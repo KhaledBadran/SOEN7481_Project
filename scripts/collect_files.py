@@ -1,9 +1,16 @@
+# -*- coding: utf-8 -*-
+
 import requests
 from pathlib import Path
 import pandas as pd
 from numpy import random
 from time import sleep
 from tqdm import tqdm
+# import sys
+# import codecs
+# sys.stdout = codecs.getwriter('utf8')(sys.stdout)
+from bs4 import UnicodeDammit
+
 
 BASE_URL = "https://raw.githubusercontent.com/"
 
@@ -32,13 +39,15 @@ def download_file(data_dir: str, repo_url: str, tree: str, filename: str) -> Non
         # example for filename "tests/test_camera.py" --> output file will be "tests_&_test_camera.py"
         output_file = Path(output_dir, filename.replace('/', '_&_'))
         output_file.touch()
-        output_file.write_text(response.text)
+        output_file.write_text(UnicodeDammit(response.text).unicode_markup)
 
     except requests.exceptions.RequestException as e:
         raise SystemExit(e)
 
     except Exception as e:
-        print(e)
+        with open(Path(data_dir, "errors.txt").resolve(), 'a') as f:
+            f.write(f"{repo_url}/tree/{tree}/{filename}\n")
+
 
     return
 
@@ -46,15 +55,15 @@ def download_file(data_dir: str, repo_url: str, tree: str, filename: str) -> Non
 if __name__ == "__main__":
     data_folder: Path = Path("..", "data", "python_flaky_tests")
     data_file: Path = Path.joinpath(data_folder, "active_repos.csv")
-    df = pd.read_csv(data_file, usecols=[1, 2, 3, 4]).head(500)
-
+    df = pd.read_csv(data_file, usecols=[1, 2, 3, 4])
+    df.drop_duplicates(inplace=True)
     repos_dir = Path("..", "data", "repos")
 
-    pbar = tqdm(df.iterrows())
+    pbar = tqdm(df[:--000].iterrows())
 
     for index, row in pbar:
         pbar.set_description(f"project: {row['Project_Name']}  File: {row['Test_filename']}")
 
-        sleep(random.uniform(0, 3))
+        sleep(random.uniform(0, 2))
         download_file(data_dir=repos_dir, repo_url=row['Project_URL'],
                       tree=row['Project_Hash'], filename=row['Test_filename'])
