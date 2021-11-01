@@ -1,0 +1,9 @@
+{
+    "functionName": "test_MultiRequest",
+    "className": "MultiRequestTests",
+    "fileName": "/kaltura_&_KalturaGeneratedAPIClientsPython/KalturaClient_&_tests_&_test_functional.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"From lines 221- 241 of origional PythonTester.py\"\"\"\nself.client.startMultiRequest()\nks = self.client.session.start(ADMIN_SECRET, USER_NAME, KalturaSessionType.\n    ADMIN, PARTNER_ID, 86400, '')\nself.client.setKs(ks)\nlistResult = self.client.baseEntry.list()\nmultiResult = self.client.doMultiRequest()\nprint(multiResult[1].totalCount)\nself.client.setKs(multiResult[0])\nwith self.assertRaises(KalturaException) as cm:\n    mediaEntry = self.client.media.get('invalid entry id')\nassert cm.exception.code == 'ENTRY_ID_NOT_FOUND'\nself.client = KalturaClient(GetConfig())\nself.client.startMultiRequest()\nks = self.client.session.start(ADMIN_SECRET, USER_NAME, KalturaSessionType.\n    ADMIN, PARTNER_ID, 86400, '')\nself.client.setKs(ks)\nmediaEntry = self.client.media.get('invalid entry id')\nmultiResult = self.client.doMultiRequest()\nself.client.setKs(multiResult[0])\nassert isinstance(multiResult[1], KalturaException)\nassert multiResult[1].code == 'ENTRY_ID_NOT_FOUND'\nself._AdvancedMultiRequestExample()\n"
+}

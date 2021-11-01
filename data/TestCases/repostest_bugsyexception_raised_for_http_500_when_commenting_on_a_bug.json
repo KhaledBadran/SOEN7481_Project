@@ -1,0 +1,9 @@
+{
+    "functionName": "test_bugsyexception_raised_for_http_500_when_commenting_on_a_bug",
+    "className": null,
+    "fileName": "/AutomatedTester_&_Bugsy/tests_&_test_errors.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "responses.add(responses.GET, 'https://bugzilla.mozilla.org/rest/login',\n    body='{\"token\": \"foobar\"}', status=200, content_type='application/json',\n    match_querystring=True)\nresponses.add(responses.GET, rest_url('bug', 1017315), body=json.dumps(\n    bug_return), status=200, content_type='application/json',\n    match_querystring=True)\nbugzilla = Bugsy('foo', 'bar')\nbug = bugzilla.get(1017315)\nresponses.add(responses.POST,\n    'https://bugzilla.mozilla.org/rest/bug/1017315/comment', body=\n    'Internal Server Error', status=500, content_type='text/html',\n    match_querystring=True)\nwith pytest.raises(BugsyException) as e:\n    bug.add_comment('I like sausages')\nassert str(e.value\n    ) == 'Message: We received a 500 error with the following: Internal Server Error Code: None'\nresponses.activate"
+}

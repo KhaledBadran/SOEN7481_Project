@@ -1,0 +1,9 @@
+{
+    "functionName": "test_absolute_asym_comp_uncertainty",
+    "className": "TestDataPoint",
+    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_chemked.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "properties = self.load_properties('testfile_uncertainty.yaml')\nwith pytest.warns(UserWarning) as record:\n    d = DataPoint(properties[0])\nm = str(record.pop(UserWarning).message)\nassert m == 'Asymmetric uncertainties are not supported. The maximum of lower-uncertainty and upper-uncertainty has been used as the symmetric uncertainty.'\nassert np.isclose(d.composition['Ar'].amount.value, Q_(99.0))\nassert np.isclose(d.composition['Ar'].amount.error, Q_(1.0))\nwith pytest.warns(UserWarning) as record:\n    d = DataPoint(properties[1])\nm = str(record.pop(UserWarning).message)\nassert m == 'Asymmetric uncertainties are not supported. The maximum of lower-uncertainty and upper-uncertainty has been used as the symmetric uncertainty.'\nassert np.isclose(d.composition['Ar'].amount.value, Q_(99.0))\nassert np.isclose(d.composition['Ar'].amount.error, Q_(1.0))\n"
+}

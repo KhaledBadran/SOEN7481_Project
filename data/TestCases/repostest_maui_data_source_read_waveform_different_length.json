@@ -1,0 +1,9 @@
+{
+    "functionName": "test_maui_data_source_read_waveform_different_length",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_teledyne_&_test_maui.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"BF: Stacking return arrays with different length.\n\n    Depending on rounding issues, time and data arrays can have\n    different lengths. Shorten to the shorter one by cutting the longer\n    one from the end.\n    \"\"\"\nfaulty_dataset_str = []\nfaulty_dataset_int = []\nfor it in range(402):\n    faulty_dataset_str.append(str(it))\n    faulty_dataset_int.append(it)\nreturn_data_string = '\"   ' + '   '.join(faulty_dataset_str) + '   \"'\nwith expected_protocol(ik.teledyne.MAUI, [init, 'TRMD?', 'TRMD SINGLE',\n    \"C1:INSPECT? 'SIMPLE'\", \"C1:INSPECT? 'HORIZ_OFFSET'\",\n    \"C1:INSPECT? 'HORIZ_INTERVAL'\", 'TRMD AUTO'], ['AUTO',\n    return_data_string, 'HORIZ_OFFSET       : 9.8895e-06   ',\n    'HORIZ_INTERVAL     : 5e-10        '], sep='\\n') as osc:\n    signal = np.array(faulty_dataset_int)\n    h_offset = 9.8895e-06\n    h_interval = 5e-10\n    timebase = np.arange(h_offset, h_offset + h_interval * len(signal),\n        h_interval)\n    timebase = timebase[0:len(signal)]\n    dataset_return = np.stack((timebase, signal))\n    assert (osc.channel[0].read_waveform() == dataset_return).all()\n"
+}

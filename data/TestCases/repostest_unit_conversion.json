@@ -1,0 +1,9 @@
+{
+    "functionName": "test_unit_conversion",
+    "className": null,
+    "fileName": "/UW-Hydro_&_MetSim/metsim_&_tests_&_test_metsim.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Tests to make sure that variable renaming works\"\"\"\nloc = data_locations['binary']\ndata_files = [os.path.join(loc, f) for f in os.listdir(loc)]\nout_dir = '.'\nparams = {'start': dates['binary'][0], 'stop': dates['binary'][1],\n    'forcing_fmt': 'binary', 'domain_fmt': 'netcdf', 'state_fmt': 'netcdf',\n    'domain': './metsim/data/stehekin.nc', 'state':\n    './metsim/data/state_vic.nc', 'forcing': data_files, 'method': 'mtclim',\n    'scheduler': 'threading', 'time_step': '60', 'out_dir': out_dir,\n    'out_state': os.path.join(out_dir, 'state.nc'), 'out_vars': {'prec': {\n    'out_name': 'pptrate', 'units': 'mm s-1'}, 'temp': {'out_name':\n    'airtemp', 'units': 'K'}}, 'forcing_vars': in_vars_section['binary'],\n    'domain_vars': domain_section['binary']}\nparams1 = dict()\nparams1.update(params)\nparams2 = dict()\nparams2.update(params)\nparams2['out_vars'] = {'prec': {'out_name': 'pptrate', 'units':\n    'mm timestep-1'}, 'temp': {'out_name': 'airtemp', 'units': 'C'}}\nms1 = MetSim(params1)\nms1.run()\nds1 = ms1.open_output().load()\nds1.close()\ntime_step = int(params['time_step'])\nsec_per_min = 60.0\ntol = 0.0001\nms2 = MetSim(params2)\nms2.run()\nds2 = ms2.open_output().load()\nassert np.allclose(ds1['airtemp'].mean(), ds2['airtemp'].mean() + 273.15,\n    atol=tol)\nassert np.allclose(time_step * sec_per_min * ds1['pptrate'].mean(), ds2[\n    'pptrate'].mean(), atol=tol)\n"
+}

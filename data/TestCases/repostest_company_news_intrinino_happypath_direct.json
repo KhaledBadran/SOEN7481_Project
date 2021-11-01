@@ -1,0 +1,9 @@
+{
+    "functionName": "test_company_news_intrinino_happypath_direct",
+    "className": "TestCompanyNewsIntrinino",
+    "fileName": "/EVEprosper_&_ProsperDatareader/tests_&_test_news.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"make sure production endpoint works as expected -- direct auth\"\"\"\nif not CAN_DIRECT_AUTH:\n    pytest.xfail('Lacking creds for Intrinino -- direct auth')\nall_news_df = news.company_news_intrinio(self.good_ticker, username=helpers\n    .CONFIG.get_option('INTRINIO', 'username'), password=helpers.CONFIG.\n    get_option('INTRINIO', 'password'))\nassert isinstance(all_news_df, pd.DataFrame)\nunique_values, unique_expected = helpers.find_uniques(list(all_news_df.\n    columns.values), self.expected_cols)\nassert unique_expected == []\nif unique_values:\n    pytest.xfail('Unexpected values from company_news_intrinino(): {}'.\n        format(unique_values))\n"
+}

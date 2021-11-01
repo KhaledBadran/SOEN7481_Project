@@ -1,0 +1,9 @@
+{
+    "functionName": "test_normalize",
+    "className": null,
+    "fileName": "/bytesandbrains_&_ProcessOptimizer/ProcessOptimizer_&_tests_&_test_space.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "a = Real(2.0, 30.0, transform='normalize')\nfor i in range(50):\n    check_limits(a.rvs(random_state=i), 2, 30)\nrng = np.random.RandomState(0)\nX = rng.randn(100)\nX = 28 * (X - X.min()) / (X.max() - X.min()) + 2\nassert_true(np.all(a.transform(X) <= np.ones_like(X)))\nassert_true(np.all(np.zeros_like(X) <= a.transform(X)))\nassert_array_almost_equal(a.inverse_transform(a.transform(X)), X)\na = Real(10 ** 2.0, 10 ** 4.0, prior='log-uniform', transform='normalize')\nfor i in range(50):\n    check_limits(a.rvs(random_state=i), 10 ** 2, 10 ** 4)\nrng = np.random.RandomState(0)\nX = np.clip(10 ** 3 * rng.randn(100), 10 ** 2.0, 10 ** 4.0)\nassert_true(np.all(a.transform(X) <= np.ones_like(X)))\nassert_true(np.all(np.zeros_like(X) <= a.transform(X)))\nassert_array_almost_equal(a.inverse_transform(a.transform(X)), X)\na = Integer(2, 30, transform='normalize')\nfor i in range(50):\n    check_limits(a.rvs(random_state=i), 2, 30)\nassert_array_equal(a.transformed_bounds, (0, 1))\nX = rng.randint(2, 31)\nassert_true(np.all(a.transform(X) <= np.ones_like(X)))\nassert_true(np.all(np.zeros_like(X) <= a.transform(X)))\nX_orig = a.inverse_transform(a.transform(X))\nassert_equal(X_orig.dtype, 'int64')\nassert_array_equal(X_orig, X)\npytest.mark.fast_test"
+}

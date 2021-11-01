@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pattern_pathed_handler_nested",
+    "className": "TestEynnydWebappHandlers",
+    "fileName": "/cbefus_&_Eynnyd/tests_&_test_eynnyd_webapp.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "spy_handler = TestEynnydWebappHandlers.SpyHandler()\nroutes = RoutesBuilder().add_handler('GET', '/foo/{fid}/fizz', spy_handler.\n    test_handler).build()\ntest_app = EynnydWebappBuilder().set_routes(routes).build()\nrequest = TestEynnydWebappHandlers.StubRequest(method='GET', request_uri=\n    '/foo/1234/fizz')\nresponse = test_app.process_request_to_response(request)\nself.assertEqual(1, spy_handler.handler_call_count)\nself.assertEqual(b'PANTS!', response.body.content)\nself.assertEqual(1, len(spy_handler.request_path_parameters))\nself.assertTrue('fid' in spy_handler.request_path_parameters)\nself.assertEqual('1234', spy_handler.request_path_parameters.get('fid'))\n"
+}

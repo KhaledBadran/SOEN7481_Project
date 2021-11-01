@@ -1,0 +1,9 @@
+{
+    "functionName": "test_for_itay",
+    "className": null,
+    "fileName": "/ComputationalCryoEM_&_ASPIRE-Python/src_&_aspire_&_aspire_&_em_classavg_&_test_forward_backward.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "im = data_utils.mat_to_npy('im')\nim_size = im.shape[-1]\ntrunc_param = 10\nbeta = 0.5\nconverter = Converter(im_size, trunc_param, beta)\nconverter.init_direct('orig')\nc_im_python = converter.direct_forward(im)\nc_im_matlab = data_utils.mat_to_npy('c_im_matlab')\ndiff = np.min(np.abs(np.concatenate((c_im_python - c_im_matlab, c_im_python +\n    c_im_matlab), axis=1)), axis=1)\nnp.where(diff > 0)\n"
+}

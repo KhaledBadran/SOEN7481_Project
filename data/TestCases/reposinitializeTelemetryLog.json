@@ -1,0 +1,9 @@
+{
+    "functionName": "initializeTelemetryLog",
+    "className": null,
+    "fileName": "/FaradayRF_&_Faraday-Software/faraday_&_telemetry.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Initialize the log database by deleting file\n\n    :param config: Telemetry ConfigParser object from telemetry.ini\n    :return: None\n    \"\"\"\nlogger.info('Initializing Telemetry Log File')\nlog = config.get('DATABASE', 'filename')\nlogpath = os.path.join(faradayHelper.userPath, 'lib', log)\ntry:\n    os.remove(logpath)\n    logger.info('Log initialization complete')\nexcept OSError as e:\n    logger.error(e)\n"
+}

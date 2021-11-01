@@ -1,0 +1,9 @@
+{
+    "functionName": "test_psf_files",
+    "className": null,
+    "fileName": "/PaulHancock_&_Aegean/tests_&_test_wcs_helpers.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that using external psf files works properly\"\"\"\nfname = 'tests/test_files/1904-66_SIN.fits'\npsfname = 'tests/test_files/1904-66_SIN_psf.fits'\nhelper = WCSHelper.from_file(fname, psf_file=psfname)\na, b, pa = helper.get_psf_sky2sky(290.0, -63.0)\nif not np.all(np.isfinite((a, b, pa))):\n    raise AssertionError('Beam contains nans')\n"
+}

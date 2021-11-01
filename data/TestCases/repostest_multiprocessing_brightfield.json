@@ -1,0 +1,9 @@
+{
+    "functionName": "test_multiprocessing_brightfield",
+    "className": "TestCellFitting",
+    "fileName": "/Jhsmit_&_ColiCoords/test_&_test_fitting.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cells = self.cells[:8].copy()\nres_list = cells.optimize_mp('brightfield')\nfor r, cell in zip(res_list, cells):\n    for k, v in r.params.items():\n        self.assertEqual(v, getattr(cell.coords, k))\nif platform.system() == 'Linux':\n    obj_values = [10016887.213015744, 23617786.724680573, 8999333.060823418,\n        29395182.431100346, 62892422.38607424, 20011819.274376377, \n        33025293.22872089, 112600585.35048027]\nelse:\n    obj_values = [10016887.123816863, 23617786.697511297, 8999333.084250152,\n        29339637.49970112, 62892422.65259473, 20011819.287397716, \n        33025293.172053672, 112600585.34296474]\nfor r, val in zip(res_list, obj_values):\n    self.assertAlmostEqual(self.cf * r.objective_value, val, 5)\n"
+}

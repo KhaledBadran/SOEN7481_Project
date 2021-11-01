@@ -1,0 +1,9 @@
+{
+    "functionName": "test_backref_matcher_advanced",
+    "className": "TestRegex",
+    "fileName": "/named-data_&_PyNDN2/tests_&_unit_tests_&_test_regex.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "backRef = NdnRegexBackrefManager()\ncm = NdnRegexRepeatMatcher('([<a><b>])+', backRef, 10)\nres = cm.match(Name('/a/b/c'), 0, 2)\nself.assertEqual(True, res)\nself.assertEqual(2, len(cm.getMatchResult()))\nself.assertEqual('a', cm.getMatchResult()[0].toEscapedString())\nself.assertEqual('b', cm.getMatchResult()[1].toEscapedString())\nself.assertEqual(1, backRef.size())\nself.assertEqual('b', backRef.getBackref(0).getMatchResult()[0].\n    toEscapedString())\n"
+}

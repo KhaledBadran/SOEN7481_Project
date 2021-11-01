@@ -1,0 +1,9 @@
+{
+    "functionName": "test_we_can_put_a_current_bug",
+    "className": null,
+    "fileName": "/AutomatedTester_&_Bugsy/tests_&_test_bugsy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "responses.add(responses.GET, 'https://bugzilla.mozilla.org/rest/login',\n    body='{\"token\": \"foobar\"}', status=200, content_type='application/json',\n    match_querystring=True)\nbug_dict = bug_return.copy()\nbug_dict['summary'] = 'I love foo but hate bar'\nresponses.add(responses.PUT,\n    'https://bugzilla.mozilla.org/rest/bug/1017315', body=json.dumps(\n    bug_dict), status=200, content_type='application/json')\nresponses.add(responses.GET, rest_url('bug', 1017315), body=json.dumps(\n    bug_return), status=200, content_type='application/json',\n    match_querystring=True)\nbugzilla = Bugsy('foo', 'bar')\nbug = Bug(**bug_return['bugs'][0])\nbug.summary = 'I love foo but hate bar'\nbug.assigned_to = 'automatedtester@mozilla.com'\nbugzilla.put(bug)\nassert bug.summary == 'I love foo but hate bar'\nassert bug.assigned_to == 'automatedtester@mozilla.com'\nresponses.activate"
+}

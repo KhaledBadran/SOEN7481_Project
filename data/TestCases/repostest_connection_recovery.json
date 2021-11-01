@@ -1,0 +1,9 @@
+{
+    "functionName": "test_connection_recovery",
+    "className": null,
+    "fileName": "/heston_&_firebase-live-data/tests_&_test_integration.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "watch_mock = mocker.Mock(wraps=live.watcher.watch)\ncancel_mock = mocker.Mock(wraps=live.watcher.cancel)\nlive.watcher.watch = watch_mock\nlive.watcher.cancel = cancel_mock\nlivedata._cache = None\nlivedata._ttl = datetime.timedelta(seconds=1)\nlivedata._retry_interval = datetime.timedelta(seconds=2)\nlivedata.is_stale = lambda : True\nlivedata._db.child = mocker.Mock(side_effect=HTTPError('Test error'))\nlivedata.restart()\ntime.sleep(3)\nwatch_mock.assert_any_call(livedata.get_metawatcher_name(), callee.\n    functions.Callable(), livedata.get_data_silent, interval=livedata.\n    _retry_interval)\nlivedata._db.child = mocker.Mock()\nlivedata.is_stale = lambda : False\ntime.sleep(3)\ncancel_mock.assert_any_call('meta_{}'.format(id(livedata)))\nassert isinstance(livedata._cache, data.FirebaseData)\npytest.mark.slow"
+}

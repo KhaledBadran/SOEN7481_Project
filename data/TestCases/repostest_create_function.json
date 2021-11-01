@@ -1,0 +1,9 @@
+{
+    "functionName": "test_create_function",
+    "className": "test_Lambda",
+    "fileName": "/pbx-gs_&_OSBot-AWS/tests_&_unit_&_apis_&_test_Lambda.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "role_arn = IAM_Role(self.lambda_name + '__tmp_role').create_for__lambda().get(\n    'role_arn')\ntmp_folder = Temp_Folder_With_Lambda_File(self.lambda_name).create_temp_file()\nself.aws_lambda.set_role(role_arn).set_s3_bucket(self.s3_bucket).set_s3_key(\n    self.s3_key).set_folder_code(tmp_folder.folder)\nassert self.aws_lambda.create_params() == (self.lambda_name, 'python3.7',\n    role_arn, self.lambda_name + '.run', 3008, 60, {'Mode': 'PassThrough'},\n    {'S3Bucket': self.s3_bucket, 'S3Key': self.s3_key})\nassert self.aws_lambda.upload() is True\nresult = self.aws_lambda.create()\ndata = result.get('data')\nname = result.get('name')\nstatus = result.get('status')\nassert status == 'ok'\nassert name == self.lambda_name\nexpected_arn = 'arn:aws:lambda:{0}:{1}:function:{2}'.format(self.region,\n    self.account_id, self.lambda_name)\nAssert(data).field_is_equal('CodeSize', 209).field_is_equal('FunctionArn',\n    expected_arn).field_is_equal('FunctionName', self.lambda_name\n    ).field_is_equal('Handler', self.lambda_name + '.run').field_is_equal(\n    'MemorySize', 3008).field_is_equal('Role', role_arn).field_is_equal(\n    'Runtime', 'python3.7').field_is_equal('Timeout', 60).field_is_equal(\n    'TracingConfig', {'Mode': 'PassThrough'}).field_is_equal('Version',\n    '$LATEST')\nassert self.aws_lambda.delete() is True\n"
+}

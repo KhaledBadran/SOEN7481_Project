@@ -1,0 +1,9 @@
+{
+    "functionName": "test_save_load_cells",
+    "className": "FileIOTest",
+    "fileName": "/Jhsmit_&_ColiCoords/test_&_test_fileio.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "save('temp_save.hdf5', self.cell_obj)\ncell_obj_load = load('temp_save.hdf5')\nos.remove('temp_save.hdf5')\nfor item in ['r', 'xl', 'xr']:\n    self.assertEqual(getattr(self.cell_obj.coords, item), getattr(\n        cell_obj_load.coords, item))\nself.assertEqual(self.cell_obj.name, cell_obj_load.name)\nfor p1, p2 in zip(self.cell_obj.coords.coeff, cell_obj_load.coords.coeff):\n    self.assertEqual(p1, p2)\nself.assertEqual(self.cell_obj.coords.shape, cell_obj_load.coords.shape)\nself.assertArrayEqual(self.cell_obj.data.binary_img, cell_obj_load.data.\n    binary_img)\nself.assertArrayEqual(self.cell_obj.data.flu_fluorescence, cell_obj_load.\n    data.flu_fluorescence)\n"
+}

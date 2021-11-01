@@ -1,0 +1,9 @@
+{
+    "functionName": "test_to_convex_map_whitelist",
+    "className": null,
+    "fileName": "/alex-ber_&_AlexBerUtils/tests_&_utils_&_init_app_conf_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "logger.info(f'{request._pyfuncitem.name}()')\nexp_d = {'general.profiles': ['dev'], 'app.as_str.alt_white_list': [10],\n    'app.as_str.bool1_scalar': True}\nsys_d = {'general.profiles': 'dev', 'app.white_list': 'one,two,three',\n    'app.as_str.alt_white_list': '10', 'app.as_str.bool1_scalar': 'True',\n    'db.unused': 'localhost'}\nlist_ensure = [key for key in sys_d.keys() if 'scalar' not in key]\ncreate_default_parser()._do_ensure_list(sys_d, list_ensure)\ndefault_d = to_convex_map(sys_d, white_list_flat_keys=['general',\n    'app.as_str'], implicit_convert=True)\ncheck_exp_sys(exp_d, default_d)\n"
+}

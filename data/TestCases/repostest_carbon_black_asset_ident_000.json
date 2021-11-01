@@ -1,0 +1,9 @@
+{
+    "functionName": "test_carbon_black_asset_ident_000",
+    "className": "AssetAnalysisModuleTestCase",
+    "fileName": "/IntegralDefense_&_ACE/lib_&_saq_&_modules_&_test_asset.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from saq.modules.asset import CarbonBlackAssetIdentAnalysis\nq, result = splunk_query(\n    'index=carbonblack | dedup local_ip | head limit=1 | fields local_ip')\nself.assertTrue(result)\nself.assertTrue(isinstance(q.json(), list))\nself.assertEquals(len(q.json()), 1)\nipv4 = q.json()[0]['local_ip']\nlogging.info('using ipv4 {} for test'.format(ipv4))\nengine = AnalysisEngine()\nengine.enable_module('analysis_module_carbon_black_asset_ident')\nself.start_engine(engine)\nroot = create_root_analysis(event_time=datetime.datetime.now())\nroot.initialize_storage()\no_uuid = root.add_observable(F_IPV4, ipv4).id\nroot.save()\nengine.queue_work_item(root.storage_dir)\nengine.queue_work_item(TerminatingMarker())\nengine.wait()\nroot.load()\nipv4 = root.get_observable(o_uuid)\nself.assertIsNotNone(ipv4)\nanalysis = ipv4.get_analysis(CarbonBlackAssetIdentAnalysis)\nself.assertIsNotNone(analysis)\nself.assertIsNotNone(analysis.details)\nself.assertEquals(len(analysis.discovered_hostnames), 1)\nunittest.skip('skipping this one for now...')"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_copy_errors",
+    "className": null,
+    "fileName": "/Macquarie-MEG-Research_&_BIDSHandler/bidshandler_&_tests_&_test_add.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with tempfile.TemporaryDirectory() as tmp:\n    shutil.copytree(TESTPATH2, op.join(tmp, 'BIDSTEST2'))\n    src_bt = BIDSTree(TESTPATH1)\n    dst_bt = BIDSTree(op.join(tmp, 'BIDSTEST2'))\n    proj = src_bt.project('test1')\n    with pytest.raises(TypeError):\n        dst_bt.project('test1').subject('1').session('1').add(proj)\n    with pytest.raises(TypeError):\n        dst_bt.project('test1').subject('1').add(proj)\n    with pytest.raises(TypeError):\n        dst_bt.project('test1').add(src_bt)\n    proj = src_bt.project('test2')\n    sub = proj.subject('3')\n    ses = sub.session('1')\n    scan = ses.scan(task='resting', run='1')\n    with pytest.raises(ValueError):\n        dst_bt.project('test1').add(proj)\n    with pytest.raises(AssociationError):\n        dst_bt.project('test1').add(sub)\n    with pytest.raises(AssociationError):\n        dst_bt.project('test1').add(ses)\n    with pytest.raises(AssociationError):\n        dst_bt.project('test1').add(scan)\n    with pytest.raises(ValueError):\n        dst_bt.project('test1').subject('1').add(sub)\n    with pytest.raises(AssociationError):\n        dst_bt.project('test1').subject('1').add(ses)\n    with pytest.raises(AssociationError):\n        dst_bt.project('test1').subject('1').add(scan)\n    with pytest.raises(ValueError):\n        session = src_bt.project('test1').subject('1').session('2')\n        dst_bt.project('test1').subject('1').session('1').add(session)\n    with pytest.raises(AssociationError):\n        dst_bt.project('test1').subject('1').session('1').add(scan)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_calls",
+    "className": null,
+    "fileName": "/fireeye_&_FIDL/FIDL_&_tests_&_test_common.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Checks the `calls` in a `controlFlowinator` object\"\"\"\nfor f_ea, f_call_info in calls_in_putty.items():\n    c = du.controlFlowinator(ea=f_ea, fast=False)\n    if not c:\n        continue\n    names = [co.name for co in c.calls]\n    namez = [x['name'] for x in f_call_info.values()]\n    assert Counter(names) == Counter(namez)\n    locs = [co.call_ea for co in c.calls]\n    locz = [i['call_ea'] for i in f_call_info.values()]\n    assert Counter(locs) == Counter(locz)\n"
+}

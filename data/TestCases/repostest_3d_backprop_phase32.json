@@ -1,0 +1,9 @@
+{
+    "functionName": "test_3d_backprop_phase32",
+    "className": null,
+    "fileName": "/RI-imaging_&_ODTbrain/tests_&_test_alg3d_bpp.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sino, angles = create_test_sino_3d()\nparameters = get_test_parameter_set(2)\nr = list()\nfor p in parameters:\n    f = odtbrain.backpropagate_3d(sino, angles, dtype=np.float32, padval=0, **p\n        )\n    r.append(cutout(f))\ndata32 = np.array(r).flatten().view(np.float32)\ndata64 = test_3d_backprop_phase()\nassert np.allclose(data32, data64, atol=6e-07, rtol=0)\n"
+}

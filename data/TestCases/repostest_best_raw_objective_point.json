@@ -1,0 +1,9 @@
+{
+    "functionName": "test_best_raw_objective_point",
+    "className": "TestBestPointUtils",
+    "fileName": "/facebook_&_Ax/ax_&_service_&_tests_&_test_best_point_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "exp = get_branin_experiment()\nwith self.assertRaisesRegex(ValueError, 'Cannot identify best '):\n    get_best_raw_objective_point(exp)\nself.assertEqual(get_best_parameters(exp), None)\nexp.new_trial(generator_run=GeneratorRun(arms=[Arm(parameters={'x1': 5.0,\n    'x2': 5.0})])).run()\nopt_conf = exp.optimization_config.clone()\nopt_conf.objective.metric._name = 'not_branin'\nwith self.assertRaisesRegex(ValueError, 'No data has been logged'):\n    get_best_raw_objective_point(exp, opt_conf)\n"
+}

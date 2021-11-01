@@ -1,0 +1,9 @@
+{
+    "functionName": "test_write_missing_device_serial_number",
+    "className": "TestDeviceCredential",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_credentials.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a DeviceCredential struct missing device serial number data\n        can be written to a data stream.\n        \"\"\"\ncredential = objects.DeviceCredential(password='secret', device_identifier=\n    'devID2233', network_identifier='netID9000', machine_identifier=\n    'machineID1', media_identifier='mediaID313')\nstream = utils.BytearrayStream()\ncredential.write(stream)\nself.assertEqual(len(self.encoding_missing_device_serial_number), len(stream))\nself.assertEqual(str(self.encoding_missing_device_serial_number), str(stream))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_valid_pbc_shape",
+    "className": null,
+    "fileName": "/Tsjerk_&_Insane/tests_&_test_pbc.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "def try_shape(shape):\n    try:\n        insane.pbc.PBC(shape=shape, xyz=(10, 10, 10))\n    except insane.pbc.PBCException as e:\n        if 'is not a known PBC shape' in str(e):\n            raise AssertionError()\n        raise e\nshapes = 'cubic', 'rectangular', 'square', 'hexagonal', 'optimal', 'keep', None\nfor shape in shapes:\n    yield try_shape, shape\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_instrument_address",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_base_instrument.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "mock_filelike = mock.MagicMock()\nmock_filelike.__class__ = AbstractCommunicator\ninst = ik.Instrument(mock_filelike)\naddress = mock.PropertyMock(return_value='/dev/foobar')\ntype(inst._file).address = address\nassert inst.address == '/dev/foobar'\naddress.assert_called_with()\ninst.address = 'COM1'\naddress.assert_called_with('COM1')\n"
+}

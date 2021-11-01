@@ -1,0 +1,9 @@
+{
+    "functionName": "test_shap_summary_plot",
+    "className": "TestUtil",
+    "fileName": "/univieCUBE_&_phenotrex/tests_&_test_util.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with TemporaryDirectory() as tmpdir:\n    sh, gr = generic_compute_shaps(classifier=MODELS_PATH / trait_name /\n        f'{trait_name}.xgb.pkl', fasta_files=list(GENOMIC_PATH.iterdir()),\n        n_samples=50, verb=True, genotype=None)\n    shap_summary_plot(sh=sh, n_max_features=20, out_summary_plot=Path(\n        tmpdir) / 'plot.png', out_summary_txt=Path(tmpdir) / 'summary.txt',\n        title='')\n    assert (Path(tmpdir) / 'plot.png').is_file()\n    assert (Path(tmpdir) / 'summary.txt').is_file()\npytest.mark.skipif(not FROM_FASTA, reason='Missing optional dependencies')"
+}

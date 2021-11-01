@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sync_info_args_and_file_are_exclusive",
+    "className": "TestCli",
+    "fileName": "/DusanMadar_&_PySyncDroid/tests_&_test_cli.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test sync info args -s, -d and -f are mutually exclusive.\n        \"\"\"\ncmd = '-M model -V vendor -s /src -d /dst -f file'.split(' ')\nargs = self.parser.parse_args(cmd)\nwith self.assertRaises(ArgumentError) as exc:\n    cli.parse_sync_info(args)\nself.assertEqual(str(exc.exception),\n    'Source (-s) and destination (-d) cannot be set when syncing from file (-f).'\n    )\n"
+}

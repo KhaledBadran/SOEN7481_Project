@@ -1,0 +1,9 @@
+{
+    "functionName": "makeCertificate",
+    "className": "TestValidator",
+    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_validator.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        Make a certificate and put it in the _fixture._cache .\n\n        :type key: PibKey\n        :type signer: PibKey\n        \"\"\"\nrequest = CertificateV2(key.getDefaultCertificate())\nrequest.setName(Name(key.getName()).append('looper').appendVersion(1))\nparams = SigningInfo(signer)\nnow = Common.getNowMilliseconds()\nparams.setValidityPeriod(ValidityPeriod(now - 100 * 24 * 3600 * 1000.0, now +\n    100 * 24 * 3600 * 1000.0))\nself._fixture._keyChain.sign(request, params)\nself._fixture._keyChain.addCertificate(key, request)\nself._fixture._cache.insert(request)\n"
+}

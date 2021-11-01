@@ -1,0 +1,9 @@
+{
+    "functionName": "test_eda_clean",
+    "className": null,
+    "fileName": "/neuropsychology_&_NeuroKit/tests_&_tests_eda.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sampling_rate = 1000\neda = nk.eda_simulate(duration=30, sampling_rate=sampling_rate, scr_number=\n    6, noise=0.01, drift=0.01, random_state=42)\nclean = nk.eda_clean(eda, sampling_rate=sampling_rate)\nassert len(clean) == len(eda)\neda_biosppy = nk.eda_clean(eda, sampling_rate=sampling_rate, method='biosppy')\noriginal, _, _ = biosppy.tools.filter_signal(signal=eda, ftype='butter',\n    band='lowpass', order=4, frequency=5, sampling_rate=sampling_rate)\noriginal, _ = biosppy.tools.smoother(signal=original, kernel='boxzen', size\n    =int(0.75 * sampling_rate), mirror=True)\nassert np.allclose((eda_biosppy - original).mean(), 0, atol=1e-05)\n"
+}

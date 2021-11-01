@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pop_smooth",
+    "className": null,
+    "fileName": "/open-source-economics_&_OG-USA/ogusa_&_tests_&_test_demographics.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test that population growth rates evolve smoothly.\n    \"\"\"\nE = 20\nS = 80\nT = int(round(4.0 * S))\nstart_year = 2018\n(omega, g_n_ss, omega_SS, surv_rate, rho, g_n_vector, imm_rates, omega_S_preTP\n    ) = demographics.get_pop_objs(E, S, T, 1, 100, start_year, False)\nassert np.any(np.absolute(omega[:-1, :] - omega[1:, :]) < 0.0001)\nassert np.any(np.absolute(g_n_vector[:-1] - g_n_vector[1:]) < 0.0001)\n"
+}

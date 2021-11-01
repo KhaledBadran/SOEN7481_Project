@@ -1,0 +1,9 @@
+{
+    "functionName": "test_loopbackcomm_query",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_comm_&_test_loopback.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "comm = LoopbackCommunicator()\ncomm.read = mock.MagicMock(return_value='answer')\ncomm.sendcmd = mock.MagicMock()\nassert comm._query('mock') == 'answer'\ncomm.sendcmd.assert_called_with('mock')\ncomm.read.assert_called_with(-1)\ncomm._query('mock', size=10)\ncomm.read.assert_called_with(10)\n"
+}

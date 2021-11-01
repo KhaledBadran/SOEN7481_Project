@@ -1,0 +1,9 @@
+{
+    "functionName": "test_run_validations_fails_on_slow_success",
+    "className": null,
+    "fileName": "/PearsonEducation_&_Alarmageddon/tests_&_test_run.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "reporter = env['reporter']\npublishers = [MockPublisher()]\nreporter.publishers = publishers\nvalidation = Validation('success')\nvalidation.perform = slow_success\nvalidation.timeout = 1\nrun._run_validations([validation], reporter, processes)\nassert reporter._reports[0].is_failure()\n"
+}

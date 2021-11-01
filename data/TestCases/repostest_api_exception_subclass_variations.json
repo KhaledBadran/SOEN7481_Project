@@ -1,0 +1,9 @@
+{
+    "functionName": "test_api_exception_subclass_variations",
+    "className": null,
+    "fileName": "/jperras_&_Flask-ApiExceptions/test_apiexceptions.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Subclass ApiException with class attribute descriptors.\"\"\"\nclass CustomError(ApiException):\n    \"\"\"Subclass of ApiException with additional attributes.\"\"\"\n    status_code = 418\n    message = 'A class attribute exception message.'\n    code = 'class-attribute'\n    info = {'foo': 'bar'}\n@app.route('/testing')\ndef testing():\n    \"\"\"Endpoint that simply raises our custom exception.\"\"\"\n    raise CustomError()\next = JSONExceptionHandler(app)\next.register(code_or_exception=CustomError, handler=api_exception_handler)\nwith app.app_context():\n    with app.test_client() as c:\n        rv = c.get('/testing')\nassert rv.status_code == 418\nassert rv.headers['content-type'] == 'application/json'\nassert json.loads(rv.data)['errors'] == [{'code': CustomError.code,\n    'message': CustomError.message, 'info': CustomError.info}]\n"
+}

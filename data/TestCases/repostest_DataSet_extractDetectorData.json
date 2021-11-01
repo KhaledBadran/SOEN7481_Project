@@ -1,0 +1,9 @@
+{
+    "functionName": "test_DataSet_extractDetectorData",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_DataSet.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "DataFile = ['Data/camea2018n000136.hdf', 'Data/camea2018n000137.hdf']\ndataset = DataSet(DataFile)\nbinning = 1\ndataset.convertDataFile(binning=binning, saveFile=True)\ntry:\n    dataset.extractDetectorData(A4=10000.0)\n    assert False\nexcept AttributeError:\n    assert True\ntry:\n    dataset.extractDetectorData(Ef=10000.0)\n    assert False\nexcept AttributeError:\n    assert True\nEfs = dataset.convertedFiles[0].instrumentCalibrationEf[:, (1)].reshape(104,\n    8 * binning)\nAnalyserSelection = 5\nEf = np.mean(Efs[:, (AnalyserSelection)])\nA4s = dataset.convertedFiles[0].instrumentCalibrationA4.reshape(104, 8 *\n    binning)\nDetectorSelection = 19\nA4 = np.mean(A4s[DetectorSelection]) - dataset.convertedFiles[0].A4Off\nDatBoth = dataset.extractData(A4=A4, Ef=Ef)\nDatBothId = dataset.extractData(A4=A4, EfId=AnalyserSelection)\nDatOne = dataset.extractData(A4=A4)\nDatOne2 = dataset.extractData(Ef=Ef)\nDatAll = dataset.extractData()\nDatAllRaw = dataset.extractData(raw=True)\nassert len(DatAllRaw) == 3\nassert len(DatAllRaw[0]) == len(DatAllRaw[1]) and len(DatAllRaw[0]) == len(\n    DatAllRaw[2])\nassert np.all(DatBothId[0] == DatBoth[0])\nassert len(DatAllRaw[0]) == len(DatAll)\nfor i in range(len(dataset.convertedFiles)):\n    assert DatAllRaw[0][i].shape == DatAllRaw[1][i].shape and DatAllRaw[0][i\n        ].shape == DatAllRaw[2][i].shape\n    assert DatAllRaw[0][i].shape == DatAll[i].shape\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_no_matching_pre_error_handler_raises",
+    "className": "TestErrorHandlers",
+    "fileName": "/cbefus_&_Eynnyd/tests_&_plan_execution_&_test_error_handlers.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class CustomTestException(Exception):\n    pass\nclass CustomRegisterException(Exception):\n    pass\nclass SpyFakeExceptionHandler:\n\n    def __init__(self):\n        self._call_count = 0\n\n    @property\n    def call_count(self):\n        return self._call_count\n\n    def test_fake_handler(self, exc, request):\n        self._call_count += 1\nfake_handler = SpyFakeExceptionHandler()\nerror_handlers = ErrorHandlers([], [(CustomRegisterException, fake_handler.\n    test_fake_handler)])\nwith self.assertRaises(NoGenericErrorHandlerException):\n    error_handlers.handle_pre_response_error(CustomTestException(), None)\nself.assertEqual(0, fake_handler.call_count)\n"
+}

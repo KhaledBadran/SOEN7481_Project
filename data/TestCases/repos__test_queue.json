@@ -1,0 +1,9 @@
+{
+    "functionName": "__test_queue",
+    "className": "RedisQueueTestCase",
+    "fileName": "/wo1fsea_&_PyEasyRPC/tests_&_test_redis_collections_&_test_queue.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "q = Queue(redis_key, packer=packer)\nq.clear()\nself.assertEqual(q.get(), None)\nself.assertEqual(len(q), 0)\nfor i in range(10):\n    q.put(i)\nfor i in range(10):\n    self.assertEqual(q.get(), i)\nself.assertEqual(q.get(), None)\nmax_len = 6\nq1 = Queue(redis_key, max_len=max_len, packer=packer)\nfor i in range(10):\n    q1.put(i)\nself.assertEqual(len(q1), max_len)\nfor i in range(10):\n    if i < q1.max_len:\n        self.assertEqual(q.get(), 10 - max_len + i)\n    else:\n        self.assertEqual(q.get(), None)\nq.clear()\nself.assertEqual(len(q), 0)\n"
+}

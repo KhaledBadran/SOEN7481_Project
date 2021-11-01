@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ns_tag_closed",
+    "className": "LexerTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_lexer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "template = \"\"\"\n\n            <%self:go x=\"1\" y=\"2\" z=\"${'hi' + ' ' + 'there'}\"/>\n        \"\"\"\nnodes = Lexer(template).parse()\nself._compare(nodes, TemplateNode({}, [Text('\\n\\n            ', (1, 1)),\n    CallNamespaceTag('self:go', {'x': '1', 'y': '2', 'z':\n    \"${'hi' + ' ' + 'there'}\"}, (3, 13), []), Text('\\n        ', (3, 64))]))\n"
+}

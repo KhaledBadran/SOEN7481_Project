@@ -1,0 +1,9 @@
+{
+    "functionName": "test_symmetric_key_create_getattributelist_destroy",
+    "className": "TestIntegration",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_integration_&_services_&_test_integration.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the GetAttributeList operation works for a newly created key.\n        \"\"\"\nkey_name = 'Integration Test - Create-GetAttributeList-Destroy Key'\nresult = self._create_symmetric_key(key_name=key_name)\nuid = result.uuid\nself.assertEqual(ResultStatus.SUCCESS, result.result_status.value)\nself.assertEqual(ObjectType.SYMMETRIC_KEY, result.object_type)\nself.assertIsInstance(uid, str)\ntry:\n    result = self.client.get_attribute_list(uid)\n    self.assertEqual(ResultStatus.SUCCESS, result.result_status.value)\n    self.assertIsInstance(result.uid, str)\n    self.assertIsInstance(result.names, list)\n    for name in result.names:\n        self.assertIsInstance(name, str)\n    expected = ['Cryptographic Algorithm', 'Cryptographic Length',\n        'Cryptographic Usage Mask', 'Unique Identifier', 'Object Type']\n    for name in expected:\n        self.assertIn(name, result.names)\nfinally:\n    result = self.client.destroy(uid)\n    self.assertEqual(ResultStatus.SUCCESS, result.result_status.value)\n    result = self.client.get(uuid=result.uuid.value, credential=None)\n    self.assertEqual(ResultStatus.OPERATION_FAILED, result.result_status.value)\n"
+}

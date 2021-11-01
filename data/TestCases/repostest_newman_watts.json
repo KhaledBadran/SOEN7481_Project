@@ -1,0 +1,9 @@
+{
+    "functionName": "test_newman_watts",
+    "className": null,
+    "fileName": "/Silmathoron_&_NNGT/testing_&_test_generation2.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Check the newman_watts generation method.\n    \"\"\"\nnum_nodes = 5\nk_lattice = 2\np_shortcut = 0.2\ng = ng.newman_watts(k_lattice, edges=6, nodes=num_nodes, directed=False)\nlattice_edges = [(0, 1), (0, 4), (1, 2), (2, 3), (3, 4)]\nfor e in lattice_edges:\n    assert g.has_edge(e)\nassert g.edge_nb() == 6\nreciprocity = 0.0\ng = ng.newman_watts(k_lattice, reciprocity_circular=reciprocity, edges=6,\n    nodes=num_nodes, directed=True)\nassert g.edge_nb() == 6\nassert 0.0 <= na.reciprocity(g) <= 1 / 3.0\nreciprocity = 1.0\ng = ng.newman_watts(k_lattice, reciprocity_circular=reciprocity, edges=12,\n    nodes=num_nodes, directed=True)\nassert g.edge_nb() == 12\nassert 5 / 6.0 <= na.reciprocity(g) <= 1\nreciprocity = 0.5\ng = ng.newman_watts(k_lattice, reciprocity_circular=reciprocity, edges=8,\n    nodes=num_nodes, directed=True)\nassert g.edge_nb() == 8\nassert 0.5 <= na.reciprocity(g) <= 0.75\ng = ng.newman_watts(k_lattice, p_shortcut, nodes=num_nodes, directed=False)\nassert 0.5 * k_lattice * num_nodes <= g.edge_nb() <= k_lattice * num_nodes\nreciprocity = 0.0\ng = ng.newman_watts(k_lattice, p_shortcut, reciprocity, nodes=num_nodes,\n    directed=True)\nassert 0.5 * k_lattice * num_nodes <= g.edge_nb() <= k_lattice * num_nodes\nreciprocity = 1.0\ng = ng.newman_watts(k_lattice, p_shortcut, reciprocity, nodes=num_nodes,\n    directed=True)\nassert k_lattice * num_nodes <= g.edge_nb() <= 2 * k_lattice * num_nodes\nreciprocity = 0.5\ng = ng.newman_watts(k_lattice, p_shortcut, reciprocity, nodes=num_nodes,\n    directed=True)\nrecip_fact = 0.5 * (1 + reciprocity)\nmin_edges = int(recip_fact * k_lattice * num_nodes)\nassert min_edges <= g.edge_nb() <= 2 * recip_fact * k_lattice * num_nodes\npytest.mark.mpi_skip"
+}

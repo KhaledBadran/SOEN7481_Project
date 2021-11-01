@@ -1,0 +1,9 @@
+{
+    "functionName": "test_generic_login",
+    "className": null,
+    "fileName": "/PlaidWeb_&_Authl/tests_&_test_flask_wrapper.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "app = flask.Flask(__name__)\napp.secret_key = 'qwer'\naflask = authl.flask.AuthlFlask(app, {})\n@app.route('/')\ndef index():\n    if 'me' not in flask.session:\n        return aflask.render_login_form('/')\n    return f\"hello {flask.session['me']}\"\nclass GenericHandler(TestHandler):\n\n    @property\n    def cb_id(self):\n        return 'foo'\n\n    def handles_url(self, url):\n        return url if 'login.example' in url else None\n\n    @property\n    def generic_url(self):\n        return 'https://login.example/larry'\n\n    @property\n    def service_name(self):\n        return 'generic'\n\n    @property\n    def url_schemes(self):\n        return [('https://login.example/%', 'example')]\n\n    @property\n    def logo_html(self):\n        return [('foo', 'generic_logo')]\n\n    def initiate_auth(self, id_url, callback_uri, redir):\n        return disposition.Verified(id_url + '/auth', redir)\naflask.authl.add_handler(GenericHandler())\nwith app.test_client() as client:\n    response = client.get('/')\n    soup = BeautifulSoup(response.data, 'html.parser')\n    link = soup.find('a', title='generic_logo')\n    response = client.get(link['href'])\n    assert flask.session['me'] == 'https://login.example/larry/auth'\n    assert response.headers['Location'] == 'http://localhost/'\n    response = client.get('/')\n    assert response.data == b'hello https://login.example/larry/auth'\n"
+}

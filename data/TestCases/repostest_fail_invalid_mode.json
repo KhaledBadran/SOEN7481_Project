@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fail_invalid_mode",
+    "className": "TestSpatialPyramidPoolingLayer",
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_pool.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with pytest.raises(ValueError) as exc:\n    input = self.input_layer((None, None, None, None))\n    layer = self.layer(input, pool_dims=[1], mode='other', implementation=\n        'kaiming')\n    layer.get_output_for(Mock(shape=(1, 1, 1, 1)))\nassert \"Mode must be either 'max', 'average_inc_pad' or 'average_exc_pad'. Got 'other'\" in exc.value.args[\n    0]\n"
+}

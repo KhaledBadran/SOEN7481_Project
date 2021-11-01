@@ -1,0 +1,9 @@
+{
+    "functionName": "test_train",
+    "className": null,
+    "fileName": "/Marcnuth_&_Keras-Models/tests_&_test_text_cnn.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "config = tf.ConfigProto()\nconfig.gpu_options.allow_growth = True\nsess = tf.Session(config=config)\nset_session(sess)\ntimestamp = str(int(time.time()))\ntb_dir = Path('~/xx/tensorboard/')\ncallbacks = [TensorBoard(log_dir=tb_dir.absolute().as_posix(),\n    histogram_freq=0, write_graph=True, write_images=True)]\ndatagen = AllOnceFromDirGenerator(datadir=Path(\n    '/home/ubuntu/xx/aiflow/tests/resources/titles/seniority_data/'),\n    batch_size=64, shuffle=True, random_seed=1, limit=100000)\ndatagen.summary()\nmodel = TextCNN(input_shape=(5, 300), n_classes=4, filter_sizes=(3, 4, 5))\nmodel.compile(optimizer='adam', loss='categorical_crossentropy', metrics=[\n    'categorical_accuracy'])\nmodel.summary()\nmodel.fit_generator(datagen, steps_per_epoch=datagen.steps_each_epoch,\n    epochs=200, verbose=2, workers=10, max_queue_size=32, callbacks=callbacks)\nprint('finish training, save the model')\nmodel.save((Path(__file__).parent / 'output' / 'textcnn_seniroty.h5').\n    absolute().as_posix())\n"
+}

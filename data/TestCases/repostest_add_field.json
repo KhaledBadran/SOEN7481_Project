@@ -1,0 +1,9 @@
+{
+    "functionName": "test_add_field",
+    "className": null,
+    "fileName": "/quantOS-org_&_JAQS/test_&_test_dataview.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "dv = DataView()\ndv.load_dataview(folder_path=daily_path)\nnrows, ncols = dv.data_d.shape\nn_securities = len(dv.data_d.columns.levels[0])\nds = RemoteDataService()\nds.init_from_config(data_config)\ndv.add_field('total_share', ds)\nassert dv.data_d.shape == (nrows, ncols + 1 * n_securities)\n"
+}

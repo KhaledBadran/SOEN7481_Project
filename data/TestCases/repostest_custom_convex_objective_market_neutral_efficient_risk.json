@@ -1,0 +1,9 @@
+{
+    "functionName": "test_custom_convex_objective_market_neutral_efficient_risk",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_custom_objectives.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "target_risk = 0.19\nef = EfficientFrontier(*setup_efficient_frontier(data_only=True),\n    weight_bounds=(-1, 1))\nef.efficient_risk(target_risk, market_neutral=True)\nbuilt_in = ef.weights\nef = EfficientFrontier(*setup_efficient_frontier(data_only=True),\n    weight_bounds=(-1, 1))\nef.add_constraint(lambda x: cp.sum(x) == 0)\nef.add_constraint(lambda x: cp.quad_form(x, ef.cov_matrix) <= target_risk ** 2)\nef.convex_objective(lambda x: -x @ ef.expected_returns, weights_sum_to_one=\n    False)\ncustom = ef.weights\nnp.testing.assert_allclose(built_in, custom, atol=1e-07)\n"
+}

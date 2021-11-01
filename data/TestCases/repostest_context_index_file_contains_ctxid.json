@@ -1,0 +1,9 @@
+{
+    "functionName": "test_context_index_file_contains_ctxid",
+    "className": null,
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_BundleInstallTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "d = Descriptor('test')\nctxid = 'http://example.org/ctx1'\nd.includes.add(make_include_func(ctxid))\ng = rdflib.ConjunctiveGraph()\ncg = g.get_context(ctxid)\nwith transaction.manager:\n    cg.add((URIRef('a'), URIRef('b'), URIRef('c')))\nbi = Installer(*dirs, graph=g)\nbi.install(d)\nwith open(p(dirs.bundles_directory, 'test', '1', 'graphs', 'index'), 'rb'\n    ) as f:\n    assert f.read().startswith(ctxid.encode('UTF-8'))\n"
+}

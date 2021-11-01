@@ -1,0 +1,9 @@
+{
+    "functionName": "test_random_discretized_projections",
+    "className": "TestRecallExperiment",
+    "fileName": "/pixelogik_&_NearPy/tests_&_experiments_tests.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "dim = 4\nvector_count = 5000\nvectors = numpy.random.randn(dim, vector_count)\nrdp = RandomDiscretizedProjections('rdp', 1, 0.01)\nnearest = NearestFilter(10 + 1)\nengine = Engine(dim, lshashes=[rdp], vector_filters=[nearest])\nexp = RecallPrecisionExperiment(10, vectors)\nresult = exp.perform_experiment([engine])\nrecall1 = result[0][0]\nprecision1 = result[0][1]\nsearchtime1 = result[0][2]\nprint(\"\"\"\nRecall RDP: %f, Precision RDP: %f, SearchTime RDP: %f\n\"\"\" % (\n    recall1, precision1, searchtime1))\nrdp = RandomDiscretizedProjections('rdp', 2, 0.2)\nengine = Engine(dim, lshashes=[rdp], vector_filters=[nearest])\nresult = exp.perform_experiment([engine])\nrecall2 = result[0][0]\nprecision2 = result[0][1]\nsearchtime2 = result[0][2]\nprint(\"\"\"\nRecall RDP: %f, Precision RDP: %f, SearchTime RDP: %f\n\"\"\" % (\n    recall2, precision2, searchtime2))\nself.assertTrue(precision2 > precision1)\n"
+}

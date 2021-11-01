@@ -1,0 +1,9 @@
+{
+    "functionName": "test_generate_test_prompt_yes",
+    "className": null,
+    "fileName": "/bio-phys_&_MDBenchmark/mdbenchmark_&_tests_&_test_generate.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test whether promt answer yes works.\"\"\"\nwith tmpdir.as_cwd():\n    open('protein.tpr', 'a').close()\n    result = cli_runner.invoke(cli, ['generate', '--module=gromacs/2016',\n        '--host=draco', '--max-nodes=4', '--gpu', '--no-cpu',\n        '--name=protein'], input='y\\n')\n    output1 = \"\"\"WARNING Cannot locate modules available on this host. Not performing module name validation.\nCreating benchmark system for gromacs/2016 with GPUs.\n\"\"\"\n    bundle = dtr.discover()\n    df = DataFrameFromBundle(bundle)\n    df = ConsolidateDataFrame(df)\n    output2 = \"\"\"The above benchmarks will be generated. Continue? [y/N]: y\nFinished generating all benchmarks.\nYou can now submit the jobs with mdbenchmark submit.\n\"\"\"\n    mid = 'Benchmark Summary:\\n' + PrintDataFrame(df, False) + '\\n'\n    output = output1 + mid + output2\n    assert result.exit_code == 0\n    assert result.output == output\n"
+}

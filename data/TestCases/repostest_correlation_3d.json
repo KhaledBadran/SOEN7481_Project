@@ -1,0 +1,9 @@
+{
+    "functionName": "test_correlation_3d",
+    "className": null,
+    "fileName": "/LSSTDESC_&_CCL/benchmarks_&_test_correlation_3d.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "Omega_v = [0.7, 0.7, 0.7, 0.65, 0.75]\nw_0 = [-1.0, -0.9, -0.9, -0.9, -0.9]\nw_a = [0.0, 0.0, 0.1, 0.1, 0.1]\ncosmo = ccl.Cosmology(Omega_c=0.25, Omega_b=0.05, h=0.7, sigma8=0.8, n_s=\n    0.96, Neff=3.046, m_nu_type='normal', Omega_g=0, Omega_k=1.0 - 0.25 - \n    0.05 - Omega_v[model], w0=w_0[model], wa=w_a[model], transfer_function=\n    'bbks', matter_power_spectrum='halofit')\ndata = np.loadtxt('./benchmarks/data/model%d_xi.txt' % (model + 1))\nN1 = 40\ndata1 = data[:N1, :]\nr1 = data1[:, (0)]\ndata2 = data[N1:, :]\nr2 = data2[:, (0)]\nfor z in np.arange(6):\n    zind = int(z)\n    a = 1.0 / (1 + z)\n    xi1 = ccl.correlation_3d(cosmo, a, r1)\n    err = np.abs(r1 * r1 * (xi1 - data1[:, (zind + 1)]))\n    assert np.allclose(err, 0, rtol=0, atol=CORR_TOLERANCE1[zind])\n    xi2 = ccl.correlation_3d(cosmo, a, data2[:, (0)])\n    err = np.abs(r2 * r2 * (xi2 - data2[:, (zind + 1)]))\n    assert np.allclose(err, 0, rtol=0, atol=CORR_TOLERANCE1[zind])\npytest.mark.parametrize('model', list(range(3)))"
+}

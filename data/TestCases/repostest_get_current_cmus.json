@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_current_cmus",
+    "className": null,
+    "fileName": "/ocaballeror_&_Lyricfetch/lyricfetch_&_tests_&_test_dbus.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test that we can get the current song playing in cmus.\n    \"\"\"\nnow_playing = Song(artist='Death', title='Baptized In Blood', album=\n    'Scream Bloody Gore')\ncmus = tmp_path / 'cmus-remote'\ncontents = \"\"\"#!/bin/sh\n[ \"$1\" = \"-Q\" ] || exit 1\necho \"{}\"\n    \"\"\"\ncontents = contents.format(sample_response_cmus)\ncmus.write_text(contents)\nenviron = os.environ.copy()\nenviron['PATH'] = str(tmp_path) + ':' + environ['PATH']\nmonkeypatch.setattr(os, 'environ', environ)\nos.chmod(cmus, 493)\ncurrent = get_current_cmus()\nassert current\nassert current == now_playing\n"
+}

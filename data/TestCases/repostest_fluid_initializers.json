@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fluid_initializers",
+    "className": "TestFluid",
+    "fileName": "/tum-pbs_&_PhiFlow/tests_&_test_fluid.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "def typetest(fluid):\n    self.assertIsInstance(fluid, Fluid)\n    self.assertIsInstance(fluid.velocity, StaggeredGrid)\n    numpy.testing.assert_equal(fluid.density.data.shape, [1, 4, 4, 1])\n    numpy.testing.assert_equal(fluid.velocity.resolution, [4, 4])\n    numpy.testing.assert_equal(fluid.velocity.data[0].resolution, [5, 4])\ntypetest(Fluid(Domain([4, 4]), density=0.0, velocity=0.0))\ntypetest(Fluid(Domain([4, 4]), density=1.0, velocity=1.0))\ntypetest(Fluid(Domain([4, 4]), density=0, velocity=math.zeros))\ntypetest(Fluid(Domain([4, 4]), density=lambda s: math.randn(s), velocity=lambda\n    s: math.randn(s)))\ntypetest(Fluid(Domain([4, 4]), density=numpy.zeros([1, 4, 4, 1]), velocity=\n    numpy.zeros([1, 5, 5, 2])))\ntypetest(Fluid(Domain([4, 4]), density=numpy.zeros([1, 4, 4, 1]), velocity=\n    numpy.zeros([1, 5, 5, 2])))\ntypetest(Fluid(Domain([4, 4])))\n"
+}

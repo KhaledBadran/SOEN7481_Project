@@ -1,0 +1,9 @@
+{
+    "functionName": "test_plaw_accuracy",
+    "className": null,
+    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_profiles.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from scipy.special import gamma\nprefac = 2.0 ** (3 + alpha) * np.pi ** 1.5 * gamma((3 + alpha) / 2) / gamma(\n    -alpha / 2)\ndef fk(k):\n    return prefac / k ** (3 + alpha)\ndef alpha_f(cosmo, a):\n    return alpha\np = ccl.halos.HaloProfilePowerLaw(one_f, alpha_f)\np.update_precision_fftlog(plaw_index=alpha)\nk_arr = np.logspace(-3, 2, 1024)\nfk_arr = p.fourier(COSMO, k_arr, 1.0, 1.0)\nfk_arr_pred = fk(k_arr)\nres = np.fabs(fk_arr / fk_arr_pred - 1)\nassert np.all(res < 0.005)\npytest.mark.parametrize('alpha', [-1.2, -2.0, -2.8])"
+}

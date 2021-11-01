@@ -1,0 +1,9 @@
+{
+    "functionName": "test_bayesian_gplvm_2d",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_models_&_test_gplvm.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "Q = 2\nX_data_mean = pca_reduce(Data.Y, Q)\nkernel = gpflow.kernels.SquaredExponential()\nm = gpflow.models.BayesianGPLVM(Data.Y, X_data_mean, np.ones((Data.N, Q)),\n    kernel, num_inducing_variables=Data.M)\nelbo_initial = m.elbo()\nopt = gpflow.optimizers.Scipy()\nopt.minimize(m.training_loss, m.trainable_variables, options=dict(maxiter=2))\nassert m.elbo() > elbo_initial\nXtest = Data.rng.randn(10, Q)\nmu_f, var_f = m.predict_f(Xtest)\nmu_fFull, var_fFull = m.predict_f(Xtest, full_cov=True)\nnp.testing.assert_allclose(mu_fFull, mu_f)\nfor i in range(Data.D):\n    np.testing.assert_allclose(var_f[:, (i)], np.diag(var_fFull[:, :, (i)]))\n"
+}

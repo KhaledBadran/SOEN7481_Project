@@ -1,0 +1,9 @@
+{
+    "functionName": "test_validity_period_checking",
+    "className": "TestCertificate",
+    "fileName": "/named-data_&_PyNDN2/tests_&_unit_tests_&_test_certificate.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "certificate = CertificateV2()\ncertificate.setName(Name(\n    '/ndn/site1/KEY/ksk-1416425377094/0123/%FD%00%00%01I%C9%8B'))\ncertificate.getMetaInfo().setFreshnessPeriod(3600 * 1000.0)\ncertificate.setContent(PUBLIC_KEY)\ncertificate.setSignature(self.generateFakeSignature())\nself.assertEqual(True, certificate.isValid(fromIsoString('20141111T050000')))\nself.assertEqual(True, certificate.isValid(fromIsoString('20141111T060000')))\nself.assertEqual(False, certificate.isValid(fromIsoString('20141111T045959')))\nself.assertEqual(False, certificate.isValid(fromIsoString('20141111T060001')))\n"
+}

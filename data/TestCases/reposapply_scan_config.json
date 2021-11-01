@@ -1,0 +1,9 @@
+{
+    "functionName": "apply_scan_config",
+    "className": null,
+    "fileName": "/PRIArobotics_&_HedgehogServer/hedgehog_&_server_&___init__.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "def set(config, section, option, value):\n    if value is not None:\n        if section not in config:\n            config.add_section(section)\n        config[section][option] = value\n    elif section in config and option in config[section]:\n        del config[section][option]\n        if not config[section]:\n            del config[section]\ndef get(config, section, option):\n    return config.get(section, option, fallback=None)\ndef copy(in_cfg, out_cfg, section, option):\n    value = get(in_cfg, section, option)\n    set(out_cfg, section, option, value)\n    return value\ncopy(scan_config, config, 'default', 'port')\nwifi_commands = get(scan_config, 'wifi', 'commands')\nif wifi_commands:\n    subprocess.Popen(['wpa_cli'], stdin=subprocess.PIPE).communicate(\n        wifi_commands.encode())\n"
+}

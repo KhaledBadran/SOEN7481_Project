@@ -1,0 +1,9 @@
+{
+    "functionName": "test_freeze",
+    "className": null,
+    "fileName": "/132nd-etcher_&_EPAB/test_&_test_cmd_&_test_freeze.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "config.FREEZE_ENTRY_POINT.default = 'test'\nwhen(freeze)._install_pyinstaller()\nwhen(freeze)._patch('version')\nexpect(elib_run).run('pipenv clean', failure_ok=True)\nexpect(elib_run).run(contains('pyinstaller --log-level=WARN'), timeout=300)\nfreeze._freeze('version')\n"
+}

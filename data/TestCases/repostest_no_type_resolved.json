@@ -1,0 +1,9 @@
+{
+    "functionName": "test_no_type_resolved",
+    "className": "OWMEvidenceGetDWEDSTest",
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_CommandTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        There's no evidence, so we shouldn't see any output\n        \"\"\"\nself.parent._default_ctx.stored.resolve_class.return_value = None\nself.parent._default_ctx.stored.side_effect = lambda x: x\nself.parent._den3.side_effect = lambda x: x\nwith self.assertRaisesRegexp(GenericUserError, 'unresolved'):\n    self.cut.get(URIRef('http://example.org/context'), rdf_type='unresolved')\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test__make_analysis__default_mask_all_empty__cosmic_ray_image_masks_mask",
+    "className": "TestPhase",
+    "fileName": "/Jammy2211_&_PyAutoCTI/test_&_unit_&_pipeline_&_test_phase.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "phase.cosmic_ray_parallel_buffer = 0\nphase.cosmic_ray_serial_buffer = 0\nphase.cosmic_ray_diagonal_buffer = 0\nci_data.cosmic_ray_image = np.array([[0.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0,\n    0.0, 0.0]])\nanalysis = phase.make_analysis(ci_datas=[ci_data], cti_settings=cti_settings)\nassert (analysis.ci_datas_full[0].mask == np.array([[False, False, False],\n    [False, True, False], [False, False, False]])).all()\nphase.cosmic_ray_parallel_buffer = 1\nphase.cosmic_ray_serial_buffer = 1\nphase.cosmic_ray_diagonal_buffer = 1\nci_data.cosmic_ray_image = np.array([[0.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0,\n    0.0, 0.0]])\nanalysis = phase.make_analysis(ci_datas=[ci_data], cti_settings=cti_settings)\nassert (analysis.ci_datas_full[0].mask == np.array([[False, False, False],\n    [False, True, True], [False, True, True]])).all()\nphase.cosmic_ray_parallel_buffer = 2\nphase.cosmic_ray_serial_buffer = 1\nphase.cosmic_ray_diagonal_buffer = 1\nci_data.cosmic_ray_image = np.array([[1.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0,\n    0.0, 0.0]])\nanalysis = phase.make_analysis(ci_datas=[ci_data], cti_settings=cti_settings)\nassert (analysis.ci_datas_full[0].mask == np.array([[True, True, False], [\n    True, True, False], [True, False, False]])).all()\n"
+}

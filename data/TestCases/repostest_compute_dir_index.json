@@ -1,0 +1,9 @@
+{
+    "functionName": "test_compute_dir_index",
+    "className": null,
+    "fileName": "/harsimrans_&_DropboxSyncer/tests_&_test_syncer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "files = ['/abc/def.txt', '/abc/efg.png', '/abc/hgf.pdf', '/something.txt']\ndirectories = ['abc/har', 'bcd', '/def']\nfor root, dirs, filenames in os.walk('/'):\n    for d in dirs:\n        fs.RemoveObject(os.path.join(root, d))\n    print(root, dirs, filenames)\nfor entry in directories:\n    fs.CreateDirectory(entry)\nfor entry in files:\n    fs.CreateFile(entry)\nfor root, dirs, filenames in os.walk('/'):\n    print(root, dirs, filenames)\nd = syncer.compute_dir_index('/')\nprint(d['files'], d['subdirs'])\nassert len(d['files']) == 4\nassert len(d['subdirs']) == 4\n"
+}

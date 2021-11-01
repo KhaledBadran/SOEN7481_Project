@@ -1,0 +1,9 @@
+{
+    "functionName": "test_standard_play_mock",
+    "className": "TestGetNFLDBPlayData",
+    "fileName": "/AndrewRook_&_NFLWin/nflwin_&_tests_&_test_utilities.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "def mockreturn_engine():\n    return True\ndef mockreturn_query_string(season_years, season_types):\n    return True\ndef mockreturn_read_sql(sql_string, engine):\n    return self.test_df\nmonkeypatch.setattr(utils, 'connect_nfldb', mockreturn_engine)\nmonkeypatch.setattr(utils, '_make_nfldb_query_string', mockreturn_query_string)\nmonkeypatch.setattr(pd, 'read_sql', mockreturn_read_sql)\nexpected_df = pd.DataFrame({'gsis_id': [0, 0, 0, 0, 0, 1, 1, 1, 1, 1],\n    'drive_id': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 'play_id': [1, 2, 3, 4, 5, \n    1, 2, 3, 4, 5], 'seconds_elapsed': [0.0, 152.0, 354.0, 354.0, 0.0, \n    840.0, 840.0, 875.0, 900.0, 900.0], 'offense_team': ['HOU', 'KC', 'KC',\n    'HOU', 'HOU', 'UNK', 'DEN', 'DEN', 'CAR', 'UNK'], 'yardline': [-15, 35,\n    -15, -30, -26, np.nan, 48, -15, -18, np.nan], 'down': [0, 0, 0, 1, 2, 0,\n    1, 0, 1, 0], 'yards_to_go': [0, 0, 0, 10, 6, 0, 2, 0, 10, 0],\n    'home_team': ['HOU', 'HOU', 'HOU', 'HOU', 'HOU', 'DEN', 'DEN', 'DEN',\n    'DEN', 'DEN'], 'away_team': ['KC', 'KC', 'KC', 'KC', 'KC', 'CAR', 'CAR',\n    'CAR', 'CAR', 'CAR'], 'offense_won': [False, False, False, False, False,\n    True, True, True, True, True], 'quarter': ['Q1', 'Q1', 'Q1', 'Q1', 'Q2',\n    'OT', 'OT', 'OT2', 'OT3', 'OT'], 'curr_home_score': [0, 0, 0, 0, 0, 0, \n    0, 7, 7, 7], 'curr_away_score': [0, 6, 7, 7, 7, 0, 0, 0, 0, 0]})\nexpected_df['down'] = expected_df['down'].astype(np.int8)\npd.util.testing.assert_frame_equal(utils.get_nfldb_play_data().sort_index(\n    axis=1), expected_df.sort_index(axis=1))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "run_translation",
+    "className": null,
+    "fileName": "/cristian-mattarei_&_CoSA/tests_&_test_interface.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "reset_env()\nstatus = True\nif '-boolean' in path:\n    boolean = True\nelse:\n    boolean = False\nmodels = list([x for x in list(os.walk(path)) if COSADIR not in x[0]])[-1][-1]\nj_files = [('%s/%s' % (path, f)) for f in models if f.split('.')[1] == 'json']\ns_files = [('%s/%s' % (path, f)) for f in models if f.split('.')[1] in [\n    'sts', 'ets']]\nv_files = [('%s/%s[%s]' % (path, f, f.split('.')[0])) for f in models if f.\n    split('.')[1] in ['v']]\nif os.path.isfile('%s/assumptions.txt' % path):\n    assumptions = '%s/assumptions.txt' % path\nelse:\n    assumptions = None\nif os.path.isfile('%s/properties.txt' % path):\n    properties = '%s/properties.txt' % path\nelse:\n    properties = None\nif os.path.isfile('%s/lemmas.txt' % path):\n    lemmas = '%s/lemmas.txt' % path\nelse:\n    lemmas = None\nproblems_manager = cosa_option_manager.get_default_problem_manager(verbosity\n    =3, boolean=boolean, translate=path + GENERATED, printer='SMV',\n    model_files=','.join(j_files + s_files + v_files))\nproblems_manager.add_problem(solver_name='msat', verification='safety' if \n    properties is not None else 'simulation', prove=True if properties is not\n    None else False, assumptions=assumptions, properties=properties, lemmas\n    =lemmas)\nrun_problems(problems_manager)\nreturn status\n"
+}

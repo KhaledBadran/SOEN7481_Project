@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_clusters_with_context_only_home_when_work_out_of_range",
+    "className": "TestGPS",
+    "fileName": "/lukeWaninger_&_GSCAP/tests_&_test_gps.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "work = self.work_cluster.copy()\nwork.lat = work.lat + 10\ny = pd.concat([self.home_cluster, work], sort=False).sort_values(by='ts'\n    ).reset_index(drop=True)\ny = gps.process_velocities(y)\nrecords, clusters = gps.get_clusters_with_context(y)\nclusters = clusters.cid.unique()\nself.assertTrue('work' not in clusters)\nself.assertTrue('home' in clusters)\n"
+}

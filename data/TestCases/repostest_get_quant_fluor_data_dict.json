@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_quant_fluor_data_dict",
+    "className": null,
+    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_core_&_tests_&_test_quant_analysis.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Tests for 'get_quant_fluor_data_dict': basic tests for consistensy of the returned dictionary\"\"\"\nfor standard_data in _standard_data_sample:\n    quant_fluor_data_dict = get_quant_fluor_data_dict(standard_data,\n        incident_energy=12.0)\n    jsonschema.validate(instance=quant_fluor_data_dict, schema=\n        _xrf_quant_fluor_schema)\n    assert quant_fluor_data_dict['name'] == standard_data['name'\n        ], \"Dictionary element 'name' is incorrect\"\n    assert quant_fluor_data_dict['serial'] == standard_data['serial'\n        ], \"Dictionary element 'serial' is incorrect\"\n    assert quant_fluor_data_dict['description'] == standard_data['description'\n        ], \"Dictionary element 'description' is incorrect\"\n    eline_set = set()\n    mass_sum_expected = 0\n    for cmpd, mass in standard_data['compounds'].items():\n        em_dict = split_compound_mass(cmpd, mass)\n        for el, ms in em_dict.items():\n            elines = generate_eline_list([el], incident_energy=12.0)\n            n_elines = len(elines)\n            if n_elines:\n                mass_sum_expected += n_elines * ms\n                eline_set.update(elines)\n    eline_out_list = list(quant_fluor_data_dict['element_lines'].keys())\n    assert len(eline_out_list) == len(eline_set\n        ), 'The number of emission lines is not as expected'\n    assert set(eline_out_list\n        ) == eline_set, 'Generated object contains emission lines that are different from expected'\n    mass_sum = sum([_['density'] for _ in quant_fluor_data_dict[\n        'element_lines'].values()])\n    assert mass_sum == mass_sum_expected, 'The total mass (density) of the components is different from expected'\n"
+}

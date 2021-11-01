@@ -1,0 +1,9 @@
+{
+    "functionName": "test_if_each",
+    "className": null,
+    "fileName": "/mabuchilab_&_NiceLib/tests_&_test_if.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "parser = Parser(\n    \"\"\"\n        #define a {}\n        #define x 0\n        #define y 0\n        #define z 0\n\n        #if a == 1\n            #define x 20\n        #elif a == 2\n            #define y 40\n        #else\n            #define z 60\n        #endif\n    \"\"\"\n    .format(num))\nparser.parse()\nprint(parser.get_any_macro('x').body_str())\nprint(parser.get_any_macro('y').body_str())\nprint(parser.get_any_macro('z').body_str())\nassert parser.get_any_macro('x').body_str() == result[0]\nassert parser.get_any_macro('y').body_str() == result[1]\nassert parser.get_any_macro('z').body_str() == result[2]\npytest.mark.parametrize('num,result', [(1, ('20', '0', '0')), (2, ('0',\n    '40', '0')), (3, ('0', '0', '60')), (0, ('0', '0', '60'))])"
+}

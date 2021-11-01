@@ -1,0 +1,9 @@
+{
+    "functionName": "test_write_missing_maximum_items",
+    "className": "TestLocateRequestPayload",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_locate.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a Locate request payload can be written to a data stream\n        even when missing the maximum items.\n        \"\"\"\npayload = payloads.LocateRequestPayload(offset_items=1, storage_status_mask\n    =3, object_group_member=enums.ObjectGroupMember.GROUP_MEMBER_DEFAULT,\n    attributes=[objects.Attribute(attribute_name=objects.Attribute.\n    AttributeName('Object Group'), attribute_value=primitives.TextString(\n    value='RoundRobinTestGroup', tag=enums.Tags.OBJECT_GROUP))])\nstream = utils.BytearrayStream()\npayload.write(stream)\nself.assertEqual(len(self.no_maximum_items_encoding), len(stream))\nself.assertEqual(str(self.no_maximum_items_encoding), str(stream))\n"
+}

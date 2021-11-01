@@ -1,0 +1,9 @@
+{
+    "functionName": "test_n_samples_leaves_roots",
+    "className": null,
+    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_tests_&_sklearn_compat_&_test_birch.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "X, y = make_blobs(n_samples=10)\nbrc = Birch()\nbrc.fit(X)\nn_samples_root = sum([sc.n_samples_ for sc in brc.root_.subclusters_])\nn_samples_leaves = sum([sc.n_samples_ for leaf in brc._get_leaves() for sc in\n    leaf.subclusters_])\nassert_equal(n_samples_leaves, X.shape[0])\nassert_equal(n_samples_root, X.shape[0])\n"
+}

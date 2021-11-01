@@ -1,0 +1,9 @@
+{
+    "functionName": "win_test_case_1",
+    "className": null,
+    "fileName": "/david-leon_&_Dandelion/test_&_test_ChainCRF.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    This test case passed on Tensorflow 1.8.0 + Win64, but failed on Tensorflow 1.8.0 + Ubuntu 14.04\n    :return:\n    \"\"\"\ny = tensor.imatrix('y')\nx = tensor.ftensor3('x')\nU = tensor.fmatrix('U')\nx_nobatch = tensor.fmatrix('x_nobatch')\ncost2 = CRF_forward(x, U)\ncost3 = CRF_forward_nobatch(x_nobatch, U, return_alpha=True)\nseq2 = CRF_decode(x, U)\nseq3 = CRF_forward_nobatch(x_nobatch, U, viterbi=True, return_best_sequence\n    =True)\nprint('compiling f2 ...')\nf2 = theano.function([x, U], cost2)\nprint('compiling f4 ...')\nf4 = theano.function([x, U], seq2)\nprint('compiling f5 ...')\nf5 = theano.function([x_nobatch, U], cost3)\nprint('compiling f6 ...')\nf6 = theano.function([x_nobatch, U], seq3)\nB, T, N = 2, 5, 3\nfor i in range(10):\n    x = np.random.rand(B, T, N).astype(np.float32)\n    U = np.random.rand(N, N).astype(np.float32)\n    c2 = f2(x, U)\n    s2 = f4(x, U)\n    c3_list = []\n    s3_list = []\n    for j in range(B):\n        c3_nobatch = f5(x[(j), :, :], U)\n        s3_nobatch = f6(x[(j), :, :], U)\n        c3_list.append(np.expand_dims(c3_nobatch, 0))\n        s3_list.append(np.expand_dims(s3_nobatch, 0))\n    c3 = np.concatenate(c3_list, axis=0)\n    s3 = np.concatenate(s3_list, axis=0)\n    print(c2)\n    print(c3)\n    print(s2)\n    print(s3)\n    if np.all(s2 == s3):\n        print('s pass')\n    else:\n        raise ValueError('s not same!')\n"
+}

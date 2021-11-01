@@ -1,0 +1,9 @@
+{
+    "functionName": "test_argv_by_name",
+    "className": null,
+    "fileName": "/ocaballeror_&_Lyricfetch/lyricfetch_&_tests_&_test_args.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Check that the program accepts a song or list of songs by name, and\n    returns a list of song objects with the information it parsed.\n    \"\"\"\nartist, title = 'judas priest', 'no surrender'\nnew_args = [__file__, f'{artist} - {title}']\nparam_song = Song(artist, title)\nmonkeypatch.setattr(sys, 'argv', new_args)\nsongs = parse_argv()\nassert songs == set([param_song])\nparam_songs = [Song('kreator', 'mars mantra'), Song('nervosa',\n    'morbid courage'), Song('ac/dc', 'night prowler')]\nnew_args = [__file__]\nfor p_song in param_songs:\n    new_args.append(f'{p_song.artist} - {p_song.title}')\nmonkeypatch.setattr(sys, 'argv', new_args)\nsongs = parse_argv()\nassert songs == set(param_songs)\n"
+}

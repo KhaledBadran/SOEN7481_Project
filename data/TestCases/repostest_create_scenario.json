@@ -1,0 +1,9 @@
+{
+    "functionName": "test_create_scenario",
+    "className": "TestScenario",
+    "fileName": "/JohnVolk_&_PRMS-Python/test_&_test_prms_python.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        a simulation setup should create a simulation directory with correct scenario data\n        \"\"\"\ns = Scenario(self.test_model_data_dir, self.scenario_dir, title=\n    'Scenario Uno', description='test scenario for prms_python')\nparam_mods = {'snow_adj': lambda x: 1.1 * x, 'rad_trncf': lambda x: 0.9 * x}\ns.build(param_mod_funs=param_mods)\nassert_valid_input_dir(self, self.scenario_dir)\ns.run()\nassert_valid_input_dir(self, os.path.join(self.scenario_dir, 'inputs'))\nassert_valid_output_dir(self, os.path.join(self.scenario_dir, 'outputs'))\nmd_json_path = os.path.join(self.scenario_dir, 'metadata.json')\nassert os.path.isfile(md_json_path)\nmd_json = json.loads(open(md_json_path).read())\nassert md_json['title'] == 'Scenario Uno'\nassert md_json['description'] == 'test scenario for prms_python'\nassert 'start_datetime' in md_json\nassert 'end_datetime' in md_json\nassert 'mod_funs_dict' in md_json\np_base = Parameters(os.path.join(self.test_model_data_dir, 'parameters'))\np_scen = Parameters(os.path.join(self.scenario_dir, 'inputs', 'parameters'))\nassert_array_almost_equal(p_base['snow_adj'] * 1.1, p_scen['snow_adj'])\nassert_array_almost_equal(p_base['rad_trncf'] * 0.9, p_scen['rad_trncf'])\n"
+}

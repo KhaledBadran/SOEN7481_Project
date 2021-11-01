@@ -1,0 +1,9 @@
+{
+    "functionName": "test_max_sharpe_explicit_bound",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_efficient_frontier.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ef = setup_efficient_frontier()\nef.add_constraint(lambda w: w[0] >= 0.2)\nef.add_constraint(lambda w: w[2] == 0.15)\nef.add_constraint(lambda w: w[3] + w[4] <= 0.1)\nef.max_sharpe()\nnp.testing.assert_almost_equal(ef.weights.sum(), 1)\nassert ef.weights[0] >= 0.2 - 1e-05\nnp.testing.assert_almost_equal(ef.weights[2], 0.15)\nassert ef.weights[3] + ef.weights[4] <= 0.1 + 1e-05\n"
+}

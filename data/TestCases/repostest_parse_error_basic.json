@@ -1,0 +1,9 @@
+{
+    "functionName": "test_parse_error_basic",
+    "className": "TestParser",
+    "fileName": "/anselmrothe_&_EIG/test_&_test_parser.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with self.assertRaises(ProgramSyntaxError) as cm:\n    question = Parser.parse('(== (color 1-1) Blu)')\nexception = cm.exception\nself.assertEqual(exception.error_msg, 'Unrecognized token')\nwith self.assertRaises(ProgramSyntaxError) as cm1:\n    question = Parser.parse('(== (color 1-1 2-2) Blue)')\nexception = cm1.exception\nself.assertEqual(exception.error_msg,\n    'Operand number mismatch. 1 expected, found 2')\nwith self.assertRaises(ProgramSyntaxError) as cm2:\n    question = Parser.parse('(== (color Red) Blue)')\nexception = cm2.exception\nself.assertEqual(exception.error_msg,\n    'Parameter type mismatch. Expected DataType.LOCATION for parameter 1, get DataType.COLOR'\n    )\nwith self.assertRaises(ProgramSyntaxError) as cm3:\n    question = Parser.parse('(setSize AllTiles)')\nexception = cm3.exception\nself.assertEqual(exception.error_msg,\n    'Parameter type mismatch. Expected DataType.SET_L for parameter 1, get DataType.SET_LITERAL_L'\n    )\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_order_trade_task",
+    "className": null,
+    "fileName": "/quantOS-org_&_JAQS/test_&_test_data_basic.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from jaqs.data.basic import TradeStat, Trade, Task, TaskInd, Order, OrderStatusInd\norder = Order()\norder.symbol = 'SPY'\norder.task_id = 10000001\norder.entrust_no = '123'\norder.entrust_size = 10\norder.entrust_action = 'Short'\norder.entrust_price = 1.2\norder.entrust_time = 95055\norder.entrust_date = 20171201\norder.fill_price = 1.19\norder.fill_size = 3\norder.commission = 0.001\nstr(order)\no2 = Order(order)\no2.entrust_no = '124'\no3 = Order.new_order('SPY', 'Buy', 10, 10, 20111111, 143029, 'Limit')\noind = OrderStatusInd(order)\nOrderStatusInd.create_from_dict({'symbol': 'SPY'})\nstr(oind)\ntask = Task(order.task_id, 'vwap', {'a': 'b'}, order, 'place_order', order.\n    entrust_date)\nassert not task.is_finished\ntask.task_status = common.TASK_STATUS.DONE\nassert task.is_finished\ntind = TaskInd(task.task_id, task.task_status, task.algo, 'success')\nstr(tind)\ntind2 = TaskInd.create_from_dict({'task_id': 2011223})\ntrade = Trade(order)\ntrade.set_fill_info(15, 20, 20171202, 112311, 12345)\nstr(trade)\nt2 = Trade.create_from_dict({'symbol': 'SPY'})\ntstat = TradeStat()\nstr(tstat)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_version_range",
+    "className": null,
+    "fileName": "/siku2_&_Loglette/tests_&_test_changelog.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "vrange = ChangelogRange.parse(Path('tests/logs/range.log').read_text())\nassert vrange is not vrange.copy()\nassert len(vrange) == 3\nassert len(vrange.flatten()) == 4\nassert vrange.get((6,)).changes[0].text == 'sorting logs'\nassert len(vrange[2, 0, 0:5, 5, 1]) == 2\nassert vrange.first.version == (5,)\nassert vrange.last.version == (3,)\nassert vrange.latest.version == (6,)\nassert vrange.oldest.version == (3,)\n"
+}

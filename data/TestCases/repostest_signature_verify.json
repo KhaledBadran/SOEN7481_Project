@@ -1,0 +1,9 @@
+{
+    "functionName": "test_signature_verify",
+    "className": "TestProxyKmipClient",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_test_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the client can verify a signature.\n        \"\"\"\nresult = {'unique_identifier': '1', 'validity_indicator': enums.\n    ValidityIndicator.VALID, 'result_status': enums.ResultStatus.SUCCESS}\nclient = ProxyKmipClient()\nclient.open()\nclient.proxy.signature_verify.return_value = result\nvalidity = client.signature_verify(\n    b'kw\\xb4\\xd60\\x06\\xde\\xe6\\x05\\xb1V\\xe2t\\x03\\x97\\x93X\\xde\\xb9\\xe7\\x15F\\x16\\xd9t\\x9d\\xec\\xbe\\xc0]&K'\n    , b'\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00', uid='1',\n    cryptographic_parameters={'block_cipher_mode': enums.BlockCipherMode.\n    CBC, 'padding_method': enums.PaddingMethod.PKCS5,\n    'cryptographic_algorithm': enums.CryptographicAlgorithm.BLOWFISH})\nself.assertEqual(enums.ValidityIndicator.VALID, validity)\nmock.patch('kmip.pie.client.KMIPProxy', mock.MagicMock(spec_set=KMIPProxy))"
+}

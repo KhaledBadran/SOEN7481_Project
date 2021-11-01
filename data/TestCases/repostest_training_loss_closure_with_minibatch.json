@@ -1,0 +1,9 @@
+{
+    "functionName": "test_training_loss_closure_with_minibatch",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_models_&_test_training_mixins.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "N = 13\nB = 5\nnum_batches = int(np.ceil(N / B))\ndata = np.random.randn(N, 2), np.random.randn(N, 1)\ndataset = tf.data.Dataset.from_tensor_slices(data)\nmodel = DummyModel()\ntraining_loss_full_data = model.training_loss_closure(data, compile=True)\nloss_full = training_loss_full_data()\nit = iter(dataset.batch(B))\ntraining_loss_minibatch = model.training_loss_closure(it, compile=True)\nbatch_losses = [training_loss_minibatch() for _ in range(num_batches)]\nnp.testing.assert_allclose(loss_full, np.sum(batch_losses))\n"
+}

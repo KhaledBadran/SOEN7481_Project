@@ -1,0 +1,9 @@
+{
+    "functionName": "test_create_unsupported_object_type",
+    "className": "TestKmipEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that an InvalidField error is generated when attempting to\n        create an unsupported object type.\n        \"\"\"\ne = engine.KmipEngine()\ne._data_store = self.engine\ne._data_store_session_factory = self.session_factory\ne._data_session = e._data_store_session_factory()\ne._logger = mock.MagicMock()\nobject_type = enums.ObjectType.PUBLIC_KEY\npayload = payloads.CreateRequestPayload(object_type)\nargs = payload,\nregex = 'Cannot create a PublicKey object with the Create operation.'\nsix.assertRaisesRegex(self, exceptions.InvalidField, regex, e.\n    _process_create, *args)\ne._logger.info.assert_any_call('Processing operation: Create')\n"
+}

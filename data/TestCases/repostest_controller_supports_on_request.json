@@ -1,0 +1,9 @@
+{
+    "functionName": "test_controller_supports_on_request",
+    "className": null,
+    "fileName": "/RobertoPrevato_&_BlackSheep/tests_&_test_controllers.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "app = FakeApplication()\napp.controllers_router = RoutesRegistry()\nget = app.controllers_router.get\nk = 0\nclass Home(Controller):\n\n    def greet(self):\n        return 'Hello World'\n\n    async def on_request(self, request: Request):\n        nonlocal k\n        k += 1\n        assert isinstance(request, Request)\n        assert request.url.path == b'/' if k < 10 else b'/foo'\n        return await super().on_request(request)\n\n    @get('/')\n    async def index(self, request: Request):\n        assert isinstance(self, Home)\n        return text(self.greet())\n\n    @get('/foo')\n    async def foo(self):\n        assert isinstance(self, Home)\n        return text('foo')\napp.setup_controllers()\nfor j in range(1, 10):\n    await app(get_example_scope('GET', '/'), MockReceive(), MockSend())\n    assert app.response.status == 200\n    assert k == j\nfor j in range(10, 20):\n    await app(get_example_scope('GET', '/foo'), MockReceive(), MockSend())\n    assert app.response.status == 200\n    assert k == j\npytest.mark.asyncio"
+}

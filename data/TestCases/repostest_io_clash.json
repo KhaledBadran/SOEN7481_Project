@@ -1,0 +1,9 @@
+{
+    "functionName": "test_io_clash",
+    "className": null,
+    "fileName": "/geowurster_&_NewlineJSON/tests_&_test_core.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with pytest.raises(TypeError):\n    with nlj.open(tempfile.NamedTemporaryFile(mode='w'), 'w') as src:\n        next(src)\nwith nlj.open(dicts_path) as src:\n    pass\nwith pytest.raises(ValueError):\n    next(src)\nwith nlj.open(tempfile.NamedTemporaryFile(mode='w')) as dst:\n    with pytest.raises(AttributeError):\n        dst.write([])\nwith nlj.open(tempfile.NamedTemporaryFile(mode='w'), 'w') as dst:\n    pass\nwith pytest.raises(ValueError):\n    dst.write([])\n"
+}

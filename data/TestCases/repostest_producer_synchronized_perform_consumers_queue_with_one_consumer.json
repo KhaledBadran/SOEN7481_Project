@@ -1,0 +1,9 @@
+{
+    "functionName": "test_producer_synchronized_perform_consumers_queue_with_one_consumer",
+    "className": null,
+    "fileName": "/Drakkar-Software_&_OctoBot-Channels/tests_&_test_synchronized.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "async def callback():\n    pass\ntest_consumer = await synchronized_channel.new_consumer(callback)\nproducer = TestSynchronizedProducer(get_chan(TEST_SYNCHRONIZED_CHANNEL))\nawait producer.run()\nwith patch.object(test_consumer, 'callback', new=AsyncMock()\n    ) as mocked_test_consumer_callback:\n    await producer.send({})\n    await mock_was_not_called(mocked_test_consumer_callback)\n    await producer.synchronized_perform_consumers_queue(1)\n    await mock_was_called_once(mocked_test_consumer_callback)\npytest.mark.asyncio"
+}

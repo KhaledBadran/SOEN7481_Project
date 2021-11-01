@@ -1,0 +1,9 @@
+{
+    "functionName": "test_parameters_mgrowth",
+    "className": null,
+    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_parameters.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Check that valid modified growth inputs are allowed, and invalid ones are\n    rejected.\n    \"\"\"\nzarr = np.linspace(0.0, 1.0, 15)\ndfarr = 0.1 * np.ones(15)\ndef f_func(z):\n    return 0.1 * z\nfor omega_g in [None, 0.0, 0.1]:\n    assert_no_warnings(ccl.Cosmology, Omega_c=0.25, Omega_b=0.05, h=0.7,\n        A_s=2.1e-09, n_s=0.96, z_mg=zarr, df_mg=dfarr, Omega_g=omega_g)\n    assert_no_warnings(ccl.Cosmology, Omega_c=0.25, Omega_b=0.05, h=0.7,\n        A_s=2.1e-09, n_s=0.96, z_mg=[0.0, 0.1, 0.2], df_mg=[0.1, 0.1, 0.1],\n        Omega_g=omega_g)\n    assert_raises(ValueError, ccl.Cosmology, Omega_c=0.25, Omega_b=0.05, h=\n        0.7, A_s=2.1e-09, n_s=0.96, z_mg=zarr, Omega_g=omega_g)\n    assert_raises(ValueError, ccl.Cosmology, Omega_c=0.25, Omega_b=0.05, h=\n        0.7, A_s=2.1e-09, n_s=0.96, df_mg=dfarr, Omega_g=omega_g)\n    assert_raises(ValueError, ccl.Cosmology, Omega_c=0.25, Omega_b=0.05, h=\n        0.7, A_s=2.1e-09, n_s=0.96, z_mg=None, df_mg=dfarr, Omega_g=omega_g)\n    assert_raises(ValueError, ccl.Cosmology, Omega_c=0.25, Omega_b=0.05, h=\n        0.7, A_s=2.1e-09, n_s=0.96, z_mg=zarr, df_mg=0.1, Omega_g=omega_g)\n    assert_raises(ValueError, ccl.Cosmology, Omega_c=0.25, Omega_b=0.05, h=\n        0.7, A_s=2.1e-09, n_s=0.96, z_mg=zarr, df_mg=f_func, Omega_g=omega_g)\n    assert_raises(ValueError, ccl.Cosmology, Omega_c=0.25, Omega_b=0.05, h=\n        0.7, A_s=2.1e-09, n_s=0.96, z_mg=zarr, df_mg=dfarr[1:], Omega_g=omega_g\n        )\n    assert_raises(ValueError, ccl.Cosmology, Omega_c=0.25, Omega_b=0.05, h=\n        0.7, A_s=2.1e-09, n_s=0.96, z_mg=zarr, df_mg=np.column_stack((dfarr,\n        dfarr)), Omega_g=omega_g)\n"
+}

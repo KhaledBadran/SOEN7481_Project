@@ -1,0 +1,9 @@
+{
+    "functionName": "fuller_scaling",
+    "className": null,
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_models_&_phases_&_diffusivity.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Uses Fuller model to adjust a diffusion coefficient for gases from\n    reference conditions to conditions of interest\n\n    Parameters\n    ----------\n    target : OpenPNM Object\n        The object for which these values are being calculated.  This\n        controls the length of the calculated array, and also provides\n        access to other necessary thermofluid properties.\n\n    DABo : float, array_like\n        Diffusion coefficient at reference conditions\n\n    Po, To : float, array_like\n        Pressure & temperature at reference conditions, respectively\n\n    pressure : string\n        The dictionary key containing the pressure values in Pascals (Pa)\n\n    temperature : string\n        The dictionary key containing the temperature values in Kelvin (K)\n\n    Returns\n    -------\n    value : NumPy ndarray\n        Array containing scaled gas diffusion coefficient values [m2/s].\n\n    \"\"\"\nTi = target[temperature]\nPi = target[pressure]\nvalue = DABo * (Ti / To) ** 1.75 * (Po / Pi)\nreturn value\n"
+}

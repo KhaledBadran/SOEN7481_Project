@@ -1,0 +1,9 @@
+{
+    "functionName": "test_Transfer_validate_catch_all_errors",
+    "className": null,
+    "fileName": "/justanr_&_Flask-Transfer/tests_&_test_transfer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "@transf.validator\n@transf.validator\ndef derp(filehandle, meta):\n    raise UploadError('error')\nwith pytest.raises(UploadError) as excinfo:\n    transf._validate('', {}, catch_all_errors=True)\nassert excinfo.value.args[0] == ['error', 'error']\n"
+}

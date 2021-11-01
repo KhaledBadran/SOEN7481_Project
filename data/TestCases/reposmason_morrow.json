@@ -1,0 +1,9 @@
+{
+    "functionName": "mason_morrow",
+    "className": null,
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_models_&_geometry_&_throat_shape_factor.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Mason and Morrow relate the capillary pressure to the shaped factor in a\n    similar way to Mortensen but for triangles.\n\n    Parameters\n    ----------\n    target : OpenPNM Object\n        The object which this model is associated with. This controls the\n        length of the calculated array, and also provides access to other\n        necessary properties.\n\n    throat_perimeter : string\n        The dictionary key of the array containing the throat perimeter values.\n\n    throat_area : string\n        The dictionary key of the array containing the throat area values.\n\n    Returns\n    -------\n    value : NumPy ndarray\n        Array containing throat shape factor values.\n\n    References\n    ----------\n    Mason, G. and Morrow, N.R.. Capillary behavior of a perfectly wetting\n    liquid in irregular triangular tubes. Journal of Colloid and Interface\n    Science, 141(1), pp.262-274 (1991).\n\n    \"\"\"\nts = target.throats()[target[throat_area] <= 0]\nP = target[throat_perimeter]\nA = target[throat_area]\nvalue = A / P ** 2\nvalue[ts] = 1 / (4 * _np.pi)\nreturn value\n"
+}

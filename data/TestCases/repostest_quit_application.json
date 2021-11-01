@@ -1,0 +1,9 @@
+{
+    "functionName": "test_quit_application",
+    "className": null,
+    "fileName": "/mandeep_&_Mosaic/tests_&_test_player.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that the application exits properly.\n\n    Qtbot clicks on the file menu and Qt.Key_Down highlights the quit application\n    item. Monkeypatch is set to intercept the exit call and will append 1 to exit_calls\n    when it does.\"\"\"\nexit_calls = []\nmonkeypatch.setattr(QApplication, 'quit', lambda : exit_calls.append(1))\nqtbot.keyClick(window.file, Qt.Key_Down)\nqtbot.keyClick(window.file, Qt.Key_Down)\nqtbot.keyClick(window.file, Qt.Key_Down)\nqtbot.keyClick(window.file, Qt.Key_Down)\nqtbot.keyClick(window.file, Qt.Key_Down)\nqtbot.keyClick(window.file, Qt.Key_Down)\nqtbot.keyClick(window.file, Qt.Key_Enter)\nassert exit_calls == [1]\n"
+}

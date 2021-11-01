@@ -1,0 +1,9 @@
+{
+    "functionName": "test_propose_normalized_scores_gt_tunable_names",
+    "className": "TestBTBSession",
+    "fileName": "/HDI-Project_&_BTB/tests_&_test_session.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tuner = MagicMock()\ntuner.propose.return_value = 'parameters'\ninstance = MagicMock(spec_set=BTBSession)\ninstance.proposals = {}\ninstance._normalized_scores.__len__.return_value = 1\ninstance._selector.select.return_value = 'test_tunable'\ninstance._tuners = {'test_tunable': tuner}\ninstance._tunables = {'test_tunable': 'test_spec'}\ninstance._tunable_names = ['test_tunable']\ninstance._get_next_tunable_name.return_value = 'test_tunable'\ninstance._make_id.return_value = 1\nres_name, res_config = BTBSession.propose(instance)\nassert res_name == 'test_tunable'\nassert res_config == 'parameters'\nexpected_proposals = {(1): {'id': 1, 'name': 'test_tunable', 'config':\n    'parameters'}}\nassert instance.proposals == expected_proposals\ninstance._make_id.assert_called_once_with('test_tunable', 'parameters')\ntuner.propose.assert_called_once_with(1)\n"
+}

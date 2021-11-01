@@ -1,0 +1,9 @@
+{
+    "functionName": "object_to_categorical",
+    "className": "DataFrameToMatrix",
+    "fileName": "/kitware_&_BroThon/zat_&_dataframe_to_matrix.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Run a heuristic on the object columns to determine whether it contains categorical values\n           if the heuristic decides it's categorical then the type of the column is changed\n        Args:\n            df (dataframe): The dataframe to check for categorical data\n        Returns:\n            None but the dataframe columns are modified\n        \"\"\"\nfor column in df.select_dtypes(include='object').columns:\n    if df[column].nunique() < 100:\n        print('Changing column {:s} to category...'.format(column))\n        df[column] = pd.Categorical(df[column])\nstaticmethod"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_adk_transitions",
+    "className": null,
+    "fileName": "/MDAnalysis_&_MDAnalysisData/MDAnalysisData_&_tests_&_test_datasets.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "if method == 'DIMS':\n    data = datasets.fetch_adk_transitions_DIMS()\nelif method == 'FRODA':\n    data = datasets.fetch_adk_transitions_FRODA()\nelse:\n    raise ValueError(\"Unknown adk_transitions method '{}'\".format(method))\nmetadata = adk_transitions.METADATA[method]['CONTENTS']\nassert len(data.DESCR) == descr_length\ndescr_header = (\n    \"\"\".. -*- coding: utf-8 -*-\n\n.. _`adk-transitions-{}-dataset`:\"\"\".\n    format(method))\nassert data.DESCR.startswith(descr_header)\ndatafiles = data[filetype] if isinstance(data[filetype], list) else [data[\n    filetype]]\npattern = os.path.join('*', metadata[filetype])\nassert all(glob.fnmatch.fnmatch(path, pattern) for path in datafiles\n    ), 'not all datafiles {} match {}'.format(datafiles, pattern)\nassert all(os.path.exists(path) for path in datafiles)\npytest.mark.onlinepytest.mark.parametrize('method,descr_length', (('DIMS', 1395), ('FRODA', \n    1399)))pytest.mark.parametrize('filetype', ('topology', 'trajectories'))"
+}

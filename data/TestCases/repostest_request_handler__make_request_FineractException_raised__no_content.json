@@ -1,0 +1,9 @@
+{
+    "functionName": "test_request_handler__make_request_FineractException_raised__no_content",
+    "className": null,
+    "fileName": "/mobidevke_&_PyFineract/tests_&_test_handlers.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with pytest.raises(FineractException):\n    request_handler = RequestHandler('a', 'b', 'https://localhost',\n        'default', 10, 30)\n    mocker.patch.object(requests.Session, 'send', return_value=\n        ExampleResponse(204))\n    mocker.patch.object(request_handler,\n        '_RequestHandler__create_err_message', return_value='Failed')\n    request_handler.make_request('get', '')\n"
+}

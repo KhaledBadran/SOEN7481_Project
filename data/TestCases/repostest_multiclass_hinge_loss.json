@@ -1,0 +1,9 @@
+{
+    "functionName": "test_multiclass_hinge_loss",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_test_objectives.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from lasagne.objectives import multiclass_hinge_loss\nfrom lasagne.nonlinearities import rectify\np = theano.tensor.matrix('p')\nt = theano.tensor.ivector('t')\nc = multiclass_hinge_loss(p, t)\nfloatX = theano.config.floatX\npredictions = np.random.rand(10, 20).astype(floatX)\ntargets = np.random.random_integers(0, 19, (10,)).astype('int8')\none_hot = np.zeros((10, 20))\none_hot[np.arange(10), targets] = 1\ncorrect = predictions[one_hot > 0]\nrest = predictions[one_hot < 1].reshape((10, 19))\nrest = np.max(rest, axis=1)\nhinge = rectify(1 + rest - correct)\nassert np.allclose(hinge, c.eval({p: predictions, t: targets}))\n"
+}

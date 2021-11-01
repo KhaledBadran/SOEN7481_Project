@@ -1,0 +1,9 @@
+{
+    "functionName": "test_compare_manual_predict",
+    "className": "TestOptimizeTSSpredator",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_optimize_TSSpredator.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "out = StringIO()\nmanual = os.path.join(self.test_folder, 'manual.gff')\npredict = os.path.join(self.test_folder, 'predict.gff')\ngen_file(manual, self.example.manual_file)\ngen_file(predict, self.example.gff_file)\npara_list = [copy.deepcopy(self.example.best_para)]\nargs = self.mock_args.mock()\nargs.manual = manual\nargs.cores = 1\nargs.gene_length = 2000\nargs.cluster = 3\not.compare_manual_predict(1000, para_list, [predict], self.test_folder, out,\n    args, self.example.mans, 3, 2000)\nself.assertEqual(out.getvalue(),\n    \"\"\"1000\the_0.3_rh_0.2_fa_0.7_rf_0.3_bh_0.0_ef_2.5_pf_3.3\tTP=0\tTP_rate=0.0\tFP=2\tFP_rate=0.00100150225338007\tFN=2\tmissing_ratio=0.6666666666666666\n\"\"\"\n    )\n"
+}

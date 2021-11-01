@@ -1,0 +1,9 @@
+{
+    "functionName": "test_logger_configured",
+    "className": "CITestUtils",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test config_handler working logger functionality\"\"\"\nif self.skip_config_ci:\n    self.skipTest(reason=\n        'PyU4V.conf could not be loaded, not possible to guarantee PyU4V.log existence'\n        )\nif 'DEBUG' not in self.cfg.get('logger_PyU4V', 'level'):\n    self.skipTest(reason=\n        'DEBUG level logging is required for utils.config_handler CI tests')\nlog_args = self.cfg.get('handler_fileHandler', 'args').split(',')\nlog_path = log_args[0][2:].strip(\"'\")\nassert os.path.isfile(os.path.normpath(log_path)) is True\ntime_re_search = re.compile('\\\\A' + time.strftime('%Y-%m-%d') + '\\\\s' +\n    time.strftime('%H:%M') + ':\\\\d{2},\\\\d{3}')\nwith open(log_path, newline='') as log_file:\n    log_lines = log_file.readlines()\n    assert bool(time_re_search.match(log_lines[-1])) is True\n"
+}

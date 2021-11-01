@@ -1,0 +1,9 @@
+{
+    "functionName": "test_abund_prior_warning",
+    "className": "Test_find_abund",
+    "fileName": "/ellawang44_&_Breidablik/breidablik_&_interpolate_&_test_spectra.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with warnings.catch_warnings(record=True) as w:\n    warnings.simplefilter('always')\n    Test_find_abund.models.find_abund([600, 700], [1, 0.5], [0.5, 0.5], \n        5000, 2.5, -2, method='chisq', prior=[1, 2, 3], abunds=[1, 2, 3])\n    Test_find_abund.models.find_abund([600, 700], [1, 0.9], [0.5, 0.5], \n        5000, 2.5, -2, prior=[1, 2, 3])\n    Test_find_abund.models.find_abund([600, 700], [1, 0.9], [0.5, 0.5], \n        5000, 2.5, -2, abunds=[1, 2, 3])\n    assert len(w) == 3\n    for i in range(len(w)):\n        assert issubclass(w[i].category, UserWarning)\n"
+}

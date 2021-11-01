@@ -1,0 +1,9 @@
+{
+    "functionName": "test_IH_is_used",
+    "className": null,
+    "fileName": "/Menelau_&_DESlib/deslib_&_tests_&_test_base.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "X, y, neighbors, distances, dsel_processed, _ = example_estimate_competence\nexpected = [0, 0, 1]\nquery = np.ones((3, 2))\nds_test = BaseDS(create_pool_classifiers, with_IH=True, IH_rate=0.5)\nds_test.fit(X, y)\nds_test.DSEL_processed_ = dsel_processed\nds_test._get_region_competence = MagicMock(return_value=(distances, neighbors))\npredicted = ds_test.predict(query)\nassert np.array_equal(predicted, expected)\n"
+}

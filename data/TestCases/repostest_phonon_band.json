@@ -1,0 +1,9 @@
+{
+    "functionName": "test_phonon_band",
+    "className": null,
+    "fileName": "/mesonepigreco_&_CellConstructor/tests_&_TestInterpolateDynmat_&_test_phonon_band.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "total_path = os.path.dirname(os.path.abspath(__file__))\nos.chdir(total_path)\nNQIRR = 8\nsupercell_size = 3, 3, 2\ndynmats = CC.Phonons.Phonons('dynmat', nqirr=NQIRR)\nq_target = np.array(dynmats.q_tot[1], dtype=np.float64)\ndyn_fc = dynmats.GenerateSupercellDyn(supercell_size)\nnew_dynmat = CC.Phonons.InterpolateDynFC(dyn_fc.dynmats[0], supercell_size,\n    dynmats.structure, dyn_fc.structure, q_target)\ndyn0 = CC.Phonons.Phonons('dynmat', nqirr=1)\ndyn0.dynmats[0] = new_dynmat\nw, pols = dyn0.DyagDinQ(0)\nw2, pols = dynmats.DyagDinQ(1)\nw *= CC.Phonons.RY_TO_CM\nw2 *= CC.Phonons.RY_TO_CM\nprint('Frequencies:')\nprint('\\n'.join([('%d) %16.8f | %16.8f' % (i, w[i], w2[i])) for i in range(\n    len(w))]))\nq0 = np.array([0, 0, 0], dtype=np.float64)\nq1 = dynmats.q_stars[-1][0]\nN_STEPS = 10\nw_arrays = []\nfor i in range(N_STEPS):\n    print('Interpolation... (step %d of %d)' % (i + 1, N_STEPS))\n    q_vector = q0 + i * (q1 - q0) / (N_STEPS - 1)\n    new_dynmat = CC.Phonons.InterpolateDynFC(dyn_fc.dynmats[0],\n        supercell_size, dynmats.structure, dyn_fc.structure, q_vector)\n    dyn0.dynmats[0] = new_dynmat\n    ws, pols = dyn0.DyagDinQ(0)\n    ws *= CC.Phonons.RY_TO_CM\n    w_arrays.append(ws)\nfreqs = np.array(w_arrays)\nn_q, n_freqs = np.shape(freqs)\nplt.figure()\nfor i in range(n_freqs):\n    plt.plot(freqs[:, (i)])\nplt.title('Phonon band')\nplt.xlabel('q point')\nplt.ylabel('freq. [cm-1]')\nplt.tight_layout()\n"
+}

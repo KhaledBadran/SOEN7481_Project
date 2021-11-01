@@ -1,0 +1,9 @@
+{
+    "functionName": "has_fsaverage",
+    "className": null,
+    "fileName": "/nipy_&_PySurfer/surfer_&_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Determine whether the user has a usable fsaverage\"\"\"\nsubjects_dir = _get_subjects_dir(subjects_dir, raise_error=raise_error)\nout = ''\nif not op.isdir(subjects_dir):\n    out = 'SUBJECTS_DIR not found: %s' % (subjects_dir,)\nelse:\n    fs_dir = op.join(_get_subjects_dir(subjects_dir, False), 'fsaverage')\n    surf_dir = op.join(fs_dir, 'surf')\n    if not op.isdir(fs_dir):\n        out = 'fsaverage not found in SUBJECTS_DIR: %s' % (fs_dir,)\n    elif not op.isdir(surf_dir):\n        out = 'fsaverage has no \"surf\" directory: %s' % (surf_dir,)\nout = (out == '', out) if return_why else out == ''\nreturn out\n"
+}

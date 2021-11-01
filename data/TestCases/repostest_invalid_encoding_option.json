@@ -1,0 +1,9 @@
+{
+    "functionName": "test_invalid_encoding_option",
+    "className": "TestKeyWrappingSpecification",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a TypeError is raised when an invalid value is used to set\n        the encoding option of a KeyWrappingSpecification struct.\n        \"\"\"\nkwargs = {'encoding_option': 'invalid'}\nself.assertRaisesRegex(TypeError,\n    'Encoding option must be an EncodingOption enumeration.', objects.\n    KeyWrappingSpecification, **kwargs)\nargs = objects.KeyWrappingSpecification(), 'encoding_option', 'invalid'\nself.assertRaisesRegex(TypeError,\n    'Encoding option must be an EncodingOption enumeration.', setattr, *args)\n"
+}

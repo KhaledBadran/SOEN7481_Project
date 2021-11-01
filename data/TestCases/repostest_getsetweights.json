@@ -1,0 +1,9 @@
+{
+    "functionName": "test_getsetweights",
+    "className": null,
+    "fileName": "/hughperkins_&_DeepCL/python_&_test_&_test_basic.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cl = PyDeepCL.DeepCL()\nnet = PyDeepCL.NeuralNet(cl)\nnet.addLayer(PyDeepCL.InputLayerMaker().numPlanes(1).imageSize(2))\nnet.addLayer(PyDeepCL.ConvolutionalMaker().numFilters(1).filterSize(1).\n    biased(False))\nnet.setBatchSize(1)\nprint(net.asString())\nassert 2 == net.getNumLayers()\nprint('net.getLayer(1).getBiased()', net.getLayer(1).getBiased())\nweights = net.getLayer(1).getWeights()\nprint('weights', weights)\nassert weights.size == 1\nassert weights[0] != 0\nnet.getLayer(1).setWeights(np.array([2.5], dtype=np.float32))\nweights = net.getLayer(1).getWeights()\nprint('weights', weights)\nassert len(weights) == 1\nassert weights[0] == 2.5\nnet = PyDeepCL.NeuralNet(cl)\nnet.addLayer(PyDeepCL.InputLayerMaker().numPlanes(1).imageSize(2))\nnet.addLayer(PyDeepCL.ConvolutionalMaker().numFilters(1).filterSize(2).biased()\n    )\nnet.setBatchSize(1)\nprint(net.asString())\nassert 2 == net.getNumLayers()\nweights = net.getLayer(1).getWeights()\nprint('weights', weights)\nassert len(weights) == 5\nfor weight in weights:\n    assert weight != 0\nnet.getLayer(1).setWeights(np.array([2.5, 1, 3, 2, 7], dtype=np.float32))\nweights = net.getLayer(1).getWeights()\nprint('weights', weights)\nassert len(weights) == 5\nassert weights.tolist() == [2.5, 1, 3, 2, 7]\n"
+}

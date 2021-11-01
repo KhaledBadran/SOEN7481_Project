@@ -1,0 +1,9 @@
+{
+    "functionName": "testReferenceSetting",
+    "className": "TestSimulation",
+    "fileName": "/NuttyLogic_&_BSBolt/tests_&_test_full_simulation.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "count = 0\nfor fq1_read, fq2_read in zip(*(OpenFastq(test_fastqs[0]), OpenFastq(\n    test_fastqs[1]))):\n    count += 1\n    fq1_read_info = sim_data[fq1_read[0].replace('@', '')]\n    fq2_read_info = sim_data[fq2_read[0].replace('@', '')]\n    self.assertEqual(fq1_read[0].split('/')[0], fq2_read[0].split('/')[0])\n    self.assertTrue(check_bases(fq1_read[1], fq1_read_info['cigar'],\n        fq1_read_info['ref_strand'], count))\n    self.assertTrue(check_bases(fq2_read[1], fq2_read_info['cigar'],\n        fq2_read_info['ref_strand'], count))\n    sim_regions[f\"{fq1_read_info['chrom']}:{round(fq1_read_info['start'], -2)}\"\n        ] += 1\n    sim_regions[f\"{fq2_read_info['chrom']}:{round(fq2_read_info['start'], -2)}\"\n        ] += 1\n"
+}

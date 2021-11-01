@@ -1,0 +1,9 @@
+{
+    "functionName": "test_write_kmip_1_3",
+    "className": "TestCapabilityInformation",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a CapabilityInformation structure can be written to a data\n        stream with only KMIP 1.3 features.\n        \"\"\"\ncapability_information = objects.CapabilityInformation(streaming_capability\n    =False, asynchronous_capability=True, attestation_capability=True,\n    batch_undo_capability=False, batch_continue_capability=True,\n    unwrap_mode=enums.UnwrapMode.PROCESSED, destroy_action=enums.\n    DestroyAction.SHREDDED, shredding_algorithm=enums.ShreddingAlgorithm.\n    CRYPTOGRAPHIC, rng_mode=enums.RNGMode.NON_SHARED_INSTANTIATION)\nbuffer = utils.BytearrayStream()\ncapability_information.write(buffer, kmip_version=enums.KMIPVersion.KMIP_1_3)\nself.assertEqual(len(self.full_encoding_kmip_1_3), len(buffer))\nself.assertEqual(str(self.full_encoding_kmip_1_3), str(buffer))\n"
+}

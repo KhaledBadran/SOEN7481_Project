@@ -1,0 +1,9 @@
+{
+    "functionName": "test_positive_lower",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_utilities_&_test_utilities.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "expected_lower = override_lower or env_lower\nwith as_context(Config(positive_bijector='softplus', positive_minimum=\n    env_lower)):\n    bijector = positive(lower=override_lower)\n    assert isinstance(bijector, tfp.bijectors.Chain)\n    assert np.isclose(bijector.bijectors[0].shift, expected_lower)\npytest.mark.parametrize('env_lower, override_lower', [(0.1, None), (0.0, \n    0.2), (0.3, 0.4)])"
+}

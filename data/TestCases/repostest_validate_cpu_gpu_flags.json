@@ -1,0 +1,9 @@
+{
+    "functionName": "test_validate_cpu_gpu_flags",
+    "className": null,
+    "fileName": "/bio-phys_&_MDBenchmark/mdbenchmark_&_tests_&_test_generate.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that the validate_cpu_gpu_flags function works as expected.\"\"\"\nwith pytest.raises(exceptions.BadParameter) as error:\n    validate_cpu_gpu_flags(cpu=False, gpu=False)\nassert str(error.value\n    ) == 'You must select either CPUs or GPUs to run the benchmarks on.'\nassert validate_cpu_gpu_flags(cpu=True, gpu=False) is None\nassert validate_cpu_gpu_flags(cpu=False, gpu=True) is None\nassert validate_cpu_gpu_flags(cpu=True, gpu=True) is None\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_vx_000_hash_lookup",
+    "className": "VxAnalysisModuleTestCase",
+    "fileName": "/IntegralDefense_&_ACE/lib_&_saq_&_modules_&_test_vx.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "engine = AnalysisEngine()\nengine.enable_module('analysis_module_vxstream_hash_analyzer')\nself.start_engine(engine)\nroot = create_root_analysis(event_time=datetime.datetime.now())\nroot.initialize_storage()\nsha2 = root.add_observable(F_SHA256, SAMPLE_HASH)\nroot.save()\nengine.queue_work_item(root.storage_dir)\nengine.queue_work_item(TerminatingMarker())\nengine.wait()\nroot.load()\nsha2 = root.get_observable(sha2.id)\nfrom saq.modules.vx import VxStreamHashAnalysis\nanalysis = sha2.get_analysis(VxStreamHashAnalysis)\nself.assertIsNotNone(analysis)\nself.assertEquals(analysis.sha256, sha2.value)\nself.assertEquals(analysis.environment_id, saq.CONFIG['vxstream'][\n    'environmentid'])\nself.assertEquals(analysis.status, VXSTREAM_STATUS_SUCCESS)\nself.assertIsNotNone(analysis.submit_date)\nself.assertIsNotNone(analysis.complete_date)\nself.assertIsNone(analysis.fail_date)\nself.assertIsNotNone(analysis.vxstream_threat_level)\nself.assertIsNotNone(analysis.vxstream_threat_score)\n"
+}

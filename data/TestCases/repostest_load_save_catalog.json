@@ -1,0 +1,9 @@
+{
+    "functionName": "test_load_save_catalog",
+    "className": null,
+    "fileName": "/PaulHancock_&_Aegean/tests_&_test_catalogs.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that we can load and save various file formats\"\"\"\ncatalog = [ComponentSource()]\nfor ext in ['csv', 'vot']:\n    fout = 'a.' + ext\n    cat.save_catalog(fout, catalog, meta=None)\n    fout = 'a_comp.' + ext\n    if not os.path.exists(fout):\n        raise AssertionError()\n    catin = cat.load_catalog(fout)\n    if not len(catin) == len(catalog):\n        raise AssertionError()\n    os.remove(fout)\nfout = 'a.csv'\ncat.save_catalog(fout, catalog, meta=None, prefix='test')\nfout = 'a_comp.csv'\nif not os.path.exists(fout):\n    raise AssertionError()\nif 'test_ra' not in open(fout).readlines()[0]:\n    raise AssertionError()\nos.remove(fout)\nfor ext in ['reg', 'ann', 'bla']:\n    fout = 'a.' + ext\n    cat.save_catalog(fout, catalog, meta=None)\n    fout = 'a_comp.' + ext\n    if not os.path.exists(fout):\n        raise AssertionError()\n    os.remove(fout)\nfout = 'a.db'\ncat.save_catalog(fout, catalog, meta=None)\nif not os.path.exists(fout):\n    raise AssertionError()\ncat.save_catalog(fout, catalog, meta=None)\nos.remove(fout)\nbadfile = open('file.fox', 'w')\nprint('ff 012.d', file=badfile)\nbadfile.close()\nassert_raises(Exception, cat.load_catalog, 'file.fox')\nbadfile = open('file.fox', 'w')\nprint('1 1', file=badfile)\nbadfile.close()\ncatin = cat.load_catalog('file.fox')\nprint(catin)\nif not len(catin) == 1:\n    raise AssertionError()\nos.remove('file.fox')\n"
+}

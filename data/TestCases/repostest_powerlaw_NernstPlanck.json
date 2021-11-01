@@ -1,0 +1,9 @@
+{
+    "functionName": "test_powerlaw_NernstPlanck",
+    "className": "NernstPlanckTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_NernstPlanckTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "mod = op.models.physics.ad_dif_mig_conductance.ad_dif_mig\nself.phys.add_model(propname='throat.ad_dif_mig_conductance_powerlaw',\n    model=mod, s_scheme='powerlaw', ion='ionX')\nself.phys.regenerate_models()\nself.adm.setup(conductance='throat.ad_dif_mig_conductance_powerlaw')\nself.adm.run()\nx = [0.0, 0.0, 0.0, 1.27816, 1.79057, 2.70356, 1.59724, 1.93331, 2.46112, \n    2.0, 2.0, 2.0]\ny = np.around(self.adm['pore.concentration.ionX'], decimals=5)\nassert_allclose(actual=y, desired=x)\n"
+}

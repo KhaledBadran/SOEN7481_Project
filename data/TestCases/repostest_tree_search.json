@@ -1,0 +1,9 @@
+{
+    "functionName": "test_tree_search",
+    "className": "TestCluster",
+    "fileName": "/nishaq503_&_CHESS/tests_&_test_cluster.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "np.random.seed(42)\ndata, labels = datasets.line()\nm = Manifold(data, 'euclidean')\nm.build_tree(criterion.MinPoints(10), criterion.MaxDepth(5))\nfor depth, graph in enumerate(m.graphs):\n    for cluster in graph:\n        linear = set([c for c in graph if c.overlaps(cluster.medoid,\n            cluster.radius)])\n        tree = set(next(iter(m.graphs[0])).tree_search(cluster.medoid,\n            cluster.radius, cluster.depth).keys())\n        self.assertSetEqual(set(), tree - linear)\n        for d in range(depth, 0, -1):\n            parents = set([m.select(cluster.name[:-1]) for cluster in linear])\n            for parent in parents:\n                self.assertIn(parent, parent.tree_search(cluster.medoid,\n                    cluster.radius, parent.depth))\nc: Cluster = next(iter(m.graphs[0]))\nresults = c.tree_search(np.asarray([0, 1]), 0.0, -1)\nself.assertEqual(0, len(results))\nwith self.assertRaises(ValueError):\n    _ = c.tree_search(np.asarray([0, 1]), 0.0, -5)\nreturn\n"
+}

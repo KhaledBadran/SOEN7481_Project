@@ -1,0 +1,9 @@
+{
+    "functionName": "test_transform_list_of_invalid_dicts",
+    "className": "TestTunable",
+    "fileName": "/HDI-Project_&_BTB/tests_&_tuning_&_test_tunable.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test transform method with a list of dictionaries where one of them does not have\n        the categorical value.\"\"\"\nself.bhp.transform.return_value = [[1], [0]]\nself.chp = CategoricalHyperParam(['cat', 'dog'])\nself.ihp.transform.return_value = [[1], [1]]\nvalues_list_dict = [{'bhp': True, 'ihp': 2}, {'bhp': False, 'chp': 'cat',\n    'ihp': 3}]\nwith self.assertRaises(ValueError):\n    self.instance.transform(values_list_dict)\n"
+}

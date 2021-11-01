@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gp_sensitivity",
+    "className": "TestPrediction",
+    "fileName": "/SUNCAT-Center_&_CatLearn/test_&_test_predict.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test Gaussian process predictions with sensitivity analysis.\"\"\"\ntrain_features, train_targets, test_features, test_targets = get_data()\nkdict = [{'type': 'gaussian', 'width': 30.0, 'scaling': 5.0}]\nsen = SensitivityAnalysis(train_matrix=train_features[:, :5], train_targets\n    =train_targets, test_matrix=test_features[:, :5], kernel_list=kdict,\n    init_reg=np.sqrt(0.001), init_width=10.0)\nsen.backward_selection(predict=True, test_targets=test_targets, selection=3)\n"
+}

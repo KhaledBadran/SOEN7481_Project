@@ -1,0 +1,9 @@
+{
+    "functionName": "test_check_decorator",
+    "className": "TestNeuralPooling",
+    "fileName": "/apmoore1_&_Bella/tests_&_test_neural_pooling.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Tests the decorator :py:func:`bella.neural_pooling.matrix_checking`\n        used by the following functions:\n\n        1. :py:func:`bella.neural_pooling.matrix_min`\n        2. :py:func:`bella.neural_pooling.matrix_max`\n        3. :py:func:`bella.neural_pooling.matrix_avg`\n        \"\"\"\nwith self.assertRaises(TypeError, msg=\n    'Should only not accept lists only np.ndarray'):\n    matrix_min([1, 2, 3, 4])\ntest_array = np.asarray([[1, 2, 3], [4, 5, 6], [7, 8, 9]])\nwith self.assertRaises(ValueError, msg=\n    'Should not accept returned matrix from neural functions that have different row row dimensions'\n    ):\n    matrix_row_error(test_array)\nwith self.assertRaises(ValueError, msg=\n    'Should not accept returned matrix from neural functions that have more than one dimension as it should be a vector not a matrix'\n    ):\n    matrix_dim_error(test_array)\nvector_max = np.asarray([[5]], dtype=np.float32)\nvector_2d = np.asarray([1, 2, 3, 4, 5], dtype=np.float32).reshape(5, 1)\nself.assertEqual(True, np.array_equal(vector_max, matrix_max(vector_2d)),\n    msg='Should be able to handle normal cases')\nvector_max = np.asarray([[1], [2], [3], [4], [5]], dtype=np.float32)\nvector_2d = np.asarray([1, 2, 3, 4, 5], dtype=np.float32).reshape(1, 5)\ntest_vec_max = matrix_max(vector_2d, transpose=True)\nself.assertEqual(True, np.array_equal(vector_max, test_vec_max), msg=\n    'Should be able to handle normal cases with transpose returned {} valid {}'\n    .format(test_vec_max, vector_max))\n"
+}

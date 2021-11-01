@@ -1,0 +1,9 @@
+{
+    "functionName": "_run_accelerated",
+    "className": "InvasionPercolation",
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_algorithms_&_InvasionPercolation.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        Numba-jitted run method for InvasionPercolation class.\n\n        Notes\n        -----\n        (1) ``idx`` and ``indptr`` are properties are the network's incidence\n        matrix, and are used to quickly find neighbor throats.\n\n        (2) Numba doesn't like forein data types (i.e. GenericNetwork), and so\n        ``find_neighbor_throats`` method cannot be called in a jitted method.\n\n        (3) Nested wrapper is for performance issues (reduced OpenPNM import)\n        time due to local numba import\n\n        \"\"\"\nfrom numba import njit\ntry:\n    from numba.core.errors import NumbaPendingDeprecationWarning\nexcept ModuleNotFoundError:\n    from numba.errors import NumbaPendingDeprecationWarning\nwarnings.simplefilter('ignore', category=NumbaPendingDeprecationWarning)\n@njit\ndef wrapper(queue, t_sorted, t_order, t_inv, p_inv, p_inv_t, conns, idx,\n    indptr, n_steps):\n    count = 0\n    while len(queue) > 0 and count < n_steps:\n        t = hq.heappop(queue)\n        t_next = t_sorted[t]\n        t_inv[t_next] = count\n        while len(queue) > 0 and queue[0] == t:\n            t = hq.heappop(queue)\n        Ps = conns[t_next]\n        Ps = Ps[p_inv[Ps] < 0]\n        if len(Ps) > 0:\n            p_inv[Ps] = count\n            p_inv_t[Ps] = t_next\n            for i in Ps:\n                Ts = idx[indptr[i]:indptr[i + 1]]\n                Ts = Ts[t_inv[Ts] < 0]\n            for i in set(Ts):\n                hq.heappush(queue, t_order[i])\n        count += 1\n    return t_inv, p_inv, p_inv_t\nreturn wrapper(queue, t_sorted, t_order, t_inv, p_inv, p_inv_t, conns, idx,\n    indptr, n_steps)\n"
+}

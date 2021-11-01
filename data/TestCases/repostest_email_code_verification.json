@@ -1,0 +1,9 @@
+{
+    "functionName": "test_email_code_verification",
+    "className": "TestCoreClient",
+    "fileName": "/mozilla_&_PyFxA/fxa_&_tests_&_test_core.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.client = Client(self.server_url)\nself.acct = TestEmailAccount()\nself.client.create_account(email=self.acct.email, stretchpwd=\n    DUMMY_STRETCHED_PASSWORD)\ndef wait_for_email(m):\n    return 'x-uid' in m['headers'] and 'x-verify-code' in m['headers']\nm = self.acct.wait_for_email(wait_for_email)\nif not m:\n    raise RuntimeError('Verification email was not received')\nresponse = self.client.verify_email_code(m['headers']['x-uid'], m['headers'\n    ]['x-verify-code'])\nself.assertEqual(response, {})\n"
+}

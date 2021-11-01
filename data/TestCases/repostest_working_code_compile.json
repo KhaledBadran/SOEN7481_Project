@@ -1,0 +1,9 @@
+{
+    "functionName": "test_working_code_compile",
+    "className": null,
+    "fileName": "/HTML-as-programming-language_&_HTML-as-programming-language/tests_&_test_compiler.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test if the working code folder compiles\n    \"\"\"\npathlist = Path('working-code').glob('**/*.html')\nfor path in pathlist:\n    with patch.object(sys, 'argv', [str(path)]):\n        compiler.main()\n    out_str = 'working-code/out/' + str(path).split('/')[-1].replace('.html',\n        '.c')\n    assert Path(out_str).is_file()\nenviorment.restore_working_code"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_next_departures_from_location_whensucceed",
+    "className": "PublicTransitApiTest",
+    "fileName": "/abdullahselek_&_HerePy/tests_&_test_publictransit_api.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with io.open('testdata/models/public_transit_api_next_departures_location.json'\n    , 'r', encoding='utf-8') as f:\n    expectedResponse = f.read()\nresponses.add(responses.GET,\n    'https://transit.ls.hereapi.com/v3/multiboard/by_geocoord.json',\n    expectedResponse, status=200)\nresponse = self._api.next_departures_from_location([51.4477, -0.1669],\n    '2017-11-21T07:30:00')\nself.assertTrue(response)\nself.assertIsInstance(response, herepy.PublicTransitResponse)\nresponses.activate"
+}

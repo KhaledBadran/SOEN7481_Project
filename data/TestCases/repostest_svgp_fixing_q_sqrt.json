@@ -1,0 +1,9 @@
+{
+    "functionName": "test_svgp_fixing_q_sqrt",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_models_&_test_svgp.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    In response to bug #46, we need to make sure that the q_sqrt matrix can be fixed\n    \"\"\"\nnum_latent_gps = default_datum_svgp.Y.shape[1]\nmodel = gpflow.models.SVGP(kernel=gpflow.kernels.SquaredExponential(),\n    likelihood=default_datum_svgp.lik, q_diag=True, num_latent_gps=\n    num_latent_gps, inducing_variable=default_datum_svgp.Z, whiten=False)\ndefault_num_trainable_variables = len(model.trainable_variables)\nset_trainable(model.q_sqrt, False)\nassert len(model.trainable_variables) == default_num_trainable_variables - 1\n"
+}

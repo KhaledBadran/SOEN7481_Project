@@ -1,0 +1,9 @@
+{
+    "functionName": "test_toplevel_decorated_name",
+    "className": "DecoratorTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_decorators.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "template = Template(\n    \"\"\"\n            <%!\n                def bar(fn):\n                    def decorate(context, *args, **kw):\n                        return \"function \" + fn.__name__ + \" \" + runtime.capture(context, fn, *args, **kw)\n                    return decorate\n            %>\n\n            <%def name=\"foo(y, x)\" decorator=\"bar\">\n                this is foo ${y} ${x}\n            </%def>\n\n            ${foo(1, x=5)}\n        \"\"\"\n    )\nassert flatten_result(template.render()) == 'function foo this is foo 1 5'\n"
+}

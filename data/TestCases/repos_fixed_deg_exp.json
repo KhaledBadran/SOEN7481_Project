@@ -1,0 +1,9 @@
+{
+    "functionName": "_fixed_deg_exp",
+    "className": null,
+    "fileName": "/Silmathoron_&_NNGT/testing_&_test_generation.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "n, d, e, a_deg, directed, weighted = _get_connections(instruct)\ndeg_type = instruct['degree_type']\ndeg_types = ['in', 'out']\ndegrees = graph.get_degrees(deg_type)\nfixed_degree = degrees[0]\nassert np.array_equal(degrees, np.full(len(degrees), fixed_degree))\navg_free_degree, std_free_degree = fixed_degree, 0\nif deg_type != 'total':\n    del deg_types[deg_types.index(deg_type)]\n    degrees = graph.get_degrees(deg_types[0], weights=False)\n    avg_free_degree = np.average(degrees)\n    std_free_degree = np.std(degrees)\nreturn fixed_degree, avg_free_degree, std_free_degree\n"
+}

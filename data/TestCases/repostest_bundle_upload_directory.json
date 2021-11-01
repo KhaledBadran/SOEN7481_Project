@@ -1,0 +1,9 @@
+{
+    "functionName": "test_bundle_upload_directory",
+    "className": null,
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_HTTPBundleUploaderTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Uploading a directory requires that we turn it into an archive first.\n    \"\"\"\ncut = HTTPBundleUploader(http_server.url)\nwith open(p(testdir, 'random_file'), 'w') as f:\n    f.write('smashing')\ncut(testdir)\nreq = http_server.requests.get()\nwhile req['method'] != 'POST':\n    req = http_server.requests.get()\nassert req['headers']['content-type'] == BUNDLE_ARCHIVE_MIME_TYPE\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_attribute_names_with_invalid_attribute_name",
+    "className": "TestGetAttributeListResponsePayload",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_get_attribute_list.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a TypeError is raised when an invalid attribute name is\n        included in the list used to set the attribute_names attribute of a\n        GetAttributeList response payload.\n        \"\"\"\npayload = payloads.GetAttributeListResponsePayload()\nargs = payload, 'attribute_names', ['test-attribute-name-1', 0]\nself.assertRaisesRegex(TypeError,\n    'Attribute names must be a list of strings; item 2 has type {0}'.format\n    (type(0)), setattr, *args)\n"
+}

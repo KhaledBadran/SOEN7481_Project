@@ -1,0 +1,9 @@
+{
+    "functionName": "test_save_imports",
+    "className": null,
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_OWMCLITest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "modpath = p(self.testdir, 'test_module')\nos.mkdir(modpath)\nopen(p(modpath, '__init__.py'), 'w').close()\nself.writefile(p(modpath, 'monkey.py'),\n    \"\"\"        from owmeta.dataObject import DataObject, DatatypeProperty\n\n        class Monkey(DataObject):\n            class_context = 'http://example.org/primate/monkey'\n\n            bananas = DatatypeProperty()\n            def identifier_augment(self):\n                return type(self).rdf_namespace['paul']\n\n            def defined_augment(self):\n                return True\n\n\n        class Giraffe(DataObject):\n            class_context = 'http://example.org/ungulate/giraffe'\n\n\n        def owm_data(ns):\n            ns.context.add_import(Monkey.definition_context)\n            ns.context.add_import(Giraffe.definition_context)\n\n        __yarom_mapped_classes__ = (Monkey,)\n        \"\"\"\n    )\nprint(self.sh('owm save test_module.monkey'))\nwith OWM(owmdir=p(self.testdir, '.owm')).connect() as conn:\n    ctx = Context(ident=conn.conf[IMPORTS_CONTEXT_KEY], conf=conn.conf)\n    trips = set(ctx.stored.rdf_graph().triples((None, None, None)))\n    assert (URIRef(conn.conf[DEFAULT_CONTEXT_KEY]), CONTEXT_IMPORTS, URIRef\n        ('http://example.org/primate/monkey')) in trips\n    assert (URIRef(conn.conf[DEFAULT_CONTEXT_KEY]), CONTEXT_IMPORTS, URIRef\n        ('http://example.org/ungulate/giraffe')) in trips\n"
+}

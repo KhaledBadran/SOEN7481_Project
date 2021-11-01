@@ -1,0 +1,9 @@
+{
+    "functionName": "test_raw_sql",
+    "className": "TestCaseModel",
+    "fileName": "/Riffstation_&_Flask-Philo-SQLAlchemy/tests_&_app_&_test_orm.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with self.app.app_context():\n    rock = Genre(name='Rock', description='rock yeah!!!')\n    rock.add()\n    self.pool.commit()\n    pink = Artist(genre_id=rock.id, name='Pink Floyd', description='Awsome')\n    pink.add()\n    self.pool.commit()\n    dark = Album(artist_id=pink.id, name='Dark side of the moon',\n        description='Interesting')\n    dark.add()\n    self.pool.commit()\n    rolling = Artist(genre_id=rock.id, name='Rolling Stones', description=\n        'Acceptable')\n    rolling.add()\n    self.pool.commit()\n    sql = \"\"\"\n                SELECT a.name as artist_name, a.description artist_description,\n                g.name as artist_genre\n                FROM artist a\n                INNER JOIN genre g ON a.genre_id = g.id\n                ORDER BY a.id DESC;\n            \"\"\"\n    result = Genre.objects.raw_sql(sql).fetchall()\n    assert 2 == len(result)\n    assert 'Rolling Stones' == result[0][0]\n    sql = \"\"\"\n                SELECT a.name as artist_name, a.description artist_description,\n                g.name as artist_genre\n                FROM artist a\n                INNER JOIN genre g ON a.genre_id = g.id\n                WHERE a.id = :artist_id\n                ORDER BY a.id DESC;\n            \"\"\"\n    result = Genre.objects.raw_sql(sql, artist_id=pink.id).fetchall()\n    assert 1 == len(result)\n    assert 'Pink Floyd' == result[0][0]\n"
+}

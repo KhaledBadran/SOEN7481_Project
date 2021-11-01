@@ -1,0 +1,9 @@
+{
+    "functionName": "test_prof2pt_smoke",
+    "className": null,
+    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_pkhm.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "uk_NFW = P1.fourier(COSMO, KK, MM, AA, mass_def=M200)\nuk_EIN = P2.fourier(COSMO, KK, MM, AA, mass_def=M200)\ncv_NN = PKC.fourier_2pt(P1, COSMO, KK, MM, AA, mass_def=M200)\nassert np.all(np.fabs(cv_NN - uk_NFW ** 2) < 1e-10)\ncv_NE = PKC.fourier_2pt(P1, COSMO, KK, MM, AA, prof2=P2, mass_def=M200)\nassert np.all(np.fabs(cv_NE - uk_NFW * uk_EIN) < 1e-10)\n"
+}

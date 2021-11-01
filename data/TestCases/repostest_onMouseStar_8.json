@@ -1,0 +1,9 @@
+{
+    "functionName": "test_onMouseStar_8",
+    "className": null,
+    "fileName": "/mworion_&_MountWizzard4/mw4_&_test_&_unit_tests_&_gui_&_extWindows_&_test_hemisphereWext.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class Test:\n    pass\nevent = Test()\nevent.inaxes = True\nevent.button = 1\nevent.dblclick = False\nevent.xdata = 180\nevent.ydata = 45\napp.app.hipparcos.az = [180]\napp.app.hipparcos.alt = [45]\napp.app.hipparcos.name = ['test']\nwith mock.patch.object(PyQt5.QtWidgets.QMessageBox, 'question',\n    return_value=PyQt5.QtWidgets.QMessageBox.Yes):\n    with mock.patch.object(mountcontrol.obsSite.Connection, 'communicate',\n        return_value=(True, '1', 1)):\n        with mock.patch.object(app.app.mount.obsSite, 'setTargetRaDec',\n            return_value=False):\n            suc = app.onMouseStar(event=event)\n            assert not suc\n"
+}

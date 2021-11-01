@@ -1,0 +1,9 @@
+{
+    "functionName": "test_complex_validation",
+    "className": null,
+    "fileName": "/Edinburgh-Genome-Foundry_&_BandWitch/tests_&_test_gel_analysis.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data_dir = os.path.join('tests', 'test_data', 'complex_validation_data')\nrecords_path = os.path.join(data_dir, 'constructs_sequences.zip')\nconstructs_map_path = os.path.join(data_dir, 'constructs_map.xls')\ndigestions_map_path = os.path.join(data_dir, 'digestions_map.xls')\naati_zip_path = os.path.join(data_dir, 'digestion_results.zip')\nclones = ClonesObservations.from_files(records_path=records_path,\n    constructs_map_path=constructs_map_path, aati_zip_path=aati_zip_path,\n    digestions_map_path=digestions_map_path)\nvalidations = clones.validate_all_clones(relative_tolerance=0.03)\nclones.plot_validations_plate_map(validations)\nclones.plot_all_validations_patterns(validations)\npartial_digest_analysis = clones.partial_digests_analysis()\nclones.plot_partial_digests_analysis(partial_digest_analysis)\nsummary_table = clones.validations_summary_table(validations, target=os.\n    path.join(str(tmpdir), 'table.csv'))\n"
+}

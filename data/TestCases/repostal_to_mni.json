@@ -1,0 +1,9 @@
+{
+    "functionName": "tal_to_mni",
+    "className": null,
+    "fileName": "/nipy_&_PySurfer/surfer_&_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Convert Talairach coords to MNI using the Lancaster transform.\n\n    Parameters\n    ----------\n    coords : n x 3 numpy array\n        Array of Talairach coordinates\n    units : str\n        Can be 'm' or 'mm' (default).\n\n    Returns\n    -------\n    mni_coords : n x 3 numpy array\n        Array of coordinates converted to MNI space.\n    \"\"\"\ncoords = np.atleast_2d(coords)\nxfm = np.array([[1.0686, -0.00396, 0.00826, 1.07816], [0.0064, 1.05741, \n    0.08566, 1.16824], [-0.01281, -0.08863, 1.10792, -4.17805], [0.0, 0.0, \n    0.0, 1.0]])\nunits = _check_units(units)\nif units == 'm':\n    xfm[:3, (3)] /= 1000.0\nmni_coords = np.dot(np.c_[coords, np.ones(coords.shape[0])], xfm.T)[:, :3]\nreturn mni_coords\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ordinary",
+    "className": "TestKrige",
+    "fileName": "/GeoStat-Framework_&_GSTools/tests_&_test_krige.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "for trend_func in [None, trend]:\n    for Model in self.cov_models:\n        for dim in self.dims:\n            model = Model(dim=dim, var=5, len_scale=10, anis=[0.9, 0.8],\n                angles=[2, 1, 0.5])\n            ordinary = krige.Ordinary(model, self.cond_pos[:dim], self.\n                cond_val, trend_func)\n            field_1, __ = ordinary.unstructured(self.grids[dim - 1])\n            field_1 = field_1.reshape(self.grid_shape[:dim])\n            field_2, __ = ordinary.structured(self.pos[:dim])\n            self.assertAlmostEqual(np.max(np.abs(field_1 - field_2)), 0.0,\n                places=2)\n            for i, val in enumerate(self.cond_val):\n                self.assertAlmostEqual(field_1[self.data_idx[:dim]][i], val,\n                    places=2)\n"
+}

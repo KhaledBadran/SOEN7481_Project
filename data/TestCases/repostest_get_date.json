@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_date",
+    "className": "TestAdsOrcidCelery",
+    "fileName": "/adsabs_&_ADSPipelineUtils/adsputils_&_tests_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Check we always work with UTC dates\"\"\"\nd = adsputils.get_date()\nself.assertTrue(d.tzname() == 'UTC')\nd1 = adsputils.get_date('2009-09-04T01:56:35.450686Z')\nself.assertTrue(d1.tzname() == 'UTC')\nself.assertEqual(d1.isoformat(), '2009-09-04T01:56:35.450686+00:00')\nself.assertEqual(adsputils.date2solrstamp(d1), '2009-09-04T01:56:35.450686Z')\nd2 = adsputils.get_date('2009-09-03T20:56:35.450686-05:00')\nself.assertTrue(d2.tzname() == 'UTC')\nself.assertEqual(d2.isoformat(), '2009-09-04T01:56:35.450686+00:00')\nself.assertEqual(adsputils.date2solrstamp(d2), '2009-09-04T01:56:35.450686Z')\nd3 = adsputils.get_date('2009-09-03T20:56:35.450686')\nself.assertTrue(d3.tzname() == 'UTC')\nself.assertEqual(d3.isoformat(), '2009-09-03T20:56:35.450686+00:00')\nself.assertEqual(adsputils.date2solrstamp(d3), '2009-09-03T20:56:35.450686Z')\n"
+}

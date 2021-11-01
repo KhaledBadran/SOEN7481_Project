@@ -1,0 +1,9 @@
+{
+    "functionName": "test_scope_eight",
+    "className": "ScopeTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_def.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"test that the initial context counts\n        as 'enclosing' scope, for nested defs\"\"\"\nt = Template(\n    \"\"\"\n        <%def name=\"enclosing()\">\n            <%def name=\"a()\">\n                a: x is ${x}\n            </%def>\n\n            <%def name=\"b()\">\n                <%\n                    x = 10\n                %>\n\n                b. x is ${x}.  ${a()}\n            </%def>\n\n            ${b()}\n        </%def>\n        ${enclosing()}\n    \"\"\"\n    )\neq_(flatten_result(t.render(x=5)), 'b. x is 10. a: x is 5')\n"
+}

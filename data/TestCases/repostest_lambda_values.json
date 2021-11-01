@@ -1,0 +1,9 @@
+{
+    "functionName": "test_lambda_values",
+    "className": null,
+    "fileName": "/vc1492a_&_PyNomaly/tests_&_test_loop.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test to ensure results are returned which correspond to what is expected\n    when varying the extent parameter (we expect larger extent values to\n    result in more constrained scores).\n    :param X_n140_outliers: A pytest Fixture that generates 140 observations.\n    :return: None\n    \"\"\"\nclf1 = loop.LocalOutlierProbability(X_n140_outliers, extent=1, use_numba=NUMBA)\nclf2 = loop.LocalOutlierProbability(X_n140_outliers, extent=2, use_numba=NUMBA)\nclf3 = loop.LocalOutlierProbability(X_n140_outliers, extent=3, use_numba=NUMBA)\nscore1 = clf1.fit().local_outlier_probabilities\nscore2 = clf2.fit().local_outlier_probabilities\nscore3 = clf3.fit().local_outlier_probabilities\nscore_mean1 = np.mean(score1)\nscore_mean2 = np.mean(score2)\nscore_mean3 = np.mean(score3)\nassert_greater(score_mean1, score_mean2)\nassert_greater(score_mean2, score_mean3)\n"
+}

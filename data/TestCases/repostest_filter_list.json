@@ -1,0 +1,9 @@
+{
+    "functionName": "test_filter_list",
+    "className": null,
+    "fileName": "/CCampJr_&_LazyHDF5/lazy5_&_tests_&_test_nonh5utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Test filtering of lists \"\"\"\nlist_to_filter = ['Keep1', 'Keep2', 'KeepExclude', 'Exclude1', 'Exclude2']\nfilters = 'Keep'\nout_list = filterlist(list_to_filter, filters, keep_filtered_items=True,\n    exclusive=True)\nassert out_list == ['Keep1', 'Keep2', 'KeepExclude']\nfilters = 'Exclude'\nout_list = filterlist(list_to_filter, filters, keep_filtered_items=False,\n    exclusive=True)\nassert out_list == ['Keep1', 'Keep2']\nfilters = ['Keep']\nout_list = filterlist(list_to_filter, filters, keep_filtered_items=True,\n    exclusive=True)\nassert out_list == ['Keep1', 'Keep2', 'KeepExclude']\nfilters = 'Keep'\nout_list = filterlist(list_to_filter, filters, keep_filtered_items=True,\n    exclusive=True)\nassert out_list == ['Keep1', 'Keep2', 'KeepExclude']\nfilters = ['Keep', '1']\nout_list = filterlist(list_to_filter, filters, keep_filtered_items=True,\n    exclusive=True)\nassert out_list == ['Keep1']\nfilters = ['Keep', '1']\nout_list = filterlist(list_to_filter, filters, keep_filtered_items=True,\n    exclusive=False)\nassert out_list == ['Keep1', 'Keep2', 'KeepExclude', 'Exclude1']\nfilters = ['Exclude', '2']\nout_list = filterlist(list_to_filter, filters, keep_filtered_items=False,\n    exclusive=True)\nassert out_list == ['Keep1']\nfilters = ['Exclude', '2']\nout_list = filterlist(list_to_filter, filters, keep_filtered_items=False,\n    exclusive=False)\nassert out_list == ['Keep1', 'Keep2', 'KeepExclude', 'Exclude1']\nfilters = 1\nwith pytest.raises(TypeError):\n    out_list = filterlist(list_to_filter, filters, keep_filtered_items=\n        False, exclusive=False)\n"
+}

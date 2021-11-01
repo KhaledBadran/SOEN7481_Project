@@ -1,0 +1,9 @@
+{
+    "functionName": "test_update_with_slots",
+    "className": "Test",
+    "fileName": "/fabioz_&_PyDev.Debugger/test_pydevd_reload_&_test_pydevd_reload.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "SAMPLE_CODE1 = \"\"\"\nclass B(object):\n\n    __slots__ = ['bar']\n\n\"\"\"\nSAMPLE_CODE2 = \"\"\"\nclass B(object):\n\n    __slots__ = ['bar', 'foo']\n\n    def m1(self):\n        self.bar = 10\n        return 1\n\n\"\"\"\nself.make_mod(sample=SAMPLE_CODE1)\nimport x\nB = x.B\nself.make_mod(sample=SAMPLE_CODE2)\npydevd_reload.xreload(x)\nb = B()\nself.assertEqual(1, b.m1())\nself.assertEqual(10, b.bar)\nself.assertRaises(Exception, setattr, b, 'foo', 20)\n"
+}

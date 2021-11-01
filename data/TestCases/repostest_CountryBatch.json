@@ -1,0 +1,9 @@
+{
+    "functionName": "test_CountryBatch",
+    "className": null,
+    "fileName": "/JosephPallipadan_&_Namsor-API-Wrapper-Python/namsorclient_&_tests_&_test_request_objects.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tester = namsorclient.CountryBatch()\nassert tester.response_type == namsorclient.CountryResponse\nnames = []\nfor id in range(10):\n    name = [faker_obj.name()]\n    name.append(id)\n    names.append(name)\n    tester.addItem(name[0], name[1])\n    assert isinstance(tester.items[-1], namsorclient.CountryBatch.\n        CountryBatchItem)\n    assert tester.items[-1].name == name[0]\n    assert tester.items[-1].ID == name[1]\nfor name, item in zip(names, tester.batch_item_converter()):\n    keys = ['id', 'name']\n    assert all([(key in item) for key in keys])\n    assert item['name'] == name[0]\n    assert item['id'] == name[1]\n"
+}

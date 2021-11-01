@@ -1,0 +1,9 @@
+{
+    "functionName": "test_variable_conductance",
+    "className": "ReactiveTransportTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_ReactiveTransportTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.alg.reset(bcs=True, source_terms=True, variable_props=True)\ndef variable_diffusivity(target, pore_concentration='pore.concentration'):\n    X = target[pore_concentration]\n    return 1e-09 * (1 + 5 * (X / 10) ** 2)\ndef variable_conductance(target, pore_diffusivity='pore.diffusivity'):\n    Dt = target['throat.diffusivity']\n    return 1e-06 * Dt\nself.alg['pore.concentration'] = 0.0\nself.phase.add_model(propname='pore.diffusivity', model=variable_diffusivity)\nself.phys.add_model(propname='throat.diffusive_conductance', model=\n    variable_conductance)\nself.alg.set_value_BC(pores=self.net.pores('left'), values=10.0)\nself.alg.set_value_BC(pores=self.net.pores('right'), values=0.0)\nself.alg.run()\nc_avg = self.alg['pore.concentration'].reshape(self.net.shape).mean(axis=(0, 2)\n    )\ndesired = [10.0, 8.18175755, 5.42194391, 0.0]\nassert_allclose(c_avg, desired)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_load_with_phases",
+    "className": "VTKTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_io_&_VTKTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "path = Path(os.path.realpath(__file__), '../../../fixtures/VTK-VTP')\nfname = Path(path.resolve(), 'test_save_vtk_2.vtp')\nproject = op.io.VTK.load(filename=fname)\nassert len(project) == 2\nnet = project.network\nassert net.Np == 8\nassert net.Nt == 12\nassert np.shape(net['pore.coords']) == (8, 3)\nassert np.shape(net['throat.conns']) == (12, 2)\nassert len(project.phases()) == 1\n"
+}

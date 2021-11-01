@@ -1,0 +1,9 @@
+{
+    "functionName": "test_mock_s3_init_exception",
+    "className": null,
+    "fileName": "/capitalone_&_Data-Load-and-Copy-using-Python/tests_&_test_s3.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "mock_session.side_effect = S3Error()\nwith pytest.raises(S3Error):\n    locopy.S3()\nmock_session.side_effect = None\nmock_session.return_value.get_credentials.return_value = None\nwith pytest.raises(S3CredentialsError):\n    locopy.S3()\npytest.mark.parametrize('dbapi', DBAPIS)mock.patch('locopy.s3.Session')"
+}

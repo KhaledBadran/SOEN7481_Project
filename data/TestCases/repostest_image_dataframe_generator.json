@@ -1,0 +1,9 @@
+{
+    "functionName": "test_image_dataframe_generator",
+    "className": null,
+    "fileName": "/goeckslab_&_Galaxy-ML/galaxy_ml_&_tests_&_test_image_generator.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "image_generator = ImageDataFrameBatchGenerator(df, directory=directory,\n    x_col=x_col, y_col=y_col, shuffle=False, seed=42, class_mode=class_mode,\n    target_size=(32, 32), featurewise_center=True,\n    featurewise_std_normalization=True, rotation_range=20,\n    width_shift_range=0.2, height_shift_range=0.2, horizontal_flip=True,\n    fit_sample_size=None)\nimage_generator2 = clone(image_generator)\nimage_generator2.set_processing_attrs()\nX = np.arange(df.shape[0])[:, (np.newaxis)]\ny = image_generator2.labels\nX_train, X_test = train_test_split(X, test_size=0.2, random_state=42,\n    shuffle='stratified', labels=y)\nimage_gen = image_generator2.flow(X_train, batch_size=32)\nbatch_X, batch_y = next(image_gen)\nassert image_generator2.class_indices == {'airplane': 0, 'automobile': 1,\n    'bird': 2, 'cat': 3, 'deer': 4, 'dog': 5, 'frog': 6, 'horse': 7, 'ship':\n    8, 'truck': 9}\nassert image_generator2.classes[:10] == [6, 9, 9, 4, 1, 1, 2, 7, 8, 3\n    ], image_generator2.classes[:10]\nassert np.squeeze(X_train)[:10].tolist() == [7, 280, 317, 299, 433, 401, \n    171, 155, 82, 197], np.squeeze(X_train)[:10].tolist()\nassert batch_X.shape == (32, 32, 32, 3), batch_X.shape\nassert np.argmax(batch_y[:10], axis=1).tolist() == [7, 8, 0, 4, 7, 0, 2, 8,\n    4, 3], np.argmax(batch_y[:10], axis=1)\n"
+}

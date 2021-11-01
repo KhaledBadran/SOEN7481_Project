@@ -1,0 +1,9 @@
+{
+    "functionName": "test_plates_to_csv",
+    "className": "TestMethods",
+    "fileName": "/Erik-White_&_ColonyScanalyser/tests_&_unit_&_test_plate.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "import csv\nplates = PlateCollection.from_image(shape=(1, 1), image=image_circle,\n    diameter=180)\nresult = plates.plates_to_csv(tmp_path)\nwith open(result, 'r') as csvfile:\n    reader = list(csv.reader(csvfile))\n    assert len(reader) == plates.count + 1\n    assert reader[1] == ['1', '', '(102, 102)', '160', '0', '0', '0', '0.0',\n        '0.0', '0.0', '0.0', '0.0', '0.0', '0.0', '0.0']\n"
+}

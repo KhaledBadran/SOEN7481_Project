@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ParsingIssues",
+    "className": "Test_ConfigParser",
+    "fileName": "/Kieran-Bacon_&_Better/PackageTests_&_test_configparser.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" A bug was discovered that a setting would be added twice when a new section was read as the section would\n        flush the setting to the config, and then reading the new setting in the section, the setting would again be\n        flushed. The section didn't reset the setting when it flushed - which is now does.\n\n        This was found because the type of the setting changes if it is cast and this lead to a non string trying to be\n        converted again and it throw a failure\n        \"\"\"\ntry:\n    ConfigParser(\n        \"\"\"\n            (int) a = 100\n            [section]\n            something = else\n            \"\"\"\n        )\nexcept:\n    self.fail('Could not parse the config correctly...')\n"
+}

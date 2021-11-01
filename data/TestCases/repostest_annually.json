@@ -1,0 +1,9 @@
+{
+    "functionName": "test_annually",
+    "className": null,
+    "fileName": "/roniemartinez_&_DocCron/tests_&_test_predefined.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cron = doccron.cron('@annually')\nnow = datetime.now(tz=tzlocal())\nyear = now.year if now < localize(datetime(now.year, 1, 1)) else now.year + 1\nassert next(cron) == localize(datetime(year, 1, 1, 0, 0))\nassert next(cron) == localize(datetime(year + 1, 1, 1, 0, 0))\nassert next(cron) == localize(datetime(year + 2, 1, 1, 0, 0))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_automl_sequential_wrapper_with_validation_split_wrapper",
+    "className": null,
+    "fileName": "/Neuraxio_&_Neuraxle/testing_&_metaopt_&_test_automl_sequential_wrapper.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data_inputs = np.array(range(100))\nexpected_outputs = np.array(range(100, 200))\nhyperparameter_space = HyperparameterSpace({'multiplication_1__multiply_by':\n    RandInt(1, 3), 'multiplication_2__multiply_by': RandInt(1, 3),\n    'multiplication_3__multiply_by': RandInt(1, 3)})\npipeline = Pipeline([('multiplication_1', MultiplyByN()), (\n    'multiplication_2', MultiplyByN()), ('multiplication_3', MultiplyByN())\n    ], cache_folder=tmpdir).set_hyperparams_space(hyperparameter_space)\nrandom_search = RandomSearch(ValidationSplitWrapper(pipeline, test_size=0.2,\n    scoring_function=mean_squared_error, run_validation_split_in_test_mode=\n    False), hyperparams_repository=HyperparamsJSONRepository(tmpdir),\n    higher_score_is_better=False, n_iter=100)\nmse_before = ((data_inputs - expected_outputs) ** 2).mean()\nrandom_search: AutoMLSequentialWrapper = random_search.fit(data_inputs,\n    expected_outputs)\nbest_model: Pipeline = random_search.get_best_model()\npredicted_outputs = best_model.transform(data_inputs)\nactual_mse = ((predicted_outputs - expected_outputs) ** 2).mean()\nassert actual_mse < mse_before\n"
+}

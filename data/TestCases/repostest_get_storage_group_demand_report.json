@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_storage_group_demand_report",
+    "className": "CITestProvisioning",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test get_storage_group_demand_report.\"\"\"\nsrp_list = self.provisioning.get_srp_list()\nsrp_report = None\nfor srp in srp_list:\n    report = self.provisioning.get_storage_group_demand_report(srp)\n    if report:\n        srp_report = report\n    else:\n        self.assertIsInstance(report, dict)\n        self.assertIn(constants.STORAGE_GROUP_DEMAND, report)\n        self.assertIsInstance(report[constants.STORAGE_GROUP_DEMAND], list)\n        self.assertIsNone(report[constants.STORAGE_GROUP_DEMAND])\nif srp_report:\n    self._validate_srp_demand_report(srp_report)\n"
+}

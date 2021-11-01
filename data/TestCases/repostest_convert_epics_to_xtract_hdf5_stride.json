@@ -1,0 +1,9 @@
+{
+    "functionName": "test_convert_epics_to_xtract_hdf5_stride",
+    "className": null,
+    "fileName": "/darrent1974_&_CSIROCT-IMBL-ASCI/csiroct_imbl_asci_&_tests_&_test_convert_epics_to_xtract_hdf5.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "file_test_epics = os.path.join(tmp_path, 'test_epics.h5')\nfile_test_xtract = os.path.join(tmp_path, 'test_x-tract.h5')\ncreate_test_epics_hdf5(file_test_epics)\ncia.convert_epics_to_xtract_hdf5(file_test_epics, file_test_epics,\n    file_test_epics, file_test_xtract, 10, 10)\nassert os.path.isfile(file_test_xtract)\nwith h5py.File(file_test_xtract, 'r') as f_test_xtract:\n    dset_flats = f_test_xtract[xtract.h5_dataset_xtract_flats]\n    check_dataset_shape_type(dset_flats, (100, 10, 10), np.uint16)\n    dset_darks = f_test_xtract[xtract.h5_dataset_xtract_darks]\n    check_dataset_shape_type(dset_darks, (100, 10, 10), np.uint16)\n    dset_projections = f_test_xtract[xtract.h5_dataset_xtract_projections]\n    check_dataset_shape_type(dset_projections, (9, 10, 10), np.uint16)\n"
+}

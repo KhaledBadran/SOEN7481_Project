@@ -1,0 +1,9 @@
+{
+    "functionName": "test_missing_instr",
+    "className": "Test_Configuration",
+    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_configuration.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "config_fn = os.path.join(curdir, 'test_cfg_CCL_long_duration.json')\nplatform = ql.Platform('seven_qubits_chip', config_fn)\np = ql.Program('aProgram', platform, platform.get_qubit_number())\nsweep_points = [1, 2]\np.set_sweep_points(sweep_points)\nk = ql.Kernel('aKernel', platform, platform.get_qubit_number())\nk.gate('rx180', [0])\ntry:\n    k.gate('rx181', [2])\nexcept:\n    pass\nelse:\n    print('Exception not raised for missing instruction !!!')\n    raise\np.add_kernel(k)\np.compile()\n"
+}

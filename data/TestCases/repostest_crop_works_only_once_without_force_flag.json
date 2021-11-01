@@ -1,0 +1,9 @@
+{
+    "functionName": "test_crop_works_only_once_without_force_flag",
+    "className": "TestCropping",
+    "fileName": "/ornlneutronimaging_&_NeuNorm/tests_&_NeuNorm_&_cropping_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"assert crop of sample and ob works only once if no force flag used\"\"\"\nx0, y0, x1, y1 = 0, 0, 2, 2\n_roi = ROI(x0=x0, y0=y0, x1=x1, y1=y1)\no_norm = Normalization()\nsample_path = self.data_path + '/tif/sample'\no_norm.load(folder=sample_path, auto_gamma_filter=False)\nob_path = self.data_path + '/tif/ob'\no_norm.load(folder=ob_path, data_type='ob', auto_gamma_filter=False)\no_norm.normalization()\no_norm.crop(roi=_roi)\n_sample_first_time = o_norm.data['sample']['data'][0]\n_ob_first_time = o_norm.data['ob']['data'][0]\no_norm.crop(roi=_roi)\n_sample_second_time = o_norm.data['sample']['data'][0]\n_ob_second_time = o_norm.data['ob']['data'][0]\nself.assertTrue((_sample_first_time == _sample_second_time).all())\nself.assertTrue((_ob_first_time == _ob_second_time).all())\n"
+}

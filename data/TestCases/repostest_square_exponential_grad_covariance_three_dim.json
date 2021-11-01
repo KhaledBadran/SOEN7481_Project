@@ -1,0 +1,9 @@
+{
+    "functionName": "test_square_exponential_grad_covariance_three_dim",
+    "className": "TestSquareExponential",
+    "fileName": "/Yelp_&_MOE/moe_&_tests_&_optimal_learning_&_python_&_python_version_&_covariance_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test the SquareExponential grad_covariance function against correct values for different sets of hyperparameters in 3D.\"\"\"\nfor hyperparameters in self.three_dim_test_sets:\n    length = hyperparameters[1:]\n    covariance = self.CovarianceClass(hyperparameters)\n    truth = numpy.array([0.0, 0.0, 0.0])\n    grad_cov = covariance.grad_covariance(numpy.array([0.0, 0.0, 0.0]),\n        numpy.array([0.0, 0.0, 0.0]))\n    self.assert_vector_within_relative(grad_cov, truth, 0.0)\n    truth1 = numpy.array([0.0, 0.0, 1.0 / length[2] * covariance.covariance\n        (numpy.array([0.0, 0.0, 0.0]), numpy.array([0.0, 0.0, length[2]]))])\n    grad_cov1 = covariance.grad_covariance(numpy.array([0.0, 0.0, 0.0]),\n        numpy.array([0.0, 0.0, length[2]]))\n    self.assert_vector_within_relative(grad_cov1, truth1, self.epsilon)\n    truth2 = truth1.copy()\n    truth2[2] *= -1.0\n    grad_cov2 = covariance.grad_covariance(numpy.array([0.0, 0.0, length[2]\n        ]), numpy.array([0.0, 0.0, 0.0]))\n    self.assert_vector_within_relative(grad_cov2, truth2, self.epsilon)\n    assert grad_cov1[2] == -grad_cov2[2]\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_dart",
+    "className": "TestSklearn",
+    "fileName": "/microsoft_&_LightGBM/tests_&_python_package_test_&_test_sklearn.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "X, y = load_boston(return_X_y=True)\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1,\n    random_state=42)\ngbm = lgb.LGBMRegressor(boosting_type='dart', n_estimators=50)\ngbm.fit(X_train, y_train)\nscore = gbm.score(X_test, y_test)\nself.assertGreaterEqual(score, 0.8)\nself.assertLessEqual(score, 1.0)\n"
+}

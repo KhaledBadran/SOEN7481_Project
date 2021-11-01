@@ -1,0 +1,9 @@
+{
+    "functionName": "test_leaderFallback",
+    "className": null,
+    "fileName": "/bakwc_&_PySyncObj/test_syncobj.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "random.seed(42)\na = [getNextAddr(), getNextAddr()]\no1 = TestObj(a[0], [a[1]], leaderFallbackTimeout=30.0)\no2 = TestObj(a[1], [a[0]], leaderFallbackTimeout=30.0)\nobjs = [o1, o2]\nassert not o1._isReady()\nassert not o2._isReady()\ndoTicks(objs, 5.0, stopFunc=lambda : o1._isReady() and o2._isReady())\no1._SyncObj__conf.leaderFallbackTimeout = 3.0\no2._SyncObj__conf.leaderFallbackTimeout = 3.0\ndoTicks([o for o in objs if o._isLeader()], 2.0)\nassert o1._isLeader() or o2._isLeader()\ndoTicks([o for o in objs if o._isLeader()], 2.0)\nassert not o1._isLeader() and not o2._isLeader()\n"
+}

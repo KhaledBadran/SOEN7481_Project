@@ -1,0 +1,9 @@
+{
+    "functionName": "test_circularize_image",
+    "className": null,
+    "fileName": "/PyAbel_&_PyAbel/abel_&_tests_&_test_tools_circularize.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "IM = abel.tools.analytical.SampleImage(n=511, name='Ominus', sigma=2).image\ndef flower_scaling(theta, freq=2, amp=0.1):\n    return 1 + amp * np.sin(freq * theta) ** 4\nIMdist = circularize(IM, radial_correction_function=flower_scaling)\nIMcirc, angle, scalefactor, spline = circularize_image(IMdist, method='lsq',\n    dr=0.5, dt=0.1, tol=0, ref_angle=0, return_correction=True)\nr, c = IMcirc.shape\ndiff = (IMcirc - IM).sum()\nassert_allclose(diff, -307.603, atol=0.05)\nassert_allclose(angle[-1], 3.04, atol=0.05)\nassert_allclose(scalefactor[4], 0.97, atol=0.05)\n"
+}

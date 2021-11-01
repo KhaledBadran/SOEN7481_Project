@@ -1,0 +1,9 @@
+{
+    "functionName": "test_redaction_based_hierarchy",
+    "className": "ARXaaSTest",
+    "fileName": "/navikt_&_PyARXaaS/tests_&_pyarxaas_&_test_ARXaaS.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "expected = [['1123', '*123', '**23', '***3', '****'], ['1321', '*321',\n    '**21', '***1', '****'], ['1234', '*234', '**34', '***4', '****'], [\n    '1532', '*532', '**32', '***2', '****']]\naaas = ARXaaS('http://localhost:8080', connector=MockAaasConnector)\nredaction_builder = RedactionHierarchyBuilder(' ', '*',\n    RedactionHierarchyBuilder.Order.RIGHT_TO_LEFT,\n    RedactionHierarchyBuilder.Order.LEFT_TO_RIGHT)\ncolumn = ['1123', '1321', '1234', '1532']\nhierarchy = aaas.hierarchy(redaction_builder, column)\nself.assertEqual(expected, hierarchy)\n"
+}

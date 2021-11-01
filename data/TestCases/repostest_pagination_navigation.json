@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pagination_navigation",
+    "className": null,
+    "fileName": "/vamf12_&_Glask/tests_&_test_sqlalchemy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "[db.session.add(Post()) for _ in range(1132)]\ndb.session.commit()\ndb.session.remove()\npagination = Pagination(query=Post.query, page=77)\nassert pagination.page == 77\nassert pagination.navigation.pages == [70, 71, 72, 73, 74, 75, 76, 77, 78, 79]\nassert pagination.navigation.previous == 69\nassert pagination.navigation.next == 80\nassert pagination.navigation.has_previous\nassert pagination.navigation.has_next\npagination = Pagination(query=Post.query)\nassert pagination.page == 0\nassert pagination.navigation.pages == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]\nassert pagination.navigation.previous == 0\nassert pagination.navigation.has_previous == False\nassert pagination.navigation.next == 10\nassert pagination.navigation.has_next\npagination = Pagination(query=Post.query, page=113)\nassert pagination.page == 113\nassert pagination.navigation.previous == 109\nassert pagination.navigation.has_previous\nassert pagination.navigation.next == 113\nassert pagination.navigation.pages == [110, 111, 112, 113]\nassert pagination.navigation.has_next == False\n"
+}

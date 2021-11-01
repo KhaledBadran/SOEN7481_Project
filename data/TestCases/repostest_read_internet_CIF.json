@@ -1,0 +1,9 @@
+{
+    "functionName": "test_read_internet_CIF",
+    "className": "CifRead",
+    "fileName": "/jcumby_&_PIEFACE/pieface_&_tests_&_test_readcoords.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Check that we can read a CIF online from COD (requires an internet connection). \"\"\"\nciffile = 'http://www.crystallography.net/cod/1004021.cif'\ncif = '1004021'\nreturnvals = readcoords.readcif(ciffile)\nself.assertDictEqual(returnvals[0], self.results[cif]['cell'])\nself.assertItemsEqual(returnvals[1].keys(), self.results[cif]['atomcoords']\n    .keys())\nfor k in returnvals[1].keys():\n    np.testing.assert_array_almost_equal(returnvals[1][k], self.results[cif\n        ]['atomcoords'][k])\nself.assertDictEqual(returnvals[2], self.results[cif]['atomtypes'])\nself.assertEqual(returnvals[3], self.results[cif]['spacegrp'])\nself.assertListEqual(returnvals[4], self.results[cif]['symmops'])\nself.assertListEqual(returnvals[5], self.results[cif]['symmid'])\nunittest.skipUnless(check_internet(), 'Requires an internet connection')"
+}

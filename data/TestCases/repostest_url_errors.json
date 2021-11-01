@@ -1,0 +1,9 @@
+{
+    "functionName": "test_url_errors",
+    "className": null,
+    "fileName": "/halcy_&_Mastodon.py/tests_&_test_auth.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "clientid_good = tmpdir.join('clientid')\ntoken_good = tmpdir.join('token')\nclientid_bad = tmpdir.join('clientid_bad')\ntoken_bad = tmpdir.join('token_bad')\nclientid_good.write_text(\"\"\"foo\nbar\nhttps://zombo.com\n\"\"\", 'UTF-8')\ntoken_good.write_text(\"\"\"foo\nhttps://zombo.com\n\"\"\", 'UTF-8')\nclientid_bad.write_text(\"\"\"foo\nbar\nhttps://evil.org\n\"\"\", 'UTF-8')\ntoken_bad.write_text(\"\"\"foo\nhttps://evil.org\n\"\"\", 'UTF-8')\napi = Mastodon(client_id=clientid_good, access_token=token_good)\nassert api\nassert api.api_base_url == 'https://zombo.com'\nassert Mastodon(client_id=clientid_good, access_token=token_good,\n    api_base_url='zombo.com')\nwith pytest.raises(MastodonIllegalArgumentError):\n    Mastodon(client_id=clientid_good, access_token=token_bad, api_base_url=\n        'zombo.com')\nwith pytest.raises(MastodonIllegalArgumentError):\n    Mastodon(client_id=clientid_bad, access_token=token_good, api_base_url=\n        'zombo.com')\nwith pytest.raises(MastodonIllegalArgumentError):\n    Mastodon(client_id=clientid_bad, access_token=token_bad, api_base_url=\n        'zombo.com')\npytest.mark.vcr()"
+}

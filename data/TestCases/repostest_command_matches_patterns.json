@@ -1,0 +1,9 @@
+{
+    "functionName": "test_command_matches_patterns",
+    "className": null,
+    "fileName": "/Gwildor_&_Pyromancer/pyromancer_&_test_&_test_command_decorator.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "line = Line(':John!JDoe@some.host PRIVMSG #Chan :Some cool message', c)\nsettings = MockObject(command_prefix='!')\ninstance = command('^Some', prefix=False)\nassert bool(instance.matches(line, settings)) is True\ninstance = command('message$', prefix=False)\nassert bool(instance.matches(line, settings)) is True\ninstance = command('^Some cool message$', prefix=False)\nassert bool(instance.matches(line, settings)) is True\ninstance = command('mESsagE', prefix=False, flags=re.IGNORECASE)\nassert bool(instance.matches(line, settings)) is True\ninstance = command('Some')\nassert bool(instance.matches(line, settings)) is False\nsettings = MockObject(command_prefix='S')\ninstance = command('^ome')\nassert bool(instance.matches(line, settings)) is True\ninstance = command('cool')\nassert bool(instance.matches(line, settings)) is True\nline = Line(':irc.example.net 376 A :End of MOTD command', c)\ninstance = command('example', prefix=False)\nassert bool(instance.matches(line, settings)) is False\ninstance = command('example', raw=True, prefix=False)\nassert bool(instance.matches(line, settings)) is True\nmock_connection"
+}

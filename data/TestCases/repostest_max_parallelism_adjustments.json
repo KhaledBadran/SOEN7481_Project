@@ -1,0 +1,9 @@
+{
+    "functionName": "test_max_parallelism_adjustments",
+    "className": "TestDispatchUtils",
+    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_dispatch_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sobol_gpei = choose_generation_strategy(search_space=get_branin_search_space())\nself.assertIsNone(sobol_gpei._steps[0].max_parallelism)\nself.assertEqual(sobol_gpei._steps[1].max_parallelism,\n    DEFAULT_BAYESIAN_PARALLELISM)\nsobol_gpei = choose_generation_strategy(search_space=\n    get_branin_search_space(), max_parallelism_cap=1)\nself.assertEqual(sobol_gpei._steps[0].max_parallelism, sobol_gpei._steps[1]\n    .max_parallelism, 1)\nsobol_gpei = choose_generation_strategy(search_space=\n    get_branin_search_space(), max_parallelism_override=-1)\nself.assertIsNone(sobol_gpei._steps[0].max_parallelism)\nself.assertIsNone(sobol_gpei._steps[1].max_parallelism)\nsobol_gpei = choose_generation_strategy(search_space=\n    get_branin_search_space(), max_parallelism_override=10)\nself.assertEqual(sobol_gpei._steps[0].max_parallelism, 10)\nself.assertEqual(sobol_gpei._steps[1].max_parallelism, 10)\n"
+}

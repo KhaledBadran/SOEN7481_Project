@@ -1,0 +1,9 @@
+{
+    "functionName": "test_Sum",
+    "className": null,
+    "fileName": "/bytesandbrains_&_ProcessOptimizer/ProcessOptimizer_&_tests_&_test_constraints.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "Sum((1, 2, 3), 5, less_than=False)\nSum([3, 2, 1], -10.0, less_than=True)\nwith raises(TypeError):\n    Sum('a', 5)\nwith raises(TypeError):\n    Sum((1, 2, 3), 5, less_than=1)\nwith raises(TypeError):\n    Sum((1, 2, 3), True)\nwith raises(ValueError):\n    Sum([0], True)\nwith raises(ValueError):\n    Sum([-10, 1, 2], True)\nspace = Space([[0.0, 10.0], [0, 10], ['abcdef']])\ncons_list = [Sum((4, 3), 5)]\nwith raises(IndexError):\n    Constraints(cons_list, space)\ncons_list = [Sum((1, 2), 5)]\nwith raises(ValueError):\n    Constraints(cons_list, space)\ncons = Constraints([Sum((0, 1), 6)], space)\nassert_false(cons.validate_sample([0.0, 7, 'a']))\nassert_false(cons.validate_sample([7.0, 0, 'a']))\nassert_false(cons.validate_sample([3.00001, 3, 'a']))\nassert_true(cons.validate_sample([2.99999, 3, 'a']))\ncons = Constraints([Sum((0, 1), 6, less_than=False)], space)\nassert_true(cons.validate_sample([0.0, 7, 'a']))\nassert_true(cons.validate_sample([7.0, 0, 'a']))\nassert_true(cons.validate_sample([3.00001, 3, 'a']))\nassert_false(cons.validate_sample([2.99999, 3, 'a']))\nsamples = cons.rvs(n_samples=1000)\nfor sample in samples:\n    assert_true(cons.validate_sample(sample))\npytest.mark.fast_test"
+}

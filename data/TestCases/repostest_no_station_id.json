@@ -1,0 +1,9 @@
+{
+    "functionName": "test_no_station_id",
+    "className": null,
+    "fileName": "/cgtobi_&_PyRMVtransport/tests_&_test_rmvtransport.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test no station_id error handling.\"\"\"\nasync with aresponses.ResponsesMockServer(loop=event_loop) as arsps:\n    arsps.add(URL, URL_PATH, 'get', aresponses.Response(text='error',\n        status=500))\n    async with aiohttp.ClientSession(loop=event_loop) as session:\n        rmv = RMVtransport(session)\n        await rmv.get_departures()\npytest.mark.asynciopytest.mark.xfail(raises=TypeError)"
+}

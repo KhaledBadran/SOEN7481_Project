@@ -1,0 +1,9 @@
+{
+    "functionName": "test_save_repr",
+    "className": null,
+    "fileName": "/Puumanamana_&_CoCoNet/tests_&_test_dl.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test save repr\n    \"\"\"\nmodel = initialize_model('CoCoNet', TEST_SHAPES, TEST_ARCHITECTURE)\nfasta = generate_fasta_file(*TEST_CTG_LENGTHS)\ncoverage = generate_h5_file(*TEST_CTG_LENGTHS)\noutput = {k: Path('repr_{}.h5'.format(k)) for k in ['composition', 'coverage']}\nsave_repr_all(model, fasta, coverage, n_frags=5, frag_len=FL, output=output,\n    wsize=WSIZE, wstep=WSTEP)\nassert all(out.is_file() for out in output.values())\nhandles = {k: h5py.File(v) for k, v in output.items()}\nfirsts = {k: handle.get(list(handle.keys())[0]).shape for k, handle in\n    handles.items()}\nlatent_dim = TEST_ARCHITECTURE['composition']['neurons'][-1\n    ] + TEST_ARCHITECTURE['coverage']['neurons'][-1]\nassert firsts['composition'] == (5, latent_dim)\nassert firsts['coverage'] == (5, latent_dim)\nfasta.unlink()\ncoverage.unlink()\nfor key, filename in output.items():\n    handles[key].close()\n    filename.unlink()\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_hashtag_tl",
+    "className": null,
+    "fileName": "/halcy_&_Mastodon.py/tests_&_test_timeline.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "status = api.status_post('#hoot (hashtag toot)')\ntl = api.timeline_hashtag('hoot')\ntry:\n    assert status['id'] in map(lambda st: st['id'], tl)\nfinally:\n    api.status_delete(status['id'])\npytest.mark.vcr()"
+}

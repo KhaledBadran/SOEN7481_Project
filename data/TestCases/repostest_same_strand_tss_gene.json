@@ -1,0 +1,9 @@
+{
+    "functionName": "test_same_strand_tss_gene",
+    "className": "TestGensRNAOutput",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_merge_manual.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tss_dict = {'seq_id': 'aaa', 'source': 'Refseq', 'feature': 'TSS', 'start':\n    3, 'end': 3, 'phase': '.', 'strand': '+', 'score': '.'}\nattributes_tss = {'ID': 'TSS0', 'Name': 'TSS_0', 'type': 'Primary,Internal',\n    'associated_gene': 'AAA_00001,AAA_00004', 'utr_length':\n    'Primary_25,Internal_NA'}\ntss = Create_generator(tss_dict, attributes_tss, 'gff')\ntss_entry = [tss.attribute_string, {'utr_length': 'Primary_25,Internal_NA',\n    'type': 'Primary,Internal', 'associated_gene': 'AAA_00001,AAA_00004'}]\nanti_ends = {'forward': 1, 'reverse': -1}\ngene_ends = {'forward': -1, 'reverse': -1}\ngff_dict = {'seq_id': 'aaa', 'source': 'Refseq', 'feature': 'CDS', 'start':\n    6, 'end': 12, 'phase': '.', 'strand': '+', 'score': '.'}\nattributes_gff = {'ID': 'CDS0', 'Name': 'CDS_0', 'locus_tag': 'AAA_00001'}\ngene = Create_generator(gff_dict, attributes_gff, 'gff')\nchecks = {'orphan': False, 'int_anti': False}\noutput = mm.same_strand_tss_gene(gene, tss, anti_ends, gene_ends, checks,\n    tss_entry)\nself.assertEqual(output[0],\n    'utr_length=Primary_3,Internal_NA;associated_gene=AAA_00001,AAA_00004;type=Primary,Internal;Name=TSS_3+'\n    )\nself.assertDictEqual(output[1], {'Name': 'TSS_3+', 'utr_length':\n    'Primary_3,Internal_NA', 'type': 'Primary,Internal', 'associated_gene':\n    'AAA_00001,AAA_00004'})\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_DataSet_Visualization",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_DataSet.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "import warnings\nfrom MJOLNIR.Data import Viewer3D, DataFile\nDataFiles = ['Data/camea2018n000136.hdf']\ndataset = DataSet(dataFiles=DataFiles)\ndataset.convertDataFile(saveLocation='Data', saveFile=True)\nData, bins = dataset.binData3D(0.08, 0.08, 0.25)\nData, bins = dataset.binData3D(0.08, 0.08, 0.25, dataFiles=[MJOLNIR.Data.\n    DataFile.DataFile('Data/camea2018n000136.nxs')])\nplt.ioff()\nimport matplotlib\nmatplotlib.use('Agg')\nwarnings.simplefilter('ignore')\nIntensity = np.divide(Data[0] * Data[3], Data[1] * Data[2])\nwarnings.simplefilter('once')\nviewer = Viewer3D.Viewer3D(Intensity, bins)\nviewer.caxis = 0, 100\ntry:\n    viewer.caxis = 'Wrong type'\n    assert False\nexcept AttributeError:\n    assert True\ntry:\n    viewer.caxis = [0, 1, 2, 3, 4]\n    assert False\nexcept AttributeError:\n    assert True\ntry:\n    viewer.setAxis(20)\n    assert False\nexcept AttributeError:\n    assert True\nplt.plot()\nplt.close('all')\nos.remove('Data/camea2018n000136.nxs')\n"
+}

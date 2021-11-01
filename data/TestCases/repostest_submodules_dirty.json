@@ -1,0 +1,9 @@
+{
+    "functionName": "test_submodules_dirty",
+    "className": null,
+    "fileName": "/msiemens_&_PyGitUp/PyGitUp_&_tests_&_test_submodules_dirty.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Run 'git up' with submodules in a dirty repo \"\"\"\nrepo = Repo(repo_path)\nrepo_head = repo.head.commit.hexsha\nsubmod_head = repo.submodules[0].hexsha\nwrite_file('sub/file', 'submodule changed')\nfrom PyGitUp.gitup import GitUp\ngitup = GitUp(testing=True)\nassert_equal(repo_head, gitup.git.repo.head.commit.hexsha)\ngitup.run()\nassert_equal(len(gitup.states), 1)\nassert_equal(gitup.states[0], 'rebasing')\n"
+}

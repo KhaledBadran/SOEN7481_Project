@@ -1,0 +1,9 @@
+{
+    "functionName": "__set_keras_backend",
+    "className": "BigDLTestCase",
+    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "if K.backend() != backend:\n    current_dim = K.image_dim_ordering()\n    os.environ['KERAS_BACKEND'] = backend\n    from six.moves import reload_module\n    reload_module(K)\n    K.set_image_dim_ordering(current_dim)\n    assert K.backend() == backend\n    assert K.image_dim_ordering() == current_dim\nif backend == 'theano':\n    from theano import ifelse\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_as_array",
+    "className": null,
+    "fileName": "/fmfn_&_BayesianOptimization/tests_&_test_target_space.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "space = TargetSpace(target_func, PBOUNDS)\nx = space._as_array([0, 1])\nassert x.shape == (2,)\nassert all(x == np.array([0, 1]))\nx = space._as_array({'p2': 1, 'p1': 2})\nassert x.shape == (2,)\nassert all(x == np.array([2, 1]))\nwith pytest.raises(ValueError):\n    x = space._as_array([2, 1, 7])\nwith pytest.raises(ValueError):\n    x = space._as_array({'p2': 1, 'p1': 2, 'other': 7})\nwith pytest.raises(ValueError):\n    x = space._as_array({'p2': 1})\nwith pytest.raises(ValueError):\n    x = space._as_array({'other': 7})\n"
+}

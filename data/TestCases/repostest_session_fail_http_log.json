@@ -1,0 +1,9 @@
+{
+    "functionName": "test_session_fail_http_log",
+    "className": null,
+    "fileName": "/OvalMoney_&_Nephthys/tests_&_test_clients_&_test_requests.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "caplog.set_level(logging.INFO)\nm.get('https://ovalmoney.com/user', exc=requests.exceptions.ConnectTimeout)\ns = Session()\nwith pytest.raises(requests.exceptions.ConnectTimeout):\n    s.get('https://ovalmoney.com/user')\nlog_rec = [rec for rec in caplog.records][0]\nassert isinstance(log_rec.exc_info[1], requests.exceptions.ConnectTimeout)\nlog = log_rec.msg\nassert log['request']['method'] == 'GET'\nassert log['request']['url'] == 'https://ovalmoney.com/user'\nassert log['request']['path'] == '/user'\nassert log['request']['host'] == 'ovalmoney.com'\n"
+}

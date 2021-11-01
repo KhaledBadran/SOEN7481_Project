@@ -1,0 +1,9 @@
+{
+    "functionName": "test_coop_pore_filling",
+    "className": "MixedPercolationCoopTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_MixedPercolationCoopTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "pn = op.network.Cubic(shape=[3, 3, 3], spacing=2.5e-05)\ngeo = op.geometry.GenericGeometry(network=pn, pores=pn.pores(), throats=pn.\n    throats())\ngeo['throat.diameter'] = 1.5e-05\ngeo['pore.diameter'] = 2e-05\ngeo.add_model(propname='throat.centroid', model=op.models.geometry.\n    throat_centroid.pore_coords)\ngeo.add_model(propname='throat.normal', model=op.models.geometry.\n    throat_vector.pore_to_pore)\nwater = op.phases.Water(network=pn)\nwater['pore.contact_angle'] = 60\nphys = op.physics.GenericPhysics(network=pn, phase=water, geometry=geo)\nr_tor = 5e-06\nphys.add_model(propname='throat.entry_pressure', model=op.models.physics.\n    meniscus.purcell, r_toroid=r_tor, mode='max')\nphys.add_model(propname='throat.meniscus', model=op.models.physics.meniscus\n    .purcell, mode='men', r_toroid=r_tor, target_Pc=5000)\nphys['pore.entry_pressure'] = 0.0\nip = op.algorithms.MixedInvasionPercolationCoop(network=pn)\nip.setup(phase=water)\nip.setup(cooperative_pore_filling='throat.meniscus')\npoints = np.arange(0.1, 1, 0.05) * ip._max_pressure()\nip.setup_coop_filling(inv_points=points)\nip.set_inlets(pores=pn.pores('bottom'))\nip.run()\nassert np.any(~np.isnan(ip.tt_Pc.data[0]))\n"
+}

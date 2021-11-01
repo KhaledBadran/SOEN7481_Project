@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fit_and_score_keras_model_in_gridsearchcv",
+    "className": null,
+    "fileName": "/goeckslab_&_Galaxy-ML/galaxy_ml_&_tests_&_test_model_validations.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "config = train_model.get_config()\nclf = KerasGClassifier(config, optimizer='adam', metrics=[], batch_size=32,\n    epochs=10, seed=42)\ndf = pd.read_csv('./tools/test-data/pima-indians-diabetes.csv', sep=',')\nX = df.iloc[:, 0:8].values.astype(float)\ny = df.iloc[:, (8)].values\nscorer = SCORERS['balanced_accuracy']\ncv = StratifiedKFold(n_splits=5, shuffle=True, random_state=123)\nnew_params = {'layers_0_Dense__config__kernel_initializer__config__seed': [\n    0], 'layers_1_Dense__config__kernel_initializer__config__seed': [0]}\ngrid = GridSearchCV(clf, param_grid=new_params, scoring=scorer, cv=cv,\n    n_jobs=2, refit=False)\ngrid.fit(X, y, verbose=0)\ngot1 = grid.best_score_\nassert round(got1, 2) == 0.49, got1\n"
+}

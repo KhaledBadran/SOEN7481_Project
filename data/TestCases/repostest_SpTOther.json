@@ -1,0 +1,9 @@
+{
+    "functionName": "test_SpTOther",
+    "className": "TestMeanStars",
+    "fileName": "/dsavransky_&_MeanStars/tests_&_test_MeanStars.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "SpT = self.ms.data['SpT'].data\nfor key in self.ms.noncolors:\n    vals = self.ms.getFloatData(key)\n    goodinds = np.isfinite(vals)\n    for v, s in zip(vals[goodinds], SpT[goodinds]):\n        m = self.ms.specregex.match(s)\n        self.assertTrue(m, \"Couldn't decompose spectral type from data.\")\n        self.assertTrue(self.ms.SpTOther(key, m.groups()[0], float(m.groups\n            ()[1])) == v, 'Cannot reproduce values from interpolant for %s' %\n            key)\n"
+}

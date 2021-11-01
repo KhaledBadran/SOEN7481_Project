@@ -1,0 +1,9 @@
+{
+    "functionName": "test_positive_bijector",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_utilities_&_test_utilities.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with as_context(Config(positive_bijector=env_bijector, positive_minimum=0.0)):\n    bijector = positive(base=override_bijector)\n    assert isinstance(bijector, expected_class)\npytest.mark.parametrize('env_bijector, override_bijector, expected_class',\n    [('softplus', None, tfp.bijectors.Softplus), ('softplus', 'Exp', tfp.\n    bijectors.Exp), ('exp', None, tfp.bijectors.Exp), ('exp', 'Softplus',\n    tfp.bijectors.Softplus)])"
+}

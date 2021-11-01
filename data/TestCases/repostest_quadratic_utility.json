@@ -1,0 +1,9 @@
+{
+    "functionName": "test_quadratic_utility",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_objective_functions.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "df = get_data()\ne_rets = mean_historical_return(df)\nS = sample_cov(df)\nw = np.array([1 / len(e_rets)] * len(e_rets))\nutility = objective_functions.quadratic_utility(w, e_rets, S, risk_aversion=3)\nassert isinstance(utility, float)\nassert utility < 0\nmu = objective_functions.portfolio_return(w, e_rets, negative=False)\nvariance = objective_functions.portfolio_variance(w, S)\nnp.testing.assert_almost_equal(-utility + 3 / 2 * variance, mu)\n"
+}

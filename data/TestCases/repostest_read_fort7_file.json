@@ -1,0 +1,9 @@
+{
+    "functionName": "test_read_fort7_file",
+    "className": null,
+    "fileName": "/mortele_&_OccamTools/test_&_test_read_fort7.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "new_file_name = os.path.join(os.path.dirname(__file__), os.pardir, 'data',\n    'example_fort_new.7')\nfort7, file_name = _load_example_fort7()\nassert fort7.title == 'example-fort.1'\nwith open(file_name, 'r') as in_file, open(new_file_name, 'w') as out_file:\n    for line in in_file:\n        if 'title' in line:\n            line = 'title: new_title\\n'\n        out_file.write(line)\nfort7 = Fort7(file_name)\nfort7.read_file(new_file_name, silent=True)\nassert fort7.title == 'new_title'\nos.remove(new_file_name)\n"
+}

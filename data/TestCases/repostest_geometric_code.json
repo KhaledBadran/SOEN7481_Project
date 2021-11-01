@@ -1,0 +1,9 @@
+{
+    "functionName": "test_geometric_code",
+    "className": null,
+    "fileName": "/bsmurphy_&_PyKrige/tests_&_test_core.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "N = 4\nlon = np.array([7.0, 7.0, 187.0, 73.231])\nlat = np.array([13.23, 13.2301, -13.23, -79.3])\nd_ref = np.array([[0.0, 0.0001, 180.0, 98.7448483171718], [0.0001, 0.0, \n    179.9999, 98.74494682832434], [180.0, 179.9999, 0.0, 81.25515168282821],\n    [98.7448483171718, 98.74494682832434, 81.25515168282821, 0.0]])\nd = np.zeros((N, N))\nfor i in range(N):\n    for j in range(N):\n        d[i, j] = core.great_circle_distance(lon[i], lat[i], lon[j], lat[j])\nassert_allclose(d, d_ref)\nassert_allclose(d[np.eye(N, dtype=bool)], 0.0)\nnp.testing.assert_equal(d >= 0.0, np.ones((N, N), dtype=bool))\nassert_allclose(d, d.T)\nnp.testing.assert_equal(d <= 180.0, np.ones((N, N), dtype=bool))\nlon_ref = lon\nlat_ref = lat\nfor i in range(len(lon_ref)):\n    lon, lat = np.meshgrid(np.linspace(0, 360.0, 20), np.linspace(-90.0, \n        90.0, 20))\n    dx = np.cos(np.pi / 180.0 * lon) * np.cos(np.pi / 180.0 * lat) - np.cos(\n        np.pi / 180.0 * lon_ref[i]) * np.cos(np.pi / 180.0 * lat_ref[i])\n    dy = np.sin(np.pi / 180.0 * lon) * np.cos(np.pi / 180.0 * lat) - np.sin(\n        np.pi / 180.0 * lon_ref[i]) * np.cos(np.pi / 180.0 * lat_ref[i])\n    dz = np.sin(np.pi / 180.0 * lat) - np.sin(np.pi / 180.0 * lat_ref[i])\n    assert_allclose(core.great_circle_distance(lon_ref[i], lat_ref[i], lon,\n        lat), core.euclid3_to_great_circle(np.sqrt(dx ** 2 + dy ** 2 + dz **\n        2)), rtol=1e-05)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_add_rotate_operation",
+    "className": null,
+    "fileName": "/mdbloice_&_Augmentor/tests_&_test_pipeline_add_operations.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "p = Augmentor.Pipeline()\nassert len(p.augmentor_images) == 0\nwith pytest.raises(ValueError):\n    p.rotate(probability=1, max_left_rotation=50, max_right_rotation=50)\n    p.rotate(probability=1.1, max_left_rotation=10, max_right_rotation=10)\n    p.rotate(probability='a string', max_left_rotation=10,\n        max_right_rotation=10)\nassert len(p.operations) == 0\np.rotate(probability=1, max_left_rotation=15, max_right_rotation=15)\nassert len(p.operations) == 1\nassert isinstance(p.operations[0], Augmentor.Operations.Operation)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_import_lib",
+    "className": "TestOptimizeTSSpredator",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_optimize_TSSpredator.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "out = StringIO()\nif not os.path.exists(os.path.join(self.test_folder, 'wigs')):\n    os.mkdir(os.path.join(self.test_folder, 'wigs'))\nwig_folder = os.path.join(self.test_folder, 'wigs', 'tmp')\nif not os.path.exists(wig_folder):\n    os.mkdir(wig_folder)\nlib_dict = {'fp': [], 'fm': [], 'np': [], 'nm': []}\ngen_file(os.path.join(wig_folder,\n    'GSM1649587_Hp26695_ML_B1_HS1_-TEX_forward_STRAIN_aaa.wig'), 'test')\ngen_file(os.path.join(wig_folder,\n    'GSM1649587_Hp26695_ML_B1_HS1_-TEX_reverse_STRAIN_aaa.wig'), 'test')\ngen_file(os.path.join(wig_folder,\n    'GSM1649588_Hp26695_ML_B1_HS1_-TEX_forward_STRAIN_aaa.wig'), 'test')\ngen_file(os.path.join(wig_folder,\n    'GSM1649588_Hp26695_ML_B1_HS1_-TEX_reverse_STRAIN_aaa.wig'), 'test')\nargs = self.mock_args.mock()\nargs.project_strain = 'aaa'\nargs.program = 'TSS'\nargs.libs = self.example.libs\nlib_num = ot.import_lib(wig_folder, set(), lib_dict, out, 'aaa.gff', [],\n    'aaa.fa', args, 'aaa')\nself.assertEqual(lib_num, 1)\n"
+}

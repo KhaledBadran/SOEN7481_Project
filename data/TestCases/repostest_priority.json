@@ -1,0 +1,9 @@
+{
+    "functionName": "test_priority",
+    "className": "SettingsTests",
+    "fileName": "/Gilnaa_&_Hydras/tests_&_test_settings.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "s = SpecificStruct()\nh = TargetStruct()\nHydraSettings.target_endian = Endianness.LITTLE\nself.assertEqual(h.serialize(), b'\\xbb\\xaa')\nHydraSettings.target_endian = Endianness.BIG\nself.assertEqual(h.serialize(), b'\\xaa\\xbb')\nHydraSettings.target_endian = Endianness.LITTLE\nself.assertEqual(h.serialize(HydraSettings(target_endian=Endianness.BIG)),\n    b'\\xaa\\xbb')\nself.assertEqual(h, TargetStruct.deserialize(b'\\xaa\\xbb', HydraSettings(\n    target_endian=Endianness.BIG)))\nHydraSettings.target_endian = Endianness.BIG\nself.assertEqual(h, TargetStruct.deserialize(b'\\xbb\\xaa', HydraSettings(\n    target_endian=Endianness.LITTLE)))\nHydraSettings.target_endian = Endianness.LITTLE\nself.assertEqual(s.serialize(), b'\\xaa\\xbb')\nHydraSettings.target_endian = Endianness.BIG\nself.assertEqual(s.serialize(), b'\\xaa\\xbb')\nself.assertEqual(s.serialize(HydraSettings(target_endian=Endianness.BIG)),\n    b'\\xaa\\xbb')\nself.assertEqual(s.serialize(HydraSettings(target_endian=Endianness.LITTLE)\n    ), b'\\xaa\\xbb')\nself.assertEqual(SpecificStruct.deserialize(b'\\xaa\\xbb', HydraSettings(\n    target_endian=Endianness.BIG)), s)\nself.assertEqual(SpecificStruct.deserialize(b'\\xaa\\xbb', HydraSettings(\n    target_endian=Endianness.LITTLE)), s)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_mhtml_analysis",
+    "className": "TestCase",
+    "fileName": "/IntegralDefense_&_ACE/lib_&_saq_&_modules_&_test_file_analysis.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "root = create_root_analysis(analysis_mode='test_groups')\nroot.initialize_storage()\nshutil.copy(os.path.join('test_data', 'mhtml', 'Invoice_PDF.mht'), root.\n    storage_dir)\nfile_observable = root.add_observable(F_FILE, 'Invoice_PDF.mht')\nroot.save()\nroot.schedule()\nengine = TestEngine(pool_size_limit=1)\nengine.enable_alerting()\nengine.enable_module('analysis_module_mhtml', 'test_groups')\nengine.controlled_stop()\nengine.start()\nengine.wait()\nroot = RootAnalysis(storage_dir=root.storage_dir)\nroot.load()\nfile_observable = root.get_observable(file_observable.id)\nself.assertIsNotNone(file_observable)\nfrom saq.modules.file_analysis import MHTMLAnalysis\nanalysis = file_observable.get_analysis(MHTMLAnalysis)\nself.assertIsNotNone(analysis)\nself.assertEquals(len(analysis.details), 1)\nself.assertEquals(len(analysis.get_observables_by_type(F_FILE)), 1)\n"
+}

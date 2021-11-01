@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_spreadsheet_df",
+    "className": "TestGet_spreadsheet_df",
+    "fileName": "/KnowEnG_&_KnowEnG_Pipelines_Library/test_&_unit_&_test_get_spreadsheet_df.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data = '\\tcol1\\tcol2\\tcol3\\n' + 'row1\\t6\\t7\\t8\\n' + 'row2\\t1\\t1\\t2\\n'\ngolden_output = pd.DataFrame([[6, 7, 8], [1, 1, 2]], columns=['col1',\n    'col2', 'col3'], index=['row1', 'row2'])\nself.createFile(self.config_dir, self.user_spreadsheet, data)\nspreadsheet = knpkg.get_spreadsheet_df(self.full_file_path)\nnpytest.assert_array_equal(golden_output, spreadsheet)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_single_gibson",
+    "className": null,
+    "fileName": "/Edinburgh-Genome-Foundry_&_DnaCauldron/tests_&_test_gibson_&_test_gibson.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "repository = dc.SequenceRepository()\nrepository.import_records(files=[sequences_fasta])\nparts = [('Frag_%d' % i) for i in [1, 2, 3, 4, 5]]\nexpected_record = repository.get_record('expected_sequence')\nassembly = dc.GibsonAssembly(parts=parts, homology_checker='default')\nsimulation = assembly.simulate(sequence_repository=repository)\nassert len(simulation.construct_records) == 1\nsimulated_record = simulation.construct_records[0]\nassert sequences_are_circularly_equal([simulated_record, expected_record])\n"
+}

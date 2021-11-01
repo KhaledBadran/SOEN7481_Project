@@ -1,0 +1,9 @@
+{
+    "functionName": "test_find_missing_items",
+    "className": "TestContribution",
+    "fileName": "/PmagPy_&_PmagPy/pmagpy_tests_&_test_contribution_builder.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "for table in self.con.tables:\n    self.assertEqual(set(), self.con.find_missing_items(table))\nself.con.tables['sites'].delete_row(0)\nmissing = self.con.find_missing_items('sites')\nself.assertEqual(set(['hz05']), missing)\ncon = cb.Contribution(PROJECT_WD)\nfor table in con.tables:\n    self.assertEqual(set(), con.find_missing_items(table))\ndirectory = os.path.join(WD, 'data_files', '3_0', 'McMurdo')\ncon = cb.Contribution(directory)\nfor table in con.tables:\n    self.assertEqual(set(), con.find_missing_items(table))\n"
+}

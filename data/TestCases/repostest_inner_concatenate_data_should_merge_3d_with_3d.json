@@ -1,0 +1,9 @@
+{
+    "functionName": "test_inner_concatenate_data_should_merge_3d_with_3d",
+    "className": null,
+    "fileName": "/Neuraxio_&_Neuraxle/testing_&_steps_&_test_concatenate_data_container.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data_inputs_3d, expected_outputs_3d = _create_data_source(SHAPE_3D)\ndata_inputs_3d_second, expected_outputs_3d_second = _create_data_source(\n    SHAPE_3D)\ndata_container_3d_second = DataContainer(data_inputs=data_inputs_3d_second,\n    expected_outputs=expected_outputs_3d_second)\ndata_container = DataContainer(data_inputs=data_inputs_3d, expected_outputs\n    =expected_outputs_3d).add_sub_data_container('2d', data_container_3d_second\n    )\np = Pipeline([InnerConcatenateDataContainer(sub_data_container_names=['2d'])])\ndata_container = p.handle_transform(data_container, ExecutionContext())\nassert data_container.data_inputs.shape == (SHAPE_3D[0], SHAPE_3D[1], \n    SHAPE_3D[2] * 2)\nassert data_container.expected_outputs.shape == (SHAPE_3D[0], SHAPE_3D[1], \n    SHAPE_3D[2] * 2)\nassert np.array_equal(data_container.data_inputs[(...), -SHAPE_3D[2]:],\n    data_container_3d_second.data_inputs)\nassert np.array_equal(data_container.expected_outputs[(...), -SHAPE_3D[2]:],\n    data_container_3d_second.expected_outputs)\n"
+}

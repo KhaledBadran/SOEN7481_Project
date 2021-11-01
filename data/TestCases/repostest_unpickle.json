@@ -1,0 +1,9 @@
+{
+    "functionName": "test_unpickle",
+    "className": null,
+    "fileName": "/bakwc_&_PySyncObj/test_syncobj.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data = {'foo': 'bar', 'command': b'\\xfa', 'entries': [b'\\xfb', b'\\xfc']}\npython2_cpickle = (\n    b'\\x80\\x02}q\\x01(U\\x03fooq\\x02U\\x03barq\\x03U\\x07commandq\\x04U\\x01\\xfaU\\x07entriesq\\x05]q\\x06(U\\x01\\xfbU\\x01\\xfceu.'\n    )\npython2_pickle = (\n    b'\\x80\\x02}q\\x00(U\\x03fooq\\x01U\\x03barq\\x02U\\x07commandq\\x03U\\x01\\xfaq\\x04U\\x07entriesq\\x05]q\\x06(U\\x01\\xfbq\\x07U\\x01\\xfcq\\x08eu.'\n    )\npython3_pickle = (\n    b'\\x80\\x02}q\\x00(X\\x03\\x00\\x00\\x00fooq\\x01X\\x03\\x00\\x00\\x00barq\\x02X\\x07\\x00\\x00\\x00commandq\\x03c_codecs\\nencode\\nq\\x04X\\x02\\x00\\x00\\x00\\xc3\\xbaq\\x05X\\x06\\x00\\x00\\x00latin1q\\x06\\x86q\\x07Rq\\x08X\\x07\\x00\\x00\\x00entriesq\\t]q\\n(h\\x04X\\x02\\x00\\x00\\x00\\xc3\\xbbq\\x0bh\\x06\\x86q\\x0cRq\\rh\\x04X\\x02\\x00\\x00\\x00\\xc3\\xbcq\\x0eh\\x06\\x86q\\x0fRq\\x10eu.'\n    )\npython2_cpickle_data = pickle.loads(python2_cpickle)\nassert data == python2_cpickle_data, 'Failed to unpickle data pickled by python2 cPickle'\npython2_pickle_data = pickle.loads(python2_pickle)\nassert data == python2_pickle_data, 'Failed to unpickle data pickled by python2 pickle'\npython3_pickle_data = pickle.loads(python3_pickle)\nassert data == python3_pickle_data, 'Failed to unpickle data pickled by python3 pickle'\npytest.mark.skipif(os.name == 'nt', reason='temporary disabled for windows')"
+}

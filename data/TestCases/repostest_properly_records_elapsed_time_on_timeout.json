@@ -1,0 +1,9 @@
+{
+    "functionName": "test_properly_records_elapsed_time_on_timeout",
+    "className": null,
+    "fileName": "/PearsonEducation_&_Alarmageddon/tests_&_validations_&_test_http.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "mock = slowserver_monkeypatch(monkeypatch, 4)\nval = HttpValidation.get(mock.host, timeout=3)\ntry:\n    val.perform({})\nexcept requests.exceptions.Timeout:\n    pass\nassert val._elapsed_time == 3\n"
+}

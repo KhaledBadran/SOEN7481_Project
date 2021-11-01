@@ -1,0 +1,9 @@
+{
+    "functionName": "test_default_generation_strategy_discrete",
+    "className": "TestAxClient",
+    "fileName": "/facebook_&_Ax/ax_&_service_&_tests_&_test_ax_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that Sobol is used if no GenerationStrategy is provided and\n        the search space is discrete.\n        \"\"\"\nax_client = AxClient()\nax_client.create_experiment(parameters=[{'name': 'x', 'type': 'choice',\n    'values': [1, 2, 3]}, {'name': 'y', 'type': 'choice', 'values': [1, 2, 3]}]\n    )\nself.assertEqual([s.model for s in not_none(ax_client.generation_strategy).\n    _steps], [Models.SOBOL])\nself.assertEqual(ax_client.get_max_parallelism(), [(-1, -1)])\nself.assertTrue(ax_client.get_trials_data_frame().empty)\n"
+}

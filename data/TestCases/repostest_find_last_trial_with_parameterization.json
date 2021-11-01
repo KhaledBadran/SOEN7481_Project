@@ -1,0 +1,9 @@
+{
+    "functionName": "test_find_last_trial_with_parameterization",
+    "className": "TestAxClient",
+    "fileName": "/facebook_&_Ax/ax_&_service_&_tests_&_test_ax_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ax_client = AxClient()\nax_client.create_experiment(name='test_experiment', parameters=[{'name':\n    'x', 'type': 'range', 'bounds': [-5.0, 10.0]}, {'name': 'y', 'type':\n    'range', 'bounds': [0.0, 15.0]}], minimize=True, objective_name='a')\nparams, trial_idx = ax_client.get_next_trial()\nfound_trial_idx = ax_client._find_last_trial_with_parameterization(\n    parameterization=params)\nself.assertEqual(found_trial_idx, trial_idx)\n_, new_trial_idx = ax_client.attach_trial(parameters=params)\nfound_trial_idx = ax_client._find_last_trial_with_parameterization(\n    parameterization=params)\nself.assertEqual(found_trial_idx, new_trial_idx)\nwith self.assertRaisesRegex(ValueError, 'No .* matches'):\n    found_trial_idx = ax_client._find_last_trial_with_parameterization(\n        parameterization={k: (v + 1.0) for k, v in params.items()})\n"
+}

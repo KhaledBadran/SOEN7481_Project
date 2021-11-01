@@ -1,0 +1,9 @@
+{
+    "functionName": "test_genomic_variant_batch_generator",
+    "className": null,
+    "fileName": "/goeckslab_&_Galaxy-ML/galaxy_ml_&_tests_&_test_sequences.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ref_genome_path = (\n    '/projects/selene/manuscript/case3/1_variant_effect_prediction/data/male.hg19.fasta'\n    )\nvcf_path = './tools/test-data/lt0.05_igap_100.vcf'\ngenerator = GenomicVariantBatchGenerator(ref_genome_path=ref_genome_path,\n    vcf_path=vcf_path, blacklist_regions='hg19', output_reference=False)\ngenerator1 = clone(generator)\ngot = list(generator1.get_params().keys())\nexpect = ['blacklist_regions', 'output_reference', 'ref_genome_path',\n    'seq_length', 'vcf_path']\nassert got == expect, got\ngenerator1.set_processing_attrs()\nreference_genome_ = generator1.reference_genome_\nstart_radius_ = generator1.start_radius_\nend_radius_ = generator1.end_radius_\nvariants = generator1.variants\nassert reference_genome_.__class__.__name__ == 'Genome'\nassert start_radius_ == 500, start_radius_\nassert end_radius_ == 500, end_radius_\nassert len(variants) == 101, len(variants)\ngen_flow = generator1.flow(batch_size=4)\nn_batches = len(gen_flow)\nbatch_X = next(gen_flow)\nwith np.load('./tools/test-data/vcf_batch1.npz', 'r') as data:\n    expect_X = data['arr_0']\nassert n_batches == 26, n_batches\nassert np.array_equal(batch_X, expect_X), batch_X\ngenerator2 = clone(generator)\ngenerator2.set_params(output_reference=True)\ngenerator2.set_processing_attrs()\ngen_flow = generator2.flow(batch_size=4)\nbatch_X = next(gen_flow)\nwith np.load('./tools/test-data/vcf_batch2.npz', 'r') as data:\n    expect_X = data['arr_0']\ngenerator2.close()\nassert np.array_equal(batch_X, expect_X), batch_X\nnottest"
+}

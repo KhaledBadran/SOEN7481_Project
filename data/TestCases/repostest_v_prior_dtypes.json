@@ -1,0 +1,9 @@
+{
+    "functionName": "test_v_prior_dtypes",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_test_base_prior.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with gpflow.config.as_context():\n    set_default_float(np.float32)\n    m = model_class(*args)\n    assert m.V.prior.dtype == np.float32\n    set_default_float(np.float64)\n    m = model_class(*args)\n    assert m.V.prior.dtype == np.float64\npytest.mark.parametrize('model_class, args', [(gpflow.models.GPMC,\n    get_gpmc_model_params())])"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_restore_claim_set_with_optional_claims",
+    "className": "EasyJWTTest",
+    "fileName": "/BMeu_&_EasyJWT/tests_&_easyjwt_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n            Test restoring a claim set if optional claims are given.\n\n            Expected Result: The values in the claim set are correctly mapped to their respective instance variables.\n                             The date values are converted to `datetime` objects.\n        \"\"\"\nexp_timestamp = int(self.expiration_date.replace(tzinfo=timezone.utc).\n    timestamp())\niat_timestamp = int(self.issued_at_date.replace(tzinfo=timezone.utc).\n    timestamp())\nnbf_timestamp = int(self.not_before_date.replace(tzinfo=timezone.utc).\n    timestamp())\nclaim_set = dict(_easyjwt_class='EasyJWT', aud=self.audience, exp=\n    exp_timestamp, iat=iat_timestamp, iss=self.issuer, jti=self.JWT_ID, nbf\n    =nbf_timestamp, sub=self.subject)\neasyjwt = EasyJWT(self.key)\neasyjwt._restore_claim_set(claim_set)\nself.assertEqual(self.audience, easyjwt.audience)\nself.assertEqual(self.expiration_date, easyjwt.expiration_date)\nself.assertEqual(self.issued_at_date, easyjwt.issued_at_date)\nself.assertEqual(self.issuer, easyjwt.issuer)\nself.assertEqual(self.JWT_ID, easyjwt.JWT_ID)\nself.assertEqual(self.not_before_date, easyjwt.not_before_date)\nself.assertEqual(self.subject, easyjwt.subject)\n"
+}

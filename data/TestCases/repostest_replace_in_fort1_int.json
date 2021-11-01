@@ -1,0 +1,9 @@
+{
+    "functionName": "test_replace_in_fort1_int",
+    "className": null,
+    "fileName": "/mortele_&_OccamTools/test_&_test_replace_in_fort1.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "out_file_name = os.path.join(os.path.dirname(file_name), 'fort.1_int')\nfor steps, atoms in zip([54144, 901, 129, 598], [90, 1598, 2515, 1001]):\n    replace_in_fort1(file_name, out_file_name, atoms=atoms, number_of_steps\n        =steps)\n    fort1_new = Fort1(out_file_name)\n    fort1_new.read_file(silent=True)\n    assert fort1_new.n_particles == atoms\n    assert fort1_new.n_time_steps == steps\n    _assert_fort1s_equal_ignore(fort1, fort1_new, 'n_particles', 'n_time_steps'\n        )\nos.remove(out_file_name)\n"
+}

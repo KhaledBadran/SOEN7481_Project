@@ -1,0 +1,9 @@
+{
+    "functionName": "test_hyperparameter_opt",
+    "className": "TestGaussianKernel",
+    "fileName": "/SUNCAT-Center_&_CatLearn/test_&_test_gradients.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "kdict = [{'type': 'gaussian', 'width': width, 'scaling': scaling}]\ngp_hyp = GaussianProcess(kernel_list=kdict, train_fp=train, train_target=\n    target, gradients=gradients, scale_data=True, optimize_hyperparameters=\n    False, regularization=np.sqrt(0.001))\ngp_hyp.optimize_hyperparameters(global_opt=False)\nbigKtilde_hyp = np.linalg.inv(gp_hyp.cinv)\nbigKdg_hyp = bigKtilde_hyp[n_train:n_train + n_train * D, :n_train]\nbigKgd_hyp = bigKtilde_hyp[:n_train, n_train:n_train + n_train * D]\nprint('Checking block matrices bigKgd and bigKdg (opt. hyper.).')\nnp.testing.assert_array_almost_equal(bigKdg_hyp, bigKgd_hyp.T, decimal=10)\n"
+}

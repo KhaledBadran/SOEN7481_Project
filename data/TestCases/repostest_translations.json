@@ -1,0 +1,9 @@
+{
+    "functionName": "test_translations",
+    "className": "TestCells",
+    "fileName": "/mit-crpg_&_OpenMOC/tests_&_unit_tests_&_test_cells.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "translation = np.array([6, 2, 1])\nwith self.assertRaises(Exception):\n    self.cell.setTranslation(np.array([0, 2.0]))\nmaterial = openmoc.Material()\nself.cell.setFill(material)\nwith self.assertRaises(Exception):\n    self.cell.setTranslation(translation)\nuniverse = openmoc.Universe()\nself.cell.setFill(universe)\nself.cell.setTranslation(translation)\noutput = self.cell.retrieveTranslation(3)\nnp.testing.assert_array_almost_equal(translation, output, 10)\n"
+}

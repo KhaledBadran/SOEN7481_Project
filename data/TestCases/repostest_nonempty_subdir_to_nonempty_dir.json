@@ -1,0 +1,9 @@
+{
+    "functionName": "test_nonempty_subdir_to_nonempty_dir",
+    "className": "TestDryRun",
+    "fileName": "/kenfar_&_DataGristle/scripts_&_tests_&_test_gristle_dir_merger_cmd.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"starting dirs & files:\n            \tmp\\\\TestGristleDirMerger_source_?\\\\mysubdir\n            \tmp\\\\TestGristleDirMerger_source_?\\\\mysubdir\foo.csv\n            \tmp\\\\TestGristleDirMerger_dest_???\\\\mysubdir\bar.csv\n           should become:\n            \tmp\\\\TestGristleDirMerger_source_?\n            \tmp\\\\TestGristleDirMerger_source_?\\\\mysubdir\foo.csv\n            \tmp\\\\TestGristleDirMerger_dest_???\\\\mysubdir\bar.csv\n        \"\"\"\nsource_subdir = os.path.join(self.source_dir, 'mysubdir')\nos.mkdir(source_subdir)\ntt.touch(os.path.join(source_subdir, 'foo.csv'))\ndest_subdir = os.path.join(self.dest_dir, 'mysubdir')\nos.mkdir(dest_subdir)\ntt.touch(os.path.join(dest_subdir, 'bar.csv'))\nself.cmd = (\n    '%(pgm)s %(source_dir)s                                     %(dest_dir)s                                  --match-on-name-only                               --dry-run                                          --log-level debug                            '\n     % {'pgm': PGM, 'source_dir': self.source_dir, 'dest_dir': self.dest_dir})\nself.executor(self.cmd)\nassert 'mysubdir' in os.listdir(self.dest_dir)\nassert 'bar.csv' in os.listdir(os.path.join(self.dest_dir, 'mysubdir'))\nassert 'mysubdir' in os.listdir(self.source_dir)\nassert 'foo.csv' in os.listdir(os.path.join(self.source_dir, 'mysubdir'))\n"
+}

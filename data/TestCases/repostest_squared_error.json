@@ -1,0 +1,9 @@
+{
+    "functionName": "test_squared_error",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_test_objectives.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from lasagne.objectives import squared_error\nif not colvect:\n    a, b = theano.tensor.matrices('ab')\n    c = squared_error(a, b)\nelse:\n    a, b = theano.tensor.vectors('ab')\n    c = squared_error(a.dimshuffle(0, 'x'), b)[:, (0)]\nfloatX = theano.config.floatX\nshape = (10, 20) if not colvect else (10,)\nx = np.random.rand(*shape).astype(floatX)\ny = np.random.rand(*shape).astype(floatX)\nz = (x - y) ** 2\nassert np.allclose(z, c.eval({a: x, b: y}))\npytest.mark.parametrize('colvect', (False, True))"
+}

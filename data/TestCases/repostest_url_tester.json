@@ -1,0 +1,9 @@
+{
+    "functionName": "test_url_tester",
+    "className": null,
+    "fileName": "/PlaidWeb_&_Authl/tests_&_test_flask_wrapper.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "app = flask.Flask(__name__)\napp.secret_key = 'qwer'\nauthl.flask.setup(app, {'TEST_ENABLED': True}, tester_path='/test')\nwith app.test_request_context('http://example.site/'):\n    test_url = flask.url_for('authl.test')\nwith app.test_client() as client:\n    assert json.loads(client.get(test_url).data) is None\n    assert json.loads(client.get(test_url + '?url=nope').data) is None\n    assert json.loads(client.get(test_url + '?url=test:foo').data) == {'name':\n        'Loopback', 'url': 'test:foo'}\n"
+}

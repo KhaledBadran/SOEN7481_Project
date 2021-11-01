@@ -1,0 +1,9 @@
+{
+    "functionName": "test_binary_hinge_loss_sigmoid_predictions",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_test_objectives.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from lasagne.objectives import binary_hinge_loss\np = theano.tensor.vector('p')\nt = theano.tensor.ivector('t')\nc = binary_hinge_loss(p, t, log_odds=False)\nfloatX = theano.config.floatX\npredictions = np.random.rand(10).astype(floatX)\ntargets = np.random.random_integers(0, 1, (10,)).astype('int8')\ntargets2 = 2 * targets - 1\nhinge = np.maximum(0, 1 - np.log(predictions / (1 - predictions)) * targets2)\nassert np.allclose(hinge, c.eval({p: predictions, t: targets}))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_identity_management",
+    "className": "TestPibImpl",
+    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_pib_impl.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "for fixture in self.pibImpls:\n    pib = fixture.pib\n    try:\n        pib.getDefaultIdentity()\n        self.fail('Did not throw the expected exception')\n    except Pib.Error:\n        pass\n    else:\n        self.fail('Did not throw the expected exception')\n    self.assertEqual(False, pib.hasIdentity(fixture.id1))\n    pib.addIdentity(fixture.id1)\n    self.assertEqual(True, pib.hasIdentity(fixture.id1))\n    try:\n        pib.getDefaultIdentity()\n    except Exception as ex:\n        self.fail('Unexpected exception: ' + str(ex))\n    self.assertEqual(fixture.id1, pib.getDefaultIdentity())\n    pib.addIdentity(fixture.id2)\n    self.assertEqual(True, pib.hasIdentity(fixture.id2))\n    self.assertEqual(fixture.id1, pib.getDefaultIdentity())\n    pib.setDefaultIdentity(fixture.id2)\n    self.assertEqual(fixture.id2, pib.getDefaultIdentity())\n    pib.removeIdentity(fixture.id2)\n    self.assertEqual(False, pib.hasIdentity(fixture.id2))\n    try:\n        pib.getDefaultIdentity()\n        self.fail('Did not throw the expected exception')\n    except Pib.Error:\n        pass\n    else:\n        self.fail('Did not throw the expected exception')\n    pib.setDefaultIdentity(fixture.id2)\n    self.assertEqual(fixture.id2, pib.getDefaultIdentity())\n    idNames = pib.getIdentities()\n    self.assertEqual(2, len(idNames))\n    self.assertTrue(fixture.id1 in idNames)\n    self.assertTrue(fixture.id2 in idNames)\n"
+}

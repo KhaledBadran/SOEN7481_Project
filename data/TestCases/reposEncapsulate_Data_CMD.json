@@ -1,0 +1,9 @@
+{
+    "functionName": "Encapsulate_Data_CMD",
+    "className": "Transmit_Insert_Data_Queue_Class",
+    "fileName": "/FaradayRF_&_Faraday-Software/faraday_&_uart_&_layer_2_protocol.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "self.fragment_data_list = []\nself.fragment_data_list.append(chr(0))\nif len(chr(command)) == 1:\n    self.fragment_data_list.append(chr(0) + chr(command))\nelse:\n    return 'ERROR - Command Attempt Length'\nfor i in range(0, len(self.fragment_data_list), 1):\n    self.fragment_data_list[i] = self.fragment_data_list[i].replace(escapebyte,\n        escapebyte + escapebyte)\n    self.fragment_data_list[i] = self.fragment_data_list[i].replace(startbyte,\n        escapebyte + startbyte)\n    self.fragment_data_list[i] = self.fragment_data_list[i].replace(stopbyte,\n        escapebyte + stopbyte)\n    self.fragment_data_list[i] = startbyte + self.fragment_data_list[i]\n    self.fragment_data_list[i] = self.fragment_data_list[i] + stopbyte\n    self.tx_packet_queue.put(self.fragment_data_list[i])\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_key_errors_on_validate_inputs",
+    "className": null,
+    "fileName": "/comp-org_&_COMP-Developer-Toolkit/cs_kit_&_tests_&_test_FunctionsTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class TestFunctions(CoreTestFunctions):\n    get_version = get_version\n    get_inputs = get_inputs\n    validate_inputs = lambda *args: 'hello world'\n    run_model = run_model\n    ok_adjustment = {'mock': {'model_param': 2}}\n    bad_adjustment = {'mock': {'model_param': 'not an int'}}\nft = TestFunctions()\nwith pytest.raises(CSKitError):\n    ft.test_validate_inputs()\nclass TestFunctions(CoreTestFunctions):\n    get_version = get_version\n    get_inputs = get_inputs\n    validate_inputs = lambda *args: {'heyo': {}}\n    run_model = run_model\n    ok_adjustment = {'mock': {'model_param': 2}}\n    bad_adjustment = {'mock': {'model_param': 'not an int'}}\nft = TestFunctions()\nwith pytest.raises(CSKitError):\n    ft.test_validate_inputs()\nclass TestFunctions(CoreTestFunctions):\n    get_version = get_version\n    get_inputs = get_inputs\n    validate_inputs = lambda *args: {'errors_warnings': {},\n        'custom_adjustment': {}, 'heyo': 2}\n    run_model = run_model\n    ok_adjustment = {'mock': {'model_param': 2}}\n    bad_adjustment = {'mock': {'model_param': 'not an int'}}\nft = TestFunctions()\nwith pytest.raises(CSKitError):\n    ft.test_validate_inputs()\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_method_create__delete",
+    "className": "test_API_Gateway",
+    "fileName": "/pbx-gs_&_OSBot-AWS/tests_&_unit_&_apis_&_test_API_Gateway.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "api_name = 'temp-unit-test-api'\npath = '/'\nmethod = 'POST'\napi_id = self.api_gateway.rest_api_create(api_name).get('id')\nresource_id = self.api_gateway.resource(api_id, path).get('id')\nself.result = self.api_gateway.method_create(api_id, resource_id, method)\nassert method in self.api_gateway.resource_methods(api_id, path)\nself.result = self.api_gateway.method_delete(api_id, resource_id, method)\nassert [] == self.api_gateway.resource_methods(api_id, path)\nself.api_gateway.rest_api_delete(api_id)\n"
+}

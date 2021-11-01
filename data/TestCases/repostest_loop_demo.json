@@ -1,0 +1,9 @@
+{
+    "functionName": "test_loop_demo",
+    "className": "TestLoop",
+    "fileName": "/whiteclover_&_Choco/test_&_test_loop.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "template = Template(\n    \"\"\"x|index|reverse_index|first|last|cycle|even|odd\n% for x in 'ham':\n${x}|${loop.index}|${loop.reverse_index}|${loop.first}|${loop.last}|${loop.cycle('even', 'odd')}|${loop.even}|${loop.odd}\n% endfor\"\"\"\n    )\nexpected = ['x|index|reverse_index|first|last|cycle|even|odd',\n    'h|0|2|True|False|even|True|False', 'a|1|1|False|False|odd|False|True',\n    'm|2|0|False|True|even|True|False']\ncode = template.code\nassert 'loop = __M_loop._enter(' in code, 'Generated a loop context since the loop variable was accessed'\nrendered = template.render()\nprint(rendered)\nfor line in expected:\n    assert line in rendered, 'Loop variables give information about the progress of the loop'\n"
+}

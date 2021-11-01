@@ -1,0 +1,9 @@
+{
+    "functionName": "interpolation",
+    "className": "TestFlowOneStation",
+    "fileName": "/clebsonpy_&_HydroComp/test_&_test_iha_&_test_cha.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "nulls = flow_sar.data['D19086'].isnull()\ndate_start = flow_sar.data.loc[nulls].index[0] - pd.timedelta_range(start=\n    '1 day', periods=1, freq='D')\ndate_end = flow_sar.data.loc[nulls].index[-1]\ndate_range = pd.date_range(start=date_start.values[0], end=date_end)\ndelta = None\nfor date in date_range:\n    if nulls[date]:\n        flow_sar.data['D19086'][date] = flow_ana.data['66231000'][date] + delta\n    delta = flow_sar.data['D19086'][date] - flow_ana.data['66231000'][date]\nreturn flow_sar\nstaticmethod"
+}

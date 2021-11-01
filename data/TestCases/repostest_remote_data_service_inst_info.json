@@ -1,0 +1,9 @@
+{
+    "functionName": "test_remote_data_service_inst_info",
+    "className": null,
+    "fileName": "/quantOS-org_&_JAQS/test_&_test_dataservice.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sec = '000001.SZ'\nres = ds.query_inst_info(sec, fields=\n    'status,selllot,buylot,pricetick,multiplier,product')\nassert res.at[sec, 'multiplier'] == 1\nassert abs(res.at[sec, 'pricetick'] - 0.01) < 0.01\nassert res.at[sec, 'buylot'] == 100\nres = ds.query_inst_info('000001.SH')\nassert not res.empty\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_is_allowed_allow_owner_not_owner",
+    "className": "TestKmipEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that an access check resulting in an \"Allow Owner\" policy is\n        processed correctly when the user requesting access is not the owner.\n        \"\"\"\ne = engine.KmipEngine()\ne.get_relevant_policy_section = mock.Mock(return_value={enums.ObjectType.\n    SYMMETRIC_KEY: {enums.Operation.GET: enums.Policy.ALLOW_OWNER}})\nresult = e.is_allowed('test_policy', 'test_user_A', 'test_group',\n    'test_user_B', enums.ObjectType.SYMMETRIC_KEY, enums.Operation.GET)\nself.assertFalse(result)\n"
+}

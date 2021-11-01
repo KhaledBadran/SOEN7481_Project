@@ -1,0 +1,9 @@
+{
+    "functionName": "comm",
+    "className": null,
+    "fileName": "/NASA_&_MLMCPy/tests_&_mlmc_&_test_MLMCSimulator.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Creates a MPI.COMM_WORLD object for working with multi-process information.\n    \"\"\"\ntry:\n    imp.find_module('mpi4py')\n    from mpi4py import MPI\n    return MPI.COMM_WORLD\nexcept ImportError:\n\n\n    class FakeCOMM:\n\n        def __init__(self):\n            self.size = 1\n            self.rank = 0\n\n        @staticmethod\n        def allgather(thing):\n            return np.array([thing])\n    return FakeCOMM()\npytest.fixture"
+}

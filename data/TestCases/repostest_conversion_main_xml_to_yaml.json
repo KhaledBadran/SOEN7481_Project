@@ -1,0 +1,9 @@
+{
+    "functionName": "test_conversion_main_xml_to_yaml",
+    "className": "TestConverterMain",
+    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_converters.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test detection in converter for xml->yaml\n        \"\"\"\nfile_path = os.path.join('testfile_st.xml')\nfilename = pkg_resources.resource_filename(__name__, file_path)\nfile_author = 'Kyle E Niemeyer'\nfile_author_orcid = '0000-0003-4425-7097'\nwith TemporaryDirectory() as temp_dir:\n    newfile = os.path.join(temp_dir, 'test.yaml')\n    with pytest.warns(UserWarning) as record:\n        main(['-i', filename, '-o', newfile, '-fa', file_author, '-fo',\n            file_author_orcid])\n    c = ChemKED(yaml_file=newfile)\nm = str(record.pop(UserWarning).message)\nassert m == 'Using DOI to obtain reference information, rather than preferredKey.'\ntrue_yaml = pkg_resources.resource_filename(__name__, os.path.join(\n    'testfile_st.yaml'))\nc_true = ChemKED(yaml_file=true_yaml)\nassert c.file_authors[0]['name'] == c_true.file_authors[0]['name']\nassert c.file_authors[1]['name'] == file_author\nassert c.file_authors[1]['ORCID'] == file_author_orcid\nassert c.reference.detail == 'Converted from ReSpecTh XML file {}'.format(\n    file_path)\nassert c.apparatus.kind == c_true.apparatus.kind\nassert c.experiment_type == c_true.experiment_type\nassert c.reference.doi == c_true.reference.doi\nassert len(c.datapoints) == len(c_true.datapoints)\n"
+}

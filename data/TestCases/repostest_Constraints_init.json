@@ -1,0 +1,9 @@
+{
+    "functionName": "test_Constraints_init",
+    "className": null,
+    "fileName": "/bytesandbrains_&_ProcessOptimizer/ProcessOptimizer_&_tests_&_test_constraints.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "space = Space([Real(1, 10), Real(1, 10), Real(1, 10), Integer(0, 10),\n    Integer(0, 10), Integer(0, 10), Categorical(list('abcdefg')),\n    Categorical(list('abcdefg')), Categorical(list('abcdefg'))])\ncons_list = [Single(0, 5.0, 'real'), Inclusive(1, (3.0, 5.0), 'real'),\n    Exclusive(2, (3.0, 5.0), 'real'), Single(3, 5, 'integer'), Inclusive(4,\n    (3, 5), 'integer'), Exclusive(5, (3, 5), 'integer'), Single(6, 'b',\n    'categorical'), Inclusive(7, ('c', 'd', 'e'), 'categorical'), Exclusive\n    (8, ('c', 'd', 'e'), 'categorical'), Inclusive(4, (7, 9), 'integer'),\n    Exclusive(5, (7, 9), 'integer')]\ncons = Constraints(cons_list, space)\nassert_equal(cons.space, space)\nassert_equal(cons.constraints_list, cons_list)\nassert_equal(len(cons.single), space.n_dims)\nassert_equal(cons.single[1], None)\nassert_equal(cons.single[-1], None)\nassert_not_equal(cons.single[0], None)\nassert_not_equal(cons.single[6], None)\nassert_equal(len(cons.inclusive), space.n_dims)\nassert_equal(cons.inclusive[0], [])\nassert_equal(cons.inclusive[2], [])\nassert_not_equal(not cons.inclusive[1], [])\nassert_not_equal(not cons.inclusive[7], [])\nassert_equal(len(cons.inclusive[4]), 2)\nassert_equal(len(cons.exclusive), space.n_dims)\nassert_equal(cons.exclusive[3], [])\nassert_equal(cons.exclusive[7], [])\nassert_not_equal(cons.exclusive[2], [])\nassert_not_equal(cons.exclusive[5], [])\nassert_equal(len(cons.exclusive[5]), 2)\npytest.mark.fast_test"
+}

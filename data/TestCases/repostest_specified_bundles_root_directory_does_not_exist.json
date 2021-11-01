@@ -1,0 +1,9 @@
+{
+    "functionName": "test_specified_bundles_root_directory_does_not_exist",
+    "className": null,
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_BundleTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with tempfile.TemporaryDirectory(prefix=__name__ + '.') as tempdir:\n    bundles_directory = p(tempdir, 'bundles')\n    b = Bundle('example', bundles_directory=bundles_directory)\n    with pytest.raises(BundleNotFound, match='Bundle directory'):\n        b._get_bundle_directory()\n"
+}

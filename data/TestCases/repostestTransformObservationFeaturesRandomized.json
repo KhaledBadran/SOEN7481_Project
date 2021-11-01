@@ -1,0 +1,9 @@
+{
+    "functionName": "testTransformObservationFeaturesRandomized",
+    "className": "IntToFloatTransformTest",
+    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_int_to_float_transform.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "observation_features = [ObservationFeatures(parameters={'x': 2.2, 'a': 2,\n    'b': 'b', 'd': 4})]\nobs_ft2 = deepcopy(observation_features)\nobs_ft2 = self.t2.transform_observation_features(obs_ft2)\nself.assertEqual(obs_ft2, [ObservationFeatures(parameters={'x': 2.2, 'a': 2,\n    'b': 'b', 'd': 4})])\nself.assertTrue(isinstance(obs_ft2[0].parameters['a'], float))\nself.assertTrue(isinstance(obs_ft2[0].parameters['d'], float))\nobs_ft2 = self.t2.untransform_observation_features(obs_ft2)\nself.assertEqual(obs_ft2, observation_features)\n"
+}

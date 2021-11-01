@@ -1,0 +1,9 @@
+{
+    "functionName": "test_forward_multiple",
+    "className": "TestSimple",
+    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_test_simple_integration.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from bigdl.nn.layer import Linear\nrng = RNG()\nrng.set_seed(100)\ninput = [rng.uniform(0.0, 0.1, [2]), rng.uniform(0.0, 0.1, [2]) + 0.2]\ngrad_output = [rng.uniform(0.0, 0.1, [3]), rng.uniform(0.0, 0.1, [3]) + 0.2]\nlinear1 = Linear(2, 3)\nlinear2 = Linear(2, 3)\nmodule = ParallelTable()\nmodule.add(linear1)\nmodule.add(linear2)\nmodule.forward(input)\nmodule.backward(input, grad_output)\n"
+}

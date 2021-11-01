@@ -1,0 +1,9 @@
+{
+    "functionName": "_showQ",
+    "className": "ScenarioImage",
+    "fileName": "/hughperkins_&_DeepCL/python_&_test_qlearning.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        can do nothing, or it can print the current q\n        values somehow.\n        This provides no information to the qlearning module: it's\n        simply an opportunity for you to see how the q value look\n        occasionally\n        \"\"\"\nnet = self.net\nprint('q directions:')\nsize = self.size\nself.netinput.fill(0)\nself.netinput[0, self.appleY, self.appleX] = 1\nfor y in range(size):\n    thisLine = ''\n    for x in range(size):\n        highestQ = 0\n        bestAction = 0\n        self.netinput[1, y, x] = 1\n        net.forward(self.netinput)\n        self.netinput[1, y, x] = 0\n        output = net.getOutput()\n        for action in range(4):\n            thisQ = output[action]\n            if action == 0 or thisQ > highestQ:\n                highestQ = thisQ\n                bestAction = action\n        if bestAction == 0:\n            thisLine += '>'\n        elif bestAction == 1:\n            thisLine += '<'\n        elif bestAction == 2:\n            thisLine += 'V'\n        else:\n            thisLine += '^'\n    print(thisLine)\n"
+}

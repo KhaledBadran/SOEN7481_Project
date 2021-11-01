@@ -1,0 +1,9 @@
+{
+    "functionName": "test_faqueue_alert",
+    "className": "TestCase",
+    "fileName": "/IntegralDefense_&_ACE/lib_&_saq_&_modules_&_test_intel.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "if not saq.CONFIG['sip'].getboolean('enabled'):\n    return\nroot = create_root_analysis(analysis_mode=ANALYSIS_MODE_CORRELATION,\n    alert_type=ANALYSIS_TYPE_FAQUEUE)\nroot.initialize_storage()\nroot.details = {'indicator': {'sip_id': '1'}}\nroot.save()\nroot.schedule()\nengine = TestEngine(local_analysis_modes=[ANALYSIS_MODE_CORRELATION])\nengine.enable_module('analysis_module_faqueue_sip_alert_analyzer',\n    ANALYSIS_MODE_CORRELATION)\nengine.controlled_stop()\nengine.start()\nengine.wait()\nroot = RootAnalysis(storage_dir=root.storage_dir)\nroot.load()\nALERT(root)\nset_dispositions([root.uuid], DISPOSITION_FALSE_POSITIVE, UNITTEST_USER_ID)\nengine = TestEngine(local_analysis_modes=[ANALYSIS_MODE_CORRELATION,\n    ANALYSIS_MODE_DISPOSITIONED])\nengine.enable_module('analysis_module_faqueue_sip_alert_analyzer', [\n    ANALYSIS_MODE_CORRELATION, ANALYSIS_MODE_DISPOSITIONED])\nengine.controlled_stop()\nengine.start()\nengine.wait()\nself.assertEquals(log_count('updating sip_id 1 to status Informational'), 1)\nset_dispositions([root.uuid], DISPOSITION_WEAPONIZATION, UNITTEST_USER_ID)\nengine = TestEngine(local_analysis_modes=[ANALYSIS_MODE_CORRELATION,\n    ANALYSIS_MODE_DISPOSITIONED])\nengine.enable_module('analysis_module_faqueue_sip_alert_analyzer', [\n    ANALYSIS_MODE_CORRELATION, ANALYSIS_MODE_DISPOSITIONED])\nengine.controlled_stop()\nengine.start()\nengine.wait()\nself.assertEquals(log_count('updating sip_id 1 to status Analyzed'), 1)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_load_project_with_name_conflict",
+    "className": "WorkspaceTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_utils_&_WorkspaceTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.ws.clear()\nproj = self.ws.new_project(name='test')\npn = op.network.Cubic(shape=[3, 3, 3], project=proj)\nop.phases.Air(network=pn)\nself.ws.save_project(proj, filename='test.pnm')\nself.ws.load_project('test.pnm')\nassert set(self.ws.keys()) == set(['test', 'sim_01'])\nos.remove('test.pnm')\n"
+}

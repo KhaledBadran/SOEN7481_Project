@@ -1,0 +1,9 @@
+{
+    "functionName": "test_move_blastn_files",
+    "className": null,
+    "fileName": "/BFSSI-Bioinformatics-Lab_&_EnteroTyper/EnteroTyper_&_tests_&_test_typer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "outdir = Path(tempfile.mkdtemp())\nindir = Path(tempfile.mkdtemp())\nblastn_file = tempfile.NamedTemporaryFile(mode='w+', dir=indir, encoding=\n    'utf-8', suffix='.BLASTn')\nblastn_file.write('tmp')\nblastn_file.flush()\nassert len(list(indir.glob('*.BLASTn'))) != 0\nmove_blastn_files(indir=indir, outdir=outdir)\nassert len(list(outdir.glob('*.BLASTn'))) != 0\nshutil.rmtree(outdir)\nshutil.rmtree(indir)\n"
+}

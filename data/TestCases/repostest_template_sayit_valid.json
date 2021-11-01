@@ -1,0 +1,9 @@
+{
+    "functionName": "test_template_sayit_valid",
+    "className": null,
+    "fileName": "/mrf345_&_flask_gtts_&_/tests_&_integration.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" test validity of mp3 file from template sayit \"\"\"\nbase_dir = app.static_folder\nfile_name = 'testing.mp3'\nfile_path = os.path.join(base_dir, file_name)\nstatic_file_relative = client.get('/say').data[1:].decode('utf-8')\nstatic_file_path = os.path.join(eng.tempdir, os.path.basename(\n    static_file_relative))\ngTTS(text=text, lang=language).save(file_path)\nwith open(static_file_path, 'rb') as resp:\n    with open(file_path, 'rb') as default:\n        assert resp.read() == default.read()\n"
+}

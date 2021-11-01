@@ -1,0 +1,9 @@
+{
+    "functionName": "test_group_by_site",
+    "className": "TestMungeForPlotting",
+    "fileName": "/PmagPy_&_PmagPy/pmagpy_tests_&_test_contribution_builder.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "dmag_dir = os.path.join(WD, 'data_files', 'dmag_magic')\nstatus, meas_data = cb.add_sites_to_meas_table(dmag_dir)\nself.assertTrue(status)\nself.assertIn('site', meas_data.columns)\nosler_dir = os.path.join(WD, 'data_files', '3_0', 'Osler')\nstatus, warning = cb.add_sites_to_meas_table(osler_dir)\nself.assertFalse(status)\nself.assertEqual(warning,\n    'You are missing measurements, specimens, samples tables')\nmcmurdo_dir = os.path.join(WD, 'data_files', '3_0', 'McMurdo')\nstatus, meas_data = cb.add_sites_to_meas_table(mcmurdo_dir)\nself.assertTrue(status)\nself.assertIn('site', meas_data.columns)\norientation_dir = os.path.join(WD, 'data_files', 'orientation_magic')\nipmag.orientation_magic(orient_file='orient_example.txt', output_dir_path=\n    orientation_dir, input_dir_path=orientation_dir)\nstatus, warning = cb.add_sites_to_meas_table(orientation_dir)\nself.assertFalse(status)\nself.assertEqual(warning, 'You are missing measurements, specimens tables')\n"
+}

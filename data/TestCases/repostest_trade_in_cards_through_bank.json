@@ -1,0 +1,9 @@
+{
+    "functionName": "test_trade_in_cards_through_bank",
+    "className": "TestGame",
+    "fileName": "/josefwaller_&_PyCatan/tests_&_test_game.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "g = Game()\ng.players[0].add_cards([ResCard.Wood] * 4)\nres = g.trade_to_bank(player=0, cards=[ResCard.Wood] * 4, request=ResCard.Wheat\n    )\nassert res == Statuses.ALL_GOOD\nassert not g.players[0].has_cards([ResCard.Wood])\nassert g.players[0].has_cards([ResCard.Wheat])\nres = g.trade_to_bank(player=0, cards=[ResCard.Brick] * 4, request=ResCard.Ore)\nassert res == Statuses.ERR_CARDS\nassert not g.players[0].has_cards([ResCard.Ore])\ng.players[0].add_cards([ResCard.Brick] * 3)\nres = g.trade_to_bank(player=0, cards=[ResCard.Brick] * 4, request=ResCard.\n    Sheep)\nassert res == Statuses.ERR_CARDS\nassert g.players[0].has_cards([ResCard.Brick] * 3)\nassert not g.players[0].has_cards([ResCard.Sheep])\n"
+}

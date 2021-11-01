@@ -1,0 +1,9 @@
+{
+    "functionName": "test_next_prev_specimen",
+    "className": "TestDemagGUI",
+    "fileName": "/PmagPy_&_PmagPy/pmagpy_tests_&_test_demag_gui.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "next_evt = wx.PyCommandEvent(wx.EVT_BUTTON.typeId, self.frame.nextbutton.\n    GetId())\nprev_evt = wx.PyCommandEvent(wx.EVT_BUTTON.typeId, self.frame.prevbutton.\n    GetId())\ns_old = self.frame.s\nself.frame.ProcessEvent(next_evt)\nself.assertNotEqual(self.frame.s, s_old)\nself.frame.ProcessEvent(prev_evt)\nself.assertEqual(self.frame.s, s_old)\nedit_menu = self.get_menu_from_frame(self.frame, 'Edit')\nnext_menu_evt = wx.PyCommandEvent(wx.EVT_MENU.typeId, edit_menu.FindItem(\n    '&Next Specimen\\tCtrl-Right'))\nprev_menu_evt = wx.PyCommandEvent(wx.EVT_MENU.typeId, edit_menu.FindItem(\n    '&Previous Specimen\\tCtrl-Left'))\ns_old = self.frame.s\nself.frame.ProcessEvent(next_menu_evt)\nself.assertNotEqual(self.frame.s, s_old)\nself.frame.ProcessEvent(prev_menu_evt)\nself.assertEqual(self.frame.s, s_old)\nself.frame.ProcessEvent(prev_evt)\nself.assertEqual(self.frame.s, self.frame.specimens[-1])\nself.frame.ProcessEvent(next_evt)\nself.assertEqual(self.frame.s, self.frame.specimens[0])\n"
+}

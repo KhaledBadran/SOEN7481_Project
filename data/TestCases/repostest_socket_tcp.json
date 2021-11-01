@@ -1,0 +1,9 @@
+{
+    "functionName": "test_socket_tcp",
+    "className": null,
+    "fileName": "/Carbyne-Solutions_&_logrdis/tests_&_test_socket.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test the TCP server.\"\"\"\nserver = log_server('tcp')\nsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\nLOGGER.debug('Sending test message to localhost:4444')\nsock.connect(('localhost', 4444))\nsock.send(sample_entry.encode())\nsock.close()\ntime.sleep(1)\ncfg = test_yaml()\nresults = query_check(cfg)\nfor res in results:\n    assert re.search('[\\\\d\\\\w\\\\:]+', res['mac_source'])\nserver.stop()\n"
+}

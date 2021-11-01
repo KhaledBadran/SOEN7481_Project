@@ -1,0 +1,9 @@
+{
+    "functionName": "test_parameters_get_binders_list_types_default_from_query_optional",
+    "className": null,
+    "fileName": "/RobertoPrevato_&_BlackSheep/tests_&_test_normalization.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "def handler(a: Optional[List[str]]):\n    ...\nbinders = get_binders(Route(b'/', handler), {})\nassert all(isinstance(binder, FromQuery) for binder in binders)\nassert all(binder.required is False for binder in binders)\nassert binders[0].name == 'a'\nassert binders[0].expected_type == List[str]\n"
+}

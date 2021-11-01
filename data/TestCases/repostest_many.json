@@ -1,0 +1,9 @@
+{
+    "functionName": "test_many",
+    "className": null,
+    "fileName": "/halcy_&_Mastodon.py/tests_&_test_streaming.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "listener = Listener()\nstream = [line for event in events for line in event]\nlistener.handle_stream_(stream)\nassert listener.updates == [{'foo': 'bar'}]\nassert listener.notifications == [{'foo': 'bar'}]\nassert listener.deletes == [123]\nassert listener.heartbeats == 2\npytest.mark.parametrize('events', itertools.permutations([['event: update',\n    'data: {\"foo\": \"bar\"}', ''], ['event: notification',\n    'data: {\"foo\": \"bar\"}', ''], ['event: delete', 'data: 123', ''], [\n    ':toot toot'], [':beep beep']]))"
+}

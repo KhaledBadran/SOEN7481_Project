@@ -1,0 +1,9 @@
+{
+    "functionName": "Byte_Escape_Data_Fixed_Length",
+    "className": "Transmit_Insert_Data_Queue_Class",
+    "fileName": "/FaradayRF_&_Faraday-Software/faraday_&_uart_&_layer_2_protocol.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        This function byte stuffs a simple byte escape framing protocol around a provided data packet.\n        Byte framing and escaping allows data to safely traverse the transmission medium with defined\n        packet start and stop boundries for parsing.\n\n        This function inputs a packet and returns a packet with escaped bytes per protocol inserted.\n        \"\"\"\npacket = packet.replace(escapebyte, escapebyte + escapebyte)\npacket = packet.replace(startbyte, escapebyte + startbyte)\npacket = packet.replace(stopbyte, escapebyte + stopbyte)\npacket = startbyte + packet\npacket = packet + stopbyte\nreturn packet\n"
+}

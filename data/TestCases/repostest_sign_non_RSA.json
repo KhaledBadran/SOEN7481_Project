@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sign_non_RSA",
+    "className": "TestCryptographyEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_crypto_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that an InvalidField exception is raised when sign is\n        called with a crypto algorithm other than RSA.\n        \"\"\"\nengine = crypto.CryptographyEngine()\nargs = (None, enums.CryptographicAlgorithm.TRIPLE_DES, enums.\n    HashingAlgorithm.MD5, None, None, None)\nself.assertRaisesRegex(exceptions.InvalidField,\n    'For signing, an RSA key must be used.', engine.sign, *args)\n"
+}

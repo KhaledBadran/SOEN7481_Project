@@ -1,0 +1,9 @@
+{
+    "functionName": "test_changelog",
+    "className": null,
+    "fileName": "/132nd-etcher_&_EPAB/test_&_test_cmd_&_test_changelog.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "caplog.set_level(10)\nchangelog = Path('CHANGELOG.md')\nassert config.CHANGELOG_DISABLE() is False\nwhen(epab.utils).ensure_exe(...)\nwhen(elib_run).run('gitchangelog', mute=True).thenReturn((src, 0))\n_chglog()\nassert 'writing changelog' in caplog.text\nassert changelog.exists()\nassert changelog.read_text() == result\npytest.mark.parametrize('src,result', [('content', 'content'), (\n    'content    \\r\\n\\r\\ncontent', \"\"\"content    \n\n\n\ncontent\"\"\"), (\n    'content  \\r\\n\\r\\n\\r\\ncontent', \"\"\"content  \n\n\n\n\n\ncontent\"\"\")])"
+}

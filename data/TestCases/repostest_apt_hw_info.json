@@ -1,0 +1,9 @@
+{
+    "functionName": "test_apt_hw_info",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_thorlabs_&_test_thorlabs_apt.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with expected_protocol(ik.thorlabs.ThorLabsAPT, [ThorLabsPacket(message_id=\n    ThorLabsCommands.HW_REQ_INFO, param1=0, param2=0, dest=80, source=1,\n    data=None).pack()], [ThorLabsPacket(message_id=ThorLabsCommands.\n    HW_GET_INFO, dest=1, source=80, data=hw_info_data.pack(\n    b'\\x01\\x02\\x03\\x04', 'ABC-123'.encode('ascii'), 3, 161, 162, 163,\n    'abcdefg'.encode('ascii'), 42, 43, 2)).pack()], sep='') as apt:\n    assert apt._hw_type == 'Unknown type: 3'\n    assert apt._fw_version == 'a1.a2.a3'\n    assert apt._notes == 'abcdefg'\n    assert apt._hw_version == 42\n    assert apt._mod_state == 43\n    assert apt.serial_number == '01020304'\n    assert apt.model_number == 'ABC-123'\n    assert apt.name == 'ThorLabs APT Instrument model ABC-123, serial 01020304 (HW version 42, FW version a1.a2.a3)'\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cleanup_rows_buffered",
+    "className": "CursorTest",
+    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_test_cursor.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "conn = self.test_connection\ncursor = conn.cursor(pymysql.cursors.Cursor)\ncursor.execute('select * from test as t1, test as t2')\nfor counter, row in enumerate(cursor):\n    if counter > 10:\n        break\ndel cursor\nself.safe_gc_collect()\nc2 = conn.cursor()\nc2.execute('select 1')\nself.assertEqual(c2.fetchone(), (1,))\nself.assertIsNone(c2.fetchone())\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_differential_with_inplace_data",
+    "className": "TestCreateScoreDifferential",
+    "fileName": "/AndrewRook_&_NFLWin/nflwin_&_tests_&_test_preprocessing.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "csd = preprocessing.CreateScoreDifferential('home_score', 'away_score',\n    'offense_home', score_differential_colname='score_diff', copy=False)\ninput_data = pd.DataFrame({'home_score': [1, 2, 3, 4], 'away_score': [10, 0,\n    5, 15], 'offense_home': [True, True, True, True]})\nexpected_data = pd.DataFrame({'home_score': [1, 2, 3, 4], 'away_score': [10,\n    0, 5, 15], 'offense_home': [True, True, True, True], 'score_diff': [-9,\n    2, -2, -11]})\ncsd.fit(input_data)\ncsd.transform(input_data)\npd.util.testing.assert_frame_equal(expected_data.sort_index(axis=1),\n    input_data.sort_index(axis=1))\n"
+}

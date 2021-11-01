@@ -1,0 +1,9 @@
+{
+    "functionName": "test_comment_retrieval",
+    "className": null,
+    "fileName": "/AutomatedTester_&_Bugsy/tests_&_test_bugs.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "responses.add(responses.GET, 'https://bugzilla.mozilla.org/rest/login',\n    body='{\"token\": \"foobar\"}', status=200, content_type='application/json',\n    match_querystring=True)\nresponses.add(responses.GET, rest_url('bug', 1017315), body=json.dumps(\n    bug_return), status=200, content_type='application/json',\n    match_querystring=True)\nresponses.add(responses.GET,\n    'https://bugzilla.mozilla.org/rest/bug/1017315/comment', body=json.\n    dumps(comments_return), status=200, content_type='application/json',\n    match_querystring=True)\nbugzilla = Bugsy('foo', 'bar')\nbug = bugzilla.get(1017315)\ncomments = bug.get_comments()\nassert len(comments) == 2\nc1 = comments[0]\nassert c1.attachment_id is None\nassert c1.author == u'gps@mozilla.com'\nassert c1.bug_id == 1017315\nassert c1.creation_time == datetime.datetime(2014, 3, 27, 23, 47, 45)\nassert c1.creator == u'gps@mozilla.com'\nassert c1.id == 8589785\nassert c1.is_private is False\nassert c1.text == u'text 1'\nassert c1.tags == set([u'tag1', u'tag2'])\nassert c1.time == datetime.datetime(2014, 3, 27, 23, 47, 45)\nresponses.activate"
+}

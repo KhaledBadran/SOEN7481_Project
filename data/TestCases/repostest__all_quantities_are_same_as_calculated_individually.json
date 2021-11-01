@@ -1,0 +1,9 @@
+{
+    "functionName": "test__all_quantities_are_same_as_calculated_individually",
+    "className": "TestCIHyperFit",
+    "fileName": "/Jammy2211_&_PyAutoCTI/test_&_unit_&_charge_injection_&_test_ci_fit.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "hyper_noise_scalar_0 = ci_hyper.CIHyperNoiseScalar(scale_factor=1.0)\nhyper_noise_scalar_1 = ci_hyper.CIHyperNoiseScalar(scale_factor=2.0)\nfit = ci_fit.CIHyperFit(masked_hyper_ci_data=ci_data_hyper_fit, cti_params=\n    MockParams(), cti_settings=MockSettings(), hyper_noise_scalars=[\n    hyper_noise_scalar_0, hyper_noise_scalar_1])\nhyper_noise_map = ci_fit.hyper_noise_map_from_noise_map_and_noise_scalings(\n    noise_map=ci_data_hyper_fit.noise_map, noise_scaling_maps=\n    ci_data_hyper_fit.noise_scaling_maps, hyper_noise_scalars=[\n    hyper_noise_scalar_0, hyper_noise_scalar_1])\nassert (hyper_noise_map == fit.noise_map).all()\nresidual_map = af.fit_util.residual_map_from_data_mask_and_model_data(data=\n    ci_data_hyper_fit.image, mask=ci_data_hyper_fit.mask, model_data=\n    ci_data_hyper_fit.ci_pre_cti)\nassert (residual_map == fit.residual_map).all()\nchi_squared_map = (af.fit_util.\n    chi_squared_map_from_residual_map_noise_map_and_mask(residual_map=\n    residual_map, noise_map=hyper_noise_map, mask=ci_data_hyper_fit.mask))\nassert (chi_squared_map == fit.chi_squared_map).all()\nchi_squared = af.fit_util.chi_squared_from_chi_squared_map_and_mask(\n    chi_squared_map=chi_squared_map, mask=ci_data_hyper_fit.mask)\nnoise_normalization = af.fit_util.noise_normalization_from_noise_map_and_mask(\n    noise_map=hyper_noise_map, mask=ci_data_hyper_fit.mask)\nlikelihood = af.fit_util.likelihood_from_chi_squared_and_noise_normalization(\n    chi_squared=chi_squared, noise_normalization=noise_normalization)\nassert (likelihood == fit.likelihood).all()\n"
+}

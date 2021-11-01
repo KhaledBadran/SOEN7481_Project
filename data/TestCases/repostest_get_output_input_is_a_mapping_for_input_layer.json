@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_output_input_is_a_mapping_for_input_layer",
+    "className": "TestGetOutput_MergeLayer",
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_helper.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "l1, l2, l3 = layers\np = PropertyMock()\ntype(l1[0]).input_var = p\ninput_expr, kwarg = theano.tensor.matrix(), object()\ninputs = {l1[0]: input_expr}\noutput = get_output(l3, inputs, kwarg=kwarg)\nassert output is l3.get_output_for.return_value\nl3.get_output_for.assert_called_with([l2[0].get_output_for.return_value, l2\n    [1].get_output_for.return_value], kwarg=kwarg)\nl2[0].get_output_for.assert_called_with(input_expr, kwarg=kwarg)\nl2[1].get_output_for.assert_called_with(l1[1].input_var, kwarg=kwarg)\nassert p.call_count == 0\n"
+}

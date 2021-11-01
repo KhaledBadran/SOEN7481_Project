@@ -1,0 +1,9 @@
+{
+    "functionName": "test_custom_gs",
+    "className": "TestManagedLoop",
+    "fileName": "/facebook_&_Ax/ax_&_service_&_tests_&_test_managed_loop.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Managed loop with custom generation strategy\"\"\"\nstrategy0 = GenerationStrategy(name='Sobol', steps=[GenerationStep(model=\n    Models.SOBOL, num_trials=-1)])\nloop = OptimizationLoop.with_evaluation_function(parameters=[{'name': 'x1',\n    'type': 'range', 'bounds': [-5.0, 10.0], 'value_type': 'float',\n    'log_scale': False}, {'name': 'x2', 'type': 'range', 'bounds': [0.0, \n    10.0]}], experiment_name='test', objective_name='branin', minimize=True,\n    evaluation_function=_branin_evaluation_function, total_trials=6,\n    generation_strategy=strategy0)\nbp, _ = loop.full_run().get_best_point()\nself.assertIn('x1', bp)\nself.assertIn('x2', bp)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_permutations_with_shuffle_is_suffiently_shuffled",
+    "className": null,
+    "fileName": "/hintofbasil_&_Python-Beautifurl/beautifurl_&_test_beautifurl.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Catches the case where urls are shuffled one index after the other\n\n    e.g\n    LightCalmSloth\n    LightCalmFerret\n    LightCalmToad\n    ...\n    \"\"\"\ntest_key = 'aaA'\nmin_count = 70\nbeautifurl = Beautifurl()\nshuffled = beautifurl.get_permutations(test_key, shuffle=True)\nurls_as_lists = map(lambda x: re.findall('[A-Z][a-z]+', x), itertools.\n    islice(shuffled, 100))\nwords_by_position = defaultdict(list)\nfor url in urls_as_lists:\n    for i, word in enumerate(url):\n        words_by_position[i].append(word)\nfor i in range(len(test_key)):\n    count = len(set(words_by_position[i]))\n    assert count > min_count\n"
+}

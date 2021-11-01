@@ -1,0 +1,9 @@
+{
+    "functionName": "test_basic_gecko_adjustment",
+    "className": null,
+    "fileName": "/SysBioChalmers_&_GECKO/geckopy_&_tests_&_test_gecko.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "in_model = {'P00549': 0.1, 'P31373': 0.1, 'P31382': 0.1, 'P39708': 0.1,\n    'P39714': 0.1, 'P39726': 0.1, 'Q01574': 0.1}\nnot_in_model = {'P10591': 0.1, 'P31383': 0.1, 'P32471': 0.1}\nmeasurements = pd.concat([pd.Series(in_model), pd.Series(not_in_model)])\nmodel = GeckoModel('multi-pool')\nmodel.limit_proteins(fractions=pd.Series(measurements))\nsol = model.optimize()\nassert sol.objective_value > 0.05\nassert len(model.proteins) - len(model.pool_proteins) - len(in_model) == 0\nassert all(rxn.upper_bound > 0 for rxn in model.individual_protein_exchanges)\n"
+}

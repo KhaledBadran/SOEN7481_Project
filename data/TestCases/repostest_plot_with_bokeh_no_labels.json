@@ -1,0 +1,9 @@
+{
+    "functionName": "test_plot_with_bokeh_no_labels",
+    "className": null,
+    "fileName": "/Edinburgh-Genome-Foundry_&_DnaFeaturesViewer/tests_&_test_basics.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Bokeh has a problem with empty lists of labels.\"\"\"\ngb_record = SeqIO.read(example_genbank, 'genbank')\nrecord = BiopythonTranslator().translate_record(record=gb_record)\nfor feature in record.features:\n    feature.label = None\nplot = record.plot_with_bokeh(figure_width=8)\ntarget_file = os.path.join(str(tmpdir), 'plot_with_bokeh.html')\nwith open(target_file, 'w+') as f:\n    f.write(file_html(plot, CDN, 'Example Sequence'))\nwith open(target_file, 'r') as f:\n    assert len(f.read()) > 5000\n"
+}

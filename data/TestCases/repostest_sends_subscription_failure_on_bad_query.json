@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sends_subscription_failure_on_bad_query",
+    "className": null,
+    "fileName": "/willdeuschle_&_Flask-GraphQL-Subscriptions-Transport/tests_&_test_flask_graphql_subscriptions_transport.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "app, ss = basic_ss\ntest_client = SocketIOTestClient(app, ss.socketio, namespace=ss.namespace)\nss.send_subscription_fail = Mock()\ntest_client.emit('message', json.dumps({'type': SUBSCRIPTION_START,\n    'payload': 'foo', 'query': 'query test{ unknownField }', 'variables':\n    'baz'}), namespace=ss.namespace)\nss.send_subscription_fail.assert_called_once()\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_int_array_range_constraint",
+    "className": null,
+    "fileName": "/SeverTopan_&_AdjSim/test_&_test_decision_mutable.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "import adjsim\nconstraint = adjsim.decision.RangeConstraint(mutable_min, mutable_max)\nd = adjsim.decision.DecisionMutableIntArray(shape, constraint)\nassert d.constraint.max_val == mutable_max\nassert d.constraint.min_val == mutable_min\nassert d.shape == tuple(shape)\nvalid_values = [(mutable_max - mutable_min) / 2 + mutable_min, mutable_min,\n    mutable_max]\nfor value in valid_values:\n    d._set_value(np.zeros(shape, dtype=np.int_) + int(value))\n    assert (d.value == np.zeros(shape, dtype=np.int_) + int(value)).all()\ninvalid_types = [None, InvalidClass(), np.zeros(shape, dtype=np.int_) + (\n    mutable_max - mutable_min) / 2 + mutable_min]\nfor value in invalid_types:\n    with pytest.raises(TypeError):\n        d._set_value(value)\ninvalid_values = [(np.zeros(shape) + mutable_min - 1).astype(np.int_), (np.\n    zeros(shape) + mutable_max + 1).astype(np.int_), (np.zeros(np.array(\n    shape) + 1) + (mutable_max - mutable_min) / 2 + mutable_min).astype(np.\n    int_)]\nfor value in invalid_values:\n    with pytest.raises(ValueError):\n        d._set_value(value)\nfor _ in range(50):\n    d._set_value_random()\n    assert (d.value <= constraint.max_val).all() and (d.value >= constraint\n        .min_val).all()\nfor _ in range(50):\n    d._perturb_around_locus(np.zeros(shape, dtype=np.int_) + int(\n        valid_values[0]))\n    assert (d.value <= constraint.max_val).all() and (d.value >= constraint\n        .min_val).all()\nfor _ in range(50):\n    d._perturb_locally()\n    assert (d.value <= constraint.max_val).all() and (d.value >= constraint\n        .min_val).all()\npytest.mark.parametrize('mutable_min,mutable_max,shape', items)"
+}

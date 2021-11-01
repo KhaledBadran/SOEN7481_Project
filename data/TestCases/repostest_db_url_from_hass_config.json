@@ -1,0 +1,9 @@
+{
+    "functionName": "test_db_url_from_hass_config",
+    "className": null,
+    "fileName": "/robmarkcole_&_HASS-data-detective/tests_&_test_config.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test extracting recorder url from config.\"\"\"\nwith patch('detective.config.load_hass_config', return_value={}), patch(\n    'os.path.isfile', return_value=False), pytest.raises(ValueError):\n    config.db_url_from_hass_config('mock-path')\nwith patch('detective.config.load_hass_config', return_value={}), patch(\n    'os.path.isfile', return_value=True):\n    assert config.db_url_from_hass_config('mock-path'\n        ) == 'sqlite:///mock-path/home-assistant_v2.db'\nwith patch('detective.config.load_hass_config', return_value={'recorder': {\n    'db_url': 'mock-url'}}):\n    assert config.db_url_from_hass_config('mock-path') == 'mock-url'\n"
+}

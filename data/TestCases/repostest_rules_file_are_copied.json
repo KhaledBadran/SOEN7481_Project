@@ -1,0 +1,9 @@
+{
+    "functionName": "test_rules_file_are_copied",
+    "className": "TestUdevRulesInstaller",
+    "fileName": "/bitcoin-core_&_HWI/test_&_test_udevrules.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "result = process_commands(['installudevrules', '--location', self.\n    INSTALLATION_FOLDER])\nself.assertIn('error', result)\nself.assertIn('code', result)\nself.assertEqual(result['error'], 'Need to be root.')\nself.assertEqual(result['code'], -16)\nfor root, dirs, files in walk(self.INSTALLATION_FOLDER, topdown=False):\n    for file_name in files:\n        src = path.join(self.SOURCE_FOLDER, file_name)\n        tgt = path.join(self.INSTALLATION_FOLDER, file_name)\n        self.assertTrue(filecmp.cmp(src, tgt))\n"
+}

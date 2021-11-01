@@ -1,0 +1,9 @@
+{
+    "functionName": "expected_counts",
+    "className": null,
+    "fileName": "/kitware_&_BroThon/zat_&_dataframe_stats.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Expected counts of the multivariate frequency distribution of the variables given the\n       null hypothesis of complete independence between variables.\n       Args:\n           rownames: the column name or list of columns names that make the keys of the rows\n           colnames: the column name or list of columns names that make the keys of the columns\n    \"\"\"\ncont_table = contingency_table(dataframe, rownames=rownames, colnames=\n    colnames, margins=True)\nrow_counts = cont_table['All']\ncolumn_counts = cont_table.loc['All']\ntotal_observations = cont_table['All']['All']\nfor column in cont_table.columns:\n    for row in cont_table.index:\n        cont_table[column][row] = column_counts[column] * row_counts[row\n            ] / total_observations\nreturn cont_table\n"
+}

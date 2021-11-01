@@ -1,0 +1,9 @@
+{
+    "functionName": "test_next_nearby_departures_of_station_whensucceed",
+    "className": "PublicTransitApiTest",
+    "fileName": "/abdullahselek_&_HerePy/tests_&_test_publictransit_api.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with io.open('testdata/models/public_transit_api_next_nearby_departures.json',\n    'r', encoding='utf-8') as f:\n    expectedResponse = f.read()\nresponses.add(responses.GET, 'https://transit.ls.hereapi.com/v3/board.json',\n    expectedResponse, status=200)\nresponse = self._api.next_nearby_departures_of_station(402000653,\n    '2017-11-21T11:10:00')\nself.assertTrue(response)\nself.assertIsInstance(response, herepy.PublicTransitResponse)\nresponses.activate"
+}

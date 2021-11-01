@@ -1,0 +1,9 @@
+{
+    "functionName": "test_similarity_model",
+    "className": null,
+    "fileName": "/AllenInstitute_&_EM_Aligner_python/integration_tests_&_test_transforms.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "rt = renderapi.transform.Polynomial2DTransform()\nwith pytest.raises(AlignerTransformException):\n    t = AlignerSimilarityModel(transform=rt)\nrt = renderapi.transform.SimilarityModel()\nt = AlignerTransform(name='SimilarityModel', transform=rt)\nassert t.__class__ == AlignerSimilarityModel\nt = AlignerTransform(name='SimilarityModel', transform=rt, fullsize=True)\nnmatch = 100\nmatch = example_match(nmatch)\nncol = 1000\nicol = 73\nblock, weights, rhs = t.block_from_pts(np.array(match['matches']['p']).\n    transpose(), np.array(match['matches']['w']), icol, ncol)\nassert np.all(np.isclose(rhs, 0.0))\nassert block.check_format() is None\nassert weights.size == nmatch * t.rows_per_ptmatch\nassert block.shape == (nmatch * t.rows_per_ptmatch, ncol)\nassert block.nnz == 10 * nmatch\nt = AlignerTransform(name='SimilarityModel')\nv = t.to_solve_vec()\nassert np.all(v == np.array([1.0, 0.0, 0.0, 0.0]).reshape(-1, 1))\nntiles = 6\nvi = [1.0, 0.02, -10.0, 12.1]\nvec = np.tile(vi, ntiles)\nvec = vec.reshape(-1, 1)\nindex = 0\nfor i in range(ntiles):\n    index += t.from_solve_vec(vec[index:, :])\n    msub = t.M.flatten()[[0, 1, 2, 5]]\n    assert np.all(np.isclose(msub, vi))\nrdict = {'default_lambda': 1.0, 'translation_factor': 0.1}\nt = AlignerTransform(name='SimilarityModel')\nr = t.regularization(rdict)\nassert np.all(r[[0, 1]] == 1.0)\nassert np.all(r[[2, 3]] == 0.1)\n"
+}

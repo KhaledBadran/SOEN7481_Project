@@ -1,0 +1,9 @@
+{
+    "functionName": "test_glove_twitter_download",
+    "className": "TestWordVectors",
+    "fileName": "/apmoore1_&_Bella/tests_&_test_word_vectors.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Tests that the Glove Twitter word vectors are downloaded correctly\n        \"\"\"\nglove_twitter_vectors = GloveTwitterVectors(25, skip_conf=True)\ncurrent_dir = os.path.abspath(os.path.dirname(__file__))\nglove_twitter_folder = os.path.join(current_dir, os.pardir, 'data',\n    'word_vectors', 'glove_twitter')\nself.assertEqual(True, os.path.isdir(glove_twitter_folder), msg=\n    'Glove Twitter vectors directory should be here {}'.format(\n    glove_twitter_folder))\nglove_twitter_files = ['glove.twitter.27B.25d.binary',\n    'glove.twitter.27B.50d.binary', 'glove.twitter.27B.100d.binary',\n    'glove.twitter.27B.200d.binary']\nfor glove_twitter_file in glove_twitter_files:\n    glove_file_path = os.path.join(glove_twitter_folder, glove_twitter_file)\n    self.assertEqual(True, os.path.isfile(glove_file_path), msg=\n        'Glove Twitter vector file {} should be here {}'.format(\n        glove_twitter_file, glove_file_path))\npytest.mark.skip(reason='Takes a long time to test only add on large tests')"
+}

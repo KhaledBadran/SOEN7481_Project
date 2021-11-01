@@ -1,0 +1,9 @@
+{
+    "functionName": "test_account_id",
+    "className": "Test_IAM",
+    "fileName": "/pbx-gs_&_OSBot-AWS/tests_&_unit_&_apis_&_test_IAM.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "account_id_1 = self.iam.account_id('gs-detect-aws')\nassert Globals.aws_session_profile_name == 'gs-detect-aws'\nself.iam._account_id = None\nself.iam._sts = None\naccount_id_2 = self.iam.account_id('default')\nassert Globals.aws_session_profile_name == 'default'\nassert account_id_1 != account_id_2\nself.iam._account_id = None\nself.iam._sts = None\naccount_id_3 = self.iam.account_id()\nassert Globals.aws_session_profile_name == 'default'\nassert account_id_2 == account_id_3\nunittest.skip(\n    \"Doesn't work in CodeBuild since there is only one configuration in there\")"
+}

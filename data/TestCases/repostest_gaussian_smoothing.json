@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gaussian_smoothing",
+    "className": null,
+    "fileName": "/pmneila_&_PyMCubes/test_smoothing.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "x, y, z = np.mgrid[:100, :100, :100]\nlevelset = np.sqrt((x - 50) ** 2 + (y - 50) ** 2 + (z - 50) ** 2) - 25\nbinary_levelset = levelset > 0\nsmoothed_levelset = mcubes.smooth(binary_levelset, method='gaussian', sigma=3)\nvertices, _ = mcubes.marching_cubes(smoothed_levelset, 0.0)\ndist = np.sqrt(np.sum((vertices - [50, 50, 50]) ** 2, axis=1))\nassert dist.min() > 24 and dist.max() < 25\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_saveDotAndImagesInSameDirectory",
+    "className": "VisualizeToolTests",
+    "fileName": "/glyph_&_Automat/automat_&__test_&_test_visualize.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Passing the same directory to --image-directory and --dot-directory\n        writes images and dot files to that one directory.\n        \"\"\"\ndirectory = 'imagesAndDot'\nself.tool(argv=[self.fakeFQPN, '--image-directory', directory,\n    '--dot-directory', directory])\nself.assertTrue(any('image and dot' in line for line in self.collectedOutput))\nself.assertEqual(len(self.digraphRecorder.renderCalls), 1)\nrenderCall, = self.digraphRecorder.renderCalls\nself.assertEqual(renderCall['directory'], directory)\nself.assertFalse(renderCall['cleanup'])\nself.assertFalse(len(self.digraphRecorder.saveCalls))\n"
+}

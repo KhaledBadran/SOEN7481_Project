@@ -1,0 +1,9 @@
+{
+    "functionName": "linkcode_resolve",
+    "className": null,
+    "fileName": "/nipy_&_PySurfer/doc_&_conf.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Determine the URL corresponding to Python object\n    \"\"\"\nif domain != 'py':\n    return None\nmodname = info['module']\nfullname = info['fullname']\nsubmod = sys.modules.get(modname)\nif submod is None:\n    return None\nobj = submod\nfor part in fullname.split('.'):\n    try:\n        obj = getattr(obj, part)\n    except:\n        return None\ntry:\n    fn = inspect.getsourcefile(obj)\nexcept:\n    fn = None\nif not fn:\n    try:\n        fn = inspect.getsourcefile(sys.modules[obj.__module__])\n    except:\n        fn = None\nif not fn:\n    return None\ntry:\n    source, lineno = inspect.getsourcelines(obj)\nexcept:\n    lineno = None\nif lineno:\n    linespec = '#L%d-L%d' % (lineno, lineno + len(source) - 1)\nelse:\n    linespec = ''\nfn = relpath(fn, start=dirname(surfer.__file__))\nreturn 'http://github.com/nipy/PySurfer/blob/master/surfer/%s%s' % (fn,\n    linespec)\n"
+}

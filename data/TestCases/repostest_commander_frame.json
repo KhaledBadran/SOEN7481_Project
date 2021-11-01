@@ -1,0 +1,9 @@
+{
+    "functionName": "test_commander_frame",
+    "className": "MyTestCase",
+    "fileName": "/KD-Group_&_Carrier.Sample/tests_&_test_commander.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "result = sampler.communicate('simple_test')\nself.assertTrue(result.success)\nsampler.set_sampler('mock_sampler')\nsampler.communicate('to_measure 4 0.4 0.147')\nself.assertTrue(sampler.is_measuring)\nwhile sampler.is_measuring:\n    time.sleep(0.1)\nresult = sampler.query()\nself.assertTrue(result.success)\ntry:\n    sampler.communicate('to_measure 4 0.4 0.147')\nexcept sampler.Error as e:\n    self.assertTrue(str(e).startswith('sampler_not_found'))\ntry:\n    sampler.communicate('unknown_command')\nexcept sampler.Error as e:\n    self.assertTrue(str(e).startswith('command_not_found'))\n"
+}

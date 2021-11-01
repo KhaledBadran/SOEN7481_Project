@@ -1,0 +1,9 @@
+{
+    "functionName": "test_autoflush",
+    "className": "TestDatabase",
+    "fileName": "/corydodt_&_Hypy/src_&_hypy_&_test_lib.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Verify that autoflush is not on when it's not turned on, and that\n        words are autoindexed when it is turned on\n        \"\"\"\ncond = HCondition(u'doc*')\n@contextmanager\ndef setup(**kw):\n    db1 = HDatabase(**kw)\n    db1.open('_temp_db', 'w')\n    doc = HDocument(uri=u'1')\n    doc.addText(\n        u'word this is my document. do you like documents? this one is hi-res.'\n        )\n    db1.putDoc(doc, clean=True)\n    try:\n        yield db1\n    finally:\n        db1.close()\nwith setup() as db:\n    self.assertEqual(len(db.search(cond)), 0)\nwith setup(autoflush=True) as db:\n    self.assertEqual(len(db.search(cond)), 1)\n"
+}

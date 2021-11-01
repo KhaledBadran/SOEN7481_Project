@@ -1,0 +1,9 @@
+{
+    "functionName": "test_dump_with_labels",
+    "className": "TestAccess",
+    "fileName": "/hdoupe_&_ParamTools/paramtools_&_tests_&_test_parameters.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "params1 = TestParams()\nspec = params1.specification(serializable=True, include_empty=True,\n    meta_data=True, label0='one')\nschema = params1._schema\nparams1.set_state(label0='one')\ndumped = params1.dump()\nassert dumped == {**spec, **{'schema': schema}}\nclass TestParams2(Parameters):\n    defaults = dumped\nparams2 = TestParams2()\nparams2.set_state(label0='one')\nassert params2.dump() == dumped\n"
+}

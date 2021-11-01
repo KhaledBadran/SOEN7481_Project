@@ -1,0 +1,9 @@
+{
+    "functionName": "__rate_subscribable",
+    "className": "_IMUHandler",
+    "fileName": "/PRIArobotics_&_HedgehogServer/hedgehog_&_server_&_handlers_&_hardware.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "outer_self = self\nclass Subs(subscription.PolledSubscribable[Tuple[int, int, int], imu.\n    RateUpdate]):\n\n    async def poll(self):\n        return await outer_self.rate_value\n\n    def compose_update(self, server, ident, subscription, value):\n        return imu.RateUpdate(*value, subscription)\nreturn Subs()\n"
+}

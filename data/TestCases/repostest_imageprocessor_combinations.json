@@ -1,0 +1,9 @@
+{
+    "functionName": "test_imageprocessor_combinations",
+    "className": null,
+    "fileName": "/IBM_&_MAX-Framework/maxfw_&_tests_&_test_image_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test various combinations of the Imageprocessor's functionality.\"\"\"\ntransform_sequence = [ToPILImage('RGB'), Resize((2000, 2000)), Rotate(5),\n    Grayscale(num_output_channels=4), Resize((200, 200)), Normalize()]\np = ImageProcessor(transform_sequence)\nimg_out = p.apply_transforms(test_input)\nassert np.array(img_out).shape == (200, 200, 4)\ntransform_sequence = [ToPILImage('RGB'), Resize((200, 200)), Normalize()]\np = ImageProcessor(transform_sequence)\nimg_out = p.apply_transforms(test_input)\nassert np.array(img_out).shape == (200, 200, 3)\ntransform_sequence = [ToPILImage('RGB'), Resize((200, 200)), Standardize()]\np = ImageProcessor(transform_sequence)\nimg_out = p.apply_transforms(test_input)\nassert np.array(img_out).shape == (200, 200, 3)\ntransform_sequence = [ToPILImage('RGB'), Resize((2000, 2000)), Rotate(5),\n    Grayscale(num_output_channels=4), Resize((200, 200)), PILtoarray()]\np = ImageProcessor(transform_sequence)\nimg_out = p.apply_transforms(test_input)\nassert img_out.shape == (200, 200, 4)\nassert np.min(img_out) >= 0\nassert np.max(img_out) <= 255\ntransform_sequence = [ToPILImage('RGB'), Resize((2000, 2000)), Rotate(5),\n    Grayscale(num_output_channels=4), Resize((200, 200)), PILtoarray()]\np = ImageProcessor(transform_sequence)\np.apply_transforms(test_input)\np.apply_transforms(test_input)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "__test_redis_mailbox",
+    "className": "RedisMailboxTestCase",
+    "fileName": "/wo1fsea_&_PyEasyRPC/tests_&_test_redis_collections_&_test_mailbox.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "mb_receive = Mailbox(channel, packer=packer)\nmb_send = Mailbox(channel, packer=packer)\nmb_receive.subscribe()\nmb_send.set_message(1)\nself.assertTrue(mb_receive.get_message(), 1)\nmb_send.set_message(1.1)\nself.assertTrue(mb_receive.get_message(), 1.1)\nmb_send.set_message(1)\nself.assertTrue(mb_receive.get_message(), 1)\nmsg_data = {'int': 1, 'float': 2.0, 'string': 'string', 'dict': {'int': 1,\n    'float': 2.0, 'string': 'string'}, 'list': [0, '1', 2.0, 3], 'tuple': (\n    0, '1', 2.0, 3) if packer is PicklePacker else [0, '1', 2.0, 3]}\nsign = [0]\ndef msg_handler(data):\n    sign[0] += 1\n    self.assertEqual(msg_data, data)\nmb_receive_with_handler = Mailbox(channel, msg_handler=msg_handler, packer=\n    packer)\nmb_receive_with_handler.subscribe()\nmb_send.set_message(msg_data)\nmb_receive_with_handler.get_message()\nself.assertEqual(sign[0], 1)\nmb_receive_with_handler.run_in_background()\nmb_send.set_message(msg_data)\nmb_send.set_message(msg_data)\nmb_send.set_message(msg_data)\ntime.sleep(1)\nmb_receive_with_handler.stop_background_thread()\nmb_send.set_message(msg_data)\nself.assertEqual(sign[0], 4)\n"
+}

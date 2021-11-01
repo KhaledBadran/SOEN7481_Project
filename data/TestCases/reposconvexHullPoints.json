@@ -1,0 +1,9 @@
+{
+    "functionName": "convexHullPoints",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_DataSet.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Calculate the convex hull of rectangularly spaced A3 and A4 values\"\"\"\nA3Unique = np.unique(A3)\nA4Unique = np.unique(A4)\nA3Step = np.diff(A3Unique)[[0, -1]] * 0.5\nA4Step = np.diff(A4Unique)[[0, -1]] * 0.5\naddLeft = np.array(np.meshgrid(A3Unique[0] - A3Step[0], A4Unique)).reshape((\n    2, -1))\naddRight = np.array(np.meshgrid(A3Unique[-1] + A3Step[1], A4Unique)).reshape((\n    2, -1))\naddBottom = np.array(np.meshgrid(A3Unique, A4Unique[0] - A4Step[0])).reshape((\n    2, -1))\naddTop = np.array(np.meshgrid(A3Unique, A4Unique[-1] + A4Step[1])).reshape((\n    2, -1))\ncorners = np.array([[addLeft[0, 0], addBottom[1, 0]], [addLeft[0, 0],\n    addTop[1, -1]], [addRight[0, -1], addBottom[1, 0]], [addRight[0, -1],\n    addTop[1, -1]]]).T\nboundary = np.concatenate([addLeft, addRight, addBottom, addTop, corners],\n    axis=1)\nhullPoints = ConvexHull(np.array([boundary[0], boundary[1]]).T)\nbound = hullPoints.points[hullPoints.vertices].T\nreturn PolygonS(bound.T)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_attach_trial_and_get_trial_parameters",
+    "className": "TestAxClient",
+    "fileName": "/facebook_&_Ax/ax_&_service_&_tests_&_test_ax_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ax_client = AxClient()\nax_client.create_experiment(parameters=[{'name': 'x', 'type': 'range',\n    'bounds': [-5.0, 10.0]}, {'name': 'y', 'type': 'range', 'bounds': [0.0,\n    15.0]}], minimize=True)\nparams, idx = ax_client.attach_trial(parameters={'x': 0.0, 'y': 1.0})\nax_client.complete_trial(trial_index=idx, raw_data=5)\nself.assertEqual(ax_client.get_best_parameters()[0], params)\nself.assertEqual(ax_client.get_trial_parameters(trial_index=idx), {'x': 0,\n    'y': 1})\nwith self.assertRaises(ValueError):\n    ax_client.get_trial_parameters(trial_index=10)\nwith self.assertRaisesRegex(ValueError, '.* is of type'):\n    ax_client.attach_trial({'x': 1, 'y': 2})\n"
+}

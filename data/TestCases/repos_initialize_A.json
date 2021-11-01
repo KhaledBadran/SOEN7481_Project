@@ -1,0 +1,9 @@
+{
+    "functionName": "_initialize_A",
+    "className": "PETScSparseLinearSolver",
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_utils_&_petsc.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        This method creates the petsc sparse coefficients matrix from the\n        OpenPNM scipy one. The method also equally decomposes the matrix at\n        certain rows into different blocks (each block contains all the\n        columns) and distributes them over the pre-assigned cores for parallel\n        computing. The method can be used in serial.\n        \"\"\"\nself.petsc_A = PETSc.Mat()\nself.petsc_A.create(PETSc.COMM_WORLD)\nself.petsc_A.setSizes([self.m, self.n])\nself.petsc_A.setType('aij')\nself.petsc_A.setUp()\nself.Istart, self.Iend = self.petsc_A.getOwnershipRange()\nsize_tmp = self.A.shape\ncsr1 = self.A.indptr[self.Istart:self.Iend + 1] - self.A.indptr[self.Istart]\nind1 = self.A.indptr[self.Istart]\nind2 = self.A.indptr[self.Iend]\ncsr2 = self.A.indices[ind1:ind2]\ncsr3 = self.A.data[ind1:ind2]\nself.petsc_A = PETSc.Mat().createAIJ(size=size_tmp, csr=(csr1, csr2, csr3))\nself.petsc_A.assemblyBegin()\nself.petsc_A.assemblyEnd()\n"
+}

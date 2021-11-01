@@ -1,0 +1,9 @@
+{
+    "functionName": "test_evaluate_with_cost_delay",
+    "className": null,
+    "fileName": "/NASA_&_MLMCPy/tests_&_model_&_test_ModelFromData.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test ability to wait for the duration of the cost specified for the model\n    when evaluating a sample.\n    \"\"\"\nmodel = ModelFromData(input_data_file, output_data_file, cost=cost,\n    wait_cost_duration=True)\nsample = model._inputs[0]\nstart_time = timeit.default_timer()\nmodel.evaluate(sample)\nevaluation_time = timeit.default_timer() - start_time\nassert np.abs(evaluation_time - cost) < 0.01\npytest.mark.parametrize('cost', [0.01, 0.05, 0.1])"
+}

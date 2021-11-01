@@ -1,0 +1,9 @@
+{
+    "functionName": "test_input_arrays",
+    "className": null,
+    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_background.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cosmo = ccl.Cosmology(Omega_c=0.27, Omega_b=0.05, h=0.7, n_s=0.965, A_s=2e-09)\na_arr = np.linspace(0.1, 1, 100)\nchi_from_ccl = ccl.background.comoving_radial_distance(cosmo, a_arr)\nhoh0_from_ccl = ccl.background.h_over_h0(cosmo, a_arr)\ngrowth_from_ccl = ccl.background.growth_factor(cosmo, a_arr)\nfgrowth_from_ccl = ccl.background.growth_rate(cosmo, a_arr)\ncosmo_input = ccl.Cosmology(Omega_c=0.27, Omega_b=0.05, h=0.7, n_s=0.965,\n    A_s=2e-09)\ncosmo_input._set_background_from_arrays(a_array=a_arr, chi_array=\n    chi_from_ccl, hoh0_array=hoh0_from_ccl)\ncosmo_input._set_growth_from_arrays(a_array=a_arr, growth_array=\n    growth_from_ccl, fgrowth_array=fgrowth_from_ccl)\na_arr = np.linspace(0.102, 0.987, 158)\nchi_ccl_input = ccl.background.comoving_radial_distance(cosmo_input, a_arr)\nchi_from_ccl = ccl.background.comoving_radial_distance(cosmo, a_arr)\nassert np.allclose(chi_ccl_input, chi_from_ccl, atol=0.0, rtol=1e-05)\ngrowth_ccl_input = ccl.background.growth_factor(cosmo_input, a_arr)\ngrowth_from_ccl = ccl.background.growth_factor(cosmo, a_arr)\nassert np.allclose(growth_ccl_input, growth_from_ccl, atol=0.0, rtol=1e-05)\nfgrowth_ccl_input = ccl.background.growth_rate(cosmo_input, a_arr)\nfgrowth_from_ccl = ccl.background.growth_rate(cosmo, a_arr)\nassert np.allclose(fgrowth_ccl_input, fgrowth_from_ccl, atol=0.0, rtol=1e-05)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_authorization_policy_success",
+    "className": null,
+    "fileName": "/RobertoPrevato_&_BlackSheep/tests_&_test_auth.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "app = FakeApplication()\nadmin = Identity({'id': '001', 'name': 'Charlie Brown', 'role': 'admin'}, 'JWT'\n    )\napp.use_authentication().add(MockAuthHandler(admin))\napp.use_authorization().add(AdminsPolicy())\n@auth('admin')\n@app.router.get(b'/')\nasync def home():\n    return None\napp.prepare()\nawait app(get_example_scope('GET', '/'), MockReceive(), MockSend())\nassert app.response.status == 204\npytest.mark.asyncio"
+}

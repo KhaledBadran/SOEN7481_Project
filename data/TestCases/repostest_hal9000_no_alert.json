@@ -1,0 +1,9 @@
+{
+    "functionName": "test_hal9000_no_alert",
+    "className": "TestCase",
+    "fileName": "/IntegralDefense_&_ACE/lib_&_saq_&_modules_&_test_hal9000.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "root = create_root_analysis(analysis_mode=ANALYSIS_MODE_ANALYSIS)\nroot.initialize_storage()\ntest_observable = root.add_observable(F_TEST, 'test')\nroot.save()\nroot.schedule()\nengine = TestEngine(local_analysis_modes=[ANALYSIS_MODE_ANALYSIS])\nengine.enable_module('analysis_module_hal9000', ANALYSIS_MODE_ANALYSIS)\nengine.controlled_stop()\nengine.start()\nengine.wait()\nself.assertFalse(os.path.exists(root.storage_dir))\nc.execute('SELECT total_count, mal_count FROM observables')\nrows = c.fetchall()\nself.assertEquals(len(rows), 1)\nresult = rows[0]\nself.assertIsNotNone(result)\nself.assertEquals(result[0], 1)\nself.assertEquals(result[1], 0)\nuse_db(name='hal9000')"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_threadpool",
+    "className": null,
+    "fileName": "/pwwang_&_PyPPL/tests_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "nthread = fixt_threadpool.nthread\ninitializer = fixt_threadpool.initializer\ninitargs = fixt_threadpool.get('initargs')\ncleanup = fixt_threadpool.get('cleanup')\nexc = fixt_threadpool.expt_exc\npool = ThreadPool(nthread, initializer, initargs)\nassert len(pool.threads) == nthread\nassert isinstance(pool.threads[0], ThreadEx)\nif exc:\n    with pytest.raises(exc):\n        pool.join(cleanup=cleanup, interval=0.1)\nelse:\n    pool.join(cleanup=cleanup, interval=0.01)\nfor thread in pool.threads:\n    thread.join()\nassert all([(not thread.is_alive()) for thread in pool.threads])\n"
+}

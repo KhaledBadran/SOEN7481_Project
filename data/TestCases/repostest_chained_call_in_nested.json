@@ -1,0 +1,9 @@
+{
+    "functionName": "test_chained_call_in_nested",
+    "className": "CallTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_call.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "t = Template(\n    \"\"\"\n            <%def name=\"embedded()\">\n            <%def name=\"a()\">\n                this is a.\n                <%call expr=\"b()\">\n                    this is a's ccall.  heres my body: ${caller.body()}\n                </%call>\n            </%def>\n            <%def name=\"b()\">\n                this is b.  heres  my body: ${caller.body()}\n                whats in the body's caller's body ? ${context.caller_stack[-2].body()}\n            </%def>\n\n            <%call expr=\"a()\">\n                heres the main templ call\n            </%call>\n            </%def>\n            ${embedded()}\n\"\"\"\n    )\nassert result_lines(t.render()) == ['this is a.',\n    'this is b. heres my body:', \"this is a's ccall. heres my body:\",\n    'heres the main templ call', \"whats in the body's caller's body ?\",\n    'heres the main templ call']\n"
+}

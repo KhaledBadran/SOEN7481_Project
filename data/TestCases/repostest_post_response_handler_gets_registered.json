@@ -1,0 +1,9 @@
+{
+    "functionName": "test_post_response_handler_gets_registered",
+    "className": "TestExceptionHandlersRegistry",
+    "fileName": "/cbefus_&_Eynnyd/tests_&_plan_execution_&_test_error_handlers_builder.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class FakeException(Exception):\n    pass\ndef fake_handler(thrown_exc, request, response):\n    return ResponseBuilder().set_status(HTTPStatus.OK).build()\nexception_handlers = ErrorHandlersBuilder().add_post_response_error_handler(\n    FakeException, fake_handler).build()\nresponse = exception_handlers.handle_post_response_error(FakeException(),\n    'fake request', 'fake response')\nself.assertEqual(HTTPStatus.OK.value, response.status.code)\n"
+}

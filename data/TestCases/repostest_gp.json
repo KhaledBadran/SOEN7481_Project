@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gp",
+    "className": "TestHyperparameterScaling",
+    "fileName": "/SUNCAT-Center_&_CatLearn/test_&_test_scale.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test Gaussian process predictions with rescaling.\"\"\"\ntrain_features, train_targets, test_features, test_targets = get_data()\nkdict = [{'type': 'gaussian', 'width': 1.0, 'scaling': 1.0}]\ngp = GaussianProcess(train_fp=train_features, train_target=train_targets,\n    kernel_list=kdict, regularization=np.sqrt(0.001),\n    optimize_hyperparameters=True, scale_data=True)\npred = gp.predict(test_fp=test_features, test_target=test_targets,\n    get_validation_error=True, get_training_error=True, uncertainty=True)\nopt = gp.kernel_list[0]['width']\norig = hs.rescale_hyperparameters(gp.scaling, gp.kernel_list)[0]['width']\nassert not np.allclose(opt, orig)\nscaled = hs.hyperparameters(gp.scaling, gp.kernel_list)[0]['width']\nassert np.allclose(opt, scaled)\nprint('gaussian prediction (rmse):', pred['validation_error']['rmse_average'])\n"
+}

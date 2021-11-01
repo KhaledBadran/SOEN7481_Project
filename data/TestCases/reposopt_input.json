@@ -1,0 +1,9 @@
+{
+    "functionName": "opt_input",
+    "className": null,
+    "fileName": "/audunarn_&_ANYstructure/ANYstructure_&_tests_&_test_optimize.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "obj_dict = ex.obj_dict\nfat_obj = ex.get_fatigue_object()\nfp = ex.get_fatigue_pressures()\nfat_press = (fp['p_ext']['loaded'], fp['p_ext']['ballast'], fp['p_ext']['part']\n    ), (fp['p_int']['loaded'], fp['p_int']['ballast'], fp['p_int']['part'])\nx0 = [obj_dict['spacing'][0], obj_dict['plate_thk'][0], obj_dict[\n    'stf_web_height'][0], obj_dict['stf_web_thk'][0], obj_dict[\n    'stf_flange_width'][0], obj_dict['stf_flange_thk'][0], obj_dict['span']\n    [0], 10]\nobj = calc.Structure(obj_dict)\nlat_press = 271.124\nupper_bounds = np.array([0.6, 0.01, 0.3, 0.01, 0.1, 0.01, 3.5, 10])\nlower_bounds = np.array([0.8, 0.02, 0.5, 0.02, 0.22, 0.03, 3.5, 10])\ndeltas = np.array([0.05, 0.005, 0.05, 0.005, 0.05, 0.005])\nreturn obj, upper_bounds, lower_bounds, lat_press, deltas, fat_obj, fat_press, x0\npytest.fixture"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ignore_non_version_number",
+    "className": null,
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_BundleTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with tempfile.TemporaryDirectory(prefix=__name__ + '.') as tempdir:\n    bundles_directory = p(tempdir, 'bundles')\n    b = Bundle('example', bundles_directory=bundles_directory)\n    makedirs(p(bundles_directory, 'example', 'ignore_me'))\n    expected = p(bundles_directory, 'example', '5')\n    makedirs(expected)\n    actual = b._get_bundle_directory()\n    assert actual == expected\n"
+}

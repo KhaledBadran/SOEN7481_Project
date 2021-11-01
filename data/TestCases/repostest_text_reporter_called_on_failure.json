@@ -1,0 +1,9 @@
+{
+    "functionName": "test_text_reporter_called_on_failure",
+    "className": "TestAssertEqualWithReporter",
+    "fileName": "/approvals_&_ApprovalTests.Python/tests_&_test_asserts.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class LocalReporter(Reporter):\n\n    def __init__(self):\n        self.received = None\n        self.approved = None\n\n    def report(self, received_path, approved_path):\n        self.received = codecs.open(received_path, 'r', encoding='utf-8-sig'\n            ).read()\n        self.approved = codecs.open(approved_path, 'r', encoding='utf-8-sig'\n            ).read()\nreporter = LocalReporter()\ntry:\n    assert_equal_with_reporter('expected', 'actual', reporter)\nexcept AssertionError:\n    pass\nself.assertEqual(reporter.received, 'actual')\nself.assertEqual(reporter.approved, 'expected')\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_stdin_syntax_err",
+    "className": "CmdTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_cmd.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with mock.patch('sys.stdin', mock.Mock(read=mock.Mock(return_value='${x'))):\n    with self._capture_output_fixture('stderr') as stderr:\n        with raises(SystemExit):\n            cmdline(['--var', 'x=5', '-'])\n    assert 'SyntaxException: Expected' in stderr.write.mock_calls[0][1][0]\n    assert 'Traceback' in stderr.write.mock_calls[0][1][0]\n"
+}

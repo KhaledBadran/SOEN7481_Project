@@ -1,0 +1,9 @@
+{
+    "functionName": "test_lookup",
+    "className": "CacheTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_cache.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "l = TemplateLookup(cache_impl='mock')\nl.put_string('x',\n    \"\"\"\n            <%page cached=\"True\" />\n            ${y}\n        \"\"\")\nt = l.get_template('x')\nself._install_mock_cache(t)\nassert result_lines(t.render(y=5)) == ['5']\nassert result_lines(t.render(y=7)) == ['5']\nassert isinstance(t.cache.impl, MockCacheImpl)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_dict_utilities",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_test_base_training.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test both `parameter_dict()` and `read_values()`\n    \"\"\"\nclass SubModule(tf.Module):\n\n    def __init__(self):\n        self.parameter = gpflow.Parameter(1.0)\n        self.variable = tf.Variable(1.0)\nclass Module(tf.Module):\n\n    def __init__(self):\n        self.submodule = SubModule()\n        self.top_parameter = gpflow.Parameter(3.0)\nm = Module()\nparams = gpflow.utilities.parameter_dict(m)\nassert list(params.keys()) == ['.submodule.parameter',\n    '.submodule.variable', '.top_parameter']\nassert list(params.values()) == [m.submodule.parameter, m.submodule.\n    variable, m.top_parameter]\nfor k, v in read_values(m).items():\n    assert params[k].numpy() == v\n"
+}

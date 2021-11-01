@@ -1,0 +1,9 @@
+{
+    "functionName": "test_nested_model_seq_concat",
+    "className": "TestLayer",
+    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_keras_&_test_layer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "input_data1 = np.random.random_sample([2, 3])\ninput1 = Input((3,))\nout1 = Dense(3)(input1)\nout1_1 = Dense(3)(out1)\nbranch1 = Model(input=[input1], output=out1_1)\nbranch2 = Sequential()\nbranch2.add(Dense(3, input_shape=[3]))\nbranch2.add(Dense(3))\nbranch2.add(branch1)\nbranch2_tensor = branch2(input1)\nkmodel = Model(input=[input1], output=branch2_tensor)\nkmodel.predict([input_data1])\nself.modelTest(input_data1, kmodel, random_weights=False, dump_weights=True,\n    is_training=False)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_temperature_interval",
+    "className": null,
+    "fileName": "/bobbypaton_&_GoodVibes/tests_&_test_goodvibes.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "(QS, QH, s_freq_cutoff, h_freq_cutoff, freq_scale_factor, solv, spc, invert, d3\n    ) = 'grimme', False, 100.0, 100.0, 1.0, 'none', False, False, 0\nprecision = 6\ntemperature_interval = [float(temp) for temp in ti.split(',')]\ninterval = range(int(temperature_interval[0]), int(temperature_interval[1] +\n    1), int(temperature_interval[2]))\nfor i in range(len(interval)):\n    temp = float(interval[i])\n    conc = GV.ATMOS / (GV.GAS_CONSTANT * temp)\n    bbe = GV.calc_bbe(datapath(path), QS, QH, s_freq_cutoff, h_freq_cutoff,\n        temp, conc, freq_scale_factor, solv, spc, invert, d3)\n    assert H[i] == round(bbe.enthalpy, precision)\n    assert TS[i] == round(temp * bbe.entropy, precision)\n    assert TqhS[i] == round(temp * bbe.qh_entropy, precision)\n    assert GT[i] == round(bbe.gibbs_free_energy, precision)\n    assert qhGT[i] == round(bbe.qh_gibbs_free_energy, precision)\npytest.mark.parametrize('path, ti, H, TS, TqhS, GT, qhGT', [('allene.out',\n    '200,300,40', [-116.512865, -116.512128, -116.511313], [0.016953, \n    0.021149, 0.025552], [0.016955, 0.021151, 0.025555], [-116.529818, -\n    116.533277, -116.536865], [-116.529821, -116.53328, -116.536868]), (\n    'ethane.out', '200,300,40', [-79.752458, -79.751811, -79.751109], [\n    0.017099, 0.021225, 0.025519], [0.017101, 0.021227, 0.025521], [-\n    79.769556, -79.773036, -79.776628], [-79.769558, -79.773038, -79.77663]\n    ), ('methylaniline.out', '200,300,40', [-326.518529, -326.51706, -\n    326.515348], [0.023362, 0.029637, 0.036421], [0.023345, 0.029579, \n    0.036313], [-326.541891, -326.546698, -326.551769], [-326.541875, -\n    326.546639, -326.551661])])"
+}

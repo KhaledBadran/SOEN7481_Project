@@ -1,0 +1,9 @@
+{
+    "functionName": "test_zoom_ground_truth_temporary_class",
+    "className": null,
+    "fileName": "/mdbloice_&_Augmentor/tests_&_test_ground_truth_augmentation.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "file_ending = 'PNG'\nstandard_image_directory = tempfile.mkdtemp()\nground_truth_image_directory = tempfile.mkdtemp(prefix='ground-truth_')\nimage_names = []\nnum_of_images = random.randint(1, 10)\nfor i in range(num_of_images):\n    image_names.append('im%s.%s' % (i, file_ending))\nstandard_images = []\nground_truth_images = []\nfor image_name in image_names:\n    im = Image.fromarray(np.uint8(np.random.rand(80, 80, 3) * 255))\n    im_path = os.path.join(os.path.abspath(standard_image_directory),\n        image_name)\n    im.save(im_path, file_ending)\n    standard_images.append(im_path)\nfor image_name in image_names:\n    im = Image.fromarray(np.uint8(np.random.rand(80, 80, 3) * 255))\n    im_path = os.path.join(os.path.abspath(ground_truth_image_directory),\n        image_name)\n    im.save(im_path, file_ending)\n    ground_truth_images.append(im_path)\np = Augmentor.Pipeline(standard_image_directory)\np.ground_truth(ground_truth_image_directory)\np.add_operation(ZoomGroundTruth(probability=1, min_factor=1.1, max_factor=1.5))\nnum_samples = random.randint(2, 10)\np.sample(num_samples)\ngenerated_files = glob.glob(os.path.join(standard_image_directory, 'output/*'))\nassert num_samples * 2 == len(generated_files)\nshutil.rmtree(standard_image_directory)\nshutil.rmtree(ground_truth_image_directory)\n"
+}

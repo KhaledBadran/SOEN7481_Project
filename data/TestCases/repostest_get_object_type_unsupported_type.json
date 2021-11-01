@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_object_type_unsupported_type",
+    "className": "TestKmipEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that an InvalidField error is generated when attempting to\n        get the object type of an object with an unsupported object type.\n        This should never happen by definition, but \"Safety first!\"\n        \"\"\"\ne = engine.KmipEngine()\ne._object_map = {enums.ObjectType.OPAQUE_DATA: None}\ne._data_store = self.engine\ne._data_store_session_factory = self.session_factory\ne._data_session = e._data_store_session_factory()\ne._is_allowed_by_operation_policy = mock.Mock(return_value=True)\ne._logger = mock.MagicMock()\nobj_a = pie_objects.OpaqueObject(b'', enums.OpaqueDataType.NONE)\ne._data_session.add(obj_a)\ne._data_session.commit()\ne._data_session = e._data_store_session_factory()\nid_a = str(obj_a.unique_identifier)\nargs = id_a,\nname = enums.ObjectType.OPAQUE_DATA.name\nregex = 'The {0} object type is not supported.'.format(''.join([x.\n    capitalize() for x in name.split('_')]))\nsix.assertRaisesRegex(self, exceptions.InvalidField, regex, e.\n    _get_object_type, *args)\ne._data_session.commit()\n"
+}

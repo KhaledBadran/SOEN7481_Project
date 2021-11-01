@@ -1,0 +1,9 @@
+{
+    "functionName": "test_find_nim_std_lib",
+    "className": null,
+    "fileName": "/Pebaz_&_Nimporter/tests_&_test_build.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Make sure that Nim's standard library can be found.\"\"\"\nassert shutil.which('nim'), 'Nim compiler is not installed or not on path'\nassert NimCompiler.find_nim_std_lib(\n    ), \"Can't find Nim stdlib even though it is installed\"\nenviron = os.environ.copy()\ntry:\n    os.environ['PATH'] = ''\n    assert not shutil.which('nim')\n    assert not NimCompiler.find_nim_std_lib()\nfinally:\n    os.environ.clear()\n    os.environ.update(environ)\n"
+}

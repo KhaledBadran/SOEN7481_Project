@@ -1,0 +1,9 @@
+{
+    "functionName": "test_concentration_translation",
+    "className": null,
+    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_massdef.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "c_old = np.array([9.0, 10.0, 11.0])\nDelta_old = 200.0\nDelta_new = 200.0\nc_new = ccl.halos.massdef.convert_concentration(COSMO, c_old, Delta_old,\n    Delta_new)\nassert np.all(c_old == c_new)\nDelta_new = 500.0\nc_new = ccl.halos.massdef.convert_concentration(COSMO, c_old, Delta_old,\n    Delta_new)\nc_new_expected = np.array([6.12194, 6.82951, 7.53797])\nassert np.all(np.fabs(c_new / c_new_expected - 1) < 0.0001)\n"
+}

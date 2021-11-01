@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_mtp_details",
+    "className": "TestFindDevice",
+    "fileName": "/DusanMadar_&_PySyncDroid/tests_&_test_find_device.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test 'get_mtp_details' returns a valid MTP url gvfs path.\n        \"\"\"\nusb_bus, device = get_connection_details(vendor='linux', model='root')\nmtp_details = get_mtp_details(usb_bus, device)\nself.assertIsInstance(mtp_details, tuple)\nfor mtp_detail in mtp_details:\n    self.assertIn(device, mtp_detail)\n    self.assertIn(usb_bus, mtp_detail)\n"
+}

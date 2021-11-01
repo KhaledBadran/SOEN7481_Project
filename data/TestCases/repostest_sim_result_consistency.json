@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sim_result_consistency",
+    "className": null,
+    "fileName": "/NASA_&_MLMCPy/tests_&_model_&_test_CDFWrapperModel.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Runs MLMC Simulator with CDF Wrapper models twice and checks results\n    to ensure outputs are consistent.\n    \"\"\"\ngrid_size = 100\ngrid = np.linspace(8, 25, grid_size)\ncdfw_level1 = CDFWrapperModel(models_from_data[0], grid)\ncdfw_level2 = CDFWrapperModel(models_from_data[1], grid)\ncdfw_level3 = CDFWrapperModel(models_from_data[2], grid)\ncdfws = [cdfw_level1, cdfw_level2, cdfw_level3]\nsim = MLMCSimulator(data_input, cdfws)\ncdf1, ss1, v1 = sim.simulate(epsilon=0.05, initial_sample_sizes=\n    initial_sample_size)\ncdf2, ss2, v2 = sim.simulate(epsilon=0.05, initial_sample_sizes=\n    initial_sample_size)\nassert np.all(np.isclose(ss1, ss2))\nassert np.all(np.isclose(v1, v2))\nassert np.all(np.isclose(cdf1, cdf2))\npytest.mark.parametrize('initial_sample_size', [100, 250, 500])"
+}

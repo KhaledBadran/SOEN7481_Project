@@ -1,0 +1,9 @@
+{
+    "functionName": "testExperimentObjectiveUpdates",
+    "className": "SQAStoreTest",
+    "fileName": "/facebook_&_Ax/ax_&_storage_&_sqa_store_&_tests_&_test_sqa_store.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "experiment = get_experiment_with_batch_trial()\nsave_experiment(experiment)\nself.assertEqual(get_session().query(SQAMetric).count(), len(experiment.\n    metrics))\noptimization_config = get_optimization_config()\nobjective = get_objective()\nobjective.minimize = True\noptimization_config.objective = objective\nexperiment.optimization_config = optimization_config\nsave_experiment(experiment)\nself.assertEqual(get_session().query(SQAMetric).count(), len(experiment.\n    metrics))\noptimization_config.objective = Objective(metric=Metric(name='objective'))\nexperiment.optimization_config = optimization_config\nsave_experiment(experiment)\nself.assertEqual(get_session().query(SQAMetric).count(), len(experiment.\n    metrics))\nloaded_experiment = load_experiment(experiment.name)\nself.assertEqual(experiment, loaded_experiment)\n"
+}

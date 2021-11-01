@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_normalized_docstring",
+    "className": null,
+    "fileName": "/IanChen83_&_ClassArg/tests_&_test_doc.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tiny_str = 'Loren ipsum dolor sit amet.'\nlong_str = \"\"\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris\nsed urna quis ante luctus sodales a vel felis.\"\"\"\nreturn_str = \"\"\"Returns:\n  xxx:  pass\"\"\"\nspec = SimpleNamespace(args=['aaa', 'bbb'], varargs='ccc', varkw='fff',\n    defaults=(1,), kwonlyargs=['ddd', 'eee', 'xxx'], kwonlydefaults={'eee':\n    2, 'xxx': False}, annotations={'bbb': int, 'ddd': int, 'eee': int,\n    'xxx': bool}, descriptions=[long_str, return_str], argument_docs=dict(\n    aaa=tiny_str, bbb=tiny_str, ccc=tiny_str, ddd=tiny_str, xxx='pass'),\n    aliases=dict(x='xxx'))\nexpect7 = \"\"\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris\nsed urna quis ante luctus sodales a vel felis.\n\nReturns:\n  xxx:  pass\n\nArguments:\n  aaa           Loren ipsum dolor sit amet.\n  bbb           Loren ipsum dolor sit amet.\n  ccc           Loren ipsum dolor sit amet.\n  --ddd         Loren ipsum dolor sit amet.\n  --xxx, -x     pass\"\"\"\nexpect8 = \"\"\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris\nsed urna quis ante luctus sodales a vel felis.\n\nReturns:\n  xxx:  pass\n\nArguments:\n  aaa      Loren ipsum dolor sit amet.\n  bbb      Loren ipsum dolor sit amet.\n  ccc      Loren ipsum dolor sit amet.\n  --ddd    Loren ipsum dolor sit amet.\n  --xxx, -x\n           pass\"\"\"\nres = doc.get_normalized_docstring(spec)\nif res != expect7:\n    print(res)\n    assert res == expect7\nres = doc.get_normalized_docstring(spec, tabstop=11)\nif res != expect8:\n    print(res)\n    print(expect8)\n    assert res == expect8\n"
+}

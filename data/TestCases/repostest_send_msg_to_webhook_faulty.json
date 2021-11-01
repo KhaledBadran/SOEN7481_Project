@@ -1,0 +1,9 @@
+{
+    "functionName": "test_send_msg_to_webhook_faulty",
+    "className": null,
+    "fileName": "/EVEprosper_&_ProsperCommon/tests_&_test_prosper_logging.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"verify that the handler gives a warning on exception\"\"\"\ntest_serverid = 1234\ntest_apikey = 'some_key'\nwebhook = prosper_logging.DiscordWebhook()\nwebhook.api_keys(test_serverid, test_apikey)\nhandler = prosper_logging.HackyDiscordHandler(webhook)\nhandler.send_msg_to_webhook('dummy')\nassert warn.called\npatch('requests.post', side_effect=Exception)patch('prosper.common.prosper_logging.warnings.warn')"
+}

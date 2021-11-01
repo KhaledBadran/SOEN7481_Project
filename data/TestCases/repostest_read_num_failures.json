@@ -1,0 +1,9 @@
+{
+    "functionName": "test_read_num_failures",
+    "className": null,
+    "fileName": "/geowurster_&_NewlineJSON/tests_&_test_core.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with tempfile.NamedTemporaryFile(mode='r+') as f:\n    f.write('{' + os.linesep + ']')\n    f.seek(0)\n    with nlj.open(f.name, skip_failures=True) as src:\n        assert src.num_failures is 0\n        for row in src:\n            pass\n        assert src.num_failures is 2\n"
+}

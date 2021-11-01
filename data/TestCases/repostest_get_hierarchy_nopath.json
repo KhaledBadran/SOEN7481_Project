@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_hierarchy_nopath",
+    "className": null,
+    "fileName": "/CCampJr_&_LazyHDF5/lazy5_&_tests_&_test_inspect.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    OrderedDict describing HDF5 file hierarchy. Testing with no full paths in\n    the dataset names. Keys are groups, values are datasets.\n    \"\"\"\nfilename, fid = hdf_dataset\nhierarchy = get_hierarchy(fid, fulldsetpath=False, grp_w_dset=False)\nassert hierarchy == {'/': ['base'], 'Group1': ['ingroup1_1', 'ingroup1_2'],\n    'Group2': ['ingroup2'], 'Group2/Group3': ['ingroup3'], 'Group4': [],\n    'Group4/Group5': [], 'Group4/Group5/Group6': ['ingroup6']}\nhierarchy = get_hierarchy(filename, fulldsetpath=False, grp_w_dset=False)\nassert hierarchy == {'/': ['base'], 'Group1': ['ingroup1_1', 'ingroup1_2'],\n    'Group2': ['ingroup2'], 'Group2/Group3': ['ingroup3'], 'Group4': [],\n    'Group4/Group5': [], 'Group4/Group5/Group6': ['ingroup6']}\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_wda",
+    "className": null,
+    "fileName": "/PythonOT_&_POT/test_&_test_dr.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "n_samples = 100\nnp.random.seed(0)\nxs, ys = ot.datasets.make_data_classif('gaussrot', n_samples)\nn_features_noise = 8\nxs = np.hstack((xs, np.random.randn(n_samples, n_features_noise)))\np = 2\nPwda, projwda = ot.dr.wda(xs, ys, p, maxiter=10)\nprojwda(xs)\nnp.testing.assert_allclose(np.sum(Pwda ** 2, 0), np.ones(p))\npytest.mark.skipif(nogo, reason='Missing modules (autograd or pymanopt)')"
+}

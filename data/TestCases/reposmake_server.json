@@ -1,0 +1,9 @@
+{
+    "functionName": "make_server",
+    "className": null,
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_HTTPBundleUploaderTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "class _Handler(SimpleHTTPRequestHandler):\n\n    def do_POST(self):\n        request_queue.put(dict(method=self.command, path=self.path, headers\n            ={k.lower(): v for k, v in self.headers.items()}))\n        self.send_response(201)\n        self.end_headers()\nport = 8000\nwhile True:\n    try:\n        server = HTTPServer(('127.0.0.1', port), _Handler)\n        break\n    except OSError as e:\n        if e.errno != 98:\n            raise\n        port += 1\nreturn server\n"
+}

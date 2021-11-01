@@ -1,0 +1,9 @@
+{
+    "functionName": "test_invalid_operation_auth",
+    "className": "TestOtherOperationsAuth",
+    "fileName": "/fvalverd_&_AutoApi/tests_&_test_operations.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data = {'email': self.user, 'password': self.password, 'api': self.api}\nresponse = self.app.post('/login', data=data)\nself.assertEqual(response.status_code, 200)\nheaders = self.response_to_headers(response)\nresponse = self.app.post('/asdf', headers=headers)\nresponse_json = json.loads(response.data or '{}')\nself.assertEqual(response.status_code, 400)\nself.assertDictEqual(response_json, {'message':\n    u'This is not a valid operation'})\n"
+}

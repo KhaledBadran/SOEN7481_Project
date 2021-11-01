@@ -1,0 +1,9 @@
+{
+    "functionName": "test_warn_ind1",
+    "className": null,
+    "fileName": "/NUAA-AL_&_ALiPy/test_&_test_indexcollection.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with pytest.warns(RepeatElementWarning, match=\n    '.*same elements in the given data'):\n    a = IndexCollection([1, 2, 2, 3])\nwith pytest.warns(RepeatElementWarning, match=\n    '.*has already in the collection.*'):\n    a.add(3)\na.add(4)\nwith pytest.warns(InexistentElementWarning, match=\n    '.*to discard is not in the collection.*'):\n    a.discard(6)\nassert a.pop() == 4\nwith pytest.warns(RepeatElementWarning, match=\n    '.*has already in the collection.*'):\n    a.update(IndexCollection([2, 9, 10]))\nwith pytest.warns(InexistentElementWarning, match=\n    '.*to discard is not in the collection.*'):\n    a.difference_update(IndexCollection([2, 100]))\n"
+}

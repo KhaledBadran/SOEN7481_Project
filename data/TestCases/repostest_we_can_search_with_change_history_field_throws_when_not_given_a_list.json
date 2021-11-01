@@ -1,0 +1,9 @@
+{
+    "functionName": "test_we_can_search_with_change_history_field_throws_when_not_given_a_list",
+    "className": null,
+    "fileName": "/AutomatedTester_&_Bugsy/tests_&_test_search.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "return_1 = {'bugs': [{'component': 'CSS Parsing and Computation', 'product':\n    'Core', 'summary': 'Map \"rebeccapurple\" to #663399 in named color list.'}]}\nresponses.add(responses.GET,\n    'https://bugzilla.mozilla.org/rest/bug?chfieldfrom=2014-12-01&chfieldto=2014-12-05&include_fields=version&include_fields=id&include_fields=summary&include_fields=status&include_fields=op_sys&include_fields=resolution&include_fields=product&include_fields=component&include_fields=platform&chfield=[Bug Creation]&chfield=Alias&chfieldvalue=foo'\n    , body=json.dumps(return_1), status=200, content_type=\n    'application/json', match_querystring=False)\ntry:\n    bugzilla = Bugsy()\n    bugs = bugzilla.search_for.change_history_fields('[Bug Creation]', 'foo'\n        ).timeframe('2014-12-01', '2014-12-05').search()\nexcept Exception as e:\n    assert str(e) == 'fields should be a list'\nresponses.activate"
+}

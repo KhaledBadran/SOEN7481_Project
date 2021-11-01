@@ -1,0 +1,9 @@
+{
+    "functionName": "test_port_stats",
+    "className": "TestIxeOnline",
+    "fileName": "/shmir_&_PyIxExplorer/ixexplorer_&_test_&_test_online.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cfg1 = path.join(path.dirname(__file__), 'configs/stats_config_1.prt')\ncfg2 = path.join(path.dirname(__file__), 'configs/stats_config_2.prt')\nself._reserver_and_load(cfg1, cfg2)\nself.ixia.session.start_transmit()\nport_stats = IxePortsStats(self.ixia.session)\nport_stats.read_stats()\nprint(json.dumps(port_stats.statistics, indent=1, sort_keys=True))\nassert port_stats.statistics[self.port1]['framesSent'] > 0\nassert port_stats.statistics[self.port2]['framesSent_rate'] > 0\nself.ixia.session.stop_transmit()\nself.ports[self.port1].start_transmit()\ntime.sleep(8)\nself.ports[self.port1].stop_transmit()\nport1_stats = self.ports[self.port1].read_stats('framesSent', 'framesReceived')\nprint(json.dumps(port1_stats, indent=1))\nassert port1_stats['framesSent'] > 0\nassert port1_stats['framesSent_rate'] == 0\n"
+}

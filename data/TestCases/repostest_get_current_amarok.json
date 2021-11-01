@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_current_amarok",
+    "className": null,
+    "fileName": "/ocaballeror_&_Lyricfetch/lyricfetch_&_tests_&_test_dbus.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Check that we can get the current song playing in amarok.\n    \"\"\"\nnow_playing = Song(artist='Nightwish', title='Alpenglow', album=\n    'Endless Forms Most Beautiful')\ndbus_service.set_handler('/Player', 'GetMetadata', lambda :\n    sample_response_amarok)\ndbus_service.listen()\nsong = get_current_amarok()\nassert song == now_playing\npytest.mark.parametrize('dbus_service', ['org.kde.amarok'], indirect=True)"
+}

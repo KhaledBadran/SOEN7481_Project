@@ -1,0 +1,9 @@
+{
+    "functionName": "test_when_connect_disconnect",
+    "className": null,
+    "fileName": "/martinohanlon_&_BlueDot/tests_&_test_blue_dot.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "mbd = MockBlueDot()\nevent_connect = Event()\nmbd.when_client_connects = lambda : event_connect.set()\nevent_disconnect = Event()\nmbd.when_client_disconnects = lambda : event_disconnect.set()\nassert not event_connect.is_set()\nmbd.mock_client_connected()\nassert event_connect.wait(1)\nassert not event_disconnect.is_set()\nmbd.mock_client_disconnected()\nassert event_disconnect.wait(1)\n"
+}

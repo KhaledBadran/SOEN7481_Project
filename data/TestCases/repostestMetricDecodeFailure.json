@@ -1,0 +1,9 @@
+{
+    "functionName": "testMetricDecodeFailure",
+    "className": "SQAStoreTest",
+    "fileName": "/facebook_&_Ax/ax_&_storage_&_sqa_store_&_tests_&_test_sqa_store.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "metric = get_branin_metric()\nsqa_metric = self.encoder.metric_to_sqa(metric)\nsqa_metric.metric_type = 'foobar'\nwith self.assertRaises(SQADecodeError):\n    self.decoder.metric_from_sqa(sqa_metric)\nsqa_metric.metric_type = METRIC_REGISTRY[BraninMetric]\nsqa_metric.intent = 'foobar'\nwith self.assertRaises(SQADecodeError):\n    self.decoder.metric_from_sqa(sqa_metric)\nsqa_metric.intent = MetricIntent.TRACKING\nsqa_metric.properties = {}\nwith self.assertRaises(ValueError):\n    self.decoder.metric_from_sqa(sqa_metric)\n"
+}

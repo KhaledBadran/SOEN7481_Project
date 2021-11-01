@@ -1,0 +1,9 @@
+{
+    "functionName": "test_guess_ncores",
+    "className": null,
+    "fileName": "/bio-phys_&_MDBenchmark/mdbenchmark_&_tests_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that we can guess the correct number of cores on the supported\n    systems.\n    \"\"\"\ndef dummy(arg):\n    return 'ABC'\nmonkeypatch.setattr('mdbenchmark.utils.sys.platform', 'linux')\nmonkeypatch.setattr('mdbenchmark.utils._cat_proc_cpuinfo_grep_query_sort_uniq',\n    dummy)\nassert utils.guess_ncores() == 9\nmonkeypatch.setattr('mdbenchmark.utils.sys.platform', 'darwin')\nmonkeypatch.setattr('mdbenchmark.utils.mp.cpu_count', lambda : 10)\nassert utils.guess_ncores() == 5\nmonkeypatch.setattr('mdbenchmark.utils.sys.platform', 'starlord')\noutput = \"\"\"WARNING Could not guess number of physical cores. Assuming there is only 1 core per node.\n\"\"\"\nutils.guess_ncores()\nout, err = capsys.readouterr()\nassert out == output\n"
+}

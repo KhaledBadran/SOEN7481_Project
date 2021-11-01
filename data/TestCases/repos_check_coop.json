@@ -1,0 +1,9 @@
+{
+    "functionName": "_check_coop",
+    "className": "MixedInvasionPercolationCoop",
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_algorithms_&_MixedInvasionPercolationCoop.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        Method run in loop after every pore invasion. All connecting throats\n        are now given access to the invading phase. Two throats with access to\n        the invading phase can cooperatively fill any pores that they are both\n        connected to, common pores.\n        The invasion of theses throats connected to the common pore is handled\n        elsewhere.\n        \"\"\"\nnet = self.project.network\nt_inv = 'throat.invasion_sequence'\np_inv = 'pore.invasion_sequence'\nfor throat in net.find_neighbor_throats(pores=pore):\n    if self[t_inv][throat] == -1:\n        a = set(net['throat.conns'][throat])\n        ts_Pc = self.tt_Pc.data[throat]\n        ts = self.tt_Pc.rows[throat]\n        if np.any(~np.isnan(ts_Pc)):\n            ts_Pc = np.asarray(ts_Pc)\n            ts = np.asarray(ts)\n            ts = ts[~np.isnan(ts_Pc)]\n            ts_Pc = ts_Pc[~np.isnan(ts_Pc)]\n            for i, t in enumerate(ts):\n                b = set(net['throat.conns'][t])\n                cP = list(a.intersection(b))\n                uPs = list(a.symmetric_difference(b))\n                if np.all(self[p_inv][uPs] > -1) and self[p_inv][cP] == -1:\n                    hq.heappush(queue, [ts_Pc[i], list(cP), 'pore'])\n"
+}

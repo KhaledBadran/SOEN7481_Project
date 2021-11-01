@@ -1,0 +1,9 @@
+{
+    "functionName": "testGetBoundsAndTask",
+    "className": "NumpyModelBridgeTest",
+    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_numpy_modelbridge.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "bounds, task_features, target_fidelities = get_bounds_and_task(self.\n    search_space, ['x', 'y', 'z'])\nself.assertEqual(bounds, [(0.0, 1.0), (1.0, 2.0), (0.0, 5.0)])\nself.assertEqual(task_features, [])\nself.assertEqual(target_fidelities, {(1): 2.0})\nbounds, task_features, target_fidelities = get_bounds_and_task(self.\n    search_space, ['x', 'z'])\nself.assertEqual(target_fidelities, {})\nsearch_space = SearchSpace(self.parameters)\nsearch_space._parameters['x'] = RangeParameter('x', ParameterType.INT,\n    lower=1, upper=4)\nbounds, task_features, target_fidelities = get_bounds_and_task(search_space,\n    ['x', 'y', 'z'])\nself.assertEqual(task_features, [0])\nsearch_space._parameters['x'] = ChoiceParameter('x', ParameterType.FLOAT, [\n    0.1, 0.4])\nwith self.assertRaises(ValueError):\n    get_bounds_and_task(search_space, ['x', 'y', 'z'])\nsearch_space._parameters['x'] = RangeParameter('x', ParameterType.FLOAT,\n    lower=1.0, upper=4.0, log_scale=True)\nwith self.assertRaises(ValueError):\n    get_bounds_and_task(search_space, ['x', 'y', 'z'])\n"
+}

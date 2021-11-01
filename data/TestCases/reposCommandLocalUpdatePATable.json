@@ -1,0 +1,9 @@
+{
+    "functionName": "CommandLocalUpdatePATable",
+    "className": "faraday_commands",
+    "fileName": "/FaradayRF_&_Faraday-Software/faraday_&_proxyio_&_faradaycommands.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        A predefined command to return a a complete datagram and command packet to update the LOCAL Faraday RF Power Table settings without affecting the default BOOT power level.\n        Note that a setting of 152 is the maximum output power, any number higher than 152 will be sent as a value of 152.\n\n        :param ucharPATable_Byte: A single byte value for the PA table RF power setting on the CC430\n\n        :Return: Returns the complete generated packet as a string of bytes.\n\n        \"\"\"\npacket = commandmodule.create_command_datagram(self.CMD_UPDATERFPOWER,\n    commandmodule.create_update_rf_patable_packet(ucharPATable_Byte))\nreturn packet\n"
+}

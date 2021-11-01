@@ -1,0 +1,9 @@
+{
+    "functionName": "test_integration_points_curve_2d",
+    "className": "TestIntegrationPoints",
+    "fileName": "/oberbichler_&_ANurbs/tests_&_TestIntegrationPoints.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "model = an.Model()\nmodel.add_array(\n    \"\"\"[\n            {\n                \"key\": \"TestData\",\n                \"type\": \"NurbsCurveGeometry2D\",\n                \"degree\": 1,\n                \"nb_poles\": 2,\n                \"knots\": [-1, 0, 1],\n                \"poles\": [[-1, 0], [0, 0], [2, 0]]\n            }\n        ]\"\"\"\n    )\ncurve = model.get(0).data\nintegration_points = an.integration_points(degree=2, curve=curve)\nassert_array_almost_equal(integration_points, [(-0.788675, 0.5), (-0.211325,\n    0.5), (0.211325, 1.0), (0.788675, 1.0)])\nstaticmethod"
+}

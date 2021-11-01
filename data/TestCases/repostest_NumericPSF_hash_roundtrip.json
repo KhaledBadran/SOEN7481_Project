@@ -1,0 +1,9 @@
+{
+    "functionName": "test_NumericPSF_hash_roundtrip",
+    "className": null,
+    "fileName": "/OpenSMFS_&_PyBroMo/pybromo_&_tests_&_test_psflib.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "psf = pbm.NumericPSF()\nwith tables.open_file('psfntest.h5', mode='w') as h5:\n    psf.to_hdf5(h5)\nwith tables.open_file('psfntest.h5', mode='r') as h5:\n    a = h5.get_node('/xz_realistic_z50_150_160_580nm_n1335_HR2')\n    assert pbm.NumericPSF(psf_pytables=a).hash() == psf.hash()\n"
+}

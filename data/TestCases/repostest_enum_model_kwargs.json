@@ -1,0 +1,9 @@
+{
+    "functionName": "test_enum_model_kwargs",
+    "className": "ModelRegistryTest",
+    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_registry.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Tests that kwargs are passed correctly when instantiating through the\n        Models enum.\"\"\"\nexp = get_branin_experiment()\nsobol = Models.SOBOL(search_space=exp.search_space, init_position=2,\n    scramble=False, seed=239)\nself.assertIsInstance(sobol, RandomModelBridge)\nfor _ in range(5):\n    sobol_run = sobol.gen(1)\n    exp.new_batch_trial().add_generator_run(sobol_run).run()\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_agent_move",
+    "className": null,
+    "fileName": "/SeverTopan_&_AdjSim/test_&_test_callback.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from adjsim import core, utility, decision\ndef move_callback(agent):\n    move_callback.count += 1\nmove_callback.count = 0\ndef move(env, source):\n    source.x += 10\n    source.y += 10\nclass TestAgent(core.VisualAgent):\n\n    def __init__(self, x, y):\n        super().__init__(pos=np.array([x, y]))\n        self.decision = decision.RandomSingleCastDecision()\n        self.actions['move'] = move\ntest_sim = core.Simulation()\ntest_sim.callbacks.agent_moved.register(move_callback)\ntest_sim.agents.add(TestAgent(0, 0))\ntest_sim.agents.add(TestAgent(0, -10))\ncommon.step_simulate_interpolation(test_sim)\nassert move_callback.count == 4 * common.INTERPOLATION_NUM_TIMESTEP\n"
+}

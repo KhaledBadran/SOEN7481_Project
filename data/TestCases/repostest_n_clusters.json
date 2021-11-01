@@ -1,0 +1,9 @@
+{
+    "functionName": "test_n_clusters",
+    "className": null,
+    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_tests_&_sklearn_compat_&_test_birch.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "X, y = make_blobs(n_samples=100, centers=10)\nbrc1 = Birch(n_clusters=10)\nbrc1.fit(X)\nassert_greater(len(brc1.subcluster_centers_), 10)\nassert_equal(len(np.unique(brc1.labels_)), 10)\ngc = AgglomerativeClustering(n_clusters=10)\nbrc2 = Birch(n_clusters=gc)\nbrc2.fit(X)\nassert_array_equal(brc1.subcluster_labels_, brc2.subcluster_labels_)\nassert_array_equal(brc1.labels_, brc2.labels_)\nclf = ElasticNet()\nbrc3 = Birch(n_clusters=clf)\nassert_raises(ValueError, brc3.fit, X)\nbrc4 = Birch(threshold=10000.0)\nassert_warns(UserWarning, brc4.fit, X)\n"
+}

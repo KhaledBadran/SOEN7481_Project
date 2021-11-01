@@ -1,0 +1,9 @@
+{
+    "functionName": "test_detect_5utr",
+    "className": "TestDetectUTR",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_detect_utr.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "args = self.mock_args.mock()\ndu.read_file = Mock_func().mock_read_file\ndu.plot = Mock_func().mock_plot\nout_file = os.path.join(self.test_folder, '5utr.gff')\nargs.source = True\nargs.base_5utr = 'both'\nargs.length = 300\ndu.detect_5utr('test.tss', 'test.gff', 'test.ta', out_file, args)\nheader = ['##gff-version 3']\nargs.source = False\nargs.base_5utr = 'both'\ndu.detect_5utr('test.tss', 'test.gff', 'test.ta', out_file, args)\ndatas = import_data(out_file)\nref = header + [self.example.out_5utr_other]\nself.assertEqual(datas[1], ref[1])\nargs.base_5utr = 'transcript'\ndu.detect_5utr('test.tss', 'test.gff', 'test.ta', out_file, args)\nself.assertEqual(set(datas), set(ref))\nargs.source = True\nargs.base_5utr = 'both'\ndu.detect_5utr('test.tss', 'test.gff', 'test.ta', out_file, args)\ndatas = import_data(out_file)\nref = header + [self.example.out_5utr_tsspredator]\nself.assertListEqual(datas, ref)\n"
+}

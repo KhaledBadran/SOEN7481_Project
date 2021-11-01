@@ -1,0 +1,9 @@
+{
+    "functionName": "calcTasQH",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_TasUBlibDEG.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "A3, A4 = angles\nr = [0, 0, 0, A3 + A3Off, A4, 0.0, 0.0, Ei, Ef]\nki = np.sqrt(Ei) * factorsqrtEK\nkf = np.sqrt(Ef) * factorsqrtEK\nQV = calcTasUVectorFromAngles(r)\nq = np.sqrt(ki ** 2 + kf ** 2 - 2.0 * ki * kf * cosd(A4))\nif len(QV.shape) > 2:\n    q = np.expand_dims(np.swapaxes(q, 0, 2), 3)\nQV *= q\nQ = np.einsum('ij,...j->...i', UBINV, QV)\nif len(QV.shape) > 2:\n    QxQy = np.swapaxes(QV, 0, 2)\n    return Q, QxQy[:, :, :, (0)], QxQy[:, :, :, (1)]\nreturn Q, QV\n"
+}

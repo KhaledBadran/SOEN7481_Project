@@ -1,0 +1,9 @@
+{
+    "functionName": "test_skew_ground_truth",
+    "className": null,
+    "fileName": "/mdbloice_&_Augmentor/tests_&_test_ground_truth_by_class.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "standard_image_directory = tempfile.mkdtemp()\nground_truth_image_directory = tempfile.mkdtemp(prefix='ground-truth_')\nimage_names = []\nnum_of_images = random.randint(1, 10)\nfor i in range(num_of_images):\n    image_names.append('im%s.png' % i)\nstandard_images = []\nground_truth_images = []\nfor image_name in image_names:\n    im = Image.fromarray(np.uint8(np.random.rand(80, 80, 3) * 255))\n    im_path = os.path.join(os.path.abspath(standard_image_directory),\n        image_name)\n    im.save(im_path, 'PNG')\n    standard_images.append(im_path)\nfor image_name in image_names:\n    im = Image.fromarray(np.uint8(np.random.rand(80, 80, 3) * 255))\n    im_path = os.path.join(os.path.abspath(ground_truth_image_directory),\n        image_name)\n    im.save(im_path, 'PNG')\n    ground_truth_images.append(im_path)\nnum_samples = 10\np = Augmentor.Pipeline(standard_image_directory)\np.ground_truth(ground_truth_image_directory)\np.skew(probability=1, magnitude=0.5)\np.sample(num_samples)\ngenerated_files = glob.glob(os.path.join(standard_image_directory, 'output/*'))\nassert num_samples * 2 == len(generated_files)\np.greyscale(probability=1)\np.sample(num_samples)\ngenerated_files = glob.glob(os.path.join(standard_image_directory, 'output/*'))\nassert num_samples * 4 == len(generated_files)\nshutil.rmtree(standard_image_directory)\nshutil.rmtree(ground_truth_image_directory)\n"
+}

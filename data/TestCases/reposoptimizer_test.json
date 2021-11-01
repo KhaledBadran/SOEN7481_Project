@@ -1,0 +1,9 @@
+{
+    "functionName": "optimizer_test",
+    "className": "TestOptimizer",
+    "fileName": "/Yelp_&_MOE/moe_&_tests_&_optimal_learning_&_python_&_python_version_&_optimization_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Check that the optimizer can find the optimum of the quadratic test objective.\"\"\"\noptimum_point = self.polynomial.optimum_point\nself.polynomial.current_point = optimum_point\ngradient = self.polynomial.compute_grad_objective_function()\nself.assert_vector_within_relative(gradient, numpy.zeros(self.polynomial.\n    dim), 0.0)\noptimizer.optimize()\noutput = optimizer.objective_function.current_point\nself.assert_vector_within_relative(output, optimum_point, 2.0 * numpy.finfo\n    (numpy.float64).eps)\ninitial_guess = numpy.full(self.polynomial.dim, 0.2)\noptimizer.objective_function.current_point = initial_guess\noptimizer.optimize()\noutput = optimizer.objective_function.current_point\nself.assert_vector_within_relative(output, optimum_point, tolerance)\nvalue = self.polynomial.compute_objective_function()\nself.assert_scalar_within_relative(value, self.polynomial.optimum_value,\n    tolerance)\ngradient = self.polynomial.compute_grad_objective_function()\nself.assert_vector_within_relative(gradient, numpy.zeros(self.polynomial.\n    dim), tolerance)\n"
+}

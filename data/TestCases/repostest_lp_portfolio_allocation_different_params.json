@@ -1,0 +1,9 @@
+{
+    "functionName": "test_lp_portfolio_allocation_different_params",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_discrete_allocation.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "df = get_data()\nmu = mean_historical_return(df)\nS = sample_cov(df)\nef = EfficientFrontier(mu, S)\nw = ef.max_sharpe()\nlatest_prices = get_latest_prices(df)\nda = DiscreteAllocation(w, latest_prices, total_portfolio_value=80000,\n    short_ratio=0.4)\nallocation, leftover = da.lp_portfolio()\nassert da.allocation == {'GOOG': 1, 'AAPL': 43, 'FB': 95, 'BABA': 44,\n    'AMZN': 4, 'AMD': 1, 'SHLD': 3, 'BBY': 69, 'MA': 114, 'PFE': 412,\n    'SBUX': 51}\ntotal = 0\nfor ticker, num in allocation.items():\n    total += num * latest_prices[ticker]\nnp.testing.assert_almost_equal(total + leftover, 80000, decimal=4)\n"
+}

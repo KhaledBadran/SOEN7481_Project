@@ -1,0 +1,9 @@
+{
+    "functionName": "test_input_arrays_raises",
+    "className": null,
+    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_background.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test for input scale factor array being descending,\n    not ending in 1.0, being different size, as well as\n    for no input arrays.\n    \"\"\"\nfor input_a in [input_a_array_descending, input_a_array_not1, input_a_array\n    [:-2]]:\n    cosmo_input = ccl.Cosmology(Omega_c=0.27, Omega_b=0.05, h=0.7, n_s=\n        0.965, A_s=2e-09)\n    cosmo_input._set_background_from_arrays(a_array=input_a, chi_array=\n        input_chi, hoh0_array=input_hoh0)\n    cosmo_input._set_growth_from_arrays(a_array=input_a, growth_array=\n        input_growth, fgrowth_array=input_fgrowth)\n    with pytest.raises(ValueError):\n        cosmo_input.compute_distances()\n        cosmo_input.compute_growth()\nwith pytest.raises(ValueError):\n    cosmo_input._set_background_from_arrays(a_array=input_a_array,\n        chi_array=input_chi, hoh0_array=input_hoh0)\n    cosmo_input._set_growth_from_arrays(a_array=input_a_array, growth_array\n        =input_growth, fgrowth_array=input_fgrowth)\n    cosmo_input.compute_growth()\n    cosmo_input._set_background_from_arrays(a_array=input_a, chi_array=\n        input_chi, hoh0_array=input_hoh0)\n    cosmo_input._set_growth_from_arrays(a_array=input_a, growth_array=\n        input_growth, fgrowth_array=input_fgrowth)\nwith pytest.raises(ValueError):\n    cosmo_input = ccl.Cosmology(Omega_c=0.27, Omega_b=0.05, h=0.7, n_s=\n        0.965, A_s=2e-09)\n    cosmo_input._set_background_from_arrays()\n    cosmo_input._set_growth_from_arrays()\n"
+}

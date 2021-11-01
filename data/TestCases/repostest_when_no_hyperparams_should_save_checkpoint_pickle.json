@@ -1,0 +1,9 @@
+{
+    "functionName": "test_when_no_hyperparams_should_save_checkpoint_pickle",
+    "className": null,
+    "fileName": "/Neuraxio_&_Neuraxle/testing_&_test_pickle_checkpoint_step.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tape = TapeCallbackFunction()\npickle_checkpoint_step = DefaultCheckpoint()\npipeline = create_pipeline(tmpdir, pickle_checkpoint_step, tape)\npipeline, actual_data_inputs = pipeline.fit_transform(data_inputs,\n    expected_outputs)\nactual_tape = tape.get_name_tape()\nassert np.array_equal(actual_data_inputs, data_inputs)\nassert actual_tape == ['1', '2', '3']\nassert os.path.exists(os.path.join(tmpdir, 'ResumablePipeline',\n    'pickle_checkpoint', 'di', '0.pickle'))\nassert os.path.exists(os.path.join(tmpdir, 'ResumablePipeline',\n    'pickle_checkpoint', 'di', '1.pickle'))\nassert os.path.exists(os.path.join(tmpdir, 'ResumablePipeline',\n    'pickle_checkpoint', 'eo', '0.pickle'))\nassert os.path.exists(os.path.join(tmpdir, 'ResumablePipeline',\n    'pickle_checkpoint', 'eo', '1.pickle'))\n"
+}

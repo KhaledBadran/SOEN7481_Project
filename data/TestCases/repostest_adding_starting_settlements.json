@@ -1,0 +1,9 @@
+{
+    "functionName": "test_adding_starting_settlements",
+    "className": "TestGame",
+    "fileName": "/josefwaller_&_PyCatan/tests_&_test_game.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "g = Game()\ng.players[0].add_cards([ResCard.Wood, ResCard.Brick, ResCard.Sheep, ResCard\n    .Wheat])\nres = g.add_settlement(0, g.board.points[0][0], True)\nassert res == Statuses.ALL_GOOD\nassert g.board.points[0][0].building != None\nassert g.board.points[0][0].building.type == Building.BUILDING_SETTLEMENT\nassert g.board.points[0][0].building.point is g.board.points[0][0]\nassert len(g.players[0].cards) == 4\nres = g.add_settlement(1, g.board.points[0][1], True)\nassert res == Statuses.ERR_BLOCKED\nres = g.add_settlement(2, g.board.points[0][2], True)\nassert res == Statuses.ALL_GOOD\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_KLratio_from_r",
+    "className": null,
+    "fileName": "/open-source-economics_&_OG-USA/ogusa_&_tests_&_test_firm.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        choose values that simplify the calculations and are similar to\n        observed values\n    \"\"\"\nKLratio = firm.get_KLratio_from_r(r, p, method)\nassert np.allclose(KLratio, expected, atol=1e-06)\npytest.mark.parametrize('r,p,method,expected', [(r1, p1, 'SS', expected1),\n    (r1, p2, 'SS', expected2), (r1, p3, 'SS', expected3), (r4, p4, 'TPI',\n    expected4)], ids=['epsilon=0.8,SS', 'epsilon=1.2,SS', 'epsilon=1.0,SS',\n    'epsilon=0.5,TP'])"
+}

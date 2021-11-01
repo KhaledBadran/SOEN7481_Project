@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fourier",
+    "className": "TestStructureMethods",
+    "fileName": "/mesonepigreco_&_CellConstructor/scripts_&_cellconstructor_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Generate a random dynamical matrix, apply translations,\n        and then generate do forward and backward the transformation\n        \"\"\"\nSUPERCELL = 4, 4, 1\ndyn = self.dynSnSe\nsuperstructure = dyn.structure.generate_supercell(SUPERCELL)\nnatsc = superstructure.N_atoms\nfc_random = np.random.uniform(size=(3 * natsc, 3 * natsc))\nfc_random += fc_random.T\nCC.symmetries.ApplyTranslationsToSupercell(fc_random, superstructure, SUPERCELL\n    )\nq_grid = CC.symmetries.GetQGrid(dyn.structure.unit_cell, SUPERCELL)\ndynq = CC.Phonons.GetDynQFromFCSupercell(fc_random, np.array(q_grid), dyn.\n    structure, superstructure)\nfc_new = CC.Phonons.GetSupercellFCFromDyn(dynq, np.array(q_grid), dyn.\n    structure, superstructure)\nself.assertTrue(np.max(np.abs(fc_new - fc_random)) < 1e-10)\n"
+}

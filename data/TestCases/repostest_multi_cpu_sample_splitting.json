@@ -1,0 +1,9 @@
+{
+    "functionName": "test_multi_cpu_sample_splitting",
+    "className": null,
+    "fileName": "/NASA_&_MLMCPy/tests_&_mlmc_&_test_MLMCSimulator.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Tests simulator's _determine_num_cpu_samples() by ensuring that all samples\n    will be used and that the difference in number of samples between processes\n    is never greater than one.\n    \"\"\"\ntotal_samples = 100\nsample_sizes = np.zeros(num_cpus)\nsim = MLMCSimulator(models=models_from_data, data=data_input)\nfor cpu_rank in range(num_cpus):\n    sim._num_cpus = num_cpus\n    sim._cpu_rank = cpu_rank\n    sample_sizes[cpu_rank] = sim._determine_num_cpu_samples(total_samples)\nassert np.sum(sample_sizes) == total_samples\nassert np.max(sample_sizes) - np.min(sample_sizes) <= 1\npytest.mark.parametrize('num_cpus', [1, 2, 3, 4, 7, 12])"
+}

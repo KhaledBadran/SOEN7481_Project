@@ -1,0 +1,9 @@
+{
+    "functionName": "test_dimension_checking_2D_multiple_points",
+    "className": null,
+    "fileName": "/bytesandbrains_&_ProcessOptimizer/ProcessOptimizer_&_tests_&_test_optimizer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "low = -2\nhigh = 2\nopt = Optimizer([(low, high), (low, high)])\nwith pytest.raises(ValueError) as e:\n    opt.tell([[low + 1], [low + 1, low + 2], [low + 1, low + 3]], 2.0)\nassert 'dimensions as the space' in str(e.value)\nwith pytest.raises(ValueError) as e:\n    opt.tell([[low + 1, low + 1, low + 1], [low + 1, low + 2], [low + 1, \n        low + 3]], 2.0)\nassert 'dimensions as the space' in str(e.value)\npytest.mark.fast_test"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_read_kmip_2_0_invalid_attribute_reference",
+    "className": "TestGetAttributeListResponsePayload",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_get_attribute_list.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that an InvalidKmipEncoding error is raised during the decoding\n        of a GetAttributeList response payload when the wrong type is found\n        for the AttributeReference structure.\n        \"\"\"\npayload = payloads.GetAttributeListResponsePayload()\nargs = self.invalid_attribute_reference_encoding,\nkwargs = {'kmip_version': enums.KMIPVersion.KMIP_2_0}\nself.assertRaisesRegex(exceptions.InvalidKmipEncoding,\n    'The GetAttributeList response payload encoding contains an invalid AttributeReference type.'\n    , payload.read, *args, **kwargs)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_basic_multidict",
+    "className": null,
+    "fileName": "/zeaphoo_&_cocopot_&_/tests_&_test_datastructure.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "d = MultiDict([('a', 'b'), ('a', 'c')])\nassert d['a'] == 'b'\nassert d.getlist('a') == ['b', 'c']\nassert ('a' in d) == True\nif PY2:\n    assert list(iter(d)) == list(iter({'a': ['b', 'c']}))\n    assert list(d.iterkeys()) == ['a']\n    assert list(d.itervalues()) == ['b']\n    assert list(d.iteritems()) == [('a', 'b')]\nd = MultiDict([('a', 'b'), ('a', 'c')], a='dddd')\nassert d['a'] == 'b'\nassert d.getlist('a') == ['b', 'c', 'dddd']\nassert len(d) == 1\nassert list(d.keys()) == ['a']\nassert list(d.values()) == ['b']\nd.replace('a', 'ee')\nassert d['a'] == 'ee'\nassert d.getlist('a') == ['ee']\nassert d.get('foo') == None\ndel d['a']\nassert len(d) == 0\n"
+}

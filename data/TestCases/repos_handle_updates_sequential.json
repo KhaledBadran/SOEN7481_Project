@@ -1,0 +1,9 @@
+{
+    "functionName": "_handle_updates_sequential",
+    "className": "ProcessHandler",
+    "fileName": "/PRIArobotics_&_HedgehogClient/hedgehog_&_client_&_async_handlers.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "queue = asyncio.Queue()\nasync def run_updates() ->None:\n    while True:\n        update = await queue.get()\n        await self.handle_update(update)\n        if isinstance(update, process.ExitUpdate):\n            break\ntasks.append(asyncio.create_task(run_updates()))\nwhile True:\n    update = yield\n    queue.put_nowait(update)\n    if isinstance(update, process.ExitUpdate):\n        break\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_evaluate_performance_too_many_entities_warning",
+    "className": null,
+    "fileName": "/Accenture_&_AmpliGraph/tests_&_ampligraph_&_evaluation_&_test_protocol.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "X = load_yago3_10()\nmodel = TransE(batches_count=200, seed=0, epochs=1, k=5, eta=1, verbose=True)\nmodel.fit(X['train'])\nwith pytest.warns(UserWarning):\n    evaluate_performance(X['test'][::100], model, verbose=True,\n        corrupt_side='o')\nwith pytest.warns(UserWarning):\n    entities_subset = np.union1d(np.unique(X['train'][:, (0)]), np.unique(X\n        ['train'][:, (2)]))[:50000]\n    evaluate_performance(X['test'][::100], model, verbose=True,\n        corrupt_side='o', entities_subset=entities_subset)\nevaluate_performance(X['test'][::100], model, verbose=True, corrupt_side=\n    'o', entities_subset=entities_subset[:10])\nX_wn18rr = load_wn18rr()\nmodel_wn18 = TransE(batches_count=200, seed=0, epochs=1, k=5, eta=1,\n    verbose=True)\nmodel_wn18.fit(X_wn18rr['train'])\nevaluate_performance(X_wn18rr['test'][::100], model_wn18, verbose=True,\n    corrupt_side='o')\n"
+}

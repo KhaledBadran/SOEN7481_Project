@@ -1,0 +1,9 @@
+{
+    "functionName": "test_add_param_tags",
+    "className": "TestLayer",
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_base.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "a_shape = 20, 50\na = numpy.random.normal(0, 1, a_shape)\nA = layer.add_param(a, a_shape)\nassert A in layer.params\nassert 'trainable' in layer.params[A]\nassert 'regularizable' in layer.params[A]\nb_shape = 30, 20\nb = numpy.random.normal(0, 1, b_shape)\nB = layer.add_param(b, b_shape, trainable=False)\nassert B in layer.params\nassert 'trainable' not in layer.params[B]\nassert 'regularizable' in layer.params[B]\nc_shape = 40, 10\nc = numpy.random.normal(0, 1, c_shape)\nC = layer.add_param(c, c_shape, tag1=True)\nassert C in layer.params\nassert 'trainable' in layer.params[C]\nassert 'regularizable' in layer.params[C]\nassert 'tag1' in layer.params[C]\n"
+}

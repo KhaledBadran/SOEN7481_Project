@@ -1,0 +1,9 @@
+{
+    "functionName": "test_calls_unsubscribe",
+    "className": null,
+    "fileName": "/willdeuschle_&_Flask-GraphQL-Subscriptions-Transport/tests_&_test_flask_graphql_subscriptions_transport.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "app, ss = basic_ss\ntest_client = SocketIOTestClient(app, ss.socketio, namespace=ss.namespace)\nss.unsubscribe = Mock()\ntest_client.emit('message', json.dumps({'type': SUBSCRIPTION_START,\n    'payload': 'foo', 'id': 1, 'query': 'query test{ testString }',\n    'variables': 'baz'}), namespace=ss.namespace)\ntest_client.emit('message', json.dumps({'type': SUBSCRIPTION_END, 'payload':\n    'foo', 'id': 1}), namespace=ss.namespace)\nss.unsubscribe.assert_called_once()\n"
+}

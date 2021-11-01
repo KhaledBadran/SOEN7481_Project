@@ -1,0 +1,9 @@
+{
+    "functionName": "test_warn_multiind",
+    "className": null,
+    "fileName": "/NUAA-AL_&_ALiPy/test_&_test_indexcollection.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with pytest.warns(RepeatElementWarning, match=\n    '.*same elements in the given data'):\n    a = MultiLabelIndexCollection([(0, 1), (0, 2), (0, 1)], label_size=3)\nwith pytest.warns(ValidityWarning, match=\n    'This collection does not have a label_size value.*'):\n    MultiLabelIndexCollection()\nwith pytest.warns(RepeatElementWarning):\n    a.update((0, 1))\nwith pytest.warns(InexistentElementWarning):\n    a.discard((0, 0))\n"
+}

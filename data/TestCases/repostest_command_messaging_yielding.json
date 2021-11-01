@@ -1,0 +1,9 @@
+{
+    "functionName": "test_command_messaging_yielding",
+    "className": null,
+    "fileName": "/Gwildor_&_Pyromancer/pyromancer_&_test_&_test_command_decorator.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "def mock_command():\n    for msg, expected in MESSAGES:\n        yield msg\nline = Line(':John!JDoe@some.host PRIVMSG #Chan :Some cool message', c)\ninstance = command('')\nmatch = Match(None, line, c)\ninstance.send_messages(mock_command(), match, [])\nfor index, (msg, expected) in enumerate(MESSAGES):\n    assert c.outbox[index] == 'PRIVMSG #Chan :{}'.format(expected)\nmock_connection"
+}

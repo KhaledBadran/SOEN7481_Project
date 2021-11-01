@@ -1,0 +1,9 @@
+{
+    "functionName": "helper_test_chances_input_binding",
+    "className": "UITestCase",
+    "fileName": "/AndreMiras_&_EtherollApp/src_&_etherollapp_&_tests_&_ui_&_test_etheroll_ui.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Makes sure the chances input works as expected, refs #46.\"\"\"\ncontroller = app.root\nroll_screen = controller.roll_screen\nchance_of_winning = roll_screen.ids.chance_of_winning_id\nchances_slider = chance_of_winning.ids.chances_slider_id\nchances_input = chance_of_winning.ids.chances_input_id\nself.assertEqual(str(chances_slider.value), chances_input.text)\nself.assertEqual(chances_slider.value, 50)\nchances_input.text = '30'\nchances_input.dispatch('on_text_validate')\nself.assertEqual(chances_slider.value, 30)\nchances_slider.value = 70\nself.assertEqual(chances_input.text, '70')\n"
+}

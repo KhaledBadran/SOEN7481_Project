@@ -1,0 +1,9 @@
+{
+    "functionName": "test_read_only_profile_name",
+    "className": "TestProfileInformation",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a ProfileInformation structure can be correctly read in\n        from a data stream even when missing all fields except the profile\n        name.\n        \"\"\"\nprofile_information = objects.ProfileInformation()\nself.assertIsNone(profile_information.profile_name)\nself.assertIsNone(profile_information.server_uri)\nself.assertIsNone(profile_information.server_port)\nprofile_information.read(self.only_profile_name_encoding, kmip_version=\n    enums.KMIPVersion.KMIP_1_3)\nself.assertEqual(enums.ProfileName.BASELINE_SERVER_BASIC_KMIPv12,\n    profile_information.profile_name)\nself.assertIsNone(profile_information.server_uri)\nself.assertIsNone(profile_information.server_port)\n"
+}

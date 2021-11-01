@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cls_spline",
+    "className": null,
+    "fileName": "/LSSTDESC_&_CCL/benchmarks_&_test_cls.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cosmo, trcs, lfc, bmk = set_up\ncl = ccl.angular_cl(cosmo, trcs[t1], trcs[t2], lfc['ells'],\n    limber_integration_method='spline') * lfc[fl]\nel = np.sqrt((bmk[a1b1] * bmk[a2b2] + bmk[a1b2] * bmk[a2b1]) / (2 * lfc[\n    'ells'] + 1.0))\nassert np.all(np.fabs(cl - bmk[bm]) < 0.2 * el)\npytest.mark.parametrize('t1,t2,bm,a1b1,a1b2,a2b1,a2b2,fl', [('g1', 'g1',\n    'dd_11', 'dd_11', 'dd_11', 'dd_11', 'dd_11', 'fl_one'), ('g1', 'g2',\n    'dd_12', 'dd_11', 'dd_12', 'dd_12', 'dd_22', 'fl_one'), ('l2', 'l2',\n    'll_22', 'll_22', 'll_22', 'll_22', 'll_22', 'fl_ll')])"
+}

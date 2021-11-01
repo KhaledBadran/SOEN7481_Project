@@ -1,0 +1,9 @@
+{
+    "functionName": "load_from_file",
+    "className": null,
+    "fileName": "/microsoft_&_LightGBM/tests_&_c_api_test_&_test_.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "ref = None\nif reference is not None:\n    ref = reference\nhandle = ctypes.c_void_p()\nLIB.LGBM_DatasetCreateFromFile(c_str(filename), c_str('max_bin=15'), ref,\n    ctypes.byref(handle))\nprint(LIB.LGBM_GetLastError())\nnum_data = ctypes.c_long()\nLIB.LGBM_DatasetGetNumData(handle, ctypes.byref(num_data))\nnum_feature = ctypes.c_long()\nLIB.LGBM_DatasetGetNumFeature(handle, ctypes.byref(num_feature))\nprint('#data: %d #feature: %d' % (num_data.value, num_feature.value))\nreturn handle\n"
+}

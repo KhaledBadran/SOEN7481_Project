@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fixed_cycle_time_delay_time",
+    "className": "TestVelocityRampRunner",
+    "fileName": "/trinamic_&_PyTrinamicTools/PyTrinamicTools_&_helpers_&_tests_&_test_Ramps.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Run a linear ramp and see if the delay is plausible\"\"\"\nupdate_mock = Mock()\nramp_runner = VelocityRampRunner(update_mock, update_cycle_time_ms=10)\nstart_time = time.perf_counter()\nramp_runner.run_linear_ramp(0, 100, 40)\nstop_time = time.perf_counter()\ndelay_s = stop_time - start_time\nassert 0.035 < delay_s < 0.045\n"
+}

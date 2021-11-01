@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ZmqPipeEnd_errors",
+    "className": null,
+    "fileName": "/SillyFreak_&_ConcurrentUtils/tests_&_test_pipe.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ctx = zmq.asyncio.Context()\nwith pytest.raises(ValueError):\n    ZmqPipeEnd(ctx, zmq.PUSH, 'tcp://*', port=0, bind=True)\nwith pytest.raises(RuntimeError):\n    a = ZmqPipeEnd(ctx, zmq.PAIR, 'inproc://asdf', port=None, bind=True)\n    await a.initialize()\npytest.mark.asyncio"
+}

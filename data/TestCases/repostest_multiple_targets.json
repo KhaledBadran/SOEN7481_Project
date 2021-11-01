@@ -1,0 +1,9 @@
+{
+    "functionName": "test_multiple_targets",
+    "className": "TestIgnitionType",
+    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_converters.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Check for error with multiple ignition targets.\n        \"\"\"\nroot = etree.Element('experiment')\nignition = etree.SubElement(root, 'ignitionType')\nignition.set('target', 'OH;CH')\nignition.set('type', 'max')\nwith pytest.raises(NotImplementedError) as excinfo:\n    ignition = get_ignition_type(root)\nassert 'Multiple ignition targets not supported.' in str(excinfo.value)\n"
+}

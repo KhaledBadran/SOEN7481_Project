@@ -1,0 +1,9 @@
+{
+    "functionName": "test_assert_model_parameters_in_condition_or_parameter_table",
+    "className": null,
+    "fileName": "/PEtab-dev_&_PEtab/tests_&_test_lint.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "document = libsbml.SBMLDocument(3, 1)\nmodel = document.createModel()\nmodel.setTimeUnits('second')\nmodel.setExtentUnits('mole')\nmodel.setSubstanceUnits('mole')\nsbml.add_global_parameter(model, 'parameter1')\nsbml.add_global_parameter(model, 'noiseParameter1_')\nsbml.add_global_parameter(model, 'observableParameter1_')\nlint.assert_model_parameters_in_condition_or_parameter_table(model, pd.\n    DataFrame(columns=['parameter1']), pd.DataFrame())\nlint.assert_model_parameters_in_condition_or_parameter_table(model, pd.\n    DataFrame(), pd.DataFrame(index=['parameter1']))\nwith pytest.raises(AssertionError):\n    lint.assert_model_parameters_in_condition_or_parameter_table(model, pd.\n        DataFrame(columns=['parameter1']), pd.DataFrame(index=['parameter1']))\nlint.assert_model_parameters_in_condition_or_parameter_table(model, pd.\n    DataFrame(), pd.DataFrame())\nsbml.create_assigment_rule(model, assignee_id='parameter1', formula=\n    'parameter2')\nlint.assert_model_parameters_in_condition_or_parameter_table(model, pd.\n    DataFrame(), pd.DataFrame())\n"
+}

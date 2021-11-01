@@ -1,0 +1,9 @@
+{
+    "functionName": "_do_analyze",
+    "className": "Test",
+    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_pydevcoverage.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "invalid_files = []\np = subprocess.Popen([sys.executable, self._coverage_file,\n    '--pydev-analyze'], stdout=subprocess.PIPE, stdin=subprocess.PIPE,\n    stderr=subprocess.PIPE)\n__, stderrdata = p.communicate('|'.join(files).encode())\nif stderrdata:\n    match = re.search('Invalid files not passed to coverage: (.*?)$',\n        stderrdata.decode(), re.M)\n    if match:\n        invalid_files = [f.strip() for f in match.group(1).split(',')]\nreturn invalid_files\n"
+}

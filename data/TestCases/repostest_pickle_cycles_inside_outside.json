@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pickle_cycles_inside_outside",
+    "className": null,
+    "fileName": "/nickpowersys_&_CaaR/tests_&_test_caar.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "filename = tempdir.join(ct._pickle_filename(data_file, states_to_clean,\n    auto, encoding))\npickle_path = ct.pickle_from_file(data_file, picklepath=filename, cycle=\n    cycle, states=states_to_clean, sensors_file=sensors, postal_file=postal,\n    auto=auto, encoding=encoding)\npickle_file = os.path.basename(pickle_path)\nassert pickle_file == os.path.basename(expected_path)\npytest.mark.parametrize(\n    'tempdir, data_file, cycle, states_to_clean, expected_path, sensors, postal, auto, encoding'\n    , [(tmpdir(), TEST_CYCLES_FILE, CYCLE_TYPE_COOL, STATE,\n    CYCLES_PICKLE_FILE_OUT, TEST_SENSORS_FILE, TEST_POSTAL_FILE, 'cycles',\n    'UTF-8'), (tmpdir(), TEST_CYCLES_FILE, CYCLE_TYPE_COOL, None,\n    ALL_STATES_CYCLES_PICKLED_OUT, None, None, 'cycles', 'UTF-8'), (tmpdir(\n    ), TEST_SENSOR_OBS_FILE, None, STATE, SENSOR_PICKLE_FILE_OUT,\n    TEST_SENSORS_FILE, TEST_POSTAL_FILE, 'sensors', 'UTF-8'), (tmpdir(),\n    TEST_SENSOR_OBS_FILE, None, None, ALL_STATES_SENSOR_OBS_PICKLED_OUT,\n    None, None, 'sensors', 'UTF-8'), (tmpdir(), TEST_GEOSPATIAL_OBS_FILE,\n    None, STATE, GEOSPATIAL_PICKLE_FILE_OUT, TEST_SENSORS_FILE,\n    TEST_POSTAL_FILE, 'geospatial', 'UTF-8'), (tmpdir(),\n    TEST_GEOSPATIAL_OBS_FILE, None, None,\n    ALL_STATES_GEOSPATIAL_OBS_PICKLED_OUT, None, None, 'geospatial', 'UTF-8')])"
+}

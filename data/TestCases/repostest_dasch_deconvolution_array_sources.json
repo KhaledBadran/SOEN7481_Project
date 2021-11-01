@@ -1,0 +1,9 @@
+{
+    "functionName": "test_dasch_deconvolution_array_sources",
+    "className": null,
+    "fileName": "/PyAbel_&_PyAbel/abel_&_tests_&_test_dasch_methods.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "im = abel.tools.analytical.SampleImage(101).image\nq = abel.tools.symmetry.get_image_quadrants(im)[0]\nfn = 'three_point_basis_{}.npy'.format(q.shape[0])\nif os.path.exists(fn):\n    os.system('rm {}'.format(fn))\ngb = abel.dasch.three_point_transform(q)\nnp.testing.assert_equal(abel.dasch._source, 'generated')\ncb = abel.dasch.three_point_transform(q)\nnp.testing.assert_equal(abel.dasch._source, 'cache')\nnp.testing.assert_allclose(gb, cb)\nabel.dasch.cache_cleanup()\nfb = abel.dasch.three_point_transform(q)\nnp.testing.assert_equal(abel.dasch._source, 'file')\nnp.testing.assert_allclose(gb, fb)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "show_view",
+    "className": "_Hemisphere",
+    "fileName": "/nipy_&_PySurfer/surfer_&_viz.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Orient camera to display view\"\"\"\nif isinstance(view, string_types):\n    try:\n        vd = self._xfm_view(view, 'd')\n        view = dict(azimuth=vd['v'][0], elevation=vd['v'][1])\n        roll = vd['r']\n    except ValueError as v:\n        print(v)\n        raise\n_force_render(self._f)\nif view is not None:\n    view = deepcopy(view)\n    view['reset_roll'] = True\n    view['figure'] = self._f\n    if 'distance' not in view:\n        view['distance'] = distance\n    elif distance is not None and distance != view['distance']:\n        raise ValueError(\n            'view parameters view[\"distance\"] != distance (%s != %s)' % (\n            view['distance'], distance))\n    mlab.view(**view)\nif roll is not None:\n    mlab.roll(roll=roll, figure=self._f)\n_force_render(self._f)\nview = mlab.view(figure=self._f)\nroll = mlab.roll(figure=self._f)\nreturn view, roll\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_custom_stop_words_param",
+    "className": null,
+    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_engine_&_tests_&_test_stop_words.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test to save, retrieve and delete the custom stop words\n\n       tested_stop_words - list of custom stop words,\n       cfns - list of common first names imported from stop_words.py\n              to use as a custom stop words in testing\n    \"\"\"\ncustom_sw = _StopWordsWrapper(cache_dir=cache_dir)\ncustom_sw.save(name=csw_name, stop_words=csw_list)\ncustom_stop_words = custom_sw.load(name=csw_name)\nassert custom_stop_words == csw_list\nassert len(custom_stop_words) == len(csw_list)\ni = 0\nfor word in custom_stop_words:\n    assert word == csw_list[i]\n    i += 1\ncustom_sw.delete(name=csw_name)\nwith pytest.raises(FileNotFoundError):\n    custom_sw.load(name=csw_name)\nif os.path.isdir(os.path.join(cache_dir, 'stop_words')):\n    shutil.rmtree(os.path.join(cache_dir, 'stop_words'), ignore_errors=True)\npytest.mark.parametrize('csw_name, csw_list', [('test_acstw',\n    tested_stop_words), ('common_first_names', cfns), ('csw', csw)])"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_modify_hostgroup_add_host",
+    "className": "CITestProvisioning",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test modify hostgroup add host.\"\"\"\nhost_group_name = self.create_host_group()\nhost_group_details = self.provisioning.get_host_group(host_group_name)\nhost_name = self.create_empty_host()\nself.assertEqual(1, host_group_details[constants.NUM_OF_HOSTS])\nself.provisioning.modify_hostgroup(host_group_name, add_host_list=[host_name])\nhost_group_details = self.provisioning.get_host_group(host_group_name)\nhosts_in_group = host_group_details[constants.HOST]\nhost_was_added = False\nfor item in hosts_in_group:\n    if item[constants.HOST_ID] == host_name:\n        host_was_added = True\nself.assertEqual(2, host_group_details[constants.NUM_OF_HOSTS])\nself.assertTrue(host_was_added)\n"
+}

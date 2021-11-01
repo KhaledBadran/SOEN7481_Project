@@ -1,0 +1,9 @@
+{
+    "functionName": "test_quantitative",
+    "className": null,
+    "fileName": "/PaulHancock_&_Aegean/tests_&_test_BANE.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that the images are equal to a pre-calculated version\"\"\"\nfbase = 'tests/test_files/1904-66_SIN'\noutbase = 'dlme'\nBANE.filter_image(fbase + '.fits', out_base=outbase, cores=2, nslice=2)\nrms = outbase + '_rms.fits'\nbkg = outbase + '_bkg.fits'\nref_rms = fbase + '_rms.fits'\nref_bkg = fbase + '_bkg.fits'\nr1 = fits.getdata(rms)\nr2 = fits.getdata(ref_rms)\nb1 = fits.getdata(bkg)\nb2 = fits.getdata(ref_bkg)\nos.remove(rms)\nos.remove(bkg)\nif not np.allclose(r1, r2, atol=0.01, equal_nan=True):\n    raise AssertionError('rms is wrong')\nif not np.allclose(b1, b2, atol=0.003, equal_nan=True):\n    raise AssertionError('bkg is wrong')\nreturn\n"
+}

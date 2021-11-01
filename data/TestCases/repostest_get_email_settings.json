@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_email_settings",
+    "className": null,
+    "fileName": "/PearsonEducation_&_Alarmageddon/tests_&_publishing_&_test_emailer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "email_pub = create_default_email_publisher(tmpdir, smtpserver)\nhttp_validator = HttpValidation.get(httpserver.url).expect_status_codes([200])\nemail_type = 'test_alert'\nsubject = 'subject test line'\nbody = 'body test'\nrecipient_array = [{'real_name': 'Test Recipient', 'address':\n    'testrecipient@alarmageddon.com'}]\nsender = {'real_name': 'Alarmageddon Monitor', 'address':\n    'noreply@alarmageddon.com'}\nemail_settings = {'email_type': email_type, 'subject': subject, 'body':\n    body, 'sender': sender, 'recipients': recipient_array}\nemailer.enrich(http_validator, email_settings)\nresult = Success('validation name', http_validator)\nenriched_email_settings = email_pub.get_email_settings(result)\nassert enriched_email_settings['email_type'] == email_type\nassert enriched_email_settings['subject'] == subject\nassert enriched_email_settings['body'] == body\nassert enriched_email_settings['sender'] == sender\nassert enriched_email_settings['recipients'] == recipient_array\n"
+}

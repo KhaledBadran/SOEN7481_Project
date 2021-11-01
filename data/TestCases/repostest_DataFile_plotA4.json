@@ -1,0 +1,9 @@
+{
+    "functionName": "test_DataFile_plotA4",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_DataFile.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "plt.ioff()\nimport matplotlib\nmatplotlib.use('Agg')\nfileName = 'Data/camea2018n000136.hdf'\nfileName2 = 'Data/camea2018n000136.nxs'\nfile = DataFile(fileName)\ntry:\n    file.plotA4(binning=20)\n    assert False\nexcept AttributeError:\n    assert True\nfig = file.plotA4(1)\nfig2 = file.plotA4()\nassertFile(fileName2)\nfile2 = DataFile(fileName2)\ntry:\n    file2.plotA4(binning=20)\n    assert False\nexcept AttributeError:\n    assert True\nfile2.plotA4(binning=1)\nplt.close('all')\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_recontruct",
+    "className": "TestCell",
+    "fileName": "/Jhsmit_&_ColiCoords/test_&_test_cell.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "bf_recontstr = self.cell_obj.reconstruct_image('brightfield')\nlsq = np.sum((bf_recontstr - self.cell_obj.data.bf_img) ** 2)\nself.assertAlmostEqual(44728880.4819674, float(lsq), 2)\nbf_rscl = self.cell_obj.reconstruct_image('brightfield', r_scale=0.5)\ncell = self.cell_obj.copy()\ncell.data.add_data(bf_rscl, 'brightfield', 'rescaled')\nr_mid = cell.measure_r(data_name='rescaled', mode='mid', in_place=False)\nself.assertAlmostEqual(12.974043291957795, float(r_mid), 2)\n"
+}

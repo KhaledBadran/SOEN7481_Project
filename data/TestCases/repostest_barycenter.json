@@ -1,0 +1,9 @@
+{
+    "functionName": "test_barycenter",
+    "className": null,
+    "fileName": "/PythonOT_&_POT/test_&_test_bregman.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "n_bins = 100\na1 = ot.datasets.make_1D_gauss(n_bins, m=30, s=10)\na2 = ot.datasets.make_1D_gauss(n_bins, m=40, s=10)\nA = np.vstack((a1, a2)).T\nM = ot.utils.dist0(n_bins)\nM /= M.max()\nalpha = 0.5\nweights = np.array([1 - alpha, alpha])\nreg = 0.01\nbary_wass, log = ot.bregman.barycenter(A, M, reg, weights, method=method,\n    log=True)\nnp.testing.assert_allclose(1, np.sum(bary_wass))\not.bregman.barycenter(A, M, reg, log=True, verbose=True)\npytest.mark.parametrize('method', ['sinkhorn', 'sinkhorn_stabilized'])"
+}

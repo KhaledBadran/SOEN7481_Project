@@ -1,0 +1,9 @@
+{
+    "functionName": "test_activate_on_static_object",
+    "className": "TestKmipEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the right error is generated when an activation request is\n        received for an object that cannot be activated.\n        \"\"\"\ne = engine.KmipEngine()\ne._data_store = self.engine\ne._data_store_session_factory = self.session_factory\ne._data_session = e._data_store_session_factory()\ne._is_allowed_by_operation_policy = mock.Mock(return_value=True)\ne._logger = mock.MagicMock()\nmanaged_object = pie_objects.OpaqueObject(b'', enums.OpaqueDataType.NONE)\ne._data_session.add(managed_object)\ne._data_session.commit()\ne._data_session = e._data_store_session_factory()\nobject_id = str(managed_object.unique_identifier)\npayload = payloads.ActivateRequestPayload(unique_identifier=attributes.\n    UniqueIdentifier(object_id))\nargs = payload,\nname = enums.ObjectType.OPAQUE_DATA.name\nregex = 'An {0} object has no state and cannot be activated.'.format(''.\n    join([x.capitalize() for x in name.split('_')]))\nself.assertRaisesRegex(exceptions.IllegalOperation, regex, e.\n    _process_activate, *args)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_multi_scale_inducing_equivalence_inducing_points",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_covariances_&_test_base_covariances.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "Xnew, Z = np.random.randn(N, D), np.random.randn(M, D)\nrbf = gpflow.kernels.SquaredExponential(1.3441, lengthscales=np.random.\n    uniform(0.5, 3.0, D))\ninducing_variable_zero_lengthscales = Multiscale(Z, scales=np.zeros(Z.shape\n    ) + 1e-10)\ninducing_variable_inducing_point = InducingPoints(Z)\nmulti_scale_Kuf = Kuf(inducing_variable_zero_lengthscales, rbf, Xnew)\ninducing_point_Kuf = Kuf(inducing_variable_inducing_point, rbf, Xnew)\nrelative_error_Kuf = np.abs(multi_scale_Kuf - inducing_point_Kuf\n    ) / inducing_point_Kuf\nassert np.max(relative_error_Kuf) < 0.001\nmulti_scale_Kuu = Kuu(inducing_variable_zero_lengthscales, rbf)\ninducing_point_Kuu = Kuu(inducing_variable_inducing_point, rbf)\nrelative_error_Kuu = np.abs(multi_scale_Kuu - inducing_point_Kuu\n    ) / inducing_point_Kuu\nassert np.max(relative_error_Kuu) < 0.001\npytest.mark.parametrize('N, M, D', [[23, 13, 3], [10, 5, 7]])"
+}

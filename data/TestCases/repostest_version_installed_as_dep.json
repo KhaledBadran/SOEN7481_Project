@@ -1,0 +1,9 @@
+{
+    "functionName": "test_version_installed_as_dep",
+    "className": null,
+    "fileName": "/EVEprosper_&_ProsperCommon/tests_&_test_prosper_version.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"validate expected return when installed as dependency\"\"\"\nvirtualenv_name = 'DUMMY_VENV'\ndummy_version = '9.9.9'\npython_version = 'python{major}.{minor}'.format(major=sys.version_info[0],\n    minor=sys.version_info[1])\nvirtualenv_path = path.join(HERE, virtualenv_name, 'lib', python_version,\n    'site-packages/prosper/common')\nos.makedirs(virtualenv_path, exist_ok=True)\nwith open(path.join(virtualenv_path, 'version.txt'), 'w') as dummy_fh:\n    dummy_fh.write(dummy_version)\nassert p_version.get_version(virtualenv_path) == dummy_version\nshutil.rmtree(path.join(HERE, virtualenv_name))\n"
+}

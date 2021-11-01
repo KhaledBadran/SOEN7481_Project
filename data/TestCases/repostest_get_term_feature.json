@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_term_feature",
+    "className": "TestDetectOperon",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_detect_operon.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "features = {'num': 0, 'detect': False}\ndatas = []\njumps = []\nfor ta in self.example.tas:\n    for term in self.example.terms:\n        if ta.strand == '+':\n            jump = op.get_term_feature(ta, term, 5, features, datas, ta.end,\n                term.start, term.end - 5)\n        else:\n            jump = op.get_term_feature(ta, term, 5, features, datas, ta.\n                start, term.end + 5, term.start)\n        jumps.append(jump)\nself.assertEqual(set(jumps), set([False, True, False, True, True, False, \n    False, False, False]))\nstrands = []\nstarts = []\nfor data in datas:\n    strands.append(data.strand)\n    starts.append(data.start)\nself.assertEqual(set(strands), set(['+', '-']))\nself.assertEqual(set(starts), set([360, 420]))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_calculate_route_include_modes",
+    "className": "PublicTransitApiTest",
+    "fileName": "/abdullahselek_&_HerePy/tests_&_test_publictransit_api.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with io.open('testdata/models/public_transit_calculate_route.json', 'r',\n    encoding='utf-8') as f:\n    expectedResponse = f.read()\nresponses.add(responses.GET, 'https://transit.ls.hereapi.com/v3/route.json',\n    expectedResponse, status=200)\ninclude_modes = [herepy.PublicTransitModeType.bus, herepy.\n    PublicTransitModeType.city_train]\nresponse = self._api.calculate_route([41.9773, -87.9019], [41.8961, -\n    87.6552], '2017-11-22T07:30:00', include_modes=include_modes)\nself.assertTrue(response)\nself.assertIsInstance(response, herepy.PublicTransitResponse)\nresponses.activate"
+}

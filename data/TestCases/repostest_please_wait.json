@@ -1,0 +1,9 @@
+{
+    "functionName": "test_please_wait",
+    "className": null,
+    "fileName": "/PlaidWeb_&_Authl/tests_&_handlers_&_test_emailaddr.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "token_store = tokens.DictStore()\npending = {}\nmock_send = mocker.MagicMock()\nhandler = email_addr.EmailAddress(mock_send, 'this is data', token_store,\n    expires_time=60, pending_storage=pending)\nmock_time = mocker.patch('time.time')\nassert mock_send.call_count == 0\nmock_time.return_value = 10\nhandler.initiate_auth('mailto:foo@bar.com', 'http://example/', 'blop')\nassert mock_send.call_count == 1\nassert 'foo@bar.com' in pending\ntoken_value = pending['foo@bar.com']\nhandler.initiate_auth('mailto:foo@bar.com', 'http://example/', 'blop')\nassert mock_send.call_count == 1\nassert 'foo@bar.com' in pending\nassert token_value == pending['foo@bar.com']\nhandler.check_callback('http://example/', {'t': pending['foo@bar.com']}, {})\nassert 'foo@bar.com' not in pending\nhandler.initiate_auth('mailto:foo@bar.com', 'http://example/', 'blop')\nassert mock_send.call_count == 2\nassert 'foo@bar.com' in pending\nassert token_value != pending['foo@bar.com']\ntoken_value = pending['foo@bar.com']\nmock_time.return_value = 1000\nhandler.initiate_auth('mailto:foo@bar.com', 'http://example/', 'blop')\nassert mock_send.call_count == 3\nassert 'foo@bar.com' in pending\nassert token_value != pending['foo@bar.com']\ntoken_value = pending['foo@bar.com']\ntoken_store.remove(pending['foo@bar.com'])\nhandler.initiate_auth('mailto:foo@bar.com', 'http://example/', 'blop')\nassert mock_send.call_count == 4\nassert token_value != pending['foo@bar.com']\ntoken_value = pending['foo@bar.com']\n"
+}

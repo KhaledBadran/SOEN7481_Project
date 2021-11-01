@@ -1,0 +1,9 @@
+{
+    "functionName": "test_nfw_accuracy",
+    "className": null,
+    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_profiles.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from scipy.special import sici\ntol = 1e-10 if use_analytic else 0.005\ncM = ccl.halos.ConcentrationDuffy08(M200)\np = ccl.halos.HaloProfileNFW(cM, fourier_analytic=use_analytic)\nM = 100000000000000.0\na = 0.5\nc = cM.get_concentration(COSMO, M, a)\nr_Delta = M200.get_radius(COSMO, M, a) / a\nr_s = r_Delta / c\ndef fk(k):\n    x = k * r_s\n    Si1, Ci1 = sici((1 + c) * x)\n    Si2, Ci2 = sici(x)\n    P1 = 1 / (np.log(1 + c) - c / (1 + c))\n    P2 = np.sin(x) * (Si1 - Si2) + np.cos(x) * (Ci1 - Ci2)\n    P3 = np.sin(c * x) / ((1 + c) * x)\n    return M * P1 * (P2 - P3)\nk_arr = np.logspace(-2, 2, 256) / r_Delta\nfk_arr = p.fourier(COSMO, k_arr, M, a, M200)\nfk_arr_pred = fk(k_arr)\nres = np.fabs((fk_arr - fk_arr_pred) / M)\nassert np.all(res < tol)\npytest.mark.parametrize('use_analytic', [True, False])"
+}

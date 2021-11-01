@@ -1,0 +1,9 @@
+{
+    "functionName": "test_custom_nonconvex_utility_objective",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_custom_objectives.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ef = setup_efficient_frontier()\ndef utility_obj(weights, mu, cov_matrix, k=1):\n    return -weights.dot(mu) + k * np.dot(weights.T, np.dot(cov_matrix, weights)\n        )\nw = ef.nonconvex_objective(utility_obj, objective_args=(ef.expected_returns,\n    ef.cov_matrix, 1))\nassert isinstance(w, dict)\nassert set(w.keys()) == set(ef.tickers)\nnp.testing.assert_almost_equal(ef.weights.sum(), 1)\nvol1 = ef.portfolio_performance()[1]\nw = ef.nonconvex_objective(utility_obj, objective_args=(ef.expected_returns,\n    ef.cov_matrix, 3))\nvol2 = ef.portfolio_performance()[1]\nassert vol2 < vol1\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_client_connect_disconnect",
+    "className": null,
+    "fileName": "/martinohanlon_&_BlueDot/tests_&_test_bluetooth_comms.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "client_connected = Event()\nclient_disconnected = Event()\ndef when_client_connects():\n    client_connected.set()\ndef when_client_disconnects():\n    client_disconnected.set()\nbts = BluetoothServer(None)\nbtc = BluetoothClient(bta0.address, None, device='hci1', auto_connect=False)\nbts.when_client_connects = when_client_connects\nbts.when_client_disconnects = when_client_disconnects\nbtc.connect()\nassert btc.connected\nassert bts.client_address == btc.client_address\nassert client_connected.wait(1)\nbtc.disconnect()\nassert not btc.connected\nassert client_disconnected.wait(1)\nbts.stop()\n"
+}

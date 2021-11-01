@@ -1,0 +1,9 @@
+{
+    "functionName": "test_stitch_repeatedly",
+    "className": "TopotoolsTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_topotools_&_TopotoolsTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "pn = op.network.Cubic(shape=[10, 10, 1], spacing=0.0001)\npn2 = op.network.Cubic(shape=[10, 10, 1], spacing=0.0001)\npn2['pore.coords'] += [0.0001 * 10, 0, 0]\npn3 = op.network.Cubic(shape=[10, 10, 1], spacing=0.0001)\npn3['pore.coords'] += [0.0001 * 20, 0, 0]\nop.topotools.stitch(network=pn, donor=pn2, P_network=pn.pores('back'),\n    P_donor=pn2.pores('front'), method='nearest')\nop.topotools.stitch(network=pn, donor=pn3, P_network=pn.pores('back'),\n    P_donor=pn2.pores('front'), method='nearest')\nassert pn.Nt == pn2.Nt * 3 + 20\n"
+}

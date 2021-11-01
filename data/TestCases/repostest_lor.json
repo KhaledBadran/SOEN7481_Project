@@ -1,0 +1,9 @@
+{
+    "functionName": "test_lor",
+    "className": null,
+    "fileName": "/grd349_&_PBjam/pbjam_&_tests_&_test_asy_peakbag.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test for method to compute the lorentzian profiles\"\"\"\nnorders = cs.pars['norders']\nmod = asymp_spec_model(cs.st.f, norders)\nh, freq, w = 1, cs.st.f[0], 1\nfunc = mod._lor\ninp = [freq, h, w]\npbt.does_it_run(func, inp)\npbt.does_it_return(func, inp)\npbt.right_type(func, inp, np.ndarray)\npbt.right_shape(func, inp, np.shape(cs.st.f))\nassert_array_equal(func(*inp), [1, 1])\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_load_keras_seq_of",
+    "className": "TestSimple",
+    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_test_simple_integration.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from bigdl.nn.keras.topology import Sequential as KSequential\nfrom bigdl.nn.keras.layer import Dense\nmodel = KSequential()\nfc1 = Dense(2, input_shape=[2, 3])\nmodel.add(fc1)\ntmp_path = tempfile.mktemp()\nmodel.save(tmp_path, True)\nmodel_loaded = KSequential.load(tmp_path)\nassert 'bigdl.nn.keras.topology.Sequential' in str(type(model_loaded))\nassert len(model_loaded.layers) == 1\n"
+}

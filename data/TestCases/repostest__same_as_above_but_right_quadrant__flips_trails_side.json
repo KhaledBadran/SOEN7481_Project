@@ -1,0 +1,9 @@
+{
+    "functionName": "test__same_as_above_but_right_quadrant__flips_trails_side",
+    "className": "TestSerialAllTrailsArrayFromFrame",
+    "fileName": "/Jammy2211_&_PyAutoCTI/test_&_unit_&_charge_injection_&_test_ci_frame.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "pattern = ci_pattern.CIPattern(normalization=10.0, regions=[(0, 1, 2, 4), (\n    2, 3, 2, 4)])\nframe_geometry = ci_frame.FrameGeometry.euclid_bottom_right()\nframe_geometry.serial_overscan = ci_frame.Region((0, 4, 0, 2))\nimage = np.array([[0.0, 1.0, 2.0, 0.5], [3.0, 4.0, 5.0, 0.5], [6.0, 7.0, \n    8.0, 0.5], [9.0, 10.0, 11.0, 0.5]])\nframe = ci_frame.ChInj(frame_geometry=frame_geometry, ci_pattern=pattern)\nnew_frame = frame.serial_all_trails_frame_from_frame(image)\nassert (new_frame == np.array([[0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0],\n    [6.0, 7.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0]])).all()\n"
+}

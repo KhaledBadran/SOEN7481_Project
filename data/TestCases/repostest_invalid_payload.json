@@ -1,0 +1,9 @@
+{
+    "functionName": "test_invalid_payload",
+    "className": "TestError",
+    "fileName": "/albertogeniola_&_MerossIot/tests_&_test_error.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "devs = self.meross_manager.find_devices(device_class=ToggleXMixin,\n    online_status=OnlineStatus.ONLINE)\nif len(devs) < 1:\n    self.skipTest('No available/online devices found to test. Skipping...')\ndev = devs[0]\nasync def send_invalid_command_to_device(dev: BaseDevice):\n    return await self.meross_manager.async_execute_cmd(destination_device_uuid\n        =dev.uuid, method='SET', namespace=Namespace.HUB_MTS100_MODE,\n        payload={'temperature': 'bar'})\nwith self.assertRaises(CommandTimeoutError):\n    await send_invalid_command_to_device(dev=dev)\nunittest_run_loop"
+}

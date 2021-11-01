@@ -1,0 +1,9 @@
+{
+    "functionName": "huber_loss",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_objectives.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\" Computes the huber loss between predictions and targets.\n\n    .. math:: L_i = \\\\frac{(p - t)^2}{2},  |p - t| \\\\le \\\\delta\n\n        L_i = \\\\delta (|p - t| - \\\\frac{\\\\delta}{2} ), |p - t| \\\\gt \\\\delta\n\n    Parameters\n    ----------\n    predictions : Theano 2D tensor or 1D tensor\n        Prediction outputs of a neural network.\n\n    targets : Theano 2D tensor or 1D tensor\n        Ground truth to which the prediction is to be compared\n        with. Either a vector or 2D Tensor.\n\n    delta : scalar, default 1\n        This delta value is defaulted to 1, for `SmoothL1Loss`\n        described in Fast-RCNN paper [1]_ .\n\n    Returns\n    -------\n    Theano tensor\n        An expression for the element-wise huber loss [2]_ .\n\n    Notes\n    -----\n    This is an alternative to the squared error for\n    regression problems.\n\n    References\n    ----------\n    .. [1] Ross Girshick et al (2015):\n           Fast RCNN\n           https://arxiv.org/pdf/1504.08083.pdf\n\n    .. [2] Huber, Peter et al (1964)\n           Robust Estimation of a Location Parameter\n           https://projecteuclid.org/euclid.aoms/1177703732\n    \"\"\"\npredictions, targets = align_targets(predictions, targets)\nabs_diff = abs(targets - predictions)\nift = 0.5 * squared_error(targets, predictions)\niff = delta * (abs_diff - delta / 2.0)\nreturn theano.tensor.switch(abs_diff <= delta, ift, iff)\n"
+}

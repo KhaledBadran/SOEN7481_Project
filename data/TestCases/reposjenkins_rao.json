@@ -1,0 +1,9 @@
+{
+    "functionName": "jenkins_rao",
+    "className": null,
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_models_&_geometry_&_throat_shape_factor.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Jenkins and Rao relate the capillary pressure in an eliptical throat to\n    the aspect ratio\n\n    Parameters\n    ----------\n    target : OpenPNM Object\n        The object which this model is associated with. This controls the\n        length of the calculated array, and also provides access to other\n        necessary properties.\n\n    throat_perimeter : string\n        The dictionary key of the array containing the throat perimeter values.\n\n    throat_area : string\n        The dictionary key of the array containing the throat area values.\n\n    throat_diameter : string\n        The dictionary key of the array containing the throat diameter values.\n\n    Returns\n    -------\n    value : NumPy ndarray\n        Array containing throat capillary pressure values.\n\n    References\n    ----------\n    Jenkins, R.G. and Rao, M.B., The effect of elliptical pores on\n    mercury porosimetry results. Powder technology, 38(2), pp.177-180. (1984)\n\n    \"\"\"\nP = target[throat_perimeter]\nA = target[throat_area]\nr = target[throat_diameter] / 2\nvalue = P / A / (2 / r)\nreturn value\n"
+}

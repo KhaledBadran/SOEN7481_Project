@@ -1,0 +1,9 @@
+{
+    "functionName": "test_protected_url_sharepoint",
+    "className": "TestCase",
+    "fileName": "/IntegralDefense_&_ACE/lib_&_saq_&_modules_&_test_url.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "root = create_root_analysis()\nroot.initialize_storage()\nurl = root.add_observable(F_URL,\n    'https://lahia-my.sharepoint.com/:b:/g/personal/secure_onedrivemsw_bid/EVdjoBiqZTxMnjAcDW6yR4gBqJ59ALkT1C2I3L0yb_n0uQ?e=naeXYD'\n    )\nurl.add_directive(DIRECTIVE_CRAWL)\nroot.save()\nroot.schedule()\nengine = TestEngine()\nengine.enable_module('analysis_module_protected_url_analyzer', 'test_groups')\nengine.controlled_stop()\nengine.start()\nengine.wait()\nroot.load()\nurl = root.get_observable(url.id)\nfrom saq.modules.url import ProtectedURLAnalysis, PROTECTION_TYPE_SHAREPOINT\nanalysis = url.get_analysis(ProtectedURLAnalysis)\nself.assertIsNotNone(analysis)\nself.assertEquals(analysis.protection_type, PROTECTION_TYPE_SHAREPOINT)\nfrom urllib.parse import urlparse, parse_qs\nparsed_url = urlparse(analysis.extracted_url)\nself.assertEquals(parsed_url.path,\n    '/personal/secure_onedrivemsw_bid/_layouts/15/download.aspx')\nparsed_qs = parse_qs(parsed_url.query)\nself.assertEquals(parsed_qs['e'][0], 'naeXYD')\nself.assertEquals(parsed_qs['share'][0],\n    'EVdjoBiqZTxMnjAcDW6yR4gBqJ59ALkT1C2I3L0yb_n0uQ')\nextracted_url = analysis.get_observables_by_type(F_URL)\nself.assertEquals(len(extracted_url), 1)\nextracted_url = extracted_url[0]\nself.assertTrue(extracted_url.has_directive(DIRECTIVE_CRAWL))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_modularity",
+    "className": "Test_modularity",
+    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_modularity.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.setUpClass()\nconfig_fn = os.path.join(curdir, 'hwcfg_cc_light_modular.json')\nc = ql.Compiler('testCompiler')\nc.add_pass_alias('Writer', 'outputIR')\nc.add_pass('Reader')\nc.add_pass('RotationOptimizer')\nc.add_pass('DecomposeToffoli')\nc.add_pass_alias('CliffordOptimize', 'clifford_prescheduler')\nc.add_pass('Scheduler')\nc.add_pass_alias('CliffordOptimize', 'clifford_postscheduler')\nc.add_pass_alias('Writer', 'scheduledqasmwriter')\nc.set_pass_option('ALL', 'skip', 'no')\nc.set_pass_option('Reader', 'write_qasm_files', 'no')\nc.set_pass_option('RotationOptimizer', 'write_qasm_files', 'no')\nc.set_pass_option('outputIR', 'write_qasm_files', 'yes')\nc.set_pass_option('scheduledqasmwriter', 'write_qasm_files', 'yes')\nc.set_pass_option('ALL', 'write_report_files', 'no')\nnqubits = 3\nplatform = ql.Platform('starmon', config_fn)\np = ql.Program('testProgram', platform, nqubits, 0)\nk = ql.Kernel('aKernel', platform, nqubits, 0)\nfor i in range(nqubits):\n    k.gate('prep_z', [i])\nk.gate('x', [0])\nk.gate('x', [0])\nk.gate('x', [0])\nk.gate('h', [1])\nk.gate('cz', [2, 0])\np.add_kernel(k)\nc.compile(p)\n"
+}

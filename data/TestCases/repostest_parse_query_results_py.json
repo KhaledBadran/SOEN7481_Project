@@ -1,0 +1,9 @@
+{
+    "functionName": "test_parse_query_results_py",
+    "className": "TestQueryBuilder",
+    "fileName": "/jeff-99_&_OpenKVK/OpenKVK_&_test_&_test_openkvk.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "py_result = [\n    '[{\"RESULT\":{\"TYPES\":[\"varchar\"],\"HEADER\":[\"bedrijfsnaam\"],\"ROWS\":[[\"Kinkrsoftware\"]]}}]'\n    ]\npy_multiple_query_result = [\n    '[{\"RESULT\":{\"TYPES\":[\"varchar\"],\"HEADER\":[\"bedrijfsnaam\"],\"ROWS\":[[\"Friesland Bank N.V.\"]]}}]'\n    ,\n    '[{\"RESULT\":{\"TYPES\":[\"varchar\"],\"HEADER\":[\"bedrijfsnaam\"],\"ROWS\":[[\"Bineko-export B.V.\"],[\"Bytefabriek\"]]}}]'\n    ]\nself.client.setResponseFormat('py')\nassert self.client._parse_query_results(py_result) == [{'bedrijfsnaam':\n    'Kinkrsoftware'}]\nassert self.client._parse_query_results(py_multiple_query_result) == [{\n    'bedrijfsnaam': 'Friesland Bank N.V.'}, {'bedrijfsnaam':\n    'Bineko-export B.V.'}, {'bedrijfsnaam': 'Bytefabriek'}]\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_order",
+    "className": "testCaliOrdering",
+    "fileName": "/benjimor_&_CaLi/tests_&_test_cali_ordering.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "odrl = ODRLVocabulary()\nDL1 = RestrictivenessLatticeOfStatus(Graph().parse(data=dl1_rdf, format='ttl'))\nld_licenses_graph = Graph().parse(data=ld_licenses_rdf, format='ttl')\ncali_ordering = CaliOrdering(ls=DL1, vocabulary=odrl, license_constraints=\n    LicenseConstraints(odrl, [CommercialUse_Not_Duty,\n    ShareAlike_Not_Prohibition, CommercialUse_Include_Use]),\n    compatibility_constraints=CompatibilityConstraints(odrl, [\n    ShareAlike_Compatibility, DerivativeWorks_Compatibility]))\nlicenses = ODRLLicenses(vocabulary=odrl, ls=DL1, rdf_graph=ld_licenses_graph)\ncali_ordering.add_license(licenses[0])\ncali_ordering.add_licenses(licenses)\nmit_license = ODRLLicense(vocabulary=odrl, ls=DL1, rdf_graph=\n    ld_licenses_graph, iri=MIT)\ncc_by_sa_license = ODRLLicense(vocabulary=odrl, ls=DL1, rdf_graph=\n    ld_licenses_graph, iri=CC_BY_SA)\ncc_by_nc_sa_license = ODRLLicense(vocabulary=odrl, ls=DL1, rdf_graph=\n    ld_licenses_graph, iri=CC_BY_NC_SA)\nself.assertTrue(cali_ordering.is_compatible(mit_license, cc_by_sa_license))\nself.assertFalse(cali_ordering.is_compatible(cc_by_sa_license, mit_license))\nself.assertTrue(cali_ordering.is_compliant(cc_by_sa_license, mit_license))\nself.assertFalse(cali_ordering.is_compliant(mit_license, cc_by_sa_license))\nself.assertFalse(cali_ordering.is_compatible(cc_by_sa_license,\n    cc_by_nc_sa_license))\nself.assertEqual(len(cali_ordering.all_compatible(mit_license)), 2)\nself.assertEqual(len(cali_ordering.all_compliant(mit_license)), 6)\nself.assertEqual(len(cali_ordering.get_rdf_graph()), 21)\n"
+}

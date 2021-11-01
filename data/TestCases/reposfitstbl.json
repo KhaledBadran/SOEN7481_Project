@@ -1,0 +1,9 @@
+{
+    "functionName": "fitstbl",
+    "className": null,
+    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_calibrations.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "if os.getenv('PYPEIT_DEV') is None:\n    fitstbl = dummy_fitstbl(directory=data_path(''))\n    fitstbl['framebit'][0] = fitstbl.type_bitmask.turn_off(fitstbl[\n        'framebit'][0], flag='bias')\n    fitstbl['filename'][1] = 'b1.fits.gz'\n    fitstbl['filename'][5] = 'b27.fits.gz'\n    return fitstbl\nfitstbl = dummy_fitstbl(directory=os.path.join(os.getenv('PYPEIT_DEV'),\n    'RAW_DATA', 'shane_kast_blue', '600_4310_d55'))\nfitstbl['framebit'][0] = fitstbl.type_bitmask.turn_off(fitstbl['framebit'][\n    0], flag='bias')\nfitstbl['filename'][1] = 'b1.fits.gz'\nfor ii in range(2, 5):\n    fitstbl['filename'][ii] = 'b{0}.fits.gz'.format(ii)\nfitstbl['filename'][5] = 'b27.fits.gz'\nreturn fitstbl\npytest.fixture"
+}

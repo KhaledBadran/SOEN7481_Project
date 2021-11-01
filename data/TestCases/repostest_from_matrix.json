@@ -1,0 +1,9 @@
+{
+    "functionName": "test_from_matrix",
+    "className": "test_rotation_axis",
+    "fileName": "/jonwright_&_ImageD11/test_&_gv_general_&_test_gv_general.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"test_from_matrix: Check matrix construction\"\"\"\nc30 = math.sqrt(3) / 2.0\ns30 = math.sin(math.radians(30.0))\nm = np.transpose(np.array([[c30, s30, 0], [-s30, c30, 0], [0, 0, 1]]))\no = gv_general.axis_from_matrix(m)\nself.assertAlmostEqual(array_diff(o.to_matrix(), m), 0, 6)\nself.assertAlmostEqual(array_diff(o.direction, np.array([0, 0, 1])), 0, 6)\nself.assertNotAlmostEqual(array_diff(o.direction, np.array([0, 1, 1])), 0, 6)\nself.assertAlmostEqual(o.angle, 30.0, 6)\nself.assertNotAlmostEqual(o.angle, 31.0, 6)\n"
+}

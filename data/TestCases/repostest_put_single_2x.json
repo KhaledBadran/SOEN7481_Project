@@ -1,0 +1,9 @@
+{
+    "functionName": "test_put_single_2x",
+    "className": "TestIndex",
+    "fileName": "/nkordulla_&_FHR-DB/tests_&_fhr_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "index = Index('field1', 'simple_field1_index', 'simple_id')\nmodel = SimpleIndexInterface()\nindex.put(model)\nmodel.data['field1'] = 'neu'\nindex.put(model)\nresult = Database.get().get(\n    'SELECT field1 FROM simple_field1_index WHERE simple_id = %s', model._id)\nself.assertNotEqual(result, None)\nself.assertEqual(result['field1'], 'neu')\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test__apply_metadata_funcs",
+    "className": "TestElasticBuffer",
+    "fileName": "/dkaslovsky_&_ElasticBatch/tests_&_test_buffer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class TestCase:\n\n    def __init__(self, docs_in, metadata_funcs, expected_docs):\n        self.docs_in = docs_in\n        self.metadata_funcs = metadata_funcs\n        self.expected_docs = expected_docs\ndef _index(doc):\n    return 'my-index'\ndef _id(doc):\n    return sum(doc.values())\ntests = {'no metadata funcs': TestCase(docs_in=[{'a': 1, 'b': 2}, {'a': 8,\n    'b': 9}], metadata_funcs={}, expected_docs=[{'a': 1, 'b': 2}, {'a': 8,\n    'b': 9}]), 'single metadata func': TestCase(docs_in=[{'a': 1, 'b': 2},\n    {'a': 8, 'b': 9}], metadata_funcs={'_index': _index}, expected_docs=[{\n    'a': 1, 'b': 2, '_index': 'my-index'}, {'a': 8, 'b': 9, '_index':\n    'my-index'}]), 'multiple metadata funcs': TestCase(docs_in=[{'a': 1,\n    'b': 2}, {'a': 8, 'b': 9}], metadata_funcs={'_index': _index, '_id':\n    _id}, expected_docs=[{'a': 1, 'b': 2, '_index': 'my-index', '_id': 3},\n    {'a': 8, 'b': 9, '_index': 'my-index', '_id': 17}])}\nfor test_name, test in tests.items():\n    eb = ElasticBuffer(**test.metadata_funcs)\n    docs_out = eb._apply_metadata_funcs(test.docs_in)\n    self.assertListEqual(docs_out, test.expected_docs, test_name)\n"
+}

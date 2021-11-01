@@ -1,0 +1,9 @@
+{
+    "functionName": "test_is_element_displayed_not_displayed_splinter",
+    "className": null,
+    "fileName": "/mozilla_&_PyPOM/tests_&_splinter_specific_&_test_page.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "locator = splinter_strategy, str(random.random())\nfrom mock import PropertyMock\nvisible_mock = PropertyMock(return_value=False)\npage.driver.configure_mock(**{'find_by_{0}.return_value.first.visible'.\n    format(splinter_strategy): visible_mock})\ntype(getattr(page.driver, 'find_by_{0}'.format(splinter_strategy)).\n    return_value.first).visible = visible_mock\nassert not page.is_element_displayed(*locator)\ngetattr(page.driver, 'find_by_{0}'.format(splinter_strategy)\n    ).assert_called_once_with(locator[1])\nvisible_mock.assert_called_with()\n"
+}

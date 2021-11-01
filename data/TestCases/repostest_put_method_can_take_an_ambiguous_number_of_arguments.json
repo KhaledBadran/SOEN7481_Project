@@ -1,0 +1,9 @@
+{
+    "functionName": "test_put_method_can_take_an_ambiguous_number_of_arguments",
+    "className": null,
+    "fileName": "/ChrisByrd14_&_JSONite/tests_&_test_service_class.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "dummy = DummyClass()\nJavascript.put({'a': 1, 'b': 2}, an_object=dummy)\nJavascript.put(foo={'c': 3}, bar={'d': 4})\nexpected = {'a': 1, 'b': 2, 'an_object': dummy.__dict__, 'foo': {'c': 3},\n    'bar': {'d': 4}}\nassert Javascript.data == expected\nexpected_string = \"\"\"\n<script>\nlet jsonite = {\n    \"a\": 1,\n    \"b\": 2,\n    \"an_object\": {\"foo\": \"bar\", \"baz\": 12345.6},\n    \"foo\": {\"c\": 3},\n    \"bar\": {\"d\": 4},\n};\n</script>\"\"\"\nassert Javascript.render() == expected_string.strip()\n"
+}

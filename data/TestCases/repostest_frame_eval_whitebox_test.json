@@ -1,0 +1,9 @@
+{
+    "functionName": "test_frame_eval_whitebox_test",
+    "className": null,
+    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_frame_eval_and_tracing.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from tests_python.debugger_unittest import CMD_STEP_INTO, CMD_STEP_RETURN, CMD_STEP_OVER\nwith case_setup_force_frame_eval.test_file('_debugger_case_frame_eval.py'\n    ) as writer:\n    line_on_global = writer.get_line_index_with_content('break on global')\n    writer.write_add_breakpoint(line_on_global, '')\n    writer.write_add_breakpoint(writer.get_line_index_with_content(\n        'break on check_with_trace'), 'None')\n    writer.write_make_initial_run()\n    hit = writer.wait_for_breakpoint_hit(line=line_on_global)\n    assert hit.suspend_type == 'frame_eval'\n    writer.write_step_over(hit.thread_id)\n    hit = writer.wait_for_breakpoint_hit(reason=CMD_STEP_OVER)\n    writer.write_step_in(hit.thread_id)\n    hit = writer.wait_for_breakpoint_hit(line=writer.\n        get_line_index_with_content('check_step_in_then_step_return') + 1,\n        reason=CMD_STEP_INTO)\n    assert hit.name == 'check_step_in_then_step_return'\n    writer.write_step_return(hit.thread_id)\n    hit = writer.wait_for_breakpoint_hit(reason=CMD_STEP_RETURN)\n    assert hit.name == '<module>'\n    writer.write_run_thread(hit.thread_id)\n    writer.finished_ok = True\n"
+}

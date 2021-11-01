@@ -1,0 +1,9 @@
+{
+    "functionName": "test_quantile",
+    "className": null,
+    "fileName": "/quantOS-org_&_JAQS/test_&_test_py_expression_eval.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "val = pd.DataFrame(np.random.rand(500, 3000))\nexpr = parser.parse('Quantile(val, 12)')\nres = parser.evaluate({'val': val})\nassert np.nanmean(val[res == 1].values.flatten()) < 0.11\nval = pd.DataFrame(np.random.rand(1000, 100))\nexpr = parser.parse('Ts_Quantile(val, 500, 12)')\nres = parser.evaluate({'val': val})\nassert np.nanmean(val[res == 1].values.flatten()) < 0.11\n"
+}

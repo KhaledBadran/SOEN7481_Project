@@ -1,0 +1,9 @@
+{
+    "functionName": "test_write_missing_nonce",
+    "className": "TestAttestationCredential",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_credentials.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a ValueError gets raised when attempting to write an\n        AttestationCredential struct missing nonce data to a data stream.\n        \"\"\"\ncredential = objects.AttestationCredential(attestation_type=enums.\n    AttestationType.TPM_QUOTE, attestation_measurement=\n    b'\\xff\\xff\\xff\\xff\\xff\\xff\\xff\\xff', attestation_assertion=\n    b'\\x11\\x11\\x11\\x11\\x11\\x11\\x11\\x11')\nstream = utils.BytearrayStream()\nargs = stream,\nself.assertRaisesRegex(ValueError,\n    'Attestation credential struct is missing the nonce.', credential.write,\n    *args)\n"
+}

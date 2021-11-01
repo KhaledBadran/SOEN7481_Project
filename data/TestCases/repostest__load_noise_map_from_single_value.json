@@ -1,0 +1,9 @@
+{
+    "functionName": "test__load_noise_map_from_single_value",
+    "className": "TestLoadCIData",
+    "fileName": "/Jammy2211_&_PyAutoCTI/test_&_unit_&_charge_injection_&_test_ci_data.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "frame_geometry = MockGeometry()\npattern = MockPattern()\ndata = ci_data.ci_data_from_fits(frame_geometry=frame_geometry, ci_pattern=\n    pattern, image_path=test_data_dir + '3x3_ones.fits', image_hdu=0,\n    noise_map_from_single_value=10.0, ci_pre_cti_path=test_data_dir +\n    '3x3_threes.fits', ci_pre_cti_hdu=0)\nassert (data.image == np.ones((3, 3))).all()\nassert (data.noise_map == 10.0 * np.ones((3, 3))).all()\nassert (data.ci_pre_cti == 3.0 * np.ones((3, 3))).all()\nassert data.ci_frame.frame_geometry == frame_geometry\nassert data.ci_frame.ci_pattern == pattern\nassert data.cosmic_ray_image == None\n"
+}

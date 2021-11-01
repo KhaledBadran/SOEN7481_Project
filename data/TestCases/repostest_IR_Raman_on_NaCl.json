@@ -1,0 +1,9 @@
+{
+    "functionName": "test_IR_Raman_on_NaCl",
+    "className": "TestStructureMethods",
+    "fileName": "/mesonepigreco_&_CellConstructor/scripts_&_cellconstructor_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        We generate a simple NaCl structure and predict using symmetries if the mode is IR or Raman active\n        \"\"\"\nself.setUp()\nself.NaCldyn.Symmetrize()\nfor i in range(100):\n    get_ir_activity = self.NaCldyn.GetIRActive()\n    assert (get_ir_activity == [False, False, False, True, True, True]).all(\n        ), get_ir_activity\nfor i in range(100):\n    get_raman_activity = self.NaCldyn.GetRamanActive()\n    assert not get_raman_activity.any()\nself.NaCldyn.dynmats[0][:, :] = np.random.uniform(size=(3 * self.NaCl.\n    N_atoms, 3 * self.NaCl.N_atoms))\nself.NaCldyn.effective_charges = np.random.uniform(size=(self.NaCl.N_atoms,\n    3, 3))\nself.NaCldyn.raman_tensor = np.random.uniform(size=(3, 3, 3 * self.NaCl.\n    N_atoms))\nself.NaCldyn.Symmetrize()\nassert np.max(np.abs(self.NaCldyn.raman_tensor)) < 1e-10\nir_responce = self.NaCldyn.GetIRIntensities()\nassert np.max(np.abs(ir_responce[3:] - ir_responce[3])) < 1e-10\nunittest.skip('not yet working function')"
+}

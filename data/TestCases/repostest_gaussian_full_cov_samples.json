@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gaussian_full_cov_samples",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_models_&_test_model_predict.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "samples_shape = num_samples, Ntest, output_dim\nX, Y, _ = rng.randn(N, input_dim), rng.randn(N, output_dim), rng.randn(M,\n    input_dim)\nXtest = rng.randn(Ntest, input_dim)\nkernel = Matern32()\nmodel_gp = gpflow.models.GPR([X, Y], kernel=kernel)\nsamples = model_gp.predict_f_samples(Xtest, num_samples)\nassert samples.shape == samples_shape\nsamples = model_gp.predict_f_samples(Xtest, num_samples, full_cov=False)\nassert samples.shape == samples_shape\npytest.mark.parametrize('input_dim, output_dim, N, Ntest, M, num_samples',\n    [[3, 2, 20, 30, 5, 5]])"
+}

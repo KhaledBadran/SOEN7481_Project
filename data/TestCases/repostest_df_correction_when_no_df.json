@@ -1,0 +1,9 @@
+{
+    "functionName": "test_df_correction_when_no_df",
+    "className": "TestDFCorrection",
+    "fileName": "/ornlneutronimaging_&_NeuNorm/tests_&_NeuNorm_&_normalizing_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"assert sample and ob are inchanged if df is empty\"\"\"\npath = self.data_path + '/tif/sample'\no_norm = Normalization()\no_norm.load(folder=path, data_type='sample', auto_gamma_filter=False)\ndata_before = o_norm.data['sample']['data'][0]\no_norm.df_correction()\ndata_after = o_norm.data['sample']['data'][0]\nassert (data_before == data_after).all()\npath = self.data_path + '/tif/ob'\no_norm = Normalization()\no_norm.load(folder=path, data_type='ob', auto_gamma_filter=False)\ndata_before = o_norm.data['ob']['data'][0]\no_norm.df_correction()\ndata_after = o_norm.data['ob']['data'][0]\nassert (data_before == data_after).all()\n"
+}

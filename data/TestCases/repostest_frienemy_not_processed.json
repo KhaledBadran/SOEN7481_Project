@@ -1,0 +1,9 @@
+{
+    "functionName": "test_frienemy_not_processed",
+    "className": null,
+    "fileName": "/Menelau_&_DESlib/deslib_&_tests_&_util_&_test_fire.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "X = np.random.rand(5, 2)\ny = np.array([0, 0, 0, 1, 1])\nX_query = np.random.rand(1, 2)\nclf1 = create_base_classifier(return_value=[0, 1, 0, 0, 1])\nclf2 = create_base_classifier(return_value=[1, 1, 1, 1, 1])\nclf3 = create_base_classifier(return_value=[0, 0, 0, 0, 0])\nclf4 = create_base_classifier(return_value=[0, 0, 0, 1, 1])\npool = [clf1, clf2, clf3, clf4]\ndfp_mask = frienemy_pruning(X_query, X, y, pool, 5)\nassert np.array_equal(dfp_mask, np.array([[1, 0, 0, 1]]))\n"
+}

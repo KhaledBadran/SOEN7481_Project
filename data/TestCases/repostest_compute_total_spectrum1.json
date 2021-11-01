@@ -1,0 +1,9 @@
+{
+    "functionName": "test_compute_total_spectrum1",
+    "className": "TestComputeTotalSpectrum",
+    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_core_&_tests_&_test_map_processing.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Using 'global' dask client to save time\"\"\"\nglobal_client = self.client\ndata_shape = 7, 12, 20\ndata_dask = da.random.random(data_shape, chunks=(2, 3, 4))\ndata_numpy = data_dask.compute(scheduler='synchronous')\nmask, selection = _create_xrf_mask(data_shape, apply_mask, select_area)\ndata_tmp = data_numpy\nif mask is not None:\n    mask_conv = (mask > 0).astype(dtype=int)\n    mask_conv = np.broadcast_to(np.expand_dims(mask_conv, axis=2), data_tmp\n        .shape)\n    data_tmp = data_tmp * mask_conv\nif selection is not None:\n    y0, x0, ny, nx = selection\n    data_tmp = data_tmp[y0:y0 + ny, x0:x0 + nx, :]\ntotal_spectrum_expected = np.sum(np.sum(data_tmp, axis=0), axis=0)\ndata = _create_xrf_data(data_dask, data_representation, tmpdir)\ntotal_spectrum = compute_total_spectrum(data, selection=selection, mask=\n    mask, chunk_pixels=12, progress_bar=TerminalProgressBar(\n    'Monitoring progress: '), client=global_client)\nnpt.assert_array_almost_equal(total_spectrum, total_spectrum_expected,\n    err_msg='Total spectrum was computed incorrectly')\npytest.mark.parametrize('data_representation', ['numpy_array', 'dask_array',\n    'hdf5_file_dset'])pytest.mark.parametrize('apply_mask', [False, True])pytest.mark.parametrize('select_area', [False, True])"
+}

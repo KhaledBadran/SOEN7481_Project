@@ -1,0 +1,9 @@
+{
+    "functionName": "test_extend_geometry_present",
+    "className": "TopotoolsTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_topotools_&_TopotoolsTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "pn = op.network.Cubic(shape=[2, 2, 1])\ngeo = op.geometry.StickAndBall(network=pn)\ngeo['pore.test_float'] = 1.0\ngeo['pore.test_int'] = 1\ngeo['pore.test_bool'] = True\nop.topotools.extend(network=pn, pore_coords=[[3, 3, 3], [3, 3, 4]])\nassert ~np.any(np.isnan(geo['pore.test_float']))\nassert ~np.any(np.isnan(geo['pore.test_int']))\nassert geo['pore.test_bool'].sum() == geo['pore.test_bool'].size\n"
+}

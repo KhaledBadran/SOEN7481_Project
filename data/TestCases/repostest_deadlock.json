@@ -1,0 +1,9 @@
+{
+    "functionName": "test_deadlock",
+    "className": "TestCase",
+    "fileName": "/IntegralDefense_&_ACE/lib_&_saq_&_test_database.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "_uuid = str(uuid.uuid4())\n_lock_uuid = str(uuid.uuid4())\nwith get_db_connection() as db:\n    c = db.cursor()\n    c.execute(\n        'INSERT INTO locks ( uuid, lock_uuid, lock_time ) VALUES ( %s, %s, NOW() )'\n        , (_uuid, _lock_uuid))\n    db.commit()\ndef _t1():\n    _uuid = str(uuid.uuid4())\n    _lock_uuid = str(uuid.uuid4())\n    try:\n        with get_db_connection() as db:\n            c = db.cursor()\n            c.execute(\n                'INSERT INTO locks ( uuid, lock_time ) VALUES ( %s, NOW() )',\n                (_uuid,))\n            time.sleep(2)\n            c.execute(\"UPDATE locks SET lock_owner = 'whatever'\")\n            db.commit()\n    except pymysql.err.OperationalError as e:\n        if e.args[0] == 1213 or e.args[0] == 1205:\n            deadlock_event.set()\ndef _t2():\n    _uuid = str(uuid.uuid4())\n    _lock_uuid = str(uuid.uuid4())\n    try:\n        with get_db_connection() as db:\n            c = db.cursor()\n            c.execute(\"UPDATE locks SET lock_owner = 'whatever'\")\n            time.sleep(2)\n            c.execute(\n                'INSERT INTO locks ( uuid, lock_time ) VALUES ( %s, NOW() )',\n                (_uuid,))\n            db.commit()\n    except pymysql.err.OperationalError as e:\n        if e.args[0] == 1213 or e.args[0] == 1205:\n            deadlock_event.set()\ndeadlock_event = threading.Event()\nt1 = threading.Thread(target=_t1)\nt2 = threading.Thread(target=_t2)\nt1.start()\nt2.start()\nself.assertTrue(deadlock_event.wait(5))\nt1.join(5)\nt2.join(5)\nself.assertFalse(t1.is_alive())\nself.assertFalse(t2.is_alive())\nunittest.skip"
+}

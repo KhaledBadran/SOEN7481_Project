@@ -1,0 +1,9 @@
+{
+    "functionName": "test_parse_config_explicit_white_list",
+    "className": null,
+    "fileName": "/alex-ber_&_AlexBerUtils/tests_&_utils_&_init_app_conf_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "logger.info(f'{request._pyfuncitem.name}()')\nexpdd = {'general': {'profiles': [], 'log': {'version': 1,\n    'disable_existing_loggers': False, 'formatters': {'brief': {'format':\n    '%(message)s'}, 'detail': {'format':\n    '%(asctime)-15s %(levelname)s [%(name)s.%(funcName)s] %(message)s',\n    'datefmt': '%Y-%m-%d %H:%M:%S'}}, 'root': {'level': 'DEBUG'}}, 'config':\n    {'file': None}, 'whiteListSysOverride': ['app.host_name'], 'listEnsure':\n    []}, 'app': {'host_name': '10.20.40.60', 'news': 'cnn.com',\n    'white_list': ['gamma', 'alpha', 'betha'], 'alt_white_list': [100, 10.0]}}\npck = '.'.join(['tests_data', __package__, 'initappconf'])\nwith path(pck, 'confige.yml') as full_path:\n    expdd['general']['config']['file'] = str(full_path)\n    argsv = (\n        f'--general.config.file={full_path} --app.portal=reddit.com --app.host_name=10.20.40.60 10.20.40.60:8082 '\n        .split())\n    dd = parse_config(None, argsv)\n    del dd['general']['log']['handlers']\n    del dd['general']['log']['root']['handlers']\n    pytest.assume(expdd == dd)\npytest.mark.yml"
+}

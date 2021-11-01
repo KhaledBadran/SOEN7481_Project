@@ -1,0 +1,9 @@
+{
+    "functionName": "test_parameters_same",
+    "className": null,
+    "fileName": "/open-source-economics_&_OG-USA/regression_&_test_regression.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "reg = parameter_read[0]\nnew = parameter_read[1]\nfor k, v in reg.items():\n    print('Paramater = ', k)\n    try:\n        print('Diff in ', k, ' = ', np.absolute(v - np.squeeze(new.__dict__\n            [k])).max())\n        assert np.allclose(v, np.squeeze(new.__dict__[k]))\n    except KeyError:\n        print(k, ' is not in the parameters class')\n    except TypeError:\n        print('Master value = ', v, ' Dev value = ', new.__dict__[k])\n        assert v == new.__dict__[k]\n    except ValueError:\n        pass\npytest.mark.regression"
+}

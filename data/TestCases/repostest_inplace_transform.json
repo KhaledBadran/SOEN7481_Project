@@ -1,0 +1,9 @@
+{
+    "functionName": "test_inplace_transform",
+    "className": "TestComputeElapsedTime",
+    "fileName": "/AndrewRook_&_NFLWin/nflwin_&_tests_&_test_preprocessing.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "input_df = pd.DataFrame({'quarter': ['Q1', 'Q2', 'Q3', 'Q4', 'OT'],\n    'time_elapsed': [200, 0, 50, 850, 40]})\ncet = preprocessing.ComputeElapsedTime('quarter', 'time_elapsed', copy=False)\ncet.fit(input_df)\ncet.transform(input_df)\nexpected_df = pd.DataFrame({'quarter': ['Q1', 'Q2', 'Q3', 'Q4', 'OT'],\n    'time_elapsed': [200, 0, 50, 850, 40], 'total_elapsed_time': [200, 900,\n    1850, 3550, 3640]})\npd.util.testing.assert_frame_equal(input_df, expected_df)\n"
+}

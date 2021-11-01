@@ -1,0 +1,9 @@
+{
+    "functionName": "test_efficient_return_shrunk",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_efficient_frontier.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "df = get_data()\nef = setup_efficient_frontier()\nef.cov_matrix = risk_models.CovarianceShrinkage(df).ledoit_wolf(\n    shrinkage_target='single_factor')\nw = ef.efficient_return(0.22)\nassert isinstance(w, dict)\nassert set(w.keys()) == set(ef.tickers)\nnp.testing.assert_almost_equal(ef.weights.sum(), 1)\nassert all([(i >= 0) for i in w.values()])\nnp.testing.assert_allclose(ef.portfolio_performance(), (0.22, \n    0.0849639369932322, 2.353939884117318))\n"
+}

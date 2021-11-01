@@ -1,0 +1,9 @@
+{
+    "functionName": "test_clear_expired_locks",
+    "className": "LockTestCase",
+    "fileName": "/IntegralDefense_&_ACE/lib_&_saq_&_test_locks.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "saq.LOCK_TIMEOUT_SECONDS = 0\ntarget = str(uuid.uuid4())\nlock_uuid = str(uuid.uuid4())\nself.assertTrue(acquire_lock(target, lock_uuid))\nclear_expired_locks()\nc.execute('SELECT uuid FROM locks WHERE uuid = %s', (target,))\nself.assertIsNone(c.fetchone())\nuse_db"
+}

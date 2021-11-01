@@ -1,0 +1,9 @@
+{
+    "functionName": "test_invalid_bounds_shell",
+    "className": "Test_valid_query_input",
+    "fileName": "/mchalela_&_GriSPy/tests_&_test_data_consistency.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "lower_radii = np.random.uniform(0.1, 0.5, size=10)\nbad_upper_radii = np.random.uniform(0.6, 1, size=11)\nwith pytest.raises(ValueError):\n    gsp.shell_neighbors(self.centres, distance_upper_bound=bad_upper_radii,\n        distance_lower_bound=lower_radii, sorted=self.sorted, kind=self.kind)\nlower_radii = np.random.uniform(0.1, 0.5, size=10)\nbad_upper_radii = np.random.uniform(0.6, 1, size=10)\nbad_upper_radii[4] = lower_radii[4] - 0.05\nwith pytest.raises(ValueError):\n    gsp.shell_neighbors(self.centres, distance_upper_bound=bad_upper_radii,\n        distance_lower_bound=lower_radii, sorted=self.sorted, kind=self.kind)\n"
+}

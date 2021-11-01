@@ -1,0 +1,9 @@
+{
+    "functionName": "purcell",
+    "className": null,
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_models_&_physics_&_meniscus.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Wrapper for the general toroidal model to implement the Purcell equation\n    for a torus with cylindrical profile and toroidal radius r_toroid.\n\n    Notes\n    -----\n    This approach accounts for the converging-diverging nature of many throat\n    types. Advancing the meniscus beyond the apex of the toroid requires an\n    increase in capillary pressure beyond that for a cylindical tube of the\n    same radius. The details of this equation are described by Mason and\n    Morrow [1]_, and explored by Gostick [2]_ in the context of a pore network\n    model.\n    \"\"\"\ntarget['throat.scale_a'] = r_toroid\ntarget['throat.scale_b'] = r_toroid\noutput = general_toroidal(target=target, mode=mode, profile_equation=\n    'elliptical', target_Pc=target_Pc, num_points=num_points,\n    throat_diameter=throat_diameter, touch_length=touch_length,\n    surface_tension=surface_tension, contact_angle=contact_angle)\nreturn output\n"
+}

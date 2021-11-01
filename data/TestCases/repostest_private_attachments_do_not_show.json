@@ -1,0 +1,9 @@
+{
+    "functionName": "test_private_attachments_do_not_show",
+    "className": "TestETL",
+    "fileName": "/klahnakoski_&_Bugzilla-ETL/tests_&_test_etl.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.settings.param.allow_private_bugs = False\nFile(self.settings.param.first_run_time).delete()\nFile(self.settings.param.last_run_time).delete()\ndatabase.make_test_instance(self.settings.bugzilla)\nwith MySQL(self.settings.bugzilla) as db:\n    private_attachments = db.query(\n        \"\"\"\n                SELECT\n                    bug_id,\n                    attach_id\n                FROM\n                    attachments\n                ORDER BY\n                    mod(attach_id, 7),\n                    attach_id\n                LIMIT\n                    5\n            \"\"\"\n        )\n    for a in private_attachments:\n        database.mark_attachment_private(db, a.attach_id, isprivate=1)\nbz_etl.main(es=self.settings.public.bugs.es, es_comments=self.settings.\n    public.comments.es, kwargs=self.settings)\nes = real_elasticsearch.Index(self.settings.public.bugs.es)\nrefresh_metadata(es)\nverify_no_private_attachments(es, private_attachments)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_set_params_functional_model",
+    "className": null,
+    "fileName": "/goeckslab_&_Galaxy-ML/galaxy_ml_&_tests_&_test_keras_galaxy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "config = resnet_model.get_config()\nclassifier = KerasGClassifier(config, model_type='functional')\nparams = {'layers_1_Conv2D__config__kernel_initializer__config__seed': 9999,\n    'layers_1_Conv2D__config__filters': 64, 'lr': 0.03, 'epochs': 200}\nclassifier.set_params(**params)\ngot1 = classifier.config['layers'][1]['config']['kernel_initializer']['config'\n    ]['seed']\ngot2 = classifier.config['layers'][1]['config']['filters']\ngot3 = classifier.lr\ngot4 = classifier.epochs\nassert got1 == 9999, got1\nassert got2 == 64, got2\nassert got3 == 0.03, got3\nassert got4 == 200, got4\n"
+}

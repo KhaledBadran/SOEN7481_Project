@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_decode_algorithms",
+    "className": "EasyJWTTest",
+    "fileName": "/BMeu_&_EasyJWT/tests_&_easyjwt_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n            Test getting the algorithms for decoding a token.\n\n            Expected Result: A set of all previous encoding algorithms and the current one is returned.\n        \"\"\"\ncurrent_alg_temp = EasyJWT.algorithm\nprevious_algs_temp = EasyJWT.previous_algorithms\nEasyJWT.algorithm = Algorithm.HS256\nEasyJWT.previous_algorithms = [Algorithm.HS384, Algorithm.HS512]\nalgorithms = {Algorithm.HS256.value, Algorithm.HS384.value, Algorithm.HS512\n    .value}\nself.assertSetEqual(algorithms, EasyJWT._get_decode_algorithms())\nEasyJWT.algorithm = current_alg_temp\nEasyJWT.previous_algorithms = previous_algs_temp\n"
+}

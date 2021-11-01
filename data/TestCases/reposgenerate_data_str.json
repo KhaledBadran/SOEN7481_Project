@@ -1,0 +1,9 @@
+{
+    "functionName": "generate_data_str",
+    "className": "psv_load_tests_random",
+    "fileName": "/DolphDev_&_PSV/tests_&_test_load_random.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "from psv.core.objects.rowobjects import accepted_chars\nfrom string import ascii_uppercase\nfrom random import uniform\nalphabet = accepted_chars + ascii_uppercase\ncolumns = tuple(set(generate_random_column_range(randint(1, 100), alphabet)))\ndef _gen():\n    for x in range(randint(5, 500)):\n        store = {}\n        for column in columns:\n            number = randint(1, 3)\n            if number == 1:\n                store[column] = generate_random_string(alphabet, randint(3, 30)\n                    )\n            elif number == 2:\n                store[column] = randint(1, 10000)\n            elif number == 3:\n                store[column] = uniform(float(randint(1, 500)), randint(501,\n                    50000.0))\n        yield store\nself.csvloads_dict_tuple = tuple(_gen())\nself.csvloads_dict_columns = columns\nimport io\nimport csv\nwith io.StringIO() as csvfile:\n    fieldnames = self.csvloads_dict_columns\n    writer = csv.DictWriter(csvfile, fieldnames=fieldnames, quoting=csv.\n        QUOTE_ALL)\n    writer.writeheader()\n    for item in self.csvloads_dict_tuple:\n        writer.writerow(item)\n    self.csvloads_str = csvfile.getvalue()\n"
+}

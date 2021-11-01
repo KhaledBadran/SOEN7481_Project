@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fit_and_transform_exceptions",
+    "className": "TestFeatureBinarizerFromTrees",
+    "fileName": "/IBM_&_AIX360/tests_&_rbm_&_test_Feature_Binarizer_From_Trees.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "fbt = FeatureBinarizerFromTrees()\nwith self.assertRaises((TypeError, ValueError)):\n    fbt.fit(self.X_train)\nfbt = FeatureBinarizerFromTrees()\nXn = self.X_train.copy(True)\nXn.iloc[[31, 27, 80], Xn.columns.get_loc('smoothness error')] = np.NaN\nwith self.assertRaises(ValueError):\n    fbt.fit(Xn, self.y_train)\nfbt = FeatureBinarizerFromTrees()\nXn = self.X_train.copy(True)\nXn.iloc[[3, 17, 20], Xn.columns.get_loc('bin num')] = np.NaN\nwith self.assertRaises(ValueError):\n    fbt.fit(Xn, self.y_train)\nfbt = FeatureBinarizerFromTrees(colCateg=self.col_categorical)\nXn = self.X_train.copy(True)\nXn.iloc[[3, 17, 20], Xn.columns.get_loc('cat num')] = np.NaN\nwith self.assertRaises(ValueError):\n    fbt.fit(Xn, self.y_train)\n"
+}

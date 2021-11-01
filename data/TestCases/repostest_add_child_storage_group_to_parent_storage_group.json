@@ -1,0 +1,9 @@
+{
+    "functionName": "test_add_child_storage_group_to_parent_storage_group",
+    "className": "PyU4VProvisioningTest",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_provisioning.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test add_child_storage_group_to_parent_storage_group.\"\"\"\nchild_storage_group = self.data.storagegroup_name_1\nparent_storage_group = self.data.parent_sg\nref_payload = {'editStorageGroupActionParam': {'expandStorageGroupParam': {\n    'addExistingStorageGroupParam': {'storageGroupId': [child_storage_group]}}}\n    }\nwith mock.patch.object(self.provisioning, 'modify_storage_group') as mock_mod:\n    self.provisioning.add_child_sg_to_parent_sg(child_storage_group,\n        parent_storage_group)\n    mock_mod.assert_called_once_with(parent_storage_group, ref_payload)\nref_result = self.data.job_list[0]\nact_result = self.provisioning.add_child_sg_to_parent_sg(child_storage_group,\n    parent_storage_group)\nself.assertEqual(ref_result, act_result)\n"
+}

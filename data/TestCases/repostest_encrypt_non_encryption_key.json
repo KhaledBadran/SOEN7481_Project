@@ -1,0 +1,9 @@
+{
+    "functionName": "test_encrypt_non_encryption_key",
+    "className": "TestKmipEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the right error is thrown when a non-encryption key\n        is specified with an Encrypt request.\n        \"\"\"\ne = engine.KmipEngine()\ne._data_store = self.engine\ne._data_store_session_factory = self.session_factory\ne._data_session = e._data_store_session_factory()\ne._is_allowed_by_operation_policy = mock.Mock(return_value=True)\ne._logger = mock.MagicMock()\ne._cryptography_engine.logger = mock.MagicMock()\nencryption_key = pie_objects.SymmetricKey(enums.CryptographicAlgorithm.\n    TRIPLE_DES, 128,\n    b'\\x01#Eg\\x89\\xab\\xcd\\xef\\xf0\\xe1\\xd2\\xc3\\xb4\\xa5\\x96\\x87', [enums.\n    CryptographicUsageMask.DECRYPT])\nencryption_key.state = enums.State.ACTIVE\ne._data_session.add(encryption_key)\ne._data_session.commit()\ne._data_session = e._data_store_session_factory()\nunique_identifier = str(encryption_key.unique_identifier)\ncryptographic_parameters = attributes.CryptographicParameters(block_cipher_mode\n    =enums.BlockCipherMode.CBC, padding_method=enums.PaddingMethod.PKCS5,\n    cryptographic_algorithm=enums.CryptographicAlgorithm.BLOWFISH)\ndata = b'7654321 Now is the time for \\x00'\niv_counter_nonce = b'\\xfe\\xdc\\xba\\x98vT2\\x10'\npayload = payloads.EncryptRequestPayload(unique_identifier,\n    cryptographic_parameters, data, iv_counter_nonce)\nargs = payload,\nself.assertRaisesRegex(exceptions.PermissionDenied,\n    \"The Encrypt bit must be set in the encryption key's cryptographic usage mask.\"\n    , e._process_encrypt, *args)\n"
+}

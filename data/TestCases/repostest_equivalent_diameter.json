@@ -1,0 +1,9 @@
+{
+    "functionName": "test_equivalent_diameter",
+    "className": "ThroatSizeTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_geometry_&_ThroatSIzeTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.geo['throat.area'] = 1.0\nself.geo.add_model(propname='throat.diameter', model=gm.throat_size.\n    equivalent_diameter, throat_area='throat.area', throat_shape='circle')\na = np.unique(self.geo['throat.diameter'])\nb = np.array(1.12837917, ndmin=1)\nassert np.allclose(a, b)\ndel self.geo['throat.diameter'], self.geo.models['throat.diameter']\nself.geo.add_model(propname='throat.diameter', model=gm.throat_size.\n    equivalent_diameter, throat_area='throat.area', throat_shape='square')\na = np.unique(self.geo['throat.diameter'])\nb = np.array(1.0, ndmin=1)\nassert np.allclose(a, b)\ndel self.geo['throat.diameter'], self.geo.models['throat.diameter']\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_grid_invalid_type",
+    "className": null,
+    "fileName": "/SeverTopan_&_AdjSim/test_&_test_index.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from adjsim import core, analysis, decision, utility\ntest_sim = core.Simulation()\ntest_sim.indices.grid.initialize(1)\ninvalid_types = [(0, 0), 5, object, [0, 0], {(0): 0}]\nfor invalid_type in invalid_types:\n    with pytest.raises(TypeError):\n        test_sim.indices.grid.get_inhabitants(invalid_type)\n    with pytest.raises(TypeError):\n        test_sim.indices.grid.get_neighbour_coordinates(invalid_type)\n    with pytest.raises(TypeError):\n        test_sim.indices.grid.get_neighbours(invalid_type)\n"
+}

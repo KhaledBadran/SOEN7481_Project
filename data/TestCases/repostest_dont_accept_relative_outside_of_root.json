@@ -1,0 +1,9 @@
+{
+    "functionName": "test_dont_accept_relative_outside_of_root",
+    "className": "LookupTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_lookup.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"test the mechanics of an include where\n        the include goes outside of the path\"\"\"\ntl = lookup.TemplateLookup(directories=[os.path.join(template_base, 'subdir')])\nindex = tl.get_template('index.html')\nctx = runtime.Context(FastEncodingBuffer())\nctx._with_template = index\nassert_raises_message(errors.TemplateLookupException,\n    'Template uri \"../index.html\" is invalid - it cannot be relative outside of the root path'\n    , runtime._lookup_template, ctx, '../index.html', index.uri)\nassert_raises_message(errors.TemplateLookupException,\n    'Template uri \"../othersubdir/foo.html\" is invalid - it cannot be relative outside of the root path'\n    , runtime._lookup_template, ctx, '../othersubdir/foo.html', index.uri)\nt = runtime._lookup_template(ctx, 'foo/../index.html', index.uri)\n"
+}

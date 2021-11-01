@@ -1,0 +1,9 @@
+{
+    "functionName": "test_Full_example_without_Viewer3D",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/TutorialsDepricated_&_Full_example_without_Viewer3D.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "import numpy as np\nimport matplotlib.pyplot as plt\nDataFile = ['Data/camea2018n000137.hdf']\nDS = DataSet.DataSet(dataFiles=DataFile)\nDS.convertDataFile(saveFile=False)\nI, qx, qy, energy, Norm, Monitor = (DS.I, DS.qx, DS.qy, DS.energy, DS.Norm,\n    DS.Monitor)\nI = np.concatenate(I)\nqx = np.concatenate(qx)\nqy = np.concatenate(qy)\nenergy = np.concatenate(energy)\nNorm = np.concatenate(Norm)\nMonitor = np.concatenate(Monitor)\nr = np.linalg.norm([qx, qy], axis=0)\ntheta = np.arctan2(qy, qx)\n[I_bin, Monitor_bin, Normalization_bin, NormCount_bin], [r_bin, theta_bin,\n    energy_bin] = DataSet.binData3D(0.01, np.deg2rad(1.0), 0.5, [r.flatten(\n    ), theta.flatten(), energy.flatten()], data=I, norm=Norm, mon=Monitor)\nQx = np.cos(theta_bin) * r_bin\nQy = np.sin(theta_bin) * r_bin\nInt = np.divide(I_bin * NormCount_bin, Monitor_bin * Normalization_bin)\nEslice = 2\nVMIN = 0\nVMAX = 20\nfig = plt.figure(figsize=(8, 8))\npc = plt.pcolormesh(Qx[:, :, (Eslice)].T, Qy[:, :, (Eslice)].T, Int[:, :, (\n    Eslice)].T, vmin=VMIN, vmax=VMAX, zorder=10)\nax = fig.add_subplot(111)\nplt.ylabel('$Q_y$ [1/AA]')\nplt.xlabel('$Q_x$ [1/AA]')\nplt.title('$\\\\hbar \\\\omega =$ {:.02f}'.format(np.mean(energy_bin[:, :, (\n    Eslice)])) + ' meV')\nplt.axis([-1.8, 1.8, -1.8, 1.8])\nax.set_aspect('equal', 'datalim')\nplt.grid(True)\nplt.colorbar(pc)\nif show:\n    plt.show()\n"
+}

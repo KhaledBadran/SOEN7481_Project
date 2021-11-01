@@ -1,0 +1,9 @@
+{
+    "functionName": "test_inherited_pydantic_case_insensitive",
+    "className": "TestBaseSettingsHandler",
+    "fileName": "/David-Lor_&_Python-DotEnv-Settings-Handler/tests_&_test_basesettingshandler.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test the class setting with the case_insensitive option from pydantic.BaseSettings,\n        testing if the BaseSettingsHandler is correctly inheriting pydantic.BaseSettings.\n        The case from env variables and class fields are different but must match.\n        \"\"\"\nself._write_env(my_FOO='0.0.0.0', MY_bar='5000', MY_Baz='baz')\nclass MyCaseSensitiveSettings(BaseSettingsHandler):\n    my_foo: str\n    my_bar: str\n    my_baz: str\nwith pytest.raises(pydantic.ValidationError):\n    MyCaseSensitiveSettings()\nclass MyCaseInsensitiveSettings(MyCaseSensitiveSettings):\n\n\n    class Config:\n        case_insensitive = True\nsettings = MyCaseInsensitiveSettings()\nassert settings.my_foo == '0.0.0.0'\nassert settings.my_bar == '5000'\nassert settings.my_baz == 'baz'\n"
+}

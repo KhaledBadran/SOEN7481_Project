@@ -1,0 +1,9 @@
+{
+    "functionName": "test_serialize_and_deserialize_maintains_passphrase_verification",
+    "className": "TestSerializer",
+    "fileName": "/bmpang_&_PythonCredentialHolderClass/test_&_test_serializer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "passphrase = 'test'\nexpected_credential = 'credential'\ncredential_holder = CredentialHolder(passphrase, expected_credential)\nserialized_credential_holder = (CredentialHolderSerializer.\n    serialize_credential_holder(credential_holder))\nnew_credential_holder = (CredentialHolderSerializer.\n    deserialize_credential_holder(serialized_credential_holder))\nwith raises(MismatchedPassphrasesException):\n    new_credential_holder.get_credential('not test')\n"
+}

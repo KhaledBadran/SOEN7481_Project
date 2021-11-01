@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pairwise_comparisons",
+    "className": null,
+    "fileName": "/Puumanamana_&_CoCoNet/tests_&_test_clustering.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "model = generate_rd_model()\nh5_data = {k: generate_h5_file(8, 8, 8, n_samples=5, filename=k + '.h5') for\n    k in ['composition', 'coverage']}\nhandles = {k: h5py.File(v, 'r') for k, v in h5_data.items()}\ncontigs = ['V0', 'V1', 'V2']\ngraph = igraph.Graph()\ngraph.add_vertices(contigs)\ngraph.es['weight'] = []\nneighbors = [np.array([0, 1]), np.array([0, 1]), np.array([2])]\ncompute_pairwise_comparisons(model, graph, handles, neighbors=neighbors,\n    n_frags=5)\nfor v in h5_data.values():\n    v.unlink()\nassert (0, 1) in graph.get_edgelist()\nassert (1, 2) not in graph.get_edgelist()\nassert 0 <= graph.es['weight'][0] <= 25\n"
+}

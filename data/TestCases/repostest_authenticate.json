@@ -1,0 +1,9 @@
+{
+    "functionName": "test_authenticate",
+    "className": "TestSLUGSConnector",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_auth_&_test_slugs.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a call to authenticate with the SLUGSConnector triggers the\n        right utility and SLUGS API calls.\n        \"\"\"\nmock_get_client_identity.return_value = 'John Doe'\nusers_response = mock.MagicMock(requests.Response)\nusers_response.status_code = 200\ngroups_response = mock.MagicMock(requests.Response)\ngroups_response.status_code = 200\ngroups_response.json.return_value = {'groups': ['Group A', 'Group B']}\nmock_request_get.side_effect = [users_response, groups_response]\nconnector = auth.SLUGSConnector(url='http://127.0.0.1:8080/test/slugs/')\nresult = connector.authenticate('test')\nmock_get_client_identity.assert_called_once_with('test')\nmock_request_get.assert_any_call(\n    'http://127.0.0.1:8080/test/slugs/users/John Doe')\nmock_request_get.assert_any_call(\n    'http://127.0.0.1:8080/test/slugs/users/John Doe/groups')\nself.assertEqual(('John Doe', ['Group A', 'Group B']), result)\nmock.patch('requests.get')mock.patch(\n    'kmip.services.server.auth.utils.get_client_identity_from_certificate')"
+}

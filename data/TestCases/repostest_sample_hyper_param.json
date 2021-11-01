@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sample_hyper_param",
+    "className": null,
+    "fileName": "/Accenture_&_AmpliGraph/tests_&_ampligraph_&_evaluation_&_test_protocol.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "np.random.seed(0)\nparam_grid = {'batches_count': [50], 'epochs': [4000], 'k': [100, 200],\n    'eta': lambda : np.random.choice([5, 10, 15]), 'loss': ['pairwise',\n    'nll'], 'loss_params': {'margin': [2]}, 'embedding_model_params': {},\n    'regularizer': ['LP', None], 'regularizer_params': {'p': [1, 3],\n    'lambda': [0.0001, 1e-05]}, 'optimizer': ['adagrad', 'adam'],\n    'optimizer_params': {'lr': lambda : np.random.uniform(0.001, 0.1)},\n    'verbose': False, 'model_name': 'ComplEx'}\nfor _ in range(10):\n    param = _sample_parameters(param_grid)\n    assert param['batches_count'] == 50\n    assert param['k'] in (100, 200)\n    assert param['eta'] in (5, 10, 15)\n    assert param['loss'] in ('pairwise', 'nll')\n    if param['loss'] == 'pairwise':\n        assert param['loss_params']['margin'] == 2\n    assert param['embedding_model_params'] == {}\n    assert param['regularizer'] in ('LP', None)\n    if param['regularizer'] == 'LP':\n        assert param['regularizer_params']['p'] in (1, 3)\n        assert param['regularizer_params']['lambda'] in (0.0001, 1e-05)\n    assert param['optimizer'] in ('adagrad', 'adam')\n    assert 0.001 < param['optimizer_params']['lr'] < 0.1\n    assert not param['verbose']\n    assert param['model_name'] == 'ComplEx'\n"
+}

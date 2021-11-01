@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cluster_merging",
+    "className": "MixedPercolationTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_MixedPercolationTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "phys = self.phys\nphys['throat.entry_pressure'] = 0.0\nPc = np.array([[0.0, 1.0, 2.0, 1.0, 0.0], [3.0, 4.0, 5.0, 4.0, 3.0], [6.0, \n    7.0, 8.0, 7.0, 6.0], [9.0, 10.0, 11.0, 10.0, 9.0], [12.0, 13.0, 14.0, \n    13.0, 12.0]])\nphys['pore.entry_pressure'] = Pc.flatten()\nIP_1 = mp(network=self.net)\nIP_1.settings['partial_saturation'] = False\nIP_1.settings['snap_off'] = False\nIP_1.setup(phase=self.phase)\nIP_1.set_inlets(clusters=[[0], [4]])\nIP_1.run()\nassert len(np.unique(IP_1['pore.cluster'][5:])) == 1\n"
+}

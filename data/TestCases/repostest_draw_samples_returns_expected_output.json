@@ -1,0 +1,9 @@
+{
+    "functionName": "test_draw_samples_returns_expected_output",
+    "className": null,
+    "fileName": "/NASA_&_MLMCPy/tests_&_input_&_test_InputFromData.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Ensure draw_samples() returns expected output type, shape, and number of\n    samples.\n    \"\"\"\ndata_sampler = InputFromData(data_filename)\nfor num_samples in range(1, 4):\n    sample = data_sampler.draw_samples(num_samples)\n    data_sampler.reset_sampling()\n    assert isinstance(sample, np.ndarray)\n    assert len(sample.shape) == 2\n    assert sample.shape[0] == num_samples\npytest.mark.parametrize('data_filename', data_file_paths, ids=data_file_names)"
+}

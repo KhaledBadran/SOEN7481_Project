@@ -1,0 +1,9 @@
+{
+    "functionName": "test_partial_aggressive_fill",
+    "className": null,
+    "fileName": "/nabicht_&_Buttonwood/tests_&_test_MarketObjects_&_test_Orderbooks_&_test_orderlevelbook.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ob = build_base_order_book()\nask_prices = ob.ask_prices()\nbid_prices = ob.bid_prices()\nbest_ask_price = ob.best_ask_price()\nbest_bid_price = ob.best_bid_price()\nbast_ask_level = ob.best_ask_level()\nbast_bid_level = ob.best_bid_level()\nagg_new = NewOrderCommand(101, 1234002.123, 1008, 'user_z', MARKET,\n    BID_SIDE, FAR, Price('34.52'), 45)\noec = OrderEventChain(agg_new, LOGGER, SUBCHAIN_ID_GENERATOR)\npf = PartialFillReport(102, 1234002.123, 1008, 'user_z', MARKET, agg_new, \n    35, Price('34.52'), BID_SIDE, 3333, 10)\noec.apply_partial_fill_report(pf)\nob.handle_partial_fill_report(pf, oec)\nassert ask_prices == ob.ask_prices()\nassert bid_prices == ob.bid_prices()\nassert best_ask_price == ob.best_ask_price()\nassert best_bid_price == ob.best_bid_price()\nassert bast_ask_level == ob.best_ask_level()\nassert bast_bid_level == ob.best_bid_level()\n"
+}

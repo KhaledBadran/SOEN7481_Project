@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_shap_values",
+    "className": "TestTrexClassifier",
+    "fileName": "/univieCUBE_&_phenotrex/tests_&_test_ml.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Get shap values associated with the training data.\n        \"\"\"\ntraining_records, genotype, phenotype, group = self.test_load_data(trait_name,\n    False)\nclf = classifier(verb=True, random_state=RANDOM_STATE)\nclf.train(training_records)\nraw_features, shaps, bias = clf.get_shap(training_records[:5], n_samples=50)\nprint(shaps.shape)\nprint(bias)\npytest.mark.parametrize('trait_name', trait_names, ids=trait_names)pytest.mark.parametrize('classifier', classifiers, ids=classifier_ids)"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_parent_cursor_fetch",
+    "className": null,
+    "fileName": "/octabytes_&_FireO/src_&_tests_&_v020_&_test_cursor.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "p = CursorParentFetch.collection.create(name='Some Name')\nparent_key = p.key\nfor n in range(10):\n    ch = CursorChildFetch(parent=parent_key)\n    ch.age = n\n    ch.save()\nchilds = CursorChildFetch.collection.order('created_on').fetch(3)\nfor c in childs:\n    assert utils.get_parent_doc(c.key) == parent_key\n    assert c.age in [1, 2, 3]\nc = childs.cursor\nchilds = CursorChildFetch.collection.cursor(c).fetch(3)\nfor c in childs:\n    assert utils.get_parent_doc(c.key) == parent_key\n    assert c.age in [4, 5, 6]\n"
+}

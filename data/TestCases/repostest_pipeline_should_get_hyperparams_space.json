@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pipeline_should_get_hyperparams_space",
+    "className": null,
+    "fileName": "/Neuraxio_&_Neuraxle/testing_&_hyperparams_&_test_get_set_hyperparams.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "p = Pipeline([SomeStep().set_name('step_1'), SomeStep().set_name('step_2')])\np.set_hyperparams_space({'hp': RandInt(1, 2), 'step_1__hp': RandInt(2, 3),\n    'step_2__hp': RandInt(3, 4)})\nhyperparams_space = p.get_hyperparams_space()\nassert isinstance(hyperparams_space, HyperparameterSpace)\nassert hyperparams_space['hp'].min_included == 1\nassert hyperparams_space['hp'].max_included == 2\nassert hyperparams_space['step_1__hp'].min_included == 2\nassert hyperparams_space['step_1__hp'].max_included == 3\nassert hyperparams_space['step_2__hp'].min_included == 3\nassert hyperparams_space['step_2__hp'].max_included == 4\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_unbalanced_sinkhorn_transport_class",
+    "className": null,
+    "fileName": "/PythonOT_&_POT/test_&_test_da.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"test_sinkhorn_transport\n    \"\"\"\nns = 150\nnt = 200\nXs, ys = make_data_classif('3gauss', ns)\nXt, yt = make_data_classif('3gauss2', nt)\notda = ot.da.UnbalancedSinkhornTransport()\notda.fit(Xs=Xs, Xt=Xt)\nassert hasattr(otda, 'cost_')\nassert hasattr(otda, 'coupling_')\nassert hasattr(otda, 'log_')\nassert_equal(otda.cost_.shape, (Xs.shape[0], Xt.shape[0]))\nassert_equal(otda.coupling_.shape, (Xs.shape[0], Xt.shape[0]))\ntransp_Xs = otda.transform(Xs=Xs)\nassert_equal(transp_Xs.shape, Xs.shape)\ntransp_yt = otda.transform_labels(ys)\nassert_equal(transp_yt.shape[0], yt.shape[0])\nassert_equal(transp_yt.shape[1], len(np.unique(ys)))\ntransp_ys = otda.inverse_transform_labels(yt)\nassert_equal(transp_ys.shape[0], ys.shape[0])\nassert_equal(transp_ys.shape[1], len(np.unique(yt)))\nXs_new, _ = make_data_classif('3gauss', ns + 1)\ntransp_Xs_new = otda.transform(Xs_new)\nassert_equal(transp_Xs_new.shape, Xs_new.shape)\ntransp_Xt = otda.inverse_transform(Xt=Xt)\nassert_equal(transp_Xt.shape, Xt.shape)\nXt_new, _ = make_data_classif('3gauss2', nt + 1)\ntransp_Xt_new = otda.inverse_transform(Xt=Xt_new)\nassert_equal(transp_Xt_new.shape, Xt_new.shape)\ntransp_Xs = otda.fit_transform(Xs=Xs, Xt=Xt)\nassert_equal(transp_Xs.shape, Xs.shape)\notda_unsup = ot.da.SinkhornTransport()\notda_unsup.fit(Xs=Xs, Xt=Xt)\nn_unsup = np.sum(otda_unsup.cost_)\notda_semi = ot.da.SinkhornTransport()\notda_semi.fit(Xs=Xs, ys=ys, Xt=Xt, yt=yt)\nassert_equal(otda_semi.cost_.shape, (Xs.shape[0], Xt.shape[0]))\nn_semisup = np.sum(otda_semi.cost_)\nassert n_unsup != n_semisup, 'semisupervised mode not working'\notda = ot.da.SinkhornTransport(log=True)\notda.fit(Xs=Xs, ys=ys, Xt=Xt)\nassert len(otda.log_.keys()) != 0\n"
+}

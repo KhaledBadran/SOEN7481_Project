@@ -1,0 +1,9 @@
+{
+    "functionName": "test_total_norm_constraint",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_test_updates.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "import numpy as np\nimport theano\nimport theano.tensor as T\nfrom lasagne.updates import total_norm_constraint\nx1 = T.scalar()\nx2 = T.matrix()\nthreshold = 5.0\ntensors1 = total_norm_constraint([x1, x2], threshold, return_norm=False)\ntensors2, norm = total_norm_constraint([x1, x2], threshold, return_norm=True)\nf1 = theano.function([x1, x2], [tensors1[0], tensors1[1]])\nf2 = theano.function([x1, x2], [tensors2[0], tensors2[1], norm])\nx_test = np.arange(1 + 9, dtype='float32')\nx1_test = x_test[-1]\nx2_test = x_test[:9].reshape((3, 3))\nx1_out1, x2_out1 = f1(x1_test, x2_test)\nx1_out2, x2_out2, norm = f2(x1_test, x2_test)\nnp.testing.assert_array_almost_equal(x1_out1, x1_out2)\nnp.testing.assert_array_almost_equal(x2_out1, x2_out2)\nx_out = [float(x1_out1)] + list(x2_out1.flatten())\nnp.testing.assert_array_almost_equal(np.linalg.norm(x_test), norm)\nnp.testing.assert_array_almost_equal(np.linalg.norm(x_out), threshold)\n"
+}

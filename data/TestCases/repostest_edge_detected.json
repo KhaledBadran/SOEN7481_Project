@@ -1,0 +1,9 @@
+{
+    "functionName": "test_edge_detected",
+    "className": null,
+    "fileName": "/rm-hull_&_OPi.GPIO/tests_&_test_event.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "pin = 23\nfs.CreateFile('/sys/class/gpio/gpio{0}/edge'.format(pin))\nfs.CreateFile('/sys/class/gpio/gpio{0}/value'.format(pin))\nwith patch('select.epoll') as mock:\n    try:\n        assert pin not in event._threads\n        event.add_edge_detect(pin, RISING)\n        assert not event.edge_detected(pin)\n        mock.return_value.poll.return_value = [(pin, 4)]\n        time.sleep(2)\n        event._threads[pin].cancel()\n        assert event.edge_detected(pin)\n        assert not event.edge_detected(pin)\n    finally:\n        event.cleanup()\n        assert pin not in event._threads\n"
+}

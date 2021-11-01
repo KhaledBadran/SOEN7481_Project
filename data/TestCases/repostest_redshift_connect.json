@@ -1,0 +1,9 @@
+{
+    "functionName": "test_redshift_connect",
+    "className": null,
+    "fileName": "/capitalone_&_Data-Load-and-Copy-using-Python/tests_&_test_redshift.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with mock.patch(dbapi.__name__ + '.connect') as mock_connect:\n    r = Redshift(profile=PROFILE, dbapi=dbapi, **credentials)\n    r.connect()\n    if dbapi.__name__ == 'pg8000':\n        mock_connect.assert_called_with(host='host', user='user', port=\n            'port', password='password', database='database', ssl_context=True)\n    else:\n        mock_connect.assert_called_with(host='host', user='user', port=\n            'port', password='password', database='database', sslmode='require'\n            )\n    r.conn.cursor.assert_called_with()\n    mock_connect.side_effect = Exception('Connect Exception')\n    with pytest.raises(DBError):\n        r.connect()\npytest.mark.parametrize('dbapi', DBAPIS)mock.patch('locopy.s3.Session')"
+}

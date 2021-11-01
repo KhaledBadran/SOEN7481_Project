@@ -1,0 +1,9 @@
+{
+    "functionName": "test_filter_fetch_transaction",
+    "className": null,
+    "fileName": "/octabytes_&_FireO/src_&_tests_&_v050_&_test_transaction.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "@fireo.transactional\ndef update_population(trans):\n    cities = TransCity.collection.filter('state', '==', 'EF').transaction(trans\n        ).fetch()\n    city = next(cities)\n    city.population = city.population + 1\n    city.update(transaction=trans)\ntransaction = fireo.transaction()\nupdate_population(transaction)\ncity = TransCity.collection.get('trans_city/EF')\nassert city.population == 501\n"
+}

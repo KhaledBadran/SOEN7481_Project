@@ -1,0 +1,9 @@
+{
+    "functionName": "test_that_we_can_add_a_comment_to_a_bug_before_it_is_put",
+    "className": null,
+    "fileName": "/AutomatedTester_&_Bugsy/tests_&_test_bugs.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "responses.add(responses.GET, 'https://bugzilla.mozilla.org/rest/login',\n    body='{\"token\": \"foobar\"}', status=200, content_type='application/json',\n    match_querystring=True)\nresponses.add(responses.GET,\n    'https://bugzilla.mozilla.org/rest/bug/1017315?include_fields=version&include_fields=id&include_fields=summary&include_fields=status&include_fields=op_sys&include_fields=resolution&include_fields=product&include_fields=component&include_fields=platform'\n    , body=json.dumps(bug_return), status=200, content_type=\n    'application/json', match_querystring=True)\nbugzilla = Bugsy('foo', 'bar')\nbug = Bug()\nbug.summary = 'I like cheese'\nbug.add_comment('I like sausages')\nbug_dict = bug.to_dict().copy()\nbug_dict['id'] = 123123\nresponses.add(responses.POST, 'https://bugzilla.mozilla.org/rest/bug', body\n    =json.dumps(bug_dict), status=200, content_type='application/json',\n    match_querystring=True)\nbugzilla.put(bug)\nresponses.activate"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_signal_propagation__node",
+    "className": null,
+    "fileName": "/heston_&_firebase-live-data/tests_&_test_integration.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "mock_handler = mocker.MagicMock()\ndef handler(*args, **kwargs):\n    mock_handler(*args, **kwargs)\nlivedata.signal('/foo/bar').connect(handler)\nmessage = {'path': '/foo/bar/baz', 'data': 'hola', 'event': 'put'}\nlivedata._stream_handler(message)\nmock_handler.assert_called_with(firebase_data, path='/foo/bar/baz', value={\n    'baz': 'hola'})\n"
+}

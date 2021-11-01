@@ -1,0 +1,9 @@
+{
+    "functionName": "test_emg_eventrelated",
+    "className": null,
+    "fileName": "/neuropsychology_&_NeuroKit/tests_&_tests_emg.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "emg = nk.emg_simulate(duration=20, sampling_rate=1000, burst_number=3)\nemg_signals, info = nk.emg_process(emg, sampling_rate=1000)\nepochs = nk.epochs_create(emg_signals, events=[3000, 6000, 9000],\n    sampling_rate=1000, epochs_start=-0.1, epochs_end=1.9)\nemg_eventrelated = nk.emg_eventrelated(epochs)\nno_activation = np.where(emg_eventrelated['EMG_Activation'] == 0)[0][0]\nassert int(pd.DataFrame(emg_eventrelated.values[no_activation]).isna().sum()\n    ) == 4\nassert np.alltrue(np.nansum(np.array(emg_eventrelated['EMG_Amplitude_Mean']\n    )) < np.nansum(np.array(emg_eventrelated['EMG_Amplitude_Max'])))\nassert len(emg_eventrelated['Label']) == 3\nwith pytest.warns(nk.misc.NeuroKitWarning, match=\n    '.*does not have an `EMG_Onsets`.*'):\n    first_epoch_key = list(epochs.keys())[0]\n    first_epoch_copy = epochs[first_epoch_key].copy()\n    del first_epoch_copy['EMG_Onsets']\n    nk.emg_eventrelated({**epochs, first_epoch_key: first_epoch_copy})\nwith pytest.warns(nk.misc.NeuroKitWarning, match=\n    '.*does not have an `EMG_Activity`.*'):\n    first_epoch_key = list(epochs.keys())[0]\n    first_epoch_copy = epochs[first_epoch_key].copy()\n    del first_epoch_copy['EMG_Activity']\n    nk.emg_eventrelated({**epochs, first_epoch_key: first_epoch_copy})\nwith pytest.warns(nk.misc.NeuroKitWarning, match=\n    '.*does not have an.*`EMG_Amplitude`.*'):\n    first_epoch_key = list(epochs.keys())[0]\n    first_epoch_copy = epochs[first_epoch_key].copy()\n    del first_epoch_copy['EMG_Amplitude']\n    nk.emg_eventrelated({**epochs, first_epoch_key: first_epoch_copy})\n"
+}

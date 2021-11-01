@@ -1,0 +1,9 @@
+{
+    "functionName": "test_stitch",
+    "className": "TestClass",
+    "fileName": "/kdecarlo_&_CG1D_rootprocessing/test_&_rootprocessing_&_test_RP.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "wd = self.data_path\nsys.path.append(wd)\nfrom sampledata import sampledata\nfrom RP_run import RP_run\nsampledata(wd, 1)\nanalysis_list = ['RP_stitch']\nos.remove(wd + '/Sample_Data_unittest/raw/19000101_Image_0060_0006.tiff')\nself.assertRaises(ValueError, RP_run, wd, wd + '/Sample_Data_unittest',\n    analysis_list, 0, 1)\nbad_image = np.zeros([100, 100])\nbad_image = Image.fromarray(bad_image)\nbad_image.save(wd + '/Sample_Data_unittest/raw/19000101_Image_0060_0006.tiff')\nself.assertRaises(ValueError, RP_run, wd, wd + '/Sample_Data_unittest',\n    analysis_list, 0, 1)\nshutil.rmtree(wd + '/Sample_Data_unittest')\n"
+}

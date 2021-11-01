@@ -1,0 +1,9 @@
+{
+    "functionName": "test_add_valve",
+    "className": null,
+    "fileName": "/MechWolf_&_MechWolf/tests_&_test_protocol.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "A = mw.Apparatus()\nvalve = mw.Valve(mapping={pump1: 1, pump2: 2})\nbad_valve = mw.Valve()\nA.add([pump1, pump2], [valve, bad_valve], tube)\nP = mw.Protocol(A)\nexpected = [dict(start=0, stop=None, component=valve, params={'setting': 1})]\nP.add(valve, setting=pump1)\nassert P.procedures == expected\nP.procedures = []\nP.add(valve, setting='pump1')\nassert P.procedures == expected\nP.procedures = []\nP.add(valve, setting=1)\nassert P.procedures == expected\nwith pytest.raises(ValueError):\n    P.add(valve, setting=3)\nwith pytest.raises(ValueError):\n    P.add(bad_valve, setting=3)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_simple_02",
+    "className": null,
+    "fileName": "/vutran1710_&_PyrateLimiter/tests_&_test_02.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Multi-rates Limiter with RedisBucket\n    \"\"\"\nrate_1 = RequestRate(5, 5 * Duration.SECOND)\nrate_2 = RequestRate(7, 9 * Duration.SECOND)\nlimiter4 = Limiter(rate_1, rate_2, bucket_class=RedisBucket, bucket_kwargs=\n    {'redis_pool': pool, 'bucket_name': 'test-bucket-2'})\nitem = 'redis-test-item'\nwith pytest.raises(BucketFullException):\n    for _ in range(6):\n        limiter4.try_acquire(item)\nassert limiter4.get_current_volume(item) == 5\nsleep(6.5)\nlimiter4.try_acquire(item)\nlimiter4.try_acquire(item)\nassert limiter4.get_current_volume(item) == 7\nwith pytest.raises(BucketFullException):\n    limiter4.try_acquire(item)\nsleep(6)\nlimiter4.try_acquire(item)\nassert limiter4.get_current_volume(item) == 3\nlimiter4.try_acquire(item)\nlimiter4.try_acquire(item)\nlimiter4.try_acquire(item)\nlimiter4.try_acquire(item)\nwith pytest.raises(BucketFullException):\n    limiter4.try_acquire(item)\nassert limiter4.get_current_volume(item) == 7\nsleep(6)\nlimiter4.try_acquire(item)\nlimiter4.try_acquire(item)\nwith pytest.raises(BucketFullException):\n    limiter4.try_acquire(item)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_efficient_risk_sector_constraints_manual",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_efficient_frontier.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sector_mapper = {'GOOG': 'tech', 'AAPL': 'tech', 'FB': 'tech', 'AMZN':\n    'tech', 'BABA': 'tech', 'GE': 'utility', 'AMD': 'tech', 'WMT': 'retail',\n    'BAC': 'fig', 'GM': 'auto', 'T': 'auto', 'UAA': 'airline', 'SHLD':\n    'retail', 'XOM': 'energy', 'RRC': 'energy', 'BBY': 'retail', 'MA':\n    'fig', 'PFE': 'pharma', 'JPM': 'fig', 'SBUX': 'retail'}\nsector_upper = {'tech': 0.2, 'utility': 0.1, 'retail': 0.2, 'fig': 0.4,\n    'airline': 0.05, 'energy': 0.2}\nsector_lower = {'utility': 0.01, 'fig': 0.02, 'airline': 0.01}\nef = setup_efficient_frontier()\nfor sector in sector_upper:\n    is_sector = [(sector_mapper[t] == sector) for t in ef.tickers]\n    ef.add_constraint(lambda w: cp.sum(w[is_sector]) <= sector_upper[sector])\nfor sector in sector_lower:\n    is_sector = [(sector_mapper[t] == sector) for t in ef.tickers]\n    ef.add_constraint(lambda w: cp.sum(w[is_sector]) >= sector_lower[sector])\nweights = ef.efficient_risk(0.19)\nfor sector in list(set().union(sector_upper, sector_lower)):\n    sector_sum = 0\n    for t, v in weights.items():\n        if sector_mapper[t] == sector:\n            sector_sum += v\n    assert sector_sum <= sector_upper.get(sector, 1) + 1e-05\n    assert sector_sum >= sector_lower.get(sector, 0) - 1e-05\n"
+}

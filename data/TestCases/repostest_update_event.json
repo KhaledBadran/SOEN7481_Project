@@ -1,0 +1,9 @@
+{
+    "functionName": "test_update_event",
+    "className": "TestStorage",
+    "fileName": "/YuriyLisovskiy_&_EventReminder/tests_&_unittests_&_storage_&_test_storage.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data = None, '2019-05-02', datetime.now().date(), datetime.now().time(\n    ).replace(microsecond=0), 'some description', False, True\nmodel = EventModel(data)\nmodel.id = EventModel.insert(self.db.cursor(), model)\nself.db.commit()\nevent = EventModel.get(self.db.cursor(), model.id)\nself.assertEqual(event.title, data[1])\nself.assertEqual(event.time, data[3])\nself.assertEqual(event.date, data[2])\nself.assertEqual(event.description, data[4])\nself.assertEqual(event.is_past, data[5])\nself.assertEqual(event.repeat_weekly, data[6])\nexpected = {'title': 'some title', 'e_time': datetime.now().time().replace(\n    microsecond=0), 'e_date': datetime.now().date(), 'description':\n    'some_____description', 'repeat_weekly': False, 'is_past': False}\nself.storage.disconnect()\nself.storage.try_to_reconnect = True\nactual = self.storage.update_event(model.id, **expected)\nself.storage.try_to_reconnect = False\nself.assertEqual(actual.title, expected['title'])\nself.assertEqual(actual.time, expected['e_time'])\nself.assertEqual(actual.date, expected['e_date'])\nself.assertEqual(actual.description, expected['description'])\nself.assertEqual(actual.repeat_weekly, expected['repeat_weekly'])\nself.assertEqual(actual.is_past, expected['is_past'])\nself.clean_db()\n"
+}

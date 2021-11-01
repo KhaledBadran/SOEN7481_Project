@@ -1,0 +1,9 @@
+{
+    "functionName": "test_to_dict",
+    "className": "TestChapter1",
+    "fileName": "/axiros_&_DevApps/tests_&_test_tutorial.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "t = \"\"\"\n        # Serializing / PrettyPrint\n\n        Configurative state can be pretty printed and dict-dumped:\n        \"\"\"\nmd(t)\nres = bash_run(['calc_tree_nav.py av=1 i.D.dv=42 du # du matched to dump',\n    'calc_tree_nav.py app_var=2 inner.Deep.deep_var=42 dump asdict=true'])\nassert res[0]['res'].strip().startswith('App(app_var=1,')\nassert ev(res[1]['res'].strip()) == {'app_var': 2, 'inner': {'Deep': {\n    'deep_var': 42}, 'inner_var': 1}}\nmd(\"\"\"\n        The dict format can be piped as is into a config file for subsequent runs.\n        > Currently we do not serialize function parameter changes.\n        \"\"\"\n    )\n"
+}

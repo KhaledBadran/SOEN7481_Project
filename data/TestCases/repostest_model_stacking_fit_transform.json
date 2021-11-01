@@ -1,0 +1,9 @@
+{
+    "functionName": "test_model_stacking_fit_transform",
+    "className": null,
+    "fileName": "/Neuraxio_&_Neuraxle/testing_&_test_union.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "model_stacking = Pipeline([ModelStacking([SKLearnWrapper(\n    GradientBoostingRegressor(), HyperparameterSpace({'n_estimators':\n    RandInt(50, 600), 'max_depth': RandInt(1, 10), 'learning_rate':\n    LogUniform(0.07, 0.7)})), SKLearnWrapper(KMeans(), HyperparameterSpace(\n    {'n_clusters': RandInt(5, 10)}))], joiner=NumpyTranspose(), judge=\n    SKLearnWrapper(Ridge(), HyperparameterSpace({'alpha': LogUniform(0.7, \n    1.4), 'fit_intercept': Boolean()})))])\nexpected_outputs_shape = 379, 1\ndata_inputs_shape = 379, 13\ndata_inputs = _create_data(data_inputs_shape)\nexpected_outputs = _create_data(expected_outputs_shape)\nmodel_stacking, outputs = model_stacking.fit_transform(data_inputs,\n    expected_outputs)\nassert outputs.shape == expected_outputs_shape\n"
+}

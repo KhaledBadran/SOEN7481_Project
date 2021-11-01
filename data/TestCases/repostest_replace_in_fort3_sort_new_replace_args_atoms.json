@@ -1,0 +1,9 @@
+{
+    "functionName": "test_replace_in_fort3_sort_new_replace_args_atoms",
+    "className": null,
+    "fileName": "/mortele_&_OccamTools/test_&_test_replace_in_fort3.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tol = 1e-14\natom_names, atoms, _, _, _, _, _, _, _ = _parse_fort_3_file(file_name)\nrepl = Fort3Replacement('atom', new=True, content=['P', 30.973, 0.0]\n    ), Fort3Replacement('atom', replace=True, content=['O', 16.0, 0.0]\n    ), Fort3Replacement('atom', new=True, content=['Ar-', 39.948, -1.0])\natom_names, atoms = _sort_new_replace_args_atom(atom_names, atoms, *repl)\nassert len(atoms) == 6\nassert atoms[0]._content[0] == 'O'\nassert atoms[0]._content[1] == pytest.approx(16.0, abs=tol)\nfor name, mass, charge in zip(['P', 'Ar-'], [30.973, 39.948], [0.0, -1.0]):\n    found = False\n    assert name in atom_names.values()\n    for atom in atoms[4:]:\n        if name == atom._content[0]:\n            found = True\n            assert atom._content[1] == pytest.approx(mass, abs=tol)\n            assert atom._content[2] == pytest.approx(charge, abs=tol)\n    assert found\ncaught = False\nrepl = Fort3Replacement('atom', new=True, content=['Ar', 0]), Fort3Replacement(\n    'atom', new=True, content=['O', 1, 0]), Fort3Replacement('atom',\n    replace=True, content=['not', 1, 0])\nfor r in repl:\n    try:\n        _sort_new_replace_args_atom(atom_names, atoms, r)\n    except ValueError:\n        caught = True\n    assert caught is True\n"
+}

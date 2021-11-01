@@ -1,0 +1,9 @@
+{
+    "functionName": "test_multi_stack_name_exception",
+    "className": null,
+    "fileName": "/AllenInstitute_&_EM_Aligner_python/integration_tests_&_test_rough.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "rough_parameters2 = copy.deepcopy(rough_parameters)\nrough_parameters2['input_stack']['name'] = rough_input_stack\nrough_parameters2['output_stack']['name'] = output_stack_name\nrough_parameters2['pointmatch']['name'] = rough_pointmatches\nrough_parameters2['transformation'] = 'SimilarityModel'\nwith pytest.raises(ValidationError):\n    rough_parameters2['input_stack']['name'] = [rough_parameters2[\n        'input_stack']['name']] * 2\n    EMaligner.EMaligner(input_data=copy.deepcopy(rough_parameters2), args=[])\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_warn_old_comment",
+    "className": "TestDeprecations",
+    "fileName": "/SimGus_&_Chatette/tests_&_unit-testing_&_test_deprecations.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "instance = Deprecations.reset_instance()\nassert not instance._old_comment_warned\nassert not instance._old_choice_warned\ninstance.warn_old_comment()\nassert instance._old_comment_warned\nassert not instance._old_choice_warned\ncaptured = capsys.readouterr()\nassert 'Comments starting with a semi-colon' in captured.err\ninstance = Deprecations.reset_instance()\ninstance.warn_old_comment('filename')\ncaptured = capsys.readouterr()\nassert \"This syntax was found in file 'filename'.\" in captured.err\ninstance = Deprecations.reset_instance()\ninstance.warn_old_comment('filename', 12, 'line')\ncaptured = capsys.readouterr()\nassert \"This syntax was found in file 'filename'\" + \" at line 12: 'line'.\" in captured.err\ninstance = Deprecations.reset_instance()\ninstance.warn_old_comment(line_nb=12, line='line')\ncaptured = capsys.readouterr()\nassert 'This syntax was found' + \" at line 12: 'line'.\" in captured.err\n"
+}

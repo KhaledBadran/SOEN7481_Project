@@ -1,0 +1,9 @@
+{
+    "functionName": "test_write_value_no_padding",
+    "className": "TestByteString",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_primitives_&_test_byte_string.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "encoding = b'\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08'\nself.stream = utils.BytearrayStream()\nvalue = b'\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08'\nbs = primitives.ByteString(value)\nbs.write_value(self.stream)\nresult = self.stream.read()\nlen_exp = len(encoding)\nlen_rcv = len(result)\nself.assertEqual(len_exp, len_rcv, self.bad_length.format(len_exp, len_rcv))\nself.assertEqual(encoding, result, self.bad_encoding)\n"
+}

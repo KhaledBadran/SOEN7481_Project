@@ -1,0 +1,9 @@
+{
+    "functionName": "test_transfer_chx_multiple_action",
+    "className": null,
+    "fileName": "/OwnMarket_&_OwnBlockchainSdkPython/own_blockchain_sdk_&_test_transactions.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sender_wallet = Wallet()\nrecipient_wallet1 = Wallet()\nrecipient_wallet2 = Wallet()\namount1 = 200\namount2 = 300\nexpected = (\n    \"\"\"{\n    \"senderAddress\": \"%s\",\n    \"nonce\": 1,\n    \"expirationTime\": 0,\n    \"actionFee\": 0.01,\n    \"actions\": [\n        {\n            \"actionType\": \"TransferChx\",\n            \"actionData\": {\n                \"recipientAddress\": \"%s\",\n                \"amount\": %d\n            }\n        },\n        {\n            \"actionType\": \"TransferChx\",\n            \"actionData\": {\n                \"recipientAddress\": \"%s\",\n                \"amount\": %d\n            }\n        }\n    ]\n}\"\"\"\n     % (sender_wallet.address, recipient_wallet1.address, amount1,\n    recipient_wallet2.address, amount2))\ntx = Tx(sender_wallet.address, 1, 0.01, 0)\ntx.add_transfer_chx_action(recipient_wallet1.address, amount1)\ntx.add_transfer_chx_action(recipient_wallet2.address, amount2)\nactual = tx.to_json()\nassert expected == actual\n"
+}

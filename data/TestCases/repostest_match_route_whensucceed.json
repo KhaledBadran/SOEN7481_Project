@@ -1,0 +1,9 @@
+{
+    "functionName": "test_match_route_whensucceed",
+    "className": "RmeApiTest",
+    "fileName": "/abdullahselek_&_HerePy/tests_&_test_rme_api.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with io.open('testdata/models/rme_match_route_api.json', 'r') as f:\n    expectedResponse = f.read()\nresponses.add(responses.GET,\n    'https://m.fleet.ls.hereapi.com/2/matchroute.json', expectedResponse,\n    status=200)\nwith io.open('testdata/routes/sample.gpx', encoding='utf-8') as gpx_file:\n    gpx_content = gpx_file.read()\nresponse = self._api.match_route(gpx_content, ['ADAS_ATTRIB_FCn(SLOPES)'])\nself.assertTrue(response)\nself.assertIsInstance(response, herepy.RmeResponse)\nresponses.activate"
+}

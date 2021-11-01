@@ -1,0 +1,9 @@
+{
+    "functionName": "test_haloprofile_smoke",
+    "className": null,
+    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_haloprofile.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from pyccl.pyutils import assert_warns\ncosmo = ccl.Cosmology(Omega_c=0.27, Omega_b=0.045, h=0.67, sigma8=0.8, n_s=\n    0.96, transfer_function='bbks', matter_power_spectrum='linear')\na = 1\nc = 5\nmass = 100000000000000.0\nodelta = 200\nprof = assert_warns(ccl.CCLWarning, getattr(ccl, func), cosmo, c, mass,\n    odelta, a, r)\nassert np.all(np.isfinite(prof))\nassert np.shape(prof) == np.shape(r)\npytest.mark.parametrize('func', ['nfw_profile_3d', 'nfw_profile_2d',\n    'einasto_profile_3d', 'hernquist_profile_3d'])pytest.mark.parametrize('r', [1, 1.0, np.array([1, 2, 3]), [1, 2, 3]])"
+}

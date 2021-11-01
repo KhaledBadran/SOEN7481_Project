@@ -1,0 +1,9 @@
+{
+    "functionName": "test_mergecfg",
+    "className": null,
+    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_pypeitpar.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "user_file = 'user_adjust.cfg'\nif os.path.isfile(user_file):\n    os.remove(user_file)\np = pypeitpar.PypeItPar.from_cfg_file()\np['rdx']['spectrograph'] = 'keck_lris_blue'\np['calibrations']['biasframe']['useframe'] = 'overscan'\np.to_config(cfg_file=user_file)\nassert os.path.isfile(user_file), 'User file was not written!'\np = pypeitpar.PypeItPar.from_cfg_file(merge_with=user_file)\nassert p['rdx']['spectrograph'\n    ] == 'keck_lris_blue', 'Test spectrograph is incorrect!'\nassert p['calibrations']['biasframe']['useframe'\n    ] == 'overscan', 'Test biasframe:useframe is incorrect!'\nos.remove(user_file)\n"
+}

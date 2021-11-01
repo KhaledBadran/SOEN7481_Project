@@ -1,0 +1,9 @@
+{
+    "functionName": "test__parse_query_results_json",
+    "className": "TestQueryBuilder",
+    "fileName": "/jeff-99_&_OpenKVK/OpenKVK_&_test_&_test_openkvk.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "json_result = [\n    u'[{\"RESULT\":{\"TYPES\":[\"varchar\"],\"HEADER\":[\"bedrijfsnaam\"],\"ROWS\":[[\"Kinkrsoftware\"]]}}]'\n    ]\njson_multiple_query_result = [\n    '[{\"RESULT\":{\"TYPES\":[\"varchar\"],\"HEADER\":[\"bedrijfsnaam\"],\"ROWS\":[[\"Friesland Bank N.V.\"]]}}]'\n    ,\n    '[{\"RESULT\":{\"TYPES\":[\"varchar\"],\"HEADER\":[\"bedrijfsnaam\"],\"ROWS\":[[\"Bineko-export B.V.\"],[\"Bytefabriek\"]]}}]'\n    ]\nself.client.setResponseFormat('json')\nassert self.client._parse_query_results(json_result\n    ) == '[{\"bedrijfsnaam\": \"Kinkrsoftware\"}]'\nassert self.client._parse_query_results(json_multiple_query_result\n    ) == '[{\"bedrijfsnaam\": \"Friesland Bank N.V.\"}, {\"bedrijfsnaam\": \"Bineko-export B.V.\"}, {\"bedrijfsnaam\": \"Bytefabriek\"}]'\n"
+}

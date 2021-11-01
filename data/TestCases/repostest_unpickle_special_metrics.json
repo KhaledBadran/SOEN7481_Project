@@ -1,0 +1,9 @@
+{
+    "functionName": "test_unpickle_special_metrics",
+    "className": null,
+    "fileName": "/viebboy_&_PyGOP/test_&_utility_&_test_misc.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "filename = os.path.join(tmpdir.dirname, 'special_metrics.pickle')\nmisc.pickle_special_metrics([utility.mean_absolute_error_numpy], filename)\nmetrics = misc.unpickle_special_metrics(filename)\nassert metrics[0].__name__ == 'mean_absolute_error_numpy'\ny_true = np.random.rand(10, 20)\ny_pred = np.random.rand(10, 20)\nassert utility.mean_absolute_error_numpy(y_true, y_pred) == metrics[0](y_true,\n    y_pred)\nos.remove(filename)\n"
+}

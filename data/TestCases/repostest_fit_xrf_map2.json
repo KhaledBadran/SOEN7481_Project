@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fit_xrf_map2",
+    "className": null,
+    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_core_&_tests_&_test_map_processing.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Basic functionality of `fit_xrf_map`.\n    Tests are run using global Dask clients to inprove testing speed.\n    \"\"\"\ndataset_params = {'n_data_dimensions': (20, 20)}\nadd_pts_before, add_pts_after = 15, 10\nuse_snip = False\nft = _FitXRFMapTesting(dataset_params=dataset_params, use_snip=use_snip,\n    add_pts_before=add_pts_before, add_pts_after=add_pts_after)\ndata = ft.data_input\ndata_out = fit_xrf_map(data, data_sel_indices=ft.data_sel_indices, matv=ft.\n    spectra, snip_param=ft.snip_param, use_snip=use_snip, chunk_pixels=10,\n    n_chunks_min=4, progress_bar=None, client=None)\nft.verify_fit_output(data_out=data_out, snip_param=ft.snip_param)\n"
+}

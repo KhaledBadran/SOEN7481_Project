@@ -1,0 +1,9 @@
+{
+    "functionName": "test_log_format_name",
+    "className": null,
+    "fileName": "/EVEprosper_&_ProsperCommon/tests_&_test_prosper_logging.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"test log_format_name overrides in logging handler builders\"\"\"\ntest_format = 'STDOUT'\nformat_actual = prosper_logging.ReportingFormats[test_format].value\ntest_file = path.join(HERE, 'test_alt_format.cfg')\ntest_logname = 'fmt_test_logger'\nlogger_builder = prosper_logging.ProsperLogger(test_logname, LOG_PATH,\n    config_obj=prosper_config.ProsperConfig(test_file))\nlogger = logger_builder.get_logger()\nfor fmt in [h.formatter._fmt for h in logger.handlers]:\n    assert fmt == format_actual.format(custom_args='')\n"
+}

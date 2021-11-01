@@ -1,0 +1,9 @@
+{
+    "functionName": "test_add_success",
+    "className": "SensorsTest",
+    "fileName": "/leopepe_&_GOApy/tests_&_Sensor_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.sensors = Sensors()\nself.sensors.add(name='SenseTmpDirState', shell=\n    'if [ -d \"/tmp/goap_tmp\" ]; then echo -n \"exist\"; else echo -n \"not_exist\"; fi'\n    , binding='tmp_dir_state')\nself.sensors.add(name='SenseTmpDirContent', shell=\n    '[ -f /tmp/goap_tmp/.token ] && echo -n \"token_found\" || echo -n \"token_not_found\"'\n    , binding='tmp_dir_content')\nassert 'SenseTmpDirState' == str(self.sensors.get(name='SenseTmpDirState'))\nassert 'SenseTmpDirContent' == str(self.sensors.get(name='SenseTmpDirContent'))\n"
+}

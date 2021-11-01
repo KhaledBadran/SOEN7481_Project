@@ -1,0 +1,9 @@
+{
+    "functionName": "test_user_defined_boundary_face",
+    "className": "RelativePermeabilityTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_metrics_&_RelativePermabilityTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "pores_in = self.net.pores('top')\npores_out = self.net.pores('bottom')\nself.net.set_label(pores=pores_in, label='pore_in')\nself.net.set_label(pores=pores_out, label='pore_out')\ninlets = {'x': 'pore_in'}\noutlets = {'x': 'pore_out'}\nrp = op.algorithms.metrics.RelativePermeability(network=self.net)\nrp.setup(invading_phase=self.non_wet_phase, defending_phase=self.wet_phase,\n    invasion_sequence='invasion_sequence', flow_inlets=inlets, flow_outlets\n    =outlets)\nrp.run(Snw_num=10)\nresults = rp.get_Kr_data()\nkx = results['relperm_wp']['x']\nkz = results['relperm_wp']['z']\nkr = [0.5953556221922877, 0.42713264157774794, 0.3658925423425995, \n    0.21493111700350034, 1.2600781827032384e-06, 1.000000000000001e-06, \n    1.000000000000001e-06, 1.000000000000001e-06, 1.000000000000001e-06, \n    1.000000000000001e-06]\nnt.assert_allclose(kx, kz)\nnt.assert_allclose(kx, kr)\n"
+}

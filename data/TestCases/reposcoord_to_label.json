@@ -1,0 +1,9 @@
+{
+    "functionName": "coord_to_label",
+    "className": null,
+    "fileName": "/nipy_&_PySurfer/surfer_&_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Create label from MNI coordinate\n\n    Parameters\n    ----------\n    subject_id : string\n        Use if file is in register with subject's orig.mgz\n    coord : numpy array of size 3 | int\n        One coordinate in MNI space or the vertex index.\n    label : str\n        Label name\n    hemi : [lh, rh]\n        Hemisphere target\n    n_steps : int\n        Number of dilation iterations\n    map_surface : str\n        The surface name used to find the closest point\n    coord_as_vert : bool\n        whether the coords parameter should be interpreted as vertex ids\n    units : str\n        Can be 'm' or 'mm' (default).\n    verbose : bool, str, int, or None\n        If not None, override default verbose level (see surfer.verbose).\n    \"\"\"\ngeo = Surface(subject_id, hemi, map_surface, units=units)\ngeo.load_geometry()\ncoords = geo.coords\nif geo.units == 'm':\n    coords = coords * 1000\nif coord_as_vert:\n    coord = coords[coord]\nn_vertices = len(coords)\nadj_mat = mesh_edges(geo.faces)\nfoci_vtxs = find_closest_vertices(coords, [coord])\ndata = np.zeros(n_vertices)\ndata[foci_vtxs] = 1.0\nsmooth_mat = smoothing_matrix(np.arange(n_vertices), adj_mat, 1)\nfor _ in range(n_steps):\n    data = smooth_mat * data\nidx = np.where(data.ravel() > 0)[0]\nlabel_fname = label + '-' + hemi + '.label'\nlogger.debug('Saving label : %s' % label_fname)\nf = open(label_fname, 'w')\nf.write('#label at %s from subject %s\\n' % (coord, subject_id))\nf.write('%d\\n' % len(idx))\nfor i in idx:\n    x, y, z = coords[i]\n    f.write('%d  %f  %f  %f 0.000000\\n' % (i, x, y, z))\nverbose"
+}

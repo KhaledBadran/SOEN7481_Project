@@ -1,0 +1,9 @@
+{
+    "functionName": "test_wrapper_bidirectional",
+    "className": "TestLayer",
+    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_keras_&_test_layer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "input_data = np.random.random([5, 32, 64])\nlayer = Bidirectional(SimpleRNN(12, return_sequences=True), input_shape=(32,\n    64))\nself.modelTestSingleLayer(input_data, layer, dump_weights=True)\nlayer2 = Bidirectional(LSTM(8, return_sequences=True), input_shape=(32, 64),\n    merge_mode='sum')\nself.modelTestSingleLayer(input_data, layer2, dump_weights=True)\nlayer3 = Bidirectional(GRU(12, return_sequences=True), input_shape=(32, 64),\n    merge_mode='mul')\nself.modelTestSingleLayer(input_data, layer3, dump_weights=True)\nlayer4 = Bidirectional(LSTM(64, return_sequences=True), input_shape=(32, 64))\nself.modelTestSingleLayer(input_data, layer4, dump_weights=True)\ninput_data2 = np.random.random_sample([4, 8, 40, 40, 32])\nlayer5 = Bidirectional(ConvLSTM2D(32, 4, 4, border_mode='same',\n    return_sequences=True), input_shape=(8, 40, 40, 32), merge_mode='ave')\nself.modelTestSingleLayer(input_data2, layer5, dump_weights=True)\n"
+}

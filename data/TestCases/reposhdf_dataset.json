@@ -1,0 +1,9 @@
+{
+    "functionName": "hdf_dataset",
+    "className": null,
+    "fileName": "/CCampJr_&_LazyHDF5/lazy5_&_tests_&_test_alter.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\" Setups and tears down a sample HDF5 file \"\"\"\nfilename = 'temp_test.h5'\nfid = h5py.File(filename, 'w')\ndata_m, data_n, data_p = [20, 22, 24]\ndata = np.random.randn(data_m, data_n, data_p)\nfid.create_dataset('base', data=data)\ngrp1 = fid.create_group('Group1')\ngrp3 = fid.create_group('Group2/Group3')\ngrp6 = fid.create_group('Group4/Group5/Group6')\ngrp1.create_dataset('ingroup1_1', data=data)\ngrp1.create_dataset('ingroup1_2', data=data)\nfid.create_dataset('Group2/ingroup2', data=data)\ngrp3.create_dataset('ingroup3', data=data)\ngrp6.create_dataset('ingroup6', data=data)\nfid['base'].attrs['Attribute_str'] = 'Test'\nfid['base'].attrs['Attribute_bytes'] = b'Test'\nfid['base'].attrs['Attribute_np_bytes'] = np.bytes_('Test')\nfid['base'].attrs.create('Attribute_int', 1)\nfid['base'].attrs.create('Attribute_float', 1.1)\nfid['base'].attrs.create('Attribute_np_1d', np.array([1, 2, 3]))\nfid['base'].attrs.create('Attribute_np_2d', np.array([[1, 2, 3], [4, 5, 6]]))\nyield filename, fid\nif hdf_is_open(fid):\n    fid.close()\ntime.sleep(1)\ntry:\n    os.remove(filename)\nexcept:\n    print('Could not delete {}'.format(filename))\npytest.fixture(scope='function')"
+}

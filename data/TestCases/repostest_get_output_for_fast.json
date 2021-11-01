@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_output_for_fast",
+    "className": "TestSpatialPyramidPoolingLayer",
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_pool.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "try:\n    input = floatX(np.random.randn(8, 16, 17, 13))\n    if fixed:\n        input_layer = self.input_layer(input.shape)\n    else:\n        input_layer = self.input_layer((None, None, None, None))\n    input_theano = theano.shared(input)\n    layer = self.layer(input_layer, pool_dims)\n    result = layer.get_output_for(input_theano)\n    result_eval = result.eval()\n    numpy_result = spatial_pool(input, pool_dims)\n    assert result_eval.shape == numpy_result.shape\n    assert np.allclose(result_eval, numpy_result)\n    assert result_eval.shape[2] == layer.output_shape[2]\nexcept NotImplementedError:\n    pytest.skip()\npytest.mark.parametrize('pool_dims', list(pool_dims_test_sets()))pytest.mark.parametrize('fixed', [True, False])"
+}

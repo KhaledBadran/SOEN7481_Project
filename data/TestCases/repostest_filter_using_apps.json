@@ -1,0 +1,9 @@
+{
+    "functionName": "test_filter_using_apps",
+    "className": "TestModelCreator",
+    "fileName": "/bigfishgames_&_GameBenchAPI-PyClient/tests_&_test_integration_&_test_models_&_test_creator_&_test_model_creator.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Keyword search using 'apps' should return the proper DataFrames.\n\n            Regression test for https://github.com/bigfishgames/gamebenchapi-pyclient/issues/59\n        \"\"\"\nwith open(os.path.join(PARENT_DIR + '/fixtures/' + 'authentication_token.json')\n    ) as json_data:\n    self.auth_token = json.load(json_data)\nwith open(os.path.join(PARENT_DIR + API_SAMPLES + 'apps_filter.json')\n    ) as json_data:\n    self.app_filter_json = json.load(json_data)\nmock_return.request('POST', AUTH_URL, json=self.auth_token)\nmock_return.request('POST',\n    'https://production.node.gce.gamebench.net/v1/sessions', json=self.\n    app_filter_json['response'])\ncreator = ModelCreator('SessionSummary', **APPS_FILTER_PARAMS)\nmodel = creator.get_model()\nexpected = pandas.DataFrame([self.app_filter_json['response']])\nactual = model.data\nassert_frame_equal(actual, expected)\nrequests_mock.Mocker()"
+}

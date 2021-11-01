@@ -1,0 +1,9 @@
+{
+    "functionName": "test_compiler",
+    "className": null,
+    "fileName": "/SunDwarf_&_Pyte/tests_&_test__compiler.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "consts = pyte.create_consts(None)\nif PY36:\n    instructions = [tokens.LOAD_CONST, 0, tokens.RETURN_VALUE]\nelse:\n    instructions = [tokens.LOAD_CONST, 0, 0, tokens.RETURN_VALUE]\nfunc = pyte.compile(instructions, consts, [], [], use_safety_wrapper=False)\nassert isinstance(func, types.FunctionType)\nassert func.__code__.co_consts == (None,)\nassert func() is None\n"
+}

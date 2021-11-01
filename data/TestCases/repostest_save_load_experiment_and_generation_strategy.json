@@ -1,0 +1,9 @@
+{
+    "functionName": "test_save_load_experiment_and_generation_strategy",
+    "className": "TestWithDBSettingsBase",
+    "fileName": "/facebook_&_Ax/ax_&_service_&_tests_&_test_with_db_settings_base.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "experiment, generation_strategy = self.init_experiment_and_generation_strategy(\n    save_generation_strategy=False)\ndb_exp, db_gs = self.with_db_settings._load_experiment_and_generation_strategy(\n    experiment.name)\nself.assertIsNotNone(db_exp)\nself.assertIsNone(db_gs)\nexperiment, generation_strategy = self.init_experiment_and_generation_strategy(\n    save_experiment=False, save_generation_strategy=False)\nexp_saved, gs_saved = (self.with_db_settings.\n    _maybe_save_experiment_and_generation_strategy(experiment,\n    generation_strategy))\nself.assertTrue(exp_saved)\nself.assertTrue(gs_saved)\ndb_exp, db_gs = self.with_db_settings._load_experiment_and_generation_strategy(\n    experiment.name)\nself.assertIsNotNone(db_exp)\nself.assertEqual(db_exp, experiment)\nself.assertIsNotNone(db_gs)\nself.assertEqual(db_gs.name, generation_strategy.name)\nsimple_experiment = get_simple_experiment()\n_save_experiment(simple_experiment, encoder=self.with_db_settings.\n    db_settings.encoder)\nwith self.assertRaisesRegex(ValueError, 'Service API only'):\n    self.with_db_settings._load_experiment_and_generation_strategy(\n        simple_experiment.name)\n"
+}

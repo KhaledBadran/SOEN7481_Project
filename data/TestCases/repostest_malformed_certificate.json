@@ -1,0 +1,9 @@
+{
+    "functionName": "test_malformed_certificate",
+    "className": "TestValidator",
+    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_validator.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "malformedCertificate = Data(self._fixture._subIdentity.getDefaultKey().\n    getDefaultCertificate())\nmalformedCertificate.getMetaInfo().setType(ContentType.BLOB)\nself._fixture._keyChain.sign(malformedCertificate, SigningInfo(self.\n    _fixture._identity))\ntry:\n    CertificateV2(malformedCertificate).wireEncode()\n    self.fail('Did not throw the expected exception')\nexcept CertificateV2.Error:\n    pass\nelse:\n    self.fail('Did not throw the expected exception')\noriginalProcessInterest = self._fixture._face._processInterest\ndef processInterest(interest, onData, onTimeout, onNetworkNack):\n    if interest.getName().isPrefixOf(malformedCertificate.getName()):\n        onData(interest, malformedCertificate)\n    else:\n        originalProcessInterest.processInterest(interest, onData, onTimeout,\n            onNetworkNack)\nself._fixture._face._processInterest = processInterest\ndata = Data(Name('/Security/V2/ValidatorFixture/Sub1/Sub2/Data'))\nself._fixture._keyChain.sign(data, SigningInfo(self._fixture._subIdentity))\nself.validateExpectFailure(data, 'Signed by a malformed certificate')\nself.assertEqual(1, len(self._fixture._face._sentInterests))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_halomodel_power_consistent",
+    "className": null,
+    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_halomodel.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from pyccl.pyutils import assert_warns\na = 0.8\nk = np.logspace(-1, 1, 10)\ntot = assert_warns(ccl.CCLWarning, ccl.halomodel_matter_power, COSMO, k, a)\none = assert_warns(ccl.CCLWarning, ccl.onehalo_matter_power, COSMO, k, a)\ntwo = assert_warns(ccl.CCLWarning, ccl.twohalo_matter_power, COSMO, k, a)\nassert np.allclose(one + two, tot)\n"
+}

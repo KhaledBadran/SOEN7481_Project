@@ -1,0 +1,9 @@
+{
+    "functionName": "test_logarithm",
+    "className": "GenericSourceTermTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_physics_&_GenericSourceTermTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.phys['pore.item1'] = 1.6e-14\nself.phys['pore.item2'] = 10\nself.phys['pore.item3'] = 4\nself.phys['pore.item4'] = 1.4\nself.phys['pore.item5'] = 0.133\nself.phys['pore.item6'] = -5.1e-13\nself.phys.add_model(propname='pore.source1', model=pm.generic_source_term.\n    logarithm, A1='pore.item1', A2='pore.item2', A3='pore.item3', A4=\n    'pore.item4', A5='pore.item5', A6='pore.item6', X='pore.mole_fraction',\n    regen_mode='normal')\nself.phys.add_model(propname='pore.source2', model=pm.generic_source_term.\n    logarithm_sym, A1='pore.item1', A2='pore.item2', A3='pore.item3', A4=\n    'pore.item4', A5='pore.item5', A6='pore.item6', X='pore.mole_fraction',\n    regen_mode='normal')\nself.alg = op.algorithms.ReactiveTransport(network=self.net, phase=self.phase)\nself.alg.set_value_BC(values=0.4, pores=self.BC_pores)\nself.alg.set_source(propname='pore.source1', pores=self.source_pores)\nself.alg.settings.update({'conductance': 'throat.diffusive_conductance',\n    'quantity': 'pore.mole_fraction'})\nself.alg.run()\nself.phase.update(self.alg.results())\nself.phys.regenerate_models(propnames='pore.source1')\nself.phys.regenerate_models(propnames='pore.source2')\nX = self.phase['pore.mole_fraction']\nr1 = np.sum(1.6e-14 * np.log(4 * X[self.source_pores] ** 1.4 + 0.133) / np.\n    log(10) - 5.1e-13)\nr2 = np.sum(self.phys['pore.source1.rate'][self.source_pores])\nrs = np.sum(self.phys['pore.source2.rate'][self.source_pores])\nassert_allclose(actual=r2, desired=r1)\nassert_allclose(actual=rs, desired=r1)\n"
+}

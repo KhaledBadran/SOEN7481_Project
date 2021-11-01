@@ -1,0 +1,9 @@
+{
+    "functionName": "test_equal_on_not_equal_common_template_attribute",
+    "className": "TestCreateKeyPairRequestPayload",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_create_key_pair.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the equality operator returns False when comparing two\n        CreateKeyPair request payloads with different common template\n        attributes.\n        \"\"\"\na = payloads.CreateKeyPairRequestPayload(common_template_attribute=objects.\n    TemplateAttribute(attributes=[objects.Attribute(attribute_name=objects.\n    Attribute.AttributeName('Cryptographic Algorithm'), attribute_value=\n    primitives.Enumeration(enums.CryptographicAlgorithm, value=enums.\n    CryptographicAlgorithm.RSA, tag=enums.Tags.CRYPTOGRAPHIC_ALGORITHM))],\n    tag=enums.Tags.COMMON_TEMPLATE_ATTRIBUTE))\nb = payloads.CreateKeyPairRequestPayload(common_template_attribute=objects.\n    TemplateAttribute(attributes=[objects.Attribute(attribute_name=objects.\n    Attribute.AttributeName('Cryptographic Length'), attribute_value=\n    primitives.Integer(value=1024, tag=enums.Tags.CRYPTOGRAPHIC_LENGTH))],\n    tag=enums.Tags.COMMON_TEMPLATE_ATTRIBUTE))\nself.assertFalse(a == b)\nself.assertFalse(b == a)\n"
+}

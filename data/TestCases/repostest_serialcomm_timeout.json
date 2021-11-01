@@ -1,0 +1,9 @@
+{
+    "functionName": "test_serialcomm_timeout",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_comm_&_test_serial.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "comm = SerialCommunicator(serial.Serial())\ncomm._conn = mock.MagicMock()\ntimeout = mock.PropertyMock(return_value=30)\ntype(comm._conn).timeout = timeout\nunit_eq(comm.timeout, 30 * u.second)\ntimeout.assert_called_with()\ncomm.timeout = 10\ntimeout.assert_called_with(10)\ncomm.timeout = 1000 * u.millisecond\ntimeout.assert_called_with(1)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_Instrument_saveload",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Geometry_&_Instrument.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "import os\nInstr = Instrument(position=(0, 1, 0))\nInstr2 = Instrument()\nwedge = Wedge.Wedge(position=(0.5, 0, 0))\nDet = Detector.TubeDetector1D(position=(1.0, 1, 0), direction=(1, 0, 0))\nAna = Analyser.FlatAnalyser(position=(0.5, 0, 0), direction=(1, 0, 1))\nwedge.append([Det, Ana])\nInstr.append(wedge)\ntempFile = 'temp.bin'\nInstr.save(tempFile)\nInstr2.load(tempFile)\nos.remove(tempFile)\nassert Instr == Instr2\n"
+}

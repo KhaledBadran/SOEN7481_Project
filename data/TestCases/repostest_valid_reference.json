@@ -1,0 +1,9 @@
+{
+    "functionName": "test_valid_reference",
+    "className": "TestGetReference",
+    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_converters.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Ensure valid reference reads properly.\n        \"\"\"\nroot = etree.Element('experiment')\nref = etree.SubElement(root, 'bibliographyLink')\nref.set('doi', '10.1016/j.ijhydene.2007.04.008')\nref.set('preferredKey',\n    'Chaumeix, N., Pichon, S., Lafosse, F., Paillard, C.-E., International Journal of Hydrogen Energy, 2007, (32) 2216-2226, Fig. 12., right, open diamond'\n    )\nwith pytest.warns(UserWarning) as record:\n    ref = get_reference(root)\nm = str(record.pop(UserWarning).message)\nassert m == 'Using DOI to obtain reference information, rather than preferredKey.'\nassert ref['doi'] == '10.1016/j.ijhydene.2007.04.008'\nassert ref['journal'] == 'International Journal of Hydrogen Energy'\nassert ref['year'] == 2007\nassert ref['volume'] == 32\nassert ref['pages'] == '2216-2226'\nassert len(ref['authors']) == 4\nassert {'name': 'N CHAUMEIX'} in ref['authors']\nassert {'name': 'S PICHON'} in ref['authors']\nassert {'name': 'F LAFOSSE'} in ref['authors']\nassert {'name': 'C PAILLARD'} in ref['authors']\n"
+}

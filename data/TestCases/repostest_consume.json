@@ -1,0 +1,9 @@
+{
+    "functionName": "test_consume",
+    "className": "TestConsumer",
+    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_consumer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "contentData = self.createEncryptedContent()\ncKeyData = self.createEncryptedCKey()\ndKeyData = self.createEncryptedDKey()\ncontentCount = [0]\ncKeyCount = [0]\ndKeyCount = [0]\nclass TestFace(object):\n\n    def __init__(self, handleExpressInterest):\n        self.handleExpressInterest = handleExpressInterest\n\n    def expressInterest(self, interest, onData, onTimeout, onNetworkNack):\n        return self.handleExpressInterest(interest, onData, onTimeout,\n            onNetworkNack)\ndef handleExpressInterest(interest, onData, onTimeout, onNetworkNack):\n    if interest.matchesName(contentData.getName()):\n        contentCount[0] = 1\n        onData(interest, contentData)\n    elif interest.matchesName(cKeyData.getName()):\n        cKeyCount[0] = 1\n        onData(interest, cKeyData)\n    elif interest.matchesName(dKeyData.getName()):\n        dKeyCount[0] = 1\n        onData(interest, dKeyData)\n    else:\n        onTimeout(interest)\n    return 0\nface = TestFace(handleExpressInterest)\nconsumer = Consumer(face, self.keyChain, self.groupName, self.uName,\n    Sqlite3ConsumerDb(self.databaseFilePath))\nconsumer.addDecryptionKey(self.uKeyName, self.fixtureUDKeyBlob)\nfinalCount = [0]\ndef onConsumeComplete(data, result):\n    finalCount[0] = 1\n    self.assertTrue('consumeComplete', result.equals(Blob(DATA_CONTENT, False))\n        )\nconsumer.consume(self.contentName, onConsumeComplete, lambda code, message:\n    self.fail('consume error ' + repr(code) + ': ' + message))\nself.assertEqual(1, contentCount[0], 'contentCount')\nself.assertEqual(1, cKeyCount[0], 'cKeyCount')\nself.assertEqual(1, dKeyCount[0], 'dKeyCount')\nself.assertEqual(1, finalCount[0], 'finalCount')\n"
+}

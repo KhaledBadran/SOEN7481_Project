@@ -1,0 +1,9 @@
+{
+    "functionName": "test_upload_to_s3_with_custom_key",
+    "className": null,
+    "fileName": "/capitalone_&_Data-Load-and-Copy-using-Python/tests_&_test_s3.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "mock_progress.return_value = None\ns = locopy.S3()\ns.upload_to_s3(LOCAL_TEST_FILE, S3_DEFAULT_BUCKET, CUSTOM_KEY)\nmock_progress.assert_called_with('test file')\ns.s3.upload_file.assert_called_with(LOCAL_TEST_FILE, S3_DEFAULT_BUCKET,\n    CUSTOM_KEY, ExtraArgs={'ServerSideEncryption': 'AES256'}, Callback=None)\ns = locopy.S3(kms_key=KMS_KEY)\ns.upload_to_s3(LOCAL_TEST_FILE, S3_DEFAULT_BUCKET, CUSTOM_KEY)\ns.s3.upload_file.assert_called_with(LOCAL_TEST_FILE, S3_DEFAULT_BUCKET,\n    CUSTOM_KEY, ExtraArgs={'SSEKMSKeyId': KMS_KEY, 'ServerSideEncryption':\n    'aws:kms'}, Callback=None)\nmock.patch('locopy.s3.ProgressPercentage')mock.patch('locopy.s3.Session')"
+}

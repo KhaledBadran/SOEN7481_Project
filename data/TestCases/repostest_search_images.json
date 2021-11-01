@@ -1,0 +1,9 @@
+{
+    "functionName": "test_search_images",
+    "className": "GoogleTest",
+    "fileName": "/abenassi_&_Google-Search-API/google_&_tests_&_test_google.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test method to search images.\"\"\"\nclass MockBrowser(object):\n    \"\"\"Mock browser to replace selenium driver.\"\"\"\n\n    def __init__(self, html_f):\n        self.page_source = html_f.read()\n        self.page_source = self.page_source.decode('utf8') if 'decode' in dir(\n            self.page_source) else self.page_source\n\n    def get(self, url):\n        pass\n\n    def quit(self):\n        pass\ngoogle.images.get_browser_with_url = Mock(return_value=MockBrowser(html_f))\nres = google.search_images('apple', num_images=10)\nself.assertEqual(len(res), 10)\nload_html_file('html_files')"
+}

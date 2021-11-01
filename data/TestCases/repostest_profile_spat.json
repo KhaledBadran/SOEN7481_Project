@@ -1,0 +1,9 @@
+{
+    "functionName": "test_profile_spat",
+    "className": null,
+    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_bspline.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test that bspline_profile (1) is successful and (2) produces the\n    same result for a set of data fit spatially.\n    \"\"\"\nfiles = [data_path('gemini_gnirs_32_{0}_spat_fit.npz'.format(slit)) for\n    slit in [0, 1]]\nfor f in files:\n    d = np.load(f)\n    spat_bspl = bspline.bspline(d['spat_coo_data'], nord=4, bkspace=np.fmax\n        (1.0 / d['median_slit_width'] / 10.0, 1.2 * np.median(np.diff(d[\n        'spat_coo_data']))))\n    spat_bspl, spat_gpm_fit, spat_flat_fit, _, exit_status = bspline_profile(d\n        ['spat_coo_data'], d['spat_flat_data'], np.ones_like(d[\n        'spat_flat_data']), np.ones_like(d['spat_flat_data']), nord=4,\n        upper=5.0, lower=5.0, fullbkpt=spat_bspl.breakpoints, quiet=True)\n    assert np.allclose(d['spat_flat_fit'], spat_flat_fit\n        ), 'Bad spatial bspline result'\n"
+}

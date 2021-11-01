@@ -1,0 +1,9 @@
+{
+    "functionName": "test_save_and_restore_model",
+    "className": null,
+    "fileName": "/Accenture_&_AmpliGraph/tests_&_ampligraph_&_utils_&_test_model_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "models = 'ComplEx', 'TransE', 'DistMult'\nfor model_name in models:\n    module = importlib.import_module('ampligraph.latent_features.models')\n    print('Doing save/restore testing for model class: ', model_name)\n    class_ = getattr(module, model_name)\n    model = class_(batches_count=2, seed=555, epochs=20, k=10, optimizer=\n        'adagrad', optimizer_params={'lr': 0.1})\n    X = np.array([['a', 'y', 'b'], ['b', 'y', 'a'], ['a', 'y', 'c'], ['c',\n        'y', 'a'], ['a', 'y', 'd'], ['c', 'y', 'd'], ['b', 'y', 'c'], ['f',\n        'y', 'e']])\n    model.fit(X)\n    example_name = 'helloworld.pkl'\n    save_model(model, model_name_path=example_name)\n    loaded_model = restore_model(model_name_path=example_name)\n    assert loaded_model is not None\n    assert loaded_model.all_params == model.all_params\n    assert loaded_model.is_fitted == model.is_fitted\n    assert loaded_model.ent_to_idx == model.ent_to_idx\n    assert loaded_model.rel_to_idx == model.rel_to_idx\n    for i in range(len(loaded_model.trained_model_params)):\n        npt.assert_array_equal(loaded_model.trained_model_params[i], model.\n            trained_model_params[i])\n    y_pred_before = model.predict(np.array([['f', 'y', 'e'], ['b', 'y', 'd']]))\n    y_pred_after = loaded_model.predict(np.array([['f', 'y', 'e'], ['b',\n        'y', 'd']]))\n    npt.assert_array_equal(y_pred_after, y_pred_before)\n    npt.assert_array_equal(loaded_model.get_embeddings(['a', 'b'],\n        embedding_type='entity'), model.get_embeddings(['a', 'b'],\n        embedding_type='entity'))\n    os.remove(example_name)\n"
+}

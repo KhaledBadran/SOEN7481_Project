@@ -1,0 +1,9 @@
+{
+    "functionName": "test_write_parameter_df",
+    "className": null,
+    "fileName": "/PEtab-dev_&_PEtab/tests_&_test_parameters.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test parameters.write_parameter_df.\"\"\"\nparameter_df = pd.DataFrame(data={PARAMETER_ID: ['par1', 'par2'],\n    PARAMETER_NAME: ['parname1', 'parname2']}).set_index(PARAMETER_ID)\nwith tempfile.NamedTemporaryFile(mode='w', delete=True) as fh:\n    file_name = fh.name\n    petab.write_parameter_df(parameter_df, file_name)\n    re_df = petab.get_parameter_df(file_name)\n    assert (parameter_df == re_df).all().all()\n"
+}

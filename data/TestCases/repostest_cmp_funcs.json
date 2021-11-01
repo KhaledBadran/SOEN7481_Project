@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cmp_funcs",
+    "className": null,
+    "fileName": "/hdoupe_&_ParamTools/paramtools_&_tests_&_test_fields.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "range_validator = validate.Range(0, 10)\ndaterange_validator = validate.DateRange('2019-01-01', '2019-01-05', step={\n    'days': 2})\nchoice_validator = validate.OneOf(choices=['one', 'two'])\ncases = [('one', 'two', fields.Str(validate=[choice_validator])), (datetime\n    .date(2019, 1, 2), datetime.date(2019, 1, 3), fields.Date(validate=[\n    daterange_validator])), (2, 5, fields.Integer(validate=[range_validator]))]\nfor min_, max_, field in cases:\n    cmp_funcs = field.cmp_funcs()\n    assert cmp_funcs['gt'](min_, max_) is False\n    assert cmp_funcs['lt'](min_, max_) is True\n    assert cmp_funcs['eq'](min_, max_) is False\n    assert cmp_funcs['eq'](max_, max_) is True\n    assert cmp_funcs['lte'](max_, max_) is True\n    assert cmp_funcs['lte'](min_, max_) is True\n    assert cmp_funcs['gte'](max_, min_) is True\n"
+}

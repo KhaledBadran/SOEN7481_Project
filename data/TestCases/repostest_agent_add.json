@@ -1,0 +1,9 @@
+{
+    "functionName": "test_agent_add",
+    "className": null,
+    "fileName": "/SeverTopan_&_AdjSim/test_&_test_callback.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from adjsim import core, analysis, decision\ndef addition_callback(agent):\n    addition_callback.count += 1\naddition_callback.count = 0\ndef increment_agents(env, source):\n    env.agents.add(TestAgent())\nclass TestAgent(core.Agent):\n\n    def __init__(self):\n        super().__init__()\n        self.actions['increment'] = increment_agents\n        self.decision = decision.RandomSingleCastDecision()\ntest_sim = core.Simulation()\ntest_sim.callbacks.agent_added.register(addition_callback)\ntest_sim.agents.add(TestAgent())\ntest_sim.trackers['count'] = analysis.AgentTypeCountTracker()\ncommon.step_simulate_interpolation(test_sim)\nassert addition_callback.count == 2 ** common.INTERPOLATION_NUM_TIMESTEP\n"
+}

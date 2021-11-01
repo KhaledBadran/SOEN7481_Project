@@ -1,0 +1,9 @@
+{
+    "functionName": "test_explicit_logfiles_multiple",
+    "className": "TestAnyPyProcess",
+    "fileName": "/AnyBody-Research-Group_&_AnyPyTools/tests_&_test_abcutils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "logfile = 'test.log'\nmacro = [['load \"model.main.any\"',\n    'operation Main.ArmModelStudy.InverseDynamics'], [\n    'load \"model.main.any\"', 'operation Main.ArmModelStudy.InverseDynamics'\n    ], ['load \"model.main.any\"',\n    'operation Main.ArmModelStudy.InverseDynamics']]\napp = AnyPyProcess(silent=True, keep_logfiles=True)\noutput = app.start_macro(macro, logfile=logfile)\nassert os.path.isfile('test_0.log')\nassert os.path.isfile('test_1.log')\nassert os.path.isfile('test_2.log')\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "basex_forward_gaussian",
+    "className": null,
+    "fileName": "/PyAbel_&_PyAbel/abel_&_tests_&_test_basex.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Check a gaussian solution for BASEX\"\"\"\nn = 100\nr_max = n - 1\nref = GaussianAnalytical(n, r_max, symmetric=False, sigma=30)\ntr = np.tile(ref.func[(None), :], (n, 1))\nAi = abel.basex.get_bs_cached(n, sigma=sigma, reg=reg, basis_dir=None,\n    verbose=False, direction='forward')\nproj = abel.basex.basex_core_transform(tr, Ai)\nproj = proj[n // 2 + n % 2]\nref = ref.abel\nassert_allclose(proj, ref, atol=atol, rtol=rtol)\n"
+}

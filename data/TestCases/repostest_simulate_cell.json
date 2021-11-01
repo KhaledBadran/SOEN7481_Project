@@ -1,0 +1,9 @@
+{
+    "functionName": "test_simulate_cell",
+    "className": "TestGenerators",
+    "fileName": "/alejoe91_&_MEArec/MEArec_&_tests_&_test_generators.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cell_folder = mr.get_default_cell_models_folder()\nparams = mr.get_default_templates_params()\ntarget_spikes = [3, 50]\nparams['target_spikes'] = target_spikes\ncells = os.listdir(cell_folder)\ncell_name = [c for c in cells if 'TTPC1' in c][0]\ncell_path = os.path.join(cell_folder, cell_name)\ncell, v, i = mr.run_cell_model(cell_model_folder=cell_path, sim_folder=None,\n    verbose=True, save=False, return_vi=True, **params)\nc = mr.return_bbp_cell_morphology(cell_name, cell_folder)\nassert target_spikes[0] <= len(v) <= target_spikes[1]\nassert target_spikes[0] <= len(i) <= target_spikes[1]\nassert len(c.xmid) == len(c.ymid) and len(c.xmid) == len(c.zmid)\n"
+}

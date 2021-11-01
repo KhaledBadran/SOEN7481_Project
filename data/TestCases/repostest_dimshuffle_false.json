@@ -1,0 +1,9 @@
+{
+    "functionName": "test_dimshuffle_false",
+    "className": "TestMaxPool2DCCLayer",
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_pool.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "try:\n    from lasagne.layers.cuda_convnet import MaxPool2DCCLayer\nexcept ImportError:\n    pytest.skip('cuda_convnet not available')\nfrom lasagne.layers.input import InputLayer\ninput_layer = InputLayer((4, 12, 12, 16))\nlayer = MaxPool2DCCLayer(input_layer, pool_size=2, dimshuffle=False)\nassert layer.output_shape == (4, 6, 6, 16)\ninput = floatX(np.random.randn(4, 12, 12, 16))\noutput = max_pool_2d(input.transpose(3, 0, 1, 2), (2, 2), (2, 2))\noutput = output.transpose(1, 2, 3, 0)\nactual = layer.get_output_for(input).eval()\nassert np.allclose(output, actual)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_df_averaging",
+    "className": "TestUtilites",
+    "fileName": "/ornlneutronimaging_&_NeuNorm/tests_&_NeuNorm_&_utilities_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"assert df average works\"\"\"\ndf_tif_file_2 = self.data_path + '/tif/df/df002.tif'\ndf_tif_file_3 = self.data_path + '/tif/df/df003.tif'\no_norm = Normalization()\no_norm.load(file=df_tif_file_2, data_type='df', auto_gamma_filter=False)\no_norm.load(file=df_tif_file_3, data_type='df', auto_gamma_filter=False)\n_average_df = average_df(df=o_norm.data['df']['data'])\nexpected_df = np.ones([5, 5])\nexpected_df[0, 0] = 5\nself.assertTrue((expected_df == _average_df).all())\n"
+}

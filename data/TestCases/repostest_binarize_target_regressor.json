@@ -1,0 +1,9 @@
+{
+    "functionName": "test_binarize_target_regressor",
+    "className": null,
+    "fileName": "/goeckslab_&_Galaxy-ML/galaxy_ml_&_tests_&_test_binarize_target.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cv = OrderedKFold(10)\nscoring = dict(AUC=binarize_auc_scorer, AP=\n    binarize_average_precision_scorer, R2=r2_scorer)\nclf = RandomForestRegressor(random_state=42)\nestimator = BinarizeTargetRegressor(clf)\nresult_val = cross_validate(estimator, X, y, cv=cv, scoring=scoring,\n    verbose=0, n_jobs=2)\nap_mean = result_val['test_AP'].mean()\nassert round(ap_mean, 4) == 0.1794, ap_mean\nroc_mean = result_val['test_AUC'].mean()\nassert round(roc_mean, 4) == 0.5764, roc_mean\nr2_mean = result_val['test_R2'].mean()\nassert round(r2_mean, 4) == -0.2046, r2_mean\n"
+}

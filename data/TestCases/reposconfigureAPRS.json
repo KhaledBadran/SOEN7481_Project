@@ -1,0 +1,9 @@
+{
+    "functionName": "configureAPRS",
+    "className": null,
+    "fileName": "/FaradayRF_&_Faraday-Software/faraday_&_aprs.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Configure aprs configuration file from command line\n\n    :param args: argparse arguments\n    :return: None\n    \"\"\"\nconfig = ConfigParser.RawConfigParser()\nconfig.read(os.path.join(faradayHelper.path, configFile))\nif args.callsign is not None:\n    config.set('APRSIS', 'CALLSIGN', args.callsign)\nif args.server is not None:\n    config.set('APRSIS', 'SERVER', args.server)\nif args.port is not None:\n    config.set('APRSIS', 'PORT', args.port)\nif args.rate is not None:\n    config.set('APRSIS', 'RATE', args.rate)\nif args.stationsage is not None:\n    config.set('APRSIS', 'STATIONSAGE', args.stationsage)\nif args.comment is not None:\n    config.set('APRS', 'COMMENT', args.comment[:43])\nif args.altcomment is not None:\n    config.set('APRS', 'ALTCOMMENT', args.altcomment[:43])\nfilename = os.path.join(faradayHelper.path, configFile)\nwith open(filename, 'wb') as configfile:\n    config.write(configfile)\n"
+}

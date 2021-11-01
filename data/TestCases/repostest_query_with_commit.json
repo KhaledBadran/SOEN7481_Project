@@ -1,0 +1,9 @@
+{
+    "functionName": "test_query_with_commit",
+    "className": "TestSQLAlchemyDataSource",
+    "fileName": "/GeographicaGS_&_Longitude/longitude_&_core_&_tests_&_test_data_source_postgres.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.connection_mock.return_value.commit().return_value = None\n(self.connection_mock.return_value.cursor.return_value.execute.return_value\n    ) = None\ncarto_ds = PostgresDataSource()\ndata = carto_ds.execute_query(query_template='some valid query', params={},\n    needs_commit=True, query_config=None)\nself.assertTrue('fields' in data)\nself.assertTrue('rows' in data)\nself.assertCountEqual([], data['fields'])\nself.assertCountEqual([], data['rows'])\n"
+}

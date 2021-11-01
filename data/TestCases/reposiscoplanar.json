@@ -1,0 +1,9 @@
+{
+    "functionName": "iscoplanar",
+    "className": null,
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_topotools_&_topotools.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Determines if given pores are coplanar with each other\n\n    Parameters\n    ----------\n    coords : array_like\n        List of pore coords to check for coplanarity.  At least 3 pores are\n        required.\n\n    Returns\n    -------\n    A boolean value of whether given points are coplanar (True) or not (False)\n    \"\"\"\ncoords = np.array(coords, ndmin=1)\nif np.shape(coords)[0] < 3:\n    raise Exception('At least 3 input pores are required')\nPx = coords[:, (0)]\nPy = coords[:, (1)]\nPz = coords[:, (2)]\nif np.shape(np.unique(Px))[0] == 1:\n    return True\nif np.shape(np.unique(Py))[0] == 1:\n    return True\nif np.shape(np.unique(Pz))[0] == 1:\n    return True\nn1 = np.array((Px[1] - Px[0], Py[1] - Py[0], Pz[1] - Pz[0])).T\nn = np.array([0.0, 0.0, 0.0])\ni = 1\nwhile n.sum() == 0:\n    if i >= np.size(Px) - 1:\n        logger.warning('No valid basis vectors found')\n        return False\n    n2 = np.array((Px[i + 1] - Px[i], Py[i + 1] - Py[i], Pz[i + 1] - Pz[i])).T\n    n = np.cross(n1, n2)\n    i += 1\nr = np.array((Px[1:-1] - Px[0], Py[1:-1] - Py[0], Pz[1:-1] - Pz[0]))\nn_dot = np.dot(n, r)\nif np.sum(np.absolute(n_dot)) == 0:\n    return True\nelse:\n    return False\n"
+}

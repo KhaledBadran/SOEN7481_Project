@@ -1,0 +1,9 @@
+{
+    "functionName": "test_key_generation",
+    "className": "TestAesAlgorithm",
+    "fileName": "/named-data_&_PyNDN2/tests_&_unit_tests_&_test_aes_algorithm.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "keyParams = AesKeyParams(128)\ndecryptKey = AesAlgorithm.generateKey(keyParams)\nencryptKey = AesAlgorithm.deriveEncryptKey(decryptKey.getKeyBits())\nplainBlob = Blob(PLAINTEXT, False)\nencryptParams = EncryptParams(EncryptAlgorithmType.AesCbc, 16)\ncipherBlob = AesAlgorithm.encrypt(encryptKey.getKeyBits(), plainBlob,\n    encryptParams)\nreceivedBlob = AesAlgorithm.decrypt(decryptKey.getKeyBits(), cipherBlob,\n    encryptParams)\nself.assertTrue(receivedBlob.equals(plainBlob))\n"
+}

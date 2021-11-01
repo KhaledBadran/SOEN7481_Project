@@ -1,0 +1,9 @@
+{
+    "functionName": "fit",
+    "className": "NLO",
+    "fileName": "/Jammy2211_&_PyAutoCTI/test_&_unit_&_pipeline_&_test_phase.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class Fitness(object):\n\n    def __init__(self, instance_from_physical_vector):\n        self.result = None\n        self.instance_from_physical_vector = instance_from_physical_vector\n\n    def __call__(self, vector):\n        instance = self.instance_from_physical_vector(vector)\n        likelihood = analysis.fit(instance)\n        self.result = af.Result(instance, likelihood)\n        return -2 * likelihood\nfitness_function = Fitness(self.variable.instance_from_physical_vector)\nfitness_function(self.variable.prior_count * [0.5])\nreturn fitness_function.result\n"
+}

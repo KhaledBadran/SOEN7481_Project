@@ -1,0 +1,9 @@
+{
+    "functionName": "test_to_dict_not_flat_not_interleaved_categorized_by_object",
+    "className": "DictTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_io_&_DictTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "D = Dict.to_dict(network=self.net, phases=[self.phase_1, self.phase_2],\n    flatten=False, interleave=False, categorize_by=['object'])\na = set(['network', 'phase', 'physics', 'geometry'])\nb = set(['net_01', 'phase_01', 'phase_02'])\nc = set(['labels', 'properties'])\nd = set(['pore', 'throat'])\ne = set(['network', 'phase'])\nassert e == set(D.keys())\nkeys = D['network']['net_01']['geometry'].keys()\nassert set(['geo_01', 'geo_02']).issubset(keys)\nkeys = D['phase'].keys()\nassert set(['phase_01', 'phase_02']).issubset(keys)\nkeys = D['phase']['phase_01']['physics'].keys()\nassert set(['phys_01', 'phys_02']).issubset(keys)\n"
+}

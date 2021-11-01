@@ -1,0 +1,9 @@
+{
+    "functionName": "testExperimentGeneratorRunUpdates",
+    "className": "SQAStoreTest",
+    "fileName": "/facebook_&_Ax/ax_&_storage_&_sqa_store_&_tests_&_test_sqa_store.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "experiment = get_experiment_with_batch_trial()\nsave_experiment(experiment)\nself.assertEqual(get_session().query(SQAGeneratorRun).count(), 2)\ntrial = experiment.trials[0]\ntrial.add_arm(get_arm())\nsave_experiment(experiment)\nself.assertEqual(get_session().query(SQAGeneratorRun).count(), 3)\ngenerator_run = get_generator_run()\ntrial.add_generator_run(generator_run=generator_run, multiplier=0.5)\nsave_experiment(experiment)\nself.assertEqual(get_session().query(SQAGeneratorRun).count(), 4)\nloaded_experiment = load_experiment(experiment.name)\nself.assertEqual(experiment, loaded_experiment)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_kegg_to_uniprot",
+    "className": null,
+    "fileName": "/LoLab-VU_&_Magine/magine_&_tests_&_test_id_mapping.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    tests kegg gene to gene name\n    :return:\n    \"\"\"\ng = nx.DiGraph()\ng.add_edge('hsa:217', 'hsa:219')\ng.add_edge('hsa:217', 'hsa:223')\ng.add_edge('hsa:501', 'hsa:219')\ng.add_edge('hsa:224', 'hsa:219')\ng.add_node('hsa:857')\ndic, kegg_short = gm.convert_kegg_nodes(g, species='hsa')\nnx.set_node_attributes(g, kegg_short, 'keggName')\ng = nx.relabel_nodes(g, dic)\nvalid = {'ALDH2': '217', 'ALDH1B1': '219', 'ALDH9A1': '223', 'ALDH7A1':\n    '501', 'ALDH3A2': '224', 'CAV1': '857'}\nfor k, v in valid.items():\n    ok_(g.node[k]['keggName'] == v)\n"
+}

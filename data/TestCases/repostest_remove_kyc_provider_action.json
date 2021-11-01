@@ -1,0 +1,9 @@
+{
+    "functionName": "test_remove_kyc_provider_action",
+    "className": null,
+    "fileName": "/OwnMarket_&_OwnBlockchainSdkPython/own_blockchain_sdk_&_test_transactions.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sender_wallet = Wallet()\nprovider_address = Wallet().address\nasset_hash = 'AssetH1'\nexpected = (\n    \"\"\"{\n    \"senderAddress\": \"%s\",\n    \"nonce\": 1,\n    \"expirationTime\": 0,\n    \"actionFee\": 0.01,\n    \"actions\": [\n        {\n            \"actionType\": \"RemoveKycProvider\",\n            \"actionData\": {\n                \"assetHash\": \"%s\",\n                \"providerAddress\": \"%s\"\n            }\n        }\n    ]\n}\"\"\"\n     % (sender_wallet.address, asset_hash, provider_address))\ntx = Tx(sender_wallet.address, 1, 0.01, 0)\ntx.add_remove_kyc_provider_address_action(asset_hash, provider_address)\nactual = tx.to_json()\nassert expected == actual\n"
+}

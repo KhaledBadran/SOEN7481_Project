@@ -1,0 +1,9 @@
+{
+    "functionName": "test_initialise_with_ten_images",
+    "className": null,
+    "fileName": "/mdbloice_&_Augmentor/tests_&_test_load.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tmpdir = tempfile.mkdtemp()\ntmps = []\nfor i in range(10):\n    tmps.append(tempfile.NamedTemporaryFile(dir=tmpdir, suffix='.JPEG'))\n    bytestream = io.BytesIO()\n    im = Image.new('RGB', (800, 800))\n    im.save(bytestream, 'JPEG')\n    tmps[i].file.write(bytestream.getvalue())\n    tmps[i].flush()\np = Augmentor.Pipeline(tmpdir)\nassert len(p.augmentor_images) == len(tmps)\nif os.name != 'nt':\n    for i in range(len(tmps)):\n        im = Image.open(p.augmentor_images[i].image_path)\n        assert im is not None\nfor i in range(len(tmps)):\n    p_paths = [x.image_path for x in p.augmentor_images]\n    assert tmps[i].name in p_paths\nfor i in range(len(tmps)):\n    assert os.path.exists(p.augmentor_images[i].image_path)\nfor i in range(len(tmps)):\n    tmps[i].close()\nshutil.rmtree(tmpdir)\n"
+}

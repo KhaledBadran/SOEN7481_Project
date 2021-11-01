@@ -1,0 +1,9 @@
+{
+    "functionName": "capture_frame_action",
+    "className": "VisionHandler",
+    "fileName": "/PRIArobotics_&_HedgehogServer/hedgehog_&_server_&_handlers_&_vision.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "if ident not in self._connections:\n    raise FailedCommandError('camera is closed')\nimg = await self._camera.grabber.read()\nif img is None:\n    self._img = None\n    self._channel_data = None\n    raise FailedCommandError('camera did not return an image')\nself._img = img\nfor conn in self._connections.values():\n    conn.channel_data.clear()\nreturn ack.Acknowledgement()\n_commands.register(vision_msg.CaptureFrameAction)"
+}

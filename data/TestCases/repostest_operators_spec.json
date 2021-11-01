@@ -1,0 +1,9 @@
+{
+    "functionName": "test_operators_spec",
+    "className": "TestSchema",
+    "fileName": "/hdoupe_&_ParamTools/paramtools_&_tests_&_test_parameters.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class Params1(Parameters):\n    array_first = False\n    defaults = {'schema': {'labels': {'mylabel': {'type': 'int',\n        'validators': {'range': {'min': 0, 'max': 10}}}, 'somelabel': {\n        'type': 'int', 'validators': {'range': {'min': 0, 'max': 10}}}},\n        'operators': {'array_first': False, 'label_to_extend': 'somelabel'}}}\nparams = Params1(array_first=True, label_to_extend='mylabel')\nassert params.array_first\nassert params.label_to_extend == 'mylabel'\nassert params.operators == {'array_first': True, 'label_to_extend':\n    'mylabel', 'uses_extend_func': False}\nParams1.array_first = True\nparams = Params1()\nassert params.array_first\nassert params.label_to_extend == 'somelabel'\nassert params.operators == {'array_first': True, 'label_to_extend':\n    'somelabel', 'uses_extend_func': False}\nclass Params2(Parameters):\n    defaults = {'schema': {'operators': {'array_first': True}}}\nparams = Params2()\nassert params.array_first\nassert params.label_to_extend is None\nassert params.operators == {'array_first': True, 'label_to_extend': None,\n    'uses_extend_func': False}\nclass Params3(Parameters):\n    array_first = True\n    label_to_extend = 'hello'\n    defaults = {'schema': {'operators': {'array_first': True}}}\nparams = Params3(array_first=False, label_to_extend=None)\nassert params.operators == {'array_first': False, 'label_to_extend': None,\n    'uses_extend_func': False}\n"
+}

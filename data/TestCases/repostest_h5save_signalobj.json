@@ -1,0 +1,9 @@
+{
+    "functionName": "test_h5save_signalobj",
+    "className": "TestH5IO",
+    "fileName": "/PyTTAmaster_&_PyTTa/tests_&_test_h5io.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        SignalObj hdf5 save test\n        \"\"\"\nsin1 = pytta.generate.sin(freq=500, timeLength=6)\nsin2 = pytta.generate.sin(freq=1000, timeLength=7)\nsin2.signalType = 'energy'\nsavedlst = [sin1, sin2]\npytta.save(self.filename, sin1, sin2)\nloaded = pytta.load(self.filename)\nloadedlst = [loaded[pyttaobj] for pyttaobj in loaded]\nfor idx, pobj in enumerate(loadedlst):\n    self.assertSequenceEqual(pobj.timeSignal.tolist(), savedlst[idx].\n        timeSignal.tolist())\n    self.assertSequenceEqual(pobj.freqSignal.tolist(), savedlst[idx].\n        freqSignal.tolist())\n    self.assertEqual(pobj.samplingRate, savedlst[idx].samplingRate)\n    self.assertEqual(pobj.signalType, savedlst[idx].signalType)\n    self.assertEqual(str(pobj.channels), str(savedlst[idx].channels))\n"
+}

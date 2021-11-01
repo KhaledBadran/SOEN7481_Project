@@ -1,0 +1,9 @@
+{
+    "functionName": "test_post_parse_verification",
+    "className": null,
+    "fileName": "/EclecticIQ_&_OpenTAXII/tests_&_test_http.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "headers = prepare_headers(version, https)\nheaders[HTTP_X_TAXII_SERVICES] = 'invalid-services-spec'\nrequest = as_tm(version).DiscoveryRequest(message_id=MESSAGE_ID)\nbase_url = '%s://localhost' % ('https' if https else 'http')\nresponse = client.post(DISCOVERY['address'], data=request.to_xml(), headers\n    =headers, base_url=base_url)\nassert response.status_code == 200\nassert is_headers_valid(response.headers, version=version, https=https)\nmessage = as_tm(version).get_message_from_xml(response.data)\nassert message.status_type == ST_FAILURE\nassert message.in_response_to == MESSAGE_ID\npytest.mark.parametrize('https', [True, False])pytest.mark.parametrize('version', [11, 10])"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_max_sharpe_L2_reg",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_efficient_frontier.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ef = setup_efficient_frontier()\nef.add_objective(objective_functions.L2_reg, gamma=5)\nwith warnings.catch_warnings(record=True) as w:\n    weights = ef.max_sharpe()\n    assert len(w) == 1\nassert isinstance(weights, dict)\nassert set(weights.keys()) == set(ef.tickers)\nnp.testing.assert_almost_equal(ef.weights.sum(), 1)\nassert all([(i >= 0) for i in weights.values()])\nnp.testing.assert_allclose(ef.portfolio_performance(), (0.2936875354933478,\n    0.22783545277575057, 1.2012508683744123))\nef2 = setup_efficient_frontier()\nef2.max_sharpe()\nequal_weight = np.full((ef.n_assets,), 1 / ef.n_assets)\nassert np.abs(equal_weight - ef.weights).sum() < np.abs(equal_weight - ef2.\n    weights).sum()\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_getoutputcubesize",
+    "className": null,
+    "fileName": "/hughperkins_&_DeepCL/python_&_test_&_test_basic.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "batchSize = 32\nplanes = 3\nsize = 28\ncl = PyDeepCL.DeepCL()\nnet = PyDeepCL.NeuralNet(cl)\nnet.addLayer(PyDeepCL.InputLayerMaker().numPlanes(planes).imageSize(size))\nnet.addLayer(PyDeepCL.RandomTranslationsMaker().translateSize(3))\nnet.setBatchSize(batchSize)\nimages = np.zeros((batchSize, planes, size, size), dtype=np.float32)\nnet.forward(images)\nprint('net.getOutputCubeSize()', net.getLayer(1).getOutputCubeSize())\nassert net.getLayer(1).getOutputCubeSize() == batchSize * planes * size * size\n"
+}

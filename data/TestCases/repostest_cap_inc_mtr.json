@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cap_inc_mtr",
+    "className": null,
+    "fileName": "/open-source-economics_&_OG-USA/ogusa_&_tests_&_test_get_micro_data.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test of the get_micro_data.cap_inc_mtr() function\n\n    Note that this test may fail if the Tax-Calculator is not v 2.4.0\n    In that case, you can use the pickeld caculator object, however\n    this is too large for GitHub, so it won't be available there.\n    \"\"\"\ncalc1 = get_micro_data.get_calculator(baseline=True, calculator_start_year=\n    2028, reform={}, data='cps')\ncalc1.advance_to_year(2028)\nexpected = np.genfromtxt(os.path.join(CUR_PATH, 'test_io_data',\n    'mtr_combined_capinc_for_tests.csv'), delimiter=',')\ntest_data = get_micro_data.cap_inc_mtr(calc1)\nassert np.allclose(expected, test_data, equal_nan=True)\npytest.mark.full_run"
+}

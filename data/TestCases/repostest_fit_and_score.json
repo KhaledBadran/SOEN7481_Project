@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fit_and_score",
+    "className": null,
+    "fileName": "/goeckslab_&_Galaxy-ML/galaxy_ml_&_tests_&_test_model_validations.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "X = np.arange(100).reshape((10, 10))\ny = np.arange(10)\nestimator = RandomForestRegressor(random_state=42)\nscorer = SCORERS['r2']\ntrain, test = next(KFold(n_splits=5).split(X, y))\nparameters = {}\nfit_params = {}\ngot1 = _fit_and_score(estimator, X, y, scorer, train, test, verbose=0,\n    parameters=parameters, fit_params=fit_params)\nexpect1 = [-16.0]\nassert expect1 == got1, got1\ngot2 = _fit_and_score(estimator, X, y, scorer, train, test, verbose=0,\n    parameters=parameters, fit_params=fit_params, return_train_score=True)\nexpect2 = [0.97, -16.0]\nassert expect2 == [round(x, 2) for x in got2], got2\n"
+}

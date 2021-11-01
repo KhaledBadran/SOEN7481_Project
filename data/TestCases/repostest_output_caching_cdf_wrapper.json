@@ -1,0 +1,9 @@
+{
+    "functionName": "test_output_caching_cdf_wrapper",
+    "className": null,
+    "fileName": "/NASA_&_MLMCPy/tests_&_model_&_test_CDFWrapperModel.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Runs simulator's _evaluate_sample() with and without caching enabled\n    to ensure consistency of outputs when running a cdf wrapper model. Also\n    tests the estimate and variances with and without caching.\n    \"\"\"\ngrid_size = 100\ngrid = np.linspace(8, 25, grid_size)\ncdfw_level1 = CDFWrapperModel(models_from_data[0], grid)\ncdfw_level2 = CDFWrapperModel(models_from_data[1], grid)\ncdfw_level3 = CDFWrapperModel(models_from_data[2], grid)\ncdfws = [cdfw_level1, cdfw_level2, cdfw_level3]\ncached_sim = MLMCSimulator(data_input, cdfws)\ncached_cdf, cached_sample_sizes, cached_variances = cached_sim.simulate(epsilon\n    =0.05, initial_sample_sizes=initial_sample_size)\ncached_inputs_caching = np.copy(cached_sim._cached_inputs)\ncached_outputs_caching = np.copy(cached_sim._cached_outputs)\nuncached_sim = MLMCSimulator(data_input, cdfws)\nuncached_sim._caching_enabled = False\nuncached_cdf, uncached_sample_sizes, uncached_variances = (uncached_sim.\n    simulate(epsilon=0.05, initial_sample_sizes=initial_sample_size))\ncached_inputs_no_caching = np.copy(uncached_sim._cached_inputs)\ncached_outputs_no_caching = np.copy(uncached_sim._cached_outputs)\nassert np.array_equal(cached_inputs_caching, cached_inputs_no_caching)\nassert np.array_equal(cached_outputs_caching, cached_outputs_no_caching)\nassert np.array_equal(cached_sample_sizes, uncached_sample_sizes)\nassert np.array_equal(cached_cdf, uncached_cdf)\nassert np.array_equal(cached_variances, uncached_variances)\npytest.mark.parametrize('initial_sample_size', [250, 300, 350, 400])"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_form_data_request_body_log",
+    "className": null,
+    "fileName": "/OvalMoney_&_Nephthys/tests_&_test_clients_&_test_requests.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "caplog.set_level(logging.INFO)\nm.post('https://ovalmoney.com/form_data')\ns = Session()\ns.post('https://ovalmoney.com/form_data', data={'key': 'value', 'key2':\n    'value2'})\nlog_rec = [rec for rec in caplog.records][0]\nassert log_rec.msg['request']['body'] == 'key=value&key2=value2'\n"
+}

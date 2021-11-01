@@ -1,0 +1,9 @@
+{
+    "functionName": "test_process_invokes",
+    "className": null,
+    "fileName": "/alex-ber_&_AlexBerUtils/tests_&_utils_&_processinvokes_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "logger.info(f'{request._pyfuncitem.name}()')\nexp_log_msg = 'simulating run_sub_process'\nprocess_invoke_run = f\"echo '{exp_log_msg}'\"\ncmd = shlex.split(process_invoke_run)\nprocess_invoke_cwd = _os.getcwd()\nprocessinvokes.run_sub_process(*cmd, **{'kwargs': {'cwd': process_invoke_cwd}})\npytest.assume(mock_log.call_count == 1)\n(_, logmsg), _ = mock_log.call_args\npytest.assume(exp_log_msg == logmsg)\n"
+}

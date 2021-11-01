@@ -1,0 +1,9 @@
+{
+    "functionName": "mock_urlopen",
+    "className": null,
+    "fileName": "/jaapz_&_CryptsyPythonAPI/test_cryptsy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "def _mock_urlopen(request):\n    \"\"\" Mock urllib to return the url so we can check if the url is\n        constructed correctly. \"\"\"\n\n\n    class MockRequest:\n\n        def read(self):\n            return '{\"url\": \"%s\"}' % request._Request__original\n    return MockRequest()\nmonkeypatch.setattr(urllib2, 'urlopen', _mock_urlopen)\npytest.fixture"
+}

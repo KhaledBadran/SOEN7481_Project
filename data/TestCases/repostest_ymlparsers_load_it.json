@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ymlparsers_load_it",
+    "className": null,
+    "fileName": "/alex-ber_&_AlexBerUtils/tests_&_utils_&_ymlparsers_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "logger.info(f'{request._pyfuncitem.name}()')\npck = '.'.join(['tests_data', __package__, 'ymlparsers'])\nwith path(pck, 'config.yml') as full_path:\n    with open(full_path, 'r') as f:\n        content = f.read()\nstop = 10\nexp_d = copy.deepcopy(exp_config_d)\nexp_app_d = dict(exp_d.get('app', None))\nif exp_app_d is not None:\n    exp_d['app'] = exp_app_d\nexp_host_name = exp_app_d.get('inner_host_name', None)\nexp_cli_template = exp_app_d.get('cli_template', None)\nexp_cli_template = format_template(exp_cli_template, app_inner_host_name=\n    exp_host_name)\nexp_app_d['cli_template'] = exp_cli_template\nth1 = threading.Thread(name='run_with_substition', target=\n    _run_with_substition, args=(content, exp_d, stop))\nth2 = threading.Thread(name='run_without_substition', target=\n    _run_without_substition, args=(str(content), copy.deepcopy(exp_config_d\n    ), stop))\nth1.start()\ntime.sleep(2)\nth2.start()\nth1.join()\nth2.join()\npytest.mark.yml"
+}

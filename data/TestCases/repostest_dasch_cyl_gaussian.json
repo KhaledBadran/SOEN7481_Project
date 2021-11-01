@@ -1,0 +1,9 @@
+{
+    "functionName": "test_dasch_cyl_gaussian",
+    "className": null,
+    "fileName": "/PyAbel_&_PyAbel/abel_&_tests_&_test_dasch_methods.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "def gauss(r, r0, sigma):\n    return np.exp(-(r - r0) ** 2 / sigma ** 2)\nimage_shape = n, n\nrows, cols = image_shape\nr2 = rows // 2\nc2 = cols // 2\nsigma = 20 * n / 100\nx = np.linspace(-c2, c2, cols)\ny = np.linspace(-r2, r2, rows)\nX, Y = np.meshgrid(x, y)\nIM = gauss(X, 0, sigma)\nQ0 = IM[:r2, c2:]\nQ0_copy = Q0.copy()\nospeed = abel.tools.vmi.angular_integration(Q0_copy, origin=(0, 0))\nfor method in dasch_transforms.keys():\n    Q0_copy = Q0.copy()\n    AQ0 = dasch_transforms[method](Q0)\n    ratio_2d = np.sqrt(np.pi) * sigma\n    np.testing.assert_allclose(Q0_copy, AQ0 * ratio_2d, rtol=0.0, atol=0.3)\n"
+}

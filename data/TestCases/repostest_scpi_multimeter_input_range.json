@@ -1,0 +1,9 @@
+{
+    "functionName": "test_scpi_multimeter_input_range",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_generic_scpi_&_test_scpi_multimeter.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with expected_protocol(ik.generic_scpi.SCPIMultimeter, ['CONF?', 'CONF?',\n    'CONF?', 'CONF:FRES MIN', 'CONF?', 'CONF:CURR:DC 1.0'], [\n    'CURR:AC +1.000000E+01,+3.000000E-06', 'CURR:AC AUTO,+3.000000E-06',\n    'FRES +1.000000E+01,+3.000000E-06', 'CURR:DC +1.000000E+01,+3.000000E-06']\n    ) as dmm:\n    unit_eq(dmm.input_range, 10.0 * u.amp)\n    assert dmm.input_range == dmm.InputRange.automatic\n    dmm.input_range = dmm.InputRange.minimum\n    dmm.input_range = 1 * u.amp\n"
+}

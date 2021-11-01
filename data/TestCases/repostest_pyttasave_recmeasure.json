@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pyttasave_recmeasure",
+    "className": "TestPyttaSave",
+    "fileName": "/PyTTAmaster_&_PyTTa/tests_&_test_pyttasave.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        RecMeasure pytta save test\n        \"\"\"\nmType = 'rec'\nlengthDomain = 'samples'\nlengthDomain2 = 'time'\nfftDegree = 18\ntimeLength2 = 4\ndevice = 4\ndevice2 = 3\ninChannels = [1, 2, 3, 4]\ninChannels2 = [1, 5, 3, 7]\nsamplingRate = 44100\nsamplingRate2 = 48000\nfreqMin = 22\nfreqMin2 = 20\nfreqMax = 19222\nfreqMax2 = 20000\ncomment = 'Testing'\ncomment2 = 'Testing2'\nmed1 = pytta.generate.measurement(kind=mType, samplingRate=samplingRate,\n    freqMin=freqMin, freqMax=freqMax, device=device, inChannels=inChannels,\n    comment=comment, lengthDomain=lengthDomain, fftDegree=fftDegree)\nmed2 = pytta.generate.measurement(kind=mType, samplingRate=samplingRate2,\n    freqMin=freqMin2, freqMax=freqMax2, device=device2, inChannels=\n    inChannels2, comment=comment2, lengthDomain=lengthDomain2, timeLength=\n    timeLength2)\nsavedlst = [med1, med2]\npytta.save(self.filename, med1, med2)\na = pytta.load(self.filename)\nloadedlst = [pyttaobj for pyttaobj in a]\nfor idx, pobj in enumerate(loadedlst):\n    self.assertEqual(pobj.lengthDomain, savedlst[idx].lengthDomain)\n    self.assertEqual(pobj.timeLength, savedlst[idx].timeLength)\n    self.assertEqual(pobj.fftDegree, savedlst[idx].fftDegree)\n    self.assertEqual(pobj.device, savedlst[idx].device)\n    self.assertEqual(str(pobj.inChannels), str(savedlst[idx].inChannels))\n    self.assertEqual(pobj.samplingRate, savedlst[idx].samplingRate)\n    self.assertEqual(pobj.freqMin, savedlst[idx].freqMin)\n    self.assertEqual(pobj.freqMax, savedlst[idx].freqMax)\n    self.assertEqual(pobj.comment, savedlst[idx].comment)\n"
+}

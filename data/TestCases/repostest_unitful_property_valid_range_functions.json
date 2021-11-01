@@ -1,0 +1,9 @@
+{
+    "functionName": "test_unitful_property_valid_range_functions",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_property_factories_&_test_unitful_property.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class UnitfulMock(MockInstrument):\n\n    def min_value(self):\n        return 0\n\n    def max_value(self):\n        return 10\n    unitful_property = unitful_property('MOCK', u.hertz, valid_range=(\n        min_value, max_value))\nmock_inst = UnitfulMock()\nmock_inst.unitful_property = 0\nmock_inst.unitful_property = 10\nassert mock_inst.value == \"\"\"MOCK {:e}\nMOCK {:e}\n\"\"\".format(0, 10)\n"
+}

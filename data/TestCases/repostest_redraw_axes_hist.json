@@ -1,0 +1,9 @@
+{
+    "functionName": "test_redraw_axes_hist",
+    "className": "TestIterSubplots",
+    "fileName": "/Jhsmit_&_ColiCoords/test_&_test_iplot.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.fig, self.ax = iter_subplots(subplot_kw={'projection': 'iter_redraw'})\ni = 10\nhists = [np.random.normal(5, 2, size=200) for j in range(i)]\nn, b, p = self.ax.iter_hist(hists)\nh, edges = np.histogram(hists[0])\nhp = np.array([p.get_height() for p in self.ax.patches])\nself.assertArrayEqual(h, hp)\nself.fig.on_next(None)\nh, edges = np.histogram(hists[1])\nhp = np.array([p.get_height() for p in self.ax.patches])\nself.assertArrayEqual(h, hp)\nself.fig.on_prev(None)\nh, edges = np.histogram(hists[0])\nhp = np.array([p.get_height() for p in self.ax.patches])\nself.assertArrayEqual(h, hp)\nself.fig.on_last(None)\nh, edges = np.histogram(hists[-1])\nhp = np.array([p.get_height() for p in self.ax.patches])\nself.assertArrayEqual(h, hp)\nself.fig.on_first(None)\nh, edges = np.histogram(hists[0])\nhp = np.array([p.get_height() for p in self.ax.patches])\nself.assertArrayEqual(h, hp)\n"
+}

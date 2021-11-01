@@ -1,0 +1,9 @@
+{
+    "functionName": "pool_2d_nxn_regions",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_layers_&_pool.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Performs a pooling operation that results in a fixed size:\n    output_size x output_size.\n    Used by SpatialPyramidPoolingLayer. Refer to appendix A in [1]\n\n    Parameters\n    ----------\n    inputs : a tensor with 4 dimensions (N x C x H x W)\n    output_size: integer\n        The output size of the pooling operation\n    mode : string\n        Pooling mode, one of 'max', 'average_inc_pad', 'average_exc_pad'\n        Defaults to 'max'.\n\n    Returns a list of tensors, for each output bin.\n       The list contains output_size*output_size elements, where\n       each element is a 3D tensor (N x C x 1)\n\n    References\n    ----------\n    .. [1] He, Kaiming et al (2015):\n           Spatial Pyramid Pooling in Deep Convolutional Networks\n           for Visual Recognition.\n           http://arxiv.org/pdf/1406.4729.pdf.\n    \"\"\"\nif mode == 'max':\n    pooling_op = T.max\nelif mode in ['average_inc_pad', 'average_exc_pad']:\n    pooling_op = T.mean\nelse:\n    msg = \"Mode must be either 'max', 'average_inc_pad' or \"\n    msg += \"'average_exc_pad'. Got '{0}'\"\n    raise ValueError(msg.format(mode))\nh, w = inputs.shape[2:]\nresult = []\nn = float(output_size)\nfor row in range(output_size):\n    for col in range(output_size):\n        start_h = T.floor(row / n * h).astype('int32')\n        end_h = T.ceil((row + 1) / n * h).astype('int32')\n        start_w = T.floor(col / n * w).astype('int32')\n        end_w = T.ceil((col + 1) / n * w).astype('int32')\n        pooling_region = inputs[:, :, start_h:end_h, start_w:end_w]\n        this_result = pooling_op(pooling_region, axis=(2, 3))\n        result.append(this_result.dimshuffle(0, 1, 'x'))\nreturn result\n"
+}

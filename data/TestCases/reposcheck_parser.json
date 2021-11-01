@@ -1,0 +1,9 @@
+{
+    "functionName": "check_parser",
+    "className": null,
+    "fileName": "/textX_&_Arpeggio/arpeggio_&_tests_&_regressions_&_issue_32_&_test_issue_32.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Test that the PEG parsers correctly parse a grammar and match the given\n    text. Test both the peg and cleanpeg parsers. Raise an exception if the\n    grammar parse failed, and returns False if the match fails. Otherwise,\n    return True.\n\n    Parameters:\n    grammar -- Not the full grammar, but just the PEG expression for a string\n               literal or regex match, e.g. \"'x'\" to match an x.\n    text    -- The text to test against the grammar for a match.\n    \"\"\"\nparser = ParserPEG('top <- ' + grammar + ' EOF;', 'top', skipws=False)\nif parser.parse(text) is None:\n    return False\nparser = ParserCleanPEG('top = ' + grammar + ' EOF', 'top', skipws=False)\nif parser.parse(text) is None:\n    return False\nreturn True\n"
+}

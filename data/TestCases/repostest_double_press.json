@@ -1,0 +1,9 @@
+{
+    "functionName": "test_double_press",
+    "className": null,
+    "fileName": "/martinohanlon_&_BlueDot/tests_&_test_blue_dot.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "mbd = MockBlueDot()\nmbd.mock_client_connected()\ndef simulate_double_press():\n    sleep(mbd.double_press_time + 0.1)\n    mbd.mock_blue_dot_pressed(0, 0)\n    mbd.mock_blue_dot_released(0, 0)\n    mbd.mock_blue_dot_pressed(0, 0)\n    mbd.mock_blue_dot_released(0, 0)\ndef simulate_failed_double_press():\n    sleep(mbd.double_press_time + 0.1)\n    mbd.mock_blue_dot_pressed(0, 0)\n    mbd.mock_blue_dot_released(0, 0)\n    sleep(mbd.double_press_time + 0.1)\n    mbd.mock_blue_dot_pressed(0, 0)\n    mbd.mock_blue_dot_released(0, 0)\nevent_double_pressed = Event()\nmbd.when_double_pressed = lambda : event_double_pressed.set()\nsimulate_failed_double_press()\nassert not event_double_pressed.is_set()\nsimulate_double_press()\nassert event_double_pressed.is_set()\ndelay_function(simulate_double_press, 0.2)\nassert mbd.wait_for_double_press(1)\ndelay_function(simulate_failed_double_press, 0.2)\nassert not mbd.wait_for_double_press(1)\n"
+}

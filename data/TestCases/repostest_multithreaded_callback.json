@@ -1,0 +1,9 @@
+{
+    "functionName": "test_multithreaded_callback",
+    "className": null,
+    "fileName": "/TMiguelT_&_Asynchronize/test_&_test_general.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test for the awaitable use-case\n    \"\"\"\ncallback = asynchronize.AsyncCallback()\nlib = MultiThreadedLibrary(step_callback=callback.step_callback,\n    end_callback=callback.finished_callback, iterator=False)\nlib.start()\nval = await callback\nassert val.args[0] is True\npytest.mark.asyncio"
+}

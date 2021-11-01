@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pswf_compat",
+    "className": null,
+    "fileName": "/ComputationalCryoEM_&_ASPIRE-Python/src_&_aspire_&_aspire_&_em_classavg_&_test_forward_backward.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "image = data_utils.mat_to_npy('image')\nimage = np.transpose(image, axes=(1, 0))\nim_size = image.shape[-1]\ntrunc_param = 10\nbeta = 0.5\nconverter = Converter(im_size, trunc_param, beta)\nif is_full:\n    converter.init_direct('full')\nelse:\n    converter.init_direct('orig')\nc_ims = converter.direct_forward(image)\nif is_full:\n    image_out = converter.direct_backward(c_ims)[0]\nelse:\n    image_out = converter.direct_backward(c_ims)[:, :, (0)]\nif is_full:\n    c_ims_full = np.transpose(data_utils.mat_to_npy('c_ims_full'))\n    c_ims_matlab = c_ims_full\nelse:\n    c_ims_not_full = data_utils.mat_to_npy('c_ims_not_full')\n    c_ims_matlab = c_ims_not_full\nif is_full:\n    image_matlab_out = converter.direct_backward(c_ims_matlab)[0]\nelse:\n    image_matlab_out = converter.direct_backward(c_ims_matlab)[:, :, (0)]\nplt.figure(1)\nplt.subplot(121)\nplt.imshow(np.real(image_out), cmap='gray')\nplt.title('python')\nplt.subplot(122)\nplt.imshow(np.real(image_matlab_out), cmap='gray')\nplt.title('matlab')\nplt.show()\n"
+}

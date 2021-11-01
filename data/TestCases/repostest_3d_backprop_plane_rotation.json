@@ -1,0 +1,9 @@
+{
+    "functionName": "test_3d_backprop_plane_rotation",
+    "className": null,
+    "fileName": "/RI-imaging_&_ODTbrain/tests_&_test_alg3d_bppt.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    A very soft test to check if planar rotation works fine\n    in the reconstruction with tilted angles.\n    \"\"\"\nparameters = get_test_parameter_set(1)\nresults = []\ntilts = [1.1, 0.0, 0.234, 2.80922, -0.29, 9.87]\nfor angz in tilts:\n    sino, angles = create_test_sino_3d_tilted(tilt_plane=angz, A=21)\n    rotmat = np.array([[np.cos(angz), -np.sin(angz), 0], [np.sin(angz), np.\n        cos(angz), 0], [0, 0, 1]])\n    tilted_axis = np.dot(rotmat, [0, 1, 0])\n    rref = list()\n    for p in parameters:\n        fref = odtbrain.backpropagate_3d_tilted(sino, angles, padval='edge',\n            tilted_axis=tilted_axis, padding=(False, False), dtype=np.\n            float64, onlyreal=False, **p)\n        rref.append(cutout(fref))\n    data = np.array(rref).flatten().view(float)\n    results.append(data)\nfor ii in np.arange(len(results)):\n    assert np.allclose(results[ii], results[ii - 1], atol=0.2, rtol=0.2)\n"
+}

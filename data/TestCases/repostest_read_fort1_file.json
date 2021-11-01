@@ -1,0 +1,9 @@
+{
+    "functionName": "test_read_fort1_file",
+    "className": null,
+    "fileName": "/mortele_&_OccamTools/test_&_test_read_fort1.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "file_name = os.path.join(os.path.dirname(__file__), os.pardir, 'data',\n    'example_fort.1')\nfile_name_2 = os.path.join(os.path.dirname(__file__), os.pardir, 'data',\n    'example_2_fort.1')\nfort1 = Fort1(file_name)\nfort1.read_file(silent=True)\nwith open(file_name, 'r') as in_file:\n    for _ in range(2):\n        line = in_file.readline().strip()\n    assert line == fort1.title\n    assert line == 'example_fort.1'\nfort1.read_file(file_name_2, silent=True)\nwith open(file_name_2, 'r') as in_file:\n    for _ in range(2):\n        line = in_file.readline().strip()\n    assert line == fort1.title\n    assert line == 'example_2_fort.1'\n"
+}

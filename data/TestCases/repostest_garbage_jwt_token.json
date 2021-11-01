@@ -1,0 +1,9 @@
+{
+    "functionName": "test_garbage_jwt_token",
+    "className": "TestJwtToken",
+    "fileName": "/mozilla_&_PyFxA/fxa_&_tests_&_test_oauth.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.verify_will_succeed = False\nwith self.assertRaises(fxa.errors.ServerError):\n    self.client.verify_token('garbage')\nfor c in responses.calls:\n    if c.request.url == 'https://server/v1/verify':\n        break\nelse:\n    raise Exception(\n        'testing with a garbage token should have                              called /verify, but it did not.'\n        )\nresponses.activate"
+}

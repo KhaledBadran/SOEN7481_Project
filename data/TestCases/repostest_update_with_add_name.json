@@ -1,0 +1,9 @@
+{
+    "functionName": "test_update_with_add_name",
+    "className": "TestX509Certificate",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_objects_&_test_x509_certificate.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Tests that an X509Certificate already stored in the database can be\n        updated. This will store an X509Certificate in the database. It will\n        add a name to it in one session, and then retrieve it in another\n        session to verify that it has all of the correct names.\n\n        This test and the subsequent test_udpate_* methods are different than\n        the name tests above because these are updating objects already stored\n        in the database. This tests will simulate what happens when the KMIP\n        client calls an add attribute method.\n        \"\"\"\nfirst_name = 'bowser'\ncert = X509Certificate(self.bytes_a, name=first_name)\nSession = sessionmaker(bind=self.engine)\nsession = Session()\nsession.add(cert)\nsession.commit()\nadded_name = 'frumpy'\nexpected_names = [first_name, added_name]\nexpected_mo_names = list()\nfor i, name in enumerate(expected_names):\n    expected_mo_names.append(sqltypes.ManagedObjectName(name, i))\nsession = Session()\nupdate_cert = session.query(X509Certificate).filter(ManagedObject.\n    unique_identifier == cert.unique_identifier).one()\nupdate_cert.names.append(added_name)\nsession.commit()\nsession = Session()\nget_obj = session.query(X509Certificate).filter(ManagedObject.\n    unique_identifier == cert.unique_identifier).one()\nsession.commit()\nself.assertEquals(expected_names, get_obj.names)\nself.assertEquals(expected_mo_names, get_obj._names)\n"
+}

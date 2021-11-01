@@ -1,0 +1,9 @@
+{
+    "functionName": "test_train_train_params_file_creation",
+    "className": null,
+    "fileName": "/dbehrlich_&_PsychRNN/test_&_backend_&_test_rnn.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "params = get_params()\npd1 = PerceptualDiscrimination(dt=params['dt'], tau=params['tau'], T=2000,\n    N_batch=params['N_batch'])\ngen1 = pd1.batch_generator()\npd2 = PerceptualDiscrimination(dt=params['dt'], tau=params['tau'], T=1000,\n    N_batch=params['N_batch'])\ngen2 = pd2.batch_generator()\nmocker.patch.object(RNN, 'forward_pass')\nRNN.forward_pass.return_value = tf.fill([params['N_batch'], params[\n    'N_steps'], params['N_out']], float('nan')), tf.fill([params['N_batch'],\n    params['N_steps'], params['N_rec']], float('nan'))\nrnn = RNN(params)\nrnn.build()\ntrain_params = {}\ntrain_params['save_weights_path'] = str(tmpdir.dirpath('save_weights.npz'))\ntrain_params['training_iters'] = 1000\ntrain_params['learning_rate'] = 0.01\ntrain_params['loss_epoch'] = 20\ntrain_params['verbosity'] = False\ntrain_params['save_training_weights_epoch'] = 10\ntrain_params['training_weights_path'] = str(tmpdir.dirpath('training_weights'))\ntrain_params['generator_function'] = gen2\ntrain_params['optimizer'] = tf.compat.v1.train.AdamOptimizer(learning_rate=\n    train_params['learning_rate'])\ntrain_params['clip_grads'] = False\nassert not tmpdir.dirpath('save_weights.npz').check(exists=1)\nassert not tmpdir.dirpath('training_weights' + str(train_params[\n    'save_training_weights_epoch'])).check(exists=1)\nrnn.train(gen1, train_params)\nassert rnn.is_initialized is True\nout, _ = capfd.readouterr()\nprint(out)\nassert out == ''\nassert tmpdir.dirpath('save_weights.npz').check(exists=1)\nassert tmpdir.dirpath('training_weights' + str(train_params[\n    'save_training_weights_epoch']) + '.npz').check(exists=1)\npatch.object(RNN, '__abstractmethods__', set())"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "getPixelPositions",
+    "className": "TubeDetector1D",
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Geometry_&_Detector.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Return pixel positions relative to center.\"\"\"\nscale = (np.arange(self.pixels, dtype=float) - (self.pixels - 1.0) / 2.0\n    ) / self.pixels * self.length\nscale.shape = self.pixels, 1\ndirection = self.direction.copy()\ndirection.shape = 1, 3\npixelPositions = np.dot(scale, direction) + self.position\nreturn np.split(pixelPositions, self.split)[1:-1]\n"
+}

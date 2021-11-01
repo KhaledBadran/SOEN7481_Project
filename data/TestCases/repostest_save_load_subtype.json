@@ -1,0 +1,9 @@
+{
+    "functionName": "test_save_load_subtype",
+    "className": "ClassRegistryTest",
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_DataObjectTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class A(DataObject):\n    class_context = self.context\nself.context.mapper.process_class(A)\nself.context.add_import(BASE_CONTEXT)\nm = self.context(Context)(ident='http://example.org/ctx', imported=(self.\n    context,))\nim = self.context(Context)(ident='http://example.org/ctxim', imported=(self\n    .context,))\nco = self.context(Context)(ident='http://example.org/ctxb', imported=(m, im))\nm(A)(ident='http://example.org/anA')\nco.save_imports(im)\nco.save_context(inline_imports=True)\no = list(m.stored(DataObject)(ident='http://example.org/anA').load())\nself.assertIsInstance(o[0], A)\n"
+}

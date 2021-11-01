@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_params_expressions",
+    "className": "TestLayer",
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_base.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "x, y, z = (theano.shared(0, name=n) for n in 'xyz')\nW1 = layer.add_param(x ** 2 + theano.tensor.log(y), (), tag1=True)\nW2 = layer.add_param(theano.tensor.matrix(), (10, 10), tag1=True)\nW3 = layer.add_param(z.T, (), tag2=True)\nassert list(layer.params.keys()) == [W1, W2, W3]\nassert layer.get_params() == [x, y, z]\nassert layer.get_params(tag1=True) == [x, y]\nassert layer.get_params(tag2=True) == [z]\n"
+}

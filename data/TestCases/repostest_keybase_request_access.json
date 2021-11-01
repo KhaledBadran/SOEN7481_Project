@@ -1,0 +1,9 @@
+{
+    "functionName": "test_keybase_request_access",
+    "className": "KeybaseTest",
+    "fileName": "/cmsteffen-code_&_PyKBLib/tests_&_test_pykblib_keybase.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.keybase._api.run_command.return_value = 'error message'\nwith self.assertRaises(KeybaseException):\n    self.keybase.request_access('test_team')\nself.keybase._api.run_command.assert_called_with(\n    'team request-access test_team')\nself.keybase._api.run_command.return_value = 'an email has been sent'\nself.keybase.request_access('test_team')\nself.keybase._api.run_command.return_value = 'You have joined'\nself.keybase.request_access('test_team')\nself.keybase._api.run_command.side_effect = APIException(\n    'access already requested')\nself.keybase.request_access('test_team')\n"
+}

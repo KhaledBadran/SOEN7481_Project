@@ -1,0 +1,9 @@
+{
+    "functionName": "test_verify_neurons_have_evidence",
+    "className": "EvidenceCoverageTest",
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_EvidenceCoverageTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        For each neuron in owmeta, verify\n        that there is supporting evidence\n        \"\"\"\nneurons = list(self.qctx(Neuron)().load())\nevcheck = []\nknowns = dict()\nfor n in neurons:\n    pp = [x.statements for x in (n.neurotransmitter, n.type, n.innexin, n.\n        neuropeptide)]\n    for stmt in itertools.chain(*pp):\n        if stmt.context.identifier in knowns:\n            n = self.get_supporting_evidence(stmt)\n            knowns[stmt.context.identifier] = n\n            evcheck.append(n)\nself.assertTrue(0 not in evcheck, 'There appears to be no evidence: ' + str\n    (evcheck))\n"
+}

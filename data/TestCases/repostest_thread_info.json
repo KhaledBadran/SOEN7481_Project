@@ -1,0 +1,9 @@
+{
+    "functionName": "test_thread_info",
+    "className": null,
+    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_frame_evaluator.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "obj = CheckClass()\nobj.collect_info()\nassert obj.thread_info.additional_info is not None\nassert not obj.thread_info.is_pydevd_thread\nthread_info = obj.thread_info\nobj.collect_info()\nassert obj.thread_info is thread_info\nobj = CheckClass()\nt = threading.Thread(target=obj.collect_info)\nt.is_pydev_daemon_thread = True\nt.start()\nt.join()\nassert obj.thread_info.additional_info is None\nassert obj.thread_info.is_pydevd_thread\npytest.mark.parametrize('_times', range(2))"
+}

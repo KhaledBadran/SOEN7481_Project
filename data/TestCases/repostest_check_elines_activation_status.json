@@ -1,0 +1,9 @@
+{
+    "functionName": "test_check_elines_activation_status",
+    "className": null,
+    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_xanes_maps_&_tests_&_test_xanes_maps_api.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Tests for ``check_elines_activation_status``\"\"\"\nincident_energies, eline, eline_activation_energy = _get_xanes_energy_axis()\nactivation_status = [(_ >= eline_activation_energy) for _ in incident_energies]\nactivation_status_output = check_elines_activation_status(np.asarray(\n    incident_energies), eline)\nassert activation_status == activation_status_output, 'Activation status of some energy values is determined incorrectly'\nactivation_status_output = check_elines_activation_status(list(\n    incident_energies), eline)\nassert activation_status == activation_status_output, 'Activation status of some energy values is determined incorrectly'\nactivation_status_output = check_elines_activation_status([], eline)\nassert not activation_status_output, 'Empty list of incident energies is processed incorrectly'\n"
+}

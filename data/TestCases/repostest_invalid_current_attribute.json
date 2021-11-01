@@ -1,0 +1,9 @@
+{
+    "functionName": "test_invalid_current_attribute",
+    "className": "TestModifyAttributeRequestPayload",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_modify_attribute.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a TypeError is raised when an invalid value is used to set\n        the current attribute of a ModifyAttribute request payload.\n        \"\"\"\nkwargs = {'current_attribute': 'invalid'}\nself.assertRaisesRegex(TypeError,\n    'The current attribute must be a CurrentAttribute object.', payloads.\n    ModifyAttributeRequestPayload, **kwargs)\nargs = payloads.ModifyAttributeRequestPayload(), 'current_attribute', 'invalid'\nself.assertRaisesRegex(TypeError,\n    'The current attribute must be a CurrentAttribute object.', setattr, *args)\n"
+}

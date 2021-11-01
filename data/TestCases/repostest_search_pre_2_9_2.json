@@ -1,0 +1,9 @@
+{
+    "functionName": "test_search_pre_2_9_2",
+    "className": null,
+    "fileName": "/halcy_&_Mastodon.py/tests_&_test_search.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "api.mastodon_major = 2\napi.mastodon_minor = 9\napi.mastodon_patch = 1\nwith vcr.use_cassette('test_search.yaml', cassette_library_dir=\n    'tests/cassettes_pre_2_9_2', record_mode='none'):\n    results = api.search_v1('mastodonpy_test')\n    assert isinstance(results, dict)\n    results = api.search_v2('mastodonpy_test')\n    assert isinstance(results, dict)\n    results = api.search('mastodonpy_test')\n    assert isinstance(results, dict)\n    results = api.search('mastodonpy_test', result_type='statuses')\n    assert isinstance(results, dict)\n    assert len(results['hashtags']) == 0\n    assert len(results['accounts']) == 0\n"
+}

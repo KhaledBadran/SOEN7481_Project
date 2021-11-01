@@ -1,0 +1,9 @@
+{
+    "functionName": "test_big_tx",
+    "className": "TestSignTx",
+    "fileName": "/bitcoin-core_&_HWI/test_&_test_device.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "outputs = []\nnum_inputs = 60\nfor i in range(0, num_inputs):\n    outputs.append({self.wpk_rpc.getnewaddress('', 'legacy'): 0.001})\npsbt = self.wpk_rpc.walletcreatefundedpsbt([], outputs, 0, {}, True)['psbt']\npsbt = self.wpk_rpc.walletprocesspsbt(psbt)['psbt']\ntx = self.wpk_rpc.finalizepsbt(psbt)['hex']\ntxid = self.wpk_rpc.sendrawtransaction(tx)\ninputs = []\nfor i in range(0, num_inputs):\n    inputs.append({'txid': txid, 'vout': i})\npsbt = self.wpk_rpc.walletcreatefundedpsbt(inputs, [{self.wpk_rpc.\n    getnewaddress('', 'legacy'): 0.001 * num_inputs}], 0, {\n    'subtractFeeFromOutputs': [0]}, True)['psbt']\ntry:\n    result = self.do_command(self.dev_args + ['signtx', psbt])\n    if self.interface == 'cli':\n        self.fail('Big tx did not cause CLI to error')\n    if self.type == 'coldcard':\n        self.assertEqual(result['code'], -7)\n    else:\n        self.assertNotIn('code', result)\n        self.assertNotIn('error', result)\nexcept OSError:\n    if self.interface == 'cli':\n        pass\n"
+}

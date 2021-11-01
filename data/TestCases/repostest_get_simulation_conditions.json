@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_simulation_conditions",
+    "className": null,
+    "fileName": "/PEtab-dev_&_PEtab/tests_&_test_measurements.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test get_simulation_conditions\"\"\"\nmeasurement_df = pd.DataFrame(data={SIMULATION_CONDITION_ID: ['c0', 'c1',\n    'c0', 'c1']})\nexpected = pd.DataFrame(data={SIMULATION_CONDITION_ID: ['c0', 'c1']})\nactual = petab.get_simulation_conditions(measurement_df)\nassert actual.equals(expected)\nmeasurement_df = pd.DataFrame(data={SIMULATION_CONDITION_ID: ['c0', 'c1',\n    'c0', 'c1'], PREEQUILIBRATION_CONDITION_ID: ['c1', 'c0', 'c1', 'c0']})\nexpected = pd.DataFrame(data={SIMULATION_CONDITION_ID: ['c0', 'c1'],\n    PREEQUILIBRATION_CONDITION_ID: ['c1', 'c0']})\nactual = petab.get_simulation_conditions(measurement_df)\nassert actual.equals(expected)\nmeasurement_df = pd.DataFrame(data={SIMULATION_CONDITION_ID: ['c0', 'c1',\n    'c0', 'c1'], PREEQUILIBRATION_CONDITION_ID: ['', '', 'c1', 'c0']})\nexpected = pd.DataFrame(data={SIMULATION_CONDITION_ID: ['c0', 'c1', 'c0',\n    'c1'], PREEQUILIBRATION_CONDITION_ID: ['', '', 'c1', 'c0']}).sort_values([\n    SIMULATION_CONDITION_ID, PREEQUILIBRATION_CONDITION_ID], ignore_index=True)\nactual = petab.get_simulation_conditions(measurement_df)\nassert actual.equals(expected)\nmeasurement_df = pd.DataFrame(data={SIMULATION_CONDITION_ID: ['c0', 'c1',\n    'c0', 'c1'], PREEQUILIBRATION_CONDITION_ID: [np.nan, np.nan, 'c1', 'c0']})\nexpected = pd.DataFrame(data={SIMULATION_CONDITION_ID: ['c0', 'c1', 'c0',\n    'c1'], PREEQUILIBRATION_CONDITION_ID: ['', '', 'c1', 'c0']}).sort_values([\n    SIMULATION_CONDITION_ID, PREEQUILIBRATION_CONDITION_ID], ignore_index=True)\nactual = petab.get_simulation_conditions(measurement_df)\nassert actual.equals(expected)\n"
+}

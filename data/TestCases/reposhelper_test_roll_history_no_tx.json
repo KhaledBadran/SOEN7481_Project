@@ -1,0 +1,9 @@
+{
+    "functionName": "helper_test_roll_history_no_tx",
+    "className": "UITestCase",
+    "fileName": "/AndreMiras_&_EtherollApp/src_&_etherollapp_&_tests_&_ui_&_test_etheroll_ui.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        When going to the roll history screen with an account selected that has\n        no transaction history, the application should fail gracefully.\n        \"\"\"\nreturn\ncontroller = app.root\nself.assertIsNotNone(controller.current_account)\nscreen_manager = controller.screen_manager\nscreen_manager.current = 'roll_results_screen'\ndialogs = Dialog.dialogs\nself.assertEqual(len(dialogs), 1)\ndialog = dialogs[0]\nself.assertEqual(dialog.title, 'No transaction found')\nload_roll_screen(screen_manager)\n"
+}

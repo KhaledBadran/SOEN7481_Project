@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ex_dir",
+    "className": "TestEA",
+    "fileName": "/flyaway1217_&_ExAssist/tests_&_test_basic.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Test for ex_dir.\n\n        1. Can not modify the ex_dir once started.\n        2. Always can acess the ex_dir.\n        \"\"\"\nex_dir1 = 'tests/Experiments/'\nex_dir2 = 'test/Ex2'\nassist = EA.getAssist('Test')\nassert assist.ex_dir == ex_dir1\nassist.ex_dir = ex_dir2\nassert assist.ex_dir == ex_dir2\nassist.ex_dir = ex_dir1\nwith EA.start(assist) as assist:\n    assist.ex_dir = ex_dir1\n    assert assist.ex_dir == ex_dir1\n    assist.ex_dir = ex_dir2\n    assert assist.ex_dir == ex_dir1\n    assert assist.ex_dir != ex_dir2\nassist.ex_dir = ex_dir2\nassert assist.ex_dir == ex_dir2\nassist.ex_dir = ex_dir1\n"
+}

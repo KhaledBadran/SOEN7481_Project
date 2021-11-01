@@ -1,0 +1,9 @@
+{
+    "functionName": "test_write_no_new_attribute",
+    "className": "TestModifyAttributeRequestPayload",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_modify_attribute.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that an InvalidField error is raised when attempting to write a\n        ModifyAttribute request payload to a buffer with no new attribute\n        field specified.\n        \"\"\"\npayload = payloads.ModifyAttributeRequestPayload()\nargs = utils.BytearrayStream(),\nkwargs = {'kmip_version': enums.KMIPVersion.KMIP_2_0}\nself.assertRaisesRegex(exceptions.InvalidField,\n    'The ModifyAttribute request payload is missing the new attribute field.',\n    payload.write, *args, **kwargs)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_expired_certificate",
+    "className": "TestValidator",
+    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_validator.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "expiredCertificate = Data(self._fixture._subIdentity.getDefaultKey().\n    getDefaultCertificate())\ninfo = SigningInfo(self._fixture._identity)\nnow = Common.getNowMilliseconds()\ninfo.setValidityPeriod(ValidityPeriod(now - 2 * 3600 * 1000, now - 3600 * \n    1000.0))\nself._fixture._keyChain.sign(expiredCertificate, info)\ntry:\n    CertificateV2(expiredCertificate).wireEncode()\nexcept Exception as ex:\n    self.fail('Unexpected exception: ' + str(ex))\noriginalProcessInterest = self._fixture._face._processInterest\ndef processInterest(interest, onData, onTimeout, onNetworkNack):\n    if interest.getName().isPrefixOf(expiredCertificate.getName()):\n        onData(interest, expiredCertificate)\n    else:\n        originalProcessInterest.processInterest(interest, onData, onTimeout,\n            onNetworkNack)\nself._fixture._face._processInterest = processInterest\ndata = Data(Name('/Security/V2/ValidatorFixture/Sub1/Sub2/Data'))\nself._fixture._keyChain.sign(data, SigningInfo(self._fixture._subIdentity))\nself.validateExpectFailure(data, 'Signed by an expired certificate')\nself.assertEqual(1, len(self._fixture._face._sentInterests))\n"
+}

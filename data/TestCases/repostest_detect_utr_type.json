@@ -1,0 +1,9 @@
+{
+    "functionName": "test_detect_utr_type",
+    "className": "TestsORFDetection",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_sORF_detection.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ta_dict = [{'seq_id': 'aaa', 'source': 'intergenic', 'feature':\n    'Transcript', 'start': 1, 'end': 23, 'phase': '.', 'strand': '+',\n    'score': '.'}]\nattributes_tas = [{'ID': 'tran0', 'Name': 'Transcript_0', 'UTR_type':\n    'intergenic'}]\ntas = []\ntas.append(Create_generator(ta_dict[0], attributes_tas[0], 'gff'))\nsd.get_coverage = self.mock.mock_get_coverage\nmed_inters = {'aaa': {'intergenic': []}}\nsd.detect_utr_type(tas[0], 'intergenic', med_inters, 'wigs', '+', 'test')\nsd.get_coverage = get_coverage\nself.assertDictEqual(med_inters, {'aaa': {'intergenic': ['2']}})\n"
+}

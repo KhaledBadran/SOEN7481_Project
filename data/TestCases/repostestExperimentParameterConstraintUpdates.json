@@ -1,0 +1,9 @@
+{
+    "functionName": "testExperimentParameterConstraintUpdates",
+    "className": "SQAStoreTest",
+    "fileName": "/facebook_&_Ax/ax_&_storage_&_sqa_store_&_tests_&_test_sqa_store.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "experiment = get_experiment_with_batch_trial()\nsave_experiment(experiment)\nself.assertEqual(get_session().query(SQAParameterConstraint).count(), len(\n    experiment.search_space.parameter_constraints))\nsearch_space = experiment.search_space\nexisting_constraint = experiment.search_space.parameter_constraints[0]\nnew_constraint = get_sum_constraint2()\nsearch_space.add_parameter_constraints([new_constraint])\nexperiment.search_space = search_space\nsave_experiment(experiment)\nself.assertEqual(get_session().query(SQAParameterConstraint).count(), len(\n    experiment.search_space.parameter_constraints))\nnew_constraint.bound = 5.0\nsearch_space.set_parameter_constraints([existing_constraint, new_constraint])\nexperiment.search_space = search_space\nsave_experiment(experiment)\nself.assertEqual(get_session().query(SQAParameterConstraint).count(), len(\n    experiment.search_space.parameter_constraints))\nsearch_space.set_parameter_constraints([new_constraint])\nexperiment.search_space = search_space\nsave_experiment(experiment)\nself.assertEqual(get_session().query(SQAParameterConstraint).count(), len(\n    experiment.search_space.parameter_constraints))\nloaded_experiment = load_experiment(experiment.name)\nself.assertEqual(experiment, loaded_experiment)\n"
+}

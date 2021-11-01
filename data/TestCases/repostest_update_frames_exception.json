@@ -1,0 +1,9 @@
+{
+    "functionName": "test_update_frames_exception",
+    "className": null,
+    "fileName": "/SimLeek_&_CV_PubSubs/tests_&_window_&_test_subscriber_windows.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sub_win.SubscriberWindows.FRAME_DICT = {}\nwith mock.patch.object(cv2, 'namedWindow'), mock.patch.object(cv2, 'imshow'\n    ) as mock_imshow:\n    sw = sub_win.SubscriberWindows()\n    frame = RuntimeError('Sent from FrameUpdater')\n    sw.FRAME_DICT['0'] = frame\n    with pytest.raises(RuntimeError) as e:\n        sw.update_frames()\n    assert e.value == frame\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_concurrent_pipe",
+    "className": null,
+    "fileName": "/SillyFreak_&_ConcurrentUtils/tests_&_test_pipe.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "loop = asyncio.get_event_loop()\np = ThreadPoolExecutor()\na, b = pipe()\nb = ConcurrentPipeEnd(b, loop=loop)\nasync def reply():\n    await b.send(await b.recv() + 1)\n    await b.send(await b.recv() + 1)\nloop.run_in_executor(p, asyncio.run, reply())\nassert await a.request_sendnowait(1) == 2\nassert await a.request(2) == 3\nwith pytest.raises(ValueError):\n    await a.send(1, eof=True)\nwith pytest.raises(ValueError):\n    await a.send()\na.send_nowait(eof=True)\nwith pytest.raises(EOFError):\n    a.send_nowait('foo')\nwith pytest.raises(EOFError):\n    assert await b.recv()\nwith pytest.raises(EOFError):\n    assert await b.recv()\npytest.mark.asyncio"
+}

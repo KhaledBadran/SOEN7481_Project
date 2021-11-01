@@ -1,0 +1,9 @@
+{
+    "functionName": "test_port_up",
+    "className": null,
+    "fileName": "/GIC-de_&_PyANCP/tests_&_test_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "S1 = Subscriber(aci='0.0.0.0/0.0.0.0 eth 1/1:7', up=1024, down=16000)\nS2 = Subscriber(aci='0.0.0.0/0.0.0.0 eth 2/2:7', up=1024, down=16000)\nsubscribers = [S1, S2]\ntx_off = len(ancp_client._tx_bytes)\nancp_client.port_up(subscribers)\nmsg = ancp_client._tx_bytes[tx_off:]\noff = 0\nfor s in subscribers:\n    length, code = struct.unpack_from('!HxB', msg, 2 + off)\n    assert code == MessageType.PORT_UP\n    off += length + 4\nassert len(msg) == off\n"
+}

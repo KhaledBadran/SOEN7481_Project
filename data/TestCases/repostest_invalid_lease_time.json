@@ -1,0 +1,9 @@
+{
+    "functionName": "test_invalid_lease_time",
+    "className": "TestObtainLeaseResponsePayload",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_obtain_lease.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a TypeError is raised when an invalid value is used to set\n        the lease time of an ObtainLease response payload.\n        \"\"\"\nkwargs = {'lease_time': 'invalid'}\nself.assertRaisesRegex(TypeError, 'Lease time must be an integer.',\n    payloads.ObtainLeaseResponsePayload, **kwargs)\npayload = payloads.ObtainLeaseResponsePayload()\nargs = payload, 'lease_time', 'invalid'\nself.assertRaisesRegex(TypeError, 'Lease time must be an integer.', setattr,\n    *args)\n"
+}

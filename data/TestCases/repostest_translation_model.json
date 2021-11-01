@@ -1,0 +1,9 @@
+{
+    "functionName": "test_translation_model",
+    "className": null,
+    "fileName": "/AllenInstitute_&_EM_Aligner_python/integration_tests_&_test_transforms.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "rt = renderapi.transform.Polynomial2DTransform()\nwith pytest.raises(AlignerTransformException):\n    t = AlignerTranslationModel(transform=rt)\nrt = renderapi.transform.AffineModel()\nt = AlignerTransform(name='TranslationModel', transform=rt)\nassert t.__class__ == AlignerTranslationModel\nt = AlignerTransform(name='TranslationModel', transform=rt)\nnmatch = 100\nmatch = example_match(nmatch)\nncol = 1000\nicol = 73\nblock, weights, rhs = t.block_from_pts(np.array(match['matches']['p']).\n    transpose(), np.array(match['matches']['w']), icol, ncol)\nassert rhs.shape == (nmatch, 2)\nassert block.check_format() is None\nassert weights.size == nmatch * t.rows_per_ptmatch\nassert block.shape == (nmatch * t.rows_per_ptmatch, ncol)\nassert block.nnz == 1 * nmatch\nt = AlignerTransform(name='TranslationModel')\nv = t.to_solve_vec()\nassert np.all(v == np.array([0.0, 0.0]).reshape(-1, 2))\nntiles = 6\nvec = np.random.randn(ntiles * 2)\nvec = vec.reshape(-1, 2)\nindex = 0\nfor i in range(ntiles):\n    t = AlignerTransform(name='TranslationModel')\n    index += t.from_solve_vec(vec[index:, :])\n    msub = t.translation\n    assert np.all(np.isclose(msub, vec[i]))\nrdict = {'default_lambda': 1.2345, 'translation_factor': 0.1}\nt = AlignerTransform(name='TranslationModel')\nr = t.regularization(rdict)\nassert np.all(np.isclose(r, 0.12345))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_send_producer_with_consumer",
+    "className": null,
+    "fileName": "/Drakkar-Software_&_OctoBot-Channels/tests_&_test_producer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class TestConsumer(Consumer):\n    pass\nclass TestChannel(Channel):\n    PRODUCER_CLASS = EmptyTestProducer\n    CONSUMER_CLASS = TestConsumer\nasync def callback(data):\n    assert data == 'test'\n    await get_chan(TEST_CHANNEL).stop()\ndel_chan(TEST_CHANNEL)\nawait create_channel_instance(TestChannel, set_chan)\nawait get_chan(TEST_CHANNEL).new_consumer(callback)\nproducer = EmptyTestProducer(get_chan(TEST_CHANNEL))\nawait producer.run()\nawait producer.send({'data': 'test'})\npytest.mark.asyncio"
+}

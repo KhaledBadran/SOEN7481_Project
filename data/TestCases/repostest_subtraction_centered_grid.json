@@ -1,0 +1,9 @@
+{
+    "functionName": "test_subtraction_centered_grid",
+    "className": "TestFieldMath",
+    "fileName": "/tum-pbs_&_PhiFlow/tests_&_test_object_math.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"subtract one field from another\"\"\"\nshape = [32, 27]\nfor boundary in [CLOSED, PERIODIC, OPEN]:\n    domain = Domain(shape, boundaries=(boundary, boundary))\n    centered_grid = CenteredGrid.sample(Noise(), domain)\n    result_array = (centered_grid - centered_grid).data\n    np.testing.assert_array_equal(result_array, 0)\n"
+}

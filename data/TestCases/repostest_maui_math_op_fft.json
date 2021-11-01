@@ -1,0 +1,9 @@
+{
+    "functionName": "test_maui_math_op_fft",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_teledyne_&_test_maui.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Set math channel, fft operator.\"\"\"\nwith expected_protocol(ik.teledyne.MAUI, [init,\n    \"F1:DEFINE EQN,'FFT(C1)',TYPE,powerspectrum,WINDOW,vonhann,SUPPRESSDC,ON\",\n    \"F1:DEFINE EQN,'FFT(C1)',TYPE,real,WINDOW,flattop,SUPPRESSDC,OFF\",\n    \"F1:DEFINE EQN,'FFT(C1)',TYPE,powerspectrum,WINDOW,vonhann,SUPPRESSDC,ON\"\n    ], [], sep='\\n') as osc:\n    osc.math[0].operator.fft(0)\n    osc.math[0].operator.fft(0, type='real', window='flattop', suppress_dc=\n        False)\n    osc.math[0].operator.fft(0, type='inv str', window='inv str', suppress_dc=1\n        )\n"
+}

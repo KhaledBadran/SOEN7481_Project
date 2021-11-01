@@ -1,0 +1,9 @@
+{
+    "functionName": "test_file_with_col_type_all",
+    "className": "TestCommandLine",
+    "fileName": "/kenfar_&_DataGristle/scripts_&_tests_&_test_gristle_freaker_cmd.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cmd = \"%s -i %s --col-type all -d '|' -o %s \" % (os.path.join(script_dir,\n    'gristle_freaker'), self.easy_fqfn, self.out_fqfn)\nrunner = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.\n    PIPE, close_fds=True, shell=True)\nrecords = cleaner(runner.communicate()[0])\nfor record in records.split('\\n'):\n    print(record)\nassert runner.returncode == 0\nfor rec in fileinput.input(self.out_fqfn):\n    fields = rec[:-1].split('-')\n    assert len(fields) == 5\n    row_id = fields[0].strip()\n    key_a = fields[1].strip()\n    key_b = fields[2].strip()\n    key_c = fields[3].strip()\n    cnt = int(fields[4])\n    assert 0 <= int(row_id) < 100\n    assert key_a == 'A'\n    assert key_b == 'B'\n    assert key_c == 'C'\n    assert int(cnt) == 1\nfileinput.close()\nrunner.stdin.close()\n"
+}

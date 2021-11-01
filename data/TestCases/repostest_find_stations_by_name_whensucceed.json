@@ -1,0 +1,9 @@
+{
+    "functionName": "test_find_stations_by_name_whensucceed",
+    "className": "PublicTransitApiTest",
+    "fileName": "/abdullahselek_&_HerePy/tests_&_test_publictransit_api.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with open('testdata/models/public_transit_api.json', 'r') as f:\n    expectedResponse = f.read()\nresponses.add(responses.GET,\n    'https://transit.ls.hereapi.com/v3/stations/by_name.json',\n    expectedResponse, status=200)\nresponse = self._api.find_stations_by_name([40.7505, -73.991], 'union', 10,\n    herepy.PublicTransitSearchMethod.fuzzy, 5000)\nself.assertTrue(response)\nself.assertIsInstance(response, herepy.PublicTransitResponse)\nresponses.activate"
+}

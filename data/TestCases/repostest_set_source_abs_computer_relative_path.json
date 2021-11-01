@@ -1,0 +1,9 @@
+{
+    "functionName": "test_set_source_abs_computer_relative_path",
+    "className": "TestSync",
+    "fileName": "/DusanMadar_&_PySyncDroid/tests_&_test_sync.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test 'set_source_abs' creates an absolute path from a relative path\n        when the path exists on computer.\n        \"\"\"\nmock_path_exists.return_value = True\nmock_path_isdir.return_value = True\nsync = Sync(FAKE_MTP_DETAILS, 'a-relative-path/', '')\nsync.set_source_abs()\nexpected_abs_path = os.path.join(os.getcwd(), 'a-relative-path')\nself.assertEqual(sync.source, expected_abs_path)\npatch('pysyncdroid.sync.os.path.isdir')patch('pysyncdroid.sync.os.path.exists')"
+}

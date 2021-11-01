@@ -1,0 +1,9 @@
+{
+    "functionName": "test_io_error",
+    "className": "TestFileOpen",
+    "fileName": "/poletaevvlad_&_CubeLang/test_&_cli_&_test_options.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "open_mock.side_effect = IOError('~~error~~')\nwith pytest.raises(argparse.ArgumentTypeError) as e:\n    file_contents_type('/file')\nassert str(e.value) == 'cannot open a file: ~~error~~'\nmock.patch('cubelang.cli.options.open')"
+}

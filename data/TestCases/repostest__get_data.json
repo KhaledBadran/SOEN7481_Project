@@ -1,0 +1,9 @@
+{
+    "functionName": "test__get_data",
+    "className": "TestRequestsMixin",
+    "fileName": "/tutorgen_&_HPIT-python-client/tests_&_hpitclient_&_test_requests_mixin.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "test_requests_mixin = RequestsMixin()\nhttpretty.register_uri(httpretty.GET, 'http://test__get_data/', body=\n    '[{\"test\": \"true\"}]', adding_headers={'X-session-cookie': 'abcd1234'})\ntest_requests_mixin._get_data('http://test__get_data/').should.equal([{\n    'test': 'true'}])\nhttpretty.register_uri(httpretty.GET, 'http://test__post_data_500/', status=500\n    )\ntest_requests_mixin._get_data.when.called_with('http://test__post_data_500/'\n    ).should.throw(InternalServerError)\nhttpretty.register_uri(httpretty.GET, 'http://test__post_data_404/', status=404\n    )\ntest_requests_mixin._get_data.when.called_with('http://test__post_data_404/'\n    ).should.throw(ResourceNotFoundError)\nhttpretty.register_uri(httpretty.GET, 'http://test__post_data_403/', status=403\n    )\ntest_requests_mixin._get_data.when.called_with('http://test__post_data_403/'\n    ).should.throw(AuthenticationError)\nhttpretty.activate"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_outlier",
+    "className": "TestDataClean",
+    "fileName": "/SUNCAT-Center_&_CatLearn/test_&_test_data_clean.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test outlier removal from toy features.\"\"\"\nf = np.arange(200).reshape(50, 4)\nt = np.random.random_sample((50,))\nt[2] += 200000.0\nt[0] -= 200000.0\nd = clean.remove_outliers(features=f, targets=t, constraint=None)\nself.assertTrue(np.shape(d['features']) != np.shape(f))\nself.assertTrue(np.shape(d['targets']) != np.shape(t))\nself.assertTrue(np.shape(d['features'])[0] == np.shape(d['targets'])[0])\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_scenfile",
+    "className": null,
+    "fileName": "/OMS-NetZero_&_FAIR/tests_&_unit_&_unit_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "datadir = os.path.join(os.path.dirname(__file__), 'rcp45/')\nE1 = magicc.scen_open(datadir + 'RCP45.SCEN')\nassert np.allclose(E1, rcp45.Emissions.emissions, rtol=1e-08, atol=0.0002)\nE2 = magicc.scen_open(datadir + 'RCP45.SCEN', include_cfcs=False)\nassert np.allclose(E2, rcp45.Emissions.emissions[:, :24], rtol=1e-08, atol=\n    0.0002)\nE3 = magicc.scen_open(datadir + 'RCP45.SCEN', startyear=1950)\nassert np.allclose(E3, rcp45.Emissions.emissions[185:, :], rtol=1e-08, atol\n    =0.0002)\nassert magicc._import_emis_file('rcp26') == rcp3pd.Emissions\nassert magicc._import_emis_file('rcp6') == rcp6.Emissions\nassert magicc._import_emis_file('rcp85') == rcp85.Emissions\nwith pytest.raises(ValueError):\n    magicc._import_emis_file('rcp19')\ntest_files = os.path.join(os.path.dirname(__file__), 'scenfiles')\nscenfile_2000 = os.path.join(test_files, 'WORLD_ONLY.SCEN')\nscenfile_2010 = os.path.join(test_files, 'WORLD_ONLY_2010.SCEN')\nwith pytest.raises(ValueError):\n    magicc.scen_open(datadir + 'RCP45.SCEN', include_cfcs=np.zeros(0))\nE4 = magicc.scen_open(scenfile_2000, startyear=2000, include_cfcs=np.ones((\n    51, 16)))\nassert E4[0, -1] == 1\nwith pytest.raises(ValueError):\n    magicc.scen_open(datadir + 'RCP45.SCEN', include_cfcs='foo')\nwith pytest.raises(ValueError):\n    magicc.scen_open(scenfile_2010)\nwith pytest.raises(ValueError):\n    magicc.scen_open(scenfile_2000, harmonise=1950)\nwith pytest.raises(ValueError):\n    magicc.scen_open(scenfile_2000, harmonise=2060)\nE5 = magicc.scen_open(scenfile_2000, harmonise=2010)\nassert E5[0, 1] == rcp45.Emissions.co2_fossil[0]\n"
+}

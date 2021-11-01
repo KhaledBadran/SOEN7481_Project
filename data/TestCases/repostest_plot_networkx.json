@@ -1,0 +1,9 @@
+{
+    "functionName": "test_plot_networkx",
+    "className": "PlotToolsTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_topotools_&_PlotToolsTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "for i in range(3):\n    shape = np.ones(3, dtype=int)\n    shape[np.arange(3) != i] = [5, 8]\n    pn = op.network.Cubic(shape=shape)\n    x, y = pn['pore.coords'].T[op.topotools.dimensionality(pn)]\n    fig, ax = plt.subplots()\n    m = op.topotools.plot_networkx(pn, ax=ax)\n    x_plot, y_plot = np.array(m.get_offsets()).T\n    np.testing.assert_allclose(x_plot, x)\n    np.testing.assert_allclose(y_plot, y)\n    plt.close()\nfor i in range(3):\n    shape = np.ones(3, dtype=int)\n    shape[np.arange(3) == i] = [5]\n    pn = op.network.Cubic(shape=shape)\n    x, = pn['pore.coords'].T[op.topotools.dimensionality(pn)]\n    fig, ax = plt.subplots()\n    m = op.topotools.plot_networkx(pn, ax=ax)\n    x_plot, y_plot = np.array(m.get_offsets()).T\n    np.testing.assert_allclose(x_plot, x)\n    plt.close()\n"
+}

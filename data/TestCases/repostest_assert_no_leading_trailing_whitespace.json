@@ -1,0 +1,9 @@
+{
+    "functionName": "test_assert_no_leading_trailing_whitespace",
+    "className": null,
+    "fileName": "/PEtab-dev_&_PEtab/tests_&_test_lint.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "test_df = pd.DataFrame(data={'testId': ['name1 ', 'name2'], 'testText ': [\n    ' name1', 'name2'], 'testNumeric': [1.0, 2.0], 'testNone': None})\nwith pytest.raises(AssertionError):\n    lint.assert_no_leading_trailing_whitespace(test_df.columns.values, 'test')\nwith pytest.raises(AssertionError):\n    lint.assert_no_leading_trailing_whitespace(test_df['testId'].values,\n        'testId')\nwith pytest.raises(AssertionError):\n    lint.assert_no_leading_trailing_whitespace(test_df['testText '].values,\n        'testText')\nlint.assert_no_leading_trailing_whitespace(test_df['testNumeric'].values,\n    'testNumeric')\nlint.assert_no_leading_trailing_whitespace(test_df['testNone'].values,\n    'testNone')\n"
+}

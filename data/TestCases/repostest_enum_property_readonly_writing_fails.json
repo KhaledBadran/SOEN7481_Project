@@ -1,0 +1,9 @@
+{
+    "functionName": "test_enum_property_readonly_writing_fails",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_property_factories_&_test_enum_property.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with pytest.raises(AttributeError):\n\n\n    class SillyEnum(Enum):\n        a = 'aa'\n\n\n    class EnumMock(MockInstrument):\n        a = enum_property('MOCK:A', SillyEnum, readonly=True)\n    mock_instrument = EnumMock({'MOCK:A?': 'aa'})\n    mock_instrument.a = SillyEnum.a\n"
+}

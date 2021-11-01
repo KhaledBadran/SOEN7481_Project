@@ -1,0 +1,9 @@
+{
+    "functionName": "test_vlan_id",
+    "className": null,
+    "fileName": "/CyberReboot_&_NetworkML/tests_&_test_funcs_host.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "instance = HostBase()\ntest_data = {field: None for field in WS_FIELDS}\nmac_df = recast_df(pd.DataFrame([test_data]))\nassert instance._tshark_vlan_id(mac_df) == {'tshark_tagged_vlan': 0}\ntest_data.update({'vlan.id': 99})\nmac_df = recast_df(pd.DataFrame([test_data]))\nassert instance._tshark_vlan_id(mac_df) == {'tshark_tagged_vlan': 1}\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_srsdg645_trigger_rate",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_srs_&_test_srsdg645.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    SRSDG645: Set / get trigger rate.\n    \"\"\"\nwith expected_protocol(ik.srs.SRSDG645, ['TRAT?', 'TRAT 10000', 'TRAT 1000'\n    ], ['+1000.000000']) as ddg:\n    assert ddg.trigger_rate == u.Quantity(1000, u.Hz)\n    ddg.trigger_rate = 10000\n    ddg.trigger_rate = u.Quantity(1000, u.Hz)\n"
+}

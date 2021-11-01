@@ -1,0 +1,9 @@
+{
+    "functionName": "process_stream_action",
+    "className": "ProcessHandler",
+    "fileName": "/PRIArobotics_&_HedgehogServer/hedgehog_&_server_&_handlers_&_process.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "if msg.pid in self._processes:\n    assert msg.fileno == process.STDIN\n    proc = self._processes[msg.pid]\n    if msg.chunk != b'':\n        proc.stdin.write(msg.chunk)\n    else:\n        proc.stdin.write_eof()\n    return ack.Acknowledgement()\nelse:\n    raise FailedCommandError('no process with pid {}'.format(msg.pid))\n_commands.register(process.StreamAction)"
+}

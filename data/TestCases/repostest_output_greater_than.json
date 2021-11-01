@@ -1,0 +1,9 @@
+{
+    "functionName": "test_output_greater_than",
+    "className": null,
+    "fileName": "/PearsonEducation_&_Alarmageddon/tests_&_validations_&_test_ssh.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "t = '100'\nmonkeypatch.setattr(Connection, 'run', lambda self, x, err_stream, timeout,\n    warn: get_mock_ssh_text(t, 0))\nssh_ctx = ssh.SshContext('ubuntu', get_mock_key_file(tmpdir))\nvalidation = ssh.SshCommandValidation(ssh_ctx, 'citations', 'command',\n    hosts=hosts)\nvalidation.add_expectation(ssh.OutputGreaterThan(validation, 90))\nvalidation.perform({})\n"
+}

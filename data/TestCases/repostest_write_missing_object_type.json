@@ -1,0 +1,9 @@
+{
+    "functionName": "test_write_missing_object_type",
+    "className": "TestObjectDefaults",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that an InvalidField error is raised during the encoding of an\n        ObjectDefaults structure when the structure is missing the object\n        type field.\n        \"\"\"\nobject_defaults = objects.ObjectDefaults(attributes=objects.Attributes(\n    attributes=[primitives.Enumeration(enums.CryptographicAlgorithm, value=\n    enums.CryptographicAlgorithm.AES, tag=enums.Tags.\n    CRYPTOGRAPHIC_ALGORITHM), primitives.Integer(value=128, tag=enums.Tags.\n    CRYPTOGRAPHIC_LENGTH), primitives.Integer(value=enums.\n    CryptographicUsageMask.ENCRYPT.value | enums.CryptographicUsageMask.\n    DECRYPT.value, tag=enums.Tags.CRYPTOGRAPHIC_USAGE_MASK)]))\nargs = utils.BytearrayStream(),\nself.assertRaisesRegex(exceptions.InvalidField,\n    'The ObjectDefaults structure is missing the object type field.',\n    object_defaults.write, *args)\n"
+}

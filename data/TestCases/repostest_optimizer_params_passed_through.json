@@ -1,0 +1,9 @@
+{
+    "functionName": "test_optimizer_params_passed_through",
+    "className": "TestGpHyperOptViews",
+    "fileName": "/Yelp_&_MOE/moe_&_tests_&_views_&_rest_&_gp_hyper_opt_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that the optimizer parameters get passed through to the endpoint.\"\"\"\ntest_case = self.gp_test_environments[0]\npython_domain, python_gp = test_case\npython_cov, historical_data = python_gp.get_core_data_copy()\njson_payload = json.loads(self._build_json_payload(python_domain,\n    python_cov, historical_data))\nrequest = pyramid.testing.DummyRequest(post=json_payload)\nrequest.json_body = json_payload\nview = GpHyperOptView(request)\nparams = view.get_params_from_request()\n_, optimizer_parameters, num_random_samples = (\n    _make_optimizer_parameters_from_params(params))\ntest_param_dict = TEST_GRADIENT_DESCENT_PARAMETERS._asdict()\ntest_param_dict['num_multistarts'] = TEST_OPTIMIZER_MULTISTARTS\nassert optimizer_parameters._get_member_dict() == test_param_dict\nfor i, key in enumerate(test_param_dict.iterkeys()):\n    test_param_dict[key] /= 2\ntest_num_multistarts = test_param_dict.pop('num_multistarts')\njson_payload['optimizer_info']['num_multistarts'] = test_num_multistarts\njson_payload['optimizer_info']['optimizer_parameters'] = test_param_dict\nrequest = pyramid.testing.DummyRequest(post=json_payload)\nrequest.json_body = json_payload\nview = GpHyperOptView(request)\nparams = view.get_params_from_request()\n_, optimizer_parameters, num_random_samples = (\n    _make_optimizer_parameters_from_params(params))\ntest_param_dict['num_multistarts'] = test_num_multistarts\nassert optimizer_parameters._get_member_dict() == test_param_dict\n"
+}

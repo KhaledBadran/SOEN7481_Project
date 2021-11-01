@@ -1,0 +1,9 @@
+{
+    "functionName": "test_case_8",
+    "className": null,
+    "fileName": "/david-leon_&_Dandelion/test_&_test_shufflenet.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "print('test_case_8: grad of model_ShuffleNet_v2')\nargs = [[3, (24, 116, 232, 464, 1024), (3, 7, 3), 1, relu], [1, (24, 48, 96,\n    192, 1088), (2, 5, 2), 2, relu]]\nshape_gt = [(4, 1024, 7, 7), (4, 1088, 7, 7)]\nfor i, arg in enumerate(args):\n    in_channels, stage_channels, stack_size, batchnorm_mode, activation = arg\n    model = model_ShuffleNet_v2(in_channels=in_channels, stage_channels=\n        stage_channels, stack_size=stack_size, batchnorm_mode=\n        batchnorm_mode, activation=activation)\n    x = tensor.ftensor4('x')\n    gt = tensor.ftensor4('gt')\n    y = model.forward(x)\n    loss = aggregate(squared_error(gt, y))\n    params = model.collect_params()\n    updates = sgd(loss, params, 0.0001)\n    updates.update(model.collect_self_updates())\n    print('compiling fn...')\n    fn = theano.function([x, gt], [y, loss], updates=updates,\n        no_default_updates=False)\n    print('run fn...')\n    input = np.random.rand(4, in_channels, 224, 224).astype(np.float32)\n    gt = np.random.rand(4, stage_channels[4], 7, 7).astype(np.float32)\n    y, loss = fn(input, gt)\n    print('loss = ', loss)\n    assert y.shape == shape_gt[i], 'incorrect output shape = %s' % str(y.shape)\n"
+}

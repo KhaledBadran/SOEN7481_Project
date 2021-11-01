@@ -1,0 +1,9 @@
+{
+    "functionName": "test_render_datapoint_with_kwargs",
+    "className": "TestDatasetExporter",
+    "fileName": "/vfdev-5_&_ImageDatasetViz/tests_&_test_dataset_exporter.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "img = ((123, 234, 220) * np.ones((256, 256, 3))).astype(np.uint8)\nmask = np.zeros((256, 256, 3), dtype=np.uint8)\nmask[34:145, 56:123, :] = 255, 255, 0\nalpha = 0.7\ntargets = (mask, {'blend_alpha': alpha}), ((bbox_to_points((10, 12, 145, \n    156)), 'A'), (bbox_to_points((109, 120, 215, 236)), 'B'), {'geom_color':\n    (255, 255, 0)}), (bbox_to_points((129, 140, 175, 186)), 'C')\nres = render_datapoint(img, targets, blend_alpha=0.5)\nassert isinstance(res, Image.Image)\nnp_res = np.asarray(res)\nunique_pixels = np_res.reshape(-1, 3).tolist()\nunique_pixels = set([tuple(p) for p in unique_pixels])\nassert (int(123 * (1.0 - alpha) + alpha * 255), int(234 * (1.0 - alpha) + \n    alpha * 255), int(220 * (1.0 - alpha) + alpha * 0)) in unique_pixels\nassert (255, 255, 0) in unique_pixels\nassert (0, 255, 0) in unique_pixels\nassert (255, 255, 255) in unique_pixels\nassert (0, 0, 0) in unique_pixels\n"
+}

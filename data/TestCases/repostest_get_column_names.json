@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_column_names",
+    "className": null,
+    "fileName": "/capitalone_&_Data-Load-and-Copy-using-Python/tests_&_test_redshift.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with mock.patch(dbapi.__name__ + '.connect') as mock_connect:\n    r = locopy.Redshift(dbapi=dbapi, **credentials)\n    r.connect()\n    assert r._get_column_names('query') == None\n    sql = 'SELECT * FROM (query) WHERE 1 = 0'\n    assert mock_connect.return_value.cursor.return_value.execute.called_with(\n        sql, ())\n    mock_connect.return_value.cursor.return_value.description = [['COL1 '],\n        ['COL2 ']]\n    r = locopy.Redshift(dbapi=dbapi, **credentials)\n    r.connect()\n    assert r._get_column_names('query') == ['COL1', 'COL2']\n    mock_connect.return_value.cursor.return_value.execute.side_effect = (\n        Exception())\n    r = locopy.Redshift(dbapi=dbapi, **credentials)\n    r.connect()\n    with pytest.raises(Exception):\n        r._get_column_names('query')\npytest.mark.parametrize('dbapi', DBAPIS)mock.patch('locopy.s3.Session')"
+}

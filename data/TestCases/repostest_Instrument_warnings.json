@@ -1,0 +1,9 @@
+{
+    "functionName": "test_Instrument_warnings",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Geometry_&_Instrument.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "Instr = Instrument()\nwedge = Wedge.Wedge(position=(0.5, 0, 0))\nInstr.wedges = wedge\nwith warnings.catch_warnings(record=True) as w:\n    warnings.simplefilter('always')\n    Instr.wedges = wedge\n    assert len(w) == 1\n    assert issubclass(w[0].category, UserWarning)\n    assert 'The list of wedges is not empty! Appending new wedges(s)' in str(w\n        [0].message)\n"
+}

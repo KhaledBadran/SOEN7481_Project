@@ -1,0 +1,9 @@
+{
+    "functionName": "test_calculate_route_short_route",
+    "className": "PublicTransitApiTest",
+    "fileName": "/abdullahselek_&_HerePy/tests_&_test_publictransit_api.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with io.open(\n    'testdata/models/public_transit_api_calculate_route_many_transfers.json',\n    'r', encoding='utf-8') as f:\n    expectedResponse = f.read()\nresponses.add(responses.GET, 'https://transit.ls.hereapi.com/v3/route.json',\n    expectedResponse, status=200)\nexpected_short_route = (\n    'RE 29511 - Frankfurt(Main)Hbf; ICE 76 - Hamburg-Altona; ICE 849 - Berlin Gesundbrunnen; S5 - Strausberg Nord'\n    )\nresponse = self._api.calculate_route([41.9773, -87.9019], [41.8961, -\n    87.6552], '2017-11-22T07:30:00')\nshort_route = response.Res['Connections']['Connection'][0]['short_route']\nself.assertTrue(response)\nself.assertIsInstance(response, herepy.PublicTransitResponse)\nself.assertEqual(short_route, expected_short_route)\nresponses.activate"
+}

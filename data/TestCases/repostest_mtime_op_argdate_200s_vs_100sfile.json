@@ -1,0 +1,9 @@
+{
+    "functionName": "test_mtime_op_argdate_200s_vs_100sfile",
+    "className": "TestFileAnalyzer_check_times",
+    "fileName": "/kenfar_&_DataGristle/scripts_&_tests_&_test_gristle_processor.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "_, fqfn = tempfile.mkstemp(prefix='ProcessorTestIn_', dir=self.tmpdir)\ncurr_time = time.time()\ntouch(fqfn, (curr_time - 100, curr_time - 100))\nfile_analyzer = mod.FileAnalyzer({}, {})\nprint('--- 200s ---')\nassert file_analyzer._mtime_op_argdate(fqfn, 'lt', '200s') is False\n"
+}

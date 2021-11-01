@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gen_hdf5_qa_dataset",
+    "className": null,
+    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_simulation_&_tests_&_test_sim_xrf_scan_data.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test 'gen_hdf5_quantitative_analysis_dataset'.\n    Simple test, which checks if all the files are created\"\"\"\nwd = os.path.join(tmp_path, 'file_dir')\nstandards_serials = ['41151', '41163']\ntest_elements = {}\ntest_elements['Fe'] = {'density': 50}\ntest_elements['W'] = {'density': 70}\ntest_elements['Au'] = {'density': 80}\nfiles_saved = gen_hdf5_qa_dataset(wd=wd, standards_serials=\n    standards_serials, test_elements=test_elements)\nassert len(files_saved\n    ) == 4, f'Incorrect number of saved files: expected 4, saved {len(files_saved)}'\nfor fln in files_saved:\n    assert os.path.isfile(fln), f\"File '{fln}' was not created\"\n"
+}

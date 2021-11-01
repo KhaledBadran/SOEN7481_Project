@@ -1,0 +1,9 @@
+{
+    "functionName": "test_triples_saved_multi",
+    "className": "ContextTest",
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_ContextTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "graph = set()\nident_uri = 'http://example.com/context_1'\nident_uri1 = 'http://example.com/context_11'\nident_uri2 = 'http://example.com/context_12'\nctx = Context(ident=ident_uri)\nctx1 = Context(ident=ident_uri1)\nctx2 = Context(ident=ident_uri2)\nctx2.add_import(ctx)\nctx1.add_import(ctx2)\nctx1.add_import(ctx)\nctx.add_statement(create_mock_statement(ident_uri, 1))\nctx1.add_statement(create_mock_statement(ident_uri1, 3))\nctx2.add_statement(create_mock_statement(ident_uri2, 2))\nctx1.save_context(graph, inline_imports=True)\nself.assertEqual(ctx1.triples_saved, 3)\n"
+}

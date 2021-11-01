@@ -1,0 +1,9 @@
+{
+    "functionName": "test_set_outlets_overwrite",
+    "className": "OrdinaryPercolationTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_OrdinaryPercolationTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.alg = op.algorithms.OrdinaryPercolation(network=self.net)\nself.alg.setup(phase=self.water)\nself.alg.set_outlets(pores=self.net.pores('top'))\nassert np.sum(self.alg['pore.outlets']) == 25\nself.alg.set_outlets(pores=self.net.pores('bottom'))\nassert np.sum(self.alg['pore.outlets']) == 50\nself.alg.set_outlets(pores=self.net.pores('top'), overwrite=True)\nassert np.sum(self.alg['pore.outlets']) == 25\nself.alg.set_outlets(pores=[], overwrite=True)\nassert np.sum(self.alg['pore.outlets']) == 0\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_resumable_pipeline_with_checkpoint_fit_transform_should_resume_saved_checkpoints",
+    "className": null,
+    "fileName": "/Neuraxio_&_Neuraxle/testing_&_test_checkpoints.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "given_fully_saved_checkpoints(tmpdir)\ntest_case = create_checkpoint_test_case(tmpdir)\npipeline, outputs = test_case.pipeline.fit_transform([0, 1], [1, 2])\nassert test_case.tape_transform_step1.data == [[0, 1]]\nassert test_case.tape_fit_step1.data == [([0, 1], [1, 2])]\nassert test_case.tape_fit_step2.data == [([0, 1], [1, 2])]\nassert test_case.tape_transform_step2.data == [[0, 1]]\n"
+}

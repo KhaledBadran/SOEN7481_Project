@@ -1,0 +1,9 @@
+{
+    "functionName": "test_size_prior",
+    "className": "TestBayes",
+    "fileName": "/anselmrothe_&_EIG/test_&_test_bayes.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "hypotheses = BattleshipHypothesisSpace(grid_size=2, ship_labels=[1, 2],\n    ship_sizes=[1, 2], orientations=['V'])\nprior = EqualSizesDistribution(ship_labels=[1, 2])\nbelief = Bayes(hypotheses, prior)\nfor i, h in enumerate(hypotheses):\n    h_sizes = [0, 0]\n    for s in h.ships:\n        h_sizes[s.ship_label - 1] = s.size\n    h_sizes = tuple(h_sizes)\n    if h_sizes == (1, 1):\n        self.assertAlmostEqual(belief.belief[i], 1 / 48)\n    elif h_sizes == (1, 2) or h_sizes == (2, 1):\n        self.assertAlmostEqual(belief.belief[i], 1 / 16)\n    elif h_sizes == (2, 2):\n        self.assertAlmostEqual(belief.belief[i], 1 / 8)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_invalid_public_protection_storage_masks",
+    "className": "TestCreateKeyPairRequestPayload",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_create_key_pair.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a TypeError is raised when an invalid value is used to set\n        the public protection storage masks of a CreateKeyPair request\n        payload.\n        \"\"\"\nkwargs = {'public_protection_storage_masks': 'invalid'}\nself.assertRaisesRegex(TypeError,\n    'The public protection storage masks must be a ProtectionStorageMasks structure.'\n    , payloads.CreateKeyPairRequestPayload, **kwargs)\nkwargs = {'public_protection_storage_masks': objects.ProtectionStorageMasks()}\nself.assertRaisesRegex(TypeError,\n    'The public protection storage masks must be a ProtectionStorageMasks structure with a PublicProtectionStorageMasks tag.'\n    , payloads.CreateKeyPairRequestPayload, **kwargs)\nargs = payloads.CreateKeyPairRequestPayload(\n    ), 'public_protection_storage_masks', 'invalid'\nself.assertRaisesRegex(TypeError,\n    'The public protection storage masks must be a ProtectionStorageMasks structure.'\n    , setattr, *args)\nargs = payloads.CreateKeyPairRequestPayload(\n    ), 'public_protection_storage_masks', objects.ProtectionStorageMasks()\nself.assertRaisesRegex(TypeError,\n    'The public protection storage masks must be a ProtectionStorageMasks structure with a PublicProtectionStorageMasks tag.'\n    , setattr, *args)\n"
+}

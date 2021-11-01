@@ -1,0 +1,9 @@
+{
+    "functionName": "get_cmd",
+    "className": null,
+    "fileName": "/kenfar_&_DataGristle/scripts_&_tests_&_test_gristle_dir_merger_cmd.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "pgm = PGM\nif match_on == 'name_only':\n    mo_opt = '--match-on-name-only'\nelse:\n    mo_opt = '--match-on-name-and-md5'\nif on_partial_match is None:\n    opm_opt = ''\nelse:\n    opm_opt = '--on-partial-match %s' % on_partial_match\ncmd = f\"\"\"{pgm} {source_dir}\n                    {dest_dir}\n                    {mo_opt}\n                    --on-full-match {on_match}\n                    {opm_opt}\n                    --log-level debug\n                    -r\n           \"\"\"\nprint('\\n command: %s' % cmd)\nreturn cmd\n"
+}

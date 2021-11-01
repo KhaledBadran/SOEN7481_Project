@@ -1,0 +1,9 @@
+{
+    "functionName": "test_withOutputLabels",
+    "className": "TableMakerTests",
+    "fileName": "/glyph_&_Automat/automat_&__test_&_test_visualize.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        L{tableMaker} adds a colspan attribute to the input label's cell\n        equal to the number of output labels and a second row that\n        contains the output labels.\n        \"\"\"\ntable = self.tableMaker(self.inputLabel, ('output label 1',\n    'output label 2'), port=self.port)\nself.assertEqual(len(table.children), 2)\ninputRow, outputRow = table.children\ndef hasCorrectColspan(element):\n    return not isLeaf(element\n        ) and element.name == 'td' and element.attributes.get('colspan') == '2'\nself.assertEqual(len(findElements(inputRow, hasCorrectColspan)), 1)\nself.assertEqual(findElements(outputRow, isLeaf), ['output label 1',\n    'output label 2'])\n"
+}

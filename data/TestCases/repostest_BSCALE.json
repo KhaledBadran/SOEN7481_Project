@@ -1,0 +1,9 @@
+{
+    "functionName": "test_BSCALE",
+    "className": null,
+    "fileName": "/PaulHancock_&_Aegean/tests_&_test_BANE.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that BSCALE present and not 1.0 is handled properly\"\"\"\nfbase = 'tests/test_files/1904-66_SIN'\noutbase = 'dlme'\nhdu = fits.open(fbase + '.fits')\nhdu[0].header['BSCALE'] = 1.0\nhdu.writeto('dlme.fits')\ntry:\n    BANE.filter_image(outbase + '.fits', out_base=outbase, cores=1, nslice=1)\nexcept ValueError as e:\n    raise AssertionError('BSCALE=1.0 causes crash')\nfinally:\n    os.remove('dlme.fits')\nhdu[0].header['BSCALE'] = 2.0\nhdu.writeto('dlme.fits')\ntry:\n    BANE.filter_image(outbase + '.fits', out_base=outbase, cores=1, nslice=1)\nexcept ValueError as e:\n    raise AssertionError('BSCALE=2.0 causes crash')\nfinally:\n    os.remove('dlme.fits')\nreturn\n"
+}

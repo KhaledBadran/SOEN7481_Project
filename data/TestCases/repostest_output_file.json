@@ -1,0 +1,9 @@
+{
+    "functionName": "test_output_file",
+    "className": null,
+    "fileName": "/AllenInstitute_&_EM_Aligner_python/integration_tests_&_test_file_io.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "p = copy.deepcopy(montage_parameters)\np['input_stack']['name'] = raw_stack\np['pointmatch']['name'] = montage_pointmatches\ntmp_file_dir = str(tmpdir.mkdir('file_test_dir'))\np['output_stack']['db_interface'] = 'file'\np['output_stack']['output_file'] = os.path.join(tmp_file_dir,\n    'resolvedtiles.json')\np['output_stack']['compress_output'] = compress\ntmod = EMaligner.EMaligner(input_data=p, args=[])\ntmod.run()\nsolved = renderapi.resolvedtiles.ResolvedTiles(json=jsongz.load(tmod.args[\n    'output_stack']['output_file']))\norig_ids = np.array([t.tileId for t in solved_montage.resolvedtiles.tilespecs])\nfor t in solved.tilespecs:\n    i = np.argwhere(orig_ids == t.tileId).flatten()[0]\n    assert np.all(np.isclose(solved_montage.resolvedtiles.tilespecs[i].\n        tforms[-1].M, t.tforms[-1].M, atol=1e-07))\ndel tmod\nshutil.rmtree(tmp_file_dir)\npytest.mark.parametrize('compress', [True, False])"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_yieldsMachineInNestedClass",
+    "className": "FindMachinesViaWrapperTests",
+    "fileName": "/glyph_&_Automat/automat_&__test_&_test_discover.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        When given a L{twisted.python.modules.PythonAttribute} that refers\n        to a nested class that contains a L{MethodicalMachine} as a\n        class variable, L{findMachinesViaWrapper} yields that machine\n        and its FQPN.\n        \"\"\"\nsource = \"\"\"        from automat import MethodicalMachine\n\n        class PythonClass(object):\n            class NestedClass(object):\n                _classMachine = MethodicalMachine()\n        \"\"\"\nmoduleDict = self.makeModuleAsDict(source, self.pathDir, 'nestedcls.py')\nPythonClass = moduleDict['nestedcls.PythonClass']\nself.assertIn(('nestedcls.PythonClass.NestedClass._classMachine',\n    PythonClass.load().NestedClass._classMachine), list(self.\n    findMachinesViaWrapper(PythonClass)))\n"
+}

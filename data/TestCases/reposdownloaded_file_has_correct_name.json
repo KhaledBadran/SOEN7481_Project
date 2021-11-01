@@ -1,0 +1,9 @@
+{
+    "functionName": "downloaded_file_has_correct_name",
+    "className": "TestFileDownloader",
+    "fileName": "/SketchingDev_&_Doodle-Dashboard/tests_&_doodledashboard_&_notifications_&_image_&_test_file_downloader.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "file_contents = str(uuid.uuid4())\nself.http_server.serve_content(file_contents)\nurl = '%s/%s' % (self.http_server.url, remote_name)\nimage_downloader = FileDownloader()\nimage_downloader.download(url)\ndownloads = image_downloader.get_downloaded_files()\nself.assertEqual(1, len(downloads), 'File has been downloaded')\nfile_path = downloads[0]\nself.assertTrue(file_path.endswith(expected_end_of_local_filename), \n    \"Expected local path '%s' to end with '%s'\" % (file_path,\n    expected_end_of_local_filename))\nwith open(file_path, 'r') as f:\n    self.assertEquals(file_contents, f.read())\nos.remove(file_path)\n"
+}

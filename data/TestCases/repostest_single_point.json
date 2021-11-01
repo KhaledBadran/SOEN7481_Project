@@ -1,0 +1,9 @@
+{
+    "functionName": "test_single_point",
+    "className": "TestGetChangingVariable",
+    "fileName": "/kyleniemeyer_&_PyTeCK/pyteck_&_tests_&_test_eval_model.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Check normal behavior for single point.\n        \"\"\"\ncases = [DataPoint({'pressure': [numpy.random.rand(1) * units('atm')],\n    'temperature': [numpy.random.rand(1) * units('K')], 'composition': {\n    'kind': 'mole fraction', 'species': [{'species-name': 'O2', 'amount': [\n    1.0]}]}, 'ignition-type': None})]\nvariable = eval_model.get_changing_variable(cases)\nassert len(variable) == 1\nassert variable[0] == cases[0].temperature.magnitude\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_evaluate_log_likelihood_at_points",
+    "className": "TestGaussianProcessLogMarginalLikelihood",
+    "fileName": "/Yelp_&_MOE/moe_&_tests_&_optimal_learning_&_python_&_python_version_&_log_likelihood_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Check that ``evaluate_log_likelihood_at_hyperparameter_list`` computes and orders results correctly.\"\"\"\nnum_sampled = 5\nself.gp_test_environment_input.num_sampled = num_sampled\n_, gaussian_process = self._build_gaussian_process_test_data(self.\n    gp_test_environment_input)\npython_cov, historical_data = gaussian_process.get_core_data_copy()\nlml = GaussianProcessLogMarginalLikelihood(python_cov, historical_data)\nnum_to_eval = 10\ndomain_bounds = [self.gp_test_environment_input.hyperparameter_interval\n    ] * self.gp_test_environment_input.num_hyperparameters\ndomain = TensorProductDomain(domain_bounds)\nhyperparameters_to_evaluate = domain.generate_uniform_random_points_in_domain(\n    num_to_eval)\ntest_values = evaluate_log_likelihood_at_hyperparameter_list(lml,\n    hyperparameters_to_evaluate)\nfor i, value in enumerate(test_values):\n    lml.hyperparameters = hyperparameters_to_evaluate[i, ...]\n    truth = lml.compute_log_likelihood()\n    assert value == truth\n"
+}

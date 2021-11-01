@@ -1,0 +1,9 @@
+{
+    "functionName": "test_decorate_log_request_querystring",
+    "className": null,
+    "fileName": "/OvalMoney_&_Nephthys/tests_&_test_clients_&_test_requests.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "log_record = MagicMock()\nname, value = 'query', 'var'\nrequest = MagicMock(url=f'https://ovalmoney.com?{name}={value}')\nrequest.headers = None\ndecorate_log_request(log_record, request)\nexpected = call(name, [value])\nassert expected in log_record.add_request_querystring.call_args_list\n"
+}

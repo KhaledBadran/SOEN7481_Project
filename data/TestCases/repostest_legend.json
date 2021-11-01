@@ -1,0 +1,9 @@
+{
+    "functionName": "test_legend",
+    "className": null,
+    "fileName": "/Edinburgh-Genome-Foundry_&_DnaFeaturesViewer/tests_&_test_basics.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class CustomTranslator(BiopythonTranslator):\n\n    def compute_feature_legend_text(self, feature):\n        return feature.type\n\n    def compute_feature_color(self, feature):\n        return {'CDS': '#ffd383', 'promoter': 'red', 'restriction_site':\n            '#fbf3f6', 'terminator': '#d1e9f1'}[feature.type]\ntranslator = CustomTranslator()\ngraphic_record = translator.translate_record(example_genbank)\nax, _ = graphic_record.plot()\ngraphic_record.plot_legend(ax=ax)\n"
+}

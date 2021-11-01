@@ -1,0 +1,9 @@
+{
+    "functionName": "test_specified_version_fetched",
+    "className": null,
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_BundleTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with tempfile.TemporaryDirectory(prefix=__name__ + '.') as tempdir:\n    bundles_directory = p(tempdir, 'bundles')\n    makedirs(p(bundles_directory, 'example', '1'))\n    expected = p(bundles_directory, 'example', '2')\n    makedirs(expected)\n    makedirs(p(bundles_directory, 'example', '3'))\n    b = Bundle('example', version=2, bundles_directory=bundles_directory)\n    assert expected == b._get_bundle_directory()\n"
+}

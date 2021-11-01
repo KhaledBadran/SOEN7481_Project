@@ -1,0 +1,9 @@
+{
+    "functionName": "test_create_save_and_load_project",
+    "className": "OpenpnmIOTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_io_&_OpenpnmIOTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ws = op.Workspace()\nws.clear()\npn = op.network.Cubic(shape=[3, 3, 3])\nassert len(ws) == 1\nop.io.OpenpnmIO.save_project(project=pn.project, filename='proj.pnm')\nproj = op.io.OpenpnmIO.load_project('proj.pnm')\nassert isinstance(proj, list)\nassert len(ws) == 2\nos.remove('proj.pnm')\n"
+}

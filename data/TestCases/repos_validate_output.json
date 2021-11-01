@@ -1,0 +1,9 @@
+{
+    "functionName": "_validate_output",
+    "className": "TestPBstat",
+    "fileName": "/pierrepo_&_PBxplore/pbxplore_&_tests_&_test_regression.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "suffix_residue = ''\nif residue_min or residue_max:\n    suffix_residue = '.{}-{}'.format(residue_min, residue_max)\nsuffix_args = ''\nextension = '.png'\nif neq:\n    suffix_args = '.Neq'\nif mapdist:\n    suffix_args = '.map'\nif logo:\n    suffix_args = '.logo'\nif image_format is None:\n    extension = '.png'\nelse:\n    extension = '.' + image_format\nreference_full_path = os.path.join(REFDIR, reference + '.PB' + suffix_args +\n    suffix_residue)\noutput = os.path.join(str(out_run_dir), output)\noutput_full_path = output + '.PB' + suffix_args + suffix_residue\nif neq:\n    _assert_identical_files(output_full_path, reference_full_path)\nvalue, msg = _file_validity(output_full_path + extension)\nassert value, msg\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_transfer_function",
+    "className": null,
+    "fileName": "/dbehrlich_&_PsychRNN/test_&_backend_&_test_simulation.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "def my_relu(X):\n    return np.maximum(X, 0)\nreset_seeds(19846)\nmtc = MatchToCategory(dt=10, tau=100, T=2000, N_batch=50)\nparams = mtc.get_task_params()\nparams['name'] = 'test'\nparams['N_rec'] = 49\nrnn_model = Basic(params)\nx, _, _, _ = mtc.get_trial_batch()\nwith pytest.raises(UserWarning) as excinfo:\n    sim_model = BasicSimulator(rnn_model=rnn_model, transfer_function=my_relu)\nassert 'my_relu' in str(excinfo.value)\nrnn_model.destruct()\n"
+}

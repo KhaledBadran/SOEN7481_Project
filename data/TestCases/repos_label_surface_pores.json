@@ -1,0 +1,9 @@
+{
+    "functionName": "_label_surface_pores",
+    "className": "Cubic",
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_network_&_Cubic.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        \"\"\"\nhits = np.zeros_like(self.Ps, dtype=bool)\ndims = topotools.dimensionality(self)\nmn = np.amin(self['pore.coords'], axis=0)\nmx = np.amax(self['pore.coords'], axis=0)\nfor ax in [0, 1, 2]:\n    if dims[ax]:\n        hits += self['pore.coords'][:, (ax)] <= mn[ax]\n        hits += self['pore.coords'][:, (ax)] >= mx[ax]\nself['pore.surface'] = hits\n"
+}

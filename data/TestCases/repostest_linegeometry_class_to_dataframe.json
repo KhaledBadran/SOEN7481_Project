@@ -1,0 +1,9 @@
+{
+    "functionName": "test_linegeometry_class_to_dataframe",
+    "className": null,
+    "fileName": "/dss-extensions_&_OpenDSSDirect.py/tests_&_test_opendssdirect_no_ext_errors.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "string = \"\"\"Clear\n\n    New Circuit.test_circuit\n\n    New Wiredata.ACSR336 GMR=0.0255000 DIAM=0.7410000 RAC=0.3060000 NormAmps=530.0000 Runits=mi radunits=in gmrunits=ft\n    New Wiredata.ACSR1/0 GMR=0.0044600 DIAM=0.3980000 RAC=1.120000 NormAmps=230.0000 Runits=mi radunits=in gmrunits=ft\n\n\n    New Linegeometry.HC2_336_1neut_0Mess nconds=4 nphases=3\n    ~ cond=1 Wire=acsr336 x=-1.2909 h=13.716 units=m\n    ~ cond=2 Wire=acsr336 x=-0.1530096 h=4.1806368 units=ft\n    ~ cond=3 Wire=acsr336 x=0.5737 h=13.716 units=m\n    ~ cond=4 Wire= ACSR1/0 x=0 h=14.648 ! units=m ! neutral\n\n    New Line.Line1 Bus1=bus1.1.2.3 Bus2=bus2.1.2.3\n    ~ Geometry= HC2_336_1neut_0Mess\n    ~ Length=300 units=ft\n\n    Set Voltagebases=[4.8,34.5,115.0]\n    Calcvoltagebases\n    Solve\"\"\"\nimport opendssdirect as dss\ndss.run_command(string).strip()\nis_pandas_installed = dss.utils.is_pandas_installed\ndss.utils.is_pandas_installed = False\ndata = dss.utils.class_to_dataframe('linegeometry')\ndss.utils.is_pandas_installed = is_pandas_installed\nassert data == {'linegeometry.hc2_336_1neut_0mess': {'Seasons': '1',\n    'Ratings': ['0'], 'nconds': '4', 'nphases': '3', 'cond': '4', 'wire':\n    'ACSR1/0', 'x': [-1.2909, -0.1530096, 0.5737, 0.0], 'h': [13.716, \n    4.1806368, 13.716, 14.648], 'units': ['m', 'ft', 'm', 'm'], 'normamps':\n    '0', 'emergamps': '0', 'reduce': '', 'spacing': '', 'wires': [\n    'acsr336 acsr336 acsr336 ACSR1/0'], 'cncable': 'ACSR1/0', 'tscable':\n    'ACSR1/0', 'cncables': ['acsr336 acsr336 acsr336 ACSR1/0'], 'tscables':\n    ['acsr336 acsr336 acsr336 ACSR1/0'], 'like': ''}}\n"
+}

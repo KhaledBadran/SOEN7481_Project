@@ -1,0 +1,9 @@
+{
+    "functionName": "test_usb_switches",
+    "className": "TestToggleX",
+    "fileName": "/albertogeniola_&_MerossIot/tests_&_test_togglex.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "devices = self.meross_manager.find_devices(online_status=OnlineStatus.ONLINE)\nusb_dev = None\nusb_channel = None\nfor d in devices:\n    for c in d.channels:\n        if c.is_usb:\n            usb_dev = d\n            usb_channel = c\n            break\n    if usb_dev is not None:\n        break\nif usb_dev is None:\n    self.skipTest('Could not find any device with an usb channel')\n    return\nawait usb_dev.async_turn_off(channel=usb_channel.index)\nself.assertFalse(usb_dev.is_on(channel=usb_channel.index))\nawait asyncio.sleep(1)\nawait usb_dev.async_turn_on(channel=usb_channel.index)\nself.assertTrue(usb_dev.is_on(channel=usb_channel.index))\nunittest_run_loop"
+}

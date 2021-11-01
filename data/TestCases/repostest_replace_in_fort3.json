@@ -1,0 +1,9 @@
+{
+    "functionName": "test_replace_in_fort3",
+    "className": null,
+    "fileName": "/mortele_&_OccamTools/test_&_test_replace_in_fort3.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "repl = Fort3Replacement(property='atom', new=True, content=['Ar', 1.67, 0]\n    ), Fort3Replacement(property='atom', replace=True, content=['O', 16, 0]\n    ), Fort3Replacement(property='bond type', new=True, content=['Be', 'Be',\n    7.41, 5.42]), Fort3Replacement(property='bond type', replace=True,\n    content=['H', 'O', 3.1, 9]), Fort3Replacement(property='angle', new=\n    True, content=['H', 'H', 'H', 84.1, 5.9]), Fort3Replacement(property=\n    'angle', replace=True, content=['O', 'H', 'O', 16, 1])\nout_file = replace_in_fort3(file_name, None, *repl)\nwith open(out_file, 'r') as in_file:\n    lines = in_file.readlines()\natom_name, _, _, _, _, _, _, _, _ = _parse_fort_3_file(out_file)\nind = {val: key for key, val in atom_name.items()}\nexpected = [f\"{ind['Ar']} Ar 1.67 0.0\", f\"{ind['O']} O 16.0 0.0\",\n    f\"{ind['Be']} {ind['Be']} 7.41 5.42\", f\"{ind['H']} {ind['O']} 3.1 9.0\",\n    f\"{ind['H']} {ind['H']} {ind['H']} 84.1 5.9\",\n    f\"{ind['O']} {ind['H']} {ind['O']} 16.0 1.0\"]\nfor e in expected:\n    found = False\n    se = e.split()\n    for line in lines:\n        sline = line.split()\n        if len(se) == len(sline):\n            equal = True\n            for a, b in zip(se, sline):\n                equal = _check_equal(a, b) and equal\n            if equal is True:\n                found = True\n                break\n    assert found is True\ncaught = False\nrepl = Fort3Replacement(property='bond type', content=['H', 'H', 1, 1])\ntry:\n    out_file = replace_in_fort3(file_name, None, repl)\nexcept ValueError:\n    caught = True\nassert caught is True\nif os.path.exists(out_file) and os.path.isfile(out_file):\n    os.remove(out_file)\n"
+}

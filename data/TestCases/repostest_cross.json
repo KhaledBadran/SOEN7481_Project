@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cross",
+    "className": "TestHyperGraph",
+    "fileName": "/oberbichler_&_HyperGraph/tests_&_TestHyperGraph.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "graph = hg.HyperGraph()\nax, ay, az, bx, by, bz = graph.new_variables([1, 2, 3, 4, 5, 6])\na = np.array([ax, ay, az])\nb = np.array([bx, by, bz])\nresult = np.cross(a, b)\nassert_almost_equal(result[0].value, -3)\nassert_almost_equal(result[1].value, 6)\nassert_almost_equal(result[2].value, -3)\ngraph.compute(result[0])\ng = graph.g()\nh = graph.h()\nassert_array_almost_equal(g, [0, 6, -5, 0, -3, 2])\nassert_array_almost_equal(h, [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 1], [0, 0,\n    0, 0, -1, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]])\ngraph.compute(result[1])\ng = graph.g()\nh = graph.h()\nassert_array_almost_equal(g, [-6, 0, 4, 3, 0, -1])\nassert_array_almost_equal(h, [[0, 0, 0, 0, 0, -1], [0, 0, 0, 0, 0, 0], [0, \n    0, 0, 1, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]]\n    )\ngraph.compute(result[2])\ng = graph.g()\nh = graph.h()\nassert_array_almost_equal(g, [5, -4, 0, -2, 1, 0])\nassert_array_almost_equal(h, [[0, 0, 0, 0, 1, 0], [0, 0, 0, -1, 0, 0], [0, \n    0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]]\n    )\n"
+}

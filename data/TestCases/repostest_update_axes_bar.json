@@ -1,0 +1,9 @@
+{
+    "functionName": "test_update_axes_bar",
+    "className": "TestIterSubplots",
+    "fileName": "/Jhsmit_&_ColiCoords/test_&_test_iplot.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.fig, self.ax = iter_subplots()\ni = 10\nx = [np.arange(10) for j in range(i)]\nbars = [np.random.randint(0, 100, size=10) for j in range(i)]\nbc = self.ax.iter_bar(x, bars)\nhp = np.array([p.get_height() for p in self.ax.patches])\nself.assertArrayEqual(bars[0], hp)\nself.fig.on_next(None)\nhp = np.array([p.get_height() for p in self.ax.patches])\nself.assertArrayEqual(bars[1], hp)\nself.fig.on_prev(None)\nhp = np.array([p.get_height() for p in self.ax.patches])\nself.assertArrayEqual(bars[0], hp)\nself.fig.on_last(None)\nhp = np.array([p.get_height() for p in self.ax.patches])\nself.assertArrayEqual(bars[-1], hp)\nself.fig.on_first(None)\nhp = np.array([p.get_height() for p in self.ax.patches])\nself.assertArrayEqual(bars[0], hp)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_intspline_accuracy",
+    "className": null,
+    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_spline_integ.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "nx = 1024\nx_arr = np.linspace(-2, 2, nx)\ny_arr = np.array([yf(x_arr, p) for p in [2, 4]])\nint_spline = _spline_integrate(x_arr, y_arr, -1, 1)\nint_exact = np.array([(yf_int(1, p) - yf_int(-1, p)) for p in [2, 4]])\nassert np.all(np.fabs(int_spline / int_exact - 1) < 100000.0 - 5)\n"
+}

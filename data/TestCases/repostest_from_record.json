@@ -1,0 +1,9 @@
+{
+    "functionName": "test_from_record",
+    "className": null,
+    "fileName": "/Edinburgh-Genome-Foundry_&_GoldenHinges/tests_&_test_basics.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "seq = random_dna_sequence(7202, seed=123)\nrecord = sequence_to_biopython_record(seq)\nzone = 1900, len(seq) - 1900\nannotate_record(record, location=zone, label='Gene: acs', color='#8edfff')\nannotate_record(record, location=zone, label='@EnforceTranslation')\nannotate_record(record, location=(zone[0] - 1800, zone[0], 0), label=\n    '@AvoidChanges')\nannotate_record(record, location=(zone[1], 1800 + zone[1], 0), label=\n    '@AvoidChanges')\ncut_region_size = 70\nzones = [(x + int(200 * np.sin(x)), x + cut_region_size + int(200 * np.sin(\n    x) - 50 * np.cos(x)), 0) for x in range(50, len(seq), 1030)[1:]]\nfor zone in zones:\n    annotate_record(record, location=zone, label='!cut')\nselector = OverhangsSelector(gc_min=0.25, gc_max=0.75, differences=2)\nsolution = selector.cut_sequence(record, allow_edits=True,\n    include_extremities=True)\nassert solution is not None\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sparse2qubitunitaryotherqubitcheck",
+    "className": "Test_conjugated_kernel",
+    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_unitary.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.setUpClass()\nnum_qubits = 1\np = ql.Program('test_usingqx_sparse2qubitotherqubit_test', platform, num_qubits\n    )\nk = ql.Kernel('akernel', platform, num_qubits)\nmatrix = [0.30279949 - 0.60010283j, -0.58058628 - 0.45946559j, 0.04481146 -\n    0.73904059j, 0.64910478 + 0.17456782j]\nu1 = ql.Unitary('testname', matrix)\nu1.decompose()\nk.gate(u1, [0])\np.add_kernel(k)\np.compile()\nqx.set(os.path.join(output_dir, p.name + '_initialqasmwriter_out.qasm'))\nqx.execute()\nc0 = qx.get_state()\nself.assertAlmostEqual(helper_prob(matrix[0]), helper_regex(c0)[0], 5)\nself.assertAlmostEqual(helper_prob(matrix[1]), helper_regex(c0)[1], 5)\n"
+}

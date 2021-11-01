@@ -1,0 +1,9 @@
+{
+    "functionName": "test_write_partial",
+    "className": "TestKeyWrappingSpecification",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a partially defined KeyWrappingSpecification struct can be\n        written to a data stream.\n        \"\"\"\nkey_wrapping_specification = objects.KeyWrappingSpecification(wrapping_method\n    =enums.WrappingMethod.ENCRYPT, encryption_key_information=objects.\n    EncryptionKeyInformation(unique_identifier=\n    '100182d5-72b8-47aa-8383-4d97d512e98a', cryptographic_parameters=\n    attributes.CryptographicParameters(block_cipher_mode=enums.\n    BlockCipherMode.NIST_KEY_WRAP)))\nstream = BytearrayStream()\nkey_wrapping_specification.write(stream)\nself.assertEqual(len(self.partial_encoding), len(stream))\nself.assertEqual(str(self.partial_encoding), str(stream))\n"
+}

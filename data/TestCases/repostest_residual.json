@@ -1,0 +1,9 @@
+{
+    "functionName": "test_residual",
+    "className": "MixedPercolationTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_MixedPercolationTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "net = self.net\nphys = self.phys\nphys['throat.entry_pressure'] = np.arange(0, net.Nt, dtype=float)\nphys['pore.entry_pressure'] = 0.0\ndat_o = self.run_mp(False, False, False)\nT = 10\n[P1, P2] = self.net['throat.conns'][T]\nself.phase['pore.occupancy'] = False\nself.phase['throat.occupancy'] = False\nself.phase['pore.occupancy'][P1] = True\nself.phase['pore.occupancy'][P2] = True\ndat_p = self.run_mp(False, True, False, False)\nassert self.alg['pore.invasion_pressure'][P1] == -np.inf\nassert self.alg['pore.invasion_pressure'][P2] == -np.inf\nassert self.alg['throat.invasion_pressure'][T] == -np.inf\nassert ~np.all(dat_o.S_tot - dat_p.S_tot == 0)\n"
+}

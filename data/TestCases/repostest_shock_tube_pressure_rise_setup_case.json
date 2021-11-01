@@ -1,0 +1,9 @@
+{
+    "functionName": "test_shock_tube_pressure_rise_setup_case",
+    "className": "TestSimulation",
+    "fileName": "/kyleniemeyer_&_PyTeCK/pyteck_&_tests_&_test_simulation.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that shock tube case with pressure rise is set up properly.\n        \"\"\"\nfile_path = os.path.join('testfile_st2.yaml')\nfilename = pkg_resources.resource_filename(__name__, file_path)\nproperties = ChemKED(filename, skip_validation=True)\nsimulations = create_simulations(filename, properties)\nassert len(simulations) == 1\nmechanism_filename = 'gri30.xml'\nSPEC_KEY = {'H2': 'H2', 'O2': 'O2', 'N2': 'N2', 'Ar': 'AR'}\ninit_temp = 1264.2\ninit_pres = 2.18 * ct.one_atm\ngas = ct.Solution(mechanism_filename)\nsim = simulations[0]\nsim.setup_case(mechanism_filename, SPEC_KEY)\nassert sim.apparatus == 'shock tube'\nassert np.allclose(sim.time_end, 0.029157)\nassert np.allclose(sim.gas.T, init_temp)\nassert np.allclose(sim.gas.P, init_pres)\nmass_fracs = np.zeros(sim.gas.n_species)\nmass_fracs[sim.gas.species_index(SPEC_KEY['H2'])] = 0.00444\nmass_fracs[sim.gas.species_index(SPEC_KEY['O2'])] = 0.00556\nmass_fracs[sim.gas.species_index(SPEC_KEY['Ar'])] = 0.99\nassert np.allclose(sim.gas.X, mass_fracs)\nassert sim.n_vars == gas.n_species + 3\n[times, volumes] = simulation.create_volume_history(mechanism_filename,\n    init_temp, init_pres, 'H2:0.00444,O2:0.00566,AR:0.9899', 0.1 * 1000.0,\n    sim.time_end)\nvolumes = volumes / volumes[0]\ndVdt = simulation.first_derivative(times, volumes)\nvelocities = np.zeros(times.size)\nfor i, time in enumerate(times):\n    velocities[i] = sim.reac.walls[0].vdot(time)\nassert np.allclose(dVdt, velocities, rtol=0.001)\n"
+}

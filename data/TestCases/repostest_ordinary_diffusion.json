@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ordinary_diffusion",
+    "className": "DiffusiveConductanceTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_physics_&_DiffusiveConductanceTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.geo['throat.conduit_lengths.pore1'] = 0.15\nself.geo['throat.conduit_lengths.throat'] = 0.6\nself.geo['throat.conduit_lengths.pore2'] = 0.25\nmod = op.models.physics.diffusive_conductance.ordinary_diffusion\nself.phys.add_model(propname='throat.o_diffusive_conductance', model=mod)\nself.phys.regenerate_models()\nactual = self.phys['throat.o_diffusive_conductance'].mean()\nassert_approx_equal(actual, desired=1.0)\n"
+}

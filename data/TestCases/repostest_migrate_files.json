@@ -1,0 +1,9 @@
+{
+    "functionName": "test_migrate_files",
+    "className": "TestStructureDirectory",
+    "fileName": "/brettvanderwerff_&_Flaskerizer/flaskerizer_&_flaskerizer_src_&_tests_&_test_structure_directory.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"tests that migrate_files migrates the correct number of files from the Example bootstrap template directory\n         to the Test_application directory. This is done by walking through the Test_application directory with os.walk\n         and counting the number of files with a particular set of extensions (see extensions list) and comparing this\n         number to the number of files gotten from walking through a \"gold_standard\" respective Test_application_test_folder.\n        \"\"\"\nmigrate_dict = self.test.detect_static_files()\nself.test.migrate_files(migrate_dict)\nextensions = ['.js', '.css', '.jpg', '.png', 'gif', '.ico', '.otf', '.eot',\n    '.svg', '.ttf', '.woff', '.woff2']\ntest_dir = self.flaskerized_app_dir\ntest_file_list = []\ngold_standard_file_list = []\nfor dir in [test_dir, self.gold_standard_dir]:\n    for path, subdir, files in os.walk(dir):\n        for name in files:\n            for extension in extensions:\n                if name.endswith(extension):\n                    if dir == test_dir:\n                        test_file_list.append(name)\n                    if dir == self.gold_standard_dir:\n                        gold_standard_file_list.append(name)\nself.assertEqual(len(test_file_list), len(gold_standard_file_list))\n"
+}

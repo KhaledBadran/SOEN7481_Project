@@ -1,0 +1,9 @@
+{
+    "functionName": "remove_component",
+    "className": "Pipeline",
+    "fileName": "/konstantint_&_PassportEye/passporteye_&_util_&_pipeline.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Removes an existing component with a given name, invalidating all the values computed by\n        the previous component.\"\"\"\nif name not in self.components:\n    raise Exception('No component named %s' % name)\ndel self.components[name]\ndel self.depends[name]\nfor p in self.provides[name]:\n    del self.whoprovides[p]\n    self.invalidate(p)\ndel self.provides[name]\n"
+}

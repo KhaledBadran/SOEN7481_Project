@@ -1,0 +1,9 @@
+{
+    "functionName": "test_compute_decay_width_muon",
+    "className": "TestRambo",
+    "fileName": "/LoganAMorrison_&_Hazma/test_&_rambo_&_test_rambo.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test rambo decay width function on mu -> e nu nu.\n        \"\"\"\ndef msqrd_mu_to_enunu(momenta):\n    \"\"\"\n            Matrix element squared for mu -> e nu nu.\n            \"\"\"\n    pe = momenta[0]\n    pve = momenta[1]\n    pvmu = momenta[2]\n    pmu = sum(momenta)\n    return 64.0 * GF ** 2 * MDot(pe, pvmu) * MDot(pmu, pve)\nfsp_masses = np.array([me, 0.0, 0.0])\nrambo = compute_decay_width(fsp_masses, mmu, num_ps_pts=50000,\n    mat_elem_sqrd=msqrd_mu_to_enunu)\nr = me ** 2 / mmu ** 2\ncorr_fac = 1.0 - 8.0 * r + 8 * r ** 3 - r ** 4 - 12.0 * r ** 2 * np.log(r)\nanalytic = GF ** 2 * mmu ** 5 / (192.0 * np.pi ** 3) * corr_fac\nassert_allclose(rambo[0], analytic, rtol=0.005)\n"
+}

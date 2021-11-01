@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_profile",
+    "className": null,
+    "fileName": "/PlaidWeb_&_Authl/tests_&_handlers_&_test_indieauth.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "profile_html = \"\"\"\n    <link rel=\"authorization_endpoint\" href=\"https://endpoint.example/\">\n    <div class=\"h-card\">\n    <a class=\"u-url p-name\" href=\"https://example.foo/~user/\">larry</a>\n    <p class=\"e-note\">I'm <em>Larry</em>. And you're not. <span class=\"p-pronouns\">he/him</span></p>\n    <a class=\"u-email\" href=\"mailto:larry%40example.foo\">larry at example dot foo</a>\n    <img class=\"u-photo\" src=\"plop.jpg\">\n    </div>\"\"\"\nprofile_blob = {'avatar': 'http://profile.example/plop.jpg', 'bio':\n    \"I'm Larry. And you're not. he/him\", 'email': 'larry@example.foo',\n    'name': 'larry', 'pronouns': 'he/him', 'homepage':\n    'https://example.foo/~user/'}\nprofile_mock = requests_mock.get('http://profile.example', text=profile_html)\nprofile = indieauth.get_profile('http://profile.example')\nassert profile_mock.call_count == 1\nassert profile == profile_blob\nprofile_mock = requests_mock.get('https://cached.example', text=profile_html)\nhandler = indieauth.from_config({'INDIEAUTH_CLIENT_ID': 'poiu',\n    'INDIEAUTH_PENDING_TTL': 12345}, 'plop')\nassert not handler.handles_url('https://cached.example')\ninjected = requests.get('https://cached.example')\nassert handler.handles_page('https://cached.example', injected.headers,\n    BeautifulSoup(injected.text, 'html.parser'), injected.links)\nassert profile_mock.call_count == 1\nindieauth.get_profile('https://cached.example')\nassert profile_mock.call_count == 1\nassert profile == profile_blob\n"
+}

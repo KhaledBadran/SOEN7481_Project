@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pk2d_function",
+    "className": null,
+    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_pk2d.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test evaluation of Pk2D objects\n    \"\"\"\ncosmo = ccl.Cosmology(Omega_c=0.27, Omega_b=0.045, h=0.67, A_s=1e-10, n_s=0.96)\npsp = ccl.Pk2D(pkfunc=lpk2d, cosmo=cosmo)\nktest = 0.01\natest = 0.5\nptrue = pk2d(ktest, atest)\nphere = psp.eval(ktest, atest, cosmo)\nassert_almost_equal(np.fabs(phere / ptrue), 1.0, 6)\nktest = 1\natest = 0.5\nptrue = pk2d(ktest, atest)\nphere = psp.eval(ktest, atest, cosmo)\nassert_almost_equal(np.fabs(phere / ptrue), 1.0, 6)\nktest = np.logspace(-3, 1, 10)\nptrue = pk2d(ktest, atest)\nphere = psp.eval(ktest, atest, cosmo)\nassert_allclose(phere, ptrue, rtol=1e-06)\npsp = ccl.Pk2D(pkfunc=pk2d, is_logp=False, cosmo=cosmo)\nphere = psp.eval(ktest, atest, cosmo)\nassert_allclose(phere, ptrue, rtol=1e-06)\nkarr = np.logspace(-4, 2, 1000)\naarr = np.linspace(0.01, 1.0, 100)\nparr = np.array([pk2d(karr, a) for a in aarr])\npsp = ccl.Pk2D(a_arr=aarr, lk_arr=np.log(karr), pk_arr=parr, is_logp=False)\nphere = psp.eval(ktest, atest, cosmo)\nassert_allclose(phere, ptrue, rtol=1e-06)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_prime_subscriptions",
+    "className": null,
+    "fileName": "/fmfn_&_BayesianOptimization/tests_&_test_bayesian_optimization.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "optimizer = BayesianOptimization(target_func, PBOUNDS, random_state=1)\noptimizer._prime_subscriptions()\nfor event in DEFAULT_EVENTS:\n    assert all([isinstance(k, ScreenLogger) for k in optimizer._events[\n        event].keys()])\n    assert all([hasattr(k, 'update') for k in optimizer._events[event].keys()])\ntest_subscriber = 'test_subscriber'\ndef test_callback(event, instance):\n    pass\noptimizer = BayesianOptimization(target_func, PBOUNDS, random_state=1)\noptimizer.subscribe(event=Events.OPTIMIZATION_START, subscriber=\n    test_subscriber, callback=test_callback)\nassert all([(k == test_subscriber) for k in optimizer._events[Events.\n    OPTIMIZATION_START].keys()])\nassert all([(v == test_callback) for v in optimizer._events[Events.\n    OPTIMIZATION_START].values()])\noptimizer._prime_subscriptions()\nassert all([(k == test_subscriber) for k in optimizer._events[Events.\n    OPTIMIZATION_START].keys()])\nassert all([(v == test_callback) for v in optimizer._events[Events.\n    OPTIMIZATION_START].values()])\nassert optimizer._events[Events.OPTIMIZATION_STEP] == {}\nassert optimizer._events[Events.OPTIMIZATION_END] == {}\nwith pytest.raises(KeyError):\n    optimizer._events['other']\n"
+}

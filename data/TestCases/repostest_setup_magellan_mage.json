@@ -1,0 +1,9 @@
+{
+    "functionName": "test_setup_magellan_mage",
+    "className": null,
+    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_setups.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "droot = os.path.join(os.environ['PYPEIT_DEV'], 'RAW_DATA/magellan_mage/1x1')\ndroot += '/'\npargs = setup.parser(['-r', droot, '-s', 'magellan_mage'])\nsetup.main(pargs)\ncwd = os.getcwd()\nsetup_dir = os.path.join(cwd, 'setup_files')\nassert os.path.isdir(setup_dir), 'No setup_files directory created'\nfiles = glob.glob(os.path.join(setup_dir, 'magellan_mage*'))\next = [f.split('.')[-1] for f in files]\nassert np.all([(e in ext) for e in expected]\n    ), 'Did not find all setup file extensions: {0}'.format(expected)\nshutil.rmtree(setup_dir)\ndev_suite_required"
+}

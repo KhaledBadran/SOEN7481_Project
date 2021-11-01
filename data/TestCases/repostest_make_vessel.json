@@ -1,0 +1,9 @@
+{
+    "functionName": "test_make_vessel",
+    "className": null,
+    "fileName": "/TUDelft-CITG_&_OpenTNSim/tests_&_test_vessel_generator.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "path = nx.dijkstra_path(graph, list(graph)[0], list(graph)[-1])\nenv = simpy.Environment()\nenv.FG = graph\ngenerator = model.VesselGenerator(vessel_type, vessel_database)\ngenerated_vessel = generator.generate(env, 'Test vessel')\nrandom.seed(4)\nvessel_info = vessel_database.sample(n=1, random_state=int(1000 * random.\n    random()))\nvessel_data = {}\nvessel_data['env'] = env\nvessel_data['name'] = 'Test vessel'\nvessel_data['route'] = None\nvessel_data['geometry'] = None\nfor key in vessel_info:\n    if key == 'vessel_id':\n        vessel_data['id'] = vessel_info[key].values[0]\n    else:\n        vessel_data[key] = vessel_info[key].values[0]\ntest_vessel = vessel_type(**vessel_data)\nfor key in generated_vessel.__dict__:\n    if key != 'container' or key != 'resource':\n        generated_vessel.__dict__[key] == test_vessel.__dict__[key]\n"
+}

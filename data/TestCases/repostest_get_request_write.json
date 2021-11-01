@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_request_write",
+    "className": "TestRequestMessage",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_test_messages.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "prot_ver = contents.ProtocolVersion(1, 1)\nbatch_count = contents.BatchCount(1)\nreq_header = messages.RequestHeader(protocol_version=prot_ver, batch_count=\n    batch_count)\noperation = contents.Operation(enums.Operation.GET)\nrequest_payload = payloads.GetRequestPayload(unique_identifier=\n    '49a1ca88-6bea-4fb2-b450-7e58802c3038')\nbatch_item = messages.RequestBatchItem(operation=operation, request_payload\n    =request_payload)\nrequest_message = messages.RequestMessage(request_header=req_header,\n    batch_items=[batch_item])\nrequest_message.write(self.stream)\nresult = self.stream.read()\nlen_exp = len(self.get)\nlen_rcv = len(result)\nself.assertEqual(len_exp, len_rcv, self.msg.format('request message',\n    'write', len_exp, len_rcv))\nmsg = 'Bad request message write: encoding mismatch'\nself.assertEqual(self.get, result, msg)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_df_correction_locked_when_run_twice_without_force_flag",
+    "className": "TestDFCorrection",
+    "fileName": "/ornlneutronimaging_&_NeuNorm/tests_&_NeuNorm_&_normalizing_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"assert df corrction run only one time if force flag is False\"\"\"\nsample_path = self.data_path + '/tif/sample/'\nob_path = self.data_path + '/tif/ob/'\no_norm = Normalization()\no_norm.load(folder=sample_path, auto_gamma_filter=False)\no_norm.load(folder=ob_path, data_type='ob', auto_gamma_filter=False)\ndf_file_1 = self.data_path + '/tif/df/df002.tif'\ndf_file_2 = self.data_path + '/tif/df/df003.tif'\no_norm.load(file=df_file_1, data_type='df', auto_gamma_filter=False)\no_norm.load(file=df_file_2, data_type='df', auto_gamma_filter=False)\no_norm.df_correction()\n_sample_first_run = o_norm.data['sample']['data'][0]\n_ob_first_run = o_norm.data['ob']['data'][0]\no_norm.df_correction()\n_sample_second_run = o_norm.data['sample']['data'][0]\n_ob_second_run = o_norm.data['ob']['data'][0]\nassert (_sample_first_run == _sample_second_run).all()\nassert (_ob_first_run == _ob_second_run).all()\n"
+}

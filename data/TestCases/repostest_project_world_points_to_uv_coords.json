@@ -1,0 +1,9 @@
+{
+    "functionName": "test_project_world_points_to_uv_coords",
+    "className": "TestCamera",
+    "fileName": "/fechbmaster_&_3DNIRmapper/tests_&_test_camera.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "exp_p1 = np.array([610 / self.screen_width, (self.screen_height - 190) /\n    self.screen_height])\nexp_p2 = np.array([610 / self.screen_width, (self.screen_height - 890) /\n    self.screen_height])\nexp_p3 = np.array([1310 / self.screen_width, (self.screen_height - 890) /\n    self.screen_height])\nexp_p4 = np.array([1310 / self.screen_width, (self.screen_height - 190) /\n    self.screen_height])\nexp_array = np.array([exp_p2, exp_p3, exp_p4])\npix_p1 = self.cam.get_texture_coords_for_vertices(self.p1)\npix_p2 = self.cam.get_texture_coords_for_vertices(np.array([self.p2, self.\n    p3, self.p4]))\ntry:\n    np.testing.assert_almost_equal(pix_p1, exp_p1)\n    np.testing.assert_almost_equal(pix_p2, exp_array)\n    res = True\nexcept AssertionError as err:\n    res = False\n    print(err)\nself.assertTrue(res)\n"
+}

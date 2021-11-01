@@ -1,0 +1,9 @@
+{
+    "functionName": "test_shape_3d",
+    "className": "TestSRF",
+    "fileName": "/GeoStat-Framework_&_GSTools/tests_&_test_srf.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.cov_model.dim = 3\nsrf = SRF(self.cov_model, mean=self.mean, mode_no=self.mode_no)\nfield_str = srf((self.x_grid, self.y_grid, self.z_grid), seed=self.seed,\n    mesh_type='structured')\nfield_unstr = srf((self.x_tuple, self.y_tuple, self.z_tuple), seed=987654,\n    mesh_type='unstructured')\nself.assertEqual(field_str.shape, (len(self.x_grid), len(self.y_grid), len(\n    self.z_grid)))\nself.assertEqual(field_unstr.shape, (len(self.x_tuple),))\n"
+}

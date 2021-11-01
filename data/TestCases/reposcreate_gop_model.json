@@ -1,0 +1,9 @@
+{
+    "functionName": "create_gop_model",
+    "className": null,
+    "fileName": "/viebboy_&_PyGOP/test_&_layers_&_test_gop.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "op_set = gop_operators.get_random_op_set()\nregularizer = random.choice([None, 0.0001])\nconstraint = random.choice([None, 4.0])\ntrainable = random.choice([True, False])\ninputs = Input((INPUT_DIM,))\nhiddens = GOP(units=3, op_set=op_set, regularizer=regularizer, constraint=\n    constraint, trainable=trainable, name='GOP')(inputs)\noutputs = Dense(OUTPUT_DIM)(hiddens)\nmodel = Model(inputs=inputs, outputs=outputs)\nmodel.compile(optimizer='adam', loss='mse', metrics=['mse'])\nreturn model, trainable\n"
+}

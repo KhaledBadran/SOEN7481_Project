@@ -1,0 +1,9 @@
+{
+    "functionName": "test_layer_from_shape_valid_get_output_shape",
+    "className": "TestGetOutputShape_MergeLayer",
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_helper.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "layer = layer_from_shape\ninput_shapes = {layer: (4, 5, 6)}\nassert get_output_shape(layer, input_shapes) is input_shapes[layer]\ninput_shapes = {None: (4, 5, 6)}\nlayer.get_output_shape_for = Mock()\nassert get_output_shape(layer, input_shapes\n    ) is layer.get_output_shape_for.return_value\nlayer.get_output_shape_for.assert_called_with([input_shapes[None], layer.\n    input_layers[1].shape])\n"
+}

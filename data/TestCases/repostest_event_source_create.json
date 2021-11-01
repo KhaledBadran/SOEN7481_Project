@@ -1,0 +1,9 @@
+{
+    "functionName": "test_event_source_create",
+    "className": "test_Lambda",
+    "fileName": "/pbx-gs_&_OSBot-AWS/tests_&_unit_&_apis_&_test_Lambda.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with Temp_Lambda() as temp_lambda:\n    with Temp_Queue() as temp_queue:\n        event_source_arn = temp_queue.queue.arn()\n        lambda_name = temp_lambda.lambda_name\n        aws_lambda = temp_lambda.aws_lambda\n        queue = temp_queue.queue\n        aws_lambda.configuration_update(Timeout=10)\n        queue.policy_add_sqs_permissions_to_lambda_role(lambda_name)\n        sleep(2)\n        aws_lambda.event_source_create(event_source_arn, lambda_name)\n        queue.policy_remove_sqs_permissions_to_lambda_role(lambda_name)\n"
+}

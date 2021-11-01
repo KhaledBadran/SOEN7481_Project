@@ -1,0 +1,9 @@
+{
+    "functionName": "test_Normalization_tables",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Geometry_&_Instrument.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "Instr = Instrument(fileName='Data/CAMEA_Updated.xml')\nInstr.initialize()\nNF = 'Data/camea2018n000038.hdf'\ntry:\n    Instr.generateCalibration(Vanadiumdatafile=NF, savelocation='Data/',\n        plot=False, tables=[])\n    assert False\nexcept AttributeError:\n    assert True\ntry:\n    Instr.generateCalibration(Vanadiumdatafile=NF, savelocation='Data/',\n        plot=False, tables=['Nothing?'])\n    assert False\nexcept AttributeError:\n    assert True\nif not quick == True:\n    Instr.generateCalibration(Vanadiumdatafile=NF, savelocation='Data/',\n        plot=False, tables=[1, 3, 8])\nelse:\n    Instr.generateCalibration(Vanadiumdatafile=NF, savelocation='Data/',\n        plot=False, tables=[1])\npytest.mark.unit"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "build",
+    "className": "BCCToyModel",
+    "fileName": "/mesonepigreco_&_CellConstructor/scripts_&_cellconstructor_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Build the dynamical matrix\n        and the structure\n        \"\"\"\nself.structure = CC.Structure.Structure(self.N_atoms)\nself.structure.coords[(1), :] = 0.51 * self.lattice_param\nself.structure.has_unit_cell = True\nself.structure.unit_cell = np.eye(3) * self.lattice_param\nself.structure.atoms[0] = 'Na'\nself.structure.atoms[1] = 'Cl'\nself.structure.masses = {'Na': 20953.89349715178, 'Cl': 302313.4327204893}\nself.dynmat = CC.Phonons.Phonons(self.structure)\nself.dynmat.dynmats[0] = np.random.uniform(size=(3 * self.N_atoms, 3 * self\n    .N_atoms))\nself.dynmat.dynmats[0] += self.dynmat.dynmats[0].T\nself.dynmat.Symmetrize()\nself.dynmat.ForcePositiveDefinite()\nself.dynmat.effective_charges = self.z0\n"
+}

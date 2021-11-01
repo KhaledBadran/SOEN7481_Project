@@ -1,0 +1,9 @@
+{
+    "functionName": "test_estimate_work",
+    "className": "TestGPS",
+    "fileName": "/lukeWaninger_&_GSCAP/tests_&_test_gps.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "t = gps.estimate_work_location(self.gps_records)\nself.assertTrue(t[0] is None and len(t[1]) == 0)\nr = pd.concat([self.gps_records for i in range(100)], axis=0, sort=False)\nr['ts'] = dt.datetime(year=2005, month=1, day=3, hour=12, minute=4)\nt = gps.estimate_work_location(r)\nself.assertTrue(t[0]['cid'] == 'work')\nself.assertTrue(t[0]['lat'] == 40.00015)\nself.assertTrue(t[0]['lon'] == -45.0)\n"
+}

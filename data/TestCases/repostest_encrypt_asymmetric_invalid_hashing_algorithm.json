@@ -1,0 +1,9 @@
+{
+    "functionName": "test_encrypt_asymmetric_invalid_hashing_algorithm",
+    "className": "TestCryptographyEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_crypto_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the right error is raised when an invalid hashing algorithm\n        is specified.\n        \"\"\"\nengine = crypto.CryptographyEngine()\nargs = enums.CryptographicAlgorithm.RSA, b'', b''\nkwargs = {'padding_method': enums.PaddingMethod.OAEP, 'hashing_algorithm':\n    'invalid'}\nself.assertRaisesRegex(exceptions.InvalidField,\n    \"The hashing algorithm 'invalid' is not supported for asymmetric encryption.\"\n    , engine.encrypt, *args, **kwargs)\n"
+}

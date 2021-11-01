@@ -1,0 +1,9 @@
+{
+    "functionName": "setup_classifiers",
+    "className": null,
+    "fileName": "/Menelau_&_DESlib/deslib_&_tests_&_test_integration_dfp.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "rng = np.random.RandomState(654321)\nX, y = make_classification(n_classes=2, n_samples=1000, weights=[0.2, 0.8],\n    random_state=rng)\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33,\n    random_state=rng)\nscalar = StandardScaler()\nX_train = scalar.fit_transform(X_train)\nX_test = scalar.transform(X_test)\nX_train, X_dsel, y_train, y_dsel = train_test_split(X_train, y_train,\n    test_size=0.5, random_state=rng)\npool_classifiers = RandomForestClassifier(n_estimators=10, random_state=rng,\n    max_depth=10)\npool_classifiers.fit(X_train, y_train)\nreturn pool_classifiers, X_dsel, y_dsel, X_test, y_test\n"
+}

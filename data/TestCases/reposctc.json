@@ -1,0 +1,9 @@
+{
+    "functionName": "ctc",
+    "className": null,
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_models_&_geometry_&_throat_length.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Calculate throat length assuming point-like pores, i.e. center-to-center\n    distance between pores. Also, this model assumes that pores and throat\n    centroids are colinear.\n\n    Parameters\n    ----------\n    target : OpenPNM Object\n        The object which this model is associated with. This controls the\n        length of the calculated array, and also provides access to other\n        necessary properties.\n\n    Returns\n    -------\n    value : NumPy ndarray\n        Array containing throat length values.\n\n    \"\"\"\nnetwork = target.project.network\nthroats = network.map_throats(throats=target.Ts, origin=target)\ncn = network['throat.conns'][throats]\nC1 = network['pore.coords'][cn[:, (0)]]\nC2 = network['pore.coords'][cn[:, (1)]]\nvalue = _norm(C1 - C2, axis=1)\nreturn value\n"
+}

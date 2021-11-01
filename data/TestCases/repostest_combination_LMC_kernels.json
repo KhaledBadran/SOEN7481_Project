@@ -1,0 +1,9 @@
+{
+    "functionName": "test_combination_LMC_kernels",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_kernels_&_test_kernels.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "N, D, P = 100, 3, 2\nkernel_list1 = [Linear(active_dims=[1]), SquaredExponential()]\nL1 = len(kernel_list1)\nkernel_list2 = [SquaredExponential(), Linear(), Linear()]\nL2 = len(kernel_list2)\nk1 = LinearCoregionalization(kernel_list1, np.random.randn(P, L1))\nk2 = LinearCoregionalization(kernel_list2, np.random.randn(P, L2))\nkernel = k1 + k2\nX = np.random.randn(N, D)\nK1 = k1(X, full_cov=True)\nK2 = k2(X, full_cov=True)\nK = kernel(X, full_cov=True)\nassert K.shape == [N, P, N, P]\nnp.testing.assert_allclose(K, K1 + K2)\n"
+}

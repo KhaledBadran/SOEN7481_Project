@@ -1,0 +1,9 @@
+{
+    "functionName": "test_remove_volume_from_srdf_storage_group",
+    "className": "CITestProvisioning",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Tests adding a volume to a storage group that is replicated\"\"\"\nsg_name, srdf_group_number, device_id, remote_volume = self.create_rdf_sg()\nself.provisioning.add_new_volume_to_storage_group(storage_group_id=sg_name,\n    vol_size=1, num_vols=1, cap_unit='GB', remote_array_1_id=self.conn.\n    remote_array, remote_array_1_sgs=[sg_name])\nstorage_group_details = self.provisioning.get_storage_group(storage_group_name\n    =sg_name)\nself.assertEqual(2, storage_group_details[constants.NUM_OF_VOLS])\nself.provisioning.remove_volume_from_storage_group(storage_group_id=sg_name,\n    vol_id=device_id, remote_array_1_id=self.conn.remote_array,\n    remote_array_1_sgs=[sg_name])\nstorage_group_details = self.provisioning.get_storage_group(storage_group_name\n    =sg_name)\nself.assertEqual(1, storage_group_details[constants.NUM_OF_VOLS])\n"
+}

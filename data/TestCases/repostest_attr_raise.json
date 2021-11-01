@@ -1,0 +1,9 @@
+{
+    "functionName": "test_attr_raise",
+    "className": "NamespaceTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_namespace.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "l = lookup.TemplateLookup()\nl.put_string('foo.html',\n    \"\"\"\n            <%def name=\"foo()\">\n            </%def>\n        \"\"\")\nl.put_string('bar.html',\n    \"\"\"\n        <%namespace name=\"foo\" file=\"foo.html\"/>\n\n        ${foo.notfoo()}\n        \"\"\"\n    )\nself.assertRaises(AttributeError, l.get_template('bar.html').render)\n"
+}

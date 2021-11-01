@@ -1,0 +1,9 @@
+{
+    "functionName": "test_PlotA3A4",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/TutorialsDepricated_&_PlotA3A4.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "import matplotlib.pyplot as plt\nimport numpy as np\nFile = 'Data/camea2018n000137.hdf'\nDS = DataSet.DataSet(dataFiles=File)\nDS.convertDataFile()\nfiles = DS.convertedFiles\nplanes2 = list(np.arange(64).reshape(8, 8))\nax = [DS.createRLUAxes() for _ in range(len(planes2))]\nax2 = DS.plotA3A4(files, planes=planes2, ax=ax)\ncounter = 0\nfor ax in ax2:\n    fig = ax.get_figure()\n    fig.set_size_inches(10.5, 10.5, forward=True)\n    if save:\n        fig.savefig('A3A4/{:03d}.png'.format(counter), format='png')\n    counter += 1\nif save:\n    plt.show()\nelif os.path.exists('Data/camea2018n000137.nxs'):\n    os.remove('Data/camea2018n000137.nxs')\n"
+}

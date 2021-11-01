@@ -1,0 +1,9 @@
+{
+    "functionName": "test_install_bdist",
+    "className": null,
+    "fileName": "/Pebaz_&_Nimporter/tests_&_test_installation.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Make sure that the wheel can be installed by Pip\"\"\"\nwith nimporter.cd('tests/proj1'):\n    subprocess.Popen(f'{PYTHON} setup.py bdist_wheel'.split()).wait()\n    dist = Path('dist')\n    build = Path('build')\n    egg = Path('project1.egg-info')\n    try:\n        assert dist.exists()\n        assert build.exists()\n        assert egg.exists()\n        targets = list(Path('dist').glob('project1*.whl'))\n        assert len(targets) == 1\n        wheel = targets[0]\n        assert wheel.exists()\n        subprocess.Popen(f'{PIP} install {wheel}'.split()).wait()\n    finally:\n        shutil.rmtree(str(dist.absolute()))\n        shutil.rmtree(str(build.absolute()))\n        shutil.rmtree(str(egg.absolute()))\nwith nimporter.cd('../..'):\n    try:\n        import proj1\n        assert proj1\n        import proj1.performance\n        assert proj1.performance\n        import proj1.lib1\n        assert proj1.lib1\n        assert proj1.foo\n        assert proj1.bar\n        assert proj1.baz\n        assert proj1.baz() == 1\n    except Exception as e:\n        warnings.warn(str(e))\n    if sys.platform != 'win32':\n        subprocess.Popen(f'{PIP} uninstall project1 -y'.split()).wait()\npytest.mark.slow_integration_test"
+}

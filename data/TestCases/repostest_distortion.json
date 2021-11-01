@@ -1,0 +1,9 @@
+{
+    "functionName": "test_distortion",
+    "className": null,
+    "fileName": "/apetri_&_LensTools/lenstools_&_tests_&_test_ray.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "fig, ax = plt.subplots(1, 2, figsize=(16, 8))\nimage_unlensed = plt.imread(os.path.join(dataExtern(), 'lensing/lens.png'))[:,\n    :, (0)]\npos_original = np.array(np.where(image_unlensed > 0)\n    ) * 2.0 / image_unlensed.shape[0] * deg\npos_original = np.roll(pos_original, 1, axis=0)\npos_original[1] *= -1\npos_original[1] += 2.0 * deg\nax[0].scatter(pos_original[0], pos_original[1])\nax[0].set_xlabel('$x$({0})'.format(pos_original.unit.to_string()))\nax[0].set_ylabel('$y$({0})'.format(pos_original.unit.to_string()))\nax[0].set_title('Original')\npos_apparent = tracer.shootForward(pos_original, z=2.0)\nax[1].scatter(pos_apparent[0], pos_apparent[1])\nax[1].set_xlabel('$x$({0})'.format(pos_original.unit.to_string()))\nax[1].set_ylabel('$y$({0})'.format(pos_original.unit.to_string()))\nax[1].set_title('Lensed')\nfig.savefig('lens_distortion.png')\n"
+}

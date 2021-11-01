@@ -1,0 +1,9 @@
+{
+    "functionName": "test_authentication_challenge_error",
+    "className": null,
+    "fileName": "/RobertoPrevato_&_BlackSheep/tests_&_test_auth.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "error = AuthenticateChallenge(scheme, realm, parameters)\nheader = error.get_header()\nassert header[0] == b'WWW-Authenticate'\nassert header[1] == expected_value\npytest.mark.parametrize('scheme,realm,parameters,expected_value', [['Basic',\n    None, None, b'Basic'], ['Bearer', 'Mushrooms Kingdom', None,\n    b'Bearer realm=\"Mushrooms Kingdom\"'], ['Bearer', 'Mushrooms Kingdom', {\n    'title': 'Something', 'error': 'Invalid access token',\n    'error_description': 'access token expired'},\n    b'Bearer realm=\"Mushrooms Kingdom\", title=\"Something\", error=\"Invalid access token\", error_description=\"access token expired\"'\n    ]])"
+}

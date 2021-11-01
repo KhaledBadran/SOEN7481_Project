@@ -1,0 +1,9 @@
+{
+    "functionName": "test_unrecognized_attributes",
+    "className": "TestAttributes",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a TypeError is raised when an unrecognized attribute is\n        included in the attribute list. Note that this unrecognized attribute\n        is a valid PyKMIP object derived from Base, it just isn't an attribute.\n        \"\"\"\nkwargs = {'attributes': [primitives.Enumeration(enums.WrappingMethod, enums\n    .WrappingMethod.ENCRYPT, enums.Tags.WRAPPING_METHOD)]}\nself.assertRaisesRegex(TypeError, 'Item 1 must be a supported attribute.',\n    objects.Attributes, **kwargs)\nattrs = objects.Attributes()\nargs = attrs, 'attributes', [primitives.Enumeration(enums.\n    CryptographicAlgorithm, enums.CryptographicAlgorithm.AES, enums.Tags.\n    CRYPTOGRAPHIC_ALGORITHM), primitives.Enumeration(enums.WrappingMethod,\n    enums.WrappingMethod.ENCRYPT, enums.Tags.WRAPPING_METHOD)]\nself.assertRaisesRegex(TypeError, 'Item 2 must be a supported attribute.',\n    setattr, *args)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test__acquire_num_candidates_gt_one",
+    "className": "TestPredictedScoreAcquisition",
+    "fileName": "/HDI-Project_&_BTB/tests_&_tuning_&_acquisition_&_test_predicted_score.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "candidates = np.array([[1, 1], [2, 2], [3, 3], [4, 4]])\ninstance = MagicMock()\ninstance._get_max_candidates.return_value = 'max_candidates'\nresult = PredictedScoreAcquisition._acquire(instance, candidates,\n    num_candidates=2)\ncalled_with = instance._get_max_candidates.call_args_list\nexpected_call = [call(np.array([1, 2, 3, 4]), 2)]\nassert_called_with_np_array(called_with, expected_call)\nassert result == 'max_candidates'\n"
+}

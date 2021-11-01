@@ -1,0 +1,9 @@
+{
+    "functionName": "test_plot_tiles",
+    "className": null,
+    "fileName": "/ECCO-GROUP_&_ECCOv4-py/ecco_v4_py_&_test_&_test_tile_plot.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Run through various options and make sure nothing is broken\"\"\"\nnparr = get_test_array(is_xda=False)\nxda = get_test_array(is_xda=True)\nfor arr in [nparr, xda]:\n    ecco.plot_tiles(arr, **vdict)\n    plt.close()\npytest.mark.parametrize('vdict', [{}, {'cmap': 'plasma'}, {'layout':\n    'latlon', 'rotate_to_latlon': False}, {'layout': 'latlon',\n    'rotate_to_latlon': False, 'Arctic_cap_tile_location': 5}, {'layout':\n    'latlon', 'rotate_to_latlon': False, 'Arctic_cap_tile_location': 7}, {\n    'layout': 'latlon', 'rotate_to_latlon': False,\n    'Arctic_cap_tile_location': 10}, {'show_colorbar': True}, {\n    'show_colorbar': True, 'show_cbar_label': True, 'cbar_label':\n    'something good'}, {'show_tile_labels': False}, {'fig_size': 20}, {\n    'less_output': False}])"
+}

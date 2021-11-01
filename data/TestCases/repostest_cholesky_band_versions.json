@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cholesky_band_versions",
+    "className": null,
+    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_bspline.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from pypeit.bspline.utilpy import cholesky_band as cholesky_band_py\nfrom pypeit.bspline.utilc import cholesky_band as cholesky_band_c\nd = np.load(data_path('cholesky_band_l.npz'))\npytime = time.perf_counter()\ne, l = cholesky_band_py(d['l'], mininf=d['mininf'])\npytime = time.perf_counter() - pytime\nctime = time.perf_counter()\ne, _l = cholesky_band_c(d['l'], mininf=d['mininf'])\nctime = time.perf_counter() - ctime\nassert ctime < pytime, 'C is less efficient!'\nassert np.allclose(l, _l), 'Differences in cholesky_band'\nbspline_ext_required"
+}

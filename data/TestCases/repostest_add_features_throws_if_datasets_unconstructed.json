@@ -1,0 +1,9 @@
+{
+    "functionName": "test_add_features_throws_if_datasets_unconstructed",
+    "className": "TestBasic",
+    "fileName": "/microsoft_&_LightGBM/tests_&_python_package_test_&_test_basic.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "X1 = np.random.random((100, 1))\nX2 = np.random.random((100, 1))\nwith self.assertRaises(ValueError):\n    d1 = lgb.Dataset(X1)\n    d2 = lgb.Dataset(X2)\n    d1.add_features_from(d2)\nwith self.assertRaises(ValueError):\n    d1 = lgb.Dataset(X1).construct()\n    d2 = lgb.Dataset(X2)\n    d1.add_features_from(d2)\nwith self.assertRaises(ValueError):\n    d1 = lgb.Dataset(X1)\n    d2 = lgb.Dataset(X2).construct()\n    d1.add_features_from(d2)\n"
+}

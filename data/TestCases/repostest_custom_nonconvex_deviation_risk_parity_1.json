@@ -1,0 +1,9 @@
+{
+    "functionName": "test_custom_nonconvex_deviation_risk_parity_1",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_custom_objectives.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ef = setup_efficient_frontier()\ndef deviation_risk_parity(w, cov_matrix):\n    diff = w * np.dot(cov_matrix, w) - (w * np.dot(cov_matrix, w)).reshape(\n        -1, 1)\n    return (diff ** 2).sum().sum()\nw = ef.nonconvex_objective(deviation_risk_parity, ef.cov_matrix)\nassert isinstance(w, dict)\nassert set(w.keys()) == set(ef.tickers)\nnp.testing.assert_almost_equal(ef.weights.sum(), 1)\n"
+}

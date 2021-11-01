@@ -1,0 +1,9 @@
+{
+    "functionName": "readDetFile",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Geometry_&_Instrument.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "detdata = np.zeros(pixels, dtype='int32')\nf = open(fname, 'r')\npsddata = f.readlines()\nf.close()\nidx = 0\na3 = 0\na4 = 0\nei = 0\nfor line in psddata:\n    if line.find('EI=') > 0 or line.find(' SourceE=') > 0:\n        l = line.split('=')\n        ei = float(l[1])\n    if line.find('A3=') > 0:\n        l = line.split('=')\n        a3 = float(l[1])\n    if line.find('A4=') > 0:\n        l = line.split('=')\n        a4 = float(l[1])\n    if line.find('variables:') > 0:\n        idx = idx + 1\n        break\n    idx = idx + 1\ndetind = 0\nfor i in range(idx + 1, pixels + idx - 1):\n    l = psddata[i].split()\n    detdata[detind] = int(round(factor * float(l[1])))\n    detind = detind + 1\nreturn detdata, a3, a4, ei\n"
+}

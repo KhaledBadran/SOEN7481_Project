@@ -1,0 +1,9 @@
+{
+    "functionName": "test_train_test_split_list_input",
+    "className": null,
+    "fileName": "/goeckslab_&_Galaxy-ML/galaxy_ml_&_tests_&_test_model_validations.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "X = np.ones(7)\ny1 = ['1'] * 4 + ['0'] * 3\ny2 = np.hstack((np.ones(4), np.zeros(3)))\ny3 = y2.tolist()\nfor shuffle in (None, 'simple', 'stratified', 'group'):\n    X_train1, X_test1, y_train1, y_test1 = train_test_split(X, y1,\n        random_state=0, labels=y1 if shuffle in ('stratified', 'group') else\n        None)\n    X_train2, X_test2, y_train2, y_test2 = train_test_split(X, y2,\n        random_state=0, labels=y2 if shuffle in ('stratified', 'group') else\n        None)\n    X_train3, X_test3, y_train3, y_test3 = train_test_split(X, y3,\n        random_state=0, labels=y3 if shuffle in ('stratified', 'group') else\n        None)\n    np.testing.assert_equal(X_train1, X_train2)\n    np.testing.assert_equal(y_train2, y_train3)\n    np.testing.assert_equal(X_test1, X_test3)\n    np.testing.assert_equal(y_test3, y_test2)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_calculate_interval_without_white",
+    "className": "TestSchedule",
+    "fileName": "/named-data_&_PyNDN2/tests_&_unit_tests_&_test_schedule.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "schedule = Schedule()\ninterval1 = RepetitiveInterval(fromIsoString('20150825T000000'),\n    fromIsoString('20150827T000000'), 5, 10, 2, RepetitiveInterval.\n    RepeatUnit.DAY)\ninterval2 = RepetitiveInterval(fromIsoString('20150825T000000'),\n    fromIsoString('20150827T000000'), 6, 8, 1, RepetitiveInterval.\n    RepeatUnit.DAY)\nschedule.addBlackInterval(interval1)\nschedule.addBlackInterval(interval2)\ntimePoint1 = fromIsoString('20150825T063000')\nresult = schedule.getCoveringInterval(timePoint1)\nself.assertEqual(result.isPositive, False)\nself.assertEqual(result.interval.isEmpty(), False)\nself.assertEqual(toIsoString(result.interval.getStartTime()), '20150825T050000'\n    )\nself.assertEqual(toIsoString(result.interval.getEndTime()), '20150825T100000')\ntimePoint2 = fromIsoString('20150825T013000')\nresult = schedule.getCoveringInterval(timePoint2)\nself.assertEqual(result.isPositive, False)\nself.assertEqual(result.interval.isEmpty(), False)\nself.assertEqual(toIsoString(result.interval.getStartTime()), '20150825T000000'\n    )\nself.assertEqual(toIsoString(result.interval.getEndTime()), '20150826T000000')\n"
+}

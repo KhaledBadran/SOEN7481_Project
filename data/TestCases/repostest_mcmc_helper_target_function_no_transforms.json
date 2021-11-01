@@ -1,0 +1,9 @@
+{
+    "functionName": "test_mcmc_helper_target_function_no_transforms",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_optimizers_&_test_mcmc.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Verifies the objective for a set of priors where no transforms are set.\n    \"\"\"\ndata = build_data()\nmodel = build_model(data)\nexpected_log_prior = 0.0\nprior_width = 200.0\nhmc_helper = gpflow.optimizers.SamplingHelper(model.log_posterior_density,\n    model.trainable_parameters)\nfor param in model.trainable_parameters:\n    param.transform = None\n    low_value = -100\n    high_value = low_value + prior_width\n    param.prior = Uniform(low=np.float64(low_value), high=np.float64(\n        high_value))\n    param.prior_on = prior_on\n    prior_density = 1 / prior_width\n    expected_log_prior += np.log(prior_density)\nlog_marginal_likelihood = model.log_marginal_likelihood().numpy()\nexpected_log_prob = log_marginal_likelihood + expected_log_prior\ntarget_log_prob_fn = hmc_helper.target_log_prob_fn\nnp.testing.assert_allclose(target_log_prob_fn(), expected_log_prob)\nlog_prob, grad_fn = target_log_prob_fn.__original_wrapped__()\ngrad, nones = grad_fn(1, [None] * len(model.trainable_parameters))\nassert len(grad) == len(model.trainable_parameters)\nassert nones == [None] * len(model.trainable_parameters)\npytest.mark.parametrize('prior_on', ['constrained', 'unconstrained'])"
+}

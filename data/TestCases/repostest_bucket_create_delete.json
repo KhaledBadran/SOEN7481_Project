@@ -1,0 +1,9 @@
+{
+    "functionName": "test_bucket_create_delete",
+    "className": "Test_S3",
+    "fileName": "/pbx-gs_&_OSBot-AWS/tests_&_unit_&_apis_&_test_S3.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "bucket_name = random_text('temp_bucket').lower().replace('_', '-')\nbucket_url = 'http://{0}.s3.amazonaws.com/'.format(bucket_name)\nregion = 'eu-west-2'\nassert self.s3.bucket_exists(bucket_name) is False\nassert self.s3.bucket_create(bucket_name, region) == {'status': 'ok',\n    'data': bucket_url}\nassert self.s3.bucket_exists(bucket_name) is True\nassert self.s3.bucket_delete(bucket_name) is True\nassert self.s3.bucket_exists(bucket_name) is False\n"
+}

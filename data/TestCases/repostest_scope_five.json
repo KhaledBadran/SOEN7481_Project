@@ -1,0 +1,9 @@
+{
+    "functionName": "test_scope_five",
+    "className": "ScopeTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_def.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"test that variables are pulled from\n        'enclosing' scope before context.\"\"\"\nt = Template(\n    \"\"\"\n            <%def name=\"enclosing()\">\n            <%\n                x = 5\n            %>\n            <%def name=\"a()\">\n                this is a. x is ${x}.\n            </%def>\n\n            <%def name=\"b()\">\n                <%\n                    x = 9\n                %>\n                this is b. x is ${x}.\n                calling a. ${a()}\n            </%def>\n\n            ${b()}\n            </%def>\n            ${enclosing()}\n\"\"\"\n    )\neq_(flatten_result(t.render()),\n    'this is b. x is 9. calling a. this is a. x is 5.')\n"
+}

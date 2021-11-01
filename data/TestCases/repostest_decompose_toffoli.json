@@ -1,0 +1,9 @@
+{
+    "functionName": "test_decompose_toffoli",
+    "className": "Test_controlled_kernel",
+    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_controlled_kernel.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "config_fn = os.path.join(curdir, 'test_cfg_none_simple.json')\nplatform = ql.Platform('platform_none', config_fn)\nnum_qubits = 4\np = ql.Program('test_decompose_toffoli', platform, num_qubits)\nk = ql.Kernel('kernel1', platform, num_qubits)\nk.hadamard(2)\nk.toffoli(0, 1, 2)\nk.hadamard(2)\np.add_kernel(k)\nql.set_option('decompose_toffoli', 'NC')\np.compile()\n"
+}

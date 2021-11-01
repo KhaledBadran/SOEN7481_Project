@@ -1,0 +1,9 @@
+{
+    "functionName": "test_clone_and_property",
+    "className": "TestSklearn",
+    "fileName": "/microsoft_&_LightGBM/tests_&_python_package_test_&_test_sklearn.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "X, y = load_boston(return_X_y=True)\ngbm = lgb.LGBMRegressor(n_estimators=10, silent=True)\ngbm.fit(X, y, verbose=False)\ngbm_clone = clone(gbm)\nself.assertIsInstance(gbm.booster_, lgb.Booster)\nself.assertIsInstance(gbm.feature_importances_, np.ndarray)\nX, y = load_digits(n_class=2, return_X_y=True)\nclf = lgb.LGBMClassifier(n_estimators=10, silent=True)\nclf.fit(X, y, verbose=False)\nself.assertListEqual(sorted(clf.classes_), [0, 1])\nself.assertEqual(clf.n_classes_, 2)\nself.assertIsInstance(clf.booster_, lgb.Booster)\nself.assertIsInstance(clf.feature_importances_, np.ndarray)\n"
+}

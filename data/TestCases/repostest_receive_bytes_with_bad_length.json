@@ -1,0 +1,9 @@
+{
+    "functionName": "test_receive_bytes_with_bad_length",
+    "className": "TestKmipSession",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_session.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the session generates an error on an incorrectly sized\n        message.\n        \"\"\"\ncontent = b'\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00'\nkmip_session = session.KmipSession(None, None, None, 'name')\nkmip_session._connection = mock.MagicMock()\nkmip_session._connection.recv = mock.MagicMock(side_effect=[content,\n    content, None])\nargs = [32]\nself.assertRaises(ValueError, kmip_session._receive_bytes, *args)\nkmip_session._connection.recv.assert_any_call(16)\nkmip_session._connection.recv.assert_called_with(16)\n"
+}

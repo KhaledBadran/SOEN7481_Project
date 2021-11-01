@@ -1,0 +1,9 @@
+{
+    "functionName": "test_min_volatility_tx_costs_L2_reg",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_efficient_frontier.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ef = setup_efficient_frontier()\nprev_w = np.array([1 / ef.n_assets] * ef.n_assets)\nef.add_objective(objective_functions.transaction_cost, w_prev=prev_w)\nef.add_objective(objective_functions.L2_reg)\nef.min_volatility()\nnp.testing.assert_allclose(ef.portfolio_performance(), (0.2316565265271545,\n    0.1959773703677164, 1.0800049318450338))\n"
+}

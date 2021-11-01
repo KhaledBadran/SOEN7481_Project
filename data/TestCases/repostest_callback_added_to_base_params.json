@@ -1,0 +1,9 @@
+{
+    "functionName": "test_callback_added_to_base_params",
+    "className": null,
+    "fileName": "/willdeuschle_&_Flask-GraphQL-Subscriptions-Transport/tests_&_test_flask_graphql_subscriptions_transport.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "app, ss = basic_ss\ntest_client = SocketIOTestClient(app, ss.socketio, namespace=ss.namespace)\nss.subscription_manager.subscribe = Mock()\ntest_client.emit('message', json.dumps({'type': SUBSCRIPTION_START,\n    'payload': 'foo', 'query': 'query test{ testString }', 'variables':\n    'baz'}), namespace=ss.namespace)\nss.subscription_manager.subscribe.assert_called_once()\nassert ss.subscription_manager.subscribe.call_args[1].get('callback', None\n    ) != None\n"
+}

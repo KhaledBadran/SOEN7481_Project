@@ -1,0 +1,9 @@
+{
+    "functionName": "test_incremental_has_correct_expires_on",
+    "className": "TestETL",
+    "fileName": "/klahnakoski_&_Bugzilla-ETL/tests_&_test_etl.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "bugs = wrap([813650, 726635])\nstart_incremental = convert.datetime2milli(convert.string2datetime(\n    '2013-01-01', '%Y-%m-%d'))\ndatabase.make_test_instance(self.settings.bugzilla)\nes = fake_elasticsearch.make_test_instance(self.settings.public.bugs)\nwith MySQL(self.settings.bugzilla) as db:\n    param = Data()\n    param.end_time = start_incremental\n    param.start_time = MIN_TIMESTAMP\n    param.start_time_str = extract_bugzilla.milli2string(db, param.start_time)\n    param.alias_file = self.settings.param.alias_file\n    param.bug_list = bugs\n    param.allow_private_bugs = False\n    with ThreadedQueue('etl queue', es, batch_size=1000) as output:\n        etl(db, output, param, self.alias_analyzer, please_stop=None)\n    param = Data()\n    param.end_time = convert.datetime2milli(datetime.utcnow())\n    param.start_time = start_incremental\n    param.start_time_str = extract_bugzilla.milli2string(db, param.start_time)\n    param.alias_file = self.settings.param.alias_file\n    param.bug_list = bugs\n    param.allow_private_bugs = False\n    with ThreadedQueue('etl queue', es, batch_size=1000) as output:\n        etl(db, output, param, self.alias_analyzer, please_stop=None)\nrefresh_metadata(es)\nesq = jx_elasticsearch.new_instance(self.settings.public.bugs.es)\nfor b in bugs:\n    results = esq.query({'from': self.settings.public.bugs.es.index,\n        'select': 'bug_id', 'where': {'and': [{'eq': {'bug_id': b}}, {'gt':\n        {'expires_on': Date.now().milli}}]}, 'format': 'list'})\n    if len(results.data) != 1:\n        Log.error('Expecting only one active bug_version record')\n"
+}

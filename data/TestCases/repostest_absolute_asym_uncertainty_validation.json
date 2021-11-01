@@ -1,0 +1,9 @@
+{
+    "functionName": "test_absolute_asym_uncertainty_validation",
+    "className": "TestValidator",
+    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_validation.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Ensure that quantites with absolute asymmetric uncertainty are validated properly.\n        \"\"\"\nuncertainty_schema = {quantity: {'type': 'list', 'isvalid_uncertainty': True}}\nv = OurValidator(uncertainty_schema)\nassert v.validate({quantity: ['1.0 {}'.format(unit), {'uncertainty-type':\n    'absolute', 'upper-uncertainty': '0.1 {}'.format(unit),\n    'lower-uncertainty': '0.1 {}'.format(unit)}]})\npytest.mark.parametrize('quantity, unit', property_units.items())"
+}

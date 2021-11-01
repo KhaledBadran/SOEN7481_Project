@@ -1,0 +1,9 @@
+{
+    "functionName": "test_as_context_manager",
+    "className": "TestKmipServer",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_server.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the right methods are called when the KmipServer is used\n        as a context manager.\n        \"\"\"\ns = server.KmipServer(hostname='127.0.0.1', port=5696, config_path=None,\n    policy_path=None)\ns._logger = mock.MagicMock()\ns.start = mock.MagicMock()\ns.stop = mock.MagicMock()\nwith s:\n    pass\nself.assertTrue(s.start.called)\nself.assertTrue(s.stop.called)\nmock.patch('kmip.services.server.engine.KmipEngine')mock.patch('kmip.services.server.server.KmipServer._setup_logging')"
+}

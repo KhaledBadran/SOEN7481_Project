@@ -1,0 +1,9 @@
+{
+    "functionName": "test_wasserstein_bary_2d",
+    "className": null,
+    "fileName": "/PythonOT_&_POT/test_&_test_bregman.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "size = 100\na1 = np.random.randn(size, size)\na1 += a1.min()\na1 = a1 / np.sum(a1)\na2 = np.random.randn(size, size)\na2 += a2.min()\na2 = a2 / np.sum(a2)\nA = np.zeros((2, size, size))\nA[(0), :, :] = a1\nA[(1), :, :] = a2\nreg = 0.01\nbary_wass = ot.bregman.convolutional_barycenter2d(A, reg)\nnp.testing.assert_allclose(1, np.sum(bary_wass))\not.bregman.convolutional_barycenter2d(A, reg, log=True, verbose=True)\n"
+}

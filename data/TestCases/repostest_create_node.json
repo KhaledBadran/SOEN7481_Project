@@ -1,0 +1,9 @@
+{
+    "functionName": "test_create_node",
+    "className": "TestSimple",
+    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_test_simple_integration.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "import numpy as np\nfc1 = Linear(4, 2)()\nfc2 = Linear(4, 2)()\ncadd = CAddTable()([fc1, fc2])\noutput1 = ReLU()(cadd)\nmodel = Model([fc1, fc2], [output1])\nfc1.element().set_weights([np.ones((4, 2)), np.ones((2,))])\nfc2.element().set_weights([np.ones((4, 2)), np.ones((2,))])\noutput = model.forward([np.array([0.1, 0.2, -0.3, -0.4]), np.array([0.5, \n    0.4, -0.2, -0.1])])\nassert_allclose(output, np.array([2.2, 2.2]))\n"
+}

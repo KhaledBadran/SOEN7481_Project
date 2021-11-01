@@ -1,0 +1,9 @@
+{
+    "functionName": "test_rsp_eventrelated",
+    "className": null,
+    "fileName": "/neuropsychology_&_NeuroKit/tests_&_tests_rsp.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "rsp, info = nk.rsp_process(nk.rsp_simulate(duration=30, random_state=42))\nepochs = nk.epochs_create(rsp, events=[5000, 10000, 15000], epochs_start=-\n    0.1, epochs_end=1.9)\nrsp_eventrelated = nk.rsp_eventrelated(epochs)\nassert np.alltrue(np.array(rsp_eventrelated['RSP_Rate_Min']) < np.array(\n    rsp_eventrelated['RSP_Rate_Mean']))\nassert np.alltrue(np.array(rsp_eventrelated['RSP_Rate_Mean']) < np.array(\n    rsp_eventrelated['RSP_Rate_Max']))\nassert np.alltrue(np.array(rsp_eventrelated['RSP_Amplitude_Min']) < np.\n    array(rsp_eventrelated['RSP_Amplitude_Mean']))\nassert np.alltrue(np.array(rsp_eventrelated['RSP_Amplitude_Mean']) < np.\n    array(rsp_eventrelated['RSP_Amplitude_Max']))\nassert len(rsp_eventrelated['Label']) == 3\nwith pytest.warns(nk.misc.NeuroKitWarning, match=\n    '.*does not have an `RSP_Amplitude`.*'):\n    first_epoch_key = list(epochs.keys())[0]\n    first_epoch_copy = epochs[first_epoch_key].copy()\n    del first_epoch_copy['RSP_Amplitude']\n    nk.rsp_eventrelated({**epochs, first_epoch_key: first_epoch_copy})\nwith pytest.warns(nk.misc.NeuroKitWarning, match=\n    '.*does not have an `RSP_Phase`.*'):\n    first_epoch_key = list(epochs.keys())[0]\n    first_epoch_copy = epochs[first_epoch_key].copy()\n    del first_epoch_copy['RSP_Phase']\n    nk.rsp_eventrelated({**epochs, first_epoch_key: first_epoch_copy})\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_survey_scenario",
+    "className": null,
+    "fileName": "/openfisca_&_senegal/openfisca_senegal_&_tests_&_test_survey_scenario_from_stata_data.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "circleci = 'CIRCLECI' in os.environ\nif circleci or not data_is_available:\n    return\nyear = 2017\ndata = create_data_from_stata(create_dataframes=create_dataframes)\nsurvey_scenario = SenegalSurveyScenario(data=data, year=year)\ndf_by_entity = survey_scenario.create_data_frame_by_entity(variables=['age',\n    'salaire', 'impot_avant_reduction_famille', 'impot_revenus',\n    'household_weight'])\nfor entity, df in df_by_entity.items():\n    assert not df.empty, '{} dataframe is empty'.format(entity)\n    log.debug(df)\npytest.mark.skip(reason=\n    \"FileNotFoundError: [Errno 2] No such file or directory: '/home/benjello/Dropbox/Projet_Micro_Sim/B_all_final_dta/TaxeIneq_prep_inc_SEN.dta'\"\n    )"
+}

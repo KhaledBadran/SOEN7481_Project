@@ -1,0 +1,9 @@
+{
+    "functionName": "test_release_bouncer_download_links",
+    "className": null,
+    "fileName": "/mozilla_&_PollBot/tests_&_test_views.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "resp = await check_response(cli, '/v1/firefox/54.0/bouncer')\nbody = await resp.json()\nassert body['status'] == Status.EXISTS.value\nassert body['message'].startswith('Bouncer for RELEASE redirects to version')\nurl_prefix = 'https://download-installer.cdn.mozilla.net/pub/firefox/releases/'\nassert body['link'].startswith(url_prefix)\npytest.mark.xfail"
+}

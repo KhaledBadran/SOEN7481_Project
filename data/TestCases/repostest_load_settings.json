@@ -1,0 +1,9 @@
+{
+    "functionName": "test_load_settings",
+    "className": "TestKmipServerConfig",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_config.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the right calls are made and the right errors generated when\n        loading configuration settings from a configuration file specified by\n        a path string.\n        \"\"\"\nc = config.KmipServerConfig()\nc._logger = mock.MagicMock()\nc._parse_settings = mock.MagicMock()\nc.parse_auth_settings = mock.MagicMock()\nwith mock.patch('os.path.exists') as os_mock:\n    os_mock.return_value = True\n    with mock.patch('six.moves.configparser.ConfigParser.read') as parser_mock:\n        c.load_settings('/test/path/server.conf')\n        c._logger.info.assert_any_call(\n            'Loading server configuration settings from: /test/path/server.conf'\n            )\n        parser_mock.assert_called_with('/test/path/server.conf')\n        self.assertTrue(c._parse_settings.called)\n        self.assertTrue(c.parse_auth_settings.called)\nc._logger.reset_mock()\nwith mock.patch('os.path.exists') as os_mock:\n    os_mock.return_value = False\n    args = '/test/path/server.conf',\n    self.assertRaises(exceptions.ConfigurationError, c.load_settings, *args)\n"
+}

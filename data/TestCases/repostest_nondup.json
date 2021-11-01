@@ -1,0 +1,9 @@
+{
+    "functionName": "test_nondup",
+    "className": "TestDuplicateOptions",
+    "fileName": "/kenfar_&_DataGristle/scripts_&_tests_&_test_gristle_sorter_cmd.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "in_fqfn = create_test_file(self.temp_dir, duplicate=True)\ndialect = csvhelper.Dialect(delimiter=',', quoting=csv.QUOTE_NONE,\n    quotechar=None, has_header=False, doublequote=False)\nout_fqfn = in_fqfn + '.sorted'\ncmd = f\"\"\" {pjoin(SCRIPT_DIR, 'gristle_sorter')}                       -i {in_fqfn}\n                    -o {out_fqfn}\n                    -k 0sf\n              \"\"\"\nexecutor(cmd, expect_success=True)\nrecs = get_file_contents(out_fqfn, dialect)\nassert recs[0][0] == '1'\nassert recs[1][0] == '2'\nassert recs[2][0] == '3'\nassert recs[3][0] == '3'\nassert recs[4][0] == '4'\n"
+}

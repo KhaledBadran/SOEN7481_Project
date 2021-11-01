@@ -1,0 +1,9 @@
+{
+    "functionName": "one_hot",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"One-hot representation of integer vector.\n\n    Given a vector of integers from 0 to m-1, returns a matrix\n    with a one-hot representation, where each row corresponds\n    to an element of x.\n\n    Parameters\n    ----------\n    x : integer vector\n        The integer vector to convert to a one-hot representation.\n    m : int, optional\n        The number of different columns for the one-hot representation. This\n        needs to be strictly greater than the maximum value of `x`.\n        Defaults to ``max(x) + 1``.\n\n    Returns\n    -------\n    Theano tensor variable\n        A Theano tensor variable of shape (``n``, `m`), where ``n`` is the\n        length of `x`, with the one-hot representation of `x`.\n\n    Notes\n    -----\n    If your integer vector represents target class memberships, and you wish to\n    compute the cross-entropy between predictions and the target class\n    memberships, then there is no need to use this function, since the function\n    :func:`lasagne.objectives.categorical_crossentropy()` can compute the\n    cross-entropy from the integer vector directly.\n\n    \"\"\"\nif m is None:\n    m = T.cast(T.max(x) + 1, 'int32')\nreturn T.eye(m)[T.cast(x, 'int32')]\n"
+}

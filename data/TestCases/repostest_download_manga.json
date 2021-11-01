@@ -1,0 +1,9 @@
+{
+    "functionName": "test_download_manga",
+    "className": null,
+    "fileName": "/superDross_&_MangaReaderScraper/tests_&_test_download.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "downloader = Download('dragon-ball', filetype, MockedSiteParser)\ndownloader.download_volumes([1])\nexpected_path = f'/tmp/dragon-ball/dragon-ball_volume_1.{filetype}'\nassert os.path.exists(expected_path)\nwith open(expected_path, 'rb') as pdf_file:\n    pdf = pdf_file.read().decode('utf-8', 'ignore')\n    assert pdf.startswith(file_signature)\npytest.mark.parametrize('filetype,file_signature', [('pdf', '%PDF-'), (\n    'cbz', 'PK')])"
+}

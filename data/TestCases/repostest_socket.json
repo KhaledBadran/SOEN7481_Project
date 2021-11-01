@@ -1,0 +1,9 @@
+{
+    "functionName": "test_socket",
+    "className": "TestSocket",
+    "fileName": "/PRIArobotics_&_HedgehogUtils/tests_&_test_zmq.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "a, b = (zmq_ctx.socket(zmq.PAIR).configure(hwm=1000, linger=0) for _ in\n    range(2))\nwith a, b:\n    a.bind('inproc://endpoint')\n    b.connect('inproc://endpoint')\n    assert b.poll(0.01) == 0\n    a.signal()\n    assert b.poll(0.01) == zmq.POLLIN\n    b.wait()\n    assert b.poll(0.01) == 0\n    a.send_multipart((b'foo', b'bar'))\n    assert b.poll(0.01) == zmq.POLLIN\n    b.recv_multipart_expect((b'foo', b'bar'))\n"
+}

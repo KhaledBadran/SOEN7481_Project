@@ -1,0 +1,9 @@
+{
+    "functionName": "test_inverse_restart",
+    "className": null,
+    "fileName": "/OMS-NetZero_&_FAIR/tests_&_reproduction_&_reproduction_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Tests restarts for inverse FaIR.\"\"\"\nE, F, T = fair.inverse.inverse_fair_scm(C=rcp85.Concentrations.co2[:20])\nE1, F1, T1, restart = fair.inverse.inverse_fair_scm(C=rcp85.Concentrations.\n    co2[:10], restart_out=True)\nE2, F2, T2 = fair.inverse.inverse_fair_scm(C=rcp85.Concentrations.co2[10:20\n    ], restart_in=restart)\nassert np.all(E == np.concatenate((E1, E2)))\nassert np.all(F == np.concatenate((F1, F2)))\nassert np.all(T == np.concatenate((T1, T2)))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_book",
+    "className": "TestBook",
+    "fileName": "/pyexcel_&_Flask-Excel/tests_&_test_extra_methods_of_request.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "test_sample = ['book', 'book_dict']\nexpected = {u'result': {u'Sheet1': [[1.0, 1.0, 1.0, 1.0], [2.0, 2.0, 2.0, \n    2.0], [3.0, 3.0, 3.0, 3.0]], u'Sheet3': [[u'X', u'Y', u'Z'], [1.0, 4.0,\n    7.0], [2.0, 5.0, 8.0], [3.0, 6.0, 9.0]], u'Sheet2': [[4.0, 4.0, 4.0, \n    4.0], [5.0, 5.0, 5.0, 5.0], [6.0, 6.0, 6.0, 6.0]]}}\nfor struct_type in test_sample:\n    io = BytesIO()\n    book = pe.Book(self.content)\n    book.save_to_memory('xls', io)\n    io.seek(0)\n    response = self.app.post('/respond/%s' % struct_type, buffered=True,\n        data={'file': (io, 'test.xls')}, content_type='multipart/form-data')\n    assert json.loads(response.data.decode('utf-8')) == expected\n"
+}

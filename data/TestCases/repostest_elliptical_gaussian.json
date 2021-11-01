@@ -1,0 +1,9 @@
+{
+    "functionName": "test_elliptical_gaussian",
+    "className": null,
+    "fileName": "/PaulHancock_&_Aegean/tests_&_test_fitting.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test our elliptical gaussian creation function\"\"\"\nx, y = np.indices((3, 3))\ngauss = fitting.elliptical_gaussian(x, y, amp=1, xo=0, yo=1, sx=1, sy=1,\n    theta=0)\nif np.any(np.isnan(gauss)):\n    raise AssertionError()\ngauss = fitting.elliptical_gaussian(x, y, amp=1, xo=0, yo=1, sx=1, sy=1,\n    theta=np.inf)\nif not np.all(np.isnan(gauss)):\n    raise AssertionError()\n"
+}

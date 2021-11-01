@@ -1,0 +1,9 @@
+{
+    "functionName": "test_posting_chunked_text",
+    "className": null,
+    "fileName": "/RobertoPrevato_&_BlackSheep/itests_&_test_server.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "lines = b'\\r\\n'.join([b'POST /echo-chunked-text HTTP/1.1', b'Host: ' +\n    server_host.encode(), b'Transfer-Encoding: chunked',\n    b'Content-Type: text/plain; charset=utf-8'])\nsocket_connection.send(lines)\nfor line in value.splitlines():\n    chunk = line.encode('utf-8')\n    socket_connection.send(hex(len(chunk)).encode()[2:] + b'\\r\\n' + chunk +\n        b'\\r\\n')\nsocket_connection.send(b'0\\r\\n\\r\\n')\nresponse_bytes = bytearray()\nwhile True:\n    chunk = socket_connection.recv(1024)\n    if chunk:\n        response_bytes.extend(chunk)\n    else:\n        break\nresponse_bytes = bytes(response_bytes)\nvalue = value.replace('\\n', '')\ncontent_length_header = b'content-length: ' + str(len(value)).encode()\nassert content_length_header in response_bytes\nassert response_bytes.endswith(value.encode('utf-8'))\npytest.mark.parametrize('value', [LOREM_IPSUM])"
+}

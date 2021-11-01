@@ -1,0 +1,9 @@
+{
+    "functionName": "rotated",
+    "className": "RotatedBox",
+    "fileName": "/konstantint_&_PassportEye/passporteye_&_util_&_geometry.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Returns a RotatedBox that is obtained by rotating this box around a given center by a given angle.\n\n        >>> assert RotatedBox([2, 2], 2, 1, 0.1).rotated([1, 1], np.pi/2).approx_equal([0, 2], 2, 1, np.pi/2+0.1)\n        \"\"\"\nrot = np.array([[np.cos(angle), np.sin(angle)], [-np.sin(angle), np.cos(\n    angle)]])\nt = np.asfarray(rotation_center)\nnew_c = np.dot(rot.T, self.center - t) + t\nreturn RotatedBox(new_c, self.width, self.height, (self.angle + angle) % (\n    np.pi * 2))\n"
+}

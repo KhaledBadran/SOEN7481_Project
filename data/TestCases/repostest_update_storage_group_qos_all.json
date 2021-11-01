@@ -1,0 +1,9 @@
+{
+    "functionName": "test_update_storage_group_qos_all",
+    "className": "CITestProvisioning",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test update_storage_group_qos.\"\"\"\nstorage_group_name = self.create_empty_storage_group()\nmax_iops = 'maxIOPS'\niops = '3000'\nmbps = '4000'\ndistribution = 'Never'\nqos_update = {max_iops: iops, constants.MAX_MBPS: mbps, constants.\n    DISTRIBUTION_TYPE: distribution}\nupdate_results = self.provisioning.update_storage_group_qos(storage_group_name,\n    qos_update)\nqos_specs = update_results[constants.HOST_IO_LIMIT]\nself._validate_qos_specs(iops, mbps, distribution, qos_specs)\n"
+}

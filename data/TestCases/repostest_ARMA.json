@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ARMA",
+    "className": null,
+    "fileName": "/PTB-PSt1_&_PyDynamic/test_&_test_misc_noise.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "w = pn.ARMA(100)\nassert w.shape == (100,)\nassert np.std(w) == pytest.approx(1.0, abs=0.2)\nassert np.mean(w) == pytest.approx(0.0, abs=0.2)\nphi_list = [2, [2], np.array([1, 2])]\ntheta_list = [1, [1], np.array([1, 2])]\nfor theta, phi in zip(theta_list, phi_list):\n    N = np.random.choice(possible_lengths)\n    std = 0.5\n    w = pn.ARMA(100, phi=phi, theta=theta, std=std)\n    assert w.shape == (100,)\n"
+}

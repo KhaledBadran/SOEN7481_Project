@@ -1,0 +1,9 @@
+{
+    "functionName": "test___init__custom",
+    "className": "TestBTBSession",
+    "fileName": "/HDI-Project_&_BTB/tests_&_test_session.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "selector = MagicMock()\ntunable = {'my_test_tuner': {'my_tunable_hp': {}}}\nscorer = 'my_scorer'\ninstance = BTBSession(tunable, scorer, tuner_class='my_tuner',\n    selector_class=selector, maximize=False, max_errors=2, verbose=True)\nassert instance._tunables is tunable\nassert instance._scorer is scorer\nassert instance._tuner_class == 'my_tuner'\nassert instance._max_errors == 2\nassert instance._best_normalized == -np.inf\nassert instance._normalized_scores == defaultdict(list)\nassert instance._tuners == {}\nassert instance._tunable_names == ['my_test_tuner']\nassert instance._range is trange\nassert instance.best_proposal is None\nassert instance.proposals == {}\nassert instance.iterations == 0\nassert instance.errors == Counter()\n"
+}

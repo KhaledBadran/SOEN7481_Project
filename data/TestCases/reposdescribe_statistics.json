@@ -1,0 +1,9 @@
+{
+    "functionName": "describe_statistics",
+    "className": null,
+    "fileName": "/gavincyi_&_LightMatchingEngine/tests_&_performance_&_performance_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "add_statistics = pd.DataFrame([(trade_num, timer.interval * 1000000.0) for \n    _, trade_num, timer in add_statistics], columns=['trade_num', 'interval'])\ntrade_statistics = add_statistics['trade_num'].describe()\nLOGGER.info(\"\"\"Trade statistics:\n%s\"\"\", tabulate(trade_statistics.to_frame(\n    name='trade'), tablefmt='pipe'))\ncancel_statistics = pd.Series([(timer.interval * 1000000.0) for _, timer in\n    cancel_statistics], name='interval')\nstatistics = pd.concat([add_statistics['interval'].describe(),\n    cancel_statistics.describe()], keys=['add', 'cancel'], axis=1)\nstatistics['add (trade > 0)'] = add_statistics.loc[add_statistics[\n    'trade_num'] > 0, 'interval'].describe()\npercentile_75 = trade_statistics['75%']\nstatistics['add (trade > %s)' % percentile_75] = add_statistics.loc[\n    add_statistics['trade_num'] > percentile_75, 'interval'].describe()\nLOGGER.info(\"\"\"Matching engine latency (nanoseconds):\n%s\"\"\", tabulate(\n    statistics, headers=statistics.columns, tablefmt='pipe'))\n"
+}

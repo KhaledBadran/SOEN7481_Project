@@ -1,0 +1,9 @@
+{
+    "functionName": "test_parallel",
+    "className": null,
+    "fileName": "/mesonepigreco_&_CellConstructor/tests_&_test_parallel_&_test_mpi4py.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Compute pi with parallelization\n    \"\"\"\nrandom.seed(CC.Settings.get_rank() + time.time())\ndef get_pi(x):\n    _x_ = random.uniform(-1, 1)\n    _y_ = random.uniform(-1, 1)\n    if _x_ * _x_ + _y_ * _y_ < 1:\n        return 1\n    return 0\ndef get_pi_and_twopi(x):\n    _x_ = random.uniform(-1, 1)\n    _y_ = random.uniform(-1, 1)\n    if _x_ * _x_ + _y_ * _y_ < 1:\n        return 1, 2\n    return 0, 0\nlong_list = range(1000000)\nt1 = time.time()\nresult = CC.Settings.GoParallelTuple(get_pi_and_twopi, long_list, reduce_op='+'\n    )\nt2 = time.time()\npi = [(x * 4.0 / len(long_list)) for x in result]\nprint('Rank:', CC.Settings.get_rank())\nprint('NPROC:', CC.Settings.GetNProc())\nprint('Total result: {}'.format(pi))\nprint('Total time: {} s'.format(t2 - t1))\n"
+}

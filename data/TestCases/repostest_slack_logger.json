@@ -1,0 +1,9 @@
+{
+    "functionName": "test_slack_logger",
+    "className": null,
+    "fileName": "/EVEprosper_&_ProsperCommon/tests_&_test_prosper_logging.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Execute LogCapture on Slack logger object\"\"\"\nif not SLACK_WEBHOOK:\n    pytest.xfail('slack_webhook is blank')\ntest_logname = 'slack_logger'\nlog_builder = prosper_logging.ProsperLogger(test_logname, LOG_PATH,\n    config_obj=config)\nlog_builder.configure_slack_logger(SLACK_WEBHOOK)\ntest_logger = log_builder.get_logger()\nlog_capture = helper_log_messages(test_logger)\nrequest_POST_endpoint = SLACK_POST_ENDPOINT.format(webhook_info=\n    SLACK_WEBHOOK.replace('https://hooks.slack.com', ''))\nlog_capture.check((test_logname, 'INFO',\n    'prosper.common.prosper_logging TEST --INFO--'), (test_logname,\n    'WARNING', 'prosper.common.prosper_logging TEST --WARNING--'), (\n    REQUEST_LOGNAME, 'DEBUG', SLACK_NEW_CONNECTION), (REQUEST_LOGNAME,\n    'DEBUG', request_POST_endpoint), (test_logname, 'ERROR',\n    'prosper.common.prosper_logging TEST --ERROR--'), (REQUEST_LOGNAME,\n    'DEBUG', SLACK_NEW_CONNECTION), (REQUEST_LOGNAME, 'DEBUG',\n    request_POST_endpoint), (test_logname, 'CRITICAL',\n    'prosper.common.prosper_logging TEST --CRITICAL--'))\npytest.mark.loud"
+}

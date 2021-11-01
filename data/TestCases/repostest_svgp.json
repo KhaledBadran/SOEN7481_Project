@@ -1,0 +1,9 @@
+{
+    "functionName": "test_svgp",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_integration_&_test_dynamic_shapes.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "model = gpflow.models.SVGP(gpflow.kernels.SquaredExponential(), gpflow.\n    likelihoods.Gaussian(), inducing_variable=Datum.X.copy(), q_diag=q_diag,\n    whiten=whiten, mean_function=gpflow.mean_functions.Constant(),\n    num_latent_gps=Datum.Y.shape[1])\ngpflow.set_trainable(model.inducing_variable, False)\ntensor_spec = tf.TensorSpec(shape=None, dtype=default_float())\nelbo = tf.function(model.elbo, input_signature=[(tensor_spec, tensor_spec)])\n@tf.function\ndef model_closure():\n    return -elbo(Datum.data)\nopt = gpflow.optimizers.Scipy()\nopt.minimize(model_closure, variables=model.trainable_variables, options=\n    dict(maxiter=3), compile=True)\npytest.mark.parametrize('whiten', [True, False])pytest.mark.parametrize('q_diag', [True, False])"
+}

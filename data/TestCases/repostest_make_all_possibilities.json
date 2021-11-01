@@ -1,0 +1,9 @@
+{
+    "functionName": "test_make_all_possibilities",
+    "className": "TestMakeAllPossibilities",
+    "fileName": "/SimGus_&_Chatette/tests_&_unit-testing_&_modifiers_&_test_randgen.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "empty = Example()\nexamples = [Example('test1'), Example('test2')]\nall_examples = make_all_possibilities(examples, empty)\nassert empty in all_examples\nfor ex in examples:\n    assert ex in all_examples\nempty = Example()\nall_examples = make_all_possibilities(examples, empty, 'randgen')\nfor ex in all_examples:\n    current_mapping = getattr(ex, RANDGEN_MAPPING_KEY, dict())\n    if ex == empty:\n        assert not current_mapping['randgen']\n    else:\n        assert current_mapping['randgen']\nempty = Example()\nexamples = [Example('test1'), Example('test2')]\nall_examples = make_all_possibilities(examples, empty, 'randgen', True)\nfor ex in all_examples:\n    current_mapping = getattr(ex, RANDGEN_MAPPING_KEY, dict())\n    if ex == empty:\n        assert current_mapping['randgen']\n    else:\n        assert not current_mapping['randgen']\n"
+}

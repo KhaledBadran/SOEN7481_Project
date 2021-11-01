@@ -1,0 +1,9 @@
+{
+    "functionName": "test_imputing_all_missing_values_numeric",
+    "className": null,
+    "fileName": "/tvdboom_&_ATOM/tests_&_test_data_cleaning.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Assert that all missing values are imputed in numeric columns.\"\"\"\nfor v in [None, np.NaN, np.inf, -np.inf]:\n    X = [[v, 1, 1], [2, 5, 2], [4, v, 1], [2, 1, 1]]\n    y = [1, 1, 0, 0]\n    imputer = Imputer(strat_num='mean')\n    X, y = imputer.fit_transform(X, y)\n    assert X.isna().sum().sum() == 0\n"
+}

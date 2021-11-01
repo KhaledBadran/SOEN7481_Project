@@ -1,0 +1,9 @@
+{
+    "functionName": "check_store_many_vectors",
+    "className": "StorageTest",
+    "fileName": "/pixelogik_&_NearPy/tests_&_storage_tests.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "num_vector = len(xs)\nbucket_keys = list(map(str, list(range(10000000, 10000000 + num_vector))))\nx_data = list(range(0, num_vector))\nself.storage.store_many_vectors('testHash', bucket_keys, xs, x_data)\nfor bucket_key, x, data in zip(bucket_keys, xs, x_data):\n    bucket = self.storage.get_bucket('testHash', bucket_key)\n    self.assertEqual(len(bucket), 1)\n    y, y_data = bucket[0]\n    self.assertEqual(type(y), type(x))\n    self.assertEqual(y.shape, x.shape)\n    self.assertEqual(max(abs(y - x)), 0)\n    self.assertEqual(y_data, data)\nself.storage.clean_all_buckets()\nself.assertEqual(self.storage.get_bucket('testHash', bucket_key), [])\n"
+}

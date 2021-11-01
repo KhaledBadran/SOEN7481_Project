@@ -1,0 +1,9 @@
+{
+    "functionName": "test_spherical_pores_with_throat_centroid_and_overlap",
+    "className": "ThroatEndpointsTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_geometry_&_ThroatEndpointsTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.geo['throat.centroid'] = np.array([[0, 0.5, 1], [0, 1.5, 0]]) + self.base\nself.geo['pore.diameter'] = [1.5, 1.0, 0.5]\nself.geo['throat.diameter'] = 0.25\nself.geo.add_model(propname='throat.endpoints', model=mods.spherical_pores,\n    regen_mode='normal')\nEP12_head = self.geo['throat.endpoints.head'][0]\nEP12_tail = self.geo['throat.endpoints.tail'][0]\nEP12_head_desired = np.array([0, 0.29348392, 0.58696784]) + self.base\nEP12_tail_desired = np.array([0, 0.84627033, 0.30745935]) + self.base\nassert_allclose(EP12_head, desired=EP12_head_desired)\nassert_allclose(EP12_tail, desired=EP12_tail_desired)\ndel self.geo['throat.centroid']\n"
+}

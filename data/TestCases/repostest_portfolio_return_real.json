@@ -1,0 +1,9 @@
+{
+    "functionName": "test_portfolio_return_real",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_objective_functions.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "df = get_data()\ne_rets = mean_historical_return(df)\nw = np.array([1 / len(e_rets)] * len(e_rets))\nnegative_mu = objective_functions.portfolio_return(w, e_rets)\nassert isinstance(negative_mu, float)\nassert negative_mu < 0\nnp.testing.assert_almost_equal(negative_mu, -w.dot(e_rets))\nnp.testing.assert_almost_equal(negative_mu, -(w * e_rets).sum())\nnp.testing.assert_almost_equal(-e_rets.sum() / len(e_rets), negative_mu)\n"
+}

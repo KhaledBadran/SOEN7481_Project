@@ -1,0 +1,9 @@
+{
+    "functionName": "test_set_props_from_ds",
+    "className": null,
+    "fileName": "/gcallah_&_PropArgs/test_&_test_prop_args.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with mock.patch('propargs.data_store._open_file_as_json'\n    ) as mock_open_file_as_json:\n    mock_open_file_as_json.return_value = json.loads(\n        '{{ \"{prop_name}\": {{\"val\": 7}} }}'.format(prop_name=DUMMY_PROP_NM))\n    prop_args.ds_file = 'some_file'\n    data_store.set_props_from_ds(prop_args)\n    assert prop_args[DUMMY_PROP_NM] == 7\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_filter_response",
+    "className": "TestCommunication",
+    "fileName": "/funilrys_&_PyTravisCI/tests_&_core_&_test_communication.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test of :meth:`PyTravisCI.communication.Communication.filter_response`.\n        \"\"\"\nresponse = {'@type': 'branches', '@href':\n    '/repo/891/branches?exists_on_github=true&limit=5', '@representation':\n    'standard', '@pagination': {'limit': 5, 'offset': 0, 'count': 24,\n    'is_first': True, 'is_last': False, 'next': {'@href':\n    '/repo/891/branches?exists_on_github=true&limit=5&offset=5', 'offset': \n    5, 'limit': 5}, 'prev': None, 'first': {'@href':\n    '/repo/891/branches?exists_on_github=true&limit=5', 'offset': 0,\n    'limit': 5}, 'last': {'@href':\n    '/repo/891/branches?exists_on_github=true&limit=5&offset=20', 'offset':\n    20, 'limit': 5}}, 'id': 12345, 'name': 'XYZ', 'data': {'@href':\n    'XYWJFIWO', 'id': 32032, 'info': 'hello'}, 'dataset': [{'@hred':\n    'JOJEFWOFJ', 'hello': 'info'}, 'hello', [1, 23, 4], 2]}\nexpected = {'id': 12345, 'name': 'XYZ', 'data': {'id': 32032, 'info':\n    'hello'}, 'dataset': [{'hello': 'info'}, 'hello', [1, 23, 4], 2]}\ncomm = Communication(self.root)\nactual = comm.filter_response(response)\nself.assertEqual(expected, actual)\n"
+}

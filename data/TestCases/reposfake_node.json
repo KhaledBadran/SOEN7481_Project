@@ -1,0 +1,9 @@
+{
+    "functionName": "fake_node",
+    "className": null,
+    "fileName": "/max-k_&_flask-multi-redis/test_&_integration_&_test_flask_multi_redis.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class Node(object):\n\n    def __init__(self, name):\n        self.config = {'socket_timeout': 2}\n        self.name = name\n\n    def get(self, pattern):\n        return self.name\n\n    def ttl(self, pattern):\n        if int(self.name[-1]) == 3:\n            return None\n        return int(self.name[-1])\n\n    def keys(self, pattern):\n        if pattern == 'empty':\n            return []\n        if int(self.name[-1]) == 3:\n            return [self.name, pattern]\n        return [pattern]\n\n    def set(self, key, pattern):\n        setattr(self, key, pattern)\n        return True\n\n    def scan_iter(self, pattern):\n        return iter([getattr(self, pattern)])\n\n    def delete(self, pattern):\n        delattr(self, 'name')\nreturn Node\npytest.fixture"
+}

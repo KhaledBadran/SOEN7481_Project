@@ -1,0 +1,9 @@
+{
+    "functionName": "test_loop_dist_matrix",
+    "className": null,
+    "fileName": "/vc1492a_&_PyNomaly/tests_&_test_loop.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Tests to ensure the proper results are returned when supplying the\n    appropriate format distance and neighbor matrices.\n    :param X_n120: A pytest Fixture that generates 120 observations.\n    :return: None\n    \"\"\"\nneigh = NearestNeighbors(metric='euclidean')\nneigh.fit(X_n120)\nd, idx = neigh.kneighbors(X_n120, n_neighbors=10, return_distance=True)\nclf1 = loop.LocalOutlierProbability(X_n120, use_numba=NUMBA)\nclf2 = loop.LocalOutlierProbability(distance_matrix=d, neighbor_matrix=idx,\n    use_numba=NUMBA)\nscores1 = clf1.fit().local_outlier_probabilities\nscores2 = clf2.fit().local_outlier_probabilities\nassert_almost_equal(scores1, scores2, decimal=1)\n"
+}

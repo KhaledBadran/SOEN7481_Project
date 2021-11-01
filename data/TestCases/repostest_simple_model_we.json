@@ -1,0 +1,9 @@
+{
+    "functionName": "test_simple_model_we",
+    "className": null,
+    "fileName": "/Microsoft_&_LMChallenge/lmchallenge_&_tests_&_test_functional.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "results = list(lmc.we(eg_models.SimpleModel(), PlainData.DATA))\nexpect_meta(PlainData.META, results)\nexpect_logp([(None if p is None else math.log(p)) for p in [0.5, 0.25, None,\n    0.25, 0.25, None, 0.25]], results)\nstats = lmc.stats.stats(results, human=False)\nexpect_partial_match(PlainData.STATS, stats)\nexpect_partial_match(dict(tokens=5, sum=4 * -math.log(0.25) + -math.log(0.5\n    )), stats['entropy'])\nhuman_stats = lmc.stats.stats(results, human=True)\nexpect_partial_match(PlainData.HUMAN_STATS, human_stats)\nexpect_partial_match(dict(hit=5 / 7, mean=4 / 5 * -math.log(0.25) + 1 / 5 *\n    -math.log(0.5)), human_stats['entropy'])\n"
+}

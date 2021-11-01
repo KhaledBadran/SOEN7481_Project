@@ -1,0 +1,9 @@
+{
+    "functionName": "test_validate_data_health",
+    "className": "GenericTransportTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_GenericTransportTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "alg = op.algorithms.GenericTransport(network=self.net, phase=self.phase)\nalg.settings['conductance'] = 'throat.diffusive_conductance'\nalg.settings['quantity'] = 'pore.concentration'\nalg.settings['cache_A'] = False\nalg.set_value_BC(pores=self.net.pores('top'), values=1)\nalg.set_value_BC(pores=self.net.pores('bottom'), values=0)\nself.phys['throat.diffusive_conductance'][0] = np.nan\nwith pytest.raises(Exception):\n    alg.run()\nmod = op.models.misc.from_neighbor_pores\nself.phase['pore.seed'] = np.nan\nself.phys.add_model(propname='throat.diffusive_conductance', model=mod,\n    pore_prop='pore.seed', ignore_nans=False)\nwith pytest.raises(Exception):\n    alg.run()\nself.phase['pore.seed'] = 1\nself.phys.regenerate_models(propnames='throat.diffusive_conductance')\nTs = self.net.find_neighbor_throats(pores=0)\nop.topotools.trim(self.net, throats=Ts)\nwith pytest.raises(Exception):\n    alg.run()\nself.setup_class()\n"
+}

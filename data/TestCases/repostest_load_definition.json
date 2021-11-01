@@ -1,0 +1,9 @@
+{
+    "functionName": "test_load_definition",
+    "className": "TestLoadModel",
+    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_keras_&_test_load_model.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "K.set_image_dim_ordering('th')\nkmodel, input_data, output_data = TestModels.kmodel_seq_lenet_mnist()\nkeras_model_json_path, keras_model_hdf5_path = dump_keras(kmodel,\n    dump_weights=True)\nbmodel = DefinitionLoader.from_json_path(keras_model_json_path)\nWeightLoader.load_weights_from_kmodel(bmodel, kmodel)\nself.assert_allclose(bmodel.forward(input_data), kmodel.predict(input_data))\n"
+}

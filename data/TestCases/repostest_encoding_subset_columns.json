@@ -1,0 +1,9 @@
+{
+    "functionName": "test_encoding_subset_columns",
+    "className": "TestOneHotEncoderFromDataFrame",
+    "fileName": "/AndrewRook_&_NFLWin/nflwin_&_tests_&_test_preprocessing.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ohe = preprocessing.OneHotEncoderFromDataFrame(categorical_feature_names=[\n    'one', 'three'], copy=True)\nshifted_data = self.data[2:]\nohe.fit(shifted_data)\ntransformed_data = ohe.transform(shifted_data)\nself.data = pd.DataFrame({'one': [1, 2, 3, 1], 'two': [2, 2, 2, 5], 'three':\n    [0, 5, 0, 5]})\nexpected_data = pd.DataFrame({'two': [2, 5], 'onehot_col1': [0.0, 1],\n    'onehot_col2': [1.0, 0], 'onehot_col3': [1.0, 0], 'onehot_col4': [0.0, \n    1]}, index=[2, 3])\nprint(transformed_data)\nprint(expected_data)\npd.util.testing.assert_frame_equal(transformed_data.sort_index(axis=1),\n    expected_data.sort_index(axis=1))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_submit_with_other_timezone",
+    "className": "TestCase",
+    "fileName": "/IntegralDefense_&_ACE/test_ace_api.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "result = self._submit(event_time=self._get_localized_submit_time().\n    astimezone(pytz.timezone('US/Eastern')))\nself.assertIsNotNone(result)\nself.assertTrue('result' in result)\nresult = result['result']\nself.assertIsNotNone(result['uuid'])\nuuid = result['uuid']\nroot = RootAnalysis(storage_dir=workload_storage_dir(uuid))\nroot.load()\nself.assertEquals(root.event_time, self._get_localized_submit_time())\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_trace_edges",
+    "className": null,
+    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_scripts.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "setupdir = os.path.join(os.getcwd(), 'setup_files')\noutdir = os.path.join(os.getcwd(), 'shane_kast_blue_A')\nmasterdir = os.path.join(os.getcwd(), 'shane_kast_blue_A', 'Masters')\nif os.path.isdir(setupdir):\n    shutil.rmtree(setupdir)\nif os.path.isdir(outdir):\n    shutil.rmtree(outdir)\ndroot = os.path.join(os.environ['PYPEIT_DEV'],\n    'RAW_DATA/shane_kast_blue/600_4310_d55')\ndroot += '/'\nsetup.main(setup.parser(['-r', droot, '-s', 'shane_kast_blue', '-c', 'all']))\nos.mkdir(masterdir)\npypeit_file = os.path.join(outdir, 'shane_kast_blue_A.pypeit')\ntrace_edges.main(trace_edges.parser(['-f', pypeit_file]))\ntrace_file = os.path.join(outdir, 'Masters', 'MasterEdges_A_1_01.fits.gz')\nedges = edgetrace.EdgeTraceSet.from_file(trace_file)\nassert edges.ntrace == 2, 'Did not find the expected number of traces.'\nshutil.rmtree(setupdir)\nshutil.rmtree(outdir)\ndev_suite_required"
+}

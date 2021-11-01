@@ -1,0 +1,9 @@
+{
+    "functionName": "test_early_stopping",
+    "className": null,
+    "fileName": "/NTMC-Community_&_MatchZoo-py/tests_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "es = utils.EarlyStopping(patience=1, key='key')\nresult = {'key': 1.0}\nes.update(result)\nassert es.should_stop_early is False\nes.update(result)\nassert es.should_stop_early is True\nstate = es.state_dict()\nnew_es = utils.EarlyStopping()\nassert new_es.should_stop_early is False\nnew_es.load_state_dict(state)\nassert new_es.best_so_far == 1.0\nassert new_es.is_best_so_far is False\nassert new_es.should_stop_early is True\n"
+}

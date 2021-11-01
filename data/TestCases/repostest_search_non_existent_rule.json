@@ -1,0 +1,9 @@
+{
+    "functionName": "test_search_non_existent_rule",
+    "className": null,
+    "fileName": "/OpenSCAP_&_OVAL-visualization-as-graph/tests_&_test_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "rule = 'random_rule_which_doest_exist'\nsrc = 'test_data/ssg-fedora-ds-arf.xml'\nclient = get_client(src, rule)\nwith pytest.raises(Exception, match='404 rule \"{}\" not found!'.format(rule)):\n    assert client.search_rules_id()\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_value_federate_subscription_and_publication_registration",
+    "className": null,
+    "fileName": "/GMLC-TDC_&_HELICS/tests_&_python_&_test_value_federate.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "pubid3 = h.helicsFederateRegisterTypePublication(vFed, 'pub3', 'double', 'V')\nsubid1 = h.helicsFederateRegisterSubscription(vFed, 'sub1', '')\nsubid2 = h.helicsFederateRegisterSubscription(vFed, 'sub2', '')\nsubid3 = h.helicsFederateRegisterSubscription(vFed, 'sub3', 'V')\nh.helicsFederateEnterExecutingMode(vFed)\npublication_type = h.helicsPublicationGetType(pubid3)\nassert publication_type == 'double'\nsub_key = h.helicsSubscriptionGetKey(subid1)\nassert sub_key == 'sub1'\nsub_type = h.helicsInputGetType(subid1)\nassert sub_type == ''\nsub_key = h.helicsSubscriptionGetKey(subid2)\nassert sub_key == 'sub2'\nsub_key = h.helicsSubscriptionGetKey(subid3)\nassert sub_key == 'sub3'\nsub_type = h.helicsInputGetType(subid3)\nassert sub_type == ''\nsub_units = h.helicsInputGetUnits(subid3)\nassert sub_units == 'V'\nsub_type = h.helicsInputGetType(subid2)\nassert sub_type == ''\n"
+}

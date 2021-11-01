@@ -1,0 +1,9 @@
+{
+    "functionName": "complete_register",
+    "className": "HandlerRegistry",
+    "fileName": "/PRIArobotics_&_HedgehogClient/hedgehog_&_client_&_async_handlers.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "handlers = self._queue.popleft()\nassert len(handlers) == len(replies)\nfor handler, reply in zip(handlers, replies):\n    if handler is None:\n        continue\n    if isinstance(reply, ack.Acknowledgement) and reply.code != ack.OK:\n        continue\n    update_keys, update_handler = handler(reply)\n    for update_key in update_keys:\n        if update_key in self._handlers:\n            self._handlers[update_key].close()\n        self._handlers[update_key] = update_handler\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_parameters_missing",
+    "className": null,
+    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_parameters.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Check that errors are raised when compulsory parameters are missing, but\n    not when non-compulsory ones are.\n    \"\"\"\nassert_raises(ValueError, ccl.Cosmology, Omega_c=0.25)\nassert_raises(ValueError, ccl.Cosmology, Omega_c=0.25, Omega_b=0.05, h=0.7,\n    A_s=2.1e-09)\nassert_raises(ValueError, ccl.Cosmology, Omega_c=0.25, Omega_b=0.05, h=0.7,\n    n_s=0.96)\nassert_raises(ValueError, ccl.Cosmology, Omega_c=0.25, Omega_b=0.05, A_s=\n    2.1e-09, n_s=0.96)\nassert_raises(ValueError, ccl.Cosmology, Omega_c=0.25, h=0.7, A_s=2.1e-09,\n    n_s=0.96)\nassert_raises(ValueError, ccl.Cosmology, Omega_b=0.05, h=0.7, A_s=2.1e-09,\n    n_s=0.96)\nassert_raises(ValueError, ccl.Cosmology, Omega_c=0.25, Omega_b=0.05, h=0.7,\n    A_s=2.1e-09, n_s=0.96, Omega_k=None)\nassert_raises(ValueError, ccl.Cosmology, Omega_c=0.25, Omega_b=0.05, h=0.7,\n    A_s=2.1e-09, n_s=0.96, w0=None)\nassert_raises(ValueError, ccl.Cosmology, Omega_c=0.25, Omega_b=0.05, h=0.7,\n    A_s=2.1e-09, n_s=0.96, wa=None)\nassert_raises(ValueError, ccl.Cosmology, Omega_c=0.25, Omega_b=0.05, h=0.7,\n    n_s=0.8, A_s=2.1e-09, sigma8=0.7)\nassert_raises(ValueError, ccl.Cosmology, Omega_c=0.25, Omega_b=0.05, h=0.7,\n    n_s=0.8)\nassert_no_warnings(ccl.Cosmology, Omega_c=0.25, Omega_b=0.05, h=0.7, A_s=\n    2.1e-09, n_s=0.96, z_mg=None, df_mg=None)\nassert_no_warnings(ccl.Cosmology, Omega_c=0.25, Omega_b=0.05, h=0.7, A_s=\n    2.1e-09, n_s=0.96, z_mg=None)\nassert_no_warnings(ccl.Cosmology, Omega_c=0.25, Omega_b=0.05, h=0.7, A_s=\n    2.1e-09, n_s=0.96, df_mg=None)\n"
+}

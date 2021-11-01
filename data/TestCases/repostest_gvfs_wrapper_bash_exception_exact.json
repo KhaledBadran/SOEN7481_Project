@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gvfs_wrapper_bash_exception_exact",
+    "className": "TestSync",
+    "fileName": "/DusanMadar_&_PySyncDroid/tests_&_test_sync.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test 'gvfs_wrapper' handles only a specific BashException.\n        \"\"\"\nmock_mkdir.side_effect = [BashException('Connection reset by peer'), None]\nsync = Sync(FAKE_MTP_DETAILS, '', '')\nsync.gvfs_wrapper(mock_mkdir, '/tmp/dir')\nself.assertEqual(mock_mkdir.call_count, 2)\nmock_mount.assert_called_once_with(sync.mtp_url)\npatch('pysyncdroid.gvfs.mkdir')patch('pysyncdroid.gvfs.mount')"
+}

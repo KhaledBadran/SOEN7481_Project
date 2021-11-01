@@ -1,0 +1,9 @@
+{
+    "functionName": "test_mc_optimisation",
+    "className": null,
+    "fileName": "/fmilthaler_&_FinQuant/tests_&_test_portfolio.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "d = d_pass[3]\npf = build_portfolio(**d)\nnp.random.seed(seed=0)\nminvol_res_orig = [0.18560926749041448, 0.1333176229402258, 1.3547291311321408]\nmaxsharpe_res_orig = [0.33033770744503416, 0.16741461860370618, \n    1.9433052511092475]\nminvol_w_orig = [0.09024151309669741, 0.015766238378839476, \n    0.514540537132381, 0.37945171139208195]\nmaxsharpe_w_orig = [0.018038812127367274, 0.37348740385059126, \n    0.5759648343129179, 0.03250894970912355]\nlabels_orig = ['min Volatility', 'max Sharpe Ratio', 'Initial Portfolio']\nxlabel_orig = 'Volatility [period=252]'\nylabel_orig = 'Expected Return [period=252]'\nopt_w, opt_res = pf.mc_optimisation(num_trials=500)\nassert (minvol_res_orig - opt_res.iloc[0].values <= strong_abse).all()\nassert (maxsharpe_res_orig - opt_res.iloc[1].values <= strong_abse).all()\nassert (minvol_w_orig - opt_w.iloc[0].values <= strong_abse).all()\nassert (maxsharpe_w_orig - opt_w.iloc[1].values <= strong_abse).all()\nplt.figure()\npf.mc_plot_results()\nax = plt.gca()\nlabels_plot = ax.get_legend_handles_labels()[1]\nxlabel_plot = ax.get_xlabel()\nylabel_plot = ax.get_ylabel()\nassert labels_orig == labels_plot\nassert xlabel_orig == xlabel_plot\nassert ylabel_orig == ylabel_plot\n"
+}

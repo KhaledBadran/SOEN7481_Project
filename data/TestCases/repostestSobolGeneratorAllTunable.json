@@ -1,0 +1,9 @@
+{
+    "functionName": "testSobolGeneratorAllTunable",
+    "className": "SobolGeneratorTest",
+    "fileName": "/facebook_&_Ax/ax_&_models_&_tests_&_test_sobol.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "generator = SobolGenerator(seed=0)\nbounds = self._create_bounds(n_tunable=3, n_fixed=0)\ngenerated_points, weights = generator.gen(n=3, bounds=bounds)\nexpected_points = np.array([[0.63552922, 0.17165081, 0.85513169], [\n    0.92333341, 0.75570321, 0.72268772], [0.21601909, 0.48894, 0.11520141]])\nself.assertTrue(np.shape(expected_points) == np.shape(generated_points))\nself.assertTrue(np.allclose(expected_points, generated_points))\nself.assertTrue(np.all(weights == 1.0))\nself.assertEqual(generator._get_state(), {'init_position': 3})\n"
+}

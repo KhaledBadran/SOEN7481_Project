@@ -1,0 +1,9 @@
+{
+    "functionName": "test_plot_module_only",
+    "className": null,
+    "fileName": "/bio-phys_&_MDBenchmark/mdbenchmark_&_tests_&_test_plot.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test plotting function with one given engine or module.\n    \"\"\"\nwith tmpdir.as_cwd():\n    if module in ['gromacs', 'namd']:\n        output = (\n            \"\"\"Plotting GPU and CPU data.\nPlotting all hosts in input file.\nPlotting all modules for engine '{}'.\nYour file was saved as 'testpng.png' in the working directory.\n\"\"\"\n            .format(module))\n    else:\n        output = (\n            \"\"\"Plotting GPU and CPU data.\nPlotting all hosts in input file.\nPlotting module '{}'.\nYour file was saved as 'testpng.png' in the working directory.\n\"\"\"\n            .format(module))\n    result = cli_runner.invoke(cli, ['plot', '--csv={}'.format(data[\n        'test.csv']), '--module={}'.format(module), '--output-name=testpng'])\n    assert result.exit_code == 0\n    assert result.output == output\n    assert os.path.exists('testpng.png')\npytest.mark.parametrize('module', ('gromacs', 'namd', 'namd/2.12',\n    'gromacs/2018'))"
+}

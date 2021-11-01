@@ -1,0 +1,9 @@
+{
+    "functionName": "test_put_nested",
+    "className": "TestPutResource",
+    "fileName": "/fvalverd_&_AutoApi/tests_&_views_&_test_put.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.movies[1]['country'] = 'USA'\nresponse = self.app.put('/%s/actors/%s/movies/%s' % (self.api, self.actors[\n    1]['id'], self.movies[1]['id']), headers=self.headers, data=json.dumps(\n    self.movies[1]), content_type='application/json')\nself.assertEqual(response.status_code, 204)\nresponse = self.app.get('/%s/movies/%s' % (self.api, self.movies[1]['id']),\n    headers=self.headers)\nresponse_json = json.loads(response.data)\nself.assertEqual(self.movies[1], response_json)\n"
+}

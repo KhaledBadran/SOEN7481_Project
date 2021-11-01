@@ -1,0 +1,9 @@
+{
+    "functionName": "test_aggregate_invalid",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_test_objectives.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from lasagne.objectives import aggregate\nwith pytest.raises(ValueError) as exc:\n    aggregate(theano.tensor.matrix(), mode='asdf')\nassert 'mode must be' in exc.value.args[0]\nwith pytest.raises(ValueError) as exc:\n    aggregate(theano.tensor.matrix(), mode='normalized_sum')\nassert 'require weights' in exc.value.args[0]\n"
+}

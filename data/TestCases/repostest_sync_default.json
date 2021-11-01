@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sync_default",
+    "className": "TestSyncIntegration",
+    "fileName": "/DusanMadar_&_PySyncDroid/tests_&_test_sync_integration.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test `sync` is able to copy files from src to dst and ignores unmatched\n        files from dst.\n        \"\"\"\nwith tempfile.TemporaryDirectory() as src_tmp_dir_path:\n    with tempfile.TemporaryDirectory() as dst_tmp_dir_path:\n        with open(os.path.join(src_tmp_dir_path, self.COPY_FILE), 'w'):\n            pass\n        sync = Sync(FAKE_MTP_DETAILS, src_tmp_dir_path, os.path.join(\n            dst_tmp_dir_path, self.DST_DIR))\n        sync.set_source_abs()\n        sync.set_destination_abs()\n        sync.sync()\n        self.assertTrue(os.path.exists(os.path.join(dst_tmp_dir_path, self.\n            DST_DIR, self.COPY_FILE)))\n"
+}

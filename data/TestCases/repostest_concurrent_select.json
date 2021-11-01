@@ -1,0 +1,9 @@
+{
+    "functionName": "test_concurrent_select",
+    "className": null,
+    "fileName": "/Drakkar-Software_&_OctoBot-Backtesting/tests_&_util_&_test_database.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "async with get_database() as database:\n    timestamps = [ohlcv[0] for ohlcv in await database.select(\n        ExchangeDataTables.OHLCV, time_frame='1h')]\n    await asyncio.gather(*[_check_select_result(database, ts) for ts in\n        timestamps])\n"
+}

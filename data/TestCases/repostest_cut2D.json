@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cut2D",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/TutorialsDepricated_&_cut2D.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "import numpy as np\nimport matplotlib.pyplot as plt\nfile = 'Data/camea2018n000137.hdf'\nDataObj = DataSet.DataSet(dataFiles=file)\nDataObj.convertDataFile()\nenergy = DataObj.energy\nEnergyBins = _tools.binEdges(energy, tolerance=0.125)\nq1 = np.array([1.0, 0])\nq2 = np.array([0, 1.0])\nwidth = 0.1\nminPixel = 0.01\nax, DataList, qBnLit, centerPos, binDIstance = DataObj.plotCutQE(q1, q2,\n    width, minPixel, EnergyBins, rlu=False)\nplt.colorbar(ax.pmeshs[0])\nax.set_clim(0, 10)\nplt.tight_layout()\nax2, DataList, Bins, binCenter, binDistance = DataObj.plotCut1D(q1, q2,\n    width, minPixel, rlu=False, Emin=0.2, Emax=1.7, plotCoverage=True)\nif show:\n    plt.show()\nelif os.path.exists('Data/camea2018n000137.nxs'):\n    os.remove('Data/camea2018n000137.nxs')\n"
+}

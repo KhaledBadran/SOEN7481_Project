@@ -1,0 +1,9 @@
+{
+    "functionName": "reservoirs",
+    "className": null,
+    "fileName": "/BYU-PRISM_&_GEKKO/e2e_&_hw_reservoirs_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "c = np.array([0.03, 0.015, 0.06, 0])\nareas = np.array([13.4, 12, 384.5, 4400])\nV0 = np.array([0.26, 0.18, 0.68, 22])\nh0 = 1000 * V0 / areas\nVout0 = c * np.sqrt(h0)\nvin = [0.13, 0.13, 0.13, 0.21, 0.21, 0.21, 0.13, 0.13, 0.13, 0.13, 0.13, \n    0.13, 0.13]\nVin = [0, 0, 0, 0]\nm = GEKKO()\nm.time = np.linspace(0, 1, 13)\nc = m.Array(m.Const, 4, value=0)\nc[0].value = 0.03\nc[1].value = c[0] / 2\nc[2].value = c[0] * 2\nc[3].value = 0\nVuse = [0.03, 0.05, 0.02, 0.0]\nevap_c = m.Array(m.Param, 4, value=1e-05)\nevap_c[-1].value = 5e-06\nA = [m.Param(value=i) for i in areas]\nVin[0] = m.Param(value=vin)\nV = [m.Var(value=i) for i in V0]\nh = [m.Var(value=i) for i in h0]\nVout = [m.Var(value=i) for i in Vout0]\nVin[1:4] = [m.Intermediate(Vout[i]) for i in range(3)]\nVevap = [m.Intermediate(evap_c[i] * A[i]) for i in range(4)]\nm.Equations([(V[i].dt() == Vin[i] - Vout[i] - Vevap[i] - Vuse[i]) for i in\n    range(4)])\nm.Equations([(1000 * V[i] == h[i] * A[i]) for i in range(4)])\nm.Equations([(Vout[i] ** 2 == c[i] ** 2 * h[i]) for i in range(4)])\nm.options.imode = 4\nm.solve(disp=False)\nhvals = [h[i].value for i in range(4)]\nassert test.like(hvals, [[19.40299, 19.20641, 19.01394, 19.31262, 19.60511,\n    19.89159, 19.6849, 19.48247, 19.28424, 19.09014, 18.90011, 18.71408, \n    18.53199], [15.0, 15.15939, 15.31216, 15.46995, 15.63249, 15.79955, \n    15.95968, 16.11305, 16.25983, 16.40018, 16.53428, 16.66226, 16.7843], [\n    1.768531, 1.758775, 1.74913, 1.739597, 1.730178, 1.720873, 1.71168, \n    1.702594, 1.693612, 1.684731, 1.675947, 1.667259, 1.658662], [5.0, \n    5.001073, 5.002143, 5.003208, 5.004269, 5.005326, 5.00638, 5.007429, \n    5.008475, 5.009516, 5.010554, 5.011589, 5.012619]])\n"
+}

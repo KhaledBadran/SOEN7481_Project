@@ -1,0 +1,9 @@
+{
+    "functionName": "find_connecting_bonds",
+    "className": null,
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_topotools_&_topotools.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Given pairs of sites, finds the bonds which connects each pair.\n\n    Parameters\n    ----------\n    sites : array_like\n        A 2-column vector containing pairs of site indices on each row.\n\n    am : scipy.sparse matrix\n        The adjacency matrix of the network.  Must be symmetrical such that if\n        sites *i* and *j* are connected, the matrix contains non-zero values\n        at locations (i, j) and (j, i).\n\n    Returns\n    -------\n    Returns a list the same length as P1 (and P2) with each element\n    containing the throat number that connects the corresponding pores,\n    or `None`` if pores are not connected.\n\n    Notes\n    -----\n    The returned list can be converted to an ND-array, which will convert\n    the ``None`` values to ``nan``.  These can then be found using\n    ``numpy.isnan``.\n\n    \"\"\"\nif am.format != 'dok':\n    am = am.todok(copy=False)\nsites = np.array(sites, ndmin=2)\nif sites.size == 0:\n    return []\nz = tuple(zip(sites[:, (0)], sites[:, (1)]))\nneighbors = [am.get(z[i], None) for i in range(len(z))]\nreturn neighbors\n"
+}

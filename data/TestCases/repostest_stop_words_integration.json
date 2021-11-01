@@ -1,0 +1,9 @@
+{
+    "functionName": "test_stop_words_integration",
+    "className": null,
+    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_server_&_tests_&_test_ingestion.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "url = V01 + '/stop-words/'\nsw_name = 'test1w'\npars = {'name': sw_name, 'stop_words': ['and', 'or', 'in']}\nres = app.post_check(url, json=pars)\nassert dict2type(res, collapse_lists=True) == {'name': 'str'}\nassert res['name'] == sw_name\nres = app.get_check(url + sw_name)\nassert dict2type(res, collapse_lists=True) == {'name': 'str', 'stop_words':\n    ['str']}\nassert res['name'] == sw_name\nassert res['stop_words'] == pars['stop_words']\ndsid, pars, _ = get_features(app, hashed=hashed, stop_words=sw_name)\npytest.mark.parametrize('hashed', [True])"
+}

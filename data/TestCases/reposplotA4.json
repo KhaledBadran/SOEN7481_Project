@@ -1,0 +1,9 @@
+{
+    "functionName": "plotA4",
+    "className": "DataFile",
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_DataFile.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Method to plot the fitted A4 values of the normalization table\n\n        Kwargs:\n    \n            - binning (int): Binning for the corresponding normalization table (default self.binning or 8)\n\n        returns:\n\n            - fig (matplotlib figure): Figure into which the A4 values are plotted\n\n        \"\"\"\nself.loadBinning(binning)\nbinning = self.binning\nNorm = (self.instrumentCalibrationEf[:, (0)] * self.instrumentCalibrationEf\n    [:, (2)] * np.sqrt(2 * np.pi)).reshape((104, 8 * binning))\nA4 = np.reshape(self.instrumentCalibrationA4, (104, 8 * binning))\nfig = plt.figure()\nfor a4, N in zip(A4, Norm):\n    plt.scatter(-a4, np.arange(len(a4)), c=N)\nplt.title('Instrument calibration')\nplt.ylabel('Pixel')\nplt.xlabel('-A4 [deg]')\nreturn fig\n_tools.KwargChecker()"
+}

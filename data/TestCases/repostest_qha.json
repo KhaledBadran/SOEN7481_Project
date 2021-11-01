@@ -1,0 +1,9 @@
+{
+    "functionName": "test_qha",
+    "className": null,
+    "fileName": "/mesonepigreco_&_CellConstructor/tests_&_TestQHA_&_test_QHA.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "total_path = os.path.dirname(os.path.abspath(__file__))\nos.chdir(total_path)\n\"\"\"\n    This example file provide the quasi harmonic approximation to compute the pressure\n    by interpolating two different dynamical matrix on a supercell 3x3x2 of common ice at\n    different volumes.\n    \"\"\"\nRyToEv = 13.605698\nEv_AngToGPa = 160.21766208\nph1 = CC.Phonons.Phonons('V804/dynmat', nqirr=8)\nph2 = CC.Phonons.Phonons('V907/dynmat', nqirr=8)\nN_points = 100\nN_T = 100\nT = np.linspace(0, 300, N_T)\nfree_energy = CC.Manipulate.QHA_FreeEnergy(ph1, ph2, T, N_points)\nV0 = np.linalg.det(ph1.structure.unit_cell)\nV1 = np.linalg.det(ph2.structure.unit_cell)\nprint('The two volumes are:', V0, 'Angstrom^3 and', V1, 'Angstrom^3')\npressure = np.diff(free_energy, axis=0) / ((V0 - V1) / (N_points - 1))\npressure *= RyToEv * Ev_AngToGPa * 10\nplt.figure()\nplt.imshow(free_energy, aspect='auto')\nplt.colorbar()\nplt.figure()\nplt.title('QHA Pressure contribution')\nplt.plot(T, pressure[(0), :])\nplt.xlabel('T [K]')\nplt.ylabel('P [kbar]')\n"
+}

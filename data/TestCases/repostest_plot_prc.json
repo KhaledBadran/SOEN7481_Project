@@ -1,0 +1,9 @@
+{
+    "functionName": "test_plot_prc",
+    "className": null,
+    "fileName": "/tvdboom_&_ATOM/tests_&_test_plots.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Assert that the plot_prc method work as intended.\"\"\"\ntrainer = TrainerRegressor(['ols', 'ridge'], metric='r2')\ntrainer.run(reg_train, reg_test)\npytest.raises(PermissionError, trainer.plot_prc)\ntrainer = TrainerClassifier(['LDA', 'LGB'], metric='f1')\npytest.raises(NotFittedError, trainer.plot_prc, models='LDA')\ntrainer.run(bin_train, bin_test)\ntrainer.plot_prc(filename=FILE_DIR + 'prc1', display=False)\ntrainer.lda.plot_prc(filename=FILE_DIR + 'prc2', display=False)\nassert glob.glob(FILE_DIR + 'prc1.png')\nassert glob.glob(FILE_DIR + 'prc2.png')\natom = ATOMClassifier(X_bin, y_bin, random_state=1)\natom.run('lda', metric='f1')\natom.plot_prc(filename=FILE_DIR + 'prc3', display=False)\natom.lda.plot_prc(filename=FILE_DIR + 'prc4', display=False)\nassert glob.glob(FILE_DIR + 'prc3.png')\nassert glob.glob(FILE_DIR + 'prc4.png')\n"
+}

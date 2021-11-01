@@ -1,0 +1,9 @@
+{
+    "functionName": "test_set_bounds",
+    "className": null,
+    "fileName": "/fmfn_&_BayesianOptimization/tests_&_test_target_space.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "pbounds = {'p1': (0, 1), 'p3': (0, 3), 'p2': (0, 2), 'p4': (0, 4)}\nspace = TargetSpace(target_func, pbounds)\nspace.set_bounds({'other': (7, 8)})\nassert all(space.bounds[:, (0)] == np.array([0, 0, 0, 0]))\nassert all(space.bounds[:, (1)] == np.array([1, 2, 3, 4]))\nspace.set_bounds({'p2': (1, 8)})\nassert all(space.bounds[:, (0)] == np.array([0, 1, 0, 0]))\nassert all(space.bounds[:, (1)] == np.array([1, 8, 3, 4]))\n"
+}

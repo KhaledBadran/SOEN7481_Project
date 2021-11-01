@@ -1,0 +1,9 @@
+{
+    "functionName": "test_hagen_poiseuille_zero_length_throat",
+    "className": "HydraulicConductanceTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_physics_&_HydraulicConductanceTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.geo['throat.conduit_lengths.pore1'] = 0.25\nself.geo['throat.conduit_lengths.throat'] = 0.0\nself.geo['throat.conduit_lengths.pore2'] = 0.15\nmod = op.models.physics.hydraulic_conductance.hagen_poiseuille\nself.phys.add_model(propname='throat.hydraulic_conductance', model=mod)\nactual = self.phys['throat.hydraulic_conductance'].mean()\nassert_approx_equal(actual, desired=9947.1839)\n"
+}

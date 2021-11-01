@@ -1,0 +1,9 @@
+{
+    "functionName": "test_max_sharpe_long_weight_bounds",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_efficient_frontier.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ef = EfficientFrontier(*setup_efficient_frontier(data_only=True),\n    weight_bounds=(0.03, 0.13))\nef.max_sharpe()\nnp.testing.assert_almost_equal(ef.weights.sum(), 1)\nassert ef.weights.min() >= 0.03\nassert ef.weights.max() <= 0.13\nbounds = [(0.01, 0.13), (0.02, 0.11)] * 10\nef = EfficientFrontier(*setup_efficient_frontier(data_only=True),\n    weight_bounds=bounds)\nef.max_sharpe()\nassert (0.01 <= ef.weights[::2]).all() and (ef.weights[::2] <= 0.13).all()\nassert (0.02 <= ef.weights[1::2]).all() and (ef.weights[1::2] <= 0.11).all()\n"
+}

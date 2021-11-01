@@ -1,0 +1,9 @@
+{
+    "functionName": "test_can_run",
+    "className": "CommandLineTest",
+    "fileName": "/schlind_&_Karlsruher/tests_&_commandline_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"CommandLine must run.\"\"\"\nwith self.managed_io() as (out, err):\n    for arg in self.known_task_args:\n        sys.argv = [arg, '--home={}'.format(self.test_home)]\n        exit_code = CommandLine.run()\n        console = out.getvalue().strip()\n        self.assertEqual('', console)\n        self.assertEqual(0, exit_code)\n        self.assertEqual(0, len(console))\nmock.patch('karlsruher.tweepyx.API', mock.MagicMock())mock.patch('karlsruher.twitter.Twitter.me', mock.MagicMock(return_value=\n    mock.Mock(id=0, screen_name='test')))mock.patch('karlsruher.twitter.Twitter.followers', mock.MagicMock(\n    return_value=[]))mock.patch('karlsruher.twitter.Twitter.friends', mock.MagicMock(\n    return_value=[]))mock.patch('karlsruher.twitter.Twitter.list_members', mock.MagicMock(\n    return_value=[]))mock.patch('karlsruher.twitter.Twitter.mentions_timeline', mock.MagicMock(\n    return_value=[]))"
+}

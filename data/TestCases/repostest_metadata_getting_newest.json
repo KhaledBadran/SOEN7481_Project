@@ -1,0 +1,9 @@
+{
+    "functionName": "test_metadata_getting_newest",
+    "className": null,
+    "fileName": "/NicklasMCHD_&_JustUpdate/tests_&_test_metadata.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "md = MetaData()\nassert len(md._metadata) == 0\nmd.add_metadata('test_app-1.0.0.exe', 'DUMMY_CHECKSUM', '1.0.0')\nassert len(md._metadata) == 1\nassert md.get_newest(MetaDataChannel.STABLE) == Version('1.0.0')\nmd.add_metadata('test_app-1.0.0a1.exe', 'DUMMY_CHECKSUM_FOR_ALPHA', '1.0.0a1')\nassert len(md._metadata) == 2\nassert md.get_newest(MetaDataChannel.ALPHA) == Version('1.0.0a1')\nmd.add_metadata('test_app-1.0.0b1.exe', 'DUMMY_CHECKSUM_FOR_BETA', '1.0.0b1')\nassert len(md._metadata) == 3\nassert md.get_newest(MetaDataChannel.BETA) == Version('1.0.0b1')\n"
+}

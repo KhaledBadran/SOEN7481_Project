@@ -1,0 +1,9 @@
+{
+    "functionName": "test_type_casting",
+    "className": "Test_ConfigParser",
+    "fileName": "/Kieran-Bacon_&_Better/PackageTests_&_test_configparser.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "config = ConfigParser()\nconfig.parse(\n    \"\"\"\n        (int) a = 10\n        (list) names = Kieran, Martha, Mumbo\n        (int) k = 10, 2\n        (range) yes = 10, 20, 5\n        (uuid.uuid4) guid =\n        (list) b = one, two, three\n        (list) c =\n            one,\n            two, three,\n            four five\n            six\n        \"\"\"\n    )\nself.assertEqual(config.keys(), {'a', 'names', 'k', 'yes', 'guid', 'b', 'c'})\nself.assertEqual(config['a'], 10)\nself.assertEqual(config['names'], ['Kieran', 'Martha', 'Mumbo'])\nself.assertEqual(config['k'], int('10', 2))\nself.assertEqual(config['yes'], range(10, 20, 5))\nself.assertEqual(config['b'], ['one', 'two', 'three'])\nself.assertEqual(config['c'], ['one', 'two', 'three', 'four five\\nsix'])\nimport uuid\nself.assertIsInstance(config['guid'], uuid.UUID)\n"
+}

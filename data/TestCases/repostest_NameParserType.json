@@ -1,0 +1,9 @@
+{
+    "functionName": "test_NameParserType",
+    "className": null,
+    "fileName": "/JosephPallipadan_&_Namsor-API-Wrapper-Python/namsorclient_&_tests_&_test_models.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    An arbitrary collection of data is created and represented\n    as a list of tuples with 2 elements each. The 2 items in a tuple \n    are used to create a sample value for the NameParserType key in\n    the response from the ParseName endpoints.\n\n    A NameParserTypeWrapper is instantiated with the generated sample data\n    and the assertions ensure that the object is created correctly. \n    \"\"\"\ntests = [(1, 1), (10, 11), (0, 500), (1190, 0)]\nfor i in tests:\n    choices = [f'LN{i[0]}FN{i[1]}', f'FN{i[0]}LN{i[1]}']\n    raw_string = random.choice(choices)\n    tester = namsorclient.NameParserTypeWrapper(raw_string)\n    assert str(tester) == raw_string\n    assert tester.first_name_count == i[0]\n    assert tester.last_name_count == i[1]\n"
+}

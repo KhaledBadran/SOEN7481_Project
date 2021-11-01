@@ -1,0 +1,9 @@
+{
+    "functionName": "test_rotation_storm",
+    "className": "TestData",
+    "fileName": "/Jhsmit_&_ColiCoords/test_&_test_data_models.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "for cell in self.storm_cells_1:\n    for th in np.arange(90, 370, 90):\n        data_r = cell.data.copy().rotate(th)\n        flu = data_r.data_dict['fluorescence']\n        storm = data_r.data_dict['storm']\n        x, y = storm['x'], storm['y']\n        nc = Cell(data_r, init_coords=False)\n        nc.coords.shape = data_r.shape\n        x_fl = np.sum(nc.coords.x_coords * flu) / np.sum(flu)\n        y_fl = np.sum(nc.coords.y_coords * flu) / np.sum(flu)\n        self.assertAlmostEqual(x[0], np.array(x_fl), 2)\n        self.assertAlmostEqual(y[0], np.array(y_fl), 2)\n"
+}

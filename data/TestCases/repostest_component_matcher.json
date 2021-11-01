@@ -1,0 +1,9 @@
+{
+    "functionName": "test_component_matcher",
+    "className": "TestRegex",
+    "fileName": "/named-data_&_PyNDN2/tests_&_unit_tests_&_test_regex.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "backRef = NdnRegexBackrefManager()\ncm = NdnRegexComponentMatcher('a', backRef)\nres = cm.match(Name('/a/b/'), 0, 1)\nself.assertEqual(True, res)\nself.assertEqual(1, len(cm.getMatchResult()))\nself.assertEqual('a', cm.getMatchResult()[0].toEscapedString())\nbackRef = NdnRegexBackrefManager()\ncm = NdnRegexComponentMatcher('a', backRef)\nres = cm.match(Name('/a/b/'), 1, 1)\nself.assertEqual(False, res)\nself.assertEqual(0, len(cm.getMatchResult()))\nbackRef = NdnRegexBackrefManager()\ncm = NdnRegexComponentMatcher('(c+)\\\\.(cd)', backRef)\nres = cm.match(Name('/ccc.cd/b/'), 0, 1)\nself.assertEqual(True, res)\nself.assertEqual(1, len(cm.getMatchResult()))\nself.assertEqual('ccc.cd', cm.getMatchResult()[0].toEscapedString())\nself.assertEqual(2, backRef.size())\nself.assertEqual('ccc', backRef.getBackref(0).getMatchResult()[0].\n    toEscapedString())\nself.assertEqual('cd', backRef.getBackref(1).getMatchResult()[0].\n    toEscapedString())\n"
+}

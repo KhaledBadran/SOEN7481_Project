@@ -1,0 +1,9 @@
+{
+    "functionName": "test_weather_for_location_name",
+    "className": "DestinationWeatherApiTest",
+    "fileName": "/abdullahselek_&_HerePy/tests_&_test_destination_weather_api.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with open('testdata/models/destination_weather_forecasts.json', 'r') as f:\n    expectedResponse = f.read()\nresponses.add(responses.GET,\n    'https://weather.ls.hereapi.com/weather/1.0/report.json',\n    expectedResponse, status=200)\nproduct = herepy.WeatherProductType.forecast_7days\nname = 'Berlin'\nresponse = self._api.weather_for_location_name(name, product)\nself.assertTrue(response)\nself.assertIsInstance(response, herepy.DestinationWeatherResponse)\nresponses.activate"
+}

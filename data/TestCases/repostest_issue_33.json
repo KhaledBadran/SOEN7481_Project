@@ -1,0 +1,9 @@
+{
+    "functionName": "test_issue_33",
+    "className": "TestNewIssues",
+    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_test_issues.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "conn = pymysql.connect(charset='utf8', **self.databases[0])\nself.safe_create_table(conn, u'hei\u00dfe', u'create table hei\u00dfe (name varchar(32))'\n    )\nc = conn.cursor()\nc.execute(u\"insert into hei\u00dfe (name) values ('Pi\u00dfata')\")\nc.execute(u'select name from hei\u00dfe')\nself.assertEqual(u'Pi\u00dfata', c.fetchone()[0])\n"
+}

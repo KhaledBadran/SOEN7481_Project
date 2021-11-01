@@ -1,0 +1,9 @@
+{
+    "functionName": "test_properties_are_init_args_subclass_override",
+    "className": "DataObjectTest",
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_DataObjectTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class A(DataObject):\n    a = DatatypeProperty()\n    properties_are_init_args = True\nclass B(A):\n    b = DatatypeProperty()\n    properties_are_init_args = False\nif six.PY2:\n    with warnings.catch_warnings(record=True) as w:\n        warnings.simplefilter('always')\n        B(a=5)\n        self.assertTrue(len(w) > 0 and issubclass(w[0].category,\n            DeprecationWarning))\nelse:\n    with self.assertRaises(TypeError):\n        B(a=5)\n"
+}

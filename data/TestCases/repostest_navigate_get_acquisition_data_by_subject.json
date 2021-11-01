@@ -1,0 +1,9 @@
+{
+    "functionName": "test_navigate_get_acquisition_data_by_subject",
+    "className": null,
+    "fileName": "/incf-nidash_&_PyNIDM/nidm_&_experiment_&_tests_&_test_navigate.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "set_of_keys_returned = set([])\nset_of_activities = set([])\nsubjects = Navigate.getSubjects(OPENNEURO_FILES, OPENNEURO_PROJECT_URI)\nassert len(subjects) > 0\nfor s in subjects:\n    activities = Navigate.getActivities(nidm_file_tuples=OPENNEURO_FILES,\n        subject_id=s)\n    assert len(activities) > 0\n    for a in activities:\n        set_of_activities.add(str(a))\n        ad = Navigate.getActivityData(OPENNEURO_FILES, a)\n        assert len(ad.data) > 5\n        for vt in ad.data:\n            set_of_keys_returned.add(vt.label)\nassert 'age' in set_of_keys_returned\nassert 'InversionTime' in set_of_keys_returned\nassert 'hadAcquisitionModality' in set_of_keys_returned\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_stale",
+    "className": "TestQueuedPool",
+    "fileName": "/5uper5hoot_&_PikaTools/tests_&_test_pool.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with queued_pool.acquire() as cxn:\n    stale = id(cxn.fairy.cxn)\n    fairy = cxn.fairy\nwith queued_pool.acquire() as cxn:\n    assert stale == id(cxn.fairy.cxn)\nfairy.released_at -= queued_pool.stale + 1\nwith queued_pool.acquire() as cxn:\n    assert stale != id(cxn.fairy.cxn)\n"
+}

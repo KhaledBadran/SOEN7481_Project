@@ -1,0 +1,9 @@
+{
+    "functionName": "test_network_nack",
+    "className": "TestFaceInterestMethods",
+    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_face_methods.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "uri = '/noroute' + str(getNowMilliseconds())\ndataCallback, timeoutCallback, onNackCallback = self.run_express_name_test(uri,\n    True)\nself.assertEqual(dataCallback.call_count, 0,\n    'Data callback called for unroutable interest')\nself.assertEqual(timeoutCallback.call_count, 0,\n    'Timeout callback called for unroutable interest')\nself.assertEqual(onNackCallback.call_count, 1, 'Expected 1 network Nack call')\nonNetworkNackArgs = onNackCallback.call_args[0]\ncallbackNetworkNack = onNetworkNackArgs[1]\nself.assertEqual(callbackNetworkNack.getReason(), NetworkNack.Reason.\n    NO_ROUTE, 'Network Nack has unexpected reason')\n"
+}

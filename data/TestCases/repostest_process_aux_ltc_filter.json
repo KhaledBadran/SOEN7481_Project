@@ -1,0 +1,9 @@
+{
+    "functionName": "test_process_aux_ltc_filter",
+    "className": "ProcessAuxFileTestCase",
+    "fileName": "/mzy2240_&_ESA/tests_&_test_saw.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.saw.ProcessAuxFile(FileName=AREA_AUX_FILE)\nkf = self.saw.get_key_field_list('bus')\narea_bus = self.saw.GetParametersMultipleElement(ObjectType='bus',\n    ParamList=kf, FilterName='area_filter')\nbus = self.saw.GetParametersMultipleElement(ObjectType='bus', ParamList=kf +\n    ['AreaName'])\nself.assertNotEqual(area_bus.shape[0], bus.shape[0])\nbus_expected = bus['AreaName'] == 'East'\nself.assertEqual(bus_expected.sum(), area_bus.shape[0])\n"
+}

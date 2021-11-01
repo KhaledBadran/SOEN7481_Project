@@ -1,0 +1,9 @@
+{
+    "functionName": "test_timeout_too_short",
+    "className": null,
+    "fileName": "/PearsonEducation_&_Alarmageddon/tests_&_publishing_&_test_http_publisher.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sleep_time = 2\nmock = slowserver_monkeypatch(monkeypatch, sleep_time)\npublisher = HttpPublisher(name='Test', url=mock.host, timeout_seconds=1)\nwith pytest.raises(PublishFailure):\n    publisher.send(Failure('failure', Validation('validation', priority=\n        Priority.NORMAL), 'description'))\n"
+}

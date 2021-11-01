@@ -1,0 +1,9 @@
+{
+    "functionName": "test_discovery_request",
+    "className": null,
+    "fileName": "/EclecticIQ_&_OpenTAXII/tests_&_services_&_test_discovery.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "request = as_tm(version).DiscoveryRequest(message_id=MESSAGE_ID)\nservice = server.get_service('discovery-A')\nheaders = prepare_headers(version, https)\nresponse = service.process(headers, request)\nassert len(response.service_instances) == INSTANCES_CONFIGURED\nassert response.in_response_to == MESSAGE_ID\nassert isinstance(response, as_tm(version).DiscoveryResponse)\npytest.mark.parametrize('https', [True, False])pytest.mark.parametrize('version', [11, 10])"
+}

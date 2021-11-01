@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sparse_block",
+    "className": null,
+    "fileName": "/AllenInstitute_&_EM_Aligner_python/integration_tests_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tids = [t.layout.sectionId for t in tilespecs]\nncol = 1000\npcol = 123\nqcol = 789\nma = {'npts_min': 5, 'npts_max': 500, 'choose_random': False}\nfor match in matches:\n    if not (match['pGroupId'] in tids) & (match['qGroupId'] in tids):\n        continue\n    pi = tids.index(match['pGroupId'])\n    qi = tids.index(match['qGroupId'])\n    pspec = tilespecs[pi]\n    qspec = tilespecs[qi]\n    pblock, qblock, weights, rhs = blocks_from_tilespec_pair(pspec, qspec,\n        match, pcol, qcol, ncol, ma)\n    assert pblock.shape == qblock.shape == (len(match['matches']['w']), ncol)\n    assert pblock.shape[0] == rhs.shape[0]\n    pndof = pspec.tforms[-1].DOF_per_tile\n    qndof = qspec.tforms[-1].DOF_per_tile\n    for block, nd, nc in zip([pblock, qblock], [pndof, qndof], [pcol, qcol]):\n        i, j, v = scipy.sparse.find(block)\n        assert np.all(np.in1d(j, nc + np.arange(nd)))\n"
+}

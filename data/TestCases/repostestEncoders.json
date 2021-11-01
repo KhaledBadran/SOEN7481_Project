@@ -1,0 +1,9 @@
+{
+    "functionName": "testEncoders",
+    "className": "JSONStoreTest",
+    "fileName": "/facebook_&_Ax/ax_&_storage_&_json_store_&_tests_&_test_json_store.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "for class_, fake_func in TEST_CASES:\n    original_object = fake_func()\n    if isinstance(original_object, Metric) or isinstance(original_object,\n        Runner):\n        continue\n    json_object = object_to_json(original_object)\n    object_keys = {remove_prefix(key, '_') for key in original_object.\n        __dict__.keys()}\n    json_keys = {key for key in json_object.keys() if key != '__type'}\n    if class_ in ENCODE_DECODE_FIELD_MAPS:\n        map = ENCODE_DECODE_FIELD_MAPS[class_]\n        for field in map.python_only:\n            json_keys.add(field)\n        for field in map.encoded_only:\n            object_keys.add(field)\n        for python, encoded in map.python_to_encoded.items():\n            json_keys.remove(encoded)\n            json_keys.add(python)\n    self.assertEqual(object_keys, json_keys, msg=\n        f'Mismatch between Python and JSON representation in {class_}.')\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_form_network_laplacian_matrix",
+    "className": "TestForm_network_laplacian_matrix",
+    "fileName": "/KnowEnG_&_KnowEnG_Pipelines_Library/test_&_unit_&_test_form_network_laplacian_matrix.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" assert that the laplacian matrix returned sums to zero in both rows\n            and columns\n        \"\"\"\nTHRESHOLD = 0.8\nA = np.random.rand(10, 10)\nA[A < THRESHOLD] = 0\nA = A + A.T\nLd, Lk = kn.form_network_laplacian_matrix(A)\nL = Ld - Lk\nL = L.todense()\nL0 = L.sum(axis=0)\nself.assertFalse(L0.any(), msg='Laplacian row sum not equal 0')\nL1 = L.sum(axis=1)\nself.assertFalse(L1.any(), msg='Laplacian col sum not equal 0')\nLd, Lk = kn.form_network_laplacian_matrix(spar.csr_matrix(A))\nL = Ld - Lk\nL = L.todense()\nL0 = L.sum(axis=0)\nself.assertFalse(L0.any(), msg='Laplacian row sum not equal 0')\nL1 = L.sum(axis=1)\nself.assertFalse(L1.any(), msg='Laplacian col sum not equal 0')\n"
+}

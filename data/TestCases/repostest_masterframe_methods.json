@@ -1,0 +1,9 @@
+{
+    "functionName": "test_masterframe_methods",
+    "className": null,
+    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_masterframe.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "master_key = 'A_1_01'\nmaster_dir = data_root()\nAimg = buildimage.ArcImage(None)\nAimg.PYP_SPEC = 'shane_kast_blue'\nfilename = masterframe.construct_file_name(Aimg, master_key, master_dir=\n    master_dir)\nassert isinstance(filename, str)\nassert filename == os.path.join(master_dir, 'Master' + Aimg.master_type +\n    '_' + master_key + '.' + Aimg.master_file_format)\nhdr = masterframe.build_master_header(Aimg, master_key, master_dir)\nassert isinstance(hdr, fits.Header)\n_master_key, _master_dir = masterframe.grab_key_mdir(hdr)\nassert _master_key == master_key\n_master_key2, _master_dir2 = masterframe.grab_key_mdir(filename,\n    from_filename=True)\nassert _master_key2 == master_key\n"
+}

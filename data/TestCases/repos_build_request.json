@@ -1,0 +1,9 @@
+{
+    "functionName": "_build_request",
+    "className": "TestKmipEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "payload = payloads.DiscoverVersionsRequestPayload()\nbatch = [messages.RequestBatchItem(operation=contents.Operation(enums.\n    Operation.DISCOVER_VERSIONS), request_payload=payload)]\nprotocol = contents.ProtocolVersion(1, 0)\nmax_size = contents.MaximumResponseSize(2 ** 20)\nasynch = contents.AsynchronousIndicator(False)\nusername = objects.Credential.UsernamePasswordCredential.Username('tester')\npassword = objects.Credential.UsernamePasswordCredential.Password('password')\ncreds = objects.Credential.UsernamePasswordCredential(username=username,\n    password=password)\nauth = contents.Authentication(creds)\nbatch_error_option = contents.BatchErrorContinuationOption(enums.\n    BatchErrorContinuationOption.STOP)\nbatch_order_option = contents.BatchOrderOption(True)\ntimestamp = contents.TimeStamp(int(time.time()))\nheader = messages.RequestHeader(protocol_version=protocol,\n    maximum_response_size=max_size, asynchronous_indicator=asynch,\n    authentication=auth, batch_error_cont_option=batch_error_option,\n    batch_order_option=batch_order_option, time_stamp=timestamp,\n    batch_count=contents.BatchCount(len(batch)))\nreturn messages.RequestMessage(request_header=header, batch_items=batch)\n"
+}

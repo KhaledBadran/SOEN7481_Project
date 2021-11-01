@@ -1,0 +1,9 @@
+{
+    "functionName": "test_encrypt_decrypt",
+    "className": "TestProxyKmipClientIntegration",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_integration_&_services_&_test_proxykmipclient.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the ProxyKmipClient can create an encryption key, encrypt\n        plain text with it, and then decrypt the cipher text, retrieving the\n        original plain text.\n        \"\"\"\nkey_id = self.client.create(enums.CryptographicAlgorithm.AES, 256,\n    cryptographic_usage_mask=[enums.CryptographicUsageMask.ENCRYPT, enums.\n    CryptographicUsageMask.DECRYPT])\nself.client.activate(key_id)\nplain_text = b'This is a secret message.'\ncipher_text, iv = self.client.encrypt(plain_text, uid=key_id,\n    cryptographic_parameters={'cryptographic_algorithm': enums.\n    CryptographicAlgorithm.AES, 'block_cipher_mode': enums.BlockCipherMode.\n    CBC, 'padding_method': enums.PaddingMethod.PKCS5}, iv_counter_nonce=\n    b'\\x85\\x1e\\x87dwng\\x96\\xaa\\xb7\"\\xdb\\xb6D\\xac\\xe8')\nself.assertEqual(None, iv)\nresult = self.client.decrypt(cipher_text, uid=key_id,\n    cryptographic_parameters={'cryptographic_algorithm': enums.\n    CryptographicAlgorithm.AES, 'block_cipher_mode': enums.BlockCipherMode.\n    CBC, 'padding_method': enums.PaddingMethod.PKCS5}, iv_counter_nonce=\n    b'\\x85\\x1e\\x87dwng\\x96\\xaa\\xb7\"\\xdb\\xb6D\\xac\\xe8')\nself.assertEqual(plain_text, result)\nself.client.revoke(enums.RevocationReasonCode.CESSATION_OF_OPERATION, key_id)\nself.client.destroy(key_id)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_motor_action",
+    "className": "TestMessages",
+    "fileName": "/PRIArobotics_&_HedgehogProtocol/tests_&_test_protocol.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "msg = motor.Action(0, motor.POWER)\nproto = HedgehogMessage()\nproto.motor_action.state = motor.POWER\nself.assertTransmissionClientServer(msg, proto)\nmsg = motor.Action(0, motor.VELOCITY, 100)\nproto = HedgehogMessage()\nproto.motor_action.state = motor.VELOCITY\nproto.motor_action.amount = 100\nself.assertTransmissionClientServer(msg, proto)\nmsg = motor.Action(0, motor.POWER, 100, relative=-100)\nproto = HedgehogMessage()\nproto.motor_action.amount = 100\nproto.motor_action.relative = -100\nself.assertTransmissionClientServer(msg, proto)\nmsg = motor.Action(0, motor.VELOCITY, 100, absolute=-100)\nproto = HedgehogMessage()\nproto.motor_action.state = motor.VELOCITY\nproto.motor_action.amount = 100\nproto.motor_action.absolute = -100\nself.assertTransmissionClientServer(msg, proto)\nwith pytest.raises(errors.InvalidCommandError):\n    motor.Action(0, motor.POWER, 100, relative=100, absolute=100)\nwith pytest.raises(errors.InvalidCommandError):\n    motor.Action(0, motor.POWER, 100, reached_state=motor.BRAKE)\nwith pytest.raises(errors.InvalidCommandError):\n    motor.Action(0, motor.BRAKE, 100, absolute=100)\nwith pytest.raises(errors.InvalidCommandError):\n    motor.Action(0, motor.POWER, -100, absolute=100)\nwith pytest.raises(errors.InvalidCommandError):\n    motor.Action(0, motor.POWER, 0, relative=100)\n"
+}

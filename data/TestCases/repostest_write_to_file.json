@@ -1,0 +1,9 @@
+{
+    "functionName": "test_write_to_file",
+    "className": null,
+    "fileName": "/kallam_&_FileTransforms/tests_&_test_Result.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "f = BaseOutputFile('test.csv')\nf.add_row([1, 2])\nf.write_to_file()\nwith open(f.file_path, 'r') as tf:\n    assert '1,2\\n' == tf.read()\nf.headers = ['First', 'Second']\nassert f.write_to_file()\nwith open(f.file_path, 'r') as tf:\n    assert '\"First\",\"Second\"\\n1,2\\n' == tf.read()\nos.remove(f.file_path)\n"
+}

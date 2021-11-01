@@ -1,0 +1,9 @@
+{
+    "functionName": "test_WaveSweep",
+    "className": null,
+    "fileName": "/ardiloot_&_NonlinearTMM/Tests_&_test_TMMForWaves.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "betas = np.linspace(0.0, 0.5, 15)\nenhLayer = 2\nenhZ = 0.0\nLy = 0.001\npwr = 0.01\nw0 = 0.0005\nwaveParams = {'waveType': waveType, 'pwr': pwr, 'w0': w0, 'Ly': Ly,\n    'nPointsInteg': 300, 'dynamicMaxXCoef': 10.0}\ntmm.SetParams(pol=pol)\ntmm.wave.SetParams(**waveParams)\ntmm.I0 = pwr / (w0 * Ly)\nsr = tmm.Sweep('beta', betas, layerNr=enhLayer, layerZ=enhZ, outEnh=True)\nsrW = tmm.WaveSweep('beta', betas, layerNr=enhLayer, layerZ=enhZ, outEnh=True)\npwrIncident = sr.Ii * srW.beamArea\nnp.testing.assert_allclose(srW.Pi, pwrIncident, atol=0.0001)\nnp.testing.assert_allclose(srW.Pr / srW.Pi, sr.Ir / sr.Ii, atol=0.0001)\nnp.testing.assert_allclose(srW.Pt / srW.Pi, sr.It / sr.Ii, atol=0.0001)\nnp.testing.assert_allclose(srW.enh, sr.enh, atol=0.0005)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fit_output",
+    "className": "TestPartialOutputs",
+    "fileName": "/HDI-Project_&_MLBlocks/tests_&_features_&_test_partial_outputs.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "primitives = ['sklearn.preprocessing.StandardScaler',\n    'sklearn.linear_model.LogisticRegression']\npipeline = MLPipeline(primitives)\nnamed = 'default'\nlist_ = ['default', 0]\nint_block = 0\ninvalid_int = 10\nstr_block = 'sklearn.preprocessing.StandardScaler#1'\ninvalid_block = 'InvalidBlockName'\nstr_block_variable = 'sklearn.preprocessing.StandardScaler#1.X'\ninvalid_variable = 'sklearn.preprocessing.StandardScaler#1.invalid'\nnamed_out = pipeline.fit(self.X, self.y, output_=named)\nlist_out = pipeline.fit(self.X, self.y, output_=list_)\nint_out = pipeline.fit(self.X, self.y, output_=int_block)\nstr_out = pipeline.fit(self.X, self.y, output_=str_block)\nstr_out_variable = pipeline.fit(self.X, self.y, output_=str_block_variable)\nno_output = pipeline.fit(self.X, self.y)\nX = np.array([[2.0, -0.5, -0.5, -0.5, -0.5], [-0.5, 2.0, -0.5, -0.5, -0.5],\n    [-0.5, -0.5, 2.0, -0.5, -0.5], [-0.5, -0.5, -0.5, 2.0, -0.5], [-0.5, -\n    0.5, -0.5, -0.5, 2.0]])\ny = np.array([0, 0, 0, 0, 1])\ncontext = {'X': X, 'y': y}\nalmost_equal(named_out, y)\nassert len(list_out) == 2\nalmost_equal(list_out[0], y)\nalmost_equal(list_out[1], context)\nalmost_equal(context, int_out)\nalmost_equal(context, str_out)\nalmost_equal(X, str_out_variable)\nassert no_output is None\nwith self.assertRaises(IndexError):\n    pipeline.fit(self.X, self.y, output_=invalid_int)\nwith self.assertRaises(ValueError):\n    pipeline.fit(self.X, self.y, output_=invalid_block)\nwith self.assertRaises(ValueError):\n    pipeline.fit(self.X, self.y, output_=invalid_variable)\n"
+}

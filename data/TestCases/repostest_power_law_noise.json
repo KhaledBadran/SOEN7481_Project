@@ -1,0 +1,9 @@
+{
+    "functionName": "test_power_law_noise",
+    "className": null,
+    "fileName": "/PTB-PSt1_&_PyDynamic/test_&_test_misc_noise.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "for color_value in possible_inputs:\n    N = np.random.choice(possible_lengths)\n    std = 0.5\n    w = pn.white_gaussian(N)\n    w_color1 = pn.power_law_noise(w=w, std=std, color_value=color_value)\n    assert w_color1.shape == N\n    assert np.all(np.isfinite(w_color1))\n    w_color2 = pn.power_law_noise(N=N, std=std, color_value=color_value)\n    assert w_color2.shape == N\n    assert np.all(np.isfinite(w_color2))\n    if visualize:\n        if color_value in [2, 1, -2.0]:\n            plt.figure('time_alpha=' + str(color_value))\n            plt.plot(w)\n            plt.plot(w_color1)\n            plt.figure('psd_alpha=' + str(color_value))\n            plt.psd(w_color1)\n            plt.xscale('log')\nif visualize:\n    plt.show()\n"
+}

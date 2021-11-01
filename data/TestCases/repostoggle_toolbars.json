@@ -1,0 +1,9 @@
+{
+    "functionName": "toggle_toolbars",
+    "className": "Brain",
+    "fileName": "/nipy_&_PySurfer/surfer_&_viz.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Toggle toolbar display\n\n        Parameters\n        ----------\n        show : bool | None\n            If None, the state is toggled. If True, the toolbar will\n            be shown, if False, hidden.\n        \"\"\"\nif self._figures[0][0].scene is not None:\n    if hasattr(self._figures[0][0].scene, 'scene_editor'):\n        bars = [f.scene.scene_editor._tool_bar for ff in self._figures for\n            f in ff]\n    else:\n        bars = [f.scene._tool_bar for ff in self._figures for f in ff]\n    if show is None:\n        if hasattr(bars[0], 'isVisible'):\n            show = not bars[0].isVisible()\n        elif hasattr(bars[0], 'Shown'):\n            show = not bars[0].Shown()\n    for bar in bars:\n        if hasattr(bar, 'setVisible'):\n            bar.setVisible(show)\n        elif hasattr(bar, 'Show'):\n            bar.Show(show)\n"
+}

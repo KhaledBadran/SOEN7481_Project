@@ -1,0 +1,9 @@
+{
+    "functionName": "load_lines",
+    "className": "CurrencyConverter",
+    "fileName": "/alexprengere_&_currencyconverter/currency_converter_&_currency_converter.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "_rates = self._rates = defaultdict(dict)\nna_values = self.na_values\ncast = self.cast\nlines = iter(lines)\nheader = next(lines).strip().split(',')[1:]\nfor line in lines:\n    line = line.strip().split(',')\n    date = parse_date(line[0])\n    for currency, rate in zip(header, line[1:]):\n        currency = currency.strip()\n        if rate not in na_values and currency:\n            _rates[currency][date] = cast(rate)\nself.currencies = set(self._rates) | set([self.ref_currency])\nself._compute_bounds()\nfor currency in sorted(self._rates):\n    self._set_missing_to_none(currency)\n    if self.fallback_on_missing_rate:\n        method = self.fallback_on_missing_rate_method\n        if method == 'linear_interpolation':\n            self._use_linear_interpolation(currency)\n        elif method == 'last_known':\n            self._use_last_known(currency)\n        else:\n            raise ValueError('Unknown fallback method {0!r}'.format(method))\n"
+}

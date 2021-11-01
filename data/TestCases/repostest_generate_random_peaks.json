@@ -1,0 +1,9 @@
+{
+    "functionName": "test_generate_random_peaks",
+    "className": null,
+    "fileName": "/shao-lab_&_MAnorm/tests_&_test_region_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "peaks_ref = GenomicRegions(name='test1')\npeak1 = ManormPeak(chrom='chr1', start=1, end=100, summit=50)\npeak2 = ManormPeak(chrom='chr1', start=50, end=150, summit=120)\npeak3 = ManormPeak(chrom='chr1', start=149, end=200, summit=166)\npeak4 = ManormPeak(chrom='chr1', start=250, end=500, summit=350)\npeak5 = ManormPeak(chrom='chr2', start=300, end=400, summit=333)\npeak6 = ManormPeak(chrom='chr2', start=1, end=100, summit=50)\npeak7 = ManormPeak(chrom='chr2', start=50, end=120, summit=80)\npeak8 = ManormPeak(chrom='chr22', start=1, end=100, summit=50)\npeaks_ref.add(peak1)\npeaks_ref.add(peak2)\npeaks_ref.add(peak3)\npeaks_ref.add(peak4)\npeaks_ref.add(peak5)\npeaks_ref.add(peak6)\npeaks_ref.add(peak7)\npeaks_ref.add(peak8)\npeaks_rand = generate_random_regions(peaks_ref)\nassert peaks_rand.size == 8\nassert len(peaks_rand.fetch('chr1')) == 4\nassert len(peaks_rand.fetch('chr2')) == 3\nassert len(peaks_rand.fetch('chr22')) == 1\n"
+}

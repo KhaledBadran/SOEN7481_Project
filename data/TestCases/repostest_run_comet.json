@@ -1,0 +1,9 @@
+{
+    "functionName": "test_run_comet",
+    "className": "TestEvalBase",
+    "fileName": "/CosmiQ_&_CometTS/CometTS_&_tests_&_Comet_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "print(data_dir)\n\"\"\"Test instantiation of run_comet.\n        This test will hit all core functions including calculate_zonal_stats, get_num_obs, and mask_imagery\"\"\"\nbase_instance = run_comet(os.path.join(data_dir, 'Test_Raster_List2.csv'),\n    os.path.join(data_dir, 'San_Juan.shp'), -1, 0, maskit=True)\noutput = os.path.join(data_dir, 'Test_San_Juan_FullStats2.csv')\nbase_instance.to_csv(output)\nbase_instance = pd.read_csv(os.path.join(data_dir,\n    'Test_San_Juan_FullStats2.csv'))\ngdf = pd.read_csv(os.path.join(data_dir, 'Test_San_Juan_FullStats.csv'))\ngdf = gdf.sort_values(by=['date'])\nbase_instance = base_instance.sort_values(by=['date'])\nbase_instance = base_instance[['date', 'mean']]\ngdf = gdf[['date', 'mean']]\nprint(gdf['mean'])\nprint(base_instance['mean'])\npd.testing.assert_frame_equal(base_instance.reset_index(drop=True), gdf.\n    reset_index(drop=True))\n"
+}

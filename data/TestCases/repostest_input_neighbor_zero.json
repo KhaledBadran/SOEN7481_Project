@@ -1,0 +1,9 @@
+{
+    "functionName": "test_input_neighbor_zero",
+    "className": null,
+    "fileName": "/vc1492a_&_PyNomaly/tests_&_test_loop.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test to ensure that the proper warning is issued if the neighbor size\n    is specified as 0 (must be greater than 0).\n    :param X_n120: A pytest Fixture that generates 120 observations.\n    :return: None\n    \"\"\"\nclf = loop.LocalOutlierProbability(X_n120, n_neighbors=0, use_numba=NUMBA)\nwith pytest.warns(UserWarning) as record:\n    clf.fit()\nassert len(record) == 1\nassert record[0].message.args[0\n    ] == 'n_neighbors must be greater than 0. Fit with 10 instead.'\n"
+}

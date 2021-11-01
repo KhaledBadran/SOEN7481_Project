@@ -1,0 +1,9 @@
+{
+    "functionName": "test_invalid_iv_counter_nonce",
+    "className": "TestKeyWrappingData",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a TypeError is raised when an invalid value is used to set\n        the IV/counter/nonce of a KeyWrappingData struct.\n        \"\"\"\nkwargs = {'iv_counter_nonce': 0}\nself.assertRaisesRegex(TypeError, 'IV/counter/nonce must be bytes.',\n    objects.KeyWrappingData, **kwargs)\nargs = objects.KeyWrappingData(), 'iv_counter_nonce', 0\nself.assertRaisesRegex(TypeError, 'IV/counter/nonce must be bytes.',\n    setattr, *args)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_tube_data",
+    "className": null,
+    "fileName": "/robmarkcole_&_London-tube-status/tests_&_test_london_tube_status.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test TubeData.\"\"\"\nwith requests_mock.Mocker() as mock_req:\n    url = lts.API_URL\n    mock_req.get(url, text=json.dumps(VALID_RESPONSE))\n    test_tube_data = lts.TubeData()\n    test_tube_data.update()\n    assert test_tube_data.data['Bakerloo'] == {'Description':\n        'Nothing to report', 'State': 'Good Service'}\n    assert test_tube_data.data['London Overground'] == {'Description':\n        'Something', 'State': 'Minor Delays'}\n"
+}

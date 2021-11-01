@@ -1,0 +1,9 @@
+{
+    "functionName": "test_2pt_correlation",
+    "className": null,
+    "fileName": "/apetri_&_LensTools/lenstools_&_tests_&_test_nicaea.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "theta = np.arange(1.0, 100.0, 1.0) * u.arcmin\ntry:\n    xi_plus = cosmo.shearTwoPoint(theta, z=2.0, settings=settings, kind='+')\n    xi_minus = cosmo.shearTwoPoint(theta, z=2.0, settings=settings, kind='-')\nexcept ImportError:\n    return\nfig, ax = plt.subplots(figsize=(8, 8))\nax.plot(theta, xi_plus, label='$\\\\xi_+$')\nax.plot(theta, xi_minus, label='$\\\\xi_-$')\nax.set_xscale('log')\nax.set_xlabel('$\\\\theta(\\\\mathrm{arcmin})$', fontsize=18)\nax.set_ylabel('$\\\\xi(\\\\theta)$', fontsize=18)\nax.legend()\nfig.savefig('2pt_nicaea.png')\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_learning_curve",
+    "className": "TestCurve",
+    "fileName": "/SUNCAT-Center_&_CatLearn/test_&_test_learning_curve.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test learning curve from DB.\"\"\"\nhv = Hierarchy(db_name='vec_store.sqlite', file_name='hierarchy')\nfeatselect_featvar = False\nfeatselect_featconst = True\ni = 10\nlim = i + 2\nif featselect_featvar:\n    select_limit = [0, 20]\nelse:\n    select_limit = [i - 1, i + 1]\nwhile i < lim:\n    set_size, p_error, result, PC = hierarchy(hv, 243, 5, 45, new_data=True,\n        ridge=True, scale=True, globalscale=True, normalization=True,\n        featselect_featvar=featselect_featvar, featselect_featconst=\n        featselect_featconst, select_limit=select_limit, feat_sub=i)\n    if not (set_size and p_error) == [] and not featselect_featvar:\n        for data in result:\n            print('data size:', data[0], 'prediction error:', data[1],\n                'Omega:', data[5], 'Euclidean length:', data[2],\n                'Pearson correlation:', data[3])\n        i += 1\n    elif (set_size and p_error) == [] and not featselect_featvar:\n        print('No subset {}'.format(i))\n        i += 1\n        lim += 1\n    if featselect_featvar:\n        i += 4\n    select_limit = [i - 1, i + 1]\n"
+}

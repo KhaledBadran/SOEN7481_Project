@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fetch_remote_sha_fail",
+    "className": null,
+    "fileName": "/MDAnalysis_&_MDAnalysisData/MDAnalysisData_&_tests_&_test_base.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "mocker.patch('MDAnalysisData.base.urlretrieve')\nmock_sha = mocker.patch('MDAnalysisData.base._sha256', return_value='12345678')\nwith pytest.raises(IOError, match='.+? file may be corrupted'):\n    base._fetch_remote(remote_topology)\n"
+}

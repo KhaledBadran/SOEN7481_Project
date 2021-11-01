@@ -1,0 +1,9 @@
+{
+    "functionName": "test_wait_and_display_progress",
+    "className": null,
+    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_core_&_tests_&_test_map_processing.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Basic test for the function `wait_and_display_progress`\"\"\"\nclient = dask_client_create()\ndata = da.random.random(size=(100, 100), chunks=(10, 10))\nsm_fut = da.sum(data, axis=0).persist(scheduler=client)\nwait_and_display_progress(sm_fut, progress_bar)\nsm = sm_fut.compute(scheduler=client)\nclient.close()\nsm_expected = np.sum(data.compute(), axis=0)\nnpt.assert_array_almost_equal(sm, sm_expected, err_msg=\n    'Computations are incorrect')\nif isinstance(progress_bar, _SampleProgressBar):\n    captured = capsys.readouterr()\n    progress_bar._check_output(captured.out)\npytest.mark.parametrize('progress_bar', [_SampleProgressBar(\n    'Monitoring progress'), TerminalProgressBar('Monitoring progress: '), None]\n    )"
+}

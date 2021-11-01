@@ -1,0 +1,9 @@
+{
+    "functionName": "test_search_eq_categorization",
+    "className": null,
+    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_server_&_tests_&_test_search.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Check that NN categorization with a single training document and semantic search\n    returns the same results\n    \"\"\"\ndataset_id, lsi_id, ds_pars, input_ds = get_features_lsi_cached(app)\nquery_document_id = 1\ninput_ds = pd.DataFrame(input_ds['dataset']).set_index('document_id')\npars = dict(parent_id=lsi_id, query_document_id=query_document_id)\ndata = app.post_check(V01 + '/search/', json=pars)\ndf_s = pd.DataFrame(data['data']).set_index('document_id')\npars = {'parent_id': lsi_id, 'data': [{'document_id': query_document_id,\n    'category': 'search'}], 'method': 'NearestNeighbor', 'subset': 'test'}\nmethod = V01 + '/categorization/'\ndata = app.post_check(method, json=pars)\nmethod = V01 + '/categorization/{}/predict'.format(data['id'])\ndata = app.get_check(method)\ncategories = [el['scores'][0]['category'] for el in data['data']]\nassert categories == ['search'] * len(categories)\ndf_c = pd.DataFrame([{'document_id': row['document_id'], 'score': row[\n    'scores'][0]['score']} for row in data['data']]).set_index('document_id')\nassert (df_c.index == df_s.index).sum() / df_s.shape[0] > 0.994\nassert_allclose(df_c.score.values, df_s.score.values)\n"
+}

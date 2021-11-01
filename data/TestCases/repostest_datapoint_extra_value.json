@@ -1,0 +1,9 @@
+{
+    "functionName": "test_datapoint_extra_value",
+    "className": "TestGetDatapoints",
+    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_converters.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Raise error when value without associated property definition\n        \"\"\"\nroot = etree.Element('experiment')\nexp = etree.SubElement(root, 'experimentType')\nexp.text = 'Ignition delay measurement'\napp = etree.SubElement(root, 'apparatus')\nkind = etree.SubElement(app, 'kind')\nkind.text = 'shock tube'\ndatagroup = etree.SubElement(root, 'dataGroup')\nprop = etree.SubElement(datagroup, 'property')\nprop.set('id', 'x1')\nprop.set('name', 'temperature')\nprop.set('units', 'K')\ndatapoint = etree.SubElement(datagroup, 'dataPoint')\nx1 = etree.SubElement(datapoint, 'x1')\nx1.text = str(1000.0)\nx2 = etree.SubElement(datapoint, 'x2')\nx2.text = str(100.0)\nwith pytest.raises(KeywordError) as excinfo:\n    get_datapoints(root)\nassert 'value missing from properties: x2' in str(excinfo.value)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_we_cant_post_without_passing_a_bug_object",
+    "className": null,
+    "fileName": "/AutomatedTester_&_Bugsy/tests_&_test_bugsy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "responses.add(responses.GET, 'https://bugzilla.mozilla.org/rest/login',\n    body='{\"token\": \"foobar\"}', status=200, content_type='application/json',\n    match_querystring=True)\nbugzilla = Bugsy('foo', 'bar')\ntry:\n    bugzilla.put('foo')\n    assert 1 == 0, 'Should have thrown an error about type when calling put'\nexcept BugsyException as e:\n    assert str(e\n        ) == 'Message: Please pass in a Bug object when posting to Bugzilla Code: None'\nresponses.activate"
+}

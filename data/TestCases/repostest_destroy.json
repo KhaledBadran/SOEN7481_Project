@@ -1,0 +1,9 @@
+{
+    "functionName": "test_destroy",
+    "className": "TestKMIPClientIntegration",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_integration_&_services_&_test_kmip_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "credential_type = CredentialType.USERNAME_AND_PASSWORD\ncredential_value = {'Username': 'Peter', 'Password': 'abc123'}\ncredential = self.cred_factory.create_credential(credential_type,\n    credential_value)\nresult = self._create_symmetric_key()\nuuid = result.uuid\nresult = self.client.get(uuid=uuid, credential=credential)\nself._check_result_status(result.result_status.value, ResultStatus,\n    ResultStatus.SUCCESS)\nself._check_object_type(result.object_type.value, ObjectType, ObjectType.\n    SYMMETRIC_KEY)\nself._check_uuid(result.uuid.value, str)\nsecret = result.secret\nexpected = SymmetricKey\nmessage = utils.build_er_error(result.__class__, 'type', expected, secret,\n    'secret')\nself.assertIsInstance(secret, expected, message)\nresult = self.client.destroy(uuid, credential)\nself._check_result_status(result.result_status.value, ResultStatus,\n    ResultStatus.SUCCESS)\nself._check_uuid(result.uuid.value, str)\nresult = self.client.get(uuid=uuid, credential=credential)\nself._check_result_status(result.result_status.value, ResultStatus,\n    ResultStatus.OPERATION_FAILED)\nexpected = ResultReason\nobserved = type(result.result_reason.value)\nmessage = utils.build_er_error(result.result_reason.__class__, 'type',\n    expected, observed)\nself.assertEqual(expected, observed, message)\nexpected = ResultReason.ITEM_NOT_FOUND\nobserved = result.result_reason.value\nmessage = utils.build_er_error(result.result_reason.__class__, 'value',\n    expected, observed)\nself.assertEqual(expected, observed, message)\n"
+}

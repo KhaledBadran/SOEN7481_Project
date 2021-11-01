@@ -1,0 +1,9 @@
+{
+    "functionName": "test_variable_rename",
+    "className": null,
+    "fileName": "/UW-Hydro_&_MetSim/metsim_&_tests_&_test_metsim.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Tests to make sure that variable renaming works\"\"\"\nloc = data_locations['binary']\ndata_files = [os.path.join(loc, f) for f in os.listdir(loc)]\nout_dir = '.'\nparams = {'start': dates['binary'][0], 'stop': dates['binary'][1],\n    'forcing_fmt': 'binary', 'domain_fmt': 'netcdf', 'state_fmt': 'netcdf',\n    'domain': './metsim/data/stehekin.nc', 'state':\n    './metsim/data/state_vic.nc', 'forcing': data_files, 'method': 'mtclim',\n    'scheduler': 'threading', 'time_step': '60', 'out_dir': out_dir,\n    'out_state': os.path.join(out_dir, 'state.nc'), 'out_vars': {'prec': {\n    'out_name': 'pptrate'}, 'shortwave': {'out_name': 'SWRadAtm'}},\n    'forcing_vars': in_vars_section['binary'], 'domain_vars':\n    domain_section['binary']}\nms = MetSim(params)\nms.run()\nds = ms.open_output()\nassert 'pptrate' in ds.variables\nassert 'SWRadAtm' in ds.variables\n"
+}

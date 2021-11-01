@@ -1,0 +1,9 @@
+{
+    "functionName": "test_form_data",
+    "className": null,
+    "fileName": "/zeaphoo_&_cocopot_&_/tests_&_test_request.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "env = dict(copy.deepcopy(env1))\nform_data = 'c=1&d=woo'\nenv['CONTENT_TYPE'] = 'application/x-www-form-urlencoded'\nenv['wsgi.input'] = BytesIO(to_bytes(form_data))\nenv['CONTENT_LENGTH'] = len(form_data)\nreq = Request(env)\nassert req.input_stream == env['wsgi.input']\nassert req.args == MultiDict({'a': '1', 'b': '2'}.items())\nassert req.form == FormsDict({'c': '1', 'd': 'woo'}.items())\nassert req.form.c == '1'\nassert req.form.d == 'woo'\nassert req.values == MultiDict({'a': '1', 'b': '2', 'c': '1', 'd': 'woo'}.\n    items())\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fft",
+    "className": "TestMath",
+    "fileName": "/tum-pbs_&_PhiFlow/tests_&_test_math.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tf.InteractiveSession()\nfor dims in range(1, 4):\n    shape = [2] + [4] * dims + [3]\n    x_np = np.random.randn(*shape) + 1.0j * np.random.randn(*shape)\n    x_np = x_np.astype(np.complex64)\n    x_tf = tf.constant(x_np, tf.complex64)\n    k_np = fft(x_np)\n    k_tf = fft(x_tf)\n    self.assertLess(max(abs(k_np - k_tf.eval())), 0.001)\n    x_np = ifft(k_np)\n    x_tf = ifft(k_tf)\n    self.assertLess(max(abs(x_np - x_tf.eval())), 0.001)\n"
+}

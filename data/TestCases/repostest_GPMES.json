@@ -1,0 +1,9 @@
+{
+    "functionName": "test_GPMES",
+    "className": "ModelBridgeFactoryTest",
+    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_factory.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Tests GPMES instantiation.\"\"\"\nexp = get_branin_experiment(with_batch=True)\nwith self.assertRaises(ValueError):\n    get_GPMES(experiment=exp, data=exp.fetch_data())\nexp.trials[0].run()\ngpmes = get_GPMES(experiment=exp, data=exp.fetch_data())\nself.assertIsInstance(gpmes, TorchModelBridge)\nconfigs = {'Winsorize': {'winsorization_lower': 0.1, 'winsorization_upper':\n    0.1}}\ngpmes_win = get_GPMES(experiment=exp, data=exp.fetch_data(),\n    transform_configs=configs)\nself.assertIsInstance(gpmes_win, TorchModelBridge)\nself.assertEqual(gpmes_win._transform_configs, configs)\nexp.parameters['x2'] = RangeParameter(name='x2', parameter_type=exp.\n    parameters['x2'].parameter_type, lower=-5.0, upper=10.0, is_fidelity=\n    True, target_value=10.0)\ngpmes_mf = get_GPMES(experiment=exp, data=exp.fetch_data())\nself.assertIsInstance(gpmes_mf, TorchModelBridge)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_set_database_path_default",
+    "className": "TestKmipServerConfig",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_config.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the database_path configuration property can be set correctly\n        without specifying a value.\n        \"\"\"\nc = config.KmipServerConfig()\nc._logger = mock.MagicMock()\nself.assertNotIn('database_path', c.settings.keys())\nc._set_database_path(None)\nself.assertIn('database_path', c.settings.keys())\nself.assertEqual(None, c.settings.get('database_path'))\n"
+}

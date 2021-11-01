@@ -1,0 +1,9 @@
+{
+    "functionName": "test_grad_log_likelihood_pings",
+    "className": "TestGaussianProcessLogMarginalLikelihood",
+    "fileName": "/Yelp_&_MOE/moe_&_tests_&_optimal_learning_&_python_&_python_version_&_log_likelihood_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Ping test (compare analytic result to finite difference) the log likelihood gradient wrt hyperparameters.\"\"\"\nnumpy.random.seed(2014)\nh = 0.0002\ntolerance = 5e-06\nfor num_sampled in self.num_sampled_list:\n    self.gp_test_environment_input.num_sampled = num_sampled\n    _, gaussian_process = self._build_gaussian_process_test_data(self.\n        gp_test_environment_input)\n    python_cov, historical_data = gaussian_process.get_core_data_copy()\n    lml = GaussianProcessLogMarginalLikelihood(python_cov, historical_data)\n    analytic_grad = lml.compute_grad_log_likelihood()\n    for k in xrange(lml.num_hyperparameters):\n        hyperparameters_old = lml.hyperparameters\n        hyperparameters_p = numpy.copy(hyperparameters_old)\n        hyperparameters_p[k] += h\n        lml.hyperparameters = hyperparameters_p\n        cov_p = lml.compute_log_likelihood()\n        lml.hyperparameters = hyperparameters_old\n        hyperparameters_m = numpy.copy(hyperparameters_old)\n        hyperparameters_m[k] -= h\n        lml.hyperparameters = hyperparameters_m\n        cov_m = lml.compute_log_likelihood()\n        lml.hyperparameters = hyperparameters_old\n        fd_grad = (cov_p - cov_m) / (2.0 * h)\n        self.assert_scalar_within_relative(fd_grad, analytic_grad[k], tolerance\n            )\n"
+}

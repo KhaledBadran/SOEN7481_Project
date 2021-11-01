@@ -1,0 +1,9 @@
+{
+    "functionName": "commands",
+    "className": "AsyncClient",
+    "fileName": "/PRIArobotics_&_HedgehogClient/hedgehog_&_client_&_async_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "def is_error(reply):\n    return isinstance(reply, ack.Acknowledgement) and reply.code != ack.OK\ndef reply_str(reply):\n    if is_error(reply):\n        return repr(errors.error(reply.code, reply.message))\n    else:\n        return 'OK'\nreplies = await self.send_multipart(*((cmd, None) for cmd in cmds))\nif any(is_error(reply) for reply in replies):\n    msg = ', '.join(f'{index}: {reply_str(reply)}' for index, reply in\n        enumerate(replies))\n    raise errors.FailedCommandError(f'at least one command failed: {msg}')\n"
+}

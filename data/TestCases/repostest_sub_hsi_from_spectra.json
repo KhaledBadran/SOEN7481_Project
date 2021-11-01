@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sub_hsi_from_spectra",
+    "className": null,
+    "fileName": "/CCampJr_&_CRIkit2/crikit_&_preprocess_&_tests_&_test_subtract_dark.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Dark is HSI. Data is spectrum. \"\"\"\nspectrum, spectra, hsi, shape = make_datasets\ndata = 1 * spectra\ndark = 1 * hsi\nsubdark = SubtractDark(dark)\nmeaner = data.mean()\nout = subdark.calculate(data)\nassert meaner == data.mean()\nassert out.mean() != data.mean()\nassert out.size == data.size\nnp.testing.assert_array_almost_equal(out, data - dark.mean(axis=(0, 1))[(\n    None), :])\nsuccess = subdark.transform(data)\nnp.testing.assert_array_almost_equal(data, out)\nassert meaner != data.mean()\nassert success is True\n"
+}

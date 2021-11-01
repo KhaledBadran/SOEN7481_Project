@@ -1,0 +1,9 @@
+{
+    "functionName": "test_link_headers",
+    "className": null,
+    "fileName": "/halcy_&_Mastodon.py/tests_&_test_pagination.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "rmock = requests_mock.Adapter()\napi.session.mount(api.api_base_url, rmock)\n_id = 'abc1234'\nrmock.register_uri('GET', requests_mock.ANY, json=[{'foo': 'bar'}], headers\n    ={'link':\n    \"\"\"\n            <{base}/api/v1/timelines/tag/{tag}?max_id={_id}>; rel=\"next\", <{base}/api/v1/timelines/tag/{tag}?since_id={_id}>; rel=\"prev\"\n        \"\"\"\n    .format(base=api.api_base_url, tag=UNLIKELY_HASHTAG, _id=_id).strip()})\nresp = api.timeline_hashtag(UNLIKELY_HASHTAG)\nassert resp[0]._pagination_next['max_id'] == _id\nassert resp[0]._pagination_prev['since_id'] == _id\n"
+}

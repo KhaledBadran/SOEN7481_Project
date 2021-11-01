@@ -1,0 +1,9 @@
+{
+    "functionName": "test_divide_chains_name",
+    "className": "TestChain",
+    "fileName": "/samreay_&_ChainConsumer/tests_&_test_analysis.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "np.random.seed(0)\ndata = np.concatenate((np.random.normal(loc=0.0, size=100000), np.random.\n    normal(loc=1.0, size=100000)))\nconsumer = ChainConsumer()\nnum_walkers = 2\nconsumer.add_chain(data, walkers=num_walkers, name='test')\nc = consumer.divide_chain(chain='test')\nc.configure(bins=0.7)\nmeans = [0, 1.0]\nfor i in range(num_walkers):\n    stats = list(c.analysis.get_summary()[i].values())[0]\n    assert np.abs(stats[1] - means[i]) < 0.1\n    assert np.abs(c.chains[i].chain[:, (0)].mean() - means[i]) < 0.01\n"
+}

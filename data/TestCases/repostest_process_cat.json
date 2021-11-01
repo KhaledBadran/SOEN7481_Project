@@ -1,0 +1,9 @@
+{
+    "functionName": "test_process_cat",
+    "className": null,
+    "fileName": "/PRIArobotics_&_HedgehogServer/tests_&_test_server.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "async with conn_dealer() as socket:\n    await assertReplyDealer(socket, process.StreamAction(0, process.STDIN,\n        b''), ack.FAILED_COMMAND)\n    await assertReplyDealer(socket, process.SignalAction(0, signal.SIGINT),\n        ack.FAILED_COMMAND)\n    response = await assertReplyDealer(socket, process.ExecuteAction('cat'),\n        process.ExecuteReply)\n    pid = response.pid\n    stream_handler = handle_streams()\n    output = None\n\n    async def handle():\n        nonlocal output\n        _, msg = await socket.recv_msg()\n        assertMsgEqual(msg, process.StreamUpdate, pid=pid)\n        output = stream_handler(msg)\n    action = process.StreamAction(pid, process.STDIN, b'asdf')\n    object.__setattr__(action, 'fileno', process.STDOUT)\n    await assertReplyDealer(socket, action, ack.INVALID_COMMAND)\n    await assertReplyDealer(socket, process.StreamAction(pid, process.STDIN,\n        b'asdf'), ack.OK)\n    await handle()\n    await assertReplyDealer(socket, process.StreamAction(pid, process.STDIN,\n        b''), ack.OK)\n    while output is None:\n        await handle()\n    _, msg = await socket.recv_msg()\n    assert msg == process.ExitUpdate(pid, 0)\n    assert output[process.STDOUT] == b'asdf'\n    assert output[process.STDERR] == b''\npytest.mark.trio"
+}

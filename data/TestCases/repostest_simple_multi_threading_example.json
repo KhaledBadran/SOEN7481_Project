@@ -1,0 +1,9 @@
+{
+    "functionName": "test_simple_multi_threading_example",
+    "className": null,
+    "fileName": "/mdbloice_&_Augmentor/tests_&_test_multi_threading.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tmpdir = tempfile.mkdtemp()\nn = 100\ntmpfiles = []\nfor i in range(n):\n    tmpfiles.append(tempfile.NamedTemporaryFile(dir=tmpdir, suffix='.JPEG'))\n    im = Image.new('RGB', original_dimensions)\n    im.save(tmpfiles[i].name, 'JPEG')\np = Augmentor.Pipeline(tmpdir)\nassert len(p.augmentor_images) == n\np.resize(probability=1, width=larger_dimensions[0], height=larger_dimensions[1]\n    )\np.sample(n, multi_threaded=True)\ngenerated_images = glob.glob(os.path.join(tmpdir, 'output', '*.JPEG'))\nnumber_of_gen_images = len(generated_images)\nassert number_of_gen_images == n\nfor im_path in generated_images:\n    im_g = Image.open(im_path)\n    assert im_g.size == larger_dimensions\nfor t in tmpfiles:\n    t.close()\nshutil.rmtree(tmpdir)\n"
+}

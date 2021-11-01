@@ -1,0 +1,9 @@
+{
+    "functionName": "test_run_with_file5",
+    "className": null,
+    "fileName": "/kallam_&_FileTransforms/tests_&_test_BaseTransforms.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Read from two separate files and process them separately before combining them.\n\n    :param basic_transform2: pytest fixture - instance of BaseTransform with a processing function\n    :param generated_input_csv: pytest fixture - test input file path\n    \"\"\"\nbasic_transform2.combine_inputs = True\nresult = basic_transform2.run(file_paths=[generated_input_csv,\n    generated_input_csv2], write_output=False)\nf = result.get_file(basic_transform2.output_name)\nassert ['FIRST NAME', 'LAST NAME'] == f.headers\nassert [2, 'Doe'] == f[0]\nassert [2, 'Doe'] == f[1]\nassert 2 == len(f.data)\n"
+}

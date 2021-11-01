@@ -1,0 +1,9 @@
+{
+    "functionName": "test_generic_model_creation",
+    "className": "TestModelCreator",
+    "fileName": "/bigfishgames_&_GameBenchAPI-PyClient/tests_&_test_integration_&_test_models_&_test_creator_&_test_model_creator.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" The ModelCreator returns the proper DataFrame.\"\"\"\nwith open(os.path.join(PARENT_DIR + API_SAMPLES + 'notes.json')) as json_data:\n    self.generic_json = json.load(json_data)\nwith open(os.path.join(PARENT_DIR + '/fixtures/' + 'authentication_token.json')\n    ) as json_data:\n    self.auth_token = json.load(json_data)\nmock_return.request('POST', AUTH_URL, json=self.auth_token)\nmock_return.request('GET', GENERIC_SESSION_URL, json=self.generic_json[\n    'response'])\ncreator = ModelCreator('SessionNotes', **DEFAULT_GENERIC_PARAMS)\nmodel = creator.get_model()\nexpected = pandas.DataFrame([self.generic_json['response']])\nactual = model.data\nassert_frame_equal(actual, expected)\nrequests_mock.Mocker()"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sklearn_integration",
+    "className": "TestSklearn",
+    "fileName": "/microsoft_&_LightGBM/tests_&_python_package_test_&_test_sklearn.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "for name, estimator in ((lgb.sklearn.LGBMClassifier.__name__, lgb.sklearn.\n    LGBMClassifier), (lgb.sklearn.LGBMRegressor.__name__, lgb.sklearn.\n    LGBMRegressor)):\n    check_parameters_default_constructible(name, estimator)\n    estimator = estimator(min_child_samples=1, min_data_in_bin=1)\n    for check in _yield_all_checks(name, estimator):\n        check_name = check.func.__name__ if hasattr(check, 'func'\n            ) else check.__name__\n        if check_name == 'check_estimators_nan_inf':\n            continue\n        elif check_name == 'check_no_attributes_set_in_init':\n            continue\n        try:\n            check(name, estimator)\n        except SkipTest as message:\n            warnings.warn(message, SkipTestWarning)\nunittest.skipIf(sk_version < '0.19.0', 'scikit-learn version is less than 0.19'\n    )"
+}

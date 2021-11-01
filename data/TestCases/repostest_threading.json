@@ -1,0 +1,9 @@
+{
+    "functionName": "test_threading",
+    "className": null,
+    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_engine_&_tests_&_test_thread.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cache_dir = check_cache()\nfe = FeatureVectorizer(cache_dir=cache_dir, mode='w')\nuuid = fe.setup()\nfe.ingest(data_dir=data_dir)\nfe.parse_email_headers()\ncat = _EmailThreadingWrapper(cache_dir=cache_dir, parent_id=uuid)\ntree = cat.thread()\ncat.get_params()\ntree_ref = [{'id': 0, 'parent': None, 'children': [{'id': 1, 'children': [],\n    'parent': 0}, {'id': 2, 'parent': 0, 'children': [{'id': 3, 'children':\n    [], 'parent': 2}, {'id': 4, 'children': [], 'parent': 2}]}]}]\nassert [el.to_dict() for el in tree] == tree_ref\nassert len(fe.filenames_) == sum([el.tree_size for el in tree])\nassert len(fe.filenames_) == 5\nassert len(tree[0].flatten()) == 5\n"
+}

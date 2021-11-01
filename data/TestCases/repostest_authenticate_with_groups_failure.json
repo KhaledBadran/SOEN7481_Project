@@ -1,0 +1,9 @@
+{
+    "functionName": "test_authenticate_with_groups_failure",
+    "className": "TestSLUGSConnector",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_auth_&_test_slugs.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a PermissionDenied error is raised when a groups request to\n        SLUGS fails.\n        \"\"\"\nmock_get_client_identity.return_value = 'John Doe'\nusers_response = mock.MagicMock(requests.Response)\nusers_response.status_code = 200\ngroups_response = mock.MagicMock(requests.Response)\ngroups_response.status_code = 404\nmock_request_get.side_effect = [users_response, groups_response]\nconnector = auth.SLUGSConnector(url='http://127.0.0.1:8080/test/slugs/')\nargs = 'test',\nself.assertRaisesRegex(exceptions.PermissionDenied,\n    'Group information could not be retrieved for user ID: John Doe',\n    connector.authenticate, *args)\nmock.patch('requests.get')mock.patch(\n    'kmip.services.server.auth.utils.get_client_identity_from_certificate')"
+}

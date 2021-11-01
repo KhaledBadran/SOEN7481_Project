@@ -1,0 +1,9 @@
+{
+    "functionName": "test_start_and_end_time_in_trial_completion",
+    "className": "TestAxClient",
+    "fileName": "/facebook_&_Ax/ax_&_service_&_tests_&_test_ax_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "start_time = current_timestamp_in_millis()\nax_client = AxClient()\nax_client.create_experiment(parameters=[{'name': 'x', 'type': 'range',\n    'bounds': [-5.0, 10.0]}, {'name': 'y', 'type': 'range', 'bounds': [0.0,\n    15.0]}], minimize=True)\nparams, idx = ax_client.get_next_trial()\nax_client.complete_trial(trial_index=idx, raw_data=1.0, metadata={\n    'start_time': start_time, 'end_time': current_timestamp_in_millis()})\ndat = ax_client.experiment.fetch_data().df\nself.assertGreater(dat['end_time'][0], dat['start_time'][0])\n"
+}

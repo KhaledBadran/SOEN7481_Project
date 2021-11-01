@@ -1,0 +1,9 @@
+{
+    "functionName": "test_GaussianPulse",
+    "className": null,
+    "fileName": "/PTB-PSt1_&_PyDynamic/test_&_test_signals.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "m0 = 1 + np.random.rand() * 0.2\nsigma = 50 * Ts\nx = GaussianPulse(time, t0, m0, sigma, noise=0.0)\nassert_almost_equal(np.max(x), m0)\nassert_almost_equal(time[x.argmax()], t0)\nassert np.std(x[:N // 10]) < 1e-10\nnstd = 0.01\nx = GaussianPulse(time, t0, m0, sigma, noise=nstd)\nassert_almost_equal(np.round(np.std(x[:N // 10]) * 100) / 100, nstd)\n"
+}

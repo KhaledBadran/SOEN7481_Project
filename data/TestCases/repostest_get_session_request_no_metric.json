@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_session_request_no_metric",
+    "className": "TestGetAuthRequest",
+    "fileName": "/bigfishgames_&_GameBenchAPI-PyClient/tests_&_test_integration_&_test_api_&_test_requests_retriever_&_test_builder_&_test_request_director.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Test to check that get_session_request returns expected dict when session_id is empty.\"\"\"\ntest_params = {'method': 'POST', 'session_id': '', 'metric': '',\n    'auth_token': AUTH_TOKEN, 'params': 'test_params', 'data':\n    '{\"test_data\": \"test_data\"}'}\nexpected = {'method': 'POST', 'url': BASE_URL + VERSION + SESSION_SUFFIX,\n    'attributes': {'headers': NO_METRIC_HEADERS, 'params': 'test_params',\n    'data': '{\"test_data\": \"test_data\"}'}}\nself.director = RequestDirector(**test_params)\nactual = self.director.get_session_request()\nself.assertEqual(expected, actual)\n"
+}

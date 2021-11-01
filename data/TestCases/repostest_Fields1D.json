@@ -1,0 +1,9 @@
+{
+    "functionName": "test_Fields1D",
+    "className": null,
+    "fileName": "/ardiloot_&_NonlinearTMM/Tests_&_test_TMM.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tmmCpp, tmmPy = tmms2\nzs = np.linspace(-2e-07, 2e-07, 20)\ntmmCpp.Solve(beta=betaTest)\ntmmPy.Solve(beta=betaTest)\nresEPy, resHPy = tmmPy.GetFields(zs)\nresCpp = tmmCpp.GetFields(zs)\nnp.testing.assert_allclose(resEPy, resCpp.E)\nnp.testing.assert_allclose(resHPy, resCpp.H)\n"
+}

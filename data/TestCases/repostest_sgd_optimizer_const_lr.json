@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sgd_optimizer_const_lr",
+    "className": null,
+    "fileName": "/Accenture_&_AmpliGraph/tests_&_ampligraph_&_latent_features_&_test_optimizers.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sdg_class = OPTIMIZER_REGISTRY['sgd']\nw = tf.Variable(0.01)\nx = tf.placeholder(shape=(1,), dtype=tf.float32)\ny = tf.placeholder(shape=(1,), dtype=tf.float32)\npred = w * x\nloss = tf.losses.mean_squared_error(y, pred)\nsgd_optimizer = sdg_class({'lr': 0.001}, 10)\ntrain = sgd_optimizer.minimize(loss)\nwith tf.Session() as sess:\n    for epoch in range(1, 11):\n        for batch in range(1, 11):\n            feed_dict = {}\n            sgd_optimizer.update_feed_dict(feed_dict, batch, epoch)\n    assert list(feed_dict.values())[0] == 0.001\n"
+}

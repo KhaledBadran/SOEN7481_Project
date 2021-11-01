@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cf_predictions",
+    "className": null,
+    "fileName": "/ssaamm_&_PyRecs/tests_&_test_pyrecs.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "X, y = pyrecs.util.matrix_to_dataset(data)\ncf = pyrecs.collab.CollaborativeFiltering()\ncf.fit(X, y)\npositive_preds = cf.predict([(0, 2), (2, 0)])\nnegative_preds = cf.predict([(3, 0)])\nfor pos, neg in it.product(positive_preds, negative_preds):\n    assert pos > neg\npytest.mark.parametrize('data', [data, list_data])"
+}

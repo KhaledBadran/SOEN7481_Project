@@ -1,0 +1,9 @@
+{
+    "functionName": "test_binary_accuracy",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_test_objectives.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from lasagne.objectives import binary_accuracy\np = theano.tensor.vector('p')\nt = theano.tensor.ivector('t')\nif not colvect:\n    c = binary_accuracy(p, t)\nelse:\n    c = binary_accuracy(p.dimshuffle(0, 'x'), t)[:, (0)]\nfloatX = theano.config.floatX\npredictions = np.random.rand(10).astype(floatX) > 0.5\ntargets = np.random.random_integers(0, 1, (10,)).astype('int8')\naccuracy = predictions == targets\nassert np.allclose(accuracy, c.eval({p: predictions, t: targets}))\npytest.mark.parametrize('colvect', (False, True))"
+}

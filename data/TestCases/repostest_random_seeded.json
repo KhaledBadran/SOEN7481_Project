@@ -1,0 +1,9 @@
+{
+    "functionName": "test_random_seeded",
+    "className": null,
+    "fileName": "/Silmathoron_&_NNGT/testing_&_test_random.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "num_seeds = get_num_seeds()\nnngt.seed(msd=0, seeds=[i for i in range(1, num_seeds + 1)])\ng1 = ng.gaussian_degree(10, 1, nodes=100)\nnngt.seed(msd=0, seeds=[i for i in range(1, num_seeds + 1)])\ng2 = ng.gaussian_degree(10, 1, nodes=100)\nassert np.all(g1.edges_array == g2.edges_array)\ng3 = ng.gaussian_degree(10, 1, nodes=100)\nif nngt.get_config('backend') == 'nngt' or nngt.on_master_process():\n    if g3.edge_nb() == g2.edge_nb():\n        assert np.any(g2.edges_array != g3.edges_array)\n"
+}

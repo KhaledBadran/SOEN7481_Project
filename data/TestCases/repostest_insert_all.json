@@ -1,0 +1,9 @@
+{
+    "functionName": "test_insert_all",
+    "className": null,
+    "fileName": "/Drakkar-Software_&_OctoBot-Backtesting/tests_&_util_&_test_database.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "async with get_temp_empty_database() as temp_empty_database:\n    await temp_empty_database.insert_all(ExchangeDataTables.OHLCV, symbol=[\n        'xyz', 'abc'], timestamp=[1, 2], price=[1, 10], date=['01', '05'])\n    assert await temp_empty_database.select(ExchangeDataTables.OHLCV) == [(\n        2, 'abc', '10', '05'), (1, 'xyz', '1', '01')]\n    assert await temp_empty_database.select(ExchangeDataTables.OHLCV, date='05'\n        ) == [(2, 'abc', '10', '05')]\n"
+}

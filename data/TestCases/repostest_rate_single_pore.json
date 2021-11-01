@@ -1,0 +1,9 @@
+{
+    "functionName": "test_rate_single_pore",
+    "className": "GenericTransportTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_GenericTransportTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "alg = op.algorithms.ReactiveTransport(network=self.net, phase=self.phase)\nalg.settings['conductance'] = 'throat.diffusive_conductance'\nalg.settings['quantity'] = 'pore.mole_fraction'\nalg.set_rate_BC(pores=self.net.pores('left'), values=1.235)\nalg.set_value_BC(pores=self.net.pores('right'), values=0.0)\nalg.run()\nrate = alg.rate(pores=self.net.pores('right'))[0]\nassert np.isclose(rate, -1.235 * self.net.pores('right').size)\nassert np.isclose(alg.rate(pores=self.net.Ps), 0.0)\n"
+}

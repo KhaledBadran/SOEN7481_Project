@@ -1,0 +1,9 @@
+{
+    "functionName": "test_run_bash_cmd_oserror",
+    "className": "TestRunBashCmd",
+    "fileName": "/DusanMadar_&_PySyncDroid/tests_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test 'run_bash_cmd' raises an OSError when trying to execute a\n        non-existent file.\n        \"\"\"\nself.mock_popen.side_effect = OSError\nwith self.assertRaises(OSError) as exc:\n    run_bash_cmd(['no_command'])\nerr_msg = 'Error while trying to execute command \"no_command\": None'\nself.assertEqual(str(exc.exception), err_msg)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_remove_boundary_conditions",
+    "className": "GenericTransportTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_GenericTransportTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "alg = op.algorithms.GenericTransport(network=self.net, phase=self.phase)\nalg.set_value_BC(pores=self.net.pores('top'), values=1)\nalg.set_value_BC(pores=self.net.pores('bottom'), values=0)\nassert np.sum(np.isfinite(alg['pore.bc_value'])) > 0\nalg.remove_BC(pores=self.net.pores('top'))\nassert np.sum(np.isfinite(alg['pore.bc_value'])) > 0\nalg.remove_BC(pores=self.net.pores('bottom'))\nassert np.sum(np.isfinite(alg['pore.bc_value'])) == 0\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "_test_process_discover_versions_batch_item",
+    "className": "TestKMIPClient",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_test_kmip_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "batch_item = ResponseBatchItem(operation=Operation(OperationEnum.\n    DISCOVER_VERSIONS), response_payload=payloads.\n    DiscoverVersionsResponsePayload(protocol_versions))\nresult = self.client._process_discover_versions_batch_item(batch_item)\nbase = 'expected {0}, received {1}'\nmsg = base.format(DiscoverVersionsResult, result)\nself.assertIsInstance(result, DiscoverVersionsResult, msg)\nif protocol_versions is None:\n    protocol_versions = list()\nmsg = base.format(protocol_versions, result.protocol_versions)\nself.assertEqual(protocol_versions, result.protocol_versions, msg)\n"
+}

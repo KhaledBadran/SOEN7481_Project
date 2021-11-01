@@ -1,0 +1,9 @@
+{
+    "functionName": "create_database_entries",
+    "className": null,
+    "fileName": "/BenSDuggan_&_DAPT/tests_&_test_sheets.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "scope = ['https://spreadsheets.google.com/feeds',\n    'https://www.googleapis.com/auth/drive']\ncreds = ServiceAccountCredentials.from_json_keyfile_name(config.config[\n    'sheets-creds-path'], scope)\nclient = gspread.authorize(creds)\nsheet = client.open_by_key(config.config['sheets-spreedsheet-id'])\nworksheet = sheet.get_worksheet(0)\nconfig = dapt.Config(path='test_config.json')\nsheet = dapt.db.Sheet(config=config)\ndata = [['id', 'start-time', 'end-time', 'status', 'a', 'b', 'c'], ['t1',\n    '2019-09-06 17:23', '2019-09-06 17:36', 'finished', '2', '4', '6'], [\n    't2', '', '', '', '10', '10', ''], ['t3', '', '', '', '10', '-10', '']]\nstart = gspread.utils.rowcol_to_a1(1, 1)\nend = gspread.utils.rowcol_to_a1(len(data) + 1, len(data[0]) + 1)\nrange_label = '%s!%s:%s' % (worksheet.title, start, end)\nsheet.sheet.values_update(range_label, params={'valueInputOption': 'RAW'},\n    body={'values': data})\nreturn\n"
+}

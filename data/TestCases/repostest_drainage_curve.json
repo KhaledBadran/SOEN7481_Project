@@ -1,0 +1,9 @@
+{
+    "functionName": "test_drainage_curve",
+    "className": "MixedPercolationTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_MixedPercolationTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "net = self.net\nphys = self.phys\nphys['throat.entry_pressure'] = np.arange(0, net.Nt, dtype=float)\nphys['pore.entry_pressure'] = 0.0\nIP_1 = mp(network=self.net)\nself.phase['pore.occupancy'] = False\nself.phase['throat.occupancy'] = False\nIP_1.settings['snap_off'] = False\nIP_1.setup(phase=self.phase)\ninv_points = np.arange(0, 100, 1, dtype=float)\nsat = np.zeros_like(inv_points)\ntot_vol = self.net['pore.volume'].sum() + self.net['throat.volume'].sum()\nfor i, Pc in enumerate(inv_points):\n    IP_1.reset()\n    IP_1.set_inlets(pores=self.inlets)\n    IP_1.set_residual(pores=self.phase['pore.occupancy'])\n    IP_1.run(max_pressure=Pc)\n    IP_1.results(Pc)\n    Pinv_Pc = IP_1['pore.invasion_pressure']\n    Tinv_Pc = IP_1['throat.invasion_pressure']\n    sat[i] += np.sum(self.net['pore.volume'][Pinv_Pc < np.inf])\n    sat[i] += np.sum(self.net['throat.volume'][Tinv_Pc < np.inf])\nassert sat.max() / tot_vol == 1.0\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_issue_22",
+    "className": null,
+    "fileName": "/textX_&_Arpeggio/arpeggio_&_tests_&_regressions_&_issue_22_&_test_issue_22.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Infinite recursion during resolving of a grammar given in a clean PEG\n    notation.\n    \"\"\"\ncurrent_dir = os.path.dirname(__file__)\ngrammar1 = open(os.path.join(current_dir, 'grammar1.peg')).read()\nparser1 = ParserPEG(grammar1, 'belang')\nparser1.parse('a [0]')\nparser1.parse('a (0)')\ngrammar2 = open(os.path.join(current_dir, 'grammar2.peg')).read()\nparser2 = ParserPEG(grammar2, 'belang', debug=True)\nparser2.parse('a [0](1)[2]')\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_derive_key_missing_iteration_count",
+    "className": "TestCryptographyEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_crypto_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the right error is raised when the iteration count is not\n        provided for PBKDF2-based key derivation.\n        \"\"\"\nengine = crypto.CryptographyEngine()\nargs = enums.DerivationMethod.PBKDF2, 16\nkwargs = {'hash_algorithm': enums.HashingAlgorithm.SHA_256, 'salt': b'\\x11\"3D'}\nself.assertRaisesRegex(exceptions.InvalidField,\n    'For PBKDF2 key derivation, iteration count must be specified.', engine\n    .derive_key, *args, **kwargs)\n"
+}

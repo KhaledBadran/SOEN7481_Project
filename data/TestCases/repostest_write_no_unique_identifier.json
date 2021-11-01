@@ -1,0 +1,9 @@
+{
+    "functionName": "test_write_no_unique_identifier",
+    "className": "TestModifyAttributeResponsePayload",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_modify_attribute.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that an InvalidField error is raised when attempting to write\n        a ModifyAttribute response payload to a buffer with no unique\n        identifier field specified.\n        \"\"\"\npayload = payloads.ModifyAttributeResponsePayload()\nargs = utils.BytearrayStream(),\nself.assertRaisesRegex(exceptions.InvalidField,\n    'The ModifyAttribute response payload is missing the unique identifier field.'\n    , payload.write, *args)\n"
+}

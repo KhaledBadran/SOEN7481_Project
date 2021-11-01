@@ -1,0 +1,9 @@
+{
+    "functionName": "test_exchange_with_cache",
+    "className": "TestWeather",
+    "fileName": "/lukeWaninger_&_GSCAP/tests_&_test_weather.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "content = pd.DataFrame([wthr.HourlyWeatherReport(lat=self.lat, lon=self.lon,\n    date=(self.day - dt.timedelta(days=i)).date(), time=self.time).dict for\n    i in range(2)])\nwthr.put_to_cache(content, self.session)\nt = self.session.query(wthr.HourlyWeatherReport).all()\nself.assertTrue(len(t) == 2)\nfor i in range(2):\n    t = wthr.get_from_cache(date=self.day - dt.timedelta(days=i), lat=self.\n        lat, lon=self.lon, session=self.session)\n    self.assertTrue(isinstance(t, pd.DataFrame))\n    self.assertTrue(len(t) == 1)\n"
+}

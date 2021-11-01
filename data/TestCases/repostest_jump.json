@@ -1,0 +1,9 @@
+{
+    "functionName": "test_jump",
+    "className": "TestJTypes",
+    "fileName": "/AshtonUPS_&_Py-MI-PS/src_&_PyMIPS_&_tests_&_test_commands.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "Memory.reset()\nDataHeap.reset()\nProgramStack.reset()\npc = RegisterPool.get_register('pc')\nprogram = {'main': [JType('j', 'test'), BaseCommand(), BaseCommand(),\n    BaseCommand()], 'test': [BaseCommand()]}\nProgramStack.add_block_from_dict(program)\nProgramStack.jump_label('main')\nProgramStack.execute_next()\naddress = ProgramStack.get_label_addres('test')\nself.assertEqual(pc.get_contents_as_int(), address)\n"
+}

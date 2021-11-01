@@ -1,0 +1,9 @@
+{
+    "functionName": "viterbi_decode",
+    "className": null,
+    "fileName": "/david-leon_&_Dandelion/test_&_test_ChainCRF.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Computes the best tag sequence y for a given input x, i.e. the one that\n    maximizes the value of path_energy.\"\"\"\nx = add_boundary_energy(x, b_start, b_end, mask)\nalpha_0 = x[:, (0), :]\ngamma_0 = K.zeros_like(alpha_0)\ninitial_states = [gamma_0, alpha_0]\n_, gamma = _forward(x, lambda B: [K.cast(K.argmax(B, axis=1), K.floatx()),\n    K.max(B, axis=1)], initial_states, U, mask)\ny = _backward(gamma, mask)\nreturn y\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "create_test_for_lambda_invocation",
+    "className": "test_Temp_Aws_Roles",
+    "fileName": "/pbx-gs_&_OSBot-AWS/tests_&_unit_&_apis_&_test_helpers_&_test_Temp_Aws_Roles.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "role_name = self.temp_aws_roles.role_name__for_lambda_invocation\nrole_arn = 'arn:aws:iam::{0}:role/{1}'.format(self.account_id, role_name)\nassert role_arn == self.temp_aws_roles.for_lambda_invocation(delete_existing\n    =True)\nself.iam = IAM().set_role_name(role_name)\npolicies_statements = self.iam.role_policies_statements(just_statements=True)\nresource = policies_statements[0].get('Resource')[0]\nassert self.account_id in resource\nunittest.skip(\n    'causes side effect with other tests, due to the fact that AWS takes a while to sync the privileges internally'\n    )"
+}

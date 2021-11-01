@@ -1,0 +1,9 @@
+{
+    "functionName": "test_load_fail_no_section",
+    "className": "TestDucoNode",
+    "fileName": "/SteinHeselmans_&_DucoBox/tests_&_test_duconode.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "node = dut.DucoNode(111, 222)\ncfgparser_mock_object = MagicMock(spec=dut.ConfigParser)\ncfgparser_mock_object.get.side_effect = NoSectionError(\n    'some message for missing config parser section')\nnode._load(cfgparser_mock_object)\nself.assertEqual(int(node.number), 111)\nself.assertEqual(int(node.address), 222)\nself.assertEqual(node.blacklist, False)\npatch('duco.ducobox.ConfigParser', autospec=True)"
+}

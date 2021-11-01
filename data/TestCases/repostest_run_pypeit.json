@@ -1,0 +1,9 @@
+{
+    "functionName": "test_run_pypeit",
+    "className": null,
+    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_runpypeit.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "rawdir = os.path.join(os.environ['PYPEIT_DEV'], 'RAW_DATA',\n    'shane_kast_blue', '600_4310_d55')\nassert os.path.isdir(rawdir), 'Incorrect raw directory'\ntestrawdir = os.path.join(rawdir, 'TEST')\nif os.path.isdir(testrawdir):\n    shutil.rmtree(testrawdir)\nos.makedirs(testrawdir)\nfiles = ['b21.fits.gz', 'b22.fits.gz', 'b23.fits.gz', 'b27.fits.gz',\n    'b1.fits.gz', 'b11.fits.gz', 'b12.fits.gz', 'b13.fits.gz']\nfor f in files:\n    shutil.copy(os.path.join(rawdir, f), os.path.join(testrawdir, f))\noutdir = os.path.join(os.getenv('PYPEIT_DEV'), 'REDUX_OUT_TEST')\nif os.path.isdir(outdir):\n    shutil.rmtree(outdir)\nsargs = setup.parser(['-r', testrawdir, '-s', 'shane_kast_blue', '-c all',\n    '-o', '--output_path', outdir])\nsetup.main(sargs)\nconfigdir = os.path.join(outdir, 'shane_kast_blue_A')\npyp_file = os.path.join(configdir, 'shane_kast_blue_A.pypeit')\nassert os.path.isfile(pyp_file), 'PypeIt file not written.'\npargs = run_pypeit.parser([pyp_file, '-o', '-m', '-r', configdir])\nrun_pypeit.main(pargs)\nassert os.path.isfile(os.path.join(configdir, 'Science',\n    'spec2d_b27-J1217p3905_KASTb_2015May20T045733.560.fits'))\nspec1d_file = os.path.join(configdir, 'Science',\n    'spec1d_b27-J1217p3905_KASTb_2015May20T045733.560.fits')\nassert os.path.isfile(spec1d_file)\nspecObjs = specobjs.SpecObjs.from_fitsfile(spec1d_file)\nassert specObjs[0].FLEX_SHIFT != 0.0, 'Flexure not calculated!'\nassert specObjs[0].VEL_CORR != 0.0, 'Heliocentric not calculated!'\npargs = run_pypeit.parser([pyp_file, '-o', '-m', '-r', configdir])\nrun_pypeit.main(pargs)\nshutil.rmtree(outdir)\nshutil.rmtree(testrawdir)\ndev_suite_required"
+}

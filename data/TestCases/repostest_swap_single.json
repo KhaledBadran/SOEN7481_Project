@@ -1,0 +1,9 @@
+{
+    "functionName": "test_swap_single",
+    "className": "Test_dependence",
+    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_dependence.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.setUp()\nnqubits = 4\nk = ql.Kernel('aKernel', platf, nqubits)\nk.gate('x', [0])\nk.gate('swap', [0, 1])\nk.gate('x', [0])\nsweep_points = [2]\np = ql.Program('swap_single', platf, nqubits)\np.set_sweep_points(sweep_points)\np.add_kernel(k)\np.compile()\ngold_fn = rootDir + '/golden/test_swap_single_ASAP.qasm'\nqasm_fn = os.path.join(output_dir, p.name + '_scheduledqasmwriter_out.qasm')\nself.assertTrue(file_compare(qasm_fn, gold_fn))\n"
+}

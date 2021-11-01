@@ -1,0 +1,9 @@
+{
+    "functionName": "test_plot_filter_dataframe_for_plotting_gpu_and_cpu",
+    "className": null,
+    "fileName": "/bio-phys_&_MDBenchmark/mdbenchmark_&_tests_&_test_plot.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Checks whether the cpu and gpu filtering works properly.\n    \"\"\"\nwith tmpdir.as_cwd():\n    input_df = pd.read_csv(data['testcsv.csv'])\n    if gpu and not cpu:\n        input_df = input_df[input_df.gpu]\n    elif not gpu and cpu:\n        input_df = input_df[~input_df.gpu]\n    elif not gpu and not cpu:\n        input_df = pd.read_csv(data['empty_df.csv'])\n    real_df = plot.filter_dataframe_for_plotting(df=input_df, host_name=(),\n        module_name=(), gpu=gpu, cpu=cpu)\n    assert_frame_equal(input_df, real_df)\npytest.mark.parametrize('gpu,cpu', [(True, True), (True, False), (False, True)]\n    )"
+}

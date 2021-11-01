@@ -1,0 +1,9 @@
+{
+    "functionName": "load_project",
+    "className": "OpenpnmIO",
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_io_&_OpenpnmIO.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        Load a saved Project file into the current Workspace\n\n        Parameters\n        ----------\n        filename : string or path object\n            The name of the file to load\n\n        Returns\n        -------\n        project : OpenPNM Project\n            A handle to the loaded Project is returned.\n        \"\"\"\nfilename = cls._parse_filename(filename=filename, ext='pnm')\nprojname = filename.name.split('.')[0]\nwith open(filename, 'rb') as f:\n    d = pickle.load(f)\n    if type(d) is dict:\n        if len(d) == 1:\n            projects = set(ws.keys())\n            temp = cls.load_workspace(filename=filename, overwrite=False)\n            proj = list(set(temp.keys()).difference(projects))[0]\n            return ws[proj]\n        else:\n            raise Exception(filename.name + ' contains multiple ' +\n                'projects, use load_workspace instead')\n    elif isinstance(d, list):\n        if projname not in ws.keys():\n            ws[projname] = d\n            return ws[projname]\n        else:\n            newname = ws._gen_name()\n            logger.warning('Project named ' + projname +\n                ' already present in Workspace,' + ' renaming to ' + newname)\n            ws[newname] = d\n            return ws[newname]\n    else:\n        raise Exception('File contents are not understood')\nclassmethod"
+}

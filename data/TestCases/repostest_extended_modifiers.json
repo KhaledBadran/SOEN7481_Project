@@ -1,0 +1,9 @@
+{
+    "functionName": "test_extended_modifiers",
+    "className": "TestXenaOffline",
+    "fileName": "/xenadevel_&_PyXenaValkyrie/tests_&_test_offline.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "try:\n    port = self.xm.session.reserve_ports([self.port3])[self.port3]\nexcept Exception as e:\n    pytest.skip('Skip test - ' + str(e))\nport.load_config(path.join(path.dirname(__file__), 'configs',\n    'test_config_100G.xpc'))\nassert len(port.streams[0].modifiers) == 1\nmodifier1 = port.streams[0].modifiers[0]\nassert modifier1.min_val == 0\nprint(modifier1)\nmodifier2 = port.streams[0].add_modifier(m_type=XenaModifierType.extended,\n    position=12)\nassert len(port.streams[0].modifiers) == 1\nassert len(port.streams[0].xmodifiers) == 1\nassert modifier2.position == 12\nprint(modifier2)\nport.streams[0].remove_modifier(0)\nassert len(port.streams[0].modifiers) == 0\nassert len(port.streams[0].xmodifiers) == 1\nport.streams[0].remove_modifier(0, m_type=XenaModifierType.extended)\nassert len(port.streams[0].xmodifiers) == 0\n"
+}

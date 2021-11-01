@@ -1,0 +1,9 @@
+{
+    "functionName": "on_master_process",
+    "className": null,
+    "fileName": "/Silmathoron_&_NNGT/nngt_&_lib_&_test_functions.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Check whether the current code is executing on the master process (rank 0)\n    if MPI is used.\n\n    Returns\n    -------\n    True if rank is 0, if mpi4py is not present or if MPI is not used,\n    otherwise False.\n    \"\"\"\ntry:\n    from mpi4py import MPI\n    comm = MPI.COMM_WORLD\n    rank = comm.Get_rank()\n    if rank == 0:\n        return True\n    else:\n        return False\nexcept ImportError:\n    return True\n"
+}

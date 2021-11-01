@@ -1,0 +1,9 @@
+{
+    "functionName": "pore_coords",
+    "className": null,
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_models_&_geometry_&_throat_centroid.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Calculate throat centroid values by averaging adjacent pore coordinates.\n\n    Parameters\n    ----------\n    target : OpenPNM Object\n        The object which this model is associated with. This controls the\n        length of the calculated array, and also provides access to other\n        necessary properties.\n\n    Returns\n    -------\n    value : NumPy ndarray\n        Array containing throat centroid values.\n\n    \"\"\"\nnetwork = target.project.network\nTs = network.throats(target.name)\nconns = network['throat.conns']\ncoords = network['pore.coords']\nreturn _np.mean(coords[conns], axis=1)[Ts]\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_plotter_extents5",
+    "className": "TestChain",
+    "fileName": "/samreay_&_ChainConsumer/tests_&_test_plotter.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "x, y = np.linspace(-3, 3, 200), np.linspace(-5, 5, 200)\nxx, yy = np.meshgrid(x, y, indexing='ij')\nxs, ys = xx.flatten(), yy.flatten()\nchain = np.vstack((xs, ys)).T\npdf = 1 / (2 * np.pi) * np.exp(-0.5 * (xs * xs + ys * ys / 4))\nc = ChainConsumer()\nc.add_chain(chain, parameters=['x', 'y'], weights=pdf, grid=True)\nc.configure()\nminv, maxv = c.plotter._get_parameter_extents('x', c.chains)\nassert np.isclose(minv, -3, atol=0.001)\nassert np.isclose(maxv, 3, atol=0.001)\n"
+}

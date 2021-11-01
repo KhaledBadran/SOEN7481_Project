@@ -1,0 +1,9 @@
+{
+    "functionName": "test_reify_edges_amr_codec",
+    "className": null,
+    "fileName": "/goodmami_&_penman/tests_&_test_transform.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "decode = amr_codec.decode\nnorm = make_norm(reify_edges, amr_model)\nform = make_form(amr_codec.encode)\ng = norm(decode('(a / alpha :mod 5)'))\nassert form(g) == '(a / alpha :ARG1-of (_ / have-mod-91 :ARG2 5))'\ng = norm(decode('(a / alpha :mod-of (b / beta))'))\nassert form(g) == '(a / alpha :ARG2-of (_ / have-mod-91 :ARG1 (b / beta)))'\ng = norm(decode('(a / alpha :mod-of (b / beta :polarity -))'))\nassert form(g\n    ) == '(a / alpha :ARG2-of (_ / have-mod-91 :ARG1 (b / beta :ARG1-of (_2 / have-polarity-91 :ARG2 -))))'\ng = norm(decode('(a / alpha :mod-of~1 (b / beta~2 :polarity -))'))\nassert form(g\n    ) == '(a / alpha :ARG2-of (_ / have-mod-91~1 :ARG1 (b / beta~2 :ARG1-of (_2 / have-polarity-91 :ARG2 -))))'\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_remote_data_service_dividend",
+    "className": null,
+    "fileName": "/quantOS-org_&_JAQS/test_&_test_dataservice.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "arr = ds.query_index_member(index='000300.SH', start_date=20160101,\n    end_date=20170505)\nsymbol_arr = ','.join(arr)\ndf, msg = ds.query_dividend(symbol_arr, start_date=20160101, end_date=20170101)\ndf2 = df.pivot(index='exdiv_date', columns='symbol', values='share_ratio')\nassert abs(df.loc[(df['exdiv_date'] == 20160504) & (df['symbol'] ==\n    '002085.SZ'), 'share_ratio'] - 0.2).iat[0] < 0.01\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sample_conditional",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_conditionals_&_test_multioutput.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "if full_cov and full_output_cov:\n    return\nq_mu = tf.random.uniform((Data.M, Data.P), dtype=tf.float64)\nq_sqrt = tf.convert_to_tensor([np.tril(tf.random.uniform((Data.M, Data.M),\n    dtype=tf.float64)) for _ in range(Data.P)])\nZ = Data.X[:Data.M, (...)]\nXs = np.ones((Data.N, Data.D), dtype=float_type)\ninducing_variable = InducingPoints(Z)\nkernel = SquaredExponential()\nvalue_f, mean_f, var_f = sample_conditional(Xs, inducing_variable, kernel,\n    q_mu, q_sqrt=q_sqrt, white=whiten, full_cov=full_cov, full_output_cov=\n    full_output_cov, num_samples=int(100000.0))\nvalue_f = value_f.numpy().reshape((-1,) + value_f.numpy().shape[2:])\nif full_output_cov:\n    pytest.skip(\n        'sample_conditional with X instead of inducing_variable does not support full_output_cov'\n        )\nvalue_x, mean_x, var_x = sample_conditional(Xs, Z, kernel, q_mu, q_sqrt=\n    q_sqrt, white=whiten, full_cov=full_cov, full_output_cov=\n    full_output_cov, num_samples=int(100000.0))\nvalue_x = value_x.numpy().reshape((-1,) + value_x.numpy().shape[2:])\nnp.testing.assert_array_almost_equal(np.mean(value_x, axis=0), np.mean(\n    value_f, axis=0), decimal=1)\nnp.testing.assert_array_almost_equal(np.cov(value_x, rowvar=False), np.cov(\n    value_f, rowvar=False), decimal=1)\nnp.testing.assert_allclose(mean_x, mean_f)\nnp.testing.assert_allclose(var_x, var_f)\npytest.mark.parametrize('whiten', [True, False])pytest.mark.parametrize('full_cov', [True, False])pytest.mark.parametrize('full_output_cov', [True, False])"
+}

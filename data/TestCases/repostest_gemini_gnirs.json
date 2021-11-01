@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gemini_gnirs",
+    "className": null,
+    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_spectrographs.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "s = spectrographs.gemini_gnirs.GeminiGNIRSSpectrograph()\nexample_file = os.path.join(os.environ['PYPEIT_DEV'], 'RAW_DATA',\n    'gemini_gnirs', '32_SB_SXD', 'cN20170331S0246.fits')\nassert os.path.isfile(example_file\n    ), 'Could not find example file for Gemini GNIRS read.'\ndet = 1\n_, data, hdu, exptime, rawdatasec_img, oscansec_img = s.get_rawimage(\n    example_file, det)\nbpm = s.bpm(example_file, det)\nassert data.shape == (1022, 1024)\nassert bpm.shape == (1022, 1024)\ndev_suite_required"
+}

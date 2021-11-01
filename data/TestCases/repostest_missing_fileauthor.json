@@ -1,0 +1,9 @@
+{
+    "functionName": "test_missing_fileauthor",
+    "className": "TestFileMetadata",
+    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_converters.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Ensure missing file author raises error.\n        \"\"\"\nroot = etree.Element('experiment')\nversion = etree.SubElement(root, 'fileVersion')\nmajor_version = etree.SubElement(version, 'major')\nmajor_version.text = '1'\nminor_version = etree.SubElement(version, 'minor')\nminor_version.text = '0'\nwith pytest.raises(MissingElementError) as excinfo:\n    get_file_metadata(root)\nassert 'Error: required element fileAuthor is missing.' in str(excinfo.value)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_listen_for_messages",
+    "className": "PubSubTests",
+    "fileName": "/washad_&_PyRedisEasyIO/tests_&_test_pub_sub.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "pubsub1, pubsub2 = self.pubsub1, self.pubsub2\nthreading.Thread(target=self._publish_many, args=(20, 0.1)).start()\nmessages = []\nfor i, m in enumerate(pubsub2.listen()):\n    if i >= 10:\n        break\n    messages.append(m[1])\nassert_that(len(messages)).is_equal_to(10)\n"
+}

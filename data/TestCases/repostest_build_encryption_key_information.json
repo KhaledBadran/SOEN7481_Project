@@ -1,0 +1,9 @@
+{
+    "functionName": "test_build_encryption_key_information",
+    "className": "TestProxyKmipClient",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_test_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that an EncryptionKeyInformation struct can be built from a\n        dictionary.\n        \"\"\"\nclient = ProxyKmipClient()\nresult = client._build_encryption_key_information(None)\nself.assertEqual(None, result)\nresult = client._build_encryption_key_information({'unique_identifier':\n    'test', 'cryptographic_parameters': {'block_cipher_mode': enums.\n    BlockCipherMode.CBC}})\nself.assertIsInstance(result, obj.EncryptionKeyInformation)\nself.assertEqual('test', result.unique_identifier)\nself.assertIsInstance(result.cryptographic_parameters, obj.\n    CryptographicParameters)\nself.assertEqual(enums.BlockCipherMode.CBC, result.cryptographic_parameters\n    .block_cipher_mode)\n"
+}

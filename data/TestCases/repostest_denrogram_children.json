@@ -1,0 +1,9 @@
+{
+    "functionName": "test_denrogram_children",
+    "className": null,
+    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_tests_&_test_cluster.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "import numpy as np\nfrom scipy.cluster.hierarchy import dendrogram, linkage\nfrom freediscovery.cluster import _DendrogramChildren\nnp.random.seed(1)\na = np.random.multivariate_normal([10, 0], [[3, 1], [1, 4]], size=[10])\nb = np.random.multivariate_normal([0, 20], [[3, 1], [1, 4]], size=[5])\nX = np.concatenate((a, b))\nZ = linkage(X, 'ward')\nZ[:, (2)] = np.arange(Z.shape[0]) + 1\nddata = dendrogram(Z, no_plot=True)\ndc = _DendrogramChildren(ddata)\nidx = 0\nfor i, d, c in zip(ddata['icoord'], ddata['dcoord'], ddata['color_list']):\n    node_children = dc.query(idx)\n    idx += 1\nassert len(node_children) == X.shape[0]\nassert_allclose(sorted(node_children), np.arange(X.shape[0]))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_transform_values_not_ndarray",
+    "className": "TestBaseHyperParam",
+    "fileName": "/HDI-Project_&_BTB/tests_&_tuning_&_hyperparams_&_test_base.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "instance = MagicMock()\ninstance._transform.return_value = 2\nmock_np_asarray.return_value = np.array([[1]])\nvalues = 1\nresult = BaseHyperParam.transform(instance, values)\nmock_np_asarray.asser_called_once_with(1)\ninstance._within_hyperparam_space.assert_called_once_with(np.array([[1]]))\ninstance._transform.assert_called_once_with(np.array([[1]]))\nself.assertEqual(result, 2)\npatch('btb.tuning.hyperparams.base.np.asarray')"
+}

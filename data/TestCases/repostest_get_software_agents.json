@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_software_agents",
+    "className": null,
+    "fileName": "/incf-nidash_&_PyNIDM/nidm_&_experiment_&_tools_&_tests_&_test_rest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "nidm_file = BRAIN_VOL_FILES[0]\nrdf_graph = Query.OpenGraph(nidm_file)\nagents = Query.getSoftwareAgents(rdf_graph)\nassert len(agents) > 0\nisa = URIRef('http://www.w3.org/1999/02/22-rdf-syntax-ns#type')\ncount = 0\nfor a in agents:\n    for s, o, p in rdf_graph.triples((a, isa, Constants.PROV['Agent'])):\n        count += 1\nassert count == len(agents)\n"
+}

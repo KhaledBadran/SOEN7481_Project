@@ -1,0 +1,9 @@
+{
+    "functionName": "test_with_context_should_inject_dependencies_properly",
+    "className": null,
+    "fileName": "/Neuraxio_&_Neuraxle/testing_&_test_could_have_context.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data_inputs = np.array([0, 1, 2, 3])\ncontext = ExecutionContext(root=tmpdir)\nservice = SomeService()\ncontext.set_service_locator({BaseService: service})\np = Pipeline([SomeStep().assert_has_services(BaseService)]).with_context(\n    context=context)\np.transform(data_inputs=data_inputs)\nassert np.array_equal(service.data, data_inputs)\n"
+}

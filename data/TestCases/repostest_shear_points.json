@@ -1,0 +1,9 @@
+{
+    "functionName": "test_shear_points",
+    "className": "TransformationsTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_topotools_&_TransformationsTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "net = op.network.Cubic(shape=[3, 3, 3])\na = np.array([[0.5, 0.5, 0.5], [0.5, 0.5, 1.5]])\nassert np.allclose(net['pore.coords'][0:2, :], a)\ntopotools.shear_coords(network=net, ay=1)\nb = np.array([[1.0, 0.5, 0.5], [1.0, 0.5, 1.5]])\nassert np.allclose(net['pore.coords'][0:2, :], b)\nnet = op.network.Cubic(shape=[3, 3, 3])\nS = [[1.0, 1.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]\ntopotools.shear_coords(network=net, S=S)\nassert np.allclose(net['pore.coords'][0:2, :], b)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_firefox_find_db",
+    "className": "TestBrowser",
+    "fileName": "/cdgriffith_&_CookieEater/test_&_test_browser.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from cookie_eater.base import get_platform\ntry:\n    FirefoxCookies()\nexcept Exception:\n    pass\n_db_paths = {'windows': '~\\\\AppData\\\\Roaming\\\\Mozilla\\\\Firefox\\\\Profiles\\\\',\n    'mac': '~/Library/Application Support/Firefox/Profiles/', 'linux':\n    '~/.mozilla/firefox/'}\npath = os.path.expanduser(_db_paths[get_platform()])\ntest_path = os.path.join(path, 'reusables_test.default')\ntry:\n    os.mkdir(test_path)\nexcept Exception:\n    pass\ntry:\n    FirefoxCookies()\nexcept BrowserException as err:\n    assert 'Cookie does not exist at' in str(err)\nfinally:\n    shutil.rmtree(test_path, ignore_errors=True)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_setup_two_domains",
+    "className": "TestDomainDynDNS",
+    "fileName": "/Domain-Connect_&_DomainConnectDDNS-Python/dyndns_&_tests_&_test_dyndns.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "domain_1 = 'host1.' + self.domain\ndomain_2 = 'host2.' + self.domain\nself._setup_domain(domain_1)\nself._setup_domain(domain_2)\nassert os.path.exists('settings.txt'), 'Settings file missing'\nwith open('settings.txt', 'r') as file:\n    context = json.load(file)\n    for domain in [domain_1, domain_2]:\n        assert domain in context, 'Domain not found in settings'\n        config = context[domain]\n        assert len(config.keys()) == len(self.expected_settings_keys\n            ), 'Config size incorrect'\n        for key in self.expected_settings_keys:\n            assert key in config, 'Key `{}` not found.'.format(key)\nunittest.skipIf(not stdin.isatty(), 'Skipping interactive test.')"
+}

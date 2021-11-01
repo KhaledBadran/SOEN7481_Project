@@ -1,0 +1,9 @@
+{
+    "functionName": "test_equivalence_vgp_and_svgp",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_integration_&_test_method_equivalence.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "kernel = gpflow.kernels.Matern52()\nlikelihood = gpflow.likelihoods.StudentT()\nsvgp_model = _create_svgp_model(kernel, likelihood, DatumVGP.q_mu, DatumVGP\n    .q_sqrt, whiten=True)\nvgp_model = _create_vgp_model(kernel, likelihood, DatumVGP.q_mu, DatumVGP.\n    q_sqrt)\nlikelihood_svgp = svgp_model.elbo(DatumVGP.data)\nlikelihood_vgp = vgp_model.elbo()\nassert_allclose(likelihood_svgp, likelihood_vgp, rtol=0.01)\nsvgp_mu, svgp_var = svgp_model.predict_f(DatumVGP.Xs)\nvgp_mu, vgp_var = vgp_model.predict_f(DatumVGP.Xs)\nassert_allclose(svgp_mu, vgp_mu)\nassert_allclose(svgp_var, vgp_var)\n"
+}

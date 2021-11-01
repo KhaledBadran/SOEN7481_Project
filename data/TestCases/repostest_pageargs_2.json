@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pageargs_2",
+    "className": "InheritanceTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_inheritance.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "collection = lookup.TemplateLookup()\ncollection.put_string('base',\n    \"\"\"\n            this is the base.\n\n            ${next.body(**context.kwargs)}\n\n            <%def name=\"foo(**kwargs)\">\n                ${next.body(**kwargs)}\n            </%def>\n\n            <%def name=\"bar(**otherargs)\">\n                ${next.body(z=16, **context.kwargs)}\n            </%def>\n\n            ${foo(x=12, y=15, z=8)}\n            ${bar(x=19, y=17)}\n        \"\"\"\n    )\ncollection.put_string('index',\n    \"\"\"\n            <%inherit file=\"base\"/>\n            <%page args=\"x, y, z=7\"/>\n            pageargs: ${x}, ${y}, ${z}\n        \"\"\"\n    )\nassert result_lines(collection.get_template('index').render(x=5, y=10)) == [\n    'this is the base.', 'pageargs: 5, 10, 7', 'pageargs: 12, 15, 8',\n    'pageargs: 5, 10, 16']\n"
+}

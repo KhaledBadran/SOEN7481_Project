@@ -1,0 +1,9 @@
+{
+    "functionName": "test_movie",
+    "className": null,
+    "fileName": "/nipy_&_PySurfer/surfer_&_tests_&_test_viz.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test saving a movie of an MEG inverse solution.\"\"\"\nimport imageio\nif sys.version_info < (3,):\n    raise SkipTest('imageio ffmpeg requires Python 3')\n_set_backend()\nbrain = Brain(*std_args)\nstc_fname = os.path.join(data_dir, 'meg_source_estimate-lh.stc')\nstc = io.read_stc(stc_fname)\ndata = stc['data']\ntime = np.arange(data.shape[1]) * stc['tstep'] + stc['tmin']\nbrain.add_data(data, colormap='hot', vertices=stc['vertices'],\n    smoothing_steps=10, time=time, time_label='time=%0.2f ms')\nbrain.scale_data_colormap(fmin=13, fmid=18, fmax=22, transparent=True)\ndst = str(tmpdir.join('test.mov'))\nbrain.save_movie(dst)\nframes = imageio.mimread(dst)\nassert len(frames) == 2\nbrain.save_movie(dst, time_dilation=10)\nframes = imageio.mimread(dst)\nassert len(frames) == 7\nbrain.save_movie(dst, tmin=0.081, tmax=0.102)\nframes = imageio.mimread(dst)\nassert len(frames) == 2\nbrain.close()\nrequires_imageio()requires_fsaverage()"
+}

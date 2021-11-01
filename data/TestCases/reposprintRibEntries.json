@@ -1,0 +1,9 @@
+{
+    "functionName": "printRibEntries",
+    "className": null,
+    "fileName": "/named-data_&_PyNDN2/examples_&_test_list_rib.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    This is called when all the segments are received to decode the\n    encodedMessage as repeated TLV RibEntry messages and display the values.\n\n    :param Blob encodedMessage: The repeated TLV-encoded RibEntry.\n    \"\"\"\nribEntryMessage = rib_entry_pb2.RibEntryMessage()\nProtobufTlv.decode(ribEntryMessage, encodedMessage)\ndump('RIB:')\nfor ribEntry in ribEntryMessage.rib_entry:\n    line = ''\n    line += ProtobufTlv.toName(ribEntry.name.component).toUri()\n    for route in ribEntry.routes:\n        line += ' route={faceId=' + str(route.face_id) + ' (origin=' + str(\n            route.origin) + ' cost=' + str(route.cost)\n        if route.flags & 1 != 0:\n            line += ' ChildInherit'\n        if route.flags & 2 != 0:\n            line += ' Capture'\n        if route.HasField('expiration_period'):\n            line += ' expirationPeriod=' + str(route.expiration_period)\n        line += ')}'\n    dump(line)\n"
+}

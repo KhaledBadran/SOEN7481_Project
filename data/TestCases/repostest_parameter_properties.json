@@ -1,0 +1,9 @@
+{
+    "functionName": "test_parameter_properties",
+    "className": null,
+    "fileName": "/PEtab-dev_&_PEtab/tests_&_test_petab.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test the petab.Problem functions to get parameter values.\n    \"\"\"\npetab_problem = copy.deepcopy(petab_problem)\npetab_problem.parameter_df = pd.DataFrame(data={PARAMETER_ID: ['par1',\n    'par2', 'par3'], LOWER_BOUND: [0, 0.1, 0.1], UPPER_BOUND: [100, 100, \n    200], PARAMETER_SCALE: ['lin', 'log', 'log10'], NOMINAL_VALUE: [7, 8, 9\n    ], ESTIMATE: [1, 1, 0]}).set_index(PARAMETER_ID)\nassert petab_problem.x_ids == ['par1', 'par2', 'par3']\nassert petab_problem.x_free_ids == ['par1', 'par2']\nassert petab_problem.x_fixed_ids == ['par3']\nassert petab_problem.lb == [0, 0.1, 0.1]\nassert petab_problem.lb_scaled == [0, np.log(0.1), np.log10(0.1)]\nassert petab_problem.get_lb(fixed=False, scaled=True) == [0, np.log(0.1)]\nassert petab_problem.ub == [100, 100, 200]\nassert petab_problem.ub_scaled == [100, np.log(100), np.log10(200)]\nassert petab_problem.get_ub(fixed=False, scaled=True) == [100, np.log(100)]\nassert petab_problem.x_nominal == [7, 8, 9]\nassert petab_problem.x_nominal_scaled == [7, np.log(8), np.log10(9)]\nassert petab_problem.x_nominal_free == [7, 8]\nassert petab_problem.x_nominal_fixed == [9]\nassert petab_problem.x_nominal_free_scaled == [7, np.log(8)]\nassert petab_problem.x_nominal_fixed_scaled == [np.log10(9)]\n"
+}

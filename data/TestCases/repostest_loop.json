@@ -1,0 +1,9 @@
+{
+    "functionName": "test_loop",
+    "className": null,
+    "fileName": "/vc1492a_&_PyNomaly/tests_&_test_loop.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Tests the basic functionality and asserts that the anomalous observations\n    are detected as anomalies. Tests the functionality using inputs\n    as Numpy arrays and as Pandas dataframes.\n    :param X_n8: A pytest Fixture that generates the 8 observations.\n    :return: None\n    \"\"\"\nclf = loop.LocalOutlierProbability(X_n8, n_neighbors=5, use_numba=NUMBA)\nscore = clf.fit().local_outlier_probabilities\nshare_outlier = 2.0 / 8.0\npredictions = [(-1 if s > share_outlier else 1) for s in score]\nassert_array_equal(predictions, 6 * [1] + 2 * [-1])\nassert_greater(np.min(score[-2:]), np.max(score[:-2]))\nX_df = pd.DataFrame(X_n8)\nclf = loop.LocalOutlierProbability(X_df, n_neighbors=5, use_numba=NUMBA)\nscore = clf.fit().local_outlier_probabilities\nshare_outlier = 2.0 / 8.0\npredictions = [(-1 if s > share_outlier else 1) for s in score]\nassert_array_equal(predictions, 6 * [1] + 2 * [-1])\nassert_greater(np.min(score[-2:]), np.max(score[:-2]))\n"
+}

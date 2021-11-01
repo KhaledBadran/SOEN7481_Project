@@ -1,0 +1,9 @@
+{
+    "functionName": "test_load_snli",
+    "className": null,
+    "fileName": "/NTMC-Community_&_MatchZoo-py/tests_&_test_datasets.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "train_data, classes = mz.datasets.snli.load_data('train', 'classification',\n    return_classes=True)\nnum_samples = 549361\nassert len(train_data) == num_samples\nx, y = train_data.unpack()\nassert len(x['text_left']) == num_samples\nassert len(x['text_right']) == num_samples\nassert y.shape == (num_samples, 1)\nassert classes == ['entailment', 'contradiction', 'neutral']\ndev_data, classes = mz.datasets.snli.load_data('dev', 'classification',\n    return_classes=True)\nassert len(dev_data) == 9842\nassert classes == ['entailment', 'contradiction', 'neutral']\ntest_data, classes = mz.datasets.snli.load_data('test', 'classification',\n    return_classes=True)\nassert len(test_data) == 9824\nassert classes == ['entailment', 'contradiction', 'neutral']\ntrain_data = mz.datasets.snli.load_data('train', 'ranking')\nx, y = train_data.unpack()\nassert len(x['text_left']) == num_samples\nassert len(x['text_right']) == num_samples\nassert y.shape == (num_samples, 1)\npytest.mark.cron"
+}

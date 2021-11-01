@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_TR",
+    "className": null,
+    "fileName": "/open-source-economics_&_OG-USA/ogusa_&_tests_&_test_fiscal.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test of the fiscal.get_TR() function.\n    \"\"\"\nY = 3.2\nTR = 1.5\nG = 0.0\nagg_pension_outlays = 0.0\ntotal_tax_revenue = 1.9\np = Specifications(baseline=baseline)\np.budget_balance = budget_balance\np.baseline_spending = baseline_spending\nif method == 'TPI':\n    Y = np.ones(p.T * p.S) * Y\n    TR = np.ones(p.T * p.S) * TR\n    total_tax_revenue = np.ones(p.T * p.S) * total_tax_revenue\ntest_TR = fiscal.get_TR(Y, TR, G, total_tax_revenue, agg_pension_outlays, p,\n    method)\nassert np.allclose(test_TR, expected_TR)\npytest.mark.parametrize(\n    'baseline,budget_balance,baseline_spending,method,expected_TR', [(True,\n    False, False, 'SS', expected_TR1), (True, True, False, 'SS',\n    expected_TR2), (False, False, True, 'SS', expected_TR3), (True, False, \n    False, 'TPI', expected_TR4)], ids=['balanced_budget = False',\n    'balanced_budget = True', 'baseline_spending = True',\n    'Time path, balanced_budget = False'])"
+}

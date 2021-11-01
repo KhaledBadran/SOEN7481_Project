@@ -1,0 +1,9 @@
+{
+    "functionName": "_test_diffusion_sim_core",
+    "className": null,
+    "fileName": "/OpenSMFS_&_PyBroMo/pybromo_&_tests_&_test_diffusion.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "rs = np.random.RandomState(_SEED)\nP = pbm.Particles(num_particles=100, D=D1, box=box, rs=rs)\nt_max = 0.001\ntime_size = t_max / t_step\nassert t_max < 10000.0\nS = pbm.ParticlesSimulation(t_step=t_step, t_max=t_max, particles=P, box=\n    box, psf=psf)\nstart_pos = [p.r0 for p in S.particles]\nstart_pos = np.vstack(start_pos).reshape(S.num_particles, 3, 1)\nfor wrap_func in [pbm.diffusion.wrap_mirror, pbm.diffusion.wrap_periodic]:\n    for total_emission in [True, False]:\n        sim = S._sim_trajectories(time_size, start_pos, rs=rs,\n            total_emission=total_emission, save_pos=True, wrap_func=wrap_func)\nPOS, em = sim\nPOS = np.concatenate(POS, axis=0)\nDR = np.diff(POS, axis=2)\ndx, dy, dz = DR[:, :, (0)], DR[:, :, (1)], DR[:, :, (2)]\ndr_squared = dx ** 2 + dy ** 2 + dz ** 2\nD_fitted = dr_squared.mean() / (6 * t_max)\nassert np.abs(D1 - D_fitted) < 0.01\n"
+}

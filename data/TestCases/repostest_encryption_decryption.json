@@ -1,0 +1,9 @@
+{
+    "functionName": "test_encryption_decryption",
+    "className": "TestRsaAlgorithm",
+    "fileName": "/named-data_&_PyNDN2/tests_&_unit_tests_&_test_rsa_algorithm.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "encryptParams = EncryptParams(EncryptAlgorithmType.RsaOaep, 0)\nprivateKeyBlob = Blob(b64decode(PRIVATE_KEY))\npublicKeyBlob = Blob(b64decode(PUBLIC_KEY))\ndecryptKey = DecryptKey(privateKeyBlob)\nencryptKey = RsaAlgorithm.deriveEncryptKey(decryptKey.getKeyBits())\nencodedPublic = publicKeyBlob\nderivedPublicKey = encryptKey.getKeyBits()\nself.assertTrue(encodedPublic.equals(derivedPublicKey))\nplainBlob = Blob(PLAINTEXT, False)\nencryptBlob = RsaAlgorithm.encrypt(encryptKey.getKeyBits(), plainBlob,\n    encryptParams)\nreceivedBlob = RsaAlgorithm.decrypt(decryptKey.getKeyBits(), encryptBlob,\n    encryptParams)\nself.assertTrue(plainBlob.equals(receivedBlob))\ncipherBlob = Blob(CIPHERTEXT_OAEP, False)\ndecryptedBlob = RsaAlgorithm.decrypt(decryptKey.getKeyBits(), cipherBlob,\n    encryptParams)\nself.assertTrue(plainBlob.equals(decryptedBlob))\nencryptParams = EncryptParams(EncryptAlgorithmType.RsaPkcs, 0)\nencryptBlob = RsaAlgorithm.encrypt(encryptKey.getKeyBits(), plainBlob,\n    encryptParams)\nreceivedBlob = RsaAlgorithm.decrypt(decryptKey.getKeyBits(), encryptBlob,\n    encryptParams)\nself.assertTrue(plainBlob.equals(receivedBlob))\ncipherBlob = Blob(CIPHERTEXT_PKCS, False)\ndecryptedBlob = RsaAlgorithm.decrypt(decryptKey.getKeyBits(), cipherBlob,\n    encryptParams)\nself.assertTrue(plainBlob.equals(decryptedBlob))\n"
+}

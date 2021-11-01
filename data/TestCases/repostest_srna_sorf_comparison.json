@@ -1,0 +1,9 @@
+{
+    "functionName": "test_srna_sorf_comparison",
+    "className": "TestComparesRNAsORF",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_compare_sRNA_sORF.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cro.Gff3Parser = Mock_Gff_parser\nsRNA_file = os.path.join(self.test_folder, 'sRNA.gff')\nsORF_file = os.path.join(self.test_folder, 'sORF.gff')\ngen_file(sRNA_file, 'srna')\ngen_file(sORF_file, 'sorf')\nsRNA_out = os.path.join(self.test_folder, 'sRNA.out')\nsORF_out = os.path.join(self.test_folder, 'sORF.out')\ncro.srna_sorf_comparison(sRNA_file, sORF_file, sRNA_out, sORF_out)\nsrnas, attribute_srnas = extract_info(sRNA_out, 'file')\nrefs, attribute_refs = extract_info(self.example.srna_out, 'string')\nself.assertEqual(set(srnas), set(refs[1:]))\nself.assertEqual(set(attribute_srnas[2]), set(attribute_refs[3]))\nsorfs, attribute_sorfs = extract_info(sORF_out, 'file')\nrefs, attribute_refs = extract_info(self.example.sorf_out, 'string')\nself.assertEqual(set(sorfs), set(refs[1:]))\nself.assertEqual(set(attribute_sorfs[2]), set(attribute_refs[3]))\n"
+}

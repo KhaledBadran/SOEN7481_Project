@@ -1,0 +1,9 @@
+{
+    "functionName": "test__search_annotations",
+    "className": null,
+    "fileName": "/HDI-Project_&_MLBlocks/tests_&_test_discovery.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "os_mock.path.abspath = os.path.abspath\nos_mock.path.join = os.path.join\nos_mock.path.exists.return_value = True\nos_mock.listdir.side_effect = [['a.primitive.json',\n    'another.primitive.json', 'some'], ['other'], ['primitive.json']]\nos_mock.path.isdir.return_value = False\nos_mock.path.isdir.side_effect = [False, False, True, True, False]\nannotations = discovery._search_annotations('/path/to', 'other')\nassert annotations == {'/path/to/another.primitive.json':\n    'another.primitive', '/path/to/some/other/primitive.json':\n    'some.other.primitive'}\npatch('mlblocks.discovery.os')"
+}

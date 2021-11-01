@@ -1,0 +1,9 @@
+{
+    "functionName": "test_callback_exception",
+    "className": null,
+    "fileName": "/SimLeek_&_CV_PubSubs/tests_&_frame_&_test_frame_updater.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "def redden_frame_print_spam(frame):\n    frame[:, :, (0)] = 0\n    frame[:, :, (2)] = 1 / 0\nwith pytest.raises(ZeroDivisionError) as e:\n    v = fup.FrameUpdater(np.zeros((1, 2, 3)), callbacks=redden_frame_print_spam\n        )\n    v.loop()\nassert e.errisinstance(ZeroDivisionError)\n"
+}

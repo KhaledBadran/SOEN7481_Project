@@ -1,0 +1,9 @@
+{
+    "functionName": "test_missing_xp",
+    "className": "TestAggregateNFLDBScores",
+    "fileName": "/AndrewRook_&_NFLWin/nflwin_&_tests_&_test_utilities.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "input_df = pd.DataFrame({'gsis_id': [0, 0, 0, 0, 0, 0, 0, 0], 'yardline': [\n    0, 0, 0, -15, 0, 0, 0, -15], 'offense_team': ['KC', 'KC', 'KC', 'NE',\n    'KC', 'KC', 'KC', 'KC'], 'home_team': ['KC', 'KC', 'KC', 'KC', 'KC',\n    'KC', 'KC', 'KC'], 'away_team': ['NE', 'NE', 'NE', 'NE', 'NE', 'NE',\n    'NE', 'NE'], 'offense_play_points': [0, 0, 0, 0, 0, 0, 6, 0],\n    'defense_play_points': [0, 0, 6, 0, 0, 0, 0, 0]})\nexpected_df = pd.DataFrame({'gsis_id': [0, 0, 0, 0, 0, 0, 0, 0], 'yardline':\n    [0, 0, 0, -15, 0, 0, 0, -15], 'offense_team': ['KC', 'KC', 'KC', 'NE',\n    'KC', 'KC', 'KC', 'KC'], 'home_team': ['KC', 'KC', 'KC', 'KC', 'KC',\n    'KC', 'KC', 'KC'], 'away_team': ['NE', 'NE', 'NE', 'NE', 'NE', 'NE',\n    'NE', 'NE']})\nexpected_df[['curr_home_score', 'curr_away_score']] = pd.DataFrame([(0, 0),\n    (0, 0), (0, 0), (0, 7), (0, 7), (0, 7), (0, 7), (7, 7)])\ninput_df = utils._aggregate_nfldb_scores(input_df)\npd.util.testing.assert_frame_equal(input_df, expected_df)\n"
+}

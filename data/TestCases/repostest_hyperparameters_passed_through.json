@@ -1,0 +1,9 @@
+{
+    "functionName": "test_hyperparameters_passed_through",
+    "className": "TestGpHyperOptViews",
+    "fileName": "/Yelp_&_MOE/moe_&_tests_&_views_&_rest_&_gp_hyper_opt_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that the hyperparameters get passed through to the endpoint.\"\"\"\ntest_case = self.gp_test_environments[0]\npython_domain, python_gp = test_case\npython_cov, historical_data = python_gp.get_core_data_copy()\njson_payload = json.loads(self._build_json_payload(python_domain,\n    python_cov, historical_data))\nrequest = pyramid.testing.DummyRequest(post=json_payload)\nrequest.json_body = json_payload\nview = GpHyperOptView(request)\nparams = view.get_params_from_request()\nassert params['hyperparameter_domain_info'] == json_payload[\n    'hyperparameter_domain_info']\njson_payload['hyperparameter_domain_info']['domain_bounds'] = []\nfor i in range(json_payload['hyperparameter_domain_info']['dim']):\n    json_payload['hyperparameter_domain_info']['domain_bounds'].append({\n        'min': 0.2 * i, 'max': 0.5 * i})\nrequest = pyramid.testing.DummyRequest(post=json_payload)\nrequest.json_body = json_payload\nview = GpHyperOptView(request)\nparams = view.get_params_from_request()\nassert params['hyperparameter_domain_info'] == json_payload[\n    'hyperparameter_domain_info']\n"
+}

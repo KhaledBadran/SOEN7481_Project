@@ -1,0 +1,9 @@
+{
+    "functionName": "test_convergence_born",
+    "className": null,
+    "fileName": "/apetri_&_LensTools/lenstools_&_tests_&_test_ray.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "z_final = 2.0\nb = np.linspace(0.0, tracer.lens[0].side_angle.to(deg).value, 512)\nxx, yy = np.meshgrid(b, b)\npos = np.array([xx, yy]) * deg\nconv = tracer.convergenceBorn(pos, z=z_final)\nconv_map = ConvergenceMap(data=conv, angle=tracer.lens[0].side_angle)\nconv_map.visualize(colorbar=True)\nconv_map.savefig('convergence_born.png')\n"
+}

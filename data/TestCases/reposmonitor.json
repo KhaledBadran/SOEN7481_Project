@@ -1,0 +1,9 @@
+{
+    "functionName": "monitor",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_test_monitor.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "tmp_path = str(tmp_path)\ndef lml_callback():\n    return model.log_marginal_likelihood()\ndef print_callback():\n    print('foo')\nreturn Monitor(MonitorTaskGroup([ModelToTensorBoard(tmp_path, model),\n    ScalarToTensorBoard(tmp_path, lml_callback, 'lml')], period=2),\n    MonitorTaskGroup(ExecuteCallback(print_callback), period=1))\npytest.fixture"
+}

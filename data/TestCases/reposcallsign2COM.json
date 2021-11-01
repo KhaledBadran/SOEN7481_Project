@@ -1,0 +1,9 @@
+{
+    "functionName": "callsign2COM",
+    "className": null,
+    "fileName": "/FaradayRF_&_Faraday-Software/faraday_&_proxy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\" Associate configuration callsigns with serial COM ports\"\"\"\nlocal = {}\nnum = int(proxyConfig.get('PROXY', 'units'))\nunits = range(0, num)\nfor unit in units:\n    item = 'UNIT' + str(unit)\n    callsign = proxyConfig.get(item, 'callsign').upper()\n    nodeid = proxyConfig.get(item, 'nodeid')\n    com = proxyConfig.get(item, 'com')\n    baudrate = proxyConfig.getint(item, 'baudrate')\n    timeout = proxyConfig.getint(item, 'timeout')\n    local[str(item)] = {'callsign': callsign, 'nodeid': nodeid, 'com': com,\n        'baudrate': baudrate, 'timeout': timeout}\nlocal = json.dumps(local)\nreturn json.loads(local)\n"
+}

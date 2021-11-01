@@ -1,0 +1,9 @@
+{
+    "functionName": "test_jlm_dir_locate_sysimage",
+    "className": null,
+    "fileName": "/tkf_&_JuliaManager.jl/jlm_&_src_&_jlm_&_tests_&_test_cli.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sysimage = str(tmp_path / 'dummy-sys.so')\ncli.run(['set-sysimage', sysimage])\ncapsys.readouterr()\njlm_dir = str(initialized / '.jlm')\nwith changingdir(tmp_path / 'different_dir'):\n    cli.run(['--jlm-dir', jlm_dir, 'locate', 'sysimage'])\ncaptured = capsys.readouterr()\nassert captured.out == sysimage\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_set_asset_code_action",
+    "className": null,
+    "fileName": "/OwnMarket_&_OwnBlockchainSdkPython/own_blockchain_sdk_&_test_transactions.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sender_wallet = Wallet()\nasset_hash = 'AssetH1'\nasset_code = 'AST1'\nexpected = (\n    \"\"\"{\n    \"senderAddress\": \"%s\",\n    \"nonce\": 1,\n    \"expirationTime\": 0,\n    \"actionFee\": 0.01,\n    \"actions\": [\n        {\n            \"actionType\": \"SetAssetCode\",\n            \"actionData\": {\n                \"assetHash\": \"%s\",\n                \"assetCode\": \"%s\"\n            }\n        }\n    ]\n}\"\"\"\n     % (sender_wallet.address, asset_hash, asset_code))\ntx = Tx(sender_wallet.address, 1, 0.01, 0)\ntx.add_set_asset_code_action(asset_hash, asset_code)\nactual = tx.to_json()\nassert expected == actual\n"
+}

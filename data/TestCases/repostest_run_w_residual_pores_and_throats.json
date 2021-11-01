@@ -1,0 +1,9 @@
+{
+    "functionName": "test_run_w_residual_pores_and_throats",
+    "className": "OrdinaryPercolationTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_OrdinaryPercolationTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.alg = op.algorithms.OrdinaryPercolation(network=self.net)\nself.alg.setup(phase=self.water)\nself.alg.set_inlets(pores=self.net.pores('top'))\nself.alg.set_residual(pores=self.net.pores('bottom'))\nself.alg.run()\ndata = self.alg.results(Pc=20000)\nassert sum(data['pore.occupancy']) > 0\nassert sum(data['throat.occupancy']) > 0\n"
+}

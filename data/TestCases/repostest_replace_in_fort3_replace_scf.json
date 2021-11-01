@@ -1,0 +1,9 @@
+{
+    "functionName": "test_replace_in_fort3_replace_scf",
+    "className": null,
+    "fileName": "/mortele_&_OccamTools/test_&_test_replace_in_fort3.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "inps = [[3, 4, 5], (3, 4, 5), '3 4 5', ['3 4 5'], np.array([3, 4, 5])]\nfor scf_new in inps:\n    replace_1 = Fort3Replacement(property='scf', replace=True, content=scf_new)\n    out_path = replace_in_fort3(file_name, None, replace_1)\n    _, _, _, _, _, _, scf, _, _ = _parse_fort_3_file(out_path)\n    for expected, found in zip([3, 4, 5], scf):\n        assert expected == found\ninps = [9, np.array([9]), [9], 9, '9']\nfor scf_new in inps:\n    replace_1 = Fort3Replacement(property='scf', replace=True, content=scf_new)\n    out_path = replace_in_fort3(file_name, None, replace_1)\n    _, _, _, _, _, _, scf, _, _ = _parse_fort_3_file(out_path)\n    for expected, found in zip([9, 9, 9], scf):\n        assert expected == found\nos.remove(out_path)\n"
+}

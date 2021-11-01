@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sorf_detection",
+    "className": "TestsORFDetection",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_sORF_detection.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "fasta = os.path.join(self.fasta, 'fasta')\ngen_file(fasta, \"\"\">aaa\nTAGGAGGCCGCTATGCCATTA\"\"\")\nsrna_gff = os.path.join(self.gff, 'srna.gff')\ninter_gff = os.path.join(self.gff, 'inter.gff')\ntss_file = os.path.join(self.gff, 'tss.gff')\nsd.get_coverage = self.mock.mock_get_coverage\nsd.read_libs = self.mock.mock_read_libs\nsd.read_wig = self.mock.mock_read_wig\nsd.get_inter_coverage = self.mock.mock_get_inter_coverage\ngen_file(srna_gff, self.example.srna)\ngen_file(inter_gff, self.example.inter)\ngen_file(tss_file, self.example.tss)\nargs = self.mock_args.mock()\nargs.start_codon = ['ATG']\nargs.stop_codon = ['TTA']\nargs.cutoff_5utr = 'p_0.5'\nargs.cutoff_intercds = 'n_20'\nargs.cutoff_3utr = 'n_11'\nargs.cutoff_inter = 50\nargs.cutoff_anti = 50\nargs.libs = ['frag:frag:1:a:+']\nargs.merge_wigs = 'wig_folder'\nargs.utr_detect = True\nargs.background = 10\nargs.print_all = True\nsd.sorf_detection(fasta, srna_gff, inter_gff, tss_file, 'wig_f_file',\n    'wig_r_file', 'test_folder/test', args)\nsd.get_coverage = copy.deepcopy(get_coverage)\nsd.replicate_comparison = self.mock.mock_replicate_comparison\nself.assertTrue(os.path.exists('test_folder/test_all.csv'))\nself.assertTrue(os.path.exists('test_folder/test_all.gff'))\nself.assertTrue(os.path.exists('test_folder/test_best.csv'))\nself.assertTrue(os.path.exists('test_folder/test_best.gff'))\n"
+}

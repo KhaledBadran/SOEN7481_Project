@@ -1,0 +1,9 @@
+{
+    "functionName": "test_delete_temp_lambdas",
+    "className": "test_Lambdas_Creation",
+    "fileName": "/pbx-gs_&_OSBot-AWS/tests_&_integration_&_test_Lambdas_Creation.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "names = [name for name in Lambda().functions().keys() if name.startswith(\n    'temp_lambda_')]\nfor name in names:\n    assert Lambda(name).delete() is True\nnames = [name for name in Lambda().functions().keys() if name.startswith(\n    'temp_lambda_')]\nassert names == []\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_in_remote_def",
+    "className": "NamespaceTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_namespace.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "collection = lookup.TemplateLookup()\ncollection.put_string('main.html',\n    \"\"\"\n            <%namespace name=\"foo\" file=\"ns.html\"/>\n\n            this is main.  ${bar()}\n            <%def name=\"bar()\">\n                this is bar, foo is ${foo.bar()}\n            </%def>\n        \"\"\"\n    )\ncollection.put_string('ns.html',\n    \"\"\"\n            <%def name=\"bar()\">\n                this is ns.html->bar\n            </%def>\n        \"\"\"\n    )\ncollection.put_string('index.html',\n    \"\"\"\n            <%namespace name=\"main\" file=\"main.html\"/>\n\n            this is index\n            ${main.bar()}\n        \"\"\"\n    )\nassert result_lines(collection.get_template('index.html').render()) == [\n    'this is index', 'this is bar, foo is', 'this is ns.html->bar']\n"
+}

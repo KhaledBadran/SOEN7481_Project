@@ -1,0 +1,9 @@
+{
+    "functionName": "test_write_bibtex_file",
+    "className": null,
+    "fileName": "/martisak_&_3gpp-citations/standardcitations_&_test_&_test_write_bibtex.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test function that prints to file. If we specify output to be a file\n    we want to make sure we get some output in this file. (The correctness\n    of the entire output is verified elsewhere.)\n    \"\"\"\ndatabase = standardcitations.get_bibdatabase()\nworksheet = standardcitations.get_worksheet(\n    'standardcitations/test/test_input.xlsx')\nrow = worksheet.__getitem__('2')\nentry = standardcitations.get_entry(row, True)\ndatabase.entries.append(entry)\ndirectory = tmp_path / 'sub'\ndirectory.mkdir()\nfilename = directory / 'hello.txt'\nstandardcitations.write_bibtex(database, filename=str(filename))\nassert filename.read_text().startswith('@techreport')\n"
+}

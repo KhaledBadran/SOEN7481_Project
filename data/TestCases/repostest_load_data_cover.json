@@ -1,0 +1,9 @@
+{
+    "functionName": "test_load_data_cover",
+    "className": null,
+    "fileName": "/Puumanamana_&_CoCoNet/tests_&_test_dl.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test coverage generator\n    \"\"\"\nfasta_file = generate_fasta_file(*TEST_CTG_LENGTHS, save=False)\ncoverage_file = generate_h5_file(*TEST_CTG_LENGTHS)\npairs_file = Path('pairs.npy').resolve()\nmake_pairs(fasta_file, STEP, FL, output=pairs_file, n_examples=50)\ngen = CoverageGenerator(pairs_file, coverage_file, batch_size=\n    TEST_LEARN_PRMS['batch_size'], load_batch=TEST_LEARN_PRMS['load_batch'],\n    wsize=TEST_LEARN_PRMS['wsize'], wstep=TEST_LEARN_PRMS['wstep'])\nX1, X2 = next(gen)\npairs_file.unlink()\ncoverage_file.unlink()\nassert X1.shape == X2.shape\nassert X1.shape == (TEST_LEARN_PRMS['batch_size'], 2, 9)\n"
+}

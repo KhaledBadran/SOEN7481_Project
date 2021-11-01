@@ -1,0 +1,9 @@
+{
+    "functionName": "test_works_df",
+    "className": "CleanDFOrSeriesTestCase",
+    "fileName": "/mzy2240_&_ESA/tests_&_test_saw.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Ensure that when using valid fields, the DataFrame comes back\n        as expected.\n        \"\"\"\ndf_in = pd.DataFrame([[' 6    ', '7.2234 ', ' yes '], [' 3', '11', '   no '\n    ]], columns=['BusNum', 'GenMW', 'GenAGCAble'])\ndf_expected = pd.DataFrame([[3, 11.0, 'no'], [6, 7.2234, 'yes']], columns=[\n    'BusNum', 'GenMW', 'GenAGCAble'])\ndf_actual = saw_14.clean_df_or_series(obj=df_in, ObjectType='gen')\npd.testing.assert_frame_equal(df_actual, df_expected)\n"
+}

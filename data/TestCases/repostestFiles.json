@@ -1,0 +1,9 @@
+{
+    "functionName": "testFiles",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_DataSet.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "if numFiles > 1:\n    comparison = np.array([np.all([np.isclose(files[0].Ei, files[i + 1].Ei,\n        atol=Ei_err) for i in range(numFiles - 1)]), np.all([compareNones(\n        files[0].temperature, files[i + 1].temperature, temperature_err) for\n        i in range(numFiles - 1)]), np.all([compareNones(files[0].\n        magneticField, files[i + 1].magneticField, magneticField_err) for i in\n        range(numFiles - 1)]), np.all([compareNones(files[0].electricField,\n        files[i + 1].electricField, electricField_err) for i in range(\n        numFiles - 1)]), np.all([(files[0].binning == files[i + 1].binning) for\n        i in range(numFiles - 1)])])\n    tests = np.array(['Ei', 'Temperature', 'Magnetic Field',\n        'Electric Field', 'Binning'])\n    if not np.all(comparison):\n        errors = np.array(1 - comparison, dtype=bool)\n        raise AttributeError(\n            \"\"\"Attributes for the datafiles are not the same! Difference is in :\n\"\"\"\n             + ','.join([x for x in tests[errors]]) +\n            \"\"\"\nIf the files are to be binned anyway change the tolerence limits.\"\"\"\n            )\n_tools.my_timer_N()"
+}

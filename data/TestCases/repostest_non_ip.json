@@ -1,0 +1,9 @@
+{
+    "functionName": "test_non_ip",
+    "className": null,
+    "fileName": "/CyberReboot_&_NetworkML/tests_&_test_funcs_host.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "instance = HostBase()\nfor eth_type, test_output in ((1, {'tshark_ipx': 0, 'tshark_nonip': 1}), (\n    33079, {'tshark_ipx': 1, 'tshark_nonip': 1}), (2048, {'tshark_ipx': 0,\n    'tshark_nonip': 0})):\n    test_data = {field: None for field in WS_FIELDS}\n    test_data.update({'eth.type': eth_type})\n    mac_df = recast_df(pd.DataFrame([test_data]))\n    assert instance._tshark_non_ip(mac_df) == test_output\n"
+}

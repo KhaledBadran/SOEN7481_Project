@@ -1,0 +1,9 @@
+{
+    "functionName": "test_does_not_call_simauto_if_not_necessary",
+    "className": "GetFieldListTestCase",
+    "fileName": "/mzy2240_&_ESA/tests_&_test_saw.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Ensure that if the field list has already been accessed for\n        the given object type that SimAuto is not called again.\n        \"\"\"\nwith patch.object(saw_14, '_call_simauto') as m:\n    field_list = saw_14.GetFieldList(ObjectType='gen')\nself.check_field_list(field_list)\nself.assertEqual(m.call_count, 0)\n"
+}

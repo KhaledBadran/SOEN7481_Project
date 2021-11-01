@@ -1,0 +1,9 @@
+{
+    "functionName": "test_neighbor",
+    "className": "ThroatSeedTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_geometry_&_ThroatSeedTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.geo.add_model(propname='throat.seed_max', model=mods.\n    from_neighbor_pores, mode='max')\nself.geo.add_model(propname='throat.seed_min', model=mods.\n    from_neighbor_pores, mode='min')\nself.geo.add_model(propname='throat.seed_mean', model=mods.\n    from_neighbor_pores, mode='mean')\nself.geo.regenerate_models()\nassert np.all(self.geo['throat.seed_min'] <= self.geo['throat.seed_max'])\nassert np.all(self.geo['throat.seed_min'] <= self.geo['throat.seed_mean'])\nassert np.all(self.geo['throat.seed_mean'] <= self.geo['throat.seed_max'])\n"
+}

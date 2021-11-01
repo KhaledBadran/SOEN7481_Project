@@ -1,0 +1,9 @@
+{
+    "functionName": "test_featurize",
+    "className": "TestFeaturizer",
+    "fileName": "/nateraw_&_BeautifulSauce/tests_&_test_featurizer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ftrs = Featurizer()\nsoup = Sauce.from_file(self.args['testfile_1'])\n@ftrs.add_categorical_feature('tag_name')\ndef f_tag_name(tag):\n    return tag.name\n@ftrs.add_numerical_feature('is_bold')\ndef f_is_bold(tag):\n    if tag.css_attrs['font-weight'] == 'bold':\n        return True\n    else:\n        return False\n@ftrs.add_text_feature('text')\ndef f_text(tag):\n    if tag.name in ['head', 'meta', 'script']:\n        return ''\n    texts = list(tag.find_all(text=True, recursive=False))\n    if len(texts) < 1:\n        return ''\n    texts = ' '.join(texts).strip()\n    texts = re.sub('\\n', ' ', texts)\n    return texts\nftrs.featurize(soup)\n"
+}

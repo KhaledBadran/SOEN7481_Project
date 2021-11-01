@@ -1,0 +1,9 @@
+{
+    "functionName": "test_scheme_default",
+    "className": "TestWin32Scheme",
+    "fileName": "/cournape_&_Bento/bento_&_commands_&_tests_&_test_configure.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "bento_info = 'Name: foo\\n'\nself.options.prefix = self.eprefix = None\nscheme = self._compute_scheme(bento_info, self.options)\nprefix = scheme.pop('prefix')\neprefix = scheme.pop('eprefix')\npy_version_short = scheme.pop('py_version_short')\npkgname = scheme.pop('pkgname')\nself.assertEqual(prefix, sys.prefix)\nself.assertEqual(eprefix, sys.exec_prefix)\nself.assertEqual(pkgname, 'foo')\nself.assertEqual(py_version_short, PY_VERSION_SHORT)\nfor k, v in scheme.items():\n    self.assertEqual(WIN32_REFERENCE[k], v, \n        'discrepency for path %s: %s vs %s' % (k, WIN32_REFERENCE[k], v))\nmock.patch('sys.platform', 'win32')mock.patch('bento.core.platforms.sysconfig.bento.utils.path.find_root', lambda\n    ignored: 'C:\\\\')mock.patch('sys.prefix', 'C:\\\\Python%s' % PY_VERSION_SHORT_NO_DOT)mock.patch('sys.exec_prefix', 'C:\\\\Python%s' % PY_VERSION_SHORT_NO_DOT)"
+}

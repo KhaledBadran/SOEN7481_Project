@@ -1,0 +1,9 @@
+{
+    "functionName": "test_simple_waf",
+    "className": "TestBuildDirectoryWaf",
+    "fileName": "/cournape_&_Bento/bento_&_commands_&_tests_&_test_build.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from bento.backends.waf_backend import make_stream_logger\nfrom bento.backends.waf_backend import WafBackend\ntop_node = self.top_node\npackage = PackageDescription.from_string(BENTO_INFO_WITH_EXT)\npackage_options = PackageOptions.from_string(BENTO_INFO_WITH_EXT)\ncreate_fake_package_from_bento_info(top_node, BENTO_INFO_WITH_EXT)\ntop_node.make_node('bento.info').safe_write(BENTO_INFO_WITH_EXT)\nglobal_context = create_global_context(package, package_options, WafBackend())\nconf, configure = prepare_command(global_context, 'configure', [], package,\n    top_node)\nrun_command_in_context(conf, configure)\nbld, build = prepare_command(global_context, 'build', [], package, top_node)\nbld.waf_context.logger = make_stream_logger('build', cStringIO())\nrun_command_in_context(bld, build)\nskip_no_waf"
+}

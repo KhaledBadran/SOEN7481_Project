@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_destination_subdir_data_doesnt_exist",
+    "className": "TestSync",
+    "fileName": "/DusanMadar_&_PySyncDroid/tests_&_test_sync.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test 'get_destination_subdir_data' creates destination direcotry if it\n        doesn't exist.\n        \"\"\"\nmock_path_exists.side_effect = True, False\nsync = Sync(FAKE_MTP_DETAILS, '/tmp', 'Card/Music')\nsync.set_source_abs()\nsync.set_destination_abs()\nsync_data = self._create_empty_sync_data(sync)\nsync.get_destination_subdir_data(sync_data)\nmock_gvfs_wrapper.assert_called_once_with(mkdir,\n    '/run/user/<user>/gvfs/mtp:host=%5Busb%3A002%2C003%5D/Card/Music/testdir')\nself.assertFalse(sync_data['dst_dir_fls'])\npatch('pysyncdroid.sync.os.path.exists')patch.object(pysyncdroid.sync.Sync, 'gvfs_wrapper')"
+}

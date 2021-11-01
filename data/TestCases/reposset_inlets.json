@@ -1,0 +1,9 @@
+{
+    "functionName": "set_inlets",
+    "className": "MixedInvasionPercolation",
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_algorithms_&_MixedInvasionPercolation.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n\n        Parameters\n        ----------\n        pores : array_like\n            The list of inlet pores from which the Phase can enter the Network\n\n        clusters : list of lists - can be just one list but each list defines\n            a cluster of pores that share a common invasion pressure.\n\n        Like Basic Invasion Percolation a queue of\n        \"\"\"\nif pores is not None:\n    logger.info('Setting inlet pores at shared pressure')\n    clusters = []\n    clusters.append(pores)\nelif clusters is not None:\n    logger.info('Setting inlet clusters at individual pressures')\nelse:\n    logger.error(\"Either 'inlets' or 'clusters' must be passed to\" +\n        ' setup method')\nself.queue = []\nif self.settings['cooperative_pore_filling'] and hasattr(self, 'tt_Pc'):\n    check_coop = True\nelse:\n    check_coop = False\nfor i, cluster in enumerate(clusters):\n    self.queue.append([])\n    self['pore.invasion_sequence'][cluster] = 0\n    self['pore.cluster'][cluster] = i\n    self['pore.invasion_pressure'][cluster] = -np.inf\n    if np.size(cluster) > 1:\n        for elem_id in cluster:\n            self._add_ts2q(elem_id, self.queue[i])\n            if check_coop:\n                self._check_coop(elem_id, self.queue[i])\n    elif np.size(cluster) == 1:\n        self._add_ts2q(cluster, self.queue[i])\n        if check_coop:\n            self._check_coop(elem_id, self.queue[i])\n    else:\n        logger.warning('Some inlet clusters have no pores')\nif self.settings['snap_off']:\n    self._apply_snap_off()\n"
+}

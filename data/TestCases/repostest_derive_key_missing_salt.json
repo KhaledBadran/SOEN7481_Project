@@ -1,0 +1,9 @@
+{
+    "functionName": "test_derive_key_missing_salt",
+    "className": "TestCryptographyEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_crypto_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the right error is raised when the salt is not provided for\n        PBKDF2-based key derivation.\n        \"\"\"\nengine = crypto.CryptographyEngine()\nargs = enums.DerivationMethod.PBKDF2, 16\nkwargs = {'hash_algorithm': enums.HashingAlgorithm.SHA_256}\nself.assertRaisesRegex(exceptions.InvalidField,\n    'For PBKDF2 key derivation, salt must be specified.', engine.derive_key,\n    *args, **kwargs)\n"
+}

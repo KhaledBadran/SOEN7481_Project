@@ -1,0 +1,9 @@
+{
+    "functionName": "test_vx_001_file_lookup",
+    "className": "VxAnalysisModuleTestCase",
+    "fileName": "/IntegralDefense_&_ACE/lib_&_saq_&_modules_&_test_vx.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "engine = AnalysisEngine()\nengine.enable_module('analysis_module_vxstream_file_analyzer')\nengine.enable_module('analysis_module_vxstream_hash_analyzer')\nengine.enable_module('analysis_module_file_hash_analyzer')\nengine.enable_module('analysis_module_file_type')\nself.start_engine(engine)\nroot = create_root_analysis(event_time=datetime.datetime.now())\nroot.initialize_storage()\nshutil.copy2('test_data/sample.jar', root.storage_dir)\n_file = root.add_observable(F_FILE, 'sample.jar')\n_file.add_directive(DIRECTIVE_SANDBOX)\nroot.save()\nengine.queue_work_item(root.storage_dir)\nengine.queue_work_item(TerminatingMarker())\nengine.wait()\nroot.load()\n_file = root.get_observable(_file.id)\nfrom saq.modules.file_analysis import FileHashAnalysis\nfrom saq.modules.vx import VxStreamHashAnalysis\nhash_analysis = _file.get_analysis(FileHashAnalysis)\nself.assertIsNotNone(hash_analysis)\nsha2 = hash_analysis.get_observables_by_type(F_SHA256)\nself.assertIsInstance(sha2, list)\nself.assertEquals(len(sha2), 1)\nsha2 = sha2[0]\nanalysis = sha2.get_analysis(VxStreamHashAnalysis)\nself.assertIsNotNone(analysis)\nself.assertEquals(analysis.sha256, sha2.value)\nself.assertEquals(analysis.environment_id, saq.CONFIG['vxstream'][\n    'environmentid'])\nself.assertEquals(analysis.status, VXSTREAM_STATUS_SUCCESS)\nself.assertIsNotNone(analysis.submit_date)\nself.assertIsNotNone(analysis.complete_date)\nself.assertIsNone(analysis.fail_date)\nself.assertIsNotNone(analysis.vxstream_threat_level)\nself.assertIsNotNone(analysis.vxstream_threat_score)\n"
+}

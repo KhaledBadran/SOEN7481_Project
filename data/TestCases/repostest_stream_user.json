@@ -1,0 +1,9 @@
+{
+    "functionName": "test_stream_user",
+    "className": null,
+    "fileName": "/halcy_&_Mastodon.py/tests_&_test_streaming.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "patch_streaming()\nuser = api2.account_verify_credentials()\napi2.account_unfollow(user)\ntime.sleep(2)\nupdates = []\nnotifications = []\ndeletes = []\nlistener = CallbackStreamListener(update_handler=lambda x: updates.append(x\n    ), notification_handler=lambda x: notifications.append(x),\n    delete_handler=lambda x: deletes.append(x))\nposted = []\ndef do_activities():\n    time.sleep(5)\n    posted.append(api.status_post('only real cars respond.'))\n    posted.append(api2.status_post(\"@mastodonpy_test beep beep I'm a jeep\"))\n    posted.append(api2.status_post(\n        \"on the internet, nobody knows you're a plane\"))\n    time.sleep(1)\n    api.status_delete(posted[0])\n    time.sleep(10)\n    streaming_close()\nt = threading.Thread(args=(), target=do_activities)\nt.start()\nstream = None\ntry:\n    stream = api.stream_user(listener, run_async=True)\n    time.sleep(20)\nfinally:\n    if stream != None:\n        stream.close()\nassert len(updates) == 1\nassert len(notifications) == 1\nassert len(deletes) == 1\nassert updates[0].id == posted[0].id\nassert deletes[0] == posted[0].id\nassert notifications[0].status.id == posted[1].id\nt.join()\npytest.mark.vcr(match_on=['path'])"
+}

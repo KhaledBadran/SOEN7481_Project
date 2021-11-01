@@ -1,0 +1,9 @@
+{
+    "functionName": "test_upwind_NernstPlanck",
+    "className": "NernstPlanckTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_NernstPlanckTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "mod = op.models.physics.ad_dif_mig_conductance.ad_dif_mig\nself.phys.add_model(propname='throat.ad_dif_mig_conductance_upwind', model=\n    mod, s_scheme='upwind', ion='ionX')\nself.phys.regenerate_models()\nself.adm.setup(conductance='throat.ad_dif_mig_conductance_upwind')\nself.adm.run()\nx = [0.0, 0.0, 0.0, 1.15437, 1.497, 2.02144, 1.60103, 1.87748, 2.27264, 2.0,\n    2.0, 2.0]\ny = np.around(self.adm['pore.concentration.ionX'], decimals=5)\nassert_allclose(actual=y, desired=x)\n"
+}

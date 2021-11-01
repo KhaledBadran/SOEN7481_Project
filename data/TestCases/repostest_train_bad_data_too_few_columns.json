@@ -1,0 +1,9 @@
+{
+    "functionName": "test_train_bad_data_too_few_columns",
+    "className": null,
+    "fileName": "/CyberReboot_&_NetworkML/tests_&_test_algorithms_host_footprint.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    This test tries to train a model on a mal-formed csv with too few fields\n    \"\"\"\nwith tempfile.TemporaryDirectory() as tmpdir:\n    testdata = os.path.join(tmpdir, 'test_data')\n    shutil.copytree('./tests/test_data', testdata)\n    input_file = os.path.join(testdata, 'bad_data_too_few_columns.csv')\n    operation = 'train'\n    sys.argv = hf_args(tmpdir, operation, input_file)\n    instance = HostFootprint()\n    with pytest.raises(Exception):\n        instance.main()\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_account_search",
+    "className": null,
+    "fileName": "/halcy_&_Mastodon.py/tests_&_test_account.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "results = api.account_search('admin')\nadmin_acc = results[0]\nassert isinstance(results, list)\nassert len(results) == 1\napi.account_follow(admin_acc)\nresults = api.account_search('admin', following=True)\nassert isinstance(results, list)\nassert len(results) == 1\napi.account_unfollow(admin_acc)\nresults = api.account_search('admin', following=True)\nassert isinstance(results, list)\nassert len(results) == 0\nresults = api.account_search('admin')\nassert isinstance(results, list)\nassert len(results) == 1\npytest.mark.vcr()"
+}

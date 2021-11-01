@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fully_correlated_conditional_repeat_shapes",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_conditionals_&_test_multioutput.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "L, M, N, P = Data.L, Data.M, Data.N, Data.P\nKmm = tf.ones((L * M, L * M)) + default_jitter() * tf.eye(L * M)\nKmn = tf.ones((L * M, N, P))\nKnn = tf.ones((N, P))\nf = tf.ones((L * M, R))\nq_sqrt = None\nwhite = True\nm, v = func(Kmn, Kmm, Knn, f, full_cov=False, full_output_cov=False, q_sqrt\n    =q_sqrt, white=white)\nassert v.shape.as_list() == m.shape.as_list()\npytest.mark.parametrize('func, R', [(fully_correlated_conditional_repeat, 5\n    ), (fully_correlated_conditional_repeat, 1), (\n    fully_correlated_conditional, 1)])"
+}

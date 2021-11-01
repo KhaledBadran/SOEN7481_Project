@@ -1,0 +1,9 @@
+{
+    "functionName": "_throat_c2c",
+    "className": "DelaunayGeometry",
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_materials_&_VoronoiFibers.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        Calculate the center to center distance from centroid of pore1 to\n        centroid of throat to centroid of pore2.\n        \"\"\"\nnet = self.network\nNt = net.num_throats()\np_cen = net['pore.centroid']\nt_cen = net['throat.centroid']\nconns = net['throat.conns']\np1 = conns[:, (0)]\np2 = conns[:, (1)]\nv1 = t_cen - p_cen[p1]\nv2 = t_cen - p_cen[p2]\ncheck_nan = ~np.any(np.isnan(v1 + v2), axis=1)\nvalue = np.ones([Nt, 3], dtype=float) * np.nan\nfor i in range(Nt):\n    if check_nan[i]:\n        value[i, 0] = np.linalg.norm(v1[i]) - self.network.fiber_rad\n        value[i, 1] = self.network.fiber_rad * 2\n        value[i, 2] = np.linalg.norm(v2[i]) - self.network.fiber_rad\nreturn value[net.throats(self.name)]\n"
+}

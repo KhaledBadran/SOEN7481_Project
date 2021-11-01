@@ -1,0 +1,9 @@
+{
+    "functionName": "test_subchain_getters_partial_fill_before_ack",
+    "className": null,
+    "fileName": "/nabicht_&_Buttonwood/tests_&_test_MarketObjects_&_test_Events_&_test_ordereventchain.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "n = NewOrderCommand(121234, 1234235.123, 2342, 'user_x', MARKET, BID_SIDE,\n    FAR, Price('34.52'), 1000)\noec = OrderEventChain(n, LOGGER, MonotonicIntID())\npf = PartialFillReport(121236, 1234237.123, 2342, 'user_x', MARKET, n, 44,\n    Price('34.52'), BID_SIDE, 99999, 1000 - 44)\noec.apply_partial_fill_report(pf)\nack = AcknowledgementReport(121235, 1234235.123, 2342, 'user_x', MARKET, n,\n    Price('34.52'), 1000 - 44, None)\noec.apply_acknowledgement_report(ack)\nsubchain = oec.most_recent_subchain()\nassert subchain.open_event() == n\nassert subchain.first_execution_report() == pf\nassert subchain.fills() == [pf]\nassert subchain.last_event() == ack\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_FOC_savings",
+    "className": null,
+    "fileName": "/open-source-economics_&_OG-USA/ogusa_&_tests_&_test_household.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "(r, w, b, b_splus1, n, BQ, factor, tr, theta, tau_c, etr_params,\n    mtry_params, t, j, method) = model_vars\nif j is not None:\n    test_value = household.FOC_savings(r, w, b, b_splus1, n, BQ, factor, tr,\n        theta, params.e[:, (j)], params.rho, tau_c, etr_params, mtry_params,\n        t, j, params, method)\nelse:\n    test_value = household.FOC_savings(r, w, b, b_splus1, n, BQ, factor, tr,\n        theta, np.squeeze(params.e), params.rho, tau_c, etr_params,\n        mtry_params, t, j, params, method)\nassert np.allclose(test_value, expected)\npytest.mark.parametrize('model_vars,params,expected', test_data, ids=['SS',\n    'TPI', 'SS - wealth tax', 'TPI - wealth tax', 'SS - j =0'])"
+}

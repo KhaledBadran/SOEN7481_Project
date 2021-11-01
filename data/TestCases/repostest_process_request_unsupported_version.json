@@ -1,0 +1,9 @@
+{
+    "functionName": "test_process_request_unsupported_version",
+    "className": "TestKmipEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that an InvalidMessage exception is raised when processing a\n        request using an unsupported KMIP version.\n        \"\"\"\ne = engine.KmipEngine()\ne._logger = mock.MagicMock()\nprotocol = contents.ProtocolVersion(0, 1)\nheader = messages.RequestHeader(protocol_version=protocol)\nrequest = messages.RequestMessage(request_header=header)\nargs = request,\nregex = 'KMIP {0} is not supported by the server.'.format(protocol)\nsix.assertRaisesRegex(self, exceptions.InvalidMessage, regex, e.\n    process_request, *args)\n"
+}

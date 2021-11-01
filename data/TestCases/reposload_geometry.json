@@ -1,0 +1,9 @@
+{
+    "functionName": "load_geometry",
+    "className": "Surface",
+    "fileName": "/nipy_&_PySurfer/surfer_&_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "surf_path = op.join(self.data_path, 'surf', '%s.%s' % (self.hemi, self.surf))\ncoords, faces = nib.freesurfer.read_geometry(surf_path)\nif self.units == 'm':\n    coords /= 1000.0\nif self.offset is not None:\n    if self.hemi == 'lh':\n        coords[:, (0)] -= np.max(coords[:, (0)]) + self.offset\n    else:\n        coords[:, (0)] -= np.min(coords[:, (0)]) + self.offset\nnn = _compute_normals(coords, faces)\nif self.coords is None:\n    self.coords = coords\n    self.faces = faces\n    self.nn = nn\nelse:\n    self.coords[:] = coords\n    self.faces[:] = faces\n    self.nn[:] = nn\n"
+}

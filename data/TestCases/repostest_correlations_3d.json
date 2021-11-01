@@ -1,0 +1,9 @@
+{
+    "functionName": "test_correlations_3d",
+    "className": "TestChain",
+    "fileName": "/samreay_&_ChainConsumer/tests_&_test_analysis.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data = np.random.multivariate_normal([0, 0, 1], [[1, 0.5, 0.2], [0.5, 1, \n    0.3], [0.2, 0.3, 1.0]], size=100000)\nparameters = ['x', 'y', 'z']\nc = ChainConsumer()\nc.add_chain(data, parameters=parameters, name='chain1')\np, cor = c.analysis.get_correlations(chain='chain1', parameters=['y', 'z', 'x']\n    )\nassert p[0] == 'y'\nassert p[1] == 'z'\nassert p[2] == 'x'\nassert np.isclose(cor[0, 0], 1, atol=0.01)\nassert np.isclose(cor[1, 1], 1, atol=0.01)\nassert np.isclose(cor[2, 2], 1, atol=0.01)\nassert cor.shape == (3, 3)\nassert np.abs(cor[0, 1] - 0.3) < 0.01\nassert np.abs(cor[0, 2] - 0.5) < 0.01\nassert np.abs(cor[1, 2] - 0.2) < 0.01\n"
+}

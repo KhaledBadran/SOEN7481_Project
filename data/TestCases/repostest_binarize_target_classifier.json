@@ -1,0 +1,9 @@
+{
+    "functionName": "test_binarize_target_classifier",
+    "className": null,
+    "fileName": "/goeckslab_&_Galaxy-ML/galaxy_ml_&_tests_&_test_binarize_target.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cv = OrderedKFold(10)\nscoring = dict(AUC=binarize_auc_scorer, AP=\n    binarize_average_precision_scorer, BACC=BINARIZE_SCORERS[\n    'balanced_accuracy'], PRECISION=BINARIZE_SCORERS['precision'], F1_MACRO\n    =BINARIZE_SCORERS['f1_macro'])\nclf = RandomForestClassifier(random_state=42)\nestimator = BinarizeTargetClassifier(clf)\nresult_val = cross_validate(estimator, X, y, cv=cv, scoring=scoring,\n    verbose=0, n_jobs=2)\nap_mean = result_val['test_AP'].mean()\nassert round(ap_mean, 4) == 0.171, ap_mean\nroc_mean = result_val['test_AUC'].mean()\nassert round(roc_mean, 4) == 0.5696, roc_mean\nbacc_mean = result_val['test_BACC'].mean()\nassert round(bacc_mean, 4) == 0.5089, bacc_mean\nprecision_mean = result_val['test_PRECISION'].mean()\nassert round(precision_mean, 4) == 0.1, precision_mean\nf1_macro_mean = result_val['test_F1_MACRO'].mean()\nassert round(f1_macro_mean, 4) == 0.4922, f1_macro_mean\nclf = SVC(random_state=10)\nestimator = BinarizeTargetClassifier(clf)\nwith open('./tools/test-data/binarize_svc.zip', 'wb') as f:\n    pickle.dump(estimator, f, pickle.HIGHEST_PROTOCOL)\nwith open('./tools/test-data/binarize_svc.zip', 'rb') as f:\n    estimator = load_model(f)\nresult_val = cross_validate(estimator, X, y, cv=cv, scoring=scoring,\n    verbose=0, n_jobs=2)\nap_mean = result_val['test_AP'].mean()\nassert round(ap_mean, 2) == 0.42, ap_mean\nroc_mean = result_val['test_AUC'].mean()\nassert round(roc_mean, 2) == 0.75, roc_mean\n"
+}

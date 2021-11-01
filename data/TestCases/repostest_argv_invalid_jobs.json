@@ -1,0 +1,9 @@
+{
+    "functionName": "test_argv_invalid_jobs",
+    "className": null,
+    "fileName": "/ocaballeror_&_Lyricfetch/lyricfetch_&_tests_&_test_args.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Check that `parse_argv()` raises some kind of error when an invalid number\n    of jobs is passed.\n    \"\"\"\nnew_argv = ['python', __file__, '-j', str(num)]\ncurrent_value = CONFIG['jobcount']\nmonkeypatch.setattr(sys, 'argv', new_argv)\nwith pytest.raises(SystemExit):\n    parse_argv()\nassert CONFIG['jobcount'] == current_value\npytest.mark.parametrize('num', [-1, 0])"
+}

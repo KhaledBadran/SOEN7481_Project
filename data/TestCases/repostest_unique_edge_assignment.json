@@ -1,0 +1,9 @@
+{
+    "functionName": "test_unique_edge_assignment",
+    "className": null,
+    "fileName": "/seung-lab_&_PyChunkedGraph/pychunkedgraph_&_creator_&_data_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "file_paths = glob.glob(dir + '/*')\nfile_chunks = np.array_split(file_paths, n_threads * 3)\nmulti_args = []\nfor i_file_chunk, file_chunk in enumerate(file_chunks):\n    multi_args.append([file_chunk])\nif n_threads == 1:\n    results = mu.multiprocess_func(_test_unique_edge_assignment_thread,\n        multi_args, n_threads=n_threads, verbose=True, debug=n_threads == 1)\nelse:\n    results = mu.multiprocess_func(_test_unique_edge_assignment_thread,\n        multi_args, n_threads=n_threads)\nid_dict = collections.Counter()\nfor result in results:\n    id_dict += result\nreturn id_dict\n"
+}

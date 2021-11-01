@@ -1,0 +1,9 @@
+{
+    "functionName": "test_execute_process_handle_exit",
+    "className": "TestHedgehogClientProcessAPI",
+    "fileName": "/PRIArobotics_&_HedgehogClient/tests_&_test_async_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "pid = 2346\nasync with connect_dummy(Commands.execute_process_echo_asdf, pid) as client:\n    event = asyncio.Event()\n\n    async def on_exit(_pid, exit_code):\n        assert _pid == pid\n        assert exit_code == 0\n        event.set()\n    assert await client.execute_process('echo', 'asdf', on_exit=on_exit) == pid\n    await event.wait()\npytest.mark.asyncio"
+}

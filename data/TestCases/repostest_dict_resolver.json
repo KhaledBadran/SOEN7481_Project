@@ -1,0 +1,9 @@
+{
+    "functionName": "test_dict_resolver",
+    "className": null,
+    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_resolvers.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from _pydevd_bundle.pydevd_resolver import DictResolver\ndict_resolver = DictResolver()\ndct = {(1, 2): 2, u'22': 22}\ncontents_debug_adapter_protocol = clear_contents_debug_adapter_protocol(\n    dict_resolver.get_contents_debug_adapter_protocol(dct))\nlen_entry = contents_debug_adapter_protocol.pop(-1)\ncheck_len_entry(len_entry, (GENERATED_LEN_ATTR_NAME, 2))\nif IS_PY36_OR_GREATER:\n    assert contents_debug_adapter_protocol == [('(1, 2)', 2, '[(1, 2)]'), (\n        \"'22'\", 22, \"['22']\")]\nelif IS_PY2:\n    assert contents_debug_adapter_protocol == [('(1, 2)', 2, '[(1, 2)]'), (\n        u\"u'22'\", 22, u\"[u'22']\")]\nelse:\n    assert contents_debug_adapter_protocol == [(\"'22'\", 22, \"['22']\"), (\n        '(1, 2)', 2, '[(1, 2)]')]\n"
+}

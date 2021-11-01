@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cla_max_sharpe_semicovariance",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_cla.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "df = get_data()\ncla = setup_cla()\ncla.cov_matrix = risk_models.semicovariance(df, benchmark=0).values\nw = cla.max_sharpe()\nassert isinstance(w, dict)\nassert set(w.keys()) == set(cla.tickers)\nnp.testing.assert_almost_equal(cla.weights.sum(), 1)\nnp.testing.assert_allclose(cla.portfolio_performance(), (0.2936179968144084,\n    0.06362345488289835, 4.300583759841616))\n"
+}

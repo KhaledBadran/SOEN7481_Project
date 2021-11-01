@@ -1,0 +1,9 @@
+{
+    "functionName": "test_console_wrapper",
+    "className": null,
+    "fileName": "/bio-phys_&_MDBenchmark/mdbenchmark_&_tests_&_test_console.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Make sure that the console_wrapper function works as expected.\"\"\"\nwith pytest.raises(ValueError):\n    console.console_wrapper('Hello John {}')\nfh = StringIO()\nconsole.console_wrapper('Hello {}', filehandler=fh, args=['John'])\nassert fh.getvalue() == 'Hello John\\n'\nfh = StringIO()\nconsole.console_wrapper(\n    'Starting {count} benchmarks on {host} using {nodes} nodes!',\n    filehandler=fh, host='draco', nodes=123, count=5.0)\noutput = 'Starting 5.0 benchmarks on draco using 123 nodes!\\n'\nassert fh.getvalue() == output\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_decode_inverted_attributes",
+    "className": "TestPENMANCodec",
+    "fileName": "/goodmami_&_penman/tests_&_test_codec.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "caplog.set_level(logging.WARNING, logger='penman.layout')\ng = decode('(b :-of 1)')\nassert g.top == 'b'\nassert g.triples == [('b', ':instance', None), ('b', ':-of', '1')]\nassert 'cannot deinvert attribute' in caplog.text\nassert g.variables() == {'b'}\ncaplog.clear()\ng = decode('(a :ARG-of \"string\")')\nassert g.top == 'a'\nassert g.triples == [('a', ':instance', None), ('a', ':ARG-of', '\"string\"')]\nassert 'cannot deinvert attribute' in caplog.text\nassert g.variables() == {'a'}\ncaplog.clear()\n"
+}

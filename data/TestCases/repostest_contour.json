@@ -1,0 +1,9 @@
+{
+    "functionName": "test_contour",
+    "className": null,
+    "fileName": "/nipy_&_PySurfer/surfer_&_tests_&_test_viz.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test plotting of contour overlay.\"\"\"\n_set_backend()\nbrain = Brain(*std_args)\nview = get_view(brain)\noverlay_file = pjoin(data_dir, 'lh.sig.nii.gz')\nbrain.add_contour_overlay(overlay_file)\nbrain.add_contour_overlay(overlay_file, max=20, n_contours=9, line_width=2)\nbrain.contour['surface'].actor.property.line_width = 1\nbrain.contour['surface'].contour.number_of_contours = 10\ncheck_view(brain, view)\nbrain.close()\nrequires_fsaverage()"
+}

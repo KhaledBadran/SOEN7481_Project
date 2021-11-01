@@ -1,0 +1,9 @@
+{
+    "functionName": "test_config_env_rich",
+    "className": null,
+    "fileName": "/Carbyne-Solutions_&_logrdis/tests_&_test_config.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "def fin():\n    del os.environ['DB_PROTO']\n    del os.environ['DB_HOST']\n    del os.environ['DB_PORT']\n    del os.environ['DB_NAME']\n    del os.environ['DB_USER']\n    del os.environ['DB_PASS']\n    del os.environ['SOCKET']\n    del os.environ['LISTEN_HOST']\n    del os.environ['LISTEN_PORT']\nrequest.addfinalizer(fin)\nos.environ['DB_PROTO'] = 'postgresql'\nos.environ['DB_HOST'] = 'squidh'\nos.environ['DB_PORT'] = '5432'\nos.environ['DB_NAME'] = 'squidn'\nos.environ['DB_USER'] = 'squid'\nos.environ['DB_PASS'] = 'pass'\nos.environ['SOCKET'] = 'tcp'\nos.environ['LISTEN_HOST'] = '0.0.0.0'\nos.environ['LISTEN_PORT'] = '5555'\nconfig_dict = test_yaml()\nassert config_dict['engine'] == 'postgresql://squid:pass@squidh:5432/squidn'\nassert config_dict['socket'] == 'tcp'\nassert config_dict['listen_host'] == '0.0.0.0'\nassert config_dict['listen_port'] == '5555'\n"
+}

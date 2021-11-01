@@ -1,0 +1,9 @@
+{
+    "functionName": "test_generate_random_uniform_positions",
+    "className": null,
+    "fileName": "/mortele_&_OccamTools/test_&_test_generate_fort5.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "file_name = os.path.join(os.path.dirname(__file__), 'pos_test.5')\n_check_remove_file(file_name)\nn_particles = 100\nbox = [9.29580019, 6.12879582, 3.98020502]\ngenerate_uniform_random(n_particles, box, path=file_name)\nassert os.path.exists(file_name)\nwith open(file_name, 'r') as in_file:\n    for _ in range(4):\n        line = in_file.readline()\n    for i in range(1, n_particles + 1):\n        line = in_file.readline()\n        line = line.split()\n        assert int(line[-1]) == i\n        line = in_file.readline().strip()\n        assert int(line) == 1\n        line = in_file.readline()\n        line = line.split()\n        assert len(line) == 13\n        x, y, z = [float(p) for p in line[4:7]]\n        assert x <= box[0]\n        assert y <= box[1]\n        assert z <= box[2]\n_check_remove_file(file_name)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ssh_expected_rejects_0_when_changed",
+    "className": null,
+    "fileName": "/PearsonEducation_&_Alarmageddon/tests_&_validations_&_test_ssh.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "t = '18:01:46 up 62 days, 18:27,  1 user,  load average: 0.09, 0.04, 0.05'\nmonkeypatch.setattr(Connection, 'run', lambda self, x, err_stream, timeout,\n    warn: get_mock_ssh_text(t, 0))\nssh_ctx = ssh.SshContext('ubuntu', get_mock_key_file(tmpdir))\nwith pytest.raises(ValidationFailure):\n    ssh.SshCommandValidation(ssh_ctx, 'name', 'cmd', hosts=hosts\n        ).expect_exit_code(1).perform({})\n"
+}

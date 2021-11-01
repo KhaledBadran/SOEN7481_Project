@@ -1,0 +1,9 @@
+{
+    "functionName": "do_callback",
+    "className": null,
+    "fileName": "/PlaidWeb_&_Authl/tests_&_handlers_&_test_emailaddr.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "assert message['To'] == 'user@example.com'\nurl = message.get_payload().strip()\nargs = parse_args(url)\nassert url.startswith('http://example/cb/')\nresult = handler.check_callback(url, parse_args(url), {})\nLOGGER.info('check_callback(%s,%s): %s', url, args, result)\nassert isinstance(result, disposition.Verified)\nassert result.identity == 'mailto:user@example.com'\nassert result.redir == '/redir'\n"
+}

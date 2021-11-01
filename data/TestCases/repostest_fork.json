@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fork",
+    "className": "TestSyscall",
+    "fileName": "/MeiK2333_&_JudgeLight/tests_&_test_syscall.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "code = \"\"\"\n#include <unistd.h>\n\nint main() {\n    int pid = fork();\n    return 0;\n}\n\"\"\"\ncompile_it(code)\njl = JudgeLight('./a.out', allow_system_calls_rule='default')\nstats = jl.run()\nself.assertEqual(stats['re_flag'], 1)\nself.assertTrue(stats['re_syscall'] != 0 and stats['re_syscall'] != -1)\nclear_it()\n"
+}

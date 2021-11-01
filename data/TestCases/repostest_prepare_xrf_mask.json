@@ -1,0 +1,9 @@
+{
+    "functionName": "test_prepare_xrf_mask",
+    "className": null,
+    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_core_&_tests_&_test_map_processing.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Basic functionality of `_prepare_xrf_mask`\"\"\"\ndata_shape = 7, 12, 20\ndata_dask = da.random.random(data_shape, chunks=(2, 3, 4))\nmask, selection = _create_xrf_mask(data_shape, apply_mask, select_area)\nmask_expected = None\nif mask is not None:\n    mask_expected = mask\nif selection:\n    if mask_expected is None:\n        mask_expected = np.ones(shape=data_shape[0:2])\n    ny, nx = mask_expected.shape\n    y0, x0 = selection[0], selection[1]\n    y1, x1 = y0 + selection[2], x0 + selection[3]\n    for y in range(ny):\n        if y < y0 or y >= y1:\n            mask_expected[(y), :] = 0\n    for x in range(nx):\n        if x < x0 or x >= x1:\n            mask_expected[:, (x)] = 0\nmask_prepared = _prepare_xrf_mask(data_dask, mask=mask, selection=selection)\nnpt.assert_array_equal(mask_prepared, mask_expected, err_msg=\n    'The prepared mask is not equal to expected')\npytest.mark.parametrize('apply_mask', [False, True])pytest.mark.parametrize('select_area', [False, True])"
+}

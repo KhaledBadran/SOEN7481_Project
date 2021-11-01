@@ -1,0 +1,9 @@
+{
+    "functionName": "test_output_methods",
+    "className": "psv_load_tests_random",
+    "fileName": "/DolphDev_&_PSV/tests_&_test_load_random.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.generate_data_str()\napi = psv.loads(self.csvloads_str)\ntry:\n    api.outputs(quote_all=False)\n    api.outputs(quote_all=True)\n    api.output('TEST-OUTPUT-1.csv', quote_all=False)\n    api.output('TEST-OUTPUT-1.csv', quote_all=True)\nexcept Exception as err:\n    self.fail(str(err))\ntry:\n    api.outputs(columns={'NOT SUPPORTED TYPE'})\nexcept ValueError:\n    pass\ntry:\n    api.output('NAME.csv', columns={'NOT SUPPORTED TYPE'})\n    self.fail('Output Method failed to catch unsupported type')\nexcept ValueError:\n    pass\n"
+}

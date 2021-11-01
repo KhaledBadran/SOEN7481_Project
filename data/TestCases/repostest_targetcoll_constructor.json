@@ -1,0 +1,9 @@
+{
+    "functionName": "test_targetcoll_constructor",
+    "className": "TestTarget",
+    "fileName": "/apmoore1_&_Bella/tests_&_test_data_types.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Tests TargetCollection constructor\n        \"\"\"\ntarget_example = Target([(3, 5), (6, 8)], '1', 'Iphone', 'text with Iphone', 1)\nwith self.assertRaises(TypeError, msg=\n    'The constructor should only accept an interator as an argument'):\n    TargetCollection(1)\nwith self.assertRaises(TypeError, msg=\n    'The constructor should only accept an interator of Target instances'):\n    TargetCollection([1, 2, 3, 4])\nTargetCollection([])\nTargetCollection([target_example])\nTargetCollection()\nanother_example = Target([(3, 4)], '2', 'Keys', 'text with Keys', -1)\ndup_example = Target([(3, 10)], '1', 'Pixel', 'text with Pixels', 0)\nwith self.assertRaises(KeyError, msg=\n    'Should raise an error as two of the target instances have the same key'):\n    TargetCollection([target_example, another_example, dup_example])\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_growth_mg",
+    "className": null,
+    "fileName": "/LSSTDESC_&_CCL/benchmarks_&_test_growth.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Compare the modified growth function computed by CCL against the exact\n    result for a particular modification of the growth rate.\n    \"\"\"\nnz_mg = 128\nz_mg = np.zeros(nz_mg)\ndf_mg = np.zeros(nz_mg)\nfor i in range(0, nz_mg):\n    z_mg[i] = 4.0 * (i + 0.0) / (nz_mg - 1.0)\n    df_mg[i] = 0.1 / (1.0 + z_mg[i])\ncosmo1 = ccl.Cosmology(Omega_c=0.25, Omega_b=0.05, Omega_k=0.0, Neff=0.0,\n    m_nu=0.0, w0=-1.0, wa=0.0, h=0.7, A_s=2.1e-09, n_s=0.96)\ncosmo2 = ccl.Cosmology(Omega_c=0.25, Omega_b=0.05, Omega_k=0.0, Neff=0.0,\n    m_nu=0.0, w0=-1.0, wa=0.0, h=0.7, A_s=2.1e-09, n_s=0.96, z_mg=z_mg,\n    df_mg=df_mg)\na = 1.0 / (1.0 + z_mg)\nd1 = ccl.growth_factor(cosmo1, a)\nd2 = ccl.growth_factor(cosmo2, a)\nf1 = ccl.growth_rate(cosmo1, a)\nf2 = ccl.growth_rate(cosmo2, a)\nf2r = f1 + 0.1 * a\nd2r = d1 * np.exp(0.1 * (a - 1.0))\nassert_allclose(d2r, d2, rtol=GROWTH_TOLERANCE)\nassert_allclose(f2r, f2, rtol=GROWTH_TOLERANCE)\n"
+}

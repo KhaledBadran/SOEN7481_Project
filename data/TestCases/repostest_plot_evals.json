@@ -1,0 +1,9 @@
+{
+    "functionName": "test_plot_evals",
+    "className": null,
+    "fileName": "/tvdboom_&_ATOM/tests_&_test_plots.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Assert that the plot_evals method work as intended.\"\"\"\ntrainer = TrainerClassifier(['LR', 'XGB'], metric='f1')\ntrainer.run(bin_train, bin_test)\npytest.raises(ValueError, trainer.plot_evals)\npytest.raises(AttributeError, trainer.LR.plot_evals)\ntrainer = TrainerClassifier('LGB', metric='f1')\npytest.raises(NotFittedError, trainer.plot_evals, models='LDA')\ntrainer.run(bin_train, bin_test)\ntrainer.plot_evals(filename=FILE_DIR + 'evals1', display=False)\ntrainer.lgb.plot_evals(filename=FILE_DIR + 'evals2', display=False)\nassert glob.glob(FILE_DIR + 'evals1.png')\nassert glob.glob(FILE_DIR + 'evals2.png')\natom = ATOMClassifier(X_bin, y_bin, random_state=1)\natom.run('XGB', metric='f1')\natom.plot_evals(filename=FILE_DIR + 'evals3', display=False)\natom.xgb.plot_evals(filename=FILE_DIR + 'evals4', display=False)\nassert glob.glob(FILE_DIR + 'evals3.png')\nassert glob.glob(FILE_DIR + 'evals4.png')\n"
+}

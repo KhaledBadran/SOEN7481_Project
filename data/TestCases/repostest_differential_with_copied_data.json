@@ -1,0 +1,9 @@
+{
+    "functionName": "test_differential_with_copied_data",
+    "className": "TestCreateScoreDifferential",
+    "fileName": "/AndrewRook_&_NFLWin/nflwin_&_tests_&_test_preprocessing.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "csd = preprocessing.CreateScoreDifferential('home_score', 'away_score',\n    'offense_home', score_differential_colname='score_diff', copy=True)\ninput_data = pd.DataFrame({'home_score': [1, 2, 3, 4], 'away_score': [10, 0,\n    5, 15], 'offense_home': [True, True, True, True]})\nexpected_input_data = pd.DataFrame({'home_score': [1, 2, 3, 4],\n    'away_score': [10, 0, 5, 15], 'offense_home': [True, True, True, True]})\nexpected_transformed_data = pd.DataFrame({'home_score': [1, 2, 3, 4],\n    'away_score': [10, 0, 5, 15], 'offense_home': [True, True, True, True],\n    'score_diff': [-9, 2, -2, -11]})\ncsd.fit(input_data)\ntransformed_data = csd.transform(input_data)\npd.util.testing.assert_frame_equal(expected_input_data.sort_index(axis=1),\n    input_data.sort_index(axis=1))\npd.util.testing.assert_frame_equal(expected_transformed_data.sort_index(\n    axis=1), transformed_data.sort_index(axis=1))\n"
+}

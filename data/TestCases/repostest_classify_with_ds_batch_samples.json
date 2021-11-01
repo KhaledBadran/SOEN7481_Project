@@ -1,0 +1,9 @@
+{
+    "functionName": "test_classify_with_ds_batch_samples",
+    "className": null,
+    "fileName": "/Menelau_&_DESlib/deslib_&_tests_&_des_&_test_des_mi.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "n_samples = 10\nquery = np.ones((n_samples, 2))\npredictions = np.tile(np.array([0, 1, 0]), (n_samples, 1))\ndesmi_test = DESMI()\ndesmi_test.estimate_competence = MagicMock(return_value=np.ones((n_samples, 3))\n    )\ndesmi_test.select = MagicMock(return_value=np.tile(np.array([[0, 2]]), (\n    n_samples, 1)))\nresult = desmi_test.classify_with_ds(query, predictions)\nassert np.allclose(result, np.zeros(10))\n"
+}

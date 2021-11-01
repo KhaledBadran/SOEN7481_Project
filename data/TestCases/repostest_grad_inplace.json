@@ -1,0 +1,9 @@
+{
+    "functionName": "test_grad_inplace",
+    "className": "GradientStreamedTest",
+    "fileName": "/IMTtugraz_&_PyQMRI/test_&_test_gradient.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "gradx = np.zeros_like(self.gradin)\ngrady = np.zeros_like(self.gradin)\ngradz = np.zeros_like(self.gradin)\ngradx[(...), :-1] = np.diff(self.gradin, axis=-1)\ngrady[(...), :-1, :] = np.diff(self.gradin, axis=-2)\ngradz[:-1, (...)] = np.diff(self.gradin, axis=0) / self.dz\ngrad = np.stack((gradx, grady, gradz), axis=-1)\noutp = np.zeros_like(self.divin)\nself.grad.fwd([outp], [[self.gradin]])\nnp.testing.assert_allclose(outp[(...), :-1], grad, rtol=0)\n"
+}

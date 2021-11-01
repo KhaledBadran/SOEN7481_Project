@@ -1,0 +1,9 @@
+{
+    "functionName": "test_beat_start_in_measure",
+    "className": null,
+    "fileName": "/Perlence_&_PyGuitarPro/tests_&_test_models.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "song = gp.Song()\nmeasure = song.tracks[0].measures[0]\nvoice = measure.voices[0]\nbeat = gp.Beat(voice, start=measure.start)\nbeat2 = gp.Beat(voice, start=measure.start + beat.duration.time)\nvoice.beats.append(beat)\nassert beat.startInMeasure == 0\nassert beat2.startInMeasure == 960\nwith pytest.raises(AttributeError):\n    beat2.realStart\n"
+}

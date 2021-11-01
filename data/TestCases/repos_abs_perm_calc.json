@@ -1,0 +1,9 @@
+{
+    "functionName": "_abs_perm_calc",
+    "className": "RelativePermeability",
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_algorithms_&_metrics_&_RelativePermeability.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        Calculates absolute permeability of the medium using StokesFlow\n        algorithm. The direction of flow is defined by flow_pores. This\n        permeability is normalized by variables in darcy's law other than\n        the rate.\n\n        Parameters\n        ----------\n        phase: phase object\n        The phase for which the flow rate is calculated.\n\n        flow_pores: numpy array\n        Boundary pores that will have constant value boundary condition to in\n        StokesFlow algorithm. First element is the inlet face (pores) for flow\n        of invading phase through porous media. Second element is the outlet\n        face (pores).\n\n        Output: array [Kwp, Knwp]\n        The value of absolute permeability of defending (if there is any) and\n        invadin phase in the direction that is defined by flow_pores.\n\n        Note: Absolute permeability is not dependent to the phase, but here\n        we just need to calculate the rate instead of all variables that are\n        contributing to the darcy's law.\n        \"\"\"\nnetwork = self.project.network\nSt_p = StokesFlow(network=network, phase=phase)\nSt_p.set_value_BC(pores=flow_pores[0], values=1)\nSt_p.set_value_BC(pores=flow_pores[1], values=0)\nSt_p.run()\nval = np.sum(abs(St_p.rate(pores=flow_pores[1])))\nK_abs = val\nself.project.purge_object(obj=St_p)\nreturn K_abs\n"
+}

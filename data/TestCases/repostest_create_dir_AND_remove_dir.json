@@ -1,0 +1,9 @@
+{
+    "functionName": "test_create_dir_AND_remove_dir",
+    "className": "TestCreate_dir_AND_remove_dir",
+    "fileName": "/KnowEnG_&_KnowEnG_Pipelines_Library/test_&_unit_&_test_create_dir_AND_remove_dir.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" assert that the functions work togeather to create and remove a directory\n            even when files have been added\n        \"\"\"\ndir_name = 'tmp_test'\ndir_path = self.run_parameters['test_directory']\nnew_directory_name = kn.create_dir(dir_path, dir_name)\nself.assertTrue(os.path.exists(new_directory_name), msg=\n    'create_dir function exception')\nA = np.random.rand(10, 10)\ntime_stamp = '123456789'\na_name = os.path.join(new_directory_name, 'temp_test' + time_stamp)\nwith open(a_name, 'wb') as fh:\n    A.dump(fh)\nA_back = np.load(a_name)\nif os.path.isfile(a_name):\n    os.remove(a_name)\nA_diff = A - A_back\nA_diff = A_diff.sum()\nself.assertEqual(A_diff, 0, msg='write / read directory exception')\nkn.remove_dir(new_directory_name)\nself.assertFalse(os.path.exists(new_directory_name), msg=\n    'remove_dir function exception')\n"
+}

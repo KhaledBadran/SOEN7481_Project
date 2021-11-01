@@ -1,0 +1,9 @@
+{
+    "functionName": "test_certificate_add_delete",
+    "className": "TestSqlIdentityStorage",
+    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_identity_methods.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "identityName = Name('/TestIdentityStorage/Identity').appendVersion(int(time\n    .time()))\nself.identityManager.createIdentityAndCertificate(identityName, KeyChain.\n    getDefaultKeyParams())\nkeyName1 = self.identityManager.getDefaultKeyNameForIdentity(identityName)\ncert2 = self.identityManager.selfSign(keyName1)\nself.identityStorage.addCertificate(cert2)\ncertName2 = cert2.getName()\ncertName1 = self.identityManager.getDefaultCertificateNameForIdentity(\n    identityName)\nself.assertNotEqual(certName1, certName2,\n    'New certificate was set as default without explicit request')\nself.identityStorage.deleteCertificateInfo(certName1)\nself.assertTrue(self.identityStorage.doesCertificateExist(certName2))\nself.assertFalse(self.identityStorage.doesCertificateExist(certName1))\nself.keyChain.deleteIdentity(identityName)\nself.assertFalse(self.identityStorage.doesCertificateExist(certName2))\n"
+}

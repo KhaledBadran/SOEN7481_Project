@@ -1,0 +1,9 @@
+{
+    "functionName": "test_invalid_centres",
+    "className": "Test_valid_query_input",
+    "fileName": "/mchalela_&_GriSPy/tests_&_test_data_consistency.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "bad_centres = [[1, 1, 1], [2, 2, 2]]\nwith pytest.raises(TypeError):\n    gsp.bubble_neighbors(bad_centres, distance_upper_bound=self.upper_radii,\n        sorted=self.sorted, kind=self.kind)\nbad_centres = np.random.uniform(-1, 1, size=(10, 3))\nbad_centres[4, 1] = np.inf\nwith pytest.raises(ValueError):\n    gsp.bubble_neighbors(bad_centres, distance_upper_bound=self.upper_radii,\n        sorted=self.sorted, kind=self.kind)\nbad_centres = np.random.uniform(-1, 1, size=(10, 2))\nwith pytest.raises(ValueError):\n    gsp.bubble_neighbors(bad_centres, distance_upper_bound=self.upper_radii,\n        sorted=self.sorted, kind=self.kind)\nbad_centres = np.array([[], [], []]).reshape((0, 3))\nwith pytest.raises(ValueError):\n    gsp.bubble_neighbors(bad_centres, distance_upper_bound=self.upper_radii,\n        sorted=self.sorted, kind=self.kind)\n"
+}

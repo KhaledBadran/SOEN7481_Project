@@ -1,0 +1,9 @@
+{
+    "functionName": "test_process_multibatch",
+    "className": "TestKmipEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a batch containing multiple operations is processed\n        correctly.\n        \"\"\"\ne = engine.KmipEngine()\ne._logger = mock.MagicMock()\npayload = payloads.DiscoverVersionsRequestPayload()\nbatch = list([messages.RequestBatchItem(operation=contents.Operation(enums.\n    Operation.DISCOVER_VERSIONS), unique_batch_item_id=contents.\n    UniqueBatchItemID(1), request_payload=payload), messages.\n    RequestBatchItem(operation=contents.Operation(enums.Operation.\n    DISCOVER_VERSIONS), unique_batch_item_id=contents.UniqueBatchItemID(2),\n    request_payload=payload)])\nresults = e._process_batch(batch, enums.BatchErrorContinuationOption.STOP, True\n    )\nself.assertIsNotNone(results)\nself.assertEqual(2, len(results))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_user_data_dir_android",
+    "className": "TestEtherollApp",
+    "fileName": "/AndreMiras_&_EtherollApp/src_&_etherollapp_&_tests_&_service_&_test_main.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"On Android, pyjnius is used to call getAbsolutePath().\"\"\"\napp = EtherollApp()\nm_jnius = mock.MagicMock()\nwith patch_platform(), patch_jnius(m_jnius):\n    assert app._get_user_data_dir()\nassert m_jnius.cast().getAbsolutePath.call_args_list == [mock.call()]\n"
+}

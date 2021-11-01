@@ -1,0 +1,9 @@
+{
+    "functionName": "test_published_kdks",
+    "className": "TestAccessManagerV2",
+    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_access_manager_v2.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "for user in self._fixture._userIdentities:\n    kdkName = Name('/access/policy/identity/NAC/dataset/KDK')\n    kdkName.append(self._fixture._nacIdentity.getDefaultKey().getName().get(-1)\n        ).append('ENCRYPTED-BY').append(user.getDefaultKey().getName())\n    self._fixture._face.receive(Interest(kdkName).setCanBePrefix(True).\n        setMustBeFresh(True))\n    self.assertTrue(self._fixture._face._sentData[0].getName().equals(\n        kdkName), 'Sent Data does not have the KDK name ' + kdkName.toUri())\n    self._fixture._face._sentData = []\n"
+}

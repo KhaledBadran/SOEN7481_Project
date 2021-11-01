@@ -1,0 +1,9 @@
+{
+    "functionName": "test_modify_attribute",
+    "className": "TestProxyKmipClient",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_test_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the client can modify an attribute.\n        \"\"\"\nrequest_payload = payloads.ModifyAttributeRequestPayload(unique_identifier=\n    '1', new_attribute=obj.NewAttribute(attribute=primitives.Boolean(value=\n    True, tag=enums.Tags.SENSITIVE)))\nresponse_payload = payloads.ModifyAttributeResponsePayload(unique_identifier\n    ='1')\nwith ProxyKmipClient() as client:\n    client.proxy.send_request_payload.return_value = response_payload\n    unique_identifier, attribute = client.modify_attribute(unique_identifier\n        ='1', new_attribute=obj.NewAttribute(attribute=primitives.Boolean(\n        value=True, tag=enums.Tags.SENSITIVE)))\n    args = enums.Operation.MODIFY_ATTRIBUTE, request_payload\n    client.proxy.send_request_payload.assert_called_with(*args)\n    self.assertEqual('1', unique_identifier)\n    self.assertIsNone(attribute)\nmock.patch('kmip.pie.client.KMIPProxy', mock.MagicMock(spec_set=KMIPProxy))"
+}

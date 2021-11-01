@@ -1,0 +1,9 @@
+{
+    "functionName": "test_deleting",
+    "className": null,
+    "fileName": "/Macquarie-MEG-Research_&_BIDSHandler/bidshandler_&_tests_&_test_load.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with tempfile.TemporaryDirectory() as tmp:\n    shutil.copytree(TESTPATH1, op.join(tmp, 'BIDSTEST1'))\n    bt = BIDSTree(op.join(tmp, 'BIDSTEST1'))\n    bt.project('test1').subject(1).session(1).scan(task='optimumMMN', run='1'\n        ).delete()\n    scans_tsv = bt.project('test1').subject(1).session(1).scans_tsv\n    df = pd.read_csv(scans_tsv, sep='\\t')\n    assert 'meg\\\\sub-1_ses-1_task-optimumMMN_run-1_meg\\\\sub-1_ses-1_task-optimumMMN_run-1_meg.con' not in df[\n        'filename']\n    other_scan = bt.project('test1').subject(1).session(1).scan(task=\n        'resting', run='1')\n    assert op.exists(other_scan.coordsystem_json)\n    assert op.exists(op.join(other_scan.path, other_scan.associated_files[\n        'headshape']))\n    bt.project('test1').subject(1).session(1).delete()\n    with pytest.raises(NoSessionError):\n        bt.project('test1').subject(1).session(1)\n    bt.project('test1').subject(1).delete()\n    with pytest.raises(NoSubjectError):\n        bt.project('test1').subject(1)\n    participants_tsv = bt.project('test1').participants_tsv\n    df = pd.read_csv(participants_tsv, sep='\\t')\n    assert 'sub-1' not in df['participant_id']\n"
+}

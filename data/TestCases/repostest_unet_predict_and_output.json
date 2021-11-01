@@ -1,0 +1,9 @@
+{
+    "functionName": "test_unet_predict_and_output",
+    "className": "TestsUnet",
+    "fileName": "/MarniTausen_&_Greenotyper/test_sample.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.PL.measure_size = True, 'test_outputs/u-net'\nself.PL.mask_output = True, 'test_outputs/u-net'\nself.PL.crop_output = True, 'test_outputs/u-net'\nself.PL.measure_greenness = True, 'test_outputs/u-net'\n_file = open('test_outputs/u-net/database.size.csv', 'w')\n_file.write('')\n_file.close()\n_file = open('test_outputs/u-net/database.greenness.csv', 'w')\n_file.write('')\n_file.close()\nself.PL.load_unet('training_data/u-net/network/currentbest.unet.hdf5')\ncrops = self.PL.collect_crop_data(512)\nimagedata = self.PL.unet_prepare_images(crops)\nfilename_labels = self.PL.get_filename_labels()\npredicted_masks = self.PL.unet_apply_on_images(imagedata)\nself.PL.unet_output_data(imagedata, predicted_masks, filename_labels)\nself.PL.organize_output('test_outputs/u-net/database.size.csv',\n    'test_outputs/u-net/unet.sizes.csv')\nTrue_results = {'Time': '2018/06/16 - 11:34', '2171': '151528', '2172':\n    '13637', '2173': '151743', '2174': '86893', '2175': '100536', '2191':\n    '18501', '2192': '138264', '2193': '10389', '2194': '113808', '2195':\n    '89083'}\n_file = open('test_outputs/u-net/unet.sizes.csv')\nheader = _file.readline().replace('\\n', '').split(',')\ndataline = _file.readline().replace('\\n', '').split(',')\nresults = {}\nfor name, data in zip(header, dataline):\n    results[name] = data\nfor name in header:\n    self.assertEqual(results[name], True_results[name])\nself.PL.greenness_output('test_outputs/u-net/database.greenness.csv',\n    'test_outputs/u-net/unet.greenness')\n"
+}

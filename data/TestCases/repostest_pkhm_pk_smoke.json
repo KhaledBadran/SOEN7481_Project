@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pkhm_pk_smoke",
+    "className": null,
+    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_pkhm.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "hmc = ccl.halos.HMCalculator(COSMO, HMF, HBF, mass_def=M200, nlog10M=2)\ndef f(k, a):\n    return ccl.halos.halomod_power_spectrum(COSMO, hmc, k, a, P1, prof_2pt=\n        pars['cv'], normprof1=pars['norm'], normprof2=pars['norm'],\n        p_of_k_a=pars['pk'], prof2=pars['p2'], get_1h=pars['h1'], get_2h=\n        pars['h2'])\nsmoke_assert_pkhm_real(f)\npytest.mark.parametrize('pars', [{'cv': None, 'norm': True, 'pk': 'linear',\n    'h1': True, 'h2': True, 'itg': 'simpson', 'p2': None}, {'cv': PKC,\n    'norm': True, 'pk': 'linear', 'h1': True, 'h2': True, 'itg': 'simpson',\n    'p2': None}, {'cv': None, 'norm': False, 'pk': 'linear', 'h1': True,\n    'h2': True, 'itg': 'simpson', 'p2': None}, {'cv': None, 'norm': True,\n    'pk': 'nonlinear', 'h1': True, 'h2': True, 'itg': 'simpson', 'p2': None\n    }, {'cv': None, 'norm': True, 'pk': PK2D, 'h1': True, 'h2': True, 'itg':\n    'simpson', 'p2': None}, {'cv': None, 'norm': True, 'pk': None, 'h1': \n    True, 'h2': True, 'itg': 'simpson', 'p2': None}, {'cv': None, 'norm': \n    True, 'pk': 'linear', 'h1': False, 'h2': True, 'itg': 'simpson', 'p2':\n    None}, {'cv': None, 'norm': True, 'pk': 'linear', 'h1': True, 'h2': \n    False, 'itg': 'simpson', 'p2': None}, {'cv': None, 'norm': True, 'pk':\n    'linear', 'h1': False, 'h2': False, 'itg': 'simpson', 'p2': None}, {\n    'cv': None, 'norm': True, 'pk': 'linear', 'h1': True, 'h2': True, 'itg':\n    'spline', 'p2': None}, {'cv': None, 'norm': True, 'pk': 'linear', 'h1':\n    True, 'h2': True, 'itg': 'simpson', 'p2': P2}])"
+}

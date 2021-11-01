@@ -1,0 +1,9 @@
+{
+    "functionName": "test_relative_asym_uncertainty",
+    "className": "TestDataPoint",
+    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_chemked.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "properties = self.load_properties('testfile_uncertainty.yaml')\nwith pytest.warns(UserWarning) as record:\n    d = DataPoint(properties[3])\nm = str(record.pop(UserWarning).message)\nassert m == 'Asymmetric uncertainties are not supported. The maximum of lower-uncertainty and upper-uncertainty has been used as the symmetric uncertainty.'\nassert np.isclose(d.ignition_delay.value, Q_(471.54, 'us'))\nassert np.isclose(d.ignition_delay.error, Q_(47.154, 'us'))\nassert np.isclose(d.ignition_delay.rel, 0.1)\nassert np.isclose(d.temperature.value, Q_(1164.48, 'K'))\nassert np.isclose(d.temperature.error, Q_(116.448, 'K'))\nassert np.isclose(d.temperature.rel, 0.1)\n"
+}

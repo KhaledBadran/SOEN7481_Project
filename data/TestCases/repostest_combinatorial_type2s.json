@@ -1,0 +1,9 @@
+{
+    "functionName": "test_combinatorial_type2s",
+    "className": null,
+    "fileName": "/Edinburgh-Genome-Foundry_&_DnaCauldron/tests_&_test_combinatorial_type2s_&_test_combinatorial_type2s.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "repository = dc.SequenceRepository()\nrepository.import_records(folder=parts_folder, use_file_names_as_ids=True)\nparts_list = list(repository.collections['parts'])\nassembly = dc.Type2sRestrictionAssembly(parts_list, expected_constructs=1)\nsimulation = assembly.simulate(sequence_repository=repository)\nassert len(simulation.errors) == 1\nassert len(simulation.construct_records) == 5\nassembly = dc.Type2sRestrictionAssembly(parts_list, expected_constructs=\n    'any_number')\nsimulation = assembly.simulate(sequence_repository=repository)\nassert len(simulation.errors) == 0\nassert len(simulation.construct_records) == 5\nassembly = dc.Type2sRestrictionAssembly(parts_list, max_constructs=3,\n    expected_constructs='any_number', expect_no_unused_parts=False)\nsimulation = assembly.simulate(sequence_repository=repository)\nassert len(simulation.errors) == 0\nassert len(simulation.warnings) == 1\nassert len(simulation.construct_records) == 3\nassembly = dc.Type2sRestrictionAssembly(parts_list, max_constructs=2,\n    expected_constructs='any_number', expect_no_unused_parts=False,\n    randomize_constructs=True)\nsimulation = assembly.simulate(sequence_repository=repository)\nassert len(simulation.errors) == 0\nassert len(simulation.warnings) == 1\nassert len(simulation.construct_records) == 2\n"
+}

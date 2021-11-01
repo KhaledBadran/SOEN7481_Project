@@ -1,0 +1,9 @@
+{
+    "functionName": "test_compilation",
+    "className": "Test_basic",
+    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_basics.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "print('output dir : {}'.format(ql.get_option('output_dir')))\nconfig_fn = os.path.join(curdir, 'hardware_config_qx.json')\nplatf = ql.Platform('starmon', config_fn)\nsweep_points = [1]\nnqubits = 2\np = ql.Program('basic', platf, nqubits, nqubits)\np.set_sweep_points(sweep_points)\nk = ql.Kernel('first_kernel', platf, nqubits, nqubits)\nk.gate('prep_z', [0])\nk.gate('x', [0])\nk.gate('x90', [0])\nk.gate('measure', [0])\np.add_kernel(k)\nk = ql.Kernel('second_kernel', platf, nqubits, nqubits)\nk.gate('prep_z', [0])\nk.gate('x90', [0])\nk.gate('cz', [0, 1])\nk.gate('x90', [0])\nk.gate('measure', [0])\np.add_kernel(k)\np.compile()\nqasm_files = []\nqasm_files.append(os.path.join(output_dir, 'basic_initialqasmwriter_out.qasm'))\nqasm_files.append(os.path.join(output_dir,\n    'basic_scheduledqasmwriter_out.qasm'))\nfor qasm_file in qasm_files:\n    print('assembling: {}'.format(qasm_file))\n    assemble(qasm_file)\n"
+}

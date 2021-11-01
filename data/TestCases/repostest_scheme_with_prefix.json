@@ -1,0 +1,9 @@
+{
+    "functionName": "test_scheme_with_prefix",
+    "className": "TestUnixScheme",
+    "fileName": "/cournape_&_Bento/bento_&_commands_&_tests_&_test_configure.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "bento_info = 'Name: foo\\n'\nself.options.prefix = '/home/guido'\nscheme = self._compute_scheme(bento_info, self.options)\nprefix = scheme.pop('prefix')\neprefix = scheme.pop('eprefix')\npy_version_short = scheme.pop('py_version_short')\npkgname = scheme.pop('pkgname')\nself.assertEqual(prefix, '/home/guido')\nself.assertEqual(eprefix, '/home/guido')\nself.assertEqual(pkgname, 'foo')\nself.assertEqual(py_version_short, PY_VERSION_SHORT)\nfor k, v in scheme.items():\n    self.assertEqual(UNIX_REFERENCE[k], v)\nself.options.eprefix = '/home/exec/guido'\nscheme = self._compute_scheme(bento_info, self.options)\nprefix = scheme.pop('prefix')\neprefix = scheme.pop('eprefix')\npy_version_short = scheme.pop('py_version_short')\npkgname = scheme.pop('pkgname')\nself.assertEqual(prefix, '/home/guido')\nself.assertEqual(eprefix, '/home/exec/guido')\nself.assertEqual(pkgname, 'foo')\nself.assertEqual(py_version_short, PY_VERSION_SHORT)\nfor k, v in scheme.items():\n    self.assertEqual(UNIX_REFERENCE[k], v)\nmock.patch('sys.platform', 'linux2')mock.patch('bento.core.platforms.sysconfig.bento.utils.path.find_root', lambda\n    ignored: '/')"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fit_auto_pandas",
+    "className": "FeatureExtractorTest",
+    "fileName": "/HDI-Project_&_MLPrimitives/tests_&_custom_&_test_feature_extraction.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class FE(FeatureExtractor):\n    _detect_features = Mock(return_value=['a', 'b'])\n    _fit = Mock()\nfe = FE(features='auto')\nX = pd.DataFrame({'a': ['a', 'b', 'c'], 'b': ['d', 'e', 'f'], 'c': [1, 2, 3]})\nfe.fit(X)\nassert fe._features == ['a', 'b']\nassert fe._detect_features.called_once_with(X)\nexpected_calls = [((pd.Series(['a', 'b', 'c']),), {}), ((pd.Series(['d',\n    'e', 'f']),), {})]\nself.assert_equal(expected_calls, fe._fit.call_args_list)\n"
+}

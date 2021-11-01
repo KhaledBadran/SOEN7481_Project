@@ -1,0 +1,9 @@
+{
+    "functionName": "pore_to_pore",
+    "className": null,
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_models_&_geometry_&_throat_vector.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Calculates throat vector as straight path between connected pores.\n\n    Parameters\n    ----------\n    target: OpenPNM object\n        The object containing the geometrical properties of the throats\n\n    Returns\n    -------\n    unit_vec : NumPy ndarray, shape = (N, 3)\n        Array containing pore-to-pore unit vectors\n\n    Notes\n    -----\n    There is an important impicit assumption here: the positive direction is\n    taken as the direction from the pore with the lower index to the higher.\n    This corresponds to the pores in the 1st and 2nd columns of the\n    'throat.conns' array as stored on the etwork.\n\n    \"\"\"\nnetwork = target.project.network\nthroats = network.throats(target.name)\nconns = network['throat.conns']\nP1 = conns[:, (0)]\nP2 = conns[:, (1)]\ncoords = network['pore.coords']\nvec = coords[P2] - coords[P1]\nunit_vec = tr.unit_vector(vec, axis=1)\nreturn unit_vec[throats]\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_learn_save_load_model",
+    "className": null,
+    "fileName": "/Puumanamana_&_CoCoNet/tests_&_test_dl.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Check:\n    - if the training goes through\n    - if the model is saved\n    \"\"\"\nmodel = initialize_model('CoCoNet', TEST_SHAPES, TEST_ARCHITECTURE)\nmodel_file = Path('{}/test_model.pth'.format(LOCAL_DIR))\nresults_file = Path('{}/test_res.csv'.format(LOCAL_DIR))\npair_files = {'train': Path('{}/pairs_train.npy'.format(LOCAL_DIR)), 'test':\n    Path('{}/pairs_test.npy'.format(LOCAL_DIR))}\ncoverage_file = generate_h5_file(*TEST_CTG_LENGTHS)\nfasta_file = generate_fasta_file(*TEST_CTG_LENGTHS, save=True)\nfasta = list(SeqIO.parse(fasta_file, 'fasta'))\nmake_pairs(fasta, STEP, FL, output=pair_files['train'], n_examples=50)\nmake_pairs(fasta, STEP, FL, output=pair_files['test'], n_examples=5)\ntrain(model, fasta_file, coverage_file, pair_files, results_file, output=\n    model_file, **TEST_LEARN_PRMS)\ntests = model_file.is_file() and results_file.is_file()\nfor path in (list(pair_files.values()) + [fasta_file, coverage_file,\n    model_file, results_file]):\n    path.unlink()\nassert tests\n"
+}

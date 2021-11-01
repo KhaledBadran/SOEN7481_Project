@@ -1,0 +1,9 @@
+{
+    "functionName": "test_errors",
+    "className": "TestValidationMessages",
+    "fileName": "/hdoupe_&_ParamTools/paramtools_&_tests_&_test_parameters.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "params = TestParams()\nadj = {'min_int_param': [{'value': 'abc'}]}\nwith pytest.raises(ValidationError) as excinfo:\n    params.adjust(adj)\nexp_user_message = {'min_int_param': ['Not a valid integer: abc.']}\nassert json.loads(excinfo.value.args[0]) == {'errors': exp_user_message}\nexp_internal_message = {'min_int_param': [['Not a valid integer: abc.']]}\nassert excinfo.value.messages['errors'] == exp_internal_message\nexp_labels = {'min_int_param': [{}]}\nassert excinfo.value.labels['errors'] == exp_labels\nparams = TestParams()\nadj = {'min_int_param': 'abc'}\nwith pytest.raises(ValidationError) as excinfo:\n    params.adjust(adj)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "_aexit",
+    "className": "AsyncClient",
+    "fileName": "/PRIArobotics_&_HedgehogClient/hedgehog_&_client_&_async_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "stack = AsyncExitStack()\n@stack.callback\ndef decrement_open_count():\n    self._open_count -= 1\n    logger.debug('Open: %d (%d daemon)', self._open_count, self._daemon_count)\n@stack.push_async_exit\nasync def exit(exc_type, exc_val, exc_tb):\n    if self._open_count == 1:\n        logger.debug('Deactivating client...')\n        try:\n            return await self._exit_stack.__aexit__(exc_type, exc_val, exc_tb)\n        finally:\n            self._exit_stack = None\n@stack.push_async_callback\nasync def shutdown():\n    if self._open_count - 1 == self._daemon_count:\n        await self.shutdown()\n@stack.callback\ndef decrement_daemon_count():\n    if daemon:\n        self._daemon_count -= 1\n@stack.push\ndef suppress_shutdown_error(exc_type, exc_val, exc_tb):\n    if exc_type == errors.EmergencyShutdown:\n        print(exc_val)\n        return True\nlogger.debug('Exiting as %s', 'daemon' if daemon else 'regular')\nreturn await stack.__aexit__(exc_type, exc_val, exc_tb)\n"
+}

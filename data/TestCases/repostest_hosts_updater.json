@@ -1,0 +1,9 @@
+{
+    "functionName": "test_hosts_updater",
+    "className": "TestConfigurationMethods",
+    "fileName": "/XHotSniperX_&_Netconflib/tests_&_test_netconf.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Tests whether the hosts are set correctly.\n        \"\"\"\nself.init_configurator(self.MAX_NUM)\nself.ncl.update_hosts_file()\nnodes = self.config.items('hosts')\nhosts = {}\nfor name, addr in nodes:\n    hosts[name] = addr\nnum = len(hosts)\nfor node in self.ncl.topology.nodes:\n    self.assertEqual(len(node.hosts), num)\n    to_test = {}\n    for host in node.hosts:\n        to_test[host.name] = host.address\n    self.assertDictEqual(hosts, to_test)\n"
+}

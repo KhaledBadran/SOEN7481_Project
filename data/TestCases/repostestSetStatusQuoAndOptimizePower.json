@@ -1,0 +1,9 @@
+{
+    "functionName": "testSetStatusQuoAndOptimizePower",
+    "className": "BatchTrialTest",
+    "fileName": "/facebook_&_Ax/ax_&_core_&_tests_&_test_batch_trial.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "batch_trial = self.experiment.new_batch_trial()\nstatus_quo = Arm(name='status_quo', parameters={'w': 0.0, 'x': 1, 'y':\n    'foo', 'z': True})\nbatch_trial.set_status_quo_and_optimize_power(status_quo)\nself.assertEqual(batch_trial.arm_weights[status_quo], 1.0)\nbatch_trial = self.experiment.new_batch_trial()\nparameterizations = [{'w': 0.75, 'x': 1, 'y': 'foo', 'z': True}, {'w': 0.77,\n    'x': 2, 'y': 'foo', 'z': True}]\narms = [Arm(parameters=p) for i, p in enumerate(parameterizations)]\nbatch_trial.add_arms_and_weights(arms=arms)\nbatch_trial.set_status_quo_and_optimize_power(status_quo)\nself.assertEqual(batch_trial.arm_weights[status_quo], np.sqrt(2))\nbatch_trial = self.experiment.new_batch_trial()\nbatch_trial.set_status_quo_with_weight(status_quo, 1)\nself.assertEqual(batch_trial.arm_weights[status_quo], 1.0)\nbatch_trial.add_arms_and_weights(arms=arms)\nbatch_trial.set_status_quo_and_optimize_power(status_quo)\nself.assertEqual(batch_trial.arm_weights[status_quo], np.sqrt(2))\nself.assertEqual(batch_trial._status_quo_weight_override, np.sqrt(2))\nbatch_trial = self.experiment.new_batch_trial()\nparameterizations = [{'w': 0.75, 'x': 1, 'y': 'foo', 'z': True}, {'w': 0.77,\n    'x': 2, 'y': 'foo', 'z': True}, {'w': 0.0, 'x': 1, 'y': 'foo', 'z': True}]\narms = [Arm(parameters=p) for i, p in enumerate(parameterizations)]\nbatch_trial.add_arms_and_weights(arms=arms)\nbatch_trial.set_status_quo_and_optimize_power(status_quo)\nself.assertEqual(batch_trial.arm_weights[status_quo], np.sqrt(2))\nself.assertEqual(batch_trial._status_quo_weight_override, np.sqrt(2))\n"
+}

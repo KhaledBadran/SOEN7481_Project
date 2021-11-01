@@ -1,0 +1,9 @@
+{
+    "functionName": "test_component_stop_exception",
+    "className": null,
+    "fileName": "/SillyFreak_&_ConcurrentUtils/tests_&_test_component.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class Fail(Exception):\n    pass\n@component_workload\nasync def component(x, *, commands, events):\n    await events.send(Component.EVENT_START)\n    command = await commands.recv()\n    assert command == Component.COMMAND_STOP\n    raise Fail\ncomp = await start_component(component, 1)\nwith pytest.raises(Fail):\n    await comp.stop()\npytest.mark.asyncio"
+}

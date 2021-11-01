@@ -1,0 +1,9 @@
+{
+    "functionName": "test_decorate_log_response_content_raises",
+    "className": null,
+    "fileName": "/OvalMoney_&_Nephthys/tests_&_test_clients_&_test_requests.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "log_record = MagicMock()\ncontent = MagicMock()\ncontent.decode.side_effect = exception\nresponse = MagicMock(url='https://ovalmoney.com', headers=None, encoding=\n    encoding, content=content)\ndecorate_log_response(log_record, response)\ncontent.decode.assert_called_with(expected_encoding, errors='strict')\nassert log_record.response_body == '<RAW Data>'\npytest.mark.parametrize('exception,encoding,expected_encoding', [(TypeError,\n    None, 'utf-8'), (UnicodeDecodeError, None, 'utf-8'), (LookupError,\n    'UtF8', 'UtF8')])"
+}

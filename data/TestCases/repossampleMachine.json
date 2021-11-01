@@ -1,0 +1,9 @@
+{
+    "functionName": "sampleMachine",
+    "className": null,
+    "fileName": "/glyph_&_Automat/automat_&__test_&_test_visualize.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Create a sample L{MethodicalMachine} with some sample states.\n    \"\"\"\nmm = MethodicalMachine()\nclass SampleObject(object):\n\n    @mm.state(initial=True)\n    def begin(self):\n        \"\"\"initial state\"\"\"\n\n    @mm.state()\n    def end(self):\n        \"\"\"end state\"\"\"\n\n    @mm.input()\n    def go(self):\n        \"\"\"sample input\"\"\"\n\n    @mm.output()\n    def out(self):\n        \"\"\"sample output\"\"\"\n    begin.upon(go, end, [out])\nso = SampleObject()\nso.go()\nreturn mm\n"
+}

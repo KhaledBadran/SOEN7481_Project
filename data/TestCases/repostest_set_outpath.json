@@ -1,0 +1,9 @@
+{
+    "functionName": "test_set_outpath",
+    "className": null,
+    "fileName": "/grd349_&_PBjam/pbjam_&_tests_&_test_star.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Tests for the function that sets the output filename\n    \n    Notes\n    -----\n    If adding more star inits, remember to os.rmdir(st.path) to clean up after\n    the test. \n    \n    \"\"\"\npth = f'{os.getcwd()}/pbjam/tests'\npg = lk.periodogram.Periodogram(np.array([1, 1]) * units.microhertz, units.\n    Quantity(np.array([1, 1]), None))\nst = star('thisisatest', pg, (220.0, 3.0), (16.97, 0.05), (4750, 250), (\n    1.34, 0.1))\nfunc = st._set_outpath\nassert os.path.isdir(st.path)\nos.rmdir(st.path)\ninp = [pth]\nfunc(*inp)\nassert os.path.isdir(st.path)\nos.rmdir(st.path)\n"
+}

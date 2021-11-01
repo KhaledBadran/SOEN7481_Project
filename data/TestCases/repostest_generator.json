@@ -1,0 +1,9 @@
+{
+    "functionName": "test_generator",
+    "className": null,
+    "fileName": "/chrisseto_&_Agent/tests_&_test_agent.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "@agent.async_generator\ndef inner_gen():\n    yield 0\n    yield 1\n    yield from asyncio.sleep(0.01)\n    yield 2\n    yield from asyncio.sleep(0.01)\n    yield 3\ngen = inner_gen()\nassert isinstance(gen, agent.AsyncGenerator)\nassert hasattr(gen, '__anext__')\nassert hasattr(gen, '__aiter__')\nreturns = iter(range(4))\nasync for i in inner_gen():\n    assert i == next(returns)\npytest.mark.asyncio"
+}

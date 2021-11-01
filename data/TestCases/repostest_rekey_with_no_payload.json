@@ -1,0 +1,9 @@
+{
+    "functionName": "test_rekey_with_no_payload",
+    "className": "TestKMIPClient",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_test_kmip_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the client correctly handles responses with no payload data.\n        \"\"\"\nbatch_item = ResponseBatchItem(operation=Operation(OperationEnum.REKEY),\n    result_status=ResultStatus(ResultStatusEnum.OPERATION_FAILED),\n    result_reason=ResultReason(ResultReasonEnum.PERMISSION_DENIED),\n    result_message=ResultMessage('Permission denied.'), response_payload=None)\nresponse = ResponseMessage(batch_items=[batch_item])\nbuild_mock.return_value = None\nsend_mock.return_value = response\nresult = self.client.rekey(uuid='1', offset=0, template_attribute=objects.\n    TemplateAttribute(attributes=[objects.Attribute(attribute_name=objects.\n    Attribute.AttributeName('Activation Date'), attribute_value=primitives.\n    DateTime(value=1136113200, tag=enums.Tags.ACTIVATION_DATE))]))\nself.assertEqual(ResultStatusEnum.OPERATION_FAILED, result.get('result_status')\n    )\nself.assertEqual(ResultReasonEnum.PERMISSION_DENIED, result.get(\n    'result_reason'))\nself.assertEqual('Permission denied.', result.get('result_message'))\nmock.patch('kmip.services.kmip_client.KMIPProxy._build_request_message')mock.patch('kmip.services.kmip_client.KMIPProxy._send_and_receive_message')"
+}

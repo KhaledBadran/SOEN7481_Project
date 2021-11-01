@@ -1,0 +1,9 @@
+{
+    "functionName": "test_roi_fit_images",
+    "className": "TestApplyingROI",
+    "fileName": "/ornlneutronimaging_&_NeuNorm/tests_&_NeuNorm_&_normalizing_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"assert norm roi do fit the images\"\"\"\nsample_tif_file = self.data_path + '/tif/sample/image001.tif'\nob_tif_file = self.data_path + '/tif/ob/ob001.tif'\no_norm = Normalization()\no_norm.load(file=sample_tif_file, data_type='sample', auto_gamma_filter=False)\no_norm.load(file=ob_tif_file, data_type='ob', auto_gamma_filter=False)\nroi = ROI(x0=0, y0=0, x1=20, y1=4)\nwith pytest.raises(ValueError):\n    o_norm.normalization(roi=roi)\no_norm = Normalization()\no_norm.load(file=sample_tif_file, data_type='sample', auto_gamma_filter=False)\no_norm.load(file=ob_tif_file, data_type='ob', auto_gamma_filter=False)\nroi = ROI(x0=-1, y0=0, x1=4, y1=4)\nwith pytest.raises(ValueError):\n    o_norm.normalization(roi=roi)\no_norm = Normalization()\no_norm.load(file=sample_tif_file, data_type='sample', auto_gamma_filter=False)\no_norm.load(file=ob_tif_file, data_type='ob', auto_gamma_filter=False)\nroi = ROI(x0=0, y0=-1, x1=4, y1=4)\nwith pytest.raises(ValueError):\n    o_norm.normalization(roi=roi)\no_norm = Normalization()\no_norm.load(file=sample_tif_file, data_type='sample', auto_gamma_filter=False)\no_norm.load(file=ob_tif_file, data_type='ob', auto_gamma_filter=False)\nroi = ROI(x0=0, y0=0, x1=4, y1=20)\nwith pytest.raises(ValueError):\n    o_norm.normalization(roi=roi)\n"
+}

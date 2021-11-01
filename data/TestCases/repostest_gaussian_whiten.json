@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gaussian_whiten",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_conditionals_&_test_conditionals.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Make sure that predicting using the whitened representation is the\n    same as the non-whitened one.\n    \"\"\"\nF_sqrt = tf.convert_to_tensor(rng.rand(Nn, Ln))\nK = kernel(Xdata)\nL = tf.linalg.cholesky(K)\nV = tf.linalg.triangular_solve(L, mu, lower=True)\nV_prime = tf.linalg.diag(tf.transpose(F_sqrt))\ncommon_shape = tf.broadcast_static_shape(V_prime.shape, L.shape)\nL = tf.broadcast_to(L, common_shape)\nV_sqrt = tf.linalg.triangular_solve(L, tf.linalg.diag(tf.transpose(F_sqrt)),\n    lower=True)\nFstar_mean, Fstar_var = conditional(Xnew, Xdata, kernel, mu, q_sqrt=F_sqrt)\nFstar_w_mean, Fstar_w_var = conditional(Xnew, Xdata, kernel, V, q_sqrt=\n    V_sqrt, white=True)\nmean_diff = Fstar_w_mean - Fstar_mean\nvar_diff = Fstar_w_var - Fstar_var\nassert_allclose(mean_diff, 0, atol=4)\nassert_allclose(var_diff, 0, atol=4)\n"
+}

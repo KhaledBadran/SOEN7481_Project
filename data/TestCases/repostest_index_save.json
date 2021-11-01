@@ -1,0 +1,9 @@
+{
+    "functionName": "test_index_save",
+    "className": "TestDriller",
+    "fileName": "/NullConvergence_&_GraphRepo/tests_&_test_driller.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "folder = os.path.dirname(os.path.abspath(__file__))\ntest_driller = Driller(os.path.join(folder, 'cnfg_init.yml'))\ntest_driller.drill_batch(save_path='data/graphrepo.json')\nrecords = [r for r in test_driller.graph.run('MATCH(n) RETURN n')]\nassert len(records) == 22\ntest_driller.clean()\ntest_driller.index_from_file(file_path='data/graphrepo.json')\nrecords = [r for r in test_driller.graph.run('MATCH(n) RETURN n')]\nassert len(records) == 22\nos.remove('data/graphrepo.json')\ntest_driller.clean()\n"
+}

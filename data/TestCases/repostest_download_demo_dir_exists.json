@@ -1,0 +1,9 @@
+{
+    "functionName": "test_download_demo_dir_exists",
+    "className": null,
+    "fileName": "/HDI-project_&_ATM/tests_&_test_data.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test downloading a demo dataset and the given directory exists.\"\"\"\nmock_exists.return_value = True\nresult = data.download_demo('test_dataset', path='test_dir')\nmock_boto3.client.assert_called_once_with('s3', config=mock_config.return_value\n    )\nmock_config.assert_called_once_with(signature_version=data.UNSIGNED)\nassert not mock_mkdirs.called\nassert result == mock_join.return_value\npatch('atm.data.os.path.join')patch('atm.data.os.path.exists')patch('atm.data.os.makedirs')patch('atm.data.Config')patch('atm.data.boto3')"
+}

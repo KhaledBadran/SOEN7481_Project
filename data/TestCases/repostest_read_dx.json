@@ -1,0 +1,9 @@
+{
+    "functionName": "test_read_dx",
+    "className": null,
+    "fileName": "/MDAnalysis_&_GridDataFormats/gridData_&_tests_&_test_dx.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "g = Grid(infile)\nPOINTS = 8\nref = np.ones(POINTS)\nref[4] = 1e-06\nref[5] = -1000000.0\nassert_equal(g.grid.flat, ref)\nassert_equal(g.grid.size, POINTS)\nassert_equal(g.delta, np.ones(3))\nassert_equal(g.origin, np.array([20.1, 3.0, -10.0]))\npytest.mark.parametrize('infile', [datafiles.DX, datafiles.DXGZ])"
+}

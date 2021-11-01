@@ -1,0 +1,9 @@
+{
+    "functionName": "test_read_policy_from_file_empty_policy",
+    "className": "TestPolicy",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_test_policy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that reading a file with an empty policy is handled correctly.\n        \"\"\"\npolicy_file = tempfile.NamedTemporaryFile(dir=self.temp_dir, delete=False)\nwith open(policy_file.name, 'w') as f:\n    f.write('{\"test\": {}}')\npolicies = policy.read_policy_from_file(policy_file.name)\nself.assertEqual(0, len(policies))\n"
+}

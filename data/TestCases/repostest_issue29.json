@@ -1,0 +1,9 @@
+{
+    "functionName": "test_issue29",
+    "className": null,
+    "fileName": "/Carbonara-Project_&_Carbonara-IDB/tests_&_test_issue29.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n\n    demonstrate GetManyBytes can retrieve the entire .text section\n\n    see github issue #29 for the backstory.\n\n    \"\"\"\ncd = os.path.dirname(__file__)\nidbpath = os.path.join(cd, 'data', 'issue29', 'issue29.i64')\nwith idb.from_file(idbpath) as db:\n    api = idb.IDAPython(db)\n    seg = api.idc.FirstSeg()\n    while seg != api.idc.BADADDR:\n        name = api.idc.SegName(seg)\n        start = api.idc.SegStart(seg)\n        end = api.idc.SegEnd(seg)\n        if name == '.text':\n            textBytes = api.idc.GetManyBytes(start, end - start)\n            assert len(textBytes) == end - start\n        seg = api.idc.NextSeg(seg)\n"
+}

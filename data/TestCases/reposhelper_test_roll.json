@@ -1,0 +1,9 @@
+{
+    "functionName": "helper_test_roll",
+    "className": "UITestCase",
+    "fileName": "/AndreMiras_&_EtherollApp/src_&_etherollapp_&_tests_&_ui_&_test_etheroll_ui.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Trying to place a valid roll.\"\"\"\ncontroller = app.root\ncontroller.current_account = controller.account_utils.get_account_list()[0]\nroll_screen = controller.roll_screen\nroll_button = roll_screen.ids.roll_button_id\nself.assertEqual(roll_button.text, 'Roll')\nroll_button.dispatch('on_release')\ndialogs = Dialog.dialogs\nself.assertEqual(len(dialogs), 1)\ndialog = dialogs[0]\nself.assertEqual(dialog.title, 'Enter your password')\ndialog.content.password = 'password'\nunlock_button = dialog._action_buttons[0]\nwith patch('pyetheroll.etheroll.Etheroll.player_roll_dice'\n    ) as m_player_roll_dice:\n    m_player_roll_dice.return_value = HexBytes(\n        '0x7be6e37621eb12db7dc535954345f69d8cc5644b2de0ec32a344ca33c3054237')\n    unlock_button.dispatch('on_release')\n    threads = threading.enumerate()\n    if len(threads) == 3:\n        self.assertEqual(len(threads), 3)\n        player_roll_dice_thread = threads[2]\n        self.assertEqual(type(player_roll_dice_thread), threading.Thread)\n        self.assertTrue('function Controller.player_roll_dice' in str(\n            player_roll_dice_thread._target))\n        player_roll_dice_thread.join()\nadvance_frames_for_screen()\nself.assertEqual(len(threading.enumerate()), 2)\nmain_thread = threading.enumerate()[0]\nself.assertEqual(type(main_thread), threading._MainThread)\ndialogs = Dialog.dialogs\nself.assertEqual(len(dialogs), 1)\ndialog = dialogs[0]\nself.assertEqual(dialog.title, 'Rolled successfully')\ndialog.dismiss()\nself.assertEqual(len(dialogs), 0)\n"
+}

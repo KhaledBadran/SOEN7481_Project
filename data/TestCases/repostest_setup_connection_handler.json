@@ -1,0 +1,9 @@
+{
+    "functionName": "test_setup_connection_handler",
+    "className": "TestKmipServer",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_server.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a KmipSession can be successfully created and spun off from\n        the KmipServer.\n        \"\"\"\ns = server.KmipServer(hostname='127.0.0.1', port=5696, config_path=None,\n    policy_path=None)\ns._logger = mock.MagicMock()\ns._engine = engine_mock\nwith mock.patch('kmip.services.server.session.KmipSession.start'\n    ) as session_mock:\n    address = '127.0.0.1', 5696\n    s._setup_connection_handler(None, address)\n    s._logger.info.assert_any_call(\n        'Receiving incoming connection from: 127.0.0.1:5696')\n    s._logger.info.assert_any_call(\n        'Dedicating session 00000001 to 127.0.0.1:5696')\n    session_mock.assert_called_once_with()\nself.assertEqual(2, s._session_id)\ntest_exception = Exception()\nwith mock.patch('kmip.services.server.session.KmipSession.start',\n    side_effect=test_exception) as session_mock:\n    address = '127.0.0.1', 5696\n    s._setup_connection_handler(None, address)\n    s._logger.info.assert_any_call(\n        'Receiving incoming connection from: 127.0.0.1:5696')\n    s._logger.info.assert_any_call(\n        'Dedicating session 00000001 to 127.0.0.1:5696')\n    session_mock.assert_called_once_with()\n    s._logger.warning.assert_called_once_with(\n        'Failure occurred while starting session: 00000002')\n    s._logger.exception.assert_called_once_with(test_exception)\nself.assertEqual(3, s._session_id)\nmock.patch('kmip.services.server.engine.KmipEngine')mock.patch('kmip.services.server.server.KmipServer._setup_logging')"
+}

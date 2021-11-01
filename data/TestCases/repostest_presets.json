@@ -1,0 +1,9 @@
+{
+    "functionName": "test_presets",
+    "className": "TestValve",
+    "fileName": "/albertogeniola_&_MerossIot/tests_&_test_valve.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "if len(self.test_devices) < 1:\n    self.skipTest('No valve device has been found to run this test.')\n    return\nfor dev in self.test_devices:\n    res = await dev.async_update()\n    max_supported_temp = dev.max_supported_temperature\n    min_supported_temp = dev.min_supported_temperature\n    self.assertGreater(len(dev.get_supported_presets()), 0)\n    for preset in dev.get_supported_presets():\n        old_preset_temp = dev.get_preset_temperature(preset)\n        self.assertIsNotNone(old_preset_temp)\n        new_preset = randint(min_supported_temp, max_supported_temp)\n        await dev.async_set_preset_temperature(preset=preset, temperature=\n            new_preset)\n        new_current_preset = dev.get_preset_temperature(preset)\n        self.assertEqual(new_current_preset, new_preset)\nunittest_run_loop"
+}

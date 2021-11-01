@@ -1,0 +1,9 @@
+{
+    "functionName": "test_imageprocessor_read",
+    "className": null,
+    "fileName": "/IBM_&_MAX-Framework/maxfw_&_tests_&_test_image_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test the Imageprocessor.\"\"\"\ntransform_sequence = [ToPILImage('RGBA')]\np = ImageProcessor(transform_sequence)\nimg_out = p.apply_transforms(test_input)\nassert np.array(img_out).shape == (678, 1024, 4)\ntransform_sequence = [ToPILImage('RGB')]\np = ImageProcessor(transform_sequence)\nimg_out = p.apply_transforms(test_input)\nassert np.array(img_out).shape == (678, 1024, 3)\ntransform_sequence = [ToPILImage('RGBA'), PILtoarray()]\np = ImageProcessor(transform_sequence)\nimg_out = p.apply_transforms(test_input)\nassert np.min(img_out) >= 0\nassert np.max(img_out) <= 255\ntransform_sequence = [ToPILImage('L'), PILtoarray()]\np = ImageProcessor(transform_sequence)\nimg_out = p.apply_transforms(test_input)\nassert np.min(img_out) >= 0\nassert np.max(img_out) <= 255\n"
+}

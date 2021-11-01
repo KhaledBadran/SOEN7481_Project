@@ -1,0 +1,9 @@
+{
+    "functionName": "test_on_topic",
+    "className": "FlaskMQTTTestCase",
+    "fileName": "/MrLeeh_&_Flask-MQTT/tests_&_test_integration.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.mqtt = Mqtt(self.app)\nself.handled_message = False\nself.handled_topic = False\n@self.mqtt.on_message()\ndef handle_message(client, userdata, message):\n    self.handled_message = True\n@self.mqtt.on_topic('home/test')\ndef handle_on_topic(*args, **kwargs):\n    self.handled_topic = True\n@self.mqtt.on_connect()\ndef handle_connect(*args, **kwargs):\n    self.mqtt.subscribe('home/test')\nwait()\nself.mqtt.publish('home/test', 'hello world')\nwait()\nself.assertFalse(self.handled_message)\nself.assertTrue(self.handled_topic)\n"
+}

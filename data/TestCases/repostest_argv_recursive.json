@@ -1,0 +1,9 @@
+{
+    "functionName": "test_argv_recursive",
+    "className": null,
+    "fileName": "/ocaballeror_&_Lyricfetch/lyricfetch_&_tests_&_test_args.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Check that the `-r` flag searches recursively for mp3 files and returns a\n    list with all the names found.\n    \"\"\"\ntmpdir = Path(tempfile.mkdtemp())\ntempdir_dir = tmpdir / 'dir'\ntempdir_dir.mkdir()\nmp3s = [tmpdir / 'first.mp3', tmpdir / 'second.mp3', tempdir_dir /\n    'third.mp3', tempdir_dir / 'fourth.mp3']\nfor mp3 in mp3s:\n    shutil.copyfile(mp3file, mp3)\nmonkeypatch.setattr(sys, 'argv', [__file__, '-r'])\nwith chdir(str(tmpdir)):\n    songs = parse_argv()\n    songs = set(Path(s.filename).absolute() for s in songs)\ntry:\n    assert set(mp3s) == songs\nfinally:\n    shutil.rmtree(tmpdir)\n"
+}

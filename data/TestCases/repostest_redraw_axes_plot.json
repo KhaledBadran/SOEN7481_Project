@@ -1,0 +1,9 @@
+{
+    "functionName": "test_redraw_axes_plot",
+    "className": "TestIterSubplots",
+    "fileName": "/Jhsmit_&_ColiCoords/test_&_test_iplot.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.fig, self.ax = iter_subplots(subplot_kw={'projection': 'iter_redraw'})\nself.assertIsInstance(self.ax, IterRedrawAxes)\ni = 10\nx = [np.arange(10) for j in range(i)]\ny = [(xi ** k) for k, xi in enumerate(x)]\nline, = self.ax.iter_plot(x, y)\nydata = line.get_ydata()\nself.assertArrayEqual(y[0], ydata)\nself.fig.on_next(None)\nline = self.ax.lines[0]\nydata = line.get_ydata()\nself.assertArrayEqual(y[1], ydata)\nself.fig.on_prev(None)\nline = self.ax.lines[0]\nydata = line.get_ydata()\nself.assertArrayEqual(y[0], ydata)\nself.fig.on_last(None)\nline = self.ax.lines[0]\nydata = line.get_ydata()\nself.assertArrayEqual(y[-1], ydata)\nself.fig.on_first(None)\nline = self.ax.lines[0]\nydata = line.get_ydata()\nself.assertArrayEqual(y[0], ydata)\n"
+}

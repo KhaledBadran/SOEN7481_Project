@@ -1,0 +1,9 @@
+{
+    "functionName": "test_create_symmetric_key_with_cryptographic_failure",
+    "className": "TestCryptographyEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_crypto_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a CryptographicFailure error is raised when the symmetric\n        key generation process fails.\n        \"\"\"\nclass DummyAlgorithm(object):\n    key_sizes = [0]\n\n    def __init__(self, key_bytes):\n        raise Exception()\nengine = crypto.CryptographyEngine()\nengine._symmetric_key_algorithms.update([(enums.CryptographicAlgorithm.AES,\n    DummyAlgorithm)])\nargs = [enums.CryptographicAlgorithm.AES, 0]\nself.assertRaises(exceptions.CryptographicFailure, engine.\n    create_symmetric_key, *args)\n"
+}

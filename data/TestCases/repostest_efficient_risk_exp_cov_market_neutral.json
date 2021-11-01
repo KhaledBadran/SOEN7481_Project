@@ -1,0 +1,9 @@
+{
+    "functionName": "test_efficient_risk_exp_cov_market_neutral",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_efficient_frontier.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "df = get_data()\nef = EfficientFrontier(*setup_efficient_frontier(data_only=True),\n    weight_bounds=(-1, 1))\nef.cov_matrix = risk_models.exp_cov(df)\nw = ef.efficient_risk(0.19, market_neutral=True)\nassert isinstance(w, dict)\nassert set(w.keys()) == set(ef.tickers)\nnp.testing.assert_almost_equal(ef.weights.sum(), 0)\nassert (ef.weights < 1).all() and (ef.weights > -1).all()\nnp.testing.assert_allclose(ef.portfolio_performance(), (0.3908928033782067,\n    0.18999999995323363, 1.9520673866815672), atol=1e-06)\n"
+}

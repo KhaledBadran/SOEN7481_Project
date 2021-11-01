@@ -1,0 +1,9 @@
+{
+    "functionName": "test_write_length",
+    "className": "TestBase",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_primitives_&_test_base.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "encoding = b'\\x00\\x00\\x00\\x04'\nbase = primitives.Base()\nbase.length = 4\nbase.write_length(self.stream)\nresult = self.stream.read()\nlen_exp = len(encoding)\nlen_rcv = len(result)\nself.assertEqual(len_exp, len_rcv, self.bad_write.format('length',\n    '{0} bytes'.format(len_exp), '{0} bytes'.format(len_rcv)))\nself.assertEqual(encoding, result, self.bad_encoding.format('length'))\n"
+}

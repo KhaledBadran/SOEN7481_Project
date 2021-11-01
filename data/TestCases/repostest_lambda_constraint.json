@@ -1,0 +1,9 @@
+{
+    "functionName": "test_lambda_constraint",
+    "className": null,
+    "fileName": "/oberbichler_&_EQlib/tests_&_test_lambda_elements.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "g1 = eq.Equation()\ng2 = eq.Equation()\nx1 = eq.Variable(1)\nx2 = eq.Variable(2)\ndef compute(equations, variables, fs, gs, hs):\n    x1, x2 = hj.HyperJet.variables(variables)\n    f1 = x1 ** 2 + x1 * x2 + x2 ** 3\n    f2 = x1 ** 3 + x1 * x2 + x2 ** 2\n    fs[0] = explode(f1, gs[0], hs[0])\n    fs[1] = explode(f2, gs[1], hs[1])\nelement = eq.LambdaConstraint([g1, g2], [x1, x2], compute)\nfs = np.empty(2, float)\ngs = np.empty((2, 2), float)\nhs = np.empty((2, 2, 2), float)\nelement.compute(fs, gs, hs)\nassert_equal(fs, [11, 7])\nassert_equal(gs, [[4, 13], [5, 5]])\nassert_equal(hs, [[[2, 1], [1, 12]], [[6, 1], [1, 2]]])\n"
+}

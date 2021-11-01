@@ -1,0 +1,9 @@
+{
+    "functionName": "test_propagate_ages",
+    "className": "TestContribution",
+    "fileName": "/PmagPy_&_PmagPy/pmagpy_tests_&_test_contribution_builder.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.con.tables['ages'].df['sample'] = None\nself.con.tables['ages'].df['specimen'] = ''\nself.con.tables['ages'].df.loc['1', 'site'] = None\nself.con.tables['ages'].df.loc['2', 'sample'] = 'mgq05t2a2'\nself.con.tables['ages'].df.loc['3', 'sample'] = 'mgq05t2a2'\nself.con.tables['ages'].df.loc['3', 'specimen'] = 'hz05a1'\nself.con.tables['sites'].df.loc['hz10', 'age'] = 999\nself.con.tables['sites'].df.loc['hz11', 'age'] = ''\nself.con.propagate_ages()\nres = self.con.tables['locations'].df.loc['Tel Hazor', 'age_high']\nself.assertEqual(-732, res)\nres = self.con.tables['sites'].df.loc['hz05', 'age']\nself.assertEqual(-740, res)\nres = self.con.tables['sites'].df.loc['hz10', 'age']\nself.assertEqual(999, res)\nres = self.con.tables['sites'].df.loc['hz11', 'age']\nself.assertEqual(-1050, res)\n"
+}

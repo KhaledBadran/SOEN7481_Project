@@ -1,0 +1,9 @@
+{
+    "functionName": "test_kfold_cross_validation_should_split_data_properly_bug",
+    "className": null,
+    "fileName": "/Neuraxio_&_Neuraxle/testing_&_metaopt_&_test_automl.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data_inputs = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])\nexpected_outputs = np.array([0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40])\ndata_container = DataContainer(data_inputs=data_inputs, expected_outputs=\n    expected_outputs)\nsplitter = KFoldCrossValidationSplitter(k_fold=2)\nvalidation_splits = splitter.split_data_container(data_container)\ntrain_di, train_eo, validation_di, validation_eo = (\n    extract_validation_split_data(validation_splits))\nassert len(train_di[0]) == 6\nassert np.array_equal(np.array(train_di[0]), data_inputs[5:])\nassert len(train_eo[0]) == 6\nassert np.array_equal(np.array(train_eo[0]), expected_outputs[5:])\nassert len(train_di[1]) == 5\nassert np.array_equal(np.array(train_di[1]), data_inputs[:5])\nassert len(train_eo[1]) == 5\nassert np.array_equal(np.array(train_eo[1]), expected_outputs[:5])\nassert len(validation_di[0]) == 5\nassert np.array_equal(np.array(validation_di[0]), data_inputs[:5])\nassert len(validation_eo[0]) == 5\nassert np.array_equal(np.array(validation_eo[0]), expected_outputs[:5])\nassert len(validation_di[1]) == 6\nassert np.array_equal(np.array(validation_di[1]), data_inputs[5:])\nassert len(validation_eo[1]) == 6\nassert np.array_equal(validation_eo[1], expected_outputs[5:])\n"
+}

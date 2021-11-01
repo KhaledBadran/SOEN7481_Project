@@ -1,0 +1,9 @@
+{
+    "functionName": "testOneToMany",
+    "className": "CIMTestCase",
+    "fileName": "/rwl_&_PyCIM/PyCIM_&_Test_&_CIM14Test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Test one-to-many bidirectional references.\n        \"\"\"\nlg1 = ConformLoadGroup(name='CLG1')\nlg2 = ConformLoadGroup(name='CLG2')\ncl = ConformLoad(name='Load 1', LoadGroup=lg1)\nself.assertEqual(cl.LoadGroup, lg1)\nself.assertTrue(cl in lg1.EnergyConsumers)\ncl.setLoadGroup(lg2)\nself.assertNotEqual(cl.LoadGroup, lg1)\nself.assertEqual(cl.LoadGroup, lg2)\nself.assertFalse(cl in lg1.EnergyConsumers)\nself.assertTrue(cl in lg2.EnergyConsumers)\n"
+}

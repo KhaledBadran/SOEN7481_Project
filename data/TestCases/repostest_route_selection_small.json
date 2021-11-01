@@ -1,0 +1,9 @@
+{
+    "functionName": "test_route_selection_small",
+    "className": null,
+    "fileName": "/TUDelft-CITG_&_OpenTNSim/tests_&_test_route_selection.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "env = simpy.Environment()\nenv.FG = graph\nrandom.seed(4)\nvessel_info = vessel_database.sample(n=1, random_state=int(1000 * random.\n    random()))\nvessel_width = vessel_info['width'].values[0]\nassert vessel_width < 6.5\nedges = []\nnodes = []\nfor edge in graph.edges(data=True):\n    if edge[2]['Width'] > vessel_width:\n        edges.append(edge)\n        nodes.append(graph.nodes[edge[0]])\n        nodes.append(graph.nodes[edge[1]])\nsubGraph = graph.__class__()\nfor node in nodes:\n    subGraph.add_node(node['name'], name=node['name'], geometry=node[\n        'geometry'], position=(node['geometry'].x, node['geometry'].y))\nfor edge in edges:\n    subGraph.add_edge(edge[0], edge[1], attr_dict=edge[2])\npath = nx.dijkstra_path(subGraph, subGraph.nodes['Node 1']['name'],\n    subGraph.nodes['Node 4']['name'])\nassert path == ['Node 1', 'Node 2', 'Node 4']\n"
+}

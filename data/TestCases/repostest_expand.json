@@ -1,0 +1,9 @@
+{
+    "functionName": "test_expand",
+    "className": null,
+    "fileName": "/PaulHancock_&_Aegean/tests_&_test_fits_interp.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test the expand function\"\"\"\nfname = 'tests/test_files/1904-66_AIT.fits'\nhdulist = fits.open(fname)\nhdulist[0].data[:] = 1.0\ncompressed = fits_interp.compress(hdulist, factor=10)\nexpanded = fits_interp.expand(compressed)\nif not expanded is hdulist:\n    raise AssertionError()\nif not np.all(expanded[0].data == 1.0):\n    raise AssertionError('image is not all 1.0')\ncompressed = fits_interp.compress(fname, factor=10)\ncompressed[0].header['CD1_1'] = compressed[0].header['CDELT1']\ndel compressed[0].header['CDELT1']\ncompressed[0].header['CD2_2'] = compressed[0].header['CDELT2']\ndel compressed[0].header['CDELT2']\nif not isinstance(fits_interp.expand(compressed), fits.HDUList):\n    raise AssertionError(\"CD1_1/CD2_2 doesn't work\")\ncompressed = fits_interp.compress(fname, factor=10)\ndel compressed[0].header['CDELT2']\nif not fits_interp.expand(compressed) is None:\n    raise AssertionError()\ndel compressed[0].header['CDELT1']\nif not fits_interp.expand(compressed) is None:\n    raise AssertionError()\n"
+}

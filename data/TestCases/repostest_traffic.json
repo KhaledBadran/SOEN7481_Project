@@ -1,0 +1,9 @@
+{
+    "functionName": "test_traffic",
+    "className": "TestXenaOnline",
+    "fileName": "/xenadevel_&_PyXenaValkyrie/tests_&_test_online.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "port = self.xm.session.reserve_ports([self.port1])[self.port1]\nport.load_config(path.join(path.dirname(__file__), 'configs',\n    'test_config_loopback.xpc'))\nself.xm.session.clear_stats()\nport_stats = port.read_port_stats()\nprint(json.dumps(port_stats, indent=1))\nassert port_stats['pt_total']['packets'] == 0\nself.xm.session.start_traffic()\ntime.sleep(1)\nstream_stats = port.streams[0].read_stats()\nprint(json.dumps(stream_stats, indent=1))\nassert abs(1000 - stream_stats['pps']) < 111\ntpld_stats = port.tplds[1].read_stats()\nprint(json.dumps(tpld_stats, indent=1))\nassert abs(1000 - tpld_stats['pr_tpldtraffic']['pps']) < 111\nself.xm.session.stop_traffic()\nports_stats = XenaPortsStats(self.xm.session)\nports_stats.read_stats()\nprint(ports_stats.statistics.dumps())\nprint(json.dumps(ports_stats.get_flat_stats(), indent=1))\nstreams_stats = XenaStreamsStats(self.xm.session)\nstreams_stats.read_stats()\nprint(streams_stats.statistics.dumps())\nprint(json.dumps(streams_stats.get_flat_stats(), indent=1))\ntplds_stats = XenaTpldsStats(self.xm.session)\ntplds_stats.read_stats()\nprint(tplds_stats.statistics.dumps())\nprint(json.dumps(tplds_stats.get_flat_stats(), indent=1))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "start_client_thread",
+    "className": null,
+    "fileName": "/fabioz_&_PyDev.Debugger/tests_&_test_pydev_ipython_011.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "class ClientThread(threading.Thread):\n\n    def __init__(self, client_port):\n        threading.Thread.__init__(self)\n        self.client_port = client_port\n\n    def run(self):\n\n\n        class HandleRequestInput:\n\n            def RequestInput(self):\n                called_RequestInput[0] = True\n                return '\\n'\n\n            def IPythonEditor(self, name, line):\n                called_IPythonEditor[0] = name, line\n                return True\n        handle_request_input = HandleRequestInput()\n        from _pydev_bundle import pydev_localhost\n        self.client_server = client_server = SimpleXMLRPCServer((\n            pydev_localhost.get_localhost(), self.client_port), logRequests\n            =False)\n        client_server.register_function(handle_request_input.RequestInput)\n        client_server.register_function(handle_request_input.IPythonEditor)\n        client_server.serve_forever()\n\n    def shutdown(self):\n        return\n        self.client_server.shutdown()\nclient_thread = ClientThread(client_port)\nclient_thread.setDaemon(True)\nclient_thread.start()\nreturn client_thread\n"
+}

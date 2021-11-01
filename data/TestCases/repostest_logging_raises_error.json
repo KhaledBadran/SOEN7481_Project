@@ -1,0 +1,9 @@
+{
+    "functionName": "test_logging_raises_error",
+    "className": "Test_PoolManager_logging",
+    "fileName": "/Kieran-Bacon_&_Better/PackageTests_&_multiprocessing_&_test_PoolManager_logging.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with pytest.raises(TypeError):\n    with PoolManager(lambda x: x, logger=0.1) as pool:\n        pass\nwith pytest.raises(TypeError):\n    with PoolManager(lambda x: x, logger=[1, 2]) as pool:\n        pass\nlog = logging.getLogger('test5')\npool = PoolManager(lambda x: x)\npool.start()\nwith pytest.raises(RuntimeError):\n    pool.addLogger(log)\npool.close()\n"
+}

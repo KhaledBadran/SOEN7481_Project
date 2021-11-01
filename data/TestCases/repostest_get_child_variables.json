@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_child_variables",
+    "className": null,
+    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_suspended_frames_manager.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from _pydevd_bundle.pydevd_suspended_frames import SuspendedFramesManager\nsuspended_frames_manager = SuspendedFramesManager()\npy_db = _DummyPyDB()\nfor frame in (get_dict_large_frame(), get_set_large_frame(),\n    get_tuple_large_frame()):\n    with suspended_frames_manager.track_frames(py_db) as tracker:\n        thread_id = 'thread1'\n        tracker.track(thread_id, pydevd_frame_utils.\n            create_frames_list_from_frame(frame))\n        assert suspended_frames_manager.get_thread_id_for_variable_reference(id\n            (frame)) == thread_id\n        variable = suspended_frames_manager.get_variable(id(frame))\n        children_variables = variable.get_child_variable_named('obj'\n            ).get_children_variables()\n        assert len(children_variables) < _NUMBER_OF_ITEMS_TO_CREATE\n        found_too_large = False\n        found_len = False\n        for x in children_variables:\n            if x.name == TOO_LARGE_ATTR:\n                var_data = x.get_var_data()\n                assert 'readOnly' in var_data['presentationHint']['attributes']\n                found_too_large = True\n            elif x.name == GENERATED_LEN_ATTR_NAME:\n                found_len = True\n        if not found_too_large:\n            raise AssertionError('Expected to find variable named: %s' % (\n                TOO_LARGE_ATTR,))\n        if not found_len:\n            raise AssertionError('Expected to find variable named: len()')\n"
+}

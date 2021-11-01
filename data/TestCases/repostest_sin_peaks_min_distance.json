@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sin_peaks_min_distance",
+    "className": "TestDetectPeaks",
+    "fileName": "/kyleniemeyer_&_PyTeCK/pyteck_&_tests_&_test_detect_peaks.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Tests detection of peaks in randomized sin wave with min peak distance.\n        \"\"\"\ny = np.sin(2 * np.pi * 5 * np.linspace(0, 1, 200)) + np.random.randn(200) / 5.0\nmpd = 20\npeaks = detect_peaks(y, mph=0, mpd=mpd, show=False)\nfor idx, ind in enumerate(peaks):\n    start = max(0, ind - mpd)\n    end = min(len(y) - 1, ind + mpd)\n    peaks_before = np.array([i for i in range(start, ind) if y[i] > y[ind]])\n    peaks_after = np.array([i for i in range(ind + 1, end + 1) if y[i] > y[\n        ind]])\n    if peaks_before.size and peaks_before[0] == 0:\n        peaks_before = peaks_before[1:]\n    if peaks_after.size and peaks_after[-1] == y.size - 1:\n        peaks_after = peaks_after[:-1]\n    if idx > 0:\n        ind_prev = peaks[idx - 1]\n        idel = np.zeros(peaks_before.size, dtype=bool)\n        for i in range(peaks_before.size):\n            if peaks_before[i] - ind_prev <= mpd and y[ind_prev] > y[\n                peaks_before[i]]:\n                idel[i] = 1\n        peaks_before = peaks_before[~idel]\n    if idx < len(peaks) - 1:\n        ind_next = peaks[idx + 1]\n        idel = np.zeros(peaks_after.size, dtype=bool)\n        for i in range(peaks_after.size):\n            if ind_next - peaks_after[i] <= mpd and y[ind_next] > y[\n                peaks_after[i]]:\n                idel[i] = 1\n        peaks_after = peaks_after[~idel]\n    assert peaks_before.size == 0 and peaks_after.size == 0\n"
+}

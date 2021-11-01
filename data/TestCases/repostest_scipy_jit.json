@@ -1,0 +1,9 @@
+{
+    "functionName": "test_scipy_jit",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_optimizers_&_test_scipy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "m1 = _create_full_gp_model()\nm2 = _create_full_gp_model()\nopt1 = gpflow.optimizers.Scipy()\nopt2 = gpflow.optimizers.Scipy()\nopt1.minimize(m1.training_loss, variables=m1.trainable_variables, options=\n    dict(maxiter=50), compile=False)\nopt2.minimize(m2.training_loss, variables=m2.trainable_variables, options=\n    dict(maxiter=50), compile=True)\ndef get_values(model):\n    return np.array([var.value().numpy().squeeze() for var in model.\n        trainable_variables])\nnp.testing.assert_allclose(get_values(m1), get_values(m2), rtol=1e-14, atol\n    =1e-14)\n"
+}

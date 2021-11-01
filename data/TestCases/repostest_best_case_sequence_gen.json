@@ -1,0 +1,9 @@
+{
+    "functionName": "test_best_case_sequence_gen",
+    "className": "TestStimuliGeneration",
+    "fileName": "/BciPy_&_BciPy/bcipy_&_helpers_&_tests_&_test_stimuli.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test best_case_rsvp_seq_gen\"\"\"\nalp = ['a', 'b', 'c', 'd', 'e', 'f', 'g']\nn = 5\nsamples, times, colors = best_case_rsvp_seq_gen(alp=alp, session_stimuli=[\n    0.1, 0.1, 0.1, 0.2, 0.2, 0.1, 0.2], timing=[1, 0.2], color=['red',\n    'white'], stim_number=1, stim_length=n, is_txt=True)\nfirst_seq = samples[0]\nself.assertEqual(1, len(samples))\nself.assertEqual(n + 1, len(first_seq), 'Should include fixation cross.')\nself.assertEqual(len(samples), len(times))\nself.assertEqual(len(samples), len(colors))\nexpected = ['+', 'a', 'b', 'd', 'e', 'g']\nfor letter in expected:\n    self.assertTrue(letter in first_seq)\nself.assertNotEqual(expected, first_seq, 'Should be in random order.')\nself.assertEqual([1] + [0.2] * n, times[0])\nself.assertEqual(['red'] + ['white'] * n, colors[0])\n"
+}

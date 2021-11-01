@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_data_subset",
+    "className": null,
+    "fileName": "/gelijergensen_&_PermutationImportance/test_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data = np.array([[0, 1, 2, 3], [1, 2, 3, 4]])\nrows = np.arange(data.shape[0])\ncolumns = [1, 0]\nexpected = np.array([[1, 0], [2, 1]])\nassert (expected == get_data_subset(data, rows, columns)).all()\nassert (expected == get_data_subset(data, None, columns)).all()\nexpected = data\nassert (expected == get_data_subset(data, rows)).all()\nA = [1, 2]\nB = [2, 4]\nC = [3, 6]\nD = [1, 0]\ndata = pd.DataFrame({'A': A, 'B': B, 'C': C, 'D': D})\nexpected = pd.DataFrame({'B': B, 'A': A}).loc[:, (['B', 'A'])]\nassert expected.equals(get_data_subset(data, rows, columns))\nassert expected.equals(get_data_subset(data, None, columns))\nexpected = data\nassert expected.equals(get_data_subset(data, rows))\ndata = [[0, 1, 2], [1, 2, 3]]\nwith pytest.raises(InvalidDataException):\n    get_data_subset(data, rows, columns)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "txfunc_output",
+    "className": null,
+    "fileName": "/open-source-economics_&_OG-USA/regression_&_test_regression.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "ref_idx = request.param\nif ref_idx == 'baseline':\n    reg_path = REG_BASELINE + '/TxFuncEst_{idx}.pkl'.format(idx=ref_idx)\n    path = BASELINE + '/TxFuncEst_{idx}.pkl'.format(idx=ref_idx)\n    return safe_read_pickle(reg_path), safe_read_pickle(path)\nelse:\n    reg_path = REG_REFORM.format(ref_idx=ref_idx\n        ) + '/TxFuncEst_policy{idx}.pkl'.format(idx=ref_idx)\n    path = REFORM.format(ref_idx=ref_idx\n        ) + '/TxFuncEst_policy{idx}.pkl'.format(idx=ref_idx)\n    return safe_read_pickle(reg_path), safe_read_pickle(path)\npytest.fixture(scope='module', params=REF_IDXS + ['baseline'])"
+}

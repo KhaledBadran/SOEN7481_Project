@@ -1,0 +1,9 @@
+{
+    "functionName": "test_neighbor_throats_with_nans",
+    "className": "MiscTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_misc_&_MiscTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "net = op.network.Cubic(shape=[2, 2, 2])\nnet['throat.values'] = 1.0\nnet['throat.values'][0] = np.nan\nf = mods.from_neighbor_throats\nwith_nans = f(target=net, throat_prop='throat.values', ignore_nans=False,\n    mode='min')\nassert np.any(np.isnan(with_nans))\nno_nans = f(target=net, throat_prop='throat.values', ignore_nans=True, mode\n    ='min')\nassert np.all(~np.isnan(no_nans))\nwith_nans = f(target=net, throat_prop='throat.values', ignore_nans=False,\n    mode='max')\nassert np.any(np.isnan(with_nans))\nno_nans = f(target=net, throat_prop='throat.values', ignore_nans=True, mode\n    ='max')\nassert np.all(~np.isnan(no_nans))\nwith_nans = f(target=net, throat_prop='throat.values', ignore_nans=False,\n    mode='mean')\nassert np.any(np.isnan(with_nans))\nno_nans = f(target=net, throat_prop='throat.values', ignore_nans=True, mode\n    ='mean')\nassert np.all(~np.isnan(no_nans))\n"
+}

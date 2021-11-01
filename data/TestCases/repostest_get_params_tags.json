@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_params_tags",
+    "className": "TestLayer",
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_base.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "a_shape = 20, 50\na = numpy.random.normal(0, 1, a_shape)\nA = layer.add_param(a, a_shape, name='A', tag1=True, tag2=False)\nb_shape = 30, 20\nb = numpy.random.normal(0, 1, b_shape)\nB = layer.add_param(b, b_shape, name='B', tag1=True, tag2=True)\nc_shape = 40, 10\nc = numpy.random.normal(0, 1, c_shape)\nC = layer.add_param(c, c_shape, name='C', tag2=True)\nassert layer.get_params() == [A, B, C]\nassert layer.get_params(tag1=True) == [A, B]\nassert layer.get_params(tag1=False) == [C]\nassert layer.get_params(tag2=True) == [B, C]\nassert layer.get_params(tag2=False) == [A]\nassert layer.get_params(tag1=True, tag2=True) == [B]\n"
+}

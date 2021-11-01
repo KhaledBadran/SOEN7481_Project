@@ -1,0 +1,9 @@
+{
+    "functionName": "test_edge_d",
+    "className": null,
+    "fileName": "/alex-fe_&_Graphml-to-SVG-converter/tests_&_test_elements.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sc_values = 0, 1\nec_values = 10, 5\nstart_coordinates.return_value = sc_values\nend_coordinates.return_value = ec_values\npoints = [Point(i, i * 3) for i in range(4)]\npath = Path(points)\nedge = Edge('id_', 'key', None, None, None, path, None)\ncoordinates = sc_values + edge.path.points[0].coordinates + edge.path.points[1\n    ].coordinates + edge.path.points[2].coordinates + edge.path.points[3\n    ].coordinates + ec_values\nd_ = 'M{},{} L{},{} L{},{} L{},{} L{},{} L{},{}'.format(*coordinates)\nassert edge.d == d_\npatch('element.Edge.end_coordinates', new_callable=PropertyMock)patch('element.Edge.start_coordinates', new_callable=PropertyMock)"
+}

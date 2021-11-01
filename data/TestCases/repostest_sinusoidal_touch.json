@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sinusoidal_touch",
+    "className": "MeniscusTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_physics_&_MeniscusTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "phys = self.phys\nself.geo['throat.amplitude'] = 5e-06\nself.geo['throat.touch_length'] = 1e-06\nphys.add_model(propname='throat.sin_pressure_max', model=pm.meniscus.\n    sinusoidal, mode='max')\nphys.add_model(propname='throat.sin_pressure_touch', model=pm.meniscus.\n    sinusoidal, mode='touch')\nh = phys.check_data_health()\nfor check in h.values():\n    if len(check) > 0:\n        assert 1 == 2\nassert np.any(phys['throat.sin_pressure_touch'] < phys[\n    'throat.sin_pressure_max'])\n"
+}

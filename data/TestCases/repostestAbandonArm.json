@@ -1,0 +1,9 @@
+{
+    "functionName": "testAbandonArm",
+    "className": "BatchTrialTest",
+    "fileName": "/facebook_&_Ax/ax_&_core_&_tests_&_test_batch_trial.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "arm = self.batch.arms[0]\nreason = 'Bad arm'\nself.batch.mark_arm_abandoned(arm.name, reason)\nself.assertEqual(len(self.batch.abandoned_arms), 1)\nself.assertEqual(self.batch.abandoned_arms[0], arm)\nself.assertEqual(len(self.batch.abandoned_arms_metadata), 1)\nmetadata = self.batch.abandoned_arms_metadata[0]\nself.assertEqual(metadata.reason, reason)\nself.assertEqual(metadata.name, arm.name)\nwith self.assertRaises(ValueError):\n    self.batch.mark_arm_abandoned(Arm(parameters={'x': 3, 'y': 'fooz', 'z':\n        False}))\n"
+}

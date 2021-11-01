@@ -1,0 +1,9 @@
+{
+    "functionName": "test_func_code_info",
+    "className": null,
+    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_frame_evaluator.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from _pydevd_frame_eval import pydevd_frame_evaluator\nthread_info = pydevd_frame_evaluator.get_thread_info_py()\nfunc_info = pydevd_frame_evaluator.get_func_code_info_py(thread_info,\n    method(), method.__code__)\nassert func_info.co_filename is method.__code__.co_filename\nfunc_info2 = pydevd_frame_evaluator.get_func_code_info_py(thread_info,\n    method(), method.__code__)\nassert func_info is func_info2\nsome_func = eval('lambda:sys._getframe()')\nfunc_info3 = pydevd_frame_evaluator.get_func_code_info_py(thread_info,\n    some_func(), some_func.__code__)\ndel some_func\ndel func_info3\nsome_func = eval('lambda:sys._getframe()')\npydevd_frame_evaluator.get_func_code_info_py(thread_info, some_func(),\n    some_func.__code__)\nfunc_info = pydevd_frame_evaluator.get_func_code_info_py(thread_info,\n    some_func(), some_func.__code__)\nassert pydevd_frame_evaluator.get_func_code_info_py(thread_info, some_func(\n    ), some_func.__code__) is func_info\npytest.mark.parametrize('_times', range(2))"
+}

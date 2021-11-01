@@ -1,0 +1,9 @@
+{
+    "functionName": "test_overwrite",
+    "className": "TestWriteFile",
+    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_chemked.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        \"\"\"\nyaml_file = 'testfile_st.yaml'\nyaml_filename = pkg_resources.resource_filename(__name__, yaml_file)\nwith open(yaml_filename, 'r') as f:\n    lines = f.readlines()\nwith TemporaryDirectory() as temp_dir:\n    newfile_path = os.path.join(temp_dir, 'testfile.yaml')\n    with open(newfile_path, 'w') as f:\n        f.writelines(lines)\n    c = ChemKED(newfile_path)\n    with pytest.raises(OSError):\n        c.write_file(newfile_path)\n    assert c.write_file(newfile_path, overwrite=True) is None\n"
+}

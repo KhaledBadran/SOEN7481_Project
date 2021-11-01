@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_communities",
+    "className": null,
+    "fileName": "/Puumanamana_&_CoCoNet/tests_&_test_clustering.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "adj = np.array([[10, 10, 0, -1, -1], [9, 10, 0, 0, 0], [0, 0, 10, 8, 9], [0,\n    -1, 9, 10, 10], [0, 0, 0, 10, 10]])\ncontigs = ['V{}|0'.format(i) for i in range(len(adj))]\ngraph = igraph.Graph()\ngraph.add_vertices(contigs)\nedges = [(i, j, adj[i, j]) for i in range(len(contigs)) for j in range(len(\n    contigs)) if adj[i, j] >= 0]\nfor i, j, w in edges:\n    graph.add_edge(i, j, weight=w)\nget_communities(graph, 8, gamma=0.5)\nclusters = np.array(graph.vs['cluster'])\nassert clusters[0] == clusters[1]\nassert all(clusters[2:] == clusters[2])\nassert clusters[1] != clusters[2]\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_find_stations_nearby_whensucceed",
+    "className": "PublicTransitApiTest",
+    "fileName": "/abdullahselek_&_HerePy/tests_&_test_publictransit_api.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with io.open('testdata/models/public_transit_api_nearby.json', 'r',\n    encoding='utf-8') as f:\n    expectedResponse = f.read()\nresponses.add(responses.GET,\n    'https://transit.ls.hereapi.com/v3/stations/by_geocoord.json',\n    expectedResponse, status=200)\nresponse = self._api.find_stations_nearby([55.7541, 37.62], 350, 3)\nself.assertTrue(response)\nself.assertIsInstance(response, herepy.PublicTransitResponse)\nresponses.activate"
+}

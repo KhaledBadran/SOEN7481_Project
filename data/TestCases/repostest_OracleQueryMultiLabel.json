@@ -1,0 +1,9 @@
+{
+    "functionName": "test_OracleQueryMultiLabel",
+    "className": null,
+    "fileName": "/NUAA-AL_&_ALiPy/test_&_test_oracle.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "for i in range(10):\n    r = random.randrange(0, 20)\n    test, _ = OQM.query_by_index((r,))\n    assert (test == np.array(My[r])).all()\nfor i in range(20):\n    OQM._add_one_entry(My[20 + i], 20 + i)\n    test, _ = OQM.query_by_index((20 + i,))\n    assert (test == np.array(My[20 + i])).all()\nfor i in range(10):\n    r = random.randrange(0, 20)\n    for j in range(5):\n        test, _ = OQM.query_by_index((r, j))\n        assert test == np.array(My[r, j])\nfor i, j in zip(range(10), range(10, 0, -1)):\n    r = random.randrange(0, 20)\n    for k in range(5):\n        test, _ = OQM.query_by_index([(i, k), (j, k)])\n        assert test[0] == My[i, k]\n        assert test[1] == My[j, k]\nfor i, j in zip(range(10), range(10, 0, -1)):\n    r = random.randrange(0, 20)\n    for k in range(5):\n        test, _ = OQM.query_by_index([(i, k), (j,)])\n        assert test[0] == My[i, k]\n        assert (test[1] == My[j]).all()\n"
+}

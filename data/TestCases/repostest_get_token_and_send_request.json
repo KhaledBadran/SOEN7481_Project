@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_token_and_send_request",
+    "className": null,
+    "fileName": "/EclecticIQ_&_OpenTAXII/tests_&_test_auth.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "base_url = '%s://localhost' % ('https' if https else 'http')\nresponse = client.post(AUTH_PATH, data={'username': USERNAME, 'password':\n    PASSWORD}, base_url=base_url)\nassert response.status_code == 200\ndata = json.loads(response.get_data(as_text=True))\ntoken = data.get('token')\nassert token\nheaders = prepare_headers(version, https)\nheaders[HTTP_AUTHORIZATION] = 'Bearer %s' % token\nresponse = client.post(INBOX_OPEN['address'], data='invalid-body', headers=\n    headers, base_url=base_url)\nassert response.status_code == 200\nassert is_headers_valid(response.headers, version, https)\nmessage = as_tm(version).get_message_from_xml(response.data)\nassert message.status_type == ST_BAD_MESSAGE\nrequest = as_tm(version).DiscoveryRequest(message_id=MESSAGE_ID)\nheaders = prepare_headers(version, https)\nheaders[HTTP_AUTHORIZATION] = 'Bearer %s' % token\nresponse = client.post(DISCOVERY['address'], data=request.to_xml(), headers\n    =headers, base_url=base_url)\nassert response.status_code == 200\nassert is_headers_valid(response.headers, version=version, https=https)\nmessage = as_tm(version).get_message_from_xml(response.data)\nassert isinstance(message, as_tm(version).DiscoveryResponse)\nfrom opentaxii import context\nassert not hasattr(context, 'account')\npytest.mark.parametrize('https', [True, False])pytest.mark.parametrize('version', [11, 10])"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_eda_peaks",
+    "className": null,
+    "fileName": "/neuropsychology_&_NeuroKit/tests_&_tests_eda.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sampling_rate = 1000\neda = nk.eda_simulate(duration=30, sampling_rate=sampling_rate, scr_number=\n    6, noise=0, drift=0.01, random_state=42)\neda_phasic = nk.eda_phasic(nk.standardize(eda), method='highpass')['EDA_Phasic'\n    ].values\nsignals, info = nk.eda_peaks(eda_phasic, method='gamboa2008')\nonsets, peaks, amplitudes = biosppy.eda.basic_scr(eda_phasic, sampling_rate\n    =1000)\nassert np.allclose((info['SCR_Peaks'] - peaks).mean(), 0, atol=1e-05)\nsignals, info = nk.eda_peaks(eda_phasic, method='kim2004')\nonsets, peaks, amplitudes = biosppy.eda.kbk_scr(eda_phasic, sampling_rate=1000)\nassert np.allclose((info['SCR_Peaks'] - peaks).mean(), 0, atol=1)\n"
+}

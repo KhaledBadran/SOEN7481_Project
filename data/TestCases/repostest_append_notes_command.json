@@ -1,0 +1,9 @@
+{
+    "functionName": "test_append_notes_command",
+    "className": "TestRecord",
+    "fileName": "/Keeper-Security_&_Commander/unit-tests_&_test_command_record.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "params = get_synced_params()\ncmd = record.RecordAppendNotesCommand()\nrecord_uid = next(iter(params.subfolder_record_cache['']))\nwith mock.patch('keepercommander.api.update_record'):\n    cmd.execute(params, notes='notes', record=record_uid)\n    with mock.patch('builtins.input', return_value='data'):\n        cmd.execute(params, record=record_uid)\nwith self.assertRaises(CommandError):\n    cmd.execute(params, notes='notes', record='invalid')\n"
+}

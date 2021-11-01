@@ -1,0 +1,9 @@
+{
+    "functionName": "test_profile_spec",
+    "className": null,
+    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_bspline.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test that bspline_profile (1) is successful and (2) produces the\n    same result for a set of data fit spectrally.\n    \"\"\"\nfiles = [data_path('gemini_gnirs_32_{0}_spec_fit.npz'.format(slit)) for\n    slit in [0, 1]]\nlogrej = 0.5\nspec_samp_fine = 1.2\nfor f in files:\n    d = np.load(f)\n    spec_bspl, spec_gpm_fit, spec_flat_fit, _, exit_status = bspline_profile(d\n        ['spec_coo_data'], d['spec_flat_data'], d['spec_ivar_data'], np.\n        ones_like(d['spec_coo_data']), ingpm=d['spec_gpm_data'], nord=4,\n        upper=logrej, lower=logrej, kwargs_bspline={'bkspace':\n        spec_samp_fine}, kwargs_reject={'groupbadpix': True, 'maxrej': 5},\n        quiet=True)\n    assert np.allclose(d['spec_flat_fit'], spec_flat_fit\n        ), 'Bad spectral bspline result'\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_load_wn18",
+    "className": null,
+    "fileName": "/Accenture_&_AmpliGraph/tests_&_ampligraph_&_datasets_&_test_datasets.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "wn18 = load_wn18()\nassert len(wn18['train']) == 141442\nassert len(wn18['valid']) == 5000\nassert len(wn18['test']) == 5000\nent_train = np.union1d(np.unique(wn18['train'][:, (0)]), np.unique(wn18[\n    'train'][:, (2)]))\nent_valid = np.union1d(np.unique(wn18['valid'][:, (0)]), np.unique(wn18[\n    'valid'][:, (2)]))\nent_test = np.union1d(np.unique(wn18['test'][:, (0)]), np.unique(wn18[\n    'test'][:, (2)]))\ndistinct_ent = np.union1d(np.union1d(ent_train, ent_valid), ent_test)\ndistinct_rel = np.union1d(np.union1d(np.unique(wn18['train'][:, (1)]), np.\n    unique(wn18['train'][:, (1)])), np.unique(wn18['train'][:, (1)]))\nassert len(distinct_ent) == 40943\nassert len(distinct_rel) == 18\n"
+}

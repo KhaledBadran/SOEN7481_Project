@@ -1,0 +1,9 @@
+{
+    "functionName": "test_apt_pia_channel_jog_parameters",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_thorlabs_&_test_thorlabs_apt.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test the jog parameters for the APT Piezo Inertia Actuator.\n\n    Tested with KIM101 driver connected to PIM1 mirror mount.\n    \"\"\"\nwith expected_protocol(ik.thorlabs.APTPiezoInertiaActuator, [init_kim101[0],\n    ThorLabsPacket(message_id=ThorLabsCommands.PZMOT_REQ_PARAMS, param1=45,\n    param2=1, dest=80, source=1, data=None).pack(), ThorLabsPacket(\n    message_id=ThorLabsCommands.PZMOT_SET_PARAMS, param1=None, param2=None,\n    dest=80, source=1, data=struct.pack('<HHHllll', 45, 1, 2, 100, 100, \n    1000, 10000)).pack()], [init_kim101[1], ThorLabsPacket(message_id=\n    ThorLabsCommands.PZMOT_GET_PARAMS, dest=1, source=80, data=struct.pack(\n    '<HHHllll', 45, 1, 1, 500, 1000, 400, 5000)).pack()], sep='') as apt:\n    assert apt.channel[0].jog_parameters == [1, 500, 1000, u.Quantity(400, \n        1 / u.s), u.Quantity(5000, 1 / u.s ** 2)]\n    apt.channel[0].jog_parameters = [2, 100, 100, u.Quantity(1000, 1 / u.s),\n        u.Quantity(10000, 1 / u.s ** 2)]\n    with pytest.raises(TypeError):\n        apt.channel[0].jog_parameters = 3.14\n    with pytest.raises(ValueError):\n        apt.channel[0].jog_parameters = [42, 42]\n    with pytest.raises(ValueError):\n        apt.channel[0].jog_parameters = [0, 100, 100, 1000, 10000]\n    with pytest.raises(ValueError):\n        apt.channel[0].jog_parameters = [2, 0, 100, 1000, 10000]\n    with pytest.raises(ValueError):\n        apt.channel[0].jog_parameters = [2, 100, 2500, 1000, 10000]\n    with pytest.raises(ValueError):\n        apt.channel[0].jog_parameters = [2, 100, 100, 2500, 10000]\n    with pytest.raises(ValueError):\n        apt.channel[0].jog_parameters = [2, 100, 100, 1000, 100001]\n"
+}

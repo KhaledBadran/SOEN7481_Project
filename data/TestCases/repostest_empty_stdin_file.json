@@ -1,0 +1,9 @@
+{
+    "functionName": "test_empty_stdin_file",
+    "className": "TestCommandLine",
+    "fileName": "/kenfar_&_DataGristle/scripts_&_tests_&_test_gristle_freaker_cmd.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cmd = \"cat %s | %s -d '|' -o %s -c 0\" % (self.empty_fqfn, os.path.join(\n    script_dir, 'gristle_freaker'), self.out_fqfn)\nrunner = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.\n    PIPE, close_fds=True, shell=True)\n_ = runner.communicate()[0]\nprint(os.strerror(runner.returncode).lower())\nassert os.strerror(runner.returncode).lower() in ['no data available',\n    'no message available on stream']\nout_recs = []\nfor rec in fileinput.input(self.out_fqfn):\n    out_recs.append(rec)\nfileinput.close()\nassert not out_recs\nrunner.stdin.close()\n"
+}

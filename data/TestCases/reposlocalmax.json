@@ -1,0 +1,9 @@
+{
+    "functionName": "localmax",
+    "className": null,
+    "fileName": "/jonwright_&_ImageD11/test_&_test_localmaxlabel.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" reference implementation \n    ... very slow \n    \"\"\"\nout = wk\nnf = im.shape[1]\nfor i in prange(1, im.shape[0] - 1):\n    out[i, 0] = nf * i\n    out[i, nf - 1] = nf * (i + 1) - 1\n    for j in range(1, nf - 1):\n        mx = im[i - 1, j - 1]\n        out[i, j] = (i - 1) * nf + j - 1\n        for k, l in ((i - 1, j), (i - 1, j + 1), (i, j - 1), (i, j), (i, j +\n            1), (i + 1, j - 1), (i + 1, j), (i + 1, j + 1)):\n            if im[k, l] > mx:\n                mx = im[k, l]\n                out[i, j] = k * nf + l\nnpk = 0\nlabels[0] = 0\nlabels[-1] = 0\nfor i in prange(1, im.shape[0] - 1):\n    labels[i, 0] = 0\n    labels[i, nf - 1] = 0\n    for j in range(1, nf - 1):\n        if out[i, j] == i * nf + j:\n            npk += 1\n            labels[i, j] = npk\n            out[i, j] = 0\n        else:\n            labels[i, j] = -1\npon = False\nfor i in range(1, im.shape[0] - 1):\n    for j in range(1, nf - 1):\n        adr = out[i, j]\n        if adr == 0:\n            continue\n        while 1:\n            adrnew = out.flat[adr]\n            if adrnew == 0 or labels.flat[adr] == 0:\n                break\n            adr = adrnew\n        l = labels.flat[adr]\n        labels[i, j] = l\n        adr = out[i, j]\n        while 1:\n            labels.flat[adr] = l\n            adrnew = out.flat[adr]\n            if adrnew == 0:\n                break\n            out.flat[adr] = 0\n            adr = adrnew\njit(nopython=True)"
+}

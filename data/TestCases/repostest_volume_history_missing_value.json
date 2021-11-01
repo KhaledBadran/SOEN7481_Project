@@ -1,0 +1,9 @@
+{
+    "functionName": "test_volume_history_missing_value",
+    "className": "TestGetDatapoints",
+    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_converters.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Ensure error when missing value in volume history dataGroup.\n        \"\"\"\nroot = etree.Element('experiment')\napparatus = etree.SubElement(root, 'apparatus')\nkind = etree.SubElement(apparatus, 'kind')\nkind.text = 'rapid compression machine'\ndatagroup = etree.SubElement(root, 'dataGroup')\nprop = etree.SubElement(datagroup, 'property')\nprop.set('id', 'x1')\nprop.set('name', 'temperature')\nprop.set('units', 'K')\nprop = etree.SubElement(datagroup, 'property')\nprop.set('id', 'x2')\nprop.set('name', 'ignition delay')\nprop.set('units', 'us')\ndatapoint = etree.SubElement(datagroup, 'dataPoint')\nx1 = etree.SubElement(datapoint, 'x1')\nx1.text = str(1000.0)\nx2 = etree.SubElement(datapoint, 'x2')\nx2.text = str(100.0)\ndatagroup = etree.SubElement(root, 'dataGroup')\nprop = etree.SubElement(datagroup, 'property')\nprop.set('id', 'x3')\nprop.set('name', 'time')\nprop.set('units', 's')\nprop = etree.SubElement(datagroup, 'property')\nprop.set('id', 'x4')\nprop.set('name', 'volume')\nprop.set('units', 'cm3')\ndatapoint = etree.SubElement(datagroup, 'dataPoint')\nx3 = etree.SubElement(datapoint, 'x3')\nx3.text = str(0.0)\nwith pytest.raises(KeywordError) as excinfo:\n    get_datapoints(root)\nassert 'Both time and quantity values required in each time-history dataPoint.' in str(\n    excinfo.value)\ndatapoint.remove(x3)\nx4 = etree.SubElement(datapoint, 'x4')\nx4.text = str(50.0)\nwith pytest.raises(KeywordError) as excinfo:\n    get_datapoints(root)\nassert 'Both time and quantity values required in each time-history dataPoint.' in str(\n    excinfo.value)\n"
+}

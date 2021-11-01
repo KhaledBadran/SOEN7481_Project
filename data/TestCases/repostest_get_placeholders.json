@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_placeholders",
+    "className": null,
+    "fileName": "/PEtab-dev_&_PEtab/tests_&_test_observables.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test get_placeholders\"\"\"\nobservable_df = pd.DataFrame(data={OBSERVABLE_ID: ['obs_1', 'obs_2'],\n    OBSERVABLE_FORMULA: ['observableParameter1_obs_1 * 2 * foo',\n    '1 + observableParameter1_obs_2']}).set_index(OBSERVABLE_ID)\nexpected = ['observableParameter1_obs_1', 'observableParameter1_obs_2']\nactual = petab.get_placeholders(observable_df)\nassert actual == expected\nobservable_df[NOISE_FORMULA] = ['noiseParameter1_obs_1', '2.0']\nexpected = ['observableParameter1_obs_1', 'noiseParameter1_obs_1',\n    'observableParameter1_obs_2']\nactual = petab.get_placeholders(observable_df)\nassert actual == expected\n"
+}

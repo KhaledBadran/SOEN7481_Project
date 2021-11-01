@@ -1,0 +1,9 @@
+{
+    "functionName": "test_DataFile_Sample_UB",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_Sample.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "df = MJOLNIR.Data.DataFile.DataFile('Data/camea2018n000136.hdf')\ns = df.sample\nb1, b2, b3 = [np.linalg.norm(x) for x in [s.reciprocalVectorA, s.\n    reciprocalVectorB, s.reciprocalVectorC]]\na1, a2, a3 = [np.linalg.norm(x) for x in [s.realVectorA, s.realVectorB, s.\n    realVectorC]]\nbeta1, beta2, beta3 = _tools.vectorAngle(s.reciprocalVectorB, s.\n    reciprocalVectorC), _tools.vectorAngle(s.reciprocalVectorC, s.\n    reciprocalVectorA), _tools.vectorAngle(s.reciprocalVectorA, s.\n    reciprocalVectorB)\nalpha1, alpha2, alpha3 = _tools.vectorAngle(s.realVectorB, s.realVectorC\n    ), _tools.vectorAngle(s.realVectorC, s.realVectorA), _tools.vectorAngle(s\n    .realVectorA, s.realVectorB)\ncell = s.cell\nr1 = s.plane_vector1\nr2 = s.plane_vector2\nUBCalc = TasUBlib.calcTasUBFromTwoReflections(cell, r1, r2)\ncomparison = np.isclose(UBCalc, s.orientationMatrix, atol=1e-05)\nprint(np.round(UBCalc, 5))\nprint(np.round(s.orientationMatrix, 5))\nassert np.all(comparison)\n"
+}

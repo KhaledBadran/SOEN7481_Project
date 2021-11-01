@@ -1,0 +1,9 @@
+{
+    "functionName": "test_detuned2",
+    "className": "Test_Alap_Rc_Schedule",
+    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_alap_rc_schedule.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.setUp()\nv = 'detuned2'\nscheduler = self._SCHEDULER\nprog_name = 'test_' + v + '_' + scheduler\nkernel_name = 'kernel_' + v + '_' + scheduler\nstarmon = ql.Platform('starmon', self.config)\nprog = ql.Program(prog_name, starmon, 7, 0)\nk = ql.Kernel(kernel_name, starmon, 7, 0)\nk.gate('cz', [0, 2])\nk.gate('cz', [1, 4])\nk.gate('x', [3])\nk.gate('y', [3])\nk.gate('cz', [2, 5])\nk.gate('cz', [4, 6])\nprog.add_kernel(k)\nql.set_option('scheduler', scheduler)\nprog.compile()\nGOLD_fn = os.path.join(rootDir, 'golden', prog.name + '.qisa')\nQISA_fn = os.path.join(output_dir, prog.name + '.qisa')\nassemble(QISA_fn)\nself.assertTrue(file_compare(QISA_fn, GOLD_fn))\n"
+}

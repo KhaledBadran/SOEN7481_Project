@@ -1,0 +1,9 @@
+{
+    "functionName": "test_data_already_set",
+    "className": null,
+    "fileName": "/tvdboom_&_ATOM/tests_&_test_basetrainer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Assert that if there already is data, the call to run can be empty.\"\"\"\ndataset = pd.concat([bin_train, bin_test]).reset_index(drop=True)\ntrainer = TrainerClassifier('LR')\ntrainer.run(bin_train, bin_test)\ntrainer.run()\nassert trainer._data.equals(dataset)\nassert trainer._idx == [len(bin_train), len(bin_test)]\n"
+}

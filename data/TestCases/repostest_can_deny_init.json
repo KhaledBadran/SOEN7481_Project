@@ -1,0 +1,9 @@
+{
+    "functionName": "test_can_deny_init",
+    "className": null,
+    "fileName": "/willdeuschle_&_Flask-GraphQL-Subscriptions-Transport/tests_&_test_flask_graphql_subscriptions_transport.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "app, ss = basic_ss\ntest_client = SocketIOTestClient(app, ss.socketio, namespace=ss.namespace)\nss.on_connect = Mock(return_value=False)\nss.send_init_result = Mock(return_value=True)\ntest_client.emit('message', json.dumps({'type': INIT, 'payload': 'foo'}),\n    namespace=ss.namespace)\nss.send_init_result.assert_called_once()\nassert INIT_FAIL == ss.send_init_result.call_args[0][0]\n"
+}

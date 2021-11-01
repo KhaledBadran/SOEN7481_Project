@@ -1,0 +1,9 @@
+{
+    "functionName": "test_conjugate",
+    "className": "Test_conjugated_kernel",
+    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_conjugate.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "config_fn = os.path.join(curdir, 'test_cfg_none_simple.json')\nplatform = ql.Platform('platform_none', config_fn)\nnum_qubits = 3\np = ql.Program('test_conjugate', platform, num_qubits)\nk = ql.Kernel('kernel_orignal', platform, num_qubits)\nck = ql.Kernel('kernel_conjugate', platform, num_qubits)\nk.gate('x', [0])\nk.gate('y', [0])\nk.gate('z', [0])\nk.gate('h', [0])\nk.gate('i', [0])\nk.gate('s', [0])\nk.gate('t', [0])\nk.gate('sdag', [0])\nk.gate('tdag', [0])\nk.gate('cnot', [0, 1])\nk.gate('cphase', [1, 2])\nk.gate('swap', [2, 0])\nk.gate('toffoli', [0, 1, 2])\nck.conjugate(k)\np.add_kernel(k)\np.add_kernel(ck)\np.compile()\ngold_fn = rootDir + '/golden/test_conjugate.qasm'\nqasm_fn = os.path.join(output_dir, p.name + '_initialqasmwriter_out.qasm')\nself.assertTrue(file_compare(qasm_fn, gold_fn))\n"
+}

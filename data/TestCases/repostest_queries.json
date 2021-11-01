@@ -1,0 +1,9 @@
+{
+    "functionName": "test_queries",
+    "className": "TestDatabase",
+    "fileName": "/corydodt_&_Hypy/src_&_hypy_&_test_lib.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test various conditions against an index to make sure search works.\n        \"\"\"\nwith self.freshenDatabase() as db:\n    result = db.search(HCondition(u'wor*', matching='simple'))\n    self.assertEqual(len(result), 3)\n    result = db.search(HCondition(u'wor*', matching='simple'))\n    self.assertEqual(len(result), 3)\n    result = db.search(HCondition(u'res*', matching='simple'))\n    self.assertEqual(result.pluck(u'@uri'), [u'1', u'2'])\n    result = db.search(HCondition(u'someth* | whatever*', matching='simple',\n        max=2))\n    self.assertEqual(result.pluck(u'@uri'), [u'2', u'3'])\n    result = db.search(HCondition(u'someth* | upon*', matching='simple', max=2)\n        )\n    self.assertEqual(result.pluck(u'@uri'), [u'3', u'2'])\n    self.assertEqual(result.hintWords(), [u'someth', u'upon'])\n"
+}

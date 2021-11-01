@@ -1,0 +1,9 @@
+{
+    "functionName": "testMetricValidation",
+    "className": "SQAStoreTest",
+    "fileName": "/facebook_&_Ax/ax_&_storage_&_sqa_store_&_tests_&_test_sqa_store.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "sqa_metric = SQAMetric(name='foobar', intent=MetricIntent.OBJECTIVE,\n    metric_type=METRIC_REGISTRY[BraninMetric])\nwith self.assertRaises(ValueError):\n    with session_scope() as session:\n        session.add(sqa_metric)\nsqa_metric.experiment_id = 0\nwith session_scope() as session:\n    session.add(sqa_metric)\nwith self.assertRaises(ValueError):\n    sqa_metric.generator_run_id = 0\n    with session_scope() as session:\n        session.add(sqa_metric)\nsqa_metric = SQAMetric(name='foobar', intent=MetricIntent.OBJECTIVE,\n    metric_type=METRIC_REGISTRY[BraninMetric], generator_run_id=0)\nwith session_scope() as session:\n    session.add(sqa_metric)\nwith self.assertRaises(ValueError):\n    sqa_metric.experiment_id = 0\n    with session_scope() as session:\n        session.add(sqa_metric)\n"
+}

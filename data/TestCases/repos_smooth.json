@@ -1,0 +1,9 @@
+{
+    "functionName": "_smooth",
+    "className": null,
+    "fileName": "/nipy_&_PySurfer/surfer_&_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "from scipy import sparse\nlogger.debug('Updating smoothing matrix, be patient..')\ne = adj_mat.copy()\ne.data[e.data == 2] = 1\nn_vertices = e.shape[0]\ne = e + sparse.eye(n_vertices, n_vertices)\nidx_use = vertices\nsmooth_mat = 1.0\nn_iter = smoothing_steps if smoothing_steps is not None else 1000\nfor k in range(n_iter):\n    e_use = e[:, (idx_use)]\n    data1 = e_use * np.ones(len(idx_use))\n    idx_use = np.where(data1)[0]\n    scale_mat = sparse.dia_matrix((1 / data1[idx_use], 0), shape=(len(\n        idx_use), len(idx_use)))\n    smooth_mat = scale_mat * e_use[(idx_use), :] * smooth_mat\n    logger.debug('Smoothing matrix creation, step %d' % (k + 1))\n    if smoothing_steps is None and len(idx_use) >= n_vertices:\n        break\nsmooth_mat = smooth_mat.tocoo()\nsmooth_mat = sparse.coo_matrix((smooth_mat.data, (idx_use[smooth_mat.row],\n    smooth_mat.col)), shape=(n_vertices, len(vertices)))\nreturn smooth_mat\n"
+}

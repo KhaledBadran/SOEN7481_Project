@@ -1,0 +1,9 @@
+{
+    "functionName": "test_discordwebhook_webhook_url",
+    "className": null,
+    "fileName": "/EVEprosper_&_ProsperCommon/tests_&_test_prosper_logging.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"validate that we can query after setting serverid and api key\"\"\"\nbase_url = 'https://discordapp.com/api/webhooks/'\ntest_serverid = 1234\ntest_apikey = 'some-key'\ntest_url_faulty = 'some string'\ntest_url_correct = base_url + str(test_serverid) + '/' + test_apikey\ndiscord_webhook = prosper_logging.DiscordWebhook()\nwith pytest.raises(Exception):\n    discord_webhook.webhook(None)\nwith pytest.raises(Exception):\n    discord_webhook.webhook(test_url_faulty)\ndiscord_webhook.webhook(test_url_correct)\nassert discord_webhook\n"
+}

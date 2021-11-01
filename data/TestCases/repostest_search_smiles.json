@@ -1,0 +1,9 @@
+{
+    "functionName": "test_search_smiles",
+    "className": null,
+    "fileName": "/mcs07_&_ChemSpiPy/tests_&_test_search.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test SMILES input to search.\"\"\"\nresults = cs.search('O=C(OCC)C')\nassert results.ready() is False\nresults.wait()\nassert results.ready() is True\nassert results.success() is True\nassert results.message == 'Found by conversion query string to chemical structure (full match)'\nassert results[0].csid == 8525\nassert results.duration.total_seconds() > 0\n"
+}

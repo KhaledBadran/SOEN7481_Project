@@ -1,0 +1,9 @@
+{
+    "functionName": "test_poly_validation",
+    "className": null,
+    "fileName": "/AllenInstitute_&_EM_Aligner_python/integration_tests_&_test_montage.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "p = copy.deepcopy(montage_parameters)\np['regularization'] = {'default_lambda': 1000.0, 'translation_factor': \n    1e-05, 'poly_factors': [1e-05, 1000.0, 1000000.0, 1000.0]}\np['output_stack']['name'] = output_stack_name\np['transformation'] = 'Polynomial2DTransform'\np['poly_order'] = 2\nwith pytest.raises(ValidationError):\n    EMaligner.EMaligner(input_data=p, args=[])\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_plot_importance",
+    "className": "TestBasic",
+    "fileName": "/microsoft_&_LightGBM/tests_&_python_package_test_&_test_plotting.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "gbm0 = lgb.train(self.params, self.train_data, num_boost_round=10)\nax0 = lgb.plot_importance(gbm0)\nself.assertIsInstance(ax0, matplotlib.axes.Axes)\nself.assertEqual(ax0.get_title(), 'Feature importance')\nself.assertEqual(ax0.get_xlabel(), 'Feature importance')\nself.assertEqual(ax0.get_ylabel(), 'Features')\nself.assertLessEqual(len(ax0.patches), 30)\ngbm1 = lgb.LGBMClassifier(n_estimators=10, num_leaves=3, silent=True)\ngbm1.fit(self.X_train, self.y_train)\nax1 = lgb.plot_importance(gbm1, color='r', title='t', xlabel='x', ylabel='y')\nself.assertIsInstance(ax1, matplotlib.axes.Axes)\nself.assertEqual(ax1.get_title(), 't')\nself.assertEqual(ax1.get_xlabel(), 'x')\nself.assertEqual(ax1.get_ylabel(), 'y')\nself.assertLessEqual(len(ax1.patches), 30)\nfor patch in ax1.patches:\n    self.assertTupleEqual(patch.get_facecolor(), (1.0, 0, 0, 1.0))\nax2 = lgb.plot_importance(gbm0, color=['r', 'y', 'g', 'b'], title=None,\n    xlabel=None, ylabel=None)\nself.assertIsInstance(ax2, matplotlib.axes.Axes)\nself.assertEqual(ax2.get_title(), '')\nself.assertEqual(ax2.get_xlabel(), '')\nself.assertEqual(ax2.get_ylabel(), '')\nself.assertLessEqual(len(ax2.patches), 30)\nself.assertTupleEqual(ax2.patches[0].get_facecolor(), (1.0, 0, 0, 1.0))\nself.assertTupleEqual(ax2.patches[1].get_facecolor(), (0.75, 0.75, 0, 1.0))\nself.assertTupleEqual(ax2.patches[2].get_facecolor(), (0, 0.5, 0, 1.0))\nself.assertTupleEqual(ax2.patches[3].get_facecolor(), (0, 0, 1.0, 1.0))\nunittest.skipIf(not MATPLOTLIB_INSTALLED, 'matplotlib is not installed')"
+}

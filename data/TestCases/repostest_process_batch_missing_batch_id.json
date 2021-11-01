@@ -1,0 +1,9 @@
+{
+    "functionName": "test_process_batch_missing_batch_id",
+    "className": "TestKmipEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that an InvalidMessage error is generated while processing a\n        batch with missing batch IDs.\n        \"\"\"\ne = engine.KmipEngine()\ne._logger = mock.MagicMock()\nbatch = list([messages.RequestBatchItem(), messages.RequestBatchItem()])\nargs = batch, None, None\nsix.assertRaisesRegex(self, exceptions.InvalidMessage,\n    'Batch item ID is undefined.', e._process_batch, *args)\n"
+}

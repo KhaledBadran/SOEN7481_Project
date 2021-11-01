@@ -1,0 +1,9 @@
+{
+    "functionName": "test_request_nearby_places",
+    "className": "TestGPS",
+    "fileName": "/lukeWaninger_&_GSCAP/tests_&_test_gps.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "base = 'https://api.yelp.com/v3/businesses/search'\nurl = (\n    f'{base}?latitude={self.lat}&longitude={self.lon}&radius=50&sort_by=best_match'\n    )\nresponses.add(responses.GET, url, body=\n    '{\"businesses\": [], \"total\": 0, \"region\": {\"center\": {\"longitude\": -84.90685, \"latitude\": 32.3788}}}'\n    , status=200)\nrequest = gps.PlaceRequest(lat=self.lat, lon=self.lon, source=gps.ApiSource\n    .YELP, rankby=gps.YelpRankBy.BEST_MATCH, radius=50)\nt = gps.request_nearby_places(request, 1, kwargs=self.cache_kwargs)\nself.assertTrue(isinstance(t['request'], pd.DataFrame))\nself.assertTrue(t['misses'] == 1 and t['hits'] == 0)\nself.assertTrue(len(t['request']) == 1)\nrequest = [request for i in range(2)]\nt = gps.request_nearby_places(request, 1, kwargs=self.cache_kwargs)\nself.assertTrue(isinstance(t['request'], pd.DataFrame))\nself.assertTrue(t['misses'] == 0 and t['hits'] == 2)\nself.assertTrue(len(t['request']) == 2)\nresponses.activate"
+}

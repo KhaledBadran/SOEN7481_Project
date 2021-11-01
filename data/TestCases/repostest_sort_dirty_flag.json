@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sort_dirty_flag",
+    "className": null,
+    "fileName": "/nabicht_&_Buttonwood/tests_&_test_MarketObjects_&_test_Orderbooks_&_test_sidedict.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sd = SideDict()\nassert sd._sort_dirty == False\nsd[Price('100.0')] = 1\nassert sd._sort_dirty\nsd[Price('100.0')] = 2\nassert sd._sort_dirty\nassert sd._sorted == []\nsd[Price('101.0')] = 1\nassert sd._sort_dirty\nassert sd._sorted == []\ndel sd[Price('101.0')]\nassert sd._sort_dirty\nassert sd._sorted == []\nl = sd.sorted_prices()\nassert len(l) == 1\nassert l[0] == Price('100.0')\nassert len(sd._sorted) == 1\nassert sd._sorted[0] == Price('100.0')\nassert sd._sort_dirty == False\nlength = len(sd._sorted)\nsd[Price('101.0')] = 1\nassert sd._sort_dirty\nassert len(sd._sorted) == length\nsd[Price('102.0')] = 1\nassert sd._sort_dirty\nassert len(sd._sorted) == length\nsd[Price('103.0')] = 1\nassert sd._sort_dirty\nassert len(sd._sorted) == length\nsd[Price('104.0')] = 1\nassert sd._sort_dirty\nl = sd.sorted_prices()\nassert sd._sort_dirty == False\nassert len(sd._sorted) == 5\nsd[Price('104.0')] = 1\nassert sd._sort_dirty == False\n"
+}

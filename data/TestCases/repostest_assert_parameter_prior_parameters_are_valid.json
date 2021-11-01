@@ -1,0 +1,9 @@
+{
+    "functionName": "test_assert_parameter_prior_parameters_are_valid",
+    "className": null,
+    "fileName": "/PEtab-dev_&_PEtab/tests_&_test_lint.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Check lint.assert_parameter_prior_parameters_are_valid.\"\"\"\nparameter_df = pd.DataFrame({INITIALIZATION_PRIOR_TYPE: [UNIFORM, '', ''],\n    INITIALIZATION_PRIOR_PARAMETERS: ['0;1', '10;20', ''],\n    OBJECTIVE_PRIOR_PARAMETERS: ['0;20', '10;20', '']})\nlint.assert_parameter_prior_parameters_are_valid(parameter_df)\nwith pytest.raises(AssertionError):\n    lint.assert_parameter_prior_parameters_are_valid(pd.DataFrame({\n        INITIALIZATION_PRIOR_TYPE: [NORMAL]}))\nwith pytest.raises(AssertionError):\n    lint.assert_parameter_prior_parameters_are_valid(pd.DataFrame({\n        OBJECTIVE_PRIOR_PARAMETERS: ['0;1;2']}))\n"
+}

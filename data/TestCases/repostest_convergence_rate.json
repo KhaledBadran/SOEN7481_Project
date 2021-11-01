@@ -1,0 +1,9 @@
+{
+    "functionName": "test_convergence_rate",
+    "className": "TestExplicitEulerMethod",
+    "fileName": "/Hoeppke_&_PyODESolver/pyodesolver_&_method_explicit_euler_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "N_arr = [(2 ** n) for n in range(5, 11)]\ndef computeErr(N):\n    \"\"\"TODO: Docstring for computeErr.\n\n            :N: Number of gridpoints\n            :returns: err in inf norm\n\n            \"\"\"\n    t = np.linspace(0, 1, num=N)\n    y0 = np.pi\n    exactSol = ExampleFunc01_solution(y0, t).T\n    ee_solver = ExplicitEuler(N, y0, [0, 1], ExampleFunc01())\n    solution = ee_solver.generate()\n    numericSol = np.zeros_like(exactSol)\n    idx = 0\n    for time, val in solution:\n        numericSol[idx] = val\n        idx += 1\n    err = np.max(np.abs(exactSol - numericSol))\n    return err\nErr_arr = []\nfor Nidx in range(len(N_arr)):\n    N = N_arr[Nidx]\n    err = computeErr(N)\n    Err_arr.append(err)\nisOkay = True\nfor Nidx in range(1, len(N_arr)):\n    quotient = Err_arr[Nidx - 1] / Err_arr[Nidx]\n    if quotient < 1.9:\n        isOkay = False\nself.assertTrue(isOkay)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_continuous_dependent_variable_with_weighting",
+    "className": "TestContinuousDependentVariable",
+    "fileName": "/Rambatino_&_CHAID/tests_&_test_tree.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Check that a tree can be built with a continuous dependent variable\n        \"\"\"\ntree = CHAID.Tree.from_numpy(self.ndarr, self.random_arr, alpha_merge=0.999,\n    max_depth=5, min_child_node_size=11, dep_variable_type='continuous',\n    weights=self.wt)\nassert round(tree.tree_store[0].p, 4) == 0.1594\nassert len(tree.tree_store) == 9\n"
+}

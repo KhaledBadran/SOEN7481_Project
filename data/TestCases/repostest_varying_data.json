@@ -1,0 +1,9 @@
+{
+    "functionName": "test_varying_data",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_models_&_test_gpr.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "input_dim = 2\noutput_dim = 1\nN = 5\nX, Y = rng.randn(N, input_dim), rng.randn(N, output_dim)\nvar_data = tf.Variable(X, shape=[None, input_dim]), tf.Variable(Y, shape=[\n    None, output_dim])\nm = gpflow.models.GPR(var_data, gpflow.kernels.SquaredExponential())\nlml_func = tf.function(m.log_marginal_likelihood)\nold_lml = lml_func()\nnew_N = 7\nnew_X, new_Y = rng.randn(new_N, input_dim), rng.randn(new_N, output_dim)\nfor var, new_value in zip(var_data, (new_X, new_Y)):\n    var.assign(new_value)\nnew_lml = lml_func()\nassert np.abs((old_lml - new_lml) / (new_lml + old_lml)\n    ) > 0.1, 'we expect the LML for different data to be significantly different'\n"
+}

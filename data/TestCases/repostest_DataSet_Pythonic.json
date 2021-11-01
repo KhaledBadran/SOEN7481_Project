@@ -1,0 +1,9 @@
+{
+    "functionName": "test_DataSet_Pythonic",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_DataSet.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "dataFiles = ['Data/camea2018n000136.hdf', 'Data/camea2018n000137.hdf']\ndataset = DataSet(dataFiles=dataFiles)\nassert len(dataset) == 2\nfor df in dataset:\n    print(df)\ninitShape = dataset.I.shape\nnames = [dataset[i].name for i in range(len(dataset))]\nnames.reverse()\nfor i, df in enumerate(list(reversed(dataset))):\n    names[i] == df.name\ndataset.append(dataFiles)\nassert len(dataset) == 4\nsecondShape = dataset.Monitor.shape\nassert np.all(secondShape != initShape)\ndel dataset[3]\ndel dataset[2]\ntry:\n    dataset[10]\n    assert False\nexcept IndexError:\n    assert True\ntry:\n    del dataset[10]\n    assert False\nexcept IndexError:\n    assert True\ntry:\n    dataset.append('NoFile')\nexcept:\n    assert True\ndataset.append(MJOLNIR.Data.DataFile.DataFile(dataFiles[0]))\nassert len(dataset) == 3\nassert dataset.I.shape != secondShape\n"
+}

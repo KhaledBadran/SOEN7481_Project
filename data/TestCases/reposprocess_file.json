@@ -1,0 +1,9 @@
+{
+    "functionName": "process_file",
+    "className": null,
+    "fileName": "/konstantint_&_PassportEye/passporteye_&_mrz_&_scripts.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Processes a file and returns the parsed MRZ (or None if no candidate regions were even found).\n\n    The input argument is a list (filename, save_roi, extra_params).\n    (Because we need to use this function within imap_unordered)\n    \"\"\"\ntic = time.time()\nfilename, save_roi, extra_params = params\nresult = read_mrz(filename, save_roi=save_roi, extra_cmdline_params=\n    extra_params)\nwalltime = time.time() - tic\nreturn filename, result, walltime\n"
+}

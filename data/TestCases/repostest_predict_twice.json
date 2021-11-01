@@ -1,0 +1,9 @@
+{
+    "functionName": "test_predict_twice",
+    "className": null,
+    "fileName": "/Accenture_&_AmpliGraph/tests_&_ampligraph_&_latent_features_&_test_models.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "model = DistMult(batches_count=2, seed=555, epochs=1, k=10, loss='pairwise',\n    loss_params={'margin': 5}, optimizer='adagrad', optimizer_params={'lr':\n    0.1})\nX = np.array([['a', 'y', 'b'], ['b', 'y', 'a'], ['a', 'y', 'c'], ['c', 'z',\n    'a'], ['a', 'z', 'd']])\nmodel.fit(X)\nX_test1 = np.array([['a', 'y', 'b'], ['b', 'y', 'a']])\nX_test2 = np.array([['a', 'y', 'c'], ['c', 'z', 'a']])\npreds1 = model.predict(X_test1)\npreds2 = model.predict(X_test2)\nassert not np.array_equal(preds1, preds2)\n"
+}

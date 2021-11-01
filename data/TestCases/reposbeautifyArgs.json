@@ -1,0 +1,9 @@
+{
+    "functionName": "beautifyArgs",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&__tools.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Beautify arguments and keyword arguments. Returns formated string with arguments and \n    keyword argumenets seperated with commas as called in a function\"\"\"\nreturnStr = ''\nif not args == ():\n    args = list(args)\n    returnStr = ', '.join([(str(x) if type(x) != str else '\"{}\"'.format(x)) for\n        x in args])\n    if not kwargs == {}:\n        returnStr += ', '\nif not kwargs == {}:\n    kwformat = [('{}={}'.format(key, kwargs[key]) if type(kwargs[key]) !=\n        str else '{}=\"{}\"'.format(key, kwargs[key])) for key in kwargs]\n    returnStr += ', '.join([str(x) for x in kwformat])\nreturn returnStr\n"
+}

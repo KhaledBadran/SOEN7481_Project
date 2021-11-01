@@ -1,0 +1,9 @@
+{
+    "functionName": "test_add_transfer_asset_action",
+    "className": null,
+    "fileName": "/OwnMarket_&_OwnBlockchainSdkPython/own_blockchain_sdk_&_test_transactions.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sender_wallet = Wallet()\nfrom_account_hash = 'FAccH1'\nto_account_hash = 'TAccH1'\nasset_hash = 'AssetH1'\namount = 100\nexpected = (\n    \"\"\"{\n    \"senderAddress\": \"%s\",\n    \"nonce\": 1,\n    \"expirationTime\": 0,\n    \"actionFee\": 0.01,\n    \"actions\": [\n        {\n            \"actionType\": \"TransferAsset\",\n            \"actionData\": {\n                \"fromAccountHash\": \"%s\",\n                \"toAccountHash\": \"%s\",\n                \"assetHash\": \"%s\",\n                \"amount\": %d\n            }\n        }\n    ]\n}\"\"\"\n     % (sender_wallet.address, from_account_hash, to_account_hash,\n    asset_hash, amount))\ntx = Tx(sender_wallet.address, 1, 0.01, 0)\ntx.add_transfer_asset_action(from_account_hash, to_account_hash, asset_hash,\n    amount)\nactual = tx.to_json()\nassert expected == actual\n"
+}

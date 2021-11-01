@@ -1,0 +1,9 @@
+{
+    "functionName": "test_tricky_code",
+    "className": "LexerTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_lexer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "if compat.py3k:\n    template = \"<% print('hi %>') %>\"\n    nodes = Lexer(template).parse()\n    self._compare(nodes, TemplateNode({}, [Code(\"print('hi %>') \\n\", False,\n        (1, 1))]))\nelse:\n    template = \"<% print 'hi %>' %>\"\n    nodes = Lexer(template).parse()\n    self._compare(nodes, TemplateNode({}, [Code(\"print 'hi %>' \\n\", False,\n        (1, 1))]))\n"
+}

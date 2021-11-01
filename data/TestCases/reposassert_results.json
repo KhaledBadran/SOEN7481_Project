@@ -1,0 +1,9 @@
+{
+    "functionName": "assert_results",
+    "className": null,
+    "fileName": "/kenfar_&_DataGristle/scripts_&_tests_&_test_gristle_dir_merger_cmd.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "assert env_result.status_code == expected_status_code\nassert 'mysubdir' in os.listdir(dest_dir)\nif env_result.status_code == 0:\n    if source_subdir_exists:\n        assert 'mysubdir' in os.listdir(source_dir)\n        for sfile in source_files:\n            assert sfile in os.listdir(os.path.join(source_dir, 'mysubdir'))\n        for sfile in os.listdir(os.path.join(source_dir, 'mysubdir')):\n            assert sfile in source_files\n    else:\n        assert source_files is None, 'Bad test args'\n        assert not os.path.exists(source_dir)\nif dest_files:\n    for dfile in dest_files:\n        assert dfile in os.listdir(os.path.join(dest_dir, 'mysubdir'))\nif dest_files:\n    for dfile in os.listdir(os.path.join(dest_dir, 'mysubdir')):\n        assert dfile in dest_files\n"
+}

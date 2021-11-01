@@ -1,0 +1,9 @@
+{
+    "functionName": "test_find_standard",
+    "className": null,
+    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_flux.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "coord = SkyCoord('J050630.6+524951.0', unit=(units.hourangle, units.deg))\nstd_dict = flux_calib.find_standard_file(coord.ra.value, coord.dec.value)\nassert std_dict['name'] == 'G191B2B'\nassert os.path.split(std_dict['cal_file'])[1] == 'g191b2b_stisnic_002.fits'\nassert std_dict['std_source'] == 'calspec'\ncoord = SkyCoord('J050630.6+522201.0', unit=(units.hourangle, units.deg))\nwith pytest.raises(PypeItError):\n    std_dict = flux_calib.find_standard_file(coord.ra.value, coord.dec.value)\n"
+}

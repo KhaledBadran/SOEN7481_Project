@@ -1,0 +1,9 @@
+{
+    "functionName": "test_register_custom_type",
+    "className": null,
+    "fileName": "/hdoupe_&_ParamTools/paramtools_&_tests_&_test_schema.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test allowed to register marshmallow field and PartialField instances and\n    test that uninitialized fields and random classes throw type errors.\n    \"\"\"\ncustom_type = 'custom'\nassert custom_type not in ALLOWED_TYPES\nregister_custom_type(custom_type, ma.fields.String())\nassert custom_type in ALLOWED_TYPES\nregister_custom_type('partial-test', PartialField(ma.fields.Str(), {}))\nassert 'partial-test' in ALLOWED_TYPES\nwith pytest.raises(TypeError):\n    register_custom_type('custom', ma.fields.Str)\nclass Whatever:\n    pass\nwith pytest.raises(TypeError):\n    register_custom_type('whatever', Whatever())\n"
+}

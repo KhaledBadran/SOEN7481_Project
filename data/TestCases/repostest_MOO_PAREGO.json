@@ -1,0 +1,9 @@
+{
+    "functionName": "test_MOO_PAREGO",
+    "className": "ModelBridgeFactoryTest",
+    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_factory.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "single_obj_exp = get_branin_experiment(with_batch=True)\nwith self.assertRaises(ValueError):\n    get_MOO_PAREGO(experiment=single_obj_exp, data=single_obj_exp.fetch_data())\nmulti_obj_exp = get_branin_experiment_with_multi_objective(with_batch=True)\nwith self.assertRaises(ValueError):\n    get_MOO_PAREGO(experiment=multi_obj_exp, data=multi_obj_exp.fetch_data())\nmulti_obj_exp.trials[0].run()\nmoo_parego = get_MOO_PAREGO(experiment=multi_obj_exp, data=multi_obj_exp.\n    fetch_data())\nself.assertIsInstance(moo_parego, TorchModelBridge)\nself.assertEqual({'acquisition_function_kwargs': {'chebyshev_scalarization':\n    True, 'sequential': True}}, moo_parego._default_model_gen_options)\nmoo_parego_run = moo_parego.gen(n=5)\nself.assertEqual(len(moo_parego_run.arms), 5)\n"
+}

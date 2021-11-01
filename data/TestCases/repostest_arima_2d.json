@@ -1,0 +1,9 @@
+{
+    "functionName": "test_arima_2d",
+    "className": null,
+    "fileName": "/HDI-Project_&_MLPrimitives/tests_&_adapters_&_test_statsmodels.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "arima = ARIMA(1, 0, 0, 3)\nX = np.array([[1, 2, 3, 4, 5], [6, 7, 8, 9, 10], [11, 12, 13, 14, 15]])\narima.predict(X)\nassert_allclose(arima_mock.call_args_list[0][0], [[1, 2, 3, 4, 5]])\nassert_allclose(arima_mock.call_args_list[1][0], [[6, 7, 8, 9, 10]])\nassert_allclose(arima_mock.call_args_list[2][0], [[11, 12, 13, 14, 15]])\nassert arima_mock.call_args_list[0][1] == {'order': (1, 0, 0)}\nassert arima_mock.call_args_list[1][1] == {'order': (1, 0, 0)}\nassert arima_mock.call_args_list[2][1] == {'order': (1, 0, 0)}\npatch('statsmodels.tsa.arima_model.ARIMA')"
+}

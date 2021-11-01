@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sunday_should_move_to_monday",
+    "className": null,
+    "fileName": "/roniemartinez_&_DocCron/tests_&_test_non_standard_characters.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cron = doccron.cron('0 0 21W * 7 *')\ndatetime_21 = datetime.now(tz=tzlocal()).replace(hour=0, minute=0, second=0,\n    microsecond=0)\nif datetime_21.day == 21:\n    datetime_21 += timedelta(days=monthrange(datetime_21.year, datetime_21.\n        month)[-1])\nwhile True:\n    if datetime_21.day == 21 and datetime_21.isoweekday() == 7:\n        break\n    datetime_21 += timedelta(days=1)\nassert next(cron) == datetime_21 + timedelta(days=1)\n"
+}

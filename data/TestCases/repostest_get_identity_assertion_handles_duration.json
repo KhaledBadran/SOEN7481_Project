@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_identity_assertion_handles_duration",
+    "className": "TestCoreClientSession",
+    "fileName": "/mozilla_&_PyFxA/fxa_&_tests_&_test_core.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "millis = int(round(time.time() * 1000))\nbid_assertion = self.session.get_identity_assertion('http://example.com', 1234)\ncert, assertion = browserid.utils.unbundle_certs_and_assertion(bid_assertion)\ncert = jwt.parse(cert[0]).payload\nassertion = jwt.parse(assertion).payload\nttl = round(float(cert['exp'] - millis) / 1000)\nself.assertGreaterEqual(ttl, 1230)\nself.assertLessEqual(ttl, 1260)\nttl = round(float(assertion['exp'] - millis) / 1000)\nself.assertGreaterEqual(ttl, 1230)\nself.assertLessEqual(ttl, 1260)\n"
+}

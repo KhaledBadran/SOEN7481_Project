@@ -1,0 +1,9 @@
+{
+    "functionName": "test_download_textfile_file_exists",
+    "className": "KEGGapiTest",
+    "fileName": "/filippocastelli_&_KEGGutils/tests_&_test_keggapi.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "filepath = kgapi.DOWNLOAD_DIR.joinpath('textfile-testing')\ntext = 'surprise_mofo'\ntry:\n    os.remove(filepath)\nexcept FileNotFoundError:\n    pass\nfilepath.write_text(text)\nself.assertEqual(kgapi.download_textfile('http://rest.kegg.jp/list/hsa',\n    'textfile-testing'), text)\npatch('requests.get', side_effect=mocked_requests_get)"
+}

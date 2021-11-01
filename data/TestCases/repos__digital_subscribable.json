@@ -1,0 +1,9 @@
+{
+    "functionName": "__digital_subscribable",
+    "className": "_IOHandler",
+    "fileName": "/PRIArobotics_&_HedgehogServer/hedgehog_&_server_&_handlers_&_hardware.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "outer_self = self\nclass Subs(subscription.PolledSubscribable[bool, digital.Update]):\n\n    async def poll(self):\n        return await outer_self.digital_value\n\n    def compose_update(self, server, ident, subscription, value):\n        return digital.Update(outer_self.port, value, subscription)\nreturn Subs()\n"
+}

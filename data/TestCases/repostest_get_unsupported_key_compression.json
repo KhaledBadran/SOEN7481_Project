@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_unsupported_key_compression",
+    "className": "TestKmipEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the right error is generated when key compression is\n        provided in a Get request.\n        \"\"\"\ne = engine.KmipEngine()\ne._data_store = self.engine\ne._data_store_session_factory = self.session_factory\ne._data_session = e._data_store_session_factory()\ne._logger = mock.MagicMock()\nk = enums.KeyCompressionType.EC_PUBLIC_KEY_TYPE_UNCOMPRESSED\npayload = payloads.GetRequestPayload(key_compression_type=k)\nargs = payload,\nregex = 'Key compression is not supported.'\nsix.assertRaisesRegex(self, exceptions.KeyCompressionTypeNotSupported,\n    regex, e._process_get, *args)\ne._logger.info.assert_any_call('Processing operation: Get')\n"
+}

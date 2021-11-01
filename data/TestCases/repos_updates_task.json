@@ -1,0 +1,9 @@
+{
+    "functionName": "_updates_task",
+    "className": "HedgehogServer",
+    "fileName": "/PRIArobotics_&_HedgehogServer/hedgehog_&_server_&_hedgehog_server.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "task_status.started()\nif self.updates is None:\n    return\nasync for update in self.updates:\n    logger.debug('Got HWC update:  %s', update)\n    if isinstance(update, ShutdownUpdate):\n        logger.info('Initiating shutdown')\n        subprocess.run(['sudo', 'shutdown', '-h', '0'])\n    else:\n        logger.info('Ignored update:  %s', update)\n"
+}

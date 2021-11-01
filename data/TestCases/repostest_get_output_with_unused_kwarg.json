@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_output_with_unused_kwarg",
+    "className": "TestGetOutput_Layer",
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_helper.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "l1, l2, l3 = layers\nl2.get_output_for = lambda data, asdf=123, **kwargs: data\nunused_kwarg = object()\nwith warnings.catch_warnings(record=True) as w:\n    warnings.simplefilter('always')\n    get_output(l3, kwagg=unused_kwarg)\n    assert len(w) == 1\n    assert issubclass(w[0].category, UserWarning)\n    assert 'perhaps you meant kwarg' in str(w[0].message)\nwith warnings.catch_warnings(record=True) as w:\n    warnings.simplefilter('always')\n    get_output(l3, adsf=unused_kwarg)\n    assert len(w) == 1\n    assert issubclass(w[0].category, UserWarning)\n    assert 'perhaps you meant asdf' in str(w[0].message)\n"
+}

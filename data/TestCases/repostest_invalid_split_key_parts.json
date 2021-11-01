@@ -1,0 +1,9 @@
+{
+    "functionName": "test_invalid_split_key_parts",
+    "className": "TestSplitKey",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_secrets_&_test_split_key.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a TypeError is raised when an invalid value is used to set\n        the split key parts of a SplitKey object.\n        \"\"\"\nkwargs = {'split_key_parts': 'invalid'}\nself.assertRaisesRegex(TypeError, 'The split key parts must be an integer.',\n    secrets.SplitKey, **kwargs)\nargs = secrets.SplitKey(), 'split_key_parts', 'invalid'\nself.assertRaisesRegex(TypeError, 'The split key parts must be an integer.',\n    setattr, *args)\n"
+}

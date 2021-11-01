@@ -1,0 +1,9 @@
+{
+    "functionName": "test_df_filtering",
+    "className": null,
+    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_engine_&_tests_&_test_vectorizer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cache_dir = check_cache()\nfe = FeatureVectorizer(cache_dir=cache_dir, mode='w')\nuuid = fe.setup(min_df=min_df, max_df=max_df, use_hashing=use_hashing)\nfe.ingest(data_dir)\nX = fe._load_features(uuid)\nfe2 = FeatureVectorizer(cache_dir=cache_dir, mode='w')\nuuid2 = fe2.setup(use_hashing=use_hashing)\nfe2.ingest(data_dir)\nX2 = fe2._load_features(uuid2)\nif use_hashing:\n    assert X.shape[1] == X2.shape[1]\nelse:\n    assert X.shape[1] < X2.shape[1]\nfe.delete()\npytest.mark.parametrize('use_hashing, min_df, max_df', [[False, 0.1, 0.6],\n    [True, 0.1, 0.6]])"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_change_phonon_cell",
+    "className": "TestStructureMethods",
+    "fileName": "/mesonepigreco_&_CellConstructor/scripts_&_cellconstructor_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        This tries to change the unit cell of a dynamical matrix and see if the fourier transmformation goes correctly\n        \"\"\"\ndyn = self.dynSnSe.Copy()\nnew_cell = dyn.structure.unit_cell.copy()\nnew_cell[(0), :] *= 1.1\nnew_cell[(1), :] *= 0.8\nnew_cell[(2), :] *= 1.03\ndyn.AdjustToNewCell(new_cell)\nsuperdyn = dyn.GenerateSupercellDyn(dyn.GetSupercell())\ndynq = CC.Phonons.GetDynQFromFCSupercell(superdyn.dynmats[0], np.array(dyn.\n    q_tot), dyn.structure, superdyn.structure)\n__tollerance__ = 1e-06\nfor iq in range(len(dyn.q_tot)):\n    eps = np.max(np.abs(dyn.dynmats[iq] - dynq[(iq), :, :]))\n    self.assertTrue(eps < __tollerance__)\n"
+}

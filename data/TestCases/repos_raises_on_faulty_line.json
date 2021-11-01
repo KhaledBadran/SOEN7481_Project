@@ -1,0 +1,9 @@
+{
+    "functionName": "_raises_on_faulty_line",
+    "className": null,
+    "fileName": "/gJigsaw_&_KataBankOCR/parse_&_test_&_test_generators_&_test_figures_from_entries.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"confirm figures_from_entries raises on invalid Line within Entry\"\"\"\nfor line in faulty_lines:\n    adulterated_entry = adulterate_iterable(Entries.get_random(), line)\n    iterator = figures_from_entries((adulterated_entry,))\n    error = pytest.raises((ValueError, TypeError), tuple, iterator)\n    for message in ('Entry Line', fault):\n        assert message in error.value.message\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_media_library_path",
+    "className": null,
+    "fileName": "/mandeep_&_Mosaic/tests_&_test_player.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test the media library path setting in the preferences dialog.\n\n    Qtbot tests the media library path selection by opening the preferences\n    dialog, clicking on the set path button, and using the tmpdir fixture to provide\n    a temporary directory.\"\"\"\nqtbot.mouseClick(window.edit, Qt.LeftButton)\nqtbot.keyClick(window.edit, Qt.Key_Down)\nmock.patch.object(QDialog, 'exec_', return_value='')\nqtbot.keyClick(window.edit, Qt.Key_Enter)\nmock.patch.object(QFileDialog, 'getExistingDirectory', return_value=str(tmpdir)\n    )\nqtbot.mouseClick(config.dialog_media_library.media_library_button, Qt.\n    LeftButton)\n"
+}

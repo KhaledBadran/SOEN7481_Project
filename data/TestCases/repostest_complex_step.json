@@ -1,0 +1,9 @@
+{
+    "functionName": "test_complex_step",
+    "className": "TestSchroedinger",
+    "fileName": "/tum-pbs_&_PhiFlow/tests_&_test_schroedinger.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "q = QuantumWave(Domain([4, 4]))\nq = q.copied_with(amplitude=WavePacket([2, 2], 1.0, [0.5, 0]))\npot = StepPotential(box[0:1, 0:1], 1.0)\nSCHROEDINGER.step(q, 1.0, potentials=[pot], obstacles=[Obstacle(box[3:4, 0:1])]\n    )\nnumpy.testing.assert_equal(q.amplitude.data.shape, [1, 4, 4, 1])\n"
+}

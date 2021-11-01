@@ -1,0 +1,9 @@
+{
+    "functionName": "test_merge_bams",
+    "className": "TestSNPCalling",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_snp.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "args = self.mock_args.mock()\nargs.frag_bams = os.path.join(self.test_folder, 'frag_bams')\nargs.normal_bams = os.path.join(self.test_folder, 'tex_bams')\nos.mkdir(args.normal_bams)\nos.mkdir(args.frag_bams)\nbam_datas = [{'sample': 'NC_007795.1', 'bam_number': 0, 'bams': 'test',\n    'rep': 1}]\nself.snp._run_bam = self.mock.mock_run_bam\ngen_file(os.path.join(args.normal_bams, 'tex.bam'), 'test')\ngen_file(os.path.join(args.normal_bams, 'notex.bam'), 'test')\ngen_file(os.path.join(args.frag_bams, 'farg.bam'), 'test')\nargs.bams = [args.frag_bams, args.normal_bams]\nargs.samtools_path = 'test'\nlog = open(os.path.join(self.test_folder, 'test.log'), 'w')\nself.snp._merge_bams(args, bam_datas, log)\nself.assertEqual(bam_datas[0]['bam_number'], 1)\n"
+}

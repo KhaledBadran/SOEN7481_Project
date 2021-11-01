@@ -1,0 +1,9 @@
+{
+    "functionName": "test_lsi_remove_documents",
+    "className": null,
+    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_engine_&_tests_&_test_lsi.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cache_dir = check_cache()\nfe = FeatureVectorizer(cache_dir=cache_dir, mode='w')\nuuid = fe.setup()\nfe.ingest(data_dir)\nlsi = _LSIWrapper(cache_dir=cache_dir, parent_id=uuid, mode='w')\nlsi_res, exp_var = lsi.fit_transform(n_components=2, alpha=1.0)\nX_lsi = lsi._load_features()\ndocs = DocumentIndex.from_folder(data_dir).data\ndataset_definition = docs[['document_id']].to_dict(orient='records')\nfe.remove([dataset_definition[2], dataset_definition[4]])\nX_lsi_new = lsi._load_features()\nassert X_lsi_new.shape[0] == X_lsi.shape[0] - 2\n"
+}

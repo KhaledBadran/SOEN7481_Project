@@ -1,0 +1,9 @@
+{
+    "functionName": "test_anchor",
+    "className": null,
+    "fileName": "/jmriebold_&_BoilerPy3/tests_&_test_extractors.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "template = (\n    \"<html><body><p>*</p><div>*<a href='half.html'>*</a></div><a href='full.html'><p>*</p></a></body></html>\"\n    )\ncontent = make_content([6, 'end with space ', 3, 6])\ndoc = make_doc_2(template, content)\nblocks = doc.text_blocks\ntext_arr = [block.text for block in blocks]\ndensity_arr = [block.link_density for block in blocks]\nnum_anchor_words = [block.num_words_in_anchor_text for block in blocks]\nassert text_arr == [content[0], content[1] + content[2], content[3]]\nassert num_anchor_words == [0, 3, 6]\nassert density_arr == [0.0, 0.5, 1.0]\n"
+}

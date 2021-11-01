@@ -1,0 +1,9 @@
+{
+    "functionName": "test_file_tree",
+    "className": null,
+    "fileName": "/Edinburgh-Genome-Foundry_&_Flametree/tests_&_test_basics.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Assert that the directory function dispatches as expected.\"\"\"\nroot = file_tree(os.path.join(str(tmpdir), 'my_folder/'))\nassert root._file_manager.__class__ == DiskFileManager\nroot = file_tree(os.path.join(str(tmpdir), 'my_archive.zip'))\nassert root._file_manager.__class__ == ZipFileManager\nroot = file_tree('@memory')\nassert root._file_manager.__class__ == ZipFileManager\nroot._file('test.txt').write('bla bla bla bla bla bla bla bla')\ndata = root._close()\nroot = file_tree(data)\nassert root._file_manager.__class__ == ZipFileManager\nassert [f._name for f in root._all_files] == ['test.txt']\n"
+}

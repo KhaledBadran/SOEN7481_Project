@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fetchall",
+    "className": "test_MySQLdb",
+    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_thirdparty_&_test_MySQLdb_&_test_MySQLdb_dbapi20.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "con = self._connect()\ntry:\n    cur = con.cursor()\n    self.assertRaises(self.driver.Error, cur.fetchall)\n    self.executeDDL1(cur)\n    for sql in self._populate():\n        cur.execute(sql)\n    cur.execute('select name from %sbooze' % self.table_prefix)\n    rows = cur.fetchall()\n    self.assertTrue(cur.rowcount in (-1, len(self.samples)))\n    self.assertEqual(len(rows), len(self.samples),\n        'cursor.fetchall did not retrieve all rows')\n    rows = [r[0] for r in rows]\n    rows.sort()\n    for i in range(0, len(self.samples)):\n        self.assertEqual(rows[i], self.samples[i],\n            'cursor.fetchall retrieved incorrect rows')\n    rows = cur.fetchall()\n    self.assertEqual(len(rows), 0,\n        'cursor.fetchall should return an empty list if called after the whole result set has been fetched'\n        )\n    self.assertTrue(cur.rowcount in (-1, len(self.samples)))\n    self.executeDDL2(cur)\n    cur.execute('select name from %sbarflys' % self.table_prefix)\n    rows = cur.fetchall()\n    self.assertTrue(cur.rowcount in (-1, 0))\n    self.assertEqual(len(rows), 0,\n        'cursor.fetchall should return an empty list if a select query returns no rows'\n        )\nfinally:\n    con.close()\n"
+}

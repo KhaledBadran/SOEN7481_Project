@@ -1,0 +1,9 @@
+{
+    "functionName": "test_2009_regular_season_query",
+    "className": "TestGetNFLDBPlayData",
+    "fileName": "/AndrewRook_&_NFLWin/nflwin_&_tests_&_test_utilities.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "queried_df = utils.get_nfldb_play_data(season_years=[2009], season_types=[\n    'Regular'])\nexpected_df = pd.DataFrame({'gsis_id': ['2009091000', '2009091000',\n    '2009091000', '2009091000', '2009091000'], 'drive_id': [1, 1, 1, 1, 1],\n    'play_id': [46, 68, 92, 113, 139], 'seconds_elapsed': [0.0, 7, 44, 85, \n    93], 'offense_team': ['TEN', 'PIT', 'PIT', 'PIT', 'PIT'], 'yardline': [\n    -20.0, -8, -3, -6, -6], 'down': [0, 1, 2, 3, 4], 'yards_to_go': [0, 10,\n    5, 8, 8], 'home_team': ['PIT', 'PIT', 'PIT', 'PIT', 'PIT'], 'away_team':\n    ['TEN', 'TEN', 'TEN', 'TEN', 'TEN'], 'offense_won': [False, True, True,\n    True, True], 'quarter': ['Q1', 'Q1', 'Q1', 'Q1', 'Q1'],\n    'curr_home_score': [0, 0, 0, 0, 0], 'curr_away_score': [0, 0, 0, 0, 0]})\nexpected_df['down'] = expected_df['down'].astype(np.int8)\npd.util.testing.assert_frame_equal(queried_df[:5].sort_index(axis=1),\n    expected_df.sort_index(axis=1), check_column_type=False)\npytest.mark.requires_db"
+}

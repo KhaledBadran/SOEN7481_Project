@@ -1,0 +1,9 @@
+{
+    "functionName": "test_request_with_body",
+    "className": null,
+    "fileName": "/AmadeusITGroup_&_JumpSSH/tests_&_test_restclient.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "gateway_ip, gateway_port = docker_env.get_host_ip_port('gateway')\ngateway_session = SSHSession(host=gateway_ip, port=gateway_port, username=\n    'user1', password='password1').open()\nrest_client = RestSshClient(gateway_session)\nuri = 'http://%s/echo-body' % REMOTE_HOST_IP_PORT\njson_file_content = tests_util.create_random_json(5)\nhttp_response = rest_client.post(uri, data=json.dumps(json_file_content))\nassert http_response.status_code == 200\nassert http_response.json() == json_file_content\nwith pytest.raises(exception.RestClientError) as exc_info:\n    rest_client.post(uri, local_file='missing_file')\nassert 'Invalid file path given' in str(exc_info.value)\nwith tempfile.NamedTemporaryFile() as tmp_local_file:\n    tmp_local_file.write(json.dumps(json_file_content).encode('utf-8'))\n    tmp_local_file.seek(0)\n    http_response = rest_client.post(uri, local_file=tmp_local_file.name)\n    assert http_response.status_code == 200\n    assert http_response.json() == json_file_content\n    assert not gateway_session.exists(path=tmp_local_file.name)\nremote_file = 'remote_file.json'\nwith pytest.raises(exception.RestClientError) as exc_info:\n    rest_client.post(uri, remote_file=remote_file)\nassert 'Invalid remote file path given' in str(exc_info.value)\ngateway_session.file(remote_path=remote_file, content=json.dumps(\n    json_file_content))\nhttp_response = rest_client.post(uri, remote_file=remote_file)\nassert http_response.status_code == 200\nassert http_response.json() == json_file_content\n"
+}

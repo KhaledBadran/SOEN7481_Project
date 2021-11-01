@@ -1,0 +1,9 @@
+{
+    "functionName": "test_mtime_op_argdate_10dfile",
+    "className": "TestFileAnalyzer_check_times",
+    "fileName": "/kenfar_&_DataGristle/scripts_&_tests_&_test_gristle_processor.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "_, fqfn = tempfile.mkstemp(prefix='ProcessorTestIn_', dir=self.tmpdir)\ncurr_time = time.time()\ntouch(fqfn, (curr_time - 86400 * 10, curr_time - 86400 * 10))\nfile_analyzer = mod.FileAnalyzer({}, {})\nassert file_analyzer._mtime_op_argdate(fqfn, 'lt', '200h') is True\nassert file_analyzer._mtime_op_argdate(fqfn, 'lt', '600h') is False\nassert file_analyzer._mtime_op_argdate(fqfn, 'lt', '11d') is False\nassert file_analyzer._mtime_op_argdate(fqfn, 'lt', '10d') is True\nassert file_analyzer._mtime_op_argdate(fqfn, 'lt', '9d') is True\nassert file_analyzer._mtime_op_argdate(fqfn, 'lt', '1w') is True\nassert file_analyzer._mtime_op_argdate(fqfn, 'lt', '2w') is False\nassert file_analyzer._mtime_op_argdate(fqfn, 'lt', '0M') is True\nassert file_analyzer._mtime_op_argdate(fqfn, 'lt', '1M') is False\nassert file_analyzer._mtime_op_argdate(fqfn, 'lt', '2M') is False\nassert file_analyzer._mtime_op_argdate(fqfn, 'lt', '0y') is True\nassert file_analyzer._mtime_op_argdate(fqfn, 'lt', '1y') is False\n"
+}

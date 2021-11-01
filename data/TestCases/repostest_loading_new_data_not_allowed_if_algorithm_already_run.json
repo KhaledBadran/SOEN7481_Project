@@ -1,0 +1,9 @@
+{
+    "functionName": "test_loading_new_data_not_allowed_if_algorithm_already_run",
+    "className": "TestLoading",
+    "fileName": "/ornlneutronimaging_&_NeuNorm/tests_&_NeuNorm_&_loading_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"assert error raises when loading new data on data already manipulated\"\"\"\nsample_tif_file = self.data_path + '/tif/sample/image001.tif'\nob_tif_file = self.data_path + '/tif/ob/ob001.tif'\no_norm = Normalization()\no_norm.load(file=sample_tif_file, data_type='sample', auto_gamma_filter=False)\no_norm.load(file=ob_tif_file, data_type='ob', auto_gamma_filter=False)\no_norm.normalization()\nnew_sample_tif_file = self.data_path + '/tif/sample/image002.tif'\nself.assertRaises(IOError, o_norm.load, file=new_sample_tif_file)\n"
+}

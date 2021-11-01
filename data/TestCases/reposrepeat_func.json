@@ -1,0 +1,9 @@
+{
+    "functionName": "repeat_func",
+    "className": null,
+    "fileName": "/PRIArobotics_&_HedgehogUtils/hedgehog_&_utils_&_asyncio.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Repeats the result of a 0-ary function either indefinitely, or for a defined number of times.\n    `times` and `interval` behave exactly like with `aiostream.create.repeat`.\n\n    A useful idiom is to combine an indefinite `repeat_func` stream with `aiostream.select.takewhile`\n    to terminate the stream at some point.\n    \"\"\"\nbase = stream.repeat.raw((), times, interval=interval)\nreturn cast(AsyncIterator[T], stream.starmap.raw(base, func, task_limit=1))\noperator"
+}

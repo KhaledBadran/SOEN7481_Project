@@ -1,0 +1,9 @@
+{
+    "functionName": "_replay_events",
+    "className": null,
+    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_tracing_on_top_level.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "for event, lineno, arg in collected:\n    if event == 'call':\n        new_trace_func = trace_top_level_unhandled.call_trace_dispatch(lineno)\n        if hasattr(new_trace_func, 'get_method_object'):\n            new_trace_func = new_trace_func.get_method_object()\n        assert new_trace_func.__name__ == 'trace_dispatch_and_unhandled_exceptions'\n    elif event == 'exception':\n        trace_top_level_unhandled.exception_trace_dispatch(lineno, arg)\n    elif event == 'return':\n        trace_top_level_unhandled.return_trace_dispatch(lineno)\n    elif event == 'line':\n        pass\n    else:\n        raise AssertionError('Unexpected: %s' % (event,))\n"
+}

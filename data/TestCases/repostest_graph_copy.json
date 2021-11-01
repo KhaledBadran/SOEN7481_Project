@@ -1,0 +1,9 @@
+{
+    "functionName": "test_graph_copy",
+    "className": null,
+    "fileName": "/Silmathoron_&_NNGT/testing_&_test_basics.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test partial and full graph copy.\n    \"\"\"\navg = 20\nstd = 4\ng = ng.gaussian_degree(avg, std, nodes=100)\nh = nngt.Graph(copy_graph=g)\nassert g.node_nb() == h.node_nb()\nassert g.edge_nb() == h.edge_nb()\nassert np.array_equal(g.edges_array, h.edges_array)\npop = nngt.NeuralPop.exc_and_inhib(100)\nshape = nngt.geometry.Shape.rectangle(1000.0, 1000.0)\ng = ng.gaussian_degree(avg, std, population=pop, shape=shape, name=\n    'new_node_spatial')\nh = nngt.Graph(copy_graph=g)\nassert g.node_nb() == h.node_nb()\nassert g.edge_nb() == h.edge_nb()\nassert np.array_equal(g.edges_array, h.edges_array)\nassert not h.is_network()\nassert not h.is_spatial()\nrng = np.random.default_rng()\ng.set_weights(rng.uniform(0, 10, g.edge_nb()))\ng.new_node_attribute('plop', 'int', rng.integers(1, 50, g.node_nb()))\ng.new_node_attribute('bip', 'double', rng.uniform(0, 1, g.node_nb()))\ng.new_edge_attribute('test', 'int', rng.integers(1, 200, g.edge_nb()))\ncopy = g.copy()\nassert g.node_nb() == copy.node_nb()\nassert g.edge_nb() == copy.edge_nb()\nassert np.array_equal(g.edges_array, copy.edges_array)\nfor k, v in g.edge_attributes.items():\n    npt.assert_array_equal(v, copy.edge_attributes[k])\nfor k, v in g.node_attributes.items():\n    npt.assert_array_equal(v, copy.node_attributes[k])\nassert g.population == copy.population\nassert g.population is not copy.population\nassert g.shape == copy.shape\nassert g.shape is not copy.shape\ng = ng.erdos_renyi(nodes=100, avg_deg=10, directed=False)\nh = g.copy()\nassert g.is_directed() == h.is_directed() == False\npytest.mark.mpi_skip"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_find_duplicates",
+    "className": null,
+    "fileName": "/Accenture_&_AmpliGraph/tests_&_ampligraph_&_discovery_&_test_discovery.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "X = np.array([['a', 'y', 'b'], ['b', 'y', 'a'], ['a', 'y', 'c'], ['c', 'y',\n    'a'], ['a', 'y', 'd'], ['c', 'x', 'd'], ['b', 'y', 'c'], ['f', 'y', 'e']])\nmodel = ComplEx(k=2, batches_count=2)\nmodel.fit(X)\nentities = set('a b c d e f'.split())\nrelations = set('x y'.split())\ndef asserts(tol, dups, ent_rel, subspace):\n    assert tol > 0.0\n    assert len(dups) <= len(ent_rel)\n    assert all(len(d) <= len(ent_rel) for d in dups)\n    assert all(d.issubset(subspace) for d in dups)\ndups, tol = find_duplicates(X, model, mode='triple', tolerance='auto',\n    expected_fraction_duplicates=0.5)\nasserts(tol, dups, X, {tuple(x) for x in X})\ndups, tol = find_duplicates(X, model, mode='triple', tolerance=1.0)\nassert tol == 1.0\nasserts(tol, dups, X, {tuple(x) for x in X})\ndups, tol = find_duplicates(np.unique(X[:, (0)]), model, mode='entity',\n    tolerance='auto', expected_fraction_duplicates=0.5)\nasserts(tol, dups, entities, entities)\ndups, tol = find_duplicates(np.unique(X[:, (2)]), model, mode='entity',\n    tolerance='auto', expected_fraction_duplicates=0.5)\nasserts(tol, dups, entities, entities)\ndups, tol = find_duplicates(np.unique(X[:, (1)]), model, mode='relation',\n    tolerance='auto', expected_fraction_duplicates=0.5)\nasserts(tol, dups, relations, relations)\nwith pytest.raises(ValueError):\n    find_duplicates(X, model, mode='hah')\nwith pytest.raises(ValueError):\n    find_duplicates(X, model, mode='entity')\nwith pytest.raises(ValueError):\n    find_duplicates(X, model, mode='relation')\nwith pytest.raises(ValueError):\n    find_duplicates(np.unique(X[:, (0)]), model, mode='triple')\n"
+}

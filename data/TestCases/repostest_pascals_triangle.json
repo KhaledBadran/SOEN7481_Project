@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pascals_triangle",
+    "className": null,
+    "fileName": "/poletaevvlad_&_CubeLang/test_&_execution_&_test_execution.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Computes five lines of Pascal's triangle:\n                     1\n                   1   1\n                 1   2   1\n               1   3   3   1\n            1   4   6   4    1\n    Values are returned via `print` function line by line separated by `0`.\n    \"\"\"\ncode = \"\"\"\n        let result: list of list of int\n        let row_size: int = 1\n\n        repeat 5 times\n            let row: list of int = new_list(row_size, 1)\n            let i: int = 1\n            while i < row_size - 1 do\n                row[i] = result[size(result) - 1][i] + result[size(result) - 1][i - 1]\n                i = i + 1\n            end\n            add_last(result, row)\n            row_size = row_size + 1\n        end\n\n        for row in result do\n            for x in row do\n                print(x)\n            end\n            print(0)\n        end\n    \"\"\"\nstack = Stack()\nstack.add_global('print', Function(([Integer], Void)))\nstdlib.initialize_stack(stack)\nexpressions = parser.parse(code, stack)\nprint_fn = MagicMock()\ncontext = ExecutionContext(dict(print=print_fn, **stdlib.exec_globals))\ncontext.compile(expressions)\ncontext.execute(MockTracebackWriter())\nreturn_value = [x[0][0] for x in print_fn.call_args_list]\nassert return_value == [1, 0, 1, 1, 0, 1, 2, 1, 0, 1, 3, 3, 1, 0, 1, 4, 6, \n    4, 1, 0]\n"
+}

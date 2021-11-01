@@ -1,0 +1,9 @@
+{
+    "functionName": "test_required",
+    "className": null,
+    "fileName": "/spacemanspiff2007_&_EasyCo/tests_&_test_entry.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "c = ConfigEntry(required=True, key_name='test')\nc.set_type_hint('test', int)\nvalidator = c.set_validator({}, CFG_LOWER)\nwith pytest.raises(voluptuous.MultipleInvalid):\n    voluptuous.Schema(validator)({})\nvoluptuous.Schema(validator)({'test': 5})\nc = ConfigEntry(required=False, key_name='test')\nc.set_type_hint('test', str)\nvalidator = c.set_validator({}, CFG_LOWER)\nvoluptuous.Schema(validator)({})\nvoluptuous.Schema(validator)({'test': 'my_str'})\n"
+}

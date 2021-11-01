@@ -1,0 +1,9 @@
+{
+    "functionName": "test_tracker",
+    "className": null,
+    "fileName": "/fmfn_&_BayesianOptimization/tests_&_test_observer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class MockInstance:\n\n    def __init__(self, max_target=1, max_params=[1, 1]):\n        self._max_target = max_target\n        self._max_params = max_params\n\n    @property\n    def max(self):\n        return {'target': self._max_target, 'params': self._max_params}\ntracker = _Tracker()\nassert tracker._iterations == 0\nassert tracker._previous_max is None\nassert tracker._previous_max_params is None\ntest_instance = MockInstance()\ntracker._update_tracker('other_event', test_instance)\nassert tracker._iterations == 0\nassert tracker._previous_max is None\nassert tracker._previous_max_params is None\ntracker._update_tracker(Events.OPTIMIZATION_STEP, test_instance)\nassert tracker._iterations == 1\nassert tracker._previous_max == 1\nassert tracker._previous_max_params == [1, 1]\nnew_instance = MockInstance(max_target=7, max_params=[7, 7])\ntracker._update_tracker(Events.OPTIMIZATION_STEP, new_instance)\nassert tracker._iterations == 2\nassert tracker._previous_max == 7\nassert tracker._previous_max_params == [7, 7]\nother_instance = MockInstance(max_target=2, max_params=[2, 2])\ntracker._update_tracker(Events.OPTIMIZATION_STEP, other_instance)\nassert tracker._iterations == 3\nassert tracker._previous_max == 7\nassert tracker._previous_max_params == [7, 7]\ntracker._time_metrics()\nstart_time = tracker._start_time\nprevious_time = tracker._previous_time\ntracker._time_metrics()\nassert start_time == tracker._start_time\nassert previous_time < tracker._previous_time\n"
+}

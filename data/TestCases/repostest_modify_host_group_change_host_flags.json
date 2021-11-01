@@ -1,0 +1,9 @@
+{
+    "functionName": "test_modify_host_group_change_host_flags",
+    "className": "PyU4VProvisioningTest",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_provisioning.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test modify_host_group change flags.\"\"\"\nhost_group_id = self.data.hostgroup_id\nhost_flag_dict = {'consistent_lun': 'true'}\npayload = {'editHostGroupActionParam': {'setHostGroupFlagsParam': {\n    'hostFlags': host_flag_dict}}}\nwith mock.patch.object(self.provisioning, 'modify_resource') as mock_mod:\n    self.provisioning.modify_hostgroup(host_group_id, host_flag_dict=\n        host_flag_dict)\n    mock_mod.assert_called_once_with(category=constants.SLOPROVISIONING,\n        resource_level=constants.SYMMETRIX, resource_level_id=self.data.\n        array, resource_type=constants.HOSTGROUP, resource_type_id=\n        host_group_id, payload=payload)\n"
+}

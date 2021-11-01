@@ -1,0 +1,9 @@
+{
+    "functionName": "test_shap_force_plots",
+    "className": "TestUtil",
+    "fileName": "/univieCUBE_&_phenotrex/tests_&_test_util.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with TemporaryDirectory() as tmpdir:\n    sh, gr = generic_compute_shaps(classifier=MODELS_PATH / trait_name /\n        f'{trait_name}.xgb.pkl', fasta_files=list(GENOMIC_PATH.iterdir()),\n        n_samples=50, verb=True, genotype=None)\n    shap_force_plots(gr=gr, sh=sh, n_max_features=20, out_prefix=Path(\n        tmpdir) / 'force_plots')\n    print(list(Path(tmpdir).iterdir()))\n    assert len(list(Path(tmpdir).glob('force_plots*'))) > 0\npytest.mark.skipif(not FROM_FASTA, reason='Missing optional dependencies')"
+}

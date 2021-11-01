@@ -1,0 +1,9 @@
+{
+    "functionName": "test_git_hooks",
+    "className": null,
+    "fileName": "/132nd-etcher_&_EPAB/test_&_test_cmd_&_test_git_hooks.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "Path('./.git/hooks').mkdir(parents=True)\npre_push = Path('./.git/hooks/pre-push')\nassert not pre_push.exists()\nwhen(elib_run).run('pipenv --venv', filters='Courtesy Notice:').thenReturn((\n    '.', 0))\n_install_hooks()\nassert pre_push.exists()\nassert f'# This Git hook was installed by EPAB {__version__}\\n' in pre_push.read_text(\n    )\n"
+}

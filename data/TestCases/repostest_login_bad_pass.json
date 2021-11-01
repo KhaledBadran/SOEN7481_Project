@@ -1,0 +1,9 @@
+{
+    "functionName": "test_login_bad_pass",
+    "className": "TestLogin",
+    "fileName": "/fvalverd_&_AutoApi/tests_&_test_operations.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data = {'email': self.user, 'password': 'bad_pass', 'api': self.api}\nresponse = self.app.post('/login', data=data)\nself.assertEqual(response.status_code, 401)\nresponse_json = json.loads(response.data or '{}')\nself.assertDictContainsSubset({'message': u'Invalid email/password/api'},\n    response_json)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_save_and_load_project",
+    "className": "WorkspaceTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_utils_&_WorkspaceTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "proj = self.ws.new_project('test_proj')\nnet = op.network.Cubic(shape=[3, 3, 3], project=proj)\nop.phases.Air(network=net)\nself.ws.save_project(proj)\nassert proj.name in self.ws.keys()\nself.ws.close_project(proj)\nassert 'test_proj' not in self.ws.keys()\nassert proj.workspace == {}\nself.ws.load_project(filename='test_proj.pnm')\nassert 'test_proj' in self.ws.keys()\nself.ws.clear()\nos.remove('test_proj.pnm')\n"
+}

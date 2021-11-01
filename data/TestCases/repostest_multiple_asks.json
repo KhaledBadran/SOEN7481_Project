@@ -1,0 +1,9 @@
+{
+    "functionName": "test_multiple_asks",
+    "className": null,
+    "fileName": "/bytesandbrains_&_ProcessOptimizer/ProcessOptimizer_&_tests_&_test_optimizer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "base_estimator = ExtraTreesRegressor(random_state=2)\nopt = Optimizer([(-2.0, 2.0)], base_estimator, n_initial_points=1,\n    acq_optimizer='sampling')\nopt.run(bench1, n_iter=3)\nassert_equal(len(opt.models), 3)\nassert_equal(len(opt.Xi), 3)\nopt.ask()\nassert_equal(len(opt.models), 3)\nassert_equal(len(opt.Xi), 3)\nassert_equal(opt.ask(), opt.ask())\npytest.mark.fast_test"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_DataFile_SaveLoad",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_DataFile.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "df = DataFile('Data/camea2018n000136.hdf')\ndf.saveHDF('Data/camea2018n000136_2.hdf')\ndf2 = DataFile('Data/camea2018n000136_2.hdf')\nfailed = []\nfor att, val in df.__dict__.items():\n    if att in ['name', 'fileLocation']:\n        continue\n    if isinstance(val, np.ndarray):\n        if val.dtype == 'O':\n            continue\n        try:\n            test = np.all(np.isclose(val, getattr(df2, att)))\n        except:\n            test = np.all(val == getattr(df2, att))\n    else:\n        test = val == getattr(df2, att)\n    if not test:\n        failed.append(att)\nprint(failed)\nassert len(failed) == 0\nos.remove(df2.fileLocation)\n"
+}

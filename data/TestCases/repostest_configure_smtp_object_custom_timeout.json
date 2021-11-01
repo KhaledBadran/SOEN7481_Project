@@ -1,0 +1,9 @@
+{
+    "functionName": "test_configure_smtp_object_custom_timeout",
+    "className": null,
+    "fileName": "/PearsonEducation_&_Alarmageddon/tests_&_publishing_&_test_emailer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "monkeypatch.setattr(smtplib.SMTP, '__init__', mock_smtp_init)\nconfig = create_configuration(tmpdir, smtp_port=str(smtpserver.addr[1]))\ntimeout_seconds = 15\nemail_pub = EmailPublisher(config, connect_timeout_seconds=timeout_seconds)\nsmtp_obj = email_pub.configure_smtp_object(smtpserver.addr[0], smtpserver.\n    addr[1])\nassert smtp_obj._timeout == timeout_seconds\n"
+}

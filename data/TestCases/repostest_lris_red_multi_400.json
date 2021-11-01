@@ -1,0 +1,9 @@
+{
+    "functionName": "test_lris_red_multi_400",
+    "className": null,
+    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_metadata.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "file_list = glob.glob(os.path.join(os.environ['PYPEIT_DEV'], 'RAW_DATA',\n    'keck_lris_red', 'multi_400_8500_d560', '*.fits.gz'))\ncfg_lines = ['[rdx]', 'spectrograph = keck_lris_red']\nps = PypeItSetup(file_list, cfg_lines=cfg_lines)\nps.build_fitstbl()\nps.get_frame_types(flag_unknown=True)\ncfgs = ps.fitstbl.unique_configurations(ignore_frames=['bias', 'dark'])\nps.fitstbl.set_configurations(cfgs, ignore_frames=['bias', 'dark'])\nps.fitstbl.set_calibration_groups(global_frames=['bias', 'dark'])\nassert np.all(ps.fitstbl['setup'] == 'A')\ndev_suite_required"
+}

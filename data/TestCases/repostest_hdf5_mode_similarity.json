@@ -1,0 +1,9 @@
+{
+    "functionName": "test_hdf5_mode_similarity",
+    "className": null,
+    "fileName": "/AllenInstitute_&_EM_Aligner_python/integration_tests_&_test_petsc.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "parameters = copy.deepcopy(rough_parameters)\nparameters['hdf5_options']['output_dir'] = str(tmpdir.mkdir('hdf5output'))\nparameters['input_stack']['name'] = rough_input_stack\nparameters['pointmatch']['name'] = rough_pointmatches\nparameters['output_mode'] = 'hdf5'\nparameters['hdf5_options']['chunks_per_file'] = chunks\nmod = EMaligner.EMaligner(input_data=copy.deepcopy(parameters), args=[])\nmod.run()\nindexfile = os.path.join(parameters['hdf5_options']['output_dir'],\n    'solution_input.h5')\nassert os.path.exists(indexfile)\ndel mod\nparameters['output_mode'] = 'none'\nparameters['assemble_from_file'] = indexfile\nmod = EMaligner.EMaligner(input_data=copy.deepcopy(parameters), args=[])\nmod.run()\nassert np.all(np.array(mod.results['precision']) < 1e-07)\nassert np.all(np.array(mod.results['error']) < 1000000.0)\ndel mod\nrenderapi.stack.delete_stack(parameters['output_stack']['name'], render=render)\nparameters['ingest_from_file'] = indexfile\nparameters['output_mode'] = 'stack'\nmod = EMaligner.EMaligner(input_data=copy.deepcopy(parameters), args=[])\nmod.run()\ntin = renderapi.tilespec.get_tile_specs_from_stack(parameters['input_stack'\n    ]['name'], render=render)\ntout = renderapi.tilespec.get_tile_specs_from_stack(parameters[\n    'output_stack']['name'], render=render)\nassert len(tin) == len(tout)\nos.remove(indexfile)\ndel mod\nrenderapi.stack.delete_stack(parameters['output_stack']['name'], render=render)\npytest.mark.parametrize('chunks', [-1, 1, 2])"
+}

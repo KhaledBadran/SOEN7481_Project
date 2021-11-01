@@ -1,0 +1,9 @@
+{
+    "functionName": "test_video_detection_retinanet",
+    "className": null,
+    "fileName": "/OlafenwaMoses_&_ImageAI/test_&_test_video_object_detection.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "detector = VideoObjectDetection()\ndetector.setModelTypeAsRetinaNet()\ndetector.setModelPath(model_path=os.path.join(main_folder, 'data-models',\n    'resnet50_coco_best_v2.0.1.h5'))\ndetector.loadModel(detection_speed='fastest')\nvideo_path = detector.detectObjectsFromVideo(input_file_path=video_file,\n    output_file_path=video_file_output, save_detected_video=True,\n    frames_per_second=30, log_progress=True)\nassert os.path.exists(video_file_output + '.avi')\nassert isinstance(video_path, str)\nos.remove(video_file_output + '.avi')\npytest.mark.detectionpytest.mark.video_detectionpytest.mark.retinanet"
+}

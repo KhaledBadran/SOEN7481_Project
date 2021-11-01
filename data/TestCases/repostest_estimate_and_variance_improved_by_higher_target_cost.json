@@ -1,0 +1,9 @@
+{
+    "functionName": "test_estimate_and_variance_improved_by_higher_target_cost",
+    "className": null,
+    "fileName": "/NASA_&_MLMCPy/tests_&_mlmc_&_test_MLMCSimulator.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Runs simulator with increasing target costs and ensures that the resulting\n    estimates are increasingly accurate and variances decrease.\n    \"\"\"\nnp.random.seed(1)\nmc_20000_output_sample_mean = 12.3186216602\nsim = MLMCSimulator(models=models_from_data, data=data_input)\nestimates = np.zeros(3)\nvariances = np.zeros_like(estimates)\nsample_sizes = np.zeros((3, 3))\nfor i, target_cost in enumerate([5, 25, 500]):\n    estimates[i], sample_sizes[i], variances[i] = sim.simulate(epsilon=0.5,\n        initial_sample_sizes=100, target_cost=target_cost)\nerror = np.abs(estimates - mc_20000_output_sample_mean)\nassert error[0] > error[1] > error[2]\nassert np.sum(sample_sizes[0]) < np.sum(sample_sizes[1])\nassert np.sum(sample_sizes[1]) < np.sum(sample_sizes[2])\nassert variances[0] > variances[1] > variances[2]\n"
+}

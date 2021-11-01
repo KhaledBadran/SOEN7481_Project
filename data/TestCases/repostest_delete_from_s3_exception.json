@@ -1,0 +1,9 @@
+{
+    "functionName": "test_delete_from_s3_exception",
+    "className": null,
+    "fileName": "/capitalone_&_Data-Load-and-Copy-using-Python/tests_&_test_s3.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "s = locopy.S3()\ns.s3.delete_object.side_effect = Exception('Delete Exception')\nwith pytest.raises(S3DeletionError):\n    s.delete_from_s3('TEST_BUCKET', 'TEST_FILE')\nmock.patch('locopy.s3.Session')"
+}

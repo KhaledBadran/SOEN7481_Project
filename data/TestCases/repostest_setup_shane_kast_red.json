@@ -1,0 +1,9 @@
+{
+    "functionName": "test_setup_shane_kast_red",
+    "className": null,
+    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_setups.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "droot = os.path.join(os.environ['PYPEIT_DEV'],\n    'RAW_DATA/shane_kast_red/600_7500_d55_ret')\ndroot += '/'\npargs = setup.parser(['-r', droot, '-s', 'shane_kast_red'])\nsetup.main(pargs)\ncwd = os.getcwd()\nsetup_dir = os.path.join(cwd, 'setup_files')\nassert os.path.isdir(setup_dir), 'No setup_files directory created'\nfiles = glob.glob(os.path.join(setup_dir, 'shane_kast_red*'))\next = [f.split('.')[-1] for f in files]\nassert np.all([(e in ext) for e in expected]\n    ), 'Did not find all setup file extensions: {0}'.format(expected)\nshutil.rmtree(setup_dir)\ndev_suite_required"
+}

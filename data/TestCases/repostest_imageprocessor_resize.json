@@ -1,0 +1,9 @@
+{
+    "functionName": "test_imageprocessor_resize",
+    "className": null,
+    "fileName": "/IBM_&_MAX-Framework/maxfw_&_tests_&_test_image_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test the Imageprocessor's resize function.\"\"\"\ntransform_sequence = [ToPILImage('RGBA'), Resize(size=(200, 200))]\np = ImageProcessor(transform_sequence)\nimg_out = p.apply_transforms(test_input)\nassert np.array(img_out).shape == (200, 200, 4)\ntransform_sequence = [ToPILImage('RGBA'), Resize(size=(2000, 2000))]\np = ImageProcessor(transform_sequence)\nimg_out = p.apply_transforms(test_input)\nassert np.array(img_out).shape == (2000, 2000, 4)\n"
+}

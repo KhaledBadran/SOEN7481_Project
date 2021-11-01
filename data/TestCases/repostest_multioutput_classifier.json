@@ -1,0 +1,9 @@
+{
+    "functionName": "test_multioutput_classifier",
+    "className": "TestSklearn",
+    "fileName": "/microsoft_&_LightGBM/tests_&_python_package_test_&_test_sklearn.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "n_outputs = 3\nX, y = make_multilabel_classification(n_samples=100, n_features=20,\n    n_classes=n_outputs, random_state=0)\ny = y.astype(str)\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1,\n    random_state=42)\nclf = MultiOutputClassifier(estimator=lgb.LGBMClassifier(n_estimators=10))\nclf.fit(X_train, y_train)\nscore = clf.score(X_test, y_test)\nself.assertGreaterEqual(score, 0.2)\nself.assertLessEqual(score, 1.0)\nnp.testing.assert_array_equal(np.tile(np.unique(y_train), n_outputs), np.\n    concatenate(clf.classes_))\nfor classifier in clf.estimators_:\n    self.assertIsInstance(classifier, lgb.LGBMClassifier)\n    self.assertIsInstance(classifier.booster_, lgb.Booster)\nunittest.skipIf(sk_version < '0.22.0', 'scikit-learn version is less than 0.22'\n    )"
+}

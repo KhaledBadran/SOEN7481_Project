@@ -1,0 +1,9 @@
+{
+    "functionName": "test_label_faces_tol",
+    "className": "TopotoolsTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_topotools_&_TopotoolsTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "net = op.network.Cubic(shape=[3, 3, 3], spacing=1, connectivity=6)\nnet.clear(mode='labels')\nnet['pore.coords'] += np.array([5, 5, 5])\ntopotools.label_faces(network=net, tol=0.2)\nassert net.num_pores('surface') == 26\nassert net.num_pores('left') == 9\nassert net.num_pores('right') == 9\nassert net.num_pores('front') == 9\nassert net.num_pores('back') == 9\nassert net.num_pores('top') == 9\nassert net.num_pores('bottom') == 9\n"
+}

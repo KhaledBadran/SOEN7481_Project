@@ -1,0 +1,9 @@
+{
+    "functionName": "test_scan_extract_rfam",
+    "className": "TestRibos",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_ribos.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.ribo._run_cmscan = self.mock.mock_run_cmscan\nrb.modify_table = self.mock.mock_modify_table\nrb.regenerate_seq = self.mock.mock_regenerate_seq\nrb.reextract_rbs = self.mock.mock_reextract_rbs\nprefixs = []\ngen_file(os.path.join(self.gffs, 'tmp/test.gff'), self.example.gff_file)\ngen_file(os.path.join(self.fastas, 'tmp/test.fa'), self.example.fasta_file)\ngen_file(os.path.join(self.seq_path, 'test.fa'), self.example.fasta_file)\ngen_file(os.path.join(self.tsss, 'tmp/test_TSS.gff'), self.example.tss_file)\ngen_file(os.path.join(self.trans, 'tmp/test_transcript.gff'), self.example.\n    tran_file)\ngen_file(os.path.join(self.out_folder, 'tmp_fasta', 'test.fa'), self.\n    example.fasta_file)\nargs = self.mock_args.mock()\nargs.start_codons = ['ATG']\nargs.fastas = self.fastas\nargs.out_folder = self.out_folder\nargs.gffs = self.gffs\nargs.fuzzy = 5\nargs.fuzzy_rbs = 2\nargs.utr = True\nargs.without_rbs = False\nargs.rbs_seq = ['AGGAGG']\nargs.output_all = 'test'\nargs.cutoff = 'e_0.01'\ntmp_files = {'fasta': os.path.join(self.out_folder, 'tmp_fasta'), 'scan':\n    'tmp_scan', 'table': os.path.join(self.out_folder, 'tmp_table')}\nrfam = 'Rfam_.cm'\nsuffixs = {'csv': 'test.csv', 'txt': 'test_prescan.txt', 're_txt':\n    'test_scan.txt', 're_csv': 'test_scan.csv'}\nlog = open(os.path.join(self.test_folder, 'test.log'), 'w')\nself.ribo._scan_extract_rfam(prefixs, args, tmp_files, suffixs, 'test',\n    rfam, log)\nself.assertListEqual(prefixs, ['test'])\nself.assertTrue(os.path.exists(os.path.join(self.out_folder, 'tmp_fasta',\n    'test_regenerate.fa')))\n"
+}

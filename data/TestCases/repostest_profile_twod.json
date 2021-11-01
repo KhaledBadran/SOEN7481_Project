@@ -1,0 +1,9 @@
+{
+    "functionName": "test_profile_twod",
+    "className": null,
+    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_bspline.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test that bspline_profile (1) is successful and (2) produces the\n    same result for a set of data fit two-dimensionally.\n    \"\"\"\nfiles = [data_path('gemini_gnirs_32_{0}_twod_fit.npz'.format(slit)) for\n    slit in [0, 1]]\nspec_samp_coarse = 50.0\ntwod_sigrej = 4.0\nfor f in files:\n    d = np.load(f)\n    twod_bspl, twod_gpm_fit, twod_flat_fit, _, exit_status = bspline_profile(d\n        ['twod_spec_coo_data'], d['twod_flat_data'], d['twod_ivar_data'], d\n        ['poly_basis'], ingpm=d['twod_gpm_data'], nord=4, upper=twod_sigrej,\n        lower=twod_sigrej, kwargs_bspline={'bkspace': spec_samp_coarse},\n        kwargs_reject={'groupbadpix': True, 'maxrej': 10}, quiet=True)\n    assert np.allclose(d['twod_flat_fit'], twod_flat_fit\n        ), 'Bad 2D bspline result'\n"
+}

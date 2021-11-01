@@ -1,0 +1,9 @@
+{
+    "functionName": "download_video_fixtures",
+    "className": "WildFireFrameExtractorTester",
+    "fileName": "/frgfm_&_PyroNear/test_&_test_datasets_wildfire_frame_extractor.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "video_urls_yaml_url = (\n    'https://gist.githubusercontent.com/x0s/2015a7e58d8d3f885b6528d33cd10b2d/raw/'\n    )\nwith urllib.request.urlopen(video_urls_yaml_url) as video_urls_yaml:\n    urls = yaml.safe_load(video_urls_yaml)\nfor dest, url in urls.items():\n    vid = pafy.new(url)\n    stream = vid.getbest()\n    print(f'Downloading {stream.get_filesize() / 1000000.0:.2f} MB')\n    stream.download((path_to_videos / dest).as_posix())\nstaticmethod"
+}

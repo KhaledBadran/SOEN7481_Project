@@ -1,0 +1,9 @@
+{
+    "functionName": "test_compute_selected_rois2",
+    "className": null,
+    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_core_&_tests_&_test_map_processing.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Basic functionality of `compute_selected_rois`.\n    Tests are run using global Dask clients to inprove testing speed.\n    \"\"\"\ndataset_params = {'n_data_dimensions': (20, 20)}\nadd_pts_before, add_pts_after = 15, 10\nuse_snip = False\nft = _FitXRFMapTesting(dataset_params=dataset_params, use_snip=use_snip,\n    add_pts_before=add_pts_before, add_pts_after=add_pts_after)\ndata = ft.data_input\nn_pts = ft.n_spectrum_points\nenergy_min, energy_max = 3.1, 12.2\nenergy_step = (energy_max - energy_min) / (n_pts - 1)\nroi_dict = {'roi-1': (2.5, 3.5), 'roi-2': (3.5, 4.8), 'roi-3': (5.2, 7.4),\n    'roi-4': (6.0, 6.0), 'roi-5': (6.0, 5.5), 'roi-6': (10.1, 15.0)}\nsnip_param = {'e_offset': energy_min - energy_step * add_pts_before,\n    'e_linear': energy_step, 'e_quadratic': 0, 'b_width': 2.0}\ndata_out = compute_selected_rois(data, data_sel_indices=ft.data_sel_indices,\n    roi_dict=roi_dict, snip_param=snip_param, use_snip=use_snip)\nft.verify_roi_output(data_out=data_out, roi_dict=roi_dict, snip_param=\n    snip_param)\n"
+}

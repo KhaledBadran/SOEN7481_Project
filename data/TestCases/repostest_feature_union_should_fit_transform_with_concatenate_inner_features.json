@@ -1,0 +1,9 @@
+{
+    "functionName": "test_feature_union_should_fit_transform_with_concatenate_inner_features",
+    "className": null,
+    "fileName": "/Neuraxio_&_Neuraxle/testing_&_test_union.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "p = Pipeline([FeatureUnion([Identity(), Identity()], joiner=\n    NumpyConcatenateInnerFeatures())])\ndata_inputs = np.random.randint((1, 20))\nexpected_outputs = np.random.randint((1, 20))\np, outputs = p.fit_transform(data_inputs, expected_outputs)\nassert np.array_equal(outputs, np.concatenate([data_inputs, data_inputs]))\n"
+}

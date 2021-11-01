@@ -1,0 +1,9 @@
+{
+    "functionName": "test_setup_single_output_channel_with_initial_value",
+    "className": null,
+    "fileName": "/rm-hull_&_OPi.GPIO/tests_&_test_gpio.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with patch('OPi.GPIO.sysfs') as mock:\n    GPIO.setmode(GPIO.SUNXI)\n    GPIO.setup('PG06', GPIO.OUT, GPIO.HIGH)\n    mock.export.assert_called_with(198)\n    mock.direction.assert_called_with(198, GPIO.OUT)\n    mock.output.assert_called_with(198, GPIO.HIGH)\n    assert 'PG06' in GPIO._exports\n"
+}

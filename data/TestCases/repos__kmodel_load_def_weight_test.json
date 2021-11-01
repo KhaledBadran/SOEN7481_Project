@@ -1,0 +1,9 @@
+{
+    "functionName": "__kmodel_load_def_weight_test",
+    "className": "TestLoadModel",
+    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_keras_&_test_load_model.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "keras_model_path_json, keras_model_path_hdf5 = dump_keras(kmodel,\n    dump_weights=True)\nbmodel = DefinitionLoader.from_json_path(keras_model_path_json)\nWeightLoader.load_weights_from_hdf5(bmodel, kmodel, keras_model_path_hdf5)\nbmodel.training(False)\nboutput = bmodel.forward(input_data)\nkoutput = kmodel.predict(input_data)\nassert_allclose(boutput, koutput, rtol=1e-05)\n"
+}

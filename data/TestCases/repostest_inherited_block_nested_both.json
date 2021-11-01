@@ -1,0 +1,9 @@
+{
+    "functionName": "test_inherited_block_nested_both",
+    "className": "BlockTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_block.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "l = TemplateLookup()\nl.put_string('index',\n    \"\"\"\n                <%inherit file=\"base\"/>\n                <%block name=\"title\">\n                    index title\n                </%block>\n\n                <%block name=\"header\">\n                    index header\n                    ${parent.header()}\n                </%block>\n            \"\"\"\n    )\nl.put_string('base',\n    \"\"\"\n            above\n            <%block name=\"header\">\n                base header\n                <%block name=\"title\">\n                    the title\n                </%block>\n            </%block>\n\n            ${next.body()}\n            below\n        \"\"\"\n    )\nself._do_test(l.get_template('index'), ['above', 'index header',\n    'base header', 'index title', 'below'], filters=result_lines)\n"
+}

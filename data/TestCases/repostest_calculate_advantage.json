@@ -1,0 +1,9 @@
+{
+    "functionName": "test_calculate_advantage",
+    "className": null,
+    "fileName": "/realtwister_&_LearnedEvolution/tests_&_agents_&_test_batch.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "g = 0.95\nbatch = Batch(reward_discount=g)\nr = [1, 2, 3]\nv = [100, 200, 300]\nfinal_value = 400\ntrue_advantages = [1 + 200 - 100, 2 + 300 - 200, 3 + 400 - 300]\nassert np.all(np.array(true_advantages) == np.array(batch.\n    calculate_advantages(r, v, final_value)))\nT = 1000\nr = np.random.rand(T)\nv = np.random.rand(T)\nfinal_value = np.random.rand()\nadvs = batch.calculate_advantages(r, v, final_value)\nfor t in range(T):\n    if t == T - 1:\n        adv = r[t] + final_value - v[t]\n    else:\n        adv = r[t] + v[t + 1] - v[t]\n    assert np.abs(adv - advs[t]) < 1e-10, (t, delta)\n"
+}

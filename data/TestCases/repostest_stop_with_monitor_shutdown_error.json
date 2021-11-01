@@ -1,0 +1,9 @@
+{
+    "functionName": "test_stop_with_monitor_shutdown_error",
+    "className": "TestKmipServer",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_server.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the right calls and log messages are triggered when stopping\n        the server results in an error while shutting down the policy monitor.\n        \"\"\"\ns = server.KmipServer(hostname='127.0.0.1', port=5696, config_path=None,\n    policy_path=None)\ns._logger = mock.MagicMock()\ns._socket = mock.MagicMock()\ns.policy_monitor = mock.MagicMock()\ntest_exception = Exception()\ns.policy_monitor.join.side_effect = test_exception\nthread_mock = mock.MagicMock()\nthread_mock.join = mock.MagicMock()\nthread_mock.is_alive = mock.MagicMock(return_value=False)\nthread_mock.name = 'TestThread'\nregex = 'Server failed to clean up the policy monitor.'\nself.assertRaisesRegex(exceptions.ShutdownError, regex, s.stop)\ns._logger.info.assert_any_call('Cleaning up remaining connection threads.')\ns._logger.info.assert_any_call('Shutting down server socket handler.')\ns._socket.shutdown.assert_called_once_with(socket.SHUT_RDWR)\ns._socket.close.assert_called_once_with()\ns.policy_monitor.stop.assert_called_once_with()\ns.policy_monitor.join.assert_called_once_with()\ns._logger.exception(test_exception)\nmock.patch('kmip.services.server.engine.KmipEngine')mock.patch('kmip.services.server.server.KmipServer._setup_logging')"
+}

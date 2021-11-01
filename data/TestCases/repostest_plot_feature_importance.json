@@ -1,0 +1,9 @@
+{
+    "functionName": "test_plot_feature_importance",
+    "className": null,
+    "fileName": "/tvdboom_&_ATOM/tests_&_test_plots.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Assert that the plot_feature_importance method work as intended.\"\"\"\ntrainer = TrainerRegressor(['ols', 'ridge'], metric='r2')\npytest.raises(NotFittedError, trainer.plot_feature_importance)\ntrainer.run(reg_train, reg_test)\npytest.raises(PermissionError, trainer.ols.plot_feature_importance)\ntrainer = TrainerRegressor(['Bag', 'lgb'], metric='r2')\ntrainer.run(reg_train, reg_test)\npytest.raises(ValueError, trainer.plot_feature_importance, show=0)\ntrainer.plot_feature_importance(filename=FILE_DIR + 'f1', display=False)\ntrainer.bag.plot_feature_importance(filename=FILE_DIR + 'f2', display=False)\nassert glob.glob(FILE_DIR + 'f1.png')\nassert glob.glob(FILE_DIR + 'f2.png')\natom = ATOMClassifier(X_class, y_class, random_state=1)\natom.run('tree', metric='f1_micro')\natom.plot_feature_importance(filename=FILE_DIR + 'f3', display=False)\natom.tree.plot_feature_importance(filename=FILE_DIR + 'f4', display=False)\nassert glob.glob(FILE_DIR + 'f2.png')\nassert glob.glob(FILE_DIR + 'f4.png')\n"
+}

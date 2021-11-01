@@ -1,0 +1,9 @@
+{
+    "functionName": "test_log_write",
+    "className": null,
+    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_msgs.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "outfil = 'tst.log'\nmsgs = pypmsgs.Messages(outfil, verbosity=1)\nmsgs.close()\nwith open(outfil, 'r') as f:\n    lines = f.readlines()\npckgs = ['scipy', 'numpy', 'astropy']\nflgs = [False] * len(pckgs)\nfor line in lines:\n    for jj, pckg in enumerate(pckgs):\n        if pckg in line:\n            flgs[jj] = True\nfor flg in flgs:\n    assert flg is True\n"
+}

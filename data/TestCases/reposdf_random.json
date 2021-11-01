@@ -1,0 +1,9 @@
+{
+    "functionName": "df_random",
+    "className": null,
+    "fileName": "/kitware_&_BroThon/zat_&_data_generator.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Generate a dataframe with random data. This is a general method\n       to easily generate a random dataframe, for more control of the\n       random 'distributions' use the column methods (df_numeric_column, df_categorical_column)\n       For other distributions you can use numpy methods directly (see example at bottom of this file)\n        Args:\n            num_numeric (int): The number of numeric columns (default = 3)\n            num_categorical (int): The number of categorical columns (default = 3)\n            num_rows (int): The number of rows to generate  (default = 100)\n    \"\"\"\ndf = pd.DataFrame()\ncolumn_names = string.ascii_lowercase\nfor name in column_names[:num_numeric]:\n    df[name] = df_numeric_column(num_rows=num_rows)\nfor name in column_names[num_numeric:num_numeric + num_categorical]:\n    df[name] = df_categorical_column(['foo', 'bar', 'baz'], num_rows=num_rows)\nreturn df\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_scpi_multimeter_resolution",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_generic_scpi_&_test_scpi_multimeter.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with expected_protocol(ik.generic_scpi.SCPIMultimeter, ['CONF?', 'CONF?',\n    'CONF?', 'CONF:FRES +1.000000E+01,MIN', 'CONF?',\n    'CONF:CURR:DC +1.000000E+01,3e-06'], [\n    'VOLT +1.000000E+01,+3.000000E-06', 'VOLT +1.000000E+01,MAX',\n    'FRES +1.000000E+01,+3.000000E-06', 'CURR:DC +1.000000E+01,+3.000000E-06']\n    ) as dmm:\n    assert dmm.resolution == 3e-06\n    assert dmm.resolution == dmm.Resolution.maximum\n    dmm.resolution = dmm.Resolution.minimum\n    dmm.resolution = 3e-06\n"
+}

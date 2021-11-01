@@ -1,0 +1,9 @@
+{
+    "functionName": "test_html_renderer",
+    "className": "TestMMVHTMLRenderer",
+    "fileName": "/Axiologue_&_DjangoRestMultipleModels/tests_&_test_html_renderer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Testing bug in which results dict failed to be passed into template context\n        \"\"\"\nclient = APIClient()\nresponse = client.get('/template', format='html')\nself.assertEqual(response.status_code, status.HTTP_200_OK)\nself.assertIn('data', response.data)\nself.assertContains(response, 'Tragedy')\nself.assertContains(response, '<html>')\nself.assertContains(response, 'decrepit')\nresponse = client.get('/template?format=json')\nself.assertEqual(response.status_code, status.HTTP_200_OK)\nself.assertNotIn('data', response.data)\nself.assertNotIn('<html>', response)\n"
+}

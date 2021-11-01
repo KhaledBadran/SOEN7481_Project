@@ -1,0 +1,9 @@
+{
+    "functionName": "test_srsdg645_output_offset",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_srs_&_test_srsdg645.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    SRSDG645: Checks getting/setting unitful output offset.\n    \"\"\"\nwith expected_protocol(ik.srs.SRSDG645, ['LOFF? 1', 'LOFF 1,2.0'], ['1.2']\n    ) as ddg:\n    unit_eq(ddg.output['AB'].level_offset, u.Quantity(1.2, 'V'))\n    ddg.output['AB'].level_offset = 2.0\n"
+}

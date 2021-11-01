@@ -1,0 +1,9 @@
+{
+    "functionName": "test_find_endpoint_by_content",
+    "className": null,
+    "fileName": "/PlaidWeb_&_Authl/tests_&_handlers_&_test_indieauth.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "links = {'authorization_endpoint': {'url': 'http://link_endpoint'}}\nrel_content = BeautifulSoup('<link rel=\"authorization_endpoint\" href=\"foo\">',\n    'html.parser')\nabs_content = BeautifulSoup(\n    '<link rel=\"authorization_endpoint\" href=\"http://foo/\">', 'html.parser')\nassert indieauth.find_endpoint('http://example', links=links\n    ) == 'http://link_endpoint'\nassert indieauth.find_endpoint('http://example', content=rel_content\n    ) == 'http://example/foo'\nassert indieauth.find_endpoint('http://example', content=abs_content\n    ) == 'http://foo/'\nassert indieauth.find_endpoint('http://example', links=links, content=\n    rel_content) == 'http://link_endpoint'\nassert not requests_mock.called\n"
+}

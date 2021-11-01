@@ -1,0 +1,9 @@
+{
+    "functionName": "test_derive_key_invalid_hash_algorithm",
+    "className": "TestCryptographyEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_crypto_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the right error is raised when an invalid hash algorithm is\n        provided for key derivation.\n        \"\"\"\nengine = crypto.CryptographyEngine()\nargs = enums.DerivationMethod.HASH, 16\nkwargs = {'hash_algorithm': 'invalid'}\nself.assertRaisesRegex(exceptions.InvalidField,\n    \"Hash algorithm 'invalid' is not a supported hashing algorithm.\",\n    engine.derive_key, *args, **kwargs)\n"
+}

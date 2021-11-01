@@ -1,0 +1,9 @@
+{
+    "functionName": "test_peakfind",
+    "className": null,
+    "fileName": "/CCampJr_&_CRIkit2/crikit_&_measurement_&_tests_&_test_peakfind.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "x = np.linspace(0, 100, 1000)\nA = np.array([80, 100])\nOmega = np.array([30, 50])\nSigma = np.array([3, 4])\ny = np.zeros(x.shape)\nfor a, o, s in zip(A, Omega, Sigma):\n    y += a * np.exp(-(x - o) ** 2 / (2 * s ** 2))\nnoise_sigma = 0.001\nnoise = noise_sigma * np.random.randn(*x.shape)\ny_noisy = y + noise\npkfind = PeakFinder(noise_sigma=noise_sigma, cwt_width=50, n_noise_tests=\n    1000, cutoff_d1=None, cutoff_d2=None, verbose=False)\nprint(\"\"\"\n====================================\n\"\"\")\npkfind.calculate(y, x=x, recalc_cutoff=True, method='fft')\nassert_allclose(np.array(Omega), pkfind.centers, rtol=0.01)\nassert_allclose(np.array(A), pkfind.amps, rtol=0.01)\nassert_allclose(np.array(Sigma), pkfind.sigmas, rtol=0.1)\nassert_allclose(np.array([False, False]), pkfind.shoulder)\nprint(\"\"\"\nActual Center: {}\"\"\".format(Omega))\nprint('Calculated Centers: {}\\n'.format(['{:.2f}'.format(x) for x in pkfind\n    .centers]))\nprint(\"\"\"\nActual Amplitudes: {}\"\"\".format(A))\nprint('Calculated Amplitudes: {}\\n'.format(['{:.2f}'.format(x) for x in\n    pkfind.amps]))\nprint(\"\"\"\nActual Widths: {}\"\"\".format(Sigma))\nprint('Calculated Widths: {}\\n'.format(['{:.2f}'.format(x) for x in pkfind.\n    sigmas]))\nprint('Is Shoulder: {}\\n'.format(pkfind.shoulder))\n"
+}

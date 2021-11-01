@@ -1,0 +1,9 @@
+{
+    "functionName": "openDB",
+    "className": null,
+    "fileName": "/FaradayRF_&_Faraday-Software/faraday_&_telemetry.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Open telemetry database and return a SQLite3 connection\n\n    :return: SQLite connection\n    \"\"\"\ntry:\n    dbFilename = telemetryConfig.get('DATABASE', 'FILENAME')\n    dbPath = os.path.join(faradayHelper.userPath, 'lib', dbFilename)\n    dbFilename = os.path.join(dbPath)\nexcept ConfigParser.Error as e:\n    logger.error('ConfigParse.Error: ' + str(e))\ntry:\n    conn = sqlite3.connect(dbFilename)\n    conn.execute('PRAGMA journal_mode=WAL;')\n    conn.commit()\nexcept sqlite3.Error as e:\n    logger.error('Sqlite3.error: ' + str(e))\n    conn.close()\nreturn conn\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_df_creation_after_dict",
+    "className": null,
+    "fileName": "/nickpowersys_&_CaaR/tests_&_test_caar.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "clean_dict = ct.dict_from_file(data_file, cycle=cycle, states=states,\n    sensors_file=sensors, postal_file=postal, auto=auto)\nassert isinstance(clean_dict, dict)\nassert len(clean_dict) > 0\nkwargs = {}\nif id_type is not None:\n    kwargs[id_type] = ids\ndf = df_creation_func(clean_dict, **kwargs)\nassert isinstance(df, pd.DataFrame)\npytest.mark.parametrize(\n    'data_file, states, sensors, postal, cycle, auto, df_creation_func, id_type, ids'\n    , [(TEST_CYCLES_FILE, STATE, TEST_SENSORS_FILE, TEST_POSTAL_FILE,\n    CYCLE_TYPE_COOL, 'cycles', hi.create_cycles_df, 'device_ids', [\n    SENSOR_ID1]), (TEST_CYCLES_FILE, None, None, None, CYCLE_TYPE_COOL,\n    'cycles', hi.create_cycles_df, None, None), (TEST_SENSOR_OBS_FILE,\n    STATE, TEST_SENSORS_FILE, TEST_POSTAL_FILE, None, 'sensors', hi.\n    create_sensors_df, 'sensor_ids', [SENSOR_ID1]), (TEST_SENSOR_OBS_FILE,\n    None, None, None, None, 'sensors', hi.create_sensors_df, None, None), (\n    TEST_GEOSPATIAL_OBS_FILE, STATE, TEST_SENSORS_FILE, TEST_POSTAL_FILE,\n    None, 'geospatial', hi.create_geospatial_df, 'location_ids', [\n    LOCATION_ID1]), (TEST_GEOSPATIAL_OBS_FILE, None, None, None, None,\n    'geospatial', hi.create_geospatial_df, None, None)])"
+}

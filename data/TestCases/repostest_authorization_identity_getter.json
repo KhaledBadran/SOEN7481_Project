@@ -1,0 +1,9 @@
+{
+    "functionName": "test_authorization_identity_getter",
+    "className": null,
+    "fileName": "/RobertoPrevato_&_GuardPost/tests_&_test_sync_authorization.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class UserNameRequirement(Requirement):\n\n    def __init__(self, expected_name: str):\n        self.expected_name = expected_name\n\n    def handle(self, context: AuthorizationContext):\n        assert context.identity is not None\n        if context.identity.has_claim_value('name', self.expected_name):\n            context.succeed(self)\nauth = get_strategy([Policy('user', UserNameRequirement('Tybek'))],\n    request_identity_getter)\n@auth(policy='user')\ndef some_method(request: Request):\n    assert request is not None\n    return True\nvalue = some_method(Request(None, User({'name': 'Tybek'})))\nassert value is True\n"
+}

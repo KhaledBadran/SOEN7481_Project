@@ -1,0 +1,9 @@
+{
+    "functionName": "issymmetric",
+    "className": null,
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_topotools_&_topotools.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    A method to check if a square matrix is symmetric\n    Returns ``True`` if the sparse adjacency matrix is symmetric\n    \"\"\"\nif am.shape[0] != am.shape[1]:\n    logger.warning('Matrix is not square, symmetrical is irrelevant')\n    return False\nif am.format != 'coo':\n    am = am.tocoo(copy=False)\nif istril(am) or istriu(am):\n    return False\nsym = (am != am.T).size == 0\nreturn sym\n"
+}

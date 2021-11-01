@@ -1,0 +1,9 @@
+{
+    "functionName": "test_we_handle_errors_from_bugzilla_when_updating_a_bug",
+    "className": null,
+    "fileName": "/AutomatedTester_&_Bugsy/tests_&_test_bugsy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "responses.add(responses.GET, 'https://bugzilla.mozilla.org/rest/login',\n    body='{\"token\": \"foobar\"}', status=200, content_type='application/json',\n    match_querystring=True)\nresponses.add(responses.PUT,\n    'https://bugzilla.mozilla.org/rest/bug/1017315', body=\n    '{\"error\":true,\"code\":50,\"message\":\"You must select/enter a component.\"}',\n    status=400, content_type='application/json')\nbugzilla = Bugsy('foo', 'bar')\nbug_dict = bug_return.copy()\nbug_dict['summary'] = 'I love foo but hate bar'\nbug = Bug(**bug_dict['bugs'][0])\ntry:\n    bugzilla.put(bug)\nexcept BugsyException as e:\n    assert str(e) == 'Message: You must select/enter a component. Code: 50'\nresponses.activate"
+}

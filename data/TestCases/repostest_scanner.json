@@ -1,0 +1,9 @@
+{
+    "functionName": "test_scanner",
+    "className": null,
+    "fileName": "/michalfilippi_&_PreviewGen/tests_&_scanner_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "source_structure = ['img_1.jpg', 'img_2.jpg', 'img_3.jpg',\n    'sub_1/img_1_1.jpg', 'sub_1/img_1_2.jpg', 'sub_1/img_1_3.jpg',\n    'sub_2/sub_3/img_2_3_1.jpg', 'sub_2/sub_3/img_2_3_4.jpg',\n    'sub_2/sub_3/img_2_3_5.jpg', 'sub_2/sub_3/img_2_3_6.jpg',\n    'sub_3/.hidden/img_1.jpg', '.hidden/img_1.jpg']\ndestination_structure = ['img_3.jpg', 'sub_1/img_1_1.jpg']\nsource_dir, destination_dir = prepare_structure(tmpdir, source_structure,\n    destination_structure)\nscanner.logger.setLevel('DEBUG')\ns = scanner.Scanner(source_dir, destination_dir, False)\nsource_images = s._scan_source()\nassert len(source_images) == len(source_structure)\nrelative_paths = s._relative_paths(source_images)\nassert {str(p) for p in relative_paths} == set(source_structure)\nrelative_without_hidden = s._ignore_hidden(relative_paths)\nassert len(relative_without_hidden) == len(source_structure) - 2\npairs = s._pair_files(relative_without_hidden)\nfiltered_paths = s._filter_existing(pairs)\nassert len(filtered_paths) == len(relative_without_hidden) - len(\n    destination_structure)\nassert len(s.run()) == len(source_structure) - len(destination_structure)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_change_gen_voltage_set_points",
+    "className": "ChangeParametersMultipleElementFlatInputTestCase",
+    "fileName": "/mzy2240_&_ESA/tests_&_test_saw.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Set all generator voltages to 1, and ensure the command\n        sticks.\n        \"\"\"\nvalue_list = self.gen_v_pu.to_numpy().tolist()\nfor v in value_list:\n    v[-1] = 1.0\nnum_objects = len(value_list)\nflattened_value_list = [val for sublist in value_list for val in sublist]\nself.assertIsNone(saw_14.ChangeParametersMultipleElementFlatInput(\n    ObjectType='gen', ParamList=self.params, NoOfObjects=num_objects,\n    ValueList=flattened_value_list))\ngen_v = saw_14.GetParametersMultipleElement(ObjectType='gen', ParamList=\n    self.params)\ntry:\n    pd.testing.assert_frame_equal(gen_v, self.gen_v_pu)\nexcept AssertionError:\n    pass\nelse:\n    self.fail('DataFrames are equal, but they should not be.')\nactual = pd.to_numeric(gen_v['GenVoltSet']).to_numpy()\nexpected = np.array([1.0] * actual.shape[0])\nnp.testing.assert_array_equal(actual, expected)\n"
+}

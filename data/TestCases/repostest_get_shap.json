@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_shap",
+    "className": "TestShapHandler",
+    "fileName": "/univieCUBE_&_phenotrex/tests_&_test_shap_handler.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Get ShapHandler and SHAP data from classifier and genotype file.\n\n        :param trait_name:\n        :param classifier_type:\n        :return:\n        \"\"\"\nfull_path_genotype = FLAT_PATH / trait_name / f'{trait_name}.genotype'\nfull_path_phenotype = FLAT_PATH / trait_name / f'{trait_name}.phenotype'\ntraining_records, genotype, phenotype, group = load_training_files(\n    genotype_file=full_path_genotype, phenotype_file=full_path_phenotype,\n    verb=True)\ntr = training_records[:3]\nmodel_path = (MODELS_PATH / trait_name /\n    f'{trait_name}.{classifier_type.lower()}.pkl')\nclf = load_classifier(model_path, verb=True)\nsh = ShapHandler.from_clf(clf)\nfs, sv, bv = clf.get_shap(tr, n_samples=50)\nreturn tr, sh, fs, sv, bv\npytest.mark.parametrize('trait_name', trait_names, ids=trait_names)pytest.mark.parametrize('classifier_type', classifier_ids, ids=classifier_ids)"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_compare_table",
+    "className": "TestMergesRNA",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_merge_sRNA.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ms.replicate_comparison = Mock_func().mock_replicate_comparison\nwigs = {'aaa': {'frag_1': {'track_1|+|frag': [100, 30, 23, 21, 21]}}}\ntables = [{'strain': 'aaa', 'name': 'sRNA_1', 'start': 3, 'end': 4,\n    'strand': '+', 'libs': 'track_1', 'detect': 'True', 'avg': 30, 'high': \n    100, 'low': 20, 'detail': 'detail'}]\nsrna_dict = {'seq_id': 'aaa', 'source': 'Refseq', 'feature': 'sRNA',\n    'start': 3, 'end': 4, 'phase': '.', 'strand': '+', 'score': '.'}\nattributes_srna = {'ID': 'sRNA0', 'Name': 'srna_0', 'sRNA_type': '3utr',\n    'with_TSS': 'TSS_1', 'start_cleavage': 'cleavage3', 'end_cleavage':\n    'cleavage10', 'overlap_cds': 'CDS1', 'overlap_percent': '0.01415'}\nsrna = Create_generator(srna_dict, attributes_srna, 'gff')\ntss_dict = {'seq_id': 'aaa', 'source': 'Refseq', 'feature': 'TSS', 'start':\n    3, 'end': 3, 'phase': '.', 'strand': '+', 'score': '.'}\nattributes_tss = {'ID': 'tss0', 'Name': 'TSS_0', 'type': 'Orphan'}\ntss = Create_generator(tss_dict, attributes_tss, 'gff')\nout = StringIO()\ncutoff_tex = [0, 0, 0, 50, 20]\ncutoff_notex = [0, 0, 0, 30, 10]\ncutoff_frag = [400, 200, 0, 50, 30]\ngen_file('tmp_median', 'aaa\\t3utr\\ttrack_1\\t10')\nargs = self.mock_args.mock()\nargs.replicates = replicates = {'tex': 1, 'frag': 1}\nargs.texs = texs = {'track_tex_track_notex': 0}\nargs.out_folder = os.getcwd()\nargs.table_best = True\nargs.tex_notex = 2\nms.compare_table(srna, tables, 'utr', wigs, wigs, texs, out, [tss], args)\nself.assertEqual(out.getvalue(),\n    \"\"\"aaa\tsrna_0\t3\t4\t+\tfrag_1\t1\tTSS_1;cleavage3\tcleavage10\t22.0\ttrack_1(22.0)\tCDS1\t0.01415\n\"\"\"\n    )\nos.remove('tmp_median')\n"
+}

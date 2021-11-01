@@ -1,0 +1,9 @@
+{
+    "functionName": "generate_file",
+    "className": null,
+    "fileName": "/kenfar_&_DataGristle/scripts_&_tests_&_test_gristle_dir_merger.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "filedesc, fqfn = tempfile.mkstemp(prefix='test_md5_', dir=temp_dir)\nfileobj = os.fdopen(filedesc, 'w')\nfor _ in range(records):\n    fileobj.write('blahblahblahfidoblahblah\\n')\nfileobj.close()\ncmd = 'md5sum %s' % fqfn\nrunner = envoy.run(cmd)\nassert runner.status_code == 0, 'generate_file md5sum failed'\nmd5sum, _ = runner.std_out.split()\nreturn fqfn, md5sum\n"
+}

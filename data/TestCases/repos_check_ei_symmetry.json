@@ -1,0 +1,9 @@
+{
+    "functionName": "_check_ei_symmetry",
+    "className": "TestExpectedImprovement",
+    "fileName": "/Yelp_&_MOE/moe_&_tests_&_optimal_learning_&_python_&_python_version_&_expected_improvement_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Compute ei at each ``[point_to_sample +/- shift for shift in shifts]`` and check for equality.\n\n        :param ei_eval: properly configured ExpectedImprovementEvaluator object\n        :type ei_eval: ExpectedImprovementInterface subclass\n        :param point_to_sample: point at which to center the shifts\n        :type point_to_sample: array of float64 with shape (1, )\n        :param shifts: shifts to use in the symmetry check\n        :type shifts: tuple of float64\n        :return: None; assertions fail if test conditions are not met\n\n        \"\"\"\n__tracebackhide__ = True\nfor shift in shifts:\n    ei_eval.current_point = point_to_sample - shift\n    left_ei = ei_eval.compute_expected_improvement()\n    left_grad_ei = ei_eval.compute_grad_expected_improvement()\n    ei_eval.current_point = point_to_sample + shift\n    right_ei = ei_eval.compute_expected_improvement()\n    right_grad_ei = ei_eval.compute_grad_expected_improvement()\n    cls.assert_scalar_within_relative(left_ei, right_ei, 0.0)\n    cls.assert_vector_within_relative(left_grad_ei, -right_grad_ei, 0.0)\nclassmethod"
+}

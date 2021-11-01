@@ -1,0 +1,9 @@
+{
+    "functionName": "test_q_sqrt_constraints",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_test_kullback_leiblers.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Test that sending in an unconstrained q_sqrt returns the same conditional\n    evaluation and gradients. This is important to match the behaviour of the KL, which\n    enforces q_sqrt is triangular.\n    \"\"\"\ntril = np.tril(rng.randn(Ln, Nn, Nn))\nq_sqrt_constrained = Parameter(tril, transform=triangular())\nq_sqrt_unconstrained = Parameter(tril)\ndiff_before_gradient_step = (q_sqrt_constrained - q_sqrt_unconstrained).numpy()\nassert_allclose(diff_before_gradient_step, 0)\nkls = []\nfor q_sqrt in [q_sqrt_constrained, q_sqrt_unconstrained]:\n    with tf.GradientTape() as tape:\n        kl = prior_kl(inducing_points, kernel, mu, q_sqrt, whiten=white)\n    grad = tape.gradient(kl, q_sqrt.unconstrained_variable)\n    q_sqrt.unconstrained_variable.assign_sub(grad)\n    kls.append(kl)\ndiff_kls_before_gradient_step = kls[0] - kls[1]\nassert_allclose(diff_kls_before_gradient_step, 0)\ndiff_after_gradient_step = (q_sqrt_constrained - q_sqrt_unconstrained).numpy()\nassert_allclose(diff_after_gradient_step, 0)\npytest.mark.parametrize('white', [True, False])"
+}

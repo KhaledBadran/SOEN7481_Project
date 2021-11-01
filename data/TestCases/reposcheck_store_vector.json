@@ -1,0 +1,9 @@
+{
+    "functionName": "check_store_vector",
+    "className": "StorageTest",
+    "fileName": "/pixelogik_&_NearPy/tests_&_storage_tests.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "bucket_key = '23749283743928748'\nx_data = ['one', 'two', 'three']\nself.storage.store_vector('testHash', bucket_key, x, x_data)\nbucket = self.storage.get_bucket('testHash', bucket_key)\nself.assertEqual(len(bucket), 1)\ny, y_data = bucket[0]\nself.assertEqual(type(y), type(x))\nself.assertEqual(y.shape, x.shape)\nself.assertEqual(max(abs(y - x)), 0)\nself.assertEqual(y_data, x_data)\nself.storage.clean_all_buckets()\nself.assertEqual(self.storage.get_bucket('testHash', bucket_key), [])\n"
+}

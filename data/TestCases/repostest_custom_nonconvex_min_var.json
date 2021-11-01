@@ -1,0 +1,9 @@
+{
+    "functionName": "test_custom_nonconvex_min_var",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_custom_objectives.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ef = setup_efficient_frontier()\nef.min_volatility()\noriginal_vol = ef.portfolio_performance()[1]\nef = setup_efficient_frontier()\nef.nonconvex_objective(objective_functions.portfolio_variance,\n    objective_args=ef.cov_matrix)\ncustom_vol = ef.portfolio_performance()[1]\nnp.testing.assert_almost_equal(custom_vol, original_vol, decimal=5)\nassert original_vol < custom_vol\n"
+}

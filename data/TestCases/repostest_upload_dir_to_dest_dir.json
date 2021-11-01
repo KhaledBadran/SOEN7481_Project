@@ -1,0 +1,9 @@
+{
+    "functionName": "test_upload_dir_to_dest_dir",
+    "className": null,
+    "fileName": "/lowandrew_&_KubeJobSub/tests_&_test_azurebatch.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "azurebatch = parse_configuration_file('tests/valid_credentials.txt')\nazurebatch.input = {'': ['tests/test_files newdir']}\nazurebatch.job_name = 'pytest-4'\nresource_files = azurebatch.upload_input_to_blob_storage(input_id='')\nblob_client = BlockBlobService(account_name=azurebatch.storage_account_name,\n    account_key=azurebatch.storage_account_key)\ngenerator = blob_client.list_blobs(container_name=azurebatch.job_name +\n    '-input')\nblob_files = list()\nfor blob in generator:\n    blob_files.append(blob.name)\nassert len(blob_files) == 2\nresource_file_paths = list()\nfor resource_file in resource_files:\n    resource_file_paths.append(resource_file.file_path)\nassert 'newdir/test_files/file_1.txt' in resource_file_paths and 'newdir/test_files/file_2.txt' in resource_file_paths\nassert len(resource_files) == 2\nblob_client.delete_container(container_name=azurebatch.job_name + '-input')\n"
+}

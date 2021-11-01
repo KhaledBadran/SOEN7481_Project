@@ -1,0 +1,9 @@
+{
+    "functionName": "test_hyperparams_repository_should_save_success_trial",
+    "className": null,
+    "fileName": "/Neuraxio_&_Neuraxle/testing_&_metaopt_&_test_hyperparams_repository.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "hyperparams_json_repository = HyperparamsJSONRepository(tmpdir)\nhyperparams = HyperparameterSamples(HYPERPARAMS)\nhyperparams_json_repository._save_successful_trial_json(hyperparams,\n    FIRST_SCORE_FOR_TRIAL)\ntrial_hash = hyperparams_json_repository._get_trial_hash(hyperparams.\n    to_flat_as_dict_primitive())\nfile_name = str(float(FIRST_SCORE_FOR_TRIAL)).replace('.', ','\n    ) + '_' + trial_hash + '.json'\npath = os.path.join(tmpdir, file_name)\nwith open(path) as f:\n    trial_json = json.load(f)\nassert trial_json['hyperparams'] == hyperparams.to_flat_as_dict_primitive()\nassert trial_json['score'] == FIRST_SCORE_FOR_TRIAL\n"
+}

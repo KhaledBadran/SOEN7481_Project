@@ -1,0 +1,9 @@
+{
+    "functionName": "test_is_valid_date",
+    "className": "TestKmipEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that object date checking yields the correct results.\n        \"\"\"\ne = engine.KmipEngine()\ne._data_store = self.engine\ne._data_store_session_factory = self.session_factory\ne._data_session = e._data_store_session_factory()\ne._is_allowed_by_operation_policy = mock.Mock(return_value=True)\ne._logger = mock.MagicMock()\nself.assertTrue(e._is_valid_date(enums.AttributeType.INITIAL_DATE, \n    1563564520, None, None))\nself.assertTrue(e._is_valid_date(enums.AttributeType.INITIAL_DATE, \n    1563564520, None, 1563564521))\nself.assertTrue(e._is_valid_date(enums.AttributeType.INITIAL_DATE, \n    1563564520, 1563564519, 1563564521))\nself.assertTrue(e._is_valid_date(enums.AttributeType.INITIAL_DATE, \n    1563564520, 1563564520, None))\nself.assertFalse(e._is_valid_date(enums.AttributeType.INITIAL_DATE, \n    1563564520, 1563564519, None))\ne._logger.debug.assert_any_call(\n    \"Failed match: object's initial date (Fri Jul 19 19:28:40 2019) does not match the specified initial date (Fri Jul 19 19:28:39 2019).\"\n    )\ne._logger.reset_mock()\nself.assertFalse(e._is_valid_date(enums.AttributeType.INITIAL_DATE, \n    1563564519, 1563564520, 1563564521))\ne._logger.debug.assert_any_call(\n    \"Failed match: object's initial date (Fri Jul 19 19:28:39 2019) is less than the starting initial date (Fri Jul 19 19:28:40 2019).\"\n    )\ne._logger.reset_mock()\nself.assertFalse(e._is_valid_date(enums.AttributeType.INITIAL_DATE, \n    1563564521, 1563564519, 1563564520))\ne._logger.debug.assert_any_call(\n    \"Failed match: object's initial date (Fri Jul 19 19:28:41 2019) is greater than the ending initial date (Fri Jul 19 19:28:40 2019).\"\n    )\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ensure_correct_environment",
+    "className": null,
+    "fileName": "/bio-phys_&_MDBenchmark/mdbenchmark_&_tests_&_migrations_&_test_mds_to_dtr.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "mds_to_dtr.ensure_correct_environment()\nmonkeypatch.delattr('datreant.__version__')\nwith pytest.raises(SystemExit):\n    mds_to_dtr.ensure_correct_environment()\n    out, err = capsys.readouterr()\n    assert out == mds_to_dtr.MIGRATION_WARNING.format('datreant.core')\n"
+}

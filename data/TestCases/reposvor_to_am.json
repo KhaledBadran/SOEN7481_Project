@@ -1,0 +1,9 @@
+{
+    "functionName": "vor_to_am",
+    "className": null,
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_topotools_&_topotools.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Given a Voronoi tessellation object from Scipy's ``spatial`` module,\n    converts to a sparse adjacency matrix network representation in COO format.\n\n    Parameters\n    ----------\n    vor : Voronoi Tessellation object\n        This object is produced by ``scipy.spatial.Voronoi``\n\n    Returns\n    -------\n    A sparse adjacency matrix in COO format.  The network is undirected\n    and unweighted, so the adjacency matrix is upper-triangular and all the\n    weights are set to 1.\n\n    \"\"\"\nN = vor.vertices.shape[0]\nrc = [[], []]\nfor ij in vor.ridge_dict.keys():\n    row = vor.ridge_dict[ij].copy()\n    row.append(row[0])\n    rc[0].extend(row[:-1])\n    rc[1].extend(row[1:])\nrc = np.vstack(rc).T\nrc = np.sort(rc, axis=1)\nkeep = ~np.any(rc == -1, axis=1)\nrc = rc[keep]\ndata = np.ones_like(rc[:, (0)])\nM = N = np.amax(rc) + 1\nam = sprs.coo_matrix((data, (rc[:, (0)], rc[:, (1)])), shape=(M, N))\nam = sp.sparse.triu(A=am, k=1, format='csr')\nam = am.tocoo()\nreturn am\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_catlearn_nl",
+    "className": "TestNeighborList",
+    "fileName": "/SUNCAT-Center_&_CatLearn/test_&_test_neighborlist.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Function to test the ase wrapper.\"\"\"\ngadb = DataConnection('{}/data/gadb.db'.format(wkdir))\nall_cand = gadb.get_all_relaxed_candidates(use_extinct=False)\nnl1 = catlearn_neighborlist(all_cand[0], max_neighbor=1)\nself.assertEqual((len(all_cand[0]), len(all_cand[0])), np.shape(nl1))\nnl4 = catlearn_neighborlist(all_cand[0], max_neighbor=4)\nself.assertFalse(np.allclose(nl1, nl4))\nnl5 = catlearn_neighborlist(all_cand[0], max_neighbor=5)\nnlfull = catlearn_neighborlist(all_cand[0], max_neighbor='full')\nself.assertFalse(np.allclose(nl4, nl5))\nself.assertTrue(np.allclose(nl5, nlfull))\n"
+}

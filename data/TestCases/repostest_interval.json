@@ -1,0 +1,9 @@
+{
+    "functionName": "test_interval",
+    "className": null,
+    "fileName": "/wbap_&_BriCA1/tests_&_virtual_time_&_test_sync.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "agent = brica1.Agent()\nscheduler = brica1.VirtualTimeScheduler(agent)\nzero = np.zeros(3, dtype=np.short)\ndata = np.array([1, 2, 3], dtype=np.short)\nCompA = brica1.ConstantComponent()\nCompB = brica1.PipeComponent()\nCompC = brica1.NullComponent()\nModA = brica1.Module()\nModA.add_component('CompA', CompA)\nModA.add_component('CompB', CompB)\nModA.add_component('CompC', CompC)\nCompA.set_state('out', data)\nCompA.make_out_port('out', 3)\nCompB.make_in_port('in', 3)\nbrica1.connect((CompA, 'out'), (CompB, 'in'))\nCompB.make_out_port('out', 3)\nCompB.set_map('in', 'out')\nCompC.make_in_port('in', 3)\nbrica1.connect((CompB, 'out'), (CompC, 'in'))\nagent.add_submodule('ModA', ModA)\nscheduler.update()\na_out = zero\nb_in = zero\nb_out = zero\nc_in = zero\nassert (CompA.get_state('out') == data).all()\nassert CompA.get_state('out') is not data\ninterval = 100\nsteps = 0\nwhile True:\n    assert (CompA.get_out_port('out').buffer == a_out).all()\n    assert (CompB.get_in_port('in').buffer == b_in).all()\n    assert (CompB.get_out_port('out').buffer == b_out).all()\n    assert (CompC.get_in_port('in').buffer == c_in).all()\n    assert steps * interval == scheduler.current_time\n    time = scheduler.step(interval)\n    steps += 1\n    if time > 2000:\n        break\n    if time == 1000:\n        a_out = data\n    if time == 1000:\n        b_in = data\n    if time == 2000:\n        b_out = data\n    if time == 2000:\n        c_in = data\n"
+}

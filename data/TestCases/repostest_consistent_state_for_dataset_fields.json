@@ -1,0 +1,9 @@
+{
+    "functionName": "test_consistent_state_for_dataset_fields",
+    "className": "TestBasic",
+    "fileName": "/microsoft_&_LightGBM/tests_&_python_package_test_&_test_basic.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "def check_asserts(data):\n    np.testing.assert_allclose(data.label, data.get_label())\n    np.testing.assert_allclose(data.label, data.get_field('label'))\n    self.assertFalse(np.isnan(data.label[0]))\n    self.assertFalse(np.isinf(data.label[1]))\n    np.testing.assert_allclose(data.weight, data.get_weight())\n    np.testing.assert_allclose(data.weight, data.get_field('weight'))\n    self.assertFalse(np.isnan(data.weight[0]))\n    self.assertFalse(np.isinf(data.weight[1]))\n    np.testing.assert_allclose(data.init_score, data.get_init_score())\n    np.testing.assert_allclose(data.init_score, data.get_field('init_score'))\n    self.assertFalse(np.isnan(data.init_score[0]))\n    self.assertFalse(np.isinf(data.init_score[1]))\n    self.assertTrue(np.all(np.isclose([data.label[0], data.weight[0], data.\n        init_score[0]], data.label[0])))\n    self.assertAlmostEqual(data.label[1], data.weight[1])\n    self.assertListEqual(data.feature_name, data.get_feature_name())\nX, y = load_breast_cancer(return_X_y=True)\nsequence = np.ones(y.shape[0])\nsequence[0] = np.nan\nsequence[1] = np.inf\nfeature_names = ['f{0}'.format(i) for i in range(X.shape[1])]\nlgb_data = lgb.Dataset(X, sequence, weight=sequence, init_score=sequence,\n    feature_name=feature_names).construct()\ncheck_asserts(lgb_data)\nlgb_data = lgb.Dataset(X, y).construct()\nlgb_data.set_label(sequence)\nlgb_data.set_weight(sequence)\nlgb_data.set_init_score(sequence)\nlgb_data.set_feature_name(feature_names)\ncheck_asserts(lgb_data)\n"
+}

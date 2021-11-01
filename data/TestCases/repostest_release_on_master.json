@@ -1,0 +1,9 @@
+{
+    "functionName": "test_release_on_master",
+    "className": null,
+    "fileName": "/132nd-etcher_&_EPAB/test_&_test_cmd_&_test_release.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ctx = mock()\nrepo = mock()\nCTX.repo = repo\nwhen(CTX.repo).get_current_branch().thenReturn('master')\nwhen(epab.utils).get_next_version().thenReturn('next_version')\nexpect(ctx).invoke(epab.linters.lint)\nexpect(ctx).invoke(epab.cmd.pytest, long=True)\nexpect(elib_run).run(contains('python.exe setup.py bdist_wheel'))\nexpect(elib_run).run(f'twine upload dist/* --skip-existing', mute=True)\nconfig.PACKAGE_NAME.default = 'test'\nepab.cmd._release._release(ctx)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_counter_metric",
+    "className": null,
+    "fileName": "/michael-lazar_&_Akita/tests_&_test_metrics.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "metric = CounterMetric(window_size=2, n_windows=5)\nassert len(metric.history) == 5\nassert metric.total == 0\nassert metric.min is None\nassert metric.max is None\nmetric.flush(timestamp=0)\nassert metric.history == [0, 0, 0, 0, 0]\nmetric.add_point()\nmetric.flush(timestamp=2.1)\nassert metric.history == [1, 0, 0, 0, 0]\nmetric.add_point()\nmetric.flush(timestamp=3.4)\nassert metric.history == [1, 0, 0, 0, 0]\nmetric.flush(timestamp=4.9)\nassert metric.history == [1, 1, 0, 0, 0]\nmetric.flush(timestamp=6.0)\nassert metric.history == [0, 1, 1, 0, 0]\nmetric.add_point()\nmetric.add_point()\nmetric.add_point()\nmetric.flush(timestamp=12.3)\nassert metric.history == [0, 0, 3, 0, 1]\nassert metric.total == 4\nassert metric.min == 0\nassert metric.max == 3\n"
+}

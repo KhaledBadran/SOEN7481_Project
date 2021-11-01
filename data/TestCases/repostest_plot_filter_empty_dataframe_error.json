@@ -1,0 +1,9 @@
+{
+    "functionName": "test_plot_filter_empty_dataframe_error",
+    "className": null,
+    "fileName": "/bio-phys_&_MDBenchmark/mdbenchmark_&_tests_&_test_plot.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Assert that we exit when given an empty DataFrame through a specific filter combination.\n    \"\"\"\nwith tmpdir.as_cwd():\n    df = pd.read_csv(data['testcsv.csv'])\n    df = df[~df['gpu'] & (df['host'] == 'draco')]\n    with pytest.raises(SystemExit) as error:\n        plot.filter_dataframe_for_plotting(df=df, host_name=('draco',),\n            module_name=(), gpu=True, cpu=False)\n    expected_output = \"\"\"Plotting GPU data only.\nERROR Your filtering led to an empty dataset. Exiting.\n\"\"\"\n    out, err = capsys.readouterr()\n    assert out == expected_output\n    assert error.type == SystemExit\n    assert error.value.code == 1\n"
+}

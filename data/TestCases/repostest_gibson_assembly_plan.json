@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gibson_assembly_plan",
+    "className": null,
+    "fileName": "/Edinburgh-Genome-Foundry_&_DnaCauldron/tests_&_test_gibson_&_test_gibson.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "repository = dc.SequenceRepository()\nrepository.import_records(files=[sequences_fasta])\nassembly_plan = dc.AssemblyPlan.from_spreadsheet(assembly_class=dc.\n    GibsonAssembly, path=os.path.join(this_directory, 'gibson_plan.csv'))\nplan_simulation = assembly_plan.simulate(sequence_repository=repository)\nstats = plan_simulation.compute_stats()\nassert stats['valid_assemblies'] == 3\nassert stats['errored_assemblies'] == 2\nreport_writer = dc.AssemblyReportWriter(include_mix_graphs=True,\n    include_assembly_plots=True, show_overhangs_in_graph=True,\n    annotate_parts_homologies=True)\nplan_simulation.write_report(target='@memory', assembly_report_writer=\n    report_writer)\n"
+}

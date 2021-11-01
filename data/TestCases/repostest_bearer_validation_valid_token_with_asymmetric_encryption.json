@@ -1,0 +1,9 @@
+{
+    "functionName": "test_bearer_validation_valid_token_with_asymmetric_encryption",
+    "className": null,
+    "fileName": "/RobertoPrevato_&_GuardPost-JWT/tests_&_test_bearer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "key_id = '230498151c214b788dd97f22b85410a5'\nhandler = JWTBearerTest([issuer], [audience], [InMemoryKeyProvider({key_id:\n    private_rsa_1.public_key()})])\ntoken = jwt.encode({'iss': issuer, 'aud': audience, 'some': 'payload'},\n    private_rsa_1, algorithm=alg, headers={'kid': key_id})\nidentity = await handler.authenticate({'access_token': token.decode()})\nassert identity is not None\nassert isinstance(identity, Identity)\nassert identity['some'] == 'payload'\npytest.mark.parametrize('alg,issuer,audience', [['RS256', 'Hello', 'World'],\n    ['RS384', 'Hello', 'World'], ['RS512', 'Hello', 'World'], ['PS256',\n    'Hello', 'World'], ['PS384', 'Hello', 'World'], ['PS512', 'Hello',\n    'World']])pytest.mark.asyncio"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "_create_symmetric_key",
+    "className": "TestKMIPClientIntegration",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_integration_&_services_&_test_kmip_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "credential_type = CredentialType.USERNAME_AND_PASSWORD\ncredential_value = {'Username': 'Peter', 'Password': 'abc123'}\ncredential = self.cred_factory.create_credential(credential_type,\n    credential_value)\nobject_type = ObjectType.SYMMETRIC_KEY\nattribute_type = AttributeType.CRYPTOGRAPHIC_ALGORITHM\nalgorithm = self.attr_factory.create_attribute(attribute_type,\n    CryptoAlgorithmEnum.AES)\nmask_flags = [CryptographicUsageMask.ENCRYPT, CryptographicUsageMask.DECRYPT]\nattribute_type = AttributeType.CRYPTOGRAPHIC_USAGE_MASK\nusage_mask = self.attr_factory.create_attribute(attribute_type, mask_flags)\nattributes = [algorithm, usage_mask]\ntemplate_attribute = TemplateAttribute(attributes=attributes)\nreturn self.client.create(object_type, template_attribute, credential)\n"
+}

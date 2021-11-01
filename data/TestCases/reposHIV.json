@@ -1,0 +1,9 @@
+{
+    "functionName": "HIV",
+    "className": null,
+    "fileName": "/BYU-PRISM_&_GEKKO/e2e_&_hw_HIV_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "lkr = [3, np.log10(0.1), np.log10(2e-07), np.log10(0.5), np.log10(5), np.\n    log10(100)]\nm = GEKKO()\nm.time = np.linspace(0, 15, 61)\nlg10_kr = [m.FV(value=lkr[i]) for i in range(6)]\nkr = [m.Var() for i in range(6)]\nH = m.Var(value=1000000.0)\nI = m.Var(value=0)\nV = m.Var(value=100.0)\nLV = m.CV(value=2)\nm.Equations([(10 ** lg10_kr[i] == kr[i]) for i in range(6)])\nm.Equations([H.dt() == kr[0] - kr[1] * H - kr[2] * H * V, I.dt() == kr[2] *\n    H * V - kr[3] * I, V.dt() == -kr[2] * H * V - kr[4] * V + kr[5] * I, LV ==\n    m.log10(V)])\nm.options.IMODE = 5\nm.options.TIME_SHIFT = 0\nm.options.EV_TYPE = 2\nm.options.COLDSTART = 2\nm.options.SOLVER = 1\nm.options.MAX_ITER = 1000\nm.options.NODES = 2\nm.solve(disp=False)\nfor i in range(5):\n    lg10_kr[i].STATUS = 1\n    lg10_kr[i].DMAX = 2\n    lg10_kr[i].LOWER = -10\n    lg10_kr[i].UPPER = 10\ndata = np.genfromtxt('hiv_data.csv', delimiter=',')\nlog_v = data[:,][:, (1)]\nv = np.power(10, log_v)\nLV.FSTATUS = 1\nLV.STATUS = 1\nLV.value = log_v\nm.solve(disp=False)\nresults = [lg10_kr[i].value[-1] for i in range(5)]\nassert results == [5.0, -0.8378562, -6.798968, -0.3755447, 0.6999032]\n"
+}

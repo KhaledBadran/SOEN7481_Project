@@ -1,0 +1,9 @@
+{
+    "functionName": "test_message_invalid_response_write",
+    "className": "TestResponseMessage",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_test_messages.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "prot_ver = contents.ProtocolVersion(1, 1)\ntime_stamp = contents.TimeStamp(1459241917)\nbatch_count = contents.BatchCount(1)\nresp_hdr = messages.ResponseHeader(protocol_version=prot_ver, time_stamp=\n    time_stamp, batch_count=batch_count)\nresult_status = contents.ResultStatus(enums.ResultStatus.OPERATION_FAILED)\nresult_reason = contents.ResultReason(enums.ResultReason.INVALID_MESSAGE)\nresult_message = contents.ResultMessage(\n    'Default response. No operations supported.')\nbatch_item = messages.ResponseBatchItem(result_status=result_status,\n    result_reason=result_reason, result_message=result_message)\nresponse_message = messages.ResponseMessage(response_header=resp_hdr,\n    batch_items=[batch_item])\nresponse_message.write(self.stream)\nresult = self.stream.read()\nlen_exp = len(self.invalid_message_response)\nlen_rcv = len(result)\nself.assertEqual(len_exp, len_rcv, self.msg.format('response message',\n    'write', len_exp, len_rcv))\nmsg = 'Bad response message write: encoding mismatch'\nself.assertEqual(self.invalid_message_response, result, msg)\n"
+}

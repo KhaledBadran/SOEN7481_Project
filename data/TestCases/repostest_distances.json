@@ -1,0 +1,9 @@
+{
+    "functionName": "test_distances",
+    "className": null,
+    "fileName": "/Silmathoron_&_NNGT/testing_&_test_generation2.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Check that distances are properly generated for SpatialGraphs \"\"\"\nnum_nodes = 4\npos = [(0, 0), (1, 0), (2, 0), (3, 0)]\ng = nngt.SpatialGraph(num_nodes, positions=pos)\nedges = [(0, 1), (0, 3), (1, 2), (2, 3)]\ng.new_edges(edges)\ndist = g.edge_attributes['distance']\nexpected = np.abs(np.diff(g.edges_array, axis=1)).ravel()\nassert np.array_equal(dist, expected)\ng.new_node(positions=[(4, 0)])\ng.new_edge(1, 4)\nassert g.get_edge_attributes((1, 4), 'distance') == 3\ng = ng.distance_rule(2.5, rule='lin', nodes=num_nodes, avg_deg=2, positions=pos\n    )\ndist = g.edge_attributes['distance']\nexpected = np.abs(np.diff(g.edges_array, axis=1)).ravel()\nassert np.array_equal(dist, expected)\nassert np.all(dist < 3)\nnum_nodes = 20\npop = nngt.NeuralPop.exc_and_inhib(num_nodes)\npos = np.array([(i, 0) for i in range(num_nodes)])\nnet = nngt.SpatialNetwork(pop, positions=pos)\ninh = pop['inhibitory']\nexc = pop['excitatory']\nng.connect_groups(net, exc, pop, 'erdos_renyi', avg_deg=5)\nng.connect_groups(net, inh, pop, 'random_scale_free', in_exp=2.1, out_exp=\n    2.1, avg_deg=5)\ndist = net.edge_attributes['distance']\nexpected = np.abs(np.diff(net.edges_array, axis=1)).ravel()\nassert np.array_equal(dist, expected)\npytest.mark.mpi_skip"
+}

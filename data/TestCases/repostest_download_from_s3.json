@@ -1,0 +1,9 @@
+{
+    "functionName": "test_download_from_s3",
+    "className": null,
+    "fileName": "/capitalone_&_Data-Load-and-Copy-using-Python/tests_&_test_s3.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "s = locopy.S3()\ns.download_from_s3(S3_DEFAULT_BUCKET, LOCAL_TEST_FILE, LOCAL_TEST_FILE)\ns.s3.download_file.assert_called_with(S3_DEFAULT_BUCKET, LOCAL_TEST_FILE,\n    os.path.basename(LOCAL_TEST_FILE), Config=mock_config())\nmock_config.side_effect = Exception()\nwith pytest.raises(S3DownloadError):\n    s.download_from_s3(S3_DEFAULT_BUCKET, LOCAL_TEST_FILE, LOCAL_TEST_FILE)\nmock.patch('locopy.s3.TransferConfig')mock.patch('locopy.s3.Session')"
+}

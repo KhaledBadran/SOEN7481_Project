@@ -1,0 +1,9 @@
+{
+    "functionName": "test_verify_claim_set_failure_class_missing",
+    "className": "EasyJWTTest",
+    "fileName": "/BMeu_&_EasyJWT/tests_&_easyjwt_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n            Test verifying a claim set with a missing class claim.\n\n            Expected result: An `UnspecifiedClassError` error is raised.\n        \"\"\"\neasyjwt = EasyJWT(self.key)\nclaim_set = easyjwt._get_claim_set()\ndel claim_set['_easyjwt_class']\nwith self.assertRaises(UnspecifiedClassError):\n    easyjwt._verify_claim_set(claim_set)\n"
+}

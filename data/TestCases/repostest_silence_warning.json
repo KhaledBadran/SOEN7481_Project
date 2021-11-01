@@ -1,0 +1,9 @@
+{
+    "functionName": "test_silence_warning",
+    "className": "TestTestUtils",
+    "fileName": "/facebook_&_Ax/ax_&_utils_&_common_&_tests_&_test_testutils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "new_stderr = io.StringIO()\nold_err = sys.stderr\nwith self.assertRaises(AssertionError):\n    try:\n        sys.stderr = new_stderr\n        with self.silence_stderr():\n            print('A message', file=sys.stderr)\n            raise AssertionError()\n    finally:\n        sys.stderr = old_err\nself.assertTrue(new_stderr.getvalue().startswith('A message\\n'))\n"
+}

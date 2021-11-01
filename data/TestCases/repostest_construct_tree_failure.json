@@ -1,0 +1,9 @@
+{
+    "functionName": "test_construct_tree_failure",
+    "className": null,
+    "fileName": "/PearsonEducation_&_Alarmageddon/tests_&_publishing_&_test_junit.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "pub = JUnitPublisher('should_not_be_created.xml')\nv = Validation('low', priority=Priority.CRITICAL)\nfailure = Failure('bar', v, 'unable to transmogrify', time=30)\ntree = pub._construct_tree([failure]).getroot()\nassert tree.get('failures') == str(1)\nassert tree.get('tests') == str(1)\nassert float(tree.get('time')) == 30\nassert len(tree) == 1\nfor element in tree:\n    assert float(element.get('time')) == 30\n    for sub in element:\n        assert sub.text\n"
+}

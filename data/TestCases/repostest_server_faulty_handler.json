@@ -1,0 +1,9 @@
+{
+    "functionName": "test_server_faulty_handler",
+    "className": null,
+    "fileName": "/PRIArobotics_&_HedgehogServer/tests_&_test_server.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "async def handler_callback(server, ident, msg):\n    raise Exception\nasync with conn_req(handler_dict={io.Action: handler_callback}) as socket:\n    await assertReplyReq(socket, io.Action(0, io.INPUT_FLOATING), ack.\n        FAILED_COMMAND)\nrecords = [record for record in caplog.records if record.levelno >= logging\n    .WARNING]\nassert len(records\n    ) == 1 and 'Uncaught exception in command handler' in records[0].message\ncheck_caplog.expected.update(records)\npytest.mark.trio"
+}

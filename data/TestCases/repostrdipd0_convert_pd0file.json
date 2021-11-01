@@ -1,0 +1,9 @@
+{
+    "functionName": "trdipd0_convert_pd0file",
+    "className": null,
+    "fileName": "/mmartini-usgs_&_ADCPy/tests_&_test_TRDIpd02netcdf.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "import adcpy.TRDIstuff.TRDIpd0tonetcdf as TRDIpd0\nimport numpy as np\npd0_input_file = here.joinpath('../data/demo2/10631whV20784profilestiny.pd0')\nserial_number = '23857'\ndelta_t = '3600'\nnetcdf_output = here.joinpath('11121whV23857profiles.cdf')\ntime_type = 'CF'\nensembles_to_process = [0, np.inf]\nensemble_count, netcdf_index, read_error = TRDIpd0.convert_pd0_to_netcdf(\n    pd0_input_file, netcdf_output, ensembles_to_process, serial_number,\n    time_type, delta_t)\nprint(ensemble_count)\nreturn ensemble_count, netcdf_index, read_error\npytest.fixture"
+}

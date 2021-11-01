@@ -1,0 +1,9 @@
+{
+    "functionName": "test_by_hand",
+    "className": null,
+    "fileName": "/Edinburgh-Genome-Foundry_&_DnaFeaturesViewer/tests_&_test_basics.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test building a GraphicRecord \"by hand\" \"\"\"\nfeatures = [GraphicFeature(start=5, end=20, strand=+1, color='#ffd700',\n    label='Small feature'), GraphicFeature(start=20, end=500, strand=+1,\n    color='#ffcccc', label='Gene 1 with a very long name'), GraphicFeature(\n    start=400, end=700, strand=-1, color='#cffccc', label='Gene 2'),\n    GraphicFeature(start=600, end=900, strand=+1, color='#ccccff', label=\n    'Gene 3')]\nrecord = GraphicRecord(sequence_length=1000, features=features)\nrecord.plot(figure_width=5, with_ruler=False)\nax, _ = record.plot(figure_width=5)\ntarget_file = os.path.join(str(tmpdir), 'by_hand.png')\nax.figure.savefig(target_file)\ncircular_rec = CircularGraphicRecord(sequence_length=1000, features=features)\nax2, _ = circular_rec.plot(figure_width=4)\nax2.figure.tight_layout()\ntarget_file = os.path.join(str(tmpdir), 'by_hand_circular.png')\nax2.figure.savefig(target_file, bbox_inches='tight')\n"
+}

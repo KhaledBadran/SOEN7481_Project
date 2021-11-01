@@ -1,0 +1,9 @@
+{
+    "functionName": "test_setup_one_domain",
+    "className": "TestDomainDynDNS",
+    "fileName": "/Domain-Connect_&_DomainConnectDDNS-Python/dyndns_&_tests_&_test_dyndns.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self._setup_domain(self.host + self.domain)\nassert os.path.exists('settings.txt'), 'Settings file missing'\nwith open('settings.txt', 'r') as file:\n    context = json.load(file)\n    assert self.host + self.domain in context, 'Domain not found in settings'\n    config = context[self.host + self.domain]\n    assert len(config.keys()) == len(self.expected_settings_keys\n        ), 'Config size incorrect'\n    for key in self.expected_settings_keys:\n        assert key in config, 'Key `{}` not found.'.format(key)\nunittest.skipIf(not stdin.isatty(), 'Skipping interactive test.')"
+}

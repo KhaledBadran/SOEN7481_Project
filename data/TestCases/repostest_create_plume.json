@@ -1,0 +1,9 @@
+{
+    "functionName": "test_create_plume",
+    "className": null,
+    "fileName": "/raphaeldussin_&_DICRIVERS/dicrivers_&_test_&_test_geo_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"unit test\"\"\"\nfrom dicrivers.geo_utils import find_closest_ocean_cell_to_river_mouth\nfrom dicrivers.geo_utils import create_plume\nrivers = pd.read_csv(FIXTURE_DIR + '20major_rivers.csv')\nlon_grid, lat_grid = np.meshgrid(np.arange(-180, 180, 1), np.arange(-90, 90, 1)\n    )\nmask_grid = np.ones(lon_grid.shape)\nMississippi = rivers.loc[rivers['basinname'] == 'Mississippi']\nlon_miss = Mississippi['mouth_lon'].values\nlat_miss = Mississippi['mouth_lat'].values\njmouth, imouth = find_closest_ocean_cell_to_river_mouth(lon_miss, lat_miss,\n    lon_grid, lat_grid, mask_grid)\nrspread = 10\nnitermax = 1000\nplume = create_plume(imouth, jmouth, lon_grid, lat_grid, mask_grid, rspread\n    =rspread, nitermax=nitermax)\nassert isinstance(plume, np.ndarray)\nassert plume.sum() > 1\nassert plume.sum() < (2 * rspread + 1) ** 2 + 1\nreturn None\n"
+}

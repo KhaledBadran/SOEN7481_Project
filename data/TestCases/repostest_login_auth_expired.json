@@ -1,0 +1,9 @@
+{
+    "functionName": "test_login_auth_expired",
+    "className": "TestLogin",
+    "fileName": "/Keeper-Security_&_Commander/unit-tests_&_test_login.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "params = get_user_params()\ncall_no = 0\ndef return_auth_expired(context, rq):\n    nonlocal call_no\n    call_no += 1\n    rs = TestLogin.process_login_command(context, rq)\n    if call_no == 1:\n        rs['result'] = 'fail'\n        rs['result_code'] = 'auth_expired'\n        rs['message'] = 'Auth expired'\n    elif call_no == 2:\n        pass\n    else:\n        raise Exception()\n    return rs\nself.v2_execute_mock.side_effect = return_auth_expired\nwith mock.patch('keepercommander.api.change_master_password') as m_passwd:\n\n    def password_changed(params):\n        params.password = vault_env.password\n        return True\n    m_passwd.side_effect = password_changed\n    with self.assertLogs():\n        login(params)\n    m_passwd.assert_called()\nself.assertEqual(params.session_token, vault_env.session_token)\nself.assertEqual(params.data_key, vault_env.data_key)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_nbr_data_files_same_after_normalization_by_list_roi",
+    "className": "TestNormalization",
+    "fileName": "/ornlneutronimaging_&_NeuNorm/tests_&_NeuNorm_&_normalizing_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"assert the number of data files is the same after normalization by a list of ROI\"\"\"\nsamples_path = self.data_path + '/tif/sample/'\nob1 = self.data_path + '/tif/ob/ob001.tif'\nob2 = self.data_path + '/tif/ob/ob002.tif'\no_norm = Normalization()\no_norm.load(folder=samples_path, auto_gamma_filter=False)\no_norm.load(file=[ob1, ob2], data_type='ob', auto_gamma_filter=False)\n_roi1 = ROI(x0=0, y0=0, x1=2, y1=2)\n_roi2 = ROI(x0=1, y0=1, x1=3, y1=3)\n_list_roi = [_roi1, _roi2]\nnbr_data_before = len(o_norm.data['sample']['data'])\no_norm.normalization(roi=_list_roi)\nnbr_data_after = len(o_norm.data['sample']['data'])\nassert nbr_data_after == nbr_data_before\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "infer_bbox",
+    "className": null,
+    "fileName": "/AlexBdx_&_Heli/10_Executable_&_test_CNN.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "crop = bbox.nn_size_crop(frame, bbox_roi, NN_SIZE)\nrgb_crop = cv2.cvtColor(crop, cv2.COLOR_BGR2RGB)\npre_processed_crop, _, _ = transfer_learning.preprocess_image(crop, 1,\n    DTYPE_IMAGES)\nsingle_sample = np.expand_dims(pre_processed_crop, 0)\nprediction = model.predict(single_sample)[0][0]\nprediction = np.round(prediction).astype(np.uint8)\nreturn prediction, crop\n"
+}

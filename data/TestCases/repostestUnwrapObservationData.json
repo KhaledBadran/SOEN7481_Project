@@ -1,0 +1,9 @@
+{
+    "functionName": "testUnwrapObservationData",
+    "className": "BaseModelBridgeTest",
+    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_base_modelbridge.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "observation_data = [get_observation1().data, get_observation2().data]\nf, cov = unwrap_observation_data(observation_data)\nself.assertEqual(f['a'], [2.0, 2.0])\nself.assertEqual(f['b'], [4.0, 1.0])\nself.assertEqual(cov['a']['a'], [1.0, 2.0])\nself.assertEqual(cov['b']['b'], [4.0, 5.0])\nself.assertEqual(cov['a']['b'], [2.0, 3.0])\nself.assertEqual(cov['b']['a'], [3.0, 4.0])\nod3 = ObservationData(metric_names=['a'], means=np.array([2.0]), covariance\n    =np.array([[4.0]]))\nwith self.assertRaises(ValueError):\n    unwrap_observation_data(observation_data + [od3])\n"
+}

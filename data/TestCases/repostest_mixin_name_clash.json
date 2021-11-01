@@ -1,0 +1,9 @@
+{
+    "functionName": "test_mixin_name_clash",
+    "className": "StructTests",
+    "fileName": "/Gilnaa_&_Hydras/tests_&_test_struct.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class Header(Struct):\n    a = u8\nwith self.assertRaises(TypeError):\n\n\n    class BodyA(Struct):\n        a = u8\n        _hdr = Mixin(Header)\nwith self.assertRaises(TypeError):\n\n\n    class BodyB(Struct):\n        _hdr = Mixin(Header)\n        a = u8\nwith self.assertRaises(TypeError):\n\n\n    class BodyC(Struct):\n        b = u8\n        _hdr = Mixin(Header)\n        _hdr2 = Mixin(Header)\n"
+}

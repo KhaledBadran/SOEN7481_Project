@@ -1,0 +1,9 @@
+{
+    "functionName": "test_direct_load_aixACCT_leakage_data",
+    "className": null,
+    "fileName": "/JAnderson419_&_Ferro/tests_&_test_aixacct.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "RTlkgDir = join(sampledir, 'RTWhiteB_lkg')\nRTlkgFiles = hd.dir_read(RTlkgDir)\nlkglist = []\nfor i in RTlkgFiles:\n    l = hd.LeakageData(thickness=2.55e-05, area=0.0001)\n    l.lcm_read(i)\n    lkglist.append(l)\ndirectreaddict = aix.read_tfdata(join(sampledir, 'RTWHITEB_lkg.dat'))\ndirectlkgData = aix.load_tfdata(directreaddict)\nprint(all(elem in directlkgData for elem in lkglist))\nassert all(elem in directlkgData for elem in lkglist)\n"
+}

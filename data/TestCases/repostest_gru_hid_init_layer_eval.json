@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gru_hid_init_layer_eval",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_recurrent.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "n_units = 7\nn_test_cases = 2\nin_shp = n_test_cases, 2, 3\nin_h_shp = 1, n_units\nX_test = np.ones(in_shp, dtype=theano.config.floatX)\nXh_test = np.ones(in_h_shp, dtype=theano.config.floatX)\nXh_test_batch = np.tile(Xh_test, (n_test_cases, 1))\nl_inp = InputLayer(in_shp)\nl_inp_h = InputLayer(in_h_shp)\nl_rec_inp_layer = GRULayer(l_inp, n_units, hid_init=l_inp_h)\nl_rec_nparray = GRULayer(l_inp, n_units, hid_init=Xh_test)\nl_il_param = dict([(p.name, p) for p in l_rec_inp_layer.get_params()])\nl_rn_param = dict([(p.name, p) for p in l_rec_nparray.get_params()])\nfor k, v in l_rn_param.items():\n    if k in l_il_param:\n        v.set_value(l_il_param[k].get_value())\nX = T.tensor3()\nXh = T.matrix()\noutput_inp_layer = lasagne.layers.get_output(l_rec_inp_layer, {l_inp: X,\n    l_inp_h: Xh})\noutput_nparray = lasagne.layers.get_output(l_rec_nparray, {l_inp: X})\noutput_val_inp_layer = output_inp_layer.eval({X: X_test, Xh: Xh_test_batch})\noutput_val_nparray = output_nparray.eval({X: X_test})\nassert np.allclose(output_val_inp_layer, output_val_nparray)\n"
+}

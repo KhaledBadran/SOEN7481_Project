@@ -1,0 +1,9 @@
+{
+    "functionName": "run_and_compare",
+    "className": null,
+    "fileName": "/Tsjerk_&_Insane/tests_&_test_regression.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Run insane and compare its output against a reference\n    \"\"\"\narguments = _arguments_as_list(arguments)\nref_stdout = os.path.join(ref_dir, 'stdout')\nref_stderr = os.path.join(ref_dir, 'stderr')\nwith utils.tempdir():\n    out, err, returncode = run_insane(arguments, input_dir, runner=runner)\n    assert not returncode\n    compare(utils.ContextStringIO(out), ref_stdout)\n    compare(utils.ContextStringIO(err), ref_stderr)\n    compare_directories('./', ref_dir, ignore=('stderr', 'stdout', 'testlog'))\n"
+}

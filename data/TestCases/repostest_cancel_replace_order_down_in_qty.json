@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cancel_replace_order_down_in_qty",
+    "className": null,
+    "fileName": "/nabicht_&_Buttonwood/tests_&_test_MarketObjects_&_test_Orderbooks_&_test_orderlevelbook.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ob = build_base_order_book()\nprev_order_chains = ob.order_chains_at_price(BID_SIDE, Price('34.50'))\nassert len(prev_order_chains) == 2\nassert prev_order_chains[0].chain_id() == 1001\nassert prev_order_chains[1].chain_id() == 1004\nassert ob.best_priority_chain(BID_SIDE).chain_id() == 1001\nprev_visible_qty_at_tob = ob.visible_qty_at_price(BID_SIDE, Price('34.50'))\nprev_hidden_qty_at_tob = ob.hidden_qty_at_price(BID_SIDE, Price('34.50'))\ncr = CancelReplaceCommand(77, 1234012.123, prev_order_chains[0].chain_id(),\n    prev_order_chains[0].user_id(), MARKET, prev_order_chains[0].side(),\n    prev_order_chains[0].current_price(), prev_order_chains[0].current_qty(\n    ) - 5)\nprev_order_chains[0].apply_cancel_replace_command(cr)\ncr_ack = AcknowledgementReport(78, 1234012.123, prev_order_chains[0].\n    chain_id(), prev_order_chains[0].user_id(), MARKET, cr,\n    prev_order_chains[0].current_price(), prev_order_chains[0].current_qty(\n    ) - 5, prev_order_chains[0].current_qty() - 5)\nprev_order_chains[0].apply_acknowledgement_report(cr_ack)\nob.handle_acknowledgement_report(cr_ack, prev_order_chains[0])\ncurrent_order_chains = ob.order_chains_at_price(BID_SIDE, Price('34.50'))\nassert len(current_order_chains) == 2\nfor chain in current_order_chains:\n    print(chain)\nassert prev_order_chains[0].chain_id() == 1001\nassert prev_order_chains[1].chain_id() == 1004\nassert ob.best_priority_chain(BID_SIDE).chain_id() == 1001\nassert ob.visible_qty_at_price(BID_SIDE, Price('34.50')\n    ) == prev_visible_qty_at_tob - 5\nassert ob.hidden_qty_at_price(BID_SIDE, Price('34.50')\n    ) == prev_hidden_qty_at_tob\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_attach_trial_ttl_seconds",
+    "className": "TestAxClient",
+    "fileName": "/facebook_&_Ax/ax_&_service_&_tests_&_test_ax_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ax_client = AxClient()\nax_client.create_experiment(parameters=[{'name': 'x', 'type': 'range',\n    'bounds': [-5.0, 10.0]}, {'name': 'y', 'type': 'range', 'bounds': [0.0,\n    15.0]}], minimize=True)\nparams, idx = ax_client.attach_trial(parameters={'x': 0.0, 'y': 1.0},\n    ttl_seconds=1)\nself.assertTrue(ax_client.experiment.trials.get(idx).status.is_running)\ntime.sleep(1)\nself.assertTrue(ax_client.experiment.trials.get(idx).status.is_failed)\nwith self.assertRaisesRegex(ValueError,\n    '.* has been marked FAILED, so it no longer expects data.'):\n    ax_client.complete_trial(trial_index=idx, raw_data=5)\nparams2, idx2 = ax_client.attach_trial(parameters={'x': 0.0, 'y': 1.0},\n    ttl_seconds=1)\nax_client.complete_trial(trial_index=idx2, raw_data=5)\nself.assertEqual(ax_client.get_best_parameters()[0], params2)\nself.assertEqual(ax_client.get_trial_parameters(trial_index=idx2), {'x': 0,\n    'y': 1})\n"
+}

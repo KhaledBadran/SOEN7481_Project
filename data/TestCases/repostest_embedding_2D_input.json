@@ -1,0 +1,9 @@
+{
+    "functionName": "test_embedding_2D_input",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_embedding.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "import numpy as np\nimport theano\nimport theano.tensor as T\nfrom lasagne.layers import EmbeddingLayer, InputLayer, helper\nx = T.imatrix()\nbatch_size = 2\nseq_len = 3\nemb_size = 5\nvocab_size = 3\nl_in = InputLayer((None, seq_len))\nW = np.arange(vocab_size * emb_size).reshape((vocab_size, emb_size)).astype(\n    'float32')\nl1 = EmbeddingLayer(l_in, input_size=vocab_size, output_size=emb_size, W=W)\nx_test = np.array([[0, 1, 2], [0, 0, 2]], dtype='int32')\nassert helper.get_output_shape(l1, (batch_size, seq_len)) == (batch_size,\n    seq_len, emb_size)\noutput = helper.get_output(l1, x)\nf = theano.function([x], output)\nnp.testing.assert_array_almost_equal(f(x_test), W[x_test])\n"
+}

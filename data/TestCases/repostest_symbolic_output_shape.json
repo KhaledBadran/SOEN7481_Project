@@ -1,0 +1,9 @@
+{
+    "functionName": "test_symbolic_output_shape",
+    "className": "TestMergeLayer",
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_base.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from lasagne.layers.base import MergeLayer\nclass WrongLayer(MergeLayer):\n\n    def get_output_shape_for(self, input_shapes):\n        return theano.tensor.vector().shape\nwith pytest.raises(ValueError) as exc:\n    WrongLayer([(None,)]).output_shape\nassert 'symbolic output shape' in exc.value.args[0]\n"
+}

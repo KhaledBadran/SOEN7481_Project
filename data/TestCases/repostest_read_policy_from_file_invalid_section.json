@@ -1,0 +1,9 @@
+{
+    "functionName": "test_read_policy_from_file_invalid_section",
+    "className": "TestPolicy",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_test_policy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that reading a policy file with an invalid section generates\n        the right error.\n        \"\"\"\npolicy_file = tempfile.NamedTemporaryFile(dir=self.temp_dir, delete=False)\nwith open(policy_file.name, 'w') as f:\n    f.write(\n        '{\"test\": {\"invalid\": {\"group_A\": {\"SPLIT_KEY\": {\"GET\": \"ALLOW_ALL\"}}}}}'\n        )\nargs = policy_file.name,\nregex = \"Policy 'test' contains an invalid section named: invalid\"\nself.assertRaisesRegex(ValueError, regex, policy.read_policy_from_file, *args)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_save_xrf_quant_fluor_json_file4",
+    "className": null,
+    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_core_&_tests_&_test_quant_analysis.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Schema allows some data fields to hold value of ``None``. Test if this works.\"\"\"\ndata, json_path = _get_data_and_json_path(tmp_path)\ndata = copy.deepcopy(data)\ndata['detector_channel'] = None\ndata['scaler_name'] = None\ndata['distance_to_sample'] = None\nsave_xrf_quant_fluor_json_file(json_path, data)\ndata_loaded = load_xrf_quant_fluor_json_file(json_path)\nassert data_loaded == data, 'Loaded data is not equal to the original data'\n"
+}

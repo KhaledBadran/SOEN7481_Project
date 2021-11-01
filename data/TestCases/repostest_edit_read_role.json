@@ -1,0 +1,9 @@
+{
+    "functionName": "test_edit_read_role",
+    "className": "TestEditRoles",
+    "fileName": "/fvalverd_&_AutoApi/tests_&_test_operations.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "for read, status_code in [(False, 403), (True, 200)]:\n    response = self.app.post('/roles', headers=self.headers, data=json.\n        dumps({'email': self.read_user['email'], 'api': self.api, 'roles':\n        {'read': read}}), content_type='application/json')\n    self.assertEqual(response.status_code, 204)\n    response = self.app.get('/%s/movies' % self.api, headers=self.\n        read_user_header)\n    self.assertEqual(response.status_code, status_code)\n"
+}

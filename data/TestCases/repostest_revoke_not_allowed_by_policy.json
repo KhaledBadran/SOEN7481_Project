@@ -1,0 +1,9 @@
+{
+    "functionName": "test_revoke_not_allowed_by_policy",
+    "className": "TestKmipEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that an unallowed request is handled correctly by Revoke.\n        \"\"\"\ne = engine.KmipEngine()\ne._data_store = self.engine\ne._data_store_session_factory = self.session_factory\ne._data_session = e._data_store_session_factory()\ne._is_allowed_by_operation_policy = mock.Mock(return_value=False)\ne._logger = mock.MagicMock()\ne._client_identity = 'test'\nobj_a = pie_objects.OpaqueObject(b'', enums.OpaqueDataType.NONE)\nobj_a._owner = 'admin'\ne._data_session.add(obj_a)\ne._data_session.commit()\ne._data_session = e._data_store_session_factory()\nid_a = str(obj_a.unique_identifier)\nreason_unspecified = objects.RevocationReason(code=enums.\n    RevocationReasonCode.UNSPECIFIED)\ndate = primitives.DateTime(tag=enums.Tags.COMPROMISE_OCCURRENCE_DATE, value=6)\npayload = payloads.RevokeRequestPayload(unique_identifier=attributes.\n    UniqueIdentifier(id_a), revocation_reason=reason_unspecified,\n    compromise_occurrence_date=date)\nargs = [payload]\nself.assertRaisesRegex(exceptions.PermissionDenied,\n    'Could not locate object: {0}'.format(id_a), e._process_revoke, *args)\n"
+}

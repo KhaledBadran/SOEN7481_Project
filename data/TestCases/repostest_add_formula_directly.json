@@ -1,0 +1,9 @@
+{
+    "functionName": "test_add_formula_directly",
+    "className": null,
+    "fileName": "/quantOS-org_&_JAQS/test_&_test_dataview.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ds = RemoteDataService()\nds.init_from_config(data_config)\ndv = DataView()\nsecs = '600030.SH,000063.SZ,000001.SZ'\nprops = {'start_date': 20160601, 'end_date': 20170601, 'symbol': secs,\n    'fields': 'open,close', 'freq': 1}\ndv.init_from_config(props, data_api=ds)\ndv.prepare_data()\ndv.add_formula('myfactor', 'close / open', is_quarterly=False)\nassert dv.data_d.shape == (281, 39)\n"
+}

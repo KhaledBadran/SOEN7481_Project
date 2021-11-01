@@ -1,0 +1,9 @@
+{
+    "functionName": "test_convert_split_key_pie_to_core",
+    "className": "TestObjectFactory",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_test_factory.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a Pie split key object can be converted into a core split\n        key object.\n        \"\"\"\npie_split_key = pobjects.SplitKey(cryptographic_algorithm=enums.\n    CryptographicAlgorithm.AES, cryptographic_length=128, key_value=self.\n    symmetric_bytes, cryptographic_usage_masks=[enums.\n    CryptographicUsageMask.EXPORT], name='Split Key', key_format_type=enums\n    .KeyFormatType.RAW, key_wrapping_data=None, split_key_parts=3,\n    key_part_identifier=1, split_key_threshold=2, split_key_method=enums.\n    SplitKeyMethod.XOR, prime_field_size=None)\ncore_split_key = self.factory.convert(pie_split_key)\nself.assertIsInstance(core_split_key, secrets.SplitKey)\nself._test_core_key(core_split_key, enums.CryptographicAlgorithm.AES, 128,\n    self.symmetric_bytes, enums.KeyFormatType.RAW)\nself.assertEqual(3, core_split_key.split_key_parts)\nself.assertEqual(1, core_split_key.key_part_identifier)\nself.assertEqual(2, core_split_key.split_key_threshold)\nself.assertEqual(enums.SplitKeyMethod.XOR, core_split_key.split_key_method)\nself.assertIsNone(core_split_key.prime_field_size)\n"
+}

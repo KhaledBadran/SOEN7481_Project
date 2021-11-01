@@ -1,0 +1,9 @@
+{
+    "functionName": "testdb_read_worker",
+    "className": null,
+    "fileName": "/FaradayRF_&_Faraday-Software/faraday_&_proxy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Read from DB and insert traffic in deque\n\n    This function periodically appends traffic obtained from a\n    pre-generated SQLite database to the deque as if there were\n    hardware attached.  This is to enable testing when hardware\n    is not present.  The callsign and nodeid are derived from\n    the config file.\n    \"\"\"\nlogger.debug('Starting testdb_read_worker thread')\ntry:\n    testCallsign = proxyConfig.get('PROXY', 'TESTCALLSIGN')\n    testNodeId = proxyConfig.getint('PROXY', 'TESTNODEID')\n    testRate = proxyConfig.getint('PROXY', 'TESTRATE')\nexcept ConfigParser.Error as e:\n    logger.error('ConfigParse.Error: ' + str(e))\n    return None\nif int(testRate) <= 0:\n    logger.warn(\n        'Test packet rate invalid, TESTRATE = [ {} ] setting rate to [ 1 ] per second.'\n        .format(int(testRate)))\n    testRate = 1\nsleepTime = 1.0 / testRate\nunit = testCallsign + '-' + str(testNodeId)\ngetDicts[unit] = {}\nconn = openTestDB()\nif conn is None:\n    return\ncursor = sqlBeginRead(conn)\nif cursor is None:\n    return\nrow = cursor.fetchone()\nwhile row is not None:\n    port = row[1]\n    item = {}\n    item['data'] = row[2]\n    try:\n        getDicts[unit][port].append(item)\n    except:\n        getDicts[unit][port] = deque([])\n        getDicts[unit][port].append(item)\n    logger.debug(\n        'Appended packet: id [ {} ] port [ {} ] data [ {} ] ts [ {} ] '.\n        format(row[0], port, item, row[3]))\n    time.sleep(sleepTime)\n    row = cursor.fetchone()\n"
+}

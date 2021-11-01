@@ -1,0 +1,9 @@
+{
+    "functionName": "test_core_initialize_variogram_model",
+    "className": null,
+    "fileName": "/bsmurphy_&_PyKrige/tests_&_test_core.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data, _, _ = validation_ref\nwith pytest.raises(ValueError):\n    core._initialize_variogram_model(np.vstack((data[:, (0)], data[:, (1)])\n        ).T, data[:, (2)], 'linear', [0.0], 'linear', 6, False, 'euclidean')\nwith pytest.raises(ValueError):\n    core._initialize_variogram_model(np.vstack((data[:, (0)], data[:, (1)])\n        ).T, data[:, (2)], 'spherical', [0.0], 'spherical', 6, False,\n        'euclidean')\nwith pytest.raises(ValueError):\n    core._initialize_variogram_model(np.vstack((data[:, (0)], data[:, (1)])\n        ).T, data[:, (2)], 'spherical', [0.0, 0.0, 0.0], 'spherical', 6, \n        False, 'tacos')\nx = np.array([(1.0 + n / np.sqrt(2)) for n in range(4)])\ny = np.array([(1.0 + n / np.sqrt(2)) for n in range(4)])\nz = np.arange(1.0, 5.0, 1.0)\nlags, semivariance, variogram_model_parameters = (core.\n    _initialize_variogram_model(np.vstack((x, y)).T, z, 'linear', [0.0, 0.0\n    ], 'linear', 6, False, 'euclidean'))\nassert_allclose(lags, np.array([1.0, 2.0, 3.0]))\nassert_allclose(semivariance, np.array([0.5, 2.0, 4.5]))\n"
+}

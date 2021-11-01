@@ -1,0 +1,9 @@
+{
+    "functionName": "test_detect_3utr_pro",
+    "className": "TestsRNAUTR",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_sRNA_utr_derived.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sud.get_coverage = self.mock.mock_get_coverage\nargs = self.mock_args.mock()\nargs.min_len = 1\nargs.max_len = 300\nargs.decrease_utr = 0.5\nargs.fuzzy_utr = 1\nargs.fuzzy_tsss = {'3utr': 3}\nargs.pros = self.example.pros\nargs.utrs = []\nargs.srnas = []\npos = {'start': 2, 'end': 20, 'ori_start': 1, 'ori_end': 25}\nsud.detect_3utr_pro(self.example.inters[0], pos, self.example.wigs, '3utr',\n    args)\nself.assertListEqual(args.srnas, [{'end_cleavage': 'NA', 'end': 20,\n    'start_cleavage': 'Cleavage:18_+', 'utr': '3utr', 'datas': {'frag_1': [\n    {'low': 10, 'final_start': 2, 'track': 'track_1', 'type': 'frag',\n    'final_end': 20, 'avg': 41.36842105263158, 'ori_avg': 27.52, 'high': 50\n    }]}, 'strand': '+', 'start_tss': 'NA', 'start': 18, 'strain': 'aaa'}])\nself.assertListEqual(args.utrs, [{'end_cleavage': 'NA', 'end': 20,\n    'start_cleavage': 'NA', 'utr': '3utr', 'datas': {'frag_1': [{'low': 10,\n    'final_start': 2, 'track': 'track_1', 'type': 'frag', 'final_end': 20,\n    'avg': 41.36842105263158, 'ori_avg': 27.52, 'high': 50}]}, 'strand':\n    '+', 'start_tss': 'NA', 'start': 18, 'strain': 'aaa'}])\nsud.get_coverage = get_coverage\n"
+}

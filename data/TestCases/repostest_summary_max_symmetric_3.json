@@ -1,0 +1,9 @@
+{
+    "functionName": "test_summary_max_symmetric_3",
+    "className": "TestChain",
+    "fileName": "/samreay_&_ChainConsumer/tests_&_test_analysis.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "c = ChainConsumer()\nc.add_chain(self.data_skew)\nsummary_area = 0.95\nc.configure(statistics='max_symmetric', bins=1.0, summary_area=summary_area)\nsummary = c.analysis.get_summary()['0']\nxs = np.linspace(0, 2, 1000)\npdf = skewnorm.pdf(xs, 5, 1, 1.5)\nxmax = xs[pdf.argmax()]\ncdf_top = skewnorm.cdf(summary[2], 5, 1, 1.5)\ncdf_bottom = skewnorm.cdf(summary[0], 5, 1, 1.5)\narea = cdf_top - cdf_bottom\nassert np.isclose(xmax, summary[1], atol=0.05)\nassert np.isclose(area, summary_area, atol=0.05)\nassert np.isclose(summary[2] - summary[1], summary[1] - summary[0])\n"
+}

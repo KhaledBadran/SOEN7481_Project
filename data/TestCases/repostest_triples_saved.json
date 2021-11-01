@@ -1,0 +1,9 @@
+{
+    "functionName": "test_triples_saved",
+    "className": "ContextTest",
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_ContextTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "graph = set()\nident_uri = 'http://example.com/context_1'\nident_uri2 = 'http://example.com/context_2'\nident_uri2_1 = 'http://example.com/context_2_1'\nident_uri3 = 'http://example.com/context_3'\nident_uri4 = 'http://example.com/context_4'\nctx = Context(ident=ident_uri)\nctx2 = Context(ident=ident_uri2)\nctx2_1 = Context(ident=ident_uri2_1)\nctx.add_import(ctx2)\nctx.add_import(ctx2_1)\nctx3 = Context(ident=ident_uri3)\nctx3.add_import(ctx)\nlast_ctx = Context(ident=ident_uri4)\nlast_ctx.add_import(ctx3)\nctx.add_statement(create_mock_statement(ident_uri, 1))\nctx2.add_statement(create_mock_statement(ident_uri2, 2))\nctx2_1.add_statement(create_mock_statement(ident_uri2_1, 2.1))\nctx3.add_statement(create_mock_statement(ident_uri3, 3))\nlast_ctx.add_statement(create_mock_statement(ident_uri4, 4))\nlast_ctx.save_context(graph, True)\nself.assertEqual(last_ctx.triples_saved, 5)\n"
+}

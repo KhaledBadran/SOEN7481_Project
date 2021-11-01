@@ -1,0 +1,9 @@
+{
+    "functionName": "test_plane_scaling",
+    "className": null,
+    "fileName": "/apetri_&_LensTools/lenstools_&_tests_&_test_camb_transfer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "plane = PotentialPlane.load(os.path.join(dataExtern(), 'plane.fits'))\ntfr = CAMBTransferFunction.read(os.path.join(dataExtern(), 'camb',\n    'camb_tfr.pkl'))\nfig, ax = plt.subplots(1, 3, figsize=(24, 8))\nplane.visualize(fig=fig, ax=ax[0], colorbar=True, cbar_label='$\\\\Phi$')\nax[0].set_title('Original ($z={0:.2f}$)'.format(plane.redshift))\nzs = 1.5\nplane.scaleWithTransfer(zs, tfr, scaling_method='uniform')\nplane.visualize(fig=fig, ax=ax[1], colorbar=True, cbar_label='$\\\\Phi$')\nax[1].set_title('Uniform scaling ($z={0:.2f}$)'.format(zs))\nzs = 1.5\nplane = PotentialPlane.load(os.path.join(dataExtern(), 'plane.fits'))\nplane.scaleWithTransfer(zs, tfr, scaling_method='FFT')\nplane.visualize(fig=fig, ax=ax[2], colorbar=True, cbar_label='$\\\\Phi$')\nax[2].set_title('FFT scaling ($z={0:.2f}$)'.format(zs))\nfig.tight_layout()\nfig.savefig('plane_scaling_tfr.png')\n"
+}

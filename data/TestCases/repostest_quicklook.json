@@ -1,0 +1,9 @@
+{
+    "functionName": "test_quicklook",
+    "className": null,
+    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_scripts.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "calib_dir = os.path.join(os.environ['PYPEIT_DEV'], 'CALIBS')\nif not os.path.isdir(calib_dir):\n    raise IOError('You need to get the CALIBS folder as described above!!')\noutdir = os.path.join(os.getcwd(), 'keck_lris_blue_A')\nif os.path.isdir(outdir):\n    shutil.rmtree(outdir)\ndroot = os.path.join(os.environ['PYPEIT_DEV'], 'RAW_DATA', 'keck_lris_blue',\n    'long_600_4000_d560')\nql_mos.main(ql_mos.parser(['keck_lris_blue', droot, 'b150910_2033.fits.gz',\n    'b150910_2051.fits.gz', 'b150910_2070.fits.gz', '--det=2',\n    '--user_pixflat={0}'.format(os.path.join(calib_dir,\n    'PYPEIT_LRISb_pixflat_B600_2x2_17sep2009.fits.gz'))]))\ndev_suite_required"
+}

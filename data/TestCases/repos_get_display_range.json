@@ -1,0 +1,9 @@
+{
+    "functionName": "_get_display_range",
+    "className": "Brain",
+    "fileName": "/nipy_&_PySurfer/surfer_&_viz.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "if scalar_data.min() >= 0:\n    sign = 'pos'\nelif scalar_data.max() <= 0:\n    sign = 'neg'\nif sign == 'neg':\n    range_data = np.abs(scalar_data[np.where(scalar_data < 0)])\nelif sign == 'pos':\n    range_data = scalar_data[np.where(scalar_data > 0)]\nelse:\n    range_data = np.abs(scalar_data)\nif min is None:\n    min = 'robust_min'\nif min == 'robust_min':\n    min = np.percentile(range_data, 2)\nelif min == 'actual_min':\n    min = range_data.min()\nif max is None:\n    max = 'robust_max'\nif max == 'robust_max':\n    max = np.percentile(scalar_data, 98)\nelif max == 'actual_max':\n    max = range_data.max()\nreturn min, max\n"
+}

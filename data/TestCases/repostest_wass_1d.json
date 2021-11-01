@@ -1,0 +1,9 @@
+{
+    "functionName": "test_wass_1d",
+    "className": null,
+    "fileName": "/PythonOT_&_POT/test_&_test_ot.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "n = 20\nm = 30\nrng = np.random.RandomState(0)\nu = rng.randn(n, 1)\nv = rng.randn(m, 1)\nM = ot.dist(u, v, metric='sqeuclidean')\nG, log = ot.emd([], [], M, log=True)\nwass = log['cost']\nwass1d = ot.wasserstein_1d(u, v, [], [], p=2.0)\nnp.testing.assert_allclose(np.sqrt(wass), wass1d)\n"
+}

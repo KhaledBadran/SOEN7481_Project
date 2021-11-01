@@ -1,0 +1,9 @@
+{
+    "functionName": "test_shock_tube_data_points",
+    "className": "TestDataGroups",
+    "fileName": "/kyleniemeyer_&_PyTeCK/pyteck_&_tests_&_test_parse_files_xml.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test parsing of ignition delay data points for shock tube file.\n        \"\"\"\nfile_path = os.path.join('testfile_st.xml')\nfilename = pkg_resources.resource_filename(__name__, file_path)\ntree = etree.parse(filename)\nroot = tree.getroot()\nproperties = {}\nproperties = parse_files_XML.get_datapoints(properties, root)\nnp.testing.assert_array_equal(properties['temperature'], [1164.48, 1164.97] *\n    units.kelvin)\nnp.testing.assert_array_equal(properties['ignition-delay'], [471.54, 448.03\n    ] * units.us)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_display_blocking",
+    "className": null,
+    "fileName": "/SimLeek_&_CV_PubSubs/tests_&_window_&_test_subscriber_windows.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sub_win.SubscriberWindows.FRAME_DICT = {}\nwith mock.patch('displayarray.window.subscriber_windows.FrameUpdater'\n    ) as fup, mock.patch(\n    'displayarray.window.subscriber_windows.SubscriberWindows') as sws:\n    fup_inst = fup.return_value = mock.MagicMock()\n    sws_inst = sws.return_value = mock.MagicMock()\n    sub_win.display(0, 1, blocking=True)\n    assert fup_inst.start.call_count == 2\n    sws.assert_called_once_with(window_names=['window 0', 'window 1'],\n        video_sources=(0, 1), silent=False)\n    sws_inst.loop.assert_called_once()\n    assert fup_inst.join.call_count == 2\n"
+}

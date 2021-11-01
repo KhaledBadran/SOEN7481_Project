@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cnot_targetcommute",
+    "className": "Test_commutation",
+    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_commutation.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "config_fn = os.path.join(curdir, 'test_179.json')\nplatf = ql.Platform('starmon', config_fn)\nql.set_option('scheduler', 'ALAP')\nql.set_option('scheduler_post179', 'yes')\nql.set_option('scheduler_commute', 'yes')\nnqubits = 7\nk = ql.Kernel('aKernel', platf, nqubits)\nk.gate('cnot', [0, 3])\nk.gate('cnot', [6, 3])\nk.gate('t', [6])\nk.gate('y', [6])\nk.gate('cnot', [1, 3])\nk.gate('t', [1])\nk.gate('y', [1])\nk.gate('t', [1])\nk.gate('y', [1])\nk.gate('cnot', [5, 3])\nk.gate('t', [5])\nk.gate('y', [5])\nk.gate('t', [5])\nk.gate('y', [5])\nk.gate('t', [5])\nk.gate('y', [5])\nsweep_points = [2]\np = ql.Program('test_cnot_targetcommute', platf, nqubits)\np.set_sweep_points(sweep_points)\np.add_kernel(k)\np.compile()\ngold_fn = rootDir + '/golden/' + p.name + '_scheduled.qasm'\nqasm_fn = os.path.join(output_dir, p.name + '_scheduledqasmwriter_out.qasm')\nself.assertTrue(file_compare(qasm_fn, gold_fn))\n"
+}

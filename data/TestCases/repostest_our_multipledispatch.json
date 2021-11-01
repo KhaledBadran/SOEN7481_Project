@@ -1,0 +1,9 @@
+{
+    "functionName": "test_our_multipledispatch",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_utilities_&_test_multipledispatch.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "test_fn = gpflow.utilities.Dispatcher('test_fn')\n@test_fn.register(A1, B1)\ndef test_a1_b1(x, y):\n    return 'a1-b1'\n@test_fn.register(A2, B1)\ndef test_a2_b1(x, y):\n    return 'a2-b1'\n@test_fn.register(A1, B2)\ndef test_a1_b2(x, y):\n    return 'a1-b2'\nassert test_fn(A1(), B1()) == 'a1-b1'\nassert test_fn(A2(), B1()) == 'a2-b1'\nassert test_fn(A1(), B2()) == 'a1-b2'\nwith warnings.catch_warnings(record=True) as w:\n    warnings.simplefilter('always')\n    assert test_fn(A2(), B2()) == 'a1-b2'\n    assert len(w) == 1\n    assert issubclass(w[0].category, multipledispatch.conflict.AmbiguityWarning\n        )\n@test_fn.register(A2, B2)\ndef test_a2_b2(x, y):\n    return 'a2-b2'\nwith warnings.catch_warnings(record=True) as w:\n    warnings.simplefilter('always')\n    assert test_fn(A2(), B2()) == 'a2-b2'\n    assert len(w) == 0\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_vm_mem_insert",
+    "className": null,
+    "fileName": "/BTaskaya_&_Arkhe/test_arkhe.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "code = create_instr('insert', 0, 1)\nvm = Arkhe(code)\nvm.registers[0] = 16\nvm.registers[1] = 'hello'\nwith pytest.raises(MemoryFault):\n    vm.exc_instr()\nvm.memory.alloc(100)\nvm.counter = 0\nvm.exc_instr()\nassert vm.memory[16] == 'hello'\n"
+}

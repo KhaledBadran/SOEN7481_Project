@@ -1,0 +1,9 @@
+{
+    "functionName": "test_propagate_lithology_cols",
+    "className": "TestContribution",
+    "fileName": "/PmagPy_&_PmagPy/pmagpy_tests_&_test_contribution_builder.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.con.tables['specimens'].df.loc[:, ('geologic_classes')] = None\nres = self.con.tables['specimens'].df['geologic_classes'].unique()\nself.assertEqual([None], res)\nself.con.propagate_lithology_cols()\nres = self.con.tables['specimens'].df['geologic_classes'].unique()\nself.assertEqual(res, ['Archeologic'])\nself.con.tables['specimens'].df.loc[:, ('geologic_types')] = ''\nres = self.con.tables['specimens'].df['geologic_types'].unique()\nself.assertEqual([''], res)\nself.con.tables['samples'].df.loc['mgh12t101', 'geologic_types'] = 'Oven'\nself.con.propagate_lithology_cols()\nres = self.con.tables['specimens'].df['geologic_types'].unique()\nself.assertEqual(sorted(res), ['Mixed Archeological Objects', 'Oven'])\nres = self.con.tables['specimens'].df.loc['mgh12t101', 'geologic_types']\nself.assertEqual('Oven', res)\n"
+}

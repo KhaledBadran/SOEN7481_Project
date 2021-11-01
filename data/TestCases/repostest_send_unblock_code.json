@@ -1,0 +1,9 @@
+{
+    "functionName": "test_send_unblock_code",
+    "className": "TestCoreClient",
+    "fileName": "/mozilla_&_PyFxA/fxa_&_tests_&_test_core.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "acct = TestEmailAccount(email='block-{uniq}@{hostname}')\nself.client.create_account(email=acct.email, stretchpwd=\n    DUMMY_STRETCHED_PASSWORD)\nself._accounts_to_delete.append(acct)\nresponse = self.client.send_unblock_code(acct.email)\nself.assertEqual(response, {})\nm = acct.wait_for_email(lambda m: 'x-unblock-code' in m['headers'])\nif not m:\n    raise RuntimeError('Unblock code email was not received')\ncode = m['headers']['x-unblock-code']\nself.assertTrue(len(code) > 0)\nself.client.login(email=acct.email, stretchpwd=DUMMY_STRETCHED_PASSWORD,\n    unblock_code=code)\n"
+}

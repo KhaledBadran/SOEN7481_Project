@@ -1,0 +1,9 @@
+{
+    "functionName": "test_equal_results",
+    "className": "TestPoissonSolve",
+    "fileName": "/tum-pbs_&_PhiFlow/tests_&_test_poisson_solve.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data_in = _generate_examples()\nfor domain in DOMAINS:\n    pressure_fields = [poisson_solve(domain.centered_grid(data_in), domain,\n        solver=solver)[0].data for solver in [SparseCG(), GeometricCG()]]\n    for field in pressure_fields[1:]:\n        np.testing.assert_almost_equal(field, pressure_fields[0], decimal=4)\n"
+}

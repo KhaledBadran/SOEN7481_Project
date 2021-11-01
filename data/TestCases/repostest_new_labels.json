@@ -1,0 +1,9 @@
+{
+    "functionName": "test_new_labels",
+    "className": "TestMMObjectViews",
+    "fileName": "/Axiologue_&_DjangoRestMultipleModels/tests_&_test_object_view.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Adding the 'label' key to querylist elements should use those labels\n        instead of the model names\n        \"\"\"\nview = CustomLabelView.as_view()\nrequest = factory.get('/')\nwith self.assertNumQueries(2):\n    response = view(request).render()\nself.assertEqual(response.status_code, status.HTTP_200_OK)\nself.assertEqual(len(response.data), 2)\nself.assertEqual(response.data, {'Drama': [{'title': 'Romeo And Juliet',\n    'genre': 'Tragedy', 'year': 1597}, {'title':\n    \"A Midsummer Night's Dream\", 'genre': 'Comedy', 'year': 1600}, {'title':\n    'Julius Caesar', 'genre': 'Tragedy', 'year': 1623}, {'title':\n    'As You Like It', 'genre': 'Comedy', 'year': 1623}], 'Poetry': [{\n    'title': \"Shall I compare thee to a summer's day?\", 'style': 'Sonnet'},\n    {'title': 'As a decrepit father takes delight', 'style': 'Sonnet'}]})\n"
+}

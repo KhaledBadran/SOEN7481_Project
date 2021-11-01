@@ -1,0 +1,9 @@
+{
+    "functionName": "test_capture_content",
+    "className": "TestIxeOnline",
+    "fileName": "/shmir_&_PyIxExplorer/ixexplorer_&_test_&_test_online.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self._reserve_ports(self.port1, self.port2)\nself.ports[self.port1].loopback = 1\nself.ports[self.port1].add_stream()\nself.ports[self.port1].streams[1].sa = '11:11:11:11:11:11'\nself.ports[self.port1].streams[1].dma = 2\nself.ports[self.port1].streams[1].numFrames = 1\nself.ports[self.port1].write()\nself.ixia.session.start_capture()\nself.ixia.session.start_transmit(blocking=True)\nself.ixia.session.stop_capture()\nassert '11 11 11 11 11 11' in str(self.ports[self.port2].get_cap_frames(1))\nself.ports[self.port1].streams[1].sa = '22:22:22:22:22:22'\nself.ports[self.port1].streams[1].numFrames = 2\nself.ports[self.port1].write()\nself.ixia.session.start_capture()\nself.ixia.session.start_transmit(blocking=True)\nself.ixia.session.stop_capture()\nassert '11 11 11 11 11 11' not in str(self.ports[self.port2].get_cap_frames(2))\nassert '22 22 22 22 22 22' in str(self.ports[self.port2].get_cap_frames(2))\n"
+}

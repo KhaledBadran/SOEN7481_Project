@@ -1,0 +1,9 @@
+{
+    "functionName": "waitUntilRotationIsFinished",
+    "className": null,
+    "fileName": "/akira-okumura_&_ISEE_SiPM/old_script_&_measurement_&_stage_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "for i in range(10000):\n    time.sleep(0.01)\n    status = gsc02.getStatus()\n    current_pos = int(status.split(b',')[0].replace(b' ', b''))\n    flag1, flag2, flag3 = status.split(b',')[2:5]\n    if (current_pos == goal and flag1 == b'K' and flag2 == b'K' and flag3 ==\n        b'R'):\n        print('\\nRotation complete')\n        return\n    elif flag1 == b'K' and flag2 == b'K' and flag3 == b'B':\n        print('\\nCurrent Position: %7.2f deg (%s)' % (float(current_pos) /\n            DEG2STEP, status.decode()), end='')\n    else:\n        print('Error: ', status.decode())\n"
+}

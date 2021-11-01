@@ -1,0 +1,9 @@
+{
+    "functionName": "test_parse_config_false",
+    "className": null,
+    "fileName": "/alex-ber_&_AlexBerUtils/tests_&_utils_&_init_app_conf_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "logger.info(f'{request._pyfuncitem.name}()')\npck = '.'.join(['tests_data', __package__, 'initappconf'])\nexp_disable_existing_loggers = 'False'\nwith path(pck, 'config.yml') as full_path:\n    argsv = (\n        f'--general.config.file={full_path} --general.profiles=dev --general.log.disable_existing_loggers={exp_disable_existing_loggers} '\n        .split())\n    dd = parse_config(None, argsv, implicit_convert=False)\n    disable_existing_loggers = dd['general']['log']['disable_existing_loggers']\n    pytest.assume(exp_disable_existing_loggers == disable_existing_loggers)\npytest.mark.yml"
+}

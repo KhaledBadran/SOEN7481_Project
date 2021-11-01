@@ -1,0 +1,9 @@
+{
+    "functionName": "CommandLocalExperimentalRfPacketForward",
+    "className": "faraday_commands",
+    "fileName": "/FaradayRF_&_Faraday-Software/faraday_&_proxyio_&_faradaycommands.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        A predefined command to return a complete command datagram and command packet that commands a LOCAL Faraday device to send the provided packet over a single RF packet.\n\n        :param remote_callsign: The callsign of the remote target Faraday device\n        :param remote_node_id: The ID number (0-255) of the remote target Faraday device.\n        :param data: The data payload (Text, packet, etc...) that is to transmitted to the remote Faraday device\n\n        :Return: Returns the complete generated packet as a string of bytes.\n\n\n        .. Note:: The data must be equal or lesser length than the maximum RF packet payload!\n\n        :Example:\n\n        >>> command_packet = faraday_cmd.CommandLocalExperimentalRfPacketForward(\"KB1LQD\", 1, \"This is a test message\")\n\n        \"\"\"\npacket = commandmodule.create_command_datagram(self.CMD_RFPACKETFORWARD,\n    commandmodule.CreatePacketMsgExperimental(0, remote_callsign,\n    remote_node_id, len(data), data))\nreturn packet\n"
+}

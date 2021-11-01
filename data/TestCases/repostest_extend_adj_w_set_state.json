@@ -1,0 +1,9 @@
+{
+    "functionName": "test_extend_adj_w_set_state",
+    "className": "TestExtend",
+    "fileName": "/hdoupe_&_ParamTools/paramtools_&_tests_&_test_parameters.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class ExtParams(Parameters):\n    defaults = extend_ex_path\n    label_to_extend = 'd0'\n    array_first = True\nparams = ExtParams()\nparams.set_state(d0=list(range(2, 11)))\nparams.adjust({'extend_param': [{'d0': 2, 'value': -1}]})\nassert params.extend_param.tolist() == [[-1, -1], [-1, -1], [-1, -1], [-1, \n    -1], [-1, -1], [-1, -1], [-1, -1], [-1, -1], [-1, -1]]\nparams = ExtParams()\nparams.set_state(d0=list(range(2, 11)))\nparams.adjust({'extend_param': [{'d0': 3, 'value': -1}]})\nassert params.extend_param.tolist() == [[1, 2], [-1, -1], [-1, -1], [-1, -1\n    ], [-1, -1], [-1, -1], [-1, -1], [-1, -1], [-1, -1]]\nparams = ExtParams()\nparams.set_state(d0=list(range(2, 11)))\nparams.adjust({'extend_param': [{'d0': 1, 'value': -1}]})\nassert params.extend_param.tolist() == []\nparams.array_first = False\nparams.clear_state()\nparams.extend()\nparams.array_first = True\nparams.set_state()\nassert params.extend_param.tolist() == [[1, 2], [-1, -1], [-1, -1], [-1, -1\n    ], [-1, -1], [-1, -1], [-1, -1], [-1, -1], [-1, -1], [-1, -1], [-1, -1]]\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pqueue",
+    "className": null,
+    "fileName": "/pwwang_&_PyPPL/tests_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "pqueue = PQueue(batch_len=batch_len)\nfor method, item, batch in puts:\n    getattr(pqueue, method)(item, batch)\nret = []\nwhile not pqueue.empty():\n    ret.append(pqueue.get())\nassert ret == expect\npytest.mark.parametrize('batch_len,puts,expect', [(10, [('put', 5, 0), (\n    'put', 0, 0), ('put', 7, 0), ('put_next', 4, 2), ('put_next', 6, 3), (\n    'put_next', 3, 3), ('put', 3, 3), ('put', 6, 3)], [(0, 0), (3, 3), (6, \n    3), (4, 4), (3, 5), (5, 5), (6, 5), (7, 7)])])"
+}

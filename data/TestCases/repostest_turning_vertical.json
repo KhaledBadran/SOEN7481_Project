@@ -1,0 +1,9 @@
+{
+    "functionName": "test_turning_vertical",
+    "className": null,
+    "fileName": "/poletaevvlad_&_CubeLang/test_&_test_actions.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cube: Cube = CubeMock()\nmock = MagicMock()\nsetattr(cube, func, mock)\norientation = Orientation()\naction = Turn(side, [1, 2], 1)\nassert action.perform(cube, orientation) == orientation\nassert len(mock.call_args_list) == len(out_sides)\nprint(mock.call_args_list[0])\nfor args, side in zip(mock.call_args_list, out_sides):\n    arg_orientation, arg_index, arg_turn = tuple(args)[0]\n    assert arg_orientation == orientation\n    assert arg_index == side\n    assert arg_turn == out_amount\npytest.mark.parametrize('side, func, out_sides, out_amount', [(Side.FRONT,\n    'turn_slice', [1, 2], 1), (Side.BACK, 'turn_slice', [2, 3], 3), (Side.\n    RIGHT, 'turn_vertical', [2, 3], 1), (Side.LEFT, 'turn_vertical', [1, 2],\n    3), (Side.TOP, 'turn_horizontal', [1, 2], 3), (Side.BOTTOM,\n    'turn_horizontal', [2, 3], 1)])"
+}

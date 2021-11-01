@@ -1,0 +1,9 @@
+{
+    "functionName": "test_callback",
+    "className": null,
+    "fileName": "/apetri_&_LensTools/lenstools_&_tests_&_test_ray.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "z_final = 1.5\nb = np.linspace(0.0, tracer.lens[0].side_angle.to(deg).value, 512)\nxx, yy = np.meshgrid(b, b)\npos = np.array([xx, yy]) * deg\ndef save_callback(positions, tracer, k, pos):\n    dfl = DeflectionPlane(positions.value - pos.value, angle=tracer.lens[0]\n        .side_angle, redshift=tracer.redshift[k + 1], cosmology=tracer.lens\n        [0].cosmology, unit=pos.unit)\n    dfl.convergence().save('convergence_z{0}.fit'.format(int(tracer.\n        redshift[k + 1] * 100)))\nfin = tracer.shoot(pos, z=z_final, callback=save_callback, pos=pos)\n"
+}

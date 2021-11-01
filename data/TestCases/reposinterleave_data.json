@@ -1,0 +1,9 @@
+{
+    "functionName": "interleave_data",
+    "className": "MultiPhase",
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_phases_&_MultiPhase.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        Gathers property values from component phases to build a single array\n\n        If the requested ``prop`` is not on this MultiPhase, then a search is\n        conducted on all associated phase objects, and values from each\n        are assembled into a single array.\n\n        Parameters\n        ----------\n        prop : string\n            The property to be retrieved\n\n        Returns\n        -------\n        array : ND-array\n            An array containing the specified property retrieved from each\n            component phase and assembled based on the specified mixing rule\n\n        \"\"\"\nelement = prop.split('.')[0]\nvals = np.zeros([self._count(element=element)], dtype=float)\ntry:\n    for phase in self.phases.values():\n        vals += phase[prop] * self[element + '.occupancy.' + phase.name]\nexcept KeyError:\n    vals = super().interleave_data(prop)\nif np.any(self[element + '.occupancy.all'] != 1.0):\n    self._update_occupancy()\n    if np.any(self[element + '.occupancy.all'] != 1.0):\n        raise Exception(f\"Occupancy doesn't add to unity in all {element}s\")\nreturn vals\n"
+}

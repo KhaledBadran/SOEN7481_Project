@@ -1,0 +1,9 @@
+{
+    "functionName": "test_chaid_vector_with_floats_and_nan",
+    "className": null,
+    "fileName": "/Rambatino_&_CHAID/tests_&_test_nominal_column.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Check that the metadata is correct when NominalColumns are created from\n    floats\n    \"\"\"\narr = np.array([1.0, 2.0, np.nan])\nvector = CHAID.NominalColumn(arr)\nassert np.array_equal(vector.arr, np.array([0, 1, -1])\n    ), 'The indices are correctly substituted'\nassert vector.metadata == {(0): 1.0, (1): 2.0, (-1): '<missing>'\n    }, 'The metadata is formed correctly'\n"
+}

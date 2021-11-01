@@ -1,0 +1,9 @@
+{
+    "functionName": "test_limited_record_lifetime",
+    "className": "TestValidationPolicyCommandInterest",
+    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_validation_policy_command_interest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self._fixture = ValidationPolicyCommandInterestFixture(\n    ValidationPolicyCommandInterest.Options(400 * 1000.0, 1000, 300 * 1000.0))\ninterest1 = self._fixture.makeCommandInterest(self._fixture._identity)\nself._fixture.setNowOffsetMilliseconds(240 * 1000.0)\ninterest2 = self._fixture.makeCommandInterest(self._fixture._identity)\nself._fixture.setNowOffsetMilliseconds(360 * 1000.0)\ninterest3 = self._fixture.makeCommandInterest(self._fixture._identity)\nself._fixture.setNowOffsetMilliseconds(0.0)\nself.validateExpectSuccess(interest1, 'Should succeed')\nself.validateExpectSuccess(interest3, 'Should succeed')\nself._fixture.setNowOffsetMilliseconds(301 * 1000.0)\nself.validateExpectSuccess(interest2,\n    'Should succeed despite the timestamp being reordered, because the record has expired'\n    )\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_binEdges",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&__tools.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "values = np.exp(np.linspace(-0.1, 1, 101))\nminBin = 0.1\nbins = binEdges(values, minBin)\nassert np.isclose(bins[0], values[0] - 0.1 * minBin)\nassert bins[-1] >= values[-1] + 0.1 * minBin\nassert np.all(np.diff(bins) >= minBin * 0.99)\nbinsCut = binEdges(values, 0.01, startPoint=0.0)\nassert binsCut[0] >= 0.0\nbinsCut = binEdges(values + np.min(values) + 0.0099, 0.01, startPoint=0.0,\n    endPoint=0.5)\nassert binsCut[0] >= 0.0\nassert binsCut[-1] <= 0.5\nbinsCut = binEdges(values + np.min(values) + 0.0101, 0.01, startPoint=0.0,\n    endPoint=0.5)\nassert binsCut[0] > 0.01\nbinsCut = binEdges(np.linspace(0, 0.95, 101), 0.01, startPoint=0.0,\n    endPoint=1.0101)\nassert binsCut[-1] <= 1.0\nbinsCut = binEdges(values - np.max(values) + 1.0, 0.01, startPoint=0.0,\n    endPoint=1.01)\nassert binsCut[-1] <= 1.01\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "kmodel_graph_activation_is_layer",
+    "className": "TestModels",
+    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "input1 = Input(shape=(20,))\ndense = Dense(10)(input1)\nactivation = Activation('relu')(dense)\ndense2 = Dense(10, activation='relu')(activation)\ndense3 = Dense(5)(dense2)\nkmodel = Model(input=input1, output=dense3)\nkmodel.compile(loss='categorical_crossentropy', optimizer=RMSprop(),\n    metrics=['accuracy'])\ninput_data = np.random.sample([1, 20])\noutput_data = np.random.sample([1, 5])\nreturn kmodel, input_data, output_data\nstaticmethod"
+}

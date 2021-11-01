@@ -1,0 +1,9 @@
+{
+    "functionName": "test_wdc_parsefile_newformat",
+    "className": "WDCParsefileTestCase",
+    "fileName": "/gracecox_&_MagPySV/magpysv_&_tests_&_test_io.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\"Verify correct parsing of the test WDC format files\"\"\"\ntestfile = os.path.join(TEST_DATA_PATH, filename)\ndata = io.wdc_parsefile(testfile)\nself.assertEqual(data.code[0], code)\nself.assertEqual(len(data.code.unique()), 1)\nself.assertTrue(any(x in {'X', 'Y', 'Z', 'D', 'I', 'H'} for x in data.\n    component))\nself.assertEqual(data.component[3], component1)\nself.assertEqual(data.component.values[-1], component2)\ndata({'filename': 'testdata1.wdc', 'code': 'NGK', 'component1': 'D',\n    'component2': 'Z'}, {'filename': 'testdata2.wdc', 'code': 'NGK',\n    'component1': 'D', 'component2': 'Z'}, {'filename': 'testdata3.wdc',\n    'code': 'PSM', 'component1': 'H', 'component2': 'D'})unpack"
+}

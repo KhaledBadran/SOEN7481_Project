@@ -1,0 +1,9 @@
+{
+    "functionName": "binary_accuracy",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_objectives.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Computes the binary accuracy between predictions and targets.\n\n    .. math:: L_i = \\\\mathbb{I}(t_i = \\\\mathbb{I}(p_i \\\\ge \\\\alpha))\n\n    Parameters\n    ----------\n    predictions : Theano tensor\n        Predictions in [0, 1], such as a sigmoidal output of a neural network,\n        giving the probability of the positive class\n    targets : Theano tensor\n        Targets in {0, 1}, such as ground truth labels.\n    threshold : scalar, default: 0.5\n        Specifies at what threshold to consider the predictions being of the\n        positive class\n\n    Returns\n    -------\n    Theano tensor\n        An expression for the element-wise binary accuracy in {0, 1}\n\n    Notes\n    -----\n    This objective function should not be used with a gradient calculation;\n    its gradient is zero everywhere. It is intended as a convenience for\n    validation and testing, not training.\n\n    To obtain the average accuracy, call :func:`theano.tensor.mean()` on the\n    result, passing ``dtype=theano.config.floatX`` to compute the mean on GPU.\n    \"\"\"\npredictions, targets = align_targets(predictions, targets)\npredictions = theano.tensor.ge(predictions, threshold)\nreturn theano.tensor.eq(predictions, targets)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_thinplate",
+    "className": null,
+    "fileName": "/AllenInstitute_&_EM_Aligner_python/integration_tests_&_test_montage.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "p = copy.deepcopy(montage_parameters)\np['input_stack']['name'] = loading_raw_stack\np['output_stack']['name'] = output_stack_name\np['pointmatch']['name'] = montage_pointmatches\np['transformation'] = 'ThinPlateSplineTransform'\np['regularization'] = {'default_lambda': 1000.0, 'translation_factor': \n    1e-05, 'thinplate_factor': 1e-05}\nmod = EMaligner.EMaligner(input_data=p, args=[])\nmod.run()\nassert np.all(np.array(mod.results['precision']) < 0.0001)\nassert np.all(np.array(mod.results['error']) < 200)\ndel mod\n"
+}

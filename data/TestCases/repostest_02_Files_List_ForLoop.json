@@ -1,0 +1,9 @@
+{
+    "functionName": "test_02_Files_List_ForLoop",
+    "className": "GoogleDriveFileListTest",
+    "fileName": "/googledrive_&_PyDrive/pydrive_&_test_&_test_filelist.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "drive = GoogleDrive(self.ga)\nflist = drive.ListFile({'q': \"title = '%s' and trashed = false\" % self.\n    title, 'maxResults': 2})\nfiles = []\nfor x in flist:\n    self.assertTrue(len(x) <= 2)\n    files.extend(x)\nfor file1 in self.file_list:\n    found = False\n    for file2 in files:\n        if file1['id'] == file2['id']:\n            found = True\n    self.assertEqual(found, True)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_weekly",
+    "className": null,
+    "fileName": "/roniemartinez_&_DocCron/tests_&_test_predefined.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cron = doccron.cron('@weekly')\nnext_sunday = datetime.now(tz=tzlocal()).replace(hour=0, minute=0, second=0,\n    microsecond=0)\nwhile next_sunday.isoweekday() != 7:\n    next_sunday += timedelta(days=1)\nif next_sunday <= datetime.now(tz=tzlocal()):\n    next_sunday += timedelta(days=7)\nassert next(cron) == next_sunday\nfor _ in range(3):\n    next_sunday += timedelta(days=7)\n    assert next(cron) == next_sunday\n"
+}

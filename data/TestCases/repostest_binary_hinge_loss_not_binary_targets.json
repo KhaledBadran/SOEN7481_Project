@@ -1,0 +1,9 @@
+{
+    "functionName": "test_binary_hinge_loss_not_binary_targets",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_test_objectives.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from lasagne.objectives import binary_hinge_loss\np = theano.tensor.vector('p')\nt = theano.tensor.ivector('t')\nif not colvect:\n    c = binary_hinge_loss(p, t, log_odds=True, binary=False)\nelse:\n    c = binary_hinge_loss(p.dimshuffle(0, 'x'), t, log_odds=True, binary=False\n        )[:, (0)]\nfloatX = theano.config.floatX\npredictions = np.random.rand(10).astype(floatX)\ntargets = np.random.random_integers(0, 1, (10,)).astype('int8')\ntargets = 2 * targets - 1\nhinge = np.maximum(0, 1 - predictions * targets)\nassert np.allclose(hinge, c.eval({p: predictions, t: targets}))\npytest.mark.parametrize('colvect', (False, True))"
+}

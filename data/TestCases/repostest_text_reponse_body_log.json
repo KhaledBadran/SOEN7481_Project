@@ -1,0 +1,9 @@
+{
+    "functionName": "test_text_reponse_body_log",
+    "className": null,
+    "fileName": "/OvalMoney_&_Nephthys/tests_&_test_clients_&_test_requests.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "caplog.set_level(logging.INFO)\nm.get('https://ovalmoney.com/text_data', headers={'Content-Type':\n    'text/plain'}, text='Response')\ns = Session()\ns.get('https://ovalmoney.com/text_data')\nlog_rec = [rec for rec in caplog.records][0]\nassert log_rec.msg['response']['body'] == 'Response'\n"
+}

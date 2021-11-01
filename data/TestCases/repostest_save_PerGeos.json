@@ -1,0 +1,9 @@
+{
+    "functionName": "test_save_PerGeos",
+    "className": "PerGeosTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_io_&_PerGeosTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "net = op.network.Cubic(shape=[5, 5, 5])\nwater = op.phases.Water(network=net)\nfname = tmpdir.join(net.project.name)\nlen_before = len(tmpdir.listdir())\nop.io.PerGeos.save(network=net, phases=water, filename=fname)\nprint(tmpdir.listdir())\nprint(len(tmpdir.listdir()))\nprint(len_before)\nassert len(tmpdir.listdir()) == len_before + 1\nos.remove(fname.dirpath().join(net.project.name + '.am'))\n"
+}

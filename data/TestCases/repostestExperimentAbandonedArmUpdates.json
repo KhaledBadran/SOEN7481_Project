@@ -1,0 +1,9 @@
+{
+    "functionName": "testExperimentAbandonedArmUpdates",
+    "className": "SQAStoreTest",
+    "fileName": "/facebook_&_Ax/ax_&_storage_&_sqa_store_&_tests_&_test_sqa_store.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "experiment = get_experiment_with_batch_trial()\nsave_experiment(experiment)\nself.assertEqual(get_session().query(SQAAbandonedArm).count(), 1)\ntrial = experiment.trials[0]\ntrial.mark_arm_abandoned(trial.arms[1].name)\nsave_experiment(experiment)\nself.assertEqual(get_session().query(SQAAbandonedArm).count(), 2)\nloaded_experiment = load_experiment(experiment.name)\nself.assertEqual(experiment, loaded_experiment)\n"
+}

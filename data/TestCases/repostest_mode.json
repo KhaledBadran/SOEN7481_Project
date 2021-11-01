@@ -1,0 +1,9 @@
+{
+    "functionName": "test_mode",
+    "className": "TestValve",
+    "fileName": "/albertogeniola_&_MerossIot/tests_&_test_valve.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "if len(self.test_devices) < 1:\n    self.skipTest('No valve device has been found to run this test.')\ndev = self.test_devices[0]\nawait dev.async_update()\nself.assertIsNotNone(dev.mode)\nmodes = set(ThermostatV3Mode)\nmodes.remove(dev.mode)\nmodes = list(modes)\nindex = randint(0, len(modes) - 1)\ntarget_mode = modes[index]\nawait dev.async_set_mode(mode=target_mode)\nself.assertEqual(target_mode, dev.mode)\nunittest_run_loop"
+}

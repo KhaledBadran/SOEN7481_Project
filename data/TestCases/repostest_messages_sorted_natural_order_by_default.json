@@ -1,0 +1,9 @@
+{
+    "functionName": "test_messages_sorted_natural_order_by_default",
+    "className": "TestFeed",
+    "fileName": "/SketchingDev_&_Doodle-Dashboard/tests_&_doodledashboard_&_datafeeds_&_test_rss.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.http_server.serve_content(TestFeed._RSS_FEED)\noptions = {'url': self.http_server.url}\ndata_feed = RssFeedCreator().create(options, self._EMPTY_SECRET_STORE)\nmessages = data_feed.get_messages()\nself.assertEqual(3, len(messages))\nself.assertEqual(\"\"\"Dummy Item 1\nhttps://item/1\n2018-01-01T00:00:00+00:00\"\"\",\n    messages[0].text)\nself.assertEqual(\"\"\"Dummy Item 2\nhttps://item/2\n2018-01-03T00:00:00+00:00\"\"\",\n    messages[1].text)\nself.assertEqual(\"\"\"Dummy Item 3\nhttps://item/3\n2018-01-02T00:00:00+00:00\"\"\",\n    messages[2].text)\n"
+}

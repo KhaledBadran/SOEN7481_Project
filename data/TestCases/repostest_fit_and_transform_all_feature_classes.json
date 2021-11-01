@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fit_and_transform_all_feature_classes",
+    "className": "TestFeatureBinarizerFromTrees",
+    "fileName": "/IBM_&_AIX360/tests_&_rbm_&_test_Feature_Binarizer_From_Trees.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "fbt = FeatureBinarizerFromTrees(colCateg=self.col_categorical, treeNum=1,\n    treeDepth=None, threshRound=2, returnOrd=True, randomState=self.\n    random_state)\ncols = self.col_categorical + self.col_binary + self.col_ordinal[0:2]\nfbt.fit(self.X_train[cols], self.y_train)\nT = fbt.transform(self.X_test[cols])\nself.assertTrue(type(T) is tuple)\nself.assertTrue(type(T[0]) is DataFrame)\nself.assertTrue(type(T[1]) is DataFrame)\nU: DataFrame = T[1]\nT: DataFrame = T[0]\nself.assertListEqual(U.columns.to_list(), fbt.ordinal)\nself.assertListEqual(list(fbt.enc.keys()), self.col_categorical)\nself.assertTrue(type(list(fbt.enc.values())[0]) is OneHotEncoder)\nself.assertTrue(type(list(fbt.thresh.values())[0]) is ndarray)\nself.assertListEqual(list(fbt.maps.keys()), self.col_binary)\nself.assertListEqual(list(fbt.thresh.keys()), ['mean radius', 'mean texture'])\na = T['mean texture', '<=', 27.24].to_numpy()\nb = (self.X_test['mean texture'] <= 27.24).astype(int).to_numpy()\nself.assertTrue(np.all(a == b))\na = T['mean texture', '>', 27.24].to_numpy()\nb = 1 - b\nself.assertTrue(np.all(a == b))\nXn: DataFrame = self.X_test.copy(True)\nidx = Xn.sample(10).index\nXn.loc[idx, 'mean radius'] = np.NaN\nXn.loc[idx, 'cat alpha'] = None\nwith self.assertWarns(RuntimeWarning):\n    T: DataFrame = fbt.transform(Xn)[0]\nself.assertFalse((T.loc[idx, 'mean radius'] == 1).to_numpy().any())\nself.assertTrue((T.loc[idx, ('cat alpha', '==')] == 0).to_numpy().any())\nself.assertTrue((T.loc[idx, ('cat alpha', '!=')] == 1).to_numpy().any())\n"
+}

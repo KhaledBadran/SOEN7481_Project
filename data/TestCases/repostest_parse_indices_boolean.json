@@ -1,0 +1,9 @@
+{
+    "functionName": "test_parse_indices_boolean",
+    "className": "BaseTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_core_&_BaseTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "b = np.array([True, True, True])\nwith pytest.raises(Exception):\n    self.net._parse_indices(indices=b)\nb = np.zeros((self.net.Np,), dtype=bool)\nassert len(self.net._parse_indices(indices=b)) == 0\nb = np.zeros((self.net.Nt,), dtype=bool)\nb[[0, 1, 2]] = True\nassert np.shape(self.net._parse_indices(indices=b)) == (3,)\n"
+}

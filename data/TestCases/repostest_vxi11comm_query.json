@@ -1,0 +1,9 @@
+{
+    "functionName": "test_vxi11comm_query",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_comm_&_test_vxi11.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "comm = VXI11Communicator()\ncomm._inst.ask.return_value = 'answer'\nassert comm._query('mock') == 'answer'\ncomm._inst.ask.assert_called_with('mock', num=-1)\ncomm._query('mock', size=10)\ncomm._inst.ask.assert_called_with('mock', num=10)\nmock.patch(import_base)"
+}

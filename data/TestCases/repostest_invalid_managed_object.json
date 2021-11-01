@@ -1,0 +1,9 @@
+{
+    "functionName": "test_invalid_managed_object",
+    "className": "TestRegisterRequestPayload",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_register.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a TypeError is raised when an invalid value is used to set\n        the managed object of a Register request payload.\n        \"\"\"\nkwargs = {'managed_object': 'invalid'}\nself.assertRaisesRegex(TypeError,\n    'Managed object must be a supported managed object structure.',\n    payloads.RegisterRequestPayload, **kwargs)\nargs = payloads.RegisterRequestPayload(), 'managed_object', 'invalid'\nself.assertRaisesRegex(TypeError,\n    'Managed object must be a supported managed object structure.', setattr,\n    *args)\n"
+}

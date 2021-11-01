@@ -1,0 +1,9 @@
+{
+    "functionName": "test_default_validator",
+    "className": null,
+    "fileName": "/spacemanspiff2007_&_EasyCo/tests_&_test_entry.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "c = ConfigEntry(required=True, default=5)\nc.set_type_hint('test', int)\nvalidator = c.set_validator({}, DEFAULT_CONFIGURATION)\nret = voluptuous.Schema(validator)({})\nassert ret == {'test': 5}\nret = voluptuous.Schema(validator)({'test': 7})\nassert ret == {'test': 7}\nc = ConfigEntry(required=True, default='asdf')\nc.set_type_hint('test', str)\nvalidator = c.set_validator({}, DEFAULT_CONFIGURATION)\nret = voluptuous.Schema(validator)({})\nassert ret == {'test': 'asdf'}\nret = voluptuous.Schema(validator)({'test': 'ASDF'})\nassert ret == {'test': 'ASDF'}\n"
+}

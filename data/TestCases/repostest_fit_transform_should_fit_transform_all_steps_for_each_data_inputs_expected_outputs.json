@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fit_transform_should_fit_transform_all_steps_for_each_data_inputs_expected_outputs",
+    "className": null,
+    "fileName": "/Neuraxio_&_Neuraxle/testing_&_steps_&_test_for_each.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tape = TapeCallbackFunction()\ntape_fit = TapeCallbackFunction()\np = Pipeline([ForEachDataInput(Pipeline([FitTransformCallbackStep(tape.\n    callback, tape_fit, ['1']), FitTransformCallbackStep(tape.callback,\n    tape_fit, ['2'])]))])\ndata_inputs = [[0, 1], [1, 2]]\nexpected_outputs = [[2, 3], [4, 5]]\np, outputs = p.fit_transform(data_inputs, expected_outputs)\nassert tape.get_name_tape() == ['1', '2', '1', '2']\nassert tape_fit.get_name_tape() == ['1', '2', '1', '2']\nassert tape_fit.data == [([0, 1], [2, 3]), ([0, 1], [2, 3]), ([1, 2], [4, 5\n    ]), ([1, 2], [4, 5])]\n"
+}

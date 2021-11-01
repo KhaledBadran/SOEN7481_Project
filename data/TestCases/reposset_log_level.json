@@ -1,0 +1,9 @@
+{
+    "functionName": "set_log_level",
+    "className": null,
+    "fileName": "/nipy_&_PySurfer/surfer_&_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Convenience function for setting the logging level\n\n    Parameters\n    ----------\n    verbose : bool, str, int, or None\n        The verbosity of messages to print. If a str, it can be either DEBUG,\n        INFO, WARNING, ERROR, or CRITICAL. Note that these are for\n        convenience and are equivalent to passing in logging.DEBUG, etc.\n        For bool, True is the same as 'INFO', False is the same as 'WARNING'.\n        If None, the environment variable MNE_LOG_LEVEL is read, and if\n        it doesn't exist, defaults to INFO.\n    return_old_level : bool\n        If True, return the old verbosity level.\n    \"\"\"\nif verbose is None:\n    verbose = 'INFO'\nelif isinstance(verbose, bool):\n    if verbose is True:\n        verbose = 'INFO'\n    else:\n        verbose = 'WARNING'\nif isinstance(verbose, string_types):\n    verbose = verbose.upper()\n    logging_types = dict(DEBUG=logging.DEBUG, INFO=logging.INFO, WARNING=\n        logging.WARNING, ERROR=logging.ERROR, CRITICAL=logging.CRITICAL)\n    if verbose not in logging_types:\n        raise ValueError('verbose must be of a valid type')\n    verbose = logging_types[verbose]\nold_verbose = logger.level\nlogger.setLevel(verbose)\nreturn old_verbose if return_old_level else None\n"
+}

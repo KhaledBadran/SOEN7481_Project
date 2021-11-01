@@ -1,0 +1,9 @@
+{
+    "functionName": "remove_isolated_clusters",
+    "className": null,
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_topotools_&_topotools.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Finds cluster labels not attached to the inlets, and sets them to\n    unoccupied (-1)\n\n    Parameters\n    ----------\n    labels : tuple of site and bond labels\n        This information is provided by the ``site_percolation`` or\n        ``bond_percolation`` functions\n\n    inlets : array_like\n        A list of which sites are inlets.  Can be a boolean mask or an\n        array of indices.\n\n    Returns\n    -------\n    A tuple containing a list of site and bond labels, with all clusters\n    not connected to the inlet sites set to not occupied.\n\n    \"\"\"\ninv_clusters = np.unique(labels.sites[inlets])\ninv_clusters = inv_clusters[inv_clusters >= 0]\np_invading = np.in1d(labels.sites, inv_clusters)\nlabels.sites[~p_invading] = -1\nt_invading = np.in1d(labels.bonds, inv_clusters)\nlabels.bonds[~t_invading] = -1\nreturn labels\n"
+}

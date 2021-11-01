@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fill_multiple_orders_different_level",
+    "className": "TestBasicOrders",
+    "fileName": "/gavincyi_&_LightMatchingEngine/tests_&_unit_&_test_basic_orders.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "me = lme.LightMatchingEngine()\nfor i in range(1, 11):\n    buy_order, trades = me.add_order(TestBasicOrders.instmt, \n        TestBasicOrders.price + i, TestBasicOrders.lot_size, lme.Side.BUY)\n    self.assertEqual(0, len(trades))\n    self.check_order_book(me, TestBasicOrders.instmt, i, 0)\n    self.assertEqual(1, len(me.order_books[TestBasicOrders.instmt].bids[\n        TestBasicOrders.price + i]))\n    self.check_order(buy_order, i, TestBasicOrders.instmt, TestBasicOrders.\n        price + i, TestBasicOrders.lot_size, lme.Side.BUY, 0,\n        TestBasicOrders.lot_size)\nsell_order, trades = me.add_order(TestBasicOrders.instmt, TestBasicOrders.\n    price, 10.0 * TestBasicOrders.lot_size, lme.Side.SELL)\nself.check_order_book(me, TestBasicOrders.instmt, 0, 0)\nself.assertEqual(20, len(trades))\nself.check_order(buy_order, 10, TestBasicOrders.instmt, TestBasicOrders.\n    price + 10, TestBasicOrders.lot_size, lme.Side.BUY, TestBasicOrders.\n    lot_size, 0)\nself.check_order(sell_order, 11, TestBasicOrders.instmt, TestBasicOrders.\n    price, 10 * TestBasicOrders.lot_size, lme.Side.SELL, 10 *\n    TestBasicOrders.lot_size, 0)\nfor i in range(0, 10):\n    match_price = sell_order.price + 10 - i\n    self.check_trade(trades[2 * i], sell_order.order_id, sell_order.instmt,\n        match_price, TestBasicOrders.lot_size, sell_order.side, 2 * i + 1)\n    self.check_trade(trades[2 * i + 1], 10 - i, buy_order.instmt,\n        match_price, TestBasicOrders.lot_size, buy_order.side, 2 * i + 2)\n"
+}

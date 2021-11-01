@@ -1,0 +1,9 @@
+{
+    "functionName": "test_print_coverage",
+    "className": "TestGenTableTran",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_gen_table_tran.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "out = StringIO()\nout_gff = StringIO()\ngtt.print_coverage(self.example.tas, out, out_gff, self.example.wigs, self.\n    example.wigs, None)\nself.assertEqual(out.getvalue(),\n    \"\"\"aaa\tTranscript_0\t4\t20\t+\tfragmented&TEX+/-\tNA\tNA\tNA\ttrack_1(33.529411764705884)\n\"\"\"\n    )\nself.assertListEqual(out_gff.getvalue().split('\\t')[:-1], ['aaa',\n    'ANNOgesic', 'Transcript', '4', '20', '.', '+', '.'])\nself.assertEqual(set(out_gff.getvalue().split('\\t')[-1].strip().split(';')),\n    set(['Name=Transcript_0', 'detect_lib=fragmented&TEX+/-',\n    'best_avg_coverage=33.529411764705884', 'ID=tran0']))\n"
+}

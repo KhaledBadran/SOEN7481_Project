@@ -1,0 +1,9 @@
+{
+    "functionName": "CRF_forward",
+    "className": null,
+    "fileName": "/david-leon_&_Dandelion/test_&_test_ChainCRF.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n\n    :param observations: (B, T, N)\n    :param transitions:  (N, N)\n    :param viterbi:\n    :param return_alpha:\n    :param return_best_sequence:\n    :return:\n    \"\"\"\nU = transitions.dimshuffle('x', 'x', 0, 1)\ninitial = observations[:, (0), :]\ntensor.unbroadcast(initial, 0, 1)\nx = observations[:, 1:, :]\nx = x.dimshuffle(0, 1, 'x', 2)\nx = x + U\nx = x.dimshuffle(1, 0, 2, 3)\ndef recurrence(energy_matrix_t, states):\n    \"\"\"\n        :param energy_matrix_t: (B, N, N)\n\n        :return:\n        \"\"\"\n    alpha_tm1 = states\n    alpha_tm1 = alpha_tm1.dimshuffle(0, 1, 'x')\n    x = alpha_tm1 + energy_matrix_t\n    new_states = log_sum_exp(x, axis=1)\n    return new_states\nalpha, _ = theano.scan(fn=recurrence, sequences=x, outputs_info=[initial])\nreturn alpha.dimshuffle(1, 0, 2)\n"
+}

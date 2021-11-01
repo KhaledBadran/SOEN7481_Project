@@ -1,0 +1,9 @@
+{
+    "functionName": "test_console_entry_version",
+    "className": null,
+    "fileName": "/jantman_&_AutoSimulationCraft/autosimulationcraft_&_tests_&_test_runner.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" test console_entry_point() with --version \"\"\"\nwith patch('autosimulationcraft.runner.parse_args') as mock_parse_args:\n    args = Container()\n    setattr(args, 'version', True)\n    mock_parse_args.return_value = args\n    with pytest.raises(SystemExit):\n        autosimulationcraft.runner.console_entry_point()\nout, err = capsys.readouterr()\nassert out == '{v}\\n'.format(v=VERSION)\nassert mock_parse_args.call_count == 1\n"
+}

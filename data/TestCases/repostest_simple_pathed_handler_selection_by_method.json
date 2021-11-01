@@ -1,0 +1,9 @@
+{
+    "functionName": "test_simple_pathed_handler_selection_by_method",
+    "className": "TestEynnydWebappHandlers",
+    "fileName": "/cbefus_&_Eynnyd/tests_&_test_eynnyd_webapp.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "spy_get_handler = TestEynnydWebappHandlers.SpyHandler('NOPE')\nspy_post_handler = TestEynnydWebappHandlers.SpyHandler('YEP')\nroutes = RoutesBuilder().add_handler('GET', '/foo/bar', spy_get_handler.\n    test_handler).add_handler('POST', '/foo/bar', spy_post_handler.test_handler\n    ).build()\ntest_app = EynnydWebappBuilder().set_routes(routes).build()\nrequest = TestEynnydWebappHandlers.StubRequest(method='POST', request_uri=\n    '/foo/bar')\nresponse = test_app.process_request_to_response(request)\nself.assertEqual(1, spy_post_handler.handler_call_count)\nself.assertEqual(0, spy_get_handler.handler_call_count)\nself.assertEqual(b'YEP', response.body.content)\n"
+}

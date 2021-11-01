@@ -1,0 +1,9 @@
+{
+    "functionName": "check_delete_vector",
+    "className": "StorageTest",
+    "fileName": "/pixelogik_&_NearPy/tests_&_storage_tests.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "hash_name, bucket_name = 'tastHash', 'testBucket'\nsamples = list(range(10))\nfor sample in samples:\n    self.storage.store_vector(hash_name, bucket_name, x, sample)\ndef get_bucket_items():\n    return [data for v, data in self.storage.get_bucket(hash_name, bucket_name)\n        ]\nself.assertEqual(get_bucket_items(), samples)\ndeleted_sample = 4\nself.storage.delete_vector(hash_name, [bucket_name], deleted_sample)\nsamples.remove(deleted_sample)\nself.assertEqual(get_bucket_items(), samples)\n"
+}

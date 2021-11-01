@@ -1,0 +1,9 @@
+{
+    "functionName": "test_kernel_prediction",
+    "className": "TestGaussianKernel",
+    "fileName": "/SUNCAT-Center_&_CatLearn/test_&_test_gradients.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "k = gaussian_kernel(theta=width, log_scale=False, m1=train, m2=test,\n    eval_gradients=False)\nktilde = gaussian_kernel(theta=width, log_scale=False, m1=train, m2=test,\n    eval_gradients=True)\nprint('Comparing k (without gradients) and k in ktilde.')\nnp.testing.assert_array_equal(k, ktilde[:, :n_test])\ni_pos = np.random.randint(len(train))\nj_pos = np.random.randint(len(test))\nd = train[i_pos] - test[j_pos]\nprint('Checking k in ktilde.')\nk_math = np.exp(-np.linalg.norm(d / width) ** 2 / 2)\nnp.testing.assert_array_almost_equal(k_math, ktilde[i_pos, j_pos], decimal=15)\nprint('Checking kgd in ktilde.')\nkgd_math = width ** -2 * d * np.exp(-np.linalg.norm(d / width) ** 2 / 2)\nnp.testing.assert_array_almost_equal(kgd_math, ktilde[(i_pos), n_test + D *\n    j_pos:n_test + D * j_pos + D], decimal=15)\n"
+}

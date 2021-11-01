@@ -1,0 +1,9 @@
+{
+    "functionName": "test_control_lines",
+    "className": "LexerTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_lexer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "template = \"\"\"\ntext text la la\n% if foo():\n mroe text la la blah blah\n% endif\n\n        and osme more stuff\n        % for l in range(1,5):\n    tex tesl asdl l is ${l} kfmas d\n      % endfor\n    tetx text\n\n\"\"\"\nnodes = Lexer(template).parse()\nself._compare(nodes, TemplateNode({}, [Text(\"\"\"\ntext text la la\n\"\"\", (1, 1)\n    ), ControlLine('if', 'if foo():', False, (3, 1)), Text(\n    ' mroe text la la blah blah\\n', (4, 1)), ControlLine('if', 'endif', \n    True, (5, 1)), Text(\"\"\"\n        and osme more stuff\n\"\"\", (6, 1)),\n    ControlLine('for', 'for l in range(1,5):', False, (8, 1)), Text(\n    '    tex tesl asdl l is ', (9, 1)), Expression('l', [], (9, 24)), Text(\n    ' kfmas d\\n', (9, 28)), ControlLine('for', 'endfor', True, (10, 1)),\n    Text('    tetx text\\n\\n', (11, 1))]))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_is_child_storage_group_in_parent_storage_group",
+    "className": "CITestProvisioning",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test is_child_storage_group_in_parent_storage_group.\"\"\"\nparent_storage_group = self.create_empty_storage_group()\nchild_storage_group = self.create_empty_storage_group()\nresult = self.provisioning.is_child_storage_group_in_parent_storage_group(\n    child_storage_group, parent_storage_group)\nself.assertIsInstance(result, bool)\nself.assertFalse(result)\nself.provisioning.add_child_storage_group_to_parent_group(child_storage_group,\n    parent_storage_group)\nresult = self.provisioning.is_child_storage_group_in_parent_storage_group(\n    child_storage_group, parent_storage_group)\nself.provisioning.remove_child_storage_group_from_parent_group(\n    child_storage_group, parent_storage_group)\nstorage_group_list = self.provisioning.get_storage_group_list()\nauto_created_child = '{psg}_1'.format(psg=parent_storage_group)\nif auto_created_child in storage_group_list:\n    self.provisioning.remove_child_storage_group_from_parent_group(\n        auto_created_child, parent_storage_group)\n    self.addCleanup(self.delete_storage_group, auto_created_child)\nself.assertIsInstance(result, bool)\nself.assertTrue(result)\n"
+}

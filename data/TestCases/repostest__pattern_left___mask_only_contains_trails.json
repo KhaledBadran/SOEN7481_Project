@@ -1,0 +1,9 @@
+{
+    "functionName": "test__pattern_left___mask_only_contains_trails",
+    "className": "TestMaskedSerialTrails",
+    "fileName": "/Jammy2211_&_PyAutoCTI/test_&_unit_&_charge_injection_&_test_ci_mask.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "pattern = ci_pattern.CIPatternUniform(normalization=1.0, regions=[(0, 3, 1, 4)]\n    )\nframe = ci_frame.ChInj(frame_geometry=ci_frame.FrameGeometry.\n    euclid_bottom_left(), ci_pattern=pattern)\nmask = ci_mask.CIMask.masked_serial_trails_from_ci_frame(shape=(3, 10),\n    ci_frame=frame, columns=(0, 6))\nassert type(mask) == ci_mask.CIMask\nassert (mask == np.array([[False, False, False, False, True, True, True, \n    True, True, True], [False, False, False, False, True, True, True, True,\n    True, True], [False, False, False, False, True, True, True, True, True,\n    True]])).all()\n"
+}

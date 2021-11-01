@@ -1,0 +1,9 @@
+{
+    "functionName": "test_service_objects",
+    "className": null,
+    "fileName": "/KevinHonka_&_Icinga2_Python_API/icinga2_&_tests_&_test_services.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Get all service Objects and check if created service is present\n    \"\"\"\napi = Icinga2API(username=constants.username, password=constants.password,\n    url=constants.url, debug=False)\nresponse = api.services.objects()\nassert any(result['attrs'].get('name', None) == constants.TestService_name for\n    result in response)\npytest.mark.run(order=6)"
+}

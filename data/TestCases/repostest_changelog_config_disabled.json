@@ -1,0 +1,9 @@
+{
+    "functionName": "test_changelog_config_disabled",
+    "className": null,
+    "fileName": "/132nd-etcher_&_EPAB/test_&_test_cmd_&_test_changelog.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "caplog.set_level(10)\nchangelog = Path('CHANGELOG.md')\nconfig.CHANGELOG_DISABLE.default = True\nassert config.CHANGELOG_DISABLE() is True\nexpect(elib_run, times=0).run(...)\n_chglog()\nassert 'skipping changelog update as per config' in caplog.text\nassert not changelog.exists()\n"
+}

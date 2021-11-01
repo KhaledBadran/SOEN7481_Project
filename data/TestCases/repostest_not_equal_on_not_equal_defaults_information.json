@@ -1,0 +1,9 @@
+{
+    "functionName": "test_not_equal_on_not_equal_defaults_information",
+    "className": "TestQueryResponsePayload",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_query.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the inequality operator returns True when comparing two\n        QueryResponsePayload structures with different defaults information\n        fields.\n        \"\"\"\na = payloads.QueryResponsePayload(defaults_information=objects.\n    DefaultsInformation(object_defaults=[objects.ObjectDefaults(object_type\n    =enums.ObjectType.SYMMETRIC_KEY, attributes=objects.Attributes(\n    attributes=[primitives.Enumeration(enums.CryptographicAlgorithm, value=\n    enums.CryptographicAlgorithm.AES, tag=enums.Tags.\n    CRYPTOGRAPHIC_ALGORITHM), primitives.Integer(value=128, tag=enums.Tags.\n    CRYPTOGRAPHIC_LENGTH), primitives.Integer(value=enums.\n    CryptographicUsageMask.ENCRYPT.value | enums.CryptographicUsageMask.\n    DECRYPT.value, tag=enums.Tags.CRYPTOGRAPHIC_USAGE_MASK)]))]))\nb = payloads.QueryResponsePayload(defaults_information=objects.\n    DefaultsInformation(object_defaults=[objects.ObjectDefaults(object_type\n    =enums.ObjectType.PUBLIC_KEY, attributes=objects.Attributes(attributes=\n    [primitives.Enumeration(enums.CryptographicAlgorithm, value=enums.\n    CryptographicAlgorithm.RSA, tag=enums.Tags.CRYPTOGRAPHIC_ALGORITHM),\n    primitives.Integer(value=1024, tag=enums.Tags.CRYPTOGRAPHIC_LENGTH),\n    primitives.Integer(value=enums.CryptographicUsageMask.ENCRYPT.value,\n    tag=enums.Tags.CRYPTOGRAPHIC_USAGE_MASK)]))]))\nself.assertTrue(a != b)\nself.assertTrue(b != a)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_or_compute_grads",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_test_updates.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from lasagne.updates import get_or_compute_grads\nA = theano.shared(1)\nB = theano.shared(1)\nloss = A + B\ngrads = get_or_compute_grads(loss, [A, B])\nassert get_or_compute_grads(grads, [A, B]) is grads\nwith pytest.raises(ValueError):\n    get_or_compute_grads(grads, [A])\nC = T.scalar()\nwith pytest.raises(ValueError):\n    get_or_compute_grads(A + C, [A, C])\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_same_result",
+    "className": "TestGrapheneAngles",
+    "fileName": "/OMalenfantThuot_&_ML_Calc_Driver/tests_&_test_angles.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "j1 = Job(posinp=self.pos_2at, calculator=self.calc)\nj1.run('energy')\ne1 = j1.results['energy']\nj2 = Job(posinp=self.pos_4at_red, calculator=self.calc)\nj2.run('energy')\ne2 = j2.results['energy']\npos_4at = deepcopy(self.pos_4at_red)\npos_4at.convert_units('angstroem')\nj3 = Job(posinp=pos_4at, calculator=self.calc)\nj3.run('energy')\ne3 = j3.results['energy']\nassert e2 == e3\nassert np.isclose(e2, 2 * e1, atol=0.0002)\n"
+}

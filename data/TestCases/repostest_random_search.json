@@ -1,0 +1,9 @@
+{
+    "functionName": "test_random_search",
+    "className": "TestSklearn",
+    "fileName": "/microsoft_&_LightGBM/tests_&_python_package_test_&_test_sklearn.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "X, y = load_iris(return_X_y=True)\ny = y.astype(str)\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1,\n    random_state=42)\nX_train, X_val, y_train, y_val = train_test_split(X_train, y_train,\n    test_size=0.1, random_state=42)\nn_iter = 3\nparams = dict(subsample=0.8, subsample_freq=1)\nparam_dist = dict(boosting_type=['rf', 'gbdt'], n_estimators=[np.random.\n    randint(low=3, high=10) for i in range(n_iter)], reg_alpha=[np.random.\n    uniform(low=0.01, high=0.06) for i in range(n_iter)])\nfit_params = dict(verbose=False, eval_set=[(X_val, y_val)], eval_metric=\n    constant_metric, early_stopping_rounds=2)\nrand = RandomizedSearchCV(estimator=lgb.LGBMClassifier(**params),\n    param_distributions=param_dist, cv=2, n_iter=n_iter, random_state=42)\nrand.fit(X_train, y_train, **fit_params)\nscore = rand.score(X_test, y_test)\nself.assertIn(rand.best_params_['boosting_type'], ['rf', 'gbdt'])\nself.assertIn(rand.best_params_['n_estimators'], list(range(3, 10)))\nself.assertGreaterEqual(rand.best_params_['reg_alpha'], 0.01)\nself.assertLessEqual(rand.best_params_['reg_alpha'], 0.06)\nself.assertLessEqual(rand.best_score_, 1.0)\nself.assertLess(rand.best_estimator_.best_score_['valid_0']['multi_logloss'\n    ], 0.25)\nself.assertEqual(rand.best_estimator_.best_score_['valid_0']['error'], 0)\nself.assertGreaterEqual(score, 0.2)\nself.assertLessEqual(score, 1.0)\n"
+}

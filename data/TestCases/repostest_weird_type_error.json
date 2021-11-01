@@ -1,0 +1,9 @@
+{
+    "functionName": "test_weird_type_error",
+    "className": "CallSimAutoTestCase",
+    "fileName": "/mzy2240_&_ESA/tests_&_test_saw.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"I'll be honest - I'm just trying to get testing coverage to\n        100%, and I have no idea how to get this exception raised\n        without doing some hacking. Here we go.\n        \"\"\"\nm = MagicMock()\nm.GetParametersSingleElement = Mock(return_value=('issues', 12))\nwith patch.object(saw_14, '_pwcom', new=m):\n    with patch('esa.saw.PowerWorldError', side_effect=TypeError('weird things')\n        ):\n        with self.assertRaises(TypeError):\n            saw_14.GetParametersSingleElement('bus', ['BusNum'], [1])\n"
+}

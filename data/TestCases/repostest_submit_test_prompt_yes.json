@@ -1,0 +1,9 @@
+{
+    "functionName": "test_submit_test_prompt_yes",
+    "className": null,
+    "fileName": "/bio-phys_&_MDBenchmark/mdbenchmark_&_tests_&_test_submit.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test whether promt answer no works.\"\"\"\nwith tmpdir.as_cwd():\n    monkeypatch.setattr('subprocess.call', lambda x: True)\n    monkeypatch.setattr('mdbenchmark.cli.submit.get_batch_command', lambda :\n        'sbatch')\n    monkeypatch.setattr('mdbenchmark.cli.submit.detect_md_engine', lambda x:\n        gromacs)\n    monkeypatch.setattr('mdbenchmark.cli.submit.cleanup_before_restart', lambda\n        engine, sim: True)\n    result = cli_runner.invoke(cli, ['submit', '--directory={}'.format(data\n        ['analyze-files-gromacs-one-unstarted'])], input='y\\n')\n    df = pd.read_csv(data['analyze-files-gromacs-prompt.csv'], index_col=0)\n    s = PrintDataFrame(df, False)\n    output = 'Benchmark Summary:\\n' + s + \"\"\"\nThe above benchmarks will be submitted. Continue? [y/N]: y\n\"\"\" + 'Submitting a total of 1 benchmarks.\\n' + \"\"\"Submitted all benchmarks. Run mdbenchmark analyze once they are finished to get the results.\n\"\"\"\n    assert result.exit_code == 0\n    assert result.output == output\n    treant = dtr.Bundle(data['analyze-files-gromacs-one-unstarted'] + '/1')\n    treant.categories['started'] = False\npytest.mark.skip(reason='monkeypatching is a problem. skip for now.')"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_comments_dont_bother_values",
+    "className": "Test_ConfigParser",
+    "fileName": "/Kieran-Bacon_&_Better/PackageTests_&_test_configparser.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "config = ConfigParser(\n    \"\"\"\n        a = value # This comment should not exist as part of the value\n        b = \"value # This one should though since its inside a quote\"\n        c = 'just to clarify that #either quotes work'\n        d = \"And we need to check that if the thing isn't within the quotes\" # Then its totally ok\n        e = \"We should also ensure that \\\\\" works as a method of escaping the quotes\" # And this should still work\n        f = Lets go for multi-line comments ; shaking nervously\n         these should not be a problem right!? # One would hope\n         because that would be bad...\n        g = \"Well this shouldn't  really work... # as this comment\n         is actually within the multi-line quote.\"\n        \"\"\"\n    )\nself.assertEqual(config, {'a': 'value', 'b':\n    'value # This one should though since its inside a quote', 'c':\n    'just to clarify that #either quotes work', 'd':\n    \"And we need to check that if the thing isn't within the quotes\", 'e':\n    'We should also ensure that \\\\\" works as a method of escaping the quotes',\n    'f':\n    \"\"\"Lets go for multi-line comments\nthese should not be a problem right!?\nbecause that would be bad...\"\"\"\n    , 'g':\n    \"\"\"Well this shouldn't  really work... # as this comment\nis actually within the multi-line quote.\"\"\"\n    })\n"
+}

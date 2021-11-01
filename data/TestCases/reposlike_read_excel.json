@@ -1,0 +1,9 @@
+{
+    "functionName": "like_read_excel",
+    "className": null,
+    "fileName": "/Hatoris_&_BioPlate/tests_&_test_plate_to_excel.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "rm_empty = [] if lst is None else lst\nif plate.name == 'Plate':\n    return clean_list(rm_empty, plate, header=header)\nelif plate.name == 'Inserts':\n    n = 0\n    for parts in plate:\n        parts = parts if header else parts[1:, 1:]\n        u = len(parts)\n        for part in parts:\n            if header:\n                if n == 0:\n                    part[0] = 'TOP'\n                elif u == n:\n                    part[0] = 'BOT'\n            if u == n:\n                rm_empty.append([])\n            clean_list(rm_empty, part, parts=True)\n            n += 1\n    return rm_empty\n"
+}

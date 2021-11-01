@@ -1,0 +1,9 @@
+{
+    "functionName": "test_saveHorizonMaskFile_1",
+    "className": null,
+    "fileName": "/mworion_&_MountWizzard4/mw4_&_test_&_unit_tests_&_gui_&_mainWmixin_&_test_tabSettHorizon.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "app.ui.horizonFileName.setText('test')\nwith mock.patch.object(app, 'saveFile', return_value=('build', 'test', 'bpts')\n    ):\n    with mock.patch.object(app.app.data, 'saveHorizonP', return_value=True):\n        with qtbot.waitSignal(app.app.message) as blocker:\n            suc = app.saveHorizonMask()\n            assert suc\n        assert ['Horizon mask [test] saved', 0] == blocker.args\n"
+}

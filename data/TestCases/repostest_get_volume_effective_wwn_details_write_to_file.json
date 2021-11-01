@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_volume_effective_wwn_details_write_to_file",
+    "className": "PyU4VProvisioningTest",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_provisioning.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test get_volume_effective_wwn_details.\"\"\"\ndevice_id = self.data.device_id\nvol_list = [device_id]\ncol_list = ['volume_id', 'effective_wwn', 'wwn', 'has_effective_wwn',\n    'storage_group_id']\nstorage_group_format = \"['{sg}']\".format(sg=self.data.storagegroup_name)\nrow_list = [device_id, '', self.data.volume_wwn, '', storage_group_format]\nref_out_data = [col_list, row_list]\nwith tempfile.TemporaryDirectory() as td:\n    file_name = os.path.join(td, 'temp_ut_file')\n    act_vol_data = self.provisioning.get_volume_effective_wwn_details(vol_list,\n        output_file_name=file_name)\n    self.assertEqual(None, act_vol_data)\n    with open(file_name, 'r') as f:\n        file_contents = list(csv.reader(f))\n        self.assertEqual(ref_out_data, file_contents)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ChangeValueTree",
+    "className": null,
+    "fileName": "/OpenSCAP_&_OVAL-visualization-as-graph/tests_&_test_graph.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        and\n        /|       t t or\n          /          f   t\n    \"\"\"\nTree = OvalNode(node_id=1, node_type='operator', value='and', children=[\n    OvalNode(node_id=2, node_type='value', value='true'), OvalNode(node_id=\n    3, node_type='value', value='false'), OvalNode(node_id=4, node_type=\n    'operator', value='or', children=[OvalNode(node_id=5, node_type='value',\n    value='false'), OvalNode(node_id=6, node_type='value', value='true')])])\nTree.change_tree_value(3, 'true')\ntests.any_test_help.any_test_treeEvaluation_with_tree(Tree, 'true')\n"
+}

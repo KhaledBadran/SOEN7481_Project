@@ -1,0 +1,9 @@
+{
+    "functionName": "test_positive_pairs",
+    "className": null,
+    "fileName": "/Puumanamana_&_CoCoNet/tests_&_test_fragmentation.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test positive examples (pairs from the same genome)\n    \"\"\"\nmin_dist = calculate_optimal_dist(contig_frags, fppc)\nresult = make_positive_pairs(0, 4, contig_frags, fppc, encoding_len=8)\nassert sum(result.sp[:, (0)] == result.sp[:, (1)]) == fppc\nassert sum(np.abs(result.start[:, (0)].astype(int) - result.start[:, (1)].\n    astype(int)) < min_dist) == 0\nassert np.array(result.tolist()).shape == (fppc, 2, 3)\n"
+}

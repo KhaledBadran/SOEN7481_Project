@@ -1,0 +1,9 @@
+{
+    "functionName": "test_syncobjWaitBinded",
+    "className": null,
+    "fileName": "/bakwc_&_PySyncObj/test_syncobj.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "random.seed(42)\na = [getNextAddr(), getNextAddr(), getNextAddr()]\no1 = TestObj(a[0], [a[1]], testType=TEST_TYPE.WAIT_BIND)\no2 = TestObj(a[1], [a[0]], testType=TEST_TYPE.WAIT_BIND)\no1.waitBinded()\no2.waitBinded()\no3 = TestObj(a[1], [a[0]], testType=TEST_TYPE.WAIT_BIND)\nwith pytest.raises(SyncObjException):\n    o3.waitBinded()\no1.destroy()\no2.destroy()\no3.destroy()\npytest.mark.skipif(os.name == 'nt', reason='temporary disabled for windows')"
+}

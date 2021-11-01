@@ -1,0 +1,9 @@
+{
+    "functionName": "run_express_name_test",
+    "className": "TestFaceInterestMethods",
+    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_face_methods.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "name = Name(interestName)\ndataCallback = Mock()\ntimeoutCallback = Mock()\nonNackCallback = Mock()\nif useOnNack:\n    self.face.expressInterest(name, dataCallback, timeoutCallback,\n        onNackCallback)\nelse:\n    self.face.expressInterest(name, dataCallback, timeoutCallback)\nwhile True:\n    self.face.processEvents()\n    time.sleep(0.01)\n    if (dataCallback.call_count > 0 or timeoutCallback.call_count > 0 or \n        onNackCallback.call_count > 0):\n        break\nreturn dataCallback, timeoutCallback, onNackCallback\n"
+}

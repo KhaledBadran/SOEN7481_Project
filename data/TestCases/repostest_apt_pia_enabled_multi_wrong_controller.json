@@ -1,0 +1,9 @@
+{
+    "functionName": "test_apt_pia_enabled_multi_wrong_controller",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_thorlabs_&_test_thorlabs_apt.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Multi-channel enabling APT Piezo Inertia Actuator TIM101.\n\n    Tested with KIM101 driver connected to PIM1 mirror mount.\n    \"\"\"\nwith expected_protocol(ik.thorlabs.APTPiezoInertiaActuator, [init_tim101[0]\n    ], [init_tim101[1]], sep='') as apt:\n    with pytest.raises(TypeError):\n        apt.enabled_multi = 42\n    with pytest.raises(TypeError):\n        assert apt.enabled_multi == 1\n"
+}

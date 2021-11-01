@@ -1,0 +1,9 @@
+{
+    "functionName": "calRefVector",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&__tools.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\" Calcualte reference vector as vector pointing from mean point to geometric center. For half moon shape this is anti-radially.\n    \n    Args:\n        \n        - points (list): list of points for which reference vector is calcualted, shape is 2xN\n        \n    Returns:\n        \n        vector: Reference vector\n    \n    \"\"\"\ncenter = np.mean(points, axis=1).reshape(2, 1)\nargMinDist = np.argmin(np.linalg.norm(center - points, axis=0))\nreturn center - points[:, (argMinDist)].reshape(2, 1), center\n"
+}

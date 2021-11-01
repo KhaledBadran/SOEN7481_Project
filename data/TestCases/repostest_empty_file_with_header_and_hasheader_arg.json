@@ -1,0 +1,9 @@
+{
+    "functionName": "test_empty_file_with_header_and_hasheader_arg",
+    "className": "TestEmptyFile",
+    "fileName": "/kenfar_&_DataGristle/scripts_&_tests_&_test_gristle_determinator_cmd.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "fqfn = os.path.join(self.tmp_dir, 'empty_header.csv')\nself.create_empty_file_with_header(fqfn)\ncmd = '%s %s --outputformat=parsable --has-header' % (pjoin(script_path,\n    'gristle_determinator'), fqfn)\nrunner = envoy.run(cmd)\nprint(runner.std_out)\nprint(runner.std_err)\nassert runner.status_code == 0\nassert get_value(runner.std_out, 'file_analysis_results', 'main', 'main',\n    'record_count') == '1'\nassert get_value(runner.std_out, 'file_analysis_results', 'main', 'main',\n    'has_header') == 'True'\n"
+}

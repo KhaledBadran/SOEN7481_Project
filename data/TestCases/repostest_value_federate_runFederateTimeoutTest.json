@@ -1,0 +1,9 @@
+{
+    "functionName": "test_value_federate_runFederateTimeoutTest",
+    "className": null,
+    "fileName": "/GMLC-TDC_&_HELICS/tests_&_python_&_test_value_federate.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "fedinitstring = '--broker=mainbroker --federates=1'\ndeltat = 0.01\nfedinfo = h.helicsCreateFederateInfo()\nh.helicsFederateInfoSetCoreName(fedinfo, 'TestA Core')\nh.helicsFederateInfoSetCoreTypeFromString(fedinfo, 'zmq')\nh.helicsFederateInfoSetCoreInitString(fedinfo, fedinitstring)\nh.helicsFederateInfoSetTimeProperty(fedinfo, h.helics_property_time_delta,\n    deltat)\nh.helicsFederateInfoSetIntegerProperty(fedinfo, h.\n    helics_property_int_log_level, 1)\nvFed = h.helicsCreateValueFederate('TestA Federate', fedinfo)\ndefaultValue = 'String1'\ntestValue = 'String2'\npubid = h.helicsFederateRegisterGlobalPublication(vFed, 'pub1', h.\n    helics_data_type_string, '')\nsubid = h.helicsFederateRegisterSubscription(vFed, 'pub1', '')\nh.helicsInputSetDefaultString(subid, defaultValue)\nh.helicsFederateEnterExecutingMode(vFed)\ncounter = 60\nwhile counter > 0:\n    counter -= 1\n    time.sleep(1)\nassert h.helicsBrokerIsConnected(helicsBroker\n    ) == 1, 'Broker should still be connected'\nh.helicsFederateFinalize(vFed)\nstate = h.helicsFederateGetState(vFed)\nassert state == 3\nwhile h.helicsBrokerIsConnected(helicsBroker):\n    time.sleep(1)\nh.helicsFederateInfoFree(fedinfo)\nh.helicsFederateFree(vFed)\npt.mark.skipif(os.getenv('HELICS_PYTHON_ADDITIONAL_TESTS', '') == '',\n    reason='Disabled by default.')"
+}

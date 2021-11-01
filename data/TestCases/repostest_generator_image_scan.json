@@ -1,0 +1,9 @@
+{
+    "functionName": "test_generator_image_scan",
+    "className": null,
+    "fileName": "/mdbloice_&_Augmentor/tests_&_test_generators.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "num_of_sub_dirs = random.randint(1, 10)\nnum_of_im_files = random.randint(1, 10)\noutput_directory = os.path.join(tempfile.mkdtemp(), 'output_abs')\ninitial_temp_directory = tempfile.mkdtemp()\nsub_dirs = []\nfor _ in range(num_of_sub_dirs):\n    sub_dirs.append(tempfile.mkdtemp(dir=initial_temp_directory))\ntmp_files = []\nimage_counter = 0\nsuffix_filetypes = [('.PNG', 'PNG'), ('.JPEG', 'JPEG'), ('.JPG', 'JPEG'), (\n    '.png', 'PNG'), ('.jpeg', 'JPEG'), ('.jpg', 'JPEG')]\nfor sub_dir in sub_dirs:\n    for iterator in range(num_of_im_files):\n        suffix_filetype = random.choice(suffix_filetypes)\n        tmp_files.append(tempfile.NamedTemporaryFile(dir=os.path.abspath(\n            sub_dir), suffix=suffix_filetype[0]))\n        im = Image.fromarray(np.uint8(np.random.rand(80, 80, 3) * 255))\n        im.save(tmp_files[image_counter].name, suffix_filetype[1])\n        image_counter += 1\np = Augmentor.Pipeline(initial_temp_directory, output_directory=\n    output_directory)\nbatch_size = random.randint(1, 1000)\ng = p.keras_generator(batch_size=batch_size)\nX, y = next(g)\nassert np.shape(y)[0] == batch_size\nassert np.shape(y)[1] == num_of_sub_dirs\nassert len(y) == batch_size\ng_2 = p.keras_generator(batch_size=batch_size)\nX_2, y_2 = next(g_2)\nassert np.shape(y_2)[0] == batch_size\nassert np.shape(y_2)[1] == num_of_sub_dirs\nassert len(y_2) == batch_size\nfor tmp_file in tmp_files:\n    tmp_file.close()\nfor sub_dir in sub_dirs:\n    shutil.rmtree(sub_dir)\nshutil.rmtree(os.path.join(initial_temp_directory, output_directory))\nshutil.rmtree(initial_temp_directory)\n"
+}

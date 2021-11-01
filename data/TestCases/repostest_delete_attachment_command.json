@@ -1,0 +1,9 @@
+{
+    "functionName": "test_delete_attachment_command",
+    "className": "TestRecord",
+    "fileName": "/Keeper-Security_&_Commander/unit-tests_&_test_command_record.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "params = get_synced_params()\ncmd = record.RecordDeleteAttachmentCommand()\nrecord_uid = next(iter([x['record_uid'] for x in params.record_cache.values\n    () if len(x['extra_unencrypted']) > 10]))\nrec = api.get_record(params, record_uid)\nKeeperApiHelper.communicate_expect(['record_update'])\ncmd.execute(params, name=[rec.attachments[0]['id']], record=rec.title)\nself.assertTrue(KeeperApiHelper.is_expect_empty())\n"
+}

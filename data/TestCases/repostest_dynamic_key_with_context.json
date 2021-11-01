@@ -1,0 +1,9 @@
+{
+    "functionName": "test_dynamic_key_with_context",
+    "className": "CacheTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_cache.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "t = Template(\n    \"\"\"\n            <%block name=\"foo\" cached=\"True\" cache_key=\"${mykey}\">\n                some block\n            </%block>\n        \"\"\"\n    )\nm = self._install_mock_cache(t)\nt.render(mykey='thekey')\nt.render(mykey='thekey')\neq_(result_lines(t.render(mykey='thekey')), ['some block'])\neq_(m.key, 'thekey')\nt = Template(\n    \"\"\"\n            <%def name=\"foo()\" cached=\"True\" cache_key=\"${mykey}\">\n                some def\n            </%def>\n            ${foo()}\n        \"\"\"\n    )\nm = self._install_mock_cache(t)\nt.render(mykey='thekey')\nt.render(mykey='thekey')\neq_(result_lines(t.render(mykey='thekey')), ['some def'])\neq_(m.key, 'thekey')\n"
+}

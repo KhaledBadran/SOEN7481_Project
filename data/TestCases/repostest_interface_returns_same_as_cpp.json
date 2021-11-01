@@ -1,0 +1,9 @@
+{
+    "functionName": "test_interface_returns_same_as_cpp",
+    "className": "TestGpHyperOptViews",
+    "fileName": "/Yelp_&_MOE/moe_&_tests_&_views_&_rest_&_gp_hyper_opt_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Integration test for the /gp/hyper_opt endpoint.\"\"\"\nmoe_route = GP_HYPER_OPT_MOE_ROUTE\nfor test_case in self.gp_test_environments:\n    python_domain, python_gp = test_case\n    python_cov, historical_data = python_gp.get_core_data_copy()\n    json_payload = self._build_json_payload(python_domain, python_cov,\n        historical_data)\n    resp = self.testapp.post(moe_route.endpoint, json_payload)\n    resp_schema = GpHyperOptResponse()\n    resp_dict = resp_schema.deserialize(json.loads(resp.body))\n    assert 'covariance_info' in resp_dict\n    assert resp_dict['covariance_info']['covariance_type'\n        ] == python_cov.covariance_type\n    for hyperparameter in resp_dict['covariance_info']['hyperparameters']:\n        assert hyperparameter >= 0.0\n"
+}

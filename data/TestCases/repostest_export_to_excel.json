@@ -1,0 +1,9 @@
+{
+    "functionName": "test_export_to_excel",
+    "className": null,
+    "fileName": "/JosephPallipadan_&_Namsor-API-Wrapper-Python/namsorclient_&_tests_&_test_request_objects.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    The test for the export to excel function involves using the sample_batch_responses file,\n    which contains sample responses from all the different response types. The export to excel function is called and then the file is read to ensure that all the values match. \n    \"\"\"\ntester = namsorclient.GenderBatch()\nfor response_type in Sample_Responses.keys():\n    response = Sample_Responses[str(response_type)]\n    tester.response = response\n    tester.export_to_excel('../hello.xlsx')\n    worksheet = xlrd.open_workbook('../hello.xlsx').sheet_by_index(0)\n    response_keys = response[0].keys()\n    for response_key, file_key in zip(response_keys, worksheet.row_values(0)):\n        match = re.match('([a-z]+)([A-Z]*[a-z]*)([A-Z]*[a-z]*)([A-Z]*[a-z]*)',\n            response_key).groups()\n        transformed_key = '-'.join([(i[0].upper() + i[1:]) for i in match if\n            i != ''])\n        assert transformed_key == file_key\n    for response_item, row_num in zip(response, range(10)):\n        row_values = worksheet.row_values(row_num + 1)\n        response_values = response_item.values()\n        for response_value, row_value in zip(response_values, row_values):\n            assert str(response_value) == str(row_value)\n"
+}

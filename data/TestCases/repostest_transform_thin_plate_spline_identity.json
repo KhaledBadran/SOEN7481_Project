@@ -1,0 +1,9 @@
+{
+    "functionName": "test_transform_thin_plate_spline_identity",
+    "className": "TestTPSTransformLayer",
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_special.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from lasagne.layers import InputLayer, TPSTransformerLayer\nfrom lasagne.utils import floatX\nfrom theano.tensor import constant\nbatchsize = 5\nnum_control_points = 16\ndest_offset = np.zeros(shape=(batchsize, 2 * num_control_points))\nl_in = InputLayer((batchsize, 3, 28, 28))\nl_loc = InputLayer((batchsize, 2 * num_control_points))\nlayer = TPSTransformerLayer(l_in, l_loc, control_points=num_control_points)\ninputs = floatX(np.arange(np.prod(l_in.shape)).reshape(l_in.shape))\noutputs = layer.get_output_for([constant(inputs), constant(dest_offset)]).eval(\n    )\nnp.testing.assert_allclose(inputs, outputs, atol=0.0005)\n"
+}

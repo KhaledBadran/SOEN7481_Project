@@ -1,0 +1,9 @@
+{
+    "functionName": "effective",
+    "className": null,
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_models_&_geometry_&_pore_volume.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Calculate the effective pore volume for optional use in transient\n    simulations. The effective pore volume is calculated by adding half the\n    volume of all neighbouring throats to the pore volume.\n\n    Parameters\n    ----------\n    target : OpenPNM Object\n        The object which this model is associated with. This controls\n        the length of the calculated array, and also provides access to other\n        necessary geometric properties.\n\n    pore_volume : string\n        The dictionary key of the pore volume values\n\n    throat_volume : string\n        The dictionary key of the throat volume values\n\n    Returns\n    -------\n    value : NumPy ndarray\n        Array containing pore volume values.\n\n    \"\"\"\nnetwork = target.project.network\ncn = network['throat.conns']\nP1 = cn[:, (0)]\nP2 = cn[:, (1)]\neff_vol = np.copy(network[pore_volume])\nnp.add.at(eff_vol, P1, 1 / 2 * network[throat_volume])\nnp.add.at(eff_vol, P2, 1 / 2 * network[throat_volume])\npores = network.map_pores(pores=target.Ps, origin=target)\nvalue = eff_vol[pores]\nreturn value\n"
+}

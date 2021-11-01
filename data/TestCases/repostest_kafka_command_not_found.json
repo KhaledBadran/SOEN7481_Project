@@ -1,0 +1,9 @@
+{
+    "functionName": "test_kafka_command_not_found",
+    "className": null,
+    "fileName": "/PearsonEducation_&_Alarmageddon/tests_&_validations_&_test_kafka.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ssh_ctx = ssh.SshContext('ubuntu', get_mock_key_file(tmpdir))\ntext = '-bash: /opt/kafka2/bin/kdkd: No such file or directory'\nmonkeypatch.setattr(Connection, 'run', lambda self, x, warn:\n    get_mock_ssh_text(text, 0))\nwith pytest.raises(ValidationFailure):\n    kafka.KafkaStatusValidation(ssh_ctx, zookeeper_nodes='1.2.3.4:2181',\n        hosts=['127.0.0.1'], cluster_name=_CLUSTER_NAME).perform({})\n"
+}

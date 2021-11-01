@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_harmonic_energy_force",
+    "className": null,
+    "fileName": "/mesonepigreco_&_CellConstructor/tests_&_TestHarmEnergyForce_&_test_supercell_harm_energy_force.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "total_path = os.path.dirname(os.path.abspath(__file__))\nos.chdir(total_path)\ndyn = CC.Phonons.Phonons('PbTe.dyn', 8)\nsuper_struct = dyn.structure.generate_supercell(dyn.GetSupercell())\nstructs = dyn.ExtractRandomStructures(20, 300)\nxats = np.array([x.coords for x in structs])\nu_disps = xats - np.tile(super_struct.coords, (len(structs), 1, 1))\nu_disps = u_disps.reshape((len(structs), 3 * super_struct.N_atoms))\nsuper_dyn = dyn.GenerateSupercellDyn(dyn.GetSupercell())\nen1, forc1 = dyn.get_energy_forces(None, displacement=u_disps)\nen2, forc2 = super_dyn.get_energy_forces(None, displacement=u_disps)\nen_dist = np.max(np.abs(en1 - en2))\nassert en_dist < EPS, 'Error, energy difference between two methods: {}'.format(\n    en_dist)\nf_dist = np.max(np.abs(forc1 - forc2))\nassert f_dist < EPS, 'Error, the force difference between two methods: {}'.format(\n    f_dist)\n"
+}

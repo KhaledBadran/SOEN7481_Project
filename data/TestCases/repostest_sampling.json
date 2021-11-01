@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sampling",
+    "className": null,
+    "fileName": "/apetri_&_LensTools/lenstools_&_tests_&_test_constraints.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "fig, ax = plt.subplots(1, 2, figsize=(16, 8))\nemulator = Emulator.read(os.path.join(dataExtern(), 'sample', 'emulator.pkl'))\ntest_data = pd.read_pickle(os.path.join(dataExtern(), 'sample', 'data.pkl'))\ncovariance = Ensemble.read(os.path.join(dataExtern(), 'sample',\n    'covariance.pkl'))\np = Ensemble.meshgrid({'Om': np.linspace(0.2, 0.5, 50), 'sigma8': np.\n    linspace(0.6, 0.9, 50)})\np['w'] = -1.0\nscores = emulator.score(p, test_data, features_covariance=covariance,\n    correct=1000)\nscores['likelihood'] = np.exp(-0.5 * scores[emulator.feature_names[0]])\nfor n in range(2):\n    contour = ContourPlot.from_scores(scores, parameters=['Om', 'sigma8'],\n        feature_names=['likelihood'], plot_labels=['$\\\\Omega_m$',\n        '$\\\\sigma_8$'], fig=fig, ax=ax[n])\n    contour.show()\n    contour.getLikelihoodValues([p_value], precision=0.01)\n    contour.plotContours(colors=['red'])\n    contour.labels()\nfisher = emulator.approximate_linear(center=(0.26, -1.0, 0.8))\nfisher.pop(('parameters', 'w'))\nfisher = fisher.iloc[[0, 1, 3]]\nfor n in range(2):\n    ellipse = fisher.confidence_ellipse(covariance, correct=1000,\n        observed_feature=test_data, parameters=['Om', 'sigma8'], p_value=\n        p_value, fill=False, edgecolor='blue')\n    ax[n].add_artist(ellipse)\nsamples = emulator.sample_posterior(test_data, features_covariance=\n    covariance, correct=1000, pslice={'w': -1})[emulator.feature_names[0]]\nax[1].scatter(samples['Om'], samples['sigma8'], marker='.', color='yellow')\nfig.tight_layout()\nfig.savefig('parameter_sampling.png')\n"
+}

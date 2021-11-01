@@ -1,0 +1,9 @@
+{
+    "functionName": "test_maui_channel_offset",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_teledyne_&_test_maui.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Get / Set MAUI Channel offset.\"\"\"\nwith expected_protocol(ik.teledyne.MAUI, [init, 'C1:OFST?', 'C1:OFST 0.2',\n    'C3:OFST 2'], ['1'], sep='\\n') as osc:\n    assert osc.channel[0].offset == u.Quantity(1, u.V)\n    osc.channel[0].offset = u.Quantity(200, u.mV)\n    osc.channel[2].offset = 2\n"
+}

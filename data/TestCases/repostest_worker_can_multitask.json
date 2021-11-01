@@ -1,0 +1,9 @@
+{
+    "functionName": "test_worker_can_multitask",
+    "className": null,
+    "fileName": "/nickdelgrosso_&_LeanSim/tests_&_test_worker.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "w = Worker(capacity=2)\nw.todo = 4\nw.work()\nassert w.todo == 2\nassert len(w.doing) == 0\nassert w.done == 2\nw = Worker(capacity=2, task_duration=2)\nw.todo = 4\nw.work()\nassert w.todo == 2\nassert len(w.doing) == 2\nassert w.done == 0\nw.work()\nassert w.todo == 2\nassert len(w.doing) == 0\nassert w.done == 2\n"
+}

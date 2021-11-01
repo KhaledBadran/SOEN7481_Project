@@ -1,0 +1,9 @@
+{
+    "functionName": "test_full_tokenizer",
+    "className": "TokenizationTest",
+    "fileName": "/kpi6research_&_Bert-as-a-Library/BertLibrary_&_bert_&_tokenization_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "vocab_tokens = ['[UNK]', '[CLS]', '[SEP]', 'want', '##want', '##ed', 'wa',\n    'un', 'runn', '##ing', ',']\nwith tempfile.NamedTemporaryFile(delete=False) as vocab_writer:\n    if six.PY2:\n        vocab_writer.write(''.join([(x + '\\n') for x in vocab_tokens]))\n    else:\n        vocab_writer.write(''.join([(x + '\\n') for x in vocab_tokens]).\n            encode('utf-8'))\n    vocab_file = vocab_writer.name\ntokenizer = tokenization.FullTokenizer(vocab_file)\nos.unlink(vocab_file)\ntokens = tokenizer.tokenize(u'UNwant\u00e9d,running')\nself.assertAllEqual(tokens, ['un', '##want', '##ed', ',', 'runn', '##ing'])\nself.assertAllEqual(tokenizer.convert_tokens_to_ids(tokens), [7, 4, 5, 10, \n    8, 9])\n"
+}

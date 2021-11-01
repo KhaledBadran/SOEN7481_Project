@@ -1,0 +1,9 @@
+{
+    "functionName": "test_initConfig_default_params",
+    "className": "TestYmlparsersInit",
+    "fileName": "/alex-ber_&_AlexBerUtils/tests_&_utils_&_ymlparsers_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "logger.info(f'{request._pyfuncitem.name}()')\nymlparsers.initConfig()\nlock = HiYaPyCo.jinja2Lock\npytest.assume(lock is not None)\nlock_cls = type(lock)\nb = has_method(lock_cls, 'acquire')\npytest.assume(b)\nb = has_method(lock_cls, 'release')\npytest.assume(b)\njinja2Env = HiYaPyCo.jinja2ctx\npytest.assume(jinja2Env is not None)\njinja2EnvUndefined = jinja2Env.undefined\nb = issubclass(jinja2EnvUndefined, DebugUndefined)\npytest.assume(b)\njinja2EnvGloblas = jinja2Env.globals\nb = 'uname' in jinja2EnvGloblas\npytest.assume(b)\n_load_d = ymlparsers._load_d\nassert _load_d is not None\nb = isinstance(_load_d, collections.abc.Mapping)\npytest.assume(b)\nfor k, exp_v in {'method': METHOD_SUBSTITUTE, 'mergelists': False,\n    'interpolate': True, 'castinterpolated': True}.items():\n    v = _load_d[k]\n    pytest.assume(exp_v == v)\n_safe_dump_d = ymlparsers._safe_dump_d\nassert _safe_dump_d is not None\nb = isinstance(_safe_dump_d, collections.Mapping)\npytest.assume(b)\nfor k, exp_v in {'default_flow_style': False, 'sort_keys': False}.items():\n    v = _safe_dump_d[k]\n    pytest.assume(exp_v == v)\npytest.assume(\n    'TODO: HiYaPyCo._substmerge() bug workarround, see https://github.com/zerwes/hiyapyco/pull/38'\n    , HiYaPyCo._deepmerge == HiYaPyCo._substmerge)\npytest.mark.yml"
+}

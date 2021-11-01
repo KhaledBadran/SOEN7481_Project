@@ -1,0 +1,9 @@
+{
+    "functionName": "test_dirty_after_lint",
+    "className": null,
+    "fileName": "/132nd-etcher_&_EPAB/test_&_test_cmd_&_test_release.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ctx = mock()\nrepo = mock()\nCTX.repo = repo\nwhen(epab.utils).get_next_version().thenReturn('next_version')\nwhen(CTX.repo).is_dirty(untracked=True).thenReturn(False).thenReturn(True)\nwith pytest.raises(SystemExit):\n    epab.cmd._release._release(ctx)\nassert 'linters produced artifacts' in caplog.text\n"
+}

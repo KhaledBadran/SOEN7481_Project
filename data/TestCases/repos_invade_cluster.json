@@ -1,0 +1,9 @@
+{
+    "functionName": "_invade_cluster",
+    "className": "MixedInvasionPercolation",
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_algorithms_&_MixedInvasionPercolation.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "queue = self.queue[c_num]\npressure, elem_id, elem_type = hq.heappop(queue)\nif elem_type == 'pore':\n    self._interface_Ps[elem_id] = False\nelse:\n    self._interface_Ts[elem_id] = False\nif pressure > self.max_pressure:\n    self.max_p_reached[c_num] = True\nelse:\n    elem_cluster = self[elem_type + '.cluster'][elem_id]\n    elem_cluster = elem_cluster.astype(int)\n    if elem_cluster == -1:\n        self.count += 1\n        if self.high_Pc[c_num] < pressure:\n            self.high_Pc[c_num] = pressure\n        self[elem_type + '.invasion_sequence'][elem_id] = self.count\n        self[elem_type + '.cluster'][elem_id] = c_num\n        self[elem_type + '.invasion_pressure'][elem_id] = self.high_Pc[c_num]\n        if elem_type == 'throat':\n            self._add_ps2q(elem_id, queue)\n        elif elem_type == 'pore':\n            self._add_ts2q(elem_id, queue)\n            if self.settings['cooperative_pore_filling'] and hasattr(self,\n                'tt_Pc'):\n                self._check_coop(elem_id, queue)\n    elif elem_cluster != c_num and self.invasion_running[elem_cluster]:\n        self._merge_cluster(c2keep=c_num, c2empty=elem_cluster)\n        logger.info('Merging cluster ' + str(elem_cluster) +\n            ' into cluster ' + str(c_num) + ' at sequence ' + str(self.count))\n    elif elem_cluster != c_num and len(self.queue[elem_cluster]) > 0:\n        self._merge_cluster(c2keep=c_num, c2empty=elem_cluster)\n        logger.info('Merging residual cluster ' + str(elem_cluster) +\n            ' into cluster ' + str(c_num) + ' at sequence ' + str(self.count))\n    else:\n        pass\n"
+}

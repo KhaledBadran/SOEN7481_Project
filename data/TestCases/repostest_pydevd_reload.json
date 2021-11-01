@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pydevd_reload",
+    "className": "Test",
+    "fileName": "/fabioz_&_PyDev.Debugger/test_pydevd_reload_&_test_pydevd_reload.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.make_mod()\nimport x\nC = x.C\nCOut = C\nCfoo = C.foo\nCbar = C.bar\nCstomp = C.stomp\ndef check2(expected):\n    C = x.C\n    Cfoo = C.foo\n    Cbar = C.bar\n    Cstomp = C.stomp\n    b = C()\n    bfoo = b.foo\n    self.assertEqual(expected, b.foo())\n    self.assertEqual(expected, bfoo())\n    self.assertEqual(expected, Cfoo(b))\ndef check(expected):\n    b = COut()\n    bfoo = b.foo\n    self.assertEqual(expected, b.foo())\n    self.assertEqual(expected, bfoo())\n    self.assertEqual(expected, Cfoo(b))\n    self.assertEqual((expected, expected), Cbar())\n    self.assertEqual((expected, expected, expected), Cstomp())\n    check2(expected)\ncheck(0)\ncount = 0\nwhile count < 1:\n    count += 1\n    self.make_mod(repl='0', subst=str(count))\n    pydevd_reload.xreload(x)\n    check(count)\n"
+}

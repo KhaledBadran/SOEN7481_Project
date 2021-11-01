@@ -1,0 +1,9 @@
+{
+    "functionName": "test_msgpack",
+    "className": null,
+    "fileName": "/SillyFreak_&_ConcurrentUtils/tests_&_test_serializers.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "serializer = Msgpack()\nfor value in ['foo', 1, [0.1], {'baz': True}]:\n    assert serializer.deserialize(serializer.serialize(value)) == value\nfor value in [()]:\n    assert serializer.deserialize(serializer.serialize(value)) != value\nfor value in [{'bar'}, Dataclass()]:\n    with pytest.raises(TypeError):\n        serializer.serialize(value)\n"
+}

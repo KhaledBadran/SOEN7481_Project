@@ -1,0 +1,9 @@
+{
+    "functionName": "test_idainfo",
+    "className": null,
+    "fileName": "/Carbonara-Project_&_Carbonara-IDB/tests_&_test_analysis.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "idainfo = idb.analysis.Root(kernel32_idb).idainfo\nif version == 695:\n    assert idainfo.tag == 'IDA'\nelif version == 700:\n    assert idainfo.tag == 'ida'\nassert idainfo.version == version\nassert idainfo.procname == 'metapc'\ncd = os.path.dirname(__file__)\nidbpath = os.path.join(cd, 'data', 'multibitness', 'multibitness.idb')\nwith idb.from_file(idbpath) as db:\n    idainfo = idb.analysis.Root(db).idainfo\n    assert idainfo.tag == 'IDA'\n    assert idainfo.version == 700\n    assert idainfo.procname == 'metapc'\nkern32_test()"
+}

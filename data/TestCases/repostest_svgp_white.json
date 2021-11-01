@@ -1,0 +1,9 @@
+{
+    "functionName": "test_svgp_white",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_models_&_test_svgp.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Tests that the SVGP bound on the likelihood is the same when using\n    with and without diagonals when whitening.\n    \"\"\"\nnum_latent_gps = default_datum_svgp.Y.shape[1]\nmodel_1 = gpflow.models.SVGP(kernel=gpflow.kernels.SquaredExponential(),\n    likelihood=default_datum_svgp.lik, q_diag=True, num_latent_gps=\n    num_latent_gps, inducing_variable=default_datum_svgp.Z, whiten=True)\nmodel_2 = gpflow.models.SVGP(kernel=gpflow.kernels.SquaredExponential(),\n    likelihood=default_datum_svgp.lik, q_diag=False, num_latent_gps=\n    num_latent_gps, inducing_variable=default_datum_svgp.Z, whiten=True)\nmodel_1.q_sqrt.assign(default_datum_svgp.qsqrt)\nmodel_1.q_mu.assign(default_datum_svgp.qmean)\nmodel_2.q_sqrt.assign(np.array([np.diag(default_datum_svgp.qsqrt[:, (0)]),\n    np.diag(default_datum_svgp.qsqrt[:, (1)])]))\nmodel_2.q_mu.assign(default_datum_svgp.qmean)\nassert_allclose(model_1.elbo(default_datum_svgp.data), model_2.elbo(\n    default_datum_svgp.data))\n"
+}

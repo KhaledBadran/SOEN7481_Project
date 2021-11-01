@@ -1,0 +1,9 @@
+{
+    "functionName": "test_yieldsMachine",
+    "className": "FindMachinesViaWrapperTests",
+    "fileName": "/glyph_&_Automat/automat_&__test_&_test_discover.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        When given a L{twisted.python.modules.PythonAttribute} that refers\n        directly to a L{MethodicalMachine}, L{findMachinesViaWrapper}\n        yields that machine and its FQPN.\n        \"\"\"\nsource = \"\"\"        from automat import MethodicalMachine\n\n        rootMachine = MethodicalMachine()\n        \"\"\"\nmoduleDict = self.makeModuleAsDict(source, self.pathDir, 'root.py')\nrootMachine = moduleDict['root.rootMachine']\nself.assertIn(('root.rootMachine', rootMachine.load()), list(self.\n    findMachinesViaWrapper(rootMachine)))\n"
+}

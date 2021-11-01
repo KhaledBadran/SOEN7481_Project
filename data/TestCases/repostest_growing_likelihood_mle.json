@@ -1,0 +1,9 @@
+{
+    "functionName": "test_growing_likelihood_mle",
+    "className": null,
+    "fileName": "/lopatovsky_&_CT-HMM/test_&_test_dthmm.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"The likelihood in the MLE algorithm had always to be bigger or equal to original sequence\"\"\"\ndhmm = hmms.DtHMM.random(h_states, o_symbols)\ns_seqs, e_seqs = dhmm.generate_data((data_num, data_len))\ndhmm_r = hmms.DtHMM.random(h_states, o_symbols)\ndhmm_r.maximum_likelihood_estimation(s_seqs, e_seqs)\nlog_est = dhmm.full_data_estimate(s_seqs, e_seqs)\nlog_est_mle = dhmm_r.full_data_estimate(s_seqs, e_seqs)\nassert log_est_mle >= log_est\npytest.mark.parametrize(['h_states', 'o_symbols', 'data_num', 'data_len'],\n    [(3, 3, 20, 20), (2, 1, 20, 20), (2, 10, 20, 20), (10, 1, 20, 20), (5, \n    5, 1, 50), (5, 7, 3, 25), (5, 3, 3, 25), (5, 5, 25, 2), (10, 10, 5, 5)])"
+}

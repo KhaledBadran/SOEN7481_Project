@@ -1,0 +1,9 @@
+{
+    "functionName": "test_run_cmd_success_exit_code",
+    "className": null,
+    "fileName": "/AmadeusITGroup_&_JumpSSH/tests_&_test__session.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "gateway_ip, gateway_port = docker_env.get_host_ip_port()\ngateway_session = SSHSession(host=gateway_ip, port=gateway_port, username=\n    'user1', password='password1').open()\nwith pytest.raises(TypeError):\n    gateway_session.run_cmd('hostname', success_exit_code={'key': 'value'})\nwith pytest.raises(exception.RunCmdError) as exc_info:\n    gateway_session.run_cmd('hostname', success_exit_code=3)\nassert exc_info.value.exit_code == 0\nassert exc_info.value.success_exit_code == [3]\ngateway_session.run_cmd('dummy commmand', success_exit_code=[0, 127])\ngateway_session.run_cmd('hostname', success_exit_code=[0, 127])\n"
+}

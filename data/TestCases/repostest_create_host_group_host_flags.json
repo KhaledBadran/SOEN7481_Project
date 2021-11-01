@@ -1,0 +1,9 @@
+{
+    "functionName": "test_create_host_group_host_flags",
+    "className": "CITestProvisioning",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test create_host_group.\"\"\"\nhost_flags = constants.HOST_FLAGS\nhost_flags[constants.SCSI_3] = {constants.OVERRIDE: constants.TRUE,\n    constants.ENABLED: constants.TRUE}\nhost_group_name = self.create_host_group(host_flags)\nhost_group_list = self.provisioning.get_host_group_list()\nhost_group = self.provisioning.get_host_group(host_group_name)\nenabled_flags = host_group[constants.ENABLED_FLAGS]\nself.assertIn(host_group_name, host_group_list)\nself.assertIsNotNone(host_group)\nself.assertEqual(constants.SCSI_3_FLAG, enabled_flags)\n"
+}

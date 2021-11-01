@@ -1,0 +1,9 @@
+{
+    "functionName": "test_reference_implementation_consistency",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_models_&_test_variational.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "q_mean = rng.rand(1, 1)\nq_cov = rng.rand(1, 1)\np_mean = rng.rand(1, 1)\np_cov = rng.rand(1, 1)\nmultivariate_KL = multivariate_prior_KL(q_mean, p_mean, q_cov, p_cov)\nunivariate_KL = univariate_prior_KL(q_mean.reshape(-1), p_mean.reshape(-1),\n    q_cov.reshape(-1), p_cov.reshape(-1))\nassert_allclose(univariate_KL.squeeze(), multivariate_KL.squeeze(), atol=4)\n"
+}

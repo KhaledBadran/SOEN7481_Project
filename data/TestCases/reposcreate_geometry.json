@@ -1,0 +1,9 @@
+{
+    "functionName": "create_geometry",
+    "className": "SimplerLatticeInput",
+    "fileName": "/mit-crpg_&_OpenMOC/tests_&_test_subdividing_lattice_&_test_subdividing_lattice.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Instantiate a 4x4 pin cell lattice Geometry.\"\"\"\nxmin = openmoc.XPlane(x=-2.0, name='xmin')\nxmax = openmoc.XPlane(x=+2.0, name='xmax')\nymin = openmoc.YPlane(y=-2.0, name='ymin')\nymax = openmoc.YPlane(y=+2.0, name='ymax')\nboundaries = [xmin, xmax, ymin, ymax]\nif self.dimensions == 3:\n    zmin = openmoc.ZPlane(z=-2.0, name='zmin')\n    zmax = openmoc.ZPlane(z=+2.0, name='zmax')\n    boundaries = [xmin, xmax, ymin, ymax, zmin, zmax]\nfor boundary in boundaries:\n    boundary.setBoundaryType(openmoc.REFLECTIVE)\nif self.dimensions == 3:\n    boundaries[-1].setBoundaryType(openmoc.VACUUM)\nlat = self.create_lattice()\nroot_cell = openmoc.Cell(name='root cell')\nroot_cell.addSurface(halfspace=+1, surface=boundaries[0])\nroot_cell.addSurface(halfspace=-1, surface=boundaries[1])\nroot_cell.addSurface(halfspace=+1, surface=boundaries[2])\nroot_cell.addSurface(halfspace=-1, surface=boundaries[3])\nif self.dimensions == 3:\n    root_cell.addSurface(halfspace=+1, surface=boundaries[4])\n    root_cell.addSurface(halfspace=-1, surface=boundaries[5])\nlattice_cell = openmoc.Cell(name='lattice cell')\nassembly = openmoc.Universe(name='2x2 lattice')\nroot_universe = openmoc.Universe(name='root universe')\nassembly.addCell(lattice_cell)\nroot_universe.addCell(root_cell)\nlattice_cell.setFill(lat)\ncore = openmoc.Lattice(name='2x2 core')\ncore.setWidth(width_x=2.0, width_y=2.0)\ncore.setUniverses([[[assembly, assembly], [assembly, assembly]]])\nroot_cell.setFill(core)\nself.geometry = openmoc.Geometry()\nself.geometry.setRootUniverse(root_universe)\nsuper(SimplerLatticeInput, self).create_geometry()\n"
+}

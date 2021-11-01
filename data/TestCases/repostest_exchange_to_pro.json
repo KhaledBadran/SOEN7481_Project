@@ -1,0 +1,9 @@
+{
+    "functionName": "test_exchange_to_pro",
+    "className": "TestsRNAIntergenic",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_sRNA_intergenic.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "nums = {'pro': 3, 'tss': 3, 'uni': 0, 'cds': 3, 'ta': 3}\nout_table = StringIO()\noutput = StringIO()\nsrna_datas = {'pos': 50, 'best': 10, 'high': 12}\nargs = self.mock_args.mock()\nargs.max_len = 300\nargs.min_len = 30\nargs.table_best = True\nargs.replicates = 'rep'\nargs.tex_notex = 'tex_notex'\nargs.texs = 'texs'\nargs.decrease_inter = 50\nargs.fuzzy_inter = 5\nargs.pros = copy.deepcopy(self.example.pros)\ntas = copy.deepcopy(self.example.tas)\nargs.tolerance = 5\nsi.replicate_comparison = self.mock.mock_replicate_comparison\ndetect, srna_datas, pro = si.exchange_to_pro(args, srna_datas, tas[0], 20, \n    70, 10, self.example.wigs, 20)\nself.assertTrue(detect)\nself.assertDictEqual(srna_datas, {'best': 40, 'high': 50, 'low': 10, 'pos':\n    190, 'conds': {'cond1': 'test1'}, 'detail': None})\nself.assertEqual(pro, 'Cleavage:190_+')\n"
+}

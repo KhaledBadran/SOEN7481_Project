@@ -1,0 +1,9 @@
+{
+    "functionName": "test_nfw_cumul2d_accuracy",
+    "className": null,
+    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_profiles.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cM = ccl.halos.ConcentrationDuffy08(M200)\np1 = ccl.halos.HaloProfileNFW(cM, truncated=False, cumul2d_analytic=True)\np2 = ccl.halos.HaloProfileNFW(cM, truncated=False, fourier_analytic=\n    fourier_analytic)\nM = 100000000000000.0\na = 1.0\nrt = np.logspace(-3, 2, 1024)\nsrt1 = p1.cumul2d(COSMO, rt, M, a, M200)\nsrt2 = p2.cumul2d(COSMO, rt, M, a, M200)\nres2 = np.fabs(srt2 / srt1 - 1)\nassert np.all(res2 < 0.005)\npytest.mark.parametrize('fourier_analytic', [True, False])"
+}

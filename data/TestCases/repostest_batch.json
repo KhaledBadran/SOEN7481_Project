@@ -1,0 +1,9 @@
+{
+    "functionName": "test_batch",
+    "className": null,
+    "fileName": "/PandaScience_&_ElkOpticsAnalyzer/test_&_test_mainWindow.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Tests choosing tasks via combo box.\"\"\"\nui._pytest = True\nui.batchLoadDialog.parameter = 'scissor'\nui.batchLoadDialog.file = 'EPSILON_11.OUT'\nui.batchLoadDialog.folders = []\nfor i in range(1, 7):\n    path = '../test-{}'.format(i)\n    ui.batchLoadDialog.folders.append(path)\nui.batchLoadDialog.elkInput = ui.elkInput\nwith qtbot.waitSignal(ui.windowUpated, timeout=5000):\n    ui.batchLoad()\nreturn finalizeMpl(ui)\npytest.mark.debugpytest.mark.parametrize('ui', ['./testdata/batch/test-1'], indirect=True,\n    ids=['eps11'])pytest.mark.mpl_image_compare(savefig_kwargs={'dpi': 300}, tolerance=2)"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_global_hub",
+    "className": null,
+    "fileName": "/marten-de-vries_&_Flask-WebSub/tests_&_test_publisher.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "app.config['HUB_URL'] = '/abc'\n@app.route('/resource')\n@publisher()\ndef resource():\n    return 'Hello World!'\nresp = app.test_client().get('/resource')\nassert '</abc>; rel=\"hub\"' in resp.headers['Link']\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_serializable",
+    "className": "TestAccess",
+    "fileName": "/hdoupe_&_ParamTools/paramtools_&_tests_&_test_parameters.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "params = TestParams()\nassert json.dumps(params.specification(serializable=True))\nassert json.dumps(params.specification(serializable=True, meta_data=True))\nspec = params.specification(serializable=True)\nfor value in spec.values():\n    assert 'value' not in value\nwith open(defaults_spec_path) as f:\n    exp = json.loads(f.read())\nexp.pop('schema')\nspec = params.specification(serializable=True, meta_data=True)\nassert spec == params._defaults_schema.dump(params._defaults_schema.load(exp))\n"
+}

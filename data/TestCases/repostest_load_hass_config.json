@@ -1,0 +1,9 @@
+{
+    "functionName": "test_load_hass_config",
+    "className": null,
+    "fileName": "/robmarkcole_&_HASS-data-detective/tests_&_test_config.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test loading hass config.\"\"\"\nwith tempfile.TemporaryDirectory() as tmpdir:\n    p = Path(tmpdir)\n    with (p / 'configuration.yaml').open('wt') as fp:\n        fp.write(\n            \"\"\"\nmock_secret: !secret some_secret\nincluded: !include included.yaml\nnested_with_secret: !include includes/with_secret.yaml\nnested_without_secret: !include includes/without_secret.yaml\nmock_env: !env_var MOCK_ENV\nmock_env: !env_var MOCK_ENV\nmock_dir_list: !include_dir_list ./zxc\nmock_dir_merge_list: !include_dir_merge_list ./zxc\nmock_dir_named: !include_dir_named ./zxc\nmock_dir_merge: !include_dir_merge_named ./zxc\n# Trigger duplicate error\nmock_secret: !secret other_secret\n        \"\"\"\n            )\n    with (p / 'secrets.yaml').open('wt') as fp:\n        fp.write(\n            \"\"\"\nsome_secret: test-some-secret\nother_secret: test-other-secret\nanother_secret: test-another-secret\n        \"\"\"\n            )\n    with (p / 'included.yaml').open('wt') as fp:\n        fp.write('some: value')\n    includes_dir = p / 'includes'\n    includes_dir.mkdir(exist_ok=True)\n    with (includes_dir / 'with_secret.yaml').open('wt') as fp:\n        fp.write('some: !secret another_secret')\n    with (includes_dir / 'without_secret.yaml').open('wt') as fp:\n        fp.write('some: value')\n    configuration = config.load_hass_config(tmpdir)\nassert configuration['included'] == {'some': 'value'}\nassert configuration['nested_with_secret'] == {'some': 'test-another-secret'}\nassert configuration['nested_without_secret'] == {'some': 'value'}\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_uk",
+    "className": null,
+    "fileName": "/bsmurphy_&_PyKrige/tests_&_test_core.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data, _, (uk_test_answer, gridx, gridy) = validation_ref\nuk = UniversalKriging(data[:, (0)], data[:, (1)], data[:, (2)],\n    variogram_model='exponential', variogram_parameters=[500.0, 3000.0, 0.0\n    ], drift_terms=['regional_linear'])\nz, ss = uk.execute('grid', gridx, gridy, backend='vectorized')\nassert_allclose(z, uk_test_answer)\nz, ss = uk.execute('grid', gridx, gridy, backend='loop')\nassert_allclose(z, uk_test_answer)\n"
+}

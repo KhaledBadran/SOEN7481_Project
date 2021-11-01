@@ -1,0 +1,9 @@
+{
+    "functionName": "test_groups_grouping_with_nan",
+    "className": "TestOrdinalGroupingWithnan",
+    "fileName": "/Rambatino_&_CHAID/tests_&_test_ordinal_column.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Ensure possible groups are only adjacent numbers after identifing some groups containing nans\"\"\"\nself.col.group(4.0, self.col._nan)\nself.col.group(3.0, 4.0)\nself.col.group(3.0, 2.0)\ngroupings = [(self.col.metadata[x], self.col.metadata[y]) for x, y in self.\n    col.possible_groupings()]\npossible_groupings = [(1.0, 3.0), (3.0, 5.0)]\nassert list_unordered_equal(possible_groupings, groupings\n    ), 'With NaNs, with groups containing nan identified, possible grouping incorrectly identified.'\ngroups = [[self.col.metadata[i] for i in group] for group in self.col.groups()]\nactual_groups = [[1.0], [2.0, 3.0, 4.0, '<missing>'], [5.0], [10.0]]\nassert list_unordered_equal(actual_groups, groups\n    ), 'With NaNs, with groups containing nan identified, actual groupings are incorrectly reported'\n"
+}

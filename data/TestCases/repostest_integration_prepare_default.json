@@ -1,0 +1,9 @@
+{
+    "functionName": "test_integration_prepare_default",
+    "className": null,
+    "fileName": "/Merck_&_DeepBGC/test_&_integration_&_commands_&_test_integration_prepare.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tmpdir = str(tmpdir)\noutgbk = os.path.join(tmpdir, 'outfile.gbk')\nouttsv = os.path.join(tmpdir, 'outfile.tsv')\nrun(['prepare', '--output-gbk', outgbk, '--output-tsv', outtsv,\n    get_test_file(input_file)])\nrecords = list(SeqIO.parse(outgbk, 'genbank'))\nassert len(records) == 2\nrecord = records[0]\nassert_sorted_features(record)\nproteins = util.get_protein_features(record)\npfams = util.get_pfam_features(record)\nassert len(proteins) == 18\nprint([util.get_protein_id(f) for f in proteins])\nassert len(pfams) == 111\nrecord = records[1]\nassert_sorted_features(record)\nproteins = util.get_protein_features(record)\npfams = util.get_pfam_features(record)\nassert len(proteins) == 27\nassert len(pfams) == 36\ndomains = pd.read_csv(outtsv, sep='\\t')\nrecords = domains.groupby('sequence_id')\nassert len(records) == 2\nrecord = records.get_group('BGC0000015.1')\nprint(record['protein_id'].unique())\nassert len(record['protein_id'].unique()) == 17\nassert len(record) == 111\nrecord = records.get_group('BGC0000015.2')\nassert len(record['protein_id'].unique()) == 11\nassert len(record) == 36\npytest.mark.parametrize('input_file', ['BGC0000015.fa', 'BGC0000015.fa.gz'])"
+}

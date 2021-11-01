@@ -1,0 +1,9 @@
+{
+    "functionName": "test_plot_prop",
+    "className": null,
+    "fileName": "/Silmathoron_&_NNGT/testing_&_test_plots.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "net = ng.erdos_renyi(nodes=100, avg_deg=10)\nnet.set_weights(distribution='gaussian', parameters={'avg': 5, 'std': 0.5})\nnet.new_node_attribute('attr', 'int', values=np.random.randint(-10, 20, 100))\nnplt.degree_distribution(net, ['in', 'out', 'total'], show=False)\nnplt.edge_attributes_distribution(net, 'weight', show=False)\nnplt.node_attributes_distribution(net, 'attr', show=False)\nif nngt.get_config('backend') != 'nngt':\n    nplt.betweenness_distribution(net, show=False)\npytest.mark.mpi_skip"
+}

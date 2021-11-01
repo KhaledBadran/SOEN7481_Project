@@ -1,0 +1,9 @@
+{
+    "functionName": "test_resample_groupby",
+    "className": "ResampleTest",
+    "fileName": "/HDI-Project_&_MLPrimitives/tests_&_adapters_&_test_pandas.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.df['group1'] = ['A', 'B'] * 2 * 24\nself.df['group2'] = ['C', 'C', 'D', 'D'] * 24\nout = resample(self.df.set_index('dt'), '1d', groupby=['group1', 'group2'])\nassert_frame_equal(out, pd.DataFrame([{'group1': 'A', 'group2': 'C', 'dt':\n    datetime(2000, 1, 1), 'value': 10}, {'group1': 'A', 'group2': 'C', 'dt':\n    datetime(2000, 1, 2), 'value': 34}, {'group1': 'A', 'group2': 'C', 'dt':\n    datetime(2000, 1, 3), 'value': 58}, {'group1': 'A', 'group2': 'C', 'dt':\n    datetime(2000, 1, 4), 'value': 82}, {'group1': 'A', 'group2': 'D', 'dt':\n    datetime(2000, 1, 1), 'value': 12}, {'group1': 'A', 'group2': 'D', 'dt':\n    datetime(2000, 1, 2), 'value': 36}, {'group1': 'A', 'group2': 'D', 'dt':\n    datetime(2000, 1, 3), 'value': 60}, {'group1': 'A', 'group2': 'D', 'dt':\n    datetime(2000, 1, 4), 'value': 84}, {'group1': 'B', 'group2': 'C', 'dt':\n    datetime(2000, 1, 1), 'value': 11}, {'group1': 'B', 'group2': 'C', 'dt':\n    datetime(2000, 1, 2), 'value': 35}, {'group1': 'B', 'group2': 'C', 'dt':\n    datetime(2000, 1, 3), 'value': 59}, {'group1': 'B', 'group2': 'C', 'dt':\n    datetime(2000, 1, 4), 'value': 83}, {'group1': 'B', 'group2': 'D', 'dt':\n    datetime(2000, 1, 1), 'value': 13}, {'group1': 'B', 'group2': 'D', 'dt':\n    datetime(2000, 1, 2), 'value': 37}, {'group1': 'B', 'group2': 'D', 'dt':\n    datetime(2000, 1, 3), 'value': 61}, {'group1': 'B', 'group2': 'D', 'dt':\n    datetime(2000, 1, 4), 'value': 85}], columns=['group1', 'group2', 'dt',\n    'value']))\n"
+}

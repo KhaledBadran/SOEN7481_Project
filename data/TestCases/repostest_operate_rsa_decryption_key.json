@@ -1,0 +1,9 @@
+{
+    "functionName": "test_operate_rsa_decryption_key",
+    "className": "TestConsumerDb",
+    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_consumer_db.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "database = Sqlite3ConsumerDb(self.databaseFilePath)\nencryptionKeyBlob, decryptionKeyBlob = generateRsaKeys()\nkeyName = Name(\n    '/alice/health/samples/activity/steps/D-KEY/20150928080000/20150928090000!'\n    )\nkeyName.append(Name('FOR/test/member/KEY/123!'))\ndatabase.addKey(keyName, decryptionKeyBlob)\nresultBlob = database.getKey(keyName)\nself.assertTrue(decryptionKeyBlob.equals(resultBlob))\ndatabase.deleteKey(keyName)\nresultBlob = database.getKey(keyName)\nself.assertEqual(0, resultBlob.size())\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_puf_path",
+    "className": null,
+    "fileName": "/open-source-economics_&_OG-USA/ogusa_&_tests_&_test_get_micro_data.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Check that setting `data` to None uses the puf file\n    \"\"\"\nbaseline = False\nstart_year = 2016\nreform = {'II_em': {(2017): 10000}}\nif os.path.exists(PUF_PATH):\n    calc = get_micro_data.get_calculator(baseline, start_year, reform=\n        reform, data=PUF_PATH)\n    assert calc.array('blind_head').sum() == 0 and calc.array('e00700').sum(\n        ) > 0\nelse:\n    with pytest.raises((IOError, ValueError), match='puf.csv'):\n        get_micro_data.get_calculator(baseline, start_year, reform=reform,\n            records_start_year=CPS_START_YEAR, data=None)\n"
+}

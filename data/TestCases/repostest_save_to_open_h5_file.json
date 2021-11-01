@@ -1,0 +1,9 @@
+{
+    "functionName": "test_save_to_open_h5_file",
+    "className": null,
+    "fileName": "/CCampJr_&_LazyHDF5/lazy5_&_tests_&_test_create.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Test saving to an H5 file where the H5 file id is passed \"\"\"\ndata = np.random.randn(20, 20)\nfilename = 'temp_create2.h5'\ndset_name = '/Group1/Dset'\npth = './temp_test'\nos.mkdir(pth)\nassert os.path.isdir(pth)\nfp = os.path.join(pth, filename)\nwith h5py.File(fp, 'w') as fid:\n    save(fid, dset_name, data, pth=pth, mode='w')\nassert os.path.isfile(fp)\nassert os.path.getsize(fp) >= data.nbytes\nos.remove(fp)\nos.rmdir(pth)\n"
+}

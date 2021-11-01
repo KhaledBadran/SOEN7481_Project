@@ -1,0 +1,9 @@
+{
+    "functionName": "test_api_patch_user",
+    "className": null,
+    "fileName": "/mostafa_&_GRest/tests_&_test_extended_app.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "global uid\nres = client.patch('/users/' + uid, data=json.dumps({'phone_number':\n    '654321'}), headers={'Content-Type': 'application/json'})\nassert res.status_code == 200\nassert res.json == {'result': 'OK'}\nres = client.patch('/users/' + uid, data=json.dumps({'first_name': 123}),\n    headers={'Content-Type': 'application/json'})\nassert res.status_code == 422\nassert 'errors' in res.json\n"
+}

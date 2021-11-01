@@ -1,0 +1,9 @@
+{
+    "functionName": "test_value_federate_runFederateTestVectorD",
+    "className": null,
+    "fileName": "/GMLC-TDC_&_HELICS/tests_&_python_&_test_value_federate.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "defaultValue = [0, 1, 2]\ntestValue = [3, 4, 5]\npubid = h.helicsFederateRegisterGlobalPublication(vFed, 'pub1', h.\n    helics_data_type_vector, '')\nsubid = h.helicsFederateRegisterSubscription(vFed, 'pub1', '')\nh.helicsInputSetDefaultVector(subid, defaultValue)\nh.helicsFederateEnterExecutingMode(vFed)\nh.helicsPublicationPublishVector(pubid, testValue)\nvalue = h.helicsInputGetVector(subid)\nassert value == [0, 1, 2]\ngrantedtime = h.helicsFederateRequestTime(vFed, 1.0)\nassert grantedtime == 0.01\nvalue = h.helicsInputGetVector(subid)\nassert value == [3, 4, 5]\n"
+}

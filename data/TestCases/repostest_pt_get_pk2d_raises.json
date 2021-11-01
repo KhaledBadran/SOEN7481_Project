@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pt_get_pk2d_raises",
+    "className": null,
+    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_pt_power.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with pytest.raises(TypeError):\n    ccl.nl_pt.get_pt_pk2d(COSMO, TRS['TG'], tracer2=3, ptc=PTC)\nwith pytest.raises(TypeError):\n    ccl.nl_pt.get_pt_pk2d(COSMO, 3, tracer2=TRS['TG'], ptc=PTC)\nwith pytest.raises(TypeError):\n    ccl.nl_pt.get_pt_pk2d(COSMO, TRS['TG'], ptc=3)\nptc_empty = ccl.nl_pt.PTCalculator(with_NC=False, with_IA=False, with_dd=False)\nfor t in ['TG', 'TI', 'TM']:\n    with pytest.raises(ValueError):\n        ccl.nl_pt.get_pt_pk2d(COSMO, TRS[t], nonlin_pk_type='spt', ptc=\n            ptc_empty)\nwith pytest.raises(NotImplementedError):\n    ccl.nl_pt.get_pt_pk2d(COSMO, TRS['TM'], nonlin_pk_type='halofat')\ntdum = ccl.nl_pt.PTMatterTracer()\ntdum.type = 'A'\nfor t in ['TG', 'TI', 'TM']:\n    with pytest.raises(NotImplementedError):\n        ccl.nl_pt.get_pt_pk2d(COSMO, TRS[t], tracer2=tdum, ptc=PTC)\nwith pytest.raises(NotImplementedError):\n    ccl.nl_pt.get_pt_pk2d(COSMO, tdum, tracer2=TRS['TM'], ptc=PTC)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_role_create",
+    "className": "TestCrossEnterpriseCommands",
+    "fileName": "/Keeper-Security_&_Commander/tests_&_test_cross_commands.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "param1 = TestCrossEnterpriseCommands.params1\nparam2 = TestCrossEnterpriseCommands.params2\nent1_parent_id = [x['node_id'] for x in param1.enterprise['nodes']][0]\ncmd = EnterpriseRoleCommand()\nent2_role_id = cmd.get_enterprise_id(param2)\ndt = {'displayname': 'Role'}\nencrypted_data = api.encrypt_aes(json.dumps(dt).encode('utf-8'), param2.\n    enterprise['unencrypted_tree_key'])\nrq = {'command': 'role_add', 'role_id': ent2_role_id, 'node_id':\n    ent1_parent_id, 'encrypted_data': encrypted_data, 'visible_below': True,\n    'new_user_inherit': False}\nfailed = False\ntry:\n    api.communicate(param2, rq)\nexcept KeeperApiError as err:\n    failed = True\n    self.assertEqual(err.result_code, 'bad_inputs_node_id')\nself.assertTrue(failed)\n"
+}

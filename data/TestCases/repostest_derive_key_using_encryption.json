@@ -1,0 +1,9 @@
+{
+    "functionName": "test_derive_key_using_encryption",
+    "className": "TestProxyKmipClientIntegration",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_integration_&_services_&_test_proxykmipclient.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the ProxyKmipClient can derive a new key using encryption.\n        \"\"\"\nkey_id = self.client.register(objects.SymmetricKey(enums.\n    CryptographicAlgorithm.BLOWFISH, 128,\n    b'\\x01#Eg\\x89\\xab\\xcd\\xef\\xf0\\xe1\\xd2\\xc3\\xb4\\xa5\\x96\\x87', masks=[\n    enums.CryptographicUsageMask.DERIVE_KEY]))\nsecret_id = self.client.derive_key(enums.ObjectType.SECRET_DATA, [key_id],\n    enums.DerivationMethod.ENCRYPT, {'cryptographic_parameters': {\n    'block_cipher_mode': enums.BlockCipherMode.CBC, 'padding_method': enums\n    .PaddingMethod.PKCS5, 'cryptographic_algorithm': enums.\n    CryptographicAlgorithm.BLOWFISH}, 'initialization_vector':\n    b'\\xfe\\xdc\\xba\\x98vT2\\x10', 'derivation_data':\n    b'7654321 Now is the time for \\x00'}, cryptographic_length=256)\nsecret = self.client.get(secret_id)\nself.assertEqual(\n    b'kw\\xb4\\xd60\\x06\\xde\\xe6\\x05\\xb1V\\xe2t\\x03\\x97\\x93X\\xde\\xb9\\xe7\\x15F\\x16\\xd9t\\x9d\\xec\\xbe\\xc0]&K'\n    , secret.value)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_diff_in_tolerance",
+    "className": "TestGroTester",
+    "fileName": "/Tsjerk_&_Insane/tests_&_test_regression.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Make sure that small errors in coordinates are not caught.\n        \"\"\"\ngro_content = \"\"\"        INSANE! Membrane UpperLeaflet>POPC=1 LowerLeaflet>POPC=1\n        4\n            1POPC   NC3    1   2.111  14.647  11.951\n            1POPC   PO4    2   2.177  14.644  11.651\n            1POPC   GL1    3   2.128  14.642  11.352  # Is within tolerance\n            1POPC   GL2    4   1.961  14.651  11.351\n        10 10 10\"\"\"\nwith utils.tempdir():\n    with open('ref.gro', 'w') as outfile:\n        print(textwrap.dedent(self.ref_gro_content), file=outfile, end='')\n    with open('content.gro', 'w') as outfile:\n        print(textwrap.dedent(gro_content), file=outfile, end='')\n    utils.assert_gro_equal('content.gro', 'ref.gro')\n"
+}

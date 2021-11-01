@@ -1,0 +1,9 @@
+{
+    "functionName": "test_rest_get_api_calls",
+    "className": "TestPycordRestApi",
+    "fileName": "/Celeo_&_Pycord/pycord_&_tests_&_test_pycord.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data = {'foo': 'bar'}\ndef mock(path, headers):\n    r = requests.Response()\n    r.status_code = 200\n    r.raw = json_to_bytes(data)\n    return r\nmonkeypatch.setattr(requests, 'get', mock)\ncord = pycord.Pycord('')\nfuncs = (cord.get_basic_bot_info, ()), (cord.get_connected_guilds, ()), (cord\n    .get_guild_info, ('',)), (cord.get_channels_in, ('',)), (cord.\n    get_channel_info, ('',))\nfor func in funcs:\n    assert func[0](*func[1]) == data\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_update_indicator_matrix",
+    "className": "TestUpdate_indicator_matrix",
+    "fileName": "/KnowEnG_&_KnowEnG_Pipelines_Library/test_&_unit_&_test_update_indicator_matrix.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" assert that the indicator matrix is not loosing any digits\n            Note: correctness test considered as part of linkage matrix test\n        \"\"\"\nn_repeats = 10\nn_test_perm = 11\nn_test_rows = 77\nA = np.zeros((n_test_rows, n_test_rows))\nrunning_sum = 0\nfor r in range(0, n_repeats):\n    running_sum += n_test_perm ** 2\n    f_perm = np.random.permutation(n_test_rows)\n    f_perm = f_perm[0:n_test_perm]\n    A = kn.update_indicator_matrix(f_perm, A)\nself.assertEqual(A.sum(), running_sum, msg='sum of elements exception')\n"
+}

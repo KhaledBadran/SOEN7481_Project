@@ -1,0 +1,9 @@
+{
+    "functionName": "test_03_run_clustering",
+    "className": "TestWorkflow",
+    "fileName": "/mhhennig_&_HS2/tests_&_test_not_broken.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.H.LoadDetected()\nself.C = hs.HSClustering(self.H)\nself.C.ShapePCA(pca_ncomponents=2, pca_whiten=True)\nself.C.CombinedClustering(alpha=4, bandwidth=5.0, bin_seeding=False, n_jobs\n    =4, cluster_subset=1000)\nfname = os.path.join(FILEDIR, 'sorted.hdf5')\nself.C.SaveHDF5(fname)\nself.assertTrue(os.path.isfile(fname))\nplt.figure()\nself.C.PlotShapes(range(2))\nplt.savefig(os.path.join(FILEDIR, 'cl_shapes.png'))\nplt.figure()\nself.C.PlotNeighbourhood(1, radius=6, alpha=0.8)\nplt.savefig(os.path.join(FILEDIR, 'cl_neigh.png'))\nplt.figure()\nself.C.PlotAll(invert=True)\nplt.savefig(os.path.join(FILEDIR, 'locations_clustered.png'))\n"
+}

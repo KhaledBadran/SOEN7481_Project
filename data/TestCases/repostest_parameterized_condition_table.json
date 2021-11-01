@@ -1,0 +1,9 @@
+{
+    "functionName": "test_parameterized_condition_table",
+    "className": "TestGetSimulationToOptimizationParameterMapping",
+    "fileName": "/PEtab-dev_&_PEtab/tests_&_test_parameter_mapping.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "condition_df = pd.DataFrame(data={CONDITION_ID: ['condition1', 'condition2',\n    'condition3'], CONDITION_NAME: ['', 'Condition 2', ''],\n    'dynamicParameter1': ['dynamicOverride1_1', 'dynamicOverride1_2', 0]})\ncondition_df.set_index(CONDITION_ID, inplace=True)\nmeasurement_df = pd.DataFrame(data={SIMULATION_CONDITION_ID: ['condition1',\n    'condition2', 'condition3'], OBSERVABLE_ID: ['obs1', 'obs2', 'obs1'],\n    OBSERVABLE_PARAMETERS: '', NOISE_PARAMETERS: ''})\nparameter_df = pd.DataFrame(data={PARAMETER_ID: ['dynamicOverride1_1',\n    'dynamicOverride1_2'], PARAMETER_NAME: ['', '...'], ESTIMATE: [1, 1]})\nparameter_df.set_index(PARAMETER_ID, inplace=True)\ndocument, model = minimal_sbml_model\nmodel.createParameter().setId('dynamicParameter1')\nassert petab.get_model_parameters(model) == ['dynamicParameter1']\nactual = petab.get_optimization_to_simulation_parameter_mapping(measurement_df\n    =measurement_df, condition_df=condition_df, parameter_df=parameter_df,\n    sbml_model=model)\nexpected = [({}, {'dynamicParameter1': 'dynamicOverride1_1'}, {}, {\n    'dynamicParameter1': LIN}), ({}, {'dynamicParameter1':\n    'dynamicOverride1_2'}, {}, {'dynamicParameter1': LIN}), ({}, {\n    'dynamicParameter1': 0}, {}, {'dynamicParameter1': LIN})]\nassert actual == expected\nstaticmethod"
+}

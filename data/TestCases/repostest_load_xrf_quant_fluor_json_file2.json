@@ -1,0 +1,9 @@
+{
+    "functionName": "test_load_xrf_quant_fluor_json_file2",
+    "className": null,
+    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_core_&_tests_&_test_quant_analysis.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data, json_path = _get_data_and_json_path(tmp_path)\nsave_xrf_quant_fluor_json_file(json_path, data)\nschema = copy.deepcopy(_xrf_quant_fluor_schema)\nschema['properties']['scaler_name'] = {'type': 'number'}\nwith pytest.raises(jsonschema.ValidationError):\n    load_xrf_quant_fluor_json_file(json_path, schema=schema)\n"
+}

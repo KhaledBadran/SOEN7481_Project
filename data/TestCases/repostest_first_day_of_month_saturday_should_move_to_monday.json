@@ -1,0 +1,9 @@
+{
+    "functionName": "test_first_day_of_month_saturday_should_move_to_monday",
+    "className": null,
+    "fileName": "/roniemartinez_&_DocCron/tests_&_test_non_standard_characters.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cron = doccron.cron('0 0 1W * 6 *')\ndatetime_1 = datetime.now(tz=tzlocal()).replace(hour=0, minute=0, second=0,\n    microsecond=0)\nif datetime_1.day == 1:\n    datetime_1 += timedelta(days=monthrange(datetime_1.year, datetime_1.\n        month)[-1])\nwhile True:\n    if datetime_1.day == 1 and datetime_1.isoweekday() == 6:\n        break\n    datetime_1 += timedelta(days=1)\nassert next(cron) == datetime_1 + timedelta(days=2)\n"
+}

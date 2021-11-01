@@ -1,0 +1,9 @@
+{
+    "functionName": "add_boundary_energy",
+    "className": null,
+    "fileName": "/david-leon_&_Dandelion/test_&_test_ChainCRF.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Given the observations x, it adds the start boundary energy b_start (resp.\n    end boundary energy b_end on the start (resp. end) elements and multiplies\n    the mask.\"\"\"\nif mask is None:\n    if b_start is not None:\n        x = K.concatenate([x[:, :1, :] + b_start, x[:, 1:, :]], axis=1)\n    if b_end is not None:\n        x = K.concatenate([x[:, :-1, :], x[:, -1:, :] + b_end], axis=1)\nelse:\n    mask = K.cast(mask, K.floatx())\n    mask = K.expand_dims(mask, 2)\n    x *= mask\n    if b_start is not None:\n        mask_r = K.concatenate([K.zeros_like(mask[:, :1]), mask[:, :-1]],\n            axis=1)\n        start_mask = K.cast(K.greater(mask, mask_r), K.floatx())\n        x = x + start_mask * b_start\n    if b_end is not None:\n        mask_l = K.concatenate([mask[:, 1:], K.zeros_like(mask[:, -1:])],\n            axis=1)\n        end_mask = K.cast(K.greater(mask, mask_l), K.floatx())\n        x = x + end_mask * b_end\nreturn x\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_decrypt_invalid",
+    "className": "TestDecryptorV2",
+    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_decryptor_v2.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "fixture = DecryptorFixture(Name('/not/authorized'))\nencryptedContent = EncryptedContent()\nencryptedContent.wireDecodeV2(EncryptStaticData.encryptedBlobs[0])\nnSuccesses = [0]\nnFailures = [0]\ndef onSuccess(plainData):\n    nSuccesses[0] += 1\ndef onError(errorCode, message):\n    nFailures[0] += 1\nfixture._decryptor.decrypt(encryptedContent, onSuccess, onError)\nself.assertEqual(0, nSuccesses[0])\nself.assertEqual(1, nFailures[0])\n"
+}

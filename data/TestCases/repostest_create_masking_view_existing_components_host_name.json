@@ -1,0 +1,9 @@
+{
+    "functionName": "test_create_masking_view_existing_components_host_name",
+    "className": "PyU4VProvisioningTest",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_provisioning.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test create_masking_view_existing_components host name.\"\"\"\nport_group_name = self.data.port_group_name_f\nstorage_group_name = self.data.storagegroup_name_2\nmasking_view = 'my_masking_view'\nhost_name = self.data.initiatorgroup_name_f\nhost_details = {'useExistingHostParam': {'hostId': host_name}}\npayload = {'portGroupSelection': {'useExistingPortGroupParam': {\n    'portGroupId': port_group_name}}, 'maskingViewId': masking_view,\n    'hostOrHostGroupSelection': host_details, 'storageGroupSelection': {\n    'useExistingStorageGroupParam': {'storageGroupId': storage_group_name}}}\nwith mock.patch.object(self.provisioning, 'create_resource') as mock_create:\n    self.provisioning.create_masking_view_existing_components(port_group_name,\n        masking_view, storage_group_name, host_name=host_name)\n    mock_create.assert_called_once_with(category=constants.SLOPROVISIONING,\n        resource_level=constants.SYMMETRIX, resource_level_id=self.data.\n        array, resource_type=constants.MASKINGVIEW, payload=payload)\n"
+}

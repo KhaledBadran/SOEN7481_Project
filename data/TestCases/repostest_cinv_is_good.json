@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cinv_is_good",
+    "className": "TestGaussianKernel",
+    "fileName": "/SUNCAT-Center_&_CatLearn/test_&_test_gradients.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "kdict = [{'type': 'gaussian', 'width': width, 'scaling': scaling}]\ngp = GaussianProcess(kernel_list=kdict, train_fp=train, train_target=target,\n    gradients=None, scale_data=True, optimize_hyperparameters=False)\ngp_grad = GaussianProcess(kernel_list=kdict, train_fp=train, train_target=\n    target, gradients=gradients, scale_data=True, optimize_hyperparameters=\n    False)\nprint('Checking size of covariance matrix (K).')\nself.assertEqual(np.shape(gp.cinv), (len(train), len(train)))\nprint('Checking size of covarience matrix with gradients (Ktilde).')\nself.assertEqual(np.shape(gp_grad.cinv), (len(train) + len(train) * np.\n    shape(train)[1], len(train) + len(train) * np.shape(train)[1]))\nprint('Comparing bigK and bigKtilde.')\ncov = np.linalg.inv(gp.cinv)\ncov_grad = np.linalg.inv(gp_grad.cinv)\nnp.testing.assert_array_almost_equal(cov, cov_grad[0:len(train), 0:len(\n    train)], decimal=10)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_settemp_cell",
+    "className": null,
+    "fileName": "/SunPower_&_PVMismatch/pvmismatch_&_tests_&_test_settemps.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test setTemp method for a wide range of temperatures. \n    Test added after implementing Isat2 as Isat2(Tcell)\n    \"\"\"\npvc = PVcell()\nPmp_arr = []\nVmp_arr = []\nVoc_arr = []\nIsc_arr = []\ntemps = [-85, -60, -40, -25, 0, 25, 40, 60, 85]\nfor t in temps:\n    pvc.Tcell = float(t) + 273.15\n    Pmp_arr.append(pvc.Pcell.max())\n    Vmp_arr.append(pvc.Vcell[pvc.Pcell.argmax()])\n    Voc_arr.append(pvc.calcVcell(0))\n    Isc_arr.append(pvc.Isc)\nassert np.all(np.gradient(np.squeeze(Vmp_arr)) < 0)\nassert np.all(np.gradient(np.squeeze(Voc_arr)) < 0)\nassert np.all(np.gradient(Isc_arr) > 0)\n"
+}

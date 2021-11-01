@@ -1,0 +1,9 @@
+{
+    "functionName": "test_entry_vs_invasion_pressure",
+    "className": "OrdinaryPercolationTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_OrdinaryPercolationTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.alg = op.algorithms.OrdinaryPercolation(network=self.net)\nself.alg.setup(phase=self.water, mode='bond', access_limited=True)\nself.alg.set_inlets(pores=self.net.pores('top'))\nself.alg.set_outlets(pores=self.net.pores('bottom'))\nself.alg.run()\nTinv = self.alg['throat.invasion_pressure']\nTent = self.water['throat.entry_pressure']\nassert np.all(Tent <= Tinv)\n"
+}

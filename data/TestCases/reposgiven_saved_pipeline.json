@@ -1,0 +1,9 @@
+{
+    "functionName": "given_saved_pipeline",
+    "className": null,
+    "fileName": "/Neuraxio_&_Neuraxle/testing_&_test_step_saving.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "step_savers = [(SOME_STEP_1, []), (PIPELINE_2, [TruncableJoblibStepSaver()])]\npath = create_root_path(tmpdir, True)\nroot = ResumablePipeline([], cache_folder=tmpdir)\nroot.sub_steps_savers = step_savers\nroot.name = ROOT\ndump(root, path)\npipeline_2 = ResumablePipeline([], cache_folder=tmpdir)\npipeline_2.name = 'pipeline2'\npipeline_2.sub_steps_savers = [(SOME_STEP_2, []), (CHECKPOINT, []), (\n    SOME_STEP_3, [])]\ndump(pipeline_2, create_pipeline2_path(tmpdir, True))\ngiven_saved_some_step(multiply_by=2, name=SOME_STEP_1, path=\n    create_some_step1_path(tmpdir, True))\ngiven_saved_some_step(multiply_by=4, name=SOME_STEP_2, path=\n    create_some_step2_path(tmpdir, True))\ngiven_saved_some_step(multiply_by=6, name=SOME_STEP_3, path=\n    create_some_step3_path(tmpdir, True))\ncheckpoint = DefaultCheckpoint()\ncheckpoint.name = CHECKPOINT\ndump(checkpoint, create_some_checkpoint_path(tmpdir, True))\np = ResumablePipeline([(SOME_STEP_1, MultiplyByN(multiply_by=1)), (\n    PIPELINE_2, ResumablePipeline([(SOME_STEP_2, MultiplyByN(multiply_by=1)\n    ), (CHECKPOINT, DefaultCheckpoint()), (SOME_STEP_3, MultiplyByN(\n    multiply_by=1))]))], cache_folder=tmpdir)\np.name = ROOT\nreturn p\n"
+}

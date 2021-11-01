@@ -1,0 +1,9 @@
+{
+    "functionName": "test_simple_indicator",
+    "className": null,
+    "fileName": "/NASA_&_MLMCPy/tests_&_model_&_test_CDFWrapperModel.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Checks for the expected result when evaluating the CDF Wrapper on a very\n    simple model that simply repeats its inputs.\n    \"\"\"\ninner_model = ModelForTesting('repeat')\ncdfw = CDFWrapperModel(inner_model, grid_0_1)\noutput = cdfw.evaluate(sample)\nexpected_output_sum = np.count_nonzero(sample <= grid_0_1)\nassert np.array_equal(np.sum(output), expected_output_sum)\nassert np.all(np.logical_or(output == 0, output == 1))\npytest.mark.parametrize('sample', [0, -1, 0.5, 2.0])"
+}

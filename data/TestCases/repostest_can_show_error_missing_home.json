@@ -1,0 +1,9 @@
+{
+    "functionName": "test_can_show_error_missing_home",
+    "className": "CommandLineTest",
+    "fileName": "/schlind_&_Karlsruher/tests_&_commandline_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"CommandLine must show error missing home.\"\"\"\nwith self.managed_io() as (out, err):\n    for arg in self.known_task_args:\n        sys.argv = [arg]\n        self.assertEqual(1, CommandLine.run())\n        console = out.getvalue().strip()\n        self.assertTrue(console.startswith('Please specify '), console)\n"
+}

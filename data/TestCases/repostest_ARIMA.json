@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ARIMA",
+    "className": "TestEvalBase",
+    "fileName": "/CosmiQ_&_CometTS/CometTS_&_tests_&_Comet_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test instantiation of ARIMA Functions.\"\"\"\nrun_arima(os.path.join(data_dir, 'Test_San_Juan_FullStats2.csv'), os.path.\n    join(data_dir, 'Test_San_Juan_ARIMA_Output2.csv'), 3, '2017/08/15', 2)\nbase_instance = pd.read_csv(os.path.join(data_dir,\n    'Test_San_Juan_ARIMA_Output2.csv'))\ngdf = pd.read_csv(os.path.join(data_dir, 'Test_San_Juan_ARIMA_Output.csv'))\ngdf = gdf.sort_values(by=['date'])\nbase_instance = base_instance.sort_values(by=['date'])\nbase_instance = base_instance[['date', 'SeasonalForecast']]\ngdf = gdf[['date', 'SeasonalForecast']]\nprint(gdf['SeasonalForecast'])\nprint(base_instance['SeasonalForecast'])\npd.testing.assert_frame_equal(base_instance.reset_index(drop=True), gdf.\n    reset_index(drop=True))\n"
+}

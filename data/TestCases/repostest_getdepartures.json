@@ -1,0 +1,9 @@
+{
+    "functionName": "test_getdepartures",
+    "className": null,
+    "fileName": "/cgtobi_&_PyRMVtransport/tests_&_test_rmvtransport.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test departures with default setings.\"\"\"\nwith open('fixtures/result_simple.json') as f:\n    result_simple_json = json.load(f, object_hook=date_hook)\nwith open('fixtures/result_simple.txt') as f:\n    result_text = f.read()\nasync with aresponses.ResponsesMockServer(loop=event_loop) as arsps:\n    arsps.add(URL, URL_PATH, 'get', xml_request)\n    async with aiohttp.ClientSession(loop=event_loop) as session:\n        rmv = RMVtransport(session)\n        station_id = '3006904'\n        data = await rmv.get_departures(station_id)\n        assert data == result_simple_json\n        rmv.output()\n        out, err = capsys.readouterr()\n        assert out == result_text\npytest.mark.asyncio"
+}

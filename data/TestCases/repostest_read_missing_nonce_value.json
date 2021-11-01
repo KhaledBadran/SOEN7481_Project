@@ -1,0 +1,9 @@
+{
+    "functionName": "test_read_missing_nonce_value",
+    "className": "TestNonce",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_credentials.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a ValueError gets raised when attempting to read a\n        Nonce struct from a data stream missing the nonce value data.\n        \"\"\"\nnonce = objects.Nonce()\nself.assertEqual(None, nonce.nonce_id)\nself.assertEqual(None, nonce.nonce_value)\nargs = self.encoding_missing_nonce_value,\nself.assertRaisesRegex(ValueError,\n    'Nonce encoding missing the nonce value.', nonce.read, *args)\n"
+}

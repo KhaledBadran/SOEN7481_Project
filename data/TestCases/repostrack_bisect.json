@@ -1,0 +1,9 @@
+{
+    "functionName": "track_bisect",
+    "className": null,
+    "fileName": "/Perlence_&_PyGuitarPro/tests_&_test_conversion.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Save song in *n* files, where *n* is number of tracks in song.\n\n    Resulting tabs have following tracks:\n\n    - ``*-T01.gp?``: *1st* track\n    - ``*-T02.gp?``: *1st* and *2nd* track\n    - ...\n    - ``*-Tnn.gp?``: *1st*, *2nd*, ..., *nth* track\n\n    This function helps to find the track where erroneous data was\n    written using bisection method.\n\n    \"\"\"\nfolder, _ = path.splitext(test)\ntry:\n    os.mkdir(path.join(OUTPUT, folder))\nexcept OSError:\n    pass\ntracks = song.tracks[:]\nfor number, track in enumerate(tracks, 1):\n    dest_path = path.join(OUTPUT, folder, test + '-T%02d.gp%d' % (number,\n        dest_version))\n    song.tracks = tracks[:number]\n    guitarpro.write(song, dest_path)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "testSetStatusQuo",
+    "className": "BaseModelBridgeTest",
+    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_base_modelbridge.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "modelbridge = ModelBridge(search_space=get_search_space_for_value(), model=\n    0, experiment=get_experiment_for_value(), data=Data(), status_quo_name=\n    '1_1')\nself.assertEqual(modelbridge.status_quo, get_observation1())\nmodelbridge = ModelBridge(get_search_space_for_value(), 0, [],\n    get_experiment_for_value(), 0, status_quo_features=get_observation1().\n    features)\nself.assertEqual(modelbridge.status_quo, get_observation1())\nexp = get_experiment_for_value()\nsq = Arm(name='1_1', parameters={'x': 3.0})\nexp._status_quo = sq\nmodelbridge = ModelBridge(get_search_space_for_value(), 0, [], exp, 0)\nself.assertEqual(modelbridge.status_quo, get_observation1())\nwith self.assertRaises(ValueError):\n    modelbridge = ModelBridge(get_search_space_for_value(), 0, [], exp, 0,\n        status_quo_features=get_observation1().features, status_quo_name='1_1')\nmodelbridge = ModelBridge(get_search_space_for_value(), 0, [], exp, 0,\n    status_quo_name='1_0')\nself.assertIsNone(modelbridge.status_quo)\nmodelbridge = ModelBridge(get_search_space_for_value(), 0, [],\n    get_experiment_for_value(), 0, status_quo_features=ObservationFeatures(\n    parameters={'x': 3.0, 'y': 10.0}))\nself.assertIsNone(modelbridge.status_quo)\nmock.patch('ax.modelbridge.base.observations_from_data', autospec=True,\n    return_value=[get_observation1()])mock.patch('ax.modelbridge.base.ModelBridge._fit', autospec=True)"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_modify_host_group_remove_host",
+    "className": "CITestProvisioning",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test modify host group remove host.\"\"\"\nhost_name_1 = self.create_empty_host()\nhost_name_2 = self.create_empty_host()\nhost_group_name = self.generate_name(constants.HOST_GROUP)\nhost_group_details = self.provisioning.create_host_group(host_group_name, [\n    host_name_1, host_name_2])\nself.addCleanup(self.delete_host_group, host_group_name)\nself.assertEqual(2, host_group_details[constants.NUM_OF_HOSTS])\nself.provisioning.modify_host_group(host_group_name, remove_host_list=[\n    host_name_2])\nhost_group_details = self.provisioning.get_host_group(host_group_name)\nself.assertEqual(1, host_group_details[constants.NUM_OF_HOSTS])\nremaining_host = host_group_details[constants.HOST][0][constants.HOST_ID]\nself.assertEqual(host_name_1, remaining_host)\nself.assertNotEqual(host_name_2, remaining_host)\n"
+}

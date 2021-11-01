@@ -1,0 +1,9 @@
+{
+    "functionName": "test_propagate_cols_up_old",
+    "className": "TestContribution",
+    "fileName": "/PmagPy_&_PmagPy/pmagpy_tests_&_test_contribution_builder.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "directory = os.path.join(WD, 'data_files', '3_0', 'McMurdo')\ncon = cb.Contribution(directory, dmodel=DMODEL, read_tables=['sites',\n    'samples'])\ncon.tables['sites'].df.loc[:, ('lithologies')] = None\ncon.tables['sites'].df.loc[:, ('geologic_types')] = 'your type'\ncon.tables['samples'].df.loc[:, ('geologic_types')] = 'my_type'\ncon.propagate_cols(['lithologies', 'geologic_types'], 'sites', 'samples',\n    down=False)\nself.assertEqual('Basalt', con.tables['sites'].get_first_non_null_value(\n    'mc50', 'lithologies'))\nself.assertEqual('your type', con.tables['sites'].get_first_non_null_value(\n    'mc50', 'geologic_types'))\n"
+}

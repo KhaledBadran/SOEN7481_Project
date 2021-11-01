@@ -1,0 +1,9 @@
+{
+    "functionName": "test_output_access",
+    "className": "TestAnyPyProcess",
+    "fileName": "/AnyBody-Research-Group_&_AnyPyTools/tests_&_test_abcutils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "macro = [['load \"model.main.any\" -def N_STEP=\"5\"',\n    'operation Main.ArmModelStudy.InverseDynamics',\n    'classoperation Main.ArmModelStudy.Output.MaxMuscleActivity \"Dump\"',\n    'classoperation Main.ArmModel.GlobalRef.t \"Dump\"']] * 5\napp = AnyPyProcess()\noutput = app.start_macro(macro)\noutput['GlobalRef.t']\nassert output['MaxMuscleActivity'].shape == output[\n    'Main.ArmModelStudy.Output.MaxMuscleActivity'].shape\nassert isinstance(output[1:3], AnyPyProcessOutputList)\n"
+}

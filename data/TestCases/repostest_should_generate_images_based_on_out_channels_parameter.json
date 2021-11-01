@@ -1,0 +1,9 @@
+{
+    "functionName": "test_should_generate_images_based_on_out_channels_parameter",
+    "className": "DataLoaderTest",
+    "fileName": "/thoughtworksarts_&_EmoPy/EmoPy_&_tests_&_unittests_&_test_dataloader.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        with self.assertRaises(ValueError) as e:\n            DataLoader(out_channels=0)\n        assert \"Out put channel should be either 3(RGB) or 1(Grey) but got 0\" == str(e.value)\n\n        # Should generate images with single channel\n        channels = 1\n        data_loader = DataLoader(from_csv=True, target_labels=valid_target_labels, datapath=valid_csv_file_path,\n                                 image_dimensions=valid_image_dimensions, csv_label_col=csv_label_col,\n                                 csv_image_col=csv_image_col, out_channels=channels)\n        images, labels = data_loader.load_data()\n        assert list(images.shape[1:]) == list(valid_image_dimensions) + [channels]\n\n        # Should generate images with 3 channel\n        channels = 3\n        data_loader = DataLoader(from_csv=True, target_labels=valid_target_labels, datapath=valid_csv_file_path,\n                                 image_dimensions=valid_image_dimensions, csv_label_col=csv_label_col,\n                                 csv_image_col=csv_image_col, out_channels=channels)\n        images, labels = data_loader.load_data()\n        assert list(images.shape[1:]) == list(valid_image_dimensions) + [channels]\n        \"\"\"\n"
+}

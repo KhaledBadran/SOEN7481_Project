@@ -1,0 +1,9 @@
+{
+    "functionName": "test_acq_with_poi",
+    "className": null,
+    "fileName": "/fmfn_&_BayesianOptimization/tests_&_test_util.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "util = UtilityFunction(kind='poi', kappa=1.0, xi=0.0001)\nepisilon = 0.01\ny_max = 2.0\nmax_arg = acq_max(util.utility, GP, y_max, bounds=np.array([[0, 1], [0, 1]]\n    ), random_state=ensure_rng(0), n_iter=200)\n_, brute_max_arg = brute_force_maximum(MESH, GP, kind='poi', kappa=1.0, xi=\n    0.0001)\nassert all(abs(brute_max_arg - max_arg) < episilon)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_coroutines",
+    "className": null,
+    "fileName": "/chrisseto_&_Agent/tests_&_test_agent.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "@agent.async_generator\ndef inner_gen():\n    yield from asyncio.coroutine(lambda : 'Not sent')()\n    yield (yield from asyncio.coroutine(lambda : 'yield_from')())\n    yield asyncio.coroutine(lambda : 'yield')()\ngen = inner_gen()\nassert await agent.anext(gen) == 'yield_from'\nassert await (await agent.anext(gen)) == 'yield'\npytest.mark.asyncio"
+}

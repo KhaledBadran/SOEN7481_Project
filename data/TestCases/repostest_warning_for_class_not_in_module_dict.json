@@ -1,0 +1,9 @@
+{
+    "functionName": "test_warning_for_class_not_in_module_dict",
+    "className": "ClassRegistryTest",
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_DataObjectTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class A(DataObject):\n    class_context = self.context\nwith captured_logging() as logs:\n    self.context.mapper.process_class(A)\n    log = logs.getvalue()\n    self.assertRegexpMatches(log, 'registry')\n    self.assertRegexpMatches(log, 'tests.DataObjectTest')\n    self.assertRegexpMatches(log, '\\\\bA\\\\b')\n"
+}

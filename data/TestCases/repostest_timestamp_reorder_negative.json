@@ -1,0 +1,9 @@
+{
+    "functionName": "test_timestamp_reorder_negative",
+    "className": "TestValidationPolicyCommandInterest",
+    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_validation_policy_command_interest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "interest2 = self._fixture.makeCommandInterest(self._fixture._identity)\nself._fixture.setNowOffsetMilliseconds(200.0)\ninterest3 = self._fixture.makeCommandInterest(self._fixture._identity)\nself._fixture.setNowOffsetMilliseconds(1100.0)\ninterest1 = self._fixture.makeCommandInterest(self._fixture._identity)\nself._fixture.setNowOffsetMilliseconds(1400.0)\ninterest4 = self._fixture.makeCommandInterest(self._fixture._identity)\nself._fixture.setNowOffsetMilliseconds(1100.0)\nself.validateExpectSuccess(interest1, 'Should succeed')\nself._fixture.setNowOffsetMilliseconds(0.0)\nself.validateExpectFailure(interest2, 'Should fail (timestamp reordered)')\nself._fixture.setNowOffsetMilliseconds(200.0)\nself.validateExpectFailure(interest3, 'Should fail (timestamp reordered)')\nself._fixture.setNowOffsetMilliseconds(1400.0)\nself.validateExpectSuccess(interest4, 'Should succeed')\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_init_method",
+    "className": "TestSimple",
+    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_test_simple_integration.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "initializers = [Zeros(), Ones(), ConstInitMethod(5), RandomUniform(-1, 1),\n    RandomNormal(0, 1), None]\nspecial_initializers = [MsraFiller(False), Xavier(), RandomUniform()]\nlayers = [SpatialConvolution(6, 12, 5, 5), SpatialShareConvolution(1, 1, 1,\n    1), LookupTable(1, 1, 1e-05, 1e-05, 1e-05, True), Bilinear(1, 1, 1, \n    True), Cosine(2, 3), SpatialFullConvolution(1, 1, 1, 1), Add(1), Linear\n    (100, 10), CMul([1, 2]), Mul(), PReLU(1), Euclidean(1, 1, True),\n    SpatialDilatedConvolution(1, 1, 1, 1), SpatialBatchNormalization(1),\n    BatchNormalization(1, 1e-05, 1e-05, True)]\nspecial_layers = [SpatialConvolution(6, 12, 5, 5), SpatialShareConvolution(\n    1, 1, 1, 1), Cosine(2, 3), SpatialFullConvolution(1, 1, 1, 1), Add(1),\n    Linear(100, 10), CMul([1, 2]), Mul(), PReLU(1), Euclidean(1, 1, True),\n    SpatialDilatedConvolution(1, 1, 1, 1), SpatialBatchNormalization(1),\n    BatchNormalization(1, 1e-05, 1e-05, True)]\nfor layer in layers:\n    for init1 in initializers:\n        for init2 in initializers:\n            layer.set_init_method(init1, init2)\nfor layer in special_layers:\n    for init1 in special_initializers:\n        for init2 in special_initializers:\n            layer.set_init_method(init1, init2)\nSpatialFullConvolution(1, 1, 1, 1).set_init_method(BilinearFiller(), Zeros())\n"
+}

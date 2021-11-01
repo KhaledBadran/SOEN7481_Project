@@ -1,0 +1,9 @@
+{
+    "functionName": "test_load_particles",
+    "className": null,
+    "fileName": "/ePSIC-DLS_&_ParticleSpy/ParticleSpy_&_tests_&_test_particle_io.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "my_path = os.path.dirname(__file__)\np_list = ps.load(os.path.join(my_path, 'Test_particle.hdf5'))\np = p_list.list[0]\nimage = gen_test.generate_test_image(hspy=True)\nmask = gen_test.generate_test_image(hspy=False)\nnptest.assert_almost_equal(p.properties['area']['value'], 20069.0)\nassert p.properties['area']['units'] == 'nm^2'\nnptest.assert_almost_equal(p.properties['circularity']['value'], \n    0.9095832157785668)\nnptest.assert_allclose(p.mask, mask)\nnptest.assert_allclose(p.image.data, image.data[16:184, 16:184])\n"
+}

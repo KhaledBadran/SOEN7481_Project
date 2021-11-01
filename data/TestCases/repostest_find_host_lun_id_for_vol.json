@@ -1,0 +1,9 @@
+{
+    "functionName": "test_find_host_lun_id_for_vol",
+    "className": "CITestProvisioning",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test find_host_lun_id_for_vol.\"\"\"\nselected_masking_view, active_connections = (self.provisioning.\n    get_active_masking_view_connections())\nfor connection in active_connections:\n    lun = self.provisioning.find_host_lun_id_for_vol(selected_masking_view,\n        connection[constants.VOLUME_ID_CAMEL])\n    if lun is not None:\n        self.assertIsInstance(lun, int)\n        self.assertEqual(int(connection[constants.HOST_LUN_ADDRESS], 16), lun)\n        break\n"
+}

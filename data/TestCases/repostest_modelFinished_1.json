@@ -1,0 +1,9 @@
+{
+    "functionName": "test_modelFinished_1",
+    "className": null,
+    "fileName": "/mworion_&_MountWizzard4/mw4_&_test_&_unit_tests_&_gui_&_mainWmixin_&_test_tabModel.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class Julian:\n    ut1 = 2458635.168\ndef playSound(a):\n    return\napp.playSound = playSound\ninputData = {'raJ2000S': skyfield.api.Angle(hours=0), 'decJ2000S': skyfield\n    .api.Angle(degrees=0), 'angleS': 0, 'scaleS': 1, 'errorRMS_S': 1,\n    'flippedS': False, 'success': True, 'message': 'test', 'raJNowM':\n    skyfield.api.Angle(hours=0), 'decJNowM': skyfield.api.Angle(degrees=0),\n    'raJNowS': skyfield.api.Angle(hours=0), 'decJNowS': skyfield.api.Angle(\n    degrees=0), 'siderealTime': skyfield.api.Angle(hours=0), 'julianDate':\n    Julian(), 'pierside': 'E', 'errorRA': 1, 'errorDEC': 2, 'errorRMS': 3}\napp.modelQueue.put(inputData)\napp.app.camera.signals.saved.connect(app.modelSolve)\napp.app.camera.signals.integrated.connect(app.modelSlew)\napp.app.astrometry.signals.done.connect(app.modelSolveDone)\napp.collector.ready.connect(app.modelImage)\nwith mock.patch.object(app.app.mount.model, 'programAlign', return_value=False\n    ):\n    suc = app.modelFinished()\n    assert not suc\n"
+}

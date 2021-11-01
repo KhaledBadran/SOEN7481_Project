@@ -1,0 +1,9 @@
+{
+    "functionName": "output_list",
+    "className": null,
+    "fileName": "/haotianteng_&_Chiron/chiron_&_export_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "training = tf.constant(False, dtype=tf.bool, name='Training')\nconfig_path = os.path.join(FLAGS.model, 'model.json')\nmodel_configure = read_config(config_path)\nlogits, ratio = inference(x, seq_length, training=training,\n    full_sequence_len=FLAGS.segment_len, configure=model_configure)\nratio = tf.constant(ratio, dtype=tf.float32, shape=[])\nseq_length_r = tf.cast(tf.round(tf.cast(seq_length, dtype=tf.float32) /\n    ratio), tf.int32)\nprob_logits = path_prob(logits)\npredict, log_prob = tf.nn.ctc_beam_search_decoder(tf.transpose(logits, perm\n    =[1, 0, 2]), seq_length_r, merge_repeated=False, beam_width=FLAGS.\n    beam_width)\nreturn predict[0], logits, prob_logits, log_prob\n"
+}

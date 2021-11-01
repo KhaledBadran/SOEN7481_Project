@@ -1,0 +1,9 @@
+{
+    "functionName": "test_parents",
+    "className": "TestGetPolyT",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_get_polyT.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "terms = [{'strain': 'aaa', 'start': 11, 'end': 14, 'parent_p': 'gene_0',\n    'parent_m': 'gene_1', 'p_pos': '3-5', 'm_pos': '20-50'}, {'strain':\n    'aaa', 'start': 12, 'end': 15, 'parent_p': 'tran0:1-11_+', 'parent_m':\n    'tran1:16-30_-', 'p_pos': '1-11', 'm_pos': '16-30'}]\nargs = self.mock_args.mock()\nargs.fuzzy_up_gene = 10\nargs.fuzzy_up_ta = 10\nargs.fuzzy_down_gene = 10\nargs.fuzzy_down_ta = 10\ngpt.parents(terms, self.example.cdss, args)\nself.assertDictEqual(terms[0], {'parent_p': 'gene_0', 'parent_m': 'gene_1',\n    'start': 11, 'strain': 'aaa', 'end': 14, 'p_pos': '3-5', 'm_pos': '20-50'})\nself.assertDictEqual(terms[1], {'parent_p': 'tran0:1-11_+,gene_0',\n    'parent_m': 'tran1:16-30_-,gene_1', 'start': 12, 'strain': 'aaa', 'end':\n    15, 'p_pos': '1-11', 'm_pos': '16-30'})\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_separate_locs",
+    "className": "TestDownloadMagic",
+    "fileName": "/PmagPy_&_PmagPy/pmagpy_tests_&_test_ipmag.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "dir_path = 'data_files/3_0/Megiddo'\nres = ipmag.download_magic('magic_contribution.txt', dir_path=dir_path,\n    separate_locs=True, overwrite=True)\nself.assertTrue(res)\ndirs = glob.glob(os.path.join(dir_path, 'Location_*'))\nself.assertEqual(2, len(dirs))\nfnames_0 = glob.glob(os.path.join(dirs[0], '*'))\nfnames_1 = glob.glob(os.path.join(dirs[1], '*'))\nfor ftype in ['measurements', 'specimens', 'samples', 'sites', 'locations']:\n    fname1 = os.path.join(dir_path, 'Location_1', ftype + '.txt')\n    fname2 = os.path.join(dir_path, 'Location_2', ftype + '.txt')\n    self.assertTrue(fname1 in fnames_0 or fname1 in fnames_1)\n    self.assertTrue(fname2 in fnames_0 or fname2 in fnames_1)\n"
+}

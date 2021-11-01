@@ -1,0 +1,9 @@
+{
+    "functionName": "query_ip",
+    "className": "GeoLookup",
+    "fileName": "/kitware_&_BroThon/zat_&_utils_&_geo_lookup.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Query method for the IpStack Service\n            Args:\n               ip_address(str): The IP Address to be queried\n        \"\"\"\nif ip_address in self.known_ipstack_ips:\n    return None\ncached = self.query_cache.get(ip_address)\nif cached:\n    if verbose:\n        print('Returning Cached Query Results')\n    return cached\nurl = 'http://api.ipstack.com/' + ip_address\nresponse = requests.post(url, params={'access_key': self.apikey})\ntry:\n    output = response.json()\nexcept ValueError:\n    error_msg = 'No valid response, throttling and trying again...'\n    if self.throttle:\n        if verbose:\n            print(error_msg)\n        time.sleep(30)\n        return self.query_ip(ip_address)\n    return {'error': error_msg}\nif output['type'] is None:\n    output = None\n    self.query_cache.set(ip_address, output)\n    return output\nif self.summary:\n    del output['location']\nself.query_cache.set(ip_address, output)\nself.query_cache.persist()\nreturn output\n"
+}

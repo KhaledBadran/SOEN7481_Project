@@ -1,0 +1,9 @@
+{
+    "functionName": "test_non_90_degree_angle",
+    "className": "Test_conjugated_kernel",
+    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_unitary.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.setUpClass()\nnum_qubits = 2\np = ql.Program('test_unitary_non_90_degree_angle', platform, num_qubits)\nk = ql.Kernel('akernel', platform, num_qubits)\nmatrix = [-0.43874989 - 0.10659111j, -0.47325212 + 0.12917344j, -0.58227163 +\n    0.20750072j, -0.29075334 + 0.29807585j, 0.30168601 - 0.22307459j, \n    0.32626 + 0.4534935j, -0.20523265 - 0.42403593j, -0.01012565 + \n    0.5701683j, -0.40954341 - 0.49946371j, 0.28560698 - 0.06740801j, \n    0.52146754 + 0.1833513j, -0.37248653 + 0.22891636j, 0.03113162 - \n    0.48703302j, -0.57180014 + 0.18486244j, 0.2943625 - 0.06148912j, \n    0.55533888 + 0.04322811j]\nu1 = ql.Unitary('testname', matrix)\nu1.decompose()\nk.gate(u1, [0, 1])\np.add_kernel(k)\np.compile()\nqx.set(os.path.join(output_dir, p.name + '_initialqasmwriter_out.qasm'))\nqx.execute()\nc0 = qx.get_state()\nself.assertAlmostEqual(helper_prob(matrix[0]), helper_regex(c0)[0], 5)\nself.assertAlmostEqual(helper_prob(matrix[4]), helper_regex(c0)[1], 5)\nself.assertAlmostEqual(helper_prob(matrix[8]), helper_regex(c0)[2], 5)\nself.assertAlmostEqual(helper_prob(matrix[12]), helper_regex(c0)[3], 5)\n"
+}

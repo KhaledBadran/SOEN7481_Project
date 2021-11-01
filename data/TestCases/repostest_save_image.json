@@ -1,0 +1,9 @@
+{
+    "functionName": "test_save_image",
+    "className": null,
+    "fileName": "/PaulHancock_&_Aegean/tests_&_test_source_finder.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test save_image\"\"\"\nlog = logging.getLogger('Aegean')\nsfinder = sf.SourceFinder(log=log)\nfilename = 'tests/test_files/small.fits'\n_ = sfinder.find_sources_in_image(filename, cores=1, max_summits=0, blank=True)\nbfile = 'dlme_blanked.fits'\nsfinder.save_image(bfile)\nif not os.path.exists(bfile):\n    raise AssertionError()\nos.remove(bfile)\n"
+}

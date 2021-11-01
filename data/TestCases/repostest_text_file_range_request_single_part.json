@@ -1,0 +1,9 @@
+{
+    "functionName": "test_text_file_range_request_single_part",
+    "className": null,
+    "fileName": "/RobertoPrevato_&_BlackSheep/tests_&_test_files_serving.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "file_path = _get_file_path('example.txt')\nresponse = get_response_for_file(Request('GET', b'/example', [(b'Range',\n    range_value)]), file_path, 1200)\nassert response.status == 206\nbody = await response.read()\nassert body == expected_bytes\nassert response.get_single_header(b'content-range') == expected_content_range\npytest.mark.asynciopytest.mark.parametrize('range_value,expected_bytes,expected_content_range',\n    [[b'bytes=0-10', b'Lorem ipsu', b'bytes 0-10/447'], [b'bytes=10-20',\n    b'm dolor si', b'bytes 10-20/447'], [b'bytes=33-44', b'ctetur adip',\n    b'bytes 33-44/447'], [b'bytes=15-50',\n    b'or sit amet, consectetur adipiscing', b'bytes 15-50/447'], [\n    b'bytes=66-',\n    b'usmod tempor incididunt ut labore et dolore magna\\naliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis\\n aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint\\n occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'\n    , b'bytes 66-446/447'], [b'bytes=381-',\n    b'nt, sunt in culpa qui officia deserunt mollit anim id est laborum.',\n    b'bytes 381-446/447'], [b'bytes=-50',\n    b'a qui officia deserunt mollit anim id est laborum.',\n    b'bytes 397-446/447'], [b'bytes=-66',\n    b'nt, sunt in culpa qui officia deserunt mollit anim id est laborum.',\n    b'bytes 381-446/447']])"
+}

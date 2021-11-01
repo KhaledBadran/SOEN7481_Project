@@ -1,0 +1,9 @@
+{
+    "functionName": "testEmptyMetrics",
+    "className": "ExperimentTest",
+    "fileName": "/facebook_&_Ax/ax_&_core_&_tests_&_test_experiment.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "empty_experiment = Experiment(name='test_experiment', search_space=\n    get_search_space())\nself.assertEqual(empty_experiment.num_trials, 0)\nwith self.assertRaises(ValueError):\n    empty_experiment.fetch_data()\nbatch = empty_experiment.new_batch_trial()\nself.assertEqual(empty_experiment.num_trials, 1)\nwith self.assertRaises(ValueError):\n    batch.fetch_data()\nempty_experiment.add_tracking_metric(Metric(name='some_metric'))\nempty_experiment.attach_data(get_data())\nself.assertFalse(empty_experiment.fetch_data().df.empty)\n"
+}

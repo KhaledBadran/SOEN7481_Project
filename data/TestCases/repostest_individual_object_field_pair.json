@@ -1,0 +1,9 @@
+{
+    "functionName": "test_individual_object_field_pair",
+    "className": "TSGetContingencyResultsTestCase",
+    "fileName": "/mzy2240_&_ESA/tests_&_test_saw.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Obtain the result for an individual object/field pair\"\"\"\nobj_field_list = ['\"Bus 4 | frequency\"']\nt1 = 0.0\nt2 = 10.0\nstepsize = 0.01\ncmd = 'TSSolve(\"{}\",[{},{},{},NO])'.format(self.ctg_name, t1, t2, stepsize)\nself.saw.RunScriptCommand(cmd)\nmeta, data = self.saw.TSGetContingencyResults(self.ctg_name, obj_field_list,\n    str(t1), str(t2))\nself.assertEqual(meta.shape[0], 1)\nself.assertEqual(data.shape[1], 2)\nself.assertEqual(meta['ObjectType'].values[0], 'Bus')\nself.assertEqual(meta['PrimaryKey'].values[0], '4')\nself.assertEqual(data['time'].iloc[0], t1)\nself.assertEqual(data['time'].iloc[-1], t2)\nparams = self.saw.get_key_field_list('TSContingencyElement')\ncontingency = self.saw.GetParametersMultipleElement('TSContingencyElement',\n    params)\nself.assertGreaterEqual(data.shape[0], (t2 - t1) / stepsize + contingency.\n    shape[0] + 1)\n"
+}

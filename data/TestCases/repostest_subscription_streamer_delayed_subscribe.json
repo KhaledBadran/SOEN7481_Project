@@ -1,0 +1,9 @@
+{
+    "functionName": "test_subscription_streamer_delayed_subscribe",
+    "className": null,
+    "fileName": "/PRIArobotics_&_HedgehogServer/tests_&_test_subscription.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "in_seq = [(value, 10) for value in range(0, 7 + 1)]\nout_seq = [2, 3, {4, 5}, 6, 7]\ntim_seq = [5, 15, 15, 15, 15]\nasync with subscription_streamer(in_seq) as subs:\n    await trio.sleep(25)\n    with assertPassed(sum(tim_seq)):\n        await assert_stream(tim_seq, out_seq, subs.subscribe(15, None, None))\npytest.mark.trio"
+}

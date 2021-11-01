@@ -1,0 +1,9 @@
+{
+    "functionName": "test_small_q_sqrt_handeled_correctly",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_optimizers_&_test_natural_gradient.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    This is an extra test to make sure things still work when q_sqrt is small. This was breaking (#767)\n    \"\"\"\ngpr, vgp = gpr_and_vgp\nvgp.q_mu.assign(np.random.randn(data[0].shape[0], 1))\nvgp.q_sqrt.assign(np.eye(data[0].shape[0])[(None), :, :] * 0.001)\nassert_gpr_vs_vgp(gpr, vgp)\n"
+}

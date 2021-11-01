@@ -1,0 +1,9 @@
+{
+    "functionName": "test_configure_lego_sensor",
+    "className": "TestHedgehogLegoClientAPI",
+    "fileName": "/PRIArobotics_&_HedgehogClient/tests_&_test_async_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "port, pullup = 8, True\nasync with connect_dummy(Commands.io_action_input, port, pullup) as client:\n    assert await client.configure_lego_sensor(port) is None\n    with pytest.raises(ValueError):\n        await client.configure_lego_sensor(7)\n    with pytest.raises(ValueError):\n        await client.configure_lego_sensor(12)\npytest.mark.asyncio"
+}

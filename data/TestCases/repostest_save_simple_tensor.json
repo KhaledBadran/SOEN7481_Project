@@ -1,0 +1,9 @@
+{
+    "functionName": "test_save_simple_tensor",
+    "className": null,
+    "fileName": "/mesonepigreco_&_CellConstructor/tests_&_TestTensor3_&_simple_square_&_test_tensor3.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "supercell_size = 2, 2, 1\nsupercell_structure = simple_structure.generate_supercell(supercell_size)\nnat_sc = supercell_structure.N_atoms\nfor na in range(simple_structure.N_atoms):\n    for l, m, n in itertools.product(range(2), range(2), range(1)):\n        na_vect = simple_structure.coords[(na), :\n            ] + simple_structure.unit_cell.T.dot([l, m, n])\n        na_sc = np.argmin([np.sum((supercell_structure.coords[(k), :] -\n            na_vect) ** 2) for k in range(nat_sc)])\n        print(na, l, m, n, na_sc)\nt3_matrix = np.zeros((3 * nat_sc, 3 * nat_sc, 3 * nat_sc))\nt3_matrix[0, 6, 9] = 1.0\ntensor1 = CC.ForceTensor.Tensor3(simple_structure, supercell_structure,\n    supercell_size)\ntensor1.SetupFromTensor(t3_matrix)\ntensor1.Center(Far=1)\ntensor1.WriteOnFile('prova_3RD_centrato')\n"
+}

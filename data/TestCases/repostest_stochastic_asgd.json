@@ -1,0 +1,9 @@
+{
+    "functionName": "test_stochastic_asgd",
+    "className": null,
+    "fileName": "/PythonOT_&_POT/test_&_test_stochastic.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "n = 15\nreg = 1\nnumItermax = 100000\nrng = np.random.RandomState(0)\nx = rng.randn(n, 2)\nu = ot.utils.unif(n)\nM = ot.dist(x, x)\nG, log = ot.stochastic.solve_semi_dual_entropic(u, u, M, reg, 'asgd',\n    numItermax=numItermax, log=True)\nnp.testing.assert_allclose(u, G.sum(1), atol=0.001)\nnp.testing.assert_allclose(u, G.sum(0), atol=0.001)\n"
+}

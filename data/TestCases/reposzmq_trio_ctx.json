@@ -1,0 +1,9 @@
+{
+    "functionName": "zmq_trio_ctx",
+    "className": null,
+    "fileName": "/PRIArobotics_&_HedgehogServer/tests_&_test_server.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "from hedgehog.utils.zmq.trio import Context\nctx = None\n@asynccontextmanager\nasync def open_context():\n    nonlocal ctx\n    if ctx is None:\n        with Context() as ctx:\n            yield ctx\n    else:\n        yield ctx\nreturn open_context\npytest.fixture"
+}

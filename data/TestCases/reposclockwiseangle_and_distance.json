@@ -1,0 +1,9 @@
+{
+    "functionName": "clockwiseangle_and_distance",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&__tools.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Sort points clockwise. Taken from https://stackoverflow.com/questions/41855695/sorting-list-of-two-dimensional-coordinates-by-clockwise-angle-using-python\n    \n    Args:\n        \n        - point (list): List of points in 2D of size 2xN\n        \n    Kwargs:\n        \n        - origin (list): Location of origin from which the points are to be sorted (default [0,0])\n        \n        - refvec (list): Vector direction for definition of zero point (default [0,1])\n        \n    \"\"\"\nvector = [point[0] - origin[0], point[1] - origin[1]]\nlenvector = math.hypot(vector[0], vector[1])\nif lenvector == 0:\n    return -math.pi, 0\nnormalized = [vector[0] / lenvector, vector[1] / lenvector]\ndotprod = normalized[0] * refvec[0] + normalized[1] * refvec[1]\ndiffprod = refvec[1] * normalized[0] - refvec[0] * normalized[1]\nangle = math.atan2(diffprod, dotprod)\nif angle < 0:\n    return 2 * math.pi + angle, lenvector\nreturn angle, lenvector\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_single_config_with_invalid_display_shows_error",
+    "className": "StartCommand",
+    "fileName": "/SketchingDev_&_Doodle-Dashboard/tests_&_doodledashboard_&_it_&_features_&_configurable_&_test_remote_config.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "config_with_invalid_display = \"\"\"\n        dashboard:\n          display:\n            type: non-existent\n        \"\"\"\nself.http_server.serve_content(config_with_invalid_display)\nresult = self.call_cli(CliRunner(), start, self.http_server.url)\nself.assertIn(\n    \"Cannot find the display 'non-existent'. Have you run `pip install` for the display you're trying to use?\"\n    , result.output)\nself.assertEqual(1, result.exit_code)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_simulate_with_bad_type_sample_sizes_input",
+    "className": null,
+    "fileName": "/NASA_&_MLMCPy/tests_&_mlmc_&_test_MLMCSimulator.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Tests running MLMC by specifying the number of samples but providing \n    wrong type for sample_sizes input\n    \"\"\"\ntest_mlmc = MLMCSimulator(models=models_from_data, data=data_input)\nwith pytest.raises(TypeError):\n    test_mlmc.simulate(epsilon=1.0, sample_sizes=sample_sizes)\npytest.mark.parametrize('sample_sizes', ['foo', set([1, 2, 3])])"
+}

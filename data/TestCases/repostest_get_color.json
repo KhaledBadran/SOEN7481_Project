@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_color",
+    "className": null,
+    "fileName": "/poletaevvlad_&_CubeLang/test_&_test_cube_runtime.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class Colors:\n\n    def __getitem__(self, item):\n        pass\nclass Side:\n\n    def __init__(self):\n        self.colors = Colors()\nwith patch.object(Cube, 'get_side', return_value=Side()) as mock_method:\n    runtime = CubeRuntime(Cube((3, 3, 3)), Orientation(), lambda action:\n        None, lambda : None)\n    runtime.get_color(side, 0, 0)\n    mock_method.assert_called_once_with(orientation)\npytest.mark.parametrize('side, orientation', [(Side.FRONT, Orientation(Side\n    .FRONT, Side.TOP)), (Side.LEFT, Orientation(Side.LEFT, Side.TOP)), (\n    Side.RIGHT, Orientation(Side.RIGHT, Side.TOP)), (Side.BACK, Orientation\n    (Side.BACK, Side.TOP)), (Side.TOP, Orientation(Side.TOP, Side.BACK)), (\n    Side.BOTTOM, Orientation(Side.BOTTOM, Side.FRONT))])"
+}

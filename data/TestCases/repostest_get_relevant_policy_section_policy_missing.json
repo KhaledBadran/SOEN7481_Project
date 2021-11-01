@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_relevant_policy_section_policy_missing",
+    "className": "TestKmipEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the lookup for a non-existent policy is handled correctly.\n        \"\"\"\ne = engine.KmipEngine()\ne._operation_policies = {}\ne._logger = mock.MagicMock()\nresult = e.get_relevant_policy_section('invalid')\ne._logger.warning.assert_called_once_with(\n    \"The 'invalid' policy does not exist.\")\nself.assertIsNone(result)\n"
+}

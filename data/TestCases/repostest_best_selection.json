@@ -1,0 +1,9 @@
+{
+    "functionName": "test_best_selection",
+    "className": "TestStimuliGeneration",
+    "fileName": "/BciPy_&_BciPy/bcipy_&_helpers_&_tests_&_test_stimuli.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test best_selection\"\"\"\nself.assertEqual(['a', 'c', 'e'], best_selection(selection_elements=['a',\n    'b', 'c', 'd', 'e'], val=[0.3, 0.1, 0.3, 0.1, 0.2], len_query=3))\nself.assertEqual(['a', 'b', 'c'], best_selection(selection_elements=['a',\n    'b', 'c', 'd', 'e'], val=[0.2, 0.2, 0.2, 0.2, 0.2], len_query=3))\nself.assertEqual(['a', 'c', 'd'], best_selection(selection_elements=['a',\n    'b', 'c', 'd', 'e'], val=[0.3, 0.1, 0.3, 0.1, 0.2], len_query=3,\n    always_included=['d']),\n    'Included item should bump out the best item with the lowest val.')\nself.assertEqual(['a', 'b', 'c'], best_selection(selection_elements=['a',\n    'b', 'c', 'd', 'e'], val=[0.5, 0.4, 0.1, 0.0, 0.0], len_query=3,\n    always_included=['b']),\n    'Included item should retain its position if already present')\nself.assertEqual(['a', 'b', 'e'], best_selection(selection_elements=['a',\n    'b', 'c', 'd', 'e'], val=[0.5, 0.0, 0.1, 0.3, 0.0], len_query=3,\n    always_included=['b', 'e']), 'multiple included items should be supported.'\n    )\nself.assertEqual(['d'], best_selection(selection_elements=['a', 'b', 'c',\n    'd', 'e'], val=[0.5, 0.4, 0.1, 0.0, 0.0], len_query=1, always_included=\n    ['d', 'e']), 'len_query should be respected.')\nself.assertEqual(['a', 'b', 'c'], best_selection(selection_elements=['a',\n    'b', 'c', 'd', 'e'], val=[0.5, 0.4, 0.1, 0.0, 0.0], len_query=3,\n    always_included=['<']), 'should ignore items not in the set.')\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_full_fill_with_not_enough_size_on_unacked_new_order",
+    "className": null,
+    "fileName": "/nabicht_&_Buttonwood/tests_&_test_MarketObjects_&_test_Events_&_test_ordereventchain.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "n = NewOrderCommand(1, 1234235.123, 2342, 'user_x', MARKET, BID_SIDE, FAR,\n    Price('34.52'), 1000)\noec = OrderEventChain(n, LOGGER, MonotonicIntID())\nassert oec.visible_qty() == 0\nassert oec.current_exposure() is None\nassert oec.most_recent_requested_exposure().price() == Price('34.52')\nassert oec.most_recent_requested_exposure().qty() == 1000\nassert oec.is_open()\nfull_fill = FullFillReport(3, 1234237.123, 2342, 'user_x', MARKET, n, 17,\n    Price('34.52'), BID_SIDE, 12345)\noec.apply_full_fill_report(full_fill)\nassert oec.visible_qty() == 0\nassert oec.current_exposure().price() is None\nassert oec.current_exposure().qty() == 0\nassert oec.current_exposure().causing_event_id() == 3\nassert oec.is_open() is False\n"
+}

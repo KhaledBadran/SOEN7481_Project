@@ -1,0 +1,9 @@
+{
+    "functionName": "test_bugsyexception_raised_for_http_503_when_verifying_api_key",
+    "className": null,
+    "fileName": "/AutomatedTester_&_Bugsy/tests_&_test_errors.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "responses.add(responses.GET,\n    'https://bugzilla.mozilla.org/rest/valid_login', body=\n    'Service Unavailable', status=503, content_type='text/html')\nwith pytest.raises(BugsyException) as e:\n    Bugsy(username='foo', api_key='goodkey')\nassert str(e.value\n    ) == 'Message: We received a 503 error with the following: Service Unavailable Code: None'\nresponses.activate"
+}

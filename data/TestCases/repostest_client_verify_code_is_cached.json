@@ -1,0 +1,9 @@
+{
+    "functionName": "test_client_verify_code_is_cached",
+    "className": "TestCachedClient",
+    "fileName": "/mozilla_&_PyFxA/fxa_&_tests_&_test_oauth.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with mock.patch.object(self.client.cache, 'set') as mocked_set:\n    with mock.patch.object(self.client.cache, 'get', return_value=None):\n        verification = self.client.verify_token(token='abc')\n        self.assertTrue(mocked_set.called)\n        self.assertDictEqual(verification, json.loads(self.body))\nresponses.activate"
+}

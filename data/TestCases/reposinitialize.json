@@ -1,0 +1,9 @@
+{
+    "functionName": "initialize",
+    "className": "Sample",
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_Sample.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Initialize the Sample object. Automatically called during __init__method.\"\"\"\nself.realVectorA = np.array([self.a, 0, 0])\nself.realVectorB = self.b * np.array([cosd(self.gamma), sind(self.gamma), 0.0])\nself.realVectorC = self.c * np.array([cosd(self.beta), (cosd(self.alpha) - \n    cosd(self.beta) * cosd(self.gamma)) / sind(self.gamma), np.sqrt(1 - \n    cosd(self.beta) ** 2 - ((cosd(self.alpha) - cosd(self.beta) * cosd(self\n    .gamma)) / sind(self.gamma)) ** 2)])\nself.volume = np.abs(np.dot(self.realVectorA, np.cross(self.realVectorB,\n    self.realVectorC)))\nself.reciprocalVectorA = 2 * np.pi * np.cross(self.realVectorB, self.\n    realVectorC) / self.volume\nself.reciprocalVectorB = 2 * np.pi * np.cross(self.realVectorC, self.\n    realVectorA) / self.volume\nself.reciprocalVectorC = 2 * np.pi * np.cross(self.realVectorA, self.\n    realVectorB) / self.volume\nbv1, bv2, bv3 = (self.reciprocalVectorA, self.reciprocalVectorB, self.\n    reciprocalVectorC)\na1, a2, a3, alpha1, alpha2, alpha3 = self.unitCell\nb1, b2, b3 = [np.linalg.norm(x) for x in [bv1, bv2, bv3]]\nbeta1 = np.rad2deg(_tools.vectorAngle(bv2, bv3))\nbeta2 = np.rad2deg(_tools.vectorAngle(bv3, bv1))\nbeta3 = np.rad2deg(_tools.vectorAngle(bv1, bv2))\nself.cell = [a1, a2, a3, b1, b2, b3, alpha1, alpha2, alpha3, beta1, beta2,\n    beta3]\nself.B = TasUBlib.calculateBMatrix(self.cell)\n"
+}

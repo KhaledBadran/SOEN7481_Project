@@ -1,0 +1,9 @@
+{
+    "functionName": "test_layer_4_checksums",
+    "className": "TestXenaOffline",
+    "fileName": "/xenadevel_&_PyXenaValkyrie/tests_&_test_offline.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "port = self.xm.session.reserve_ports([self.port1], force=False, reset=True)[\n    self.port1]\ntcp_stream = port.add_stream('tcp stream')\neth = Ethernet(src_s='22:22:22:22:22:22')\neth.dst_s = '11:11:11:11:11:11'\nvlan = Dot1Q(vid=17, prio=3)\neth.vlan.append(vlan)\nip = IP()\ntcp = TCP()\nheaders = eth + ip + tcp\ntcp_stream.set_packet_headers(headers, l4_checksum=False)\nheaderprotocol = tcp_stream.get_attribute('ps_headerprotocol')\nassert 'tcpcheck' not in headerprotocol.lower()\ntcp_stream.set_packet_headers(headers, l4_checksum=True)\nheaderprotocol = tcp_stream.get_attribute('ps_headerprotocol')\nassert 'tcpcheck' in headerprotocol.lower()\nresulting_headers = tcp_stream.get_packet_headers()\nl4 = resulting_headers.upper_layer.upper_layer\nassert l4.sum == 0\nudp_stream = port.add_stream('udp stream')\neth = Ethernet(src_s='44:44:44:44:44:44')\neth.dst_s = '33:33:33:33:33:33'\nip6 = IP6()\nudp = UDP()\nheaders = eth + ip6 + udp\nudp_stream.set_packet_headers(headers, l4_checksum=False)\nheaderprotocol = udp_stream.get_attribute('ps_headerprotocol')\nassert 'udpcheck' not in headerprotocol.lower()\nudp_stream.set_packet_headers(headers, l4_checksum=True)\nheaderprotocol = udp_stream.get_attribute('ps_headerprotocol')\nassert 'udpcheck' in headerprotocol.lower()\nresulting_headers = udp_stream.get_packet_headers()\nl4 = resulting_headers.upper_layer.upper_layer\nassert l4.sum == 0\n"
+}

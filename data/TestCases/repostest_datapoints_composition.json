@@ -1,0 +1,9 @@
+{
+    "functionName": "test_datapoints_composition",
+    "className": "TestGetDatapoints",
+    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_converters.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test valid parsing of datapoints with composition.\n        \"\"\"\nroot = etree.Element('experiment')\ndatagroup = etree.SubElement(root, 'dataGroup')\nprop = etree.SubElement(datagroup, 'property')\nprop.set('id', 'x1')\nprop.set('name', 'temperature')\nprop.set('units', 'K')\nprop = etree.SubElement(datagroup, 'property')\nprop.set('id', 'x2')\nprop.set('name', 'ignition delay')\nprop.set('units', 'us')\nprop = etree.SubElement(datagroup, 'property')\nprop.set('id', 'x3')\nprop.set('name', 'composition')\nprop.set('units', type)\nspecieslink = etree.SubElement(prop, 'speciesLink')\nspecieslink.set('preferredKey', 'H2')\ndatapoint = etree.SubElement(datagroup, 'dataPoint')\nx1 = etree.SubElement(datapoint, 'x1')\nx1.text = str(1000.0)\nx2 = etree.SubElement(datapoint, 'x2')\nx2.text = str(100.0)\nx3 = etree.SubElement(datapoint, 'x3')\nx3.text = str(value)\ndatapoints = get_datapoints(root)\nassert len(datapoints) == 1\ndatapoint = datapoints[0]\nassert datapoint['temperature'] == [str(1000.0) + ' K']\nassert datapoint['ignition-delay'] == [str(100.0) + ' us']\nassert datapoint['composition']['kind'] == type\nassert datapoint['composition']['species'][0] == {'amount': [value],\n    'species-name': 'H2', 'InChI': None}\npytest.mark.parametrize('type, value', [('mole fraction', 1.0), (\n    'mass fraction', 1.0), ('mole percent', 100.0)])pytest.mark.filterwarnings('ignore:Missing InChI for species H2')"
+}

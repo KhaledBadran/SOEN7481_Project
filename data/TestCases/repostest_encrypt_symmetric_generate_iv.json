@@ -1,0 +1,9 @@
+{
+    "functionName": "test_encrypt_symmetric_generate_iv",
+    "className": "TestCryptographyEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_crypto_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the initialization vector is correctly generated and\n        returned for an appropriate set of symmetric encryption inputs.\n        \"\"\"\nengine = crypto.CryptographyEngine()\nresult = engine.encrypt(enums.CryptographicAlgorithm.AES,\n    b'\\x00\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08\\t\\n\\x0b\\x0c\\r\\x0e\\x0f',\n    b'\\x0f\\x0e\\r\\x0c\\x0b\\n\\t\\x08\\x07\\x06\\x05\\x04\\x03\\x02\\x01\\x00',\n    cipher_mode=enums.BlockCipherMode.CBC, padding_method=enums.\n    PaddingMethod.PKCS5)\nself.assertIn('iv_nonce', result.keys())\nself.assertIsNotNone(result.get('iv_nonce'))\nresult = engine.encrypt(enums.CryptographicAlgorithm.AES,\n    b'\\x00\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08\\t\\n\\x0b\\x0c\\r\\x0e\\x0f',\n    b'\\x0f\\x0e\\r\\x0c\\x0b\\n\\t\\x08\\x07\\x06\\x05\\x04\\x03\\x02\\x01\\x00',\n    cipher_mode=enums.BlockCipherMode.CBC, padding_method=enums.\n    PaddingMethod.PKCS5, iv_nonce=\n    b'\\x00\\x10 0@P`p\\x80\\x90\\xa0\\xb0\\xc0\\xd0\\xe0\\xf0')\nself.assertNotIn('iv_nonce', result.keys())\n"
+}

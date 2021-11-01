@@ -1,0 +1,9 @@
+{
+    "functionName": "test_full_context",
+    "className": "TestContexts",
+    "fileName": "/apmoore1_&_Bella/tests_&_test_contexts.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Tests :py:func:`bella.contexts.full_context`\n        \"\"\"\nsingle_targets = [[\n    'This is a fake news article that is to represent a Tweet!!!!'], [\n    'I had a great day however I did not get much work done'], [\n    'I cycled in today and it was ok as it was not raining.']]\nmulti_targets = [[\n    'This is a fake news article that is to represent a Tweet!!!! and it was an awful News Article I think.'\n    ,\n    'This is a fake news article that is to represent a Tweet!!!! and it was an awful News Article I think.'\n    ], ['I had a great Day however I did not get much work done in the day',\n    'I had a great Day however I did not get much work done in the day']]\nfor index, test_context in enumerate(self.single_context):\n    test_text = test_context['text']\n    correct_target = single_targets[index]\n    target_string = context(test_context, 'full')\n    msg = ('Cannot get the target for text {}, target found {} correct {}'.\n        format(test_text, target_string, correct_target))\n    self.assertEqual(correct_target, target_string, msg=msg)\nfor index, test_context in enumerate(self.multi_contexts):\n    test_text = test_context['text']\n    correct_targets = multi_targets[index]\n    target_strings = context(test_context, 'full')\n    msg = ('Cannot get the targets for text {}, targets found {} correct {}'\n        .format(test_text, target_strings, correct_targets))\n    self.assertEqual(correct_targets, target_strings, msg=msg)\n"
+}

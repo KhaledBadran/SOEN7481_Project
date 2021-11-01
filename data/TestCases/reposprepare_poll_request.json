@@ -1,0 +1,9 @@
+{
+    "functionName": "prepare_poll_request",
+    "className": null,
+    "fileName": "/EclecticIQ_&_OpenTAXII/tests_&_test_auth.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "if version == 11:\n    content_bindings = [tm11.ContentBinding(b) for b in bindings]\n    if subscription_id:\n        poll_parameters = None\n    else:\n        poll_parameters = tm11.PollParameters(response_type=RT_FULL,\n            content_bindings=content_bindings)\n    return tm11.PollRequest(message_id=MESSAGE_ID, collection_name=\n        collection_name, subscription_id=subscription_id, poll_parameters=\n        poll_parameters)\nelif version == 10:\n    content_bindings = bindings\n    return tm10.PollRequest(message_id=MESSAGE_ID, feed_name=\n        collection_name, content_bindings=content_bindings, subscription_id\n        =subscription_id)\n"
+}

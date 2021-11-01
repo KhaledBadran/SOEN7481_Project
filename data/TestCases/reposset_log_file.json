@@ -1,0 +1,9 @@
+{
+    "functionName": "set_log_file",
+    "className": null,
+    "fileName": "/nipy_&_PySurfer/surfer_&_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Convenience function for setting the log to print to a file\n\n    Parameters\n    ----------\n    fname : str, or None\n        Filename of the log to print to. If None, stdout is used.\n        To suppress log outputs, use set_log_level('WARN').\n    output_format : str\n        Format of the output messages. See the following for examples:\n            http://docs.python.org/dev/howto/logging.html\n        e.g., \"%(asctime)s - %(levelname)s - %(message)s\".\n    overwrite : bool, or None\n        Overwrite the log file (if it exists). Otherwise, statements\n        will be appended to the log (default). None is the same as False,\n        but additionally raises a warning to notify the user that log\n        entries will be appended.\n    \"\"\"\nhandlers = logger.handlers\nfor h in handlers:\n    if isinstance(h, logging.FileHandler):\n        h.close()\n    logger.removeHandler(h)\nif fname is not None:\n    if op.isfile(fname) and overwrite is None:\n        warnings.warn(\n            'Log entries will be appended to the file. Use overwrite=False to avoid this message in the future.'\n            )\n    mode = 'w' if overwrite is True else 'a'\n    lh = logging.FileHandler(fname, mode=mode)\nelse:\n    \"\"\" we should just be able to do:\n                lh = logging.StreamHandler(sys.stdout)\n            but because doctests uses some magic on stdout, we have to do this:\n        \"\"\"\n    lh = logging.StreamHandler(WrapStdOut())\nlh.setFormatter(logging.Formatter(output_format))\nlogger.addHandler(lh)\n"
+}

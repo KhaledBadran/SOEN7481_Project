@@ -1,0 +1,9 @@
+{
+    "functionName": "test_algorithms_supported",
+    "className": "AlgorithmTest",
+    "fileName": "/BMeu_&_EasyJWT/tests_&_enums_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n            Test that the algorithms in the enum are actually supported.\n\n            Expected result: All algorithms specified in the enum can encode and decode the token.\n        \"\"\"\nkey = 'abcdefghijklmnopqrstuvwxyz'\nfor algorithm in list(Algorithm):\n    EasyJWT.algorithm = algorithm\n    easyjwt_creation = EasyJWT(key)\n    token = easyjwt_creation.create()\n    self.assertEqual(algorithm, easyjwt_creation.algorithm, msg=\n        f'Algorithm {algorithm} not set on token')\n    self.assertIsNotNone(token, msg=\n        f'Failed to encode token with algorithm {algorithm}')\n    easyjwt_verification = EasyJWT.verify(token, key)\n    self.assertEqual(algorithm, easyjwt_verification.algorithm, msg=\n        f'Algorithm {algorithm} not set on token')\n    self.assertIsNotNone(easyjwt_verification, msg=\n        f'Failed to decode token with algorithm {algorithm}')\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "helper_no_account_checks",
+    "className": "UITestCase",
+    "fileName": "/AndreMiras_&_EtherollApp/src_&_etherollapp_&_tests_&_ui_&_test_etheroll_ui.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        Helper method for checking widget are in expected state on no account.\n        \"\"\"\ncontroller = app.root\nscreen_manager = controller.screen_manager\naccount_utils = controller.account_utils\nself.assertEqual(len(account_utils.get_account_list()), 0)\nscreen_manager.current = 'switch_account_screen'\nadvance_frames_for_screen()\nswitch_account_screen = controller.switch_account_screen\nadvance_frames_for_screen()\ndialogs = Dialog.dialogs\nself.assertEqual(len(dialogs), 1)\ndialog = dialogs[0]\nself.assertEqual(dialog.title, 'No account found')\ndialog.dismiss()\nself.assertEqual(len(dialogs), 0)\ncreate_new_account_nav_item = (switch_account_screen.ids.\n    create_new_account_nav_item_id)\ncreate_new_account_nav_item.dispatch('on_tab_press')\nself.assertEqual(switch_account_screen.current_account, None)\n"
+}

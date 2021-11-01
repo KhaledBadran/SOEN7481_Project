@@ -1,0 +1,9 @@
+{
+    "functionName": "test_r_reverses_perfectly",
+    "className": "Test_MWD",
+    "fileName": "/AlexJamesWright_&_MessWithDevs/MessWithDevs_&_tests_&_test_mwd.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "subprocess.call(['cp', direc + '/allRelevantChars.c', direc + '/test.c'])\nsubprocess.call(['python', direc + '/../__init__.py', direc +\n    '/allRelevantChars.c'])\nsubprocess.call(['python', direc + '/../__init__.py', direc +\n    '/allRelevantChars.c', '-r'])\nwith open(direc + '/allRelevantChars.c', 'r') as converted:\n    with open(direc + '/test.c', 'r') as original:\n        orig = original.readlines()\n        conv = converted.readlines()\n        self.assertEqual(len(orig), len(conv))\n        for charOrig, charConv in zip(orig, conv):\n            self.assertEqual(charOrig, charConv)\nsubprocess.call(['rm', direc + '/test.c'])\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_input_data",
+    "className": null,
+    "fileName": "/AmadeusITGroup_&_JumpSSH/tests_&_test__session.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "gateway_ip, gateway_port = docker_env.get_host_ip_port()\ngateway_session = SSHSession(host=gateway_ip, port=gateway_port, username=\n    'user1', password='password1').open()\ncommands = ['read -p \"Requesting user input value?\" my_var', 'echo $my_var']\nwith pytest.raises(exception.TimeoutError):\n    gateway_session.run_cmd(commands, timeout=5)\nassert gateway_session.get_cmd_output(commands, input_data={\n    'Requesting user input value': 'dummy_value'}).split()[-1] == 'dummy_value'\n"
+}

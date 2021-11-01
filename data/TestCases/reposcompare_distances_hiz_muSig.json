@@ -1,0 +1,9 @@
+{
+    "functionName": "compare_distances_hiz_muSig",
+    "className": null,
+    "fileName": "/LSSTDESC_&_CCL/benchmarks_&_test_distances.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Compare distances calculated by pyccl with the distances in the benchmark\n    file, for a ccl cosmology with mu / Sigma parameterisation of gravity.\n    Nonzero mu / Sigma should NOT affect distances so we compare to the same\n    benchmarks as the mu = Sigma = 0 case deliberately.\n    \"\"\"\nOmega_k = 1.0 - Omega_c - Omega_b - Omega_v\ncosmo = ccl.Cosmology(Omega_c=Omega_c, Omega_b=Omega_b, Neff=Neff, h=h, A_s\n    =A_s, n_s=n_s, Omega_k=Omega_k, w0=w0, wa=wa, mu_0=mu_0, sigma_0=\n    sigma_0, Omega_g=0.0)\na = 1.0 / (1.0 + z)\nchi = ccl.comoving_radial_distance(cosmo, a) * h\nassert_allclose(chi, chi_bench, atol=1e-12, rtol=DISTANCES_TOLERANCE)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_secure_resource",
+    "className": "TestPlugin",
+    "fileName": "/tutorgen_&_HPIT-python-client/tests_&_hpitclient_&_test_plugin.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "httpretty.register_uri(httpretty.POST,\n    'https://www.hpit-project.org/new-resource', body=\n    '{\"resource_id\":\"1234\"}', content_type='application/json')\nself.test_plugin.secure_resource.when.called_with(None).should.throw(\n    InvalidParametersError)\nself.test_plugin.secure_resource.when.called_with('').should.throw(\n    InvalidParametersError)\nself.test_plugin.secure_resource.when.called_with([]).should.throw(\n    InvalidParametersError)\nself.test_plugin.secure_resource.when.called_with({}).should.throw(\n    InvalidParametersError)\nself.test_plugin.secure_resource('4').should.equal('1234')\nhttpretty.activate"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_scoring",
+    "className": null,
+    "fileName": "/goeckslab_&_Galaxy-ML/galaxy_ml_&_tests_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "inputs = {'primary_scoring': 'binarize_average_precision_scorer',\n    'secondary_scoring': 'binarize_auc_scorer'}\nscoring = get_scoring(inputs)\nassert len(scoring) == 2\ninputs = {'primary_scoring': 'r2', 'secondary_scoring':\n    'spearman_correlation,max_error,explained_variance'}\nscoring = get_scoring(inputs)\nassert len(scoring) == 4\ninputs = {'primary_scoring': 'default'}\nscoring = get_scoring(inputs)\nassert scoring is None\ninputs = {'primary_scoring': 'r2'}\nscoring = get_scoring(inputs)\nassert type(scoring).__name__ == '_PredictScorer', scoring\n"
+}

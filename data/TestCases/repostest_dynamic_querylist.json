@@ -1,0 +1,9 @@
+{
+    "functionName": "test_dynamic_querylist",
+    "className": "TestMMObjectViews",
+    "fileName": "/Axiologue_&_DjangoRestMultipleModels/tests_&_test_object_view.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        using get_querylist allows the construction of dynamic queryLists\n        \"\"\"\nview = DynamicQueryView.as_view()\nrequest = factory.get('/Julius-Caesar')\nwith self.assertNumQueries(2):\n    response = view(request, play='Julius-Caesar')\nself.assertEqual(response.status_code, status.HTTP_200_OK)\nself.assertEqual(len(response.data), 2)\nself.assertEqual(response.data, {'Play': [{'title': 'Julius Caesar',\n    'genre': 'Tragedy', 'year': 1623}], 'Poem': [{'title':\n    \"Shall I compare thee to a summer's day?\", 'style': 'Sonnet'}, {'title':\n    'As a decrepit father takes delight', 'style': 'Sonnet'}]})\n"
+}

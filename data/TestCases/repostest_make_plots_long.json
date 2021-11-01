@@ -1,0 +1,9 @@
+{
+    "functionName": "test_make_plots_long",
+    "className": "TestMakeMagicPlots",
+    "fileName": "/PmagPy_&_PmagPy/pmagpy_tests_&_test_make_plots.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "os.chdir(os.path.join(WD, 'data_files', '3_0', 'McMurdo'))\nfor filename in glob.glob('*error*'):\n    os.remove(filename)\nos.system('new_make_magic_plots.py')\nlines = pmag.magic_read('images.txt')[0]\nfor line in lines[-3:]:\n    print(line)\nself.assertEqual(len(lines), 541)\nself.assertFalse('image' in lines[0].keys())\nself.assertFalse(glob.glob('errors.txt'))\nnum_pngs = len(glob.glob('*png'))\nnum_thumbnails = len(glob.glob('*thumb.png'))\nself.assertEqual(num_pngs / 2, num_thumbnails)\nself.assertFalse(glob.glob('thumbnail_errors.txt'))\n"
+}

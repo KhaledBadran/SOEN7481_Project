@@ -1,0 +1,9 @@
+{
+    "functionName": "test_process_batch_items",
+    "className": "TestKMIPClient",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_test_kmip_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "batch_item = ResponseBatchItem(operation=Operation(OperationEnum.\n    CREATE_KEY_PAIR), response_payload=payloads.CreateKeyPairResponsePayload())\nresponse = ResponseMessage(batch_items=[batch_item, batch_item])\nresults = self.client._process_batch_items(response)\nbase = 'expected {0}, received {1}'\nmsg = base.format(list, results)\nself.assertIsInstance(results, list, msg)\nmsg = 'number of results ' + base.format(2, len(results))\nself.assertEqual(2, len(results), msg)\nfor result in results:\n    msg = base.format(CreateKeyPairResult, result)\n    self.assertIsInstance(result, CreateKeyPairResult, msg)\n"
+}

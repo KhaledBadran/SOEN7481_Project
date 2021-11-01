@@ -1,0 +1,9 @@
+{
+    "functionName": "test_data_frame",
+    "className": "TestLoad",
+    "fileName": "/CrowdTruth_&_CrowdTruth-core/test_&_test_load.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "for w in range(1, 6):\n    test_config_file = self.test_conf_const.__class__\n    data_file, _ = crowdtruth.load(file=TEST_FILE_PREF + 'platform_cf' +\n        str(w) + '.csv', config=test_config_file())\n    df = pd.read_csv(TEST_FILE_PREF + 'platform_cf' + str(w) + '.csv')\n    test_config_df = self.test_conf_const.__class__\n    data_df, _ = crowdtruth.load(data_frame=df, config=test_config_df())\n    self.assertEqual(set(data_df['units']['duration'].keys()) - set(\n        data_file['units']['duration'].keys()), set([]))\n    self.assertEqual(set(data_df['workers']['judgment'].keys()) - set(\n        data_file['workers']['judgment'].keys()), set([]))\n    self.assertEqual(set(data_df['workers']['judgment'] - data_file[\n        'workers']['judgment']), set([0]))\n"
+}

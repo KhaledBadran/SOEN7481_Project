@@ -1,0 +1,9 @@
+{
+    "functionName": "test_task_tdms2rtdc",
+    "className": null,
+    "fileName": "/ZELLMECHANIK-DRESDEN_&_DCKit/tests_&_test_gui_basic.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "path = retrieve_data('rtdc_data_traces_video.zip')\npath_out = path.with_name('converted')\npath_out.mkdir()\nmonkeypatch.setattr(QMessageBox, 'exec_', lambda *args: QMessageBox.Ok)\nmonkeypatch.setattr(QFileDialog, 'getExistingDirectory', lambda *args: str(\n    path_out))\nmw = DCKit(check_update=False)\nqtbot.addWidget(mw)\nmw.append_paths([path])\nassert mw.tableWidget.rowCount() == 1\npaths_converted, invalid, errors = mw.on_task_tdms2rtdc()\nassert len(errors) == 0\nassert len(invalid) == 0\nassert len(paths_converted) == 1\nwith dclab.new_dataset(paths_converted[0]) as ds:\n    assert ds.config['setup']['module composition'] == 'Cell_Flow_2, Fluor'\ncleanup()\n"
+}

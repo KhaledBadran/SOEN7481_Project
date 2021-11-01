@@ -1,0 +1,9 @@
+{
+    "functionName": "path_energy0",
+    "className": null,
+    "fileName": "/david-leon_&_Dandelion/test_&_test_ChainCRF.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Path energy without boundary potential handling.\"\"\"\nn_classes = K.shape(x)[2]\ny_one_hot = K.one_hot(y, n_classes)\nenergy = K.sum(x * y_one_hot, 2)\nenergy = K.sum(energy, 1)\ny_t = y[:, :-1]\ny_tp1 = y[:, 1:]\nU_flat = K.reshape(U, [-1])\nflat_indices = y_t * n_classes + y_tp1\nU_y_t_tp1 = K.gather(U_flat, flat_indices)\nif mask is not None:\n    mask = K.cast(mask, K.floatx())\n    y_t_mask = mask[:, :-1]\n    y_tp1_mask = mask[:, 1:]\n    U_y_t_tp1 *= y_t_mask * y_tp1_mask\nenergy += K.sum(U_y_t_tp1, axis=1)\nreturn energy\n"
+}

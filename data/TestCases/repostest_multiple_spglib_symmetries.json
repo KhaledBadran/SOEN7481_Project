@@ -1,0 +1,9 @@
+{
+    "functionName": "test_multiple_spglib_symmetries",
+    "className": "TestStructureMethods",
+    "fileName": "/mesonepigreco_&_CellConstructor/scripts_&_cellconstructor_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        This test tries to apply many times the symmetrization.\n        If after two application the dynamical matrix changes, \n        there is a problem in the symmetrization.\n        \"\"\"\ndyn = DownloadDynSky()\ndyn.SymmetrizeSupercell()\nnew_dyn = dyn.Copy()\nnew_dyn.SymmetrizeSupercell()\nfor iq, q in enumerate(dyn.q_tot):\n    delta = dyn.dynmats[iq] - new_dyn.dynmats[iq]\n    delta = np.sqrt(np.sum(np.abs(delta) ** 2))\n    self.assertAlmostEqual(delta, 0)\n"
+}

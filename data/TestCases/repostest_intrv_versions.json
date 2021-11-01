@@ -1,0 +1,9 @@
+{
+    "functionName": "test_intrv_versions",
+    "className": null,
+    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_bspline.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from pypeit.bspline.utilpy import intrv as intrv_py\nfrom pypeit.bspline.utilc import intrv as intrv_c\nd = np.load(data_path('intrv.npz'))\npytime = time.perf_counter()\nindx = intrv_py(d['nord'], d['breakpoints'], d['x'])\npytime = time.perf_counter() - pytime\nctime = time.perf_counter()\n_indx = intrv_c(d['nord'], d['breakpoints'], d['x'])\nctime = time.perf_counter() - ctime\nassert ctime < pytime, 'C is less efficient!'\nassert np.allclose(indx, _indx), 'Differences in index'\nbspline_ext_required"
+}

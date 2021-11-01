@@ -1,0 +1,9 @@
+{
+    "functionName": "test_value_federate_runFederateTestBool",
+    "className": null,
+    "fileName": "/GMLC-TDC_&_HELICS/tests_&_python_&_test_value_federate.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "defaultValue = True\ntestValue1 = True\ntestValue2 = False\npubid = h.helicsFederateRegisterGlobalPublication(vFed, 'pub1', h.\n    helics_data_type_boolean, '')\nsubid = h.helicsFederateRegisterSubscription(vFed, 'pub1', '')\nh.helicsInputSetDefaultBoolean(subid, h.helics_true if defaultValue else h.\n    helics_false)\nh.helicsFederateEnterExecutingMode(vFed)\nh.helicsPublicationPublishBoolean(pubid, h.helics_true if testValue1 else h\n    .helics_false)\nval = h.helicsInputGetBoolean(subid)\nassert val == h.helics_true if defaultValue else h.helics_false\ngrantedtime = h.helicsFederateRequestTime(vFed, 1.0)\nassert grantedtime == 0.01\nval = h.helicsInputGetBoolean(subid)\nassert val == h.helics_true if testValue1 else h.helics_false\nh.helicsPublicationPublishBoolean(pubid, h.helics_true if testValue2 else h\n    .helics_false)\nval = h.helicsInputGetBoolean(subid)\nassert val == h.helics_true if testValue1 else h.helics_false\ngrantedtime = h.helicsFederateRequestTime(vFed, 2.0)\nassert grantedtime == 0.02\nval = h.helicsInputGetBoolean(subid)\nassert val == h.helics_false if testValue2 else h.helics_true\n"
+}

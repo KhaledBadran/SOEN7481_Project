@@ -1,0 +1,9 @@
+{
+    "functionName": "test_on_image",
+    "className": "TestOnImage",
+    "fileName": "/jamd315_&_OnImage/on_image_&_tests_&_test_OnImage.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "resolved = [on_image.resolve_image(f'./{i}.png') for i in range(self.\n    n_sample_images)]\n@self.img_handler.on_image(resolved[0])\n@self.img_handler.on_image(resolved[4])\n@self.img_handler.not_on_image(resolved[1])\n@self.img_handler.or_on_image(resolved[2], resolved[3])\ndef some_function():\n    return 'Yes'\nfor r in resolved:\n    self.assertIn(r, self.img_handler.img_find_results)\n    self.assertFalse(self.img_handler.img_find_results[r])\nself.assertIn(some_function, self.img_handler.func_match_types)\nself.assertIn(resolved[0], self.img_handler.func_match_types[some_function]\n    ['and'])\nself.assertIn(resolved[4], self.img_handler.func_match_types[some_function]\n    ['and'])\nself.assertIn(resolved[1], self.img_handler.func_match_types[some_function]\n    ['not'])\nself.assertIn(resolved[2], self.img_handler.func_match_types[some_function]\n    ['or'][0])\nself.assertIn(resolved[3], self.img_handler.func_match_types[some_function]\n    ['or'][0])\nwith self.assertRaises(ValueError):\n\n    @self.img_handler.on_image(resolved[0], resolved[1])\n    def other_func():\n        return 'No'\nwith self.assertRaises(ValueError):\n\n    @self.img_handler.on_image(resolved[0], 'garbage')\n    def another_func():\n        return 'Maybe?'\nwith self.assertRaises(ValueError):\n\n    @self.img_handler.on_image()\n    def the_last_func():\n        return 'Oui'\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_write_missing_prime_field_size",
+    "className": "TestSplitKey",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_secrets_&_test_split_key.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that an InvalidField error is raised during the encoding of a\n        SplitKey object when the object is missing the prime field size field.\n        \"\"\"\nsplit_key_method = enums.SplitKeyMethod.POLYNOMIAL_SHARING_PRIME_FIELD\nsplit_key = secrets.SplitKey(split_key_parts=4, key_part_identifier=1,\n    split_key_threshold=2, split_key_method=split_key_method)\nstream = utils.BytearrayStream()\nargs = stream,\nself.assertRaisesRegex(exceptions.InvalidField,\n    'The SplitKey object is missing the PrimeFieldSize field. This field is required when the SplitKeyMethod is PolynomialSharingPrimeField.'\n    , split_key.write, *args)\n"
+}

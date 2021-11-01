@@ -1,0 +1,9 @@
+{
+    "functionName": "test_speg",
+    "className": null,
+    "fileName": "/SimplePEG_&_Python/tests_&_test_speg_fixtures.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "grammar, text, result = [read_file(grammar_file + postfix) for postfix in (\n    '', '.txt', '.json')]\nspeg = SPEG()\nast = speg.parse(grammar, text)\nassert json.loads(ast.to_json()) == json.loads(result)\npytest.mark.parametrize('grammar_file', collect_files(FIXTURES_ROOT, lambda\n    f: f.endswith('.peg')))"
+}

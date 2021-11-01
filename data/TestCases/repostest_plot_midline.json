@@ -1,0 +1,9 @@
+{
+    "functionName": "test_plot_midline",
+    "className": "TestIterCellPlot",
+    "fileName": "/Jhsmit_&_ColiCoords/test_&_test_iplot.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "fig, ax = iter_subplots()\nline = self.icp.plot_midline(ax=ax)\nx = np.linspace(self.cell_list[0].coords.xl, self.cell_list[0].coords.xr, 100)\ny = np.polyval(self.cell_list[0].coords.coeff[::-1], x)\nxl, yl = line.get_data()\nself.assertArrayAlmostEqual(x, xl, decimal=10)\nself.assertArrayAlmostEqual(y, yl, decimal=10)\nfig.on_next(None)\nx = np.linspace(self.cell_list[1].coords.xl, self.cell_list[1].coords.xr, 100)\ny = np.polyval(self.cell_list[1].coords.coeff[::-1], x)\nxl, yl = ax.lines[0].get_data()\nself.assertArrayAlmostEqual(x, xl, decimal=10)\nself.assertArrayAlmostEqual(y, yl, decimal=10)\nplt.close()\n"
+}

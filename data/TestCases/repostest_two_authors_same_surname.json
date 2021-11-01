@@ -1,0 +1,9 @@
+{
+    "functionName": "test_two_authors_same_surname",
+    "className": "TestValidator",
+    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_validation.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Ensure author validation can distinguish authors with same surname.\n        \"\"\"\nauthors = [{'name': 'Zhuyin Ren'}, {'name': 'Yufeng Liu'}, {'name':\n    'Tianfeng Lu'}, {'name': 'Oluwayemisi O Oluwole'}, {'name':\n    'Graham M Goldin'}]\nv.validate({'reference': {'authors': authors, 'doi':\n    '10.1016/j.combustflame.2013.08.018'}}, update=True)\nassert 'Missing author: Liuyan Lu' in v.errors['reference']\nauthors = [{'name': 'Zhuyin Ren'}, {'name': 'Yufeng Liu'}, {'name':\n    'Liuyan Lu'}, {'name': 'Oluwayemisi O Oluwole'}, {'name':\n    'Graham M Goldin'}]\nv.validate({'reference': {'authors': authors, 'doi':\n    '10.1016/j.combustflame.2013.08.018'}}, update=True)\nassert 'Missing author: Tianfeng Lu' in v.errors['reference']\ninternet_missing"
+}

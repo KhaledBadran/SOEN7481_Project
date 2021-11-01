@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ReplDict",
+    "className": null,
+    "fileName": "/bakwc_&_PySyncObj/test_syncobj.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "d = ReplDict()\nd.reset({(1): 1, (2): 22}, _doApply=True)\nassert d.rawData() == {(1): 1, (2): 22}\nd.__setitem__(1, 10, _doApply=True)\nassert d.rawData() == {(1): 10, (2): 22}\nd.set(1, 20, _doApply=True)\nassert d.rawData() == {(1): 20, (2): 22}\nassert d.setdefault(1, 50, _doApply=True) == 20\nassert d.setdefault(3, 50, _doApply=True) == 50\nd.update({(5): 5, (6): 7}, _doApply=True)\nassert d.rawData() == {(1): 20, (2): 22, (3): 50, (5): 5, (6): 7}\nassert d.pop(3, _doApply=True) == 50\nassert d.pop(6, _doApply=True) == 7\nassert d.pop(6, _doApply=True) == None\nassert d.pop(6, 0, _doApply=True) == 0\nassert d.rawData() == {(1): 20, (2): 22, (5): 5}\nassert d[1] == 20\nassert d.get(2) == 22\nassert d.get(22) == None\nassert d.get(22, 10) == 10\nassert len(d) == 3\nassert 2 in d\nassert 22 not in d\nassert sorted(d.keys()) == [1, 2, 5]\nassert sorted(d.values()) == [5, 20, 22]\nassert d.items() == d.rawData().items()\nd.clear(_doApply=True)\nassert len(d) == 0\n"
+}

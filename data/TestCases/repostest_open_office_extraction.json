@@ -1,0 +1,9 @@
+{
+    "functionName": "test_open_office_extraction",
+    "className": "TestCase",
+    "fileName": "/IntegralDefense_&_ACE/lib_&_saq_&_modules_&_test_file_analysis.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "root = create_root_analysis()\nroot.initialize_storage()\nshutil.copy('test_data/openoffice/demo.odt', root.storage_dir)\n_file = root.add_observable(F_FILE, 'demo.odt')\nroot.save()\nroot.schedule()\nengine = TestEngine()\nengine.enable_module('analysis_module_archive', 'test_groups')\nengine.enable_module('analysis_module_file_type', 'test_groups')\nengine.controlled_stop()\nengine.start()\nengine.wait()\nroot = RootAnalysis(storage_dir=root.storage_dir)\nroot.load()\n_file = root.get_observable(_file.id)\nself.assertIsNotNone(_file)\nanalysis = _file.get_analysis('ArchiveAnalysis')\nself.assertIsNotNone(analysis)\nself.assertEquals(len(analysis.find_observables(F_FILE)), 12)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "results",
+    "className": "Porosimetry",
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_algorithms_&_Porosimetry.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        \"\"\"\nif Pc is None:\n    p_inv = self['pore.invasion_pressure']\n    t_inv = self['throat.invasion_pressure']\n    results = {'pore.invasion_pressure': p_inv, 'throat.invasion_pressure':\n        t_inv}\nelse:\n    p_inv, t_inv = super().results(Pc).values()\n    phase = self.project.find_phase(self)\n    quantity = self.settings['quantity'].split('.')[-1]\n    lpf = np.array([1])\n    if self.settings['pore_partial_filling']:\n        phase['pore.' + quantity] = Pc\n        for phys in self.project.find_physics(phase=phase):\n            phys.regenerate_models(self.settings['pore_partial_filling'])\n        lpf = phase[self.settings['pore_partial_filling']]\n    ltf = np.array([1])\n    if self.settings['throat_partial_filling']:\n        phase['throat.' + quantity] = Pc\n        for phys in self.project.find_physics(phase=phase):\n            phys.regenerate_models(self.settings['throat_partial_filling'])\n        ltf = phase[self.settings['throat_partial_filling']]\n    p_inv = p_inv * lpf\n    t_inv = t_inv * ltf\n    results = {'pore.occupancy': p_inv, 'throat.occupancy': t_inv}\nreturn results\n"
+}

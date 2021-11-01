@@ -1,0 +1,9 @@
+{
+    "functionName": "test_caching_processes",
+    "className": "TestCase",
+    "fileName": "/IntegralDefense_&_ACE/lib_&_saq_&_test_database.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Cached database connections for processes.\"\"\"\nenable_cached_db_connections()\nwith get_db_connection() as conn_1:\n    self.assertEquals(len(saq.database._global_db_cache), 1)\n    conn_1_id = id(conn_1)\n\n    def f():\n        enable_cached_db_connections()\n        with get_db_connection() as conn_2:\n            send_test_message(len(saq.database._global_db_cache) == 2)\n            send_test_message(conn_1 != conn_2)\n            conn_2_id = id(conn_2)\n        with get_db_connection() as conn_3:\n            send_test_message(len(saq.database._global_db_cache) == 2)\n            send_test_message(conn_2_id == id(conn_3))\n        disable_cached_db_connections()\n        send_test_message(len(saq.database._global_db_cache) == 1)\n    p = multiprocessing.Process(target=f)\n    p.start()\n    self.assertTrue(recv_test_message())\n    self.assertTrue(recv_test_message())\n    self.assertTrue(recv_test_message())\n    self.assertTrue(recv_test_message())\n    self.assertTrue(recv_test_message())\n    p.join()\nwith get_db_connection() as conn_4:\n    self.assertEquals(len(saq.database._global_db_cache), 1)\n    self.assertEquals(conn_1_id, id(conn_4))\ndisable_cached_db_connections()\nself.assertEquals(len(saq.database._global_db_cache), 0)\n"
+}

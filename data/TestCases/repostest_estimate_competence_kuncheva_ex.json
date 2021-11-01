@@ -1,0 +1,9 @@
+{
+    "functionName": "test_estimate_competence_kuncheva_ex",
+    "className": null,
+    "fileName": "/Menelau_&_DESlib/deslib_&_tests_&_dcs_&_test_a_priori.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "query = np.array([1, 1])\na_priori_test = APriori(k=example_kuncheva['k'])\ntest_example = example_kuncheva\na_priori_test.DSEL_processed_ = test_example['dsel_processed']\na_priori_test.dsel_scores_ = test_example['dsel_scores']\na_priori_test.DSEL_target_ = test_example['y_independent']\na_priori_test.n_classes_ = test_example['n_classes']\nneighbors = test_example['neighbors'].reshape(1, -1)\ndistances = test_example['distances'].reshape(1, -1)\ncompetences = a_priori_test.estimate_competence(query.reshape(1, -1),\n    neighbors, distances)\nassert np.isclose(competences, 0.7, atol=0.01)\n"
+}

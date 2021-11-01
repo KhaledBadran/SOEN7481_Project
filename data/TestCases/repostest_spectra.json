@@ -1,0 +1,9 @@
+{
+    "functionName": "test_spectra",
+    "className": null,
+    "fileName": "/rcjackson_&_HighIQ/tests_&_test_highiq.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "my_ds = highiq.io.load_arm_netcdf(highiq.testing.TEST_FILE)\nmy_spectra = highiq.calc.get_psd(my_ds)\nassert 'power_spectral_density_interp' in my_spectra.variables.keys()\nassert 'power_spectral_density' in my_spectra.variables.keys()\npsd = my_spectra['power_spectra_normed'].sel(range=400, method='nearest')\nvel_bins = my_spectra['vel_bins']\ndV = vel_bins[1] - vel_bins[0]\nnp.testing.assert_almost_equal(psd.sum() * dV.values, 100)\nmy_ds.close()\nmy_spectra.close()\n"
+}

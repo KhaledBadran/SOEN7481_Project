@@ -1,0 +1,9 @@
+{
+    "functionName": "test_host_keys",
+    "className": null,
+    "fileName": "/CyberReboot_&_NetworkML/tests_&_test_funcs_host.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "test_data = {field: None for field in WS_FIELDS}\neth_src = '0e:00:00:00:00:01'\neth_src_int = int(netaddr.EUI(eth_src))\nsrc_ip = ipaddress.ip_address('192.168.0.1')\ndst_ip = ipaddress.ip_address('192.168.0.2')\ntest_data.update({'ip.version': 4, 'eth.src': eth_src_int, 'eth.dst':\n    eth_src_int, 'ip.src': str(int(src_ip)), 'ip.dst': str(int(dst_ip)),\n    'tcp.srcport': 999, 'tcp.dstport': 1001, 'frame.protocols': 'eth:ip'})\nrow = nan_row_dict(test_data)\ninstance = Host()\nassert instance._host_key(row)[1:] == (str(src_ip), str(dst_ip), 1, 0, 1)\ninstance = SessionHost()\nassert instance._host_key(row)[1:] == (str(src_ip), str(dst_ip), 1, 0, 1)\n"
+}

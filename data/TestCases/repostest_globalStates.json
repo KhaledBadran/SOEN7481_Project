@@ -1,0 +1,9 @@
+{
+    "functionName": "test_globalStates",
+    "className": "TestTensorElementSettings",
+    "fileName": "/PandaScience_&_ElkOpticsAnalyzer/test_&_test_mainWindow.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Tests correct views when global settings are activated.\"\"\"\nui.taskChooser.setCurrentIndex(1)\nui.tenElementsDialog.diagonalOnly()\nui.tenElementsDialog.accepted()\nwith qtbot.waitSignal(ui.windowUpated, timeout=5000):\n    ui.updateWindow()\nif step >= 1:\n    with qtbot.waitSignal(ui.windowUpated, timeout=5000):\n        qtbot.keyClick(ui, Qt.Key_G, modifier=Qt.ControlModifier)\nif step >= 2:\n    ui.tabWidget.setCurrentIndex(1)\nif step >= 3:\n    with qtbot.waitSignal(ui.windowUpated, timeout=5000):\n        ui.taskChooser.setCurrentIndex(3)\nif step >= 4:\n    ui.tabWidget.setCurrentIndex(1)\nif step >= 5:\n    ui.tabWidget.setCurrentIndex(0)\n    with qtbot.waitSignal(ui.windowUpated, timeout=5000):\n        qtbot.mouseClick(ui.btnImaginaryPart, Qt.LeftButton)\nif step >= 6:\n    with qtbot.waitSignal(ui.windowUpated, timeout=5000):\n        qtbot.keyClick(ui, Qt.Key_G, modifier=Qt.ControlModifier)\nif step >= 7:\n    with qtbot.waitSignal(ui.windowUpated, timeout=5000):\n        ui.taskChooser.setCurrentIndex(1)\nreturn finalizeMpl(ui)\npytest.mark.parametrize('step', range(1, 8))"
+}

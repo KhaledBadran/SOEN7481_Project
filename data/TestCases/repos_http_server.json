@@ -1,0 +1,9 @@
+{
+    "functionName": "_http_server",
+    "className": null,
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_HTTPBundleUploaderTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "srvdir = tempfile.mkdtemp(prefix=__name__ + '.')\nprocess = None\nrequest_queue = Queue()\ntry:\n    server = make_server(request_queue)\n\n    def pfunc():\n        chdir(srvdir)\n        server.serve_forever()\n    process = Process(target=pfunc)\n    server_data = ServerData(server, request_queue)\n\n    def start():\n        process.start()\n        wait_for_started(server_data)\n    server_data.start = start\n    yield server_data\nfinally:\n    if process:\n        process.terminate()\n        process.join()\n    shutil.rmtree(srvdir)\ncontextmanager"
+}

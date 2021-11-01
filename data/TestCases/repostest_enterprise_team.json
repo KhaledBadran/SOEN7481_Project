@@ -1,0 +1,9 @@
+{
+    "functionName": "test_enterprise_team",
+    "className": "TestEnterprise",
+    "fileName": "/Keeper-Security_&_Commander/unit-tests_&_test_command_enterprise.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "params = get_connected_params()\napi.query_enterprise(params)\ncmd = enterprise.EnterpriseTeamCommand()\nwith mock.patch('builtins.print'):\n    cmd.execute(params, team=[ent_env.team1_uid])\nTestEnterprise.expected_commands = ['team_add']\ncmd.execute(params, add=True, restrict_edit='on', node=str(ent_env.node1_id\n    ), team=['Team 3'])\nself.assertEqual(len(TestEnterprise.expected_commands), 0)\nwith mock.patch('keepercommander.commands.enterprise.user_choice'\n    ) as mock_choice:\n    TestEnterprise.expected_commands = ['team_delete']\n    mock_choice.return_value = 'y'\n    cmd.execute(params, delete=True, team=['Team 1'])\n    self.assertEqual(len(TestEnterprise.expected_commands), 0)\n    with mock.patch('builtins.print'):\n        mock_choice.return_value = 'n'\n        cmd.execute(params, delete=True, team=[ent_env.team1_uid])\n        self.assertEqual(len(TestEnterprise.expected_commands), 0)\nwith self.assertLogs(level=logging.WARNING):\n    cmd.execute(params, delete=True, team=['Unknown Team'])\n    self.assertEqual(len(TestEnterprise.expected_commands), 0)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_basic_routing",
+    "className": null,
+    "fileName": "/zeaphoo_&_cocopot_&_/tests_&_test_routing.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "r = Router()\nr.add('/', endpoint='index')\nr.add('/foo', endpoint='foo')\nr.add('/bar/', endpoint='bar')\nassert r.match('/') == ('index', {})\nassert r.match('/foo') == ('foo', {})\nassert r.match('/bar/') == ('bar', {})\npytest.raises(NotFound, lambda : r.match('/blub'))\npytest.raises(MethodNotAllowed, lambda : r.match('/foo', method='POST'))\n"
+}

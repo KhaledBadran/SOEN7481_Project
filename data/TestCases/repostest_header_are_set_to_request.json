@@ -1,0 +1,9 @@
+{
+    "functionName": "test_header_are_set_to_request",
+    "className": "TestFxABearerTokenAuth",
+    "fileName": "/mozilla_&_PyFxA/fxa_&_tests_&_test_requests_auth_plugin.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "r = self.auth(Request())\nself.assertIn('Authorization', r.headers)\nself.assertTrue(r.headers['Authorization'].startswith('Bearer'),\n    'Authorization headers does not start with Bearer')\ncore_client_patch.assert_called_with(server_url='https://accounts.com/auth/v1')\noauth_client_patch.assert_called_with('53210789456', None, server_url=\n    'https://oauth.com/oauth/v1')\noauth_client_patch.return_value.authorize_token.assert_called_with(\n    core_client_patch.return_value.login.return_value, 'profile')\nmock.patch('fxa.core.Client', return_value=mocked_core_client())mock.patch('fxa.oauth.Client', return_value=mocked_oauth_client())"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_Marray_1D",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Marray.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "shortList = Marray([0, 1, 2, 3, 4])\nassert shortList.multidimensional == False\nshortList[0] = 10\nshortList[1] = -10\nassert np.max(shortList) == 10\nassert np.min(shortList) == -10\nshortList = 10 * shortList\nassert np.max(shortList) == 100\nassert np.min(shortList) == -100\nshortList = 10 + shortList - 5\nassert np.max(shortList) == 105\nassert np.min(shortList) == -95\ntry:\n    shortList.mask = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]\n    assert False\nexcept AttributeError:\n    assert True\nshortList = shortList + shortList\nmask = np.zeros(len(shortList), dtype=bool)\nmask[-2:] = True\nshortList.mask = mask\nassert np.all(shortList.mask == mask)\nassert len(shortList.extractData()) == np.sum(1 - mask)\nassert np.all(shortList.extractData() == shortList.compress())\nshortList.mask = False\nassert len(shortList) == 5\nassert len(shortList.flatten()) == 5\nshortList.shape = -1\nshortList.shape = -1\nassert shortList.shape == (len(shortList),)\n"
+}

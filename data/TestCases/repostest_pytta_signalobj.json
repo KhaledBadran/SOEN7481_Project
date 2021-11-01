@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pytta_signalobj",
+    "className": "TestPyttaSave",
+    "fileName": "/PyTTAmaster_&_PyTTa/tests_&_test_pyttasave.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        SignalObj pytta save test\n        \"\"\"\nsin1 = pytta.generate.sin(freq=500, timeLength=6)\nsin2 = pytta.generate.sin(freq=1000, timeLength=7)\nsavedlst = [sin1, sin2]\npytta.save(self.filename, sin1, sin2)\nloaded = pytta.load(self.filename)\nloadedlst = [pyttaobj for pyttaobj in loaded]\nfor idx, pobj in enumerate(loadedlst):\n    self.assertSequenceEqual(pobj.timeSignal.tolist(), savedlst[idx].\n        timeSignal.tolist())\n    self.assertSequenceEqual(pobj.freqSignal.tolist(), savedlst[idx].\n        freqSignal.tolist())\n    self.assertEqual(pobj.samplingRate, savedlst[idx].samplingRate)\n    self.assertEqual(str(pobj.channels), str(savedlst[idx].channels))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_with_added_pores",
+    "className": "ImportedTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_geometry_&_ImportedTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "net = op.network.Cubic(shape=[3, 3, 3])\nnet['pore.diameter'] = 2.0\nnet['throat.diameter'] = 1.0\ngeo = op.geometry.Imported(network=net)\nop.topotools.extend(network=net, pore_coords=[[1, 1, 1]], throat_conns=[[0,\n    27]])\nh = net.project.check_geometry_health()\nassert h.health is False\ngeo2 = op.geometry.GenericGeometry(network=net, pores=27, throats=54)\nh = net.project.check_geometry_health()\nassert h.health is True\nassert np.any(np.isnan(net['pore.diameter']))\nassert np.any(np.isnan(net['throat.diameter']))\n"
+}

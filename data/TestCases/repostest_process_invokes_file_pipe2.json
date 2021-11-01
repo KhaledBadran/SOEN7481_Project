@@ -1,0 +1,9 @@
+{
+    "functionName": "test_process_invokes_file_pipe2",
+    "className": null,
+    "fileName": "/alex-ber_&_AlexBerUtils/tests_&_utils_&_processinvokes_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "logger.info(f'{request._pyfuncitem.name}()')\nexp_log_msg = 'simulating run_sub_process'\nprocess_invoke_run = f\"echo '{exp_log_msg}'\"\ncmd = shlex.split(process_invoke_run)\nprocess_invoke_cwd = _os.getcwd()\nfilename = 'my.log'\nprocessinvokes.run_sub_process(*cmd, **{'cwd': process_invoke_cwd,\n    'logPipe': {'cls': 'alexber.utils.processinvokes.FilePipe', 'kwargs': {\n    'fileName': filename}}})\npytest.assume(mock_file.return_value.close.call_count == 1)\npytest.assume(mock_file.return_value.write.call_count > 0)\n(logmsg,), _ = mock_file.return_value.write.call_args\npytest.assume(f'{exp_log_msg}\\n' == logmsg)\n"
+}

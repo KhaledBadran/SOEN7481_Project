@@ -1,0 +1,9 @@
+{
+    "functionName": "test_argv_from_file",
+    "className": null,
+    "fileName": "/ocaballeror_&_Lyricfetch/lyricfetch_&_tests_&_test_args.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Check that the `--from_file` argument can read a text file containing a\n    list of filenames, and return a list with all of them.\n    \"\"\"\nmp3_files = [tmpdir / 'first.mp3', tmpdir / 'second.mp3', tmpdir / 'third.mp3']\nsong_tags = [('white wizzard', 'the sun also rises'), ('mastodon',\n    'andromeda'), ('megadeth', 'dawn patrol')]\nsongs = []\nfor filename, tag in zip(mp3_files, song_tags):\n    artist, title = tag\n    shutil.copyfile(mp3file, filename)\n    tag_mp3(filename, artist=artist, title=title)\n    songs.append(Song(artist=artist, title=title))\nfilelist = tmpdir / 'filelist'\nwith open(filelist, 'w') as file:\n    for filename in mp3_files:\n        file.write(str(filename) + '\\n')\n    file.flush()\nmonkeypatch.setattr(sys, 'argv', [__file__, '--from-file', str(filelist)])\nparsed_songs = parse_argv()\nassert parsed_songs == set(parsed_songs)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_private_bugs_do_not_show",
+    "className": "TestETL",
+    "fileName": "/klahnakoski_&_Bugzilla-ETL/tests_&_test_etl.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.settings.param.allow_private_bugs = False\nFile(self.settings.param.first_run_time).delete()\nFile(self.settings.param.last_run_time).delete()\nprivate_bugs = set(Random.sample(self.settings.param.bugs, 3))\nLog.note('The private bugs for this test are {{bugs}}', bugs=private_bugs)\ndatabase.make_test_instance(self.settings.bugzilla)\nwith MySQL(self.settings.bugzilla) as db:\n    for b in private_bugs:\n        database.add_bug_group(db, b, BUG_GROUP_FOR_TESTING)\nbz_etl.main(es=self.settings.public.bugs.es, es_comments=self.settings.\n    public.comments.es, kwargs=self.settings)\nes = real_elasticsearch.Index(self.settings.public.bugs.es)\nrefresh_metadata(es)\nverify_no_private_bugs(es, private_bugs)\n"
+}

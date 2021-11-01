@@ -1,0 +1,9 @@
+{
+    "functionName": "test_write_only_rng_algorithm",
+    "className": "TestRNGParameters",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that an RNGParameters structure can be written to a data\n        stream even when missing all fields except the RNG algorithm.\n        \"\"\"\nrng_parameters = objects.RNGParameters(rng_algorithm=enums.RNGAlgorithm.\n    FIPS186_2)\nbuffer = utils.BytearrayStream()\nrng_parameters.write(buffer, kmip_version=enums.KMIPVersion.KMIP_1_3)\nself.assertEqual(len(self.only_rng_algorithm_encoding), len(buffer))\nself.assertEqual(str(self.only_rng_algorithm_encoding), str(buffer))\n"
+}

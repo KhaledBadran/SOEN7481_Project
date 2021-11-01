@@ -1,0 +1,9 @@
+{
+    "functionName": "test_generate_video",
+    "className": null,
+    "fileName": "/microsoft_&_MazeExplorer/tests_&_test_mazeexplorer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "record_path = tmpdir.mkdir('record')\nenv = MazeExplorer(mazes_path=tmpdir.strpath)\nenv.reset()\nfor _ in range(10):\n    action = env.action_space.sample()\n    env.step_record(action, record_path=record_path)\nvideo_destination = os.path.join(record_path, 'movie.avi')\nMazeExplorer.generate_video(record_path, video_destination)\nassert os.path.isfile(video_destination)\nassert os.path.getsize(video_destination) > 0\n"
+}

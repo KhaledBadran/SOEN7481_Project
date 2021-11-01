@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_client_identity_from_certificate_multiple_names",
+    "className": "TestUtils",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_auth_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the a PermissionDenied error is raised if multiple possible\n        client identities are discovered.\n        \"\"\"\nmock_get.return_value = ['John Doe', 'Jane Doe']\nargs = 'test',\nself.assertRaisesRegex(exceptions.PermissionDenied,\n    'Multiple client identities found.', utils.\n    get_client_identity_from_certificate, *args)\nmock.patch('kmip.services.server.auth.utils.get_common_names_from_certificate')"
+}

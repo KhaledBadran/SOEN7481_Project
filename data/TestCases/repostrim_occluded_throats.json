@@ -1,0 +1,9 @@
+{
+    "functionName": "trim_occluded_throats",
+    "className": null,
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_topotools_&_topotools.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Remove throats with zero area from the network and also remove\n    pores that are isolated (as a result or otherwise)\n\n    Parameters\n    ----------\n    network : OpenPNM Network Object\n\n    mask : string\n        Applies routine only to pores and throats with this label\n    \"\"\"\noccluded_ts = network['throat.area'] == 0\nif np.sum(occluded_ts) > 0:\n    occluded_ts *= network['throat.' + mask]\n    trim(network=network, throats=occluded_ts)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_remote_data_service_daily_ind_performance",
+    "className": null,
+    "fileName": "/quantOS-org_&_JAQS/test_&_test_dataservice.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "hs300 = ds.query_index_member('000300.SH', 20151001, 20170101)\nhs300_str = ','.join(hs300)\nfields = 'pb,pe,share_float_free,net_assets,limit_status'\nres, msg = ds.query('lb.secDailyIndicator', fields=fields, filter='symbol=' +\n    hs300_str + '&start_date=20160907&end_date=20170907', orderby='trade_date')\nassert msg == '0,'\n"
+}

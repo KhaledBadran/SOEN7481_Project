@@ -1,0 +1,9 @@
+{
+    "functionName": "test_set_perf_threshold_and_alert",
+    "className": "PyU4VPerformanceTest",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_performance.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test set_perf_threshold_and_alert.\"\"\"\ncategory, metric, alert = 'Array', 'PercentBusy', True\nfirst_threshold, second_threshold = 20, 30\nwith mock.patch.object(self.perf, 'update_threshold_settings') as mck_request:\n    self.perf.set_perf_threshold_and_alert(category, metric,\n        first_threshold, second_threshold, alert)\n    mck_request.assert_called_once_with(category=category, metric=metric,\n        alert=True, first_threshold=str(first_threshold), second_threshold=\n        str(second_threshold), first_threshold_occurrences=3,\n        first_threshold_samples=5, first_threshold_severity=pc.WARN_LVL,\n        second_threshold_occurrences=3, second_threshold_samples=5,\n        second_threshold_severity=pc.CRIT_LVL)\n"
+}

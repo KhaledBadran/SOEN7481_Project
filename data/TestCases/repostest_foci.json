@@ -1,0 +1,9 @@
+{
+    "functionName": "test_foci",
+    "className": null,
+    "fileName": "/nipy_&_PySurfer/surfer_&_tests_&_test_viz.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test plotting of foci.\"\"\"\n_set_backend('test')\nbrain = Brain(*std_args)\ncoords = [[-36, 18, -3], [-43, 25, 24], [-48, 26, -2]]\nbrain.add_foci(coords, map_surface='white', color='gold', name='test1',\n    resolution=25)\nsubj_dir = utils._get_subjects_dir()\nannot_path = pjoin(subj_dir, subject_id, 'label', 'lh.aparc.a2009s.annot')\nids, ctab, names = nib.freesurfer.read_annot(annot_path)\nverts = np.arange(0, len(ids))\ncoords = np.random.permutation(verts[ids == 74])[:10]\nscale_factor = 0.7\nbrain.add_foci(coords, coords_as_verts=True, scale_factor=scale_factor,\n    color='#A52A2A', name='test2')\nwith pytest.raises(ValueError):\n    brain.remove_foci(['test4'])\nbrain.remove_foci('test1')\nbrain.remove_foci()\nassert len(brain.foci_dict) == 0\nbrain.close()\nrequires_fsaverage()"
+}

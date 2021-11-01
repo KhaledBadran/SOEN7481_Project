@@ -1,0 +1,9 @@
+{
+    "functionName": "_invade_isolated_Ts",
+    "className": "MixedInvasionPercolation",
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_algorithms_&_MixedInvasionPercolation.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        Throats that are uninvaded connected to pores that are both invaded\n        should be invaded too.\n        \"\"\"\nnet = self.project.network\nTs = net['throat.conns'].copy()\ninvaded_Ps = self['pore.invasion_sequence'] > -1\nuninvaded_Ts = self['throat.invasion_sequence'] == -1\nisolated_Ts = np.logical_and(invaded_Ps[Ts[:, (0)]], invaded_Ps[Ts[:, (1)]])\nisolated_Ts = np.logical_and(isolated_Ts, uninvaded_Ts)\ninv_Pc = self['pore.invasion_pressure']\ninv_seq = self['pore.invasion_sequence']\nif np.any(isolated_Ts):\n    max_array = Ts[:, (0)]\n    second_higher = inv_seq[Ts][:, (1)] > inv_seq[Ts][:, (0)]\n    max_array[second_higher] = Ts[:, (1)][second_higher]\n    mPc = inv_Pc[max_array]\n    mSeq = inv_seq[max_array]\n    mClu = self['pore.cluster'][max_array]\n    self['throat.invasion_pressure'][isolated_Ts] = mPc[isolated_Ts]\n    self['throat.invasion_sequence'][isolated_Ts] = mSeq[isolated_Ts]\n    self['throat.cluster'][isolated_Ts] = mClu[isolated_Ts]\n"
+}

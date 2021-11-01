@@ -1,0 +1,9 @@
+{
+    "functionName": "test_params_to_array",
+    "className": null,
+    "fileName": "/fmfn_&_BayesianOptimization/tests_&_test_target_space.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "space = TargetSpace(target_func, PBOUNDS)\nassert all(space.params_to_array({'p1': 2, 'p2': 3}) == np.array([2, 3]))\nassert all(space.params_to_array({'p2': 2, 'p1': 9}) == np.array([9, 2]))\nwith pytest.raises(ValueError):\n    space.params_to_array({'p2': 1})\nwith pytest.raises(ValueError):\n    space.params_to_array({'p2': 1, 'p1': 7, 'other': 4})\nwith pytest.raises(ValueError):\n    space.params_to_array({'other': 1})\n"
+}

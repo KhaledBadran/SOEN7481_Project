@@ -1,0 +1,9 @@
+{
+    "functionName": "test_dont_pollute_self",
+    "className": "NamespaceTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_namespace.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "collection = lookup.TemplateLookup()\ncollection.put_string('base.html',\n    \"\"\"\n\n        <%def name=\"foo()\">\n        <%\n            foo = local.get_namespace(\"foo.html\")\n        %>\n        </%def>\n\n        name: ${self.name}\n        name via bar: ${bar()}\n\n        ${next.body()}\n\n        name: ${self.name}\n        name via bar: ${bar()}\n        <%def name=\"bar()\">\n            ${self.name}\n        </%def>\n\n\n        \"\"\"\n    )\ncollection.put_string('page.html',\n    \"\"\"\n        <%inherit file=\"base.html\"/>\n\n        ${self.foo()}\n\n        hello world\n\n        \"\"\"\n    )\ncollection.put_string('foo.html', '<%inherit file=\"base.html\"/>')\nassert result_lines(collection.get_template('page.html').render()) == [\n    'name: self:page.html', 'name via bar:', 'self:page.html',\n    'hello world', 'name: self:page.html', 'name via bar:', 'self:page.html']\n"
+}

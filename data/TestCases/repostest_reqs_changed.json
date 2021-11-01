@@ -1,0 +1,9 @@
+{
+    "functionName": "test_reqs_changed",
+    "className": null,
+    "fileName": "/132nd-etcher_&_EPAB/test_&_test_main.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "repo = mock()\nwhen(repo).ensure()\nwhen(epab.utils).Repo(...).thenReturn(repo)\nrunner = CliRunner()\nwhen(repo).changed_files().thenReturn(['requirements.txt'])\nresult = runner.invoke(cli, ['reqs'])\nassert result.exception\nassert result.exc_info[0] is SystemExit\nverify(repo).changed_files()\nwhen(repo).changed_files().thenReturn(['requirements-dev.txt'])\nresult = runner.invoke(cli, ['reqs'])\nassert result.exception\nassert result.exc_info[0] is SystemExit\nverify(repo, times=2).changed_files()\nwhen(repo).changed_files().thenReturn(['requirementx.txt',\n    'requirements-dev.txt'])\nresult = runner.invoke(cli, ['reqs'])\nassert result.exception\nassert result.exc_info[0] is SystemExit\nverify(repo, times=3).changed_files()\n"
+}

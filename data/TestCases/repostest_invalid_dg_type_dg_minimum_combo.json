@@ -1,0 +1,9 @@
+{
+    "functionName": "test_invalid_dg_type_dg_minimum_combo",
+    "className": "TestValidatingTheValidator",
+    "fileName": "/kenfar_&_DataGristle/scripts_&_tests_&_test_gristle_validator_cmd.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.in_fqfn = _generate_foobarbatz_file(10000, dir_name=self.tmp_dir)\nschema = _generate_foobarbatz_schema()\nfor field in schema['items']:\n    if 'dg_type' in field:\n        del field['dg_type']\nself.schema_fqfn = _write_schema_file('foobarbatz', schema, dir_name=self.\n    tmp_dir)\nself.cmd = (\n    \"%(pgm)s %(in_fqfn)s                                   -d ','                                             --validschema %(schema)s                           --quoting 'quote_none'                             --outgood %(outgood)s                              --outerr  %(outerr)s                               -s                                           \"\n     % {'pgm': self.pgm, 'outgood': self.outgood_fqfn, 'outerr': self.\n    outerr_fqfn, 'in_fqfn': self.in_fqfn, 'schema': self.schema_fqfn})\nprint(self.cmd)\nrunner = envoy.run(self.cmd)\nself.get_outputs(runner)\nassert self.std_out.startswith('Error')\nassert 'dg_type' in self.std_out\nassert self.status_code == 1\nassert not self.err_output\nassert not self.good_output\n"
+}

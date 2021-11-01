@@ -1,0 +1,9 @@
+{
+    "functionName": "test_inhabitants_multiple",
+    "className": null,
+    "fileName": "/SeverTopan_&_AdjSim/test_&_test_index.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from adjsim import core, analysis, decision\nclass TestAgent(core.SpatialAgent):\n\n    def __init__(self, pos):\n        super().__init__(pos=pos)\ntest_sim = core.Simulation()\nagent_00_1 = TestAgent(np.array([0, 0]) * grid_size)\ntest_sim.agents.add(agent_00_1)\nagent_00_2 = TestAgent(np.array([0, 0]) * grid_size)\ntest_sim.agents.add(agent_00_2)\nagent_01 = TestAgent(np.array([0, 1]) * grid_size)\ntest_sim.agents.add(agent_01)\ntest_sim.indices.grid.initialize(grid_size)\nfound_00 = test_sim.indices.grid.get_inhabitants(np.array([0, 0]) * grid_size)\nassert found_00 == [agent_00_1, agent_00_2] or found_00 == [agent_00_2,\n    agent_00_1]\nassert test_sim.indices.grid.get_inhabitants(np.array([0, 1]) * grid_size) == [\n    agent_01]\nassert test_sim.indices.grid.get_inhabitants(np.array([1, 1]) * grid_size) == [\n    ]\ncommon.step_simulate_interpolation(test_sim)\nfound_00 = test_sim.indices.grid.get_inhabitants(np.array([0, 0]) * grid_size)\nassert found_00 == [agent_00_1, agent_00_2] or found_00 == [agent_00_2,\n    agent_00_1]\nassert test_sim.indices.grid.get_inhabitants(np.array([0, 1]) * grid_size) == [\n    agent_01]\nassert test_sim.indices.grid.get_inhabitants(np.array([1, 1]) * grid_size) == [\n    ]\npytest.mark.parametrize('grid_size', [1, 5, 7, 12, 17])"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_parseXML",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Geometry_&_InstrumentXML.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from MJOLNIR.Geometry import Wedge, Analyser, Detector, Instrument\nimport os\ntempFileName = '__temp__'\nInstr = Instrument.Instrument()\nInstr.settings['Author'] = 'Jakob Lass'\nwedge = Wedge.Wedge(position=(0.5, 0, 0))\nDet = Detector.TubeDetector1D(position=(1.0, 1, 0), direction=(1, 0, 0))\nAna = Analyser.FlatAnalyser(position=(0.5, 0, 0), direction=(1, 0, 1))\nwedge.append([Det, Ana])\nInstr.append([wedge, wedge])\nInstr.append(wedge)\nf = open(tempFileName, 'w')\nf.write(createXMLString(Instr))\nf.close()\nInstrLoaded = parseXML(tempFileName)\nos.remove(tempFileName)\nassert Instr == InstrLoaded\n"
+}

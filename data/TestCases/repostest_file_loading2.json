@@ -1,0 +1,9 @@
+{
+    "functionName": "test_file_loading2",
+    "className": "TestChain",
+    "fileName": "/samreay_&_ChainConsumer/tests_&_test_analysis.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data = self.data[:1000]\ndirectory = tempfile._get_default_tempdir()\nfilename = next(tempfile._get_candidate_names())\nfilename = directory + os.sep + filename + '.npy'\nnp.save(filename, data)\nconsumer = ChainConsumer()\nconsumer.add_chain(filename)\nsummary = consumer.analysis.get_summary()\nactual = np.array(list(summary.values())[0])\nassert np.abs(actual[1] - 5.0) < 0.5\n"
+}

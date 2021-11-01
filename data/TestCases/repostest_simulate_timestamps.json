@@ -1,0 +1,9 @@
+{
+    "functionName": "test_simulate_timestamps",
+    "className": null,
+    "fileName": "/OpenSMFS_&_PyBroMo/pybromo_&_tests_&_test_diffusion.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "hash_ = create_diffusion_sim()\nS = pbm.ParticlesSimulation.from_datafile(hash_, mode='w')\nrs = np.random.RandomState(_SEED)\nkw = dict(max_rates=(400000.0,), populations=(slice(0, 35),), bg_rate=1000,\n    rs=rs, save_pos=True)\nS.simulate_timestamps_mix(**kw)\nkw.update(overwrite=True, skip_existing=True, rs=np.random.RandomState(_SEED))\nS.simulate_timestamps_mix(**kw)\nkw.update(overwrite=True, skip_existing=False, rs=np.random.RandomState(_SEED))\nS.simulate_timestamps_mix(**kw)\nkw.update(overwrite=False, skip_existing=True, rs=np.random.RandomState(_SEED))\nS.simulate_timestamps_mix(**kw)\nkw.update(overwrite=False, skip_existing=False, rs=np.random.RandomState(_SEED)\n    )\nwith pytest.raises(pbm.storage.ExistingArrayError):\n    S.simulate_timestamps_mix(**kw)\nkw.pop('rs')\nS.simulate_timestamps_mix(**kw)\nS.store.close()\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_plot_bollinger_band",
+    "className": null,
+    "fileName": "/fmilthaler_&_FinQuant/tests_&_test_moving_average.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "labels_orig = ['Stock', '15d', 'Bollinger Band']\nxlabel_orig = 'Days'\nylabel_orig = 'Price'\ntitle_orig = (\n    'Bollinger Band of +/- 2$\\\\sigma$, Moving Average of sma over 15 days')\nx = np.sin(np.linspace(1, 10, 100))\ndf = pd.DataFrame({'Stock': x}, index=np.linspace(1, 10, 100))\ndf.index.name = 'Days'\nplt.figure()\nplot_bollinger_band(df, sma, span=15)\nax = plt.gca()\nline1 = ax.lines[0]\nstock_plot = line1.get_xydata()\nlabels_plot = ax.get_legend_handles_labels()[1]\nxlabel_plot = ax.get_xlabel()\nylabel_plot = ax.get_ylabel()\ntitle_plot = ax.get_title()\nassert (df['Stock'].index.values == stock_plot[:, (0)]).all()\nassert (df['Stock'].values == stock_plot[:, (1)]).all()\nassert labels_orig == labels_plot\nassert xlabel_orig == xlabel_plot\nassert ylabel_orig == ylabel_plot\nassert title_orig == title_plot\n"
+}

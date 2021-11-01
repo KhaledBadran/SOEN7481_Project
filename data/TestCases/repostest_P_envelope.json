@@ -1,0 +1,9 @@
+{
+    "functionName": "test_P_envelope",
+    "className": null,
+    "fileName": "/grd349_&_PBjam/pbjam_&_tests_&_test_asy_peakbag.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test for method to get height of pmode envelope\"\"\"\nnorders = cs.pars['norders']\nmod = asymp_spec_model(cs.st.f, norders)\nnus = cs.pars['freqs']\nenvheight, numax, envwidth = 10 ** 1.5, nus[0], 10 ** 2.2\nfunc = mod._P_envelope\ninp = [nus, envheight, numax, envwidth]\npbt.does_it_run(func, inp)\npbt.does_it_return(func, inp)\npbt.right_type(func, inp, np.ndarray)\npbt.right_shape(func, inp, np.shape(nus))\nassert_allclose(func(*inp), [31.6227766, 31.5718312], atol=0.001)\n"
+}

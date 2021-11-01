@@ -1,0 +1,9 @@
+{
+    "functionName": "test_match_msg_with_privmsg",
+    "className": null,
+    "fileName": "/Gwildor_&_Pyromancer/pyromancer_&_test_&_test_objects.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "line = Line(':John!JDoe@some.host PRIVMSG #Chan :Some cool message', c)\nmatch = Match(None, line, c)\nmatch.msg('A {} reply', 'cool')\nassert c.outbox[0] == 'PRIVMSG #Chan :A cool reply'\nline = Line(':John!JDoe@some.host PRIVMSG TestBot :Some cool message', c)\nmatch = Match(None, line, c)\nmatch.msg('A {} reply', 'cool')\nassert c.outbox[1] == 'PRIVMSG John :A cool reply'\nmatch.msg('A private message', target='SomeUser')\nassert c.outbox[2] == 'PRIVMSG SomeUser :A private message'\nmatch.msg('A {}formatted message', 'mis', raw=True)\nassert c.outbox[3] == 'PRIVMSG John :A {}formatted message'\nmock_connection"
+}

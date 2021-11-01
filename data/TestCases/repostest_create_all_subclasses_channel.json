@@ -1,0 +1,9 @@
+{
+    "functionName": "test_create_all_subclasses_channel",
+    "className": null,
+    "fileName": "/Drakkar-Software_&_OctoBot-Channels/tests_&_test_channel_creator.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class TestChannelClass(Channel):\n    pass\nclass Test1Channel(TestChannelClass):\n    pass\nclass Test2Channel(TestChannelClass):\n    pass\ndef clean_channels():\n    for channel in deepcopy(ChannelInstances.instance().channels):\n        del_chan(channel)\ndel_chan(TEST_CHANNEL)\nawait create_all_subclasses_channel(TestChannelClass, set_chan)\nassert len(ChannelInstances.instance().channels) == 3\nclean_channels()\nawait create_all_subclasses_channel(TestChannelClass, set_chan,\n    is_synchronized=True)\nassert all(get_chan(channel).is_synchronized for channel in\n    ChannelInstances.instance().channels)\nclean_channels()\npytest.mark.asyncio"
+}

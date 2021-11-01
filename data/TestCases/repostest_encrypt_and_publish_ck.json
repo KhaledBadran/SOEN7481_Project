@@ -1,0 +1,9 @@
+{
+    "functionName": "test_encrypt_and_publish_ck",
+    "className": "TestEncryptorV2",
+    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_encryptor_v2.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self._fixture._encryptor._kekData = None\nself.assertEqual(False, self._fixture._encryptor._isKekRetrievalInProgress)\nself._fixture._encryptor.regenerateCk()\nplainText = Blob('Data to encrypt')\nencryptedContent = self._fixture._encryptor.encrypt(plainText)\nckPrefix = encryptedContent.getKeyLocatorName()\nself.assertTrue(Name('/some/ck/prefix/CK').equals(ckPrefix.getPrefix(-1)))\nself.assertTrue(encryptedContent.hasInitialVector())\nself.assertTrue(not encryptedContent.getPayload().equals(plainText))\nself.assertTrue(self._fixture._face._sentInterests[0].getName().getPrefix(6\n    ).equals(Name('/access/policy/identity/NAC/dataset/KEK')))\nkekData = self._fixture._face._sentData[0]\nself.assertTrue(kekData.getName().getPrefix(6).equals(Name(\n    '/access/policy/identity/NAC/dataset/KEK')))\nself.assertEqual(7, kekData.getName().size())\nself._fixture._face._sentData = []\nself._fixture._face._sentInterests = []\nself._fixture._face.receive(Interest(ckPrefix).setCanBePrefix(True).\n    setMustBeFresh(True))\nckName = self._fixture._face._sentData[0].getName()\nself.assertTrue(ckName.getPrefix(4).equals(Name('/some/ck/prefix/CK')))\nself.assertTrue(ckName.get(5).equals(Name.Component('ENCRYPTED-BY')))\nextractedKek = ckName.getSubName(6)\nself.assertTrue(extractedKek.equals(kekData.getName()))\nself.assertEqual(False, self._fixture._encryptor._isKekRetrievalInProgress)\n"
+}

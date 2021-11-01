@@ -1,0 +1,9 @@
+{
+    "functionName": "test_error_propagation",
+    "className": null,
+    "fileName": "/poletaevvlad_&_CubeLang/test_&_execution_&_test_runtime_errors.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "code = dedent(\n    \"\"\"\n        @runtime_function(\"func_a\")\n        def a():\n            raise ValueError(\"~~error~~\")\n        \n        @runtime_function(\"func_b\")    \n        def b():\n            a()\n            \n        @runtime_function(\"func_c\")\n        def c():\n            b() \n        \n        c()\n    \"\"\"\n    )\nwith pytest.raises(RuntimeError) as e:\n    try:\n        exec(compile(code, '<string>', 'exec'), {'runtime_function':\n            runtime_function})\n    except RuntimeError as e1:\n        raise RuntimeError.update_error(None, e1)\nerror: RuntimeError = e.value\nassert tuple(error.stack_entries[0]) == ('func_a', 3)\nassert tuple(error.stack_entries[1]) == ('func_b', 7)\nassert tuple(error.stack_entries[2]) == ('func_c', 11)\nassert tuple(error.stack_entries[3]) == (None, 13)\n"
+}

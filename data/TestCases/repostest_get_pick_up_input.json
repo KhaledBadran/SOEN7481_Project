@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_pick_up_input",
+    "className": "TestUserInput",
+    "fileName": "/sarcoma_&_Python-Rummy/tests_&_ui_&_test_user_input.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "mocker.patch('builtins.input', side_effect=['w', '1', 'd', 'p'])\nmocker.spy(UserInput, 'get_pick_up_input')\nassert UserInput.get_pick_up_input() == 'd'\ninput.assert_called_with(\n    'Enter \\x1b[0;32md\\x1b[0m to draw or \\x1b[0;32mp\\x1b[0m to pickup discard: '\n    )\nassert input.call_count == 3\nassert UserInput.get_pick_up_input.call_count == 1\nassert UserInput.get_pick_up_input() == 'p'\nassert input.call_count == 4\nassert UserInput.get_pick_up_input.call_count == 2\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_correlated_convergence_power",
+    "className": null,
+    "fileName": "/apetri_&_LensTools/lenstools_&_tests_&_test_noise.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "fig, ax = plt.subplots()\nax.plot(l, l * (l + 1) * sample_power_shape(l, scale=scale) / (2.0 * np.pi),\n    label='Original')\nfor i in range(3):\n    noise_map = corr_noise_gen.fromConvPower(sample_power_shape, seed=i,\n        scale=scale)\n    ell, Pl = noise_map.powerSpectrum(l)\n    ax.plot(ell, ell * (ell + 1) * Pl / (2.0 * np.pi), label=\n        'Realization {0}'.format(i + 1), linestyle='--')\nax.set_xlabel('$l$')\nax.set_ylabel('$l(l+1)P_l/2\\\\pi$')\nax.legend(loc='lower right')\nax.set_yscale('log')\nplt.savefig('correlated_power.png')\nplt.clf()\n"
+}

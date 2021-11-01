@@ -1,0 +1,9 @@
+{
+    "functionName": "test_image_generator_function",
+    "className": null,
+    "fileName": "/mdbloice_&_Augmentor/tests_&_test_generators.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "width = 80\nheight = 80\ntmpdir = tempfile.mkdtemp()\ntmps = []\nfor i in range(10):\n    tmps.append(tempfile.NamedTemporaryFile(dir=tmpdir, suffix='.JPEG'))\n    bytestream = io.BytesIO()\n    im = Image.new('RGB', (width, height))\n    im.save(bytestream, 'JPEG')\n    tmps[i].file.write(bytestream.getvalue())\n    tmps[i].flush()\np = Augmentor.Pipeline(tmpdir)\nassert len(p.augmentor_images) == len(tmps)\np.rotate(probability=0.5, max_left_rotation=5, max_right_rotation=5)\np.flip_left_right(probability=0.333)\np.flip_top_bottom(probability=0.5)\ng = p.image_generator()\nX = next(g)\nassert X is not None\nfor i in range(len(tmps)):\n    tmps[i].close()\nshutil.rmtree(tmpdir)\n"
+}

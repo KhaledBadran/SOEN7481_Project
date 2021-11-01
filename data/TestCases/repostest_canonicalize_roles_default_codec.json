@@ -1,0 +1,9 @@
+{
+    "functionName": "test_canonicalize_roles_default_codec",
+    "className": null,
+    "fileName": "/goodmami_&_penman/tests_&_test_transform.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "parse = def_codec.parse\nnorm = make_norm(canonicalize_roles, def_model)\nform = make_form(def_codec.format)\nt = norm(parse('(a / alpha :ARG1 (b / beta))'))\nassert form(t) == '(a / alpha :ARG1 (b / beta))'\nt = norm(parse('(a / alpha :ARG1-of-of (b / beta))'))\nassert form(t) == '(a / alpha :ARG1 (b / beta))'\nt = norm(parse('(a / alpha :mod-of (b / beta))'))\nassert form(t) == '(a / alpha :mod-of (b / beta))'\n"
+}

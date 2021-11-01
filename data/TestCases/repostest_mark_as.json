@@ -1,0 +1,9 @@
+{
+    "functionName": "test_mark_as",
+    "className": "TrialTest",
+    "fileName": "/facebook_&_Ax/ax_&_core_&_tests_&_test_trial.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "for terminal_status in (TrialStatus.ABANDONED, TrialStatus.FAILED,\n    TrialStatus.COMPLETED):\n    self.setUp()\n    for status in (TrialStatus.RUNNING, terminal_status):\n        kwargs = {}\n        if status == TrialStatus.RUNNING:\n            kwargs['no_runner_required'] = True\n        if status == TrialStatus.ABANDONED:\n            kwargs['reason'] = 'test_reason'\n        self.trial.mark_as(status=status, **kwargs)\n        self.assertTrue(self.trial.status == status)\n        if status == TrialStatus.ABANDONED:\n            self.assertEqual(self.trial.abandoned_reason, 'test_reason')\n        else:\n            self.assertIsNone(self.trial.abandoned_reason)\n"
+}

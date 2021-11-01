@@ -1,0 +1,9 @@
+{
+    "functionName": "helper_test_toolbar",
+    "className": "UITestCase",
+    "fileName": "/AndreMiras_&_EtherollApp/src_&_etherollapp_&_tests_&_ui_&_test_etheroll_ui.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Opens the about screen using the toolbar.\"\"\"\ncontroller = app.root\ntoolbar = controller.ids.toolbar_id\nleft_action_items = toolbar.left_action_items\nself.assertEqual(len(left_action_items), 1)\nmenu_action_item = left_action_items[0]\nself.assertEqual(menu_action_item[0], 'menu')\nself.assertEqual(menu_action_item[1].__qualname__,\n    'CustomToolbar.load_default_buttons.<locals>.<lambda>')\nleft_actions = toolbar.ids.left_actions\nself.assertEqual(len(left_actions.children), 1)\nleft_actions.children[0].dispatch('on_release')\nadvance_frames_for_drawer()\nnavigation = controller.ids.navigation_id\nnavigation_drawer = navigation.ids.navigation_drawer_id\nnavigation_drawer_items = navigation_drawer.ids.list.children\nself.assertEqual([child.text for child in navigation_drawer_items], [\n    'About', 'Settings', 'Wallet', 'Roll results', 'Home'])\nabout_item = navigation_drawer_items[0]\nabout_item.dispatch('on_release')\nadvance_frames_for_drawer()\nself.assertEqual(controller.screen_manager.current, 'about_screen')\nleft_action_items = toolbar.left_action_items\nself.assertEqual(len(left_action_items), 1)\nmenu_action_item = left_action_items[0]\nself.assertEqual(menu_action_item[0], 'arrow-left')\nleft_actions = toolbar.ids.left_actions\nwith patch_fetch_update_balance() as m_fetch_update_balance:\n    left_actions.children[0].dispatch('on_release')\nassert m_fetch_update_balance.call_args_list == [mock.call()]\nadvance_frames_for_screen()\nself.assertEqual(controller.screen_manager.current, 'roll_screen')\n"
+}

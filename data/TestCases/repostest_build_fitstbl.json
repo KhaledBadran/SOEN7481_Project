@@ -1,0 +1,9 @@
+{
+    "functionName": "test_build_fitstbl",
+    "className": null,
+    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_pypeitsetup.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "file_root = os.path.join(os.getenv('PYPEIT_DEV'),\n    'RAW_DATA/shane_kast_blue/600_4310_d55/b')\nfiles = glob.glob(file_root + '*')\nassert len(files) > 0\nsetupc = pypeitsetup.PypeItSetup(files, spectrograph_name='shane_kast_blue')\nfitstbl = setupc.build_fitstbl(files)\nassert isinstance(fitstbl, Table)\nassert setupc.nfiles == 26\nsetupc.write_metadata(ofile=data_path('fitstbl.fits'))\ntmp = setupc.load_metadata(data_path('fitstbl.fits'))\nassert len(tmp) == 26\ndev_suite_required"
+}

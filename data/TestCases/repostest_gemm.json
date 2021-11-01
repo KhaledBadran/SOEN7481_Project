@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gemm",
+    "className": "TestGemm",
+    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_onnx_&_test_onnx_ops.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "mata_shape = [2, 7]\nmatb_shape = [7, 4]\nmatc_shape = [2, 4]\noutput_shape = [2, 4]\nalpha = np.round(np.random.rand(), 2)\nbeta = np.round(np.random.rand(), 2)\ntrans_a, trans_b = 0, 0\ninput_x = np.random.random(mata_shape)\nb_val = np.random.random(matb_shape)\nc_val = np.random.random(matc_shape)\na = onnx.helper.make_tensor_value_info('a', onnx.TensorProto.FLOAT, mata_shape)\nb = onnx.helper.make_tensor_value_info('b', onnx.TensorProto.FLOAT, matb_shape)\nc = onnx.helper.make_tensor_value_info('c', onnx.TensorProto.FLOAT, matc_shape)\nY = onnx.helper.make_tensor_value_info('Y', onnx.TensorProto.FLOAT,\n    output_shape)\ninit_b = onnx.helper.make_tensor(name='b', data_type=onnx.TensorProto.FLOAT,\n    dims=matb_shape, vals=b_val.flatten().tolist())\ninit_c = onnx.helper.make_tensor(name='c', data_type=onnx.TensorProto.FLOAT,\n    dims=matc_shape, vals=c_val.flatten().tolist())\ngemm_node = onnx.helper.make_node(op_type='Gemm', inputs=['a', 'b', 'c'],\n    outputs=['Y'], alpha=alpha, beta=beta, transA=trans_a, transB=trans_b)\nonnx_graph = onnx.helper.make_graph(nodes=[gemm_node], name='test-gather',\n    inputs=[a, b, c], outputs=[Y], initializer=[init_b, init_c])\nonnx_model = onnx.helper.make_model(onnx_graph, producer_name='ONNX')\nonnx.checker.check_model(onnx_model)\nbigdl_model = Gemm(b_val, c_val, alpha=alpha, beta=beta, trans_a=trans_a,\n    trans_b=trans_b)\nloaded_model = load_model_proto(onnx_model)\nexpected_out = bigdl_model.forward(input_x)\nloaded_out = loaded_model.forward(input_x)\nassert np.array_equal(expected_out, loaded_out)\n"
+}

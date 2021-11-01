@@ -1,0 +1,9 @@
+{
+    "functionName": "_create_geometry",
+    "className": "CmfdPwrAssemblyTestHarness",
+    "fileName": "/mit-crpg_&_OpenMOC/tests_&_test_cmfd_print_ratios_&_test_cmfd_print_ratios.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Initialize CMFD and add it to the Geometry.\"\"\"\nsuper(CmfdPwrAssemblyTestHarness, self)._create_geometry()\ncell_id = list(self.input_set.geometry.getRootUniverse().getCells())[0]\nsurface_id = list(self.input_set.geometry.getRootUniverse().getCells()[\n    cell_id].getSurfaces())[2]\nself.input_set.geometry.getRootUniverse().getCells()[cell_id].getSurfaces()[\n    surface_id].getSurface().setBoundaryType(openmoc.PERIODIC)\nsurface_id = list(self.input_set.geometry.getRootUniverse().getCells()[\n    cell_id].getSurfaces())[3]\nself.input_set.geometry.getRootUniverse().getCells()[cell_id].getSurfaces()[\n    surface_id].getSurface().setBoundaryType(openmoc.PERIODIC)\ncmfd = openmoc.Cmfd()\ncmfd.setCMFDRelaxationFactor(0.4)\ncmfd.setSORRelaxationFactor(1.6)\ncmfd.setLatticeStructure(17, 17)\ncmfd.setGroupStructure([[1], [2], [3], [4], [5], [6, 7]])\ncmfd.printProlongation()\nself.input_set.geometry.setCmfd(cmfd)\n"
+}

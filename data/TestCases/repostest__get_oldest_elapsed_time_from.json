@@ -1,0 +1,9 @@
+{
+    "functionName": "test__get_oldest_elapsed_time_from",
+    "className": "TestElasticBuffer",
+    "fileName": "/dkaslovsky_&_ElasticBatch/tests_&_test_buffer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class TestCase:\n\n    def __init__(self, oldest_doc_timestamp, timestamp, expected=None):\n        self.timestamp = timestamp\n        self.expected = expected\n        self.eb = ElasticBuffer()\n        self.eb._oldest_doc_timestamp = oldest_doc_timestamp\ntests_success = {'oldest time is None (corresponding to empty buffer)':\n    TestCase(oldest_doc_timestamp=None, timestamp=123.456, expected=-math.\n    inf),\n    'oldest time is None (corresponding to empty buffer) with invalid timestamp'\n    : TestCase(oldest_doc_timestamp=None, timestamp='123.456', expected=-\n    math.inf), 'compute elapsed time from specified time': TestCase(\n    oldest_doc_timestamp=100.41, timestamp=123.45, expected=23.04)}\ntests_error = {'string input': TestCase(oldest_doc_timestamp=1234,\n    timestamp='1235'), 'None input': TestCase(oldest_doc_timestamp=1234,\n    timestamp=None)}\nfor test_name, test in tests_success.items():\n    result = test.eb._get_oldest_elapsed_time_from(test.timestamp)\n    self.assertAlmostEqual(result, test.expected, places=3, msg=test_name)\nfor test_name, test in tests_error.items():\n    with self.assertRaises(TypeError, msg=test_name):\n        _ = test.eb._get_oldest_elapsed_time_from(test.timestamp)\n"
+}

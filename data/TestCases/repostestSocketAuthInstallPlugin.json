@@ -1,0 +1,9 @@
+{
+    "functionName": "testSocketAuthInstallPlugin",
+    "className": "TestAuthentication",
+    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_test_connection.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "cur = self.connect().cursor()\ntry:\n    cur.execute(\"install plugin auth_socket soname 'auth_socket.so'\")\n    TestAuthentication.socket_found = True\n    self.socket_plugin_name = 'auth_socket'\n    self.realtestSocketAuth()\nexcept pymysql.err.InternalError:\n    try:\n        cur.execute(\"install soname 'auth_socket'\")\n        TestAuthentication.socket_found = True\n        self.socket_plugin_name = 'unix_socket'\n        self.realtestSocketAuth()\n    except pymysql.err.InternalError:\n        TestAuthentication.socket_found = False\n        pytest.skip(\"we couldn't install the socket plugin\")\nfinally:\n    if TestAuthentication.socket_found:\n        cur.execute('uninstall plugin %s' % self.socket_plugin_name)\npytest.mark.skipif(not socket_auth, reason='connection to unix_socket required'\n    )pytest.mark.skipif(socket_found, reason='socket plugin already installed')"
+}

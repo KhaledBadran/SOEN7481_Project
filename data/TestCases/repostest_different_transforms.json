@@ -1,0 +1,9 @@
+{
+    "functionName": "test_different_transforms",
+    "className": null,
+    "fileName": "/AllenInstitute_&_EM_Aligner_python/integration_tests_&_test_montage.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "p = copy.deepcopy(montage_parameters)\np['input_stack']['name'] = loading_raw_stack\np['output_stack']['name'] = output_stack_name\np['pointmatch']['name'] = montage_pointmatches\np['transformation'] = transform\np['fullsize'] = fullsize\np['poly_order'] = order\nmod = EMaligner.EMaligner(input_data=p, args=[])\nmod.run()\nassert np.all(np.array(mod.results['precision']) < 1e-07)\nassert np.all(np.array(mod.results['error']) < 200)\ndel mod\npytest.mark.parametrize('transform, fullsize, order', [('AffineModel', True,\n    0), ('AffineModel', False, 0), ('SimilarityModel', False, 0), (\n    'Polynomial2DTransform', False, 0), ('Polynomial2DTransform', False, 1)])"
+}

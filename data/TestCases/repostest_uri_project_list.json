@@ -1,0 +1,9 @@
+{
+    "functionName": "test_uri_project_list",
+    "className": null,
+    "fileName": "/incf-nidash_&_PyNIDM/nidm_&_experiment_&_tools_&_tests_&_test_rest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "kwargs = {Constants.NIDM_PROJECT_NAME: 'FBIRN_PhaseII', Constants.\n    NIDM_PROJECT_IDENTIFIER: 9610, Constants.NIDM_PROJECT_DESCRIPTION:\n    'Test investigation'}\nproject = Project(uuid='_123456', attributes=kwargs)\nwith open('uritest.ttl', 'w') as f:\n    f.write(project.serializeTurtle())\nkwargs = {Constants.NIDM_PROJECT_NAME: 'FBIRN_PhaseIII', Constants.\n    NIDM_PROJECT_IDENTIFIER: 1200, Constants.NIDM_PROJECT_DESCRIPTION:\n    'Test investigation2'}\nproject = Project(uuid='_654321', attributes=kwargs)\nwith open('uritest2.ttl', 'w') as f:\n    f.write(project.serializeTurtle())\nrestParser = RestParser()\nresult = restParser.run(['uritest.ttl', 'uritest2.ttl'], '/projects')\nproject_uuids = []\nfor uuid in result:\n    project_uuids.append(uuid)\nassert type(result) == list\nassert len(project_uuids) == 2\nassert '_123456' in project_uuids\nassert '_654321' in project_uuids\nos.remove('uritest.ttl')\nos.remove('uritest2.ttl')\n"
+}

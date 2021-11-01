@@ -1,0 +1,9 @@
+{
+    "functionName": "test_zip_data_container_should_concatenate_inner_features",
+    "className": null,
+    "fileName": "/Neuraxio_&_Neuraxle/testing_&_test_zip_data_container.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data_inputs_3d, expected_outputs_3d = _create_data_source((10, 10, 2))\ndata_inputs_2d, expected_outputs_2d = _create_data_source((10, 10))\ndata_container_2d = DataContainer(data_inputs=data_inputs_2d,\n    expected_outputs=expected_outputs_2d)\ndata_container = DataContainer(data_inputs=data_inputs_3d, expected_outputs\n    =expected_outputs_3d)\nzip_data_container = ZipDataContainer.create_from(data_container,\n    data_container_2d)\nzip_data_container.concatenate_inner_features()\nassert np.array_equal(np.array(zip_data_container.data_inputs)[..., -1],\n    data_container_2d.data_inputs)\nassert np.array_equal(np.array(zip_data_container.expected_outputs),\n    expected_outputs_3d)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "process_signal_action",
+    "className": "ProcessHandler",
+    "fileName": "/PRIArobotics_&_HedgehogServer/hedgehog_&_server_&_handlers_&_process.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "if msg.pid in self._processes:\n    proc = self._processes[msg.pid]\n    proc.send_signal(msg.signal)\n    return ack.Acknowledgement()\nelse:\n    raise FailedCommandError('no process with pid {}'.format(msg.pid))\n_commands.register(process.SignalAction)"
+}

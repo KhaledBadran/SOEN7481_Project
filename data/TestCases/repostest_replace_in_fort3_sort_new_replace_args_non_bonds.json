@@ -1,0 +1,9 @@
+{
+    "functionName": "test_replace_in_fort3_sort_new_replace_args_non_bonds",
+    "className": null,
+    "fileName": "/mortele_&_OccamTools/test_&_test_replace_in_fort3.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tol = 1e-14\natom_names, _, _, _, _, non_bonds, _, _, _ = _parse_fort_3_file(file_name)\nrepl = Fort3Replacement('non bond', replace=True, content=['O', 'O', 4, 2]\n    ), Fort3Replacement('non bond', replace=True, content=['H', 'H', 7, 6]\n    ), Fort3Replacement('non bond', new=True, content=['Be', 'H', 9.1, 3.6]\n    ), Fort3Replacement('non bond', new=True, content=['H+', 'O', 9.4, 3.3])\nnon_bonds_new = _sort_new_replace_args_bonds(atom_names, non_bonds, *repl,\n    non_bond=True)\nassert len(non_bonds_new) == 4\nnames = [('O', 'O'), ('H', 'H'), ('Be', 'H'), ('H+', 'O')]\nlengths = [4.0, 7.0, 9.1, 9.4]\nepsilons = [2.0, 6.0, 3.6, 3.3]\nfor name, length, eps in zip(names, lengths, epsilons):\n    found = False\n    n1, n2 = name\n    for non_bond in non_bonds_new:\n        name_1, name_2 = non_bond._content[:2]\n        if name_1 == n1 and name_2 == n2 or name_1 == n2 and name_2 == n1:\n            found = True\n            assert non_bond._content[2] == pytest.approx(length, abs=tol)\n            assert non_bond._content[3] == pytest.approx(eps, abs=tol)\n    assert found\n"
+}

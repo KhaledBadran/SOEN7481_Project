@@ -1,0 +1,9 @@
+{
+    "functionName": "test_lr_disturbed_multicolinearty",
+    "className": "CrossEntropyMNLMultinomialTests",
+    "fileName": "/Mogeng_&_IOHMM/tests_&_test_CrossentropyMNL.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.model_col = CrossEntropyMNL(solver='lbfgs', fit_intercept=True,\n    est_stderr=True, reg_method='l2', alpha=0, l1_ratio=0, tol=0.0001,\n    max_iter=100, coef=None, stderr=None, n_classes=None)\nX = np.hstack([self.data_anes96.exog[:, 0:1], self.data_anes96.exog[:, 0:1]])\nself.model_col.fit(X, self.y_disturbed, sample_weight=0.5)\nself.model = CrossEntropyMNL(solver='lbfgs', fit_intercept=True, est_stderr\n    =True, reg_method='l2', alpha=0, l1_ratio=0, tol=0.0001, max_iter=100,\n    coef=None, stderr=None, n_classes=None)\nself.model.fit(self.data_anes96.exog[:, 0:1], self.y_disturbed,\n    sample_weight=0.5)\nnp.testing.assert_array_almost_equal(self.model_col.loglike_per_sample(X,\n    self.y_disturbed), self.model.loglike_per_sample(self.data_anes96.exog[\n    :, 0:1], self.y_disturbed), decimal=3)\nnp.testing.assert_array_almost_equal(self.model_col.predict(X), self.model.\n    predict(self.data_anes96.exog[:, 0:1]), decimal=3)\n"
+}

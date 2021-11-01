@@ -1,0 +1,9 @@
+{
+    "functionName": "test_late_pore_and_throat_filling",
+    "className": "PorosimetryTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_PorosimetryTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "mip = op.algorithms.Porosimetry(network=self.net)\nmip.setup(phase=self.hg)\nmip.set_inlets(pores=self.net.pores('left'))\nmip.run()\ndata_no_lpf = mip.get_intrusion_data()\nself.phys['pore.pc_star'] = 2 / self.net['pore.diameter']\nself.phys.add_model(propname='pore.partial_filling', pressure=\n    'pore.pressure', Pc_star='pore.pc_star', model=op.models.physics.\n    multiphase.late_filling)\nmip.reset()\nmip.set_inlets(pores=self.net.pores('left'))\nmip.set_partial_filling(propname='pore.partial_filling')\nmip.run()\nself.phys.regenerate_models()\ndata_w_lpf = mip.get_intrusion_data()\nassert np.all(np.array(data_w_lpf.Snwp) <= np.array(data_no_lpf.Snwp))\nself.phys['throat.pc_star'] = 2 / self.net['throat.diameter']\nself.phys.add_model(propname='throat.partial_filling', pressure=\n    'throat.pressure', Pc_star='throat.pc_star', model=op.models.physics.\n    multiphase.late_filling)\nmip.reset()\nmip.set_inlets(pores=self.net.pores('left'))\nmip.set_partial_filling(propname='throat.partial_filling')\nmip.run()\ndata_w_ltf = mip.get_intrusion_data()\nassert np.any(np.array(data_w_ltf.Snwp) <= np.array(data_w_lpf.Snwp))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_unknown_size_inputs",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_test_kullback_leiblers.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test for #725 and #734. When the shape of the Gaussian's mean had at least\n    one unknown parameter, `gauss_kl` would blow up. This happened because\n    `tf.size` can only output types `tf.int32` or `tf.int64`.\n    \"\"\"\nmu = np.ones([1, 4], dtype=default_float())\nsqrt = np.ones([4, 1, 1], dtype=default_float())\nknown_shape = gauss_kl(*map(tf.constant, [mu, sqrt]))\nunknown_shape = gauss_kl(mu, sqrt)\nnp.testing.assert_allclose(known_shape, unknown_shape)\n"
+}

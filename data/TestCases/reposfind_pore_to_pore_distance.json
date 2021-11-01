@@ -1,0 +1,9 @@
+{
+    "functionName": "find_pore_to_pore_distance",
+    "className": null,
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_topotools_&_topotools.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Find the distance between all pores on set 1 to each pore in set 2\n\n    Parameters\n    ----------\n    network : OpenPNM Network Object\n        The network object containing the pore coordinates\n\n    pores1 : array_like\n        The pore indices of the first set\n\n    pores2 : array_Like\n        The pore indices of the second set.  It's OK if these indices are\n        partially or completely duplicating ``pores``.\n\n    Returns\n    -------\n    A distance matrix with ``len(pores1)`` rows and ``len(pores2)`` columns.\n    The distance between pore *i* in ``pores1`` and *j* in ``pores2`` is\n    located at *(i, j)* and *(j, i)* in the distance matrix.\n\n    Notes\n    -----\n    This function computes and returns a distance matrix, which is a dense\n    matrix of size Np_1 by Np_2, so can get large.  For distances between\n    larger sets a KD-tree approach would be better, which is available in\n    ``scipy.spatial``.\n\n    \"\"\"\nfrom scipy.spatial.distance import cdist\np1 = np.array(pores1, ndmin=1)\np2 = np.array(pores2, ndmin=1)\ncoords = network['pore.coords']\nreturn cdist(coords[p1], coords[p2])\n"
+}

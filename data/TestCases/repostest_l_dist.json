@@ -1,0 +1,9 @@
+{
+    "functionName": "test_l_dist",
+    "className": "TestCellListSTORM",
+    "fileName": "/Jhsmit_&_ColiCoords/test_&_test_cell.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "nbins = 50\nwith self.assertRaises(IndexError):\n    x, y = self.empty_cell.l_dist(nbins)\nwith self.assertRaises(ValueError):\n    x, y = self.cell.l_dist(nbins, data_name='notexisting')\nwith self.assertRaises(ValueError):\n    x, y = self.cell.l_dist(nbins, method='notexisting')\nstorm_int_sum = np.sum(self.cell.data.data_dict['storm']['intensity'])\nx, y = self.cell.l_dist(nbins, data_name='storm', r_max=20)\nself.assertEqual(np.sum(y), storm_int_sum)\nx, y = self.cell.l_dist(nbins, data_name='storm', method='box', r_max=20)\nself.assertEqual(np.sum(y), storm_int_sum)\nx, y = self.cell.l_dist(nbins, data_name='storm', method='box',\n    storm_weight=True, r_max=20)\nself.assertEqual(np.sum(y), storm_int_sum)\nx, y = self.cell.l_dist(nbins, data_name='fluorescence')\nx, y = self.cell.l_dist(nbins, data_name='fluorescence', method='box')\nx, y = self.cell.l_dist(nbins, method='box')\nx, y = self.cell.l_dist(nbins, method='box', l_mean=0.75 * self.cell.length,\n    norm_x=True)\nx, y = self.cell.l_dist(nbins, method='box', norm_x=True)\nx, y = self.cell.l_dist(nbins, method='box', r_max=np.inf)\nx, y = self.cell.l_dist(nbins, method='box', r_max=1)\nx, y = self.cell.l_dist(nbins, method='box', r_max=0)\nx, y_list = self.cell.l_dist(nbins, data_name='flu_3d')\nself.assertEqual(len(y_list), 20)\n"
+}

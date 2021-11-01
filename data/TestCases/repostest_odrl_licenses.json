@@ -1,0 +1,9 @@
+{
+    "functionName": "test_odrl_licenses",
+    "className": "testLicense",
+    "fileName": "/benjimor_&_CaLi/tests_&_test_license.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test if multiple ODRL licenses are well instanciated.\"\"\"\nodrl = ODRLVocabulary()\nDL1 = RestrictivenessLatticeOfStatus(Graph().parse(data=dl1_rdf, format='ttl'))\nld_licenses_graph = Graph().parse(data=ld_licenses_rdf, format='ttl')\nlicenses = ODRLLicenses(vocabulary=odrl, ls=DL1, rdf_graph=ld_licenses_graph)\nself.assertEqual(len(licenses), 7)\nfor license in licenses:\n    self.assertIsInstance(license, License)\n    self.assertIsInstance(license, ODRLLicense)\n"
+}

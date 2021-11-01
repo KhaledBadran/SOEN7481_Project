@@ -1,0 +1,9 @@
+{
+    "functionName": "test_lineMask",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_Mask.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "X, Y, Z = np.array(np.meshgrid(np.linspace(0, 1, 50), np.linspace(0, 1, 50),\n    np.linspace(0, 1, 50))).reshape(3, -1)\nclass p(object):\n    pass\npoints = p()\nfor name, coord in zip(['X', 'Y', 'Z'], [X, Y, Z]):\n    setattr(points, name, coord)\nline = lineMask(0.5, 1.0, coordinates='X')\nline2 = lineMask(0.5, 1.0)\nline3 = lineMask(-0.001, 0.5, maskInside=False)\nmask = line(points)\nmask2 = line2(X)\nmask3 = line3(X)\nprint(np.sum(mask))\nprint(np.sum(mask2))\nprint(np.sum(mask3))\nassert np.all(mask == mask2)\nassert np.all(mask3 == mask2)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_late_get",
+    "className": "ConfigureTest",
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_ConfigureTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" \"get\" shouldn't be called until the value is *dereferenced* \"\"\"\nc = Configure()\na = {'t': False}\nclass pipe(ConfigValue):\n\n    def get(self):\n        a['t'] = True\n        return 'sign'\nc['seven'] = pipe()\nself.assertFalse(a['t'])\nself.assertEqual(c['seven'], 'sign')\nself.assertTrue(a['t'])\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_stateio_recover",
+    "className": null,
+    "fileName": "/NUAA-AL_&_ALiPy/test_&_test_stateio.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "train_ini, test_ini, L_ini, U_ini = saver.get_workspace(0)\nassert 0 not in L_ini\nassert 1 not in L_ini\nassert 2 not in L_ini\ntrain, test, L, U = saver.get_workspace(2)\nassert 0 in L\nassert 1 in L\nassert 2 not in L\nassert len(L) - len(L_ini) == 2\nassert len(saver) == 3\ntrain, test, L, U = saver.recover_workspace(2)\nassert 0 in L\nassert 1 in L\nassert 2 not in L\nassert len(L) - len(L_ini) == 2\nassert len(saver) == 2\nwith pytest.raises(AssertionError):\n    saver.get_workspace(5)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_adaptive_pooling_size_none",
+    "className": "NNTester",
+    "fileName": "/frgfm_&_PyroNear/test_&_test_nn.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "for numel in (2,):\n    for pool_type in ('Concat',):\n        cls_name = 'Adaptive{}Pool{}d'.format(pool_type, numel)\n        output_size = (2,) * (numel - 1) + (None,)\n        module = nn.__dict__[cls_name](output_size)\n        x = torch.randn((4,) * (numel + 1))\n        output = module(x)\n        self.assertEqual(output.size(), (4,) + (4,) * (numel - 1) + (4,))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_rsp_amplitude",
+    "className": null,
+    "fileName": "/neuropsychology_&_NeuroKit/tests_&_tests_rsp.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "rsp = nk.rsp_simulate(duration=120, sampling_rate=1000, respiratory_rate=15,\n    method='sinusoidal', noise=0)\nrsp_cleaned = nk.rsp_clean(rsp, sampling_rate=1000)\nsignals, info = nk.rsp_peaks(rsp_cleaned)\namplitude = nk.rsp_amplitude(rsp, signals)\nassert amplitude.shape == (rsp.size,)\nassert np.abs(amplitude.mean() - 1) < 0.01\namplitude = nk.rsp_amplitude(rsp, info)\nassert amplitude.shape == (rsp.size,)\nassert np.abs(amplitude.mean() - 1) < 0.01\n"
+}

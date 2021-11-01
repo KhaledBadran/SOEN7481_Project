@@ -1,0 +1,9 @@
+{
+    "functionName": "test_custom_attributes",
+    "className": "TestIO",
+    "fileName": "/Silmathoron_&_NNGT/testing_&_test_io.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that custom attributes are saved and loaded correctly\n        \"\"\"\nnum_nodes = 100\navg_deg = 10\ng = nngt.Graph(nodes=num_nodes)\ng.new_edge_attribute('test_attr', 'int')\nfor i in range(num_nodes):\n    targets = np.random.choice(num_nodes, size=avg_deg, replace=False)\n    elist = np.zeros((len(targets), 2), dtype=int)\n    elist[:, (0)] = i\n    elist[:, (1)] = targets\n    ids = np.random.randint(0, avg_deg * num_nodes, len(targets))\n    ids *= 2 * np.random.randint(0, 2, len(targets)) - 1\n    g.new_edges(elist, attributes={'test_attr': ids}, check_duplicates=\n        False, check_self_loops=False, check_existing=False)\nold_edges = g.edges_array\nfor fmt in ('nn', 'el', 'gml'):\n    g.to_file(current_dir + 'test.' + fmt)\n    h = nngt.Graph.from_file(current_dir + 'test.' + fmt)\n    allclose = np.allclose(g.get_edge_attributes(name='test_attr'), h.\n        get_edge_attributes(edges=old_edges, name='test_attr'))\n    if not allclose:\n        print(\"Results differed for '{}'.\".format(g.name))\n        print(\"using file 'test.{}'.\".format(fmt))\n        print(g.get_edge_attributes(name='test_attr'))\n        print(h.get_edge_attributes(edges=old_edges, name='test_attr'))\n        with open(current_dir + 'test.' + fmt, 'r') as f:\n            for line in f.readlines():\n                print(line.strip())\n    self.assertTrue(allclose)\nunittest.skipIf(nngt.get_config('mpi'), 'Not checking for MPI')"
+}

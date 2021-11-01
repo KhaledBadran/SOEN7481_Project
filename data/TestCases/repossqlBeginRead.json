@@ -1,0 +1,9 @@
+{
+    "functionName": "sqlBeginRead",
+    "className": null,
+    "fileName": "/FaradayRF_&_Faraday-Software/faraday_&_proxy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Starts a read by executing SQL and returning a cursor\n\n    :param conn: Database connection\n    :return: cursor or None if we encountered a problem\n    \"\"\"\nsql = 'SELECT KEYID, PORT, BASE64, EPOCH FROM PROXY'\ncursor = None\ntry:\n    with conn:\n        cursor = conn.cursor()\n        cursor.execute(sql)\nexcept sqlite3.Error as e:\n    logger.error('Sqlite3.Error: ' + str(e))\n    conn.close()\n    return None\nreturn cursor\n"
+}

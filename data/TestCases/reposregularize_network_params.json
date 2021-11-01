@@ -1,0 +1,9 @@
+{
+    "functionName": "regularize_network_params",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_regularization.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Computes a regularization cost by applying a penalty to the parameters\n    of all layers in a network.\n\n    Parameters\n    ----------\n    layer : a :class:`Layer` instance.\n        Parameters of this layer and all layers below it will be penalized.\n    penalty : callable\n    tags: dict\n        Tag specifications which filter the parameters of the layer or layers.\n        By default, only parameters with the `regularizable` tag are included.\n    **kwargs\n        keyword arguments passed to penalty.\n\n    Returns\n    -------\n    Theano scalar\n        a scalar expression for the cost\n    \"\"\"\nreturn apply_penalty(get_all_params(layer, **tags), penalty, **kwargs)\n"
+}

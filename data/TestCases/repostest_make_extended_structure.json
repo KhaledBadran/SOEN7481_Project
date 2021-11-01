@@ -1,0 +1,9 @@
+{
+    "functionName": "test_make_extended_structure",
+    "className": null,
+    "fileName": "/mtien_&_PeptideBuilder/tests_&_test_PeptideBuilder.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Build a peptide containing all 20 amino acids in extended conformation.\n    The structure should be identical to `extended.pdb`\n    \"\"\"\nstructure = PeptideBuilder.make_extended_structure('ACDEFGHIKLMNPQRSTVWY')\nassert compare_to_reference(structure, 'extended.pdb')\nstructure = PeptideBuilder.make_extended_structure('ACDEFGHIKLMNPQRSTVW')\nassert not compare_to_reference(structure, 'extended.pdb')\nstructure = PeptideBuilder.make_extended_structure('ACDEFGHIKLMNPQRSTVWW')\nassert not compare_to_reference(structure, 'extended.pdb')\n"
+}

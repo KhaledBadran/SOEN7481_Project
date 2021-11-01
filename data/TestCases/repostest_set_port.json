@@ -1,0 +1,9 @@
+{
+    "functionName": "test_set_port",
+    "className": "TestKmipServerConfig",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_config.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the port configuration property can be set correctly.\n        \"\"\"\nc = config.KmipServerConfig()\nc._logger = mock.MagicMock()\nc._set_port(5696)\nself.assertIn('port', c.settings.keys())\nself.assertEqual(5696, c.settings.get('port'))\nargs = 'invalid',\nregex = 'The port value must be an integer in the range 0 - 65535.'\nself.assertRaisesRegex(exceptions.ConfigurationError, regex, c._set_port, *args\n    )\nself.assertNotEqual('invalid', c.settings.get('port'))\nargs = 65536,\nregex = 'The port value must be an integer in the range 0 - 65535.'\nself.assertRaisesRegex(exceptions.ConfigurationError, regex, c._set_port, *args\n    )\nself.assertNotEqual(65536, c.settings.get('port'))\n"
+}

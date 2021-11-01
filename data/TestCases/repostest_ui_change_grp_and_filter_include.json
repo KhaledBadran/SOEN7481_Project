@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ui_change_grp_and_filter_include",
+    "className": "TestUI",
+    "fileName": "/CCampJr_&_LazyHDF5/lazy5_&_tests_&_test_ui.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Load test file, change to Group1, filter for _1 \"\"\"\nself.filename = hdf_dataset\ndialog = HdfLoad()\n_ = dialog.fileOpen(self.filename)\ndialog.ui.comboBoxGroupSelect.setCurrentIndex(1)\nlist_dsets = [dialog.ui.listDataSet.item(num).text() for num in range(\n    dialog.ui.listDataSet.count())]\nassert dialog.ui.comboBoxGroupSelect.currentText() == 'Group1'\nassert list_dsets == ['ingroup1_1', 'ingroup1_2']\ndialog.ui.filterIncludeString.setText('_1')\nQTest.mouseClick(dialog.ui.pushButtonFilter, Qt.LeftButton)\nlist_dsets = [dialog.ui.listDataSet.item(num).text() for num in range(\n    dialog.ui.listDataSet.count())]\nassert list_dsets == ['ingroup1_1']\n"
+}

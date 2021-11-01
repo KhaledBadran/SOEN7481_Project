@@ -1,0 +1,9 @@
+{
+    "functionName": "test_invalid_unique_identifiers",
+    "className": "TestDeriveKeyRequestPayload",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_derive_key.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a TypeError is raised when invalid values are used to set\n        the unique identifiers of a DeriveKey request payload.\n        \"\"\"\npayload = payloads.DeriveKeyRequestPayload()\nargs = payload, 'unique_identifiers', 'invalid'\nself.assertRaisesRegex(TypeError,\n    'Unique identifiers must be a list of strings.', setattr, *args)\nargs = payload, 'unique_identifiers', [0]\nself.assertRaisesRegex(TypeError,\n    'Unique identifiers must be a list of strings.', setattr, *args)\nargs = payload, 'unique_identifiers', ['valid', 'valid', 0]\nself.assertRaisesRegex(TypeError,\n    'Unique identifiers must be a list of strings.', setattr, *args)\n"
+}

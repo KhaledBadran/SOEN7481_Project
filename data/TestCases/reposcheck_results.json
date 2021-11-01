@@ -1,0 +1,9 @@
+{
+    "functionName": "check_results",
+    "className": null,
+    "fileName": "/apmoore1_&_Bella/tests_&_test_parsers.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n            Given the expected results and the results from the function beign\n            tested it will test that they are both equal. It will return nothing\n            but will test if they are correct else it fails the tests.\n\n            :param expected_results: A list of dictionaries containing expected\n            values\n            :param test_results: A list of dictionaries containing results from\n            the function that is being tested\n            :type expected_results: list\n            :type test_results: list\n            :returns: Nothing but checks if the results are to be expected\n            :rtype: None\n            \"\"\"\nfor index, expected_result in enumerate(expected_results):\n    test_result = test_results[index]\n    for key, expected_value in expected_result.items():\n        test_value = test_result[key]\n        self.assertIsInstance(expected_value, type(test_value), msg=\n            'The expected value : {} is not of the same type as the tested value : {}'\n            .format(type(expected_value), type(test_value)))\n        if key == 'spans':\n            test_value = sorted(test_value, key=lambda x: x[0])\n            expected_value = sorted(expected_value, key=lambda x: x[0])\n        self.assertEqual(expected_value, test_value, msg=\n            'Expected {} returned {}'.format(expected_value, test_value))\n"
+}

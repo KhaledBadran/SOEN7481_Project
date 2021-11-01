@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fileargs_pagetag",
+    "className": "CacheTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_cache.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "t = Template(\n    \"\"\"\n        <%%page cache_dir='%s' cache_type='dbm'/>\n        <%%!\n            callcount = [0]\n        %%>\n        <%%def name=\"foo()\" cached=\"True\">\n            this is foo\n            <%%\n            callcount[0] += 1\n            %%>\n        </%%def>\n\n        ${foo()}\n        ${foo()}\n        ${foo()}\n        callcount: ${callcount}\n\"\"\"\n     % module_base)\nm = self._install_mock_cache(t)\nassert result_lines(t.render()) == ['this is foo', 'this is foo',\n    'this is foo', 'callcount: [1]']\neq_(m.kwargs, {'dir': module_base, 'type': 'dbm'})\n"
+}

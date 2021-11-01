@@ -1,0 +1,9 @@
+{
+    "functionName": "test_declare",
+    "className": null,
+    "fileName": "/Carbyne-Solutions_&_logrdis/tests_&_test_db.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Declare and test config file entries.\"\"\"\ncfg = test_yaml()\nsql = db.Adapter(cfg['engine'])\nfor process, directives in cfg['process'].items():\n    if not 'pk' in directives:\n        directives['pk'] = '_id'\n    if directives['action'] == 'store':\n        sql.declare(directives['tablename'], directives['pk'], directives[\n            'schema'])\n        assert directives['tablename'] in sql.tables\n        for key in sql.definitions[directives['tablename']].keys():\n            assert key in sql.definitions[directives['tablename']]\nassert len(sql.tables) == 1\nos.remove('test.sql')\n"
+}

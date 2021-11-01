@@ -1,0 +1,9 @@
+{
+    "functionName": "test_stores",
+    "className": null,
+    "fileName": "/Thor77_&_MarkovPy/markov_&_test_stores.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "assert store.relation_count('test') == 0\nstore.insert('test', 'test2')\nassert len(store) == 1\nassert store.relation_count('test') == 1\nassert 'test' in store\nassert store.next_words('test') == [('test2', 1)]\nstore.insert('test', 'test2')\nassert store.next_words('test') == [('test2', 2)]\nstore.insert('test', 'test3')\nassert sorted(store.next_words('test')) == sorted([('test2', 2), ('test3', 1)])\npytest.mark.parametrize('store', [clear_store(Pickle('test.pickle')),\n    clear_store(Redis(prefix='markovpytest'))])"
+}

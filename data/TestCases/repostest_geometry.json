@@ -1,0 +1,9 @@
+{
+    "functionName": "test_geometry",
+    "className": "TestCellList",
+    "fileName": "/Jhsmit_&_ColiCoords/test_&_test_cell.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "props = ['radius', 'length', 'circumference', 'area', 'surface', 'volume']\ncell_list_copy = self.cell_list.copy()\nfor prop in props:\n    m1 = getattr(self.cell_list, prop)\n    m2 = getattr(cell_list_copy, prop)\n    self.assertArrayEqual(m1, m2)\nshape = self.cell_obj.data.shape\ncell_pad = pad_cell(self.cell_obj, (shape[0] + 5, shape[1] + 10))\nfor prop in props:\n    m1 = getattr(self.cell_obj, prop)\n    m2 = getattr(cell_pad, prop)\n    self.assertAlmostEqual(m1, m2, 6)\n"
+}

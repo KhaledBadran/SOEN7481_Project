@@ -1,0 +1,9 @@
+{
+    "functionName": "test_aguc2_axis_am_i_still",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_newport_&_test_agilis.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Check if a given axis is still or not.\n    \"\"\"\nwith expected_protocol(ik.newport.AGUC2, ['MR', '1 TS', '2 TS', '2 TS',\n    '2 TS'], [], sep='\\r\\n') as agl:\n    with pytest.raises(IOError):\n        agl.axis['X'].am_i_still(max_retries=1)\n    with pytest.raises(IOError):\n        agl.axis['Y'].am_i_still(max_retries=3)\n"
+}

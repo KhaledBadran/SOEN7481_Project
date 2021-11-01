@@ -1,0 +1,9 @@
+{
+    "functionName": "test_remove_lock_file",
+    "className": null,
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_FileLockTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Unlinking the lock file early is not allowed generally and probably indicates a logic\n    error, so we give an exception in that case\n    \"\"\"\nwith pytest.raises(OSError):\n    with TemporaryDirectory() as td, lock_file(p(td, 'lock')):\n        unlink(p(td, 'lock'))\npytest.mark.inttest"
+}

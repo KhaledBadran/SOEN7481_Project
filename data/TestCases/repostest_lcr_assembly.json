@@ -1,0 +1,9 @@
+{
+    "functionName": "test_lcr_assembly",
+    "className": null,
+    "fileName": "/Edinburgh-Genome-Foundry_&_DnaCauldron/tests_&_test_lcr_assembly_&_test_lcr_assembly.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "repo = dc.SequenceRepository()\nrepo.import_records(files=[oligos_fasta, parts_fasta])\nplan = dc.AssemblyPlan.from_spreadsheet(path=assembly_plan_path)\nsimulation = plan.simulate(repo)\nstats = simulation.compute_stats()\nassert stats['valid_assemblies'] == 1\nassert stats['errored_assemblies'] == 1\nsimulation.write_report('@memory')\n"
+}

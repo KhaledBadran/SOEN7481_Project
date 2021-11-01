@@ -1,0 +1,9 @@
+{
+    "functionName": "with_defaults",
+    "className": null,
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_CLITest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Sets the default values for options\n    \"\"\"\nfrom functools import wraps\n@wraps(func)\ndef wrapper(argument_namespace_callback, argument_callback, *args, **kwargs):\n    collect_argument_defaults(argument_namespace_callback, argument_callback)\n    kwargs['argument_namespace_callback'] = argument_namespace_callback\n    kwargs['argument_callback'] = argument_callback\n    return func(*args, **kwargs)\nreturn wrapper\n"
+}

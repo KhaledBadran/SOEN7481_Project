@@ -1,0 +1,9 @@
+{
+    "functionName": "test_tabs_used_for_indentation_fails_for_different_types",
+    "className": null,
+    "fileName": "/devmanorg_&_fiasko_bro/tests_&_test_general_validators_&_test_are_tabs_used_for_indentation.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "directories_to_skip = defaults.VALIDATION_PARAMETERS['directories_to_skip']\nextensions = {'py', 'js', 'css', 'html'}\nfor extension in extensions:\n    expected_output = 'tabs.{}'.format(extension)\n    files_to_ignore = extensions - {extension}\n    output = validators.tabs_used_for_indentation(project_folder=test_repo,\n        directories_to_skip=directories_to_skip.union(files_to_ignore))\n    assert output == expected_output\n"
+}

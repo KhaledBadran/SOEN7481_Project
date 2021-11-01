@@ -1,0 +1,9 @@
+{
+    "functionName": "_run_configure_and_build",
+    "className": "TestBuildCommand",
+    "fileName": "/cournape_&_Bento/bento_&_commands_&_tests_&_test_install.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "top_node = self.top_node\ncreate_fake_package_from_bento_info(top_node, bento_info)\ncontext = GlobalContext(None)\noptions = PackageOptions.from_string(bento_info)\ncontext.register_package_options(options)\ncmd_argv = ['--prefix=%s' % install_prefix, '--exec-prefix=%s' % install_prefix\n    ]\nconf, configure = prepare_configure(top_node, bento_info,\n    ConfigureYakuContext, cmd_argv)\ncontext.register_command('configure', configure)\noptions_context = OptionsContext.from_command(configure)\nif not context.is_options_context_registered('configure'):\n    context.register_options_context('configure', options_context)\ncontext.save_command_argv('configure', cmd_argv)\nrun_command_in_context(conf, configure)\nbld, build = prepare_build(top_node, bento_info)\nrun_command_in_context(bld, build)\nreturn context, conf, configure, bld, build\n"
+}

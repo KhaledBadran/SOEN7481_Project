@@ -1,0 +1,9 @@
+{
+    "functionName": "test_feature_union_should_apply_to_self_and_sub_steps",
+    "className": null,
+    "fileName": "/Neuraxio_&_Neuraxle/testing_&_test_union.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "p = Pipeline([FeatureUnion([Identity(), Identity()], joiner=NumpyTranspose())])\np.apply(lambda step: step._set_hyperparams(HyperparameterSamples({'applied':\n    True})))\nassert p.hyperparams['applied']\nassert p['FeatureUnion'].hyperparams['applied']\nassert p['FeatureUnion'][0].hyperparams['applied']\nassert p['FeatureUnion'][1].hyperparams['applied']\nassert p['FeatureUnion'][2].hyperparams['applied']\n"
+}

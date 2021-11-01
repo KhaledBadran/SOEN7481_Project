@@ -1,0 +1,9 @@
+{
+    "functionName": "test_uk_get_variogram_points",
+    "className": null,
+    "fileName": "/bsmurphy_&_PyKrige/tests_&_test_core.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "_variogram_parameters = [500.0, 3000.0, 0.0]\ndata, _, (uk_test_answer, gridx, gridy) = validation_ref\nuk = UniversalKriging(data[:, (0)], data[:, (1)], data[:, (2)],\n    variogram_model='exponential', variogram_parameters=\n    _variogram_parameters, drift_terms=['regional_linear'])\nlags, calculated_variogram = uk.get_variogram_points()\nexpected_variogram = variogram_models.exponential_variogram_model(\n    _variogram_parameters, lags)\nassert_allclose(calculated_variogram, expected_variogram)\n"
+}

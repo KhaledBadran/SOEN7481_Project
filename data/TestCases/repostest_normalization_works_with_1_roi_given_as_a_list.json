@@ -1,0 +1,9 @@
+{
+    "functionName": "test_normalization_works_with_1_roi_given_as_a_list",
+    "className": "TestNormalization",
+    "fileName": "/ornlneutronimaging_&_NeuNorm/tests_&_NeuNorm_&_normalizing_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Make sure the normalization works when 2 ROI are used\"\"\"\nsample = self.data_path + '/fits/test_roi/sample.fits'\nob = self.data_path + '/fits/test_roi/ob.fits'\n_roi = ROI(x0=0, y0=0, x1=1, y1=2)\nlist_roi = [_roi]\no_norm = Normalization()\no_norm.load(file=sample, auto_gamma_filter=False)\no_norm.load(file=ob, data_type='ob', auto_gamma_filter=False)\no_norm.normalization(roi=list_roi)\nnormalized_data = o_norm.get_normalized_data()[0]\nexpected_normalized_data = np.ones([5, 4])\nexpected_normalized_data[0:2, 2:4] = 0.5\nexpected_normalized_data[3:5, 0:2] = 1.11111111\nheight, width = np.shape(expected_normalized_data)\nfor _h in np.arange(height):\n    for _w in np.arange(width):\n        assert expected_normalized_data[_h, _w] == pytest.approx(\n            normalized_data[_h, _w], 1e-05)\n"
+}

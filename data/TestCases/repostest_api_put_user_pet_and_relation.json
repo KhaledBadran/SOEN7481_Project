@@ -1,0 +1,9 @@
+{
+    "functionName": "test_api_put_user_pet_and_relation",
+    "className": null,
+    "fileName": "/mostafa_&_GRest/tests_&_test_extended_app.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "global uid\nglobal pet_id\nres = client.put('/users/' + uid + '/pets/' + pet_id)\nassert res.status_code == 200\nassert res.json == {'result': 'OK'}\nres = client.put('/users/' + uid, data=json.dumps({'first_name': 'Alex',\n    'last_name': 'Douglas', 'phone_number': '123456'}), headers={\n    'Content-Type': 'application/json'})\nassert res.status_code == 200\nif 'uid' in res.json:\n    uid = res.json['uid']\nassert 'uid' in res.json\nres = client.put('/users/' + uid, data=json.dumps({'first_name': 123,\n    'last_name': 'Douglas', 'phone_number': '123456'}), headers={\n    'Content-Type': 'application/json'})\nassert res.status_code == 422\nassert 'errors' in res.json\nres = client.put('/pets/' + pet_id, data=json.dumps({'name': 'Puppy'}),\n    headers={'Content-Type': 'application/json'})\nassert res.status_code == 200\nif 'pet_id' in res.json:\n    pet_id = res.json['pet_id']\nassert 'pet_id' in res.json\nres = client.put('/users/' + uid + '/pets/' + pet_id)\nassert res.status_code == 200\nassert res.json == {'result': 'OK'}\nres = client.put('/users/' + uid + '/cars/123123')\nassert res.status_code == 404\nassert 'errors' in res.json\n"
+}

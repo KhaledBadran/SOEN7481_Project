@@ -1,0 +1,9 @@
+{
+    "functionName": "test_imp",
+    "className": null,
+    "fileName": "/seung-lab_&_PyChunkedGraph/pychunkedgraph_&_backend_&_cutting_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "edges, weights = ex_graph()\nlogger = logging.getLogger('%d' % np.random.randint(0, 100000000))\nlogger.setLevel(logging.DEBUG)\nsh = logging.StreamHandler(sys.stdout)\nsh.setLevel(logging.DEBUG)\nlogger.addHandler(sh)\nsources = np.unique(edges)[:10]\nsinks = np.unique(edges)[-10:]\ntime_start = time.time()\nout_gt = cutting.mincut_graph_tool(edges, weights, sources, sinks, logger=\n    logger)\ntime_gt = time.time() - time_start\nprint('----------------')\ntime_start = time.time()\nout_nx = cutting.mincut_nx(edges, weights, sources, sinks, logger=logger)\ntime_nx = time.time() - time_start\nprint('Time networkx: %.3fs' % time_nx)\nprint('Time graph_tool: %.3fs' % time_gt)\nreturn np.array_equal(np.unique(out_nx, axis=0), np.unique(out_gt, axis=0))\n"
+}

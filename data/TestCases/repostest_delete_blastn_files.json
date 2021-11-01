@@ -1,0 +1,9 @@
+{
+    "functionName": "test_delete_blastn_files",
+    "className": null,
+    "fileName": "/BFSSI-Bioinformatics-Lab_&_EnteroTyper/EnteroTyper_&_tests_&_test_typer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "indir = Path(tempfile.mkdtemp())\nblastn_file = tempfile.NamedTemporaryFile(mode='w+', dir=indir, encoding=\n    'utf-8', suffix='.BLASTn')\nblastn_file.write('tmp')\nblastn_file.flush()\nassert len(list(indir.glob('*.BLASTn'))) != 0\ndelete_blastn_files(indir=indir)\nassert len(list(indir.glob('*.BLASTn'))) == 0\n"
+}

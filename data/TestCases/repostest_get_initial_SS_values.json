@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_initial_SS_values",
+    "className": null,
+    "fileName": "/open-source-economics_&_OG-USA/ogusa_&_tests_&_test_TPI.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "p = Specifications(baseline=baseline, test=False, client=dask_client,\n    num_workers=NUM_WORKERS)\np.update_specifications(param_updates)\np.baseline_dir = os.path.join(CUR_PATH, 'test_io_data', 'OUTPUT')\np.output_base = os.path.join(CUR_PATH, 'test_io_data', 'OUTPUT')\ntest_tuple = TPI.get_initial_SS_values(p)\ntest_initial_values, test_ss_vars, test_theta, test_baseline_values = (\n    test_tuple)\nexpected_tuple = utils.safe_read_pickle(os.path.join(CUR_PATH,\n    'test_io_data', filename))\nexp_initial_values, exp_ss_vars, exp_theta, exp_baseline_values = (\n    expected_tuple)\nfor i, v in enumerate(exp_initial_values):\n    assert np.allclose(test_initial_values[i], v, equal_nan=True)\nif p.baseline_spending:\n    for i, v in enumerate(exp_baseline_values):\n        assert np.allclose(test_baseline_values[i], v, equal_nan=True)\nassert np.allclose(test_theta, exp_theta)\nfor k, v in exp_ss_vars.items():\n    assert np.allclose(test_ss_vars[k], v, equal_nan=True)\npytest.mark.parametrize('baseline,param_updates,filename', [(True,\n    param_updates1, filename1), (False, param_updates2, filename2), (False,\n    param_updates3, filename3)], ids=['Baseline', 'Reform',\n    'Reform, baseline_spending'])"
+}

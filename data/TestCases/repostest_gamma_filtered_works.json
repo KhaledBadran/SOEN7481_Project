@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gamma_filtered_works",
+    "className": "TestGammaFiltering",
+    "fileName": "/ornlneutronimaging_&_NeuNorm/tests_&_NeuNorm_&_loading_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"assert gamma filtering works\"\"\"\npath = self.data_path + '/tif/sample_with_gamma/'\no_norm = Normalization()\no_norm.load(folder=path, data_type='sample', manual_gamma_filter=True,\n    auto_gamma_filter=False)\n_expected_sample = np.ones((5, 5))\n_expected_sample[0, 0] = 0.375\n_expected_sample[:, (2)] = 2\n_expected_sample[:, (3)] = 3\n_expected_sample[:, (4)] = 4\n_returned_sample = o_norm.data['sample']['data']\nself.assertTrue((_expected_sample == _returned_sample).all())\no_norm = Normalization()\no_norm.load(folder=path, data_type='sample', manual_gamma_filter=False,\n    auto_gamma_filter=False)\n_expected_sample = np.ones((5, 5))\n_expected_sample[0, 0] = 1000\n_expected_sample[:, (2)] = 2\n_expected_sample[:, (3)] = 3\n_expected_sample[:, (4)] = 4\n_returned_sample = o_norm.data['sample']['data']\nself.assertTrue((_expected_sample == _returned_sample).all())\n"
+}

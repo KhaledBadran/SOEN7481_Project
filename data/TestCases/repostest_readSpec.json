@@ -1,0 +1,9 @@
+{
+    "functionName": "test_readSpec",
+    "className": null,
+    "fileName": "/VincentVandalon_&_PySpek/PySpek_&_tests_&_test_spectralMode.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Test the correct loading of the image \"\"\"\nspec = PySpek('1412-0401898.SPE')\nx, y = spec.readSpec()\nassert len(x) == len(y)\nassert len(x) == 335\nxUncorrected, yUncorrected = spec.readSpec(perSecond=False)\nassert y[-1] * spec.aqTime == yUncorrected[-1]\nassert yUncorrected[-1] == 135\nassert abs(x[-1] - 664.47490223) < 1e-05\nwith pytest.raises(ErroneousSpectrumType):\n    specImage = PySpek('1310-0304299.SPE')\n    specImage.readSpec()\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_TimestampSimulation",
+    "className": null,
+    "fileName": "/OpenSMFS_&_PyBroMo/pybromo_&_tests_&_test_diffusion.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "for psf in (pbm.GaussianPSF(), pbm.NumericPSF()):\n    hash_ = create_diffusion_sim(psf)\n    S = pbm.ParticlesSimulation.from_datafile(hash_, mode='a')\n    params = dict(em_rates=(400000.0,), E_values=(0.75,), num_particles=(1,\n        ), bg_rate_d=1400, bg_rate_a=800)\n    mix_sim = pbm.TimestampSimulation(S, **params)\n    mix_sim.summarize()\n    rs = np.random.RandomState(_SEED)\n    mix_sim.run(rs=rs, overwrite=True)\n    mix_sim.save_photon_hdf5()\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "_test_process_query_batch_item",
+    "className": "TestKMIPClient",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_test_kmip_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "payload = payloads.QueryResponsePayload(operations, object_types,\n    vendor_identification, server_information, application_namespaces,\n    extension_information)\nbatch_item = ResponseBatchItem(operation=Operation(OperationEnum.QUERY),\n    response_payload=payload)\nresult = self.client._process_query_batch_item(batch_item)\nbase = 'expected {0}, observed {1}'\nmsg = base.format(QueryResult, result)\nself.assertIsInstance(result, QueryResult, msg)\nif operations is None:\n    operations = list()\nif object_types is None:\n    object_types = list()\nif application_namespaces is None:\n    application_namespaces = list()\nif extension_information is None:\n    extension_information = list()\nself._test_equality(operations, result.operations)\nself._test_equality(object_types, result.object_types)\nself._test_equality(vendor_identification, result.vendor_identification)\nself._test_equality(server_information, result.server_information)\nself._test_equality(application_namespaces, result.application_namespaces)\nself._test_equality(extension_information, result.extension_information)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pass_context",
+    "className": "CacheTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_cache.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "t = Template(\"\"\"\n            <%page cached=\"True\"/>\n        \"\"\")\nm = self._install_mock_cache(t)\nt.render()\nassert 'context' not in m.kwargs\nm.pass_context = True\nt.render(x='bar')\nassert 'context' in m.kwargs\nassert m.kwargs['context'].get('x') == 'bar'\n"
+}

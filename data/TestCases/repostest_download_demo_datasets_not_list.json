@@ -1,0 +1,9 @@
+{
+    "functionName": "test_download_demo_datasets_not_list",
+    "className": null,
+    "fileName": "/HDI-project_&_ATM/tests_&_test_data.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test downloading only one demo dataset.\"\"\"\nmock_exists.return_value = False\nmock_getcwd.return_value = 'test_dir'\ndatasets = 'test_dataset'\nresult = data.download_demo(datasets)\nexpected_os_join_calls = [call('test_dir', 'demos'), call(mock_join.\n    return_value, 'test_dataset')]\nmock_boto3.client.assert_called_once_with('s3', config=mock_config.return_value\n    )\nmock_config.assert_called_once_with(signature_version=data.UNSIGNED)\nmock_mkdirs.assert_called_once_with(mock_join.return_value)\nassert mock_join.call_args_list == expected_os_join_calls\nassert result == mock_join.return_value\npatch('atm.data.os.getcwd')patch('atm.data.os.path.join')patch('atm.data.os.path.exists')patch('atm.data.os.makedirs')patch('atm.data.Config')patch('atm.data.boto3')"
+}

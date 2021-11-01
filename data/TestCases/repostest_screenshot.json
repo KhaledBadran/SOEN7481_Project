@@ -1,0 +1,9 @@
+{
+    "functionName": "test_screenshot",
+    "className": "TestScreen",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_screen.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "gen_file(os.path.join(self.tex_wig, 'tex_1_f.wig'), self.example.wig_f)\ngen_file(os.path.join(self.tex_wig, 'notex_1_f.wig'), self.example.wig_f)\ngen_file(os.path.join(self.frag_wig, 'frag_f.wig'), self.example.wig_f)\ngen_file(os.path.join(self.tex_wig, 'tex_1_r.wig'), self.example.wig_r)\ngen_file(os.path.join(self.tex_wig, 'notex_1_r.wig'), self.example.wig_r)\ngen_file(os.path.join(self.frag_wig, 'frag_r.wig'), self.example.wig_r)\nargs = self.mock_args.mock()\nargs.fasta = self.fasta\nargs.main_gff = os.path.join(self.test_folder, 'main.gff')\ngen_file(args.main_gff, self.example.main_gff)\nside_gff = os.path.join(self.test_folder, 'side.gff')\nargs.side_gffs = [side_gff]\ngen_file(side_gff, self.example.side_gff)\nargs.frag_wigs = self.frag_wig\nargs.tex_wigs = self.tex_wig\nargs.height = 1000\nargs.tlibs = ['test_folder/tex/tex_1_f.wig:tex:1:a:+',\n    'test_folder/tex/tex_1_r.wig:tex:1:a:-',\n    'test_folder/tex/notex_1_f.wig:notex:1:a:+',\n    'test_folder/tex/notex_1_r.wig:notex:1:a:-']\nargs.flibs = ['test_folder/frag/frag_f.wig:frag:1:a:+',\n    'test_folder/frag/frag_r.wig:frag:1:a:-']\nargs.present = 'expand'\nargs.output_folder = self.output\nlog = open(os.path.join(self.test_folder, 'test.log'), 'w')\nself.screen.screenshot(args, log)\nself.assertTrue(os.path.exists(os.path.join(self.output, 'aaa', 'forward')))\nself.assertTrue(os.path.exists(os.path.join(self.output, 'aaa', 'reverse')))\ndatas = import_data(os.path.join(self.output, 'aaa', 'forward.txt'))\ndatas = import_data(os.path.join(self.output, 'aaa', 'reverse.txt'))\nself.assertEqual('\\n'.join(datas), self.example.out_r)\n"
+}

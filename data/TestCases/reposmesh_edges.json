@@ -1,0 +1,9 @@
+{
+    "functionName": "mesh_edges",
+    "className": null,
+    "fileName": "/nipy_&_PySurfer/surfer_&_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Returns sparse matrix with edges as an adjacency matrix\n\n    Parameters\n    ----------\n    faces : array of shape [n_triangles x 3]\n        The mesh faces\n\n    Returns\n    -------\n    edges : sparse matrix\n        The adjacency matrix\n    \"\"\"\nnpoints = np.max(faces) + 1\nnfaces = len(faces)\na, b, c = faces.T\nedges = sparse.coo_matrix((np.ones(nfaces), (a, b)), shape=(npoints, npoints))\nedges = edges + sparse.coo_matrix((np.ones(nfaces), (b, c)), shape=(npoints,\n    npoints))\nedges = edges + sparse.coo_matrix((np.ones(nfaces), (c, a)), shape=(npoints,\n    npoints))\nedges = edges + edges.T\nedges = edges.tocoo()\nreturn edges\n"
+}

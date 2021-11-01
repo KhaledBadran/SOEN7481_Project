@@ -1,0 +1,9 @@
+{
+    "functionName": "test_single_inclusive_and_exclusive",
+    "className": null,
+    "fileName": "/bytesandbrains_&_ProcessOptimizer/ProcessOptimizer_&_tests_&_test_constraints.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "Single(0, 1.0, 'real')\nSingle(0, -1, 'integer')\nSingle(0, 'a', 'categorical')\nInclusive(0, (1.0, 2.0), 'real')\nInclusive(0, [1.0, 2.0], 'real')\nInclusive(0, (-1, 2), 'integer')\nInclusive(0, ('a', 'b', 'c', 1, 0.1), 'categorical')\nExclusive(0, (1.0, 2.0), 'real')\nExclusive(0, [1.0, 2.0], 'real')\nExclusive(0, (-1, 1), 'integer')\nExclusive(0, ('a', 'b', 'c', 1, 0.1), 'categorical')\nwith raises(TypeError):\n    Inclusive(0, 'a', 'real')\nwith raises(TypeError):\n    Exclusive(0, dict(), 'real')\nwith raises(ValueError):\n    Inclusive(0, [0], 'integer')\nwith raises(ValueError):\n    Inclusive(0, (0, 1, 2), 'integer')\nwith raises(TypeError):\n    Single(0, 1, 'real')\nwith raises(TypeError):\n    Single(0, 1.0, 'integer')\nwith raises(TypeError):\n    Inclusive(0, (1, 2.0), 'real')\nwith raises(TypeError):\n    Inclusive(0, (1.0, 2), 'integer')\nwith raises(TypeError):\n    Single('a', 1.0, 'real')\nwith raises(TypeError):\n    Inclusive(0.1, (1.0, 2.0), 'real')\nwith raises(TypeError):\n    Exclusive('b', (1.0, 2.0), 'real')\nwith raises(ValueError):\n    Single(-1, 1.0, 'real')\nwith raises(ValueError):\n    Inclusive(-1, (1.0, 2.0), 'real')\nwith raises(ValueError):\n    Exclusive(-1, (1.0, 2.0), 'real')\nwith raises(ValueError):\n    Single('a', 1.0, 'not a proper value')\npytest.mark.fast_test"
+}

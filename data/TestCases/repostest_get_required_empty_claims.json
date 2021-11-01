@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_required_empty_claims",
+    "className": "EasyJWTTest",
+    "fileName": "/BMeu_&_EasyJWT/tests_&_easyjwt_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n            Test getting the claims that are required and empty.\n\n            Expected Result: Only the names of claims that are not optional, but have no value are returned.\n        \"\"\"\neasyjwt = EasyJWT(self.key)\nself.assertIsNone(easyjwt.not_before_date)\nself.assertTrue(easyjwt._is_optional_claim('nbf'))\neasyjwt.expiration_date = self.expiration_date\nself.assertTrue(easyjwt._is_optional_claim('exp'))\neasyjwt.required = True\nself.assertTrue(easyjwt._is_claim('required'))\nrequired_empty_claim = 'required_empty'\neasyjwt.required_empty = None\nself.assertTrue(easyjwt._is_claim(required_empty_claim))\nself.assertSetEqual({required_empty_claim}, easyjwt.\n    _get_required_empty_claims())\n"
+}

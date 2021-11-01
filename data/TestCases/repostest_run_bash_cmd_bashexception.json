@@ -1,0 +1,9 @@
+{
+    "functionName": "test_run_bash_cmd_bashexception",
+    "className": "TestRunBashCmd",
+    "fileName": "/DusanMadar_&_PySyncDroid/tests_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test 'run_bash_cmd' raises a BashException when trying to execute a\n        command in a non-standard way (with missing argument in this case).\n        \"\"\"\nlsub_msg = 'lsusb: option requires an argument -- \"d\"'\nself.mock_popen.return_value = self._mock_communicate(('', lsub_msg))\nwith self.assertRaises(BashException) as exc:\n    run_bash_cmd(['lsusb', '-d'])\nerr_msg = 'Command \"lsusb -d\" failed: {}'.format(lsub_msg)\nself.assertEqual(str(exc.exception), err_msg)\n"
+}

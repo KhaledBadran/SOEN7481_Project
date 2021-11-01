@@ -1,0 +1,9 @@
+{
+    "functionName": "test_110",
+    "className": "MyTest",
+    "fileName": "/andrewferlitsch_&_Gap/tests_&_image_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Images - augment - valid tuple (min, max, n) - minibatch \"\"\"\nimages = Images(['files/0_100.jpg', 'files/1_100.jpg', 'files/2_100.jpg',\n    'files/0_100g.jpg', 'files/3_100.jpg', 'files/1_100.jpg'], [1, 2, 3, 4,\n    5, 6], name='foobar')\nimages.split = 0.5\nimages.minibatch = 2\nimages.augment = -45, 45, 2\ng = images.minibatch\nx = 0\nfor _ in g:\n    x += 1\nself.assertEquals(x, 6)\ng = images.minibatch\nx = 0\nfor _ in g:\n    x += 1\nself.assertEquals(x, 3)\ng = images.minibatch\nx = 0\nfor _ in g:\n    x += 1\nself.assertEquals(x, 0)\nos.remove('foobar.h5')\n"
+}

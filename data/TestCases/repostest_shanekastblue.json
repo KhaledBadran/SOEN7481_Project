@@ -1,0 +1,9 @@
+{
+    "functionName": "test_shanekastblue",
+    "className": null,
+    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_spectrographs.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "s = spectrographs.shane_kast.ShaneKastBlueSpectrograph()\nexample_file = os.path.join(resource_filename('pypeit', 'tests'), 'files',\n    'b1.fits.gz')\nassert os.path.isfile(example_file\n    ), 'Could not find example file for Shane Kast blue read.'\ndet = 1\n_, data, hdu, exptime, rawdatasec_img, oscansec_img = s.get_rawimage(\n    example_file, det)\nbpm = s.bpm(example_file, det)\nassert data.shape == (350, 2112)\nassert bpm.shape == (2048, 350)\n"
+}

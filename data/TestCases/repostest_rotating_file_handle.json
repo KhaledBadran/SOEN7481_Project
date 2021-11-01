@@ -1,0 +1,9 @@
+{
+    "functionName": "test_rotating_file_handle",
+    "className": null,
+    "fileName": "/EVEprosper_&_ProsperCommon/tests_&_test_prosper_logging.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Exercise TimedRotatingFileHandler to make sure logs are generating as expected\n\n    Todo:\n        * Validate before_capture/after_capture testfixtures.LogCapture objects\n\n    \"\"\"\ntest_logname = 'timedrotator'\nlog_builder = prosper_logging.ProsperLogger(test_logname, LOG_PATH,\n    config_obj=config)\ntest_logger = log_builder.get_logger()\ntest_handles = log_builder.log_handlers\ntimed_handle = None\nfor handle in test_handles:\n    if isinstance(handle, logging.handlers.TimedRotatingFileHandler):\n        timed_handle = handle\n        break\nassert not timed_handle is None, 'No TimedRotatingFileHandler found in logging object'\nbefore_capture = helper_log_messages(test_logger)\ntimed_handle.doRollover()\nafter_capture = helper_log_messages(test_logger)\nfile_list = listdir(LOG_PATH)\nsimple_file_list = []\nfor logfile in file_list:\n    if test_logname in logfile:\n        simple_file_list.append(logfile)\ntoday = datetime.today().strftime('%Y-%m-%d')\nfind_count = 0\nexpected_vanilla_logname = str(test_logname + '.log')\nassert expected_vanilla_logname in simple_file_list, 'Unable to find basic logname: {0} in list {1}'.format(\n    expected_vanilla_logname, ','.join(simple_file_list))\nfind_count += 1\nexpected_rotator_logname = str(test_logname + '.log.' + today)\nassert expected_rotator_logname in simple_file_list, 'Unable to find rotated logname: {0} in list {1}'.format(\n    expected_rotator_logname, ','.join(simple_file_list))\nfind_count += 1\nassert find_count == len(simple_file_list)\ntest_cleanup_log_directory(log_builder)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "concurrent_analog_digital_requests",
+    "className": "Commands",
+    "fileName": "/PRIArobotics_&_HedgehogClient/hedgehog_&_client_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "async def handle_a(ident, msg):\n    assert msg == analog.Request(port_a)\n    await server.send_msg(ident, analog.Reply(port_a, value_a))\nasync def handle_d(ident, msg):\n    assert msg == digital.Request(port_d)\n    await server.send_msg(ident, digital.Reply(port_d, value_d))\nident, msg = await server.recv_msg()\nif isinstance(msg, analog.Request):\n    await handle_a(ident, msg)\n    ident, msg = await server.recv_msg()\n    await handle_d(ident, msg)\nelse:\n    await handle_d(ident, msg)\n    ident, msg = await server.recv_msg()\n    await handle_a(ident, msg)\nstaticmethod"
+}

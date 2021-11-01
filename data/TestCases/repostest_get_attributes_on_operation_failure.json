@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_attributes_on_operation_failure",
+    "className": "TestProxyKmipClient",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_test_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a KmipOperationFailure exception is raised when the\n        backend fails to retrieve a secret's attributes.\n        \"\"\"\nstatus = enums.ResultStatus.OPERATION_FAILED\nreason = enums.ResultReason.GENERAL_FAILURE\nmessage = 'Test failure message'\nresult = results.OperationResult(contents.ResultStatus(status), contents.\n    ResultReason(reason), contents.ResultMessage(message))\nerror_msg = str(KmipOperationFailure(status, reason, message))\nclient = ProxyKmipClient()\nclient.open()\nclient.proxy.get_attributes.return_value = result\nargs = ['id', []]\nself.assertRaisesRegex(KmipOperationFailure, error_msg, client.\n    get_attributes, *args)\nmock.patch('kmip.pie.client.KMIPProxy', mock.MagicMock(spec_set=KMIPProxy))"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sync_ignore_unmatched",
+    "className": "TestSync",
+    "fileName": "/DusanMadar_&_PySyncDroid/tests_&_test_sync.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test 'sync' ignores unmatched files.\n        \"\"\"\nmock_get_sync_data.return_value = [FAKE_SYNC_DATA]\nsync = Sync(FAKE_MTP_DETAILS, '/tmp', 'Card/Music')\nsync.set_source_abs()\nsync.set_destination_abs()\nsync.sync()\nmock_do_sync.assert_called_once_with(FAKE_SYNC_DATA)\nmock_handle_destination_dir_data.assert_not_called()\npatch.object(pysyncdroid.sync.Sync, 'do_sync')patch.object(pysyncdroid.sync.Sync, 'get_sync_data')patch.object(pysyncdroid.sync.Sync, 'handle_destination_dir_data')"
+}

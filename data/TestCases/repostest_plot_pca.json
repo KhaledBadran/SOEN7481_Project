@@ -1,0 +1,9 @@
+{
+    "functionName": "test_plot_pca",
+    "className": null,
+    "fileName": "/tvdboom_&_ATOM/tests_&_test_plots.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Assert that the plot_pca method work as intended.\"\"\"\nfs = FeatureSelector()\npytest.raises(PermissionError, fs.plot_pca)\nfs = FeatureSelector('PCA', n_features=12)\nfs.fit_transform(X_bin, y_bin)\nfs.plot_pca(filename=FILE_DIR + 'pca1', display=False)\nassert glob.glob(FILE_DIR + 'pca1.png')\natom = ATOMClassifier(X_bin, y_bin, random_state=1)\natom.feature_selection(strategy='PCA', n_features=10)\natom.plot_pca(filename=FILE_DIR + 'pca2', display=False)\nassert glob.glob(FILE_DIR + 'pca2.png')\n"
+}

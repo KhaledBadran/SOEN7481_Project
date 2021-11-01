@@ -1,0 +1,9 @@
+{
+    "functionName": "test_is_datarun_finished",
+    "className": null,
+    "fileName": "/HDI-project_&_ATM/tests_&_test_worker.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "r1 = db.get_datarun(1)\nworker = Worker(db, r1)\nassert worker.is_datarun_finished()\nr2 = db.get_datarun(2)\nworker = Worker(db, r2)\nassert not worker.is_datarun_finished()\ndeadline = (datetime.datetime.now() - datetime.timedelta(seconds=1)).strftime(\n    TIME_FMT)\nworker = get_new_worker(deadline=deadline)\nassert worker.is_datarun_finished()\n"
+}

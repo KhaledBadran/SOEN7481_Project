@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gpibusbcomm_timeout",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_comm_&_test_gpibusb.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "comm = GPIBCommunicator(mock.MagicMock(), 1)\ncomm._version = 5\nunit_eq(comm.timeout, 1000 * u.millisecond)\ncomm.timeout = 5000 * u.millisecond\ncomm._file.sendcmd.assert_called_with('++read_tmo_ms 5000')\n"
+}

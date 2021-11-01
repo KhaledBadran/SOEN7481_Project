@@ -1,0 +1,9 @@
+{
+    "functionName": "test_add_residue",
+    "className": null,
+    "fileName": "/mtien_&_PeptideBuilder/tests_&_test_PeptideBuilder.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Build a peptide containing all 20 amino acids\n    \"\"\"\nstructure = PeptideBuilder.initialize_res('A')\nfor aa in 'CDEFGHIKLMNPQRSTVWY':\n    PeptideBuilder.add_residue(structure, aa)\nppb = PPBuilder()\npp = next(iter(ppb.build_peptides(structure)))\nassert pp.get_sequence() == 'ACDEFGHIKLMNPQRSTVWY'\nassert compare_to_reference(structure, 'extended.pdb')\n"
+}

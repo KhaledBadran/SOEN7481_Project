@@ -1,0 +1,9 @@
+{
+    "functionName": "test_dump_and_load_optimizer",
+    "className": null,
+    "fileName": "/bytesandbrains_&_ProcessOptimizer/ProcessOptimizer_&_tests_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "base_estimator = ExtraTreesRegressor(random_state=2)\nopt = Optimizer([(-2.0, 2.0)], base_estimator, n_random_starts=1,\n    acq_optimizer='sampling')\nopt.run(bench1, n_iter=3)\nwith tempfile.TemporaryFile() as f:\n    dump(opt, f)\n    f.seek(0)\n    load(f)\npytest.mark.fast_test"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_simple_model_wc",
+    "className": null,
+    "fileName": "/Microsoft_&_LMChallenge/lmchallenge_&_tests_&_test_functional.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "results = list(lmc.wc(eg_models.SimpleModel(), PlainData.DATA))\nexpect_meta(PlainData.META, results)\nw = ['the', 'a', 'cat']\nexpect_completions([[w, w, w], [w, w, w], [w, w, w], [w], [w, w, w], [w, w,\n    w], [w, w, w]], results)\nstats = lmc.stats.stats(results, human=False)\nexpect_partial_match(PlainData.STATS, stats)\nexpect_partial_match(dict(hit1=1, hit3=5, hit10=5, hit20=5, hit=5, srr=1.0 +\n    1 / 2 + 3 * 1 / 3), stats['prediction'])\nexpect_partial_match(dict(tokens=2, characters=4), stats['completion'])\nhuman_stats = lmc.stats.stats(results, human=True)\nexpect_partial_match(PlainData.HUMAN_STATS, human_stats)\nexpect_partial_match(dict(hit1=1 / 7, hit3=5 / 7, hit10=5 / 7, hit20=5 / 7,\n    hit=5 / 7, mrr=(1.0 + 1 / 2 + 3 * 1 / 3) / 7), human_stats['prediction'])\nexpect_partial_match(dict(tokens=2 / 7, characters=4 / 19), human_stats[\n    'completion'])\n"
+}

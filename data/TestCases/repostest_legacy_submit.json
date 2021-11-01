@@ -1,0 +1,9 @@
+{
+    "functionName": "test_legacy_submit",
+    "className": "TestCase",
+    "fileName": "/IntegralDefense_&_ACE/test_ace_api.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "alert = ace_api.Alert(description='Test Alert')\nalert.add_observable(F_IPV4, '1.2.3.4', local_time(), directives=[\n    DIRECTIVE_NO_SCAN])\nalert.add_tag('test')\ntemp_path = os.path.join(saq.TEMP_DIR, 'test.txt')\nwith open(temp_path, 'w') as fp:\n    fp.write('test')\nalert.add_attachment_link(temp_path, 'dest/test.txt')\nalert.submit(f'https://{saq.API_PREFIX}', ssl_verification=saq.CONFIG['SSL'\n    ]['ca_chain_path'])\nself.assertTrue(validate_uuid(alert.uuid))\nroot = RootAnalysis(storage_dir=storage_dir_from_uuid(alert.uuid))\nroot.load()\nself.assertEquals(root.description, 'Test Alert')\nipv4_observable = root.find_observable(lambda o: o.type == F_IPV4)\nself.assertIsNotNone(ipv4_observable)\nself.assertEquals(ipv4_observable.value, '1.2.3.4')\nself.assertTrue(ipv4_observable.has_directive(DIRECTIVE_NO_SCAN))\nfile_observable = root.find_observable(lambda o: o.type == F_FILE)\nself.assertIsNotNone(file_observable)\nself.assertEquals(file_observable.value, 'dest/test.txt')\nwith open(os.path.join(root.storage_dir, file_observable.value), 'r') as fp:\n    self.assertEquals(fp.read(), 'test')\n"
+}

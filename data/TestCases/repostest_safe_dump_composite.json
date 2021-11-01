@@ -1,0 +1,9 @@
+{
+    "functionName": "test_safe_dump_composite",
+    "className": null,
+    "fileName": "/alex-ber_&_AlexBerUtils/tests_&_utils_&_ymlparsers_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "logger.info(f'{request._pyfuncitem.name}()')\ndefault_flow_style = kwds.get('default_flow_style', False)\nwith io.StringIO() as buf:\n    ymlparsers.safe_dump(data, stream=buf, **kwds)\n    value = buf.getvalue()\n    logger.debug(value)\n    if default_flow_style is not None and not default_flow_style:\n        pytest.assume('-' in value)\n    else:\n        pytest.assume('[' in value)\n        pytest.assume(']' in value)\n    with ymlparsers.DisableVarSubst():\n        restored_d = ymlparsers.load(value)\npytest.assume(data == restored_d)\npytest.mark.parametrize('data, kwds', [(_data_list, {}), (_data_list, {\n    'default_flow_style': None, 'sort_keys': True}), (_data_list, {\n    'default_flow_style': False, 'sort_keys': True}), (_data_list, {\n    'default_flow_style': True, 'sort_keys': True}), (_data_dict, {\n    'default_flow_style': None, 'sort_keys': True}), (_data_dict, {\n    'default_flow_style': False, 'sort_keys': True}), (_data_dict, {\n    'default_flow_style': True, 'sort_keys': True})])pytest.mark.yml"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_PYTHIAParticleData_against_xml_database",
+    "className": null,
+    "fileName": "/afedynitch_&_ParticleDataTool/tests_&_test_tables.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "pdg = tables.PYTHIAParticleData(use_cache=False)\npath = os.path.dirname(os.path.abspath(particletools.__file__))\nxmlname = path + '/ParticleData.xml'\nassert os.path.exists(xmlname)\nroot = ET.parse(xmlname).getroot()\nfirst_name = set()\nfor child in root:\n    if child.tag != 'particle':\n        continue\n    attr = child.attrib\n    pid = int(attr['id'])\n    name = attr['name']\n    mass = float(attr['m0'])\n    charge = float(attr['chargeType']) / 3.0\n    assert pdg.name(pid) == name\n    assert pdg.mass(pid) == mass\n    assert pdg.charge(pid) == charge\n    if 'tau0' in attr:\n        assert pdg.ctau(pid) == float(attr['tau0']) * 0.1\n    if name not in first_name:\n        assert pdg.pdg_id(name) == pid\n        assert pdg.mass(name) == mass\n        assert pdg.charge(name) == charge\n    first_name.add(name)\n"
+}

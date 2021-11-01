@@ -1,0 +1,9 @@
+{
+    "functionName": "test_muti_crud",
+    "className": "TestMultiDBModel",
+    "fileName": "/Riffstation_&_Flask-Philo-SQLAlchemy/tests_&_app_&_test_multidb.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with self.app.app_context():\n    rock = Example(name='Rock')\n    rock.add(connection_name='DEFAULT')\n    self.pool.commit(connection_name='DEFAULT')\n    assert 1 == Example.objects.count(connection_name='DEFAULT')\n    assert 0 == Example.objects.count(connection_name='DB2')\n    rock2 = Example(name='Rock2')\n    rock2.add(connection_name='DB2')\n    self.pool.commit(connection_name='DB2')\n    assert 1 == Example.objects.count(connection_name='DB2')\n    r1 = Example.objects.get(connection_name='DEFAULT', name='Rock')\n    r2 = Example.objects.get(connection_name='DB2', name='Rock2')\n    assert r1.name != r2.name\n    rock.delete()\n    self.pool.commit()\n    assert 0 == Example.objects.count(connection_name='DEFAULT')\n    l1 = list(Example.objects.filter_by(connection_name='DEFAULT'))\n    l2 = list(Example.objects.filter_by(connection_name='DB2'))\n    assert 0 == len(l1)\n    assert 1 == len(l2)\n"
+}

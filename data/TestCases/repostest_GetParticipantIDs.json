@@ -1,0 +1,9 @@
+{
+    "functionName": "test_GetParticipantIDs",
+    "className": null,
+    "fileName": "/incf-nidash_&_PyNIDM/nidm_&_experiment_&_tests_&_test_query.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "kwargs = {Constants.NIDM_PROJECT_NAME: 'FBIRN_PhaseII', Constants.\n    NIDM_PROJECT_IDENTIFIER: 9610, Constants.NIDM_PROJECT_DESCRIPTION:\n    'Test investigation'}\nproject = Project(uuid='_123456', attributes=kwargs)\nsession = Session(uuid='_13579', project=project)\nacq = Acquisition(uuid='_15793', session=session)\nacq2 = Acquisition(uuid='_15795', session=session)\nperson = acq.add_person(attributes={Constants.NIDM_SUBJECTID: '9999'})\nacq.add_qualified_association(person=person, role=Constants.NIDM_PARTICIPANT)\nperson2 = acq2.add_person(attributes={Constants.NIDM_SUBJECTID: '8888'})\nacq2.add_qualified_association(person=person2, role=Constants.NIDM_PARTICIPANT)\nwith open('test_3.ttl', 'w') as f:\n    f.write(project.serializeTurtle())\nparticipant_list = Query.GetParticipantIDs(['test_3.ttl'])\nremove('test_3.ttl')\nassert participant_list['ID'].str.contains('9999').any()\nassert participant_list['ID'].str.contains('8888').any()\n"
+}

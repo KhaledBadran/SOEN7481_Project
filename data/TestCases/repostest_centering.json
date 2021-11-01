@@ -1,0 +1,9 @@
+{
+    "functionName": "test_centering",
+    "className": null,
+    "fileName": "/mesonepigreco_&_CellConstructor/tests_&_TestTensor3_&_test_centering.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "total_path = os.path.dirname(os.path.abspath(__file__))\nos.chdir(total_path)\ndyn = CC.Phonons.Phonons('dyn')\nd3 = np.load('d3_realspace_sym.npy')\ntensor = CC.ForceTensor.Tensor3(dyn.structure, dyn.structure, dyn.\n    GetSupercell())\nprint('Initializing the tensor3...')\ntensor.SetupFromTensor(d3)\ntensor.WriteOnFile('tensor_original.dat')\nprint('Centering...')\ntensor.Center()\ntensor.WriteOnFile('tensor_centered.dat')\nprint('Done.')\nprint('R2:')\nprint(tensor.r_vector3.T[:10])\n"
+}

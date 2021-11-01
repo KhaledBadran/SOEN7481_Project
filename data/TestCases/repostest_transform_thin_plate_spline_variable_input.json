@@ -1,0 +1,9 @@
+{
+    "functionName": "test_transform_thin_plate_spline_variable_input",
+    "className": "TestTPSTransformLayer",
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_special.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "import lasagne\nfrom lasagne.utils import floatX\nfrom theano.tensor import constant\nx = np.random.random((10, 3, 28, 28)).astype('float32')\nx_sym = theano.tensor.tensor4()\nl_in = lasagne.layers.InputLayer((None, 3, None, 28))\nl_loc = lasagne.layers.DenseLayer(lasagne.layers.ReshapeLayer(l_in, ([0], 3 *\n    28 * 28)), num_units=32)\nl_trans = lasagne.layers.TPSTransformerLayer(l_in, l_loc, precompute_grid=\n    'auto')\nassert l_trans.output_shape[0] is None\nassert l_trans.output_shape[1] == 3\nassert l_trans.output_shape[2] is None\nassert l_trans.output_shape[3] == 28\ndest_offset = np.zeros(shape=(10, 32))\ninputs = floatX(np.arange(np.prod(x.shape)).reshape(x.shape))\noutputs = l_trans.get_output_for([constant(inputs), constant(dest_offset)]\n    ).eval()\nnp.testing.assert_allclose(inputs, outputs, atol=0.0005)\n"
+}

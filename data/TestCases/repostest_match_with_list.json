@@ -1,0 +1,9 @@
+{
+    "functionName": "test_match_with_list",
+    "className": "AnchorMatcherTest",
+    "fileName": "/szczad_&_NightCrawler/tests_&_test_anchor_matcher.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "test_html = \"\"\"\n    <html>\n    <head>\n        <title>Test title</title>\n    </head>\n    <body>\n        <div>\n            some text\n            <a href=\"https://www.google.com/\">Google search engine</a>\n            <a href=\"https://www.google.com/\">Google search engine</a>\n            another text\n            <p>A paragraph</p>\n            <span><a href=\"https://www.onet.pl/\">Onet portal</a></span>\n        </div>\n    </body>\n    </html>    \n    \"\"\"\nurl = urlparse('http://www.google.com/')\nmatcher = AnchorMatcher(list_class=list)\ninternal, external = matcher.parse(test_html, url)\nself.assertEqual(len(internal), 2)\nself.assertEqual(len(external), 1)\nself.assertEqual(internal[0].geturl(), 'https://www.google.com/')\nself.assertEqual(internal[1].geturl(), 'https://www.google.com/')\nself.assertEqual(external[0].geturl(), 'https://www.onet.pl/')\n"
+}

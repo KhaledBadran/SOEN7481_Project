@@ -1,0 +1,9 @@
+{
+    "functionName": "connectAPRSIS",
+    "className": null,
+    "fileName": "/FaradayRF_&_Faraday-Software/faraday_&_aprs.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Connect to APRS-IS server with login credentials\n\n    :return: APRS-IS socket connection\n    \"\"\"\ncallsign = aprsConfig.get('APRSIS', 'CALLSIGN').upper()\npasscode = generatePasscode(callsign)\nserver = aprsConfig.get('APRSIS', 'SERVER')\nport = aprsConfig.getint('APRSIS', 'PORT')\nif passcode is not None:\n    logger.info('Connecting to APRS-IS as: ' + str(callsign))\n    logger.debug('Server: ' + str(server) + ':' + str(port))\n    aprssock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\n    while True:\n        try:\n            logon_string = 'user' + ' ' + callsign + ' ' + 'pass' + ' ' + str(\n                passcode) + ' vers \"FaradayRF APRS-IS application\" \\r'\n            logger.debug(logon_string)\n            aprssock.connect((server, port))\n            aprssock.sendall(logon_string)\n        except IOError as e:\n            logger.error(e)\n            aprssock.close()\n            aprssock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\n        else:\n            logger.info('Connection successful!')\n            return aprssock\n        sleep(2)\n    return aprssock\nelse:\n    while True:\n        logger.error('APRS-IS LOGIN ERROR!')\n        sleep(1)\n"
+}

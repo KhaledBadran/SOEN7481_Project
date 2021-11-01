@@ -1,0 +1,9 @@
+{
+    "functionName": "test_node_location_relation",
+    "className": null,
+    "fileName": "/alex-fe_&_Graphml-to-SVG-converter/tests_&_test_elements.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "geometry = Geometry(3.8, 2.0, 4.0, 13.21)\nnode = Node('id', 'key', 'text', 'rect', None, geometry, None, None)\nwith pytest.raises(TypeError):\n    node.location_relation(Point)\nnode.geometry.width = 0.0\nnode.geometry.height = 0.0\ngeometry.translate(2)\nnode2 = Node('id', 'key', 'text', 'rect', None, geometry, None, None)\nx, y = node.location_relation(node2)\nassert x == node.geometry.x\nassert y == node.geometry.y\npytest.mark.skip('Not yet')"
+}

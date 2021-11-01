@@ -1,0 +1,9 @@
+{
+    "functionName": "test_models_regression",
+    "className": null,
+    "fileName": "/tvdboom_&_ATOM/tests_&_test_models.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Assert that the fit method works with all models for regression.\"\"\"\nfor model in [m for m in MODEL_NAMES if m not in ONLY_CLASSIFICATION]:\n    atom = ATOMRegressor(X_reg, y_reg, test_size=0.24, random_state=1)\n    atom.run(models=model, metric='neg_mean_absolute_error', n_calls=2,\n        n_random_starts=1, bo_params={'base_estimator': 'gbrt', 'cv': 1})\n    assert not atom.errors\n    assert hasattr(atom, model) and hasattr(atom, model.lower())\n"
+}

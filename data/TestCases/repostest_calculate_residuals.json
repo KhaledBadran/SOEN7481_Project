@@ -1,0 +1,9 @@
+{
+    "functionName": "test_calculate_residuals",
+    "className": null,
+    "fileName": "/PEtab-dev_&_PEtab/tests_&_test_calculate.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test calculate.calculate_residuals.\"\"\"\nfor i_model, model in enumerate(models):\n    print(f'Model {i_model}')\n    (measurement_df, observable_df, parameter_df, simulation_df,\n        expected_residuals, _, _) = model\n    residual_dfs = calculate_residuals(measurement_df, simulation_df,\n        observable_df, parameter_df)\n    assert set(residual_dfs[0][RESIDUAL]) == pytest.approx(expected_residuals)\n"
+}

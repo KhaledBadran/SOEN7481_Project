@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cell_list_optimize",
+    "className": "TestCellFitting",
+    "fileName": "/Jhsmit_&_ColiCoords/test_&_test_fitting.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cells = self.cells[:8].copy()\nres_list = cells.optimize()\nfor r, cell in zip(res_list, cells):\n    for k, v in r.params.items():\n        self.assertEqual(v, getattr(cell.coords, k))\nobj_values = [30, 25, 26, 25, 26, 22, 37, 17]\nfor r, val in zip(res_list, obj_values):\n    self.assertEqual(self.cf * r.objective_value, val)\ncells = self.cells[:8].copy()\nres_list = cells.optimize(minimizer=Powell)\nfor r, cell in zip(res_list, cells):\n    for k, v in r.params.items():\n        self.assertEqual(v, getattr(cell.coords, k))\nobj_values = [30, 25, 26, 25, 26, 22, 37, 17]\nfor r, val in zip(res_list, obj_values):\n    self.assertEqual(self.cf * r.objective_value, val)\n"
+}

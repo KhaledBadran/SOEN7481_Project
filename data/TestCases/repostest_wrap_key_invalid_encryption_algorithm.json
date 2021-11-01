@@ -1,0 +1,9 @@
+{
+    "functionName": "test_wrap_key_invalid_encryption_algorithm",
+    "className": "TestCryptographyEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_crypto_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the right error is raised when an invalid encryption\n        algorithm is specified for encryption-based key wrapping.\n        \"\"\"\nengine = crypto.CryptographyEngine()\nargs = b'', enums.WrappingMethod.ENCRYPT, 'invalid', b''\nself.assertRaisesRegex(exceptions.InvalidField,\n    \"Encryption algorithm 'invalid' is not a supported key wrapping algorithm.\"\n    , engine.wrap_key, *args)\n"
+}

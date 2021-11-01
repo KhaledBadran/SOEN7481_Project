@@ -1,0 +1,9 @@
+{
+    "functionName": "test_with_surface_boundary_conditions",
+    "className": "TestPosinp",
+    "fileName": "/OMalenfantThuot_&_ML_Calc_Driver/tests_&_test_posinp.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "pos_with_inf = Posinp([Atom('N', [2.97630782434901e-23, \n    6.87220595204354e-23, 0.0107161998748779]), Atom('N', [-\n    1.10434491945017e-23, -4.87342174483075e-23, 1.10427379608154])],\n    'angstroem', 'surface', cell=[40, '.inf', 40])\nwith pytest.raises(ValueError):\n    pos_wo_inf = Posinp([Atom('N', [2.97630782434901e-23, \n        6.87220595204354e-23, 0.0107161998748779]), Atom('N', [-\n        1.10434491945017e-23, -4.87342174483075e-23, 1.10427379608154])],\n        'angstroem', 'surface', cell=[40, 40, 40])\npos2_with_inf = Posinp([Atom('N', [2.97630782434901e-23, \n    6.87220595204354e-23, 0.0107161998748779]), Atom('N', [-\n    1.10434491945017e-23, -4.87342174483075e-23, 1.10427379608154])],\n    'angstroem', 'surface', cell=[20, 'inf', 40])\nassert pos_with_inf != pos2_with_inf\nassert pos2_with_inf.boundary_conditions == pos_with_inf.boundary_conditions\n"
+}

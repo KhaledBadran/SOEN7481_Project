@@ -1,0 +1,9 @@
+{
+    "functionName": "test_set_inlets_overwrite",
+    "className": "IPTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_IPTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "alg = op.algorithms.InvasionPercolation(network=self.net)\nalg.setup(phase=self.water)\nalg.set_inlets(pores=self.net.pores('top'))\nassert np.sum(alg['pore.invasion_sequence'] == 0) == 100\nalg.set_inlets(pores=self.net.pores('bottom'))\nassert np.sum(alg['pore.invasion_sequence'] == 0) == 200\nalg.set_inlets(pores=self.net.pores('top'), overwrite=True)\nassert np.sum(alg['pore.invasion_sequence'] == 0) == 100\nalg.set_inlets(overwrite=True)\nassert np.sum(alg['pore.invasion_sequence'] == 0) == 0\n"
+}

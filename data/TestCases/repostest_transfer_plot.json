@@ -1,0 +1,9 @@
+{
+    "functionName": "test_transfer_plot",
+    "className": null,
+    "fileName": "/apetri_&_LensTools/lenstools_&_tests_&_test_camb_transfer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tfr = CAMBTransferFunction.read(os.path.join(dataExtern(), 'camb',\n    'camb_tfr.pkl'))\nfig, ax = plt.subplots()\nzp = [0.5, 1.0, 2.0]\nk = np.logspace(-3, 1, 100) / u.Mpc\nfor z in zp:\n    ax.plot(k, tfr(z, k), label='$z={0:.2f}$'.format(z))\nax.set_xscale('log')\nax.set_yscale('log')\nax.set_xlabel('$k({\\\\rm Mpc}^{-1})$', fontsize=22)\nax.set_ylabel('$T_{\\\\rm CDM}(k)/k^2 (h^{-2}{\\\\rm Mpc}^2)$', fontsize=22)\nax.legend(loc='upper right')\nfig.savefig('camb_tfr.png')\n"
+}

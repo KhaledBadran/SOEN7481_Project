@@ -1,0 +1,9 @@
+{
+    "functionName": "test_successful_response",
+    "className": null,
+    "fileName": "/EclecticIQ_&_OpenTAXII/tests_&_test_http.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "request = as_tm(version).DiscoveryRequest(message_id=MESSAGE_ID)\nbase_url = '%s://localhost' % ('https' if https else 'http')\nresponse = client.post(DISCOVERY['address'], data=request.to_xml(), headers\n    =prepare_headers(version=version, https=https), base_url=base_url)\nassert response.status_code == 200\nassert is_headers_valid(response.headers, version=version, https=https)\nmessage = as_tm(version).get_message_from_xml(response.data)\nassert isinstance(message, as_tm(version).DiscoveryResponse)\nassert len(message.service_instances) == INSTANCES_CONFIGURED\npytest.mark.parametrize('https', [True, False])pytest.mark.parametrize('version', [11, 10])"
+}

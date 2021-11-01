@@ -1,0 +1,9 @@
+{
+    "functionName": "chung",
+    "className": null,
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_models_&_phases_&_thermal_conductivity.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Uses Chung et al. model to estimate thermal conductivity for gases with\n    low pressure(<10 bar) from first principles at conditions of interest\n\n    Parameters\n    ----------\n    target : OpenPNM Object\n        The object for which these values are being calculated.  This\n        controls the length of the calculated array, and also provides\n        access to other necessary thermofluid properties.\n\n    acentric_factor : string\n        Dictionary key containing the acentric factor of the component\n\n    Cv : string\n        Dictionary key containing the heat capacity at constant volume\n        (J/(mol.K))\n\n    mol_weight : string\n        Dictionary key containing the molecular weight of the component\n        (kg/mol)\n\n    viscosity : string\n        The dictionary key containing the viscosity values (Pa.s)\n\n    temperature : string\n        The dictionary key containing the temperature values (K)\n\n    critical_temperatre: string\n        The dictionary key containing the critical temperature values (K)\n\n    Returns\n    -------\n    value : NumPy ndarray\n        Array containing thermal conductivity values in [W/m.K]\n\n    \"\"\"\nCv = target[Cv]\nacentric = target[acentric_factor]\nMW = target[mol_weight]\nR = 8.314\nT = target[temperature]\nmu = target[viscosity]\nTc = target[critical_temperature]\nTr = T / Tc\nz = 2.0 + 10.5 * Tr ** 2\nbeta = 0.7862 - 0.7109 * acentric + 1.3168 * acentric ** 2\nalpha = Cv / R - 3 / 2\ns = 1 + alpha * ((0.215 + 0.28288 * alpha - 1.061 * beta + 0.26665 * z) / (\n    0.6366 + beta * z + 1.061 * alpha * beta))\nvalue = 3.75 * s * mu * R / MW\nreturn value\n"
+}

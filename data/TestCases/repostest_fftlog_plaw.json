@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fftlog_plaw",
+    "className": null,
+    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_fftlog.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "nk = 1024\nk_arr = np.logspace(-4, 4, nk)\nfk_arr = fk(k_arr, alpha, mu, dim)\nr_arr, fr_arr = _fftlog_transform(k_arr, fk_arr, dim, mu, -alpha)\nfr_arr_pred = fr(r_arr, alpha, mu, dim)\nres = np.fabs(fr_arr / fr_arr_pred - 1)\nassert np.all(res < 1e-10)\npytest.mark.parametrize('dim', [2, 3])pytest.mark.parametrize('mu', [0, 2])pytest.mark.parametrize('alpha', [1.2, 1.5, 1.8])"
+}

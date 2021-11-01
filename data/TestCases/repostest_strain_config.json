@@ -1,0 +1,9 @@
+{
+    "functionName": "test_strain_config",
+    "className": null,
+    "fileName": "/mesonepigreco_&_CellConstructor/tests_&_TestStrainConfiguration_&_test_strain_config.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "total_path = os.path.dirname(os.path.abspath(__file__))\nos.chdir(total_path)\nRyToCm = 109737.37595\nEPS = 1e-06\ndynmat = CC.Phonons.Phonons('ice.dyn', full_name=True)\nconfig = CC.Structure.Structure()\nconfig.read_scf('config.scf', alat=dynmat.alat)\nconfig.unit_cell = dynmat.structure.unit_cell.copy()\nconfig.has_unit_cell = True\nnew_cell = dynmat.structure.unit_cell * 1.2\nold_config = config.copy()\nconfig.change_unit_cell(new_cell)\nnew_dyn = dynmat.GetStrainMatrix(new_cell, T, EPS)\ndisp_old = old_config.get_displacement(dynmat.structure)\ndisp_new = config.get_displacement(new_dyn.structure)\nprint('Strain performed.')\nprint('Old frequencies [cm-1]:')\nold_w, old_pols = dynmat.DyagDinQ(0)\nprint(old_w * RyToCm)\nprint('New frequencies [cm-1]:')\nnew_w, new_pols = new_dyn.DyagDinQ(0)\nprint(new_w * RyToCm)\nprint(\n    'Relation between the two <u | Upsilon |  u> factors (They should be similar):'\n    )\nfact1 = new_dyn.GetProbability(disp_new, T, normalize=False)\nfact2 = dynmat.GetProbability(disp_old, T, normalize=False)\nprint('Factor1: %e' % fact1)\nprint('Factor2: %e' % fact2)\nassert np.abs(fact1 - fact2) < 1e-07\nnew_dyn.save_qe('strained_dyn', True)\npytest.mark.parametrize('T', [0, 100])"
+}

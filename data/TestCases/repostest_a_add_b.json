@@ -1,0 +1,9 @@
+{
+    "functionName": "test_a_add_b",
+    "className": "TestCore",
+    "fileName": "/MeiK2333_&_JudgeLight/tests_&_test_core.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "code = \"\"\"\n#include <stdio.h>\nint main() {\n    int a, b;\n    scanf(\"%d %d\", &a, &b);\n    printf(\"%d\\\\n\", a + b);\n    return 0;\n}\n\"\"\"\ncompile_it(code)\nin_data = '1 2'\nwith open('input.txt', 'w') as fw:\n    fw.write(in_data)\njl = JudgeLight('./a.out', input_file_path='input.txt', output_file_path=\n    'output.txt')\njl.run()\nwith open('output.txt') as fr:\n    self.assertEqual(fr.read().strip(), '3')\nclear_it()\nos.remove('input.txt')\nos.remove('output.txt')\n"
+}

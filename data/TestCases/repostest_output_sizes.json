@@ -1,0 +1,9 @@
+{
+    "functionName": "test_output_sizes",
+    "className": null,
+    "fileName": "/Accenture_&_AmpliGraph/tests_&_ampligraph_&_latent_features_&_test_models.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Test to check whether embedding matrix sizes match the input data (num rel/ent and k)\n    \"\"\"\ndef perform_test():\n    X = load_wn18rr()\n    k = 5\n    unique_entities = np.unique(np.concatenate([X['train'][:, (0)], X[\n        'train'][:, (2)]], 0))\n    unique_relations = np.unique(X['train'][:, (1)])\n    model = TransE(batches_count=100, seed=555, epochs=1, k=k, loss=\n        'multiclass_nll', loss_params={'margin': 5}, verbose=True,\n        optimizer='sgd', optimizer_params={'lr': 0.001})\n    model.fit(X['train'])\n    assert model.trained_model_params[0].shape[0] == len(unique_entities)\n    assert model.trained_model_params[1].shape[0] == len(unique_relations)\n    assert model.trained_model_params[0].shape[1] == k\n    assert model.trained_model_params[1].shape[1] == k\nperform_test()\nset_entity_threshold(10)\nperform_test()\nreset_entity_threshold()\n"
+}

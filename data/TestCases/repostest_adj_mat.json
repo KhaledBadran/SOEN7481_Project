@@ -1,0 +1,9 @@
+{
+    "functionName": "test_adj_mat",
+    "className": "TestGraphClasses",
+    "fileName": "/Silmathoron_&_NNGT/testing_&_test_graphclasses.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        When generating graphs from :class:`numpy.ndarray`s or\n        :mod:`scipy.sparse` matrices, check that the result of\n        graph.adjacency_matrix() is the same as the initial matrix.\n        \"\"\"\nref_result = ssp.csr_matrix(self.matrices[graph.name])\ncomputed_result = graph.adjacency_matrix(weights=True)\nself.assertTrue((ref_result != computed_result).nnz == 0,\n    \"\"\"AdjMat test failed for graph {}:\nref = {} vs exp {}            \"\"\".\n    format(graph.name, ref_result, computed_result))\nforeach_graph"
+}

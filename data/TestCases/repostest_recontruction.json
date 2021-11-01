@@ -1,0 +1,9 @@
+{
+    "functionName": "test_recontruction",
+    "className": "TestAdsorbateFeatures",
+    "fileName": "/SUNCAT-Center_&_CatLearn/test_&_test_ads_fp_gen.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "images = database_to_list('data/ads_example.db')\nslabs = []\nfor atoms in images:\n    slab = atoms.copy()\n    slab.pop(-1)\n    slabs.append(slab)\nimages = autogen_info(images)\nslabs = images_connectivity(slabs)\nimage_pairs = zip(images, slabs)\nr_index = check_reconstructions(image_pairs)\nfor i in range(len(images)):\n    species = images[i].info['key_value_pairs']['species']\n    connectivity2ads_index(images[i], species)\nself.assertTrue(len(r_index) == 0)\n"
+}

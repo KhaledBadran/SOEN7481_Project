@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ok3d_backends_produce_same_result",
+    "className": null,
+    "fileName": "/bsmurphy_&_PyKrige/tests_&_test_core.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data, (gridx_ref, gridy_ref, gridz_ref), mask_ref = sample_data_3d\nk3d = OrdinaryKriging3D(data[:, (0)], data[:, (1)], data[:, (2)], data[:, (\n    3)], variogram_model='linear')\nok3d_non_exact = OrdinaryKriging3D(data[:, (0)], data[:, (1)], np.zeros(\n    data[:, (1)].shape), data[:, (2)], variogram_model='exponential',\n    variogram_parameters=[500.0, 3000.0, 0.0], exact_values=False)\nk_k3d_v, ss_k3d_v = k3d.execute('grid', gridx_ref, gridy_ref, gridz_ref,\n    backend='vectorized')\nk_k3d_l, ss_k3d_l = k3d.execute('grid', gridx_ref, gridy_ref, gridz_ref,\n    backend='loop')\nassert_allclose(k_k3d_v, k_k3d_l, rtol=1e-05, atol=1e-08)\nassert_allclose(ss_k3d_v, ss_k3d_l, rtol=1e-05, atol=1e-08)\nk, ss = ok3d_non_exact.execute('grid', np.arange(10.0), np.arange(10.0), np\n    .arange(10.0), backend='loop')\nk1, ss1 = ok3d_non_exact.execute('grid', np.arange(10.0), np.arange(10.0),\n    np.arange(10.0), backend='vectorized')\nassert_allclose(k1, k)\nassert_allclose(ss1, ss)\n"
+}

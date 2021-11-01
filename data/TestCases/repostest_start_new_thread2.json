@@ -1,0 +1,9 @@
+{
+    "functionName": "test_start_new_thread2",
+    "className": "TestCase",
+    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_additional_thread_info.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "pydev_monkey.patch_thread_modules()\ntry:\n    found = {}\n\n\n    class F(object):\n        start_new_thread = thread.start_new_thread\n\n        def start_it(self):\n            try:\n                self.start_new_thread(self.function, (1, 2, 3, 4), {'d': 1,\n                    'e': 2})\n            except:\n                import traceback\n                traceback.print_exc()\n\n        def function(self, a, b, *args, **kwargs):\n            found['a'] = a\n            found['b'] = b\n            found['args'] = args\n            found['kwargs'] = kwargs\n    f = F()\n    f.start_it()\n    import time\n    for _i in xrange(20):\n        if len(found) == 4:\n            break\n        time.sleep(0.1)\n    else:\n        raise AssertionError('Could not get to condition before 2 seconds')\n    self.assertEqual({'a': 1, 'b': 2, 'args': (3, 4), 'kwargs': {'e': 2,\n        'd': 1}}, found)\nfinally:\n    pydev_monkey.undo_patch_thread_modules()\n"
+}

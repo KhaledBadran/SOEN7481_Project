@@ -1,0 +1,9 @@
+{
+    "functionName": "test_hourly_weather_report_no_summary",
+    "className": "TestWeather",
+    "fileName": "/lukeWaninger_&_GSCAP/tests_&_test_weather.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "hwr = wthr.HourlyWeatherReport(lat=self.lat, lon=self.lon, date=self.day,\n    time=self.time)\nself.session.add(hwr)\nself.session.commit()\nreport = wthr.weather_report((self.lat, self.lon, self.day), summarize=\n    'none', kwargs=self.cache_kwargs)\nself.assertTrue(report is not None)\nself.assertTrue(isinstance(report, dict))\nself.assertTrue(all(k in ['report', 'hits', 'misses'] for k in report.keys()))\nself.assertTrue(isinstance(report.get('report'), pd.DataFrame))\nself.assertTrue(report.get('report').shape is not (0, 0))\nresponses.activate"
+}

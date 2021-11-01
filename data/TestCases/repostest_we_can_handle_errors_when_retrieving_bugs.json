@@ -1,0 +1,9 @@
+{
+    "functionName": "test_we_can_handle_errors_when_retrieving_bugs",
+    "className": null,
+    "fileName": "/AutomatedTester_&_Bugsy/tests_&_test_bugsy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "error_response = {'code': 101, 'documentation':\n    'http://www.bugzilla.org/docs/tip/en/html/api/', 'error': True,\n    'message': 'Bug 111111111111 does not exist.'}\nresponses.add(responses.GET, rest_url('bug', 111111111), body=json.dumps(\n    error_response), status=404, content_type='application/json',\n    match_querystring=True)\nbugzilla = Bugsy()\ntry:\n    bug = bugzilla.get(111111111)\n    assert False, 'A BugsyException should have been thrown'\nexcept BugsyException as e:\n    assert str(e) == 'Message: Bug 111111111111 does not exist. Code: 101'\nexcept Exception as e:\n    assert False, 'Wrong type of exception was thrown'\nresponses.activate"
+}

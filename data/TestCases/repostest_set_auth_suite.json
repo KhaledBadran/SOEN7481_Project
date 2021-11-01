@@ -1,0 +1,9 @@
+{
+    "functionName": "test_set_auth_suite",
+    "className": "TestKmipServerConfig",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_config.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the auth_suite configuration property can be set correctly.\n        \"\"\"\nc = config.KmipServerConfig()\nc._logger = mock.MagicMock()\nc._set_auth_suite('Basic')\nself.assertIn('auth_suite', c.settings.keys())\nself.assertEqual('Basic', c.settings.get('auth_suite'))\nc._set_auth_suite('TLS1.2')\nself.assertIn('auth_suite', c.settings.keys())\nself.assertEqual('TLS1.2', c.settings.get('auth_suite'))\nargs = 'invalid',\nregex = 'The authentication suite must be one of the following: Basic, TLS1.2'\nself.assertRaisesRegex(exceptions.ConfigurationError, regex, c.\n    _set_auth_suite, *args)\nself.assertNotEqual('invalid', c.settings.get('auth_suite'))\n"
+}

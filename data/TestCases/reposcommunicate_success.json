@@ -1,0 +1,9 @@
+{
+    "functionName": "communicate_success",
+    "className": "TestRegister",
+    "fileName": "/Keeper-Security_&_Commander/unit-tests_&_test_command_register.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "rs = {'result': 'success', 'result_code': '', 'message': ''}\nif request['command'] == 'public_keys':\n    rs['public_keys'] = [{'key_owner': x, 'public_key': vault_env.\n        encoded_public_key} for x in request['key_owners']]\n    return rs\nif request['command'] == 'get_records':\n    rs['records'] = [{'record_uid': x, 'user_permissions': [],\n        'shared_folder_permissions': []} for x in request['records']]\n    return rs\nif request['command'] == 'get_available_teams':\n    rs['teams'] = []\n    return rs\nif request['command'] == 'pre_register':\n    rs['result'] = 'fail'\n    rs['result_code'] = 'Failed_to_find_user'\n    rs['password_rules'] = []\n    return rs\ncmd = TestRegister.expected_commands.pop(0)\nif cmd == request['command']:\n    return rs\nraise Exception()\nstaticmethod"
+}

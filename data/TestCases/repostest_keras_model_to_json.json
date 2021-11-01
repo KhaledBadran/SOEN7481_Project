@@ -1,0 +1,9 @@
+{
+    "functionName": "test_keras_model_to_json",
+    "className": null,
+    "fileName": "/goeckslab_&_Galaxy-ML/galaxy_ml_&_tests_&_test_keras_galaxy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with open('./tools/test-data/keras02.json', 'r') as f:\n    model_json = json.load(f)\nif model_json['class_name'] == 'Sequential':\n    model_type = 'sequential'\nelif model_json['class_name'] == 'Model':\n    model_type = 'functional'\nconfig = model_json.get('config')\nmodel = KerasGClassifier(config, model_type=model_type)\ngot = model.to_json()\nassert len(got) > 4850, len(got)\nassert got.startswith('{\"class_name\": \"Model\",'), got\n"
+}

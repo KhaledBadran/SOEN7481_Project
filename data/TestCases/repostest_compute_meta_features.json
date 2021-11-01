@@ -1,0 +1,9 @@
+{
+    "functionName": "test_compute_meta_features",
+    "className": null,
+    "fileName": "/Menelau_&_DESlib/deslib_&_tests_&_des_&_test_meta_des.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "X, y, nn, _, dsel_processed, dsel_scores = example_estimate_competence\nquery = np.ones((1, 2))\npool = create_pool_classifiers\nmeta_test = METADES(pool_classifiers=[pool[0]])\nmeta_test.n_classifiers_ = 1\nmeta_test.k_ = 7\nmeta_test.Kp_ = 5\nmeta_test.DSEL_processed_ = dsel_processed[:, (0)].reshape(-1, 1)\nmeta_test.dsel_scores_ = dsel_scores[:, (0), :].reshape(15, 1, 2)\nmeta_test.DSEL_target_ = y\nmeta_test.n_classes_ = 2\nneighbors_op = nn[(2), 0:meta_test.Kp]\nexpected_f1 = [1.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0]\nexpected_f2 = [1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0]\nexpected_f3 = [4.0 / 7.0]\nexpected_f4 = [0.0, 1.0, 1.0, 1.0, 0.0]\nexpected_f5 = [0.5]\nscores = np.empty((query.shape[0], meta_test.n_classifiers_, meta_test.\n    n_classes_))\nfor index, clf in enumerate(meta_test.pool_classifiers):\n    scores[:, (index), :] = clf.predict_proba(query)\nmeta_features = meta_test.compute_meta_features(scores, nn[(0), :],\n    neighbors_op)\nexpected = np.asarray(expected_f1 + expected_f2 + expected_f3 + expected_f4 +\n    expected_f5)\nassert np.array_equal(meta_features, expected.reshape(1, -1))\n"
+}

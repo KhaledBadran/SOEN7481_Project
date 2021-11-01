@@ -1,0 +1,9 @@
+{
+    "functionName": "test_qwg",
+    "className": "Test_Alap_Rc_Schedule",
+    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_alap_rc_schedule.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.setUp()\nv = 'qwg'\nprog_name = 'test_' + v + '_' + self._SCHEDULER\nkernel_name = 'kernel_' + v + '_' + self._SCHEDULER\nstarmon = ql.Platform('starmon', self.config)\nprog = ql.Program(prog_name, starmon, 7, 0)\nk = ql.Kernel(kernel_name, starmon, 7, 0)\nk.gate('x', [0])\nk.gate('y', [1])\nprog.add_kernel(k)\nprog.compile()\nGOLD_fn = os.path.join(rootDir, 'golden', prog.name + '.qisa')\nQISA_fn = os.path.join(output_dir, prog.name + '.qisa')\nassemble(QISA_fn)\nself.assertTrue(file_compare(QISA_fn, GOLD_fn))\n"
+}

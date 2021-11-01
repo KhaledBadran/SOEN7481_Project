@@ -1,0 +1,9 @@
+{
+    "functionName": "test_update_mole_fraction_too_many_nans_but_enough_concs",
+    "className": "MixtureTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_phases_&_mixtures_&_GenericMixtureTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.air.set_mole_fraction(self.H2, values=np.nan)\nself.air.set_mole_fraction(self.N2, values=np.nan)\nself.air.set_concentration(self.H2, values=1)\nself.air.set_concentration(self.N2, values=1)\nself.air.set_concentration(self.O2, values=1)\nself.air.set_concentration(self.CO2, values=1)\nself.air.update_mole_fractions()\nassert np.all(self.air['pore.mole_fraction.' + self.N2.name] == 0.25)\n"
+}

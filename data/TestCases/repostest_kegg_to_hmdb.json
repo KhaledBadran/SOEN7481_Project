@@ -1,0 +1,9 @@
+{
+    "functionName": "test_kegg_to_hmdb",
+    "className": null,
+    "fileName": "/LoLab-VU_&_Magine/magine_&_tests_&_test_id_mapping.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    tests kegg compound to hmdb\n    :return:\n    \"\"\"\ng = nx.DiGraph()\ng.add_edge('hsa:224', 'hsa:219')\ng.add_edge('hsa:219', 'cpd:C00197')\ng.add_edge('cpd:C00197', 'cpd:C00197')\ng.add_edge('cpd:C15972', 'cpd:C00197')\ng.add_edge('cpd:C15972', 'cpd:C00469')\nchange_dict, kegg_short, chem_names = cm.convert_kegg_nodes(g)\nnx.set_node_attributes(g, kegg_short, 'keggName')\nnx.set_node_attributes(g, chem_names, 'chemName')\nnx.set_node_attributes(g, change_dict, 'hmdbNames')\ndict2, kegg_short = gm.convert_kegg_nodes(g)\nnx.set_node_attributes(g, kegg_short, 'keggName')\nchange_dict.update(dict2)\ng = nx.relabel_nodes(g, change_dict)\nanswer = '(2R)-2-Hydroxy-3-(phosphonatooxy)propanoate'\nok_(g.node['HMDB0060180']['chemName'] == answer)\nok_(g.node['HMDB0060180']['keggName'] == 'C00197')\n"
+}

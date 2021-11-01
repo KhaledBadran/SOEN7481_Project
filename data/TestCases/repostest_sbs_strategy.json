@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sbs_strategy",
+    "className": null,
+    "fileName": "/gelijergensen_&_PermutationImportance/test_&_test_selection_strategies.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "training_data = np.random.rand(5, 3), np.random.rand(5)\nscoring_data = np.random.rand(5, 3), np.random.rand(5)\nnum_vars = training_data[0].shape[1]\nimportant_vars = [1]\nstrategy = SequentialBackwardSelectionStrategy(training_data, scoring_data,\n    num_vars, important_vars)\nassert getattr(strategy, 'name') == 'Sequential Backward Selection'\nexpected = [(0, (training_data[0][:, ([2])], training_data[1]), (\n    scoring_data[0][:, ([2])], scoring_data[1])), (2, (training_data[0][:,\n    ([0])], training_data[1]), (scoring_data[0][:, ([0])], scoring_data[1]))]\nfor (exp_var, exp_train_data, exp_score_data), (res_var, res_train_data,\n    res_score_data) in zip(expected, strategy):\n    assert exp_var == res_var\n    assert (exp_train_data[0] == res_train_data[0]).all()\n    assert (exp_train_data[1] == res_train_data[1]).all()\n    assert (exp_score_data[0] == res_score_data[0]).all()\n    assert (exp_score_data[1] == res_score_data[1]).all()\n"
+}

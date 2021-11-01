@@ -1,0 +1,9 @@
+{
+    "functionName": "testManyToOne",
+    "className": "CIMTestCase",
+    "fileName": "/rwl_&_PyCIM/PyCIM_&_Test_&_CIM14Test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Test many-to-one bidirectional references.\n        \"\"\"\ntw1 = TransformerWinding()\ntw2 = TransformerWinding()\npt1 = PowerTransformer(TransformerWindings=[tw1])\npt1.addTransformerWindings(tw2)\nself.assertTrue(tw1 in pt1.TransformerWindings)\nself.assertTrue(tw2 in pt1.TransformerWindings)\nself.assertEqual(tw1.PowerTransformer, pt1)\nself.assertEqual(tw2.PowerTransformer, pt1)\npt2 = PowerTransformer()\npt2.addTransformerWindings(tw2)\nself.assertTrue(tw1 in pt1.TransformerWindings)\nself.assertTrue(tw2 in pt2.TransformerWindings)\nself.assertFalse(tw2 in pt1.TransformerWindings)\nself.assertNotEqual(tw2.PowerTransformer, pt1)\nself.assertEqual(tw2.PowerTransformer, pt2)\ntw3 = TransformerWinding()\npt1.setTransformerWindings([tw3])\nself.assertFalse(tw1 in pt1.TransformerWindings)\nself.assertTrue(tw3 in pt1.TransformerWindings)\nself.assertEqual(tw1.PowerTransformer, None)\nself.assertEqual(tw3.PowerTransformer, pt1)\npt1.removeTransformerWindings(tw3)\nself.assertFalse(tw3 in pt1.TransformerWindings)\nself.assertEqual(tw3.PowerTransformer, None)\n"
+}

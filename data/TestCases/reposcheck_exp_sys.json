@@ -1,0 +1,9 @@
+{
+    "functionName": "check_exp_sys",
+    "className": null,
+    "fileName": "/alex-ber_&_AlexBerUtils/tests_&_utils_&_init_app_conf_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "general_d = default_d.get('general', None)\nassert general_d is not None\napp_d = default_d.get('app', None)\nassert app_d is not None\napp_str_d = app_d.get('as_str', None)\nassert app_str_d is not None\nexp_val = exp_d['general.profiles']\nval = general_d.get('profiles', None)\npytest.assume(exp_val == val)\nfor flat_key, exp_val in exp_d.items():\n    if flat_key.startswith('general'):\n        continue\n    arr = flat_key.split('.')\n    key = arr[-1]\n    dd = app_str_d if 'as_str' in flat_key else app_d\n    val = dd.get(key, None)\n    pytest.assume(exp_val == val)\n"
+}

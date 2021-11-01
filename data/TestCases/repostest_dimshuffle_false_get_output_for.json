@@ -1,0 +1,9 @@
+{
+    "functionName": "test_dimshuffle_false_get_output_for",
+    "className": "TestConv2DCCLayer",
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_conv.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "try:\n    from lasagne.layers.cuda_convnet import Conv2DCCLayer\nexcept ImportError:\n    pytest.skip('cuda_convnet not available')\nfrom pylearn2.sandbox.cuda_convnet.filter_acts import FilterActs\nfilter_acts = FilterActs(stride=1, pad=0, partial_sum=1)\ninput = theano.shared(floatX(np.random.random((4, 5, 5, 8))))\nkernel = theano.shared(floatX(np.random.random((4, 3, 3, 16))))\ninput_layer = DummyInputLayer((4, 5, 5, 8))\nlayer = Conv2DCCLayer(input_layer, num_filters=16, filter_size=(3, 3),\n    dimshuffle=False, W=kernel, b=None, nonlinearity=None)\noutput = np.array(filter_acts(input, kernel).eval())\nactual = layer.get_output_for(input).eval()\nactual = np.array(actual)\nassert actual.shape == output.shape\nassert actual.shape == layer.output_shape\nassert np.allclose(actual, output)\n"
+}

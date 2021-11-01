@@ -1,0 +1,9 @@
+{
+    "functionName": "testSetupKMeansNestedSampling_deprecated",
+    "className": null,
+    "fileName": "/muma7490_&_PyDIAMONDS-Background/tests_&_test_Background.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "arrayList = [np.array([0]), np.array([0, 1, 2]), np.array(([0, 1], [0, 1]))]\ndef testSetup_File(method, array):\n    np.savetxt(testPath + 'Xmeans_configuringParameters.txt', array)\n    return method(dataPath=testPath)\ndef testSetup_Data(method, array):\n    return method(data=array)\ntestFunctions = [valueObject._setupKmeans, valueObject._setupNestedSampling]\nfor method in testFunctions:\n    for array in arrayList:\n        with pytest.raises(ValueError):\n            testSetup_File(method, array)\n            testSetup_Data(method, array)\n"
+}

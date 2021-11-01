@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_model_404",
+    "className": null,
+    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_server_&_tests_&_test_exceptions.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "method = V01 + '/{}/DOES_NOT_EXISTS'.format(method)\nwith _silent('stderr'):\n    res = app_notest.get(method)\ndata = parse_res(res)\nassert res.status_code in [500, 404]\nassert sorted(data.keys()) == sorted(['messages'])\npytest.mark.parametrize('method', ['feature-extraction', 'categorization',\n    'lsi', 'clustering'])"
+}

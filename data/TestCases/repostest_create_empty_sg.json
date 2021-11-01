@@ -1,0 +1,9 @@
+{
+    "functionName": "test_create_empty_sg",
+    "className": "CITestProvisioning",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test create_empty_sg.\"\"\"\nstorage_group_name = self.generate_name('sg')\nstorage_group_details = self.provisioning.create_empty_sg(self.SRP,\n    storage_group_name, self.SLO, None)\nself.addCleanup(self.delete_storage_group, storage_group_name)\nself._validate_storage_group_details(storage_group_name, storage_group_details)\nvolume_count = storage_group_details[constants.NUM_OF_VOLS]\nself.assertEqual(0, volume_count)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "compare_both",
+    "className": null,
+    "fileName": "/klahnakoski_&_Bugzilla-ETL/tests_&_test_etl.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "errors_dir = File(settings.param.errors)\nerrors_dir.delete()\ntry_dir = errors_dir / 'try'\nref_dir = errors_dir / 'ref'\nmax_time = coalesce(milli2datetime(reference.settings.max_timestamp),\n    datetime.utcnow())\nwith Timer('Comparing to reference'):\n    candidateq = get_esq(candidate)\n    referenceq = get_esq(reference)\n    found_errors = False\n    for bug_id in bug_ids:\n        Log.note('compare {{bug}}', bug=bug_id)\n        try:\n            versions = jx.sort(get_all_bug_versions(None, bug_id, max_time,\n                esq=candidateq), 'modified_ts')\n            for v in versions:\n                v.etl = None\n            pre_ref_versions = get_all_bug_versions(None, bug_id, max_time,\n                esq=referenceq)\n            ref_versions = jx.sort(pre_ref_versions, 'modified_ts')\n            for v in ref_versions:\n                v.etl = None\n            can = value2json(scrub(versions), pretty=True)\n            ref = value2json(scrub(ref_versions), pretty=True)\n            if can != ref:\n                found_errors = True\n                (try_dir / text_type(bug_id)).set_extension('txt').write(can)\n                (ref_dir / text_type(bug_id)).set_extension('txt').write(ref)\n        except Exception as e:\n            found_errors = True\n            Log.warning(\"Problem ETL'ing bug {{bug_id}}\", bug_id=bug_id,\n                cause=e)\n    if found_errors:\n        Log.error('DIFFERENCES FOUND (Differences shown in {{path}})', path\n            =[try_dir, ref_dir])\n"
+}

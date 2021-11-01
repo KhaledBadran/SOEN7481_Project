@@ -1,0 +1,9 @@
+{
+    "functionName": "test_meta_template_file",
+    "className": "TestBuildCommand",
+    "fileName": "/cournape_&_Bento/bento_&_commands_&_tests_&_test_build.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "bento_info = \"\"\"Name: foo\n\nMetaTemplateFiles: foo/__package_info.py.in\n\nLibrary:\n    Packages: foo\n\"\"\"\nn = self.top_node.make_node(op.join('foo', '__package_info.py.in'))\nn.parent.mkdir()\nn.write('NAME = $NAME\\n')\nself._execute_build(bento_info)\npackage_info = self.build_node.find_node(op.join('foo', '__package_info.py'))\nr_package_info = 'NAME = \"foo\"\\n'\nself.assertEqual(package_info.read(), r_package_info)\n"
+}

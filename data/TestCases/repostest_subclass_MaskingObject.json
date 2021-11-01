@@ -1,0 +1,9 @@
+{
+    "functionName": "test_subclass_MaskingObject",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_Mask.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "try:\n\n\n    class Missing__call__(MaskingObject):\n        dimensionality = '2D'\n\n        def __init__(self, *args, **kwargs):\n            pass\n\n        def plot(self, ax, transformation=None, **kwargs):\n            pass\n    assert False\nexcept TypeError as E:\n    print(E)\n    assert True\ntry:\n\n\n    class Missing__plot__(MaskingObject):\n        dimensionality = '2D'\n\n        def __init__(self, *args, **kwargs):\n            pass\n\n        def __call__(self, ax, **kwargs):\n            pass\n    assert False\nexcept TypeError as E:\n    print(E)\n    assert True\ntry:\n\n\n    class Wrong__plot__(MaskingObject):\n        dimensionality = '2D'\n\n        def __init__(self, *args, **kwargs):\n            pass\n\n        def __call__(self, ax, **kwargs):\n            pass\n\n        def plot(self, ax, **kwargs):\n            pass\n    assert False\nexcept TypeError as E:\n    print(E)\n    assert True\n"
+}

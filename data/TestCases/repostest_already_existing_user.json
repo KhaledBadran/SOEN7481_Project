@@ -1,0 +1,9 @@
+{
+    "functionName": "test_already_existing_user",
+    "className": "TestCreateUser",
+    "fileName": "/fvalverd_&_AutoApi/tests_&_test_operations.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "test_data = {'email': self.user, 'password': self.password, 'api': self.api}\nadmin_headers = self.get_admin_headers()\nresponse = self.app.post('/user', headers=admin_headers, data=json.dumps(\n    test_data), content_type='application/json')\nself.assertEqual(response.status_code, 409)\nresponse_json = json.loads(response.data or '{}')\nself.assertDictContainsSubset({'message': u'User already exists'},\n    response_json)\n"
+}

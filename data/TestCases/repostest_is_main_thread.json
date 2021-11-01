@@ -1,0 +1,9 @@
+{
+    "functionName": "test_is_main_thread",
+    "className": null,
+    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_utilities.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from _pydevd_bundle.pydevd_utils import is_current_thread_main_thread\nfrom _pydevd_bundle.pydevd_utils import dump_threads\nif not is_current_thread_main_thread():\n    error_msg = 'Current thread does not seem to be a main thread. Details:\\n'\n    current_thread = threading.current_thread()\n    error_msg += 'Current thread: %s\\n' % (current_thread,)\n    if hasattr(threading, 'main_thread'):\n        error_msg += 'Main thread found: %s\\n' % (threading.main_thread(),)\n    else:\n        error_msg += 'Current main thread not instance of: %s (%s)' % (\n            threading._MainThread, current_thread.__class__.__mro__)\n    try:\n        from StringIO import StringIO\n    except:\n        from io import StringIO\n    stream = StringIO()\n    dump_threads(stream=stream)\n    error_msg += '\\n\\n' + stream.getvalue()\n    raise AssertionError(error_msg)\nclass NonMainThread(threading.Thread):\n\n    def run(self):\n        self.is_main_thread = is_current_thread_main_thread()\nnon_main_thread = NonMainThread()\nnon_main_thread.start()\nnon_main_thread.join()\nassert not non_main_thread.is_main_thread\n"
+}

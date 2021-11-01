@@ -1,0 +1,9 @@
+{
+    "functionName": "test_propagate_ages_location_component",
+    "className": "TestContribution",
+    "fileName": "/PmagPy_&_PmagPy/pmagpy_tests_&_test_contribution_builder.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.con.propagate_min_max_up(min_suffix='lowest', max_suffix='highest')\nres = self.con.tables['locations'].df.loc[['Tel Hazor'], 'age_lowest'].values[0\n    ]\nself.assertEqual(-2700, res)\nres = self.con.tables['locations'].df.loc[['Tel Megiddo'], 'age_highest'\n    ].values[0]\nself.assertEqual(-740, res)\nself.con.tables['locations'].df.loc['Tel Hazor', 'age_high'] = 10\nself.con.propagate_min_max_up()\nres = self.con.tables['locations'].df.loc[['Tel Hazor'], 'age_high'].values[0]\nself.assertEqual(10, res)\nres = self.con.tables['locations'].df.loc[['Tel Megiddo'], 'age_high'].values[0\n    ]\nself.assertEqual(-740, res)\nres = self.con.tables['locations'].df.loc[['Tel Megiddo'], 'age_low'].values[0]\nself.assertEqual(-3000, res)\nself.con.tables['sites'].df.drop(['age'], axis='columns', inplace=True)\nres = self.con.propagate_min_max_up(min_suffix='lowest', max_suffix='highest')\n"
+}

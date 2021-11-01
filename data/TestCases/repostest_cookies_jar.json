@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cookies_jar",
+    "className": null,
+    "fileName": "/RobertoPrevato_&_BlackSheep/tests_&_client_&_test_cookiejar.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "fake_pools = FakePools([Response(200, set_cookies, TextContent(\n    'Hello, World!')), Response(200, None, TextContent('Hello!'))])\ncheck_cookie = False\nasync def middleware_for_assertions(request, next_handler):\n    if check_cookie:\n        if not expected_cookies:\n            assert not request.cookies\n        for expected_cookie in expected_cookies:\n            cookie = request.cookies.get(expected_cookie)\n            assert cookie is not None, f'{cookie.name.decode()} cookie must be configured for following requests'\n    return await next_handler(request)\nasync with ClientSession(pools=fake_pools, middlewares=[\n    middleware_for_assertions]) as client:\n    await client.get(first_request_url)\n    check_cookie = True\n    await client.get(second_request_url)\npytest.mark.asynciopytest.mark.parametrize(\n    'first_request_url,second_request_url,set_cookies,expected_cookies', [[\n    b'https://foo.bezkitu.org', b'https://bezkitu.org', [(b'Set-Cookie',\n    write_response_cookie(Cookie(b'X-Foo', b'Foo', domain=b'bezkitu.org')))\n    ], ['X-Foo']], [b'https://foo.bezkitu.org', b'https://foo.bezkitu.org',\n    [(b'Set-Cookie', write_response_cookie(Cookie(b'X-Foo', b'Foo', domain=\n    b'foo.bezkitu.org')))], ['X-Foo']], [b'https://foo.bezkitu.org',\n    b'https://bezkitu.org', [(b'Set-Cookie', write_response_cookie(Cookie(\n    b'X-Foo', b'Foo', domain=b'foo.bezkitu.org')))], []], [\n    b'https://bezkitu.org', b'https://foo.org', [(b'Set-Cookie',\n    write_response_cookie(Cookie(b'X-Foo', b'Foo', domain=b'bezkitu.org')))\n    ], []]])"
+}

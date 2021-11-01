@@ -1,0 +1,9 @@
+{
+    "functionName": "test_modify_host_edit_name",
+    "className": "CITestProvisioning",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test modify_host edit name.\"\"\"\nhost_name = self.create_empty_host()\nhost_list = self.provisioning.get_host_list()\nself.assertIn(host_name, host_list)\nnew_name = self.generate_name(constants.HOST)\nself.provisioning.modify_host(host_name, new_name=new_name)\nself.addCleanup(self.delete_host, new_name)\nhost_list = self.provisioning.get_host_list()\nself.assertIn(new_name, host_list)\nself.assertNotIn(host_name, host_list)\n"
+}

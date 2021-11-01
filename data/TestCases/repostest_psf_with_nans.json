@@ -1,0 +1,9 @@
+{
+    "functionName": "test_psf_with_nans",
+    "className": null,
+    "fileName": "/PaulHancock_&_Aegean/tests_&_test_source_finder.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that a psf map with nans doesn't create a crash\"\"\"\nlog = logging.getLogger('Aegean')\nsfinder = sf.SourceFinder(log=log)\nfilename = 'tests/test_files/synthetic_test.fits'\npsf = 'tests/test_files/synthetic_test_psf.fits'\nhdu = fits.open(psf)\nprint(hdu[0].data.shape)\nhdu[0].data[(0), :, :] = np.nan\nhdu.writeto('dlme_psf.fits')\ntry:\n    found = sfinder.find_sources_in_image(filename, cores=1, rms=0.5, bkg=0,\n        imgpsf='dlme_psf.fits')\nexcept AssertionError as e:\n    os.remove('dlme_psf.fits')\n    if 'major' in e.args[0]:\n        raise AssertionError('Broken on psf maps with nans')\n    else:\n        raise\nelse:\n    os.remove('dlme_psf.fits')\nreturn\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_di_block",
+    "className": "TestMagicDataFrame",
+    "fileName": "/PmagPy_&_PmagPy/pmagpy_tests_&_test_contribution_builder.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "magic_df = cb.MagicDataFrame(os.path.join(PROJECT_WD, 'sites.txt'), dmodel=\n    DMODEL)\ndi_block = magic_df.get_di_block(df_slice='all')\nself.assertEqual([289.8, 43.6], di_block[0])\ndi_block = magic_df.get_di_block(do_index=True, item_names=['1', '2'])\nself.assertEqual([289.8, 43.6], di_block[0])\nself.assertEqual(4, len(di_block))\nmagic_df.df.loc['2', 'method_codes'] = 'fake_code'\ndi_block = magic_df.get_di_block(do_index=True, item_names=['1', '2'], excl\n    =['fake_code'])\nself.assertEqual(2, len(di_block))\n"
+}

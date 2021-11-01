@@ -1,0 +1,9 @@
+{
+    "functionName": "build_certificate",
+    "className": null,
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_session.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Programmatically generate a self-signed certificate for testing purposes.\n\n    Args:\n        common_names (list): A list of strings for the common names of the\n            cert.\n        include_extension (boolean): A flag enabling/disabling the inclusion\n            of certificate extensions.\n        bad_extension (boolean): A flag enabling/disabling the setting of\n            invalid certificate extension values.\n\n    Returns:\n        x509.Certificate: The newly generated certificate object.\n    \"\"\"\nnames = []\nfor common_name in common_names:\n    names.append(x509.NameAttribute(x509.oid.NameOID.COMMON_NAME, common_name))\nname = x509.Name(names)\nt = datetime.datetime.now()\ndelta = datetime.timedelta(days=30)\nnot_valid_before = t - delta\nnot_valid_after = t + delta\nprivate_key = rsa.generate_private_key(public_exponent=65537, key_size=2048,\n    backend=default_backend())\nbuilder = x509.CertificateBuilder().serial_number(1).issuer_name(name\n    ).subject_name(name).not_valid_before(not_valid_before).not_valid_after(\n    not_valid_after).public_key(private_key.public_key())\nextended_key_usage_values = []\nif bad_extension:\n    extended_key_usage_values.append(x509.oid.ExtendedKeyUsageOID.SERVER_AUTH)\nelse:\n    extended_key_usage_values.append(x509.oid.ExtendedKeyUsageOID.CLIENT_AUTH)\nif include_extension:\n    builder = builder.add_extension(x509.ExtendedKeyUsage(\n        extended_key_usage_values), True)\nreturn builder.sign(private_key, hashes.SHA256(), default_backend())\n"
+}

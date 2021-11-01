@@ -1,0 +1,9 @@
+{
+    "functionName": "test_make_tag",
+    "className": null,
+    "fileName": "/PlaidWeb_&_Publ/tests_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" test of utils.make_tag \"\"\"\nassert utils.make_tag('a', {'href': 'foo'}, False) == '<a href=\"foo\">'\nassert utils.make_tag('a', [('href', 'foo'), ('href', 'bar')], True\n    ) == '<a href=\"foo\" href=\"bar\" />'\nwith pytest.raises(Exception):\n    utils.make_tag('a', ('href', 'foo'))\napp = flask.Flask(__name__)\nwith app.test_request_context():\n    proxy = utils.CallableValue('<hello>')\n    assert utils.make_tag('a', {'href': proxy}) == '<a href=\"&lt;hello&gt;\">'\nescaped = flask.Markup('&amp;')\nassert utils.make_tag('a', {'href': escaped}) == '<a href=\"&amp;\">'\n"
+}

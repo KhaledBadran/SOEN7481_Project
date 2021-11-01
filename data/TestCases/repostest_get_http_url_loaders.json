@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_http_url_loaders",
+    "className": null,
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_BundleTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Find loaders for HTTP URLs\n    \"\"\"\nout = StringIO()\nr0 = Remote('remote')\nr0.accessor_configs.append(URLConfig('http://example.org/bundle_remote0'))\nfor l in r0.generate_loaders():\n    if isinstance(l, HTTPBundleLoader):\n        return\nraise AssertionError('No HTTPBundleLoader was created')\n"
+}

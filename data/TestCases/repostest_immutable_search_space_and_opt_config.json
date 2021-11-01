@@ -1,0 +1,9 @@
+{
+    "functionName": "test_immutable_search_space_and_opt_config",
+    "className": "ExperimentTest",
+    "fileName": "/facebook_&_Ax/ax_&_core_&_tests_&_test_experiment.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "mutable_exp = self._setupBraninExperiment(n=5)\nself.assertFalse(mutable_exp.immutable_search_space_and_opt_config)\nimmutable_exp = Experiment(name='test4', search_space=\n    get_branin_search_space(), tracking_metrics=[BraninMetric(name='b',\n    param_names=['x1', 'x2'])], optimization_config=\n    get_branin_optimization_config(), runner=SyntheticRunner(), properties=\n    {Keys.IMMUTABLE_SEARCH_SPACE_AND_OPT_CONF: True})\nself.assertTrue(immutable_exp.immutable_search_space_and_opt_config)\nwith self.assertRaises(UnsupportedError):\n    immutable_exp.optimization_config = get_branin_optimization_config()\nimmutable_exp.new_batch_trial()\nwith self.assertRaises(UnsupportedError):\n    immutable_exp.search_space = get_branin_search_space()\nimmutable_exp_2 = Experiment(name='test4', search_space=\n    get_branin_search_space(), tracking_metrics=[BraninMetric(name='b',\n    param_names=['x1', 'x2'])], runner=SyntheticRunner(), properties={Keys.\n    IMMUTABLE_SEARCH_SPACE_AND_OPT_CONF.value: True})\nself.assertTrue(immutable_exp_2.immutable_search_space_and_opt_config)\n"
+}

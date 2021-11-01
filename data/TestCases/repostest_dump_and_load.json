@@ -1,0 +1,9 @@
+{
+    "functionName": "test_dump_and_load",
+    "className": null,
+    "fileName": "/bytesandbrains_&_ProcessOptimizer/ProcessOptimizer_&_tests_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "res = gp_minimize(bench3, [(-2.0, 2.0)], x0=[0.0], acq_func='LCB', n_calls=\n    2, n_random_starts=0, random_state=1)\nwith tempfile.TemporaryFile() as f:\n    dump(res, f)\n    f.seek(0)\n    res_loaded = load(f)\ncheck_optimization_results_equality(res, res_loaded)\nassert_true('func' in res_loaded.specs['args'])\nwith tempfile.TemporaryFile() as f:\n    dump(res, f, store_objective=False)\n    f.seek(0)\n    res_loaded = load(f)\ncheck_optimization_results_equality(res, res_loaded)\nassert_true(not 'func' in res_loaded.specs['args'])\ndel res.specs['args']['func']\nwith tempfile.TemporaryFile() as f:\n    dump(res, f, store_objective=False)\n    f.seek(0)\n    res_loaded = load(f)\ncheck_optimization_results_equality(res, res_loaded)\nassert_true(not 'func' in res_loaded.specs['args'])\npytest.mark.fast_test"
+}

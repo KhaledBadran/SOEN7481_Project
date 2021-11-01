@@ -1,0 +1,9 @@
+{
+    "functionName": "test_text_file_range_request_multi_part",
+    "className": null,
+    "fileName": "/RobertoPrevato_&_BlackSheep/tests_&_test_files_serving.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "file_path = _get_file_path('example.txt')\nresponse = get_response_for_file(Request('GET', b'/example', [(b'Range',\n    range_value)]), file_path, 1200)\nassert response.status == 206\ncontent_type = response.content.type\nboundary = content_type.split(b'=')[1]\nbody = await response.read()\nexpected_bytes_lines = [line.replace(b'##BOUNDARY##', boundary) for line in\n    expected_bytes_lines]\nassert body.splitlines() == expected_bytes_lines\npytest.mark.asynciopytest.mark.parametrize('range_value,expected_bytes_lines', [[\n    b'bytes=0-10, 10-20', [b'--##BOUNDARY##', b'Content-Type: text/plain',\n    b'Content-Range: bytes 0-10/447', b'', b'Lorem ipsu', b'--##BOUNDARY##',\n    b'Content-Type: text/plain', b'Content-Range: bytes 10-20/447', b'',\n    b'm dolor si', b'--##BOUNDARY##--']], [b'bytes=0-10, -66', [\n    b'--##BOUNDARY##', b'Content-Type: text/plain',\n    b'Content-Range: bytes 0-10/447', b'', b'Lorem ipsu', b'--##BOUNDARY##',\n    b'Content-Type: text/plain', b'Content-Range: bytes 381-446/447', b'',\n    b'nt, sunt in culpa qui officia deserunt mollit anim id est laborum.',\n    b'--##BOUNDARY##--']]])"
+}

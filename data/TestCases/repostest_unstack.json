@@ -1,0 +1,9 @@
+{
+    "functionName": "test_unstack",
+    "className": "TestMath",
+    "fileName": "/tum-pbs_&_PhiFlow/tests_&_test_math.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tensor = random_uniform([1, 2, 3, 4])\nfor dim in range(len(tensor.shape)):\n    components = unstack(tensor, dim, keepdims=True)\n    np.testing.assert_equal(tensor, concat(components, axis=dim))\n    components = unstack(tensor, dim, keepdims=False)\n    np.testing.assert_equal(tensor, stack(components, axis=dim))\nsess = tf.InteractiveSession()\nfor dim in range(len(tensor.shape)):\n    components = unstack(tf.constant(tensor), dim, keepdims=True)\n    np.testing.assert_equal(tensor, concat(components, axis=dim).eval())\n    components = unstack(tf.constant(tensor), dim, keepdims=False)\n    np.testing.assert_equal(tensor, stack(components, axis=dim).eval())\n"
+}

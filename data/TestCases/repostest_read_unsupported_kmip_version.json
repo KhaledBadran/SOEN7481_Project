@@ -1,0 +1,9 @@
+{
+    "functionName": "test_read_unsupported_kmip_version",
+    "className": "TestProtectionStorageMasks",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a VersionNotSupported error is raised during the decoding of\n        a ProtectionStorageMasks structure when the structure is read for an\n        unsupported KMIP version.\n        \"\"\"\nprotection_storage_masks = objects.ProtectionStorageMasks()\nargs = self.full_encoding,\nkwargs = {'kmip_version': enums.KMIPVersion.KMIP_1_2}\nself.assertRaisesRegex(exceptions.VersionNotSupported,\n    'KMIP 1.2 does not support the ProtectionStorageMasks object.',\n    protection_storage_masks.read, *args, **kwargs)\n"
+}

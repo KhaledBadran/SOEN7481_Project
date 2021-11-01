@@ -1,0 +1,9 @@
+{
+    "functionName": "test_can_show_help",
+    "className": "CommandLineTest",
+    "fileName": "/schlind_&_Karlsruher/tests_&_commandline_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"CommandLine must show help.\"\"\"\nwith self.managed_io() as (out, err):\n    for arg in ['', '-help', 'what?']:\n        sys.argv = [arg]\n        self.assertEqual(0, CommandLine.run())\n        console = out.getvalue().strip()\n        self.assertTrue(console.startswith('Karlsruher '), console)\n"
+}

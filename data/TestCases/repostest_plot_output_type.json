@@ -1,0 +1,9 @@
+{
+    "functionName": "test_plot_output_type",
+    "className": null,
+    "fileName": "/bio-phys_&_MDBenchmark/mdbenchmark_&_tests_&_test_plot.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"check whether output types are constructed correctly.\n    \"\"\"\nwith tmpdir.as_cwd():\n    output = (\n        \"\"\"All modules will be plotted.\nAll hosts will be plotted.\nA total of 2 runs will be plotted.\nYour file was saved as 'test.{}' in the working directory.\n\"\"\"\n        .format(output_type))\n    output = (\n        \"\"\"Plotting GPU and CPU data.\nPlotting all hosts in input file.\nPlotting all modules in your input data.\nYour file was saved as 'testfile.{}' in the working directory.\n\"\"\"\n        .format(output_type))\n    result = cli_runner.invoke(cli, ['plot', '--csv={}'.format(data[\n        'test.csv']), '--output-name=testfile', '--output-format={}'.format\n        (output_type)])\n    assert result.output == output\n    assert result.exit_code == 0\npytest.mark.parametrize('output_type', ('png', 'pdf'))"
+}

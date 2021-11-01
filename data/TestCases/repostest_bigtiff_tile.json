@@ -1,0 +1,9 @@
+{
+    "functionName": "test_bigtiff_tile",
+    "className": null,
+    "fileName": "/mapbox_&_COGDumper/tests_&_test_filedumper.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "reader = FileReader(bigtiff)\ncog = COGTiff(reader.read)\nmime_type, tile = cog.get_tile(0, 0, 0)\nassert 1 == len(cog._image_ifds[0]['offsets'])\nassert 1 == len(cog._image_ifds[0]['byte_counts'])\nassert 'jpeg_tables' in cog._image_ifds[0]\nassert cog._image_ifds[0]['jpeg_tables'] is None\nassert mime_type == 'application/octet-stream'\n"
+}

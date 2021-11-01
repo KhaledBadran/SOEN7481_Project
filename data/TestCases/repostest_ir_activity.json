@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ir_activity",
+    "className": null,
+    "fileName": "/mesonepigreco_&_CellConstructor/tests_&_TestIrRamanActivity_&_test_ir_raman_activity.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "total_path = os.path.dirname(os.path.abspath(__file__))\nos.chdir(total_path)\ndyn = CC.Phonons.Phonons('dynmat')\ndyn.Symmetrize()\nws, pols = dyn.DyagDinQ(0)\nir_active_modes = dyn.GetIRActive()\nraman_active_modes = dyn.GetRamanActive()\nprint()\nfor i, w in enumerate(ws * CC.Phonons.RY_TO_CM):\n    print('{:4d}) {:16.8f} cm-1 | IR active? {} | Raman active? {}'.format(\n        i, w, ir_active_modes[i], raman_active_modes[i]))\nprint('Done.')\n"
+}

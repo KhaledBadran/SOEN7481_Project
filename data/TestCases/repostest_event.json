@@ -1,0 +1,9 @@
+{
+    "functionName": "test_event",
+    "className": "Test",
+    "fileName": "/PyUserInput_&_PyUserInput/tests_&_test_unix.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "for size in screen_sizes:\n    with Display(visible=VISIBLE, size=size):\n        time.sleep(1.0)\n        mouse = PyMouse()\n        event = Event()\n        event.start()\n        for p in positions:\n            event.reset()\n            mouse.move(*p)\n            time.sleep(0.01)\n            print('check ', expect_pos(p, size), '=', event.pos)\n            eq_(expect_pos(p, size), event.pos)\n        for btn in buttons:\n            event.reset()\n            mouse.press(0, 0, btn)\n            time.sleep(0.01)\n            print('check button', btn, 'pressed')\n            eq_(btn, event.button)\n            eq_(True, event.press)\n            event.reset()\n            mouse.release(0, 0, btn)\n            time.sleep(0.01)\n            print('check button', btn, 'released')\n            eq_(btn, event.button)\n            eq_(False, event.press)\n\n        def check_scroll(btn, vertical=None, horizontal=None):\n            event.reset()\n            mouse.press(0, 0, btn)\n            time.sleep(0.01)\n            if vertical:\n                eq_(vertical, event.scroll_vertical)\n            elif horizontal:\n                eq_(horizontal, event.scroll_horizontal)\n        print('check scroll up')\n        check_scroll(4, 1, 0)\n        print('check scroll down')\n        check_scroll(5, -1, 0)\n        print('check scroll left')\n        check_scroll(6, 0, 1)\n        print('check scroll right')\n        check_scroll(7, 0, -1)\n        event.stop()\n"
+}

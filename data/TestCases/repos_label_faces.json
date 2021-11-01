@@ -1,0 +1,9 @@
+{
+    "functionName": "_label_faces",
+    "className": "DelaunayVoronoiDual",
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_network_&_DelaunayVoronoiDual.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        Label the pores sitting on the faces of the domain in accordance with\n        the conventions used for cubic etc.\n        \"\"\"\ncoords = np.around(self['pore.coords'], decimals=10)\nmin_labels = ['front', 'left', 'bottom']\nmax_labels = ['back', 'right', 'top']\nmin_coords = np.amin(coords, axis=0)\nmax_coords = np.amax(coords, axis=0)\nfor ax in range(3):\n    self['pore.' + min_labels[ax]] = coords[:, (ax)] == min_coords[ax]\n    self['pore.' + max_labels[ax]] = coords[:, (ax)] == max_coords[ax]\n"
+}

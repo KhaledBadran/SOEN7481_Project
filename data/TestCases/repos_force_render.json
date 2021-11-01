@@ -1,0 +1,9 @@
+{
+    "functionName": "_force_render",
+    "className": null,
+    "fileName": "/nipy_&_PySurfer/surfer_&_viz.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Ensure plots are updated before properties are used\"\"\"\nif not isinstance(figures, list):\n    figures = [[figures]]\n_gui = GUI()\norig_val = _gui.busy\n_gui.set_busy(busy=True)\n_gui.process_events()\nfor ff in figures:\n    for f in ff:\n        f.render()\n        mlab.draw(figure=f)\n_gui.set_busy(busy=orig_val)\n_gui.process_events()\n"
+}

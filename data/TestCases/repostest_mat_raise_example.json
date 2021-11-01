@@ -1,0 +1,9 @@
+{
+    "functionName": "test_mat_raise_example",
+    "className": null,
+    "fileName": "/NUAA-AL_&_ALiPy/test_&_test_repository.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with pytest.raises(ValueError, match=\n    'Different length of the given parameters found.*'):\n    mr3 = MatrixRepository(labels=y[label_ind], indexes=label_ind, examples\n        =X[label_ind[0:3]])\nwith pytest.raises(Exception, match=\n    'This repository has the instance information.*'):\n    mr2.update_query(labels=[1], indexes=[9])\nwith pytest.warns(ValidityWarning, match='.*is not in the repository.*'):\n    mr2.discard(index=7)\nwith pytest.raises(ValueError, match='Different length of parameters found.*'):\n    mr2.update_query(labels=[1], indexes=[10, 9])\nwith pytest.warns(ValidityWarning, match='.*is not in the repository.*'):\n    mr2.retrieve_by_indexes(indexes=7)\nwith pytest.warns(ValidityWarning, match=\n    '.*or retrieving is not in the repository.*'):\n    mr2.retrieve_by_examples(examples=[4, 4])\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_updateCalibration",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_DataFile.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "calibFiles = ['Data/Normalization80_1.calib',\n    'Data/Normalization80_3.calib', 'Data/Normalization80_5.calib']\ndf = DataFile('Data/camea2018n000136.hdf')\nprint(df.I)\nprint('----------------------')\ndf.loadBinning(1)\nbinnings = df.possibleBinnings\nedges = df.instrumentCalibrationEdges\ndf.updateCalibration(calibFiles)\ndf.loadBinning(1)\nnewBinnings = df.possibleBinnings\nnewEdges = df.instrumentCalibrationEdges\nassert len(newBinnings) != len(binnings)\nassert not np.any(newEdges != edges)\ndf.updateCalibration(calibFiles, overwrite=True)\ndf.loadBinning(1)\nnewEdges = df.instrumentCalibrationEdges\nassert np.any(newEdges != edges)\n"
+}

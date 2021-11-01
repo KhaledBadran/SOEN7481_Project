@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_on_invalid_key_wrapping_specification",
+    "className": "TestProxyKmipClient",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_test_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a TypeError exception is raised when trying to retrieve a\n        secret with an invalid key wrapping specification.\n        \"\"\"\nargs = ['1']\nkwargs = {'key_wrapping_specification': 'invalid'}\nwith ProxyKmipClient() as client:\n    self.assertRaisesRegex(TypeError,\n        'Key wrapping specification must be a dictionary.', client.get, *\n        args, **kwargs)\nmock.patch('kmip.pie.client.KMIPProxy', mock.MagicMock(spec_set=KMIPProxy))"
+}

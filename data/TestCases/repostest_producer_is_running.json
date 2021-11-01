@@ -1,0 +1,9 @@
+{
+    "functionName": "test_producer_is_running",
+    "className": null,
+    "fileName": "/Drakkar-Software_&_OctoBot-Channels/tests_&_test_producer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class TestChannel(Channel):\n    PRODUCER_CLASS = EmptyTestProducer\ndel_chan(TEST_CHANNEL)\nawait create_channel_instance(TestChannel, set_chan)\nproducer = EmptyTestProducer(get_chan(TEST_CHANNEL))\nassert not producer.is_running\nawait producer.run()\nassert producer.is_running\nawait get_chan(TEST_CHANNEL).stop()\nassert not producer.is_running\npytest.mark.asyncio"
+}

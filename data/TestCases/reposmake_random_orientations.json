@@ -1,0 +1,9 @@
+{
+    "functionName": "make_random_orientations",
+    "className": null,
+    "fileName": "/jonwright_&_ImageD11/test_&_test_indexing.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Generate random quaternions and convert to U matrices\n    \"\"\"\nq = np.random.standard_normal((4, N))\ns = 1 / (q * q).sum(axis=0)\nU = np.zeros((N, 3, 3), float)\nr, i, j, k = 0, 1, 2, 3\nU[:, (0), (0)] = 1 - 2 * s * (q[j] * q[j] + q[k] * q[k])\nU[:, (0), (1)] = 2 * s * (q[i] * q[j] - q[k] * q[r])\nU[:, (0), (2)] = 2 * s * (q[i] * q[k] + q[j] * q[r])\nU[:, (1), (0)] = 2 * s * (q[i] * q[j] + q[k] * q[r])\nU[:, (1), (1)] = 1 - 2 * s * (q[i] * q[i] + q[k] * q[k])\nU[:, (1), (2)] = 2 * s * (q[j] * q[k] - q[i] * q[r])\nU[:, (2), (0)] = 2 * s * (q[i] * q[k] - q[j] * q[r])\nU[:, (2), (1)] = 2 * s * (q[j] * q[k] + q[i] * q[r])\nU[:, (2), (2)] = 1 - 2 * s * (q[i] * q[i] + q[j] * q[j])\nreturn U\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_trial_split_is_new_best_score_should_return_true_with_one_score",
+    "className": null,
+    "fileName": "/Neuraxio_&_Neuraxle/testing_&_metaopt_&_test_trial.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "hp = HyperparameterSamples({'a': 2})\ntrial = Trial(hyperparams=hp, main_metric_name=MAIN_METRIC_NAME)\nwith trial.new_validation_split(Identity()) as trial_split:\n    trial_split.add_metric_results_train(name=MAIN_METRIC_NAME, score=0.5,\n        higher_score_is_better=False)\n    trial_split.add_metric_results_validation(name=MAIN_METRIC_NAME, score=\n        0.5, higher_score_is_better=False)\nassert trial_split.is_new_best_score()\n"
+}

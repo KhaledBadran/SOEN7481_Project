@@ -1,0 +1,9 @@
+{
+    "functionName": "test_build_key_wrapping_data",
+    "className": "TestObjectFactory",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_test_factory.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "key_wrapping_data = cobjects.KeyWrappingData(wrapping_method=enums.\n    WrappingMethod.ENCRYPT, encryption_key_information=cobjects.\n    EncryptionKeyInformation(unique_identifier='1',\n    cryptographic_parameters=cobjects.CryptographicParameters(\n    block_cipher_mode=enums.BlockCipherMode.CBC)),\n    mac_signature_key_information=cobjects.MACSignatureKeyInformation(\n    unique_identifier='2', cryptographic_parameters=cobjects.\n    CryptographicParameters(block_cipher_mode=enums.BlockCipherMode.CCM)),\n    mac_signature=b'\\x01', iv_counter_nonce=b'\\x02', encoding_option=enums.\n    EncodingOption.NO_ENCODING)\nresult = self.factory._build_key_wrapping_data(key_wrapping_data)\nself.assertIsInstance(result, dict)\nself.assertEqual(enums.WrappingMethod.ENCRYPT, result.get('wrapping_method'))\nself.assertIsInstance(result.get('encryption_key_information'), dict)\neki = result.get('encryption_key_information')\nself.assertEqual('1', eki.get('unique_identifier'))\nself.assertIsInstance(eki.get('cryptographic_parameters'), dict)\nself.assertIsInstance(result.get('mac_signature_key_information'), dict)\nmski = result.get('mac_signature_key_information')\nself.assertEqual('2', mski.get('unique_identifier'))\nself.assertIsInstance(mski.get('cryptographic_parameters'), dict)\nself.assertEqual(b'\\x01', result.get('mac_signature'))\nself.assertEqual(b'\\x02', result.get('iv_counter_nonce'))\nself.assertEqual(enums.EncodingOption.NO_ENCODING, result.get(\n    'encoding_option'))\n"
+}

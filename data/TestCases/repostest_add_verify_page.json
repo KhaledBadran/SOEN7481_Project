@@ -1,0 +1,9 @@
+{
+    "functionName": "test_add_verify_page",
+    "className": null,
+    "fileName": "/billypoke_&_Preston/tests_&_test_cache.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class Response:\n\n    def __init__(self, url, data=None, headers=None):\n        self.url = url\n        self.data = data or {}\n        self.headers = {'expires': (datetime.utcnow() + timedelta(seconds=\n            300)).strftime('%a, %d %b %Y %H:%M:%S GMT')}\n        if headers:\n            self.headers.update(headers)\n\n    def json(self):\n        return self.data\ncache.data.clear()\nr = Response('')\ncache.set(r)\nassert len(cache) == 1\nassert cache.check('') == {}\nr = Response(Preston.BASE_URL + '/test', {'foo': 'bar'})\ncache.set(r)\nassert len(cache) == 2\nassert cache.check(Preston.BASE_URL + '/test') == {'foo': 'bar'}\nr = Response(Preston.BASE_URL + '/test2', {}, {'expires': (datetime.utcnow(\n    ) + timedelta(seconds=1)).strftime('%a, %d %b %Y %H:%M:%S GMT')})\ncache.set(r)\nassert len(cache) == 3\nsleep(1)\nassert not cache.check(Preston.BASE_URL + '/test2')\nassert len(cache) == 2\n"
+}

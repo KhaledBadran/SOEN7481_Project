@@ -1,0 +1,9 @@
+{
+    "functionName": "test_nextset",
+    "className": "TestNextset",
+    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_test_nextset.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "con = self.connect(init_command='SELECT \"bar\"; SELECT \"baz\"', client_flag=\n    CLIENT.MULTI_STATEMENTS)\ncur = con.cursor()\ncur.execute('SELECT 1; SELECT 2;')\nself.assertEqual([(1,)], list(cur))\nr = cur.nextset()\nself.assertTrue(r)\nself.assertEqual([(2,)], list(cur))\nself.assertIsNone(cur.nextset())\n"
+}

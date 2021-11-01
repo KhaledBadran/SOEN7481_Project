@@ -1,0 +1,9 @@
+{
+    "functionName": "test_substitute_overhangs",
+    "className": null,
+    "fileName": "/Edinburgh-Genome-Foundry_&_DnaCauldron/tests_&_test_utils_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "record = repo.get_record('partA')\nassert dc.utils.list_digestion_overhangs([record]) == ['ATTG', 'GGCT']\nnew_record = dc.utils.substitute_overhangs(record, {'ATTG': 'ATAA'})\nassert dc.utils.list_digestion_overhangs([new_record]) == ['ATAA', 'GGCT']\nnew_record = dc.utils.substitute_overhangs(record, {'ATTG': 'ATAA'})\nassert dc.utils.list_digestion_overhangs([new_record]) == ['ATAA', 'GGCT']\nnew_record = dc.utils.substitute_overhangs(record, {'ATTG': 'ATAA'},\n    return_linear_parts=True)\nassert str(new_record.seq[:12]) == 'CGTCTCAATAAT'\n"
+}

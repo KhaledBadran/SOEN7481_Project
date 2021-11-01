@@ -1,0 +1,9 @@
+{
+    "functionName": "test_coverage_nearby_whensucceed",
+    "className": "PublicTransitApiTest",
+    "fileName": "/abdullahselek_&_HerePy/tests_&_test_publictransit_api.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with io.open('testdata/models/public_transit_api_nearby_coverage.json', 'r',\n    encoding='utf-8') as f:\n    expectedResponse = f.read()\nresponses.add(responses.GET,\n    'https://transit.ls.hereapi.com/v3/coverage/nearby.json',\n    expectedResponse, status=200)\nresponse = self._api.coverage_nearby(0, [52.516, 13.3778])\nself.assertTrue(response)\nself.assertIsInstance(response, herepy.PublicTransitResponse)\nresponses.activate"
+}

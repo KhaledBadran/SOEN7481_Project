@@ -1,0 +1,9 @@
+{
+    "functionName": "test_feature_extraction_cyrillic",
+    "className": null,
+    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_engine_&_tests_&_test_vectorizer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data_dir = os.path.join(basename, '..', '..', 'data', 'ds_002', 'raw')\ncache_dir = check_cache()\nuse_hashing = use_hashing == 'hashed'\nfe = FeatureVectorizer(cache_dir=cache_dir, mode='w')\nuuid = fe.setup(use_hashing=use_hashing)\nfe.ingest(data_dir, file_pattern='.*\\\\d.txt')\nres2 = fe._load_features(uuid)\nfilenames = fe.filenames_\nfe._filenames = None\nfilenames2 = fe.filenames_\nassert_equal(filenames2, filenames)\nassert isinstance(res2, np.ndarray) or scipy.sparse.issparse(res2\n    ), 'not an array {}'.format(res2)\nassert np.isfinite(res2.data).all()\nfe.delete()\npytest.mark.parametrize('use_hashing', ['hashed', 'non-hashed'])"
+}

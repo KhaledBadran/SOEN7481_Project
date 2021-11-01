@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_modeIDs",
+    "className": null,
+    "fileName": "/grd349_&_PBjam/pbjam_&_tests_&_test_asy_peakbag.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test for function that gets the mode ID from asy_fit\"\"\"\nst = cs.st\nnorders = cs.pars['norders']\nfunc = st.asy_fit.get_modeIDs\npbt.does_it_return(func, [st.asy_fit.fit, norders])\npbt.right_type(func, [st.asy_fit.fit, norders], pd.DataFrame)\ndf = st.asy_fit.get_modeIDs(st.asy_fit.fit, norders)\nassert all(df['nu_mad'].values == np.zeros(2 * norders))\nassert_allclose(df['nu_med'], np.array([89.05, 90.05, 99.0, 100.0]))\n"
+}

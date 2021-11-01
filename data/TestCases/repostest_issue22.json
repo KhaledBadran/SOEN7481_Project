@@ -1,0 +1,9 @@
+{
+    "functionName": "test_issue22",
+    "className": null,
+    "fileName": "/Carbonara-Project_&_Carbonara-IDB/tests_&_test_issue22.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n\n    demonstrate that functions found at addresses with the high bit set are no problem.\n\n    see github issue #22 for the backstory.\n\n    \"\"\"\ncd = os.path.dirname(__file__)\nidbpath = os.path.join(cd, 'data', 'highaddr', 'highaddr.idb')\nwith idb.from_file(idbpath) as db:\n    api = idb.IDAPython(db)\n    assert len(api.idautils.Functions()) == 1\n    assert api.idautils.Functions()[0] == 4160749567\n"
+}

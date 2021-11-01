@@ -1,0 +1,9 @@
+{
+    "functionName": "_get_spacing",
+    "className": "Cubic",
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_network_&_Cubic.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "P12 = self['throat.conns']\nC12 = self['pore.coords'][P12]\nmag = np.linalg.norm(np.diff(C12, axis=1), axis=2)\nunit_vec = np.around(np.squeeze(np.diff(C12, axis=1)) / mag, decimals=14)\nspacing = [0, 0, 0]\ndims = topotools.dimensionality(self)\nc = {tuple(row): (1) for row in unit_vec}\nif len(c.keys()) > sum(dims):\n    raise Exception('Spacing is undefined when throats point in ' +\n        'more directions than network has dimensions')\nmag = np.float64(mag.squeeze())\nfor ax in [0, 1, 2]:\n    if dims[ax]:\n        inds = np.where(unit_vec[:, (ax)] == unit_vec[:, (ax)].max())[0]\n        temp = np.unique(mag[inds])\n        if not np.allclose(temp, temp[0]):\n            raise Exception('A unique value of spacing could not be found')\n        else:\n            spacing[ax] = temp[0]\nreturn np.array(spacing)\n"
+}

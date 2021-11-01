@@ -1,0 +1,9 @@
+{
+    "functionName": "test_dimensionality_error_unit",
+    "className": "TestValidator",
+    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_validation.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Ensure that dimensionality errors in units are validation errors\n        \"\"\"\nunit_schema = {quantity: {'type': 'dict', 'isvalid_unit': True}}\nv = OurValidator(unit_schema)\nv.validate({quantity: {'units': 'candela*ampere'}})\nassert v.errors[quantity][0\n    ] == 'incompatible units; should be consistent with {}'.format(unit)\npytest.mark.parametrize('quantity, unit', [('volume', 'meter**3'), ('time',\n    'second')])"
+}

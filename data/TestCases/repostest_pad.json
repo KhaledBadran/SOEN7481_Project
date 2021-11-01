@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pad",
+    "className": "TestData",
+    "fileName": "/Jhsmit_&_ColiCoords/test_&_test_support.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "shape_0, shape_1 = zip(*[cell_obj.data.shape for cell_obj in self.cells])\nshape_0_max, shape_1_max = np.max(shape_0), np.max(shape_1)\ncell_list = CellList([pad_cell(cell_obj, (shape_0_max, shape_1_max)) for\n    cell_obj in self.cells])\nfor cell in cell_list:\n    self.assertEqual((shape_0_max, shape_1_max), cell.data.shape)\n    self.assertEqual((shape_0_max, shape_1_max), cell.coords.shape)\nx, y = self.cells.r_dist(20, 1, method='box')\ncell_list = CellList([pad_cell(cell_obj, cell_obj.data.shape) for cell_obj in\n    self.cells])\nxn, yn = cell_list.r_dist(20, 1, method='box')\nself.assertArrayEqual(y, yn)\ncell = self.cells[0]\nshape_0, shape_1 = cell.data.shape\npadded_cell = pad_cell(cell, (shape_0 + 10, shape_1 + 10))\nself.assertArrayEqual(cell.data.data_dict['storm']['x'] + 5, padded_cell.\n    data.data_dict['storm']['x'])\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_set_certificate_path",
+    "className": "TestKmipServerConfig",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_config.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the certificate_path configuration property can be set\n        correctly.\n        \"\"\"\nc = config.KmipServerConfig()\nc._logger = mock.MagicMock()\nself.assertNotIn('certificate_path', c.settings.keys())\nwith mock.patch('os.path.exists') as os_mock:\n    os_mock.return_value = True\n    c._set_certificate_path('/test/path/server.crt')\nself.assertIn('certificate_path', c.settings.keys())\nself.assertEqual('/test/path/server.crt', c.settings.get('certificate_path'))\nc._set_certificate_path(None)\nself.assertIn('certificate_path', c.settings.keys())\nself.assertEqual(None, c.settings.get('certificate_path'))\nc = config.KmipServerConfig()\nc._logger = mock.MagicMock()\nargs = 0,\nregex = (\n    'The certificate path value, if specified, must be a valid string path to a certificate file.'\n    )\nself.assertRaisesRegex(exceptions.ConfigurationError, regex, c.\n    _set_certificate_path, *args)\nself.assertNotEqual(0, c.settings.get('certificate_path'))\nargs = '/test/path/server.crt',\nregex = (\n    'The certificate path value, if specified, must be a valid string path to a certificate file.'\n    )\nwith mock.patch('os.path.exists') as os_mock:\n    os_mock.return_value = False\n    self.assertRaisesRegex(exceptions.ConfigurationError, regex, c.\n        _set_certificate_path, *args)\n    self.assertNotEqual('/test/path/server.crt', c.settings.get(\n        'certificate_path'))\n"
+}

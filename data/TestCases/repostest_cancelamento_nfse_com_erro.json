@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cancelamento_nfse_com_erro",
+    "className": "test_nfse_paulistana",
+    "fileName": "/danimaribeiro_&_PyTrustNFe/tests_&_test_nfse_paulistana.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "pfx_source = open(os.path.join(self.caminho, 'teste.pfx'), 'rb').read()\npfx = Certificado(pfx_source, '123456')\ncancelamento = self._get_cancelamento()\npath = os.path.join(os.path.dirname(__file__), 'XMLs')\nxml_return = open(os.path.join(path, 'paulistana_canc_errado.xml'), 'r').read()\nwith mock.patch('pytrustnfe.nfse.paulistana.get_authenticated_client'\n    ) as client:\n    retorno = mock.MagicMock()\n    client.return_value = retorno\n    retorno.service.CancelamentoNFe.return_value = xml_return\n    retorno = cancelamento_nfe(pfx, cancelamento=cancelamento)\n    self.assertEqual(retorno['received_xml'], xml_return)\n    self.assertEqual(retorno['object'].Cabecalho.Sucesso, False)\n    self.assertEqual(retorno['object'].Erro.ChaveNFe.NumeroNFe, 446)\n"
+}

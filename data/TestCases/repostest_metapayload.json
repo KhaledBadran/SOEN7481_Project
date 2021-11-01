@@ -1,0 +1,9 @@
+{
+    "functionName": "test_metapayload",
+    "className": null,
+    "fileName": "/MaterialsDataInfrastructureConsortium_&_CommonMetadata/matmeta_&_tests_&_test_metapayload.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "scripty = Human(given_name='Totally', family_name='NotARobot', email=\n    'a@a.com', institution='Earth')\nkwargs = dict(title='Test Payload', description='test description', source=\n    {'name': 'whatever', 'producer': 'test producer', 'url':\n    'http://www.testurl.org', 'tags': ['these', 'are', 'source', 'tags']},\n    data_contacts=[scripty], data_contributors=[scripty], links={\n    'landing_page': 'http://www.globus.org'}, licenses=[{'name':\n    'license name', 'url': 'http://www.licenseurl.org', 'description':\n    'license description', 'tags': ['license', 'tags']}])\ncitpayload = CITPayload(**kwargs)\nmdfpayload = MDFPayload(**kwargs)\nmcpayload = MCPayload(**kwargs)\nfor payload in [citpayload, mdfpayload, mcpayload]:\n    assert payload.metapayload\n"
+}

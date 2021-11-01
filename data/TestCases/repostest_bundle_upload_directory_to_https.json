@@ -1,0 +1,9 @@
+{
+    "functionName": "test_bundle_upload_directory_to_https",
+    "className": null,
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_HTTPBundleUploaderTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cut = HTTPBundleUploader(https_server.url, ssl_context=https_server.ssl_context\n    )\nwith open(p(testdir, 'random_file'), 'w') as f:\n    f.write('smashing')\ncut(testdir)\nreq = https_server.requests.get()\nwhile req['method'] != 'POST':\n    req = https_server.requests.get()\nassert req['headers']['content-type'] == BUNDLE_ARCHIVE_MIME_TYPE\n"
+}

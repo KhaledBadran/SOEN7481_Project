@@ -1,0 +1,9 @@
+{
+    "functionName": "train_model",
+    "className": "TestIO",
+    "fileName": "/SUNCAT-Center_&_CatLearn/test_&_test_io.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Function to train a Gaussian process.\"\"\"\nkdict = [{'type': 'gaussian', 'width': 0.5, 'scaling': 1.0}, {'type':\n    'linear', 'scaling': 1.0}, {'type': 'constant', 'const': 1.0}, {'type':\n    'quadratic', 'slope': 1.0, 'degree': 1.0, 'scaling': 1.0}]\nself.__class__.gp = GaussianProcess(train_fp=train_features, train_target=\n    train_targets, kernel_list=kdict, regularization=np.sqrt(0.001),\n    optimize_hyperparameters=True, scale_data=False)\nio.write(filename='test-model', model=self.gp, ext='pkl')\nio.write(filename='test-model', model=self.gp, ext='hdf5')\n"
+}

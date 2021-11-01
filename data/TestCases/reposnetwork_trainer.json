@@ -1,0 +1,9 @@
+{
+    "functionName": "network_trainer",
+    "className": null,
+    "fileName": "/viebboy_&_PyGOP/test_&_utility_&_test_gop_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "params, model_data = utility.get_random_model_data()\nmodel = gop_utils.network_builder(model_data['topology'], model_data[\n    'op_sets'], input_dropout=params['input_dropout'], dropout=params[\n    'dropout'], regularizer=params['weight_regularizer'], constraint=params\n    ['weight_constraint'], output_activation=model_data['output_activation'\n    ], use_bias=model_data['use_bias'])\nmodel.compile(params['optimizer'], params['loss'], params['metrics'])\nconvergence_measure = random.choice(['train_', 'val_']) + params[\n    'convergence_measure']\nmeasure, history, weights = gop_utils.network_trainer(model, direction=\n    params['direction'], convergence_measure=convergence_measure, LR=params\n    ['lr_finetune'], SC=params['epoch_finetune'], optimizer=params[\n    'optimizer'], optimizer_parameters=params['optimizer_parameters'], loss\n    =params['loss'], metrics=params['metrics'], special_metrics=params[\n    'special_metrics'], train_func=utility.get_generator, train_data=[\n    INPUT_DIM, OUTPUT_DIM, BATCH_SIZE, STEPS], val_func=utility.\n    get_generator, val_data=[INPUT_DIM, OUTPUT_DIM, BATCH_SIZE, STEPS],\n    test_func=utility.get_generator, test_data=[INPUT_DIM, OUTPUT_DIM,\n    BATCH_SIZE, STEPS], class_weight=params['class_weight'])\n"
+}

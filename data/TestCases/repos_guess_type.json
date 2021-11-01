@@ -1,0 +1,9 @@
+{
+    "functionName": "_guess_type",
+    "className": "MRZ",
+    "fileName": "/konstantint_&_PassportEye/passporteye_&_mrz_&_text.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Guesses the type of the MRZ from given lines. Returns 'TD1', 'TD2', 'TD3', 'MRVA', 'MRVB' or None.\n        The algorithm is basically just counting lines, looking at their length and checking whether the first character is a 'V'\n\n        >>> MRZ._guess_type([]) is None\n        True\n        >>> MRZ._guess_type([1]) is None\n        True\n        >>> MRZ._guess_type([1,2]) is None  # No len() for numbers\n        True\n        >>> MRZ._guess_type(['a','b'])  # This way passes\n        'TD2'\n        >>> MRZ._guess_type(['*'*40, '*'*40])\n        'TD3'\n        >>> MRZ._guess_type([1,2,3])\n        'TD1'\n        >>> MRZ._guess_type(['V'*40, '*'*40])\n        'MRVA'\n        >>> MRZ._guess_type(['V'*36, '*'*36])\n        'MRVB'\n        \"\"\"\ntry:\n    if len(mrz_lines) == 3:\n        return 'TD1'\n    elif len(mrz_lines) == 2 and len(mrz_lines[0]) < 40 and len(mrz_lines[1]\n        ) < 40:\n        return 'MRVB' if mrz_lines[0][0].upper() == 'V' else 'TD2'\n    elif len(mrz_lines) == 2:\n        return 'MRVA' if mrz_lines[0][0].upper() == 'V' else 'TD3'\n    else:\n        return None\nexcept Exception:\n    return None\nstaticmethod"
+}

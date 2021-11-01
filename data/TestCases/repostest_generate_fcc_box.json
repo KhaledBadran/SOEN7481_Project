@@ -1,0 +1,9 @@
+{
+    "functionName": "test_generate_fcc_box",
+    "className": null,
+    "fileName": "/mortele_&_OccamTools/test_&_test_generate_fort5.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "file_name = os.path.join(os.path.dirname(__file__), 'fcc_box_test.5')\n_check_remove_file(file_name)\nlattice_constant = 7.2598259\ncell_box = [3, 1, 4]\ngenerate_fcc(cell_box, lattice_constant, velocity=False, path=file_name)\nwith open(file_name, 'r') as in_file:\n    line = in_file.readline()\n    line = in_file.readline().split()\n    assert len(line) == 4\n    expected = [(lattice_constant * b) for b in cell_box]\n    for box, ex in zip(line[:3], expected):\n        assert float(box) == pytest.approx(ex, abs=1e-15)\nassert _check_remove_file(file_name)\n"
+}

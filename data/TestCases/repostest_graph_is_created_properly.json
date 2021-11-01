@@ -1,0 +1,9 @@
+{
+    "functionName": "test_graph_is_created_properly",
+    "className": null,
+    "fileName": "/Rambatino_&_CHAID/tests_&_test_graph.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test that the graph is created correctly\n    \"\"\"\narr = np.array([1] * 5 + [2] * 5)\norig_arr = arr.copy()\nndarr = np.array([1, 2, 3] * 5 + [2, 2, 3] * 5).reshape(10, 3)\norig_ndarr = ndarr.copy()\ntree = CHAID.Tree.from_numpy(ndarr, arr, min_child_node_size=0)\nexpected_path = os.path.join(ROOT_FOLDER, 'tests', 'expected_graph', 'test')\noutput_path = '/tmp/artifacts'\ntree.render(path=output_path, view=False)\nassert os.path.exists(output_path + '.png')\nassert os.path.exists(output_path)\n"
+}

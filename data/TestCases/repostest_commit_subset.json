@@ -1,0 +1,9 @@
+{
+    "functionName": "test_commit_subset",
+    "className": null,
+    "fileName": "/132nd-etcher_&_EPAB/test_&_test_repo_&_test_commit.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "assert not repo.changed_files()\nfor file in file_set:\n    assert str(file) in repo.untracked_files()\nfirst_file = str(file_set[0])\nrest = file_set[1:]\nrepo.commit('test', files_to_add=[first_file])\nuntracked_files = repo.untracked_files()\nassert untracked_files\nassert first_file not in untracked_files\nfor other in rest:\n    assert str(other) in untracked_files\n"
+}

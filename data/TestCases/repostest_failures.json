@@ -1,0 +1,9 @@
+{
+    "functionName": "test_failures",
+    "className": null,
+    "fileName": "/PlaidWeb_&_Authl/tests_&_handlers_&_test_emailaddr.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "store = {}\npending = {}\ndef accept(message):\n    url = message.get_payload().strip()\n    pending[message['To']] = url\nhandler = email_addr.EmailAddress(accept, 'some data', tokens.DictStore(\n    store), 10, email_template_text='{url}')\nfor malformed in ('foo@bar.baz', 'http://foo.bar/', 'mailto:blahblahblah'):\n    assert 'Malformed' in str(handler.initiate_auth(malformed,\n        'http://example.cb/', '/malformed'))\nassert 'Missing token' in str(handler.check_callback('foo', {}, {}))\nassert 'Invalid token' in str(handler.check_callback('foo', {'t': 'bogus'}, {})\n    )\ndef initiate(addr, redir):\n    result = handler.initiate_auth('mailto:' + addr, 'http://example/', redir)\n    assert isinstance(result, disposition.Notify)\n    assert result.cdata == 'some data'\ndef check_pending(addr):\n    url = pending[addr]\n    return handler.check_callback(url, parse_args(url), {})\nmock_time = mocker.patch('time.time')\nmock_time.return_value = 30\nassert len(store) == 0\ninitiate('timeout@example.com', '/timeout')\nassert len(store) == 1\nmock_time.return_value = 20000\nresult = check_pending('timeout@example.com')\nassert isinstance(result, disposition.Error)\nassert 'timed out' in result.message\nassert result.redir == '/timeout'\nassert len(store) == 0\nassert len(store) == 0\ninitiate('replay@example.com', '/replay')\nassert len(store) == 1\nresult1 = check_pending('replay@example.com')\nresult2 = check_pending('replay@example.com')\nassert len(store) == 0\nassert isinstance(result1, disposition.Verified)\nassert result1.identity == 'mailto:replay@example.com'\nassert result1.redir == '/replay'\nassert isinstance(result2, disposition.Error)\nassert 'Invalid token' in str(result2)\n"
+}

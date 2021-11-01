@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cookie_with_expires_in_days",
+    "className": "TestResponseCookieBuilder",
+    "fileName": "/cbefus_&_Eynnyd/tests_&_utils_&_cookies_&_test_response_cookie_builder.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "shifted_before = arrow.utcnow().shift(days=5)\ncookie = ResponseCookieBuilder('foo', 'bar').set_expires_in_days(5).build()\nshifted_after = arrow.utcnow().shift(days=5)\nself.assertTrue(cookie.expires.is_present())\nself.assertTrue(cookie.expires.get().is_between(shifted_before,\n    shifted_after), msg='{e} is not > than {b} and < {a}'.format(e=cookie.\n    expires.get(), b=shifted_before, a=shifted_after))\n"
+}

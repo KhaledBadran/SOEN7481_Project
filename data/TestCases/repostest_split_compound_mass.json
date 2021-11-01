@@ -1,0 +1,9 @@
+{
+    "functionName": "test_split_compound_mass",
+    "className": null,
+    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_core_&_tests_&_test_xrf_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "mass_total = 10.0\ndata = split_compound_mass(formula, mass_total)\nassert len(data) == len(elements), 'The number of parsed elements is incorrect'\nassert set(elements) == set(data.keys()\n    ), 'The set of parsed elements is incorrect'\nnpt.assert_almost_equal(np.sum(list(data.values())), mass_total, err_msg=\n    'The computed mass is not distributed properly among elements')\npytest.mark.parametrize('formula, elements, n_atoms', [('Fe2O3', ('Fe', 'O'\n    ), (2, 3)), ('He', ('He',), (1,)), ('H2SO4', ('H', 'S', 'O'), (2, 1, 4)\n    ), ('C', ('C',), (1,))])"
+}

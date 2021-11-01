@@ -1,0 +1,9 @@
+{
+    "functionName": "test_read_from_file_env_val_embedded_success",
+    "className": "ConfigureTest",
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_ConfigureTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with patch.dict('os.environ', {'USER': 'dave'}, clear=True):\n    tf = self.tempfile()\n    print('{\"greeting\": \"Hello, $USER\"}', file=tf)\n    tf.close()\n    try:\n        c = Configure.open(tf.name)\n        self.assertEqual(c['greeting'], 'Hello, dave')\n    finally:\n        os.unlink(tf.name)\n"
+}

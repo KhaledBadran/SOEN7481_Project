@@ -1,0 +1,9 @@
+{
+    "functionName": "test_remove_variation",
+    "className": "TestStats",
+    "fileName": "/SimGus_&_Chatette/tests_&_unit-testing_&_test_statistics.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "instance = Stats.reset_instance()\nassert instance.nb_variation_units == 0\nassert instance.nb_variation_intents == 0\nassert instance.nb_variation_slots == 0\nassert instance.nb_variation_aliases == 0\ninstance.new_variation_unit_declared(UnitType.alias)\ninstance.one_variation_unit_removed(UnitType.alias)\nassert instance.nb_variation_units == 0\nassert instance.nb_variation_aliases == 0\ninstance.new_variation_unit_declared(UnitType.slot)\ninstance.one_variation_unit_removed(UnitType.slot)\nassert instance.nb_variation_units == 0\nassert instance.nb_variation_slots == 0\ninstance.new_variation_unit_declared(UnitType.intent)\ninstance.one_variation_unit_removed(UnitType.intent)\nassert instance.nb_variation_units == 0\nassert instance.nb_variation_intents == 0\nwith pytest.raises(TypeError):\n    instance.one_variation_unit_removed('invalid')\nwith pytest.raises(InvalidStatsState):\n    instance.one_variation_unit_removed(UnitType.alias)\nwith pytest.raises(InvalidStatsState):\n    instance.one_variation_unit_removed(UnitType.slot)\nwith pytest.raises(InvalidStatsState):\n    instance.one_variation_unit_removed(UnitType.intent)\ninstance.new_variation_unit_declared(UnitType.alias)\ninstance.nb_variation_aliases = 0\nwith pytest.raises(InvalidStatsState):\n    instance.one_variation_unit_removed(UnitType.alias)\ninstance.new_variation_unit_declared(UnitType.slot)\ninstance.nb_variation_slots = 0\nwith pytest.raises(InvalidStatsState):\n    instance.one_variation_unit_removed(UnitType.slot)\ninstance.new_variation_unit_declared(UnitType.intent)\ninstance.nb_variation_intents = 0\nwith pytest.raises(InvalidStatsState):\n    instance.one_variation_unit_removed(UnitType.intent)\n"
+}

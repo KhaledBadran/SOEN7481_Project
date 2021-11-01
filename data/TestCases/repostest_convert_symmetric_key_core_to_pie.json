@@ -1,0 +1,9 @@
+{
+    "functionName": "test_convert_symmetric_key_core_to_pie",
+    "className": "TestObjectFactory",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_test_factory.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a core symmetric key can be converted into a Pie symmetric\n        key.\n        \"\"\"\nformat_type = misc.KeyFormatType(enums.KeyFormatType.RAW)\nalgorithm = attributes.CryptographicAlgorithm(enums.CryptographicAlgorithm.AES)\nlength = attributes.CryptographicLength(128)\nkey_material = cobjects.KeyMaterial(self.symmetric_bytes)\nkey_value = cobjects.KeyValue(key_material)\nkey_block = cobjects.KeyBlock(key_format_type=format_type,\n    key_compression_type=None, key_value=key_value, cryptographic_algorithm\n    =algorithm, cryptographic_length=length, key_wrapping_data=None)\ncore_key = secrets.SymmetricKey(key_block)\npie_key = self.factory.convert(core_key)\nself.assertIsInstance(pie_key, pobjects.SymmetricKey)\nself._test_pie_key(pie_key, algorithm.value, length.value, self.\n    symmetric_bytes, format_type.value)\n"
+}

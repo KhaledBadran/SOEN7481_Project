@@ -1,0 +1,9 @@
+{
+    "functionName": "test_env_providers",
+    "className": "TestChapter1",
+    "fileName": "/axiros_&_DevApps/tests_&_test_tutorial.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "t = \"\"\"\n        ## Environ\n\n        Supported as well - but you have to provide structed values in lit.eval form:\"\"\"\nmd(t)\nres = bash_run(\n    'export Calc_oper_func=mul Calc_run=\\'{\"a\":4.2}\\'; %s/calc1.py b=3' %\n    dtut, no_cmd_path=True)\nassert res[0]['res'] == '12'\nmd(\"\"\"\n            > By default we do NOT support short forms at the environ provider and also we are case sensitive.\n            > Note that the overridden defaults still had been casted to the original types of the function signature.\n            \"\"\"\n    )\nmd(\"\"\"\n\nHelp output, as expected:\"\"\")\nres = bash_run(\n    'export Calc_oper_func=xxx Calc_run=\\'{\"b\":4.2}\\';%s/calc1.py a=2.1 -h' %\n    dtut, res_as=markdown, no_cmd_path=True)\nassert 'xxx' in res[0]['res']\nassert not '4.2' in res[0]['res']\nmd(\"\"\"\n            Up to now there is no indication within the app regarding allowed values for the operator function.\n            That is why we accepted the bogus value, when configuring the app.\"\"\"\n    )\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_base_params_rejected_if_not_dict",
+    "className": null,
+    "fileName": "/willdeuschle_&_Flask-GraphQL-Subscriptions-Transport/tests_&_test_flask_graphql_subscriptions_transport.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "app, ss = basic_ss\ntest_client = SocketIOTestClient(app, ss.socketio, namespace=ss.namespace)\nss.on_subscribe = Mock(return_value='not a dict')\nss.send_subscription_fail = Mock()\ntest_client.emit('message', json.dumps({'type': SUBSCRIPTION_START,\n    'payload': 'foo', 'query': 'query test{ testString }', 'variables':\n    'baz'}), namespace=ss.namespace)\nss.on_subscribe.assert_called_once()\nss.send_subscription_fail.assert_called_once()\nassert PARAMS_MUST_BE_OBJECT == ss.send_subscription_fail.call_args[0][1][\n    'errors']\n"
+}

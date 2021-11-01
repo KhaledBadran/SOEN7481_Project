@@ -1,0 +1,9 @@
+{
+    "functionName": "test_concat_measurements",
+    "className": null,
+    "fileName": "/PEtab-dev_&_PEtab/tests_&_test_petab.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "a = pd.DataFrame({MEASUREMENT: [1.0]})\nb = pd.DataFrame({TIME: [1.0]})\nwith tempfile.NamedTemporaryFile(mode='w', delete=True) as fh:\n    filename_a = fh.name\n    a.to_csv(fh, sep='\\t', index=False)\n    fh.flush()\n    expected = pd.DataFrame({MEASUREMENT: [1.0, nan], TIME: [nan, 1.0]})\n    assert expected.equals(petab.concat_tables([a, b], petab.measurements.\n        get_measurement_df))\n    assert expected.equals(petab.concat_tables([filename_a, b], petab.\n        measurements.get_measurement_df))\n"
+}

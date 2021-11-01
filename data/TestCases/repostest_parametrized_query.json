@@ -1,0 +1,9 @@
+{
+    "functionName": "test_parametrized_query",
+    "className": null,
+    "fileName": "/SNH48Live_&_KVM48/server_&_tests_&_test_app.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "query = \"\"\"        query perfVods($ids: [String!], $from: Int, $to: Int, $group: Group) {\n          perfVods(ids: $ids, from: $from, to: $to, group: $group) {\n            id\n            startTime\n          }\n        }\"\"\"\nvariables = {'ids': None, 'from': 1555776000, 'to': 1555840800, 'group':\n    'SNH48'}\nr = client.post('/api/graphql', json=dict(query=query, variables=variables))\nassert r.status_code == 200\nassert r.json == {'data': {'perfVods': [{'id': '324479006245982208',\n    'startTime': 1555825500}, {'id': '326091353251188736', 'startTime': \n    1555836300}]}}\n"
+}

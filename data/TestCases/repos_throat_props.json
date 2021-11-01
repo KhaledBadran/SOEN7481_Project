@@ -1,0 +1,9 @@
+{
+    "functionName": "_throat_props",
+    "className": "VoronoiGeometry",
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_materials_&_VoronoiFibers.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        Helper Function to calculate the throat normal vectors\n        \"\"\"\nnetwork = self.network\nnet_Ts = network.throats(self.name)\nconns = network['throat.conns'][net_Ts]\np1 = conns[:, (0)]\np2 = conns[:, (1)]\ncoords = network['pore.coords']\nnormals = tr.unit_vector(coords[p2] - coords[p1])\nself['throat.normal'] = normals\nself['throat.centroid'] = (coords[p1] + coords[p2]) / 2\nself['throat.incenter'] = self['throat.centroid']\n"
+}

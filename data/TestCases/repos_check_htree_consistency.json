@@ -1,0 +1,9 @@
+{
+    "functionName": "_check_htree_consistency",
+    "className": null,
+    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_server_&_tests_&_test_cluster.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "all_cluster_id = [row['cluster_id'] for row in htree]\nfor row in htree:\n    assert np.in1d(row['children'], all_cluster_id).all()\nrow1 = htree[0]\nmax_tree_depth = np.max([row['cluster_depth'] for row in htree])\nfor level in range(max_tree_depth):\n    out = []\n    for srow in filter(lambda row: row['cluster_depth'] == level, htree):\n        out += [k['document_id'] for k in srow['documents']]\n    if False:\n        assert len(out) == dataset_size, 'depth={}'.format(level)\n    assert len(np.unique(out)) == len(out)\nif len(row1['documents']) > 1:\n    assert_almost_equal(np.mean([doc['similarity'] for doc in row1[\n        'documents']]), row1['cluster_similarity'])\n    assert np.max([doc['similarity'] for doc in row1['documents']]) > row1[\n        'cluster_similarity']\n"
+}

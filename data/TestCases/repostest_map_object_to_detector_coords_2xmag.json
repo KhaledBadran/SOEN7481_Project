@@ -1,0 +1,9 @@
+{
+    "functionName": "test_map_object_to_detector_coords_2xmag",
+    "className": "TestMap_object_to_detector_coords",
+    "fileName": "/PolymerGuy_&_AXITOM/axitom_&_tests_&_test_map_object_to_detector_coords.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        When the source to detector distance is twice the source to object distance,\n        the magnification should be 2x.\n        \"\"\"\ntol = 1e-06\nconfig = Config(n_pixels_u=20, n_pixels_v=20, detector_size_u=200.0,\n    detector_size_v=200.0, source_to_detector_dist=20000000000.0,\n    source_to_object_dist=10000000000.0)\nxs, ys = np.meshgrid(config.object_xs, config.object_ys)\ndetector_a, detector_b = map_object_to_detector_coords(xs, ys, config.\n    object_zs, config)\ncorr_us = config.n_pixels_u * (config.detector_us - config.detector_us[0]\n    ) / config.detector_size_u\ncorr_vs = config.n_pixels_v * (config.detector_vs - config.detector_vs[0]\n    ) / config.detector_size_v\nxs_error = np.abs(detector_a[:, :] - corr_us[:, (np.newaxis)])\nys_error = np.abs(detector_b[:, :, :].transpose() - corr_vs[:, (np.newaxis),\n    (np.newaxis)])\nif np.max(xs_error) > tol or np.max(ys_error) > tol:\n    self.fail()\n"
+}

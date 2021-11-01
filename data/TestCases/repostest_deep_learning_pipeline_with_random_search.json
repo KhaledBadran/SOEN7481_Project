@@ -1,0 +1,9 @@
+{
+    "functionName": "test_deep_learning_pipeline_with_random_search",
+    "className": null,
+    "fileName": "/Neuraxio_&_Neuraxle/testing_&_test_deep_learning_pipeline.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data_inputs, expected_outputs = create_2d_data()\np = RandomSearch(DeepLearningPipeline(SKLearnWrapper(linear_model.\n    LinearRegression()), batch_size=BATCH_SIZE, batch_metrics={'mse':\n    to_numpy_metric_wrapper(mean_squared_error)},\n    shuffle_in_each_epoch_at_train=True, n_epochs=N_EPOCHS, epochs_metrics=\n    {'mse': to_numpy_metric_wrapper(mean_squared_error)}, scoring_function=\n    to_numpy_metric_wrapper(mean_squared_error), validation_size=0.15),\n    n_iter=N_ITER)\np, outputs = p.fit_transform(data_inputs, expected_outputs)\nbest_model = p.get_best_model()\nbest_model.set_train(False)\nbest_model.apply('disable_metrics')\noutputs = best_model.transform(data_inputs)\nmse = ((outputs - expected_outputs) ** 2).mean()\nassert mse < 2\n"
+}

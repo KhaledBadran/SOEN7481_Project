@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_available_log_files",
+    "className": "test_CloudTrail",
+    "fileName": "/pbx-gs_&_OSBot-AWS/tests_&_unit_&_helpers_&_test_CloudTrail_To_Elk.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "iam = IAM()\naccount_id = iam.account_id()\nregion = iam.region()\nlog_type = 'CloudTrail'\nyear = '2020'\nmonth = '02'\nday = '16'\nhour = ''\nminute = ''\ns3_prefix = (\n    f'{self.s3_key_prefix}/AWSLogs/{account_id}/{log_type}/{region}/{year}/{month}/{day}/'\n    )\ns3 = self.cloud_trail.s3\ns3_files = s3.find_files(self.s3_bucket, prefix=s3_prefix)\nprint('-------')\ntotal = 0\nfor s3_file in sorted(s3_files):\n    contents = s3.file_contents_from_gzip(self.s3_bucket, s3_file)\n    records = json.loads(contents).get('Records')\n    total += len(records)\n    print(f\"{len(records): 4} : {total: 4} : {s3_file.split('/').pop()}\")\n"
+}

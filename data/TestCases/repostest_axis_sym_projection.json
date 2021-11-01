@@ -1,0 +1,9 @@
+{
+    "functionName": "test_axis_sym_projection",
+    "className": "TestAxis_sym_projection",
+    "fileName": "/PolymerGuy_&_AXITOM/axitom_&_tests_&_test_axis_sym_projection.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tol = 1e-06\nconfig = axitom.Config(n_pixels_u=100, n_pixels_v=100, detector_size_u=\n    100.0, detector_size_v=100.0, source_to_detector_dist=1e+20,\n    source_to_object_dist=1e+20)\nvolume = barrel(100)\nangles = [0.0]\nproj = axis_sym_projection(volume, config, angles=angles)\nerror = np.abs(np.sum(volume, axis=1) - proj)\nif np.max(error) > tol:\n    self.fail()\n"
+}

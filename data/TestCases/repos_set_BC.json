@@ -1,0 +1,9 @@
+{
+    "functionName": "_set_BC",
+    "className": "ReactiveTransport",
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_algorithms_&_ReactiveTransport.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        Apply boundary conditions to specified pores if no source terms are\n        already assigned to these pores. Otherwise, raise an error.\n\n        Parameters\n        ----------\n        %(GenericTransport._set_BC.parameters)s\n\n        Notes\n        -----\n        %(GenericTransport._set_BC.notes)s\n        \"\"\"\nfor item in self.settings['sources']:\n    if np.any(self[item][pores]):\n        raise Exception('Source term already present in given ' +\n            'pores, cannot also assign boundary ' + 'conditions')\nsuper()._set_BC(pores=pores, bctype=bctype, bcvalues=bcvalues, mode=mode)\ndocstr.dedent"
+}

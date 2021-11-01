@@ -1,0 +1,9 @@
+{
+    "functionName": "test_plugin",
+    "className": "TestAuthentication",
+    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_test_connection.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "conn = self.connect()\nif not self.mysql_server_is(conn, (5, 5, 0)):\n    pytest.skip('MySQL-5.5 required for plugins')\ncur = conn.cursor()\ncur.execute(\n    \"select plugin from mysql.user where concat(user, '@', host)=current_user()\"\n    )\nfor r in cur:\n    self.assertIn(conn._auth_plugin_name, (r[0], 'mysql_native_password'))\n"
+}

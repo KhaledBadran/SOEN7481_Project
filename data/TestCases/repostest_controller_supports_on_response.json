@@ -1,0 +1,9 @@
+{
+    "functionName": "test_controller_supports_on_response",
+    "className": null,
+    "fileName": "/RobertoPrevato_&_BlackSheep/tests_&_test_controllers.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "app = FakeApplication()\napp.controllers_router = RoutesRegistry()\nget = app.controllers_router.get\nk = 0\nclass Home(Controller):\n\n    def greet(self):\n        return 'Hello World'\n\n    async def on_response(self, response: Response):\n        nonlocal k\n        k += 1\n        assert isinstance(response, Response)\n        if response.content.body == b'Hello World':\n            assert k < 10\n        else:\n            assert k >= 10\n        return await super().on_response(response)\n\n    @get('/')\n    async def index(self, request: Request):\n        assert isinstance(self, Home)\n        return text(self.greet())\n\n    @get('/foo')\n    async def foo(self):\n        assert isinstance(self, Home)\n        return text('foo')\napp.setup_controllers()\nfor j in range(1, 10):\n    await app(get_example_scope('GET', '/'), MockReceive(), MockSend())\n    assert app.response.status == 200\n    assert k == j\nfor j in range(10, 20):\n    await app(get_example_scope('GET', '/foo'), MockReceive(), MockSend())\n    assert app.response.status == 200\n    assert k == j\npytest.mark.asyncio"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_create_get_wrapped_destroy",
+    "className": "TestProxyKmipClientIntegration",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_integration_&_services_&_test_proxykmipclient.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the ProxyKmipClient can create keys, retrieve a wrapped key,\n        and then destroy the keys for cleanup.\n        \"\"\"\nkey_id = self.client.create(enums.CryptographicAlgorithm.AES, 256)\nwrapping_id = self.client.create(enums.CryptographicAlgorithm.AES, 256,\n    cryptographic_usage_mask=[enums.CryptographicUsageMask.WRAP_KEY, enums.\n    CryptographicUsageMask.UNWRAP_KEY, enums.CryptographicUsageMask.ENCRYPT,\n    enums.CryptographicUsageMask.DECRYPT])\nself.client.activate(wrapping_id)\nunwrapped_key = self.client.get(key_id)\nwrapped_key = self.client.get(key_id, key_wrapping_specification={\n    'wrapping_method': enums.WrappingMethod.ENCRYPT,\n    'encryption_key_information': {'unique_identifier': wrapping_id,\n    'cryptographic_parameters': {'block_cipher_mode': enums.BlockCipherMode\n    .NIST_KEY_WRAP}}, 'encoding_option': enums.EncodingOption.NO_ENCODING})\nself.assertNotEqual(unwrapped_key.value, wrapped_key.value)\nself.client.revoke(enums.RevocationReasonCode.CESSATION_OF_OPERATION,\n    wrapping_id)\nself.client.destroy(key_id)\nself.client.destroy(wrapping_id)\n"
+}

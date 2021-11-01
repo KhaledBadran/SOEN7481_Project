@@ -1,0 +1,9 @@
+{
+    "functionName": "test_login_success_2fa_one_time",
+    "className": "TestLogin",
+    "fileName": "/Keeper-Security_&_Commander/unit-tests_&_test_login.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "TestLogin.has2fa = True\nself.getpass_mock.side_effect = [vault_env.one_time_token, self.ctrl_c]\nself.store_config_mock.side_effect = None\nparams = get_user_params()\nlogin(params)\nself.store_config_mock.assert_called_once_with(params.config_filename, 'w')\nself.assertEqual(params.session_token, vault_env.session_token)\nself.assertEqual(params.data_key, vault_env.data_key)\n"
+}

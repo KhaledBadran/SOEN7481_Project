@@ -1,0 +1,9 @@
+{
+    "functionName": "test_inf",
+    "className": "TestDataClean",
+    "fileName": "/SUNCAT-Center_&_CatLearn/test_&_test_data_clean.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test cleaning inf variable features.\"\"\"\nfeatures = np.random.random_sample((50, 5))\nfeatures[0, 0] = np.nan\nfeatures[40:, (1)] = np.nan\ntest = np.random.random_sample((100, 5))\nlabels = 5 * ['test_label']\nfinite = clean.clean_infinite(features, test=test, labels=labels,\n    max_impute_fraction=0.1)\nself.assertTrue(np.shape(finite['train']) == (50, 4))\nself.assertTrue(np.shape(finite['test']) == (100, 4))\n"
+}

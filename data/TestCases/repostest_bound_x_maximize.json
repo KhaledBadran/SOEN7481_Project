@@ -1,0 +1,9 @@
+{
+    "functionName": "test_bound_x_maximize",
+    "className": null,
+    "fileName": "/fmfn_&_BayesianOptimization/tests_&_test_seq_domain_red.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class Tracker:\n\n    def __init__(self):\n        self.start_count = 0\n        self.step_count = 0\n        self.end_count = 0\n\n    def update_start(self, event, instance):\n        self.start_count += 1\n\n    def update_step(self, event, instance):\n        self.step_count += 1\n\n    def update_end(self, event, instance):\n        self.end_count += 1\n\n    def reset(self):\n        self.__init__()\nbounds_transformer = SequentialDomainReductionTransformer()\npbounds = {'x': (-10, 10), 'y': (-10, 10)}\nn_iter = 10\nstandard_optimizer = BayesianOptimization(f=black_box_function, pbounds=\n    pbounds, verbose=2, random_state=1)\nstandard_optimizer.maximize(init_points=2, n_iter=n_iter)\nmutated_optimizer = BayesianOptimization(f=black_box_function, pbounds=\n    pbounds, verbose=2, random_state=1, bounds_transformer=bounds_transformer)\nmutated_optimizer.maximize(init_points=2, n_iter=n_iter)\nassert len(standard_optimizer.space) == len(mutated_optimizer.space)\nassert not (standard_optimizer._space.bounds == mutated_optimizer._space.bounds\n    ).any()\n"
+}

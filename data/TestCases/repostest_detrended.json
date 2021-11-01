@@ -1,0 +1,9 @@
+{
+    "functionName": "test_detrended",
+    "className": "TestKrige",
+    "fileName": "/GeoStat-Framework_&_GSTools/tests_&_test_krige.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "for Model in self.cov_models:\n    for dim in self.dims:\n        model = Model(dim=dim, var=2, len_scale=10, anis=[0.5, 0.2], angles\n            =[0.4, 0.2, 0.1])\n        detrended = krige.Detrended(model, self.cond_pos[:dim], self.\n            cond_val, trend)\n        field_1, __ = detrended.unstructured(self.grids[dim - 1])\n        field_1 = field_1.reshape(self.grid_shape[:dim])\n        field_2, __ = detrended.structured(self.pos[:dim])\n        self.assertAlmostEqual(np.max(np.abs(field_1 - field_2)), 0.0, places=2\n            )\n        for i, val in enumerate(self.cond_val):\n            self.assertAlmostEqual(field_2[self.data_idx[:dim]][i], val,\n                places=2)\n"
+}

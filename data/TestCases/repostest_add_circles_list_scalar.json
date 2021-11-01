@@ -1,0 +1,9 @@
+{
+    "functionName": "test_add_circles_list_scalar",
+    "className": null,
+    "fileName": "/PaulHancock_&_Aegean/tests_&_test_regions.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that Region.add_circles works for vector inputs\"\"\"\nra_list = np.radians([13.5, 13.5])\ndec_list = np.radians([-90, -90])\nradius_list = np.radians([0.1, 0.01])\nra = ra_list[0]\ndec = dec_list[0]\nradius = radius_list[0]\nregion1 = Region(maxdepth=11)\nregion2 = Region(maxdepth=11)\nregion1.add_circles(ra_list, dec_list, radius_list)\nregion1._demote_all()\nregion2.add_circles(ra, dec, radius)\nregion2._demote_all()\ntest = True\nfor i in range(1, region1.maxdepth + 1):\n    if len(region1.pixeldict[i].difference(region2.pixeldict[i])) > 0:\n        test = False\nif not test:\n    raise AssertionError(\n        'add_circles gives different results for lists and scalars')\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_find_match",
+    "className": null,
+    "fileName": "/Carbyne-Solutions_&_logrdis/tests_&_test_log.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that find_match returns the expected entries.\"\"\"\ncfg = test_yaml()\nfor sample in SAMPLES.split('\\n'):\n    tablename, match = find_match(sample, cfg)\n    assert tablename == 'access_logs', 'Invalid table matched'\n    assert re.search('[\\\\d\\\\-\\\\:\\\\+]+', match.group('time'))\n    assert re.search('\\\\d+', match.group('time_response'))\n    assert re.search('[\\\\d\\\\:\\\\-]+', match.group('mac_source'))\n    assert re.search('[\\\\d\\\\.\\\\-]+', match.group('ip_source'))\n    assert re.search('[\\\\d\\\\.\\\\-]+', match.group('http_request_url'))\n    assert re.search('[\\\\d\\\\.\\\\-]+', match.group('ip_destination'))\n"
+}

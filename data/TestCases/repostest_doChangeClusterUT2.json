@@ -1,0 +1,9 @@
+{
+    "functionName": "test_doChangeClusterUT2",
+    "className": null,
+    "fileName": "/bakwc_&_PySyncObj/test_syncobj.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "a = [getNextAddr(), getNextAddr(), getNextAddr(), getNextAddr()]\no1 = TestObj(a[0], [a[1], a[2]], dynamicMembershipChange=True)\no2 = TestObj(a[1], [a[2], a[0]], dynamicMembershipChange=True)\no3 = TestObj(a[2], [a[0], a[1]], dynamicMembershipChange=True)\ndoTicks([o1, o2, o3], 10, stopFunc=lambda : o1._isReady() and o2._isReady() and\n    o3._isReady())\nassert o1._isReady() == o2._isReady() == o3._isReady() == True\no3.addValue(50)\no2._addNodeToCluster(a[3])\nsuccess = False\nfor i in xrange(10):\n    doTicks([o1, o2, o3], 0.5)\n    res = True\n    res &= __checkParnerNodeExists(o1, a[3], True)\n    res &= __checkParnerNodeExists(o2, a[3], True)\n    res &= __checkParnerNodeExists(o3, a[3], True)\n    if res:\n        success = True\n        break\n    o2._addNodeToCluster(a[3])\nassert success\no4 = TestObj(a[3], [a[0], a[1], a[2]], dynamicMembershipChange=True)\ndoTicks([o1, o2, o3, o4], 10, stopFunc=lambda : o4._isReady())\no1.addValue(450)\ndoTicks([o1, o2, o3, o4], 10, stopFunc=lambda : o4.getCounter() == 500)\nassert o4.getCounter() == 500\no1._destroy()\no2._destroy()\no3._destroy()\no4._destroy()\n"
+}

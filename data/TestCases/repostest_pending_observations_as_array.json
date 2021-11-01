@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pending_observations_as_array",
+    "className": "TestModelbridgeUtils",
+    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.trial.mark_running(no_runner_required=True)\nself.assertEqual([x.tolist() for x in pending_observations_as_array(\n    pending_observations=get_pending_observation_features(self.experiment),\n    outcome_names=['m2', 'm1'], param_names=['x', 'y', 'z', 'w'])], [[['1',\n    'foo', 'True', '4']], [['1', 'foo', 'True', '4']]])\nself.experiment.attach_data(Data.from_evaluations({self.trial.arm.name: {\n    'm2': (1, 0)}}, trial_index=self.trial.index))\nself.assertEqual([x.tolist() for x in pending_observations_as_array(\n    pending_observations=get_pending_observation_features(self.experiment),\n    outcome_names=['m2', 'm1'], param_names=['x', 'y', 'z', 'w'])], [[], [[\n    '1', 'foo', 'True', '4']]])\n"
+}

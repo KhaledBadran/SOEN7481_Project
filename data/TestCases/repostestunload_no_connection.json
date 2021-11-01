@@ -1,0 +1,9 @@
+{
+    "functionName": "testunload_no_connection",
+    "className": null,
+    "fileName": "/capitalone_&_Data-Load-and-Copy-using-Python/tests_&_test_redshift.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "with mock.patch(dbapi.__name__ + '.connect') as mock_connect:\n    r = locopy.Redshift(dbapi=dbapi, **credentials)\n    with pytest.raises(Exception):\n        r.unload('query', 'path')\n    mock_connect.return_value.cursor.return_value.execute.side_effect = (\n        Exception())\n    r = locopy.Redshift(dbapi=dbapi, **credentials)\n    r.connect()\n    with pytest.raises(Exception):\n        r.unload('query', 'path')\npytest.mark.parametrize('dbapi', DBAPIS)mock.patch('locopy.s3.Session')"
+}

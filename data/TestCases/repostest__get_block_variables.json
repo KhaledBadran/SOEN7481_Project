@@ -1,0 +1,9 @@
+{
+    "functionName": "test__get_block_variables",
+    "className": "TestMLPipline",
+    "fileName": "/HDI-Project_&_MLBlocks/tests_&_test_mlpipeline.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "expected = {'name_output': {'name': 'output', 'type': 'whatever'}}\npipeline = MLPipeline(['a_primitive'])\npipeline.blocks['a_primitive#1'].produce_outputs = [{'name': 'output',\n    'type': 'whatever'}]\noutputs = pipeline._get_block_variables('a_primitive#1', 'produce_outputs',\n    {'output': 'name_output'})\nassert outputs == expected\npatch('mlblocks.mlpipeline.MLBlock', new=get_mlblock_mock)"
+}

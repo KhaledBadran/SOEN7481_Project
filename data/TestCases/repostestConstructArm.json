@@ -1,0 +1,9 @@
+{
+    "functionName": "testConstructArm",
+    "className": "SearchSpaceTest",
+    "fileName": "/facebook_&_Ax/ax_&_core_&_tests_&_test_search_space.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "arm = self.ss1.construct_arm(name='test')\nself.assertEqual(arm.name, 'test')\nfor p_name in self.ss1.parameters.keys():\n    self.assertTrue(p_name in arm.parameters)\n    self.assertEqual(arm.parameters[p_name], None)\narm = self.ss1.construct_arm({'a': 1.0})\nfor p_name in self.ss1.parameters.keys():\n    self.assertTrue(p_name in arm.parameters)\n    if p_name == 'a':\n        self.assertEqual(arm.parameters[p_name], 1.0)\n    else:\n        self.assertEqual(arm.parameters[p_name], None)\nwith self.assertRaises(ValueError):\n    self.ss1.construct_arm({'IDONTEXIST_a': 1.0})\nwith self.assertRaises(ValueError):\n    self.ss1.construct_arm({'a': 'notafloat'})\n"
+}

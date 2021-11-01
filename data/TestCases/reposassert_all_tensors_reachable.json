@@ -1,0 +1,9 @@
+{
+    "functionName": "assert_all_tensors_reachable",
+    "className": "BertModelTest",
+    "fileName": "/kpi6research_&_Bert-as-a-Library/BertLibrary_&_bert_&_modeling_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Checks that all the tensors in the graph are reachable from outputs.\"\"\"\ngraph = sess.graph\nignore_strings = ['^.*/assert_less_equal/.*$', '^.*/dilation_rate$',\n    '^.*/Tensordot/concat$', '^.*/Tensordot/concat/axis$', '^testing/.*$']\nignore_regexes = [re.compile(x) for x in ignore_strings]\nunreachable = self.get_unreachable_ops(graph, outputs)\nfiltered_unreachable = []\nfor x in unreachable:\n    do_ignore = False\n    for r in ignore_regexes:\n        m = r.match(x.name)\n        if m is not None:\n            do_ignore = True\n    if do_ignore:\n        continue\n    filtered_unreachable.append(x)\nunreachable = filtered_unreachable\nself.assertEqual(len(unreachable), 0, \n    'The following ops are unreachable: %s' % ' '.join([x.name for x in\n    unreachable]))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "format_subcommands",
+    "className": "HelpFormatterWithSubCommands",
+    "fileName": "/1313e_&_CMasher/cmasher_&_cli_tools.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "help_position = min(self._action_max_length + 2, self._max_help_position)\nhelp_width = max(self._width - help_position, 11)\nname_width = help_position - self._current_indent - 2\nname = '{0}{1: <{2}}{3}'.format(' ' * self._current_indent, name,\n    name_width, '  ' if len(name) <= name_width else '\\n' + ' ' * help_position\n    )\ndesc_lines = self._split_lines(description, help_width)\nparts = [name, desc_lines.pop(0), '\\n']\nfor line in desc_lines:\n    parts.append('%s%s\\n' % (' ' * help_position, line))\nreturn ''.join(parts)\n"
+}

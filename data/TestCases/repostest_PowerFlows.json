@@ -1,0 +1,9 @@
+{
+    "functionName": "test_PowerFlows",
+    "className": null,
+    "fileName": "/ardiloot_&_NonlinearTMM/Tests_&_test_SecondOrderNLTMM.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tmmPy, tmmCpp = tmms\nbetas = np.linspace(0.0, 0.99, 20)\nenhLayer, enhDist = 2, 2e-08\nsrPy = tmmPy.Sweep(['betaP1', 'betaP2'], [betas, betas], enhpos=(enhLayer,\n    enhDist))\nsrCpp = tmmCpp.Sweep('beta', betas, betas, outEnh=True, outAbs=True,\n    layerNr=enhLayer, layerZ=enhDist)\nnp.testing.assert_allclose(srPy['iP1'], srCpp.P1.inc)\nnp.testing.assert_allclose(srPy['rP1'], srCpp.P1.r)\nnp.testing.assert_allclose(srPy['tP1'], srCpp.P1.t)\nnp.testing.assert_allclose(srPy['IP1'].real, srCpp.P1.Ii)\nnp.testing.assert_allclose(srPy['RP1'].real, srCpp.P1.Ir)\nnp.testing.assert_allclose(srPy['TP1'].real, srCpp.P1.It)\nnp.testing.assert_allclose(srPy['AP1'].real, srCpp.P1.Ia)\nnp.testing.assert_allclose(srPy['enhP1'].real, srCpp.P1.enh)\nnp.testing.assert_allclose(srPy['iP2'], srCpp.P2.inc)\nnp.testing.assert_allclose(srPy['rP2'], srCpp.P2.r)\nnp.testing.assert_allclose(srPy['tP2'], srCpp.P2.t)\nnp.testing.assert_allclose(srPy['IP2'].real, srCpp.P2.Ii)\nnp.testing.assert_allclose(srPy['RP2'].real, srCpp.P2.Ir)\nnp.testing.assert_allclose(srPy['TP2'].real, srCpp.P2.It)\nnp.testing.assert_allclose(srPy['AP2'].real, srCpp.P2.Ia)\nnp.testing.assert_allclose(srPy['enhP2'].real, srCpp.P2.enh)\nnp.testing.assert_allclose(srPy['iGen'], srCpp.Gen.inc)\nnp.testing.assert_allclose(srPy['rGen'], srCpp.Gen.r)\nnp.testing.assert_allclose(srPy['tGen'], srCpp.Gen.t)\nnp.testing.assert_allclose(srPy['IGen'].real, srCpp.Gen.Ii)\nnp.testing.assert_allclose(srPy['RGen'].real, srCpp.Gen.Ir)\nnp.testing.assert_allclose(srPy['TGen'].real, srCpp.Gen.It)\nnp.testing.assert_allclose(srPy['AGen'].real, srCpp.Gen.Ia)\n"
+}

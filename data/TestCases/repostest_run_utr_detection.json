@@ -1,0 +1,9 @@
+{
+    "functionName": "test_run_utr_detection",
+    "className": "TestsRNAUTR",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_sRNA_utr_derived.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "args = self.mock_args.mock()\nargs.min_len = 1\nargs.max_len = 300\nargs.decrease_utr = 0.5\nargs.fuzzy_utr = 2\nargs.fuzzy_tsss = {'5utr': 'n_3'}\nargs.utrs = []\nargs.srnas = []\nargs.tsss = self.example.tsss\nargs.pros = self.example.pros\nsud.get_coverage = self.mock.mock_get_coverage\nsud.run_utr_detection(self.example.wigs, self.example.inters[0], 2, 50,\n    '5utr', args)\nsud.get_coverage = get_coverage\nself.assertListEqual(args.srnas, [{'start': 1, 'end': 50, 'start_cleavage':\n    'NA', 'datas': {'frag_1': [{'high': 50, 'final_end': 20, 'avg': \n    41.36842105263158, 'low': 10, 'ori_avg': 27.52, 'final_start': 2,\n    'type': 'frag', 'track': 'track_1'}]}, 'start_tss': 'TSS:1_+', 'strain':\n    'aaa', 'strand': '+', 'utr': '5utr', 'end_cleavage': 'NA'}])\nself.assertListEqual(args.utrs, [{'start': 1, 'end': 50, 'start_cleavage':\n    'NA', 'datas': {'frag_1': [{'high': 50, 'final_end': 20, 'avg': \n    41.36842105263158, 'low': 10, 'ori_avg': 27.52, 'final_start': 2,\n    'type': 'frag', 'track': 'track_1'}]}, 'start_tss': 'NA', 'strain':\n    'aaa', 'strand': '+', 'utr': '5utr', 'end_cleavage': 'NA'}])\n"
+}

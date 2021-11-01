@@ -1,0 +1,9 @@
+{
+    "functionName": "test_stop_processing_mapping_rules_once_first_one_is_met",
+    "className": null,
+    "fileName": "/pestanko_&_3scale-api-python/tests_&_integration_&_test_integration_backend_mapping_rules.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "params_first = updated_backend_mapping_rules_params.copy()\nparams_first['pattern'] = '/get/anything/search'\nresource_first = backend.mapping_rules.create(params=params_first)\nassert resource_first.exists()\nparams_second = updated_backend_mapping_rules_params.copy()\nparams_second['pattern'] = '/get/anything/{id}'\nresource_second = backend.mapping_rules.create(params=params_second)\nassert resource_second.exists()\nservice.proxy.deploy()\nresponse = apicast_http_client.get(path=params_first['pattern'])\nasserts.assert_http_ok(response)\nassert params_first['pattern'] in response.url\n"
+}

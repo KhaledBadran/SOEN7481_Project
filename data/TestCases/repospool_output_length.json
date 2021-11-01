@@ -1,0 +1,9 @@
+{
+    "functionName": "pool_output_length",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_layers_&_pool.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Compute the output length of a pooling operator\n    along a single dimension.\n\n    Parameters\n    ----------\n    input_length : integer\n        The length of the input in the pooling dimension\n    pool_size : integer\n        The length of the pooling region\n    stride : integer\n        The stride between successive pooling regions\n    pad : integer\n        The number of elements to be added to the input on each side.\n    ignore_border: bool\n        If ``True``, partial pooling regions will be ignored.\n        Must be ``True`` if ``pad != 0``.\n\n    Returns\n    -------\n    output_length\n        * None if either input is None.\n        * Computed length of the pooling operator otherwise.\n\n    Notes\n    -----\n    When ``ignore_border == True``, this is given by the number of full\n    pooling regions that fit in the padded input length,\n    divided by the stride (rounding down).\n\n    If ``ignore_border == False``, a single partial pooling region is\n    appended if at least one input element would be left uncovered otherwise.\n    \"\"\"\nif input_length is None or pool_size is None:\n    return None\nif ignore_border:\n    output_length = input_length + 2 * pad - pool_size + 1\n    output_length = (output_length + stride - 1) // stride\nelse:\n    assert pad == 0\n    if stride >= pool_size:\n        output_length = (input_length + stride - 1) // stride\n    else:\n        output_length = max(0, (input_length - pool_size + stride - 1) //\n            stride) + 1\nreturn output_length\n"
+}

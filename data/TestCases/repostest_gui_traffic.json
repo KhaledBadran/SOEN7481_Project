@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gui_traffic",
+    "className": "TestIxnOnline",
+    "fileName": "/shmir_&_PyIxNetwork/tests_&_test_online.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self._reserve_ports('test_config')\nself.ixn.protocols_start()\ntime.sleep(4)\nself.ixn.regenerate()\nself.ixn.traffic_apply()\nself.ixn.l23_traffic_start()\ntime.sleep(8)\nself.ixn.l23_traffic_stop()\ntime.sleep(4)\nport_stats = IxnPortStatistics(self.ixn.root)\nport_stats.read_stats()\nprint(json.dumps(port_stats.get_all_stats(), indent=1))\nprint(json.dumps(port_stats.get_object_stats('Port 1'), indent=1))\nassert int(port_stats.get_stat('Port 1', 'Frames Tx.')) >= 1200\nself.ixn.l23_traffic_start(blocking=True)\ntime.sleep(4)\nti_stats = IxnTrafficItemStatistics(self.ixn.root)\nti_stats.read_stats()\nprint(json.dumps(ti_stats.get_all_stats(), indent=1))\nprint(json.dumps(ti_stats.get_object_stats('Traffic Item 1'), indent=1))\nassert int(ti_stats.get_object_stats('Traffic Item 1')['Tx Frames']) == 1600\nflow_stats = IxnFlowStatistics(self.ixn.root)\nflow_stats.read_stats()\nassert int(flow_stats.get_stat('Port 2/Port 1/Traffic Item 1', 'Tx Frames')\n    ) == 800\nself._save_config()\n"
+}

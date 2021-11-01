@@ -1,0 +1,9 @@
+{
+    "functionName": "initialize_yss",
+    "className": "TestCase",
+    "fileName": "/IntegralDefense_&_ACE/lib_&_saq_&_modules_&_test_file_analysis.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "yss_log_path = os.path.join(saq.YSS_BASE_DIR, 'logs', 'unittest_yss.log')\nif os.path.exists(yss_log_path):\n    try:\n        os.remove(yss_log_path)\n    except Exception as e:\n        logging.error('unable to remove yss log {}: {}'.format(yss_log_path, e)\n            )\nwith open(yss_log_path, 'wb') as fp:\n    pass\nself.yss_process = Popen(['yss', '--base-dir', saq.YSS_BASE_DIR,\n    '--socket-dir', UNITTEST_SOCKET_DIR, '--pid-file', '.yss_unittest.pid',\n    '-L', os.path.join('etc', 'unittest_logging.ini'), '-d',\n    get_yara_rules_dir()], stdout=PIPE, stderr=PIPE, universal_newlines=\n    True, cwd=saq.YSS_BASE_DIR)\ndef _pipe_reader(pipe, buf, marker):\n    try:\n        while True:\n            line = pipe.readline()\n            if line == '':\n                break\n            logging.info('YSS: {}: {}'.format(marker, line.strip()))\n            buf.append(line.strip())\n    except Exception as e:\n        logging.error('error reading yss_process pipe: {}'.format(e))\nself.yss_stdout_reader_thread = threading.Thread(target=_pipe_reader, args=\n    (self.yss_process.stdout, self.yss_stdout_buffer, 'STDOUT'))\nself.yss_stdout_reader_thread.start()\nself.yss_stderr_reader_thread = threading.Thread(target=_pipe_reader, args=\n    (self.yss_process.stdout, self.yss_stderr_buffer, 'STDERR'))\nself.yss_stderr_reader_thread.start()\ndef _condition():\n    return os.path.exists(yss_log_path)\nwait_for(_condition, timeout=1)\ntail_process = Popen(['tail', '-f', yss_log_path], stdout=PIPE)\nfor line in tail_process.stdout:\n    if b'waiting for client' in line:\n        break\ntail_process.kill()\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_prices_from_returns",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_expected_returns.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "df = get_data()\nreturns_df = df.pct_change()\npseudo_prices = expected_returns.prices_from_returns(returns_df)\ninitial_prices = df.bfill().iloc[0]\ntest_prices = pseudo_prices * initial_prices\nassert ((test_prices[1:] - df[1:]).fillna(0) < 1e-10).all().all()\n"
+}

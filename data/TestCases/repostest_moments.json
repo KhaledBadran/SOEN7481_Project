@@ -1,0 +1,9 @@
+{
+    "functionName": "test_moments",
+    "className": null,
+    "fileName": "/rcjackson_&_HighIQ/tests_&_test_highiq.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "my_ds = highiq.io.load_arm_netcdf(highiq.testing.TEST_FILE)\nmy_spectra = highiq.calc.get_psd(my_ds)\nmy_moments = highiq.calc.get_lidar_moments(my_spectra)\nintensity = my_moments['intensity'].values\nvelocity = my_moments['doppler_velocity'].values\nassert np.nanmin(intensity) > 1.0\nassert np.nanmin(velocity) < -2.0\nmy_ds.close()\nmy_spectra.close()\n"
+}

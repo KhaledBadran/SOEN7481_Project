@@ -1,0 +1,9 @@
+{
+    "functionName": "test_upsilon_matrix",
+    "className": "TestStructureMethods",
+    "fileName": "/mesonepigreco_&_CellConstructor/scripts_&_cellconstructor_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        In this test we compute the upsilon matrix (inverse phonon covariance) \n        in the supercell both by generating the supercell \n        and by computing upsilon using the DiagonalizeSupercell method.\n        These two ways shold give the same result.\n        \"\"\"\ndyn = self.dynSnSe.Copy()\nT = 300\nsuper_dyn = dyn.GenerateSupercellDyn(dyn.GetSupercell())\nups_from_supercell = super_dyn.GetUpsilonMatrix(T)\nups_from_dyn = dyn.GetUpsilonMatrix(T)\ndelta = np.sqrt(np.sum((ups_from_supercell - ups_from_dyn) ** 2))\nself.assertAlmostEqual(delta, 0, delta=1e-05)\n"
+}

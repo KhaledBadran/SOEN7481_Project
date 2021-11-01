@@ -1,0 +1,9 @@
+{
+    "functionName": "test_long_path",
+    "className": null,
+    "fileName": "/dss-extensions_&_OpenDSSDirect.py/tests_&_test_opendssdirect_no_ext_errors.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "import opendssdirect as dss\nimport tempfile, shutil\nimport warnings\nlong_name = '-'.join(['40242748-21fd-4a61-8ad9-cefdd3ff6a05'] * 6)\noriginal_working_dir = os.getcwd()\ntry:\n    tmp_dir_path = tempfile.mkdtemp()\n    inner_dir_path = os.path.join(tmp_dir_path, long_name)\n    os.mkdir(inner_dir_path)\n    long_file_path = os.path.join(inner_dir_path, long_name + '.dss')\n    with open(long_file_path, 'w') as f:\n        f.write('clear\\nnew circuit.test\\n')\n    dss.run_command(\"redirect '{}'\".format(long_file_path))\n    os.chdir(inner_dir_path)\n    dss.run_command(\"redirect '{}'\".format(long_name + '.dss'))\nexcept (IOError, OSError):\n    warnings.warn(\n        'Could not create a file with a long path in Python. Skipping test.')\nfinally:\n    os.chdir(original_working_dir)\n    if os.path.exists(tmp_dir_path):\n        shutil.rmtree(tmp_dir_path)\n"
+}

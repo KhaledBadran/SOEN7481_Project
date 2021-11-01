@@ -1,0 +1,9 @@
+{
+    "functionName": "test_validation_split_wrapper_handle_methods_should_split_data",
+    "className": null,
+    "fileName": "/Neuraxio_&_Neuraxle/testing_&_metaopt_&_test_validation_split_wrapper.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "transform_callback = TapeCallbackFunction()\nfit_callback = TapeCallbackFunction()\nvalidation_split_wrapper = ValidationSplitWrapper(FitTransformCallbackStep(\n    transform_callback_function=transform_callback, fit_callback_function=\n    fit_callback, transform_function=lambda di: di * 2), test_size=0.1)\ndata_inputs = np.random.randint(1, 100, (100, 5))\nexpected_outputs = np.random.randint(1, 100, (100, 5))\nvalidation_split_wrapper, outputs = (validation_split_wrapper.\n    handle_fit_transform(DataContainer(data_inputs=data_inputs, current_ids\n    =list(range(len(data_inputs))), expected_outputs=expected_outputs),\n    ExecutionContext(DEFAULT_CACHE_FOLDER)))\nassert np.array_equal(outputs.data_inputs, data_inputs * 2)\nassert np.array_equal(fit_callback.data[0][0], data_inputs[0:90])\nassert np.array_equal(fit_callback.data[0][1], expected_outputs[0:90])\nassert np.array_equal(transform_callback.data[0], data_inputs[0:90])\nassert np.array_equal(transform_callback.data[1], data_inputs[90:])\nassert np.array_equal(transform_callback.data[2], data_inputs)\nassert validation_split_wrapper.scores_train is not None\nassert validation_split_wrapper.scores_validation is not None\nassert validation_split_wrapper.scores_train_mean is not None\nassert validation_split_wrapper.scores_validation_mean is not None\nassert validation_split_wrapper.scores_train_std is not None\nassert validation_split_wrapper.scores_validation_std is not None\n"
+}

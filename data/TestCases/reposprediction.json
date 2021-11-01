@@ -1,0 +1,9 @@
+{
+    "functionName": "prediction",
+    "className": null,
+    "fileName": "/haotianteng_&_Chiron/chiron_&_train_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "logits = tf.transpose(logits, perm=[1, 0, 2])\n\"\"\"ctc_beam_search_decoder require input shape [max_time,batch_size,num_classes]\"\"\"\npredict = tf.to_int32(tf.nn.ctc_beam_search_decoder(logits, seq_length,\n    merge_repeated=False)[0][0])\nerror = tf.reduce_sum(tf.edit_distance(predict, label, normalize=False)\n    ) / tf.to_float(tf.size(label.values))\ntf.summary.scalar('Error_rate', error)\nreturn error\n"
+}

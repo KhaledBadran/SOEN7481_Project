@@ -1,0 +1,9 @@
+{
+    "functionName": "test_authenticate_with_connection_failure",
+    "className": "TestSLUGSConnector",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_auth_&_test_slugs.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a ConfigurationError is raised when attempting to\n        authenticate with an invalid URL.\n        \"\"\"\nmock_get_client_identity.return_value = 'John Doe'\nmock_request_get.side_effect = [requests.exceptions.ConnectionError()]\nconnector = auth.SLUGSConnector(url='http://127.0.0.1:8080/test/slugs/')\nargs = 'test',\nself.assertRaisesRegex(exceptions.ConfigurationError,\n    'A connection could not be established using the SLUGS URL.', connector\n    .authenticate, *args)\nmock.patch('requests.get')mock.patch(\n    'kmip.services.server.auth.utils.get_client_identity_from_certificate')"
+}

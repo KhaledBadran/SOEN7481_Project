@@ -1,0 +1,9 @@
+{
+    "functionName": "test_firefox_delete_cookie",
+    "className": "TestBrowser",
+    "fileName": "/cdgriffith_&_CookieEater/test_&_test_browser.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "fox = FirefoxCookiesV1(db=fox_db)\nfox.add_cookie('www.example.com', 'test_name', 'test_value')\nfox.delete_cookie('www.example.com', 'test_name')\nconn = sqlite3.Connection(fox_db)\ncur = conn.cursor()\ncur.execute('SELECT * FROM {0}'.format(fox.table_name))\nres = cur.fetchall()\nassert len(res) == 0\n"
+}

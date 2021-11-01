@@ -1,0 +1,9 @@
+{
+    "functionName": "get_efo_from_xref",
+    "className": "OnToma",
+    "fileName": "/opentargets_&_OnToma/ontoma_&_interface.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Given an short disease id, returns the id and label of equivalent term(s) in EFO as defined by xrefs\n        \"\"\"\nif '/' in efocode:\n    efocode = efocode.split('/')[-1]\ntry:\n    return self.xref_to_efo[efocode.replace('_', ':')]\nexcept KeyError:\n    logger.error('There are no EFO ID that have xrefs to %s', efocode)\n    return None\n"
+}

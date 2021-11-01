@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_data",
+    "className": "TestDataAcquisitionClient",
+    "fileName": "/BciPy_&_BciPy/bcipy_&_acquisition_&_tests_&_test_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Data should be queryable.\"\"\"\ndevice = _MockDevice(data=self.mock_data, channels=self.mock_channels)\ndaq = DataAcquisitionClient(device=device, delete_archive=True,\n    raw_data_file_name=None)\ndaq.start_acquisition()\ntime.sleep(0.1)\ndaq.stop_acquisition()\ndata = daq.get_data()\nself.assertTrue(len(data) > 0, 'DataAcquisitionClient should have data.')\nfor i, record in enumerate(data):\n    self.assertEqual(record.data, self.mock_data[i])\ndaq.cleanup()\n"
+}

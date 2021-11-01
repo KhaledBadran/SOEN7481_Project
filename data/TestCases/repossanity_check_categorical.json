@@ -1,0 +1,9 @@
+{
+    "functionName": "sanity_check_categorical",
+    "className": "DataFrameToMatrix",
+    "fileName": "/kitware_&_BroThon/zat_&_dataframe_to_matrix.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Sanity check for 'dimensionality explosion' on categorical types\n        Args:\n            df (dataframe): The dataframe to check the categorical columns\n        Returns:\n            None\n        \"\"\"\nfor column in df.select_dtypes(include='category').columns:\n    num_unique = df[column].nunique()\n    if num_unique > 20:\n        print('WARNING: {:s} will expand into {:d} dimensions...'.format(\n            column, num_unique))\nstaticmethod"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_canget_kwargs",
+    "className": "ScopeTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_def.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"test that arguments passed to the body()\n        function are accessible by top-level defs\"\"\"\nl = lookup.TemplateLookup()\nl.put_string('base', \"\"\"\n\n        ${next.body(x=12)}\n\n        \"\"\")\nl.put_string('main',\n    \"\"\"\n            <%inherit file=\"base\"/>\n            <%page args=\"x\"/>\n            this is main.  x is ${x}\n\n            ${a()}\n\n            <%def name=\"a(**args)\">\n                this is a, x is ${x}\n            </%def>\n        \"\"\"\n    )\neq_(result_lines(l.get_template('main').render()), ['this is main. x is 12',\n    'this is a, x is 12'])\nl.put_string('another',\n    \"\"\"\n            <%namespace name=\"ns\" file=\"main\"/>\n\n            ${ns.body(x=15)}\n        \"\"\"\n    )\neq_(result_lines(l.get_template('another').render()), [\n    'this is main. x is 15', 'this is a, x is 15'])\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_label_encoder_base",
+    "className": null,
+    "fileName": "/Menelau_&_DESlib/deslib_&_tests_&_test_base.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from sklearn.linear_model import LogisticRegression\nX_dsel_ex1 = np.array([[-1, 1], [-0.75, 0.5], [-1.5, 1.5]])\ny_dsel_ex1 = np.array(['cat', 'dog', 'plane'])\nx = [[-2, -2], [2, 2]]\ny = ['cat', 'dog']\npool_classifiers = [LogisticRegression().fit(x, y) for _ in range(2)]\nquery = np.atleast_2d([[1, 0], [-1, -1]])\nds_test = BaseDS(pool_classifiers, k=2)\nds_test.fit(X_dsel_ex1, y_dsel_ex1)\npredictions = ds_test.predict(query)\nassert np.array_equal(predictions, np.array(['dog', 'cat']))\n"
+}

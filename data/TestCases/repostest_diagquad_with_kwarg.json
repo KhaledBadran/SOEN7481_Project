@@ -1,0 +1,9 @@
+{
+    "functionName": "test_diagquad_with_kwarg",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_quadrature_&_test_quadrature.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "alpha = np.array([2.5, -1.3])\nnum_gauss_hermite_points = 25\nquad = quadrature.ndiagquad(lambda X, Y: tf.exp(X * Y),\n    num_gauss_hermite_points, mu1, var1, Y=alpha)\nexpected = np.exp(alpha * mu1 + alpha ** 2 * var1 / 2)\nassert_allclose(quad, expected)\npytest.mark.parametrize('mu1', [np.array([1.0, 1.3])])pytest.mark.parametrize('var1', [np.array([3.0, 3.5])])"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "spatial_pool",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_pool.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "def ceildiv(a, b):\n    return (a + b - 1) // b\ndef floordiv(a, b):\n    return a // b\ninput_size = data.shape[2:]\npooled_data_list = []\nfor pool_dim in pool_dims:\n    pool_size = tuple(ceildiv(i, pool_dim) for i in input_size)\n    stride_size = tuple(floordiv(i, pool_dim) for i in input_size)\n    pooled_part = max_pool_2d_ignoreborder(data, pool_size, stride_size, (0, 0)\n        )\n    pooled_part = pooled_part.reshape(data.shape[0], data.shape[1], \n        pool_dim ** 2)\n    pooled_data_list.append(pooled_part)\nreturn np.concatenate(pooled_data_list, axis=2)\n"
+}

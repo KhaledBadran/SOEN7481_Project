@@ -1,0 +1,9 @@
+{
+    "functionName": "test_all2dobj_update_image",
+    "className": null,
+    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_spec2dobj.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "spec2DObj1 = spec2dobj.Spec2DObj(**init_dict)\nspec2DObj2 = spec2dobj.Spec2DObj(**init_dict)\nspec2DObj2.det = 2\nallspec2D = spec2dobj.AllSpec2DObj()\nallspec2D['meta']['ir_redux'] = False\nallspec2D[1] = spec2DObj1\nallspec2D[2] = spec2DObj2\nofile = data_path('tst_allspec2d.fits')\nif os.path.isfile(ofile):\n    os.remove(ofile)\nallspec2D.write_to_fits(ofile)\n_allspec2D = spec2dobj.AllSpec2DObj()\nspec2DObj1.sciimg = spec2DObj1.sciimg.copy() * 2.0\n_allspec2D['meta']['ir_redux'] = False\n_allspec2D[1] = spec2DObj1\n_allspec2D.write_to_fits(ofile, update_det=1, overwrite=True)\nallspec2D_2 = spec2dobj.AllSpec2DObj.from_fits(ofile)\nassert np.array_equal(allspec2D_2[1].sciimg, spec2DObj1.sciimg)\nos.remove(ofile)\n"
+}

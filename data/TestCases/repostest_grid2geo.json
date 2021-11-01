@@ -1,0 +1,9 @@
+{
+    "functionName": "test_grid2geo",
+    "className": "TestConvert",
+    "fileName": "/GeoscienceAustralia_&_GeodePy/geodepy_&_tests_&_test_convert.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "abs_path = os.path.abspath(os.path.dirname(__file__))\ntestdata = read_dnacoord(os.path.join(abs_path,\n    'resources/natadjust_rvs_example.dat'))\nfor coord in testdata:\n    coord.converthptodd()\n    latcomp, longcomp, psf, grid_conv = grid2geo(coord.zone, coord.easting,\n        coord.northing)\n    self.assertLess(abs(latcomp - coord.lat), 5e-09)\n    self.assertLess(abs(longcomp - coord.long), 5e-09)\nnorth_ex = 50, 573976.8747, 3867822.4539, 'North'\nsouth_ex = 50, 573976.8747, 6132177.5461, 'South'\nnorth_geo = grid2geo(*north_ex)\nsouth_geo = grid2geo(*south_ex)\nself.assertEqual(north_geo[0], -south_geo[0])\nself.assertEqual(north_geo[1], south_geo[1])\nself.assertEqual(north_geo[2], south_geo[2])\nself.assertEqual(north_geo[3], -south_geo[3])\nwith self.assertRaises(ValueError):\n    grid2geo(-1, 0, 500000)\nwith self.assertRaises(ValueError):\n    grid2geo(61, 0, 500000)\nwith self.assertRaises(ValueError):\n    grid2geo(0, -2830001, 500000)\nwith self.assertRaises(ValueError):\n    grid2geo(0, 3830001, 500000)\nwith self.assertRaises(ValueError):\n    grid2geo(0, 0, -1)\nwith self.assertRaises(ValueError):\n    grid2geo(0, 0, 10000001)\nwith self.assertRaises(ValueError):\n    grid2geo(0, 0, 500000, 'fail')\n"
+}

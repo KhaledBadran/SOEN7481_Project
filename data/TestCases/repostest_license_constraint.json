@@ -1,0 +1,9 @@
+{
+    "functionName": "test_license_constraint",
+    "className": "testCompatibilityConstraint",
+    "fileName": "/benjimor_&_CaLi/tests_&_test_constraints.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test if compatibility constraints works as expected.\"\"\"\nODRL = ODRLVocabulary()\nld_licenses_graph = Graph().parse(data=ld_licenses_rdf, format='ttl')\nDL1 = RestrictivenessLatticeOfStatus(Graph().parse(data=dl1_rdf, format='ttl'))\nmit = ODRLLicense(vocabulary=ODRL, ls=DL1, rdf_graph=ld_licenses_graph, iri=MIT\n    )\ncc_by_sa = ODRLLicense(vocabulary=ODRL, ls=DL1, rdf_graph=ld_licenses_graph,\n    iri=CC_BY_SA)\ncc_by_nc_sa = ODRLLicense(vocabulary=ODRL, ls=DL1, rdf_graph=\n    ld_licenses_graph, iri=CC_BY_NC_SA)\nwith self.assertRaises(exceptions.NotACompatibilityConstraint):\n    compatibility_constraints = CompatibilityConstraints(ODRL, [\n        not_valid_constraint])\nwith self.assertRaises(exceptions.NotACompatibilityConstraint):\n    compatibility_constraints = CompatibilityConstraints(ODRL, [MIT])\ncompatibility_constraints = CompatibilityConstraints(ODRL, [\n    ShareAlike_Compatibility, DerivativeWorks_Compatibility])\nself.assertTrue(compatibility_constraints.is_compatible(mit, cc_by_sa))\nself.assertTrue(compatibility_constraints.is_compatible(mit, cc_by_nc_sa))\nself.assertFalse(compatibility_constraints.is_compatible(cc_by_sa, cc_by_nc_sa)\n    )\n"
+}

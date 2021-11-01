@@ -1,0 +1,9 @@
+{
+    "functionName": "test_is_element_present_not_preset_selenium",
+    "className": "TestRootElement",
+    "fileName": "/mozilla_&_PyPOM/tests_&_selenium_specific_&_test_region.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "root_element = Mock()\nlocator = str(random.random()), str(random.random())\nfrom selenium.common.exceptions import NoSuchElementException\nroot_element.find_element.side_effect = NoSuchElementException()\nassert not Region(page, root=root_element).is_element_present(*locator)\nroot_element.find_element.assert_called_once_with(*locator)\nselenium.find_element.assert_not_called()\n"
+}

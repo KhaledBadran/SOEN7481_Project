@@ -1,0 +1,9 @@
+{
+    "functionName": "_min_diff",
+    "className": "_Hemisphere",
+    "fileName": "/nipy_&_PySurfer/surfer_&_viz.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Determine minimum \"camera distance\" between two views.\n\n        Parameters\n        ----------\n        beg : string\n            origin anatomical view.\n        end : string\n            destination anatomical view.\n\n        Returns\n        -------\n        diffs : tuple\n            (min view \"distance\", min roll \"distance\").\n\n        \"\"\"\nbeg = self._xfm_view(beg)\nend = self._xfm_view(end)\nif beg == end:\n    dv = [360.0, 0.0]\n    dr = 0\nelse:\n    end_d = self._xfm_view(end, 'd')\n    beg_d = self._xfm_view(beg, 'd')\n    dv = []\n    for b, e in zip(beg_d['v'], end_d['v']):\n        diff = e - b\n        if diff > 180:\n            dv.append(diff - 360)\n        elif diff < -180:\n            dv.append(diff + 360)\n        else:\n            dv.append(diff)\n    dr = np.array(end_d['r']) - np.array(beg_d['r'])\nreturn np.array(dv), dr\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_measure_r",
+    "className": "TestCell",
+    "fileName": "/Jhsmit_&_ColiCoords/test_&_test_cell.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "r_max = self.cell_obj.measure_r(data_name='fluorescence', mode='max',\n    in_place=False, step=0.5)\nr_mid = self.cell_obj.measure_r(data_name='fluorescence', mode='mid',\n    in_place=False)\nself.assertEqual(r_max, 5.0)\nself.assertAlmostEqual(r_mid, 8.11, 2)\nr_max = self.cell_obj.measure_r(data_name='brightfield', mode='max',\n    in_place=False, step=0.5)\nr_mid = self.cell_obj.measure_r(data_name='brightfield', mode='mid',\n    in_place=False)\nr_min = self.cell_obj.measure_r(data_name='brightfield', mode='min',\n    in_place=False)\nprint(r_min)\nself.assertEqual(r_max, 9.0)\nself.assertAlmostEqual(r_mid, 6.49, 2)\nwith self.assertRaises(ValueError):\n    r_ = self.cell_obj.measure_r(mode='asdf')\ncell = self.cell_obj.copy()\nr_max = cell.measure_r(data_name='brightfield', mode='max', in_place=True,\n    step=0.5)\nself.assertEqual(r_max, None)\nself.assertEqual(cell.coords.r, 9.0)\n"
+}

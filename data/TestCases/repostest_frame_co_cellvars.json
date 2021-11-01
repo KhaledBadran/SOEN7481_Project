@@ -1,0 +1,9 @@
+{
+    "functionName": "test_frame_co_cellvars",
+    "className": "TestSetLocals",
+    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_save_locals.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "def check_co_vars(a):\n    frame = sys._getframe()\n\n    def function2():\n        print(a)\n    assert 'a' in frame.f_code.co_cellvars\n    frame = sys._getframe()\n    frame.f_locals['a'] = 50\n    save_locals(frame)\n    self.assertEqual(50, a)\ncheck_co_vars(1)\n"
+}

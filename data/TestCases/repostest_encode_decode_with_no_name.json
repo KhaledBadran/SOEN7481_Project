@@ -1,0 +1,9 @@
+{
+    "functionName": "test_encode_decode_with_no_name",
+    "className": "TestControlParametersEncodeDecode",
+    "fileName": "/named-data_&_PyNDN2/tests_&_unit_tests_&_test_control_parameters_encode_decode.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "parameters = ControlParameters()\nparameters.setStrategy(Name('/localhost/nfd/strategy/broadcast'))\nparameters.setUri('null://')\nencoded = parameters.wireEncode()\ndecodedParameters = ControlParameters()\ndecodedParameters.wireDecode(encoded)\nself.assertEqual(decodedParameters.getName(), None)\nself.assertEqual(parameters.getStrategy().toUri(), decodedParameters.\n    getStrategy().toUri())\nself.assertEqual(parameters.getUri(), decodedParameters.getUri())\n"
+}

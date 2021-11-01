@@ -1,0 +1,9 @@
+{
+    "functionName": "test_verify_success_with_validated_registered_claims",
+    "className": "EasyJWTTest",
+    "fileName": "/BMeu_&_EasyJWT/tests_&_easyjwt_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n            Test verifying a valid token with valid registered claims that are validated (exp, iss, nbf), using the\n            correct key.\n\n            Expected Result: An object representing the token is returned.\n        \"\"\"\neasyjwt_creation = EasyJWT(self.key)\neasyjwt_creation.audience = self.audience\neasyjwt_creation.expiration_date = self.expiration_date\neasyjwt_creation.issuer = self.issuer\neasyjwt_creation.JWT_ID = self.JWT_ID\neasyjwt_creation.not_before_date = self.not_before_date\neasyjwt_creation.subject = self.subject\ntoken = easyjwt_creation.create()\neasyjwt_verification = EasyJWT.verify(token, self.key, issuer=self.issuer,\n    audience=self.audience)\nself.assertIsNotNone(easyjwt_verification)\nself.assertEqual(easyjwt_creation._key, easyjwt_verification._key)\nself.assertEqual(easyjwt_creation.audience, easyjwt_verification.audience)\nself.assertEqual(easyjwt_creation.expiration_date, easyjwt_verification.\n    expiration_date)\nself.assertEqual(easyjwt_creation.issued_at_date, easyjwt_verification.\n    issued_at_date)\nself.assertEqual(easyjwt_creation.issuer, easyjwt_verification.issuer)\nself.assertEqual(easyjwt_creation.JWT_ID, easyjwt_verification.JWT_ID)\nself.assertEqual(easyjwt_creation.not_before_date, easyjwt_verification.\n    not_before_date)\nself.assertEqual(easyjwt_creation.subject, easyjwt_verification.subject)\nself.assertEqual(easyjwt_creation._easyjwt_class, easyjwt_verification.\n    _easyjwt_class)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_infiniteLoop",
+    "className": "FindMachinesViaWrapperTests",
+    "fileName": "/glyph_&_Automat/automat_&__test_&_test_discover.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        L{findMachinesViaWrapper} ignores infinite loops.\n\n        Note this test can't fail - it can only run forever!\n        \"\"\"\nsource = \"\"\"\n        class InfiniteLoop(object):\n            pass\n\n        InfiniteLoop.loop = InfiniteLoop\n        \"\"\"\nmodule = self.makeModule(source, self.pathDir, 'loop.py')\nself.assertFalse(list(self.findMachinesViaWrapper(module)))\n"
+}

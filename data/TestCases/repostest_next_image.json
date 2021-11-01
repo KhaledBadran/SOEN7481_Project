@@ -1,0 +1,9 @@
+{
+    "functionName": "test_next_image",
+    "className": "TestPDFConverter",
+    "fileName": "/Hedgehogues_&_HoChiMinh/tests_&_test_pdfconverter.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.pdf_converter.convert_all()\nind = 0\npaths = []\nwhile True:\n    path = self.pdf_converter.next_path_to_image()\n    if len(path) == 0:\n        break\n    paths.append(path)\n    ind += 1\nself.assertListEqual(sorted(self.next_image_answ_path), sorted(paths))\nself.assertEqual(3 + 4, ind)\nif os.path.isdir(self.out_path):\n    rmtree(self.out_path)\nelse:\n    self.assertFalse('There is not folder with images')\n"
+}

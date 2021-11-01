@@ -1,0 +1,9 @@
+{
+    "functionName": "test_setup_not_alfosc",
+    "className": null,
+    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_setups.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "droot = os.path.join(os.environ['PYPEIT_DEV'], 'RAW_DATA/not_alfosc/grism4')\ndroot += '/ALD'\npargs = setup.parser(['-r', droot, '-s', 'not_alfosc'])\nsetup.main(pargs)\ncwd = os.getcwd()\nsetup_dir = os.path.join(cwd, 'setup_files')\nassert os.path.isdir(setup_dir), 'No setup_files directory created'\nfiles = glob.glob(os.path.join(setup_dir, 'not_alfosc*'))\next = [f.split('.')[-1] for f in files]\nassert np.all([(e in ext) for e in expected]\n    ), 'Did not find all setup file extensions: {0}'.format(expected)\npargs = setup.parser(['-r', droot, '-s', 'not_alfosc', '-c', 'A', '-d',\n    data_path('')])\nsetup.main(pargs)\npypeit_file = data_path('not_alfosc_A/not_alfosc_A.pypeit')\npypeIt = pypeit.PypeIt(pypeit_file, calib_only=True)\nshutil.rmtree(setup_dir)\nshutil.rmtree(data_path('not_alfosc_A'))\ndev_suite_required"
+}

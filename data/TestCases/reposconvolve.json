@@ -1,0 +1,9 @@
+{
+    "functionName": "convolve",
+    "className": "LocallyConnected2DLayer",
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_layers_&_local.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "output_shape = self.output_shape\ni = self.filter_size[0] // 2\nj = self.filter_size[1] // 2\nfilter_h_ind = -i - 1 if self.flip_filters else i\nfilter_w_ind = -j - 1 if self.flip_filters else j\nif self.channelwise:\n    conved = input * self.W[:, (filter_h_ind), (filter_w_ind), :, :]\nelse:\n    conved = (input[:, (None), :, :, :] * self.W[:, :, (filter_h_ind), (\n        filter_w_ind), :, :]).sum(axis=-3)\nfor i in range(self.filter_size[0]):\n    filter_h_ind = -i - 1 if self.flip_filters else i\n    ii = i - self.filter_size[0] // 2\n    input_h_slice = slice(max(ii, 0), min(ii + output_shape[-2],\n        output_shape[-2]))\n    output_h_slice = slice(max(-ii, 0), min(-ii + output_shape[-2],\n        output_shape[-2]))\n    for j in range(self.filter_size[1]):\n        filter_w_ind = -j - 1 if self.flip_filters else j\n        jj = j - self.filter_size[1] // 2\n        input_w_slice = slice(max(jj, 0), min(jj + output_shape[-1],\n            output_shape[-1]))\n        output_w_slice = slice(max(-jj, 0), min(-jj + output_shape[-1],\n            output_shape[-1]))\n        if ii == jj == 0:\n            continue\n        if self.channelwise:\n            inc = input[:, :, (input_h_slice), (input_w_slice)] * self.W[:,\n                (filter_h_ind), (filter_w_ind), (output_h_slice), (\n                output_w_slice)]\n        else:\n            inc = (input[:, (None), :, (input_h_slice), (input_w_slice)] *\n                self.W[:, :, (filter_h_ind), (filter_w_ind), (\n                output_h_slice), (output_w_slice)]).sum(axis=-3)\n        conved = T.inc_subtensor(conved[:, :, (output_h_slice), (\n            output_w_slice)], inc)\nreturn conved\n"
+}

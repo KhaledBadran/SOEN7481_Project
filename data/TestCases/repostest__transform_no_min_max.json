@@ -1,0 +1,9 @@
+{
+    "functionName": "test__transform_no_min_max",
+    "className": "TestIntHyperParam",
+    "fileName": "/HDI-Project_&_BTB/tests_&_tuning_&_hyperparams_&_test_numerical.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that the method ``_transform`` performs a normalization of values between ``min``\n        and ``max`` with a max value set in.\n        \"\"\"\nmock_sys.maxsize = 1000\n_max = 10\ninstance = IntHyperParam(max=_max)\nvalues = np.array([[1], [9]])\nresult = instance._transform(values)\nexpected_result = np.array([[0.981409], [0.99706458]])\nnp.testing.assert_allclose(result, expected_result)\npatch('btb.tuning.hyperparams.numerical.sys')"
+}

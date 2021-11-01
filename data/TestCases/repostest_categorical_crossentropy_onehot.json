@@ -1,0 +1,9 @@
+{
+    "functionName": "test_categorical_crossentropy_onehot",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_test_objectives.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from lasagne.objectives import categorical_crossentropy\np = theano.tensor.matrix('p')\nt = theano.tensor.ivector('t')\nc = categorical_crossentropy(p, t)\nfloatX = theano.config.floatX\npredictions = np.random.rand(10, 20).astype(floatX)\npredictions /= predictions.sum(axis=1, keepdims=True)\ntargets = np.random.randint(20, size=10).astype(np.uint8)\ncrossent = -np.log(predictions[np.arange(10), targets])\nassert np.allclose(crossent, c.eval({p: predictions, t: targets}))\n"
+}

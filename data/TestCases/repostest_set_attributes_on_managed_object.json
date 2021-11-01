@@ -1,0 +1,9 @@
+{
+    "functionName": "test_set_attributes_on_managed_object",
+    "className": "TestKmipEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that multiple attributes can be set on a given managed object.\n        \"\"\"\ne = engine.KmipEngine()\ne._data_store = self.engine\ne._data_store_session_factory = self.session_factory\ne._data_session = e._data_store_session_factory()\ne._logger = mock.MagicMock()\nmanaged_object = pie_objects.SecretData(b'', enums.SecretDataType.PASSWORD)\nmanaged_object.names = []\nattribute_factory = factory.AttributeFactory()\nname = attribute_factory.create_attribute(enums.AttributeType.NAME,\n    attributes.Name.create('Test Secret Data', enums.NameType.\n    UNINTERPRETED_TEXT_STRING))\nmask = attribute_factory.create_attribute(enums.AttributeType.\n    CRYPTOGRAPHIC_USAGE_MASK, [enums.CryptographicUsageMask.ENCRYPT, enums.\n    CryptographicUsageMask.DECRYPT])\ntemplate_attribute = objects.TemplateAttribute(attributes=[name, mask])\nobject_attributes = e._process_template_attribute(template_attribute)\nself.assertEqual([], managed_object.names)\nself.assertEqual([], managed_object.cryptographic_usage_masks)\ne._set_attributes_on_managed_object(managed_object, object_attributes)\nself.assertEqual(['Test Secret Data'], managed_object.names)\nself.assertEqual([enums.CryptographicUsageMask.ENCRYPT, enums.\n    CryptographicUsageMask.DECRYPT], managed_object.cryptographic_usage_masks)\n"
+}

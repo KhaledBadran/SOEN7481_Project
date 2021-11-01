@@ -1,0 +1,9 @@
+{
+    "functionName": "test_contexts_staged_ignores_stored",
+    "className": "ContextStoreTest",
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_ContextTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ctxid0 = URIRef('http://example.com/context_0')\nctxid1 = URIRef('http://example.com/context_1')\nctx = Mock()\ngraph = Mock()\ngraph.store.triples_choices.side_effect = [[((None, None, ctxid0), ())], []]\nctx.conf = {'rdf.graph': graph}\nctx.contents_triples.return_value = ()\nctx.identifier = ctxid1\nctx.imports = []\nstore = ContextStore(ctx)\nself.assertNotIn(ctxid0, set(store.contexts()))\n"
+}

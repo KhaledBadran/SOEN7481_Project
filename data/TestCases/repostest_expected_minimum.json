@@ -1,0 +1,9 @@
+{
+    "functionName": "test_expected_minimum",
+    "className": null,
+    "fileName": "/bytesandbrains_&_ProcessOptimizer/ProcessOptimizer_&_tests_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "res = gp_minimize(bench3, [(-2.0, 2.0)], x0=[0.0], noise=1e-08, n_calls=8,\n    n_random_starts=3, random_state=1)\nx_min, f_min = expected_minimum(res, random_state=1)\nx_min2, f_min2 = expected_minimum(res, random_state=1)\nassert f_min <= res.fun\nassert x_min == x_min2\nassert f_min == f_min2\npytest.mark.fast_test"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_multistarted_gradient_descent_optimizer_crippled_start",
+    "className": "TestOptimizer",
+    "fileName": "/Yelp_&_MOE/moe_&_tests_&_optimal_learning_&_python_&_python_version_&_optimization_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Check that multistarted GD is finding the best result from GD.\"\"\"\nmax_num_steps = 1\nmax_num_restarts = 1\nparam_dict = self.gd_parameters._asdict()\nparam_dict['max_num_steps'] = max_num_steps\nparam_dict['max_num_restarts'] = max_num_restarts\ngd_parameters_crippled = GradientDescentParameters(**param_dict)\ngradient_descent_optimizer_crippled = GradientDescentOptimizer(self.domain,\n    self.polynomial, gd_parameters_crippled)\nnum_points = 15\npoints = self.domain.generate_uniform_random_points_in_domain(num_points)\nmultistart_optimizer = MultistartOptimizer(gradient_descent_optimizer_crippled,\n    num_points)\ntest_best_point, _ = multistart_optimizer.optimize(random_starts=points)\nfor value in (test_best_point - self.polynomial.optimum_point):\n    assert value != 0.0\npoints_with_opt = numpy.append(points, self.polynomial.optimum_point.\n    reshape((1, self.polynomial.dim)), axis=0)\ntest_best_point, _ = multistart_optimizer.optimize(random_starts=\n    points_with_opt)\nfor value in (test_best_point - self.polynomial.optimum_point):\n    assert value == 0.0\n"
+}

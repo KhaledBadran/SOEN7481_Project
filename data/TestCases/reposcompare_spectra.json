@@ -1,0 +1,9 @@
+{
+    "functionName": "compare_spectra",
+    "className": "TestDecay",
+    "fileName": "/LoganAMorrison_&_Hazma/test_&_decay_&_test_decay.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Compares recomputed spectra with reference data.\n        \"\"\"\nspectra = self.load_data(data_dir)\nfor e, (e_gams, dnde_ref) in spectra.items():\n    dnde = dnde_func(e_gams, e)\n    for e_gam, val, val_ref in zip(e_gams, dnde, dnde_ref):\n        assert_allclose(val, val_ref, rtol=1e-05, err_msg=\n            'reference spectrum from {} does not match recomputed value at e_gam = {}'\n            .format(data_dir, e_gam))\n"
+}

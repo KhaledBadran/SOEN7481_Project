@@ -1,0 +1,9 @@
+{
+    "functionName": "test_file_generator_end",
+    "className": "TestGenerator",
+    "fileName": "/BciPy_&_BciPy/bcipy_&_acquisition_&_tests_&_datastream_&_test_generator.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Should throw an exception when all data has been consumed\"\"\"\nrow_count = 10\nheader = ['col1,col2,col3']\ndata = list(mock_data(row_count, len(header)))\nrows = map(lambda x: ','.join(map(str, x)), data)\ntest_data = '\\n'.join(header + rows)\nwith patch('bcipy.acquisition.datastream.generator.open', mock_open(\n    read_data=test_data), create=True):\n    gen = file_data(filename='foo', header_row=1)\n    for _ in range(row_count):\n        next(gen)\n    with pytest.raises(StopIteration):\n        data.append(next(gen))\n"
+}

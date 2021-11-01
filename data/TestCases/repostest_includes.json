@@ -1,0 +1,9 @@
+{
+    "functionName": "test_includes",
+    "className": "InheritanceTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_inheritance.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"test that an included template also has its full hierarchy invoked.\"\"\"\ncollection = lookup.TemplateLookup()\ncollection.put_string('base',\n    \"\"\"\n        <%def name=\"a()\">base_a</%def>\n        This is the base.\n        ${next.body()}\n        End base.\n\"\"\"\n    )\ncollection.put_string('index',\n    \"\"\"\n        <%inherit file=\"base\"/>\n        this is index.\n        a is: ${self.a()}\n        <%include file=\"secondary\"/>\n\"\"\"\n    )\ncollection.put_string('secondary',\n    \"\"\"\n        <%inherit file=\"base\"/>\n        this is secondary.\n        a is: ${self.a()}\n\"\"\"\n    )\nassert result_lines(collection.get_template('index').render()) == [\n    'This is the base.', 'this is index.', 'a is: base_a',\n    'This is the base.', 'this is secondary.', 'a is: base_a', 'End base.',\n    'End base.']\n"
+}

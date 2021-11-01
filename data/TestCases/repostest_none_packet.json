@@ -1,0 +1,9 @@
+{
+    "functionName": "test_none_packet",
+    "className": "TestDsi",
+    "fileName": "/BciPy_&_BciPy/bcipy_&_acquisition_&_tests_&_protocols_&_dsi_&_test_dsi.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test null packet\"\"\"\nexpected = (\n    b'@ABCD\\x00\\x00\\x10\\x00\\x00\\x00\\r\\x00\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08\\t\\n\\x0b\\x0c\\r\\x0e\\x0f\\x10\\x11\\x12\\x13\\x14\\x15\\x16\\x17\\x18\\x19\\x1a\\x1b\\x1c\\x1d\\x1e\\x1f !\"#$%&\\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\\\]^_`abcdefghijklmn'\n    )\nparams = dict(type='NULL', payload_length=16, number=13, none=[i for i in\n    range(111)])\nresult = dsi.packet.build(params)\nself.assertEqual(result, expected)\nparsed = dsi.packet.parse(expected)\nfor k in params:\n    self.assertEqual(parsed[k], params[k])\n"
+}

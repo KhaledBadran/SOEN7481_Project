@@ -1,0 +1,9 @@
+{
+    "functionName": "test_min1",
+    "className": null,
+    "fileName": "/wannesm_&_PySDD/tests_&_test_minimize.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "vtree = Vtree(var_count=4, var_order=[1, 4, 2, 3], vtree_type='right')\nsdd = SddManager.from_vtree(vtree)\nsdd.auto_gc_and_minimize_off()\na, b, c, d = sdd.vars\nf = a & b | c & d\nf.ref()\nif directory:\n    names = {(1): 'a', (-1): '-a', (2): 'b', (-2): '-b', (3): 'c', (-3):\n        '-c', (4): 'd', (-4): '-d'}\n    with (directory / 'vtree1_before_a.gv').open('w') as out:\n        print(sdd.vtree().dot(), file=out)\n    with (directory / 'vtree1_before_b.gv').open('w') as out:\n        print(vtree_to_dot(sdd.vtree(), sdd, litnamemap=names, show_id=True\n            ), file=out)\n    with (directory / 'sdd1_before_a.gv').open('w') as out:\n        print(sdd.dot(), file=out)\n    with (directory / 'sdd1_before_b.gv').open('w') as out:\n        print(sdd_to_dot(sdd), file=out)\nsdd.minimize()\nif directory:\n    with (directory / 'vtree2_after.gv').open('w') as out:\n        print(sdd.vtree().dot(), file=out)\n    with (directory / 'sdd1_after.gv').open('w') as out:\n        print(sdd.dot(), file=out)\nf.deref()\nwmc = f.wmc(log_mode=False)\nmc = wmc.propagate()\nassert mc == 7.0\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_max_likelihood_5_failure",
+    "className": "TestChain",
+    "fileName": "/samreay_&_ChainConsumer/tests_&_test_analysis.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "c = ChainConsumer()\ndata = np.random.multivariate_normal([0, 0], [[1, 0], [0, 1]], size=10000)\ndata[:, (1)] += 2\nc.add_chain(data, parameters=['x', 'y'], name='A')\nresult = c.analysis.get_max_posteriors(parameters='x', chains='A')\nprint(result)\nassert result is None\n"
+}

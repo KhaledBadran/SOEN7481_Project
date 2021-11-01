@@ -1,0 +1,9 @@
+{
+    "functionName": "test_isource_to_dataframe",
+    "className": null,
+    "fileName": "/dss-extensions_&_OpenDSSDirect.py/tests_&_test_opendssdirect_no_ext_errors.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "expected_dict = pd.DataFrame({'Amps': {'': 0.0}, 'AngleDeg': {'': 0.0},\n    'Frequency': {'': 0.0}, 'Idx': {'': 0}, 'Name': {'': ''}}).to_dict()\nactual_dict = dss.utils.isource_to_dataframe().to_dict()\nassert_dict_equal(actual_dict, expected_dict)\ndss.Text.Command(\n    'New Isource.sampleIsource Bus1=611.3 Phases=1 Amps=0.1 Angle=30')\nexpected_dict = pd.DataFrame({'Amps': {'sampleisource': 0.1}, 'AngleDeg': {\n    'sampleisource': 30.0}, 'Frequency': {'sampleisource': 60.0}, 'Idx': {\n    'sampleisource': 1}, 'Name': {'sampleisource': 'sampleisource'}}).to_dict()\nactual_dict = dss.utils.isource_to_dataframe().to_dict()\nassert_dict_equal(actual_dict, expected_dict)\n"
+}

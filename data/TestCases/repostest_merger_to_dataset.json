@@ -1,0 +1,9 @@
+{
+    "functionName": "test_merger_to_dataset",
+    "className": null,
+    "fileName": "/tvdboom_&_ATOM/tests_&_test_atom.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Assert that the merger between X and y was successful.\"\"\"\natom = ATOMClassifier(X_bin, y_bin, random_state=1)\nmerger = X_bin.merge(y_bin.astype(np.int64).to_frame(), left_index=True,\n    right_index=True)\ndf1 = merger.sort_values(by=merger.columns.tolist())\ndf1.reset_index(drop=True, inplace=True)\ndf2 = atom.dataset.sort_values(by=atom.dataset.columns.tolist())\ndf2.reset_index(drop=True, inplace=True)\nassert df1.equals(df2)\n"
+}

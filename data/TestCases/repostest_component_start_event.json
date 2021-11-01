@@ -1,0 +1,9 @@
+{
+    "functionName": "test_component_start_event",
+    "className": null,
+    "fileName": "/SillyFreak_&_ConcurrentUtils/tests_&_test_component.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "EVENT = 'EVENT'\nfinished = False\ncancelled = False\n@component_workload\nasync def component(x, *, commands, events):\n    nonlocal finished, cancelled\n    try:\n        await events.send(EVENT)\n        await asyncio.sleep(0.05)\n        finished = True\n    except asyncio.CancelledError:\n        cancelled = True\n        raise\nwith pytest.raises(Component.LifecycleError):\n    await start_component(component, 1)\nawait asyncio.sleep(0.1)\nassert not finished\nassert cancelled\npytest.mark.asyncio"
+}

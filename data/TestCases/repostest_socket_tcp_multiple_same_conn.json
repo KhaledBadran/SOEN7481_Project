@@ -1,0 +1,9 @@
+{
+    "functionName": "test_socket_tcp_multiple_same_conn",
+    "className": null,
+    "fileName": "/Carbyne-Solutions_&_logrdis/tests_&_test_socket.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test the TCP server.\"\"\"\nserver = log_server('tcp')\nsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\nLOGGER.debug('Sending test message to localhost:4444')\nsock.connect(('localhost', 4444))\nfor msg in sample_entries:\n    sock.send(msg.encode() + '\\n'.encode())\nsock.close()\ntime.sleep(1)\ncfg = test_yaml()\nresults = query_check(cfg)\nindex = 0\nfor res in results:\n    if index == 0:\n        assert res['http_request_url'] == '172.217.5.228:1'\n    elif index == 1:\n        assert res['http_request_url'] == '172.217.5.228:2'\n    elif index == 2:\n        assert res['http_request_url'] == '172.217.5.228:3'\n    index += 1\n    assert re.search('[\\\\d\\\\w\\\\:]+', res['mac_source'])\nserver.stop()\n"
+}

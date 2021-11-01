@@ -1,0 +1,9 @@
+{
+    "functionName": "test_common_property_invalid_units",
+    "className": "TestCommonProperties",
+    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_converters.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Ensure error raised when improper units given for common properties.\n        \"\"\"\nroot = etree.Element('experiment')\nproperties = etree.SubElement(root, 'commonProperties')\nprop = etree.SubElement(properties, 'property')\nprop.set('name', physical_property)\nprop.set('units', units)\nprop_value = etree.SubElement(prop, 'value')\nprop_value.text = value\nwith pytest.raises(KeywordError) as excinfo:\n    get_common_properties(root)\nassert 'Error: units incompatible for property ' + physical_property in str(\n    excinfo.value)\npytest.mark.parametrize('physical_property, value, units', [('pressure',\n    '2.18', 'K'), ('temperature', '1000.0', 'Pa'), ('pressure rise', '0.10',\n    'ms')])"
+}

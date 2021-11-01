@@ -1,0 +1,9 @@
+{
+    "functionName": "test_evaluate_performance_ranking_against_specified_entities",
+    "className": null,
+    "fileName": "/Accenture_&_AmpliGraph/tests_&_ampligraph_&_evaluation_&_test_protocol.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "X = load_wn18()\nmodel = ComplEx(batches_count=10, seed=0, epochs=1, k=20, eta=10, loss=\n    'nll', regularizer=None, optimizer='adam', optimizer_params={'lr': 0.01\n    }, verbose=True)\nmodel.fit(X['train'])\nX_filter = np.concatenate((X['train'], X['valid'], X['test']))\nentities_subset = np.concatenate([X['test'][::1000, (0)], X['test'][::1000,\n    (2)]], 0)\nfrom ampligraph.evaluation import hits_at_n_score, mrr_score, mr_score\nranks = evaluate_performance(X['test'][::1000], model, X_filter, verbose=\n    True, corrupt_side='s,o', entities_subset=entities_subset)\nranks = ranks.reshape(-1)\nassert np.sum(ranks > len(entities_subset)) == 0\n"
+}

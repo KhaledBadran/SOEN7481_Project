@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fileargs_lookup",
+    "className": "CacheTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_cache.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "l = lookup.TemplateLookup(cache_dir=module_base, cache_type='file')\nl.put_string('test',\n    \"\"\"\n                <%!\n                    callcount = [0]\n                %>\n                <%def name=\"foo()\" cached=\"True\">\n                    this is foo\n                    <%\n                    callcount[0] += 1\n                    %>\n                </%def>\n\n                ${foo()}\n                ${foo()}\n                ${foo()}\n                callcount: ${callcount}\n        \"\"\"\n    )\nt = l.get_template('test')\nm = self._install_mock_cache(t)\nassert result_lines(l.get_template('test').render()) == ['this is foo',\n    'this is foo', 'this is foo', 'callcount: [1]']\neq_(m.kwargs, {'dir': module_base, 'type': 'file'})\n"
+}

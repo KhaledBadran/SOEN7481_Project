@@ -1,0 +1,9 @@
+{
+    "functionName": "test_structure_measurements",
+    "className": null,
+    "fileName": "/mesonepigreco_&_CellConstructor/tests_&_TestStructureMeasurement_&_test_structure_measurements.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "total_path = os.path.dirname(os.path.abspath(__file__))\nos.chdir(total_path)\nalat = 2.838000235\nHydIII = CC.Structure.Structure()\nHydIII.read_scf('Hydrogen.scf', alat)\ndistance = 0.687\ntollerance = 0.2\nMols, indices = HydIII.GetBiatomicMolecules(['H', 'H'], distance,\n    tollerance, True)\nprint('Found %s molecules:' % len(Mols))\ndist = []\nfor i, mol in enumerate(Mols):\n    d = np.sqrt(np.sum((mol.coords[(0), :] - mol.coords[(1), :]) ** 2))\n    dist.append(d)\nprint('Here all the H-H distances:')\nprint(dist)\nplt.figure()\nplt.title('H-H distance histogram')\nplt.xlabel('dist [$\\\\AA$]')\nplt.ylabel('freq')\nplt.hist(dist, 20)\nplt.tight_layout()\nMols = HydIII.get_strct_conventional_cell().GetTriatomicMolecules(['H', 'H',\n    'H'], 0.71, 1.44, 144, 0.2, 10)\nprint('N mols:', len(Mols))\nangls = []\nfor i, mol in enumerate(Mols):\n    angls.append(mol.get_angle(0, 1, 2))\n    print('%d) %.3f %.3f %.3f' % (i, mol.get_angle(0, 1, 2), mol.get_angle(\n        1, 2, 0), mol.get_angle(2, 0, 1)))\nplt.figure()\nplt.title('H-H-H angle histogram')\nplt.xlabel('angle [degree]')\nplt.ylabel('freq')\nplt.hist(angls, 20)\nplt.tight_layout()\n"
+}

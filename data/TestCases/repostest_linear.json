@@ -1,0 +1,9 @@
+{
+    "functionName": "test_linear",
+    "className": null,
+    "fileName": "/Marcnuth_&_Keras-Models/tests_&_test_linear.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "X = np.random.normal(0, 1.0, size=5000).reshape(500, 10)\nw = np.random.normal(0, 1.0, size=10)\nY = np.dot(X, w) + np.random.randint(1)\nmodel = LinearModel(input_shape=X.shape[1:], output_shape=1, dtype=float)\nmodel.compile(optimizer=SGD(), loss=mean_squared_error, metrics=['mae', 'mse'])\nmodel.summary()\nmodel.fit(X, Y, batch_size=16, epochs=10, validation_split=0.1)\nprint(X.shape, w.shape, Y.shape)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_filters",
+    "className": null,
+    "fileName": "/Edinburgh-Genome-Foundry_&_DnaCauldron/tests_&_test_filters.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "to_record = dc.sequence_to_biopython_record\nfilter1 = dc.NoRestrictionSiteFilter('BsmBI')\nassert filter1(to_record('ATGATGATG'))\nassert not filter1(to_record('ACGTCTCTTG'))\nassert not filter1(to_record('ACGGAGACGG'))\nfilter2 = dc.TextSearchFilter('GFP', is_forbidden=True)\nrecord = to_record('ATCGCGTGCGTGCACCACACGT')\nassert filter2(record)\ndc.annotate_record(record, location=(20, 40), label=\"Here's some GFP!\")\nassert not filter2(record)\n"
+}

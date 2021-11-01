@@ -1,0 +1,9 @@
+{
+    "functionName": "test_create_mazes",
+    "className": null,
+    "fileName": "/microsoft_&_MazeExplorer/tests_&_test_mazeexplorer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "env = MazeExplorer(mazes_path=tmpdir.strpath)\nfiles = os.listdir(env.mazes_path)\nrequired_files = ['10x10.cfg', '10x10.wad', '10x10_MAP01.txt', 'outputs']\nassert set(files) == set(required_files)\nenv.reset()\nfor _ in range(10):\n    action = env.action_space.sample()\n    observation, *_ = env.step(action)\n    assert observation.shape == (42, 42, 3)\n"
+}

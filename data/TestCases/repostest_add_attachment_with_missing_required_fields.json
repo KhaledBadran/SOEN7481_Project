@@ -1,0 +1,9 @@
+{
+    "functionName": "test_add_attachment_with_missing_required_fields",
+    "className": null,
+    "fileName": "/AutomatedTester_&_Bugsy/tests_&_test_bugs.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "responses.add(responses.GET, 'https://bugzilla.mozilla.org/rest/login',\n    body='{\"token\": \"foobar\"}', status=200, content_type='application/json',\n    match_querystring=True)\nresponses.add(responses.GET, rest_url('bug', 1017315), json=bug_return,\n    status=200, content_type='application/json', match_querystring=True)\nresponses.add(responses.POST,\n    'https://bugzilla.mozilla.org/rest/bug/1017315/attachment', json=\n    attachment_return, status=200, content_type='application/json',\n    match_querystring=True)\nbugzilla = Bugsy('foo', 'bar')\nbug = bugzilla.get(1017315)\nclone = copy.deepcopy(attachment_return['bugs']['1017315'][0])\ndel clone['data']\nattachment = Attachment(bugzilla, **clone)\ntry:\n    bug.add_attachment(attachment)\n    assert False, 'Should have raised a BugException due to add without data'\nexcept BugException as e:\n    assert str(e\n        ) == 'Message: Cannot add attachment without all required fields Code: None'\nresponses.activate"
+}

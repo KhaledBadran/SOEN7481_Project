@@ -1,0 +1,9 @@
+{
+    "functionName": "test_calculate_interval",
+    "className": "TestGroupManager",
+    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_group_manager.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "manager = GroupManager(Name('Alice'), Name('data_type'),\n    Sqlite3GroupManagerDb(self.intervalDatabaseFilePath), 1024, 1, self.\n    keyChain)\nself.setManager(manager)\nmemberKeys = {}\ntimePoint1 = Schedule.fromIsoString('20150825T093000')\nresult = manager._calculateInterval(timePoint1, memberKeys)\nself.assertEqual('20150825T090000', Schedule.toIsoString(result.getStartTime())\n    )\nself.assertEqual('20150825T100000', Schedule.toIsoString(result.getEndTime()))\ntimePoint2 = Schedule.fromIsoString('20150827T073000')\nresult = manager._calculateInterval(timePoint2, memberKeys)\nself.assertEqual('20150827T070000', Schedule.toIsoString(result.getStartTime())\n    )\nself.assertEqual('20150827T080000', Schedule.toIsoString(result.getEndTime()))\ntimePoint3 = Schedule.fromIsoString('20150827T043000')\nresult = manager._calculateInterval(timePoint3, memberKeys)\nself.assertEqual(False, result.isValid())\ntimePoint4 = Schedule.fromIsoString('20150827T053000')\nresult = manager._calculateInterval(timePoint4, memberKeys)\nself.assertEqual('20150827T050000', Schedule.toIsoString(result.getStartTime())\n    )\nself.assertEqual('20150827T060000', Schedule.toIsoString(result.getEndTime()))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_bidirectional_entry_pressure",
+    "className": "MixedPercolationTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_MixedPercolationTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "pn = op.network.Cubic(shape=[3, 3, 3], spacing=2.5e-05)\ngeo = op.geometry.GenericGeometry(network=pn, pores=pn.pores(), throats=pn.\n    throats())\ngeo['throat.diameter'] = 2e-05\ngeo['pore.diameter'] = (np.random.random(geo.Np) + 0.5) * 1e-05\ngeo['pore.volume'] = 4 / 3 * np.pi * (geo['pore.diameter'] / 2) ** 3\ngeo['throat.volume'] = 0.0\ngeo.add_model(propname='throat.centroid', model=op.models.geometry.\n    throat_centroid.pore_coords)\ngeo.add_model(propname='throat.normal', model=op.models.geometry.\n    throat_vector.pore_to_pore)\nwater = op.phases.Water(network=pn)\nwater['pore.contact_angle'] = 100\nphys = op.physics.GenericPhysics(network=pn, phase=water, geometry=geo)\nr_tor = 5e-06\npmod = op.models.physics.capillary_pressure.purcell_bidirectional\nphys.add_model(propname='throat.entry_pressure', model=pmod, r_toroid=r_tor)\nphys.add_model(propname='throat.max_pressure', model=op.models.physics.\n    meniscus.purcell, r_toroid=r_tor, mode='max')\nphys['pore.entry_pressure'] = 0.0\nip = op.algorithms.MixedInvasionPercolation(network=pn)\nip.setup(phase=water)\nip.set_inlets(pores=pn.pores('bottom'))\nip.run()\nalg_data = ip.get_intrusion_data()\nassert np.any(alg_data.S_pore < 1.0)\n"
+}

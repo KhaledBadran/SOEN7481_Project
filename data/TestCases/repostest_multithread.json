@@ -1,0 +1,9 @@
+{
+    "functionName": "test_multithread",
+    "className": null,
+    "fileName": "/ClanPlay_&_Python_IoC/tests_&_test_singleton_multithread.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ioc = IocManager(stats=True)\nioc.set_class(name='singleton1', cls=TSingleton1, singleton=True)\nioc.set_class(name='singleton2', cls=TSingleton1, singleton=True,\n    thread_local=True)\nassert ioc.singleton1 is ioc.singleton1\nassert ioc.singleton2 is ioc.singleton2\nstorage = {}\nthread = threading.Thread(target=_set_vars(ioc, storage))\nthread.start()\nthread.join()\nassert ioc.singleton1 is storage['singleton1']\nassert ioc.singleton2 is not storage['singleton2']\n"
+}

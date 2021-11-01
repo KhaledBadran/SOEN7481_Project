@@ -1,0 +1,9 @@
+{
+    "functionName": "test_multiphase_diffusion",
+    "className": "DiffusiveConductanceTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_physics_&_DiffusiveConductanceTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "np.random.seed(50)\nnet = op.network.Cubic(shape=[1, 6, 1])\ngeom = op.geometry.StickAndBall(network=net)\nair = op.phases.Air(network=net)\nwater = op.phases.Water(network=net)\nm = op.phases.MultiPhase(phases=[air, water], project=net.project)\nm.set_occupancy(phase=air, pores=[0, 1, 2])\nm.set_occupancy(phase=water, pores=[3, 4, 5])\nconst = op.models.misc.constant\nK_water_air = 0.5\nm.set_binary_partition_coef(propname='throat.partition_coef', phases=[water,\n    air], model=const, value=K_water_air)\nm._set_automatic_throat_occupancy()\nphys = op.physics.GenericPhysics(network=net, phase=m, geometry=geom)\nmdiff = op.models.physics.diffusive_conductance.multiphase_diffusion\nphys.add_model(propname='throat.diffusive_conductance', model=mdiff)\ng = phys['throat.diffusive_conductance']\nassert g.shape == (net.Nt, 2)\nassert_allclose(g[:, (0)][[0, 1, 3, 4]], g[:, (1)][[0, 1, 3, 4]])\nassert_allclose(g[2, 0] / g[2, 1], 1 / K_water_air)\nassert_allclose(g.mean(), 2.139269316e-07)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_read_missing_unique_identifiers",
+    "className": "TestDeriveKeyRequestPayload",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_derive_key.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a ValueError gets raised when decoding a DeriveKey request\n        payload encoding missing the unique identifiers.\n        \"\"\"\npayload = payloads.DeriveKeyRequestPayload()\nargs = self.partial_encoding_no_unique_identifiers,\nself.assertRaisesRegex(exceptions.InvalidKmipEncoding,\n    'The DeriveKey request payload encoding is missing the unique identifiers',\n    payload.read, *args)\n"
+}

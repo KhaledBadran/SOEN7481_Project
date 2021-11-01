@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_delta",
+    "className": "TestFileAnalyzer_misc",
+    "fileName": "/kenfar_&_DataGristle/scripts_&_tests_&_test_gristle_processor.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "file_analyzer = mod.FileAnalyzer({}, {})\nassert file_analyzer._get_delta('3s') == 3\nassert file_analyzer._get_delta('3s') == 3\nassert file_analyzer._get_delta('0s') == 0\nassert file_analyzer._get_delta('1m') == 60\nassert file_analyzer._get_delta('2m') == 120\nassert file_analyzer._get_delta('1h') == 3600\nassert file_analyzer._get_delta('2h') == 7200\nassert file_analyzer._get_delta('1d') == 86400\nassert file_analyzer._get_delta('100d') == 86400 * 100\nassert file_analyzer._get_delta('1000d') == 86400 * 1000\nassert file_analyzer._get_delta('1w') == 86400 * 7\nassert file_analyzer._get_delta('1M') == 86400 * 30\nassert file_analyzer._get_delta('1y') == 86400 * 365\nassert file_analyzer._get_delta('current_time - 1 day') == 86400\nassert file_analyzer._get_delta('current_time - 10 day') == 86400 * 10\nassert file_analyzer._get_delta('current_time - 2 weeks') == 86400 * 14\nassert file_analyzer._get_delta('current_time - 1 month') == 86400 * 30\nwith pytest.raises(ValueError):\n    assert file_analyzer._get_delta('3') == 3\nwith pytest.raises(ValueError):\n    assert file_analyzer._get_delta('3') == 3\n"
+}

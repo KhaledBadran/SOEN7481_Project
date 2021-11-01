@@ -1,0 +1,9 @@
+{
+    "functionName": "test_specific_bugs",
+    "className": "TestExamples",
+    "fileName": "/klahnakoski_&_Bugzilla-ETL/tests_&_test_examples.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        USE A MYSQL DATABASE TO FILL AN ES INSTANCE (USE Fake_ES() INSTANCES TO KEEP\n        THIS TEST LOCAL) WITH VERSIONS OF BUGS FROM settings.param.bugs.  COMPARE\n        THOSE VERSIONS TO A REFERENCE ES (ALSO CHECKED INTO REPOSITORY)\n        \"\"\"\nreference = FakeES(self.settings.reference)\ncandidate = elasticsearch.make_test_instance(self.settings.bugs)\ncandidate_comments = elasticsearch.make_test_instance(self.settings.comments)\nmake_test_instance(self.settings.bugzilla)\nwith MySQL(self.settings.bugzilla) as db:\n    param = Data()\n    param.end_time = convert.datetime2milli(get_current_time(db))\n    param.start_time = MIN_TIMESTAMP\n    param.start_time_str = extract_bugzilla.milli2string(db, MIN_TIMESTAMP)\n    param.alias_file = self.settings.param.alias_file\n    param.bug_list = self.settings.param.bugs\n    param.allow_private_bugs = self.settings.param.allow_private_bugs\n    with ThreadedQueue('etl queue', candidate, batch_size=1000) as output:\n        etl(db, output, param, self.alias_analyzer, please_stop=None)\n    with ThreadedQueue('etl queue', candidate_comments, batch_size=1000\n        ) as output:\n        etl_comments(db, output, param, please_stop=None)\nrefresh_metadata(candidate)\ncompare_both(candidate, reference, self.settings, self.settings.param.bugs)\n"
+}

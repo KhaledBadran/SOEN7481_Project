@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fcc_add_boundary_pores",
+    "className": "BravaisTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_network_&_BravaisTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "fcc = op.network.Bravais(shape=[3, 3, 3], mode='fcc')\nNp = fcc.Np\nfcc.add_boundary_pores(labels=['left', 'right'], spacing=1)\nassert fcc.Np > Np\nassert fcc.Np == Np + 18 + 8\nassert 'pore.left_boundary' in fcc.keys()\nassert 'pore.right_boundary' in fcc.keys()\nassert 'pore.top_boundary' not in fcc.keys()\nassert 'pore.bottom_boundary' not in fcc.keys()\n"
+}

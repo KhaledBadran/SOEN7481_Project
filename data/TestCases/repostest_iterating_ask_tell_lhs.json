@@ -1,0 +1,9 @@
+{
+    "functionName": "test_iterating_ask_tell_lhs",
+    "className": null,
+    "fileName": "/bytesandbrains_&_ProcessOptimizer/ProcessOptimizer_&_tests_&_test_optimizer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "opt = Optimizer([(1, 6)], 'GP', lhs=True)\nsamples = opt._lhs_samples\nassert opt.ask() == samples[0]\nopt.tell([1], 0)\nassert opt.ask() == samples[1]\nopt.tell([1], 0)\nassert opt.ask(n_points=3) == samples[2:5]\nopt.tell([[2], [2], [2]], [0, 0, 0])\nassert opt.ask() == samples[5]\npytest.mark.fast_test"
+}

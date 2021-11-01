@@ -1,0 +1,9 @@
+{
+    "functionName": "populate_folders",
+    "className": "psv_load_tests_random",
+    "fileName": "/DolphDev_&_PSV/tests_&_test_load_random.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "from psv.core.objects.rowobjects import accepted_chars\nfrom string import ascii_uppercase\nfrom random import uniform\nalphabet = accepted_chars + ascii_uppercase\nif self.is_populated_new:\n    return None\nelse:\n    self.is_populated_new = True\nimport csv\ncolumns = generate_random_column_range(randint(5, 20), alphabet)\nfor x in range(1, 6):\n    self.generate_data_str_nonrandom(columns, randint(1, 50))\n    with open('tests/dataset-folder-random/psv-tests-' + str(x) + '.csv',\n        'w+', encoding='UTF-8', newline='') as csvfile:\n        fieldnames = columns\n        writer = csv.DictWriter(csvfile, fieldnames=fieldnames, quoting=csv\n            .QUOTE_ALL)\n        writer.writeheader()\n        for item in self.csvloads_dict_tuple:\n            writer.writerow(item)\nself.generate_data_str()\nwith open('tests/dataset-only-one-random/test.csv', 'w+', encoding='UTF-8',\n    newline='') as csvfile:\n    fieldnames = self.csvloads_dict_columns\n    writer = csv.DictWriter(csvfile, fieldnames=fieldnames, quoting=csv.\n        QUOTE_ALL)\n    writer.writeheader()\n    for item in self.csvloads_dict_tuple:\n        writer.writerow(item)\n"
+}

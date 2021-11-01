@@ -1,0 +1,9 @@
+{
+    "functionName": "test_write_missing_managed_object",
+    "className": "TestRegisterRequestPayload",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_register.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that an InvalidField error is raised during the encoding of a\n        Register request payload when the payload is missing the managed\n        object.\n        \"\"\"\npayload = payloads.RegisterRequestPayload(object_type=enums.ObjectType.\n    SECRET_DATA, template_attribute=objects.TemplateAttribute(attributes=[\n    objects.Attribute(attribute_name=objects.Attribute.AttributeName(\n    'Cryptographic Usage Mask'), attribute_value=primitives.Integer(enums.\n    CryptographicUsageMask.VERIFY.value, tag=enums.Tags.\n    CRYPTOGRAPHIC_USAGE_MASK))]))\nargs = utils.BytearrayStream(),\nself.assertRaisesRegex(exceptions.InvalidField,\n    'The Register request payload is missing the managed object field.',\n    payload.write, *args)\n"
+}

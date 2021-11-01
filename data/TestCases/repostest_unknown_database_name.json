@@ -1,0 +1,9 @@
+{
+    "functionName": "test_unknown_database_name",
+    "className": "TestAFDatabase",
+    "fileName": "/Hugovdberg_&_PIconnect/tests_&_test_PIAF.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that the server reports a warning for an unknown database.\"\"\"\nserver = PI.PIAFDatabase.default_server['server']\ndatabases = [db.Name for db in server.Databases]\nAFdatabase_name = '__'.join(databases + ['UnkownDatabaseName'])\nwith pytest.warns(UserWarning):\n    PI.PIAFDatabase(database=AFdatabase_name)\n"
+}

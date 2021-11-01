@@ -1,0 +1,9 @@
+{
+    "functionName": "test_simauto_called_for_new_object_type",
+    "className": "GetFieldListTestCase",
+    "fileName": "/mzy2240_&_ESA/tests_&_test_saw.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Ensure that for a new object type, SimAuto is called and\n        the new result is stored in the object_fields dictionary.\n        \"\"\"\nobj_type = '3WXFormer'.lower()\nself.assertNotIn(obj_type, saw_14._object_fields)\ntry:\n    with patch.object(saw_14, '_call_simauto', wraps=saw_14._call_simauto\n        ) as p:\n        field_list = saw_14.GetFieldList(ObjectType=obj_type)\n    self.check_field_list(field_list)\n    self.assertEqual(p.call_count, 1)\n    p.assert_called_with('GetFieldList', obj_type)\n    self.assertIn(obj_type, saw_14._object_fields)\nfinally:\n    del saw_14._object_fields[obj_type]\n"
+}

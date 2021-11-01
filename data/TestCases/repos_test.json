@@ -1,0 +1,9 @@
+{
+    "functionName": "_test",
+    "className": null,
+    "fileName": "/vfdev-5_&_ImageTilingUtils/tests_&_test_const_stride.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "debug_msg = 'im_size={} ts={} scale={} stride={} origin={}\\n'.format(im_size,\n    ts, scale, stride, origin)\ntiles = ConstStrideTiles((im_size, im_size), (ts, ts), stride=(stride,\n    stride), scale=scale, origin=(origin, origin), include_nodata=True)\ndebug_msg += 'n={}\\n'.format(len(tiles))\nself.assertGreater(len(tiles), 0, debug_msg)\nself.assertLess(math.sqrt(len(tiles)), 1 + (im_size - origin) * 1.0 / tiles\n    .stride[0], debug_msg)\nextent0, out_size0 = tiles[0]\ndebug_msg += 'extent0={}, out_size0={}\\n'.format(extent0, out_size0)\nself.assertEqual((extent0[0], extent0[1]), (origin, origin), debug_msg)\nself.assertEqual((out_size0[0], out_size0[1]), (ts, ts), debug_msg)\nd = extent0[2], extent0[3]\nfor i in range(1, len(tiles)):\n    extent, out_size = tiles[i]\n    prev_extent, _ = tiles[i - 1]\n    self.assertEqual(d, (extent[2], extent[3]), debug_msg)\n    if extent[0] - prev_extent[0] > 0:\n        self.assertEqual(tiles.stride[0], extent[0] - prev_extent[0], debug_msg\n            )\n    if extent[1] - prev_extent[1] > 0:\n        self.assertEqual(tiles.stride[1], extent[1] - prev_extent[1], debug_msg\n            )\n    else:\n        self.assertEqual(0, extent[1] - prev_extent[1], debug_msg)\n    self.assertEqual(out_size, out_size0)\nextent, _ = tiles[-1]\ndebug_msg += 'extent={}, out_size={}\\n'.format(extent, _)\nself.assertLess(extent[0], im_size, debug_msg)\nself.assertLess(extent[1], im_size, debug_msg)\nself.assertGreaterEqual(extent[0] + max(extent[2], tiles.stride[0]),\n    im_size, debug_msg)\nself.assertGreaterEqual(extent[1] + max(extent[3], tiles.stride[1]),\n    im_size, debug_msg)\n"
+}

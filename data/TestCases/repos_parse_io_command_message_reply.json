@@ -1,0 +1,9 @@
+{
+    "functionName": "_parse_io_command_message_reply",
+    "className": null,
+    "fileName": "/PRIArobotics_&_HedgehogProtocol/hedgehog_&_protocol_&_messages_&_io.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "port = msg.port\nflags = msg.flags\nsubscription = msg.subscription if msg.HasField('subscription') else None\nif subscription is None:\n    return CommandReply(port, flags)\nelse:\n    return CommandUpdate(port, flags, subscription)\nReplyMsg.parser('io_command_message')"
+}

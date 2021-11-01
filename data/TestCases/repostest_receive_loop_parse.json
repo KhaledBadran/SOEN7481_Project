@@ -1,0 +1,9 @@
+{
+    "functionName": "test_receive_loop_parse",
+    "className": "TestClient",
+    "fileName": "/akolar_&_ogn-lib/tests_&_test_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sock = self._get_mocked_socket(mocker, True)\nwith mocker.patch('socket.create_connection', return_value=sock):\n    cl = client.OgnClient('username')\n    cl.connect()\n    cb = mocker.MagicMock(side_effect=lambda x: cl.disconnect())\n    cl._receive_loop(cb, None)\n    cl._receive_loop(cb, lambda x: x)\n"
+}

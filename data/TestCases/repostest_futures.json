@@ -1,0 +1,9 @@
+{
+    "functionName": "test_futures",
+    "className": null,
+    "fileName": "/chrisseto_&_Agent/tests_&_test_agent.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "@agent.async_generator\ndef inner_gen():\n    fut = asyncio.Future()\n    fut.set_result(10)\n    yield agent.Result(fut)\ngen = inner_gen()\nassert await (await agent.anext(gen)) == 10\npytest.mark.asyncio"
+}

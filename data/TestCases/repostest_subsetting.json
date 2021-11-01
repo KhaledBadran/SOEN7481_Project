@@ -1,0 +1,9 @@
+{
+    "functionName": "test_subsetting",
+    "className": null,
+    "fileName": "/ivirshup_&_ConsistentClusters/tests_&_test_aggregate.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "recon = reconcile(*clustering_run)\nby_cells = recon.subset_cells(recon._obs_names[slice(50, 100)])\nby_cells_comps = by_cells.get_components(0.9)\nassert all(by_cells._obs_names == recon._obs_names[slice(50, 100)])\nassert len(by_cells_comps) == 1\nassert all(np.sort(by_cells_comps[0].intersect_names) == np.sort(by_cells.\n    clusterings.index))\nby_settings = recon.subset_clusterings(lambda x: x['a'] < 2)\nassert len(recon.settings) / 2 == len(by_settings.settings)\nassert recon.clusterings.shape[1] / 2 == by_settings.clusterings.shape[1]\nassert all(by_settings._mapping.index.get_level_values('clustering').unique\n    () == by_settings.settings.index)\nassert all(by_settings.cluster_ids == np.unique(by_settings.clusterings.\n    stack()))\n"
+}

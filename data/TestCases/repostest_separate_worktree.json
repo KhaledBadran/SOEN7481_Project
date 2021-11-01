@@ -1,0 +1,9 @@
+{
+    "functionName": "test_separate_worktree",
+    "className": null,
+    "fileName": "/msiemens_&_PyGitUp/PyGitUp_&_tests_&_test_separate_worktree.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Run 'git up' with separate work tree \"\"\"\nif Git().version_info[:3] < (2, 5, 1):\n    raise SkipTest('Skip this test on Travis CI :(')\nos.chdir(worktree_path)\nfrom PyGitUp.gitup import GitUp\ngitup = GitUp(testing=True)\ngitup.run()\nassert_equal(len(gitup.states), 1)\nassert_equal(gitup.states[0], 'fast-forwarding')\n"
+}

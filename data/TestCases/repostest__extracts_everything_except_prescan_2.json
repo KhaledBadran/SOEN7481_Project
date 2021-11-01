@@ -1,0 +1,9 @@
+{
+    "functionName": "test__extracts_everything_except_prescan_2",
+    "className": "TestParallelSerialCalibrationSection",
+    "fileName": "/Jammy2211_&_PyAutoCTI/test_&_unit_&_charge_injection_&_test_ci_frame.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "pattern = ci_pattern.CIPatternUniform(normalization=1.0, regions=[(0, 1, 0, 1)]\n    )\nimage = np.array([[0.0, 1.0, 2.0, 3.0], [0.0, 1.0, 2.0, 3.0], [0.0, 1.0, \n    2.0, 3.0], [0.0, 1.0, 2.0, 3.0], [0.0, 1.0, 2.0, 3.0]])\nframe = ci_frame.ChInj(frame_geometry=ci_frame.FrameGeometry.\n    euclid_bottom_left(), ci_pattern=pattern)\nframe.frame_geometry.serial_prescan = ci_frame.Region(region=(0, 4, 0, 2))\nextracted_array = frame.parallel_serial_calibration_section(image)\nassert (extracted_array == np.array([[2.0, 3.0], [2.0, 3.0], [2.0, 3.0], [\n    2.0, 3.0], [2.0, 3.0]])).all()\n"
+}

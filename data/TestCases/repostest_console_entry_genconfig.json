@@ -1,0 +1,9 @@
+{
+    "functionName": "test_console_entry_genconfig",
+    "className": null,
+    "fileName": "/jantman_&_AutoSimulationCraft/autosimulationcraft_&_tests_&_test_runner.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" test console_entry_point() with --genconfig \"\"\"\nwith patch('autosimulationcraft.runner.parse_args') as mock_parse_args, patch(\n    'autosimulationcraft.autosimulationcraft.AutoSimulationCraft.gen_config'\n    ) as mock_gen_config:\n    args = Container()\n    setattr(args, 'genconfig', True)\n    setattr(args, 'confdir', '/foo/bar')\n    setattr(args, 'version', False)\n    mock_parse_args.return_value = args\n    with pytest.raises(SystemExit):\n        autosimulationcraft.runner.console_entry_point()\nassert mock_parse_args.call_count == 1\nassert mock_gen_config.call_args_list == [call('/foo/bar')]\n"
+}

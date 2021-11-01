@@ -1,0 +1,9 @@
+{
+    "functionName": "randomstate_equal",
+    "className": null,
+    "fileName": "/OpenSMFS_&_PyBroMo/pybromo_&_tests_&_test_diffusion.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "if isinstance(rs1, np.random.RandomState):\n    rs1 = rs1.get_state()\nassert isinstance(rs1, tuple)\nif isinstance(rs2, np.random.RandomState):\n    rs2 = rs2.get_state()\nassert isinstance(rs1, tuple)\nassert len(rs1) == len(rs2)\nequal = True\nfor x1, x2 in zip(rs1, rs2):\n    test = x1 == x2\n    if hasattr(test, '__array__'):\n        test = test.all()\n    equal &= test\nreturn equal\n"
+}

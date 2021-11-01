@@ -1,0 +1,9 @@
+{
+    "functionName": "test_conv_input_length",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_conv.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from lasagne.layers.conv import conv_input_length\nassert conv_input_length(2, 3, 1, 'valid') == 4\nassert conv_input_length(2, 3, 1, 0) == 4\nassert conv_input_length(6, 4, 1, 2) == 5\nassert conv_input_length(2, 3, 2, 0) == 5\nassert conv_input_length(3, 3, 2, 'same') == 5\nassert conv_input_length(3, 3, 2, 'full') == 3\nwith pytest.raises(ValueError) as exc:\n    conv_input_length(3, 5, 3, '_nonexistent_mode')\nassert 'Invalid pad: ' in exc.value.args[0]\n"
+}

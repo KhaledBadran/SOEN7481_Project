@@ -1,0 +1,9 @@
+{
+    "functionName": "test__to_array_len_shape_is_one",
+    "className": "TestBaseHyperParam",
+    "fileName": "/HDI-Project_&_BTB/tests_&_tuning_&_hyperparams_&_test_base.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "instance = MagicMock()\ninstance.dimensions = 1\nvalues = [1]\narray = MagicMock()\narray.shape.__len__.return_value = 1\nmock_np_array.return_value = array\nBaseHyperParam._to_array(instance, values)\narray.reshape.assert_called_once_with(-1, 1)\npatch('btb.tuning.hyperparams.base.np.array')"
+}

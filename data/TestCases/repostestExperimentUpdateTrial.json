@@ -1,0 +1,9 @@
+{
+    "functionName": "testExperimentUpdateTrial",
+    "className": "SQAStoreTest",
+    "fileName": "/facebook_&_Ax/ax_&_storage_&_sqa_store_&_tests_&_test_sqa_store.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "save_experiment(self.experiment)\ntrial = self.experiment.trials[0]\ntrial.mark_staged()\nupdate_trial(experiment=self.experiment, trial=trial)\nloaded_experiment = load_experiment(self.experiment.name)\nself.assertEqual(trial, loaded_experiment.trials[0])\ntrial._run_metadata = {'foo': 'bar'}\nupdate_trial(experiment=self.experiment, trial=trial)\nloaded_experiment = load_experiment(self.experiment.name)\nself.assertEqual(trial, loaded_experiment.trials[0])\nself.experiment.attach_data(get_data(trial_index=trial.index))\nupdate_trial(experiment=self.experiment, trial=trial)\nloaded_experiment = load_experiment(self.experiment.name)\nself.assertEqual(self.experiment, loaded_experiment)\ntrial = self.experiment.new_batch_trial(generator_run=get_generator_run())\nsave_new_trial(experiment=self.experiment, trial=trial)\nself.experiment.attach_data(get_data(trial_index=trial.index))\nupdate_trial(experiment=self.experiment, trial=trial)\nloaded_experiment = load_experiment(self.experiment.name)\nself.assertEqual(self.experiment, loaded_experiment)\n"
+}

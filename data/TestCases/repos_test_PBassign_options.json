@@ -1,0 +1,9 @@
+{
+    "functionName": "_test_PBassign_options",
+    "className": "TestPBAssign",
+    "fileName": "/pierrepo_&_PBxplore/pbxplore_&_tests_&_test_regression.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "out_run_dir = str(out_run_dir)\nif multiple is not None:\n    out_name = multiple\nstatus, out_run_dir = self._run_PBassign(out_run_dir, basename, extension,\n    multiple)\nassert status == expected_exit, 'PBassign stoped with a {0} exit code'.format(\n    status)\nassert len(os.listdir(out_run_dir)) == len(outfiles\n    ), 'PBassign did not produced the right number of files: {0} files produced instead of {1}'.format(\n    len(os.listdir(out_run_dir)), len(outfiles))\nout_name = basename if multiple is None else multiple\nfor outfile in (template.format(out_name + extension) for template in outfiles\n    ):\n    test_file = path.join(out_run_dir, outfile)\n    ref_file = path.join(REFDIR, outfile)\n    _assert_identical_files(test_file, ref_file)\n"
+}

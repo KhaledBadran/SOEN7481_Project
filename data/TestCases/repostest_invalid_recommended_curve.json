@@ -1,0 +1,9 @@
+{
+    "functionName": "test_invalid_recommended_curve",
+    "className": "TestRNGParameters",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a TypeError is raised when an invalid value is used to set\n        the recommended curve of an RNGParameters structure.\n        \"\"\"\nkwargs = {'recommended_curve': 'invalid'}\nself.assertRaisesRegex(TypeError,\n    'The recommended curve must be a RecommendedCurve enumeration.',\n    objects.RNGParameters, **kwargs)\nargs = objects.RNGParameters(), 'recommended_curve', 'invalid'\nself.assertRaisesRegex(TypeError,\n    'The recommended curve must be a RecommendedCurve enumeration.',\n    setattr, *args)\n"
+}

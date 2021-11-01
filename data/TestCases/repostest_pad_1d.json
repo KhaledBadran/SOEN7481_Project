@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pad_1d",
+    "className": null,
+    "fileName": "/CCampJr_&_CRIkit2/crikit_&_utils_&_tests_&_test_general.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "x = np.arange(-1000, 1001)\ny = np.real(1 / (-500 - x - 1.0j * 100))\ny_pad_edge, window_edge = pad(y, 10, 'edge')\nassert np.allclose(y_pad_edge[10:-10], y)\nassert np.allclose(y_pad_edge[:10], y[0])\nassert np.allclose(y_pad_edge[-10:], y[-1])\nassert np.allclose(window_edge[10:-10], 1)\nassert np.allclose(window_edge[:10], 0)\nassert np.allclose(window_edge[-10:], 0)\nassert np.allclose(y_pad_edge[..., window_edge == 1], y)\ny_pad_constant, window_constant = pad(y, 10, 'constant')\nassert np.allclose(y_pad_constant[10:-10], y)\nassert np.allclose(y_pad_constant[:10], 0)\nassert np.allclose(y_pad_constant[-10:], 0)\nassert np.allclose(window_constant[10:-10], 1)\nassert np.allclose(window_constant[:10], 0)\nassert np.allclose(window_constant[-10:], 0)\nassert np.allclose(y_pad_constant[..., window_constant == 1], y)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_dbOptimize",
+    "className": "TestDatabase",
+    "fileName": "/corydodt_&_Hypy/src_&_hypy_&_test_lib.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Make sure the various optimize flags do not cause a heart attack.\n        \"\"\"\nwith self.freshenDatabase() as db:\n    db.optimize(purge=True)\nwith self.freshenDatabase() as db:\n    db.optimize(opt=True)\nwith self.freshenDatabase() as db:\n    db.optimize()\n    self.assertRaises(NotImplementedError, db.sync)\n"
+}

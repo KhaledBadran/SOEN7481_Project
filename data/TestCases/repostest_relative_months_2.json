@@ -1,0 +1,9 @@
+{
+    "functionName": "test_relative_months_2",
+    "className": null,
+    "fileName": "/KoffeinFlummi_&_Chronyk/test_chronyk.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "dati = datetime.datetime.utcnow()\nnewmonth = (dati.month - 1 + 4) % 12 + 1\nnewyear = dati.year + int((dati.month - 1 + 4) / 12)\nnewday = dati.day\nwhile newday > calendar.monthrange(newyear, newmonth)[1]:\n    newday -= 1\ndati = dati.replace(year=newyear, month=newmonth, day=newday)\ntimestr = time.strftime('%Y-%m-%d', dati.timetuple())\nassert Chronyk('in 4 months', timezone=0).relativestring() == timestr\n"
+}

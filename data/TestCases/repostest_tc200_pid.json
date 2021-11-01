@@ -1,0 +1,9 @@
+{
+    "functionName": "test_tc200_pid",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_thorlabs_&_test_thorlabs_tc200.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with expected_protocol(ik.thorlabs.TC200, ['pid?', 'pgain=2'], ['pid?',\n    '2 0 220', '> pgain=2', '> '], sep='\\r') as tc:\n    assert tc.p == 2\n    tc.p = 2\nwith expected_protocol(ik.thorlabs.TC200, ['pid?', 'igain=0'], ['pid?',\n    '2 0 220', '> igain=0', '> '], sep='\\r') as tc:\n    assert tc.i == 0\n    tc.i = 0\nwith expected_protocol(ik.thorlabs.TC200, ['pid?', 'dgain=220'], ['pid?',\n    '2 0 220', '> dgain=220', '> '], sep='\\r') as tc:\n    assert tc.d == 220\n    tc.d = 220\nwith expected_protocol(ik.thorlabs.TC200, ['pid?', 'pgain=2', 'igain=0',\n    'dgain=220'], ['pid?', '2 0 220', '> pgain=2', '> igain=0',\n    '> dgain=220', '> '], sep='\\r') as tc:\n    assert tc.pid == [2, 0, 220]\n    tc.pid = 2, 0, 220\n"
+}

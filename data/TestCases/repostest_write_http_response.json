@@ -1,0 +1,9 @@
+{
+    "functionName": "test_write_http_response",
+    "className": null,
+    "fileName": "/RobertoPrevato_&_BlackSheep/tests_&_test_responses.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "response.set_cookies(cookies)\ndata = b''\nasync for chunk in scribe.write_response(response):\n    data += chunk\nassert data == expected_result\npytest.mark.asynciopytest.mark.parametrize('response,cookies,expected_result', [(Response(400,\n    [(b'Server', b'BlackSheep')]).with_content(Content(b'text/plain',\n    b'Hello, World')), [],\n    b'HTTP/1.1 400 Bad Request\\r\\nServer: BlackSheep\\r\\ncontent-type: text/plain\\r\\ncontent-length: 12\\r\\n\\r\\nHello, World'\n    ), (Response(400, [(b'Server', b'BlackSheep')]).with_content(Content(\n    b'text/plain', b'Hello, World')), [Cookie(b'session', b'123')],\n    b'HTTP/1.1 400 Bad Request\\r\\nServer: BlackSheep\\r\\nset-cookie: session=123\\r\\ncontent-type: text/plain\\r\\ncontent-length: 12\\r\\n\\r\\nHello, World'\n    ), (Response(400, [(b'Server', b'BlackSheep')]).with_content(Content(\n    b'text/plain', b'Hello, World')), [Cookie(b'session', b'123'), Cookie(\n    b'aaa', b'bbb', domain=b'bezkitu.org')],\n    b'HTTP/1.1 400 Bad Request\\r\\nServer: BlackSheep\\r\\nset-cookie: session=123\\r\\nset-cookie: aaa=bbb; Domain=bezkitu.org\\r\\ncontent-type: text/plain\\r\\ncontent-length: 12\\r\\n\\r\\nHello, World'\n    )])"
+}

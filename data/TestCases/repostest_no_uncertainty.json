@@ -1,0 +1,9 @@
+{
+    "functionName": "test_no_uncertainty",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_conditionals_&_test_uncertain_conditional.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "mean_function = mean_function_factory(mean, Data.D_in, Data.D_out)\nkernel = gpflow.kernels.SquaredExponential(variance=rng.rand())\nmodel = MomentMatchingSVGP(kernel, gpflow.likelihoods.Gaussian(),\n    num_latent_gps=Data.D_out, mean_function=mean_function,\n    inducing_variable=Data.X.copy(), whiten=white)\nmodel.full_output_cov = False\ntraining_loop(model.training_loss_closure(Data.data), optimizer=tf.\n    optimizers.Adam(), var_list=model.trainable_variables, maxiter=100,\n    compile=True)\nmean1, var1 = model.predict_f(Data.Xnew_mu)\nmean2, var2 = model.uncertain_predict_f_moment_matching(*map(tf.\n    convert_to_tensor, [Data.Xnew_mu, Data.Xnew_covar]))\nassert_allclose(mean1, mean2)\nfor n in range(Data.N_new):\n    assert_allclose(var1[(n), :], var2[n, ...])\npytest.mark.parametrize('white', [True, False])pytest.mark.parametrize('mean', MEANS)"
+}

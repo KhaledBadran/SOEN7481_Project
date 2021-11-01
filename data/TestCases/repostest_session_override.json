@@ -1,0 +1,9 @@
+{
+    "functionName": "test_session_override",
+    "className": null,
+    "fileName": "/PlaidWeb_&_Authl/tests_&_test_flask_wrapper.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "app = flask.Flask(__name__)\napp.secret_key = 'poiu'\nstash = {}\ndef on_verified(disp):\n    stash['v'] = disp\nauthl.flask.setup(app, {'TEST_ENABLED': True}, session_auth_name=None,\n    on_verified=on_verified)\nwith app.test_client() as client:\n    client.get('/login/?me=test:poiu')\n    assert 'me' not in flask.session\n    assert isinstance(stash['v'], disposition.Verified)\n    assert stash['v'].identity == 'test:poiu'\n"
+}

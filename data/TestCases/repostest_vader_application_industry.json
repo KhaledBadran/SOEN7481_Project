@@ -1,0 +1,9 @@
+{
+    "functionName": "test_vader_application_industry",
+    "className": "TestCompanyHeadlinesYahoo",
+    "fileName": "/EVEprosper_&_ProsperDatareader/tests_&_test_news.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"make sure use-case for news + vader works\"\"\"\nimport prosper.datareader.utils as utils\nall_news_df = news.industry_headlines_yahoo(self.good_ticker)\ngraded_news = utils.vader_sentiment(all_news_df, 'title')\nexpected_cols = self.company_cols\nexpected_cols.extend(['neu', 'pos', 'compound', 'neg'])\nunique_values, unique_expected = helpers.find_uniques(list(graded_news.\n    columns.values), expected_cols)\nassert unique_expected == []\nif unique_values:\n    pytest.xfail('Unexpected values from vader_sentiment(): {}'.format(\n        unique_values))\npytest.mark.long"
+}

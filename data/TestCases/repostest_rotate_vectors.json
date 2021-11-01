@@ -1,0 +1,9 @@
+{
+    "functionName": "test_rotate_vectors",
+    "className": "test_rotation_axis",
+    "fileName": "/jonwright_&_ImageD11/test_&_gv_general_&_test_gv_general.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"rotate 3x3 vectors, angs or not\"\"\"\no = gv_general.rotation_axis([0, 0, 1], 90.0)\nvecs = np.transpose(np.array([[0, 0, 1], [0, 1, 0], [1, 0, 0], [1, 0, 0]],\n    np.float))\nres = np.transpose(np.array([[0, 0, 1], [-1, 0, 0], [0, 1, 0], [0, 1, 0]],\n    np.float))\nm1, m2 = o.rotate_vectors(vecs), res\nself.assertEqual(m1.shape, m2.shape)\nerr = '\\n\\n' + str(m1.astype(np.int)) + ' != \\n\\n' + str(m2)\nself.assertAlmostEqual(array_diff(m1, m2), 0, 6, err)\nangs = np.array([90.0] * 4, np.float)\nm3, m4 = o.rotate_vectors(vecs, angs), res\nerr = '\\n\\n' + str(m3.astype(np.int)) + ' != \\n\\n' + str(m4)\nself.assertAlmostEqual(array_diff(m3, m4), 0, 6, err)\n"
+}

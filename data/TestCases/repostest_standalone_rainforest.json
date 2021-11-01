@@ -1,0 +1,9 @@
+{
+    "functionName": "test_standalone_rainforest",
+    "className": "Test_create_cmap_mod",
+    "fileName": "/1313e_&_CMasher/cmasher_&_tests_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cmap_old = mplcm.get_cmap('cmr.rainforest')\ncmap_path = create_cmap_mod('rainforest')\nspec = spec_from_file_location('rainforest', cmap_path)\nmod = module_from_spec(spec)\nspec.loader.exec_module(mod)\ncmap_new = mplcm.get_cmap('cmr.rainforest')\nassert cmap_new is mod.cmap\nassert cmap_old is not cmap_new\nassert np.allclose(cmap_old.colors, cmap_new.colors)\n"
+}

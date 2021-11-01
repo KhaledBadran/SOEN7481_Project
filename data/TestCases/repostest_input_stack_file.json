@@ -1,0 +1,9 @@
+{
+    "functionName": "test_input_stack_file",
+    "className": null,
+    "fileName": "/AllenInstitute_&_EM_Aligner_python/integration_tests_&_test_file_io.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "p = copy.deepcopy(montage_parameters)\nresolved = renderapi.resolvedtiles.get_resolved_tiles_from_z(raw_stack, p[\n    'first_section'], render=render)\ntmp_file_dir = str(tmpdir.mkdir('file_test_dir'))\ninput_stack_file = os.path.join(tmp_file_dir, 'input_stack.json')\ninput_stack_file = jsongz.dump(resolved.to_dict(), input_stack_file,\n    compress=compress)\np['input_stack']['db_interface'] = 'file'\np['input_stack']['input_file'] = input_stack_file\np['output_mode'] = 'none'\np['pointmatch']['name'] = montage_pointmatches\ntmod = EMaligner.EMaligner(input_data=p, args=[])\ntmod.run()\nfor k in ['precision', 'error', 'err']:\n    assert np.all(np.isclose(np.array(tmod.results[k]), np.array(\n        solved_montage.results[k]), atol=1e-07))\nassert np.all(np.isclose(np.linalg.norm(solved_montage.results['x'], axis=0\n    ), np.linalg.norm(tmod.results['x'], axis=0), atol=1e-07))\norig_ids = np.array([t.tileId for t in solved_montage.resolvedtiles.tilespecs])\nfor t in tmod.resolvedtiles.tilespecs:\n    i = np.argwhere(orig_ids == t.tileId).flatten()[0]\n    assert np.all(np.isclose(solved_montage.resolvedtiles.tilespecs[i].\n        tforms[-1].M, t.tforms[-1].M, atol=1e-07))\ndel tmod\nshutil.rmtree(tmp_file_dir)\npytest.mark.parametrize('compress', [True, False])"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_unitary_wrongnumberofqubits_toofew",
+    "className": "Test_conjugated_kernel",
+    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_unitary.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.setUpClass()\nnum_qubits = 3\np = ql.Program('test_unitary_pass', platform, num_qubits)\nk = ql.Kernel('akernel', platform, num_qubits)\nu = ql.Unitary('u1', [-0.43874989 - 0.10659111j, -0.47325212 + 0.12917344j,\n    -0.58227163 + 0.20750072j, -0.29075334 + 0.29807585j, 0.30168601 - \n    0.22307459j, 0.32626 + 0.4534935j, -0.20523265 - 0.42403593j, -\n    0.01012565 + 0.5701683j, -0.40954341 - 0.49946371j, 0.28560698 - \n    0.06740801j, 0.52146754 + 0.1833513j, -0.37248653 + 0.22891636j, \n    0.03113162 - 0.48703302j, -0.57180014 + 0.18486244j, 0.2943625 - \n    0.06148912j, 0.55533888 + 0.04322811j])\nwith self.assertRaises(Exception) as cm:\n    k.gate(u, [0])\nself.assertEqual(str(cm.exception),\n    \"Unitary 'u1' has been applied to the wrong number of qubits. Cannot be added to kernel! 1 and not 2.000000\"\n    )\n"
+}

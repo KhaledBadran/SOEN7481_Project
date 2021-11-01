@@ -1,0 +1,9 @@
+{
+    "functionName": "test_missing_offset",
+    "className": "TestDataAcquisitionClient",
+    "fileName": "/BciPy_&_BciPy/bcipy_&_acquisition_&_tests_&_test_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test missing offset when no triggers are present in the data.\"\"\"\nchannels = ['ch1', 'ch2', 'TRG']\nsample_hz = 100\nnum_records = 500\nn_channels = len(channels) - 1\ndata = [(mock_record(n_channels) + [0]) for i in range(num_records)]\ndevice = _MockDevice(data=data, channels=channels, fs=sample_hz)\ndaq = DataAcquisitionClient(device=device, clock=CountClock(), buffer_name=\n    'buffer_client_test_missing_offset.db', raw_data_file_name=None,\n    delete_archive=True)\nwith daq:\n    time.sleep(0.1)\nself.assertFalse(daq.is_calibrated)\nself.assertEqual(daq.offset, None)\ndaq.cleanup()\n"
+}

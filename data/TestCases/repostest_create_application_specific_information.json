@@ -1,0 +1,9 @@
+{
+    "functionName": "test_create_application_specific_information",
+    "className": "TestAttributeValueFactory",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_factories_&_test_attribute_values.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that an ApplicationSpecificInformation attribute can be created.\n        \"\"\"\nattribute = self.factory.create_attribute_value(enums.AttributeType.\n    APPLICATION_SPECIFIC_INFORMATION, {'application_namespace': 'ssl',\n    'application_data': 'www.example.com'})\nself.assertIsInstance(attribute, attributes.ApplicationSpecificInformation)\nself.assertEqual('ssl', attribute.application_namespace)\nself.assertEqual('www.example.com', attribute.application_data)\nattribute = self.factory.create_attribute_value(enums.AttributeType.\n    APPLICATION_SPECIFIC_INFORMATION, None)\nself.assertIsInstance(attribute, attributes.ApplicationSpecificInformation)\nself.assertIsNone(attribute.application_namespace)\nself.assertIsNone(attribute.application_data)\nattribute = self.factory.create_attribute_value_by_enum(enums.Tags.\n    APPLICATION_SPECIFIC_INFORMATION, {'application_namespace': 'ssl',\n    'application_data': 'www.example.com'})\nself.assertIsInstance(attribute, attributes.ApplicationSpecificInformation)\nself.assertEqual('ssl', attribute.application_namespace)\nself.assertEqual('www.example.com', attribute.application_data)\nattribute = self.factory.create_attribute_value_by_enum(enums.Tags.\n    APPLICATION_SPECIFIC_INFORMATION, None)\nself.assertIsInstance(attribute, attributes.ApplicationSpecificInformation)\nself.assertIsNone(attribute.application_namespace)\nself.assertIsNone(attribute.application_data)\n"
+}

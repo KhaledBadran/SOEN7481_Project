@@ -1,0 +1,9 @@
+{
+    "functionName": "test_extra_nodes",
+    "className": null,
+    "fileName": "/PearsonEducation_&_Alarmageddon/tests_&_validations_&_test_cassandra.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Don't complain if there are extra nodes; the cluster might be\n    scaling up.\n    \"\"\"\nssh_ctx = ssh.SshContext('ubuntu', get_mock_key_file(tmpdir))\ntext = HEALTHY_OUTPUT\nmonkeypatch.setattr(Connection, 'run', lambda self, x, warn:\n    get_mock_ssh_text(text, 0))\ncassandra.CassandraStatusValidation(ssh_ctx, number_nodes=4, hosts=[\n    '127.0.0.1'], cluster_name=_CLUSTER_NAME).perform({})\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_range_header",
+    "className": null,
+    "fileName": "/zeaphoo_&_cocopot_&_/tests_&_test_http.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "rv = list(parse_range_header('bytes=52'))\nassert rv == []\nrv = list(parse_range_header('bytes=52-', 1000))\nassert rv == [(52, 1000)]\nrv = list(parse_range_header('bytes=52a-', 1000))\nassert rv == []\nrv = list(parse_range_header('bytes=52-99', 1000))\nassert rv == [(52, 100)]\nrv = list(parse_range_header('bytes=52-99,-1000', 2000))\nassert rv == [(52, 100), (1000, 2000)]\nrv = list(parse_range_header('bytes = 1 - 100', 1000))\nassert rv == []\nrv = list(parse_range_header('AWesomes=0-999', 1000))\nassert rv == []\n"
+}

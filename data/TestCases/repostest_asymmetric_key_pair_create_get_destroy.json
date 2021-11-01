@@ -1,0 +1,9 @@
+{
+    "functionName": "test_asymmetric_key_pair_create_get_destroy",
+    "className": "TestProxyKmipClientIntegration",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_integration_&_services_&_test_proxykmipclient.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the ProxyKmipClient can create, retrieve, and destroy an\n        asymmetric key pair.\n        \"\"\"\npublic_uid, private_uid = self.client.create_key_pair(enums.\n    CryptographicAlgorithm.RSA, 2048, public_usage_mask=[enums.\n    CryptographicUsageMask.ENCRYPT], private_usage_mask=[enums.\n    CryptographicUsageMask.DECRYPT])\nself.assertIsInstance(public_uid, six.string_types)\nself.assertIsInstance(private_uid, six.string_types)\ntry:\n    public_key = self.client.get(public_uid)\n    self.assertIsInstance(public_key, objects.PublicKey)\n    self.assertEqual(public_key.cryptographic_algorithm, enums.\n        CryptographicAlgorithm.RSA)\n    self.assertEqual(public_key.cryptographic_length, 2048)\n    private_key = self.client.get(private_uid)\n    self.assertIsInstance(private_key, objects.PrivateKey)\n    self.assertEqual(private_key.cryptographic_algorithm, enums.\n        CryptographicAlgorithm.RSA)\n    self.assertEqual(private_key.cryptographic_length, 2048)\nfinally:\n    self.client.destroy(public_uid)\n    self.assertRaises(exceptions.KmipOperationFailure, self.client.get,\n        public_uid)\n    self.assertRaises(exceptions.KmipOperationFailure, self.client.destroy,\n        public_uid)\n    self.client.destroy(private_uid)\n    self.assertRaises(exceptions.KmipOperationFailure, self.client.get,\n        private_uid)\n    self.assertRaises(exceptions.KmipOperationFailure, self.client.destroy,\n        private_uid)\n"
+}

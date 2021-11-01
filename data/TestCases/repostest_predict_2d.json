@@ -1,0 +1,9 @@
+{
+    "functionName": "test_predict_2d",
+    "className": null,
+    "fileName": "/HDI-Project_&_MLPrimitives/tests_&_adapters_&_test_statsmodels.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "arima_mock.side_effect = [[[1, 2, 3]], [[4, 5, 6]], [[7, 8, 9]]]\narima = ARIMA(1, 0, 0, 3)\nX = np.array([[1, 2, 3, 4, 5], [6, 7, 8, 9, 10], [11, 12, 13, 14, 15]])\nresult = arima.predict(X)\nexpected = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])\nassert_allclose(result, expected)\narima_mock.assert_called_with(3)\npatch('statsmodels.tsa.arima_model.ARMAResults.forecast')"
+}

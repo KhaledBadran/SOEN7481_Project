@@ -1,0 +1,9 @@
+{
+    "functionName": "test_assignment_rules_to_dict",
+    "className": null,
+    "fileName": "/PEtab-dev_&_PEtab/tests_&_test_sbml.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "document = libsbml.SBMLDocument(3, 1)\nmodel = document.createModel()\npetab.sbml.add_model_output(sbml_model=model, observable_id='1',\n    observable_name='Observable 1', formula='a+b')\nexpected = {'observable_1': {'name': 'Observable 1', 'formula': 'a + b'}}\nactual = petab.assignment_rules_to_dict(model, remove=False)\nassert actual == expected\nassert model.getAssignmentRuleByVariable('observable_1') is not None\nassert len(model.getListOfParameters()) == 1\nactual = petab.assignment_rules_to_dict(model, remove=True)\nassert actual == expected\nassert model.getAssignmentRuleByVariable('observable_1') is None\nassert len(model.getListOfParameters()) == 0\n"
+}

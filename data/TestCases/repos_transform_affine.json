@@ -1,0 +1,9 @@
+{
+    "functionName": "_transform_affine",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_layers_&_special.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "num_batch, num_channels, height, width = input.shape\ntheta = T.reshape(theta, (-1, 2, 3))\nout_height = T.cast(height // downsample_factor[0], 'int64')\nout_width = T.cast(width // downsample_factor[1], 'int64')\ngrid = _meshgrid(out_height, out_width)\nT_g = T.dot(theta, grid)\nx_s = T_g[:, (0)]\ny_s = T_g[:, (1)]\nx_s_flat = x_s.flatten()\ny_s_flat = y_s.flatten()\ninput_dim = input.dimshuffle(0, 2, 3, 1)\ninput_transformed = _interpolate(input_dim, x_s_flat, y_s_flat, out_height,\n    out_width, border_mode)\noutput = T.reshape(input_transformed, (num_batch, out_height, out_width,\n    num_channels))\noutput = output.dimshuffle(0, 3, 1, 2)\nreturn output\n"
+}

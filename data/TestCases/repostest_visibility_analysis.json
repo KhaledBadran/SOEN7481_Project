@@ -1,0 +1,9 @@
+{
+    "functionName": "test_visibility_analysis",
+    "className": "TestMapper",
+    "fileName": "/fechbmaster_&_3DNIRmapper/tests_&_test_mapper.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "exp_vis_ids1 = [5, 11]\nexp_vis_ids2 = [2, 8]\nself.mapper.start_visibility_analysis()\ntry:\n    np.testing.assert_equal(self.mapper.textures[0].vis_triangle_indices,\n        exp_vis_ids1)\n    np.testing.assert_equal(self.mapper.textures[1].vis_triangle_indices,\n        exp_vis_ids2)\n    res = True\nexcept AssertionError as err:\n    res = False\n    print(err)\nself.assertTrue(res)\nexp_vis_vertices1 = np.array([[1, 1, -1], [-1, 1, 1], [1, 1, 1], [1, 1, -1],\n    [-1, 1, -1], [-1, 1, 1]])\nexp_vis_vertices2 = np.array([[1, 1, 1], [1, -1, -1], [1, 1, -1], [1, 1, 1],\n    [1, -1, 1], [1, -1, -1]])\ntry:\n    np.testing.assert_equal(self.mapper.textures[0].visible_vertices,\n        exp_vis_vertices1)\n    np.testing.assert_equal(self.mapper.textures[1].visible_vertices,\n        exp_vis_vertices2)\n    res = True\nexcept AssertionError as err:\n    res = False\n    print(err)\nself.assertTrue(res)\n"
+}

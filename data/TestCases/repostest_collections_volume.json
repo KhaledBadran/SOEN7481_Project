@@ -1,0 +1,9 @@
+{
+    "functionName": "test_collections_volume",
+    "className": null,
+    "fileName": "/EclecticIQ_&_OpenTAXII/tests_&_services_&_test_collection_management.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "version = 11\nservice = server.get_service('collection-management-A')\nheaders = prepare_headers(version, https)\nrequest = prepare_request(version)\nresponse = service.process(headers, request)\ncollection = next(c for c in response.collection_informations if c.\n    collection_name == COLLECTION_OPEN)\nassert collection.collection_volume == 0\nblocks_amount = 10\nfor i in range(blocks_amount):\n    persist_content(server.persistence, COLLECTION_OPEN, service.id)\nresponse = service.process(headers, request)\ncollection = next(c for c in response.collection_informations if c.\n    collection_name == COLLECTION_OPEN)\nassert collection.collection_volume == blocks_amount\npytest.mark.parametrize('https', [True, False])"
+}

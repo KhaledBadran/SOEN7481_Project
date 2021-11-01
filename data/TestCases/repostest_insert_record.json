@@ -1,0 +1,9 @@
+{
+    "functionName": "test_insert_record",
+    "className": null,
+    "fileName": "/danilomo_&_FinancesPy/tests_&_test_xlsx_backend.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "os.system('cp -R ./tests/resources/finances ./finances_copy')\nbe = backend('./finances_copy')\nbe.insert_record(transaction=parse_transaction('1000, aldi', get_categories\n    ()), date=dt(day=3, month=1))\nbe.insert_record(transaction=parse_transaction('1000, aldi', get_categories\n    ()), date=dt(day=30, month=3))\njan_expected = [('street_food', 34), ('sports', 467), ('furniture', 43), (\n    'aldi', 1000)]\nmar_expected = [('aldi', 1000)]\nassert jan_expected == list_records(be, dt(day=3, month=1))\nassert mar_expected == list_records(be, dt(day=30, month=3))\nos.system('rm -rf ./finances_copy')\n"
+}

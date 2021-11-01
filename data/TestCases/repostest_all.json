@@ -1,0 +1,9 @@
+{
+    "functionName": "test_all",
+    "className": "TestConstSizeTiles",
+    "fileName": "/vfdev-5_&_ImageTilingUtils/tests_&_test_const_size.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "def _test(im_size, ts, scale, min_overlapping):\n    debug_msg = 'im_size={} ts={} scale={} min_overlapping={}\\n'.format(im_size\n        , ts, scale, min_overlapping)\n    tiles = ConstSizeTiles((im_size, im_size), ts, min_overlapping=\n        min_overlapping, scale=scale)\n    debug_msg += 'n={}\\n'.format(len(tiles))\n    self.assertGreater(len(tiles), 0, debug_msg)\n    extent0, out_size = tiles[0]\n    debug_msg += 'extent0={}\\n'.format(extent0)\n    self.assertEqual((extent0[0], extent0[1]), (0, 0), debug_msg)\n    self.assertEqual(tiles.tile_size[0], ts, debug_msg)\n    self.assertEqual(tiles.tile_size[1], ts, debug_msg)\n    self.assertLessEqual((extent0[2], extent0[3]), (ts / scale, ts / scale),\n        debug_msg)\n    for i in range(1, len(tiles)):\n        extent, _ = tiles[i]\n        prev_extent, _ = tiles[i - 1]\n        var_debug_msg = 'i={} extent={}\\n'.format(i, extent)\n        var_debug_msg += 'prev_extent={}\\n'.format(prev_extent)\n        for j in [0, 1]:\n            self.assertGreaterEqual(tiles.tile_size[j] / tiles.scale -\n                tiles.min_overlapping, extent[j] - prev_extent[j], \n                debug_msg + var_debug_msg)\n    extent, _ = tiles[-1]\n    debug_msg += 'extent={}\\n'.format(extent)\n    for j in [0, 1]:\n        self.assertLess(extent[j], im_size, debug_msg)\n        self.assertEqual(extent[j] + extent[j + 2], im_size, debug_msg)\nfor scale in [0.7, 0.89, 0.99, 1.0, 1.78, 2.12]:\n    for im_size in range(100, 120):\n        for ts in range(32, int(im_size * scale) - 1, 3):\n            for min_overlapping in range(int(ts / scale) // 2, int(ts /\n                scale) - 1, 5):\n                _test(im_size, ts, scale, min_overlapping)\n"
+}

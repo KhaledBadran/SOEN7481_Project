@@ -1,0 +1,9 @@
+{
+    "functionName": "connect_dummy",
+    "className": null,
+    "fileName": "/PRIArobotics_&_HedgehogClient/tests_&_test_async_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "@asynccontextmanager\nasync def do_connect(server_coro: Callable[[DealerRouterSocket], Awaitable[\n    None]], *args, endpoint: str='inproc://controller', client_class=\n    HedgehogClient, **kwargs):\n    async with start_dummy(server_coro, *args, endpoint=endpoint, **kwargs\n        ) as dummy, connect_client(dummy, client_class=client_class) as client:\n        yield client\nreturn do_connect\npytest.fixture"
+}

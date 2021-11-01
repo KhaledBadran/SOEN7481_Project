@@ -1,0 +1,9 @@
+{
+    "functionName": "release_helper",
+    "className": null,
+    "fileName": "/EVEprosper_&_ProsperCommon/tests_&_test_prosper_version.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"travis is kinda a jerk.  Let's make sure the expected environment is set up\"\"\"\ntravis_tag = os.environ.get('TRAVIS_TAG')\nif not travis_tag:\n    return\nelse:\n    travis_tag.replace('v', '')\nprint('--TRAVIS RELEASE HELPER--')\nprint('setting up {} with {}'.format(VERSION_FILEPATH, travis_tag))\nwith open(VERSION_FILEPATH, 'w') as v_fh:\n    v_fh.write(travis_tag)\n"
+}

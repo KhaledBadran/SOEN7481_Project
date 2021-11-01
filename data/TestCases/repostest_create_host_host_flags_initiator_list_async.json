@@ -1,0 +1,9 @@
+{
+    "functionName": "test_create_host_host_flags_initiator_list_async",
+    "className": "PyU4VProvisioningTest",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_provisioning.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test create_host.\"\"\"\nhost_flags = {'consistent_lun': 'true'}\ndata = [self.data.wwnn1, self.data.wwpn2]\nwith mock.patch.object(self.provisioning, 'create_resource') as mock_create:\n    self.provisioning.create_host(self.data.initiatorgroup_name_i,\n        host_flags=host_flags, initiator_list=data, _async=True)\n    new_ig_data = {'hostId': self.data.initiatorgroup_name_i, 'initiatorId':\n        data, 'hostFlags': host_flags, 'executionOption': 'ASYNCHRONOUS'}\n    mock_create.assert_called_once_with(category='sloprovisioning',\n        resource_level='symmetrix', resource_level_id=self.data.array,\n        resource_type='host', payload=new_ig_data)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "run_reconstruction_and_compare",
+    "className": "Test_SimulatedProjections",
+    "fileName": "/PolymerGuy_&_AXITOM/axitom_&_tests_&_test_simulated_projections.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "dir_path = os.path.dirname(os.path.realpath(__file__))\nconfig = axitom.config_from_xtekct(dir_path + '/example_data/settings.xtekct')\nconfig = config.with_param(n_pixels_u=500, n_pixels_v=500)\nproj = np.load(dir_path + path_to_projections)\nproj = np.exp(-proj)\nreconstruction = axitom.fdk(proj, config)\ndeviation_field = np.abs(correct_body[:250, (250), :] - reconstruction)\nbackground_deviation = deviation_field[5:60, 75:-75]\ninterior_deviation = deviation_field[90:, 75:-75]\nif np.max(background_deviation) > self.tol:\n    self.fail(\n        'The background was not reconstructed properly with largest deviation of %f'\n         % np.max(background_deviation))\nif np.max(interior_deviation) > self.tol:\n    self.fail(\n        'The interior was not reconstructed properly with largest deviation of %f'\n         % np.max(interior_deviation))\n"
+}

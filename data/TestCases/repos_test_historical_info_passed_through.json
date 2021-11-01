@@ -1,0 +1,9 @@
+{
+    "functionName": "_test_historical_info_passed_through",
+    "className": "TestBanditViews",
+    "fileName": "/Yelp_&_MOE/moe_&_tests_&_views_&_rest_&_bandit_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that the historical infos get passed through to the endpoint.\"\"\"\nfor subtype in BANDIT_ENDPOINTS_TO_SUBTYPES[self._endpoint]:\n    for historical_info in self._historical_infos:\n        json_payload = json.loads(self._build_json_payload(subtype,\n            historical_info))\n        request = pyramid.testing.DummyRequest(post=json_payload)\n        request.json_body = json_payload\n        view = self._view(request)\n        params = view.get_params_from_request()\n        assert params['historical_info'] == json_payload['historical_info']\n"
+}

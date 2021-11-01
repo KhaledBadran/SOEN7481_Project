@@ -1,0 +1,9 @@
+{
+    "functionName": "test_merge_srna_gff",
+    "className": "TestMergesRNA",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_merge_sRNA.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "out_file = os.path.join(self.test_folder, 'test_out')\ngen_file(os.path.join(self.test_folder, 'aaa.gff'), self.example.gff_file)\nms.read_gff = Mock_func().mock_read_gff\ngffs = {'merge': out_file, 'utr': 'UTR', 'normal': 'inter'}\nms.merge_srna_gff(gffs, False, 0.5, os.path.join(self.test_folder,\n    'aaa.gff'), False)\ndatas, attributes = extract_info(out_file, 'file')\nself.assertListEqual(datas, ['aaa\\tANNOgesic\\tncRNA\\t54\\t254\\t.\\t+\\t.'])\nself.assertEqual(set(attributes[0]), set(['overlap_cds=NA',\n    'Name=sRNA_00000', 'ID=aaa_srna0', 'sRNA_type=intergenic',\n    'end_cleavage=cleavage_40', 'with_TSS=TSS_3', 'overlap_percent=NA']))\n"
+}

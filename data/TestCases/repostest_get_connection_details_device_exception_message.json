@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_connection_details_device_exception_message",
+    "className": "TestFindDevice",
+    "fileName": "/DusanMadar_&_PySyncDroid/tests_&_test_find_device.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test 'get_connection_details' raises a DeviceException and the provided\n        error message lists all vendor devices when trying to find a\n        non-existent model.\n        \"\"\"\nwith self.assertRaises(DeviceException) as exc:\n    get_connection_details(vendor='linux', model='non-existent-model')\nexc_msg_parts = ('Device \"linux non-existent-model\" not found.',\n    'Following \"linux\" devices were found:',\n    'Linux Foundation 2.0 root hub', 'Linux Foundation 3.0 root hub')\nself.assertEqual(str(exc.exception), '\\n'.join(exc_msg_parts))\n"
+}

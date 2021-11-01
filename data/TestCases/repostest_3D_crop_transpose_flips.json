@@ -1,0 +1,9 @@
+{
+    "functionName": "test_3D_crop_transpose_flips",
+    "className": null,
+    "fileName": "/CCampJr_&_CRIkit2/crikit_&_data_&_tests_&_test_mosaic.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Test a 2D dataset with cropped rows and columns \"\"\"\nmos = Mosaic()\nmos.parameters['StartR'] = 1\nmos.parameters['EndR'] = -1\nmos.parameters['StartC'] = 1\nmos.parameters['EndC'] = -1\nmos.parameters['Transpose'] = True\nmos.parameters['FlipVertical'] = True\nmos.parameters['FlipHorizontally'] = True\nm_obj = 3\nn_obj = 4\np_obj = 5\nm_obj_crop = m_obj - 2\nn_obj_crop = n_obj - 2\np_obj_crop = p_obj\nnew_obj = np.ones((m_obj, n_obj, p_obj))\nm_side = 2\nn_side = 2\nn = m_side * n_side\nfor ct in range(n):\n    mos.append(new_obj)\nassert mos.shape == tuple(n * [new_obj.shape])\nassert mos.size == n\nassert mos.issamedim\nassert mos.dtype == np.float\nassert mos.unitshape == (m_obj_crop, n_obj_crop, p_obj_crop)\nassert mos.unitshape_orig == (m_obj, n_obj, p_obj)\nmos.parameters['Order'] = 'R'\nassert mos.mosaic2d((m_side, n_side), idx=0).T.shape == (m_side *\n    m_obj_crop, n_side * n_obj_crop)\nassert mos.mosaic2d((m_side, n_side), idx=0).shape == mos.mosaic_shape((\n    m_side, n_side))[:-1]\nassert mos.mosaicfull((m_side, n_side)).transpose(1, 0, 2).shape == (m_side *\n    m_obj_crop, n_side * n_obj_crop, p_obj_crop)\nassert mos.mosaicfull((m_side, n_side)).shape == mos.mosaic_shape((m_side,\n    n_side))\nmos.parameters['Order'] = 'C'\nassert mos.mosaic2d((m_side, n_side), idx=0).T.shape == (m_side *\n    m_obj_crop, n_side * n_obj_crop)\nassert mos.mosaic2d((m_side, n_side), idx=0).shape == mos.mosaic_shape((\n    m_side, n_side))[:-1]\nassert mos.mosaicfull((m_side, n_side)).transpose(1, 0, 2).shape == (m_side *\n    m_obj_crop, n_side * n_obj_crop, p_obj_crop)\nassert mos.mosaicfull((m_side, n_side)).shape == mos.mosaic_shape((m_side,\n    n_side))\n"
+}

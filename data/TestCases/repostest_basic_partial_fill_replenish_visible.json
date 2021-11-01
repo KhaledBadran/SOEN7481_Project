@@ -1,0 +1,9 @@
+{
+    "functionName": "test_basic_partial_fill_replenish_visible",
+    "className": null,
+    "fileName": "/nabicht_&_Buttonwood/tests_&_test_MarketObjects_&_test_Events_&_test_ordereventchain.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "n = NewOrderCommand(121234, 1234235.123, 2342, 'user_x', MARKET, BID_SIDE,\n    FAR, Price('34.52'), 100, 40)\noec = OrderEventChain(n, LOGGER, MonotonicIntID())\nack = AcknowledgementReport(121235, 1234235.123, 2342, 'user_x', MARKET, n,\n    Price('34.52'), 100, 40)\noec.apply_acknowledgement_report(ack)\naggressor = NewOrderCommand(1111, 1234237.123, 22222, 'user_y', MARKET,\n    ASK_SIDE, FAR, Price('34.52'), 40)\npf = PartialFillReport(121236, 1234237.123, 2342, 'user_x', MARKET,\n    aggressor, 40, Price('34.52'), BID_SIDE, 99999, 100 - 40)\noec.apply_partial_fill_report(pf)\nassert oec.open_exposure_requests() == []\nassert oec.current_exposure().price() == Price('34.52')\nassert oec.current_exposure().qty() == 100 - 40\nassert oec.visible_qty() == 40\nassert oec.iceberg_peak_qty() == 40\nassert oec.has_partial_fill()\naggressor2 = NewOrderCommand(1114, 1234237.123, 33333, 'user_y', MARKET,\n    ASK_SIDE, FAR, Price('34.52'), 40)\npf2 = PartialFillReport(121236, 1234237.123, 2342, 'user_x', MARKET,\n    aggressor2, 40, Price('34.52'), BID_SIDE, 99999, 100 - 40 - 40)\noec.apply_partial_fill_report(pf2)\nassert oec.open_exposure_requests() == []\nassert oec.current_exposure().price() == Price('34.52')\nassert oec.current_exposure().qty() == 100 - 40 - 40\nassert oec.visible_qty() == 100 - 40 - 40\nassert oec.iceberg_peak_qty() == 40\nassert oec.has_partial_fill()\n"
+}

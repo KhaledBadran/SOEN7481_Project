@@ -1,0 +1,9 @@
+{
+    "functionName": "test_start_stop_codon",
+    "className": "TestsORFDetection",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_sorf.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "gff_path = os.path.join(self.out, 'gffs')\ntable_path = os.path.join(self.out, 'tables')\nos.mkdir(gff_path)\nos.mkdir(table_path)\nos.mkdir(os.path.join(gff_path, 'all_candidates'))\nos.mkdir(os.path.join(table_path, 'all_candidates'))\nos.mkdir(os.path.join(gff_path, 'best_candidates'))\nos.mkdir(os.path.join(table_path, 'best_candidates'))\ngen_file(os.path.join(gff_path, 'all_candidates/test_sORF_all.gff'), 'test')\ngen_file(os.path.join(gff_path, 'all_candidates/test_sORF_all.csv'), 'test')\ngen_file(os.path.join(gff_path, 'all_candidates/test_sORF_best.gff'), 'test')\ngen_file(os.path.join(gff_path, 'all_candidates/test_sORF_best.csv'), 'test')\nso.sorf_detection = self.mock.mock_sorf_detection\nargs = self.mock_args.mock()\nargs.libs = 'libs'\nargs.tex_notex = 'tex_notex'\nargs.replicates = 'replicates'\nargs.start_codon = ['ATG']\nargs.stop_codon = ['TTA']\nargs.background = 'background'\nargs.wig_path = 'wig_path'\nargs.merge_wigs = 'merge_wigs'\nlog = open(os.path.join(self.test_folder, 'test.log'), 'w')\nself.sorf._start_stop_codon(['test'], args, log)\nself.assertTrue(os.path.exists(os.path.join(gff_path,\n    'best_candidates/test_sORF.gff')))\nself.assertTrue(os.path.exists(os.path.join(gff_path,\n    'all_candidates/test_sORF.gff')))\nself.assertTrue(os.path.exists(os.path.join(table_path,\n    'best_candidates/test_sORF.csv')))\nself.assertTrue(os.path.exists(os.path.join(table_path,\n    'all_candidates/test_sORF.csv')))\nlog.close()\n"
+}

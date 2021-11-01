@@ -1,0 +1,9 @@
+{
+    "functionName": "make_test_image",
+    "className": null,
+    "fileName": "/jonwright_&_ImageD11/test_&_test_localmaxlabel.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "im = np.zeros((N, N), np.float32)\npN = w * 5 + 1\npk = np.zeros((pN, pN), np.float32)\npi, pj = np.mgrid[0:pN, 0:pN]\nni = N // pN\ns = 5.0\nfor i in range(0, ni):\n    dj = pN / 3.0 * (i / (ni - 1))\n    di = dj / 5.0\n    ci1 = pN // 2 + di\n    ci2 = pN // 2 - di\n    cj1 = pN // 2 + dj\n    cj2 = pN // 2 - dj\n    p1 = np.exp(-((pi - ci1) ** 2 + (pj - cj1) ** 2) / s)\n    p2 = np.exp(-((pi - ci2) ** 2 + (pj - cj2) ** 2) / s)\n    for j in range(0, N // pN):\n        im[i * pN:(i + 1) * pN, j * pN:(j + 1) * pN] = p1 + p2 * (j + 1) / ni\nreturn im\n"
+}

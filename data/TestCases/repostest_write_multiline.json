@@ -1,0 +1,9 @@
+{
+    "functionName": "test_write_multiline",
+    "className": "TestNcWriter",
+    "fileName": "/twhiteaker_&_CFGeom/cfgeom_&_test_&_test_ncgeom_&_test_convert_&_test_netcdf_&_test_nc_writer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "root = join(self.path_data, 'simplified_examples')\njson_file = join(root, 'multiline.json')\nwith open(json_file) as f:\n    data = f.read()\ncontainer = json_to_container(data)\nfor vlen in [False, True]:\n    tmp_file = self.get_temporary_file_path('foo.nc')\n    container.to_netcdf(tmp_file, use_vlen=vlen)\n    with Dataset(tmp_file) as nc:\n        var = nc.variables['geometry_container']\n        assert _has_attr(var, 'geometry_type', 'line')\n        assert _has_attr(var, 'part_node_count', 'part_node_count')\n        assert not _has_attr(var, 'interior_ring')\n        assert not _has_var(nc, 'interior_ring')\n        if vlen:\n            assert _has_vltype(nc, 'node_VLType', float)\n            assert _has_vltype(nc, 'part_node_VLType', int)\n            assert _has_var(nc, 'part_node_count', int, [[3], [2, 2]])\n        else:\n            assert _has_dim(nc, 'node', 7)\n            assert _has_dim(nc, 'part', 3)\n            assert _has_attr(var, 'node_count', 'node_count')\n            assert _has_var(nc, 'node_count', int, [3, 4])\n            assert _has_var(nc, 'part_node_count', int, [3, 2, 2])\n"
+}

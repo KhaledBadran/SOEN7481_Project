@@ -1,0 +1,9 @@
+{
+    "functionName": "test_periodicity_group",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_test_monitor.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that groups are called at different periods.\"\"\"\ntask_a = ExecuteCallback(lambda : print('a', end=' '))\ntask_b = ExecuteCallback(lambda : print('b', end=' '))\ntask_X = ExecuteCallback(lambda : print('X', end=' '))\ngroup_often = MonitorTaskGroup([task_a, task_b], period=1)\ngroup_seldom = MonitorTaskGroup([task_X], period=3)\nmonitor = Monitor(group_often, group_seldom)\nfor i in range(7):\n    monitor(i)\nout, _ = capsys.readouterr()\nexpected = 'a b X a b a b a b X a b a b a b X '\nassert out == expected\ncompiled_monitor = tf.function(monitor)\nfor i in tf.range(7):\n    compiled_monitor(i)\nout, _ = capsys.readouterr()\nassert 'a b X'\n"
+}

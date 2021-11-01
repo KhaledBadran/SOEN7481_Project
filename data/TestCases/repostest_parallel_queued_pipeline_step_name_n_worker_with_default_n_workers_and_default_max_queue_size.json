@@ -1,0 +1,9 @@
+{
+    "functionName": "test_parallel_queued_pipeline_step_name_n_worker_with_default_n_workers_and_default_max_queue_size",
+    "className": null,
+    "fileName": "/Neuraxio_&_Neuraxle/testing_&_test_streaming.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "p = ParallelQueuedFeatureUnion([('1', MultiplyByN(2)), ('2', MultiplyByN(2)\n    ), ('3', MultiplyByN(2)), ('4', MultiplyByN(2))], n_workers_per_step=1,\n    max_queue_size=10, batch_size=10)\noutputs = p.transform(list(range(100)))\nassert np.array_equal(outputs, EXPECTED_OUTPUTS_PARALLEL)\n"
+}

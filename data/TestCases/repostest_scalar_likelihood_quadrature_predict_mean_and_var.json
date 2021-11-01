@@ -1,0 +1,9 @@
+{
+    "functionName": "test_scalar_likelihood_quadrature_predict_mean_and_var",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_likelihoods_&_test_likelihoods.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "likelihood = likelihood_setup.likelihood\nF1m, F1v = likelihood.predict_mean_and_var(mu, var)\nF2m, F2v = ScalarLikelihood.predict_mean_and_var(likelihood, mu, var)\nassert_allclose(F1m, F2m, rtol=likelihood_setup.rtol, atol=likelihood_setup\n    .atol)\nassert_allclose(F1v, F2v, rtol=likelihood_setup.rtol, atol=likelihood_setup\n    .atol)\npytest.mark.parametrize('likelihood_setup',\n    filter_analytic_scalar_likelihood('_predict_mean_and_var'))pytest.mark.parametrize('mu, var', [[Datum.Fmu, Datum.Fvar]])"
+}

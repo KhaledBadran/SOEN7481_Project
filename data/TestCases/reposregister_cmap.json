@@ -1,0 +1,9 @@
+{
+    "functionName": "register_cmap",
+    "className": null,
+    "fileName": "/1313e_&_CMasher/cmasher_&_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Creates a :obj:`~matplotlib.colors.ListedColormap` object using the\n    provided `name` and `data`, and registers the colormap in the\n    :mod:`cmasher.cm` and :mod:`matplotlib.cm` modules.\n    A reversed version of the colormap will be registered as well.\n\n    Parameters\n    ----------\n    name : str\n        The name that this colormap must have.\n    data : 2D array_like of {float; int} with shape `(N, 3)`\n        An array containing the RGB values of all segments in the colormap.\n        If int, the array contains 8-bit RGB values.\n        If float, the array contains normalized RGB values.\n\n    Note\n    ----\n    In *MPL*, the colormap will have the added 'cmr.' prefix to avoid name\n    clashes.\n\n    \"\"\"\ncm_data = np.array(data, ndmin=2)\nif issubclass(cm_data.dtype.type, np.integer):\n    cm_data = cm_data / 255\ncolorlist = cm_data.tolist()\ncmap_N = len(colorlist)\ncmap_mpl = LC(colorlist, 'cmr.' + name, N=cmap_N)\ncmap_cmr = LC(colorlist, name, N=cmap_N)\ncmap_mpl_r = cmap_mpl.reversed()\ncmap_cmr_r = cmap_cmr.reversed()\ncmap_mpl(1)\ncmap_mpl_r(1)\ncm_type = get_cmap_type(cmap_mpl)\nmplcm.register_cmap(cmap=cmap_mpl)\nsetattr(cmrcm, cmap_cmr.name, cmap_cmr)\ncmrcm.__all__.append(cmap_cmr.name)\ncmrcm.cmap_d[cmap_cmr.name] = cmap_cmr\ncmrcm.cmap_cd[cm_type][cmap_cmr.name] = cmap_cmr\nmplcm.register_cmap(cmap=cmap_mpl_r)\nsetattr(cmrcm, cmap_cmr_r.name, cmap_cmr_r)\ncmrcm.__all__.append(cmap_cmr_r.name)\ncmrcm.cmap_d[cmap_cmr_r.name] = cmap_cmr_r\ncmrcm.cmap_cd[cm_type][cmap_cmr_r.name] = cmap_cmr_r\n"
+}

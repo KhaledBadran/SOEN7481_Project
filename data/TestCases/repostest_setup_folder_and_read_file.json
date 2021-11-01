@@ -1,0 +1,9 @@
+{
+    "functionName": "test_setup_folder_and_read_file",
+    "className": "TestPPI",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_ppi.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "paths = {'all': os.path.join(self.test_folder, 'all_results'), 'fig': os.\n    path.join(self.test_folder, 'figures'), 'best': os.path.join(self.\n    test_folder, 'best_results')}\nstrain_id = {'file': 'test.ptt', 'ptt': 'test_ptt', 'string': 'test_string',\n    'pie': 'test_pie'}\nfiles = {'id_list': self.test_folder, 'id_log': '', 'pubmed_log': '',\n    'all_specific': '', 'best_specific': '', 'all_nospecific': '',\n    'best_nospecific': '', 'action_log': ''}\ngen_file(os.path.join(self.test_folder, 'test.ptt'), self.example.ptt_file)\nargs = self.mock_args.mock()\nargs.querys = 'all'\nargs.no_specific = True\nargs.out_folder = self.test_folder\nargs.ptts = self.test_folder\ngenes = self.ppi._setup_folder_and_read_file(strain_id, '', files, paths, args)\nfor index in ('all_specific', 'all_nospecific', 'best_specific',\n    'best_nospecific', 'id_log', 'action_log', 'pubmed_log'):\n    files[index].close()\nself.assertTrue(os.path.exists('test_folder/best_results/test'))\nself.assertTrue(os.path.exists('test_folder/all_results/test'))\nself.assertListEqual(genes, [{'strain': 'Staphylococcus_aureus_HG003',\n    'locus_tag': 'dnaA', 'gene': 'SAOUHSC_00001'}, {'strain':\n    'Staphylococcus_aureus_HG003', 'locus_tag': '-', 'gene':\n    'SAOUHSC_00002'}, {'strain': 'Staphylococcus_aureus_HG003', 'locus_tag':\n    '-', 'gene': 'SAOUHSC_00003'}])\n"
+}

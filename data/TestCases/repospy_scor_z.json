@@ -1,0 +1,9 @@
+{
+    "functionName": "py_scor_z",
+    "className": null,
+    "fileName": "/jonwright_&_ImageD11/test_&_test_score_gvec_z.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Decomposing the error into 3 orthogonal directions\n      aligned with gvector (length, like two theta)\n      normal with gvector and axis (e.g. omega direction)\n      normal with that (e.g. azimuth direction)\n    \"\"\"\nnv = gv.shape[0]\nassert gv.shape[1] == 3\nassert ubi.shape == (3, 3)\nassert ub.shape == (3, 3)\nassert np.allclose(np.dot(ubi, ub), np.eye(3), 6)\nx, y, z = 0, 1, 2\ng0 = norm(gv)\ng1 = np.zeros(gv.shape, float)\ng1[:, (x)] = -g0[:, (y)]\ng1[:, (y)] = g0[:, (x)]\ng1 = norm(g1)\ng2 = np.zeros(gv.shape, float)\ng2[:, (0)] = g0[:, (x)] * g0[:, (z)]\ng2[:, (1)] = g0[:, (y)] * g0[:, (z)]\ng2[:, (2)] = -g0[:, (x)] * g0[:, (x)] - g0[:, (y)] * g0[:, (y)]\ng2 = norm(g2)\nhkl = np.round(np.dot(ubi, gv.T).T)\nd = np.dot(ub, hkl.T).T - gv\ne = np.zeros(gv.shape, float)\ne[:, (0)] = (d * g0).sum(axis=1)\ne[:, (1)] = (d * g1).sum(axis=1)\ne[:, (2)] = (d * g2).sum(axis=1)\nreturn g0, g1, g2, e\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_writing_trigger_file",
+    "className": "TestTriggers",
+    "fileName": "/BciPy_&_BciPy/bcipy_&_helpers_&_tests_&_test_triggers.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "trigger_seq = [('\"[\\'calibration_trigger\\', 2.039073024992831]\"', 'calib'),\n    ('J', 'first_pres_target'), ('+', 'fixation'), ('P', 'nontarget'), ('R',\n    'nontarget'), ('E', 'nontarget'), ('K', 'nontarget'), ('A', 'nontarget'\n    ), ('J', 'target'), ('X', 'nontarget'), ('F', 'nontarget'), ('<',\n    'nontarget'), ('S', 'nontarget'), ('E', 'first_pres_target'), ('+',\n    'fixation'), ('M', 'nontarget'), ('T', 'nontarget'), ('H', 'nontarget'),\n    ('W', 'nontarget'), ('Y', 'nontarget'), ('V', 'nontarget'), ('E',\n    'target'), ('L', 'nontarget'), ('_', 'nontarget'), ('J', 'nontarget')]\nraw_data, trigger_times = sample_raw_data(trigger_seq)\noutput = StringIO()\nwrite_trigger_file_from_lsl_calibration(StringIO(raw_data), output, seq_len=10)\nwritten_contents = output.getvalue()\nlines = written_contents.split('\\n')\nfor i in range(len(lines) - 1):\n    written_val, written_targetness, written_stamp = lines[i].split()\n    expected_trg, targetness = trigger_seq[i]\n    if 'calibration' in expected_trg:\n        expected_trg = 'calibration_trigger'\n    self.assertEqual(expected_trg, written_val)\n    self.assertEqual(targetness, written_targetness)\n    self.assertEqual(trigger_times[i], float(written_stamp))\n"
+}

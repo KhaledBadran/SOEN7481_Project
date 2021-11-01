@@ -1,0 +1,9 @@
+{
+    "functionName": "save_object_to_file",
+    "className": "OpenpnmIO",
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_io_&_OpenpnmIO.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        Saves an OpenPNM object or list of objects to a file of set of files\n\n        Parameters\n        ----------\n        objs : OpenPNM Base object or list of objects\n            The object(s) to be saved\n\n        \"\"\"\nif not isinstance(objs, list):\n    objs = [objs]\nfor item in objs:\n    fname = cls._parse_filename(filename=item.name, ext=item.settings['prefix']\n        )\n    with open(fname, 'wb') as f:\n        pickle.dump({item.name: item}, f)\nclassmethod"
+}

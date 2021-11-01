@@ -1,0 +1,9 @@
+{
+    "functionName": "test_destination_update",
+    "className": "test_Firehose",
+    "fileName": "/pbx-gs_&_OSBot-AWS/tests_&_unit_&_apis_&_test_Firehose.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "update_item = {'IntervalInSeconds': 60, 'SizeInMBs': 2}\nupdate_data = {'BufferingHints': update_item}\nassert self.firehose.destination_update(self.stream_name, update_data).get(\n    'error') is None\nassert self.firehose.stream(self.stream_name).get('Destinations').pop().get(\n    'ExtendedS3DestinationDescription').get('BufferingHints') == update_item\n"
+}

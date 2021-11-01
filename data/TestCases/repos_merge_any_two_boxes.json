@@ -1,0 +1,9 @@
+{
+    "functionName": "_merge_any_two_boxes",
+    "className": "MRZBoxLocator",
+    "fileName": "/konstantint_&_PassportEye/passporteye_&_mrz_&_image.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Given a list of boxes, finds two nearby parallel ones and merges them. Returns false if none found.\"\"\"\nn = len(box_list)\nfor i in range(n):\n    for j in range(i + 1, n):\n        if self._are_nearby_parallel_boxes(box_list[i], box_list[j]):\n            a, b = box_list[i], box_list[j]\n            merged_points = np.vstack([a.points, b.points])\n            merged_box = RotatedBox.from_points(merged_points, self.box_type)\n            if merged_box.width / merged_box.height >= self.min_box_aspect:\n                box_list.remove(a)\n                box_list.remove(b)\n                box_list.append(merged_box)\n                return True\nreturn False\n"
+}

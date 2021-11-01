@@ -1,0 +1,9 @@
+{
+    "functionName": "test_create_failure_missing_required_claims",
+    "className": "EasyJWTTest",
+    "fileName": "/BMeu_&_EasyJWT/tests_&_easyjwt_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n            Test creating a token if required claims are empty.\n\n            Expected Result: An `MissingRequiredClaimsError` error is raised.\n        \"\"\"\neasyjwt = EasyJWT(self.key)\neasyjwt._easyjwt_class = None\nself.assertTrue(easyjwt._is_claim('_easyjwt_class'))\nwith self.assertRaises(MissingRequiredClaimsError) as exception_cm:\n    token = easyjwt.create()\n    self.assertIsNone(token)\nself.assertEqual('Required empty claims: {_easyjwt_class}', str(\n    exception_cm.exception))\n"
+}

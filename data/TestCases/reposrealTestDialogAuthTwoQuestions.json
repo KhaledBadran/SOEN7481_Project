@@ -1,0 +1,9 @@
+{
+    "functionName": "realTestDialogAuthTwoQuestions",
+    "className": "TestAuthentication",
+    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_test_connection.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "TestAuthentication.Dialog.fail = False\nTestAuthentication.Dialog.m = {b'Password, please:': b'notverysecret',\n    b'Are you sure ?': b'yes, of course'}\nwith TempUser(self.connect().cursor(), 'pymysql_2q@localhost', self.\n    databases[0]['db'], 'two_questions', 'notverysecret') as u:\n    with self.assertRaises(pymysql.err.OperationalError):\n        pymysql.connect(user='pymysql_2q', **self.db)\n    pymysql.connect(user='pymysql_2q', auth_plugin_map={b'dialog':\n        TestAuthentication.Dialog}, **self.db)\n"
+}

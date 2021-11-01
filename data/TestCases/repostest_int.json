@@ -1,0 +1,9 @@
+{
+    "functionName": "test_int",
+    "className": null,
+    "fileName": "/SeverTopan_&_AdjSim/test_&_test_decision_mutable.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "import adjsim\nd = adjsim.decision.DecisionMutableInt(mutable_min, mutable_max)\nassert d.max_val == int(mutable_max)\nassert d.min_val == int(mutable_min)\nvalid_values = [(mutable_max - mutable_min) / 2 + mutable_min, mutable_min,\n    mutable_max]\nfor value in valid_values:\n    d._set_value(value)\n    assert d.value == int(value)\ninvalid_types = [None, InvalidClass()]\nfor value in invalid_types:\n    with pytest.raises(TypeError):\n        d._set_value(value)\ninvalid_values = [mutable_min - 1, mutable_max + 1]\nfor value in invalid_values:\n    with pytest.raises(ValueError):\n        d._set_value(value)\nfor _ in range(50):\n    d._set_value_random()\n    assert d.value <= d.max_val and d.value >= d.min_val\nfor _ in range(50):\n    d._perturb_around_locus(int((mutable_max - mutable_min) / 2 + mutable_min))\n    assert d.value <= d.max_val and d.value >= d.min_val\nfor _ in range(50):\n    d._perturb_locally()\n    assert d.value <= d.max_val and d.value >= d.min_val\npytest.mark.parametrize('mutable_min,mutable_max', [(0, 1), (-1, 0), (0.0, \n    7.0), (-7, 0), (300, 400), (-300, 400), (-400, -300)])"
+}

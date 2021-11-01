@@ -1,0 +1,9 @@
+{
+    "functionName": "test_plot_calibration",
+    "className": null,
+    "fileName": "/tvdboom_&_ATOM/tests_&_test_plots.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Assert that the plot_calibration method work as intended.\"\"\"\ntrainer = TrainerRegressor(['ols', 'ridge'], metric='r2')\ntrainer.run(reg_train, reg_test)\npytest.raises(PermissionError, trainer.plot_calibration)\ntrainer = TrainerClassifier(['LDA', 'kSVM'], metric='f1')\npytest.raises(NotFittedError, trainer.plot_calibration)\ntrainer.run(bin_train, bin_test)\npytest.raises(ValueError, trainer.plot_calibration, n_bins=4)\ntrainer.plot_calibration(filename=FILE_DIR + 'calibration1', display=False)\ntrainer.lda.plot_calibration(filename=FILE_DIR + 'calibration2', display=False)\nassert glob.glob(FILE_DIR + 'calibration1.png')\nassert glob.glob(FILE_DIR + 'calibration2.png')\natom = ATOMClassifier(X_bin, y_bin, random_state=1)\natom.run(['tree', 'kSVM'], metric='f1')\natom.plot_calibration(filename=FILE_DIR + 'calibration3', display=False)\natom.tree.plot_calibration(filename=FILE_DIR + 'calibration4', display=False)\nassert glob.glob(FILE_DIR + 'calibration3.png')\nassert glob.glob(FILE_DIR + 'calibration4.png')\n"
+}

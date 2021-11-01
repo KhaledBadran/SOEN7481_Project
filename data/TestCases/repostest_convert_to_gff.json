@@ -1,0 +1,9 @@
+{
+    "functionName": "test_convert_to_gff",
+    "className": "TestTerminator",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_terminator.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.term.multiparser = self.mock_parser\nhp_folder = os.path.join(self.out, 'aaa')\nos.mkdir(hp_folder)\ngen_file(os.path.join(hp_folder, 'aaa_best_terminator_after_gene.bag'),\n    self.example.bag)\nos.mkdir('tmp_transterm')\nargs = self.mock_args.mock()\nargs.hp_folder = self.out\nargs.gffs = self.gffs\nlog = open(os.path.join(self.test_folder, 'test.log'), 'w')\nself.term._convert_to_gff(['aaa'], args, log)\ndatas = import_data(os.getcwd() + '/tmp_transterm/aaa_transtermhp.gff')\nself.assertEqual('\\n'.join(datas), self.example.gff_bag)\n"
+}

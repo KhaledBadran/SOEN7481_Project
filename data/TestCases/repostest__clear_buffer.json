@@ -1,0 +1,9 @@
+{
+    "functionName": "test__clear_buffer",
+    "className": "TestElasticBuffer",
+    "fileName": "/dkaslovsky_&_ElasticBatch/tests_&_test_buffer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class TestCase:\n\n    def __init__(self, buf, timestamp):\n        self.eb = ElasticBuffer()\n        if buf:\n            self.eb._buffer = buf\n        if timestamp:\n            self.eb._oldest_doc_timestamp = timestamp\ntests = {'empty buffer': TestCase(buf=[], timestamp=None),\n    'nonempty buffer': TestCase(buf=self.docs, timestamp=123.456)}\nfor test_name, test in tests.items():\n    test.eb._clear_buffer()\n    self.assertListEqual(test.eb._buffer, [], test_name)\n    self.assertIsNone(test.eb._oldest_doc_timestamp, test_name)\n"
+}

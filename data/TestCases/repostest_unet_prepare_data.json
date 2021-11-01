@@ -1,0 +1,9 @@
+{
+    "functionName": "test_unet_prepare_data",
+    "className": "TestsUnet",
+    "fileName": "/MarniTausen_&_Greenotyper/test_sample.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "crops = self.PL.collect_crop_data(512)\nself.assertEqual(crops.shape[0], 10)\nself.assertEqual(crops.shape[1], 512)\nself.assertEqual(crops.shape[2], 512)\nself.assertEqual(crops.shape[3], 3)\nimagedata = self.PL.unet_prepare_images(crops)\nself.assertEqual(imagedata.shape[0], 10)\nself.assertEqual(imagedata.shape[1], 512)\nself.assertEqual(imagedata.shape[2], 512)\nself.assertEqual(imagedata.shape[3], 3)\nfor i in range(imagedata.shape[0]):\n    self.assertLessEqual(imagedata[i].max(), 1)\nTrue_labels = ['2175_MT20180616113420', '2174_MT20180616113420',\n    '2173_MT20180616113420', '2172_MT20180616113420',\n    '2171_MT20180616113420', '2195_MT20180616113420',\n    '2194_MT20180616113420', '2193_MT20180616113420',\n    '2192_MT20180616113420', '2191_MT20180616113420']\nfilename_labels = self.PL.get_filename_labels()\nfor tlabel, clabel in zip(True_labels, filename_labels):\n    self.assertEqual(tlabel, clabel)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_add_formula",
+    "className": null,
+    "fileName": "/quantOS-org_&_JAQS/test_&_test_dataview.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "dv = DataView()\ndv.load_dataview(folder_path=daily_path)\nnrows, ncols = dv.data_d.shape\nn_securities = len(dv.data_d.columns.levels[0])\nformula = 'Delta(high - close, 1)'\ndv.add_formula('myvar1', formula, is_quarterly=False)\nassert dv.data_d.shape == (nrows, ncols + 1 * n_securities)\nformula2 = 'myvar1 - close'\ndv.add_formula('myvar2', formula2, is_quarterly=False)\nassert dv.data_d.shape == (nrows, ncols + 2 * n_securities)\n"
+}

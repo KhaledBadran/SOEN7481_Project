@@ -1,0 +1,9 @@
+{
+    "functionName": "test_route_selection_self",
+    "className": null,
+    "fileName": "/TUDelft-CITG_&_OpenTNSim/tests_&_test_route_selection.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "generator = model.VesselGenerator(vessel_type, vessel_database)\nsimulation_start = datetime.datetime(2019, 1, 1)\nsim = model.Simulation(simulation_start, graph)\nsim.add_vessels(origin=list(graph)[0], destination=list(graph)[-1],\n    vessel_generator=generator)\nsim.run(duration=24 * 60 * 60)\nfor vessel in sim.environment.vessels:\n    if vessel.width < 6.5:\n        assert vessel.route == ['Node 1', 'Node 2', 'Node 4']\n    else:\n        assert vessel.route == ['Node 1', 'Node 2', 'Node 3', 'Node 4']\n"
+}

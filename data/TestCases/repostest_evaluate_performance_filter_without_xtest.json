@@ -1,0 +1,9 @@
+{
+    "functionName": "test_evaluate_performance_filter_without_xtest",
+    "className": null,
+    "fileName": "/Accenture_&_AmpliGraph/tests_&_ampligraph_&_evaluation_&_test_protocol.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "X = load_wn18()\nmodel = ComplEx(batches_count=10, seed=0, epochs=1, k=20, eta=10, loss=\n    'nll', regularizer=None, optimizer='adam', optimizer_params={'lr': 0.01\n    }, verbose=True)\nmodel.fit(X['train'])\nX_filter = np.concatenate((X['train'], X['valid']))\nfrom ampligraph.evaluation import hits_at_n_score, mrr_score, mr_score\nranks = evaluate_performance(X['test'][::1000], model, X_filter, verbose=\n    True, corrupt_side='s,o')\nassert mrr_score(ranks) > 0\n"
+}

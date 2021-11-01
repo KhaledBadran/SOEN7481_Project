@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pascal_voc_ap",
+    "className": "TestsUnet",
+    "fileName": "/MarniTausen_&_Greenotyper/test_sample.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "recalls = [0.4, 0.5, 0.55, 0.6, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 0.99, 1]\nprecisions = [1, 1, 0.95, 0.85, 0.9, 0.8, 0.75, 0.85, 0.7, 0.75, 0.7, 0.65]\nious = [0.3, 0.5, 0.6, 0.55, 0.6, 0.65, 0.5, 0.7, 0.4, 0.6, 0.55, 0.6]\ntrue_all_AP = (0.5 - 0) * 1 + (0.55 - 0.5) * 0.95 + (0.7 - 0.55) * 0.9 + (\n    0.85 - 0.7) * 0.85 + (0.95 - 0.85) * 0.75 + (0.99 - 0.95) * 0.7 + (1 - 0.99\n    ) * 0.65\ntrue_all_50IOU = (0.5 - 0) * 1 + (0.55 - 0.5) * 0.95 + (0.7 - 0.55) * 0.9 + (\n    0.85 - 0.7) * 0.85 + (0.95 - 0.85) * 0.75 + (0.99 - 0.95) * 0.7 + (1 - 0.99\n    ) * 0.65\ntrue_all_60IOU = (0.55 - 0) * 0.95 + (0.7 - 0.55) * 0.9 + (0.85 - 0.7\n    ) * 0.85 + (0.95 - 0.85) * 0.75 + (1 - 0.95) * 0.65\nself.assertEqual(true_all_AP, self.PL._PASCAL_VOC_AP(precisions, recalls,\n    ious, IoU=0))\nself.assertEqual(true_all_50IOU, self.PL._PASCAL_VOC_AP(precisions, recalls,\n    ious, IoU=0.5))\nself.assertEqual(true_all_60IOU, self.PL._PASCAL_VOC_AP(precisions, recalls,\n    ious, IoU=0.6))\n"
+}

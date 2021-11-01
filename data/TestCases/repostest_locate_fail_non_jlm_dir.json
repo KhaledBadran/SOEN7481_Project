@@ -1,0 +1,9 @@
+{
+    "functionName": "test_locate_fail_non_jlm_dir",
+    "className": null,
+    "fileName": "/tkf_&_JuliaManager.jl/jlm_&_src_&_jlm_&_tests_&_test_cli.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "jlm_dir = str(initialized if is_base else tmp_path / 'another')\nwith changingdir(tmp_path / 'different_dir'):\n    with pytest.raises(ApplicationError) as exc_info:\n        cli.run(['--jlm-dir', jlm_dir, 'locate', 'dir'])\ncaptured = capsys.readouterr()\nassert not captured.out\nif is_base:\n    assert 'Possible fix:' in captured.err\nassert 'is not a valid `.jlm` directory' in str(exc_info.value)\npytest.mark.parametrize('is_base', [False, True])"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_subscription_transform",
+    "className": null,
+    "fileName": "/PRIArobotics_&_HedgehogServer/tests_&_test_subscription.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "async with stream_from_subscription_transform((x, 10) for x in [0, 0, 1, 0,\n    1, 0, 1, 1, 0, 0, 1]) as s:\n    await s.expect_after(10, 0)\n    await trio.sleep(5)\n    await s.expect_after(15, 1)\n    await trio.sleep(15)\n    await s.expect_after(0, 0)\n    await s.expect_after(5, 1)\n    await trio.sleep(25)\n    await s.expect_after(15, 0)\n    await s.expect_after(20, 1)\n    await s.expect_exit_after(0)\npytest.mark.trio"
+}

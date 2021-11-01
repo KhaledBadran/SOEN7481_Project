@@ -1,0 +1,9 @@
+{
+    "functionName": "test_setting_theta_values_are_set_properly",
+    "className": null,
+    "fileName": "/mozilla_&_CANOSP-2019/tests_&_test_fed_avg_w_dp.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "num_feats = 3\nnum_labels = 2\ncoefs = [[1, 2, 3], [4, 5, 6]]\nintercepts = [7, 8]\ntheta_len = num_feats * num_labels + num_labels\ntheta = np.zeros(theta_len)\nfed_avg_w_dp._set_coef_and_inter_on_theta(theta, coefs, intercepts)\ntheta_coefs, theta_intercepts = (fed_avg_w_dp.\n    _get_coef_and_inter_slice_from_theta(theta, num_feats, num_labels))\nassert np.array_equal(coefs, theta_coefs)\nassert np.array_equal(intercepts, theta_intercepts)\n"
+}

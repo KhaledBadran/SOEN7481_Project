@@ -1,0 +1,9 @@
+{
+    "functionName": "test3_with_contribution",
+    "className": "TestUploadMagic",
+    "fileName": "/PmagPy_&_PmagPy/pmagpy_tests_&_test_ipmag.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "dir_path = os.path.join(WD, 'data_files', '3_0', 'Megiddo')\ncon = cb.Contribution(directory=dir_path)\noutfile, error_message, errors, all_errors = ipmag.upload_magic(contribution\n    =con)\nmsg = \"\"\"Validation of your upload file has failed.\nYou can still upload\"\"\"\nself.assertTrue(error_message.startswith(msg))\nimport re\npattern = re.compile('\\\\A[^.]*\\\\.[a-zA-Z]*\\\\.\\\\d{4}\\\\_?\\\\d*\\\\.txt')\npossible_files = os.listdir(dir_path)\nfiles = []\nfor f in possible_files:\n    if pattern.match(f):\n        files.append(f)\npmag.remove_files(files, dir_path)\n"
+}

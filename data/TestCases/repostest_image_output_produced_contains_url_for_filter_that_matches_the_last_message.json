@@ -1,0 +1,9 @@
+{
+    "functionName": "test_image_output_produced_contains_url_for_filter_that_matches_the_last_message",
+    "className": "TestNotification",
+    "fileName": "/SketchingDev_&_Doodle-Dashboard/tests_&_doodledashboard_&_notifications_&_image_&_test_image_configuration.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "notification = ImageDependingOnMessageContent()\nnotification.add_image_filter('/tmp/happy.png', ContainsTextFilter('123'))\nnotification.add_image_filter('/tmp/sad.png', MatchesRegexFilter('[4-6]+'))\nimage_output = notification.create([Message('123')])\nself.assertEqual('/tmp/happy.png', image_output.image_path)\nimage_output = notification.create([Message('456')])\nself.assertEqual('/tmp/sad.png', image_output.image_path)\n"
+}

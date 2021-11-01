@@ -1,0 +1,9 @@
+{
+    "functionName": "test_prepare_unsigned_certificate",
+    "className": "TestCertificate",
+    "fileName": "/named-data_&_PyNDN2/tests_&_unit_tests_&_test_der_encode_decode.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "identityStorage = MemoryIdentityStorage()\nprivateKeyStorage = MemoryPrivateKeyStorage()\nidentityManager = IdentityManager(identityStorage, privateKeyStorage)\nkeyName = Name('/test/ksk-1457560485494')\nidentityStorage.addKey(keyName, KeyType.RSA, Blob(PUBLIC_KEY))\nsubjectDescriptions = []\nsubjectDescriptions.append(CertificateSubjectDescription(TEST_OID, 'TEST NAME')\n    )\nnewCertificate = identityManager.prepareUnsignedIdentityCertificate(keyName,\n    keyName.getPrefix(1), self.toyCertNotBefore, self.toyCertNotAfter,\n    subjectDescriptions)\nnewCertificate.setName(Name(newCertificate.getName().getPrefix(-1).append(\n    self.toyCert.getName().get(-1))))\ncertificateCopy = IdentityCertificate(newCertificate)\nself.assertEqual(str(self.toyCert), str(certificateCopy),\n    'Prepared unsigned certificate dump does not have the expected format')\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "set_binary_partition_coef",
+    "className": "MultiPhase",
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_phases_&_MultiPhase.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        Set binary partition coefficient that defines the concentration ratio\n        of phase 1 to phase 2.\n        \"\"\"\nif np.size(phases) != 2:\n    raise Exception(\"'phases' must contain exactly two elements!\")\nself._add_interface_prop(propname, phases, model, **kwargs)\ninterface_prop_key = propname + f'.{phases[0].name}:{phases[1].name}'\nK12 = self[interface_prop_key]\nnetwork = self.project.network\ncn = network['throat.conns']\nocc_phase1 = self[f'pore.occupancy.{phases[0].name}'][cn]\nocc_phase2 = self[f'pore.occupancy.{phases[1].name}'][cn]\npartition_coef = self.settings['partition_coef']\nK_global = self[partition_coef]\nmask = occ_phase1[:, (0)] + occ_phase2[:, (1)] == 2.0\nK_global[mask] = K12[mask]\nmask = occ_phase2[:, (0)] + occ_phase1[:, (1)] == 2.0\nK_global[mask] = 1.0 / K12[mask]\n"
+}

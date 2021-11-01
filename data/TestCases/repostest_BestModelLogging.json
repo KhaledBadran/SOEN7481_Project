@@ -1,0 +1,9 @@
+{
+    "functionName": "test_BestModelLogging",
+    "className": null,
+    "fileName": "/viebboy_&_PyGOP/test_&_utility_&_test_misc.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "train_func = utility.get_generator\ntrain_data = [INPUT_DIM, OUTPUT_DIM, BATCH_SIZE, STEPS]\nval_func = utility.get_generator\nval_data = [INPUT_DIM, OUTPUT_DIM, BATCH_SIZE, STEPS]\ntest_func = utility.get_generator\ntest_data = [INPUT_DIM, OUTPUT_DIM, BATCH_SIZE, STEPS]\ncallback = misc.BestModelLogging(convergence_measure=\n    'train_mean_squared_error', direction='lower', special_metrics=None,\n    train_func=train_func, train_data=train_data, val_func=val_func,\n    val_data=val_data, test_func=test_func, test_data=test_data)\nmodel = utility.get_dummy_keras_model(INPUT_DIM, OUTPUT_DIM)\nmodel.compile('adam', 'mse', ['mse'])\ntrain_gen, train_steps = train_func(train_data)\nval_gen, val_steps = val_func(val_data)\nmodel.fit_generator(train_gen, train_steps, validation_data=val_gen,\n    validation_steps=val_steps, epochs=1, callbacks=[callback], verbose=0)\nassert callback.measure < np.inf\nassert len(callback.performance['train_mean_squared_error']) == 1\nassert len(callback.performance['val_mean_squared_error']) == 1\nassert len(callback.performance['test_mean_squared_error']) == 1\n"
+}

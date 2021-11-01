@@ -1,0 +1,9 @@
+{
+    "functionName": "test_bearer_validation_raises_for_invalid_issuer",
+    "className": null,
+    "fileName": "/RobertoPrevato_&_GuardPost-JWT/tests_&_test_bearer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "audience = 'bbb'\nhandler = JWTBearerTest(['xxx', 'yyy'], [audience], [InMemoryKeyProvider({\n    '001': private_rsa_1.public_key()})])\ntoken = jwt.encode({'iss': 'aaa', 'aud': audience, 'some': 'payload'},\n    private_rsa_2, algorithm='RS256')\nwith pytest.raises(InvalidIssuerError):\n    await handler.authenticate({'access_token': token.decode()})\npytest.mark.asyncio"
+}

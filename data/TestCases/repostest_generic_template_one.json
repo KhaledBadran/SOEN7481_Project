@@ -1,0 +1,9 @@
+{
+    "functionName": "test_generic_template_one",
+    "className": "TestGenericTemplate",
+    "fileName": "/p1r-a-t3_&_FB_Bot/Tests_&_test_generic_template.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "default_action = self.button.create_url_button('Boshe achi eka', self.url,\n    is_default_action=True)\npayload = list()\npayload.append(self.generic_template.create_single_generic_elements(\n    'test_generic_template_one', subtitle='Subtitle', image_url=self.url,\n    default_action=default_action))\nself.assertNotEqual(payload[0], None, 'None returned!')\ngeneric_payload = self.generic_template.generic_template(payload)\nself.assertNotEqual(generic_payload, None, 'Generic Payload is None! Crap!')\nstatus_code = self.facebook.send_message(generic_payload)\nself.assertEqual(status_code, 200, 'Status code is not 200! Whaaaaaaaaaaaat!')\n"
+}

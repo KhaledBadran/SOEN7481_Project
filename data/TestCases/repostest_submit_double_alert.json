@@ -1,0 +1,9 @@
+{
+    "functionName": "test_submit_double_alert",
+    "className": "TestCase",
+    "fileName": "/IntegralDefense_&_ACE/lib_&_saq_&_modules_&_test_cloudphish.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.start_api_server()\nroot = create_root_analysis(analysis_mode=ANALYSIS_MODE_ANALYSIS)\nroot.initialize_storage()\nurl = root.add_observable(F_URL, TEST_URL)\nurl.add_directive(DIRECTIVE_CRAWL)\nroot.save()\nroot.schedule()\nengine = TestEngine(local_analysis_modes=[ANALYSIS_MODE_ANALYSIS,\n    ANALYSIS_MODE_CLOUDPHISH, ANALYSIS_MODE_CORRELATION])\nengine.enable_alerting()\nengine.enable_module('analysis_module_cloudphish', ANALYSIS_MODE_ANALYSIS)\nengine.enable_module('analysis_module_cloudphish_request_analyzer',\n    ANALYSIS_MODE_CLOUDPHISH)\nengine.enable_module('analysis_module_crawlphish', ANALYSIS_MODE_CLOUDPHISH)\nengine.enable_module('analysis_module_forced_detection',\n    ANALYSIS_MODE_CLOUDPHISH)\nengine.start()\nwait_for_log_count('analysis CloudphishAnalysis is completed', 1, 10)\nengine.controlled_stop()\nengine.wait()\nroot = RootAnalysis(storage_dir=storage_dir_from_uuid(root.uuid))\nroot.load()\nurl = root.get_observable(url.id)\nself.assertIsNotNone(url)\nself.assertEquals(len(url.analysis), 3)\nfrom saq.modules.cloudphish import CloudphishAnalysis\ncloudphish_analysis = url.get_analysis(CloudphishAnalysis)\nself.assertIsNotNone(cloudphish_analysis)\nself.assertEquals(cloudphish_analysis.analysis_result, SCAN_RESULT_ALERT)\nfrom saq.modules.url import CrawlphishAnalysisV2\ncrawlphish_analysis = url.get_analysis(CrawlphishAnalysisV2)\nself.assertIsNotNone(crawlphish_analysis)\nc.execute('SELECT COUNT(*) FROM alerts')\nself.assertEquals(c.fetchone()[0], 2)\nself.assertEquals(cloudphish_analysis.context['c'], root.uuid)\nuse_db"
+}

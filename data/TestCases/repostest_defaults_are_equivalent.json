@@ -1,0 +1,9 @@
+{
+    "functionName": "test_defaults_are_equivalent",
+    "className": null,
+    "fileName": "/bytesandbrains_&_ProcessOptimizer/ProcessOptimizer_&_tests_&_test_optimizer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "space = [(-5.0, 10.0), (0.0, 15.0)]\nopt = Optimizer(space, random_state=1)\nfor n in range(12):\n    x = opt.ask()\n    res_opt = opt.tell(x, branin(x))\nres_min = gp_minimize(branin, space, n_calls=12, random_state=1)\nassert res_min.space == res_opt.space\nassert np.allclose(res_min.x_iters, res_opt.x_iters)\nassert np.allclose(res_min.x, res_opt.x)\n"
+}

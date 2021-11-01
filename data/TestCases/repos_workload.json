@@ -1,0 +1,9 @@
+{
+    "functionName": "_workload",
+    "className": "AsyncClient",
+    "fileName": "/PRIArobotics_&_HedgehogClient/hedgehog_&_client_&_async_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "with DealerRouterSocket(self.ctx, zmq.DEALER, side=ClientSide) as self.socket:\n    self.socket.connect(self.endpoint)\n    await events.send(Component.EVENT_START)\n    updates = asyncio.create_task(self._handle_updates())\n    try:\n        while True:\n            command = await commands.recv()\n            if command == Component.COMMAND_STOP:\n                break\n            else:\n                raise ValueError(f'unknown command: {command!r}')\n    finally:\n        updates.cancel()\n        try:\n            await updates\n        except asyncio.CancelledError:\n            pass\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_network_simple",
+    "className": "TestDucoInterface",
+    "fileName": "/SteinHeselmans_&_DucoBox/tests_&_test_ducointerface.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "serial_mock_object = MagicMock(spec=Serial)\nserial_mock.return_value = serial_mock_object\nitf = dut.DucoInterface(self.MOCK_PORT_NAME)\nself.assertFalse(itf.is_online())\nwith open('tests/cmd_network_simple.txt') as cmdfile:\n    serial_mock_object.readline.return_value = cmdfile.read().replace('\\n',\n        '\\r')\nitf.find_nodes()\nself.assertTrue(itf.is_online())\nnode = itf.get_node('1')\nself.assertIsInstance(node, dut.DucoBox)\nself.assertEqual(node.number, '1')\nself.assertEqual(node.address, '1')\nnode = itf.get_node('2')\nself.assertIsInstance(node, dut.DucoUserControlBattery)\nself.assertEqual(node.number, '2')\nself.assertEqual(node.address, '102')\nnode = itf.get_node('34')\nself.assertIsInstance(node, dut.DucoUserControlHumiditySensor)\nself.assertEqual(node.number, '34')\nself.assertEqual(node.address, '132')\nnode = itf.get_node('44')\nself.assertIsInstance(node, dut.DucoUserControlCO2Sensor)\nself.assertEqual(node.number, '44')\nself.assertEqual(node.address, '142')\nnode = itf.get_node('99')\nself.assertIsInstance(node, dut.DucoNode)\nself.assertEqual(node.number, '99')\nself.assertEqual(node.address, '999')\nnode = itf.get_node('1234')\nself.assertIsNone(node)\npatch('duco.ducobox.Serial', autospec=True)"
+}

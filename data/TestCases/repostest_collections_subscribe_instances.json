@@ -1,0 +1,9 @@
+{
+    "functionName": "test_collections_subscribe_instances",
+    "className": null,
+    "fileName": "/EclecticIQ_&_OpenTAXII/tests_&_services_&_test_collection_management.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "service = server.get_service('collection-management-A')\nheaders = prepare_headers(version, https)\nrequest = prepare_request(version)\nresponse = service.process(headers, request)\nif version == 11:\n    collections = response.collection_informations\nelse:\n    collections = response.feed_informations\nfor c in collections:\n    assert len(c.subscription_methods) == ASSIGNED_SUBSCTRIPTION_INSTANCES\npytest.mark.parametrize('https', [True, False])pytest.mark.parametrize('version', [11, 10])"
+}

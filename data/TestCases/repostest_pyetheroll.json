@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pyetheroll",
+    "className": "TestMonitorRollsService",
+    "fileName": "/AndreMiras_&_EtherollApp/src_&_etherollapp_&_tests_&_service_&_test_main.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Checks that pyetheroll is cached.\n        The cached value should be updated on (testnet/mainnet) network change.\n        \"\"\"\nservice = MonitorRollsService()\nEtheroll._etheroll = None\nwith tempfile.TemporaryDirectory() as temp_path, patch_get_abi(\n    ) as m_get_abi, mock.patch.dict('os.environ', {'XDG_CONFIG_HOME':\n    temp_path}):\n    assert service.pyetheroll is not None\n    assert m_get_abi.mock_calls == [mock.call()]\n    pyetheroll = service.pyetheroll\n    assert pyetheroll == service.pyetheroll\n    assert pyetheroll.chain_id == ChainID.MAINNET\nwith mock.patch('etherollapp.service.main.Settings.get_stored_network'\n    ) as m_get_stored_network, patch_get_abi() as m_get_abi:\n    m_get_stored_network.return_value = ChainID.ROPSTEN\n    assert service.pyetheroll.chain_id == ChainID.ROPSTEN\n    assert service.pyetheroll != pyetheroll\nassert m_get_abi.mock_calls == [mock.call()]\n"
+}

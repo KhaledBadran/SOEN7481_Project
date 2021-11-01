@@ -1,0 +1,9 @@
+{
+    "functionName": "test_is_symmetric_AdvectionDiffusion_must_be_nonsymmetric",
+    "className": "UtilsTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_utils_&_UtilsTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "net = op.network.Cubic(shape=[5, 5, 5])\ngeom = op.geometry.StickAndBall(network=net)\nair = op.phases.Air(network=net)\nphys = op.physics.Standard(network=net, phase=air, geometry=geom)\nad = op.algorithms.AdvectionDiffusion(network=net, phase=air)\nad.set_value_BC(pores=net.pores('left'), values=1.0)\nad.set_value_BC(pores=net.pores('right'), values=0.1)\nassert op.utils.misc.is_symmetric(ad.A)\nsf = op.algorithms.StokesFlow(network=net, phase=air)\nsf.set_value_BC(pores=net.pores('left'), values=1.0)\nsf.set_value_BC(pores=net.pores('right'), values=0.0)\nsf.run()\nair.update(sf.results())\nphys.regenerate_models()\nad.settings.update({'cache_A': False, 'cache_b': False})\nad._build_A()\nassert not op.utils.misc.is_symmetric(ad.A)\n"
+}

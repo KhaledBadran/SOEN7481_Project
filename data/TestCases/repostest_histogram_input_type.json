@@ -1,0 +1,9 @@
+{
+    "functionName": "test_histogram_input_type",
+    "className": null,
+    "fileName": "/mortele_&_OccamTools/test_&_test_histogram.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "occamdata = OccamData(fort1_file, silent=True)\nnpdata = occamdata.x\nfor d in (occamdata, npdata):\n    hist, _ = occamhist(d)\n    assert isinstance(hist, np.ndarray)\nfor d in (1, 'not', 2.45):\n    caught = False\n    try:\n        occamhist(d)\n    except TypeError:\n        caught = True\n    assert caught is True\n"
+}

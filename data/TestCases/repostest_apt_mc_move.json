@@ -1,0 +1,9 @@
+{
+    "functionName": "test_apt_mc_move",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_thorlabs_&_test_thorlabs_apt.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Move the stage.\"\"\"\nwith expected_protocol(ik.thorlabs.APTMotorController, [init_kdc101[0],\n    ThorLabsPacket(message_id=ThorLabsCommands.MOT_MOVE_ABSOLUTE, param1=\n    None, param2=None, dest=80, source=1, data=struct.pack('<Hl', 1, 1000))\n    .pack(), ThorLabsPacket(message_id=ThorLabsCommands.MOT_MOVE_RELATIVE,\n    param1=None, param2=None, dest=80, source=1, data=struct.pack('<Hl', 1,\n    -1000)).pack(), ThorLabsPacket(message_id=ThorLabsCommands.\n    MOT_MOVE_ABSOLUTE, param1=None, param2=None, dest=80, source=1, data=\n    struct.pack('<Hl', 1, 1919)).pack()], [init_kdc101[1], ThorLabsPacket(\n    message_id=ThorLabsCommands.MOT_MOVE_COMPLETED, param1=1, param2=0,\n    dest=80, source=1, data=None).pack(), ThorLabsPacket(message_id=\n    ThorLabsCommands.MOT_MOVE_COMPLETED, param1=1, param2=0, dest=80,\n    source=1, data=None).pack(), ThorLabsPacket(message_id=ThorLabsCommands\n    .MOT_MOVE_COMPLETED, param1=1, param2=0, dest=80, source=1, data=None).\n    pack()], sep='') as apt:\n    apt.channel[0].move(1000)\n    apt.channel[0].move(u.Quantity(-1000, 'counts'), absolute=False)\n    apt.channel[0].motor_model = 'PRM1-Z8'\n    apt.channel[0].move(u.Quantity(1, u.deg))\n    with pytest.raises(ValueError):\n        apt.channel[0].move(u.Quantity(5, u.mm))\n"
+}

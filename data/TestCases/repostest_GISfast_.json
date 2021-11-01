@@ -1,0 +1,9 @@
+{
+    "functionName": "test_GISfast_",
+    "className": null,
+    "fileName": "/viebboy_&_PyGOP/test_&_utility_&_test_gop_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "params, train_states = utility.get_random_states()\nparams['convergence_measure'] = random.choice(['train_', 'val_']) + params[\n    'convergence_measure']\nparams['tmp_dir'] = tmpdir.dirname\nparams['model_name'] = 'test_model'\nparams['max_topology'] = [20, 20, 20]\nparams['layer_iter'] = 1\nparams['block_iter'] = 0\nno_op_set = len(params['nodal_set']) * len(params['pool_set']) * len(params\n    ['activation_set'])\nif os.path.exists(os.path.join(tmpdir.dirname, 'test_model')):\n    shutil.rmtree(os.path.join(tmpdir.dirname, 'test_model'))\nos.mkdir(os.path.join(tmpdir.dirname, 'test_model'))\nmisc.dump_data(params, train_states, utility.get_generator, [INPUT_DIM,\n    OUTPUT_DIM, BATCH_SIZE, STEPS], utility.get_generator, [INPUT_DIM,\n    OUTPUT_DIM, BATCH_SIZE, STEPS], utility.get_generator, [INPUT_DIM,\n    OUTPUT_DIM, BATCH_SIZE, STEPS])\nwith open(os.path.join(tmpdir.dirname, 'test_model', 'params.pickle'), 'rb'\n    ) as fid:\n    params = pickle.load(fid)\nop_set_idx = np.random.randint(0, no_op_set)\ngop_utils.GISfast_(params, train_states, op_set_idx)\nshutil.rmtree(os.path.join(tmpdir.dirname, 'test_model'))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_controller_on_request_setting_identity",
+    "className": null,
+    "fileName": "/RobertoPrevato_&_BlackSheep/tests_&_test_controllers.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "app = FakeApplication()\napp.controllers_router = RoutesRegistry()\nget = app.controllers_router.get\nclass Home(Controller):\n\n    async def on_request(self, request: Request):\n        request.identity = User({'id': '001', 'name': 'Charlie Brown'},\n            'JWTBearer')\n\n    @get('/')\n    async def index(self, request: Request, user: Optional[User]):\n        assert hasattr(request, 'identity')\n        assert isinstance(request.identity, User)\n        return text(request.identity.name)\napp.setup_controllers()\nawait app(get_example_scope('GET', '/'), MockReceive(), MockSend())\nbody = await app.response.text()\nassert body == 'Charlie Brown'\nassert app.response.status == 200\npytest.mark.asyncio"
+}

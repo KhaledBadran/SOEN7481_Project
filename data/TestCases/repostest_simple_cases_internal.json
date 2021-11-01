@@ -1,0 +1,9 @@
+{
+    "functionName": "test_simple_cases_internal",
+    "className": null,
+    "fileName": "/Tsjerk_&_Insane/tests_&_test_regression.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    This function generates test functions for nosetests. These test functions\n    calls insane's main function with the argument listed in SIMPLE_TEST_CASES.\n    \"\"\"\nfor case in SIMPLE_TEST_CASES:\n    case_args, input_dir, alias = _split_case(case)\n    ref_dir = _reference_path(case_args, alias)\n    _test_case = functools.partial(run_and_compare, ref_dir=ref_dir, runner\n        =_run_internal)\n    yield _test_case, case_args, input_dir\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_apt_mc_position_encoder",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_thorlabs_&_test_thorlabs_apt.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Get unitful position of encoder, in counts.\"\"\"\nwith expected_protocol(ik.thorlabs.APTMotorController, [init_kdc101[0],\n    ThorLabsPacket(message_id=ThorLabsCommands.MOT_REQ_ENCCOUNTER, param1=1,\n    param2=0, dest=80, source=1, data=None).pack()], [init_kdc101[1],\n    ThorLabsPacket(message_id=ThorLabsCommands.MOT_GET_ENCCOUNTER, param1=\n    None, param2=None, dest=80, source=1, data=struct.pack('<Hl', 1, -20000\n    )).pack()], sep='') as apt:\n    assert apt.channel[0].position_encoder == u.Quantity(-20000, 'counts')\n"
+}

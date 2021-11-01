@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_outputs_invalid",
+    "className": "TestMLPipline",
+    "fileName": "/HDI-Project_&_MLBlocks/tests_&_test_mlpipeline.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "pipeline = MLPipeline(['a_primitive'])\npipeline.blocks['a_primitive#1'].produce_output = [{'name': 'output',\n    'type': 'whatever'}]\nwith pytest.raises(ValueError):\n    pipeline.get_outputs('a_primitive#1.invalid')\npatch('mlblocks.mlpipeline.MLBlock', new=get_mlblock_mock)"
+}

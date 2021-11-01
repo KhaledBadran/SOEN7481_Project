@@ -1,0 +1,9 @@
+{
+    "functionName": "start_bitcoind",
+    "className": null,
+    "fileName": "/bitcoin-core_&_HWI/test_&_test_device.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "datadir = tempfile.mkdtemp()\nbitcoind_proc = subprocess.Popen([bitcoind_path, '-regtest', '-datadir=' +\n    datadir, '-noprinttoconsole', '-fallbackfee=0.0002'])\ndef cleanup_bitcoind():\n    bitcoind_proc.kill()\n    shutil.rmtree(datadir)\natexit.register(cleanup_bitcoind)\nwhile not os.path.exists(datadir + '/regtest/.cookie'):\n    time.sleep(0.5)\nwith open(datadir + '/regtest/.cookie') as f:\n    userpass = f.readline().lstrip().rstrip()\nrpc = AuthServiceProxy('http://{}@127.0.0.1:18443'.format(userpass))\nready = False\nwhile not ready:\n    try:\n        rpc.getblockchaininfo()\n        ready = True\n    except JSONRPCException:\n        time.sleep(0.5)\n        pass\nrpc.generatetoaddress(101, rpc.getnewaddress())\nreturn rpc, userpass\n"
+}

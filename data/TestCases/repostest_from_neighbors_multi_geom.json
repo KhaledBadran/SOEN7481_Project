@@ -1,0 +1,9 @@
+{
+    "functionName": "test_from_neighbors_multi_geom",
+    "className": "MiscTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_misc_&_MiscTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "net = op.network.Cubic(shape=[5, 5, 5])\nnet.add_boundary_pores()\nPs1 = net.pores('internal')\nTs1 = net.throats('internal')\ngeo1 = op.geometry.GenericGeometry(network=net, pores=Ps1, throats=Ts1)\nPs2 = net.pores('internal', mode='not')\nTs2 = net.throats('internal', mode='not')\ngeo2 = op.geometry.GenericGeometry(network=net, pores=Ps2, throats=Ts2)\ngeo1['pore.rand1'] = np.random.random(geo1.Np)\ngeo2['pore.rand1'] = np.random.random(geo2.Np)\ngeo1.add_model(model=mods.from_neighbor_pores, propname='throat.rand1',\n    pore_prop='pore.rand1', mode='min')\ntest = np.amin(net['pore.rand1'][net['throat.conns']], axis=1)[Ts1]\nassert np.all(test == geo1['throat.rand1'])\ngeo1['throat.rand2'] = np.random.random(geo1.Nt)\ngeo2['throat.rand2'] = np.random.random(geo2.Nt)\ngeo2.add_model(model=mods.from_neighbor_throats, propname='pore.rand2',\n    throat_prop='throat.rand2', mode='max')\ntest = np.zeros(geo2.Np).astype(bool)\nfor i, pore in enumerate(net.pores(geo2.name)):\n    Ts = net.find_neighbor_throats(pores=pore)\n    T_max = np.amax(net['throat.rand2'][Ts])\n    test[i] = net['pore.rand2'][pore] == T_max\nassert np.all(test)\n"
+}

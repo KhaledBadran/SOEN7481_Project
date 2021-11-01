@@ -1,0 +1,9 @@
+{
+    "functionName": "test_keras_model_load_and_save_weights",
+    "className": null,
+    "fileName": "/goeckslab_&_Galaxy-ML/galaxy_ml_&_tests_&_test_keras_galaxy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with open('./tools/test-data/keras_model_drosophila01.json', 'r') as f:\n    model_json = json.load(f)\nconfig = model_json.get('config')\nif model_json['class_name'] == 'Sequential':\n    model_type = 'sequential'\nelse:\n    model_type = 'functional'\nmodel = KerasGRegressor(config, model_type=model_type)\nmodel.load_weights('./tools/test-data/keras_model_drosophila_weights01.h5')\ntmp = tempfile.mktemp()\ntry:\n    model.save_weights(tmp)\n    got = os.path.getsize(tmp)\n    expect = os.path.getsize(\n        './tools/test-data/keras_model_drosophila_weights01.h5')\n    assert abs(got - expect) < 40, got - expect\nfinally:\n    os.remove(tmp)\n"
+}

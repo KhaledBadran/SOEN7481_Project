@@ -1,0 +1,9 @@
+{
+    "functionName": "test_iterate_clustering",
+    "className": null,
+    "fileName": "/Puumanamana_&_CoCoNet/tests_&_test_clustering.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "model = generate_rd_model()\nh5_data = {k: generate_h5_file(*([8] * 5), n_samples=5, filename=k + '.h5') for\n    k in ['composition', 'coverage']}\nfiles = ['singletons.txt', 'pre_graph.pkl', 'graph.pkl', 'assignments.csv']\nadj = np.array([[25, 24, 0, 0, -1], [23, 25, 0, -1, 0], [0, -1, 25, 25, 25],\n    [-1, 0, 24, 25, 24], [0, -1, 18, 23, 25]])\ncontigs = ['V{}'.format(i) for i in range(5)]\nedges = [(i, j, adj[i, j]) for i in range(len(contigs)) for j in range(len(\n    contigs)) if adj[i, j] >= 0]\ngraph = igraph.Graph()\ngraph.add_vertices(contigs)\nfor i, j, w in edges:\n    graph.add_edge(i, j, weight=w)\ngraph.write_pickle(files[1])\npd.DataFrame([['W0', 5, 10, 0, 0]], columns=['contigs', 'length'] + list(\n    range(3))).to_csv(files[0], sep='\\t')\niterate_clustering(model, h5_data, files[1], singletons_file=files[0],\n    graph_file=files[2], assignments_file=files[3], n_frags=5)\nclustering = pd.read_csv(files[3], header=None, index_col=0)[1]\nall_files = all(Path(f).is_file() for f in files)\nfor f in (files + list(h5_data.values())):\n    Path(f).unlink()\nassert all_files\nassert clustering.loc['V0'] == clustering.loc['V1']\nassert clustering.loc['V2'] == clustering.loc['V3']\nassert clustering.loc['V3'] == clustering.loc['V4']\nassert len(clustering[clustering == clustering.loc['W0']]) == 1\n"
+}

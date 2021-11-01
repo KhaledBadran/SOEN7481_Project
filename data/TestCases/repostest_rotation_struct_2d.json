@@ -1,0 +1,9 @@
+{
+    "functionName": "test_rotation_struct_2d",
+    "className": "TestSRF",
+    "fileName": "/GeoStat-Framework_&_GSTools/tests_&_test_srf.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.cov_model.dim = 2\nself.cov_model.anis = 0.25\nsrf = SRF(self.cov_model, mean=self.mean, mode_no=self.mode_no)\nfield = srf((self.x_grid_c, self.y_grid_c), seed=self.seed, mesh_type=\n    'structured')\nself.cov_model.angles = -np.pi / 2.0\nsrf = SRF(self.cov_model, mean=self.mean, mode_no=self.mode_no)\nfield_rot = srf((self.x_grid_c, self.y_grid_c), seed=self.seed, mesh_type=\n    'structured')\nself.assertAlmostEqual(field[0, 0], field_rot[0, -1])\nself.assertAlmostEqual(field[1, 2], field_rot[2, 6])\n"
+}

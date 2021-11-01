@@ -1,0 +1,9 @@
+{
+    "functionName": "test_send_callback",
+    "className": "TestWebOSClient",
+    "fileName": "/supersaiyanmode_&_PyWebOSTV/tests_&_test_connection.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "obj = {}\ndef callback(res):\n    obj['res'] = res\nclient = FakeClient()\nclient.send_message('req', 'uri', {'item': 'payload'}, callback=callback,\n    unique_id='1')\nclient.received_message(json.dumps({'id': '1', 'test': 'test'}))\nassert obj['res'] == dict(id='1', test='test')\n"
+}

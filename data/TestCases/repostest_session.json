@@ -1,0 +1,9 @@
+{
+    "functionName": "test_session",
+    "className": "test_Session",
+    "fileName": "/pbx-gs_&_OSBot-AWS/tests_&_unit_&_apis_&_test_Session.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "assert self.session.session().profile_name == Globals.aws_session_profile_name\nassert self.session.session().region_name == Globals.aws_session_region_name\nwith Temp_User() as temp_user:\n    iam = temp_user.iam\n    user_info = iam.user_info()\n    access_key = iam.user_access_key_create(wait_for_key_working=True)\n    aws_access_key_id = access_key.get('AccessKeyId')\n    aws_secret_access_key = access_key.get('SecretAccessKey')\n    session = boto3.Session(aws_access_key_id=aws_access_key_id,\n        aws_secret_access_key=aws_secret_access_key)\n    user_identity = session.client('sts').get_caller_identity()\n    assert user_identity.get('UserId') == user_info.get('UserId')\n    assert user_identity.get('Arn') == user_info.get('Arn')\n    self.result = user_identity\n"
+}

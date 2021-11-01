@@ -1,0 +1,9 @@
+{
+    "functionName": "test_efficient_return_short",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_efficient_frontier.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ef = EfficientFrontier(*setup_efficient_frontier(data_only=True),\n    weight_bounds=(None, None))\nw = ef.efficient_return(0.25)\nassert isinstance(w, dict)\nassert set(w.keys()) == set(ef.tickers)\nnp.testing.assert_almost_equal(ef.weights.sum(), 1)\nnp.testing.assert_allclose(ef.portfolio_performance(), (0.25, \n    0.16826225873038014, 1.3669137793315087))\nsharpe = ef.portfolio_performance()[2]\nef_long_only = setup_efficient_frontier()\nef_long_only.efficient_return(0.25)\nlong_only_sharpe = ef_long_only.portfolio_performance()[2]\nassert sharpe > long_only_sharpe\n"
+}

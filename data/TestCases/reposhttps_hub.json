@@ -1,0 +1,9 @@
+{
+    "functionName": "https_hub",
+    "className": null,
+    "fileName": "/marten-de-vries_&_Flask-WebSub/tests_&_test_integration.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "def new(*args, **kwargs):\n    kwargs['verify'] = False\n    return old(*args, **kwargs)\nold, requests.request = requests.request, new\nimport urllib3\nurllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)\nyield from run_hub_app(celery_session_app, celery_session_worker, https=True)\nrequests.request = old\npytest.fixture"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_evaluate_ei_at_points",
+    "className": "TestExpectedImprovement",
+    "fileName": "/Yelp_&_MOE/moe_&_tests_&_optimal_learning_&_python_&_python_version_&_expected_improvement_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Check that ``evaluate_expected_improvement_at_point_list`` computes and orders results correctly (using 1D analytic EI).\"\"\"\nindex = numpy.argmax(numpy.greater_equal(self.num_sampled_list, 5))\ndomain, gaussian_process = self.gp_test_environments[index]\npoints_to_sample = domain.generate_random_point_in_domain()\nei_eval = ExpectedImprovement(gaussian_process, points_to_sample)\nnum_to_eval = 10\npoints_to_evaluate = domain.generate_uniform_random_points_in_domain(\n    num_to_eval)[:, (numpy.newaxis), :]\ntest_values = ei_eval.evaluate_at_point_list(points_to_evaluate)\nfor i, value in enumerate(test_values):\n    ei_eval.current_point = points_to_evaluate[i, ...]\n    truth = ei_eval.compute_expected_improvement()\n    assert value == truth\n"
+}

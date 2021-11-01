@@ -1,0 +1,9 @@
+{
+    "functionName": "test_trim_source_sink",
+    "className": null,
+    "fileName": "/LoLab-VU_&_Magine/magine_&_tests_&_test_network_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "graph = nx.DiGraph()\ngraph.add_edge('A', 'B')\ngraph.add_edge('B', 'C')\ngraph.add_edge('B', 'B')\ngraph.add_edge('D', 'C')\ngraph.add_edge('C', 'N')\ntrimmed = utils.trim_sink_source_nodes(graph, ['A', 'B', 'D'],\n    remove_self_edge=True)\nok_(set(trimmed.edges()) == {('B', 'C'), ('A', 'B'), ('D', 'C')})\nreturn\nimport matplotlib.pyplot as plt\nplt.subplot(121)\nnx.draw(graph, pos=nx.nx_pydot.graphviz_layout(graph, 'dot'), with_labels=True)\nplt.subplot(122)\nnx.draw(trimmed, pos=nx.nx_pydot.graphviz_layout(graph, 'dot'), with_labels\n    =True)\nplt.show()\n"
+}

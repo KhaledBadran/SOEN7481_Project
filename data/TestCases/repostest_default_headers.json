@@ -1,0 +1,9 @@
+{
+    "functionName": "test_default_headers",
+    "className": null,
+    "fileName": "/RobertoPrevato_&_BlackSheep/tests_&_client_&_test_headers.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "fake_pools = FakePools([Response(200, [], TextContent('Hello, World!'))])\nasync def middleware_for_assertions(request, next_handler):\n    assert b'hello' in request.headers\n    assert request.headers.get_single(b'hello') == b'World'\n    assert b'Foo' in request.headers\n    assert request.headers.get_single(b'Foo') == b'Power'\n    return await next_handler(request)\nasync with ClientSession(base_url=b'http://localhost:8080', pools=\n    fake_pools, middlewares=[middleware_for_assertions], default_headers=[(\n    b'Hello', b'World'), (b'Foo', b'Power')]) as client:\n    await client.get(b'/')\npytest.mark.asyncio"
+}

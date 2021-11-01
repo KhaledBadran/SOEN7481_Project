@@ -1,0 +1,9 @@
+{
+    "functionName": "test_struct",
+    "className": null,
+    "fileName": "/Carbonara-Project_&_Carbonara-IDB/tests_&_test_analysis.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "DllEntryPoint = idb.analysis.Functions(kernel32_idb).functions[1754273429]\nstruc = idb.analysis.Struct(kernel32_idb, DllEntryPoint.frame)\nmembers = list(struc.get_members())\nassert list(map(lambda m: m.get_name(), members)) == [' s', ' r',\n    'hinstDLL', 'fdwReason', 'lpReserved']\nassert members[2].get_type() == 'HINSTANCE'\nkern32_test([(695, 32, None), (695, 64, None), (700, 32, None), (700, 64,\n    None)])"
+}

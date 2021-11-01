@@ -1,0 +1,9 @@
+{
+    "functionName": "test_top_matcher_advanced",
+    "className": "TestRegex",
+    "fileName": "/named-data_&_PyNDN2/tests_&_unit_tests_&_test_regex.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cm = NdnRegexTopMatcher('^(<.*>*)<.*>')\nres = cm.match(Name('/n/a/b/c'))\nself.assertEqual(True, res)\nself.assertEqual(4, len(cm.getMatchResult()))\nself.assertEqual(Name('/n/a/b/'), cm.expand('\\\\1'))\ncm = NdnRegexTopMatcher('^(<.*>*)<.*><c>(<.*>)<.*>')\nres = cm.match(Name('/n/a/b/c/d/e/'))\nself.assertEqual(True, res)\nself.assertEqual(6, len(cm.getMatchResult()))\nself.assertEqual(Name('/n/a/d/'), cm.expand('\\\\1\\\\2'))\ncm = NdnRegexTopMatcher('(<.*>*)<.*>$')\nres = cm.match(Name('/n/a/b/c/'))\nself.assertEqual(True, res)\nself.assertEqual(4, len(cm.getMatchResult()))\nself.assertEqual(Name('/n/a/b/'), cm.expand('\\\\1'))\ncm = NdnRegexTopMatcher('<.*>(<.*>*)<.*>$')\nres = cm.match(Name('/n/a/b/c/'))\nself.assertEqual(True, res)\nself.assertEqual(4, len(cm.getMatchResult()))\nself.assertEqual(Name('/a/b/'), cm.expand('\\\\1'))\ncm = NdnRegexTopMatcher('<a>(<>*)<>$')\nres = cm.match(Name('/n/a/b/c/'))\nself.assertEqual(True, res)\nself.assertEqual(4, len(cm.getMatchResult()))\nself.assertEqual(Name('/b/'), cm.expand('\\\\1'))\ncm = NdnRegexTopMatcher('^<ndn><(.*)\\\\.(.*)><DNS>(<>*)<>')\nres = cm.match(Name('/ndn/ucla.edu/DNS/yingdi/mac/ksk-1/'))\nself.assertEqual(True, res)\nself.assertEqual(6, len(cm.getMatchResult()))\nself.assertEqual(Name('/ndn/edu/ucla/yingdi/mac/'), cm.expand('<ndn>\\\\2\\\\1\\\\3')\n    )\ncm = NdnRegexTopMatcher('^<ndn><(.*)\\\\.(.*)><DNS>(<>*)<>', '<ndn>\\\\2\\\\1\\\\3')\nres = cm.match(Name('/ndn/ucla.edu/DNS/yingdi/mac/ksk-1/'))\nself.assertEqual(True, res)\nself.assertEqual(6, len(cm.getMatchResult()))\nself.assertEqual(Name('/ndn/edu/ucla/yingdi/mac/'), cm.expand())\n"
+}

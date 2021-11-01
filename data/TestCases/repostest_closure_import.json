@@ -1,0 +1,9 @@
+{
+    "functionName": "test_closure_import",
+    "className": "NamespaceTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_namespace.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "collection = lookup.TemplateLookup()\ncollection.put_string('functions.html',\n    \"\"\"\n            <%def name=\"foo()\">\n                this is foo\n            </%def>\n\n            <%def name=\"bar()\">\n                this is bar\n            </%def>\n        \"\"\"\n    )\ncollection.put_string('index.html',\n    \"\"\"\n            <%namespace file=\"functions.html\" import=\"*\"/>\n            <%def name=\"cl1()\">\n                ${foo()}\n            </%def>\n\n            <%def name=\"cl2()\">\n                ${bar()}\n            </%def>\n\n            ${cl1()}\n            ${cl2()}\n        \"\"\"\n    )\nassert result_lines(collection.get_template('index.html').render(bar=\n    'this is bar', x='this is x')) == ['this is foo', 'this is bar']\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "CommandRf",
+    "className": "faraday_commands",
+    "fileName": "/FaradayRF_&_Faraday-Software/faraday_&_proxyio_&_faradaycommands.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        A predefined function that returns a raw command application DATAGRAM that will cause the supplied command to be executed on a remote (RF) device. This is basically and local command inside the payload of a command to transmit a command to a specific RF unit.\n\n        :param remote_callsign: The callsign of the remote target Faraday device\n        :param remote_node_id: The ID number (0-255) of the remote target Faraday device.\n        :param command_number: Command application command identification number (Identifies a command/command type using 0-255)\n        :param command_packet: Pass a pre-generated packet as defined by the intended command.\n\n        :Return: Returns the complete generated packet as a string of bytes.\n\n        :Example:\n\n        >>> faraday_cmd = faradaycommands.faraday_commands()\n        >>> packet = faraday_cmd.CommandRf(\"KB1LQD\", 1, faraday_cmd.CMD_GPIO, faradaycommands.commandmodule.create_gpio_command_packet(faradaycommands.gpioallocations.LED_1, 0,0,0,0,0))\n        \"\"\"\npacket = commandmodule.create_rf_command_datagram(remote_callsign,\n    remote_node_id, command_number, command_packet)\nreturn packet\n"
+}

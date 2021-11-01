@@ -1,0 +1,9 @@
+{
+    "functionName": "test_find_surface_pores_default_markers",
+    "className": "TopotoolsTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_topotools_&_TopotoolsTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from skimage.morphology import ball\nnet = op.network.CubicTemplate(template=ball(3), spacing=1)\nnet.clear(mode='labels')\nassert net.labels() == ['pore.all', 'throat.all']\ntopotools.find_surface_pores(network=net)\nassert net.num_pores('surface') == 66\n"
+}

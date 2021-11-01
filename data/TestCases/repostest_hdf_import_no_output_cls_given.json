@@ -1,0 +1,9 @@
+{
+    "functionName": "test_hdf_import_no_output_cls_given",
+    "className": null,
+    "fileName": "/CCampJr_&_CRIkit2/crikit_&_io_&_tests_&_test_hdf5.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Import a spectrum, spectra, and hsi when no instantiated class is provided \"\"\"\nfilename, fid, hdf_data_shape = hdf_dataset\nhdf_data_shape = np.array(hdf_data_shape)\ndname = 'spectrum'\ndataset, dset_meta = hdf_import_data('.', filename, dname,\n    output_cls_instance=None)\nassert dataset.size == hdf_data_shape[-1]\nnp.testing.assert_array_equal(dataset, fid[dname].value)\ndname = 'spectra'\ndataset, dset_meta = hdf_import_data('.', filename, dname,\n    output_cls_instance=None)\nassert dataset.size == hdf_data_shape[1:].prod()\nnp.testing.assert_array_equal(dataset, fid[dname].value)\ndname = 'hsi'\ndataset, dset_meta = hdf_import_data('.', filename, dname,\n    output_cls_instance=None)\nassert dataset.size == hdf_data_shape.prod()\nnp.testing.assert_array_equal(dataset, fid[dname].value)\n"
+}

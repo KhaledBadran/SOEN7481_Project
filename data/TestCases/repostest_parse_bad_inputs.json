@@ -1,0 +1,9 @@
+{
+    "functionName": "test_parse_bad_inputs",
+    "className": null,
+    "fileName": "/hdoupe_&_Matchups/matchups_&_tests_&_test_inputs.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "meta_params = {'use_full_sample': True}\nadj = {'matchup': {'batter': 1, 'pitcher': 1234}}\new = {'matchup': {'errors': {}, 'warnings': {}}}\new = matchups.validate_inputs(meta_params, adj, ew)\new = ew['errors_warnings']\nassert ew['matchup']['errors']['batter'] == ['Not a valid string.']\nassert ew['matchup']['errors']['pitcher'] == ['Not a valid string.']\nadj = {'matchup': {'batter': 'fake batter'}}\new = {'matchup': {'errors': {}, 'warnings': {}}}\new = matchups.validate_inputs(meta_params, adj, ew)\new = ew['errors_warnings']\nexp = ['batter \"fake batter\" must be in list of choices.']\nassert ew['matchup']['errors']['batter'] == exp\n"
+}

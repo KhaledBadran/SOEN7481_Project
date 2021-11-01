@@ -1,0 +1,9 @@
+{
+    "functionName": "test_create_host_group",
+    "className": "PyU4VProvisioningTest",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_provisioning.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test create_host_group.\"\"\"\nhost_group_id = self.data.hostgroup_id\nhost_list = [self.data.initiatorgroup_name_f]\npayload = {'hostId': host_list, 'hostGroupId': host_group_id}\nwith mock.patch.object(self.provisioning, 'create_resource') as mock_create:\n    self.provisioning.create_hostgroup(self.data.hostgroup_id, [self.data.\n        initiatorgroup_name_f])\n    mock_create.assert_called_once_with(category=constants.SLOPROVISIONING,\n        resource_level=constants.SYMMETRIX, resource_level_id=self.data.\n        array, resource_type=constants.HOSTGROUP, payload=payload)\n"
+}

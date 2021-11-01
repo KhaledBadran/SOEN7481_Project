@@ -1,0 +1,9 @@
+{
+    "functionName": "test_parser_unmatched",
+    "className": "TestCli",
+    "fileName": "/DusanMadar_&_PySyncDroid/tests_&_test_cli.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test handling `unmatched` argument.\n        \"\"\"\ncmd = '-M model -V vendor -u ignore'.split(' ')\nargs = self.parser.parse_args(cmd)\nself.assertIn(\"unmatched='ignore'\", str(args))\ncmd = '-M model -V vendor -u remove'.split(' ')\nargs = self.parser.parse_args(cmd)\nself.assertIn(\"unmatched='remove'\", str(args))\ncmd = '-M model -V vendor -u synchronize'.split(' ')\nargs = self.parser.parse_args(cmd)\nself.assertIn(\"unmatched='synchronize'\", str(args))\nwith self.assertRaises(SystemExit):\n    cmd = '-M model -V vendor -u foo'.split(' ')\n    args = self.parser.parse_args(cmd)\npatch('sys.stderr', new=StringIO())"
+}

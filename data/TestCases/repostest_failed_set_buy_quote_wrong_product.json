@@ -1,0 +1,9 @@
+{
+    "functionName": "test_failed_set_buy_quote_wrong_product",
+    "className": null,
+    "fileName": "/nabicht_&_Buttonwood/tests_&_test_MarketObjects_&_test_twosidedquote.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "market1 = Market(Product('MSFT', 'Microsoft'), Endpoint('Nasdaq', 'NSDQ'),\n    PriceFactory('0.01'))\nmarket2 = Market(Product('APPL', 'Apple'), Endpoint('Nasdaq', 'NSDQ'),\n    PriceFactory('0.01'))\nbid_quote = Quote(market1, BID_SIDE, '25.23', 18)\nask_quote = Quote(market1, ASK_SIDE, '26.20', 233)\nbuy_quote2 = Quote(market2, BID_SIDE, '25.98', 3)\ntsq = TwoSidedQuote(bid_quote, ask_quote)\nwith pytest.raises(Exception):\n    tsq.set_buy_quote(buy_quote2)\n"
+}

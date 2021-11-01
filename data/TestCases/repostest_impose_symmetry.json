@@ -1,0 +1,9 @@
+{
+    "functionName": "test_impose_symmetry",
+    "className": null,
+    "fileName": "/mesonepigreco_&_CellConstructor/tests_&_TestImposeSymmetries_&_test_impose_symmetries.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "total_path = os.path.dirname(os.path.abspath(__file__))\nos.chdir(total_path)\ndyn = CC.Phonons.Phonons('old_dyn', full_name=True)\nGROUP = spglib.get_spacegroup(dyn.structure.get_ase_atoms(), 0.05)\ns_group_expected = spglib.get_spacegroup(dyn.structure.get_ase_atoms())\nprint('Space group with high threshold:', s_group_expected)\nprint('Space group with low threshold:', GROUP)\nsymmetries = spglib.get_symmetry(dyn.structure.get_ase_atoms(), symprec=0.05)\nprint('Number of symmetries: {}'.format(len(symmetries['rotations'])))\nsym_mats = CC.symmetries.GetSymmetriesFromSPGLIB(symmetries, True)\ndyn.structure.impose_symmetries(sym_mats)\ns_group_after = spglib.get_spacegroup(dyn.structure.get_ase_atoms())\nprint('New space group with high threshold:', s_group_after)\nassert s_group_after == GROUP\n"
+}

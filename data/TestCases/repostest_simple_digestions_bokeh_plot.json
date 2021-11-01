@@ -1,0 +1,9 @@
+{
+    "functionName": "test_simple_digestions_bokeh_plot",
+    "className": null,
+    "fileName": "/Edinburgh-Genome-Foundry_&_BandWagon/tests_&_test_basics.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "patterns = [BandsPattern(compute_digestion_bands(example_sequence, [enzyme]\n    ), ladder=LADDER_100_to_4k, label=enzyme, global_bands_props={'label':\n    '=size'}) for enzyme in ['BamHI', 'EcoRI', 'EcoRV', 'PstI', 'SpeI', 'XbaI']\n    ]\npatterns_set = BandsPatternsSet(patterns=[LADDER_100_to_4k] + patterns,\n    ladder=LADDER_100_to_4k, label='Digestion results', ladder_ticks=3)\nplot = patterns_set.plot_with_bokeh()\ntarget_file = os.path.join(str(tmpdir), 'plot_with_bokeh.html')\nwith open(target_file, 'w+') as f:\n    f.write(file_html(plot, CDN, 'Example Sequence'))\nwith open(target_file, 'r') as f:\n    assert len(f.read()) > 9950\n"
+}

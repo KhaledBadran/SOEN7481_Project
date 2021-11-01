@@ -1,0 +1,9 @@
+{
+    "functionName": "test_merge_files",
+    "className": "TestGetPolyT",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_goterm.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "gff_folder = os.path.join(self.gffs, 'test.gff_folder')\nif not os.path.exists(gff_folder):\n    os.mkdir(gff_folder)\ntest1_folder = os.path.join(self.go_folder, 'test1')\nif not os.path.exists(test1_folder):\n    os.mkdir(test1_folder)\ntest2_folder = os.path.join(self.go_folder, 'test2')\nif not os.path.exists(test2_folder):\n    os.mkdir(test2_folder)\nwith open(os.path.join(gff_folder, 'test1.gff'), 'w') as fh:\n    fh.write('test1')\nwith open(os.path.join(gff_folder, 'test2.gff'), 'w') as fh:\n    fh.write('test2')\nwith open(os.path.join(test1_folder, 'test1_uniprot.csv'), 'w') as fh:\n    fh.write('test1')\nwith open(os.path.join(test2_folder, 'test2_uniprot.csv'), 'w') as fh:\n    fh.write('test2')\nlog = open(os.path.join(self.test_folder, 'test.log'), 'w')\nself.go._merge_files(self.gffs, self.go_folder, self.test_folder, log)\nout_file = os.path.join(self.go_folder, 'test', self.all_strain)\nself.assertTrue(os.path.exists(out_file))\ndata = []\nwith open(out_file) as fh:\n    for line in fh:\n        data.append(line)\nself.assertEqual(''.join(data),\n    \"\"\"Genome\tStrand\tStart\tEnd\tProtein_id\tGo_term\ntest2\ntest1\n\"\"\")\nlog.close()\n"
+}

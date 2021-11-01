@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_request_result",
+    "className": "TestSimpleHTTPAPI",
+    "fileName": "/MrLYC_&_IFV/tests_&_test_http_api.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with mock.patch('requests.Session.request', side_effect=lambda **k: k):\n    result = self.api.path.to.st.post(value=1)\n    self.assertDictContainsSubset({'url': 'http://your.dom.in/path/to/st',\n        'method': 'POST', 'value': 1}, result)\nwith mock.patch('requests.Session.request', side_effect=NotImplementedError):\n    with self.assertRaises(NotImplementedError):\n        result = self.api.path.to.st.post(value=1)\n    with mock.patch('ifv.http_api.SimpleHTTPAPI._on_request_error',\n        side_effect=lambda *a, **k: (id(self), True)):\n        result = self.api.path.to.st.post(value=1)\n        self.assertEqual(result, id(self))\nmock.patch('ifv.http_api.SimpleHTTPAPI._get_result_from_response',\n    side_effect=lambda r: r)"
+}

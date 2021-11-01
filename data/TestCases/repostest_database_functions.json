@@ -1,0 +1,9 @@
+{
+    "functionName": "test_database_functions",
+    "className": "TestProducerDb",
+    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_producer_db.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "database = Sqlite3ProducerDb(self.databaseFilePath)\nparams = AesKeyParams(128)\nkeyBlob1 = AesAlgorithm.generateKey(params).getKeyBits()\nkeyBlob2 = AesAlgorithm.generateKey(params).getKeyBits()\npoint1 = Schedule.fromIsoString('20150101T100000')\npoint2 = Schedule.fromIsoString('20150102T100000')\npoint3 = Schedule.fromIsoString('20150103T100000')\npoint4 = Schedule.fromIsoString('20150104T100000')\ndatabase.addContentKey(point1, keyBlob1)\ndatabase.addContentKey(point2, keyBlob1)\ndatabase.addContentKey(point3, keyBlob2)\nwith self.assertRaises(ProducerDb.Error):\n    database.addContentKey(point1, keyBlob1)\nself.assertEqual(True, database.hasContentKey(point1))\nself.assertEqual(True, database.hasContentKey(point2))\nself.assertEqual(True, database.hasContentKey(point3))\nself.assertEqual(False, database.hasContentKey(point4))\nkeyResult = database.getContentKey(point1)\nself.assertTrue(keyResult.equals(keyBlob1))\nkeyResult = database.getContentKey(point3)\nself.assertTrue(keyResult.equals(keyBlob2))\nwith self.assertRaises(ProducerDb.Error):\n    database.getContentKey(point4)\nself.assertEqual(True, database.hasContentKey(point1))\ndatabase.deleteContentKey(point1)\nself.assertEqual(False, database.hasContentKey(point1))\ntry:\n    database.deleteContentKey(point4)\nexcept Exception as ex:\n    self.fail('Unexpected error deleting a non-existing content key: ' +\n        repr(ex))\n"
+}

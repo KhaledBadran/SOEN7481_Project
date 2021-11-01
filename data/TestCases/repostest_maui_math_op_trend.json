@@ -1,0 +1,9 @@
+{
+    "functionName": "test_maui_math_op_trend",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_teledyne_&_test_maui.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Set math channel, trend operator.\"\"\"\nwith expected_protocol(ik.teledyne.MAUI, [init,\n    \"F1:DEFINE EQN,'TREND(C1)',VERSCALE,1,CENTER,0,AUTOFINDSCALE,ON\",\n    \"F1:DEFINE EQN,'TREND(C2)',VERSCALE,2,CENTER,1,AUTOFINDSCALE,OFF\",\n    \"F1:DEFINE EQN,'TREND(C2)',VERSCALE,2,CENTER,1,AUTOFINDSCALE,ON\"], [],\n    sep='\\n') as osc:\n    osc.math[0].operator.trend(0)\n    osc.math[0].operator.trend(1, vscale=u.Quantity(2, u.V), center=u.\n        Quantity(1, u.V), autoscale=False)\n    osc.math[0].operator.trend(1, vscale=2, center=1, autoscale=True)\n"
+}

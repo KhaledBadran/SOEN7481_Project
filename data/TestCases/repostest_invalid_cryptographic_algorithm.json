@@ -1,0 +1,9 @@
+{
+    "functionName": "test_invalid_cryptographic_algorithm",
+    "className": "TestRNGParameters",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a TypeError is raised when an invalid value is used to set\n        the cryptographic algorithm of an RNGParameters structure.\n        \"\"\"\nkwargs = {'cryptographic_algorithm': 'invalid'}\nself.assertRaisesRegex(TypeError,\n    'The cryptographic algorithm must be a CryptographicAlgorithm enumeration.'\n    , objects.RNGParameters, **kwargs)\nargs = objects.RNGParameters(), 'cryptographic_algorithm', 'invalid'\nself.assertRaisesRegex(TypeError,\n    'The cryptographic algorithm must be a CryptographicAlgorithm enumeration.'\n    , setattr, *args)\n"
+}

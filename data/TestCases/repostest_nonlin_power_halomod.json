@@ -1,0 +1,9 @@
+{
+    "functionName": "test_nonlin_power_halomod",
+    "className": null,
+    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_power.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "a = 0.8\npk = ccl.nonlin_matter_power(COSMO_HM, k, a)\nmdef = ccl.halos.MassDef('vir', 'matter')\nhmf = ccl.halos.MassFuncSheth99(COSMO_HM, mdef, mass_def_strict=False,\n    use_delta_c_fit=True)\nhbf = ccl.halos.HaloBiasSheth99(COSMO_HM, mass_def=mdef, mass_def_strict=False)\ncc = ccl.halos.ConcentrationDuffy08(mdef)\nprf = ccl.halos.HaloProfileNFW(cc)\nhmc = ccl.halos.HMCalculator(COSMO_HM, hmf, hbf, mdef)\npkb = ccl.halos.halomod_power_spectrum(COSMO_HM, hmc, k, a, prf, normprof1=True\n    )\nassert np.allclose(pk, pkb)\nassert np.all(np.isfinite(pk))\nassert np.shape(pk) == np.shape(k)\npytest.mark.parametrize('k', [1, 1.0, [0.3, 0.5, 10], np.array([0.3, 0.5, 10])]\n    )"
+}

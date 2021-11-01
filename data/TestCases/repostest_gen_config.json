@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gen_config",
+    "className": "TestOptimizeTSSpredator",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_optimize_TSSpredator.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "wig = os.path.join(self.test_folder, 'wig')\nif not os.path.exists(wig):\n    os.mkdir(wig)\nfasta = os.path.join(self.test_folder, 'aaa.fa')\ngff = os.path.join(self.test_folder, 'aaa.gff')\ngen_file(fasta, self.example.fasta)\ngen_file(gff, self.example.gff_file)\nargs = self.mock_args.mock()\nargs.libs = self.example.libs\nargs.cores = 1\nargs.cluster = 3\nargs.program = 'TSS'\nargs.project_strain = 'aaa'\nargs.replicate = 'all_1'\nargs.utr = 200\nargs.replicate_name = 'test'\nfilename = ot.gen_config(self.example.best_para, self.test_folder, 1, wig,\n    fasta, gff, args, 'aaa')\nself.assertEqual(filename, 'test_folder/config_1.ini')\ndata = import_data('test_folder/config_1.ini')\nself.assertEqual('\\n'.join(data), self.example.config)\n"
+}

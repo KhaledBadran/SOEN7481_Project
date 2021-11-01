@@ -1,0 +1,9 @@
+{
+    "functionName": "test_Box",
+    "className": null,
+    "fileName": "/OpenSMFS_&_PyBroMo/pybromo_&_tests_&_test_diffusion.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "box = pbm.Box(0, 1, 0, 1, 0, 2)\nassert (box.b == np.array([[0, 1], [0, 1], [0, 2]])).all()\nassert box.volume == 2\nassert box.volume_L == 2000\nbox.__repr__()\nbox_dict = box.to_dict()\nbox2 = pbm.Box(**box_dict)\nassert (box.b == box2.b).all()\nbox_json = box.to_json()\nbox3 = pbm.Box(**json.loads(box_json))\nassert (box.b == box3.b).all()\n"
+}

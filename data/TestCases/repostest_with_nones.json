@@ -1,0 +1,9 @@
+{
+    "functionName": "test_with_nones",
+    "className": "TestDilatedConv2DLayer",
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_conv.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "if kwargs.get('untie_biases', False):\n    pytest.skip()\nfrom lasagne.layers import DilatedConv2DLayer\nb, c, h, w = input.shape\ninput_layer = DummyInputLayer((None, c, None, None))\nlayer = DilatedConv2DLayer(input_layer, num_filters=kernel.shape[0],\n    filter_size=kernel.shape[2:], W=kernel.transpose(1, 0, 2, 3), **kwargs)\nassert layer.output_shape == (None, output.shape[1], None, None)\nactual = layer.get_output_for(input).eval()\nassert actual.shape == output.shape\nassert np.allclose(actual, output)\npytest.mark.parametrize('input, kernel, output, kwargs', list(\n    dilated_conv2d_test_sets()))"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_new_iceberg_order_ack",
+    "className": null,
+    "fileName": "/nabicht_&_Buttonwood/tests_&_test_MarketObjects_&_test_Events_&_test_ordereventchain.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "n = NewOrderCommand(121234, 1234235.123, 2342, 'user_x', MARKET, BID_SIDE,\n    FAR, Price('34.52'), 1000, 50)\noec = OrderEventChain(n, LOGGER, MonotonicIntID())\nassert oec.most_recent_event() == n\nassert len(oec.open_exposure_requests()) == 1\nassert oec.most_recent_requested_exposure() == oec.open_exposure_requests()[-1]\nassert oec.current_exposure() is None\nassert oec.most_recent_requested_exposure() == Exposure(Price('34.52'), \n    1000, 121234)\nassert oec.visible_qty() == 0\nack = AcknowledgementReport(121235, 1234235.123, 2342, 'user_x', MARKET, n,\n    Price('34.52'), 1000, 50)\noec.apply_acknowledgement_report(ack)\nassert oec.most_recent_event() == ack\nassert len(oec.open_exposure_requests()) == 0\nassert oec.most_recent_requested_exposure() is None\nassert oec.current_exposure() == Exposure(Price('34.52'), 1000, 121235)\nassert oec.visible_qty() == 50\n"
+}

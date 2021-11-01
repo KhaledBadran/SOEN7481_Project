@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gpibusbcomm_eoi",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_comm_&_test_gpibusb.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "comm = GPIBCommunicator(mock.MagicMock(), 1)\ncomm._version = 5\ncomm._file.sendcmd = mock.MagicMock()\ncomm.eoi = True\nassert comm.eoi is True\nassert comm._eoi is True\ncomm._file.sendcmd.assert_called_with('++eoi 1')\ncomm._file.sendcmd = mock.MagicMock()\ncomm.eoi = False\nassert comm.eoi is False\nassert comm._eoi is False\ncomm._file.sendcmd.assert_called_with('++eoi 0')\n"
+}

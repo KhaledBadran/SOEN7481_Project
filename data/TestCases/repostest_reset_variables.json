@@ -1,0 +1,9 @@
+{
+    "functionName": "test_reset_variables",
+    "className": "TestTree",
+    "fileName": "/goodmami_&_penman/tests_&_test_tree.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "def _vars(t):\n    return [v for v, _ in t.nodes()]\nt = tree.Tree(one_arg_node)\nassert _vars(t) == ['a', 'b']\nt.reset_variables(fmt='a{i}')\nassert _vars(t) == ['a0', 'a1']\nt.reset_variables(fmt='a{j}')\nassert _vars(t) == ['a', 'a2']\nt.reset_variables()\nassert _vars(t) == ['a', 'b']\nt = tree.Tree(reentrant)\nassert _vars(t) == ['a', 'b', 'g']\nt.reset_variables(fmt='a{i}')\nassert _vars(t) == ['a0', 'a1', 'a2']\nassert t == ('a0', [('/', 'alpha'), (':ARG0', ('a1', [('/', 'beta')])), (\n    ':ARG1', ('a2', [('/', 'gamma'), (':ARG0', 'a1')]))])\nt.reset_variables()\nassert _vars(t) == ['a', 'b', 'g']\nt = tree.Tree(var_instance)\nassert _vars(t) == ['a', 'b']\nt.reset_variables(fmt='a{i}')\nassert _vars(t) == ['a0', 'a1']\nassert t == ('a0', [('/', 'alpha'), (':ARG0', ('a1', [('/', 'b')]))])\nt.reset_variables()\nassert _vars(t) == ['a', 'b']\n"
+}

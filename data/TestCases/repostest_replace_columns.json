@@ -1,0 +1,9 @@
+{
+    "functionName": "test_replace_columns",
+    "className": null,
+    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_procimg.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "y = np.zeros((10, 3), dtype=float)\ny[:, (2)] = 2\nbad_col = np.array([False, True, False])\nassert np.array_equal(procimg.replace_columns(y, bad_col, copy=True,\n    replace_with='mean'), procimg.replace_columns(y, bad_col, copy=True,\n    replace_with='linear')\n    ), 'Interpolation and mean should provide the same result.'\nbad_col = np.array([False, True, True])\nassert np.array_equal(procimg.replace_columns(y, bad_col, copy=True,\n    replace_with='mean'), np.zeros_like(y)), 'Should set everything to 0.'\nbad_col = np.array([True, True, False])\nassert np.array_equal(procimg.replace_columns(y, bad_col, copy=True,\n    replace_with='mean'), np.full_like(y, 2)), 'Should set everything to 2.'\ny = np.zeros((10, 4), dtype=float)\ny[:, (3)] = 3\nbad_col = np.array([False, True, True, False])\nassert np.array_equal(procimg.replace_columns(y, bad_col, copy=True,\n    replace_with='linear'), np.repeat(np.arange(4), 10).reshape(4, 10).T\n    ), 'Interpolation failed.'\n"
+}

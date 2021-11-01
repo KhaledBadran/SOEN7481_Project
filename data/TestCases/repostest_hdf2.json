@@ -1,0 +1,9 @@
+{
+    "functionName": "test_hdf2",
+    "className": null,
+    "fileName": "/CCampJr_&_CRIkit2/crikit_&_data_&_tests_&_test_mosaic_hdf.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "filename, fid = hdf_dataset2\ndset_list = lazy5.inspect.get_datasets(fid)\nmos = Mosaic()\nfor n in range(10):\n    mos.append(fid[dset_list[n]])\nassert mos.size == 10\nassert mos.issamedim\nmos.parameters['Order'] = 'R'\nassert mos.mosaic2d((5, 2)).shape == (5 * 3, 2 * 4)\nmos.parameters['Order'] = 'C'\nassert mos.mosaic2d((5, 2)).shape == (5 * 3, 2 * 4)\n"
+}

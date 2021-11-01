@@ -1,0 +1,9 @@
+{
+    "functionName": "test_various_data_type_correctly_returned",
+    "className": "TestApplyingROI",
+    "fileName": "/ornlneutronimaging_&_NeuNorm/tests_&_NeuNorm_&_normalizing_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"assert normalized, sample, ob and df data are correctly returned\"\"\"\nsample_path = self.data_path + '/tif/sample'\nob_path = self.data_path + '/tif/ob'\ndf_path = self.data_path + '/tif/df'\no_norm = Normalization()\no_norm.load(folder=sample_path, auto_gamma_filter=False)\no_norm.load(folder=ob_path, data_type='ob', auto_gamma_filter=False)\no_norm.load(folder=df_path, data_type='df', auto_gamma_filter=False)\n_data_expected = o_norm.data['sample']['data'][0]\n_data_returned = o_norm.get_sample_data()[0]\nassert (_data_expected == _data_returned).all()\n_ob_expected = o_norm.data['ob']['data']\n_ob_returned = o_norm.get_ob_data()[0]\nassert (_ob_expected == _ob_returned).all()\n_df_expected = o_norm.data['df']['data']\n_df_returned = o_norm.get_df_data()\nassert _df_expected == _df_returned\nassert o_norm.get_normalized_data() == []\no_norm.normalization()\n_norm_expected = o_norm.data['normalized'][0]\n_norm_returned = o_norm.get_normalized_data()[0]\nassert (_norm_expected == _norm_returned).all()\n"
+}

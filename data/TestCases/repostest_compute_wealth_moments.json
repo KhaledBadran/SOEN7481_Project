@@ -1,0 +1,9 @@
+{
+    "functionName": "test_compute_wealth_moments",
+    "className": null,
+    "fileName": "/open-source-economics_&_OG-USA/ogusa_&_tests_&_test_wealth.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test of computation of wealth moments.\n\n    Need SCF data which is too large to check into repo so this will\n    be flagged so as to not run on TravisCI.\n    \"\"\"\nexpected_moments = np.array([-0.00436938131, 0.0187063661, 0.0589720538, \n    0.0610665862, 0.117776715, 0.387790368, 0.360041151, 0.845051216, \n    4.97530422])\ndf = wealth.get_wealth_data()\ntest_moments = wealth.compute_wealth_moments(df, np.array([0.25, 0.25, 0.2,\n    0.1, 0.1, 0.09, 0.01]))\nassert np.allclose(expected_moments, test_moments, rtol=0.001)\n"
+}

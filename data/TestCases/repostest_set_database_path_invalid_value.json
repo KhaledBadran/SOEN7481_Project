@@ -1,0 +1,9 @@
+{
+    "functionName": "test_set_database_path_invalid_value",
+    "className": "TestKmipServerConfig",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_config.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the right error is raised when an invalid value is used to\n        set the database_path configuration property.\n        \"\"\"\nc = config.KmipServerConfig()\nc._logger = mock.MagicMock()\nself.assertNotIn('database_path', c.settings.keys())\nargs = 1,\nself.assertRaises(exceptions.ConfigurationError, c._set_database_path, *args)\nself.assertNotEqual(1, c.settings.get('database_path'))\n"
+}

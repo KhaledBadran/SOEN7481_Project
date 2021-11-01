@@ -1,0 +1,9 @@
+{
+    "functionName": "test_that_all_menus_exist",
+    "className": "TestMagICGUIMenu",
+    "fileName": "/PmagPy_&_PmagPy/pmagpy_tests_&_test_magic_gui.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        check that all expected menus were created\n        and that each menu item is enabled\n        \"\"\"\nmenu_names = ['File', 'Help ']\nmenus = self.frame.MenuBar.Menus\nfound_menus = []\nfor menu, menu_name in menus:\n    self.assertIsInstance(menu, wx.Menu)\n    for item in menu.GetMenuItems():\n        self.assertTrue(item.IsEnabled())\n    self.assertIn(menu_name, menu_names)\n    found_menus.append(menu_name)\nself.assertEqual(set(menu_names), set(found_menus))\n"
+}

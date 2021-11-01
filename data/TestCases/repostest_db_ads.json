@@ -1,0 +1,9 @@
+{
+    "functionName": "test_db_ads",
+    "className": "TestAdsorbateFeatures",
+    "fileName": "/SUNCAT-Center_&_CatLearn/test_&_test_ads_fp_gen.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test the feature generation.\"\"\"\nimages = database_to_list('data/ads_example.db')\n[atoms.set_tags(np.zeros(len(atoms))) for atoms in images]\nimages = autogen_info(images)\nlayers2ads_index(images[0], images[0].info['key_value_pairs']['species'])\nprint(str(len(images)) + ' training examples.')\ngen = FeatureGenerator(nprocs=1)\ntrain_fpv = default_fingerprinters(gen, 'adsorbates')\ntrain_fpv += [gen.db_size, gen.ctime, gen.dbid, gen.delta_energy]\ntrain_fpv += [gen.catapp_AB]\nmatrix = gen.return_vec(images, train_fpv)\nlabels = gen.return_names(train_fpv)\nprint(np.shape(matrix), type(matrix))\nif __name__ == '__main__':\n    for i, l in enumerate(labels):\n        print(i, l)\nself.assertTrue(len(labels) == np.shape(matrix)[1])\n"
+}

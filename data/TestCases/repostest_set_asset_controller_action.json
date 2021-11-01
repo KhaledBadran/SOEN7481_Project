@@ -1,0 +1,9 @@
+{
+    "functionName": "test_set_asset_controller_action",
+    "className": null,
+    "fileName": "/OwnMarket_&_OwnBlockchainSdkPython/own_blockchain_sdk_&_test_transactions.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sender_wallet = Wallet()\ncontrollerWallet = Wallet()\nasset_hash = 'AssetH1'\nexpected = (\n    \"\"\"{\n    \"senderAddress\": \"%s\",\n    \"nonce\": 1,\n    \"expirationTime\": 0,\n    \"actionFee\": 0.01,\n    \"actions\": [\n        {\n            \"actionType\": \"SetAssetController\",\n            \"actionData\": {\n                \"assetHash\": \"%s\",\n                \"controllerAddress\": \"%s\"\n            }\n        }\n    ]\n}\"\"\"\n     % (sender_wallet.address, asset_hash, controllerWallet.address))\ntx = Tx(sender_wallet.address, 1, 0.01, 0)\ntx.add_set_asset_controller_action(asset_hash, controllerWallet.address)\nactual = tx.to_json()\nassert expected == actual\n"
+}

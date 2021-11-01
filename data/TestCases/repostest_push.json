@@ -1,0 +1,9 @@
+{
+    "functionName": "test_push",
+    "className": null,
+    "fileName": "/132nd-etcher_&_EPAB/test_&_test_cmd_&_test_push.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "repo = mock(spec=epab.utils.Repo)\nCTX.repo = repo\nwhen(CTX.repo).push()\ncontext = mock()\n_push(context)\nverify(context).invoke(epab.linters.lint, amend=True)\nverify(context).invoke(epab.cmd.pytest, long=True, exitfirst=True,\n    failed_first=True)\nverify(context).invoke(epab.cmd.reqs, amend=True)\nverify(context).invoke(epab.cmd.chglog, amend=True)\nverify(CTX.repo).push()\n"
+}

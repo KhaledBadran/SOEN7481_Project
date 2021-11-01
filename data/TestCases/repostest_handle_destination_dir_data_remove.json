@@ -1,0 +1,9 @@
+{
+    "functionName": "test_handle_destination_dir_data_remove",
+    "className": "TestSync",
+    "fileName": "/DusanMadar_&_PySyncDroid/tests_&_test_sync.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test 'handle_destination_dir_data' removes unmatched destination data.\n        \"\"\"\nsync = Sync(FAKE_MTP_DETAILS, '/tmp', 'Card/Music', unmatched=REMOVE)\nsync.set_source_abs()\nsync.set_destination_abs()\nsync.handle_destination_dir_data({'dst_dir_fls': [\n    '/run/user/<user>/gvfs/mtp:host=%5Busb%3A002%2C003%5D/Card/Music/testdir/song.mp3'\n    ]})\nmock_gfvs_wrapper.assert_called_once_with(rm,\n    '/run/user/<user>/gvfs/mtp:host=%5Busb%3A002%2C003%5D/Card/Music/testdir/song.mp3'\n    )\npatch.object(pysyncdroid.sync.Sync, 'gvfs_wrapper')"
+}

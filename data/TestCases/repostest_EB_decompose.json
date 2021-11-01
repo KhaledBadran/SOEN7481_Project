@@ -1,0 +1,9 @@
+{
+    "functionName": "test_EB_decompose",
+    "className": null,
+    "fileName": "/apetri_&_LensTools/lenstools_&_tests_&_test_shear.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "l, EE, BB, EB = test_map.eb_power_spectrum(l_edges)\nassert l.shape == EE.shape == BB.shape == EB.shape\nfig, ax = plt.subplots()\nax.plot(l, l * (l + 1) * EE / (2.0 * np.pi), label='$P_{EE}$')\nax.plot(l, l * (l + 1) * BB / (2.0 * np.pi), label='$P_{BB}$')\nax.plot(l, l * (l + 1) * np.abs(EB) / (2.0 * np.pi), label=\n    '$\\\\vert P_{EB}\\\\vert$')\nax.set_xscale('log')\nax.set_yscale('log')\nax.set_xlabel('$l$')\nax.set_ylabel('$l(l+1)P_l/2\\\\pi$')\nax.legend(loc='Upper left')\nplt.savefig('EB.png')\nplt.clf()\nfig, ax = plt.subplots()\nax.plot(l, np.abs(EB) / np.sqrt(EE * BB))\nax.set_xlabel('$l$')\nax.set_ylabel('$P_{EB}/\\\\sqrt{P_{EE}P_{BB}}$')\nplt.savefig('EB_corr.png')\nplt.clf()\n"
+}

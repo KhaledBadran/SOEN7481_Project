@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ccall_caller",
+    "className": "CallTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_call.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "t = Template(\n    \"\"\"\n        <%def name=\"outer_func()\">\n        OUTER BEGIN\n            <%call expr=\"caller.inner_func()\">\n                INNER CALL\n            </%call>\n        OUTER END\n        </%def>\n\n        <%call expr=\"outer_func()\">\n            <%def name=\"inner_func()\">\n                INNER BEGIN\n                ${caller.body()}\n                INNER END\n            </%def>\n        </%call>\n\n        \"\"\"\n    )\nassert result_lines(t.render()) == ['OUTER BEGIN', 'INNER BEGIN',\n    'INNER CALL', 'INNER END', 'OUTER END']\n"
+}

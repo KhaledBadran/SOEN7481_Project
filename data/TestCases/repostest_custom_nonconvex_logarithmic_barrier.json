@@ -1,0 +1,9 @@
+{
+    "functionName": "test_custom_nonconvex_logarithmic_barrier",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_custom_objectives.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ef = setup_efficient_frontier()\ndef logarithmic_barrier(weights, cov_matrix, k=0.1):\n    log_sum = np.sum(np.log(weights))\n    portfolio_volatility = np.dot(weights.T, np.dot(cov_matrix, weights))\n    return portfolio_volatility - k * log_sum\nw = ef.nonconvex_objective(logarithmic_barrier, objective_args=(ef.\n    cov_matrix, 0.2))\nassert isinstance(w, dict)\nassert set(w.keys()) == set(ef.tickers)\nnp.testing.assert_almost_equal(ef.weights.sum(), 1)\n"
+}

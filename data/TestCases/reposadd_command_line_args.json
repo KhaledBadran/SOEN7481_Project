@@ -1,0 +1,9 @@
+{
+    "functionName": "add_command_line_args",
+    "className": "ConsoleRunner",
+    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_console.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "port, client_port = get_socket_names(2, close=True)\nargs.extend((writer.get_pydevconsole_file(), str(port[1]), str(client_port[1]))\n    )\nself.port = port\nself.client_port = client_port\nserver = SimpleXMLRPCServer(client_port)\nserver.register_function(notify_finished, 'NotifyFinished')\nstart_in_daemon_thread(server.serve_forever, [])\nself.proxy = xmlrpclib.ServerProxy('http://%s:%s/' % port)\nreturn args\noverrides(DebuggerRunnerSimple.add_command_line_args)"
+}

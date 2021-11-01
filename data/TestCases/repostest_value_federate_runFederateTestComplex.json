@@ -1,0 +1,9 @@
+{
+    "functionName": "test_value_federate_runFederateTestComplex",
+    "className": null,
+    "fileName": "/GMLC-TDC_&_HELICS/tests_&_python_&_test_value_federate.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "rDefaultValue = 1.0\niDefaultValue = 1.0\nrTestValue = 2.0\niTestValue = 2.0\npubid = h.helicsFederateRegisterGlobalPublication(vFed, 'pub1', h.\n    helics_data_type_complex, '')\nsubid = h.helicsFederateRegisterSubscription(vFed, 'pub1', '')\nh.helicsInputSetDefaultComplex(subid, rDefaultValue, iDefaultValue)\nh.helicsFederateEnterExecutingMode(vFed)\nh.helicsPublicationPublishComplex(pubid, rTestValue, iTestValue)\nvalue1, value2 = h.helicsInputGetComplex(subid)\nassert value1 == rDefaultValue\nassert value2 == iDefaultValue\ngrantedtime = h.helicsFederateRequestTime(vFed, 1.0)\nassert grantedtime == 0.01\nvalue1, value2 = h.helicsInputGetComplex(subid)\nassert value1 == rTestValue\nassert value2 == iTestValue\n"
+}

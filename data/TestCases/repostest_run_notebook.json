@@ -1,0 +1,9 @@
+{
+    "functionName": "test_run_notebook",
+    "className": null,
+    "fileName": "/alchemyst_&_Dynamics-and-Control/test_all_notebooks.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Read and execute notebook\n\n    The method here is directly from the nbconvert docs\n\n    Note that there is no error handling in this file as any errors will be\n    caught by pytest\n\n    \"\"\"\nwith open(notebook) as f:\n    nb = nbformat.read(f, as_version=4)\nep = ExecutePreprocessor(timeout=600)\nep.preprocess(nb, {'metadata': {'path': notebook.parent}})\npytest.mark.parametrize('notebook', notebooks, ids=ids)"
+}

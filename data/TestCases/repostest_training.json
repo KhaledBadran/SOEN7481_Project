@@ -1,0 +1,9 @@
+{
+    "functionName": "test_training",
+    "className": "TestSimple",
+    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_test_simple_integration.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cadd = CAdd([5, 1])\ny = np.ones([5, 4])\nbf = np.ones([5, 4])\nfor i in range(y.shape[0]):\n    bf[i] = i + 1\ndef grad_update(mlp, x, y, criterion, learning_rate):\n    pred = mlp.forward(x)\n    err = criterion.forward(pred, y)\n    grad_criterion = criterion.backward(pred, y)\n    mlp.zero_grad_parameters()\n    mlp.backward(x, grad_criterion)\n    mlp.update_parameters(learning_rate)\n    return err\nmse = MSECriterion(self)\nfor i in range(0, 1000):\n    x = np.random.random((5, 4))\n    y = x.copy()\n    y = y + bf\n    err = grad_update(cadd, x, y, mse, 0.01)\nprint(cadd.get_weights()[0])\nassert_allclose(cadd.get_weights()[0], np.array([1, 2, 3, 4, 5]).reshape((5,\n    1)), rtol=0.1)\n"
+}

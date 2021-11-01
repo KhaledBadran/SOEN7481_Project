@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_beam",
+    "className": null,
+    "fileName": "/PaulHancock_&_Aegean/tests_&_test_fits_image.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that we can recover the beam from the fits header\"\"\"\nheader = fits.getheader('tests/test_files/1904-66_SIN.fits')\nbeam = AegeanTools.wcs_helpers.get_beam(header)\nprint(beam)\nif beam is None:\n    raise AssertionError()\nif beam.pa != header['BPA']:\n    raise AssertionError()\ndel header['BMAJ'], header['BMIN'], header['BPA']\nbeam = AegeanTools.wcs_helpers.get_beam(header)\nif beam is not None:\n    raise AssertionError()\n"
+}

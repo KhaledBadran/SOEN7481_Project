@@ -1,0 +1,9 @@
+{
+    "functionName": "test_update_role",
+    "className": "TestCreateUser",
+    "fileName": "/fvalverd_&_AutoApi/tests_&_test_operations.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "test_data = {'email': u'fvalverd', 'password': u'pass', 'api': self.api,\n    'roles': ['update']}\nadmin_headers = self.get_admin_headers()\nresponse = self.app.post('/user', headers=admin_headers, data=json.dumps(\n    test_data), content_type='application/json')\nself.assertEqual(response.status_code, 204)\nresponse = self.app.post('/login', data=test_data)\nself.assertEqual(response.status_code, 200)\nheaders = self.response_to_headers(response)\nresponse = self.app.get('/%s/movies' % self.api, headers=headers)\nself.assertEqual(response.status_code, 403)\nresponse = self.app.post('/%s/movies' % self.api, headers=headers, data='')\nself.assertEqual(response.status_code, 403)\nresponse = self.app.put('/%s/movies/%s' % (self.api, self.movies[0]['id']),\n    headers=headers, content_type='application/json', data=json.dumps({\n    'field': 'value'}))\nself.assertEqual(response.status_code, 204)\nresponse = self.app.patch('/%s/movies/%s' % (self.api, self.movies[0]['id']\n    ), headers=headers, content_type='application/json', data=json.dumps({\n    'another_field': 'value'}))\nself.assertEqual(response.status_code, 204)\nresponse = self.app.delete('/%s/movies/%s' % (self.api, self.movies[0]['id'\n    ]), headers=headers)\nself.assertEqual(response.status_code, 403)\n"
+}

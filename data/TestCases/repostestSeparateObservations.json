@@ -1,0 +1,9 @@
+{
+    "functionName": "testSeparateObservations",
+    "className": "ObservationsTest",
+    "fileName": "/facebook_&_Ax/ax_&_core_&_tests_&_test_observation.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "obs = Observation(features=ObservationFeatures(parameters={'x': 20}), data=\n    ObservationData(means=np.array([1]), covariance=np.array([[2]]),\n    metric_names=['a']), arm_name='0_0')\nobs_feats, obs_data = separate_observations(observations=[obs])\nself.assertEqual(obs.features, ObservationFeatures(parameters={'x': 20}))\nself.assertEqual(obs.data, ObservationData(means=np.array([1]), covariance=\n    np.array([[2]]), metric_names=['a']))\nobs_feats, obs_data = separate_observations(observations=[obs], copy=True)\nself.assertEqual(obs.features, ObservationFeatures(parameters={'x': 20}))\nself.assertEqual(obs.data, ObservationData(means=np.array([1]), covariance=\n    np.array([[2]]), metric_names=['a']))\n"
+}

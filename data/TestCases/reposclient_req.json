@@ -1,0 +1,9 @@
+{
+    "functionName": "client_req",
+    "className": null,
+    "fileName": "/PRIArobotics_&_HedgehogServer/tests_&_test_server.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "@asynccontextmanager\nasync def connect(endpoint: str='inproc://controller'):\n    async with trio_aio_loop(), zmq_trio_ctx() as ctx:\n        with ReqSocket(ctx, zmq.REQ, side=ClientSide) as socket:\n            socket.connect(endpoint)\n            yield socket\nreturn connect\npytest.fixture"
+}

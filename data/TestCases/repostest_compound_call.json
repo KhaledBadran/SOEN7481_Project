@@ -1,0 +1,9 @@
+{
+    "functionName": "test_compound_call",
+    "className": "CallTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_call.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "t = Template(\n    \"\"\"\n\n        <%def name=\"bar()\">\n            this is bar\n        </%def>\n\n        <%def name=\"comp1()\">\n            this comp1 should not be called\n        </%def>\n\n        <%def name=\"foo()\">\n            foo calling comp1: ${caller.comp1(x=5)}\n            foo calling body: ${caller.body()}\n        </%def>\n\n        <%call expr=\"foo()\">\n            <%def name=\"comp1(x)\">\n                this is comp1, ${x}\n            </%def>\n            this is the body, ${comp1(6)}\n        </%call>\n        ${bar()}\n\n\"\"\"\n    )\nassert result_lines(t.render()) == ['foo calling comp1:',\n    'this is comp1, 5', 'foo calling body:', 'this is the body,',\n    'this is comp1, 6', 'this is bar']\n"
+}

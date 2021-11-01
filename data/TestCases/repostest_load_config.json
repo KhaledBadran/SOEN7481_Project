@@ -1,0 +1,9 @@
+{
+    "functionName": "test_load_config",
+    "className": "TestGPS",
+    "fileName": "/lukeWaninger_&_GSCAP/tests_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.assertRaises(FileNotFoundError, utils.load_config, 'notfound')\nfn = 'some_config'\nif not os.path.exists(fn):\n    fn = os.path.join('tests', fn)\ndestination = 'testConfig'\nmessage = self.capture_out(utils.load_config, (fn, dict(destination_path=\n    destination)))\nself.assertTrue('loaded key for' in message)\ncf = {}\nfor k, v in [list(map(lambda x: x.strip(), l.split('='))) for l in cf if l[\n    0] != '#']:\n    cf[k] = v\nself.assertTrue(all([(c in ['GooglePlacesAPI', 'DarkSkyAPI', 'YelpAPI']) for\n    c in cf.keys()]))\nself.assertTrue(os.path.exists(destination))\nos.remove(destination)\n"
+}

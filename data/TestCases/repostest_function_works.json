@@ -1,0 +1,9 @@
+{
+    "functionName": "test_function_works",
+    "className": "TestFunctional",
+    "fileName": "/means-to-meaning_&_FirstAlexaSkills/tests_&_scripts_tests_&_test_create_lambda_function.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "try:\n    proc = subprocess.Popen(self.cmd, stdout=subprocess.PIPE, stderr=\n        subprocess.PIPE)\n    std_out, std_err = proc.communicate()\n    std_out_str_list = str(std_out.decode()).splitlines()\n    std_out_str_list = [l.strip() for l in std_out_str_list]\n    std_out_str_list = [re.sub('arn:aws:lambda:.*', 'xxxxxxxxx', l) for l in\n        std_out_str_list]\n    std_err_str = str(std_err.decode())\n    is_stdout_asexpected = set(std_out_str_list) == set(self.ref_reply)\n    is_stderr_asexpected = std_err_str == ''\n    assert is_stdout_asexpected and is_stderr_asexpected and proc.returncode == 0\nexcept Exception:\n    assert False\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_data_container_should_iterate_through_batches_using_convolved",
+    "className": null,
+    "fileName": "/Neuraxio_&_Neuraxle/testing_&_test_data_container.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data_container = DataContainer(current_ids=[str(i) for i in range(100)],\n    data_inputs=np.array(list(range(100))), expected_outputs=np.array(list(\n    range(100, 200))))\nbatches = []\nfor b in data_container.convolved_1d(stride=10, kernel_size=10):\n    batches.append(b)\nfor i, batch in enumerate(batches):\n    assert np.array_equal(np.array(batch.data_inputs), np.array(list(range(\n        i * 10, i * 10 + 10))))\n    assert np.array_equal(np.array(batch.expected_outputs), np.array(list(\n        range(i * 10 + 100, i * 10 + 100 + 10))))\n"
+}

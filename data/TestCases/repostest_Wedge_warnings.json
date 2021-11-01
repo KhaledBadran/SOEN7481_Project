@@ -1,0 +1,9 @@
+{
+    "functionName": "test_Wedge_warnings",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Geometry_&_Wedge.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "wedge = Wedge()\nDet = Detector.TubeDetector1D(position=(1.0, 1, 0), direction=(1, 0, 0))\nAna = Analyser.FlatAnalyser(position=(0.5, 0, 0), direction=(1, 0, 1))\nwedge.detectors = Det\nwedge.analysers = Ana\nwith warnings.catch_warnings(record=True) as w:\n    warnings.simplefilter('always')\n    wedge.detectors = Det\n    wedge.analysers = Ana\n    assert len(w) == 2\n    assert issubclass(w[0].category, UserWarning)\n    assert issubclass(w[1].category, UserWarning)\n    assert 'The list of detectors is not empty! Appending new detector(s)' in str(\n        w[0].message)\n    assert 'The list of analysers is not empty! Appending new analyser(s)' in str(\n        w[1].message)\n"
+}

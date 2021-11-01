@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pager",
+    "className": null,
+    "fileName": "/vamf12_&_Glask/tests_&_test_sqlalchemy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "[db.session.add(Post()) for _ in range(1132)]\ndb.session.commit()\ndb.session.remove()\nassert Pagination(query=Post.query).items == Post.query.limit(10).offset(0\n    ).all()\nassert Pagination(query=Post.query, page=1).items == Post.query.limit(10\n    ).offset(10).all()\npagination = Pagination(query=Post.query, page=114)\nassert pagination.page == 113\npagination = Pagination(query=Post.query, page=-1)\nassert pagination.page == 0\n"
+}

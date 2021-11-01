@@ -1,0 +1,9 @@
+{
+    "functionName": "test_optimizer_copy",
+    "className": null,
+    "fileName": "/bytesandbrains_&_ProcessOptimizer/ProcessOptimizer_&_tests_&_test_optimizer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "base_estimator = ExtraTreesRegressor(random_state=2)\nopt = Optimizer([(-2.0, 2.0)], base_estimator, acq_func=acq_func,\n    n_initial_points=1, acq_optimizer='sampling')\nif 'ps' in acq_func:\n    opt.run(bench1_with_time, n_iter=3)\nelse:\n    opt.run(bench1, n_iter=3)\nopt_copy = opt.copy()\ncopied_estimator = opt_copy.base_estimator_\nif 'ps' in acq_func:\n    assert_true(isinstance(copied_estimator, MultiOutputRegressor))\n    is_multi = isinstance(copied_estimator.estimator, MultiOutputRegressor)\n    assert_false(is_multi)\nelse:\n    assert_false(isinstance(copied_estimator, MultiOutputRegressor))\nassert_array_equal(opt_copy.Xi, opt.Xi)\nassert_array_equal(opt_copy.yi, opt.yi)\npytest.mark.fast_testpytest.mark.parametrize('acq_func', ACQ_FUNCS_MIXED)"
+}

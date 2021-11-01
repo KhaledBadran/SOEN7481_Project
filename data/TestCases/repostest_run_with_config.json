@@ -1,0 +1,9 @@
+{
+    "functionName": "test_run_with_config",
+    "className": "TestBerserker",
+    "fileName": "/KIDJourney_&_Berserker/tests_&_test_core.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "config = {'concurrency': 100, 'method': 'get', 'options': {'cookies': {\n    'test_cookie': 'cookie_value'}, 'headers': {'name': 'value'}},\n    'request_nums': 1, 'url': 'http://localhost:5000'}\nresult = benchmark(**config)\nfor response in result.responses:\n    for cookie_pair in config['options']['cookies']:\n        assert _str(cookie_pair) in response.text\n    for header_pair in config['options']['headers'].items():\n        assert 'HTTP_{}={}'.format(header_pair[0], header_pair[1]\n            ) in response.text\n    assert self.get_count() == config['concurrency']\n"
+}

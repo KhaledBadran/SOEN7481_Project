@@ -1,0 +1,9 @@
+{
+    "functionName": "convertToHKL",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_DataSet.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Convert a given list og QPoints to QxQy from UB matrix of sample\n\n    Args:\n\n        - sample (MJOLNIR.Sample.Sample): Sample from which the UB matrix is to be used\n\n        - QxQy (list): List of HKL points to be converted\n\n    Returns:\n\n        - HKL (list): List of QxQy points in same shape as provided\n\n\n    \"\"\"\nQxQy = np.asarray(QxQy)\nshape = QxQy.shape\nif len(shape) == 1:\n    if shape[0] != 2:\n        raise AttributeError('Provided QxQy point is not 3D. Received: {}'.\n            format(QxQy))\n    QxQy = np.pad(QxQy, (0, 1), 'constant')\n    H, K, L = np.einsum('ij,j->i', sample.orientationMatrixINV, QxQy)\nelse:\n    if shape[-1] != 2:\n        raise AttributeError('Provided QxQy point is not 2D. Received: {}'.\n            format(QxQy))\n    Shape = np.asarray(shape)\n    Shape[-1] = 1\n    z = np.zeros(Shape)\n    QxQy = np.concatenate([QxQy, z], axis=-1)\n    H, K, L = np.einsum('ij,...j->i...', sample.orientationMatrixINV, QxQy)\nreturn np.array([H, K, L]).T\n"
+}

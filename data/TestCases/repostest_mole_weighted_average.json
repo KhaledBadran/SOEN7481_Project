@@ -1,0 +1,9 @@
+{
+    "functionName": "test_mole_weighted_average",
+    "className": "MixturesTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_phase_&_MixturesTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.ha.set_concentration(component=self.N2, values=0.5)\nself.ha.set_concentration(component=self.O2, values=0.5)\nself.ha.set_concentration(component=self.H2O, values=0.0)\nself.N2['pore.test'] = 3\nself.O2['pore.test'] = 3\nself.ha.add_model(propname='pore.blah', model=mods.phases.mixtures.\n    mole_weighted_average, prop='pore.test')\nassert 'pore.blah' not in self.ha.keys()\nself.H2O['pore.test'] = 3\nself.ha.add_model(propname='pore.blah', model=mods.phases.mixtures.\n    mole_weighted_average, prop='pore.test')\nassert 'pore.blah' in self.ha.keys()\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pydevd_log",
+    "className": null,
+    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_utilities.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from _pydev_bundle import pydev_log\ntry:\n    import StringIO as io\nexcept:\n    import io\nfrom _pydev_bundle.pydev_log import log_context\nstream = io.StringIO()\nwith log_context(0, stream=stream):\n    pydev_log.critical('always')\n    pydev_log.info('never')\nassert stream.getvalue() == 'always\\n'\nstream = io.StringIO()\nwith log_context(1, stream=stream):\n    pydev_log.critical('always')\n    pydev_log.info('this too')\nassert stream.getvalue() == \"\"\"always\nthis too\n\"\"\"\nstream = io.StringIO()\nwith log_context(0, stream=stream):\n    pydev_log.critical('always %s', 1)\nassert stream.getvalue() == 'always 1\\n'\nstream = io.StringIO()\nwith log_context(0, stream=stream):\n    pydev_log.critical('always %s %s', 1, 2)\nassert stream.getvalue() == 'always 1 2\\n'\nstream = io.StringIO()\nwith log_context(0, stream=stream):\n    pydev_log.critical('always %s %s', 1)\nassert stream.getvalue() == 'always %s %s - (1,)\\n'\nstream = io.StringIO()\nwith log_context(0, stream=stream):\n    try:\n        raise RuntimeError()\n    except:\n        pydev_log.exception('foo')\n    assert 'foo\\n' in stream.getvalue()\n    assert 'raise RuntimeError()' in stream.getvalue()\nstream = io.StringIO()\nwith log_context(0, stream=stream):\n    pydev_log.error_once('always %s %s', 1)\nassert stream.getvalue() == 'always %s %s - (1,)\\n'\n"
+}

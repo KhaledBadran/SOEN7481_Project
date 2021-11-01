@@ -1,0 +1,9 @@
+{
+    "functionName": "test_load_F42A",
+    "className": "StatoilTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_io_&_StatoilTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "path = Path(os.path.realpath(__file__), '../../../fixtures/ICL-SandPack(F42A)')\nproject = op.io.Statoil.load(path=path.resolve(), prefix='F42A')\nassert len(project) == 1\nnet = project.network\nassert net.Np == 1246\nassert net.Nt == 2654\nassert np.shape(net['pore.coords']) == (1246, 3)\nassert np.shape(net['throat.conns']) == (2654, 2)\nassert 'pore.radius' in net.keys()\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_maui_math_op_derivative",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_teledyne_&_test_maui.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Set math channel, derivative operator.\"\"\"\nwith expected_protocol(ik.teledyne.MAUI, [init,\n    \"F1:DEFINE EQN,'DERI(C1)',VERSCALE,1000000.0,VEROFFSET,0,ENABLEAUTOSCALE,ON\"\n    ,\n    \"F1:DEFINE EQN,'DERI(C3)',VERSCALE,5.0,VEROFFSET,1.0,ENABLEAUTOSCALE,OFF\"\n    ], [], sep='\\n') as osc:\n    osc.math[0].operator.derivative(0)\n    osc.math[0].operator.derivative(2, vscale=u.Quantity(5000, u.mV / u.s),\n        voffset=u.Quantity(60, u.V / u.min), autoscale=False)\n"
+}

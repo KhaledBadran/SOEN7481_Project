@@ -1,0 +1,9 @@
+{
+    "functionName": "_build_config",
+    "className": "TestIxnOffline",
+    "fileName": "/shmir_&_PyIxNetwork/tests_&_test_offline.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "self.ixn.new_config()\nself.logger.info('Build config with {} ports and {} interfaces per port'.\n    format(num_ports, num_ints))\nfor port_num in range(1, num_ports + 1):\n    port_name = 'Port {}'.format(port_num)\n    self.logger.info('Create Port \"{}\"'.format(port_name))\n    ixn_port = IxnPort(name=port_name, parent=self.ixn.root)\n    for int_num in range(1, num_ints + 1):\n        int_name = '{} int {}'.format(port_name, int_num)\n        self.logger.info('Build Interface \"{}\"'.format(int_name))\n        ixn_int = IxnInterface(name=int_name, parent=ixn_port)\n        ixn_int_eth = ixn_int.get_child_static('ethernet')\n        macAddress = '00:11:22:33:{}:{}'.format(port_num, int_num)\n        ixn_int_eth.set_attributes(macAddress=macAddress)\n        ixn_int_ip = IxnObject(parent=ixn_int, objType='ipv4')\n        ip = '1.2.{}.{}'.format(port_num, int_num)\n        ixn_int_ip.set_attributes(ip=ip)\nself.ixn.commit()\nixn_ports = OrderedDict()\nfor ixn_port in self.ixn.root.get_children('vport'):\n    ixn_ports[ixn_port] = ixn_port.get_children('interface')\nreturn ixn_ports\n"
+}

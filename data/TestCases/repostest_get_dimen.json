@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_dimen",
+    "className": null,
+    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_qa.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Get the plotting dimensions\n    Returns\n    -------\n\n    \"\"\"\nnpanels, maxp = 1, 25\npages, npp = qa.get_dimen(npanels, maxp=maxp)\nassert len(pages) == 1 and pages[0][0] * pages[0][1] == 1 and len(npp\n    ) == 1 and npp[0] == npanels\nnpanels, maxp = 5, 5\npages, npp = qa.get_dimen(npanels, maxp=maxp)\nassert len(pages) == 1 and pages[0][0] * pages[0][1] == 6 and len(npp\n    ) == 1 and npp[0] == npanels\nnpanels, maxp = 22, 8\npages, npp = qa.get_dimen(npanels, maxp=maxp)\nassert len(pages) == 3 and pages[0][0] * pages[0][1] == maxp and pages[1][0\n    ] * pages[1][1] == maxp\nassert len(npp) == 3 and npp[0] == maxp and npp[1] == maxp and npp[2] == 6\nnpanels, maxp = 22, 7\npages, npp = qa.get_dimen(npanels, maxp=maxp)\nassert len(pages) == 4 and pages[0][0] * pages[0][1] == maxp + 1 and pages[1][0\n    ] * pages[1][1] == maxp + 1 and pages[2][0] * pages[2][1\n    ] == maxp + 1 and pages[3][0] * pages[3][1] == 1\nassert len(npp) == 4 and npp[0] == maxp and npp[1] == maxp and npp[2\n    ] == maxp and npp[3] == 1\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "helper_test_flashqrcode",
+    "className": "UITestCase",
+    "fileName": "/AndreMiras_&_EtherollApp/src_&_etherollapp_&_tests_&_ui_&_test_etheroll_ui.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Verifies the flash QRCode screen loads and can flash codes.\"\"\"\ncontroller = app.root\nwith patch_core_camera():\n    controller.load_flash_qr_code()\nadvance_frames_for_screen()\nscreen_manager = controller.screen_manager\nself.assertEqual(screen_manager.current, 'flashqrcode')\nflashqrcode_screen = screen_manager.get_screen('flashqrcode')\nzbarcam = flashqrcode_screen.ids.zbarcam_id\nfixture_path = os.path.join(BASE_DIR, 'tests', 'address_qrcode.png')\ntexture = Image(fixture_path).texture\ncamera = mock.Mock(texture=texture)\nzbarcam._on_texture(camera)\nswitch_account_screen = controller.switch_account_screen\nsend_screen = switch_account_screen.ids.send_id\nself.assertEqual(send_screen.ids.send_to_id.text,\n    '0x46044beaa1e985c67767e04de58181de5daaa00f')\nadvance_frames_for_screen()\n"
+}

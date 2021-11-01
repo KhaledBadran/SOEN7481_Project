@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fit_and_score_keras_model",
+    "className": null,
+    "fileName": "/goeckslab_&_Galaxy-ML/galaxy_ml_&_tests_&_test_model_validations.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "np.random.seed(42)\nconfig = train_model.get_config()\nregressor = KerasGClassifier(config, optimizer='adam', metrics=[],\n    batch_size=32, epochs=30, seed=42)\nscorer = SCORERS['accuracy']\ntrain, test = next(KFold(n_splits=5).split(X, y))\nassert np.array_equal(test, np.arange(154)), test\nnew_params = {'layers_0_Dense__config__kernel_initializer__config__seed': 0,\n    'layers_1_Dense__config__kernel_initializer__config__seed': 0}\nparameters = new_params\nfit_params = {'shuffle': False}\ngot1 = _fit_and_score(regressor, X, y, scorer, train, test, verbose=0,\n    parameters=parameters, fit_params=fit_params)\nassert round(got1[0], 1) == 0.7, got1\n"
+}

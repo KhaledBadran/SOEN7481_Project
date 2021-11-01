@@ -1,0 +1,9 @@
+{
+    "functionName": "test_plot_metrics",
+    "className": "TestBasic",
+    "fileName": "/microsoft_&_LightGBM/tests_&_python_package_test_&_test_plotting.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "test_data = lgb.Dataset(self.X_test, self.y_test, reference=self.train_data)\nself.params.update({'metric': {'binary_logloss', 'binary_error'}})\nevals_result0 = {}\ngbm0 = lgb.train(self.params, self.train_data, valid_sets=[self.train_data,\n    test_data], valid_names=['v1', 'v2'], num_boost_round=10, evals_result=\n    evals_result0, verbose_eval=False)\nax0 = lgb.plot_metric(evals_result0)\nself.assertIsInstance(ax0, matplotlib.axes.Axes)\nself.assertEqual(ax0.get_title(), 'Metric during training')\nself.assertEqual(ax0.get_xlabel(), 'Iterations')\nself.assertIn(ax0.get_ylabel(), {'binary_logloss', 'binary_error'})\nax0 = lgb.plot_metric(evals_result0, metric='binary_error')\nax0 = lgb.plot_metric(evals_result0, metric='binary_logloss', dataset_names\n    =['v2'])\nevals_result1 = {}\ngbm1 = lgb.train(self.params, self.train_data, num_boost_round=10,\n    evals_result=evals_result1, verbose_eval=False)\nself.assertRaises(ValueError, lgb.plot_metric, evals_result1)\ngbm2 = lgb.LGBMClassifier(n_estimators=10, num_leaves=3, silent=True)\ngbm2.fit(self.X_train, self.y_train, eval_set=[(self.X_test, self.y_test)],\n    verbose=False)\nax2 = lgb.plot_metric(gbm2, title=None, xlabel=None, ylabel=None)\nself.assertIsInstance(ax2, matplotlib.axes.Axes)\nself.assertEqual(ax2.get_title(), '')\nself.assertEqual(ax2.get_xlabel(), '')\nself.assertEqual(ax2.get_ylabel(), '')\nunittest.skipIf(not MATPLOTLIB_INSTALLED, 'matplotlib is not installed')"
+}

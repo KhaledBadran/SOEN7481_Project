@@ -1,0 +1,9 @@
+{
+    "functionName": "test_file_with_col_type_each",
+    "className": "TestCommandLine",
+    "fileName": "/kenfar_&_DataGristle/scripts_&_tests_&_test_gristle_freaker_cmd.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cmd = \"%s -i %s --col-type each -d '|' -o %s \" % (os.path.join(script_dir,\n    'gristle_freaker'), self.easy_fqfn, self.out_fqfn)\nrunner = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.\n    PIPE, close_fds=True, shell=True)\n_ = runner.communicate()[0]\nassert runner.returncode == 0\nfor rec in fileinput.input(self.out_fqfn):\n    fields = rec[:-1].split('-')\n    col = fields[0].strip()\n    val = fields[1].strip()\n    cnt = int(fields[2])\n    assert len(fields) == 3\n    if col == 'col:000':\n        assert 0 <= int(val) < 100\n        assert int(cnt) == 1\n    elif col == 'col:001':\n        assert val == 'A'\n        assert int(cnt) == 100\n    elif col == 'col:002':\n        assert val == 'B'\n        assert int(cnt) == 100\n    elif col == 'col:003':\n        assert val == 'C'\n        assert int(cnt) == 100\nfileinput.close()\nrunner.stdin.close()\n"
+}

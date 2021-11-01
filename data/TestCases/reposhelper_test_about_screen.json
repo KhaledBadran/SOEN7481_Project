@@ -1,0 +1,9 @@
+{
+    "functionName": "helper_test_about_screen",
+    "className": "UITestCase",
+    "fileName": "/AndreMiras_&_EtherollApp/src_&_etherollapp_&_tests_&_ui_&_test_etheroll_ui.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Verifies the about screen loads and shows infos.\"\"\"\ncontroller = app.root\nscreen_manager = controller.screen_manager\nscreen = screen_manager.children[0]\nself.assertEqual(screen.name, 'roll_screen')\nscreen_manager.current = 'about_screen'\nadvance_frames_for_screen()\nscreen = screen_manager.children[0]\nself.assertEqual(screen.name, 'about_screen')\nabout_screen_manager = screen.children[0].children[1]\nabout_overview = about_screen_manager.get_screen('about_overview')\nabout_content = about_overview.children[0].children[0].text\nself.assertTrue('EtherollApp version: ' in about_content)\nself.assertTrue('https://github.com/AndreMiras/EtherollApp' in about_content)\nload_roll_screen(screen_manager)\n"
+}

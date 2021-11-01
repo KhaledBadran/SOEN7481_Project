@@ -1,0 +1,9 @@
+{
+    "functionName": "test_unsupported_settings",
+    "className": "TestLocallyConnected2DLayer",
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_local.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from lasagne.layers import LocallyConnected2DLayer\ninput_layer = DummyInputLayer((10, 2, 4, 4))\nfor pad in ('valid', 'full', 1):\n    with pytest.raises(NotImplementedError) as exc:\n        LocallyConnected2DLayer(input_layer, 2, 3, pad=pad)\n    assert \"requires pad='same'\" in exc.value.args[0]\nwith pytest.raises(NotImplementedError) as exc:\n    LocallyConnected2DLayer(input_layer, 2, 3, stride=2)\nassert 'requires stride=1 / (1, 1)' in exc.value.args[0]\n"
+}

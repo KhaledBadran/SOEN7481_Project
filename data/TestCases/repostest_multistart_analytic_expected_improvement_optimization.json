@@ -1,0 +1,9 @@
+{
+    "functionName": "test_multistart_analytic_expected_improvement_optimization",
+    "className": "TestExpectedImprovement",
+    "fileName": "/Yelp_&_MOE/moe_&_tests_&_optimal_learning_&_python_&_python_version_&_expected_improvement_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Check that multistart optimization (gradient descent) can find the optimum point to sample (using 1D analytic EI).\"\"\"\nnumpy.random.seed(3148)\nindex = numpy.argmax(numpy.greater_equal(self.num_sampled_list, 20))\ndomain, gaussian_process = self.gp_test_environments[index]\nmax_num_steps = 200\nmax_num_restarts = 5\nnum_steps_averaged = 0\ngamma = 0.2\npre_mult = 1.5\nmax_relative_change = 1.0\ntolerance = 1e-07\ngd_parameters = GradientDescentParameters(max_num_steps, max_num_restarts,\n    num_steps_averaged, gamma, pre_mult, max_relative_change, tolerance)\nnum_multistarts = 3\npoints_to_sample = domain.generate_random_point_in_domain()\nei_eval = ExpectedImprovement(gaussian_process, points_to_sample)\nexpanded_domain = TensorProductDomain([ClosedInterval(-4.0, 2.0)] * self.dim)\nnum_to_sample = 1\nrepeated_domain = RepeatedDomain(ei_eval.num_to_sample, expanded_domain)\nei_optimizer = GradientDescentOptimizer(repeated_domain, ei_eval, gd_parameters\n    )\nbest_point = multistart_expected_improvement_optimization(ei_optimizer,\n    num_multistarts, num_to_sample)\nei_eval.current_point = best_point\ngradient = ei_eval.compute_grad_expected_improvement()\nself.assert_vector_within_relative(gradient, numpy.zeros(gradient.shape),\n    tolerance)\nassert repeated_domain.check_point_inside(best_point) is True\n"
+}

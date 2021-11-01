@@ -1,0 +1,9 @@
+{
+    "functionName": "test_GaussianPSF_hash_roundtrip",
+    "className": null,
+    "fileName": "/OpenSMFS_&_PyBroMo/pybromo_&_tests_&_test_psflib.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "psf = pbm.GaussianPSF()\nwith tables.open_file('psfgtest.h5', mode='w') as h5:\n    psf.to_hdf5(h5)\nwith tables.open_file('psfgtest.h5', mode='r') as h5:\n    a = h5.get_node('/gauss_psf_params')\n    assert pbm.GaussianPSF(psf_pytables=a).hash() == psf.hash()\n"
+}

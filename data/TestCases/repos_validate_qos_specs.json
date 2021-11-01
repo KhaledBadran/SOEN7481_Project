@@ -1,0 +1,9 @@
+{
+    "functionName": "_validate_qos_specs",
+    "className": "CITestProvisioning",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Validate return contents of qos specs requests.\n\n        :param iops: host_io_limit_io_sec reference value -- str\n        :param mbps: host_io_limit_mb_sec reference value -- str\n        :param distribution: dynamic_distribution reference value -- str\n        :param qos_specs: qos update result to validate -- dict\n        \"\"\"\nself.assertIsInstance(qos_specs, dict)\nself.assertIn(constants.HOST_IO_LIMIT_IO_SEC, qos_specs)\nself.assertIn(constants.HOST_IO_LIMIT_MB_SEC, qos_specs)\nself.assertIn(constants.DYNAMIC_DISTRIBUTION, qos_specs)\nself.assertIsInstance(qos_specs[constants.HOST_IO_LIMIT_IO_SEC], str)\nself.assertIsInstance(qos_specs[constants.HOST_IO_LIMIT_MB_SEC], str)\nself.assertIsInstance(qos_specs[constants.DYNAMIC_DISTRIBUTION], str)\nself.assertEqual(iops, qos_specs[constants.HOST_IO_LIMIT_IO_SEC])\nself.assertEqual(mbps, qos_specs[constants.HOST_IO_LIMIT_MB_SEC])\nself.assertEqual(distribution, qos_specs[constants.DYNAMIC_DISTRIBUTION])\n"
+}

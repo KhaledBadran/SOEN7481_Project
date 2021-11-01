@@ -1,0 +1,9 @@
+{
+    "functionName": "custom_nonconvex_kelly",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_custom_objectives.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "def kelly_objective(w, e_returns, cov_matrix, k=3):\n    variance = np.dot(w.T, np.dot(cov_matrix, w))\n    objective = variance * 0.5 * k - np.dot(w, e_returns)\n    return objective\nlower_bounds, upper_bounds = 0.01, 0.3\nef = setup_efficient_frontier()\nweights = ef.nonconvex_objective(kelly_objective, objective_args=(ef.\n    expected_returns, ef.cov_matrix, 3), constraints=[{'type': 'eq', 'fun':\n    lambda w: np.sum(w) - 1}, {'type': 'ineq', 'fun': lambda w: w -\n    lower_bounds}, {'type': 'ineq', 'fun': lambda w: upper_bounds - w}])\nfor w in weights.values():\n    assert w >= lower_bounds - 1e-08 and w <= upper_bounds + 1e-08\n"
+}

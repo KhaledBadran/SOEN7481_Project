@@ -1,0 +1,9 @@
+{
+    "functionName": "test_plot_probabilities",
+    "className": null,
+    "fileName": "/tvdboom_&_ATOM/tests_&_test_plots.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Assert that the plot_probabilities method work as intended.\"\"\"\ntrainer = TrainerRegressor(['ols', 'ridge'], metric='r2')\ntrainer.run(reg_train, reg_test)\npytest.raises(PermissionError, trainer.plot_probabilities)\ntrainer = TrainerClassifier('PA', metric='f1')\ntrainer.run(bin_train, bin_test)\npytest.raises(AttributeError, trainer.plot_probabilities)\ntrainer = TrainerClassifier(['LDA', 'LGB'], metric='f1')\npytest.raises(NotFittedError, trainer.plot_probabilities, models='LDA')\ntrainer.run(bin_train, bin_test)\ntrainer.plot_probabilities(filename=FILE_DIR + 'prob1', display=False)\ntrainer.lda.plot_probabilities(filename=FILE_DIR + 'prob2', display=False)\nassert glob.glob(FILE_DIR + 'prob1.png')\nassert glob.glob(FILE_DIR + 'prob2.png')\ny = [('a' if i == 0 else 'b') for i in y_bin]\natom = ATOMClassifier(X_bin, y, random_state=1)\natom.run('lda', metric='f1')\natom.plot_probabilities(target='b', filename=FILE_DIR + 'prob3', display=False)\natom.lda.plot_probabilities(filename=FILE_DIR + 'prob4', display=False)\nassert glob.glob(FILE_DIR + 'prob3.png')\nassert glob.glob(FILE_DIR + 'prob4.png')\n"
+}

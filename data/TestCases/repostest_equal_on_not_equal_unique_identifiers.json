@@ -1,0 +1,9 @@
+{
+    "functionName": "test_equal_on_not_equal_unique_identifiers",
+    "className": "TestDeriveKeyRequestPayload",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_derive_key.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the equality operator returns False when comparing two\n        DeriveKey request payloads with different sets of unique identifiers.\n        \"\"\"\na = payloads.DeriveKeyRequestPayload(unique_identifiers=[\n    'fb4b5b9c-6188-4c63-8142-fe9c328129fc'])\nb = payloads.DeriveKeyRequestPayload(unique_identifiers=[\n    '5c9b81ef-4ee5-42cd-ba2d-c002fdd0c7b3'])\nself.assertFalse(a == b)\nself.assertFalse(b == a)\na = payloads.DeriveKeyRequestPayload(unique_identifiers=[\n    'fb4b5b9c-6188-4c63-8142-fe9c328129fc',\n    '5c9b81ef-4ee5-42cd-ba2d-c002fdd0c7b3',\n    '1703250b-4d40-4de2-93a0-c494a1d4ae40'])\nb = payloads.DeriveKeyRequestPayload(unique_identifiers=[\n    '1703250b-4d40-4de2-93a0-c494a1d4ae40',\n    '5c9b81ef-4ee5-42cd-ba2d-c002fdd0c7b3',\n    'fb4b5b9c-6188-4c63-8142-fe9c328129fc'])\nself.assertFalse(a == b)\nself.assertFalse(b == a)\na = payloads.DeriveKeyRequestPayload(unique_identifiers=[\n    'fb4b5b9c-6188-4c63-8142-fe9c328129fc',\n    '5c9b81ef-4ee5-42cd-ba2d-c002fdd0c7b3',\n    '1703250b-4d40-4de2-93a0-c494a1d4ae40'])\nb = payloads.DeriveKeyRequestPayload(unique_identifiers=[])\nself.assertFalse(a == b)\nself.assertFalse(b == a)\n"
+}

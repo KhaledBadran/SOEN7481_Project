@@ -1,0 +1,9 @@
+{
+    "functionName": "test_write_missing_attestation_type",
+    "className": "TestAttestationCredential",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_credentials.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a ValueError gets raised when attempting to write an\n        AttestationCredential struct missing nonce data to a data stream.\n        \"\"\"\ncredential = objects.AttestationCredential(nonce=objects.Nonce(nonce_id=\n    b'\\x01', nonce_value=b'\\x00\\x01\\x02\\x03\\x04\\x05\\x06\\x07'),\n    attestation_measurement=b'\\xff\\xff\\xff\\xff\\xff\\xff\\xff\\xff',\n    attestation_assertion=b'\\x11\\x11\\x11\\x11\\x11\\x11\\x11\\x11')\nstream = utils.BytearrayStream()\nargs = stream,\nself.assertRaisesRegex(ValueError,\n    'Attestation credential struct is missing the attestation type.',\n    credential.write, *args)\n"
+}

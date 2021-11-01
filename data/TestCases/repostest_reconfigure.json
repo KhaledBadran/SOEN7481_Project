@@ -1,0 +1,9 @@
+{
+    "functionName": "test_reconfigure",
+    "className": null,
+    "fileName": "/goodmami_&_penman/tests_&_test_layout.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "g = codec.decode(\n    \"\"\"\n        (a / alpha\n           :ARG0 b\n           :ARG1 (g / gamma\n                    :ARG0-of (b / beta)))\"\"\"\n    )\nassert reconfigure(g) == Tree(('a', [('/', 'alpha'), (':ARG0', ('b', [('/',\n    'beta')])), (':ARG1', ('g', [('/', 'gamma'), (':ARG0-of', 'b')]))]))\nassert reconfigure(g, key=model.canonical_order) == Tree(('a', [('/',\n    'alpha'), (':ARG0', ('b', [('/', 'beta'), (':ARG0', ('g', [('/',\n    'gamma')]))])), (':ARG1', 'g')]))\n"
+}

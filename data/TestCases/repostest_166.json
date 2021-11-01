@@ -1,0 +1,9 @@
+{
+    "functionName": "test_166",
+    "className": "MyTest",
+    "fileName": "/andrewferlitsch_&_Gap/tests_&_image_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Images - uint8 setting/next() \"\"\"\nimages = Images(['files/0_100.jpg', 'files/1_100.jpg', 'files/2_100.jpg',\n    'files/3_100.jpg'], 1, config=['nostore'])\nimages.split = 0.5\nimage, label = next(images)\nself.assertEquals(type(image[0][0][0]), np.float32)\nimages = Images(['files/0_100.jpg', 'files/1_100.jpg', 'files/2_100.jpg',\n    'files/3_100.jpg'], 1, config=['nostore', 'uint8'])\nself.assertEquals(type(images[0].data[0][0][0]), np.uint8)\nimages.split = 0.5\nimage, label = next(images)\nself.assertEquals(type(image[0][0][0]), np.float32)\nimages = Images(['files/0_100.jpg', 'files/1_100.jpg', 'files/2_100.jpg',\n    'files/3_100.jpg'], 1, config=['nostore', 'grayscale', 'uint8'])\nself.assertEquals(type(images[0].data[0][0]), np.uint8)\nimages.split = 0.5\nimage, label = next(images)\nself.assertEquals(type(image[0][0]), np.float32)\nimages = Images(['files/0_100.jpg', 'files/1_100.jpg', 'files/2_100.jpg',\n    'files/3_100.jpg'], 1, config=['nostore', 'flatten', 'uint8'])\nself.assertEquals(type(images[0].data[0]), np.uint8)\nimages.split = 0.5\nimage, label = next(images)\nself.assertEquals(type(image[0]), np.float32)\n"
+}

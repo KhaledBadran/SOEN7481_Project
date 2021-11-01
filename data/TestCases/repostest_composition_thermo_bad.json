@@ -1,0 +1,9 @@
+{
+    "functionName": "test_composition_thermo_bad",
+    "className": "TestValidator",
+    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_validation.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test to make sure that bad thermo fields raise an error\n        \"\"\"\nthermo = properties['datapoints'][0]['composition']['species'][0]['thermo']\nthermo['T_ranges'] = [1000.0, 200.0, 5000.0]\nproperties['datapoints'][0]['composition']['species'][0]['thermo'] = thermo\nassert not v.validate(properties)\nthermo['T_ranges'] = [200.0, 5000.0, 1000.0]\nproperties['datapoints'][0]['composition']['species'][0]['thermo'] = thermo\nassert not v.validate(properties)\nthermo['T_ranges'] = [200.0, '1000 K', 5000.0]\nproperties['datapoints'][0]['composition']['species'][0]['thermo'] = thermo\nassert not v.validate(properties)\npytest.mark.parametrize('properties', ['testfile_st_thermo.yaml'], indirect\n    =['properties'])"
+}

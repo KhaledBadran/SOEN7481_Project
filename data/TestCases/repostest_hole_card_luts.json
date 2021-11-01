@@ -1,0 +1,9 @@
+{
+    "functionName": "test_hole_card_luts",
+    "className": "TestLutHolderHoldem",
+    "fileName": "/EricSteinberger_&_PokerRL/test_&_game_&_test_look_up_table.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" tests reversibility \"\"\"\nlh = DiscretizedNLHoldem.get_lut_holder()\nfor h in range(1326):\n    _c_1d = lh.get_1d_hole_cards_from_range_idx(h)\n    _c_2d = lh.get_2d_hole_cards_from_range_idx(h)\n    c_1d = lh.LUT_IDX_2_HOLE_CARDS[h]\n    c_2d = np.array([lh.LUT_1DCARD_2_2DCARD[c_1d[0]], lh.\n        LUT_1DCARD_2_2DCARD[c_1d[1]]], dtype=np.int8)\n    assert np.array_equal(c_1d, _c_1d)\n    assert np.array_equal(c_2d, _c_2d)\nfor c1 in range(51):\n    for c2 in range(c1 + 1, 50):\n        cc1 = lh.LUT_1DCARD_2_2DCARD[c1]\n        cc2 = lh.LUT_1DCARD_2_2DCARD[c2]\n        hole_cards = np.array([cc1, cc2], dtype=np.int8)\n        assert lh.get_range_idx_from_hole_cards(hole_cards\n            ) == lh.LUT_HOLE_CARDS_2_IDX[c1, c2]\n"
+}

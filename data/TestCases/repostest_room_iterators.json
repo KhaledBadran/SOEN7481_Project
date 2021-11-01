@@ -1,0 +1,9 @@
+{
+    "functionName": "test_room_iterators",
+    "className": null,
+    "fileName": "/Manishearth_&_ChatExchange/tests_&_test_rooms.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "client = chatexchange.Client('stackexchange.com', live_testing.email,\n    live_testing.password)\nme = client.get_me()\nsandbox = client.get_room(1)\nmy_message = None\nwith sandbox.new_messages() as messages:\n    sandbox.send_message('hello worl')\n    for message in messages:\n        if message.owner is me:\n            my_message = message\n            assert my_message.content == 'hello worl'\n            break\n        else:\n            logger.info('ignoring message: %r', message)\nwith sandbox.new_events(MessageEdited) as edits:\n    my_message.edit('hello world')\n    for edit in edits:\n        assert isinstance(edit, MessageEdited)\n        if edit.message is my_message:\n            assert my_message.content == 'hello world'\n            break\nwith sandbox.new_events(MessageDeleted) as deletions:\n    my_message.delete()\n    for deletion in deletions:\n        assert isinstance(deletion, MessageDeleted)\n        if deletion.message is my_message:\n            break\npytest.mark.timeout(240)"
+}

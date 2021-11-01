@@ -1,0 +1,9 @@
+{
+    "functionName": "test_messaging_from_timer",
+    "className": null,
+    "fileName": "/Gwildor_&_Pyromancer/pyromancer_&_test_&_test_objects.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "instance = Timer(None)\nmatch = Match(None, None, c)\ntimers = []\ninstance.send_messages((datetime.timedelta(seconds=3), 'User', 'Hi'), match,\n    timers)\nassert len(timers) == 1\nassert isinstance(timers[0], Timer)\nassert timers[0].scheduled == datetime.timedelta(seconds=3)\nassert timers[0].msg_tuple == ('User', 'Hi', (), {})\ninstance.send_messages(('User', 'Hello {}', 'world'), match, timers)\nassert c.last == 'PRIVMSG User :Hello world'\nmock_connection"
+}

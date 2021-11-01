@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ecg_delineate",
+    "className": null,
+    "fileName": "/neuropsychology_&_NeuroKit/tests_&_tests_ecg.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sampling_rate = 1000\necg = nk.ecg_simulate(duration=20, sampling_rate=sampling_rate, random_state=42\n    )\n_, rpeaks = nk.ecg_peaks(ecg, sampling_rate=sampling_rate)\nnumber_rpeaks = len(rpeaks['ECG_R_Peaks'])\n_, waves_derivative = nk.ecg_delineate(ecg, rpeaks, sampling_rate=sampling_rate\n    )\nassert len(waves_derivative['ECG_P_Peaks']) == number_rpeaks\nassert len(waves_derivative['ECG_Q_Peaks']) == number_rpeaks\nassert len(waves_derivative['ECG_S_Peaks']) == number_rpeaks\nassert len(waves_derivative['ECG_T_Peaks']) == number_rpeaks\nassert len(waves_derivative['ECG_P_Onsets']) == number_rpeaks\nassert len(waves_derivative['ECG_T_Offsets']) == number_rpeaks\n_, waves_cwt = nk.ecg_delineate(ecg, rpeaks, sampling_rate=sampling_rate,\n    method='cwt')\nassert np.allclose(len(waves_cwt['ECG_P_Peaks']), 22, atol=1)\nassert np.allclose(len(waves_cwt['ECG_T_Peaks']), 22, atol=1)\nassert np.allclose(len(waves_cwt['ECG_R_Onsets']), 23, atol=1)\nassert np.allclose(len(waves_cwt['ECG_R_Offsets']), 23, atol=1)\nassert np.allclose(len(waves_cwt['ECG_P_Onsets']), 22, atol=1)\nassert np.allclose(len(waves_cwt['ECG_P_Offsets']), 22, atol=1)\nassert np.allclose(len(waves_cwt['ECG_T_Onsets']), 22, atol=1)\nassert np.allclose(len(waves_cwt['ECG_T_Offsets']), 22, atol=1)\n"
+}

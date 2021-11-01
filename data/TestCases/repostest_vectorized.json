@@ -1,0 +1,9 @@
+{
+    "functionName": "test_vectorized",
+    "className": null,
+    "fileName": "/PaulHancock_&_Aegean/tests_&_test_cluster.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that norm_dist and sky_dist can be vectorized\"\"\"\nX = np.random.RandomState(0).rand(20, 6)\nXr = np.rec.array(X.view([('ra', 'f8'), ('dec', 'f8'), ('a', 'f8'), ('b',\n    'f8'), ('pa', 'f8'), ('peak_flux', 'f8')]).ravel())\ndef to_ss(x):\n    \"\"\"Convert numpy.rec to SimpleSource\"\"\"\n    out = SimpleSource()\n    for f in Xr.dtype.names:\n        setattr(out, f, getattr(x, f))\n    return out\nfor dist in [cluster.norm_dist, cluster.sky_dist]:\n    x0 = Xr[0]\n    dx0all = dist(x0, Xr)\n    for i, xi in enumerate(Xr):\n        dx0xi = dist(x0, xi)\n        if not np.isclose(dx0xi, dx0all[i], atol=0):\n            raise AssertionError()\n        if not np.isclose(dx0xi, dist(to_ss(x0), to_ss(xi)), atol=0):\n            raise AssertionError()\n"
+}

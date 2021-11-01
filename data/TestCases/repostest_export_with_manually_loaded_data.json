@@ -1,0 +1,9 @@
+{
+    "functionName": "test_export_with_manually_loaded_data",
+    "className": "TestExportingPhase2",
+    "fileName": "/ornlneutronimaging_&_NeuNorm/tests_&_NeuNorm_&_export_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"assert the file is correctly exported when loaded manually\"\"\"\nsample_path = self.data_path + '/fits/sample'\no_norm = Normalization()\no_norm.load(folder=sample_path, auto_gamma_filter=False)\ndata = o_norm.data['sample']['data'][0]\nfile_name = os.path.join(self.data_path, '/fits/sample/image001.fits')\no_norm_1 = Normalization()\no_norm_1.load(data=data, auto_gamma_filter=False)\no_norm_1.data['sample']['file_name'] = [file_name]\n_sample_0 = o_norm.data['sample']['data'][0]\no_norm_1.export(folder=self.export_folder, data_type='sample', file_type='fits'\n    )\noutput_file = os.path.join(self.export_folder, 'image001.fits')\nself.assertTrue(os.path.exists(output_file))\no_norm_2 = Normalization()\no_norm_2.load(folder=self.export_folder, auto_gamma_filter=False)\n_sample_reloaded = o_norm_2.data['sample']['data'][0]\nself.assertTrue((_sample_0 == _sample_reloaded).all())\n"
+}

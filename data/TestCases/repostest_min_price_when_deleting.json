@@ -1,0 +1,9 @@
+{
+    "functionName": "test_min_price_when_deleting",
+    "className": null,
+    "fileName": "/nabicht_&_Buttonwood/tests_&_test_MarketObjects_&_test_Orderbooks_&_test_sidedict.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sd = SideDict()\nassert sd.max_price() is None\nsd[Price('100.0')] = 1\nsd[Price('99.99')] = 1\nsd[Price('100.001')] = 1\nsd[Price('100.01')] = 1\nsd[Price('100.02')] = 1\nassert sd.min_price() == Price('99.99')\ndel sd[Price('99.99')]\nassert sd.min_price() == Price('100.0')\ndel sd[Price('100.01')]\nassert sd.min_price() == Price('100.00')\ndel sd[Price('100.02')]\nassert sd.min_price() == Price('100.00')\ndel sd[Price('100.0')]\nassert sd.min_price() == Price('100.001')\ndel sd[Price('100.001')]\nassert sd.min_price() is None\n"
+}

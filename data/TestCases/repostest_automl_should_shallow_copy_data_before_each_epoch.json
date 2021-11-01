@@ -1,0 +1,9 @@
+{
+    "functionName": "test_automl_should_shallow_copy_data_before_each_epoch",
+    "className": null,
+    "fileName": "/Neuraxio_&_Neuraxle/testing_&_metaopt_&_test_automl.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data_inputs = np.random.randint(0, 100, (100, 3))\nexpected_outputs = np.random.randint(0, 3, 100)\nfrom sklearn.preprocessing import StandardScaler\np = Pipeline([SKLearnWrapper(StandardScaler()), SKLearnWrapper(LinearSVC(),\n    HyperparameterSpace({'C': RandInt(0, 10000)}))])\nauto_ml = AutoML(p, validation_splitter=ValidationSplitter(0.2),\n    refit_trial=True, n_trials=10, epochs=10, cache_folder_when_no_handle=\n    'cache', scoring_callback=ScoringCallback(mean_squared_error,\n    higher_score_is_better=False), callbacks=[MetricCallback('mse',\n    metric_function=mean_squared_error, higher_score_is_better=False)],\n    hyperparams_repository=InMemoryHyperparamsRepository(cache_folder='cache'))\nrandom_search = auto_ml.fit(data_inputs, expected_outputs)\nbest_model = random_search.get_best_model()\nassert isinstance(best_model, Pipeline)\n"
+}

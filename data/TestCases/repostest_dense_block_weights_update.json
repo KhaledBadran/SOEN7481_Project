@@ -1,0 +1,9 @@
+{
+    "functionName": "test_dense_block_weights_update",
+    "className": null,
+    "fileName": "/ElPapi42_&_DeepBay/tests_&_test_dense_block.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tf.random.set_seed(156)\ntest_input = np.array([[1.0, 1.0, 0.5], [0.1, -1.0, -0.5]])\ntest_output = np.array([[0.94], [0.15]])\nblock = DenseBlock(units=1, use_batch_norm=True)\nblock.compile(tf.keras.optimizers.Adam(), tf.keras.losses.MeanSquaredError())\nblock.train_on_batch(test_input, test_output)\ninitial_params = block.dense.get_weights()\nblock.train_on_batch(test_input, test_output)\nfinal_params = block.dense.get_weights()\nwas_updated = (initial_params[0] != final_params[0]).all() and (initial_params\n    [1] != final_params[1]).all()\nassert was_updated\n"
+}

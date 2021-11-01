@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_performance_stats_request_body_other_tgt_id",
+    "className": "PyU4VPerformanceTest",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_performance.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test get_performance_stats with request body variant 2.\"\"\"\narray_category_info = CATEGORY_MAP.get(pc.ARRAY.upper())\narray_all_metrics = array_category_info.get(pc.METRICS_ALL)\nref_payload = {'symmetrixId': self.p_data.array, 'dataFormat': pc.MAXIMUM,\n    'startDate': str(self.time_now), 'endDate': str(self.time_now),\n    'metrics': array_all_metrics, 'directorId': self.p_data.fe_dir_id,\n    'portId': self.p_data.fe_port_id}\nwith mock.patch.object(self.perf, 'post_request', return_value=self.p_data.\n    perf_metrics_resp) as mck_request:\n    self.perf.get_performance_stats(category=pc.ARRAY, metrics=pc.ALL,\n        array_id=self.p_data.array, start_time=self.time_now, end_time=self\n        .time_now, recency=True, data_format='Maximum', request_body={\n        'directorId': self.p_data.fe_dir_id, 'portId': self.p_data.fe_port_id})\n    mck_request.assert_called_once_with(category=pc.PERFORMANCE,\n        resource_level=pc.ARRAY, resource_type=pc.METRICS, payload=ref_payload)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_histogram_dimension",
+    "className": null,
+    "fileName": "/mortele_&_OccamTools/test_&_test_histogram.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data = OccamData(fort1_file, silent=True)\nfor dim in (0, 1, 2, 'x', 'y', 'z', None):\n    hist, _ = occamhist(data, dimension=dim)\n    assert isinstance(hist, np.ndarray)\nfor dim in (-1, 3, 4):\n    caught = False\n    try:\n        occamhist(data, dimension=dim)\n    except ValueError:\n        caught = True\n    assert caught is True\nfor dim in ('a', 'not', 'here be dragons'):\n    caught = False\n    try:\n        occamhist(data, dimension=dim)\n    except TypeError:\n        caught = True\n    assert caught is True\nwith pytest.warns(UserWarning, match='dimension keyword'):\n    occamhist(data.x, dimension=1)\n"
+}

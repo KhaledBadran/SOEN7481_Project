@@ -1,0 +1,9 @@
+{
+    "functionName": "test_verify_muslces_have_evidence",
+    "className": "EvidenceCoverageTest",
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_EvidenceCoverageTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" For each muscle in owmeta, verify\n        that there is supporting evidence\"\"\"\nmuscles = list(self.qctx(Worm)().muscles())\nevcheck = []\nknowns = dict()\nfor n in muscles:\n    pp = [x.statements for x in (n.receptors, n.innervatedBy)]\n    for stmt in itertools.chain(*pp):\n        if stmt.context.identifier in knowns:\n            n = self.get_supporting_evidence(stmt)\n            knowns[stmt.context.identifier] = n\n            evcheck.append(n)\nself.assertTrue(0 not in evcheck, 'There appears to be no evidence: ' + str\n    (evcheck))\n"
+}

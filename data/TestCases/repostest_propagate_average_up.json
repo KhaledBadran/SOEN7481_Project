@@ -1,0 +1,9 @@
+{
+    "functionName": "test_propagate_average_up",
+    "className": "TestContribution",
+    "fileName": "/PmagPy_&_PmagPy/pmagpy_tests_&_test_contribution_builder.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "directory = os.path.join('data_files', '3_0', 'McMurdo')\ncon = cb.Contribution(directory, read_tables=['sites', 'samples'])\ncon.tables['sites'].df.drop(['lat', 'lon'], axis='columns', inplace=True)\ncon.tables['samples'].df.loc['mc01a', 'lat'] = -60.0\ncon.propagate_average_up()\nself.assertTrue(all(con.tables['sites'].df[['lat', 'lon']].values.ravel()))\nself.assertEqual([-75.61875], con.tables['sites'].df.loc['mc01', 'lat'].\n    unique())\ncon = cb.Contribution(directory, read_tables=['sites', 'samples'])\ncon.tables['sites'].df.loc['mc01', 'lon'] = 12\ncon.propagate_average_up()\nself.assertEqual([12], con.tables['sites'].df.loc['mc01', 'lon'].unique())\nself.assertNotIn('new_lat', con.tables['sites'].df.columns)\nself.assertNotIn('new_lon', con.tables['sites'].df.columns)\ncon = cb.Contribution(directory, read_tables=['sites', 'samples'])\ncon.tables['samples'].df.drop(['lon'], axis='columns', inplace=True)\ncon.propagate_average_up()\ncon = cb.Contribution(directory, read_tables=['sites', 'samples'])\ncon.tables['samples'].df.drop(['site'], axis='columns', inplace=True)\ncon.tables['sites'].df.loc['mc01', 'lat'] = ''\ncon.propagate_average_up()\ncon = cb.Contribution(directory, read_tables=['sites', 'samples'],\n    custom_filenames={'samples': '_samples.txt'})\nres = con.propagate_average_up()\nself.assertIsNone(res)\nres = con.propagate_average_up(target_df_name='samples', source_df_name='sites'\n    )\nself.assertIsNone(res)\nres = con.propagate_average_up(target_df_name='sites', source_df_name=\n    'specimens')\nself.assertIsNone(res)\n"
+}

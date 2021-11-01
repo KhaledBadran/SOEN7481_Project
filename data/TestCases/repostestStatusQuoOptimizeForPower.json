@@ -1,0 +1,9 @@
+{
+    "functionName": "testStatusQuoOptimizeForPower",
+    "className": "BatchTrialTest",
+    "fileName": "/facebook_&_Ax/ax_&_core_&_tests_&_test_batch_trial.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "self.experiment.status_quo = self.status_quo\nbatch = self.experiment.new_batch_trial(optimize_for_power=True)\nself.assertEqual(batch._status_quo_weight_override, 1)\nself.experiment.status_quo = None\nwith self.assertRaises(ValueError):\n    batch = self.experiment.new_batch_trial(optimize_for_power=True)\nbatch.add_arms_and_weights(arms=self.arms, weights=self.weights)\nexpected_status_quo_weight = math.sqrt(sum(self.weights))\nself.assertTrue(math.isclose(batch._status_quo_weight_override,\n    expected_status_quo_weight))\nself.assertTrue(math.isclose(batch.arm_weights[batch.status_quo],\n    expected_status_quo_weight))\n"
+}

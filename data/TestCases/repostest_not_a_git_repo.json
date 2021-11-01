@@ -1,0 +1,9 @@
+{
+    "functionName": "test_not_a_git_repo",
+    "className": null,
+    "fileName": "/msiemens_&_PyGitUp/PyGitUp_&_tests_&_test_git_not_in_path.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Run 'git up' with git no being in PATH \"\"\"\nos.chdir(repo_path)\nenviron = os.environ.copy()\nos.environ['PATH'] = ''\ntry:\n    with assert_raises(GitError) as e:\n        from PyGitUp.gitup import GitUp\n        GitUp(testing=True)\n    assert e.exception.message == 'The git executable could not be found'\nfinally:\n    os.environ.update(environ)\n"
+}

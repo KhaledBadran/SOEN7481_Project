@@ -1,0 +1,9 @@
+{
+    "functionName": "_onInterest",
+    "className": "Chat",
+    "fileName": "/named-data_&_PyNDN2/examples_&_test_chrono_chat.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        Send back a Chat Data Packet which contains the user's message.\n        \"\"\"\ncontent = chatbuf_pb2.ChatMessage()\nsequenceNo = int(interest.getName().get(self._chatPrefix.size() + 1).\n    toEscapedString())\ngotContent = False\nfor i in range(len(self._messageCache) - 1, -1, -1):\n    message = self._messageCache[i]\n    if message.sequenceNo == sequenceNo:\n        if message.messageType != chatbuf_pb2.ChatMessage.CHAT:\n            setattr(content, 'from', self._screenName)\n            content.to = self._chatRoom\n            content.type = message.messageType\n            content.timestamp = int(round(message.time / 1000.0))\n        else:\n            setattr(content, 'from', self._screenName)\n            content.to = self._chatRoom\n            content.type = message.messageType\n            content.data = message.message\n            content.timestamp = int(round(message.time / 1000.0))\n        gotContent = True\n        break\nif gotContent:\n    array = content.SerializeToString()\n    data = Data(interest.getName())\n    data.setContent(Blob(array))\n    self._keyChain.sign(data, self._certificateName)\n    try:\n        face.putData(data)\n    except Exception as ex:\n        logging.getLogger(__name__).error('Error in transport.send: %s',\n            str(ex))\n        return\n"
+}

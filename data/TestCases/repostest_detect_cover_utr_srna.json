@@ -1,0 +1,9 @@
+{
+    "functionName": "test_detect_cover_utr_srna",
+    "className": "TestsRNAUTR",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_sRNA_utr_derived.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sud.coverage_comparison = self.mock.mock_coverage_comparison\ncover_results = {'cover_sets': {'low': 10, 'high': 50}, 'pos': {'low': 10,\n    'high': 50}, 'covers': [20], 'type': '5utr', 'srna_covers': {'frag_1':\n    []}, 'utr_covers': {'frag_1': []}, 'intercds': 'TSS', 'check_point': {\n    'utr_start': 1, 'utr_end': 29, 'srna_start': 2, 'srna_end': 25}}\ndatas = {'num': 0, 'cover_tmp': {'total': 100, 'ori_total': 200}, 'checks':\n    {'detect_decrease': True}, 'final_poss': {'start': 3, 'end': 23}}\npos = {'start': 2, 'end': 20, 'ori_start': 1, 'ori_end': 23}\nargs = self.mock_args.mock()\nargs.min_len = 30\nargs.max_len = 500\nargs.decrease_utr = 0.5\nargs.fuzzy_utr = 2\nsud.detect_cover_utr_srna(cover_results, pos, self.example.inters[0],\n    'frag_1', 'track_1', args, 'frag', 2, 20, '+')\nself.assertDictEqual(cover_results['srna_covers'], {'frag_1': [{'low': 20,\n    'high': 50, 'track': 'track_1', 'final_start': 2, 'ori_avg': \n    0.8695652173913043, 'type': 'frag', 'final_end': 20, 'avg': \n    1.0526315789473684}]})\nself.assertDictEqual(cover_results['utr_covers'], cover_results['srna_covers'])\nself.assertDictEqual(cover_results['cover_sets'], {'best': 20, 'low': 20,\n    'high': 50})\n"
+}

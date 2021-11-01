@@ -1,0 +1,9 @@
+{
+    "functionName": "testOutcomeConstraintFail",
+    "className": "OutcomeConstraintTest",
+    "fileName": "/facebook_&_Ax/ax_&_core_&_tests_&_test_outcome_constraint.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "logger_name = OUTCOME_CONSTRAINT_PATH + '.logger'\nwith mock.patch(logger_name) as mock_warning:\n    OutcomeConstraint(metric=self.minimize_metric, op=ComparisonOp.GEQ,\n        bound=self.bound)\n    mock_warning.warning.assert_called_once_with(CONSTRAINT_WARNING_MESSAGE\n        .format(**LOWER_BOUND_MISMATCH))\nwith mock.patch(logger_name) as mock_warning:\n    OutcomeConstraint(metric=self.maximize_metric, op=ComparisonOp.LEQ,\n        bound=self.bound)\n    mock_warning.warning.assert_called_once_with(CONSTRAINT_WARNING_MESSAGE\n        .format(**UPPER_BOUND_MISMATCH))\n"
+}

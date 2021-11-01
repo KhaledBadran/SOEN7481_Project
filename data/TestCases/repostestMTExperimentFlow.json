@@ -1,0 +1,9 @@
+{
+    "functionName": "testMTExperimentFlow",
+    "className": "MultiTypeExperimentTest",
+    "fileName": "/facebook_&_Ax/ax_&_core_&_tests_&_test_multi_type_experiment.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "self.assertTrue(self.experiment.supports_trial_type('type1'))\nself.assertTrue(self.experiment.supports_trial_type('type2'))\nself.assertFalse(self.experiment.supports_trial_type(None))\nn = 10\narms = get_branin_arms(n=n, seed=0)\nb1 = self.experiment.new_batch_trial()\nb1.add_arms_and_weights(arms=arms)\nself.assertEqual(b1.trial_type, 'type1')\nb1.run()\nself.assertEqual(b1.run_metadata['dummy_metadata'], 'dummy1')\nself.experiment.update_runner('type2', SyntheticRunner(dummy_metadata='dummy3')\n    )\nb2 = self.experiment.new_batch_trial()\nb2.trial_type = 'type2'\nb2.add_arms_and_weights(arms=arms)\nself.assertEqual(b2.trial_type, 'type2')\nb2.run()\nself.assertEqual(b2.run_metadata['dummy_metadata'], 'dummy3')\ndf = self.experiment.fetch_data().df\nfor _, row in df.iterrows():\n    self.assertEqual(row['metric_name'], 'm1' if row['trial_index'] == 0 else\n        'm2')\narm_0_slice = df.loc[df['arm_name'] == '0_0']\nself.assertNotEqual(float(arm_0_slice[df['trial_index'] == 0]['mean']),\n    float(arm_0_slice[df['trial_index'] == 1]['mean']))\nself.assertEqual(len(df), 2 * n)\nself.assertEqual(self.experiment.default_trials, {0})\nself.experiment.update_tracking_metric(BraninMetric('m2', ['x1', 'x2']),\n    trial_type='type2')\ndf = self.experiment.fetch_data().df\narm_0_slice = df.loc[df['arm_name'] == '0_0']\nself.assertAlmostEqual(float(arm_0_slice[df['trial_index'] == 0]['mean']),\n    float(arm_0_slice[df['trial_index'] == 1]['mean']), places=10)\n"
+}

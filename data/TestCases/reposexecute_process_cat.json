@@ -1,0 +1,9 @@
+{
+    "functionName": "execute_process_cat",
+    "className": "Commands",
+    "fileName": "/PRIArobotics_&_HedgehogClient/hedgehog_&_client_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "ident, msg = await server.recv_msg()\nassert msg == process.ExecuteAction('cat')\nawait server.send_msg(ident, process.ExecuteReply(pid))\nwhile True:\n    ident, msg = await server.recv_msg()\n    chunk = msg.chunk\n    assert msg == process.StreamAction(pid, process.STDIN, chunk)\n    await server.send_msg(ident, ack.Acknowledgement())\n    await server.send_msg(ident, process.StreamUpdate(pid, process.STDOUT,\n        chunk))\n    if chunk == b'':\n        break\nawait server.send_msg(ident, process.StreamUpdate(pid, process.STDERR))\nawait server.send_msg(ident, process.ExitUpdate(pid, 0))\nstaticmethod"
+}

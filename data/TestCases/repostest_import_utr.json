@@ -1,0 +1,9 @@
+{
+    "functionName": "test_import_utr",
+    "className": "TestDetectUTR",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_detect_utr.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "args = self.mock_args.mock()\nutr_all = {'pri': [], 'all': [], 'sec': []}\nutr_strain = {'pri': {'aaa': []}, 'all': {'aaa': []}, 'sec': {'aaa': []}}\nargs.source = True\nargs.base_5utr = 'both'\nargs.fuzzy_5utr = 5\ndetect = du.import_utr(self.example.tss_fit, utr_strain, utr_all, 140, 340,\n    self.example.tas, 200, args)\nself.assertTrue(detect[0])\nself.assertDictEqual(utr_strain, {'pri': {'aaa': [200]}, 'all': {'aaa': [\n    200]}, 'sec': {'aaa': []}})\nself.assertDictEqual(utr_all, {'pri': [200], 'all': [200], 'sec': []})\ndetect = du.import_utr(self.example.tss_nofit, utr_strain, utr_all, 1140, \n    1190, self.example.tas, 50, args)\nself.assertFalse(detect[0])\nself.assertDictEqual(utr_strain, {'pri': {'aaa': [200]}, 'all': {'aaa': [\n    200]}, 'sec': {'aaa': []}})\nself.assertDictEqual(utr_all, {'pri': [200], 'all': [200], 'sec': []})\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_check_bounds",
+    "className": null,
+    "fileName": "/bytesandbrains_&_ProcessOptimizer/ProcessOptimizer_&_tests_&_test_constraints.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "space = Space([(0.0, 5.0), (0, 5), ['a', 'b', 'c', 1, 1.0]])\ncheck_bounds(space.dimensions[0], (1.0, 2.0))\ncheck_bounds(space.dimensions[1], (1, 3))\ncheck_bounds(space.dimensions[2], ('a', 'b'))\ncheck_bounds(space.dimensions[2], ('a', 1.0))\nwith raises(ValueError):\n    check_bounds(space.dimensions[0], (-1.0, 2.0))\nwith raises(ValueError):\n    check_bounds(space.dimensions[0], (2.0, 10.0))\nwith raises(ValueError):\n    check_bounds(space.dimensions[1], (-1, 2))\nwith raises(ValueError):\n    check_bounds(space.dimensions[1], (2, 10))\nwith raises(ValueError):\n    check_bounds(space.dimensions[2], ('k', -1.0))\nwith raises(ValueError):\n    check_bounds(space.dimensions[2], ('a', 'b', 'c', 1.2))\npytest.mark.fast_test"
+}

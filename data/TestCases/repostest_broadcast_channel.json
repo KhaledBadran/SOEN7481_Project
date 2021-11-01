@@ -1,0 +1,9 @@
+{
+    "functionName": "test_broadcast_channel",
+    "className": null,
+    "fileName": "/PRIArobotics_&_HedgehogServer/tests_&_test_subscription.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with assertPassed(2):\n    async with BroadcastChannel() as broadcast, trio.open_nursery() as nursery:\n        receive_a = broadcast.add_receiver(10)\n        receive_b = broadcast.add_receiver(10)\n\n        @nursery.start_soon\n        async def sender():\n            async for value in stream((1, 1), (2, 1)):\n                await broadcast.send(value)\n            await broadcast.aclose()\n\n        @nursery.start_soon\n        async def receiver_a():\n            async with Stream(receive_a) as s:\n                await s.expect_after(1, 1)\n                await s.expect_after(1, 2)\n                await s.expect_exit_after(0)\n\n        @nursery.start_soon\n        async def receiver_b():\n            async with Stream(receive_b) as s:\n                await s.expect_after(1, 1)\npytest.mark.trio"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_write_missing_derivation_method",
+    "className": "TestDeriveKeyRequestPayload",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_derive_key.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that an InvalidField error gets raised when encoding a DeriveKey\n        request payload missing the derivation method.\n        \"\"\"\npayload = payloads.DeriveKeyRequestPayload(object_type=enums.ObjectType.\n    SYMMETRIC_KEY, unique_identifiers=[\n    'fb4b5b9c-6188-4c63-8142-fe9c328129fc',\n    '5c9b81ef-4ee5-42cd-ba2d-c002fdd0c7b3',\n    '1703250b-4d40-4de2-93a0-c494a1d4ae40'])\nargs = utils.BytearrayStream(),\nself.assertRaisesRegex(exceptions.InvalidField,\n    'The DeriveKey request payload is missing the derivation method.',\n    payload.write, *args)\n"
+}

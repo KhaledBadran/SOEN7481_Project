@@ -1,0 +1,9 @@
+{
+    "functionName": "test_getall_does_not_poll_into_oblivion",
+    "className": "Test_PoolManager",
+    "fileName": "/Kieran-Bacon_&_Better/PackageTests_&_multiprocessing_&_test_PoolManager.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "def seppuku(*args):\n    time.sleep(5)\n    sys.exit()\nwith PoolManager(seppuku) as conn:\n    conn.putAsync([None] * 10)\n    with pytest.raises(RuntimeError):\n        conn.getAll()\n"
+}

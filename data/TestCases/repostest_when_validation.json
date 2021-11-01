@@ -1,0 +1,9 @@
+{
+    "functionName": "test_when_validation",
+    "className": "TestValidationMessages",
+    "fileName": "/hdoupe_&_ParamTools/paramtools_&_tests_&_test_parameters.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class Params(Parameters):\n    defaults = {'param': {'title': '', 'description': '', 'type': 'int',\n        'value': 0, 'validators': {'when': {'param': 'when_param', 'is': {\n        'less_than': 0}, 'then': {'range': {'min': 0}}, 'otherwise': {\n        'range': {'min': 'when_param'}}}}}, 'when_param': {'title': '',\n        'description': '', 'type': 'int', 'value': 2}}\nparams = Params(array_first=True)\nparams.adjust({'param': 3})\nassert params.param == 3.0\nparams.adjust({'when_param': -2, 'param': 0})\nwith pytest.raises(ValidationError) as excinfo:\n    params.adjust({'when_param': -2, 'param': -1})\nmsg = json.loads(excinfo.value.args[0])\nassert msg['errors']['param'] == [\n    'When when_param is less than 0, param value is invalid: param -1 < min 0 '\n    ]\n"
+}

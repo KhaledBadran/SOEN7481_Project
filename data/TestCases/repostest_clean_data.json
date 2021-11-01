@@ -1,0 +1,9 @@
+{
+    "functionName": "test_clean_data",
+    "className": null,
+    "fileName": "/Accenture_&_AmpliGraph/tests_&_ampligraph_&_datasets_&_test_datasets.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "X = {'train': np.array([['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 'h', 'i'],\n    ['j', 'k', 'l']]), 'valid': np.array([['a', 'b', 'c'], ['x', 'e', 'f'],\n    ['g', 'a', 'i'], ['j', 'k', 'y']]), 'test': np.array([['a', 'b', 'c'],\n    ['d', 'e', 'x'], ['g', 'b', 'i'], ['y', 'k', 'l']])}\nclean_X, valid_idx, test_idx = _clean_data(X, return_idx=True)\nnp.testing.assert_array_equal(clean_X['train'], X['train'])\nnp.testing.assert_array_equal(clean_X['valid'], np.array([['a', 'b', 'c']]))\nnp.testing.assert_array_equal(clean_X['test'], np.array([['a', 'b', 'c'], [\n    'g', 'b', 'i']]))\nnp.testing.assert_array_equal(valid_idx, np.array([True, False, False, False]))\nnp.testing.assert_array_equal(test_idx, np.array([True, False, True, False]))\n"
+}

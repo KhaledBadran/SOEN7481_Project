@@ -1,0 +1,9 @@
+{
+    "functionName": "test_key_management",
+    "className": "TestTpmBackEnds",
+    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_tpm_back_ends.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "for tpm in self.backEndList:\n    identityName = Name('/Test/KeyName')\n    keyId = Name.Component('1')\n    keyName = PibKey.constructKeyName(identityName, keyId)\n    self.assertEqual(False, tpm.hasKey(keyName))\n    self.assertTrue(tpm.getKeyHandle(keyName) == None)\n    self.assertTrue(tpm.createKey(identityName, RsaKeyParams(keyId)) != None)\n    self.assertTrue(tpm.hasKey(keyName))\n    self.assertTrue(tpm.getKeyHandle(keyName) != None)\n    try:\n        tpm.createKey(identityName, RsaKeyParams(keyId))\n        self.fail('Did not throw the expected exception')\n    except Tpm.Error:\n        pass\n    else:\n        self.fail('Did not throw the expected exception')\n    tpm.deleteKey(keyName)\n    self.assertEqual(False, tpm.hasKey(keyName))\n    self.assertTrue(tpm.getKeyHandle(keyName) == None)\n"
+}

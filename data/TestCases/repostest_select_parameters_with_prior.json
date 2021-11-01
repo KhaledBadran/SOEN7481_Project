@@ -1,0 +1,9 @@
+{
+    "functionName": "test_select_parameters_with_prior",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_utilities_&_test_utilities.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "kernel = gpflow.kernels.SquaredExponential()\nparams = gpflow.utilities.select_dict_parameters_with_prior(kernel)\nassert params == {}\nkernel.variance.prior = tfp.distributions.Gamma(1.0, 1.0)\nparams = gpflow.utilities.select_dict_parameters_with_prior(kernel)\nassert len(params) == 1\n"
+}

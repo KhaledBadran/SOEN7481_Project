@@ -1,0 +1,9 @@
+{
+    "functionName": "test_register_exception_code_and_handler",
+    "className": null,
+    "fileName": "/jperras_&_Flask-ApiExceptions/test_apiexceptions.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Handle Flask 404s with JSONExceptionHandler.\"\"\"\next = JSONExceptionHandler(app)\next.register(code_or_exception=404, handler=JSONExceptionHandler.handle_404)\nwith app.app_context():\n    with app.test_client() as c:\n        rv = c.get('/notfound')\nassert rv.status_code == 404\nassert rv.headers['content-type'] == 'application/json'\nassert json.loads(rv.data)['message'\n    ] == 'The resource at /notfound could not be found.'\n"
+}

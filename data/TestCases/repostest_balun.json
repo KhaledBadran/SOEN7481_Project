@@ -1,0 +1,9 @@
+{
+    "functionName": "test_balun",
+    "className": null,
+    "fileName": "/Patarimi_&_PassiveAutoDesign/tests_&_test_passive_component.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ZS_TARG = np.array([20 + 1.0j * 40])\nZL_TARG = np.array([50 + 1.0j * 0.1])\nF_TARG = np.array([4000000000.0])\nBLN = bln.Balun(F_TARG, ZL_TARG, ZS_TARG)\nBLN.enforce_symmetrical()\nres = BLN.design(1)\nBLN.enforce_symmetrical(False)\nBLN.is_symmetrical = False\nres = BLN.design(1)\nBLN.print(res)\nBLN.transfo.model['k'] = 0.2\nwith pytest.raises(ValueError):\n    res = BLN.design(1)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_OriginBatch",
+    "className": null,
+    "fileName": "/JosephPallipadan_&_Namsor-API-Wrapper-Python/namsorclient_&_tests_&_test_request_objects.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tester = namsorclient.OriginBatch()\nassert tester.response_type == namsorclient.OriginResponse\nnames = []\nfor id in range(10):\n    name = str(faker_obj.name()).split(' ')[:2]\n    name.append(id)\n    names.append(name)\n    tester.addItem(name[0], name[1], id)\n    assert isinstance(tester.items[-1], namsorclient.OriginBatch.\n        OriginBatchItem)\n    assert tester.items[-1].first_name == name[0]\n    assert tester.items[-1].last_name == name[1]\n    assert tester.items[-1].ID == name[2]\nfor name, item in zip(names, tester.batch_item_converter()):\n    keys = ['id', 'firstName', 'lastName']\n    assert all([(key in item) for key in keys])\n    assert item['firstName'] == name[0]\n    assert item['lastName'] == name[1]\n    assert item['id'] == name[2]\n"
+}

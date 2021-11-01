@@ -1,0 +1,9 @@
+{
+    "functionName": "test_bug_3006907",
+    "className": null,
+    "fileName": "/cgtobi_&_PyRMVtransport/tests_&_test_bugs.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test bug 3006907.\"\"\"\nwith open('fixtures/bug_3006907.xml') as f:\n    xml_request = f.read()\nasync with aresponses.ResponsesMockServer(loop=event_loop) as arsps:\n    arsps.add(URL, URL_PATH, 'get', xml_request)\n    async with aiohttp.ClientSession(loop=event_loop) as session:\n        rmv = RMVtransport(session)\n        station_id = '3006907'\n        data = await rmv.get_departures(station_id, max_journeys=50,\n            products=['U-Bahn', 'Tram', 'Bus', 'S'])\n        assert data['filter'] == '0001111'\n        assert data['stationId'] == '3006907'\n        assert data['station'] == 'Wiesbaden Hauptbahnhof'\npytest.mark.asyncio"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "testComputeDiagnostics",
+    "className": "CrossValidationTest",
+    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_cross_validation.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "result = []\nfor i, obs in enumerate(self.training_data):\n    result.append(CVResult(observed=obs, predicted=self.observation_data[i]))\ndiag = compute_diagnostics(result=result)\nfor v in diag.values():\n    self.assertEqual(set(v.keys()), {'a', 'b'})\nself.assertAlmostEqual(diag['MAPE']['a'], 0.4984126984126984)\nself.assertAlmostEqual(diag['Total raw effect']['a'], 3.5)\nself.assertAlmostEqual(diag['Total raw effect']['b'], 1.5)\n"
+}

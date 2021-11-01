@@ -1,0 +1,9 @@
+{
+    "functionName": "test_convkb_train_predict",
+    "className": null,
+    "fileName": "/Accenture_&_AmpliGraph/tests_&_ampligraph_&_latent_features_&_test_models.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "model = ConvKB(batches_count=2, seed=22, epochs=1, k=10, eta=1,\n    embedding_model_params={'num_filters': 16, 'filter_sizes': [1],\n    'dropout': 0.0, 'is_trainable': True}, optimizer='adam',\n    optimizer_params={'lr': 0.001}, loss='pairwise', loss_params={},\n    verbose=True)\nX = load_wn18()\nmodel.fit(X['train'])\ny1 = model.predict(X['test'][:5])\nsave_model(model, 'convkb.tmp')\ndel model\nmodel = restore_model('convkb.tmp')\ny2 = model.predict(X['test'][:5])\nassert np.all(y1 == y2)\n"
+}

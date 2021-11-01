@@ -1,0 +1,9 @@
+{
+    "functionName": "test_group_quantile",
+    "className": null,
+    "fileName": "/quantOS-org_&_JAQS/test_&_test_py_expression_eval.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "shape = 500, 3000\ndf_val = pd.DataFrame(np.random.rand(*shape))\ndf_group = pd.DataFrame(np.random.randint(1, 5, size=shape[0] * shape[1]).\n    reshape(*shape))\nexpr = parser.parse('GroupQuantile(val, mygroup, 23)')\nres = parser.evaluate({'val': df_val, 'mygroup': df_group})\nn = 100\ndf_val = pd.DataFrame(np.arange(n).reshape(2, -1))\ndf_group = pd.DataFrame(np.array([1] * 25 + [2] * 25 + [2] * 20 + [3] * 20 +\n    [9] * 10).reshape(2, -1))\nexpr = parser.parse('GroupQuantile(val, mygroup, 5)')\nres = parser.evaluate({'val': df_val, 'mygroup': df_group})\nn1 = 5\nn2 = 4\nn3 = 2\nres_correct = np.array([0.0] * n1 + [1.0] * n1 + [2.0] * n1 + [3.0] * n1 + \n    [4.0] * n1 + [0.0] * n1 + [1.0] * n1 + [2.0] * n1 + [3.0] * n1 + [4.0] *\n    n1 + [0.0] * n2 + [1.0] * n2 + [2.0] * n2 + [3.0] * n2 + [4.0] * n2 + [\n    0.0] * n2 + [1.0] * n2 + [2.0] * n2 + [3.0] * n2 + [4.0] * n2 + [0.0] *\n    n3 + [1.0] * n3 + [2.0] * n3 + [3.0] * n3 + [4.0] * n3).reshape(2, -1\n    ) + 1.0\nassert np.abs(res.values - res_correct).flatten().sum() < 1e-06\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_motor_state_update",
+    "className": "TestMessages",
+    "fileName": "/PRIArobotics_&_HedgehogProtocol/tests_&_test_protocol.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sub = Subscription()\nsub.subscribe = True\nsub.timeout = 10\nmsg = motor.StateUpdate(0, 100, 1000, sub)\nproto = HedgehogMessage()\nproto.motor_state_message.velocity = 100\nproto.motor_state_message.position = 1000\nproto.motor_state_message.subscription.subscribe = True\nproto.motor_state_message.subscription.timeout = 10\nself.assertTransmissionServerClient(msg, proto, is_async=True)\n"
+}

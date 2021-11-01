@@ -1,0 +1,9 @@
+{
+    "functionName": "test_vader_application",
+    "className": "TestCompanyNewsIntrinino",
+    "fileName": "/EVEprosper_&_ProsperDatareader/tests_&_test_news.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"make sure Intrinino plays nice with vader\"\"\"\nimport prosper.datareader.utils as utils\nif not CAN_DIRECT_AUTH:\n    pytest.xfail('Lacking creds for Intrinino -- direct auth')\nall_news_df = news.company_news_intrinio(self.good_ticker, username=helpers\n    .CONFIG.get_option('INTRINIO', 'username'), password=helpers.CONFIG.\n    get_option('INTRINIO', 'password'))\ngraded_news = utils.vader_sentiment(all_news_df, 'summary')\nexpected_cols = self.expected_cols\nexpected_cols.extend(['neu', 'pos', 'compound', 'neg'])\nunique_values, unique_expected = helpers.find_uniques(list(graded_news.\n    columns.values), expected_cols)\nassert unique_expected == []\nif unique_values:\n    pytest.xfail('Unexpected values from vader_sentiment(): {}'.format(\n        unique_values))\npytest.mark.long"
+}

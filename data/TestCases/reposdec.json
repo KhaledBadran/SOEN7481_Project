@@ -1,0 +1,9 @@
+{
+    "functionName": "dec",
+    "className": null,
+    "fileName": "/nipy_&_PySurfer/surfer_&_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "if len(arg_names) > 0 and arg_names[0] == 'self':\n    default_level = getattr(args[0], 'verbose', None)\nelse:\n    default_level = None\nverbose_level = kwargs.get('verbose', default_level)\nif verbose_level is not None:\n    old_level = set_log_level(verbose_level, True)\n    try:\n        ret = function(*args, **kwargs)\n    except Exception:\n        set_log_level(old_level)\n        raise\n    set_log_level(old_level)\n    return ret\nelse:\n    return function(*args, **kwargs)\nwraps(function)"
+}

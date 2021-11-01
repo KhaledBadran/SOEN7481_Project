@@ -1,0 +1,9 @@
+{
+    "functionName": "test_send_3",
+    "className": "TestSyncCaller",
+    "fileName": "/williamcaesar_&_API_callers/tests_&_test_syncCaller.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "payloads = [{'payload{}'.format(x): 'payloads'} for x in range(0, 3)]\ncaller = SyncCaller({'fake': 'headers'}, payloads,\n    'https://jsonplaceholder.typicode.com/posts')\nresponse = caller.send()\nself.assertGreater(len(response), 1)\nself.assertIn('response', response[0].keys())\nself.assertIn('payload', response[0].keys())\nself.assertIsInstance(response, list)\nself.assertIsInstance(response[0]['response'], Response)\nself.assertIsInstance(response[1]['response'], Response)\nself.assertIsInstance(response[2]['response'], Response)\n"
+}

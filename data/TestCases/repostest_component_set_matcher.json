@@ -1,0 +1,9 @@
+{
+    "functionName": "test_component_set_matcher",
+    "className": "TestRegex",
+    "fileName": "/named-data_&_PyNDN2/tests_&_unit_tests_&_test_regex.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "backRef = NdnRegexBackrefManager()\ncm = NdnRegexComponentSetMatcher('<a>', backRef)\nres = cm.match(Name('/a/b/'), 0, 1)\nself.assertEqual(True, res)\nself.assertEqual(1, len(cm.getMatchResult()))\nself.assertEqual('a', cm.getMatchResult()[0].toEscapedString())\nres = cm.match(Name('/a/b/'), 1, 1)\nself.assertEqual(False, res)\nself.assertEqual(0, len(cm.getMatchResult()))\nres = cm.match(Name('/a/b/'), 0, 2)\nself.assertEqual(False, res)\nself.assertEqual(0, len(cm.getMatchResult()))\nbackRef = NdnRegexBackrefManager()\ncm = NdnRegexComponentSetMatcher('[<a><b><c>]', backRef)\nres = cm.match(Name('/a/b/d'), 1, 1)\nself.assertEqual(True, res)\nself.assertEqual(1, len(cm.getMatchResult()))\nself.assertEqual('b', cm.getMatchResult()[0].toEscapedString())\nres = cm.match(Name('/a/b/d'), 2, 1)\nself.assertEqual(False, res)\nself.assertEqual(0, len(cm.getMatchResult()))\nbackRef = NdnRegexBackrefManager()\ncm = NdnRegexComponentSetMatcher('[^<a><b><c>]', backRef)\nres = cm.match(Name('/b/d'), 1, 1)\nself.assertEqual(True, res)\nself.assertEqual(1, len(cm.getMatchResult()))\nself.assertEqual('d', cm.getMatchResult()[0].toEscapedString())\nbackRef = NdnRegexBackrefManager()\ntry:\n    NdnRegexComponentSetMatcher('[<a]', backRef)\n    self.fail('Did not throw the expected exception')\nexcept NdnRegexMatcherBase.Error:\n    pass\nelse:\n    self.fail('Did not throw the expected exception')\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_set_application_parameters",
+    "className": "TestInterestMethods",
+    "fileName": "/named-data_&_PyNDN2/tests_&_unit_tests_&_test_interest_methods.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "interest = Interest('/ndn')\nself.assertTrue(not interest.hasApplicationParameters())\napplicationParameters = Blob(bytearray([35, 0]))\ninterest.setApplicationParameters(applicationParameters)\nself.assertTrue(interest.hasApplicationParameters())\nself.assertTrue(interest.getApplicationParameters().equals(\n    applicationParameters))\ndecodedInterest = Interest()\ndecodedInterest.wireDecode(interest.wireEncode())\nself.assertTrue(decodedInterest.getApplicationParameters().equals(\n    applicationParameters))\ninterest.setApplicationParameters(Blob())\nself.assertTrue(not interest.hasApplicationParameters())\n"
+}

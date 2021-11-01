@@ -1,0 +1,9 @@
+{
+    "functionName": "test_array_numpy_to_dask2",
+    "className": null,
+    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_core_&_tests_&_test_map_processing.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test if `chunk_pixels` is properly adjusted if it is large compared to the XRF map\n    size. Explicitely set the minimum number of chunks.\"\"\"\ndata_shape = 8, 8, 2\nchunk_pixels = 100\ndata = np.random.random(size=data_shape)\nres = _array_numpy_to_dask(data, chunk_pixels, n_chunks_min=16)\nres_chunk_size = 2, 2, 2\nassert res.shape == data.shape, \"The shape of the original and chunked array don't match\"\nassert res.chunksize == res_chunk_size, \"The chunk size of the Dask array doesn't match the desired chunk size\"\n"
+}

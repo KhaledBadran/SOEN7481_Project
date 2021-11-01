@@ -1,0 +1,9 @@
+{
+    "functionName": "test_remote_data_service_initialize",
+    "className": null,
+    "fileName": "/quantOS-org_&_JAQS/test_&_test_dataservice.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "import jaqs.data.dataservice as jads\ndata_config2 = {k: v for k, v in data_config.items()}\ndata_config2['remote.data.password'] = ''\ntry:\n    ds.init_from_config(data_config2)\nexcept jads.InitializeError:\n    pass\ndata_config2['remote.data.password'] = '123'\nmsg = ds.init_from_config(data_config2)\nassert msg.split(',')[0] == '-1000'\ntry:\n    ds.daily('000001.SH', start_date=20170101, end_date=20170109)\nexcept jads.NotLoginError:\n    pass\nmsg = ds.init_from_config(data_config)\nassert msg.split(',')[0] == '0'\nmsg = ds.init_from_config(data_config)\nassert msg.split(',')[0] == '0'\n"
+}

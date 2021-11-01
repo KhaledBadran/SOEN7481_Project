@@ -1,0 +1,9 @@
+{
+    "functionName": "get_spike_data",
+    "className": null,
+    "fileName": "/VisualNeuroscience-UH_&_CxSystem2/tests_&_test_python_array_clusterrun.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "output_fullpath = path.joinpath('tests', 'output_files',\n    'pytest_spike_reference_data_200ms.gz')\nwith open(output_fullpath.as_posix(), 'rb') as fb:\n    d_pickle = zlib.decompress(fb.read())\n    data = pickle.loads(d_pickle)\n    spikes_all = data['spikes_all']\nnew_output_name = [item for item in os.listdir(cluster_download_path.\n    as_posix()) if 'tonic_depol_level155' in item and '_results_' in item]\nnew_output_fullpath = cluster_download_path.joinpath(new_output_name[0])\nwith open(new_output_fullpath, 'rb') as fb:\n    new_d_pickle = zlib.decompress(fb.read())\n    new_data = pickle.loads(new_d_pickle)\n    new_spikes_all = new_data['spikes_all']\nreturn spikes_all, new_spikes_all\npytest.fixture(scope='module')"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_rekey",
+    "className": "TestProxyKmipClient",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_test_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the client can rekey an object.\n        \"\"\"\nresult = {'unique_identifier': '2', 'result_status': enums.ResultStatus.SUCCESS\n    }\nclient = ProxyKmipClient()\nclient.open()\nclient.proxy.rekey.return_value = result\nchecked_id = client.rekey(uid='1', offset=0, activation_date=1000000,\n    process_start_date=1000001, protect_stop_date=1000002,\n    deactivation_date=1000003)\nself.assertEqual('2', checked_id)\nmock.patch('kmip.pie.client.KMIPProxy', mock.MagicMock(spec_set=KMIPProxy))"
+}

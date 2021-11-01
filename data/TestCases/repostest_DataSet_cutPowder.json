@@ -1,0 +1,9 @@
+{
+    "functionName": "test_DataSet_cutPowder",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_DataSet.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "Tolerance = 0.01\nplt.ioff()\nimport matplotlib\nmatplotlib.use('Agg')\nconvertFiles = ['Data/camea2018n000136.hdf']\nDatset = DataSet(dataFiles=convertFiles)\nDatset.convertDataFile(saveFile=True)\nmask = np.ones_like(Datset.I.data)\nDatset.mask = mask\nDatset.mask = np.logical_not(mask)\neBins = _tools.binEdges(Datset.energy, 0.25)\nax, D, q = Datset.plotCutPowder(eBins, Tolerance)\nD2, q2 = Datset.cutPowder(eBins, Tolerance)\nassert np.all(D.equals(D2))\nfor i in range(len(q)):\n    for j in range(len(q[i])):\n        assert np.all(q[i][j] == q2[i][j])\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "kmodel_seq_lenet_mnist",
+    "className": "TestModels",
+    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "input_shape = [1, 28, 28]\nb_input_shape = input_shape[:]\nnb_samples = 4\nb_input_shape.insert(0, nb_samples)\nnb_classes = 10\nimg_rows, img_cols = 28, 28\nnb_filters = 32\npool_size = 2, 2\nkernel_size = 3, 3\nmodel = Sequential()\nmodel.add(Convolution2D(nb_filters, kernel_size[0], kernel_size[1],\n    border_mode='valid', input_shape=input_shape))\nmodel.add(Activation('relu'))\nmodel.add(Convolution2D(nb_filters, kernel_size[0], kernel_size[1]))\nmodel.add(Activation('relu'))\nmodel.add(MaxPooling2D(pool_size=pool_size))\nmodel.add(Dropout(0.0))\nmodel.add(Flatten())\nmodel.add(Dense(128))\nmodel.add(Activation('relu'))\nmodel.add(Dropout(0.0))\nmodel.add(Dense(nb_classes))\nmodel.add(Activation('softmax'))\nmodel.compile(loss='categorical_crossentropy', optimizer='Adagrad', metrics\n    =['accuracy'])\ninput_data = np.random.random_sample(b_input_shape)\noutput_data = np.random.randint(1, 5, [nb_samples, 1])\nreturn model, input_data, output_data\nstaticmethod"
+}

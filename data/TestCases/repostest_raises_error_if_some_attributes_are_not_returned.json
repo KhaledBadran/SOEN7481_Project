@@ -1,0 +1,9 @@
+{
+    "functionName": "test_raises_error_if_some_attributes_are_not_returned",
+    "className": "TestAuthClientVerifyCode",
+    "fileName": "/mozilla_&_PyFxA/fxa_&_tests_&_test_oauth.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "responses.add(responses.POST, 'https://server/v1/verify', body=\n    '{\"missing\": \"attributes\"}', content_type='application/json')\nadd_jwks_response()\nself.assertRaises(fxa.errors.OutOfProtocolError, self.client.verify_token,\n    token='1234')\nresponses.activate"
+}

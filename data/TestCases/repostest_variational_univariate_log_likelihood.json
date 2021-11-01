@@ -1,0 +1,9 @@
+{
+    "functionName": "test_variational_univariate_log_likelihood",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_models_&_test_variational.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "reference_log_marginal_likelihood = univariate_log_marginal_likelihood(y=\n    Datum.y_data, K=Datum.K, noise_var=Datum.noise_var)\nq_mu = np.ones((1, Datum.num_latent_gps)) * Datum.posterior_mean\nones = np.ones((1, Datum.num_latent_gps)) if diag else np.ones((1, 1, Datum\n    .num_latent_gps))\nq_sqrt = ones * Datum.posterior_std\nmodel = gpflow.models.SVGP(kernel=SquaredExponential(variance=Datum.K),\n    likelihood=Gaussian(), inducing_variable=Datum.Z, num_latent_gps=Datum.\n    num_latent_gps, q_diag=diag, whiten=whiten, q_mu=q_mu, q_sqrt=q_sqrt)\nmodel_likelihood = model.elbo(Datum.data).numpy()\nassert_allclose(model_likelihood, reference_log_marginal_likelihood, atol=4)\npytest.mark.parametrize('diag', [True, False])pytest.mark.parametrize('whiten', [True, False])"
+}

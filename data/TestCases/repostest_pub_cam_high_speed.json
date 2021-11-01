@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pub_cam_high_speed",
+    "className": null,
+    "fileName": "/SimLeek_&_CV_PubSubs/tests_&_frame_&_test_frame_publishing.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "img = np.zeros((30, 40))\nwith mock.patch.object(cv2, 'VideoCapture', new_callable=mock.MagicMock\n    ) as mock_cv_capture, mock.patch.object(NpCam, 'isOpened'\n    ) as mock_is_open, mock.patch.object(NpCam, 'set') as mock_cam_set:\n    cap = NpCam(img)\n    mock_cv_capture.side_effect = [cap]\n    mock_is_open.return_value = False\n    pub_cam_loop_opencv(0, request_size=(640, 480), high_speed=True)\n    mock_cam_set.assert_has_calls([mock.call(cv2.CAP_PROP_FOURCC, cv2.\n        CAP_OPENCV_MJPEG), mock.call(cv2.CAP_PROP_FRAME_WIDTH, 640), mock.\n        call(cv2.CAP_PROP_FRAME_HEIGHT, 480)])\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_evaluate_train_set",
+    "className": "TestSklearn",
+    "fileName": "/microsoft_&_LightGBM/tests_&_python_package_test_&_test_sklearn.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "X, y = load_boston(return_X_y=True)\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1,\n    random_state=42)\ngbm = lgb.LGBMRegressor(n_estimators=10, silent=True)\ngbm.fit(X_train, y_train, eval_set=[(X_train, y_train), (X_test, y_test)],\n    verbose=False)\nself.assertEqual(len(gbm.evals_result_), 2)\nself.assertIn('training', gbm.evals_result_)\nself.assertEqual(len(gbm.evals_result_['training']), 1)\nself.assertIn('l2', gbm.evals_result_['training'])\nself.assertIn('valid_1', gbm.evals_result_)\nself.assertEqual(len(gbm.evals_result_['valid_1']), 1)\nself.assertIn('l2', gbm.evals_result_['valid_1'])\n"
+}

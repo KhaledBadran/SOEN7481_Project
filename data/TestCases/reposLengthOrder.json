@@ -1,0 +1,9 @@
+{
+    "functionName": "LengthOrder",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&__tools.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "nonZeroPos = np.logical_not(np.isclose(v, 0.0))\nif np.sum(nonZeroPos) == 1:\n    Rv = v / np.linalg.norm(v)\n    return Rv\nif np.sum(nonZeroPos) == 0:\n    raise AttributeError('Provided vector is zero vector!')\nif np.sum(nonZeroPos) == 3:\n    v1 = Norm2D(v[:2])\n    ratio = v1[0] / v[0]\n    v2 = Norm2D(np.array([v1[0], v[2] * ratio]))\n    ratio2 = v2[0] / v1[0]\n    Rv = np.array([v2[0], v1[1] * ratio2, v2[1]])\nelse:\n    Rv = np.zeros(3)\n    nonZeros = v[nonZeroPos]\n    Rv[nonZeroPos] = Norm2D(nonZeros)\nif not np.isclose(np.dot(Rv, v) / (np.linalg.norm(Rv) * np.linalg.norm(v)), 1.0\n    ):\n    raise AttributeError(\n        'The found vector is not parallel to original vector: {}, {}',\n        format(Rv, v))\nreturn Rv\n"
+}

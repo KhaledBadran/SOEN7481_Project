@@ -1,0 +1,9 @@
+{
+    "functionName": "test_plot_shap_force",
+    "className": "TestShapHandler",
+    "fileName": "/univieCUBE_&_phenotrex/tests_&_test_shap_handler.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with TemporaryDirectory() as tmpdir:\n    tr, sh, fs, sv, bv = self.test_get_shap(trait_name, classifier_type)\n    sh.add_feature_data(sample_names=[x.identifier for x in tr], features=\n        fs, shaps=sv, base_value=bv)\n    for record in tr:\n        sh.plot_shap_force(record.identifier)\n        out_path = Path(tmpdir) / '_'.join(['testing_force_plots',\n            f'{record.identifier}_force_plot.png'])\n        out_path.parent.mkdir(exist_ok=True)\n        plt.savefig(out_path)\n        plt.close(plt.gcf())\n    assert len(list(Path(tmpdir).glob('*.png'))) == 3\npytest.mark.parametrize('trait_name', trait_names, ids=trait_names)pytest.mark.parametrize('classifier_type', classifier_ids, ids=classifier_ids)"
+}

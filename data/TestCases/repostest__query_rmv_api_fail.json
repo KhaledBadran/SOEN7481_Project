@@ -1,0 +1,9 @@
+{
+    "functionName": "test__query_rmv_api_fail",
+    "className": null,
+    "fileName": "/cgtobi_&_PyRMVtransport/tests_&_test_rmvtransport.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test failing station search.\"\"\"\nasync def response_handler(request):\n    await asyncio.sleep(0.01)\n    return aresponses.Response(body='page loaded')\nasync with aresponses.ResponsesMockServer(loop=event_loop) as arsps:\n    arsps.add(URL, URL_SEARCH_PATH, 'get', response_handler)\n    with pytest.raises(asyncio.TimeoutError):\n        async with aiohttp.ClientSession(loop=event_loop) as session:\n            rmv = RMVtransport(session, timeout=0.005)\n            url = f'https://{URL}{URL_SEARCH_PATH}'\n            await rmv._query_rmv_api(url)\npytest.mark.asynciopytest.mark.xfail(raises=RMVtransportError)"
+}

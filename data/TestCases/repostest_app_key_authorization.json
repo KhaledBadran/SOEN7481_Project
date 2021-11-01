@@ -1,0 +1,9 @@
+{
+    "functionName": "test_app_key_authorization",
+    "className": null,
+    "fileName": "/pestanko_&_3scale-api-python/tests_&_integration_&_auth_&_test_app_key_authorization.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "creds = application.authobj.credentials\nencoded = base64.b64encode(f\"{creds['app_id']}:{creds['app_key']}\".encode(\n    'utf-8')).decode('utf-8')\nresponse = application.test_request(verify=ssl_verify)\nassert response.status_code == 200\nassert response.request.headers['Authorization'] == 'Basic %s' % encoded\n"
+}

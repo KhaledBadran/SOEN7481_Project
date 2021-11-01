@@ -1,0 +1,9 @@
+{
+    "functionName": "test_verify_failure_expired_token",
+    "className": "EasyJWTTest",
+    "fileName": "/BMeu_&_EasyJWT/tests_&_easyjwt_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n            Test verifying an expired token.\n\n            Expected Result: An `ExpiredTokenError` error is raised.\n        \"\"\"\neasyjwt_creation = EasyJWT(self.key)\neasyjwt_creation.expiration_date = self.expiration_date - timedelta(minutes=30)\ntoken = easyjwt_creation.create()\nwith self.assertRaises(ExpiredTokenError):\n    easyjwt_verification = EasyJWT.verify(token, self.key)\n    self.assertIsNone(easyjwt_verification)\n"
+}

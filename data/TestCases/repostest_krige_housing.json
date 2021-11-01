@@ -1,0 +1,9 @@
+{
+    "functionName": "test_krige_housing",
+    "className": null,
+    "fileName": "/bsmurphy_&_PyKrige/tests_&_test_regression_krige.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "import ssl\nimport urllib\ntry:\n    housing = fetch_california_housing()\nexcept (ssl.SSLError, urllib.error.URLError):\n    ssl._create_default_https_context = ssl._create_unverified_context\n    try:\n        housing = fetch_california_housing()\n    except PermissionError:\n        pytest.skip('Failed to load california housing dataset')\n    ssl._create_default_https_context = ssl.create_default_context\np = housing['data'][:1000, :-2]\nx = housing['data'][:1000, -2:]\ntarget = housing['target'][:1000]\np_train, p_test, y_train, y_test, x_train, x_test = train_test_split(p,\n    target, x, train_size=0.7, random_state=10)\nfor ml_model, krige_method in _methods():\n    reg_kr_model = RegressionKriging(regression_model=ml_model, method=\n        krige_method, n_closest_points=2)\n    reg_kr_model.fit(p_train, x_train, y_train)\n    if krige_method == 'ordinary':\n        assert reg_kr_model.score(p_test, x_test, y_test) > 0.5\n    else:\n        assert reg_kr_model.score(p_test, x_test, y_test) > 0.0\npytest.mark.skipif(not SKLEARN_INSTALLED, reason='requires scikit-learn')"
+}

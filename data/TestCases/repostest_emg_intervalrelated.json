@@ -1,0 +1,9 @@
+{
+    "functionName": "test_emg_intervalrelated",
+    "className": null,
+    "fileName": "/neuropsychology_&_NeuroKit/tests_&_tests_emg.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "emg = nk.emg_simulate(duration=40, sampling_rate=1000, burst_number=3)\nemg_signals, info = nk.emg_process(emg, sampling_rate=1000)\ncolumns = ['EMG_Activation_N', 'EMG_Amplitude_Mean']\nfeatures_df = nk.emg_intervalrelated(emg_signals)\nassert all(elem in columns for elem in np.array(features_df.columns.values,\n    dtype=str))\nassert features_df.shape[0] == 1\nepochs = nk.epochs_create(emg_signals, events=[0, 20000], sampling_rate=\n    1000, epochs_end=20)\nfeatures_dict = nk.emg_intervalrelated(epochs)\nassert all(elem in columns for elem in np.array(features_dict.columns.\n    values, dtype=str))\nassert features_dict.shape[0] == 2\n"
+}

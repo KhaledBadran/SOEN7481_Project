@@ -1,0 +1,9 @@
+{
+    "functionName": "testNoiselessMerge",
+    "className": "IVWTransformTest",
+    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_ivw_transform.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "obsd = ObservationData(metric_names=['m1', 'm2', 'm2'], means=np.array([1.0,\n    2.0, 1.0]), covariance=np.array([[1.0, 0.2, 0.4], [0.2, 2.0, 0.8], [0.4,\n    0.8, 0.0]]))\nobsd2 = ivw_metric_merge(obsd)\nnp.array_equal(obsd2.means, np.array([1.0, 1.0]))\ncov_true = np.array([[1.0, 0.4], [0.4, 0.0]])\nself.assertTrue(np.array_equal(obsd2.covariance, cov_true))\nobsd = ObservationData(metric_names=['m1', 'm2', 'm2'], means=np.array([1.0,\n    2.0, 1.0]), covariance=np.array([[1.0, 0.2, 0.4], [0.2, 0.0, 0.8], [0.4,\n    0.8, 0.0]]))\nwith self.assertRaises(ValueError):\n    obsd2 = ivw_metric_merge(obsd, conflicting_noiseless='wrong')\nobsd2 = ivw_metric_merge(obsd)\nself.assertTrue(np.array_equal(obsd2.means, np.array([1.0, 2.0])))\ncov_true = np.array([[1.0, 0.2], [0.2, 0.0]])\nself.assertTrue(np.array_equal(obsd2.covariance, cov_true))\nwith self.assertRaises(ValueError):\n    obsd2 = ivw_metric_merge(obsd, conflicting_noiseless='raise')\n"
+}

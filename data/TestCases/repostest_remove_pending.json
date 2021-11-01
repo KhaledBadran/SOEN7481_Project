@@ -1,0 +1,9 @@
+{
+    "functionName": "test_remove_pending",
+    "className": "TestFaceInterestMethods",
+    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_face_methods.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "name = Name('/ndn/edu/ucla/remap/')\ndataCallback = Mock()\ntimeoutCallback = Mock()\ninterestID = self.face.expressInterest(name, dataCallback, timeoutCallback)\nself.face.removePendingInterest(interestID)\ntimeout = 10000\nstartTime = getNowMilliseconds()\nwhile True:\n    if getNowMilliseconds() - startTime >= timeout:\n        break\n    self.face.processEvents()\n    if dataCallback.call_count > 0 or timeoutCallback.call_count > 0:\n        break\n    time.sleep(0.01)\nself.assertEqual(dataCallback.call_count, 0,\n    'Should not have called data callback after interest was removed')\nself.assertEqual(timeoutCallback.call_count, 0,\n    'Should not have called timeout callback after interest was removed')\n"
+}

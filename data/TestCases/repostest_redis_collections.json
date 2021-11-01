@@ -1,0 +1,9 @@
+{
+    "functionName": "test_redis_collections",
+    "className": null,
+    "fileName": "/ViiSiX_&_FlaskRedislite/test_flask_redislite.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    - Test if we can set and get values using Redis-Collections\n    \"\"\"\nrdb = flask_redislite.FlaskRedis(app, collections=True)\nwith app.app_context():\n    collection = rdb.collection\n    d = collection.dict('foo_dict')\n    d['foo2'] = '28bH-76R-26A'\n    assert not isinstance(d, dict)\n    assert d == {'foo2': '28bH-76R-26A'}\n    l = collection.list('foo_list')\n    l.append('foo3 is kua3D')\n    assert not isinstance(l, list)\n    assert l[0] == 'foo3 is kua3D'\ntime.sleep(0.5)\nwith app.app_context():\n    collection = rdb.collection\n    d = collection.get_dict('foo_dict')\n    assert not isinstance(d, dict)\n    assert d == {'foo2': '28bH-76R-26A'}\n    l = collection.get_list('foo_list')\n    assert not isinstance(l, list)\n    assert l[0] == 'foo3 is kua3D'\n"
+}

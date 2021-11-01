@@ -1,0 +1,9 @@
+{
+    "functionName": "test_space_from_yaml",
+    "className": null,
+    "fileName": "/bytesandbrains_&_ProcessOptimizer/ProcessOptimizer_&_tests_&_test_space.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with NamedTemporaryFile() as tmp:\n    tmp.write(\n        b'\\n        Space:\\n            - Real:\\n                low: 0.0\\n                high: 1.0\\n            - Integer:\\n                low: -5\\n                high: 5\\n            - Categorical:\\n                categories:\\n                - a\\n                - b\\n                - c\\n            - Real:\\n                low: 1.0\\n                high: 5.0\\n                prior: log-uniform\\n            - Categorical:\\n                categories:\\n                - e\\n                - f\\n        '\n        )\n    tmp.flush()\n    space = Space([(0.0, 1.0), (-5, 5), ('a', 'b', 'c'), (1.0, 5.0,\n        'log-uniform'), ('e', 'f')])\n    space2 = Space.from_yaml(tmp.name)\n    assert_equal(space, space2)\npytest.mark.fast_test"
+}

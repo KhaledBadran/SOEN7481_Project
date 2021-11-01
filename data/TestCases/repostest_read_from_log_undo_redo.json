@@ -1,0 +1,9 @@
+{
+    "functionName": "test_read_from_log_undo_redo",
+    "className": null,
+    "fileName": "/seung-lab_&_PyChunkedGraph/pychunkedgraph_&_tests_&_test_graphoperation.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Undo[Redo[Merge]] -> Undo[Merge]\"\"\"\nfake_log_record = {column_keys.OperationLogs.UndoOperationID: np.uint64(\n    FakeLogRecords.REDO.id), column_keys.OperationLogs.UserID: '42'}\ngraph_operation = GraphEditOperation.from_log_record(cg, fake_log_record)\nassert isinstance(graph_operation, UndoOperation)\nassert isinstance(graph_operation.inverse_superseded_operation, SplitOperation)\n"
+}

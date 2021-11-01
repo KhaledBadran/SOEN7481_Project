@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ad_dif_mig_cond_when_dif_cond_in_wrong_shape",
+    "className": "NernstPlanckTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_NernstPlanckTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "gd = self.phase['throat.diffusive_conductance.ionX']\nself.phys['throat.Nt_by_3.ionX'] = np.vstack((gd, gd, gd)).T\nmod = op.models.physics.ad_dif_mig_conductance.ad_dif_mig\nwith pytest.raises(Exception):\n    self.phys.add_model(propname='throat.ad_dif_mig_conductance_Nt_by_2',\n        model=mod, s_scheme='upwind', ion='ionX',\n        throat_diffusive_conductance='throat.Nt_by_3')\n"
+}

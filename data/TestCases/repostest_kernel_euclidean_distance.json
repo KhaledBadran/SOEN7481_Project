@@ -1,0 +1,9 @@
+{
+    "functionName": "test_kernel_euclidean_distance",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_kernels_&_test_scaled_euclid_dist.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Tests output & gradients of kernels that are a function of the (scaled) euclidean distance\n    of the points. We test on a high dimensional space, which can generate very small distances\n    causing the scaled_square_dist to generate some negative values.\n    \"\"\"\nK = kernel(Datum.X)\nassert not np.isnan(K).any(\n    ), 'NaNs in the output of the ' + kernel.__name__ + 'kernel.'\nassert np.isfinite(K).all(\n    ), 'Infs in the output of the ' + kernel.__name__ + ' kernel.'\nX_as_param = tf.Variable(Datum.X)\nwith tf.GradientTape() as tape:\n    K_value = kernel(X_as_param, X_as_param)\ndK = tape.gradient(K_value, X_as_param)[0]\nassert not np.isnan(dK).any(\n    ), 'NaNs in the gradient of the ' + kernel.__name__ + ' kernel.'\nassert np.isfinite(dK).all(\n    ), 'Infs in the output of the ' + kernel.__name__ + ' kernel.'\npytest.mark.parametrize('kernel', kernel_list)"
+}

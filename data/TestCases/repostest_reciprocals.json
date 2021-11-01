@@ -1,0 +1,9 @@
+{
+    "functionName": "test_reciprocals",
+    "className": null,
+    "fileName": "/Accenture_&_AmpliGraph/tests_&_ampligraph_&_datasets_&_test_datasets.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test for reciprocal relations\n    \"\"\"\nfb15k = load_fb15k(add_reciprocal_rels=True)\ntrain_reciprocal = fb15k['train']\ntriple = train_reciprocal[0]\nreciprocal_triple = train_reciprocal[train_reciprocal.shape[0] // 2]\nassert triple[0] == reciprocal_triple[2]\nassert triple[2] == reciprocal_triple[0]\nassert triple[1] + '_reciprocal' == reciprocal_triple[1]\nfb15k = load_fb15k(add_reciprocal_rels=False)\nassert fb15k['train'].shape[0] == train_reciprocal.shape[0] // 2\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_binary_classification_with_custom_objective",
+    "className": "TestSklearn",
+    "fileName": "/microsoft_&_LightGBM/tests_&_python_package_test_&_test_sklearn.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "X, y = load_digits(n_class=2, return_X_y=True)\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1,\n    random_state=42)\ngbm = lgb.LGBMClassifier(n_estimators=50, silent=True, objective=logregobj)\ngbm.fit(X_train, y_train, eval_set=[(X_test, y_test)],\n    early_stopping_rounds=5, verbose=False)\ny_pred_raw = gbm.predict_proba(X_test)\nself.assertFalse(np.all(y_pred_raw >= 0))\ny_pred = 1.0 / (1.0 + np.exp(-y_pred_raw))\nret = binary_error(y_test, y_pred)\nself.assertLess(ret, 0.05)\n"
+}

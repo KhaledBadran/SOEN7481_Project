@@ -1,0 +1,9 @@
+{
+    "functionName": "test_basic_padding",
+    "className": null,
+    "fileName": "/NTMC-Community_&_MatchZoo-py/tests_&_dataloader_&_test_callbacks.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "preprocessor = preprocessors.BasicPreprocessor()\ndata_preprocessed = preprocessor.fit_transform(train_raw, verbose=0)\ndataset = Dataset(data_preprocessed, batch_size=5, mode='point')\npre_fixed_padding = callbacks.BasicPadding(fixed_length_left=5,\n    fixed_length_right=5, pad_word_mode='pre', with_ngram=False)\ndataloader = DataLoader(dataset, callback=pre_fixed_padding)\nfor batch in dataloader:\n    assert batch[0]['text_left'].shape == (5, 5)\n    assert batch[0]['text_right'].shape == (5, 5)\npost_padding = callbacks.BasicPadding(pad_word_mode='post', with_ngram=False)\ndataloader = DataLoader(dataset, callback=post_padding)\nfor batch in dataloader:\n    max_left_len = max(batch[0]['length_left'].detach().cpu().numpy())\n    max_right_len = max(batch[0]['length_right'].detach().cpu().numpy())\n    assert batch[0]['text_left'].shape == (5, max_left_len)\n    assert batch[0]['text_right'].shape == (5, max_right_len)\n"
+}

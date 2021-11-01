@@ -1,0 +1,9 @@
+{
+    "functionName": "_try_larger_image",
+    "className": "BoxToMRZ",
+    "fileName": "/konstantint_&_PassportEye/passporteye_&_mrz_&_image.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Attempts to improve the OCR result by scaling the image. If the new mrz is better, returns it, otherwise returns\n        the old mrz.\"\"\"\nif roi.shape[1] <= 700:\n    scale_by = int(1050.0 / roi.shape[1] + 0.5)\n    roi_lg = transform.rescale(roi, scale_by, order=filter_order, mode=\n        'constant', multichannel=False, anti_aliasing=True)\n    new_text = ocr(roi_lg, extra_cmdline_params=self.extra_cmdline_params)\n    new_mrz = MRZ.from_ocr(new_text)\n    new_mrz.aux['method'] = 'rescaled(%d)' % filter_order\n    if new_mrz.valid_score > cur_mrz.valid_score:\n        cur_mrz = new_mrz\n        cur_text = new_text\nreturn cur_text, cur_mrz\n"
+}

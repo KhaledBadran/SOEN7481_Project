@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sample_arm_iadd",
+    "className": "TestDataContainers",
+    "fileName": "/Yelp_&_MOE/moe_&_tests_&_bandit_&_data_containers_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test SampleArm's __iadd__ overload operator.\n\n        Verify that after x += y, x gets the new value x + y and still retains its old id.\n\n        \"\"\"\narm1 = SampleArm(win=2, loss=1, total=3)\narm2 = SampleArm(win=3, loss=2, total=5)\narm3 = arm1 + arm2\narm1_old_id = id(arm1)\narm1 += arm2\narm1_new_id = id(arm1)\nassert arm1_old_id == arm1_new_id\nassert arm1.json_payload() == arm3.json_payload()\n"
+}

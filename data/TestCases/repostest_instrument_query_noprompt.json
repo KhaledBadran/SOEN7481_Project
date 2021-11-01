@@ -1,0 +1,9 @@
+{
+    "functionName": "test_instrument_query_noprompt",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_base_instrument.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Expected order of operations:\n\n    - IK sends command to instrument\n    - Instrument sends ACK, commonly an echo of the command\n    - ACK is verified with _ack_expected function\n    - If ACK is good, do another read which contains our return data\n    \"\"\"\nmock_filelike = mock.MagicMock()\nmock_filelike.__class__ = AbstractCommunicator\ninst = ik.Instrument(mock_filelike)\ninst.read = mock.MagicMock(side_effect=['foobar?', 'datas'])\ndef new_ack(msg):\n    return msg\ninst._ack_expected = new_ack\nassert inst.query('foobar?') == 'datas'\ninst._file.query.assert_called_with('foobar?', size=0)\ninst.read.assert_called_with(-1)\n"
+}

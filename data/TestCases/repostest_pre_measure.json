@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pre_measure",
+    "className": "ExpvalAndPreExpvalMock",
+    "fileName": "/XanaduAI_&_PennyLane-PQ/tests_&_test_ibm_expval_and_pre_expval_mock.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with patch('pennylane_pq.devices.ProjectQIBMBackend.obs_queue',\n    new_callable=PropertyMock) as mock_obs_queue:\n    mock_PauliX = MagicMock(wires=[0])\n    mock_PauliX.name = 'PauliX'\n    mock_PauliY = MagicMock(wires=[0])\n    mock_PauliY.name = 'PauliY'\n    mock_Hadamard = MagicMock(wires=[0])\n    mock_Hadamard.name = 'Hadamard'\n    mock_Hermitian = MagicMock(wires=[0])\n    mock_Hermitian.name = 'Hermitian'\n    mock_obs_queue.return_value = [mock_PauliX, mock_PauliY, mock_Hadamard]\n    dev = ProjectQIBMBackend(wires=2, use_hardware=False, num_runs=8 * 1024,\n        token=token, verbose=True)\n    dev._eng = MagicMock()\n    dev.apply = MagicMock()\n    with patch('projectq.ops.All', new_callable=PropertyMock) as mock_All:\n        dev.pre_measure()\n    dev._eng.assert_has_calls([call.flush()])\n    dev.apply.assert_has_calls([call('Hadamard', [0], []), call('PauliZ', [\n        0], []), call('S', [0], []), call('Hadamard', [0], []), call('RY',\n        [0], [-0.7853981633974483])])\n    mock_obs_queue.return_value = [mock_Hermitian]\n    with patch('projectq.ops.All', new_callable=PropertyMock) as mock_All:\n        self.assertRaises(NotImplementedError, dev.pre_measure)\n"
+}

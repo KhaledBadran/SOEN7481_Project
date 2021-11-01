@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gaussian_accuracy",
+    "className": null,
+    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_profiles.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "def fk(k):\n    return np.pi ** 1.5 * np.exp(-k ** 2 / 4)\np = ccl.halos.HaloProfileGaussian(one_f, one_f)\nk_arr = np.logspace(-3, 2, 1024)\nfk_arr = p.fourier(COSMO, k_arr, 1.0, 1.0)\nfk_arr_pred = fk(k_arr)\nres = np.fabs(fk_arr - fk_arr_pred)\nassert np.all(res < 0.005)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_string_to_index_kargs",
+    "className": null,
+    "fileName": "/ironmussa_&_Optimus/tests_&_test_ml.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "df = op.spark.createDataFrame([(0, 'a'), (1, 'b'), (2, 'c'), (3, 'a'), (4,\n    'a'), (5, 'c')], ['id', 'category'])\ndf_indexed = fe.string_to_index(df, 'category', stringOrderType='frequencyAsc')\nassert_spark_df(df_indexed)\nexpected_collect = op.sc.parallelize([Row(id=0, category='a',\n    category_index=2.0), Row(id=1, category='b', category_index=0.0), Row(\n    id=2, category='c', category_index=1.0), Row(id=3, category='a',\n    category_index=2.0), Row(id=4, category='a', category_index=2.0), Row(\n    id=5, category='c', category_index=1.0)]).toDF()\nassert_equal(df_indexed.select('category', 'category***STRING_TO_INDEX',\n    'id').collect(), expected_collect.collect())\n"
+}

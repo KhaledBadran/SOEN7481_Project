@@ -1,0 +1,9 @@
+{
+    "functionName": "test_read_git_tags_happypath",
+    "className": null,
+    "fileName": "/EVEprosper_&_ProsperCommon/tests_&_test_prosper_version.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"validate version matches expectation\"\"\"\ntag_version = semantic_version.Version(p_version._read_git_tags())\nif tag_version.prerelease:\n    pytest.xfail(\n        'PyPI prerelease formatting not compatable with `semantic_version`')\nreleased_versions_report = check_output(['yolk', '-V', 'prospercommon']\n    ).splitlines()\nreleased_versions = []\nfor line in released_versions_report:\n    released_versions.append(decode(line, 'utf-8').split(' ')[1])\ncurrent_version = max([semantic_version.Version(line) for line in\n    released_versions])\ntag_status = tag_version <= current_version\nif os.environ.get('TRAVIS_TAG') and not tag_status:\n    pytest.xfail('Drafting release -- tag={} current={}'.format(tag_version,\n        current_version))\nif not tag_status:\n    pytest.xfail('Expected release mismatch -- tag={} yolk={}'.format(\n        tag_version, current_version))\n"
+}

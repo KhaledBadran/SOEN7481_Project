@@ -1,0 +1,9 @@
+{
+    "functionName": "test_paired_mean_diff_ci",
+    "className": null,
+    "fileName": "/ACCLAB_&_DABEST-python/dabest_&_tests_&_test_99_confint.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "blood_pressure = {'before': [148, 142, 136, 134, 138, 140, 132, 144, 128, \n    170, 162, 150, 138, 154, 126, 116], 'after': [152, 152, 134, 148, 144, \n    136, 144, 150, 146, 174, 162, 162, 146, 156, 132, 126], 'subject_id':\n    np.arange(1, 17)}\nexercise_bp = pd.DataFrame(blood_pressure)\nex_bp = load(data=exercise_bp, idx=('before', 'after'), paired=True, id_col\n    ='subject_id')\npaired_mean_diff = ex_bp.mean_diff.results\nassert pytest.approx(3.875) == paired_mean_diff.bca_low[0]\nassert pytest.approx(9.5) == paired_mean_diff.bca_high[0]\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_api_lsi",
+    "className": null,
+    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_server_&_tests_&_test_lsi.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "dsid, pars, _ = get_features_cached(app)\nmethod = V01 + '/feature-extraction/{}'.format(dsid)\nres = app.get(method)\nassert res.status_code == 200\ndata = parse_res(res)\nmethod = V01 + '/lsi/'\nres = app.get_check(method, data=dict(parent_id=dsid))\nlsi_pars = dict(n_components=101, parent_id=dsid)\nmethod = V01 + '/lsi/'\ndata = app.post_check(method, json=lsi_pars)\nassert sorted(data.keys()) == ['explained_variance', 'id']\nlid = data['id']\nmethod = V01 + '/lsi/'\ndata = app.get(method, data=dict(parent_id=dsid))\nmethod = V01 + '/lsi/{}'.format(lid)\ndata = app.get_check(method)\nfor key, vals in lsi_pars.items():\n    assert vals == data[key]\nassert sorted(data.keys()) == sorted(['n_components', 'parent_id'])\nfor key in data.keys():\n    assert data[key] == lsi_pars[key]\n"
+}

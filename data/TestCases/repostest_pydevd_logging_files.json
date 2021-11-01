@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pydevd_logging_files",
+    "className": null,
+    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_utilities.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from _pydev_bundle import pydev_log\nfrom _pydevd_bundle.pydevd_constants import DebugInfoHolder\nimport os.path\nfrom _pydev_bundle.pydev_log import _LoggingGlobals\ntry:\n    import StringIO as io\nexcept:\n    import io\nfrom _pydev_bundle.pydev_log import log_context\nstream = io.StringIO()\nwith log_context(0, stream=stream):\n    d1 = str(tmpdir.join('d1'))\n    d2 = str(tmpdir.join('d2'))\n    for d in (d1, d2):\n        DebugInfoHolder.PYDEVD_DEBUG_FILE = os.path.join(d, 'file.txt')\n        pydev_log.initialize_debug_stream(reinitialize=True)\n        assert os.path.normpath(_LoggingGlobals._debug_stream_filename\n            ) == os.path.normpath(os.path.join(d, 'file.%s.txt' % os.getpid()))\n        assert os.path.exists(_LoggingGlobals._debug_stream_filename)\n        assert pydev_log.list_log_files(DebugInfoHolder.PYDEVD_DEBUG_FILE) == [\n            _LoggingGlobals._debug_stream_filename]\n"
+}

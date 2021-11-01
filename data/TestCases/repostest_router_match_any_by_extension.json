@@ -1,0 +1,9 @@
+{
+    "functionName": "test_router_match_any_by_extension",
+    "className": null,
+    "fileName": "/RobertoPrevato_&_BlackSheep/tests_&_test_router.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "router = Router()\ndef a():\n    ...\ndef b():\n    ...\nrouter.add_get(b'/a/*.js', a)\nrouter.add_get(b'/b/*.css', b)\nm = router.get_match(HttpMethod.GET, b'/a/anything/really')\nassert m is None\nm = router.get_match(HttpMethod.GET, b'/a/anything/really.js')\nassert m is not None\nassert m.handler is a\nassert m.values.get('tail') == 'anything/really'\nm = router.get_match(HttpMethod.GET, b'/b/anything/really.css')\nassert m is not None\nassert m.handler is b\nassert m.values.get('tail') == 'anything/really'\n"
+}

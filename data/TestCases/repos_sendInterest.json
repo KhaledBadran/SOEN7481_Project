@@ -1,0 +1,9 @@
+{
+    "functionName": "_sendInterest",
+    "className": "Chat",
+    "fileName": "/named-data_&_PyNDN2/examples_&_test_chrono_chat.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        Send a Chat Interest to fetch chat messages after the user gets the Sync\n        data packet back but will not send interest.\n        \"\"\"\nself._isRecoverySyncState = isRecovery\nsendList = []\nsessionNoList = []\nsequenceNoList = []\nfor j in range(len(syncStates)):\n    syncState = syncStates[j]\n    nameComponents = Name(syncState.getDataPrefix())\n    tempName = nameComponents.get(-1).toEscapedString()\n    sessionNo = syncState.getSessionNo()\n    if not tempName == self._screenName:\n        index = -1\n        for k in range(len(sendList)):\n            if sendList[k] == syncState.getDataPrefix():\n                index = k\n                break\n        if index != -1:\n            sessionNoList[index] = sessionNo\n            sequenceNoList[index] = syncState.getSequenceNo()\n        else:\n            sendList.append(syncState.getDataPrefix())\n            sessionNoList.append(sessionNo)\n            sequenceNoList.append(syncState.getSequenceNo())\nfor i in range(len(sendList)):\n    uri = sendList[i] + '/' + str(sessionNoList[i]) + '/' + str(sequenceNoList\n        [i])\n    interest = Interest(Name(uri))\n    interest.setInterestLifetimeMilliseconds(self._syncLifetime)\n    self._face.expressInterest(interest, self._onData, self._chatTimeout)\n"
+}

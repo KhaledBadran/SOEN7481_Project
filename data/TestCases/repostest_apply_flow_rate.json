@@ -1,0 +1,9 @@
+{
+    "functionName": "test_apply_flow_rate",
+    "className": "MixedPercolationTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_MixedPercolationTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "t = self\npvol = np.sum(t.net['pore.volume'])\ntvol = np.sum(t.net['throat.volume'])\ntot = pvol + tvol\nnet = self.net\nphys = self.phys\nphys['throat.entry_pressure'] = np.arange(0, net.Nt, dtype=float)\nphys['pore.entry_pressure'] = 0.0\nself.run_mp(False, False, False, flowrate=tot)\nassert 'throat.invasion_time' in self.phase.props()\n"
+}

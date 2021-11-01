@@ -1,0 +1,9 @@
+{
+    "functionName": "test_parameter_assign_validation",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_test_base.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with pytest.raises(tf.errors.InvalidArgumentError):\n    param = gpflow.Parameter(0.0, transform=positive())\nparam = gpflow.Parameter(0.1, transform=positive())\nparam.assign(0.2)\nwith pytest.raises(tf.errors.InvalidArgumentError):\n    param.assign(0.0)\n"
+}

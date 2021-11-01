@@ -1,0 +1,9 @@
+{
+    "functionName": "test_random_state_object",
+    "className": "TestSklearn",
+    "fileName": "/microsoft_&_LightGBM/tests_&_python_package_test_&_test_sklearn.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "X, y = load_iris(return_X_y=True)\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1,\n    random_state=42)\nstate1 = np.random.RandomState(123)\nstate2 = np.random.RandomState(123)\nclf1 = lgb.LGBMClassifier(n_estimators=10, subsample=0.5, subsample_freq=1,\n    random_state=state1)\nclf2 = lgb.LGBMClassifier(n_estimators=10, subsample=0.5, subsample_freq=1,\n    random_state=state2)\nself.assertIs(clf1.random_state, state1)\nself.assertIs(clf2.random_state, state2)\nclf1.fit(X_train, y_train)\nclf2.fit(X_train, y_train)\ny_pred1 = clf1.predict(X_test, raw_score=True)\ny_pred2 = clf2.predict(X_test, raw_score=True)\nnp.testing.assert_allclose(y_pred1, y_pred2)\nnp.testing.assert_array_equal(clf1.feature_importances_, clf2.\n    feature_importances_)\ndf1 = clf1.booster_.model_to_string(num_iteration=0)\ndf2 = clf2.booster_.model_to_string(num_iteration=0)\nself.assertMultiLineEqual(df1, df2)\nclf1.fit(X_train, y_train)\ny_pred1_refit = clf1.predict(X_test, raw_score=True)\ndf3 = clf1.booster_.model_to_string(num_iteration=0)\nself.assertIs(clf1.random_state, state1)\nself.assertIs(clf2.random_state, state2)\nself.assertRaises(AssertionError, np.testing.assert_allclose, y_pred1,\n    y_pred1_refit)\nself.assertRaises(AssertionError, self.assertMultiLineEqual, df1, df3)\n"
+}

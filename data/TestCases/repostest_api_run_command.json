@@ -1,0 +1,9 @@
+{
+    "functionName": "test_api_run_command",
+    "className": "KeybaseAPITest",
+    "fileName": "/cmsteffen-code_&_PyKBLib/tests_&_test_pykblib_api.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "mock_run.return_value = b'return value'\nself.assertEqual(self.api.run_command('test command'), 'return value')\nmock_run.assert_called_with('keybase test command')\nmock_run.return_value = (b'\\x1b[31m\\xe2\\x96\\xb6 ERROR Team ' +\n    b'\"cancel\" does not exist\\x1b[0m\\r\\n')\nwith self.assertRaises(APIException):\n    self.api.run_command('test command')\nmock.patch('pykblib.api.pexpect.run')"
+}

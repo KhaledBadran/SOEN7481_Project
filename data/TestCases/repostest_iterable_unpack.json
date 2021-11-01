@@ -1,0 +1,9 @@
+{
+    "functionName": "test_iterable_unpack",
+    "className": "TestSaveToCSV",
+    "fileName": "/Erik-White_&_ColonyScanalyser/tests_&_unit_&_test_file_access.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "import csv\nclass TestIterator:\n\n    def __init__(self, prop):\n        self.prop = prop\n\n    def __iter__(self):\n        return iter([self.prop])\ndata_iters = list()\nfor row in data_list:\n    data_iters.append(TestIterator(row[0]))\nresult = save_to_csv(data_iters, headers, tmp_path.joinpath('csv_unpack'))\ndata_iters.insert(0, TestIterator(headers))\nwith open(result, 'r') as csvfile:\n    reader = csv.reader(csvfile)\n    for i, row in enumerate(reader):\n        if i == 0:\n            data_iters[i].prop == row\n        else:\n            assert [str(data_iters[i].prop)] == row\n"
+}

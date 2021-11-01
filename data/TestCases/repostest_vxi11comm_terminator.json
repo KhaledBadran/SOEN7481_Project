@@ -1,0 +1,9 @@
+{
+    "functionName": "test_vxi11comm_terminator",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_comm_&_test_vxi11.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "comm = VXI11Communicator()\nterm_char = mock.PropertyMock(return_value='\\n')\ntype(comm._inst).term_char = term_char\nassert comm.terminator == '\\n'\nterm_char.assert_called_with()\ncomm.terminator = '*'\nterm_char.assert_called_with('*')\nmock.patch(import_base)"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "testConvertMetricNames",
+    "className": "ConvertMetricNamesTest",
+    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_convert_metric_names.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "transform = ConvertMetricNames(None, self.observation_features, self.\n    observation_data, config=self.tconfig)\ntransformed_observations = convert_mt_observations(self.observations, self.\n    experiment)\ntransformed_observation_data = [o.data for o in transformed_observations]\ntransformed_observation_features = [o.features for o in\n    transformed_observations]\nfor obsd in transformed_observation_data:\n    self.assertEqual(obsd.metric_names[0], 'm1')\nuntransformed_observation_data = transform.untransform_observation_data(\n    transformed_observation_data, transformed_observation_features)\nself.assertEqual(transformed_observation_data, untransformed_observation_data)\ntransform.perform_untransform = True\nuntransformed_observation_data = transform.untransform_observation_data(\n    transformed_observation_data, transformed_observation_features)\nfor i in range(len(self.observations)):\n    metric_name = 'm1' if self.observation_features[i\n        ].trial_index == 0 else 'm2'\n    self.assertEqual(untransformed_observation_data[i].metric_names[0],\n        metric_name)\n"
+}

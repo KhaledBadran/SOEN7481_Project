@@ -1,0 +1,9 @@
+{
+    "functionName": "test_setting_inlets",
+    "className": "FormationFactorTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_metrics_&_FormationFactorTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "FF = op.algorithms.metrics.FormationFactor(network=self.net)\nPs = self.net.pores('left')\nself.net.set_label(pores=Ps, label='blah')\nFF.set_inlets(direction='x', label='blah')\nFF.run()\nval_1 = FF.results['x']\nFF.set_inlets(direction='x', label='left')\nFF.run()\nval_2 = FF.results['x']\nassert val_1 == val_2\n"
+}

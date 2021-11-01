@@ -1,0 +1,9 @@
+{
+    "functionName": "test_no_serializer_class",
+    "className": "TestMMObjectViews",
+    "fileName": "/Axiologue_&_DjangoRestMultipleModels/tests_&_test_object_view.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        A querylist with no `serializer_class` key should raise a ValidationError with the\n        appropriate message\n        \"\"\"\nview = NoSerializerClassView.as_view()\nrequest = factory.get('/')\nwith self.assertRaises(ValidationError) as error:\n    view(request).render()\nself.assertEqual(error.exception.message,\n    'All items in the NoSerializerClassView querylist attribute should contain a `serializer_class` key'\n    )\n"
+}

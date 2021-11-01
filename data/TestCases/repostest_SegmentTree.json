@@ -1,0 +1,9 @@
+{
+    "functionName": "test_SegmentTree",
+    "className": null,
+    "fileName": "/cheran-senthil_&_PyRival/tests_&_data_structures_&_test_SegmentTree.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "for _ in range(1000):\n    l = random.randint(2, 100)\n    arr = [random.randint(-1000, 1000) for _ in range(l)]\n    seg_tree = SegmentTree(arr, default, func)\n    q = random.randint(0, 100)\n    for _ in range(q):\n        t = random.randrange(0, 2)\n        if t == 0:\n            start = random.randrange(0, l)\n            stop = random.randrange(start, l)\n            m = default\n            for i in range(start, stop):\n                m = func(m, arr[i])\n            assert seg_tree.query(start, stop) == m\n        else:\n            idx = random.randrange(0, l)\n            seg_tree[idx] = arr[idx] = random.randint(-1000, 1000)\npytest.mark.parametrize('default,func', params)"
+}

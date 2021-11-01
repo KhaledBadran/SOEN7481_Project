@@ -1,0 +1,9 @@
+{
+    "functionName": "test_convert_dap_log_message_to_expression",
+    "className": null,
+    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_utilities.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "assert check_dap_log_message('a', \"'a'\", 'a')\nassert check_dap_log_message('a {a}', \"'a %s' % (a,)\", 'a value', {'a':\n    'value'})\nassert check_dap_log_message('a {1}', \"'a %s' % (1,)\", 'a 1')\nassert check_dap_log_message('a {  }', \"'a '\", 'a ')\nassert check_dap_log_message('a {1} {2}', \"'a %s %s' % (1, 2,)\", 'a 1 2')\nassert check_dap_log_message('a {{22:22}} {2}', \"'a %s %s' % ({22:22}, 2,)\",\n    'a {22: 22} 2')\nassert check_dap_log_message('a {(22,33)}} {2}',\n    \"'a %s} %s' % ((22,33), 2,)\", 'a (22, 33)} 2')\nif not IS_PY26:\n    assert check_dap_log_message('a {{1: {1}}}', \"'a %s' % ({1: {1}},)\", \n        'a {1: {1}}' if IS_PY3K else 'a {1: set([1])}')\nassert check_dap_log_message('a {{22:22} {2}',\n    \"'Unbalanced braces in: a {{22:22} {2}'\",\n    'Unbalanced braces in: a {{22:22} {2}')\n"
+}

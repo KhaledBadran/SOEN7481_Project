@@ -1,0 +1,9 @@
+{
+    "functionName": "test_macro_with_erros",
+    "className": "TestAnyPyProcess",
+    "fileName": "/AnyBody-Research-Group_&_AnyPyTools/tests_&_test_abcutils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "app = AnyPyProcess(silent=True, ignore_errors=['Unresolved object'])\nmacro = [['load \"model.main.any\"',\n    'operation Main.ArmModelStudy.InverseDynamics'], [\n    'load \"model.main.any\"', 'operation Main.NonExistentOpeation'], [\n    'load \"not_a_model.any\"', 'operation Main.ArmModelStudy.InverseDynamics']]\noutput = app.start_macro(macro)\nassert not 'ERROR' in output[0]\nassert not 'ERROR' in output[1]\nassert 'ERROR' in output[2]\n"
+}

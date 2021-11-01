@@ -1,0 +1,9 @@
+{
+    "functionName": "test_raw_data_format_with_fidelities",
+    "className": "TestAxClient",
+    "fileName": "/facebook_&_Ax/ax_&_service_&_tests_&_test_ax_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ax_client = AxClient()\nax_client.create_experiment(parameters=[{'name': 'x', 'type': 'range',\n    'bounds': [-5.0, 10.0]}, {'name': 'y', 'type': 'range', 'bounds': [0.0,\n    1.0]}], minimize=True)\nfor _ in range(6):\n    parameterization, trial_index = ax_client.get_next_trial()\n    x, y = parameterization.get('x'), parameterization.get('y')\n    ax_client.complete_trial(trial_index, raw_data=[({'y': y / 2.0}, {\n        'objective': (branin(x, y / 2.0), 0.0)}), ({'y': y}, {'objective':\n        (branin(x, y), 0.0)})])\n"
+}

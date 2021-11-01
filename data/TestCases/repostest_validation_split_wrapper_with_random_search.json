@@ -1,0 +1,9 @@
+{
+    "functionName": "test_validation_split_wrapper_with_random_search",
+    "className": null,
+    "fileName": "/Neuraxio_&_Neuraxle/testing_&_metaopt_&_test_validation_split_wrapper.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "transform_callback = TapeCallbackFunction()\nfit_callback = TapeCallbackFunction()\nrandom_search = RandomSearch(FitTransformCallbackStep(\n    transform_callback_function=transform_callback, fit_callback_function=\n    fit_callback, transform_function=lambda di: di * 2),\n    ValidationSplitWrapper(test_size=0.1))\ndata_inputs = np.random.randint(1, 100, (100, 5))\nexpected_outputs = np.random.randint(1, 100, (100, 5))\nrandom_search, outputs = random_search.fit_transform(data_inputs,\n    expected_outputs)\nassert np.array_equal(outputs, data_inputs * 2)\nassert np.array_equal(fit_callback.data[0][0], data_inputs[0:90])\nassert np.array_equal(fit_callback.data[0][1], expected_outputs[0:90])\nassert np.array_equal(transform_callback.data[0], data_inputs[0:90])\nassert np.array_equal(transform_callback.data[1], data_inputs[90:])\nassert np.array_equal(transform_callback.data[2], data_inputs)\nassert random_search.best_model.scores_train is not None\nassert random_search.best_model.scores_validation is not None\nassert random_search.best_model.scores_train_mean is not None\nassert random_search.best_model.scores_validation_mean is not None\nassert random_search.best_model.scores_train_std is not None\nassert random_search.best_model.scores_validation_std is not None\npytest.mark.skip(\n    'There seems to be an error with the reference to the callback function')"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_write_read_crystfel_file",
+    "className": null,
+    "fileName": "/European-XFEL_&_EXtra-geom/extra_geom_&_tests_&_test_agipd_geometry.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "geom = AGIPD_1MGeometry.from_quad_positions(quad_pos=[(-525, 625), (-550, -\n    10), (520, -160), (542.5, 475)])\npath = str(tmpdir / 'test.geom')\ngeom.write_crystfel_geom(filename=path, photon_energy=9000, adu_per_ev=\n    0.0075, clen=0.2)\nloaded = AGIPD_1MGeometry.from_crystfel_geom(path)\nnp.testing.assert_allclose(loaded.modules[0][0].corner_pos, geom.modules[0]\n    [0].corner_pos)\nnp.testing.assert_allclose(loaded.modules[0][0].fs_vec, geom.modules[0][0].\n    fs_vec)\ngeom_dict = load_crystfel_geometry(path)\nquad_gr0 = ['p{}a{}'.format(p, a) for p, a in product(range(4), range(8))]\nassert geom_dict['rigid_groups']['p0'] == quad_gr0[:8]\nassert geom_dict['rigid_groups']['p3'] == quad_gr0[-8:]\nassert geom_dict['rigid_groups']['q0'] == quad_gr0\nassert geom_dict['panels']['p0a0']['res'] == 5000\np3a7 = geom_dict['panels']['p3a7']\nassert p3a7['min_ss'] == 448\nassert p3a7['max_ss'] == 511\nassert p3a7['min_fs'] == 0\nassert p3a7['max_fs'] == 127\n"
+}

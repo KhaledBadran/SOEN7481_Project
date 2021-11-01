@@ -1,0 +1,9 @@
+{
+    "functionName": "test_predict_from_fasta",
+    "className": "TestTrexClassifier",
+    "fileName": "/univieCUBE_&_phenotrex/tests_&_test_ml.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "model_path = (MODELS_PATH / trait_name /\n    f'{trait_name}.{classifier_type.lower()}.pkl')\nwith TemporaryDirectory() as tmpdir:\n    tmp_path = Path(tmpdir) / 'model.pkl'\n    summary_path = Path(tmpdir\n        ) / 'summary.tsv' if classifier_type == 'XGB' else None\n    per_sample_path = Path(tmpdir\n        ) / 'per_sample.tsv' if classifier_type == 'XGB' else None\n    clf = load_classifier(model_path)\n    save_classifier(clf, tmp_path)\n    pred = predict(fasta_files=fasta_files, classifier=tmp_path,\n        out_explain_summary=summary_path, out_explain_per_sample=\n        per_sample_path)\n    assert summary_path is None or summary_path.is_file()\n    assert per_sample_path is None or per_sample_path.is_file()\n    print(pred)\npytest.mark.skipif(not FROM_FASTA, reason='Missing optional dependencies')pytest.mark.parametrize('trait_name', trait_names, ids=trait_names)pytest.mark.parametrize('fasta_files', predict_files, ids=['fna', 'faa',\n    'fna+faa'])pytest.mark.parametrize('classifier_type', classifier_ids, ids=classifier_ids)"
+}

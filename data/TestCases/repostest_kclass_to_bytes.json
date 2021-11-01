@@ -1,0 +1,9 @@
+{
+    "functionName": "test_kclass_to_bytes",
+    "className": null,
+    "fileName": "/Rainist_&_K-Format/tests_&_test_kclass.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "@kclass\nclass Other:\n    an: AN(10)\n    n: N(5)\n@kclass\nclass Something:\n    a: N(10)\n    b: AN(20)\n    other: Other\n    others: List[Other]\n    c: N(5)\n    d: AN(10)\nsth = Something(1, 2, Other(3, 4), [Other(1, 1), Other(1, 1)], 5, 6)\nassert sth.bytes == b'NANANNANNANNNAN'\npatch('kformat.kproperty.AN.to_bytes', lambda s, v: b'AN')patch('kformat.kproperty.N.to_bytes', lambda s, v: b'N')"
+}

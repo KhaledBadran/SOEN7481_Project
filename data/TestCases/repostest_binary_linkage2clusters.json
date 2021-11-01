@@ -1,0 +1,9 @@
+{
+    "functionName": "test_binary_linkage2clusters",
+    "className": null,
+    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_tests_&_test_cluster.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from freediscovery.cluster.utils import _binary_linkage2clusters\nfrom sklearn.metrics import v_measure_score\nn_samples = 10\nlinkage = np.array([[1, 2], [2, 3], [5, 7], [6, 9]])\ncluster_id = _binary_linkage2clusters(linkage, n_samples)\ncluster_id_ref = np.array([0, 1, 1, 1, 2, 3, 4, 3, 5, 4])\nassert cluster_id.shape == cluster_id_ref.shape\nassert v_measure_score(cluster_id, cluster_id_ref) == 1.0\n"
+}

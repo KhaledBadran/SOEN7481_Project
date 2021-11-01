@@ -1,0 +1,9 @@
+{
+    "functionName": "test_xref_request",
+    "className": null,
+    "fileName": "/mcs07_&_PubChemPy/tests_&_test_requests.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test requests with xref inputs.\"\"\"\nresponse = request('US6187568B1', 'PatentID', 'substance', operation='sids',\n    searchtype='xref')\nassert response.code == 200\nresponse2 = get_json('US6187568B1', 'PatentID', 'substance', operation=\n    'sids', searchtype='xref')\nassert 'IdentifierList' in response2\nassert 'SID' in response2['IdentifierList']\nsids = get_sids('US6187568B1', 'PatentID', 'substance', searchtype='xref')\nassert all(isinstance(sid, int) for sid in sids)\n"
+}

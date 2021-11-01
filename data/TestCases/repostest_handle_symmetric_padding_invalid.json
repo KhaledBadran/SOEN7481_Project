@@ -1,0 +1,9 @@
+{
+    "functionName": "test_handle_symmetric_padding_invalid",
+    "className": "TestCryptographyEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_crypto_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the right errors are raised when invalid padding methods\n        are used.\n        \"\"\"\nengine = crypto.CryptographyEngine()\nargs = algorithms.AES, b'\\x01\\x02\\x03\\x04', None\nself.assertRaisesRegex(exceptions.InvalidField,\n    'Padding method is required.', engine._handle_symmetric_padding, *args)\nargs = algorithms.AES, b'\\x01\\x02\\x03\\x04', 'invalid'\nself.assertRaisesRegex(exceptions.InvalidField,\n    \"Padding method 'invalid' is not supported.\", engine.\n    _handle_symmetric_padding, *args)\n"
+}

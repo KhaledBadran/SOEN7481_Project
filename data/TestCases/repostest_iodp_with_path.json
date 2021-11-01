@@ -1,0 +1,9 @@
+{
+    "functionName": "test_iodp_with_path",
+    "className": "TestIodpDscrMagic",
+    "fileName": "/PmagPy_&_PmagPy/pmagpy_tests_&_test_imports3.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "options = {}\ndir_path = os.path.join(WD, 'data_files', 'UTESTA', 'SRM_data')\noptions['csv_file'] = os.path.join('data_files', 'UTESTA', 'SRM_data',\n    'srmdiscrete-XXX-UTEST-A.csv')\noptions['meas_file'] = os.path.join(WD, 'data_files', 'custom_measurements.txt'\n    )\noptions['samp_file'] = 'custom_samples.txt'\nprogram_ran, outfile = convert.iodp_dscr(**options)\nself.assertEqual(program_ran, True)\nself.assertEqual(outfile, os.path.join(WD, 'data_files',\n    'custom_measurements.txt'))\nmeas_df = cb.MagicDataFrame(outfile)\nself.assertIn('sequence', meas_df.df.columns)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_nested_typed",
+    "className": null,
+    "fileName": "/axiros_&_DevApps/tests_&_test_casting.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "assert cast(['1'], [0]) == [1]\nassert cast('[1,2,4.6]', [int]) == [1, 2, 4]\nassert cast('[0]', [int]) == [0]\nassert cast('[0, 1, [1]]', [int, str, []]) == [0, '1', [1]]\nassert cast('[0, 1, [\"1\"]]', [int, str, []]) == [0, '1', ['1']]\nassert cast('[0, 1, [\"1\"]]', [int, str, [0]]) == [0, '1', [1]]\nassert cast(['a'], [str]) == ['a']\nfor k in (['a'], '[a]'):\n    with pytest.raises(Exception) as einfo:\n        cast('a', [int])\n    assert einfo.value.args[0] == Exc.cannot_cast\nassert cast([1, (1, 2)], [str, tuple((int, str))]) == ['1', (1, '2')]\nassert cast('[1, (1, 2)]', [str, tuple((int, str))]) == ['1', (1, '2')]\nassert cast('1, 1, 2', [str, int, str]) == ['1', 1, '2']\nassert cast([1, {'a': [1, 2, '3']}], [int, {str: [str, int, bool]}]) == [1,\n    {'a': ['1', 2, True]}]\nassert cast([1.9, {'a': [1, 2.2, '3']}], [1, {'a': [str, int, bool]}]) == [\n    1, {'a': ['1', 2, True]}]\nassert cast([1.9, {'a': [1, 2.9, '3']}], ['nearest_int', {'a': [str, cast.\n    nearest_int, bool]}]) == [2, {'a': ['1', 3, True]}]\n"
+}

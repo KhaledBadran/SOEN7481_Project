@@ -1,0 +1,9 @@
+{
+    "functionName": "test_nested_if",
+    "className": null,
+    "fileName": "/mabuchilab_&_NiceLib/tests_&_test_if.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "parser = Parser(\n    \"\"\"\n        #define x {}\n        #define y 5\n\n        #if 0\n            #if x == 1\n                #define y 20\n            #elif x == 2\n                #define y 40\n            #else\n                #define y 60\n            #endif\n        #endif\n    \"\"\"\n    .format(num))\nparser.parse()\nprint(parser.get_any_macro('y').body_str())\nassert parser.get_any_macro('y').body_str() == result\npytest.mark.parametrize('num,result', [(1, '5'), (2, '5'), (3, '5'), (0, '5')])"
+}

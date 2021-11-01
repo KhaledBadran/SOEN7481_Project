@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_relevant_policy_section_group_not_supported",
+    "className": "TestKmipEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the lookup for a policy with a group specified but not\n        supported is handled correctly.\n        \"\"\"\ne = engine.KmipEngine()\ne._logger = mock.MagicMock()\ne._operation_policies = {'test_policy': {'preset': {enums.ObjectType.\n    SYMMETRIC_KEY: {enums.Operation.GET: enums.Policy.ALLOW_OWNER}},\n    'groups': {'test_group_B': {enums.ObjectType.CERTIFICATE: {enums.\n    Operation.CREATE: enums.Policy.ALLOW_ALL}}}}}\nresult = e.get_relevant_policy_section('test_policy', 'test_group_A')\ne._logger.debug.assert_called_once_with(\n    \"The 'test_policy' policy does not support group 'test_group_A'.\")\nself.assertIsNone(result)\n"
+}

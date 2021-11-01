@@ -1,0 +1,9 @@
+{
+    "functionName": "test_bearer_validation_raises_for_invalid_audience",
+    "className": null,
+    "fileName": "/RobertoPrevato_&_GuardPost-JWT/tests_&_test_bearer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "handler = JWTBearerTest(['xxx', 'yyy'], ['bbb'], [InMemoryKeyProvider({\n    '001': private_rsa_1.public_key()})])\ntoken = jwt.encode({'iss': 'xxx', 'aud': 'uuu', 'some': 'payload'},\n    private_rsa_1, algorithm='RS256', headers={'kid': '001'})\nwith pytest.raises(InvalidAudienceError):\n    await handler.authenticate({'access_token': token.decode()})\npytest.mark.asyncio"
+}

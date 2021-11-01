@@ -1,0 +1,9 @@
+{
+    "functionName": "test_max_sharpe_exp_cov",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_efficient_frontier.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "df = get_data()\nef = setup_efficient_frontier()\nef.cov_matrix = risk_models.exp_cov(df)\nw = ef.max_sharpe()\nassert isinstance(w, dict)\nassert set(w.keys()) == set(ef.tickers)\nnp.testing.assert_almost_equal(ef.weights.sum(), 1)\nassert all([(i >= 0) for i in w.values()])\nnp.testing.assert_allclose(ef.portfolio_performance(), (0.3678817256187322,\n    0.1753405505478982, 1.9840346373481956))\n"
+}

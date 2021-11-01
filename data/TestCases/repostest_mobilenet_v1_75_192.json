@@ -1,0 +1,9 @@
+{
+    "functionName": "test_mobilenet_v1_75_192",
+    "className": "TestModels",
+    "fileName": "/Microsoft_&_MMdnn/mmdnn_&_conversion_&_examples_&_coreml_&_test_tfcoreml.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "url = (\n    'https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_0.75_192_frozen.tgz'\n    )\ntf_model_dir = _download_file(url=url)\ntf_model_path = os.path.join(TMP_MODEL_DIR,\n    'mobilenet_v1_0.75_192/frozen_graph.pb')\nmlmodel_path = os.path.join(TMP_MODEL_DIR, 'mobilenet_v1_0.75_192.mlmodel')\nmlmodel = tf_converter.convert(tf_model_path=tf_model_path, mlmodel_path=\n    mlmodel_path, output_feature_names=['MobilenetV1/Predictions/Softmax:0'\n    ], input_name_shape_dict={'input:0': [1, 192, 192, 3]},\n    image_input_names=['input:0'], red_bias=-1, green_bias=-1, blue_bias=-1,\n    image_scale=2.0 / 255.0)\nself._test_coreml_model_image_input(tf_model_path=tf_model_path,\n    coreml_model=mlmodel, input_tensor_name='input:0', output_tensor_name=\n    'MobilenetV1/Predictions/Softmax:0', img_size=192)\n"
+}

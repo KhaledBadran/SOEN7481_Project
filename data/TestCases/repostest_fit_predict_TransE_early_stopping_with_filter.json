@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fit_predict_TransE_early_stopping_with_filter",
+    "className": null,
+    "fileName": "/Accenture_&_AmpliGraph/tests_&_ampligraph_&_latent_features_&_test_models.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "X = load_wn18()\nmodel = TransE(batches_count=1, seed=555, epochs=7, k=50, loss='pairwise',\n    loss_params={'margin': 5}, verbose=True, optimizer='adagrad',\n    optimizer_params={'lr': 0.1})\nX_filter = np.concatenate((X['train'], X['valid'], X['test']))\nmodel.fit(X['train'], True, {'x_valid': X['valid'][::100], 'criteria':\n    'mrr', 'x_filter': X_filter, 'stop_interval': 2, 'burn_in': 1,\n    'check_interval': 2})\ny = model.predict(X['test'][:1])\nprint(y)\n"
+}

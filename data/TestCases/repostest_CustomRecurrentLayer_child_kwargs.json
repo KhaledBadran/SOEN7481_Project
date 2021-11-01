@@ -1,0 +1,9 @@
+{
+    "functionName": "test_CustomRecurrentLayer_child_kwargs",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_recurrent.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "in_shape = 2, 3, 4\nn_hid = 5\nin_to_hid = Mock(Layer, output_shape=(in_shape[0] * in_shape[1], n_hid),\n    input_shape=(in_shape[0] * in_shape[1], in_shape[2]), input_layer=\n    InputLayer((in_shape[0] * in_shape[1], in_shape[2])), get_output_kwargs\n    =['foo'])\nin_to_hid.get_output_for.return_value = T.matrix()\nin_to_hid.get_params.return_value = []\nhid_to_hid = Mock(Layer, output_shape=(in_shape[0], n_hid), input_shape=(\n    in_shape[0], n_hid), input_layer=InputLayer((in_shape[0], n_hid)),\n    get_output_kwargs=[])\nhid_to_hid.get_output_for.return_value = T.matrix()\nhid_to_hid.get_params.return_value = []\nl_rec = lasagne.layers.CustomRecurrentLayer(InputLayer(in_shape), in_to_hid,\n    hid_to_hid)\nhelper.get_output(l_rec, foo='bar')\nargs, kwargs = in_to_hid.get_output_for.call_args\nassert len(args) == 1\nassert kwargs == {'foo': 'bar'}\nargs, kwargs = hid_to_hid.get_output_for.call_args\nassert len(args) == 1\nassert kwargs == {'foo': 'bar'}\n"
+}

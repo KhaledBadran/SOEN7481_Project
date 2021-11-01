@@ -1,0 +1,9 @@
+{
+    "functionName": "tri_to_am",
+    "className": null,
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_topotools_&_topotools.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Given a Delaunay Triangulation object from Scipy's ``spatial`` module,\n    converts to a sparse adjacency matrix network representation.\n\n    Parameters\n    ----------\n    tri : Delaunay Triangulation Object\n        This object is produced by ``scipy.spatial.Delaunay``\n\n    Returns\n    -------\n    A sparse adjacency matrix in COO format.  The network is undirected\n    and unweighted, so the adjacency matrix is upper-triangular and all the\n    weights are set to 1.\n\n    \"\"\"\nlil = sprs.lil_matrix((tri.npoints, tri.npoints))\nindices, indptr = tri.vertex_neighbor_vertices\nfor k in range(tri.npoints):\n    lil.rows[k] = indptr[indices[k]:indices[k + 1]]\nlil.data = lil.rows\ncoo = lil.tocoo()\ncoo.data = np.ones_like(coo.data)\nam = sp.sparse.triu(A=coo, k=1, format='csr')\nam = am.tocoo()\nreturn am\n"
+}

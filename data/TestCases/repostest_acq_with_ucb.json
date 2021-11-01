@@ -1,0 +1,9 @@
+{
+    "functionName": "test_acq_with_ucb",
+    "className": null,
+    "fileName": "/fmfn_&_BayesianOptimization/tests_&_test_util.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "util = UtilityFunction(kind='ucb', kappa=1.0, xi=1.0)\nepisilon = 0.01\ny_max = 2.0\nmax_arg = acq_max(util.utility, GP, y_max, bounds=np.array([[0, 1], [0, 1]]\n    ), random_state=ensure_rng(0), n_iter=20)\n_, brute_max_arg = brute_force_maximum(MESH, GP, kind='ucb', kappa=1.0, xi=1.0)\nassert all(abs(brute_max_arg - max_arg) < episilon)\n"
+}

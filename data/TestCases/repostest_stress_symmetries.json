@@ -1,0 +1,9 @@
+{
+    "functionName": "test_stress_symmetries",
+    "className": "TestStructureMethods",
+    "fileName": "/mesonepigreco_&_CellConstructor/scripts_&_cellconstructor_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "syms = CC.symmetries.QE_Symmetry(self.struct_ice)\nsyms.ChangeThreshold(0.1)\nsyms.SetupQPoint()\nrandom_matrix = np.zeros((3, 3), dtype=np.float64)\nrandom_matrix[:, :] = np.random.uniform(size=(3, 3))\nsyms.ApplySymmetryToMatrix(random_matrix)\n__epsil__ = 1e-08\nself.assertTrue(np.sum(np.abs(random_matrix - random_matrix.T)) < __epsil__)\nvoight_stress = np.zeros(6, dtype=np.float64)\nvoight_stress[:3] = np.diag(random_matrix)\nvoight_stress[3] = random_matrix[1, 2]\nvoight_stress[4] = random_matrix[0, 2]\nvoight_stress[5] = random_matrix[0, 1]\nself.assertTrue(np.sum(np.abs(voight_stress[3:])) < __epsil__)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "_regenerate_models",
+    "className": "RelativePermeability",
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_algorithms_&_metrics_&_RelativePermeability.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        Updates the multiphase physics model for each saturation\n        \"\"\"\nprop = self.settings['conduit_hydraulic_conductance']\nprop_q = self.settings['hydraulic_conductance']\nif self.settings['wp'] is not None:\n    wp = self.project[self.settings['wp']]\n    modelwp = models.physics.multiphase.conduit_conductance\n    wp.add_model(model=modelwp, propname=prop, throat_conductance=prop_q,\n        mode='medium')\nnwp = self.project[self.settings['nwp']]\nmodelnwp = models.physics.multiphase.conduit_conductance\nnwp.add_model(model=modelnwp, propname=prop, throat_conductance=prop_q,\n    mode='medium')\n"
+}

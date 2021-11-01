@@ -1,0 +1,9 @@
+{
+    "functionName": "test_build_attributes",
+    "className": "TestSchemaMeta",
+    "fileName": "/dnephin_&_PyStaticConfiguration/tests_&_schema_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "meta, _, mock_getters = meta_schema\nvalue_def = mock.create_autospec(schema.ValueTypeDefinition)\nattributes = {'not_a_token': None, 'a_token': value_def}\nnamespace = mock.create_autospec(config.ConfigNamespace)\nattributes = meta.build_attributes(attributes, namespace)\nassert_equal(attributes['not_a_token'], None)\nassert_equal(list(attributes['_tokens'].keys()), ['a_token'])\ntoken = attributes['_tokens']['a_token']\nassert_equal(token.config_key, value_def.config_key)\nassert_equal(token.default, value_def.default)\nassert isinstance(attributes['a_token'], property)\nmock_getters.register_value_proxy.assert_called_with(namespace, token,\n    value_def.help)\n"
+}

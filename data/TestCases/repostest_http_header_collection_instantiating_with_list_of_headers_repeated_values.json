@@ -1,0 +1,9 @@
+{
+    "functionName": "test_http_header_collection_instantiating_with_list_of_headers_repeated_values",
+    "className": null,
+    "fileName": "/RobertoPrevato_&_BlackSheep/tests_&_test_headers.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "headers = Headers(values)\nfor input_header in values:\n    input_headers_with_same_name = [x[1] for x in values if x[0] ==\n        input_header[0]]\n    header = headers[input_header[0]]\n    assert len(header) == len(input_headers_with_same_name)\n    assert any(x == y for x in header for y in input_headers_with_same_name)\npytest.mark.parametrize('values', [[(b'Content-Length', b'61'), (\n    b'Content-Type', b'application/json; charset=utf-8'), (b'Server',\n    b'Python/3.7'), (b'Date', b'Fri, 02 Nov 2018 12:32:07 GMT'), (\n    b'Set-Cookie', b'foo=foo;'), (b'Set-Cookie', b'ufo=ufo;'), (\n    b'Set-Cookie', b'uof=uof;')]])"
+}

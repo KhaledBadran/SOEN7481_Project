@@ -1,0 +1,9 @@
+{
+    "functionName": "test_random_erasing_ground_truth",
+    "className": null,
+    "fileName": "/mdbloice_&_Augmentor/tests_&_test_ground_truth_by_class.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "standard_image_directory, ground_truth_image_directory = create_temporary_data(\n    )\nnum_samples = 10\np = Augmentor.Pipeline(standard_image_directory)\np.ground_truth(ground_truth_image_directory)\np.random_erasing(probability=1, rectangle_area=0.33)\np.sample(num_samples)\ngenerated_files = glob.glob(os.path.join(standard_image_directory, 'output/*'))\nassert num_samples * 2 == len(generated_files)\ndestroy_temporary_data(standard_image_directory, ground_truth_image_directory)\nstandard_image_directory, ground_truth_image_directory = create_temporary_data(\n    )\nnum_samples = 10\np = Augmentor.Pipeline(standard_image_directory)\np.random_erasing(probability=1, rectangle_area=0.33)\np.sample(num_samples)\ngenerated_files = glob.glob(os.path.join(standard_image_directory, 'output/*'))\nassert num_samples == len(generated_files)\ndestroy_temporary_data(standard_image_directory, ground_truth_image_directory)\n"
+}

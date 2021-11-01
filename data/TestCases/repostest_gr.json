@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gr",
+    "className": null,
+    "fileName": "/mesonepigreco_&_CellConstructor/tests_&_TestRadialDistrFunction_&_test_gr.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "total_path = os.path.dirname(os.path.abspath(__file__))\nos.chdir(total_path)\nENSEMBLE_SIZE = 100\nT = 0\nR_MAX_OH = 2\nR_MAX_HH = 3\nDR = 0.025\nR_LIM_OH = 0.75, 2\nR_LIM_HH = 1, 3\niceXI_dyn = CC.Phonons.Phonons('h2o.dyn', full_name=True)\niceXI_dyn.Symmetrize()\nprint('Generating displacements...')\nstructures = iceXI_dyn.ExtractRandomStructures(ENSEMBLE_SIZE, T)\nprint('Computing OH g(r)...')\ngrOH = CC.Methods.get_gr(structures, 'O', 'H', R_MAX_OH, DR)\nprint('Computing HH g(r)...')\ngrHH = CC.Methods.get_gr(structures, 'H', 'H', R_MAX_HH, DR)\nplt.plot(grOH[:, (0)], grOH[:, (1)])\nplt.xlabel('r [$\\\\AA$]')\nplt.ylabel('$g_{OH}(r)$')\nplt.title('O-H radial distribution function')\nplt.xlim(R_LIM_OH)\nplt.tight_layout()\nplt.figure()\nplt.plot(grHH[:, (0)], grHH[:, (1)])\nplt.xlabel('r [$\\\\AA$]')\nplt.ylabel('$g_{HH}(r)$')\nplt.title('H-H radial distribution function')\nplt.xlim(R_LIM_HH)\n"
+}

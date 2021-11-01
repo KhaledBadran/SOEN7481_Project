@@ -1,0 +1,9 @@
+{
+    "functionName": "test_rectangleMask",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_Mask.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "X, Y, Z = np.array(np.meshgrid(np.linspace(0, 3, 50), np.linspace(0, 3, 50),\n    np.linspace(0, 3, 50))).reshape(3, -1)\nclass p(object):\n    pass\npoints = p()\nfor name, coord in zip(['X', 'Y', 'Z'], [X, Y, Z]):\n    setattr(points, name, coord)\nrec1 = rectangleMask(corner1=[0, 2], corner2=[1, 0], coordinates=['X', 'Y'])\nrec2 = rectangleMask(corner1=[0, 2], corner2=[0, 0], corner3=[1, 0])\nmask1 = rec1(points)\nmask2 = rec2(X, Y)\nassert np.all(mask1 == mask2)\nassert rec1.length == 1.0\nassert rec1.height == 2.0\nX = np.ones(100) * 0.5\nY = np.linspace(-1, 1, 100)\npoints = np.array([X, Y])\nrec2 = rectangleMask(corner1=[1, 1], corner2=[0, 0], corner3=[1, -1])\nassert np.isclose(rec2.rotation, -0.75 * np.pi)\ninside = np.logical_and(Y < 0.5, Y > -0.5)\nmask = rec2(X, Y)\nassert np.all(inside == mask)\nrec3 = rectangleMask(corner1=[2, 1], corner2=[0, 0], corner3=[1, -2])\nassert rec3.height == rec3.length\nassert rec3.length == 2.23606797749979\nassert np.isclose(rec3.rotation, -0.85241638 * np.pi)\n"
+}

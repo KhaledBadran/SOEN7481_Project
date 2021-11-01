@@ -1,0 +1,9 @@
+{
+    "functionName": "testKaplanMeier",
+    "className": "Test",
+    "fileName": "/AllenDowney_&_EmpyricalDistributions/empiricaldist_&_test_empiricaldist.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "complete = [1, 3, 6]\nongoing = [2, 3, 5, 7]\npmf_complete = Pmf.from_seq(complete, normalize=False)\npmf_ongoing = Pmf.from_seq(ongoing, normalize=False)\nres = pmf_complete + pmf_ongoing\nself.assertListEqual(list(res), [1, 1, 2, 1, 1, 1])\nres = pmf_complete - pmf_ongoing\nself.assertListEqual(list(res), [1.0, -1.0, 0.0, -1.0, 1.0, -1.0])\nres = pmf_complete * pmf_ongoing\nself.assertListEqual(list(res), [0.0, 0.0, 1.0, 0.0, 0.0, 0.0])\nres = pmf_complete / pmf_ongoing\nself.assertListEqual(list(res), [np.inf, 0.0, 1.0, 0.0, np.inf, 0.0])\nsurv_complete = pmf_complete.make_surv()\nsurv_ongoing = pmf_ongoing.make_surv()\ndone = pmf_complete + pmf_ongoing\ns1 = surv_complete(done.index)\nself.assertListEqual(list(s1), [2.0, 2.0, 1.0, 1.0, 0.0, 0.0])\ns2 = surv_ongoing(done.index)\nself.assertListEqual(list(s2), [4.0, 3.0, 2.0, 1.0, 1.0, 0.0])\nat_risk = done + s1 + s2\nself.assertListEqual(list(at_risk), [7.0, 6.0, 5.0, 3.0, 2.0, 1.0])\nhaz = pmf_complete / at_risk\nself.assertListEqual(list(haz), [0.14285714285714285, 0.0, 0.2, 0.0, 0.5, 0.0])\n"
+}

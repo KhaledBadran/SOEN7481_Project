@@ -1,0 +1,9 @@
+{
+    "functionName": "test_default_params",
+    "className": "TestGenerators",
+    "fileName": "/alejoe91_&_MEArec/MEArec_&_tests_&_test_generators.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "print('Test default params')\ninfo, info_folder = mr.get_default_config()\ncell_models_folder = info['cell_models_folder']\ntempgen = mr.gen_templates(cell_models_folder, params={'n': 2},\n    templates_tmp_folder=info['templates_folder'])\nrecgen = mr.gen_recordings(templates=self.test_dir + '/templates.h5',\n    verbose=False)\nrecgen.params['recordings']['noise_level'] = 0\nrecgen.generate_recordings()\nrecgen_loaded = mr.load_recordings(self.test_dir + '/recordings.h5',\n    verbose=True)\nrecgen_loaded.params['recordings']['noise_level'] = 0\nrecgen_loaded.generate_recordings()\nrecgen_empty = mr.RecordingGenerator(rec_dict={}, info={})\nn = 2\nnum_cells = self.num_cells\ntemplates_params = self.templates_params\nassert tempgen.templates.shape[0] == n * num_cells\nassert len(tempgen.locations) == n * num_cells\nassert len(tempgen.rotations) == n * num_cells\nassert len(tempgen.celltypes) == n * num_cells\nassert len(np.unique(tempgen.celltypes)) == num_cells\nassert np.min(tempgen.locations[:, (0)]) > templates_params['xlim'][0\n    ] and np.max(tempgen.locations[:, (0)]) < templates_params['xlim'][1]\nassert recgen.recordings.shape[0] == self.num_chan\nassert recgen.channel_positions.shape == (self.num_chan, 3)\nassert recgen_loaded.recordings.shape[0] == self.num_chan\nassert recgen_loaded.channel_positions.shape == (self.num_chan, 3)\nassert len(recgen_empty.recordings) == 0\ndel recgen, recgen_empty\n"
+}

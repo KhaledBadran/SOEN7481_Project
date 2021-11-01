@@ -1,0 +1,9 @@
+{
+    "functionName": "test_run_module_collects_and_executes_all_tests_in_module",
+    "className": null,
+    "fileName": "/DrSerpent_&_DrSerpent/tests_&_test_runner.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "example_directory_path = os.path.dirname(os.path.realpath(__file__)\n    ) + '/example_projects'\noriginal_stdout = sys.stdout\nsys.stdout = output = StringIO()\nrun_module(example_directory_path, 'fizzbuzz/example_tests/test_logic.py')\nsys.stdout = original_stdout\nreturn Expect(output.getvalue()).to_include('test_fizz', 'test_buzz',\n    'test_fizzbuzz', 'test_number', 'Passed: 4, Failed: 0')\n"
+}

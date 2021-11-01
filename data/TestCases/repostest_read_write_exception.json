@@ -1,0 +1,9 @@
+{
+    "functionName": "test_read_write_exception",
+    "className": null,
+    "fileName": "/geowurster_&_NewlineJSON/tests_&_test_core.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with nlj.open(tempfile.NamedTemporaryFile(mode='w'), 'w') as src:\n    with pytest.raises(TypeError):\n        src.write(tuple)\nwith nlj.open(tempfile.NamedTemporaryFile(mode='r+')) as src:\n    src._stream.write('{')\n    src._stream.seek(0)\n    with pytest.raises((TypeError, ValueError)):\n        next(src)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_policy_create__policy_delete__policy_details",
+    "className": "Test_IAM",
+    "fileName": "/pbx-gs_&_OSBot-AWS/tests_&_unit_&_apis_&_test_IAM.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "policy_name = 'test_policy'\nself.iam.policy_delete_by_name(policy_name)\nnew_policy_document = {'Version': '2012-10-17', 'Statement': [{'Effect':\n    'Allow', 'Action': 'lambda:InvokeFunction', 'Resource':\n    'arn:aws:lambda:*:*:function:*'}]}\nresult = self.iam.policy_create(policy_name, new_policy_document)\nexpected_policy_arn = self.iam.policy_arn(policy_name)\nstatus = result.get('status')\npolicy_arn = result.get('policy_arn')\nassert status == 'ok'\nassert policy_arn == expected_policy_arn\nassert self.iam.policy_info(policy_arn).get('PolicyName') == 'test_policy'\nassert self.iam.policy_details(policy_arn).get('policy_version').get('Document'\n    ) == new_policy_document\nassert self.iam.policy_delete(policy_arn) is True\n"
+}

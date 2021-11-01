@@ -1,0 +1,9 @@
+{
+    "functionName": "test_apt_pia_channel_enabled_single",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_thorlabs_&_test_thorlabs_apt.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Enable a single channel for the APT Piezo Inertia Actuator.\n\n    Tested with KIM101 driver connected to PIM1 mirror mount.\n    \"\"\"\nwith expected_protocol(ik.thorlabs.APTPiezoInertiaActuator, [init_kim101[0],\n    ThorLabsPacket(message_id=ThorLabsCommands.PZMOT_REQ_PARAMS, param1=43,\n    param2=1, dest=80, source=1, data=None).pack(), ThorLabsPacket(\n    message_id=ThorLabsCommands.PZMOT_SET_PARAMS, param1=None, param2=None,\n    dest=80, source=1, data=struct.pack('<HH', 43, 0)).pack()], [\n    init_kim101[1], ThorLabsPacket(message_id=ThorLabsCommands.\n    PZMOT_GET_PARAMS, param1=None, param2=None, dest=1, source=80, data=\n    struct.pack('<HH', 43, 1)).pack()], sep='') as apt:\n    assert apt.channel[0].enabled_single\n    apt.channel[0].enabled_single = False\n"
+}

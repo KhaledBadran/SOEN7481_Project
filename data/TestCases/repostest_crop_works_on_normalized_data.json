@@ -1,0 +1,9 @@
+{
+    "functionName": "test_crop_works_on_normalized_data",
+    "className": "TestCropping",
+    "fileName": "/ornlneutronimaging_&_NeuNorm/tests_&_NeuNorm_&_cropping_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"assert crop works on normalized data\"\"\"\nx0, y0, x1, y1 = 0, 0, 2, 2\n_roi = ROI(x0=x0, y0=y0, x1=x1, y1=y1)\no_norm = Normalization()\nsample_path = self.data_path + '/tif/sample'\no_norm.load(folder=sample_path, auto_gamma_filter=False)\nob_path = self.data_path + '/tif/ob'\no_norm.load(folder=ob_path, data_type='ob', auto_gamma_filter=False)\no_norm.normalization()\no_norm.crop(roi=_roi)\n_returned_norm = o_norm.data['normalized'][0]\n_expected_norm = np.ones((3, 3))\n_expected_norm[:, (2)] = 2\nself.assertTrue((_expected_norm == _returned_norm).all())\n"
+}

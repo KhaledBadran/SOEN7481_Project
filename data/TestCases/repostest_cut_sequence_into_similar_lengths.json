@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cut_sequence_into_similar_lengths",
+    "className": null,
+    "fileName": "/Edinburgh-Genome-Foundry_&_GoldenHinges/tests_&_test_basics.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "def invalid_overhang(overhang):\n    gc = gc_content(overhang)\n    three_gc = max([gc_content(overhang[:-1]), gc_content(overhang[1:])]) == 1\n    return gc != 0.5 and (three_gc or gc != 0.75)\nforbidden_overhangs = list_overhangs(filters=[invalid_overhang])\nselector = OverhangsSelector(forbidden_overhangs=forbidden_overhangs,\n    differences=1, time_limit=2)\nsequence = data['phage_sequence']\nsolution = selector.cut_sequence(sequence, equal_segments=50, max_radius=20,\n    include_extremities=False)\nindices = [o['location'] for o in solution]\ndiffs = np.diff([0] + indices + [len(sequence)])\nassert len(diffs) == 50\nassert int(diffs.mean()) == 970\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_randint",
+    "className": null,
+    "fileName": "/Neuraxio_&_Neuraxle/testing_&_hyperparams_&_test_distributions.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "low = -10\nhigh = 10\nhd = RandInt(low, high)\nsamples = get_many_samples_for(hd)\nfor s in samples:\n    assert type(s) == int\nsamples_mean = np.abs(np.mean(samples))\nassert samples_mean < 1.0\nassert min(samples) >= -10.0\nassert max(samples) <= 10.0\nassert hd.pdf(-11) == 0.0\nassert abs(hd.pdf(-10) - 1 / (10 + 10 + 1)) < 1e-06\nassert abs(hd.pdf(0) - 1 / (10 + 10 + 1)) < 1e-06\nassert hd.pdf(0.5) == 0.0\nassert abs(hd.pdf(10) - 1 / (10 + 10 + 1)) < 1e-06\nassert hd.pdf(11) == 0.0\nassert hd.cdf(-10.1) == 0.0\nassert abs(hd.cdf(-10) - 1 / (10 + 10 + 1)) < 1e-06\nassert abs(hd.cdf(0) - (0 + 10 + 1) / (10 + 10 + 1)) < 1e-06\nassert abs(hd.cdf(5) - (5 + 10 + 1) / (10 + 10 + 1)) < 1e-06\nassert abs(hd.cdf(10) - 1.0) < 1e-06\nassert hd.cdf(10.1) == 1.0\nassert hd.min() == low\nassert hd.max() == high\nassert abs(hd.mean() - (10 - 10) / 2) < 1e-06\nassert abs(hd.var() - ((high - low + 1) ** 2 - 1) / 12) < 1e-06\nassert abs(hd.std() - math.sqrt(((high - low + 1) ** 2 - 1) / 12)) < 1e-06\nassert abs(hd.mean() - np.mean(samples)) < 0.1\nassert abs((hd.var() - np.var(samples)) / hd.var()) < 0.1\n"
+}

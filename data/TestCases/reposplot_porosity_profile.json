@@ -1,0 +1,9 @@
+{
+    "functionName": "plot_porosity_profile",
+    "className": "DelaunayGeometry",
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_materials_&_VoronoiFibers.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        Return a porosity profile in all orthogonal directions by summing\n        the voxel volumes in consectutive slices.\n        \"\"\"\nimport matplotlib.pyplot as plt\nif hasattr(self, '_fiber_image') is False:\n    logger.warning('This method only works when a fiber image exists')\n    return\nim_shape = np.asarray(np.shape(self._fiber_image))\npx = np.zeros(im_shape[0])\npy = np.zeros(im_shape[1])\npz = np.zeros(im_shape[2])\nfor x in np.arange(im_shape[0]):\n    px[x] = np.sum(self._fiber_image[(x), :, :])\n    px[x] /= np.size(self._fiber_image[(x), :, :])\nfor y in np.arange(im_shape[1]):\n    py[y] = np.sum(self._fiber_image[:, (y), :])\n    py[y] /= np.size(self._fiber_image[:, (y), :])\nfor z in np.arange(im_shape[2]):\n    pz[z] = np.sum(self._fiber_image[:, :, (z)])\n    pz[z] /= np.size(self._fiber_image[:, :, (z)])\nif fig is None:\n    fig = plt.figure()\nax = fig.gca()\nplots = []\nplots.append(plt.plot(np.arange(im_shape[0]) / im_shape[0], px, 'r', label='x')\n    )\nplots.append(plt.plot(np.arange(im_shape[1]) / im_shape[1], py, 'g', label='y')\n    )\nplots.append(plt.plot(np.arange(im_shape[2]) / im_shape[2], pz, 'b', label='z')\n    )\nplt.xlabel('Normalized Distance')\nplt.ylabel('Porosity')\nhandles, labels = ax.get_legend_handles_labels()\nax.legend(handles, labels, loc=1)\nplt.legend(bbox_to_anchor=(1, 1), loc=2, borderaxespad=0.0)\nreturn fig\n"
+}

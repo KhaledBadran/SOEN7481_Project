@@ -1,0 +1,9 @@
+{
+    "functionName": "test_conductance_gets_updated_when_pressure_changes",
+    "className": "AdvectionDiffusionTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_AdvectionDiffusionTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "mod = op.models.physics.ad_dif_conductance.ad_dif\nself.phys.add_model(propname='throat.ad_dif_conductance', model=mod,\n    s_scheme='powerlaw')\ng_old = self.phys['throat.ad_dif_conductance']\nself.sf.set_value_BC(pores=self.net.pores('back'), values=1.5)\nself.sf.run()\nself.phase.update(self.sf.results())\nself.ad.settings['conductance'] = 'throat.ad_dif_conductance'\nself.ad.run()\ng_updated = self.phys['throat.ad_dif_conductance']\nassert g_old.mean() != g_updated.mean()\nassert_allclose(g_updated.mean(), 1.0125899e-15)\nself.sf.set_value_BC(pores=self.net.pores('back'), values=1)\nself.sf.run()\n"
+}

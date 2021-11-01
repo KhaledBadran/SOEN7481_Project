@@ -1,0 +1,9 @@
+{
+    "functionName": "test_check_import_srna_covers",
+    "className": "TestsRNAUTR",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_sRNA_utr_derived.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "args = self.mock_args.mock()\ncover = {'type': '5utr'}\ndatas = {'num': 0, 'cover_tmp': {'total': 100, 'ori_total': 200}, 'checks':\n    {'detect_decrease': True}, 'final_poss': {'start': 3, 'end': 23}}\ncover_results = {'cover_sets': {'high': 50, 'low': 10}, 'srna_covers': {\n    'cond_1': []}, 'utr_covers': {'cond_1': []}, 'type': '5utr', 'intercds':\n    'TSS'}\nargs.min_len = 30\nargs.max_len = 500\npos = {'start': 1, 'end': 25, 'ori_start': 1, 'ori_end': 25}\nsud.check_import_srna_covers(datas, cover_results, self.example.inters[0],\n    'cond_1', 'track', cover, pos, args, '5utr')\nself.assertDictEqual(datas['final_poss'], {'end': 23, 'start': 3})\nself.assertDictEqual(cover_results['srna_covers'], {'cond_1': [{\n    'final_start': 3, 'high': 50, 'ori_avg': 8.0, 'final_end': 23, 'low': \n    10, 'type': '5utr', 'avg': 4, 'track': 'track'}]})\nself.assertDictEqual(cover_results['utr_covers'], cover_results['srna_covers'])\ndatas['checks'] = {'detect_decrease': False}\ncover_results['srna_covers'] = {'cond_1': []}\ncover_results['utr_covers'] = {'cond_1': []}\nsud.check_import_srna_covers(datas, cover_results, self.example.inters[0],\n    'cond_1', 'track', cover, pos, args, '5utr')\nself.assertDictEqual(cover_results['srna_covers'], {'cond_1': []})\n"
+}

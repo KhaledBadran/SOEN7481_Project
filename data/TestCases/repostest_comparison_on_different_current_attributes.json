@@ -1,0 +1,9 @@
+{
+    "functionName": "test_comparison_on_different_current_attributes",
+    "className": "TestModifyAttributeRequestPayload",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_modify_attribute.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the equality/inequality operators return False/True when\n        comparing two ModifyAttribute request payloads with different current\n        attributes.\n        \"\"\"\na = payloads.ModifyAttributeRequestPayload(current_attribute=objects.\n    CurrentAttribute(attribute=primitives.Enumeration(enums.\n    CryptographicAlgorithm, enums.CryptographicAlgorithm.AES, enums.Tags.\n    CRYPTOGRAPHIC_ALGORITHM)))\nb = payloads.ModifyAttributeRequestPayload(current_attribute=objects.\n    CurrentAttribute(attribute=primitives.Integer(128, enums.Tags.\n    CRYPTOGRAPHIC_LENGTH)))\nself.assertFalse(a == b)\nself.assertFalse(b == a)\nself.assertTrue(a != b)\nself.assertTrue(b != a)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_monkey_patch_for_gevent",
+    "className": "TestGeventPatch",
+    "fileName": "/mozilla_&_PyFxA/fxa_&_tests_&_test_oauth.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "import fxa\nimport fxa._utils\nimport grequests\nold_requests = fxa._utils.requests\nfxa.monkey_patch_for_gevent()\nself.assertNotEqual(fxa._utils.requests, old_requests)\nself.assertEqual(fxa._utils.requests, grequests)\nfxa._utils.requests = old_requests\nunittest.skipUnless(six.PY2, 'gevent works only with Python 2')"
+}

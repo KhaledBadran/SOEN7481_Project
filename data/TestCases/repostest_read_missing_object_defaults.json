@@ -1,0 +1,9 @@
+{
+    "functionName": "test_read_missing_object_defaults",
+    "className": "TestDefaultsInformation",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that an InvalidKmipEncoding error is raised during the decoding\n        of a DefaultsInformation structure when the object type is missing\n        from the encoding.\n        \"\"\"\ndefaults_information = objects.DefaultsInformation()\nself.assertIsNone(defaults_information.object_defaults)\nargs = self.no_object_defaults_encoding,\nself.assertRaisesRegex(exceptions.InvalidKmipEncoding,\n    'The DefaultsInformation encoding is missing the object defaults structure.'\n    , defaults_information.read, *args)\n"
+}

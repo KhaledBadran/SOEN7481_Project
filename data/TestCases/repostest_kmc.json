@@ -1,0 +1,9 @@
+{
+    "functionName": "test_kmc",
+    "className": null,
+    "fileName": "/LRydin_&_KramersMoyal/test_&_kmc_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "for t in [1, 0.1, 0.01, 0.001]:\n    for lag in [None, [1, 2, 3]]:\n        X = np.random.normal(loc=0, scale=np.sqrt(t), size=10000)\n        bins = np.array([5000])\n        powers = np.array([[1], [2]])\n        bw = 0.15\n        kmc, edges = km(X, kernel=kernels.epanechnikov, bw=bw, bins=bins,\n            powers=powers)\n        assert isinstance(kmc, np.ndarray)\n        assert isinstance(edges[0], np.ndarray)\n        kmc, edges = km(X, kernel=kernels.epanechnikov, bins=bins, powers=\n            powers)\n        assert isinstance(kmc, np.ndarray)\n        assert isinstance(edges[0], np.ndarray)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_TTL",
+    "className": "BatchTrialTest",
+    "fileName": "/facebook_&_Ax/ax_&_core_&_tests_&_test_batch_trial.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.batch.ttl_seconds = 1\nself.batch.mark_running(no_runner_required=True)\nself.assertTrue(self.batch.status.is_running)\nsleep(1)\nself.assertTrue(self.batch.status.is_failed)\nself.assertIn(0, self.experiment.trial_indices_by_status[TrialStatus.FAILED])\nbatch_trial = self.experiment.new_batch_trial(ttl_seconds=1)\nbatch_trial.mark_running(no_runner_required=True)\nself.assertTrue(batch_trial.status.is_running)\nsleep(1)\nself.assertIn(1, self.experiment.trial_indices_by_status[TrialStatus.FAILED])\nself.assertTrue(self.experiment.trials[1].status.is_failed)\nbatch_trial = self.experiment.new_batch_trial(ttl_seconds=1)\nbatch_trial.mark_running(no_runner_required=True)\nself.assertTrue(batch_trial.status.is_running)\nself.assertIn(2, self.experiment.trial_indices_by_status[TrialStatus.RUNNING])\nsleep(1)\nself.experiment.trials\nself.assertEqual(batch_trial._status, TrialStatus.FAILED)\nself.assertIn(2, self.experiment.trial_indices_by_status[TrialStatus.FAILED])\n"
+}

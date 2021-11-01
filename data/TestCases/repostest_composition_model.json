@@ -1,0 +1,9 @@
+{
+    "functionName": "test_composition_model",
+    "className": null,
+    "fileName": "/Puumanamana_&_CoCoNet/tests_&_test_dl.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test if composition model can compute an output\n    \"\"\"\nmodel = initialize_model('composition', TEST_SHAPES['composition'],\n    TEST_ARCHITECTURE['composition'])\nx_rd = [torch.FloatTensor(4, TEST_SHAPES['composition']).random_(0, 10) for\n    _ in range(2)]\ny_rd = torch.FloatTensor(4, 1).random_(0, 1)\npred = model(*x_rd)\nloss = model.compute_loss(pred, y_rd)\nassert 'composition' in pred\nassert y_rd.shape == pred['composition'].shape\nassert isinstance(loss, torch.FloatTensor)\n"
+}

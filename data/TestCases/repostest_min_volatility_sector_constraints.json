@@ -1,0 +1,9 @@
+{
+    "functionName": "test_min_volatility_sector_constraints",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_efficient_frontier.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sector_mapper = {'T': 'auto', 'UAA': 'airline', 'SHLD': 'retail', 'XOM':\n    'energy', 'RRC': 'energy', 'BBY': 'retail', 'MA': 'fig', 'PFE':\n    'pharma', 'JPM': 'fig', 'SBUX': 'retail', 'GOOG': 'tech', 'AAPL':\n    'tech', 'FB': 'tech', 'AMZN': 'tech', 'BABA': 'tech', 'GE': 'utility',\n    'AMD': 'tech', 'WMT': 'retail', 'BAC': 'fig', 'GM': 'auto'}\nsector_upper = {'tech': 0.2, 'utility': 0.1, 'retail': 0.2, 'fig': 0.4,\n    'airline': 0.05, 'energy': 0.2}\nsector_lower = {'utility': 0.01, 'fig': 0.02, 'airline': 0.01}\nef = EfficientFrontier(*setup_efficient_frontier(data_only=True),\n    weight_bounds=(None, None))\nef.add_sector_constraints(sector_mapper, sector_lower, sector_upper)\nweights = ef.min_volatility()\nfor sector in list(set().union(sector_upper, sector_lower)):\n    sector_sum = 0\n    for t, v in weights.items():\n        if sector_mapper[t] == sector:\n            sector_sum += v\n    assert sector_sum <= sector_upper.get(sector, 1) + 1e-05\n    assert sector_sum >= sector_lower.get(sector, 0) - 1e-05\n"
+}

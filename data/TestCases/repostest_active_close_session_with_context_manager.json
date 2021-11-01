@@ -1,0 +1,9 @@
+{
+    "functionName": "test_active_close_session_with_context_manager",
+    "className": null,
+    "fileName": "/AmadeusITGroup_&_JumpSSH/tests_&_test__session.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "gateway_ip, gateway_port = docker_env.get_host_ip_port()\nwith SSHSession(host=gateway_ip, port=gateway_port, username='user1',\n    password='password1') as gateway_session:\n    assert gateway_session.is_active()\n    remotehost_session = gateway_session.get_remote_session(host=\n        'remotehost', port=22, username='user1', password='password1')\n    assert remotehost_session.is_active()\nassert not gateway_session.is_active()\nassert not remotehost_session.is_active()\ngateway_session.open()\nassert gateway_session.is_active()\nassert gateway_session.get_exit_code('ls') == 0\n"
+}

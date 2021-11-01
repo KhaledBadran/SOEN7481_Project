@@ -1,0 +1,9 @@
+{
+    "functionName": "test_custom_recurrent_arbitrary_depth",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_recurrent.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "n_batch, n_steps, n_channels, width, height = 2, 3, 4, 5, 6\nn_out_filters = 7\nn_in_hid_filters_0 = 11\nn_hid_hid_filters_0 = 13\nfilter_shape = 3, 3\nl_in = lasagne.layers.InputLayer((n_batch, n_steps, n_channels, width, height))\nl_in_to_hid = lasagne.layers.InputLayer((None, n_channels, width, height))\nl_in_to_hid = lasagne.layers.Conv2DLayer(l_in_to_hid, n_in_hid_filters_0,\n    filter_shape, pad='same')\nl_in_to_hid = lasagne.layers.Conv2DLayer(l_in_to_hid, n_out_filters,\n    filter_shape, pad='same')\nl_hid_to_hid = lasagne.layers.InputLayer((None, n_out_filters, width, height))\nl_hid_to_hid = lasagne.layers.Conv2DLayer(l_hid_to_hid, n_hid_hid_filters_0,\n    filter_shape, pad='same')\nl_hid_to_hid = lasagne.layers.Conv2DLayer(l_hid_to_hid, n_out_filters,\n    filter_shape, pad='same')\nl_rec = lasagne.layers.CustomRecurrentLayer(l_in, l_in_to_hid, l_hid_to_hid)\nassert l_rec.output_shape == (n_batch, n_steps, n_out_filters, width, height)\nout = theano.function([l_in.input_var], lasagne.layers.get_output(l_rec))\nout_shape = out(np.zeros((n_batch, n_steps, n_channels, width, height),\n    dtype=theano.config.floatX)).shape\nassert out_shape == (n_batch, n_steps, n_out_filters, width, height)\n"
+}

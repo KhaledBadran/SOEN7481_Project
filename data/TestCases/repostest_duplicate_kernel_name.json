@@ -1,0 +1,9 @@
+{
+    "functionName": "test_duplicate_kernel_name",
+    "className": "Test_kernel",
+    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_Kernel.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "nqubits = 3\np = ql.Program('aProgram', platf, nqubits)\nk1 = ql.Kernel('aKernel1', platf, nqubits)\nk2 = ql.Kernel('aKernel2', platf, nqubits)\nk3 = ql.Kernel('aKernel1', platf, nqubits)\nk1.gate('x', [0])\nk2.gate('x', [0])\nk3.gate('x', [0])\np.add_kernel(k1)\np.add_kernel(k2)\ntry:\n    p.add_kernel(k3)\n    raise\nexcept:\n    pass\np.compile()\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_missing_properties",
+    "className": "KeyPropertiesTest",
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_DataObjectTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class A(DataObject):\n    a = ObjectProperty()\n    key_properties = 'a', 'not_an_attr'\no1 = A()\no2 = A(ident='http://example.org/o2')\no1.a(o2)\nwith self.assertRaisesRegexp(Exception, '\\\\bnot_an_attr\\\\b'):\n    o1.defined\n"
+}

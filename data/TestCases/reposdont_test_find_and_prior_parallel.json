@@ -1,0 +1,9 @@
+{
+    "functionName": "dont_test_find_and_prior_parallel",
+    "className": null,
+    "fileName": "/PaulHancock_&_Aegean/tests_&_test_source_finder.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Test find/piroirze with parallel operation\"\"\"\nlog = logging.getLogger('Aegean')\ncores = 1\nfilename = 'tests/test_files/synthetic_test.fits'\nlog.info('basic fitting (no bkg/rms')\nsfinder = sf.SourceFinder(log=log)\nfound = sfinder.find_sources_in_image(filename, cores=cores, bkg=0, rms=0.5)\nif not len(found) == 98:\n    raise AssertionError('found {0} sources'.format(len(found)))\naux_files = sf.get_aux_files(filename)\ndel sfinder\nlog.info('fitting with supplied bkg/rms and 2 cores')\ncores = 2\nsfinder = sf.SourceFinder(log=log)\n_ = sfinder.find_sources_in_image(filename, doislandflux=True, outfile=open\n    ('dlme', 'w'), nonegative=False, rmsin=aux_files['rms'], bkgin=\n    aux_files['bkg'], mask=aux_files['mask'], cores=cores)\nlog.info('now priorised fitting')\n_ = sfinder.priorized_fit_islands(filename, catalogue=found, doregroup=True,\n    cores=cores, outfile=open('dlme', 'w'))\nos.remove('dlme')\ndel sfinder\nlog.info('fitting negative sources')\nsfinder = sf.SourceFinder(log=log)\nsfinder.find_sources_in_image('tests/test_files/1904-66_SIN_neg.fits',\n    doislandflux=True, nonegative=False, cores=cores)\n"
+}

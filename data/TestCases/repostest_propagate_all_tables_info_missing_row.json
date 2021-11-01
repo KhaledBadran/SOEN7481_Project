@@ -1,0 +1,9 @@
+{
+    "functionName": "test_propagate_all_tables_info_missing_row",
+    "className": "TestContribution",
+    "fileName": "/PmagPy_&_PmagPy/pmagpy_tests_&_test_contribution_builder.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.con.tables['sites'].delete_rows(self.con.tables['sites'].df.index ==\n    'hz06')\nself.assertNotIn('hz06', self.con.tables['sites'].df.index)\nself.con.propagate_all_tables_info(write=False)\nself.assertIn('hz06', self.con.tables['sites'].df.index)\nself.assertEqual('hz06', self.con.tables['sites'].df.loc['hz06']['site'])\n"
+}

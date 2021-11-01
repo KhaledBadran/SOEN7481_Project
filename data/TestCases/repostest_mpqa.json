@@ -1,0 +1,9 @@
+{
+    "functionName": "test_mpqa",
+    "className": "TestLexicons",
+    "fileName": "/apmoore1_&_Bella/tests_&_test_lexicons.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Tests the :py:class:`bella.lexicons.Mpqa`\n        \"\"\"\nmpqa_lex = Mpqa()\nword_sentiment = mpqa_lex.lexicon\nself.assertIsInstance(word_sentiment, list, msg=\n    'The return type should of type list not {}'.format(type(word_sentiment)))\nself.assertIsInstance(word_sentiment[0], tuple, msg=\n    'The list should be a list of tuples not {}'.format(type(word_sentiment\n    [0])))\nvalue_types = set([sentiment for word, sentiment in word_sentiment])\nvalid_value_types = {'positive', 'negative', 'both', 'neutral'}\nself.assertEqual(value_types, valid_value_types, msg=\n    'The values associated to the words in the lexicons should be only {} and not {}'\n    .format(valid_value_types, value_types))\nlexicon_length = len(word_sentiment)\nvalid_lexicon_length = 6905\nself.assertEqual(valid_lexicon_length, lexicon_length, msg=\n    'The number of words in the lexicon should be {} and not {}'.format(\n    valid_lexicon_length, lexicon_length))\npytest.mark.skip(reason=\n    'Requires the files to be downloaded and we do not own the lexicons therefore cannot release them.'\n    )"
+}

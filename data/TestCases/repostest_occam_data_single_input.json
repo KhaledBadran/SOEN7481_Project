@@ -1,0 +1,9 @@
+{
+    "functionName": "test_occam_data_single_input",
+    "className": null,
+    "fileName": "/mortele_&_OccamTools/test_&_test_occam_data.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "fort1, fort7, xyz = _load_default_forts()\noccam_data = OccamData(fort1.file_name, load_from_npy=False, silent=True)\n_assert_all_attributes_present_and_equal(occam_data, fort1, fort7, xyz)\noccam_data = OccamData(fort7.file_name, load_from_npy=False, silent=True)\n_assert_all_attributes_present_and_equal(occam_data, fort1, fort7, xyz)\noccam_data = OccamData(xyz.file_name, load_from_npy=False, silent=True)\n_assert_all_attributes_present_and_equal(occam_data, fort1, fort7, xyz)\noccam_data = OccamData(os.path.dirname(fort1.file_name), load_from_npy=\n    False, silent=True)\n_assert_all_attributes_present_and_equal(occam_data, fort1, fort7, xyz)\ninputs = ['this_is_not_a_file', None, 1, 8.29898, fort1, fort7, xyz]\nfor inp in inputs:\n    caught = False\n    try:\n        _ = OccamData(inp, load_from_npy=False, silent=True)\n    except TypeError:\n        caught = True\n    except FileNotFoundError:\n        caught = True\n    assert caught\n"
+}

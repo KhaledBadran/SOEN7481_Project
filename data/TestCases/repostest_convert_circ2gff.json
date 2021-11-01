@@ -1,0 +1,9 @@
+{
+    "functionName": "test_convert_circ2gff",
+    "className": "TestConverter",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_converter.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "circ_file = os.path.join(self.test_folder, 'circ.csv')\nout_all = os.path.join(self.test_folder, 'all.gff')\nout_filter = os.path.join(self.test_folder, 'best.gff')\nwith open(circ_file, 'w') as ch:\n    ch.write(self.circ_file)\nargs = self.mock_args.mock()\nargs.start_ratio = 0.5\nargs.end_ratio = 0.5\nargs.support = 5\nself.converter.convert_circ2gff(circ_file, args, out_all, out_filter)\ndatas = import_data(out_all)\nf_datas = []\nfor data in datas:\n    if not data.startswith('#'):\n        f_datas.append('\\t'.join(data.split('\\t')[:8]))\nc_datas = []\nfor data in self.circ_all.split('\\n'):\n    if not data.startswith('#'):\n        c_datas.append('\\t'.join(data.split('\\t')[:8]))\nself.assertListEqual(f_datas, c_datas)\ndatas = import_data(out_filter)\nf_datas = []\nfor data in datas:\n    if not data.startswith('#'):\n        f_datas.append('\\t'.join(data.split('\\t')[:8]))\nc_datas = []\nfor data in self.circ_best.split('\\n'):\n    if not data.startswith('#'):\n        c_datas.append('\\t'.join(data.split('\\t')[:8]))\nself.assertListEqual(f_datas, c_datas)\n"
+}

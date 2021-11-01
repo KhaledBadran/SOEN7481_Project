@@ -1,0 +1,9 @@
+{
+    "functionName": "test_maui_measurement_statistics_error",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_teledyne_&_test_maui.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Raise ValueError if statistics cannot be gathered.\"\"\"\nwith expected_protocol(ik.teledyne.MAUI, [init, 'PAST? CUST, P1'], [\n    'CUST,P1,NULL,C3,AVG,UNDEF,HIGH,UNDEF,LAST,UNDEF,LOW,UNDEF,SIGMA,UNDEF,SWEEPS,0'\n    ], sep='\\n') as osc:\n    with pytest.raises(ValueError):\n        print(osc.measurement[0].statistics)\n"
+}

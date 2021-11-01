@@ -1,0 +1,9 @@
+{
+    "functionName": "test_load_xrf_standard_yaml_file2",
+    "className": null,
+    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_core_&_tests_&_test_quant_analysis.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test for reporting schema violation\"\"\"\nyaml_path = ['yaml', 'param', 'file']\nfile_name = 'standard.yaml'\nyaml_path = os.path.join(tmp_path, *yaml_path, file_name)\nstandard_data = copy.deepcopy(_standard_data_sample)\nfor v in standard_data:\n    v['name'] = 50.36\nsave_xrf_standard_yaml_file(yaml_path, standard_data)\nwith pytest.raises(jsonschema.ValidationError):\n    load_xrf_standard_yaml_file(yaml_path)\nload_xrf_standard_yaml_file(yaml_path, schema=None)\nschema = copy.deepcopy(_xrf_standard_schema)\nschema['properties']['name'] = {'type': ['string', 'number']}\nstandard_data_out = load_xrf_standard_yaml_file(yaml_path, schema=schema)\nassert standard_data_out == standard_data, 'Loaded data is different from the original'\n"
+}

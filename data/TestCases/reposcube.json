@@ -1,0 +1,9 @@
+{
+    "functionName": "cube",
+    "className": null,
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_models_&_geometry_&_pore_surface_area.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Calculates internal surface area of pore bodies assuming they are cubes\n    then subtracts the area of the neighboring throats.\n\n    Parameters\n    ----------\n    target : OpenPNM Object\n        The object for which these values are being calculated.  This\n        controls the length of the calculated array, and also provides\n        access to other necessary thermofluid properties.\n\n    pore_diameter : string\n        The dictionary key to the pore diameter array.\n\n    throat_area : string\n        The dictioanry key to the throat area array.  Throat areas are needed\n        since their insection with the pore are removed from the computation.\n\n    Returns\n    -------\n    value : NumPy ndarray\n        Array containing pore surface area values.\n\n    \"\"\"\nnetwork = target.project.network\nD = target[pore_diameter]\nTn = network.find_neighbor_throats(pores=target.Ps, flatten=False)\nTsurf = _np.array([_np.sum(network[throat_area][Ts]) for Ts in Tn])\nvalue = 6 * D ** 2 - Tsurf\nreturn value\n"
+}

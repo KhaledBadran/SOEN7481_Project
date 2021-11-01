@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_message_owner",
+    "className": null,
+    "fileName": "/tutorgen_&_HPIT-python-client/tests_&_hpitclient_&_test_message_sender_mixin.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "subject = MessageSenderMixin()\nsubject.send_log_entry = MagicMock()\nhttpretty.register_uri(httpretty.GET,\n    'https://www.hpit-project.org/message-owner/thing', body=\n    '{\"owner\":\"4\"}', content_type='application/json')\nsubject.get_message_owner.when.called_with(None).should.throw(\n    InvalidParametersError)\nsubject.get_message_owner.when.called_with([]).should.throw(\n    InvalidParametersError)\nsubject.get_message_owner.when.called_with({}).should.throw(\n    InvalidParametersError)\nsubject.get_message_owner.when.called_with('').should.throw(\n    InvalidParametersError)\nsubject.get_message_owner.when.called_with(['thing']).should.throw(\n    InvalidParametersError)\nsubject.get_message_owner.when.called_with({'thing': 1}).should.throw(\n    InvalidParametersError)\nsubject.get_message_owner('thing').should.equal('4')\nhttpretty.activate"
+}

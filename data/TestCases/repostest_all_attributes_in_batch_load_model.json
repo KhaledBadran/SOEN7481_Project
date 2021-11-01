@@ -1,0 +1,9 @@
+{
+    "functionName": "test_all_attributes_in_batch_load_model",
+    "className": null,
+    "fileName": "/gregmedlock_&_Medusa/medusa_&_test_&_test_load_from_file.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "test_ensemble = construct_mixed_ensemble_2()\ntest_batch_ensemble = construct_mixed_batch_ensemble()\nassert len(test_ensemble.features) == len(test_batch_ensemble.features)\nassert len(test_ensemble.members) == len(test_batch_ensemble.members)\nfor feat_obj in test_batch_ensemble.features:\n    comp_feat = test_ensemble.features.get_by_id(feat_obj.id)\n    for key, value in feat_obj.states.items():\n        assert comp_feat.states[key] == value\nfor mem_obj in test_batch_ensemble.members:\n    comp_mem_obj = test_ensemble.members.get_by_id(mem_obj.id)\n    for key, value in mem_obj.states.items():\n        assert comp_mem_obj.states[test_ensemble.features.get_by_id(key.id)\n            ] == value\nfor feat in test_batch_ensemble.features:\n    assert feat.base_component == test_batch_ensemble.base_model.reactions.get_by_id(\n        feat.base_component.id)\n"
+}

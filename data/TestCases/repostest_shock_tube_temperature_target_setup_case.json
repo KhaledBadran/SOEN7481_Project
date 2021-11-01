@@ -1,0 +1,9 @@
+{
+    "functionName": "test_shock_tube_temperature_target_setup_case",
+    "className": "TestSimulation",
+    "fileName": "/kyleniemeyer_&_PyTeCK/pyteck_&_tests_&_test_simulation.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that shock tube case with temperature target set up properly.\n        \"\"\"\nfile_path = os.path.join('testfile_st.yaml')\nfilename = pkg_resources.resource_filename(__name__, file_path)\nproperties = ChemKED(filename, skip_validation=True)\nproperties.datapoints[0].ignition_type['target'] = 'temperature'\nproperties.datapoints[1].ignition_type['target'] = 'temperature'\nsimulations = create_simulations(filename, properties)\nmechanism_filename = 'gri30.xml'\nSPEC_KEY = {'H2': 'H2', 'O2': 'O2', 'N2': 'N2', 'Ar': 'AR'}\nsim = simulations[0]\nsim.setup_case(mechanism_filename, SPEC_KEY)\nassert sim.properties.ignition_target == 'temperature'\nsim = simulations[1]\nsim.setup_case(mechanism_filename, SPEC_KEY)\nassert sim.properties.ignition_target == 'temperature'\n"
+}

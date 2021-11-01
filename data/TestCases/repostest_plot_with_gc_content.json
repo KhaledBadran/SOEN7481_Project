@@ -1,0 +1,9 @@
+{
+    "functionName": "test_plot_with_gc_content",
+    "className": null,
+    "fileName": "/Edinburgh-Genome-Foundry_&_DnaFeaturesViewer/tests_&_test_basics.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(8, 4), sharex=True)\nrecord = SeqIO.read(example_genbank, 'genbank')\ngraphic_record = BiopythonTranslator().translate_record(record)\nax, levels = graphic_record.plot()\ngraphic_record.plot(ax=ax1, with_ruler=False)\ndef plot_local_gc_content(record, window_size, ax):\n\n    def gc_content(seq):\n        return 100.0 * len([c for c in seq if c in 'GC']) / len(seq)\n    yy = [gc_content(record.seq[i:i + window_size]) for i in range(len(\n        record.seq) - window_size)]\n    xx = np.arange(len(record.seq) - window_size) + 25\n    ax.fill_between(xx, yy, alpha=0.3)\n    ax.set_ylabel('GC(%)')\nplot_local_gc_content(record, window_size=50, ax=ax2)\ntarget_file = os.path.join(str(tmpdir), 'with_plot.png')\nfig.tight_layout()\nfig.savefig(target_file)\n"
+}

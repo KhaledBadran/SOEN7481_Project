@@ -1,0 +1,9 @@
+{
+    "functionName": "test_direct_gaussian",
+    "className": null,
+    "fileName": "/PyAbel_&_PyAbel/abel_&_tests_&_test_direct.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Check abel.direct.direct_transform() against the analytical Gaussian\"\"\"\nn = 501\nr_max = 100\nref = abel.tools.analytical.GaussianAnalytical(n, r_max, symmetric=False,\n    sigma=20)\nrecon = abel.direct.direct_transform(ref.func, dr=ref.dr, direction='forward')\nratio = abel.benchmark.absolute_ratio_benchmark(ref, recon, kind='forward')\nassert_allclose(ratio, 1.0, rtol=0.02, atol=0.02)\nrecon = abel.direct.direct_transform(ref.abel, dr=ref.dr, direction='inverse')\nratio = abel.benchmark.absolute_ratio_benchmark(ref, recon, kind='inverse')\nassert_allclose(ratio, 1.0, rtol=0.02, atol=0.02)\n"
+}

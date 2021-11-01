@@ -1,0 +1,9 @@
+{
+    "functionName": "test_one_value_one_rate",
+    "className": "GenericTransportTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_GenericTransportTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "alg = op.algorithms.GenericTransport(network=self.net, phase=self.phase)\nalg.settings['conductance'] = 'throat.diffusive_conductance'\nalg.settings['quantity'] = 'pore.mole_fraction'\nalg.set_rate_BC(pores=self.net.pores('bottom'), values=1)\nalg.set_value_BC(pores=self.net.pores('top'), values=0)\nalg.run()\nx = [0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0]\ny = np.unique(np.around(alg['pore.mole_fraction'], decimals=3))\nassert np.all(x == y)\n"
+}

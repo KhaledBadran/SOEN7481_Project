@@ -1,0 +1,9 @@
+{
+    "functionName": "testDecodeGenerationStrategy",
+    "className": "JSONStoreTest",
+    "fileName": "/facebook_&_Ax/ax_&_storage_&_json_store_&_tests_&_test_json_store.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "generation_strategy = get_generation_strategy()\nexperiment = get_branin_experiment()\ngs_json = object_to_json(generation_strategy)\nnew_generation_strategy = generation_strategy_from_json(gs_json)\nself.assertEqual(generation_strategy, new_generation_strategy)\nself.assertGreater(len(new_generation_strategy._steps), 0)\nself.assertIsInstance(new_generation_strategy._steps[0].model, Models)\nself.assertIsNone(new_generation_strategy.model)\ngeneration_strategy = new_generation_strategy\ngr = generation_strategy.gen(experiment)\ngs_json = object_to_json(generation_strategy)\nnew_generation_strategy = generation_strategy_from_json(gs_json)\nself.assertEqual(generation_strategy, new_generation_strategy)\nself.assertIsInstance(new_generation_strategy._steps[0].model, Models)\nself.assertIsInstance(new_generation_strategy.model, ModelBridge)\ngeneration_strategy = new_generation_strategy\nexperiment.new_trial(gr)\ngeneration_strategy.gen(experiment, data=get_branin_data())\ngs_json = object_to_json(generation_strategy)\nnew_generation_strategy = generation_strategy_from_json(gs_json)\nself.assertEqual(generation_strategy, new_generation_strategy)\nself.assertIsInstance(new_generation_strategy._steps[0].model, Models)\nself.assertIsInstance(new_generation_strategy.model, ModelBridge)\n"
+}

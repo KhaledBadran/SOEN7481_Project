@@ -1,0 +1,9 @@
+{
+    "functionName": "test_smooth_ot_semi_dual",
+    "className": null,
+    "fileName": "/PythonOT_&_POT/test_&_test_smooth.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "n = 100\nrng = np.random.RandomState(0)\nx = rng.randn(n, 2)\nu = ot.utils.unif(n)\nM = ot.dist(x, x)\nwith pytest.raises(NotImplementedError):\n    Gl2, log = ot.smooth.smooth_ot_semi_dual(u, u, M, 1, reg_type='none')\nGl2, log = ot.smooth.smooth_ot_semi_dual(u, u, M, 1, reg_type='l2', log=\n    True, stopThr=1e-10)\nnp.testing.assert_allclose(u, Gl2.sum(1), atol=1e-05)\nnp.testing.assert_allclose(u, Gl2.sum(0), atol=1e-05)\nG = ot.smooth.smooth_ot_semi_dual(u, u, M, 1, reg_type='kl', stopThr=1e-10)\nnp.testing.assert_allclose(u, G.sum(1), atol=1e-05)\nnp.testing.assert_allclose(u, G.sum(0), atol=1e-05)\nG2 = ot.sinkhorn(u, u, M, 1, stopThr=1e-10)\nnp.testing.assert_allclose(G, G2, atol=1e-05)\n"
+}

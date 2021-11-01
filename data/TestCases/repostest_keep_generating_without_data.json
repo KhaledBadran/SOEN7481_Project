@@ -1,0 +1,9 @@
+{
+    "functionName": "test_keep_generating_without_data",
+    "className": "TestAxClient",
+    "fileName": "/facebook_&_Ax/ax_&_service_&_tests_&_test_ax_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ax_client = AxClient()\nax_client.create_experiment(parameters=[{'name': 'x', 'type': 'range',\n    'bounds': [-5.0, 10.0]}, {'name': 'y', 'type': 'range', 'bounds': [0.0,\n    15.0]}], minimize=True)\nfor _ in range(5):\n    parameterization, trial_index = ax_client.get_next_trial()\nwith self.assertRaisesRegex(DataRequiredError, 'All trials for current model'):\n    ax_client.get_next_trial()\nax_client = AxClient(enforce_sequential_optimization=False)\nax_client.create_experiment(parameters=[{'name': 'x', 'type': 'range',\n    'bounds': [-5.0, 10.0]}, {'name': 'y', 'type': 'range', 'bounds': [0.0,\n    15.0]}], minimize=True)\nself.assertFalse(ax_client.generation_strategy._steps[0].enforce_num_trials,\n    False)\nself.assertFalse(ax_client.generation_strategy._steps[1].max_parallelism, None)\nfor _ in range(10):\n    parameterization, trial_index = ax_client.get_next_trial()\n"
+}

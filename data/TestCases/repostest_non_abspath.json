@@ -1,0 +1,9 @@
+{
+    "functionName": "test_non_abspath",
+    "className": null,
+    "fileName": "/tkf_&_JuliaManager.jl/jlm_&_src_&_jlm_&_tests_&_test_localstore.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "path = cleancwd / 'a' / 'b' / 'c'\npath.mkdir(parents=True)\nstore = LocalStore()\nwith pytest.raises(ValueError):\n    store.path = str(path.relative_to(cleancwd))\nwith pytest.raises(ApplicationError):\n    store.path\nstore.path = str(path)\nassert not isinstance(store.path, str)\nassert str(store.path) == str(path)\nif isinstance(str, Path):\n    assert store.path == path\n"
+}

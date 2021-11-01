@@ -1,0 +1,9 @@
+{
+    "functionName": "test_dynamic",
+    "className": "NamespaceTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_namespace.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "collection = lookup.TemplateLookup()\ncollection.put_string('a',\n    \"\"\"\n        <%namespace name=\"b\" file=\"${context['b_def']}\"/>\n\n        a.  b: ${b.body()}\n\"\"\"\n    )\ncollection.put_string('b', '\\n        b.\\n')\neq_(flatten_result(collection.get_template('a').render(b_def='b')), 'a. b: b.')\n"
+}

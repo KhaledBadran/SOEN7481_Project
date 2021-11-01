@@ -1,0 +1,9 @@
+{
+    "functionName": "test_generating",
+    "className": null,
+    "fileName": "/poletaevvlad_&_CubeLang/test_&_compiler_&_test_expression.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "expression = Expression(0, Integer)\nt1 = expression.add_intermediate(Expression(0, Integer, ['2 + 3']))\nt2 = expression.add_intermediate(Expression(0, Integer, ['4 + 6']))\nexpression.expression = [t1, ' * ', t2]\nstream = CodeStream()\npool = VariablesPool()\npool.allocate(2)\nexpression.generate(pool, stream, CodeMap(), None)\nassert stream.get_contents() == \"\"\"tmp_2 = 2 + 3\ntmp_3 = 4 + 6\ntmp_2 * tmp_3\n\"\"\"\n"
+}

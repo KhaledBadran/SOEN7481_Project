@@ -1,0 +1,9 @@
+{
+    "functionName": "test_has_edges_edge_id",
+    "className": null,
+    "fileName": "/Silmathoron_&_NNGT/testing_&_test_basics.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Test the ``has_edge`` and ``edge_id`` methods \"\"\"\nnum_nodes = 10\nedges = [(0, 1), (2, 4)]\ng = nngt.Graph(num_nodes)\ng.new_edges(edges)\nfor i, e in enumerate(edges):\n    assert g.has_edge(e)\n    assert g.edge_id(e) == i\ng = nngt.Graph(num_nodes, directed=False)\ng.new_edges(edges)\nfor i, e in enumerate(edges):\n    assert g.has_edge(e)\n    assert g.edge_id(e) == i\n    assert g.has_edge(e[::-1])\n    assert g.edge_id(e[::-1]) == i\npytest.mark.mpi_skip"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_dict_resolver_hex",
+    "className": null,
+    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_resolvers.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from _pydevd_bundle.pydevd_resolver import DictResolver\ndict_resolver = DictResolver()\ndct = {(1, 10, 100): (10000, 100000, 100000)}\ncontents_debug_adapter_protocol = clear_contents_debug_adapter_protocol(\n    dict_resolver.get_contents_debug_adapter_protocol(dct, fmt={'hex': True}))\nlen_entry = contents_debug_adapter_protocol.pop(-1)\ncheck_len_entry(len_entry, (GENERATED_LEN_ATTR_NAME, 1))\nassert contents_debug_adapter_protocol == [('(0x1, 0xa, 0x64)', (10000, \n    100000, 100000), '[(1, 10, 100)]')]\n"
+}

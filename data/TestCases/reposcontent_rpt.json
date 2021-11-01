@@ -1,0 +1,9 @@
+{
+    "functionName": "content_rpt",
+    "className": null,
+    "fileName": "/kenfar_&_DataGristle/datagristle_&_tests_&_test_metadata.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\" provides a report of what's left in the md.\n        kinda useful for some diagnosis\n    \"\"\"\nrpt = \"\"\"SELECT s.schema_id,\n                    s.schema_name,\n                    c.collection_id,\n                    c.collection_name,\n                    f.field_id,\n                    f.field_name,\n                    f.field_order\n             FROM schema   s\n                INNER JOIN collection c\n                  ON s.schema_id = c.schema_id\n                INNER JOIN field      f\n                  ON c.collection_id = f.collection_id\n          \"\"\"\nresult = md.engine.execute(rpt)\nprint('')\nprint('')\nprint('%-5.5s,  %-20.20s,  %-5.5s, %-20.20s, %-5.5s, %-20.20s, %-5.5s' % (\n    'sch_id', 'sch_name', 'coll_id', 'coll_name', 'field_id', 'field_name',\n    'field_ord'))\nfor row in result:\n    print('%-5.5s,  %-20.20s,  %-5.5s, %-20.20s, %-5.5s, %-20.20s, %-5.5s' %\n        (row[0], row[1], row[2], row[3], row[4], row[5], row[6]))\nprint('')\n"
+}

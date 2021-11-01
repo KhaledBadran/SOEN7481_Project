@@ -1,0 +1,9 @@
+{
+    "functionName": "test_find_main_thread_id",
+    "className": null,
+    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_utilities.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "_check_in_separate_process('check_main_thread_id_simple',\n    '_pydevd_test_find_main_thread_id')\n_check_in_separate_process('check_main_thread_id_multiple_threads',\n    '_pydevd_test_find_main_thread_id')\n_check_in_separate_process('check_win_threads',\n    '_pydevd_test_find_main_thread_id')\n_check_in_separate_process('check_fix_main_thread_id_multiple_threads',\n    '_pydevd_test_find_main_thread_id')\nimport subprocess\nimport pydevd\ncwd, environ = _build_launch_env()\nsubprocess.check_call([sys.executable, '-m',\n    '_pydevd_test_find_main_thread_id'], env=environ, cwd=cwd)\nresources_dir = os.path.join(os.path.dirname(pydevd.__file__),\n    'tests_python', 'resources')\nsubprocess.check_call([sys.executable, os.path.join(resources_dir,\n    '_pydevd_test_find_main_thread_id.py')], env=environ, cwd=cwd)\npytest.mark.skipif(not IS_CPYTHON or IS_PY39_OR_GREATER, reason=\n    'Functionality to trace other threads requires CPython.3.9: still needs support to tracing other threads (waiting for CPython api to stabilize)'\n    )"
+}

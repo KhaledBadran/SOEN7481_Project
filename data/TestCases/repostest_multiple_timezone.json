@@ -1,0 +1,9 @@
+{
+    "functionName": "test_multiple_timezone",
+    "className": null,
+    "fileName": "/roniemartinez_&_DocCron/tests_&_test_timezone.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "current_datetime = datetime.now(tz=tzlocal()).replace(minute=0, second=0,\n    microsecond=0)\ncron = doccron.cron(\n    \"\"\"CRON_TZ=Asia/Manila\n    0 */2 * * *\n    CRON_TZ=UTC\n    0 1-23/2 * * *\"\"\"\n    )\nassert isinstance(cron, Iterator)\nfor i in range(1, 6):\n    next_schedule = next(cron)\n    assert isinstance(next_schedule, datetime)\n    assert next_schedule == current_datetime + timedelta(hours=i)\n"
+}

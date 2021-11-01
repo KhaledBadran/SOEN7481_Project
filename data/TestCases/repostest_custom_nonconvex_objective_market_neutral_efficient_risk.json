@@ -1,0 +1,9 @@
+{
+    "functionName": "test_custom_nonconvex_objective_market_neutral_efficient_risk",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_custom_objectives.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "target_risk = 0.19\nef = EfficientFrontier(*setup_efficient_frontier(data_only=True),\n    weight_bounds=(-1, 1))\nweight_constr = {'type': 'eq', 'fun': lambda w: np.sum(w)}\nrisk_constr = {'type': 'eq', 'fun': lambda w: target_risk ** 2 - np.dot(w.T,\n    np.dot(ef.cov_matrix, w))}\nconstraints = [weight_constr, risk_constr]\nef.nonconvex_objective(lambda w, mu: -w.T.dot(mu), objective_args=ef.\n    expected_returns, weights_sum_to_one=False, constraints=constraints)\nnp.testing.assert_allclose(ef.portfolio_performance(), (0.2309497754562942,\n    target_risk, 1.1102600451243954), atol=1e-06)\n"
+}

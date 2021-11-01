@@ -1,0 +1,9 @@
+{
+    "functionName": "test_against_R_implementation_3",
+    "className": null,
+    "fileName": "/tommyod_&_Efficient-Apriori/efficient_apriori_&_tests_&_test_apriori.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    The following R-code was used:\n        \n    > install.packages(\"arules\")\n    > col1 = c(\"b\", \"b\", \"c\", \"a\", \"b\", \"b\", \"a\", \"a\", \"b\", \"b\", \"a\", \"a\", \"c\", \n    \"b\", \"a\", \"c\") \n    > col2 = c(\"e\", \"d\", \"e\", \"e\", \"e\", \"e\", \"d\", \"e\", \"e\", \"e\", \"d\", \"e\", \"e\", \n    \"e\", \"d\", \"e\") \n    > col3 = c(\"i\", \"g\", \"h\", \"j\", \"i\", \"g\", \"h\", \"j\", \"i\", \"g\", \"j\", \"i\", \"j\", \n    \"j\", \"i\", \"i\")\n    > df = data.frame(col1, col2, col3)\n    > df <- data.frame(sapply(df, as.factor))\n    > rules <- apriori(df, parameter = list(supp = 0.2, conf = 0.2))\n    > inspect(head(rules, by = \"confidence\"))\n    \"\"\"\ntransactions = [('b', 'e', 'i'), ('b', 'd', 'g'), ('c', 'e', 'h'), ('a',\n    'e', 'j'), ('b', 'e', 'i'), ('b', 'e', 'g'), ('a', 'd', 'h'), ('a', 'e',\n    'j'), ('b', 'e', 'i'), ('b', 'e', 'g'), ('a', 'd', 'j'), ('a', 'e', 'i'\n    ), ('c', 'e', 'j'), ('b', 'e', 'j'), ('a', 'd', 'i'), ('c', 'e', 'i')]\nitemsets, rules = apriori(transactions, 0.2, 0.2)\nfor rule in rules:\n    if rule == Rule(('b',), ('e',)):\n        assert abs(rule.support - 0.375) < 1e-06\n        assert abs(rule.confidence - 0.8571429) < 1e-06\n    if rule == Rule(('i',), ('e',)):\n        assert abs(rule.support - 0.3125) < 1e-06\n        assert abs(rule.confidence - 0.8333333) < 1e-06\n    if rule == Rule(('j',), ('e',)):\n        assert abs(rule.support - 0.25) < 1e-06\n        assert abs(rule.confidence - 0.8) < 1e-06\n    if rule == Rule(('e',), ('b',)):\n        assert abs(rule.support - 0.375) < 1e-06\n        assert abs(rule.confidence - 0.5) < 1e-06\n"
+}

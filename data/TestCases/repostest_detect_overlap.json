@@ -1,0 +1,9 @@
+{
+    "functionName": "test_detect_overlap",
+    "className": "TestMergesRNA",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_merge_sRNA.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "pre_dict = {'seq_id': 'aaa', 'source': 'Refseq', 'feature': 'sRNA', 'start':\n    3, 'end': 33, 'phase': '.', 'strand': '+', 'score': '.'}\nattributes_pre = {'ID': 'sRNA0', 'Name': 'srna_0', 'sRNA_type': '5utr'}\ntar1_dict = {'seq_id': 'aaa', 'source': 'Refseq', 'feature': 'sRNA',\n    'start': 3, 'end': 33, 'phase': '.', 'strand': '+', 'score': '.'}\nattributes_tar1 = {'ID': 'sRNA0', 'Name': 'srna_0', 'sRNA_type': '3utr'}\ntar2_dict = {'seq_id': 'aaa', 'source': 'Refseq', 'feature': 'sRNA',\n    'start': 53, 'end': 233, 'phase': '.', 'strand': '+', 'score': '.'}\nattributes_tar2 = {'ID': 'sRNA0', 'Name': 'srna_0', 'sRNA_type': '5utr'}\npre = Create_generator(pre_dict, attributes_pre, 'gff')\ntar1 = Create_generator(tar1_dict, attributes_tar1, 'gff')\ntar2 = Create_generator(tar2_dict, attributes_tar2, 'gff')\noverlap = False\noverlap = ms.detect_overlap(tar1, pre, 'UTR', overlap)\nself.assertTrue(overlap)\noverlap = False\noverlap = ms.detect_overlap(tar2, pre, 'UTR', overlap)\nself.assertFalse(overlap)\n"
+}

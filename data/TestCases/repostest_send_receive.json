@@ -1,0 +1,9 @@
+{
+    "functionName": "test_send_receive",
+    "className": null,
+    "fileName": "/martinohanlon_&_BlueDot/tests_&_test_bluetooth_comms.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data_received_at_server = Event()\ndata_received_at_client = Event()\ndef data_received_server(data):\n    assert data == 'hiserver'\n    data_received_at_server.set()\ndef data_received_client(data):\n    assert data == 'hiclient'\n    data_received_at_client.set()\nbts = BluetoothServer(data_received_server, device='hci0')\nbtc = BluetoothClient(bta0.address, data_received_client, device='hci1')\nbtc.send('hiserver')\nassert data_received_at_server.wait(1)\nbts.send('hiclient')\nassert data_received_at_server.wait(1)\nbtc.disconnect()\nbts.stop()\n"
+}

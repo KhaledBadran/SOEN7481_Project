@@ -1,0 +1,9 @@
+{
+    "functionName": "to_networkx",
+    "className": "NetworkX",
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_io_&_NetworkX.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        Write OpenPNM Network to a NetworkX object.\n\n        Parameters\n        ----------\n        network : OpenPNM Network Object\n            The OpenPNM Network to be converted to a NetworkX object\n\n        Returns\n        -------\n        A NetworkX object with all pore/throat properties attached to it\n        \"\"\"\nimport networkx as nx\nif not isinstance(network, GenericNetwork):\n    raise 'Provided network is not an OpenPNM Network.'\nG = nx.Graph()\nnodes = map(int, network.Ps)\nconns = network['throat.conns']\nG.add_nodes_from(nodes)\nG.add_edges_from(conns)\nfor prop in (network.props(deep=True) + network.labels()):\n    if 'pore.' in prop:\n        if len(network[prop].shape) > 1:\n            val = {i: list(network[prop][i]) for i in network.Ps}\n        else:\n            val = {i: network[prop][i] for i in network.Ps}\n        nx.set_node_attributes(G, name=prop[5:], values=val)\n    if 'throat.' in prop:\n        val = {tuple(conn): network[prop][i] for i, conn in enumerate(conns)}\n        nx.set_edge_attributes(G, name=prop[7:], values=val)\nreturn G\nclassmethod"
+}

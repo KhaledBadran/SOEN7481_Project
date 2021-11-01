@@ -1,0 +1,9 @@
+{
+    "functionName": "registerRoute",
+    "className": null,
+    "fileName": "/named-data_&_PyNDN2/examples_&_test_register_route.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Use /localhost/nfd/rib/register to register the prefix to the faceId.\n\n    :param Name prefix: The prefix name to register.\n    :param int faceId: The face ID.\n    :param Face face: The Face which is used to sign the command interest and\n      call expressInterest.\n    :param enabled: On success or error, set enabled[0] = False.\n    :type enabled: An array with one bool element\n    \"\"\"\norigin = 255\ncost = 0\nCHILD_INHERIT = 1\nflags = CHILD_INHERIT\nmessage = (control_parameters_pb2.ControlParametersTypes.\n    ControlParametersMessage())\nfor i in range(prefix.size()):\n    message.control_parameters.name.component.append(prefix[i].getValue().\n        toBytes())\nmessage.control_parameters.face_id = faceId\nmessage.control_parameters.origin = origin\nmessage.control_parameters.cost = cost\nmessage.control_parameters.flags = flags\nencodedControlParameters = ProtobufTlv.encode(message)\ninterest = Interest(Name('/localhost/nfd/rib/register'))\ninterest.getName().append(encodedControlParameters)\ninterest.setInterestLifetimeMilliseconds(10000)\nface.makeCommandInterest(interest)\ndef onData(localInterest, data):\n    enabled[0] = False\n    processRegisterResponse(data.getContent())\ndef onTimeout(localInterest):\n    enabled[0] = False\n    dump('Register route command timed out.')\nface.expressInterest(interest, onData, onTimeout)\n"
+}

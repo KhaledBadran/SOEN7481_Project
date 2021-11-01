@@ -1,0 +1,9 @@
+{
+    "functionName": "test_serialize_packed_message",
+    "className": "TestProtobuf",
+    "fileName": "/PRIArobotics_&_HedgehogUtils/tests_&_test_protobuf.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "msg = protobuf_tests.DefaultTest(1)\nproto = protobuf_tests.Msg1.serialize(msg)\nexpected = test_pb2.TestMessage1()\nexpected.test.field = 1\nassert proto == expected.SerializeToString()\nmsg = protobuf_tests.AlternativeTest(1)\nproto = protobuf_tests.Msg1.serialize(msg)\nexpected = test_pb2.TestMessage1()\nexpected.test.kind = protobuf_tests.ALTERNATIVE\nexpected.test.field = 1\nassert proto == expected.SerializeToString()\nmsg = protobuf_tests.SimpleTest(1)\nassert msg.class_field == 'class_field_value'\nproto = protobuf_tests.Msg1.serialize(msg)\nexpected = test_pb2.TestMessage1()\nexpected.simple_test.field = 1\nassert proto == expected.SerializeToString()\n"
+}

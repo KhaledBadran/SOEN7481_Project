@@ -1,0 +1,9 @@
+{
+    "functionName": "test_content_symmetric_encrypt",
+    "className": "TestEncryptor",
+    "fileName": "/named-data_&_PyNDN2/tests_&_unit_tests_&_test_encryptor.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "for input in encryptorAesTestInputs:\n    data = Data()\n    Encryptor.encryptData(data, input.plainText, input.keyName, input.key,\n        input.encryptParams)\n    self.assertTrue(data.getName().equals(Name('/FOR').append(input.keyName\n        )), input.testName)\n    self.assertTrue(input.encryptedContent.equals(data.getContent()), input\n        .testName)\n    content = EncryptedContent()\n    content.wireDecode(data.getContent())\n    decryptedOutput = AesAlgorithm.decrypt(input.key, content.getPayload(),\n        input.encryptParams)\n    self.assertTrue(input.plainText.equals(decryptedOutput), input.testName)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_matrix_bad_request",
+    "className": "RoutingApiTest",
+    "fileName": "/abdullahselek_&_HerePy/tests_&_test_routing_api.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with codecs.open('testdata/models/routing_matrix_bad_request.json', mode=\n    'r', encoding='utf-8') as f:\n    server_response = f.read()\nresponses.add(responses.GET,\n    'https://matrix.route.ls.hereapi.com/routing/7.2/calculatematrix.json',\n    server_response, status=400)\nwith self.assertRaises(herepy.InvalidInputDataError):\n    self._api.matrix(start_waypoints=[[9.933231, -84.076831]],\n        destination_waypoints=[[9.934574, -84.065544]], modes=[herepy.\n        RouteMode.pedestrian, herepy.RouteMode.car])\nresponses.activate"
+}

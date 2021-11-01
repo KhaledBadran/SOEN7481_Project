@@ -1,0 +1,9 @@
+{
+    "functionName": "test_general_toroidal",
+    "className": "MeniscusTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_physics_&_MeniscusTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "phys = self.phys\nr_tor = 1e-06\nphys.add_model(propname='throat.purcell_pressure', model=pm.\n    capillary_pressure.purcell, r_toroid=r_tor)\nphys['throat.scale_a'] = r_tor\nphys['throat.scale_b'] = r_tor\nphys.add_model(propname='throat.general_pressure', model=pm.meniscus.\n    general_toroidal, mode='max', num_points=1000)\na = np.around(phys['throat.purcell_pressure'], 10)\nb = np.around(phys['throat.general_pressure'], 10)\nassert np.allclose(a, b)\nh = phys.check_data_health()\nfor check in h.values():\n    if len(check) > 0:\n        assert 1 == 2\n"
+}

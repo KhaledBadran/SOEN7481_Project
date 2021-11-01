@@ -1,0 +1,9 @@
+{
+    "functionName": "sparse_chain_crf_loss",
+    "className": null,
+    "fileName": "/david-leon_&_Dandelion/test_&_test_ChainCRF.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Given the true sparsely encoded tag sequence y, input x (with mask),\n    transition energies U, boundary energies b_start and b_end, it computes\n    the loss function of a Linear Chain Conditional Random Field:\n    loss(y, x) = NLL(P(y|x)), where P(y|x) = exp(E(y, x)) / Z.\n    So, loss(y, x) = - E(y, x) + log(Z)\n    Here, E(y, x) is the tag path energy, and Z is the normalization constant.\n    The values log(Z) is also called free energy.\n    \"\"\"\nx = add_boundary_energy(x, b_start, b_end, mask)\nenergy = path_energy0(y, x, U, mask)\nenergy -= free_energy0(x, U, mask)\nreturn K.expand_dims(-energy, -1)\n"
+}

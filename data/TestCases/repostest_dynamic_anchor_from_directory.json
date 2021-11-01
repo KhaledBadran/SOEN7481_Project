@@ -1,0 +1,9 @@
+{
+    "functionName": "test_dynamic_anchor_from_directory",
+    "className": "TestTrustAnchorContainer",
+    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_trust_anchor_container.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "try:\n    os.remove(self.certificatePath2)\nexcept OSError:\n    pass\nself.anchorContainer.insert('group', self.certificateDirectoryPath, 400.0, True\n    )\nself.assertTrue(self.anchorContainer.find(self.identity1.getName()) != None)\nself.assertTrue(self.anchorContainer.find(self.identity2.getName()) == None)\nself.assertEqual(1, self.anchorContainer.getGroup('group').size())\nself.fixture.saveCertificateToFile(self.certificate2, self.certificatePath2)\ntime.sleep(0.5)\nself.assertTrue(self.anchorContainer.find(self.identity1.getName()) != None)\nself.assertTrue(self.anchorContainer.find(self.identity2.getName()) != None)\nself.assertEqual(2, self.anchorContainer.getGroup('group').size())\nallFiles = [f for f in os.listdir(self.certificateDirectoryPath) if os.path\n    .isfile(os.path.join(self.certificateDirectoryPath, f))]\nfor f in allFiles:\n    try:\n        os.remove(os.path.join(self.certificateDirectoryPath, f))\n    except OSError:\n        pass\ntime.sleep(0.5)\nself.assertTrue(self.anchorContainer.find(self.identity1.getName()) == None)\nself.assertTrue(self.anchorContainer.find(self.identity2.getName()) == None)\nself.assertEqual(0, self.anchorContainer.getGroup('group').size())\n"
+}

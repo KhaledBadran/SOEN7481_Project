@@ -1,0 +1,9 @@
+{
+    "functionName": "test_keyword_search",
+    "className": "TestModelCreator",
+    "fileName": "/bigfishgames_&_GameBenchAPI-PyClient/tests_&_test_integration_&_test_models_&_test_creator_&_test_model_creator.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Keyword search should return the proper DataFrames.\n\n            Regression test for https://github.com/bigfishgames/gamebenchapi-pyclient/issues/56\n        \"\"\"\nwith open(os.path.join(PARENT_DIR + '/fixtures/' + 'authentication_token.json')\n    ) as json_data:\n    self.auth_token = json.load(json_data)\nwith open(os.path.join(PARENT_DIR + API_SAMPLES + 'keyword_search.json')\n    ) as json_data:\n    self.keyword_search_json = json.load(json_data)\nmock_return.request('POST', AUTH_URL, json=self.auth_token)\nmock_return.request('POST',\n    'https://production.node.gce.gamebench.net/v1/sessions/typeahead', json\n    =self.keyword_search_json['response'])\ncreator = ModelCreator('Keyword', **KEYWORD_SEARCH_PARAMS)\nmodel = creator.get_model()\nexpected = pandas.DataFrame([self.keyword_search_json['response']])\nactual = model.data\nassert_frame_equal(actual, expected)\nrequests_mock.Mocker()"
+}

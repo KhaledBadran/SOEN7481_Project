@@ -1,0 +1,9 @@
+{
+    "functionName": "test_halomodel_choices_smoke",
+    "className": null,
+    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_halomodel.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from pyccl.pyutils import assert_warns\nmf, c = mf_c\ncosmo = ccl.Cosmology(Omega_c=0.27, Omega_b=0.045, h=0.67, sigma8=0.8, n_s=\n    0.96, transfer_function='bbks', matter_power_spectrum='linear',\n    mass_function=mf, halo_concentration=c)\na = 0.8\nk = np.geomspace(0.01, 1, 10)\np = assert_warns(ccl.CCLWarning, ccl.twohalo_matter_power, cosmo, k, a)\npb = get_pk_new(mf, c, cosmo, a, k, False, True)\nassert np.all(np.isfinite(p))\nassert np.allclose(p, pb)\npytest.mark.parametrize('mf_c', [['shethtormen', 'bhattacharya2011'], [\n    'shethtormen', 'duffy2008'], ['shethtormen', 'constant_concentration'],\n    ['tinker10', 'constant_concentration']])"
+}

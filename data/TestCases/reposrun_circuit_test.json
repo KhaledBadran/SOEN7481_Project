@@ -1,0 +1,9 @@
+{
+    "functionName": "run_circuit_test",
+    "className": null,
+    "fileName": "/PECOS-packages_&_PECOS/tests_&_test_random_circuits.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "if gates is None:\n    gates = ['H', 'S', 'CNOT', 'measure Z', 'init |0>']\nfor seed in range(trials):\n    np.random.seed(seed)\n    circuit = generate_circuit(gates, num_qubits, circuit_depth)\n    measurements = []\n    for state_sim in state_sims:\n        np.random.seed(seed)\n        meas = run_a_circuit(num_qubits, state_sim, circuit)\n        measurements.append(meas)\n    meas0 = measurements[0]\n    for meas in measurements[1:]:\n        if meas0 != meas:\n            print('seed=', seed)\n            print(circuit)\n            return False\nreturn True\n"
+}

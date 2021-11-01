@@ -1,0 +1,9 @@
+{
+    "functionName": "test_unit_norm",
+    "className": "TestWordVectors",
+    "fileName": "/apmoore1_&_Bella/tests_&_test_word_vectors.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Testing the unit_length of WordVectors\n        \"\"\"\nhello_vec = np.asarray([0.5, 0.3, 0.4], dtype=np.float32)\nanother_vec = np.asarray([0.3333, 0.2222, 0.1111], dtype=np.float32)\ntest_vectors = {'hello': hello_vec, 'another': another_vec}\nword_vector = WordVectors(test_vectors, unit_length=True)\nunit_hello_vec = np.asarray([0.70710677, 0.4242641, 0.56568545], dtype=np.\n    float32)\nunit_is_equal = np.array_equal(unit_hello_vec, word_vector.lookup_vector(\n    'hello'))\nself.assertEqual(True, unit_is_equal, msg='Unit vector is not working')\ntest_unit_mag = np.linalg.norm(word_vector.lookup_vector('hello'))\nself.assertEqual(1.0, test_unit_mag, msg=\n    'l2 norm of a unit vector should be 1 not {}'.format(test_unit_mag))\nunknown_vector = word_vector.lookup_vector('nothing')\nself.assertEqual(True, np.array_equal(np.zeros(3), unknown_vector), msg=\n    'unknown vector should be a zero vector and not {}'.format(unknown_vector))\nhello_index = word_vector.word2index['hello']\nhello_embedding = word_vector.embedding_matrix[hello_index]\nself.assertEqual(True, np.array_equal(unit_hello_vec, hello_embedding), msg\n    =\n    'The embedding matrix is not applying the unit normalization {} should be {}'\n    .format(hello_embedding, unit_hello_vec))\n"
+}

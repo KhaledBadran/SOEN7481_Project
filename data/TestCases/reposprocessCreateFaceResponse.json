@@ -1,0 +1,9 @@
+{
+    "functionName": "processCreateFaceResponse",
+    "className": null,
+    "fileName": "/named-data_&_PyNDN2/examples_&_test_register_route.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    This is called when the face create command responds to decode the\n    encodedControlResonse as a TLV ControlResponse message containing one\n    ControlParameters. Get the face ID and call registerRoute().\n\n    :param Blob encodedControlResponse: The TLV-encoded ControlResponse.\n    \"\"\"\ndecodedControlResponse = (control_parameters_pb2.ControlParametersTypes.\n    ControlParametersResponseMessage())\nProtobufTlv.decode(decodedControlResponse, encodedControlResponse)\ncontrolResponse = decodedControlResponse.control_response\nlowestErrorCode = 400\nif controlResponse.status_code >= lowestErrorCode:\n    dump('Face create command got error, code ' + str(controlResponse.\n        status_code) + ': ' + controlResponse.status_text)\n    enabled[0] = False\n    return\nif len(controlResponse.control_parameters) != 1:\n    dump('Face create command response does not have one ControlParameters')\n    enabled[0] = False\n    return\nfaceId = controlResponse.control_parameters[0].face_id\ndump('Created face ID ' + str(faceId))\nregisterRoute(prefix, faceId, face, enabled)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "_create_xrf_mask",
+    "className": null,
+    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_core_&_tests_&_test_map_processing.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Generate a mask for testing of XRF dataset processing functions.\n\n    Parameters\n    ----------\n    data_shape: tuple or list\n        (ny, nx, ...) - the shape of XRF dataset. All dimensions except 0 and 1 are ignored\n    apply_mask: bool\n        True: generate random mask,\n    select_area: bool\n        True: select area of the XRF map for processing.\n\n    Returns\n    -------\n    mask: ndarray(int) or None\n        mask is ndarray with shape (ny, nx). Integer values: 0 - pixel inactive,\n        1, 2 - pixel active. Note: any positive integer marks pixel as active, but only\n        values of 1 and 2 are generated.\n    selection: tuple or None\n        selected area is (y0, x0, ny_sel, nx_sel)\n\n    If `select_area==True`, then all pixels in `mask` outside the selected area\n    are disabled.\n    \"\"\"\nif apply_mask:\n    mask = np.random.randint(0, 2, data_shape[0:2])\n    mask[3, 4] = 0\n    mask[2, 4] = 1\nelse:\n    mask = None\nif select_area:\n    selection = 2, 3, 4, 2\nelse:\n    selection = None\nreturn mask, selection\n"
+}

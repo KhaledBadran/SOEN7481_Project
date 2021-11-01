@@ -1,0 +1,9 @@
+{
+    "functionName": "test_locate_response_write",
+    "className": "TestResponseMessage",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_test_messages.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "prot_ver = contents.ProtocolVersion(1, 1)\ntime_stamp = contents.TimeStamp(1335514342)\nbatch_count = contents.BatchCount(1)\nresp_hdr = messages.ResponseHeader(protocol_version=prot_ver, time_stamp=\n    time_stamp, batch_count=batch_count)\noperation = contents.Operation(enums.Operation.LOCATE)\nresult_status = contents.ResultStatus(enums.ResultStatus.SUCCESS)\nuuid = '49a1ca88-6bea-4fb2-b450-7e58802c3038'\nresp_pl = payloads.LocateResponsePayload(unique_identifiers=[uuid])\nbatch_item = messages.ResponseBatchItem(operation=operation, result_status=\n    result_status, response_payload=resp_pl)\nresponse_message = messages.ResponseMessage(response_header=resp_hdr,\n    batch_items=[batch_item])\nresponse_message.write(self.stream)\nresult = self.stream.read()\nlen_exp = len(self.locate)\nlen_rcv = len(result)\nself.assertEqual(len_exp, len_rcv, self.msg.format('response message',\n    'write', len_exp, len_rcv))\nmsg = 'Bad response message write: encoding mismatch'\nself.assertEqual(self.locate, result, msg)\n"
+}

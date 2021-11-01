@@ -1,0 +1,9 @@
+{
+    "functionName": "compare_timings",
+    "className": null,
+    "fileName": "/yetone_&_babeljs-python/tests_&_test_transformer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "timing_header = False\nfor test_id in timings:\n    if 'MiniRacer' not in test_id:\n        continue\n    node_test_id = test_id.replace('MiniRacer', 'Node')\n    if node_test_id not in timings:\n        continue\n    if not timing_header:\n        timing_header = True\n        print()\n        print()\n        print('PyMiniRacer speedup over Node.js subprocess:')\n    name = test_id.split('.')[-1]\n    label = name[:25] + ' ' * (25 - len(name))\n    mini_racer_time = timings[test_id]\n    node_time = timings[node_test_id]\n    rel_s = mini_racer_time - node_time\n    rel_pct = rel_s / node_time * 100\n    if rel_pct > 0:\n        msg = '{test_label}: {rel_pct}% slower (+{rel_ms}ms)'\n    else:\n        msg = '{test_label}: {rel_pct}% faster (-{rel_ms}ms)'\n    print(msg.format(test_label=label, rel_pct=abs(round(rel_pct, 2)),\n        rel_ms=abs(round(rel_s * 1000))))\n"
+}

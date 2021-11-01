@@ -1,0 +1,9 @@
+{
+    "functionName": "test_register_exception_type",
+    "className": null,
+    "fileName": "/jperras_&_Flask-ApiExceptions/test_apiexceptions.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Register an exception type with the default handler.\"\"\"\nclass CustomError(Exception):\n    \"\"\"Exception subclass for testing purposes.\"\"\"\n    message = 'A custom error message'\n@app.route('/testing')\ndef testing():\n    \"\"\"Endpoint that simply raises an exception.\"\"\"\n    raise CustomError()\next = JSONExceptionHandler(app)\next.register(code_or_exception=CustomError)\nwith app.app_context():\n    with app.test_client() as c:\n        rv = c.get('/testing')\nassert rv.status_code == 500\nassert rv.headers['content-type'] == 'application/json'\nassert json.loads(rv.data)['message'] == 'A custom error message'\n"
+}

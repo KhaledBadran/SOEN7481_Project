@@ -1,0 +1,9 @@
+{
+    "functionName": "test_add_statements_has_uploader",
+    "className": "DataUserTest",
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_DataUserTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Assert that each statement has an uploader annotation \"\"\"\ng = R.Graph()\ns = rdflib.URIRef('http://somehost.com/s')\np = rdflib.URIRef('http://somehost.com/p')\no = rdflib.URIRef('http://somehost.com/o')\ng.add((s, p, o))\ndu = DataUser(self.config)\ntry:\n    du.add_statements(g)\nexcept Exception as e:\n    self.fail('Should be able to add statements in the first place: ' + str(e))\ng0 = du.conf['rdf.graph']\nuploader_n3_uri = du.conf['rdf.namespace']['uploader'].n3()\nupload_date_n3_uri = du.conf['rdf.namespace']['upload_date'].n3()\nq = \"\"\"\n        Select ?u ?t where\n        {\n        GRAPH ?g\n        {\n         <http://somehost.com/s>\n         <http://somehost.com/p>\n         <http://somehost.com/o> .\n        }\n\n        ?g \"\"\" + uploader_n3_uri + ' ?u.\\n        ?g ' + upload_date_n3_uri + \"\"\" ?t.\n        } LIMIT 1\n        \"\"\"\nfor x in g0.query(q):\n    self.assertEqual(du.conf['user.email'], str(x['u']))\nunittest.skip('Should be tracked by version control')"
+}

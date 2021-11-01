@@ -1,0 +1,9 @@
+{
+    "functionName": "test_itemsets_from_transactions_stochastic",
+    "className": null,
+    "fileName": "/tommyod_&_Efficient-Apriori/efficient_apriori_&_tests_&_test_itemsets.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test 50 random inputs.\n    \"\"\"\nresult, _ = itemsets_from_transactions(list(transactions), min_support)\nnaive_result, _ = itemsets_from_transactions_naive(list(transactions),\n    min_support)\nfor key in set.union(set(result.keys()), set(naive_result.keys())):\n    assert result[key] == naive_result[key]\npytest.mark.parametrize('transactions, min_support', input_data)"
+}

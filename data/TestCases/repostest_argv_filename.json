@@ -1,0 +1,9 @@
+{
+    "functionName": "test_argv_filename",
+    "className": null,
+    "fileName": "/ocaballeror_&_Lyricfetch/lyricfetch_&_tests_&_test_args.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test that the main script can accept a list of file names passed as\n    parameters, and return them all in a list.\n    \"\"\"\nmp3s = [tmpdir / 'first.mp3', tmpdir / 'second.mp3', tmpdir / 'third.mp3']\nnew_args = [__file__]\nfor mp3 in mp3s:\n    shutil.copyfile(mp3file, mp3)\n    new_args.append(str(mp3))\nmonkeypatch.setattr(sys, 'argv', new_args)\nsongs = parse_argv()\nsongs = set(pypath(s.filename) for s in songs)\nassert set(mp3s) == songs\n"
+}

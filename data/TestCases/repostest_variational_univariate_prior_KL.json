@@ -1,0 +1,9 @@
+{
+    "functionName": "test_variational_univariate_prior_KL",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_models_&_test_variational.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "reference_kl = univariate_prior_KL(Datum.posterior_mean, Datum.zero_mean,\n    Datum.posterior_var, Datum.K)\nq_mu = np.ones((1, Datum.num_latent_gps)) * Datum.posterior_mean\nones = np.ones((1, Datum.num_latent_gps)) if diag else np.ones((1, 1, Datum\n    .num_latent_gps))\nq_sqrt = ones * Datum.posterior_std\nmodel = gpflow.models.SVGP(kernel=SquaredExponential(variance=Datum.K),\n    likelihood=Gaussian(), inducing_variable=Datum.Z, num_latent_gps=Datum.\n    num_latent_gps, q_diag=diag, whiten=whiten, q_mu=q_mu, q_sqrt=q_sqrt)\nassert_allclose(model.prior_kl(), reference_kl, atol=4)\npytest.mark.parametrize('diag', [True, False])pytest.mark.parametrize('whiten', [True, False])"
+}

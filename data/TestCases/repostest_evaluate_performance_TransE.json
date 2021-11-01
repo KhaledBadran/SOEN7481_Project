@@ -1,0 +1,9 @@
+{
+    "functionName": "test_evaluate_performance_TransE",
+    "className": null,
+    "fileName": "/Accenture_&_AmpliGraph/tests_&_ampligraph_&_evaluation_&_test_protocol.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "X = load_wn18()\nmodel = TransE(batches_count=10, seed=0, epochs=100, k=100, eta=5,\n    optimizer_params={'lr': 0.1}, loss='pairwise', loss_params={'margin': 5\n    }, optimizer='adagrad')\nmodel.fit(np.concatenate((X['train'], X['valid'])))\nfilter_triples = np.concatenate((X['train'], X['valid'], X['test']))\nranks = evaluate_performance(X['test'][:200], model=model, filter_triples=\n    filter_triples, verbose=True)\nmrr = mrr_score(ranks)\nhits_10 = hits_at_n_score(ranks, n=10)\nprint('ranks: %s' % ranks)\nprint('MRR: %f' % mrr)\nprint('Hits@10: %f' % hits_10)\npytest.mark.skip(reason='Speeding up jenkins')"
+}

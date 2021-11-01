@@ -1,0 +1,9 @@
+{
+    "functionName": "test_smooth_matrix_with_rwr_single_vector",
+    "className": "TestSmooth_matrix_with_rwr",
+    "fileName": "/KnowEnG_&_KnowEnG_Pipelines_Library/test_&_unit_&_test_smooth_matrix_with_rwr.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Assert that a test matrix will converge to the precomputed answer in\n            the predicted number of steps (iterations). Depends on run_parameters\n            and the values set herein.\n        \"\"\"\nEXPECTED_STEPS = 31\nF0 = np.array([1.0, 0.0])\nA = (np.eye(2) + np.ones((2, 2))) / 3\nF_exact = np.array([0.5, 0.5])\nF_calculated, steps = kn.smooth_matrix_with_rwr(F0, A, self.run_parameters)\nself.assertEqual(steps, EXPECTED_STEPS, msg='minor difference')\nT = np.abs(F_exact - F_calculated)\nself.assertAlmostEqual(T.sum(), 0)\n"
+}

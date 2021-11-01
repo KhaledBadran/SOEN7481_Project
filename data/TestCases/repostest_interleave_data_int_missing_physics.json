@@ -1,0 +1,9 @@
+{
+    "functionName": "test_interleave_data_int_missing_physics",
+    "className": "SubdomainTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_core_&_SubdomainTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "net = op.network.Cubic(shape=[4, 1, 1])\ngeo1 = op.geometry.GenericGeometry(network=net, pores=[0, 1], throats=[0, 1])\ngeo2 = op.geometry.GenericGeometry(network=net, pores=[2, 3], throats=[2])\nair = op.phases.Air(network=net)\nphys = op.physics.GenericPhysics(network=net, phase=air, geometry=geo1)\nphys['pore.blah'] = 1\nassert np.any(np.isnan(air['pore.blah']))\n"
+}

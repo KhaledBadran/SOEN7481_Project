@@ -1,0 +1,9 @@
+{
+    "functionName": "get_notebooks",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_integration_&_test_notebooks.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Returns all notebooks in `_nbpath` that are not blacklisted.\n    \"\"\"\ndef notebook_blacklisted(nb):\n    blacklisted_notebooks_basename = map(os.path.basename,\n        BLACKLISTED_NOTEBOOKS)\n    return os.path.basename(nb) in blacklisted_notebooks_basename\nall_py_notebooks = glob.iglob(os.path.join(_nbpath(), '**', '*.pct.py'),\n    recursive=True)\nall_md_notebooks = glob.iglob(os.path.join(_nbpath(), '**', '*.md'),\n    recursive=True)\nall_notebooks = itertools.chain(all_md_notebooks, all_py_notebooks)\nnotebooks_to_test = [nb for nb in all_notebooks if not notebook_blacklisted(nb)\n    ]\nreturn notebooks_to_test\n"
+}

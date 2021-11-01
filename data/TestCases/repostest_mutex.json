@@ -1,0 +1,9 @@
+{
+    "functionName": "test_mutex",
+    "className": null,
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_FileLockTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with TemporaryDirectory() as td:\n    q = Queue()\n    done = Semaphore(0)\n    wait = Semaphore(0)\n    p1 = Process(target=mutex_test_f, args=(1, q, p(td, 'lockfile'), done,\n        wait))\n    p2 = Process(target=mutex_test_f, args=(2, q, p(td, 'lockfile'), done,\n        wait))\n    p1.start()\n    p2.start()\n    done.acquire()\n    done.release()\n    try:\n        print(q.get(timeout=1))\n        with pytest.raises(Empty):\n            print(q.get(timeout=1))\n    finally:\n        wait.release()\n        wait.release()\n        p1.join()\n        p2.join()\npytest.mark.inttest"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_handle_message_loop_with_parse_failure",
+    "className": "TestKmipSession",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_session.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the correct logging and error handling occurs during the\n        message handling loop.\n        \"\"\"\ndata = utils.BytearrayStream(())\ncert_mock.return_value = 'test_certificate'\nkmip_engine = engine.KmipEngine()\nkmip_session = session.KmipSession(kmip_engine, None, None, name='name',\n    enable_tls_client_auth=False)\nkmip_session.authenticate = mock.MagicMock()\nkmip_session.authenticate.return_value = 'test', ['group A', 'group B']\nkmip_session._logger = mock.MagicMock()\nkmip_session._connection = mock.MagicMock()\nkmip_session._receive_request = mock.MagicMock(return_value=data)\nkmip_session._send_response = mock.MagicMock()\nkmip_session._handle_message_loop()\nkmip_session._receive_request.assert_called_once_with()\nkmip_session._logger.warning.assert_called_once_with(\n    'Failure parsing request message.')\nself.assertTrue(kmip_session._logger.exception.called)\nkmip_session._logger.error.assert_not_called()\nself.assertTrue(kmip_session._send_response.called)\nmock.patch('kmip.services.server.auth.get_certificate_from_connection')mock.patch('kmip.core.messages.messages.RequestMessage.read', mock.\n    MagicMock(side_effect=Exception()))"
+}

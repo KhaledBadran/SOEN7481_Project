@@ -1,0 +1,9 @@
+{
+    "functionName": "testOperaDriverMac",
+    "className": "TestOpera",
+    "fileName": "/browserium_&_Browserium/TestFunction_&_unittests_&_test_opera.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "driverAPI = self.parseJSONOpera()\ndata = driverAPI.get('mac')\ndownload_url = self.parse_json(data)\n_response = requests.get(download_url)\nif _response.status_code == 200:\n    wget.download(download_url)\n    self.log.log_info('Binary downloaded for mac')\nelse:\n    self.log.log_error('Connection error')\n    raise requests.exceptions.ConnectionError('Connection error')\nself.assertTrue(os.path.exists('operadriver_mac64.zip'))\nself.log.log_info('Path for binary file exist')\nself.utility.delete_file('operadriver_mac64.zip')\nself.log.log_info('Binary files deleted')\n"
+}

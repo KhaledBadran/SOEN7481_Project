@@ -1,0 +1,9 @@
+{
+    "functionName": "test_incorrect_doi",
+    "className": "TestGetReference",
+    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_converters.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Ensure can handle invalid DOI.\n        \"\"\"\nroot = etree.Element('experiment')\nref = etree.SubElement(root, 'bibliographyLink')\nref.set('doi', '10.1000/invalid.doi')\nref.set('preferredKey',\n    'Chaumeix, N., Pichon, S., Lafosse, F., Paillard, C.-E., International Journal of Hydrogen Energy, 2007, (32) 2216-2226, Fig. 12., right, open diamond'\n    )\nwith pytest.warns(UserWarning) as record:\n    ref = get_reference(root)\nm = str(record.pop(UserWarning).message)\nassert m == 'Missing doi attribute in bibliographyLink or lookup failed. Setting \"detail\" key as a fallback; please update to the appropriate fields.'\nassert ref['detail'\n    ] == 'Chaumeix, N., Pichon, S., Lafosse, F., Paillard, C.-E., International Journal of Hydrogen Energy, 2007, (32) 2216-2226, Fig. 12., right, open diamond.'\n"
+}

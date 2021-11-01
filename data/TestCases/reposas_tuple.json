@@ -1,0 +1,9 @@
+{
+    "functionName": "as_tuple",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Coerce a value to a tuple of given length (and possibly given type).\n\n    Parameters\n    ----------\n    x : value or iterable\n    N : integer\n        length of the desired tuple\n    t : type or tuple of type, optional\n        required type or types for all elements\n\n    Returns\n    -------\n    tuple\n        ``tuple(x)`` if `x` is iterable, ``(x,) * N`` otherwise.\n\n    Raises\n    ------\n    TypeError\n        if `type` is given and `x` or any of its elements do not match it\n    ValueError\n        if `x` is iterable, but does not have exactly `N` elements\n    \"\"\"\ntry:\n    X = tuple(x)\nexcept TypeError:\n    X = (x,) * N\nif t is not None and not all(isinstance(v, t) for v in X):\n    if t == int_types:\n        expected_type = 'int'\n    elif isinstance(t, tuple):\n        expected_type = ' or '.join(tt.__name__ for tt in t)\n    else:\n        expected_type = t.__name__\n    raise TypeError(\n        'expected a single value or an iterable of {0}, got {1} instead'.\n        format(expected_type, x))\nif len(X) != N:\n    raise ValueError(\n        'expected a single value or an iterable with length {0}, got {1} instead'\n        .format(N, x))\nreturn X\n"
+}

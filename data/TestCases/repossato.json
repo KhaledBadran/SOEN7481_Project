@@ -1,0 +1,9 @@
+{
+    "functionName": "sato",
+    "className": null,
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_models_&_phases_&_thermal_conductivity.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Uses Sato et al. model to estimate thermal conductivity for pure liquids\n    from first principles at conditions of interest\n\n    Parameters\n    ----------\n    target : OpenPNM Object\n        The object for which these values are being calculated.  This\n        controls the length of the calculated array, and also provides\n        access to other necessary thermofluid properties.\n\n    boiling_temperature :  string\n        Dictionary key containing the toiling temperature of the component (K)\n\n    mol_weight : string\n        Dictionary key containing the molecular weight of the component\n        (kg/mol)\n\n    temperature : string\n        The dictionary key containing the temperature values (K)\n\n    critical_temperature : string\n        The dictionary key containing the critical temperature values (K)\n\n    Returns\n    -------\n    value : NumPy ndarray\n        Array containing thermal conductivity values in [W/m.K]\n\n    \"\"\"\nT = target[temperature]\nTc = target[critical_temperature]\nMW = target[mol_weight]\nTbr = target[boiling_temperature] / Tc\nTr = T / Tc\nvalue = 1.11 / (MW * 1000.0) ** 0.5 * (3 + 20 * (1 - Tr) ** (2 / 3)) / (3 +\n    20 * (1 - Tbr) ** (2 / 3))\nreturn value\n"
+}

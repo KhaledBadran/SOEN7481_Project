@@ -1,0 +1,9 @@
+{
+    "functionName": "test_detect_and_migrate_html_files",
+    "className": "TestStructureDirectory",
+    "fileName": "/brettvanderwerff_&_Flaskerizer/flaskerizer_&_flaskerizer_src_&_tests_&_test_structure_directory.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Confirms that detect_and_migrate_html_files migrates the correct number of files with extension .html\n        from the Example bootstrap template directory to the 'templates; folder of the Test_application directory\n        by comparing to the number of .html files in the 'templates' folder of a \"gold_standard\"\n        respective Test_application_test_folder.\n        \"\"\"\nself.test.mkdir()\nmigrate_dict = self.test.detect_static_files()\nself.test.migrate_files(migrate_dict)\nself.test.detect_and_migrate_html_files()\ntest_dir = os.path.join(self.flaskerized_app_dir, os.path.basename('templates')\n    )\ngold_standard_dir = os.path.join(self.gold_standard_dir, os.path.basename(\n    'Test_application'), os.path.basename('templates'))\ntest_file_list = []\ngold_standard_file_list = []\nfor dir in [test_dir, gold_standard_dir]:\n    for file in os.listdir(dir):\n        if file.endswith('.html'):\n            if dir == test_dir:\n                test_file_list.append(file)\n            if dir == gold_standard_dir:\n                gold_standard_file_list.append(file)\nself.assertEqual(len(test_file_list), len(gold_standard_file_list))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ticker_list_to_str",
+    "className": null,
+    "fileName": "/EVEprosper_&_ProsperDatareader/tests_&_test_config.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"make sure ticker_list_to_str returns as expected\"\"\"\nno_caps_pattern = re.compile('[a-z]+')\nsingle_stock = config._list_to_str('MU')\nassert not no_caps_pattern.match(single_stock)\nassert single_stock == 'MU'\nlower_stock = config._list_to_str('mu')\nassert not no_caps_pattern.match(lower_stock)\nassert lower_stock == 'MU'\nmulti_stock = config._list_to_str(['MU', 'INTC', 'BA'])\nassert not no_caps_pattern.match(multi_stock)\nassert multi_stock == 'MU,INTC,BA'\nlower_multi_stock = config._list_to_str(['MU', 'intc', 'BA'])\nassert not no_caps_pattern.match(lower_multi_stock)\nassert lower_multi_stock == 'MU,INTC,BA'\nwith pytest.raises(TypeError):\n    bad_stock = config._list_to_str({'butts': 1})\n"
+}

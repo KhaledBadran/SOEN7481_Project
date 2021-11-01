@@ -1,0 +1,9 @@
+{
+    "functionName": "rotate2X",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&__tools.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "if np.isclose(v[2] / np.linalg.norm(v), 1):\n    return rotMatrix([0, 1, 0], np.pi / 2, deg=False)\nvRotInPlane = np.array([-v[1], v[0], 0])\nvPlan = np.array([v[0], v[1], 0])\ntheta = np.arccos(np.dot(v, vPlan) / (np.linalg.norm(v) * np.linalg.norm(\n    vPlan)))\nR = rotMatrix(vRotInPlane, theta, deg=False)\nv2 = np.dot(R, v)\ntheta2 = np.arccos(np.dot(v2, np.array([1, 0, 0])) / np.linalg.norm(v2))\nR2 = rotMatrix(np.array([0, 0, 1.0]), -theta2, deg=False)\nRotation = np.dot(R2, R)\nreturn Rotation\n"
+}

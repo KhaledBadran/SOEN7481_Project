@@ -1,0 +1,9 @@
+{
+    "functionName": "test_dual_variables",
+    "className": null,
+    "fileName": "/PythonOT_&_POT/test_&_test_ot.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "n = 500\nm = 600\nmean1 = 300\nmean2 = 400\nx = np.arange(n, dtype=np.float64)\ny = np.arange(m, dtype=np.float64)\na = gauss(n, m=mean1, s=5)\nb = gauss(m, m=mean2, s=10)\nM = ot.dist(x.reshape((-1, 1)), y.reshape((-1, 1))) ** (1.0 / 2)\nprint('Computing {} EMD '.format(1))\not.tic()\nG, log = ot.emd(a, b, M, log=True)\not.toc('1 proc : {} s')\not.tic()\nG2 = ot.emd(b, a, np.ascontiguousarray(M.T))\not.toc('1 proc : {} s')\ncost1 = (G * M).sum()\nnp.testing.assert_array_almost_equal(cost1, (M * G2.T).sum())\nnp.testing.assert_almost_equal(cost1, np.abs(mean1 - mean2))\nnp.testing.assert_almost_equal(cost1, log['cost'])\ncheck_duality_gap(a, b, M, G, log['u'], log['v'], log['cost'])\nconstraint_violation = log['u'][:, (None)] + log['v'][(None), :] - M\nassert constraint_violation.max() < 1e-08\n"
+}

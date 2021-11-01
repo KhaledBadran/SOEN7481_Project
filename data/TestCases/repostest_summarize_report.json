@@ -1,0 +1,9 @@
+{
+    "functionName": "test_summarize_report",
+    "className": "TestWeather",
+    "fileName": "/lukeWaninger_&_GSCAP/tests_&_test_weather.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "report = pd.DataFrame([wthr.HourlyWeatherReport(lat=self.lat, lon=self.lon,\n    date=self.day - dt.timedelta(hours=i), time=self.time).dict for i in\n    range(23)])\ncols = list(set(wthr.HOURLY_COLS) - {'lat', 'lon', 'date', 'time'})\nfor c in cols:\n    report[c] = 0.5\nreq = wthr.WeatherRequest(lat=self.lat, lon=self.lon, date=self.day,\n    zipcode=None)\nargs = dict(report=report), req\nt = wthr.summarize_report(args)\ncols = list({k for k in t['report'].keys()} - {'lat', 'lon', 'date',\n    'zipcode', 'precip_sum'})\nfor c in cols:\n    if 'IQR' in c or 'std' in c:\n        self.assertTrue(t['report'][c] == 0.0)\n    else:\n        self.assertTrue(t['report'][c] == 0.5)\nself.assertTrue(t['report']['precip_sum'] == 11.5)\n"
+}

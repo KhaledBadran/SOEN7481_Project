@@ -1,0 +1,9 @@
+{
+    "functionName": "test_setter_error_unequal_column_names",
+    "className": null,
+    "fileName": "/tvdboom_&_ATOM/tests_&_test_atom.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Assert that an error is raised with different column names.\"\"\"\natom = ATOMClassifier(X_bin, y_bin, random_state=1)\nwith pytest.raises(ValueError, match='the same columns'):\n    new_X = atom.train.drop(atom.train.columns[0], axis=1)\n    new_X.insert(0, 'new_column', 1)\n    atom.train = new_X\n"
+}

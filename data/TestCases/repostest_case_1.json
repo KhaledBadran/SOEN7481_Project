@@ -1,0 +1,9 @@
+{
+    "functionName": "test_case_1",
+    "className": null,
+    "fileName": "/david-leon_&_Dandelion/test_&_test_categorical_crossentropy_log.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "N = np.random.randint(low=2, high=100)\nx = tensor.fmatrix()\ny = tensor.ivector()\nx1 = softmax(x)\nr1 = categorical_crossentropy(x1, y, eps=0.0)\nx2 = log_softmax(x)\nr2 = categorical_crossentropy_log(x2, y, m=N)\nf1 = theano.function([x, y], r1)\nf2 = theano.function([x, y], r2)\nfor i in range(100):\n    B = np.random.randint(low=1, high=32)\n    X = np.random.rand(B, N)\n    Y = np.random.randint(low=0, high=N, size=(B,))\n    X = X.astype('float32')\n    Y = Y.astype('int32')\n    r1 = f1(X, Y)\n    r2 = f2(X, Y)\n    dif = np.max(np.abs(r1 - r2))\n    if dif > 1e-06:\n        print('r1=', r1)\n        print('r2=', r2)\n        raise ValueError('r1 != r2')\n"
+}

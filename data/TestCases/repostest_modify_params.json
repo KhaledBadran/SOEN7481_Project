@@ -1,0 +1,9 @@
+{
+    "functionName": "test_modify_params",
+    "className": "TestParameters",
+    "fileName": "/JohnVolk_&_PRMS-Python/test_&_test_prms_python.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"parameter and data file modification access should work as expected\"\"\"\nparams_out = os.path.join(self.temp_dir, 'modify_params_out')\nmod_d = {'rad_trncf': lambda x: 1.1 * x}\nmodify_params(self.test_param, params_out, mod_d)\ngenerated = open(params_out).readlines()[2:]\nexpected = open(os.path.join(self.test_data_dir, 'expected_rad_trncf_1.1')\n    ).readlines()[2:]\nassert expected == generated\nparams_out = os.path.join(self.temp_dir, 'modify_params_out')\nmod_d = {'snow_adj': lambda x: 1.1 * x}\nmodify_params(self.test_param, params_out, mod_d)\ngenerated = open(params_out).readlines()[2:]\nexpected = open(os.path.join(self.test_data_dir, 'expected_snow_adj_1.1')\n    ).readlines()[2:]\nfor a, b in zip(expected, generated):\n    try:\n        a = float(a)\n        b = float(b)\n        self.assertAlmostEqual(a, b, places=5)\n    except ValueError:\n        assert a == b\n"
+}

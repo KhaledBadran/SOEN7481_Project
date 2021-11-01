@@ -1,0 +1,9 @@
+{
+    "functionName": "test_multiphase_occupancy_set_two_phase",
+    "className": "MultiPhaseTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_phases_&_MultiPhaseTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "m = op.phases.MultiPhase(network=self.net)\nself.water['pore.temperature'] = 300\nself.air['pore.temperature'] = 200\nassert np.all(self.water['pore.temperature'] == 300)\nassert np.all(self.air['pore.temperature'] == 200)\nPs = self.net['pore.coords'][:, (0)] < 3\nTs = self.net.tomask(throats=self.net.find_neighbor_throats(Ps))\nm.set_occupancy(phase=self.water, Pvals=Ps, Tvals=Ts)\nm.set_occupancy(phase=self.air, Pvals=~Ps, Tvals=~Ts)\nassert np.all(m['pore.temperature'] >= 200)\nassert np.all(m['pore.temperature'] <= 300)\n"
+}

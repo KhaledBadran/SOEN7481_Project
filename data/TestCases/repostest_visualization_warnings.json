@@ -1,0 +1,9 @@
+{
+    "functionName": "test_visualization_warnings",
+    "className": null,
+    "fileName": "/PEtab-dev_&_PEtab/tests_&_test_visualization.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "datasets = [['JI09_150302_Drg345_343_CycNuc__4_ABnOH_and_ctrl',\n    'JI09_150302_Drg345_343_CycNuc__4_ABnOH_and_Fsk'], [\n    'JI09_160201_Drg453-452_CycNuc__ctrl',\n    'JI09_160201_Drg453-452_CycNuc__Fsk',\n    'JI09_160201_Drg453-452_CycNuc__Sp8_Br_cAMPS_AM']]\nsim_cond_num_list = [[0, 1, 2], [0, 2, 3], [0, 3, 4], [0, 4, 5]]\nobservable_num_list = [[0], [1], [2], [0, 2], [1, 2]]\nplt.close('all')\nwith warnings.catch_warnings(record=True) as warnMsg:\n    warnings.simplefilter('always')\n    plot_data_and_simulation(data_file_Isensee, condition_file_Isensee,\n        dataset_id_list=datasets, sim_cond_num_list=sim_cond_num_list)\n    plot_data_and_simulation(data_file_Isensee, condition_file_Isensee,\n        dataset_id_list=datasets, observable_num_list=observable_num_list)\n    plot_data_and_simulation(data_file_Isensee, condition_file_Isensee,\n        dataset_id_list=datasets, observable_num_list=observable_num_list,\n        sim_cond_num_list=sim_cond_num_list)\n    plot_data_and_simulation(data_file_Isensee, condition_file_Isensee,\n        sim_cond_num_list=sim_cond_num_list)\n    assert len(warnMsg) == 4\n    for i_warn in warnMsg:\n        assert issubclass(i_warn.category, UserWarning)\n"
+}

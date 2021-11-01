@@ -1,0 +1,9 @@
+{
+    "functionName": "test_calibrate_method",
+    "className": null,
+    "fileName": "/tvdboom_&_ATOM/tests_&_test_basepredictor.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Assert that the calibrate method works as intended.\"\"\"\natom = ATOMClassifier(X_bin, y_bin, random_state=1)\npytest.raises(NotFittedError, atom.calibrate)\natom.run('LR')\natom.calibrate()\nassert atom.winner.model.__class__.__name__ == 'CalibratedClassifierCV'\n"
+}

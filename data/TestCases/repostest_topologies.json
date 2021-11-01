@@ -1,0 +1,9 @@
+{
+    "functionName": "test_topologies",
+    "className": "TestIxnOffline",
+    "fileName": "/shmir_&_PyIxNetwork/tests_&_test_offline.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Test configuration build with topologies.\n\n        todo: refactor with NGPF\n        \"\"\"\nif self._is_linux_server():\n    pytest.skip('server does not support classical protocols')\nself.logger.info(TestIxnOffline.test_topologies.__doc__)\nnum_ports = 2\nnum_ints = 0\nixn_ports = self._build_config(num_ports, num_ints)\nassert len(ixn_ports) == num_ports\nfor ixn_port in ixn_ports:\n    assert len(ixn_ports[ixn_port]) == num_ints\nfor topo_num, ixn_port in zip(range(1, num_ports + 1), ixn_ports):\n    topo_name = 'Topo {}'.format(topo_num)\n    self.logger.info('Create Topo \"{}\"'.format(topo_name))\n    ixn_topo = IxnTopology(name=topo_name)\n    ixn_topo.set_attributes(vports=[ixn_port.obj_ref()])\n    ixn_dg = IxnDeviceGroup(parent=ixn_topo)\n    ixn_dg.set_attributes(multiplier=topo_num)\n    ixn_eth = IxnNgpfEthernet(parent=ixn_dg)\n    ixn_eth.get_attribute('mac')\n    IxnNgpfIpv4(parent=ixn_eth)\n"
+}

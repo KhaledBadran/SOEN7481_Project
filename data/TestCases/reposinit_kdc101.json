@@ -1,0 +1,9 @@
+{
+    "functionName": "init_kdc101",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_thorlabs_&_test_thorlabs_apt.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Return the send, receive value to initialize a KIM101 unit.\"\"\"\nstdin = ThorLabsPacket(message_id=ThorLabsCommands.HW_REQ_INFO, param1=0,\n    param2=0, dest=80, source=1, data=None).pack()\nstdout = ThorLabsPacket(message_id=ThorLabsCommands.HW_GET_INFO, dest=1,\n    source=80, data=hw_info_data.pack(b'\\x01\\x02\\x03\\x04', 'KDC101'.encode(\n    'ascii'), 16, 161, 162, 163, 'abcdefg'.encode('ascii'), 42, 43, 1)).pack()\nreturn stdin, stdout\npytest.fixture"
+}

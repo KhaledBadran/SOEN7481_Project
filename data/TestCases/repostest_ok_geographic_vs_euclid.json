@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ok_geographic_vs_euclid",
+    "className": null,
+    "fileName": "/bsmurphy_&_PyKrige/tests_&_test_core.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "np.random.seed(89239413)\nfrom_north = 0.01 * np.random.random(5)\nlat = 90.0 - from_north\nlon = 360.0 * np.random.random(5)\nz = np.random.random(5)\nz -= z.mean()\nx = from_north * np.cos(np.deg2rad(lon))\ny = from_north * np.sin(np.deg2rad(lon))\ngrid_lon = 360.0 * np.linspace(0, 1, 50)\ngrid_from_north = np.linspace(0, 0.01, 10)\ngrid_lat = 90.0 - grid_from_north\ngrid_x = grid_from_north[:, (np.newaxis)] * np.cos(np.deg2rad(grid_lon[(np.\n    newaxis), :]))\ngrid_y = grid_from_north[:, (np.newaxis)] * np.sin(np.deg2rad(grid_lon[(np.\n    newaxis), :]))\ngrid_lon, grid_lat = np.meshgrid(grid_lon, grid_lat, indexing='xy')\ngrid_x = grid_x.flatten()\ngrid_y = grid_y.flatten()\ngrid_lon = grid_lon.flatten()\ngrid_lat = grid_lat.flatten()\nd_eucl = cdist(np.concatenate([x[:, (np.newaxis)], y[:, (np.newaxis)]],\n    axis=1), np.concatenate([grid_x[:, (np.newaxis)], grid_y[:, (np.newaxis\n    )]], axis=1))\nd_geo = core.great_circle_distance(lon[:, (np.newaxis)], lat[:, (np.newaxis\n    )], grid_lon[(np.newaxis), :], grid_lat[(np.newaxis), :])\nassert_allclose(d_eucl, d_geo, rtol=2e-09)\nOK_geo = OrdinaryKriging(lon, lat, z, variogram_model='linear', verbose=\n    False, enable_plotting=False, coordinates_type='geographic')\nOK_xy = OrdinaryKriging(x, y, z, variogram_model='linear', verbose=False,\n    enable_plotting=False)\nOK_wrong = OrdinaryKriging(lon, lat, z, variogram_model='linear', verbose=\n    False, enable_plotting=False)\nzgeo, ss = OK_geo.execute('points', grid_lon, grid_lat)\nzxy, ss = OK_xy.execute('points', grid_x, grid_y)\nzwrong, ss = OK_wrong.execute('points', grid_lon, grid_lat)\nassert_allclose(zgeo, zxy, rtol=2e-05)\nassert not np.any(zgeo == 0)\nassert np.abs((zgeo - zwrong) / zgeo).max() > 1.0\n"
+}

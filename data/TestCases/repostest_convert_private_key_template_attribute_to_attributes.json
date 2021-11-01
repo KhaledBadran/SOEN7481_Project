@@ -1,0 +1,9 @@
+{
+    "functionName": "test_convert_private_key_template_attribute_to_attributes",
+    "className": "TestAttributeUtilities",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "template_attribute = objects.TemplateAttribute(attributes=[objects.\n    Attribute(attribute_name=objects.Attribute.AttributeName(\n    'Key Format Type'), attribute_value=primitives.Enumeration(enums.\n    KeyFormatType, value=enums.KeyFormatType.RAW, tag=enums.Tags.\n    KEY_FORMAT_TYPE))], tag=enums.Tags.PRIVATE_KEY_TEMPLATE_ATTRIBUTE)\nvalue = objects.convert_template_attribute_to_attributes(template_attribute)\nself.assertIsInstance(value, objects.Attributes)\nself.assertEqual(enums.Tags.PRIVATE_KEY_ATTRIBUTES, value.tag)\nself.assertIsInstance(value.attributes, list)\nself.assertEqual(1, len(value.attributes))\nself.assertEqual(primitives.Enumeration(enums.KeyFormatType, value=enums.\n    KeyFormatType.RAW, tag=enums.Tags.KEY_FORMAT_TYPE), value.attributes[0])\n"
+}

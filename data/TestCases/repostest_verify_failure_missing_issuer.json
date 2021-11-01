@@ -1,0 +1,9 @@
+{
+    "functionName": "test_verify_failure_missing_issuer",
+    "className": "EasyJWTTest",
+    "fileName": "/BMeu_&_EasyJWT/tests_&_easyjwt_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n            Test verifying a token without giving an issuer.\n\n            Expected Result: An `InvalidIssuerError` is raised.\n        \"\"\"\neasyjwt_creation = EasyJWT(self.key)\ntoken = easyjwt_creation.create()\nwith self.assertRaises(InvalidClaimSetError) as exception_cm:\n    easyjwt_verification = EasyJWT.verify(token, self.key, issuer=self.issuer)\n    self.assertIsNone(easyjwt_verification)\nself.assertSetEqual({'issuer'}, exception_cm.exception.missing_claims)\n"
+}

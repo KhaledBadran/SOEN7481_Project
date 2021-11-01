@@ -1,0 +1,9 @@
+{
+    "functionName": "test_composed_def",
+    "className": "CallTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_call.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "t = Template(\n    \"\"\"\n            <%def name=\"f()\"><f>${caller.body()}</f></%def>\n            <%def name=\"g()\"><g>${caller.body()}</g></%def>\n            <%def name=\"fg()\">\n                <%self:f><%self:g>${caller.body()}</%self:g></%self:f>\n            </%def>\n            <%self:fg>fgbody</%self:fg>\n            \"\"\"\n    )\nassert result_lines(t.render()) == ['<f><g>fgbody</g></f>']\n"
+}

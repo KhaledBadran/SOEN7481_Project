@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sequence_parameters",
+    "className": null,
+    "fileName": "/tvdboom_&_ATOM/tests_&_test_basetrainer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Assert that every model get his corresponding parameters.\"\"\"\ntrainer = TrainerClassifier(['LR', 'LDA', 'LGB'], n_calls=(2, 3, 4),\n    n_random_starts=(1, 2, 3), bagging=[2, 5, 7])\ntrainer.run(bin_train, bin_test)\nassert len(trainer.LR.bo) == 2\nassert sum(trainer.LDA.bo.index.str.startswith('Random')) == 2\nassert len(trainer.lgb.score_bagging) == 7\n"
+}

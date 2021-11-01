@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ase_api",
+    "className": "TestAPI",
+    "fileName": "/SUNCAT-Center_&_CatLearn/test_&_test_api.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test the ase api.\"\"\"\ngadb = DataConnection('{}/data/gadb.db'.format(wkdir))\nall_cand = gadb.get_all_relaxed_candidates()\ncf = all_cand[0].get_chemical_formula()\nextend_atoms_class(all_cand[0])\nself.assertTrue(isinstance(all_cand[0], type(all_cand[1])))\nf = FeatureGenerator()\nfp = f.composition_vec(all_cand[0])\nall_cand[0].set_features(fp)\nself.assertTrue(np.allclose(all_cand[0].get_features(), fp))\nself.assertTrue(all_cand[0].get_chemical_formula() == cf)\nextend_atoms_class(all_cand[1])\nself.assertTrue(all_cand[1].get_features() is None)\ng = ase_to_networkx(all_cand[2])\nall_cand[2].set_graph(g)\nself.assertTrue(all_cand[2].get_graph() == g)\nself.assertTrue(all_cand[1].get_graph() is None)\n"
+}

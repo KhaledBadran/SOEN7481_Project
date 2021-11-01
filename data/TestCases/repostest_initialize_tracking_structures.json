@@ -1,0 +1,9 @@
+{
+    "functionName": "test_initialize_tracking_structures",
+    "className": "TestPolicyDirectoryMonitor",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_monitor.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the PolicyDirectoryMonitor can correctly initialize/reset the\n        various tracking structures used for file monitoring.\n        \"\"\"\nm = monitor.PolicyDirectoryMonitor(self.tmp_dir, multiprocessing.Manager().\n    dict())\nm.file_timestamps['a'] = 1234\nm.policy_cache['a'] = 123.12, 'b', {'c': 2}\nm.policy_files = ['a', 'b']\nm.policy_map['a'] = 'b'\nm.policy_store['a'] = {'c': 2}\nm.policy_store['default'] = {'c': 3}\nm.initialize_tracking_structures()\nself.assertEqual({}, m.file_timestamps)\nself.assertEqual({}, m.policy_cache)\nself.assertEqual([], m.policy_files)\nself.assertEqual({}, m.policy_map)\nself.assertEqual(['default'], m.policy_store.keys())\nself.assertEqual({'c': 3}, m.policy_store.get('default'))\n"
+}

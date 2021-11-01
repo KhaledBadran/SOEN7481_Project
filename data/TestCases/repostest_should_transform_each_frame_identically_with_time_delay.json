@@ -1,0 +1,9 @@
+{
+    "functionName": "test_should_transform_each_frame_identically_with_time_delay",
+    "className": "MultipleFrameTransformationTest",
+    "fileName": "/thoughtworksarts_&_EmoPy/EmoPy_&_tests_&_unittests_&_library_&_image_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sample = np.random.rand(3, 64, 64, 3)\ntransform_matrix = np.random.rand(3, 3)\ntransformed_sample = apply_transform(sample, transform_matrix, channel_axis=3)\ntransformed_frames = [apply_transform(frame, transform_matrix, channel_axis\n    =2) for frame in sample]\nexpected = np.stack(transformed_frames, axis=0)\nself.assertFalse(np.array_equal(transformed_sample, sample))\nself.assertTrue(np.array_equal(transformed_sample, expected))\n"
+}

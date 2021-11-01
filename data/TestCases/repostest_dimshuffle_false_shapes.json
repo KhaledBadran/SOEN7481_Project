@@ -1,0 +1,9 @@
+{
+    "functionName": "test_dimshuffle_false_shapes",
+    "className": "TestConv2DCCLayer",
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_conv.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "try:\n    from lasagne.layers.cuda_convnet import Conv2DCCLayer\nexcept ImportError:\n    pytest.skip('cuda_convnet not available')\ninput_layer = DummyInputLayer((4, 32, 32, 128))\nlayer = Conv2DCCLayer(input_layer, num_filters=16, filter_size=(3, 3),\n    dimshuffle=False)\nassert layer.W.get_value().shape == (4, 3, 3, 16)\nassert layer.b.get_value().shape == (16,)\nlayer = Conv2DCCLayer(input_layer, num_filters=16, filter_size=(3, 3),\n    dimshuffle=False, untie_biases=True)\nassert layer.W.get_value().shape == (4, 3, 3, 16)\nassert layer.b.get_value().shape == (16, 30, 30)\n"
+}

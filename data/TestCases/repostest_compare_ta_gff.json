@@ -1,0 +1,9 @@
+{
+    "functionName": "test_compare_ta_gff",
+    "className": "TestStatTaComparison",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_stat_TA_comparison.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tran_type = []\ncheck = [0, 0, 0, 0, 0]\nstats = {'All': {'asbe': 1, 'asae': 0, 'other': 0, 'bsbe': 0, 'gene': 1,\n    'bsae': 0}, 'aaa': {'asbe': 1, 'asae': 0, 'other': 0, 'bsbe': 0, 'gene':\n    1, 'bsae': 0}}\ngffs = copy.deepcopy(self.example.gffs)\ntrans = copy.deepcopy(self.example.tas)\nstc.compare_ta_gff(gffs, trans[0], check, tran_type, False, stats, 'gene')\nself.assertListEqual(check, [0, 0, 0, 1, 0])\nself.assertDictEqual(stats, {'aaa': {'asae': 0, 'bsbe': 0, 'asbe': 2,\n    'bsae': 0, 'other': 0, 'gene': 1}, 'All': {'asae': 0, 'bsbe': 0, 'asbe':\n    2, 'bsae': 0, 'other': 0, 'gene': 1}})\n"
+}

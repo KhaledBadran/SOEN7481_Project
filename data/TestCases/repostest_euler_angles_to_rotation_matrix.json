@@ -1,0 +1,9 @@
+{
+    "functionName": "test_euler_angles_to_rotation_matrix",
+    "className": "TestUtils",
+    "fileName": "/fechbmaster_&_3DNIRmapper/tests_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "rotation = [90, 0, 0]\nexpected = np.array([[1.0, 0.0, 0.0], [0.0, 0.0, -1.0], [0.0, 1.0, 0.0]])\ntry:\n    np.testing.assert_almost_equal(euler_angles_to_rotation_matrix(rotation\n        ), expected)\n    res = True\nexcept AssertionError as err:\n    res = False\n    print(err)\nself.assertTrue(res)\nrotation_two = [-90, 180, 0]\nexpected_two = np.array([[-1.0, 0.0, 0.0], [0.0, 0.0, 1.0], [-0.0, 1.0, -0.0]])\ntry:\n    np.testing.assert_almost_equal(euler_angles_to_rotation_matrix(\n        rotation_two), expected_two)\n    res = True\nexcept AssertionError as err:\n    res = False\n    print(err)\nself.assertTrue(res)\nrotation_three = [-90, 180, 45]\nexpected_three = np.array([[-0.7071, -0.0, -0.7071], [-0.7071, -0.0, 0.7071\n    ], [0.0, 1.0, 0.0]])\ntry:\n    np.testing.assert_equal(euler_angles_to_rotation_matrix(rotation_three)\n        .round(decimals=4), expected_three)\n    res = True\nexcept AssertionError as err:\n    res = False\n    print(err)\nself.assertTrue(res)\n"
+}

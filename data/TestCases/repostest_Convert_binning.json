@@ -1,0 +1,9 @@
+{
+    "functionName": "test_Convert_binning",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_CommandLineScripts_&_test_commandline.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "subprocess.check_output(['MJOLNIRConvert', dataFiles[0]])\nf = DataFile.DataFile(dataFiles[0].replace('hdf', 'nxs'))\nassert f.binning == 8\nsubprocess.check_output(['MJOLNIRConvert', dataFiles[0], '-b 1'])\nf = DataFile.DataFile(dataFiles[0].replace('hdf', 'nxs'))\nassert f.name == dataFiles[0].split('/')[1].replace('hdf', 'nxs')\nassert f.binning == 1\n"
+}

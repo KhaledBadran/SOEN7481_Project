@@ -1,0 +1,9 @@
+{
+    "functionName": "test_symmetry_function",
+    "className": null,
+    "fileName": "/PyAbel_&_PyAbel/abel_&_tests_&_test_benchmarks.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "for n, m in [(11, 11), (10, 10), (10, 12), (11, 12), (10, 13), (11, 13)]:\n    x = np.linspace(-np.pi, np.pi, n)\n    y = np.linspace(-np.pi, np.pi, m)\n    XX, YY = np.meshgrid(x, y)\n    f1 = np.cos(XX) * np.cos(YY)\n    assert_equal(is_symmetric(f1, i_sym=True, j_sym=True), True,\n        'Checking f1 function for polar symmetry n={},m={}'.format(n, m))\n    f2 = np.cos(XX) * np.sin(YY)\n    assert_equal(is_symmetric(f2, i_sym=True, j_sym=False), True,\n        'Checking f2 function for i symmetry n={},m={}'.format(n, m))\n    f3 = np.sin(XX) * np.cos(YY)\n    assert_equal(is_symmetric(f3, i_sym=False, j_sym=True), True,\n        'Checking f3 function for j symmetry n={},m={}'.format(n, m))\n    assert_equal(is_symmetric(f3, i_sym=True, j_sym=False), False,\n        'Checking that f3 function does not have i symmetry n={},m={}'.\n        format(n, m))\nfor n in [10, 11]:\n    x = np.linspace(-np.pi, np.pi, n)\n    f1 = np.cos(x)\n    assert_equal(is_symmetric(f1, i_sym=True, j_sym=False), True,\n        'Checking f1 function for symmetry in 1D n={},m={}'.format(n, m))\n"
+}

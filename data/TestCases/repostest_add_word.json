@@ -1,0 +1,9 @@
+{
+    "functionName": "test_add_word",
+    "className": null,
+    "fileName": "/luyuhuang_&_DWords/tests_&_test_home.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "widget = home.Home()\nqtbot.addWidget(widget)\nadd = widget.layout().itemAt(3).itemAt(0).widget()\nassert add.text() == '+'\nqtbot.mouseClick(add, Qt.LeftButton)\nassert widget._word_editor.isVisible() == True\nword = str(uuid.uuid1())\nparaphrase = str(uuid.uuid1())\nwidget._word_editor.setPlainText(word + '\\n' + paraphrase)\ncommit = widget._editor.layout().itemAt(1).itemAt(1).widget()\nassert commit.text() == 'Commit'\nqtbot.mouseClick(commit, Qt.LeftButton)\nres, = user_db.getOne('select paraphrase from words where word = ?', (word,))\nassert res == paraphrase\nclose = widget._editor.layout().itemAt(1).itemAt(2).widget()\nassert close.text() == 'Close'\nqtbot.mouseClick(close, Qt.LeftButton)\nassert widget._word_editor.isVisible() == False\n"
+}

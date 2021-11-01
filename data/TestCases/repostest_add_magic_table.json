@@ -1,0 +1,9 @@
+{
+    "functionName": "test_add_magic_table",
+    "className": "TestContribution",
+    "fileName": "/PmagPy_&_PmagPy/pmagpy_tests_&_test_contribution_builder.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "con = cb.Contribution(self.directory, read_tables=['specimens'], dmodel=DMODEL)\nself.assertEqual(set(['specimens']), set(con.tables.keys()))\ncon.add_magic_table('samples')\nself.assertEqual(set(['specimens', 'samples']), set(con.tables.keys()))\nself.assertGreater(len(con.tables['samples'].df), 0)\ncon.add_magic_table('unknown', 'sites.txt')\nself.assertEqual(set(['specimens', 'samples', 'sites']), set(con.tables.keys())\n    )\nself.assertGreater(len(con.tables['sites'].df), 0)\n"
+}

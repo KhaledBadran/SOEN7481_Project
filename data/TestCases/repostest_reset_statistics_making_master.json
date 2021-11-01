@@ -1,0 +1,9 @@
+{
+    "functionName": "test_reset_statistics_making_master",
+    "className": "SendStatusTests",
+    "fileName": "/collective_&_Products.EasyNewsletter/src_&_Products_&_EasyNewsletter_&_tests_&_test_adapter_send_status.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Validate statistics are reset when issue is made as master.\"\"\"\nstatus_adapter = ISendStatus(self.issue)\nstatus_adapter.add_records(self.receivers)\nself.assertEquals(len(status_adapter.get_keys()), 3)\nrequest = self.issue.REQUEST\nrequest['enlwf_guard'] = True\napi.content.transition(obj=self.issue, transition='make_master')\nself.assertEquals(len(status_adapter.get_keys()), 0)\nrequest['enlwf_guard'] = False\n"
+}

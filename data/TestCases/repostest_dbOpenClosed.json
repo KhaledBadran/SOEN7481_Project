@@ -1,0 +1,9 @@
+{
+    "functionName": "test_dbOpenClosed",
+    "className": "TestDatabase",
+    "fileName": "/corydodt_&_Hypy/src_&_hypy_&_test_lib.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Tests for all the db open/close modes\n        \"\"\"\ndocyy = HDocument(uri=u'yy')\ndocyy.addText(u'yy')\ndocxx = HDocument(uri=u'xx')\ndocxx.addText(u'xx')\ncondxx = HCondition(u'xx')\ncondyy = HCondition(u'yy')\ndb = HDatabase()\nself.assertRaises(OpenFailed, db.open, 'does/not/exist', 'a')\nself.assertRaises(CloseFailed, db.close)\ndb.open('_temp_db', 'w')\nself.assert_(os.path.exists('_temp_db/_idx'))\ndb.putDoc(docyy)\ndb.close()\ndb.open('_temp_db', 'r')\nself.assertRaises(PutFailed, db.putDoc, docxx)\nself.assertEqual(len(db.search(condyy)), 1)\ndb.close()\ndb.open('_temp_db', 'a')\ndb.putDoc(docxx)\ndb.flush()\nself.assertEqual(len(db.search(condxx)), 1)\nself.assertEqual(len(db.search(condyy)), 1)\ndb.close()\ndb.open('_temp_db', 'w')\nself.assertEqual(len(db.search(condxx)), 0)\ndb.close()\nself.assertRaises(CloseFailed, db.close)\nself.assertRaises(FlushFailed, db.flush)\n"
+}

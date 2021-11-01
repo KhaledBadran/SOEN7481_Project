@@ -1,0 +1,9 @@
+{
+    "functionName": "test_time_history_too_many_columns",
+    "className": "TestValidator",
+    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_validation.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that having too many columns in the value array results in a validation error\n        \"\"\"\ntime_history = {'type': 'pressure', 'quantity': {'units': 'bar', 'column': 1}}\ntime_history['time'] = {'units': 'second', 'column': 0}\ntime_history['values'] = [[0, 1, 2], [1, 2, 3]]\nassert not v.validate({'datapoints': [{'time-histories': [time_history]}]},\n    update=True)\n"
+}

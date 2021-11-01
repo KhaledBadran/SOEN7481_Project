@@ -1,0 +1,9 @@
+{
+    "functionName": "test_temperature_density",
+    "className": null,
+    "fileName": "/chianti-atomic_&_ChiantiPy/ChiantiPy_&_core_&_tests_&_test_Ion.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "_tmp_ion = ion(test_ion, temperature=temperature_1, eDensity=density_1,\n    setup=True)\nassert _tmp_ion.Temperature == np.array(temperature_1)\nassert _tmp_ion.EDensity == np.array(density_1)\n_tmp_ion = ion(test_ion, temperature=temperature_2, eDensity=density_1,\n    setup=True)\nassert np.all(_tmp_ion.Temperature == temperature_2)\nassert np.all(_tmp_ion.EDensity == np.array(temperature_2.size * [density_1]))\n_tmp_ion = ion(test_ion, temperature=temperature_1, eDensity=density_2,\n    setup=True)\nassert np.all(_tmp_ion.Temperature == np.array(density_2.size * [\n    temperature_1]))\nassert np.all(_tmp_ion.EDensity == density_2)\n_tmp_ion = ion(test_ion, temperature=temperature_2, eDensity=density_2,\n    setup=True)\nassert np.all(_tmp_ion.Temperature == temperature_2)\nassert np.all(_tmp_ion.EDensity == density_2)\nwith pytest.raises(ValueError, message=\n    \"\"\"Expecting ValueError when temperature and density are not of\n                                equal size.\"\"\"\n    ):\n    _tmp_ion = ion(test_ion, temperature=temperature_2, eDensity=density_3,\n        setup=True)\n"
+}

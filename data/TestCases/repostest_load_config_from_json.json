@@ -1,0 +1,9 @@
+{
+    "functionName": "test_load_config_from_json",
+    "className": "TestLoadConfigFromJson",
+    "fileName": "/shalev67_&_EZconfig/tests_&_unit_&_test_load_config_from_ini.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "config.register_config(name='a', config_type=str, default='test1')\nconfig.register_config(name='b', config_type=int, default=0)\nconfig.register_config(name='c', config_type=float, default=0.0)\nconfig.register_config(name='d', config_type=list, default=[])\nconfig.register_config(name='e', config_type=dict, default={})\nconfig.register_config(name='f', config_type=bool, default=False)\nconfig.register_config(name='g', config_type=bool, default=True)\ndir_name = os.path.dirname(os.path.abspath(__file__))\nconfig.load_config_from_ini_file(dir_name + '/config_files/ini_config.ini',\n    'DEFAULT')\nassert config.a == 'a'\nassert config.b == 1\nassert config.c == 1.2\nassert config.d == [1, 2, 3]\nassert config.e == {'1': 1}\nassert type(config.f) is bool and config.f\nassert type(config.g) is bool and not config.g\nwith pytest.raises(AttributeError):\n    assert config.h\n"
+}

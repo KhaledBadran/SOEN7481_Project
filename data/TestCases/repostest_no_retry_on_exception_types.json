@@ -1,0 +1,9 @@
+{
+    "functionName": "test_no_retry_on_exception_types",
+    "className": "TestRetryDecorator",
+    "fileName": "/facebook_&_Ax/ax_&_utils_&_common_&_tests_&_test_executils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class MyRuntimeError(RuntimeError):\n    pass\nclass DecoratorTester:\n    error_throwing_function_call_count = 0\n\n    @retry_on_exception(no_retry_on_exception_types=(MyRuntimeError,))\n    def error_throwing_function(self):\n        self.error_throwing_function_call_count += 1\n        raise MyRuntimeError\ndecorator_tester = DecoratorTester()\nwith self.assertRaises(MyRuntimeError):\n    decorator_tester.error_throwing_function()\nself.assertEqual(decorator_tester.error_throwing_function_call_count, 1)\nclass DecoratorTester:\n    error_throwing_function_call_count = 0\n\n    @retry_on_exception(exception_types=(RuntimeError,),\n        no_retry_on_exception_types=(MyRuntimeError,))\n    def error_throwing_function(self):\n        self.error_throwing_function_call_count += 1\n        raise MyRuntimeError\ndecorator_tester = DecoratorTester()\nwith self.assertRaises(MyRuntimeError):\n    decorator_tester.error_throwing_function()\n"
+}

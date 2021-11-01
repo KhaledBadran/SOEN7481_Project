@@ -1,0 +1,9 @@
+{
+    "functionName": "test_close_on_proxy_failure",
+    "className": "TestProxyKmipClient",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_test_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that an Exception is raised when an error occurs while closing\n        the client proxy connection.\n        \"\"\"\nclient = ProxyKmipClient()\nclient._is_open = True\nclient.proxy.close.side_effect = Exception\nself.assertRaises(Exception, client.close)\nmock.patch('kmip.pie.client.KMIPProxy', mock.MagicMock(spec_set=KMIPProxy))"
+}

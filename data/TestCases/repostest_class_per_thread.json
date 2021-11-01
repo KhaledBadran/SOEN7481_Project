@@ -1,0 +1,9 @@
+{
+    "functionName": "test_class_per_thread",
+    "className": null,
+    "fileName": "/ClanPlay_&_Python_IoC/tests_&_test_class_per_thread.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ioc = IocManager()\nioc.set_class(name='singleton1', cls=ClassA, singleton=True)\nioc.set_class(name='singleton2', cls=ClassA, singleton=True, thread_local=True)\nassert ioc.singleton1 == ioc.singleton1\nassert ioc.singleton2 == ioc.singleton2\nthread_storage = {}\nthread = threading.Thread(target=_set_vars(ioc, thread_storage))\nthread.start()\nthread.join()\nassert ioc.singleton1 == thread_storage['singleton1']\nassert ioc.singleton2 != thread_storage['singleton2']\n"
+}

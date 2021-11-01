@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sequential_queued_pipeline_should_fit_without_multiprocessing",
+    "className": null,
+    "fileName": "/Neuraxio_&_Neuraxle/testing_&_test_streaming.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "batch_size = 10\np = SequentialQueuedPipeline([(1, FitTransformCallbackStep()), (1,\n    FitTransformCallbackStep()), (1, FitTransformCallbackStep()), (1,\n    FitTransformCallbackStep())], batch_size=batch_size, max_queue_size=5)\nqueue_joiner_for_test = QueueJoinerForTest(batch_size=batch_size)\np.steps[-1] = queue_joiner_for_test\np.steps_as_tuple[-1] = p.steps_as_tuple[-1][0], queue_joiner_for_test\np._refresh_steps()\np = p.fit(list(range(100)), list(range(100)))\nassert not p[-1].called_queue_joiner\n"
+}

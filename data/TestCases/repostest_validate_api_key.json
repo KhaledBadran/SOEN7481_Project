@@ -1,0 +1,9 @@
+{
+    "functionName": "test_validate_api_key",
+    "className": null,
+    "fileName": "/AutomatedTester_&_Bugsy/tests_&_test_bugsy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "responses.add(responses.GET,\n    'https://bugzilla.mozilla.org/rest/valid_login?login=foo', body='true',\n    status=200, content_type='application/json', match_querystring=True)\nBugsy(username='foo', api_key='goodkey')\nassert responses.calls[0].request.headers['X-Bugzilla-API-Key'] == 'goodkey'\nresponses.activate"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "testScalarizedObjective",
+    "className": "ObjectiveTest",
+    "fileName": "/facebook_&_Ax/ax_&_core_&_tests_&_test_objective.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "with self.assertRaises(NotImplementedError):\n    return self.scalarized_objective.metric\nself.assertEqual(self.scalarized_objective.metrics, [self.metrics['m1'],\n    self.metrics['m2']])\nweights = [mw[1] for mw in self.scalarized_objective.metric_weights]\nself.assertEqual(weights, [1.0, 1.0])\nself.assertEqual(self.scalarized_objective.clone(), self.scalarized_objective)\nself.assertEqual(str(self.scalarized_objective),\n    \"ScalarizedObjective(metric_names=['m1', 'm2'], weights=[1.0, 1.0], minimize=False)\"\n    )\nself.assertEqual(self.scalarized_objective.get_unconstrainable_metrics(), [])\n"
+}

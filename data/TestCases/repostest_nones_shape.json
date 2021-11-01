@@ -1,0 +1,9 @@
+{
+    "functionName": "test_nones_shape",
+    "className": "TestExpressionLayer",
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_special.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "input_shape = input_layer_nones.output_shape\nnp_shape = tuple(0 if s is None else s for s in input_shape)\nX = np.random.uniform(-1, 1, np_shape)\nexpected = func(X)\nexpected_shape = tuple(s if s else None for s in expected.shape)\nlayer = ExpressionLayer(input_layer_nones, func, output_shape=expected_shape)\nassert layer.get_output_shape_for(input_shape) == expected_shape\ndef get_shape(input_shape):\n    return expected_shape\nlayer = ExpressionLayer(input_layer_nones, func, output_shape=get_shape)\nassert layer.get_output_shape_for(input_shape) == expected_shape\nlayer = ExpressionLayer(input_layer_nones, func, output_shape='auto')\nassert layer.get_output_shape_for(input_shape) == expected_shape\npytest.mark.parametrize('func', [lambda X: X ** 2, lambda X: X.mean(-1), lambda\n    X: X.sum()])"
+}

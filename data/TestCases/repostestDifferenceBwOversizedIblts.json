@@ -1,0 +1,9 @@
+{
+    "functionName": "testDifferenceBwOversizedIblts",
+    "className": "TestInvertibleBloomLookupTable",
+    "fileName": "/named-data_&_PyNDN2/tests_&_unit_tests_&_test_invertible_bloom_lookup_table.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "size = 10\nownIblt = InvertibleBloomLookupTable(size)\nfor i in range(50):\n    prefix = Name('/test/memphis' + str(i)).appendNumber(1).toUri()\n    newHash = Common.murmurHash3Blob(11, prefix)\n    ownIblt.insert(newHash)\nreceivedIblt = InvertibleBloomLookupTable(ownIblt)\nprefix = Name('/test/ucla').appendNumber(1).toUri()\nnewHash = Common.murmurHash3Blob(11, prefix)\nownIblt.insert(newHash)\ndiff = ownIblt.difference(receivedIblt)\npositive = set()\nnegative = set()\nself.assertTrue(diff.listEntries(positive, negative))\nself.assertEqual(1, len(positive))\nself.assertEqual(newHash, min(positive))\nself.assertEqual(0, len(negative))\nself.assertTrue(not ownIblt.listEntries(positive, negative))\nself.assertTrue(not receivedIblt.listEntries(positive, negative))\n"
+}

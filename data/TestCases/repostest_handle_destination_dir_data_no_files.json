@@ -1,0 +1,9 @@
+{
+    "functionName": "test_handle_destination_dir_data_no_files",
+    "className": "TestSync",
+    "fileName": "/DusanMadar_&_PySyncDroid/tests_&_test_sync.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test 'handle_destination_dir_data' ends early when there are no data\n        to process.\n        \"\"\"\nsync = Sync(FAKE_MTP_DETAILS, '/tmp', 'Card/Music', unmatched=REMOVE)\nsync.set_source_abs()\nsync.set_destination_abs()\nsync.handle_destination_dir_data({'dst_dir_fls': []})\nmock_gfvs_wrapper.assert_not_called()\npatch.object(pysyncdroid.sync.Sync, 'gvfs_wrapper')"
+}

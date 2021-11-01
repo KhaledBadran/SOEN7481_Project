@@ -1,0 +1,9 @@
+{
+    "functionName": "test_watts_strogatz",
+    "className": null,
+    "fileName": "/Silmathoron_&_NNGT/testing_&_test_generation2.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Check the watts_strogatz generation method.\n    \"\"\"\nnum_nodes = 5\nk_lattice = 2\np_shortcut = 0.2\ng = ng.watts_strogatz(k_lattice, p_shortcut, nodes=num_nodes, directed=False)\nassert g.edge_nb() == int(0.5 * k_lattice * num_nodes)\nreciprocity = 0.0\ng = ng.watts_strogatz(k_lattice, p_shortcut, reciprocity, nodes=num_nodes,\n    directed=True)\nassert g.edge_nb() == 0.5 * k_lattice * num_nodes\nreciprocity = 1.0\ng = ng.watts_strogatz(k_lattice, p_shortcut, reciprocity, nodes=num_nodes,\n    shuffle='sources', directed=True)\nassert g.edge_nb() == k_lattice * num_nodes\nassert np.all(g.get_degrees('in') == k_lattice)\ng = ng.watts_strogatz(k_lattice, p_shortcut, reciprocity, nodes=num_nodes,\n    shuffle='targets', directed=True)\nassert np.all(g.get_degrees('out') == k_lattice)\nreciprocity = 0.5\ng = ng.watts_strogatz(k_lattice, p_shortcut, reciprocity, nodes=num_nodes,\n    directed=True)\nrecip_fact = 0.5 * (1 + reciprocity)\nassert g.edge_nb() == int(recip_fact * k_lattice * num_nodes)\nfor p_shortcut in (0, 1):\n    g = ng.watts_strogatz(k_lattice, p_shortcut, nodes=num_nodes, directed=\n        False)\n    assert g.edge_nb() == 0.5 * k_lattice * num_nodes\n    g = ng.watts_strogatz(k_lattice, p_shortcut, nodes=num_nodes, directed=True\n        )\n    assert g.edge_nb() == k_lattice * num_nodes\npytest.mark.mpi_skip"
+}

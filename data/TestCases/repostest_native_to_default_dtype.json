@@ -1,0 +1,9 @@
+{
+    "functionName": "test_native_to_default_dtype",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_config_&_test_config.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with gpflow.config.as_context():\n    setter(dtype)\n    assert converter(value).dtype == dtype\n    assert converter(value).dtype == getter()\npytest.mark.parametrize('setter, getter, converter, dtype, value', [(\n    set_default_int, default_int, to_default_int, np.int32, 3), (\n    set_default_int, default_int, to_default_int, tf.int32, 3), (\n    set_default_int, default_int, to_default_int, tf.int64, [3, 1, 4, 1, 5,\n    9]), (set_default_int, default_int, to_default_int, np.int64, [3, 1, 4,\n    1, 5, 9]), (set_default_float, default_float, to_default_float, np.\n    float32, 3.14159), (set_default_float, default_float, to_default_float,\n    tf.float32, [3.14159, 3.14159, 3.14159]), (set_default_float,\n    default_float, to_default_float, np.float64, [3.14159, 3.14159, 3.14159\n    ]), (set_default_float, default_float, to_default_float, tf.float64, [\n    3.14159, 3.14159, 3.14159])])"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_orderbook_hitbtc_happypath_asks",
+    "className": "TestGetOrderbookHitBTC",
+    "fileName": "/EVEprosper_&_ProsperDatareader/tests_&_test_coins.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"validate expected normal behavior\"\"\"\nasks_orderbook = coins.get_orderbook_hitbtc(self.coin, 'asks', currency='USD')\nassert isinstance(asks_orderbook, pandas.DataFrame)\nprint(list(asks_orderbook.columns.values))\nassert list(asks_orderbook.columns.values) == self.expected_headers\norderbook = asks_orderbook['orderbook'].unique()\nassert len(orderbook) == 1\nassert orderbook[0] == 'asks'\ncoin = asks_orderbook['coin'].unique()\nassert len(coin) == 1\nassert coin[0] == self.coin\nsymbol = asks_orderbook['symbol'].unique()\nassert len(symbol) == 1\nassert symbol[0] == self.coin + 'USD'\n"
+}

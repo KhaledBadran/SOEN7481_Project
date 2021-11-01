@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sync_remove_owned_records",
+    "className": "TestSyncDown",
+    "fileName": "/Keeper-Security_&_Commander/unit-tests_&_test_sync_down.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "params = get_synced_params()\nlen_before = len(params.record_cache)\nrecords_to_delete = [x['record_uid'] for x in params.meta_data_cache.values\n    () if x['owner']]\ndef sync_down_removed_records(rq):\n    self.assertEqual(rq['command'], 'sync_down')\n    return {'revision': vault_env.revision + 1, 'removed_records':\n        records_to_delete}\nKeeperApiHelper.communicate_expect([sync_down_removed_records])\nsync_down(params)\nself.assertTrue(KeeperApiHelper.is_expect_empty())\nself.assertEqual(len(params.record_cache), len_before - len(records_to_delete))\nself.assert_key_unencrypted(params)\n"
+}

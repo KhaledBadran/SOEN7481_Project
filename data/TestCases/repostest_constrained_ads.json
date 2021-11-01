@@ -1,0 +1,9 @@
+{
+    "functionName": "test_constrained_ads",
+    "className": "TestAdsorbateFeatures",
+    "fileName": "/SUNCAT-Center_&_CatLearn/test_&_test_ads_fp_gen.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test the feature generation.\"\"\"\nimages = self.setup_metals()\n[atoms.set_tags(np.zeros(len(atoms))) for atoms in images]\nfor atoms in images:\n    c_atoms = [a.index for a in atoms if a.z < atoms.cell[2, 2] / 2.0 + 0.1]\n    atoms.set_constraint(FixAtoms(c_atoms))\nimages = autogen_info(images)\nprint(str(len(images)) + ' training examples.')\ngen = FeatureGenerator(nprocs=1)\ntrain_fpv = default_fingerprinters(gen, 'adsorbates')\nmatrix = gen.return_vec(images, train_fpv)\nlabels = gen.return_names(train_fpv)\nprint(np.shape(matrix), type(matrix))\nif __name__ == '__main__':\n    for i, l in enumerate(labels):\n        print(i, l)\nself.assertTrue(len(labels) == np.shape(matrix)[1])\n"
+}

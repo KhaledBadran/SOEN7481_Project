@@ -1,0 +1,9 @@
+{
+    "functionName": "test_locate_identifiers_2",
+    "className": "AstParseTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_ast.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "code = \"\"\"\nimport foobar\nfrom lala import hoho, yaya\nimport bleep as foo\nresult = []\ndata = get_data()\nfor x in data:\n    result.append(x+7)\n\"\"\"\nparsed = ast.PythonCode(code, **exception_kwargs)\neq_(parsed.undeclared_identifiers, set(['get_data']))\neq_(parsed.declared_identifiers, set(['result', 'data', 'x', 'hoho',\n    'foobar', 'foo', 'yaya']))\n"
+}

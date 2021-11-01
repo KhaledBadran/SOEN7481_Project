@@ -1,0 +1,9 @@
+{
+    "functionName": "test_filter_h5",
+    "className": null,
+    "fileName": "/Puumanamana_&_CoCoNet/tests_&_test_preprocessing.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test for filter directly when input is h5 formatted\n    \"\"\"\nlengths = [60, 100, 80]\nh5_data = generate_h5_file(*lengths, n_samples=3, baselines=[20, 40, 30],\n    empty_samples=[[False] * 3, [True, True, False], [False] * 3])\nfasta = generate_fasta_file(*lengths)\nfilt = ['filt.fasta', 'filt.h5']\nfilter_h5(fasta, h5_data, filt[0], filt[1], min_length=70, min_prevalence=2)\nsingletons = pd.read_csv('singletons.txt', sep='\\t').values\nn_filt = sum(1 for _ in SeqIO.parse(filt[0], 'fasta'))\nh5_filt_handle = h5py.File(filt[1], 'r')\nh5_data_filt = {k: h5_filt_handle.get(k)[:] for k in h5_filt_handle}\nfor f in ([h5_data, fasta, 'singletons.txt'] + filt):\n    Path(f).unlink()\nassert singletons.shape == (1, 2 + 3)\nassert n_filt == 1\nassert len(h5_data_filt) == 2\n"
+}

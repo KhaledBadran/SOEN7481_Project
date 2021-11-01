@@ -1,0 +1,9 @@
+{
+    "functionName": "test_classify_peak_overlap",
+    "className": null,
+    "fileName": "/shao-lab_&_MAnorm/tests_&_test_region_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "peaks1 = GenomicRegions(name='test1')\npeaks2 = GenomicRegions(name='test2')\npeak1 = ManormPeak(chrom='chr1', start=1, end=100, summit=50)\npeak2 = ManormPeak(chrom='chr1', start=50, end=150, summit=120)\npeak3 = ManormPeak(chrom='chr1', start=150, end=200, summit=166)\npeak4 = ManormPeak(chrom='chr1', start=250, end=500, summit=350)\npeak5 = ManormPeak(chrom='chr2', start=300, end=400, summit=333)\npeak6 = ManormPeak(chrom='chr2', start=1, end=100, summit=50)\npeak7 = ManormPeak(chrom='chr22', start=1, end=100, summit=50)\npeaks1.add(peak1)\npeaks1.add(peak3)\npeaks1.add(peak5)\npeaks1.add(peak7)\npeaks2.add(peak2)\npeaks2.add(peak4)\npeaks2.add(peak6)\npeaks1, peaks2 = classify_peaks_by_overlap(peaks1, peaks2)\nassert peaks1.fetch('chr1')[0].iscommon\nassert not peaks1.fetch('chr1')[1].iscommon\nassert peaks2.fetch('chr1')[0].iscommon\nassert not peaks2.fetch('chr1')[1].iscommon\nassert not peaks1.fetch('chr2')[0].iscommon\nassert not peaks2.fetch('chr2')[0].iscommon\nassert not peaks1.fetch('chr22')[0].iscommon\n"
+}

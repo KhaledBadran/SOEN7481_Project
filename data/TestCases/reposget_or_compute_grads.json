@@ -1,0 +1,9 @@
+{
+    "functionName": "get_or_compute_grads",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_updates.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Helper function returning a list of gradients\n\n    Parameters\n    ----------\n    loss_or_grads : symbolic expression or list of expressions\n        A scalar loss expression, or a list of gradient expressions\n    params : list of shared variables\n        The variables to return the gradients for\n\n    Returns\n    -------\n    list of expressions\n        If `loss_or_grads` is a list, it is assumed to be a list of\n        gradients and returned as is, unless it does not match the length\n        of `params`, in which case a `ValueError` is raised.\n        Otherwise, `loss_or_grads` is assumed to be a cost expression and\n        the function returns `theano.grad(loss_or_grads, params)`.\n\n    Raises\n    ------\n    ValueError\n        If `loss_or_grads` is a list of a different length than `params`, or if\n        any element of `params` is not a shared variable (while we could still\n        compute its gradient, we can never update it and want to fail early).\n    \"\"\"\nif any(not isinstance(p, theano.compile.SharedVariable) for p in params):\n    raise ValueError(\n        'params must contain shared variables only. If it contains arbitrary parameter expressions, then lasagne.utils.collect_shared_vars() may help you.'\n        )\nif isinstance(loss_or_grads, list):\n    if not len(loss_or_grads) == len(params):\n        raise ValueError('Got %d gradient expressions for %d parameters' %\n            (len(loss_or_grads), len(params)))\n    return loss_or_grads\nelse:\n    return theano.grad(loss_or_grads, params)\n"
+}

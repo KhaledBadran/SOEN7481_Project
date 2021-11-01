@@ -1,0 +1,9 @@
+{
+    "functionName": "test__include_parallel_poisson_trap_densities",
+    "className": "TestCISimulate",
+    "fileName": "/Jammy2211_&_PyAutoCTI/test_&_unit_&_charge_injection_&_test_ci_data.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "pattern = ci_pattern.CIPatternUniform(normalization=10.0, regions=[(2, 3, 0,\n    5)])\nci_pre_cti = pattern.simulate_ci_pre_cti(shape=(5, 5))\nparallel_species = arctic_params.Species(trap_density=10.0, trap_lifetime=1.0)\nparallel_species = arctic_params.Species.poisson_species(species=[\n    parallel_species], shape=(5, 5), seed=1)\nparallel_ccd = arctic_params.CCD(well_notch_depth=0.0001, well_fill_beta=\n    0.58, well_fill_gamma=0.0, well_fill_alpha=1.0)\nparams_parallel = arctic_params.ArcticParams(parallel_species=\n    parallel_species, parallel_ccd=parallel_ccd)\nci_data_simulate = ci_data.simulate(ci_pre_cti=ci_pre_cti, frame_geometry=\n    ci_frame.FrameGeometry.euclid_bottom_left(), ci_pattern=pattern,\n    cti_settings=arctic_parallel, cti_params=params_parallel,\n    use_parallel_poisson_densities=True)\nassert ci_data_simulate.image[2, 0] == ci_data_simulate.image[2, 3]\nassert ci_data_simulate.image[2, 0] == ci_data_simulate.image[2, 4]\nassert ci_data_simulate.image[2, 0] < ci_data_simulate.image[2, 1]\nassert ci_data_simulate.image[2, 0] < ci_data_simulate.image[2, 2]\nassert ci_data_simulate.image[2, 1] > ci_data_simulate.image[2, 2]\n"
+}

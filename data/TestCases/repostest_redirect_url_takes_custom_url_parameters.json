@@ -1,0 +1,9 @@
+{
+    "functionName": "test_redirect_url_takes_custom_url_parameters",
+    "className": "TestOAuthClientRedirectURL",
+    "fileName": "/mozilla_&_PyFxA/fxa_&_tests_&_test_oauth.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "redirect_url = urlparse(self.client.get_redirect_url(state=\n    'applicationstate', redirect_uri='https://my.site/oauth', scope=\n    'profile profile:email', action='signup', email='test@example.com',\n    code_challenge='challenge', code_challenge_method='S1234', access_type=\n    'offline', keys_jwk='MockJWK'))\nserver_url = urlparse(self.server_url)\nself.assertEqual(redirect_url.hostname, server_url.hostname)\nparams = parse_qs(redirect_url.query, keep_blank_values=True)\nall_params = ['action', 'email', 'client_id', 'redirect_uri', 'scope',\n    'state', 'access_type', 'code_challenge', 'code_challenge_method',\n    'keys_jwk']\nself.assertEqual(sorted(params.keys()), sorted(all_params))\nself.assertEqual(params['client_id'][0], self.client.client_id)\nself.assertEqual(params['state'][0], 'applicationstate')\nself.assertEqual(params['redirect_uri'][0], 'https://my.site/oauth')\nself.assertEqual(params['scope'][0], 'profile profile:email')\nself.assertEqual(params['action'][0], 'signup')\nself.assertEqual(params['email'][0], 'test@example.com')\nself.assertEqual(params['code_challenge'][0], 'challenge')\nself.assertEqual(params['code_challenge_method'][0], 'S1234')\nself.assertEqual(params['access_type'][0], 'offline')\nself.assertEqual(params['keys_jwk'][0], 'MockJWK')\n"
+}

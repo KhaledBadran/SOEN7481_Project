@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_analysis_status",
+    "className": "TestCase",
+    "fileName": "/IntegralDefense_&_ACE/test_ace_api.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "result = self._submit()\nself.assertIsNotNone(result)\nself.assertTrue('result' in result)\nresult = result['result']\nself.assertIsNotNone(result['uuid'])\nuuid = result['uuid']\nresult = ace_api.get_analysis_status(uuid)\nself.assertIsNotNone(result)\nresult = result['result']\nself.assertTrue('workload' in result)\nself.assertTrue('delayed_analysis' in result)\nself.assertTrue('locks' in result)\nself.assertTrue('alert' in result)\nself.assertEquals(result['alert'], None)\nself.assertEquals(result['delayed_analysis'], [])\nself.assertIsNone(result['locks'])\nself.assertTrue(isinstance(result['workload']['id'], int))\nself.assertEquals(result['workload']['uuid'], uuid)\nself.assertIsNotNone(result['workload']['node_id'])\nself.assertEquals(result['workload']['analysis_mode'], 'test_empty')\nself.assertTrue(isinstance(parse_event_time(result['workload'][\n    'insert_date']), datetime.datetime))\n"
+}

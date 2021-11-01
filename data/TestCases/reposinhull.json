@@ -1,0 +1,9 @@
+{
+    "functionName": "inhull",
+    "className": "DelaunayGeometry",
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_materials_&_VoronoiFibers.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        Tests whether points lie within a convex hull or not.\n        Computes a tesselation of the hull works out the normals of the facets.\n        Then tests whether dot(x.normals) < dot(a.normals) where a is the the\n        first vertex of the facets\n        \"\"\"\nxyz = np.around(xyz, 10)\nxmin = xyz[:, (0)].min()\nxr = (np.ceil(xyz[:, (0)].max()) - np.floor(xmin)).astype(int) + 1\nymin = xyz[:, (1)].min()\nyr = (np.ceil(xyz[:, (1)].max()) - np.floor(ymin)).astype(int) + 1\nzmin = xyz[:, (2)].min()\nzr = (np.ceil(xyz[:, (2)].max()) - np.floor(zmin)).astype(int) + 1\norigin = np.array([xmin, ymin, zmin])\nsi = np.floor(origin).astype(int)\nxyz -= origin\ndom = np.zeros([xr, yr, zr], dtype=np.uint8)\nindx, indy, indz = np.indices((xr, yr, zr))\nhull = sptl.ConvexHull(xyz)\nvab = xyz[hull.simplices[:, (0)]] - xyz[hull.simplices[:, (1)]]\nvac = xyz[hull.simplices[:, (0)]] - xyz[hull.simplices[:, (2)]]\nnrmls = np.cross(vab, vac)\nnrmlen = np.sum(nrmls ** 2, axis=-1) ** (1.0 / 2)\nnrmls = nrmls * np.tile(1 / nrmlen, (3, 1)).T\ncenter = np.mean(xyz, axis=0)\na = xyz[hull.simplices[:, (0)]]\ndp = np.sum((np.tile(center, (len(a), 1)) - a) * nrmls, axis=-1)\nk = dp < 0\nnrmls[k] = -nrmls[k]\naN = np.sum(nrmls * a, axis=-1)\nfor plane_index in range(len(a)):\n    eqx = nrmls[plane_index][0] * indx\n    eqy = nrmls[plane_index][1] * indy\n    eqz = nrmls[plane_index][2] * indz\n    xN = eqx + eqy + eqz\n    dom[xN - aN[plane_index] >= 0 - tol] += 1\ndom[dom < len(a)] = 0\ndom[dom == len(a)] = 1\nds = np.shape(dom)\ntemp_arr = np.zeros_like(self._hull_image, dtype=bool)\ntemp_arr[si[0]:si[0] + ds[0], si[1]:si[1] + ds[1], si[2]:si[2] + ds[2]] = dom\nself._hull_image[temp_arr] = pore\ndel temp_arr\n"
+}

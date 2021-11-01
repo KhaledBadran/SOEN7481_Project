@@ -1,0 +1,9 @@
+{
+    "functionName": "find_sample_min_std",
+    "className": null,
+    "fileName": "/PmagPy_&_PmagPy/dialogs_&_thellier_consistency_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "def find_close_value(LIST, value):\n    diff = inf\n    for a in LIST:\n        if abs(value - a) < diff:\n            diff = abs(value - a)\n            result = a\n    return result\nBest_array = []\nbest_array_std = inf\nBest_array_tmp = []\nBest_interpretations = {}\nBest_interpretations_tmp = {}\nfor this_specimen in list(Intensities.keys()):\n    for value in Intensities[this_specimen]:\n        Best_interpretations_tmp[this_specimen] = value\n        Best_array_tmp = [value]\n        all_other_specimens = list(Intensities.keys())\n        all_other_specimens.remove(this_specimen)\n        for other_specimen in all_other_specimens:\n            closest_value = find_close_value(Intensities[other_specimen], value\n                )\n            Best_array_tmp.append(closest_value)\n            Best_interpretations_tmp[other_specimen] = closest_value\n        if std(Best_array_tmp, ddof=1) < best_array_std:\n            Best_array = Best_array_tmp\n            best_array_std = std(Best_array, ddof=1)\n            Best_interpretations = copy.deepcopy(Best_interpretations_tmp)\n            Best_interpretations_tmp = {}\nreturn Best_interpretations, mean(Best_array), std(Best_array, ddof=1)\n"
+}

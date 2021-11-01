@@ -1,0 +1,9 @@
+{
+    "functionName": "test_single_season_type",
+    "className": "TestMakeNFLDBQueryString",
+    "fileName": "/AndrewRook_&_NFLWin/nflwin_&_tests_&_test_utilities.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that adding a single season type constraint works\"\"\"\nexpected_substring = (\n    \"WHERE game.home_score != game.away_score AND game.finished = TRUE AND play.pos_team != 'UNK' AND (play.time).phase not in ('Pregame', 'Half', 'Final') AND game.season_type = 'Regular'\"\n    )\nassert expected_substring in utils._make_nfldb_query_string(season_types=[\n    'Regular'])\n"
+}

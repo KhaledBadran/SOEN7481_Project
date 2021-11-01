@@ -1,0 +1,9 @@
+{
+    "functionName": "test_destroy_active_state",
+    "className": "TestKmipEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the right error is generated when destroy request is\n        received for an object that is in 'active' state.\n        \"\"\"\ne = engine.KmipEngine()\ne._data_store = self.engine\ne._data_store_session_factory = self.session_factory\ne._data_session = e._data_store_session_factory()\ne._is_allowed_by_operation_policy = mock.Mock(return_value=True)\ne._logger = mock.MagicMock()\nkey = b'\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00'\nalgorithm = enums.CryptographicAlgorithm.AES\nobj = pie_objects.SymmetricKey(algorithm, 128, key)\nobj.state = enums.State.ACTIVE\ne._data_session.add(obj)\ne._data_session.commit()\ne._data_session = e._data_store_session_factory()\nid = str(obj.unique_identifier)\npayload = payloads.DestroyRequestPayload(unique_identifier=attributes.\n    UniqueIdentifier(id))\nargs = payload,\nregex = 'Object is active and cannot be destroyed.'\nsix.assertRaisesRegex(self, exceptions.PermissionDenied, regex, e.\n    _process_destroy, *args)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_response_for_file_returns_not_modified_handling_if_none_match_header",
+    "className": null,
+    "fileName": "/RobertoPrevato_&_BlackSheep/tests_&_test_files_serving.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "info = FileInfo.from_path(file_path)\nresponse = get_response_for_file(Request(method, b'/example', [(\n    b'If-None-Match', info.etag.encode())]), file_path, 1200)\nassert response.status == 304\ndata = await response.read()\nassert data is None\npytest.mark.asynciopytest.mark.parametrize('file_path,method', TEST_FILES_METHODS)"
+}

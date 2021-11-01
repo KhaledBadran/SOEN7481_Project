@@ -1,0 +1,9 @@
+{
+    "functionName": "test_remove_empty_fields",
+    "className": "TestJsonNLPManipulation",
+    "fileName": "/dcavar_&_Py-JSON-NLP/tests_&_test_pyjsonnlp.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "d = OrderedDict([('a', 1), ('b', ''), ('c', []), ('d', [1, 2])])\nd['meta'] = OrderedDict([('a', 1), ('b', ''), ('c', {}), ('d', [1, 2])])\nd['documents'] = {(1): OrderedDict([('a', 1), ('b', ''), ('c', []), ('d', [\n    1, 2])]), (2): OrderedDict([('a', 1), ('b', ''), ('c', {}), ('d', [1, 2])])\n    }\nactual = pyjsonnlp.remove_empty_fields(d)\nexpected = OrderedDict([('a', 1), ('d', [1, 2]), ('meta', OrderedDict([('a',\n    1), ('d', [1, 2])])), ('documents', {(1): OrderedDict([('a', 1), ('d',\n    [1, 2])]), (2): OrderedDict([('a', 1), ('d', [1, 2])])})])\nassert expected == actual, actual\n"
+}

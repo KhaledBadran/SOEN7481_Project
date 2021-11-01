@@ -1,0 +1,9 @@
+{
+    "functionName": "test_modify_storagegroup_srdf",
+    "className": "PyU4VReplicationTest",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_replication.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test test_modify_storagegroup_srdf.\"\"\"\nwith mock.patch.object(self.replication, 'modify_resource') as mock_mod:\n    self.replication.modify_storagegroup_srdf(self.data.storagegroup_name,\n        'suspend', self.data.rdf_group_no, options=None, _async=False)\n    mock_mod.assert_called_once()\n    mock_mod.reset_mock()\n    self.replication.modify_storagegroup_srdf(self.data.storagegroup_name,\n        'SUSPEND', self.data.rdf_group_no, options=None, _async=False)\n    mock_mod.assert_called_once()\n    mock_mod.reset_mock()\n    self.replication.modify_storagegroup_srdf(self.data.storagegroup_name,\n        'SetMode', self.data.rdf_group_no, options=None, _async=False)\n    mock_mod.assert_called_once()\n    mock_mod.reset_mock()\n    self.replication.modify_storagegroup_srdf(self.data.storagegroup_name,\n        'sEtBIAs', self.data.rdf_group_no, options=None, _async=False)\n    mock_mod.assert_called_once()\n    mock_mod.reset_mock()\nself.assertRaises(exception.VolumeBackendAPIException, self.replication.\n    modify_storagegroup_srdf, self.data.storagegroup_name, 'None', self.\n    data.rdf_group_no)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_blnet_fetch_fine_grained",
+    "className": "BLNETWebTest",
+    "fileName": "/nielstron_&_pyblnet_&_/pyblnet_&_tests_&_test_web.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Test fetching data in higher level class \"\"\"\nfetched = STATE\ndef scratch_tuple(type, id, ret):\n    return fetched[type][id][ret], fetched[type][id], fetched\nblnet = BLNET(ADDRESS, password=PASSWORD, timeout=10, use_ta=False,\n    web_port=self.port)\nself.assertEqual(blnet.get_analog_value(id=5, cached=fetched),\n    scratch_tuple('analog', 5, 'value'))\nself.assertEqual(blnet.get_analog_value(name='TSP.oben', cached=fetched),\n    scratch_tuple('analog', 2, 'value'))\nself.assertEqual(blnet.get_digital_value(id=1, cached=fetched),\n    scratch_tuple('digital', 1, 'value'))\nself.assertEqual(blnet.get_digital_mode(id=1, cached=fetched),\n    scratch_tuple('digital', 1, 'mode'))\nself.assertEqual(blnet.get_digital_mode(id=1), scratch_tuple('digital', 1,\n    'mode'))\n"
+}

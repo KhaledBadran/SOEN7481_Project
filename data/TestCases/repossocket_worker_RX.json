@@ -1,0 +1,9 @@
+{
+    "functionName": "socket_worker_RX",
+    "className": null,
+    "fileName": "/FaradayRF_&_Faraday-Software/faraday_&_proxy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Create sockets for data connections\n\n    \"\"\"\nlogger.debug('Starting socket_worker thread')\nunit = modem['unit']\ndataBuffer[unit] = {}\nserver = startServer(unit, dataPort)\nserver.listen(5)\nwhile True:\n    conn, addr = acceptConnection(server, unit)\n    logger.info('Connected RX data thread for {0} to {1} on IP port {2}'.\n        format(addr[0], unit, dataPort))\n    while True:\n        try:\n            sendData(conn, addr, getDicts, unit, payloadSize)\n        except socket.error as e:\n            logger.info(e)\n            break\n        except StandardError as e:\n            logger.error('Type')\n            logger.error(type(e).__name__)\n            break\n        closeConnection(conn, addr, unit)\n        break\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_tpm_locator",
+    "className": "TestPibImpl",
+    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_pib_impl.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "for fixture in self.pibImpls:\n    pib = fixture.pib\n    try:\n        pib.getTpmLocator()\n    except Exception as ex:\n        self.fail('Unexpected exception: ' + str(ex))\n    try:\n        pib.setTpmLocator('tpmLocator')\n    except Exception as ex:\n        self.fail('Unexpected exception: ' + str(ex))\n    self.assertEqual(pib.getTpmLocator(), 'tpmLocator')\n    pib.addCertificate(fixture.id1Key1Cert1)\n    self.assertTrue(pib.hasIdentity(fixture.id1))\n    self.assertTrue(pib.hasKey(fixture.id1Key1Name))\n    self.assertTrue(pib.hasCertificate(fixture.id1Key1Cert1.getName()))\n    pib.setTpmLocator('tpmLocator')\n    self.assertTrue(pib.hasIdentity(fixture.id1))\n    self.assertTrue(pib.hasKey(fixture.id1Key1Name))\n    self.assertTrue(pib.hasCertificate(fixture.id1Key1Cert1.getName()))\n    pib.setTpmLocator('newTpmLocator')\n    self.assertTrue(pib.hasIdentity(fixture.id1))\n    self.assertTrue(pib.hasKey(fixture.id1Key1Name))\n    self.assertTrue(pib.hasCertificate(fixture.id1Key1Cert1.getName()))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_4_data_provided",
+    "className": null,
+    "fileName": "/tvdboom_&_ATOM/tests_&_test_basetrainer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Assert that it runs when X_train, X_test, etc... are provided.\"\"\"\ndataset = pd.concat([bin_train, bin_test]).reset_index(drop=True)\nX_train = bin_train.iloc[:, :-1]\nX_test = bin_test.iloc[:, :-1]\ny_train = bin_train.iloc[:, (-1)]\ny_test = bin_test.iloc[:, (-1)]\ntrainer = TrainerClassifier('LR')\ntrainer.run(X_train, X_test, y_train, y_test)\nassert trainer._data.equals(dataset)\n"
+}

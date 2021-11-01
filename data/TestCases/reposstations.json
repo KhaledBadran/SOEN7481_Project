@@ -1,0 +1,9 @@
+{
+    "functionName": "stations",
+    "className": null,
+    "fileName": "/FaradayRF_&_Faraday-Software/faraday_&_telemetry.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Provides a RESTful interface to station queries at URL '/stations'\n\n    This function, stations(), runs whenever \"/stations\" URL is queried. The\n    intent of this function is to return a JSON dictionary of stations and\n    the time they were heard. If no timespan or range is specified then it\n    defaults to the last 5 minutes. If a specific station is specified, then\n    the last time it was heard is returned.\n\n    :return: JSON formatted string with data or error. HTTP204 if no data\n    \"\"\"\ntry:\n    timespan = request.args.get('timespan', 5 * 60)\n    startTime = request.args.get('starttime', None)\n    endTime = request.args.get('endtime', None)\n    callsign = request.args.get('callsign', '%').upper()\n    nodeId = request.args.get('nodeid', '%')\n    timespan = int(timespan)\nexcept IOError as e:\n    logger.error('IOError: ' + str(e))\n    return json.dumps({'error': str(e)}), 400\nexcept ValueError as e:\n    logger.error('ValueError: ' + str(e))\n    return json.dumps({'error': str(e)}), 400\nexcept StandardError as e:\n    logger.error('StandardError: ' + str(e))\n    return json.dumps({'error': str(e)}), 400\nparameters = {}\nparameters['TIMESPAN'] = timespan\nparameters['STARTTIME'] = startTime\nparameters['ENDTIME'] = endTime\nparameters['CALLSIGN'] = callsign\nparameters['NODEID'] = nodeId\ndata = queryStationsDb(parameters)\nif len(data) <= 0:\n    logger.info('No stations have been heard in last %d seconds', timespan)\n    return '', 204\nreturn json.dumps(data, indent=1), 200, {'Content-Type': 'application/json'}\napp.route('/stations', methods=['GET'])"
+}

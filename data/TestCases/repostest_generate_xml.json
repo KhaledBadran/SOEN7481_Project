@@ -1,0 +1,9 @@
+{
+    "functionName": "test_generate_xml",
+    "className": null,
+    "fileName": "/Macquarie-MEG-Research_&_BIDSHandler/bidshandler_&_tests_&_test_generate_map.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with tempfile.TemporaryDirectory() as tmp:\n    shutil.copytree(TESTPATH1, op.join(tmp, 'BIDSTEST1'))\n    folder = BIDSTree(op.join(tmp, 'BIDSTEST1'))\n    folder.generate_map(op.join(tmp, 'map.xml'))\n    tree = ET.ElementTree()\n    tree.parse(op.join(tmp, 'map.xml'))\n    assert len(tree.findall('Project')) == 2\n    for _proj in tree.findall('Project'):\n        if _proj.attrib['ID'] == 'test1':\n            proj = _proj\n    assert len(proj.findall('Subject')) == 2\n    for _subj in proj.findall('Subject'):\n        if _subj.attrib['ID'] == '1':\n            subj = _subj\n    assert subj.attrib['sex'] == 'F'\n    assert len(subj.findall('Session')) == 2\n    for _sess in subj.findall('Session'):\n        if _sess.attrib['ID'] == '1':\n            sess = _sess\n    assert len(sess.findall('Scan')) == 2\n    scan = None\n    for _scan in sess.findall('Scan'):\n        if _scan.attrib['path'] == op.join('meg',\n            'sub-1_ses-1_task-resting_run-1_meg',\n            'sub-1_ses-1_task-resting_run-1_meg.con'):\n            scan = _scan\n    assert scan is not None\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_parse_message_status",
+    "className": "TestServerParser",
+    "fileName": "/akolar_&_ogn-lib/tests_&_test_parser.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "msg = (\n    'LKHS>APRS,TCPIP*,qAC,GLIDERN2:/211635h v0.2.6.ARM CPU:0.2 RAM:777.7/972.2MB NTP:3.1ms/-3.8ppm 4.902V 0.583A +33.6C 14/16Acfts[1h] RF:+62-0.8ppm/+33.66dB/+19.4dB@10km[112619]/+25.0dB@10km[8/15]'\n    )\ndata = parser.ServerParser.parse_message(msg)\nassert data['from'] == 'LKHS'\nassert data['destto'] == 'APRS'\nassert data['timestamp'].time() == time(21, 16, 35)\nassert not data['latitude']\nassert not data['longitude']\nassert 'heading' not in data\nassert 'ground_speed' not in data\nassert not data['altitude']\nassert data['raw'] == msg\nassert data['beacon_type'] == constants.BeaconType.server_status\nassert data['raw']\nassert data['comment'].startswith('v0.2.6')\n"
+}

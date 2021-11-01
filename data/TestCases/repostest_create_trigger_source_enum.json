@@ -1,0 +1,9 @@
+{
+    "functionName": "test_create_trigger_source_enum",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_teledyne_&_test_maui.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Generate trigger source enum when number of channels changes.\"\"\"\nwith expected_protocol(ik.teledyne.MAUI, [init], [], sep='\\n') as osc:\n    osc.number_channels = 42\n    assert 'c41' in osc.TriggerSource.__members__\n    assert 'c42' not in osc.TriggerSource.__members__\n    assert osc.TriggerSource['c41'].value == 'C42'\n"
+}

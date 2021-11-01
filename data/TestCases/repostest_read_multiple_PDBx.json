@@ -1,0 +1,9 @@
+{
+    "functionName": "test_read_multiple_PDBx",
+    "className": "TestPDBClass",
+    "fileName": "/pierrepo_&_PBxplore/pbxplore_&_tests_&_test_functions.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Tests for multiple chains in one file.\n\n        This test is called for both PDB abd PDBx format because the\n        `chains_1AY7` fixture is parametrixed for both extensions.\n        \"\"\"\nchain = chains_1AY7_pdbx[chain_idx]\nassert chain[0].format() == ref_first\nassert chain[-1].format() == ref_last\npytest.mark.parametrize('chain_idx,ref_first,ref_last', ((0,\n    'ATOM      1    N ASP A   1      11.860  13.207  12.724  0.00  0.00              '\n    ,\n    'ATOM    751  OXT CYS A  96       9.922  16.291  36.110  0.00  0.00              '\n    ), (1,\n    'ATOM    752    N LYS B   1      11.318  46.585   0.493  0.00  0.00              '\n    ,\n    'ATOM   1488  OXT SER B  89      13.857  33.192 -16.133  0.00  0.00              '\n    )))"
+}

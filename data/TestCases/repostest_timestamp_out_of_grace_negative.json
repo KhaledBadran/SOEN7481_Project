@@ -1,0 +1,9 @@
+{
+    "functionName": "test_timestamp_out_of_grace_negative",
+    "className": "TestValidationPolicyCommandInterest",
+    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_validation_policy_command_interest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self._fixture = ValidationPolicyCommandInterestFixture(\n    ValidationPolicyCommandInterest.Options(15 * 1000.0))\ninterest1 = self._fixture.makeCommandInterest(self._fixture._identity)\nself._fixture.setNowOffsetMilliseconds(1 * 1000.0)\ninterest2 = self._fixture.makeCommandInterest(self._fixture._identity)\nself._fixture.setNowOffsetMilliseconds(2 * 1000.0)\ninterest3 = self._fixture.makeCommandInterest(self._fixture._identity)\nself._fixture.setNowOffsetMilliseconds(-16 * 1000.0)\nself.validateExpectFailure(interest1,\n    'Should fail (timestamp outside the grace period)')\nself.validateExpectFailure(interest2,\n    'Should fail (timestamp outside the grace period)')\nself._fixture.setNowOffsetMilliseconds(2 * 1000.0)\nself.validateExpectSuccess(interest3, 'Should succeed')\n"
+}

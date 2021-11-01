@@ -1,0 +1,9 @@
+{
+    "functionName": "test_conv_diag",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_kernels_&_test_kernels.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "kernel = gpflow.kernels.Convolutional(gpflow.kernels.SquaredExponential(),\n    [3, 3], [2, 2])\nX = np.random.randn(3, 9)\nkernel_full = np.diagonal(kernel(X, full_cov=True))\nkernel_diag = kernel(X, full_cov=False)\nassert np.allclose(kernel_full, kernel_diag)\n"
+}

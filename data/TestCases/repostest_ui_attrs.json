@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ui_attrs",
+    "className": "TestUI",
+    "fileName": "/CCampJr_&_LazyHDF5/lazy5_&_tests_&_test_ui.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Load test file, change to base group (/), check attributes \"\"\"\nself.filename = hdf_dataset\ndialog = HdfLoad()\n_ = dialog.fileOpen(self.filename)\ndialog.ui.comboBoxGroupSelect.setCurrentIndex(0)\nlist_dsets = [dialog.ui.listDataSet.item(num).text() for num in range(\n    dialog.ui.listDataSet.count())]\nassert dialog.ui.comboBoxGroupSelect.currentText() == '/'\nassert list_dsets == ['base']\ndialog.ui.listDataSet.item(0).setSelected(True)\nQTest.mouseClick(dialog.ui.listDataSet.viewport(), Qt.LeftButton)\nassert dialog.ui.tableAttributes.findItems('Attribute_str', Qt.MatchExactly)[0\n    ].text() == 'Attribute_str'\nassert not dialog.ui.tableAttributes.findItems('fake', Qt.MatchExactly)\n"
+}

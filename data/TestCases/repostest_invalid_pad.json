@@ -1,0 +1,9 @@
+{
+    "functionName": "test_invalid_pad",
+    "className": "TestConv3DLayerImplementations",
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_conv.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "input_layer = DummyInputLayer((1, 2, 3, 3, 3))\nwith pytest.raises(TypeError) as exc:\n    layer = Conv3DImpl(input_layer, num_filters=16, filter_size=(3, 3, 3),\n        pad='_nonexistent_mode')\nassert 'iterable of int' in exc.value.args[0]\nwith pytest.raises(NotImplementedError) as exc:\n    layer = Conv3DImpl(input_layer, num_filters=16, filter_size=(4, 4, 4),\n        pad='same')\nassert 'requires odd filter size' in exc.value.args[0]\n"
+}

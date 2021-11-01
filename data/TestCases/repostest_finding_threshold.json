@@ -1,0 +1,9 @@
+{
+    "functionName": "test_finding_threshold",
+    "className": null,
+    "fileName": "/PECOS-packages_&_PECOS/tests_&_example_tests_&_test_finding_threshold.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "depolar = pc.error_gens.DepolarGen(model_level='code_capacity', perp_errors\n    =True)\nps = [0.19, 0.17, 0.15, 0.13, 0.11]\nds = [5, 7, 9]\nplist = np.array(ps * len(ds))\ndlist = []\nfor d in ds:\n    for _ in ps:\n        dlist.append(d)\ndlist = np.array(dlist)\nplog = []\nfor d in ds:\n    for p in ps:\n        surface = pc.qeccs.Surface4444(distance=d)\n        mwpm2d = pc.decoders.MWPM2D(surface)\n        plog.append(pc.tools.codecapacity_logical_rate(10, surface, d,\n            depolar, error_params={'p': p}, decoder=mwpm2d, verbose=False)[0])\nplog = np.array(plog)\nprint('Finished!')\ntry:\n    p0 = 0.1, 1.5, 1, 1, 1\n    pc.misc.threshold_fit(plist, dlist, plog, func, p0, maxfev=1000)\nexcept RuntimeError:\n    pass\n"
+}

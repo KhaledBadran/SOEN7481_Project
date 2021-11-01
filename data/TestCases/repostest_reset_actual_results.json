@@ -1,0 +1,9 @@
+{
+    "functionName": "test_reset_actual_results",
+    "className": "GenericTransportTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_GenericTransportTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "alg = op.algorithms.GenericTransport(network=self.net, phase=self.phase)\nalg.settings['conductance'] = 'throat.diffusive_conductance_temp'\nself.phase['throat.diffusive_conductance_temp'] = 1.0\nalg.settings['quantity'] = 'pore.concentration'\nalg.set_value_BC(pores=self.net.pores('bottom'), values=1)\nalg.set_value_BC(pores=self.net.pores('top'), values=0)\nalg.run()\nm1 = alg.rate(pores=self.net.pores('top'))\nm2 = -alg.rate(pores=self.net.pores('bottom'))\nnp.testing.assert_allclose(m1, m2)\nself.phase['throat.diffusive_conductance_temp'][[0, 1, 2]] *= 0.1\nalg.run()\nm1 = alg.rate(pores=self.net.pores('top'))\nm2 = -alg.rate(pores=self.net.pores('bottom'))\nwith pytest.raises(AssertionError):\n    np.testing.assert_allclose(m1, m2)\nalg.reset()\nalg.run()\nm1 = alg.rate(pores=self.net.pores('top'))\nm2 = -alg.rate(pores=self.net.pores('bottom'))\nnp.testing.assert_allclose(m1, m2)\n"
+}

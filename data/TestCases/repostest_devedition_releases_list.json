@@ -1,0 +1,9 @@
+{
+    "functionName": "test_devedition_releases_list",
+    "className": null,
+    "fileName": "/mozilla_&_PollBot/tests_&_test_views.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "resp = await check_response(cli, '/v1/devedition')\nbody = await resp.json()\nassert 'releases' in body\nassert all([isinstance(version, str) for version in body['releases']])\nassert all([('rc' not in version) for version in body['releases']])\n"
+}

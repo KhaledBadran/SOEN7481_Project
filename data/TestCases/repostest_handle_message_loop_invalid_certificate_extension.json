@@ -1,0 +1,9 @@
+{
+    "functionName": "test_handle_message_loop_invalid_certificate_extension",
+    "className": "TestKmipSession",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_session.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the correct logging and error handling occurs when an\n        invalid certificate is encountered while processing a request.\n        \"\"\"\ndata = utils.BytearrayStream(())\ncert_mock.return_value = 'test_certificate'\next_mock.return_value = []\nkmip_engine = engine.KmipEngine()\nkmip_engine._logger = mock.MagicMock()\nkmip_session = session.KmipSession(kmip_engine, None, None, name='name',\n    enable_tls_client_auth=True)\nkmip_session.authenticate = mock.MagicMock()\nkmip_session._engine = mock.MagicMock()\nkmip_session._logger = mock.MagicMock()\nkmip_session._connection = mock.MagicMock()\nkmip_session._receive_request = mock.MagicMock(return_value=data)\nkmip_session._send_response = mock.MagicMock()\nkmip_session._handle_message_loop()\nkmip_session._receive_request.assert_called_once_with()\nkmip_session._logger.warning('Failure verifying the client certificate.')\nkmip_session._logger.exception.assert_called_once_with(exceptions.\n    PermissionDenied(\n    'The extended key usage extension is not marked for client authentication in the client certificate.'\n    ))\nkmip_session._engine.build_error_response.assert_called_once_with(contents.\n    ProtocolVersion(1, 0), enums.ResultReason.AUTHENTICATION_NOT_SUCCESSFUL,\n    'Error verifying the client certificate. See server logs for more information.'\n    )\nself.assertTrue(kmip_session._send_response.called)\nmock.patch('kmip.services.server.auth.get_extended_key_usage_from_certificate')mock.patch('kmip.services.server.auth.get_certificate_from_connection')mock.patch('kmip.core.messages.messages.RequestMessage')"
+}

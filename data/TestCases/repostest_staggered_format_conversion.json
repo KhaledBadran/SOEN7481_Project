@@ -1,0 +1,9 @@
+{
+    "functionName": "test_staggered_format_conversion",
+    "className": "TestFields",
+    "fileName": "/tum-pbs_&_PhiFlow/tests_&_test_fields.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tensor = math.zeros([1, 5, 5, 2])\ntensor[:, (0), (0), :] = 1\ncomponents = unstack_staggered_tensor(tensor)\nself.assertEqual(len(components), 2)\nnp.testing.assert_equal(components[0].shape, [1, 5, 4, 1])\nnp.testing.assert_equal(components[1].shape, [1, 4, 5, 1])\ntensor2 = stack_staggered_components(components)\nnp.testing.assert_equal(tensor, tensor2)\n"
+}

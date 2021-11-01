@@ -1,0 +1,9 @@
+{
+    "functionName": "test_run_with_file3",
+    "className": null,
+    "fileName": "/kallam_&_FileTransforms/tests_&_test_BaseTransforms.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Verify that a file is only read once regardless of how many times the path is included as an argument\n\n    :param basic_transform: pytest fixture - instance of BaseTransform\n    :param generated_input_csv: pytest fixture - test input file path\n    \"\"\"\nresult = basic_transform.run(generated_input_csv, [generated_input_csv,\n    generated_input_csv], write_output=False)\nf = result.get_file(basic_transform.output_name)\nassert ['FIRST NAME', 'LAST NAME'] == f.headers\nassert ['John', 'Doe'] == f[0]\nassert 1 == len(f.data)\n"
+}

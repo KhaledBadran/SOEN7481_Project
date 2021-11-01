@@ -1,0 +1,9 @@
+{
+    "functionName": "test_self_signed_cert_validity",
+    "className": "TestKeyChain",
+    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_key_chain.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "certificate = self._fixture.addIdentity(Name(\n    '/Security/V2/TestKeyChain/SelfSignedCertValidity')).getDefaultKey(\n    ).getDefaultCertificate()\nself.assertTrue(certificate.isValid())\nself.assertTrue(certificate.isValid(Common.getNowMilliseconds() + 10 * 365 *\n    24 * 3600 * 1000.0))\nself.assertTrue(certificate.getValidityPeriod().getNotAfter() > Common.\n    getNowMilliseconds() + 10 * 365 * 24 * 3600 * 1000.0)\n"
+}

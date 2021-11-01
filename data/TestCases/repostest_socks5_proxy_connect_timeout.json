@@ -1,0 +1,9 @@
+{
+    "functionName": "test_socks5_proxy_connect_timeout",
+    "className": "PySocksTestCase",
+    "fileName": "/Anorov_&_PySocks/test_&_test_pysocks.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test timeout during connecting to the proxy server\"\"\"\nsock = socks.socksocket()\nsock.settimeout(0.1)\nsock.set_proxy(socks.SOCKS5, NON_ROUTABLE_IP, SOCKS5_PROXY_PORT)\naddress = TEST_SERVER_HOST, TEST_SERVER_PORT\nself.assertRaises(socks.ProxyConnectionError, sock.connect, address)\nsock = socks.socksocket()\nsock.settimeout(0.1)\nsock.set_proxy(socks.SOCKS5, NON_ROUTABLE_IP, SOCKS5_PROXY_PORT)\naddress = TEST_SERVER_HOST, TEST_SERVER_PORT\ntry:\n    sock.connect(address)\nexcept socks.ProxyConnectionError as ex:\n    self.assertEqual(str(ex.socket_err), 'timed out')\nelse:\n    assert False\n"
+}

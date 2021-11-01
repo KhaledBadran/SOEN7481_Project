@@ -1,0 +1,9 @@
+{
+    "functionName": "test_changepoint_with_X1_X2",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_kernels_&_test_changepoints.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "N = 100\nX = np.linspace(0, 100, N).reshape(N, 1)\nbase_k1 = gpflow.kernels.Matern32(lengthscales=0.2)\nbase_k2 = gpflow.kernels.Matern32(lengthscales=2.0)\nk = gpflow.kernels.ChangePoints([base_k1, base_k2], [0.0], steepness=5.0)\nK = k(X)\nassert K.shape == [N, N]\nN2 = 25\nX2 = np.linspace(0, 50, N2).reshape(N2, 1)\nK = k(X, X2)\nassert K.shape == [N, N2]\n"
+}

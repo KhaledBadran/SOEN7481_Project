@@ -1,0 +1,9 @@
+{
+    "functionName": "test_distance_neighbor_shape_mismatch",
+    "className": null,
+    "fileName": "/vc1492a_&_PyNomaly/tests_&_test_loop.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test to ensure that the proper warning is issued if there is a mismatch\n    between the shape of the provided distance and neighbor matrices.\n    :param X_n120: A pytest Fixture that generates 120 observations.\n    :return: None\n    \"\"\"\nneigh = NearestNeighbors(metric='euclidean')\nneigh.fit(X_n120)\nd, idx = neigh.kneighbors(X_n120, n_neighbors=10, return_distance=True)\nneigh_2 = NearestNeighbors(metric='euclidean')\nneigh_2.fit(X_n120)\nd_2, idx_2 = neigh.kneighbors(X_n120, n_neighbors=5, return_distance=True)\nwith pytest.warns(UserWarning) as record:\n    loop.LocalOutlierProbability(distance_matrix=d, neighbor_matrix=idx_2,\n        n_neighbors=5, use_numba=NUMBA)\nassert len(record) == 1\nassert record[0].message.args[0\n    ] == 'The shape of the distance and neighbor index matrices must match.'\n"
+}

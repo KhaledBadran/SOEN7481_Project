@@ -1,0 +1,9 @@
+{
+    "functionName": "test_graph_backward",
+    "className": "TestSimple",
+    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_test_simple_integration.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "fc1 = Linear(4, 2)()\nfc2 = Linear(4, 2)()\ncadd = CAddTable()([fc1, fc2])\noutput1 = ReLU()(cadd)\noutput2 = Threshold(10.0)(cadd)\nmodel = Model([fc1, fc2], [output1, output2])\nfc1.element().set_weights([np.ones((4, 2)), np.ones((2,))])\nfc2.element().set_weights([np.ones((4, 2)) * 2, np.ones((2,)) * 2])\noutput = model.forward([np.array([0.1, 0.2, -0.3, -0.4]), np.array([0.5, \n    0.4, -0.2, -0.1])])\ngradInput = model.backward([np.array([0.1, 0.2, -0.3, -0.4]), np.array([0.5,\n    0.4, -0.2, -0.1])], [np.array([1.0, 2.0]), np.array([3.0, 4.0])])\nassert_allclose(gradInput[0], np.array([3.0, 3.0, 3.0, 3.0]))\nassert_allclose(gradInput[1], np.array([6.0, 6.0, 6.0, 6.0]))\n"
+}

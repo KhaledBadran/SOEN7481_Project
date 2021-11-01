@@ -1,0 +1,9 @@
+{
+    "functionName": "run_insane",
+    "className": null,
+    "fileName": "/Tsjerk_&_Insane/tests_&_test_regression.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Run insane with the given arguments\n\n    Insane is run in a copy of `input_directory`.\n    \"\"\"\nif input_directory is not None:\n    for path in glob.glob(os.path.join(input_directory, '*')):\n        if os.path.isdir(path):\n            shutil.copytree(path, '.')\n        else:\n            shutil.copy2(path, '.')\nout, err, returncode = runner(arguments)\nprint('** Insane exited with return code {}.'.format(returncode))\nif returncode:\n    print(err)\nreturn out, err, returncode\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "_try_black_tophat",
+    "className": "BoxToMRZ",
+    "fileName": "/konstantint_&_PassportEye/passporteye_&_mrz_&_image.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "roi_b = morphology.black_tophat(roi, morphology.disk(5))\nnew_text = ocr(roi_b, extra_cmdline_params=self.extra_cmdline_params)\nnew_mrz = MRZ.from_ocr(new_text)\nif new_mrz.valid_score > cur_mrz.valid_score:\n    new_mrz.aux['method'] = 'black_tophat'\n    cur_text, cur_mrz = new_text, new_mrz\nnew_text, new_mrz = self._try_larger_image(roi_b, cur_text, cur_mrz)\nif new_mrz.valid_score > cur_mrz.valid_score:\n    new_mrz.aux['method'] = 'black_tophat(rescaled(3))'\n    cur_text, cur_mrz = new_text, new_mrz\nreturn cur_text, cur_mrz\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_issue_4",
+    "className": "TestOldIssues",
+    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_test_issues.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" can't retrieve TIMESTAMP fields \"\"\"\nconn = self.connect()\nc = conn.cursor()\nwith warnings.catch_warnings():\n    warnings.filterwarnings('ignore')\n    c.execute('drop table if exists issue4')\nc.execute('create table issue4 (ts timestamp)')\ntry:\n    c.execute('insert into issue4 (ts) values (now())')\n    c.execute('select ts from issue4')\n    self.assertTrue(isinstance(c.fetchone()[0], datetime.datetime))\nfinally:\n    c.execute('drop table issue4')\n"
+}

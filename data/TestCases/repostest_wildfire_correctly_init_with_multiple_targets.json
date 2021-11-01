@@ -1,0 +1,9 @@
+{
+    "functionName": "test_wildfire_correctly_init_with_multiple_targets",
+    "className": "WildFireDatasetTester",
+    "fileName": "/frgfm_&_PyroNear/test_&_test_datasets_wildfire_split.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "wildfire = WildFireDataset(metadata=self.wildfire_df, path_to_frames=self.\n    path_to_frames, transform=transforms.ToTensor(), target_names=['fire',\n    'fire_id'])\nself.assertEqual(len(wildfire), 974)\nobservation_3, metadata_3 = wildfire[3]\nself.assertIsInstance(observation_3, torch.Tensor)\nself.assertEqual(observation_3.size(), torch.Size([3, 683, 910]))\nself.assertTrue(torch.equal(metadata_3, torch.tensor([0, 96])))\n"
+}

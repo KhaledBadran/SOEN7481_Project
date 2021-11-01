@@ -1,0 +1,9 @@
+{
+    "functionName": "test_classify_catalogue",
+    "className": null,
+    "fileName": "/PaulHancock_&_Aegean/tests_&_test_models.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test classify_catalogue\"\"\"\nss = []\nisl = []\nout = []\nmixed = []\nfor i in range(10):\n    a = models.SimpleSource()\n    ss.append(a)\n    b = models.IslandSource()\n    b.island = i\n    isl.append(b)\n    c = models.ComponentSource()\n    c.island = i\n    d = models.ComponentSource()\n    d.island = i\n    d.source = 1\n    out.extend([c, d])\n    mixed.extend([a, b, c, d])\na, b, c = models.classify_catalog(mixed)\nif not np.all(b == isl):\n    raise AssertionError()\nif not np.all(a == out):\n    raise AssertionError()\ngroups = list(models.island_itergen(a))\nif not len(groups) == 10:\n    raise AssertionError()\n"
+}

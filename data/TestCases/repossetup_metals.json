@@ -1,0 +1,9 @@
+{
+    "functionName": "setup_metals",
+    "className": "TestAdsorbateFeatures",
+    "fileName": "/SUNCAT-Center_&_CatLearn/test_&_test_ads_fp_gen.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Get the atoms objects.\"\"\"\nadsorbates = ['H', 'O', 'C', 'N', 'S', 'Cl', 'P', 'F']\nsymbols = ['Ag', 'Au', 'Cu', 'Pt', 'Pd', 'Ir', 'Rh', 'Ni', 'Co']\nif n is not None:\n    symbols = symbols[:n]\n    adsorbates = adsorbates[:n]\nimages = []\nfor i, s in enumerate(symbols):\n    rs = get_radius(atomic_numbers[s])\n    a = 2 * rs * 2 ** 0.5\n    for ads in adsorbates:\n        atoms = fcc111(s, (2, 2, 3), a=a)\n        atoms.center(vacuum=6, axis=2)\n        h = (default_catlearn_radius(atomic_numbers[ads]) + rs) / 2 ** 0.5\n        add_adsorbate(atoms, ads, h, 'bridge')\n        images.append(atoms)\nreturn images\n"
+}

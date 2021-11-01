@@ -1,0 +1,9 @@
+{
+    "functionName": "test_last_day_of_week_of_month",
+    "className": null,
+    "fileName": "/roniemartinez_&_DocCron/tests_&_test_non_standard_characters.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cron = doccron.cron('0 0 * * 5L *')\nlast_friday = datetime.now(tz=tzlocal()).replace(hour=0, minute=0, second=0,\n    microsecond=0)\nwhile last_friday.isoweekday() != 5:\n    last_friday += timedelta(days=1)\nfor _ in range(3):\n    while last_friday.month == (last_friday + timedelta(days=7)).month:\n        last_friday += timedelta(days=7)\n    assert next(cron) == last_friday\n    last_friday += timedelta(days=7)\n"
+}

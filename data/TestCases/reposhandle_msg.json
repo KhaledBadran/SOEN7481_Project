@@ -1,0 +1,9 @@
+{
+    "functionName": "handle_msg",
+    "className": null,
+    "fileName": "/PRIArobotics_&_HedgehogServer/hedgehog_&_server_&_hedgehog_server.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "try:\n    msg = ServerSide.parse(msg_raw)\n    logger.debug('Receive command: %s', msg)\n    try:\n        handler = self.handlers[msg.__class__]\n    except KeyError:\n        raise UnsupportedCommandError(msg.__class__.msg_name())\n    try:\n        result = await handler(self, ident, msg)\n    except HedgehogCommandError as err:\n        logger.info('For command:     %s', msg)\n        logger.info('-> Error:        %s', err)\n        raise\n    except Exception as err:\n        logger.exception('Uncaught exception in command handler')\n        raise FailedCommandError('Uncaught exception: {}'.format(repr(err))\n            ) from err\nexcept HedgehogCommandError as err:\n    result = err.to_message()\nlogger.debug('Send reply:      %s', result)\nreturn ServerSide.serialize(result)\n"
+}

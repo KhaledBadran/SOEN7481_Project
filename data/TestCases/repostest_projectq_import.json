@@ -1,0 +1,9 @@
+{
+    "functionName": "test_projectq_import",
+    "className": "ProjectQImportTest",
+    "fileName": "/XanaduAI_&_PennyLane-PQ/tests_&_test_projectq_import.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Check that from projectq.ops import MatrixGate can raise an exception without problems, this ensures backward compatibility with older versions of ProjectQ\n        \"\"\"\ndel sys.modules['pennylane_pq.pqops']\nimport projectq.ops\nif 'MatrixGate' in projectq.ops.__dict__:\n    del projectq.ops.__dict__['MatrixGate']\nimport pennylane_pq.pqops\ndel sys.modules['pennylane_pq.pqops']\nimport projectq.ops\nif 'MatrixGate' not in projectq.ops.__dict__:\n    projectq.ops.__dict__['MatrixGate'] = projectq.ops.__dict__['BasicGate']\nimport pennylane_pq.pqops\ndel sys.modules['projectq.ops']\nimport pennylane_pq.pqops\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_read_xyz_file",
+    "className": null,
+    "fileName": "/mortele_&_OccamTools/test_&_test_read_xyz.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "other_file = os.path.join(os.path.dirname(__file__), os.pardir, 'data',\n    'example_fort.5')\nxyz = Xyz(file_name)\nxyz.read_file(silent=True)\nassert xyz.x.shape == (12, 25)\ndel xyz\nxyz = Xyz(other_file)\ncaught = False\ntry:\n    xyz.read_file(silent=True)\nexcept ValueError:\n    caught = True\nassert caught\ndel xyz\nxyz = Xyz(other_file)\nxyz.read_file(file_name, silent=True)\nassert xyz.y.shape == (12, 25)\n"
+}

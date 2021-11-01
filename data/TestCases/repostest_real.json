@@ -1,0 +1,9 @@
+{
+    "functionName": "test_real",
+    "className": null,
+    "fileName": "/bytesandbrains_&_ProcessOptimizer/ProcessOptimizer_&_tests_&_test_space.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "a = Real(1, 25)\nfor i in range(50):\n    r = a.rvs(random_state=i)\n    check_limits(r, 1, 25)\n    assert_true(r in a)\nrandom_values = a.rvs(random_state=0, n_samples=10)\nassert_array_equal(random_values.shape, 10)\nassert_array_equal(a.transform(random_values), random_values)\nassert_array_equal(a.inverse_transform(random_values), random_values)\nlog_uniform = Real(10 ** -5, 10 ** 5, prior='log-uniform')\nassert_not_equal(log_uniform, Real(10 ** -5, 10 ** 5))\nfor i in range(50):\n    random_val = log_uniform.rvs(random_state=i)\n    check_limits(random_val, 10 ** -5, 10 ** 5)\nrandom_values = log_uniform.rvs(random_state=0, n_samples=10)\nassert_array_equal(random_values.shape, 10)\ntransformed_vals = log_uniform.transform(random_values)\nassert_array_equal(transformed_vals, np.log10(random_values))\nassert_array_equal(log_uniform.inverse_transform(transformed_vals),\n    random_values)\npytest.mark.fast_test"
+}

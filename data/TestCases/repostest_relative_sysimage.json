@@ -1,0 +1,9 @@
+{
+    "functionName": "test_relative_sysimage",
+    "className": null,
+    "fileName": "/tkf_&_JuliaManager.jl/jlm_&_src_&_jlm_&_tests_&_test_cli.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "app = cli.Application(dry_run=False, verbose=True, julia='julia')\nsysimage = initialized / 'some' / 'dir' / ('sys.' + dlext)\nsysimage.parent.mkdir(parents=True)\nsysimage.symlink_to(app.default_sysimage(app.julia))\ncli.run(['--verbose', 'set-sysimage', pathstr(sysimage.relative_to(\n    initialized))])\ntest_run(initialized)\ncli.run(['locate', 'sysimage'])\nprint()\notherdir = initialized / 'some' / 'other' / 'dir'\notherdir.mkdir(parents=True)\nos.chdir(pathstr(otherdir))\ntest_run(initialized)\ncli.run(['locate', 'sysimage'])\nprint()\n"
+}

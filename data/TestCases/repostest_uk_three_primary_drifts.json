@@ -1,0 +1,9 @@
+{
+    "functionName": "test_uk_three_primary_drifts",
+    "className": null,
+    "fileName": "/bsmurphy_&_PyKrige/tests_&_test_core.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data, (gridx, gridy, gridx_2), mask_ref = sample_data_2d\nwell = np.array([[1.1, 1.1, -1.0]])\ndem = np.arange(0.0, 5.1, 0.1)\ndem = np.repeat(dem[(np.newaxis), :], 6, axis=0)\ndem_x = np.arange(0.0, 5.1, 0.1)\ndem_y = np.arange(0.0, 6.0, 1.0)\nuk = UniversalKriging(data[:, (0)], data[:, (1)], data[:, (2)],\n    variogram_model='linear', drift_terms=['regional_linear', 'external_Z',\n    'point_log'], point_drift=well, external_drift=dem, external_drift_x=\n    dem_x, external_drift_y=dem_y)\nz, ss = uk.execute('grid', gridx, gridy, backend='vectorized')\nassert z.shape == (gridy.shape[0], gridx.shape[0])\nassert ss.shape == (gridy.shape[0], gridx.shape[0])\nassert np.all(np.isfinite(z))\nassert not np.all(np.isnan(z))\nassert np.all(np.isfinite(ss))\nassert not np.all(np.isnan(ss))\nz, ss = uk.execute('grid', gridx, gridy, backend='loop')\nassert z.shape == (gridy.shape[0], gridx.shape[0])\nassert ss.shape == (gridy.shape[0], gridx.shape[0])\nassert np.all(np.isfinite(z))\nassert not np.all(np.isnan(z))\nassert np.all(np.isfinite(ss))\nassert not np.all(np.isnan(ss))\npytest.mark.skipif(sys.platform == 'win32', reason='does not run on windows')"
+}

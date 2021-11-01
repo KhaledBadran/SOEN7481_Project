@@ -1,0 +1,9 @@
+{
+    "functionName": "test_status_response_validates_devedition_version",
+    "className": null,
+    "fileName": "/mozilla_&_PollBot/tests_&_test_views.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "async def dummy_task(product, version):\n    return True\nerror_endpoint = status_response(dummy_task)\nrequest = mock.MagicMock()\nrequest.match_info = {'product': 'devedition', 'version': '58.0'}\nresp = await error_endpoint(request)\nassert resp.status == 404\nassert json.loads(resp.body.decode()) == {'status': 404, 'message':\n    'Invalid version number for devedition: 58.0'}\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_update_weights",
+    "className": null,
+    "fileName": "/mozilla_&_CANOSP-2019/tests_&_test_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "def mock_post(url, data=None, json=None):\n    return url, data, json\nmonkeypatch.setattr('mozfldp.server.requests.post', mock_post)\ninit_coefs = np.array([29.0, 0.0, 0.0])\ninit_intercept = np.array([-9.0])\nexpected_coefs, expected_int = batched_epoch_weights(client, batch_ind=\n    batched_indices_2, num_epochs=1, init_coef=init_coefs, init_int=\n    init_intercept)\nexpected_coef_update = expected_coefs - init_coefs\nexpected_int_update = expected_int - init_intercept\nreset_random_seed()\nurl, _, json_data = client.submit_weight_updates(current_coef=init_coefs,\n    current_intercept=init_intercept, num_epochs=1, batch_size=2)\nassert url == api_url\nrequest_data = json.loads(json_data)\nassert request_data['user_contrib_weight'] == len(LABELS)\nassert np.array_equal(request_data['coef_update'], expected_coef_update)\nassert np.array_equal(request_data['intercept_update'], expected_int_update)\nexpected_coefs, expected_int = batched_epoch_weights(client, batch_ind=\n    batched_indices_2, num_epochs=3, init_coef=init_coefs, init_int=\n    init_intercept)\nexpected_coef_update = expected_coefs - init_coefs\nexpected_int_update = expected_int - init_intercept\nreset_random_seed()\nurl, _, json_data = client.submit_weight_updates(current_coef=init_coefs,\n    current_intercept=init_intercept, num_epochs=3, batch_size=2)\nassert url == api_url\nrequest_data = json.loads(json_data)\nassert request_data['user_contrib_weight'] == len(LABELS)\nassert np.array_equal(request_data['coef_update'], expected_coef_update)\nassert np.array_equal(request_data['intercept_update'], expected_int_update)\npytest.mark.skip('TODO')"
+}

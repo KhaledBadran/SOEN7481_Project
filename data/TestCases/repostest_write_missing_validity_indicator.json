@@ -1,0 +1,9 @@
+{
+    "functionName": "test_write_missing_validity_indicator",
+    "className": "TestSignatureVerifyResponsePayload",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_signature_verify.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a ValueError gets raised when a required\n        SignatureVerifyResponsePayload field is missing when encoding the\n        struct.\n        \"\"\"\npayload = signature_verify.SignatureVerifyResponsePayload(unique_identifier\n    ='49a1ca88-6bea-4fb2-b450-7e58802c3038')\nstream = utils.BytearrayStream()\nargs = stream,\nself.assertRaisesRegex(ValueError,\n    'Payload is missing the validity indicator field.', payload.write, *args)\n"
+}

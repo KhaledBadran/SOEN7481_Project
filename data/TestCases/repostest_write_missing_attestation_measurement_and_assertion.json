@@ -1,0 +1,9 @@
+{
+    "functionName": "test_write_missing_attestation_measurement_and_assertion",
+    "className": "TestAttestationCredential",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_credentials.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a ValueError gets raised when attempting to write an\n        AttestationCredential struct missing both attestation measurement and\n        attestation assertion data to a data stream.\n        \"\"\"\ncredential = objects.AttestationCredential(nonce=objects.Nonce(nonce_id=\n    b'\\x01', nonce_value=b'\\x00\\x01\\x02\\x03\\x04\\x05\\x06\\x07'),\n    attestation_type=enums.AttestationType.TPM_QUOTE)\nstream = utils.BytearrayStream()\nargs = stream,\nself.assertRaisesRegex(ValueError,\n    'Attestation credential struct is missing either the attestation measurement or the attestation assertion.'\n    , credential.write, *args)\n"
+}

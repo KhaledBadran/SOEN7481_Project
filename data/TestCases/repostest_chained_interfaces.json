@@ -1,0 +1,9 @@
+{
+    "functionName": "test_chained_interfaces",
+    "className": null,
+    "fileName": "/theojulienne_&_PythonInterfaces/interfaces_&_tests_&_test_interfaces.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class IBar(interface):\n\n    def bar(self, a, b, c):\n        \"\"\"blah blah blah\"\"\"\nclass IBaz(interface):\n\n    def baz(self, b, z):\n        \"\"\"Baz from IBaz\"\"\"\n@implements(IBaz, IBar)\nclass Foo(object):\n\n    def bar(self, a, b, c):\n        pass\n\n    def baz(self, b, z):\n        pass\nassert IBar.isImplementedBy(Foo)\nassert IBaz.isImplementedBy(Foo)\nassert Foo.bar.__doc__ == 'blah blah blah'\nassert Foo.baz.__doc__ == 'Baz from IBaz'\n"
+}

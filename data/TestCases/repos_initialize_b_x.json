@@ -1,0 +1,9 @@
+{
+    "functionName": "_initialize_b_x",
+    "className": "PETScSparseLinearSolver",
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_utils_&_petsc.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        Initialize the solution vector (self.petsc_x), which is a dense\n        matrix (1D vector) and defines the rhs vector (self.petsc_b) from\n        the existing data.\n        \"\"\"\nself.petsc_s = PETSc.Vec()\nself.petsc_s.create(PETSc.COMM_WORLD)\nself.petsc_s.setSizes(self.m)\nself.petsc_s.setFromOptions()\nself.Istart, self.Iend = self.petsc_s.getOwnershipRange()\nself.petsc_x = self.petsc_s.duplicate()\nself.petsc_b = self.petsc_s.duplicate()\nPETSc.Vec.setArray(self.petsc_x, self.x0[self.Istart:self.Iend])\nPETSc.Vec.setArray(self.petsc_b, self.b[self.Istart:self.Iend])\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pvcell_calc_now_flag",
+    "className": null,
+    "fileName": "/SunPower_&_PVMismatch/pvmismatch_&_tests_&_test_pvcell.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test ``_calc_now`` turns off recalc in ``__setattr__``.\n    \"\"\"\npvc = PVcell()\nitest, vtest, ptest = pvc.Icell, pvc.Vcell, pvc.Pcell\npvc._calc_now = False\npvc.Rs = 0.001\nassert np.allclose(itest, pvc.Icell)\nassert np.allclose(vtest, pvc.Vcell)\nassert np.allclose(ptest, pvc.Pcell)\nicell, vcell, pcell = pvc.calcCell()\npvc._calc_now = True\nassert np.allclose(icell, pvc.Icell)\nassert np.allclose(vcell, pvc.Vcell)\nassert np.allclose(pcell, pvc.Pcell)\n"
+}

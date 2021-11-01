@@ -1,0 +1,9 @@
+{
+    "functionName": "test_BotorchModelOneOutcome",
+    "className": "BotorchModelTest",
+    "fileName": "/facebook_&_Ax/ax_&_models_&_tests_&_test_botorch_model.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "Xs1, Ys1, Yvars1, bounds, tfs, fns, mns = _get_torch_test_data(dtype=torch.\n    float, cuda=False, constant_noise=True)\nmodel = BotorchModel()\nwith mock.patch(FIT_MODEL_MO_PATH) as _mock_fit_model:\n    model.fit(Xs=Xs1, Ys=Ys1, Yvars=Yvars1, bounds=bounds, task_features=\n        tfs, feature_names=fns, metric_names=mns[0], fidelity_features=[])\n    _mock_fit_model.assert_called_once()\nX = torch.rand(2, 3, dtype=torch.float)\nf_mean, f_cov = model.predict(X)\nself.assertTrue(f_mean.shape == torch.Size([2, 1]))\nself.assertTrue(f_cov.shape == torch.Size([2, 1, 1]))\n"
+}

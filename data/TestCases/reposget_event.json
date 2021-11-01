@@ -1,0 +1,9 @@
+{
+    "functionName": "get_event",
+    "className": null,
+    "fileName": "/Manishearth_&_ChatExchange/tests_&_test_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n            Waits until it has seen a message passing the specified\n            predicate from both polling and sockets.\n\n            Asserts that it has not waited longer than the specified\n            timeout, and asserts that the events from difference sources\n            have the same ID.\n\n            This may dequeue any number of additional unrelated events\n            while it is running, so it's not appropriate if you are\n            trying to wait for multiple events at once.\n            \"\"\"\nsocket_event = None\npolling_event = None\ntimeout = time.time() + timeout_duration\nwhile not (socket_event and polling_event):\n    if time.time() > timeout:\n        raise Exception('Timed out waiting for event')\n    try:\n        is_socket, event = pending_events.get(timeout=1)\n    except queue.Empty:\n        continue\n    if predicate(event):\n        logger.info('Expected event (is_socket==%r): %r', is_socket, event)\n        if is_socket:\n            assert socket_event is None\n            socket_event = event\n        else:\n            assert polling_event is None\n            polling_event = event\n    else:\n        logger.debug('Unexpected events: %r', event)\nassert socket_event and polling_event\nassert type(socket_event) is type(polling_event)\nassert socket_event.id == polling_event.id\nreturn socket_event\n"
+}

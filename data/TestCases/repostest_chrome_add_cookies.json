@@ -1,0 +1,9 @@
+{
+    "functionName": "test_chrome_add_cookies",
+    "className": "TestBrowser",
+    "fileName": "/cdgriffith_&_CookieEater/test_&_test_browser.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "chrome = ChromeCookies(db=chrome_db)\nchrome.add_cookie('www.example.com', 'test_name', 'test_value')\nconn = sqlite3.Connection(chrome_db)\ncur = conn.cursor()\ncur.execute('SELECT * FROM {0}'.format(chrome.table_name))\nres = cur.fetchall()\ntry:\n    assert len(res) == 1\n    assert res[0][1] == 'www.example.com'\n    assert res[0][2] == 'test_name'\n    assert res[0][3] == 'test_value'\n    assert res[0][4] == '/'\nfinally:\n    conn.close()\n"
+}

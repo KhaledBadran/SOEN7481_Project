@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_demos",
+    "className": null,
+    "fileName": "/HDI-project_&_ATM/tests_&_test_data.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test get_dmeos.\"\"\"\nclient = Mock()\nclient.list_objects.return_value = {'Contents': [{'Key': 'test-dataset'}]}\nmock_boto3.client.return_value = client\nresult = data.get_demos()\nassert result == ['test-dataset']\nclient.list_objects.assert_called_once_with(Bucket='atm-data')\nmock_boto3.client.assert_called_once_with('s3', config=mock_conf.return_value)\nmock_conf.assert_called_once_with(signature_version=data.UNSIGNED)\npatch('atm.data.Config')patch('atm.data.boto3')"
+}

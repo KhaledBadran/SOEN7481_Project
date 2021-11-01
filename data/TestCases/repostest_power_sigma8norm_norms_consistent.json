@@ -1,0 +1,9 @@
+{
+    "functionName": "test_power_sigma8norm_norms_consistent",
+    "className": null,
+    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_power.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cosmo = ccl.Cosmology(Omega_c=0.27, Omega_b=0.045, h=0.67, A_s=2e-09, n_s=\n    0.96, transfer_function=tf)\nsigma8 = ccl.sigma8(cosmo)\ncosmo_s8 = ccl.Cosmology(Omega_c=0.27, Omega_b=0.045, h=0.67, sigma8=sigma8,\n    n_s=0.96, transfer_function=tf)\nassert np.allclose(ccl.sigma8(cosmo), ccl.sigma8(cosmo_s8))\na = 0.8\ngfac = (ccl.growth_factor(cosmo, a) / ccl.growth_factor(cosmo_s8, a)) ** 2\npk_rat = ccl.linear_matter_power(cosmo, 0.0001, a) / ccl.linear_matter_power(\n    cosmo_s8, 0.0001, a)\nassert np.allclose(pk_rat, gfac)\npytest.mark.parametrize('tf', ['boltzmann_class', 'boltzmann_camb',\n    'boltzmann_isitgr'])"
+}

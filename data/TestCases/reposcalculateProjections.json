@@ -1,0 +1,9 @@
+{
+    "functionName": "calculateProjections",
+    "className": "Sample",
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_Sample.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Calculate projections and generate projection angles.\"\"\"\nchecks = np.array(['unitCell', 'orientationMatrix', 'projectionVector1',\n    'projectionVector2'])\nboolcheck = np.logical_not(np.array([hasattr(self, x) for x in checks]))\nif np.any(boolcheck):\n    raise AttributeError('Sample object is missing: {}.'.format(', '.join(\n        str(x) for x in checks[boolcheck])))\nif self.projectionVector1[np.argmax(np.abs(self.projectionVector1))] < 0:\n    self.projectionVector1 *= -1\nif self.projectionVector2[np.argmax(np.abs(self.projectionVector2))] < 0:\n    self.projectionVector2 *= -1\nV1 = self.projectionVector1.copy()\nV2 = self.projectionVector2.copy()\npV1Q = np.dot(self.B, V1)\npV2Q = np.dot(self.B, V2)\nself.projectionAngle = _tools.vectorAngle(pV1Q, pV2Q)\nif np.isclose(0.0, self.projectionAngle):\n    raise AttributeError('The provided orientations are equal.')\nUB = self.orientationMatrix\nself.UB = UB\nself.orientationMatrixINV = np.linalg.inv(UB)\np23 = np.array([[1, 0, 0], [0, 1, 0]])\nPM = np.array([V1, V2]).T\nself.PM = PM\nself.convert = np.dot(p23, np.einsum('ij,jk->ik', UB, PM))\nself.convertHKL = np.dot(p23, UB)\ntry:\n    self.theta = -TasUBlib.calcTasMisalignment(UB, self.planeNormal, V1)\nexcept AttributeError:\n    self.theta = 0\nself.RotMat = _tools.Rot(self.theta)\nself.convertinv = np.linalg.inv(self.convert)\nself.convertHKLINV = _tools.invert(self.convertHKL)\nself.RotMat3D = np.eye(3)\nself.RotMat3D[:2, :2] = self.RotMat\nself.orientationMatrixINV = np.linalg.inv(self.UB)\n"
+}

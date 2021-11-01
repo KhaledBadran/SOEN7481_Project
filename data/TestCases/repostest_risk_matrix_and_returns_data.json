@@ -1,0 +1,9 @@
+{
+    "functionName": "test_risk_matrix_and_returns_data",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_expected_returns.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "df = get_data()\nfor method in {'mean_historical_return', 'ema_historical_return',\n    'james_stein_shrinkage', 'capm_return'}:\n    mu = expected_returns.return_model(df, method=method)\n    assert isinstance(mu, pd.Series)\n    assert list(mu.index) == list(df.columns)\n    assert mu.notnull().all()\n    assert mu.dtype == 'float64'\n    mu2 = expected_returns.return_model(expected_returns.\n        returns_from_prices(df), method=method, returns_data=True)\n    pd.testing.assert_series_equal(mu, mu2)\n"
+}

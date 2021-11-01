@@ -1,0 +1,9 @@
+{
+    "functionName": "test_previewgenerator",
+    "className": null,
+    "fileName": "/michalfilippi_&_PreviewGen/tests_&_previewergenerator_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "source_structure = [('img_1.jpg', 100, 100), ('img_2.jpg', 100, 100), (\n    'sub_1/img_1_1.jpg', 100, 100)]\ndestination_structure = [('img_1.jpg', 50, 50)]\nsource_dir, destination_dir = prepare_structure(tmpdir, source_structure,\n    destination_structure)\npreview_config = {'max_width': 50, 'max_height': 80, 'quality': 20}\nscanner_config = {'source_dir': str(source_dir), 'destination_dir': str(\n    destination_dir)}\nrun(scanner_config, preview_config)\nphoto = Image.open(str(destination_dir.join('sub_1/img_1_1.jpg')))\nassert photo.width == 50\nassert photo.height == 50\n"
+}

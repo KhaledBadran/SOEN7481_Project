@@ -1,0 +1,9 @@
+{
+    "functionName": "test_negative_offset_with_empty_stdin",
+    "className": "TestEmptyFile",
+    "fileName": "/kenfar_&_DataGristle/scripts_&_tests_&_test_gristle_slicer_cmd.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Should return error since stdin can't have negative offsets\n        \"\"\"\ncmd = \"cat %s , %s -d ',' -o %s -r -1:\" % (self.empty_fqfn, fq_pgm, self.\n    out_fqfn)\nr = envoy.run(cmd)\nassert r.status_code == 1\nout_recs = []\nfor rec in fileinput.input(self.out_fqfn):\n    out_recs.append(rec)\nfileinput.close()\nassert not out_recs\n"
+}

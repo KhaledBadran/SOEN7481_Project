@@ -1,0 +1,9 @@
+{
+    "functionName": "test_colnames_for_keycol_and_comparecol",
+    "className": "TestCommandLine",
+    "fileName": "/kenfar_&_DataGristle/scripts_&_tests_&_test_gristle_differ_cmd.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        \"\"\"\nself.dialect.delimiter = '\\t'\nfile1_recs = [['chg-row', '4', '14'], ['del-row', '6', '16'], ['same-row',\n    '8', '18']]\nfqfn1 = generate_test_file(self.temp_dir, 'old_', '.csv', self.dialect,\n    file1_recs)\nfile2_recs = [['chg-row', '4', '1a'], ['new-row', '13a', '45b'], [\n    'same-row', '8', '18']]\nfqfn2 = generate_test_file(self.temp_dir, 'new_', '.csv', self.dialect,\n    file2_recs)\nfn2 = basename(fqfn2)\nconfig = Config(self.temp_dir)\nconfig.add_property({'delimiter': 'tab'})\nconfig.add_property({'has_header': False})\nconfig.add_property({'quoting': csv.QUOTE_NONE})\nconfig.add_property({'col_names': ['col0', 'col1', 'col2']})\nconfig.add_property({'key_cols': ['col0']})\nconfig.add_property({'compare_cols': ['col2']})\nconfig.add_property({'temp_dir': self.temp_dir})\nconfig.add_property({'files': [fqfn1, fqfn2]})\nconfig.write_config()\ncmd = ' %s                     --config-fn %s               ' % (pjoin(\n    script_dir, 'gristle_differ'), config.config_fqfn)\nexecutor(cmd)\nassert self.file_cnt(fn2, '.insert') == 1\nassert self.file_cnt(fn2, '.delete') == 1\nassert self.file_cnt(fn2, '.chgold') == 1\nassert self.file_cnt(fn2, '.chgnew') == 1\nassert self.file_cnt(fn2, '.same') == 1\n"
+}

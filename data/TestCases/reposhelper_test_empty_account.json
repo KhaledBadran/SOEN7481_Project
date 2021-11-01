@@ -1,0 +1,9 @@
+{
+    "functionName": "helper_test_empty_account",
+    "className": "UITestCase",
+    "fileName": "/AndreMiras_&_EtherollApp/src_&_etherollapp_&_tests_&_ui_&_test_etheroll_ui.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Verifies the UI behaves as expected on empty account list.\"\"\"\ncontroller = app.root\naccounts = controller.account_utils.get_account_list()\nself.assertEqual(len(accounts), 0)\nroll_screen = controller.roll_screen\nroll_button = roll_screen.ids.roll_button_id\nself.assertEqual(roll_button.text, 'Roll')\nroll_button.dispatch('on_release')\ndialogs = Dialog.dialogs\nself.assertEqual(len(dialogs), 1)\ndialog = dialogs[0]\nself.assertEqual(dialog.title, 'No account selected')\ndialog.dismiss()\nself.assertEqual(len(dialogs), 0)\n"
+}

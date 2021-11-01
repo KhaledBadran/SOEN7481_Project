@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_expiration_date_validity",
+    "className": "FlaskEasyJWTTest",
+    "fileName": "/BMeu_&_Flask-EasyJWT/tests_&_flask_easyjwt_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n            Test getting the expiration date if the validity is set in the application's configuration.\n\n            Expected Result: The expiration date is the defined amount of time from now.\n        \"\"\"\nvalidity = timedelta(minutes=self.validity)\nself.app.config['EASYJWT_TOKEN_VALIDITY'] = validity\nlower_bound = datetime.utcnow().replace(microsecond=0) + validity\nexpiration_date = FlaskEasyJWT._get_config_expiration_date()\nupper_bound = datetime.utcnow().replace(microsecond=0) + validity\nself.assertIsNotNone(expiration_date)\nself.assertGreaterEqual(expiration_date, lower_bound)\nself.assertLessEqual(expiration_date, upper_bound)\n"
+}

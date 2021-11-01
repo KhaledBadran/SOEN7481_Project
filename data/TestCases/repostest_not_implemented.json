@@ -1,0 +1,9 @@
+{
+    "functionName": "test_not_implemented",
+    "className": "TestMaxPool3DNNLayer",
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_pool.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "try:\n    from lasagne.layers.dnn import MaxPool3DDNNLayer\nexcept ImportError:\n    pytest.skip('cuDNN not available')\nwith pytest.raises(NotImplementedError) as exc:\n    layer = MaxPool3DDNNLayer((1, 2, 3, 4, 5), pool_size=2, ignore_border=False\n        )\nassert 'Pool3DDNNLayer does not support ignore_border=False' in exc.value.args[\n    0]\n"
+}

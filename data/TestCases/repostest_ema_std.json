@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ema_std",
+    "className": null,
+    "fileName": "/fmilthaler_&_FinQuant/tests_&_test_moving_average.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "orig = np.array([[np.nan, 0.7071067811865476, 0.9746794344808964, \n    1.1143420667632726, 1.1785687889316867, 1.20612962779329, \n    1.217443715603457, 1.2219416913579804, 1.2236866244000921, \n    1.2243507269461653], [np.nan, 0.7071067811865476, 2.2693611435820435, \n    4.280032864205755, 6.511621880314852, 8.846731940915395, \n    11.231335395956103, 13.640730921938678, 16.063365414263, \n    18.493615652686387]])\ndforig = pd.DataFrame({'0': orig[0], '1': orig[1]}).dropna()\nl1 = range(10)\nl2 = [(i ** 2) for i in range(10)]\ndf = pd.DataFrame({'0': l1, '1': l2})\nres = ema_std(df, span=2).dropna()\nassert all((abs(dforig - res) <= 1e-15).all())\n"
+}

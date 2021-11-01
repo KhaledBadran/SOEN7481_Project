@@ -1,0 +1,9 @@
+{
+    "functionName": "test_full_normalization_sample_divide_by_ob_works",
+    "className": "TestApplyingROI",
+    "fileName": "/ornlneutronimaging_&_NeuNorm/tests_&_NeuNorm_&_normalizing_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"assert the full normalization works (when sample is divided by ob)\"\"\"\nsample_path = self.data_path + '/tif/sample'\nob_path = self.data_path + '/tif/ob'\ndf_path = self.data_path + '/tif/df'\no_norm = Normalization()\no_norm.load(folder=sample_path, auto_gamma_filter=False)\no_norm.load(folder=ob_path, data_type='ob', auto_gamma_filter=False)\no_norm.load(folder=df_path, data_type='df', auto_gamma_filter=False)\no_norm.normalization()\n_norm_expected = np.ones((5, 5))\n_norm_expected[:, (2)] = 2\n_norm_expected[:, (3)] = 3\n_norm_expected[:, (4)] = 4\n_norm_returned = o_norm.data['normalized']\nassert (_norm_expected == _norm_returned).all()\nsample_path = self.data_path + '/tif/sample'\nob_path = self.data_path + '/tif/ob'\ndf_path = self.data_path + '/tif/df'\no_norm = Normalization()\no_norm.load(folder=sample_path, auto_gamma_filter=False)\no_norm.load(folder=ob_path, data_type='ob', auto_gamma_filter=False)\no_norm.load(folder=df_path, data_type='df', auto_gamma_filter=False)\n_roi = ROI(x0=0, y0=0, x1=2, y1=2)\no_norm.normalization(roi=_roi)\n_norm_expected = np.ones((5, 5))\n_norm_expected.fill(0.8125)\n_norm_expected[:, (2)] = 1.625\n_norm_expected[:, (3)] = 2.4375\n_norm_expected[:, (4)] = 3.25\n_norm_returned = o_norm.data['normalized']\nassert (_norm_expected == _norm_returned).all()\n"
+}

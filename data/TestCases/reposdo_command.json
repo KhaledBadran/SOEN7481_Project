@@ -1,0 +1,9 @@
+{
+    "functionName": "do_command",
+    "className": "TrezorTestCase",
+    "fileName": "/bitcoin-core_&_HWI/test_&_test_trezor.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cli_args = []\nfor arg in args:\n    cli_args.append(shlex.quote(arg))\nif self.interface == 'cli':\n    proc = subprocess.Popen(['hwi ' + ' '.join(cli_args)], stdout=\n        subprocess.PIPE, stderr=subprocess.DEVNULL, shell=True)\n    result = proc.communicate()\n    return json.loads(result[0].decode())\nelif self.interface == 'bindist':\n    proc = subprocess.Popen(['../dist/hwi ' + ' '.join(cli_args)], stdout=\n        subprocess.PIPE, stderr=subprocess.DEVNULL, shell=True)\n    result = proc.communicate()\n    return json.loads(result[0].decode())\nelif self.interface == 'stdin':\n    input_str = '\\n'.join(args) + '\\n'\n    proc = subprocess.Popen(['hwi', '--stdin'], stdin=subprocess.PIPE,\n        stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)\n    result = proc.communicate(input_str.encode())\n    return json.loads(result[0].decode())\nelse:\n    return process_commands(args)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cleanup_before_restart",
+    "className": null,
+    "fileName": "/bio-phys_&_MDBenchmark/mdbenchmark_&_tests_&_mdengines_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that the cleanup of each directory works as intended for all MD engines.\"\"\"\ntmp = tmpdir.mkdir('mdbenchmark')\nfor f in (files_to_delete + files_to_keep):\n    open('{}/{}'.format(tmp, f), 'a').close()\nutils.cleanup_before_restart(engine=engine, sim=dtr.Tree(tmp.strpath))\nfiles_found = []\nfor f in files_to_keep:\n    files_found.extend(glob(os.path.join(tmp.strpath, f)))\nassert files_to_keep == [x[len(str(tmp)) + 1:] for x in files_found]\npytest.mark.parametrize('engine, files_to_delete, files_to_keep', [(gromacs,\n    ['job_thing.err.123job', 'job_thing.out.123job', 'md.log', 'md.xtc',\n    'md.cpt', 'md.edr', 'job.po12345', 'job.o12345', 'md.out'], ['md.mdp',\n    'md.tpr', 'bench.job']), (namd, ['job_thing.err.123job',\n    'job_thing.out.123job', 'job.po12345', 'job.o12345', 'benchmark.out'],\n    ['md.namd', 'md.pdb', 'md.psf', 'bench.job'])])"
+}

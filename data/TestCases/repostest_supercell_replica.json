@@ -1,0 +1,9 @@
+{
+    "functionName": "test_supercell_replica",
+    "className": null,
+    "fileName": "/mesonepigreco_&_CellConstructor/tests_&_TestReplicaSymmetry_&_test_supercell_replica.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "total_path = os.path.dirname(os.path.abspath(__file__))\nos.chdir(total_path)\nstruct = CC.Structure.Structure()\nstruct.read_scf('unit_cell_structure.scf')\nsuper_struct = struct.generate_supercell((2, 2, 1))\nprint('Space group before:')\nprint(spglib.get_spacegroup(super_struct.get_ase_atoms()))\nprint(len(spglib.get_symmetry(super_struct.get_ase_atoms())['translations']))\nspglib_syms = spglib.get_symmetry(super_struct.get_ase_atoms())\nsyms = CC.symmetries.GetSymmetriesFromSPGLIB(spglib_syms, False)\nnsyms = len(syms)\nd_structure = super_struct.copy()\nd_structure.coords += np.random.normal(scale=0.1, size=np.shape(d_structure\n    .coords))\nnew_d_structures = []\nfor i in range(nsyms):\n    irt = CC.symmetries.GetIRT(super_struct, syms[i])\n    u_disp = d_structure.coords - super_struct.coords\n    new_u_disp = CC.symmetries.ApplySymmetryToVector(syms[i], u_disp,\n        super_struct.unit_cell, irt[:])\n    tmp = super_struct.copy()\n    tmp.coords += new_u_disp\n    tmp.save_scf('replica_%d.scf' % i)\n    new_d_structures.append(tmp)\nnew_structure = super_struct.copy()\nnew_structure.coords = np.sum([x.coords for x in new_d_structures], axis=0\n    ) / nsyms\nprint('Symmetries after the sum:')\nprint(spglib.get_spacegroup(new_structure.get_ase_atoms()))\nprint(len(spglib.get_symmetry(new_structure.get_ase_atoms())['translations']))\nprint('Difference from the first one:')\nprint(np.sqrt(np.sum((new_structure.coords - super_struct.coords) ** 2)))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_verify_custom_key",
+    "className": "FlaskEasyJWTTest",
+    "fileName": "/BMeu_&_Flask-EasyJWT/tests_&_flask_easyjwt_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n            Test verifying a token created with a custom key.\n\n            Expected Result: The token can be verified with the custom key, but not with the extension's key.\n        \"\"\"\neasyjwt = FlaskEasyJWT(self.custom_key)\ntoken = easyjwt.create()\nwith self.assertRaises(InvalidSignatureError):\n    verified_easyjwt = FlaskEasyJWT.verify(token)\n    self.assertIsNone(verified_easyjwt)\nverified_easyjwt = FlaskEasyJWT.verify(token, self.custom_key)\nself.assertIsNotNone(verified_easyjwt)\n"
+}

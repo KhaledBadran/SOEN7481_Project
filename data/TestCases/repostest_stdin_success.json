@@ -1,0 +1,9 @@
+{
+    "functionName": "test_stdin_success",
+    "className": "CmdTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_cmd.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with self._capture_output_fixture() as stdout:\n    with mock.patch('sys.stdin', mock.Mock(read=mock.Mock(return_value=\n        'hello world ${x}'))):\n        cmdline(['--var', 'x=5', '-'])\neq_(stdout.write.mock_calls[0][1][0], 'hello world 5')\n"
+}

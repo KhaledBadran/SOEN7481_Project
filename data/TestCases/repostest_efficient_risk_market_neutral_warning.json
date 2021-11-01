@@ -1,0 +1,9 @@
+{
+    "functionName": "test_efficient_risk_market_neutral_warning",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_efficient_frontier.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ef = setup_efficient_frontier()\nwith warnings.catch_warnings(record=True) as w:\n    ef.efficient_risk(0.19, market_neutral=True)\n    assert len(w) == 1\n    assert issubclass(w[0].category, RuntimeWarning)\n    assert str(w[0].message\n        ) == 'Market neutrality requires shorting - bounds have been amended'\n"
+}

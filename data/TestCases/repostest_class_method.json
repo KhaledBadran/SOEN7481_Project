@@ -1,0 +1,9 @@
+{
+    "functionName": "test_class_method",
+    "className": "TestInsertCode",
+    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_bytecode_modification.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.original_stdout = sys.stdout\nsys.stdout = StringIO()\ntry:\n\n\n    class A(object):\n\n        @staticmethod\n        def foo():\n            print(\"i'm in foo\")\n\n        @staticmethod\n        def check_line_2():\n            tracing()\n            print(\"i'm in foo\")\n    original = A.foo\n    self.check_insert_to_line_with_exec(original, tracing, original.\n        __code__.co_firstlineno + 2)\n    self.check_insert_to_line_by_symbols(original, call_tracing, original.\n        __code__.co_firstlineno + 2, A.check_line_2.__code__)\nfinally:\n    sys.stdout = self.original_stdout\n"
+}

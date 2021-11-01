@@ -1,0 +1,9 @@
+{
+    "functionName": "test_protected_url_google_drive",
+    "className": "TestCase",
+    "fileName": "/IntegralDefense_&_ACE/lib_&_saq_&_modules_&_test_url.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "root = create_root_analysis()\nroot.initialize_storage()\nurl = root.add_observable(F_URL,\n    'https://drive.google.com/file/d/1ls_eBCsmf3VG_e4dgQiSh_5VUM10b9s2/view')\nurl.add_directive(DIRECTIVE_CRAWL)\nroot.save()\nroot.schedule()\nengine = TestEngine()\nengine.enable_module('analysis_module_protected_url_analyzer', 'test_groups')\nengine.controlled_stop()\nengine.start()\nengine.wait()\nroot.load()\nurl = root.get_observable(url.id)\nfrom saq.modules.url import ProtectedURLAnalysis, PROTECTION_TYPE_GOOGLE_DRIVE\nanalysis = url.get_analysis(ProtectedURLAnalysis)\nself.assertIsNotNone(analysis)\nself.assertEquals(analysis.protection_type, PROTECTION_TYPE_GOOGLE_DRIVE)\nself.assertEquals(analysis.extracted_url,\n    'https://drive.google.com/uc?authuser=0&id=1ls_eBCsmf3VG_e4dgQiSh_5VUM10b9s2&export=download'\n    )\nextracted_url = analysis.get_observables_by_type(F_URL)\nself.assertEquals(len(extracted_url), 1)\nextracted_url = extracted_url[0]\nself.assertTrue(extracted_url.has_directive(DIRECTIVE_CRAWL))\n"
+}

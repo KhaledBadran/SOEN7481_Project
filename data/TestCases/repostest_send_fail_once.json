@@ -1,0 +1,9 @@
+{
+    "functionName": "test_send_fail_once",
+    "className": "TestClient",
+    "fileName": "/akolar_&_ogn-lib/tests_&_test_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sock = self._get_mocked_socket(mocker, True)\nmocker.patch('socket.create_connection', return_value=sock)\ncl = client.OgnClient('username')\ncl._socket = mocker.Mock()\ncl._socket.sendall = mocker.Mock(side_effect=[BrokenPipeError, None])\ncl._reconnect = mocker.Mock()\ncl.send(\"\"\"\n\ntest\nmessage\n\n\n\"\"\")\nassert cl._socket.sendall.call_count == 2\nassert cl._reconnect.call_count == 1\n"
+}

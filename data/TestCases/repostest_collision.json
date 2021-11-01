@@ -1,0 +1,9 @@
+{
+    "functionName": "test_collision",
+    "className": "TestCollisions",
+    "fileName": "/hdoupe_&_ParamTools/paramtools_&_tests_&_test_parameters.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "defaults_dict = {'schema': {'labels': {}, 'additional_members': {}},\n    'errors': {'title': \"Collides with 'errors'\", 'description': '',\n    'notes': '', 'type': 'int', 'value': [{'value': 0}], 'validators': {\n    'range': {'min': 0, 'max': 10}}}}\nclass CollisionParams(Parameters):\n    defaults = defaults_dict\nwith pytest.raises(ParameterNameCollisionException) as excinfo:\n    CollisionParams()\nexp_msg = (\n    \"The paramter name, 'errors', is already used by the Parameters object.\")\nassert excinfo.value.args[0] == exp_msg\n"
+}

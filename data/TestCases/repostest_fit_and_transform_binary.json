@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fit_and_transform_binary",
+    "className": "TestFeatureBinarizerFromTrees",
+    "fileName": "/IBM_&_AIX360/tests_&_rbm_&_test_Feature_Binarizer_From_Trees.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "fbt = FeatureBinarizerFromTrees(treeNum=1, treeDepth=1, randomState=self.\n    random_state)\nfbt.fit(self.X_train[self.col_binary], self.y_train)\nself.assertListEqual(list(fbt.maps.keys()), ['bin alpha'])\ntemp = [('bin alpha', '', ''), ('bin alpha', 'not', '')]\nself.assertListEqual(fbt.features.to_list(), temp)\nT = fbt.transform(self.X_test)\nself.assertListEqual(T.columns.to_list(), temp)\nfbt = FeatureBinarizerFromTrees(treeNum=1, treeDepth=None, randomState=self\n    .random_state)\nfbt.fit(self.X_train[self.col_binary], self.y_train)\nself.assertListEqual(list(fbt.maps.keys()), self.col_binary)\ntemp = [('bin alpha', '', ''), ('bin alpha', 'not', ''), ('bin num', '', ''\n    ), ('bin num', 'not', '')]\nself.assertListEqual(fbt.features.to_list(), temp)\nT = fbt.transform(self.X_test)\nself.assertListEqual(fbt.features.to_list(), temp)\na = T['bin num', '', ''].to_numpy()\nb = (self.X_test['bin num'] == 1).astype(int).to_numpy()\nself.assertTrue(np.all(a == b))\na = T['bin num', 'not', ''].to_numpy()\nb = 1 - b\nself.assertTrue(np.all(a == b))\na = T['bin alpha', '', ''].to_numpy()\nb = (self.X_test['bin alpha'] == 'b').astype(int).to_numpy()\nself.assertTrue(np.all(a == b))\na = T['bin alpha', 'not', ''].to_numpy()\nb = 1 - b\nself.assertTrue(np.all(a == b))\n"
+}

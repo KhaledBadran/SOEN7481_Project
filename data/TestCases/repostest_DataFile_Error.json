@@ -1,0 +1,9 @@
+{
+    "functionName": "test_DataFile_Error",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_DataFile.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "df = DataFile('Data/camea2018n000136.hdf')\ntry:\n    df + df\n    assert False\nexcept NotImplementedError:\n    assert True\ndf.instrument = 'WrongInstrument'\ntry:\n    df.convert(binning=1)\n    assert False\nexcept AttributeError:\n    assert True\ndf2 = DataFile('Data/camea2018n000136.nxs')\ntry:\n    df.saveNXsqom('Data/saving.nxs')\n    assert False\nexcept AttributeError:\n    assert True\ndf2.type = 'WrongType'\ntry:\n    df2.saveNXsqom('Data/saving.nxs')\n    assert False\nexcept AttributeError:\n    assert True\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fit_start",
+    "className": "TestPartialOutputs",
+    "fileName": "/HDI-Project_&_MLBlocks/tests_&_features_&_test_partial_outputs.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "primitives = ['sklearn.preprocessing.StandardScaler',\n    'sklearn.linear_model.LogisticRegression']\npipeline = MLPipeline(primitives)\nblock_mock = Mock()\npipeline.blocks['sklearn.preprocessing.StandardScaler#1'] = block_mock\ncontext = {'X': self.X, 'y': self.y}\nint_start = 1\nstr_start = 'sklearn.linear_model.LogisticRegression#1'\npipeline.fit(start_=int_start, **context)\npipeline.fit(start_=str_start, **context)\nblock_mock.fit.assert_not_called()\n"
+}

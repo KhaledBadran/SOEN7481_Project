@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ymlparsers_load_single_no_substition",
+    "className": null,
+    "fileName": "/alex-ber_&_AlexBerUtils/tests_&_utils_&_ymlparsers_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "logger.info(f'{request._pyfuncitem.name}()')\npck = '.'.join(['tests_data', __package__, 'ymlparsers'])\nmock_lock = create_mock_lock(mocker)\nmocker.patch.object(HiYaPyCo, 'jinja2Lock', new=mock_lock, spec_set=True)\nwith path(pck, 'config.yml') as full_path:\n    with ymlparsers.DisableVarSubst():\n        default_d = ymlparsers.load([str(full_path)])\npytest.assume(mock_lock.acquire.call_count > 1)\npytest.assume(mock_lock.release.call_count == mock_lock.acquire.call_count)\napp_d = default_d.get('app', None)\nexp_d = copy.deepcopy(exp_config_d)\nexp_app_d = exp_d.get('app', None)\ninner_host_name = app_d.get('inner_host_name', None)\nexp_host_name = exp_app_d.get('inner_host_name', None)\npytest.assume(exp_host_name == inner_host_name)\ncli_template = app_d.get('cli_template')\npytest.assume('inner_host_name' in cli_template)\npytest.assume(exp_config_d == default_d)\npytest.mark.yml"
+}

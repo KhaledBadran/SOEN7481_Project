@@ -1,0 +1,9 @@
+{
+    "functionName": "testUpdateGenerationStrategyIncrementally",
+    "className": "SQAStoreTest",
+    "fileName": "/facebook_&_Ax/ax_&_storage_&_sqa_store_&_tests_&_test_sqa_store.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "experiment = get_branin_experiment()\ngeneration_strategy = choose_generation_strategy(experiment.search_space)\nsave_experiment(experiment=experiment)\nsave_generation_strategy(generation_strategy=generation_strategy)\ngenerator_runs = []\nfor i in range(7):\n    data = get_branin_data() if i > 0 else None\n    gr = generation_strategy.gen(experiment, data=data)\n    generator_runs.append(gr)\n    trial = experiment.new_trial(generator_run=gr).mark_running(\n        no_runner_required=True)\n    trial.mark_completed()\nsave_experiment(experiment=experiment)\nupdate_generation_strategy(generation_strategy=generation_strategy,\n    generator_runs=generator_runs)\nloaded_generation_strategy = load_generation_strategy_by_experiment_name(\n    experiment_name=experiment.name)\nself.assertEqual(generation_strategy._curr.index,\n    loaded_generation_strategy._curr.index, 1)\nself.assertEqual(len(loaded_generation_strategy._generator_runs), 7)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ymlparsers_load_multiple_no_substition",
+    "className": null,
+    "fileName": "/alex-ber_&_AlexBerUtils/tests_&_utils_&_ymlparsers_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "logger.info(f'{request._pyfuncitem.name}()')\nexp_d = copy.deepcopy(exp_config_d)\nexp_d['general']['log']['formatters']['detail'] = {'format':\n    '%(asctime)-14s %(levelname)s [%(name)s.%(funcName)s] %(message)s',\n    'datefmt': '%Y-%m-%d %H:%M:%S'}\nexp_d['general']['log']['root']['level'] = 'INFO'\nexp_d['app']['inner_host_name'] = 'yahoo.com'\nexp_d['app']['white_list'] = ['gamma', 'alpha', 'betha']\nexp_d['app']['alt_white_list'] = ['c', 'b', 'a']\npck = '.'.join(['tests_data', __package__, 'ymlparsers'])\nwith path(pck, 'config.yml') as full_path:\n    with path(pck, 'config-dev.yml') as full_dev_path:\n        with ymlparsers.DisableVarSubst():\n            default_d = ymlparsers.load([str(full_path), str(full_dev_path)])\napp_d = default_d.get('app', None)\nexp_app_d = exp_d.get('app', None)\ninner_host_name = app_d.get('inner_host_name', None)\nexp_host_name = exp_app_d.get('inner_host_name', None)\npytest.assume(exp_host_name == inner_host_name)\ncli_template = app_d.get('cli_template')\npytest.assume('inner_host_name' in cli_template)\npytest.assume(exp_d == default_d)\npytest.mark.yml"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_custom_mid",
+    "className": null,
+    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_engine_&_tests_&_test_lsi.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cache_dir = check_cache()\nfe = FeatureVectorizer(cache_dir=cache_dir, mode='w')\nuuid = fe.setup()\nfe.ingest(data_dir)\nmid_orig = 'sklds'\nlsi = _LSIWrapper(cache_dir=cache_dir, parent_id=uuid, mid=mid_orig, mode='w')\nlsi_res, exp_var = lsi.fit_transform(n_components=2, alpha=1.0)\nlsi._load_features()\nassert lsi.mid == mid_orig\nwith pytest.raises(WrongParameter):\n    lsi = _LSIWrapper(cache_dir=cache_dir, parent_id=uuid, mid=mid_orig,\n        mode='w')\n    lsi.fit_transform(n_components=2, alpha=1.0)\nlsi = _LSIWrapper(cache_dir=cache_dir, parent_id=uuid, mid=mid_orig, mode='fw')\nlsi.fit_transform(n_components=2, alpha=1.0)\nwith pytest.raises(WrongParameter):\n    lsi = _LSIWrapper(cache_dir=cache_dir, parent_id=uuid, mid='?', mode='fw')\n    lsi.fit_transform(n_components=2, alpha=1.0)\n"
+}

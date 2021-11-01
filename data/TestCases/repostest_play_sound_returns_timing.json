@@ -1,0 +1,9 @@
+{
+    "functionName": "test_play_sound_returns_timing",
+    "className": "TestStimuliGeneration",
+    "fileName": "/BciPy_&_BciPy/bcipy_&_helpers_&_tests_&_test_stimuli.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sound_file_path = 'test_sound_file_path'\nwhen(sf).read(sound_file_path, dtype='float32').thenReturn(('data', MOCK_FS))\nwhen(sd).play(any(), any()).thenReturn(None)\nwhen(core).wait(any()).thenReturn(None)\ntiming = play_sound(sound_file_path)\nself.assertIsInstance(timing, list)\nverify(sf, times=1).read(sound_file_path, dtype='float32')\nverify(sd, times=1).play('data', MOCK_FS)\nverify(core, times=2).wait(any())\n"
+}

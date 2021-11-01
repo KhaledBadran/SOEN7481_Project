@@ -1,0 +1,9 @@
+{
+    "functionName": "test_invalid_object_group_member",
+    "className": "TestLocateRequestPayload",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_locate.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a TypeError is raised when an invalid value is used to set\n        the object group member of a Locate request payload.\n        \"\"\"\nkwargs = {'object_group_member': 'invalid'}\nself.assertRaisesRegex(TypeError,\n    'Object group member must be an ObjectGroupMember enumeration.',\n    payloads.LocateRequestPayload, **kwargs)\nargs = payloads.LocateRequestPayload(), 'object_group_member', 'invalid'\nself.assertRaisesRegex(TypeError,\n    'Object group member must be an ObjectGroupMember enumeration.',\n    setattr, *args)\n"
+}

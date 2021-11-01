@@ -1,0 +1,9 @@
+{
+    "functionName": "test_base_level_handler",
+    "className": "TestEynnydWebappHandlers",
+    "fileName": "/cbefus_&_Eynnyd/tests_&_test_eynnyd_webapp.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "spy_handler = TestEynnydWebappHandlers.SpyHandler()\nroutes = RoutesBuilder().add_handler('GET', '/', spy_handler.test_handler\n    ).build()\ntest_app = EynnydWebappBuilder().set_routes(routes).build()\nrequest = TestEynnydWebappHandlers.StubRequest(method='GET', request_uri='/')\nresponse = test_app.process_request_to_response(request)\nself.assertEqual(1, spy_handler.handler_call_count)\nself.assertEqual(b'PANTS!', response.body.content)\n"
+}

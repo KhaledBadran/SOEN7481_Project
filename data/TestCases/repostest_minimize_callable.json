@@ -1,0 +1,9 @@
+{
+    "functionName": "test_minimize_callable",
+    "className": "TestBenchmark",
+    "fileName": "/facebook_&_Ax/ax_&_benchmark_&_tests_&_test_benchmark.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "problem = BenchmarkProblem(name='Branin', search_space=\n    get_branin_search_space(), optimization_config=\n    get_branin_optimization_config())\nexperiment, f = benchmark_minimize_callable(problem=problem, num_trials=20,\n    method_name='scipy', replication_index=2)\nres = minimize(fun=f, x0=np.zeros(2), bounds=[(-5, 10), (0, 15)], options={\n    'maxiter': 3}, method='Nelder-Mead')\nself.assertTrue(res.fun < 0)\nself.assertEqual(len(experiment.trials), res.nfev)\nself.assertEqual(len(experiment.fetch_data().df), res.nfev)\nself.assertEqual(experiment.name, 'scipy_on_Branin__v2')\nwith self.assertRaises(ValueError):\n    minimize(fun=f, x0=np.zeros(2), bounds=[(-5, 10), (0, 15)], method=\n        'Nelder-Mead')\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_measurement_sequence",
+    "className": "TestCombineMagic",
+    "fileName": "/PmagPy_&_PmagPy/pmagpy_tests_&_test_ipmag.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "df = cb.MagicDataFrame(os.path.join(self.input_dir, 'measurements.txt'))\ndf.df['specimen'] = df.df['specimen'].apply(lambda x: x + '_new')\ndf.write_magic_file('new_measurements.txt', dir_path=self.input_dir)\nres = ipmag.combine_magic(['measurements.txt', 'new_measurements.txt'],\n    'custom.out', input_dir_path=self.input_dir)\nself.assertTrue(res)\ndf = cb.MagicDataFrame('custom.out', dtype='measurements')\nself.assertEqual(df.df.sequence[-1], len(df.df))\n"
+}

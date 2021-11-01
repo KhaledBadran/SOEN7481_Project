@@ -1,0 +1,9 @@
+{
+    "functionName": "testEncodeDecode",
+    "className": "JSONStoreTest",
+    "fileName": "/facebook_&_Ax/ax_&_storage_&_json_store_&_tests_&_test_json_store.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "for class_, fake_func in TEST_CASES:\n    if class_ == 'BatchTrial' or class_ == 'Trial':\n        continue\n    if class_ == 'OrderConstraint' or class_ == 'SumConstraint':\n        continue\n    original_object = fake_func()\n    json_object = object_to_json(original_object)\n    converted_object = object_from_json(json_object)\n    if class_ == 'SimpleExperiment':\n        with self.assertRaises(Exception):\n            converted_object.evaluation_function()\n        original_object.evaluation_function = None\n        converted_object.evaluation_function = None\n    self.assertEqual(original_object, converted_object, msg=\n        f'Error encoding/decoding {class_}.')\n"
+}

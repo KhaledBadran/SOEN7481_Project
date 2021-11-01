@@ -1,0 +1,9 @@
+{
+    "functionName": "test_save_no_stdmet",
+    "className": "DataBuoyTests",
+    "fileName": "/GenSci_&_NDBC/tests_&_test_databuoy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "filename = 'test_buoy.json'\nself.DB.save(filename=filename)\nself.assertTrue(os.path.exists(filename))\nwith open(filename, 'r') as f:\n    station_json = f.read()\n    self.assertIn('station_id', station_json)\n    obj = json.loads(station_json)\n    self.assertIsInstance(obj, dict)\nos.remove(filename)\n"
+}

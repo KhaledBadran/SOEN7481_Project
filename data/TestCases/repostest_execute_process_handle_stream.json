@@ -1,0 +1,9 @@
+{
+    "functionName": "test_execute_process_handle_stream",
+    "className": "TestHedgehogClientProcessAPI",
+    "fileName": "/PRIArobotics_&_HedgehogClient/tests_&_test_async_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "pid = 2347\nasync with connect_dummy(Commands.execute_process_echo_asdf, pid) as client:\n    event = asyncio.Event()\n    counter = 0\n\n    async def on_stdout(_pid, fileno, chunk):\n        nonlocal counter\n        expect = [(pid, process.STDOUT, b'asdf\\n'), (pid, process.STDOUT, b'')]\n        assert (_pid, fileno, chunk) == expect[counter]\n        counter += 1\n        if counter == len(expect):\n            event.set()\n    assert await client.execute_process('echo', 'asdf', on_stdout=on_stdout\n        ) == pid\n    await event.wait()\npytest.mark.asyncio"
+}

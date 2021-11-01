@@ -1,0 +1,9 @@
+{
+    "functionName": "test_polarization_vectors_supercell",
+    "className": "TestStructureMethods",
+    "fileName": "/mesonepigreco_&_CellConstructor/scripts_&_cellconstructor_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "dyn = DownloadDynSnSe()\ndyn.Symmetrize()\nsuper_dyn = dyn.GenerateSupercellDyn(dyn.GetSupercell())\nw, pols = dyn.DiagonalizeSupercell()\nm = np.tile(super_dyn.structure.get_masses_array(), (3, 1)).T.ravel()\nnew_v = np.einsum('ab, a-> ab', pols, np.sqrt(m))\nsup_dyn = np.einsum('i, ai, bi->ab', w ** 2, new_v, new_v)\n__tollerance__ = 1e-06\nn_modes = len(w)\ns_mat = pols.T.dot(pols)\ndelta_mat = s_mat - np.eye(n_modes)\nself.assertTrue(np.sum(delta_mat ** 2) < __tollerance__)\ndelta = np.sum(np.abs(super_dyn.dynmats[0] - sup_dyn))\nself.assertTrue(delta < __tollerance__)\n"
+}

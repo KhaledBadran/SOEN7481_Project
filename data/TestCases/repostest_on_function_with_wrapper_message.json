@@ -1,0 +1,9 @@
+{
+    "functionName": "test_on_function_with_wrapper_message",
+    "className": "TestRetryDecorator",
+    "fileName": "/facebook_&_Ax/ax_&_utils_&_common_&_tests_&_test_executils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Tests that the decorator works on standalone functions as well as on\n        instance methods.\n        \"\"\"\nmock = Mock()\n@retry_on_exception(wrap_error_message_in='Wrapper error message')\ndef error_throwing_function():\n    mock()\n    raise RuntimeError('I failed')\nwith self.assertRaisesRegex(RuntimeError,\n    'Wrapper error message: RuntimeError: I failed'):\n    error_throwing_function()\nself.assertEqual(mock.call_count, 3)\n"
+}

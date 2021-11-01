@@ -1,0 +1,9 @@
+{
+    "functionName": "test_explicit_dialect_pipes_noquotes_noheader",
+    "className": "TestCommandLine",
+    "fileName": "/kenfar_&_DataGristle/scripts_&_tests_&_test_gristle_differ_cmd.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        \"\"\"\nfile1_recs = [['chg-row', '4', '14'], ['del-row', '6', '16'], ['same-row',\n    '8', '18']]\nfqfn1 = generate_test_file(self.temp_dir, 'old_', '.csv', self.dialect,\n    file1_recs)\nfile2_recs = [['chg-row', '4', '1a'], ['new-row', '13a', '45b'], [\n    'same-row', '8', '18']]\nfqfn2 = generate_test_file(self.temp_dir, 'new_', '.csv', self.dialect,\n    file2_recs)\nfn2 = basename(fqfn2)\ncmd = [pjoin(script_dir, 'gristle_differ'), fqfn1, fqfn2, '-k', '0', '-c',\n    '2', '--delimiter', '|', '--quoting', 'quote_none', '--has-no-header',\n    '--temp-dir', self.temp_dir]\nrunner = subprocess.Popen(cmd, close_fds=True, stdout=subprocess.PIPE,\n    stderr=subprocess.PIPE)\nstdout, stderr = runner.communicate()\nprint('------- std_out ------')\nprint(stdout)\nprint(stderr)\nassert runner.returncode == 0\nassert self.file_cnt(fn2, '.insert') == 1\nassert self.file_cnt(fn2, '.delete') == 1\nassert self.file_cnt(fn2, '.chgold') == 1\nassert self.file_cnt(fn2, '.chgnew') == 1\nassert self.file_cnt(fn2, '.same') == 1\n"
+}

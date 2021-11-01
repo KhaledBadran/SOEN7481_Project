@@ -1,0 +1,9 @@
+{
+    "functionName": "test_orientation_transform",
+    "className": null,
+    "fileName": "/poletaevvlad_&_CubeLang/test_&_test_actions.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cube1 = Cube((3, 3, 3))\ncube2 = Cube((3, 3, 3))\nturn.perform(cube1, orientation)\norigin = Orientation()\nturn.from_orientation(orientation, origin).perform(cube2, origin)\nfor side in Side:\n    o = Orientation.regular(side)\n    assert str(cube1.get_side(o).colors) == str(cube2.get_side(o).colors)\npytest.mark.parametrize('orientation, turn', cartesian(list(\n    _iterate_orientations()), [Turn(Side.LEFT, 1), Turn(Side.LEFT, 1, 3),\n    Turn(Side.RIGHT, 1), Turn(Side.RIGHT, 1, 3), Turn(Side.TOP, 1), Turn(\n    Side.TOP, 1, 3), Turn(Side.BOTTOM, 1), Turn(Side.BOTTOM, 1, 3), Turn(\n    Side.FRONT, 1), Turn(Side.FRONT, 1, 3), Turn(Side.BACK, 1), Turn(Side.\n    BACK, 1, 3)]))"
+}

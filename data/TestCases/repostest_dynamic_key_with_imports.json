@@ -1,0 +1,9 @@
+{
+    "functionName": "test_dynamic_key_with_imports",
+    "className": "CacheTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_cache.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "lookup = TemplateLookup()\nlookup.put_string('foo.html',\n    \"\"\"\n        <%!\n            callcount = [0]\n        %>\n        <%namespace file=\"ns.html\" import=\"*\"/>\n        <%page cached=\"True\" cache_key=\"${foo}\"/>\n        this is foo\n        <%\n        callcount[0] += 1\n        %>\n        callcount: ${callcount}\n\"\"\"\n    )\nlookup.put_string('ns.html', '')\nt = lookup.get_template('foo.html')\nm = self._install_mock_cache(t)\nt.render(foo='somekey')\nt.render(foo='somekey')\nassert result_lines(t.render(foo='somekey')) == ['this is foo',\n    'callcount: [1]']\nassert m.kwargs == {}\n"
+}

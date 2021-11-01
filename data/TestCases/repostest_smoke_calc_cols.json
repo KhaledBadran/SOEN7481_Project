@@ -1,0 +1,9 @@
+{
+    "functionName": "test_smoke_calc_cols",
+    "className": null,
+    "fileName": "/CyberReboot_&_NetworkML/tests_&_test_funcs_host.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "instance = HostBase()\ntest_data = {field: None for field in WS_FIELDS}\neth_src = '0e:00:00:00:00:01'\neth_src_int = int(netaddr.EUI(eth_src))\ntest_data.update({'ip.version': 4, 'eth.src': eth_src_int, 'eth.dst':\n    eth_src_int, '_srcip': '192.168.0.1', '_dstip': '192.168.0.2'})\nmac_df = recast_df(pd.DataFrame([test_data]))\nassert instance._calc_cols(eth_src_int, mac_df)\n"
+}

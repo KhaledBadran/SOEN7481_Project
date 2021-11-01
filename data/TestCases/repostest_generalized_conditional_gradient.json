@@ -1,0 +1,9 @@
+{
+    "functionName": "test_generalized_conditional_gradient",
+    "className": null,
+    "fileName": "/PythonOT_&_POT/test_&_test_optim.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "n_bins = 100\nnp.random.seed(0)\nx = np.arange(n_bins, dtype=np.float64)\na = ot.datasets.make_1D_gauss(n_bins, m=20, s=5)\nb = ot.datasets.make_1D_gauss(n_bins, m=60, s=10)\nM = ot.dist(x.reshape((n_bins, 1)), x.reshape((n_bins, 1)))\nM /= M.max()\ndef f(G):\n    return 0.5 * np.sum(G ** 2)\ndef df(G):\n    return G\nreg1 = 0.001\nreg2 = 0.1\nG, log = ot.optim.gcg(a, b, M, reg1, reg2, f, df, verbose=True, log=True)\nnp.testing.assert_allclose(a, G.sum(1), atol=1e-05)\nnp.testing.assert_allclose(b, G.sum(0), atol=1e-05)\n"
+}

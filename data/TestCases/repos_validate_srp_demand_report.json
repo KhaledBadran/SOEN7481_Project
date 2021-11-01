@@ -1,0 +1,9 @@
+{
+    "functionName": "_validate_srp_demand_report",
+    "className": "CITestProvisioning",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Helper method to validate SRP demand report contents.\n\n        :param srp_report:  SRP demand report -- dict\n        \"\"\"\nself.assertIsInstance(srp_report, dict)\nself.assertIn(constants.STORAGE_GROUP_DEMAND, srp_report)\nself.assertIsInstance(srp_report[constants.STORAGE_GROUP_DEMAND], list)\nsubscribed_gb = 'subscribed_gb'\nallocated_gb = 'allocated_gb'\nused_gb = 'used_gb'\nsnapshot_allocated_gb = 'snapshot_allocated_gb'\nsnapshot_used_gb = 'snapshot_used_gb'\ncompression_ratio_to_one = 'compression_ratio_to_one'\nfor report in srp_report[constants.STORAGE_GROUP_DEMAND]:\n    self.assertIsInstance(report, dict)\n    self.assertIn(constants.STORAGE_GROUP_ID_CAMEL, report)\n    self.assertIn(constants.EMULATION, report)\n    self.assertIn(subscribed_gb, report)\n    self.assertIn(allocated_gb, report)\n    self.assertIn(constants.ALLOCATED_PERCENT, report)\n    self.assertIn(used_gb, report)\n    self.assertIn(snapshot_allocated_gb, report)\n    self.assertIn(snapshot_used_gb, report)\n    self.assertIsInstance(report[constants.STORAGE_GROUP_ID_CAMEL], str)\n    self.assertIsInstance(report[constants.EMULATION], str)\n    self.assertIsInstance(report[subscribed_gb], float)\n    self.assertIsInstance(report[allocated_gb], float)\n    self.assertIsInstance(report[constants.ALLOCATED_PERCENT], int)\n    self.assertIsInstance(report[used_gb], float)\n    self.assertIsInstance(report[snapshot_allocated_gb], float)\n    self.assertIsInstance(report[snapshot_used_gb], float)\n    if compression_ratio_to_one in report:\n        self.assertIs(float, type(report[compression_ratio_to_one]))\n"
+}

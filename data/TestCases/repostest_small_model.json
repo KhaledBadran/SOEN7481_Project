@@ -1,0 +1,9 @@
+{
+    "functionName": "test_small_model",
+    "className": "ModelTest",
+    "fileName": "/halide_&_Halide/apps_&_onnx_&_model_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "X = helper.make_tensor_value_info('IN', TensorProto.FLOAT, [2, 3])\nY = helper.make_tensor_value_info('OUT', TensorProto.FLOAT, [2, 3])\nnode_def = helper.make_node('Abs', ['IN'], ['OUT'])\ngraph_def = helper.make_graph([node_def], 'test-model', [X], [Y])\nonnx_model = helper.make_model(graph_def, producer_name='onnx-example')\nmodel = Model()\nmodel.BuildFromOnnxModel(onnx_model)\nschedule = model.OptimizeSchedule()\nschedule = schedule.replace('\\n', ' ')\nexpected_schedule = (\n    '// --- BEGIN machine-generated schedule // Target: .+// MachineParams: .+// Delete this line if not using Generator Pipeline pipeline = get_pipeline\\\\(\\\\);.+Func OUT = pipeline.get_func\\\\(1\\\\);.+{.+}.+'\n    )\nself.assertRegex(schedule, expected_schedule)\ninput = np.random.rand(2, 3) - 0.5\noutputs = model.run([input])\nself.assertEqual(1, len(outputs))\noutput = outputs[0]\nexpected = np.abs(input)\nnp.testing.assert_allclose(expected, output)\n"
+}

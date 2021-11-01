@@ -1,0 +1,9 @@
+{
+    "functionName": "test_reconstruct_parameters",
+    "className": null,
+    "fileName": "/viebboy_&_PyGOP/test_&_utility_&_test_misc.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tmp_dir = tmpdir.dirname\nmodel_name = 'test_model'\nif os.path.exists(os.path.join(tmp_dir, model_name)):\n    shutil.rmtree(os.path.join(tmp_dir, model_name))\nos.mkdir(os.path.join(tmp_dir, model_name))\nparams = {'tmp_dir': tmp_dir, 'model_name': model_name, 'loss': 'mse',\n    'metrics': ['mse', utility.mean_absolute_error_keras],\n    'special_metrics': [utility.mean_absolute_error_numpy], 'nodal_set': [\n    'multiplication', utility.custom_nodal], 'pool_set': ['summation'],\n    'activation_set': ['relu']}\ntrain_states = {'name': 'state1'}\ntrain_func = utility.get_generator\ntrain_data = [INPUT_DIM, OUTPUT_DIM, BATCH_SIZE, STEPS]\nval_func = None\nval_data = None\ntest_func = utility.get_generator\ntest_data = [INPUT_DIM, OUTPUT_DIM, BATCH_SIZE, STEPS]\nmisc.dump_data(params, train_states, train_func, train_data, val_func,\n    val_data, test_func, test_data)\nparams_reconstruct = copy.deepcopy(params)\nparams_reconstruct['metrics'] = []\nparams_reconstruct['special_metrics'] = []\nparams_reconstruct['nodal_set'] = []\nparams_reconstruct['pool_set'] = []\nparams_reconstruct['activation_set'] = []\nparams_reconstruct = misc.reconstruct_parameters(params_reconstruct)\nassert params_reconstruct == params\nshutil.rmtree(os.path.join(tmp_dir, model_name))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_backdoor",
+    "className": "TestIxnOffline",
+    "fileName": "/shmir_&_PyIxNetwork/tests_&_test_offline.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Test cdirect access to REST objects \"\"\"\nself.logger.info(TestIxnOffline.test_backdoor.__doc__)\nif self.api != ApiType.rest:\n    pytest.skip('backdoor supported only for rest API')\nprint('session = {}'.format(self.ixn.api.session))\nixn_globals = self.ixn.api.getList(self.ixn.root.ref, 'globals')[0]\nprint('ixn_globals = {}'.format(ixn_globals))\nprint(self.ixn.api.getAttributes(ixn_globals))\nixn_prefs = self.ixn.api.getList(ixn_globals, 'preferences')[0]\nprint('ixn_prefs = {}'.format(ixn_prefs))\nprint(self.ixn.api.getAttributes(ixn_prefs))\nself.ixn.api.setAttributes(ixn_prefs, connectPortsOnLoadConfig=True)\nprint(self.ixn.api.getAttributes(ixn_prefs))\n"
+}

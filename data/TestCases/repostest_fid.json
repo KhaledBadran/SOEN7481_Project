@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fid",
+    "className": null,
+    "fileName": "/SunPower_&_PVMismatch/pvmismatch_&_contrib_&_gen_coeffs_&_tests_&_test_diode.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test diode current.\n    \"\"\"\nisat, vd, m, vt = sympy.symbols(['isat', 'vd', 'm', 'vt'])\nid_ = isat * (sympy.exp(vd / m / vt) - 1.0)\nd_isat = sympy.diff(id_, isat)\nd_vd = sympy.diff(id_, vd)\nd_m = sympy.diff(id_, m)\nd_vt = sympy.diff(id_, vt)\ntest_data1 = {'isat': ISAT_1, 'vd': VD_1, 'm': M_1, 'vt': VT}\nfid_test1, jid_test1 = diode.fid(**test_data1)\nfid_expected1 = np.float(id_.evalf(subs=test_data1))\njid_expected1 = np.array([d_isat.evalf(subs=test_data1), d_vd.evalf(subs=\n    test_data1), d_m.evalf(subs=test_data1), d_vt.evalf(subs=test_data1)],\n    dtype=np.float)\nLOGGER.debug('test: %g = expected: %g', fid_test1, fid_expected1)\nassert np.isclose(fid_test1, fid_expected1)\nassert np.allclose(jid_test1, jid_expected1.reshape(-1, 1))\ntest_data2 = np.array([ISAT1_2, ISAT2_2]), np.array([VD_1, VD_1]), np.array([\n    1.0, 2.0]), np.array([VT, VT])\nfid_test2, jid_test2 = diode.fid(*test_data2)\nargs, math_mod = (isat, vd, m, vt), ('numpy',)\ng_id = sympy.lambdify(args, id_, modules=math_mod)\ng_d_isat = sympy.lambdify(args, d_isat, modules=math_mod)\ng_d_vd = sympy.lambdify(args, d_vd, modules=math_mod)\ng_d_m = sympy.lambdify(args, d_m, modules=math_mod)\ng_d_vt = sympy.lambdify(args, d_vt, modules=math_mod)\nfid_expected2 = g_id(*test_data2)\njid_expected2 = np.array([g_d_isat(*test_data2), g_d_vd(*test_data2), g_d_m\n    (*test_data2), g_d_vt(*test_data2)], dtype=np.float)\nassert np.allclose(fid_test2, fid_expected2)\nassert np.allclose(jid_test2, jid_expected2)\n"
+}

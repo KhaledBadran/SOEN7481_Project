@@ -1,0 +1,9 @@
+{
+    "functionName": "test_convert_tiles_to_faces",
+    "className": null,
+    "fileName": "/ECCO-GROUP_&_ECCOv4-py/ecco_v4_py_&_test_&_test_llc_array_conversion.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Read in tiles data, convert to faces. \n    Verify this equals reading in face data\n    \"\"\"\nfor fname, nk, nl in zip(_TEST_FILES, _TEST_NK, _TEST_RECS):\n    data_tiles = ecco.read_llc_to_tiles(fdir=_DATA_DIR, fname=fname, llc=90,\n        nk=nk, nl=nl, filetype='>f4', less_output=False)\n    data_faces = ecco.read_llc_to_faces(fdir=_DATA_DIR, fname=fname, llc=90,\n        nk=nk, nl=nl, filetype='>f4', less_output=False)\n    data_converted = ecco.llc_tiles_to_faces(data_tiles)\n    for f in range(1, len(data_faces) + 1):\n        assert np.all(np.equal(data_converted[f], data_faces[f]))\n"
+}

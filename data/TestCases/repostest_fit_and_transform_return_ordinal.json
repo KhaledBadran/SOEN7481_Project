@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fit_and_transform_return_ordinal",
+    "className": "TestFeatureBinarizerFromTrees",
+    "fileName": "/IBM_&_AIX360/tests_&_rbm_&_test_Feature_Binarizer_From_Trees.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "fbt = FeatureBinarizerFromTrees(treeNum=1, treeDepth=3, returnOrd=True,\n    colCateg=self.col_categorical, randomState=self.random_state)\nfbt.fit(self.X_train[['mean area', 'mean concave points', 'cat num',\n    'cat alpha']], self.y_train)\nself.assertListEqual(fbt.ordinal, ['mean area', 'mean concave points'])\nself.assertTrue(type(fbt.scaler) is StandardScaler)\nself.assertTrue(fbt.scaler.transform(self.X_test[fbt.ordinal]).shape[1] == 2)\n"
+}

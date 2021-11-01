@@ -1,0 +1,9 @@
+{
+    "functionName": "test_unit_train_classify",
+    "className": null,
+    "fileName": "/Merck_&_DeepBGC/test_&_unit_&_commands_&_test_unit_train.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tmpdir = str(tmpdir)\nout_path = os.path.join(tmpdir, 'model.pkl')\nrun(['train', '--model', get_test_file('random_forest_test.json'),\n    '--classes', get_test_file('BGC0000015.classes.csv'), '--output',\n    out_path, get_test_file('BGC0000015.pfam.csv')])\nassert os.path.exists(out_path)\nmodel = SequenceModelWrapper.load(out_path)\ndomains = pd.read_csv(get_test_file('BGC0000015.pfam.csv'))\nclasses = model.predict([sample for _, sample in domains.groupby(\n    'sequence_id')])\nassert isinstance(classes, pd.DataFrame)\nassert list(classes.columns) == ['class1', 'class2', 'class3', 'class4']\nassert len(classes.index) == 2\nassert list(classes.iloc[0] > 0.5) == [True, False, True, False]\nassert list(classes.iloc[1] > 0.5) == [False, True, False, True]\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_decode_invalid_graphs",
+    "className": "TestPENMANCodec",
+    "fileName": "/goodmami_&_penman/tests_&_test_codec.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "g = decode('(g / )')\nassert g.triples == [('g', ':instance', None)]\ng = decode('(g / :ARG0 (i / i))')\nassert g.triples == [('g', ':instance', None), ('g', ':ARG0', 'i'), ('i',\n    ':instance', 'i')]\ng = decode('(g / go :ARG0 :ARG1 (t / there))')\nassert g.triples == [('g', ':instance', 'go'), ('g', ':ARG0', None), ('g',\n    ':ARG1', 't'), ('t', ':instance', 'there')]\nwith pytest.raises(penman.DecodeError):\n    decode('(')\nwith pytest.raises(penman.DecodeError):\n    decode('(a')\nwith pytest.raises(penman.DecodeError):\n    decode('(a /')\nwith pytest.raises(penman.DecodeError):\n    decode('(a / alpha')\nwith pytest.raises(penman.DecodeError):\n    decode('(a b)')\n"
+}

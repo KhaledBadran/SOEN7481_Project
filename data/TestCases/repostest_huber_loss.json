@@ -1,0 +1,9 @@
+{
+    "functionName": "test_huber_loss",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_test_objectives.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from lasagne.objectives import huber_loss\nif not colvect:\n    a, b = theano.tensor.matrices('ab')\n    l = huber_loss(a, b, delta)\nelse:\n    a, b = theano.tensor.vectors('ab')\n    l = huber_loss(a.dimshuffle(0, 'x'), b, delta)[:, (0)]\nfloatX = theano.config.floatX\nshape = (10, 20) if not colvect else (10,)\nx = np.random.rand(*shape).astype(floatX)\ny = np.random.rand(*shape).astype(floatX)\nabs_diff = abs(x - y)\nift = 0.5 * abs_diff ** 2\niff = delta * (abs_diff - delta / 2.0)\nz = np.where(abs_diff <= delta, ift, iff)\nassert np.allclose(z, l.eval({a: x, b: y}))\npytest.mark.parametrize('colvect', (False, True))pytest.mark.parametrize('delta', (0.5, 1.0))"
+}

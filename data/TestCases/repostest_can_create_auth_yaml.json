@@ -1,0 +1,9 @@
+{
+    "functionName": "test_can_create_auth_yaml",
+    "className": "TweepyXTest",
+    "fileName": "/schlind_&_Karlsruher/tests_&_tweepyx_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Auth file created\"\"\"\nwith managed_io() as stdio:\n    tweepyx.create_auth_yaml(self.yaml_file.name)\nself.assertTrue(os.path.exists(self.yaml_file.name))\nwith open(self.yaml_file.name, 'r') as f:\n    self.assertEqual(['twitter:\\n', '    consumer:\\n', \"        key: 'A'\\n\",\n        \"\"\"        secret: 'B'\n\"\"\", '    access:\\n', \"        key: 'C'\\n\",\n        \"        secret: 'D'\"], f.readlines())\npatch('builtins.input', mock.Mock(side_effect=['A', 'B', 'C', 'D']))"
+}

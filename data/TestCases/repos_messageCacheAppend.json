@@ -1,0 +1,9 @@
+{
+    "functionName": "_messageCacheAppend",
+    "className": "Chat",
+    "fileName": "/named-data_&_PyNDN2/examples_&_test_chrono_chat.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        Append a new CachedMessage to messageCache_, using given messageType and\n        message, the sequence number from _sync.getSequenceNo() and the current\n        time. Also remove elements from the front of the cache as needed to keep\n        the size to _maxMessageCacheLength.\n        \"\"\"\nself._messageCache.append(self._CachedMessage(self._sync.getSequenceNo(),\n    messageType, message, self.getNowMilliseconds()))\nwhile len(self._messageCache) > self._maxMessageCacheLength:\n    self._messageCache.pop(0)\n"
+}

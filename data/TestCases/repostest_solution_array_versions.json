@@ -1,0 +1,9 @@
+{
+    "functionName": "test_solution_array_versions",
+    "className": null,
+    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_bspline.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from pypeit.bspline.utilpy import solution_arrays as sol_py\nfrom pypeit.bspline.utilc import solution_arrays as sol_c\nd = np.load(data_path('solution_arrays.npz'))\npytime = time.perf_counter()\na, b = sol_py(d['nn'], d['npoly'], d['nord'], d['ydata'], d['action'], d[\n    'ivar'], d['upper'], d['lower'])\npytime = time.perf_counter() - pytime\nctime = time.perf_counter()\n_a, _b = sol_c(d['nn'], d['npoly'], d['nord'], d['ydata'], d['action'], d[\n    'ivar'], d['upper'], d['lower'])\nctime = time.perf_counter() - ctime\nassert ctime < pytime, 'C is less efficient!'\nassert np.allclose(a, _a), 'Differences in alpha'\nassert np.allclose(b, _b), 'Differences in beta'\nbspline_ext_required"
+}

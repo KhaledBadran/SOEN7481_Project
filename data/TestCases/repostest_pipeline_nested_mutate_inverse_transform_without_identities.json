@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pipeline_nested_mutate_inverse_transform_without_identities",
+    "className": null,
+    "fileName": "/Neuraxio_&_Neuraxle/testing_&_test_pipeline.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    This test was required for a strange bug at the border of the pipelines\n    that happened when the identities were not used.\n    \"\"\"\nexpected_tape = ['1', '2', '3', '4', '5', '6', '7', '7', '6', '5', '4', '3',\n    '2', '1']\ntape = TapeCallbackFunction()\np = Pipeline([TransformCallbackStep(tape.callback, ['1']),\n    TransformCallbackStep(tape.callback, ['2']), Pipeline([\n    TransformCallbackStep(tape.callback, ['3']), TransformCallbackStep(tape\n    .callback, ['4']), TransformCallbackStep(tape.callback, ['5'])]),\n    TransformCallbackStep(tape.callback, ['6']), TransformCallbackStep(tape\n    .callback, ['7'])])\np, _ = p.fit_transform(np.ones((1, 1)))\nprint('[mutating, inversing, and calling each inverse_transform]')\nreversed(p).transform(np.ones((1, 1)))\nprint(expected_tape)\nprint(tape.get_name_tape())\nassert expected_tape == tape.get_name_tape()\n"
+}

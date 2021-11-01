@@ -1,0 +1,9 @@
+{
+    "functionName": "test_complexity_vs_R",
+    "className": null,
+    "fileName": "/neuropsychology_&_NeuroKit/tests_&_tests_complexity.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "signal = pd.read_csv(\n    'https://raw.githubusercontent.com/neuropsychology/NeuroKit/master/data/bio_eventrelated_100hz.csv'\n    )['RSP'].values\nr = 0.2 * np.std(signal, ddof=1)\napen = nk.entropy_approximate(signal, dimension=2, r=r)\nassert np.allclose(apen, 0.04383386, atol=0.0001)\napen = nk.entropy_approximate(signal, dimension=3, delay=2, r=1)\nassert np.allclose(apen, 0.0004269369, atol=0.0001)\napen = nk.entropy_approximate(signal[0:200], dimension=2, delay=1, r=r)\nassert np.allclose(apen, 0.03632554, atol=0.0001)\nsampen = nk.entropy_sample(signal[0:300], dimension=2, r=r)\nassert np.allclose(sampen, nk.entropy_sample(signal[0:300], dimension=2, r=\n    r, distance='infinity'), atol=0.001)\nassert np.allclose(sampen, 0.03784376, atol=0.001)\nsampen = nk.entropy_sample(signal[0:300], dimension=3, delay=2, r=r)\nassert np.allclose(sampen, 0.09185509, atol=0.01)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fixture_reader_thread3",
+    "className": null,
+    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_fixtures.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sock = _DummySocket()\nreader_thread = ReaderThread(sock)\nreader_thread.start()\nmsg = 'aaaaaaabbbbbbbccccccc'\nhttp = 'Content-Length: %s\\r\\n\\r\\n%s' % (len(msg), msg)\nhttp *= 2\ninitial = http\nfor i in range(1, len(http)):\n    while http:\n        sock.put(http[:i])\n        http = http[i:]\n    assert reader_thread.get_next_message('check 1: %s' % i) == msg\n    assert reader_thread.get_next_message('check 2: %s' % i) == msg\n    http = initial\n"
+}

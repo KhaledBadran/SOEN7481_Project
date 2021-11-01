@@ -1,0 +1,9 @@
+{
+    "functionName": "test_compleconta_cv",
+    "className": "TestTrexClassifier",
+    "fileName": "/univieCUBE_&_phenotrex/tests_&_test_ml.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Perform compleconta-cv for each trait name using TrexClassifier class.\n        :param trait_name:\n        :param classifier:\n        :return:\n        \"\"\"\ntraining_records, genotype, phenotype, group = self.test_load_data(trait_name,\n    False)\nclf = classifier(verb=True, random_state=RANDOM_STATE)\ncccv_scores = clf.crossvalidate_cc(records=training_records, cv=5,\n    comple_steps=3, conta_steps=3, n_jobs=min(4, os.cpu_count()))\nassert isinstance(cccv_scores, dict)\nwith TemporaryDirectory() as tmpdir:\n    fp = Path(tmpdir) / 'cccv.json'\n    write_cccv_accuracy_file(fp, cccv_results=cccv_scores)\n    assert fp.is_file()\npytest.mark.parametrize('trait_name', trait_names, ids=trait_names)pytest.mark.parametrize('classifier', classifiers, ids=classifier_ids)"
+}

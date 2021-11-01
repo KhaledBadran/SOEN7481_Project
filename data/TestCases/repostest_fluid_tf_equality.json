@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fluid_tf_equality",
+    "className": "TestFluidTF",
+    "fileName": "/tum-pbs_&_PhiFlow/tests_&_test_fluid_tf.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tf.reset_default_graph()\n_sess = tf.InteractiveSession()\nfor domain in [Domain([8, 6], boundaries=OPEN), Domain([8, 6], boundaries=\n    STICKY), Domain([8, 6], boundaries=SLIPPERY), Domain([8, 6], boundaries\n    =PERIODIC), Domain([8, 6], boundaries=[PERIODIC, [OPEN, STICKY]])]:\n    print('Comparing on domain %s' % (domain.boundaries,))\n    np_fluid = Fluid(domain, density=Noise(), velocity=Noise(2), batch_size=10)\n    tf_fluid = constant(np_fluid)\n    physics = IncompressibleFlow(conserve_density=False)\n    for _ in range(3):\n        np_fluid = physics.step(np_fluid, 1.0)\n        tf_fluid = physics.step(tf_fluid, 1.0)\n        for np_tensor, tf_tensor in zip(struct.flatten(np_fluid), struct.\n            flatten(tf_fluid)):\n            tf_eval = tf_tensor.eval()\n            numpy.testing.assert_almost_equal(np_tensor, tf_eval, decimal=5)\n"
+}

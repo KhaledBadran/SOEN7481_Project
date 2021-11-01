@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ccall_import",
+    "className": "NamespaceTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_namespace.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "collection = lookup.TemplateLookup()\ncollection.put_string('functions.html',\n    \"\"\"\n            <%def name=\"foo()\">\n                this is foo\n            </%def>\n\n            <%def name=\"bar()\">\n                this is bar.\n                ${caller.body()}\n                ${caller.lala()}\n            </%def>\n        \"\"\"\n    )\ncollection.put_string('index.html',\n    \"\"\"\n            <%namespace name=\"func\" file=\"functions.html\" import=\"*\"/>\n            <%call expr=\"bar()\">\n                this is index embedded\n                foo is ${foo()}\n                <%def name=\"lala()\">\n                     this is lala ${foo()}\n                </%def>\n            </%call>\n        \"\"\"\n    )\nassert result_lines(collection.get_template('index.html').render()) == [\n    'this is bar.', 'this is index embedded', 'foo is', 'this is foo',\n    'this is lala', 'this is foo']\n"
+}

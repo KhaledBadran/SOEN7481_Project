@@ -1,0 +1,9 @@
+{
+    "functionName": "test_snap_assemble_data",
+    "className": null,
+    "fileName": "/European-XFEL_&_EXtra-geom/extra_geom_&_tests_&_test_dssc_geometry.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "geom = DSSC_1MGeometry.from_h5_file_and_quad_positions(sample_xfel_geom,\n    QUAD_POS)\nstacked_data = np.zeros((16, 128, 512))\nimg, centre = geom.position_modules_fast(stacked_data)\nassert img.shape == (1281, 1099)\nassert tuple(centre) == (656, 552)\nassert np.isnan(img[0, 0])\nassert img[50, 50] == 0\n"
+}

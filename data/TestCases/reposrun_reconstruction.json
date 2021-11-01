@@ -1,0 +1,9 @@
+{
+    "functionName": "run_reconstruction",
+    "className": null,
+    "fileName": "/PolymerGuy_&_AXITOM/axitom_&_tests_&_test_real_projections.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "data_path = os.path.dirname(os.path.realpath(__file__))\nconfig = axitom.config_from_xtekct(data_path + '/example_data/radiogram.xtekct'\n    )\nradiogram = axitom.read_image(data_path + '/example_data/radiogram.tif',\n    flat_corrected=True)\nradiogram = median_filter(radiogram, size=21)\n_, center_offset = axitom.find_center_of_rotation(radiogram,\n    background_internsity=0.9)\nconfig = config.with_param(center_of_rot=center_offset, n_pixels_u=1500)\nreconstruction = axitom.fdk(radiogram, config)\nreturn reconstruction\n"
+}

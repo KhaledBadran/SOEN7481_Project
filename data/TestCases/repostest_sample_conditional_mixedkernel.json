@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sample_conditional_mixedkernel",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_conditionals_&_test_multioutput.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "q_mu = tf.random.uniform((Data.M, Data.L), dtype=tf.float64)\nq_sqrt = tf.convert_to_tensor([np.tril(tf.random.uniform((Data.M, Data.M),\n    dtype=tf.float64)) for _ in range(Data.L)])\nZ = Data.X[:Data.M, (...)]\nN = int(1000000.0)\nXs = np.ones((N, Data.D), dtype=float_type)\nW = np.random.randn(Data.P, Data.L)\nmixed_kernel = mk.LinearCoregionalization([SquaredExponential() for _ in\n    range(Data.L)], W)\noptimal_inducing_variable = mf.SharedIndependentInducingVariables(\n    InducingPoints(Z))\nvalue, mean, var = sample_conditional(Xs, optimal_inducing_variable,\n    mixed_kernel, q_mu, q_sqrt=q_sqrt, white=True)\nseparate_kernel = mk.SeparateIndependent([SquaredExponential() for _ in\n    range(Data.L)])\nfallback_inducing_variable = mf.SharedIndependentInducingVariables(\n    InducingPoints(Z))\nvalue2, mean2, var2 = sample_conditional(Xs, fallback_inducing_variable,\n    separate_kernel, q_mu, q_sqrt=q_sqrt, white=True)\nvalue2 = np.matmul(value2, W.T)\nnp.testing.assert_array_almost_equal(np.mean(value, axis=0), np.mean(value2,\n    axis=0), decimal=1)\nnp.testing.assert_array_almost_equal(np.cov(value, rowvar=False), np.cov(\n    value2, rowvar=False), decimal=1)\n"
+}

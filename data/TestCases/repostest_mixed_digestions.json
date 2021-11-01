@@ -1,0 +1,9 @@
+{
+    "functionName": "test_mixed_digestions",
+    "className": null,
+    "fileName": "/Edinburgh-Genome-Foundry_&_BandWagon/tests_&_test_basics.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "png_path = os.path.join(str(tmpdir), 'test.png')\nenzymes = 'EcoRI', 'EcoRV', 'BamHI', 'XhoI'\nmixes = [[e] for e in enzymes] + list(itertools.combinations(enzymes, 2))\npatterns = [BandsPattern(compute_digestion_bands(example_sequence, mix,\n    linear=True), ladder=LADDER_100_to_4k, label=' + '.join(mix),\n    label_fontdict={'rotation': 40, 'size': 9}) for mix in mixes]\npatterns_set = BandsPatternsSet(patterns=[LADDER_100_to_4k] + patterns,\n    ladder=LADDER_100_to_4k, label='Digestion results', ladder_ticks=3)\nax = patterns_set.plot()\nax.figure.savefig(png_path, bbox_inches='tight', dpi=200)\nassert os.path.exists(png_path)\n"
+}

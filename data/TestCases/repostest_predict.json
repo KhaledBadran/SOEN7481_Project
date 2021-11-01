@@ -1,0 +1,9 @@
+{
+    "functionName": "test_predict",
+    "className": null,
+    "fileName": "/D3-AI_&_GreenGuard/tests_&_test_benchmark.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "templates = ['unstack_lstm_timeseries_classifier']\nwindow_size_rule = [('1d', '1h')]\ntarget_times, readings = load_demo()\ntarget_times = target_times.head(10)\nreadings = readings.head(100)\nscores_df = evaluate_templates(target_times=target_times, readings=readings,\n    templates=templates, window_size_rule=window_size_rule, metric=f1_score,\n    tuning_iterations=1, cv_splits=2)\nexpected_columns = ['template', 'window_size', 'resample_rule',\n    'default_test', 'default_cv', 'tuned_cv', 'tuned_test', 'status']\nexpected_dtypes = ['object', 'object', 'object', 'float64', 'float64',\n    'float64', 'float64', 'object']\nassert scores_df.columns.to_list() == expected_columns\nassert scores_df.tuned_test.notnull\nassert scores_df.dtypes.to_list() == expected_dtypes\n"
+}

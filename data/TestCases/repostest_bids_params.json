@@ -1,0 +1,9 @@
+{
+    "functionName": "test_bids_params",
+    "className": null,
+    "fileName": "/Macquarie-MEG-Research_&_BIDSHandler/bidshandler_&_tests_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "fname1 = 'sub-1_ses-1_task-resting_run-1_channels.tsv'\nsplit_fname1 = _get_bids_params(fname1)\nassert split_fname1['sub'] == '1'\nassert split_fname1['task'] == 'resting'\nassert split_fname1['ext'] == '.tsv'\nassert split_fname1['file'] == 'channels'\nsplit_fname2 = _get_bids_params('sub-1_ses-1_headshape.elp')\nassert _bids_params_are_subsets(split_fname1, split_fname2)\nsplit_fname3 = _get_bids_params('sub-1_ses-2_headshape.elp')\nassert not _bids_params_are_subsets(split_fname1, split_fname3)\nsplit_fname4 = _get_bids_params('run-1_acq-test_meg.json')\nassert not _bids_params_are_subsets(split_fname3, split_fname4)\n"
+}

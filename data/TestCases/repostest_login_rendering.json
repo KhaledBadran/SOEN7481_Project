@@ -1,0 +1,9 @@
+{
+    "functionName": "test_login_rendering",
+    "className": null,
+    "fileName": "/PlaidWeb_&_Authl/tests_&_test_flask_wrapper.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "app = flask.Flask(__name__)\napp.secret_key = 'qwer'\nauthl.flask.setup(app, {}, stylesheet='/what.css')\nwith app.test_request_context('https://foo.bar/'):\n    login_url = flask.url_for('authl.login')\nwith app.test_client() as client:\n    soup = BeautifulSoup(client.get(login_url).data, 'html.parser')\n    assert soup.find('link', rel='stylesheet', href='/what.css')\nwith app.test_client() as client:\n    assert client.get(login_url + '?asset=css').headers['Content-Type'\n        ] == 'text/css'\n    assert client.get(login_url + '?asset=nonsense').status_code == 404\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_read_kmip_2_0",
+    "className": "TestDeriveKeyResponsePayload",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_derive_key.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a DeriveKey response payload can be read from a data stream\n        encoded with the KMIP 2.0 format.\n        \"\"\"\npayload = payloads.DeriveKeyResponsePayload()\nself.assertIsNone(payload.unique_identifier)\nself.assertIsNone(payload.template_attribute)\npayload.read(self.partial_encoding_no_template_attribute, kmip_version=\n    enums.KMIPVersion.KMIP_2_0)\nself.assertEqual('fb4b5b9c-6188-4c63-8142-fe9c328129fc', payload.\n    unique_identifier)\nself.assertIsNone(payload.template_attribute)\n"
+}

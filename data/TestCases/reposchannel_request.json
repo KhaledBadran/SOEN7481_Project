@@ -1,0 +1,9 @@
+{
+    "functionName": "channel_request",
+    "className": "VisionHandler",
+    "fileName": "/PRIArobotics_&_HedgehogServer/hedgehog_&_server_&_handlers_&_vision.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "try:\n    conn = self._connections[ident]\nexcept KeyError:\n    raise FailedCommandError('camera is closed')\nelse:\n    missing = msg.keys - set(conn.channels)\n    if missing:\n        raise FailedCommandError(f\"nonexistent keys: {', '.join(missing)}\")\n    if msg.keys:\n        return vision_msg.ChannelReply({key: conn.channels[key].msg for key in\n            msg.keys})\n    else:\n        return vision_msg.ChannelReply({key: channel.msg for key, channel in\n            conn.channels.items()})\n_commands.register(vision_msg.ChannelRequest)"
+}

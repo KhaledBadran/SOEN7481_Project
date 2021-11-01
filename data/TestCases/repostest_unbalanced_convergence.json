@@ -1,0 +1,9 @@
+{
+    "functionName": "test_unbalanced_convergence",
+    "className": null,
+    "fileName": "/PythonOT_&_POT/test_&_test_unbalanced.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "n = 100\nrng = np.random.RandomState(42)\nx = rng.randn(n, 2)\na = ot.utils.unif(n)\nb = ot.utils.unif(n) * 1.5\nM = ot.dist(x, x)\nepsilon = 1.0\nreg_m = 1.0\nG, log = ot.unbalanced.sinkhorn_unbalanced(a, b, M, reg=epsilon, reg_m=\n    reg_m, method=method, log=True, verbose=True)\nloss = ot.unbalanced.sinkhorn_unbalanced2(a, b, M, epsilon, reg_m, method=\n    method, verbose=True)\nfi = reg_m / (reg_m + epsilon)\nlogb = np.log(b + 1e-16)\nloga = np.log(a + 1e-16)\nlogKtu = logsumexp(log['logu'][(None), :] - M.T / epsilon, axis=1)\nlogKv = logsumexp(log['logv'][(None), :] - M / epsilon, axis=1)\nv_final = fi * (logb - logKtu)\nu_final = fi * (loga - logKv)\nnp.testing.assert_allclose(u_final, log['logu'], atol=1e-05)\nnp.testing.assert_allclose(v_final, log['logv'], atol=1e-05)\nnp.testing.assert_allclose((G * M).sum(), loss, atol=1e-05)\npytest.mark.parametrize('method', ['sinkhorn', 'sinkhorn_stabilized'])"
+}

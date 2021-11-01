@@ -1,0 +1,9 @@
+{
+    "functionName": "test_encode_json_strings",
+    "className": null,
+    "fileName": "/geowurster_&_NewlineJSON/tests_&_test_main.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Ensure that JSON values are preserved beteen NLJ and CSV.\"\"\"\ninfile = str(tmpdir.mkdir('test-in').join('in.json'))\noutfile = str(tmpdir.mkdir('test-out').join('out.json'))\nroundtrip_file = str(tmpdir.mkdir('test-roundtrip').join('roundtrip.json'))\nexpected = {'field1': 'value', 'field2': {'key': 'val'}}\nwith nlj.open(infile, 'w') as dst:\n    dst.write(expected)\nresult = CliRunner().invoke(main, ['nlj2csv', infile, outfile])\nassert result.exit_code == 0\nresult = CliRunner().invoke(main, ['csv2nlj', outfile, roundtrip_file])\nassert result.exit_code == 0\nwith nlj.open(roundtrip_file) as src:\n    actual = next(src)\nassert expected == actual\n"
+}

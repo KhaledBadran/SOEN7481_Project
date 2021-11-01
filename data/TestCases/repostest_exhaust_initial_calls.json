@@ -1,0 +1,9 @@
+{
+    "functionName": "test_exhaust_initial_calls",
+    "className": null,
+    "fileName": "/bytesandbrains_&_ProcessOptimizer/ProcessOptimizer_&_tests_&_test_optimizer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "opt = Optimizer([(-2.0, 2.0)], base_estimator, n_initial_points=2,\n    acq_optimizer='sampling', random_state=1)\nx0 = opt.ask()\nx1 = opt.ask()\nassert x0 != x1\nr1 = opt.tell(x1, 3.0)\nassert len(r1.models) == 0\nx2 = opt.ask()\nassert x1 != x2\nr2 = opt.tell(x2, 4.0)\nif base_estimator.lower() == 'dummy':\n    assert len(r2.models) == 0\nelse:\n    assert len(r2.models) == 1\nx3 = opt.ask()\nassert x2 != x3\nx4 = opt.ask()\nr3 = opt.tell(x3, 1.0)\nif base_estimator.lower() == 'dummy':\n    assert x3 != x4\n    assert len(r3.models) == 0\nelse:\n    assert x3 == x4\n    assert len(r3.models) == 2\npytest.mark.parametrize('base_estimator', ESTIMATOR_STRINGS)"
+}

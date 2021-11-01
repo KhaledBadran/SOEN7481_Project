@@ -1,0 +1,9 @@
+{
+    "functionName": "test_forward_backward",
+    "className": "TestSimple",
+    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_test_simple_integration.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from bigdl.nn.layer import Linear\nrng = RNG()\nrng.set_seed(100)\nlinear = Linear(4, 5)\ninput = rng.uniform(0.0, 1.0, [4])\noutput = linear.forward(input)\nassert_allclose(output, np.array([0.41366524, 0.009532653, -0.677581, \n    0.07945433, -0.5742568]), atol=1e-06, rtol=0)\nmse = MSECriterion()\ntarget = rng.uniform(0.0, 1.0, [5])\nloss = mse.forward(output, target)\nprint('loss: ' + str(loss))\ngrad_output = mse.backward(output, rng.uniform(0.0, 1.0, [5]))\nl_grad_output = linear.backward(input, grad_output)\n"
+}

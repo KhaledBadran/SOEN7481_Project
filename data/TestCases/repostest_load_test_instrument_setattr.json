@@ -1,0 +1,9 @@
+{
+    "functionName": "test_load_test_instrument_setattr",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_config.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "config_data = StringIO(\n    u\"\"\"\ntest:\n    class: !!python/name:instruments.Instrument\n    uri: test://\n    attrs:\n        foo: !Q 111 GHz\n\"\"\"\n    )\ninsts = load_instruments(config_data)\nassert insts['test'].foo == u.Quantity(111, 'GHz')\n"
+}

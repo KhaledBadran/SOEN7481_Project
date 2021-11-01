@@ -1,0 +1,9 @@
+{
+    "functionName": "test_io_redirector",
+    "className": null,
+    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_pydevd_io.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class MyRedirection1(object):\n    encoding = 'foo'\nclass MyRedirection2(object):\n    pass\nmy_redirector = IORedirector(MyRedirection1(), MyRedirection2(),\n    wrap_buffer=True)\nnone_redirector = IORedirector(None, None, wrap_buffer=True)\nassert my_redirector.encoding == 'foo'\nwith pytest.raises(AttributeError):\n    none_redirector.encoding\nfor redirector in (my_redirector, none_redirector):\n    redirector.write('test')\n    redirector.flush()\nassert not redirector.isatty()\n"
+}

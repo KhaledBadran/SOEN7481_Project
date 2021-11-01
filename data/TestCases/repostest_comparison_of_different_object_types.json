@@ -1,0 +1,9 @@
+{
+    "functionName": "test_comparison_of_different_object_types",
+    "className": "TestBugFixes",
+    "fileName": "/Rambatino_&_CHAID/tests_&_test_nominal_column.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Fix bug whereby floats were being passed into NominalColumn\n        from `self.observed = NominalColumn(arr)` but as `dtype=object`\n        resulting in `TypeError: unorderable types: int() > str()` in\n        python 3.x only\n        \"\"\"\ninput_list = [100, 'c', 13, 15, np.nan, np.nan]\nobject_arr = np.array(input_list, dtype=object)\nvector = CHAID.NominalColumn(object_arr)\nassert [vector.metadata[x] for x in vector.arr] == [('<missing>' if x != x else\n    x) for x in input_list]\n"
+}

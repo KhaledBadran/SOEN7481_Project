@@ -1,0 +1,9 @@
+{
+    "functionName": "test_background_omega_x",
+    "className": null,
+    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_background.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "val = ccl.omega_x(COSMO_NU, a, kind)\nassert np.all(np.isfinite(val))\nassert np.shape(val) == np.shape(a)\nif np.all(a == 1):\n    if kind == 'matter':\n        val_z0 = COSMO_NU['Omega_b'] + COSMO_NU['Omega_c'] + COSMO_NU[\n            'Omega_nu_mass']\n    elif kind == 'dark_energy':\n        val_z0 = COSMO_NU['Omega_l']\n    elif kind == 'radiation':\n        val_z0 = COSMO_NU['Omega_g']\n    elif kind == 'curvature':\n        val_z0 = COSMO_NU['Omega_k']\n    elif kind == 'neutrinos_rel':\n        val_z0 = COSMO_NU['Omega_nu_rel']\n    elif kind == 'neutrinos_massive':\n        val_z0 = COSMO_NU['Omega_nu_mass']\n    assert np.allclose(val, val_z0)\npytest.mark.parametrize('a', AVALS)pytest.mark.parametrize('kind', ['matter', 'dark_energy', 'radiation',\n    'curvature', 'neutrinos_rel', 'neutrinos_massive'])"
+}

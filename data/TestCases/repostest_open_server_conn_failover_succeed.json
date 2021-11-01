@@ -1,0 +1,9 @@
+{
+    "functionName": "test_open_server_conn_failover_succeed",
+    "className": "TestKMIPClient",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_test_kmip_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        This test verifies that the KMIP client can setup a connection if at\n        least one connection is established\n        \"\"\"\nmock_create_socket.return_value = mock.MagicMock()\nself.mock_client.socket.connect.side_effect = [Exception, None]\nself.mock_client.open()\nself.assertEqual('IP_ADDR_2', self.mock_client.host)\nmock.patch.object(KMIPProxy, '_create_socket')"
+}

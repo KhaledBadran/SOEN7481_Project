@@ -1,0 +1,9 @@
+{
+    "functionName": "test__simple_case__sets_up_post_cti_correctly",
+    "className": "TestCIPreCTI",
+    "fileName": "/Jammy2211_&_PyAutoCTI/test_&_unit_&_charge_injection_&_test_ci_data.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "frame_geometry = ci_frame.FrameGeometry.euclid_bottom_left()\nci_pre_cti = np.zeros((5, 5))\nci_pre_cti[2, 2] = 10.0\nci_post_cti = frame_geometry.add_cti(ci_pre_cti, params_both, arctic_both)\nimage_difference = ci_post_cti - ci_pre_cti\nassert (image_difference[2, 2] < 0.0).all()\nassert (image_difference[3:5, (2)] > 0.0).all()\nassert (image_difference[(2), 3:5] > 0.0).all()\n"
+}

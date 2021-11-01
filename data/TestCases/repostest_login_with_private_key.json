@@ -1,0 +1,9 @@
+{
+    "functionName": "test_login_with_private_key",
+    "className": "ImpersonatorTestCase",
+    "fileName": "/Stavatech_&_Impersonator-Python-Client/test_&_test_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "client = Impersonator()\ncredentials = {'username': 'username', 'privateKey': 'privateKey'}\nlogin_endpoint = 'http://%s:%d/%s' % (client.host, client.port, client.\n    token_endpoint)\ntoken = client.login(username=credentials['username'], private_key=\n    credentials['privateKey'])\nself.assertIn(mock.call(login_endpoint, json=credentials), mock_post.\n    call_args_list)\nself.assertEqual(token, MOCK_TOKEN)\nmock.patch('requests.post', side_effect=mock_post_request)"
+}

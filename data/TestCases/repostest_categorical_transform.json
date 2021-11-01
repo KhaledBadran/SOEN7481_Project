@@ -1,0 +1,9 @@
+{
+    "functionName": "test_categorical_transform",
+    "className": null,
+    "fileName": "/bytesandbrains_&_ProcessOptimizer/ProcessOptimizer_&_tests_&_test_space.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "categories = ['apple', 'orange', 'banana', None, True, False, 3]\ncat = Categorical(categories)\napple = [1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]\norange = [0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0]\nbanana = [0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0]\nnone = [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0]\ntrue = [0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0]\nfalse = [0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0]\nthree = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]\nassert_equal(cat.transformed_size, 7)\nassert_equal(cat.transformed_size, cat.transform(['apple']).size)\nassert_array_equal(cat.transform(categories), [apple, orange, banana, none,\n    true, false, three])\nassert_array_equal(cat.transform(['apple', 'orange']), [apple, orange])\nassert_array_equal(cat.transform(['apple', 'banana']), [apple, banana])\nassert_array_equal(cat.inverse_transform([apple, orange]), ['apple', 'orange'])\nassert_array_equal(cat.inverse_transform([apple, banana]), ['apple', 'banana'])\nent_inverse = cat.inverse_transform([apple, orange, banana, none, true,\n    false, three])\nassert_array_equal(ent_inverse, categories)\npytest.mark.fast_test"
+}

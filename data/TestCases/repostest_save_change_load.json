@@ -1,0 +1,9 @@
+{
+    "functionName": "test_save_change_load",
+    "className": "LoadStateSaveStateTestCase",
+    "fileName": "/mzy2240_&_ESA/tests_&_test_saw.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Save the state, make a change, load the state, ensure changes\n        were reverted.\n        \"\"\"\nbranch_key_fields = saw_14.get_key_field_list('branch')\nbranch_data = saw_14.GetParametersMultipleElement('branch', \n    branch_key_fields + ['LineStatus'])\nself.assertIsNone(saw_14.SaveState())\nbranch_data_copy = branch_data.copy(deep=True)\nself.assertEqual('Closed', branch_data_copy.loc[3, 'LineStatus'])\nbranch_data_copy.loc[3, 'LineStatus'] = 'Open'\nsaw_14.change_and_confirm_params_multiple_element('branch', branch_data_copy)\nself.assertIsNone(saw_14.LoadState())\nbranch_data_new = saw_14.GetParametersMultipleElement('branch', \n    branch_key_fields + ['LineStatus'])\npd.testing.assert_frame_equal(branch_data, branch_data_new)\n"
+}

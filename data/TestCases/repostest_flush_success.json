@@ -1,0 +1,9 @@
+{
+    "functionName": "test_flush_success",
+    "className": "TestElasticBuffer",
+    "fileName": "/dkaslovsky_&_ElasticBatch/tests_&_test_buffer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "mock_bulk.return_value = len(self.docs), []\neb = ElasticBuffer()\neb._buffer = self.docs\neb._oldest_doc_timestamp = self.timestamp\neb.flush()\n(_, called_docs), _ = mock_bulk.call_args\nself.assertListEqual(called_docs, self.docs,\n    'contents of buffer should have been passed to bulk')\nself.assertListEqual(eb._buffer, [],\n    'buffer should be empty after successful insert')\nself.assertIsNone(eb._oldest_doc_timestamp,\n    'timestamp should be None after successful insert')\npatch(f'{ElasticBuffer.__module__}.bulk')"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_component_result_event",
+    "className": null,
+    "fileName": "/SillyFreak_&_ConcurrentUtils/tests_&_test_component.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "EVENT = 'EVENT'\n@component_workload\nasync def component(x, *, commands, events):\n    await events.send(Component.EVENT_START)\n    await events.send(EVENT)\n    return x\ncomp = await start_component(component, 1)\nwith pytest.raises(Component.EventException) as exc_info:\n    await comp.result()\nevent, = exc_info.value.args\nassert event == EVENT\nassert await comp.result() == 1\npytest.mark.asyncio"
+}

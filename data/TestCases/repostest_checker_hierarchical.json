@@ -1,0 +1,9 @@
+{
+    "functionName": "test_checker_hierarchical",
+    "className": "TestRegexMatching",
+    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_verification_rules.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "policyManager = ConfigPolicyManager('policy_config/hierarchical_ruleset.conf')\ndataName1 = Name('/SecurityTestSecRule/Basic/Data1')\ndataName2 = Name('/SecurityTestSecRule/Basic/Longer/Data2')\ndata1 = Data(dataName1)\ndata2 = Data(dataName2)\nmatchedRule = policyManager._findMatchingRule(dataName1, 'data')\nself.assertEqual(matchedRule, policyManager._findMatchingRule(dataName2,\n    'data'))\nself.keyChain.sign(data1, self.defaultCertName)\nself.keyChain.sign(data2, self.defaultCertName)\nsignatureName1 = data1.getSignature().getKeyLocator().getKeyName()\nsignatureName2 = data2.getSignature().getKeyLocator().getKeyName()\nfailureReason = ['unknown']\nself.assertFalse(policyManager._checkSignatureMatch(signatureName1,\n    dataName1, matchedRule, failureReason),\n    'Hierarchical matcher matched short data name to long key name')\nself.assertTrue(policyManager._checkSignatureMatch(signatureName2,\n    dataName2, matchedRule, failureReason))\nself.keyChain.sign(data1, self.shortCertName)\nself.keyChain.sign(data2, self.shortCertName)\nsignatureName1 = data1.getSignature().getKeyLocator().getKeyName()\nsignatureName2 = data2.getSignature().getKeyLocator().getKeyName()\nself.assertTrue(policyManager._checkSignatureMatch(signatureName1,\n    dataName1, matchedRule, failureReason))\nself.assertTrue(policyManager._checkSignatureMatch(signatureName2,\n    dataName2, matchedRule, failureReason))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_it_all",
+    "className": null,
+    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_calibrations.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "multi_caliBrate.shape = 2048, 350\nmulti_caliBrate.get_bpm()\nmulti_caliBrate.get_arc()\nmulti_caliBrate.get_tiltimg()\nslits = multi_caliBrate.get_slits()\nassert slits.PYP_SPEC == 'shane_kast_blue', 'Wrong spectrograph'\nassert (slits.nspec, slits.nspat) == multi_caliBrate.shape, 'Wrong image shape'\nassert slits.nslits == 1, 'Incorrect number of slits'\nassert slits.left_init.shape == (2048, 1), 'Incorrect shape for left'\nassert slits.left_tweak is None, 'Tweaks should not exist'\nwv_calib = multi_caliBrate.get_wv_calib()\nassert isinstance(wv_calib, dict)\nassert wv_calib['175'] is not None\nassert wv_calib['175']['rms'] < 0.2\nwaveTilts = multi_caliBrate.get_tilts()\nassert waveTilts.nslit == 1\nmulti_caliBrate.get_flats()\nflatImages = multi_caliBrate.get_flats()\nassert flatImages.get_pixelflat().shape == (2048, 350)\nassert flatImages.fit2illumflat(slits).shape == (2048, 350)\nslitmask = slits.slit_img()\ntilts = waveTilts.fit2tiltimg(slitmask)\nmswave = wavecalib.build_waveimg(multi_caliBrate.spectrograph, tilts, slits,\n    wv_calib)\nassert mswave.shape == (2048, 350)\ndev_suite_required"
+}

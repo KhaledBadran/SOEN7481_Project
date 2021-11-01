@@ -1,0 +1,9 @@
+{
+    "functionName": "testRunner",
+    "className": "BatchTrialTest",
+    "fileName": "/facebook_&_Ax/ax_&_core_&_tests_&_test_batch_trial.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "with self.assertRaises(ValueError):\n    self.batch.run()\nwith self.assertRaises(ValueError):\n    self.batch.mark_running()\nself.batch.runner = SyntheticRunner()\nself.batch.run()\nself.assertEqual(self.batch.deployed_name, 'test_0')\nself.assertNotEqual(len(self.batch.run_metadata.keys()), 0)\nself.assertEqual(self.batch.status, TrialStatus.RUNNING)\nstaging_mock = PropertyMock()\nwith patch.object(SyntheticRunner, 'staging_required', staging_mock):\n    mock_runner = SyntheticRunner()\n    staging_mock.return_value = True\n    self.experiment.runner = mock_runner\n    b2 = self.experiment.new_batch_trial()\n    b2.run()\n    self.assertEqual(b2.deployed_name, 'test_1')\n    self.assertEqual(b2.status, TrialStatus.STAGED)\n"
+}

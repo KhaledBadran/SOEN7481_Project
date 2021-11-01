@@ -1,0 +1,9 @@
+{
+    "functionName": "test_call_in_nested",
+    "className": "CallTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_call.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "t = Template(\n    \"\"\"\n            <%def name=\"a()\">\n                this is a ${b()}\n                <%def name=\"b()\">\n                    this is b\n                    <%call expr=\"c()\">\n                        this is the body in b's call\n                    </%call>\n                </%def>\n                <%def name=\"c()\">\n                    this is c: ${caller.body()}\n                </%def>\n            </%def>\n        ${a()}\n\"\"\"\n    )\nassert result_lines(t.render()) == ['this is a', 'this is b', 'this is c:',\n    \"this is the body in b's call\"]\n"
+}

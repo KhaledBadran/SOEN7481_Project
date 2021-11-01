@@ -1,0 +1,9 @@
+{
+    "functionName": "test_invalid_key_wrapping_specification",
+    "className": "TestGetRequestPayload",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_get.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a TypeError is raised when an invalid value is used to set\n        the key wrapping specification of a Get request payload.\n        \"\"\"\nkwargs = {'key_wrapping_specification': 'invalid'}\nself.assertRaisesRegex(TypeError,\n    'Key wrapping specification must be a KeyWrappingSpecification struct.',\n    payloads.GetRequestPayload, **kwargs)\nargs = payloads.GetRequestPayload(), 'key_wrapping_specification', 'invalid'\nself.assertRaisesRegex(TypeError,\n    'Key wrapping specification must be a KeyWrappingSpecification struct.',\n    setattr, *args)\n"
+}

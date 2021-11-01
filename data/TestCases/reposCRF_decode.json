@@ -1,0 +1,9 @@
+{
+    "functionName": "CRF_decode",
+    "className": null,
+    "fileName": "/david-leon_&_Dandelion/test_&_test_ChainCRF.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n\n    :param observations: (B, T, N)\n    :param transitions:  (N, N)\n    :param viterbi:\n    :param return_alpha:\n    :param return_best_sequence:\n    :return:\n    \"\"\"\nalpha_0 = observations[:, (0), :]\ngamma_0 = tensor.zeros_like(alpha_0, dtype='int64')\nU = transitions.dimshuffle('x', 'x', 0, 1)\nx = observations[:, 1:, :]\nx = x.dimshuffle(0, 1, 'x', 2)\nx = x + U\nx = tensor.concatenate([x, tensor.zeros_like(x[:, -1:, :, :])], axis=1)\nx = x.dimshuffle(1, 0, 2, 3)\ndef recurrence(energy_matrix_t, index_tm1, score_tm1):\n    \"\"\"\n        :param energy_matrix_t: (B, N, N)\n\n        :return:\n        \"\"\"\n    score_tm1 = score_tm1.dimshuffle(0, 1, 'x')\n    x = score_tm1 + energy_matrix_t\n    index = tensor.argmax(x, axis=1)\n    score = tensor.max(x, axis=1)\n    return index, score\nresult, _ = theano.scan(fn=recurrence, sequences=x, outputs_info=[gamma_0,\n    alpha_0])\ngamma, alpha = result\ndef backward_step(gamma_t, y_tm1):\n    y_t = batch_gather(gamma_t, y_tm1)\n    return y_t\nT, B, N = gamma.shape\ninitial = tensor.zeros(shape=(B,), dtype='int64')\ny, _ = theano.scan(fn=backward_step, sequences=gamma, outputs_info=[initial\n    ], go_backwards=True)\ny = y.dimshuffle(1, 0)\ny = y[:, ::-1]\ny = tensor.cast(y, 'int32')\nreturn y\n"
+}

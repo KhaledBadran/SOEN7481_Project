@@ -1,0 +1,9 @@
+{
+    "functionName": "test_constructor_yaml",
+    "className": null,
+    "fileName": "/capitalone_&_Data-Load-and-Copy-using-Python/tests_&_test_redshift.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "r = Redshift(profile=PROFILE, dbapi=dbapi, config_yaml='some_config.yml')\nmock_session.assert_called_with(profile_name=PROFILE)\nassert r.profile == PROFILE\nassert r.kms_key == None\nassert r.connection['host'] == 'host'\nassert r.connection['port'] == 'port'\nassert r.connection['database'] == 'database'\nassert r.connection['user'] == 'user'\nassert r.connection['password'] == 'password'\npytest.mark.parametrize('dbapi', DBAPIS)mock.patch('locopy.utility.open', mock.mock_open(read_data=GOOD_CONFIG_YAML))mock.patch('locopy.s3.Session')"
+}

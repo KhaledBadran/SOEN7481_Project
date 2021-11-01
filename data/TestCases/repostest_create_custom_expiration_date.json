@@ -1,0 +1,9 @@
+{
+    "functionName": "test_create_custom_expiration_date",
+    "className": "FlaskEasyJWTTest",
+    "fileName": "/BMeu_&_Flask-EasyJWT/tests_&_flask_easyjwt_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n            Test creating a token with a custom expiration date.\n\n            Expected Result: The token object uses the user's expiration date.\n        \"\"\"\nself.app.config['EASYJWT_TOKEN_VALIDITY'] = timedelta(minutes=self.validity)\nexpiration_date = datetime.utcnow().replace(microsecond=0) + timedelta(minutes\n    =self.custom_validity)\neasyjwt = FlaskEasyJWT()\neasyjwt.expiration_date = expiration_date\ntoken = easyjwt.create()\nself.assertIsNotNone(token)\nself.assertEqual(expiration_date, easyjwt.expiration_date)\nverified_easyjwt = FlaskEasyJWT.verify(token)\nself.assertIsNotNone(verified_easyjwt)\nself.assertEqual(expiration_date, verified_easyjwt.expiration_date)\n"
+}

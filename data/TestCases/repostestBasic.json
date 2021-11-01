@@ -1,0 +1,9 @@
+{
+    "functionName": "testBasic",
+    "className": "SimpleExperimentTest",
+    "fileName": "/facebook_&_Ax/ax_&_core_&_tests_&_test_simple_experiment.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "self.assertTrue(self.experiment.is_simple_experiment)\ntrial = self.experiment.new_trial()\nwith self.assertRaises(NotImplementedError):\n    trial.runner = SyntheticRunner()\nwith self.assertRaises(NotImplementedError):\n    self.experiment.add_tracking_metric(Metric(name='test'))\nwith self.assertRaises(NotImplementedError):\n    self.experiment.update_tracking_metric(Metric(name='test'))\nself.assertTrue(self.experiment.eval_trial(trial).df.empty)\nbatch = self.experiment.new_batch_trial()\nbatch.add_arm(Arm(parameters={'x1': 5, 'x2': 10}))\nself.assertEqual(self.experiment.eval_trial(batch).df['mean'][0], 15)\nself.experiment.new_batch_trial().add_arm(Arm(parameters={'x1': 15, 'x2': 25}))\nself.assertAlmostEqual(self.experiment.eval().df['mean'][1], 40)\nself.assertEqual(batch.fetch_data().df['mean'][0], 15)\nself.assertAlmostEqual(self.experiment.fetch_data().df['mean'][1], 40)\n"
+}

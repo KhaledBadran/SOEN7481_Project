@@ -1,0 +1,9 @@
+{
+    "functionName": "test_protocol_init_messages",
+    "className": "TestDsiProtocol",
+    "fileName": "/BciPy_&_BciPy/bcipy_&_acquisition_&_tests_&_protocols_&_dsi_&_test_dsi_protocol.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Should have the channels and the sample_rate.\"\"\"\nprotocol = dsi_protocol.DsiProtocol()\nchannel_msg = protocol.init_messages[0]\nparsed1 = dsi.packet.parse(channel_msg)\nself.assertEqual(parsed1.type, 'EVENT')\nself.assertEqual(parsed1.event_code, 'SENSOR_MAP')\nself.assertEqual(parsed1.message, ','.join(dsi.DEFAULT_CHANNELS))\nparsed2 = dsi.packet.parse(protocol.init_messages[1])\nself.assertEqual(parsed2.type, 'EVENT')\nself.assertEqual(parsed2.event_code, 'DATA_RATE')\nself.assertEqual(parsed2.message, u',300')\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "_surrogate_model",
+    "className": null,
+    "fileName": "/SUNCAT-Center_&_CatLearn/test_&_test_acquisition.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "kdict = [{'type': 'gaussian', 'width': 0.5}]\ngp = GaussianProcess(train_fp=train_features, train_target=train_targets,\n    kernel_list=kdict, regularization=0.001, optimize_hyperparameters=False,\n    scale_data=True)\nif test_targets is None:\n    get_validation_error = False\nelse:\n    get_validation_error = True\nscore = gp.predict(test_fp=test_features, test_target=test_targets,\n    get_validation_error=get_validation_error, get_training_error=False,\n    uncertainty=True)\nto_acquire = np.argsort(probability_density(0.0, score['prediction'], score\n    ['uncertainty']))\nreturn to_acquire, score\n"
+}

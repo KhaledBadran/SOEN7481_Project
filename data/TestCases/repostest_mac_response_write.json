@@ -1,0 +1,9 @@
+{
+    "functionName": "test_mac_response_write",
+    "className": "TestResponseMessage",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_test_messages.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "prot_ver = contents.ProtocolVersion(1, 2)\ntime_stamp = contents.TimeStamp(1485455139)\nbatch_count = contents.BatchCount(1)\nresponse_header = messages.ResponseHeader(protocol_version=prot_ver,\n    time_stamp=time_stamp, batch_count=batch_count)\noperation = contents.Operation(enums.Operation.MAC)\nresult_status = contents.ResultStatus(enums.ResultStatus.SUCCESS)\nuuid = '1'\nuniq_id = attr.UniqueIdentifier(uuid)\nvalue = (\n    b'\\x99\\x8bUY\\x90\\x9b\\x85\\x87[\\x90c\\x13\\x12\\xbb2\\x9fj\\xc4\\xed\\x97n\\xac\\x99\\xe5!S\\xc4\\x19(\\xf2*[\\xefy\\xa4\\xbe\\x05;1I\\x19\\xe0u#\\xb9\\xbe\\xc8#5`~I\\xba\\xa9~\\xe0\\x9ek=U\\xf4Q\\xff|'\n    )\nmac_data = objects.MACData(value)\nresp_pl = payloads.MACResponsePayload(unique_identifier=uniq_id, mac_data=\n    mac_data)\nbatch_item = messages.ResponseBatchItem(operation=operation, result_status=\n    result_status, response_payload=resp_pl)\nrm = messages.ResponseMessage(response_header=response_header, batch_items=\n    [batch_item])\nrm.write(self.stream)\nresult = self.stream.read()\nlen_exp = len(self.mac)\nlen_rcv = len(result)\nself.assertEqual(len_exp, len_rcv, self.msg.format('get response message',\n    'write', len_exp, len_rcv))\nmsg = 'Bad response message write: encoding mismatch'\nself.assertEqual(self.mac, result, msg)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_stream_cluster",
+    "className": null,
+    "fileName": "/vc1492a_&_PyNomaly/tests_&_test_loop.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test to ensure that the proper warning is issued if the streaming approach\n    is called on clustered data, as the streaming approach does not support\n    this functionality.\n    :param X_n140_outliers: A pytest Fixture that generates 140 observations.\n    :return: None\n    \"\"\"\na = [0] * 120\nb = [1] * 18\ncluster_labels = a + b\nX_train = X_n140_outliers[0:138]\nX_test = X_n140_outliers[139]\nclf = loop.LocalOutlierProbability(X_train, cluster_labels=cluster_labels,\n    use_numba=NUMBA).fit()\nwith pytest.warns(UserWarning) as record:\n    clf.stream(X_test)\nassert len(record) == 1\nassert record[0].message.args[0\n    ] == 'Stream approach does not support clustered data. Automatically refit using single cluster of points.'\n"
+}

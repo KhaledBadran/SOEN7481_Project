@@ -1,0 +1,9 @@
+{
+    "functionName": "test_vincdir_utm",
+    "className": "TestGeodesy",
+    "fileName": "/GeoscienceAustralia_&_GeodePy/geodepy_&_tests_&_test_geodesy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "zone1 = 55\neast1 = 273741.2966\nnorth1 = 5796489.7769\nazimuth1to2 = hp2dec(306.520537)\nazimuth1to2_DMS = DMSAngle(306, 52, 5.37)\nell_dist = 54972.271\nhemisphere2, zone2, east2, north2, azimuth2to1 = vincdir_utm(zone1, east1,\n    north1, azimuth1to2, ell_dist)\nself.assertEqual(hemisphere2, 'South')\nself.assertEqual(zone2, 54)\nself.assertEqual(round(east2, 4), 758173.7968)\nself.assertEqual(round(north2, 4), 5828674.3395)\nself.assertEqual(round(dec2hp(azimuth2to1), 6), 127.102507)\nhemisphere2, zone2, east2, north2, azimuth2to1 = vincdir_utm(zone1, east1,\n    north1, azimuth1to2_DMS, ell_dist)\nself.assertEqual(hemisphere2, 'South')\nself.assertEqual(zone2, 54)\nself.assertEqual(round(east2, 4), 758173.7968)\nself.assertEqual(round(north2, 4), 5828674.3395)\nself.assertEqual(round(dec2hp(azimuth2to1), 6), 127.102507)\nhemisphere2, zone2, east2, north2, azimuth2to1 = vincdir_utm(zone1, east1,\n    north1, azimuth1to2_DMS.ddm(), ell_dist)\nself.assertEqual(hemisphere2, 'South')\nself.assertEqual(zone2, 54)\nself.assertEqual(round(east2, 4), 758173.7968)\nself.assertEqual(round(north2, 4), 5828674.3395)\nself.assertEqual(round(dec2hp(azimuth2to1), 6), 127.102507)\n"
+}

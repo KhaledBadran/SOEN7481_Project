@@ -1,0 +1,9 @@
+{
+    "functionName": "test_issue_3",
+    "className": "TestOldIssues",
+    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_test_issues.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" undefined methods datetime_or_None, date_or_None \"\"\"\nconn = self.connect()\nc = conn.cursor()\nwith warnings.catch_warnings():\n    warnings.filterwarnings('ignore')\n    c.execute('drop table if exists issue3')\nc.execute('create table issue3 (d date, t time, dt datetime, ts timestamp)')\ntry:\n    c.execute('insert into issue3 (d, t, dt, ts) values (%s,%s,%s,%s)', (\n        None, None, None, None))\n    c.execute('select d from issue3')\n    self.assertEqual(None, c.fetchone()[0])\n    c.execute('select t from issue3')\n    self.assertEqual(None, c.fetchone()[0])\n    c.execute('select dt from issue3')\n    self.assertEqual(None, c.fetchone()[0])\n    c.execute('select ts from issue3')\n    self.assertIn(type(c.fetchone()[0]), (type(None), datetime.datetime),\n        'expected Python type None or datetime from SQL timestamp')\nfinally:\n    c.execute('drop table issue3')\n"
+}

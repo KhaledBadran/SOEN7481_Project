@@ -1,0 +1,9 @@
+{
+    "functionName": "test_add_command",
+    "className": "TestRecord",
+    "fileName": "/Keeper-Security_&_Commander/unit-tests_&_test_command_record.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "params = get_synced_params()\ncmd = record.RecordAddCommand()\nKeeperApiHelper.communicate_expect(['record_add'])\ncmd.execute(params, force=True, title='New Record')\nself.assertTrue(KeeperApiHelper.is_expect_empty())\nKeeperApiHelper.communicate_expect(['record_add'])\ncmd.execute(params, login='login', password='password', url='url', custom=\n    'name1: value 1, name2: value 2', title='New Record')\nself.assertTrue(KeeperApiHelper.is_expect_empty())\nKeeperApiHelper.communicate_expect(['record_add'])\ncmd.execute(params, login='login', password='password', url='url', custom=[\n    {'name1': 'value 1', 'name2': 'value 2'}], title='New Record')\nself.assertTrue(KeeperApiHelper.is_expect_empty())\nwith mock.patch('builtins.input', return_value='Input Data'):\n    KeeperApiHelper.communicate_expect(['record_add'])\n    cmd.execute(params, force=True, title='New Record')\n    self.assertTrue(KeeperApiHelper.is_expect_empty())\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_invalid_shredding_algorithm",
+    "className": "TestCapabilityInformation",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a TypeError is raised when an invalid value is used to set\n        the shredding algorithm of a CapabilityInformation structure.\n        \"\"\"\nkwargs = {'shredding_algorithm': 'invalid'}\nself.assertRaisesRegex(TypeError,\n    'The shredding algorithm must be a ShreddingAlgorithm enumeration.',\n    objects.CapabilityInformation, **kwargs)\nargs = objects.CapabilityInformation(), 'shredding_algorithm', 'invalid'\nself.assertRaisesRegex(TypeError,\n    'The shredding algorithm must be a ShreddingAlgorithm enumeration.',\n    setattr, *args)\n"
+}

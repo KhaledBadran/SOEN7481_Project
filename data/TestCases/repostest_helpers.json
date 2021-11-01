@@ -1,0 +1,9 @@
+{
+    "functionName": "test_helpers",
+    "className": null,
+    "fileName": "/PaulHancock_&_Aegean/tests_&_test_source_finder.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test the helper functions\"\"\"\nsrc = sf.ComponentSource()\nsrc.a = 1\nsrc.b = 2\nsrc.pa = 90\nsrc2 = deepcopy(src)\nsf.fix_shape(src2)\nif not src.a == src2.b:\n    raise AssertionError()\nif not src.b == src2.a:\n    raise AssertionError()\nif not src.pa == src2.pa - 90:\n    raise AssertionError()\nif not sf.pa_limit(-180.0) == 0.0:\n    raise AssertionError()\nif not sf.pa_limit(95.0) == -85.0:\n    raise AssertionError()\nif not sf.theta_limit(0.0) == 0.0:\n    raise AssertionError()\nif not sf.theta_limit(np.pi) == 0.0:\n    raise AssertionError()\nif not sf.theta_limit(-3 * np.pi / 2) == np.pi / 2:\n    raise AssertionError()\nif not np.all(a is None for a in sf.get_aux_files('_$_fkjfjl')):\n    raise AssertionError()\naux_files = sf.get_aux_files('tests/test_files/1904-66_SIN.fits')\nif not aux_files['rms'] == 'tests/test_files/1904-66_SIN_rms.fits':\n    raise AssertionError()\nif not aux_files['bkg'] == 'tests/test_files/1904-66_SIN_bkg.fits':\n    raise AssertionError()\nif not aux_files['mask'] == 'tests/test_files/1904-66_SIN.mim':\n    raise AssertionError()\n"
+}

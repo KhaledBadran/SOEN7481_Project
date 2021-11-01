@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cudaaligner_simple_batch",
+    "className": null,
+    "fileName": "/clara-genomics_&_ClaraGenomicsAnalysis/pygenomeworks_&_test_&_test_cudaaligner_bindings.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test valid calculation of alignments by checking cigar strings.\n    \"\"\"\ndevice = cuda.cuda_get_device()\nstream = get_stream\nbatch = CudaAlignerBatch(len(query), len(target), 1, alignment_type=\n    'global', stream=stream, device_id=device)\nbatch.add_alignment(query, target)\nbatch.align_all()\nalignments = batch.get_alignments()\nassert len(alignments) == 1\nassert alignments[0].cigar == cigar\npytest.mark.gpupytest.mark.parametrize('query, target, cigar', [('AAAAAAA', 'TTTTTTT',\n    '7M'), ('AAATC', 'TACGTTTT', '3M1I2M2I'), ('TACGTA', 'ACATAC', '1D5M1I'\n    ), ('TGCA', 'ATACGCT', '1I1M2I3M'), pytest.param('ACGT', 'TCGA', '5M',\n    marks=pytest.mark.xfail)])"
+}

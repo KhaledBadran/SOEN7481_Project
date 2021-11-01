@@ -1,0 +1,9 @@
+{
+    "functionName": "test_names",
+    "className": "TestWorld",
+    "fileName": "/tum-pbs_&_PhiFlow/tests_&_test_world.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "c = StateCollection()\nself.assertEqual(c.states, {})\nc = c.state_added(Fluid(Domain([64])))\ntry:\n    c = c.state_added(Fluid(Domain([80])))\n    self.fail()\nexcept AssertionError:\n    pass\nc = c.state_replaced(Fluid(Domain([80])))\nnumpy.testing.assert_equal(c.fluid.density.data.shape, [1, 80, 1])\nworld = World(add_default_objects=True)\nassert world.gravity.state is world.state.gravity\n"
+}

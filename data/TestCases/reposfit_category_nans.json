@@ -1,0 +1,9 @@
+{
+    "functionName": "fit_category_nans",
+    "className": "DataFrameToMatrix",
+    "fileName": "/kitware_&_BroThon/zat_&_dataframe_to_matrix.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"ONLY FIT: Convert np.NaNs to a category 'NaN'\"\"\"\nfor column in df.select_dtypes(include=['category']).columns:\n    if df[column].isnull().any():\n        df[column].cat.add_categories('NaN', inplace=True)\n        df[column].fillna('NaN', inplace=True)\nstaticmethod"
+}

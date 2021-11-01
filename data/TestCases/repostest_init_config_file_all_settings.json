@@ -1,0 +1,9 @@
+{
+    "functionName": "test_init_config_file_all_settings",
+    "className": "PyU4VUnivmaxConnTestConfigFile",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_conn.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test initialisation of U4VConn using all required settings.\"\"\"\nconfig_file, config_dir = pf.FakeConfigFile.create_fake_config_file(verify=True\n    )\nunivmax_conn.file_path = config_file\nwith mock.patch.object(rest_requests.RestRequests, 'establish_rest_session',\n    return_value=pf.FakeRequestsSession()):\n    conn = univmax_conn.U4VConn()\n    self.assertEqual(pcd.CommonData.array, conn.array_id)\n    self.assertIsInstance(conn.rest_client, rest_requests.RestRequests)\n    self.assertEqual('smc', conn.rest_client.username)\n    self.assertEqual('smc', conn.rest_client.password)\n    self.assertTrue(conn.rest_client.verify_ssl)\n    self.assertEqual('https://10.0.0.75:8443/univmax/restapi', conn.\n        rest_client.base_url)\n    self.assertEqual(pcd.CommonData.remote_array, conn.remote_array)\n    pf.FakeConfigFile.delete_fake_config_file(config_file, config_dir)\n"
+}

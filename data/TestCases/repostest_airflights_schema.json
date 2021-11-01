@@ -1,0 +1,9 @@
+{
+    "functionName": "test_airflights_schema",
+    "className": null,
+    "fileName": "/CFMTech_&_Jupytab/jupytab-server_&_tests_&_test_nb_run.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "response = rget(build_uri('kernel/AirFlights/schema'))\njson_result = response\nflight_table = get_table_by_id(json_result, 'flights')\nassert get_column_by_id(flight_table['columns'], 'callsign') is not None\nvelocity = get_column_by_id(flight_table['columns'], 'velocity')\nassert velocity['dataType'] == 'float'\nassert len(json_result[0]['columns']) == 16\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_claim_set_with_optional_claims",
+    "className": "EasyJWTTest",
+    "fileName": "/BMeu_&_EasyJWT/tests_&_easyjwt_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n            Test getting the claim set if optional claims are set.\n\n            Expected Result: A dictionary with the entries for the class and the optional claims is returned.\n        \"\"\"\nclaim_set = dict(_easyjwt_class='EasyJWT', aud=self.audience, exp=self.\n    expiration_date, iat=self.issued_at_date, iss=self.issuer, jti=self.\n    JWT_ID, nbf=self.not_before_date, sub=self.subject)\neasyjwt = EasyJWT(self.key)\neasyjwt.audience = self.audience\neasyjwt.expiration_date = self.expiration_date\neasyjwt.issued_at_date = self.issued_at_date\neasyjwt.issuer = self.issuer\neasyjwt.JWT_ID = self.JWT_ID\neasyjwt.not_before_date = self.not_before_date\neasyjwt.subject = self.subject\nself.assertDictEqual(claim_set, easyjwt._get_claim_set())\n"
+}

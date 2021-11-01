@@ -1,0 +1,9 @@
+{
+    "functionName": "test_build_uri_version_control",
+    "className": "PyU4VCommonTest",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_common.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test _build_uri.\"\"\"\nbuilt_uri_1 = self.common._build_uri(category=SLOPROVISIONING,\n    resource_level=SYMMETRIX, resource_level_id=self.data.array,\n    resource_type=VOLUME)\nuri_1 = '/{ver}/sloprovisioning/symmetrix/{array}/volume'.format(ver=\n    UNISPHERE_VERSION, array=self.data.array)\nself.assertEqual(uri_1, built_uri_1)\nresource_name = self.data.device_id\nversion_2 = self.data.U4P_VERSION\nbuilt_uri_2 = self.common._build_uri(category=SLOPROVISIONING,\n    resource_level=SYMMETRIX, resource_level_id=self.data.array,\n    resource_type=VOLUME, resource_type_id=resource_name, version=version_2)\nuri_2 = '/{ver}/sloprovisioning/symmetrix/{array}/volume/{res}'.format(ver=\n    version_2, array=self.data.array, res=resource_name)\nself.assertEqual(uri_2, built_uri_2)\nbuilt_uri_3 = self.common._build_uri(category=SLOPROVISIONING,\n    resource_level=SYMMETRIX, resource_level_id=self.data.array,\n    resource_type=VOLUME, resource_type_id=resource_name, version=\n    UNISPHERE_VERSION, no_version=True)\nuri_3 = '/{ver}/sloprovisioning/symmetrix/{array}/volume/{res}'.format(ver=\n    UNISPHERE_VERSION, array=self.data.array, res=resource_name)\nself.assertEqual(uri_3, built_uri_3)\nbuilt_uri_4 = self.common._build_uri(category=SLOPROVISIONING,\n    resource_level=SYMMETRIX, resource_level_id=self.data.array,\n    resource_type=VOLUME, resource_type_id=resource_name, no_version=True)\nuri_4 = '/sloprovisioning/symmetrix/{array}/volume/{res}'.format(array=self\n    .data.array, res=resource_name)\nself.assertEqual(uri_4, built_uri_4)\n"
+}

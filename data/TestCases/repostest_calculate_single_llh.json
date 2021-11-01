@@ -1,0 +1,9 @@
+{
+    "functionName": "test_calculate_single_llh",
+    "className": null,
+    "fileName": "/PEtab-dev_&_PEtab/tests_&_test_calculate.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test calculate.calculate_single_llh.\"\"\"\nm, s, sigma = 5.3, 4.5, 1.6\npi, log, log10 = np.pi, np.log, np.log10\nllh = calculate_single_llh(measurement=m, simulation=s, noise_value=sigma,\n    noise_distribution=NORMAL, scale=LIN)\nexpected_llh = -0.5 * (((s - m) / sigma) ** 2 + log(2 * pi * sigma ** 2))\nassert llh == pytest.approx(expected_llh)\nllh = calculate_single_llh(measurement=m, simulation=s, noise_value=sigma,\n    noise_distribution=NORMAL, scale=LOG)\nexpected_llh = -0.5 * (((log(s) - log(m)) / sigma) ** 2 + log(2 * pi * \n    sigma ** 2 * m ** 2))\nassert llh == pytest.approx(expected_llh)\nllh = calculate_single_llh(measurement=m, simulation=s, noise_value=sigma,\n    noise_distribution=NORMAL, scale=LOG10)\nexpected_llh = -0.5 * (((log10(s) - log10(m)) / sigma) ** 2 + log(2 * pi * \n    sigma ** 2 * m ** 2 * log(10) ** 2))\nassert llh == pytest.approx(expected_llh)\nllh = calculate_single_llh(measurement=m, simulation=s, noise_value=sigma,\n    noise_distribution=LAPLACE, scale=LIN)\nexpected_llh = -abs((s - m) / sigma) - log(2 * sigma)\nassert llh == pytest.approx(expected_llh)\nllh = calculate_single_llh(measurement=m, simulation=s, noise_value=sigma,\n    noise_distribution=LAPLACE, scale=LOG)\nexpected_llh = -abs((log(s) - log(m)) / sigma) - log(2 * sigma * m)\nassert llh == pytest.approx(expected_llh)\nllh = calculate_single_llh(measurement=m, simulation=s, noise_value=sigma,\n    noise_distribution=LAPLACE, scale=LOG10)\nexpected_llh = -abs((log10(s) - log10(m)) / sigma) - log(2 * sigma * m *\n    log(10))\nassert llh == pytest.approx(expected_llh)\n"
+}

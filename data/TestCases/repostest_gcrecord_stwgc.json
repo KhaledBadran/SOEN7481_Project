@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gcrecord_stwgc",
+    "className": null,
+    "fileName": "/linkedin_&_JTune/test_&_test_gcrecord.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Validate parsing of a CMS remark stop the world event.\"\"\"\ncms = datetime.datetime(2017, 2, 3, 14, 11, 34, 967000), [\n    \"\"\"2017-02-03T14:11:34.967-0800: 8.389: [GC (CMS Final Remark) [YG occupancy: 1786 K (7680 K)]8.389: [Rescan (parallel) , 0.0008489 secs]8.390: [weak refs processing, 0.0000172 secs]8.390: [class unloading, 0.0143227 secs]8.404: [scrub symbol table, 0.0043012 secs]8.409: [scrub string table, 0.0006371 secs][1 CMS-remark: 31483K(194560K)] 33270K(202240K), 0.0225082 secs] [Times: user=0.06 sys=0.00, real=0.03 secs] \n\"\"\"\n    ]\nr = GCRecord(cms)\nassert not r.is_cms_gc\nassert r.is_stw_gc\nassert r.valid_record\nassert r.stw_time == 0.0225082\nassert r.gc_type == 'CMS-STW'\n"
+}

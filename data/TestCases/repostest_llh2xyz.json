@@ -1,0 +1,9 @@
+{
+    "functionName": "test_llh2xyz",
+    "className": "TestConvert",
+    "fileName": "/GeoscienceAustralia_&_GeodePy/geodepy_&_tests_&_test_convert.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "x, y, z = llh2xyz(hp2dec(-37.482667598), hp2dec(144.581644114), 39.6514)\nself.assertAlmostEqual(x, -4131654.2815, 3)\nself.assertAlmostEqual(y, 2896107.9738, 3)\nself.assertAlmostEqual(z, -3888601.3067, 3)\nx, y, z = llh2xyz(DMSAngle(-37, 48, 26.67598), DMSAngle(144, 58, 16.44114),\n    39.6514)\nself.assertAlmostEqual(x, -4131654.2815, 3)\nself.assertAlmostEqual(y, 2896107.9738, 3)\nself.assertAlmostEqual(z, -3888601.3067, 3)\nx, y, z = llh2xyz(DDMAngle(-37, 48.4445996), DDMAngle(144, 58.274019), 39.6514)\nself.assertAlmostEqual(x, -4131654.2815, 3)\nself.assertAlmostEqual(y, 2896107.9738, 3)\nself.assertAlmostEqual(z, -3888601.3067, 3)\nabs_path = os.path.abspath(os.path.dirname(__file__))\ntestdata = read_dnacoord(os.path.join(abs_path,\n    'resources/natadjust_rvs_example.dat'))\nfor coord in testdata:\n    coord.converthptodd()\n    xcomp, ycomp, zcomp = llh2xyz(coord.lat, coord.long, coord.ell_ht)\n    assert abs(coord.x - xcomp) < 0.0002\n    assert abs(coord.y - ycomp) < 0.0002\n    assert abs(coord.z - zcomp) < 0.0002\n"
+}

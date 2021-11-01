@@ -1,0 +1,9 @@
+{
+    "functionName": "test_run_SS",
+    "className": null,
+    "fileName": "/open-source-economics_&_OG-USA/ogusa_&_tests_&_test_SS.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "if baseline is False:\n    tax_func_path_baseline = os.path.join(CUR_PATH, 'TxFuncEst_baseline.pkl')\n    tax_func_path = os.path.join(CUR_PATH, 'TxFuncEst_policy.pkl')\n    execute.runner(constants.BASELINE_DIR, constants.BASELINE_DIR,\n        time_path=False, baseline=True, og_spec=param_updates, run_micro=\n        False, tax_func_path=tax_func_path_baseline)\nelse:\n    tax_func_path = os.path.join(CUR_PATH, 'TxFuncEst_baseline.pkl')\np = Specifications(baseline=baseline, client=dask_client, num_workers=\n    NUM_WORKERS)\np.update_specifications(param_updates)\np.get_tax_function_parameters(None, run_micro=False, tax_func_path=\n    tax_func_path)\ntest_dict = SS.run_SS(p, None)\nexpected_dict = utils.safe_read_pickle(os.path.join(CUR_PATH,\n    'test_io_data', filename))\nfor k, v in expected_dict.items():\n    assert np.allclose(test_dict[k], v)\npytest.mark.parametrize('baseline,param_updates,filename', [(True,\n    param_updates1, filename1), (True, param_updates2, filename2), (True,\n    param_updates3, filename3), (True, param_updates4, filename4), (False,\n    param_updates5, filename5), (False, param_updates6, filename6), (False,\n    param_updates7, filename7), (False, param_updates8, filename8), (False,\n    param_updates11, filename11)], ids=['Baseline', 'Baseline, use zeta',\n    'Baseline, small open', 'Baseline, small open use zeta', 'Reform',\n    'Reform, use zeta', 'Reform, small open', 'Reform, small open use zeta',\n    'Baseline, delta_tau=0'])pytest.mark.full_run"
+}

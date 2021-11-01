@@ -1,0 +1,9 @@
+{
+    "functionName": "test_exclude_matches",
+    "className": "TestInterestMethods",
+    "fileName": "/named-data_&_PyNDN2/tests_&_unit_tests_&_test_interest_methods.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "exclude = Exclude()\nexclude.appendComponent(Name('%00%02').get(0))\nexclude.appendAny()\nexclude.appendComponent(Name('%00%20').get(0))\ncomponent = Name('%00%01').get(0)\nself.assertFalse(exclude.matches(component), component.toEscapedString() +\n    ' should not match ' + exclude.toUri())\ncomponent = Name('%00%0F').get(0)\nself.assertTrue(exclude.matches(component), component.toEscapedString() +\n    ' should match ' + exclude.toUri())\ncomponent = Name('%00%21').get(0)\nself.assertFalse(exclude.matches(component), component.toEscapedString() +\n    ' should not match ' + exclude.toUri())\n"
+}

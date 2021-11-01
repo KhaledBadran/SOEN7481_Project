@@ -1,0 +1,9 @@
+{
+    "functionName": "_sum_duplicates",
+    "className": null,
+    "fileName": "/jonwright_&_ImageD11/test_&_test_compress_duplicates.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" for testing - to be moved or removed \"\"\"\nif len(data) == 0:\n    return row, col, data\norder = np.lexsort((col, row))\nrow = row[order]\ncol = col[order]\ndata = data[order]\nunique_mask = (row[1:] != row[:-1]) | (col[1:] != col[:-1])\nunique_mask = np.append(True, unique_mask)\nrow = row[unique_mask]\ncol = col[unique_mask]\nunique_inds, = np.nonzero(unique_mask)\ndata = np.add.reduceat(data, unique_inds, dtype=data.dtype)\nreturn row, col, data\n"
+}

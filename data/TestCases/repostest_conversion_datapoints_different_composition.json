@@ -1,0 +1,9 @@
+{
+    "functionName": "test_conversion_datapoints_different_composition",
+    "className": "TestConvertToReSpecTh",
+    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_chemked.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test for appropriate handling of datapoints with different composition.\n        \"\"\"\nfile_path = os.path.join('testfile_st.yaml')\nfilename = pkg_resources.resource_filename(__name__, file_path)\nc = ChemKED(filename)\nc.datapoints[0].composition = {'H2': Composition(**{'InChI': '1S/H2/h1H',\n    'amount': Q_(0.1, 'dimensionless'), 'species_name': 'H2', 'SMILES':\n    None, 'atomic_composition': None}), 'O2': Composition(**{'InChI':\n    '1S/O2/c1-2', 'amount': Q_(0.1, 'dimensionless'), 'species_name': 'O2',\n    'SMILES': None, 'atomic_composition': None}), 'N2': Composition(**{\n    'amount': Q_(0.8, 'dimensionless'), 'species_name': 'N2', 'SMILES':\n    'N#N', 'InChI': None, 'atomic_composition': None})}\nwith TemporaryDirectory() as temp_dir:\n    newfile = os.path.join(temp_dir, 'test.xml')\n    c.convert_to_ReSpecTh(newfile)\n    tree = etree.parse(newfile)\nroot = tree.getroot()\nwith pytest.warns(UserWarning) as record:\n    datapoints = get_datapoints(root)\nm = str(record.pop(UserWarning).message)\nassert m == 'Missing InChI for species N2'\nassert len(datapoints[0]['composition']['species']) == 3\nfor spec in datapoints[0]['composition']['species']:\n    assert spec in [{'InChI': '1S/H2/h1H', 'amount': [0.1], 'species-name':\n        'H2'}, {'InChI': '1S/O2/c1-2', 'amount': [0.1], 'species-name':\n        'O2'}, {'amount': [0.8], 'species-name': 'N2', 'InChI': None}]\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_write_kmip_2_0",
+    "className": "TestDeriveKeyResponsePayload",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_derive_key.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a DeriveKey response payload can be written to a data stream\n        encoded with the KMIP 2.0 format.\n        \"\"\"\npayload = payloads.DeriveKeyResponsePayload(unique_identifier=\n    'fb4b5b9c-6188-4c63-8142-fe9c328129fc', template_attribute=objects.\n    TemplateAttribute(attributes=[objects.Attribute(attribute_name=objects.\n    Attribute.AttributeName('Cryptographic Algorithm'), attribute_value=\n    primitives.Enumeration(enums.CryptographicAlgorithm, value=enums.\n    CryptographicAlgorithm.AES, tag=enums.Tags.CRYPTOGRAPHIC_ALGORITHM)),\n    objects.Attribute(attribute_name=objects.Attribute.AttributeName(\n    'Cryptographic Length'), attribute_value=primitives.Integer(value=128,\n    tag=enums.Tags.CRYPTOGRAPHIC_LENGTH))]))\nstream = utils.BytearrayStream()\npayload.write(stream, kmip_version=enums.KMIPVersion.KMIP_2_0)\nself.assertEqual(len(self.partial_encoding_no_template_attribute), len(stream))\nself.assertEqual(str(self.partial_encoding_no_template_attribute), str(stream))\n"
+}

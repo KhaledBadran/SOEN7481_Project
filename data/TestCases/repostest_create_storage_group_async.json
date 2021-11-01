@@ -1,0 +1,9 @@
+{
+    "functionName": "test_create_storage_group_async",
+    "className": "CITestProvisioning",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test create_storage_group async.\"\"\"\nstorage_group_name = self.generate_name('sg')\nvolume_name = self.generate_name()\njob = self.provisioning.create_storage_group(self.SRP, storage_group_name,\n    self.SLO, _async=True, vol_name=volume_name)\nself.addCleanup(self.delete_storage_group, storage_group_name)\nself.conn.common.wait_for_job_complete(job)\nstorage_group_details = self.provisioning.get_storage_group(storage_group_name)\nself._validate_storage_group_details(storage_group_name, storage_group_details)\n"
+}

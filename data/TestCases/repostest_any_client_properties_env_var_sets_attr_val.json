@@ -1,0 +1,9 @@
+{
+    "functionName": "test_any_client_properties_env_var_sets_attr_val",
+    "className": null,
+    "fileName": "/5uper5hoot_&_PikaTools/tests_&_test_connection.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "monkeypatch.setenv(f'PIKA_CLIENT_PROPERTIES_{attr.upper()}', '1')\ncp = EnvConnectionParameters()\nassert isinstance(cp.client_properties, dict)\nif attr.startswith('capabilities_'):\n    nested_attr = attr.split('_', 1)[1]\n    assert 'capabilities' in cp.client_properties\n    assert nested_attr in cp.client_properties['capabilities']\nelse:\n    assert attr in cp.client_properties\npytest.mark.parametrize('attr', ['product', 'platform', 'information',\n    'version', 'capabilities_basic.nack', 'capabilities_connection.blocked',\n    'capabilities_consumer_cancel_notify', 'capabilities_publisher_confirms'])"
+}

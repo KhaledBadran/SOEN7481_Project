@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fails_with_less_argument_value_in_multiple_filters",
+    "className": null,
+    "fileName": "/Accern_&_accern-python/test_&_test_schema.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with pytest.raises(error.SchemaError) as exc_info:\n    schema = {'name': 'test', 'description': 'test', 'filters': [{\n        'entity_sentiment': [0, 10]}, {'entity_sentiment': [0]}]}\n    Schema.validate_schema(method='historical', schema=schema)\nassert exc_info.value.args[0\n    ] == '\"entity_sentiment\" has wrong number or arguments.'\n"
+}

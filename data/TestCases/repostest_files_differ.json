@@ -1,0 +1,9 @@
+{
+    "functionName": "test_files_differ",
+    "className": null,
+    "fileName": "/approvals_&_ApprovalTests.Python/tests_&_reporters_&_test_python_native_reporter.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "file1 = os.path.join(str(tmpdir), 'a.received.txt')\nfile2 = os.path.join(str(tmpdir), 'b.approved.txt')\nwith open(file1, 'w') as f1:\n    f1.write('abc')\nwith open(file2, 'w') as f2:\n    f2.write('def')\ndiff = calculate_diff(file1, file2)\ndiff = diff.replace(str(tmpdir), 'tmpdir')\nverify(diff, reporter=factory.get('PythonNative'))\n"
+}

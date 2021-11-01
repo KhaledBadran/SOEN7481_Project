@@ -1,0 +1,9 @@
+{
+    "functionName": "test__group_features",
+    "className": "TestFeaturePruner",
+    "fileName": "/dkaslovsky_&_GraphRole/tests_&_test_features_&_test_prune.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data = {'a': [1, 2, 3], 'b': [1, 2, 3], 'c': [2, 1, 1], 'd': [1, 1, 1]}\nfeatures = pd.DataFrame(data)\ntable = {'dist_thresh = 0 -> 1 component': {'dist_thresh': 0, 'expected': [\n    {'a', 'b'}]}, 'dist_thresh = 1 -> 2 components': {'dist_thresh': 1,\n    'expected': [{'a', 'b'}, {'c', 'd'}]},\n    'dist_thresh = 2 -> all connected': {'dist_thresh': 2, 'expected': [{\n    'a', 'b', 'c', 'd'}]}, 'dist_thresh = -1 -> empty list': {'dist_thresh':\n    -1, 'expected': []}}\nfor test_name, test in table.items():\n    self.pruner._feature_group_thresh = test['dist_thresh']\n    groups = self.pruner._group_features(features)\n    self.assertListEqual(list(groups), test['expected'], test_name)\n"
+}

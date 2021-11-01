@@ -1,0 +1,9 @@
+{
+    "functionName": "test_callable_proxy_caching",
+    "className": null,
+    "fileName": "/PlaidWeb_&_Publ/tests_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Test the caching-ness of CallableProxy's default \"\"\"\napp = flask.Flask(__name__)\napp.secret_key = 'bogus'\nstash = {'call_count': 0}\ndef wrapped_func():\n    stash['call_count'] += 1\n    return flask.request.path\nproxy = utils.CallableProxy(wrapped_func)\nwith app.test_request_context('/foo/bar'):\n    assert str(proxy) == '/foo/bar'\n    assert stash['call_count'] == 1\n    assert str(proxy) == '/foo/bar'\n    assert stash['call_count'] == 1\nwith app.test_request_context('/foo/bar'):\n    assert str(proxy) == '/foo/bar'\n    assert stash['call_count'] == 1\nwith app.test_request_context('/foo/baz'):\n    assert str(proxy) == '/foo/baz'\n    assert stash['call_count'] == 2\nwith app.test_request_context('/foo/baz'):\n    flask.session['me'] = 'test:cachebuster'\n    assert str(proxy) == '/foo/baz'\n    assert stash['call_count'] == 3\n"
+}

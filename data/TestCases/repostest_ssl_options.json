@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ssl_options",
+    "className": null,
+    "fileName": "/5uper5hoot_&_PikaTools/tests_&_test_connection.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "monkeypatch.setenv(f'PIKA_SSL_OPTIONS_{attr.upper()}', envval)\ncp = EnvConnectionParameters()\nassert isinstance(cp.ssl_options, pika.SSLOptions)\nassert getattr(cp.ssl_options, attr) == res\npytest.mark.parametrize('attr,envval,res', [('keyfile',\n    '/path/to/clientkey.pem', '/path/to/clientkey.pem'), ('key_password',\n    'thisisthepassword', 'thisisthepassword'), ('certfile',\n    '/path/to/clientcert.pem', '/path/to/clientcert.pem'), ('server_side',\n    '0', False), ('verify_mode', 'CERT_REQUIRED', ssl.CERT_REQUIRED), (\n    'ssl_version', 'PROTOCOL_TLS', ssl.PROTOCOL_TLS), ('cafile', '/a/path/',\n    '/a/path/'), ('capath', '/a/path/', '/a/path/'), ('cadata', 'something',\n    'something'), ('do_handshake_on_connect', '1', True), (\n    'suppress_ragged_eofs', '0', False), ('ciphers', 'a string of ciphers',\n    'a string of ciphers'), ('server_hostname', 'hostname', 'hostname')])"
+}

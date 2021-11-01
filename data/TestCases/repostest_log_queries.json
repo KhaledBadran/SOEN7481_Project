@@ -1,0 +1,9 @@
+{
+    "functionName": "test_log_queries",
+    "className": "TestFlaskProfiler",
+    "fileName": "/abetlen_&_Flask-Perf/test_flask_perf.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with patch('flask_perf.get_debug_queries') as mock_get_debug_queries, patch(\n    'flask_perf.current_app') as mock_current_app:\n    mock_current_app.config = {'PROFILER_SQLALCHEMY_FORMAT':\n        '{statement}{duration}{parameters}{start_time}{end_time}{context}',\n        'PROFILER_SQLALCHEMY_THRESHOLD':\n        PROFILER_DEFAULT_SQLALCHEMY_THRESHOLD, 'PROFILER_SQLALCHEMY_FORMAT':\n        PROFILER_DEFAULT_SQLALCHEMY_FORMAT}\n    mockQuery = MagicMock()\n    mockQuery.duration = 2\n    mock_get_debug_queries.return_value = [mockQuery]\n    Profiler.log_queries(None)\n    mock_get_debug_queries.assert_called_once()\n"
+}

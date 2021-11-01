@@ -1,0 +1,9 @@
+{
+    "functionName": "test_issue_364",
+    "className": "TestGitHubIssues",
+    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_test_issues.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Test mixed unicode/binary arguments in executemany. \"\"\"\nconn = pymysql.connect(charset='utf8mb4', **self.databases[0])\nself.safe_create_table(conn, 'issue364',\n    'create table issue364 (value_1 binary(3), value_2 varchar(3)) engine=InnoDB default charset=utf8mb4'\n    )\nsql = 'insert into issue364 (value_1, value_2) values (_binary %s, %s)'\nusql = u'insert into issue364 (value_1, value_2) values (_binary %s, %s)'\nvalues = [pymysql.Binary(b'\\x00\\xff\\x00'), u'\u00e4\u00f6\u00fc']\ncur = conn.cursor()\ncur.execute(sql, args=values)\ncur.execute('select * from issue364')\nself.assertEqual(cur.fetchone(), tuple(values))\ncur.execute(usql, args=values)\ncur.executemany(sql, args=(values, values, values))\ncur.execute('select * from issue364')\nfor row in cur.fetchall():\n    self.assertEqual(row, tuple(values))\ncur.executemany(usql, args=(values, values, values))\n"
+}

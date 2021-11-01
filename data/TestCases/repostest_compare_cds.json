@@ -1,0 +1,9 @@
+{
+    "functionName": "test_compare_cds",
+    "className": "TestsTranscriptAssembly",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_transcript.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tr.stat_ta_gff = self.mock.mock_stat_ta_gff\nself.tran.multiparser = self.mock_parser\ngen_file(os.path.join(self.gffs, 'test.gff'), self.example.gff_file)\ngen_file(os.path.join(self.gffs, 'tmp/test.gff'), self.example.gff_file)\ngen_file(os.path.join(self.out_gff, 'test_transcript.gff'), self.example.\n    tran_file)\ngff_out = os.path.join(self.out, 'gffs')\ngen_file(os.path.join(gff_out, 'tmp_ta_gff'), self.example.tran_file)\ngen_file(os.path.join(gff_out, 'tmp_gff_ta'), self.example.gff_file)\nargs = self.mock_args.mock()\nargs.out_folder = self.out\nargs.trans = self.trans\nargs.gffs = self.gffs\nlog = open(os.path.join(self.test_folder, 'test.log'), 'w')\nargs.c_feature = ['CDS']\nself.tran._compare_cds(['test'], args, log)\ndatas = import_data(os.path.join(self.gffs, 'test.gff'))\nself.assertEqual('\\n'.join(datas), '##gff-version 3\\n' + self.example.gff_file)\ndatas = import_data(os.path.join(self.out_gff, 'test_transcript.gff'))\nself.assertEqual('\\n'.join(datas), '##gff-version 3\\n' + self.example.tran_file\n    )\n"
+}

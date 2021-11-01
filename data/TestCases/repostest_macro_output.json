@@ -1,0 +1,9 @@
+{
+    "functionName": "test_macro_output",
+    "className": null,
+    "fileName": "/open-source-economics_&_OG-USA/regression_&_test_regression.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Compare macro output\n\n    macro_outputs: output as read from TPI/TPI_macro_vars.pkl using\n                   macro_output.dump_diff_output\n                   created in TPI.run_TPI\n    macro_var_idx: index of TPI macro ouptut variable from OUTPUT_VARS\n    \"\"\"\nassert np.allclose(macro_outputs['new']['pct_changes'][(macro_var_idx), :],\n    macro_outputs['reg']['pct_changes'][(macro_var_idx), :], atol=0.001,\n    rtol=0.001)\npytest.mark.regressionpytest.mark.parametrize('macro_var_idx', np.arange(len(MACRO_VARS)))"
+}

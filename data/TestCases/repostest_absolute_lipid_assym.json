@@ -1,0 +1,9 @@
+{
+    "functionName": "test_absolute_lipid_assym",
+    "className": null,
+    "fileName": "/Tsjerk_&_Insane/tests_&_test_absolute.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with utils._redirect_out_and_err(sys.stdout, sys.stdout):\n    molecules, protein, membrane, solvent, lipids, box = insane.core.old_main(\n        lower=[('DOPC', 72, 0)], upper=[('POPC', 89, 0)], output='plop.gro',\n        zdistance=15)\nnpo4 = len([atom for atom in membrane.atoms if atom[0] == 'PO4'])\nassert_equal(npo4, 72 + 89)\nassert_equal(molecules, [('POPC', 89), ('DOPC', 72)])\nassert_equal(lipids, ((('DOPC',), (72,), (0,)), (('POPC',), (89,), (0,))))\nassert_equal(len(protein), 0)\nassert_equal(len(solvent), 0)\n"
+}

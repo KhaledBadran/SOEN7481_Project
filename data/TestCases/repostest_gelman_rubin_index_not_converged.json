@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gelman_rubin_index_not_converged",
+    "className": null,
+    "fileName": "/samreay_&_ChainConsumer/tests_&_test_diagnostic.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data = np.vstack((np.random.normal(loc=0.0, size=100000), np.random.normal(\n    loc=1.0, size=100000))).T\ndata[80000:, :] *= 2\ndata[80000:, :] += 1\nconsumer = ChainConsumer()\nconsumer.add_chain(data, walkers=4)\nassert not consumer.diagnostic.gelman_rubin(chain=0)\n"
+}

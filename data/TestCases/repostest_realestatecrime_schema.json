@@ -1,0 +1,9 @@
+{
+    "functionName": "test_realestatecrime_schema",
+    "className": null,
+    "fileName": "/CFMTech_&_Jupytab/jupytab-server_&_tests_&_test_nb_run.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "response = rget(build_uri('kernel/RealEstateCrime/schema'))\njson_result = response\ncrime_table = get_table_by_id(json_result, 'crime')\nassert len(crime_table['columns']) == 9\nassert get_column_by_id(crime_table['columns'], 'beat') is not None\nreal_estate_table = get_table_by_id(json_result, 'real_estate')\nassert len(real_estate_table['columns']) == 12\ncity = get_column_by_id(real_estate_table['columns'], 'city')\nassert city['dataType'] == 'string'\ncombined = get_table_by_id(json_result, 'combined')\nassert len(combined['columns']) == 19\nbaths = get_column_by_id(real_estate_table['columns'], 'baths')\nassert baths['dataType'] == 'int'\n"
+}

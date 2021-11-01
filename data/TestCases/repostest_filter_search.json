@@ -1,0 +1,9 @@
+{
+    "functionName": "test_filter_search",
+    "className": "TestSearch",
+    "fileName": "/steveYeah_&_PyBomb/tests_&_test_clients_&_test_games.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test search filters are applied to GB API call.\"\"\"\nres = games_client.search({'name': 'game name'})\nassert isinstance(res, Response)\nassert res.uri == mock_response.url\nmock_response_json = mock_response.json()\nassert res.results == mock_response_json['results']\nassert res.num_page_results == mock_response_json['number_of_page_results']\nassert res.num_total_results == mock_response_json['number_of_total_results']\nmock_requests_get.assert_called_once_with('http://www.giantbomb.com/api/games',\n    params={'filter': 'name:game name', 'api_key': 'fake_key', 'format':\n    'json'}, headers={'User-Agent': 'Pybomb {}'.format(version)})\n"
+}

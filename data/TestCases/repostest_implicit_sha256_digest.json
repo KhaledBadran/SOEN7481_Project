@@ -1,0 +1,9 @@
+{
+    "functionName": "test_implicit_sha256_digest",
+    "className": "TestNameMethods",
+    "fileName": "/named-data_&_PyNDN2/tests_&_unit_tests_&_test_name_methods.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "name = Name()\ndigest = bytearray([40, 186, 212, 181, 39, 91, 211, 146, 219, 182, 112, 199,\n    92, 240, 182, 111, 19, 247, 148, 43, 33, 232, 15, 85, 192, 232, 107, 55,\n    71, 83, 165, 72, 0, 0])\nname.appendImplicitSha256Digest(digest[0:32])\nname.appendImplicitSha256Digest(digest[0:32])\nself.assertEqual(name.get(0), name.get(1))\ngotError = True\ntry:\n    name.appendImplicitSha256Digest(digest[0:34])\n    gotError = False\nexcept:\n    pass\nif not gotError:\n    self.fail('Expected error in appendImplicitSha256Digest')\ngotError = True\ntry:\n    name.appendImplicitSha256Digest(digest[0:30])\n    gotError = False\nexcept:\n    pass\nif not gotError:\n    self.fail('Expected error in appendImplicitSha256Digest')\nname.append(digest[0:32])\nself.assertTrue(name.get(0).compare(name.get(2)) < 0)\nself.assertEqual(name.get(0).getValue(), name.get(2).getValue())\nname.append(digest[1:32])\nself.assertTrue(name.get(0).compare(name.get(3)) < 0)\nself.assertEqual(name.get(0).toEscapedString(), 'sha256digest=' +\n    '28bad4b5275bd392dbb670c75cf0b66f13f7942b21e80f55c0e86b374753a548')\nself.assertEqual(name.get(0).isImplicitSha256Digest(), True)\nself.assertEqual(name.get(2).isImplicitSha256Digest(), False)\ngotError = True\ntry:\n    Name('/hello/sha256digest=hmm')\n    gotError = False\nexcept:\n    pass\nif not gotError:\n    self.fail('Expected error in new Name from URI')\nname2 = Name('/hello/sha256digest=' +\n    '28bad4b5275bd392dbb670c75cf0b66f13f7942b21e80f55c0e86b374753a548')\nself.assertEqual(name.get(0), name2.get(1))\nname2 = Name('/hello/sha256digest=' +\n    '28BAD4B5275BD392DBB670C75CF0B66F13F7942B21E80F55C0E86B374753A548')\nself.assertEqual(name.get(0), name2.get(1))\n"
+}

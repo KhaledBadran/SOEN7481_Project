@@ -1,0 +1,9 @@
+{
+    "functionName": "test_load_covars1",
+    "className": "Test_Data",
+    "fileName": "/sahahn_&_ABCD_ML/BPt_&_tests_&_test_Data.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "loc = get_file_path('basic_covars1.txt')\nself.ML.Load_Covars(loc=loc, col_name='gender', data_type='b')\nself.assertTrue(self.ML.covars.shape == (3, 1))\nself.assertTrue(len(np.unique(self.ML.covars['gender'])) == 2)\nself.ML.Clear_Covars()\nself.assertTrue(len(self.ML.covars) == 0)\nloc = get_file_path('custom_covars1.csv')\nself.ML.Load_Covars(loc=loc, col_name=['sex', 'age', 'education'],\n    data_type=['b', 'f', 'o'], dataset_type='custom', code_categorical_as=\n    'dummy')\nself.assertTrue(len(np.unique(self.ML.covars['sex']) == 2))\nself.assertTrue(self.ML.covars.shape == (5, 3))\nself.assertTrue('NDAR_4' not in self.ML.covars)\nself.ML.Clear_Covars()\nself.ML.Load_Covars(loc=loc, col_name='education', data_type='c',\n    dataset_type='custom', code_categorical_as='dummy')\nself.assertTrue(self.ML.covars.shape == (6, 2))\nself.ML.Clear_Covars()\n"
+}

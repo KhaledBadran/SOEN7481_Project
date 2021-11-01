@@ -1,0 +1,9 @@
+{
+    "functionName": "test_analysis_file_handling",
+    "className": "TestCase",
+    "fileName": "/IntegralDefense_&_ACE/test_ace_api.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "analysis = ace_api.Analysis(description='Test Analysis')\nnormal_file_path = self.create_test_file('normal.txt')\nanalysis.add_file(normal_file_path)\nfp_file_path = self.create_test_file('fp.txt')\nfp = open(fp_file_path, 'rb')\nanalysis.add_file(fp_file_path, fp)\nsubdir_file_path = self.create_test_file('subdir.txt')\nanalysis.add_file(subdir_file_path, relative_storage_path='subdir/subdir.txt')\nanalysis.add_file('str.txt', 'This is a string.')\nanalysis.add_file('bytes.txt', b'This is a bytes.')\nresult = analysis.submit()\nio_buffer = io.BytesIO()\nace_api.get_analysis_file(result.uuid, 'normal.txt', output_fp=io_buffer)\nwith open(normal_file_path, 'rb') as fp:\n    self.assertEquals(fp.read(), io_buffer.getvalue())\nio_buffer = io.BytesIO()\nace_api.get_analysis_file(result.uuid, 'fp.txt', output_fp=io_buffer)\nwith open(fp_file_path, 'rb') as fp:\n    self.assertEquals(fp.read(), io_buffer.getvalue())\nio_buffer = io.BytesIO()\nace_api.get_analysis_file(result.uuid, 'str.txt', output_fp=io_buffer)\nself.assertEquals(b'This is a string.', io_buffer.getvalue())\nio_buffer = io.BytesIO()\nace_api.get_analysis_file(result.uuid, 'bytes.txt', output_fp=io_buffer)\nself.assertEquals(b'This is a bytes.', io_buffer.getvalue())\n"
+}

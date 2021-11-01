@@ -1,0 +1,9 @@
+{
+    "functionName": "test_server_run",
+    "className": null,
+    "fileName": "/daveisadork_&_PyDevNS/tests_&_test_server.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "config.resolver = False\nconfig.address = server.address = '1.2.3.4'\nconnection = Connection([KeyboardInterrupt, (query, ('127.0.0.1', 5000)),\n    socket.error], expected)\nwith patch('devns.server.socket.socket') as socket_mock:\n    socket_mock.return_value = connection\n    assert server.run() == 0\npytest.mark.parametrize('query, expected', [(\n    b'\\x96\\xd1\\x01\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x05local\\x03dev\\x00\\x00\\x01\\x00\\x01'\n    ,\n    b'\\x96\\xd1\\x81\\x80\\x00\\x01\\x00\\x01\\x00\\x00\\x00\\x00\\x05local\\x03dev\\x00\\x00\\x01\\x00\\x01\\xc0\\x0c\\x00\\x01\\x00\\x01\\x00\\x00\\x00<\\x00\\x04\\x01\\x02\\x03\\x04'\n    ), (\n    b'Kj\\x01\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x04test\\x05local\\x03dev\\x00\\x00\\x01\\x00\\x01'\n    ,\n    b'Kj\\x81\\x80\\x00\\x01\\x00\\x01\\x00\\x00\\x00\\x00\\x04test\\x05local\\x03dev\\x00\\x00\\x01\\x00\\x01\\xc0\\x0c\\x00\\x01\\x00\\x01\\x00\\x00\\x00<\\x00\\x04\\x01\\x02\\x03\\x04'\n    ), (\n    b'\\x96\\xd1P\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x05local\\x03dev\\x00\\x00\\x01\\x00\\x01'\n    , None)])"
+}

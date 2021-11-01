@@ -1,0 +1,9 @@
+{
+    "functionName": "equivalent_diameter",
+    "className": null,
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_models_&_geometry_&_pore_size.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Calculates the diameter of a sphere or edge-length of a cube with same\n    volume as the pore.\n\n    Parameters\n    ----------\n    target : OpenPNM Geometry Object\n        The Geometry object which this model is associated with. This controls\n        the length of the calculated array, and also provides access to other\n        necessary geometric properties.\n\n    pore_volume : string\n        The dictionary key containing the pore volume values\n\n    pore_shape : string\n        The shape of the pore body to assume when back-calculating from\n        volume.  Options are 'sphere' (default) or 'cube'.\n\n    Returns\n    -------\n    D : NumPy ndarray\n        Array containing pore diameter values.\n\n    \"\"\"\nfrom scipy.special import cbrt\npore_vols = target[pore_volume]\nif pore_shape.startswith('sph'):\n    value = cbrt(6 * pore_vols / _np.pi)\nelif pore_shape.startswith('cub'):\n    value = cbrt(pore_vols)\nreturn value\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_code_and_tags",
+    "className": "LexerTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_lexer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "template = \"\"\"\n<%namespace name=\"foo\">\n    <%def name=\"x()\">\n        this is x\n    </%def>\n    <%def name=\"y()\">\n        this is y\n    </%def>\n</%namespace>\n\n<%\n    result = []\n    data = get_data()\n    for x in data:\n        result.append(x+7)\n%>\n\n    result: <%call expr=\"foo.x(result)\"/>\n\"\"\"\nnodes = Lexer(template).parse()\nself._compare(nodes, TemplateNode({}, [Text('\\n', (1, 1)), NamespaceTag(\n    'namespace', {'name': 'foo'}, (2, 1), [Text('\\n    ', (2, 24)), DefTag(\n    'def', {'name': 'x()'}, (3, 5), [Text(\"\"\"\n        this is x\n    \"\"\", (3,\n    22))]), Text('\\n    ', (5, 12)), DefTag('def', {'name': 'y()'}, (6, 5),\n    [Text(\"\"\"\n        this is y\n    \"\"\", (6, 22))]), Text('\\n', (8, 12))]),\n    Text('\\n\\n', (9, 14)), Code(\n    \"\"\"\nresult = []\ndata = get_data()\nfor x in data:\n    result.append(x+7)\n\n\"\"\"\n    , False, (11, 1)), Text('\\n\\n    result: ', (16, 3)), CallTag('call', {\n    'expr': 'foo.x(result)'}, (18, 13), []), Text('\\n', (18, 42))]))\n"
+}

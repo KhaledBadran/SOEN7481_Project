@@ -1,0 +1,9 @@
+{
+    "functionName": "get_pk_new",
+    "className": null,
+    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_halomodel.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "mdef = ccl.halos.MassDef('vir', 'matter')\nif mf == 'shethtormen':\n    hmf = ccl.halos.MassFuncSheth99(cosmo, mdef, mass_def_strict=False,\n        use_delta_c_fit=True)\n    hbf = ccl.halos.HaloBiasSheth99(cosmo, mass_def=mdef, mass_def_strict=False\n        )\nelif mf == 'tinker10':\n    hmf = ccl.halos.MassFuncTinker10(cosmo, mdef, mass_def_strict=False)\n    hbf = ccl.halos.HaloBiasTinker10(cosmo, mass_def=mdef, mass_def_strict=\n        False)\nif c == 'constant_concentration':\n    cc = ccl.halos.ConcentrationConstant(4.0, mdef)\nelif c == 'duffy2008':\n    cc = ccl.halos.ConcentrationDuffy08(mdef)\nelif c == 'bhattacharya2011':\n    cc = ccl.halos.ConcentrationBhattacharya13(mdef)\nprf = ccl.halos.HaloProfileNFW(cc)\nhmc = ccl.halos.HMCalculator(cosmo, hmf, hbf, mdef)\np = ccl.halos.halomod_power_spectrum(cosmo, hmc, k, a, prf, normprof1=True,\n    get_1h=get_1h, get_2h=get_2h)\nreturn p\n"
+}

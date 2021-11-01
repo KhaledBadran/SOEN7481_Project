@@ -1,0 +1,9 @@
+{
+    "functionName": "test_remote_data_service_daily",
+    "className": null,
+    "fileName": "/quantOS-org_&_JAQS/test_&_test_dataservice.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "res, msg = ds.daily('rb1710.SHF,600662.SH', fields='', start_date=20170828,\n    end_date=20170831, adjust_mode=None)\nassert msg == '0,'\nrb = res.loc[(res.loc[:, ('symbol')] == 'rb1710.SHF'), :]\nstk = res.loc[(res.loc[:, ('symbol')] == '600662.SH'), :]\nassert set(rb.columns) == {'close', 'code', 'high', 'low', 'oi', 'open',\n    'settle', 'symbol', 'freq', 'trade_date', 'trade_status', 'turnover',\n    'volume', 'vwap', 'presettle'}\nassert rb.shape == (4, 15)\nassert rb.loc[:, ('volume')].values[0] == 189616\nassert stk.loc[:, ('volume')].values[0] == 7174813\n"
+}

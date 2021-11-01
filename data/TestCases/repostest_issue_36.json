@@ -1,0 +1,9 @@
+{
+    "functionName": "test_issue_36",
+    "className": "TestNewIssues",
+    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_test_issues.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "conn = self.connections[1]\nc = conn.cursor()\nc.execute('show processlist')\nkill_id = None\nfor row in c.fetchall():\n    id = row[0]\n    info = row[7]\n    if info == 'show processlist':\n        kill_id = id\n        break\nself.assertEqual(kill_id, conn.thread_id())\nself.connections[0].kill(kill_id)\ntry:\n    c.execute('show tables')\n    self.fail()\nexcept Exception:\n    pass\nc.close()\nconn.close()\ntry:\n    time.sleep(0.1)\n    c = self.connections[0].cursor()\n    c.execute('show processlist')\n    ids = [row[0] for row in c.fetchall()]\n    self.assertFalse(kill_id in ids)\nfinally:\n    del self.connections[1]\n"
+}

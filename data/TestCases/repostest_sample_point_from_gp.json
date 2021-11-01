@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sample_point_from_gp",
+    "className": "TestGaussianProcess",
+    "fileName": "/Yelp_&_MOE/moe_&_tests_&_optimal_learning_&_python_&_cpp_wrappers_&_gaussian_process_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that sampling points from the GP works.\"\"\"\npoint_one = SamplePoint([0.0, 1.0], -1.0, 0.0)\npoint_two = SamplePoint([2.0, 2.5], 1.0, 0.1)\ncovariance = SquareExponential([1.0, 1.0, 1.0])\nhistorical_data = HistoricalData(len(point_one.point), [point_one, point_two])\ngaussian_process = GaussianProcess(covariance, historical_data)\nout_values = numpy.zeros(3)\nfor i in xrange(3):\n    out_values[i] = gaussian_process.sample_point_from_gp(point_two.point, \n        0.001)\ngaussian_process._gaussian_process.reset_to_most_recent_seed()\nout_values_test = numpy.ones(3)\nfor i in xrange(3):\n    out_values_test[i] = gaussian_process.sample_point_from_gp(point_two.\n        point, 0.001)\nself.assert_vector_within_relative(out_values_test, out_values, 0.0)\nvalue = gaussian_process.sample_point_from_gp(point_one.point, 0.0)\nself.assert_scalar_within_relative(value, point_one.value, numpy.finfo(\n    numpy.float64).eps)\n"
+}

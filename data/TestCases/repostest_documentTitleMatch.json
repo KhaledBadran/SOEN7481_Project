@@ -1,0 +1,9 @@
+{
+    "functionName": "test_documentTitleMatch",
+    "className": null,
+    "fileName": "/jmriebold_&_BoilerPy3/tests_&_test_filters.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "doc = make_doc(['News', 'This is the real title', 'Red herring'])\ndoc.title = 'News - This is the real title'\nfiltr = DocumentTitleMatchClassifier(None, True)\nis_changed = filtr.process(doc)\nlabels = [block.labels for block in doc.text_blocks]\nassert labels == [set(), {DefaultLabels.TITLE}, set()]\nassert is_changed is True\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_options_request",
+    "className": null,
+    "fileName": "/EclecticIQ_&_OpenTAXII/tests_&_test_options.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "base_url = '%s://localhost' % ('https' if https else 'http')\nresponse = client.options(DISCOVERY['address'], base_url=base_url)\nassert response.status_code == 200\nassert HTTP_X_TAXII_CONTENT_TYPES in response.headers\nvalue = response.headers[HTTP_X_TAXII_CONTENT_TYPES]\nversions = value.split(',')\nservice = server.get_service(DISCOVERY['id'])\nservice_bindings = service.supported_message_bindings\nassert len(versions) == len(service_bindings)\npytest.mark.parametrize('https', [True, False])pytest.mark.parametrize('version', [11, 10])"
+}

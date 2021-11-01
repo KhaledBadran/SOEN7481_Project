@@ -1,0 +1,9 @@
+{
+    "functionName": "test_policy_not_found_error_async",
+    "className": null,
+    "fileName": "/RobertoPrevato_&_GuardPost/tests_&_test_authorization.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "auth = get_strategy([Policy('admin')])\n@auth(policy='user')\nasync def some_method():\n    pass\nwith raises(PolicyNotFoundError, match='Cannot find policy'):\n    await some_method()\npytest.mark.asyncio"
+}

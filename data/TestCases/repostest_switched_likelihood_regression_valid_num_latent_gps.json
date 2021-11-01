@@ -1,0 +1,9 @@
+{
+    "functionName": "test_switched_likelihood_regression_valid_num_latent_gps",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_likelihoods_&_test_switched_likelihood.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    A Regression test when using Switched likelihood: the number of latent\n    functions in a GP model must be equal to the number of columns in Y minus\n    one. The final column of Y is used to index the switch. If the number of\n    latent functions does not match, an exception will be raised.\n    \"\"\"\nx = np.random.randn(100, 1)\ny = np.hstack((np.random.randn(100, 1), np.random.randint(0, 3, (100, 1))))\ndata = x, y\nZ = InducingPoints(np.random.randn(num_latent_gps, 1))\nlikelihoods = [StudentT()] * 3\nswitched_likelihood = SwitchedLikelihood(likelihoods)\nm = gpflow.models.SVGP(kernel=gpflow.kernels.Matern12(), inducing_variable=\n    Z, likelihood=switched_likelihood, num_latent_gps=num_latent_gps)\nif num_latent_gps == 1:\n    _ = m.training_loss(data)\nelse:\n    with pytest.raises(tf.errors.InvalidArgumentError):\n        _ = m.training_loss(data)\npytest.mark.parametrize('num_latent_gps', [1, 2])"
+}

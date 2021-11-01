@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cudapoa_simple_batch",
+    "className": null,
+    "fileName": "/clara-genomics_&_ClaraGenomicsAnalysis/pygenomeworks_&_test_&_test_cudapoa_bindings.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "device = cuda.cuda_get_device()\nfree, total = cuda.cuda_get_mem_info(device)\nbatch = CudaPoaBatch(10, 1024, 0.9 * free, deivce_id=device, output_mask=\n    'consensus')\npoa_1 = ['ACTGACTG', 'ACTTACTG', 'ACGGACTG', 'ATCGACTG']\npoa_2 = ['ACTGAC', 'ACTTAC', 'ACGGAC', 'ATCGAC']\nbatch.add_poa_group(poa_1)\nbatch.add_poa_group(poa_2)\nbatch.generate_poa()\nconsensus, coverage, status = batch.get_consensus()\nassert len(consensus) == 2\nassert batch.total_poas == 2\npytest.mark.gpu"
+}

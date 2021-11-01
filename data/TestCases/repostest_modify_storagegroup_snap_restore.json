@@ -1,0 +1,9 @@
+{
+    "functionName": "test_modify_storagegroup_snap_restore",
+    "className": "CITestReplication",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_replication.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test to cover restore snapshot.\"\"\"\nself.skipTest(\n    'Skipping test_modify_storagegroup_snap_restore due to OPT 564297')\nsnapshot_info, sg_name = self.create_sg_snapshot()\nsnap_name = snapshot_info.get('name')\nself.replication.modify_storage_group_snapshot(src_storage_grp_id=sg_name,\n    tgt_storage_grp_id=None, snap_name=snap_name, gen_num=0, restore=True)\nsnap_details = self.replication.get_snapshot_generation_details(sg_id=\n    sg_name, snap_name=snap_name, gen_num=0)\nrestored = False\nif 'Restored' in snap_details.get('state'):\n    restored = True\nself.assertEqual(True, restored)\n"
+}

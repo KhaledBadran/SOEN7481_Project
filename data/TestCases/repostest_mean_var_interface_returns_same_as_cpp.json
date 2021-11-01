@@ -1,0 +1,9 @@
+{
+    "functionName": "test_mean_var_interface_returns_same_as_cpp",
+    "className": "TestGpMeanVarView",
+    "fileName": "/Yelp_&_MOE/moe_&_tests_&_views_&_rest_&_gp_mean_var_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that the /gp/mean_var endpoint does the same thing as the C++ interface.\"\"\"\ntolerance = 1e-11\nfor test_case in self.gp_test_environments:\n    python_domain, python_gp = test_case\n    python_cov, historical_data = python_gp.get_core_data_copy()\n    cpp_cov = SquareExponential(python_cov.hyperparameters)\n    cpp_gp = GaussianProcess(cpp_cov, historical_data)\n    points_to_evaluate = (python_domain.\n        generate_uniform_random_points_in_domain(10))\n    cpp_mean = cpp_gp.compute_mean_of_points(points_to_evaluate)\n    cpp_var = cpp_gp.compute_variance_of_points(points_to_evaluate)\n    json_payload = self._build_json_payload(python_domain, python_cov,\n        historical_data, points_to_evaluate.tolist())\n    resp = self.testapp.post(self.endpoint, json_payload)\n    resp_schema = GpMeanVarResponse()\n    resp_dict = resp_schema.deserialize(json.loads(resp.body))\n    rest_mean = numpy.asarray(resp_dict.get('mean'))\n    rest_var = numpy.asarray(resp_dict.get('var'))\n    self.assert_vector_within_relative(rest_mean, cpp_mean, tolerance)\n    self.assert_vector_within_relative(rest_var, cpp_var, tolerance)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "testProcessCommandLine2",
+    "className": "Test",
+    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_process_command_line.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "from _pydevd_bundle.pydevd_command_line_handling import process_command_line, setup_to_argv\nsetup = process_command_line(['pydevd.py', '--port', '1', '--qt-support=auto'])\nassert setup['qt-support'] == 'auto'\nsetup = process_command_line(['pydevd.py', '--port', '1', '--qt-support'])\nassert setup['qt-support'] == 'auto'\nsetup = process_command_line(['pydevd.py', '--port', '1', '--qt-support=pyqt4']\n    )\nassert setup['qt-support'] == 'pyqt4'\nself.assertRaises(ValueError, process_command_line, ['pydevd.py', '--port',\n    '1', '--qt-support=wrong'])\n"
+}

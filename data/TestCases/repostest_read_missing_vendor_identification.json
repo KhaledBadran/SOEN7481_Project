@@ -1,0 +1,9 @@
+{
+    "functionName": "test_read_missing_vendor_identification",
+    "className": "TestAttributeReference",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that an InvalidKmipEncoding error is raised during the decoding\n        of an AttributeReference structure when the vendor identification is\n        missing from the encoding.\n        \"\"\"\nattribute_reference = objects.AttributeReference()\nself.assertIsNone(attribute_reference.vendor_identification)\nargs = self.no_vendor_identification_encoding,\nself.assertRaisesRegex(exceptions.InvalidKmipEncoding,\n    'The AttributeReference encoding is missing the vendor identification string.'\n    , attribute_reference.read, *args)\n"
+}

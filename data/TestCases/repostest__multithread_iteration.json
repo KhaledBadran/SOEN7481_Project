@@ -1,0 +1,9 @@
+{
+    "functionName": "test__multithread_iteration",
+    "className": null,
+    "fileName": "/gelijergensen_&_PermutationImportance/test_&_test_abstract_runner.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "A = [1, 2]\nB = [2, 4]\nC = [3, 6]\nD = [1, 0]\ninputs = pd.DataFrame({'A': A, 'B': B, 'C': C})\noutputs = pd.DataFrame({'D': D})\ndef scoring_fn(training_data, scoring_data):\n    return scoring_data[0].iloc[0, 1]\nselection_iterator = [(0, (inputs.iloc[:, ([1, 0])], outputs), (inputs.iloc\n    [:, ([1, 0])], outputs)), (2, (inputs.iloc[:, ([1, 2])], outputs), (\n    inputs.iloc[:, ([1, 2])], outputs))]\nexpected = {(0): 1, (2): 3}\nassert expected == _multithread_iteration(selection_iterator, scoring_fn,\n    njobs=2)\n"
+}

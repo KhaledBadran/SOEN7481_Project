@@ -1,0 +1,9 @@
+{
+    "functionName": "compare_to_reference",
+    "className": null,
+    "fileName": "/mtien_&_PeptideBuilder/tests_&_test_PeptideBuilder.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "parser = PDBParser()\nref_structure = parser.get_structure('test', str(Path('tests', 'pdbs',\n    ref_file)))\nres = list(list(structure[0])[0])\nref_res = list(list(ref_structure[0])[0])\nif not len(res) == len(ref_res):\n    return False\nresult = True\nfor r1, r2 in zip(res, ref_res):\n    result = result and compare_residues(r1, r2)\nreturn result\n"
+}

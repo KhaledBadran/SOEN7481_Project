@@ -1,0 +1,9 @@
+{
+    "functionName": "test_middleware_normalization_no_parameters",
+    "className": null,
+    "fileName": "/RobertoPrevato_&_BlackSheep/tests_&_test_normalization.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "services = {'context': object()}\nfake_request = Request('GET', b'/', [(b'example', b'Lorem')])\ncalled = False\nasync def middleware():\n    nonlocal called\n    called = True\nnormalized = normalize_middleware(middleware, services)\nresult = await normalized(fake_request, fake_handler)\nassert called\nassert result == 'fake-handler-result'\npytest.mark.asyncio"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_UMC",
+    "className": null,
+    "fileName": "/PTB-PSt1_&_PyDynamic/test_&_test_propagate_MonteCarlo.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "y, Uy, p025, p975, happr = UMC(x, b1, [1.0], Ub, blow=b2, sigma=sigma_noise,\n    runs=runs, runs_init=10, nbins=10)\nassert len(y) == len(x)\nassert Uy.shape == (x.size, x.size)\nassert p025.shape[1] == len(x)\nassert p975.shape[1] == len(x)\nassert isinstance(happr, dict)\nif visualizeOutput:\n    plt.plot(time, x)\n    plt.plot(time, y)\n    plt.plot(time, y - np.sqrt(np.diag(Uy)), linestyle='--', linewidth=1,\n        color='red')\n    plt.plot(time, y + np.sqrt(np.diag(Uy)), linestyle='--', linewidth=1,\n        color='red')\n    plt.plot(time, p025.T, linestyle=':', linewidth=1, color='gray')\n    plt.plot(time, p975.T, linestyle=':', linewidth=1, color='gray')\n    key = list(happr.keys())[0]\n    for ts, be, bc in zip(time, happr[key]['bin-edges'].T, happr[key][\n        'bin-counts'].T):\n        plt.scatter(ts * np.ones_like(bc), be[1:], bc)\n    plt.show()\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "fuller",
+    "className": null,
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_models_&_phases_&_diffusivity.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Uses Fuller model to estimate diffusion coefficient for gases from first\n    principles at conditions of interest\n\n    Parameters\n    ----------\n    target : OpenPNM Object\n        The object for which these values are being calculated.  This\n        controls the length of the calculated array, and also provides\n        access to other necessary thermofluid properties.\n\n    MA : float, array_like\n        Molecular weight of component A [kg/mol]\n\n    MB : float, array_like\n        Molecular weight of component B [kg/mol]\n\n    vA:  float, array_like\n        Sum of atomic diffusion volumes for component A\n\n    vB:  float, array_like\n        Sum of atomic diffusion volumes for component B\n\n    pressure : string\n        The dictionary key containing the pressure values in Pascals (Pa)\n\n    temperature : string\n        The dictionary key containing the temperature values in Kelvin (K)\n\n    Returns\n    -------\n    value : NumPy ndarray\n        Array containing gas diffusion coefficient values [m2/s].\n\n    \"\"\"\nT = target[temperature]\nP = target[pressure]\nMAB = 2 * (1.0 / MA + 1.0 / MB) ** -1\nMAB = MAB * 1000.0\nP = P * 1e-05\nvalue = 0.00143 * T ** 1.75 / (P * MAB ** 0.5 * (vA ** (1.0 / 3) + vB ** (\n    1.0 / 3)) ** 2) * 0.0001\nreturn value\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_write_outfile",
+    "className": "Test_write",
+    "fileName": "/deparkes_&_OOMMFTools/tests_&_test_odtchomp.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Not sure if this is dropping a line from the end...\n        \"\"\"\noutfile = tempfile.mkstemp()[1]\nodtchomp.write(outfile, self.interpreter, ',', ['key1 part1 part2',\n    'key2 part1 part2', 'key3 part1 part2'])\nwith open(outfile) as f:\n    content = f.read()\nself.assertEqual(content,\n    \"\"\"key1 part1 part2, key2 part1 part2, key3 part1 part2\n1, 4, 7\n2, 5, 8\n\"\"\"\n    )\n"
+}

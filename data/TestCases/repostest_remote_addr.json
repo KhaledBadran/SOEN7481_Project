@@ -1,0 +1,9 @@
+{
+    "functionName": "test_remote_addr",
+    "className": null,
+    "fileName": "/zeaphoo_&_cocopot_&_/tests_&_test_request.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ips = ['1.2.3.4', '2.3.4.5', '3.4.5.6']\nenv = dict(copy.deepcopy(env1))\nenv['HTTP_X_FORWARDED_FOR'] = ', '.join(ips)\nr = Request(env)\nassert r.remote_addr == ips[0]\nenv = dict(copy.deepcopy(env1))\nenv['HTTP_X_FORWARDED_FOR'] = ', '.join(ips)\nenv['REMOTE_ADDR'] = ips[1]\nr = Request(env)\nassert r.remote_addr == ips[0]\nenv = dict(copy.deepcopy(env1))\nenv['REMOTE_ADDR'] = ips[1]\nr = Request(env)\nassert r.remote_addr == ips[1]\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test3",
+    "className": "test_localmaxlabel",
+    "fileName": "/jonwright_&_ImageD11/test_&_test_localmaxlabel.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "im = make_test_image(N=2048)\nl0 = np.zeros(im.shape, np.int32)\nl1 = np.zeros(im.shape, np.int32)\nwp = np.zeros(im.shape, np.int32)\nwk = np.zeros(im.shape, np.int8)\nN = 4\nif GOTNUMBA:\n    npks = localmax(im, l0, wp)\n    start = timer()\n    for i in range(N):\n        npks = localmax(im, l0, wp)\n    end = timer()\n    ptime = (end - start) * 1000.0 / N\nelse:\n    ptime = np.nan\nnpks = localmaxlabel(im, l1, wk)\nstart = timer()\nfor i in range(N):\n    npks = localmaxlabel(im, l1, wk)\nend = timer()\nctime = (end - start) * 1000.0 / N\nprint('Timing 2048 numba %.3f ms c %.3f ms' % (ptime, ctime))\n"
+}

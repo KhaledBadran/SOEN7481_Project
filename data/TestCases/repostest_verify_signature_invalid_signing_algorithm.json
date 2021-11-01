@@ -1,0 +1,9 @@
+{
+    "functionName": "test_verify_signature_invalid_signing_algorithm",
+    "className": "TestCryptographyEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_crypto_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the right error is raised when an invalid signing algorithm\n        is used.\n        \"\"\"\nengine = crypto.CryptographyEngine()\nargs = b'', b'', b'', enums.PaddingMethod.PSS\nkwargs = {'signing_algorithm': 'invalid', 'hashing_algorithm': enums.\n    HashingAlgorithm.SHA_1, 'digital_signature_algorithm': None}\nself.assertRaisesRegex(exceptions.InvalidField,\n    \"The signing algorithm 'invalid' is not supported for signature verification.\"\n    , engine.verify_signature, *args, **kwargs)\n"
+}

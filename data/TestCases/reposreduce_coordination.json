@@ -1,0 +1,9 @@
+{
+    "functionName": "reduce_coordination",
+    "className": null,
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_topotools_&_topotools.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    \"\"\"\nam = network.create_adjacency_matrix(weights=np.random.rand(network.Nt),\n    triu=False)\nmst = csgraph.minimum_spanning_tree(am, overwrite=True)\nmst = mst.tocoo()\nTs = network.find_connecting_throat(mst.row, mst.col)\nTs = np.hstack(Ts)\nnetwork['throat.mst'] = False\nnetwork['throat.mst'][Ts] = True\nTs = np.random.permutation(network.throats('mst', mode='nor'))\nTs = Ts[:int(network.Nt - network.Np * (z / 2))]\ntrim(network=network, throats=Ts)\n"
+}

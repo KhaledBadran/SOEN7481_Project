@@ -1,0 +1,9 @@
+{
+    "functionName": "test_make_bgc_river_input",
+    "className": null,
+    "fileName": "/raphaeldussin_&_DICRIVERS/dicrivers_&_test_&_test_dicrivers.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"unit test\"\"\"\nfrom dicrivers import make_bgc_river_input\nrivers = pd.read_csv(FIXTURE_DIR + '20major_rivers.csv')\nlon_grid, lat_grid = np.meshgrid(np.arange(0, 360, 1), np.arange(-90, 90, 1))\nmask_grid = np.ones(lon_grid.shape)\nvariables = ['testvar']\nout = make_bgc_river_input(rivers, variables, lon_grid, lat_grid, mask_grid,\n    lon_mouth_name='mouth_lon', lat_mouth_name='mouth_lat', nitermax=1000,\n    method='average')\nassert isinstance(out, xr.Dataset)\nassert isinstance(out['testvar'], xr.DataArray)\nassert out['testvar'].min().values == 0\nassert out['testvar'].max().values == 99\nlon_grid, lat_grid = np.meshgrid(np.arange(-100, 30, 1), np.arange(20, 70, 1))\nmask_grid = np.ones(lon_grid.shape)\nvariables = ['testvar']\nout = make_bgc_river_input(rivers, variables, lon_grid, lat_grid, mask_grid,\n    lon_mouth_name='mouth_lon', lat_mouth_name='mouth_lat', nitermax=1000,\n    method='average')\nassert isinstance(out, xr.Dataset)\nassert isinstance(out['testvar'], xr.DataArray)\nassert out['testvar'].min().values == 0\nassert out['testvar'].max().values == 96\n"
+}

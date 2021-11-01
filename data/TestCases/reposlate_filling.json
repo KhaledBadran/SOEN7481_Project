@@ -1,0 +1,9 @@
+{
+    "functionName": "late_filling",
+    "className": null,
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_models_&_physics_&_multiphase.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Calculates the fraction of a pore or throat filled with invading fluid\n    based on the capillary pressure in the invading phase.  The invading phase\n    volume is calculated from:\n\n        .. math::\n            S_{nwp} = 1 - S_{wp}^{*} (P^{*}/P_{c})^{\\\\eta}\n\n    Parameters\n    ----------\n    pressure : string\n        The capillary pressure in the non-wetting phase (Pc > 0).\n\n    Pc_star : string\n        The minimum pressure required to create an interface within the pore\n        body or throat.  Typically this would be calculated using the Washburn\n        equation.\n\n    Swp_star : float\n        The residual wetting phase in an invaded pore or throat at a pressure\n        of ``pc_star``.\n\n    eta : float\n        Exponent controlling the rate at which wetting phase is displaced with\n        increasing pressure.\n\n    Returns\n    -------\n    An array containing the fraction of each pore or throat that would be\n    filled with non-wetting phase at the given phase pressure.  This does not\n    account for whether or not the element is actually invaded, which requires\n    a percolation algorithm of some sort.\n\n    \"\"\"\nelement = pressure.split('.')[0]\nnetwork = target.project.network\nphase = target.project.find_phase(target)\npc_star = phase[Pc_star]\nPc = phase[pressure]\nPc = np.maximum(Pc, 1e-09)\nSwp = Swp_star * (pc_star / Pc) ** eta\nvalues = np.clip(1 - Swp, 0.0, 1.0)\nif element == 'throat':\n    Ts = network.map_throats(throats=target.Ts, origin=target)\n    values = values[Ts]\nelse:\n    Ps = network.map_pores(pores=target.Ps, origin=target)\n    values = values[Ps]\nreturn values\n"
+}

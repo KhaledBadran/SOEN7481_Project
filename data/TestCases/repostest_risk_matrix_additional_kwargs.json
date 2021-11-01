@@ -1,0 +1,9 @@
+{
+    "functionName": "test_risk_matrix_additional_kwargs",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_risk_models.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "df = get_data()\nS = risk_models.sample_cov(df)\nS2 = risk_models.risk_matrix(df, frequency=2)\npd.testing.assert_frame_equal(S / 126, S2)\nS = risk_models.risk_matrix(df, method='semicovariance', benchmark=0.0004,\n    frequency=52)\nassert S.shape == (20, 20)\nassert S.notnull().all().all()\nassert risk_models._is_positive_semidefinite(S)\nS = risk_models.risk_matrix(expected_returns.returns_from_prices(df),\n    returns_data=True, method='exp_cov', span=60, fix_method='diag')\nassert S.shape == (20, 20)\nassert S.notnull().all().all()\nassert risk_models._is_positive_semidefinite(S)\n"
+}

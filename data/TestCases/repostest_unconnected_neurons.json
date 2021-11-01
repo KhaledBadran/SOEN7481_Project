@@ -1,0 +1,9 @@
+{
+    "functionName": "test_unconnected_neurons",
+    "className": "DataIntegrityTest",
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_DataIntegrityTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        This test verifies that there are exactly 2 unconnected neurons,\n        i.e., CANL and CANR, in the new connectome.\n        \"\"\"\nneuron = self.qctx(Neuron)()\nsynapse = self.qctx(Connection)()\nsynapse.pre_cell(neuron)\nself.qctx(Worm)().get_neuron_network().synapse(synapse)\nconnected_neurons = set()\nunconnected_neurons = {'CANL', 'CANR'}\nfor name in neuron.name.get():\n    connected_neurons.add(name)\nself.assertTrue(connected_neurons.isdisjoint(unconnected_neurons))\n"
+}

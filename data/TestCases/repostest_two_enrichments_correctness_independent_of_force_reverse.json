@@ -1,0 +1,9 @@
+{
+    "functionName": "test_two_enrichments_correctness_independent_of_force_reverse",
+    "className": null,
+    "fileName": "/PearsonEducation_&_Alarmageddon/tests_&_validations_&_test_validation.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "pub_values = {(1): 2, 'a': 'b'}\npage_values = {(1): 5, 'a': '3', 'what': 'who'}\nvalid = Validation('low', Priority.LOW)\npub = publisher.Publisher(priority_threshold=Priority.CRITICAL)\npage = pagerduty.PagerDutyPublisher('url', 'token')\nvalid.enrich(page, page_values, force_namespace=bools)\nvalid.enrich(pub, pub_values, force_namespace=bools)\npub_data = valid.get_enriched(pub)\npage_data = valid.get_enriched(page)\nfor item in list(pub_values.items()):\n    assert item in list(pub_data.items())\nfor item in list(page_values.items()):\n    assert item in list(page_data.items())\n"
+}

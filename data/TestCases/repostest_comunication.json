@@ -1,0 +1,9 @@
+{
+    "functionName": "test_comunication",
+    "className": "LUCTesting",
+    "fileName": "/uCAN-LIN_&_LinUSBConverter/python_lib_&_tests_&_LUC_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "global ff\nglobal count\nll = self.master.lowSpeed()\nll = self.slave.lowSpeed()\nll = self.master.openAsMaster()\nll = self.slave.openAsSlave()\nself.assertEqual(ll, 1)\nll = self.master.disable()\nll = self.slave.disable()\nself.assertEqual(ll, 1)\nll = self.master.addTransmitFrameToTable(1, 8755)\nll = self.slave.addReceptionFrameToTable(1, 2)\nself.assertEqual(ll, 1)\nll = self.slave.enable()\nll = self.master.enable()\nself.assertEqual(ll, 1)\nself.slave.set_frame_rx_handler(rx_any)\ntime.sleep(1)\nself.slave.disable()\nself.master.disable()\nprint(count)\nself.assertGreater(count, 40)\nself.assertEqual(ff.id, 1)\nself.assertEqual(int.from_bytes(ff.data, byteorder='big'), 8755)\n"
+}

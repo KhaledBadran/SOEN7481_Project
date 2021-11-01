@@ -1,0 +1,9 @@
+{
+    "functionName": "test_update_with_remove_and_add_name",
+    "className": "TestX509Certificate",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_objects_&_test_x509_certificate.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Tests that an X509Certificate already stored in the database can be\n        updated. This will store an X509Certificate in the database. It will\n        remove a name and add another one to it in one session, and then\n        retrieve it in another session to verify that it has all of the correct\n        names. This simulates multiple operation being sent for the same\n        object.\n        \"\"\"\nnames = ['bowser', 'frumpy', 'big fat cat']\ncert = X509Certificate(self.bytes_a, name=names[0])\ncert.names.append(names[1])\ncert.names.append(names[2])\nSession = sessionmaker(bind=self.engine)\nsession = Session()\nsession.add(cert)\nsession.commit()\nsession = Session()\nupdate_cert = session.query(X509Certificate).filter(ManagedObject.\n    unique_identifier == cert.unique_identifier).one()\nupdate_cert.names.pop()\nupdate_cert.names.pop()\nupdate_cert.names.append('dog')\nsession.commit()\nexpected_names = ['bowser', 'dog']\nexpected_mo_names = list()\nexpected_mo_names.append(sqltypes.ManagedObjectName(expected_names[0], 0))\nexpected_mo_names.append(sqltypes.ManagedObjectName(expected_names[1], 3))\nsession = Session()\nget_obj = session.query(X509Certificate).filter(ManagedObject.\n    unique_identifier == cert.unique_identifier).one()\nsession.commit()\nself.assertEquals(expected_names, get_obj.names)\nself.assertEquals(expected_mo_names, get_obj._names)\n"
+}

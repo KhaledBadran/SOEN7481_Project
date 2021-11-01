@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pep8_conformance",
+    "className": null,
+    "fileName": "/nlesc-nano_&_CP2K-Parser/tests_&_test_lint.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that we conform to PEP-8.\"\"\"\ncheck_paths = ['cp2kparser', 'tests']\nexclude_paths = []\nprint('PEP8 check of directories: {}\\n'.format(', '.join(check_paths)))\npackage_root = os.path.dirname(os.path.dirname(__file__))\nfor paths in (check_paths, exclude_paths):\n    for i, path in enumerate(paths):\n        paths[i] = os.path.join(package_root, path)\nstyle = pycodestyle.StyleGuide(max_line_length=100)\nstyle.options.exclude.extend(exclude_paths)\nsuccess = style.check_files(check_paths).total_errors == 0\nif not success:\n    print(textwrap.dedent(\n        \"\"\"\n            Your Python code does not conform to the official Python style\n            guide (PEP8), see https://www.python.org/dev/peps/pep-0008\n\n            A list of warning and error messages can be found above,\n            prefixed with filename:line number:column number.\n\n            Run `yapf -i yourfile.py` to automatically fix most errors.\n            Run `yapf -d yourfile.py` to preview what would be changed.\n            Run `pip install --upgrade yapf` to install the latest version\n            of yapf.\n        \"\"\"\n        ))\nassert success, 'Your code does not conform to PEP8'\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_drawTwilight_1",
+    "className": null,
+    "fileName": "/mworion_&_MountWizzard4/mw4_&_test_&_unit_tests_&_gui_&_mainWmixin_&_test_tabAlmanac.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ts = app.app.mount.obsSite.ts\ntimeJD = app.app.mount.obsSite.timeJD\nt0 = ts.tt_jd(int(timeJD.tt) - 182)\nt1 = ts.tt_jd(int(timeJD.tt) + 182)\napp.civil = dict()\napp.nautical = dict()\napp.astronomical = dict()\napp.dark = dict()\napp.civil[0] = [[t0, 10], [t0, 10]]\napp.nautical[0] = [[t0, 10], [t0, 10]]\napp.astronomical[0] = [[t0, 10], [t0, 10]]\napp.dark[0] = [[t0, 10], [t0, 10]]\nwith mock.patch.object(matplotlib.backends.backend_qt5agg.FigureCanvasQTAgg,\n    'draw'):\n    suc = app.drawTwilight(t0, t1)\n    assert suc\n"
+}

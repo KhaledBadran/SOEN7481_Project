@@ -1,0 +1,9 @@
+{
+    "functionName": "test_build_extension_library",
+    "className": null,
+    "fileName": "/Pebaz_&_Nimporter/tests_&_test_distribution.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Make sure a Nim library compiles to C and an Extension object is built.\"\"\"\nlibrary = Path('tests/proj1/proj1/lib1')\next = Nimporter._build_nim_extension(library, Path('tests/proj1'))\nassert isinstance(ext, Extension)\nassert ext.name == 'proj1.lib1'\nincludes = set(Path(i) for i in ext.include_dirs)\nfor source in ext.sources:\n    src = Path(source).absolute()\n    assert src.suffix == '.c'\n"
+}

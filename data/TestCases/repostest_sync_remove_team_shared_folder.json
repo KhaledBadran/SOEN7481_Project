@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sync_remove_team_shared_folder",
+    "className": "TestSyncDown",
+    "fileName": "/Keeper-Security_&_Commander/unit-tests_&_test_sync_down.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "params = get_synced_params()\nteams_to_delete = [x['team_uid'] for x in params.team_cache.values()]\nsf_to_delete = [x['shared_folder_uid'] for x in params.shared_folder_cache.\n    values()]\ndef sync_down_removed_teams_and_shared_folders(rq):\n    self.assertEqual(rq['command'], 'sync_down')\n    return {'revision': vault_env.revision + 1, 'removed_shared_folders':\n        sf_to_delete, 'removed_teams': teams_to_delete}\nKeeperApiHelper.communicate_expect([sync_down_removed_teams_and_shared_folders]\n    )\nsync_down(params)\nself.assertTrue(KeeperApiHelper.is_expect_empty())\nself.assertEqual(len(params.record_cache), 2)\nself.assertEqual(len(params.shared_folder_cache), 0)\nself.assertEqual(len(params.team_cache), 0)\nself.assert_key_unencrypted(params)\n"
+}

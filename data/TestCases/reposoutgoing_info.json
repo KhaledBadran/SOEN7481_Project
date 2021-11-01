@@ -1,0 +1,9 @@
+{
+    "functionName": "outgoing_info",
+    "className": null,
+    "fileName": "/kitware_&_BroThon/explorations_&_kafka_router.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "ip = message['id.resp_h']\nif ip[:3] in ['255', '239', '224']:\n    return None\ngeo_info = my_geo.query_ip(message['id.resp_h'])\nif not geo_info or geo_info['country_code'] == 'US':\n    return None\nmessage['country_code'] = geo_info['country_code']\nmessage['region_name'] = geo_info['region_name']\nreturn 'non_us'\n"
+}

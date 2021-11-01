@@ -1,0 +1,9 @@
+{
+    "functionName": "test_wsumsq",
+    "className": null,
+    "fileName": "/open-source-economics_&_OG-USA/ogusa_&_tests_&_test_txfunc.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test of the weighted sum of squares calculation\n    \"\"\"\nrate_type = 'etr'\nA = 0.01\nB = 0.02\nC = 0.1\nD = 1.1\nmax_x = 0.55\nmin_x = 0.17\nmax_y = 0.46\nmin_y = 0.04\nshift = 0.04\nshare = 0.8\nphi0 = 0.396\nphi1 = 0.7\nphi2 = 0.9\nX = np.array([32.0, 44.0, 1.6, 0.4])\nY = np.array([32.0, 55.0, 0.9, 0.03])\ntxrates = np.array([0.6, 0.5, 0.3, 0.25])\nwgts = np.array([0.1, 0.25, 0.55, 0.1])\nif tax_func_type == 'DEP':\n    params = A, B, C, D, max_x, max_y, share\n    args = (min_x, min_y, shift), X, Y, txrates, wgts, tax_func_type, rate_type\nelif tax_func_type == 'GS':\n    params = phi0, phi1, phi2\n    args = None, X, Y, txrates, wgts, tax_func_type, rate_type\ntest_val = txfunc.wsumsq(params, *args)\nassert np.allclose(test_val, expected)\npytest.mark.parametrize('tax_func_type,expected', [('DEP', 0.032749763), (\n    'GS', 0.007952744)], ids=['DEP', 'GS'])"
+}

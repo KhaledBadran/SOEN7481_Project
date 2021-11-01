@@ -1,0 +1,9 @@
+{
+    "functionName": "test_uk_backends_produce_same_result",
+    "className": null,
+    "fileName": "/bsmurphy_&_PyKrige/tests_&_test_core.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data, _, (uk_test_answer, gridx_ref, gridy_ref) = validation_ref\ngridx = np.linspace(1067000.0, 1072000.0, 100)\ngridy = np.linspace(241500.0, 244000.0, 100)\nuk = UniversalKriging(data[:, (0)], data[:, (1)], data[:, (2)],\n    variogram_model='linear', verbose=False, enable_plotting=False)\nz_uk_v, ss_uk_v = uk.execute('grid', gridx, gridy, backend='vectorized')\nz_uk_l, ss_uk_l = uk.execute('grid', gridx, gridy, backend='loop')\nassert_allclose(z_uk_v, z_uk_l)\nassert_allclose(ss_uk_v, ss_uk_l)\n"
+}

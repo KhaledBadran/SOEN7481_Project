@@ -1,0 +1,9 @@
+{
+    "functionName": "test_read_missing_attestation_measurement",
+    "className": "TestAttestationCredential",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_credentials.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that an AttestationCredential struct can be read from a data\n        stream missing the attestation measurement data.\n        \"\"\"\ncredential = objects.AttestationCredential()\nself.assertEqual(None, credential.nonce)\nself.assertEqual(None, credential.attestation_type)\nself.assertEqual(None, credential.attestation_measurement)\nself.assertEqual(None, credential.attestation_assertion)\ncredential.read(self.encoding_missing_attestation_measurement)\nself.assertEqual(objects.Nonce(nonce_id=b'\\x01', nonce_value=\n    b'\\x00\\x01\\x02\\x03\\x04\\x05\\x06\\x07'), credential.nonce)\nself.assertEqual(enums.AttestationType.TPM_QUOTE, credential.attestation_type)\nself.assertEqual(None, credential.attestation_measurement)\nself.assertEqual(b'\\x11\\x11\\x11\\x11\\x11\\x11\\x11\\x11', credential.\n    attestation_assertion)\n"
+}

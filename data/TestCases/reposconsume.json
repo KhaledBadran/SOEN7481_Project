@@ -1,0 +1,9 @@
+{
+    "functionName": "consume",
+    "className": null,
+    "fileName": "/5uper5hoot_&_PikaTools/tests_&_test_pool.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "def _callback(ch, method, properties, body):\n    msg = Message.from_json(body)\n    consumed[msg.id] = msg\ndef _forever():\n    channel.start_consuming()\ncxn = pika.BlockingConnection(params)\nchannel = cxn.channel()\nchannel.queue_declare(queue='pika_pool_test')\nchannel.basic_consume(_callback, queue='pika_pool_test', no_ack=True)\nthd = threading.Thread(target=_forever)\nthd.daemon = True\nthd.start()\npytest.fixture(scope='session', autouse=True)"
+}

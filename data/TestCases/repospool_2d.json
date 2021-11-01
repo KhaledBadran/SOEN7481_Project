@@ -1,0 +1,9 @@
+{
+    "functionName": "pool_2d",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_layers_&_pool.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Wrapper function that calls :func:`theano.tensor.signal.pool_2d` either\n    with the new or old keyword argument names expected by Theano.\n    \"\"\"\ntry:\n    return T.signal.pool.pool_2d(input, **kwargs)\nexcept TypeError:\n    kwargs['ds'] = kwargs.pop('ws')\n    kwargs['st'] = kwargs.pop('stride')\n    kwargs['padding'] = kwargs.pop('pad')\n    return T.signal.pool.pool_2d(input, **kwargs)\n"
+}

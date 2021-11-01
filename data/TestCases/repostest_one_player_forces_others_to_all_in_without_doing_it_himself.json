@@ -1,0 +1,9 @@
+{
+    "functionName": "test_one_player_forces_others_to_all_in_without_doing_it_himself",
+    "className": null,
+    "fileName": "/exzacktlee_&_CardGames/tests_&_test_holdem_&_test_bet_collector.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "collector, players = collector_four_players\nfor player in players:\n    player.award_chips(15)\nplayers[3].award_chips(20)\ncollector.get_blind_wagers()\nplayers[3].bet(35)\nfor player in players[:3]:\n    player.bet(15 - player.check_wager())\nfor i in range(4):\n    collector.ask_next_player_for_wager()\ncollector.collect_all_bets()\nassert len(collector.pots) == 2\nassert collector.pots[0].size == 60\nassert collector.pots[1].size == 20\n"
+}

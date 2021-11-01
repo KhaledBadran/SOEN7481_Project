@@ -1,0 +1,9 @@
+{
+    "functionName": "test_uuid",
+    "className": "TestAttributes",
+    "fileName": "/Riffstation_&_Flask-Philo-PynamoDB/tests_&_app_&_test_models.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with self.app.app_context():\n    assert ModelTest.exists() is False\n    ModelTest.create_table(read_capacity_units=1, write_capacity_units=1,\n        wait=True)\n    assert 0 == ModelTest.count()\n    key = Factory.create_uuid()\n    obj = ModelTest(key)\n    obj.save()\n    assert 1 == ModelTest.count()\n    obj2 = ModelTest.get(key)\n    assert obj.key == obj2.key\n"
+}

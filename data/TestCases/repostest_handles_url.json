@@ -1,0 +1,9 @@
+{
+    "functionName": "test_handles_url",
+    "className": null,
+    "fileName": "/PlaidWeb_&_Authl/tests_&_handlers_&_test_fediverse.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "handler = fediverse.Fediverse('test', tokens.DictStore(), homepage=\n    'http://foo.example/')\nrequests_mock.get('https://mastodon.example/api/v1/instance', text=json.\n    dumps({'uri': 'foo', 'version': '2.5.1', 'urls': 'foo.bar'}))\nrequests_mock.get('https://not-mastodon.example/api/v1/instance', text=json\n    .dumps({'moo': 'cow'}))\nrequests_mock.get('https://also-not.example/api/v1/instance', status_code=404)\nassert handler.handles_url('https://mastodon.example/@fluffy')\nassert handler.handles_url('https://mastodon.example/')\nassert handler.handles_url('mastodon.example')\nassert not handler.handles_url('https://not-mastodon.example/@fluffy')\nassert not handler.handles_url('https://not-mastodon.example/')\nassert not handler.handles_url('https://blah.example/')\nassert not handler.handles_url('https://also-not.example/')\n"
+}

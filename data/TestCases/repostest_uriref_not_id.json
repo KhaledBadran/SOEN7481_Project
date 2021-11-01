@@ -1,0 +1,9 @@
+{
+    "functionName": "test_uriref_not_id",
+    "className": "RDFLibTest",
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_RDFLibTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Test that rdflib throws up a warning when we do something bad \"\"\"\nimport six\nimport logging\nout = six.StringIO()\nlogger = logging.getLogger()\nstream_handler = logging.StreamHandler(out)\nlogger.addHandler(stream_handler)\ntry:\n    rdflib.URIRef('some random string')\nfinally:\n    logger.removeHandler(stream_handler)\nv = out.getvalue()\nout.close()\nself.assertRegexpMatches(str(v), '.*some random string.*')\n"
+}

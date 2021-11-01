@@ -1,0 +1,9 @@
+{
+    "functionName": "test_schedule_sequence",
+    "className": "TestDecisionMaker",
+    "fileName": "/BciPy_&_BciPy/bcipy_&_tasks_&_tests_&_test_main_frame.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test sequence scheduling. Should return new stimuli list, at random.\"\"\"\nprobability_distribution = np.ones(len(self.decision_maker.alphabet))\nold_counter = self.decision_maker.sequence_counter\nself.decision_maker.list_epoch[-1]['list_distribution'].append(\n    probability_distribution)\nstimuli = self.decision_maker.schedule_sequence()\nself.assertEqual(self.decision_maker.state, '.')\nself.assertEqual(stimuli[0], self.decision_maker.list_epoch[-1]['list_sti'][-1]\n    )\nself.assertLess(old_counter, self.decision_maker.sequence_counter)\n"
+}

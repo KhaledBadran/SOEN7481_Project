@@ -1,0 +1,9 @@
+{
+    "functionName": "test_multistarted_null_optimizer",
+    "className": "TestNullOptimizer",
+    "fileName": "/Yelp_&_MOE/moe_&_tests_&_optimal_learning_&_python_&_python_version_&_optimization_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that multistarting null optimizer just evalutes the function and indentifies the max.\"\"\"\nnum_points = 15\npoints = self.domain.generate_uniform_random_points_in_domain(num_points)\ntruth = numpy.empty(num_points)\nfor i, point in enumerate(points):\n    self.null_optimizer.objective_function.current_point = point\n    truth[i\n        ] = self.null_optimizer.objective_function.compute_objective_function()\nbest_index = numpy.argmax(truth)\ntruth_best_point = points[best_index, ...]\ntest_best_point, test_values = multistart_optimize(self.null_optimizer,\n    starting_points=points)\nself.assert_vector_within_relative(test_best_point, truth_best_point, 0.0)\nself.assert_vector_within_relative(test_values, truth, 0.0)\n"
+}

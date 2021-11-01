@@ -1,0 +1,9 @@
+{
+    "functionName": "test_mean_historical_returns_type_warning",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_expected_returns.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "df = get_data()\nmean = expected_returns.mean_historical_return(df)\nwith warnings.catch_warnings(record=True) as w:\n    mean_from_array = expected_returns.mean_historical_return(np.array(df))\n    assert len(w) == 1\n    assert issubclass(w[0].category, RuntimeWarning)\n    assert str(w[0].message) == 'prices are not in a dataframe'\nnp.testing.assert_array_almost_equal(mean.values, mean_from_array.values,\n    decimal=6)\n"
+}

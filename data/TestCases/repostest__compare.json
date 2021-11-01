@@ -1,0 +1,9 @@
+{
+    "functionName": "test__compare",
+    "className": null,
+    "fileName": "/Macquarie-MEG-Research_&_BIDSHandler/bidshandler_&_tests_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "assert _compare(1, '=', 1)\nassert _compare(1, '!=', '1')\nassert _compare(2, '>', 1)\nassert _compare(1, '<', 2)\nwith pytest.raises(ValueError):\n    _compare(1, 'a', 2)\nwith pytest.raises(TypeError):\n    _compare(1, '>=', 'a')\nref_datetime = datetime.strptime('2018-10-26T11:22:33', '%Y-%m-%dT%H:%M:%S')\nref_datetime2 = datetime.strptime('2018-10-27T11:22:33', '%Y-%m-%dT%H:%M:%S')\nref_datetime3 = datetime.strptime('2018-10-26T22:22:33', '%Y-%m-%dT%H:%M:%S')\nref_date = datetime.strptime('2018-10-26', '%Y-%m-%d').date()\nassert _compare_times(ref_datetime, '=', ref_date)\nassert _compare_times(ref_date, '=', ref_datetime3)\nassert _compare_times(ref_datetime2, '>', ref_datetime)\nwith pytest.raises(TypeError):\n    _compare_times(ref_date, '=', str)\n"
+}

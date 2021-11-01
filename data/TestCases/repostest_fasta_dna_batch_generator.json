@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fasta_dna_batch_generator",
+    "className": null,
+    "fileName": "/goeckslab_&_Galaxy-ML/galaxy_ml_&_tests_&_test_sequences.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "fasta_path = sequence_path\ngenerator = FastaDNABatchGenerator(fasta_path, seq_length=1000, seed=42)\nparams = generator.get_params()\nexpect1 = {'fasta_path': './tools/test-data/regulatory_mutations.fa',\n    'seed': 42, 'seq_length': 1000, 'shuffle': True}\nassert params == expect1, params\nX = np.arange(2, 8)[:, (np.newaxis)]\ny = np.array([1, 0, 0, 1, 0, 1])\nbatch_size = 3\nseq_iterator = generator.flow(X, y, batch_size=batch_size)\nbatch_X, batch_y = next(seq_iterator)\ngot1 = batch_X[0][3]\ngot2 = batch_X[1][4]\ngot3 = batch_X[2][6]\nassert batch_X.shape == (3, 1000, 4), batch_X.shape\nassert got1.tolist() == [0.0, 0.0, 0.0, 1.0], got1\nassert got2.tolist() == [0.0, 0.0, 1.0, 0.0], got2\nassert got3.tolist() == [0.0, 1.0, 0.0, 0.0], got3\nassert np.array_equal(batch_y, np.array([1, 0, 1])), batch_y\nretrived_seq_encodings, _ = generator.sample(X, sample_size=3)\ngot4 = retrived_seq_encodings[0][3]\ngot5 = retrived_seq_encodings[1][4]\ngot6 = retrived_seq_encodings[2][7]\nassert retrived_seq_encodings.shape == (3, 1000, 4\n    ), retrived_seq_encodings.shape\nassert got4.tolist() == [0.0, 0.0, 0.0, 1.0], got4\nassert got5.tolist() == [0.0, 0.0, 1.0, 0.0], got5\nassert got6.tolist() == [1.0, 0.0, 0.0, 0.0], got6\ngenerator.close()\n"
+}

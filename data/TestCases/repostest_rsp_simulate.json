@@ -1,0 +1,9 @@
+{
+    "functionName": "test_rsp_simulate",
+    "className": null,
+    "fileName": "/neuropsychology_&_NeuroKit/tests_&_tests_rsp.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "rsp1 = nk.rsp_simulate(duration=20, length=3000, random_state=42)\nassert len(rsp1) == 3000\nrsp2 = nk.rsp_simulate(duration=20, length=3000, respiratory_rate=80,\n    random_state=42)\nassert len(nk.signal_findpeaks(rsp1, height_min=0.2)['Peaks']) < len(nk.\n    signal_findpeaks(rsp2, height_min=0.2)['Peaks'])\nrsp3 = nk.rsp_simulate(duration=20, length=3000, method='sinusoidal',\n    random_state=42)\nrsp4 = nk.rsp_simulate(duration=20, length=3000, method='breathmetrics',\n    random_state=42)\nassert len(nk.signal_findpeaks(rsp3, height_min=0.2)['Peaks']) > len(nk.\n    signal_findpeaks(rsp4, height_min=0.2)['Peaks'])\n"
+}

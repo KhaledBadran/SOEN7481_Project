@@ -1,0 +1,9 @@
+{
+    "functionName": "test_set_bank",
+    "className": "CurrentControllerTest",
+    "fileName": "/PedalPi_&_Application/test_&_controller_&_current_controller_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "bank = self.bank_with_pedalboard\nself.manager.append(bank)\nfirst_bank = self._current.bank\nself._current.set_bank(bank)\nself.assertEqual(bank, self._current.bank)\nself.assertEqual(bank.pedalboards[0], self._current.pedalboard)\nself.observer.on_current_pedalboard_changed.assert_called_with(bank.\n    pedalboards[0])\nself.observer.reset_mock()\nwith self.observer:\n    self._current.set_bank(first_bank)\nself.observer.on_current_pedalboard_changed.assert_not_called()\nself.manager.banks.remove(bank)\n"
+}

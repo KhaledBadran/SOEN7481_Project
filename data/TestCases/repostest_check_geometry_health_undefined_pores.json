@@ -1,0 +1,9 @@
+{
+    "functionName": "test_check_geometry_health_undefined_pores",
+    "className": "HealthCheckTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_core_&_HealthCheckTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "proj = self.ws.copy_project(self.proj)\nnetwork = proj.network\ntemp = np.copy(network['pore.geo_01'])\nnetwork['pore.geo_01'] = False\nh = proj.check_geometry_health()\nassert np.all(h['undefined_pores'] == np.where(temp)[0])\ndel self.ws[proj.name]\n"
+}

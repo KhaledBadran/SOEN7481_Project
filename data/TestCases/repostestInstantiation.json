@@ -1,0 +1,9 @@
+{
+    "functionName": "testInstantiation",
+    "className": "CIMTestCase",
+    "fileName": "/rwl_&_PyCIM/PyCIM_&_Test_&_CIM14Test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Test element instantiation.\n        \"\"\"\nThermalGeneratingUnit(oMCost=6.0, variableCost=10.0)\nGenUnitOpCostCurve(name='curve1', isNetGrossP=True)\nGenUnitOpSchedule(timeStep=1.0)\nStartupModel(name='model1', startupCost=20.0)\nConformLoad(phases='A', pfixed=30.0)\nclg = ConformLoadGroup(description='group')\nLoadArea(name='area1')\ncls = ConformLoadSchedule(ConformLoadGroup=clg)\nself.assertEqual(cls.ConformLoadGroup, clg)\nAnalogLimit(value=100.0)\nAnalogValue(value=6.0)\nAnalog(maxValue=100.0)\nSurgeProtector(normaIlyInService=True)\nCurrentRelay(inverseTimeFlag=True)\ntn = TopologicalNode(name='tn1')\ncn = ConnectivityNode(TopologicalNode=tn)\nself.assertTrue(cn.TopologicalNode, tn)\nTerminal(connected=True)\nBreaker(ratedCurrent=20.0)\nSynchronousMachine(coolantType='water')\nBusbarSection(phases='ABC')\nACLineSegment(r=0.1, length=10.0)\nReactiveCapabilityCurve(coolantTemperature=20.0)\ntw = TransformerWinding(windingType='primary')\npt = PowerTransformer(TransformerWindings=[tw])\nself.assertTrue(tw in pt.TransformerWindings)\n"
+}

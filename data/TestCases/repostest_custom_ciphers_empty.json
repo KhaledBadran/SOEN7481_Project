@@ -1,0 +1,9 @@
+{
+    "functionName": "test_custom_ciphers_empty",
+    "className": "TestTLS12AuthenticationSuite",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_test_auth.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that providing a custom list of cipher suites that ultimately\n        yields an empty suite list causes the default cipher suite list to\n        be provided instead.\n        \"\"\"\nsuite = auth.TLS12AuthenticationSuite(['TLS_RSA_WITH_AES_256_CBC_SHA'])\nciphers = suite.ciphers\nself.assertIsInstance(ciphers, str)\nsuites = ciphers.split(':')\nself.assertEqual(23, len(suites))\nself.assertIn('AES128-SHA256', suites)\nself.assertIn('AES256-SHA256', suites)\nself.assertIn('DH-DSS-AES256-SHA256', suites)\nself.assertIn('DH-DSS-AES128-SHA256', suites)\nself.assertIn('DH-RSA-AES128-SHA256', suites)\nself.assertIn('DHE-DSS-AES128-SHA256', suites)\nself.assertIn('DHE-RSA-AES128-SHA256', suites)\nself.assertIn('DH-DSS-AES256-SHA256', suites)\nself.assertIn('DH-RSA-AES256-SHA256', suites)\nself.assertIn('DHE-DSS-AES256-SHA256', suites)\nself.assertIn('DHE-RSA-AES256-SHA256', suites)\nself.assertIn('ECDH-ECDSA-AES128-SHA256', suites)\nself.assertIn('ECDH-ECDSA-AES256-SHA256', suites)\nself.assertIn('ECDHE-ECDSA-AES128-SHA256', suites)\nself.assertIn('ECDHE-ECDSA-AES256-SHA384', suites)\nself.assertIn('ECDH-RSA-AES128-SHA256', suites)\nself.assertIn('ECDH-RSA-AES256-SHA384', suites)\nself.assertIn('ECDHE-RSA-AES128-SHA256', suites)\nself.assertIn('ECDHE-RSA-AES256-SHA384', suites)\nself.assertIn('ECDHE-ECDSA-AES128-GCM-SHA256', suites)\nself.assertIn('ECDHE-ECDSA-AES256-GCM-SHA384', suites)\nself.assertIn('ECDHE-ECDSA-AES128-SHA256', suites)\nself.assertIn('ECDHE-ECDSA-AES256-SHA384', suites)\n"
+}

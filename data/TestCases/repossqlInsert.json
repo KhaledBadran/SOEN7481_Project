@@ -1,0 +1,9 @@
+{
+    "functionName": "sqlInsert",
+    "className": null,
+    "fileName": "/FaradayRF_&_Faraday-Software/faraday_&_proxy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Takes in a data tuple and inserts it into the Proxy SQLite table\n\n    :param data: Proxy dictionary\n    :return: Status True or False on SQL insertion success\n    \"\"\"\ntry:\n    dbFilename = proxyConfig.get('DATABASE', 'FILENAME')\n    dbPath = os.path.join(faradayHelper.userPath, 'lib', dbFilename)\n    logger.debug('Proxy Database: ' + dbPath)\n    dbFilename = os.path.join(dbPath)\nexcept ConfigParser.Error as e:\n    logger.error('ConfigParse.Error: ' + str(e))\n    return False\nsqlparameters = [None, data['port'], data['data'], time.time()]\nif len(sqlparameters) > 0:\n    numKeys = len(sqlparameters)\n    paramSubs = '?' * numKeys\n    paramSubs = ','.join(paramSubs)\n    sql = 'INSERT INTO PROXY VALUES(' + paramSubs + ')'\n    try:\n        conn = sqlite3.connect(dbFilename)\n    except sqlite3.Error as e:\n        logger.error('Sqlite3.Error: ' + str(e))\n        return False\n    try:\n        with conn:\n            conn.execute(sql, sqlparameters)\n    except sqlite3.Error as e:\n        logger.error('Sqlite3.Error: ' + str(e))\n        conn.close()\n        return False\n    conn.close()\n    return True\nelse:\n    return False\n"
+}

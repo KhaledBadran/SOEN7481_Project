@@ -1,0 +1,9 @@
+{
+    "functionName": "test_create_color_lut",
+    "className": null,
+    "fileName": "/nipy_&_PySurfer/surfer_&_tests_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test various ways of making a colormap.\"\"\"\ncmap_in = (np.random.rand(256, 4) * 255).astype(np.int)\ncmap_out = utils.create_color_lut(cmap_in)\nassert_array_equal(cmap_in, cmap_out)\ncmap_in = cmap_in[:, :3]\ncmap_out = utils.create_color_lut(cmap_in)\nassert_array_equal(cmap_in, cmap_out[:, :3])\nassert_array_equal(cmap_out[:, (3)], np.ones(256, np.int) * 255)\ncmap_out = utils.create_color_lut('BuGn_r')\nassert cmap_out.shape == (256, 4)\ncmap_out = utils.create_color_lut('icefire_r')\nassert cmap_out.shape == (256, 4)\ncmap_in = mpl.colors.ListedColormap(['blue', 'white', 'red'])\ncmap_out = utils.create_color_lut(cmap_in)\nassert_array_equal(cmap_out, cmap_in(np.linspace(0, 1, 256)) * 255)\ncmap_out = utils.create_color_lut(['purple', 'pink', 'white'])\nassert cmap_out.shape == (256, 4)\ncmap_out = utils.create_color_lut('Reds', 12)\nassert cmap_out.shape == (12, 4)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_role_policies_attach__role_policies_detach",
+    "className": "Test_IAM",
+    "fileName": "/pbx-gs_&_OSBot-AWS/tests_&_unit_&_apis_&_test_IAM.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "policy_name = 'test_policy'\npolicy_document = {'Version': '2012-10-17', 'Statement': [{'Effect':\n    'Allow', 'Action': 'lambda:InvokeFunction', 'Resource':\n    'arn:aws:lambda:*:*:function:*'}]}\npolicy_arn = self.iam.policy_create(policy_name, policy_document).get(\n    'policy_arn')\nassert len(list(self.iam.role_policies())) == 0\nself.iam.role_policy_attach(policy_arn)\nassert list(self.iam.role_policies()) == ['test_policy']\nself.iam.role_policy_detach(policy_arn)\nassert self.iam.policy_exists(policy_arn) is True\nassert self.iam.policy_delete(policy_arn) is True\nassert self.iam.policy_exists(policy_arn) is False\n"
+}

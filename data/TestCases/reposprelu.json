@@ -1,0 +1,9 @@
+{
+    "functionName": "prelu",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_layers_&_special.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Convenience function to apply parametric rectify to a given layer's output.\n    Will set the layer's nonlinearity to identity if there is one and will\n    apply the parametric rectifier instead.\n\n    Parameters\n    ----------\n    layer: a :class:`Layer` instance\n        The `Layer` instance to apply the parametric rectifier layer to;\n        note that it will be irreversibly modified as specified above\n\n    **kwargs\n        Any additional keyword arguments are passed to the\n        :class:`ParametericRectifierLayer`\n\n    Examples\n    --------\n    Note that this function modifies an existing layer, like this:\n\n    >>> from lasagne.layers import InputLayer, DenseLayer, prelu\n    >>> layer = InputLayer((32, 100))\n    >>> layer = DenseLayer(layer, num_units=200)\n    >>> layer = prelu(layer)\n\n    In particular, :func:`prelu` can *not* be passed as a nonlinearity.\n    \"\"\"\nnonlinearity = getattr(layer, 'nonlinearity', None)\nif nonlinearity is not None:\n    layer.nonlinearity = nonlinearities.identity\nreturn ParametricRectifierLayer(layer, **kwargs)\n"
+}

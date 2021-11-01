@@ -1,0 +1,9 @@
+{
+    "functionName": "test_convert_gff2rntptt",
+    "className": "TestTerminator",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_terminator.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "os.mkdir(os.path.join(self.srnas, 'tmp'))\ngen_file(os.path.join(self.gffs, 'aaa.gff'), self.example.gff_file)\ngen_file(os.path.join(self.srnas, 'aaa_sRNA.gff'), self.example.srna_file)\ngen_file(os.path.join(self.fastas, 'aaa.fa'), self.example.fasta_file)\nlog = open(os.path.join(self.test_folder, 'test.log'), 'w')\nfile_types, prefixs = self.term._convert_gff2rntptt(self.gffs, self.fastas,\n    self.srnas, log)\nself.assertDictEqual(file_types, {'aaa': 'srna'})\nself.assertListEqual(prefixs, ['aaa'])\n"
+}

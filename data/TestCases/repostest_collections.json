@@ -1,0 +1,9 @@
+{
+    "functionName": "test_collections",
+    "className": null,
+    "fileName": "/EclecticIQ_&_OpenTAXII/tests_&_services_&_test_collection_management.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "service = server.get_service('collection-management-A')\nheaders = prepare_headers(version, https)\nrequest = prepare_request(version)\nresponse = service.process(headers, request)\nnames = [c.name for c in COLLECTIONS_B]\nif version == 11:\n    assert isinstance(response, as_tm(version).CollectionInformationResponse)\n    assert len(response.collection_informations) == len(COLLECTIONS_B)\n    for c in response.collection_informations:\n        assert c.collection_name in names\nelse:\n    assert isinstance(response, as_tm(version).FeedInformationResponse)\n    assert len(response.feed_informations) == len(COLLECTIONS_B)\n    for c in response.feed_informations:\n        assert c.feed_name in names\npytest.mark.parametrize('https', [True, False])pytest.mark.parametrize('version', [11, 10])"
+}

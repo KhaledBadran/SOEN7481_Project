@@ -1,0 +1,9 @@
+{
+    "functionName": "test_case",
+    "className": null,
+    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_datacontainer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ofile = 'test.fits.gz'\nif os.path.isfile(ofile):\n    os.remove(ofile)\ndata = MixedCaseContainer(np.arange(10), 5, 8.2)\nwith pytest.raises(AttributeError):\n    data.uppercase = 3\nwith pytest.raises(KeyError):\n    data['LOWERCASE'] = 3\nwith pytest.raises(AttributeError):\n    data.cAMELcASE = 3\ndata.to_file(ofile)\nwith fits.open(ofile) as hdu:\n    assert hdu['mixedcase'].header['UpPeRcAsE'] == 5, 'Bad header access'\n    assert hdu['mixedcase'].header['CaMeLcAsE'] == 8.2, 'Bad header access'\n_data = MixedCaseContainer.from_file(ofile)\nassert _data.UPPERCASE == 5, 'Bad file read'\nos.remove(ofile)\n"
+}

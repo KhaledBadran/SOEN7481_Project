@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_volume_effective_wwn_details",
+    "className": "CITestProvisioning",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test get_volume_effective_wwn_details.\"\"\"\nvolume_list = self.provisioning.get_volume_list()\nselected_volume_list = list()\nselected_volume_details = None\nfor volume in volume_list:\n    volume_details = self.provisioning.get_volume(volume)\n    if volume_details[constants.HAS_EFFECTIVE_WWN]:\n        selected_volume_list.append(volume)\n        selected_volume_details = volume_details\n        break\nif selected_volume_details is None:\n    self.skipTest(\n        'test_get_volume_effective_wwn_details - could not find a volume with effective wwn flag set to true.'\n        )\ncsv_file_name = 'test.csv'\ntemp_dir = self.create_temp_directory()\ncsv_file_path = os.path.join(temp_dir, csv_file_name)\nself.provisioning.get_volume_effective_wwn_details(selected_volume_list,\n    csv_file_path)\nparsed_values = file_handler.read_csv_values(csv_file_path)\nself._validate_effective_wwn_details(selected_volume_details, parsed_values)\n"
+}

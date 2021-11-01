@@ -1,0 +1,9 @@
+{
+    "functionName": "test_direct_c_python_correspondence_with_correction",
+    "className": null,
+    "fileName": "/PyAbel_&_PyAbel/abel_&_tests_&_test_direct.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Check that both the C and Python backends are identical (correction=True)\"\"\"\nN = 10\nr = 0.5 + np.arange(N).astype('float64')\nx = 2 * r.reshape((1, -1)) ** 2\nout1 = abel.direct._pyabel_direct_integral(x, r, 1)\nout2 = abel.direct._cabel_direct_integral(x, r, 1)\nassert_allclose(out1, out2, rtol=1e-09, atol=1e-09)\npytest.mark.skipif(not abel.direct.cython_ext, reason=\n    'abel.direct C extension not installed')"
+}

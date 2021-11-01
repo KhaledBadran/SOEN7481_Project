@@ -1,0 +1,9 @@
+{
+    "functionName": "test_FIRuncFilter_diag",
+    "className": null,
+    "fileName": "/PTB-PSt1_&_PyDynamic/test_&_test_propagate_filter.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sigma_diag = sigma_noise * (1 + np.heaviside(np.arange(len(time)) - len(\n    time) // 2, 0))\nnoise = sigma_diag * white_gaussian(len(time))\nx = rect(time, 100 * Ts, 250 * Ts, 1.0, noise=noise)\nfor blow in [None, b2]:\n    y, Uy = FIRuncFilter(x, sigma_diag, b1, Ub, blow=blow, kind='diag')\n    assert len(y) == len(x)\n    assert len(Uy) == len(x)\n"
+}

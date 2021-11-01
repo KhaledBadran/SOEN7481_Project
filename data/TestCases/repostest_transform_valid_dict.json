@@ -1,0 +1,9 @@
+{
+    "functionName": "test_transform_valid_dict",
+    "className": "TestTunable",
+    "fileName": "/HDI-Project_&_BTB/tests_&_tuning_&_test_tunable.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test transform method with a dictionary that has all the hyperparameters.\"\"\"\nself.bhp.transform.return_value = [[1]]\nself.chp.transform.return_value = [[0]]\nself.ihp.transform.return_value = [[1]]\nvalues_dict = {'bhp': True, 'chp': 'cat', 'ihp': 1}\nresult = self.instance.transform(values_dict)\nself.bhp.transform.assert_called_once_with(True)\nself.chp.transform.assert_called_once_with('cat')\nself.ihp.transform.assert_called_once_with(1)\nnp.testing.assert_array_equal(result, np.array([[1, 0, 1]]))\n"
+}

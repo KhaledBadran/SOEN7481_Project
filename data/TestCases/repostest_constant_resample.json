@@ -1,0 +1,9 @@
+{
+    "functionName": "test_constant_resample",
+    "className": "TestFields",
+    "fileName": "/tum-pbs_&_PhiFlow/tests_&_test_fields.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "field = ConstantField([0, 1])\nself.assertEqual(field.component_count, 2)\nat_cgrid = field.at(CenteredGrid(np.zeros([1, 4, 4, 1])))\nnp.testing.assert_equal(at_cgrid.data.shape, [1, 4, 4, 2])\nat_sgrid = field.at(Fluid([4, 4]).velocity)\nnp.testing.assert_equal(at_sgrid.unstack()[0].data.shape, [1, 5, 4, 1])\nnp.testing.assert_equal(at_sgrid.unstack()[1].data.shape, [1, 4, 5, 1])\n"
+}

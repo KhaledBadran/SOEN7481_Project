@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gpu_sinkhorn",
+    "className": null,
+    "fileName": "/PythonOT_&_POT/test_&_test_gpu.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "rng = np.random.RandomState(0)\nfor n_samples in [50, 100, 500, 1000]:\n    a = rng.rand(n_samples // 4, 100)\n    b = rng.rand(n_samples, 100)\n    wa = ot.unif(n_samples // 4)\n    wb = ot.unif(n_samples)\n    wb2 = np.random.rand(n_samples, 20)\n    wb2 /= wb2.sum(0, keepdims=True)\n    M = ot.dist(a.copy(), b.copy())\n    M2 = ot.gpu.dist(a.copy(), b.copy(), to_numpy=False)\n    reg = 1\n    G = ot.sinkhorn(wa, wb, M, reg)\n    G1 = ot.gpu.sinkhorn(wa, wb, M, reg)\n    np.testing.assert_allclose(G1, G, rtol=1e-10)\n    ot.gpu.sinkhorn(wa, wb, M2, reg, to_numpy=False, log=True)\n    ot.gpu.sinkhorn(wa, wb2, M2, reg, to_numpy=False, log=True)\npytest.mark.skipif(nogpu, reason='No GPU available')"
+}

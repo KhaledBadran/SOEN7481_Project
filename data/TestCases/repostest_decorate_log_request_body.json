@@ -1,0 +1,9 @@
+{
+    "functionName": "test_decorate_log_request_body",
+    "className": null,
+    "fileName": "/OvalMoney_&_Nephthys/tests_&_test_clients_&_test_requests.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "log_record = MagicMock()\nrequest = MagicMock(url=f'https://ovalmoney.com')\nbody = MagicMock()\nbody.decode.return_value = 'return'\nrequest.body = body\ndecorate_log_request(log_record, request)\nassert log_record.request_body == 'return'\nbody.decode.assert_called_with('UTF-8', errors='strict')\n"
+}

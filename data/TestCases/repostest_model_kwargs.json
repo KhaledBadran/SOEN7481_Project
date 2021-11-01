@@ -1,0 +1,9 @@
+{
+    "functionName": "test_model_kwargs",
+    "className": "ModelBridgeFactoryTest",
+    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_factory.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Tests that model kwargs are passed correctly.\"\"\"\nexp = get_branin_experiment()\nsobol = get_sobol(search_space=exp.search_space, init_position=2, scramble=\n    False, seed=239)\nself.assertIsInstance(sobol, RandomModelBridge)\nfor _ in range(5):\n    sobol_run = sobol.gen(1)\n    exp.new_batch_trial().add_generator_run(sobol_run).run()\nwith self.assertRaises(TypeError):\n    get_sobol(search_space=exp.search_space, nonexistent=True)\n"
+}

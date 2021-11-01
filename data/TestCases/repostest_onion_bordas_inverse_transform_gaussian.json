@@ -1,0 +1,9 @@
+{
+    "functionName": "test_onion_bordas_inverse_transform_gaussian",
+    "className": null,
+    "fileName": "/PyAbel_&_PyAbel/abel_&_tests_&_test_onion_bordas.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Check onion_bordas inverse transform with a Gaussian function\"\"\"\nn = 501\nr_max = 251\nref = abel.tools.analytical.GaussianAnalytical(n, r_max, symmetric=False,\n    sigma=10)\ntr = np.tile(ref.abel[(None), :], (n, 1))\nrecon = abel.onion_bordas.onion_bordas_transform(tr, ref.dr, direction=\n    'inverse')\nrecon1d = recon[n // 2 + n % 2]\nratio = abel.benchmark.absolute_ratio_benchmark(ref, recon1d)\nassert_allclose(ratio, 1.0, rtol=0, atol=0.1)\n"
+}

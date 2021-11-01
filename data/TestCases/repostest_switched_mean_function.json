@@ -1,0 +1,9 @@
+{
+    "functionName": "test_switched_mean_function",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_test_mean_functions.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test for the SwitchedMeanFunction.\n    \"\"\"\nX = np.hstack([rng.randn(N, D), 1.0 * rng.randint(0, 2, N).reshape(-1, 1)])\nzeros, ones = Constant(np.zeros(1)), Constant(np.ones(1))\nswitched_mean = SwitchedMeanFunction([zeros, ones])\nnp_list = np.array([0.0, 1.0])\nresult_ref = np_list[X[:, (D)].astype(default_int())].reshape(-1, 1)\nresult = switched_mean(X)\nassert_allclose(result, result_ref)\npytest.mark.parametrize('N, D', [[10, 3]])"
+}

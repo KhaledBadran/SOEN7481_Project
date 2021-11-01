@@ -1,0 +1,9 @@
+{
+    "functionName": "test_tables",
+    "className": "TestFutStk",
+    "fileName": "/vijayshinva_&_Indian-Stock-Markets/src_&_tests_&_test_nse.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with Nse() as nse:\n    db = sqlite3.connect('nse.db')\n    cursor = db.cursor()\n    cursor.execute('SELECT name FROM sqlite_master WHERE type=\"table\"')\n    tables = cursor.fetchall()\n    self.assertTrue(any('FUTIDX' in t for t in tables))\n    self.assertTrue(any('FUTSTK' in t for t in tables))\n    self.assertTrue(any('OPTIDX' in t for t in tables))\n    self.assertTrue(any('OPTSTK' in t for t in tables))\n    cursor.close()\n    db.close()\n"
+}

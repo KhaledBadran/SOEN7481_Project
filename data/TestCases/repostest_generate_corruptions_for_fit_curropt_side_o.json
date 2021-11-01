@@ -1,0 +1,9 @@
+{
+    "functionName": "test_generate_corruptions_for_fit_curropt_side_o",
+    "className": null,
+    "fileName": "/Accenture_&_AmpliGraph/tests_&_ampligraph_&_evaluation_&_test_protocol.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tf.reset_default_graph()\nX = np.array([['a', 'x', 'b'], ['c', 'x', 'd'], ['e', 'x', 'f'], ['b', 'y',\n    'h'], ['a', 'y', 'l']])\nrel_to_idx, ent_to_idx = create_mappings(X)\nX = to_idx(X, ent_to_idx=ent_to_idx, rel_to_idx=rel_to_idx)\neta = 1\nwith tf.Session() as sess:\n    all_ent = tf.squeeze(tf.constant(list(ent_to_idx.values()), dtype=tf.int32)\n        )\n    dataset = tf.constant(X, dtype=tf.int32)\n    X_corr = sess.run(generate_corruptions_for_fit(dataset, eta=eta,\n        corrupt_side='o', entities_size=len(X), rnd=0))\n    print(X_corr)\nX_corr_exp = [[0, 0, 1], [2, 0, 3], [4, 0, 3], [1, 1, 0], [0, 1, 3]]\nnp.testing.assert_array_equal(X_corr, X_corr_exp)\n"
+}

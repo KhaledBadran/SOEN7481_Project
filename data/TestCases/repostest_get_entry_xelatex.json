@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_entry_xelatex",
+    "className": null,
+    "fileName": "/martisak_&_3gpp-citations/standardcitations_&_test_&_test_get_entry.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test the get_entry function by reading the `test_input.xlsx` workbook\n    reading the first (real) row, and producing an entry. We don't test\n    dynamic fields such as date or note (release) exactly since these are prone\n    to change, but rather that they are within expected ranges.\n    \"\"\"\nrow = pytest.ws.__getitem__('2')\nentry = standardcitations.get_entry(row, True)\nassert entry['number'] == '36.101'\nassert entry['ID'] == '3gpp.{}'.format(entry['number'])\nassert entry['ENTRYTYPE'] == 'techreport'\nassert validators.between(int(entry['year']), min=2010)\nassert validators.between(int(entry['month']), min=1, max=12)\nassert validators.between(int(entry['day']), min=1, max=31)\n"
+}

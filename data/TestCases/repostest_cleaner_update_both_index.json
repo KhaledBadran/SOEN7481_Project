@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cleaner_update_both_index",
+    "className": "TestCleaner",
+    "fileName": "/nkordulla_&_FHR-DB/tests_&_fhr_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "model = ComplexInnerModel()\nmodel.put()\nsql = 'DELETE FROM simple_token_index'\nDatabase.get().execute(sql)\nsql = 'DELETE FROM simple_new_index'\nDatabase.get().execute(sql)\ncleaner = Cleaner()\ncleaner.cleanModel(ComplexInnerModel)\nself.assertEquals(1, len(Database.get().query(\n    'SELECT id FROM simple_token_index')))\nself.assertEquals(1, len(Database.get().query(\n    'SELECT id FROM simple_new_index')))\n"
+}

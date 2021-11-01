@@ -1,0 +1,9 @@
+{
+    "functionName": "test_zmq_ipc_pipe_separate",
+    "className": null,
+    "fileName": "/SillyFreak_&_ConcurrentUtils/tests_&_test_pipe.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "async def task():\n    ctx = zmq.asyncio.Context()\n    b = await zmq_ipc_pipe_end(ctx, 'b', 'ipc://pipe.ipc')\n    assert await b.recv() == 'foo'\n    ctx.destroy()\ntask = asyncio.create_task(task())\nctx = zmq.asyncio.Context()\na = await zmq_ipc_pipe_end(ctx, 'a', 'ipc://pipe.ipc')\nawait a.send('foo')\nctx.destroy()\nawait task\npytest.mark.asyncio"
+}

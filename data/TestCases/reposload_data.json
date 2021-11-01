@@ -1,0 +1,9 @@
+{
+    "functionName": "load_data",
+    "className": null,
+    "fileName": "/Jhsmit_&_ColiCoords/test_&_test_functions.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "dclasses = ['binary', 'brightfield', 'fluorescence']\nf_path = os.path.dirname(os.path.realpath(__file__))\ndata = Data()\nfor dclass in dclasses:\n    files = sorted(listdir_fullpath(os.path.join(f_path, 'test_data',\n        dataset, dclass.lower())), key=str)\n    arr = np.empty((len(files), 512, 512)).astype('uint16')\n    for i, f in enumerate(files):\n        arr[i] = tifffile.imread(f)\n    data.add_data(arr, dclass)\nreturn data\n"
+}

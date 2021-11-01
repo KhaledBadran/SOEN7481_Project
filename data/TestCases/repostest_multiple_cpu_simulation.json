@@ -1,0 +1,9 @@
+{
+    "functionName": "test_multiple_cpu_simulation",
+    "className": null,
+    "fileName": "/NASA_&_MLMCPy/tests_&_mlmc_&_test_MLMCSimulator.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Compares outputs of simulator in single cpu vs MPI environments to ensure\n    consistency.\n    \"\"\"\ndata_filename = os.path.join(data_path, 'spring_mass_1D_inputs.txt')\nfull_data_input = InputFromData(data_filename)\nfull_data_input._data = np.genfromtxt(data_filename)\nfull_data_input._data = full_data_input._data.reshape(full_data_input._data\n    .shape[0], -1)\nbase_sim = MLMCSimulator(models=models_from_data, data=full_data_input)\nbase_sim._num_cpus = 1\nbase_sim._cpu_rank = 0\nbase_estimate, base_sample_sizes, base_variances = base_sim.simulate(0.1, 200)\nfull_data_input.reset_sampling()\nbase_costs, base_initial_variances = base_sim._compute_costs_and_variances()\nsim = MLMCSimulator(models=models_from_data, data=data_input)\nestimates, sample_sizes, variances = sim.simulate(0.1, 200)\ndata_input.reset_sampling()\nsim_costs, initial_variances = sim._compute_costs_and_variances()\nassert np.all(np.isclose(base_initial_variances, initial_variances))\nassert np.all(np.isclose(base_costs, sim_costs))\nall_estimates = comm.allgather(estimates)\nall_sample_sizes = comm.allgather(sample_sizes)\nall_variances = comm.allgather(variances)\nassert np.all(estimates[0] == estimates)\nassert np.all(variances[0] == variances)\nfor estimate in all_estimates:\n    assert np.all(np.isclose(estimate, base_estimate))\nfor variance in all_variances:\n    assert np.all(np.isclose(variance, base_variances))\nfor i, sample_size in enumerate(all_sample_sizes):\n    assert np.array_equal(base_sample_sizes, sample_size)\n"
+}

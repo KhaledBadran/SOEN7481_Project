@@ -1,0 +1,9 @@
+{
+    "functionName": "test_one_player_all_ins_and_other_players_call",
+    "className": null,
+    "fileName": "/exzacktlee_&_CardGames/tests_&_test_holdem_&_test_bet_collector.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "collector, players = collector_four_players\nfor player in players[:3]:\n    player.award_chips(20)\nplayers[3].award_chips(13)\ncollector.get_blind_wagers()\nfor player in players:\n    player.bet(13 - player.check_wager())\nfor i in range(4):\n    collector.ask_next_player_for_wager()\ncollector.collect_all_bets()\nassert len(collector.pots) == 1\nassert collector.pots[0].size == 13 * 4\n"
+}

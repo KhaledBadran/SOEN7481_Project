@@ -1,0 +1,9 @@
+{
+    "functionName": "test_IO_read",
+    "className": "TestKMIPProtocol",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_test_kmip_protocol.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "socket = MagicMock()\nsocket.recv = MagicMock(side_effect=[self.response[:8], self.response[8:]])\nprotocol = self.factory.getProtocol(socket)\nreceived = protocol.read()\nsocket.recv.assert_any_call(8)\nsocket.recv.assert_any_call(len(self.response) - 8)\nself.assertEqual(self.response, received.peek())\n"
+}

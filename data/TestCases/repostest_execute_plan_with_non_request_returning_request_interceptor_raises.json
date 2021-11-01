@@ -1,0 +1,9 @@
+{
+    "functionName": "test_execute_plan_with_non_request_returning_request_interceptor_raises",
+    "className": "TestPlanExecutor",
+    "fileName": "/cbefus_&_Eynnyd/tests_&_plan_execution_&_test_plan_executor.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "def fake_interceptor(original_request):\n    return 'not a proper request - should throw'\ndef correct_error_thrown_handler(thrown_error, request):\n    return ResponseBuilder().set_status(HTTPStatus.SERVICE_UNAVAILABLE).build()\nexception_handlers = ErrorHandlersBuilder().add_pre_response_error_handler(\n    RequestInterceptorReturnedNonRequestException, correct_error_thrown_handler\n    ).build()\nplan_executor = PlanExecutor(exception_handlers)\nplan = ExecutionPlan([fake_interceptor], 'some handler', [], {})\nresponse = plan_executor.execute_plan(plan, 'original test request')\nself.assertEqual(HTTPStatus.SERVICE_UNAVAILABLE.value, response.status.code)\n"
+}

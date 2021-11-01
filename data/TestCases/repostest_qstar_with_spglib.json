@@ -1,0 +1,9 @@
+{
+    "functionName": "test_qstar_with_spglib",
+    "className": null,
+    "fileName": "/mesonepigreco_&_CellConstructor/tests_&_TestQStarWithSPGLIB_&_test_qstar_with_spglib.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "total_path = os.path.dirname(os.path.abspath(__file__))\nos.chdir(total_path)\ncmca_dyn = CC.Phonons.Phonons('cmca', 8)\ncmca_dyn.AdjustQStar(use_spglib=True)\nprint('The number of irreducible q points are:')\nprint(len(cmca_dyn.q_stars))\nprint('The total number of q:')\nprint(len(cmca_dyn.q_tot))\nprint('Space group:', spglib.get_spacegroup(cmca_dyn.structure.get_ase_atoms())\n    )\nprint('Number of symmetries:')\nsyms = spglib.get_symmetry(cmca_dyn.structure.get_ase_atoms())\nprint(len(syms['rotations']))\nassert len(cmca_dyn.q_stars) == 8\n"
+}

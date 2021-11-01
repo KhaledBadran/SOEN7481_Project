@@ -1,0 +1,9 @@
+{
+    "functionName": "get_new_worker",
+    "className": null,
+    "fileName": "/HDI-project_&_ATM/tests_&_test_worker.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "kwargs['dataset_id'] = kwargs.get('dataset_id', None)\nkwargs['methods'] = kwargs.get('methods', ['logreg', 'dt'])\nrun_conf = RunConfig(kwargs)\nkwargs['train_path'] = POLLUTION_PATH\ndataset_conf = DatasetConfig(kwargs)\ndb = Database(dialect='sqlite', database=DB_PATH)\natm = ATM(dialect='sqlite', database=DB_PATH)\ndataset = atm.add_dataset(**dataset_conf.to_dict())\nrun_conf.dataset_id = dataset.id\ndatarun = atm.add_datarun(**run_conf.to_dict())\nreturn Worker(db, datarun)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_rate_multiple_values",
+    "className": "GenericTransportTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_GenericTransportTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "alg = op.algorithms.GenericTransport(network=self.net, phase=self.phase)\nalg.settings['conductance'] = 'throat.diffusive_conductance'\nalg.settings['quantity'] = 'pore.mole_fraction'\nalg.set_rate_BC(pores=[0, 1, 2, 3], values=[0, 3.5, 0.4, -12])\nalg.set_value_BC(pores=[50, 51, 52, 53], values=0.0)\nalg.run()\nrate_individual = alg.rate(pores=[0, 1, 2, 3], mode='single')\nrate_net = alg.rate(pores=[0, 1, 2, 3], mode='group')[0]\nnt.assert_allclose(rate_individual, [0, 3.5, 0.4, -12], atol=1e-10)\nnt.assert_allclose(rate_net, sum([0, 3.5, 0.4, -12]))\n"
+}

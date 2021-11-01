@@ -1,0 +1,9 @@
+{
+    "functionName": "test_property",
+    "className": "Test",
+    "fileName": "/fabioz_&_PyDev.Debugger/tests_runfiles_&_test_pydevd_property.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test case to validate custom property\n        \"\"\"\nfrom _pydevd_bundle import pydevd_traceproperty\nclass TestProperty(object):\n\n    def __init__(self):\n        self._get = 0\n        self._set = 0\n        self._del = 0\n\n    def get_name(self):\n        self._get += 1\n        return self.__name\n\n    def set_name(self, value):\n        self._set += 1\n        self.__name = value\n\n    def del_name(self):\n        self._del += 1\n        del self.__name\n    name = property(get_name, set_name, del_name, \"name's docstring\")\n    self.assertEqual(name.__class__, pydevd_traceproperty.DebugProperty)\ntestObj = TestProperty()\nself._check(testObj)\n"
+}

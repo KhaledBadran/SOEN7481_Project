@@ -1,0 +1,9 @@
+{
+    "functionName": "test_megkde_2d_basic",
+    "className": null,
+    "fileName": "/samreay_&_ChainConsumer/tests_&_test_kde.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "np.random.seed(1)\ndata = np.random.multivariate_normal([0, 1], [[1.0, 0.0], [0.0, 0.75 ** 2]],\n    size=10000)\nxs, ys = np.linspace(-4, 4, 50), np.linspace(-4, 4, 50)\nxx, yy = np.meshgrid(xs, ys, indexing='ij')\nsamps = np.vstack((xx.flatten(), yy.flatten())).T\nzs = MegKDE(data).evaluate(samps).reshape(xx.shape)\nzs_x = zs.sum(axis=1)\nzs_y = zs.sum(axis=0)\ncs_x = zs_x.cumsum()\ncs_x /= cs_x[-1]\ncs_x[0] = 0\ncs_y = zs_y.cumsum()\ncs_y /= cs_y[-1]\ncs_y[0] = 0\nsamps_x = interp1d(cs_x, xs)(np.random.uniform(size=10000))\nsamps_y = interp1d(cs_y, ys)(np.random.uniform(size=10000))\nmu_x, std_x = norm.fit(samps_x)\nmu_y, std_y = norm.fit(samps_y)\nassert np.isclose(mu_x, 0, atol=0.1)\nassert np.isclose(std_x, 1.0, atol=0.1)\nassert np.isclose(mu_y, 1, atol=0.1)\nassert np.isclose(std_y, 0.75, atol=0.1)\n"
+}

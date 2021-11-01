@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ph_N2",
+    "className": "TestPhononFinite",
+    "fileName": "/OMalenfantThuot_&_ML_Calc_Driver/tests_&_test_phonon.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ph1 = Phonon(posinp=self.posN2, calculator=self.calcN2, finite_difference=True)\nph1.run(batch_size=1)\nassert np.isclose(ph1.energies.max(), 2339.53, atol=0.01)\nassert all(np.abs(np.delete(ph1.energies, np.argmax(ph1.energies))) < 30)\nph2 = Phonon(posinp=ph1._ground_state, calculator=ph1.calculator, relax=\n    False, finite_difference=True, translation_amplitudes=0.03)\nph2.run()\nassert np.allclose(ph1.energies, ph2.energies)\nph3 = Phonon(posinp=self.posN2, calculator=self.calcN2, finite_difference=\n    True, relax=False)\nph3.run()\nassert not np.allclose(ph3.energies, ph1.energies, atol=100)\n"
+}

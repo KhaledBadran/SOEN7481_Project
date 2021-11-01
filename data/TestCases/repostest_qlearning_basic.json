@@ -1,0 +1,9 @@
+{
+    "functionName": "test_qlearning_basic",
+    "className": null,
+    "fileName": "/SeverTopan_&_AdjSim/test_&_test_decision.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from adjsim import core, utility, decision\ndef move(env, source):\n    move.count += 1\n    source.step_complete = True\nmove.count = 0\ndef perception(env, source):\n    perception.count += 1\n    return 1\nperception.count = 0\ndef loss(env, source):\n    loss.count += 1\n    return 1\nloss.count = 0\nclass TestAgent(core.VisualAgent):\n\n    def __init__(self, x, y, sim):\n        super().__init__(pos=np.array([x, y]))\n        self.decision = decision.QLearningDecision(perception=perception,\n            loss=loss, simulation=sim, output_file_name=None,\n            input_file_name=None)\n        self.actions['move'] = move\n        self.mutable = decision.DecisionMutableFloat(mutable_min, mutable_max)\ntest_sim = core.Simulation()\nagent = TestAgent(0, 0, test_sim)\ntest_sim.agents.add(agent)\ntest_sim.simulate(1)\nassert move.count == 1\nassert perception.count == 1\nassert loss.count == 2\nassert agent.decision.q_table[1].loss == 1\nassert len(agent.decision.q_table[1].action_premise.iterations) == 1\nassert len(agent.decision.q_table[1].action_premise.iterations[0].\n    decision_mutables) == 1\ndecision_mutable_premise = agent.decision.q_table[1].action_premise.iterations[\n    0].decision_mutables[0]\nassert decision_mutable_premise.name == 'mutable'\nassert decision_mutable_premise.value < mutable_max and decision_mutable_premise.value > mutable_min\nassert agent.decision.q_table[1].action_premise.iterations[0\n    ].action_name == 'move'\npytest.mark.parametrize('mutable_min,mutable_max', [(0, 1), (0, 7), (-7, 0),\n    (300, 400)])"
+}

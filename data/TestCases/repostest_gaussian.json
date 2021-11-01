@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gaussian",
+    "className": "TestFilter",
+    "fileName": "/michaelbuehlmann_&_CatAna/test_&_python_&_io_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "N = 1 << 24\ndata = np.zeros((N, 3))\ndata[:, (0)] = 1000 * np.random.uniform(0, 1, N) ** (1 / 3)\npc = catana.PointContainer(data)\ngf = catana.io.GaussianRadialWindowFunctionFilter(100)\ngf(pc)\nassert np.array(pc).shape[0] / N == pytest.approx(0.001329340388, rel=0.1)\n"
+}

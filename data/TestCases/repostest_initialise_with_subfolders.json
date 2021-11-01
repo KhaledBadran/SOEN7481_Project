@@ -1,0 +1,9 @@
+{
+    "functionName": "test_initialise_with_subfolders",
+    "className": null,
+    "fileName": "/mdbloice_&_Augmentor/tests_&_test_load.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "num_of_folders = 10\nnum_of_images = 10\ntemp_directories, temp_files, parent_temp_directory = create_sub_folders(\n    number_of_sub_folders=num_of_folders, number_of_images=num_of_images)\nassert len(temp_directories) == num_of_folders\nassert len(temp_files) == num_of_images * num_of_folders\ntmp_not_to_be_found = tempfile.NamedTemporaryFile(dir=parent_temp_directory,\n    suffix='.JPEG')\nim_not_to_be_found = Image.fromarray(np.uint8(np.random.rand(800, 800) * 255))\nim_not_to_be_found.save(tmp_not_to_be_found.name, 'JPEG')\nsub_temp_directory_not_to_be_found = tempfile.mkdtemp(dir=temp_directories[\n    random.randint(0, len(temp_directories) - 1)])\nfiles_found = ImageUtilities.scan_directory_with_classes(parent_temp_directory)\nassert len(files_found.keys()) == num_of_folders\nimage_count = 0\nfor val in files_found.values():\n    image_count += len(val)\n    for image_path in val:\n        assert os.path.isfile(image_path)\nassert image_count == num_of_folders * num_of_images\nscanned_directories = []\nglob_scanned_files = glob.glob(os.path.join(parent_temp_directory, '*'))\nfor glob_scanned_file in glob_scanned_files:\n    if os.path.isdir(glob_scanned_file):\n        scanned_directories.append(os.path.split(glob_scanned_file)[1])\nfor key in files_found.keys():\n    assert key in scanned_directories\n    assert os.path.exists(os.path.join(parent_temp_directory, key))\ntmp_not_to_be_found.close()\nshutil.rmtree(sub_temp_directory_not_to_be_found)\nfor temp_file in temp_files:\n    temp_file.close()\nfor temp_directory in temp_directories:\n    shutil.rmtree(temp_directory)\nshutil.rmtree(parent_temp_directory)\n"
+}

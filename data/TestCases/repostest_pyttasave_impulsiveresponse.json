@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pyttasave_impulsiveresponse",
+    "className": "TestPyttaSave",
+    "fileName": "/PyTTAmaster_&_PyTTa/tests_&_test_pyttasave.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\"\n        ImpulsiveResponse pytta save test\n        \"\"\"\nxt = pytta.generate.sweep(fftDegree=16)\nnoise = pytta.generate.noise(fftDegree=16, startMargin=0, stopMargin=0)\nnoise *= 0.5\nyt = xt + noise\nIR = pytta.ImpulsiveResponse(excitation=xt, recording=yt, method='Ht',\n    winType='hann', winSize=44100 * 0.1, overlap=0.6, samplingRate=noise.\n    samplingRate, freqMax=10000, freqMin=100, comment='testing the stuff')\npytta.save(self.filename, IR)\na = pytta.load(self.filename)\nloadedlst = [pyttaobj for pyttaobj in a]\nself.assertSequenceEqual(loadedlst[0].systemSignal.timeSignal.tolist(), IR.\n    systemSignal.timeSignal.tolist())\n"
+}

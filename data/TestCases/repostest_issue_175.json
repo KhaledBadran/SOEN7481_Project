@@ -1,0 +1,9 @@
+{
+    "functionName": "test_issue_175",
+    "className": "TestGitHubIssues",
+    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_test_issues.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" The number of fields returned by server is read in wrong way \"\"\"\nconn = self.connect()\ncur = conn.cursor()\nfor length in (200, 300):\n    columns = ', '.join('c{0} integer'.format(i) for i in range(length))\n    sql = 'create table test_field_count ({0})'.format(columns)\n    try:\n        cur.execute(sql)\n        cur.execute('select * from test_field_count')\n        assert len(cur.description) == length\n    finally:\n        with warnings.catch_warnings():\n            warnings.filterwarnings('ignore')\n            cur.execute('drop table if exists test_field_count')\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_from_shapely_polygon",
+    "className": "TestPolygon",
+    "fileName": "/twhiteaker_&_CFGeom/cfgeom_&_test_&_test_ncgeom_&_test_convert_&_test_shapely_&_test_shapely_reader.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "for d in ['2d', '3d']:\n    poly1 = wkt.loads(self.fixture_wkt[d]['polygon'])\n    poly2 = wkt.loads(self.fixture_wkt[d]['polygon_hole'])\n    geoms = [orient(poly1, sign=-1.0), poly2]\n    res = shapely_to_container(geoms)\n    self.assertIsInstance(res, GeometryContainer)\n    for ctr, geom in enumerate(res.geoms):\n        loaded = geom.to_shapely()\n        self.assertTrue(loaded.almost_equals(geoms[ctr]))\n"
+}

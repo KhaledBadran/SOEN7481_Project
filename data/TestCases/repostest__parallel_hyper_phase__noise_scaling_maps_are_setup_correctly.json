@@ -1,0 +1,9 @@
+{
+    "functionName": "test__parallel_hyper_phase__noise_scaling_maps_are_setup_correctly",
+    "className": "TestResult",
+    "fileName": "/Jammy2211_&_PyAutoCTI/test_&_unit_&_pipeline_&_test_phase.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "phase = ph.ParallelPhase(parallel_species=[af.PriorModel(arctic_params.\n    Species)], parallel_ccd=arctic_params.CCD, optimizer_class=NLO,\n    phase_name='test_phase')\nci_data.image[0, 0] = 2.0\nci_data.noise_map[0, 0] = 2.0\nresult = phase.run(ci_datas=[ci_data, ci_data, ci_data, ci_data],\n    cti_settings=cti_settings)\nphase2 = ph.ParallelHyperPhase(phase_name='test_phase_2', parallel_species=\n    [af.PriorModel(arctic_params.Species)], parallel_ccd=arctic_params.CCD,\n    optimizer_class=NLO)\nnoise_scaling_maps = phase2.noise_scaling_maps_from_result(result=result)\nassert (noise_scaling_maps[0][0] == np.array([[0.25, 0.0, 0.0], [0.0, 0.0, \n    0.0], [0.0, 0.0, 0.0]])).all()\nassert (noise_scaling_maps[1][0] == np.array([[0.25, 0.0, 0.0], [0.0, 0.0, \n    0.0], [0.0, 0.0, 0.0]])).all()\nassert (noise_scaling_maps[2][0] == np.array([[0.25, 0.0, 0.0], [0.0, 0.0, \n    0.0], [0.0, 0.0, 0.0]])).all()\nassert (noise_scaling_maps[3][0] == np.array([[0.25, 0.0, 0.0], [0.0, 0.0, \n    0.0], [0.0, 0.0, 0.0]])).all()\nassert (noise_scaling_maps[0][1] == np.zeros((3, 3))).all()\nassert (noise_scaling_maps[1][1] == np.zeros((3, 3))).all()\nassert (noise_scaling_maps[2][1] == np.zeros((3, 3))).all()\nassert (noise_scaling_maps[3][1] == np.zeros((3, 3))).all()\n"
+}

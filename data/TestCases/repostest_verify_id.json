@@ -1,0 +1,9 @@
+{
+    "functionName": "test_verify_id",
+    "className": null,
+    "fileName": "/PlaidWeb_&_Authl/tests_&_handlers_&_test_indieauth.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "endpoint_1 = {'Link': '<https://auth.example/1>; rel=\"authorization_endpoint'}\nendpoint_2 = {'Link': '<https://auth.example/2>; rel=\"authorization_endpoint'}\nassert indieauth.verify_id('https://matching.example',\n    'https://matching.example') == 'https://matching.example'\nrequests_mock.get('https://different.example/1', headers=endpoint_1)\nrequests_mock.get('https://different.example/2', headers=endpoint_1)\nassert indieauth.verify_id('https://different.example/1',\n    'https://different.example/2') == 'https://different.example/2'\nrequests_mock.get('https://one.example', headers=endpoint_1)\nrequests_mock.get('https://two.example', headers=endpoint_1)\nwith pytest.raises(ValueError):\n    indieauth.verify_id('https://one.example', 'https://two.example')\nrequests_mock.get('https://same.example/alice', headers=endpoint_1)\nrequests_mock.get('https://same.example/bob', headers=endpoint_2)\nwith pytest.raises(ValueError):\n    indieauth.verify_id('https://same.example/alice',\n        'https://same.example/bob')\nrequests_mock.get('http://upgrade.example', headers=endpoint_2)\nrequests_mock.get('https://upgrade.example', headers=endpoint_2)\nassert indieauth.verify_id('http://upgrade.example', 'https://upgrade.example')\n"
+}

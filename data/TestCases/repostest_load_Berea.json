@@ -1,0 +1,9 @@
+{
+    "functionName": "test_load_Berea",
+    "className": "StatoilTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_io_&_StatoilTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "path = Path(os.path.realpath(__file__),\n    '../../../fixtures/ICL-Sandstone(Berea)')\nproject = op.io.Statoil.load(path=path, prefix='Berea')\nassert len(project) == 1\nnet = project.network\nassert net.Np == 6298\nassert net.Nt == 12098\nassert np.shape(net['pore.coords']) == (6298, 3)\nassert np.shape(net['throat.conns']) == (12098, 2)\nassert 'pore.radius' in net.keys()\nassert np.all(net.find_neighbor_pores(pores=1000) == [221, 1214])\n"
+}

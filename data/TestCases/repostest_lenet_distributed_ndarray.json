@@ -1,0 +1,9 @@
+{
+    "functionName": "test_lenet_distributed_ndarray",
+    "className": "TestBackend",
+    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_keras_&_test_backend.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "kmodel, X_train, y_train = TestModels.kmodel_seq_lenet_mnist()\nself.modelTest(X_train, kmodel, dump_weights=True)\nkmodel.compile(loss='categorical_crossentropy', optimizer='adam', metrics=[\n    'accuracy'])\nmodel = with_bigdl_backend(kmodel)\nmodel.fit(X_train, y_train, batch_size=4, nb_epoch=2, validation_data=(\n    X_train, y_train), is_distributed=True)\nmodel.predict(X_train, is_distributed=True).collect()\nmodel.evaluate(X_train, y_train, is_distributed=True)\nprint(model)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_in_call",
+    "className": "InheritanceTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_inheritance.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "collection = lookup.TemplateLookup()\ncollection.put_string('/layout.html',\n    \"\"\"\n        Super layout!\n        <%call expr=\"self.grid()\">\n            ${next.body()}\n        </%call>\n        Oh yea!\n\n        <%def name=\"grid()\">\n            Parent grid\n                ${caller.body()}\n            End Parent\n        </%def>\n        \"\"\"\n    )\ncollection.put_string('/subdir/layout.html',\n    \"\"\"\n        ${next.body()}\n        <%def name=\"grid()\">\n           Subdir grid\n               ${caller.body()}\n           End subdir\n        </%def>\n        <%inherit file=\"/layout.html\"/>\n        \"\"\"\n    )\ncollection.put_string('/subdir/renderedtemplate.html',\n    \"\"\"\n        Holy smokes!\n        <%inherit file=\"/subdir/layout.html\"/>\n        \"\"\"\n    )\nassert result_lines(collection.get_template('/subdir/renderedtemplate.html'\n    ).render()) == ['Super layout!', 'Subdir grid', 'Holy smokes!',\n    'End subdir', 'Oh yea!']\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_save_failure",
+    "className": "JSONGraphFormatTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_io_&_JSONGraphFormatTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "path = Path(os.path.realpath(__file__), '../../../fixtures/JSONGraphFormat')\nfilename = Path(path.resolve(), 'save_failure.json')\nnet = copy.deepcopy(self.net)\nnet.pop('pore.diameter')\nwith pytest.raises(Exception) as e_info:\n    op.io.JSONGraphFormat.save(net, filename=filename)\nexpected_error = 'Error - network is missing one of:'\nassert expected_error in str(e_info.value)\n"
+}

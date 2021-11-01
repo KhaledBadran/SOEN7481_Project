@@ -1,0 +1,9 @@
+{
+    "functionName": "create_diffusion_sim",
+    "className": null,
+    "fileName": "/OpenSMFS_&_PyBroMo/pybromo_&_tests_&_test_diffusion.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "rs = np.random.RandomState(_SEED)\nspecs = {k: v for k, v in particles_specs.items() if k in ['num_particles',\n    'D', 'box']}\nP = pbm.Particles.from_specs(**specs, rs=rs)\nS = pbm.ParticlesSimulation(t_step=t_step, t_max=t_max, particles=P, box=\n    box, psf=psf)\nS.simulate_diffusion(save_pos=True, total_emission=False, radial=False, rs=rs)\nS.store.close()\nreturn S.hash()[:6]\n"
+}

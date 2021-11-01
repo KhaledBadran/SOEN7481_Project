@@ -1,0 +1,9 @@
+{
+    "functionName": "test_modify_initiator_rename_alias",
+    "className": "CITestProvisioning",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test modify_initiator rename alias.\"\"\"\ninitiator = self.provisioning.get_available_initiator()\nif not initiator:\n    self.skipTest(\n        'test_modify_initiator_rename_alias - Unable to get an available initiator.'\n        )\ninitiator_details = self.provisioning.get_initiator(initiator)\ninitiator_id = initiator_details[constants.INITIATOR_ID]\nold_alias = initiator_id, initiator_id\nif constants.ALIAS in initiator_details:\n    old_alias = tuple(initiator_details[constants.ALIAS].split('/'))\nnew_alias = 'pyu4v_ci_test', 'pyu4v_ci_alias'\nnew_alias_str = new_alias[0] + '/' + new_alias[1]\nself.provisioning.modify_initiator(initiator, rename_alias=new_alias)\ninitiator_details = self.provisioning.get_initiator(initiator)\ntry:\n    self.assertEqual(new_alias_str, initiator_details[constants.ALIAS])\nfinally:\n    self.provisioning.modify_initiator(initiator, rename_alias=old_alias)\n"
+}

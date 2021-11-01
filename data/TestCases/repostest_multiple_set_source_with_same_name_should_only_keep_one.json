@@ -1,0 +1,9 @@
+{
+    "functionName": "test_multiple_set_source_with_same_name_should_only_keep_one",
+    "className": "ReactiveTransportTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_ReactiveTransportTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.alg.settings.update({'conductance': 'throat.diffusive_conductance',\n    'quantity': 'pore.concentration'})\nself.alg.set_source(pores=self.net.pores('bottom'), propname='pore.reaction')\nself.alg.set_source(pores=self.net.pores('bottom'), propname='pore.reaction')\nself.alg.set_source(pores=self.net.pores('bottom'), propname='pore.reaction')\nself.alg.set_value_BC(pores=self.net.pores('top'), values=1.0)\nself.alg.run()\nc_mean_desired = 0.717129\nc_mean = self.alg['pore.concentration'].mean()\nassert_allclose(c_mean, c_mean_desired, rtol=1e-05)\n"
+}

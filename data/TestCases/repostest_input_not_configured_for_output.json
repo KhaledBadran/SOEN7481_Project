@@ -1,0 +1,9 @@
+{
+    "functionName": "test_input_not_configured_for_output",
+    "className": null,
+    "fileName": "/rm-hull_&_OPi.GPIO/tests_&_test_gpio.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with patch('OPi.GPIO.sysfs'):\n    GPIO.setmode(GPIO.BOARD)\n    GPIO.setup(23, GPIO.IN)\n    with pytest.raises(RuntimeError) as ex:\n        GPIO.output(23, GPIO.LOW)\n    assert str(ex.value) == 'Channel 23 is configured for input'\n"
+}

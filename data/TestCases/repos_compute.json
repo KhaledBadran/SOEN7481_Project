@@ -1,0 +1,9 @@
+{
+    "functionName": "_compute",
+    "className": "Pipeline",
+    "fileName": "/konstantint_&_PassportEye/passporteye_&_util_&_pipeline.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "if key not in self.data:\n    cname = self.whoprovides[key]\n    for d in self.depends[cname]:\n        self._compute(d)\n    inputs = [self.data[d] for d in self.depends[cname]]\n    results = self.components[cname](*inputs)\n    if len(self.provides[cname]) == 1:\n        self.data[self.provides[cname][0]] = results\n    else:\n        for k, v in zip(self.provides[cname], results):\n            self.data[k] = v\n"
+}

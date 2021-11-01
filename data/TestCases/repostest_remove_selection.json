@@ -1,0 +1,9 @@
+{
+    "functionName": "test_remove_selection",
+    "className": "TestSelections",
+    "fileName": "/datreant_&_MDSynthesis/src_&_mdsynthesis_&_tests_&_test_treants.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test universe removal\"\"\"\ntreant.atomselections.add('CA', 'protein and name CA')\ntreant.atomselections.add('someres', 'resid 12')\nassert 'CA' in treant.atomselections\nassert 'someres' in treant.atomselections\ntreant.atomselections.remove('CA')\nassert 'CA' not in treant.atomselections\nassert 'someres' in treant.atomselections\ndel treant.atomselections['someres']\ntreant.atomselections.add('moreres', 'resid 12:20')\nassert 'CA' not in treant.atomselections\nassert 'someres' not in treant.atomselections\nassert 'moreres' in treant.atomselections\nwith pytest.raises(KeyError):\n    treant.atomselections.remove('someres')\nwith pytest.raises(KeyError):\n    del treant.atomselections['CA']\n"
+}

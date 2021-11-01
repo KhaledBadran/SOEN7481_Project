@@ -1,0 +1,9 @@
+{
+    "functionName": "test_steady_states",
+    "className": null,
+    "fileName": "/TommasoBelluzzo_&_PyDTMC/tests_&_test_steady_states.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "actual = MarkovChain(p).pi\nexpected = [np.array(steady_state) for steady_state in steady_states]\nmatches = 0\nfor a in actual:\n    for e in expected:\n        matches += 1 if np.allclose(a, e, rtol=0.0, atol=1e-06) else 0\nassert matches == len(expected)\nmark.parametrize(argnames=('p', 'steady_states'), argvalues=cases, ids=[str\n    (i + 1) for i in range(len(cases))])"
+}

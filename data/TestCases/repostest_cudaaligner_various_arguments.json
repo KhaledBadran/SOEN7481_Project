@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cudaaligner_various_arguments",
+    "className": null,
+    "fileName": "/clara-genomics_&_ClaraGenomicsAnalysis/pygenomeworks_&_test_&_test_cudaaligner_bindings.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Pass legal and illegal arguments, and test for correct exception throwing behavior.\n    \"\"\"\ndevice = cuda.cuda_get_device()\ngenome_sim = PoissonGenomeSimulator()\nread_sim = NoisyReadSimulator()\nbatch = CudaAlignerBatch(max_seq_len, max_seq_len, max_alignments,\n    device_id=device)\nsuccess = True\nfor _ in range(num_alignments):\n    reference = genome_sim.build_reference(seq_len)\n    query, start, end = read_sim.generate_read(reference, seq_len,\n        insertion_error_rate=0.0)\n    target, start, end = read_sim.generate_read(reference, seq_len,\n        insertion_error_rate=0.0)\n    status = batch.add_alignment(query, target)\n    if status != 0:\n        success &= False\nbatch.align_all()\nassert success is should_succeed\npytest.mark.gpupytest.mark.parametrize(\n    'max_seq_len, max_alignments, seq_len, num_alignments, should_succeed',\n    [(1000, 100, 10000, 10, False), (1000, 100, 100, 10, True), (1000, 100,\n    1000, 100, True), (100, 10, 100, 1000, False)])"
+}

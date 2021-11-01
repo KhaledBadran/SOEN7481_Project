@@ -1,0 +1,9 @@
+{
+    "functionName": "test_function_interpolator",
+    "className": "TestBesselIntegrator",
+    "fileName": "/michaelbuehlmann_&_CatAna/test_&_python_&_besseltools_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "w = lambda r: np.exp(-(r / 40) ** 2) * r ** 2\nfi = catana.FunctionInterpolator(w, 100000, 0, 100)\nassert fi(0) == w(0)\nassert fi(99.9) == pytest.approx(w(99.9))\nassert fi(20) == pytest.approx(fi(20))\nwith pytest.raises(ValueError):\n    fi(100)\nwith pytest.raises(ValueError):\n    fi(-1)\nwith pytest.raises(ValueError):\n    fi(120)\nres1 = catana.besseltools.double_sbessel_integrator(w, 6, 100, 2.3, 4.5)\nres2 = catana.besseltools.double_sbessel_integrator(fi, 6, 100, 2.3, 4.5)\nassert res1 == pytest.approx(res2, rel=1e-05)\n"
+}

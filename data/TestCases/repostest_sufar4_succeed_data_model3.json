@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sufar4_succeed_data_model3",
+    "className": "TestSufarAscMagic",
+    "fileName": "/PmagPy_&_PmagPy/pmagpy_tests_&_test_imports3.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "input_dir = os.path.join(WD, 'data_files', 'convert_2_magic', 'sufar_asc_magic'\n    )\ninfile = 'sufar4-asc_magic_example.txt'\nprogram_ran, outfile = convert.sufar4(infile, input_dir_path=input_dir)\nself.assertTrue(program_ran)\nself.assertEqual(os.path.realpath(outfile), os.path.realpath(os.path.join(\n    '.', 'measurements.txt')))\nwith open(outfile, 'r') as ofile:\n    lines = ofile.readlines()\n    self.assertEqual(292, len(lines))\n    self.assertEqual('measurements', lines[0].split('\\t')[1].strip())\ncon = cb.Contribution(WD)\nself.assertEqual(sorted(con.tables), sorted(['measurements', 'specimens',\n    'samples', 'sites']))\n"
+}

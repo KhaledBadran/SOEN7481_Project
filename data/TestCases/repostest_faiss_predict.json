@@ -1,0 +1,9 @@
+{
+    "functionName": "test_faiss_predict",
+    "className": null,
+    "fileName": "/Menelau_&_DESlib/deslib_&_tests_&_util_&_test_faiss.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "rng = np.random.RandomState(123456)\n_, X_test, X_train, _, _, y_train = load_dataset(None, rng)\nk = 7\nX_train = X_train.astype(np.float32)\nX_test = X_test.astype(np.float32)\nf_knn_test = faiss_knn_wrapper.FaissKNNClassifier(n_neighbors=k)\nf_knn_test.fit(X_train, y_train)\nf_knn_preds = f_knn_test.predict(X_test)\nknn_test = KNeighborsClassifier(n_neighbors=k)\nknn_test.fit(X_train, y_train)\nknn_preds = knn_test.predict(X_test)\nassert (f_knn_preds - knn_preds).sum() == 0\npytest.mark.skipif(not faiss_knn_wrapper.is_available(), reason=\n    'requires the faiss library')"
+}

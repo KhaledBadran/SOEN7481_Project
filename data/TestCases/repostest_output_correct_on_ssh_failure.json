@@ -1,0 +1,9 @@
+{
+    "functionName": "test_output_correct_on_ssh_failure",
+    "className": null,
+    "fileName": "/PearsonEducation_&_Alarmageddon/tests_&_validations_&_test_ssh.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "monkeypatch.setattr(Connection, 'run', lambda self, x, err_stream, timeout,\n    warn: broken_ssh())\nssh_ctx = ssh.SshContext('ubuntu', get_mock_key_file(tmpdir))\nwith pytest.raises(ValidationFailure):\n    validation = ssh.SshCommandValidation(ssh_ctx, 'citations', 'command',\n        hosts=hosts)\n    validation.add_expectation(ssh.OutputLessThan(validation, 90))\n    validation.perform({})\n"
+}

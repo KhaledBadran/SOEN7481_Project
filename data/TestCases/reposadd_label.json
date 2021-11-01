@@ -1,0 +1,9 @@
+{
+    "functionName": "add_label",
+    "className": "_Hemisphere",
+    "fileName": "/nipy_&_PySurfer/surfer_&_viz.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Add an ROI label to the image\"\"\"\nfrom matplotlib.colors import colorConverter\narray_id, pipe = self._add_scalar_data(label)\nwith warnings.catch_warnings(record=True):\n    surf = mlab.pipeline.surface(pipe, name=label_name, figure=self._f,\n        reset_zoom=False, **kwargs)\n    surf.actor.property.backface_culling = False\ncolor = colorConverter.to_rgba(color, alpha)\ncmap = np.array([(0, 0, 0, 0), color])\nl_m = surf.module_manager.scalar_lut_manager\nl_m.lut.table = np.round(cmap * 255).astype(np.uint8)\nreturn array_id, surf\n"
+}

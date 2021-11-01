@@ -1,0 +1,9 @@
+{
+    "functionName": "repeat_func_eof",
+    "className": null,
+    "fileName": "/PRIArobotics_&_HedgehogUtils/hedgehog_&_utils_&_asyncio.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Repeats the result of a 0-ary function until an `eof` item is reached.\n    The `eof` item itself is not part of the resulting stream; by setting `use_is` to true,\n    eof is checked by identity rather than equality.\n    `times` and `interval` behave exactly like with `aiostream.create.repeat`.\n    \"\"\"\npred = (lambda item: item != eof\n    ) if not use_is else lambda item: item is not eof\nbase = repeat_func.raw(func, interval=interval)\nreturn cast(AsyncIterator[T], stream.takewhile.raw(base, pred))\noperator"
+}

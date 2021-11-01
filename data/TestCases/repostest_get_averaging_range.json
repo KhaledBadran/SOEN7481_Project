@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_averaging_range",
+    "className": "TestOptimizer",
+    "fileName": "/Yelp_&_MOE/moe_&_tests_&_optimal_learning_&_python_&_python_version_&_optimization_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test the method used to produce what interval to average over in Polyak-Ruppert averaging.\"\"\"\nnum_steps_total = 250\nend = num_steps_total + 1\nnum_steps_averaged_input_list = [-1, 0, 1, 20, 100, 249, 250, 251, 10000]\ntruth_list = [(1, end), (250, end), (250, end), (231, end), (151, end), (2,\n    end), (1, end), (1, end), (1, end)]\nfor i, truth in enumerate(truth_list):\n    start, end = GradientDescentOptimizer._get_averaging_range(\n        num_steps_averaged_input_list[i], num_steps_total)\n    assert start == truth[0]\n    assert end == truth[1]\n"
+}

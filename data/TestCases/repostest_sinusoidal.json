@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sinusoidal",
+    "className": "MeniscusTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_physics_&_MeniscusTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "phys = self.phys\nself.geo['throat.amplitude'] = 5e-06\nphys.add_model(propname='throat.sin_pressure', model=pm.meniscus.sinusoidal,\n    mode='max')\nphys.add_model(propname='throat.sin_meniscus', model=pm.meniscus.sinusoidal,\n    mode='men', target_Pc=5000)\nh = phys.check_data_health()\nfor check in h.values():\n    if len(check) > 0:\n        assert 1 == 2\n"
+}

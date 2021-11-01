@@ -1,0 +1,9 @@
+{
+    "functionName": "test_filtering",
+    "className": null,
+    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_pydevd_filtering.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from _pydevd_bundle.pydevd_filtering import FilesFiltering\nfrom _pydevd_bundle.pydevd_filtering import ExcludeFilter\nfiles_filtering = FilesFiltering()\nsite_packages = tmpdir.mkdir('site-packages')\nproject_dir = tmpdir.mkdir('project')\nproject_dir_inside_site_packages = str(site_packages.mkdir('project'))\nsite_packages_inside_project_dir = str(project_dir.mkdir('site-packages'))\nfiles_filtering.set_exclude_filters([ExcludeFilter('**/project*', True, \n    True), ExcludeFilter('**/bar*', False, True)])\nassert files_filtering.exclude_by_filter('/foo/project', None) is True\nassert files_filtering.exclude_by_filter('/foo/unmatched', None) is None\nassert files_filtering.exclude_by_filter('/foo/bar', None) is False\n"
+}

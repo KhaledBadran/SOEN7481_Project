@@ -1,0 +1,9 @@
+{
+    "functionName": "test_lens_and_pendular_ring",
+    "className": "ThroatVolumeTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_geometry_&_ThroatVolumeTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "net = op.network.Cubic(shape=[2, 1, 1])\nnet['pore.diameter'] = 0.5\nnet['throat.diameter'] = 0.25\nmod = op.models.geometry.throat_volume.lens\nnet.add_model(propname='throat.lens_volume', model=mod)\nVlens = net['throat.lens_volume']\nassert np.isclose(Vlens, 2 * 0.006733852203712552)\nmod = op.models.geometry.throat_volume.pendular_ring\nnet.add_model(propname='throat.ring_volume', model=mod)\nVcyl = 2 * 0.01315292522620208\nVring = net['throat.ring_volume']\nassert np.isclose(Vcyl - Vring, 2 * 0.006733852203712552)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_load_xrf_standard_yaml_file1",
+    "className": null,
+    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_core_&_tests_&_test_quant_analysis.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Try loading non-existent YAML file\"\"\"\nfile_name = 'standard.yaml'\nyaml_path = os.path.join(tmp_path, file_name)\nwith pytest.raises(IOError, match=f\"File '{yaml_path}' does not exist\"):\n    load_xrf_standard_yaml_file(yaml_path)\nyaml_path = ['yaml', 'param', 'file']\nyaml_path = os.path.join(tmp_path, *yaml_path, file_name)\nwith pytest.raises(IOError, match=f\"File '{yaml_path}' does not exist\"):\n    load_xrf_standard_yaml_file(yaml_path)\n"
+}

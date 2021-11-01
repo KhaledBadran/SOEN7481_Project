@@ -1,0 +1,9 @@
+{
+    "functionName": "test_from_factory",
+    "className": null,
+    "fileName": "/akshay2000_&_Pychkari/test_&_pychkari_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "container = Container()\nconst_dep = 42\ndef factory_a():\n    return A(DepOne(), DepTwo(), const_dep)\ncontainer.register('AWithFactory', factory_a)\ncontainer.register('AWithoutFactory', A)\ncontainer.register('DepOne', DepOne)\ncontainer.register('DepTwo', DepTwo)\na_from_factory = container.get('AWithFactory')\na_without_factory = container.get('AWithoutFactory')\nassert a_from_factory.const_d == const_dep\nassert a_without_factory != a_from_factory\n"
+}

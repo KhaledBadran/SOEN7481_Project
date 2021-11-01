@@ -1,0 +1,9 @@
+{
+    "functionName": "test_quadrature",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_conditionals_&_test_uncertain_conditional.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "kernel = gpflow.kernels.SquaredExponential()\ninducing_variable = gpflow.inducing_variables.InducingPoints(DataQuad.Z)\nmean_function = mean_function_factory(mean, DataQuad.D_in, DataQuad.D_out)\neffective_mean = mean_function or (lambda X: 0.0)\ndef conditional_fn(X):\n    return conditional(X, inducing_variable, kernel, DataQuad.q_mu, q_sqrt=\n        DataQuad.q_sqrt, white=white)\ndef mean_fn(X):\n    return conditional_fn(X)[0] + effective_mean(X)\ndef var_fn(X):\n    return conditional_fn(X)[1]\nquad_args = DataQuad.Xmu, DataQuad.Xvar, DataQuad.H, DataQuad.D_in, (DataQuad\n    .D_out,)\nmean_quad = mvnquad(mean_fn, *quad_args)\nvar_quad = mvnquad(var_fn, *quad_args)\ndef mean_sq_fn(X):\n    return mean_fn(X) ** 2\nmean_sq_quad = mvnquad(mean_sq_fn, *quad_args)\nvar_quad = var_quad + (mean_sq_quad - mean_quad ** 2)\nmean_analytic, var_analytic = uncertain_conditional(DataQuad.Xmu, DataQuad.\n    Xvar, inducing_variable, kernel, DataQuad.q_mu, DataQuad.q_sqrt,\n    mean_function=mean_function, full_output_cov=False, white=white)\nassert_allclose(mean_quad, mean_analytic, rtol=1e-06)\nassert_allclose(var_quad, var_analytic, rtol=1e-06)\npytest.mark.parametrize('mean', MEANS)pytest.mark.parametrize('white', [True, False])"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_build_pie_symmetric_key_on_invalid_format",
+    "className": "TestObjectFactory",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_test_factory.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a TypeError exception is raised when attempting to create a\n        Pie SymmetricKey object from a core SymmetricKey object with an\n        incompatible format.\n        \"\"\"\nformat_type = misc.KeyFormatType(enums.KeyFormatType.OPAQUE)\nalgorithm = attributes.CryptographicAlgorithm(enums.CryptographicAlgorithm.AES)\nlength = attributes.CryptographicLength(128)\nkey_material = cobjects.KeyMaterial(self.symmetric_bytes)\nkey_value = cobjects.KeyValue(key_material)\nkey_block = cobjects.KeyBlock(key_format_type=format_type,\n    key_compression_type=None, key_value=key_value, cryptographic_algorithm\n    =algorithm, cryptographic_length=length, key_wrapping_data=None)\ncore_key = secrets.SymmetricKey(key_block)\nargs = [core_key, pobjects.SymmetricKey]\nself.assertRaises(TypeError, self.factory._build_pie_key, *args)\n"
+}

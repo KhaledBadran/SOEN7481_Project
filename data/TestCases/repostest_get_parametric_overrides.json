@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_parametric_overrides",
+    "className": null,
+    "fileName": "/PEtab-dev_&_PEtab/tests_&_test_conditions.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "condition_df = pd.DataFrame(data={CONDITION_ID: ['condition1', 'condition2'\n    ], CONDITION_NAME: ['', 'Condition 2'], 'fixedParameter1': [1.0, 2.0]})\nassert conditions.get_parametric_overrides(condition_df) == []\ncondition_df.fixedParameter1 = condition_df.fixedParameter1.values.astype(int)\nassert conditions.get_parametric_overrides(condition_df) == []\ncondition_df.loc[0, 'fixedParameter1'] = 'parameterId'\nassert conditions.get_parametric_overrides(condition_df) == ['parameterId']\n"
+}

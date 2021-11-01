@@ -1,0 +1,9 @@
+{
+    "functionName": "test_discover",
+    "className": null,
+    "fileName": "/datreant_&_MDSynthesis/src_&_mdsynthesis_&_tests_&_test_manipulators.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with tmpdir.as_cwd():\n    sims = 'a dir/inky', 'something/blinky', 'pinky', 'something/else/clyde'\n    treants = 'something/pacman',\n    sims = [mds.Sim(name) for name in sims]\n    treants = [dtr.Treant(name) for name in treants]\n    b = mds.discover('.')\n    assert len(b) == 4\n    for sim in sims:\n        assert sim in b\n    for treant in treants:\n        assert treant not in b\n    dtrb = dtr.discover('.')\n    assert len(dtrb) == 5\n    for treant in (sims + treants):\n        assert treant in dtrb\n"
+}

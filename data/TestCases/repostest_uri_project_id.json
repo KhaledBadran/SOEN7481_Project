@@ -1,0 +1,9 @@
+{
+    "functionName": "test_uri_project_id",
+    "className": null,
+    "fileName": "/incf-nidash_&_PyNIDM/nidm_&_experiment_&_tools_&_tests_&_test_rest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "restParser = RestParser()\nresult = restParser.run(OPENNEURO_FILES, '/projects')\nproject = result[0]\nresult = restParser.run(OPENNEURO_FILES, '/projects/{}'.format(project))\nassert 'dctypes:title' in result\nassert 'sio:Identifier' in result\nassert 'subjects' in result\nassert len(result['subjects']['uuid']) > 2\nassert 'data_elements' in result\nassert len(result['data_elements']['uuid']) > 1\n"
+}

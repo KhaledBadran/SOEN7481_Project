@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ui_load_file",
+    "className": "TestUI",
+    "fileName": "/CCampJr_&_LazyHDF5/lazy5_&_tests_&_test_ui.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Load test file and check groups \"\"\"\nself.filename = hdf_dataset\ndialog = HdfLoad()\n_ = dialog.fileOpen(self.filename)\nlist_dsets = [dialog.ui.listDataSet.item(num).text() for num in range(\n    dialog.ui.listDataSet.count())]\nlist_grps = [dialog.ui.comboBoxGroupSelect.itemText(num) for num in range(\n    dialog.ui.comboBoxGroupSelect.count())]\nassert list_dsets == ['base']\nassert 'Group1' in list_grps\nassert 'Group2/Group3' in list_grps\nassert 'Group4/Group5/Group6' in list_grps\nassert 'Group5' not in list_grps\n"
+}

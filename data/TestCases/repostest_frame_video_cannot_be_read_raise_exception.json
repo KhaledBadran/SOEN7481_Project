@@ -1,0 +1,9 @@
+{
+    "functionName": "test_frame_video_cannot_be_read_raise_exception",
+    "className": "WildFireFrameExtractorTester",
+    "fileName": "/frgfm_&_PyroNear/test_&_test_datasets_wildfire_frame_extractor.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Error in reading video frame should raise Exception\"\"\"\nclass VideoCaptureMock:\n\n    def set(*args):\n        pass\n\n    def read():\n        return False, None\nwith patch('pyronear.datasets.wildfire.frame_extractor.cv2.VideoCapture',\n    return_value=VideoCaptureMock):\n    with self.assertRaises(IOError):\n        frame_extractor = FrameExtractor(self.path_to_videos, self.\n            path_to_states, strategy='random', n_frames=2)\n        with tempfile.TemporaryDirectory() as path_to_frames:\n            frame_extractor.run(path_to_frames=path_to_frames\n                ).get_frame_labels()\n"
+}

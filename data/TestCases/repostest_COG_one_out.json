@@ -1,0 +1,9 @@
+{
+    "functionName": "test_COG_one_out",
+    "className": "TestCOG",
+    "fileName": "/alsprogrammer_&_PythonFuzzyLogic/tests_&_defuzzify_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "in_fuzz_var = FuzzyVariable()\nin_fuzz_memb = TriFunc(-1, 0, 1)\nin_fuzz_term = in_fuzz_var.is_(in_fuzz_memb)\nout_fuzz_var = FuzzyVariable()\nout_fuzz_memb = TriFunc(-1, 0, 1)\nfuzz_rule = FuzzyRule(in_fuzz_term, out_fuzz_var, out_fuzz_memb)\nin_fuzz_var.value = 0\nres = apply_defuzzyfy_COG(fuzz_rule)\nself.assertEqual(len(res), 1)\nself.assertAlmostEqual(res[0], 0, delta=0.01)\n"
+}

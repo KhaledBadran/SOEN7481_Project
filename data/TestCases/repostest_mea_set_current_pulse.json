@@ -1,0 +1,9 @@
+{
+    "functionName": "test_mea_set_current_pulse",
+    "className": null,
+    "fileName": "/alejoe91_&_MEAutility/MEAutility_&_tests_&_test_core.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "mea = mu.return_mea('Neuronexus-32')\nel_id = 0\namp1 = 1000\nt_stop = 100\nt_start = 5\nwidth1 = 2\ninterpulse = 2\ndt = 0.01\nn_pulses = 3\ninterburst = 30\nc, t = mea.set_current_pulses(el_id=0, amp1=amp1, width1=width1, interpulse\n    =interpulse, t_stop=t_stop, dt=dt, biphasic=False)\nassert np.max(t) < t_stop\nassert np.max(c) == amp1 and np.min(c) == 0\nassert np.allclose(c, mea.electrodes[el_id].current)\nc, t = mea.set_current_pulses(el_id=0, amp1=amp1, width1=width1, interpulse\n    =interpulse, t_stop=t_stop, dt=dt, biphasic=True)\nassert np.max(t) < t_stop\nassert np.max(c) == amp1 and np.min(c) == -amp1\nassert np.allclose(c, mea.electrodes[el_id].current)\nc, t = mea.set_current_pulses(el_id=0, amp1=amp1, width1=width1, interpulse\n    =interpulse, t_stop=t_stop, dt=dt, biphasic=True, n_pulses=n_pulses,\n    interburst=interburst, t_start=t_start)\nassert np.max(t) < t_stop and np.min(t) >= t_start\nassert np.max(c) == amp1 and np.min(c) == -amp1\nassert np.allclose(c, mea.electrodes[el_id].current)\n"
+}

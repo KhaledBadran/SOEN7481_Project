@@ -1,0 +1,9 @@
+{
+    "functionName": "test_taylor_aris_diffusion",
+    "className": "DiffusiveConductanceTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_physics_&_DiffusiveConductanceTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.geo['throat.conduit_lengths.pore1'] = 0.15\nself.geo['throat.conduit_lengths.throat'] = 0.6\nself.geo['throat.conduit_lengths.pore2'] = 0.25\nself.phase['pore.pressure'] = np.linspace(0, 20, self.net.Np)\nself.phase['throat.hydraulic_conductance'] = 1\nmod = op.models.physics.diffusive_conductance.taylor_aris_diffusion\nself.phys.add_model(propname='throat.ta_diffusive_conductance', model=mod)\nself.phys.regenerate_models()\nactual = np.array([self.phys['throat.ta_diffusive_conductance'].mean(),\n    self.phys['throat.ta_diffusive_conductance'].max(), self.phys[\n    'throat.ta_diffusive_conductance'].min()])\ndesired = np.array([1.03744, 1.10782, 1.00017])\nactual = np.around(actual, decimals=5)\nassert_allclose(actual, desired)\n"
+}

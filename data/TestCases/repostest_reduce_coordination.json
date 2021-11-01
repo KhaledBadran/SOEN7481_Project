@@ -1,0 +1,9 @@
+{
+    "functionName": "test_reduce_coordination",
+    "className": "TopotoolsTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_topotools_&_TopotoolsTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "net = op.network.Cubic(shape=[10, 10, 10], connectivity=26)\na = np.mean(net.num_neighbors(pores=net.Ps, flatten=False))\nb = 20.952\nassert a == b\ntopotools.reduce_coordination(network=net, z=6)\na = np.mean(net.num_neighbors(pores=net.Ps, flatten=False))\nb = 6.0\nassert_allclose(a, b)\nh = net.check_network_health()\nassert h.health\n"
+}

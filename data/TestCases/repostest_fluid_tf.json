@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fluid_tf",
+    "className": "TestFluidTF",
+    "fileName": "/tum-pbs_&_PhiFlow/tests_&_test_fluid_tf.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tf.reset_default_graph()\nworld = World()\nfluid = Fluid(Domain([16, 16]))\nworld.add(fluid, physics=IncompressibleFlow())\nworld.add(Inflow(Sphere((8, 8), radius=4)))\nworld.add(Obstacle(box[4:16, 0:8]))\nfluid_in = fluid.copied_with(density=placeholder, velocity=placeholder)\nfluid_out = world.step(fluid_in)\nself.assertIsInstance(fluid_out, Fluid)\nsession = Session(Scene.create('data', copy_calling_script=False))\nfluid = session.run(fluid_out, {fluid_in: fluid})\nfluid = session.run(fluid_out, {fluid_in: fluid})\nself.assertIsInstance(fluid, Fluid)\n"
+}

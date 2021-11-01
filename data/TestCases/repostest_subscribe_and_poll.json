@@ -1,0 +1,9 @@
+{
+    "functionName": "test_subscribe_and_poll",
+    "className": null,
+    "fileName": "/EclecticIQ_&_OpenTAXII/tests_&_services_&_test_poll.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "server.config['count_blocks_in_poll_responses'] = True\nsubs_service = server.get_service('collection-management-A')\npoll_service = server.get_service('poll-A')\ncollection = COLLECTION_ONLY_STIX\nblocks_amount = 10\nfor i in range(blocks_amount):\n    persist_content(server.persistence, collection, poll_service.id)\nheaders = prepare_headers(version, https)\nparams = dict(response_type=RT_COUNT_ONLY, content_bindings=[\n    CB_STIX_XML_111, CUSTOM_CONTENT_BINDING])\nsubs_request = prepare_subscription_request(collection=collection, action=\n    ACT_SUBSCRIBE, version=version, params=params)\nsubs_response = subs_service.process(headers, subs_request)\nassert len(subs_response.subscription_instances) == 1\nsubscription = subs_response.subscription_instances[0]\nassert subscription.subscription_id\npoll_request = prepare_request(collection_name=collection, count_only=False,\n    subscription_id=subscription.subscription_id, version=version)\npoll_response = poll_service.process(headers, poll_request)\nif version == 11:\n    assert poll_response.record_count.record_count == blocks_amount\n    assert not poll_response.record_count.partial_count\n    assert len(poll_response.content_blocks) == 0\n    assert poll_response.subscription_id == subscription.subscription_id\nelse:\n    assert len(poll_response.content_blocks) == blocks_amount\npytest.mark.parametrize('https', [True, False])pytest.mark.parametrize('version', [11, 10])"
+}

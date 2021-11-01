@@ -1,0 +1,9 @@
+{
+    "functionName": "classic_ordinary_diffusion",
+    "className": null,
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_models_&_physics_&_diffusive_conductance.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Calculate the diffusive conductance of conduits in network, where a\n    conduit is ( 1/2 pore - full throat - 1/2 pore ) based on the areas\n    Parameters\n    ----------\n    network : OpenPNM Network Object\n    phase : OpenPNM Phase Object\n        The phase of interest\n    Notes\n    -----\n    (1) This function requires that all the necessary phase properties already\n    be calculated.\n    (2) This function calculates the specified property for the *entire*\n    network then extracts the values for the appropriate throats at the end.\n    \"\"\"\nnetwork = target.project.network\nthroats = network.map_throats(throats=target.Ts, origin=target)\nphase = target.project.find_phase(target)\nPs = network['throat.conns']\nparea = network[pore_area]\npdia = network[pore_diameter]\ntdia = network[throat_diameter]\ntarea = _np.pi * (tdia / 2) ** 2\ntlen = network[throat_length]\nDABt = phase.interpolate_data(propname=pore_diffusivity)[throats]\nct = phase.interpolate_data(propname=pore_molar_density)[throats]\nplen1 = 0.5 * pdia[Ps[:, (0)]]\nplen2 = 0.5 * pdia[Ps[:, (1)]]\nplen1[plen1 <= 1e-12] = 1e-12\nplen2[plen2 <= 1e-12] = 1e-12\ngp1 = ct * DABt * parea[Ps[:, (0)]] / plen1\ngp1[_np.isnan(gp1)] = _np.inf\ngp1[~(gp1 > 0)] = _np.inf\ngp2 = ct * DABt * parea[Ps[:, (1)]] / plen2\ngp2[_np.isnan(gp2)] = _np.inf\ngp2[~(gp2 > 0)] = _np.inf\ntlen[tlen <= 0] = 1e-12\ntry:\n    sf = network[shape_factor]\nexcept KeyError:\n    sf = _np.ones(network.num_throats())\nsf[_np.isnan(sf)] = 1.0\ngt = 1 / sf * ct * DABt * tarea / tlen\ngt[~(gt > 0)] = _np.inf\nvalue = (1 / gt + 1 / gp1 + 1 / gp2) ** -1\nreturn value\n"
+}

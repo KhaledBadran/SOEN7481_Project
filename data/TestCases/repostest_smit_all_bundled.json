@@ -1,0 +1,9 @@
+{
+    "functionName": "test_smit_all_bundled",
+    "className": "Test_basic",
+    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_cc_light.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.setUpClass()\nconfig_fn = os.path.join(curdir, 'hardware_config_cc_light.json')\nplatform = ql.Platform('seven_qubits_chip', config_fn)\nsweep_points = [1, 2]\nnum_qubits = platform.get_qubit_number()\np = ql.Program('test_smit_all_bundled', platform, num_qubits)\np.set_sweep_points(sweep_points)\nk = ql.Kernel('aKernel', platform, num_qubits)\nfor i in range(7):\n    k.prepz(i)\nk.gate('cz', [2, 0])\nk.gate('cz', [3, 5])\nk.gate('cz', [1, 4])\nk.gate('cz', [4, 6])\nk.gate('cz', [2, 5])\nk.gate('cz', [3, 0])\np.add_kernel(k)\np.compile()\nQISA_fn = os.path.join(output_dir, p.name + '.qisa')\nGOLD_fn = rootDir + '/golden/test_smit_all_bundled.qisa'\nassemble(QISA_fn)\nself.assertTrue(file_compare(QISA_fn, GOLD_fn))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_collective_step",
+    "className": "TestObjects",
+    "fileName": "/tum-pbs_&_PhiFlow/tests_&_test_objects.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "world = World()\nobstacle = world.add(Obstacle(geometry_at(0)), physics=GeometryMovement(\n    geometry_at))\ninflow = world.add(Inflow(geometry_at(0)))\ninflow.physics = world.get_physics(obstacle)\nstatic_obstacle = world.add(Obstacle(box[0:1]))\nworld.step()\nself.assertAlmostEqual(obstacle.age, 1.0)\nself.assertAlmostEqual(obstacle.geometry.center[0], 1.0)\nself.assertAlmostEqual(inflow.age, 1.0)\nself.assertAlmostEqual(static_obstacle.age, 1.0)\n"
+}

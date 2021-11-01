@@ -1,0 +1,9 @@
+{
+    "functionName": "test_barycenter_stabilized_vs_sinkhorn",
+    "className": null,
+    "fileName": "/PythonOT_&_POT/test_&_test_unbalanced.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "n = 100\nrng = np.random.RandomState(42)\nx = rng.randn(n, 2)\nA = rng.rand(n, 2)\nA = A * np.array([1, 4])[(None), :]\nM = ot.dist(x, x)\nepsilon = 0.5\nreg_m = 10\nqstable, log = barycenter_unbalanced(A, M, reg=epsilon, reg_m=reg_m, log=\n    True, tau=100, method='sinkhorn_stabilized')\nq, log = barycenter_unbalanced(A, M, reg=epsilon, reg_m=reg_m, method=\n    'sinkhorn', log=True)\nnp.testing.assert_allclose(q, qstable, atol=1e-05)\n"
+}

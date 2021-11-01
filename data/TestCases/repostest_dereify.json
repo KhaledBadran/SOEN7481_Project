@@ -1,0 +1,9 @@
+{
+    "functionName": "test_dereify",
+    "className": "TestModel",
+    "fileName": "/goodmami_&_penman/tests_&_test_model.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "t1 = '_', ':instance', 'have-mod-91'\nt1b = '_', ':instance', 'chase-01'\nt2 = '_', ':ARG1', 'a'\nt3 = '_', ':ARG2', 'b'\nm = Model()\nwith pytest.raises(TypeError):\n    m.dereify(t1)\nwith pytest.raises(TypeError):\n    m.dereify(t1, t2)\nwith pytest.raises(ModelError):\n    m.dereify(t1, t2, t3)\nm = Model.from_dict(mini_amr)\nassert m.dereify(t1, t2, t3) == ('a', ':mod', 'b')\nassert m.dereify(t1, t3, t2) == ('a', ':mod', 'b')\nwith pytest.raises(ModelError):\n    m.dereify(t1b, t2, t3)\n"
+}

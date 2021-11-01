@@ -1,0 +1,9 @@
+{
+    "functionName": "test_invalid_unique_identifier",
+    "className": "TestMACSignatureKeyInformation",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a TypeError is raised when an invalid value is used to set\n        the unique identifier of a MACSignatureKeyInformation struct.\n        \"\"\"\nkwargs = {'unique_identifier': 0}\nself.assertRaisesRegex(TypeError, 'Unique identifier must be a string.',\n    objects.MACSignatureKeyInformation, **kwargs)\nargs = objects.MACSignatureKeyInformation(), 'unique_identifier', 0\nself.assertRaisesRegex(TypeError, 'Unique identifier must be a string.',\n    setattr, *args)\n"
+}

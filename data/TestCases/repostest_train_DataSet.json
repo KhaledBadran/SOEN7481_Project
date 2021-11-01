@@ -1,0 +1,9 @@
+{
+    "functionName": "test_train_dataset",
+    "className": "TestKerasAPI",
+    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_keras_&_test_keras_api.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "images = []\nlabels = []\nfor i in range(0, 8):\n    features = np.random.uniform(0, 1, (200, 200, 3))\n    label = np.array([2])\n    images.append(features)\n    labels.append(label)\nimage_frame = DistributedImageFrame(self.sc.parallelize(images), self.sc.\n    parallelize(labels))\ntransformer = Pipeline([BytesToMat(), Resize(256, 256), CenterCrop(224, 224\n    ), ChannelNormalize(0.485, 0.456, 0.406, 0.229, 0.224, 0.225),\n    MatToTensor(), ImageFrameToSample(target_keys=['label'])])\ndata_set = DataSet.image_frame(image_frame).transform(transformer)\nmodel = BSequential()\nmodel.add(BLayer.Convolution2D(1, 5, 5, input_shape=(3, 224, 224)))\nmodel.add(BLayer.Reshape((1 * 220 * 220,)))\nmodel.add(BLayer.Dense(20, activation='softmax'))\nmodel.compile(optimizer='sgd', loss='sparse_categorical_crossentropy',\n    metrics=['accuracy'])\nmodel.fit(data_set, batch_size=8, nb_epoch=2, validation_data=data_set)\n"
+}

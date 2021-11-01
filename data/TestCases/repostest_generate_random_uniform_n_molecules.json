@@ -1,0 +1,9 @@
+{
+    "functionName": "test_generate_random_uniform_n_molecules",
+    "className": null,
+    "fileName": "/mortele_&_OccamTools/test_&_test_generate_fort5.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "file_name = os.path.join(os.path.dirname(__file__), 'molecules_test.5')\n_check_remove_file(file_name)\nn_particles = 10\nbox = [2, 2, 2]\ngenerate_uniform_random(n_particles, box, path=file_name)\nassert os.path.exists(file_name)\nwith open(file_name, 'r') as in_file:\n    for _ in range(2):\n        line = in_file.readline()\n    line = in_file.readline().strip()\n    line = line.split()\n    assert len(line) == 3\n    expected = ['Number', 'of', 'particles:']\n    for i, e in enumerate(expected):\n        assert line[i] == e\n    line = in_file.readline().strip()\n    assert int(line) == n_particles\nassert _check_remove_file(file_name)\n"
+}

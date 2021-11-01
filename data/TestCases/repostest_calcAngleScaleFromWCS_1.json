@@ -1,0 +1,9 @@
+{
+    "functionName": "test_calcAngleScaleFromWCS_1",
+    "className": null,
+    "fileName": "/mworion_&_MountWizzard4/mw4_&_test_&_unit_tests_&_astrometry_&_test_astrometry.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "hdu = fits.HDUList()\nhdu.append(fits.PrimaryHDU())\nheader = hdu[0].header\nscaleX = 2\nfor angleX in range(-180, 180, 1):\n    phi = np.radians(angleX)\n    CD11 = scaleX * np.cos(phi)\n    CD12 = scaleX * np.sin(phi)\n    header.set('CD1_1', CD11)\n    header.set('CD1_2', CD12)\n    angle, scale, flip = app.calcAngleScaleFromWCS(wcsHeader=header)\n    assert np.round(scale, 0) == scaleX * 3600\n    assert np.round(angle, 3) == np.round(angleX, 3)\n"
+}

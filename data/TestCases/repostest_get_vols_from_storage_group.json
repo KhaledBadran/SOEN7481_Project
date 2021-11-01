@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_vols_from_storage_group",
+    "className": "PyU4VProvisioningTest",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_provisioning.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test get_vols_from_storage_group.\"\"\"\nvol_list = self.provisioning.get_vols_from_storagegroup(self.data.\n    storagegroup_name)\nref_vol_list = [self.data.device_id, self.data.device_id2]\nself.assertEqual(ref_vol_list, vol_list)\nwith mock.patch.object(self.provisioning, 'get_volume_list', return_value=\n    list()):\n    vol_list = self.provisioning.get_vols_from_storagegroup(self.data.\n        storagegroup_name)\n    self.assertIsNotNone(vol_list)\n    self.assertEqual(list(), vol_list)\n"
+}

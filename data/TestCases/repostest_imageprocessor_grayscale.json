@@ -1,0 +1,9 @@
+{
+    "functionName": "test_imageprocessor_grayscale",
+    "className": null,
+    "fileName": "/IBM_&_MAX-Framework/maxfw_&_tests_&_test_image_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test the Imageprocessor's grayscale function.\"\"\"\ntransform_sequence = [ToPILImage('RGBA'), Resize(size=(200, 200)), Grayscale()]\np = ImageProcessor(transform_sequence)\nimg_out = p.apply_transforms(test_input)\nassert np.array(img_out).shape == (200, 200)\ntransform_sequence = [ToPILImage('RGBA'), Resize(size=(200, 200)),\n    Grayscale(num_output_channels=3)]\np = ImageProcessor(transform_sequence)\nimg_out = p.apply_transforms(test_input)\nassert np.array(img_out).shape == (200, 200, 3)\ntransform_sequence = [ToPILImage('RGBA'), Resize(size=(200, 200)),\n    Grayscale(num_output_channels=4), PILtoarray()]\np = ImageProcessor(transform_sequence)\nimg_out = p.apply_transforms(test_input)\nassert img_out.shape == (200, 200, 4)\nassert img_out[..., 0].all() == img_out[..., 1].all() == img_out[..., 2].all(\n    ) == img_out[..., 3].all()\n"
+}

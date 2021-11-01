@@ -1,0 +1,9 @@
+{
+    "functionName": "test_smis",
+    "className": "Test_basic",
+    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_cc_light.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.setUpClass()\nconfig_fn = os.path.join(curdir, 'hardware_config_cc_light.json')\nplatform = ql.Platform('seven_qubits_chip', config_fn)\nsweep_points = [1, 2]\nnum_qubits = platform.get_qubit_number()\np = ql.Program('aProgram', platform, num_qubits)\np.set_sweep_points(sweep_points)\nk = ql.Kernel('aKernel', platform, num_qubits)\nk.prepz(0)\nk.prepz(1)\nk.prepz(2)\nk.prepz(3)\nk.gate('h', [0])\nk.gate('h', [1])\nk.x(2)\nk.x(3)\nk.measure(0)\nk.measure(1)\nk.measure(2)\nk.measure(3)\np.add_kernel(k)\np.compile()\nQISA_fn = os.path.join(output_dir, p.name + '.qisa')\nassemble(QISA_fn)\n"
+}

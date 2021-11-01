@@ -1,0 +1,9 @@
+{
+    "functionName": "_config_and_run_stream_stats_test",
+    "className": "TestIxeOnline",
+    "fileName": "/shmir_&_PyIxExplorer/ixexplorer_&_test_&_test_online.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "self._reserve_ports(self.port1, self.port2)\niteration = 1\nfor port_name in [self.port1, self.port2]:\n    port = self.ports[port_name]\n    port.add_stream()\n    port.add_stream()\n    for stream in port.streams.values():\n        stream.framesize = 68\n        stream.vlan.vlanId = 33\n        stream.dma = 'advance'\n        stream.numFrames = iteration\n        stream.rateMode = 'streamRateModeFps'\n        iteration += 1\nself.ixia.session.set_stream_stats(rx_ports=[self.ports[r] for r in\n    rx_ports], sequence_checking=sc, data_integrity=di, timestamp=ts)\nself.ixia.session.wait_for_up(ports=self.ports.values())\nself.ixia.session.start_transmit()\ntime.sleep(2)\nself.ixia.session.stop_transmit()\ntime.sleep(2)\nstream_stats = IxeStreamsStats(self.ixia.session)\nstream_stats.read_stats()\nprint(json.dumps(stream_stats.statistics, indent=1, sort_keys=True))\nreturn stream_stats.statistics\n"
+}

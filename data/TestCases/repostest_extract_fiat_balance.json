@@ -1,0 +1,9 @@
+{
+    "functionName": "test_extract_fiat_balance",
+    "className": "TestProcess",
+    "fileName": "/smechaab_&_CurrencyViewer/tests_&_test_processing.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test of extract_fiat_balance function :\n            fiat symbols should match with raw data from Krakenex API\"\"\"\ndata_with_symbol = self.request_result\nself.cvObject.extract_fiat_balance(data_with_symbol)\nprint(data_with_symbol)\nreport_fiat = 'Z' + self.cvObject.default_currency\nassert report_fiat in self.cvObject.currencies['fiat']\nfor fiat_symbol in self.cvObject.currencies['fiat']:\n    if fiat_symbol != report_fiat:\n        assert fiat_symbol in data_with_symbol\n"
+}

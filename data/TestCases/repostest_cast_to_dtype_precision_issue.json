@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cast_to_dtype_precision_issue",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_test_base.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    TensorFlow's tf.cast(value, dtype) implicitly does a tf.convert_to_tensor(value)\n    *before* the cast when the value is not a tensor already. When value is a python float,\n    this results in the following behaviour:\n\n    >>> tf.cast(0.2, tf.float64)\n    <tf.Tensor: id=37, shape=(), dtype=float64, numpy=0.20000000298023224>\n    \n    instead of the expected expansion of 0.2 to float64 precision that you get when\n    passing in an object that already carries dtype information, such as a numpy array\n    (which has float64 precision by default):\n\n    >>> tf.cast(np.array(0.2), tf.float64)\n    <tf.Tensor: id=40, shape=(), dtype=float64, numpy=0.2>\n\n    This affected *all* gpflow.Parameter objects, resulting in numerical discrepancies\n    between GPflow 1 and 2, due to the pass through _cast_to_dtype, which is now fixed.\n    This is the corresponding regression test.\n    \"\"\"\np = gpflow.Parameter(0.2, dtype=np.float64)\nactual_value = p.numpy()\nassert actual_value.dtype == np.float64\nexpected_value = np.float64(0.2)\nassert actual_value == expected_value\n"
+}

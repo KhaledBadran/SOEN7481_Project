@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fix_rng",
+    "className": null,
+    "fileName": "/CCampJr_&_CRIkit2/crikit_&_preprocess_&_tests_&_test_als.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "x = np.linspace(-100, 100, 1000)\ny = 10 * np.exp(-(x ** 2 / (2 * 20 ** 2)))\nfix_rng = np.arange(200, 800)\nals = AlsCvxopt(smoothness_param=1000.0, asym_param=1e-05, redux=1,\n    fix_end_points=False, fix_rng=None, verbose=True)\ny_als = als.calculate(y)\nassert np.max((y - y_als)[200:800]) > 0.002\nals = AlsCvxopt(smoothness_param=1000.0, asym_param=1e-05, redux=1,\n    fix_end_points=False, fix_rng=fix_rng, verbose=True)\ny_als = als.calculate(y)\nassert np.max((y - y_als)[200:800]) < 0.002\n"
+}

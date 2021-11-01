@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ecdsa_identity",
+    "className": "TestSqlIdentityStorage",
+    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_identity_methods.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "identityName = Name('/TestSqlIdentityStorage/KeyType/ECDSA')\nkeyName = self.identityManager.generateEcdsaKeyPairAsDefault(identityName)\ncert = self.identityManager.selfSign(keyName)\nself.identityManager.addCertificateAsIdentityDefault(cert)\nfailedCallback = Mock()\nverifiedCallback = Mock()\nself.keyChain.verifyData(cert, verifiedCallback, failedCallback)\nself.assertEqual(verifiedCallback.call_count, 1,\n    'Verification callback was not used.')\nself.keyChain.deleteIdentity(identityName)\nself.assertFalse(self.identityStorage.doesKeyExist(keyName))\n"
+}

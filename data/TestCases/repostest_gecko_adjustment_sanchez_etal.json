@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gecko_adjustment_sanchez_etal",
+    "className": null,
+    "fileName": "/SysBioChalmers_&_GECKO/geckopy_&_tests_&_test_gecko.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "mmol_gdw = pd.read_csv(os.path.join(os.path.dirname(__file__),\n    '../geckopy/data_files/sanchez-mmol_gdw.csv'), index_col=0, header=None,\n    squeeze=True)\nggdw = pd.Series(PROTEIN_PROPERTIES.loc[mmol_gdw.index, 'mw'] / 1000.0\n    ) * pd.Series(mmol_gdw)\nmodel = GeckoModel('multi-pool')\ngrowth_rate_unlimited_protein = model.slim_optimize()\nmodel.limit_proteins(ggdw=pd.Series(ggdw))\ngrowth_rate_limited_protein = model.slim_optimize()\nassert growth_rate_limited_protein < 0.8 * growth_rate_unlimited_protein\nmeasured_in_model = set(mmol_gdw.index).intersection(model.proteins)\nassert sum(model.concentrations[p] - ggdw[p] for p in measured_in_model\n    ) < 1e-10\nassert sum(abs(rxn.upper_bound - mmol_gdw[rxn.annotation['uniprot']]) for\n    rxn in model.individual_protein_exchanges) < 1e-06\nassert sum(rxn.metabolites[model.common_protein_pool] + PROTEIN_PROPERTIES.\n    loc[rxn.annotation['uniprot'], 'mw'] / 1000.0 for rxn in model.\n    pool_protein_exchanges) < 1e-06\nassert model.p_measured > 0.25\nassert model.f_mass_fraction_measured_matched_to_total > 0.25\nassert model.protein_pool_exchange.upper_bound > 0.015\n"
+}

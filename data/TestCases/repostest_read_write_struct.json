@@ -1,0 +1,9 @@
+{
+    "functionName": "test_read_write_struct",
+    "className": "TestScene",
+    "fileName": "/tum-pbs_&_PhiFlow/tests_&_test_scene.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "for scene in Scene.list('data'):\n    scene.remove()\nstate = Fluid(Domain([4, 4]))\nscene = Scene.create('data')\nscene.write(state, frame=0)\nself.assertTrue(isfile(scene.subpath('density_000000.npz')))\nself.assertTrue(isfile(scene.subpath('velocity_000000.npz')))\nloaded_state = scene.read(state, frame=0)\nself.assertIsInstance(loaded_state, Fluid)\nself.assertIsInstance(loaded_state.velocity, StaggeredGrid)\nself.assertIsInstance(loaded_state.density, CenteredGrid)\n_differences = struct.compare([loaded_state.density, state.density])\nself.assertEqual(loaded_state.density, state.density)\nprint_differences(loaded_state.velocity.data, state.velocity.data)\nnp.testing.assert_equal(loaded_state.velocity.data[0].data, state.velocity.\n    data[0].data)\nscene.write(np.ones([1, 4, 4, 1]) * 2, frame=1)\nself.assertTrue(isfile(scene.subpath('unnamed_000001.npz')))\nself.assertEqual(scene.read(None, frame=1)[0, 0, 0, 0], 2)\nscene.write([np.ones([1, 4, 4, 1])], ['Ones'], frame=2)\nself.assertTrue(isfile(scene.subpath('Ones_000002.npz')))\nmystruct = [{'Two': np.ones([1, 4, 4, 1]) * 2, 'Three': np.ones([1, 4, 4, 1\n    ]) * 3}]\nscene.write(mystruct, frame=3)\nself.assertTrue(isfile(scene.subpath('0_Three_000003.npz')))\nself.assertTrue(isfile(scene.subpath('0_Two_000003.npz')))\nloaded_struct = scene.read(mystruct, frame=3)\nself.assertIsInstance(loaded_struct, list)\nnp.testing.assert_equal(mystruct[0]['Two'][0, 0, 0, 0], loaded_struct[0][\n    'Two'][0, 0, 0, 0])\nscene.remove()\n"
+}

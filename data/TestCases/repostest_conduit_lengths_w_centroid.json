@@ -1,0 +1,9 @@
+{
+    "functionName": "test_conduit_lengths_w_centroid",
+    "className": "ThroatStraightTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_geometry_&_ThroatLengthTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "del self.geo['throat.length']\nself.geo['throat.centroid'] = np.array([[0, 0.5, 0.5]]) + self.base\nself.geo.add_model(propname='throat.conduit_lengths', model=mods.\n    conduit_lengths, regen_mode='normal')\nL1 = self.geo['throat.conduit_lengths.pore1'][0]\nL2 = self.geo['throat.conduit_lengths.pore2'][0]\nLt = self.geo['throat.conduit_lengths.throat'][0]\nassert_approx_equal(actual=L1, desired=0.2)\nassert_approx_equal(actual=L2, desired=0.3)\nassert_approx_equal(actual=Lt, desired=1.12161167)\n"
+}

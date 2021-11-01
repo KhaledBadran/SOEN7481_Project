@@ -1,0 +1,9 @@
+{
+    "functionName": "test_set_enable_tls_client_auth",
+    "className": "TestKmipServerConfig",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_config.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the enable_tls_client_auth configuration property can be set\n        correctly.\n        \"\"\"\nc = config.KmipServerConfig()\nc._logger = mock.MagicMock()\nc._set_enable_tls_client_auth(False)\nself.assertEqual(False, c.settings.get('enable_tls_client_auth'))\nc._set_enable_tls_client_auth(None)\nself.assertEqual(True, c.settings.get('enable_tls_client_auth'))\nc._set_enable_tls_client_auth(True)\nself.assertEqual(True, c.settings.get('enable_tls_client_auth'))\nargs = 'invalid',\nself.assertRaisesRegex(exceptions.ConfigurationError,\n    'The flag enabling the TLS certificate client auth flag check must be a boolean.'\n    , c._set_enable_tls_client_auth, *args)\n"
+}

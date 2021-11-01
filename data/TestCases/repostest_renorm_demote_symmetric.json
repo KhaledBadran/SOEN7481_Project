@@ -1,0 +1,9 @@
+{
+    "functionName": "test_renorm_demote_symmetric",
+    "className": null,
+    "fileName": "/PaulHancock_&_Aegean/tests_&_test_regions.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that Region._renorm and Region._demote are mutual inverses\"\"\"\nra = 13.5\ndec = -90\nradius = 0.1\nregion = Region(maxdepth=11)\nregion.add_circles(np.radians(ra), np.radians(dec), np.radians(radius))\nregion._demote_all()\nstart_dict = region.pixeldict.copy()\nregion._renorm()\nregion._demote_all()\nend_dict = region.pixeldict.copy()\ntest = True\nfor i in range(1, region.maxdepth + 1):\n    if len(end_dict[i].difference(start_dict[i])) > 0:\n        test = False\nif not test:\n    raise AssertionError('renorm and demote are not symmetric')\n"
+}

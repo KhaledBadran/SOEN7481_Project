@@ -1,0 +1,9 @@
+{
+    "functionName": "test_max_derivative",
+    "className": "TestGetIgnitionDelay",
+    "fileName": "/kyleniemeyer_&_PyTeCK/pyteck_&_tests_&_test_simulation.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test using maximum derivative of temperature for ignition delay.\n        \"\"\"\na, b, c = [51329.3528, 0.316147043, 0.0105018205]\nd = 1000 + 0.5 * np.sqrt(np.pi) * a * c * erf(b / c)\ntimes = np.linspace(0, 1, 10000)\ntemperature = -0.5 * np.sqrt(np.pi) * a * c * erf((b - times) / c) + d\nignition_delays = simulation.get_ignition_delay(times, temperature,\n    'temperature', 'd/dt max')\nassert np.allclose(ignition_delays[0], b, rtol=0.0001)\n"
+}

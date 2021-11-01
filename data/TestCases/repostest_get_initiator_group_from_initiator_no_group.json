@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_initiator_group_from_initiator_no_group",
+    "className": "CITestProvisioning",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test get_initiator_group_from_initiator no initiator group.\"\"\"\ninitiator = self.provisioning.get_available_initiator()\nif not initiator:\n    self.skipTest(\n        'test_get_initiator_group_from_initiator_no_group - Unable to get an available initiator.'\n        )\ninitiator_details = self.provisioning.get_initiator(initiator)\ngroup = self.provisioning.get_initiator_group_from_initiator(initiator)\nself.assertIsNone(group)\nself.assertNotIn(constants.HOST, initiator_details)\n"
+}

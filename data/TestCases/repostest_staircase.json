@@ -1,0 +1,9 @@
+{
+    "functionName": "test_staircase",
+    "className": "TestStatistics",
+    "fileName": "/neuropsychology_&_NeuroKit.py/tests_&_test_statistics.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "staircase = nk.staircase()\nfor trial in range(200):\n    signal = staircase.predict_next_value()\n    if signal > 50:\n        response = 1\n    else:\n        response = 0\n    staircase.add_response(response=response, value=signal)\ntreshold = staircase.get_treshold()\nself.assertTrue(49 <= treshold <= 51)\ndata = staircase.get_data()\nself.assertEqual(len(data), 200)\n"
+}

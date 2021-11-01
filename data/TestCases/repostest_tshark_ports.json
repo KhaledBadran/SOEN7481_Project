@@ -1,0 +1,9 @@
+{
+    "functionName": "test_tshark_ports",
+    "className": null,
+    "fileName": "/CyberReboot_&_NetworkML/tests_&_test_funcs_host.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "instance = HostBase()\nfor test_rows, test_output, ratio_output in (([{'tcp.srcport': 22,\n    'tcp.dstport': 1025, 'ip.proto': 6}, {'tcp.srcport': 1025,\n    'tcp.dstport': 22, 'ip.proto': 6}, {'tcp.srcport': 22, 'tcp.dstport': \n    1025, 'ip.proto': 6}], {'tshark_tcp_priv_port_22_in'}, {\n    'tshark_tcp_priv_packet_ratio_io_port_22': 2.0,\n    'tshark_tcp_nonpriv_packet_ratio_io_port_other': 0.5}), ([{\n    'tcp.srcport': 1025, 'tcp.dstport': 1025, 'ip.proto': 6}], {\n    'tshark_tcp_nonpriv_port_other_in'}, {\n    'tshark_tcp_nonpriv_packet_ratio_io_port_other': 1.0})):\n    test_data = []\n    for test_ports in test_rows:\n        row = {field: None for field in WS_FIELDS}\n        row.update(test_ports)\n        test_data.append(row)\n    mac_df = recast_df(pd.DataFrame(test_data))\n    ports = {col for col, val in instance._tshark_ports('in', mac_df).items\n        () if val == 1}\n    assert test_output == ports\n    ratios = {col: val for col, val in instance._tshark_ratio_ports(mac_df)\n        .items() if val}\n    assert ratio_output == ratios, test_rows\n"
+}

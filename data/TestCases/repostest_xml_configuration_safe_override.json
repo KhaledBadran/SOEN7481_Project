@@ -1,0 +1,9 @@
+{
+    "functionName": "test_xml_configuration_safe_override",
+    "className": "TestXMLConfiguration",
+    "fileName": "/dnephin_&_PyStaticConfiguration/tests_&_loader_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "content = \"\"\"\n            <config>\n                <sometag foo=\"bar\">\n                    <foo>E</foo>\n                </sometag>\n            </config>\n        \"\"\"\nself.write_content_to_file(content)\nassert_raises(errors.ConfigurationError, loader.XMLConfiguration, self.\n    tmpfile.name, safe=True)\n"
+}

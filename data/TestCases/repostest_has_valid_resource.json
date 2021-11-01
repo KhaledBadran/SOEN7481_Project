@@ -1,0 +1,9 @@
+{
+    "functionName": "test_has_valid_resource",
+    "className": "EvidenceQualityTests",
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_EvidenceQualityTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Checks if the object has either a valid DOI or URL\"\"\"\nev = self.qctx(Evidence)()\nallEvidence = set(ev.load())\nqualityEvidence = set()\nfor evobj in allEvidence:\n    ref = evobj.reference()\n    if isinstance(ref, Document):\n        doi = ref.doi()\n        if doi:\n            for pat in DOI_REGEXEN:\n                if pat.match(doi):\n                    qualityEvidence.add(evobj)\n                    break\n            else:\n                continue\n        urls = ref.uri.get()\n        good_uris = True\n        for uri in urls:\n            parsed = urlparse(uri)\n            if not parsed.scheme or not parsed.netloc:\n                good_uris = False\n                break\n        if not good_uris:\n            continue\n    elif isinstance(ref, Website):\n        urls = ref.url.get()\n        urls = list(urls)\n        print(urls)\n        good_uris = True\n        for uri in urls:\n            parsed = urlparse(uri)\n            if not parsed.scheme or not parsed.netloc:\n                good_uris = False\n                break\n        if not good_uris:\n            continue\n    qualityEvidence.add(evobj)\nself.assertSetEqual(allEvidence, qualityEvidence, msg='\\n'.join(str(x.\n    reference()) for x in allEvidence - qualityEvidence))\n"
+}

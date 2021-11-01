@@ -1,0 +1,9 @@
+{
+    "functionName": "test_exec_command_failed_callback",
+    "className": "TestWebOSControlBase",
+    "fileName": "/supersaiyanmode_&_PyWebOSTV/tests_&_test_controls.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "client = FakeClient()\ncontrol_base = WebOSControlBase(client)\ncontrol_base.COMMANDS = {'test': {'uri': '/test', 'validation': lambda *\n    args: (False, 'err'), 'validation_error': 'Error'}}\nresponse = []\nevent = Event()\ndef callback(status, resp):\n    response.append((status, resp))\n    event.set()\nclient.setup_response('/test', {'resp': True})\ncontrol_base.test(callback=callback)\nevent.wait()\nassert response == [(False, 'err')]\n"
+}

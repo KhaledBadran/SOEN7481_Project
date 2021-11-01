@@ -1,0 +1,9 @@
+{
+    "functionName": "test_trainer_train",
+    "className": null,
+    "fileName": "/Neuraxio_&_Neuraxle/testing_&_metaopt_&_test_automl.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data_inputs = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])\nexpected_outputs = data_inputs * 4\np = Pipeline([MultiplyByN(2).set_hyperparams_space(HyperparameterSpace({\n    'multiply_by': FixedHyperparameter(2)})), NumpyReshape(new_shape=(-1, 1\n    )), linear_model.LinearRegression()])\ntrainer: Trainer = Trainer(epochs=10, scoring_callback=ScoringCallback(\n    mean_squared_error, higher_score_is_better=False), validation_splitter=\n    ValidationSplitter(test_size=0.2))\nrepo_trial: Trial = trainer.train(pipeline=p, data_inputs=data_inputs,\n    expected_outputs=expected_outputs)\ntrained_pipeline = repo_trial.get_trained_pipeline(split_number=0)\noutputs = trained_pipeline.transform(data_inputs)\nmse = mean_squared_error(expected_outputs, outputs)\nassert mse < 1\n"
+}

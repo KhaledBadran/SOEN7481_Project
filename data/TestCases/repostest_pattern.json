@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pattern",
+    "className": null,
+    "fileName": "/halide_&_Halide/python_bindings_&_correctness_&_float_precision_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "x = hl.Var('x')\nf = hl.Func('f')\nf[x] = x * hl.f64(c) * (hl.f64(0.1) + hl.f64(0.2))\nfor i, hl_value in enumerate(numpy.asarray(f.realize(10))):\n    py_value = i * c * (0.1 + 0.2)\n    check = math.isclose(hl_value, py_value)\n    assert check, '{}[{}]: {} != {}'.format(i, c, hl_value, py_value)\n"
+}

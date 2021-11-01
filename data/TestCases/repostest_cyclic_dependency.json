@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cyclic_dependency",
+    "className": null,
+    "fileName": "/akshay2000_&_Pychkari/test_&_pychkari_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "container = Container()\ncontainer.register('DepOne', DepOne)\ncontainer.register('DepTwo', DepTwo)\ncontainer.register('DepThree', DepThree)\ncontainer.register('CyclicDep', CyclicDep)\nwith pytest.raises(CyclicDependencyError) as exec_info:\n    container.get('CyclicDep')\nassert exec_info.value.cycled_node_name == 'CyclicDep'\n"
+}

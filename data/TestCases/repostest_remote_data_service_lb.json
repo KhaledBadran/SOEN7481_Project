@@ -1,0 +1,9 @@
+{
+    "functionName": "test_remote_data_service_lb",
+    "className": null,
+    "fileName": "/quantOS-org_&_JAQS/test_&_test_dataservice.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "fields = 'pb,pe,free_share,net_assets,limit_status'\nfor res3, msg3 in [ds.query('lb.secDailyIndicator', fields=fields, filter=\n    'symbol=600030.SH&start_date=20170907&end_date=20170907', orderby=\n    'trade_date'), ds.query_lb_dailyindicator('600030.SH', 20170907, \n    20170907, fields)]:\n    assert msg3 == '0,'\n    assert abs(res3.loc[0, 'pb'] - 1.5135) < 0.0001\n    assert abs(res3.loc[0, 'free_share'] - 781496.5954) < 0.0001\n    assert abs(res3.loc[0, 'net_assets'] - 143700000000.0) < 100000000.0\n    assert res3.loc[0, 'limit_status'] == 0\nfor res4, msg4 in [ds.query('lb.income', fields='', filter=\n    'symbol=600000.SH&start_date=20150101&end_date=20170101&report_type=408001000'\n    , order_by='report_date'), ds.query_lb_fin_stat('income', '600000.SH', \n    20150101, 20170101, fields='')]:\n    assert msg4 == '0,'\n    assert res4.shape == (8, 12)\n    assert abs(res4.loc[4, 'oper_rev'] - 120928000000) < 1\n"
+}

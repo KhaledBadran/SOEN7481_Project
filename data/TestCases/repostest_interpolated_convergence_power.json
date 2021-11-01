@@ -1,0 +1,9 @@
+{
+    "functionName": "test_interpolated_convergence_power",
+    "className": null,
+    "fileName": "/apetri_&_LensTools/lenstools_&_tests_&_test_noise.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "fig, ax = plt.subplots()\npower_func = np.loadtxt(os.path.join(dataExtern(), 'ee4e-7.txt'), unpack=True)\nl_in, Pl_in = power_func\nax.plot(l_in, l_in * (l_in + 1) * Pl_in / (2.0 * np.pi), label='Original')\nfor i in range(3):\n    noise_map = corr_noise_gen.fromConvPower(power_func, seed=i,\n        bounds_error=False, fill_value=0.0)\n    ell, Pl = noise_map.powerSpectrum(l_in)\n    ax.plot(ell, ell * (ell + 1) * Pl / (2.0 * np.pi), label=\n        'Realization {0}'.format(i + 1), linestyle='--')\nax.set_xlabel('$l$')\nax.set_ylabel('$l(l+1)P_l/2\\\\pi$')\nax.legend(loc='upper right')\nax.set_yscale('log')\nplt.savefig('interpolated_power.png')\nplt.clf()\n"
+}

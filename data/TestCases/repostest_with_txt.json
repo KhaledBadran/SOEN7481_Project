@@ -1,0 +1,9 @@
+{
+    "functionName": "test_with_txt",
+    "className": "TestDownloadMagic",
+    "fileName": "/PmagPy_&_PmagPy/pmagpy_tests_&_test_ipmag.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "try:\n    res = requests.get('https://earthref.org/MagIC/download/12366/')\nexcept requests.exceptions.ConnectionError:\n    return\nif res.status_code == 200:\n    if not os.path.exists('temp'):\n        os.mkdir('temp')\n    ran = ipmag.download_magic(dir_path='temp', txt=res.text)\n    output_files = glob.glob(os.path.join('temp', '*.txt'))\n    self.assertTrue(len(output_files) == 7)\n    for f in output_files:\n        self.assertIn(f, output_files)\n    shutil.rmtree('temp')\n"
+}

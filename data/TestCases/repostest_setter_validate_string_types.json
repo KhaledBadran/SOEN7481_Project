@@ -1,0 +1,9 @@
+{
+    "functionName": "test_setter_validate_string_types",
+    "className": null,
+    "fileName": "/AutomatedTester_&_Bugsy/tests_&_test_attachment.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "bugzilla = Bugsy()\nsource = attachment_return['bugs']['1017315'][0]\nattachment = Attachment(bugzilla, **source)\nfor field in ['comment', 'content_type', 'file_name', 'summary']:\n    setattr(attachment, field, 'foobar')\n    assert getattr(attachment, field) == 'foobar'\n    try:\n        setattr(attachment, field, 1)\n        assert False, 'Should have raised an AttachmentException due to invalid data value'\n    except AttachmentException as e:\n        match = (\n            'Message: The %s field value must be of type string Code: None' %\n            field)\n        assert str(e) == match\n"
+}

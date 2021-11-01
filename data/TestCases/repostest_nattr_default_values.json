@@ -1,0 +1,9 @@
+{
+    "functionName": "test_nattr_default_values",
+    "className": "TestAttributes",
+    "fileName": "/Silmathoron_&_NNGT/testing_&_test_attributes.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "g2 = nngt.Graph()\nattributes = {'size': 2.0, 'color': 'blue', 'a': 5, 'blob': []}\nattribute_types = {'size': 'double', 'color': 'string', 'a': 'int', 'blob':\n    'object'}\ng2.new_node(attributes=attributes, value_types=attribute_types)\ng2.new_node(2)\ng2.new_node(3, attributes={'size': [4.0, 5.0, 1.0], 'color': ['r', 'g', 'b'\n    ]}, value_types={'size': 'double', 'color': 'string'})\ndouble_res = np.array([2.0, np.NaN, np.NaN, 4.0, 5.0, 1.0])\nisnan1 = np.isnan(g2.node_attributes['size'])\nisnan2 = np.isnan(double_res)\nself.assertTrue(np.all(isnan1 == isnan2))\nself.assertTrue(np.all(np.isclose(g2.node_attributes['size'][~isnan1],\n    double_res[~isnan2])))\nself.assertEqual(g2.node_attributes['color'].tolist(), ['blue', '', '', 'r',\n    'g', 'b'])\nself.assertEqual(g2.node_attributes['a'].tolist(), [5, 0, 0, 0, 0, 0])\nself.assertEqual(g2.node_attributes['blob'].tolist(), [[], None, None, None,\n    None, None])\n"
+}

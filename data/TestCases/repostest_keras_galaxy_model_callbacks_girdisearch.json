@@ -1,0 +1,9 @@
+{
+    "functionName": "test_keras_galaxy_model_callbacks_girdisearch",
+    "className": null,
+    "fileName": "/goeckslab_&_Galaxy-ML/galaxy_ml_&_tests_&_test_keras_galaxy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "config = train_model.get_config()\ncbacks = [{'callback_selection': {'monitor': 'val_loss', 'min_delta': 0.001,\n    'callback_type': 'ReduceLROnPlateau', 'min_lr': 0.0, 'patience': 10,\n    'cooldown': 0, 'mode': 'auto', 'factor': 0.2}}, {'callback_selection':\n    {'callback_type': 'TerminateOnNaN'}}, {'callback_selection': {\n    'callback_type': 'CSVLogger', 'filename': './tests/log.cvs',\n    'separator': '\\t', 'append': True}}, {'callback_selection': {'baseline':\n    None, 'min_delta': 0.0, 'callback_type': 'EarlyStopping', 'patience': \n    10, 'mode': 'auto', 'restore_best_weights': True, 'monitor': 'val_loss'}}]\nestimator = KerasGClassifier(config, optimizer='adam', metrics=[],\n    batch_size=32, epochs=500, seed=42, callbacks=cbacks)\nscorer = SCORERS['balanced_accuracy']\ncv = KFold(n_splits=5)\nnew_params = {'layers_0_Dense__config__kernel_initializer__config__seed': [\n    42], 'layers_1_Dense__config__kernel_initializer__config__seed': [42]}\nfit_params = {'shuffle': False}\ngrid = GridSearchCV(estimator, param_grid=new_params, scoring=scorer, cv=cv,\n    n_jobs=2, refit=False, error_score=np.NaN)\ngrid.fit(X, y, **fit_params)\ngot1 = grid.best_score_\nassert 0.6 <= round(got1, 2) <= 0.75, got1\n"
+}

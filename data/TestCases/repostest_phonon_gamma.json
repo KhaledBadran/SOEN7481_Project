@@ -1,0 +1,9 @@
+{
+    "functionName": "test_phonon_gamma",
+    "className": null,
+    "fileName": "/mesonepigreco_&_CellConstructor/tests_&_TestPhononsGamma_&_test_phonon_gamma.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "total_path = os.path.dirname(os.path.abspath(__file__))\nos.chdir(total_path)\nRyToCm = 109691.40235\n\"\"\"\n    In this script I will show how to read a QE dynmat into the cell constructure\n    generating both the structure and all the phonon information.\n    \"\"\"\nhydrogen_structure = CC.Phonons.Phonons('hydrogen_dyn')\nhydrogen_structure.structure.fix_coords_in_unit_cell()\nase_struct = hydrogen_structure.structure.get_ase_atoms()\nprint(hydrogen_structure.structure.masses)\nfreq, pol_vect = hydrogen_structure.DyagDinQ(0)\nprint('Frequencies:')\nprint(np.sort(freq * RyToCm))\nidvib = 70\nprint('Saving a video of the %d vibration = %.3f cm-1' % (idvib, freq[idvib\n    ] * RyToCm))\nCC.Manipulate.GenerateXYZVideoOfVibrations(hydrogen_structure, 'vibron.xyz',\n    idvib, 0.4, 0.1, 100)\nprint('Done! Check vibron.xyz')\n"
+}

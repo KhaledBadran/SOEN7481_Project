@@ -1,0 +1,9 @@
+{
+    "functionName": "test_flatten_nested_keys",
+    "className": null,
+    "fileName": "/Accenture_&_AmpliGraph/tests_&_ampligraph_&_evaluation_&_test_protocol.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "params = {'batches_count': 50, 'epochs': 4000, 'k': 200, 'eta': 15, 'loss':\n    'nll', 'loss_params': {'margin': 2}, 'embedding_model_params': {},\n    'regularizer': 'LP', 'regularizer_params': {'p': 1, 'lambda': 1e-05},\n    'optimizer': 'adam', 'optimizer_params': {'lr': 0.001}, 'verbose': \n    False, 'model_name': 'ComplEx'}\nflattened_params = _flatten_nested_keys(params)\nexpected = {'batches_count': 50, 'epochs': 4000, 'k': 200, 'eta': 15,\n    'loss': 'nll', ('loss_params', 'margin'): 2, 'regularizer': 'LP', (\n    'regularizer_params', 'p'): 1, ('regularizer_params', 'lambda'): 1e-05,\n    'optimizer': 'adam', ('optimizer_params', 'lr'): 0.001, 'verbose': \n    False, 'model_name': 'ComplEx'}\nassert flattened_params == expected\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_manual_graph_edit_no_diff",
+    "className": null,
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_OWMCLITest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Edit a context file and do a diff -- there shouldn't be any difference because we ignore such manual updates\n    \"\"\"\nindex = self.sh('cat ' + p('.owm', 'graphs', 'index'))\nfname = index.split('\\n')[0].split(' ')[0]\nopen(p(self.testdir, '.owm', 'graphs', fname), 'w').close()\nassertRegexpMatches(self.sh('owm diff'), '^$')\n"
+}

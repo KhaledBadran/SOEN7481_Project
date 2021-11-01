@@ -1,0 +1,9 @@
+{
+    "functionName": "test_neurons_have_types",
+    "className": "DataIntegrityTest",
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_DataIntegrityTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Every Neuron should have a non-blank type\n        \"\"\"\nresults = set()\nfor n in self.neurons:\n    s = (\n        \"\"\"SELECT ?v WHERE {{\n                       ?k <http://openworm.org/entities/Cell/name> {name} .\n                       ?k <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://openworm.org/entities/Neuron> .\n                       ?k <http://openworm.org/entities/Neuron/type> ?v .\n                    }}\"\"\"\n        .format(name=R.Literal(n).n3()))\n    qres = self.g.query(s)\n    for x in qres:\n        v = x[0]\n        if isinstance(v, R.Literal):\n            results.add(n)\nself.assertEqual(len(results), len(self.neurons),\n    'Some neurons are missing a type: {}'.format(set(self.neurons) - results))\n"
+}

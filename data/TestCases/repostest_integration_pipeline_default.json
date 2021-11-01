@@ -1,0 +1,9 @@
+{
+    "functionName": "test_integration_pipeline_default",
+    "className": null,
+    "fileName": "/Merck_&_DeepBGC/test_&_integration_&_commands_&_test_integration_pipeline.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tmpdir = str(tmpdir)\nreport_dir = os.path.join(tmpdir, 'report')\nrun(['pipeline', '--output', report_dir, get_test_file(input_file)])\nfiles = os.listdir(report_dir)\nfor file in files:\n    print(file)\nassert 'README.txt' in files\nassert 'report.bgc.gbk' in files\nassert 'report.bgc.tsv' in files\nassert 'report.full.gbk' in files\nassert 'report.pfam.tsv' in files\nevaluation_dir = os.path.join(report_dir, 'evaluation')\nfiles = os.listdir(evaluation_dir)\nfor file in files:\n    print(file)\nassert 'report.bgc.png' in files\nassert 'report.score.png' in files\nrecords = list(SeqIO.parse(os.path.join(report_dir, 'report.full.gbk'),\n    'genbank'))\nassert len(records) == 2\nrecord = records[0]\ncluster_features = util.get_cluster_features(record)\nassert len(cluster_features) >= 1\nrecord = records[1]\ncluster_features = util.get_cluster_features(record)\nassert len(cluster_features) >= 1\ncluster_records = list(SeqIO.parse(os.path.join(report_dir,\n    'report.bgc.gbk'), 'genbank'))\nassert len(cluster_records) >= 2\npytest.mark.parametrize('input_file', ['BGC0000015.fa', 'BGC0000015.fa.gz'])"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_usbtmccomm_timeout",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_comm_&_test_usbtmc.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "comm = USBTMCCommunicator()\ntimeout = mock.PropertyMock(return_value=1)\ntype(comm._filelike).timeout = timeout\nunit_eq(comm.timeout, 1 * u.second)\ntimeout.assert_called_with()\ncomm.timeout = 10\ntimeout.assert_called_with(array(10.0))\ncomm.timeout = 1000 * u.millisecond\ntimeout.assert_called_with(array(1.0))\nmock.patch(patch_path)"
+}

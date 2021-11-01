@@ -1,0 +1,9 @@
+{
+    "functionName": "valueObject",
+    "className": null,
+    "fileName": "/muma7490_&_PyDIAMONDS-Background/tests_&_test_Background.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "createFolders()\nmodelName = request.param[1]\ndata = np.loadtxt(testFilePath + 'KICTestFile.txt').T\npriors = np.loadtxt(testFilePath + 'background_hyperParameters' + modelName +\n    '.txt').T\nnsmc = np.loadtxt(testFilePath + 'NSMC_configuringParameters.txt')\nxmeans = np.loadtxt(testFilePath + 'Xmeans_configuringParameters.txt')\nnyquist = float(np.loadtxt(testFilePath + 'NyquistFrequency.txt'))\nrequest.addfinalizer(deleteFolders)\nreturn Background(kicID, data=data, modelObject=request.param[0], priors=\n    priors, nsmcConfiguringParameters=nsmc, nyquistFrequency=nyquist,\n    xmeansConfiguringParameters=xmeans)\npytest.fixture(scope='function', params=modelsList)"
+}

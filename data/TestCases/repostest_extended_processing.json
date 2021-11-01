@@ -1,0 +1,9 @@
+{
+    "functionName": "test_extended_processing",
+    "className": "EngineTestCase",
+    "fileName": "/IntegralDefense_&_ACE/lib_&_saq_&_collectors_&_test_cb_binaries.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.start_api_server()\nengine = TestEngine(local_analysis_modes=['binary'], analysis_pools={\n    'binary': 1})\nengine.start()\ncollector = CarbonBlackBinaryCollector(initial_search_offset=0,\n    download_batch_size=2)\n_clear_persistence(collector)\n_clear_storage(collector)\ncollector.load_groups()\ncollector.start()\nwait_for_log_count('downloaded {}'.format(collector.storage_dir), 6, 30)\nwait_for_log_count('scheduled Carbon Black binary', 6, 30)\nwait_for_log_count('completed analysis RootAnalysis', 6, 30)\ncollector.stop()\ncollector.wait()\nengine.stop()\nengine.wait()\nfile_count = 0\njson_count = 0\nsubmit_count = 0\nfor subdir in os.listdir(collector.storage_dir):\n    subdir = os.path.join(collector.storage_dir, subdir)\n    file_count += len(os.listdir(subdir))\n    json_count += len(glob.glob('{}/*.json'.format(subdir)))\n    submit_count += len(glob.glob('{}/*.submit'.format(subdir)))\nself.assertGreaterEqual(file_count, 6 * 3)\nself.assertGreaterEqual(json_count, 6)\nself.assertGreaterEqual(submit_count, 6)\n"
+}

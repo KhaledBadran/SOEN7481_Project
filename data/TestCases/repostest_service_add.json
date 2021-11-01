@@ -1,0 +1,9 @@
+{
+    "functionName": "test_service_add",
+    "className": null,
+    "fileName": "/KevinHonka_&_Icinga2_Python_API/icinga2_&_tests_&_test_services.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Testing the addition of a service\n    \"\"\"\napi = Icinga2API(username=constants.username, password=constants.password,\n    url=constants.url, debug=False)\nresponse = api.services.add(servicename=constants.TestService_name,\n    hostname=constants.TestHost_data['attrs']['name'], data=constants.\n    TestService_data)\nassert response['results'][0]['code'] == 200\npytest.mark.run(order=3)"
+}

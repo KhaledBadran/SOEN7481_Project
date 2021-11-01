@@ -1,0 +1,9 @@
+{
+    "functionName": "test_correct_dof",
+    "className": null,
+    "fileName": "/Rambatino_&_CHAID/tests_&_test_tree.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Check the degrees of freedom is correct\n    \"\"\"\ngender = np.array([0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2])\nincome = np.array([0, 0, 1, 0, 2, 0, 1, 2, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0])\nndarr = np.transpose(np.vstack([gender]))\ntree = CHAID.Tree.from_numpy(ndarr, income, alpha_merge=0.9,\n    min_child_node_size=0)\nsplit = tree.generate_best_split(tree.vectorised_array, tree.observed)\nassert split.dof == (len(set(gender)) - 1) * (len(set(income)) - 1)\n"
+}

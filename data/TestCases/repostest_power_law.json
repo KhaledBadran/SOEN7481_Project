@@ -1,0 +1,9 @@
+{
+    "functionName": "test_power_law",
+    "className": "GenericSourceTermTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_physics_&_GenericSourceTermTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.phys['pore.item1'] = 5e-13\nself.phys['pore.item2'] = 2.5\nself.phys['pore.item3'] = -1.4e-11\nself.phys.add_model(propname='pore.source1', model=pm.generic_source_term.\n    power_law, A1='pore.item1', A2='pore.item2', A3='pore.item3', X=\n    'pore.mole_fraction', regen_mode='normal')\nself.phys.add_model(propname='pore.source2', model=pm.generic_source_term.\n    power_law_sym, A1='pore.item1', A2='pore.item2', A3='pore.item3', X=\n    'pore.mole_fraction', regen_mode='normal')\nself.alg = op.algorithms.ReactiveTransport(network=self.net, phase=self.phase)\nself.alg.set_value_BC(values=0.4, pores=self.BC_pores)\nself.alg.set_source(propname='pore.source1', pores=self.source_pores)\nself.alg.settings.update({'conductance': 'throat.diffusive_conductance',\n    'quantity': 'pore.mole_fraction'})\nself.alg.run()\nself.phase.update(self.alg.results())\nself.phys.regenerate_models(propnames='pore.source1')\nself.phys.regenerate_models(propnames='pore.source2')\nX = self.phase['pore.mole_fraction']\nr1 = np.sum(5e-13 * X[self.source_pores] ** 2.5 - 1.4e-11)\nr2 = np.sum(self.phys['pore.source1.rate'][self.source_pores])\nrs = np.sum(self.phys['pore.source2.rate'][self.source_pores])\nassert r1 == r2\nassert r1 == rs\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_max_load_average",
+    "className": null,
+    "fileName": "/PearsonEducation_&_Alarmageddon/tests_&_validations_&_test_ssh.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "t = '18:01:46 up 62 days, 18:27,  1 user,  load average: 0.09, 0.04, 0.05'\nmonkeypatch.setattr(Connection, 'run', lambda self, x, warn:\n    get_mock_ssh_text(t, 0))\nssh_ctx = ssh.SshContext('ubuntu', get_mock_key_file(tmpdir))\nssh.LoadAverageValidation(ssh_ctx, hosts=hosts).expect_max_1_minute_load(40\n    ).expect_max_5_minute_load(20).expect_max_15_minute_load(10).perform({})\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_adjust_pool_bounds",
+    "className": null,
+    "fileName": "/SysBioChalmers_&_GECKO/geckopy_&_tests_&_test_gecko.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "essential = {'P00498': 0.0}\nin_model = {'P00549': 0.1, 'P31373': 0.1, 'P31382': 0.1, 'P39708': 0.1,\n    'P39714': 0.1, 'P39726': 0.1, 'Q01574': 0.1}\nexpected = set('prot_{}_exchange'.format(pool_id) for pool_id in essential)\nmeasurements = pd.concat([pd.Series(in_model), pd.Series(essential)])\nmodel = GeckoModel('multi-pool')\nmodel.limit_proteins(fractions=pd.Series(measurements))\nassert model.slim_optimize() < 0.001\nmodel.adjust_pool_bounds(inplace=False)\nassert model.slim_optimize() < 0.001\nadjustment = model.adjust_pool_bounds(inplace=True)\nobserved = set(adjustment['reaction'])\nassert abs(model.slim_optimize() - 0.05) < 0.001\nassert expected == observed\n"
+}

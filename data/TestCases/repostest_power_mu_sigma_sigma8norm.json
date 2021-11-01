@@ -1,0 +1,9 @@
+{
+    "functionName": "test_power_mu_sigma_sigma8norm",
+    "className": null,
+    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_power_mu_sigma_sigma8norm.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cosmo = ccl.Cosmology(Omega_c=0.27, Omega_b=0.045, h=0.67, sigma8=0.8, n_s=\n    0.96, transfer_function=tf)\ncosmo_musig = ccl.Cosmology(Omega_c=0.27, Omega_b=0.045, h=0.67, sigma8=0.8,\n    n_s=0.96, transfer_function=tf, mu_0=0.1, sigma_0=0.2)\nassert np.allclose(ccl.sigma8(cosmo_musig), 0.8)\nif tf != 'boltzmann_isitgr':\n    a = 0.8\n    gfac = (ccl.growth_factor(cosmo, a) / ccl.growth_factor(cosmo_musig, a)\n        ) ** 2\n    pk_rat = ccl.linear_matter_power(cosmo, 0.0001, a\n        ) / ccl.linear_matter_power(cosmo_musig, 0.0001, a)\n    assert np.allclose(pk_rat, gfac)\nwith mock.patch.dict(sys.modules, {'isitgr': None}):\n    with assert_raises(ImportError):\n        get_isitgr_pk_lin(cosmo)\nwith mock.patch.dict(sys.modules, {'isitgr': None}):\n    reload(ccl.boltzmann)\npytest.mark.parametrize('tf', ['bbks', 'eisenstein_hu', 'boltzmann_class',\n    'boltzmann_camb', 'boltzmann_isitgr'])"
+}

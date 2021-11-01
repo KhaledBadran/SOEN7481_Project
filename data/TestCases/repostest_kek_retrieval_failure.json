@@ -1,0 +1,9 @@
+{
+    "functionName": "test_kek_retrieval_failure",
+    "className": "TestEncryptorV2",
+    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_encryptor_v2.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "nErrors = [0]\ndef onError(errorCode, message):\n    nErrors[0] += 1\nself._fixture = EncryptorFixture(False, onError)\nplainText = Blob('Data to encrypt')\nencryptedContent = self._fixture._encryptor.encrypt(plainText)\nself.assertTrue(self._fixture._face._sentInterests[0].getName().getPrefix(6\n    ).equals(Name('/access/policy/identity/NAC/dataset/KEK')))\nself.assertEqual(0, len(self._fixture._face._sentData))\nself.assertEqual(1, nErrors[0])\nself.assertEqual(0, len(self._fixture._face._sentData))\nself._fixture.publishData()\nself._fixture._face._delayedCallTable._setNowOffsetMilliseconds(73000)\nself._fixture._face.processEvents()\nkekData = self._fixture._face._sentData[0]\nself.assertTrue(kekData.getName().getPrefix(6).equals(Name(\n    '/access/policy/identity/NAC/dataset/KEK')))\nself.assertEqual(7, kekData.getName().size())\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_unicode_name_escapes",
+    "className": null,
+    "fileName": "/textX_&_Arpeggio/arpeggio_&_tests_&_regressions_&_issue_32_&_test_issue_32.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "assert check_parser(\"'\\\\N{LATIN SMALL LETTER B}'\", 'b')\nif sys.version_info >= (3, 3):\n    assert check_parser(\"'\\\\N{LATIN CAPITAL LETTER GHA}'\", '\u01a2')\nwith pytest.raises(arpeggio.GrammarError):\n    check_parser(\"'\\\\N{NOT A VALID NAME}'\", '\\\\N{NOT A VALID NAME}')\nassert check_parser(\"'\\\\N{should not match filter regex!}'\",\n    '\\\\N{should not match filter regex!}')\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "get_modelbridge",
+    "className": null,
+    "fileName": "/facebook_&_Ax/ax_&_plot_&_tests_&_test_tile_fitted.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "exp = get_experiment()\nmodelbridge = ModelBridge(search_space=get_search_space(), model=\n    FullFactorialGenerator(), experiment=exp, data=get_data(),\n    status_quo_name=status_quo_name)\nmodelbridge._predict = mock.MagicMock(\n    'ax.modelbridge.base.ModelBridge._predict', autospec=True, return_value\n    =[get_observation().data])\nreturn modelbridge\nmock.patch('ax.modelbridge.base.observations_from_data', autospec=True,\n    return_value=[get_observation()])mock.patch('ax.modelbridge.base.gen_arms', autospec=True, return_value=[Arm\n    (parameters={})])"
+}

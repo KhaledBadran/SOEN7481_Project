@@ -1,0 +1,9 @@
+{
+    "functionName": "test_efficient_risk_L2_reg",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_efficient_frontier.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ef = setup_efficient_frontier()\nef.add_objective(objective_functions.L2_reg, gamma=5)\nweights = ef.efficient_risk(0.19)\nassert isinstance(weights, dict)\nassert set(weights.keys()) == set(ef.tickers)\nnp.testing.assert_almost_equal(ef.weights.sum(), 1)\nassert all([(i >= 0) for i in weights.values()])\nnp.testing.assert_allclose(ef.portfolio_performance(), (0.24087463760460398,\n    0.19, 1.162498090632486), atol=1e-06)\nef2 = setup_efficient_frontier()\nef2.efficient_risk(0.19)\nequal_weight = np.full((ef.n_assets,), 1 / ef.n_assets)\nassert np.abs(equal_weight - ef.weights).sum() < np.abs(equal_weight - ef2.\n    weights).sum()\n"
+}

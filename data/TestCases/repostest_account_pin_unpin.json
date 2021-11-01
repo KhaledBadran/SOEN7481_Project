@@ -1,0 +1,9 @@
+{
+    "functionName": "test_account_pin_unpin",
+    "className": null,
+    "fileName": "/halcy_&_Mastodon.py/tests_&_test_account.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "user = api2.account_verify_credentials()\ntry:\n    api.account_follow(user)\nexcept:\n    pass\ntry:\n    api.account_unpin(user)\nexcept:\n    pass\nrelationship = api.account_pin(user)\nendorsed = api.endorsements()\ntry:\n    assert relationship\n    assert relationship['endorsed']\n    assert user['id'] in map(lambda x: x['id'], endorsed)\nfinally:\n    relationship = api.account_unpin(user)\n    endorsed2 = api.endorsements()\n    api.account_unfollow(user)\n    assert relationship\n    assert not relationship['endorsed']\n    assert not user['id'] in map(lambda x: x['id'], endorsed2)\npytest.mark.vcr()"
+}

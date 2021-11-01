@@ -1,0 +1,9 @@
+{
+    "functionName": "test_File_List_Folders",
+    "className": "GoogleDriveFileListTest",
+    "fileName": "/googledrive_&_PyDrive/pydrive_&_test_&_test_filelist.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "drive = GoogleDrive(self.ga)\nfolder1 = drive.CreateFile({'mimeType':\n    'application/vnd.google-apps.folder', 'title': self.title})\nfolder1.Upload()\nself.file_list.append(folder1)\nflist = drive.ListFile({'q': \"title = '%s' and trashed = false\" % self.title})\ncount = 0\nfor _flist in flist:\n    for file1 in _flist:\n        self.assertFileInFileList(file1)\n        count += 1\nself.assertTrue(count == 11)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_pop_objs",
+    "className": null,
+    "fileName": "/open-source-economics_&_OG-USA/ogusa_&_tests_&_test_demographics.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test of the that omega_SS and the last period of omega_path_S are\n    close to each other.\n    \"\"\"\nE = 20\nS = 80\nT = int(round(4.0 * S))\nstart_year = 2018\n(omega, g_n_ss, omega_SS, surv_rate, rho, g_n_vector, imm_rates, omega_S_preTP\n    ) = demographics.get_pop_objs(E, S, T, 1, 100, start_year, False)\nassert np.allclose(omega_SS, omega[(-1), :])\n"
+}

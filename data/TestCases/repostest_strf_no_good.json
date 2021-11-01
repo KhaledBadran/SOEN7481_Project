@@ -1,0 +1,9 @@
+{
+    "functionName": "test_strf_no_good",
+    "className": null,
+    "fileName": "/TEOS-10_&_GSW-python/gsw_&_tests_&_test_geostrophy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "shape = 5,\nSA = np.ma.masked_all(shape, dtype=float)\nCT = np.ma.masked_all(shape, dtype=float)\np = np.array([0.0, 10.0, 20.0, 30.0, 40.0])\nstrf = gsw.geo_strf_dyn_height(SA, CT, p, p_ref=0, axis=0)\nexpected = np.zeros(shape, float) + np.nan\nassert_array_equal(strf.filled(np.nan), expected)\nSA[:1] = 35\nCT[:1] = 5\nstrf = gsw.geo_strf_dyn_height(SA, CT, p, p_ref=0, axis=0)\nexpected = np.zeros(shape, float) + np.nan\nassert_array_equal(strf.filled(np.nan), expected)\nSA[:2] = 35\nCT[:2] = [5, 4]\nstrf = gsw.geo_strf_dyn_height(SA, CT, p, p_ref=0, axis=0)\nassert strf.count() == 2\n"
+}

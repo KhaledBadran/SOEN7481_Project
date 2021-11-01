@@ -1,0 +1,9 @@
+{
+    "functionName": "test_full_single_file",
+    "className": "TestCommandLine",
+    "fileName": "/kenfar_&_DataGristle/scripts_&_tests_&_test_gristle_freaker_cmd.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Tests use of columns all against a single file.\n        \"\"\"\ncmd = \"%s -i %s -c 1 2 -d '|' -o %s \" % (os.path.join(script_dir,\n    'gristle_freaker'), self.easy_fqfn, self.out_fqfn)\nrunner = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.\n    PIPE, close_fds=True, shell=True)\n_ = runner.communicate()[0]\nassert runner.returncode == 0\nout_rec_cnt = 0\nfor rec in fileinput.input(self.out_fqfn):\n    out_rec_cnt += 1\n    fields = rec[:-1].split('-')\n    key_col_1 = fields[0].strip()\n    key_col_2 = fields[1].strip()\n    freq_cnt = int(fields[2])\n    assert key_col_1 == 'A'\n    assert key_col_2 == 'B'\n    assert freq_cnt == 100\nfileinput.close()\nassert out_rec_cnt == 1\nrunner.stdin.close()\n"
+}

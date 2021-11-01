@@ -1,0 +1,9 @@
+{
+    "functionName": "test_plot_roc",
+    "className": null,
+    "fileName": "/tvdboom_&_ATOM/tests_&_test_plots.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Assert that the plot_roc method work as intended.\"\"\"\ntrainer = TrainerRegressor(['ols', 'ridge'], metric='r2')\ntrainer.run(reg_train, reg_test)\npytest.raises(PermissionError, trainer.plot_roc)\ntrainer = TrainerClassifier(['LDA', 'LGB'], metric='f1')\npytest.raises(NotFittedError, trainer.plot_roc, models='LDA')\ntrainer.run(bin_train, bin_test)\ntrainer.plot_roc(filename=FILE_DIR + 'roc1', display=False)\ntrainer.lda.plot_roc(filename=FILE_DIR + 'roc2', display=False)\nassert glob.glob(FILE_DIR + 'roc1.png')\nassert glob.glob(FILE_DIR + 'roc2.png')\natom = ATOMClassifier(X_bin, y_bin, random_state=1)\natom.run('lda', metric='f1')\natom.plot_roc(filename=FILE_DIR + 'roc3', display=False)\natom.lda.plot_roc(filename=FILE_DIR + 'roc4', display=False)\nassert glob.glob(FILE_DIR + 'roc3.png')\nassert glob.glob(FILE_DIR + 'roc4.png')\n"
+}

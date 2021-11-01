@@ -1,0 +1,9 @@
+{
+    "functionName": "test_multiphase_set_occupancy_w_values_only",
+    "className": "MultiPhaseTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_phases_&_MultiPhaseTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "m = op.phases.MultiPhase(network=self.net, phases=[self.air, self.water])\nPvals = np.array([0.5, 0.9, 0.01])\nTvals = np.array([0.9, 0.01])\nwith pytest.raises(Exception):\n    m.set_occupancy(self.water, Pvals=Pvals)\nwith pytest.raises(Exception):\n    m.set_occupancy(self.water, Tvals=Tvals)\nm.set_occupancy(self.water, Pvals=1)\nassert m['pore.occupancy.water'].mean() == 1\nPvals = np.ones(self.net.Np) * 0.5\nm.set_occupancy(self.water, Pvals=Pvals)\nassert m['pore.occupancy.water'].mean() == 0.5\nm.set_occupancy(self.water, Tvals=1)\nassert m['throat.occupancy.water'].mean() == 1\nTvals = np.ones(self.net.Nt) * 0.54\nm.set_occupancy(self.water, Tvals=Tvals)\nassert m['throat.occupancy.water'].mean() == 0.54\n"
+}

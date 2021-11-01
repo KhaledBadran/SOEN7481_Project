@@ -1,0 +1,9 @@
+{
+    "functionName": "test_block",
+    "className": null,
+    "fileName": "/SimLeek_&_CV_PubSubs/tests_&_window_&_test_subscriber_windows.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sub_win.SubscriberWindows.FRAME_DICT = {}\nwith mock.patch.object(cv2, 'namedWindow'), mock.patch.object(sub_win.\n    SubscriberWindows, 'update'), mock.patch.object(sub_win.\n    SubscriberWindows, 'loop') as mock_loop:\n    sw = sub_win.SubscriberWindows()\n    sw.close_threads.append(mock.MagicMock())\n    sw.block()\n    mock_loop.assert_called_once()\n    sw.close_threads[0].join.assert_called_once()\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_center_uniform",
+    "className": null,
+    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_moment.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test the centering algorithm with uniform weighting\n    \"\"\"\nngau = 10\nnpix = 200\nxi = np.arange(ngau, npix, npix // ngau, dtype=float)\nxt = xi + np.round(np.random.normal(scale=1.0, size=xi.size), decimals=1)\nimg = np.zeros((1, npix), dtype=float)\nx = np.arange(npix)\nfor c in xt:\n    img[(0), :] += (erf((x - c + 0.5) / np.sqrt(2) / 2) - erf((x - c - 0.5) /\n        np.sqrt(2) / 2)) / 2.0\nxr, xe, bad = moment.moment1d(img, xi, 10.0, row=0, order=1)\nassert np.mean(np.absolute(xi - xt)) - np.mean(np.absolute(xr - xt)\n    ) > 0, 'Recentering did not improve the mean difference'\nassert np.std(xi - xt) - np.std(xr - xt\n    ) > 0, 'Recentering did not improve the standard deviation in the difference'\n"
+}

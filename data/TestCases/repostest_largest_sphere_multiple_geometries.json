@@ -1,0 +1,9 @@
+{
+    "functionName": "test_largest_sphere_multiple_geometries",
+    "className": "PoreSizeTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_geometry_&_PoreSizeTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "net = op.network.Cubic(shape=[5, 5, 5], spacing=[5, 5, 5])\nnet['pore.coords'][net.pores('top')] += [0, 0, -3.0]\ngeom2 = op.geometry.GenericGeometry(network=net, pores=net.pores('top'))\ngeom2['pore.fixed_diameter'] = 1\nPs = net.pores('top', mode='nor')\ngeom1 = op.geometry.GenericGeometry(network=net, pores=Ps, throats=net.Ts)\ngeom1.add_model(propname='pore.diameter', model=mods.largest_sphere, iters=0)\nassert np.all(np.unique(geom1['pore.diameter']) == [1.5, 5.0])\ngeom2['pore.fixed_diameter'] = 6\ngeom1.regenerate_models()\nassert np.amin(geom1['pore.diameter']) < 0\n"
+}

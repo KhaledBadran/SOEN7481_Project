@@ -1,0 +1,9 @@
+{
+    "functionName": "test_anext",
+    "className": null,
+    "fileName": "/chrisseto_&_Agent/tests_&_test_agent.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "fut = asyncio.coroutine(lambda : (0, 1, 2, 3, 4, 5, 6))()\n@agent.async_generator\ndef inner_gen():\n    for x in (yield from fut):\n        yield x\ngen = inner_gen()\nfor i in range(6):\n    assert i == await agent.anext(gen)\npytest.mark.asyncio"
+}

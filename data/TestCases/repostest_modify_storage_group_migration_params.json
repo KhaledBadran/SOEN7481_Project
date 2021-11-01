@@ -1,0 +1,9 @@
+{
+    "functionName": "test_modify_storage_group_migration_params",
+    "className": "PyU4VMigrationTest",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_migration.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test modify_storage_group_migration.\"\"\"\nwith mock.patch.object(self.migration, 'modify_resource') as mock_mod:\n    ref_options = dict()\n    ref_options['action'] = 'LINK'\n    ref_options['option'] = 'dummy_option'\n    ref_options['executionOption'] = constants.ASYNCHRONOUS\n    self.migration.modify_storage_group_migration(storage_group_name=self.\n        data.storagegroup_name, action='LINK', options={'option':\n        'dummy_option'}, _async=True)\n    mock_mod.assert_called_once_with(category=constants.MIGRATION,\n        resource_level=constants.SYMMETRIX, resource_level_id=self.conn.\n        array_id, resource_type=constants.STORAGEGROUP, resource_type_id=\n        self.data.storagegroup_name, payload=ref_options)\n"
+}

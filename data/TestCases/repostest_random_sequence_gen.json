@@ -1,0 +1,9 @@
+{
+    "functionName": "test_random_sequence_gen",
+    "className": "TestStimuliGeneration",
+    "fileName": "/BciPy_&_BciPy/bcipy_&_helpers_&_tests_&_test_stimuli.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test generation of random sequences\"\"\"\nalp = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',\n    'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '<', '_']\nstim_number = 10\nstim_length = 10\nseqs, seq_timings, seq_colors = random_rsvp_calibration_seq_gen(alp, timing\n    =[0.5, 1, 0.2], color=['green', 'red', 'white'], stim_number=\n    stim_number, stim_length=stim_length, is_txt=True)\nself.assertEqual(len(seqs), stim_number,\n    'Should have produced the correct number of sequences')\nself.assertEqual(len(seq_timings), stim_number)\nself.assertEqual(len(seq_colors), stim_number)\nseq_strings = []\nfor seq in seqs:\n    self.assertEqual(len(seq), stim_length + 2, (\n        'Sequence should include the correct number of choices as ',\n        'well as the target and cross.'))\n    choices = seq[2:]\n    self.assertEqual(stim_length, len(set(choices)),\n        'All choices should be unique')\n    seq_strings.append(''.join(choices))\nself.assertEqual(len(seqs), len(set(seq_strings)),\n    'All sequences should be different')\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_bug_fixes",
+    "className": "TestSystem",
+    "fileName": "/SimGus_&_Chatette/tests_&_system-testing_&_test_system.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "facade = ChatetteFacade.get_or_create()\nfile_path = (\n    'tests/system-testing/inputs/generate-nb/training-only/bugfixes/bug-22-slot-position.chatette'\n    )\nfacade.run(file_path)\nfor ex in facade.train_examples:\n    for entity in ex.entities:\n        if entity._len != 5 and entity._len != 8:\n            pytest.fail(\"Incorrect length for entity '\" + str(entity.value) +\n                \"': \" + str(entity._len))\n        if entity._start_index < 26 and entity._start_index > 35:\n            pytest.fail(\"Incorrect starting index for entity '\" + str(\n                entity.value) + \"' in '\" + str(ex.text) + \"': \" + str(\n                entity._start_index))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "get_ot_zooma_to_efo_mappings",
+    "className": null,
+    "fileName": "/opentargets_&_OnToma/ontoma_&_downloaders.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"download zooma and returns a dict\n    >>> d = get_ot_zooma_to_efo_mappings(URLS['ZOOMA_EFO_MAP'])\n    >>> d['skeletal dysplasias']\n    'http://purl.obolibrary.org/obo/HP_0002652'\n    \"\"\"\nmappings = {}\nlogger.debug('ZOOMA to EFO mappings - requesting from URL %s', url)\nwith requests.get(url, stream=True) as req:\n    for i, row in enumerate(csv.DictReader(req.iter_lines(decode_unicode=\n        True), delimiter='\\t')):\n        mappings[row['PROPERTY_VALUE'].lower()] = row['SEMANTIC_TAG'].strip()\n    logger.info('ZOOMA to EFO mappings - Parsed %s rows', i)\nreturn mappings\n"
+}

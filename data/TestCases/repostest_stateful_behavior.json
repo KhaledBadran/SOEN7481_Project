@@ -1,0 +1,9 @@
+{
+    "functionName": "test_stateful_behavior",
+    "className": "Test_bugs",
+    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_bugs.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.setUpClass()\nql.set_option('optimize', 'no')\nql.set_option('scheduler', 'ALAP')\nconfig_fn = os.path.join(curdir, 'hardware_config_cc_light.json')\nplatform = ql.Platform('myPlatform', config_fn)\nsweep_points = [1]\nnqubits = 3\nnregs = 3\np = ql.Program('statelessProgram', platform, nqubits, nregs)\np.set_sweep_points(sweep_points)\nk = ql.Kernel('aKernel', platform, nqubits, nregs)\nk.prepz(0)\nk.gate('rx180', [0])\nk.measure(0)\nrd = ql.CReg()\nrs1 = ql.CReg()\nrs2 = ql.CReg()\nk.classical(rs1, ql.Operation(3))\nk.classical(rs1, ql.Operation(4))\nk.classical(rd, ql.Operation(rs1, '+', rs2))\np.add_kernel(k)\nNCOMPILES = 50\nQISA_fn = os.path.join(output_dir, p.name + '.qisa')\nfor i in range(NCOMPILES):\n    p.compile()\n    self.setUpClass()\n    QISA_fn_i = os.path.join(output_dir, p.name + '_' + str(i) + '.qisa')\n    os.rename(QISA_fn, QISA_fn_i)\nfor i in range(NCOMPILES - 1):\n    QISA_fn_1 = os.path.join(output_dir, p.name + '_' + str(i) + '.qisa')\n    QISA_fn_2 = os.path.join(output_dir, p.name + '_' + str(i + 1) + '.qisa')\n    self.assertTrue(file_compare(QISA_fn_1, QISA_fn_2))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_read_missing_prime_field_size",
+    "className": "TestSplitKey",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_secrets_&_test_split_key.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that an InvalidKmipEncoding error is raised during the decoding\n        of a SplitKey object when the prime field size is missing from the\n        encoding.\n        \"\"\"\nsplit_key = secrets.SplitKey()\nself.assertIsNone(split_key.prime_field_size)\nargs = self.no_prime_field_size_encoding,\nself.assertRaisesRegex(exceptions.InvalidKmipEncoding,\n    'The SplitKey encoding is missing the PrimeFieldSize field. This field is required when the SplitKeyMethod is PolynomialSharingPrimeField.'\n    , split_key.read, *args)\n"
+}

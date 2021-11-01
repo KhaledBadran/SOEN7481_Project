@@ -1,0 +1,9 @@
+{
+    "functionName": "test_add_delegate_stake_action",
+    "className": null,
+    "fileName": "/OwnMarket_&_OwnBlockchainSdkPython/own_blockchain_sdk_&_test_transactions.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sender_wallet = Wallet()\nvalidator_wallet = Wallet()\namount = 100000\nexpected = (\n    \"\"\"{\n    \"senderAddress\": \"%s\",\n    \"nonce\": 1,\n    \"expirationTime\": 0,\n    \"actionFee\": 0.01,\n    \"actions\": [\n        {\n            \"actionType\": \"DelegateStake\",\n            \"actionData\": {\n                \"validatorAddress\": \"%s\",\n                \"amount\": %d\n            }\n        }\n    ]\n}\"\"\"\n     % (sender_wallet.address, validator_wallet.address, amount))\ntx = Tx(sender_wallet.address, 1, 0.01, 0)\ntx.add_delegate_stake_action(validator_wallet.address, amount)\nactual = tx.to_json()\nassert expected == actual\n"
+}

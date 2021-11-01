@@ -1,0 +1,9 @@
+{
+    "functionName": "bundle",
+    "className": null,
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_BundleDeployTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "res = BundleData()\nres.testdir = tempfile.mkdtemp(prefix=__name__ + '.')\nres.test_homedir = p(res.testdir, 'homedir')\nres.bundle_source_directory = p(res.testdir, 'bundle_source')\nres.bundles_directory = p(res.testdir, 'homedir', 'bundles')\nos.mkdir(res.test_homedir)\nos.mkdir(res.bundle_source_directory)\nos.mkdir(res.bundles_directory)\nres.descriptor = Descriptor('test')\ngraph = ConjunctiveGraph()\nctxg = graph.get_context(URIRef('http://example.org/ctx'))\nctxg.add((URIRef('http://example.org/a'), URIRef('http://example.org/b'),\n    URIRef('http://example.org/c')))\nres.installer = Installer(res.bundle_source_directory, res.\n    bundles_directory, graph=graph)\nres.bundle_directory = res.installer.install(res.descriptor)\ntry:\n    yield res\nfinally:\n    shutil.rmtree(res.testdir)\nfixture"
+}

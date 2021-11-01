@@ -1,0 +1,9 @@
+{
+    "functionName": "test_parseVersion",
+    "className": null,
+    "fileName": "/nicfit_&_Parcyl/tests_&_test_requirements.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "for V in ('0.8.10a3', '0.8.10-a3'):\n    vstr, v = parseVersion(V)\n    assert v.major == 0\n    assert v.minor == 8\n    assert v.maint == 10\n    assert v.release == 'a3'\n    assert vstr == '0.8.10a3'\nfor V in ('0.3b14', '0.3b14.dev2', '0.3-b14.post1'):\n    vstr, v = parseVersion(V)\n    assert v.major == 0\n    assert v.minor == 3\n    assert v.maint == 0\n    assert v.release == 'b14'\n    assert vstr == V.replace('-', '')\nvstr, v = parseVersion('1')\nassert v.major == 1\nassert v.minor == 0\nassert v.maint == 0\nassert v.release == 'final'\nassert vstr == '1'\n"
+}

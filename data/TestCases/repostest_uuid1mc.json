@@ -1,0 +1,9 @@
+{
+    "functionName": "test_uuid1mc",
+    "className": null,
+    "fileName": "/alex-ber_&_AlexBerUtils/tests_&_utils_&_uuids_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "logger.info(f'{request._pyfuncitem.name}()')\nrnd = b'W\\x91\\x8e\\xb3!\\x08'\nmocker.patch('random._urandom', side_effect=lambda _: rnd, create=True)\nmocker.patch('.'.join([__name__, 'urandom']), side_effect=lambda _: rnd,\n    create=True)\nmocker.patch('.'.join([__name__, 'uuid1']), side_effect=lambda p: p,\n    autospec=True, spec_set=True)\nmocker.patch('.'.join(['alexber.utils.uuids', '_uuid1']), side_effect=lambda\n    p: p, autospec=True, spec_set=True)\nexp = ref_uuid1mc()\nactual = uuid1mc()\nassert exp == actual\n"
+}

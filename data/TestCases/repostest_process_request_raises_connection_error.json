@@ -1,0 +1,9 @@
+{
+    "functionName": "test_process_request_raises_connection_error",
+    "className": "TestWeather",
+    "fileName": "/lukeWaninger_&_GSCAP/tests_&_test_weather.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "key = wthr.CONFIG['DarkSkyAPI']\nlat = np.round(self.lat, 1)\nlon = np.round(self.lon, 1)\nurl = f'https://api.darksky.net/forecast/{key}/32.4,-84.9,1115319600'\nresponses.add(responses.GET, url, body=ConnectionError('...'))\nproqu, reqque, resque = mul.Queue(), mul.Queue(), mul.Queue()\nreq = wthr.WeatherRequest(lat=lat, lon=lon, date=self.day, zipcode=None)\nargs = req, proqu, reqque, resque\nresque.put(dict(pid=os.getpid(), response=None))\nself.assertRaises(ConnectionError, wthr.process_request, args)\nresponses.activate"
+}

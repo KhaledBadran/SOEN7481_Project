@@ -1,0 +1,9 @@
+{
+    "functionName": "test_nested_call_3",
+    "className": "CallTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_call.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "template = Template(\n    \"\"\"        <%def name=\"A()\">\n          ${caller.body()}\n        </%def>\n\n        <%def name=\"B()\">\n          ${caller.foo()}\n        </%def>\n\n        <%call expr=\"A()\">\n          <%call expr=\"B()\">\n            <%def name=\"foo()\">\n              foo\n            </%def>\n          </%call>\n        </%call>\n\n        \"\"\"\n    )\nassert flatten_result(template.render()) == 'foo'\n"
+}

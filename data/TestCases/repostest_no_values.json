@@ -1,0 +1,9 @@
+{
+    "functionName": "test_no_values",
+    "className": "TestDucoValveCO2SensorExtended",
+    "fileName": "/SteinHeselmans_&_DucoBox/tests_&_test_ducovalveco2sensor.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sensor = dut.DucoValveCO2Sensor(255, 2)\nitf_mock_object = MagicMock(spec=dut.DucoInterface)\nsensor.bind_serial(itf_mock_object)\nitf_mock_object.execute_command.side_effect = (self.\n    callback_execute_cmd_nodeparaget)\nsensor.sample()\nco2_call = call(self.nodeparaget_co2(255))\ntemperature_call = call(self.nodeparaget_temperature(255))\nitf_mock_object.execute_command.assert_has_calls([co2_call,\n    temperature_call], any_order=True)\nself.assertEqual(sensor.get_value(dut.CO2_STR), None)\nself.assertEqual(sensor.get_value(dut.TEMPERATURE_STR), None)\npatch('duco.ducobox.DucoInterface', autospec=True)"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_rollaxis",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_conditionals_&_test_util.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "A = np.random.randn(10, 5, 3)\nA_tf = tf.convert_to_tensor(A)\nif direction == 'left':\n    perm = [1, 2, 0] if rolls == 1 else [2, 0, 1]\nelif direction == 'right':\n    perm = [2, 0, 1] if rolls == 1 else [1, 2, 0]\nelse:\n    raise NotImplementedError\nA_rolled_ref = np.transpose(A, perm)\nif direction == 'left':\n    A_rolled_tf = rollaxis_left(A_tf, rolls)\nelif direction == 'right':\n    A_rolled_tf = rollaxis_right(A_tf, rolls)\nelse:\n    raise NotImplementedError\nassert_allclose(A_rolled_ref, A_rolled_tf)\npytest.mark.parametrize('rolls', [1, 2])pytest.mark.parametrize('direction', ['left', 'right'])"
+}

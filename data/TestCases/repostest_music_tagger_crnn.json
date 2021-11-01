@@ -1,0 +1,9 @@
+{
+    "functionName": "test_music_tagger_crnn",
+    "className": "TestApplication",
+    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_keras_&_test_application.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "keras.backend.set_image_dim_ordering('th')\nkmodel = MusicTaggerCRNN(include_top=False, weights=None)\ninput_data = np.random.random([2, 1, 96, 1366])\nbmodel = DefinitionLoader.from_kmodel(kmodel)\nWeightLoader.load_weights_from_kmodel(bmodel, kmodel)\nkeras_output = kmodel.predict(input_data)\nbmodel.training(is_training=False)\nbigdl_output = bmodel.forward(input_data)\nself.assert_allclose(keras_output, bigdl_output, rtol=1e-06, atol=1e-06)\npytest.mark.skip(reason='need to fix todo before running the test')"
+}

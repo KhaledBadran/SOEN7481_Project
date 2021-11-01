@@ -1,0 +1,9 @@
+{
+    "functionName": "test_DataFile_CreateEmpty",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_DataFile.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "nf = np.array(['Data/Normalization_1.calib', 'Data/Normalization_3.calib',\n    'Data/Normalization_8.calib'])\nA3 = np.linspace(0, 180, 181)\nA4 = -16\nEi = 5.5\nMonitor = 100000.0\nsample = MJOLNIR.Data.Sample.Sample(a=6.0, b=6.0, c=12.2, projectionVector2\n    =[1, 0, 0], projectionVector1=[0, 2, 1], gamma=120.0, beta=80.0, alpha=90.0\n    )\ntry:\n    _ = createEmptyDataFile(A3=10, A4=10, Ei=10, sample=sample)\n    assert False\nexcept AttributeError:\n    assert True\ntry:\n    _ = createEmptyDataFile(A3=[10, 11], A4=[10, 11, 12], Ei=10, sample=sample)\n    assert False\nexcept AttributeError:\n    assert True\ndf = createEmptyDataFile(A3=A3, A4=A4, Ei=Ei, sample=sample, Monitor=\n    Monitor, normalizationFiles=nf)\nassert df.sample == sample\nassert len(df.possibleBinnings) == len(nf)\n"
+}

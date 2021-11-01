@@ -1,0 +1,9 @@
+{
+    "functionName": "test_condition_table_is_parameter_free",
+    "className": null,
+    "fileName": "/PEtab-dev_&_PEtab/tests_&_test_lint.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with patch('petab.get_parametric_overrides') as mock_get_parametric_overrides:\n    mock_get_parametric_overrides.return_value = []\n    assert lint.condition_table_is_parameter_free(pd.DataFrame()) is True\n    mock_get_parametric_overrides.assert_called_once()\n    mock_get_parametric_overrides.reset_mock()\n    mock_get_parametric_overrides.return_value = ['p1']\n    assert lint.condition_table_is_parameter_free(pd.DataFrame()) is False\n    mock_get_parametric_overrides.assert_called_once()\n"
+}

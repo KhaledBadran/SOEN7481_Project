@@ -1,0 +1,9 @@
+{
+    "functionName": "test_invalid_operations",
+    "className": "TestQueryResponsePayload",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_query.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a TypeError is raised when an invalid value is used to set\n        the operations of a Query response payload.\n        \"\"\"\nkwargs = {'operations': 'invalid'}\nself.assertRaisesRegex(TypeError,\n    'The operations must be a list of Operation enumerations.', payloads.\n    QueryResponsePayload, **kwargs)\nkwargs = {'operations': ['invalid']}\nself.assertRaisesRegex(TypeError,\n    'The operations must be a list of Operation enumerations.', payloads.\n    QueryResponsePayload, **kwargs)\nargs = payloads.QueryResponsePayload(), 'operations', 'invalid'\nself.assertRaisesRegex(TypeError,\n    'The operations must be a list of Operation enumerations.', setattr, *args)\nargs = payloads.QueryResponsePayload(), 'operations', ['invalid']\nself.assertRaisesRegex(TypeError,\n    'The operations must be a list of Operation enumerations.', setattr, *args)\n"
+}

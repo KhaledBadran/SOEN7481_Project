@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_supported_eline_list",
+    "className": null,
+    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_core_&_tests_&_test_xrf_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "list_k = get_supported_eline_list(lines=('K',))\nlist_l = get_supported_eline_list(lines=('L',))\nlist_m = get_supported_eline_list(lines=('M',))\nlist_kl = get_supported_eline_list(lines=('K', 'L'))\nlist_lm = get_supported_eline_list(lines=('L', 'M'))\nlist_klm = get_supported_eline_list(lines=('K', 'L', 'M'))\nlist_default = get_supported_eline_list()\nfor v in list_klm:\n    assert re.search('[A-Z][a-z]?_[KLM]', v\n        ), f'Emission line name {v} is not properly formatted'\nassert len(list_k) > 0 and len(list_l) > 0 and len(list_m\n    ) > 0, 'At least one of the lists for K, L or M lines is empty'\nassert list_klm == list_default, 'The complete list of emission lines is incorrectly assembled'\nassert list_klm == list_k + list_l + list_m, 'The complete list does not include all for K, L and M lines'\nassert list_kl == list_k + list_l, 'The list for K and L lines is not equivalent to the sum of the lists'\nassert list_lm == list_l + list_m, 'The list for K and L lines is not equivalent to the sum of the lists'\n"
+}

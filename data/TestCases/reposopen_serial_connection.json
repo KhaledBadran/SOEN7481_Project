@@ -1,0 +1,9 @@
+{
+    "functionName": "open_serial_connection",
+    "className": null,
+    "fileName": "/PRIArobotics_&_HedgehogServer/hedgehog_&_server_&_hardware_&_serial_&___init__.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "if loop is None:\n    loop = asyncio.get_event_loop()\nreader = asyncio.StreamReader(limit=limit, loop=loop)\nprotocol = asyncio.StreamReaderProtocol(reader, loop=loop)\ntransport = serial_asyncio.SerialTransport(loop, protocol, ser)\nwriter = asyncio.StreamWriter(transport, protocol, reader, loop)\ntry:\n    yield reader, writer\nfinally:\n    writer.close()\n    await trio_asyncio.aio_as_trio(writer.wait_closed)()\nasynccontextmanager"
+}

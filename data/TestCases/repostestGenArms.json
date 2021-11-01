@@ -1,0 +1,9 @@
+{
+    "functionName": "testGenArms",
+    "className": "BaseModelBridgeTest",
+    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_base_modelbridge.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "p1 = {'x': 0, 'y': 1}\np2 = {'x': 4, 'y': 8}\nobservation_features = [ObservationFeatures(parameters=p1),\n    ObservationFeatures(parameters=p2)]\narms, candidate_metadata = gen_arms(observation_features=observation_features)\nself.assertEqual(arms[0].parameters, p1)\nself.assertIsNone(candidate_metadata)\narm = Arm(name='1_1', parameters=p1)\narms_by_signature = {arm.signature: arm}\nobservation_features[0].metadata = {'some_key': 'some_val_0'}\nobservation_features[1].metadata = {'some_key': 'some_val_1'}\narms, candidate_metadata = gen_arms(observation_features=\n    observation_features, arms_by_signature=arms_by_signature)\nself.assertEqual(arms[0].name, '1_1')\nself.assertEqual(candidate_metadata, {arms[0].signature: {'some_key':\n    'some_val_0'}, arms[1].signature: {'some_key': 'some_val_1'}})\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_parser_embl_data",
+    "className": "TestConverter",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_converter.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "embl_file = os.path.join(self.test_folder, 'test.embl')\nembl_out = os.path.join(self.test_folder, 'test.embl_out')\nout = StringIO()\nwith open(embl_file, 'w') as eh:\n    for line in self.embl_file.split('\\n'):\n        eh.write(line + '\\n')\ninfo = self.converter._parser_embl_data(embl_file, out)\ndatas = out.getvalue().split('\\n')\nself.assertEqual(set(datas[:-1]), set(self.gff_out.split('\\n')))\nself.assertEqual(info[0], 'NC_007795.1')\nfor index in range(0, 2):\n    self.assertDictEqual(info[1]['pos'][index], self.multi_embl[index])\nout.close()\n"
+}

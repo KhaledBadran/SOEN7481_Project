@@ -1,0 +1,9 @@
+{
+    "functionName": "test_boolean_distribution",
+    "className": null,
+    "fileName": "/Neuraxio_&_Neuraxle/testing_&_hyperparams_&_test_distributions.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "hd = Boolean()\nsamples = get_many_samples_for(hd)\nfalses = Counter(samples).get(False)\ntrues = Counter(samples).get(True)\nassert trues > NUM_TRIALS * 0.4\nassert falses > NUM_TRIALS * 0.4\nassert hd.pdf(False) == 0.5\nassert hd.pdf(0.0) == 0.5\nassert hd.pdf(True) == 0.5\nassert hd.pdf(1.0) == 0.5\nassert hd.pdf(-0.1) == 0.0\nassert hd.pdf(1.1) == 0.0\nassert hd.cdf(False) == 0.5\nassert hd.cdf(0.0) == 0.5\nassert hd.cdf(True) == 1.0\nassert hd.cdf(1.0) == 1.0\nassert hd.cdf(-0.1) == 0.0\nassert hd.cdf(1.1) == 1.0\nassert hd.min() == 0\nassert hd.max() == 1\nassert abs(hd.mean() - 0.5) < 1e-06\nassert abs(hd.std() - 0.5) < 1e-06\nassert abs(hd.var() - 0.25) < 1e-06\nassert abs(hd.mean() - np.mean(samples)) < 0.01\nassert abs(hd.var() - np.var(samples)) < 0.01\n"
+}

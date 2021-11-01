@@ -1,0 +1,9 @@
+{
+    "functionName": "test_add_trial_same_arm",
+    "className": "TrialTest",
+    "fileName": "/facebook_&_Ax/ax_&_core_&_tests_&_test_trial.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "new_trial1 = self.experiment.new_trial(generator_run=GeneratorRun(arms=[\n    self.arm.clone(clear_name=True)]))\nself.assertEqual(new_trial1.arm.name, self.trial.arm.name)\nself.assertFalse(new_trial1.arm is self.trial.arm)\nnew_trial2 = self.experiment.new_trial(generator_run=GeneratorRun(arms=[\n    self.arm.clone()]))\nself.assertEqual(new_trial2.arm.name, self.trial.arm.name)\nself.assertFalse(new_trial2.arm is self.trial.arm)\narm_wrong_name = self.arm.clone(clear_name=True)\narm_wrong_name.name = 'wrong_name'\nwith self.assertRaises(ValueError):\n    new_trial2 = self.experiment.new_trial(generator_run=GeneratorRun(arms=\n        [arm_wrong_name]))\n"
+}

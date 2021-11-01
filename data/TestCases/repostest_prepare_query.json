@@ -1,0 +1,9 @@
+{
+    "functionName": "test_prepare_query",
+    "className": null,
+    "fileName": "/mavrix93_&_LightCurvesClassifier/test_&_cli_&_test_cli.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "if os.path.exists('/tmp/query_ogle.txt'):\n    os.remove('/tmp/query_ogle.txt')\ncmd = (\n    'lcc prepare_query -o query_ogle.txt  -p starid -r 1:100 -p field_num -r 1:10 -p target -r lmc -f q'\n    )\nsys.argv = cmd.split()\nconfig = mock.Mock()\nconfig.TUN_PARAMS = '/tmp'\nconfig.QUERIES = '/tmp'\nprepare_query(config)\nassert os.path.exists('/tmp/query_ogle.txt')\n"
+}

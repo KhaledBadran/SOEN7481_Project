@@ -1,0 +1,9 @@
+{
+    "functionName": "test_process_request_darksky_failed",
+    "className": "TestWeather",
+    "fileName": "/lukeWaninger_&_GSCAP/tests_&_test_weather.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "lat = np.round(self.lat, 1)\nlon = np.round(self.lon, 1)\nkey = wthr.CONFIG['DarkSkyAPI']\nfor url in [f'https://api.darksky.net/forecast/{key}/32.4,-84.9,1115319600',\n    f'https://api.darksky.net/forecast/{key}/32.4,-84.9,1115294400']:\n    responses.add(responses.GET, url, status=404)\nproqu, reqque, resque = mul.Queue(), mul.Queue(), mul.Queue()\nreq = wthr.WeatherRequest(lat=lat, lon=lon, date=self.day, zipcode=None)\nargs = req, proqu, reqque, resque\nresque.put(dict(pid=os.getpid(), response=None))\nt = wthr.process_request(args)\nself.assertTrue(all(c in t.keys() for c in ['report', 'hits', 'misses']))\nself.assertTrue(isinstance(t['report'], pd.DataFrame))\nfor c in t['report'].columns:\n    if c in ['date', 'lat', 'lon']:\n        self.assertTrue(all([(not b) for b in pd.isnull(t['report'][c])]))\n    else:\n        self.assertTrue(all(pd.isnull(t['report'][c])))\nresponses.activate"
+}

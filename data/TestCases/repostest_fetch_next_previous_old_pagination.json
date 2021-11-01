@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fetch_next_previous_old_pagination",
+    "className": null,
+    "fileName": "/halcy_&_Mastodon.py/tests_&_test_pagination.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with vcr.use_cassette('test_fetch_next_previous.yaml', cassette_library_dir\n    ='tests/cassettes_old_pagination', record_mode='none'):\n    account = api.account_verify_credentials()\n    with many_statuses(api):\n        statuses = api.account_statuses(account['id'], limit=5)\n        next_statuses = api.fetch_next(statuses)\n        assert next_statuses\n        previous_statuses = api.fetch_previous(next_statuses)\n        assert previous_statuses\n"
+}

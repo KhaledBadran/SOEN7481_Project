@@ -1,0 +1,9 @@
+{
+    "functionName": "test_new_variations",
+    "className": "TestStats",
+    "fileName": "/SimGus_&_Chatette/tests_&_unit-testing_&_test_statistics.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "instance = Stats.reset_instance()\nassert instance.nb_variation_units == 0\nassert instance.nb_variation_intents == 0\nassert instance.nb_slots_declared == 0\nassert instance.nb_aliases_declared == 0\ninstance.new_variation_unit_declared(UnitType.intent)\nassert instance.nb_variation_units == 1\nassert instance.nb_variation_intents == 1\ninstance.new_variation_unit_declared(UnitType.slot)\nassert instance.nb_variation_units == 2\nassert instance.nb_variation_intents == 1\ninstance.new_variation_unit_declared(UnitType.alias)\nassert instance.nb_variation_units == 3\nassert instance.nb_variation_aliases == 1\nwith pytest.raises(TypeError):\n    instance.new_variation_unit_declared('invalid')\n"
+}

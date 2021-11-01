@@ -1,0 +1,9 @@
+{
+    "functionName": "test_stats_calculate",
+    "className": null,
+    "fileName": "/ocaballeror_&_Lyricfetch/lyricfetch_&_tests_&_test_stats.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Check the calculations of all the parameters in `Stats.calculate()`.\n    \"\"\"\nstats = Stats()\nstats.add_result(azlyrics, True, 1)\nstats.add_result(azlyrics, True, 1)\nstats.add_result(azlyrics, True, 1)\nstats.add_result(azlyrics, False, 1)\nstats.add_result(metrolyrics, False, 2)\nstats.add_result(metrolyrics, False, 2)\nstats.add_result(metrolyrics, False, 2)\ncalc = stats.calculate()\nassert calc == {'best': ('azlyrics', 3, 75), 'worst': ('metrolyrics', 0, 0),\n    'fastest': ('azlyrics', 1), 'slowest': ('metrolyrics', 2), 'found': 3,\n    'notfound': 4, 'total_time': 10}\n"
+}

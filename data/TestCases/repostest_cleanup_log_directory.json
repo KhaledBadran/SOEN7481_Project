@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cleanup_log_directory",
+    "className": null,
+    "fileName": "/EVEprosper_&_ProsperCommon/tests_&_test_prosper_logging.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test0: clean up testing log directory.  Only want log-under-test\"\"\"\nif log_builder_obj:\n    log_builder_obj.close_handles()\nlog_list = listdir(LOG_PATH)\nfor log_file in log_list:\n    if '.log' in log_file:\n        log_abspath = path.join(LOG_PATH, log_file)\n        if not platform.system() == 'Windows':\n            remove(log_abspath)\n"
+}

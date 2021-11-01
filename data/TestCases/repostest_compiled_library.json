@@ -1,0 +1,9 @@
+{
+    "functionName": "test_compiled_library",
+    "className": "TestSubDirectory",
+    "fileName": "/cournape_&_Bento/bento_&_commands_&_tests_&_test_sub_directory.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test sub_directory support for C compiled libraries.\"\"\"\nbento_info = \"\"\"Name: foo\n\nLibrary:\n    SubDirectory: lib\n    CompiledLibrary: foo\n        Sources: src/foo.c\n\"\"\"\nr_section = InstalledSection.from_source_target_directories(\n    'compiled_libraries', 'foo', '$_srcrootdir/.', '$sitedir/', ['libfoo.a'])\nr_sections = {'compiled_libraries': {'foo': r_section}}\nself._test_installed_sections(bento_info, r_sections)\nrequire_c_compiler('yaku')"
+}

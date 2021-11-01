@@ -1,0 +1,9 @@
+{
+    "functionName": "test_source_competence_exponential",
+    "className": null,
+    "fileName": "/Menelau_&_DESlib/deslib_&_tests_&_des_&_test_probabilistic.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "exp_test = Exponential()\nexp_test.n_classifiers_ = 1\nexp_test.dsel_scores_ = np.array([[[0.5, 0.5], [1.0, 0.0], [0.0, 1.0]]]\n    ).reshape(3, 1, 2)\nexp_test.DSEL_target_ = [1, 1, 1]\nexp_test.n_classes_ = 2\nexp_test.n_samples_ = 3\nC_src = exp_test.source_competence()\nexpected = np.array([[0.0], [-1.0], [1.0]])\nassert np.allclose(C_src, expected, atol=0.01)\n"
+}

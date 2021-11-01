@@ -1,0 +1,9 @@
+{
+    "functionName": "axisChecker",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Marray.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Checks the axis provided in numpy functions. Returns axis decremented by one and boolean if 0 is in original axis.\"\"\"\nif not axis is None:\n    try:\n        ax = np.asarray(axis)\n    except TypeError:\n        if axis == 0:\n            returnAxis = None\n            returnBool = True\n        else:\n            returnAxis = axis\n            returnBool = False\n    else:\n        try:\n            _ = len(ax)\n        except TypeError:\n            returnAxis = axis - 1\n        else:\n            returnAxis = tuple([(a - 1) for a in ax if a != 0])\n        returnBool = 0 in ax\nelse:\n    returnAxis = axis\n    returnBool = False\nreturn returnAxis, returnBool\n"
+}

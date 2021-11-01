@@ -1,0 +1,9 @@
+{
+    "functionName": "_set_backend",
+    "className": null,
+    "fileName": "/nipy_&_PySurfer/surfer_&_tests_&_test_viz.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Use testing backend for Windows.\"\"\"\nonly_test = sys.platform == 'win32' or (os.getenv('TRAVIS', 'false') ==\n    'true' and sys.platform == 'linux') and sys.version[0] == '3'\nif backend is None:\n    backend = 'test' if only_test else 'auto'\nif only_test and backend != 'test':\n    raise SkipTest('non-testing backend crashes on Windows and Travis Py3k')\nmlab.options.backend = backend\n"
+}

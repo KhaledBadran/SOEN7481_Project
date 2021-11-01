@@ -1,0 +1,9 @@
+{
+    "functionName": "in_hull_volume",
+    "className": "DelaunayGeometry",
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_materials_&_VoronoiFibers.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        Work out the voxels inside the convex hull of the voronoi vertices of\n        each pore\n        \"\"\"\ni = self.network['pore.internal']\ns = self.network['pore.surface']\nd = self.network['pore.delaunay']\nPs = self.network.pores()[np.logical_and(d, np.logical_or(i, s))]\ninds = self.network._map(ids=self['pore._id'][Ps], element='pore', filtered\n    =True)\nself._get_fiber_image(inds)\nhull_image = np.ones_like(self._fiber_image, dtype=np.uint16) * -1\nself._hull_image = hull_image\nfor pore in Ps:\n    logger.info('Processing Pore: ' + str(pore + 1) + ' of ' + str(len(Ps)))\n    verts = self['pore.vertices'][pore]\n    verts = np.asarray(unique_list(np.around(verts, 6)))\n    verts /= self.network.resolution\n    self.inhull(verts, pore)\nmax_h = ndimage.maximum_filter(self._hull_image, size=2)\nmask = self._hull_image == -1\nself._hull_image[mask] = max_h[mask]\nself._process_pore_voxels()\n"
+}

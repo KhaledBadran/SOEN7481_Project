@@ -1,0 +1,9 @@
+{
+    "functionName": "test_label_encoder_integration_sklearn_ensembles_not_encoding",
+    "className": null,
+    "fileName": "/Menelau_&_DESlib/deslib_&_tests_&_test_des_integration.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "rng = np.random.RandomState(123456)\nX_dsel, X_test, X_train, y_dsel, y_test, y_train = load_dataset(['yes',\n    'no'], rng)\npool_classifiers = AdaBoostClassifier(n_estimators=10, random_state=rng)\npool_classifiers.fit(X_train, y_train)\nknorau = KNORAU(pool_classifiers)\nknorau.fit(X_dsel, y_dsel)\nassert np.isclose(knorau.score(X_test, y_test), 0.9521276595744681)\n"
+}

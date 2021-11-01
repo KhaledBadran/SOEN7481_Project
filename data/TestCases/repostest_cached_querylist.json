@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cached_querylist",
+    "className": "TestMMObjectViews",
+    "fileName": "/Axiologue_&_DjangoRestMultipleModels/tests_&_test_object_view.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "view = CachedQueryView.as_view()\nrequest = factory.get('/Julius-Caesar')\nwith self.assertNumQueries(2):\n    response = view(request)\nwith self.assertNumQueries(0):\n    response = view(request)\nself.assertEqual(response.status_code, status.HTTP_200_OK)\nself.assertEqual(response.data, {'Play': [{'title': 'Romeo And Juliet',\n    'genre': 'Tragedy', 'year': 1597}, {'title':\n    \"A Midsummer Night's Dream\", 'genre': 'Comedy', 'year': 1600}, {'title':\n    'Julius Caesar', 'genre': 'Tragedy', 'year': 1623}, {'title':\n    'As You Like It', 'genre': 'Comedy', 'year': 1623}], 'Poem': [{'title':\n    \"Shall I compare thee to a summer's day?\", 'style': 'Sonnet'}, {'title':\n    'As a decrepit father takes delight', 'style': 'Sonnet'}]})\n"
+}

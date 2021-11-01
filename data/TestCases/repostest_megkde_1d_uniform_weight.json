@@ -1,0 +1,9 @@
+{
+    "functionName": "test_megkde_1d_uniform_weight",
+    "className": null,
+    "fileName": "/samreay_&_ChainConsumer/tests_&_test_kde.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "np.random.seed(0)\ndata = np.random.normal(loc=0, scale=1.0, size=2000)\nxs = np.linspace(-3, 3, 100)\nys = MegKDE(data, weights=np.ones(2000)).evaluate(xs)\ncs = ys.cumsum()\ncs /= cs[-1]\ncs[0] = 0\nsamps = interp1d(cs, xs)(np.random.uniform(size=10000))\nmu, std = norm.fit(samps)\nassert np.isclose(mu, 0, atol=0.1)\nassert np.isclose(std, 1.0, atol=0.1)\n"
+}

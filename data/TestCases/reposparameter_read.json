@@ -1,0 +1,9 @@
+{
+    "functionName": "parameter_read",
+    "className": null,
+    "fileName": "/open-source-economics_&_OG-USA/regression_&_test_regression.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "ref_idx = request.param\nif ref_idx == 'baseline':\n    return safe_read_pickle(REG_BASELINE + '/model_params.pkl'\n        ), safe_read_pickle(BASELINE + '/model_params.pkl')\nelse:\n    return safe_read_pickle(REG_REFORM.format(ref_idx=request.param) +\n        '/model_params.pkl'), safe_read_pickle(REFORM.format(ref_idx=\n        request.param) + '/model_params.pkl')\npytest.fixture(scope='module', params=REF_IDXS + ['baseline'])"
+}

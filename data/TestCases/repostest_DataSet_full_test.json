@@ -1,0 +1,9 @@
+{
+    "functionName": "test_DataSet_full_test",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_DataSet.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "import MJOLNIR.Data.Viewer3D\nimport matplotlib.pyplot as plt\nimport os\nplt.ioff()\nDataFile = ['Data/camea2018n000136.hdf']\ndataset = DataSet(dataFiles=DataFile)\ndataset.convertDataFile(saveLocation='Data/', saveFile=True)\nimport matplotlib\nmatplotlib.use('Agg')\nData, bins = dataset.binData3D(0.08, 0.08, 0.25)\nwarnings.simplefilter('ignore')\nIntensity = np.divide(Data[0] * Data[3], Data[1] * Data[2])\nwarnings.simplefilter('once')\nviewer = MJOLNIR.Data.Viewer3D.Viewer3D(Intensity, bins)\nviewer = dataset.View3D(0.08, 0.08, 0.25)\nif pythonVersion == 3:\n    viewer.ax.set_xticks_base(0.5)\n    viewer.ax.set_yticks_base(0.5)\nviewer.setProjection(0)\nviewer.setPlane(4)\ndel viewer\nviewer = dataset.View3D(0.08, 0.08, 0.25, rlu=False)\nos.remove('Data/camea2018n000137.nxs')\ndel viewer\nplt.close('all')\n"
+}

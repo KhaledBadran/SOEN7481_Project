@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gru_grad",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_recurrent.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "num_batch, seq_len, n_features = 5, 3, 10\nl_inp = InputLayer((num_batch, seq_len, n_features))\nl_gru = GRULayer(l_inp, num_units=num_units)\noutput = helper.get_output(l_gru)\ng = T.grad(T.mean(output), lasagne.layers.get_all_params(l_gru))\nassert isinstance(g, (list, tuple))\npytest.mark.parametrize('num_units', (6, 1))"
+}

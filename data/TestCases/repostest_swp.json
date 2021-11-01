@@ -1,0 +1,9 @@
+{
+    "functionName": "test_swp",
+    "className": null,
+    "fileName": "/Silmathoron_&_NNGT/testing_&_test_analysis.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Check small-world propensity \"\"\"\nnum_nodes = 500\nk_latt = 16\nexpected = 1 - 1 / np.sqrt(2)\nweights = {'distribution': 'uniform', 'lower': 0.5, 'upper': 5}\nfor directed in (True, False):\n    for w in (None, weights):\n        for p in (0, 1):\n            use_weights = None if w is None else 'weight'\n            g = ng.watts_strogatz(k_latt, p, nodes=num_nodes, directed=\n                directed, weights=w)\n            if w is None:\n                assert np.isclose(na.small_world_propensity(g, use_diameter\n                    =True, weights=use_weights), expected, atol=0.01)\n            else:\n                assert np.isclose(na.small_world_propensity(g, use_diameter\n                    =True, weights=use_weights), expected, atol=0.02)\ng = ng.watts_strogatz(k_latt, 0, nodes=num_nodes, directed=True)\nassert np.isclose(na.small_world_propensity(g, use_global_clustering=False),\n    expected, atol=0.01)\nassert np.isclose(na.small_world_propensity(g, use_diameter=False),\n    expected, atol=0.01)\nfor directed in (False, True):\n    g = ng.newman_watts(10, 0.03, nodes=num_nodes, directed=directed)\n    na.small_world_propensity(g, use_diameter=True, weights=use_weights)\npytest.mark.mpi_skippytest.mark.skipif(nngt_backend, reason='Not implemented')"
+}

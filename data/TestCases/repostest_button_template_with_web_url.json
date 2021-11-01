@@ -1,0 +1,9 @@
+{
+    "functionName": "test_button_template_with_web_url",
+    "className": "TestButtonTemplate",
+    "fileName": "/p1r-a-t3_&_FB_Bot/Tests_&_test_button_template.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Button Template test with Web URL buttons with default. \n        \"\"\"\nbuttons = list()\nfor _ in range(0, 3):\n    title = 'Test 1 - {}'.format(_)\n    buttons.append(self.button.create_url_button(title, self.url))\ntitle_text = 'test_button_template_with_web_url - Test 1 - {}'.format(_)\nbutton_payload = self.template.button_template(title_text, buttons)\nstatus_code = self.facebook.send_message(button_payload)\nself.assertEqual(status_code, 200, 'test_button_template - web_url - Test 1')\n"
+}

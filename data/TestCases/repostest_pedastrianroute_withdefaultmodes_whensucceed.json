@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pedastrianroute_withdefaultmodes_whensucceed",
+    "className": "RoutingApiTest",
+    "fileName": "/abdullahselek_&_HerePy/tests_&_test_routing_api.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with codecs.open('testdata/models/routing_pedestrian.json', mode='r',\n    encoding='utf-8') as f:\n    expectedResponse = f.read()\nresponses.add(responses.GET,\n    'https://route.ls.hereapi.com/routing/7.2/calculateroute.json',\n    expectedResponse, status=200)\nresponse = self._api.pedastrian_route([11.0, 12.0], [22.0, 23.0])\nself.assertTrue(response)\nself.assertIsInstance(response, herepy.RoutingResponse)\nresponses.activate"
+}

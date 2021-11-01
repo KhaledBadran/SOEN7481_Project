@@ -1,0 +1,9 @@
+{
+    "functionName": "test_text_file_range_request_single_part_if_range_handling",
+    "className": null,
+    "fileName": "/RobertoPrevato_&_BlackSheep/tests_&_test_files_serving.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "file_path = _get_file_path('example.txt')\ninfo = FileInfo.from_path(file_path)\nresponse = get_response_for_file(Request('GET', b'/example', [(b'Range',\n    range_value), (b'If-Range', info.etag.encode() + (b'' if matches else\n    b'xx'))]), file_path, 1200)\nexpected_status = 206 if matches else 200\nassert response.status == expected_status\nif not matches:\n    body = await response.read()\n    with open(file_path, mode='rb') as actual_file:\n        assert body == actual_file.read()\npytest.mark.asynciopytest.mark.parametrize('range_value,matches', [[b'bytes=0-10', True], [\n    b'bytes=0-10', False], [b'bytes=10-20', True], [b'bytes=10-20', False]])"
+}

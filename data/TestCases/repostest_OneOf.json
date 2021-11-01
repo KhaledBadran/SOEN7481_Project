@@ -1,0 +1,9 @@
+{
+    "functionName": "test_OneOf",
+    "className": null,
+    "fileName": "/hdoupe_&_ParamTools/paramtools_&_tests_&_test_validate.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "choices = ['allowed1', 'allowed2']\noneof = OneOf(choices=choices)\nassert oneof('allowed1') == 'allowed1'\nassert oneof(choices) == choices\nassert oneof([choices]) == [choices]\nwith pytest.raises(ValidationError):\n    oneof('notallowed')\nwith pytest.raises(ValidationError):\n    oneof(['notallowed', 'allowed1'])\nwith pytest.raises(ValidationError):\n    oneof([[choices]])\nassert oneof('allowed1')\nassert oneof({'value': 'allowed1'}, is_value_object=True)\nwith pytest.raises(ValidationError):\n    oneof('notallowed')\nwith pytest.raises(ValidationError):\n    oneof({'value': 'notallowed'}, is_value_object=True)\n"
+}

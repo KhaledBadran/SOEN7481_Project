@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_individual_predictions",
+    "className": null,
+    "fileName": "/CyberReboot_&_NetworkML/tests_&_test_algorithms_host_footprint.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "le_classes = ['asomething', 'bsomething']\nle = preprocessing.LabelEncoder()\nle.fit(le_classes)\nfilename = ['firstfile']\nhost_key = np.array(['mac1'])\ntshark_srcips = np.array([\"['1.1.1.1']\"])\nframe_epoch = None\ninstance = HostFootprint()\nassert instance.get_individual_predictions([[0.6, 0.7]], le, filename,\n    host_key, tshark_srcips, frame_epoch) == {'firstfile': [{'top_role':\n    'bsomething', 'role_list': [('bsomething', 0.7), ('asomething', 0.6)],\n    'source_ip': '1.1.1.1', 'source_mac': 'mac1'}]}\nassert instance.get_individual_predictions([[0.2, 0.1]], le, filename,\n    host_key, tshark_srcips, frame_epoch) == {'firstfile': [{'top_role':\n    'Unknown', 'role_list': [('asomething', 0.2), ('bsomething', 0.1)],\n    'source_ip': '1.1.1.1', 'source_mac': 'mac1'}]}\n"
+}

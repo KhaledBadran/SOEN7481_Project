@@ -1,0 +1,9 @@
+{
+    "functionName": "test_handle_keys",
+    "className": null,
+    "fileName": "/SimLeek_&_CV_PubSubs/tests_&_window_&_test_subscriber_windows.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sub_win.SubscriberWindows.FRAME_DICT = {}\nwith mock.patch.object(cv2, 'namedWindow'), mock.patch(\n    'displayarray.window.subscriber_windows.window_commands'\n    ) as mock_win_cmd, mock.patch(\n    'displayarray.window.subscriber_windows.subscriber_dictionary.stop_cam'\n    ) as mock_stop, mock.patch(\n    'displayarray.window.subscriber_windows.warnings'\n    ) as mock_warnings, mock.patch(\n    'displayarray.window.subscriber_windows.RuntimeWarning'\n    ) as mock_runtime, mock.patch.object(cv2, 'destroyWindow') as mock_destroy:\n    mock_runtime.return_value = mock_runtime\n    sw = sub_win.SubscriberWindows()\n    sw.handle_keys(ord('h'))\n    mock_win_cmd.key_pub.publish.assert_called_once_with('h')\n\n    def bad_key(k):\n        raise ValueError('Bad Key')\n    mock_win_cmd.key_pub.publish = bad_key\n    sw.handle_keys(ord('b'))\n    mock_runtime.assert_called_once_with(\n        f\"Unknown key code: [{ord('b')}]. Please report to the displayarray issue page.\"\n        )\n    mock_warnings.warn.assert_called_once_with(mock_runtime)\n    assert sw.ESC_KEY_CODES == [27]\n    ret = sw.handle_keys(27)\n    mock_destroy.assert_called_once_with('displayarray (press ESC to quit)')\n    assert sw.exited is True\n    mock_win_cmd.quit.assert_called()\n    mock_stop.assert_called_with('0')\n    assert ret == 'quit'\n"
+}

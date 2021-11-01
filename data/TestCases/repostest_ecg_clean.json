@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ecg_clean",
+    "className": null,
+    "fileName": "/neuropsychology_&_NeuroKit/tests_&_tests_ecg.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sampling_rate = 1000\nnoise = 0.05\necg = nk.ecg_simulate(sampling_rate=sampling_rate, noise=noise)\necg_cleaned_nk = nk.ecg_clean(ecg, sampling_rate=sampling_rate, method=\n    'neurokit')\nassert ecg.size == ecg_cleaned_nk.size\nfft_raw = np.abs(np.fft.rfft(ecg))\nfft_nk = np.abs(np.fft.rfft(ecg_cleaned_nk))\nfreqs = np.fft.rfftfreq(ecg.size, 1 / sampling_rate)\nassert np.sum(fft_raw[freqs < 0.5]) > np.sum(fft_nk[freqs < 0.5])\necg_biosppy = nk.ecg_clean(ecg, sampling_rate=sampling_rate, method='biosppy')\noriginal, _, _ = biosppy.tools.filter_signal(signal=ecg, ftype='FIR', band=\n    'bandpass', order=int(0.3 * sampling_rate), frequency=[3, 45],\n    sampling_rate=sampling_rate)\nassert np.allclose((ecg_biosppy - original).mean(), 0, atol=1e-06)\n"
+}

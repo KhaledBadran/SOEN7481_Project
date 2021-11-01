@@ -1,0 +1,9 @@
+{
+    "functionName": "test_no_file",
+    "className": "TestLoadLocal",
+    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_test_load_local.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test load local infile when the file does not exist\"\"\"\nconn = self.connect()\nc = conn.cursor()\nc.execute('CREATE TABLE test_load_local (a INTEGER, b INTEGER)')\ntry:\n    self.assertRaises(OperationalError, c.execute,\n        \"LOAD DATA LOCAL INFILE 'no_data.txt' INTO TABLE test_load_local fields terminated by ','\"\n        )\nfinally:\n    c.execute('DROP TABLE test_load_local')\n    c.close()\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "batched_epoch_weights",
+    "className": null,
+    "fileName": "/mozilla_&_CANOSP-2019/tests_&_test_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "model = client._model.get_clone(trained=True)\nmodel.set_weights(init_coef, init_int)\nfor _ in range(num_epochs):\n    for bi in batch_ind:\n        model.minibatch_update(client._features[bi], client._labels[bi])\nreturn model.get_weights()\n"
+}

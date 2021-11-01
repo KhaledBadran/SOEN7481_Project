@@ -1,0 +1,9 @@
+{
+    "functionName": "test_expression_to_evaluate",
+    "className": null,
+    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_utilities.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from _pydevd_bundle.pydevd_vars import _expression_to_evaluate\nassert _expression_to_evaluate(b'expr') == b'expr'\nassert _expression_to_evaluate(b'  expr') == b'expr'\nassert _expression_to_evaluate(b'for a in b:\\n  foo') == b'for a in b:\\n  foo'\nassert _expression_to_evaluate(b'  for a in b:\\n  foo') == b'for a in b:\\nfoo'\nassert _expression_to_evaluate(b'  for a in b:\\nfoo') == b'  for a in b:\\nfoo'\nassert _expression_to_evaluate(b'\\tfor a in b:\\n\\t\\tfoo'\n    ) == b'for a in b:\\n\\tfoo'\nif IS_PY2:\n    assert _expression_to_evaluate(u'  expr') == codecs.BOM_UTF8 + b'expr'\nelse:\n    assert _expression_to_evaluate(u'  expr') == u'expr'\n    assert _expression_to_evaluate(u'  for a in expr:\\n  pass'\n        ) == u'for a in expr:\\npass'\n"
+}

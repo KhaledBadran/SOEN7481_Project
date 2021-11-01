@@ -1,0 +1,9 @@
+{
+    "functionName": "test_normalize_modules",
+    "className": null,
+    "fileName": "/bio-phys_&_MDBenchmark/mdbenchmark_&_tests_&_mdengines_&_test_init.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that normalize modules works as expected.\"\"\"\nnormalize_modules(modules=['gromacs/2016.4'], skip_validation=True)\nout, err = capsys.readouterr()\nassert out == 'WARNING Not performing module name validation.\\n'\nnormalize_modules(modules=['gromacs/2016.4'], skip_validation=False)\nout, err = capsys.readouterr()\nassert out == \"\"\"WARNING Cannot locate modules available on this host. Not performing module name validation.\n\"\"\"\nwith tmpdir.as_cwd():\n    for k, v in DIR_STRUCTURE.items():\n        for k2, v2 in v.items():\n            os.makedirs(os.path.join(k, k2))\n            for v3 in v2:\n                open(os.path.join(k, k2, v3), 'a').close()\n    dirs = ':'.join([os.path.join(os.getcwd(), x) for x in os.listdir(os.\n        getcwd())])\n    monkeypatch.setenv('MODULEPATH', dirs)\n    output = \"\"\"WARNING We have problems finding all of your requested modules on this host.\nWe were not able to find the following modules for MD engine gromacs: doesnotexist.\nAvailable modules are:\ngromacs/2016.4\ngromacs/2018.1\ngromacs/5.1.4-plumed2.3\n\n\"\"\"\n    normalize_modules(modules=['gromacs/doesnotexist'], skip_validation=False)\n    out, err = capsys.readouterr()\n    assert out == output\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_failure_trial_to_json",
+    "className": null,
+    "fileName": "/Neuraxio_&_Neuraxle/testing_&_metaopt_&_test_trial.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "hp = HyperparameterSamples({'a': 2})\ntrial = Trial(hyperparams=hp, main_metric_name='mse')\nwith trial:\n    trial_split = given_failed_trial_split(trial)\ntrial_json = trial.to_json()\nassert trial_json['status'] == TRIAL_STATUS.FAILED.value\nassert trial_json['error'] == str(trial_split.error)\nassert trial_json['error_traceback'] == EXPECTED_ERROR_TRACEBACK\nassert trial_json['main_metric_name'] == trial.main_metric_name\nassert then_failed_validation_split_json_is_valid(trial_json[\n    'validation_splits'][0], trial_split=trial_split)\nstart_time = datetime.datetime.strptime(trial_json['start_time'],\n    TRIAL_DATETIME_STR_FORMAT)\nend_time = datetime.datetime.strptime(trial_json['end_time'],\n    TRIAL_DATETIME_STR_FORMAT) + datetime.timedelta(hours=1)\nassert start_time < end_time\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_compute_optimal_chunk_size",
+    "className": null,
+    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_core_&_tests_&_test_map_processing.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Basic functionality of the '_compute_optimal_chunk_size'\"\"\"\nres = _compute_optimal_chunk_size(chunk_pixels=n_pixels, data_chunksize=\n    data_chunksize, data_shape=data_shape, n_chunks_min=4)\nassert res == chunk_optimal, \"Computed optimal chunks size doesn't match the expected\"\nres = _compute_optimal_chunk_size(n_pixels, data_chunksize, data_shape, 4)\nassert res == chunk_optimal, \"Computed optimal chunks size doesn't match the expected\"\npytest.mark.parametrize('data_chunksize, chunk_optimal, n_pixels, data_shape',\n    [((3, 5), (12, 10), 100, (20, 20)), ((5, 3), (10, 12), 100, (20, 20)),\n    ((2, 5), (10, 10), 100, (20, 20)), ((11, 13), (11, 13), 100, (20, 20)),\n    ((2, 2), (6, 2), 10, (50, 2)), ((2, 2), (2, 6), 10, (2, 50)), ((25, 25),\n    (20, 20), 400, (20, 20)), ((25, 25), (20, 20), 500, (20, 20)), ((5, 2),\n    (10, 10), 400, (20, 20)), ((15, 15), (15, 15), 400, (20, 20))])"
+}

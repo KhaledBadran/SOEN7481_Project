@@ -1,0 +1,9 @@
+{
+    "functionName": "test_correct_reproduce",
+    "className": null,
+    "fileName": "/RI-imaging_&_ODTbrain/tests_&_test_apple.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "myframe = sys._getframe()\nsino, angles = create_test_sino_3d(Nx=10, Ny=10)\np = get_test_parameter_set(1)[0]\nsryt = odtbrain.sinogram_as_rytov(uSin=sino, u0=1, align=False)\nf = odtbrain.backpropagate_3d(sryt, angles, padval=0, dtype=np.float64,\n    copy=False, **p)\nfc = odtbrain.apple.correct(f=f, res=p['res'], nm=p['nm'], enforce_envelope\n    =0.95, max_iter=100, min_diff=0.01)\nfo = cutout(fc)\nfo = np.array(fo, dtype=np.complex128)\nif WRITE_RES:\n    write_results(myframe, fo)\ndata = fo.flatten().view(float)\nassert np.allclose(data, get_results(myframe))\n"
+}

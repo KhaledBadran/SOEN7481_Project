@@ -1,0 +1,9 @@
+{
+    "functionName": "dropout_locations",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_layers_&_noise.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Convenience function to drop full locations of feature maps.\n\n    Adds a :class:`DropoutLayer` that sets feature map locations (i.e., pixels\n    or voxels) to zero, across all channels, with probability p.\n\n    Parameters\n    ----------\n    incoming : a :class:`Layer` instance or a tuple\n        the layer feeding into this layer, or the expected input shape\n    *args, **kwargs\n        Any additional arguments and keyword arguments are passed on to the\n        :class:`DropoutLayer` constructor, except for `shared_axes`.\n\n    Returns\n    -------\n    layer : :class:`DropoutLayer` instance\n        The dropout layer with `shared_axes` set to drop locations.\n    \"\"\"\nkwargs['shared_axes'] = 1,\nreturn DropoutLayer(incoming, *args, **kwargs)\n"
+}

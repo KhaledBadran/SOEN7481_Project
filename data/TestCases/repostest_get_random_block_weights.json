@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_random_block_weights",
+    "className": null,
+    "fileName": "/viebboy_&_PyGOP/test_&_utility_&_test_gop_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "gop_weights = [np.random.rand(1, 10, 20), np.random.rand(20)]\nbn_weights = [np.random.rand(20)] * 4\noutput_weights = [np.random.rand(100, 3), np.random.rand(3)]\nnew_gop_weights, new_bn_weights, new_output_weights = (gop_utils.\n    get_random_block_weights([gop_weights, bn_weights, output_weights]))\nassert new_gop_weights[0].shape == gop_weights[0].shape\nassert len(new_gop_weights) == 2\nassert new_bn_weights[0].shape == (20,)\nassert new_output_weights[0].shape[0] == 100 + 20\n"
+}

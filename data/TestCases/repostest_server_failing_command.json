@@ -1,0 +1,9 @@
+{
+    "functionName": "test_server_failing_command",
+    "className": null,
+    "fileName": "/PRIArobotics_&_HedgehogServer/tests_&_test_server.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "async def handler_callback(server, ident, msg):\n    raise FailedCommandError\nasync with conn_req(handler_dict={io.Action: handler_callback}) as socket:\n    await assertReplyReq(socket, io.Action(0, io.INPUT_FLOATING), ack.\n        FAILED_COMMAND)\n    await trio.sleep(0.05)\npytest.mark.trio"
+}

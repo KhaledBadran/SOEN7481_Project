@@ -1,0 +1,9 @@
+{
+    "functionName": "_create_file_with_ref_standards",
+    "className": null,
+    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_core_&_tests_&_test_quant_analysis.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Create a file with user-defined standards based on ``_standard_data_sample[0]``.\n    The file contains the descriptions of 2 standards with identical sets of elements/compounds\n    with slightly different densities.\n\n    The created file is placed at the standard default location ``<wd>/.pyxrf/quantiative_standards.yaml``.\n    Working directory (typically ``~``) is set to temporary directory for using with PyTest.\n\n    It is expected that the dataset will be processed using incident energy value 12.0 keV.\n    \"\"\"\nsd = _standard_data_sample[0]\nfile_path = os.path.join(wd, '.pyxrf', 'quantitative_standards.yaml')\nstandard_data = []\nfor n in range(2):\n    sd_copy = copy.deepcopy(sd)\n    sd_copy['serial'] += f'{n}'\n    sd_copy['name'] = f\"Test reference standard #{sd_copy['serial']}\"\n    d = sd_copy['compounds']\n    total_density = 0\n    for c in d:\n        d[c] += np.random.rand() * 2 - 1\n        total_density += d[c]\n    sd_copy['density'] = total_density\n    standard_data.append(sd_copy)\nsave_xrf_standard_yaml_file(file_path=file_path, standard_data=standard_data)\nimg_list = []\neline_lists = [('Ni_K', 'Ga_K', 'S_K'), ('S_K', 'Cr_K', 'Ni_K')]\nfor elist in eline_lists:\n    img_list.append(gen_xrf_map_dict(elines=elist))\nreturn file_path, img_list\n"
+}

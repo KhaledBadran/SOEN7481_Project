@@ -1,0 +1,9 @@
+{
+    "functionName": "saveProxyLog",
+    "className": null,
+    "fileName": "/FaradayRF_&_Faraday-Software/faraday_&_proxy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Save proxy log database into a new file\n\n    :param name: Name of file to save data into (should be .db)\n    :param config: Proxy ConfigParser object from proxy.ini\n    :return: None\n    \"\"\"\nlog = config.get('DATABASE', 'filename')\noldpath = os.path.join(faradayHelper.userPath, 'lib', log)\nnewpath = os.path.join(faradayHelper.userPath, 'lib', name)\ntry:\n    shutil.move(oldpath, newpath)\n    sys.exit(0)\nexcept shutil.Error as e:\n    logger.error(e)\nexcept IOError as e:\n    logger.error(e)\n"
+}

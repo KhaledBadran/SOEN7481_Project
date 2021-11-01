@@ -1,0 +1,9 @@
+{
+    "functionName": "test_plot_successive_halving",
+    "className": null,
+    "fileName": "/tvdboom_&_ATOM/tests_&_test_plots.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Assert that the plot_successive_halving method work as intended.\"\"\"\ntrainer = TrainerRegressor(['ols', 'ridge'], metric='max_error')\ntrainer.run(reg_train, reg_test)\npytest.raises(PermissionError, trainer.ols.plot_successive_halving)\nsh = SuccessiveHalvingRegressor(['ols', 'ridge'], metric='max_error', bagging=4\n    )\npytest.raises(NotFittedError, sh.plot_successive_halving)\nsh.run(reg_train, reg_test)\npytest.raises(ValueError, sh.plot_successive_halving, models='unknown')\npytest.raises(ValueError, sh.plot_successive_halving, models='BR')\npytest.raises(ValueError, sh.plot_successive_halving, metric='unknown')\npytest.raises(ValueError, sh.plot_successive_halving, metric=-1)\npytest.raises(ValueError, sh.plot_successive_halving, metric=1)\npytest.raises(ValueError, sh.plot_successive_halving, metric='roc_auc')\nsh.plot_successive_halving(models=['OLS', 'Ridge'], metric='me', filename=\n    FILE_DIR + 'sh1', display=False)\nsh.ols.plot_successive_halving(filename=FILE_DIR + 'sh2', display=False)\nassert glob.glob(FILE_DIR + 'sh1.png')\nassert glob.glob(FILE_DIR + 'sh2.png')\natom = ATOMRegressor(X_reg, y_reg, random_state=1)\natom.successive_halving('ols', metric='max_error')\natom.plot_successive_halving(filename=FILE_DIR + 'sh3', display=False)\natom.ols.plot_successive_halving(filename=FILE_DIR + 'sh4', display=False)\nassert glob.glob(FILE_DIR + 'sh3.png')\nassert glob.glob(FILE_DIR + 'sh4.png')\n"
+}

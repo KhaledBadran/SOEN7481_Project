@@ -1,0 +1,9 @@
+{
+    "functionName": "test_strict_parameter",
+    "className": null,
+    "fileName": "/max-k_&_flask-multi-redis/test_&_integration_&_test_flask_multi_redis.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that initializing with the strict parameter set to True will use\n    StrictRedis, and that False will keep using the old Redis class.\"\"\"\nredis = FlaskMultiRedis(app, strict=True)\nassert redis._redis_client is not None\nassert type(redis._redis_client).__name__ == 'StrictRedis'\nredis = FlaskMultiRedis(app, strict=False)\nassert redis._redis_client is not None\nassert type(redis._redis_client).__name__ == 'Redis'\n"
+}

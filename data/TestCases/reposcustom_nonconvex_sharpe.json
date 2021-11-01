@@ -1,0 +1,9 @@
+{
+    "functionName": "custom_nonconvex_sharpe",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_custom_objectives.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "ef = setup_efficient_frontier()\nw1 = ef.nonconvex_objective(objective_functions.sharpe_ratio,\n    objective_args=(ef.expected_returns, ef.cov_matrix), weights_sum_to_one\n    =True)\np1 = ef.portfolio_performance()\nef = setup_efficient_frontier()\nw2 = ef.max_sharpe()\np2 = ef.portfolio_performance()\nnp.testing.assert_allclose(list(w1.values()), list(w2.values()), atol=0.0002)\nassert p2[2] >= p1[2]\nef = setup_efficient_frontier()\nmin_weight, max_weight = 0.01, 0.3\nw3 = ef.nonconvex_objective(objective_functions.sharpe_ratio,\n    objective_args=(ef.expected_returns, ef.cov_matrix), constraints=[{\n    'type': 'eq', 'fun': lambda w: np.sum(w) - 1}, {'type': 'ineq', 'fun': \n    lambda w: w - min_weight}, {'type': 'ineq', 'fun': lambda w: max_weight -\n    w}])\nfor w in w3.values():\n    assert w >= min_weight - 1e-08 and w <= max_weight + 1e-08\n"
+}

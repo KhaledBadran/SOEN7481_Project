@@ -1,0 +1,9 @@
+{
+    "functionName": "test_decrypt_no_cryptographic_parameters",
+    "className": "TestKmipEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the right error is thrown when cryptographic parameters\n        are not provided with a Decrypt request.\n\n        Note: once the cryptographic parameters can be obtained from the\n              encryption key's attributes, this test should be updated to\n              reflect that.\n        \"\"\"\ne = engine.KmipEngine()\ne._data_store = self.engine\ne._data_store_session_factory = self.session_factory\ne._data_session = e._data_store_session_factory()\ne._is_allowed_by_operation_policy = mock.Mock(return_value=True)\ne._logger = mock.MagicMock()\ne._cryptography_engine.logger = mock.MagicMock()\ndecryption_key = pie_objects.SymmetricKey(enums.CryptographicAlgorithm.\n    TRIPLE_DES, 128,\n    b'\\x01#Eg\\x89\\xab\\xcd\\xef\\xf0\\xe1\\xd2\\xc3\\xb4\\xa5\\x96\\x87', [enums.\n    CryptographicUsageMask.DECRYPT])\ndecryption_key.state = enums.State.ACTIVE\ne._data_session.add(decryption_key)\ne._data_session.commit()\ne._data_session = e._data_store_session_factory()\nunique_identifier = str(decryption_key.unique_identifier)\ncryptographic_parameters = None\ndata = b'7654321 Now is the time for \\x00'\niv_counter_nonce = b'\\xfe\\xdc\\xba\\x98vT2\\x10'\npayload = payloads.DecryptRequestPayload(unique_identifier,\n    cryptographic_parameters, data, iv_counter_nonce)\nargs = payload,\nself.assertRaisesRegex(exceptions.InvalidField,\n    'The cryptographic parameters must be specified.', e._process_decrypt,\n    *args)\n"
+}

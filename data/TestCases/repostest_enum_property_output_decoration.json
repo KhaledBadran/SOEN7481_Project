@@ -1,0 +1,9 @@
+{
+    "functionName": "test_enum_property_output_decoration",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_property_factories_&_test_enum_property.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class SillyEnum(Enum):\n    a = 'aa'\nclass EnumMock(MockInstrument):\n\n    @staticmethod\n    def _output_decorator(_):\n        return 'foobar'\n    a = enum_property('MOCK:A', SillyEnum, output_decoration=_output_decorator)\nmock_instrument = EnumMock()\nmock_instrument.a = SillyEnum.a\nassert mock_instrument.value == 'MOCK:A foobar\\n'\n"
+}

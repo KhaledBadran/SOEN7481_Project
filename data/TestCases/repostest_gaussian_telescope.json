@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gaussian_telescope",
+    "className": null,
+    "fileName": "/garrettj403_&_GaussOpt/gaussopt_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" A Gaussian telescope is generated in this test. Ensure that perfect\n    coupling is found. The focal length of all mirrors = 160mm. \"\"\"\nfreq = gaussopt.Frequency(center=250, span=100, npts=101)\nidx_center = freq.idx(250)\nslen = 22.64\narad = 3.6\nhfac = 0.59\nhorn_tx = gaussopt.Horn(freq, slen, arad, hfac, comment='Trasmitting')\nhorn_rx = horn_tx.copy(comment='Receiving')\nair = gaussopt.Freespace(160)\nmirror = gaussopt.Mirror(16, units='cm')\nz_offset = horn_tx.z_offset(units='mm')[idx_center]\nair_red = gaussopt.Freespace(160 - z_offset, comment='reduced')\ncomponent_list = air_red, mirror, air, air, mirror, air_red\nsystem = gaussopt.System(horn_tx, component_list, horn_rx)\ncoupling = system.coupling()\nfor i in range(len(freq)):\n    if i == idx_center:\n        assert coupling[i] == 1.0\n    else:\n        assert coupling[i] < 1.0\n"
+}

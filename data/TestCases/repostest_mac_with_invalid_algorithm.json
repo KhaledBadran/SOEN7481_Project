@@ -1,0 +1,9 @@
+{
+    "functionName": "test_mac_with_invalid_algorithm",
+    "className": "TestCryptographyEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_crypto_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that an InvalidField error is raised when doing the MAC\n        with an invalid algorithm.\n        \"\"\"\nengine = crypto.CryptographyEngine()\nkey = b'\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00'\ndata = b'\\x00\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08\\t\\n\\x0b\\x0c\\r\\x0e\\x0f'\nargs = ['invalid', key, data]\nself.assertRaises(exceptions.InvalidField, engine.mac, *args)\n"
+}

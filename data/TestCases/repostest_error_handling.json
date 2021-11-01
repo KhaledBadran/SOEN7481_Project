@@ -1,0 +1,9 @@
+{
+    "functionName": "test_error_handling",
+    "className": null,
+    "fileName": "/tvdboom_&_ATOM/tests_&_test_basetrainer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Assert that models with errors are removed from pipeline.\"\"\"\ntrainer = TrainerClassifier(['LR', 'LDA'], n_calls=4, n_random_starts=[2, -1])\ntrainer.run(bin_train, bin_test)\nassert trainer.errors.get('LDA')\nassert 'lDA' not in trainer.models\nassert 'LDA' not in trainer.results.index\n"
+}

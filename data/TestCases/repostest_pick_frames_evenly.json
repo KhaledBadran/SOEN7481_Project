@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pick_frames_evenly",
+    "className": "WildFireFrameExtractorTester",
+    "fileName": "/frgfm_&_PyroNear/test_&_test_datasets_wildfire_frame_extractor.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "frame_min, frame_max, f_base = 100, 106, '952.mp4'\nstate = pd.Series([frame_min, frame_max, f_base], index=['stateStart',\n    'stateEnd', 'fBase'])\nframe_indexes_expected = {(2): [100, 106], (3): [100, 103, 106], (4): [100,\n    102, 104, 106]}\nfor n_frames in [2, 3, 4]:\n    frame_indexes = FrameExtractor._pick_frames(state, n_frames=n_frames,\n        allow_duplicates=False, random=False)\n    self.assertEqual(n_frames, frame_indexes.nunique())\n    self.assertListEqual(frame_indexes.tolist(), frame_indexes_expected[\n        n_frames])\n"
+}

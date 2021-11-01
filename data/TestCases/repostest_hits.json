@@ -1,0 +1,9 @@
+{
+    "functionName": "test_hits",
+    "className": "TestDatabase",
+    "fileName": "/corydodt_&_Hypy/src_&_hypy_&_test_lib.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Poke at the hits returned by a search and see if document data and\n        teaser text come out right.\n        \"\"\"\nwith self.freshenDatabase() as db:\n    cc = HCondition(u'hi-res')\n    for hit in db.search(cc):\n        self.assertEqual(str(hit),\n            \"\"\"@digest=17de33c57e358f0fc5d57cd26a08b48e\n@id=1\n@uri=1\n\nword this is my document. do you like documents? this one is hi-res.\n\"\"\"\n            )\n        self.assertEqual(hit.teaser([u'document']),\n            u'word this is my <strong>document</strong>. do you li ... ke <strong>document</strong>s? this one is hi-re ... '\n            )\n        self.assertEqual(hit.teaser([u'document'], 'rst'),\n            u'word this is my **document**. do you li ... ke **document**s? this one is hi-re ... '\n            )\n        self.assertRaises(NotImplementedError, hit.teaser, [u'document'], 'pdf'\n            )\n"
+}

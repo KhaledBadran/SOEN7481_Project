@@ -1,0 +1,9 @@
+{
+    "functionName": "test_df_correction_run_twice_with_force_flag",
+    "className": "TestDFCorrection",
+    "fileName": "/ornlneutronimaging_&_NeuNorm/tests_&_NeuNorm_&_normalizing_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"assert df corrction run more than once with force flag\"\"\"\nsample_path = self.data_path + '/tif/sample/'\nob_path = self.data_path + '/tif/ob/'\no_norm = Normalization()\no_norm.load(folder=sample_path, auto_gamma_filter=False)\no_norm.load(folder=ob_path, data_type='ob', auto_gamma_filter=False)\ndf_file_1 = self.data_path + '/tif/df/df002.tif'\ndf_file_2 = self.data_path + '/tif/df/df003.tif'\no_norm.load(file=df_file_1, data_type='df', auto_gamma_filter=False)\no_norm.load(file=df_file_2, data_type='df', auto_gamma_filter=False)\no_norm.df_correction()\n_sample_first_run = o_norm.data['sample']['data'][0]\n_ob_first_run = o_norm.data['ob']['data'][0]\n_average_df = o_norm.data['df']['data_average']\no_norm.df_correction(force=True)\n_sample_second_run = o_norm.data['sample']['data'][0]\n_ob_second_run = o_norm.data['ob']['data'][0]\n_expected_sample_after_second_run = _sample_first_run - _average_df\n_expected_ob_after_second_run = _ob_first_run - _average_df\nassert (_sample_second_run == _expected_sample_after_second_run).all()\nassert (_ob_second_run == _expected_ob_after_second_run).all()\n"
+}

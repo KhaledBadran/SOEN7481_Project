@@ -1,0 +1,9 @@
+{
+    "functionName": "test_to_json_attendees",
+    "className": "TestEventSerializer",
+    "fileName": "/kuzmoyev_&_Google-Calendar-Simple-API/tests_&_test_event.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "e = Event('Good day', start=(1 / Jul / 2020)[11:22:33], timezone=\n    TEST_TIMEZONE, attendees=[Attendee(email='attendee@gmail.com',\n    response_status=ResponseStatus.NEEDS_ACTION), Attendee(email=\n    'attendee2@gmail.com', response_status=ResponseStatus.ACCEPTED)])\nevent_json = {'summary': 'Good day', 'start': {'dateTime':\n    '2020-07-01T11:22:33+12:00', 'timeZone': TEST_TIMEZONE}, 'end': {\n    'dateTime': '2020-07-01T12:22:33+12:00', 'timeZone': TEST_TIMEZONE},\n    'recurrence': [], 'visibility': 'default', 'attendees': [{'email':\n    'attendee@gmail.com', 'responseStatus': ResponseStatus.NEEDS_ACTION}, {\n    'email': 'attendee2@gmail.com', 'responseStatus': ResponseStatus.\n    ACCEPTED}], 'reminders': {'useDefault': False}, 'attachments': []}\nself.assertDictEqual(EventSerializer.to_json(e), event_json)\ne = Event('Good day2', start=20 / Jul / 2020, default_reminders=True)\nevent_json = {'summary': 'Good day2', 'start': {'date': '2020-07-20'},\n    'end': {'date': '2020-07-21'}, 'recurrence': [], 'visibility':\n    'default', 'attendees': [], 'reminders': {'useDefault': True},\n    'attachments': []}\nself.assertDictEqual(EventSerializer.to_json(e), event_json)\n"
+}

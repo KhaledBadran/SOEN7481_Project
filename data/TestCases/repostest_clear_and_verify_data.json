@@ -1,0 +1,9 @@
+{
+    "functionName": "test_clear_and_verify_data",
+    "className": null,
+    "fileName": "/AFM-analysis_&_PyJibe/tests_&_test_fd_base.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "main_window = pyjibe.head.PyJibe()\nmain_window.load_data(files=[jpkfile])\nwar = main_window.subwindows[0].widget()\ntpp = war.tab_preprocess\ntpp.list_preproc_applied.clear()\nwar.cb_autosave.setChecked(0)\nitem = QtWidgets.QListWidgetItem()\nitem.setText('compute_tip_position')\ntpp.list_preproc_applied.addItem(item)\nitab = war.tab_fit.table_parameters_initial\nwar.tab_fit.cb_weight_cp.setCheckState(0)\nitab.item(4, 0).setCheckState(0)\nitab.item(3, 1).setText(str(18000))\napret = war.data_set[0]\nwar.tab_fit.fit_approach_retract(apret)\nftab = war.tab_fit.table_parameters_fitted\nassert np.allclose(apret.fit_properties['params_fitted']['E'].value, \n    14741.958242422093, atol=0.0001, rtol=0)\nassert float(ftab.item(0, 0).text()) == 14742\nassert float(ftab.item(1, 0).text()) == 18029\nassert float(ftab.item(2, 0).text()) == -480.67\n"
+}

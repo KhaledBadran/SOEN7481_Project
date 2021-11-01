@@ -1,0 +1,9 @@
+{
+    "functionName": "test_poll_empty_response",
+    "className": null,
+    "fileName": "/EclecticIQ_&_OpenTAXII/tests_&_services_&_test_poll.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "server.config['count_blocks_in_poll_responses'] = count_blocks\nservice = server.get_service('poll-A')\nheaders = prepare_headers(version, https)\nrequest = prepare_request(collection_name=COLLECTION_OPEN, version=version)\nif version == 11:\n    response = service.process(headers, request)\n    assert isinstance(response, as_tm(version).PollResponse)\n    if count_blocks:\n        assert response.record_count.record_count == 0\n        assert not response.record_count.partial_count\n    else:\n        assert response.record_count is None\nelse:\n    with pytest.raises(exceptions.StatusMessageException):\n        response = service.process(headers, request)\nserver.config['count_blocks_in_poll_responses'] = True\npytest.mark.parametrize(('https', 'version', 'count_blocks'), [(True, 11, \n    True), (False, 11, False), (True, 10, False), (False, 10, False)])"
+}

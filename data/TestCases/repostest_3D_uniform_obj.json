@@ -1,0 +1,9 @@
+{
+    "functionName": "test_3D_uniform_obj",
+    "className": null,
+    "fileName": "/CCampJr_&_CRIkit2/crikit_&_data_&_tests_&_test_mosaic.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "mos = Mosaic()\nm_obj = 3\nn_obj = 4\np_obj = 2\nnew_obj = np.ones((m_obj, n_obj, p_obj))\nm_side = 2\nn_side = 2\nn = m_side * n_side\nfor ct in range(n):\n    mos.append(new_obj)\nassert mos.shape == tuple(n * [new_obj.shape])\nassert mos.size == n\nassert mos.issamedim\nassert mos.dtype == np.float\nwith pytest.raises(ValueError):\n    mos.mosaic2d((m_side, n_side)).shape\nmos.parameters['Order'] = 'R'\nassert mos.mosaic2d((m_side, n_side), idx=0).shape == (m_side * m_obj, \n    n_side * n_obj)\nassert mos.mosaic2d((m_side, n_side), idx=0).shape == mos.mosaic_shape((\n    m_side, n_side), idx=0)\nassert mos.mosaicfull((m_side, n_side)).shape == (m_side * m_obj, n_side *\n    n_obj, p_obj)\nassert mos.mosaicfull((m_side, n_side)).shape == mos.mosaic_shape((m_side,\n    n_side))\nmos.parameters['Order'] = 'C'\nassert mos.mosaic2d((m_side, n_side), idx=0).shape == (m_side * m_obj, \n    n_side * n_obj)\nassert mos.mosaic2d((m_side, n_side), idx=0).shape == mos.mosaic_shape((\n    m_side, n_side), idx=0)\nassert mos.mosaicfull((m_side, n_side)).shape == (m_side * m_obj, n_side *\n    n_obj, p_obj)\nassert mos.mosaicfull((m_side, n_side)).shape == mos.mosaic_shape((m_side,\n    n_side))\n"
+}

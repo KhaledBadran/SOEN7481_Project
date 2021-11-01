@@ -1,0 +1,9 @@
+{
+    "functionName": "test_regular_defs",
+    "className": "CallTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_call.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "t = Template(\n    \"\"\"\n        <%!\n            @runtime.supports_caller\n            def a(context):\n                context.write(\"this is a\")\n                if context['caller']:\n                    context['caller'].body()\n                context.write(\"a is done\")\n                return ''\n        %>\n\n        <%def name=\"b()\">\n            this is b\n            our body: ${caller.body()}\n            ${a(context)}\n        </%def>\n        test 1\n        <%call expr=\"a(context)\">\n            this is the body\n        </%call>\n        test 2\n        <%call expr=\"b()\">\n            this is the body\n        </%call>\n        test 3\n        <%call expr=\"b()\">\n            this is the body\n            <%call expr=\"b()\">\n                this is the nested body\n            </%call>\n        </%call>\n\n\n        \"\"\"\n    )\nassert result_lines(t.render()) == ['test 1', 'this is a',\n    'this is the body', 'a is done', 'test 2', 'this is b', 'our body:',\n    'this is the body', 'this is aa is done', 'test 3', 'this is b',\n    'our body:', 'this is the body', 'this is b', 'our body:',\n    'this is the nested body', 'this is aa is done', 'this is aa is done']\n"
+}

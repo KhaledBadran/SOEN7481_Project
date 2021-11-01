@@ -1,0 +1,9 @@
+{
+    "functionName": "_set_automatic_throat_occupancy",
+    "className": "MultiPhase",
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_phases_&_MultiPhase.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        Automatically interpolates throat occupancy based on adjacent pores.\n        \"\"\"\nself.settings['throat_occupancy'] = 'automatic'\nfor phase in self.phases.values():\n    self.add_model(propname=f'throat.occupancy.{phase.name}', model=misc.\n        from_neighbor_pores, prop=f'pore.occupancy.{phase.name}', mode=mode)\n"
+}

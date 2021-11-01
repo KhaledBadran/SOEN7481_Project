@@ -1,0 +1,9 @@
+{
+    "functionName": "test_unitful_property_input_decoration",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_property_factories_&_test_unitful_property.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class UnitfulMock(MockInstrument):\n\n    @staticmethod\n    def _input_decorator(_):\n        return '1'\n    a = unitful_property('MOCK:A', u.hertz, input_decoration=_input_decorator)\nmock_instrument = UnitfulMock({'MOCK:A?': 'garbage'})\nassert mock_instrument.a == 1 * u.Hz\n"
+}

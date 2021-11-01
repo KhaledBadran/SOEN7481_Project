@@ -1,0 +1,9 @@
+{
+    "functionName": "test_to_shorts",
+    "className": null,
+    "fileName": "/axiros_&_DevApps/tests_&_test_configure.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ctx = {}\nres = ctx['shorts'] = devapps.to_shorts(['foo', 'foo_e'])\nres.pop('_orig_shorts_', 0)\nassert res == {'f': 'foo', 'fe': 'foo_e', 'foo': 'foo', 'foo_e': 'foo_e'}\nwith pytest.raises(Exception) as einfo:\n    res = devapps.short_to_long(0, {'fo': 1}, 0, ctx)\nassert log[-1]['event'] == Exc.non_unique\nres = devapps.short_to_long(0, {'foo': 1}, 0, ctx)\nres.pop('_orig_shorts_', 0)\nassert res == {'foo': 1}\nres = devapps.short_to_long(0, {'f': 1}, 0, ctx)\nres.pop('_orig_shorts_', 0)\nassert res == {'foo': 1}\nres = devapps.short_to_long(0, {'foo_': 1}, 0, ctx)\nres.pop('_orig_shorts_', 0)\nassert res == {'foo_e': 1}\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_hansenlaw_forward_tansform_gaussian",
+    "className": null,
+    "fileName": "/PyAbel_&_PyAbel/abel_&_tests_&_test_hansenlaw.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Check hansenlaw forward tansform with a Gaussian function\"\"\"\nn = 1001\nr_max = 501\nref = abel.tools.analytical.GaussianAnalytical(n, r_max, symmetric=False,\n    sigma=200)\nrecon = abel.hansenlaw.hansenlaw_transform(ref.func, ref.dr, direction=\n    'forward')\nratio = abel.benchmark.absolute_ratio_benchmark(ref, recon, kind='forward')\nassert_allclose(ratio, 1.0, rtol=0.07, atol=0)\n"
+}

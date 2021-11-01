@@ -1,0 +1,9 @@
+{
+    "functionName": "test_append_trace_id",
+    "className": null,
+    "fileName": "/Handsome2734_&_Flask-Tracing/test_tracing.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with app.test_client() as c:\n    original_id = uuid.uuid4()\n    rv = c.get('/', headers={'X-Request-ID': original_id})\n    assert 'X-Request-ID' in rv.headers\n    request_ids = rv.headers.get('X-Request-ID')\n    assert len(request_ids.split(',')) == 2\n    old, new = request_ids.split(',')\n    assert old == str(original_id)\n"
+}

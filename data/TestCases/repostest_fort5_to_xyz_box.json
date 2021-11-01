@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fort5_to_xyz_box",
+    "className": null,
+    "fileName": "/mortele_&_OccamTools/test_&_test_fort5_to_xyz.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "file_name, _, _, xyz_file_name = _setup_minimal_and_convert()\nwith open(file_name, 'r') as fort5, open(xyz_file_name, 'r') as xyz:\n    xyz_line = xyz.readline()\n    xyz_line = xyz.readline().split()\n    xyz_box = [float(l) for l in xyz_line[2:]]\n    fort5_line = fort5.readline()\n    fort5_line = fort5.readline().split()\n    fort5_box = [float(l) for l in fort5_line[:3]]\n    assert np.allclose(xyz_box, fort5_box)\n_remove_files(file_name, xyz_file_name)\n"
+}

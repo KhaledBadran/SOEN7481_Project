@@ -1,0 +1,9 @@
+{
+    "functionName": "test_recursive_feature_elimination",
+    "className": "TestTrexClassifier",
+    "fileName": "/univieCUBE_&_phenotrex/tests_&_test_ml.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Perform feature compression tests only for SVM; counterindicated for XGB.\n        :param trait_name:\n        :return:\n        \"\"\"\ntraining_records, genotype, phenotype, group = self.test_load_data(trait_name,\n    False)\nsvm = TrexSVM(verb=True, random_state=RANDOM_STATE)\nrecursive_feature_elimination(records=training_records, pipeline=svm.\n    cv_pipeline, step=0.01, n_features=n_features)\nvec = svm.cv_pipeline.named_steps['vec']\nvec._validate_vocabulary()\nassert vec.fixed_vocabulary_\nassert len(vec.vocabulary_) >= n_features\nX, y, tn, ft = get_x_y_tn_ft(training_records)\nX_trans = vec.transform(X)\nassert X_trans.shape[1] >= n_features\none_is_zero = False\nnon_zero = X_trans.nonzero()\nfor x in non_zero:\n    if len(x) == 0:\n        one_is_zero = True\nassert not one_is_zero\npytest.mark.parametrize('trait_name', trait_names, ids=trait_names)pytest.mark.parametrize('n_features', [10000])"
+}

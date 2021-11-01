@@ -1,0 +1,9 @@
+{
+    "functionName": "test_compare_state_probs_with_discrete",
+    "className": null,
+    "fileName": "/lopatovsky_&_CT-HMM/test_&_test_cthmm.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test will run algorithms for counting state probability, determinically with the same initialization for both models\"\"\"\nt, _, e = dthmm.generate_data((data_num, data_len), times=True)\nct = hmms.CtHMM.random(3, 3)\ndt = hmms.DtHMM(*ct.get_dthmm_params())\nassert compare_parameters_no_sort(dt, hmms.DtHMM(*ct.get_dthmm_params()))\nrow = e[0]\ntrow = t[0]\nalpha = ct.forward(trow, row)\nbeta = ct.backward(trow, row)\ngamma = ct.single_state_prob(alpha, beta)\nksi = ct.double_state_prob(alpha, beta, trow, row)\nd_alpha = dt.forward(row)\nd_beta = dt.backward(row)\nd_gamma = dt.single_state_prob(d_alpha, d_beta)\nd_ksi = dt.double_state_prob(d_alpha, d_beta, row)\nassert float_equal_mat(gamma, d_gamma)\nassert float_equal_mat(ksi[0], d_ksi)\npytest.mark.parametrize(['data_num', 'data_len'], [(1, 100), (3, 100), (20,\n    20), (40, 2)])"
+}

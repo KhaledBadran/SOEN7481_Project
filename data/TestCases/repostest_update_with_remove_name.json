@@ -1,0 +1,9 @@
+{
+    "functionName": "test_update_with_remove_name",
+    "className": "TestX509Certificate",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_objects_&_test_x509_certificate.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Tests that an X509Certificate already stored in the database can be\n        updated. This will store an X509Certificate in the database. It will\n        remove a name from it in one session, and then retrieve it in another\n        session to verify that it has all of the correct names.\n        \"\"\"\nnames = ['bowser', 'frumpy', 'big fat cat']\nremove_index = 1\ncert = X509Certificate(self.bytes_a, name=names[0])\ncert.names.append(names[1])\ncert.names.append(names[2])\nSession = sessionmaker(bind=self.engine)\nsession = Session()\nsession.add(cert)\nsession.commit()\nexpected_names = list()\nexpected_mo_names = list()\nfor i, name in enumerate(names):\n    if i != remove_index:\n        expected_names.append(name)\n        expected_mo_names.append(sqltypes.ManagedObjectName(name, i))\nsession = Session()\nupdate_cert = session.query(X509Certificate).filter(ManagedObject.\n    unique_identifier == cert.unique_identifier).one()\nupdate_cert.names.pop(remove_index)\nsession.commit()\nsession = Session()\nget_obj = session.query(X509Certificate).filter(ManagedObject.\n    unique_identifier == cert.unique_identifier).one()\nsession.commit()\nself.assertEquals(expected_names, get_obj.names)\nself.assertEquals(expected_mo_names, get_obj._names)\n"
+}

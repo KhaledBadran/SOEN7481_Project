@@ -1,0 +1,9 @@
+{
+    "functionName": "test_we_can_set_the_user_agent_to_bugsy",
+    "className": null,
+    "fileName": "/AutomatedTester_&_Bugsy/tests_&_test_bugsy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "responses.add(responses.GET, 'https://bugzilla.mozilla.org/rest/login',\n    body='{\"token\": \"foobar\"}', status=200, content_type='application/json',\n    match_querystring=True)\nBugsy('foo', 'bar')\nassert responses.calls[0].request.headers['User-Agent'] == 'Bugsy'\nresponses.activate"
+}

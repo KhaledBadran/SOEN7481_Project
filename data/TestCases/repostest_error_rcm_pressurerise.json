@@ -1,0 +1,9 @@
+{
+    "functionName": "test_error_rcm_pressurerise",
+    "className": "TestConvertReSpecTh",
+    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_converters.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test for appropriate error if RCM file has pressure rise.\n        \"\"\"\nfile_path = os.path.join('testfile_rcm.xml')\nfilename = pkg_resources.resource_filename(__name__, file_path)\ntree = etree.parse(filename)\nroot = tree.getroot()\nproperties = root.find('commonProperties')\nprop = etree.SubElement(properties, 'property')\nprop.set('name', 'pressure rise')\nprop.set('units', '1/ms')\nprop_value = etree.SubElement(prop, 'value')\nprop_value.text = '0.10'\net = etree.ElementTree(root)\nwith TemporaryDirectory() as temp_dir:\n    filename = os.path.join(temp_dir, 'test.xml')\n    et.write(filename, encoding='utf-8', xml_declaration=True)\n    with pytest.raises(KeywordError) as excinfo:\n        ReSpecTh_to_ChemKED(filename)\n    assert 'Pressure rise cannot be defined for RCM.' in str(excinfo.value)\npytest.mark.filterwarnings('ignore:Using DOI')"
+}

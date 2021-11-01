@@ -1,0 +1,9 @@
+{
+    "functionName": "test_propagate_cols_up",
+    "className": "TestContribution",
+    "fileName": "/PmagPy_&_PmagPy/pmagpy_tests_&_test_contribution_builder.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "directory = os.path.join('data_files', '3_0', 'McMurdo')\ncon = cb.Contribution(directory, read_tables=['sites', 'samples'],\n    custom_filenames={'locations': '_locations.txt'})\ncon.tables['samples'].df.loc['mc01a', 'lithologies'] = 'other:Trachyte'\nind = con.tables['samples'].df.columns.get_loc('lithologies')\ncon.tables['samples'].df.iloc[2, ind] = None\ncon.tables['samples'].df.iloc[3, ind] = np.nan\ncon.tables['samples'].df.iloc[4, ind] = ''\ncon.tables['sites'].df.loc['mc01', 'lithologies'] = ''\ncon.tables['sites'].df[:10][['lithologies', 'geologic_types']]\ncols = ['lithologies', 'geologic_types']\ncon.propagate_cols_up(cols, 'sites', 'samples')\nself.assertEqual('Other:Trachyte', con.tables['sites'].df.loc['mc01',\n    'lithologies'].unique()[0])\nself.assertEqual('Basalt', con.tables['sites'].df.loc['mc02', 'lithologies'\n    ].unique()[0])\nself.assertTrue(all(con.tables['sites'].df['lithologies']))\ncon = cb.Contribution(directory, read_tables=['sites'])\ncon.propagate_cols_up(cols, 'sites', 'samples')\n"
+}

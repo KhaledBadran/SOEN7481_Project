@@ -1,0 +1,9 @@
+{
+    "functionName": "testDialogAuthTwoQuestionsInstallPlugin",
+    "className": "TestAuthentication",
+    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_test_connection.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "cur = self.connect().cursor()\ntry:\n    cur.execute(\"install plugin two_questions soname 'dialog_examples.so'\")\n    TestAuthentication.two_questions_found = True\n    self.realTestDialogAuthTwoQuestions()\nexcept pymysql.err.InternalError:\n    pytest.skip(\"we couldn't install the two_questions plugin\")\nfinally:\n    if TestAuthentication.two_questions_found:\n        cur.execute('uninstall plugin two_questions')\npytest.mark.skipif(not socket_auth, reason='connection to unix_socket required'\n    )pytest.mark.skipif(two_questions_found, reason=\n    'two_questions plugin already installed')"
+}

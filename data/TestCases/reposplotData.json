@@ -1,0 +1,9 @@
+{
+    "functionName": "plotData",
+    "className": "Viewer1D",
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_Viewer1D.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Plot current data. First destroy previous plot if possible\"\"\"\ntry:\n    self.dataPlot.remove()\nexcept:\n    pass\nself.ax.clear()\nself.ax.set_ylabel('Int [arb]')\nif self.plotAll == False:\n    self.dataPlot = self.ax.errorbar(self._xData, self._yData, yerr=self.\n        _yErr, fmt='.')\n    if not self.dataLabel is '':\n        self.ax.legend([self.dataLabel[self.xID]])\n        self.ax.legend_.draggable(True)\nelse:\n    for i in range(len(self.yData)):\n        self.dataPlot = self.ax.errorbar(self.xData[i], self.yData[i], yerr\n            =self.yErr[i], fmt='.')\n    if not self.dataLabel is '':\n        labels = self.dataLabel.copy()\n        labels[self.xID] = '*' + labels[self.xID]\n        self.ax.legend(labels)\nif not self.xLabel is '':\n    self.ax.set_xlabel(self.xLabel[self.xID])\nplt.draw()\n"
+}

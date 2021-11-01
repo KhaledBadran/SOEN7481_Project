@@ -1,0 +1,9 @@
+{
+    "functionName": "test_keras_fasta_batch_classifier",
+    "className": null,
+    "fileName": "/goeckslab_&_Galaxy-ML/galaxy_ml_&_tests_&_test_keras_galaxy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "config = model.get_config()\nfasta_path = './tools/test-data/regulatory_mutations.fa'\nbatch_generator = FastaDNABatchGenerator(fasta_path, seq_length=1000, seed=42)\nclassifier = KerasGBatchClassifier(config, batch_generator, model_type=\n    'sequential')\nparams = classifier.get_params()\ngot = {key: value for key, value in params.items() if not key.startswith((\n    'config', 'layers')) and not key.endswith('generator')}\nexpect = {'amsgrad': None, 'batch_size': 32, 'beta_1': None, 'beta_2': None,\n    'callbacks': None, 'class_positive_factor': 1,\n    'data_batch_generator__fasta_path':\n    './tools/test-data/regulatory_mutations.fa',\n    'data_batch_generator__seed': 42, 'data_batch_generator__seq_length': \n    1000, 'data_batch_generator__shuffle': True, 'decay': 0, 'epochs': 1,\n    'loss': 'binary_crossentropy', 'lr': 0.01, 'metrics': [], 'model_type':\n    'sequential', 'momentum': 0, 'n_jobs': 1, 'nesterov': False,\n    'optimizer': 'sgd', 'prediction_steps': None, 'rho': None,\n    'schedule_decay': None, 'seed': None, 'steps_per_epoch': None,\n    'validation_fraction': 0.1, 'validation_steps': None, 'verbose': 0}\nassert got == expect, got\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gru_passthrough",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_recurrent.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "l_in = InputLayer((4, 5, 6))\nzero = lasagne.init.Constant(0.0)\none = lasagne.init.Constant(1.0)\npass_gate = Gate(zero, zero, None, one, None)\nno_gate = Gate(zero, zero, None, zero, None)\nin_pass_gate = Gate(np.eye(6).astype(theano.config.floatX), zero, None,\n    zero, None)\nl_rec = GRULayer(l_in, 6, no_gate, pass_gate, in_pass_gate)\nout = lasagne.layers.get_output(l_rec)\ninp = np.arange(4 * 5 * 6).reshape(4, 5, 6).astype(theano.config.floatX)\nnp.testing.assert_almost_equal(out.eval({l_in.input_var: inp}), inp)\n"
+}

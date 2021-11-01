@@ -1,0 +1,9 @@
+{
+    "functionName": "test_validate_failure",
+    "className": "IntegrationTest",
+    "fileName": "/BMeu_&_Flask-EasyJWT/tests_&_integration_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n            Test validating a token that is not valid.\n\n            Expected Result: The token is rejected.\n        \"\"\"\ntoken_object = AccountValidationToken(self.easyjwt_key[::-1])\ntoken_object.user_id = 42\ntoken = token_object.create()\nresponse = self.client.get(f'/validate_user/{token}')\nvalidated_user = response.get_data(as_text=True)\nself.assertEqual(str(0), validated_user)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "_generate_minimal_xyz",
+    "className": null,
+    "fileName": "/mortele_&_OccamTools/test_&_test_xyz_to_fort5.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "n_particles = 10\nbox = [9, 5.5, 3.2]\nfile_name = os.path.join(os.path.dirname(__file__), 'minimal.xyz')\nwith open(file_name, 'w') as out_file:\n    out_file.write(f'{n_particles}\\n')\n    out_file.write(f'# box: {box[0]:.15f} {box[1]:.15f} {box[2]:.15f}\\n')\n    x = np.random.uniform(low=0.0, high=box[0], size=n_particles)\n    y = np.random.uniform(low=0.0, high=box[1], size=n_particles)\n    z = np.random.uniform(low=0.0, high=box[2], size=n_particles)\n    label = 'Ar'\n    for i in range(n_particles):\n        out_file.write(f'{label} {x[i]:.15f} {y[i]:.15f} {z[i]:.15f}\\n')\nreturn file_name, n_particles, box\n"
+}

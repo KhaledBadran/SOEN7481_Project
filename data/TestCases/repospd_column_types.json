@@ -1,0 +1,9 @@
+{
+    "functionName": "pd_column_types",
+    "className": "LogToDataFrame",
+    "fileName": "/kitware_&_BroThon/zat_&_log_to_dataframe.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Given a set of names and types, construct a dictionary to be used\n           as the Pandas read_csv dtypes argument\"\"\"\nunknown_type = 'category' if aggressive_category else 'object'\npandas_types = {}\nfor name, zeek_type in zip(column_names, column_types):\n    item_type = self.type_map.get(zeek_type)\n    if not item_type:\n        if 'uid' in name:\n            item_type = 'object'\n        else:\n            if verbose:\n                print('Could not find type for {:s} using {:s}...'.format(\n                    zeek_type, unknown_type))\n            item_type = unknown_type\n    pandas_types[name] = item_type\nreturn pandas_types\n"
+}

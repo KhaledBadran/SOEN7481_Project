@@ -1,0 +1,9 @@
+{
+    "functionName": "test_step_record",
+    "className": null,
+    "fileName": "/microsoft_&_MazeExplorer/tests_&_test_mazeexplorer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "env = MazeExplorer(random_textures=True, mazes_path=tmpdir.strpath)\nenv.reset()\nfor _ in range(3):\n    action = env.action_space.sample()\n    observation, *_ = env.step_record(action, tmpdir)\n    assert observation.shape == (42, 42, 3)\nassert len(list(Path(tmpdir).glob('*.png'))) == 6\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_record_score_lt_best",
+    "className": "TestBTBSession",
+    "fileName": "/HDI-Project_&_BTB/tests_&_test_session.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tuner = MagicMock()\ninstance = MagicMock(spec_set=BTBSession)\ninstance._make_id.return_value = 0\ninstance.proposals = [{'test': 'test'}]\ninstance._tuners = {'test': tuner}\ninstance.best_proposal = None\ninstance._best_normalized = 10\ninstance._normalize.return_value = 1\ninstance._normalized_scores = defaultdict(list)\nBTBSession.record(instance, 'test', 'config', 1)\nexpected_normalized_scores = defaultdict(list)\nexpected_normalized_scores['test'].append(1)\nassert instance.best_proposal is None\nassert instance._normalized_scores == expected_normalized_scores\nassert instance._best_normalized == 10\ntuner.record.assert_called_once_with('config', 1)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_execute_plan_request_interceptors_swap_out_request",
+    "className": "TestPlanExecutor",
+    "fileName": "/cbefus_&_Eynnyd/tests_&_plan_execution_&_test_plan_executor.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class FakeRequest(AbstractRequest):\n\n    @property\n    def http_method(self):\n        return 'PUT'\n\n    @property\n    def request_uri(self):\n        pass\n\n    @property\n    def forwarded_request_uri(self):\n        pass\n\n    @property\n    def headers(self):\n        pass\n\n    @property\n    def client_ip_address(self):\n        pass\n\n    @property\n    def cookies(self):\n        pass\n\n    @property\n    def query_parameters(self):\n        pass\n\n    @property\n    def path_parameters(self):\n        pass\n\n    @property\n    def byte_body(self):\n        pass\n\n    @property\n    def utf8_body(self):\n        pass\ndef fake_interceptor(original_request):\n    return FakeRequest()\ndef fake_handler(request):\n    self.assertEqual('PUT', request.http_method)\n    return ResponseBuilder().set_status(HTTPStatus.OK).build()\nplan_executor = PlanExecutor(ErrorHandlersBuilder().build())\nplan = ExecutionPlan([fake_interceptor], fake_handler, [], {})\nresponse = plan_executor.execute_plan(plan, 'original test request')\nself.assertEqual(HTTPStatus.OK.value, response.status.code)\n"
+}

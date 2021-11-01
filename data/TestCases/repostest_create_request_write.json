@@ -1,0 +1,9 @@
+{
+    "functionName": "test_create_request_write",
+    "className": "TestRequestMessage",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_test_messages.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "prot_ver = contents.ProtocolVersion(1, 1)\nbatch_count = contents.BatchCount(1)\nrequest_header = messages.RequestHeader(protocol_version=prot_ver,\n    batch_count=batch_count)\noperation = contents.Operation(enums.Operation.CREATE)\nobject_type = enums.ObjectType.SYMMETRIC_KEY\nname = AttributeType.CRYPTOGRAPHIC_ALGORITHM\nvalue = CryptoAlgorithmEnum.AES\nattr_a = self.attribute_factory.create_attribute(name, value)\nname = AttributeType.CRYPTOGRAPHIC_LENGTH\nvalue = 128\nattr_b = self.attribute_factory.create_attribute(name, value)\nname = AttributeType.CRYPTOGRAPHIC_USAGE_MASK\nvalue = [CryptographicUsageMask.ENCRYPT, CryptographicUsageMask.DECRYPT]\nattr_c = self.attribute_factory.create_attribute(name, value)\ntemp_attr = objects.TemplateAttribute(attributes=[attr_a, attr_b, attr_c])\nreq_pl = payloads.CreateRequestPayload(object_type=object_type,\n    template_attribute=temp_attr)\nbatch_item = messages.RequestBatchItem(operation=operation, request_payload\n    =req_pl)\nreq_message = messages.RequestMessage(request_header=request_header,\n    batch_items=[batch_item])\nreq_message.write(self.stream)\nresult = self.stream.read()\nlen_exp = len(self.create)\nlen_rcv = len(result)\nself.assertEqual(len_exp, len_rcv, self.msg.format('request message',\n    'write', len_exp, len_rcv))\nmsg = 'Bad request message write: encoding mismatch'\nself.assertEqual(self.create, result, msg)\n"
+}

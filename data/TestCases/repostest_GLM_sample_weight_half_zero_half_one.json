@@ -1,0 +1,9 @@
+{
+    "functionName": "test_GLM_sample_weight_half_zero_half_one",
+    "className": "NegativeBinomialTests",
+    "fileName": "/Mogeng_&_IOHMM/tests_&_test_GLM.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.model = GLM(solver='IRLS', family=NegativeBinomialWrapper(),\n    fit_intercept=True, est_stderr=True, reg_method=None, alpha=0, l1_ratio\n    =0, tol=0.0001, max_iter=100, coef=None, stderr=None, dispersion=None)\nlen_half = 10\nself.model.fit(self.X, self.Y, sample_weight=np.array([1] * len_half + [0] *\n    (self.X.shape[0] - len_half)))\nself.model_half = GLM(solver='IRLS', family=NegativeBinomialWrapper(),\n    fit_intercept=True, est_stderr=True, reg_method=None, alpha=0, l1_ratio\n    =0, max_iter=100, coef=None, stderr=None, dispersion=None)\nself.model_half.fit(self.X[:len_half], self.Y[:len_half])\nnp.testing.assert_array_almost_equal(self.model.coef, self.model_half.coef,\n    decimal=2)\nnp.testing.assert_array_almost_equal(self.model.stderr, self.model_half.\n    stderr, decimal=3)\nnp.testing.assert_array_almost_equal(self.model.dispersion, self.model_half\n    .dispersion, decimal=3)\n"
+}

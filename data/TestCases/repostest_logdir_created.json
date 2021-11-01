@@ -1,0 +1,9 @@
+{
+    "functionName": "test_logdir_created",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_test_monitor.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Check that TensorFlow summaries are written.\n    \"\"\"\ntmp_path = str(tmp_path)\nassert os.path.exists(tmp_path) and os.path.isdir(tmp_path)\nsize_before = _get_size_directory(tmp_path)\nassert size_before > 0\nopt = tf.optimizers.Adam()\nfor step in range(Data.num_steps):\n    opt.minimize(model.training_loss, model.trainable_variables)\n    monitor(step)\nsize_after = _get_size_directory(tmp_path)\nassert size_after > size_before\n"
+}

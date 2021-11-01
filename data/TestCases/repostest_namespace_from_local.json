@@ -1,0 +1,9 @@
+{
+    "functionName": "test_namespace_from_local",
+    "className": null,
+    "fileName": "/glentner_&_CmdKit/tests_&_test_config.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test automatic file type deduction and allow for missing files.\"\"\"\nfor ftype in FACTORIES:\n    filepath = f'{TMPDIR}/{ftype}.{ftype}'\n    if os.path.exists(filepath):\n        os.remove(filepath)\nwith pytest.raises(FileNotFoundError):\n    Namespace.from_local(f'{TMPDIR}/toml.toml')\nwith pytest.raises(FileNotFoundError):\n    Namespace.from_local(f'{TMPDIR}/yaml.yaml')\nwith pytest.raises(FileNotFoundError):\n    Namespace.from_local(f'{TMPDIR}/json.json')\nassert Namespace() == Namespace.from_local(f'{TMPDIR}/toml.toml',\n    ignore_if_missing=True) == Namespace.from_local(f'{TMPDIR}/yaml.yaml',\n    ignore_if_missing=True) == Namespace.from_local(f'{TMPDIR}/json.json',\n    ignore_if_missing=True)\nwith pytest.raises(NotImplementedError):\n    Namespace.from_local(f'{TMPDIR}/config.special')\nfor ftype, data in FACTORIES.items():\n    with open(f'{TMPDIR}/{ftype}.{ftype}', mode='w') as output:\n        output.write(data)\nassert Namespace(TEST_DICT) == Namespace.from_local(f'{TMPDIR}/toml.toml'\n    ) == Namespace.from_local(f'{TMPDIR}/tml.tml') == Namespace.from_local(\n    f'{TMPDIR}/yaml.yaml') == Namespace.from_local(f'{TMPDIR}/yml.yml'\n    ) == Namespace.from_local(f'{TMPDIR}/json.json')\n"
+}

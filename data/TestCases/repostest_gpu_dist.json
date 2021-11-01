@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gpu_dist",
+    "className": null,
+    "fileName": "/PythonOT_&_POT/test_&_test_gpu.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "rng = np.random.RandomState(0)\nfor n_samples in [50, 100, 500, 1000]:\n    print(n_samples)\n    a = rng.rand(n_samples // 4, 100)\n    b = rng.rand(n_samples, 100)\n    M = ot.dist(a.copy(), b.copy())\n    M2 = ot.gpu.dist(a.copy(), b.copy())\n    np.testing.assert_allclose(M, M2, rtol=1e-10)\n    M2 = ot.gpu.dist(a.copy(), b.copy(), metric='euclidean', to_numpy=False)\n    with pytest.raises(NotImplementedError):\n        M2 = ot.gpu.dist(a.copy(), b.copy(), metric='cityblock', to_numpy=False\n            )\npytest.mark.skipif(nogpu, reason='No GPU available')"
+}

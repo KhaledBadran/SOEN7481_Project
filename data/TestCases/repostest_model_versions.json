@@ -1,0 +1,9 @@
+{
+    "functionName": "test_model_versions",
+    "className": null,
+    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_bspline.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from pypeit.bspline.utilpy import bspline_model as bspline_model_py\nfrom pypeit.bspline.utilc import bspline_model as bspline_model_c\nd = np.load(data_path('bspline_model.npz'))\npytime = time.perf_counter()\nmod = bspline_model_py(d['x'], d['action'], d['lower'], d['upper'], d[\n    'coeff'], d['n'], d['nord'], d['npoly'])\npytime = time.perf_counter() - pytime\nctime = time.perf_counter()\n_mod = bspline_model_c(d['x'], d['action'], d['lower'], d['upper'], d[\n    'coeff'], d['n'], d['nord'], d['npoly'])\nctime = time.perf_counter() - ctime\nassert ctime < pytime, 'C is less efficient!'\nassert np.allclose(mod, _mod), 'Differences in index'\nbspline_ext_required"
+}

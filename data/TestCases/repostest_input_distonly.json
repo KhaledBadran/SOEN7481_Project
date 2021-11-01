@@ -1,0 +1,9 @@
+{
+    "functionName": "test_input_distonly",
+    "className": null,
+    "fileName": "/vc1492a_&_PyNomaly/tests_&_test_loop.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test to ensure that the proper warning is issued if only a distance\n    matrix is provided (without a neighbor matrix).\n    :param X_n120: A pytest Fixture that generates 120 observations.\n    :return: None\n    \"\"\"\nneigh = NearestNeighbors(metric='euclidean')\nneigh.fit(X_n120)\nd, idx = neigh.kneighbors(X_n120, n_neighbors=10, return_distance=True)\nwith pytest.warns(UserWarning) as record:\n    loop.LocalOutlierProbability(distance_matrix=d, use_numba=NUMBA)\nassert len(record) == 1\nassert record[0].message.args[0\n    ] == 'A neighbor index matrix and distance matrix must both be provided when not using raw input data.'\n"
+}

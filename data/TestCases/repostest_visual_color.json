@@ -1,0 +1,9 @@
+{
+    "functionName": "test_visual_color",
+    "className": null,
+    "fileName": "/SeverTopan_&_AdjSim/test_&_test_simulation.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from adjsim import core, utility, decision, color\ndef change(env, source):\n    if env.time % 2:\n        source.color = color.BLUE_DARK\n    else:\n        source.color = color.RED_DARK\nclass TestAgent(core.VisualAgent):\n\n    def __init__(self, x, y):\n        super().__init__(pos=np.array([x, y]))\n        self.decision = decision.RandomSingleCastDecision()\n        self.actions['change'] = change\ntest_sim = core.VisualSimulation()\ntest_sim._wait_on_visual_init = 0\ntest_sim.agents.add(TestAgent(0, 0))\ncommon.step_simulate_interpolation(test_sim)\n"
+}

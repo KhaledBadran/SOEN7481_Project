@@ -1,0 +1,9 @@
+{
+    "functionName": "test_auto_shape",
+    "className": "TestExpressionLayer",
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_special.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from lasagne.layers.helper import get_output\nX, expected = self.np_result(func, input_layer)\nlayer = ExpressionLayer(input_layer, func, output_shape='auto')\nassert layer.get_output_shape_for(X.shape) == expected.shape\noutput = get_output(layer, X).eval()\nassert np.allclose(output, expected)\npytest.mark.parametrize('func', [lambda X: X ** 2, lambda X: X.mean(-1), lambda\n    X: X.sum()])"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_getProjectAcquisitionObjects",
+    "className": null,
+    "fileName": "/incf-nidash_&_PyNIDM/nidm_&_experiment_&_tests_&_test_query.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "if not Path('./cmu_a.nidm.ttl').is_file():\n    urllib.request.urlretrieve(\n        'https://raw.githubusercontent.com/dbkeator/simple2_NIDM_examples/master/datasets.datalad.org/abide/RawDataBIDS/CMU_a/nidm.ttl'\n        , 'cmu_a.nidm.ttl')\nfiles = ['cmu_a.nidm.ttl']\nproject_list = Query.GetProjectsUUID(files)\nprint(project_list)\nproject_uuid = str(project_list[0])\nobjects = Query.getProjectAcquisitionObjects(files, project_uuid)\nassert isinstance(objects, list)\n"
+}

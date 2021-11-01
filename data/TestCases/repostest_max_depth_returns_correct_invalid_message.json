@@ -1,0 +1,9 @@
+{
+    "functionName": "test_max_depth_returns_correct_invalid_message",
+    "className": null,
+    "fileName": "/Rambatino_&_CHAID/tests_&_test_tree.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test when max_depth reached, it has the correct invalid message\n    on the terminal nodes\n    \"\"\"\ngender = np.array([0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1])\nincome = np.array([0, 0, 1, 1, 2, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0])\nndarr = np.transpose(np.vstack([gender]))\ntree = CHAID.Tree.from_numpy(ndarr, income, alpha_merge=0.9, max_depth=1,\n    min_child_node_size=1, min_parent_node_size=1)\nassert tree.tree_store[-1\n    ].split.invalid_reason == CHAID.InvalidSplitReason.MAX_DEPTH, 'The max depth limit is the invalid reason on the terminal node'\n"
+}

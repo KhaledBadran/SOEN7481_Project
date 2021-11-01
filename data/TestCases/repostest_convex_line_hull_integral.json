@@ -1,0 +1,9 @@
+{
+    "functionName": "test_convex_line_hull_integral",
+    "className": null,
+    "fileName": "/cheran-senthil_&_PyRival/tests_&_data_structures_&_test_convex_hull_trick.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "import random\nrandom.seed(1337)\nfor _ in range(t):\n    n = random.randint(1, 20)\n    K = [random.randint(-10, 10) for _ in range(n)]\n    M = [random.randint(-10, 10) for _ in range(n)]\n    X = list(range(-10, 10 + 1))\n    brute_ans = brute(K, M, X)\n    hull_i, hull_x = convex_hull_trick(K, M)\n    assert len(hull_i) - 1 == len(hull_x)\n    ans = [max_query(x, K, M, hull_i, hull_x) for x in X]\n    assert ans == brute_ans\n"
+}

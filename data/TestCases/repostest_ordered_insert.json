@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ordered_insert",
+    "className": null,
+    "fileName": "/SurrealAI_&_BeneDict/test_&_test_core.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Notes:\n        Python 3.6, all dict insertion order is guaranteed,\n            vanilla BeneDict will also pass this test\n        Python 3.5, only OrderedBeneDict will pass this test\n        Python 3.4 will simply crash due to OrderedDict internal problem\n    \"\"\"\nD = Dtype()\nO = OrderedDict()\nnums = [10, 7, 2, 8, 4, 1, 3, 9, 5, 6]\nfor i in nums:\n    key = 'k{}'.format(i)\n    O[key] = i\n    setattr(D, key, i)\nD_items = list(D.to_dict().items())\nO_items = list(O.items())\nif Dtype in [OrderedBeneDict, MyOrderedDict] or sys.version_info.minor >= 6:\n    print(D_items)\n    assert D_items == O_items\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_select_from_timestamp",
+    "className": null,
+    "fileName": "/Drakkar-Software_&_OctoBot-Backtesting/tests_&_util_&_test_database.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "async with get_database() as database:\n    operations = [DataBaseOperations.INF_EQUALS.value]\n    candles = await database.select_from_timestamp(ExchangeDataTables.OHLCV,\n        ['1587960000'], operations)\n    assert len(candles) > 0\n    assert all(candle[0] <= 1587960000 for candle in candles)\n    operations = [DataBaseOperations.INF_EQUALS.value, DataBaseOperations.\n        SUP_EQUALS.value]\n    candles = await database.select_from_timestamp(ExchangeDataTables.OHLCV,\n        ['1587960000', '1587960000'], operations)\n    assert len(candles) > 0\n    assert all(candle[0] == 1587960000 for candle in candles)\n    operations = [DataBaseOperations.INF_EQUALS.value, DataBaseOperations.\n        SUP_EQUALS.value]\n    candles = await database.select_from_timestamp(ExchangeDataTables.OHLCV,\n        ['1587960000', '1587945600'], operations)\n    assert len(candles) == 15\n    assert all(1587945600 <= candle[0] <= 1587960000 for candle in candles)\n    operations = [DataBaseOperations.INF_EQUALS.value, DataBaseOperations.\n        SUP_EQUALS.value]\n    candles = await database.select_from_timestamp(ExchangeDataTables.OHLCV,\n        ['1587960000', '1587945600'], operations, symbol='xyz')\n    assert len(candles) == 0\n"
+}

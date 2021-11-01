@@ -1,0 +1,9 @@
+{
+    "functionName": "test_rsa_decryption",
+    "className": "TestTpmBackEnds",
+    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_tpm_back_ends.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "for tpm in self.backEndList:\n    identityName = Name('/Test/KeyName')\n    key = tpm.createKey(identityName, RsaKeyParams())\n    keyName = key.getKeyName()\n    content = Blob([1, 2, 3, 4])\n    publicKey = key.derivePublicKey()\n    cipherText = RsaAlgorithm.encrypt(publicKey, content, EncryptParams(\n        EncryptAlgorithmType.RsaOaep))\n    plainText = key.decrypt(cipherText.toBytes())\n    self.assertTrue(plainText.equals(content))\n    tpm.deleteKey(keyName)\n    self.assertEqual(False, tpm.hasKey(keyName))\n"
+}

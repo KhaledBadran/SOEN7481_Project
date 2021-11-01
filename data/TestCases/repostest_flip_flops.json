@@ -1,0 +1,9 @@
+{
+    "functionName": "test_flip_flops",
+    "className": null,
+    "fileName": "/poletaevvlad_&_CubeLang/test_&_test_integration.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "code = \"\"\"\n        let count: int\n        while top[1, 1] != top[2, 2] or count == 0 do \n            RUR'U'\n            count = count + 1\n        end\n        out(count)\n    \"\"\"\nout_fn = MagicMock()\nstack = Stack()\nfinish_function = MagicMock()\ncube_runtime = CubeRuntime(Cube((3, 3, 3)), Orientation(), lambda action:\n    None, finish_function)\ncube_runtime.functions.initialize_stack(stack)\nstdlib.initialize_stack(stack)\nstack.add_global('out', Function(([Integer], Void)))\nglobals = {'out': out_fn, **stdlib.exec_globals, **cube_runtime.functions.\n    exec_globals}\nexecutor = ExecutionContext(globals)\nexecutor.compile(parser.parse(code, stack))\nexecutor.execute(MockTracebackWriter())\ncube_runtime.finished()\nout_fn.assert_called_once_with(6)\nfinish_function.assert_called_once()\n"
+}

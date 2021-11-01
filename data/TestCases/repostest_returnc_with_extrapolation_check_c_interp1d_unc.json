@@ -1,0 +1,9 @@
+{
+    "functionName": "test_returnc_with_extrapolation_check_c_interp1d_unc",
+    "className": null,
+    "fileName": "/PTB-PSt1_&_PyDynamic/test_&_test_interpolate.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "C = interp1d_unc(**interp_inputs)[3]\nassert C.shape == (len(interp_inputs['t_new']), len(interp_inputs['t']))\ninterp_range = (interp_inputs['t_new'] >= np.min(interp_inputs['t'])) | (\n    interp_inputs['t_new'] <= np.max(interp_inputs['t']))\nassert np.all(np.count_nonzero(C[np.where(~interp_range)], 1) == 1)\nassert np.all(np.any((np.count_nonzero(C[np.where(interp_range)], 1) == 2, \n    np.count_nonzero(C[np.where(interp_range)], 1) == 1), 0))\nassert_allclose(np.sum(C, 1), np.ones_like(interp_inputs['t_new']))\ngiven(timestamps_values_uncertainties_kind(returnC=True, extrapolate=True,\n    kind_tuple=('linear',), restrict_fill_unc='str'))"
+}

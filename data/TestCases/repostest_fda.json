@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fda",
+    "className": null,
+    "fileName": "/PythonOT_&_POT/test_&_test_dr.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "n_samples = 90\nnp.random.seed(0)\nxs, ys = ot.datasets.make_data_classif('gaussrot', n_samples)\nn_features_noise = 8\nxs = np.hstack((xs, np.random.randn(n_samples, n_features_noise)))\np = 1\nPfda, projfda = ot.dr.fda(xs, ys, p)\nprojfda(xs)\nnp.testing.assert_allclose(np.sum(Pfda ** 2, 0), np.ones(p))\npytest.mark.skipif(nogo, reason='Missing modules (autograd or pymanopt)')"
+}

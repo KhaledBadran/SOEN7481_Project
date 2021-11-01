@@ -1,0 +1,9 @@
+{
+    "functionName": "test_remove_chain_by_name",
+    "className": "TestChainConsumer",
+    "fileName": "/samreay_&_ChainConsumer/tests_&_test_chainconsumer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tolerance = 0.05\nconsumer = ChainConsumer()\nconsumer.add_chain(self.data * 2, name='a')\nconsumer.add_chain(self.data, name='b')\nconsumer.remove_chain(chain='a')\nconsumer.configure()\nsummary = consumer.analysis.get_summary()\nassert isinstance(summary, dict)\nactual = np.array(list(summary.values())[0])\nexpected = np.array([3.5, 5.0, 6.5])\ndiff = np.abs(expected - actual)\nassert np.all(diff < tolerance)\n"
+}

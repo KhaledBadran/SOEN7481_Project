@@ -1,0 +1,9 @@
+{
+    "functionName": "test_expr_in_attribute",
+    "className": "LexerTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_lexer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"test some slightly trickier expressions.\n\n        you can still trip up the expression parsing, though, unless we\n        integrated really deeply somehow with AST.\"\"\"\ntemplate = \"\"\"\n            <%call expr=\"foo>bar and 'lala' or 'hoho'\"/>\n            <%call expr='foo<bar and hoho>lala and \"x\" + \"y\"'/>\n        \"\"\"\nnodes = Lexer(template).parse()\nself._compare(nodes, TemplateNode({}, [Text('\\n            ', (1, 1)),\n    CallTag('call', {'expr': \"foo>bar and 'lala' or 'hoho'\"}, (2, 13), []),\n    Text('\\n            ', (2, 57)), CallTag('call', {'expr':\n    'foo<bar and hoho>lala and \"x\" + \"y\"'}, (3, 13), []), Text('\\n        ',\n    (3, 64))]))\n"
+}

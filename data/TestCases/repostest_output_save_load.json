@@ -1,0 +1,9 @@
+{
+    "functionName": "test_output_save_load",
+    "className": "TestAnyPyProcess",
+    "fileName": "/AnyBody-Research-Group_&_AnyPyTools/tests_&_test_abcutils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "macro = [['load \"model.main.any\" -def N_STEP=\"10\"',\n    'operation Main.ArmModelStudy.InverseDynamics',\n    'classoperation Main.ArmModelStudy.Output.MaxMuscleActivity \"Dump\"',\n    'classoperation Main.ArmModel.GlobalRef.t \"Dump\"']]\napp = AnyPyProcess()\napp.start_macro(macro)\napp.save_results('test.db')\nreloaded = app.load_results('test.db')\nreloaded['Main.ArmModel.GlobalRef.t']\n"
+}

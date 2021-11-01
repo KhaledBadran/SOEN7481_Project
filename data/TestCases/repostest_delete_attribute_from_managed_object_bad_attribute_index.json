@@ -1,0 +1,9 @@
+{
+    "functionName": "test_delete_attribute_from_managed_object_bad_attribute_index",
+    "className": "TestKmipEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that an ItemNotFound error is raised when attempting to delete\n        an attribute by index that cannot be found on a managed object.\n        \"\"\"\ne = engine.KmipEngine()\ne._data_store = self.engine\ne._data_store_session_factory = self.session_factory\ne._data_session = e._data_store_session_factory()\ne._logger = mock.MagicMock()\nmanaged_object = pie_objects.SymmetricKey(enums.CryptographicAlgorithm.AES,\n    0, b'')\nargs = managed_object, ('Object Group', 3, None)\nself.assertRaisesRegex(exceptions.ItemNotFound,\n    'Could not locate the attribute instance with the specified index: 3',\n    e._delete_attribute_from_managed_object, *args)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_authorize",
+    "className": null,
+    "fileName": "/archivesspace-labs_&_ArchivesSnake/tests_&_test_web_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "client = ASnakeClient()\ntoke = client.authorize()\nassert isinstance(toke, str)\nassert len(toke) == 64\nassert set(toke) <= set('0123456789abcdef')\nassert client.session.headers['X-ArchivesSpace-Session'] == toke\nassert client.get('users/1').status_code == 200\nvcr.use_cassette"
+}

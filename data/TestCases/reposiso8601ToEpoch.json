@@ -1,0 +1,9 @@
+{
+    "functionName": "iso8601ToEpoch",
+    "className": null,
+    "fileName": "/FaradayRF_&_Faraday-Software/faraday_&_telemetry.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Converts ISO 8601 start and stop times into epoch time values\n\n    :param startTime: ISO 8601 time\n    :param endTime: ISO 8601 time\n    :return: tuple with EPOCH times (START,STOP). None if error.\n    \"\"\"\nfmt = '%Y-%m-%dT%H:%M:%S'\ntry:\n    start = time.strptime(startTime, fmt)\n    end = time.strptime(endTime, fmt)\n    startEpoch = time.mktime(start)\n    endEpoch = time.mktime(end)\nexcept StandardError as e:\n    logger.error('StandardError: ' + str(e))\n    return None\ntimeTuple = startEpoch, endEpoch\nreturn timeTuple\n"
+}

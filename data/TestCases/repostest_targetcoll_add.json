@@ -1,0 +1,9 @@
+{
+    "functionName": "test_targetcoll_add",
+    "className": "TestTarget",
+    "fileName": "/apmoore1_&_Bella/tests_&_test_data_types.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test the add function of TargetCollection\n        \"\"\"\ntarget_col = TargetCollection()\ntarget_example_0 = Target([(3, 5), (6, 8)], '1', 'Iphone',\n    'text with Iphone', 1)\ntarget_example_1 = Target([(1, 5)], '3', 'Iphone', 'text with Iphone', 1)\ntarget_col.add(target_example_0)\nself.assertEqual(target_col['1'], target_example_0, msg=\n    'Test that {} has been added to {}'.format(target_example_0, target_col))\nwith self.assertRaises(TypeError, msg='Should not be able to add a dict'):\n    target_col.add({'target_id': '2'})\nwith self.assertRaises(ValueError, msg=\n    'Should not be able to add a Target that has no `id`'):\n    del target_example_1['target_id']\n    if 'target_id' in target_example_1:\n        raise KeyError('{} should not contain `id` key'.format(\n            target_example_1))\n    target_col.add(target_example_1)\n"
+}

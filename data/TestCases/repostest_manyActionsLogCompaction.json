@@ -1,0 +1,9 @@
+{
+    "functionName": "test_manyActionsLogCompaction",
+    "className": null,
+    "fileName": "/bakwc_&_PySyncObj/test_syncobj.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "random.seed(42)\na = [getNextAddr(), getNextAddr(), getNextAddr()]\no1 = TestObj(a[0], [a[1], a[2]], TEST_TYPE.COMPACTION_1,\n    compactionMinEntries=100)\no2 = TestObj(a[1], [a[2], a[0]], TEST_TYPE.COMPACTION_1,\n    compactionMinEntries=100)\no3 = TestObj(a[2], [a[0], a[1]], TEST_TYPE.COMPACTION_1,\n    compactionMinEntries=100)\nobjs = [o1, o2, o3]\nassert not o1._isReady()\nassert not o2._isReady()\nassert not o3._isReady()\ndoTicks(objs, 10, stopFunc=lambda : o1._isReady() and o2._isReady() and o3.\n    _isReady())\nassert o1._isReady()\nassert o2._isReady()\nassert o3._isReady()\nassert o1._getLeader().address in a\nassert o1._getLeader() == o2._getLeader()\nassert o1._getLeader() == o3._getLeader()\nfor i in xrange(0, 500):\n    o1.addValue(1)\n    o2.addValue(1)\ndoTicks(objs, 10, stopFunc=lambda : o1.getCounter() == 1000 and o2.\n    getCounter() == 1000 and o3.getCounter() == 1000)\nassert o1.getCounter() == 1000\nassert o2.getCounter() == 1000\nassert o3.getCounter() == 1000\nassert o1._getRaftLogSize() <= 100\nassert o2._getRaftLogSize() <= 100\nassert o3._getRaftLogSize() <= 100\nnewObjs = [o1, o2]\ndoTicks(newObjs, 10, stopFunc=lambda : o3._getLeader() is None)\nfor i in xrange(0, 500):\n    o1.addValue(1)\n    o2.addValue(1)\ndoTicks(newObjs, 10, stopFunc=lambda : o1.getCounter() == 2000 and o2.\n    getCounter() == 2000)\nassert o1.getCounter() == 2000\nassert o2.getCounter() == 2000\nassert o3.getCounter() != 2000\ndoTicks(objs, 10, stopFunc=lambda : o3.getCounter() == 2000)\nassert o3.getCounter() == 2000\nassert o1._getRaftLogSize() <= 100\nassert o2._getRaftLogSize() <= 100\nassert o3._getRaftLogSize() <= 100\no1._destroy()\no2._destroy()\no3._destroy()\n"
+}

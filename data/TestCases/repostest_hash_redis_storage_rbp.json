@@ -1,0 +1,9 @@
+{
+    "functionName": "test_hash_redis_storage_rbp",
+    "className": "TestHashStorage",
+    "fileName": "/pixelogik_&_NearPy/tests_&_hash_storage_tests.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "hash1 = RandomBinaryProjections('testRBPHash', 10)\nhash1.reset(100)\nself.redis_storage.store_hash_configuration(hash1)\nhash2 = RandomBinaryProjections(None, None)\nhash2.apply_config(self.redis_storage.load_hash_configuration('testRBPHash'))\nself.assertEqual(hash1.dim, hash2.dim)\nself.assertEqual(hash1.hash_name, hash2.hash_name)\nself.assertEqual(hash1.projection_count, hash2.projection_count)\nfor i in range(hash1.normals.shape[0]):\n    for j in range(hash1.normals.shape[1]):\n        self.assertEqual(hash1.normals[i, j], hash2.normals[i, j])\n"
+}

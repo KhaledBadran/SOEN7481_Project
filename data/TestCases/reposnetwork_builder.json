@@ -1,0 +1,9 @@
+{
+    "functionName": "network_builder",
+    "className": null,
+    "fileName": "/viebboy_&_PyGOP/test_&_utility_&_test_gop_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "params, model_data = utility.get_random_model_data()\nmodel = gop_utils.network_builder(model_data['topology'], model_data[\n    'op_sets'], input_dropout=params['input_dropout'], dropout=params[\n    'dropout'], regularizer=params['weight_regularizer'], constraint=params\n    ['weight_constraint'], output_activation=model_data['output_activation'\n    ], use_bias=model_data['use_bias'])\nmodel.compile(params['optimizer'], params['loss'], params['metrics'])\noutput_weights = model.get_layer('output').get_weights()\nif output_weights[0].ndim == 3:\n    assert output_weights[0].shape == (1, 50, OUTPUT_DIM)\nelse:\n    assert output_weights[0].shape == (50, OUTPUT_DIM)\n"
+}

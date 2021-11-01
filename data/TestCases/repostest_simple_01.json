@@ -1,0 +1,9 @@
+{
+    "functionName": "test_simple_01",
+    "className": null,
+    "fileName": "/vutran1710_&_PyrateLimiter/tests_&_test_02.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Single-rate Limiter with RedisBucket\n    \"\"\"\nrate = RequestRate(3, 5 * Duration.SECOND)\nlimiter = Limiter(rate, bucket_class=RedisBucket, bucket_kwargs={\n    'redis_pool': pool, 'bucket_name': 'test-bucket-1'})\nitem = 'vutran_list'\nwith pytest.raises(BucketFullException):\n    for _ in range(4):\n        limiter.try_acquire(item)\nsleep(6)\nlimiter.try_acquire(item)\nvol = limiter.get_current_volume(item)\nassert vol == 1\nlimiter.try_acquire(item)\nlimiter.try_acquire(item)\nwith pytest.raises(BucketFullException):\n    limiter.try_acquire(item)\n"
+}

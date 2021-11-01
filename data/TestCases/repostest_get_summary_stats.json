@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_summary_stats",
+    "className": null,
+    "fileName": "/grd349_&_PBjam/pbjam_&_tests_&_test_asy_peakbag.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test for method for getting summary stats from asy_fit\"\"\"\nst = cs.st\nfunc = st.asy_fit._get_summary_stats\ninp = [st.asy_fit.fit]\npbt.does_it_return(func, inp)\npbt.right_type(func, inp, pd.DataFrame)\npbt.right_shape(func, inp, (10, 9))\nout = func(*inp)\nfor key in ['std', 'skew', 'MAD']:\n    assert_array_equal(out.loc[:, (key)], 0)\nfor key in ['mean', '2nd', '16th', '50th', '84th', '97th']:\n    assert_array_equal(out.loc[:, (key)], np.array([1.0, 2.0, 1.0, 0.0, -\n        2.0, 1.0, 1.0, 1.0, 1.0, 1.0]))\n"
+}

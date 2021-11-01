@@ -1,0 +1,9 @@
+{
+    "functionName": "test_read_missing_split_key_threshold",
+    "className": "TestSplitKey",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_secrets_&_test_split_key.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that an InvalidKmipEncoding error is raised during the decoding\n        of a SplitKey object when the split key threshold is missing from the\n        encoding.\n        \"\"\"\nsplit_key = secrets.SplitKey()\nself.assertIsNone(split_key.split_key_threshold)\nargs = self.no_split_key_threshold_encoding,\nself.assertRaisesRegex(exceptions.InvalidKmipEncoding,\n    'The SplitKey encoding is missing the SplitKeyThreshold field.',\n    split_key.read, *args)\n"
+}

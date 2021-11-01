@@ -1,0 +1,9 @@
+{
+    "functionName": "test_JMSPCommSender",
+    "className": "TestJMSPCommSender",
+    "fileName": "/mobinrg_&_JMSPComm_python/test_&_test_JMSPCommSender.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "spcomm = JMSPCommSender()\nspcomm.comMainVer = 16\nspcomm.comDataVer = 16\nspcomm.initFrame()\nspcomm.addBuffer(3)\nspcomm.addBuffer(1)\nspcomm.buildCommPack()\ndata = test_helper.getDataFrame1()\nprint(data)\nprint(spcomm.dataFrame, len(spcomm.dataFrame), spcomm.dataCRC)\ni = 0\nfor byte in spcomm.dataFrame:\n    print(byte, data[test_helper.COL_DATA_FRAME][i])\n    self.assertEqual(byte, data[test_helper.COL_DATA_FRAME][i])\n    i += 1\nself.assertEqual(spcomm.comMainVer, 16)\nself.assertEqual(spcomm.comDataVer, 16)\nself.assertEqual(spcomm.dataCRC, data[test_helper.COL_DATA_FRAME_CRC])\n"
+}

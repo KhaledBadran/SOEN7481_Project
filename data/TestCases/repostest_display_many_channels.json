@@ -1,0 +1,9 @@
+{
+    "functionName": "test_display_many_channels",
+    "className": null,
+    "fileName": "/SimLeek_&_CV_PubSubs/tests_&_frame_&_test_frame_updater.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with mock.patch('displayarray.frame.frame_updater.pub_cam_thread'\n    ), mock.patch.object(fup.subscriber_dictionary, 'CV_CAMS_DICT'\n    ) as mock_cam_dict, mock.patch.object(fup.subscriber_dictionary,\n    'cam_frame_sub') as mock_sub_cam, mock.patch(\n    'displayarray.frame.frame_updater.subscriber_dictionary.handler_cmd_sub'\n    ) as handler_cmd_sub:\n    mock_cam_dict.__contains__.side_effect = itertools.cycle([False, False,\n        True])\n    mock_sub_owner = handler_cmd_sub.return_value = mock.MagicMock()\n    mock_sub_owner.get.side_effect = ['', '', '', 'quit']\n    arr = np.ones((20, 20, 20))\n    sub = mock.MagicMock()\n    sub.get.return_value = arr\n    mock_sub_cam.return_value = sub\n    f = fup.FrameUpdater(arr)\n    f.loop()\n    assert isinstance(f.callbacks[0], SelectChannels)\n    win_cmd_pub.publish('quit')\n"
+}

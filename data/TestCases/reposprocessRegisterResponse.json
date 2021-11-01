@@ -1,0 +1,9 @@
+{
+    "functionName": "processRegisterResponse",
+    "className": null,
+    "fileName": "/named-data_&_PyNDN2/examples_&_test_register_route.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    This is called when the register route command responds to decode the\n    encodedControlResponse as a TLV ControlParametersResponse message\n    containing one ControlParameters. On success, print the ControlParameters\n    values which should be the same as requested.\n\n    :param Blob encodedControlResponse: The TLV-encoded ControlParametersResponse.\n    \"\"\"\ndecodedControlResponse = (control_parameters_pb2.ControlParametersTypes.\n    ControlParametersResponseMessage())\nProtobufTlv.decode(decodedControlResponse, encodedControlResponse)\ncontrolResponse = decodedControlResponse.control_response\nlowestErrorCode = 400\nif controlResponse.status_code >= lowestErrorCode:\n    dump('Face create command got error, code ' + str(controlResponse.\n        status_code) + ': ' + controlResponse.status_text)\n    return\nif len(controlResponse.control_parameters) != 1:\n    dump('Face create command response does not have one ControlParameters')\n    return\ncontrolParameters = controlResponse.control_parameters[0]\ndump('Successful in name registration: ControlParameters(Name: ' +\n    ProtobufTlv.toName(controlParameters.name.component).toUri() +\n    ', FaceId: ' + str(controlParameters.face_id) + ', Origin: ' + str(\n    controlParameters.origin) + ', Cost: ' + str(controlParameters.cost) +\n    ', Flags: ' + str(controlParameters.flags) + ')')\n"
+}

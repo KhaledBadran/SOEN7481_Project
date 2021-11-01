@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_message_with_attributes",
+    "className": "test_Queue",
+    "fileName": "/pbx-gs_&_OSBot-AWS/tests_&_unit_&_apis_&_test_Queue.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with Temp_Queue() as temp_Queue:\n    queue = temp_Queue.queue\n    body = 'this is the body of the message.... 132'\n    attributes = {'var_1': 'value_1', 'var_2': 'value_2'}\n    queue.message_send(body, attributes)\n    data = queue.get_message_with_attributes()\n    assert body == data[0]\n    assert attributes == data[1]\n    assert attributes.get('var_1') == 'value_1'\n"
+}

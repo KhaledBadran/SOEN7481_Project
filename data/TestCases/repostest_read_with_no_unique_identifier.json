@@ -1,0 +1,9 @@
+{
+    "functionName": "test_read_with_no_unique_identifier",
+    "className": "TestGetAttributeListResponsePayload",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_get_attribute_list.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that an InvalidKmipEncoding error is raised when a\n        GetAttributeList response payload is read from a data stream with no\n        unique identifier.\n        \"\"\"\npayload = payloads.GetAttributeListResponsePayload()\nself.assertEqual(None, payload._unique_identifier)\nself.assertEqual(list(), payload._attribute_names)\nargs = self.encoding_sans_unique_identifier,\nself.assertRaisesRegex(exceptions.InvalidKmipEncoding,\n    'The GetAttributeList response payload encoding is missing the unique identifier.'\n    , payload.read, *args)\n"
+}

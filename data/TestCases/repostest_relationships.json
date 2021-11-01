@@ -1,0 +1,9 @@
+{
+    "functionName": "test_relationships",
+    "className": "TestCaseModel",
+    "fileName": "/Riffstation_&_Flask-Philo-SQLAlchemy/tests_&_app_&_test_orm.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with self.app.app_context():\n    rock = Genre(name='Rock', description='rock yeah!!!')\n    rock.add()\n    self.pool.commit()\n    pink = Artist(genre_id=rock.id, name='Pink Floyd', description='Awsome')\n    pink.add()\n    self.pool.commit()\n    dark = Album(artist_id=pink.id, name='Dark side of the moon',\n        description='Interesting')\n    dark.add()\n    self.pool.commit()\n    rolling = Artist(genre_id=rock.id, name='Rolling Stones', description=\n        'Acceptable')\n    rolling.add()\n    self.pool.commit()\n    hits = Album(artist_id=rolling.id, name='Greatest hits', description=\n        'Interesting')\n    hits.add()\n    self.pool.commit()\n    assert 2 == Album.objects.count()\n    wall = Album(artist_id=pink.id, name='The Wall', description='Interesting')\n    wall.add()\n    self.pool.commit()\n    assert 2 == len(pink.albums)\n    assert 2 == len(Artist.objects.filter_by(genre_id=rock.id)[:])\n"
+}

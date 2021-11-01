@@ -1,0 +1,9 @@
+{
+    "functionName": "test_qgrid_interpolation",
+    "className": "TestStructureMethods",
+    "fileName": "/mesonepigreco_&_CellConstructor/scripts_&_cellconstructor_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        We test if the interpolation and the generation of \n        a q grid is consistent.\n        \"\"\"\ndyn = self.dynSnSe.Copy()\nnew_dyn = dyn.Interpolate(dyn.GetSupercell(), (4, 4, 1))\nsuperdyn = new_dyn.GenerateSupercellDyn(new_dyn.GetSupercell())\ndynq = CC.Phonons.GetDynQFromFCSupercell(superdyn.dynmats[0], np.array(\n    new_dyn.q_tot), new_dyn.structure, superdyn.structure)\nfor iq, q in enumerate(new_dyn.q_tot):\n    zero = dynq[(iq), :, :] - new_dyn.dynmats[iq]\n    zero = np.max(np.abs(zero))\n    self.assertTrue(zero < 1e-08)\n"
+}

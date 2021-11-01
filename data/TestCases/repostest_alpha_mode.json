@@ -1,0 +1,9 @@
+{
+    "functionName": "test_alpha_mode",
+    "className": null,
+    "fileName": "/pashango2_&_Image4Layer/tests_&_test_image4layer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "rgb = Image.new('RGB', (1, 1), (255, 0, 0))\nrgba = Image.new('RGBA', (1, 1), (255, 0, 0, 128))\nl = Image.new('L', (1, 1), 255)\nla = Image.new('LA', (1, 1), (255, 255))\nhsv = Image.new('HSV', (1, 1), (0, 0, 0))\ncmyk = Image.new('CMYK', (1, 1), (0, 0, 0, 0))\ndst_mode, color_pair, alpha_pair = split_separate_blend(rgb, rgba)\nassert dst_mode == 'RGB'\ndst_mode, color_pair, alpha_pair = split_separate_blend(rgba, rgb)\nassert dst_mode == 'RGBA'\ndst_mode, color_pair, alpha_pair = split_separate_blend(rgb, l)\nassert dst_mode == 'RGB'\ndst_mode, color_pair, alpha_pair = split_separate_blend(l, rgb)\nassert dst_mode == 'RGB'\ndst_mode, color_pair, alpha_pair = split_separate_blend(la, rgb)\nassert dst_mode == 'RGBA'\ndst_mode, color_pair, alpha_pair = split_separate_blend(l, la)\nassert dst_mode == 'L'\ndst_mode, color_pair, alpha_pair = split_separate_blend(la, l)\nassert dst_mode == 'LA'\ndst_mode, color_pair, alpha_pair = split_separate_blend(rgb, la)\nassert dst_mode == 'RGB'\ncolors = [(a.getpixel((0, 0)), b.getpixel((0, 0))) for a, b in color_pair]\nassert colors == [(255, 255), (0, 255), (0, 255)]\ndst_mode, color_pair, alpha_pair = split_separate_blend(hsv, l)\nassert dst_mode == 'HSV'\ndst_mode, color_pair, alpha_pair = split_separate_blend(cmyk, l)\nassert dst_mode == 'CMYK'\n"
+}

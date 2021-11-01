@@ -1,0 +1,9 @@
+{
+    "functionName": "test_services_available",
+    "className": null,
+    "fileName": "/EclecticIQ_&_OpenTAXII/tests_&_test_http.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "headers = prepare_headers(version, https)\nrequest = as_tm(version).DiscoveryRequest(message_id=MESSAGE_ID)\nbase_url = '%s://localhost' % ('https' if https else 'http')\nresponse = client.post(DISCOVERY_NOT_AVAILABLE['address'], data=request.\n    to_xml(), headers=headers, base_url=base_url)\nassert response.status_code == 200\nmessage = as_tm(version).get_message_from_xml(response.data)\nassert isinstance(message, as_tm(version).StatusMessage)\nassert message.status_type == ST_FAILURE\npytest.mark.parametrize('https', [True, False])pytest.mark.parametrize('version', [11, 10])"
+}

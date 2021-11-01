@@ -1,0 +1,9 @@
+{
+    "functionName": "test_penalty",
+    "className": "TestRegularizationPenalties",
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_test_regularization.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "np_penalty = getattr(self, penalty)\ntheano_penalty = getattr(lasagne.regularization, penalty)\nX = T.matrix()\nX0 = lasagne.utils.floatX(np.random.uniform(-3, 3, (10, 10)))\ntheano_result = theano_penalty(X).eval({X: X0})\nnp_result = np_penalty(X0)\nassert np.allclose(theano_result, np_result)\npytest.mark.parametrize('penalty', ['l1', 'l2'])"
+}

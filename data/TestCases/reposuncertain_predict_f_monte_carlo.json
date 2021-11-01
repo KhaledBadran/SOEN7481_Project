@@ -1,0 +1,9 @@
+{
+    "functionName": "uncertain_predict_f_monte_carlo",
+    "className": "MomentMatchingSVGP",
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_conditionals_&_test_uncertain_conditional.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "D_in = Xchol.shape[0]\nX_samples = Xmu + np.reshape(Xchol[(None), :, :] @ rng.randn(mc_iter, D_in)\n    [:, :, (None)], [mc_iter, D_in])\nF_mu, F_var = self.predict_f(X_samples)\nF_samples = (F_mu + rng.randn(*F_var.shape) * F_var ** 0.5).numpy()\nmean = np.mean(F_samples, axis=0)\ncovar = np.cov(F_samples.T)\nreturn mean, covar\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test__individual_pixel_double_density__more_captures_so_brighter_trails",
+    "className": "TestParallelAndSerialCTI",
+    "fileName": "/Jammy2211_&_PyAutoCTI/test_&_unit_&_data_&_test_add_correct_cti_to_image.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "image_pre_cti = np.zeros((5, 5))\nimage_pre_cti[2, 2] = +100\nim = cti_image.ImageFrame(frame_geometry=ci_frame.FrameGeometry.\n    euclid_bottom_left(), array=image_pre_cti)\nparams_0 = setup(include_parallel=True, p_trap_densities=(0.1,),\n    p_trap_lifetimes=(1.0,), p_well_notch_depth=1e-07, p_well_fill_beta=0.8,\n    include_serial=True, s_trap_densities=(0.1,), s_trap_lifetimes=(1.0,),\n    s_well_notch_depth=1e-07, s_well_fill_beta=0.8)\nimage_post_cti_0 = im.add_cti_to_image(cti_params=params_0, cti_settings=\n    arctic_both)\nparams_1 = setup(include_parallel=True, p_trap_densities=(0.2,),\n    p_trap_lifetimes=(1.0,), p_well_notch_depth=1e-07, p_well_fill_beta=0.8,\n    include_serial=True, s_trap_densities=(0.2,), s_trap_lifetimes=(1.0,),\n    s_well_notch_depth=1e-07, s_well_fill_beta=0.8)\nimage_post_cti_1 = im.add_cti_to_image(cti_params=params_1, cti_settings=\n    arctic_both)\nimage_difference = image_post_cti_1 - image_post_cti_0\nassert (image_difference[0:2, :] == 0.0).all()\nassert (image_difference[:, 0:2] == 0.0).all()\nassert image_difference[2, 2] < 0.0\nassert (image_difference[3:5, (2)] > 0.0).all()\nassert (image_difference[(2), 3:5] > 0.0).all()\nassert (image_difference[3:5, 3:5] > 0.0).all()\n"
+}

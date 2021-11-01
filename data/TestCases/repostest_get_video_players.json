@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_video_players",
+    "className": "UiConfTests",
+    "fileName": "/ptchankue_&_KalturaGeneratedAPIClientsPython/KalturaClient_&_tests_&_test_uiconf.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Until I find a better way... this gets all uiconfs that are 'single video' players\n           Not sure if this is the right way\"\"\"\nfilt = KalturaUiConfFilter()\nplayers = [KalturaUiConfObjType.PLAYER_V3, KalturaUiConfObjType.PLAYER,\n    KalturaUiConfObjType.PLAYER_SL]\ntags = 'player'\nfilt.setObjTypeIn(players)\nfilt.setTagsMultiLikeOr(tags)\nresp = self.client.uiConf.list(filter=filt)\nobjs = resp.objects\nfor o in objs:\n    self.assertIn(o.objType.getValue(), players)\n    match = re.search('isPlaylist=\"(.*?)\"', o.getConfFile())\n    if match is None:\n        pass\n    else:\n        value = match.group(1)\n        self.assertIn(value, ['true', 'multi'])\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_invalid_usage_limits_count",
+    "className": "TestCheckResponsePayload",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_check.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a TypeError is raised when an invalid value is used to set\n        the usage limits count of a Check response payload.\n        \"\"\"\nkwargs = {'usage_limits_count': 'invalid'}\nself.assertRaisesRegex(TypeError, 'Usage limits count must be an integer.',\n    payloads.CheckResponsePayload, **kwargs)\npayload = payloads.CheckResponsePayload()\nargs = payload, 'usage_limits_count', 'invalid'\nself.assertRaisesRegex(TypeError, 'Usage limits count must be an integer.',\n    setattr, *args)\n"
+}

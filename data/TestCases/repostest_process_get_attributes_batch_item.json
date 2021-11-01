@@ -1,0 +1,9 @@
+{
+    "functionName": "test_process_get_attributes_batch_item",
+    "className": "TestKMIPClient",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_test_kmip_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "uuid = '00000000-1111-2222-3333-444444444444'\nattributes = []\npayload = payloads.GetAttributesResponsePayload(unique_identifier=uuid,\n    attributes=attributes)\nbatch_item = ResponseBatchItem(operation=Operation(OperationEnum.\n    GET_ATTRIBUTES), response_payload=payload)\nresult = self.client._process_get_attributes_batch_item(batch_item)\nself.assertIsInstance(result, GetAttributesResult)\nself.assertEqual(uuid, result.uuid)\nself.assertEqual(attributes, result.attributes)\n"
+}

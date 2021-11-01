@@ -1,0 +1,9 @@
+{
+    "functionName": "test_derive_key_invalid_derivation_type",
+    "className": "TestKmipEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the right error is thrown when an invalid derivation type\n        is provided with a DeriveKey request.\n        \"\"\"\ne = engine.KmipEngine()\ne._data_store = self.engine\ne._data_store_session_factory = self.session_factory\ne._data_session = e._data_store_session_factory()\ne._logger = mock.MagicMock()\ne._cryptography_engine.logger = mock.MagicMock()\npayload = payloads.DeriveKeyRequestPayload(object_type=enums.ObjectType.\n    CERTIFICATE)\nargs = payload,\nself.assertRaisesRegex(exceptions.InvalidField,\n    'Key derivation can only generate a SymmetricKey or SecretData object.',\n    e._process_derive_key, *args)\n"
+}

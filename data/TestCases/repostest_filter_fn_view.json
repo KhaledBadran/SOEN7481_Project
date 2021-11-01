@@ -1,0 +1,9 @@
+{
+    "functionName": "test_filter_fn_view",
+    "className": "TestMMObjectViews",
+    "fileName": "/Axiologue_&_DjangoRestMultipleModels/tests_&_test_object_view.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        The filter function is useful if you want to apply filtering to one query\n        but not another (unlike adding view level filtering, which will filter all the\n        querysets), but that filtering can't be provided at the beginning (for example, it\n        needs to access a query_param).  This is testing the filter_fn.\n        \"\"\"\nview = FilterFnView.as_view()\nrequest = factory.get('/', {'letter': 'o'})\nwith self.assertNumQueries(2):\n    response = view(request).render()\nself.assertEqual(response.status_code, status.HTTP_200_OK)\nself.assertEqual(response.data, {'Play': [{'title':\n    \"A Midsummer Night's Dream\", 'genre': 'Comedy', 'year': 1600}, {'title':\n    'Julius Caesar', 'genre': 'Tragedy', 'year': 1623}], 'Poem': [{'title':\n    \"Shall I compare thee to a summer's day?\", 'style': 'Sonnet'}, {'title':\n    'As a decrepit father takes delight', 'style': 'Sonnet'}]})\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_read_policy_from_file_legacy",
+    "className": "TestPolicy",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_test_policy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that reading a legacy policy file works correctly.\n\n        Note: legacy policy file support may be removed in the future.\n        \"\"\"\npolicy_file = tempfile.NamedTemporaryFile(dir=self.temp_dir, delete=False)\nwith open(policy_file.name, 'w') as f:\n    f.write('{\"test\": {\"CERTIFICATE\": {\"LOCATE\": \"ALLOW_ALL\"}}}')\npolicies = policy.read_policy_from_file(policy_file.name)\nself.assertEqual(1, len(policies))\nself.assertIn('test', policies.keys())\nexpected = {'preset': {enums.ObjectType.CERTIFICATE: {enums.Operation.\n    LOCATE: enums.Policy.ALLOW_ALL}}}\nself.assertEqual(expected, policies.get('test'))\n"
+}

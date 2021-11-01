@@ -1,0 +1,9 @@
+{
+    "functionName": "test_column_name_mappings",
+    "className": null,
+    "fileName": "/Rambatino_&_CHAID/tests_&_test_split.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Test column name mappings are applied correctly \"\"\"\ncolumn_names = ['a', 'b', 'c']\ncols = range(0, len(column_names))\nsplits = [CHAID.Split(col, None, None, 1, 0) for col in cols]\nfor split in splits:\n    assert split.column == str(split.column_id\n        ), 'Names should be column id when mapping not applied'\n    split.name_columns(column_names)\n    assert split.column == column_names[split.column_id\n        ], 'Names should correctly map to column name when mapping is applied'\n"
+}

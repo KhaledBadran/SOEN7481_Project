@@ -1,0 +1,9 @@
+{
+    "functionName": "test_load_from_expired",
+    "className": "CacheTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_cache.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"test that the cache callable can be called safely after the\n        originating template has completed rendering.\n\n        \"\"\"\nt = Template(\n    \"\"\"\n        ${foo()}\n        <%def name=\"foo()\" cached=\"True\" cache_timeout=\"1\">\n            foo\n        </%def>\n        \"\"\"\n    )\nself._install_mock_cache(t)\nx1 = t.render()\ntime.sleep(1.2)\nx2 = t.render()\nassert x1.strip() == x2.strip() == 'foo'\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_suspend_rotations",
+    "className": null,
+    "fileName": "/poletaevvlad_&_CubeLang/test_&_test_cube_runtime.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "actions = []\nruntime = CubeRuntime(Cube((2, 2, 2)), Orientation(), actions.append, lambda :\n    None)\nruntime.perform_turn(Side.FRONT, 1, [1])\nruntime.perform_rotate(Side.TOP, False)\nruntime.suspend_rotations()\nfor _ in range(3):\n    runtime.perform_turn(Side.FRONT, 1, [1])\n    runtime.perform_rotate(Side.TOP, False)\nruntime.resume_rotations()\nassert \"FYFRBY'\" == ''.join(map(str, actions))\n"
+}

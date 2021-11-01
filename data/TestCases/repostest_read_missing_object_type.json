@@ -1,0 +1,9 @@
+{
+    "functionName": "test_read_missing_object_type",
+    "className": "TestObjectDefaults",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that an InvalidKmipEncoding error is raised during the decoding\n        of an ObjectDefaults structure when the object type is missing from\n        the encoding.\n        \"\"\"\nobject_defaults = objects.ObjectDefaults()\nself.assertIsNone(object_defaults.object_type)\nargs = self.no_object_type_encoding,\nself.assertRaisesRegex(exceptions.InvalidKmipEncoding,\n    'The ObjectDefaults encoding is missing the object type enumeration.',\n    object_defaults.read, *args)\n"
+}

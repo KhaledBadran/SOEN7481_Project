@@ -1,0 +1,9 @@
+{
+    "functionName": "test_publishes_failure_to_correct_url",
+    "className": null,
+    "fileName": "/PearsonEducation_&_Alarmageddon/tests_&_publishing_&_test_http_publisher.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "mock = goodserver_monkeypatch(monkeypatch)\npublisher = HttpPublisher(name='Test', success_url=mock.host + '/success',\n    failure_url=mock.host + '/failure', publish_successes=True)\npublisher.send(Failure('failure', Validation('validation', priority=\n    Priority.NORMAL), 'description'))\nassert mock.successes == 1\nassert mock.last_url == '/failure'\n"
+}

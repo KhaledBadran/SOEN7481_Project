@@ -1,0 +1,9 @@
+{
+    "functionName": "test_add_new_project_recursively",
+    "className": null,
+    "fileName": "/Macquarie-MEG-Research_&_BIDSHandler/bidshandler_&_tests_&_test_add.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with tempfile.TemporaryDirectory() as tmp:\n    shutil.copytree(TESTPATH2, op.join(tmp, 'BIDSTEST2'))\n    src_bt = BIDSTree(TESTPATH1)\n    dst_bt = BIDSTree(op.join(tmp, 'BIDSTEST2'))\n    scan = src_bt.project('test2').subject('3').session('1').scan(task=\n        'resting', run='1')\n    assert scan.emptyroom is not None\n    dst_bt.add(scan)\n    assert len(dst_bt.projects) == 2\n    assert op.exists(dst_bt.project('test2').readme)\n    assert op.exists(dst_bt.project('test2').description)\n    assert len(dst_bt.project('test2').subjects) == 2\n    scans_tsv = dst_bt.project('test2').subject('3').session('1').scans_tsv\n    assert op.exists(scans_tsv)\n    dst_bt.project('test2').subject('emptyroom')\n"
+}

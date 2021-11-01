@@ -1,0 +1,9 @@
+{
+    "functionName": "test_private_comments_do_not_show",
+    "className": "TestETL",
+    "fileName": "/klahnakoski_&_Bugzilla-ETL/tests_&_test_etl.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.settings.param.allow_private_bugs = False\ndatabase.make_test_instance(self.settings.bugzilla)\nwith MySQL(self.settings.bugzilla) as db:\n    private_comments = db.query(\n        \"\"\"\n                SELECT\n                    bug_id,\n                    comment_id\n                FROM\n                    longdescs\n                ORDER BY\n                    mod(comment_id, 7),\n                    comment_id\n                LIMIT\n                    5\n            \"\"\"\n        )\n    for c in private_comments:\n        database.mark_comment_private(db, c.comment_id, 1)\nes = fake_elasticsearch.make_test_instance(self.settings.public.bugs)\nes_c = fake_elasticsearch.make_test_instance(self.settings.public.comments)\nbz_etl.main(es=self.settings.public.bugs.es, es_comments=self.settings.\n    public.comments.es, kwargs=self.settings)\nrefresh_metadata(es_c)\nverify_no_private_comments(es_c, jx.select(private_comments, 'comment_id'))\n"
+}

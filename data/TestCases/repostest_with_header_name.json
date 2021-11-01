@@ -1,0 +1,9 @@
+{
+    "functionName": "test_with_header_name",
+    "className": "CLITableOutputModeTest",
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_CLITest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with noexit(), stdout() as so:\n\n    @with_defaults\n    def main(argument_namespace_callback, **kwargs):\n        argument_namespace_callback.output_mode = 'table'\n\n        def gen():\n            yield 'blah'\n            yield 'blah'\n        it = gen()\n\n\n        class Iterable(object):\n            header = ['FIELD']\n\n            def __next__(self):\n                return next(it)\n            next = __next__\n\n            def __iter__(self):\n                return iter(it)\n        return Iterable()\n    self.ccw().main.side_effect = main\n    PCLI.main()\n    self.assertRegexpMatches(so.getvalue(), 'FIELD')\n"
+}

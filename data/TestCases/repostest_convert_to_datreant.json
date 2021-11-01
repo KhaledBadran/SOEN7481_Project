@@ -1,0 +1,9 @@
+{
+    "functionName": "test_convert_to_datreant",
+    "className": null,
+    "fileName": "/bio-phys_&_MDBenchmark/mdbenchmark_&_tests_&_migrations_&_test_mds_to_dtr.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "directory, files = create_sim_files\nsim_files = [file for file in files if file.endswith('.json')]\nproxy_files = [file for file in files if file.endswith('.proxy')]\nfiles_to_keep = [file for file in files if '.json' not in file]\nmds_to_dtr.convert_to_datreant(sim_files)\nfor path in ['1', '2', '3']:\n    treant = os.path.join(str(directory), path, '.datreant')\n    assert os.path.exists(os.path.join(treant))\n    assert os.path.exists(os.path.join(treant, 'categories.json'))\nfor file in proxy_files:\n    assert not os.path.exists(file)\nfor file in files_to_keep:\n    assert os.path.exists(file)\n"
+}

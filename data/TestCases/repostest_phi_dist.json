@@ -1,0 +1,9 @@
+{
+    "functionName": "test_phi_dist",
+    "className": "TestCellListSTORM",
+    "fileName": "/Jhsmit_&_ColiCoords/test_&_test_cell.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "step = 0.5\nwith self.assertRaises(IndexError):\n    x, yl, yr = self.empty_cell.phi_dist(step)\nwith self.assertRaises(ValueError):\n    x, yl, yr = self.cell.phi_dist(step, data_name='notexisting')\nwith self.assertRaises(ValueError):\n    x, yl, yr = self.cell.phi_dist(step, method='notexisting')\nstop = 180\nbins_box = np.arange(0, stop + step, step) + 0.5 * step\nbins = np.arange(0, stop + step, step)\nx, y = self.cell.data.data_dict['storm']['x'], self.cell.data.data_dict['storm'\n    ]['y']\nlc, rc, psi = self.cell.coords.transform(x, y)\nb = np.logical_and(psi != 0, psi != 180)\nstorm_int_sum = np.sum(self.cell.data.data_dict['storm']['intensity'][b])\nx, yl, yr = self.cell.phi_dist(step, data_name='storm', r_max=np.inf)\nself.assertArrayEqual(bins_box, x)\nself.assertEqual(np.sum(yl + yr), storm_int_sum)\nx, yl, yr = self.cell.phi_dist(step, data_name='storm', storm_weight=True,\n    r_max=np.inf)\nself.assertArrayEqual(bins_box, x)\nself.assertEqual(np.sum(yl + yr), storm_int_sum)\nx, yl, yr = self.cell.phi_dist(step, data_name='storm', r_max=0)\nself.assertEqual(np.sum(yl + yr), 0)\nx, yl, yr = self.cell.phi_dist(step, data_name='fluorescence')\nself.assertArrayEqual(bins, x)\nx, yl, yr = self.cell.phi_dist(step, data_name='fluorescence', r_min=-5)\nx, yl, yr = self.cell.phi_dist(step, data_name='fluorescence', r_max=0)\nx, yl, yr = self.cell.phi_dist(step, data_name='fluorescence', r_max=0, r_min=5\n    )\nself.assertEqual(np.sum(yl + yr), 0)\n"
+}

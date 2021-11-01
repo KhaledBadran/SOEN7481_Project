@@ -1,0 +1,9 @@
+{
+    "functionName": "test_we_can_get_username_with_userid_cookie",
+    "className": null,
+    "fileName": "/AutomatedTester_&_Bugsy/tests_&_test_bugsy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "responses.add(responses.GET, 'https://bugzilla.mozilla.org/rest/user/1234',\n    body='{\"users\": [{\"name\": \"user@example.com\"}]}', status=200,\n    content_type='application/json', match_querystring=True)\nbugzilla = Bugsy(userid='1234', cookie='abcd')\nassert bugzilla.username == 'user@example.com'\nassert responses.calls[0].request.headers['X-Bugzilla-Token'] == '1234-abcd'\nresponses.activate"
+}

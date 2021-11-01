@@ -1,0 +1,9 @@
+{
+    "functionName": "test_two_electrodes",
+    "className": null,
+    "fileName": "/justasb_&_LFPsimpy/tests_&_test_all.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "soma, ic = create_sec()\nle = add_lfp_electrode()\nle2 = LfpElectrode(x=100, y=50, z=0, sampling_period=0.1)\nassert len(le.times) == 0\nassert len(le.values) == 0\nassert len(le2.times) == 0\nassert len(le2.values) == 0\nrun_sim()\nassert len(le.times) > 0 and not any([(t < 0) for t in le.times])\nassert len(le.values) > 0 and any([(v != 0) for v in le.values])\nassert len(le2.times) > 0 and not any([(t < 0) for t in le2.times])\nassert len(le2.values) > 0 and any([(v != 0) for v in le2.values])\nassert all([(t1 == t2) for t1, t2 in zip(le.times, le2.times)])\nassert any([(v1 != v2) for v1, v2 in zip(le.values, le2.values)])\nassert any([(v1 == v2) for v1, v2 in zip(le.values, le2.values)])\n"
+}

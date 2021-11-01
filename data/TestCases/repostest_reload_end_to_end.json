@@ -1,0 +1,9 @@
+{
+    "functionName": "test_reload_end_to_end",
+    "className": "TestConfigFacadeAcceptance",
+    "fileName": "/dnephin_&_PyStaticConfiguration/tests_&_config_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "loader = mock.Mock()\nfacade = staticconf.ConfigFacade.load(self.file.name, self.namespace, loader)\nassert_equal(loader.call_count, 1)\ntime.sleep(1)\nfacade.reload_if_changed()\nassert_equal(loader.call_count, 1)\nos.utime(self.file.name, None)\nfacade.reload_if_changed()\nassert_equal(loader.call_count, 2)\n"
+}

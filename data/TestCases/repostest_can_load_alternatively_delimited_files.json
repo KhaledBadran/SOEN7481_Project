@@ -1,0 +1,9 @@
+{
+    "functionName": "test_can_load_alternatively_delimited_files",
+    "className": null,
+    "fileName": "/NASA_&_MLMCPy/tests_&_input_&_test_InputFromData.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test ability of InputFromData to load files with different data\n    \"\"\"\nfile_path = os.path.join(data_path, filename)\nsampler = InputFromData(file_path, delimiter=delimiter)\nsample = sampler.draw_samples(5)\nassert np.sum(sample) == 125.0\npytest.mark.parametrize('delimiter, filename', [(',',\n    '2D_test_data_comma_delimited.csv'), (';',\n    '2D_test_data_semicolon_delimited.csv'), (1,\n    '2D_test_data_length_delimited.csv')], ids=['comma', 'semicolon', 'length']\n    )"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_check_data_health_has_nans",
+    "className": "HealthCheckTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_core_&_HealthCheckTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "proj = self.ws.copy_project(self.proj)\nphys11 = proj['phys_01']\nphys11['pore.blah'] = 1.0\na = phys11.check_data_health()\nassert a.health\nphys11['pore.blah'][0] = np.nan\na = phys11.check_data_health()\nassert not a.health\nassert a['pore.blah'] == 'Has NaNs'\n"
+}

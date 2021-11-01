@@ -1,0 +1,9 @@
+{
+    "functionName": "testBadBehavior",
+    "className": "MultiTypeExperimentTest",
+    "fileName": "/facebook_&_Ax/ax_&_core_&_tests_&_test_multi_type_experiment.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "with self.assertRaises(ValueError):\n    self.experiment.add_trial_type('type1', SyntheticRunner())\nwith self.assertRaises(ValueError):\n    self.experiment.update_runner('type3', SyntheticRunner())\nwith self.assertRaises(ValueError):\n    self.experiment.add_tracking_metric(BraninMetric('m2', ['x1', 'x2']),\n        'type3')\nwith self.assertRaises(ValueError):\n    self.experiment.remove_tracking_metric('m3')\nwith self.assertRaises(ValueError):\n    self.experiment.update_tracking_metric(BraninMetric('m1', ['x1', 'x2']),\n        'type2')\nwith self.assertRaises(ValueError):\n    self.experiment.update_tracking_metric(BraninMetric('m2', ['x1', 'x2']),\n        'type3')\nbatch = self.experiment.new_batch_trial()\nbatch._trial_type = 'type3'\nwith self.assertRaises(ValueError):\n    self.experiment.runner_for_trial(batch)\nwith self.assertRaises(ValueError):\n    self.experiment.new_batch_trial(trial_type='type3')\nwith self.assertRaises(NotImplementedError):\n    self.experiment.reset_runners(SyntheticRunner())\n"
+}

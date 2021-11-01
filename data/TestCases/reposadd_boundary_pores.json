@@ -1,0 +1,9 @@
+{
+    "functionName": "add_boundary_pores",
+    "className": "CubicDual",
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_network_&_CubicDual.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        Add boundary pores to the specified faces of the network\n\n        Pores are offset from the faces by 1/2 of the given ``spacing``, such\n        that they lie directly on the boundaries.\n\n        Parameters\n        ----------\n        labels : string or list of strings\n            The labels indicating the pores defining each face where boundary\n            pores are to be added (e.g. 'left' or ['left', 'right'])\n\n        spacing : scalar or array_like\n            The spacing of the network (e.g. [1, 1, 1]).  This must be given\n            since it can be quite difficult to infer from the network,\n            for instance if boundary pores have already added to other faces.\n\n        \"\"\"\nspacing = np.array(spacing)\nif spacing.size == 1:\n    spacing = np.ones(3) * spacing\nfor item in labels:\n    Ps = self.pores(item)\n    coords = np.absolute(self['pore.coords'][Ps])\n    axis = np.count_nonzero(np.diff(coords, axis=0), axis=0) == 0\n    offset = np.array(axis, dtype=int) * spacing / 2\n    if np.amin(coords) == np.amin(coords[:, (np.where(axis)[0])]):\n        offset = -1 * offset\n    topotools.add_boundary_pores(network=self, pores=Ps, offset=offset,\n        apply_label=item + '_boundary')\n"
+}

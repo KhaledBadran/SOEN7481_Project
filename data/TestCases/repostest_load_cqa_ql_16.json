@@ -1,0 +1,9 @@
+{
+    "functionName": "test_load_cqa_ql_16",
+    "className": null,
+    "fileName": "/NTMC-Community_&_MatchZoo/tests_&_unit_test_&_test_datasets.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "train_data = mz.datasets.cqa_ql_16.load_data(task='classification')\nassert len(train_data) == 3998\ndev_data, tag = mz.datasets.cqa_ql_16.load_data('dev', task=\n    'classification', return_classes=True)\nassert tag == ['PerfectMatch', 'Relevant', 'Irrelevant']\nassert len(dev_data) == 500\nx, y = dev_data.unpack()\nassert y.shape == (500, 3)\ntest_data = mz.datasets.cqa_ql_16.load_data('test')\nassert len(test_data) == 700\ntrain_data = mz.datasets.cqa_ql_16.load_data(match_type='answer')\nassert len(train_data) == 39980\ntest_data = mz.datasets.cqa_ql_16.load_data(stage='test', match_type='answer')\nassert len(test_data) == 7000\ntrain_data = mz.datasets.cqa_ql_16.load_data(match_type='external_answer')\nassert len(train_data) == 39980\ntrain_data = mz.datasets.cqa_ql_16.load_data(task='ranking')\nx, y = train_data.unpack()\nassert y.shape == (3998, 1)\ndev_data = mz.datasets.cqa_ql_16.load_data('dev', task='ranking',\n    match_type='answer', target_label='Good')\nx, y = dev_data.unpack()\nassert y.shape == (5000, 1)\npytest.mark.cron"
+}

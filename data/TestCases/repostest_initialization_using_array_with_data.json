@@ -1,0 +1,9 @@
+{
+    "functionName": "test_initialization_using_array_with_data",
+    "className": "TestNormalization",
+    "fileName": "/ornlneutronimaging_&_NeuNorm/tests_&_NeuNorm_&_normalizing_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"assert initialization using arrays with data\"\"\"\nsample_01 = self.data_path + '/tif/sample/image001.tif'\nsample_02 = self.data_path + '/tif/sample/image002.tif'\ndata = []\ndata.append(np.asarray(Image.open(sample_01)))\ndata.append(np.asarray(Image.open(sample_02)))\no_norm = Normalization()\no_norm.load(data=data, auto_gamma_filter=False)\ndata_returned = o_norm.data['sample']['data']\nassert (2, 5, 5) == np.shape(data_returned)\n"
+}

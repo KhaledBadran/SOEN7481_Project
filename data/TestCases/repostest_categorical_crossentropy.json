@@ -1,0 +1,9 @@
+{
+    "functionName": "test_categorical_crossentropy",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_test_objectives.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from lasagne.objectives import categorical_crossentropy\np, t = theano.tensor.matrices('pt')\nc = categorical_crossentropy(p, t)\nfloatX = theano.config.floatX\npredictions = np.random.rand(10, 20).astype(floatX)\npredictions /= predictions.sum(axis=1, keepdims=True)\ntargets = np.random.rand(10, 20).astype(floatX)\ntargets /= targets.sum(axis=1, keepdims=True)\ncrossent = -(targets * np.log(predictions)).sum(axis=-1)\nassert np.allclose(crossent, c.eval({p: predictions, t: targets}))\n"
+}

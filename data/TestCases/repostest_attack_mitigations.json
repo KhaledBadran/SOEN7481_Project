@@ -1,0 +1,9 @@
+{
+    "functionName": "test_attack_mitigations",
+    "className": null,
+    "fileName": "/PlaidWeb_&_Authl/tests_&_handlers_&_test_fediverse.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "store = tokens.DictStore()\nhandler = fediverse.Fediverse('test', store, homepage='http://foo.example/')\nmock_mastodon = mocker.patch('mastodon.Mastodon')\nmock_mastodon.create_app.return_value = 'the id', 'the secret'\nmock_mastodon().auth_request_url.return_value = 'https://cb?code=12345'\nmock_mastodon().log_in.return_value = 'some_auth_token'\nrequests_mock.get('https://mastodon.example/api/v1/instance', text=json.\n    dumps({'uri': 'foo', 'version': '2.5.1', 'urls': 'foo.bar'}))\nmock_mastodon().me.return_value = {'url': 'https://hijack.example/@moo'}\nresult = handler.initiate_auth('mastodon.example', 'https://cb', 'qwerpoiu')\nassert isinstance(result, disposition.Redirect)\nresult = handler.check_callback(result.url, parse_args(result.url), {})\nassert isinstance(result, disposition.Error)\nassert 'Domains do not match' in result.message\nmock_mastodon().me.return_value = {'url': 'https://mastodon.example/@moo'}\nresult = handler.initiate_auth('mastodon.example', 'https://cb', 'qwerpoiu')\nassert isinstance(result, disposition.Redirect)\nargs = parse_args(result.url)\nresult = handler.check_callback(result.url, args, {})\nassert isinstance(result, disposition.Verified)\nassert result.identity == 'https://mastodon.example/@moo'\nresult = handler.check_callback('https://cb', args, {})\nassert isinstance(result, disposition.Error)\nassert 'Invalid transaction' in result.message\n"
+}

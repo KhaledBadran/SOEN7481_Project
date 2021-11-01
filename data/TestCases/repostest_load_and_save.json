@@ -1,0 +1,9 @@
+{
+    "functionName": "test_load_and_save",
+    "className": "TestTensorflow",
+    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_test_tensorflow.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "linear = Linear(10, 2)()\nsigmoid = Sigmoid()(linear)\nsoftmax = SoftMax().set_name('output')(sigmoid)\nmodel_original = Model([linear], [softmax])\ninput = np.random.random((4, 10))\ntemp = tempfile.mkdtemp()\nmodel_original.save_tensorflow([('input', [4, 10])], temp + '/model.pb')\nmodel_loaded = Model.load_tensorflow(temp + '/model.pb', ['input'], ['output'])\nmodel_loaded_without_backwardgraph = Model.load_tensorflow(temp +\n    '/model.pb', ['input'], ['output'], generated_backward=False)\nexpected_output = model_original.forward(input)\noutput = model_loaded.forward(input)\noutput_without_backwardgraph = model_loaded_without_backwardgraph.forward(input\n    )\nassert_allclose(output, expected_output, atol=1e-06, rtol=0)\nassert_allclose(output_without_backwardgraph, expected_output, atol=1e-06,\n    rtol=0)\n"
+}

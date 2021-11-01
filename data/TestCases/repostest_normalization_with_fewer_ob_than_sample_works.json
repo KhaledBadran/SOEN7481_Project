@@ -1,0 +1,9 @@
+{
+    "functionName": "test_normalization_with_fewer_ob_than_sample_works",
+    "className": "TestNormalization",
+    "fileName": "/ornlneutronimaging_&_NeuNorm/tests_&_NeuNorm_&_normalizing_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"assert normalization works when number of ob and sample is different\"\"\"\nsamples_path = self.data_path + '/tif/sample/'\nob1 = self.data_path + '/tif/ob/ob001.tif'\nob2 = self.data_path + '/tif/ob/ob002.tif'\ndf1 = self.data_path + '/tif/df/df001.tif'\no_norm = Normalization()\no_norm.load(folder=samples_path, auto_gamma_filter=False)\no_norm.load(file=[ob1, ob2], data_type='ob', auto_gamma_filter=False)\no_norm.load(file=df1, data_type='df', auto_gamma_filter=False)\no_norm.df_correction()\no_norm.normalization()\nexpected_normalized_array = np.zeros((5, 5))\nexpected_normalized_array[0, 0] = 1\nassert (o_norm.data['normalized'] == expected_normalized_array).all()\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_rotate_points_to_axis",
+    "className": null,
+    "fileName": "/RI-imaging_&_ODTbrain/tests_&_test_rotation_matrices.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "rot1 = odtbrain._alg3d_bppt.rotate_points_to_axis(points=[[1, 2, 3]], axis=\n    [1, 2, 3])\nassert rot1[0][0] < 1e-14\nassert rot1[0][2] < 1e-14\nrot2 = odtbrain._alg3d_bppt.rotate_points_to_axis(points=[[-3, 0.6, 0.1]],\n    axis=[-3, 0.6, 0.1])\nassert rot2[0][0] < 1e-14\nassert rot2[0][2] < 1e-14\nsq2 = np.sqrt(2)\npoints = [[0, 0, 1], [1, 0, 0], [1, 1, 0]]\nrot3 = odtbrain._alg3d_bppt.rotate_points_to_axis(points=points, axis=[0, 1, 1]\n    )\nassert np.allclose(rot3[0], [0, 1 / sq2, 1 / sq2])\nassert np.allclose(rot3[1], [1, 0, 0])\nassert np.allclose(rot3[2], [1, 1 / sq2, -1 / sq2])\npoints = [[0, 0, 1], [1, 0, 0], [0, -1, 0]]\nrot4 = odtbrain._alg3d_bppt.rotate_points_to_axis(points=points, axis=[1, 0, 1]\n    )\nassert np.allclose(rot4[0], [-0.5, 1 / sq2, 0.5])\nassert np.allclose(rot4[1], [0.5, 1 / sq2, -0.5])\nassert np.allclose(rot4[2], [1 / sq2, 0, 1 / sq2])\npoints = [[0, 0, 1], [1, 0, 1], [1, -1, 0]]\nrot4 = odtbrain._alg3d_bppt.rotate_points_to_axis(points=points, axis=[1, 0, 0]\n    )\nassert np.allclose(rot4[0], [0, 0, 1])\nassert np.allclose(rot4[1], [0, 1, 1])\nassert np.allclose(rot4[2], [1, 1, 0])\npoints = [[0, 0, 1], [1, 0, 0], [1, -1, 0]]\nrot4 = odtbrain._alg3d_bppt.rotate_points_to_axis(points=points, axis=[0, -\n    1, 0])\nassert np.allclose(rot4[0], [0, 0, -1])\nassert np.allclose(rot4[1], [1, 0, 0])\nassert np.allclose(rot4[2], [1, 1, 0])\n"
+}

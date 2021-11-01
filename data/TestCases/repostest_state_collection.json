@@ -1,0 +1,9 @@
+{
+    "functionName": "test_state_collection",
+    "className": "TestWorld",
+    "fileName": "/tum-pbs_&_PhiFlow/tests_&_test_world.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "fluid = Fluid(Domain([1, 1]))\nfluid2 = Fluid(Domain([2, 2]))\nc1 = StateCollection([fluid])\nassert c1.fluid is fluid\nassert fluid in c1\nassert c1[fluid] is fluid\nassert isinstance(repr(c1), six.string_types)\nassert len(c1) == len(c1.shape) == len(c1.staticshape) == len(c1.dtype)\nassert c1.shape.fluid.density.data == (1, 1, 1, 1)\nself.assertIsInstance(c1.dtype.fluid.density.data, numpy.dtype)\nc2 = StateCollection()\nassert len(c2) == 0\nc2 = c2.state_added(fluid)\nassert c2 == c1\nassert hash(c2) == hash(c1)\nc3 = c2.state_replaced(fluid2)\nassert c3 != c2\nassert c3.fluid is fluid2\nc4 = c3.state_removed(fluid2)\nassert len(c4) == 0\nc5 = struct.map(lambda x: x, c1)\nassert isinstance(c5, StateCollection)\nassert c5 == c1\n"
+}

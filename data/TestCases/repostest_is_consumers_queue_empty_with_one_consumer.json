@@ -1,0 +1,9 @@
+{
+    "functionName": "test_is_consumers_queue_empty_with_one_consumer",
+    "className": null,
+    "fileName": "/Drakkar-Software_&_OctoBot-Channels/tests_&_test_synchronized.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "async def callback():\n    pass\nawait synchronized_channel.new_consumer(callback)\nproducer = TestSynchronizedProducer(get_chan(TEST_SYNCHRONIZED_CHANNEL))\nawait producer.run()\nawait producer.send({})\nassert not producer.is_consumers_queue_empty(1)\nassert not producer.is_consumers_queue_empty(2)\nawait producer.synchronized_perform_consumers_queue(1)\nassert producer.is_consumers_queue_empty(1)\nassert producer.is_consumers_queue_empty(2)\npytest.mark.asyncio"
+}

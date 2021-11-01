@@ -1,0 +1,9 @@
+{
+    "functionName": "test__non_uniform_column__three_ci_regions__fully_masked_includes_a_none",
+    "className": "TestMeanChargeInAllColumns",
+    "fileName": "/Jammy2211_&_PyAutoCTI/test_&_unit_&_charge_injection_&_test_ci_pattern.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ci_column = np.array([[13.0], [10.0], [10.0], [0.0], [10.0], [7.0], [10.0],\n    [0.0], [16.0], [16.0], [7.0]])\ncolumn_mask = np.array([[False], [True], [False], [False], [True], [True],\n    [True], [False], [False], [True], [False]])\npattern = ci_pattern.CIPatternNonUniform(normalization=10.0, regions=[(0, 3,\n    0, 1), (4, 7, 0, 1), (8, 11, 0, 1)], row_slope=0.0)\nmean_of_columns = pattern.mean_charge_in_all_image_columns(column=ci_column,\n    column_mask=column_mask)\nassert mean_of_columns == [11.5, None, 11.5]\n"
+}

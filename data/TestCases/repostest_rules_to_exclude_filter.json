@@ -1,0 +1,9 @@
+{
+    "functionName": "test_rules_to_exclude_filter",
+    "className": null,
+    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_pydevd_filtering.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from _pydevd_bundle.pydevd_process_net_command_json import _convert_rules_to_exclude_filters\nfrom _pydevd_bundle.pydevd_filtering import ExcludeFilter\nfrom random import shuffle\ndira = tmpdir.mkdir('a')\ndirb = dira.mkdir('b')\nfileb = dirb.join('fileb.py')\nfileb2 = dirb.join('fileb2.py')\nwith fileb.open('w') as stream:\n    stream.write('')\ndef filename_to_server(filename):\n    return filename\ndef on_error(msg):\n    raise AssertionError(msg)\nrules = [{'path': str(dira), 'include': False}, {'path': str(dirb),\n    'include': True}, {'path': str(fileb), 'include': True}, {'path': str(\n    fileb2), 'include': True}, {'path': '**/foo/*.py', 'include': True}, {\n    'module': 'bar', 'include': False}, {'module': 'bar.foo', 'include': True}]\nshuffle(rules)\nexclude_filters = _convert_rules_to_exclude_filters(rules,\n    filename_to_server, on_error)\nassert exclude_filters == [ExcludeFilter(name=str(fileb2), exclude=False,\n    is_path=True), ExcludeFilter(name=str(fileb), exclude=False, is_path=\n    True), ExcludeFilter(name=str(dirb) + '/**', exclude=False, is_path=\n    True), ExcludeFilter(name=str(dira) + '/**', exclude=True, is_path=True\n    ), ExcludeFilter(name='**/foo/*.py', exclude=False, is_path=True),\n    ExcludeFilter(name='bar.foo', exclude=False, is_path=False),\n    ExcludeFilter(name='bar', exclude=True, is_path=False)]\n"
+}

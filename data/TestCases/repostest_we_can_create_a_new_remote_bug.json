@@ -1,0 +1,9 @@
+{
+    "functionName": "test_we_can_create_a_new_remote_bug",
+    "className": null,
+    "fileName": "/AutomatedTester_&_Bugsy/tests_&_test_bugsy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "bug = Bug()\nbug.summary = 'I like foo'\nresponses.add(responses.GET, 'https://bugzilla.mozilla.org/rest/login',\n    body='{\"token\": \"foobar\"}', status=200, content_type='application/json',\n    match_querystring=True)\nbug_dict = bug.to_dict().copy()\nbug_dict['id'] = 123123\nresponses.add(responses.POST, 'https://bugzilla.mozilla.org/rest/bug', body\n    =json.dumps(bug_dict), status=200, content_type='application/json')\nbugzilla = Bugsy('foo', 'bar')\nbugzilla.put(bug)\nassert bug.id != None\nresponses.activate"
+}

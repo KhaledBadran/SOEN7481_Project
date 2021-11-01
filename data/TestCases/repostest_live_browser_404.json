@@ -1,0 +1,9 @@
+{
+    "functionName": "test_live_browser_404",
+    "className": "TestCase",
+    "fileName": "/IntegralDefense_&_ACE/lib_&_saq_&_modules_&_test_url.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"We should not download screenshots for URLs that returned a 404 error message.\"\"\"\nfrom saq.database import Alert\nfrom saq.modules.url import CrawlphishAnalysisV2\nfrom saq.modules.url import LiveBrowserAnalysis\nroot = create_root_analysis()\nroot.initialize_storage()\nurl = root.add_observable(F_URL,\n    'http://localhost:{}/test_data/live_browser.dne.html'.format(LOCAL_PORT))\nurl.add_directive(DIRECTIVE_CRAWL)\nroot.save()\nroot.schedule()\nengine = TestEngine()\nengine.enable_alerting()\nengine.enable_module('analysis_module_crawlphish', 'test_groups')\nengine.enable_module('analysis_module_live_browser_analyzer', 'test_groups')\nengine.controlled_stop()\nengine.start()\nengine.wait()\nalert = saq.db.query(Alert).first()\nself.assertIsNotNone(alert)\nalert.load()\nurl = alert.get_observable(url.id)\nanalysis = url.get_analysis(CrawlphishAnalysisV2)\nfile_observables = analysis.get_observables_by_type(F_FILE)\nself.assertEquals(len(file_observables), 0)\nforce_alerts"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test__trasnform",
+    "className": "TestGaussianCopulaProcessMetaModel",
+    "fileName": "/HDI-Project_&_BTB/tests_&_tuning_&_metamodels_&_test_gaussian_process.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "instance = MagicMock()\ntrials = np.array([[0.1, 0.8, 0.2], [0.7, 0.6, 0.4], [0.4, 0.2, 0.3], [0.7,\n    0.8, 0.9], [0.2, 0.3, 0.4]])\ndistributions = []\nfor column in trials.T:\n    distribution = Univariate()\n    distribution.fit(column)\n    distributions.append(distribution)\ninstance._distributions = distributions\nresult = GaussianCopulaProcessMetaModel._transform(instance, trials)\nexpected_result = np.array([[-0.93051407, 0.72584367, -1.05823838], [\n    0.78865964, 0.1155097, 0.3732126], [-0.04619363, -0.96388991, -\n    0.49278658], [0.78865964, 0.72584367, 1.82607428], [-0.60472608, -\n    0.66069297, 0.3732126]])\nnp.testing.assert_allclose(result, expected_result)\n"
+}

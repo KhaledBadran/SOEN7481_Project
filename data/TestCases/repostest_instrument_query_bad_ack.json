@@ -1,0 +1,9 @@
+{
+    "functionName": "test_instrument_query_bad_ack",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_base_instrument.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with pytest.raises(AcknowledgementError):\n    mock_filelike = mock.MagicMock()\n    mock_filelike.__class__ = AbstractCommunicator\n    inst = ik.Instrument(mock_filelike)\n    inst.read = mock.MagicMock(return_value='derp')\n\n    def new_ack(msg):\n        return msg\n    inst._ack_expected = new_ack\n    _ = inst.query('foobar?')\n"
+}

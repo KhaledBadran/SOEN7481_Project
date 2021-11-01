@@ -1,0 +1,9 @@
+{
+    "functionName": "test_handle_ignored_file_type",
+    "className": "TestSync",
+    "fileName": "/DusanMadar_&_PySyncDroid/tests_&_test_sync.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test 'handle_ignored_file_type' raises IgnoredTypeException exception\n        only for files with specified extensions.\n        \"\"\"\nsync = Sync(FAKE_MTP_DETAILS, '', '', ignore_file_types=['jpg'])\nsync.set_source_abs()\nsync.set_destination_abs()\nsync.handle_ignored_file_type('/tmp/test.png')\nwith self.assertRaises(IgnoredTypeException):\n    sync.handle_ignored_file_type('/tmp/test.jpg')\n"
+}

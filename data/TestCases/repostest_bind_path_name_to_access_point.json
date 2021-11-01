@@ -1,0 +1,9 @@
+{
+    "functionName": "test_bind_path_name_to_access_point",
+    "className": "TestCommunication",
+    "fileName": "/funilrys_&_PyTravisCI/tests_&_core_&_test_communication.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test of :meth:`PyTravisCI.communication.Communication.bind_path_name_to_access_point`.\n        \"\"\"\ncomm = Communication(self.root)\nexpected = f'{AccessPoints.OPEN}/hello'\nactual = comm.bind_path_name_to_access_point(comm.access_point, 'hello')\nself.assertEqual(expected, actual)\nexpected = f'{AccessPoints.OPEN}/None/hello'\npath_name = None\nactual = comm.bind_path_name_to_access_point(comm.access_point,\n    f'{path_name}/hello')\nself.assertEqual(expected, actual)\nexpected = f'{AccessPoints.OPEN}/1/hello'\npath_name = 1\nactual = comm.bind_path_name_to_access_point(comm.access_point,\n    f'{path_name}/hello')\nself.assertEqual(expected, actual)\nexpected = f'{AccessPoints.OPEN}/1/hello'\npath_name = 1\nactual = comm.bind_path_name_to_access_point(f'{comm.access_point}/',\n    f'{path_name}/hello')\nself.assertEqual(expected, actual)\nexpected = f'{AccessPoints.OPEN}/1534/hello'\npath_name = 1534\nactual = comm.bind_path_name_to_access_point(f'{comm.access_point}/',\n    f'/{path_name}/hello')\nself.assertEqual(expected, actual)\nexpected = f'{AccessPoints.OPEN}/153/hello'\npath_name = 153\nactual = comm.bind_path_name_to_access_point(f'{comm.access_point}',\n    f'/{path_name}/hello')\nself.assertEqual(expected, actual)\nexpected = f'{AccessPoints.OPEN}/5'\npath_name = 153\nactual = comm.bind_path_name_to_access_point(f'{comm.access_point}', 5)\nself.assertEqual(expected, actual)\nexpected = path_name = 'https://github.com/funilrys'\nactual = comm.bind_path_name_to_access_point(comm.access_point, path_name)\nself.assertEqual(expected, actual)\n"
+}

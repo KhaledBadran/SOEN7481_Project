@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_object_type_multiple_objects",
+    "className": "TestKmipEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a sqlalchemy.orm.exc.MultipleResultsFound error is generated\n        when getting the object type of multiple objects map to the same\n        object ID.\n        \"\"\"\ne = engine.KmipEngine()\ne._data_store = self.engine\ne._data_store_session_factory = self.session_factory\ne._data_session = e._data_store_session_factory()\ne._is_allowed_by_operation_policy = mock.Mock(return_value=True)\ntest_exception = exc.MultipleResultsFound()\ne._data_session.query = mock.MagicMock(side_effect=test_exception)\ne._logger = mock.MagicMock()\nargs = '1',\nself.assertRaises(exc.MultipleResultsFound, e._get_object_type, *args)\ne._data_session.commit()\ne._logger.warning.assert_called_once_with('Multiple objects found for ID: 1')\n"
+}

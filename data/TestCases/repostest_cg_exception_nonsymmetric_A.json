@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cg_exception_nonsymmetric_A",
+    "className": "SolversTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_SolversTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "air = op.phases.Air(network=self.net)\nphys = op.physics.Standard(network=self.net, phase=air, geometry=self.geom)\nad = op.algorithms.AdvectionDiffusion(network=self.net, phase=air)\nad.set_value_BC(pores=self.net.pores('left'), values=1.0)\nad.set_value_BC(pores=self.net.pores('right'), values=0.1)\nsf = op.algorithms.StokesFlow(network=self.net, phase=air)\nsf.set_value_BC(pores=self.net.pores('left'), values=1.0)\nsf.set_value_BC(pores=self.net.pores('right'), values=0.0)\nsf.run()\nair.update(sf.results())\nphys.regenerate_models()\nad.settings.update({'cache_A': False, 'cache_b': False, 'solver_type': 'cg',\n    'solver_family': 'scipy'})\nwith pytest.raises(Exception):\n    ad.run()\n"
+}

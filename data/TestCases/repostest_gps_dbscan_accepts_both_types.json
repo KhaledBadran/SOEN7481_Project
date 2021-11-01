@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gps_dbscan_accepts_both_types",
+    "className": "TestGPS",
+    "fileName": "/lukeWaninger_&_GSCAP/tests_&_test_gps.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "r = pd.DataFrame(columns=['lat', 'lon', 'ts'])\nd = dt.datetime(year=2019, month=1, day=1)\nr.loc[0] = 1, 1, d\nl, c = gps.gps_dbscan(r)\nassert isinstance(l, list) and isinstance(c, list)\nassert len(l) == 1 and len(c) == 0\nr = gps.records_to_gpsr(r)\nl, c = gps.gps_dbscan(r)\nassert isinstance(l, list) and isinstance(c, list)\nassert len(l) == 1 and len(c) == 0\n"
+}

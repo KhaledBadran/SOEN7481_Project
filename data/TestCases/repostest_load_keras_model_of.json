@@ -1,0 +1,9 @@
+{
+    "functionName": "test_load_keras_model_of",
+    "className": "TestSimple",
+    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_test_simple_integration.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from bigdl.nn.keras.topology import Model as KModel\nfrom bigdl.nn.keras.layer import Input as KInput\nfrom bigdl.nn.keras.layer import Dense\ninput = KInput(shape=[2, 3])\nfc1 = Dense(2)(input)\nmodel = KModel(input, fc1)\ntmp_path = tempfile.mktemp()\nmodel.save(tmp_path, True)\nmodel_loaded = KModel.load(tmp_path)\nassert 'bigdl.nn.keras.topology.Model' in str(type(model_loaded))\nassert len(model_loaded.layers) == 2\n"
+}

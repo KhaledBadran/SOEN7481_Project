@@ -1,0 +1,9 @@
+{
+    "functionName": "testSearchSpaceSetter",
+    "className": "ExperimentTest",
+    "fileName": "/facebook_&_Ax/ax_&_core_&_tests_&_test_experiment.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "one_param_ss = SearchSpace(parameters=[get_search_space().parameters['w']])\nself.experiment.search_space = one_param_ss\nself.assertEqual(len(self.experiment.parameters), 1)\nself.experiment.search_space = get_search_space()\nself.experiment.new_batch_trial()\nwith self.assertRaises(ValueError):\n    self.experiment.search_space = one_param_ss\nbad_type_ss = get_search_space()\nbad_type_ss.parameters['x']._parameter_type = ParameterType.FLOAT\nwith self.assertRaises(ValueError):\n    self.experiment.search_space = bad_type_ss\nextra_param_ss = get_search_space()\nextra_param_ss.add_parameter(FixedParameter('l', ParameterType.FLOAT, 0.5))\nwith self.assertRaises(ValueError):\n    self.experiment.search_space = extra_param_ss\n"
+}

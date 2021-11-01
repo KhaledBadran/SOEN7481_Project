@@ -1,0 +1,9 @@
+{
+    "functionName": "test_send_request_payload",
+    "className": "TestKMIPClient",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_test_kmip_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the client can send a request payload and correctly handle\n        the resulting response messsage.\n        \"\"\"\nrequest_payload = payloads.DeleteAttributeRequestPayload(unique_identifier=\n    '1', attribute_name='Object Group', attribute_index=2)\nresponse_payload = payloads.DeleteAttributeResponsePayload(unique_identifier\n    ='1', attribute=None)\nbatch_item = ResponseBatchItem(operation=Operation(OperationEnum.\n    DELETE_ATTRIBUTE), result_status=ResultStatus(ResultStatusEnum.SUCCESS),\n    response_payload=response_payload)\nresponse_message = ResponseMessage(batch_items=[batch_item])\nbuild_mock.return_value = None\nsend_mock.return_value = response_message\nresult = self.client.send_request_payload(OperationEnum.DELETE_ATTRIBUTE,\n    request_payload)\nself.assertIsInstance(result, payloads.DeleteAttributeResponsePayload)\nself.assertEqual(result, response_payload)\nmock.patch('kmip.services.kmip_client.KMIPProxy._build_request_message')mock.patch('kmip.services.kmip_client.KMIPProxy._send_and_receive_message')"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_abstract_extend",
+    "className": null,
+    "fileName": "/SurrealAI_&_BeneDict/test_&_test_config.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"where the extended dict may also contain _special_\"\"\"\ndefault_config = Config({'replay': {'host': '_str_', 'port': '_int_'},\n    'obs_spec': {'type': '_enum[continuous,discrete]_', 'dim': '_list_'}})\nmy_config = Config({'replay': {'host': 'localhost', 'port': '_int_'},\n    'obs_spec': {'type': '_enum[continuous,discrete]_', 'dim': '_list_',\n    'extra': '_float_'}})\ngold_config = Config(my_config)\nmy_config.extend(default_config)\nassert my_config == gold_config\nmy_config = Config({'replay': {'host': 'localhost', 'port': '_dict_'},\n    'obs_spec': {'type': '_enum[continuous,discrete]_', 'dim': '_list_',\n    'extra': '_float_'}})\nwith pytest_print_raises(ConfigError):\n    my_config.extend(default_config)\nmy_config = Config({'replay': {'host': 'localhost', 'port': '_int_'},\n    'obs_spec': {'type': '_enum[continuous,discrete]_'}})\nwith pytest_print_raises(ConfigError):\n    my_config.extend(default_config)\n"
+}

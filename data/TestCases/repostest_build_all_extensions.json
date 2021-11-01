@@ -1,0 +1,9 @@
+{
+    "functionName": "test_build_all_extensions",
+    "className": null,
+    "fileName": "/Pebaz_&_Nimporter/tests_&_test_distribution.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Make sure all extensions within a project are compiled correctly.\"\"\"\nextension_names = {'proj2.lib1', 'proj2.performance'}\nextensions = Nimporter.build_nim_extensions(Path('tests/proj2'))\nassert len(extensions) == 2\nfor ext in extensions:\n    assert ext.name in extension_names\n    assert isinstance(ext, Extension)\n    includes = set(Path(i) for i in ext.include_dirs)\n    for source in ext.sources:\n        src = Path(source).absolute()\n        assert src.suffix == '.c'\n"
+}

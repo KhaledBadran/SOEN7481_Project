@@ -1,0 +1,9 @@
+{
+    "functionName": "test_conversion_error_datapoints_different_composition_type",
+    "className": "TestConvertToReSpecTh",
+    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_chemked.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test for appropriate erorr of datapoints with different composition type.\n        \"\"\"\nfile_path = os.path.join('testfile_st.yaml')\nfilename = pkg_resources.resource_filename(__name__, file_path)\nc = ChemKED(filename)\nc.datapoints[0].composition_type = 'mass fraction'\nwith pytest.raises(NotImplementedError) as excinfo:\n    c.convert_to_ReSpecTh('test.xml')\nassert 'Error: ReSpecTh does not support varying composition type among datapoints.' in str(\n    excinfo.value)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_retrieve_uniprot",
+    "className": "TestGeneOntology",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_gene_ontology.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "go.Gff3Parser = Mock_gff_parser\ndatabase_file = os.path.join(self.test_folder, 'database')\ngen_file(database_file, self.example.idmapping)\ngff_file = os.path.join(self.test_folder, 'test.gff')\ngen_file(gff_file, 'test')\nout_file = os.path.join(self.test_folder, 'out.gff')\ntran_file = os.path.join(self.test_folder, 'test_transcript.gff')\ngen_file(tran_file, 'test')\ngo.retrieve_uniprot(database_file, gff_file, out_file, tran_file, 'express')\ndatas = import_data(out_file)\nself.assertEqual(set(datas), set(self.example.out_retrieve.split('\\n')))\n"
+}

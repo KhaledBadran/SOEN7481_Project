@@ -1,0 +1,9 @@
+{
+    "functionName": "test_data_api",
+    "className": null,
+    "fileName": "/quantOS-org_&_JAQS/test_&_test_data_api.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "address = data_config.get('remote.data.address', None)\nusername = data_config.get('remote.data.username', None)\npassword = data_config.get('remote.data.password', None)\nif address is None or username is None or password is None:\n    raise ValueError('no data service config available!')\napi = DataApi(address, use_jrpc=False)\nlogin_msg = api.login(username=username, password=password)\nprint(login_msg)\ndaily, msg = api.daily(symbol='600030.SH,000002.SZ', start_date=20170103,\n    end_date=20170708, fields=\n    'open,high,low,close,volume,last,trade_date,settle')\ndaily2, msg2 = api.daily(symbol='600030.SH', start_date=20170103, end_date=\n    20170708, fields='open,high,low,close,volume,last,trade_date,settle')\nassert msg == '0,'\nassert msg2 == '0,'\nassert daily.shape == (248, 9)\nassert daily2.shape == (124, 9)\ndf, msg = api.bar(symbol='600030.SH', trade_date=20170904, freq=common.\n    QUOTE_TYPE.MIN, start_time=90000, end_time=150000)\nprint(df.columns)\nassert df.shape == (240, 15)\nprint('test passed')\n"
+}

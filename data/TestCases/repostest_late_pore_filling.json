@@ -1,0 +1,9 @@
+{
+    "functionName": "test_late_pore_filling",
+    "className": "MultiPhaseModelsTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_physics_&_MultiPhaseModelsTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.phase['pore.pc_star'] = 1000\nself.phys.add_model(propname='pore.nwp_saturation', model=pm.multiphase.\n    late_filling, Pc_star='pore.pc_star', pressure='pore.pressure')\nassert np.all(self.phase['pore.nwp_saturation'] < 1.0)\nassert np.all(self.phase['pore.nwp_saturation'] > 0.0)\n"
+}

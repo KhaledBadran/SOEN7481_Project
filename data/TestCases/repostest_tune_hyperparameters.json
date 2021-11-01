@@ -1,0 +1,9 @@
+{
+    "functionName": "test_tune_hyperparameters",
+    "className": null,
+    "fileName": "/HDI-project_&_ATM/tests_&_test_worker.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    This won't test that BTB is working correctly, just that the ATM-BTB\n    connection is working.\n    \"\"\"\nmock_tuner = Mock()\nworker.Tuner = Mock(return_value=mock_tuner)\nwith patch('atm.worker.update_params') as update_params_mock:\n    worker.tune_hyperparameters(hyperpartition)\n    update_params_mock.assert_called_once_with(params=mock_tuner.propose.\n        return_value, categoricals=hyperpartition.categoricals, constants=\n        hyperpartition.constants)\nmock_tuner.propose.assert_called()\n"
+}

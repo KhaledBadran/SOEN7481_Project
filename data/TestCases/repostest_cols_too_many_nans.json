@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cols_too_many_nans",
+    "className": null,
+    "fileName": "/tvdboom_&_ATOM/tests_&_test_data_cleaning.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Assert that columns with too many NaN values are dropped.\"\"\"\nX = X_bin.copy()\nfor i in range(5):\n    X['col ' + str(i)] = [np.nan for _ in range(X.shape[0])]\nimpute = Imputer(strat_num='mean', strat_cat='most_frequent')\nX, y = impute.fit_transform(X, y_bin)\nassert len(X.columns) == 30\nassert X.isna().sum().sum() == 0\n"
+}

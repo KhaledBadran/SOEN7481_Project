@@ -1,0 +1,9 @@
+{
+    "functionName": "test_auth_to_dict",
+    "className": "TestRequestDirector",
+    "fileName": "/bigfishgames_&_GameBenchAPI-PyClient/tests_&_test_unit_&_test_api_&_test_requests_retriever_&_test_builder_&_test_request_director.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Verify the helper method correctly turns the object into a dictionary.\"\"\"\nmock = Mock()\nmock.request.method = 'POST'\nmock.request.url = AUTH_URL\nmock.request.headers = AUTH_HEADERS\nmock.request.data = AUTH_DATA\nactual = self.director._auth_to_dict(mock)\nexpected = {'method': mock.request.method, 'url': mock.request.url,\n    'attributes': {'headers': mock.request.headers, 'data':\n    f'{{ \"username\": \"{USERNAME}\", \"password\": \"{PASSWORD}\" }}'}}\nself.assertEqual(actual, expected)\n"
+}

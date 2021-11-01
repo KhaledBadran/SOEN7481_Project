@@ -1,0 +1,9 @@
+{
+    "functionName": "test_internal_consumer",
+    "className": null,
+    "fileName": "/Drakkar-Software_&_OctoBot-Channels/tests_&_test_consumer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "await get_chan(TEST_CHANNEL).new_consumer(internal_consumer=internal_consumer)\nwith patch.object(internal_consumer, 'perform', new=AsyncMock()\n    ) as mocked_consume_ends:\n    await get_chan(TEST_CHANNEL).get_internal_producer().send({})\n    await mock_was_called_once(mocked_consume_ends)\npytest.mark.asyncio"
+}

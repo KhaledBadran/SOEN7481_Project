@@ -1,0 +1,9 @@
+{
+    "functionName": "test_strain_lab",
+    "className": "test_xfab_strain",
+    "fileName": "/jonwright_&_ImageD11/test_&_test_finite_strain.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from xfab.tools import ubi_to_u_and_eps\ndzero_cell = indexing.ubitocellpars(self.ubi0)\nu, eps_xfab_ref_e6 = ubi_to_u_and_eps(self.ubi, dzero_cell)\nemat = finite_strain.e6_to_symm(eps_xfab_ref_e6)\nExfab = np.dot(np.dot(u, emat), u.T)\ndgt = finite_strain.DeformationGradientTensor(self.ubi, self.ub0)\neps_new = dgt.finite_strain_lab(m=0.5)\nself.assertTrue(np.allclose(dgt.U, u))\nself.assertTrue(np.allclose(dgt.U, self.u))\nself.assertTrue(np.allclose(eps_new, Exfab))\n"
+}

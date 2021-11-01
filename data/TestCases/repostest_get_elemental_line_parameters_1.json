@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_elemental_line_parameters_1",
+    "className": null,
+    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_simulation_&_tests_&_test_sim_xrf_scan_data.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "eline_list = _get_elemental_line_parameters(elemental_line=params['eline'],\n    incident_energy=params['incident_energy'])\nassert isinstance(eline_list, list), 'Returned value is not a list'\nassert len(eline_list) == params['n_lines'\n    ], f\"The number of emission lines {len(eline_list)} does not match the expected number {params['n_lines']}\"\nexpected_keys = set(['name', 'energy', 'ratio'])\nfor eline in eline_list:\n    assert expected_keys == set(eline.keys()\n        ), 'Dictionary with emission line parameters contains incorrect set of keys'\npytest.mark.parametrize('params', [{'eline': 'Fe_K', 'incident_energy': \n    12.0, 'n_lines': 4}, {'eline': 'Fe_K', 'incident_energy': 1.0,\n    'n_lines': 0}, {'eline': 'Se_L', 'incident_energy': 12.0, 'n_lines': 9},\n    {'eline': 'Se_L', 'incident_energy': 1.0, 'n_lines': 0}, {'eline':\n    'W_M', 'incident_energy': 12.0, 'n_lines': 4}, {'eline': 'W_M',\n    'incident_energy': 1, 'n_lines': 0}])"
+}

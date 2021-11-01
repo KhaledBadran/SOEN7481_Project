@@ -1,0 +1,9 @@
+{
+    "functionName": "test_bspline_3d",
+    "className": "TestNurbsSurfaceGeometry",
+    "fileName": "/oberbichler_&_ANurbs/tests_&_TestSurface.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "surface_geometry = an.NurbsSurfaceGeometry3D(degree_u=2, degree_v=1,\n    nb_poles_u=4, nb_poles_v=3, is_rational=False)\nsurface_geometry.knots_u = [0, 0, 7.5, 15, 15]\nsurface_geometry.knots_v = [0, 10, 20]\nsurface_geometry.poles = [[-10.0, -5.0, -1.0], [-12.0, 3.0, 3.0], [-9.0, \n    11.0, -0.0701928417], [-5.0, -3.0, 1.0], [-6.0, 4.0, -2.0], [-5.0, 7.0,\n    0.9298071583], [0.0, -4.0, -1.0], [1.0, 6.0, 5.0], [0.0, 13.0, -\n    0.2350184214], [4.0, -2.0, 0.0], [5.0, 4.0, -1.0], [5.0, 11.0, \n    0.7649815786]]\nmodel = an.Model()\nsurface_geometry_ptr = model.add(surface_geometry)\nsurface = an.Surface3D(surface_geometry_ptr)\nassert_array_almost_equal(surface.point_at(u=12, v=5), [1.46, 0.96, 0.9])\nassert_array_almost_equal(surface.derivatives_at(u=12, v=5, order=2), [[\n    1.46, 0.96, 0.9], [0.96, 0.0266666667, -0.2666666667], [0.084, 0.832, \n    0.276], [0.0355555556, -0.0088888889, -0.1333333333], [0.0106666667, -\n    0.048, -0.064], [0, 0, 0]])\nstaticmethod"
+}

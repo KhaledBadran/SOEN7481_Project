@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cache_refresh_after_triple_add",
+    "className": "POCacheTest",
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_SimplePropertyTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "o = self.ctx.DataObject(ident=R.URIRef('http://example.org/a'))\nDataObject.DatatypeProperty('boots', o)\no.boots()\nc1 = o.po_cache\nself.assertIsNotNone(c1)\nself.config['rdf.graph'].add((R.URIRef('http://example.org/a'), R.URIRef(\n    'http://bluhbluh.com'), R.URIRef('http://bluhah.com')))\no.boots()\nself.assertIsNot(c1, o.po_cache)\n"
+}

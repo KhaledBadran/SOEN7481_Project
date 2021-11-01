@@ -1,0 +1,9 @@
+{
+    "functionName": "test_firefox_add_cookie",
+    "className": "TestBrowser",
+    "fileName": "/cdgriffith_&_CookieEater/test_&_test_browser.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "fox = FirefoxCookiesV1(db=fox_db)\nfox.add_cookie('www.example.com', 'test_name', 'test_value')\nconn = sqlite3.Connection(fox_db)\ncur = conn.cursor()\ncur.execute('SELECT * FROM {0}'.format(fox.table_name))\nres = cur.fetchall()\ntry:\n    assert len(res) == 1\n    assert res[0][1] == 'example.com'\n    assert res[0][3] == 'test_name'\n    assert res[0][4] == 'test_value'\n    assert res[0][5] == 'www.example.com'\n    assert res[0][6] == '/'\nfinally:\n    conn.close()\n"
+}

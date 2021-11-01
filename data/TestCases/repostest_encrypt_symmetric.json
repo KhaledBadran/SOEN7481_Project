@@ -1,0 +1,9 @@
+{
+    "functionName": "test_encrypt_symmetric",
+    "className": null,
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_crypto_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test that various encryption algorithms and block cipher modes can be\n    used to correctly symmetrically encrypt data.\n    \"\"\"\nengine = crypto.CryptographyEngine()\nengine._handle_symmetric_padding = mock.MagicMock(return_value=\n    symmetric_parameters.get('plain_text'))\nresult = engine.encrypt(symmetric_parameters.get('algorithm'),\n    symmetric_parameters.get('key'), symmetric_parameters.get('plain_text'),\n    cipher_mode=symmetric_parameters.get('cipher_mode'), iv_nonce=\n    symmetric_parameters.get('iv_nonce'), auth_additional_data=\n    symmetric_parameters.get('auth_additional_data'), auth_tag_length=\n    symmetric_parameters.get('auth_tag_length'))\nif engine._handle_symmetric_padding.called:\n    engine._handle_symmetric_padding.assert_called_once_with(engine.\n        _symmetric_key_algorithms.get(symmetric_parameters.get('algorithm')\n        ), symmetric_parameters.get('plain_text'), None)\nassert symmetric_parameters.get('cipher_text') == result.get('cipher_text')\nassert symmetric_parameters.get('auth_tag') == result.get('auth_tag')\n"
+}

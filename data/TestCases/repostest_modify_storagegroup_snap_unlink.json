@@ -1,0 +1,9 @@
+{
+    "functionName": "test_modify_storagegroup_snap_unlink",
+    "className": "CITestReplication",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_replication.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test to cover unlink snapshot.\"\"\"\nsnapshot_info, sg_name = self.create_sg_snapshot()\ntarget_sg = '{sg}_lnk'.format(sg=sg_name)\nsnap_name = snapshot_info.get('name')\nself.replication.modify_storage_group_snapshot(src_storage_grp_id=sg_name,\n    tgt_storage_grp_id=target_sg, snap_name=snap_name, gen_num=0, link=True)\nlinked_snap_details = self.replication.get_snapshot_generation_details(sg_id\n    =sg_name, snap_name=snap_name, gen_num=0)\nself.assertEqual(True, linked_snap_details.get('isLinked'))\nself.replication.modify_storage_group_snapshot(src_storage_grp_id=sg_name,\n    tgt_storage_grp_id=target_sg, snap_name=snap_name, gen_num=0, unlink=True)\nsnap_details = self.replication.get_snapshot_generation_details(sg_id=\n    sg_name, snap_name=snap_name, gen_num=0)\nself.assertEqual(False, snap_details.get('isLinked'))\nself.provisioning.delete_storage_group(storage_group_id=target_sg)\n"
+}

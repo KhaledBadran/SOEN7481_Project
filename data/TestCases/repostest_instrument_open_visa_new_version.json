@@ -1,0 +1,9 @@
+{
+    "functionName": "test_instrument_open_visa_new_version",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_base_instrument.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "mock_visa_comm.return_value.__class__ = VisaCommunicator\nmock_visa.__version__ = '1.8'\nvisa_open_resource = mock_visa.ResourceManager.return_value.open_resource\ninst = ik.Instrument.open_visa('abc123')\nassert isinstance(inst._file, VisaCommunicator) is True\nvisa_open_resource.assert_called_with('abc123')\nmock_visa_comm.assert_called_with(visa_open_resource('abc123'))\nmock.patch('instruments.abstract_instruments.instrument.VisaCommunicator')mock.patch('instruments.abstract_instruments.instrument.visa')"
+}

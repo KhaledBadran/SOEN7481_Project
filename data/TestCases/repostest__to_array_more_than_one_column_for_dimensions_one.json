@@ -1,0 +1,9 @@
+{
+    "functionName": "test__to_array_more_than_one_column_for_dimensions_one",
+    "className": "TestBaseHyperParam",
+    "fileName": "/HDI-Project_&_BTB/tests_&_tuning_&_hyperparams_&_test_base.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "instance = MagicMock()\ninstance.dimensions = 1\nvalues = [1]\narray = MagicMock()\narray.shape.__len__.return_value = 2\narray.shape = [2, 3]\nmock_np_array.return_value = array\nwith self.assertRaises(ValueError):\n    BaseHyperParam._to_array(instance, values)\npatch('btb.tuning.hyperparams.base.np.array')"
+}

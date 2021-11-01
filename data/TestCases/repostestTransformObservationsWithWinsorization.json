@@ -1,0 +1,9 @@
+{
+    "functionName": "testTransformObservationsWithWinsorization",
+    "className": "PercentileYTransformTest",
+    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_percentile_y_transform.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "self.assertListEqual(self.t.percentiles['m1'], [0.0, 1.0, 2.0, 3.0])\nself.assertListEqual(self.t.percentiles['m2'], [0.0, 5.0, 25.0, 125.0])\ntransformed_obsd_mid = self.t_with_winsorization.transform_observation_data([\n    deepcopy(self.obsd_mid)], [])[0]\nmean_results = np.array(list(transformed_obsd_mid.means))\nexpected = np.array([0.5, 0.75])\nself.assertTrue(np.allclose(mean_results, expected), msg=\n    f'Unexpected mean Results: {mean_results}. Expected: {expected}.')\ntransformed_obsd_extreme = (self.t_with_winsorization.\n    transform_observation_data([deepcopy(self.obsd_extreme)], [])[0])\nmean_results = np.array(list(transformed_obsd_extreme.means))\nexpected = np.array([0.0847075, 0.9152924])\nself.assertTrue(np.allclose(mean_results, expected), msg=\n    f'Unexpected mean Results: {mean_results}. Expected: {expected}.')\n"
+}

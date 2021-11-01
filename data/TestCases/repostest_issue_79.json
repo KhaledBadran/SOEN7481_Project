@@ -1,0 +1,9 @@
+{
+    "functionName": "test_issue_79",
+    "className": "TestGitHubIssues",
+    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_test_issues.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Duplicate field overwrites the previous one in the result of DictCursor \"\"\"\nconn = self.connect()\nc = conn.cursor(pymysql.cursors.DictCursor)\nwith warnings.catch_warnings():\n    warnings.filterwarnings('ignore')\n    c.execute('drop table if exists a')\n    c.execute('drop table if exists b')\nc.execute('CREATE TABLE a (id int, value int)')\nc.execute('CREATE TABLE b (id int, value int)')\na = 1, 11\nb = 1, 22\ntry:\n    c.execute('insert into a values (%s, %s)', a)\n    c.execute('insert into b values (%s, %s)', b)\n    c.execute('SELECT * FROM a inner join b on a.id = b.id')\n    r = c.fetchall()[0]\n    self.assertEqual(r['id'], 1)\n    self.assertEqual(r['value'], 11)\n    self.assertEqual(r['b.value'], 22)\nfinally:\n    c.execute('drop table a')\n    c.execute('drop table b')\n"
+}

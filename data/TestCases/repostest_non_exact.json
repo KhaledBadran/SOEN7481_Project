@@ -1,0 +1,9 @@
+{
+    "functionName": "test_non_exact",
+    "className": null,
+    "fileName": "/bsmurphy_&_PyKrige/tests_&_test_core.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data = np.array([[0.0, 0.0, 0.47], [1.5, 1.5, 0.56], [3, 3, 0.74], [4.5, \n    4.5, 1.47]])\ngridx = np.arange(0.0, 4.51, 1.5)\ngridy = np.arange(0.0, 4.51, 1.5)\nok = OrdinaryKriging(data[:, (0)], data[:, (1)], data[:, (2)],\n    variogram_model='exponential', variogram_parameters=[500.0, 3000.0, 5.0])\nz, ss = ok.execute('grid', gridx, gridy, backend='vectorized')\nok_non_exact = OrdinaryKriging(data[:, (0)], data[:, (1)], data[:, (2)],\n    variogram_model='exponential', variogram_parameters=[500.0, 3000.0, 5.0\n    ], exact_values=False)\nz_non_exact, ss_non_exact = ok_non_exact.execute('grid', gridx, gridy,\n    backend='vectorized')\nin_values = np.diag(z)\nassert_allclose(in_values, data[:, (2)])\nassert ~np.allclose(in_values, data[:, (2)])\nnp.fill_diagonal(z, 0.0)\nnp.fill_diagonal(z_non_exact, 0.0)\nassert_allclose(z, z_non_exact)\n"
+}

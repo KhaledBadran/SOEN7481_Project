@@ -1,0 +1,9 @@
+{
+    "functionName": "test_read_no_new_attribute",
+    "className": "TestModifyAttributeRequestPayload",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_modify_attribute.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that an InvalidKmipEncoding error is raised when an invalid\n        encoding containing no encoded new attribute is used to decode a\n        ModifyAttribute request payload.\n        \"\"\"\npayload = payloads.ModifyAttributeRequestPayload()\nargs = self.empty_encoding,\nkwargs = {'kmip_version': enums.KMIPVersion.KMIP_2_0}\nself.assertRaisesRegex(exceptions.InvalidKmipEncoding,\n    'The ModifyAttribute request payload encoding is missing the new attribute field.'\n    , payload.read, *args, **kwargs)\n"
+}

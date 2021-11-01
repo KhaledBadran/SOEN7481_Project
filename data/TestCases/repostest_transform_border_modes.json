@@ -1,0 +1,9 @@
+{
+    "functionName": "test_transform_border_modes",
+    "className": "TestTransformLayer",
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_special.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from lasagne.layers import InputLayer, TransformerLayer\nfrom lasagne.utils import floatX\nfrom theano.tensor import constant\nl_in = InputLayer((1, 1, 16, 16))\nl_loc = InputLayer((1, 6))\nlayer = TransformerLayer(l_in, l_loc, border_mode='nearest')\nimage = np.hstack((np.zeros((16, 8)), np.ones((16, 8))))\ninputs = floatX(image).reshape(l_in.shape)\nthetas = floatX(np.array([[4, 0, 0, 0, 1, 0]]))\noutputs = layer.get_output_for([constant(inputs), constant(thetas)]).eval()\nnp.testing.assert_allclose(inputs, outputs, rtol=1e-06)\nlayer = TransformerLayer(l_in, l_loc, border_mode='mirror')\noutputs = layer.get_output_for([constant(inputs), constant(thetas)]).eval()\nexpected = np.zeros_like(outputs)\nexpected[0, 0] = [0.5, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0.5]\nnp.testing.assert_allclose(expected, outputs, rtol=1e-06)\nlayer = TransformerLayer(l_in, l_loc, border_mode='wrap')\noutputs = layer.get_output_for([constant(inputs), constant(thetas)]).eval()\nexpected = np.zeros_like(outputs)\nexpected[0, 0] = [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]\nnp.testing.assert_allclose(expected, outputs, rtol=1e-06)\nwith pytest.raises(ValueError):\n    layer = TransformerLayer(l_in, l_loc, border_mode='invalid')\n    outputs = layer.get_output_for([constant(inputs), constant(thetas)]).eval()\n"
+}

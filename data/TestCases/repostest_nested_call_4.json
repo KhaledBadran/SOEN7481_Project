@@ -1,0 +1,9 @@
+{
+    "functionName": "test_nested_call_4",
+    "className": "CallTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_call.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "base = \"\"\"\n        <%def name=\"A()\">\n        A_def\n        ${caller.body()}\n        </%def>\n\n        <%def name=\"B()\">\n        B_def\n        ${caller.body()}\n        </%def>\n        \"\"\"\ntemplate = Template(base +\n    \"\"\"\n        <%def name=\"C()\">\n         C_def\n         <%self:B>\n           <%self:A>\n              A_body\n           </%self:A>\n            B_body\n           ${caller.body()}\n         </%self:B>\n        </%def>\n\n        <%self:C>\n        C_body\n        </%self:C>\n        \"\"\"\n    )\neq_(flatten_result(template.render()), 'C_def B_def A_def A_body B_body C_body'\n    )\ntemplate = Template(base +\n    \"\"\"\n        <%def name=\"C()\">\n         C_def\n         <%self:B>\n            B_body\n           ${caller.body()}\n           <%self:A>\n              A_body\n           </%self:A>\n         </%self:B>\n        </%def>\n\n        <%self:C>\n        C_body\n        </%self:C>\n        \"\"\"\n    )\neq_(flatten_result(template.render()), 'C_def B_def B_body C_body A_def A_body'\n    )\n"
+}

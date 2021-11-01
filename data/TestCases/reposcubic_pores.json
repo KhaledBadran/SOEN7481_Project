@@ -1,0 +1,9 @@
+{
+    "functionName": "cubic_pores",
+    "className": null,
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_models_&_geometry_&_throat_endpoints.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Calculate coordinates of throat endpoints, assuming throats don't overlap\n    with their adjacent pores. This model could be applied to conduits such as\n    cuboids or cylinders in series.\n\n    Parameters\n    ----------\n    target : OpenPNM Object\n        The object which this model is associated with. This controls the\n        length of the calculated array, and also provides access to other\n        necessary properties.\n\n    pore_diameter : string\n        Dictionary key of the pore diameter values\n\n    Returns\n    -------\n    EP : dictionary\n        Coordinates of throat endpoints stored in Dict form. Can be accessed\n        via the dict keys 'head' and 'tail'.\n\n    Notes\n    -----\n    This model is only accurate for cubic networks without diagonal\n    connections.\n\n    \"\"\"\nnetwork = target.project.network\nthroats = network.map_throats(throats=target.Ts, origin=target)\nxyz = network['pore.coords']\ncn = network['throat.conns'][throats]\nL = _ctc(target=target) + 1e-15\nD1 = network[pore_diameter][cn[:, (0)]]\nD2 = network[pore_diameter][cn[:, (1)]]\nunit_vec = (xyz[cn[:, (1)]] - xyz[cn[:, (0)]]) / L[:, (None)]\nEP1 = xyz[cn[:, (0)]] + 0.5 * D1[:, (_np.newaxis)] * unit_vec\nEP2 = xyz[cn[:, (1)]] - 0.5 * D2[:, (_np.newaxis)] * unit_vec\noverlap = L - 0.5 * (D1 + D2) < 0\nmask = (D1 >= D2) & overlap\nEP2[mask] = EP1[mask]\nmask = (D1 < D2) & overlap\nEP1[mask] = EP2[mask]\nreturn {'head': EP1, 'tail': EP2}\n"
+}

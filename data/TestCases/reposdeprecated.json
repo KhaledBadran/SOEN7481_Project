@@ -1,0 +1,9 @@
+{
+    "functionName": "deprecated",
+    "className": null,
+    "fileName": "/Silmathoron_&_NNGT/nngt_&_lib_&_test_functions.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Decorator to mark deprecated functions.\n    \"\"\"\ndef decorator(func):\n\n    def wrapper(func, *args, **kwargs):\n        warnings.simplefilter('always', DeprecationWarning)\n        message = 'Function {} is deprecated since version {}'\n        message = message.format(func.__name__, version)\n        if reason is not None:\n            message += ' because ' + reason + '.'\n        else:\n            message += '.'\n        if removal is not None:\n            message += ' It will be removed in version {}.'.format(removal)\n        if alternative is not None:\n            message += ' Use ' + alternative + ' instead.'\n        warnings.warn(message, category=DeprecationWarning)\n        warnings.simplefilter('default', DeprecationWarning)\n        return func(*args, **kwargs)\n    return decorate(func, wrapper)\nreturn decorator\n"
+}

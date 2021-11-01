@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pandas_tree_execution",
+    "className": null,
+    "fileName": "/fpiedrah_&_BDT/tests_&_test_tree.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "true_child = PandasNode('True Node')\nfalse_child = PandasNode('False Node')\nhead = PandasNode('Node', lambda df: df['vals'] > 5, pd.DataFrame(np.matrix\n    (range(10)).T, columns=['vals']), true_child, false_child)\ntree = PandasBDT(head)\ntree.execute()\nleaves = tree.get_leaves()\nindex_true_leave = leaves[0].data_frame.index.tolist()\nindex_false_leave = leaves[-1].data_frame.index.tolist()\nassert (index_true_leave == range(6, 10) and index_false_leave == range(6)\n    ) == True\n"
+}

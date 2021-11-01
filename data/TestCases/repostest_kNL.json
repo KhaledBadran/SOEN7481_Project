@@ -1,0 +1,9 @@
+{
+    "functionName": "test_kNL",
+    "className": null,
+    "fileName": "/LSSTDESC_&_CCL/benchmarks_&_test_kNL.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cosmo = ccl.Cosmology(Omega_c=0.25, Omega_b=0.05, h=0.7, sigma8=0.8, n_s=\n    0.96, Neff=0, m_nu=0.0, w0=-1.0, wa=0.0, T_CMB=2.7, m_nu_type='normal',\n    Omega_g=0, Omega_k=0, transfer_function='bbks', matter_power_spectrum=\n    'linear')\ndata = np.loadtxt('./benchmarks/data/kNL.txt')\na = data[:, (0)]\nkNL = data[:, (1)]\nkNL_ccl = ccl.kNL(cosmo, a)\nfor i in range(len(a)):\n    err = np.abs(kNL_ccl[i] / kNL[i] - 1)\n    assert np.allclose(err, 0, rtol=0, atol=KNL_TOLERANCE)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_invoke_compiler_success",
+    "className": null,
+    "fileName": "/Pebaz_&_Nimporter/tests_&_test_build.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that warnings are propagated\"\"\"\nwarn_file = Path('tests/pkg1/warn.nim').resolve()\nout_file = Path('tests/pkg1/warn' + NimCompiler.EXT).resolve()\ntry:\n    NimCompiler.ensure_nimpy()\n    out, err, war, hin = NimCompiler.invoke_compiler(['nim', 'c', *\n        NimCompiler.NIM_CLI_ARGS, f'--out:{out_file}', str(warn_file)])\n    assert out_file.exists(), err\n    assert any(\"Warning: imported and not used: 'asyncstreams'\" in i for i in\n        war)\n    assert any('Hint: system [Processing]' in i for i in hin)\nfinally:\n    if out_file.exists():\n        out_file.unlink()\n        if sys.platform == 'win32':\n            Path('tests/pkg1/warn.exp').unlink()\n            Path('tests/pkg1/warn.lib').unlink()\n"
+}

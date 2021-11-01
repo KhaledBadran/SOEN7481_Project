@@ -1,0 +1,9 @@
+{
+    "functionName": "_get_xanes_energy_axis",
+    "className": null,
+    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_xanes_maps_&_tests_&_test_xanes_maps_api.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Generates a reasonable range of energy values for testing of XANES processing.\n    The set of energies contains values in pre- and post-edge regions.\n    \"\"\"\neline = 'Fe_K'\neline_activation_energy = 7.1115\ne_min, e_max, de = 7.05, 7.15, 0.001\nincident_energies = np.mgrid[e_min:e_max:((e_max - e_min) / de + 1) * 1.0j]\nincident_energies = np.round(incident_energies, 5)\nreturn incident_energies, eline, eline_activation_energy\n"
+}

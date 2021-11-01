@@ -1,0 +1,9 @@
+{
+    "functionName": "test_SubscriptionManager_can_unsubscribe",
+    "className": null,
+    "fileName": "/willdeuschle_&_Python-GraphQL-Subscriptions/tests_&_test_python_graphql_subscriptions.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "called = [0]\nschema = Schema\nsetup_functions = {'test_filter_sub': lambda options, args,\n    subscription_name: {'sub_1': {}}}\nsub_manager = SubscriptionManager(schema, pubsub, setup_functions)\ndef callback(error=None, result=None):\n    called[0] += 1\n    assert result.data['test_filter_sub'] == 'SUCCESS'\nkwargs = {'query':\n    'subscription test_filter($filter_bool: Boolean){                   test_filter_sub(filter_bool: $filter_bool) }'\n    , 'operation_name': 'test_filter', 'variables': {'filter_bool': True},\n    'callback': callback, 'context': {}}\nsub_id = sub_manager.subscribe(**kwargs)\nassert called == [0]\nsub_manager.publish('sub_1', {})\nassert called == [1]\nsub_manager.unsubscribe(sub_id)\nsub_manager.publish('sub_1', {})\nassert called == [1]\n"
+}

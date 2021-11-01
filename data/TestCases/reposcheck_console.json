@@ -1,0 +1,9 @@
+{
+    "functionName": "check_console",
+    "className": "CaseSetup",
+    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_console.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "for key, value in kwargs.items():\n    assert hasattr(WriterThread, key)\n    setattr(WriterThread, key, value)\nself.writer = writer\nargs = runner.get_command_line()\nargs = runner.add_command_line_args(args)\nif SHOW_OTHER_DEBUG_INFO:\n    print('executing: %s' % (' '.join(args),))\ntry:\n    with runner.run_process(args, writer) as dct_with_stdout_stder:\n        writer.get_stdout = lambda : ''.join(dct_with_stdout_stder['stdout'])\n        writer.get_stderr = lambda : ''.join(dct_with_stdout_stder['stderr'])\n        writer.hello()\n        yield writer\nfinally:\n    writer.log = []\nstdout = dct_with_stdout_stder['stdout']\nstderr = dct_with_stdout_stder['stderr']\nwriter.additional_output_checks(''.join(stdout), ''.join(stderr))\ncontextmanager"
+}

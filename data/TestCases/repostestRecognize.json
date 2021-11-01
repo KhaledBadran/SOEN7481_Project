@@ -1,0 +1,9 @@
+{
+    "functionName": "testRecognize",
+    "className": "DecoderPipelineTests",
+    "fileName": "/mertyildiran_&_Dragonfire/dragonfire_&_sr_&_decoder_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.decoder_pipeline.init_request('recognize',\n    'audio/x-raw, layout=(string)interleaved, rate=(int)16000, format=(string)S16LE, channels=(int)1'\n    )\np = pyaudio.PyAudio()\nstream = p.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True,\n    output=True, frames_per_buffer=CHUNK)\ndata = stream.read(CHUNK)\nfor i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):\n    data = stream.read(CHUNK)\n    stream.write(data, CHUNK)\n    self.decoder_pipeline.process_data(data)\nstream.stop_stream()\nstream.close()\np.terminate()\nself.decoder_pipeline.end_request()\nwhile not self.finished:\n    time.sleep(1)\nprint(self.words)\npytest.mark.skip(reason='Kaldi is deprecated.')"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_calculate_returns",
+    "className": null,
+    "fileName": "/realtwister_&_LearnedEvolution/tests_&_agents_&_test_batch.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "g = 0.95\nbatch = Batch(reward_discount=g)\nr = [1, 2, 3]\nv = 10\nreturns = [r[0] + g * r[1] + g ** 2 * r[2] + g ** 3 * v, r[1] + g * r[2] + \n    g ** 2 * v, r[2] + g * v]\nassert np.all(np.array(returns) == np.array(batch.calculate_returns(r, v)))\nT = 1000\nr = np.random.rand(T)\nv = np.random.rand() * 100\nrets = batch.calculate_returns(r, v)\nfor t in range(T):\n    ret = g ** (T - t) * v\n    for k in range(T - t):\n        delta = g ** k * r[t + k]\n        ret += delta\n    assert np.abs(ret - rets[t]) < 1e-10, (t, delta)\n"
+}

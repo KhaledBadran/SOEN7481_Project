@@ -1,0 +1,9 @@
+{
+    "functionName": "test_proper_common_initial_composition",
+    "className": "TestCommonProperties",
+    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_converters.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Ensure proper handling of initial composition common property.\n        \"\"\"\nroot = etree.Element('experiment')\nproperties = etree.SubElement(root, 'commonProperties')\ninitial_composition = etree.SubElement(properties, 'property')\ninitial_composition.set('name', 'initial composition')\nspecies_refs = [{'name': 'H2', 'inchi': '1S/H2/h1H', 'amount': 0.00444}, {\n    'name': 'O2', 'inchi': '1S/O2/c1-2', 'amount': 0.00566}, {'name': 'Ar',\n    'inchi': '1S/Ar', 'amount': 0.9899}]\nfor spec in species_refs:\n    component = etree.SubElement(initial_composition, 'component')\n    species = etree.SubElement(component, 'speciesLink')\n    species.set('preferredKey', spec['name'])\n    species.set('InChI', spec['inchi'])\n    amount = etree.SubElement(component, 'amount')\n    amount.set('units', composition_type)\n    amount.text = str(spec['amount'])\ncommon = get_common_properties(root)\nassert common['composition']['kind'] == composition_type\nassert len(common['composition']['species']) == 3\nfor spec_ref, spec in zip(species_refs, common['composition']['species']):\n    assert spec['species-name'] == spec_ref['name']\n    assert spec['InChI'] == spec_ref['inchi']\n    assert spec['amount'] == [spec_ref['amount']]\npytest.mark.parametrize('composition_type', ['mole fraction', 'mass fraction'])"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_watch__unknown_name",
+    "className": null,
+    "fileName": "/heston_&_firebase-live-data/tests_&_test_watcher.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "watcher_stub = mocker.patch('firebasedata.watcher.Watcher')\nis_stale = mocker.Mock()\nupdate = mocker.Mock()\ninterval = timedelta(seconds=0.001)\nwatcher.cancel_all()\nwatcher.watch('test_watcher', is_stale, update, interval)\nwatcher_stub.assert_called_with(is_stale, update, interval)\nassert watcher_stub.return_value.start.called\nassert 'test_watcher' in watcher._watchers\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_generate_supercell",
+    "className": null,
+    "fileName": "/mesonepigreco_&_CellConstructor/tests_&_TestGenerateSupercell_&_test_supercell_structure.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "total_path = os.path.dirname(os.path.abspath(__file__))\nos.chdir(total_path)\nSUPERCELL = 3, 3, 2\nsimple_struct = CC.Structure.Structure()\nsimple_struct.read_scf('unit_cell_structure.scf')\nsuper1 = simple_struct.generate_supercell(SUPERCELL, QE_convention=False)\nsuper2 = simple_struct.generate_supercell(SUPERCELL, QE_convention=True)\nassert super1.N_atoms == super2.N_atoms\nfor i in range(super1.N_atoms):\n    is_zero = False\n    for j in range(super2.N_atoms):\n        if super2.atoms[j] != super1.atoms[i]:\n            continue\n        r_vec = CC.Methods.get_closest_vector(super1.unit_cell, super1.\n            coords[(i), :] - super2.coords[(j), :])\n        if np.sqrt(r_vec.dot(r_vec)) < 1e-07:\n            is_zero = True\n            break\n    if not is_zero:\n        print('The atom {} has not corrispondence:'.format(i + 1))\n        print('coord: {}'.format(super1.coords[(i), :]))\n        print('All other coordinates:')\n        print(super2.coords[:, :])\n    assert is_zero, 'Error, I did not find the corrispondence of one atom.'\n"
+}

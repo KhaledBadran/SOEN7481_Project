@@ -1,0 +1,9 @@
+{
+    "functionName": "test_process_echo",
+    "className": null,
+    "fileName": "/PRIArobotics_&_HedgehogServer/tests_&_test_server.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "async with conn_dealer() as socket:\n    response = await assertReplyDealer(socket, process.ExecuteAction('echo',\n        'asdf'), process.ExecuteReply)\n    pid = response.pid\n    stream_handler = handle_streams()\n    output = None\n\n    async def handle():\n        nonlocal output\n        _, msg = await socket.recv_msg()\n        assertMsgEqual(msg, process.StreamUpdate, pid=pid)\n        output = stream_handler(msg)\n    while output is None:\n        await handle()\n    _, msg = await socket.recv_msg()\n    assert msg == process.ExitUpdate(pid, 0)\n    assert output[process.STDOUT] == b'asdf\\n'\n    assert output[process.STDERR] == b''\npytest.mark.trio"
+}

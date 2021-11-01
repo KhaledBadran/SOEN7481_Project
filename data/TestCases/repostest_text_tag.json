@@ -1,0 +1,9 @@
+{
+    "functionName": "test_text_tag",
+    "className": "LexerTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_lexer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "template = \"\"\"\n        ## comment\n        % if foo:\n            hi\n        % endif\n        <%text>\n            # more code\n\n            % more code\n            <%illegal compionent>/></>\n            <%def name=\"laal()\">def</%def>\n\n\n        </%text>\n\n        <%def name=\"foo()\">this is foo</%def>\n\n        % if bar:\n            code\n        % endif\n        \"\"\"\nnode = Lexer(template).parse()\nself._compare(node, TemplateNode({}, [Text('\\n', (1, 1)), Comment('comment',\n    (2, 1)), ControlLine('if', 'if foo:', False, (3, 1)), Text(\n    '            hi\\n', (4, 1)), ControlLine('if', 'endif', True, (5, 1)),\n    Text('        ', (6, 1)), TextTag('text', {}, (6, 9), [Text(\n    \"\"\"\n            # more code\n\n            % more code\n            <%illegal compionent>/></>\n            <%def name=\"laal()\">def</%def>\n\n\n        \"\"\"\n    , (6, 16))]), Text('\\n\\n        ', (14, 17)), DefTag('def', {'name':\n    'foo()'}, (16, 9), [Text('this is foo', (16, 28))]), Text('\\n\\n', (16, \n    46)), ControlLine('if', 'if bar:', False, (18, 1)), Text(\n    \"\"\"            code\n\"\"\", (19, 1)), ControlLine('if', 'endif', True, (20,\n    1)), Text('        ', (21, 1))]))\n"
+}

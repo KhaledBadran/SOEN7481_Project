@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ingestion_content",
+    "className": null,
+    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_engine_&_tests_&_test_vectorizer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data_dir = Path(basename, '..', '..', 'data', 'ds_002', 'raw')\ndd = []\nfor idx, fname in enumerate(sorted(data_dir.glob('*txt'))):\n    with fname.open('rt', encoding='utf-8') as fh:\n        dd.append({'document_id': idx + 19, 'content': fh.read()})\ncache_dir = check_cache()\nfe = FeatureVectorizer(cache_dir=cache_dir, mode='w')\nuuid = fe.setup()\nfe.ingest(dataset_definition=dd, vectorize=True)\nassert len(fe.filenames_) == 6\nassert fe.filenames_[0] == '000000000_0.txt'\nX = fe._load_features()\nassert X.shape[0] == 6\nassert fe.db_.data.shape[0] == len(fe.filenames_)\nfe2 = FeatureVectorizer(cache_dir=cache_dir, mode='w')\nfe2.setup()\nfe2.ingest(data_dir=str(data_dir))\nX2 = fe2._load_features()\nassert X.shape == X2.shape\nassert_array_equal(X.indices, X2.indices)\nassert_array_equal(X.data, X2.data)\n"
+}

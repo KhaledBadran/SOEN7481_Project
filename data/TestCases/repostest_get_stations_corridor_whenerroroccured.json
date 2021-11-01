@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_stations_corridor_whenerroroccured",
+    "className": "EVChargingStationsApi",
+    "fileName": "/abdullahselek_&_HerePy/tests_&_test_ev_charging_stations_api.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with open('testdata/models/ev_charging_stations_error_unauthorized.json', 'r'\n    ) as f:\n    expected_response = f.read()\nresponses.add(responses.GET,\n    'https://ev-v2.cit.cc.api.here.com/ev/stations.json', expected_response,\n    status=200)\nwith self.assertRaises(herepy.HEREError):\n    self._api.get_stations_corridor(points=[52.51666, 13.38333, 52.13333, \n        11.61666, 53.56527, 10.00138, 11.0])\nresponses.activate"
+}

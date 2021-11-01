@@ -1,0 +1,9 @@
+{
+    "functionName": "test_plot_single_tile",
+    "className": null,
+    "fileName": "/ECCO-GROUP_&_ECCOv4-py/ecco_v4_py_&_test_&_test_tile_plot.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"plot a single tile\"\"\"\nnparr = get_test_array(is_xda=False)\nxda = get_test_array(is_xda=True)\nfor t in xda.tile.values:\n    ecco.plot_tile(nparr[t, ...], **vdict)\n    plt.close()\n    ecco.plot_tile(xda.sel(tile=t), **vdict)\n    plt.close()\npytest.mark.parametrize('vdict', [{}, {'cmap': 'plasma'}, {'show_colorbar':\n    True}, {'show_colorbar': True, 'show_cbar_label': True, 'cbar_label':\n    'something good'}, {'show_tile_labels': False}, {'less_output': False}])"
+}

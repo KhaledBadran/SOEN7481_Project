@@ -1,0 +1,9 @@
+{
+    "functionName": "test_instrument_open_gpibusb",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_base_instrument.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "mock_serial_manager.new_serial_connection.return_value.__class__ = (\n    SerialCommunicator)\nmock_gpib_comm.return_value.__class__ = GPIBCommunicator\ninst = ik.Instrument.open_gpibusb('/dev/port', gpib_address=1, model='gi')\nassert isinstance(inst._file, GPIBCommunicator) is True\nmock_serial_manager.new_serial_connection.assert_called_with('/dev/port',\n    baud=460800, timeout=3, write_timeout=3)\nmock_gpib_comm.assert_called_with(mock_serial_manager.new_serial_connection\n    .return_value, 1, 'gi')\nmock.patch('instruments.abstract_instruments.instrument.GPIBCommunicator')mock.patch('instruments.abstract_instruments.instrument.serial_manager')"
+}

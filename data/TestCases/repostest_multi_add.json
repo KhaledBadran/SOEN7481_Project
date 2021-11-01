@@ -1,0 +1,9 @@
+{
+    "functionName": "test_multi_add",
+    "className": null,
+    "fileName": "/CFMTech_&_Jupytab/jupytab_&_tests_&_test_function.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "def multi_add(*args):\n    return sum(args)\nfuncs = Functions()\nfuncs['MultiAdd'] = Function('Sum of all arguments', multi_add)\nrequest = json.dumps({'body': {'function': 'MultiAdd', 'data': {'_arg1':\n    list(range(1, 10)), '_arg2': list(range(1, 10))}}})\nx = funcs.render_evaluate(request, do_print=False)\nassert x == '[2, 4, 6, 8, 10, 12, 14, 16, 18]'\n"
+}

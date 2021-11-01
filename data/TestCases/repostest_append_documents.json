@@ -1,0 +1,9 @@
+{
+    "functionName": "test_append_documents",
+    "className": null,
+    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_server_&_tests_&_test_ingestion.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "method = V01 + '/feature-extraction/'\ndata = app.post_check(method)\ndsid = data['id']\nmethod += dsid\napp.post_check(method, json={'data_dir': data_dir})\ndata = app.get_check(method)\ndata = app.post_check(method + '/id-mapping', json={'return_file_path': False})\nassert dict2type(data['data'][0]) == {'document_id': 'int', 'internal_id':\n    'int'}\ndata = app.post_check(method + '/id-mapping', json={'return_file_path': True})\nassert dict2type(data['data'][0]) == {'document_id': 'int', 'file_path':\n    'str', 'internal_id': 'int'}\ndb_old = data['data']\ndataset_definition = []\nfor idx, row in enumerate(db_old):\n    row_out = {'document_id': idx + 10}\n    if ingestion_method == 'file_path':\n        row_out['file_path'] = os.path.join(data_dir, row['file_path'])\n    elif ingestion_method == 'content':\n        with Path(data_dir, row['file_path']).open('rt', encoding='utf-8'\n            ) as fh:\n            row_out['content'] = fh.read()\n    dataset_definition.append(row_out)\napp.post_check(method + '/append', json={'dataset_definition':\n    dataset_definition})\ndata = app.post_check(method + '/id-mapping', json={'return_file_path': True})\ndb_old = pd.DataFrame(db_old)\ndb_new = pd.DataFrame(data['data'])\nassert db_old.shape[0] * 2 == db_new.shape[0]\npytest.mark.parametrize('ingestion_method', ['file_path', 'content'])"
+}

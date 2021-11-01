@@ -1,0 +1,9 @@
+{
+    "functionName": "test_dry_run",
+    "className": null,
+    "fileName": "/PearsonEducation_&_Alarmageddon/tests_&_test_run.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "validations = [Validation('low', Priority.LOW), Validation('normal',\n    Priority.NORMAL), Validation('critical', Priority.CRITICAL)]\npublishers = [Publisher('low_pub', priority_threshold=Priority.LOW),\n    Publisher('norm_pub', priority_threshold=Priority.NORMAL), Publisher(\n    'crit_pub', priority_threshold=Priority.CRITICAL)]\nassociations = run._compute_dry_run(validations, publishers)\nlows = associations[publishers[0]]\nnorms = associations[publishers[1]]\ncrits = associations[publishers[2]]\nassert len(lows) == 3\nassert len(norms) == 2\nassert len(crits) == 1\nassert validations[0] in lows\nassert validations[1] in lows\nassert validations[2] in lows\nassert validations[0] not in norms\nassert validations[1] in norms\nassert validations[2] in norms\nassert validations[0] not in crits\nassert validations[1] not in crits\nassert validations[2] in crits\n"
+}

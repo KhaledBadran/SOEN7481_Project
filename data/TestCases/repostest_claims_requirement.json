@@ -1,0 +1,9 @@
+{
+    "functionName": "test_claims_requirement",
+    "className": null,
+    "fileName": "/RobertoPrevato_&_GuardPost/tests_&_test_authorization.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "auth = get_strategy([Policy('x', ClaimsRequirement('name'))],\n    request_identity_getter)\n@auth(policy='x')\nasync def some_method(request: Request):\n    assert request is not None\n    return True\nvalue = await some_method(Request(User({'name': 'Tybek'})))\nassert value is True\npytest.mark.asyncio"
+}

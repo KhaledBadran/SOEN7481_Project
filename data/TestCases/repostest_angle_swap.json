@@ -1,0 +1,9 @@
+{
+    "functionName": "test_angle_swap",
+    "className": null,
+    "fileName": "/RI-imaging_&_ODTbrain/tests_&_test_angle_weights.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test if everything still works, when angles are swapped.\n    \"\"\"\nsino, angles = create_test_sino_2d()\nangles = angles[:-2]\nsino = sino[:-2, :]\nparameters = get_test_parameter_set(2)\nr1 = []\nfor p in parameters:\n    f1 = odtbrain.backpropagate_2d(sino, angles, weight_angles=True, **p)\n    r1.append(f1)\norder = np.argsort(angles % 0.5)\nangles = angles[order]\nsino = sino[(order), :]\nr2 = []\nfor p in parameters:\n    f2 = odtbrain.backpropagate_2d(sino, angles, weight_angles=True, **p)\n    r2.append(f2)\nassert np.allclose(np.array(r1).flatten().view(float), np.array(r2).flatten\n    ().view(float))\n"
+}

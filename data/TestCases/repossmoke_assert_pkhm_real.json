@@ -1,0 +1,9 @@
+{
+    "functionName": "smoke_assert_pkhm_real",
+    "className": null,
+    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_pkhm.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "sizes = [(0, 0), (2, 0), (0, 2), (2, 3), (1, 3), (3, 1)]\nshapes = [(), (2,), (2,), (2, 3), (1, 3), (3, 1)]\nfor (sa, sk), sh in zip(sizes, shapes):\n    if sk == 0:\n        k = 0.1\n    else:\n        k = np.logspace(-2.0, 0.0, sk)\n    if sa == 0:\n        a = 1.0\n    else:\n        a = np.linspace(0.5, 1.0, sa)\n    p = func(k, a)\n    assert np.shape(p) == sh\n    assert np.all(np.isfinite(p))\n"
+}

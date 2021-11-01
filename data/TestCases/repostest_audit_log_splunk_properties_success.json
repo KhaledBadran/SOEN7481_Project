@@ -1,0 +1,9 @@
+{
+    "functionName": "test_audit_log_splunk_properties_success",
+    "className": "TestEnterprise",
+    "fileName": "/Keeper-Security_&_Commander/unit-tests_&_test_command_enterprise.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "splunk = enterprise.AuditLogSplunkExport()\nprops = {}\nrecord = Record()\nwith mock.patch('builtins.print'), mock.patch('builtins.input'\n    ) as mock_input, mock.patch('requests.post') as mock_post:\n    resp1 = mock.Mock()\n    resp1.status_code = 401\n    resp1.json.return_value = {'code': 2}\n    resp2 = mock.Mock()\n    resp2.status_code = 400\n    resp2.json.return_value = {'code': 6}\n    mock_input.side_effect = ['www.splunk.com', 'Splunk Token',\n        KeyboardInterrupt()]\n    mock_post.side_effect = [resp1, resp2, Exception()]\n    splunk.get_properties(record, props)\n    self.assertIn('hec_url', props)\n    self.assertIn('token', props)\n    self.assertEqual(props['hec_url'], record.login_url)\n    self.assertEqual(props['token'], record.password)\n    self.assertTrue(splunk.store_record)\n"
+}

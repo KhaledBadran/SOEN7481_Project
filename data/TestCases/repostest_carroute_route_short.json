@@ -1,0 +1,9 @@
+{
+    "functionName": "test_carroute_route_short",
+    "className": "RoutingApiTest",
+    "fileName": "/abdullahselek_&_HerePy/tests_&_test_routing_api.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with codecs.open('testdata/models/routing_car_route_short.json', mode='r',\n    encoding='utf-8') as f:\n    expectedResponse = f.read()\nresponses.add(responses.GET,\n    'https://route.ls.hereapi.com/routing/7.2/calculateroute.json',\n    expectedResponse, status=200)\nresponse = self._api.car_route([38.9, -77.04833], [39.0, -77.1])\nexpected_short_route = (\n    'US-29 - K St NW; US-29 - Whitehurst Fwy; I-495 N - Capital Beltway; MD-187 S - Old Georgetown Rd'\n    )\nself.assertEqual(response.route_short, expected_short_route)\nresponses.activate"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_read_missing_validation_authority_type",
+    "className": "TestValidationInformation",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that an InvalidKmipEncoding error is raised during the decoding\n        of a ValidationInformation structure when the validation authority\n        type is missing from the encoding.\n        \"\"\"\nvalidation_information = objects.ValidationInformation()\nargs = self.no_validation_authority_type_encoding,\nself.assertRaisesRegex(exceptions.InvalidKmipEncoding,\n    'The ValidationInformation encoding is missing the validation authority type.'\n    , validation_information.read, *args)\n"
+}

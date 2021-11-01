@@ -1,0 +1,9 @@
+{
+    "functionName": "categorical_crossentropy",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_objectives.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Computes the categorical cross-entropy between predictions and targets.\n\n    .. math:: L_i = - \\\\sum_j{t_{i,j} \\\\log(p_{i,j})}\n\n    :math:`p` are the predictions, :math:`t` are the targets, :math:`i`\n    denotes the data point and :math:`j` denotes the class.\n\n    Parameters\n    ----------\n    predictions : Theano 2D tensor\n        Predictions in (0, 1), such as softmax output of a neural network,\n        with data points in rows and class probabilities in columns.\n    targets : Theano 2D tensor or 1D tensor\n        Either targets in [0, 1] matching the layout of `predictions`, or\n        a vector of int giving the correct class index per data point.\n        In the case of an integer vector argument, each element\n        represents the position of the '1' in a one-hot encoding.\n\n    Returns\n    -------\n    Theano 1D tensor\n        An expression for the item-wise categorical cross-entropy.\n\n    Notes\n    -----\n    This is the loss function of choice for multi-class classification\n    problems and softmax output units. For hard targets, i.e., targets\n    that assign all of the probability to a single class per data point,\n    providing a vector of int for the targets is usually slightly more\n    efficient than providing a matrix with a single 1.0 per row.\n    \"\"\"\nreturn theano.tensor.nnet.categorical_crossentropy(predictions, targets)\n"
+}

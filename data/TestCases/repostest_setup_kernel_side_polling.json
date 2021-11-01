@@ -1,0 +1,9 @@
+{
+    "functionName": "test_setup_kernel_side_polling",
+    "className": null,
+    "fileName": "/YoSTEALTH_&_Liburing/test_&_setup_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ring = liburing.io_uring()\nassert liburing.io_uring_queue_init(1, ring, liburing.IORING_SETUP_SQPOLL) == 0\nassert liburing.io_uring_queue_exit(ring) is None\npytest.mark.skipif(os.getuid() != 0, reason=\n    '`IORING_SETUP_SQPOLL` must be run as \"root\" user.')"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_expand_dim_fit",
+    "className": null,
+    "fileName": "/Neuraxio_&_Neuraxle/testing_&_steps_&_test_expand_dim.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "handle_fit_callback = TapeCallbackFunction()\nhandle_transform_callback = TapeCallbackFunction()\nhandle_fit_transform_callback = TapeCallbackFunction()\np = Pipeline([ExpandDim(HandleCallbackStep(handle_fit_callback,\n    handle_transform_callback, handle_fit_transform_callback))])\np['ExpandDim'].hashers = [SomeSummaryHasher(fake_summary_id=SUMMARY_ID)]\np = p.fit(np.array(range(10)), np.array(range(10)))\nassert handle_transform_callback.data == []\nassert handle_fit_transform_callback.data == []\nassert handle_fit_callback.data[0][0].current_ids == [SUMMARY_ID]\nassert handle_fit_callback.data[0][0].summary_id == SUMMARY_ID\nassert np.array_equal(np.array(handle_fit_callback.data[0][0].data_inputs),\n    np.array([np.array(range(10))]))\nassert np.array_equal(np.array(handle_fit_callback.data[0][0].\n    expected_outputs), np.array([np.array(range(10))]))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "circular_pores",
+    "className": null,
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_models_&_geometry_&_throat_endpoints.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Calculate the coordinates of throat endpoints, assuming circular pores.\n    This model accounts for the overlapping lens between pores and throats.\n\n    Parameters\n    ----------\n    target : OpenPNM Object\n        The object which this model is associated with. This controls the\n        length of the calculated array, and also provides access to other\n        necessary properties.\n\n    pore_diameter : string\n        Dictionary key of the pore diameter values.\n\n    throat_diameter : string\n        Dictionary key of the throat diameter values.\n\n    throat_centroid : string, optional\n        Dictionary key of the throat centroid values. See the notes.\n\n    Returns\n    -------\n    EP : dictionary\n        Coordinates of throat endpoints stored in Dict form. Can be accessed\n        via the dict keys 'head' and 'tail'.\n\n    Notes\n    -----\n    (1) This model should only be applied to ture 2D networks.\n\n    (2) By default, this model assumes that throat centroid and pore\n    coordinates are colinear. If that's not the case, such as in extracted\n    networks, `throat_centroid` could be passed as an optional argument, and\n    the model takes care of the rest.\n\n    \"\"\"\nreturn spherical_pores(target, pore_diameter=pore_diameter, throat_diameter\n    =throat_diameter)\n"
+}

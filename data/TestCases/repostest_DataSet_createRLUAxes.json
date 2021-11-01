@@ -1,0 +1,9 @@
+{
+    "functionName": "test_DataSet_createRLUAxes",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_DataSet.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "plt.ioff()\nimport matplotlib\nmatplotlib.use('Agg')\nfig = plt.figure()\nconvertFiles = ['Data/camea2018n000136.hdf']\nds = DataSet(dataFiles=convertFiles)\nds.convertDataFile(saveFile=True)\nax = ds.createRLUAxes()\nax = ds.createRLUAxes(basex=0.5, figure=fig)\nax = ds.createRLUAxes(basey=0.5)\nif pythonVersion == 3:\n    ax.set_xticks_base(0.2)\n    ax.set_yticks_base(0.5)\nV1, V2, V3 = [2, 0, 0], [-2, 3, 0], [2, -3, 0]\nax.set_axis(V1, V2)\nax.set_axis(V1, V2, V3)\nplt.close('all')\n"
+}

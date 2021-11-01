@@ -1,0 +1,9 @@
+{
+    "functionName": "test_coef_predict_same_as_predict_xgb",
+    "className": null,
+    "fileName": "/tpospisi_&_Flexcode/tests_&_test_examples.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "def generate_data(n_draws):\n    x = np.random.normal(0, 1, n_draws)\n    z = np.random.normal(x, 1, n_draws)\n    return x, z\nx_train, z_train = generate_data(10000)\nx_validation, z_validation = generate_data(10000)\nx_test, z_test = generate_data(10000)\nmodel = flexcode.FlexCodeModel(XGBoost, max_basis=31, basis_system='cosine',\n    regression_params={'max_depth': 5})\nmodel.fit(x_train, z_train)\nmodel.tune(x_validation, z_validation, bump_threshold_grid=np.linspace(0, \n    0.2, 3), sharpen_grid=np.linspace(0.5, 1.5, 3))\ncdes_predict, z_grid = model.predict(x_test, n_grid=200)\ncoefs = model.predict_coefs(x_test)\ncdes_coefs = coefs.evaluate(z_grid)\nassert np.max(np.abs(cdes_predict - cdes_coefs)) <= 0.0001\n"
+}

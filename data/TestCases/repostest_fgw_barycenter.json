@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fgw_barycenter",
+    "className": null,
+    "fileName": "/PythonOT_&_POT/test_&_test_gromov.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "np.random.seed(42)\nns = 50\nnt = 60\nXs, ys = ot.datasets.make_data_classif('3gauss', ns, random_state=42)\nXt, yt = ot.datasets.make_data_classif('3gauss2', nt, random_state=42)\nys = np.random.randn(Xs.shape[0], 2)\nyt = np.random.randn(Xt.shape[0], 2)\nC1 = ot.dist(Xs)\nC2 = ot.dist(Xt)\nn_samples = 3\nX, C = ot.gromov.fgw_barycenters(n_samples, [ys, yt], [C1, C2], [ot.unif(ns\n    ), ot.unif(nt)], [0.5, 0.5], 0.5, fixed_structure=False, fixed_features\n    =False, p=ot.unif(n_samples), loss_fun='square_loss', max_iter=100, tol\n    =0.001)\nnp.testing.assert_allclose(C.shape, (n_samples, n_samples))\nnp.testing.assert_allclose(X.shape, (n_samples, ys.shape[1]))\nxalea = np.random.randn(n_samples, 2)\ninit_C = ot.dist(xalea, xalea)\nX, C = ot.gromov.fgw_barycenters(n_samples, [ys, yt], [C1, C2], ps=[ot.unif\n    (ns), ot.unif(nt)], lambdas=[0.5, 0.5], alpha=0.5, fixed_structure=True,\n    init_C=init_C, fixed_features=False, p=ot.unif(n_samples), loss_fun=\n    'square_loss', max_iter=100, tol=0.001)\nnp.testing.assert_allclose(C.shape, (n_samples, n_samples))\nnp.testing.assert_allclose(X.shape, (n_samples, ys.shape[1]))\ninit_X = np.random.randn(n_samples, ys.shape[1])\nX, C = ot.gromov.fgw_barycenters(n_samples, [ys, yt], [C1, C2], [ot.unif(ns\n    ), ot.unif(nt)], [0.5, 0.5], 0.5, fixed_structure=False, fixed_features\n    =True, init_X=init_X, p=ot.unif(n_samples), loss_fun='square_loss',\n    max_iter=100, tol=0.001)\nnp.testing.assert_allclose(C.shape, (n_samples, n_samples))\nnp.testing.assert_allclose(X.shape, (n_samples, ys.shape[1]))\n"
+}

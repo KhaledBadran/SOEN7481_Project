@@ -1,0 +1,9 @@
+{
+    "functionName": "test_environ_coerce",
+    "className": null,
+    "fileName": "/glentner_&_CmdKit/tests_&_test_config.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test automatic type coercion with Environ.reduce().\"\"\"\nPREFIX = 'CMDKIT'\nfor var in dict(os.environ):\n    if var.startswith(PREFIX):\n        os.environ.pop(var)\nfor line in TEST_ENV_TYPES.strip().split('\\n'):\n    field, value = line.strip().split('=')\n    os.environ[field] = value\nenv = Environ(prefix=PREFIX).reduce()\nassert isinstance(env['int'], int) and env['int'] == 1\nassert isinstance(env['float'], float) and env['float'] == 3.14\nassert isinstance(env['true'], bool) and env['true'] is True\nassert isinstance(env['false'], bool) and env['false'] is False\nassert env['null'] is None\nassert env['str'] == 'other'\n"
+}

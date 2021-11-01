@@ -1,0 +1,9 @@
+{
+    "functionName": "_handle_camera",
+    "className": "VisionHandler",
+    "fileName": "/PRIArobotics_&_HedgehogServer/hedgehog_&_server_&_handlers_&_vision.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "try:\n    async with trio.open_nursery() as nursery:\n        grabber = vision.Grabber(vision.camera())\n        await nursery.start(grabber.run)\n        self._camera = Camera(grabber, nursery.cancel_scope, trio.Event())\n        task_status.started()\nfinally:\n    self._camera.closed.set()\n    self._connections.clear()\n    self._camera = None\n    self._img = None\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_input_nonlin_power_spectrum",
+    "className": null,
+    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_power.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cosmo = ccl.Cosmology(Omega_c=0.27, Omega_b=0.05, h=0.7, n_s=0.965, A_s=2e-09)\na_arr = np.linspace(0.1, 1.0, 50)\nk_arr = np.logspace(np.log10(0.0002), np.log10(1), 1000)\npk_arr = np.empty(shape=(len(a_arr), len(k_arr)))\nfor i, a in enumerate(a_arr):\n    pk_arr[i] = ccl.power.nonlin_matter_power(cosmo, k_arr, a)\nchi_from_ccl = ccl.background.comoving_radial_distance(cosmo, a_arr)\nhoh0_from_ccl = ccl.background.h_over_h0(cosmo, a_arr)\ngrowth_from_ccl = ccl.background.growth_factor(cosmo, a_arr)\nfgrowth_from_ccl = ccl.background.growth_rate(cosmo, a_arr)\ncosmo_input = ccl.Cosmology(Omega_c=0.27, Omega_b=0.05, h=0.7, n_s=0.965,\n    A_s=2e-09)\ncosmo_input._set_background_from_arrays(a_array=a_arr, chi_array=\n    chi_from_ccl, hoh0_array=hoh0_from_ccl)\ncosmo_input._set_growth_from_arrays(a_array=a_arr, growth_array=\n    growth_from_ccl, fgrowth_array=fgrowth_from_ccl)\ncosmo_input._set_nonlin_power_from_arrays(a_arr, k_arr, pk_arr)\npk_CCL_input = ccl.power.nonlin_matter_power(cosmo_input, k_arr, 0.5)\npk_CCL = ccl.power.nonlin_matter_power(cosmo, k_arr, 0.5)\nassert np.allclose(pk_CCL_input, pk_CCL, atol=0.0, rtol=1e-05)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_external_compatibility",
+    "className": "CompatibilityTest",
+    "fileName": "/BMeu_&_EasyJWT/tests_&_compatibility_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n            Test the compatibility of the current version of `EasyJWT` with externally created tokens.\n\n            Expected Result: The verification succeeds without errors. All data is restored.\n        \"\"\"\ntoken, _ = self.get_token_and_version_from_file('external.jwt')\nmessage = 'External Token'\nwith self.assertNotRaises(EasyJWTError, message):\n    token_object = ExternalCompatibilityToken.verify(token, KEY, ISSUER,\n        AUDIENCE)\nself.assertIsNotNone(token_object, message)\nself.verify_claim_set(token_object, message)\n"
+}

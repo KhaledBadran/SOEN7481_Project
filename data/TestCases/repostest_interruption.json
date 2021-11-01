@@ -1,0 +1,9 @@
+{
+    "functionName": "test_interruption",
+    "className": "TestAxClient",
+    "fileName": "/facebook_&_Ax/ax_&_service_&_tests_&_test_ax_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ax_client = AxClient()\nax_client.create_experiment(name='test', parameters=[{'name': 'x', 'type':\n    'range', 'bounds': [-5.0, 10.0]}, {'name': 'y', 'type': 'range',\n    'bounds': [0.0, 15.0]}], objective_name='branin', minimize=True)\nfor i in range(6):\n    parameterization, trial_index = ax_client.get_next_trial()\n    self.assertFalse(all(t.status.is_terminal for t in ax_client.experiment\n        .trials.values()))\n    x, y = parameterization.get('x'), parameterization.get('y')\n    ax_client.complete_trial(trial_index, raw_data=checked_cast(float,\n        branin(checked_cast(float, x), checked_cast(float, y))))\n    old_client = ax_client\n    serialized = ax_client.to_json_snapshot()\n    ax_client = AxClient.from_json_snapshot(serialized)\n    self.assertEqual(len(ax_client.experiment.trials.keys()), i + 1)\n    self.assertIsNot(ax_client, old_client)\n    self.assertTrue(all(t.status.is_terminal for t in ax_client.experiment.\n        trials.values()))\n"
+}

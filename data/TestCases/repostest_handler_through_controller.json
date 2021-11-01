@@ -1,0 +1,9 @@
+{
+    "functionName": "test_handler_through_controller",
+    "className": null,
+    "fileName": "/RobertoPrevato_&_BlackSheep/tests_&_test_controllers.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "app = FakeApplication()\napp.controllers_router = RoutesRegistry()\nget = app.controllers_router.get\nclass Home(Controller):\n\n    def greet(self):\n        return 'Hello World'\n\n    @get('/')\n    async def index(self, request: Request):\n        assert isinstance(self, Home)\n        return text(self.greet())\n\n    @get('/foo')\n    async def foo(self):\n        assert isinstance(self, Home)\n        return text('foo')\napp.setup_controllers()\nawait app(get_example_scope('GET', '/'), MockReceive(), MockSend())\nassert app.response.status == 200\nbody = await app.response.text()\nassert body == 'Hello World'\nawait app(get_example_scope('GET', '/foo'), MockReceive(), MockSend())\nassert app.response.status == 200\nbody = await app.response.text()\nassert body == 'foo'\npytest.mark.asyncio"
+}

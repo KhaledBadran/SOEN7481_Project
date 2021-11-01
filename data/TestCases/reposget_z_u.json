@@ -1,0 +1,9 @@
+{
+    "functionName": "get_z_u",
+    "className": "BCCToyModel",
+    "fileName": "/mesonepigreco_&_CellConstructor/scripts_&_cellconstructor_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Returns the effective charge given the u_disp.\n        \n        We remove the q square\n        \"\"\"\nprojector = np.ones(3 * self.N_atoms)\nprojector[3:] *= -1\nprojector /= np.sqrt(projector.dot(projector))\nv_disp = projector.dot(u_disp.ravel()) * CC.Units.A_TO_BOHR\npol = np.array([1, 1, 1])\nz_eff_all = np.outer(projector, pol) * 2 * v_disp * self.dz_dr\nz_eff_all = z_eff_all.reshape((self.N_atoms, 3, 3))\nz_eff = np.einsum('abc->acb', z_eff_all)\nreturn z_eff\n"
+}

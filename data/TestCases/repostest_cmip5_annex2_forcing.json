@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cmip5_annex2_forcing",
+    "className": null,
+    "fileName": "/OMS-NetZero_&_FAIR/tests_&_unit_&_unit_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test Annex II forcing class is doing what is expected\"\"\"\nf_ancil = cmip5_annex2_forcing.Forcing\nfilename = os.path.join(os.path.dirname(__file__),\n    '../../fair/ancil/cmip5_annex2_forcing.csv')\nf_file = np.loadtxt(filename, skiprows=1, delimiter=',')\nassert np.all(f_ancil.year == f_file[:, (0)])\nassert np.all(f_ancil.co2 == f_file[:, (1)])\nassert np.all(f_ancil.ghg_other == f_file[:, (2)])\nassert np.all(f_ancil.tropo3 == f_file[:, (3)])\nassert np.all(f_ancil.strato3 == f_file[:, (4)])\nassert np.all(f_ancil.aero == f_file[:, (5)])\nassert np.all(f_ancil.landuse == f_file[:, (6)])\nassert np.all(f_ancil.stwv == f_file[:, (7)])\nassert np.all(f_ancil.bcsnow == f_file[:, (8)])\nassert np.all(f_ancil.contrails == f_file[:, (9)])\nassert np.all(f_ancil.solar == f_file[:, (10)])\nassert np.all(f_ancil.volcanic == f_file[:, (11)])\nassert np.all(f_ancil.total == np.sum(f_file[:, 1:], axis=1))\n"
+}

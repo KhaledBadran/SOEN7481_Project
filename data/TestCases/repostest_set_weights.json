@@ -1,0 +1,9 @@
+{
+    "functionName": "test_set_weights",
+    "className": null,
+    "fileName": "/Silmathoron_&_NNGT/testing_&_test_weights.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "w = 10.0\ng = ng.erdos_renyi(nodes=100, density=0.1, weights=w)\nassert set(g.get_weights()) == {w}\nw2 = 5.0\ng.set_weights(w2)\nassert set(g.get_weights()) == {w2}\nelist = g.get_edges()[:10]\nw3 = 2.0\ng.set_weights(w3, elist=elist)\nassert set(g.get_weights()) == {w2, w3}\nassert set(g.get_weights(edges=elist)) == {w3}\npytest.mark.mpi_skip"
+}

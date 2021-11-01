@@ -1,0 +1,9 @@
+{
+    "functionName": "test_init_app",
+    "className": null,
+    "fileName": "/max-k_&_flask-multi-redis/test_&_integration_&_test_flask_multi_redis.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that a constructor without app instance will not initialize the\n    connection.\n\n    After FlaskMultiRedis.init_app(app) is called, the connection will be\n    initialized.\"\"\"\nredis = FlaskMultiRedis()\nassert redis._app is None\nassert len(redis._redis_nodes) == 0\nredis.init_app(app)\nassert redis._app is app\nassert len(redis._redis_nodes) == 1\nassert hasattr(redis._redis_client, 'connection_pool')\n"
+}

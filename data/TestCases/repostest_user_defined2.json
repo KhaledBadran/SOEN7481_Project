@@ -1,0 +1,9 @@
+{
+    "functionName": "test_user_defined2",
+    "className": "TestAttributes",
+    "fileName": "/Silmathoron_&_NNGT/testing_&_test_attributes.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        When generating graphs with weights, check that the expected properties\n        are indeed obtained.\n        \"\"\"\navg = 50\nstd = 6\ng = nngt.generation.gaussian_degree(avg, std, nodes=200)\nref_result = np.full(g.edge_nb(), 4.0)\ng.set_edge_attribute('ud2', val=4.0, value_type='double')\ncomputed_result = g.get_edge_attributes(name='ud2')\nself.assertTrue(np.allclose(ref_result, computed_result),\n    \"\"\"Error on graph {}: unequal 'ud2' attribute for tolerance {}.\n            \"\"\"\n    .format(g.name, self.tolerance))\n"
+}

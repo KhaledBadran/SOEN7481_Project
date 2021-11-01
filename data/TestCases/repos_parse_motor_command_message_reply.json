@@ -1,0 +1,9 @@
+{
+    "functionName": "_parse_motor_command_message_reply",
+    "className": null,
+    "fileName": "/PRIArobotics_&_HedgehogProtocol/hedgehog_&_protocol_&_messages_&_motor.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "port = msg.port\ndc = msg.dc if msg.HasField('dc') else None\nencoder = msg.encoder if msg.HasField('encoder') else None\nstepper = msg.stepper if msg.HasField('stepper') else None\nstate = msg.state\namount = msg.amount\nsubscription = msg.subscription if msg.HasField('subscription') else None\nif dc:\n    config = DcConfig()\nelif encoder:\n    config = EncoderConfig(msg.encoder.encoder_a_port, msg.encoder.\n        encoder_b_port)\nelif stepper:\n    config = StepperConfig()\nelse:\n    assert False\nif subscription is None:\n    return CommandReply(port, config, state, amount)\nelse:\n    return CommandUpdate(port, config, state, amount, subscription)\nReplyMsg.parser('motor_command_message')"
+}

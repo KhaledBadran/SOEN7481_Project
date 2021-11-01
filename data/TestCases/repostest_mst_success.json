@@ -1,0 +1,9 @@
+{
+    "functionName": "test_mst_success",
+    "className": "TestMstMagic",
+    "fileName": "/PmagPy_&_PmagPy/pmagpy_tests_&_test_imports3.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "options = {'input_dir_path': self.input_dir, 'infile': 'curie_example.dat'}\noptions['spec_name'] = 'abcde'\noptions['location'] = 'place'\nprogram_ran, outfile = convert.mst(**options)\nself.assertTrue(program_ran)\nself.assertEqual(os.path.realpath(outfile), os.path.join(WD,\n    'measurements.txt'))\nmeas_df = cb.MagicDataFrame(outfile)\nself.assertIn('sequence', meas_df.df.columns)\nself.assertEqual(meas_df.df.location.values[0], 'place')\ncon = cb.Contribution(WD)\nfor table in ['measurements', 'specimens', 'samples', 'sites', 'locations']:\n    self.assertIn(table, con.tables)\n"
+}

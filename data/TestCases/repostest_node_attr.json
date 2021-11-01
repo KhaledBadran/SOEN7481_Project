@@ -1,0 +1,9 @@
+{
+    "functionName": "test_node_attr",
+    "className": "TestAttributes",
+    "fileName": "/Silmathoron_&_NNGT/testing_&_test_attributes.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        When generating graphs with weights, check that the expected properties\n        are indeed obtained.\n        \"\"\"\ng = nngt.Graph(100)\nref_result = np.random.uniform(-1, 4, g.node_nb())\ng.set_node_attribute('nud', values=ref_result, value_type='double')\ncomputed_result = g.get_node_attributes(name='nud')\nself.assertTrue(np.allclose(ref_result, computed_result),\n    \"\"\"Error on graph {}: unequal 'nud' attribute for tolerance {}.\n            \"\"\"\n    .format(g.name, self.tolerance))\n"
+}

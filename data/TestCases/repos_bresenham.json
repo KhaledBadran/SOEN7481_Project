@@ -1,0 +1,9 @@
+{
+    "functionName": "_bresenham",
+    "className": "DelaunayGeometry",
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_materials_&_VoronoiFibers.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        A Bresenham line function to generate points to fill in for the fibers\n        \"\"\"\nline_points = []\nfor face in faces:\n    fx = face[:, (0)]\n    fy = face[:, (1)]\n    fz = face[:, (2)]\n    if np.std(fx) < np.std(fy) and np.std(fx) < np.std(fz):\n        f2d = np.vstack((fy, fz)).T\n    elif np.std(fy) < np.std(fx) and np.std(fy) < np.std(fz):\n        f2d = np.vstack((fx, fz)).T\n    else:\n        f2d = np.vstack((fx, fy)).T\n    hull = sptl.ConvexHull(f2d, qhull_options='QJ Pp')\n    face = np.around(face[hull.vertices].astype(float), 6)\n    for i in range(len(face)):\n        vec = face[i] - face[i - 1]\n        vec_length = np.linalg.norm(vec)\n        increments = np.int(np.ceil(vec_length / dx))\n        check_p_old = np.array([-1, -1, -1])\n        for x in np.linspace(0, 1, increments):\n            check_p_new = face[i - 1] + vec * x\n            if np.sum(check_p_new - check_p_old) != 0:\n                line_points.append(check_p_new)\n                check_p_old = check_p_new\nreturn np.asarray(line_points)\n"
+}

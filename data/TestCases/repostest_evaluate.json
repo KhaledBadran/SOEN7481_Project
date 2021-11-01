@@ -1,0 +1,9 @@
+{
+    "functionName": "test_evaluate",
+    "className": null,
+    "fileName": "/goodmami_&_penman/tests_&_test_constant.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "assert evaluate(None) is None\nassert evaluate('') is None\nassert evaluate('\"\"') == ''\nassert evaluate('a') == 'a'\nassert evaluate('\"a\"') == 'a'\nassert evaluate('\"1\"') == '1'\nassert evaluate('\"escapes \\\\\" and spaces\"') == 'escapes \" and spaces'\nassert evaluate('1') == 1\nassert evaluate('1.5') == 1.5\nassert evaluate('1e-3') == 0.001\nassert evaluate('.1') == '.1'\nassert evaluate('true') == 'true'\nassert evaluate('false') == 'false'\nassert evaluate('null') == 'null'\nassert evaluate('NaN') == 'NaN'\nassert evaluate('Infinity') == 'Infinity'\nassert evaluate('+Infinity') == '+Infinity'\nassert evaluate('-Infinity') == '-Infinity'\nwith pytest.raises(ConstantError):\n    evaluate('\"a')\nwith pytest.raises(ConstantError):\n    evaluate('a\"')\nwith pytest.raises(ConstantError):\n    evaluate('{\"a\":1}')\nwith pytest.raises(ConstantError):\n    evaluate('[1]')\n"
+}

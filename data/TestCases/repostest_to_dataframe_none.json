@@ -1,0 +1,9 @@
+{
+    "functionName": "test_to_dataframe_none",
+    "className": null,
+    "fileName": "/capitalone_&_Data-Load-and-Copy-using-Python/tests_&_test_database.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with mock.patch(dbapi.__name__ + '.connect') as mock_connect:\n    mock_connect.return_value.cursor.return_value.fetchmany.return_value = []\n    with Database(dbapi=dbapi, **credentials) as test:\n        test.execute(\"SELECT 'hello world' WHERE 1=0\")\n        assert test.to_dataframe(size=5) is None\n        mock_pandas.assert_not_called()\npytest.mark.parametrize('dbapi', DBAPIS)mock.patch('pandas.DataFrame')"
+}

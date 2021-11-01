@@ -1,0 +1,9 @@
+{
+    "functionName": "test_batch_load_vs_innate",
+    "className": null,
+    "fileName": "/gregmedlock_&_Medusa/medusa_&_test_&_test_load_from_file.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "test_ensemble = construct_mixed_ensemble_2()\ntest_batch_ensemble = construct_mixed_batch_ensemble()\ntextbook = create_test_model('textbook')\nassert len(test_ensemble.base_model.reactions) == len(textbook.reactions)\nassert len(test_ensemble.base_model.metabolites) == len(textbook.metabolites)\nassert len(test_batch_ensemble.base_model.reactions) == len(textbook.reactions)\nassert len(test_batch_ensemble.base_model.metabolites) == len(textbook.\n    metabolites)\nassert len(test_ensemble.features) == 11\nassert len(test_ensemble.members) == 4\nassert len(test_batch_ensemble.features) == 11\nassert len(test_batch_ensemble.members) == 4\nfor member in test_ensemble.members:\n    assert len(member.states) == 11\n    assert member.ensemble == test_ensemble\nfor member in test_batch_ensemble.members:\n    assert len(member.states) == 11\n    assert member.ensemble == test_batch_ensemble\nfor feature in test_ensemble.features:\n    assert feature.base_component in test_ensemble.base_model.reactions\n    assert feature.component_attribute in REACTION_ATTRIBUTES\n    assert len(set(feature.states.values())) > 1\nfor feature in test_batch_ensemble.features:\n    assert feature.base_component in test_batch_ensemble.base_model.reactions\n    assert feature.component_attribute in REACTION_ATTRIBUTES\n    assert len(set(feature.states.values())) > 1\n"
+}

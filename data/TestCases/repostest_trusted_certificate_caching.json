@@ -1,0 +1,9 @@
+{
+    "functionName": "test_trusted_certificate_caching",
+    "className": "TestValidator",
+    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_validator.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data = Data(Name('/Security/V2/ValidatorFixture/Sub1/Sub2/Data'))\nself._fixture._keyChain.sign(data, SigningInfo(self._fixture._subIdentity))\nself.validateExpectSuccess(data,\n    'Should get accepted, as signed by the policy-compliant certificate')\nself.assertEqual(1, len(self._fixture._face._sentInterests))\nself._fixture._face._sentInterests = []\nself._fixture._face._processInterest = None\nself.validateExpectSuccess(data,\n    'Should get accepted, based on the cached trusted certificate')\nself.assertEqual(0, len(self._fixture._face._sentInterests))\nself._fixture._face._sentInterests = []\nself._fixture._validator._setCacheNowOffsetMilliseconds(2 * 3600 * 1000.0)\nself.validateExpectFailure(data, 'Should try and fail to retrieve certificates'\n    )\nself.assertTrue(len(self._fixture._face._sentInterests) > 1)\nself._fixture._face._sentInterests = []\n"
+}

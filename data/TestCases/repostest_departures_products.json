@@ -1,0 +1,9 @@
+{
+    "functionName": "test_departures_products",
+    "className": null,
+    "fileName": "/cgtobi_&_PyRMVtransport/tests_&_test_rmvtransport.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test products filter.\"\"\"\nwith open('fixtures/result_products_filter.json') as f:\n    result_products_filter_json = json.load(f, object_hook=date_hook)\nasync with aresponses.ResponsesMockServer(loop=event_loop) as arsps:\n    arsps.add(URL, URL_PATH, 'get', xml_request)\n    async with aiohttp.ClientSession(loop=event_loop) as session:\n        rmv = RMVtransport(session)\n        station_id = '3006904'\n        products = ['S', 'RB']\n        data = await rmv.get_departures(station_id, products=products,\n            max_journeys=50)\n        assert data == result_products_filter_json\npytest.mark.asyncio"
+}

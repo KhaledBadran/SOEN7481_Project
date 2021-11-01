@@ -1,0 +1,9 @@
+{
+    "functionName": "test_errors_choice_param",
+    "className": "TestValidationMessages",
+    "fileName": "/hdoupe_&_ParamTools/paramtools_&_tests_&_test_parameters.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "params = TestParams()\nadjustment = {'str_choice_param': [{'value': 'not a valid choice'}]}\nwith pytest.raises(ValidationError) as excinfo:\n    params.adjust(adjustment)\nmsg = [\n    'str_choice_param \"not a valid choice\" must be in list of choices value0, value1.'\n    ]\nassert json.loads(excinfo.value.args[0])['errors']['str_choice_param'] == msg\nparams = TestParams()\nadjustment = {'str_choice_param': [{'value': 4}]}\nparams = TestParams()\nwith pytest.raises(ValidationError) as excinfo:\n    params.adjust(adjustment)\nmsg = ['Not a valid string.']\nassert json.loads(excinfo.value.args[0])['errors']['str_choice_param'] == msg\nparams = TestParams()\nparams.adjust(adjustment, raise_errors=False)\nmsg = ['Not a valid string.']\nassert params.errors['str_choice_param'] == msg\nparams = TestParams()\nwith pytest.raises(ValidationError) as excinfo:\n    params.adjust(adjustment)\nmsg = ['Not a valid string.']\nassert json.loads(excinfo.value.args[0])['errors']['str_choice_param'] == msg\nparams = TestParams()\nparams.adjust(adjustment, raise_errors=False)\nparams.errors['str_choice_param'] == ['Not a valid string.']\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sphere",
+    "className": null,
+    "fileName": "/pmneila_&_PyMCubes/test_mcubes.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "x, y, z = np.mgrid[:100, :100, :100]\nu = (x - 50) ** 2 + (y - 50) ** 2 + (z - 50) ** 2 - 25 ** 2\ndef func(x, y, z):\n    return (x - 50) ** 2 + (y - 50) ** 2 + (z - 50) ** 2 - 25 ** 2\nvertices1, triangles1 = mcubes.marching_cubes(u, 0.0)\nvertices2, triangles2 = mcubes.marching_cubes_func((0, 0, 0), (99, 99, 99),\n    100, 100, 100, func, 0.0)\nassert_allclose(vertices1, vertices2)\nassert_array_equal(triangles1, triangles2)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_hdu",
+    "className": null,
+    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_specobj.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sobj = specobj.SpecObj('MultiSlit', 1, SLITID=0)\nsobj['BOX_WAVE'] = np.arange(100).astype(float)\nsobj['BOX_COUNTS'] = np.ones_like(sobj.BOX_WAVE)\nsobj['TRACE_SPAT'] = np.arange(100) * 2.0\nhdul = sobj.to_hdu()\nassert len(hdul) == 1\nassert isinstance(hdul[0], fits.hdu.table.BinTableHDU)\nassert len(hdul[0].data) == 100\nassert 'TRACE_SPAT' in hdul[0].data.dtype.names\nassert 'SLITID' in hdul[0].header.keys()\n"
+}

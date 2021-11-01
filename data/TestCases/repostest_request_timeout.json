@@ -1,0 +1,9 @@
+{
+    "functionName": "test_request_timeout",
+    "className": null,
+    "fileName": "/RobertoPrevato_&_BlackSheep/tests_&_client_&_test_timeouts.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "fake_pools = FakePools([])\nfake_pools.pool.connection.sleep_for = 5\nasync with ClientSession(base_url=b'http://localhost:8080', pools=\n    fake_pools, request_timeout=0.002) as client:\n    with pytest.raises(RequestTimeout):\n        await client.get(b'/')\npytest.mark.asyncio"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_max_ndn_packet_size",
+    "className": "TestFaceInterestMethods",
+    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_face_methods.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "targetSize = Face.getMaxNdnPacketSize() + 1\ninterest = Interest()\ninterest.getName().append(bytearray(targetSize))\ninitialSize = interest.wireEncode().size()\ninterest.setName(Name().append(bytearray(targetSize - (initialSize -\n    targetSize))))\ninterestSize = interest.wireEncode().size()\nself.assertEqual(targetSize, interestSize,\n    'Wrong interest size for MaxNdnPacketSize')\nwith self.assertRaises(RuntimeError):\n    self.face.expressInterest(interest, Mock(), Mock())\n"
+}

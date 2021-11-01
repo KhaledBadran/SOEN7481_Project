@@ -1,0 +1,9 @@
+{
+    "functionName": "test_append_parameters_digest",
+    "className": "TestInterestMethods",
+    "fileName": "/named-data_&_PyNDN2/tests_&_unit_tests_&_test_interest_methods.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "name = Name('/local/ndn/prefix')\ninterest = Interest(name)\nself.assertTrue(not interest.hasApplicationParameters())\ninterest.appendParametersDigestToName()\nself.assertEqual('/local/ndn/prefix', interest.getName().toUri())\napplicationParameters = Blob(bytearray([35, 1, 192]))\ninterest.setApplicationParameters(applicationParameters)\nself.assertTrue(interest.hasApplicationParameters())\ninterest.appendParametersDigestToName()\nself.assertEqual(name.size() + 1, interest.getName().size())\nself.assertTrue(interest.getName().getPrefix(-1).equals(name))\nSHA256_LENGTH = 32\nself.assertEqual(SHA256_LENGTH, interest.getName().get(-1).getValue().size())\nself.assertEqual(interest.getName().toUri(), '/local/ndn/prefix/' +\n    'params-sha256=a16cc669b4c9ef6801e1569488513f9523ffb28a39e53aa6e11add8d00a413fc'\n    )\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_add_new_vol_to_storage_group_name_async",
+    "className": "PyU4VProvisioningTest",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_provisioning.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test add_new_vol_to_storage_group vol name, async.\"\"\"\nnum_of_volumes = 1\nvolume_size = 10\nvolume_capacity_type = 'GB'\nvolume_name = 'my-vol'\nadd_vol_info = {'emulation': 'FBA', 'create_new_volumes': False,\n    'volumeAttributes': [{'num_of_vols': num_of_volumes, 'volume_size':\n    volume_size, 'capacityUnit': volume_capacity_type, 'volumeIdentifier':\n    {'identifier_name': volume_name, 'volumeIdentifierChoice':\n    'identifier_name'}}]}\npayload = {'editStorageGroupActionParam': {'expandStorageGroupParam': {\n    'addVolumeParam': add_vol_info}}, 'executionOption': 'ASYNCHRONOUS'}\nwith mock.patch.object(self.provisioning, 'modify_storage_group') as mock_mod:\n    self.provisioning.add_new_vol_to_storagegroup(self.data.\n        storagegroup_name, num_of_volumes, volume_size,\n        volume_capacity_type, True, volume_name)\n    mock_mod.assert_called_once_with(self.data.storagegroup_name, payload)\n"
+}

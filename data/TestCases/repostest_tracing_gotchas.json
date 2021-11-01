@@ -1,0 +1,9 @@
+{
+    "functionName": "test_tracing_gotchas",
+    "className": null,
+    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_tracing_gotchas.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Summary of the gotchas tested:\n\n    If 'call' is used, a None return value is used for the tracing. Afterwards the return may or may\n    not be ignored depending on the Python version.\n\n    Also, on Python 2.6, the trace function may not be set to None as it'll give an error\n    afterwards (it needs to be set to an empty tracing function).\n\n    All of the versions seem to work when the return value is a new callable though.\n\n    Note: according to: https://docs.python.org/3/library/sys.html#sys.settrace the behavior\n    does not follow the spec (but we have to work with it nonetheless).\n\n    Note: Jython seems to do what's written in the docs.\n    \"\"\"\ndef method():\n    _a = 1\n    _b = 1\n    _c = 1\n    _d = 1\nfor tracer, line_events in ((Tracer(), 1 if IS_JYTHON else 4), (\n    TracerSettingNone(), 1), (TracerChangeToOtherTracing(), 1), (\n    TracerDisableOnCall(), 0)):\n    curr_trace_func = sys.gettrace()\n    try:\n        sys.settrace(tracer.trace_func)\n        method()\n        if tracer.call_calls != 1:\n            pytest.fail('Expected a single call event. Found: %s' % tracer.\n                call_calls)\n        if tracer.line_calls != line_events:\n            pytest.fail('Expected %s line events. Found: %s. Tracer: %s' %\n                (line_events, tracer.line_calls, tracer))\n    finally:\n        sys.settrace(curr_trace_func)\n"
+}

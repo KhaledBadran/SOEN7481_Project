@@ -1,0 +1,9 @@
+{
+    "functionName": "test_receive_bytes",
+    "className": "TestKmipSession",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_session.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the session can receive a message.\n        \"\"\"\ncontent = b'\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00'\nkmip_session = session.KmipSession(None, None, None, 'name')\nkmip_session._connection = mock.MagicMock()\nkmip_session._connection.recv = mock.MagicMock(side_effect=[content, content])\nobserved = kmip_session._receive_bytes(16)\nkmip_session._connection.recv.assert_any_call(16)\nkmip_session._connection.recv.assert_called_with(8)\nself.assertEqual(content + content, observed)\nkmip_session._connection.recv = mock.MagicMock(side_effect=[''])\nargs = 8,\nself.assertRaises(exceptions.ConnectionClosed, kmip_session._receive_bytes,\n    *args)\n"
+}

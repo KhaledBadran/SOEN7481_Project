@@ -1,0 +1,9 @@
+{
+    "functionName": "test_display_callbacks",
+    "className": null,
+    "fileName": "/SimLeek_&_CV_PubSubs/tests_&_window_&_test_subscriber_windows.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sub_win.SubscriberWindows.FRAME_DICT = {}\nwith mock.patch('displayarray.window.subscriber_windows.FrameUpdater'\n    ) as fup, mock.patch(\n    'displayarray.window.subscriber_windows.SubscriberWindows') as sws:\n    cb = mock.MagicMock()\n    sub_win.display(0, 1, callbacks=cb)\n    fup.assert_has_calls([mock.call(0, callbacks=[cb], force_backend='',\n        fps_limit=float('inf'), request_size=(-1, -1)), mock.call(1,\n        callbacks=[cb], force_backend='', fps_limit=float('inf'),\n        request_size=(-1, -1))])\n    fup.reset_mock()\n    cb2 = mock.MagicMock()\n    sub_win.display(0, 1, callbacks=[cb, cb2], fps_limit=60)\n    fup.assert_has_calls([mock.call(0, callbacks=[cb, cb2], force_backend=\n        '', fps_limit=60, request_size=(-1, -1)), mock.call(1, callbacks=[\n        cb, cb2], force_backend='', fps_limit=60, request_size=(-1, -1))])\n"
+}

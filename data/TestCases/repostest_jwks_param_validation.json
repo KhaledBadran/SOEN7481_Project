@@ -1,0 +1,9 @@
+{
+    "functionName": "test_jwks_param_validation",
+    "className": "TestJwtToken",
+    "fileName": "/mozilla_&_PyFxA/fxa_&_tests_&_test_oauth.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "client = Client(server_url=self.server_url, jwks=[])\nself.assertEqual(client.jwks, [])\njwks_file = os.path.join(os.path.dirname(__file__), 'jwks.json')\njwks = json.loads(open(jwks_file).read())['keys']\nclient = Client(server_url=self.server_url, jwks=jwks)\nself.assertEqual(client.jwks, jwks)\njwks.append(\"this is not the JWK you're looking for\")\nwith self.assertRaises(AttributeError):\n    Client(server_url=self.server_url, jwks=jwks)\njwks.pop()\njwks[0]['kty'] = 'InvalidKty'\nwith self.assertRaises(jwt.exceptions.InvalidKeyError):\n    Client(server_url=self.server_url, jwks=jwks)\n"
+}

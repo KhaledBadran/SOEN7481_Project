@@ -1,0 +1,9 @@
+{
+    "functionName": "test_rate_Nt_by_2_conductance",
+    "className": "GenericTransportTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_GenericTransportTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "net = op.network.Cubic(shape=[1, 6, 1])\ngeom = op.geometry.StickAndBall(network=net)\nair = op.phases.Air(network=net)\nwater = op.phases.Water(network=net)\nm = op.phases.MultiPhase(phases=[air, water], project=net.project)\nm.set_occupancy(phase=air, pores=[0, 1, 2])\nm.set_occupancy(phase=water, pores=[3, 4, 5])\nconst = op.models.misc.constant\nK_water_air = 0.5\nm.set_binary_partition_coef(propname='throat.partition_coef', phases=[water,\n    air], model=const, value=K_water_air)\nm._set_automatic_throat_occupancy()\n_ = op.physics.Standard(network=net, phase=m, geometry=geom)\nalg = op.algorithms.GenericTransport(network=net, phase=m)\nalg.settings['conductance'] = 'throat.diffusive_conductance'\nalg.settings['quantity'] = 'pore.mole_fraction'\nalg.set_rate_BC(pores=0, values=1.235)\nalg.set_value_BC(pores=5, values=0.0)\nalg.run()\nrate = alg.rate(pores=5)[0]\nassert np.isclose(rate, -1.235)\nrate = alg.rate(throats=2)[0]\nassert np.isclose(rate, 1.235)\nrate_air_side = alg.rate(pores=2)[0]\nrate_water_side = alg.rate(pores=3)[0]\nassert np.isclose(rate_air_side, 0.0)\nassert np.isclose(rate_water_side, 0.0)\nassert np.isclose(alg.rate(pores=net.Ps), 0.0)\n"
+}

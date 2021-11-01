@@ -1,0 +1,9 @@
+{
+    "functionName": "test_register_handler",
+    "className": null,
+    "fileName": "/PlaidWeb_&_Authl/tests_&_test_main.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Test that both registration paths result in the same, correct result \"\"\"\nhandler = TestHandler()\ninstance_1 = Authl([handler])\nassert list(instance_1.handlers) == [handler]\ninstance_2 = Authl()\ninstance_2.add_handler(handler)\nassert list(instance_1.handlers) == list(instance_2.handlers)\nwith pytest.raises(ValueError):\n    instance_2.add_handler(handler)\n"
+}

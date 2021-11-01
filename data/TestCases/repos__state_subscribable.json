@@ -1,0 +1,9 @@
+{
+    "functionName": "__state_subscribable",
+    "className": "_MotorHandler",
+    "fileName": "/PRIArobotics_&_HedgehogServer/hedgehog_&_server_&_handlers_&_hardware.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "outer_self = self\nclass Subs(subscription.PolledSubscribable[Tuple[int, int], motor.StateUpdate]\n    ):\n\n    async def poll(self):\n        return await outer_self.state\n\n    def compose_update(self, server, ident, subscription, state):\n        velocity, position = state\n        return motor.StateUpdate(outer_self.port, velocity, position,\n            subscription)\nreturn Subs()\n"
+}

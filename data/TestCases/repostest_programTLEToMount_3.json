@@ -1,0 +1,9 @@
+{
+    "functionName": "test_programTLEToMount_3",
+    "className": null,
+    "fileName": "/mworion_&_MountWizzard4/mw4_&_test_&_unit_tests_&_gui_&_mainWmixin_&_test_tabSatellite.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tle = ['TIANGONG 1',\n    '1 37820U 11053A   14314.79851609  .00064249  00000-0  44961-3 0  5637',\n    '2 37820  42.7687 147.7173 0010686 283.6368 148.1694 15.73279710179072']\napp.satellite = EarthSatellite(tle[1], tle[2], name=tle[0])\ntle = ['TIANGONG 1',\n    '1 37820U 11053A   14314.79851609  .00064249  00000-0  44961-3 0  5637',\n    '2 37820  42.7687 147.7173 0010686 283.6368 148.1694 15.73279710179072']\napp.satellitesRawTLE = {tle[0].strip('\\n'): {'line0': tle[0].strip('\\n'),\n    'line1': tle[1].strip('\\n'), 'line2': tle[2].strip('\\n')}}\napp.app.mount.mountUp = True\napp.app.mount.satellite.tleParams.name = 'TIANGONG 2'\nwith mock.patch.object(app.app.mount.satellite, 'setTLE', return_value=False):\n    suc = app.programTLEDataToMount()\n    assert not suc\n"
+}

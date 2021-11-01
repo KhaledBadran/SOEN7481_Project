@@ -1,0 +1,9 @@
+{
+    "functionName": "_create_files_with_ref_calib",
+    "className": null,
+    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_core_&_tests_&_test_quant_analysis.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Create reference calibration files based on the reference standards read from\n    user-defined configuration file at standard location ``<wd>/.pyxrf/quantiative_standards.yaml``.\n    The files are created in the working directory <wd>. The list of file paths is returned\n    by the function.\n\n    Parameter ``img_list`` is the list of XRF map dictionaries. The number of elements in the list\n    must match the number of reference standards. Incident energy is used to determine active\n    emission lines, so it has to be set properly.\n    \"\"\"\npqe = ParamQuantEstimation(home_dir=wd)\npqe.load_standards()\npqe.standards_built_in = None\nfile_paths = []\nfor n, st in enumerate(pqe.standards_custom):\n    pqe.set_selected_standard(st)\n    pqe.gen_fluorescence_data_dict(incident_energy=incident_energy)\n    pqe.fill_fluorescence_data_dict(xrf_map_dict=img_list[n], scaler_name=\n        'sclr')\n    pqe.set_detector_channel_in_data_dict(detector_channel='sum')\n    pqe.set_distance_to_sample_in_data_dict(distance_to_sample=2.0)\n    pqe.set_optional_parameters(scan_id=f'12345{n}', scan_uid=\n        'some-uid-string-{n}')\n    fln = pqe.get_suggested_json_fln()\n    f_path = os.path.join(wd, fln)\n    pqe.save_fluorescence_data_dict(file_path=f_path)\n    file_paths.append(f_path)\nreturn file_paths\n"
+}

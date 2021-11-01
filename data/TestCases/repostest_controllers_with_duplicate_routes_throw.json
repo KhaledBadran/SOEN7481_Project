@@ -1,0 +1,9 @@
+{
+    "functionName": "test_controllers_with_duplicate_routes_throw",
+    "className": null,
+    "fileName": "/RobertoPrevato_&_BlackSheep/tests_&_test_controllers.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "app = FakeApplication()\napp.controllers_router = RoutesRegistry()\nget = app.controllers_router.get\nclass A(Controller):\n\n    @get(first_pattern)\n    async def index(self, request: Request):\n        ...\nclass B(Controller):\n\n    @get(second_pattern)\n    async def index(self, request: Request):\n        ...\nwith pytest.raises(RouteDuplicate) as context:\n    app.use_controllers()\nerror = context.value\nassert 'Cannot register route pattern `' + ensure_str(first_pattern\n    ) + '` for `GET` more than once.' in str(error)\nassert 'This pattern is already registered for handler test_controllers_with_duplicate_routes_throw.<locals>.A.index.' in str(\n    error)\npytest.mark.asynciopytest.mark.parametrize('first_pattern,second_pattern', [('/', '/'), (b'/',\n    b'/'), (b'/', '/'), ('/', b'/'), ('/home', '/home/'), (b'/home',\n    b'/home/'), ('/home', '/home//'), (b'/home', b'/home//'), (\n    '/hello/world', '/hello/world/'), (b'/hello/world', b'/hello/world//'),\n    ('/a/b', '/a/b')])"
+}

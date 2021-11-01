@@ -1,0 +1,9 @@
+{
+    "functionName": "test_corrupt",
+    "className": null,
+    "fileName": "/Microsoft_&_LMChallenge/lmchallenge_&_core_&_tests_&_test_errors.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "config = errors.DEFAULT_CONFIG\np_anykey = config['p_anykey']\nrand = MagicMock()\nrand.random = MagicMock(side_effect=[1, p_anykey - 0.001, p_anykey + 0.001,\n    0, 0])\nrand.choice = MagicMock(side_effect=['q', '_', 'Z'])\nassert errors.corrupt(config, 'hello', rand) == 'hql_Z'\nassert errors.score(config, 'hql_Z', 'hello') == 3 * math.log(p_anykey\n    ) + 2 * math.log(1 - p_anykey)\n"
+}

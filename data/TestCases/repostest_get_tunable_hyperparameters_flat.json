@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_tunable_hyperparameters_flat",
+    "className": "TestMLPipline",
+    "fileName": "/HDI-Project_&_MLBlocks/tests_&_test_mlpipeline.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "mlpipeline = MLPipeline(['a_primitive'])\nmlpipeline._tunable_hyperparameters = {'block_1': {'hp_1': {'type': 'int',\n    'range': [1, 10]}}, 'block_2': {'hp_1': {'type': 'str', 'default': 'a',\n    'values': ['a', 'b', 'c']}, 'hp_2': {'type': 'bool', 'default': True}}}\nreturned = mlpipeline.get_tunable_hyperparameters(flat=True)\nexpected = {('block_1', 'hp_1'): {'type': 'int', 'range': [1, 10]}, (\n    'block_2', 'hp_1'): {'type': 'str', 'default': 'a', 'values': ['a', 'b',\n    'c']}, ('block_2', 'hp_2'): {'type': 'bool', 'default': True}}\nassert returned == expected\npatch('mlblocks.mlpipeline.MLBlock', new=get_mlblock_mock)"
+}

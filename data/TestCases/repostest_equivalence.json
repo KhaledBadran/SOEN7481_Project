@@ -1,0 +1,9 @@
+{
+    "functionName": "test_equivalence",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_integration_&_test_method_equivalence.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    With a Gaussian likelihood, and inducing points (where appropriate)\n    positioned at the data, many of the gpflow methods are equivalent (perhaps\n    subject to some optimization).\n    \"\"\"\ngpr_model = _create_full_gp_model()\ngpr_likelihood = gpr_model.log_marginal_likelihood()\napproximate_likelihood = maximum_log_likelihood_objective(approximate_model,\n    Datum.data)\nassert_allclose(approximate_likelihood, gpr_likelihood, rtol=1e-06)\ngpr_kernel_ls = gpr_model.kernel.lengthscales.read_value()\ngpr_kernel_var = gpr_model.kernel.variance.read_value()\napproximate_kernel_ls = approximate_model.kernel.lengthscales.read_value()\napproximate_kernel_var = approximate_model.kernel.variance.read_value()\nassert_allclose(gpr_kernel_ls, approximate_kernel_ls, 0.0001)\nassert_allclose(gpr_kernel_var, approximate_kernel_var, 0.001)\ngpr_mu, gpr_var = gpr_model.predict_y(Datum.Xtest)\napproximate_mu, approximate_var = approximate_model.predict_y(Datum.Xtest)\nassert_allclose(gpr_mu, approximate_mu, 0.001)\nassert_allclose(gpr_var, approximate_var, 0.0001)\npytest.mark.parametrize('approximate_model', _create_approximate_models())"
+}

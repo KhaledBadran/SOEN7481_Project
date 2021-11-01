@@ -1,0 +1,9 @@
+{
+    "functionName": "test_particleanalysis",
+    "className": null,
+    "fileName": "/ePSIC-DLS_&_ParticleSpy/ParticleSpy_&_tests_&_test_particle_analysis.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "image = gen_test.generate_test_image(hspy=True)\nmask = gen_test.generate_test_image(hspy=False)\neds = gen_test.generate_test_eds()\nsi = gen_test.generate_test_si()\neels = gen_test.generate_test_si('EELS')\nac = [image, eds, si, eels]\nparams = PAnalysis.parameters()\nparams.generate(store_im=True)\nparams.generate_eds(eds_method='CL', elements=['Au', 'Pd'], factors=[1.0, \n    1.0], store_maps=True)\np_list = PAnalysis.ParticleAnalysis(ac, params, mask=mask)\np = p_list.list[0]\nnptest.assert_almost_equal(p.properties['area']['value'], 20069.0)\nassert p.properties['area']['units'] == 'nm^2'\nnptest.assert_almost_equal(p.properties['circularity']['value'], \n    0.9095832157785668)\nnptest.assert_allclose(p.mask, mask)\nnptest.assert_allclose(p.image.data, image.data[16:184, 16:184])\nau_map = eds.get_lines_intensity()[0]\nnptest.assert_allclose(p.maps['Au'].data, au_map.data[16:184, 16:184])\neds_particle = eds.transpose() * mask\neds_particle = eds_particle.transpose()\neds_particle_spectrum = eds_particle.sum()\nnptest.assert_allclose(p.spectrum['EDS_TEM'].data, eds_particle_spectrum.data)\nnptest.assert_allclose(p.composition['Au'], 46.94530019)\nnptest.assert_allclose(p.properties['x']['value'], 100.0)\nnptest.assert_allclose(p.properties['y']['value'], 100.0)\n"
+}

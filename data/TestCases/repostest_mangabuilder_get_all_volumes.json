@@ -1,0 +1,9 @@
+{
+    "functionName": "test_mangabuilder_get_all_volumes",
+    "className": null,
+    "fileName": "/superDross_&_MangaReaderScraper/tests_&_test_manga.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "parser = MockedSiteParser()\nbuilder = MangaBuilder(parser)\nmanga = builder.get_manga_volumes(vol_nums=inval)\nv1 = Volume(number=1, file_path='/tmp/dragon-ball/dragon-ball_volume_1.pdf',\n    upload_path=Path('/dragon-ball/dragon-ball_volume_1.pdf'))\nv2 = Volume(number=2, file_path='/tmp/dragon-ball/dragon-ball_volume_2.pdf',\n    upload_path=Path('/dragon-ball/dragon-ball_volume_2.pdf'))\nv3 = Volume(number=3, file_path='/tmp/dragon-ball/dragon-ball_volume_3.pdf',\n    upload_path=Path('/dragon-ball/dragon-ball_volume_3.pdf'))\nimg1 = open('tests/test_files/jpgs/test-manga_1_1.jpg', 'rb')\nimg2 = open('tests/test_files/jpgs/test-manga_1_2.jpg', 'rb')\npages = [(1, img1.read()), (2, img2.read())]\nv1.pages = pages\nv2.pages = pages\nv3.pages = pages\nassert manga.volume[2].upload_path == v2.upload_path\nassert manga.volume[1].page[1] == v1.page[1]\nassert manga.volume[3].page[2] == v1.page[2]\nassert manga.volumes == [v1, v2, v3]\npytest.mark.parametrize('inval', [[1, 2, 3], None])"
+}

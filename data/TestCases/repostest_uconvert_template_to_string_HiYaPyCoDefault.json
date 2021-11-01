@@ -1,0 +1,9 @@
+{
+    "functionName": "test_uconvert_template_to_string_HiYaPyCoDefault",
+    "className": null,
+    "fileName": "/alex-ber_&_AlexBerUtils/tests_&_utils_&_ymlparsers_extra_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "logger.info(f'{request._pyfuncitem.name}{ymlparsersExtraFixture}')\nymlparsers.initConfig()\nmock_lock = create_mock_lock(mocker)\ninit_jinja2ctx = HiYaPyCo.jinja2ctx\nmocker.patch.object(HiYaPyCo, 'jinja2Lock', new=mock_lock, spec_set=True)\njinja2ctx_mock = mocker.patch.object(HiYaPyCo, 'jinja2ctx', spec_set=True)\nmock_variable_start_string = mocker.PropertyMock(return_value=\n    init_jinja2ctx.variable_start_string)\ntype(jinja2ctx_mock).variable_start_string = mock_variable_start_string\nmock_variable_end_string = mocker.PropertyMock(return_value=init_jinja2ctx.\n    variable_end_string)\ntype(jinja2ctx_mock).variable_end_string = mock_variable_end_string\nexp_value = '{name}'\ntemplate = '{{name}}'\nvalue = _convert_template_to_string_format(template)\npytest.assume(exp_value == value)\npytest.assume(mock_lock.acquire.call_count > 0)\npytest.assume(mock_lock.release.call_count == mock_lock.acquire.call_count)\npytest.assume(mock_variable_start_string.call_count > 0)\npytest.assume(mock_variable_end_string.call_count > 0)\npytest.mark.parametrize('ymlparsersExtraFixture', [(True, False)], indirect\n    =True)pytest.mark.yml"
+}

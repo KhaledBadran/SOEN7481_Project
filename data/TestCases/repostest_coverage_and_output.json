@@ -1,0 +1,9 @@
+{
+    "functionName": "test_coverage_and_output",
+    "className": "TestsORFDetection",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_sORF_detection.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "out_t = StringIO()\nout_g = StringIO()\nsd.get_coverage = self.mock.mock_get_coverage\nsd.replicate_comparison = self.mock.mock_replicate_comparison\nsorfs = [{'strain': 'aaa', 'strand': '+', 'start': 10, 'end': 15, 'starts':\n    [str(10)], 'ends': [str(15)], 'seq': 'ATGTA', 'type': '3utr', 'print': \n    False, 'rbs': [1], 'start_TSS': '1', 'with_TSS': ['TSS:3_+'], 'srna': [\n    'sRNA:2-5_+'], 'candidate': ['2-6_TSS:3_RBS:1']}]\nseq = {'aaa': 'TAGGAGGCCGCTATGCCATTA'}\nwigs = {'forward': 'wigs_f', 'reverse': 'wigs_r'}\nargs = self.mock_args.mock()\nargs.print_all = True\nargs.min_rbs = 0\nargs.max_rbs = 20\nargs.min_len = 0\nargs.max_len = 300\nargs.table_best = True\nargs.background = 10\nsd.coverage_and_output(sorfs, 'median', wigs, out_g, out_t, 'best', seq,\n    'cover', args, 'texs', 'final')\nsd.get_coverage = copy.deepcopy(get_coverage)\nself.assertEqual(out_g.getvalue(),\n    \"\"\"##gff-version 3\naaa\tANNOgesic\tsORF\t10\t15\t.\t+\t.\tID=aaa_sorf0;Name=sORF_00000;start_TSS=1;with_TSS=TSS:3_+;sORF_type=3utr;sRNA=NA;rbs=RBS_1;frame_shift=1\n\"\"\"\n    )\nself.assertEqual(out_t.getvalue().split('\\n')[1],\n    \"aaa\\tsORF_00000\\t10\\t15\\t+\\t3'UTR_derived\\tTSS:3_+\\tRBS_1\\t10\\t15\\tNA\\t1\\tFragmented\\t20\\t\\tGCTATG\\t10-15_TSS:3_+_RBS:1\"\n    )\n"
+}

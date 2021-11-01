@@ -1,0 +1,9 @@
+{
+    "functionName": "test_send_request_payload_mismatch_response_operation",
+    "className": "TestKMIPClient",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_test_kmip_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that an InvalidMessage error is raised when the wrong operation\n        is returned from the server.\n        \"\"\"\nresponse_payload = payloads.DeleteAttributeResponsePayload(unique_identifier\n    ='1', attribute=None)\nbatch_item = ResponseBatchItem(operation=Operation(OperationEnum.CREATE),\n    result_status=ResultStatus(ResultStatusEnum.SUCCESS), response_payload=\n    response_payload)\nbuild_mock.return_value = None\nsend_mock.return_value = ResponseMessage(batch_items=[batch_item])\nargs = OperationEnum.DELETE_ATTRIBUTE, payloads.DeleteAttributeRequestPayload(\n    unique_identifier='1', attribute_name='Object Group', attribute_index=2)\nself.assertRaisesRegex(exceptions.InvalidMessage,\n    'The response message does not match the request operation.', self.\n    client.send_request_payload, *args)\nmock.patch('kmip.services.kmip_client.KMIPProxy._build_request_message')mock.patch('kmip.services.kmip_client.KMIPProxy._send_and_receive_message')"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_proper_experiment_types",
+    "className": "TestGetExperiment",
+    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_converters.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Ensure proper validation of accepted experiment types.\n        \"\"\"\nroot = etree.Element('experiment')\nexp = etree.SubElement(root, 'experimentType')\nexp.text = 'Ignition delay measurement'\napp = etree.SubElement(root, 'apparatus')\nkind = etree.SubElement(app, 'kind')\nkind.text = apparatus\nref = get_experiment_kind(root)\nassert ref['experiment-type'] == 'ignition delay'\nassert ref['apparatus']['kind'] == apparatus\npytest.mark.parametrize('apparatus', ['shock tube',\n    'rapid compression machine'])"
+}

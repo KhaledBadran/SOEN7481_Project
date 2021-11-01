@@ -1,0 +1,9 @@
+{
+    "functionName": "test_processing",
+    "className": "BroHTTPTestCase",
+    "fileName": "/IntegralDefense_&_ACE/lib_&_saq_&_collectors_&_test_http.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.process_pcap(os.path.join(saq.SAQ_HOME, 'test_data', 'pcaps',\n    'http_download_pdf.pcap'))\ncollector = BroHTTPStreamCollector()\ncollector.load_groups()\ncollector.start()\nwait_for_log_count('found http stream', 1, 5)\nwait_for_log_count('copied file from', 4, 5)\nwait_for_log_count('scheduled BRO HTTP Scanner Detection -', 1, 5)\ncollector.stop()\ncollector.wait()\n"
+}

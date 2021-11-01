@@ -1,0 +1,9 @@
+{
+    "functionName": "test_task_join",
+    "className": null,
+    "fileName": "/ZELLMECHANIK-DRESDEN_&_DCKit/tests_&_test_gui_basic.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "path = retrieve_data('rtdc_data_hdf5_rtfdc.zip')\npath_out = path.with_name('out.rtdc')\nmonkeypatch.setattr(QDialog, 'exec_', lambda *args: QMessageBox.Ok)\nmonkeypatch.setattr(QMessageBox, 'exec_', lambda *args: QMessageBox.Ok)\nmonkeypatch.setattr(QFileDialog, 'getSaveFileName', lambda *args: (str(\n    path_out), None))\nmw = DCKit(check_update=False)\nqtbot.addWidget(mw)\nmw.append_paths([path, path])\nmw.on_task_join()\nwith dclab.new_dataset(path_out) as ds, dclab.new_dataset(path) as ds0:\n    assert len(ds) == 2 * len(ds0)\ncleanup()\n"
+}

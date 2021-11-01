@@ -1,0 +1,9 @@
+{
+    "functionName": "test_specified_rng",
+    "className": null,
+    "fileName": "/oujago_&_NumpyDL/tests_&_test_initialization.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from npdl.utils.random import get_rng\nfrom npdl.utils.random import set_rng\nfrom npdl.initializations import Normal\nfrom npdl.initializations import Uniform\nfrom npdl.initializations import GlorotNormal\nfrom npdl.initializations import GlorotUniform\nfrom numpy.random import RandomState\nfrom numpy import allclose\nshape = 10, 20\nseed = 12345\nrng = get_rng()\nfor test_cls in [Normal, Uniform, GlorotNormal, GlorotUniform]:\n    set_rng(RandomState(seed))\n    sample1 = test_cls().call(shape)\n    set_rng(RandomState(seed))\n    sample2 = test_cls().call(shape)\n    set_rng(rng)\n    assert allclose(sample1, sample2\n        ), 'random initialization was inconsistent for {}'.format(test_cls.\n        __name__)\n"
+}

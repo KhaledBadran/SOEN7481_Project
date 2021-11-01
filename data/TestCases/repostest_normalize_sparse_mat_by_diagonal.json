@@ -1,0 +1,9 @@
+{
+    "functionName": "test_normalize_sparse_mat_by_diagonal",
+    "className": "TestNormalize_sparse_mat_by_diagonal",
+    "fileName": "/KnowEnG_&_KnowEnG_Pipelines_Library/test_&_unit_&_test_normalize_sparse_mat_by_diagonal.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" assert that a test matrix will be \"normalized\" s.t. the sum of the rows\n            or columns will nearly equal one\n        \"\"\"\nA = np.random.rand(500, 500)\nB = kn.normalize_sparse_mat_by_diagonal(spar.csr_matrix(A))\nB = B.todense()\nB2 = B ** 2\nB2 = np.sqrt(B2.sum())\ngeo_mean = float(stats.gmean(B.sum(axis=1)))\nself.assertAlmostEqual(geo_mean, 1, delta=0.1)\ngeo_mean = float(stats.gmean(B.T.sum(axis=1)))\nself.assertAlmostEqual(geo_mean, 1, delta=0.1)\n"
+}

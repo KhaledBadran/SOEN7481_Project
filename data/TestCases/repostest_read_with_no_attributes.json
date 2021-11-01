@@ -1,0 +1,9 @@
+{
+    "functionName": "test_read_with_no_attributes",
+    "className": "TestGetAttributesResponsePayload",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_get_attributes.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a GetAttributes response payload without attribute name\n        data can be read from a data stream.\n        \"\"\"\npayload = payloads.GetAttributesResponsePayload()\nself.assertEqual(None, payload._unique_identifier)\nself.assertEqual(list(), payload._attributes)\npayload.read(self.encoding_sans_attributes)\nself.assertEqual(self.unique_identifier, payload.unique_identifier)\nself.assertEqual(primitives.TextString(value=self.unique_identifier, tag=\n    enums.Tags.UNIQUE_IDENTIFIER), payload._unique_identifier)\nself.assertEqual(list(), payload.attributes)\nself.assertEqual(list(), payload._attributes)\n"
+}

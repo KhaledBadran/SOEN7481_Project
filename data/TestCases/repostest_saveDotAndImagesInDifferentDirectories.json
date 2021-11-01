@@ -1,0 +1,9 @@
+{
+    "functionName": "test_saveDotAndImagesInDifferentDirectories",
+    "className": "VisualizeToolTests",
+    "fileName": "/glyph_&_Automat/automat_&__test_&_test_visualize.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Passing different directories to --image-directory and --dot-directory\n        writes images and dot files to those directories.\n        \"\"\"\nimageDirectory = 'image'\ndotDirectory = 'dot'\nself.tool(argv=[self.fakeFQPN, '--image-directory', imageDirectory,\n    '--dot-directory', dotDirectory])\nself.assertTrue(any('image' in line for line in self.collectedOutput))\nself.assertTrue(any('dot' in line for line in self.collectedOutput))\nself.assertEqual(len(self.digraphRecorder.renderCalls), 1)\nrenderCall, = self.digraphRecorder.renderCalls\nself.assertEqual(renderCall['directory'], imageDirectory)\nself.assertTrue(renderCall['cleanup'])\nself.assertEqual(len(self.digraphRecorder.saveCalls), 1)\nsaveCall, = self.digraphRecorder.saveCalls\nself.assertEqual(saveCall['directory'], dotDirectory)\n"
+}

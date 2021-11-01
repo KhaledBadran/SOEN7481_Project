@@ -1,0 +1,9 @@
+{
+    "functionName": "test_proper_common_properties",
+    "className": "TestCommonProperties",
+    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_converters.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Ensure proper handling of correct common properties.\n        \"\"\"\nroot = etree.Element('experiment')\nproperties = etree.SubElement(root, 'commonProperties')\nprop = etree.SubElement(properties, 'property')\nprop.set('name', physical_property)\nprop.set('units', units)\nprop_value = etree.SubElement(prop, 'value')\nprop_value.text = value\nif units == 'Torr':\n    units = 'torr'\ncommon = get_common_properties(root)\nassert common[physical_property.replace(' ', '-')] == [' '.join([value, units])\n    ]\npytest.mark.parametrize('physical_property, value, units', [('pressure',\n    '2.18', 'atm'), ('pressure', '700', 'Torr'), ('pressure', '700', 'torr'\n    ), ('pressure', '1', 'bar'), ('pressure', '1000', 'mbar'), (\n    'temperature', '1000.0', 'K'), ('pressure rise', '0.10', '1/ms')])"
+}

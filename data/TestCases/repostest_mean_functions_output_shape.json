@@ -1,0 +1,9 @@
+{
+    "functionName": "test_mean_functions_output_shape",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_test_mean_functions.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test the output shape for basic and compositional mean functions, also\n    check that the combination of mean functions returns the correct class\n    \"\"\"\nX = np.random.randn(Datum.N, Datum.input_dim)\nY = mean_function_1(X)\nassert Y.shape in [(Datum.N, Datum.output_dim), (Datum.N, 1)]\nif operation == '+':\n    mean_composed = mean_function_1 + mean_function_2\nelif operation == '*':\n    mean_composed = mean_function_1 * mean_function_2\nelse:\n    raise NotImplementedError\nY_composed = mean_composed(X)\nassert Y_composed.shape in [(Datum.N, Datum.output_dim), (Datum.N, 1)]\npytest.mark.parametrize('mean_function_1', _mean_functions)pytest.mark.parametrize('mean_function_2', _mean_functions)pytest.mark.parametrize('operation', ['+', '*'])"
+}

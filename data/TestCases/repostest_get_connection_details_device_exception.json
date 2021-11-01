@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_connection_details_device_exception",
+    "className": "TestFindDevice",
+    "fileName": "/DusanMadar_&_PySyncDroid/tests_&_test_find_device.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test 'get_connection_details' raises a DeviceException with an\n        appropriate error message when trying to find a non-existent device.\n        \"\"\"\nwith self.assertRaises(DeviceException) as exc:\n    get_connection_details(vendor='non-existent-vendor', model=\n        'non-existent-model')\nexc_msg_parts = (\n    'Device \"non-existent-vendor non-existent-model\" not found.',\n    'No \"non-existent-vendor\" devices were found.')\nself.assertEqual(str(exc.exception), '\\n'.join(exc_msg_parts))\n"
+}

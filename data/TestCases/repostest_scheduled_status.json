@@ -1,0 +1,9 @@
+{
+    "functionName": "test_scheduled_status",
+    "className": null,
+    "fileName": "/halcy_&_Mastodon.py/tests_&_test_status.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "base_time = datetime.datetime(4000, 1, 1, 12, 13, 14, 0, pytz.timezone(\n    'Etc/GMT+2'))\nthe_future = base_time + datetime.timedelta(minutes=20)\nscheduled_toot = api.status_post('please ensure adequate headroom',\n    scheduled_at=the_future)\nassert scheduled_toot\nthe_immediate_future = base_time + datetime.timedelta(minutes=10)\nscheduled_toot_2 = api.scheduled_status_update(scheduled_toot,\n    the_immediate_future)\nassert scheduled_toot_2\nassert scheduled_toot_2.id == scheduled_toot.id\nassert scheduled_toot_2.scheduled_at < scheduled_toot.scheduled_at\nscheduled_toot_list = api.scheduled_statuses()\nassert scheduled_toot_2.id in map(lambda x: x.id, scheduled_toot_list)\nscheduled_toot_3 = api.scheduled_status(scheduled_toot.id)\nassert scheduled_toot_2.id == scheduled_toot_3.id\napi.scheduled_status_delete(scheduled_toot_2)\nscheduled_toot_list_2 = api.scheduled_statuses()\nassert not scheduled_toot_2.id in map(lambda x: x.id, scheduled_toot_list_2)\npytest.mark.vcr(match_on=['path'])"
+}

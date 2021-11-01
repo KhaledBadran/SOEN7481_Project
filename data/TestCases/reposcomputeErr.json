@@ -1,0 +1,9 @@
+{
+    "functionName": "computeErr",
+    "className": null,
+    "fileName": "/Hoeppke_&_PyODESolver/pyodesolver_&_method_explicit_euler_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"TODO: Docstring for computeErr.\n\n            :N: Number of gridpoints\n            :returns: err in inf norm\n\n            \"\"\"\nt = np.linspace(0, 1, num=N)\ny0 = np.pi\nexactSol = ExampleFunc01_solution(y0, t).T\nee_solver = ExplicitEuler(N, y0, [0, 1], ExampleFunc01())\nsolution = ee_solver.generate()\nnumericSol = np.zeros_like(exactSol)\nidx = 0\nfor time, val in solution:\n    numericSol[idx] = val\n    idx += 1\nerr = np.max(np.abs(exactSol - numericSol))\nreturn err\n"
+}

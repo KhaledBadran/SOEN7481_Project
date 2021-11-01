@@ -1,0 +1,9 @@
+{
+    "functionName": "test_meg_inverse",
+    "className": null,
+    "fileName": "/nipy_&_PySurfer/surfer_&_tests_&_test_viz.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test plotting of MEG inverse solution.\"\"\"\n_set_backend()\nbrain = Brain(*std_args)\nstc_fname = os.path.join(data_dir, 'meg_source_estimate-lh.stc')\nstc = io.read_stc(stc_fname)\nvertices = stc['vertices']\ncolormap = 'hot'\ndata = stc['data']\ndata_full = brain.geo['lh'].nn[vertices][..., np.newaxis] * data[:, (np.\n    newaxis)]\ntime = np.linspace(stc['tmin'], stc['tmin'] + data.shape[1] * stc['tstep'],\n    data.shape[1], endpoint=False)\ndef time_label(t):\n    return 'time=%0.2f ms' % (1000.0 * t)\nfor use_data in (data, data_full):\n    brain.add_data(use_data, colormap=colormap, vertices=vertices,\n        smoothing_steps=1, time=time, time_label=time_label)\nbrain.scale_data_colormap(fmin=13, fmid=18, fmax=22, transparent=True)\nassert brain.data_dict['lh']['time_idx'] == 0\nbrain.set_time(0.1)\nassert brain.data_dict['lh']['time_idx'] == 2\npytest.raises(ValueError, brain.add_data, data, vertices=vertices, time=\n    time[:-1])\nbrain.add_data(data, colormap=colormap, vertices=vertices, smoothing_steps=\n    1, time=time, time_label=time_label, initial_time=0.09)\nassert brain.data_dict['lh']['time_idx'] == 1\ndata_dicts = brain._data_dicts['lh']\nassert len(data_dicts) == 3\nassert data_dicts[0]['time_idx'] == 1\nassert data_dicts[1]['time_idx'] == 1\nbrain.set_data_time_index(0)\nassert data_dicts[0]['time_idx'] == 0\nassert data_dicts[1]['time_idx'] == 0\nbrain.set_data_smoothing_steps(2)\nbrain.add_data(data[:, (1)], colormap=colormap, vertices=vertices,\n    smoothing_steps=2)\nbrain.set_data_time_index(2)\nassert len(data_dicts) == 4\nbrain.set_surf('white')\nbrain.remove_data()\nassert brain._data_dicts['lh'] == []\nbrain.close()\nrequires_fsaverage()"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sigmaclip",
+    "className": null,
+    "fileName": "/PaulHancock_&_Aegean/tests_&_test_BANE.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test the sigmaclipping\"\"\"\ndata = np.ones(100)\nif not BANE.sigmaclip(data, 3, 4, reps=4)[0] == 1.0:\n    raise AssertionError()\ndata[13] = np.nan\nif not BANE.sigmaclip(data, 3, 4, reps=4)[0] == 1.0:\n    raise AssertionError()\nif not np.isnan(BANE.sigmaclip([], 0, 3)[0]):\n    raise AssertionError()\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_lr_one_data_point",
+    "className": "DiscreteMNLUnaryTests",
+    "fileName": "/Mogeng_&_IOHMM/tests_&_test_DiscreteMNL.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.model = DiscreteMNL(solver='lbfgs', fit_intercept=True, est_stderr=\n    True, reg_method='l2', alpha=0, l1_ratio=0, tol=0.0001, max_iter=100,\n    coef=None, stderr=None, classes=None)\nself.model.fit(self.data_spector.exog[4:5, :], self.y[4:5,], sample_weight=0.5)\nnp.testing.assert_array_equal(self.model.coef, np.zeros((4, 1)))\nnp.testing.assert_array_almost_equal(self.model.loglike_per_sample(self.\n    data_spector.exog[4:6, :], np.array(['foo', 'foo'])), np.array([0, 0]),\n    decimal=3)\nnp.testing.assert_array_almost_equal(self.model.loglike_per_sample(self.\n    data_spector.exog[4:6, :], np.array(['foo', 'bar'])), np.array([0, -np.\n    Infinity]), decimal=3)\n"
+}

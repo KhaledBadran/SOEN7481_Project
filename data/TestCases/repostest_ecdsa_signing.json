@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ecdsa_signing",
+    "className": "TestTpmBackEnds",
+    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_tpm_back_ends.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "for tpm in self.backEndList:\n    identityName = Name('/Test/Ec/KeyName')\n    key = tpm.createKey(identityName, EcKeyParams())\n    keyName = key.getKeyName()\n    content = Blob([1, 2, 3, 4])\n    signature = key.sign(DigestAlgorithm.SHA256, content.toBytes())\n    publicKey = key.derivePublicKey()\n    result = VerificationHelpers.verifySignature(content, signature, publicKey)\n    self.assertEqual(True, result)\n    tpm.deleteKey(keyName)\n    self.assertEqual(False, tpm.hasKey(keyName))\n"
+}

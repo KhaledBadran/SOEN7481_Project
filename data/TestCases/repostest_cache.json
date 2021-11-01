@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cache",
+    "className": "TestResolve",
+    "fileName": "/Siujoeng-Lau_&_Encrypted-DNS/tests_&_test_resolve.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "dns_query = dns.message.make_query('www.netflix.com', dns.rdatatype.A)\nresponse = dns.query.udp(dns_query, '127.0.0.1', port=53, timeout=5)\nif response.answer:\n    response.answer[-1].items[0].to_text()\nstart_time = time.time()\ncached_response = dns.query.udp(dns_query, '127.0.0.1', port=53, timeout=5)\nif cached_response.answer:\n    cached_response.answer[-1].items[0].to_text()\nend_time = time.time()\nself.assertTrue(end_time - start_time < 0.1)\n"
+}

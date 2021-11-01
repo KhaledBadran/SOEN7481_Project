@@ -1,0 +1,9 @@
+{
+    "functionName": "_check_tracing_other_threads",
+    "className": null,
+    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_utilities.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "import pydevd_tracing\nimport time\nfrom tests_python.debugger_unittest import wait_for_condition\ntry:\n    import _thread\nexcept ImportError:\n    import thread as _thread\ndef dump_threads_and_kill_on_timeout():\n    time.sleep(10)\n    from _pydevd_bundle import pydevd_utils\n    pydevd_utils.dump_threads()\n    time.sleep(1)\n    import os\n    os._exit(77)\n_thread.start_new_thread(dump_threads_and_kill_on_timeout, ())\ndef method():\n    while True:\n        trace_func = sys.gettrace()\n        if trace_func:\n            threading.current_thread().trace_func = trace_func\n            break\n        time.sleep(0.01)\ndef dummy_thread_method():\n    threads.append(threading.current_thread())\n    method()\nthreads = []\nthreads.append(threading.Thread(target=method))\nthreads[-1].daemon = True\nthreads[-1].start()\n_thread.start_new_thread(dummy_thread_method, ())\nwait_for_condition(lambda : len(threads) == 2, msg=lambda : \n    'Found threads: %s' % (threads,))\ndef tracing_func(frame, event, args):\n    return tracing_func\nassert pydevd_tracing.set_trace_to_threads(tracing_func) == 0\ndef check_threads_tracing_func():\n    for t in threads:\n        if getattr(t, 'trace_func', None) != tracing_func:\n            return False\n    return True\nwait_for_condition(check_threads_tracing_func)\nassert tracing_func == sys.gettrace()\n"
+}

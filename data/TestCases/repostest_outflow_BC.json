@@ -1,0 +1,9 @@
+{
+    "functionName": "test_outflow_BC",
+    "className": "AdvectionDiffusionTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_AdvectionDiffusionTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "for s_scheme in ['upwind', 'hybrid', 'powerlaw', 'exponential']:\n    ad = op.algorithms.AdvectionDiffusion(network=self.net, phase=self.phase)\n    ad.setup(quantity='pore.concentration', conductance=\n        'throat.ad_dif_conductance_' + s_scheme)\n    ad.set_value_BC(pores=self.net.pores('back'), values=2)\n    ad.set_outflow_BC(pores=self.net.pores('front'))\n    ad.run()\n    y = ad[ad.settings['quantity']].mean()\n    assert_allclose(actual=y, desired=2.0)\n"
+}

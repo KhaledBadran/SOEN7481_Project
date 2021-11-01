@@ -1,0 +1,9 @@
+{
+    "functionName": "test_non_url_redirect",
+    "className": null,
+    "fileName": "/RobertoPrevato_&_BlackSheep/tests_&_client_&_test_redirects.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "async with ClientSession(base_url=b'http://localhost:8080', pools=\n    pools_factory(responses)) as client:\n    response = await client.get(b'/')\n    assert response is not None\n    assert response.status == expected_status\n    location_header = response.headers.get_single(b'Location')\n    assert location_header == expected_location\npytest.mark.asynciopytest.mark.parametrize('responses,expected_status,expected_location', \n    get_scenarios(lambda status: [[Response(status, [(b'Location',\n    b'urn:oasis:names:specification:docbook:dtd:xml:4.1.2')]), Response(200,\n    None, TextContent('Hello, World!'))], status,\n    b'urn:oasis:names:specification:docbook:dtd:xml:4.1.2']) +\n    get_scenarios(lambda status: [[Response(status, [(b'Location',\n    b'msalf84227e26-9a47-4c00-a92c-1b1bad8225cc://auth')]), Response(200,\n    None, TextContent('Hello, World!'))], status,\n    b'msalf84227e26-9a47-4c00-a92c-1b1bad8225cc://auth']))"
+}

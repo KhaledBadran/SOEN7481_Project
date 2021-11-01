@@ -1,0 +1,9 @@
+{
+    "functionName": "test_text_and_tag",
+    "className": "LexerTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_lexer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "template = \"\"\"\n<b>Hello world</b>\n        <%def name=\"foo()\">\n                this is a def.\n        </%def>\n\n        and some more text.\n\"\"\"\nnode = Lexer(template).parse()\nself._compare(node, TemplateNode({}, [Text(\n    \"\"\"\n<b>Hello world</b>\n        \"\"\", (1, 1)), DefTag('def', {'name':\n    'foo()'}, (3, 9), [Text(\"\"\"\n                this is a def.\n        \"\"\",\n    (3, 28))]), Text(\"\"\"\n\n        and some more text.\n\"\"\", (5, 16))]))\n"
+}

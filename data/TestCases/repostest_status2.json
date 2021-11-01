@@ -1,0 +1,9 @@
+{
+    "functionName": "test_status2",
+    "className": null,
+    "fileName": "/mworion_&_MountWizzard4/mw4_&_test_&_unit_tests_&_powerswitch_&_test_kmrelay.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "returnValue = \"\"\"<response>\n                     <relay0>1</relay0>\n                     <relay1>1</relay1>\n                     <relay2>1</relay2>\n                     <relay3>1</relay3>\n                     <relay4>1</relay4>\n                     <relay5>1</relay5>\n                     <relay6>1</relay6>\n                     <relay7>1</relay7>\n                     <relay8>1</relay8>\n                     </response>\"\"\"\nclass Test:\n    pass\nret = Test()\nret.text = returnValue\nret.reason = 'OK'\nret.status_code = 200\nwith mock.patch.object(app, 'getRelay', return_value=ret):\n    for i in range(0, 8):\n        app.set(i, 1)\n    with qtbot.waitSignal(app.signals.statusReady):\n        app.cyclePolling()\n    assert [1, 1, 1, 1, 1, 1, 1, 1] == app.status\n"
+}

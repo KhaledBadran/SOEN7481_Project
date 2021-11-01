@@ -1,0 +1,9 @@
+{
+    "functionName": "test_supported_ignition_types",
+    "className": "TestDataPoint",
+    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_chemked.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "properties = self.load_properties('testfile_st.yaml')\ndatapoints = [DataPoint(d) for d in properties]\nfor d in datapoints:\n    assert d.ignition_type['target'] == 'pressure'\n    assert d.ignition_type['type'] == 'd/dt max'\nproperties = self.load_properties('testfile_st2.yaml')\ndatapoints = [DataPoint(d) for d in properties]\nfor d in datapoints:\n    assert d.ignition_type['target'] == 'OH'\n    assert d.ignition_type['type'] == 'max'\nproperties = self.load_properties('testfile_st_p5.yaml')\ndatapoints = [DataPoint(d) for d in properties]\nfor d in datapoints:\n    assert d.ignition_type['target'] == 'OH*'\n    assert d.ignition_type['type'] == '1/2 max'\nproperties = self.load_properties('testfile_required.yaml')\ndatapoints = [DataPoint(d) for d in properties]\nassert datapoints[0].ignition_type['target'] == 'CH'\nassert datapoints[0].ignition_type['type'] == 'min'\nassert datapoints[1].ignition_type['target'] == 'CH*'\nassert datapoints[1].ignition_type['type'] == 'd/dt max extrapolated'\n"
+}

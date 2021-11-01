@@ -1,0 +1,9 @@
+{
+    "functionName": "testSetupData_CorrectData",
+    "className": null,
+    "fileName": "/muma7490_&_PyDIAMONDS-Background/tests_&_test_Background.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "fileName = testFilePath + 'KICTestFile.txt'\ndef testSetupData_File():\n    return valueObject._setupData('TestFile', dataPath=testFilePath)\ndef testSetupData_Data():\n    data = np.loadtxt(fileName).T\n    return valueObject._setupData(kicID, data=data)\nresults = [testSetupData_File(), testSetupData_Data()]\nfor result in results:\n    assert isinstance(result, np.ndarray)\n    assert len(result) == 2\n    assert len(result[0]) == len(result[1])\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "_fetch_dropped_fc",
+    "className": null,
+    "fileName": "/hey-yahei_&_OpSummary.MXNet/tests_&_test_gluon_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "ret = []\ndropped = dropped_layers.get(func, [])\nfor k, v in dropped.items():\n    if type(v) is tuple:\n        if len(v) == 1:\n            ret.extend(getattr(net, k)[v[0]:])\n        elif len(v) == 2:\n            ret.extend(getattr(net, k)[v[0]:v[1]])\n    elif type(v) is int:\n        ret.append(getattr(net, k)[v])\n    elif v is None:\n        ret.append(getattr(net, k))\nreturn ret\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_batch_independence",
+    "className": "TestFluid",
+    "fileName": "/tum-pbs_&_PhiFlow/tests_&_test_fluid.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "def simulate(centers):\n    world = World()\n    fluid = world.add(Fluid(Domain([5, 4], boundaries=CLOSED, box=AABox(0,\n        [40, 32])), buoyancy_factor=0.1, batch_size=centers.shape[0]),\n        physics=IncompressibleFlow(pressure_solver=SparseCG(max_iterations=3)))\n    world.add(Inflow(Sphere(center=centers, radius=3), rate=0.2))\n    world.add(Fan(Sphere(center=centers, radius=5), acceleration=[1.0, 0]))\n    world.step(dt=1.5)\n    world.step(dt=1.5)\n    world.step(dt=1.5)\n    print()\n    return fluid.density.data[0, ...], fluid.velocity.unstack()[0].data[0, ...\n        ], fluid.velocity.unstack()[1].data[0, ...]\nd1, vy1, vx1 = simulate(numpy.array([[5, 16], [5, 4]]))\nd2, vy2, vx2 = simulate(numpy.array([[5, 16], [5, 16]]))\nnumpy.testing.assert_equal(d1, d2)\nnumpy.testing.assert_equal(vy1, vy2)\nnumpy.testing.assert_equal(vx1, vx2)\n"
+}

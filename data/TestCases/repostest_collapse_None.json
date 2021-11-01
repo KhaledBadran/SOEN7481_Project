@@ -1,0 +1,9 @@
+{
+    "functionName": "test_collapse_None",
+    "className": "TestDimshuffleLayer",
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_shape.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from lasagne.layers.shape import DimshuffleLayer\nds_ok = DimshuffleLayer(input_layer_with_None, [0, 1, 3, 4])\nassert ds_ok.output_shape == (2, 3, 5, 7)\nassert ds_ok.get_output_for(input_var).eval({input_var: input_data}).shape == (\n    2, 3, 5, 7)\nwith pytest.raises(ValueError):\n    DimshuffleLayer(input_layer_with_None, [0, 1, 2, 4])\n"
+}

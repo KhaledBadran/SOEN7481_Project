@@ -1,0 +1,9 @@
+{
+    "functionName": "test_Sample_conversions",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_Sample.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "df = MJOLNIR.Data.DataFile.DataFile('Data/camea2018n000178.hdf')\nsample = df.sample\np0, p1 = 2.25, -1.23\nQx, Qy = sample.tr(p0, p1)\nP0, P1 = sample.inv_tr(Qx, Qy)\nassert np.all(np.isclose([p0, p1], [P0, P1]))\nstring = sample.format_coord(Qx, Qy)\nhkl = [float(x.split('=')[-1]) for x in string.split(',')]\nprint(string)\nprint(hkl)\nQxQyFromSample = sample.calculateHKLToQxQy(*hkl)\nprint(QxQyFromSample)\nassert np.all(np.isclose(QxQyFromSample, [Qx, Qy], atol=0.001))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_hierarchical_biobrick",
+    "className": null,
+    "fileName": "/Edinburgh-Genome-Foundry_&_DnaCauldron/tests_&_test_hierarchical_biobrick_&_test_hierarchical_biobrick.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "repository = dc.SequenceRepository()\nrepository.import_records(folder=parts_folder, use_file_names_as_ids=True)\nassembly_plan = dc.AssemblyPlan.from_spreadsheet(assembly_class=dc.\n    BioBrickStandardAssembly, path=os.path.join(this_directory,\n    'hierarchical_biobrick.csv'))\nplan_simulation = assembly_plan.simulate(sequence_repository=repository)\nstats = plan_simulation.compute_stats()\nassert stats['valid_assemblies'] == 3\nreport_writer = dc.AssemblyReportWriter(include_mix_graphs=True)\nplan_simulation.write_report('@memory', assembly_report_writer=report_writer)\n"
+}

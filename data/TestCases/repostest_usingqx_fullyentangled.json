@@ -1,0 +1,9 @@
+{
+    "functionName": "test_usingqx_fullyentangled",
+    "className": "Test_conjugated_kernel",
+    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_unitary.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.setUpClass()\nnum_qubits = 2\np = ql.Program('test_usingqxfullentangled', platform, num_qubits)\nk = ql.Kernel('akernel', platform, num_qubits)\nmatrix = [-0.15050486 + 0.32164259j, -0.29086861 + 0.76699622j, 0.17865218 +\n    0.18573699j, -0.31380116 + 0.19005417j, -0.65629705 + 0.20915109j, \n    0.32782708 + 0.16363753j, -0.54511727 - 0.21100055j, 0.0601221 - \n    0.21446079j, -0.38935965 - 0.47787084j, 0.30279699 - 0.10056307j, \n    0.04076564 + 0.54046282j, -0.23847619 + 0.40939808j, 0.13874319 - \n    0.01460122j, -0.27256915 + 0.12950497j, -0.49774672 + 0.22449364j, \n    0.6159743 + 0.46032394j]\nu1 = ql.Unitary('testname', matrix)\nu1.decompose()\nk.hadamard(0)\nk.hadamard(1)\nk.cnot(0, 1)\nk.gate(u1, [0, 1])\np.add_kernel(k)\np.compile()\nqx.set(os.path.join(output_dir, p.name + '_initialqasmwriter_out.qasm'))\nqx.execute()\nc0 = qx.get_state()\nself.assertAlmostEqual(0.25 * helper_prob(matrix[0] + matrix[1] + matrix[2] +\n    matrix[3]), helper_regex(c0)[0], 5)\nself.assertAlmostEqual(0.25 * helper_prob(matrix[4] + matrix[5] + matrix[6] +\n    matrix[7]), helper_regex(c0)[1], 5)\nself.assertAlmostEqual(0.25 * helper_prob(matrix[8] + matrix[9] + matrix[10\n    ] + matrix[11]), helper_regex(c0)[2], 5)\nself.assertAlmostEqual(0.25 * helper_prob(matrix[12] + matrix[13] + matrix[\n    14] + matrix[15]), helper_regex(c0)[3], 5)\n"
+}

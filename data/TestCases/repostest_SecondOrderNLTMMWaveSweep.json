@@ -1,0 +1,9 @@
+{
+    "functionName": "test_SecondOrderNLTMMWaveSweep",
+    "className": null,
+    "fileName": "/ardiloot_&_NonlinearTMM/Tests_&_test_SecondOrderNLTMMForWaves.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "betas = np.linspace(0.0, 0.99, 10)\ntmm.P1.pol = polP1\ntmm.P2.pol = polP2\ntmm.Gen.pol = polGen\ntmm.P1.wave.waveType = waveType\nsr = tmm.Sweep('beta', betas, betas, outP1=False, outP2=False)\nsrW = tmm.WaveSweep('beta', betas, betas, outP1=False, outP2=False)\nnp.testing.assert_allclose(srW.Gen.Pr, sr.Gen.Ir * srW.Gen.beamArea, rtol=0.01)\nnp.testing.assert_allclose(srW.Gen.Pt, sr.Gen.It * srW.Gen.beamArea, rtol=0.06)\n"
+}

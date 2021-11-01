@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ten_GtC_pulse",
+    "className": null,
+    "fileName": "/OMS-NetZero_&_FAIR/tests_&_reproduction_&_reproduction_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "emissions = np.zeros(250)\nemissions[125:] = 10.0\nother_rf = np.zeros(emissions.size)\nfor x in range(0, emissions.size):\n    other_rf[x] = 0.5 * np.sin(2 * np.pi * x / 14.0)\nC, F, T = fair.forward.fair_scm(emissions=emissions, other_rf=other_rf,\n    useMultigas=False, r0=32.4, tcr_dbl=70)\ndatadir = os.path.join(os.path.dirname(__file__), 'ten_GtC_pulse/')\nC_expected = np.load(datadir + 'C.npy')\nF_expected = np.load(datadir + 'F.npy')\nT_expected = np.load(datadir + 'T.npy')\nassert np.allclose(C, C_expected)\nassert np.allclose(F, F_expected)\nassert np.allclose(T, T_expected)\n"
+}

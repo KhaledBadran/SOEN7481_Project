@@ -1,0 +1,9 @@
+{
+    "functionName": "test_blnet_web_set_digital",
+    "className": "BLNETWebTest",
+    "fileName": "/nielstron_&_pyblnet_&_/pyblnet_&_tests_&_test_web.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Test setting digital values \"\"\"\nwith BLNETWeb(self.url, password=PASSWORD, timeout=10) as blnet:\n    blnet.set_digital_value(10, '2')\n    self.assertEqual(self.server.get_node('A'), '2')\n    blnet.set_digital_value(9, 'EIN')\n    self.assertEqual(self.server.get_node('9'), '2')\n    blnet.set_digital_value(8, 'auto')\n    self.assertEqual(self.server.get_node('8'), '3')\n    blnet.set_digital_value(1, 'on')\n    self.assertEqual(self.server.get_node('1'), '2')\n    blnet.set_digital_value(1, 'AUS')\n    self.assertEqual(self.server.get_node('1'), '1')\n    blnet.set_digital_value(5, 3)\n    self.assertEqual(self.server.get_node('5'), '3')\n    blnet.set_digital_value(4, True)\n    self.assertEqual(self.server.get_node('4'), '2')\n    blnet.set_digital_value(6, False)\n    self.assertEqual(self.server.get_node('6'), '1')\n    try:\n        blnet.set_digital_value(0, 'EIN')\n        self.fail(\"Didn't catch wrong id 0\")\n    except ValueError:\n        pass\n    try:\n        blnet.set_digital_value(16, 'EIN')\n        self.fail(\"Didn't catch wrong id 16\")\n    except ValueError:\n        pass\n"
+}

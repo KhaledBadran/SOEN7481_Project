@@ -1,0 +1,9 @@
+{
+    "functionName": "test_share_message",
+    "className": "TestPlugin",
+    "fileName": "/tutorgen_&_HPIT-python-client/tests_&_hpitclient_&_test_plugin.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "httpretty.register_uri(httpretty.POST,\n    'https://www.hpit-project.org/share-message', body='OK')\nself.test_plugin.share_message.when.called_with(None, None).should.throw(\n    InvalidParametersError)\nself.test_plugin.share_message.when.called_with('', None).should.throw(\n    InvalidParametersError)\nself.test_plugin.share_message.when.called_with([], None).should.throw(\n    InvalidParametersError)\nself.test_plugin.share_message.when.called_with({}, None).should.throw(\n    InvalidParametersError)\nself.test_plugin.share_message.when.called_with('thing', None).should.throw(\n    InvalidParametersError)\nself.test_plugin.share_message.when.called_with('thing', '').should.throw(\n    InvalidParametersError)\nself.test_plugin.share_message.when.called_with('thing', []).should.throw(\n    InvalidParametersError)\nself.test_plugin.share_message('thing', '4').should.equal(True)\nself.test_plugin.share_message('thing', ['4', '5', '6']).should.equal(True)\nhttpretty.activate"
+}

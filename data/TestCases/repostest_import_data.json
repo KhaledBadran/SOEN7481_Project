@@ -1,0 +1,9 @@
+{
+    "functionName": "test_import_data",
+    "className": "TestTranscripSNP",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_transcript_SNP.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "snp_file = os.path.join(self.test_folder, 'snp')\ngen_file(snp_file, self.example.snp_file)\ndepth_file = os.path.join(self.test_folder, 'depth')\ngen_file(depth_file, self.example.depth_file)\nargs = self.mock_args.mock()\nargs.depth_s = 'n_10'\nargs.depth_b = 'a_2'\nargs.dp4_sum = 'n_10'\nargs.dp4_frac = 0.5\nargs.idv = 'n_10'\nargs.imf = 0.5\nargs.filters = ['VDB_s0.1']\nargs.min_sample = 2\nmax_quals, snps, dess, raw_snps = ts.import_data(snp_file, args, 2,\n    depth_file, 2)\nself.assertDictEqual(max_quals, {'NC_007795.1': 98.0, 'All_genome': 98.0})\nself.assertListEqual(snps, [{'dp4_frac': 1.0, 'strain': 'NC_007795.1',\n    'filter': '.', 'indel': -1, 'pos': 1, 'id': '.', 'all_info':\n    'NC_007795.1\\t1\\t.\\tC\\tA\\t98\\t.\\tDP=89;DP4=0,0,60,9;VDB=8.46526e-15\\tGT:PL:DP\\t1/1:125,184,0:87'\n    , 'qual': 98.0, 'info': ['DP=89', 'DP4=0,0,60,9', 'VDB=8.46526e-15'],\n    'alt': 'A', 'ref': 'C', 'frac': -1, 'depth': 89, 'dp4_sum': 69}, {\n    'dp4_frac': 1.0, 'strain': 'NC_007795.1', 'filter': '.', 'indel': 22,\n    'pos': 6, 'id': '.', 'all_info':\n    'NC_007795.1\\t6\\t.\\tA\\tAA\\t26.9515\\t.\\tINDEL;IDV=22;IMF=0.536585;DP=41;VDB=9.36323e-14;DP4=0,0,40,0\\tGT:PL:DP\\t0/1:60,0,55:40'\n    , 'qual': 26.9515, 'info': ['INDEL', 'IDV=22', 'IMF=0.536585', 'DP=41',\n    'VDB=9.36323e-14', 'DP4=0,0,40,0'], 'alt': 'AA', 'ref': 'A', 'frac': \n    0.536585, 'depth': 41, 'dp4_sum': 40}])\n"
+}

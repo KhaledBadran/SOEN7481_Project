@@ -1,0 +1,9 @@
+{
+    "functionName": "test_set_thresholds_from_csv",
+    "className": "PyU4VPerformanceTest",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_performance.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test set_perfthresholds_csv.\"\"\"\nthreshold_settings = self.p_data.threshold_settings_resp.get(pc.PERF_THRESH)\nmock_csv_data = {pc.CATEGORY: list(), pc.METRIC: list(), pc.KPI: list(), pc\n    .ALERT_ERR: list(), pc.FIRST_THRESH: list(), pc.SEC_THRESH: list()}\nfor threshold_setting in threshold_settings:\n    mock_csv_data[pc.CATEGORY].append(self.p_data.threshold_settings_resp.\n        get(pc.CATEGORY))\n    mock_csv_data[pc.METRIC].append(threshold_setting.get(pc.METRIC))\n    mock_csv_data[pc.KPI].append(threshold_setting.get(pc.KPI))\n    mock_csv_data[pc.ALERT_ERR].append(threshold_setting.get(pc.ALERT_ERR))\n    mock_csv_data[pc.FIRST_THRESH].append(threshold_setting.get(pc.\n        FIRST_THRESH))\n    mock_csv_data[pc.SEC_THRESH].append(threshold_setting.get(pc.SEC_THRESH))\nwith mock.patch.object(file_handler, 'read_csv_values', return_value=\n    mock_csv_data):\n    with mock.patch.object(self.perf, 'update_threshold_settings'\n        ) as mck_update:\n        self.perf.set_thresholds_from_csv('fake_csv_path')\n        self.assertEqual(mck_update.call_count, 1)\n"
+}

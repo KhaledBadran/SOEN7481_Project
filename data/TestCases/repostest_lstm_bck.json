@@ -1,0 +1,9 @@
+{
+    "functionName": "test_lstm_bck",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_recurrent.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "num_batch, seq_len, n_features1 = 2, 3, 4\nnum_units = 2\nx = T.tensor3()\nin_shp = num_batch, seq_len, n_features1\nl_inp = InputLayer(in_shp)\nx_in = np.ones(in_shp).astype('float32')\nlasagne.random.get_rng().seed(1234)\nl_lstm_fwd = LSTMLayer(l_inp, num_units=num_units, backwards=False)\nlasagne.random.get_rng().seed(1234)\nl_lstm_bck = LSTMLayer(l_inp, num_units=num_units, backwards=True)\noutput_fwd = helper.get_output(l_lstm_fwd, x)\noutput_bck = helper.get_output(l_lstm_bck, x)\noutput_fwd_val = output_fwd.eval({x: x_in})\noutput_bck_val = output_bck.eval({x: x_in})\nnp.testing.assert_almost_equal(output_fwd_val, output_bck_val[:, ::-1])\n"
+}

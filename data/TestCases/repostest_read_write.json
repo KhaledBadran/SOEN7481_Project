@@ -1,0 +1,9 @@
+{
+    "functionName": "test_read_write",
+    "className": "TestGeneticAlgorithm",
+    "fileName": "/SUNCAT-Center_&_CatLearn/test_&_test_ga.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Function to test reading an writing GA files.\"\"\"\ntrain_features, train_targets, _, _ = get_data()\ntrain_features = train_features[:, :20]\nga1 = GeneticAlgorithm(population_size=10, fit_func=minimize_error,\n    features=train_features, targets=train_targets, population=None)\nself.assertEqual(np.shape(ga1.population), (10, 20))\nga1.search(2, writefile='gaWrite.json')\nself.assertTrue(len(ga1.population) == 10)\nself.assertTrue(len(ga1.fitness) == 10)\nold_pop, _ = read_data('gaWrite.json')\nga2 = GeneticAlgorithm(population_size=10, fit_func=minimize_error,\n    features=train_features, targets=train_targets, population=old_pop)\nself.assertTrue(np.allclose(ga2.population, ga1.population))\nga2.search(3)\nself.assertTrue(len(ga2.population) == 10)\nself.assertTrue(len(ga2.fitness) == 10)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "generic_function",
+    "className": null,
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_models_&_misc_&_simple_equations.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Runs an arbitrary function on the given data\n\n    This allows users to place a customized calculation into the automatated\n    model regeneration pipeline.\n\n    Parameters\n    ----------\n    target : OpenPNM Object\n        The object which this model is associated with. This controls the\n        length of the calculated array, and also provides access to other\n        necessary properties.\n\n    prop : string\n        The dictionary key containing the array to be operated on\n\n    func : Numpy function\n        A handle to the function to apply\n\n    kwargs : keyward arguments\n        All arguments required by the specific Numpy function\n\n    Returns\n    -------\n    result : NumPy ndarray\n        Array containing func(target[prop], **kwargs).\n\n    Examples\n    --------\n    The following example shows how to use a Numpy function, but any function\n    can be used, as long as it returns an array object:\n\n    >>> import openpnm as op\n    >>> import numpy as np\n    >>> pn = op.network.Cubic(shape=[5, 5, 5])\n    >>> geo = op.geometry.GenericGeometry(network=pn, pores=pn.Ps, throats=pn.Ts)\n    >>> geo['pore.rand'] = np.random.rand(geo.Np)\n    >>> geo.add_model(propname='pore.cos',\n    ...               model=op.models.misc.generic_function,\n    ...               func=np.cos,\n    ...               prop='pore.rand')\n    \"\"\"\nvalues = target[prop]\nresult = func(values, **kwargs)\nif not isinstance(result, np.ndarray):\n    logger.warning('Given function must return a Numpy array')\nreturn result\n"
+}

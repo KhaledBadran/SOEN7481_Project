@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_enns",
+    "className": null,
+    "fileName": "/grd349_&_PBjam/pbjam_&_tests_&_test_asy_peakbag.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test for method to get the radial orders in the asymptotic relation\"\"\"\nnorders = cs.pars['norders']\nnmax = cs.pars['nmax']\nnsamples = cs.pars['nsamples']\nmod = asymp_spec_model(cs.st.f, norders)\nfunc = mod._get_enns\ninp = [nmax, norders]\ninp_arr = [np.array([nmax]).repeat(nsamples), norders]\npbt.does_it_run(func, inp)\npbt.does_it_return(func, inp)\npbt.right_type(func, inp, np.ndarray)\npbt.right_shape(func, inp, (norders,))\npbt.right_shape(func, inp_arr, (nsamples, norders))\nassert_array_equal(func(*inp), [0, 1])\n"
+}

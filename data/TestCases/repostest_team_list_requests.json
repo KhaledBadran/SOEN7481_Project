@@ -1,0 +1,9 @@
+{
+    "functionName": "test_team_list_requests",
+    "className": "TeamTest",
+    "fileName": "/cmsteffen-code_&_PyKBLib/tests_&_test_pykblib_team.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "set_of_users = {random_username() for _ in range(3)}\nrandom_return_value = {self.team.name: set_of_users}\nself.team._keybase.list_requests.return_value = random_return_value\nresponse = self.team.list_requests()\nself.assertEqual(response, set_of_users)\nself.team._keybase.list_requests.assert_called_with(self.team.name)\nself.team.name = random_username()\nrandom_return_value = {self.team.name: set_of_users}\nself.team._keybase.list_requests.return_value = random_return_value\nself.team.list_requests()\nself.team._keybase.list_requests.assert_called_with(self.team.name)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "polynomial",
+    "className": null,
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_models_&_misc_&_simple_equations.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Calculates a property as a polynomial function of a given property\n\n    Parameters\n    ----------\n    target : OpenPNM Object\n        The object for which these values are being calculated.  This\n        controls the length of the calculated array, and also provides\n        access to other necessary thermofluid properties.\n\n    a : array_like\n        A list containing the polynomial coefficients, where element 0 in the\n        list corresponds to a0 and so on.  Note that no entries can be skipped\n        so 0 coefficients must be sent as 0.\n\n    prop : string\n        The dictionary key containing the independent variable or phase\n        property to be used in the polynomial.\n\n    Returns\n    -------\n    value : NumPy ndarray\n        Array containing ``Pn(target[prop])``, where ``Pn`` is nth order\n        polynomial with coefficients stored in ``a``.\n\n    \"\"\"\nx = target[prop]\nvalue = 0.0\nfor i in range(0, len(a)):\n    value += a[i] * x ** i\nreturn value\n"
+}

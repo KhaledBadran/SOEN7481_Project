@@ -1,0 +1,9 @@
+{
+    "functionName": "test_geometry_movement",
+    "className": "TestObjects",
+    "fileName": "/tum-pbs_&_PhiFlow/tests_&_test_objects.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "obstacle = Obstacle(geometry_at(0))\nphys = GeometryMovement(geometry_at)\nobstacle = phys.step(obstacle, dt=2.0)\nself.assertIsInstance(obstacle, Obstacle)\nself.assertAlmostEqual(obstacle.age, 2.0, places=5)\nself.assertAlmostEqual(obstacle.geometry.center[0], 2.0, places=5)\nself.assertAlmostEqual(obstacle.velocity[0], 1.0, places=5)\nobstacle = phys.step(obstacle, dt=2.0)\nself.assertIsInstance(obstacle, Obstacle)\nself.assertAlmostEqual(obstacle.age, 4.0, places=5)\nself.assertAlmostEqual(obstacle.geometry.center[0], 4.0, places=5)\nself.assertAlmostEqual(obstacle.velocity[0], 1.0, places=5)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_unordered_group_with_separator",
+    "className": null,
+    "fileName": "/textX_&_Arpeggio/arpeggio_&_tests_&_test_separators.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "def grammar():\n    return UnorderedGroup('a', 'b', 'c', sep=[',', ';']), EOF\nparser = ParserPython(grammar, reduce_tree=False)\nresult = parser.parse('b , a, c')\nassert result\nresult = parser.parse('b , c; a')\nassert result\nwith pytest.raises(NoMatch):\n    parser.parse('a, b c')\nwith pytest.raises(NoMatch):\n    parser.parse('a, c: a')\nwith pytest.raises(NoMatch):\n    parser.parse('a, b, b; c')\nwith pytest.raises(NoMatch):\n    parser.parse('a, c')\n"
+}

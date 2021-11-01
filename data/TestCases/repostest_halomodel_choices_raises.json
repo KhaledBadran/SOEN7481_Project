@@ -1,0 +1,9 @@
+{
+    "functionName": "test_halomodel_choices_raises",
+    "className": null,
+    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_halomodel.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from pyccl.pyutils import assert_warns\ncosmo = ccl.Cosmology(Omega_c=0.27, Omega_b=0.045, h=0.67, sigma8=0.8, n_s=\n    0.96, transfer_function='bbks', matter_power_spectrum='linear',\n    mass_function='tinker')\na = 0.8\nk = np.geomspace(0.01, 1, 10)\nwith pytest.raises(ValueError):\n    assert_warns(ccl.CCLWarning, ccl.twohalo_matter_power, cosmo, k, a)\n"
+}

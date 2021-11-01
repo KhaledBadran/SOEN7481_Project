@@ -1,0 +1,9 @@
+{
+    "functionName": "test_spec2dobj_update_slit",
+    "className": null,
+    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_spec2dobj.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "spec2DObj1 = spec2dobj.Spec2DObj(**init_dict)\nspec2DObj2 = spec2dobj.Spec2DObj(**init_dict)\nspec2DObj2.det = 2\nwith pytest.raises(pypmsgs.PypeItError):\n    spec2DObj1.update_slits(spec2DObj2)\nspec2DObj2.det = 1\nspec2DObj2.sciimg = spec2DObj1.sciimg.copy() * 2.0\nspec2DObj2.slits.mask[1:] = 1\nspec2DObj1.update_slits(spec2DObj2)\n"
+}

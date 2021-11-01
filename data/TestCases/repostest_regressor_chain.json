@@ -1,0 +1,9 @@
+{
+    "functionName": "test_regressor_chain",
+    "className": "TestSklearn",
+    "fileName": "/microsoft_&_LightGBM/tests_&_python_package_test_&_test_sklearn.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "bunch = load_linnerud(as_frame=True)\nX, y = bunch['data'], bunch['target']\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1,\n    random_state=42)\norder = [2, 0, 1]\nreg = RegressorChain(base_estimator=lgb.LGBMRegressor(n_estimators=10),\n    order=order, random_state=42)\nreg.fit(X_train, y_train)\ny_pred = reg.predict(X_test)\n_, score, _ = mse(y_test, y_pred)\nself.assertGreaterEqual(score, 0.2)\nself.assertLessEqual(score, 120.0)\nself.assertListEqual(order, reg.order_)\nfor regressor in reg.estimators_:\n    self.assertIsInstance(regressor, lgb.LGBMRegressor)\n    self.assertIsInstance(regressor.booster_, lgb.Booster)\nunittest.skipIf(sk_version < '0.23.0', 'scikit-learn version is less than 0.23'\n    )"
+}

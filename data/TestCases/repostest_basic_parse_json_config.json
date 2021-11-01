@@ -1,0 +1,9 @@
+{
+    "functionName": "test_basic_parse_json_config",
+    "className": "TestHelper",
+    "fileName": "/KIDJourney_&_Berserker/tests_&_test_helper.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "mock_open.return_value.read.return_value = (\n    '[{\"method\": \"post\", \"cookies\": {\"ca\": \"cv\", \"cb\": \"cv2\"}, \"data\": {\"key2\": \"value2\", \"key\": \"value\"}, \"url\": \"http://example.com\", \"headers\": {\"name2\": \"value2\", \"name\": \"value\"}, \"request_nums\": 1000, \"concurrency\": 100}]'\n    )\nmock_os.return_value = True\nparser_result = parse_config_file('est')\nassert parser_result == [{'concurrency': 100, 'request_nums': 1000, 'url':\n    'http://example.com', 'method': 'post', 'options': {'cookies': {'ca':\n    'cv', 'cb': 'cv2'}, 'headers': {'name': 'value', 'name2': 'value2'},\n    'data': {'key': 'value', 'key2': 'value2'}}}]\nmock.patch('builtins.open')mock.patch('berserker.helper.os.path.exists')"
+}

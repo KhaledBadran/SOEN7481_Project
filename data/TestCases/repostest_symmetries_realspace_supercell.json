@@ -1,0 +1,9 @@
+{
+    "functionName": "test_symmetries_realspace_supercell",
+    "className": "TestStructureMethods",
+    "fileName": "/mesonepigreco_&_CellConstructor/scripts_&_cellconstructor_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "dyn = self.dynSnSe.Copy()\nfor iq, q in enumerate(dyn.q_tot):\n    dyn.dynmats[iq][:, :] += np.random.uniform(size=np.shape(dyn.dynmats[0]))\ndyn_supercell = dyn.GenerateSupercellDyn(dyn.GetSupercell())\nspg_sym = CC.symmetries.QE_Symmetry(dyn_supercell.structure)\nspg_sym.SetupFromSPGLIB()\nspg_sym.ApplySymmetriesToV2(dyn_supercell.dynmats[0])\ndyn_supercell.ApplySumRule()\nfcq = CC.Phonons.GetDynQFromFCSupercell(dyn_supercell.dynmats[0], np.array(\n    dyn.q_tot), dyn.structure, dyn_supercell.structure)\nnew_dyn = dyn.Copy()\nfor iq, q in enumerate(dyn.q_tot):\n    new_dyn.dynmats[iq] = fcq[(iq), :, :]\ndyn.Symmetrize()\nthreshold = 0.001\nfor iq, q in enumerate(dyn.q_tot):\n    w_spglib, dumb = new_dyn.DyagDinQ(iq)\n    w_standard, dumb = dyn.DyagDinQ(iq)\n    w_spglib *= CC.Units.RY_TO_CM\n    w_standard *= CC.Units.RY_TO_CM\n    self.assertTrue(np.max(np.abs(w_spglib - w_standard)) < threshold)\nrandom_vector = np.zeros(np.shape(dyn.structure.coords), dtype=np.double)\nrandom_vector[:, :] = np.random.uniform(size=np.shape(random_vector))\nrv2 = random_vector.copy()\nqe_sym = CC.symmetries.QE_Symmetry(dyn.structure)\nqe_sym.SetupFromSPGLIB()\nqe_sym.SymmetrizeVector(random_vector)\nqe_sym.SetupQPoint()\nqe_sym.SymmetrizeVector(rv2)\nself.assertTrue(np.sum((random_vector - rv2) ** 2) < 1e-08)\n"
+}

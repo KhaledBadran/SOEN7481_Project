@@ -1,0 +1,9 @@
+{
+    "functionName": "testRoundingWithImpossiblyConstrainedIntRanges",
+    "className": "IntToFloatTransformTest",
+    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_int_to_float_transform.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "parameters = [RangeParameter('x', lower=1, upper=3, parameter_type=\n    ParameterType.INT), RangeParameter('y', lower=1, upper=3,\n    parameter_type=ParameterType.INT)]\nconstrained_int_search_space = SearchSpace(parameters=parameters,\n    parameter_constraints=[SumConstraint(parameters=parameters,\n    is_upper_bound=True, bound=3)])\nt = IntToFloat(search_space=constrained_int_search_space,\n    observation_features=None, observation_data=None)\nself.assertEqual(t.rounding, 'randomized')\nobservation_features = [ObservationFeatures(parameters={'x': 2.6, 'y': 2.6})]\nself.assertFalse(constrained_int_search_space.check_membership(t.\n    untransform_observation_features(observation_features=\n    observation_features)[0].parameters))\n"
+}

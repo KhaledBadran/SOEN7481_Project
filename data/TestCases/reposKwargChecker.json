@@ -1,0 +1,9 @@
+{
+    "functionName": "KwargChecker",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&__tools.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Function to check if given key-word is in the list of accepted Kwargs. If not directly therein, checks capitalization. If still not match raises error\n    with suggestion of closest argument.\n    \n    Args:\n    \n        - func (function): Function to be decorated.\n\n    Raises:\n\n        - AttributeError\n    \"\"\"\ndef KwargCheckerNone(func):\n\n    @functools.wraps(func)\n    def newFunc(*args, **kwargs):\n        argList = extractArgsList(func, newFunc, function, include)\n        checkArgumentList(argList, kwargs)\n        returnval = func(*args, **kwargs)\n        return returnval\n    newFunc._original = func\n    newFunc._include = include\n    newFunc._function = function\n    return newFunc\nreturn KwargCheckerNone\n"
+}

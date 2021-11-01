@@ -1,0 +1,9 @@
+{
+    "functionName": "generate_rules_naively",
+    "className": null,
+    "fileName": "/tommyod_&_Efficient-Apriori/efficient_apriori_&_tests_&_test_rules.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Generate association rules naively, for testing purposes.\n    \"\"\"\ndef proper_subsets(itemset: set):\n    \"\"\"\n        Yield every proper subset of a set.\n        \"\"\"\n    size = range(1, len(itemset))\n    arg = [itertools.combinations(itemset, i) for i in size]\n    yield from itertools.chain(*arg)\ndef count(itemset):\n    \"\"\"\n        Helper function to find the count of an itemset in the transactions.\n        \"\"\"\n    return itemsets[len(itemset)][itemset]\nitemsets_gen = (iset for size in filter(lambda x: x > 1, itemsets.keys()) for\n    iset in itemsets[size].keys())\nfor itemset in itemsets_gen:\n    count_full = count(itemset)\n    for lhs in proper_subsets(itemset):\n        rhs = set(itemset).difference(set(lhs))\n        rhs = tuple(sorted(list(rhs)))\n        rule = Rule(lhs, rhs, count_full, count(lhs), count(rhs),\n            num_transactions)\n        if rule.confidence >= min_confidence:\n            yield rule\n"
+}

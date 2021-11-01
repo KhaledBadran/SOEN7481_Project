@@ -1,0 +1,9 @@
+{
+    "functionName": "test_api_delete_team",
+    "className": "KeybaseAPITest",
+    "fileName": "/cmsteffen-code_&_PyKBLib/tests_&_test_pykblib_api.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "mock_child = mock.MagicMock()\nmock_spawn.return_value = mock_child\nmock_child.expect.side_effect = pexpect.exceptions.EOF('ERROR')\nwith self.assertRaises(APIException):\n    self.api.delete_team('test_team')\nmock_spawn.assert_called_with('keybase team delete test_team')\nmock_child.expect.assert_called_with('WARNING', timeout=10)\nmock_child.expect.side_effect = None\nmock_child.read_nonblocking.side_effect = [b'Failure!', pexpect.exceptions.\n    EOF('ERROR')]\nwith self.assertRaises(APIException):\n    self.api.delete_team('test_team')\nmock_child.sendline.assert_called_with('nuke test_team\\r\\n')\nmock_child.read_nonblocking.assert_called_with(timeout=3)\nmock_child.read_nonblocking.side_effect = [b'Success!', pexpect.exceptions.\n    EOF('EOF')]\nself.api.delete_team('test_team')\nmock.patch('pykblib.api.pexpect.spawn')"
+}

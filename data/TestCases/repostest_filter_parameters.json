@@ -1,0 +1,9 @@
+{
+    "functionName": "test_filter_parameters",
+    "className": "TestCommunication",
+    "fileName": "/funilrys_&_PyTravisCI/tests_&_core_&_test_communication.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test of :meth:`PyTravisCI.communication.Communication.filter_parameters`.\n        \"\"\"\ncomm = Communication(self.root)\ncomm._parameters = {'hello': 'world', 'world': 'hello', 'repo':\n    'example.org/test', 'formatted_respo': 'example.org%2Ftest'}\nexpected = {'hello': 'world', 'world': 'hello', 'repo': 'example.org/test',\n    'formatted_respo': 'example.org%2Ftest'}\ncomm.filter_parameters({'test': 'world'})\nself.assertEqual(expected, comm._parameters)\nexpected = {'hello': 'world', 'world': 'world', 'repo': 'example.org/test',\n    'formatted_respo': 'example.org%2Ftest'}\ncomm.filter_parameters({'world': 'world'})\nself.assertEqual(expected, comm._parameters)\nself.assertRaises(ValueError, comm.filter_parameters, 1)\n"
+}

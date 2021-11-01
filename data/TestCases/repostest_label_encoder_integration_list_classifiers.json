@@ -1,0 +1,9 @@
+{
+    "functionName": "test_label_encoder_integration_list_classifiers",
+    "className": null,
+    "fileName": "/Menelau_&_DESlib/deslib_&_tests_&_test_des_integration.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "rng = np.random.RandomState(123456)\nX_dsel, X_test, X_train, y_dsel, y_test, y_train = load_dataset(encode_labels\n    =['no', 'yes'], rng=rng)\npool_classifiers = [LogisticRegression(), SVC(probability=True)]\n[clf.fit(X_train, y_train) for clf in pool_classifiers]\nknorau = KNORAU(pool_classifiers)\nknorau.fit(X_dsel, y_dsel)\nthis_score = knorau.score(X_test, y_test)\nassert np.isclose(this_score, 0.9574468085106383)\n"
+}

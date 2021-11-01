@@ -1,0 +1,9 @@
+{
+    "functionName": "test_input_sizes",
+    "className": null,
+    "fileName": "/Puumanamana_&_CoCoNet/tests_&_test_config.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Check if input sizes are correct\n    \"\"\"\ncfg = Configuration()\ncfg.init_config(output='test123', kmer=4, no_rc=False, fragment_length=10,\n    wsize=4, wstep=2)\ncfg.io['filt_h5'] = generate_h5_file(10)\ninput_shapes = {'composition': 136, 'coverage': (4, 2)}\nauto_shapes = cfg.get_input_shapes()\ncfg.io['filt_h5'].unlink()\nassert input_shapes == auto_shapes\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_invalid_attribute",
+    "className": "TestNewAttribute",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_new_attribute.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a TypeError is raised when an invalid value is used to\n        create a NewAttribute object. Note that the value is not a valid\n        PyKMIP object derived from Base and therefore cannot be an attribute.\n        \"\"\"\nkwargs = {'attribute': 'invalid'}\nself.assertRaisesRegex(TypeError,\n    'The attribute must be a Base object, not a {}.'.format(type('invalid')\n    ), objects.NewAttribute, **kwargs)\nargs = objects.NewAttribute(), 'attribute', 'invalid'\nself.assertRaisesRegex(TypeError,\n    'The attribute must be a Base object, not a {}.'.format(type('invalid')\n    ), setattr, *args)\n"
+}

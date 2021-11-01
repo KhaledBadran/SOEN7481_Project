@@ -1,0 +1,9 @@
+{
+    "functionName": "test_add_to_zip_copy_function",
+    "className": null,
+    "fileName": "/alex-ber_&_AlexBerUtils/tests_&_utils_&_deploys_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "logger.info(f'{request._pyfuncitem.name}()')\nsplit_dirname = 'ymlparsers'\npck = '.'.join(['tests_data', __package__, 'ymlparsers'])\nwith path(pck, 'config.yml') as full_path:\n    with tempfile.TemporaryDirectory() as temp_dir:\n        local_folder = Path(temp_dir)\n        zip_path = local_folder / 'my.zip'\n        with zipfile.ZipFile(zip_path, mode='w') as zf:\n            shutil.copytree(str(full_path.parent), str(local_folder /\n                'xxxirrelevantxxx'), ignore=shutil.ignore_patterns(\n                '__pycache__', 'venv', 'logs', '*.pyc', 'tmp*', '.*',\n                '__init__.py'), copy_function=add_to_zip_copy_function(\n                split_dirname=split_dirname, zf=zf), symlinks=True,\n                ignore_dangling_symlinks=True)\n        with zipfile.ZipFile(zip_path, mode='r') as zf:\n            entry_path = (Path(split_dirname) / 'config.yml').as_posix()\n            entry_content_bytes = zf.read(str(entry_path))\n            with ymlparsers.DisableVarSubst():\n                default_d = ymlparsers.load([entry_content_bytes.decode(\n                    'utf-8')])\n    check_config_yml(default_d, exp_config_d)\npytest.mark.yml"
+}

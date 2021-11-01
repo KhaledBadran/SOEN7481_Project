@@ -1,0 +1,9 @@
+{
+    "functionName": "test_create_condition_df",
+    "className": null,
+    "fileName": "/PEtab-dev_&_PEtab/tests_&_test_conditions.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test conditions.create_condition_df.\"\"\"\nparameter_ids = ['par1', 'par2', 'par3']\ncondition_ids = ['condition1', 'condition2']\ndf = petab.create_condition_df(parameter_ids, condition_ids)\nexpected = pd.DataFrame(data={CONDITION_ID: ['condition1', 'condition2'],\n    'par1': [np.nan, np.nan], 'par2': [np.nan, np.nan], 'par3': [np.nan, np\n    .nan]}).set_index(CONDITION_ID)\nassert ((df == expected) | df.isna() == expected.isna()).all().all()\n"
+}

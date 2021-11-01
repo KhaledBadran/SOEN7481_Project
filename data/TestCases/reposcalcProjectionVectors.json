@@ -1,0 +1,9 @@
+{
+    "functionName": "calcProjectionVectors",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_Sample.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "r1 = R1[:3]\nr2 = R2[:3]\nif not norm is None:\n    NV = norm\nelse:\n    NV = np.cross(r1, r2)\nNV /= np.linalg.norm(NV)\nZeros = np.isclose(NV, 0.0)\nif np.sum(Zeros) == 3:\n    raise AttributeError('The two plane vectors are equivalen, {}, {}!'.\n        format(r1, r2))\nif np.sum(Zeros) == 2 or np.sum(Zeros) == 1:\n    if Zeros[0] == True:\n        V1 = np.array([1.0, 0.0, 0.0])\n        V2 = np.cross(NV, V1)\n    elif Zeros[1]:\n        V1 = np.array([0.0, 1.0, 0.0])\n        V2 = np.cross(NV, V1)\n    else:\n        V1 = np.array([0.0, 0.0, 1.0])\n        V2 = np.cross(NV, V1)\nelse:\n    V1 = r1\n    V2 = r2\nV1 = _tools.LengthOrder(V1)\nV2 = _tools.LengthOrder(V2)\nreturn V1, V2\n"
+}

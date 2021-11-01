@@ -1,0 +1,9 @@
+{
+    "functionName": "test_new_node_attr",
+    "className": null,
+    "fileName": "/Silmathoron_&_NNGT/testing_&_test_basics.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test node creation with attributes.\n    \"\"\"\nshape = nngt.geometry.Shape.rectangle(1000.0, 1000.0)\ng = nngt.SpatialGraph(100, shape=shape, name='new_node_spatial')\nassert g.node_nb(\n    ) == 100, \"Error on '{}': invalid initial nodes ({} vs {} expected).\".format(\n    g.name, g.node_nb(), 100)\nn = g.new_node(positions=[(0, 0)])\nassert np.all(np.isclose(g.get_positions(n), (0, 0), tolerance)\n    ), \"Error on '{}': last position is ({}, {}) vs (0, 0) expected.\".format(g\n    .name, *g.get_positions(n))\n"
+}

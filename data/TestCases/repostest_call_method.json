@@ -1,0 +1,9 @@
+{
+    "functionName": "test_call_method",
+    "className": "RPCTestCase",
+    "fileName": "/wo1fsea_&_PyEasyRPC/tests_&_test_rpc.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "instance0 = TestInstance()\ninstance1 = TestInstance()\nclient0 = RPCClient('TestInstance', instance0.service_uuid)\nrpc_uuid0, expire_time0 = client0.set_call_method_request('add', (1, 2), {})\nclient1 = RPCClient('TestInstance', instance1.service_uuid)\nrpc_uuid1, expire_time1 = client1.set_call_method_request('add', (1, 2), {})\nself.assertEqual(client0.get_methods(), instance0.rpc_methods)\nwhile instance0.process():\n    pass\nwhile instance1.process():\n    pass\nself.assertEqual(client0.get_call_method_result_with_uuid(rpc_uuid0,\n    expire_time0).get('return_value'), 3)\nself.assertEqual(client1.get_call_method_result_with_uuid(rpc_uuid1,\n    expire_time1).get('return_value'), 3)\ninstance0.unregister()\ninstance1.unregister()\n"
+}

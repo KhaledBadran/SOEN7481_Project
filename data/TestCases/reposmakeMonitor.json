@@ -1,0 +1,9 @@
+{
+    "functionName": "makeMonitor",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Geometry_&_Instrument.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "control = entry.create_group('control')\ncontrol.attrs['NX_class'] = np.string_('NXmonitor')\nmons = [10000] * Numpoints\ncontrol.create_dataset('data', data=mons, dtype='int32')\ndset = control.create_dataset('preset', (1,), dtype='int32')\ndset[0] = 10000\ndset = control.create_dataset('mode', (1,), dtype='S70')\ndset[0] = b'monitor'\ntime = [36.87] * Numpoints\ncontrol.create_dataset('time', data=time, dtype='float32')\ntime = [36.87 * 1000000000.0] * Numpoints\ncontrol.create_dataset('absolut_time', data=time, dtype='float32')\npb = entry.create_group('proton_beam')\npb.attrs['NX_class'] = np.string_('NXmonitor')\nvals = [0] * Numpoints\ndset = pb.create_dataset('data', data=vals, dtype='int32')\n"
+}

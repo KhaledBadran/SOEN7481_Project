@@ -1,0 +1,9 @@
+{
+    "functionName": "test_remap_link_target",
+    "className": null,
+    "fileName": "/PlaidWeb_&_Publ/tests_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" test the target remapper \"\"\"\napp = flask.Flask('tests', static_folder='feedme')\nwith app.test_request_context('https://feed.me/blah/merry'):\n    assert utils.remap_link_target('@fred') == '/feedme/fred'\n    assert utils.remap_link_target('@fred', absolute=True\n        ) == 'https://feed.me/feedme/fred'\n    assert utils.remap_link_target('daphne') == 'daphne'\n    assert utils.remap_link_target('daphne', absolute=True\n        ) == 'https://feed.me/blah/daphne'\n"
+}

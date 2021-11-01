@@ -1,0 +1,9 @@
+{
+    "functionName": "test_assert_noise_distributions_valid",
+    "className": null,
+    "fileName": "/PEtab-dev_&_PEtab/tests_&_test_lint.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "observable_df = pd.DataFrame(data={OBSERVABLE_ID: ['0obsPar1noisePar',\n    '2obsPar0noisePar'], NOISE_PARAMETERS: ['', ''], NOISE_DISTRIBUTION: [\n    '', '']})\nobservable_df.set_index([OBSERVABLE_ID], inplace=True)\nlint.assert_noise_distributions_valid(observable_df)\nobservable_df[OBSERVABLE_TRANSFORMATION] = [LIN, LOG]\nobservable_df[NOISE_DISTRIBUTION] = [NORMAL, '']\nlint.assert_noise_distributions_valid(observable_df)\nobservable_df[NOISE_DISTRIBUTION] = ['Normal', '']\nwith pytest.raises(ValueError):\n    lint.assert_noise_distributions_valid(observable_df)\nobservable_df.drop(columns=NOISE_DISTRIBUTION, inplace=True)\nlint.assert_noise_distributions_valid(observable_df)\n"
+}

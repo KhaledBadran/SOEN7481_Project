@@ -1,0 +1,9 @@
+{
+    "functionName": "test_big_u_unicode_escapes",
+    "className": null,
+    "fileName": "/textX_&_Arpeggio/arpeggio_&_tests_&_regressions_&_issue_32_&_test_issue_32.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "assert check_parser(\"'\\\\U00000041'\", 'A')\nassert check_parser(\"'\\\\U0000004A'\", 'J')\nassert check_parser(\"'\\\\U0000004a'\", 'J')\nassert check_parser(\"'\\\\U________'\", '\\\\U________')\nassert check_parser(\"'\\\\U1_______'\", '\\\\U1_______')\nassert check_parser(\"'\\\\U41______'\", '\\\\U41______')\nassert check_parser(\"'\\\\U041_____'\", '\\\\U041_____')\nassert check_parser(\"'\\\\U0041____'\", '\\\\U0041____')\nassert check_parser(\"'\\\\U00041___'\", '\\\\U00041___')\nassert check_parser(\"'\\\\U000041__'\", '\\\\U000041__')\nassert check_parser(\"'\\\\U0000041_'\", '\\\\U0000041_')\nassert check_parser(\"'\\\\U000000411'\", 'A1')\nwith pytest.raises(arpeggio.GrammarError):\n    check_parser(\"'\\\\U00110000'\", '?')\n"
+}

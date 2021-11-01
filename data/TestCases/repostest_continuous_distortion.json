@@ -1,0 +1,9 @@
+{
+    "functionName": "test_continuous_distortion",
+    "className": null,
+    "fileName": "/apetri_&_LensTools/lenstools_&_tests_&_test_ray.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "image_unlensed = plt.imread(os.path.join(dataExtern(), 'lensing/lens.png'))[:,\n    :, (0)]\npos_original = np.array(np.where(image_unlensed > 0)\n    ) * 2.0 / image_unlensed.shape[0] * deg\npos_original = np.roll(pos_original, 1, axis=0)\npos_original[1] *= -1\npos_original[1] += 2.0 * deg\npos_apparent = tracer.shootForward(pos_original, z=2.0, save_intermediate=True)\nfig, ax = plt.subplots(2, 5, figsize=(40, 16))\nfor i in range(2):\n    for j in range(5):\n        ax[i, j].scatter(pos_apparent[(5 * i + j) * 4, 0], pos_apparent[(5 *\n            i + j) * 4, 1])\n        ax[i, j].set_xlabel('$x$({0})'.format(pos_original.unit.to_string()))\n        ax[i, j].set_ylabel('$y$({0})'.format(pos_original.unit.to_string()))\n        ax[i, j].set_title('z={0:.2f}'.format(tracer.redshift[(5 * i + j) * 4])\n            )\nfig.tight_layout()\nfig.savefig('lens_distortion_continuous.png')\nfig, ax = plt.subplots()\nscatterplot = ax.scatter(pos_original[0], pos_original[1])\nax.set_xlabel('$x$({0})'.format(pos_original.unit.to_string()))\nax.set_ylabel('$y$({0})'.format(pos_original.unit.to_string()))\nfor n in range(pos_apparent.shape[0]):\n    scatterplot.set_offsets(pos_apparent[n].transpose())\n    ax.set_title('z={:.2f}'.format(tracer.redshift[n]))\n    fig.savefig('distortion{0}.png'.format(n))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_server_ttl_config_address",
+    "className": null,
+    "fileName": "/daveisadork_&_PyDevNS/tests_&_test_server.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "server.config.address = address\nwith patch('devns.server.DevNS._get_address_by_ifconfig') as ifconfig:\n    assert server.address == address\n    assert server._encoded_address == encoded_address\n    assert server._address_age == 0\n    ifconfig.assert_not_called()\npytest.mark.parametrize('address, encoded_address', [('0.0.0.0',\n    b'\\x00\\x00\\x00\\x00'), ('127.0.0.1', b'\\x7f\\x00\\x00\\x01'), ('1.2.3.4',\n    b'\\x01\\x02\\x03\\x04')])"
+}

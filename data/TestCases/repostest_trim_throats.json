@@ -1,0 +1,9 @@
+{
+    "functionName": "test_trim_throats",
+    "className": "TopotoolsTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_topotools_&_TopotoolsTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "np.random.seed(1)\npn = op.network.Cubic(shape=[2, 2, 2], spacing=5)\nPs = pn.pores()[:4]\nTs1 = pn.find_neighbor_throats(pores=Ps, mode='or')\ngeo1 = op.geometry.GenericGeometry(network=pn, pores=Ps, throats=Ts1)\nPs = pn.pores()[4:]\nTs2 = pn.find_neighbor_throats(pores=Ps, mode='xnor')\ngeo2 = op.geometry.GenericGeometry(network=pn, pores=Ps, throats=Ts2)\ngeo1['throat.random'] = np.random.random(geo1.Nt)\ngeo2['throat.random'] = np.random.random(geo2.Nt)\ntrimmers = pn['throat.random'] < 0.25\ntopotools.trim(pn, throats=pn.throats()[trimmers])\nassert ~np.any(pn['throat.random'] < 0.25)\n"
+}

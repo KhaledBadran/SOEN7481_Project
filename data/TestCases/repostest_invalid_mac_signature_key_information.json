@@ -1,0 +1,9 @@
+{
+    "functionName": "test_invalid_mac_signature_key_information",
+    "className": "TestKeyWrappingSpecification",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a TypeError is raised when an invalid value is used to set\n        the MAC/signature key information of a KeyWrappingSpecification\n        struct.\n        \"\"\"\nkwargs = {'mac_signature_key_information': 'invalid'}\nself.assertRaisesRegex(TypeError,\n    'MAC/signature key information must be an MACSignatureKeyInformation struct.'\n    , objects.KeyWrappingSpecification, **kwargs)\nargs = objects.KeyWrappingSpecification(\n    ), 'mac_signature_key_information', 'invalid'\nself.assertRaisesRegex(TypeError,\n    'MAC/signature key information must be an MACSignatureKeyInformation struct.'\n    , setattr, *args)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_when_hyperparams_should_save_checkpoint_pickle",
+    "className": null,
+    "fileName": "/Neuraxio_&_Neuraxle/testing_&_test_pickle_checkpoint_step.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tape = TapeCallbackFunction()\npickle_checkpoint_step = DefaultCheckpoint()\npipeline = create_pipeline(tmpdir, pickle_checkpoint_step, tape,\n    HyperparameterSamples({'a__learning_rate': 1}))\npipeline, actual_data_inputs = pipeline.fit_transform(data_inputs,\n    expected_outputs)\nactual_tape = tape.get_name_tape()\nassert np.array_equal(actual_data_inputs, data_inputs)\nassert actual_tape == ['1', '2', '3']\nassert os.path.exists(os.path.join(tmpdir, 'ResumablePipeline',\n    'pickle_checkpoint', 'di', '44f9d6dd8b6ccae571ca04525c3eaffa.pickle'))\nassert os.path.exists(os.path.join(tmpdir, 'ResumablePipeline',\n    'pickle_checkpoint', 'di', '898a67b2f5eeae6393ca4b3162ba8e3d.pickle'))\nassert os.path.exists(os.path.join(tmpdir, 'ResumablePipeline',\n    'pickle_checkpoint', 'eo', '44f9d6dd8b6ccae571ca04525c3eaffa.pickle'))\nassert os.path.exists(os.path.join(tmpdir, 'ResumablePipeline',\n    'pickle_checkpoint', 'eo', '898a67b2f5eeae6393ca4b3162ba8e3d.pickle'))\n"
+}

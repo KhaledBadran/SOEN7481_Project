@@ -1,0 +1,9 @@
+{
+    "functionName": "test_auth",
+    "className": null,
+    "fileName": "/zeaphoo_&_cocopot_&_/tests_&_test_request.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "user, pwd = 'marc', 'secret'\nbasic = to_unicode(base64.b64encode(to_bytes('%s:%s' % (user, pwd))))\nenv = dict(copy.deepcopy(env1))\nr = Request(env)\nassert r.authorization == None\nenv['HTTP_AUTHORIZATION'] = 'basic %s' % basic\nr = Request(env)\nassert r.authorization == (user, pwd)\n"
+}

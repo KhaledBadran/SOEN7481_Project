@@ -1,0 +1,9 @@
+{
+    "functionName": "test_watch__stale",
+    "className": null,
+    "fileName": "/heston_&_firebase-live-data/tests_&_test_watcher.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "is_stale = mocker.Mock()\nis_stale.side_effect = [False, False, True]\nupdate = mocker.Mock()\ninterval = timedelta(seconds=0.001)\nwatcher.watch('test_watcher', is_stale, update, interval=interval)\ntime.sleep(0.1)\nwatcher.cancel('test_watcher')\nassert is_stale.call_count == 4\nassert update.called is True\n"
+}

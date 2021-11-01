@@ -1,0 +1,9 @@
+{
+    "functionName": "test_reparametrize",
+    "className": null,
+    "fileName": "/apetri_&_LensTools/lenstools_&_tests_&_test_constraints.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "emulator = Emulator.read('analysis.pkl')\nOm = emulator['parameters', 'Om'].values\nw = emulator['parameters', 'w'].values\nsi8 = emulator['parameters', 'si8'].values\nemulator = emulator.reparametrize(lambda p: pd.Series([p['w'], p['si8'] * p\n    ['Om'] ** 0.5], index=['w', 'Si8']))\nassert (emulator['parameters', 'w'] == w).all()\nassert (emulator['parameters', 'Si8'] == si8 * Om ** 0.5).all()\n"
+}

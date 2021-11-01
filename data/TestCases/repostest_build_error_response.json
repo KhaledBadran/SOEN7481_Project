@@ -1,0 +1,9 @@
+{
+    "functionName": "test_build_error_response",
+    "className": "TestKmipEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a bare bones response containing a single error result can\n        be constructed correctly.\n        \"\"\"\ne = engine.KmipEngine()\ne._logger = mock.MagicMock()\nresponse = e.build_error_response(contents.ProtocolVersion(1, 1), enums.\n    ResultReason.GENERAL_FAILURE, 'A general test failure occurred.')\nself.assertIsInstance(response, messages.ResponseMessage)\nheader = response.response_header\nself.assertEqual(contents.ProtocolVersion(1, 1), header.protocol_version)\nself.assertIsNotNone(header.time_stamp)\nself.assertIsNotNone(header.batch_count)\nself.assertEqual(1, header.batch_count.value)\nbatch = response.batch_items\nself.assertEqual(1, len(batch))\nbatch_item = batch[0]\nself.assertIsNone(batch_item.operation)\nself.assertIsNone(batch_item.unique_batch_item_id)\nself.assertEqual(enums.ResultStatus.OPERATION_FAILED, batch_item.\n    result_status.value)\nself.assertEqual(enums.ResultReason.GENERAL_FAILURE, batch_item.\n    result_reason.value)\nself.assertEqual('A general test failure occurred.', batch_item.\n    result_message.value)\nself.assertIsNone(batch_item.async_correlation_value)\nself.assertIsNone(batch_item.response_payload)\nself.assertIsNone(batch_item.message_extension)\n"
+}

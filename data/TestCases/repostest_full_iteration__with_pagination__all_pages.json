@@ -1,0 +1,9 @@
+{
+    "functionName": "test_full_iteration__with_pagination__all_pages",
+    "className": null,
+    "fileName": "/mobidevke_&_PyFineract/tests_&_test_pagination.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "request_handler = RequestHandler('a', 'b', 'https://localhost', 'default', \n    10, 5)\nmocker.patch.object(requests.Session, 'send', new=fake_handler2)\npaginated_list = PaginatedList(FineractObject, request_handler, '/', {})\ncount = 0\nwhile paginated_list.has_next():\n    for _ in paginated_list:\n        count += 1\n    paginated_list.get_next()\nassert count == 10\n"
+}

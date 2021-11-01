@@ -1,0 +1,9 @@
+{
+    "functionName": "test_crop_and_label_pots_1_image_size_thresholding",
+    "className": "TestOutputs",
+    "fileName": "/MarniTausen_&_Greenotyper/test_sample.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.PL.open_image('sample_data/Cam41/Cam41_MT20180616113420_C39_69.jpg')\nself.PL.infer_network_on_image()\nself.PL.identify_group()\nself.PL.color_correction()\nself.PL.measure_size = True, 'test_outputs'\nself.PL.mask_output = True, 'test_outputs'\nself.PL.crop_output = True, 'test_outputs'\n_file = open('test_outputs/database.size.csv', 'w')\n_file.write('')\n_file.close()\nself.PL.crop_and_label_pots()\nself.PL.organize_output('test_outputs/database.size.csv',\n    'test_outputs/sizes.csv')\nTrue_results = {'Time': '2018/06/16 - 11:34', '2171': '142874', '2172':\n    '11876', '2173': '146116', '2174': '80369', '2175': '91804', '2191':\n    '16865', '2192': '128383', '2193': '9830', '2194': '109220', '2195':\n    '87013'}\n_file = open('test_outputs/sizes.csv')\nheader = _file.readline().replace('\\n', '').split(',')\ndataline = _file.readline().replace('\\n', '').split(',')\nresults = {}\nfor name, data in zip(header, dataline):\n    results[name] = data\nfor name in header:\n    self.assertEqual(results[name], True_results[name])\n"
+}

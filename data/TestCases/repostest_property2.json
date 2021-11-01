@@ -1,0 +1,9 @@
+{
+    "functionName": "test_property2",
+    "className": "Test",
+    "fileName": "/fabioz_&_PyDev.Debugger/tests_runfiles_&_test_pydevd_property.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test case to validate custom property\n        \"\"\"\nclass TestProperty(object):\n\n    def __init__(self):\n        self._get = 0\n        self._set = 0\n        self._del = 0\n\n    def name(self):\n        self._get += 1\n        return self.__name\n    name = property(name)\n\n    def set_name(self, value):\n        self._set += 1\n        self.__name = value\n    name.setter(set_name)\n\n    def del_name(self):\n        self._del += 1\n        del self.__name\n    name.deleter(del_name)\ntestObj = TestProperty()\nself._check(testObj)\n"
+}

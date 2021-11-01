@@ -1,0 +1,9 @@
+{
+    "functionName": "check_field_list",
+    "className": "GetFieldListTestCase",
+    "fileName": "/mzy2240_&_ESA/tests_&_test_saw.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Helper to check a returned field list DataFrame.\"\"\"\nself.assertIsInstance(field_list, pd.DataFrame)\nactual = field_list.columns.to_numpy().tolist()\nnew = False\nold = False\ntry:\n    self.assertEqual(saw_14.FIELD_LIST_COLUMNS, actual)\nexcept AssertionError:\n    new = True\ntry:\n    self.assertEqual(saw_14.FIELD_LIST_COLUMNS_OLD, actual)\nexcept AssertionError as e2:\n    old = True\nif new and old:\n    raise AssertionError('Valid columns:\\n{}\\n{}\\nReceived:{}'.format(\n        saw_14.FIELD_LIST_COLUMNS, saw_14.FIELD_LIST_COLUMNS_OLD, actual))\npd.testing.assert_frame_equal(field_list, field_list.sort_values(by=[\n    'internal_field_name']))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_evaluate_2d_data",
+    "className": null,
+    "fileName": "/NASA_&_MLMCPy/tests_&_model_&_test_ModelFromData.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test ability to evaluate two dimensional data.\n    \"\"\"\ndata_model = ModelFromData(input_data_file_2d, output_data_file_2d, 1.0)\ninput_data = np.genfromtxt(input_data_file_2d)\noutput_data = np.genfromtxt(output_data_file_2d)\nmodel_output = data_model.evaluate(input_data[index])\ntrue_output = output_data[index]\nassert np.all(np.isclose(model_output, true_output))\npytest.mark.parametrize('index', [0, 2, 3])"
+}

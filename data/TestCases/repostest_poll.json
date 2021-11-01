@@ -1,0 +1,9 @@
+{
+    "functionName": "test_poll",
+    "className": "TestPlugin",
+    "fileName": "/tutorgen_&_HPIT-python-client/tests_&_hpitclient_&_test_plugin.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Plugin._poll() Test plan:\n            -ensure we get something from server\n        \"\"\"\nhttpretty.register_uri(httpretty.GET,\n    'https://www.hpit-project.org/plugin/message/list', body='{\"messages\":\"4\"}'\n    )\nhttpretty.register_uri(httpretty.POST,\n    'https://www.hpit-project.org/plugin/subscribe', body='')\nself.test_plugin = Plugin('test_name', None)\nself.test_plugin._poll().should_not.equal(None)\nhttpretty.activate"
+}

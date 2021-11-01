@@ -1,0 +1,9 @@
+{
+    "functionName": "test_transcript_snp",
+    "className": "TestSNPCalling",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_snp.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "fasta = os.path.join(self.test_folder, 'NC_007795.1.fa')\ngen_file(fasta, self.example.fasta)\nsnp_folder = os.path.join(self.test_folder,\n    'compare_related_and_reference_genomes/SNP_raw_outputs/test')\nos.mkdir(snp_folder)\nsnp = os.path.join(snp_folder, 'test_with_BAQ_NC_007795.1.vcf')\ngen_file(snp, self.example.snp)\nargs = self.mock_args.mock()\nargs.depth = 5\nargs.fraction = 0.3\nargs.quality = 2\nargs.depth_s = 'n_10'\nargs.depth_b = 'a_2'\nargs.dp4_sum = 'n_10'\nargs.dp4_frac = 0.5\nargs.idv = 'n_10'\nargs.imf = 0.5\nargs.filters = ['VDB_s0.1']\nargs.min_sample = 2\nos.mkdir(os.path.join(self.test_folder,\n    'compare_related_and_reference_genomes/seqs/with_BAQ/test'))\ndepth_file = os.path.join(self.test_folder, 'tmp_depthNC_007795.1')\ngen_file(depth_file, self.example.depth_file)\nbam_datas = [{'sample': 'NC_007795.1', 'bam_number': 1, 'bams': 'test',\n    'rep': 1}]\nself.snp._transcript_snp(fasta, 'test', 'with', 'test', bam_datas, self.\n    table, args)\ndatas = import_data(os.path.join(self.test_folder,\n    'compare_related_and_reference_genomes/statistics/stat_test_with_BAQ_NC_007795.1_SNP_best.csv'\n    ))\nprint('\\n'.join(datas))\nself.assertEqual('\\n'.join(datas), self.example.out_stat)\ndatas = import_data(os.path.join(self.test_folder,\n    'compare_related_and_reference_genomes/seqs/with_BAQ/test/test_NC_007795.1_NC_007795.1_1_1.fa'\n    ))\nself.assertEqual('\\n'.join(datas), \"\"\">NC_007795.1\nAaTTGaaTCCCGAACGACAGTTAT\"\"\")\nos.remove('test_NC_007795.1_seq_reference.csv')\nos.remove('test_NC_007795.1_best.vcf')\nos.remove('test_NC_007795.1_NC_007795.1_SNP_QUAL_best.png')\nos.remove('test_NC_007795.1_NC_007795.1_SNP_QUAL_raw.png')\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "fd_setup",
+    "className": null,
+    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_engine_&_tests_&_test_cluster.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "basename = os.path.dirname(__file__)\ncache_dir = check_cache()\nnp.random.seed(1)\ndata_dir = os.path.join(basename, '..', '..', 'data', 'ds_001', 'raw')\nn_features = 110000\nfe = FeatureVectorizer(cache_dir=cache_dir, mode='w')\ndsid = fe.setup(n_features=n_features, use_hashing=False, stop_words=\n    'english', min_df=0.1, max_df=0.9)\nfe.ingest(data_dir, file_pattern='.*\\\\d.txt')\nlsi = _LSIWrapper(cache_dir=cache_dir, parent_id=dsid, mode='w')\nlsi.fit_transform(n_components=6)\nreturn cache_dir, dsid, fe.filenames_, lsi.mid\n"
+}

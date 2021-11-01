@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gen_recordings_with_spiketrains",
+    "className": "TestGenerators",
+    "fileName": "/alejoe91_&_MEArec/MEArec_&_tests_&_test_generators.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "print('Test recording generation - from spiketrains')\nrec_params = mr.get_default_recordings_params()\nsp_params = rec_params['spiketrains']\nsp_params['n_exc'] = 2\nsp_params['n_inh'] = 1\nsp_params['duration'] = 5\nspgen = mr.gen_spiketrains(sp_params)\nrecgen = mr.gen_recordings(params=rec_params, spgen=spgen, tempgen=self.\n    tempgen, verbose=False)\nfor st, st_ in zip(spgen.spiketrains, recgen.spiketrains):\n    assert np.allclose(st.times.magnitude, st_.times.magnitude)\ndel recgen\n"
+}

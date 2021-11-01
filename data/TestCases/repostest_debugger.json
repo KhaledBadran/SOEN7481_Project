@@ -1,0 +1,9 @@
+{
+    "functionName": "test_debugger",
+    "className": null,
+    "fileName": "/BTaskaya_&_Arkhe/test_arkhe.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "stream = StringIO()\nadb = ADB(stream)\nadb.run_cmd('LOAD 00 00 04; LOAD 01 01 F4; MUL 00 01 02')\nadb.run_cmd('eval 2')\nassert adb.vm.counter == 10\nassert adb.vm.registers[0] == 4 and adb.vm.registers[1] == 500\nassert adb.vm.registers[2] == 0\nadb.run_cmd('eval 1')\nassert adb.vm.registers[2] == 2000\n"
+}

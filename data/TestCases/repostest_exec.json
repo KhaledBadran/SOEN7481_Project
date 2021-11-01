@@ -1,0 +1,9 @@
+{
+    "functionName": "test_exec",
+    "className": "TestATRE",
+    "fileName": "/ChristianVisintin_&_ATtila/tests_&_test_atre.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.atre = ATRuntimeEnvironment(True)\nwith self.assertRaises(ATREUninitializedError):\n    self.atre.exec('AT;;OK')\nself.atre.configure_virtual_communicator('virtualAdapter', 115200, 10,\n    '\\r\\n', read_callback, write_callback, in_waiting)\nself.atre.open_serial()\nself.atre.exec('AT;;OK;;100')\nwith self.assertRaises(ATRuntimeError):\n    self.atre.exec('AT;;NOK')\nself.atre.exec('PRINT Foobar')\nwith self.assertRaises(ATRuntimeError):\n    self.atre.exec('GETENV aaaaaaaaaaa')\nself.assertIsNone(self.atre.exec(''))\nself.atre.close_serial()\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_initialize_states",
+    "className": null,
+    "fileName": "/viebboy_&_PyGOP/test_&_utility_&_test_misc.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tmp_dir = tmpdir.dirname\nmodel_name = 'test_model'\nif os.path.exists(os.path.join(tmpdir.dirname, model_name)):\n    shutil.rmtree(os.path.join(tmpdir.dirname, model_name))\nos.mkdir(os.path.join(tmpdir.dirname, model_name))\nparameters = {'tmp_dir': tmp_dir, 'model_name': model_name, 'use_bias': \n    True, 'output_activation': None, 'input_dim': INPUT_DIM, 'output_dim':\n    OUTPUT_DIM}\ntrain_states = misc.initialize_states(parameters, 'hemlgop')\ntrain_states_file = os.path.join(tmp_dir, model_name, 'train_states.pickle')\nwith open(train_states_file, 'wb') as fid:\n    pickle.dump(train_states, fid)\nassert train_states == misc.initialize_states(parameters, 'hemlgop')\nshutil.rmtree(os.path.join(tmpdir.dirname, model_name))\nwith pytest.raises(OSError):\n    misc.initialize_states(parameters, 'hemlgop')\n"
+}

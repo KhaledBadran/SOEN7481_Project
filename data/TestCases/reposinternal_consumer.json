@@ -1,0 +1,9 @@
+{
+    "functionName": "internal_consumer",
+    "className": null,
+    "fileName": "/Drakkar-Software_&_OctoBot-Channels/tests_&_test_consumer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "class TestInternalConsumer(InternalConsumer):\n\n    async def perform(self, kwargs):\n        pass\nclass TestChannel(Channel):\n    PRODUCER_CLASS = EmptyTestProducer\n    CONSUMER_CLASS = TestInternalConsumer\ndel_chan(TEST_CHANNEL)\nawait create_channel_instance(TestChannel, set_chan)\nproducer = EmptyTestProducer(get_chan(TEST_CHANNEL))\nawait producer.run()\nyield TestInternalConsumer()\nawait get_chan(TEST_CHANNEL).stop()\npytest.yield_fixture()"
+}

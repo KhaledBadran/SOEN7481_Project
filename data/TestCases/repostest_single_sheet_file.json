@@ -1,0 +1,9 @@
+{
+    "functionName": "test_single_sheet_file",
+    "className": "TestSheet",
+    "fileName": "/pyexcel_&_Flask-Excel/tests_&_test_database_io.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "array = [['id', 'name'], [1, 'News'], [2, 'Sports']]\nfor upload_file_type in ['xls', 'ods']:\n    with app.app_context():\n        db.drop_all()\n        db.create_all()\n    print('Uploading %s' % upload_file_type)\n    file_name = 'test.%s' % upload_file_type\n    io = pe.save_as(array=array, dest_file_type=upload_file_type)\n    response = self.app.post('/upload/categories', buffered=True, data={\n        'file': (io, file_name)}, content_type='multipart/form-data')\n    ret = pe.get_array(file_type='xls', file_content=response.data)\n    assert array == ret\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_import_without_gpu_or_cudnn_raises",
+    "className": "TestConv2DDNNLayer",
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_conv.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "if theano_backend == 'pygpu':\n    from theano.gpuarray import dnn\n    if dnn.dnn_present():\n        pytest.skip()\nelif theano_backend == 'pygpu_sandbox':\n    from theano.sandbox.gpuarray import dnn\n    if dnn.dnn_present():\n        pytest.skip()\nelif theano_backend == 'cuda_sandbox':\n    from theano.sandbox.cuda import dnn\n    if dnn.dnn_available():\n        pytest.skip()\nelse:\n    with pytest.raises(ImportError):\n        import lasagne.layers.dnn\n"
+}

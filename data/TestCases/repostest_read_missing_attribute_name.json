@@ -1,0 +1,9 @@
+{
+    "functionName": "test_read_missing_attribute_name",
+    "className": "TestAttributeReference",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that an InvalidKmipEncoding error is raised during the decoding\n        of an AttributeReference structure when the attribute name is missing\n        from the encoding.\n        \"\"\"\nattribute_reference = objects.AttributeReference()\nself.assertIsNone(attribute_reference.attribute_name)\nargs = self.no_attribute_name_encoding,\nself.assertRaisesRegex(exceptions.InvalidKmipEncoding,\n    'The AttributeReference encoding is missing the attribute name string.',\n    attribute_reference.read, *args)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fetchone",
+    "className": "test_MySQLdb",
+    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_thirdparty_&_test_MySQLdb_&_test_MySQLdb_dbapi20.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "con = self._connect()\ntry:\n    cur = con.cursor()\n    self.assertRaises(self.driver.Error, cur.fetchone)\n    self.executeDDL1(cur)\n    cur.execute('select name from %sbooze' % self.table_prefix)\n    self.assertEqual(cur.fetchone(), None,\n        'cursor.fetchone should return None if a query retrieves no rows')\n    self.assertTrue(cur.rowcount in (-1, 0))\n    cur.execute(\"insert into %sbooze values ('Victoria Bitter')\" % self.\n        table_prefix)\n    cur.execute('select name from %sbooze' % self.table_prefix)\n    r = cur.fetchone()\n    self.assertEqual(len(r), 1,\n        'cursor.fetchone should have retrieved a single row')\n    self.assertEqual(r[0], 'Victoria Bitter',\n        'cursor.fetchone retrieved incorrect data')\n    self.assertTrue(cur.rowcount in (-1, 1))\nfinally:\n    con.close()\n"
+}

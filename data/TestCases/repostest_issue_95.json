@@ -1,0 +1,9 @@
+{
+    "functionName": "test_issue_95",
+    "className": "TestGitHubIssues",
+    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_test_issues.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Leftover trailing OK packet for \"CALL my_sp\" queries \"\"\"\nconn = self.connect()\ncur = conn.cursor()\nwith warnings.catch_warnings():\n    warnings.filterwarnings('ignore')\n    cur.execute('DROP PROCEDURE IF EXISTS `foo`')\ncur.execute(\n    \"\"\"CREATE PROCEDURE `foo` ()\n        BEGIN\n            SELECT 1;\n        END\"\"\"\n    )\ntry:\n    cur.execute('CALL foo()')\n    cur.execute('SELECT 1')\n    self.assertEqual(cur.fetchone()[0], 1)\nfinally:\n    with warnings.catch_warnings():\n        warnings.filterwarnings('ignore')\n        cur.execute('DROP PROCEDURE IF EXISTS `foo`')\n"
+}

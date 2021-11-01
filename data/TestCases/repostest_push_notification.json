@@ -1,0 +1,9 @@
+{
+    "functionName": "test_push_notification",
+    "className": "TestValve",
+    "fileName": "/albertogeniola_&_MerossIot/tests_&_test_valve.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "if len(self.test_devices) < 1:\n    self.skipTest('No valve device has been found to run this test.')\n    return\ndev1 = self.test_devices[0]\nawait dev1.async_turn_on()\nnew_meross_client = await MerossHttpClient.async_from_user_password(email=\n    EMAIL, password=PASSWORD)\nm = None\ntry:\n    m = MerossManager(http_client=new_meross_client)\n    await m.async_init()\n    await m.async_device_discovery()\n    devs = m.find_devices(internal_ids=(dev1.internal_id,))\n    dev = devs[0]\n    await dev.async_update()\n    await dev1.async_update()\n    target = randint(dev.min_supported_temperature, dev.\n        max_supported_temperature)\n    print(f'TARGET = {target}...')\n    await dev1.async_set_target_temperature(temperature=target)\n    dev1_target_temp = dev1.target_temperature\n    print(f'DEV1 = {dev1_target_temp}...')\n    self.assertEqual(dev1_target_temp, target)\n    await asyncio.sleep(5)\n    dev_target_temp = dev.target_temperature\n    print(f'DEV = {dev_target_temp}...')\n    self.assertEqual(dev_target_temp, target)\nfinally:\n    if m is not None:\n        m.close()\n    await new_meross_client.async_logout()\nunittest_run_loop"
+}

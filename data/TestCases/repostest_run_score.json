@@ -1,0 +1,9 @@
+{
+    "functionName": "test_run_score",
+    "className": "TestBTBSession",
+    "fileName": "/HDI-Project_&_BTB/tests_&_test_session.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "instance = MagicMock(spec_set=BTBSession)\ninstance.propose.return_value = 'test', 'config'\ninstance._scorer.return_value = 1\ninstance.best_proposal = {'test': 'config'}\ninstance._range = range\ninstance.iterations = 0\nresult = BTBSession.run(instance, 1)\ninstance._scorer.assert_called_once_with('test', 'config')\ninstance.record.assert_called_once_with('test', 'config', 1)\nassert result == {'test': 'config'}\nassert instance.iterations == 1\n"
+}

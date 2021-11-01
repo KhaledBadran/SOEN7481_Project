@@ -1,0 +1,9 @@
+{
+    "functionName": "test_update_frames_callback",
+    "className": null,
+    "fileName": "/SimLeek_&_CV_PubSubs/tests_&_window_&_test_subscriber_windows.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sub_win.SubscriberWindows.FRAME_DICT = {}\nwith mock.patch.object(cv2, 'namedWindow'), mock.patch.object(cv2, 'imshow'\n    ) as mock_imshow:\n    cb = mock.MagicMock()\n    cb2 = mock.MagicMock()\n    frame = np.ones((100, 100))\n    frame2 = np.ones((102, 102))\n    frame3 = np.ones((103, 103))\n    cb.return_value = frame2\n    cb2.return_value = frame3\n    sw = sub_win.SubscriberWindows(window_names=['0', '1'], video_sources=[\n        0, 1], callbacks=[cb, cb2])\n    sw.FRAME_DICT['0'] = frame\n    sw.FRAME_DICT['1'] = frame\n    sw.update_frames()\n    assert sw.frames == {'0': [frame3], '1': [frame3]}\n    assert np.all(cb.mock_calls[0].args[0] == frame)\n    assert np.all(cb2.mock_calls[0].args[0] == frame2)\n    mock_imshow.assert_has_calls([mock.call('0 (press ESC to quit)', frame3\n        ), mock.call('1 (press ESC to quit)', frame3)])\n"
+}

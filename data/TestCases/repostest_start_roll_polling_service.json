@@ -1,0 +1,9 @@
+{
+    "functionName": "test_start_roll_polling_service",
+    "className": "TestUtils",
+    "fileName": "/AndreMiras_&_EtherollApp/src_&_etherollapp_&_tests_&_service_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Call `start_roll_polling_service()` with and without args.\n        Verifies the PythonActivity is being created and started.\n        \"\"\"\nm_jnius = mock.MagicMock()\nwith self.patch_platform(), self.patch_jnius(m_jnius):\n    utils.start_roll_polling_service()\nassert m_jnius.autoclass().start.call_args_list == [mock.call(m_jnius.\n    autoclass().mActivity, 'null')]\nm_jnius = mock.MagicMock()\narguments = {'foo': 'bar', 'foobar': True}\nwith self.patch_platform(), self.patch_jnius(m_jnius):\n    utils.start_roll_polling_service(arguments)\nassert m_jnius.autoclass.call_args_list == [mock.call(\n    'com.github.andremiras.etheroll.ServiceService'), mock.call(\n    'org.kivy.android.PythonActivity')]\nassert m_jnius.autoclass().start.call_args_list == [mock.call(m_jnius.\n    autoclass().mActivity, '{\"foo\": \"bar\", \"foobar\": true}')]\n"
+}

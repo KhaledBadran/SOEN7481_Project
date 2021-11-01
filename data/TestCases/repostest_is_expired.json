@@ -1,0 +1,9 @@
+{
+    "functionName": "test_is_expired",
+    "className": "TestSession",
+    "fileName": "/Xdynix_&_PixivPixie/tests_&_core_&_test_pixie.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test the calculation of `expiration_date`.\"\"\"\nnow = datetime(2000, 1, 1, 12)\nmonkeypatch.setattr(pixiv_pixie.core.pixie, 'datetime', get_fake_datetime(\n    now + timedelta(hours=1)))\nassert Session(expires_in=1800, create_date=now).is_expired()\nassert Session(expires_in=3600, create_date=now).is_expired()\nassert Session(expires_in=7200, create_date=now).is_expired() is False\nassert Session(expires_in=3700, create_date=now).is_expired(approx=0) is False\nassert Session(expires_in=3700, create_date=now).is_expired()\nassert Session(expires_in=3700, create_date=now).is_expired(approx=900)\nwith pytest.raises(ValueError):\n    Session().is_expired(approx=-1)\n"
+}

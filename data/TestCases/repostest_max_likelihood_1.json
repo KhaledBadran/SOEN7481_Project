@@ -1,0 +1,9 @@
+{
+    "functionName": "test_max_likelihood_1",
+    "className": "TestChain",
+    "fileName": "/samreay_&_ChainConsumer/tests_&_test_analysis.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "c = ChainConsumer()\ndata = np.random.multivariate_normal([0, 0], [[1, 0], [0, 1]], size=10000)\nposterior = norm.logpdf(data).sum(axis=1)\ndata[:, (1)] += 1\nc.add_chain(data, parameters=['x', 'y'], posterior=posterior, name='A')\nresult = c.analysis.get_max_posteriors()\nx, y = result['x'], result['y']\nassert np.isclose(x, 0, atol=0.05)\nassert np.isclose(y, 1, atol=0.05)\n"
+}

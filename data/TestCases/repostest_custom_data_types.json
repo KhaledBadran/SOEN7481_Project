@@ -1,0 +1,9 @@
+{
+    "functionName": "test_custom_data_types",
+    "className": null,
+    "fileName": "/incf-nidash_&_PyNIDM/nidm_&_experiment_&_tests_&_test_query.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "SPECIAL_TEST_FILES = ['/opt/project/ttl/MTdemog_aseg.ttl']\nvaluetype1 = Query.getDataTypeInfo(Query.OpenGraph(SPECIAL_TEST_FILES[0]),\n    'no-real-value')\nassert valuetype1 == False\nvaluetype2 = Query.getDataTypeInfo(Query.OpenGraph(SPECIAL_TEST_FILES[0]),\n    Constants.NIIRI['age_e3hrcc'])\nassert str(valuetype2['label']) == 'age'\nassert str(valuetype2['description']) == 'Age of participant at scan'\nassert str(valuetype2['isAbout']) == str(Constants.NIIRI['24d78sq'])\nvaluetype3 = Query.getDataTypeInfo(Query.OpenGraph(SPECIAL_TEST_FILES[0]),\n    'age_e3hrcc')\nassert str(valuetype3['label']) == 'age'\nassert str(valuetype3['description']) == 'Age of participant at scan'\nassert str(valuetype3['isAbout']) == str(Constants.NIIRI['24d78sq'])\npytest.mark.skip(reason=\n    \"We don't have an easily accessible file for this test so skipping it until better test samples are available.\"\n    )"
+}

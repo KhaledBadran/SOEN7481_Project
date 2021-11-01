@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sky2vec2sky",
+    "className": null,
+    "fileName": "/PaulHancock_&_Aegean/tests_&_test_regions.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that function Region.vec2sky and Region.sky2vec are mutual inverses\"\"\"\nra, dec = np.radians(np.array((0, -45)))\nsky = Region.radec2sky(ra, dec)\nvec = Region.sky2vec(sky)\nsky2 = Region.vec2sky(vec)\nif not np.all(np.array(sky2) - np.array(sky) == 0):\n    raise AssertionError('sky2vec2sky failed')\nvec2 = Region.sky2vec(sky2)\nif not np.all(np.array(vec) - np.array(vec2) == 0):\n    raise AssertionError('vec2sky2vec failed')\n"
+}

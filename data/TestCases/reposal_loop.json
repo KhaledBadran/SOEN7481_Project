@@ -1,0 +1,9 @@
+{
+    "functionName": "al_loop",
+    "className": null,
+    "fileName": "/NUAA-AL_&_ALiPy/test_&_test_exa_noisy_oracles.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "train_idx, test_idx, label_ind, unlab_ind = alibox.get_split(round)\nsaver = alibox.get_stateio(round)\nrepo = alibox.get_repository(round)\nwhile not stopping_criterion.is_stop():\n    select_ind, select_ora = strategy.select(label_ind, unlab_ind)\n    vote_count, vote_result, cost = get_majority_vote(selected_instance=\n        select_ind, oracles=oracles, names=select_ora)\n    repo.update_query(labels=vote_result, indexes=select_ind)\n    label_ind.update(select_ind)\n    unlab_ind.difference_update(select_ind)\n    _, y_lab, indexes_lab = repo.get_training_data()\n    model.fit(X=X[indexes_lab], y=y_lab)\n    pred = model.predict(X[test_idx])\n    perf = alibox.calc_performance_metric(y_true=y[test_idx], y_pred=pred)\n    st = alibox.State(select_index=select_ind, performance=perf, cost=cost)\n    saver.add_state(st)\n    stopping_criterion.update_information(saver)\nstopping_criterion.reset()\nreturn saver\n"
+}

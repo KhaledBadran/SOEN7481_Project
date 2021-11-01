@@ -1,0 +1,9 @@
+{
+    "functionName": "test_rotations_do_nothing",
+    "className": null,
+    "fileName": "/poletaevvlad_&_CubeLang/test_&_postprocessing_&_test_optimizer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "actual = []\npp = OptimizingPostprocessor()\npp.callback = actual.append\npp.process(a1)\npp.process(a2)\npp.done()\nfor x, y in zip_longest(actual, [a1, a2]):\n    assert repr(x) == repr(y)\npytest.mark.parametrize('a1, a2', [(Rotate(Side.LEFT, True), Rotate(Side.\n    TOP, False)), (Rotate(Side.LEFT, True), Turn(Side.TOP, 1)), (Turn(\n    TurningType.HORIZONTAL, [1], 1), Turn(TurningType.VERTICAL, [1], 1)), (\n    Turn(TurningType.HORIZONTAL, [1], 1), Turn(TurningType.HORIZONTAL, [2],\n    1))])"
+}

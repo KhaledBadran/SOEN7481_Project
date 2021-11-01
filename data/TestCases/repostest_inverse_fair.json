@@ -1,0 +1,9 @@
+{
+    "functionName": "test_inverse_fair",
+    "className": null,
+    "fileName": "/OMS-NetZero_&_FAIR/tests_&_reproduction_&_reproduction_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Tests reproducibility of concentrations-to-emissions FaIR.\"\"\"\nnt = 140\nC = 1.01 ** np.arange(nt) * 278.0\nE, F, T = fair.inverse.inverse_fair_scm(C=C, tcrecs=np.array([1.7, 3.0]))\ndatadir = os.path.join(os.path.dirname(__file__), '1pctCO2/')\nE_expected = np.load(datadir + 'E.npy')\nF_expected = np.load(datadir + 'F.npy')\nT_expected = np.load(datadir + 'T.npy')\nassert np.allclose(E, E_expected)\nassert np.allclose(F, F_expected)\nassert np.allclose(T, T_expected)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "build_model",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_optimizers_&_test_mcmc.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "kernel = gpflow.kernels.Matern52(lengthscales=0.3)\nmeanf = gpflow.mean_functions.Linear(1.0, 0.0)\nmodel = gpflow.models.GPR(data, kernel, meanf, noise_variance=0.01)\nfor p in model.parameters:\n    p.prior = Gamma(to_default_float(1.0), to_default_float(1.0))\nreturn model\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_removeNulls",
+    "className": "TestDatabase",
+    "fileName": "/corydodt_&_Hypy/src_&_hypy_&_test_lib.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Bug 321579: nulls should not kill addText\n        \"\"\"\ndocnulls = HDocument(uri=u'nulls\\x00')\ndocnulls.addText(u'hello there\\x00 children')\ndocnulls.addHiddenText(u'sweet\\x00sweet love')\ndocnulls[u'character\\x00'] = u'chef\\x00'\nwith self.freshenDatabase() as db:\n    db.putDoc(docnulls)\n    db.flush()\n    cond = HCondition(u'there*')\n    self.assertEqual(db.search(cond).pluck(u'@uri'), [u'nulls'])\n    cond = HCondition(u'sweet*')\n    self.assertEqual(db.search(cond).pluck(u'@uri'), [u'nulls'])\n    cond = HCondition()\n    cond.addAttr(u'character STREQ chef')\n    self.assertEqual(db.search(cond).pluck(u'@uri'), [u'nulls'])\n    docnulls[u'voi\\x00ce'] = u'Isaac Hayes'\n    db.updateAttributes(docnulls)\n    cond = HCondition()\n    cond.addAttr(u'voice STRRX .saac.*')\n    self.assertEqual(db.search(cond).pluck(u'@uri'), [u'nulls'])\n"
+}

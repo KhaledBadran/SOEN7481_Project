@@ -1,0 +1,9 @@
+{
+    "functionName": "test_verify_signature_invalid_signature",
+    "className": "TestCryptographyEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_crypto_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that verifying an invalid signature returns the right value.\n        \"\"\"\nengine = crypto.CryptographyEngine()\nbackend = backends.default_backend()\npublic_key_numbers = rsa.RSAPublicNumbers(int('010001', 16), int(\n    'ac13d9fdae7b7335b69cd98567e9647d99bf373a9e05ce3435d66465f328b7f7334b792aee7efa044ebc4c7a30b21a5d7a89cdb3a30dfcd9fee9995e09415edc0bf9e5b4c3f74ff53fb4d29441bf1b7ed6cbdd4a47f9252269e1646f6c1aee0514e93f6cb9df71d06c060a2104b47b7260ac37c106861dc78ca5a25faa9cb2e3'\n    , 16))\npublic_key = public_key_numbers.public_key(backend)\npublic_bytes = public_key.public_bytes(serialization.Encoding.PEM,\n    serialization.PublicFormat.PKCS1)\nargs = public_bytes, b'', b'', enums.PaddingMethod.PSS\nkwargs = {'signing_algorithm': enums.CryptographicAlgorithm.RSA,\n    'hashing_algorithm': enums.HashingAlgorithm.SHA_1,\n    'digital_signature_algorithm': None}\nself.assertFalse(engine.verify_signature(*args, **kwargs))\n"
+}

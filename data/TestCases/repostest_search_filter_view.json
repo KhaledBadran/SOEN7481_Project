@@ -1,0 +1,9 @@
+{
+    "functionName": "test_search_filter_view",
+    "className": "TestMMObjectViews",
+    "fileName": "/Axiologue_&_DjangoRestMultipleModels/tests_&_test_object_view.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Tests use of built in DRF filtering with ObjectMultipleModelAPIView\n        \"\"\"\nview = SearchFilterView.as_view()\nrequest = factory.get('/', {'search': 'as'})\nwith self.assertNumQueries(2):\n    response = view(request).render()\nself.assertEqual(response.status_code, status.HTTP_200_OK)\nself.assertEqual(response.data, {'Play': [{'title': 'As You Like It',\n    'genre': 'Comedy', 'year': 1623}], 'Poem': [{'title':\n    'As a decrepit father takes delight', 'style': 'Sonnet'}]})\n"
+}

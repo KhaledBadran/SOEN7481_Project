@@ -1,0 +1,9 @@
+{
+    "functionName": "test_safe_load",
+    "className": "psv_load_tests_random",
+    "fileName": "/DolphDev_&_PSV/tests_&_test_load_random.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.populate_folders()\ntry:\n    api = psv.safe_load('tests/dataset-only-one-random/test.csv')\n    api = psv.safe_load('tests/dataset-only-one-random/test.csv',\n        custom_columns=api.columns[:2])\n    api = psv.safe_load('tests/dataset-only-one-random/test.csv',\n        typetransfer=True)\n    api = psv.safe_load('tests/dataset-only-one-random/test.csv',\n        custom_columns=api.columns[:2], typetransfer=True)\n    api = psv.safe_load('tests/dataset-only-one-random/test.csv',\n        csv_size_max=2 ** 24)\n    api2 = psv.safe_load(open('tests/dataset-only-one-random/test.csv', 'r',\n        encoding='UTF-8'))\n    api2 = psv.safe_load(open('tests/dataset-only-one-random/test.csv', 'r',\n        encoding='UTF-8'), custom_columns=api.columns[:2])\n    api2 = psv.safe_load(open('tests/dataset-only-one-random/test.csv', 'r',\n        encoding='UTF-8'), typetransfer=True)\n    api2 = psv.safe_load(open('tests/dataset-only-one-random/test.csv', 'r',\n        encoding='UTF-8'), custom_columns=api.columns[:2], typetransfer=True)\n    api2 = psv.safe_load(open('tests/dataset-only-one-random/test.csv', 'r',\n        encoding='UTF-8'), csv_size_max=2 ** 24)\n    api2 = psv.safe_load(open('tests/dataset-only-one-random/test.csv', 'r',\n        encoding='UTF-8'), close_file=True)\nexcept Exception as err:\n    self.fail(str(err))\n"
+}

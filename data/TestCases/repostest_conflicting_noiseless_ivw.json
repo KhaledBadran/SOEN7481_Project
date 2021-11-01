@@ -1,0 +1,9 @@
+{
+    "functionName": "test_conflicting_noiseless_ivw",
+    "className": "InverseVarianceWeightingTest",
+    "fileName": "/facebook_&_Ax/ax_&_utils_&_stats_&_tests_&_test_statstools.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "means = np.array([1, 2, 1])\nvariances = np.array([0, 0, 1])\nnew_mean, new_var = inverse_variance_weight(means, variances)\nself.assertEqual(new_mean, 1.5)\nself.assertEqual(new_var, 0.0)\nwith self.assertRaises(ValueError):\n    inverse_variance_weight(means, variances, conflicting_noiseless='raise')\n"
+}

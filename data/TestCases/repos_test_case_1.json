@@ -1,0 +1,9 @@
+{
+    "functionName": "_test_case_1",
+    "className": null,
+    "fileName": "/david-leon_&_Dandelion/test_&_test_im2col.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "print('test case 1')\nimport numpy as np\nx = tensor.ftensor4()\ny = im2col(x, nb_size=(1, 1), border_mode='valid', merge_channel=True)\nf = theano.function([x], y, no_default_updates=True)\nfor i in range(10):\n    B, C, H, W = np.random.randint(1, 8), np.random.randint(1, 4\n        ), np.random.randint(3, 128), np.random.randint(3, 128)\n    X = np.random.rand(B, C, H, W).astype('float32')\n    Y = f(X)\n    Y2 = X.transpose((0, 2, 3, 1))\n    print('Y.shape=', Y.shape)\n    print('Y2.shape=', Y2.shape)\n    if np.all(Y == Y2):\n        pass\n    else:\n        diff = np.max(abs(Y - Y2))\n        print('max diff=', diff)\n        print('Y=', Y.flatten())\n        print('Y2=', Y2.flatten())\n        raise ValueError('X!=Y')\n"
+}

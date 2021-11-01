@@ -1,0 +1,9 @@
+{
+    "functionName": "test_add_command_check_request",
+    "className": "TestRecord",
+    "fileName": "/Keeper-Security_&_Commander/unit-tests_&_test_command_record.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "params = get_synced_params()\ncmd = record.RecordAddCommand()\ndef check_record(rq):\n    rq['command'] = 'record_add'\n    record_key = api.decrypt_data(rq['record_key'], self.vault_env.data_key)\n    data_bytes = api.decrypt_data(rq['data'], record_key)\n    data = json.loads(data_bytes.decode('utf-8'))\n    self.assertEqual(data['title'], 'data')\n    self.assertEqual(data['title'], data['link'])\n    self.assertEqual(data['secret1'], data['secret2'])\n    self.assertEqual(len(data['custom']), 2)\nwith mock.patch('builtins.input', return_value='data'):\n    KeeperApiHelper.communicate_expect([check_record])\n    cmd.execute(params, custom='name1: value 1, name2: value 2')\n    self.assertTrue(KeeperApiHelper.is_expect_empty())\n"
+}

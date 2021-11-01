@@ -1,0 +1,9 @@
+{
+    "functionName": "test_itemsets_from_a_file",
+    "className": null,
+    "fileName": "/tommyod_&_Efficient-Apriori/efficient_apriori_&_tests_&_test_itemsets.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test generator feature.\n    \"\"\"\ndef file_generator(filename):\n    \"\"\"\n        A file generator for testing.\n        \"\"\"\n\n    def generate_from_file():\n        with open(filename) as file:\n            for line in file:\n                yield tuple(line.strip('\\n').split(','))\n    return generate_from_file\nbase, filename = os.path.split(__file__)\ngen_obj = file_generator(os.path.join(base, 'transactions.txt'))\nresult, _ = itemsets_from_transactions(gen_obj, min_support=4 / 4)\nassert result[2] == {('A', 'C'): 4}\n"
+}

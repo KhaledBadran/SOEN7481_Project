@@ -1,0 +1,9 @@
+{
+    "functionName": "test__get_contingency_table",
+    "className": null,
+    "fileName": "/gelijergensen_&_PermutationImportance/test_&_test_metrics.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "truths = np.array(['a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c'])\npredictions = np.array(['a', 'b', 'c', 'a', 'c', 'b', 'a', 'b', 'b'])\nexpected = np.array([[3, 0, 0], [0, 2, 2], [0, 1, 1]])\nassert (expected == _get_contingency_table(truths, predictions)).all()\nclasses = ['a', 'b', 'c', 'd']\nexpected = np.array([[3, 0, 0, 0], [0, 2, 2, 0], [0, 1, 1, 0], [0, 0, 0, 0]])\nassert (expected == _get_contingency_table(truths, predictions, classes)).all()\nclasses = ['a', 'b', 'c']\npredictions = np.array([[1, 0, 0], [0, 0.9, 0.1], [0.05, 0.05, 0.9], [1, 0,\n    0], [0.05, 0.05, 0.9], [0, 0.9, 0.1], [1, 0, 0], [0, 0.9, 0.1], [0, 0.9,\n    0.1]])\nexpected = np.array([[3, 0, 0], [0, 2, 2], [0, 1, 1]])\nassert (expected == _get_contingency_table(truths, predictions, classes)).all()\nwith pytest.raises(AmbiguousProbabilisticForecastsException):\n    _get_contingency_table(truths, predictions)\ntruths = np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1], [1, 0, 0], [0, 1, 0], [\n    0, 0, 1], [1, 0, 0], [0, 1, 0], [0, 0, 1]])\nassert (expected == _get_contingency_table(truths, predictions)).all()\npredictions = np.zeros((9,))\nwith pytest.raises(UnmatchingProbabilisticForecastsException):\n    _get_contingency_table(truths, predictions)\npredictions = np.zeros((9, 4))\nwith pytest.raises(UnmatchingProbabilisticForecastsException):\n    _get_contingency_table(truths, predictions)\ntruths = np.array(['a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c'])\npredictions = np.array(['a', 'b', 'c', 'a', 'c'])\nwith pytest.raises(UnmatchedLengthPredictionsException):\n    _get_contingency_table(truths, predictions)\n"
+}

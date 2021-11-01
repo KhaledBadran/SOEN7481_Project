@@ -1,0 +1,9 @@
+{
+    "functionName": "test_buffer",
+    "className": "TestBuffer",
+    "fileName": "/BciPy_&_BciPy/bcipy_&_acquisition_&_tests_&_test_buffer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test Buffer functionality.\"\"\"\nn_records = 15000\nchannel_count = 25\nchannels = [('ch' + str(c)) for c in range(channel_count)]\nbuf = Buffer(channels=channels, chunksize=10000)\nappend_timer = _Timer()\ntimevalues = {}\nfor i, data in enumerate(mock_data(n_records, channel_count)):\n    timestamp = float(i)\n    if i % 1000 == 0:\n        timevalues[timestamp] = data\n    with append_timer:\n        buf.append(Record(data, timestamp, None))\nself.assertEqual(buf.start_time, 0.0)\nstarttime = 0.0\nrows = buf.query(start=starttime, end=starttime + 1.0, field='timestamp')\nself.assertEqual(len(rows), 1, 'Results should not include end value.')\nself.assertEqual(rows[0].timestamp, starttime)\nself.assertEqual(rows[0].data, timevalues[starttime])\nstart_time = 1000.0\nend_time = 2000.0\nrows = buf.query(start=start_time, end=end_time, field='timestamp')\nself.assertEqual(len(rows), start_time)\nself.assertEqual(rows[0].data, timevalues[start_time])\nrows = buf.query(start=buf.start_time, field='timestamp')\nself.assertEqual(len(rows), n_records,\n    'Providing only the start should return the rest.')\nbuf.cleanup()\n"
+}

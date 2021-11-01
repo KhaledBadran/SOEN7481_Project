@@ -1,0 +1,9 @@
+{
+    "functionName": "test_stat_ta_gff",
+    "className": "TestStatTaComparison",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_stat_TA_comparison.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "gff_file = os.path.join(self.test_folder, 'aaa.gff')\nta_file = os.path.join(self.test_folder, 'aaa_transcript.gff')\ngen_file(gff_file, self.example.gff)\ngen_file(ta_file, self.example.ta)\nstat_file = os.path.join(self.test_folder, 'stat')\nout_ta_file = os.path.join(self.test_folder, 'out_ta.gff')\nout_gff_file = os.path.join(self.test_folder, 'out.gff')\nstc.stat_ta_gff(ta_file, gff_file, stat_file, out_ta_file, out_gff_file, [\n    'gene'])\ndatas = import_data(stat_file)\nself.assertEqual('\\n'.join(datas), \n    \"\"\"For gene:\n\tAll genomes:\n\tThe transcript information compares with gene:\n\"\"\"\n     + self.example.print_tag)\ndatas, attributes = extract_info(out_ta_file, 'file')\nself.assertListEqual(datas, [\n    'aaa\\tfragmented_and_normal\\tTranscript\\t313\\t3344\\t.\\t+\\t.'])\nfor attribute in attributes:\n    if 'type' in attribute:\n        self.assertEqual(attribute, 'type=cover_CDS')\n    if 'associated_cds=' in attribute:\n        self.assertEqual(attribute, 'associated_cds=YP_498609.1')\ndatas, attributes = extract_info(out_gff_file, 'file')\nself.assertListEqual(datas, ['aaa\\tRefseq\\tgene\\t517\\t1878\\t.\\t+\\t.',\n    'aaa\\tRefseq\\tCDS\\t517\\t1878\\t.\\t+\\t.'])\nfor attribute in attributes:\n    if 'Parent_tran' in attribute:\n        self.assertEqual(attribute, 'Parent_tran=tran0')\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "testCustomData",
+    "className": "DataTest",
+    "fileName": "/facebook_&_Ax/ax_&_core_&_tests_&_test_data.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "CustomData = custom_data_class(column_data_types={'metadata': str,\n    'created_time': pd.Timestamp}, required_columns={'metadata'})\ndata_entry = {'arm_name': '0_1', 'mean': 3.7, 'sem': 0.5, 'metric_name':\n    'b', 'metadata': '42', 'created_time': '2018-09-20'}\ndata = CustomData(df=pd.DataFrame([data_entry]))\nself.assertNotEqual(data, Data(self.df))\nself.assertTrue(isinstance(data.df.iloc[0]['created_time'], pd.Timestamp))\ndata_entry2 = {'arm_name': '0_1', 'mean': 3.7, 'sem': 0.5, 'metric_name':\n    'b', 'created_time': '2018-09-20'}\nwith self.assertRaises(ValueError):\n    CustomData(df=pd.DataFrame([data_entry2]))\nwith self.assertRaises(ValueError):\n    Data(df=pd.DataFrame([data_entry2]))\n"
+}

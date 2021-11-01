@@ -1,0 +1,9 @@
+{
+    "functionName": "test_getattr",
+    "className": "NamespaceTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_namespace.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "collection = lookup.TemplateLookup()\ncollection.put_string('main.html',\n    \"\"\"\n            <%namespace name=\"foo\" file=\"ns.html\"/>\n            <%\n                 if hasattr(foo, 'lala'):\n                     foo.lala()\n                 if not hasattr(foo, 'hoho'):\n                     context.write('foo has no hoho.')\n            %>\n         \"\"\"\n    )\ncollection.put_string('ns.html',\n    \"\"\"\n          <%def name=\"lala()\">this is lala.</%def>\n        \"\"\")\nassert flatten_result(collection.get_template('main.html').render()\n    ) == 'this is lala.foo has no hoho.'\n"
+}

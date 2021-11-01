@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_formula_placeholders",
+    "className": null,
+    "fileName": "/PEtab-dev_&_PEtab/tests_&_test_observables.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test get_formula_placeholders\"\"\"\nassert petab.get_formula_placeholders('1.0', 'any', 'observable') == []\nassert petab.get_formula_placeholders(\n    'observableParameter1_twoParams * observableParameter2_twoParams + otherParam'\n    , 'twoParams', 'observable') == ['observableParameter1_twoParams',\n    'observableParameter2_twoParams']\nassert petab.get_formula_placeholders('3.0 * noiseParameter1_oneParam',\n    'oneParam', 'noise') == ['noiseParameter1_oneParam']\nassert petab.get_formula_placeholders(\n    'observableParameter2_twoParams * observableParameter1_twoParams + otherParam / observableParameter2_twoParams'\n    , 'twoParams', 'observable') == ['observableParameter1_twoParams',\n    'observableParameter2_twoParams']\nwith pytest.raises(AssertionError):\n    petab.get_formula_placeholders(\n        'observableParameter2_twoParams + observableParameter2_twoParams',\n        'twoParams', 'observable')\nassert petab.get_formula_placeholders('', 'any', 'observable') == []\nassert petab.get_formula_placeholders(1, 'any', 'observable') == []\n"
+}

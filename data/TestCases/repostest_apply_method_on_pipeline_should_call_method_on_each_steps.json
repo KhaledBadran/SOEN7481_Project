@@ -1,0 +1,9 @@
+{
+    "functionName": "test_apply_method_on_pipeline_should_call_method_on_each_steps",
+    "className": null,
+    "fileName": "/Neuraxio_&_Neuraxle/testing_&_test_apply.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "pipeline = Pipeline([MultiplyByN(1), MultiplyByN(1)])\npipeline.apply(lambda step: step._set_hyperparams(HyperparameterSamples({\n    'multiply_by': 2})))\nassert pipeline.get_hyperparams()['multiply_by'] == 2\nassert pipeline['MultiplyByN'].get_hyperparams()['multiply_by'] == 2\nassert pipeline['MultiplyByN1'].get_hyperparams()['multiply_by'] == 2\n"
+}

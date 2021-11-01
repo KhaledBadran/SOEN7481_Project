@@ -1,0 +1,9 @@
+{
+    "functionName": "test_update_member_id",
+    "className": null,
+    "fileName": "/gregmedlock_&_Medusa/medusa_&_test_&_test_ensemble.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "test_ensemble = construct_textbook_ensemble()\nmember1 = test_ensemble.members[0]\nmember2 = test_ensemble.members[1]\nnew_id = 'first_with_mod_id'\nmember1.id = new_id\nassert member1.id == new_id\nassert test_ensemble.members[0].id == new_id\nassert test_ensemble.members.get_by_id(new_id)\nassert new_id in test_ensemble.features[0].states.keys()\nduplicate_id = member2.id\nwith pytest.raises(ValueError):\n    member1.id = duplicate_id\n"
+}

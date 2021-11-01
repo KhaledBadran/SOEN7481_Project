@@ -1,0 +1,9 @@
+{
+    "functionName": "test_bundle_directory_manifest_has_no_version",
+    "className": null,
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_BundleDeployTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    A valid bundle manifest has a version number, up to a specific version, all other\n    fields are optional\n    \"\"\"\ncut = Deployer()\nbdir = p(testdir, 'notabundle')\nos.makedirs(bdir)\nwith open(p(bdir, 'manifest'), 'w') as mf:\n    json.dump({}, mf)\nwith raises(NotABundlePath):\n    cut.deploy(p(testdir, 'notabundle'))\n"
+}

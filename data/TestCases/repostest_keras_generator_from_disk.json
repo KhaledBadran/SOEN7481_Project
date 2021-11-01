@@ -1,0 +1,9 @@
+{
+    "functionName": "test_keras_generator_from_disk",
+    "className": null,
+    "fileName": "/mdbloice_&_Augmentor/tests_&_test_generators.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "batch_size = random.randint(1, 50)\nwidth = 80\nheight = 80\ntmpdir = tempfile.mkdtemp()\ntmps = []\nfor i in range(10):\n    tmps.append(tempfile.NamedTemporaryFile(dir=tmpdir, suffix='.JPEG'))\n    bytestream = io.BytesIO()\n    im = Image.new('RGB', (width, height))\n    im.save(bytestream, 'JPEG')\n    tmps[i].file.write(bytestream.getvalue())\n    tmps[i].flush()\np = Augmentor.Pipeline(tmpdir)\nassert len(p.augmentor_images) == len(tmps)\np.rotate(probability=0.5, max_left_rotation=5, max_right_rotation=5)\np.flip_left_right(probability=0.333)\np.flip_top_bottom(probability=0.5)\ng = p.keras_generator(batch_size=batch_size, image_data_format='channels_last')\nX, y = next(g)\nassert len(X) == batch_size\nassert len(X) == batch_size\nassert len(X) == len(y)\nassert np.shape(X) == (batch_size, width, height, 3)\nfor i in range(20):\n    X, y = next(g)\n    assert len(X) == batch_size\n    assert len(X) == batch_size\n    assert len(X) == len(y)\n    assert np.shape(X) == (batch_size, width, height, 3)\ng2 = p.keras_generator(batch_size=batch_size, image_data_format=\n    'channels_first')\nX2, y2 = next(g2)\nassert len(X2) == batch_size\nassert len(X2) == len(y2)\nassert np.shape(X2) == (batch_size, 3, width, height)\nfor i in range(len(tmps)):\n    tmps[i].close()\nshutil.rmtree(tmpdir)\n"
+}

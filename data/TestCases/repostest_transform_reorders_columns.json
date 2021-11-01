@@ -1,0 +1,9 @@
+{
+    "functionName": "test_transform_reorders_columns",
+    "className": "TestCheckColumnNames",
+    "fileName": "/AndrewRook_&_NFLWin/nflwin_&_tests_&_test_preprocessing.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ccn = preprocessing.CheckColumnNames()\ninput_data = pd.DataFrame({'one': [1, 2], 'two': [3, 4], 'three': [5, 6]})\ntest_data = pd.DataFrame({'one': [7, 8], 'two': [9, 10], 'three': [11, 12]})\nexpected_data = test_data.copy()\ninput_data = input_data[['one', 'two', 'three']]\ntest_data = test_data[['two', 'one', 'three']]\nexpected_data = expected_data[['one', 'two', 'three']]\nwith pytest.raises(AssertionError):\n    pd.util.testing.assert_frame_equal(test_data, expected_data)\nccn.fit(input_data)\npd.util.testing.assert_frame_equal(ccn.transform(test_data), expected_data)\n"
+}

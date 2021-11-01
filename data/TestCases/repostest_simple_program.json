@@ -1,0 +1,9 @@
+{
+    "functionName": "test_simple_program",
+    "className": "Test_program",
+    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_Program.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.setUpClass()\nnqubits = 2\nk = ql.Kernel('kernel1', platf, nqubits)\nk.prepz(0)\nk.prepz(1)\nk.x(0)\nk.gate('cnot', [0, 1])\nk.gate('rx90', [1])\nk.clifford(1, 0)\nk.measure(0)\nsweep_points = [2]\np = ql.Program('rb_program', platf, nqubits)\np.set_sweep_points(sweep_points)\np.add_kernel(k)\np.compile()\n"
+}

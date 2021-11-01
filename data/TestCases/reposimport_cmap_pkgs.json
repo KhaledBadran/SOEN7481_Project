@@ -1,0 +1,9 @@
+{
+    "functionName": "import_cmap_pkgs",
+    "className": null,
+    "fileName": "/1313e_&_CMasher/cmasher_&_cli_tools.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "cmap_pkgs = {'cmocean', 'colorcet', 'palettable'}\nenv_pkgs = os.environ.get('CMR_CMAP_PKGS', None)\nif env_pkgs is not None:\n    if sys.platform.startswith('win'):\n        env_pkgs = env_pkgs.split(';')\n    elif sys.platform.startswith(('darwin', 'linux')):\n        env_pkgs = env_pkgs.split(':')\n    else:\n        env_pkgs = []\n    cmap_pkgs.update(env_pkgs)\nfor cmap_pkg in cmap_pkgs:\n    try:\n        import_module(cmap_pkg)\n    except ImportError:\n        pass\n"
+}

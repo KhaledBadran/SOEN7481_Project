@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fgw",
+    "className": null,
+    "fileName": "/PythonOT_&_POT/test_&_test_gromov.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "n_samples = 50\nmu_s = np.array([0, 0])\ncov_s = np.array([[1, 0], [0, 1]])\nxs = ot.datasets.make_2D_samples_gauss(n_samples, mu_s, cov_s, random_state=42)\nxt = xs[::-1].copy()\nys = np.random.randn(xs.shape[0], 2)\nyt = ys[::-1].copy()\np = ot.unif(n_samples)\nq = ot.unif(n_samples)\nC1 = ot.dist(xs, xs)\nC2 = ot.dist(xt, xt)\nC1 /= C1.max()\nC2 /= C2.max()\nM = ot.dist(ys, yt)\nM /= M.max()\nG = ot.gromov.fused_gromov_wasserstein(M, C1, C2, p, q, 'square_loss',\n    alpha=0.5)\nnp.testing.assert_allclose(p, G.sum(1), atol=0.0001)\nnp.testing.assert_allclose(q, G.sum(0), atol=0.0001)\nId = 1 / (1.0 * n_samples) * np.eye(n_samples, n_samples)\nnp.testing.assert_allclose(G, np.flipud(Id), atol=0.0001)\nfgw, log = ot.gromov.fused_gromov_wasserstein2(M, C1, C2, p, q,\n    'square_loss', alpha=0.5, log=True)\nG = log['T']\nnp.testing.assert_allclose(fgw, 0, atol=0.1, rtol=0.1)\nnp.testing.assert_allclose(p, G.sum(1), atol=0.0001)\nnp.testing.assert_allclose(q, G.sum(0), atol=0.0001)\n"
+}

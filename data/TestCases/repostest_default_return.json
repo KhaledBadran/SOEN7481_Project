@@ -1,0 +1,9 @@
+{
+    "functionName": "test_default_return",
+    "className": "TestRetryDecorator",
+    "fileName": "/facebook_&_Ax/ax_&_utils_&_common_&_tests_&_test_executils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Tests if the decorator correctly returns the default value.\n        \"\"\"\nclass DecoratorTester:\n\n    @retry_on_exception(suppress_all_errors=True,\n        default_return_on_suppression='SUCCESS')\n    def error_throwing_function(self):\n        raise Exception('ERROR THROWN FOR TESTING. SHOULD HAVE BEEN CAUGHT')\ndecorator_tester = DecoratorTester()\nself.assertEqual('SUCCESS', decorator_tester.error_throwing_function())\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cosmology_output",
+    "className": null,
+    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_cosmology.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Check that status messages and other output from Cosmology() object works\n    correctly.\n    \"\"\"\ncosmo = ccl.Cosmology(Omega_c=0.25, Omega_b=0.05, h=0.7, A_s=2.1e-09, n_s=0.96)\nassert_no_warnings(cosmo.status)\nassert_no_warnings(print, cosmo)\nassert_(cosmo.has_distances is False)\nassert_(cosmo.has_growth is False)\nassert_(cosmo.has_linear_power is False)\nassert_(cosmo.has_nonlin_power is False)\nassert_(cosmo.has_sigma is False)\nassert_no_warnings(cosmo.compute_distances)\nassert_no_warnings(cosmo.compute_growth)\nassert_no_warnings(cosmo.compute_linear_power)\nassert_no_warnings(cosmo.compute_nonlin_power)\nassert_no_warnings(cosmo.compute_sigma)\nassert_(cosmo.has_distances is True)\nassert_(cosmo.has_growth is True)\nassert_(cosmo.has_linear_power is True)\nassert_(cosmo.has_nonlin_power is True)\nassert_(cosmo.has_sigma is True)\n"
+}

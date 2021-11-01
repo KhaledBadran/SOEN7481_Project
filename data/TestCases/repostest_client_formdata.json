@@ -1,0 +1,9 @@
+{
+    "functionName": "test_client_formdata",
+    "className": null,
+    "fileName": "/zeaphoo_&_cocopot_&_/tests_&_test_testing.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "app = Cocopot()\n@app.route('/hello')\ndef hello():\n    return 'ok'\nc = CocopotClient(app)\nr = c.open('/hello', content_type='application/x-www-form-urlencoded', form\n    ={'c': 1, 'd': 'woo'})\nassert r[0] == b'ok'\nassert r[1] == '200 OK'\nfiles = {'a.txt': FileUpload(BytesIO(to_bytes('text default')), 'file1',\n    'a.txt', headers={'Content-Type': 'text/plain'}), 'a.html': FileUpload(\n    BytesIO(to_bytes('<!DOCTYPE html><title>Content of a.html.</title>')),\n    'file2', 'a.html', headers={'Content-Type': 'text/plain'}), 'b.txt':\n    'b txt content'}\nc = CocopotClient(app)\nr = c.open('/hello', content_type='multipart/form-data', form={'text':\n    'text default'}, files=files)\nassert r[0] == b'ok'\nassert r[1] == '200 OK'\nc = CocopotClient(app)\nr = c.open('/hello', content_type='text/plain', input_stream=BytesIO())\nassert r[0] == b'ok'\nassert r[1] == '200 OK'\n"
+}

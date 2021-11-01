@@ -1,0 +1,9 @@
+{
+    "functionName": "test_valid_metadata",
+    "className": "TestFileMetadata",
+    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_converters.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Ensure valid metadata validates properly.\n        \"\"\"\nroot = etree.Element('experiment')\nauthor = etree.SubElement(root, 'fileAuthor')\nauthor.text = 'Kyle Niemeyer'\nversion = etree.SubElement(root, 'fileVersion')\nmajor_version = etree.SubElement(version, 'major')\nmajor_version.text = '1'\nminor_version = etree.SubElement(version, 'minor')\nminor_version.text = '0'\nmeta = get_file_metadata(root)\nassert meta['chemked-version'] == __version__\nassert meta['file-authors'][0]['name'] == 'Kyle Niemeyer'\nassert meta['file-version'] == 0\n"
+}

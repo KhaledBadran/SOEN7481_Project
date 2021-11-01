@@ -1,0 +1,9 @@
+{
+    "functionName": "test_region",
+    "className": "RealBackendTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_cache.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "t = Template(\n    \"\"\"\n            <%block name=\"foo\" cached=\"True\" cache_region=\"short\">\n                short term ${x}\n            </%block>\n            <%block name=\"bar\" cached=\"True\" cache_region=\"long\">\n                long term ${x}\n            </%block>\n            <%block name=\"lala\">\n                none ${x}\n            </%block>\n        \"\"\"\n    )\nself._install_mock_cache(t)\nr1 = result_lines(t.render(x=5))\ntime.sleep(1.2)\nr2 = result_lines(t.render(x=6))\nr3 = result_lines(t.render(x=7))\neq_(r1, ['short term 5', 'long term 5', 'none 5'])\neq_(r2, ['short term 6', 'long term 5', 'none 6'])\neq_(r3, ['short term 6', 'long term 5', 'none 7'])\n"
+}

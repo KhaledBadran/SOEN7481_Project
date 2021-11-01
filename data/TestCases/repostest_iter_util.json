@@ -1,0 +1,9 @@
+{
+    "functionName": "test_iter_util",
+    "className": null,
+    "fileName": "/EVEprosper_&_ProsperCommon/tests_&_test_prosper_logging.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"validate __iter__ works as expected\"\"\"\ntest_logname = 'debug_logger'\nlog_builder = prosper_logging.ProsperLogger(test_logname, LOG_PATH,\n    config_obj=config)\nlog_builder.configure_debug_logger()\ntest_logger = log_builder.get_logger()\nexpected_handlers = [logging.handlers.TimedRotatingFileHandler, logging.\n    StreamHandler]\nfor indx, handler in enumerate(log_builder):\n    print(type(handler))\n    assert isinstance(handler, expected_handlers[indx])\n"
+}

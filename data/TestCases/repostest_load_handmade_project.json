@@ -1,0 +1,9 @@
+{
+    "functionName": "test_load_handmade_project",
+    "className": "OpenpnmIOTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_io_&_OpenpnmIOTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ws = op.Workspace()\nws.clear()\npn = op.network.Cubic(shape=[3, 3, 3])\nnew_proj = [pn]\npickle.dump(new_proj, open('proj.pnm', 'wb'))\nproj = op.io.OpenpnmIO.load_project('proj.pnm')\nassert isinstance(proj, op.Project)\nassert len(ws.keys()) == 2\nos.remove('proj.pnm')\n"
+}

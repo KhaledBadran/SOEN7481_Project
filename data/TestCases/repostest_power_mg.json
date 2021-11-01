@@ -1,0 +1,9 @@
+{
+    "functionName": "test_power_mg",
+    "className": null,
+    "fileName": "/LSSTDESC_&_CCL/benchmarks_&_test_power_mg2.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "mu_0 = [0.0, 0.1, -0.1, 0.1, -0.1]\nsigma_0 = [0.0, 0.1, -0.1, -0.1, 0.1]\nh0 = 0.7\ncosmoMG = ccl.Cosmology(Omega_c=0.112 / h0 ** 2, Omega_b=0.0226 / h0 ** 2,\n    h=h0, A_s=2.1e-09, n_s=0.96, Neff=3.046, mu_0=mu_0[model], sigma_0=\n    sigma_0[model], Omega_k=0, m_nu=0, T_CMB=2.7255, matter_power_spectrum=\n    'linear', transfer_function='boltzmann_isitgr')\ndata = np.loadtxt('./benchmarks/data/model%d_pk_MG_matterpower.dat' % model)\na = 1\nk = data[:, (0)] * cosmoMG['h']\npk = data[:, (1)] / cosmoMG['h'] ** 3\npk_ccl = ccl.linear_matter_power(cosmoMG, k, a)\nerr = np.abs(pk_ccl / pk - 1)\nprint(cosmoMG)\ncut = data[:, (0)] > 0.0001\nassert np.allclose(err[cut], 0, rtol=0, atol=POWER_MG_TOL)\npytest.mark.parametrize('model', list(range(5)))"
+}

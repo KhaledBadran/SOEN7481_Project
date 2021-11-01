@@ -1,0 +1,9 @@
+{
+    "functionName": "test_write_missing_validation_version_major",
+    "className": "TestValidationInformation",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that an InvalidField error is raised during the encoding of an\n        ValidationInformation structure when the structure is missing the\n        validation version major field.\n        \"\"\"\nvalidation_information = objects.ValidationInformation(\n    validation_authority_type=enums.ValidationAuthorityType.COMMON_CRITERIA,\n    validation_authority_country='US', validation_authority_uri=\n    'https://example.com', validation_version_minor=0, validation_type=\n    enums.ValidationType.HYBRID, validation_level=5,\n    validation_certificate_identifier=\n    'c005d39e-604f-11e9-99df-080027fc1396', validation_certificate_uri=\n    'https://test.com', validation_vendor_uri='https://vendor.com',\n    validation_profiles=['Profile 1', 'Profile 2'])\nargs = utils.BytearrayStream(),\nself.assertRaisesRegex(exceptions.InvalidField,\n    'The ValidationInformation structure is missing the validation version major field.'\n    , validation_information.write, *args)\n"
+}

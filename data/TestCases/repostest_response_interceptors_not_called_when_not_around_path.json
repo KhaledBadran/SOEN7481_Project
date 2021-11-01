@@ -1,0 +1,9 @@
+{
+    "functionName": "test_response_interceptors_not_called_when_not_around_path",
+    "className": "TestEynnydWebappInterceptors",
+    "fileName": "/cbefus_&_Eynnyd/tests_&_test_eynnyd_webapp.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "spy_root_interceptor = TestEynnydWebappInterceptors.SpyResponseInterceptor(\n    body_append='ROOT')\nspy_bar_interceptor = TestEynnydWebappInterceptors.SpyResponseInterceptor(\n    body_append='FOO')\nspy_bar_id_interceptor = TestEynnydWebappInterceptors.SpyResponseInterceptor(\n    body_append='FID')\nspy_post_handler = TestEynnydWebappInterceptors.SpyHandler()\nroutes = RoutesBuilder().add_handler('POST', '/foo/{fid}', spy_post_handler\n    .test_handler).add_response_interceptor('/bar/{fid}',\n    spy_bar_id_interceptor.test_interceptor).add_response_interceptor('/',\n    spy_root_interceptor.test_interceptor).add_response_interceptor('/bar',\n    spy_bar_interceptor.test_interceptor).build()\ntest_app = EynnydWebappBuilder().set_routes(routes).build()\nrequest = TestEynnydWebappHandlers.StubRequest(method='POST', request_uri=\n    '/foo/1234')\nresponse = test_app.process_request_to_response(request)\nself.assertEqual(1, spy_root_interceptor.interceptor_call_count)\nself.assertEqual(0, spy_bar_interceptor.interceptor_call_count)\nself.assertEqual(0, spy_bar_id_interceptor.interceptor_call_count)\nself.assertEqual(1, spy_post_handler.handler_call_count)\nself.assertEqual(b'HANDLERROOT', response.body.content)\n"
+}

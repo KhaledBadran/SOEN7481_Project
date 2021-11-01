@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_array",
+    "className": "TestStorage",
+    "fileName": "/YuriyLisovskiy_&_EventReminder/tests_&_unittests_&_storage_&_test_storage.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "expected = [('title 1', datetime.now().date().strftime(EventModel.\n    DATE_FORMAT), datetime.now().time().replace(microsecond=0).strftime(\n    EventModel.TIME_FORMAT), 'Some descr 1', 0, 0), ('title 2', (datetime.\n    now() + timedelta(days=2)).date().strftime(EventModel.DATE_FORMAT),\n    datetime.now().time().replace(microsecond=0).strftime(EventModel.\n    TIME_FORMAT), 'Some descr 2', 0, 1), ('title 3', datetime.now().date().\n    strftime(EventModel.DATE_FORMAT), datetime.now().time().replace(\n    microsecond=0).strftime(EventModel.TIME_FORMAT), 'Some descr 3', 1, 0),\n    ('title 4', (datetime.now() + timedelta(days=9)).date().strftime(\n    EventModel.DATE_FORMAT), datetime.now().time().replace(microsecond=0).\n    strftime(EventModel.TIME_FORMAT), 'Some descr 4', 1, 1)]\nself.cursor.executemany(\n    'INSERT INTO Events(title, date, time, description, is_past, repeat_weekly) VALUES (?, ?, ?, ?, ?, ?)'\n    , expected)\nself.db.commit()\nactual = self.storage.to_array()\nself.assertEqual(len(actual), len(expected))\nfor i in range(len(expected)):\n    self.assertEqual(actual[i].get('title'), expected[i][0])\n    self.assertEqual(actual[i].get('date'), expected[i][1])\n    self.assertEqual(actual[i].get('time'), expected[i][2])\n    self.assertEqual(actual[i].get('description'), expected[i][3])\n    self.assertEqual(actual[i].get('is_past'), expected[i][4])\n    self.assertEqual(actual[i].get('repeat_weekly'), expected[i][5])\nself.clean_db()\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_multipleMachines",
+    "className": "MethodicalTests",
+    "fileName": "/glyph_&_Automat/automat_&__test_&_test_methodical.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Two machines may co-exist happily on the same instance; they don't\n        interfere with each other.\n        \"\"\"\nclass MultiMach(object):\n    a = MethodicalMachine()\n    b = MethodicalMachine()\n\n    @a.input()\n    def inputA(self):\n        \"\"\"input A\"\"\"\n\n    @b.input()\n    def inputB(self):\n        \"\"\"input B\"\"\"\n\n    @a.state(initial=True)\n    def initialA(self):\n        \"\"\"initial A\"\"\"\n\n    @b.state(initial=True)\n    def initialB(self):\n        \"\"\"initial B\"\"\"\n\n    @a.output()\n    def outputA(self):\n        return 'A'\n\n    @b.output()\n    def outputB(self):\n        return 'B'\n    initialA.upon(inputA, initialA, [outputA])\n    initialB.upon(inputB, initialB, [outputB])\nmm = MultiMach()\nself.assertEqual(mm.inputA(), ['A'])\nself.assertEqual(mm.inputB(), ['B'])\n"
+}

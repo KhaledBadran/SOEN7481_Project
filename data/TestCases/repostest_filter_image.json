@@ -1,0 +1,9 @@
+{
+    "functionName": "test_filter_image",
+    "className": null,
+    "fileName": "/PaulHancock_&_Aegean/tests_&_test_BANE.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test filter image\"\"\"\nfname = 'tests/test_files/1904-66_SIN.fits'\noutbase = 'dlme'\nrms = outbase + '_rms.fits'\nbkg = outbase + '_bkg.fits'\nBANE.filter_image(fname, step_size=(10, 10), box_size=(100, 100), cores=2,\n    out_base=outbase)\nif not os.path.exists(rms):\n    raise AssertionError()\nos.remove(rms)\nif not os.path.exists(bkg):\n    raise AssertionError()\nos.remove(bkg)\nBANE.filter_image(fname, cores=2, out_base=outbase, twopass=True,\n    compressed=True)\nif not os.path.exists(rms):\n    raise AssertionError()\nos.remove(rms)\nif not os.path.exists(bkg):\n    raise AssertionError()\nos.remove(bkg)\n"
+}

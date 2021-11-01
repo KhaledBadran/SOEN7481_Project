@@ -1,0 +1,9 @@
+{
+    "functionName": "test_read_policy_from_file",
+    "className": "TestPolicy",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_test_policy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that reading a policy file works correctly.\n        \"\"\"\npolicy_file = tempfile.NamedTemporaryFile(dir=self.temp_dir, delete=False)\nwith open(policy_file.name, 'w') as f:\n    f.write(\n        '{\"test\": {\"groups\": {\"group_A\": {\"SPLIT_KEY\": {\"GET\": \"ALLOW_ALL\"}}}, \"preset\": {\"SPLIT_KEY\": {\"GET\": \"ALLOW_ALL\"}}}}'\n        )\npolicies = policy.read_policy_from_file(policy_file.name)\nself.assertEqual(1, len(policies))\nself.assertIn('test', policies.keys())\nexpected = {'groups': {'group_A': {enums.ObjectType.SPLIT_KEY: {enums.\n    Operation.GET: enums.Policy.ALLOW_ALL}}}, 'preset': {enums.ObjectType.\n    SPLIT_KEY: {enums.Operation.GET: enums.Policy.ALLOW_ALL}}}\nself.assertEqual(expected, policies.get('test'))\n"
+}

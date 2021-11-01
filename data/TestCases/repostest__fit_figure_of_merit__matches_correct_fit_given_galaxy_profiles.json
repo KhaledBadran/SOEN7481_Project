@@ -1,0 +1,9 @@
+{
+    "functionName": "test__fit_figure_of_merit__matches_correct_fit_given_galaxy_profiles",
+    "className": "TestResult",
+    "fileName": "/Jammy2211_&_PyAutoCTI/test_&_unit_&_pipeline_&_test_phase.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "parallel_species = arctic_params.Species(trap_density=0.1, trap_lifetime=1.0)\nparallel_ccd = arctic_params.CCD(well_notch_depth=0.1, well_fill_alpha=0.5,\n    well_fill_beta=0.5, well_fill_gamma=0.5)\nphase = ph.ParallelPhase(parallel_species=[parallel_species], parallel_ccd=\n    parallel_ccd, optimizer_class=NLO, phase_name='test_phase')\nanalysis = phase.make_analysis(ci_datas=[ci_data], cti_settings=cti_settings)\ninstance = phase.variable.instance_from_unit_vector([])\ncti_params = ph.cti_params_for_instance(instance=instance)\nfit_figure_of_merit = analysis.fit(instance=instance)\nmask = phase.mask_function(shape=ci_data.image.shape)\nci_datas_fit = [phase.extract_ci_data(data=d, mask=mask) for d, mask in zip\n    ([ci_data], [mask])]\nfit = ci_fit.CIFit(masked_ci_data=ci_datas_fit[0], cti_params=cti_params,\n    cti_settings=cti_settings)\nassert fit.likelihood == fit_figure_of_merit\n"
+}

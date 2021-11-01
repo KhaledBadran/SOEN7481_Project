@@ -1,0 +1,9 @@
+{
+    "functionName": "test_build_pie_asymmetric_key",
+    "className": "TestObjectFactory",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_test_factory.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a core asymmetric key object can be converted into a Pie\n        asymmetric object.\n        \"\"\"\nformat_type = misc.KeyFormatType(enums.KeyFormatType.PKCS_1)\nalgorithm = attributes.CryptographicAlgorithm(enums.CryptographicAlgorithm.RSA)\nlength = attributes.CryptographicLength(2048)\nkey_material = cobjects.KeyMaterial(self.public_bytes)\nkey_value = cobjects.KeyValue(key_material)\nkey_block = cobjects.KeyBlock(key_format_type=format_type,\n    key_compression_type=None, key_value=key_value, cryptographic_algorithm\n    =algorithm, cryptographic_length=length, key_wrapping_data=None)\ncore_key = secrets.PublicKey(key_block)\npie_key = self.factory._build_pie_key(core_key, pobjects.PublicKey)\nself.assertIsInstance(pie_key, pobjects.PublicKey)\nself._test_pie_key(pie_key, algorithm.value, length.value, self.\n    public_bytes, format_type.value)\n"
+}

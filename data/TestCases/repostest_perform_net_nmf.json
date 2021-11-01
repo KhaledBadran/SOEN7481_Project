@@ -1,0 +1,9 @@
+{
+    "functionName": "test_perform_net_nmf",
+    "className": "TestPerform_net_nmf",
+    "fileName": "/KnowEnG_&_KnowEnG_Pipelines_Library/test_&_unit_&_test_perform_net_nmf.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "run_parameters = self.run_parameters\nk = run_parameters['number_of_clusters']\nnrows = 90\nncols = 30\nH0 = np.random.rand(k, ncols)\nC = np.argmax(H0, axis=0)\nH = np.zeros(H0.shape)\nfor row in range(0, max(C) + 1):\n    rowdex = C == row\n    H[row, rowdex] = 1\npct_nodes = 0.1\nn_nodes = np.int_(np.round(pct_nodes * nrows ** 2))\nN = synthesize_random_network(nrows, n_nodes)\nW = np.random.rand(nrows, k)\nW = N.dot(W)\nX = W.dot(H)\nlap_dag, lap_val = kn.form_network_laplacian_matrix(N)\nH_b = kn.perform_net_nmf(X, lap_val, lap_dag, run_parameters)\nH_clusters = np.argmax(H, axis=0)\nH_b_clusters = np.argmax(H_b, axis=0)\nsets_R_equal = sets_a_eq_b(H_clusters, H_b_clusters)\nself.assertTrue(sets_R_equal, msg='test net nmf clusters differ')\n"
+}

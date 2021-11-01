@@ -1,0 +1,9 @@
+{
+    "functionName": "test_set_hyperparameters_flat",
+    "className": "TestMLPipline",
+    "fileName": "/HDI-Project_&_MLBlocks/tests_&_test_mlpipeline.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "block_1 = get_mlblock_mock()\nblock_2 = get_mlblock_mock()\nblocks = OrderedDict((('a.primitive.Name#1', block_1), (\n    'a.primitive.Name#2', block_2)))\nmlpipeline = MLPipeline(['a_primitive'])\nmlpipeline.blocks = blocks\nhyperparameters = {('a.primitive.Name#2', 'some'): 'arg'}\nmlpipeline.set_hyperparameters(hyperparameters)\nblock_1.set_hyperparameters.assert_not_called()\nblock_2.set_hyperparameters.assert_called_once_with({'some': 'arg'})\npatch('mlblocks.mlpipeline.MLBlock', new=get_mlblock_mock)"
+}

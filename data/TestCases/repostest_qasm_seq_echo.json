@@ -1,0 +1,9 @@
+{
+    "functionName": "test_qasm_seq_echo",
+    "className": "Test_single_qubit_seqs_CCL",
+    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_std_experiments_CCL.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "nqubits = 1\np = Program('Echo', platf, nqubits)\ntimes = np.linspace(0, 20000.0, 61)\ntimes = np.linspace(0, 60, 61)\np.set_sweep_points(times)\nfor tau in times:\n    n = 'echo_tau_{}ns'.format(tau)\n    n = n.replace('.', '_')\n    k = Kernel(n, platf, nqubits)\n    k.prepz(0)\n    k.rx90(0)\n    for j in range(int(tau / 2)):\n        k.gate('i', [0])\n    k.rx180(0)\n    for j in range(int(tau / 2)):\n        k.gate('i', [0])\n    k.rx90(0)\n    k.measure(0)\n    p.add_kernel(k)\np.compile()\nQISA_fn = os.path.join(output_dir, p.name + '.qisa')\nassemble(QISA_fn)\n"
+}

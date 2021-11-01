@@ -1,0 +1,9 @@
+{
+    "functionName": "test_verify_failure_invalid_issued_at",
+    "className": "EasyJWTTest",
+    "fileName": "/BMeu_&_EasyJWT/tests_&_easyjwt_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n            Test verifying a token with an invalid issued-at date.\n\n            Expected Result: An `InvalidIssuedAtError` is raised.\n        \"\"\"\neasyjwt_creation = EasyJWT(self.key)\ntoken = easyjwt_creation.create(issued_at='NaN')\nwith self.assertRaises(InvalidIssuedAtError):\n    easyjwt_verification = EasyJWT.verify(token, self.key)\n    self.assertIsNone(easyjwt_verification)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_collection_insert_rejects",
+    "className": "TestCollection",
+    "fileName": "/kenfar_&_DataGristle/datagristle_&_tests_&_test_metadata.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "kv = {'collection_name': 'a', 'collection_desc': 'a1', 'schema_id': self.\n    schema_id}\norig_rowcount = len(self.md.collection_tools.lister())\nold_rows = self.md.collection_tools.lister()\nkv2 = kv.copy()\nkv2.pop('schema_id')\nwith pytest.raises(KeyError):\n    self.md.collection_tools.setter(**kv2)\nassert len(self.md.collection_tools.lister()) == orig_rowcount\nnew_rows = self.md.collection_tools.lister()\nassert rowproxy_diff(old_rows, new_rows, expected_add_cnt=0, expected_del_cnt=0\n    )\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "check_failure",
+    "className": null,
+    "fileName": "/PlaidWeb_&_Authl/tests_&_handlers_&_test_indieauth.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "assert len(store) == 0\nresponse = handler.initiate_auth('http://example.user', 'http://client/cb',\n    '/dest')\nassert isinstance(response, disposition.Redirect)\nassert len(store) == 1\ndata = {'state': parse_args(response.url)['state'], 'code': 'bogus'}\nresponse = handler.check_callback('http://client/cb', data, {})\nassert isinstance(response, disposition.Error)\nassert message in response.message\nassert len(store) == 0\n"
+}

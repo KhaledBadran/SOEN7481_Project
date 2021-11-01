@@ -1,0 +1,9 @@
+{
+    "functionName": "test_tricky_code_3",
+    "className": null,
+    "fileName": "/whiteclover_&_Choco/test_&_test_lexer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "template = \"\"\"<%\n            print('hi')\n            # this is a comment\n            # another comment\n            x = 7 # someone's '''comment\n            print('''\n        there\n        ''')\n            # someone else's comment\n%> '''and now some text '''\"\"\"\nnodes = Lexer(template).parse()\nself._compare(nodes, TemplateNode({}, [Code(\n    \"\"\"\nprint('hi')\n# this is a comment\n# another comment\nx = 7 # someone's '''comment\nprint('''\n        there\n        ''')\n# someone else's comment\n\n\"\"\"\n    , False, (1, 1)), Text(\" '''and now some text '''\", (10, 3))]))\n"
+}

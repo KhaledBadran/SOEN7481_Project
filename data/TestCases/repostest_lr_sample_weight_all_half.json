@@ -1,0 +1,9 @@
+{
+    "functionName": "test_lr_sample_weight_all_half",
+    "className": "DiscreteMNLMultinomialTests",
+    "fileName": "/Mogeng_&_IOHMM/tests_&_test_DiscreteMNL.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.model_half = DiscreteMNL(solver='newton-cg', fit_intercept=True,\n    est_stderr=True, reg_method='l2', alpha=0, l1_ratio=0, tol=0.0001,\n    max_iter=100, coef=None, stderr=None, classes=None)\nself.model_half.fit(self.data_anes96.exog, self.data_anes96.endog,\n    sample_weight=0.5)\nself.model = DiscreteMNL(solver='newton-cg', fit_intercept=True, est_stderr\n    =True, reg_method='l2', alpha=0, l1_ratio=0, tol=0.0001, max_iter=100,\n    coef=None, stderr=None, classes=None)\nself.model.fit(self.data_anes96.exog, self.data_anes96.endog)\nnp.testing.assert_array_almost_equal(self.model.coef, self.model_half.coef,\n    decimal=3)\nself.assertEqual(np.sum(self.model.predict(self.data_anes96.exog) == self.\n    data_anes96.endog), 372)\nself.assertAlmostEqual(self.model.loglike(self.data_anes96.exog, self.\n    data_anes96.endog, sample_weight=0.5), old_div(-1461.92274725, 2.0),\n    places=3)\n"
+}

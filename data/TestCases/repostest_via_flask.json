@@ -1,0 +1,9 @@
+{
+    "functionName": "test_via_flask",
+    "className": null,
+    "fileName": "/abassel_&_Flask-DSwagger/tests_&_test_doc_string.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "api_swag = fds.api_swagger_register(app)\napi_swag.generate(db_models={'User': User}, path_to_capture='/api/',\n    path_to_spec_json='/api/json', version='1.0.0', title='MyAPI',\n    description='Unit testing the API')\njson_result = fds.api_swagger_register.json_cache['/api/json']\nassert json_result['basePath'] == '/api/'\nassert json_result['info']['version'] == '1.0.0'\nassert json_result['info']['title'] == 'MyAPI'\nassert json_result['info']['description'] == 'Unit testing the API'\nassert list(json_result['paths'].keys()) == ['/user/{id}']\nassert list(json_result['definitions'].keys()) == ['User']\nassert json_result['definitions']['User']['type'] == 'object'\nassert json_result['definitions']['User']['properties']['email']['type'\n    ] == 'string'\nassert json_result['definitions']['User']['properties']['first_name']['type'\n    ] == 'string'\nassert json_result['definitions']['User']['properties']['last_name']['type'\n    ] == 'string'\n"
+}

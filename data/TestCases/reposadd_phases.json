@@ -1,0 +1,9 @@
+{
+    "functionName": "add_phases",
+    "className": "MultiPhase",
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_phases_&_MultiPhase.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        Add supplied phases to the MultiPhase object and initialize occupancy to 0.\n        \"\"\"\nphases = np.array(phases, ndmin=1)\nfor phase in phases:\n    if phase.name not in self.settings['phases']:\n        self.settings['phases'].append(phase.name)\n        self[f'pore.occupancy.{phase.name}'] = 0.0\n        self[f'throat.occupancy.{phase.name}'] = 0.0\n"
+}

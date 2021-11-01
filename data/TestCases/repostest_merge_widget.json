@@ -1,0 +1,9 @@
+{
+    "functionName": "test_merge_widget",
+    "className": null,
+    "fileName": "/Vizzuality_&_LMIPy/tests_&_test_lmipy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "staging_widget = Widget(id_hash='66de77eb-dee3-4c56-9ad4-cf68d8b107fd',\n    server='https://staging-api.globalforestwatch.org')\nstaging_widget.update(update_params={'name': 'Template Widget Staging',\n    'widgetConfig': {}}, token=API_TOKEN)\nproduction_widget = Dataset(id_hash='7cf3fab2-3fbe-4980-b572-712207b2c8c7'\n    ).widget[0]\nwhitelist = ['name', 'widgetConfig']\nmerged_widget = production_widget.merge(token=API_TOKEN, target_widget=None,\n    target_widget_id=staging_widget.id, target_server=\n    'https://staging-api.globalforestwatch.org', key_whitelist=whitelist,\n    force=True)\nmerged_atts = {k: v for k, v in merged_widget.attributes.items() if k in\n    whitelist}\nproduction_atts = {k: v for k, v in production_widget.attributes.items() if\n    k in whitelist}\nassert merged_atts == production_atts\n"
+}

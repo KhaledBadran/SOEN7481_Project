@@ -1,0 +1,9 @@
+{
+    "functionName": "test_safe_dump",
+    "className": null,
+    "fileName": "/alex-ber_&_AlexBerUtils/tests_&_utils_&_ymlparsers_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "logger.info(f'{request._pyfuncitem.name}()')\norig_d = dict(exp_config_d)\nd = OrderedDict(exp_config_d)\nd['general'] = OrderedDict(d['general'])\nd['app'] = OrderedDict(d['app'])\nwith io.StringIO() as buf:\n    ymlparsers.safe_dump(d, stream=buf)\n    value = buf.getvalue()\nwith ymlparsers.DisableVarSubst():\n    restored_d = ymlparsers.load(value)\npytest.assume(orig_d == restored_d)\npytest.mark.yml"
+}

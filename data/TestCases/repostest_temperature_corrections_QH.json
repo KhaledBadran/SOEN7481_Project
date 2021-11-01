@@ -1,0 +1,9 @@
+{
+    "functionName": "test_temperature_corrections_QH",
+    "className": null,
+    "fileName": "/bobbypaton_&_GoodVibes/tests_&_test_goodvibes.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "temp = 200\nconc = GV.ATMOS / (GV.GAS_CONSTANT * temp)\n(QH, s_freq_cutoff, h_freq_cutoff, freq_scale_factor, solv, spc, invert, d3\n    ) = True, 100.0, 100.0, 1.0, 'none', False, False, 0\nbbe298 = GV.calc_bbe(datapath('Al_298K.out'), QS, QH, s_freq_cutoff,\n    h_freq_cutoff, temp, conc, freq_scale_factor, solv, spc, invert, d3)\nbbe400 = GV.calc_bbe(datapath('Al_400K.out'), QS, QH, s_freq_cutoff,\n    h_freq_cutoff, temp, conc, freq_scale_factor, solv, spc, invert, d3)\nprecision = 6\nassert E == round(bbe298.scf_energy, precision) == round(bbe400.scf_energy,\n    precision)\nassert ZPE == round(bbe298.zpe, precision) == round(bbe400.zpe, precision)\nassert H == round(bbe298.enthalpy, precision) == round(bbe400.enthalpy,\n    precision)\nassert qhH == round(bbe298.qh_enthalpy, precision) == round(bbe400.\n    qh_enthalpy, precision)\nassert TS == round(temp * bbe298.entropy, precision) == round(temp * bbe400\n    .entropy, precision)\nassert TqhS == round(temp * bbe298.qh_entropy, precision) == round(temp *\n    bbe400.qh_entropy, precision)\nassert G == round(bbe298.gibbs_free_energy, precision) == round(bbe400.\n    gibbs_free_energy, precision)\nassert qhG == round(bbe298.qh_gibbs_free_energy, precision) == round(bbe400\n    .qh_gibbs_free_energy, precision)\npytest.mark.parametrize('QS, E, ZPE, H, qhH, TS, TqhS, G, qhG', [('grimme',\n    -242.328708, 0.0, -242.327125, -242.327125, 0.011221, 0.011221, -\n    242.338346, -242.338346), ('truhlar', -242.328708, 0.0, -242.327125, -\n    242.327125, 0.011221, 0.011221, -242.338346, -242.338346)])"
+}

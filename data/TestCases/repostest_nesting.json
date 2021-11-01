@@ -1,0 +1,9 @@
+{
+    "functionName": "test_nesting",
+    "className": "TestChapter1",
+    "fileName": "/axiros_&_DevApps/tests_&_test_tutorial.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "t = \"\"\"\n        # Nesting Functional Blocks\n\n        When the app gets more complex you can recursively nest/compose functional blocks into each other\n\n        <from-file: calc_tree.py>\n        \"\"\"\nmd(t)\nres = bash_run(['calc_tree.py 1 299',\n    'calc_tree.py log.level=20 of=mul 100 3',\n    'calc_tree.py l.l=20 of=mul 100 3 # shorthand notation for nested blocks',\n    'calc_tree.py l.t \"hi there\" # calling nested functions'])\nr = res[0]['res']\nassert '[10]' in r\nassert '[20]' in r\nassert '300' in r\nfor i in (1, 2):\n    r = res[i]['res']\n    assert not '[10]' in r\n    assert '[20]' in r\n    assert '300' in r\nr = res[3]['res']\nassert 'hi there' in str(r)\nt = \"\"\"\n        > Of course you could have defined the inner class directly within the main app class as well\n\n        Help output (again with overridden defaults):\n\n        \"\"\"\nmd(t)\nres = bash_run('calc_tree.py l.l=20 l.t.ev=hi of=mul -h')\nassert 'do_testmsg(ev=hi)' in str(res)\n"
+}

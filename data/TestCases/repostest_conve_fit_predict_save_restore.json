@@ -1,0 +1,9 @@
+{
+    "functionName": "test_conve_fit_predict_save_restore",
+    "className": null,
+    "fileName": "/Accenture_&_AmpliGraph/tests_&_ampligraph_&_latent_features_&_test_models.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "X = load_wn18()\nmodel = ConvE(batches_count=100, seed=22, epochs=1, k=10,\n    embedding_model_params={'conv_filters': 16, 'conv_kernel_size': 3},\n    optimizer='adam', optimizer_params={'lr': 0.01}, loss='bce',\n    loss_params={}, regularizer=None, regularizer_params={'p': 2, 'lambda':\n    1e-05}, verbose=True, low_memory=True)\nmodel.fit(X['train'])\ny1 = model.predict(X['test'][:5])\nsave_model(model, 'model.tmp')\ndel model\nmodel = restore_model('model.tmp')\ny2 = model.predict(X['test'][:5])\nassert np.all(y1 == y2)\nos.remove('model.tmp')\n"
+}

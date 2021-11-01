@@ -1,0 +1,9 @@
+{
+    "functionName": "test_all_valid_types_except_shunts",
+    "className": "GetPowerFlowResultsTestCase",
+    "fileName": "/mzy2240_&_ESA/tests_&_test_saw.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Loop and sub test over all types, except shunts.\"\"\"\nfor object_type, object_fields in SAW.POWER_FLOW_FIELDS.items():\n    if object_type == 'shunt':\n        continue\n    with self.subTest(object_type):\n        result = saw_14.get_power_flow_results(ObjectType=object_type)\n        self.assertIsInstance(result, pd.DataFrame)\n        self.assertSetEqual(set(result.columns.to_numpy()), set(object_fields))\n        self.assertFalse(result.isna().any().any())\n"
+}

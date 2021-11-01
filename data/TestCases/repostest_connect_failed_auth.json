@@ -1,0 +1,9 @@
+{
+    "functionName": "test_connect_failed_auth",
+    "className": "TestClient",
+    "fileName": "/akolar_&_ogn-lib/tests_&_test_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sock = self._get_mocked_socket(mocker)\nwith mocker.patch('socket.create_connection', return_value=sock):\n    cl = client.OgnClient('username')\n    cl._validate_login = mocker.MagicMock(side_effect=exceptions.ParseError)\n    with pytest.raises(exceptions.ParseError):\n        cl.connect()\ncl._sock_file.close.call_count == 1\ncl._socket.close.call_count == 1\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_email_publisher_with_replacement_context_defaults",
+    "className": null,
+    "fileName": "/PearsonEducation_&_Alarmageddon/tests_&_publishing_&_test_emailer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "config = create_configuration(tmpdir, smtp_host=smtpserver.addr[0],\n    smtp_port=str(smtpserver.addr[1]))\ngeneral_defaults = config['email_defaults']['general']\nemail_pub = EmailPublisher(config, defaults=general_defaults)\nsender = email_pub._replacement_context['email_sender']['real_name']\nrecipient = email_pub._replacement_context['email_recipients'][0]['real_name']\nassert sender == 'Alarmageddon Monitor'\nassert recipient == 'Test Recipient'\n"
+}

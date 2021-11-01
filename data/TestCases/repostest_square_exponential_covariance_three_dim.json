@@ -1,0 +1,9 @@
+{
+    "functionName": "test_square_exponential_covariance_three_dim",
+    "className": "TestSquareExponential",
+    "fileName": "/Yelp_&_MOE/moe_&_tests_&_optimal_learning_&_python_&_python_version_&_covariance_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test the SquareExponential covariance function against correct values for different sets of hyperparameters in 3D.\"\"\"\nfor hyperparameters in self.three_dim_test_sets:\n    signal_variance = hyperparameters[0]\n    length = hyperparameters[1:]\n    covariance = self.CovarianceClass(hyperparameters)\n    self.assert_scalar_within_relative(covariance.covariance(numpy.array([\n        0.0, 0.0, 0.0]), numpy.array([0.0, 0.0, length[2]])), \n        signal_variance * numpy.exp(-0.5), self.epsilon)\n    self.assert_scalar_within_relative(covariance.covariance(numpy.array([\n        0.0, 0.0, 0.0]), numpy.array([0.0, length[1], 0.0])), \n        signal_variance * numpy.exp(-0.5), self.epsilon)\n    self.assert_scalar_within_relative(covariance.covariance(numpy.array([\n        0.0, 0.0, 0.0]), numpy.array([length[0], 0.0, 0.0])), \n        signal_variance * numpy.exp(-0.5), self.epsilon)\n    self.assert_scalar_within_relative(covariance.covariance(numpy.array([\n        0.0, 0.0, 0.0]), numpy.array([numpy.sqrt(3) / 3.0 * length[0], \n        numpy.sqrt(3) / 3.0 * length[1], numpy.sqrt(3) / 3.0 * length[2]])),\n        signal_variance * numpy.exp(-0.5), self.epsilon)\n    self.assert_scalar_within_relative(covariance.covariance(numpy.array([\n        numpy.sqrt(3) / 3.0 * length[0], numpy.sqrt(3) / 3.0 * length[1], \n        numpy.sqrt(3) / 3.0 * length[2]]), numpy.array([0.0, 0.0, 0.0])), \n        signal_variance * numpy.exp(-0.5), self.epsilon)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_transform_affine_identity",
+    "className": "TestTransformLayer",
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_special.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from lasagne.layers import InputLayer, TransformerLayer\nfrom lasagne.utils import floatX\nfrom theano.tensor import constant\nbatchsize = 10\nl_in = InputLayer((batchsize, 3, 28, 28))\nl_loc = InputLayer((batchsize, 6))\nlayer = TransformerLayer(l_in, l_loc)\ninputs = floatX(np.arange(np.prod(l_in.shape)).reshape(l_in.shape))\nthetas = floatX(np.tile([1, 0, 0, 0, 1, 0], (batchsize, 1)))\noutputs = layer.get_output_for([constant(inputs), constant(thetas)]).eval()\nnp.testing.assert_allclose(inputs, outputs, rtol=1e-06)\n"
+}

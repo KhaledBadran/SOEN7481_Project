@@ -1,0 +1,9 @@
+{
+    "functionName": "test_dupdetection_metrics",
+    "className": null,
+    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_server_&_tests_&_test_metrics.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "metrics = list(metrics)\nurl = V01 + '/metrics/duplicate-detection'\nlabels_true = [0, 1, 1, 2, 3, 2]\nlabels_pred = [0, 1, 3, 2, 5, 2]\npars = {'labels_true': labels_true, 'labels_pred': labels_pred, 'metrics':\n    metrics}\ndata = app.post_check(url, json=pars)\nassert sorted(data.keys()) == sorted(metrics)\nif 'ratio_duplicates' in metrics:\n    assert_almost_equal(data['ratio_duplicates'], 0.5)\nif 'f1_same_duplicates' in metrics:\n    assert_almost_equal(data['f1_same_duplicates'], 0.667, decimal=3)\nif 'mean_duplicates_count' in metrics:\n    assert_almost_equal(data['mean_duplicates_count'], 0.75)\npytest.mark.parametrize('metrics', itertools.combinations([\n    'ratio_duplicates', 'f1_same_duplicates', 'mean_duplicates_count'], 2))"
+}

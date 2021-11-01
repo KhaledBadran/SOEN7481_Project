@@ -1,0 +1,9 @@
+{
+    "functionName": "test_subdivide_3D",
+    "className": "TopotoolsTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_topotools_&_TopotoolsTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "net = op.network.Cubic(shape=[3, 3, 3])\nassert net.Np == 27\nassert net.Nt == 54\nop.topotools.subdivide(net, pores=13, shape=[5, 5, 5], labels='blah')\nassert net.pores('blah').size == 125\nassert net.throats('blah').size == 300 + 25 * 6\nassert net.Np == 27 - 1 + 125\nassert net.Nt == 54 - 6 + 300 + 25 * 6\n"
+}

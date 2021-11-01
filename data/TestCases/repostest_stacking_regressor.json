@@ -1,0 +1,9 @@
+{
+    "functionName": "test_stacking_regressor",
+    "className": "TestSklearn",
+    "fileName": "/microsoft_&_LightGBM/tests_&_python_package_test_&_test_sklearn.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from sklearn.ensemble import StackingRegressor\nX, y = load_boston(return_X_y=True)\nX_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42)\nregressors = [('gbm1', lgb.LGBMRegressor(n_estimators=3)), ('gbm2', lgb.\n    LGBMRegressor(n_estimators=3))]\nreg = StackingRegressor(estimators=regressors, final_estimator=lgb.\n    LGBMRegressor(n_estimators=3), passthrough=True)\nreg.fit(X_train, y_train)\nscore = reg.score(X_test, y_test)\nself.assertGreaterEqual(score, 0.2)\nself.assertLessEqual(score, 1.0)\nself.assertEqual(reg.n_features_in_, 13)\nself.assertEqual(len(reg.named_estimators_['gbm1'].feature_importances_), 13)\nself.assertEqual(reg.named_estimators_['gbm1'].n_features_in_, reg.\n    named_estimators_['gbm2'].n_features_in_)\nself.assertEqual(reg.final_estimator_.n_features_in_, 15)\nself.assertEqual(len(reg.final_estimator_.feature_importances_), 15)\nunittest.skipIf(sk_version < '0.23.0', 'scikit-learn version is less than 0.23'\n    )"
+}

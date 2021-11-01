@@ -1,0 +1,9 @@
+{
+    "functionName": "test_minimum_current_close_to_max_voc_gh110",
+    "className": null,
+    "fileName": "/SunPower_&_PVMismatch/pvmismatch_&_tests_&_test_pvconstants.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Tests that minimum current in ``calcSeries`` is reasonably close to the\n    maximum open circuit current of all cells in module. This came up in GitHub\n    issue 110 that the resolution of the plots, and hence the underlying data,\n    at high cell temperature was too coarse.\n    \"\"\"\npvsys = pvsystem.PVsystem()\npvsys.setTemps(388)\nexpected = np.loadtxt(os.path.join(BASEDIR, 'gh110.dat'))\ncalculated = np.concatenate([[pvsys.Isys], [pvsys.Vsys], [pvsys.Psys]], axis=0\n    ).T\nassert np.allclose(expected, calculated)\nreturn calculated\n"
+}

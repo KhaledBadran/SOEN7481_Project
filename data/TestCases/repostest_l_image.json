@@ -1,0 +1,9 @@
+{
+    "functionName": "test_l_image",
+    "className": null,
+    "fileName": "/Gsllchb_&_PyLf/tests_&_test_multi_templates.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "text = get_long_text()\ntemplates = get_default_templates()\ntemplates[0].set_background(PIL.Image.new('RGB', SIZE, color='yellow'))\ntemplates[1].set_background(PIL.Image.new('RGB', SIZE, color='black'))\nfill = 120, 100, 0\ntemplates[0].set_fill(fill)\ntemplates[1].set_fill(fill)\ncriterion = handwrite(text, templates, seed=SEED)\ncriterion = [image.convert('L') for image in criterion]\ntemplates[0].set_background(PIL.Image.new('L', SIZE, color='yellow'))\ntemplates[1].set_background(PIL.Image.new('L', SIZE, color='black'))\nfill = PIL.ImageColor.getcolor('rgb{}'.format(fill), mode='L')\ntemplates[0].set_fill(fill)\ntemplates[1].set_fill(fill)\nimages = handwrite(text, templates, seed=SEED)\nassert criterion == list(images)\n"
+}

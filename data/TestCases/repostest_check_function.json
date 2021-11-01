@@ -1,0 +1,9 @@
+{
+    "functionName": "test_check_function",
+    "className": null,
+    "fileName": "/TEOS-10_&_GSW-python/gsw_&_tests_&_test_check_functions.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cv, cf, mfunc = cfcf\nmfunc.run(locals())\nif mfunc.exception is not None or not mfunc.passed:\n    print('\\n', mfunc.name)\n    print('  ', mfunc.runline)\n    print('  ', mfunc.testline)\n    if mfunc.exception is None:\n        mfunc.exception = ValueError(\n            'Calculated values are different from the expected matlab results.'\n            )\n    raise mfunc.exception\nelse:\n    print(mfunc.name)\n    assert mfunc.passed\n"
+}

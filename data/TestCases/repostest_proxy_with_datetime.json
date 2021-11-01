@@ -1,0 +1,9 @@
+{
+    "functionName": "test_proxy_with_datetime",
+    "className": "TestValueProxy",
+    "fileName": "/dnephin_&_PyStaticConfiguration/tests_&_proxy_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "the_date = datetime.datetime(2012, 12, 1, 5, 5, 5)\nvalidator = mock.Mock(return_value=the_date)\nvalue_proxy = proxy.ValueProxy(validator, self.value_cache, 'something')\nassert_equal(value_proxy, the_date)\nassert value_proxy < datetime.datetime(2012, 12, 3)\nassert value_proxy > datetime.datetime(2012, 1, 4)\nfour_days_ahead = datetime.datetime(2012, 12, 4, 5, 5, 5)\nassert_equal(value_proxy + datetime.timedelta(days=3), four_days_ahead)\nassert_equal(repr(value_proxy), repr(the_date))\nassert_equal(str(value_proxy), str(the_date))\nassert_equal(hash(value_proxy), hash(the_date))\nassert bool(value_proxy)\n"
+}

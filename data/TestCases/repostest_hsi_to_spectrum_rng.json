@@ -1,0 +1,9 @@
+{
+    "functionName": "test_hsi_to_spectrum_rng",
+    "className": null,
+    "fileName": "/CCampJr_&_CRIkit2/crikit_&_data_&_tests_&_test_spectrum.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Import an hsi into a spectrum -- defined range\"\"\"\nspectrum, spectra, hsi, make_dataset_shape = make_datasets\nrng = [10, 11]\nnew_dataset = Spectrum()\nnew_dataset.freq.data = np.arange(spectrum.size)\nnew_dataset.freq.op_list_pix = rng\nnew_dataset.data = hsi\nassert new_dataset.size == spectrum.size\nassert (new_dataset.data != 0).sum() == len(rng)\nprint('A - B: {}'.format(new_dataset.data[rng] - hsi[..., rng].mean(axis=(0,\n    1))))\nnp.testing.assert_almost_equal(new_dataset.data[rng], hsi[..., rng].mean(\n    axis=(0, 1)))\n"
+}

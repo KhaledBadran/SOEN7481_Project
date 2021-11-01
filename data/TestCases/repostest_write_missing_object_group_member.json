@@ -1,0 +1,9 @@
+{
+    "functionName": "test_write_missing_object_group_member",
+    "className": "TestLocateRequestPayload",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_locate.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a Locate request payload can be written to a data stream\n        even when missing the object group member.\n        \"\"\"\npayload = payloads.LocateRequestPayload(maximum_items=1, offset_items=1,\n    storage_status_mask=3, attributes=[objects.Attribute(attribute_name=\n    objects.Attribute.AttributeName('Object Group'), attribute_value=\n    primitives.TextString(value='RoundRobinTestGroup', tag=enums.Tags.\n    OBJECT_GROUP))])\nstream = utils.BytearrayStream()\npayload.write(stream)\nself.assertEqual(len(self.no_object_group_member_encoding), len(stream))\nself.assertEqual(str(self.no_object_group_member_encoding), str(stream))\n"
+}

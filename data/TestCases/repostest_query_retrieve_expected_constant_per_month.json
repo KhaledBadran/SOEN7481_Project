@@ -1,0 +1,9 @@
+{
+    "functionName": "test_query_retrieve_expected_constant_per_month",
+    "className": null,
+    "fileName": "/AntoineToubhans_&_MongoTs/test_&_integration_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "df = big_collection.query(datetime(2010, 1, 1), datetime(2010, 9, 1),\n    aggregateby='1m')\nassert (9, 5) == df.shape\nassert list(df['count']) == [31, 28, 31, 30, 31, 30, 31, 31, 0]\nassert list(df['mean'])[:8] == [0, 5, 10, 15, 20, 25, 30, 35]\nassert np.isnan(list(df['mean'])[8])\nassert list(df['std'])[:8] == [0, 0, 0, 0, 0, 0, 0, 0]\nassert np.isnan(list(df['std'])[8])\nassert list(df['min'])[:8] == [0, 5, 10, 15, 20, 25, 30, 35]\nassert list(df['min'])[8] == np.inf\nassert list(df['max'])[:8] == [0, 5, 10, 15, 20, 25, 30, 35]\nassert list(df['max'])[8] == -np.inf\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "_run_configure",
+    "className": "TestBuildWaf",
+    "fileName": "/cournape_&_Bento/bento_&_commands_&_tests_&_test_build.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "from bento.backends.waf_backend import make_stream_logger\nfrom bento.backends.waf_backend import WafBackend\ntop_node = self.top_node\nbento_info = bentos['bento.info']\npackage = PackageDescription.from_string(bento_info)\npackage_options = PackageOptions.from_string(bento_info)\ncreate_fake_package_from_bento_info(top_node, bento_info)\ntop_node.make_node('bento.info').safe_write(bento_info)\nglobal_context = create_global_context(package, package_options, WafBackend())\nconf, configure = prepare_command(global_context, 'configure',\n    configure_argv, package, top_node)\nrun_command_in_context(conf, configure)\nbld, build = prepare_command(global_context, 'build', build_argv, package,\n    top_node)\nbld.waf_context.logger = make_stream_logger('build', cStringIO())\nreturn conf, configure, bld, build\n"
+}

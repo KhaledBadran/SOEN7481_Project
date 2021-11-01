@@ -1,0 +1,9 @@
+{
+    "functionName": "test_simple_email",
+    "className": null,
+    "fileName": "/PearsonEducation_&_Alarmageddon/tests_&_publishing_&_test_emailer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "email_pub = SimpleEmailPublisher({'real_name': 'test', 'address':\n    'test@test.com'}, [{'real_name': 'test', 'address': 'test@test.com'}],\n    host=smtpserver.addr[0], port=smtpserver.addr[1])\nhttp_validator = HttpValidation.get(httpserver.url).expect_status_codes([200])\nresult = Failure('Check Status Route', http_validator, description=\n    'Validation failure message')\nemail_pub.send(result)\nassert len(smtpserver.outbox) == 1\npayload = str(smtpserver.outbox[0].get_payload()[0])\nassert payload.split('\\n')[-1] == 'Validation failure message'\n"
+}

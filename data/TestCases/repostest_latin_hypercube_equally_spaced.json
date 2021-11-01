@@ -1,0 +1,9 @@
+{
+    "functionName": "test_latin_hypercube_equally_spaced",
+    "className": "TestLatinHypercubeRandomPointGeneration",
+    "fileName": "/Yelp_&_MOE/moe_&_tests_&_optimal_learning_&_python_&_geometry_utils_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that generate_latin_hypercube_points returns properly spaced points.\n\n        Sampling from a latin hypercube results in a set of points that in each dimension are drawn\n        uniformly from sub-intervals of the domain this tests that every sub-interval in each dimension\n        contains exactly one point.\n\n        \"\"\"\nfor domain in self.domains_to_test:\n    for num_points in self.num_points_to_test:\n        domain_bounds = domain._domain_bounds\n        points = generate_latin_hypercube_points(num_points, domain_bounds)\n        for dim in xrange(domain.dim):\n            sub_domain_width = domain_bounds[dim].length / float(num_points)\n            points = sorted(points, key=lambda points: points[dim])\n            for i, point in enumerate(points):\n                min_val = domain_bounds[dim].min + sub_domain_width * i\n                max_val = min_val + sub_domain_width\n                assert min_val <= point[dim] <= max_val\n"
+}

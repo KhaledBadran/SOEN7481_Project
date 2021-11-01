@@ -1,0 +1,9 @@
+{
+    "functionName": "test_authentication_challenge_response",
+    "className": null,
+    "fileName": "/RobertoPrevato_&_BlackSheep/tests_&_test_auth.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "app = FakeApplication()\napp.use_authentication().add(AccessTokenCrashingHandler())\napp.use_authorization().add(AdminsPolicy()\n    ).default_policy += AuthenticatedRequirement()\n@app.router.get(b'/')\nasync def home():\n    return None\napp.prepare()\nawait app(get_example_scope('GET', '/'), MockReceive(), MockSend())\nassert app.response.status == 401\nheader = app.response.get_single_header(b'WWW-Authenticate')\nassert header is not None\nassert header == b'Bearer, error=\"Invalid access token\", error_description=\"Access token expired\"'\npytest.mark.asyncio"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_barrier_all_3",
+    "className": "Test_barrier",
+    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_barrier.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.setUp()\nconfig_fn = os.path.join(curdir, 'hardware_config_cc_light.json')\nplatform = ql.Platform('seven_qubits_chip', config_fn)\nsweep_points = [1, 2]\nnum_qubits = platform.get_qubit_number()\np = ql.Program('test_barrier_all_3', platform, num_qubits)\np.set_sweep_points(sweep_points)\nk = ql.Kernel('aKernel', platform, num_qubits)\nk.gate('ry90', [0])\nk.gate('ry90', [2])\nk.gate('rx90', [2])\nk.gate('measure', [0])\nk.gate('measure', [1])\nk.gate('measure', [2])\nk.gate('measure', [4])\nk.gate('wait', [], 0)\nk.gate('ry90', [4])\nk.gate('ry90', [1])\nk.gate('measure', [0])\nk.gate('measure', [1])\nk.gate('measure', [2])\nk.gate('measure', [4])\nk.barrier()\nk.gate('ry90', [4])\nk.gate('ry90', [1])\np.add_kernel(k)\np.compile()\nQASM_fn = os.path.join(output_dir, p.name + '_scheduledqasmwriter_out.qasm')\ngold_fn = rootDir + '/golden/test_barrier_all.qasm'\nself.assertTrue(file_compare(QASM_fn, gold_fn))\n"
+}

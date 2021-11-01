@@ -1,0 +1,9 @@
+{
+    "functionName": "test_apt_mc_enabled",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_thorlabs_&_test_thorlabs_apt.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Enable the channel and read status back.\"\"\"\nwith expected_protocol(ik.thorlabs.APTMotorController, [init_kdc101[0],\n    ThorLabsPacket(message_id=ThorLabsCommands.MOD_REQ_CHANENABLESTATE,\n    param1=1, param2=0, dest=80, source=1, data=None).pack(),\n    ThorLabsPacket(message_id=ThorLabsCommands.MOD_SET_CHANENABLESTATE,\n    param1=1, param2=1, dest=80, source=1, data=None).pack()], [init_kdc101\n    [1], ThorLabsPacket(message_id=ThorLabsCommands.MOD_GET_CHANENABLESTATE,\n    param1=1, param2=2, dest=80, source=1, data=None).pack()], sep='') as apt:\n    assert not apt.channel[0].enabled\n    apt.channel[0].enabled = True\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_occam_data_not_equal",
+    "className": null,
+    "fileName": "/mortele_&_OccamTools/test_&_test_occam_data.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "for i in range(2):\n    fort1, fort7, xyz = _load_default_forts()\n    if i == 0:\n        fort1.n_particles += 1\n    else:\n        fort1.title = 'changed'\n    warnings.filterwarnings('ignore')\n    fort1.n_particles += 1\n    occam_data = OccamData(fort1, fort7, xyz, silent=True)\n    assert occam_data.consistent is False\n    warnings.filterwarnings('error')\n    caught = False\n    try:\n        _ = OccamData(fort1, fort7, xyz, silent=True)\n    except Warning:\n        caught = True\n    assert caught\nwarnings.filterwarnings('always')\n"
+}

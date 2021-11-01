@@ -1,0 +1,9 @@
+{
+    "functionName": "test_edit_admin_role",
+    "className": "TestEditRoles",
+    "fileName": "/fvalverd_&_AutoApi/tests_&_test_operations.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "for admin, email, status_code in [(True, 'user_1', 204), (False, 'user_2', 403)\n    ]:\n    response = self.app.post('/roles', headers=self.headers, data=json.\n        dumps({'email': self.read_user['email'], 'api': self.api, 'roles':\n        {'admin': admin}}), content_type='application/json')\n    self.assertEqual(response.status_code, 204)\n    response = self.app.post('/user', headers=self.read_user_header, data=\n        json.dumps({'email': email, 'password': u'pass', 'api': self.api}),\n        content_type='application/json')\n    self.assertEqual(response.status_code, status_code)\n"
+}

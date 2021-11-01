@@ -1,0 +1,9 @@
+{
+    "functionName": "test_schema",
+    "className": null,
+    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_schema.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "json_msg = \"\"\"\n{\n    \"arguments\": {\n        \"adapterID\": \"pydevd\",\n        \"clientID\": \"vscode\",\n        \"clientName\": \"Visual Studio Code\",\n        \"columnsStartAt1\": true,\n        \"linesStartAt1\": true,\n        \"locale\": \"en-us\",\n        \"pathFormat\": \"path\",\n        \"supportsRunInTerminalRequest\": true,\n        \"supportsVariablePaging\": true,\n        \"supportsVariableType\": true\n    },\n    \"command\": \"initialize\",\n    \"seq\": 1,\n    \"type\": \"request\"\n}\"\"\"\ninitialize_request = pydevd_base_schema.from_json(json_msg)\nassert initialize_request.__class__ == InitializeRequest\nassert initialize_request.arguments.__class__ == InitializeRequestArguments\nassert initialize_request.arguments.adapterID == 'pydevd'\nassert initialize_request.command == 'initialize'\nassert initialize_request.type == 'request'\nassert initialize_request.seq == 1\nresponse = pydevd_base_schema.build_response(initialize_request)\nassert response.__class__ == InitializeResponse\nassert response.seq == -1\nassert response.command == 'initialize'\nassert response.type == 'response'\nassert response.body.__class__ == Capabilities\nassert response.to_dict() == {'seq': -1, 'type': 'response', 'request_seq':\n    1, 'success': True, 'command': 'initialize', 'body': {}}\ncapabilities = response.body\ncapabilities.supportsCompletionsRequest = True\nassert response.to_dict() == {'seq': -1, 'type': 'response', 'request_seq':\n    1, 'success': True, 'command': 'initialize', 'body': {\n    'supportsCompletionsRequest': True}}\ninitialize_event = pydevd_schema.InitializedEvent()\nassert initialize_event.to_dict() == {'seq': -1, 'type': 'event', 'event':\n    'initialized'}\n"
+}

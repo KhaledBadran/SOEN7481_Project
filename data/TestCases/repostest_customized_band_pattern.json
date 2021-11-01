@@ -1,0 +1,9 @@
+{
+    "functionName": "test_customized_band_pattern",
+    "className": null,
+    "fileName": "/Edinburgh-Genome-Foundry_&_BandWagon/tests_&_test_basics.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "band_image_path = os.path.join('tests', 'data', 'band_image.png')\npng_path = os.path.join(str(tmpdir), 'test.png')\ngel_image = mpimg.imread(band_image_path)\npatterns = [BandsPattern([100, 1500, 2000, 1000, 3500], ladder, label='C1',\n    corner_note='corner note', corner_note_fontdict=None, background_color=\n    '#eeeeff', gel_image=gel_image)]\npatterns_set = BandsPatternsSet(patterns=[ladder] + patterns, ladder=ladder,\n    label='Digests', ladder_ticks=3)\nax = patterns_set.plot()\nax.figure.savefig(png_path, bbox_inches='tight', dpi=200)\nassert os.path.exists(png_path)\n"
+}

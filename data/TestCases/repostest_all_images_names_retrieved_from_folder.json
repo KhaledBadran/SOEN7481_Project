@@ -1,0 +1,9 @@
+{
+    "functionName": "test_all_images_names_retrieved_from_folder",
+    "className": "TestLoading",
+    "fileName": "/ornlneutronimaging_&_NeuNorm/tests_&_NeuNorm_&_loading_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"assert list_of images are correctly loaded when retrieved from folder\"\"\"\npath = self.data_path + '/tif/sample'\no_norm = Normalization()\no_norm.load(folder=path, data_type='sample', auto_gamma_filter=False)\nlist_of_files = ['image001.tif', 'image002.tif', 'image003.tif']\nlist_of_files_expected = [os.path.join(path, _file) for _file in list_of_files]\nlist_of_files_retrieved = o_norm.data['sample']['file_name']\nself.assertTrue(list_of_files_expected == list_of_files_retrieved)\npath = self.data_path + '/fits/sample'\no_norm = Normalization()\no_norm.load(folder=path, data_type='sample', auto_gamma_filter=False)\nlist_of_files = ['image001.fits', 'image002.fits', 'image003.fits']\nlist_of_files_expected = [os.path.join(path, _file) for _file in list_of_files]\nlist_of_files_retrieved = o_norm.data['sample']['file_name']\nself.assertTrue(list_of_files_expected == list_of_files_retrieved)\n"
+}

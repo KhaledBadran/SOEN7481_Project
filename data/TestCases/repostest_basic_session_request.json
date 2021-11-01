@@ -1,0 +1,9 @@
+{
+    "functionName": "test_basic_session_request",
+    "className": "TestRequestBuilder",
+    "fileName": "/bigfishgames_&_GameBenchAPI-PyClient/tests_&_test_integration_&_test_api_&_test_requests_retriever_&_test_builder_&_test_request_builder.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Test to check that each property of the auth request is\n            built and set correctly.\n        \"\"\"\nrequest_parameters = DEFAULT_REQUEST_PARAMS\nsession = SessionRequest(**request_parameters)\nself.request_director.construct_request(session)\nexpected = {'method': 'GET', 'url': DEFAULT_SESSION_URL, 'headers':\n    DEFAULT_SESSION_HEADERS, 'params': 'test_params', 'data': {'test_data':\n    'test_data'}}\nactual = {'method': session.request.method, 'url': session.request.url,\n    'headers': session.request.headers, 'params': session.request.params,\n    'data': session.request.data}\nself.assertEqual(expected, actual)\n"
+}

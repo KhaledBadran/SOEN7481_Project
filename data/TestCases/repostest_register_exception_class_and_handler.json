@@ -1,0 +1,9 @@
+{
+    "functionName": "test_register_exception_class_and_handler",
+    "className": null,
+    "fileName": "/jperras_&_Flask-ApiExceptions/test_apiexceptions.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Custom exception handling.\"\"\"\nclass CustomError(Exception):\n    \"\"\"Exception subclass with attributes.\"\"\"\n    teapot_code = 418\n    special = {'foo': 'bar'}\ndef custom_handler(error):\n    \"\"\"Handler for custom exception subclass.\"\"\"\n    response = jsonify(data=error.special)\n    response.status_code = error.teapot_code\n    return response\n@app.route('/testing')\ndef testing():\n    \"\"\"Endpoint to raise our custom exception.\"\"\"\n    raise CustomError()\next = JSONExceptionHandler(app)\next.register(code_or_exception=CustomError, handler=custom_handler)\nwith app.app_context():\n    with app.test_client() as c:\n        rv = c.get('/testing')\nassert rv.status_code == 418\nassert rv.headers['content-type'] == 'application/json'\nassert json.loads(rv.data)['data'] == CustomError.special\n"
+}

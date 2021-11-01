@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fail_if_model_outputs_do_not_match_shapes",
+    "className": null,
+    "fileName": "/NASA_&_MLMCPy/tests_&_mlmc_&_test_MLMCSimulator.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Ensures simulator throws an exception if inputs and outputs with differing\n    numbers of samples are provided.\n    \"\"\"\nmodel1 = ModelFromData(filename_2d_5_column_data, filename_2d_5_column_data,\n    1.0)\nmodel2 = ModelFromData(filename_2d_5_column_data, filename_2d_3_column_data,\n    4.0)\ndata_input = InputFromData(filename_2d_5_column_data)\nwith pytest.raises(ValueError):\n    MLMCSimulator(models=[model1, model2], data=data_input)\n"
+}

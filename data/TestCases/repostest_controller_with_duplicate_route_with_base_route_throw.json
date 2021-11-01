@@ -1,0 +1,9 @@
+{
+    "functionName": "test_controller_with_duplicate_route_with_base_route_throw",
+    "className": null,
+    "fileName": "/RobertoPrevato_&_BlackSheep/tests_&_test_controllers.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "app = FakeApplication()\napp.controllers_router = RoutesRegistry()\nget = app.controllers_router.get\nclass A(Controller):\n    route = 'home'\n\n    @get(first_pattern)\n    async def index(self, request: Request):\n        ...\n@app.route(second_pattern)\nasync def home():\n    ...\nwith pytest.raises(RouteDuplicate):\n    app.use_controllers()\npytest.mark.asynciopytest.mark.parametrize('first_pattern,second_pattern', [('/', '/home'), (\n    b'/', b'/home')])"
+}

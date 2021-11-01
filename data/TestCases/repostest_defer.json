@@ -1,0 +1,9 @@
+{
+    "functionName": "test_defer",
+    "className": "Schedule",
+    "fileName": "/al-niessner_&_DAWGIE/Test_&_test_06.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "dawgie.pl.schedule.periodics([fake_events_defer])\ndawgie.pl.schedule.defer()\nself.assertEqual(3, len(dawgie.pl.schedule.per))\nfor p in dawgie.pl.schedule.per:\n    if p.tag == 'disk.engine':\n        self.assertEqual(State.waiting, p.get('status'))\n    elif p.tag == 'network.analyzer':\n        self.assertEqual(State.delayed, p.get('status'))\n    else:\n        self.assertTrue(False, 'unxpected element ' + p.tag)\n    pass\nself.assertEqual(2, len(dawgie.pl.schedule.que))\nfor e in dawgie.pl.schedule.que:\n    self.assertEqual(State.waiting, e.get('status'))\n    pass\njobs = dawgie.pl.schedule.next_job_batch()\nself.assertEqual(1, len(jobs))\nself.assertSetEqual(set(['a', 'c', 'e', 'b', 'f', 'd', 'g']), jobs[0].get('do')\n    )\nself.assertSetEqual(set(['a', 'c', 'e', 'b', 'f', 'd', 'g']), jobs[0].get(\n    'doing'))\nself.assertSetEqual(set(), jobs[0].get('todo'))\ndawgie.pl.schedule.per.clear()\ndawgie.pl.schedule.que.clear()\nreturn\n"
+}

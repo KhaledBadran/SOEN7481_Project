@@ -1,0 +1,9 @@
+{
+    "functionName": "test_style_transfer",
+    "className": "TestModels",
+    "fileName": "/Microsoft_&_MMdnn/mmdnn_&_conversion_&_examples_&_coreml_&_test_tfcoreml.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "url = (\n    'https://storage.googleapis.com/download.tensorflow.org/models/stylize_v1.zip'\n    )\ntf_model_dir = _download_file(url=url)\ntf_model_path = os.path.join(TMP_MODEL_DIR, 'stylize_quantized.pb')\nmlmodel_path = os.path.join(TMP_MODEL_DIR, 'stylize_quantized.mlmodel')\nmlmodel = tf_converter.convert(tf_model_path=tf_model_path, mlmodel_path=\n    mlmodel_path, output_feature_names=['Squeeze:0'], input_name_shape_dict\n    ={'input:0': [1, 256, 256, 3], 'style_num:0': [26]})\ninput_tensors = [('input:0', [1, 256, 256, 3]), ('style_num:0', [26])]\nself.err_thresh = 0.5\nself._test_tf_model(tf_model_path=tf_model_path, coreml_model=mlmodel,\n    input_tensors=input_tensors, output_tensor_names=['Squeeze:0'],\n    data_modes=['image', 'onehot_0'], delta=0.01, use_cpu_only=True, scale=\n    1, bias=0, img_size=256, sequence_inputs={'style_num:0'})\n"
+}

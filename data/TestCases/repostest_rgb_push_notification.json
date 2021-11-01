@@ -1,0 +1,9 @@
+{
+    "functionName": "test_rgb_push_notification",
+    "className": "TestLight",
+    "fileName": "/albertogeniola_&_MerossIot/tests_&_test_light.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "rgb_capable = list(filter(lambda d: d.get_supports_rgb(), self.light_devices))\nif len(rgb_capable) < 1:\n    self.skipTest(\n        'Could not find any RGB-capable LightMixin within the given set of devices. The test will be skipped'\n        )\n    return\nlight = rgb_capable[0]\nnew_meross_client = await MerossHttpClient.async_from_user_password(email=\n    EMAIL, password=PASSWORD)\nm = None\ntry:\n    m = MerossManager(http_client=new_meross_client)\n    await m.async_init()\n    await m.async_device_discovery()\n    devs = m.find_devices(device_uuids=(light.uuid,))\n    dev = devs[0]\n    r = await light.async_set_light_color(rgb=(255, 0, 0))\n    await asyncio.sleep(2)\n    r = await light.async_set_light_color(rgb=(0, 255, 0))\n    await asyncio.sleep(10)\n    self.assertEqual(light.get_rgb_color(), (0, 255, 0))\n    self.assertEqual(dev.get_rgb_color(), (0, 255, 0))\nfinally:\n    if m is not None:\n        m.close()\n    await new_meross_client.async_logout()\nunittest_run_loop"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_write_to_file2",
+    "className": null,
+    "fileName": "/kallam_&_FileTransforms/tests_&_test_Result.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "f = BaseOutputFile('test.txt', file_type=FileType.TEXT)\nf.add_row('12')\nf.write_to_file()\nwith open(f.file_path, 'r') as tf:\n    assert '12\\n' == tf.read()\nf.headers = ['These headers will be skipped for FileType.TEXT']\nassert f.write_to_file()\nwith open(f.file_path, 'r') as tf:\n    assert '12\\n' == tf.read()\nos.remove(f.file_path)\n"
+}

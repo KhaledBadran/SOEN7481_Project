@@ -1,0 +1,9 @@
+{
+    "functionName": "test_generate_key",
+    "className": "TestTpmPrivateKey",
+    "fileName": "/named-data_&_PyNDN2/tests_&_unit_tests_&_test_tpm_private_key.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "for dataSet in self.keyTestData:\n    key = TpmPrivateKey.generatePrivateKey(dataSet.keyParams)\n    publicKeyBits = key.derivePublicKey()\n    publicKey = PublicKey(publicKeyBits)\n    data = Blob([1, 2, 3, 4])\n    signature = key.sign(data.toBytes(), DigestAlgorithm.SHA256)\n    result = VerificationHelpers.verifySignature(data, signature, publicKey)\n    self.assertTrue(result)\n    key2 = TpmPrivateKey.generatePrivateKey(dataSet.keyParams)\n    self.assertTrue(not key.toPkcs8().equals(key2.toPkcs8()))\n"
+}

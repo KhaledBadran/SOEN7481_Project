@@ -1,0 +1,9 @@
+{
+    "functionName": "test_save_load_model",
+    "className": null,
+    "fileName": "/NTMC-Community_&_MatchZoo/tests_&_unit_test_&_models_&_test_models.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tmpdir = '.matchzoo_test_save_load_tmpdir'\nif Path(tmpdir).exists():\n    shutil.rmtree(tmpdir)\ntry:\n    model.save(tmpdir)\n    assert mz.load_model(tmpdir)\n    with pytest.raises(FileExistsError):\n        model.save(tmpdir)\nfinally:\n    if Path(tmpdir).exists():\n        shutil.rmtree(tmpdir)\npytest.mark.cron"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_zip_data_container_should_merge_1d_with_2d",
+    "className": null,
+    "fileName": "/Neuraxio_&_Neuraxle/testing_&_test_zip_data_container.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data_inputs_3d, expected_outputs_3d = _create_data_source((10, 10, 2))\ndata_inputs_1d, expected_outputs_1d = _create_data_source((10,))\ndata_container_1d = DataContainer(data_inputs=data_inputs_1d,\n    expected_outputs=expected_outputs_1d)\ndata_container = DataContainer(data_inputs=data_inputs_3d, expected_outputs\n    =expected_outputs_3d)\nzip_data_container = ZipDataContainer.create_from(data_container,\n    data_container_1d)\nassert zip_data_container.current_ids == data_container.current_ids\nfor i, di in enumerate(zip_data_container.data_inputs):\n    assert np.array_equal(di[0], data_inputs_3d[i])\n    assert np.array_equal(di[1], data_inputs_1d[i])\n"
+}

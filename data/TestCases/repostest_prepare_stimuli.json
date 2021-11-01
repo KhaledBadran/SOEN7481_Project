@@ -1,0 +1,9 @@
+{
+    "functionName": "test_prepare_stimuli",
+    "className": "TestDecisionMaker",
+    "fileName": "/BciPy_&_BciPy/bcipy_&_tasks_&_tests_&_test_main_frame.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that stimuli are prepared as expected\"\"\"\nprobability_distribution = np.ones(len(self.decision_maker.alphabet))\nself.decision_maker.list_epoch[-1]['list_distribution'].append(\n    probability_distribution)\nstimuli = self.decision_maker.prepare_stimuli()\nself.assertEqual(11, len(stimuli[0][0]))\nfor i in range(1, len(stimuli[0][0])):\n    self.assertIn(stimuli[0][0][i], self.decision_maker.alphabet)\nself.assertEqual(stimuli[1][0][0:2], self.decision_maker.stimuli_timing)\n"
+}

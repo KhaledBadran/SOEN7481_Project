@@ -1,0 +1,9 @@
+{
+    "functionName": "test_greedy_portfolio_allocation_short_different_params",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_discrete_allocation.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "df = get_data()\nmu = mean_historical_return(df)\nS = sample_cov(df)\nef = EfficientFrontier(mu, S, weight_bounds=(-1, 1))\nw = ef.max_sharpe()\nlatest_prices = get_latest_prices(df)\nda = DiscreteAllocation(w, latest_prices, total_portfolio_value=50000,\n    short_ratio=0.5)\nallocation, leftover = da.greedy_portfolio()\nassert da.allocation == {'MA': 77, 'PFE': 225, 'FB': 41, 'BABA': 25, 'AAPL':\n    23, 'BBY': 44, 'AMZN': 2, 'SBUX': 45, 'GOOG': 3, 'WMT': 11, 'XOM': 11,\n    'BAC': -271, 'GM': -133, 'GE': -356, 'SHLD': -922, 'AMD': -285, 'JPM': \n    -5, 'T': -14, 'UAA': -8, 'RRC': -3}\nlong_total = 0\nshort_total = 0\nfor ticker, num in allocation.items():\n    if num > 0:\n        long_total += num * latest_prices[ticker]\n    else:\n        short_total -= num * latest_prices[ticker]\nnp.testing.assert_almost_equal(long_total + short_total + leftover, 75000)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_optimize",
+    "className": "TestManagedLoop",
+    "fileName": "/facebook_&_Ax/ax_&_service_&_tests_&_test_managed_loop.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Tests optimization as a single call.\"\"\"\nbest, vals, exp, model = optimize(parameters=[{'name': 'x1', 'type':\n    'range', 'bounds': [-10.0, 10.0]}, {'name': 'x2', 'type': 'range',\n    'bounds': [-10.0, 10.0]}], evaluation_function=lambda p: (p['x1'] + 2 *\n    p['x2'] - 7) ** 2 + (2 * p['x1'] + p['x2'] - 5) ** 2, minimize=True,\n    total_trials=5)\nself.assertIn('x1', best)\nself.assertIn('x2', best)\nassert vals is not None\nself.assertIn('objective', vals[0])\nself.assertIn('objective', vals[1])\nself.assertIn('objective', vals[1]['objective'])\n"
+}

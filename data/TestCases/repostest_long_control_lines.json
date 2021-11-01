@@ -1,0 +1,9 @@
+{
+    "functionName": "test_long_control_lines",
+    "className": "LexerTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_lexer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "template = \"\"\"\n    % for file in \\\\\n        requestattr['toc'].filenames:\n        x\n    % endfor\n        \"\"\"\nnodes = Lexer(template).parse()\nself._compare(nodes, TemplateNode({}, [Text('\\n', (1, 1)), ControlLine(\n    'for', \"\"\"for file in \\\\\n        requestattr['toc'].filenames:\"\"\", \n    False, (2, 1)), Text('        x\\n', (4, 1)), ControlLine('for',\n    'endfor', True, (5, 1)), Text('        ', (6, 1))]))\n"
+}

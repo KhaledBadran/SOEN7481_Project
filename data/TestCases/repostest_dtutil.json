@@ -1,0 +1,9 @@
+{
+    "functionName": "test_dtutil",
+    "className": null,
+    "fileName": "/quantOS-org_&_JAQS/test_&_test_util.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "import datetime\ndate = 20170105\ndt = jutil.convert_int_to_datetime(date)\nassert jutil.shift(date, 2) == 20170119\nassert jutil.convert_datetime_to_int(jutil.shift(dt, 2)) == 20170119\nt = 145539\ndt = jutil.combine_date_time(date, t)\nassert jutil.split_date_time(dt) == (date, t)\nassert jutil.get_next_period_day(date, 'day', 1, 1) == 20170109\nassert jutil.get_next_period_day(date, 'week', 2, 0) == 20170116\nassert jutil.get_next_period_day(date, 'month', 1, 0) == 20170201\ndate = 20170808\nassert jutil.get_next_period_day(20170831, 'day', extra_offset=1) == 20170904\nassert jutil.get_next_period_day(20170831, 'day', n=2, extra_offset=0\n    ) == 20170904\nassert jutil.get_next_period_day(20170831, 'day', n=7, extra_offset=0\n    ) == 20170911\nassert jutil.get_next_period_day(20170831, 'week', extra_offset=1) == 20170905\nassert jutil.get_next_period_day(20170831, 'month', extra_offset=0) == 20170901\nmonthly = 20170101\nwhile monthly < 20180301:\n    monthly = jutil.get_next_period_day(monthly, 'month', extra_offset=0)\n    assert datetime.datetime.strptime(str(monthly), '%Y%m%d').weekday() < 5\n"
+}

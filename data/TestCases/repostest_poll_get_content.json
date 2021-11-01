@@ -1,0 +1,9 @@
+{
+    "functionName": "test_poll_get_content",
+    "className": null,
+    "fileName": "/EclecticIQ_&_OpenTAXII/tests_&_services_&_test_poll.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "service = server.get_service('poll-A')\noriginal = persist_content(server.persistence, COLLECTION_ONLY_STIX,\n    service.id, binding=CB_STIX_XML_111)\nheaders = prepare_headers(version, https)\nrequest = prepare_request(collection_name=COLLECTION_STIX_AND_CUSTOM,\n    version=version)\nresponse = service.process(headers, request)\nassert isinstance(response, as_tm(version).PollResponse)\nassert len(response.content_blocks) == 0\nheaders = prepare_headers(version, https)\nrequest = prepare_request(collection_name=COLLECTION_ONLY_STIX, version=version\n    )\nresponse = service.process(headers, request)\nassert isinstance(response, as_tm(version).PollResponse)\nassert len(response.content_blocks) == 1\nblock = response.content_blocks[0]\nassert original.content == block.content.encode('utf-8')\nassert original.timestamp_label == block.timestamp_label\nheaders = prepare_headers(version, https)\nrequest = prepare_request(collection_name=COLLECTION_ONLY_STIX, version=\n    version, bindings=[CUSTOM_CONTENT_BINDING])\nwith pytest.raises(exceptions.StatusMessageException):\n    service.process(headers, request)\npytest.mark.parametrize('https', [True, False])pytest.mark.parametrize('version', [11, 10])"
+}

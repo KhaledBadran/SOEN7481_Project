@@ -1,0 +1,9 @@
+{
+    "functionName": "test_compute_total_spectrum2",
+    "className": null,
+    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_core_&_tests_&_test_map_processing.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Create an instance of Dask client in the 'compute_total_spectrum' function to test if it works\"\"\"\ndata_shape = 7, 12, 20\ndata_dask = da.random.random(data_shape, chunks=(2, 3, 4))\ndata_numpy = data_dask.compute()\ntotal_spectrum_expected = np.sum(np.sum(data_numpy, axis=0), axis=0)\ndata = _create_xrf_data(data_dask, 'dask_array', tmpdir=tmpdir)\ntotal_spectrum = compute_total_spectrum(data, chunk_pixels=12)\nnpt.assert_array_almost_equal(total_spectrum, total_spectrum_expected,\n    err_msg='Total spectrum was computed incorrectly')\n"
+}

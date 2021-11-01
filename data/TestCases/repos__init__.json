@@ -1,0 +1,9 @@
+{
+    "functionName": "__init__",
+    "className": "FileLoader",
+    "fileName": "/microsoft_&_LightGBM/tests_&_python_package_test_&_test_consistency.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "directory = os.path.join(os.path.dirname(os.path.realpath(__file__)), directory\n    )\nself.directory = directory\nself.prefix = prefix\nself.params = {'gpu_use_dp': True}\nwith open(os.path.join(directory, config_file), 'r') as f:\n    for line in f.readlines():\n        line = line.strip()\n        if line and not line.startswith('#'):\n            key, value = [token.strip() for token in line.split('=')]\n            if 'early_stopping' not in key:\n                self.params[key] = value if key != 'num_trees' else int(value)\n"
+}

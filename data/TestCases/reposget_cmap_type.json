@@ -1,0 +1,9 @@
+{
+    "functionName": "get_cmap_type",
+    "className": null,
+    "fileName": "/1313e_&_CMasher/cmasher_&_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Checks what the colormap type (sequential; diverging; cyclic; qualitative;\n    misc) of the provided `cmap` is and returns it.\n\n    Parameters\n    ----------\n    cmap : str or :obj:`~matplotlib.colors.Colormap` object\n        The registered name of the colormap in :mod:`matplotlib.cm` or its\n        corresponding :obj:`~matplotlib.colors.Colormap` object.\n\n    Returns\n    -------\n    cm_type : {'sequential'; 'diverging'; 'cyclic'; 'qualitative'; 'misc'}\n        A string stating which of the defined colormap types the provided\n        `cmap` has.\n\n    \"\"\"\ncmap = mplcm.get_cmap(cmap)\nrgb = cmap(np.arange(cmap.N))[:, :3]\nlab = cspace_converter('sRGB1', 'CAM02-UCS')(rgb)\nL = lab[:, (0)]\ndiff_L = np.diff(L)\nN = cmap.N - 1\ncentral_i = [int(np.floor(N / 2)), int(np.ceil(N / 2))]\ndiff_L0 = np.diff(L[:central_i[0] + 1])\ndiff_L1 = np.diff(L[central_i[1]:])\nlab_red = lab[[-2, -1, 0, 1]]\ndeltas = np.sqrt(np.sum(np.diff(lab_red, axis=0) ** 2, axis=-1))\nif cmap.N < 40:\n    return 'qualitative'\nelif np.allclose(diff_L, 0):\n    return 'misc'\nelif np.isclose(np.abs(np.sum(diff_L)), np.sum(np.abs(diff_L))):\n    return 'sequential'\nelif np.isclose(np.abs(np.sum(diff_L0)), np.sum(np.abs(diff_L0))\n    ) and np.isclose(np.abs(np.sum(diff_L1)), np.sum(np.abs(diff_L1))):\n    if np.all(np.abs(np.diff(deltas)) < deltas[::2]) and np.diff(deltas[::2]):\n        return 'cyclic'\n    else:\n        return 'diverging'\nelse:\n    return 'misc'\n"
+}

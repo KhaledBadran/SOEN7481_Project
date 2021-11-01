@@ -1,0 +1,9 @@
+{
+    "functionName": "test_basic_config",
+    "className": "TestIxnOffline",
+    "fileName": "/shmir_&_PyIxNetwork/tests_&_test_offline.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Test configuration build with basic objects - ports, interfaces, traffic items...\n\n        todo: refactor with NGPF\n        \"\"\"\nif self._is_linux_server():\n    pytest.skip('server does not support classical protocols')\nself.logger.info(TestIxnOffline.test_basic_config.__doc__)\nnum_ports = 2\nnum_ints = 2\nixn_ports = self._build_config(num_ports, num_ints)\nassert len(ixn_ports) == num_ports\nfor ixn_port in ixn_ports:\n    assert len(ixn_ports[ixn_port]) == num_ints\nixn_protocols = list(ixn_ports.keys())[0].get_child_static('protocols')\nixn_bgp = ixn_protocols.get_child_static('bgp')\nixn_bgp.set_attributes(enabled=True)\nixn_ipv4_neighbor = IxnObject(parent=ixn_bgp, objType='neighborRange')\nixn_ipv4_neighbor.set_attributes(bgpId='1.1.1.1')\nixn_ipv4_neighbor.set_attributes(interfaces=list(ixn_ports.values())[0][0].\n    obj_ref())\nixn_ipv4_neighbor.set_attributes(localIpAddress='0.0.0.0')\nixn_ti = IxnL23TrafficItem(name='One interface')\nixn_ti.set_attributes(trafficType='ipv4')\nixn_ti_es = IxnObject(parent=ixn_ti, objType='endpointSet')\nsources = [list(ixn_ports)[0].get_objects_by_type('interface')[0].obj_ref()]\ndestinations = [list(ixn_ports)[1].get_objects_by_type('interface')[0].\n    obj_ref()]\nixn_ti_es.set_attributes(sources=sources, destinations=destinations)\nself._save_config()\n"
+}

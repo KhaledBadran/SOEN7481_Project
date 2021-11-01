@@ -1,0 +1,9 @@
+{
+    "functionName": "test_verify_claim_set_failure_claims_unexpected_and_missing",
+    "className": "EasyJWTTest",
+    "fileName": "/BMeu_&_EasyJWT/tests_&_easyjwt_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n            Test verifying a claim set with missing and unexpected claims.\n\n            Expected result: An `InvalidClaimSetError` error with an explaining message is raised.\n        \"\"\"\neasyjwt = EasyJWT(self.key)\neasyjwt.email = 'test@example.com'\nclaim_set = easyjwt._get_claim_set()\nclaim_set['user_id'] = 1\ndel claim_set['email']\nwith self.assertRaises(InvalidClaimSetError) as exception_cm:\n    easyjwt._verify_claim_set(claim_set)\nself.assertEqual('Missing claims: {email}. Unexpected claims: {user_id}',\n    str(exception_cm.exception))\n"
+}

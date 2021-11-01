@@ -1,0 +1,9 @@
+{
+    "functionName": "test_create_login_profile_exception",
+    "className": "TestLoginProfile",
+    "fileName": "/SUSE_&_Enceladus/mockboto3_&_tests_&_test_iam.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test create login profile already exists raises exception.\"\"\"\nmsg = (\n    'An error occurred (EntityAlreadyExists) when calling the CreateLoginProfile operation: LoginProfile for user with name John already exists.'\n    )\nself.client.create_user(UserName=self.user)\nself.client.create_login_profile(UserName=self.user, Password=self.password)\nwith pytest.raises(MockBoto3ClientError) as e:\n    self.client.create_login_profile(UserName=self.user, Password=self.password\n        )\nassert msg == str(e.value)\nmock_iam"
+}

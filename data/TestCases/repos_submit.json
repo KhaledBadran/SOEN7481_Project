@@ -1,0 +1,9 @@
+{
+    "functionName": "_submit",
+    "className": "TestCase",
+    "fileName": "/IntegralDefense_&_ACE/test_ace_api.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "temp_path = os.path.join(saq.SAQ_HOME, saq.TEMP_DIR, 'submit_test.dat')\ntemp_data = os.urandom(1024)\nwith open(temp_path, 'wb') as fp:\n    fp.write(temp_data)\ntry:\n    with open(temp_path, 'rb') as fp:\n        return ace_api.submit(analysis_mode='test_empty' if analysis_mode is\n            None else analysis_mode, tool='unittest_tool' if tool is None else\n            tool, tool_instance='unittest_tool_instance' if tool_instance is\n            None else tool_instance, type='unittest_type' if type is None else\n            type, description='testing' if description is None else\n            description, details={'hello': 'world'} if details is None else\n            details, event_time=self._get_submit_time() if event_time is\n            None else event_time, observables=[{'type': 'ipv4', 'value':\n            '1.2.3.4', 'time': self._get_submit_time(), 'tags': ['tag_1',\n            'tag_2'], 'directives': ['no_scan'], 'limited_analysis': [\n            'basic_test']}, {'type': 'user', 'value': 'test_user', 'time':\n            self._get_submit_time()}] if observables is None else\n            observables, tags=['alert_tag_1', 'alert_tag_2'] if tags is\n            None else tags, files=[('sample.dat', io.BytesIO(\n            b'Hello, world!')), ('submit_test.dat', fp)])\nfinally:\n    os.remove(temp_path)\n"
+}

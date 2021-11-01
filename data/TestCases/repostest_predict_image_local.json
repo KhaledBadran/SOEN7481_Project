@@ -1,0 +1,9 @@
+{
+    "functionName": "test_predict_image_local",
+    "className": "TestSimple",
+    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_test_simple_integration.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "resource_path = os.path.join(os.path.split(__file__)[0], 'resources')\nimage_path = os.path.join(resource_path, 'pascal/000025.jpg')\nimage_frame = ImageFrame.read(image_path)\ntransformer = Pipeline([Resize(256, 256), CenterCrop(224, 224),\n    ChannelNormalize(0.485, 0.456, 0.406, 0.229, 0.224, 0.225), MatToTensor\n    (), ImageFrameToSample()])\nimage_frame.transform(transformer)\nmodel = Sequential()\nmodel.add(SpatialConvolution(3, 6, 5, 5))\nmodel.add(Tanh())\nimage_frame = model.predict_image(image_frame)\npredicts = image_frame.get_predict()\n"
+}

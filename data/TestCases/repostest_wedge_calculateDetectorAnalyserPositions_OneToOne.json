@@ -1,0 +1,9 @@
+{
+    "functionName": "test_wedge_calculateDetectorAnalyserPositions_OneToOne",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Geometry_&_Wedge.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "wedge = Wedge(concept='OneToOne')\nDet = Detector.TubeDetector1D(position=(1.0, 0.0, 1.0), direction=(1.0, 0, \n    0), length=0.5, pixels=5)\nAna = Analyser.FlatAnalyser(position=(0.5, 0, 0), direction=(1, 0, 1))\nDet2 = Detector.TubeDetector1D(position=(1.5, 0.1, 1.0), direction=(1.0, 0,\n    0), length=0.5, pixels=5)\nAna2 = Analyser.FlatAnalyser(position=(0.75, 0, 0), direction=(1, 0, 1))\nwedge.append([Det, Det2, Ana, Ana2])\ndetectorPixelPositions, analyserPixelPositions = (wedge.\n    calculateDetectorAnalyserPositions())\nDetPixelPos = np.array([[[0.8, 0, 1], [0.9, 0, 1], [1.0, 0, 1], [1.1, 0, 1],\n    [1.2, 0, 1]]])\nassert np.all(DetPixelPos == detectorPixelPositions[0][0])\nassert np.all([(x == Ana.position) for x in analyserPixelPositions[0]])\nDetPixelPos2 = np.array([[[1.3, 0.1, 1], [1.4, 0.1, 1], [1.5, 0.1, 1], [1.6,\n    0.1, 1], [1.7, 0.1, 1]]])\nassert np.all(DetPixelPos2 == detectorPixelPositions[1][0])\nassert np.all([(x[0] == Ana2.position[0]) for x in analyserPixelPositions[1]])\noffcenterpos = np.array([0.02225497, 0.02166939, 0.02105171, 0.02041748, \n    0.01977911])\nassert np.sum([(analyserPixelPositions[1][i][1] - offcenterpos[i]) for i in\n    range(5)]) < 1e-08\n"
+}

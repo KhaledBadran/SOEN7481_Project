@@ -1,0 +1,9 @@
+{
+    "functionName": "test_multiphase_set_occupancy_w_pore_indices_and_Pvals",
+    "className": "MultiPhaseTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_phases_&_MultiPhaseTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "m = op.phases.MultiPhase(network=self.net, phases=[self.air, self.water])\nPs_water = np.array([0, 1, 2])\nPvals = np.array([0.5, 0.9, 0.01])\nPs_water_mask = self.net.tomask(Ps_water)\nTs_water = np.array([4, 12, 22])\nTs_water_mask = self.net.tomask(throats=Ts_water)\nTvals = np.array([0.3, 0.4, 0.1])\nm.set_occupancy(self.water, pores=Ps_water, Pvals=Pvals, throats=Ts_water,\n    Tvals=Tvals)\nassert_allclose(m['pore.occupancy.water'][Ps_water], Pvals)\nassert_allclose(m['throat.occupancy.water'][Ts_water], Tvals)\nassert m['pore.occupancy.water'][~Ps_water_mask].mean() == 0\nassert m['throat.occupancy.water'][~Ts_water_mask].mean() == 0\nwith pytest.raises(Exception):\n    m.set_occupancy(self.water, pores=[1, 5, 10], Pvals=[0.5, 0])\nwith pytest.raises(Exception):\n    m.set_occupancy(self.water, throats=[10, 52, 0], Tvals=[0.5, 0.01])\nm.set_occupancy(self.water, pores=Ps_water, Pvals=0.25, throats=Ts_water,\n    Tvals=0.23)\nassert m['pore.occupancy.water'][Ps_water].mean() == 0.25\nassert m['throat.occupancy.water'][Ts_water].mean() == 0.23\n"
+}

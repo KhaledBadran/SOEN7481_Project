@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sorting_by_multiple_parameters",
+    "className": "TestMMFlatViews",
+    "fileName": "/Axiologue_&_DjangoRestMultipleModels/tests_&_test_flat_view.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Sorting by multiple fields should work\n        \"\"\"\nview = SortingMultipleFieldsFlatView.as_view()\nrequest = factory.get('/')\nwith self.assertNumQueries(2):\n    response = view(request).render()\nself.assertEqual(len(response.data), 6)\nself.assertEqual(response.data, sorted(sorted(self.sorted_results_w_author,\n    key=lambda x: x['title']), key=lambda x: x['type']))\n"
+}

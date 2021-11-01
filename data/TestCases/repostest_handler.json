@@ -1,0 +1,9 @@
+{
+    "functionName": "test_handler",
+    "className": "ExceptionTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_def.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "def handle(context, error):\n    context.write('error message is ' + str(error))\n    return True\ntemplate = Template(\n    \"\"\"\n            <%\n                raise Exception(\"this is a test\")\n            %>\n    \"\"\"\n    , error_handler=handle)\neq_(template.render().strip(), 'error message is this is a test')\n"
+}

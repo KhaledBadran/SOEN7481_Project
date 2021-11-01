@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_output_and_shape_for",
+    "className": "TestMaxPool1DLayer",
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_pool.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "input = floatX(np.random.randn(8, 16, 23))\ninput_layer = self.input_layer(input.shape)\ninput_theano = theano.shared(input)\nlayer = self.layer(input_layer, pool_size, stride)\nlayer_output_shape = layer.get_output_shape_for(input.shape)\nlayer_output = layer.get_output_for(input_theano)\nlayer_result = layer_output.eval()\nnumpy_result = max_pool_1d(input, pool_size, stride)\nassert numpy_result.shape == layer_output_shape\nassert np.allclose(numpy_result, layer_result)\npytest.mark.parametrize('pool_size, stride', list(pool_test_sets()))"
+}

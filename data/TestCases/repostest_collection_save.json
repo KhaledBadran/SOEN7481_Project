@@ -1,0 +1,9 @@
+{
+    "functionName": "test_collection_save",
+    "className": null,
+    "fileName": "/Vizzuality_&_LMIPy/tests_&_test_lmipy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "col = Collection(search='template', object_type=['dataset'], app=['gfw'],\n    env='staging')\nds = col[0]\nsave_path = './tests/collection'\ncol.save(path=save_path)\nassert os.path.exists(save_path) == True\nassert f'{ds.id}.json' in os.listdir(save_path)\n_ = [os.remove(save_path + f'/{f}') for f in os.listdir(save_path)]\nos.rmdir(save_path)\n"
+}

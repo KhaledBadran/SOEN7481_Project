@@ -1,0 +1,9 @@
+{
+    "functionName": "test_raw_data_format",
+    "className": "TestAxClient",
+    "fileName": "/facebook_&_Ax/ax_&_service_&_tests_&_test_ax_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ax_client = AxClient()\nax_client.create_experiment(parameters=[{'name': 'x', 'type': 'range',\n    'bounds': [-5.0, 10.0]}, {'name': 'y', 'type': 'range', 'bounds': [0.0,\n    15.0]}], minimize=True)\nfor _ in range(6):\n    parameterization, trial_index = ax_client.get_next_trial()\n    x, y = parameterization.get('x'), parameterization.get('y')\n    ax_client.complete_trial(trial_index, raw_data=(branin(x, y), 0.0))\nwith self.assertRaisesRegex(ValueError, 'Raw data has an invalid type'):\n    ax_client.update_trial_data(trial_index, raw_data='invalid_data')\n"
+}

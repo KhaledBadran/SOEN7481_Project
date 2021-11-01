@@ -1,0 +1,9 @@
+{
+    "functionName": "test_scheme_prefix",
+    "className": "TestWin32Scheme",
+    "fileName": "/cournape_&_Bento/bento_&_commands_&_tests_&_test_configure.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "bento_info = 'Name: foo\\n'\nself.options.prefix = 'C:\\\\foo'\nself.eprefix = None\nscheme = self._compute_scheme(bento_info, self.options)\nprefix = scheme.pop('prefix')\neprefix = scheme.pop('eprefix')\nscheme.pop('py_version_short')\nscheme.pop('pkgname')\nself.assertEqual(prefix, 'C:\\\\foo')\nself.assertEqual(eprefix, 'C:\\\\foo')\nfor k, v in scheme.items():\n    self.assertEqual(WIN32_REFERENCE[k], v, \n        'discrepency for path %s: %s vs %s' % (k, WIN32_REFERENCE[k], v))\nmock.patch('sys.platform', 'win32')mock.patch('bento.core.platforms.sysconfig.bento.utils.path.find_root', lambda\n    ignored: 'C:\\\\')"
+}

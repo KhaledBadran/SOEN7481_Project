@@ -1,0 +1,9 @@
+{
+    "functionName": "test_hash_memory_storage_pcabp",
+    "className": "TestHashStorage",
+    "fileName": "/pixelogik_&_NearPy/tests_&_hash_storage_tests.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "train_vectors = numpy.random.randn(10, 100)\nhash1 = PCABinaryProjections('testPCABPHash', 4, train_vectors)\nself.memory.store_hash_configuration(hash1)\nhash2 = PCABinaryProjections(None, None, None)\nhash2.apply_config(self.memory.load_hash_configuration('testPCABPHash'))\nself.assertEqual(hash1.dim, hash2.dim)\nself.assertEqual(hash1.hash_name, hash2.hash_name)\nself.assertEqual(hash1.projection_count, hash2.projection_count)\nfor i in range(hash1.components.shape[0]):\n    for j in range(hash1.components.shape[1]):\n        self.assertEqual(hash1.components[i, j], hash2.components[i, j])\n"
+}

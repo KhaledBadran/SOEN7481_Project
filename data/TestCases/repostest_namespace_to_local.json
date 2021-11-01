@@ -1,0 +1,9 @@
+{
+    "functionName": "test_namespace_to_local",
+    "className": null,
+    "fileName": "/glentner_&_CmdKit/tests_&_test_config.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test Namespace.to_local dispatch method.\"\"\"\nfor ftype in FACTORIES:\n    ns = Namespace(TEST_DICT)\n    ns.to_local(f'{TMPDIR}/{ftype}.{ftype}')\n    assert ns == Namespace.from_local(f'{TMPDIR}/{ftype}.{ftype}')\nwith pytest.raises(NotImplementedError):\n    ns = Namespace(TEST_DICT)\n    ns.to_local(f'{TMPDIR}/config.special')\n"
+}

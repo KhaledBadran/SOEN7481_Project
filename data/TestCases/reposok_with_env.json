@@ -1,0 +1,9 @@
+{
+    "functionName": "ok_with_env",
+    "className": "TestConfigure",
+    "fileName": "/axiros_&_DevApps/tests_&_test_configure.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "argv = self.test_ok(get_argv=True)\nm = {}\nm[pref + 'MyApp_b_dflt_True'] = '0'\nm[pref + 'MyApp_inner_deep_f_d_float'] = '1.2'\nm[pref + 'MyApp_inner_deep_s_d_dflt'] = 'not_taken_is_in_cli_args'\ne.update(m)\nexp = {'cls': {'attr_inst': 2.4, 'b_dflt_False': False, 'b_dflt_True': \n    False, 'b_no_dflt': True, 'd_no_dflt': {'a': 'b:2'}, 'f_dflt': 42.0,\n    'f_no_dflt': 2.3, 'i_dflt': 42, 'i_no_dflt': 23, 'inner': {'b_i_dflt': \n    False, 'deep': {'b_d_dflt': False, 'f_d_float': 1.2, 's_d_dflt':\n    'my_deep_str'}, 's_i_dflt': 'inner_cust_str'}, 'l_no_dflt': ['1'],\n    's_dflt': 'foo', 's_no_dflt': 'sndfoo'}, 'func_param': 'myenvp'}\nenv = 'MyApp' if not pref else pref + 'MyApp'\nres = self.configure((CLI(argv, set_runner_func=False), Env(env)))[0]().do_run(\n    'myenvp')\nassert res == exp\nfor k in m:\n    del os.environ[k]\n"
+}

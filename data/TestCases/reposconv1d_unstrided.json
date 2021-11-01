@@ -1,0 +1,9 @@
+{
+    "functionName": "conv1d_unstrided",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_theano_extensions_&_conv.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    perform a strided 1D convolution by reshaping input and filters so that the\n    stride becomes 1. This function requires that the filter length is a\n    multiple of the stride. It also truncates the input to have a length\n    that is a multiple of the stride.\n    \"\"\"\nbatch_size, num_input_channels, input_length = image_shape\nnum_filters, num_input_channels_, filter_length = filter_shape\nstride = subsample[0]\nif filter_length % stride > 0:\n    raise RuntimeError(\n        'Filter length (%d) is not a multiple of the stride (%d)' % (\n        filter_length, stride))\nif border_mode not in ('valid', 0, (0,)):\n    raise RuntimeError('Unsupported border_mode for conv1d_unstrided: %s' %\n        border_mode)\nnum_steps = filter_length // stride\ntruncated_length = input_length // stride * stride\ninput_truncated = input[:, :, :truncated_length]\nr_input_shape = (batch_size, num_input_channels, truncated_length // stride,\n    stride)\nr_input = input_truncated.reshape(r_input_shape)\nr_input_folded_shape = (batch_size, num_input_channels * stride, \n    truncated_length // stride)\nr_input_folded = r_input.dimshuffle(0, 1, 3, 2).reshape(r_input_folded_shape)\nr_filter_shape = num_filters, num_input_channels, num_steps, stride\nr_filters_flipped = filters[:, :, ::-1].reshape(r_filter_shape)\nr_filter_folded_shape = num_filters, num_input_channels * stride, num_steps\nr_filters_flipped_folded = r_filters_flipped.dimshuffle(0, 1, 3, 2).reshape(\n    r_filter_folded_shape)\nr_filters_folded = r_filters_flipped_folded[:, :, ::-1]\nreturn implementation(r_input_folded, r_filters_folded,\n    r_input_folded_shape, r_filter_folded_shape, border_mode, subsample=(1,\n    ), filter_flip=filter_flip)\n"
+}

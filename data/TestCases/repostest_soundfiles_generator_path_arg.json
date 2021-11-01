@@ -1,0 +1,9 @@
+{
+    "functionName": "test_soundfiles_generator_path_arg",
+    "className": "TestStimuliGeneration",
+    "fileName": "/BciPy_&_BciPy/bcipy_&_helpers_&_tests_&_test_stimuli.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that soundfiles function constructs the correct path.\"\"\"\ndirectory = path.join('.', 'sounds')\nsoundfile_paths = [path.join(directory, '0.wav'), path.join(directory,\n    '1.wav'), path.join(directory, '2.wav')]\nwhen(glob).glob(path.join(directory, '*.wav')).thenReturn(soundfile_paths)\nwhen(path).isdir(directory).thenReturn(True)\ngen = soundfiles(directory)\nself.assertEqual(next(gen), soundfile_paths[0])\n"
+}

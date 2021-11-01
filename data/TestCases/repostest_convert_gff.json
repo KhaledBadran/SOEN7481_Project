@@ -1,0 +1,9 @@
+{
+    "functionName": "test_convert_gff",
+    "className": "TestsTSSpredator",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_tsspredator.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "os.mkdir(os.path.join(self.out, 'gffs'))\nos.mkdir(os.path.join(self.out, 'MasterTables'))\nos.mkdir(os.path.join(self.out, 'MasterTables/MasterTable_test'))\ngen_file(os.path.join(self.out,\n    'MasterTables/MasterTable_test/MasterTable.tsv'), self.example.master)\nargs = self.mock_args.mock()\nargs.out_folder = self.out\nargs.program = 'TSS'\nlog = open(os.path.join(self.test_folder, 'test.log'), 'w')\nself.tss._convert_gff(['test'], args, log)\ndatas = import_data(os.path.join(self.out, 'gffs/test_TSS.gff'))\nself.assertEqual('\\n'.join(datas), self.example.master_gff)\n"
+}

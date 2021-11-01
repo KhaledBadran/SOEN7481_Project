@@ -1,0 +1,9 @@
+{
+    "functionName": "test_hard_coded_test_2_level",
+    "className": null,
+    "fileName": "/NASA_&_MLMCPy/tests_&_mlmc_&_test_MLMCSimulator.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test simulator cost, initial variance, and sample size computations against\n    precomputed values with two models.\n    \"\"\"\nnp.random.seed(1)\nmodels = models_from_data[:2]\nsim = MLMCSimulator(models=models, data=data_input)\nsim_estimate, sim_sample_sizes, output_variances = sim.simulate(epsilon=1.0,\n    initial_sample_sizes=200)\nsim_costs, sim_variances = sim._compute_costs_and_variances()\nhard_coded_variances = np.array([[7.659619446414387], [0.07288894751770203]])\nhard_coded_sample_sizes = np.array([9, 0])\nhard_coded_estimate = np.array([11.639166038233583])\nassert np.all(np.isclose(sim_variances, hard_coded_variances))\nassert np.all(np.isclose(sim_estimate, hard_coded_estimate))\nassert np.all(np.isclose(sim._sample_sizes, hard_coded_sample_sizes))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_issue_8",
+    "className": "TestOldIssues",
+    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_test_issues.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Primary Key and Index error when selecting data \"\"\"\nconn = self.connect()\nc = conn.cursor()\nwith warnings.catch_warnings():\n    warnings.filterwarnings('ignore')\n    c.execute('drop table if exists test')\nc.execute(\n    \"\"\"CREATE TABLE `test` (`station` int(10) NOT NULL DEFAULT '0', `dh`\ndatetime NOT NULL DEFAULT '2015-01-01 00:00:00', `echeance` int(1) NOT NULL\nDEFAULT '0', `me` double DEFAULT NULL, `mo` double DEFAULT NULL, PRIMARY\nKEY (`station`,`dh`,`echeance`)) ENGINE=MyISAM DEFAULT CHARSET=latin1;\"\"\"\n    )\ntry:\n    self.assertEqual(0, c.execute('SELECT * FROM test'))\n    c.execute('ALTER TABLE `test` ADD INDEX `idx_station` (`station`)')\n    self.assertEqual(0, c.execute('SELECT * FROM test'))\nfinally:\n    c.execute('drop table test')\n"
+}

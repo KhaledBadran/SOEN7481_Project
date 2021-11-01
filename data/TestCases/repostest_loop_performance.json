@@ -1,0 +1,9 @@
+{
+    "functionName": "test_loop_performance",
+    "className": null,
+    "fileName": "/vc1492a_&_PyNomaly/tests_&_test_loop.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Using a set of known anomalies (labels), tests the performance (using\n    ROC / AUC score) of the software and ensures it is able to capture most\n    anomalies under this basic scenario.\n    :param X_n120: A pytest Fixture that generates the 120 observations.\n    :return: None\n    \"\"\"\nX_outliers = rng.uniform(low=-4, high=4, size=(20, 2))\nX_test = np.r_[X_n120, X_outliers]\nX_labels = np.r_[np.repeat(1, X_n120.shape[0]), np.repeat(-1, X_outliers.\n    shape[0])]\nclf = loop.LocalOutlierProbability(X_test, n_neighbors=X_test.shape[0] - 1,\n    progress_bar=True, use_numba=NUMBA)\nscore = clf.fit().local_outlier_probabilities\nshare_outlier = X_outliers.shape[0] / X_test.shape[0]\nX_pred = [(-1 if s > share_outlier else 1) for s in score]\nassert_greater(roc_auc_score(X_pred, X_labels), 0.98)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_can_use_lsl",
+    "className": "TestAcquisition",
+    "fileName": "/BciPy_&_BciPy/bcipy_&_helpers_&_tests_&_test_acquisition.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "print('Testing init_eeg_acquisition with LSL device')\nparams = self.parameters\nparams['acq_device'] = 'LSL'\nclient, server = init_eeg_acquisition(params, self.save, server=True)\nwith client:\n    time.sleep(0.1)\nclient.cleanup()\nserver.stop()\nself.assertEqual(client.device_info.name, 'LSL')\nself.assertEqual(client.device_info.fs, 256)\n"
+}

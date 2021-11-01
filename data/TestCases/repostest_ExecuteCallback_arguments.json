@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ExecuteCallback_arguments",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_test_monitor.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "def cb1(x=None, **_):\n    assert x is not None\n    print(x)\ndef cb2(**_):\n    print(2)\ndef cb3(y=None, **_):\n    assert y is not None\n    print(y)\ngroup1 = MonitorTaskGroup([ExecuteCallback(cb1), ExecuteCallback(cb2)])\ngroup2 = MonitorTaskGroup(ExecuteCallback(cb3))\nmonitor = Monitor(group1, group2)\nmonitor(0, x=1, y=3)\nout, _ = capsys.readouterr()\nassert out == '1\\n2\\n3\\n'\n"
+}

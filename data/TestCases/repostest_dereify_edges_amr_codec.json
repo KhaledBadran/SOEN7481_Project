@@ -1,0 +1,9 @@
+{
+    "functionName": "test_dereify_edges_amr_codec",
+    "className": null,
+    "fileName": "/goodmami_&_penman/tests_&_test_transform.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "decode = amr_codec.decode\nnorm = make_norm(dereify_edges, amr_model)\nform = make_form(amr_codec.encode)\ng = norm(decode(\n    '(a / alpha :ARG1-of~1 (_ / have-mod-91~2                         :ARG2~3 7~4))'\n    ))\nassert form(g) == '(a / alpha :mod~2 7~4)'\ng = norm(decode(\n    '(a / alpha :ARG1-of~1 (_ / have-mod-91~2                       :ARG2~3 (b / beta~4)))'\n    ))\nassert form(g) == '(a / alpha :mod~2 (b / beta~4))'\ng = norm(decode(\n    '(a / alpha :ARG2-of (_ / have-mod-91                       :ARG1 (b / beta)))'\n    ))\nassert form(g) == '(a / alpha :mod-of (b / beta))'\ng = norm(decode(\n    '(a / alpha :ARG1-of (_ / have-mod-91                       :ARG2 (b / beta)                       :polarity -))'\n    ))\nassert form(g\n    ) == '(a / alpha :ARG1-of (_ / have-mod-91 :ARG2 (b / beta) :polarity -))'\ng = norm(decode(\n    \"\"\"\n        (a / alpha\n            :ARG1-of (b / beta\n                        :ARG0 p)\n            :ARG1-of (g / gamma\n                        :ARG0-of (_ / own-01\n                                    :ARG1 (p / pi))))\"\"\"\n    ))\nassert form(g\n    ) == '(a / alpha :ARG1-of (b / beta :ARG0 p) :ARG1-of (g / gamma :poss (p / pi)))'\n"
+}

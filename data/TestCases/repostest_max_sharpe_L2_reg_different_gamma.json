@@ -1,0 +1,9 @@
+{
+    "functionName": "test_max_sharpe_L2_reg_different_gamma",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_efficient_frontier.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ef = setup_efficient_frontier()\nef.add_objective(objective_functions.L2_reg, gamma=1)\nef.max_sharpe()\nef2 = setup_efficient_frontier()\nef2.add_objective(objective_functions.L2_reg, gamma=0.01)\nef2.max_sharpe()\nequal_weight = np.array([1 / ef.n_assets] * ef.n_assets)\nassert np.abs(equal_weight - ef.weights).sum() < np.abs(equal_weight - ef2.\n    weights).sum()\n"
+}

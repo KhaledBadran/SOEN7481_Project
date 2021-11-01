@@ -1,0 +1,9 @@
+{
+    "functionName": "test_classify_with_ds_single_sample",
+    "className": null,
+    "fileName": "/Menelau_&_DESlib/deslib_&_tests_&_des_&_test_des_mi.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "query = np.ones(2)\npredictions = np.array([0, 1, 0])\ndesmi_test = DESMI(DFP=True)\nDFP_mask = np.ones((1, 3))\ndesmi_test.estimate_competence = MagicMock(return_value=np.ones((1, 3)))\ndesmi_test.select = MagicMock(return_value=np.array([[0, 2]]))\nresult = desmi_test.classify_with_ds(query, predictions, DFP_mask=DFP_mask)\nassert np.allclose(result, 0)\n"
+}

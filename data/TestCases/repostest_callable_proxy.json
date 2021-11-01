@@ -1,0 +1,9 @@
+{
+    "functionName": "test_callable_proxy",
+    "className": null,
+    "fileName": "/PlaidWeb_&_Publ/tests_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Tests of the CallableProxy class \"\"\"\ndef wrapped_func(retval='default'):\n    return retval\nproxy = utils.CallableProxy(wrapped_func)\nassert proxy() == 'default'\nassert proxy(1) == 1\nassert proxy(True) is True\nassert proxy(False) is False\napp = flask.Flask(__name__)\nwith app.test_request_context('/'):\n    assert proxy.upper() == 'DEFAULT'\n    assert bool(proxy)\n    assert len(proxy) == 7\n    assert str(proxy) == 'default'\n    assert list(proxy) == ['d', 'e', 'f', 'a', 'u', 'l', 't']\n    assert proxy[3] == 'a'\n    assert proxy == 'default'\n    assert 't' in proxy\n    assert proxy + 'foo' == 'defaultfoo'\n"
+}

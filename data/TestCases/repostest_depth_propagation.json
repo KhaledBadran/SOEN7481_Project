@@ -1,0 +1,9 @@
+{
+    "functionName": "test_depth_propagation",
+    "className": "TestUploadMagic",
+    "fileName": "/PmagPy_&_PmagPy/pmagpy_tests_&_test_ipmag.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "dir_path = os.path.join(WD, 'data_files', 'core_depthplot')\noutfile, error_message, errors, all_errors = ipmag.upload_magic(dir_path=\n    dir_path)\nprint('mv {} {}'.format(outfile, WD))\nos.system('mv {} {}'.format(outfile, WD))\noutfile = os.path.join(WD, os.path.split(outfile)[1])\nipmag.download_magic(outfile)\ncon = cb.Contribution(WD)\nself.assertIn('core_depth', con.tables['sites'].df.columns)\nself.assertEqual(con.tables['sites'].df.loc['15-1-013', 'core_depth'], 55.23)\nunittest.skipIf(sys.platform in ['win32', 'win62'],\n    \"data file isn't properly moved on windows\")"
+}

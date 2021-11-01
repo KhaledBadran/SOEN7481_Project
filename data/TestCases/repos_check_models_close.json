@@ -1,0 +1,9 @@
+{
+    "functionName": "_check_models_close",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_models_&_test_svgp.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "m1_params = {p.name: p for p in list(m1.trainable_parameters)}\nm2_params = {p.name: p for p in list(m2.trainable_parameters)}\nif set(m2_params.keys()) != set(m2_params.keys()):\n    return False\nfor key in m1_params:\n    p1 = m1_params[key]\n    p2 = m2_params[key]\n    if not np.allclose(p1.read_value(), p2.read_value(), rtol=tolerance,\n        atol=tolerance):\n        return False\nreturn True\n"
+}

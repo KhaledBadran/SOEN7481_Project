@@ -1,0 +1,9 @@
+{
+    "functionName": "test_process_template_attribute",
+    "className": "TestKmipEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a template attribute structure can be processed correctly.\n        \"\"\"\ne = engine.KmipEngine()\ne._data_store = self.engine\ne._data_store_session_factory = self.session_factory\ne._data_session = e._data_store_session_factory()\ne._logger = mock.MagicMock()\nattribute_factory = factory.AttributeFactory()\nname = attribute_factory.create_attribute(enums.AttributeType.NAME,\n    attributes.Name.create('Test Symmetric Key', enums.NameType.\n    UNINTERPRETED_TEXT_STRING))\nalgorithm = attribute_factory.create_attribute(enums.AttributeType.\n    CRYPTOGRAPHIC_ALGORITHM, enums.CryptographicAlgorithm.AES)\nlength = attribute_factory.create_attribute(enums.AttributeType.\n    CRYPTOGRAPHIC_LENGTH, 128)\nmask = attribute_factory.create_attribute(enums.AttributeType.\n    CRYPTOGRAPHIC_USAGE_MASK, [enums.CryptographicUsageMask.ENCRYPT, enums.\n    CryptographicUsageMask.DECRYPT])\ntemplate_attribute = objects.TemplateAttribute(attributes=[name, algorithm,\n    length, mask])\nresult = e._process_template_attribute(template_attribute)\nself.assertIsInstance(result, dict)\nself.assertEqual(4, len(result.keys()))\nself.assertIn('Name', result.keys())\nself.assertIn('Cryptographic Algorithm', result.keys())\nself.assertIn('Cryptographic Length', result.keys())\nself.assertIn('Cryptographic Usage Mask', result.keys())\nself.assertEqual([name.attribute_value], result.get('Name'))\nself.assertEqual(algorithm.attribute_value, result.get(\n    'Cryptographic Algorithm'))\nself.assertEqual(length.attribute_value, result.get('Cryptographic Length'))\nself.assertEqual(mask.attribute_value, result.get('Cryptographic Usage Mask'))\n"
+}

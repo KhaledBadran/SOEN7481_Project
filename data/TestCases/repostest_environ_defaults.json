@@ -1,0 +1,9 @@
+{
+    "functionName": "test_environ_defaults",
+    "className": null,
+    "fileName": "/glentner_&_CmdKit/tests_&_test_config.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test defaults for missing environment variables.\"\"\"\nPREFIX = 'CMDKIT'\nfor var in dict(os.environ):\n    if var.startswith(PREFIX):\n        os.environ.pop(var)\nfor line in TEST_ENV_TYPES.strip().split('\\n'):\n    field, value = line.strip().split('=')\n    os.environ[field] = value\nenv = Environ(prefix=PREFIX, defaults={'CMDKIT_DEFAULT_VALUE': '42'}).reduce()\nvalue = env['default']['value']\nassert isinstance(value, int) and value == 42\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_submit_test_prompt_no",
+    "className": null,
+    "fileName": "/bio-phys_&_MDBenchmark/mdbenchmark_&_tests_&_test_submit.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test whether prompt answer no works.\"\"\"\nwith tmpdir.as_cwd():\n    result = cli_runner.invoke(cli, ['submit', '--directory={}'.format(data\n        ['analyze-files-gromacs-one-unstarted'])], input='n\\n')\n    df = pd.read_csv(data['analyze-files-gromacs-prompt.csv'], index_col=0)\n    s = PrintDataFrame(df, False)\n    output = ('Benchmark Summary:\\n' + s +\n        \"\"\"\nThe above benchmarks will be submitted. Continue? [y/N]: n\n\"\"\" +\n        'ERROR Exiting. No benchmarks submitted.\\n')\n    assert result.exit_code == 1\n    assert result.output == output\n"
+}

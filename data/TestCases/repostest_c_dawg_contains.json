@@ -1,0 +1,9 @@
+{
+    "functionName": "test_c_dawg_contains",
+    "className": null,
+    "fileName": "/kmike_&_DAWG-Python/tests_&_test_dawg.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "dawg = pytest.importorskip('dawg')\nbin_dawg = dawg.IntDAWG({'foo': 1, 'bar': 2, 'foobar': 3})\nd = dawg_python.Dictionary()\nfd, path = tempfile.mkstemp()\nbin_dawg.save(path)\nwith open(path, 'rb') as f:\n    d.read(f)\nassert d.contains(b'foo')\nassert not d.contains(b'x')\nassert d.contains(b'foobar')\nassert d.contains(b'bar')\n"
+}

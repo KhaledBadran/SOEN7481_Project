@@ -1,0 +1,9 @@
+{
+    "functionName": "test_init_expected_behavior",
+    "className": "InitializationTestCase",
+    "fileName": "/mzy2240_&_ESA/tests_&_test_saw.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "my_saw_14 = SAW(PATH_14, object_field_lookup=('bus', 'shunt'))\nself.assertIsInstance(my_saw_14.log, logging.Logger)\nself.assertEqual(PATH_14, my_saw_14.pwb_file_path)\nself.assertEqual(2, len(my_saw_14._object_fields))\nfor f in ['bus', 'shunt']:\n    df = my_saw_14._object_fields[f]\n    self.assertIsInstance(df, pd.DataFrame)\n    cols = df.columns.to_numpy().tolist()\n    if len(cols) == len(my_saw_14.FIELD_LIST_COLUMNS):\n        self.assertEqual(cols, my_saw_14.FIELD_LIST_COLUMNS)\n    elif len(cols) == len(my_saw_14.FIELD_LIST_COLUMNS_OLD):\n        self.assertEqual(cols, my_saw_14.FIELD_LIST_COLUMNS_OLD)\n    else:\n        raise AssertionError(\n            'Columns, {}, do not match either FIELD_LIST_COLUMNS or FIELD_LIST_COLUMNS_OLD.'\n            .format(cols))\n"
+}

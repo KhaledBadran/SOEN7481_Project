@@ -1,0 +1,9 @@
+{
+    "functionName": "test_propose_tunable_cardinality_eq_one",
+    "className": "TestBTBSession",
+    "fileName": "/HDI-Project_&_BTB/tests_&_test_session.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "mock_tunable.from_dict.return_value.cardinality = 1\nmock_tunable.from_dict.return_value.get_defaults.return_value = 'parameters'\nmock_isinstance.return_value = True\ninstance = MagicMock(spec_set=BTBSession)\ninstance._tuners = {}\ninstance._tunable_names = ['test_tunable']\ninstance.proposals = {}\ninstance._make_id.return_value = 1\ntunable_name, config = BTBSession.propose(instance)\ninstance._make_id.assert_called_once_with('test_tunable', 'parameters')\ninstance._tuner_class.assert_not_called()\nassert instance._tuners == {'test_tunable': None}\nassert 'test_tunable' == tunable_name\nassert 'parameters' == config\npatch('btb.session.isinstance')patch('btb.session.Tunable')"
+}

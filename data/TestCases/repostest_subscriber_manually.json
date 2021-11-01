@@ -1,0 +1,9 @@
+{
+    "functionName": "test_subscriber_manually",
+    "className": null,
+    "fileName": "/marten-de-vries_&_Flask-WebSub/tests_&_test_integration.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "resp = requests.get('http://localhost:5002/callbacks/unexisting')\nassert resp.status_code == 400\nresp2 = requests.get('http://localhost:5002/callbacks/unexisting', params={\n    'hub.mode': 'subscribe'})\nassert resp2.status_code == 404\nresp3 = requests.post('http://localhost:5002/callbacks/unexisting')\nassert resp3.status_code == 404\nresp4 = requests.get('http://localhost:5002/callbacks/unexisting', {\n    'hub.mode': 'denied'})\nassert resp4.status_code == 404\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_multivariate_normal",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_test_logdensities.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cov = np.dot(cov_sqrt, cov_sqrt.T)\nL = np.linalg.cholesky(cov)\ngp_result = logdensities.multivariate_normal(x, mu, L)\nif mu.shape[1] > 1:\n    if x.shape[1] > 1:\n        sp_result = [mvn.logpdf(x[:, (i)], mu[:, (i)], cov) for i in range(\n            mu.shape[1])]\n    else:\n        sp_result = [mvn.logpdf(x.ravel(), mu[:, (i)], cov) for i in range(\n            mu.shape[1])]\nelse:\n    sp_result = mvn.logpdf(x.T, mu.ravel(), cov)\nassert_allclose(gp_result, sp_result)\npytest.mark.parametrize('x', [randn(4, 10), randn(4, 1)])pytest.mark.parametrize('mu', [randn(4, 10), randn(4, 1)])pytest.mark.parametrize('cov_sqrt', [randn(4, 4), np.eye(4)])"
+}

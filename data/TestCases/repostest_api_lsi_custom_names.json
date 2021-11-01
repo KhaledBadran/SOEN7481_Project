@@ -1,0 +1,9 @@
+{
+    "functionName": "test_api_lsi_custom_names",
+    "className": null,
+    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_server_&_tests_&_test_lsi.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "dsid, pars, _ = get_features_cached(app)\nmid_orig = 'tyds'\nlsi_pars = dict(n_components=2, parent_id=dsid, id=mid_orig)\ndata = app.post_check(V01 + '/lsi/', json=lsi_pars)\nassert data['id'] == mid_orig\nmethod = V01 + '/lsi/{}'.format(mid_orig)\ndata = app.get_check(method)\nwith pytest.raises(WrongParameter):\n    data = app.post_check(V01 + '/lsi/', json=lsi_pars)\nwith pytest.raises(WrongParameter):\n    lsi_pars['id'] = '?+d'\n    data = app.post_check(V01 + '/lsi/', json=lsi_pars)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_company_data_balanced",
+    "className": "TestFinanceScraper",
+    "fileName": "/LukasBudach_&_FinanceScraper/tests_&_test_finance_scraper.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.scraper.set_approach(scraper.ScraperApproach.BALANCED)\nresponse = self.scraper.get_company_data(self.valid_ticker)\nself.assertIsNotNone(response)\nself.assertEqual(response.source, 'IEX')\nself.assertNotEqual(response.name, 'No name found')\nself.assertEqual(response.symbol, self.valid_ticker)\nresponse = self.scraper.get_company_data(self.iex_invalid_ticker)\nself.assertIsNotNone(response)\nself.assertEqual(response.source, 'Yahoo')\nself.assertNotEqual(response.name, 'No name found')\nself.assertEqual(response.symbol, self.iex_invalid_ticker)\nresponse = self.scraper.get_company_data(self.invalid_ticker)\nself.assertIsNone(response)\n"
+}

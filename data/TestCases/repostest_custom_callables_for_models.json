@@ -1,0 +1,9 @@
+{
+    "functionName": "test_custom_callables_for_models",
+    "className": "TestGenerationStrategy",
+    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_generation_strategy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "exp = get_branin_experiment()\nsobol_factory_generation_strategy = GenerationStrategy(steps=[\n    GenerationStep(model=get_sobol, num_trials=-1)])\nself.assertFalse(sobol_factory_generation_strategy._uses_registered_models)\nself.assertTrue(sobol_factory_generation_strategy.uses_non_registered_models)\ngr = sobol_factory_generation_strategy.gen(experiment=exp, n=1)\nself.assertEqual(len(gr.arms), 1)\n"
+}

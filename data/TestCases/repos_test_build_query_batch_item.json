@@ -1,0 +1,9 @@
+{
+    "functionName": "_test_build_query_batch_item",
+    "className": "TestKMIPClient",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_test_kmip_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "batch_item = self.client._build_query_batch_item(query_functions)\nbase = 'expected {0}, received {1}'\nmsg = base.format(RequestBatchItem, batch_item)\nself.assertIsInstance(batch_item, RequestBatchItem, msg)\noperation = batch_item.operation\nmsg = base.format(Operation, operation)\nself.assertIsInstance(operation, Operation, msg)\noperation_enum = operation.value\nmsg = base.format(OperationEnum.QUERY, operation_enum)\nself.assertEqual(OperationEnum.QUERY, operation_enum, msg)\npayload = batch_item.request_payload\nmsg = base.format(payloads.QueryRequestPayload, payload)\nself.assertIsInstance(payload, payloads.QueryRequestPayload, msg)\nquery_functions_observed = payload.query_functions\nself.assertEqual(query_functions, query_functions_observed)\n"
+}

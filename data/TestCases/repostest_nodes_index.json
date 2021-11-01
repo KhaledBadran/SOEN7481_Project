@@ -1,0 +1,9 @@
+{
+    "functionName": "test_nodes_index",
+    "className": "TestCommit",
+    "fileName": "/NullConvergence_&_GraphRepo/tests_&_test_commit.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "folder = os.path.dirname(os.path.abspath(__file__))\ntest_driller = Driller(os.path.join(folder, 'cnfg_simple.yml'))\ntest_driller.drill_batch()\nnode_matcher = NodeMatcher(test_driller.graph)\nall_commits = list(node_matcher.match('Commit'))\nassert len(all_commits) == 8\nall_devs = list(node_matcher.match('Developer'))\nassert len(all_devs) == 2\nall_files = list(node_matcher.match('File'))\nassert len(all_files) == 6\nall_methods = list(node_matcher.match('Method'))\nassert len(all_methods) == 5\nall_branches = list(node_matcher.match('Branch'))\nassert len(all_branches) == 1\ntest_driller.clean()\n"
+}

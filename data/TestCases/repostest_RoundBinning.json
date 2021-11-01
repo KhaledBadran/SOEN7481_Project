@@ -1,0 +1,9 @@
+{
+    "functionName": "test_RoundBinning",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&__tools.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "X = np.random.rand(2, 3000)\nbinning = [0.05, 0.1, 0.2]\ntry:\n    RoundBinning(X, binning)\nexcept AttributeError:\n    assert True\nbinning = [0.05, 0.05]\nBP, I, C = RoundBinning(X, binning)\nInt = np.random.rand(3000)\nBP2, I2, C2, Data = RoundBinning(X, binning[0], Int)\nassert np.all(BP == BP2)\nassert np.all(I == I2)\nassert np.all(C == C2)\nassert np.all(Data.shape[0] == BP.shape[1])\n"
+}

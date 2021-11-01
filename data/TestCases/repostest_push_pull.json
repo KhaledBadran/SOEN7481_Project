@@ -1,0 +1,9 @@
+{
+    "functionName": "test_push_pull",
+    "className": "test_Queue",
+    "fileName": "/pbx-gs_&_OSBot-AWS/tests_&_unit_&_apis_&_test_Queue.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with Temp_Queue() as temp_Queue:\n    queue = temp_Queue.queue\n    queue.push({'var_1': 'value_1', 'var_2': 'value_2'})\n    assert queue.get_message() == '{\"var_1\": \"value_1\", \"var_2\": \"value_2\"}'\n    queue.push({'var_3': 'value_3', 'var_4': 'value_4'})\n    assert queue.pull() == {'var_3': 'value_3', 'var_4': 'value_4'}\n    queue.push([{'var_5': 'value_5'}, {'var_6': 'value_7'}])\n    assert queue.pull() == [{'var_5': 'value_5'}, {'var_6': 'value_7'}]\n"
+}

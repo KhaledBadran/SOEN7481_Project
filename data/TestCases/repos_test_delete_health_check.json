@@ -1,0 +1,9 @@
+{
+    "functionName": "_test_delete_health_check",
+    "className": "CITestSystem",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_system.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Test delete_health_check.\"\"\"\ncommon.CommonFunctions.delete_resource = MagicMock(side_effect=self.common.\n    delete_resource)\nhealth_check_list, health_check_id_1 = None, None\ntry:\n    health_check_list = self.system.list_system_health_check()\n    health_check_id_1 = health_check_list.get(HEALTH_CHECK_ID)[0]\nexcept exception.ResourceNotFoundException:\n    self.skipTest(\n        'Skip delete health check - there are no health checks available')\nself.system.delete_health_check(health_check_id=health_check_id_1)\ncommon.CommonFunctions.delete_resource.assert_called_once()\ntry:\n    health_check_list = self.system.list_system_health_check()\n    health_check_id_2 = health_check_list.get(HEALTH_CHECK_ID)[0]\n    self.assertNotIn(health_check_id_2, health_check_list.get(HEALTH_CHECK_ID))\nexcept exception.ResourceNotFoundException:\n    pass\n"
+}

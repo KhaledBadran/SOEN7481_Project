@@ -1,0 +1,9 @@
+{
+    "functionName": "test_shrunk_covariance_extreme_delta",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_risk_models.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "df = get_data()\ncs = risk_models.CovarianceShrinkage(df)\nshrunk_cov = cs.shrunk_covariance(0)\nnp.testing.assert_array_almost_equal(shrunk_cov.values, risk_models.\n    sample_cov(df))\nshrunk_cov = cs.shrunk_covariance(1)\nN = df.shape[1]\nF = np.identity(N) * np.trace(cs.S) / N\nnp.testing.assert_array_almost_equal(shrunk_cov.values, F * 252)\n"
+}

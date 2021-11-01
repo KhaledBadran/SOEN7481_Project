@@ -1,0 +1,9 @@
+{
+    "functionName": "testSubsetModel",
+    "className": "TorchUtilsTest",
+    "fileName": "/facebook_&_Ax/ax_&_models_&_tests_&_test_torch_model_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "x = torch.zeros(1, 1)\ny = torch.zeros(1, 2)\nmodel = SingleTaskGP(x, y)\nself.assertEqual(model.num_outputs, 2)\nobj_weights = torch.tensor([1.0, 0.0])\nmodel_sub, obj_weights_sub, ocs_sub = subset_model(model, obj_weights)\nself.assertIsNone(ocs_sub)\nself.assertEqual(model_sub.num_outputs, 1)\nself.assertTrue(torch.equal(obj_weights_sub, torch.tensor([1.0])))\nobj_weights = torch.tensor([1.0, 2.0])\nmodel_sub, obj_weights_sub, ocs_sub = subset_model(model, obj_weights)\nself.assertIsNone(ocs_sub)\nself.assertIs(model_sub, model)\nself.assertIs(obj_weights_sub, obj_weights)\nobj_weights = torch.tensor([1.0, 0.0])\nocs = torch.tensor([[1.0, 0.0]]), torch.tensor([1.0])\nmodel_sub, obj_weights_sub, ocs_sub = subset_model(model, obj_weights, ocs)\nself.assertEqual(model_sub.num_outputs, 1)\nself.assertTrue(torch.equal(obj_weights_sub, torch.tensor([1.0])))\nself.assertTrue(torch.equal(ocs_sub[0], torch.tensor([[1.0]])))\nself.assertTrue(torch.equal(ocs_sub[1], torch.tensor([1.0])))\nobj_weights = torch.tensor([1.0, 0.0])\nocs = torch.tensor([[0.0, 1.0]]), torch.tensor([1.0])\nmodel_sub, obj_weights_sub, ocs_sub = subset_model(model, obj_weights, ocs)\nself.assertIs(model_sub, model)\nself.assertIs(obj_weights_sub, obj_weights)\nself.assertIs(ocs_sub, ocs)\nyvar = torch.ones(1, 2)\nmodel = HeteroskedasticSingleTaskGP(x, y, yvar)\nmodel_sub, obj_weights_sub, ocs = subset_model(model, obj_weights)\nself.assertIsNone(ocs)\nself.assertIs(model_sub, model)\nself.assertIs(obj_weights_sub, obj_weights)\nobj_weights = torch.ones(3)\nwith self.assertRaises(RuntimeError):\n    subset_model(model, obj_weights)\n"
+}

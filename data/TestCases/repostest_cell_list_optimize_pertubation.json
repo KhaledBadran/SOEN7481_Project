@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cell_list_optimize_pertubation",
+    "className": "TestCellFitting",
+    "fileName": "/Jhsmit_&_ColiCoords/test_&_test_fitting.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cells = self.cells[:8].copy()\nfor cell in cells:\n    cell.coords.xl -= 3\n    cell.coords.xr += 3\n    cell.coords.a0 *= 0.95\n    cell.coords.a1 *= 1.05\nres_list = cells.optimize(minimizer=Powell)\nfor r, cell in zip(res_list, cells):\n    for k, v in r.params.items():\n        self.assertEqual(v, getattr(cell.coords, k))\nobj_values = [28, 26, 24, 53, 31, 20, 46, 11]\nfor r, val in zip(res_list, obj_values):\n    self.assertEqual(self.cf * r.objective_value, val)\n"
+}

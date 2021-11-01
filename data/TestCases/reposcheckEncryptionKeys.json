@@ -1,0 +1,9 @@
+{
+    "functionName": "checkEncryptionKeys",
+    "className": null,
+    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_producer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "self.assertEqual(expectedExpressInterestCallCount, expressInterestCallCount[0])\nself.assertEqual(True, testDb.hasContentKey(testTime))\ncontentKey[0] = testDb.getContentKey(testTime)\nparams = EncryptParams(EncryptAlgorithmType.RsaOaep)\nfor i in range(len(result)):\n    key = result[i]\n    keyName = key.getName()\n    self.assertEqual(cKeyName, keyName.getSubName(0, 6))\n    self.assertEqual(keyName.get(6), roundedTime)\n    self.assertEqual(keyName.get(7), Encryptor.NAME_COMPONENT_FOR)\n    self.assertEqual(True, keyName.getSubName(8) in self.decryptionKeys)\n    decryptionKey = self.decryptionKeys[keyName.getSubName(8)]\n    self.assertEqual(True, decryptionKey.size() != 0)\n    encryptedKeyEncoding = key.getContent()\n    content = EncryptedContent()\n    content.wireDecode(encryptedKeyEncoding)\n    encryptedKey = content.getPayload()\n    retrievedKey = RsaAlgorithm.decrypt(decryptionKey, encryptedKey, params)\n    self.assertTrue(contentKey[0].equals(retrievedKey))\nself.assertEqual(3, len(result))\n"
+}

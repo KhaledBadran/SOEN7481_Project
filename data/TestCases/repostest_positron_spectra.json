@@ -1,0 +1,9 @@
+{
+    "functionName": "test_positron_spectra",
+    "className": "TestScalarMediator",
+    "fileName": "/LoganAMorrison_&_Hazma/test_&_scalar_mediator_&_test_scalar_mediator.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test the positron spectra for:\n            'total', 'mu mu', 'pi pi'\n        \"\"\"\npspec1_new = self.sm1.positron_spectra(self.eng_ps1, self.e_cm1)\npspec2_new = self.sm2.positron_spectra(self.eng_ps2, self.e_cm2)\nfor key in self.pspec1_old.keys():\n    for val1, val2 in zip(self.pspec1_old[key], pspec1_new[key]):\n        assert_allclose(val1, val2, rtol=0.0001, err_msg=key)\nfor key in self.pspec2_old.keys():\n    for val1, val2 in zip(self.pspec2_old[key], pspec2_new[key]):\n        assert_allclose(val1, val2, rtol=0.0001, err_msg=key)\n"
+}

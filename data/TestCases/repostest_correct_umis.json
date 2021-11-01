@@ -1,0 +1,9 @@
+{
+    "functionName": "test_correct_umis",
+    "className": null,
+    "fileName": "/Hoohm_&_CITE-seq-Count/tests_&_test_processing.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "temp = processing.correct_umis(pytest.results, 2, pytest.corrected_results.\n    keys(), pytest.max_umis)\nresults = temp[0]\nn_corrected = temp[1]\nfor cell_barcode in results.keys():\n    for TAG in results[cell_barcode]:\n        assert len(results[cell_barcode][TAG]) == len(pytest.\n            corrected_results[cell_barcode][TAG])\n        assert sum(results[cell_barcode][TAG].values()) == sum(pytest.\n            corrected_results[cell_barcode][TAG].values())\nassert n_corrected == 3\npytest.mark.dependency(depends=['test_classify_reads_multi_process'])"
+}

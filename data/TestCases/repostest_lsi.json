@@ -1,0 +1,9 @@
+{
+    "functionName": "test_lsi",
+    "className": null,
+    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_engine_&_tests_&_test_lsi.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cache_dir = check_cache()\nn_components = 2\nfe = FeatureVectorizer(cache_dir=cache_dir, mode='w')\nuuid = fe.setup()\nfe.ingest(data_dir, file_pattern='.*\\\\d.txt')\nlsi = _LSIWrapper(cache_dir=cache_dir, parent_id=uuid, mode='w')\nlsi_res, exp_var = lsi.fit_transform(n_components=n_components, alpha=1.0)\nassert lsi_res.components_.shape[0] == 5\nassert lsi_res.components_.shape[1] == fe.n_features_\nassert lsi._load_pars() is not None\nlsi._load_model()\nX_lsi = lsi._load_features()\nassert_allclose(normalize(X_lsi), X_lsi)\nlsi.list_models()\nlsi.delete()\n"
+}

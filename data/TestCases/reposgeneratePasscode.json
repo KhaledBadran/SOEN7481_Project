@@ -1,0 +1,9 @@
+{
+    "functionName": "generatePasscode",
+    "className": null,
+    "fileName": "/FaradayRF_&_Faraday-Software/faraday_&_aprs.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Generates an APRS-IS compliant passcode.\n\n    Based on the open-source work of magicbug at https://github.com/magicbug/PHP-APRS-Passcode. Thanks!\n\n    :param callsign: Uppercase callsign string\n    :return: APRS-IS Passcode if successful, None if error\n    \"\"\"\ncallhash = None\ni = 0\ncallList = list(callsign)\nif len(callList) % 2 != 0:\n    callList.append('\\x00')\nlength = len(callList)\nif length <= 10 and length > 1 and not callsign == 'REPLACEME':\n    callhash = 29666\n    while i < length:\n        try:\n            callhash ^= ord(callList[i]) << 8\n            callhash ^= ord(callList[i + 1])\n            i += 2\n        except StandardError as e:\n            logger.error(e)\n            callhash = None\n            break\n    if callhash is not None:\n        callhash = callhash & 524287\nelse:\n    logger.error(\"Callsign '{0}' invalid!\".format(callsign))\nlogger.debug(\"'{0}' APRS-IS Passcode: {1}\".format(callsign, callhash))\nreturn callhash\n"
+}

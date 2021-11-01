@@ -1,0 +1,9 @@
+{
+    "functionName": "test_encrypt_invalid_encryption_key",
+    "className": "TestKmipEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the right error is thrown when an invalid encryption key\n        is specified with an Encrypt request.\n        \"\"\"\ne = engine.KmipEngine()\ne._data_store = self.engine\ne._data_store_session_factory = self.session_factory\ne._data_session = e._data_store_session_factory()\ne._is_allowed_by_operation_policy = mock.Mock(return_value=True)\ne._logger = mock.MagicMock()\ne._cryptography_engine.logger = mock.MagicMock()\nencryption_key = pie_objects.OpaqueObject(b'\\x01\\x02\\x03\\x04', enums.\n    OpaqueDataType.NONE)\ne._data_session.add(encryption_key)\ne._data_session.commit()\ne._data_session = e._data_store_session_factory()\nunique_identifier = str(encryption_key.unique_identifier)\ncryptographic_parameters = attributes.CryptographicParameters(block_cipher_mode\n    =enums.BlockCipherMode.CBC, padding_method=enums.PaddingMethod.PKCS5,\n    cryptographic_algorithm=enums.CryptographicAlgorithm.BLOWFISH)\ndata = b'7654321 Now is the time for \\x00'\niv_counter_nonce = b'\\xfe\\xdc\\xba\\x98vT2\\x10'\npayload = payloads.EncryptRequestPayload(unique_identifier,\n    cryptographic_parameters, data, iv_counter_nonce)\nargs = payload,\nself.assertRaisesRegex(exceptions.PermissionDenied,\n    'The requested encryption key is not a symmetric key. Only symmetric encryption is currently supported.'\n    , e._process_encrypt, *args)\n"
+}

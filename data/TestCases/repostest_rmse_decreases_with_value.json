@@ -1,0 +1,9 @@
+{
+    "functionName": "test_rmse_decreases_with_value",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_discrete_allocation.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "df = get_data()\nmu = mean_historical_return(df)\nS = sample_cov(df)\nef = EfficientFrontier(mu, S)\nw = ef.max_sharpe()\nlatest_prices = get_latest_prices(df)\nda1 = DiscreteAllocation(w, latest_prices, total_portfolio_value=10000)\nda1.greedy_portfolio()\nrmse1 = da1._allocation_rmse_error(verbose=False)\nda2 = DiscreteAllocation(w, latest_prices, total_portfolio_value=100000)\nda2.greedy_portfolio()\nrmse2 = da2._allocation_rmse_error(verbose=False)\nassert rmse2 < rmse1\nda3 = DiscreteAllocation(w, latest_prices, total_portfolio_value=10000)\nda3.lp_portfolio()\nrmse3 = da3._allocation_rmse_error(verbose=False)\nda4 = DiscreteAllocation(w, latest_prices, total_portfolio_value=30000)\nda4.lp_portfolio()\nrmse4 = da4._allocation_rmse_error(verbose=False)\nassert rmse4 < rmse3\n"
+}

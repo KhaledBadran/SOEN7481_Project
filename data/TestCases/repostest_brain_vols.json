@@ -1,0 +1,9 @@
+{
+    "functionName": "test_brain_vols",
+    "className": null,
+    "fileName": "/incf-nidash_&_PyNIDM/nidm_&_experiment_&_tools_&_tests_&_test_rest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "restParser = RestParser()\nif cmu_test_project_uuid:\n    project = cmu_test_project_uuid\nelse:\n    project = restParser.run(BRAIN_VOL_FILES, '/projects')[0]\nsubjects = restParser.run(BRAIN_VOL_FILES, '/projects/{}/subjects'.format(\n    project))\nsubject = subjects['uuid'][0]\ndata = Query.GetDerivativesDataForSubject(BRAIN_VOL_FILES, None, subject)\nassert len(data) > 0\nfor key in data:\n    assert 'StatCollectionType' in data[key]\n    assert 'URI' in data[key]\n    assert 'values' in data[key]\n"
+}

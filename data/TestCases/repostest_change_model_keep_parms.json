@@ -1,0 +1,9 @@
+{
+    "functionName": "test_change_model_keep_parms",
+    "className": null,
+    "fileName": "/AFM-analysis_&_PyJibe/tests_&_test_fd_fit.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "main_window = pyjibe.head.PyJibe()\nmain_window.load_data(files=[jpkfile, jpkfile])\nwar = main_window.subwindows[0].widget()\nwar.tab_preprocess.list_preproc_applied.clear()\nwar.cb_autosave.setChecked(0)\nitem = QtWidgets.QListWidgetItem()\nitem.setText('compute_tip_position')\nwar.tab_preprocess.list_preproc_applied.addItem(item)\nitab = war.tab_fit.table_parameters_initial\nitab.item(3, 1).setText(str(12345))\npyr_name = nmodel.model_hertz_three_sided_pyramid.model_name\npyr_idx = war.tab_fit.cb_model.findText(pyr_name)\nwar.tab_fit.cb_model.setCurrentIndex(pyr_idx)\nassert float(itab.item(3, 1).text()) == 12345\n"
+}

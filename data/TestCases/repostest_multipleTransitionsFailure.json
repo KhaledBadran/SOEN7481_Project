@@ -1,0 +1,9 @@
+{
+    "functionName": "test_multipleTransitionsFailure",
+    "className": "MethodicalTests",
+    "fileName": "/glyph_&_Automat/automat_&__test_&_test_methodical.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        A L{MethodicalMachine} can only have one transition per start/event\n        pair.\n        \"\"\"\nclass WillFail(object):\n    m = MethodicalMachine()\n\n    @m.state(initial=True)\n    def start(self):\n        \"\"\"We start here.\"\"\"\n\n    @m.state()\n    def end(self):\n        \"\"\"Rainbows end.\"\"\"\n\n    @m.input()\n    def event(self):\n        \"\"\"An event.\"\"\"\n    start.upon(event, enter=end, outputs=[])\n    with self.assertRaises(ValueError):\n        start.upon(event, enter=end, outputs=[])\n"
+}

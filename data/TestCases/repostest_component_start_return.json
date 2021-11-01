@@ -1,0 +1,9 @@
+{
+    "functionName": "test_component_start_return",
+    "className": null,
+    "fileName": "/SillyFreak_&_ConcurrentUtils/tests_&_test_component.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "@component_workload\nasync def component(x, *, commands, events):\n    return x\nwith pytest.raises(Component.LifecycleError) as exc_info:\n    await start_component(component, 1)\nresult, = exc_info.value.__cause__.args\nassert result == 1\npytest.mark.asyncio"
+}

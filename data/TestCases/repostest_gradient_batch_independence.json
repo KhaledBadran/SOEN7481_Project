@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gradient_batch_independence",
+    "className": "TestFluidTF",
+    "fileName": "/tum-pbs_&_PhiFlow/tests_&_test_fluid_tf.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "session = Session(None)\nworld = World()\nfluid = world.add(Fluid(Domain([40, 32], boundaries=CLOSED),\n    buoyancy_factor=0.1, batch_size=2), physics=IncompressibleFlow())\nworld.add(Inflow(Sphere(center=numpy.array([[5, 4], [5, 8]]), radius=3),\n    rate=0.2))\nfluid.velocity = variable(fluid.velocity)\ninitial_state = fluid.state\nsession.initialize_variables()\nfor frame in range(3):\n    world.step(dt=1.5)\ntarget = session.run(fluid.density).data[0, ...]\nloss = tf.nn.l2_loss(fluid.density.data[1, ...] - target)\nself_loss = tf.nn.l2_loss(fluid.density.data[0, ...] - target)\noptim = tf.train.GradientDescentOptimizer(learning_rate=0.2).minimize(loss)\nsession.initialize_variables()\nfor optim_step in range(3):\n    _, loss_value, sl_value = session.run([optim, loss, self_loss])\nstaggered_velocity = session.run(initial_state.velocity).staggered_tensor()\nnumpy.testing.assert_equal(staggered_velocity[0, ...], 0)\nassert numpy.all(~numpy.isnan(staggered_velocity))\n"
+}

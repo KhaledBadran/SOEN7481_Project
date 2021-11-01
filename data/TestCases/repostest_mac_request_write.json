@@ -1,0 +1,9 @@
+{
+    "functionName": "test_mac_request_write",
+    "className": "TestRequestMessage",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_test_messages.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "prot_ver = contents.ProtocolVersion(1, 2)\nbatch_count = contents.BatchCount(1)\nreq_header = messages.RequestHeader(protocol_version=prot_ver, batch_count=\n    batch_count)\noperation = contents.Operation(enums.Operation.MAC)\nuuid = attr.UniqueIdentifier('1')\ndata = objects.Data(value=\n    b'\\x00\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08\\t\\n\\x0b\\x0c\\r\\x0e\\x0f')\nparameters_attribute = attr.CryptographicParameters(cryptographic_algorithm\n    =enums.CryptographicAlgorithm.HMAC_SHA512)\nrequest_payload = payloads.MACRequestPayload(unique_identifier=uuid,\n    cryptographic_parameters=parameters_attribute, data=data)\nbatch_item = messages.RequestBatchItem(operation=operation, request_payload\n    =request_payload)\nrequest_message = messages.RequestMessage(request_header=req_header,\n    batch_items=[batch_item])\nrequest_message.write(self.stream)\nresult = self.stream.read()\nlen_exp = len(self.mac)\nlen_rcv = len(result)\nself.assertEqual(len_exp, len_rcv, self.msg.format('request message',\n    'write', len_exp, len_rcv))\nmsg = 'Bad request message write: encoding mismatch'\nself.assertEqual(self.mac, result, msg)\n"
+}

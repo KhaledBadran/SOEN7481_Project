@@ -1,0 +1,9 @@
+{
+    "functionName": "plotEfOverview",
+    "className": "DataFile",
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_DataFile.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Method to plot the fitted Ef values of the normalization table\n\n        Kwargs:\n    \n            - binning (int): Binning for the corresponding normalization table (default self.binning or 8)\n\n        returns:\n\n            - fig (matplotlib figure): Figure into which the Ef values are plotted\n\n        \"\"\"\nself.loadBinning(binning)\nbinning = self.binning\nEf = self.instrumentCalibrationEf[:, (1)].reshape(104, 8 * binning)\nfig = plt.figure()\nplt.imshow(Ef.T, origin='lower')\nplt.xlabel('Detector number')\nplt.ylabel('Pixel number')\nplt.colorbar()\nplt.title('Final Energy Overview')\nreturn fig\n_tools.KwargChecker()"
+}

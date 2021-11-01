@@ -1,0 +1,9 @@
+{
+    "functionName": "test_prepare_for_web_sync",
+    "className": null,
+    "fileName": "/RobertoPrevato_&_Gallerist/tests_&_test_gallerist.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "gallerist = Gallerist(FakeSyncStore())\nmetadata = gallerist.process_image(file_path)\nassert metadata is not None\nfor version in metadata.versions:\n    image = Image.open(gallerist.store.full_path(version.file_name))\n    assert image is not None\n    image.close()\npytest.mark.parametrize('file_path', ['files/pexels-photo-126407.jpeg',\n    'files/blacksheep.png', 'files/01.gif', 'files/small-png-01.png'])"
+}

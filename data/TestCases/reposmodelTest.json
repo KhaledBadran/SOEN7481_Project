@@ -1,0 +1,9 @@
+{
+    "functionName": "modelTest",
+    "className": "BigDLTestCase",
+    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "if random_weights:\n    kweights = keras_model.get_weights()\n    new_kweights = self.__generate_random_weights(kweights)\n    keras_model.set_weights(new_kweights)\nkeras_model_json_path, keras_model_hdf5_path = dump_keras(keras_model,\n    dump_weights=dump_weights)\nself.__set_keras_backend('theano')\nbigdl_model = DefinitionLoader.from_json_path(keras_model_json_path)\nbigdl_model.training(is_training)\nbigdl_output = bigdl_model.forward(input_data)\nself.__set_keras_backend('tensorflow')\nkeras_output = keras_model.predict(input_data)\nif dump_weights:\n    WeightLoader.load_weights_from_hdf5(bigdl_model, keras_model,\n        keras_model_hdf5_path)\nbigdl_output2 = bigdl_model.forward(input_data)\nself.assert_allclose(bigdl_output2, keras_output, rtol=rtol, atol=atol)\n"
+}

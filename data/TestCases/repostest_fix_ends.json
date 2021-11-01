@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fix_ends",
+    "className": null,
+    "fileName": "/CCampJr_&_CRIkit2/crikit_&_preprocess_&_tests_&_test_als.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "x = np.linspace(-100, 100, 1000)\ny = 1000 * np.exp(-x ** 2 / (2 * 20 ** 2)) + 200 * np.exp(-(x + 99) ** 2 /\n    (2 * 1 ** 2))\nals = AlsCvxopt(smoothness_param=100.0, asym_param=0.001, redux=1,\n    fix_end_points=False, fix_rng=None, verbose=True)\ny_als = als.calculate(y)\nassert y[0] - y_als[0] > 20\nals = AlsCvxopt(smoothness_param=10.0, asym_param=0.001, redux=1,\n    fix_end_points=True, fix_rng=None, verbose=True)\ny_als = als.calculate(y)\nassert y[0] - y_als[0] < 2\n"
+}

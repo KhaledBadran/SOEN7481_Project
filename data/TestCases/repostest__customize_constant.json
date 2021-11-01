@@ -1,0 +1,9 @@
+{
+    "functionName": "test__customize_constant",
+    "className": "TestPhase",
+    "fileName": "/Jammy2211_&_PyAutoCTI/test_&_unit_&_pipeline_&_test_phase.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class MyPhase(ph.ParallelPhase):\n\n    def pass_priors(self, previous_results):\n        self.parallel_species = previous_results.last.constant.parallel_species\nparallel = arctic_params.Species()\nsetattr(results.constant, 'parallel_species', [parallel])\nresults_collection = af.ResultsCollection()\nresults_collection.add('first_phase', results)\nphase = MyPhase(phase_name='test_phase', optimizer_class=NLO,\n    parallel_species=[parallel])\nphase.make_analysis([ci_data], cti_settings, results=results_collection)\nassert phase.parallel_species == [parallel]\n"
+}

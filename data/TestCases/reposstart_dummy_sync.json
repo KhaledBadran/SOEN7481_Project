@@ -1,0 +1,9 @@
+{
+    "functionName": "start_dummy_sync",
+    "className": null,
+    "fileName": "/PRIArobotics_&_HedgehogClient/hedgehog_&_client_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "@contextmanager\ndef do_start(server_coro: Callable[[DealerRouterSocket], Awaitable[None]],\n    *args, endpoint: str='inproc://controller', **kwargs):\n    with EventLoopThread() as looper, looper.context(start_dummy(\n        server_coro, *args, endpoint=endpoint, **kwargs)) as dummy:\n        yield dummy\nreturn do_start\npytest.fixture"
+}

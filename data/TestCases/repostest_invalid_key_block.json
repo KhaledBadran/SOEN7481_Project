@@ -1,0 +1,9 @@
+{
+    "functionName": "test_invalid_key_block",
+    "className": "TestSplitKey",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_secrets_&_test_split_key.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a TypeError is raised when an invalid value is used to set\n        the key block of a SplitKey object.\n        \"\"\"\nkwargs = {'key_block': 'invalid'}\nself.assertRaisesRegex(TypeError,\n    'The key block must be a KeyBlock structure.', secrets.SplitKey, **kwargs)\nargs = secrets.SplitKey(), 'key_block', 'invalid'\nself.assertRaisesRegex(TypeError,\n    'The key block must be a KeyBlock structure.', setattr, *args)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_extend_adj",
+    "className": "TestExtend",
+    "fileName": "/hdoupe_&_ParamTools/paramtools_&_tests_&_test_parameters.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class ExtParams(Parameters):\n    defaults = extend_ex_path\n    label_to_extend = 'd0'\n    array_first = True\nparams = ExtParams()\nparams.adjust({'extend_param': [{'d0': 3, 'value': -1}]})\nassert params.extend_param.tolist() == [[1, 2], [1, 2], [1, 2], [-1, -1], [\n    -1, -1], [-1, -1], [-1, -1], [-1, -1], [-1, -1], [-1, -1], [-1, -1]]\nfor val in params._data['extend_param']['value']:\n    if val['d0'] > 3 or val['d0'] in (0, 1):\n        assert val['_auto'] is True\n    else:\n        assert '_auto' not in val\nparams = ExtParams()\nparams.adjust({'extend_param': [{'d0': 3, 'd1': 'c1', 'value': -1}, {'d0': \n    3, 'd1': 'c2', 'value': 1}]})\nassert params.extend_param.tolist() == [[1, 2], [1, 2], [1, 2], [-1, 1], [-\n    1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1]]\nparams = ExtParams()\nparams.adjust({'extend_param': [{'d0': 3, 'value': -1}, {'d0': 5, 'd1':\n    'c1', 'value': 0}, {'d0': 5, 'd1': 'c2', 'value': 1}, {'d0': 8, 'd1':\n    'c1', 'value': 22}, {'d0': 8, 'd1': 'c2', 'value': 23}]})\nassert params.extend_param.tolist() == [[1, 2], [1, 2], [1, 2], [-1, -1], [\n    -1, -1], [0, 1], [0, 1], [0, 1], [22, 23], [22, 23], [22, 23]]\nparams = ExtParams()\nparams.adjust({'extend_param': [{'d0': 3, 'value': -1}, {'d0': 5, 'd1':\n    'c1', 'value': 0}, {'d0': 6, 'd1': 'c2', 'value': 1}]})\nassert params.extend_param.tolist() == [[1, 2], [1, 2], [1, 2], [-1, -1], [\n    -1, -1], [0, -1], [0, 1], [0, 1], [0, 1], [0, 1], [0, 1]]\nparams = ExtParams()\nparams.adjust({'extend_param': [{'d0': 0, 'value': 1}]})\nassert params.extend_param.tolist() == [[1, 1]] * 11\n"
+}

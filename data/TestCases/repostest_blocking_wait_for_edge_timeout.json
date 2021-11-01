@@ -1,0 +1,9 @@
+{
+    "functionName": "test_blocking_wait_for_edge_timeout",
+    "className": null,
+    "fileName": "/rm-hull_&_OPi.GPIO/tests_&_test_event.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "pin = 68\nfs.CreateFile('/sys/class/gpio/gpio{0}/edge'.format(pin))\nfs.CreateFile('/sys/class/gpio/gpio{0}/value'.format(pin))\nwith patch('select.epoll'):\n    assert event.blocking_wait_for_edge(pin, RISING, timeout=0.01) is None\n"
+}

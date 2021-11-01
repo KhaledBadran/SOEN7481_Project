@@ -1,0 +1,9 @@
+{
+    "functionName": "test_add_statements_completes",
+    "className": "DataUserTest",
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_DataUserTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Test that we can upload lots of triples.\n\n        This is to address the problem from issue #31 on https://github.com/openworm/owmeta/issues\n        \"\"\"\ng = rdflib.Graph()\nfor i in range(9000):\n    s = rdflib.URIRef('http://somehost.com/s%d' % i)\n    p = rdflib.URIRef('http://somehost.com/p%d' % i)\n    o = rdflib.URIRef('http://somehost.com/o%d' % i)\n    g.add((s, p, o))\ndu = DataUser(conf=self.config)\ndu.add_statements(g)\n"
+}

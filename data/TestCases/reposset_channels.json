@@ -1,0 +1,9 @@
+{
+    "functionName": "set_channels",
+    "className": "Connection",
+    "fileName": "/PRIArobotics_&_HedgehogServer/hedgehog_&_server_&_handlers_&_vision.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "for key, channel in channels.items():\n    if isinstance(channel, vision_msg.FacesChannel):\n        self.channels[key] = Channel(channel, partial(vision.detect_faces,\n            vision.haar_face_cascade), vision.highlight_faces, pack_faces)\n    elif isinstance(channel, vision_msg.BlobsChannel):\n        self.channels[key] = Channel(channel, partial(vision.detect_blobs,\n            min_hsv=channel.hsv_min, max_hsv=channel.hsv_max), vision.\n            highlight_blobs, pack_blobs)\n    else:\n        assert False\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_big_clusters",
+    "className": "MixedPercolationTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_MixedPercolationTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.setup_class(Np=10)\nnet = self.net\nphys = self.phys\nnp.random.seed(1)\nphys['throat.entry_pressure'] = 0.0\nphys['pore.entry_pressure'] = np.random.random(net.Np) * net.Np\nself.inlets = net.pores('left')\nself.outlets = None\nnp.random.seed(1)\nself.phase['pore.occupancy'] = False\nself.phase['throat.occupancy'] = False\nself.phase['pore.occupancy'] = np.random.random(net.Np) < 0.25\nIP_1 = mp(network=self.net)\nIP_1.setup(phase=self.phase)\nIP_1.set_inlets(pores=self.inlets)\nIP_1.set_residual(pores=self.phase['pore.occupancy'])\nIP_1.run()\nassert np.all(IP_1['pore.invasion_sequence'] > -1)\nassert len(np.unique(IP_1['pore.cluster'])) > 1\n"
+}

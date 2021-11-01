@@ -1,0 +1,9 @@
+{
+    "functionName": "test_uk3d_functional_drift",
+    "className": null,
+    "fileName": "/bsmurphy_&_PyKrige/tests_&_test_core.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "data, (gridx, gridy, gridz), mask_ref = sample_data_3d\nfunc_x = lambda x, y, z: x\nfunc_y = lambda x, y, z: y\nfunc_z = lambda x, y, z: z\nwith pytest.raises(ValueError):\n    UniversalKriging3D(data[:, (0)], data[:, (1)], data[:, (2)], data[:, (3\n        )], variogram_model='linear', drift_terms=['functional'])\nwith pytest.raises(TypeError):\n    UniversalKriging3D(data[:, (0)], data[:, (1)], data[:, (2)], data[:, (3\n        )], variogram_model='linear', drift_terms=['functional'],\n        functional_drift=func_x)\nuk_func = UniversalKriging3D(data[:, (0)], data[:, (1)], data[:, (2)], data\n    [:, (3)], variogram_model='linear', drift_terms=['functional'],\n    functional_drift=[func_x, func_y, func_z])\nz_func, ss_func = uk_func.execute('grid', gridx, gridy, gridz)\nuk_lin = UniversalKriging3D(data[:, (0)], data[:, (1)], data[:, (2)], data[\n    :, (3)], variogram_model='linear', drift_terms=['regional_linear'])\nz_lin, ss_lin = uk_lin.execute('grid', gridx, gridy, gridz)\nassert_allclose(z_func, z_lin)\nassert_allclose(ss_func, ss_lin)\n"
+}

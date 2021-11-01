@@ -1,0 +1,9 @@
+{
+    "functionName": "test_oned",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_test_kullback_leiblers.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Check that the KL divergence matches a 1D by-hand calculation.\n    \"\"\"\nmu1d = Datum.mu[(dim), :][(None), :]\ns1d = Datum.sqrt[:, (dim), (dim)][:, (None), (None)]\nK1d = Datum.K_batch[:, (dim), (dim)][:, (None), (None)]\nkl = gauss_kl(mu1d, s1d, K1d if not white else None)\nkl_1d = compute_kl_1d(tf.reshape(mu1d, (-1,)), tf.reshape(s1d, (-1,)), None if\n    white else tf.reshape(K1d, (-1,)))\nnp.testing.assert_allclose(kl, kl_1d)\npytest.mark.parametrize('dim', [0, 1])pytest.mark.parametrize('white', [True, False])"
+}

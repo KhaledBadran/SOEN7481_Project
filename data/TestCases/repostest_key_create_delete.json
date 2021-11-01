@@ -1,0 +1,9 @@
+{
+    "functionName": "test_key_create_delete",
+    "className": "TestSqlIdentityStorage",
+    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_identity_methods.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "identityName = Name('/TestIdentityStorage/Identity').appendVersion(int(time\n    .time()))\nkeyName1 = self.keyChain.generateRSAKeyPair(identityName, True)\nself.keyChain.getIdentityManager().setDefaultKeyForIdentity(keyName1)\nkeyName2 = self.keyChain.generateRSAKeyPair(identityName, False)\nself.assertEqual(self.identityManager.getDefaultKeyNameForIdentity(\n    identityName), keyName1,\n    'Default key name was changed without explicit request')\nself.assertNotEqual(self.identityManager.getDefaultKeyNameForIdentity(\n    identityName), keyName2,\n    'Newly created key replaced default key without explicit request')\nself.identityStorage.deletePublicKeyInfo(keyName2)\nself.assertFalse(self.identityStorage.doesKeyExist(keyName2))\nself.keyChain.deleteIdentity(identityName)\n"
+}

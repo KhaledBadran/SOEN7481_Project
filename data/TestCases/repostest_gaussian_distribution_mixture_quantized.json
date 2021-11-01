@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gaussian_distribution_mixture_quantized",
+    "className": null,
+    "fileName": "/Neuraxio_&_Neuraxle/testing_&_hyperparams_&_test_distributions.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "distribution_amplitudes = [1, 1, 1]\nmeans = [-2, 0, 2]\nstds = [1, 1, 1]\ndistribution_mins = [None for _ in range(len(means))]\ndistribution_max = [None for _ in range(len(means))]\nhd = DistributionMixture.build_gaussian_mixture(distribution_amplitudes,\n    means, stds, distribution_mins, distribution_max,\n    use_quantized_distributions=True)\nsamples = get_many_samples_for(hd)\nsamples_median = np.median(samples)\nassert -0.5 < samples_median < 0.5\nsamples_std = np.std(samples)\nassert 1 < samples_std < 4\nassert abs(hd.pdf(-2.0) - 0.147917229965673) < 1e-06\nassert abs(hd.pdf(-1.5) - 0.0) < 1e-06\nassert abs(hd.pdf(1.0) - 0.16314590372033272) < 1e-06\nassert abs(hd.pdf(5.0) - 0.001993471656810324) < 1e-06\nassert abs(hd.cdf(-2.0) - 0.2528340972073022) < 1e-06\nassert abs(hd.cdf(-1.5) - 0.2528340972073022) < 1e-06\nassert abs(hd.cdf(1.0) - 0.7471659027926978) < 1e-06\nassert abs(hd.cdf(5.0) - 0.99992245064379) < 1e-06\nassert hd.min() == -np.inf\nassert hd.max() == np.inf\nassert abs(hd.mean() - 0.0) < 1e-06\nassert abs(hd.var() - 3.749999989027785) < 1e-06\nassert abs(hd.std() - 1.9364916702706947) < 1e-06\nassert abs(hd.mean() - np.mean(samples)) < 0.1\nassert abs((hd.var() - np.var(samples)) / hd.var()) < 0.1\n"
+}

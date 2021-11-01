@@ -1,0 +1,9 @@
+{
+    "functionName": "test_set_universe_with_kwargs",
+    "className": "TestUniverse",
+    "fileName": "/datreant_&_MDSynthesis/src_&_mdsynthesis_&_tests_&_test_treants.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Universe should preserve its kwargs, if possible.\n\n            Test that setting a Universe for a Sim also gets its kwargs\n            preserved, that an exception is raised for unserializable kwargs,\n            and that a proper warning is geven when the Sim can't get them from\n            the Universe in the first place.\n\n            \"\"\"\nu = mda.Universe(PDB, XTC, something_fake=True)\ntreant.universe = u\nassert treant.universedef.kwargs['something_fake'] is True\nu2 = mda.Universe(PDB, XTC, something_else=mda.topology.GROParser.GROParser)\nwith pytest.raises(ValueError):\n    treant.universe = u2\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_simple_sendmail",
+    "className": null,
+    "fileName": "/PlaidWeb_&_Authl/tests_&_handlers_&_test_emailaddr.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "connector = mocker.MagicMock(name='connector')\nimport email\nmessage = email.message.EmailMessage()\nmessage['To'] = 'recipient@bob.example'\nmessage.set_payload('test body')\nsender = email_addr.simple_sendmail(connector, 'sender@bob.example',\n    'test subject')\nsender(message)\nconnector.assert_called_once()\nwith connector() as conn:\n    conn.sendmail.assert_called_with('sender@bob.example',\n        'recipient@bob.example', str(message))\nassert message['From'] == 'sender@bob.example'\nassert message['Subject'] == 'test subject'\n"
+}

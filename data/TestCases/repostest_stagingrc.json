@@ -1,0 +1,9 @@
+{
+    "functionName": "test_stagingrc",
+    "className": "Staging_Test",
+    "fileName": "/apmechev_&_GRID_LRT/GRID_LRT_&_tests_&_test_staging_LTA.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "user, passw, _ = stager_access.get_staging_creds()\nself.assertTrue(user == 'apmechev')\ndirectory = expanduser('~/')\nif os.path.exists(expanduser('~/.stagingrc')):\n    os.remove(expanduser('~/.stagingrc'))\nif os.path.exists(expanduser('~/.awe/Environment.cfg')):\n    os.remove(expanduser('~/.awe/Environment.cfg'))\nwith open(expanduser('~/.stagingrc'), 'w') as st_file:\n    st_file.write('user=test1\\n')\n    st_file.write('password=test2\\n')\nuser2, passw2, _ = stager_access.get_staging_creds()\nsys.stderr.write('username is ' + user2)\nself.assertTrue(user2 == 'test1')\nself.assertTrue(passw2 == 'test2')\nf = os.path.dirname(__file__) + '/srm_50_sara.txt'\nstage_all_LTA.main(f, test=True)\nf = os.path.dirname(__file__) + '/srm_50_sara.txt'\nl = stage_all_LTA.return_srmlist(f)\nself.assertTrue(len(l) == 51)\ndirectory = expanduser('~/.awe/')\nif not os.path.exists(directory):\n    os.makedirs(directory)\nwith open(expanduser('~/.awe/Environment.cfg'), 'w') as a_file:\n    a_file.write('database_user : testu1\\n')\n    a_file.write('database_password : testu2\\n')\nprev_usr = os.environ['PICAS_USR']\nos.environ['PICAS_USR'] = ''\nprev_pwd = os.environ['PICAS_USR_PWD']\nos.environ['PICAS_USR_PWD'] = ''\nuser3, passw3, _ = stager_access.get_staging_creds()\nself.assertTrue(user3 == 'testu1')\nself.assertTrue(passw3 == 'testu2')\nos.environ['PICAS_USR'] = prev_usr\nos.environ['PICAS_USR_PWD'] = prev_pwd\n"
+}

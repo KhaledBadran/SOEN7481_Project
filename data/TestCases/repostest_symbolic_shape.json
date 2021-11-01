@@ -1,0 +1,9 @@
+{
+    "functionName": "test_symbolic_shape",
+    "className": "TestReshapeLayer",
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_shape.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from lasagne.layers import InputLayer, ReshapeLayer, get_output\nx = theano.tensor.tensor3()\nbatch_size, seq_len, num_features = x.shape\nl_inp = InputLayer((None, None, None))\nl_rshp2 = ReshapeLayer(l_inp, (batch_size * seq_len, [2]))\noutput_shape = l_rshp2.get_output_shape_for((batch_size, seq_len, num_features)\n    )\nassert output_shape == (None, None)\noutput = get_output(l_rshp2, x)\nout1 = output.eval({x: np.ones((3, 5, 6), dtype='float32')})\nout2 = output.eval({x: np.ones((4, 5, 7), dtype='float32')})\nassert out1.shape == (3 * 5, 6)\nassert out2.shape == (4 * 5, 7)\n"
+}

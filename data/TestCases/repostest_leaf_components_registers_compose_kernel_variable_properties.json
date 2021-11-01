@@ -1,0 +1,9 @@
+{
+    "functionName": "test_leaf_components_registers_compose_kernel_variable_properties",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_utilities_&_test_printing.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "module = module_callable()\nleaf_components_dict = leaf_components(module)\nassert len(leaf_components_dict) > 0\nfor path, variable in leaf_components_dict.items():\n    path_as_list = path.split('.')\n    param_name = path_as_list[-3] + '.' + path_as_list[-2\n        ] + '.' + path_as_list[-1]\n    assert isinstance(variable, gpflow.Parameter)\n    np.testing.assert_equal(variable.value().numpy(), expected_param_dicts[\n        param_name]['value'])\n    assert variable.trainable == expected_param_dicts[param_name]['trainable']\n    assert variable.shape == expected_param_dicts[param_name]['shape']\npytest.mark.parametrize('module_callable, expected_param_dicts', [(\n    create_compose_kernel, compose_kernel_param_dict)])"
+}

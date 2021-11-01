@@ -1,0 +1,9 @@
+{
+    "functionName": "test_context_manager",
+    "className": "TestProxyKmipClient",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_test_client.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the KmipClient can be used by the with-statement as a\n        context manager.\n        \"\"\"\nwith ProxyKmipClient() as client:\n    self.assertTrue(client._is_open)\n    client.proxy.open.assert_called_with()\nself.assertFalse(client._is_open)\nclient.proxy.close.assert_called_with()\nmock.patch('kmip.pie.client.KMIPProxy', mock.MagicMock(spec_set=KMIPProxy))"
+}

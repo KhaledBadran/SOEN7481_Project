@@ -1,0 +1,9 @@
+{
+    "functionName": "test_unfold_symmetry",
+    "className": null,
+    "fileName": "/mesonepigreco_&_CellConstructor/tests_&_TestReplicaSymmetry_&_test_unfold_symmetry.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "total_path = os.path.dirname(os.path.abspath(__file__))\nos.chdir(total_path)\nstructure = CC.Structure.Structure()\nstructure.read_scf('unit_cell_structure.scf')\nqe_sym = CC.symmetries.QE_Symmetry(structure)\nqe_sym.SetupQPoint(verbose=True)\nsyms, irts = qe_sym.GetSymmetries(True)\nnat = structure.N_atoms\nnsyms = len(syms)\nd_structure = structure.copy()\nd_structure.coords += np.random.normal(scale=0.1, size=np.shape(d_structure\n    .coords))\nnew_d_structures = []\nfor i in range(nsyms):\n    u_disp = d_structure.coords - structure.coords\n    new_u_disp = CC.symmetries.ApplySymmetryToVector(syms[i], u_disp,\n        structure.unit_cell, irts[(i), :])\n    tmp = structure.copy()\n    tmp.coords += new_u_disp\n    tmp.save_scf('replica_%d.scf' % i)\n    new_d_structures.append(tmp)\nprint('Symmetry of a displaced structure:')\nqe_sym = CC.symmetries.QE_Symmetry(new_d_structures[0])\nqe_sym.SetupQPoint(verbose=True)\nprint()\nnew_structure = structure.copy()\nnew_structure.coords = np.sum([x.coords for x in new_d_structures], axis=0\n    ) / nsyms\nprint('Symmetries after the sum:')\nqe_sym = CC.symmetries.QE_Symmetry(new_structure)\nqe_sym.SetupQPoint(verbose=True)\nprint()\nprint('Difference from the first one:')\nprint(np.sqrt(np.sum((new_structure.coords - structure.coords) ** 2)))\n"
+}

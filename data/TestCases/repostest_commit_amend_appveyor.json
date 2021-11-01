@@ -1,0 +1,9 @@
+{
+    "functionName": "test_commit_amend_appveyor",
+    "className": null,
+    "fileName": "/132nd-etcher_&_EPAB/test_&_test_repo_&_test_commit.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "_dummy_commit(repo)\nassert len(list(repo.repo.iter_commits())) == 2\nmonkeypatch.setenv('APPVEYOR', 'test')\nrepo.amend_commit(new_message='test')\nassert repo.last_commit_msg() == 'test [skip ci]'\nassert len(list(repo.repo.iter_commits())) == 2\n"
+}

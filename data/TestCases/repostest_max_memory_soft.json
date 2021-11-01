@@ -1,0 +1,9 @@
+{
+    "functionName": "test_max_memory_soft",
+    "className": "Test",
+    "fileName": "/sqreen_&_PyMiniRacer/tests_&_test_eval.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.mr.set_soft_memory_limit(100000000)\nwith self.assertRaises(py_mini_racer.JSOOMException):\n    self.mr.eval(\n        \"\"\"let s = 1000;\n                var a = new Array(s);\n                a.fill(0);\n                while(true) {\n                    s *= 1.1;\n                    let n = new Array(Math.floor(s));\n                    n.fill(0);\n                    a = a.concat(n);\n                }\"\"\"\n        , max_memory=200000000)\nself.assertEqual(self.mr.was_soft_memory_limit_reached(), True)\n"
+}

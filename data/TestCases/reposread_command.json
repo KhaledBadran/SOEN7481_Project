@@ -1,0 +1,9 @@
+{
+    "functionName": "read_command",
+    "className": null,
+    "fileName": "/PRIArobotics_&_HedgehogServer/hedgehog_&_server_&_hardware_&_serial_&___init__.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "cmd = await read(1)\nwith trio.move_on_after(0.5):\n    if cmd[0\n        ] not in Reply.SUCCESS_REPLIES | Reply.ERROR_REPLIES | Reply.UPDATES:\n        raise RuntimeError(\n            f\"HWC speaks a language we don't understand: 0x{cmd[0]:02X}\")\n    if cmd[0] in Reply.LENGTHS:\n        length = Reply.LENGTHS[cmd[0]]\n    else:\n        cmd += await read(1)\n        length = cmd[1] + 2\n    while len(cmd) < length:\n        cmd += await read(length - len(cmd))\n    return list(cmd)\nraise TruncatedCommandError(\n    f\"HWC sent a truncated response: {' '.join(f'{b:02X}' for b in cmd)}\")\n"
+}

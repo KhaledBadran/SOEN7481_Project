@@ -1,0 +1,9 @@
+{
+    "functionName": "test_dask_client_create",
+    "className": null,
+    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_core_&_tests_&_test_map_processing.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    `dask_client_create` is a trivial function that instantiates Dask client\n    in uniform way throughout the program. We test that we can pass addition\n    kwargs to the object constructor or override default parameters.\n    \"\"\"\nos.chdir(tmpdir)\ndask_worker_space_path = os.path.join(tmpdir, 'dask-worker-space')\nclient = dask_client_create(n_workers=11)\nn_workers = len(client.scheduler_info()['workers'])\nassert n_workers == 11, 'The number of workers was set incorrectly'\nclient.close()\nassert not os.path.exists(dask_worker_space_path\n    ), 'Temporary directory was created in the current directory'\nclient = dask_client_create(processes=False)\nn_workers = len(client.scheduler_info()['workers'])\nassert n_workers == 1, 'Dask client is expected to have one worker'\nclient.close()\nassert not os.path.exists(dask_worker_space_path\n    ), 'Temporary directory was created in the current directory'\n"
+}

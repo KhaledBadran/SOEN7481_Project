@@ -1,0 +1,9 @@
+{
+    "functionName": "test_redis",
+    "className": null,
+    "fileName": "/mavrix93_&_LightCurvesClassifier/test_&_stars_processing_&_test_stars_searcher.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with open(os.path.join(os.path.dirname(__file__),\n    '../resources/test_filter.pickle'), 'rb') as fi:\n    st_filter = pickle.load(fi)\nsearcher = StarsSearcherRedis([st_filter], db_connector='OgleII', save_path\n    ='/tmp/test_stars')\nqueries = [{'field': 'LMC_SC3', 'starid': i} for i in range(1, 10)]\nsearcher.queryStars(queries)\nassert len(searcher.getPassedStars()) > 0\ntime.sleep(2)\nassert len(searcher.getStatus()) >= int(len(queries) * 0.6)\n"
+}

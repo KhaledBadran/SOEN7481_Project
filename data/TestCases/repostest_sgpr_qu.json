@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sgpr_qu",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_models_&_test_sgpr.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "rng = Datum().rng\nX = to_default_float(rng.randn(100, 2))\nZ = to_default_float(rng.randn(20, 2))\nY = to_default_float(np.sin(X @ np.array([[-1.4], [0.5]])) + 0.5 * rng.\n    randn(len(X), 1))\nmodel = gpflow.models.SGPR((X, Y), kernel=gpflow.kernels.SquaredExponential\n    (), inducing_variable=Z)\ngpflow.optimizers.Scipy().minimize(model.training_loss, variables=model.\n    trainable_variables)\nqu_mean, qu_cov = model.compute_qu()\nf_at_Z_mean, f_at_Z_cov = model.predict_f(model.inducing_variable.Z,\n    full_cov=True)\nnp.testing.assert_allclose(qu_mean, f_at_Z_mean, rtol=1e-05, atol=1e-05)\nnp.testing.assert_allclose(tf.reshape(qu_cov, (1, 20, 20)), f_at_Z_cov,\n    rtol=1e-05, atol=1e-05)\n"
+}

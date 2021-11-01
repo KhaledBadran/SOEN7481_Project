@@ -1,0 +1,9 @@
+{
+    "functionName": "createPacket",
+    "className": null,
+    "fileName": "/FaradayRF_&_Faraday-Software/faraday_&_proxy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "temp = []\npacket = ''\ni = 0\nfor i in range(size):\n    try:\n        a = data.popleft()\n        temp.append(a)\n    except IndexError:\n        pass\ntry:\n    payload = ''.join(temp)\n    preamble = struct.pack('BB', 0, 0)\n    size = struct.pack('B', len(payload))\n    framedPayload = size + payload\n    packet = (preamble + framedPayload).encode('base64', 'strict')\nexcept TypeError as e:\n    logger.error(e)\nexcept struct.error as e:\n    logger.warning(e)\nexcept UnicodeError as e:\n    logger.error(e)\nexcept StandardError as e:\n    logger.info('StandardError')\n    logger.error(e)\nreturn packet\n"
+}

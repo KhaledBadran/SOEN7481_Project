@@ -1,0 +1,9 @@
+{
+    "functionName": "test_role_policies",
+    "className": "Test_IAM",
+    "fileName": "/pbx-gs_&_OSBot-AWS/tests_&_unit_&_apis_&_test_IAM.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "policies = self.iam.role_policies()\nassert len(set(policies)) == 0\niam = IAM(role_name='AWSServiceRoleForAPIGateway')\nassert iam.role_policies() == {'APIGatewayServiceRolePolicy':\n    'arn:aws:iam::aws:policy/aws-service-role/APIGatewayServiceRolePolicy'}\nassert len(iam.role_policies_statements().get('APIGatewayServiceRolePolicy'\n    )[0].get('Action')) > 10\n"
+}

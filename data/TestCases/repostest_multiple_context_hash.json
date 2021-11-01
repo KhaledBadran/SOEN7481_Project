@@ -1,0 +1,9 @@
+{
+    "functionName": "test_multiple_context_hash",
+    "className": null,
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_BundleInstallTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "d = Descriptor('test')\nctxid_1 = 'http://example.org/ctx1'\nctxid_2 = 'http://example.org/ctx2'\nd.includes.add(make_include_func(ctxid_1))\nd.includes.add(make_include_func(ctxid_2))\ng = rdflib.ConjunctiveGraph()\ncg = g.get_context(ctxid_1)\nwith transaction.manager:\n    cg.add((URIRef('a'), URIRef('b'), URIRef('c')))\ncg = g.get_context(ctxid_2)\nwith transaction.manager:\n    cg.add((URIRef('a'), URIRef('b'), URIRef('c')))\nbi = Installer(*dirs, graph=g)\nbi.install(d)\nwith open(p(dirs.bundles_directory, 'test', '1', 'graphs', 'hashes'), 'rb'\n    ) as f:\n    contents = f.read()\n    assert ctxid_1.encode('UTF-8') in contents\n    assert ctxid_2.encode('UTF-8') in contents\n"
+}

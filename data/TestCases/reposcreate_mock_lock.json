@@ -1,0 +1,9 @@
+{
+    "functionName": "create_mock_lock",
+    "className": null,
+    "fileName": "/alex-ber_&_AlexBerUtils/tests_&_utils_&_ymlparsers_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "mock_lock = DymmyLock()\ndef __enter__():\n    mock_lock.acquire()\n    return mock_lock\ndef __exit__(t, v, tb):\n    mock_lock.release()\nmocker.patch.object(mock_lock, 'acquire', autospec=True, spec_set=True)\nmocker.patch.object(mock_lock, 'release', autospec=True, spec_set=True)\nmocker.patch.object(type(mock_lock), '__enter__', side_effect=__enter__,\n    create=True)\nmocker.patch.object(type(mock_lock), '__exit__', side_effect=__exit__,\n    create=True)\nreturn mock_lock\n"
+}

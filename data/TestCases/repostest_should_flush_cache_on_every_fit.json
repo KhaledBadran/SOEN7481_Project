@@ -1,0 +1,9 @@
+{
+    "functionName": "test_should_flush_cache_on_every_fit",
+    "className": null,
+    "fileName": "/Neuraxio_&_Neuraxle/testing_&_steps_&_test_value_caching_wrapper.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tape_transform = TapeCallbackFunction()\ntape_fit = TapeCallbackFunction()\nwrapper = PickleValueCachingWrapper(LogFitTransformCallbackStep(\n    tape_transform, tape_fit, transform_function=np.log), cache_folder=tmpdir)\np = Pipeline([wrapper])\nwrapper.create_checkpoint_path()\nwrapper.write_cache(1, 10)\nwrapper.write_cache(2, 20)\np, outputs = p.fit_transform([1, 1, 2, 2], [2, 2, 4, 4])\nassert outputs == EXPECTED_OUTPUTS\nassert tape_transform.data == [[1], [2]]\nassert tape_fit.data == [([1, 1, 2, 2], [2, 2, 4, 4])]\n"
+}

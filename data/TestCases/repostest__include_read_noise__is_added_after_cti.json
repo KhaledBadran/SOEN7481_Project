@@ -1,0 +1,9 @@
+{
+    "functionName": "test__include_read_noise__is_added_after_cti",
+    "className": "TestCISimulate",
+    "fileName": "/Jammy2211_&_PyAutoCTI/test_&_unit_&_charge_injection_&_test_ci_data.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "pattern = ci_pattern.CIPatternUniform(normalization=10.0, regions=[(0, 1, 0,\n    3)])\nci_pre_cti = pattern.simulate_ci_pre_cti(shape=(3, 3))\nci_data_simulate = ci_data.simulate(ci_pre_cti=ci_pre_cti, frame_geometry=\n    ci_frame.FrameGeometry.euclid_bottom_left(), ci_pattern=pattern,\n    cti_settings=arctic_parallel, cti_params=params_parallel, read_noise=\n    1.0, noise_seed=1)\nimage_no_noise = pattern.ci_pre_cti_from_shape(shape=(3, 3))\nassert ci_data_simulate.image - image_no_noise == pytest.approx(np.array([[\n    1.62, -0.61, -0.53], [-1.07, 0.87, -2.3], [1.74, -0.76, 0.32]]), 0.01)\n"
+}

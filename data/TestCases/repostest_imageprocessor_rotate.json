@@ -1,0 +1,9 @@
+{
+    "functionName": "test_imageprocessor_rotate",
+    "className": null,
+    "fileName": "/IBM_&_MAX-Framework/maxfw_&_tests_&_test_image_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test the Imageprocessor's rotate function.\"\"\"\ntransform_sequence = [ToPILImage('RGBA'), Resize((200, 200)), Rotate(5)]\np = ImageProcessor(transform_sequence)\nimg_out = p.apply_transforms(test_input)\nassert np.array(img_out).shape == (200, 200, 4)\ntransform_sequence = [ToPILImage('RGBA'), Resize((200, 200))]\np = ImageProcessor(transform_sequence)\nimg_in = p.apply_transforms(test_input)\ntransform_sequence = [Rotate(5)]\np = ImageProcessor(transform_sequence)\nimg_out = p.apply_transforms(img_in)\nassert img_in.rotate(5) == img_out\ntransform_sequence = [ToPILImage('RGBA'), Resize((200, 200)), Rotate(-5)]\np = ImageProcessor(transform_sequence)\nimg_out = p.apply_transforms(test_input)\nassert np.array(img_out).shape == (200, 200, 4)\ntransform_sequence = [ToPILImage('RGBA'), Resize((200, 200)), Rotate(499.99)]\np = ImageProcessor(transform_sequence)\nimg_out = p.apply_transforms(test_input)\nassert np.array(img_out).shape == (200, 200, 4)\n"
+}

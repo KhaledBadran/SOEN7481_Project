@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cudaaligner_long_alignments",
+    "className": null,
+    "fileName": "/clara-genomics_&_ClaraGenomicsAnalysis/pygenomeworks_&_test_&_test_cudaaligner_bindings.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test varying batches of long and short alignments and check for successful\n    completion of alignment.\n    \"\"\"\ndevice = cuda.cuda_get_device()\ngenome_sim = PoissonGenomeSimulator()\nread_sim = NoisyReadSimulator()\nbatch = CudaAlignerBatch(ref_length, ref_length, num_alignments, device_id=\n    device)\nfor _ in range(num_alignments):\n    reference = genome_sim.build_reference(ref_length)\n    query, start, end = read_sim.generate_read(reference, ref_length,\n        insertion_error_rate=0.0)\n    target, start, end = read_sim.generate_read(reference, ref_length,\n        insertion_error_rate=0.0)\n    batch.add_alignment(query, target)\nbatch.align_all()\nbatch.get_alignments()\nbatch.reset()\nassert len(batch.get_alignments()) == 0\npytest.mark.gpupytest.mark.parametrize('ref_length, num_alignments', [(5000, 30), (10000, \n    10), (500, 100)])"
+}

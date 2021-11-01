@@ -1,0 +1,9 @@
+{
+    "functionName": "test_modify_host_remove_initiator",
+    "className": "CITestProvisioning",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test modify_host remove initiator.\"\"\"\navailable_initiator = self.provisioning.get_available_initiator_wwn_as_list()\nif not available_initiator:\n    self.skipTest(\n        'test_modify_host_remove_initiator - Unable to get an available initiator.'\n        )\nhost_name = self.create_host(available_initiator)\nself.provisioning.modify_host(host_name, remove_init_list=available_initiator)\nhost_details = self.provisioning.get_host(host_name)\ninitiator_count = host_details[constants.NUM_OF_INITIATORS]\nself.assertEqual(0, initiator_count)\nself.assertNotIn(constants.INITIATOR, host_details)\n"
+}

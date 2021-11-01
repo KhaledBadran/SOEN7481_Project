@@ -1,0 +1,9 @@
+{
+    "functionName": "test_adding_new_trials",
+    "className": "TrialTest",
+    "fileName": "/facebook_&_Ax/ax_&_core_&_tests_&_test_trial.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "new_arm = get_arms()[1]\ncand_metadata = {new_arm.signature: {'a': 'b'}}\nnew_trial = self.experiment.new_trial(generator_run=GeneratorRun(arms=[\n    new_arm], candidate_metadata_by_arm_signature=cand_metadata))\nwith self.assertRaises(ValueError):\n    self.experiment.new_trial(generator_run=GeneratorRun(arms=get_arms()))\nself.assertEqual(new_trial.arms_by_name['1_0'], new_arm)\nwith self.assertRaises(KeyError):\n    self.trial.arms_by_name['1_0']\nself.assertEqual(new_trial._get_candidate_metadata_from_all_generator_runs(\n    ), {'1_0': cand_metadata[new_arm.signature]})\nself.assertEqual(new_trial._get_candidate_metadata('1_0'), cand_metadata[\n    new_arm.signature])\nself.assertRaises(ValueError, new_trial._get_candidate_metadata,\n    'this_is_not_an_arm')\n"
+}

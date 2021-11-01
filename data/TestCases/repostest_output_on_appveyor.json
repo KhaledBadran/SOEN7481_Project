@@ -1,0 +1,9 @@
+{
+    "functionName": "test_output_on_appveyor",
+    "className": null,
+    "fileName": "/132nd-etcher_&_EPAB/test_&_test_cmd_&_test_test_runner.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "CTX.appveyor = True\nwhen(subprocess).call(...)\nwhen(elib_run, strict=False).run(\n    f'pytest test --vcr-record=none --long {pytest_options()}', timeout=\n    _TIMEOUT)\n_pytest('test', **DEFAULT_OPTS)\nassert 'running: _pytest' in caplog.text\nassert 'running test suite' in caplog.text\nassert 'coverage.xml not found, skipping codacy coverage' in caplog.text\n"
+}

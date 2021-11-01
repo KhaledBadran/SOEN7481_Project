@@ -1,0 +1,9 @@
+{
+    "functionName": "test_norm_constraint_dim6_raises",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_test_updates.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "import numpy as np\nimport theano\nfrom lasagne.updates import norm_constraint\nmax_norm = 0.01\nparam = theano.shared(np.random.randn(1, 2, 3, 4, 5, 6).astype(theano.\n    config.floatX))\nwith pytest.raises(ValueError) as excinfo:\n    norm_constraint(param, max_norm)\nassert 'Unsupported tensor dimensionality' in str(excinfo.value)\n"
+}

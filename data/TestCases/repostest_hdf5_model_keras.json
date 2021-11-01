@@ -1,0 +1,9 @@
+{
+    "functionName": "test_hdf5_model_keras",
+    "className": null,
+    "fileName": "/goeckslab_&_Galaxy-ML/galaxy_ml_&_tests_&_test_model_persist.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "model_weights = './tools/test-data/train_test_eval_weights01.h5'\nmodel_config = './tools/test-data/train_test_eval_model01'\nwith open(model_config, 'rb') as f:\n    model = pickle.load(f)\nmodel.load_weights(model_weights)\nprint(model)\ntmp = tempfile.mktemp()\ntry:\n    print('\\nDumping model to hdf5...')\n    start_time = time.time()\n    model_persist.dump_model_to_h5(model, tmp)\n    end_time = time.time()\n    print('(%s s)' % str(end_time - start_time))\n    print('File size: %s' % str(os.path.getsize(tmp)))\n    print('\\nLoading hdf5 model...')\n    start_time = time.time()\n    model = model_persist.load_model_from_h5(tmp)\n    end_time = time.time()\n    print('(%s s)' % str(end_time - start_time))\nfinally:\n    os.remove(tmp)\ntmp_skeleton = tempfile.mktemp()\ntmp_weights = tempfile.mktemp()\ntry:\n    print('\\nComparing pickled file size before and after...')\n    print(model)\n    start_time = time.time()\n    model.model_.save_weights(tmp_weights)\n    del model.model_\n    with open(tmp_skeleton, 'wb') as f:\n        pickle.dump(model, f, pickle.HIGHEST_PROTOCOL)\n    end_time = time.time()\n    print('(%s s)' % str(end_time - start_time))\n    print('Model skeleton size: %s' % str(os.path.getsize(tmp_skeleton)))\n    print('Model weights size: %s' % str(os.path.getsize(tmp_weights)))\nfinally:\n    os.remove(tmp_skeleton)\n    os.remove(tmp_weights)\n"
+}

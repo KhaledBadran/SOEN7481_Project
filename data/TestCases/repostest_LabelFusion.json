@@ -1,0 +1,9 @@
+{
+    "functionName": "test_LabelFusion",
+    "className": null,
+    "fileName": "/jmriebold_&_BoilerPy3/tests_&_test_filters.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "lb1 = DefaultLabels.MARKUP_PREFIX + '.title'\nlb2 = DefaultLabels.MARKUP_PREFIX + '.menu'\ndoc = make_doc([10, 10, 10, 10, 10, 10, 10], None, None, [None, None, lb1,\n    lb1, lb2, lb2, [lb1, lb2]])\nfiltr = LabelFusion()\nis_changed = filtr.process(doc)\nblock_idxs = [(block.offset_blocks_start, block.offset_blocks_end) for\n    block in doc.text_blocks]\nassert block_idxs == [(0, 1), (2, 3), (4, 5), (6, 6)]\nassert is_changed is True\n"
+}

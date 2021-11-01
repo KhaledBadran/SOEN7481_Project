@@ -1,0 +1,9 @@
+{
+    "functionName": "test_lj_run",
+    "className": "LocalJudgeCLITest",
+    "fileName": "/NoCLin_&_LocalJudge/tests_&_lj_cli_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "p = Popen(['lj', 'run', 'poj-1000.c'], stdin=PIPE, stdout=PIPE, cwd=PROB_DIR)\nstdout, _ = p.communicate('1 2'.encode())\nprint(stdout)\nself.assertNotEqual(-1, stdout.find(b'Process Exit Code: 0'))\nself.assertNotEqual(-1, stdout.find(b'3\\n'))\np = Popen(['ljr', 'poj-1000.c'], stdin=PIPE, stdout=PIPE, cwd=PROB_DIR)\nstdout, _ = p.communicate('1 2'.encode())\nself.assertNotEqual(-1, stdout.find(b'Process Exit Code: 0'))\nself.assertNotEqual(-1, stdout.find(b'3\\n'))\n"
+}

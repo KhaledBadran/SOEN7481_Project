@@ -1,0 +1,9 @@
+{
+    "functionName": "test_authorize_code_with_session_object",
+    "className": "TestAuthClientAuthorizeCode",
+    "fileName": "/mozilla_&_PyFxA/fxa_&_tests_&_test_oauth.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "session = mock.Mock()\nsession.get_identity_assertion.return_value = 'IDENTITY'\ncode = self.client.authorize_code(session)\nsession.get_identity_assertion.assert_called_once_with(audience=\n    TEST_SERVER_URL, service=self.client.client_id)\nself.assertEqual(code, 'qed')\nreq_body = json.loads(_decoded(responses.calls[0].request.body))\nself.assertEqual(req_body, {'assertion': 'IDENTITY', 'client_id': self.\n    client.client_id, 'state': AnyStringValue()})\nresponses.activate"
+}

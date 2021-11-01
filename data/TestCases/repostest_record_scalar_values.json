@@ -1,0 +1,9 @@
+{
+    "functionName": "test_record_scalar_values",
+    "className": "TestBaseTuner",
+    "fileName": "/HDI-Project_&_BTB/tests_&_tuning_&_tuners_&_test_base.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that the method record performs an update to ``trials`` and ``scores`` when called\n        with a scalar value.\n        \"\"\"\ninstance = MagicMock()\ninstance.tunable = MagicMock(spec_set=Tunable)\ninstance.trials = np.empty((0, 2), dtype=np.float)\ninstance.raw_scores = np.empty((0, 1), dtype=np.float)\ninstance._trials_set = set()\ninstance.tunable.transform.return_value = np.array([[1, 0]])\nBaseTuner.record(instance, 1, 0.1)\ninstance.tunable.transform.assert_called_once_with(1)\nnp.testing.assert_array_equal(instance.trials, np.array([[1, 0]]))\nassert instance._trials_set == set({(1, 0)})\nnp.testing.assert_array_equal(instance.raw_scores, np.array([0.1]))\nnp.testing.assert_array_equal(instance.scores, np.array([0.1]))\n"
+}

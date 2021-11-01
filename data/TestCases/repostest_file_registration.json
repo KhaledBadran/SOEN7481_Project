@@ -1,0 +1,9 @@
+{
+    "functionName": "test_file_registration",
+    "className": null,
+    "fileName": "/YoSTEALTH_&_Liburing/test_&_file_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ring = liburing.io_uring()\nassert liburing.io_uring_queue_init(1, ring, 0) == 0\nfd1 = os.open(os.path.join(tmpdir, '1.txt'), os.O_CREAT)\nfd2 = os.open(os.path.join(tmpdir, '2.txt'), os.O_CREAT)\ntry:\n    fds = liburing.files(fd1, fd2)\n    assert liburing.io_uring_register_files(ring, fds, len(fds)) == 0\n    assert liburing.io_uring_unregister_files(ring) == 0\nfinally:\n    os.close(fd1)\n    os.close(fd2)\n    liburing.io_uring_queue_exit(ring)\n"
+}

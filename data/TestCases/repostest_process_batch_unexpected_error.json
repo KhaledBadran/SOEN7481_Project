@@ -1,0 +1,9 @@
+{
+    "functionName": "test_process_batch_unexpected_error",
+    "className": "TestKmipEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that an unexpected, non-KMIP error is handled appropriately\n        while processing a batch of operations.\n        \"\"\"\ne = engine.KmipEngine()\ne._logger = mock.MagicMock()\ntest_exception = Exception('A general test failure occurred.')\ne._process_operation = mock.MagicMock(side_effect=test_exception)\nbatch = list([messages.RequestBatchItem(operation=contents.Operation(enums.\n    Operation.DISCOVER_VERSIONS))])\nresults = e._process_batch(batch, enums.BatchErrorContinuationOption.STOP, True\n    )\nself.assertIsNotNone(results)\nself.assertEqual(1, len(results))\nresult = results[0]\ne._logger.warning.assert_called_with(\n    'Error occurred while processing operation.')\ne._logger.exception.assert_called_with(test_exception)\nself.assertIsInstance(result, messages.ResponseBatchItem)\nself.assertIsNotNone(result.operation)\nself.assertEqual(enums.Operation.DISCOVER_VERSIONS, result.operation.value)\nself.assertIsNone(result.unique_batch_item_id)\nself.assertIsNotNone(result.result_status)\nself.assertEqual(enums.ResultStatus.OPERATION_FAILED, result.result_status.\n    value)\nself.assertIsNotNone(result.result_reason)\nself.assertEqual(enums.ResultReason.GENERAL_FAILURE, result.result_reason.value\n    )\nself.assertIsNotNone(result.result_message)\nself.assertEqual('Operation failed. See the server logs for more information.',\n    result.result_message.value)\nself.assertIsNone(result.async_correlation_value)\nself.assertIsNone(result.response_payload)\nself.assertIsNone(result.message_extension)\n"
+}

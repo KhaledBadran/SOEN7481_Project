@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_loan_transactions",
+    "className": null,
+    "fileName": "/mobidevke_&_PyFineract/tests_&_objects_&_test_loan_transaction.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "mocker.patch.object(requests.Session, 'send', new=fake_handler1)\nrequest_handler = RequestHandler('a', 'b', 'https://localhost', 'default', \n    10, 30)\nmocker.patch.object(requests.Session, 'send', new=fake_handler1)\npaginated_list = PaginatedList(LoanTransaction, request_handler, '/', {})\ncount = 0\nfor item in paginated_list:\n    count += 1\nassert count == 1\nassert isinstance(paginated_list[0], LoanTransaction)\n"
+}

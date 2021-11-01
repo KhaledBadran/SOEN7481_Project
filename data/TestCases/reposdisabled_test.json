@@ -1,0 +1,9 @@
+{
+    "functionName": "disabled_test",
+    "className": null,
+    "fileName": "/kitware_&_BroThon/explorations_&_kafka_router.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Test for KafkaRouter Class\"\"\"\nfrom zat.utils import geo_lookup\nmy_geo = geo_lookup.GeoLookup()\ndef north_south(message):\n    if not message['local_orig'] and message['local_resp']:\n        return 'incoming'\n    elif message['local_orig'] and not message['local_resp']:\n        return 'outgoing'\n    return None\ndef incoming_info(message):\n    geo_info = my_geo.query_ip(message['id.orig_h'])\n    timestamp = datetime.fromtimestamp(message['ts'])\n    print('\\nINCOMING')\n    print(timestamp, geo_info['country_code'], geo_info['region_name'],\n        message['id.orig_h'], '-->', message['id.resp_h'], message['proto'],\n        message.get('service', 'unknown'))\n    return None\ndef outgoing_info(message):\n    ip = message['id.resp_h']\n    if ip[:3] in ['255', '239', '224']:\n        return None\n    geo_info = my_geo.query_ip(message['id.resp_h'])\n    if not geo_info or geo_info['country_code'] == 'US':\n        return None\n    message['country_code'] = geo_info['country_code']\n    message['region_name'] = geo_info['region_name']\n    return 'non_us'\ndef print_info(message):\n    timestamp = datetime.fromtimestamp(message['ts'])\n    print(timestamp, message['country_code'], message['region_name'],\n        message['id.orig_h'], '-->', message['id.resp_h'], message['proto'],\n        message.get('service', 'unknown'))\n    return None\nrouter = KafkaRouter(offset='earliest')\nrouter.add_route('conn', north_south)\nrouter.add_route('outgoing', outgoing_info)\nrouter.add_route('incoming', incoming_info)\nrouter.add_route('non_us', print_info)\nrouter.run()\n"
+}

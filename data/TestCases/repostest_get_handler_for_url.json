@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_handler_for_url",
+    "className": null,
+    "fileName": "/PlaidWeb_&_Authl/tests_&_test_main.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Test that URL rules map correctly \"\"\"\nhandler_1 = UrlHandler('test://foo', 'a')\nhandler_2 = UrlHandler('test://bar', 'b')\nhandler_3 = LinkHandler('moo', 'c')\ninstance = Authl([handler_1, handler_2, handler_3])\nrequests_mock.get('http://moo/link', text='<link rel=\"moo\" href=\"yes\">')\nrequests_mock.get('http://moo/header', headers={'Link': '<gabba>; rel=\"moo\"'})\nrequests_mock.get('http://moo/redir', status_code=301, headers={'Location':\n    'http://moo/header'})\nrequests_mock.get('http://foo.bar', text='nothing here')\nassert instance.get_handler_for_url('test://foo') == (handler_1, 'a',\n    'test://foo')\nassert instance.get_handler_for_url('test://bar') == (handler_2, 'b',\n    'test://bar')\nassert instance.get_handler_for_url('test://baz') == (None, '', '')\nassert instance.get_handler_for_url('http://moo/link') == (handler_3, 'c',\n    'http://moo/link')\nassert instance.get_handler_for_url('http://moo/header') == (handler_3, 'c',\n    'http://moo/header')\nassert instance.get_handler_for_url('http://moo/redir') == (handler_3, 'c',\n    'http://moo/header')\nassert instance.get_handler_for_url('http://foo.bar') == (None, '', '')\nassert instance.get_handler_for_url('') == (None, '', '')\n"
+}

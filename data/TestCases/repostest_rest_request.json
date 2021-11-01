@@ -1,0 +1,9 @@
+{
+    "functionName": "test_rest_request",
+    "className": "PyU4VRestRequestsTest",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_requests.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test REST request success.\"\"\"\nwith mock.patch.object(self.rest.session, 'request', return_value=pf.\n    FakeResponse(200, self.data.server_version)) as mock_request:\n    response, sc = self.rest.rest_request('/fake_uri', 'GET')\n    mock_request.assert_called_once_with(method='GET', timeout=120, url=\n        'http://10.10.10.10:8443/univmax/restapi/fake_uri')\n    self.assertEqual(200, sc)\n    self.assertEqual(self.data.server_version, response)\n"
+}

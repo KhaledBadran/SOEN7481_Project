@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sample_with_no_masks",
+    "className": null,
+    "fileName": "/mdbloice_&_Augmentor/tests_&_test_datapipeline.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "width = 80\nheight = 80\ntmpdir = tempfile.mkdtemp()\ntmps = []\nnum_of_images = 10\nfor i in range(num_of_images):\n    tmps.append(tempfile.NamedTemporaryFile(dir=tmpdir, suffix='.JPEG'))\n    bytestream = io.BytesIO()\n    im = Image.new('RGB', (width, height))\n    im.save(bytestream, 'JPEG')\n    tmps[i].file.write(bytestream.getvalue())\n    tmps[i].flush()\ny = [(0 if random.random() <= 0.5 else 1) for x in range(0, num_of_images)]\nimages = [np.asarray(x) for x in tmps]\np = Augmentor.DataPipeline(images)\nassert len(p.augmentor_images) == len(glob.glob(os.path.join(tmpdir, '*.JPEG'))\n    )\np.rotate(probability=1, max_left_rotation=5, max_right_rotation=5)\nsample_size = 100\naugmented_images = p.sample(sample_size)\nassert len(augmented_images) == sample_size\nfor i in range(len(tmps)):\n    tmps[i].close()\nshutil.rmtree(tmpdir)\npytest.mark.skip(reason=\n    'DataPipeline has not been written to handle this circumstance yet.')"
+}

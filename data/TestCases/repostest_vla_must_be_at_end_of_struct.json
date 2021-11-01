@@ -1,0 +1,9 @@
+{
+    "functionName": "test_vla_must_be_at_end_of_struct",
+    "className": "TestVLA",
+    "fileName": "/Gilnaa_&_Hydras/tests_&_test_array_vla.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class Florp(Struct):\n    a = u8\n    b = u8[1:15]\nself.assertFalse(Florp.is_constant_size())\nwith self.assertRaises(TypeError):\n\n\n    class Blarg(Struct):\n        b = u8[1:15]\n        a = u8\nwith self.assertRaises(TypeError):\n\n\n    class Zlorp(Struct):\n        a = Florp\n        b = u8\n"
+}

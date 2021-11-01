@@ -1,0 +1,9 @@
+{
+    "functionName": "test_context",
+    "className": "NamespaceTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_namespace.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"test that namespace callables get access to the current context\"\"\"\ncollection = lookup.TemplateLookup()\ncollection.put_string('main.html',\n    \"\"\"\n        <%namespace name=\"comp\" file=\"defs.html\"/>\n\n        this is main.  ${comp.def1()}\n        ${comp.def2(\"there\")}\n\"\"\"\n    )\ncollection.put_string('defs.html',\n    \"\"\"\n        <%def name=\"def1()\">\n            def1: x is ${x}\n        </%def>\n\n        <%def name=\"def2(x)\">\n            def2: x is ${x}\n        </%def>\n\"\"\"\n    )\nassert flatten_result(collection.get_template('main.html').render(x=\n    'context x')) == 'this is main. def1: x is context x def2: x is there'\n"
+}

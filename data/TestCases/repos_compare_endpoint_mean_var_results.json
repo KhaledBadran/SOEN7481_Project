@@ -1,0 +1,9 @@
+{
+    "functionName": "_compare_endpoint_mean_var_results",
+    "className": "TestGpMeanVarView",
+    "fileName": "/Yelp_&_MOE/moe_&_tests_&_views_&_rest_&_gp_mean_var_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Compare the results of mean/var endpoint to truth values.\n\n        :param json_payload: json input to POST to the test endpoint\n        :type json_payload: string (json)\n        :param endpoint: path to the endpoint to test\n        :type endpoint: string\n        :param response_schema: schema of the endpoint's response\n        :type response_schema: colander.MappingSchema subclass\n        :param tolerance: desired relative accuracy\n        :type tolerance: float64\n        :param truth_mean: the true GP mean values\n        :type truth_mean: array with shape matching the response schema 'mean' field\n        :param truth_var: the true GP variance values\n        :type truth_var: array with shape matching the response schema 'var' field\n\n        \"\"\"\nresp = self.testapp.post(endpoint, json_payload)\nresp_dict = response_schema.deserialize(json.loads(resp.body))\nif truth_mean is not None:\n    rest_mean = numpy.asarray(resp_dict.get('mean'))\n    self.assert_vector_within_relative(rest_mean, truth_mean, tolerance)\nif truth_var is not None:\n    rest_var = numpy.asarray(resp_dict.get('var'))\n    self.assert_vector_within_relative(rest_var, truth_var, tolerance)\n"
+}

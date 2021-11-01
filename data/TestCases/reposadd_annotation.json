@@ -1,0 +1,9 @@
+{
+    "functionName": "add_annotation",
+    "className": "_Hemisphere",
+    "fileName": "/nipy_&_PySurfer/surfer_&_viz.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Add an annotation file\"\"\"\narray_id, pipe = self._add_scalar_data(ids)\nwith warnings.catch_warnings(record=True):\n    surf = mlab.pipeline.surface(pipe, name=annot, figure=self._f,\n        reset_zoom=False, **kwargs)\n    surf.actor.property.backface_culling = False\nl_m = surf.module_manager.scalar_lut_manager\nl_m.lut.table = np.round(cmap).astype(np.uint8)\nreturn dict(surface=surf, name=annot, colormap=cmap, brain=self, array_id=\n    array_id)\n"
+}

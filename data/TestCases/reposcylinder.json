@@ -1,0 +1,9 @@
+{
+    "functionName": "cylinder",
+    "className": null,
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_models_&_geometry_&_throat_volume.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Calculate throat volume assuing a cylindrical shape\n\n    Parameters\n    ----------\n    target : OpenPNM Object\n        The object which this model is associated with. This controls the\n        length of the calculated array, and also provides access to other\n        necessary properties.\n\n    throat_length and throat_diameter : strings\n        The dictionary keys containing the arrays with the throat diameter and\n        length values.\n\n    Returns\n    -------\n    value : NumPy ndarray\n        Array containing throat volume values.\n\n    Notes\n    -----\n    At present this models does NOT account for the volume reprsented by the\n    intersection of the throat with a spherical pore body.\n\n    \"\"\"\nleng = target[throat_length]\ndiam = target[throat_diameter]\nvalue = _np.pi / 4 * leng * diam ** 2\nreturn value\n"
+}

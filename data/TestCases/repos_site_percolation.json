@@ -1,0 +1,9 @@
+{
+    "functionName": "_site_percolation",
+    "className": null,
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_topotools_&_topotools.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    This private method is called by 'find_clusters'\n    \"\"\"\nconns = np.copy(network['throat.conns'])\nconns[:, (0)] = pmask[conns[:, (0)]]\nconns[:, (1)] = pmask[conns[:, (1)]]\ntmask = np.all(conns, axis=1)\ncsr = network.create_adjacency_matrix(weights=tmask, fmt='csr', drop_zeros=True\n    )\nclusters = sprs.csgraph.connected_components(csgraph=csr, directed=False)[1]\np_clusters = (clusters + 1) * pmask - 1\nt_clusters = clusters[network['throat.conns']]\nind = t_clusters[:, (0)] == t_clusters[:, (1)]\nt_clusters = t_clusters[:, (0)]\nt_clusters[~ind] = -1\nreturn p_clusters, t_clusters\n"
+}

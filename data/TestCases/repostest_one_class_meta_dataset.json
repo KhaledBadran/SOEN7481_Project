@@ -1,0 +1,9 @@
+{
+    "functionName": "test_one_class_meta_dataset",
+    "className": null,
+    "fileName": "/Menelau_&_DESlib/deslib_&_tests_&_static_&_test_stacked.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "X, y = create_X_y\npool = [DecisionTreeClassifier().fit(X, y) for _ in range(5)]\nstacked = StackedClassifier(pool)\nX_meta = np.random.rand(10, 2)\ny_meta = np.zeros(10, dtype=int)\nwith pytest.raises(ValueError):\n    stacked.fit(X_meta, y_meta)\n"
+}

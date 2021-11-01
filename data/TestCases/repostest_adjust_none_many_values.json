@@ -1,0 +1,9 @@
+{
+    "functionName": "test_adjust_none_many_values",
+    "className": "TestAdjust",
+    "fileName": "/hdoupe_&_ParamTools/paramtools_&_tests_&_test_parameters.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "params = TestParams()\nadj = {'int_dense_array_param': [{'value': None}]}\nparams.adjust(adj)\nassert len(params._data['int_dense_array_param']['value']) == 0\nassert len(params.int_dense_array_param) == 0\nparams = TestParams()\nadj = {'int_dense_array_param': [{'label0': 'zero', 'value': None}]}\nparams.adjust(adj)\nassert len(params._data['int_dense_array_param']['value']) == 18\nassert len(params.int_dense_array_param) == 18\nassert len(params.specification(use_state=False, include_empty=True, label0\n    ='zero')['int_dense_array_param']) == 0\nassert len(params.specification(use_state=False, include_empty=True, label0\n    ='one')['int_dense_array_param']) == 18\n"
+}

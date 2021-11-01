@@ -1,0 +1,9 @@
+{
+    "functionName": "strip_scores",
+    "className": null,
+    "fileName": "/dcavar_&_Flair-JSON-NLP/tests_&_test_flairjsonnlp.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"Scores are non-deterministic\"\"\"\nfor s in j['documents'][1]['sentences']:\n    for label in s.get('labels', []):\n        label['scores']['label'] = 0\nfor e in j['documents'][1]['expressions']:\n    e['scores']['type'] = 0\nfor t in j['documents'][1]['tokenList']:\n    t['scores']['upos'] = 0\n    t['scores']['xpos'] = 0\n    t['scores']['entity'] = 0\n    if 'synsets' in t:\n        t['synsets'][0]['scores']['wordnetId'] = 0\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ZipRaceEthnicityBatch",
+    "className": null,
+    "fileName": "/JosephPallipadan_&_Namsor-API-Wrapper-Python/namsorclient_&_tests_&_test_request_objects.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tester = namsorclient.US_ZipRaceEthnicityBatch()\nassert tester.response_type == namsorclient.RaceEthnicityResponse\nnames = []\nfor id in range(10):\n    name = str(faker_obj.name()).split(' ')[:2]\n    country_code = random.choice(list(namsorclient.CountryCodes))\n    name.append(country_code)\n    name.append(str(random.randint(10000, 99999)))\n    name.append(id)\n    names.append(name)\n    tester.addItem(name[0], name[1], name[2], name[3], name[4])\n    assert isinstance(tester.items[-1], namsorclient.\n        US_ZipRaceEthnicityBatch.US_ZipRaceEthnicityBatchItem)\n    assert tester.items[-1].first_name == name[0]\n    assert tester.items[-1].last_name == name[1]\n    assert tester.items[-1].country_code == name[2].value\n    assert tester.items[-1].zip_code == name[3]\n    assert tester.items[-1].ID == name[4]\nfor name, item in zip(names, tester.batch_item_converter()):\n    keys = ['id', 'firstName', 'lastName', 'countryIso2', 'zipCode']\n    assert all([(key in item) for key in keys])\n    assert item['firstName'] == name[0]\n    assert item['lastName'] == name[1]\n    assert item['countryIso2'] == name[2].value\n    assert item['zipCode'] == name[3]\n    assert item['id'] == name[4]\n"
+}

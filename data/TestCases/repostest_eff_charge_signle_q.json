@@ -1,0 +1,9 @@
+{
+    "functionName": "test_eff_charge_signle_q",
+    "className": null,
+    "fileName": "/mesonepigreco_&_CellConstructor/tests_&_TestEffChargeInterp_&_test_eff_interpol.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "total_path = os.path.dirname(os.path.abspath(__file__))\nos.chdir(total_path)\ndyn = CC.Phonons.Phonons('dyn', 32)\nq_vector = np.array([0.25, 0, 0]) / dyn.alat\nt2 = CC.ForceTensor.Tensor2(dyn.structure, dyn.structure.generate_supercell\n    (dyn.GetSupercell()), dyn.GetSupercell())\nt2.SetupFromPhonons(dyn)\ntime1 = time.time()\nt2.Center()\ntime2 = time.time()\nprint('Time to the full centerng:', time2 - time1, 's')\ndynq_full = t2.Interpolate(-q_vector, asr=False)\ntest_dynmat = CC.Phonons.Phonons('matdyn_dyn', full_name=True)\ndist = np.max(np.abs(test_dynmat.dynmats[0] - dynq_full)) / np.max(np.abs(\n    test_dynmat.dynmats[0]))\nassert dist < 1e-05\n"
+}

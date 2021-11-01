@@ -1,0 +1,9 @@
+{
+    "functionName": "test_previous_cursor_not_closed",
+    "className": "TestEscape",
+    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_test_connection.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "con = self.connect(init_command='SELECT \"bar\"; SELECT \"baz\"', client_flag=\n    CLIENT.MULTI_STATEMENTS)\ncur1 = con.cursor()\ncur1.execute('SELECT 1; SELECT 2')\ncur2 = con.cursor()\ncur2.execute('SELECT 3')\nself.assertEqual(cur2.fetchone()[0], 3)\n"
+}

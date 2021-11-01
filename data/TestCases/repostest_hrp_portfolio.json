@@ -1,0 +1,9 @@
+{
+    "functionName": "test_hrp_portfolio",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_hrp.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "df = get_data()\nreturns = df.pct_change().dropna(how='all')\nhrp = HRPOpt(returns)\nw = hrp.optimize()\nx = pd.read_csv(resource('weights_hrp.csv'), squeeze=True, index_col=0)\npd.testing.assert_series_equal(x, pd.Series(w), check_names=False,\n    check_less_precise=True)\nassert isinstance(w, dict)\nassert set(w.keys()) == set(df.columns)\nnp.testing.assert_almost_equal(sum(w.values()), 1)\nassert all([(i >= 0) for i in w.values()])\n"
+}

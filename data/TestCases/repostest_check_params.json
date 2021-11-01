@@ -1,0 +1,9 @@
+{
+    "functionName": "test_check_params",
+    "className": null,
+    "fileName": "/goeckslab_&_Galaxy-ML/galaxy_ml_&_tests_&_test_keras_galaxy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "fn = Sequential.fit, Sequential.predict\nparams1 = dict(epochs=100, validation_split=0.2)\nparams2 = dict(random_state=9999)\ntry:\n    check_params(params1, fn)\n    got1 = True\nexcept ValueError:\n    got1 = False\n    pass\ntry:\n    check_params(params2, Sequential.fit)\n    got2 = True\nexcept ValueError:\n    got2 = False\n    pass\nassert got1 is True, got1\nassert got2 is False, got2\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_df_fails_when_not_identical_data_shape",
+    "className": "TestDFCorrection",
+    "fileName": "/ornlneutronimaging_&_NeuNorm/tests_&_NeuNorm_&_normalizing_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "o_norm = Normalization()\nsample_1 = np.ones([5, 5])\ndf_1 = np.ones([6, 6])\no_norm.data['sample']['data'] = sample_1\no_norm.data['df']['data'] = df_1\nwith pytest.raises(IOError):\n    o_norm.df_correction()\no_norm = Normalization()\nob_1 = np.ones([6, 6])\no_norm.data['ob']['data'] = sample_1\no_norm.data['df']['data'] = ob_1\nwith pytest.raises(IOError):\n    o_norm.df_correction()\n"
+}

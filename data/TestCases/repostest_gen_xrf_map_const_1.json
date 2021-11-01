@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gen_xrf_map_const_1",
+    "className": null,
+    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_simulation_&_tests_&_test_sim_xrf_scan_data.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Successful generation of XRF map\"\"\"\nelement_groups = {'Fe_K': {'area': 800}, 'Se_L': {'area': 900}, 'W_M': {\n    'area': 1000}}\nbackground_area = 1000\nnx, ny = 50, 100\ntotal_area = sum([_['area'] for _ in element_groups.values()])\ntotal_area += background_area\nxrf_map, xx = gen_xrf_map_const(element_groups, nx=nx, ny=ny,\n    incident_energy=12.0, background_area=background_area)\nassert xrf_map.shape == (ny, nx, 4096), 'Incorrect shape of generated XRF maps'\nassert xx.shape == (4096,), 'Incorrect shape of energy axis'\nnpt.assert_array_equal(xrf_map[(0), (0), :], xrf_map[(1), (1), :], err_msg=\n    'Elements of XRF map are not equal')\nnpt.assert_almost_equal(np.sum(xrf_map[(0), (0), :]), total_area, err_msg=\n    'Area of the generated spectrum does not match the expected value')\nxrf_map, xx = gen_xrf_map_const(element_groups, nx=nx, ny=ny,\n    n_spectrum_points=1000, incident_energy=12.0, background_area=\n    background_area)\nassert xrf_map.shape == (ny, nx, 1000), 'Incorrect shape of generated XRF maps'\nassert xx.shape == (1000,), 'Incorrect shape of energy axis'\n"
+}

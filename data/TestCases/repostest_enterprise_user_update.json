@@ -1,0 +1,9 @@
+{
+    "functionName": "test_enterprise_user_update",
+    "className": "TestEnterprise",
+    "fileName": "/Keeper-Security_&_Commander/unit-tests_&_test_command_enterprise.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "params = get_connected_params()\napi.query_enterprise(params)\ncmd = enterprise.EnterpriseUserCommand()\nTestEnterprise.expected_commands = ['enterprise_user_update']\ncmd.execute(params, node='Root node', email=[ent_env.user2_email])\nself.assertEqual(len(TestEnterprise.expected_commands), 0)\nTestEnterprise.expected_commands = ['enterprise_user_update']\ncmd.execute(params, node='{0}'.format(ent_env.node1_id), email=[ent_env.\n    user2_email])\nself.assertEqual(len(TestEnterprise.expected_commands), 0)\n"
+}

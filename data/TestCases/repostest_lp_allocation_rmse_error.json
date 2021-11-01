@@ -1,0 +1,9 @@
+{
+    "functionName": "test_lp_allocation_rmse_error",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_discrete_allocation.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "df = get_data()\nmu = mean_historical_return(df)\nS = sample_cov(df)\nef = EfficientFrontier(mu, S)\nw = ef.max_sharpe()\nlatest_prices = get_latest_prices(df)\nda = DiscreteAllocation(w, latest_prices)\nda.lp_portfolio()\nnp.testing.assert_almost_equal(da._allocation_rmse_error(verbose=False), \n    0.017070218149194846)\n"
+}

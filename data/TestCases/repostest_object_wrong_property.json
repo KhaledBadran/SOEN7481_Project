@@ -1,0 +1,9 @@
+{
+    "functionName": "test_object_wrong_property",
+    "className": null,
+    "fileName": "/ocaballeror_&_Lyricfetch/lyricfetch_&_tests_&_test_dbusobject.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Try to get an inexistent property and verify that an error is returned.\n    \"\"\"\nobject_path = 'com.example.object'\ninterface = 'com.example.interface1'\naddr = DBusAddress('/path', object_path, interface=interface)\ndbus_service.listen()\nconn = connect_and_authenticate()\nwith pytest.raises(DBusErrorResponse):\n    conn.send_and_get_reply(Properties(addr).get('prop'))\npytest.mark.parametrize('dbus_service', ['com.example.object'], indirect=True)"
+}

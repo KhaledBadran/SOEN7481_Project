@@ -1,0 +1,9 @@
+{
+    "functionName": "test_process_buffer",
+    "className": null,
+    "fileName": "/realtwister_&_LearnedEvolution/tests_&_agents_&_test_batch.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "batch = Batch()\nT = 100\nobservations, internals, actions, rewards, terminals, values = fill_batch(batch\n    , T)\nassert len(batch._buffer) == 0\nassert len(batch._memory) == T\nadvantages = batch.calculate_advantages(rewards, values)\nreturns = batch.calculate_returns(rewards)\nfor i, (observation, internal, action, ret, adv) in enumerate(batch._memory):\n    assert observation == observations[i]\n    assert internal == internals[i]\n    assert action == actions[i]\n    assert ret == returns[i]\n    assert adv == advantages[i]\nfor _ in range(100):\n    fill_batch(batch, T)\nassert len(batch._memory) == batch._memory.maxlen\n"
+}

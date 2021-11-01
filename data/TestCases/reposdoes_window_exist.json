@@ -1,0 +1,9 @@
+{
+    "functionName": "does_window_exist",
+    "className": "TestMenus3",
+    "fileName": "/PmagPy_&_PmagPy/pmagpy_tests_&_test_pmag_gui.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "item = None\nmenus = self.frame.MenuBar.Menus\nif submenu:\n    for m, name in menus:\n        if name == menu_name:\n            for m_item in m.MenuItems:\n                if m_item.Label == submenu:\n                    menu = m_item.SubMenu\n                    break\nelse:\n    for m, name in menus:\n        if name == menu_name:\n            menu = m\n            break\nitem_id = menu.FindItem(menuitem_name)\nitem = menu.FindItemById(item_id)\nif not item:\n    return None\nevent = wx.CommandEvent(wx.EVT_MENU.evtType[0], item_id)\nself.frame.GetEventHandler().ProcessEvent(event)\nwindow = None\nfor w in self.frame.Children:\n    if w.GetName() == window_name:\n        window = w\n        break\nif not window:\n    return None\nself.assertTrue(window.IsEnabled())\nself.assertTrue(window.IsShown())\nreturn window\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "_onData",
+    "className": "Chat",
+    "fileName": "/named-data_&_PyNDN2/examples_&_test_chrono_chat.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        Process the incoming Chat data.\n        \"\"\"\ncontent = chatbuf_pb2.ChatMessage()\ncontent.ParseFromString(data.getContent().toBytes())\nif self.getNowMilliseconds() - content.timestamp * 1000.0 < 120000.0:\n    name = getattr(content, 'from')\n    prefix = data.getName().getPrefix(-2).toUri()\n    sessionNo = int(data.getName().get(-2).toEscapedString())\n    sequenceNo = int(data.getName().get(-1).toEscapedString())\n    nameAndSession = name + str(sessionNo)\n    l = 0\n    while l < len(self._roster):\n        entry = self._roster[l]\n        tempName = entry[0:len(entry) - 10]\n        tempSessionNo = int(entry[len(entry) - 10:])\n        if name != tempName and content.type != chatbuf_pb2.ChatMessage.LEAVE:\n            l += 1\n        else:\n            if name == tempName and sessionNo > tempSessionNo:\n                self._roster[l] = nameAndSession\n            break\n    if l == len(self._roster):\n        self._roster.append(nameAndSession)\n        print(name + ': Join')\n    timeout = Interest(Name('/local/timeout'))\n    timeout.setInterestLifetimeMilliseconds(120000)\n    self._face.expressInterest(timeout, self._dummyOnData, self._makeAlive(\n        sequenceNo, name, sessionNo, prefix))\n    if (content.type == chatbuf_pb2.ChatMessage.CHAT and not self.\n        _isRecoverySyncState and getattr(content, 'from') != self._screenName):\n        print(getattr(content, 'from') + ': ' + content.data)\n    elif content.type == chatbuf_pb2.ChatMessage.LEAVE:\n        try:\n            n = self._roster.index(nameAndSession)\n            if name != self._screenName:\n                self._roster.pop(n)\n                print(name + ': Leave')\n        except ValueError:\n            pass\n"
+}

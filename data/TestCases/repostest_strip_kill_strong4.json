@@ -1,0 +1,9 @@
+{
+    "functionName": "test_strip_kill_strong4",
+    "className": "TestCleaner",
+    "fileName": "/mcs07_&_ChemDataExtractor/tests_&_test_scrape_clean.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test applying a ``Cleaner`` instance that kills strong tags.\"\"\"\ncleaner = Cleaner(strip_xpath='.//*', kill_xpath=\n    './/script | .//style | .//comment() | .//processing-instruction() | .//strong'\n    )\ntree = html.fromstring(HTML4)\ncleaner(tree)\nself.assertEqual(STRIPKS4, tostring(tree).decode())\n"
+}

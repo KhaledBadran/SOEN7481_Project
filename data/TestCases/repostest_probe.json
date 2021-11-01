@@ -1,0 +1,9 @@
+{
+    "functionName": "test_probe",
+    "className": null,
+    "fileName": "/fmfn_&_BayesianOptimization/tests_&_test_target_space.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "space = TargetSpace(target_func, PBOUNDS)\nassert len(space) == 0\nspace.probe(params={'p1': 1, 'p2': 2})\nassert len(space) == 1\nassert all(space.params[0] == np.array([1, 2]))\nassert all(space.target == np.array([3]))\nspace.probe(np.array([5, 4]))\nassert len(space) == 2\nassert all(space.params[1] == np.array([5, 4]))\nassert all(space.target == np.array([3, 9]))\nspace.probe(params={'p1': 1, 'p2': 2})\nassert len(space) == 2\nassert all(space.params[1] == np.array([5, 4]))\nassert all(space.target == np.array([3, 9]))\nspace.probe(np.array([5, 4]))\nassert len(space) == 2\nassert all(space.params[1] == np.array([5, 4]))\nassert all(space.target == np.array([3, 9]))\n"
+}

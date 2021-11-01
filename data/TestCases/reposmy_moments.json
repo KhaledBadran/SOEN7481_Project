@@ -1,0 +1,9 @@
+{
+    "functionName": "my_moments",
+    "className": null,
+    "fileName": "/GalacticDynamics-Oxford_&_Agama/py_&_test_user_profiles.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "af = agama.ActionFinder(potential)\ndef integrand(scaledv):\n    sintheta = numpy.sin(scaledv[:, (1)])\n    posvel = numpy.column_stack((numpy.tile(point, len(scaledv)).reshape(-1,\n        3), scaledv[:, (0)] * sintheta * numpy.cos(scaledv[:, (2)]), \n        scaledv[:, (0)] * sintheta * numpy.sin(scaledv[:, (2)]), scaledv[:,\n        (0)] * numpy.cos(scaledv[:, (1)])))\n    jacobian = scaledv[:, (0)] ** 2 * sintheta\n    actions = af(posvel)\n    return df(actions) * jacobian\nv_esc = (-2 * potential.potential(point)) ** 0.5\nresult, error, neval = agama.integrateNdim(integrand, [0, 0, 0], [v_esc,\n    numpy.pi, 2 * numpy.pi], toler=1e-06)\nreturn result\n"
+}

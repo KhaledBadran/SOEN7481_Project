@@ -1,0 +1,9 @@
+{
+    "functionName": "_throat_pair_angle",
+    "className": "MixedInvasionPercolationCoop",
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_algorithms_&_MixedInvasionPercolationCoop.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "conn1 = network['throat.conns'][t1]\nconn2 = network['throat.conns'][t2]\nlookup = np.vstack((pore, pore)).T\np1 = conn1[conn1 != lookup]\np2 = conn2[conn2 != lookup]\nv1 = network['pore.coords'][pore] - network['pore.coords'][p1]\nv2 = network['pore.coords'][pore] - network['pore.coords'][p2]\nv_ref = self._perpendicular_vector(v1, v2)\nv1_perp = self._perpendicular_vector(v1, v_ref)\nv2_perp = self._perpendicular_vector(v2, v_ref)\nreturn angle_between_vectors(v1_perp, v2_perp, axis=1)\n"
+}

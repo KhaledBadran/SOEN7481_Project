@@ -1,0 +1,9 @@
+{
+    "functionName": "test_callbacks",
+    "className": null,
+    "fileName": "/PlaidWeb_&_Authl/tests_&_test_flask_wrapper.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class CallbackHandler(TestHandler):\n\n    @property\n    def cb_id(self):\n        return 'foo'\n\n    def check_callback(self, url, get, data):\n        LOGGER.info('url=%s get=%s data=%s', url, get, data)\n        if 'me' in get:\n            return disposition.Verified('get://' + get['me'], None)\n        if 'me' in data:\n            return disposition.Verified('data://' + data['me'], None)\n        return disposition.Error('nope', None)\napp = flask.Flask(__name__)\napp.secret_key = __name__\ninstance = authl.flask.setup(app, {})\ninstance.add_handler(CallbackHandler())\nwith app.test_client() as client:\n    assert client.get('/cb/foo?me=yumyan')\n    assert flask.session['me'] == 'get://yumyan'\nwith app.test_client() as client:\n    assert client.post('/cb/foo', data={'me': 'hammerpaw'})\n    assert flask.session['me'] == 'data://hammerpaw'\nwith app.test_client() as client:\n    soup = BeautifulSoup(client.get('/cb/foo').data, 'html.parser')\n    error = soup.find('div', {'class': 'error'})\n    assert error.text.strip() == 'nope'\nwith app.test_client() as client:\n    soup = BeautifulSoup(client.get('/cb/bar').data, 'html.parser')\n    error = soup.find('div', {'class': 'error'})\n    assert error.text.strip() == 'Invalid handler'\n"
+}

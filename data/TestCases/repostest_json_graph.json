@@ -1,0 +1,9 @@
+{
+    "functionName": "test_json_graph",
+    "className": "CLIJSONOutputModeTest",
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_CLITest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with noexit(), stdout() as so:\n\n    @with_defaults\n    def main(argument_namespace_callback, **kwargs):\n        from rdflib.graph import Graph\n        argument_namespace_callback.output_mode = 'json'\n        return Mock(name='graph', spec=Graph())\n    self.ccw().main.side_effect = main\n    PCLI.main()\nval = json.loads(so.getvalue())\nself.assertEqual(val, [])\n"
+}

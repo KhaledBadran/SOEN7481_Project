@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cla_min_volatility_exp_cov_short",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_cla.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cla = CLA(*setup_cla(data_only=True), weight_bounds=(-1, 1))\ndf = get_data()\ncla.cov_matrix = risk_models.exp_cov(df).values\nw = cla.min_volatility()\nassert isinstance(w, dict)\nassert set(w.keys()) == set(cla.tickers)\nnp.testing.assert_almost_equal(cla.weights.sum(), 1)\nnp.testing.assert_allclose(cla.portfolio_performance(), (0.2634735528776959,\n    0.13259590618253303, 1.8362071642131053))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_Plot_Q_Plane",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/TutorialsDepricated_&_PlotQPlane.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "import numpy as np\nimport matplotlib.pyplot as plt\nfile = 'Data/camea2018n000137.hdf'\nData = DataSet.DataSet(dataFiles=file)\nData.convertDataFile()\nEMin = np.min(Data.energy) + 1.5\nEMax = EMin + 0.05\nax = Data.plotQPlane(EMin, EMax, binning='polar', xBinTolerance=0.025,\n    yBinTolerance=0.025, enlargen=False, log=False, ax=None, RLUPlot=True,\n    vmin=0, vmax=10)\nplt.colorbar(ax.pmeshs[0])\nax.set_clim(0, 10)\nax2 = Data.plotQPlane(EMin, EMax, binning='xy', xBinTolerance=0.025,\n    yBinTolerance=0.025, enlargen=False, log=False, ax=None, RLUPlot=True,\n    vmin=0, vmax=10)\nplt.colorbar(ax2.pmeshs[0])\nif save:\n    fig1 = plt.figure(1)\n    fig2 = plt.figure(2)\n    fig1.savefig('Tutorials/PlotQPlanePolar.png')\n    fig2.savefig('Tutorials/PlotQPlaneXY.png')\n    plt.show()\nelif os.path.exists('Data/camea2018n000137.nxs'):\n    os.remove('Data/camea2018n000137.nxs')\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_def_overridden_by_block",
+    "className": "BlockTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_block.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "l = TemplateLookup()\nl.put_string('index',\n    \"\"\"\n                <%inherit file=\"base\"/>\n                <%block name=\"header\">\n                    inner header\n                </%block>\n            \"\"\"\n    )\nl.put_string('base',\n    \"\"\"\n            above\n            ${self.header()}\n            <%def name=\"header()\">\n                the header\n            </%def>\n\n            ${next.body()}\n            below\n        \"\"\"\n    )\nself._do_test(l.get_template('index'), ['above', 'inner header', 'below'],\n    filters=result_lines)\n"
+}

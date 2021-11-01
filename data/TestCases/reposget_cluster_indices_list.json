@@ -1,0 +1,9 @@
+{
+    "functionName": "get_cluster_indices_list",
+    "className": null,
+    "fileName": "/KnowEnG_&_KnowEnG_Pipelines_Library/test_&_unit_&_test_perform_net_nmf.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" get the list of sets of positive integers in the input array where a set\n        is the index of where equal values occur for all equal values in the array\n\n    Args:\n        a_arr: array of positive integers\n\n    Returns:\n        cluster_list: list of lists where each list is the indecies of the members\n            of that set, and the lists are ordered by the first member of each.\n    \"\"\"\nidx_arr = np.arange(0, a_arr.size)\na_arr_unique = np.unique(a_arr)\ntmp_list = []\nfor v in a_arr_unique:\n    tmp_list.append(idx_arr[a_arr == v])\nlen_tmp_list = len(tmp_list)\nfirst_member_array = np.int_(np.zeros(len_tmp_list))\nfor m in range(0, len_tmp_list):\n    tmp = tmp_list[m]\n    first_member_array[m] = int(tmp[0])\nlist_order = np.int_(np.argsort(first_member_array))\ncluster_list = []\nfor t in list_order:\n    cluster_list.append(tmp_list[t])\nreturn cluster_list\n"
+}

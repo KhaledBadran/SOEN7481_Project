@@ -1,0 +1,9 @@
+{
+    "functionName": "test_subset_group",
+    "className": "TestBasic",
+    "fileName": "/microsoft_&_LightGBM/tests_&_python_package_test_&_test_basic.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "X_train, y_train = load_svmlight_file(os.path.join(os.path.dirname(os.path.\n    realpath(__file__)), '../../examples/lambdarank/rank.train'))\nq_train = np.loadtxt(os.path.join(os.path.dirname(os.path.realpath(__file__\n    )), '../../examples/lambdarank/rank.train.query'))\nlgb_train = lgb.Dataset(X_train, y_train, group=q_train)\nself.assertEqual(len(lgb_train.get_group()), 201)\nsubset = lgb_train.subset(list(range(10))).construct()\nsubset_group = subset.get_group()\nself.assertEqual(len(subset_group), 2)\nself.assertEqual(subset_group[0], 1)\nself.assertEqual(subset_group[1], 9)\n"
+}

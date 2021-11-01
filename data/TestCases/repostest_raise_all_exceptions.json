@@ -1,0 +1,9 @@
+{
+    "functionName": "test_raise_all_exceptions",
+    "className": "TestBenchmark",
+    "fileName": "/facebook_&_Ax/ax_&_benchmark_&_tests_&_test_benchmark.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Checks that an exception nested in the benchmarking stack is raised\n        when `raise_all_exceptions` is True.\n        \"\"\"\ndef broken_benchmark_replication(*args, **kwargs) ->Experiment:\n    raise ValueError('Oh, exception!')\nwith self.assertRaisesRegex(ValueError, 'Oh, exception!'):\n    full_benchmark_run(problems=[SimpleBenchmarkProblem(branin, noise_sd=\n        0.4)], methods=[GenerationStrategy(steps=[GenerationStep(model=\n        Models.SOBOL, num_trials=-1)])], num_replications=3, num_trials=5,\n        raise_all_exceptions=True, benchmark_replication=\n        broken_benchmark_replication)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_BASIC_assembly_flawed",
+    "className": null,
+    "fileName": "/Edinburgh-Genome-Foundry_&_DnaCauldron/tests_&_test_BASIC_assembly.py_&_test_BASIC_assembly.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "repo = dc.SequenceRepository()\nrepo.import_records(folder=parts_and_oligos_folder)\nplan = dc.AssemblyPlan.from_spreadsheet(path=flawed_plan_path,\n    assembly_class='from_spreadsheet')\nsimulation = plan.simulate(repo)\nstats = simulation.compute_stats()\nassert stats['errored_assemblies'] == 3\nassert stats['cancelled_assemblies'] == 1\nassert stats['valid_assemblies'] == 8\nsimulation.write_report('@memory')\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_conical_frustum_and_stick_with_boundary_pores",
+    "className": "PoissonShapeFactorsTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_physics_&_PoissonShapeFactorsTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "boundary_pores = [1, 8, 12, 55]\nconns = self.net['throat.conns']\nBP1 = np.in1d(conns[:, (0)], boundary_pores)\nBP2 = np.in1d(conns[:, (1)], boundary_pores)\nself.geo['throat.conduit_lengths.pore1'][BP1] = 0\nself.geo['throat.conduit_lengths.pore2'][BP2] = 0\nmod = op.models.physics.poisson_shape_factors.conical_frustum_and_stick\nself.phys.add_model(propname='throat.poisson_shape_factors', model=mod)\nself.phys.regenerate_models()\nSF1_BP = self.phys['throat.poisson_shape_factors.pore1'][BP1].mean()\nSF2_BP = self.phys['throat.poisson_shape_factors.pore2'][BP2].mean()\nassert_allclose(SF1_BP, desired=1.0)\nassert_allclose(SF2_BP, desired=1.0)\nself.geo['throat.conduit_lengths.pore1'] = 0.2\nself.geo['throat.conduit_lengths.pore2'] = 0.15\n"
+}

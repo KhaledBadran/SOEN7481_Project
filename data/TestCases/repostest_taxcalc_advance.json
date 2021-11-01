@@ -1,0 +1,9 @@
+{
+    "functionName": "test_taxcalc_advance",
+    "className": null,
+    "fileName": "/open-source-economics_&_OG-USA/ogusa_&_tests_&_test_get_micro_data.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test of the get_micro_data.taxcalc_advance() function\n\n    Note that this test may fail if the Tax-Calculator is not v 2.4.0\n    In that case, you can use the pickeld calculator object, however\n    this is too large for GitHub, so it won't be available there.\n    \"\"\"\nexpected_dict = utils.safe_read_pickle(os.path.join(CUR_PATH,\n    'test_io_data', 'tax_dict_for_tests.pkl'))\ntest_dict = get_micro_data.taxcalc_advance(True, 2028, {}, 'cps', 2028)\ndel test_dict['payroll_tax_liab']\nfor k, v in test_dict.items():\n    assert np.allclose(expected_dict[k], v, equal_nan=True)\n"
+}

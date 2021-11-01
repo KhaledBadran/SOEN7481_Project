@@ -1,0 +1,9 @@
+{
+    "functionName": "test_estimate",
+    "className": "MyTestCase",
+    "fileName": "/KD-Group_&_Half.Sample/tests_&_test_estimate.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sampler.set_sampler(sampler_name='mock_sampler')\nfor mock_tau in [50, 100, 200]:\n    sampler.set_sampler_value('mock_tau', mock_tau)\n    sampler.measure(number_of_waveforms=2, emitting_frequency=200)\n    while sampler.is_measuring:\n        time.sleep(0.1)\n    result = sampler.query()\n    self.assertEqual(result.success, True)\n    tau = result.tau\n    self.assertTrue(abs(tau - mock_tau) < 2.0)\n"
+}

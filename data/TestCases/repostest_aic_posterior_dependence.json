@@ -1,0 +1,9 @@
+{
+    "functionName": "test_aic_posterior_dependence",
+    "className": null,
+    "fileName": "/samreay_&_ChainConsumer/tests_&_test_comparisons.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "d = norm.rvs(size=1000)\np = norm.logpdf(d)\np2 = norm.logpdf(d, scale=2)\nc = ChainConsumer()\nc.add_chain(d, posterior=p, num_free_params=1, num_eff_data_points=1000)\nc.add_chain(d, posterior=p2, num_free_params=1, num_eff_data_points=1000)\naics = c.comparison.aic()\nassert len(aics) == 2\nassert aics[0] == 0\nexpected = 2 * np.log(2)\nassert np.isclose(aics[1], expected, atol=0.001)\n"
+}

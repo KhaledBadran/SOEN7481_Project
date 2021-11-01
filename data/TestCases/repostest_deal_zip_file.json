@@ -1,0 +1,9 @@
+{
+    "functionName": "test_deal_zip_file",
+    "className": "TestCircRNADetection",
+    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_circRNA.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "out1 = os.path.join(self.test_folder, 'test1.fa')\nout2 = os.path.join(self.test_folder, 'test2')\ngen_file(out1, self.example.fasta_file)\ngen_file(out2, self.example.fasta_file)\nos.system('gzip ' + out1)\nos.system('bzip2 -z ' + out2)\nlog = open(os.path.join(self.test_folder, 'test.log'), 'w')\nreads = self.circ._deal_zip_file([{'sample': 'all', 'files': [out1 + '.gz',\n    out2 + '.bz2']}], log)\nself.assertEqual(reads, [{'files': ['test_folder/test1.fa.gz',\n    'test_folder/test2.bz2', 'test_folder/test1.fa', 'test_folder/test2.fa'\n    ], 'zips': ['test_folder/test1.fa', 'test_folder/test2.fa'], 'sample':\n    'all'}])\nself.assertTrue(os.path.exists(out1))\nself.assertTrue(os.path.exists(out2 + '.fa'))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ingestion_no_document_id_provided",
+    "className": null,
+    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_server_&_tests_&_test_search.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Test what happens if no document id are provided during ingestion\n    We use search merely because it's the simplest processing that can be done\n    in a single API call\"\"\"\ndata_dir = os.path.dirname(__file__)\ndata_dir = os.path.join(data_dir, '..', '..', 'data', 'ds_001', 'raw')\nmethod = V01 + '/feature-extraction/'\ndata = app.post_check(method)\ndsid = data['id']\napp.post_check(method + dsid, json={'data_dir': data_dir})\ndata = app.post_check(V01 + '/search/', json={'parent_id': dsid, 'query':\n    'test'})\nassert dict2type(data['data'][0]) == {'score': 'float', 'document_id': 'int'}\n"
+}

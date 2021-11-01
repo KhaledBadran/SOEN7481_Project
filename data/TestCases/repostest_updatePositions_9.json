@@ -1,0 +1,9 @@
+{
+    "functionName": "test_updatePositions_9",
+    "className": null,
+    "fileName": "/mworion_&_MountWizzard4/mw4_&_test_&_unit_tests_&_gui_&_extWindows_&_test_satelliteW.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "app = SatelliteWindow(app=Test())\nqtbot.addWidget(app)\ntle = ['TIANGONG 1',\n    '1 37820U 11053A   14314.79851609  .00064249  00000-0  44961-3 0  5637',\n    '2 37820  42.7687 147.7173 0010686 283.6368 148.1694 15.73279710179072']\napp.satellite = EarthSatellite(*tle[1:3], name=tle[0])\nfig = plt.figure()\nax = fig.add_subplot(111, projection='3d')\napp.plotSatPosEarth, = plt.plot([1, 0], [1, 0])\napp.plotSatPosHorizon, = plt.plot([1, 0], [1, 0])\napp.plotSatPosSphere1, = ax.plot([1], [1], [1])\napp.plotSatPosSphere2, = ax.plot([1], [1], [1])\nnow = app.app.mount.obsSite.ts.now()\nobserve = app.satellite.at(now)\nsubpoint = observe.subpoint()\ndifference = app.satellite - app.app.mount.obsSite.location\naltaz = difference.at(now).altaz()\nwith mock.patch.object(app.plotSatPosSphere1, 'set_data_3d'):\n    with mock.patch.object(app.plotSatPosSphere2, 'set_data_3d'):\n        with mock.patch.object(app.plotSatPosEarth, 'set_data'):\n            with mock.patch.object(app.plotSatPosHorizon, 'set_data'):\n                suc = app.updatePositions(observe=observe, subpoint=\n                    subpoint, altaz=altaz)\n                assert suc\n"
+}

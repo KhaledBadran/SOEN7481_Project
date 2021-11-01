@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_quote_cc_happypath",
+    "className": "TestGetQuoteCC",
+    "fileName": "/EVEprosper_&_ProsperDatareader/tests_&_test_coins.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"validate expected behavior\"\"\"\ndata = coins.get_quote_cc(self.coin_list)\nprint(data.columns.values)\nexpected_columns = ['CHANGE24HOUR', 'CHANGEPCT24HOUR', 'FLAGS',\n    'FROMSYMBOL', 'HIGH24HOUR', 'LASTMARKET', 'LASTTRADEID', 'LASTUPDATE',\n    'LASTVOLUME', 'LASTVOLUMETO', 'LOW24HOUR', 'MARKET', 'MKTCAP',\n    'OPEN24HOUR', 'PRICE', 'SUPPLY', 'TICKER', 'TOSYMBOL', 'TYPE',\n    'VOLUME24HOUR', 'VOLUME24HOURTO', 'Algorithm', 'CoinName', 'FullName',\n    'FullyPremined', 'Id', 'ImageUrl', 'Name', 'PreMinedValue', 'ProofType',\n    'SortOrder', 'TotalCoinSupply', 'TotalCoinsFreeFloat', 'Url',\n    'Sponsored', 'HIGHDAY', 'TOTALVOLUME24H', 'VOLUMEDAYTO', 'Symbol',\n    'OPENDAY', 'TOTALVOLUME24HTO', 'VOLUMEDAY', 'CHANGEDAY', 'CHANGEPCTDAY',\n    'LOWDAY']\nunique_values, unique_expected = helpers.find_uniques(list(data.columns.\n    values), expected_columns)\nassert unique_expected == []\nif unique_values:\n    pytest.xfail('Unexpected values from get_quote_cc(): {}'.format(\n        unique_values))\n"
+}

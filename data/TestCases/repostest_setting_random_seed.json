@@ -1,0 +1,9 @@
+{
+    "functionName": "test_setting_random_seed",
+    "className": null,
+    "fileName": "/NASA_&_MLMCPy/tests_&_input_&_test_RandomInput.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test setting of random seed by taking samples, resetting seed, then drawing\n    again to see if the samples match.\n    \"\"\"\nrandom_input = RandomInput(np.random.uniform, random_seed=1)\nnum_samples = 5\nsamples1 = np.zeros(num_samples)\nsamples2 = np.zeros(num_samples)\nfor i in range(num_samples):\n    samples1[i] = random_input.draw_samples(1)\nrandom_input.reset_sampling()\nfor i in range(num_samples):\n    samples2[i] = random_input.draw_samples(1)\nassert np.array_equal(samples1, samples2)\n"
+}

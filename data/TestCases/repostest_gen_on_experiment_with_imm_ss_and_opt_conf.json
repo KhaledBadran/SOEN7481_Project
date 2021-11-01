@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gen_on_experiment_with_imm_ss_and_opt_conf",
+    "className": "BaseModelBridgeTest",
+    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_base_modelbridge.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "exp = get_experiment_for_value()\nexp._properties[Keys.IMMUTABLE_SEARCH_SPACE_AND_OPT_CONF] = True\nexp.optimization_config = get_optimization_config_no_constraints()\nss = get_search_space_for_range_value()\nmodelbridge = ModelBridge(search_space=ss, model=Model(), transforms=[],\n    experiment=exp)\nself.assertTrue(modelbridge.\n    _experiment_has_immutable_search_space_and_opt_config)\ngr = modelbridge.gen(1)\nself.assertIsNone(gr.optimization_config)\nself.assertIsNone(gr.search_space)\nmock.patch('ax.modelbridge.base.ModelBridge._gen', autospec=True,\n    return_value=([get_observation1trans().features], [2], None, {}))mock.patch('ax.modelbridge.base.ModelBridge.predict', autospec=True,\n    return_value=None)"
+}

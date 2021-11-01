@@ -1,0 +1,9 @@
+{
+    "functionName": "test_complex_model_with_2list_2_elements",
+    "className": "TestModel",
+    "fileName": "/nkordulla_&_FHR-DB/tests_&_fhr_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "model = ComplexInnerModelWith2Lists()\nmodel.set(new=[1, 2], new2=[3, 4])\nmodel.put()\nsql = 'SELECT new, new2 FROM simple_new_new2_index WHERE simple_id = %s'\nresult = Database.get().query(sql, model.get('id'))\nself.assertEquals(len(result), 4)\nexpectedResult = [{'new': '1', 'new2': '3'}, {'new': '1', 'new2': '4'}, {\n    'new': '2', 'new2': '3'}, {'new': '2', 'new2': '4'}]\nself.assertEquals(result, expectedResult)\n"
+}

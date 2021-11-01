@@ -1,0 +1,9 @@
+{
+    "functionName": "test_everyone_all_ins_with_different_amounts_and_pay_out",
+    "className": null,
+    "fileName": "/exzacktlee_&_CardGames/tests_&_test_holdem_&_test_bet_collector.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "collector, players = collector_four_players\nfor index, player in enumerate(players):\n    player.award_chips(5 * (index + 1))\ncollector.get_blind_wagers()\nfor player in players:\n    player.bet(player.chip_count)\nfor i in range(20):\n    collector.ask_next_player_for_wager()\ncollector.collect_all_bets()\nbest_to_worst = [players[0], players[2], players[3], players[1]]\ncollector.pay_out(best_to_worst)\nassert players[0].chip_count == 20\nassert players[2].chip_count == 25\nassert players[3].chip_count == 5\nassert players[1].chip_count == 0\n"
+}

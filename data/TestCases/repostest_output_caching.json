@@ -1,0 +1,9 @@
+{
+    "functionName": "test_output_caching",
+    "className": null,
+    "fileName": "/NASA_&_MLMCPy/tests_&_mlmc_&_test_MLMCSimulator.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Runs simulator's _evaluate_sample() with and without caching enabled\n    to ensure consistency of outputs. Also tests the estimate and variances\n    with and without caching.\n    \"\"\"\nsim = MLMCSimulator(models=models_from_data, data=data_input)\nestimate1, sample_sizes, variances1 = sim.simulate(1.0, cache_size)\nnum_levels = len(models_from_data)\nmax_samples = np.max(sim._sample_sizes)\noutputs_with_caching = np.zeros((num_levels, max_samples, 1))\noutputs_without_caching = np.zeros_like(outputs_with_caching)\ndata_input.reset_sampling()\nfor level in range(num_levels):\n    num_samples = sim._sample_sizes[level]\n    if num_samples == 0:\n        continue\n    samples = sim._draw_samples(num_samples)\n    for i, sample in enumerate(samples):\n        outputs_with_caching[level, i] = sim._evaluate_sample(sample, level)\nsim._caching_enabled = False\nsim._data.reset_sampling()\nfor level in range(num_levels):\n    num_samples = sim._sample_sizes[level]\n    if num_samples == 0:\n        continue\n    samples = sim._draw_samples(num_samples)\n    for i, sample in enumerate(samples):\n        outputs_without_caching[level, i] = sim._evaluate_sample(sample, level)\nassert np.all(np.isclose(outputs_without_caching, outputs_with_caching))\nestimate2, sample_sizes, variances2 = sim._run_simulation()\nassert np.array_equal(estimate1, estimate2)\nassert np.array_equal(variances1, variances2)\npytest.mark.parametrize('cache_size', [10, 7, 200])"
+}

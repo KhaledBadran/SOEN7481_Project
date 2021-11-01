@@ -1,0 +1,9 @@
+{
+    "functionName": "test_percent_escape",
+    "className": "LexerTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_lexer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "template = \"\"\"\n\n%% some whatever.\n\n    %% more some whatever\n    % if foo:\n    % endif\n        \"\"\"\nnode = Lexer(template).parse()\nself._compare(node, TemplateNode({}, [Text('\\n\\n', (1, 1)), Text(\n    '% some whatever.\\n\\n', (3, 2)), Text(\"\"\"   %% more some whatever\n\"\"\",\n    (5, 2)), ControlLine('if', 'if foo:', False, (6, 1)), ControlLine('if',\n    'endif', True, (7, 1)), Text('        ', (8, 1))]))\n"
+}

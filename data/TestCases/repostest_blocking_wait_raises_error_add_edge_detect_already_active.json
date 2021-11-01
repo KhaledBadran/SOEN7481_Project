@@ -1,0 +1,9 @@
+{
+    "functionName": "test_blocking_wait_raises_error_add_edge_detect_already_active",
+    "className": null,
+    "fileName": "/rm-hull_&_OPi.GPIO/tests_&_test_event.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "pin = 66\nfs.CreateFile('/sys/class/gpio/gpio{0}/edge'.format(pin))\nfs.CreateFile('/sys/class/gpio/gpio{0}/value'.format(pin))\nwith patch('select.epoll'):\n    try:\n        assert pin not in event._threads\n        event.add_edge_detect(pin, RISING)\n        with pytest.raises(RuntimeError) as ex:\n            event.blocking_wait_for_edge(pin, RISING)\n        assert str(ex.value\n            ) == 'Conflicting edge detection events already exist for this GPIO channel'\n    finally:\n        event.cleanup()\n"
+}

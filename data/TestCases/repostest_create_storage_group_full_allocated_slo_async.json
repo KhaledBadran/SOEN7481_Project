@@ -1,0 +1,9 @@
+{
+    "functionName": "test_create_storage_group_full_allocated_slo_async",
+    "className": "PyU4VProvisioningTest",
+    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_provisioning.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test create_storage_group slo set, async.\"\"\"\nppctroc = 'persist_preallocated_capacity_through_reclaim_or_copy'\nwith mock.patch.object(self.provisioning, 'create_resource') as mock_create:\n    mock_create.reset_mock()\n    self.provisioning.create_storage_group(self.data.srp, 'new-sg', self.\n        data.slo, 'None', allocate_full=True, _async=True)\n    payload = {'srpId': self.data.srp, 'storageGroupId': 'new-sg',\n        'emulation': 'FBA', 'sloBasedStorageGroupParam': [{'sloId': self.\n        data.slo, 'workloadSelection': 'None', 'noCompression': 'true',\n        'allocate_capacity_for_each_vol': 'true', ppctroc: 'true',\n        'volumeAttributes': [{'volume_size': '0', 'capacityUnit': 'GB',\n        'num_of_vols': 0}]}], 'executionOption': 'ASYNCHRONOUS'}\n    mock_create.assert_called_once_with(category='sloprovisioning',\n        resource_level='symmetrix', resource_level_id=self.data.array,\n        resource_type='storagegroup', payload=payload)\n"
+}

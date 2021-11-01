@@ -1,0 +1,9 @@
+{
+    "functionName": "test_should_update_span_info_on_subspan_start",
+    "className": "TestB3",
+    "fileName": "/davidcarboni_&_B3-Propagation/tests_&_test_b3.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "b3.start_span({b3_sampled: '1', b3_flags: '1'})\nspan = b3.values()\nb3._start_subspan()\nsubspan = b3.values()\nself.assertEqual(span[b3_trace_id], subspan[b3_trace_id])\nself.assertEqual(span[b3_span_id], subspan[b3_parent_span_id])\nself.assertNotEqual(span[b3_span_id], subspan[b3_span_id])\nself.assertEqual(span[b3_sampled], subspan[b3_sampled])\nself.assertEqual(span[b3_flags], subspan[b3_flags])\n"
+}

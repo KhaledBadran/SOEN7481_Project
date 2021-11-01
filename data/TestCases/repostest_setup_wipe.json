@@ -1,0 +1,9 @@
+{
+    "functionName": "test_setup_wipe",
+    "className": "TestTrezorManCommands",
+    "fileName": "/bitcoin-core_&_HWI/test_&_test_trezor.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "result = self.do_command(self.dev_args + ['-i', 'setup'])\nself.assertEquals(result['code'], -10)\nself.assertEquals(result['error'],\n    'Device is already initialized. Use wipe first and try again')\nresult = self.do_command(self.dev_args + ['wipe'])\nself.assertTrue(result['success'])\nt_client = TrezorClient('udp:127.0.0.1:21324', 'test')\nt_client.client.ui.get_pin = MethodType(get_pin, t_client.client.ui)\nt_client.client.ui.pin = '1234'\nresult = t_client.setup_device()\nself.assertTrue(result['success'])\nresult = self.do_command(self.dev_args + ['-i', 'setup'])\nself.assertEquals(result['code'], -10)\nself.assertEquals(result['error'],\n    'Device is already initialized. Use wipe first and try again')\n"
+}

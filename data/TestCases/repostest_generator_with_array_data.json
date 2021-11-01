@@ -1,0 +1,9 @@
+{
+    "functionName": "test_generator_with_array_data",
+    "className": null,
+    "fileName": "/mdbloice_&_Augmentor/tests_&_test_generators.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "batch_size = random.randint(1, 100)\nwidth = 800\nheight = 800\nimage_matrix = np.zeros((100, width, height, 3), dtype='uint8')\nlabels = np.zeros(100)\np = Augmentor.Pipeline()\np.rotate(probability=1, max_right_rotation=10, max_left_rotation=10)\ng = p.keras_generator_from_array(image_matrix, labels, batch_size=\n    batch_size, scaled=True)\nX, y = next(g)\nassert len(X) == batch_size\nassert len(y) == batch_size\nfor i in range(len(y)):\n    assert y[i] == 0\nfor i in range(len(X)):\n    x_converted = X[i] * 255\n    x_converted = x_converted.astype('uint8')\n    im_pil = Image.fromarray(x_converted)\n    assert im_pil is not None\nimage_matrix_2d = np.zeros((100, width, height), dtype='uint8')\nlabels_2d = np.zeros(100)\np2 = Augmentor.Pipeline()\np2.rotate(probability=0.1, max_left_rotation=5, max_right_rotation=5)\ng2 = p2.keras_generator_from_array(image_matrix_2d, labels_2d, batch_size=\n    batch_size)\nX2, y2 = next(g2)\nassert len(X2) == batch_size\nassert len(y2) == batch_size\nfor i in range(len(y2)):\n    assert y2[i] == 0\nfor i in range(len(X2)):\n    im_pil = Image.fromarray(X2[i].reshape(width, height))\n    assert im_pil is not None\n"
+}

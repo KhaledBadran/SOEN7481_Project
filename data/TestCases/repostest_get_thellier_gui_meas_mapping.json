@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_thellier_gui_meas_mapping",
+    "className": "TestThellierGUIMapping",
+    "fileName": "/PmagPy_&_PmagPy/pmagpy_tests_&_test_map_magic.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "meas_data3_0 = cb.MagicDataFrame(self.magic_file).df\nmeas_data3_0.iloc[0, meas_data3_0.columns.get_loc('measurement')] = 'custom'\nmeas_data2_5 = map_magic.convert_meas_df_thellier_gui(meas_data3_0, output=2)\nself.assertEqual('custom', meas_data2_5.iloc[0, meas_data2_5.columns.\n    get_loc('measurement')])\nself.assertEqual(1, meas_data2_5.iloc[0, meas_data2_5.columns.get_loc(\n    'measurement_number')])\nmeas_data3_again = map_magic.convert_meas_df_thellier_gui(meas_data2_5,\n    output=3)\nself.assertEqual('custom', meas_data3_again.iloc[0, meas_data3_again.\n    columns.get_loc('measurement')])\nself.assertEqual(1, meas_data3_again.iloc[0, meas_data3_again.columns.\n    get_loc('treat_step_num')])\ndel meas_data3_0['treat_step_num']\nself.assertEqual('custom', meas_data3_0.iloc[0, meas_data3_0.columns.\n    get_loc('measurement')])\nmeas_data2_5 = map_magic.convert_meas_df_thellier_gui(meas_data3_0, output=2)\nself.assertIn('measurement_number', meas_data2_5.columns)\nself.assertEqual('custom', meas_data2_5.iloc[0, meas_data2_5.columns.\n    get_loc('measurement')])\nself.assertEqual('custom', meas_data2_5.iloc[0, meas_data2_5.columns.\n    get_loc('measurement_number')])\nmeas_data3_0_again = map_magic.convert_meas_df_thellier_gui(meas_data2_5,\n    output=3)\nself.assertEqual('custom', meas_data3_0_again.iloc[0, meas_data2_5.columns.\n    get_loc('measurement')])\nself.assertNotIn('treat_step_num', meas_data3_0_again.columns)\n"
+}

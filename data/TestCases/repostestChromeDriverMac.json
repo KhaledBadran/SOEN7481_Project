@@ -1,0 +1,9 @@
+{
+    "functionName": "testChromeDriverMac",
+    "className": "TestChrome",
+    "fileName": "/browserium_&_Browserium/TestFunction_&_unittests_&_test_chrome.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "_data = self.parseJSONChrome()\n_releaseVersionAPI = _data.get('release_version')\n_releaseVersion = ''\nresponse = requests.get(_releaseVersionAPI)\ntry:\n    if response.status_code == 200:\n        _releaseVersion = response.text\nexcept requests.exceptions.Timeout:\n    self.log.log_error('Request time out')\nexcept requests.exceptions.TooManyRedirects:\n    self.log.log_error('Too many redirects')\nexcept requests.exceptions.RequestException as e:\n    self.log.log_error(e)\n_url = _data.get('url')\n_mac_bin = _data.get('mac_v_64')\n_apiURLBuilder = _url + _releaseVersion + '/' + _mac_bin\ntry:\n    _url = requests.get(_apiURLBuilder)\n    if _url.status_code == 200:\n        wget.download(_apiURLBuilder)\n        self.log.log_info('Binary for chromedriver downloaded for macOS')\nexcept requests.exceptions.Timeout:\n    self.log.log_error('Request time out')\nexcept requests.exceptions.TooManyRedirects:\n    self.log.log_error('Too many redirects')\nexcept requests.exceptions.RequestException as e:\n    self.log.log_error(e)\nself.assertTrue(os.path.exists('chromedriver_mac64.zip'))\nself.log.log_info('Required path for binary exist')\nself.utility.delete_file('chromedriver_mac64.zip')\nself.log.log_info('Downloaded binaries deleted')\n"
+}

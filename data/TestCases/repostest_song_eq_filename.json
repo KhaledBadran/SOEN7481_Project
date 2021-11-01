@@ -1,0 +1,9 @@
+{
+    "functionName": "test_song_eq_filename",
+    "className": null,
+    "fileName": "/ocaballeror_&_Lyricfetch/lyricfetch_&_tests_&_test_song.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Check that song comparison turns out equal when they point to the same file\n    name.\n    \"\"\"\nsong = Song(\"Be'lakor\", 'Renmants')\nothersong = Song('Carnation', 'Hatred Unleashed')\nsong.filename = 'song1.mp3'\nothersong.filename = song.filename\nassert song == othersong\nothersong.filename = Path(song.filename)\nassert song == othersong\nothersong.artist = song.artist\nothersong.title = song.title\nothersong.filename = song.filename + '_nope'\nassert song != othersong\n"
+}

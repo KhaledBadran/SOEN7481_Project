@@ -1,0 +1,9 @@
+{
+    "functionName": "inspect_kwargs",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n    Inspects a callable and returns a list of all optional keyword arguments.\n\n    Parameters\n    ----------\n    func : callable\n        The callable to inspect\n\n    Returns\n    -------\n    kwargs : list of str\n        Names of all arguments of `func` that have a default value, in order\n    \"\"\"\ntry:\n    from inspect import signature\nexcept ImportError:\n    from inspect import getargspec\n    spec = getargspec(func)\n    return spec.args[-len(spec.defaults):] if spec.defaults else []\nelse:\n    params = signature(func).parameters\n    return [p.name for p in params.values() if p.default is not p.empty]\n"
+}

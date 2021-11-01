@@ -1,0 +1,9 @@
+{
+    "functionName": "test_event_packet",
+    "className": "TestDsi",
+    "fileName": "/BciPy_&_BciPy/bcipy_&_acquisition_&_tests_&_protocols_&_dsi_&_test_dsi.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test encoding/decoding event data\"\"\"\nexpected = (\n    b'@ABCD\\x05\\x00\\x08\\x00\\x00\\x00\\r\\x00\\x00\\x00\\x02\\x00\\x00\\x00!\\x00\\x00\\x00\\x0bhello world'\n    )\nparams = dict(type='EVENT', payload_length=8, number=13, event_code=\n    'DATA_START', sending_node=33, message_length=11, message='hello world')\nresult = dsi.packet.build(params)\nself.assertEqual(result, expected)\nparsed = dsi.packet.parse(expected)\nfor key in params:\n    if key != 'message_length':\n        self.assertEqual(parsed[key], params[key])\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_all_streams_gc",
+    "className": "Test_hangup",
+    "fileName": "/heston_&_firebase-live-data/tests_&_test_live.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "gc_streams = mocker.Mock()\nlivedata._gc_streams = gc_streams\nstream1 = object()\nstream2 = object()\nlivedata._streams = {id(stream1): stream1, id(stream2): stream2}\nlivedata.hangup()\ngc_streams.put.assert_has_calls([mocker.call(stream1), mocker.call(stream2)])\n"
+}

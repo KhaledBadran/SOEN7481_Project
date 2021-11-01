@@ -1,0 +1,9 @@
+{
+    "functionName": "test_update_linkage_matrix",
+    "className": "TestUpdate_linkage_matrix",
+    "fileName": "/KnowEnG_&_KnowEnG_Pipelines_Library/test_&_unit_&_test_update_linkage_matrix.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" create a consensus matrix by sampling a synthesized set of clusters\n            assert that the clustering is equivalent\n        \"\"\"\nn_samples = 11\nn_clusters = 3\ncluster_set = np.int_(np.ones(n_samples))\nfor r in range(0, n_samples):\n    cluster_set[r] = int(np.random.randint(n_clusters))\nn_repeats = 100\nn_test_perm = 5\nn_test_rows = n_samples\nI = np.zeros((n_test_rows, n_test_rows))\nM = np.zeros((n_test_rows, n_test_rows))\nfor r in range(0, n_repeats):\n    f_perm = np.random.permutation(n_test_rows)\n    f_perm = f_perm[0:n_test_perm]\n    cluster_p = cluster_set[f_perm]\n    I = kn.update_indicator_matrix(f_perm, I)\n    M = kn.update_linkage_matrix(cluster_p, f_perm, M)\nCC = M / np.maximum(I, 1e-15)\nfor s in range(0, n_clusters):\n    s_dex = cluster_set == s\n    c_c = CC[(s_dex), :]\n    c_c = c_c[:, (s_dex)]\n    n_check = c_c - 1\n    self.assertEqual(n_check.sum(), 0, msg='cluster grouping exception')\n"
+}

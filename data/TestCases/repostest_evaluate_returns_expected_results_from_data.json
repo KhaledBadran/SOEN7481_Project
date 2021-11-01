@@ -1,0 +1,9 @@
+{
+    "functionName": "test_evaluate_returns_expected_results_from_data",
+    "className": null,
+    "fileName": "/NASA_&_MLMCPy/tests_&_model_&_test_CDFWrapperModel.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Tests CDF Wrapper output with spring model data.\n    \"\"\"\ngrid = np.linspace(8, 25, 100)\ncdfw = CDFWrapperModel(models_from_data[0], grid)\noutputs = np.zeros((num_samples, grid.size))\ninput_samples = data_input.draw_samples(num_samples)\nfor i, sample in enumerate(input_samples):\n    outputs[i] = cdfw.evaluate(sample)\ncdf = np.sum(outputs, axis=0) / num_samples\nassert np.all(np.logical_or(outputs == 0, outputs == 1))\nassert np.all(cdf >= 0.0)\nassert np.all(cdf[1:-1] >= cdf[0:-2])\ncdf_sum = np.sum(cdf[1:-1] - cdf[:-2])\nassert np.isclose(cdf_sum, 1.0, atol=0.01)\npytest.mark.parametrize('num_samples', [1, 2, 5, 500])"
+}

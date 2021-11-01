@@ -1,0 +1,9 @@
+{
+    "functionName": "test_command_parameter_all",
+    "className": null,
+    "fileName": "/OpenSCAP_&_OVAL-visualization-as-graph/tests_&_test_command_json_to_graph.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "src = tests.any_test_help.get_random_dir_in_tmp() + '.json'\nwith open(src, 'w+') as output:\n    subprocess.check_call(['python3', '-m', 'oval_graph.command_line',\n        'arf-to-json', '--all', 'tests/test_data/ssg-fedora-ds-arf.xml',\n        '.'], stdout=output)\nwith open(src, 'r') as f:\n    rules = json.load(f)\nassert len(rules.keys()) == 184\nout_dir = tests.any_test_help.get_random_dir_in_tmp()\nsubprocess.check_call(['python3', '-m', 'oval_graph.command_line',\n    'json-to-graph', src, '.', '--off-web-browser', '--all', '-o', out_dir])\nassert len(os.listdir(out_dir)) == 184\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "runtest",
+    "className": null,
+    "fileName": "/cristian-mattarei_&_CoSA/tests_&_test_correctness.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "reset_env()\ntranslate_file = 'file.ssts'\nproblems_manager = cosa_option_manager.read_problem_file(problem_file,\n    verbosity=2, solver_name='msat', prove=True, vcd=True, translate=\n    translate_file)\ncosa_option_manager._option_handling(problems_manager)\nproblems_manager.freeze()\nstatus = run_problems(problems_manager)\nwith open(translate_file, 'r') as f:\n    print(f.read())\nassert status == 0\nreturn status\n"
+}

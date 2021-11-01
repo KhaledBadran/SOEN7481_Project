@@ -1,0 +1,9 @@
+{
+    "functionName": "test_to_before_pedalboard",
+    "className": "CurrentControllerTest",
+    "fileName": "/PedalPi_&_Application/test_&_controller_&_current_controller_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "pedalboard = Pedalboard('Other pedalboard')\nself._current.bank.append(pedalboard)\nfor pedalboard in reversed(self._current.bank.pedalboards):\n    self._current.to_before_pedalboard()\n    self.assertEqual(pedalboard, self._current.pedalboard)\n    self.observer.on_current_pedalboard_changed.assert_called_with(pedalboard)\nself.assertEqual(0, self._current.pedalboard.index)\nself._current.bank.pedalboards.remove(pedalboard)\n"
+}

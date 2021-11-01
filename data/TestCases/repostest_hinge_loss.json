@@ -1,0 +1,9 @@
+{
+    "functionName": "test_hinge_loss",
+    "className": null,
+    "fileName": "/NTMC-Community_&_MatchZoo-py/tests_&_test_losses.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "true_value = torch.Tensor([[1.2], [1], [1], [1]])\npred_value = torch.Tensor([[1.2], [0.1], [0], [-0.3]])\nexpected_loss = torch.Tensor([(0 + 1 - 0.3 + 0) / 2.0])\nloss = losses.RankHingeLoss()(pred_value, true_value)\nassert torch.isclose(expected_loss, loss)\nexpected_loss = torch.Tensor([(2 + 0.1 - 1.2 + 2 - 0.3 + 0) / 2.0])\nloss = losses.RankHingeLoss(margin=2)(pred_value, true_value)\nassert torch.isclose(expected_loss, loss)\ntrue_value = torch.Tensor([[1.2], [1], [0.8], [1], [1], [0.8]])\npred_value = torch.Tensor([[1.2], [0.1], [-0.5], [0], [0], [-0.3]])\nexpected_loss = torch.Tensor([(0 + 1 - 0.15) / 2.0])\nloss = losses.RankHingeLoss(num_neg=2, margin=1)(pred_value, true_value)\nassert torch.isclose(expected_loss, loss)\n"
+}

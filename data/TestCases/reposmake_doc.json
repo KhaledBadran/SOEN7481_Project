@@ -1,0 +1,9 @@
+{
+    "functionName": "make_doc",
+    "className": null,
+    "fileName": "/jmriebold_&_BoilerPy3/tests_&_test_filters.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "text_blocks = []\nfor idx, words in enumerate(words_arr):\n    if isinstance(words, int):\n        num_words = words\n        text = ' '.join(default_words[:num_words])\n    else:\n        text = words\n        num_words = text.count(' ')\n    try:\n        num_anchor_words = num_anchor_words_arr[idx]\n    except (TypeError, IndexError):\n        num_anchor_words = 0\n    block = TextBlock(text, set(), num_words, num_anchor_words, 0, 0, idx)\n    try:\n        block.is_content = is_content_arr[idx]\n    except (TypeError, IndexError):\n        pass\n    try:\n        label = label_arr[idx]\n        if label is None:\n            pass\n        elif isinstance(label, list):\n            for l in label:\n                block.add_label(l)\n        else:\n            block.add_label(label)\n    except (TypeError, IndexError):\n        pass\n    text_blocks.append(block)\nreturn TextDocument(text_blocks)\n"
+}

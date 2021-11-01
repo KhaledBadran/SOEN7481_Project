@@ -1,0 +1,9 @@
+{
+    "functionName": "test_socketcomm_read_raw",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_comm_&_test_socket.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "comm = SocketCommunicator(socket.socket())\ncomm._conn = mock.MagicMock()\ncomm._conn.recv = mock.MagicMock(side_effect=[b'a', b'b', b'c', b'\\n'])\nassert comm.read_raw() == b'abc'\ncomm._conn.recv.assert_has_calls([mock.call(1)] * 4)\nassert comm._conn.recv.call_count == 4\ncomm._conn.recv = mock.MagicMock()\ncomm.read_raw(10)\ncomm._conn.recv.assert_called_with(10)\n"
+}

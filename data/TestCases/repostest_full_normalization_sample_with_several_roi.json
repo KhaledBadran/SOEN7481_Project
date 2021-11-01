@@ -1,0 +1,9 @@
+{
+    "functionName": "test_full_normalization_sample_with_several_roi",
+    "className": "TestApplyingROI",
+    "fileName": "/ornlneutronimaging_&_NeuNorm/tests_&_NeuNorm_&_normalizing_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"assert the full normalization works with several roi selected\"\"\"\nsample_path = self.data_path + '/tif/sample'\nob_path = self.data_path + '/tif/ob'\ndf_path = self.data_path + '/tif/df'\no_norm = Normalization()\no_norm.load(folder=sample_path, auto_gamma_filter=False)\no_norm.load(folder=ob_path, data_type='ob', auto_gamma_filter=False)\n_roi_1 = ROI(x0=0, y0=0, x1=2, y1=2)\n_roi_2 = ROI(x0=2, y0=2, x1=4, y1=4)\no_norm.normalization(roi=[_roi_1, _roi_2])\n_norm_returned = o_norm.data['normalized'][0]\n_norm_expected = np.ones((5, 5))\n_norm_expected[:, (2)] = 1.02325581\n_norm_expected[:, (3)] = 1.53488372\n_norm_expected[:, (4)] = 2.04651163\nassert _norm_expected[0, 0] == pytest.approx(_norm_returned[0, 0], 1e-08)\n"
+}

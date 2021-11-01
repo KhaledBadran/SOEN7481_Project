@@ -1,0 +1,9 @@
+{
+    "functionName": "test_3d_backprop_plane_alignment_along_axes",
+    "className": null,
+    "fileName": "/RI-imaging_&_ODTbrain/tests_&_test_alg3d_bppt.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Tests whether the reconstruction is always aligned with\n    the rotational axis (and not antiparallel).\n    \"\"\"\nparameters = get_test_parameter_set(1)\np = parameters[0]\nresults = []\ntilts = [0, np.pi / 2, np.pi, 3 * np.pi / 2, 2 * np.pi]\nfor angz in tilts:\n    sino, angles = create_test_sino_3d_tilted(tilt_plane=angz, A=21)\n    rotmat = np.array([[np.cos(angz), -np.sin(angz), 0], [np.sin(angz), np.\n        cos(angz), 0], [0, 0, 1]])\n    tilted_axis = np.dot(rotmat, [0, 1, 0])\n    fref = odtbrain.backpropagate_3d_tilted(sino, angles, padval='edge',\n        tilted_axis=tilted_axis, padding=(False, False), dtype=np.float64,\n        onlyreal=True, **p)\n    results.append(fref)\nfor ii in np.arange(len(results)):\n    assert np.allclose(results[ii], results[ii - 1], atol=0.2, rtol=0.2)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_transform_with_user_specified_colums",
+    "className": "TestCheckColumnNames",
+    "fileName": "/AndrewRook_&_NFLWin/nflwin_&_tests_&_test_preprocessing.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ccn = preprocessing.CheckColumnNames(column_names=['c', 'b', 'a'])\ninput_data = pd.DataFrame({'e': [-2, -1, 0], 'a': [1, 2, 3], 'b': [4, 5, 6],\n    'c': [7, 8, 9], 'd': [10, 11, 12]})\nexpected_data = pd.DataFrame({'c': [7, 8, 9], 'b': [4, 5, 6], 'a': [1, 2, 3]})\nexpected_data = expected_data[['c', 'b', 'a']]\ntransformed_data = ccn.transform(input_data)\npd.util.testing.assert_frame_equal(expected_data, transformed_data)\n"
+}

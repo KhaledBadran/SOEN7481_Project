@@ -1,0 +1,9 @@
+{
+    "functionName": "test_parse_metaclass",
+    "className": null,
+    "fileName": "/IanChen83_&_ClassArg/tests_&_test_typing.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "if isinstance(expect, Exception):\n    with pytest.raises(Exception) as e_info:\n        ret = type1[type2]\n        print(ret)\n    assert isinstance(expect, e_info.type)\nelse:\n    res = normalize_type(type1[type2])\n    if expect in _builtin:\n        assert res is expect\n    else:\n        type_name, types = expect\n        assert (str(res.__origin__), res.__args__) == (type_name, types)\npytest.mark.parametrize('type1, type2, expect', list(_gen_types_testcase()))"
+}

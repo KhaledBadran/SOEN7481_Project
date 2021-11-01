@@ -1,0 +1,9 @@
+{
+    "functionName": "test_close_normal_stream",
+    "className": "Test_stream_gc",
+    "fileName": "/heston_&_firebase-live-data/tests_&_test_live.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "stream = mocker.Mock()\nlivedata._start_stream_gc()\nlivedata._streams[id(stream)] = stream\nlivedata._gc_streams.put(stream)\nlivedata._gc_streams.join()\nassert stream.close.called\nlogger.debug.assert_any_call('Closing stream: %s', stream)\nlogger.debug.assert_any_call('Stream closed: %s', stream)\n"
+}

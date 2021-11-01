@@ -1,0 +1,9 @@
+{
+    "functionName": "test_scaling_factor_search",
+    "className": null,
+    "fileName": "/bobbypaton_&_GoodVibes/tests_&_test_goodvibes.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "temp = 298.15\nconc = GV.ATMOS / (GV.GAS_CONSTANT * temp)\nQS, QH, s_freq_cutoff, h_freq_cutoff, solv, spc, invert, d3 = ('grimme', \n    True, 100.0, 100.0, 'none', False, False, 0)\nprecision = 6\nbbe = GV.calc_bbe(datapath('ethane.out'), QS, QH, s_freq_cutoff,\n    h_freq_cutoff, temp, conc, freq_scale_factor, solv, spc, invert, d3)\nassert zpe == round(bbe.zpe, precision)\npytest.mark.parametrize('filename, freq_scale_factor, zpe', [('ethane.out',\n    0.977, 0.073508)])"
+}

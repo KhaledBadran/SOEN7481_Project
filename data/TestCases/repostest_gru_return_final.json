@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gru_return_final",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_recurrent.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "num_batch, seq_len, n_features = 2, 3, 4\nnum_units = 2\nin_shp = num_batch, seq_len, n_features\nx_in = np.random.random(in_shp).astype('float32')\nl_inp = InputLayer(in_shp)\nlasagne.random.get_rng().seed(1234)\nl_rec_final = GRULayer(l_inp, num_units, only_return_final=True)\nlasagne.random.get_rng().seed(1234)\nl_rec_all = GRULayer(l_inp, num_units, only_return_final=False)\noutput_final = helper.get_output(l_rec_final).eval({l_inp.input_var: x_in})\noutput_all = helper.get_output(l_rec_all).eval({l_inp.input_var: x_in})\nassert output_final.shape == (output_all.shape[0], output_all.shape[2])\nassert output_final.shape == lasagne.layers.get_output_shape(l_rec_final)\nassert np.allclose(output_final, output_all[:, (-1)])\n"
+}

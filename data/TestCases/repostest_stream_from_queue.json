@@ -1,0 +1,9 @@
+{
+    "functionName": "test_stream_from_queue",
+    "className": null,
+    "fileName": "/PRIArobotics_&_HedgehogUtils/tests_&_test_asyncio.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with assertImmediate():\n    queue = asyncio.Queue()\n    await queue.put(0)\n\n    async def put_next(item):\n        await queue.put(item + 1)\n    await assert_stream([0, 1, 2], (stream_from_queue(queue) | pipe.action(\n        put_next))[:3])\npytest.mark.asyncio"
+}

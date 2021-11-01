@@ -1,0 +1,9 @@
+{
+    "functionName": "test_has_children_mixin_apply_should_apply_method_to_recursive_childrends",
+    "className": null,
+    "fileName": "/Neuraxio_&_Neuraxle/testing_&_test_apply.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "p = Pipeline([('a', Identity()), ('b', Identity()), Pipeline([('c',\n    Identity()), ('d', Identity())])])\np.apply('_set_hyperparams', ra=None, hyperparams=HyperparameterSamples({\n    'Pipeline__c__hp': 3, 'Pipeline__d__hp': 4}))\nassert p['Pipeline']['c'].hyperparams.to_flat_as_dict_primitive()['hp'] == 3\nassert p['Pipeline']['d'].hyperparams.to_flat_as_dict_primitive()['hp'] == 4\n"
+}

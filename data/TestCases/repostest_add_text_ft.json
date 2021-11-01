@@ -1,0 +1,9 @@
+{
+    "functionName": "test_add_text_ft",
+    "className": "TestFeaturizer",
+    "fileName": "/nateraw_&_BeautifulSauce/tests_&_test_featurizer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ftrs = Featurizer()\n@ftrs.add_text_feature('text')\ndef f_text(tag):\n    if tag.name in ['head', 'meta', 'script']:\n        return ''\n    texts = list(tag.find_all(text=True, recursive=False))\n    if len(texts) < 1:\n        return ''\n    texts = ' '.join(texts).strip()\n    texts = re.sub('\\n', ' ', texts)\n    return texts\nself.assertEqual(f_text, ftrs.features['text']['text'])\n"
+}

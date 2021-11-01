@@ -1,0 +1,9 @@
+{
+    "functionName": "test_origin",
+    "className": null,
+    "fileName": "/PyAbel_&_PyAbel/abel_&_tests_&_test_tools_distributions.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Test symbolic origin wrt corresponding numeric form.\n    \"\"\"\nn = 11\nm = 20\nrow = 'utclb'\ncol = 'lcr'\nxc = [0, n // 2, n - 1]\nyc = [0, 0, m // 2, m - 1, m - 1]\nnp.random.seed(0)\nIM = np.random.random((m, n))\nfor r, y in zip(row, yc):\n    for c, x in zip(col, xc):\n        assert_equal(harmonics(IM, r + c), harmonics(IM, (y, x)), err_msg=\n            '-> origin \"{}\" != {}'.format(r + c, (y, x)))\n"
+}

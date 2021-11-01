@@ -1,0 +1,9 @@
+{
+    "functionName": "test_validate_interest",
+    "className": "TestValidatorNull",
+    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_validator_null.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "identity = self._fixture.addIdentity(Name('/TestValidator/Null'))\ninterest = Interest(Name('/Some/Other/Interest/Name'))\nself._fixture._keyChain.sign(interest, SigningInfo(identity))\nvalidator = ValidatorNull()\nsuccessCount = [0]\nfailureCount = [0]\ndef successCallback(interest):\n    successCount[0] += 1\ndef failureCallback(interest, error):\n    failureCount[0] += 1\nvalidator.validate(interest, successCallback, failureCallback)\nself.assertTrue(successCount[0] == 1 and failureCount[0] == 0,\n    'Validation should not have failed')\n"
+}

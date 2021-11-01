@@ -1,0 +1,9 @@
+{
+    "functionName": "to_array",
+    "className": "Cubic",
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_network_&_Cubic.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        Converts the values to a rectangular array with the same shape as the\n        network\n\n        Parameters\n        ----------\n        values : array_like\n            An Np-long array of values to convert to\n\n        Notes\n        -----\n        This method can break on networks that have had boundaries added.  It\n        will usually work IF the given values came only from 'internal'\n        pores.\n\n        \"\"\"\nif np.shape(values)[0] > self.num_pores('internal'):\n    raise Exception('The array shape does not match the network')\nPs = np.array(self['pore.index'][self.pores('internal')], dtype=int)\narr = np.ones(self._shape) * np.nan\nind = np.unravel_index(Ps, self._shape)\narr[ind[0], ind[1], ind[2]] = values\nreturn arr\n"
+}

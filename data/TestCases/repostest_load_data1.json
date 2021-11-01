@@ -1,0 +1,9 @@
+{
+    "functionName": "test_load_data1",
+    "className": "Test_Data",
+    "fileName": "/sahahn_&_ABCD_ML/BPt_&_tests_&_test_Data.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "locs = [get_file_path('basic_data1.txt'), get_file_path(\n    'explorer_data1.csv'), get_file_path('custom_data1.csv')]\ndataset_types = ['basic', 'explorer', 'custom']\nfor loc, dataset_type in zip(locs, dataset_types):\n    self.ML.Load_Data(loc=loc, dataset_type=dataset_type,\n        drop_col_duplicates=False, eventname='baseline_year_1_arm_1')\n    self.assertTrue(self.ML.data.shape == (2, 3))\n    self.assertTrue('NDAR_1' in self.ML.data.index)\n    self.ML.Clear_Data()\n    self.assertTrue(len(self.ML.data) == 0)\n    self.ML.Load_Data(loc=loc, dataset_type=dataset_type)\n    self.assertTrue(self.ML.data.shape == (3, 3))\n    self.assertTrue('NDAR_2' in self.ML.data.index)\n    self.ML.Clear_Data()\nself.ML.Load_Data(loc=locs, dataset_type=dataset_types, eventname=\n    'baseline_year_1_arm_1')\nself.assertTrue(self.ML.data.shape == (2, 9))\nself.assertTrue('NDAR_1' in self.ML.data.index)\nself.assertTrue('NDAR_3' in self.ML.data.index)\nself.ML.Clear_Data()\nself.ML.eventname = None\nself.test_Load_Name_Map1()\nself.ML.Load_Data(loc=locs[0], dataset_type=dataset_types[0], drop_keys=[\n    'oname2', 'cname3'])\nself.assertTrue('oname1' not in self.ML.data)\nself.assertTrue('cname1' in self.ML.data)\nself.assertTrue('cname2' in self.ML.data)\nself.assertTrue('cname3' not in self.ML.data)\nself.ML.Clear_Data()\n"
+}

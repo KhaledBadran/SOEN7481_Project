@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cov_to_corr",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_risk_models.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "df = get_data()\nrets = risk_models.returns_from_prices(df).dropna()\ntest_corr = risk_models.cov_to_corr(rets.cov())\npd.testing.assert_frame_equal(test_corr, rets.corr())\nwith warnings.catch_warnings(record=True) as w:\n    test_corr_numpy = risk_models.cov_to_corr(rets.cov().values)\n    assert len(w) == 1\n    assert issubclass(w[0].category, RuntimeWarning)\n    assert str(w[0].message) == 'cov_matrix is not a dataframe'\n    np.testing.assert_array_almost_equal(test_corr_numpy, rets.corr().values)\n"
+}

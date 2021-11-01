@@ -1,0 +1,9 @@
+{
+    "functionName": "test_2d_contour",
+    "className": null,
+    "fileName": "/apetri_&_LensTools/lenstools_&_tests_&_test_contours.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "p = np.outer(np.arange(10.0), np.ones(2))\nf = np.outer(np.arange(10.0) + 0.1 * 2, np.ones(5))\nemulator = Emulator.from_features(f, p, parameter_index=['alpha', 'beta'],\n    feature_index=['$f_{0}$'.format(n) for n in range(5)])\ntest_feature = Series(np.ones(5) * 4.0 + 0.05 * np.random.randn(5), index=\n    emulator[['features']].columns)\nfeatures_covariance = Ensemble(np.eye(5) * 0.5, index=test_feature.index,\n    columns=test_feature.index)\nemulator.train()\ng = np.arange(0.0, 10.0, 0.5)\np = np.array(np.meshgrid(g, g, indexing='ij')).reshape(2, 400).T\ntest_parameters = Ensemble(p, columns=emulator.parameter_names)\nscores = emulator.score(parameters=test_parameters, observed_feature=\n    test_feature, features_covariance=features_covariance)\nscores['features'] = np.exp(-0.5 * scores['features'])\ncontour = ContourPlot.from_scores(scores, parameters=emulator.\n    parameter_names, plot_labels=['$\\\\alpha$', '$\\\\beta$'])\ncontour.show()\ncontour.getLikelihoodValues([0.684], precision=0.1)\ncontour.plotContours(colors=['red'])\ncontour.labels()\ncontour.savefig('contour_example.png')\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pair",
+    "className": null,
+    "fileName": "/grd349_&_PBjam/pbjam_&_tests_&_test_asy_peakbag.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test for method to compute the mode pairs\"\"\"\nnorders = cs.pars['norders']\nmod = asymp_spec_model([0.5, 1], norders)\nh, freq, w, d02 = 1, cs.st.f[0], 1, 0.5\nfunc = mod._pair\ninp = [h, freq, w, d02]\npbt.does_it_run(func, inp)\npbt.does_it_return(func, inp)\npbt.right_type(func, inp, np.ndarray)\npbt.right_shape(func, inp, np.shape(cs.st.f))\nassert_array_equal(func(*inp), [1.2, 1.35])\n"
+}

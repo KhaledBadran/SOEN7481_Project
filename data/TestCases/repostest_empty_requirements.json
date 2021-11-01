@@ -1,0 +1,9 @@
+{
+    "functionName": "test_empty_requirements",
+    "className": null,
+    "fileName": "/132nd-etcher_&_EPAB/test_&_test_cmd_&_test_requirements.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "reqs = Path('requirements.txt')\nreqs_dev = Path('requirements-dev.txt')\nassert not reqs.exists()\nassert not reqs_dev.exists()\nwhen(elib_run).run('pipenv lock -r', mute=True, filters='Courtesy Notice: '\n    ).thenReturn(('', 0))\nwhen(elib_run).run('pipenv lock -r -d', mute=True, filters='Courtesy Notice: '\n    ).thenReturn(('', 0))\nepab.cmd._reqs._write_reqs(False, False)\nassert reqs.exists()\nassert reqs_dev.exists()\nassert not reqs.read_text()\nassert not reqs_dev.read_text()\n"
+}

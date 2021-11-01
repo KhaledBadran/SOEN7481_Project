@@ -1,0 +1,9 @@
+{
+    "functionName": "test_max_load_correctly_formats_failure",
+    "className": null,
+    "fileName": "/PearsonEducation_&_Alarmageddon/tests_&_validations_&_test_ssh.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "t = '18:01:46 up 62 days, 18:27,  1 user,  load average: 40.09, 0.04, 0.05'\nmonkeypatch.setattr(Connection, 'run', lambda self, x, warn:\n    get_mock_ssh_text(t, 0))\nssh_ctx = ssh.SshContext('ubuntu', get_mock_key_file(tmpdir))\ntry:\n    ssh.LoadAverageValidation(ssh_ctx, hosts=hosts).expect_max_1_minute_load(40\n        ).perform({})\n    assert False\nexcept ValidationFailure as e:\n    assert '{0}' not in str(e)\n"
+}

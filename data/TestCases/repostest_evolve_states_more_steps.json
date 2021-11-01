@@ -1,0 +1,9 @@
+{
+    "functionName": "test_evolve_states_more_steps",
+    "className": null,
+    "fileName": "/iz4vve_&_HOMarkov/test_&_test_HOM.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "hom = markov.MarkovChain(3, 1)\nhom.fit(MOCK_SEQUENCE_SMALL)\ninitial_state = np.zeros(3)\ninitial_state[0] = 1\nvec = hom.evolve_states(initial_state, num_steps=2, threshold=0)\nassert vec[2][0]['actual'] == pytest.approx(0.64, 0.01)\nassert vec[2][1]['actual'] == pytest.approx(0.16, 0.01)\nassert vec[2][2]['actual'] == pytest.approx(0.015, 0.05)\nassert vec[2][3]['actual'] == pytest.approx(0.09, 0.05)\nassert vec[2][4]['actual'] == pytest.approx(0.09, 0.05)\nvec1 = hom.evolve_states(initial_state, num_steps=2, threshold=0.1)\nassert len(vec1[2]) == 2\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_low_frequency",
+    "className": "MyTestCase",
+    "fileName": "/KD-Group_&_Half.Sample/tests_&_test_estimate.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "sampler.set_sampler(sampler_name='mock_sampler')\nmock_taus = [20000, 40000, 80000, 100000]\nfor mock_tau in mock_taus:\n    sampler.set_sampler_value('mock_tau', mock_tau)\n    sampler.measure(number_of_waveforms=4, emitting_frequency=10, auto_mode\n        =True)\n    while sampler.is_measuring:\n        time.sleep(0.1)\n    result = sampler.query()\n    self.assertTrue(result.tau >= 10000)\n    sampler.measure(number_of_waveforms=4, emitting_frequency=0.5,\n        auto_mode=True)\n    while sampler.is_measuring:\n        time.sleep(0.1)\n    result = sampler.query()\n    diff_ratio = abs(result.tau - mock_tau) / mock_tau\n    self.assertTrue(diff_ratio <= 0.01)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_visual_order",
+    "className": null,
+    "fileName": "/SeverTopan_&_AdjSim/test_&_test_simulation.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from adjsim import core, utility, decision\norder_log = []\norders = [i for i in range(5)]\ndef log(env, source):\n    order_log.append(source.order)\n    source.order = orders[source.index]\ndef shuffle(env, source):\n    random.shuffle(orders)\nclass TestAgent(core.Agent):\n\n    def __init__(self, order):\n        super().__init__()\n        self.actions['log'] = log\n        self.order = order\n        self.index = order\n        self.decision = decision.RandomSingleCastDecision()\nclass Shuffler(core.Agent):\n\n    def __init__(self):\n        super().__init__()\n        self.actions['shuffle'] = shuffle\n        self.order = 10\n        self.decision = decision.RandomSingleCastDecision()\ntest_sim = core.Simulation()\ntest_sim.agents.add(Shuffler())\nfor i in orders:\n    test_sim.agents.add(TestAgent(i))\ncommon.step_simulate_interpolation(test_sim)\nassert order_log == [i for i in range(5)] * common.INTERPOLATION_NUM_TIMESTEP\n"
+}

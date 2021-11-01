@@ -1,0 +1,9 @@
+{
+    "functionName": "test_write_measurement_df",
+    "className": null,
+    "fileName": "/PEtab-dev_&_PEtab/tests_&_test_measurements.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test measurements.get_measurement_df.\"\"\"\nmeasurement_df = pd.DataFrame(data={OBSERVABLE_ID: ['obs1', 'obs2'],\n    OBSERVABLE_PARAMETERS: ['', 'p1;p2'], NOISE_PARAMETERS: ['p3;p4', 'p5']})\nwith tempfile.NamedTemporaryFile(mode='w', delete=True) as fh:\n    file_name = fh.name\n    petab.write_measurement_df(measurement_df, file_name)\n    re_df = petab.get_measurement_df(file_name).replace(np.nan, '')\n    assert (measurement_df == re_df).all().all()\n"
+}

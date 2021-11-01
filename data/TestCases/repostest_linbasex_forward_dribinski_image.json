@@ -1,0 +1,9 @@
+{
+    "functionName": "test_linbasex_forward_dribinski_image",
+    "className": null,
+    "fileName": "/PyAbel_&_PyAbel/abel_&_tests_&_test_linbasex.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Check hansenlaw forward/inverse transform\n        using BASEX sample image, comparing speed distributions\n    \"\"\"\nIM = abel.tools.analytical.SampleImage(n=1001, name='dribinski').image\nfIM = abel.Transform(IM, method='hansenlaw', direction='forward')\nifIM = abel.Transform(fIM.transform, method='linbasex', transform_options=\n    dict(legendre_orders=[0, 2], proj_angles=[0, np.pi / 2], return_Beta=True))\norig_radial, orig_speed = abel.tools.vmi.angular_integration(IM)\nradial = ifIM.radial\nspeed = ifIM.Beta[0]\norig_speed /= orig_speed[1:60].max()\nspeed /= speed[1:60].max()\nassert np.allclose(orig_speed[1:60], speed[1:60], rtol=0, atol=0.1)\n"
+}

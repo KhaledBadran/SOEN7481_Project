@@ -1,0 +1,9 @@
+{
+    "functionName": "test_add_list_dir_list_remove_list",
+    "className": "TestSharePointConnector",
+    "fileName": "/Bystroushaak_&_Office365SharepointConnector/o365_sharepoint_connector_&_tests_&_test_o365_sharepoint_connector.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "try:\n    new_list = self.c.add_list('unittests')\n    self.assertEqual(new_list.title, 'unittests')\nexcept CantCreateNewListException:\n    pass\nlists = self.c.get_lists()\nself.assertIn('unittests', lists)\nlists = self.c.get_lists()\nlists['unittests'].delete()\nlists = self.c.get_lists()\nself.assertNotIn('unittests', lists)\n"
+}

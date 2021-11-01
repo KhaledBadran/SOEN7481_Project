@@ -1,0 +1,9 @@
+{
+    "functionName": "testTileFitted",
+    "className": "TileFittedTest",
+    "fileName": "/facebook_&_Ax/ax_&_plot_&_tests_&_test_tile_fitted.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "model = get_modelbridge(status_quo_name=None)\nwith self.assertRaises(ValueError):\n    tile_fitted(model, rel=True)\ntile_fitted(model, rel=False)\nmodel = get_modelbridge(status_quo_name='1_1')\nconfig = tile_fitted(model, rel=True)\nself.assertIsNotNone(config)\nfor key in ['layout', 'data']:\n    self.assertIn(key, config.data)\nfor key in ['annotations', 'margin', 'hovermode', 'updatemenus', 'font',\n    'width', 'height', 'legend']:\n    self.assertIn(key, config.data['layout'])\nfor i in range(2):\n    self.assertEqual(config.data['data'][i]['x'], ['1_1'])\n    self.assertEqual(config.data['data'][i]['y'], [0.0])\n    self.assertEqual(config.data['data'][i]['type'], 'scatter')\n    self.assertEqual(config.data['data'][i]['error_y']['array'], [\n        138.59292911256333])\n    self.assertIn('Arm 1_1', config.data['data'][i]['text'][0])\n    self.assertIn('[-138.593%, 138.593%]', config.data['data'][i]['text'][0])\n    self.assertIn('0.0%', config.data['data'][i]['text'][0])\n    for key in ['type', 'x', 'y', 'marker', 'mode', 'name', 'text',\n        'hoverinfo', 'error_y', 'visible', 'legendgroup', 'showlegend',\n        'xaxis', 'yaxis']:\n        self.assertIn(key, config.data['data'][i])\n"
+}

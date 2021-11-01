@@ -1,0 +1,9 @@
+{
+    "functionName": "test_02",
+    "className": null,
+    "fileName": "/MicroscPSF_&_MicroscPSF-Py/microscPSF_&_test_&_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Particle above surface.\n    \"\"\"\nmp = msPSF.m_params\nrv = numpy.arange(0.0, 1.01, 0.1)\nzv = numpy.arange(-1.0, 1.01, 0.2)\nfast_rz = msPSF.gLZRFocalScan(mp, rv, zv, pz=0.5)\nslow_rz = msPSF.gLZRFocalScanSlow(mp, rv, zv, pz=0.5)\nassert numpy.allclose(fast_rz, slow_rz, atol=0.0001, rtol=0.0001)\n"
+}

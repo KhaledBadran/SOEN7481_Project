@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_details",
+    "className": null,
+    "fileName": "/mcs07_&_ChemSpiPy/tests_&_test_api.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test get_details returns details for a record ID.\"\"\"\ninfo = cs.get_details(6543)\nassert all(field in info for field in ['id', 'smiles', 'formula',\n    'averageMass', 'molecularWeight', 'monoisotopicMass', 'nominalMass',\n    'commonName', 'referenceCount', 'dataSourceCount', 'pubMedCount',\n    'rscCount', 'mol2D'])\nassert all(isinstance(info[field], float) for field in ['averageMass',\n    'molecularWeight', 'monoisotopicMass'])\nassert isinstance(info['id'], int)\nassert all(isinstance(info[field], six.text_type) for field in ['smiles',\n    'formula', 'commonName', 'mol2D'])\n"
+}

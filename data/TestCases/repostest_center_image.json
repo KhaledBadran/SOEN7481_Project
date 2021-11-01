@@ -1,0 +1,9 @@
+{
+    "functionName": "test_center_image",
+    "className": null,
+    "fileName": "/PyAbel_&_PyAbel/abel_&_tests_&_test_tools_center.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "IM = abel.tools.analytical.SampleImage(n=361, name='dribinski').image\nIMx = shift(IM, (-1, 2))\ntrue_origin = 179, 182\norigin = abel.tools.center.find_origin(IMx, method='slice')\nassert_allclose(origin, true_origin, atol=1)\norigin = abel.tools.center.find_origin(IMx, method='com')\nassert_allclose(origin, true_origin, atol=1)\nIMc = abel.tools.center.center_image(IMx, method='com', axes=1)\norigin = abel.tools.center.find_origin(IMc, method='com')\nassert_allclose(origin, (179, 180), atol=1)\nIMc = abel.tools.center.center_image(IMx, method='com', axes=0)\norigin = abel.tools.center.find_origin(IMc, method='com')\nassert_allclose(origin, (180, 182), atol=1)\nIM = IM[:, :-1]\nm, n = IM.shape\nIMy = abel.tools.center.center_image(IM, method='slice', odd_size=True)\nassert_allclose(IMy.shape, (m, n - 1))\n"
+}

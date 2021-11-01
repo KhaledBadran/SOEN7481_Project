@@ -1,0 +1,9 @@
+{
+    "functionName": "test_SubscriptionManager_calls_context_if_a_function",
+    "className": null,
+    "fileName": "/willdeuschle_&_Python-GraphQL-Subscriptions/tests_&_test_python_graphql_subscriptions.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "schema = Schema\nsetup_functions = {'test_filter_sub': lambda options, args,\n    subscription_name: {'sub_1': {}}}\nsub_manager = SubscriptionManager(schema, pubsub, setup_functions)\ncontext = Mock(return_value={})\nkwargs = {'query':\n    'subscription test_filter($filter_bool: Boolean){                   test_filter_sub(filter_bool: $filter_bool) }'\n    , 'operation_name': 'garbage', 'variables': {}, 'callback': lambda\n    error: True, 'context': context}\nsub_id = sub_manager.subscribe(**kwargs)\nassert context.call_count == 0\nsub_manager.pubsub.publish('sub_1', {})\nassert context.call_count == 1\n"
+}

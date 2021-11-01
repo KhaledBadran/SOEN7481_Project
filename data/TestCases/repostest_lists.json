@@ -1,0 +1,9 @@
+{
+    "functionName": "test_lists",
+    "className": null,
+    "fileName": "/roniemartinez_&_DocCron/tests_&_test_list.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cron = doccron.cron('0,15,30,45 0,6,12,18 1,15,31 * 1,2,3,4,5 *')\nnext_datetime = datetime.now().replace(minute=0, second=0, microsecond=0)\nwhile True:\n    if next_datetime.day in [1, 15, 31] and next_datetime.hour in [0, 6, 12, 18\n        ] and next_datetime.minute in [0, 15, 30, 45\n        ] and next_datetime.isoweekday() in range(1, 6):\n        break\n    next_datetime += timedelta(minutes=15)\nnext_schedule = next(cron)\nassert isinstance(next_schedule, datetime)\nassert next_schedule.isoweekday() in [1, 2, 3, 4, 5]\n"
+}

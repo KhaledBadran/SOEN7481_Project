@@ -1,0 +1,9 @@
+{
+    "functionName": "testExperimentTrackingMetricUpdates",
+    "className": "SQAStoreTest",
+    "fileName": "/facebook_&_Ax/ax_&_storage_&_sqa_store_&_tests_&_test_sqa_store.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "experiment = get_experiment_with_batch_trial()\nsave_experiment(experiment)\nself.assertEqual(get_session().query(SQAMetric).count(), len(experiment.\n    metrics))\nmetric = Metric(name='tracking', lower_is_better=True)\nexperiment.update_tracking_metric(metric)\nsave_experiment(experiment)\nself.assertEqual(get_session().query(SQAMetric).count(), len(experiment.\n    metrics))\nmetric = Metric(name='tracking2')\nexperiment.add_tracking_metric(metric)\nsave_experiment(experiment)\nself.assertEqual(get_session().query(SQAMetric).count(), len(experiment.\n    metrics))\nexperiment.remove_tracking_metric('tracking2')\nsave_experiment(experiment)\nself.assertEqual(get_session().query(SQAMetric).count(), len(experiment.\n    metrics))\nloaded_experiment = load_experiment(experiment.name)\nself.assertEqual(experiment, loaded_experiment)\n"
+}

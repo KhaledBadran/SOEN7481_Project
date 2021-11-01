@@ -1,0 +1,9 @@
+{
+    "functionName": "test_random_with_custom_encoder",
+    "className": "TestGenerator",
+    "fileName": "/BciPy_&_BciPy/bcipy_&_acquisition_&_tests_&_datastream_&_test_generator.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Random generator should allow a custom encoder.\"\"\"\nchannel_count = 10\ngen = random_data(encoder=CustomEncoder(), channel_count=channel_count)\ndata = [next(gen) for _ in range(100)]\nself.assertEqual(len(data), 100)\nfor _count, record in data:\n    self.assertEqual(len(record), channel_count)\nself.assertEqual(data[0][0], 1)\nself.assertEqual(data[99][0], 100)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "np_pool_fixed_output_size",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_pool.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "m, c, h, w = feature_maps.shape\nresult = np.zeros((m, c, output_size, output_size), dtype=feature_maps.dtype)\nn = float(output_size)\nfor i in range(output_size):\n    for j in range(output_size):\n        start_h = int(np.floor(j / n * h))\n        end_h = int(np.ceil((j + 1) / n * h))\n        start_w = int(np.floor(i / n * w))\n        end_w = int(np.ceil((i + 1) / n * w))\n        region = feature_maps[:, :, start_h:end_h, start_w:end_w]\n        result[:, :, (j), (i)] = pool_op(region, axis=(2, 3))\nreturn result\n"
+}

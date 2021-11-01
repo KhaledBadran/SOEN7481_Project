@@ -1,0 +1,9 @@
+{
+    "functionName": "test_call_other_function",
+    "className": "TestInsertCode",
+    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_bytecode_modification.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.original_stdout = sys.stdout\nsys.stdout = StringIO()\ntry:\n\n    def original():\n        a = 1\n        b = 3\n        c = bar(a, b)\n        return c\n\n    def check_line_3():\n        a = 1\n        b = 3\n        tracing()\n        c = bar(a, b)\n        return c\n\n    def check_line_4():\n        a = 1\n        b = 3\n        c = bar(a, b)\n        tracing()\n        return c\n    self.check_insert_every_line(original, tracing, 4)\n    sys.stdout = self.original_stdout\n    self.check_insert_to_line_by_symbols(original, call_tracing, original.\n        __code__.co_firstlineno + 3, check_line_3.__code__)\n    self.check_insert_to_line_by_symbols(original, call_tracing, original.\n        __code__.co_firstlineno + 4, check_line_4.__code__)\nfinally:\n    sys.stdout = self.original_stdout\n"
+}

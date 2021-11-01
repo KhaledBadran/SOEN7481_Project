@@ -1,0 +1,9 @@
+{
+    "functionName": "test_max_sharpe_pair_constraint",
+    "className": null,
+    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_efficient_frontier.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ef = setup_efficient_frontier()\nef.max_sharpe()\nold_sum = ef.weights[:2].sum()\nef = setup_efficient_frontier()\nef.add_constraint(lambda w: w[1] + w[0] <= old_sum / 2)\nef.max_sharpe()\nnew_sum = ef.weights[:2].sum()\nassert new_sum <= old_sum / 2 + 0.0001\n"
+}

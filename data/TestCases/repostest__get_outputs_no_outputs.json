@@ -1,0 +1,9 @@
+{
+    "functionName": "test__get_outputs_no_outputs",
+    "className": "TestMLPipline",
+    "fileName": "/HDI-Project_&_MLBlocks/tests_&_test_mlpipeline.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self_ = MagicMock(autospec=MLPipeline)\nself_._last_block_name = 'last_block'\nself_._get_block_outputs.return_value = ['some', 'outputs']\npipeline = dict()\noutputs = None\nreturned = MLPipeline._get_outputs(self_, pipeline, outputs)\nexpected = {'default': ['some', 'outputs']}\nassert returned == expected\nself_._get_block_outputs.assert_called_once_with('last_block')\npatch('mlblocks.mlpipeline.MLBlock', new=get_mlblock_mock)"
+}

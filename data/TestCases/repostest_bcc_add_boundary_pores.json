@@ -1,0 +1,9 @@
+{
+    "functionName": "test_bcc_add_boundary_pores",
+    "className": "BravaisTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_network_&_BravaisTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "bcc = op.network.Bravais(shape=[3, 3, 3], mode='bcc')\nNp = bcc.Np\nbcc.add_boundary_pores(labels=['left', 'right'], spacing=1)\nassert bcc.Np > Np\nassert bcc.Np == Np + 18\nassert 'pore.left_boundary' in bcc.keys()\nassert 'pore.right_boundary' in bcc.keys()\nassert 'pore.top_boundary' not in bcc.keys()\nassert 'pore.bottom_boundary' not in bcc.keys()\n"
+}

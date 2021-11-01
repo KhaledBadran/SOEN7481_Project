@@ -1,0 +1,9 @@
+{
+    "functionName": "test_invalid_wrapping_method",
+    "className": "TestKeyWrappingSpecification",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a TypeError is raised when an invalid value is used to set\n        the wrapping method of a KeyWrappingSpecification struct.\n        \"\"\"\nkwargs = {'wrapping_method': 'invalid'}\nself.assertRaisesRegex(TypeError,\n    'Wrapping method must be a WrappingMethod enumeration.', objects.\n    KeyWrappingSpecification, **kwargs)\nargs = objects.KeyWrappingSpecification(), 'wrapping_method', 0\nself.assertRaisesRegex(TypeError,\n    'Wrapping method must be a WrappingMethod enumeration.', setattr, *args)\n"
+}

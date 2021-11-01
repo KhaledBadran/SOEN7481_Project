@@ -1,0 +1,9 @@
+{
+    "functionName": "test_ND_images",
+    "className": null,
+    "fileName": "/PaulHancock_&_Aegean/tests_&_test_BANE.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that ND images are treated correctly\"\"\"\nfbase = 'tests/test_files/small_{0}D.fits'\noutbase = 'dlme'\nrms = outbase + '_rms.fits'\nbkg = outbase + '_bkg.fits'\nfor fname in [fbase.format(n) for n in [3, 4]]:\n    BANE.filter_image(fname, out_base=outbase)\n    os.remove(rms)\n    os.remove(bkg)\nfname = fbase.format(5)\ntry:\n    BANE.filter_image(fname, out_base=outbase)\nexcept Exception as e:\n    pass\nelse:\n    raise AssertionError()\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_analyze_namd_file",
+    "className": null,
+    "fileName": "/bio-phys_&_MDBenchmark/mdbenchmark_&_tests_&_mdengines_&_test_namd.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that we check the `.namd` file as expected.\"\"\"\nwith tmpdir.as_cwd():\n    with open('md.namd', 'w') as fh:\n        fh.write(file_content)\n    with open('md.namd', 'r') as fh:\n        if exit_exception:\n            with pytest.raises(exit_exception):\n                namd.analyze_namd_file(fh)\n                out, err = capsys.readouterr()\n                assert out.type == exit_exception\n                assert out.code == exit_code\n                assert out == output\n        else:\n            namd.analyze_namd_file(fh)\n            out, err = capsys.readouterr()\n            assert out == output\npytest.mark.parametrize('file_content, output, exit_exception, exit_code',\n    [('dummy file', '', False, 0), ('parameters ./relative/path/',\n    \"\"\"ERROR No absolute path detected in NAMD file!\n\"\"\", SystemExit, 1), (\n    'parameters abc', 'ERROR No absolute path detected in NAMD file!\\n',\n    SystemExit, 1), ('coordinates ../another/relative/path',\n    \"\"\"ERROR Relative file paths are not allowed in NAMD files!\n\"\"\",\n    SystemExit, 1), ('structure $',\n    \"\"\"ERROR Variable Substitutions are not allowed in NAMD files!\n\"\"\",\n    SystemExit, 1)])"
+}

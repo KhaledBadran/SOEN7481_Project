@@ -1,0 +1,9 @@
+{
+    "functionName": "test_conditional_mean_and_variance",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_likelihoods_&_test_likelihoods.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Here we make sure that the conditional_mean and conditional_var functions\n    give the same result as the predict_mean_and_var function if the prediction\n    has no uncertainty.\n    \"\"\"\nmu1 = likelihood_setup.likelihood.conditional_mean(mu)\nvar1 = likelihood_setup.likelihood.conditional_variance(mu)\nmu2, var2 = likelihood_setup.likelihood.predict_mean_and_var(mu, var)\nassert_allclose(mu1, mu2, rtol=likelihood_setup.rtol, atol=likelihood_setup\n    .atol)\nassert_allclose(var1, var2, rtol=likelihood_setup.rtol, atol=\n    likelihood_setup.atol)\npytest.mark.parametrize('likelihood_setup', likelihood_setups)pytest.mark.parametrize('mu, var', [[Datum.Fmu, tf.zeros_like(Datum.Fmu)]])"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_parser_sorted",
+    "className": null,
+    "fileName": "/rpep_&_FolderAnalyse/FolderAnalyse_&_tests_&_test_parser.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    test_parser_unsorted()\n\n    This test checks the file parser, checking a variety of properties are as\n    as expected. This, however, checks that the items are sorted correctly.\n\n    \"\"\"\nfile = os.path.join(file_dir, 'example_documents', 'a-tale-of-two-cities.txt')\nfreq_dict = p.parse(file, case_sensitive=True, sort=True)\nassert len(freq_dict.keys()) > 0, 'No words found in document with words!'\nassert '\\n' not in freq_dict.keys(), \"\"\"'\n' was found in the keys dict.\"\"\"\nfor key, freq in freq_dict.items():\n    assert freq > 0, f'freq_dict[{key}] had 0 as frequency when the wordhad been found in the body of the text.'\nfor i, (key, freq) in enumerate(freq_dict.items()):\n    if i == 0:\n        last_freq = freq\n    else:\n        assert last_freq > freq, 'Sorting wrong. Last freq is smaller.'\n"
+}

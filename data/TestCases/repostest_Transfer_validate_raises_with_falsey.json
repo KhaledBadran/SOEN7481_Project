@@ -1,0 +1,9 @@
+{
+    "functionName": "test_Transfer_validate_raises_with_falsey",
+    "className": null,
+    "fileName": "/justanr_&_Flask-Transfer/tests_&_test_transfer.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "source = FileStorage(stream=BytesIO(), filename='test.conf')\n@transf.validator\ndef bad_validator(fh, m):\n    False\nwith pytest.raises(UploadError) as excinfo:\n    transf.save(source, metadata={}, catch_all_errors=False, destination=lambda\n        *a, **k: None)\nexpected = '{0!r}({1!r}, {2!r}) returned False'.format(bad_validator,\n    source, {})\nassert str(excinfo.value) == expected\n"
+}

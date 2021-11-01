@@ -1,0 +1,9 @@
+{
+    "functionName": "test_typed_name_component",
+    "className": "TestNameMethods",
+    "fileName": "/named-data_&_PyNDN2/tests_&_unit_tests_&_test_name_methods.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "otherTypeCode = 99\nuri = '/ndn/' + str(otherTypeCode) + '=value'\nname = Name()\nname.append('ndn').append('value', ComponentType.OTHER_CODE, otherTypeCode)\nself.assertEqual(uri, name.toUri())\nnameFromUri = Name(uri)\nself.assertEqual('value', str(nameFromUri.get(1).getValue()))\nself.assertEqual(otherTypeCode, nameFromUri.get(1).getOtherTypeCode())\ndecodedName = Name()\ndecodedName.wireDecode(name.wireEncode())\nself.assertEqual('value', str(decodedName.get(1).getValue()))\nself.assertEqual(otherTypeCode, decodedName.get(1).getOtherTypeCode())\n"
+}

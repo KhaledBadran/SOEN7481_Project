@@ -1,0 +1,9 @@
+{
+    "functionName": "test_translate_data_source_loader",
+    "className": null,
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_OWMCLITest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with OWM(owmdir=p(self.testdir, '.owm')).connect() as conn:\n    with transaction.manager:\n        ctx = Context(ident='http://example.org/context', conf=conn.conf)\n        ctx(LFDS)(ident='http://example.org/lfds', file_name=\n            'Merged_Nuclei_Stained_Worm.zip', torrent_file_name=\n            'd9da5ce947c6f1c127dfcdc2ede63320.torrent')\n        ctx.mapper.process_class(DT2)\n        dt = ctx(DT2)()\n        ctx_id = conn.conf[DEFAULT_CONTEXT_KEY]\n        DT2.definition_context.save(conn.conf['rdf.graph'])\n        main_ctx = Context(ident=ctx_id, conf=conn.conf)\n        main_ctx.add_import(ctx)\n        main_ctx.save_imports()\n        ctx.save()\nassertRegexpMatches(self.sh(\n    'owm translate http://example.org/trans1 http://example.org/lfds'),\n    'Merged_Nuclei_Stained_Worm.zip')\nmark.xfail"
+}

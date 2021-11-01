@@ -1,0 +1,9 @@
+{
+    "functionName": "test_weights",
+    "className": "TestChain",
+    "fileName": "/samreay_&_ChainConsumer/tests_&_test_analysis.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tolerance = 0.03\nsamples = np.linspace(-4, 4, 200000)\nweights = norm.pdf(samples)\nc = ChainConsumer()\nc.add_chain(samples, weights=weights)\nexpected = np.array([-1.0, 0.0, 1.0])\nsummary = c.analysis.get_summary()\nactual = np.array(list(summary.values())[0])\ndiff = np.abs(expected - actual)\nassert np.all(diff < tolerance)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_babel",
+    "className": "Test",
+    "fileName": "/sqreen_&_PyMiniRacer/tests_&_test_babel.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "context = py_mini_racer.MiniRacer()\npath = os.path.join(os.path.dirname(__file__), 'fixtures/babel.js')\nbabel_source = open(path, 'r', encoding='utf-8').read()\nsource = (\n    \"\"\"\n          var self = this;\n          %s\n          babel.eval = function(code) {\n            return eval(babel.transform(code)[\"code\"]);\n          }\n        \"\"\"\n     % babel_source)\ncontext.eval(source)\nself.assertEqual(64, context.call('babel.eval', '((x) => x * x)(8)'))\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "_alive",
+    "className": "Chat",
+    "fileName": "/named-data_&_PyNDN2/examples_&_test_chrono_chat.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        This is called after a timeout to check if the user with prefix has a\n        newer sequence number than the given tempSequenceNo. If not, assume the\n        user is idle and remove from the roster and print a leave message. This\n        method has an \"interest\" argument because we use it as the onTimeout for\n        Face.expressInterest.\n        \"\"\"\nsequenceNo = self._sync.getProducerSequenceNo(prefix, sessionNo)\nnameAndSession = name + sessionNo\ntry:\n    n = self._roster.index(nameAndSession)\nexcept ValueError:\n    n = -1\nif sequenceNo != -1 and n >= 0:\n    if tempSequenceNo == sequenceNo:\n        self._roster.pop(n)\n        print(name + ': Leave')\n"
+}

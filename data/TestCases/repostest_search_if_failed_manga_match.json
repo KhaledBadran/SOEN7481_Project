@@ -1,0 +1,9 @@
+{
+    "functionName": "test_search_if_failed_manga_match",
+    "className": null,
+    "fileName": "/superDross_&_MangaReaderScraper/tests_&_test_cli.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "def fake_downloader(*args, **kwargs):\n    \"\"\"\n        Will raise an error, which should trigger the manga_search\n        function and recall this function with the parameters parsed\n        from mocked manga_search (\"search_activated\").\n\n        This will help confirm whether the manga_search function was\n        called upon a MangaDoesNotExist error.\n        \"\"\"\n    if 'search activated' in args or 'search activated' in kwargs['manga_name'\n        ]:\n        return True\n    raise MangaDoesNotExist('name')\nwith mock.patch('scraper.__main__.download_manga', fake_downloader):\n    with mock.patch('scraper.__main__.manga_search') as mocked_func:\n        mocked_func.return_value = 'search activated', '2'\n        args = cli(['--manga', 'dragonballzz'])\n        expected = {'manga': 'search activated', 'search': ['dragonballzz'],\n            'source': 'mangareader', 'volumes': [2], 'output': '/tmp',\n            'filetype': 'pdf', 'upload': None, 'override_name': 'None',\n            'remove': False}\n        assert args == expected\n"
+}

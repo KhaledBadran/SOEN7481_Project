@@ -1,0 +1,9 @@
+{
+    "functionName": "test_should_apicast_return_429_when_limits_exceeded",
+    "className": null,
+    "fileName": "/pestanko_&_3scale-api-python/tests_&_integration_&_test_integration_backend_metrics.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "metric_params = dict(system_name='limits_exceeded', unit='count',\n    friendly_name='Limits Exceeded')\nmetric = service.metrics.create(params=metric_params)\napplication_plan.limits(metric).create(params=dict(period='day', value=1))\nrule = create_mapping_rule(metric, 'GET', '/limits/exceeded/')\nupdate_proxy_endpoint(service)\nresponse = apicast_http_client.get(path=rule['pattern'])\nwhile response.status_code == 200:\n    response = apicast_http_client.get(path=rule['pattern'])\nassert response.status_code == 429\n"
+}

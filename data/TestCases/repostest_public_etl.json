@@ -1,0 +1,9 @@
+{
+    "functionName": "test_public_etl",
+    "className": "TestETL",
+    "fileName": "/klahnakoski_&_Bugzilla-ETL/tests_&_test_etl.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        ENSURE ETL GENERATES WHAT'S IN THE REFERENCE FILE\n        \"\"\"\nFile(self.settings.param.first_run_time).delete()\nFile(self.settings.param.last_run_time).delete()\nself.settings.param.allow_private_bugs = Null\ndatabase.make_test_instance(self.settings.bugzilla)\nbz_etl.main(es=self.settings.public.bugs.es, es_comments=self.settings.\n    public.comments.es, kwargs=self.settings)\nes = elasticsearch.Cluster(self.settings.public.bugs.es).get_index(self.\n    settings.public.bugs.es)\nref = fake_elasticsearch.open_test_instance(name='reference', kwargs=self.\n    settings.reference.public.bugs)\ncompare_both(es, ref, self.settings, self.settings.param.bugs)\ncan = jx.sort(jx_elasticsearch.new_instance(self.settings.public.comments.\n    es).query({'from': 'public_bugs', 'limit': 10000, 'format': 'list'}).\n    data, ['bug_id', 'modified_ts', 'comment_id'])\nref = jx.sort(File(self.settings.reference.public.comments.filename).\n    read_json().values(), ['bug_id', 'modified_ts', 'comment_id'])\nfor i, (c, r) in enumerate(zip(can, ref)):\n    if c != r:\n        Log.error(\n            'Comment\\n{{candidate|json}}\\ndoes not match reference:\\n{{reference|json}}'\n            , candidate=c, reference=r)\n        break\n"
+}

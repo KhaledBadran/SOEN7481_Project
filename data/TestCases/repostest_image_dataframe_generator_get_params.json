@@ -1,0 +1,9 @@
+{
+    "functionName": "test_image_dataframe_generator_get_params",
+    "className": null,
+    "fileName": "/goeckslab_&_Galaxy-ML/galaxy_ml_&_tests_&_test_image_generator.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "batch_generator = ImageDataFrameBatchGenerator(df, directory=directory,\n    x_col=x_col, y_col=y_col, shuffle=False, seed=42, class_mode=class_mode,\n    target_size=(32, 32), featurewise_center=True,\n    featurewise_std_normalization=True, rotation_range=20,\n    width_shift_range=0.2, height_shift_range=0.2, horizontal_flip=True,\n    fit_sample_size=None)\ngot = batch_generator.get_params()\ngot.pop('dataframe')\nexpect = {'brightness_range': None, 'channel_shift_range': 0.0,\n    'class_mode': 'categorical', 'classes': None, 'color_mode': 'rgb',\n    'cval': 0.0, 'data_format': 'channels_last', 'directory':\n    './tools/test-data/cifar-10_500/', 'dtype': 'float32',\n    'featurewise_center': True, 'featurewise_std_normalization': True,\n    'fill_mode': 'nearest', 'fit_sample_size': None, 'height_shift_range': \n    0.2, 'horizontal_flip': True, 'interpolation': 'nearest',\n    'interpolation_order': 1, 'preprocessing_function': None, 'rescale':\n    None, 'rotation_range': 20, 'samplewise_center': False,\n    'samplewise_std_normalization': False, 'save_format': 'png',\n    'save_prefix': '', 'save_to_dir': None, 'seed': 42, 'shear_range': 0.0,\n    'shuffle': False, 'target_size': (32, 32), 'vertical_flip': False,\n    'weight_col': None, 'width_shift_range': 0.2, 'x_col': 'id', 'y_col':\n    'label', 'zca_epsilon': 1e-06, 'zca_whitening': False, 'zoom_range': 0.0}\nassert got == expect, got\n"
+}

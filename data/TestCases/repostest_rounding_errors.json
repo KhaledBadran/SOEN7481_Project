@@ -1,0 +1,9 @@
+{
+    "functionName": "test_rounding_errors",
+    "className": "PrimitiveCell",
+    "fileName": "/jcumby_&_PIEFACE/pieface_&_tests_&_test_readcoords.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Check that positions rounded when reading CIF are correctly handled as duplicates\"\"\"\nself.atomcoords = {'O1': np.array([0.3333, 0.3333, 0.3333])}\nself.symmops = ['x,y,z', '-x,-y,-z', 'x+1/3, y+1/3, z+1/3']\nself.symmid = [0, 1, 2]\ncorrectcoords = {'O1': np.array([0.3333, 0.3333, 0.3333]), 'O1_1': np.array\n    ([0.6667, 0.6667, 0.6667])}\nself.newcoords = readcoords.makeP1cell(self.atomcoords, self.symmops, self.\n    symmid)\nself.assertItemsEqual(self.newcoords.keys(), correctcoords.keys())\nfor k in self.newcoords.keys():\n    np.testing.assert_array_almost_equal(self.newcoords[k], correctcoords[k])\n"
+}

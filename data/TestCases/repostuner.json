@@ -1,0 +1,9 @@
+{
+    "functionName": "tuner",
+    "className": null,
+    "fileName": "/NTMC-Community_&_MatchZoo/tests_&_unit_test_&_test_tuner.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "model = mz.models.DenseBaseline()\nprpr = model.get_default_preprocessor()\ntrain_raw = mz.datasets.toy.load_data('train')\ndev_raw = mz.datasets.toy.load_data('dev')\nprpr.fit(train_raw)\nmodel.params.update(prpr.context)\nmodel.guess_and_fill_missing_params()\nreturn mz.auto.Tuner(params=model.params, train_data=prpr.transform(\n    train_raw, verbose=0), test_data=prpr.transform(dev_raw, verbose=0))\npytest.fixture(scope='module')"
+}

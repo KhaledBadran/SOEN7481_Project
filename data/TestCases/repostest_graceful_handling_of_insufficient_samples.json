@@ -1,0 +1,9 @@
+{
+    "functionName": "test_graceful_handling_of_insufficient_samples",
+    "className": null,
+    "fileName": "/NASA_&_MLMCPy/tests_&_mlmc_&_test_MLMCSimulator.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    Ensure that the simulator does not throw an exception when insufficient\n    samples are provided.\n    \"\"\"\nwith warnings.catch_warnings():\n    warnings.simplefilter('ignore')\n    if comm.rank > 4:\n        return\n    sim = MLMCSimulator(models=models_from_2d_data, data=data_input_2d)\n    sim.simulate(epsilon=1.0, initial_sample_sizes=10)\n    sim = MLMCSimulator(models=models_from_2d_data, data=data_input_2d)\n    sim.simulate(epsilon=0.01, initial_sample_sizes=5)\n"
+}

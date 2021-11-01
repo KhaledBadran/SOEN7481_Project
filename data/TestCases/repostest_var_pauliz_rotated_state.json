@@ -1,0 +1,9 @@
+{
+    "functionName": "test_var_pauliz_rotated_state",
+    "className": null,
+    "fileName": "/XanaduAI_&_PennyLane-PQ/tests_&_test_var.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"test correct variance for <Z> of a rotated state\"\"\"\nphi = 0.543\ntheta = 0.6543\ndev.apply('RX', wires=Wires([0]), par=[phi])\ndev.apply('RY', wires=Wires([0]), par=[theta])\nif isinstance(dev, ProjectQIBMBackend):\n    dev._eng.backend.get_probabilities.return_value = {'0': 0.5 * (1 + np.\n        cos(theta) * np.cos(phi)), '1': 0.5 * (1 - np.cos(theta) * np.cos(phi))\n        }\ndev.pre_measure()\nvar = dev.var('PauliZ', wires=Wires([0]), par=[])\ndev.post_measure()\nexpected = 0.25 * (3 - np.cos(2 * theta) - 2 * np.cos(theta) ** 2 * np.cos(\n    2 * phi))\nassert np.allclose(var, expected, atol=tol, rtol=0)\npytest.mark.parametrize('DevClass', [ProjectQSimulator, ProjectQIBMBackend])"
+}

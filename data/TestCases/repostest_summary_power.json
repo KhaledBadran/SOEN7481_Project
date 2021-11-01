@@ -1,0 +1,9 @@
+{
+    "functionName": "test_summary_power",
+    "className": "TestChain",
+    "fileName": "/samreay_&_ChainConsumer/tests_&_test_analysis.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tolerance = 0.04\nconsumer = ChainConsumer()\ndata = np.random.normal(loc=0, scale=np.sqrt(2), size=1000000)\nconsumer.add_chain(data, power=2.0)\nsummary = consumer.analysis.get_summary()\nactual = np.array(list(summary.values())[0])\nexpected = np.array([-1.0, 0.0, 1.0])\ndiff = np.abs(expected - actual)\nassert np.all(diff < tolerance)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_UMC_generic",
+    "className": null,
+    "fileName": "/PTB-PSt1_&_PyDynamic/test_&_test_propagate_MonteCarlo.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "x_shape = 5, 6, 7\ndraw_samples = lambda size: np.random.rand(size, *x_shape)\nevaluate = functools.partial(np.mean, axis=1)\ny, Uy, happr, output_shape = UMC_generic(draw_samples, evaluate, runs=100,\n    blocksize=20, runs_init=10)\nassert y.size == Uy.shape[0]\nassert Uy.shape == (y.size, y.size)\nassert isinstance(happr, dict)\nassert output_shape == (5, 7)\ny, Uy, happr, output_shape = UMC_generic(draw_samples, evaluate, runs=100,\n    blocksize=20, runs_init=10, n_cpu=1)\nassert y.size == Uy.shape[0]\nassert Uy.shape == (y.size, y.size)\nassert isinstance(happr, dict)\nassert output_shape == (5, 7)\ny, Uy, happr, output_shape, sims = UMC_generic(draw_samples, evaluate, runs\n    =100, blocksize=20, runs_init=10, return_samples=True)\nassert y.size == Uy.shape[0]\nassert Uy.shape == (y.size, y.size)\nassert isinstance(happr, dict)\nassert output_shape == (5, 7)\nassert isinstance(sims, dict)\nassert sims['samples'][0].shape == x_shape\nassert sims['results'][0].shape == output_shape\n"
+}

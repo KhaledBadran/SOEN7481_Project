@@ -1,0 +1,9 @@
+{
+    "functionName": "test_maui_measurement_statistics",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_teledyne_&_test_maui.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Get statistics for given measurement.\"\"\"\nwith expected_protocol(ik.teledyne.MAUI, [init, 'PAST? CUST, P1'], [\n    'CUST,P1,MEAN,C3,AVG,10,HIGH,20,LAST,30,LOW,40,SIGMA,50,SWEEPS,42'],\n    sep='\\n') as osc:\n    assert osc.measurement[0].statistics == (10.0, 40.0, 20.0, 50.0, 42.0)\n"
+}

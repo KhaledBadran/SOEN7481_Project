@@ -1,0 +1,9 @@
+{
+    "functionName": "test_as_str",
+    "className": null,
+    "fileName": "/alex-ber_&_AlexBerUtils/tests_&_utils_&_ymlparsers_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "logger.info(f'{request._pyfuncitem.name}()')\norig_d = dict(exp_config_d)\nd = OrderedDict(exp_config_d)\nd['general'] = OrderedDict(d['general'])\nd['app'] = OrderedDict(d['app'])\norig_safe_dump = ymlparsers.safe_dump\nmock_safe_dump = mocker.patch.object(ymlparsers, 'safe_dump', side_effect=\n    orig_safe_dump, autospec=True, spec_set=True)\nvalue = ymlparsers.as_str(d)\npytest.assume(mock_safe_dump.call_count > 0)\nwith ymlparsers.DisableVarSubst():\n    restored_d = ymlparsers.load(value)\npytest.assume(orig_d == restored_d)\npytest.mark.yml"
+}

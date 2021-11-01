@@ -1,0 +1,9 @@
+{
+    "functionName": "_get_throat_pairs",
+    "className": "MixedInvasionPercolationCoop",
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_algorithms_&_MixedInvasionPercolationCoop.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        Generate an array of pores with all connected throats and pairs of\n        throats that connect to the same pore\n        \"\"\"\nnetwork = self.project.network\nneighbor_Ts = network.find_neighbor_throats(pores=network.pores(), flatten=\n    False)\nPs = []\nTs = []\nT1 = []\nT2 = []\nstart = 0\nmax_c = np.amax(network.num_neighbors(pores=network.Ps, flatten=False))\npair_T1 = []\npair_T2 = []\nlogger.info('Building throat pair matrices')\nfor num_t in range(max_c + 1):\n    temp1 = []\n    temp2 = []\n    for t1 in range(num_t)[:-1]:\n        for t2 in range(num_t)[t1 + 1:]:\n            temp1.append(t1)\n            temp2.append(t2)\n    pair_T1.append(np.asarray(temp1))\n    pair_T2.append(np.asarray(temp2))\nfor p, nTs in enumerate(neighbor_Ts):\n    num_t = len(nTs)\n    for i in range(num_t):\n        Ps.append(p)\n        Ts.append(nTs[i])\n    tempt1 = pair_T1[num_t] + start\n    tempt2 = pair_T2[num_t] + start\n    for i in range(len(tempt1)):\n        T1.append(tempt1[i])\n        T2.append(tempt2[i])\n    start += num_t\nPs = np.asarray(Ps)\nTs = np.asarray(Ts)\nT1 = np.asarray(T1)\nT2 = np.asarray(T2)\nreturn Ps, Ts, T1, T2\n"
+}

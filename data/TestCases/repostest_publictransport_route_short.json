@@ -1,0 +1,9 @@
+{
+    "functionName": "test_publictransport_route_short",
+    "className": "RoutingApiTest",
+    "fileName": "/abdullahselek_&_HerePy/tests_&_test_routing_api.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with codecs.open('testdata/models/routing_public.json', mode='r', encoding=\n    'utf-8') as f:\n    expectedResponse = f.read()\nresponses.add(responses.GET,\n    'https://route.ls.hereapi.com/routing/7.2/calculateroute.json',\n    expectedResponse, status=200)\nresponse = self._api.public_transport([11.0, 12.0], [15.0, 16.0], True)\nexpected_short_route = (\n    '332 - Palmer/Schiller; 332 - Cargo Rd./Delta Cargo; 332 - Palmer/Schiller'\n    )\nself.assertEqual(response.route_short, expected_short_route)\nresponses.activate"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_an_exception_is_raised_when_we_hit_an_error",
+    "className": null,
+    "fileName": "/AutomatedTester_&_Bugsy/tests_&_test_errors.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "responses.add(responses.GET, rest_url('bug', 1017315), body=\n    \"It's all broken\", status=500, content_type='application/json',\n    match_querystring=True)\nbugzilla = Bugsy()\nwith pytest.raises(BugsyException) as e:\n    bugzilla.get(1017315)\nassert str(e.value\n    ) == \"Message: We received a 500 error with the following: It's all broken Code: None\"\nresponses.activate"
+}

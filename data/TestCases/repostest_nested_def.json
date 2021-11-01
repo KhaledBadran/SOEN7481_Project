@@ -1,0 +1,9 @@
+{
+    "functionName": "test_nested_def",
+    "className": "NestedDefTest",
+    "fileName": "/whiteclover_&_Choco/test_&_test_def.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "t = Template(\n    \"\"\"\n\n        ${hi()}\n\n        <%def name=\"hi()\">\n            hey, im hi.\n            and heres ${foo()}, ${bar()}\n\n            <%def name=\"foo()\">\n                this is foo\n            </%def>\n\n            <%def name=\"bar()\">\n                this is bar\n            </%def>\n        </%def>\n\"\"\"\n    )\neq_(flatten_result(t.render()),\n    'hey, im hi. and heres this is foo , this is bar')\n"
+}

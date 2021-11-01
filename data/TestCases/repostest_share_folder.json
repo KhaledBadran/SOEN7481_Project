@@ -1,0 +1,9 @@
+{
+    "functionName": "test_share_folder",
+    "className": "TestRegister",
+    "fileName": "/Keeper-Security_&_Commander/unit-tests_&_test_command_register.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "params = get_synced_params()\nshared_folder_uid = next(iter([x['shared_folder_uid'] for x in params.\n    shared_folder_cache.values()]))\ncmd = register.ShareFolderCommand()\nTestRegister.expected_commands.extend(['shared_folder_update'])\ncmd.execute(params, action='grant', user=['user2@keepersecurity.com'],\n    manage_records=True, manage_users=False, folder=shared_folder_uid)\nself.assertEqual(len(TestRegister.expected_commands), 0)\nTestRegister.expected_commands.extend(['shared_folder_update'])\ncmd.execute(params, action='revoke', user=['user2@keepersecurity.com'],\n    folder=shared_folder_uid)\nself.assertEqual(len(TestRegister.expected_commands), 0)\n"
+}

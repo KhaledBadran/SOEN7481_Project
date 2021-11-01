@@ -1,0 +1,9 @@
+{
+    "functionName": "test_monte_carlo_1_din",
+    "className": null,
+    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_conditionals_&_test_uncertain_conditional.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "kernel = gpflow.kernels.SquaredExponential(variance=rng.rand())\nmean_function = mean_function_factory(mean, DataMC1.D_in, DataMC1.D_out)\nmodel = MomentMatchingSVGP(kernel, gpflow.likelihoods.Gaussian(),\n    num_latent_gps=DataMC1.D_out, mean_function=mean_function,\n    inducing_variable=DataMC1.X.copy(), whiten=white)\nmodel.full_output_cov = True\ntraining_loop(model.training_loss_closure(DataMC1.data), optimizer=tf.\n    optimizers.Adam(), var_list=model.trainable_variables, maxiter=200,\n    compile=True)\nmean1, var1 = model.uncertain_predict_f_moment_matching(*map(tf.\n    convert_to_tensor, [DataMC1.Xnew_mu, DataMC1.Xnew_covar]))\nfor n in range(DataMC1.N_new):\n    mean2, var2 = model.uncertain_predict_f_monte_carlo(DataMC1.Xnew_mu[n,\n        ...], DataMC1.Xnew_covar[n, ...] ** 0.5)\n    assert_allclose(mean1[n, ...], mean2, atol=0.001, rtol=0.1)\n    assert_allclose(var1[n, ...], var2, atol=0.01, rtol=0.1)\npytest.mark.parametrize('white', [True, False])pytest.mark.parametrize('mean', MEANS)"
+}

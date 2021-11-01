@@ -1,0 +1,9 @@
+{
+    "functionName": "test_route_have_cors_enabled",
+    "className": null,
+    "fileName": "/mozilla_&_PollBot/tests_&_test_cors.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "app = get_app()\nfor r in app.router.resources():\n    info = r.get_info()\n    if 'path' in info:\n        url = info['path']\n    elif 'formatter' in info:\n        formatter = info['formatter']\n        if '{product}' in formatter:\n            formatter = formatter.replace('{product}', 'firefox')\n        if '{version}' in formatter:\n            formatter = formatter.replace('{version}', '52.0')\n    elif 'prefix' in info:\n        if info['prefix'].startswith(SWAGGER_PREFIX):\n            continue\n        else:\n            import pdb\n            pdb.set_trace()\n    else:\n        import pdb\n        pdb.set_trace()\n    if url.startswith(SWAGGER_PREFIX):\n        continue\n    await check_cors(cli, url)\n"
+}

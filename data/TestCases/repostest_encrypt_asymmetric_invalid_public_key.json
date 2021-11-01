@@ -1,0 +1,9 @@
+{
+    "functionName": "test_encrypt_asymmetric_invalid_public_key",
+    "className": "TestCryptographyEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_crypto_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the right error is raised when an invalid public key is\n        specified.\n        \"\"\"\nengine = crypto.CryptographyEngine()\nargs = enums.CryptographicAlgorithm.RSA, 'invalid', b''\nkwargs = {'padding_method': enums.PaddingMethod.OAEP, 'hashing_algorithm':\n    enums.HashingAlgorithm.SHA_1}\nself.assertRaisesRegex(exceptions.CryptographicFailure,\n    'The public key bytes could not be loaded.', engine.encrypt, *args, **\n    kwargs)\n"
+}

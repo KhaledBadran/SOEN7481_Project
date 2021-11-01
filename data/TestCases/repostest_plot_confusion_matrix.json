@@ -1,0 +1,9 @@
+{
+    "functionName": "test_plot_confusion_matrix",
+    "className": null,
+    "fileName": "/tvdboom_&_ATOM/tests_&_test_plots.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Assert that the plot_confusion_matrix method work as intended.\"\"\"\ntrainer = TrainerRegressor(['ols', 'ridge'], metric='r2')\ntrainer.run(reg_train, reg_test)\npytest.raises(PermissionError, trainer.plot_confusion_matrix)\ntrainer = TrainerClassifier(['LDA', 'LGB'], metric='f1')\npytest.raises(NotFittedError, trainer.plot_confusion_matrix, models='LDA')\ntrainer.run(bin_train, bin_test)\ntrainer.plot_confusion_matrix(filename=FILE_DIR + 'cm1', display=False)\ntrainer.lda.plot_confusion_matrix(True, filename=FILE_DIR + 'cm2', display=\n    False)\nassert glob.glob(FILE_DIR + 'cm1.png')\nassert glob.glob(FILE_DIR + 'cm2.png')\ntrainer = TrainerClassifier(['LDA', 'LGB'], metric='f1_macro')\npytest.raises(NotFittedError, trainer.plot_confusion_matrix, models='LDA')\ntrainer.run(class_train, class_test)\npytest.raises(NotImplementedError, trainer.plot_confusion_matrix)\ntrainer.lda.plot_confusion_matrix(True, filename=FILE_DIR + 'cm3', display=\n    False)\nassert glob.glob(FILE_DIR + 'cm3.png')\natom = ATOMClassifier(X_bin, y_bin, random_state=1)\natom.run('lda', metric='f1')\natom.plot_confusion_matrix(filename=FILE_DIR + 'cm4', display=False)\natom.lda.plot_confusion_matrix(filename=FILE_DIR + 'cm5', display=False)\nassert glob.glob(FILE_DIR + 'cm4.png')\nassert glob.glob(FILE_DIR + 'cm5.png')\n"
+}

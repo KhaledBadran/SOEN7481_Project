@@ -1,0 +1,9 @@
+{
+    "functionName": "test_without_given_cycle_time",
+    "className": "TestVelocityRampRunner",
+    "fileName": "/trinamic_&_PyTrinamicTools/PyTrinamicTools_&_helpers_&_tests_&_test_Ramps.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Run a linear ramp and see if the velocity is updated as expected.\"\"\"\nupdate_mock = Mock()\nramp_runner = VelocityRampRunner(update_mock)\nramp_runner._time_ms = Mock()\nramp_runner._time_ms.side_effect = [10, 30, 50]\nramp_runner.run_linear_ramp(0, 100, 40)\nexpected_velocity_update_calls = [call(0), call(50), call(100)]\nupdate_mock.assert_has_calls(expected_velocity_update_calls)\n"
+}

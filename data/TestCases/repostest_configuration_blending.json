@@ -1,0 +1,9 @@
+{
+    "functionName": "test_configuration_blending",
+    "className": null,
+    "fileName": "/glentner_&_CmdKit/tests_&_test_config.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that configuration applied depth-first blending of namespaces.\"\"\"\nns_a = Namespace({'a': {'x': 1, 'y': 2}})\nns_b = Namespace({'b': {'z': 3}})\nns_c = Namespace({'a': {'z': 4}})\nns_d = Namespace({'a': {'x': 5}})\ncfg = Configuration(A=ns_a, B=ns_b, C=ns_c, D=ns_d)\nassert cfg.namespaces['A'] == ns_a\nassert cfg.namespaces['B'] == ns_b\nassert cfg.namespaces['C'] == ns_c\nassert cfg.namespaces['D'] == ns_d\nassert cfg['a']['x'] == 5\nassert cfg['a']['y'] == 2\nassert cfg['a']['z'] == 4\nassert cfg['b']['z'] == 3\n"
+}

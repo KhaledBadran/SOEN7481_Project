@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gru_unroll_scan_fwd",
+    "className": null,
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_recurrent.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "num_batch, seq_len, n_features1 = 2, 3, 4\nnum_units = 2\nin_shp = num_batch, seq_len, n_features1\nl_inp = InputLayer(in_shp)\nl_mask_inp = InputLayer(in_shp[:2])\nx_in = np.random.random(in_shp).astype('float32')\nmask_in = np.ones(in_shp[:2]).astype('float32')\nlasagne.random.get_rng().seed(1234)\nl_gru_scan = GRULayer(l_inp, num_units=num_units, backwards=False,\n    unroll_scan=False, mask_input=l_mask_inp)\nlasagne.random.get_rng().seed(1234)\nl_gru_unrolled = GRULayer(l_inp, num_units=num_units, backwards=False,\n    unroll_scan=True, mask_input=l_mask_inp)\noutput_scan = helper.get_output(l_gru_scan)\noutput_unrolled = helper.get_output(l_gru_unrolled)\noutput_scan_val = output_scan.eval({l_inp.input_var: x_in, l_mask_inp.\n    input_var: mask_in})\noutput_unrolled_val = output_unrolled.eval({l_inp.input_var: x_in,\n    l_mask_inp.input_var: mask_in})\nnp.testing.assert_almost_equal(output_scan_val, output_unrolled_val)\n"
+}

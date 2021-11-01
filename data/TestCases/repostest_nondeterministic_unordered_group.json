@@ -1,0 +1,9 @@
+{
+    "functionName": "test_nondeterministic_unordered_group",
+    "className": null,
+    "fileName": "/textX_&_Arpeggio/arpeggio_&_tests_&_regressions_&_issue_73_&_test_issue_73.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "def root():\n    return 'word1', UnorderedGroup(some_rule, 'word2', some_rule), EOF\ndef some_rule():\n    return Optional('word2'), Optional('word3')\ncontent = 'word1 word2 '\nfail = 0\nsuccess = 0\nfor _ in range(100):\n    try:\n        parser = ParserPython(root)\n        parser.parse(content)\n        success += 1\n    except NoMatch:\n        fail += 1\nassert fail == 100\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_9_button_template_with_postback_and_web_url",
+    "className": "TestButtonTemplate",
+    "fileName": "/p1r-a-t3_&_FB_Bot/Tests_&_test_button_template.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "buttons = list()\ntitle = 'Test 9 Postback - {}'.format(1)\nbuttons.append(self.button.create_postback_button(title, self.postback_payload)\n    )\nself.assertEqual(type(buttons[0]), type(dict()), 'Must nt block')\nfor _ in range(0, 2):\n    title = 'Test 9 WebURL - {}'.format(_)\n    buttons.append(self.button.create_url_button(title, self.url))\ntitle_text = 'test_button_template_with_postback - Test 9 - {}'.format(1)\nbutton_payload = self.template.button_template(title_text, buttons)\nstatus_code = self.facebook.send_message(button_payload)\nself.assertEqual(status_code, 200, 'Suppose to work again!')\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_fit_pmt_resp_func",
+    "className": "TestTools",
+    "fileName": "/JonasReubelt_&_PeeEmTee/peeemtee_&_tests_&_test_fit.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "x, y = np.loadtxt('./peeemtee/tests/samples/charge_distribution.txt',\n    unpack=True)\nfitter = ChargeHistFitter()\nfitter.pre_fit(x, y, print_level=0)\nfitter.fit_pmt_resp_func(x, y, print_level=0)\nassert np.sum((y - fitter.opt_prf_values) ** 2 / fitter.opt_prf_values\n    ) / 195 < 1.5\nfitter = ChargeHistFitter()\nfitter.pre_fit(x, y, print_level=0, valley=0.1, calculate_hesse=True)\nfitter.fit_pmt_resp_func(x, y, print_level=0, fixed_parameters=[])\nassert np.sum((y - fitter.opt_prf_values) ** 2 / fitter.opt_prf_values\n    ) / 195 < 2\n"
+}

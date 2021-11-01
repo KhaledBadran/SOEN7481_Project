@@ -1,0 +1,9 @@
+{
+    "functionName": "test_set_phase_and_geometry_from_different_project",
+    "className": "GenericPhysicsTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_physics_&_GenericPhysicsTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "net2 = op.network.Cubic(shape=[5, 5, 5])\ngeo2 = op.geometry.GenericGeometry(network=net2)\nphase2 = op.phases.GenericPhase(network=net2)\nphase = op.phases.GenericPhase(network=self.net)\nphys = op.physics.GenericPhysics(network=self.net)\nwith pytest.raises(Exception):\n    phys.set_phase(phase=phase2)\nphys.set_phase(phase=phase)\nwith pytest.raises(Exception):\n    phys.set_geometry(geometry=geo2)\n"
+}

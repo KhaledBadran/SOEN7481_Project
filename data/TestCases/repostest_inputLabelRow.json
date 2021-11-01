@@ -1,0 +1,9 @@
+{
+    "functionName": "test_inputLabelRow",
+    "className": "TableMakerTests",
+    "fileName": "/glyph_&_Automat/automat_&__test_&_test_visualize.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        The table returned by L{tableMaker} always contains the input\n        symbol label in its first row, and that row contains one cell\n        with a port attribute set to the provided port.\n        \"\"\"\ndef hasPort(element):\n    return not isLeaf(element) and element.attributes.get('port') == self.port\nfor outputLabels in ([], ['an output label']):\n    table = self.tableMaker(self.inputLabel, outputLabels, port=self.port)\n    self.assertGreater(len(table.children), 0)\n    inputLabelRow = table.children[0]\n    portCandidates = findElements(table, hasPort)\n    self.assertEqual(len(portCandidates), 1)\n    self.assertEqual(portCandidates[0].name, 'td')\n    self.assertEqual(findElements(inputLabelRow, isLeaf), [self.inputLabel])\n"
+}

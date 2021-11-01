@@ -1,0 +1,9 @@
+{
+    "functionName": "test_marginal_effects",
+    "className": "MarginalEffectsTest",
+    "fileName": "/facebook_&_Ax/ax_&_utils_&_stats_&_tests_&_test_statstools.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "df = pd.DataFrame({'mean': [1, 2, 3, 4], 'sem': [0.1, 0.1, 0.1, 0.1],\n    'factor_1': ['a', 'a', 'b', 'b'], 'factor_2': ['A', 'B', 'A', 'B']})\nfx = marginal_effects(df)\nself.assertTrue(np.allclose(fx['Beta'].values, [-40, 40, -20, 20], atol=0.001))\nself.assertTrue(np.allclose(fx['SE'].values, [2.83] * 4, atol=0.01))\n"
+}

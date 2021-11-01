@@ -1,0 +1,9 @@
+{
+    "functionName": "test_invalid_points_sampled_input",
+    "className": "TestRestGaussianProcessWithExceptions",
+    "fileName": "/Yelp_&_MOE/moe_&_tests_&_views_&_exceptions_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that duplicate points_sampled (via GP_NEXT_POINTS_EPI_ENDPOINT) generate expected Response with error message.\"\"\"\nendpoint = GP_NEXT_POINTS_EPI_ENDPOINT\ndict_payload = copy.deepcopy(GpNextPointsPrettyView._pretty_default_request)\nfor sample_point in dict_payload['gp_historical_info']['points_sampled']:\n    sample_point['value_var'] = 0.0\ndict_payload['gp_historical_info']['points_sampled'].append(dict_payload[\n    'gp_historical_info']['points_sampled'][0])\nresult = self.testapp.post(endpoint, json.dumps(dict_payload),\n    expect_errors=True)\nrequest_schema = GpNextPointsRequest()\nparams = request_schema.deserialize(dict_payload)\nwith pytest.raises(Exception) as request_exception:\n    _make_gp_from_params(params)\nassert result.body == general_error(request_exception.value, result.request\n    ).body\n"
+}

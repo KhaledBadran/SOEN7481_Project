@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gather",
+    "className": "TestGather",
+    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_onnx_&_test_onnx_ops.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "axis = 0\ninput_x = np.array([[1.0, 1.2], [2.3, 3.4], [4.5, 5.7]], dtype=float)\nindices_val = np.array([[0, 1], [1, 2]], dtype=float)\nexpected_out = np.array([[[1, 1.2], [2.3, 3.4]], [[2.3, 3.4], [4.5, 5.7]]],\n    dtype=float)\ninput_shape = input_x.shape\nindices_shape = indices_val.shape\noutput_shape = [2, 2, 2]\ndata = onnx.helper.make_tensor_value_info('data', onnx.TensorProto.FLOAT,\n    input_shape)\nindices = onnx.helper.make_tensor_value_info('indices', onnx.TensorProto.\n    FLOAT, indices_shape)\nY = onnx.helper.make_tensor_value_info('Y', onnx.TensorProto.FLOAT,\n    output_shape)\ninit_indices = onnx.helper.make_tensor(name='indices', data_type=onnx.\n    TensorProto.FLOAT, dims=indices_shape, vals=indices_val.flatten().tolist())\ngather_node = onnx.helper.make_node(op_type='Gather', inputs=['data',\n    'indices'], outputs=['Y'], axis=axis)\nonnx_graph = onnx.helper.make_graph(nodes=[gather_node], name='test-gather',\n    inputs=[data, indices], outputs=[Y], initializer=[init_indices])\nonnx_model = onnx.helper.make_model(onnx_graph, producer_name='ONNX')\nonnx.checker.check_model(onnx_model)\nloaded_model = load_model_proto(onnx_model)\nloaded_out = loaded_model.forward([input_x, indices_val])\nassert np.allclose(loaded_out, expected_out)\n"
+}

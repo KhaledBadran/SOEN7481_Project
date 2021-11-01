@@ -1,0 +1,9 @@
+{
+    "functionName": "test_safe_select_function_generation_results",
+    "className": "psv_selections_test",
+    "fileName": "/DolphDev_&_PSV/tests_&_test_selections.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.construct()\nself.assertEqual(len(self.csvdoc.safe_select('name')), 7)\nself.assertEqual(len(self.csvdoc.safe_select(lambda x: x.name)), 7)\nself.assertEqual(len(self.csvdoc.safe_select(name='Product 1')), 1)\nself.assertEqual(len(self.csvdoc.safe_select('name', price=10)), 2)\nself.assertEqual(len(self.csvdoc.safe_select(lambda x: x.name, price=10)), 2)\nself.assertEqual(len(self.csvdoc.safe_select('name', price=lambda p: p > 10\n    )), 4)\nself.assertEqual(len(self.csvdoc.safe_select(lambda x: x.name, price=lambda\n    p: p > 10)), 4)\nself.assertEqual(len(self.csvdoc.safe_select('name', price=10, company=\n    'Yahoo', available=1)), 1)\n"
+}

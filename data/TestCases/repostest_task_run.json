@@ -1,0 +1,9 @@
+{
+    "functionName": "test_task_run",
+    "className": "test_Fargate",
+    "fileName": "/pbx-gs_&_OSBot-AWS/tests_&_unit_&_apis_&_test_Fargate.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cluster = 'FargateCluster'\nsubnet_id = ' subnet-49391932'\nsecurity_group_id = 'sg-e6ea548e'\ntask_name = 'create_and_run_task:45'\ntask_arn = 'arn:aws:ecs:eu-west-2:244560807427:task-definition/{0}'.format(\n    task_name)\ntask_run_arn = self.fargate.task_run(cluster, task_arn, subnet_id,\n    security_group_id).get('taskArn')\ntask_details = self.fargate.task_wait_for_completion(cluster, task_run_arn,\n    sleep_for=1, log_status=True)\nDev.pprint(task_details)\n"
+}

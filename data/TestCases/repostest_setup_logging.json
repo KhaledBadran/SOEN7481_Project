@@ -1,0 +1,9 @@
+{
+    "functionName": "test_setup_logging",
+    "className": "TestKmipServer",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_server.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Verify that the server logger is setup correctly.\n        \"\"\"\npath_mock.return_value = False\nisdir_mock.return_value = False\nopen_mock = mock.mock_open()\ntry:\n    import builtins\n    module = 'builtins'\nexcept ImportError:\n    module = '__builtin__'\nwith mock.patch('{0}.open'.format(module), open_mock):\n    s = server.KmipServer(log_path='/test/path/server.log')\npath_mock.assert_called_once_with('/test/path/server.log')\nisdir_mock.assert_called_once_with('/test/path')\nmakedirs_mock.assert_called_once_with('/test/path')\nopen_mock.assert_called_once_with('/test/path/server.log', 'w')\nself.assertTrue(s._logger.addHandler.called)\ns._logger.setLevel.assert_any_call(logging.DEBUG)\nmock.patch('logging.getLogger', side_effect=mock.MagicMock())mock.patch('logging.handlers.RotatingFileHandler')mock.patch('kmip.services.server.server.KmipServer._setup_configuration')mock.patch('os.path.exists')mock.patch('os.path.isdir')mock.patch('os.makedirs')"
+}

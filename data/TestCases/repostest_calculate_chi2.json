@@ -1,0 +1,9 @@
+{
+    "functionName": "test_calculate_chi2",
+    "className": null,
+    "fileName": "/PEtab-dev_&_PEtab/tests_&_test_calculate.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test calculate.calculate_chi2.\"\"\"\nfor i_model, model in enumerate(models):\n    print(f'Model {i_model}')\n    (measurement_df, observable_df, parameter_df, simulation_df,\n        expected_residuals, _, _) = model\n    chi2 = calculate_chi2(measurement_df, simulation_df, observable_df,\n        parameter_df)\n    expected = sum(np.array(list(expected_residuals)) ** 2)\n    assert chi2 == pytest.approx(expected)\n"
+}

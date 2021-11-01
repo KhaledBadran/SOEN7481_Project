@@ -1,0 +1,9 @@
+{
+    "functionName": "test_mixin",
+    "className": "StructTests",
+    "fileName": "/Gilnaa_&_Hydras/tests_&_test_struct.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class Header(Struct):\n    a = u8\n    b = u16\nclass Body(Struct):\n    foo = u8\n    _hdr = Mixin(Header)\n    _hdr2 = Mixin(Header, prefix='h_')\n    bar = u8\nexpected_members = [('foo', u8()), ('a', u8()), ('b', u16()), ('h_a', u8()),\n    ('h_b', u16()), ('bar', u8())]\nfor actual, expected in zip(Body._hydras_members().items(), expected_members):\n    self.assertEqual(actual[0], expected[0])\n    self.assertTrue(isinstance(actual[1], type(expected[1])))\n"
+}

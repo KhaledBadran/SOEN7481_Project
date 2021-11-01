@@ -1,0 +1,9 @@
+{
+    "functionName": "test_nonanal",
+    "className": null,
+    "fileName": "/mesonepigreco_&_CellConstructor/tests_&_TestEffChargeInterp_&_test_nonanal.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "total_path = os.path.dirname(os.path.abspath(__file__))\nos.chdir(total_path)\ndyn = CC.Phonons.Phonons('dyn', 32)\nt2 = CC.ForceTensor.Tensor2(dyn.structure, dyn.structure.generate_supercell\n    (dyn.GetSupercell()), dyn.GetSupercell())\nt2.SetupFromPhonons(dyn)\ntime1 = time.time()\nt2.Center()\ntime2 = time.time()\nprint('Time to the full centerng:', time2 - time1, 's')\nq_small_dir = np.random.normal(size=3)\nq_small_dir /= np.sqrt(q_small_dir.dot(q_small_dir))\ndyn_interp_standard = t2.Interpolate(q_small_dir * 1e-07, asr=False)\ndyn_interp_nonanal = t2.Interpolate(np.zeros(3), asr=False, q_direct=\n    q_small_dir)\ndist = np.max(np.abs(dyn_interp_standard - dyn_interp_nonanal))\nif verbose:\n    m = dyn.structure.get_masses_array()\n    m = np.tile(m, (3, 1)).T.ravel()\n    d_1 = dyn_interp_standard / np.sqrt(np.outer(m, m))\n    d_2 = dyn_interp_nonanal / np.sqrt(np.outer(m, m))\n    w2_1 = np.linalg.eigvalsh(d_1)\n    w2_2 = np.linalg.eigvalsh(d_2)\n    w_1 = np.sqrt(np.abs(w2_1)) * np.sign(w2_1) * CC.Units.RY_TO_CM\n    w_2 = np.sqrt(np.abs(w2_2)) * np.sign(w2_2) * CC.Units.RY_TO_CM\n    dyn.q_tot = [np.zeros(3)]\n    dyn.q_stars = [[np.zeros(3)]]\n    dyn.nqirr = 1\n    dyn.dynmats[0] = dyn_interp_standard\n    dyn.save_qe('d_interp_standard')\n    dyn.dynmats[0] = dyn_interp_nonanal\n    dyn.save_qe('d_interp_nonanal')\n    print('\\n'.join(['w_{:3d} = {:16.8f} | {:16.8f} cm-1'.format(i, w_1[i],\n        w_2[i]) for i in range(len(w_1))]))\n    print('Distance:', dist)\nassert dist < 1e-05, \"\"\"Error, the nonanal function of interpolating effective charges is not working correctly.\n Distance from expected: {}\"\"\".format(\n    dist)\n"
+}

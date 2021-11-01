@@ -1,0 +1,9 @@
+{
+    "functionName": "test_subscriber_aaci_bin",
+    "className": null,
+    "fileName": "/GIC-de_&_PyANCP/tests_&_test_subscriber.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "S1 = Subscriber(aci='0.0.0.0 eth 0', aaci_bin=128)\nlen, tlvs = S1.tlvs\nassert struct.unpack_from('!HHI', tlvs, 20) == (6, 4, 128)\nS2 = Subscriber(aci='0.0.0.0 eth 0', aaci_bin=(128, 7))\nlen, tlvs = S2.tlvs\nassert struct.unpack_from('!HHII', tlvs, 20) == (6, 8, 128, 7)\n"
+}

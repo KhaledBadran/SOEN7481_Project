@@ -1,0 +1,9 @@
+{
+    "functionName": "test_MTGP",
+    "className": "ModelBridgeFactoryTest",
+    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_factory.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Tests MTGP instantiation.\"\"\"\nexp = get_multi_type_experiment(add_trials=True)\nmtgp = get_MTGP(experiment=exp, data=exp.fetch_data())\nself.assertIsInstance(mtgp, TorchModelBridge)\nexp = get_branin_experiment()\nsobol = get_sobol(search_space=exp.search_space)\nself.assertIsInstance(sobol, RandomModelBridge)\nfor _ in range(5):\n    sobol_run = sobol.gen(n=1)\n    t = exp.new_batch_trial().add_generator_run(sobol_run)\n    t.set_status_quo_with_weight(status_quo=t.arms[0], weight=0.5)\n    t.run()\nmtgp = get_MTGP(experiment=exp, data=exp.fetch_data(), trial_index=0)\nself.assertIsInstance(mtgp, TorchModelBridge)\nwith self.assertRaises(ValueError):\n    get_MTGP(experiment=exp, data=exp.fetch_data(), trial_index=9)\nexp = get_branin_experiment()\nsobol = get_sobol(search_space=exp.search_space)\nself.assertIsInstance(sobol, RandomModelBridge)\nsobol_run = sobol.gen(n=1)\nt = exp.new_batch_trial().add_generator_run(sobol_run)\nt.run()\nwith self.assertRaises(ValueError):\n    get_MTGP(experiment=exp, data=exp.fetch_data(), trial_index=0)\n"
+}

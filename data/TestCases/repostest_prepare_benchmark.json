@@ -1,0 +1,9 @@
+{
+    "functionName": "test_prepare_benchmark",
+    "className": null,
+    "fileName": "/bio-phys_&_MDBenchmark/mdbenchmark_&_tests_&_mdengines_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that the preparation functions of all supported MD engines work.\"\"\"\nwith tmpdir.as_cwd():\n    for ext in extensions:\n        filename = 'md.{}'.format(ext)\n        if input_name.startswith('../'):\n            filename = '../md.{}'.format(ext)\n        open(filename, 'a').close()\n    relative_path, filename = os.path.split(input_name)\n    sim = dtr.Treant('./{}'.format(engine))\n    name = engine.prepare_benchmark(name=filename, relative_path=\n        relative_path, sim=sim)\n    assert name == 'md'\n    for ext in extensions:\n        assert os.path.exists('./{}/md.{}'.format(engine, ext))\npytest.mark.parametrize('engine, input_name, extensions', [(gromacs,\n    'md.tpr', ['tpr']), (namd, 'md.namd', ['namd', 'pdb', 'psf']), (gromacs,\n    '../md.tpr', ['tpr']), (namd, '../md.namd', ['namd', 'pdb', 'psf'])])"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_save_default_context",
+    "className": "OWMTest",
+    "fileName": "/openworm_&_PyOpenWorm/tests_&_CommandTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "a = 'http://example.org/mdc'\nself._init_conf({DEFAULT_CONTEXT_KEY: a})\nwith patch('importlib.import_module'):\n    with patch('owmeta.command.Context') as ctxc:\n        self.cut.save('tests.command_test_module')\n        ctxc.assert_called_with(ident=a, conf=ANY)\n        ctxc().save_context.assert_called()\n"
+}

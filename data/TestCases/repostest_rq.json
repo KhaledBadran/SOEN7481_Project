@@ -1,0 +1,9 @@
+{
+    "functionName": "test_rq",
+    "className": null,
+    "fileName": "/ViiSiX_&_FlaskRedislite/test_flask_redislite.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n    - Test if we can enqueue a simple job and get result from it\n    \"\"\"\nrdb = flask_redislite.FlaskRedis(app, rq=True)\nwith app.app_context():\n    rdb.start_worker()\nwith app.app_context():\n    queue = rdb.queue\n    job = queue['default'].enqueue(simple_job, ttl=60, result_ttl=60,\n        job_id='foo4')\n    assert job.result is None\n    time.sleep(1)\n    assert job.result == simple_job()\ntime.sleep(0.5)\nwith app.app_context():\n    queue = rdb.queue\n    assert queue['default'].fetch_job('foo4').result == simple_job()\nrdb.worker_process.terminate()\n"
+}

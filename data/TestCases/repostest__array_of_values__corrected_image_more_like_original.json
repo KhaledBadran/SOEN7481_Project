@@ -1,0 +1,9 @@
+{
+    "functionName": "test__array_of_values__corrected_image_more_like_original",
+    "className": "TestSerialCTI",
+    "fileName": "/Jammy2211_&_PyAutoCTI/test_&_unit_&_data_&_test_add_correct_cti_to_image.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "image_pre_cti = np.array([[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 9.0, \n    5.0, 9.5, 3.2, 9.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, \n    9.0, 5.0, 9.5, 352, 9.4, 0.0], [0.0, 9.0, 5.0, 9.5, 0.0, 9.0, 0.0], [\n    0.0, 9.0, 9.1, 9.3, 9.2, 9.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]])\nim = cti_image.ImageFrame(frame_geometry=ci_frame.FrameGeometry.\n    euclid_bottom_left(), array=image_pre_cti)\nimage_post_cti = im.add_cti_to_image(cti_params=params_serial, cti_settings\n    =arctic_serial)\nimage_difference_1 = image_post_cti - image_pre_cti\nim = cti_image.ImageFrame(frame_geometry=ci_frame.FrameGeometry.\n    euclid_bottom_left(), array=image_post_cti)\nimage_correct_cti = im.correct_cti_from_image(cti_params=params_serial,\n    cti_settings=arctic_serial)\nimage_difference_2 = image_correct_cti - image_pre_cti\nassert (abs(image_difference_2) <= abs(image_difference_1)).all()\n"
+}

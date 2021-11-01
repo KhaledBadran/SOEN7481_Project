@@ -1,0 +1,9 @@
+{
+    "functionName": "test_sample_no_duplicates_more_than_one_loop",
+    "className": "TestBaseTuner",
+    "fileName": "/HDI-Project_&_BTB/tests_&_tuning_&_tuners_&_test_base.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that the method ``_sample`` returns ``np.ndarray`` when not using duplicates and\n        perfroms more than one iteration.\n        \"\"\"\ninstance = MagicMock()\ninstance.tunable = MagicMock(spec_set=Tunable)\ninstance._trials_set = set({(1,), (2,)})\nside_effect = [np.array([[3]]), np.array([[1]]), np.array([[1]]), np.array(\n    [[4]])]\ninstance.tunable.sample.side_effect = side_effect\nresult = BaseTuner._sample(instance, 2, False)\nassert instance.tunable.sample.call_args_list == [call(2), call(2), call(2),\n    call(2)]\nnp.testing.assert_array_equal(result, np.array([[3], [4]]))\n"
+}

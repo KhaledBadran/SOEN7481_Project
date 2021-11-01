@@ -1,0 +1,9 @@
+{
+    "functionName": "test_load_workspace_from_poorly_made_dict",
+    "className": "OpenpnmIOTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_io_&_OpenpnmIOTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ws = op.Workspace()\nws.clear()\npn = op.network.Cubic(shape=[3, 3, 3])\npickle.dump(pn, open('pn.pnm', 'wb'))\nwith pytest.raises(Exception):\n    ws = op.io.OpenpnmIO.load_workspace('pn.pnm')\n"
+}

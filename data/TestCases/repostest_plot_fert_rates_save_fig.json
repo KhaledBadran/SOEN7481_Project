@@ -1,0 +1,9 @@
+{
+    "functionName": "test_plot_fert_rates_save_fig",
+    "className": null,
+    "fileName": "/open-source-economics_&_OG-USA/ogusa_&_tests_&_test_parameter_plots.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "totpers = base_params.S\nmin_yr = 20\nmax_yr = 100\nfert_data = np.array([0.0, 0.0, 0.3, 12.3, 47.1, 80.7, 105.5, 98.0, 49.3, \n    10.4, 0.8, 0.0, 0.0]) / 2000\nage_midp = np.array([9, 10, 12, 16, 18.5, 22, 27, 32, 37, 42, 47, 55, 56])\nfert_func = si.interp1d(age_midp, fert_data, kind='cubic')\nfert_rates = np.random.uniform(size=totpers)\nparameter_plots.plot_fert_rates(fert_func, age_midp, totpers, min_yr,\n    max_yr, fert_data, fert_rates, output_dir=tmpdir)\nimg = mpimg.imread(os.path.join(tmpdir, 'fert_rates.png'))\nassert isinstance(img, np.ndarray)\n"
+}

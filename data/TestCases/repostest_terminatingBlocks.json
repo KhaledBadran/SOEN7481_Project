@@ -1,0 +1,9 @@
+{
+    "functionName": "test_terminatingBlocks",
+    "className": null,
+    "fileName": "/jmriebold_&_BoilerPy3/tests_&_test_filters.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "lb = DefaultLabels.INDICATES_END_OF_TEXT\ns1 = (\n    'Comments can be the first word of article text.  If there are many words in the block, it is not comments'\n    )\ns2 = 'Thanks for your comments - this feedback is now closed'\ndoc = make_doc(['Comments', 'Please have your say', '48 Comments today', s1,\n    s2])\nfiltr = TerminatingBlocksFinder()\nis_changed = filtr.process(doc)\nhas_label = [(lb in block.labels) for block in doc.text_blocks]\nassert has_label == [True, True, True, False, True]\nassert is_changed is True\n"
+}

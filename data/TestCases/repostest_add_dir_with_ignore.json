@@ -1,0 +1,9 @@
+{
+    "functionName": "test_add_dir_with_ignore",
+    "className": "ManagerTestCase",
+    "fileName": "/alice1017_&_JustWatch/tests_&_test_manager.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "testcase = './tests'\ntestext = 'swp'\nwith self.assertRaises(TypeError):\n    self.manager.add_dir(testcase, ignore_ext=testext)\nself.manager.add_dir(testcase, ignore_ext=[testext])\nfiles = os.listdir(testcase)\nadd_dir_result = map(lambda _file: FileItem(os.path.join(testcase, _file)),\n    [_file for _file in files if not _file.endswith(testext)])\nself.assertEqual(self.manager.files_container, add_dir_result)\n"
+}

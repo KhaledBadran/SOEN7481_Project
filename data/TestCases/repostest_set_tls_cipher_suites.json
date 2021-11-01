@@ -1,0 +1,9 @@
+{
+    "functionName": "test_set_tls_cipher_suites",
+    "className": "TestKmipServerConfig",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_config.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the tls_cipher_suites configuration property can be set\n        correctly with a value expected from the config file.\n        \"\"\"\nc = config.KmipServerConfig()\nc._logger = mock.MagicMock()\nc._set_tls_cipher_suites(\n    \"\"\"\n    TLS_RSA_WITH_AES_256_CBC_SHA256\n    TLS_RSA_WITH_AES_128_CBC_SHA256\n\"\"\"\n    )\nself.assertEqual(2, len(c.settings.get('tls_cipher_suites')))\nself.assertIn('TLS_RSA_WITH_AES_256_CBC_SHA256', c.settings.get(\n    'tls_cipher_suites'))\nself.assertIn('TLS_RSA_WITH_AES_128_CBC_SHA256', c.settings.get(\n    'tls_cipher_suites'))\n"
+}

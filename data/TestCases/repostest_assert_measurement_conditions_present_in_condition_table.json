@@ -1,0 +1,9 @@
+{
+    "functionName": "test_assert_measurement_conditions_present_in_condition_table",
+    "className": null,
+    "fileName": "/PEtab-dev_&_PEtab/tests_&_test_lint.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "condition_df = pd.DataFrame(data={CONDITION_ID: ['condition1', 'condition2'\n    ], CONDITION_NAME: ['', 'Condition 2'], 'fixedParameter1': [1.0, 2.0]})\ncondition_df.set_index(CONDITION_ID, inplace=True)\nmeasurement_df = pd.DataFrame(data={OBSERVABLE_ID: ['', ''],\n    SIMULATION_CONDITION_ID: ['condition1', 'condition1'], TIME: [1.0, 2.0],\n    MEASUREMENT: [1.0, 2.0], OBSERVABLE_PARAMETERS: ['', ''],\n    NOISE_PARAMETERS: ['', '']})\nlint.assert_measurement_conditions_present_in_condition_table(measurement_df\n    =measurement_df, condition_df=condition_df)\nmeasurement_df[PREEQUILIBRATION_CONDITION_ID] = ['condition1', 'condition2']\nlint.assert_measurement_conditions_present_in_condition_table(measurement_df\n    =measurement_df, condition_df=condition_df)\nmeasurement_df[PREEQUILIBRATION_CONDITION_ID] = ['missing_condition1',\n    'missing_condition2']\nwith pytest.raises(AssertionError):\n    lint.assert_measurement_conditions_present_in_condition_table(\n        measurement_df=measurement_df, condition_df=condition_df)\n"
+}

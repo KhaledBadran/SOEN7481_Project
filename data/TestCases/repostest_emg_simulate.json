@@ -1,0 +1,9 @@
+{
+    "functionName": "test_emg_simulate",
+    "className": null,
+    "fileName": "/neuropsychology_&_NeuroKit/tests_&_tests_emg.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "emg1 = nk.emg_simulate(duration=20, length=5000, burst_number=1)\nassert len(emg1) == 5000\nemg2 = nk.emg_simulate(duration=20, length=5000, burst_number=15)\nassert scipy.stats.median_absolute_deviation(emg1\n    ) < scipy.stats.median_absolute_deviation(emg2)\nemg3 = nk.emg_simulate(duration=20, length=5000, burst_number=1,\n    burst_duration=2.0)\nassert len(nk.signal_findpeaks(emg3, height_min=1.0)['Peaks']) > len(nk.\n    signal_findpeaks(emg1, height_min=1.0)['Peaks'])\n"
+}

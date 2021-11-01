@@ -1,0 +1,9 @@
+{
+    "functionName": "test_invalid_media_identifier",
+    "className": "TestDeviceCredential",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_credentials.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that a TypeError is raised when an invalid value is used to set\n        the media identifier of a DeviceCredential struct.\n        \"\"\"\nkwargs = {'media_identifier': 0}\nself.assertRaisesRegex(TypeError, 'Media identifier must be a string.',\n    objects.DeviceCredential, **kwargs)\ncredential = objects.DeviceCredential()\nargs = credential, 'media_identifier', 0\nself.assertRaisesRegex(TypeError, 'Media identifier must be a string.',\n    setattr, *args)\n"
+}

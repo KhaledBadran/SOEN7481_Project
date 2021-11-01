@@ -1,0 +1,9 @@
+{
+    "functionName": "test_onlySaveDot",
+    "className": "VisualizeToolTests",
+    "fileName": "/glyph_&_Automat/automat_&__test_&_test_visualize.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Passing an empty string for --image-directory/-i disables\n        rendering images.\n        \"\"\"\nfor arg in ('--image-directory', '-i'):\n    self.digraphRecorder.reset()\n    self.collectedOutput = []\n    self.tool(argv=[self.fakeFQPN, arg, ''])\n    self.assertFalse(any('image' in line for line in self.collectedOutput))\n    self.assertEqual(len(self.digraphRecorder.saveCalls), 1)\n    call, = self.digraphRecorder.saveCalls\n    self.assertEqual('{}.dot'.format(self.fakeFQPN), call['filename'])\n    self.assertFalse(self.digraphRecorder.renderCalls)\n"
+}

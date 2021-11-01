@@ -1,0 +1,9 @@
+{
+    "functionName": "test__image_and_post_cti_different__noise_scaling_alls__likelihood_chi_squared_and_noise_normalization",
+    "className": "TestCIHyperFit",
+    "fileName": "/Jammy2211_&_PyAutoCTI/test_&_unit_&_charge_injection_&_test_ci_fit.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ci_image = 9.0 * np.ones((2, 2))\nci_noise_map = 2.0 * np.ones((2, 2))\nci_mask = np.ma.zeros((2, 2))\nci_pre_cti = 10.0 * np.ones((2, 2))\nci_noise_scalings = [np.array([[0.0, 0.0], [0.0, 0.0]])]\nci_data_hyper_fit = ci_data.MaskedCIHyperData(ci_frame=MockCIFrame(value=\n    10.0), ci_pattern=MockPattern(), image=ci_image, noise_map=ci_noise_map,\n    ci_pre_cti=ci_pre_cti, mask=ci_mask, noise_scaling_maps=ci_noise_scalings)\nhyper_noise_scalar = ci_hyper.CIHyperNoiseScalar(scale_factor=1.0)\nfit = ci_fit.CIHyperFit(masked_hyper_ci_data=ci_data_hyper_fit, cti_params=\n    MockParams(), cti_settings=MockSettings(), hyper_noise_scalars=[\n    hyper_noise_scalar])\nchi_squared = 4.0 * (1.0 / 2.0) ** 2.0\nnoise_normalization = 4.0 * np.log(2 * np.pi * 4.0)\nassert fit.likelihood == pytest.approx(-0.5 * (chi_squared +\n    noise_normalization), 0.0001)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "multistarted_optimizer_test",
+    "className": "TestOptimizer",
+    "fileName": "/Yelp_&_MOE/moe_&_tests_&_optimal_learning_&_python_&_python_version_&_optimization_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Check that the multistarted optimizer can find the optimum in a 'very' large domain.\"\"\"\ntolerance = 2e-10\nnum_points = 10\nmultistart_optimizer = MultistartOptimizer(optimizer, num_points)\noutput, _ = multistart_optimizer.optimize()\nself.assert_vector_within_relative(output, self.polynomial.optimum_point,\n    tolerance)\nvalue = self.polynomial.compute_objective_function()\nself.assert_scalar_within_relative(value, self.polynomial.optimum_value,\n    tolerance)\ngradient = self.polynomial.compute_grad_objective_function()\nself.assert_vector_within_relative(gradient, numpy.zeros(self.polynomial.\n    dim), tolerance)\n"
+}

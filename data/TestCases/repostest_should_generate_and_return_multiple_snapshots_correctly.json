@@ -1,0 +1,9 @@
+{
+    "functionName": "test_should_generate_and_return_multiple_snapshots_correctly",
+    "className": null,
+    "fileName": "/EliCDavis_&_AssociationEngine/AssociationEngine_&_Tests_&_UnitTests_&_Snapper_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "snapper = Snapper()\nsensor_a = Sensor()\nsnapper.add_sensor(sensor_a)\nsensor_a.publish(1, 1)\nsensor_a.publish(5, 6)\nsensor_b = Sensor()\nsnapper.add_sensor(sensor_b)\nsensor_b.publish(3, 7)\nsensor_b.publish(9, 8)\nsnapshot1 = snapper.get_snapshot()\nassert round(snapshot1[sensor_a.uuid] - 3, 5) == 0\nassert round(snapshot1[sensor_b.uuid] - 6, 5) == 0\nsensor_a.publish(5, 11)\nsensor_a.publish(10, 12)\nsensor_a.publish(15, 13)\nsensor_b.publish(6, 13)\nsensor_b.publish(12, 14)\nsensor_b.publish(2, 15)\nsensor_b.publish(30, 16)\nsnapshot2 = snapper.get_snapshot()\nassert round(snapshot2[sensor_a.uuid] - 10, 5) == 0\nassert round(snapshot2[sensor_b.uuid] - 12.5, 5) == 0\n"
+}

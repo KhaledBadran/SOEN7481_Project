@@ -1,0 +1,9 @@
+{
+    "functionName": "test_symbolic_source_dir",
+    "className": "TestOnSymLinks",
+    "fileName": "/kenfar_&_DataGristle/scripts_&_tests_&_test_gristle_dir_merger_cmd.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.fake_source_dir = os.path.join(self.real_dir, 'myfakedir')\nos.symlink(self.source_dir, self.fake_source_dir)\ncreate_test_file(self.source_subdir, 'foo.csv', final_contents='')\ncreate_test_file(self.dest_subdir, 'foo.csv', final_contents='')\nself.cmd = get_cmd(self.fake_source_dir, self.dest_dir, match_on=\n    'name_and_md5', on_match='keep_both', on_partial_match='keep_both')\nrunner = envoy.run(self.cmd)\nself.assert_results(runner)\n"
+}

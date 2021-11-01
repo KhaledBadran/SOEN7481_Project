@@ -1,0 +1,9 @@
+{
+    "functionName": "load_workspace",
+    "className": "OpenpnmIO",
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_io_&_OpenpnmIO.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        Load a saved Workspace into the current one\n\n        Parameters\n        ----------\n        filename : string or path object\n            The name of the file to load\n        overwrite : boolean\n            A flag to indicate if the current Workspace should be\n            overwritten when loading the new one.  The default is ``False``,\n            meaning the loaded file will be added to the existing data.  Note\n            that in this case Project names may clash, in which case the\n            newly loaded Projects are given new names.\n\n        Returns\n        -------\n        workspace : OpenPNM Workspace Object\n            A handle to the Workspace, with the newly loaded Projects added\n        \"\"\"\nfname = cls._parse_filename(filename=filename, ext='pnm')\ntemp = {}\nif overwrite:\n    ws.clear()\nwith open(fname, 'rb') as f:\n    d = pickle.load(f)\n    if isinstance(d, dict):\n        for name in d.keys():\n            if isinstance(d[name], list):\n                temp[name] = d[name]\n            else:\n                raise Exception('File does not contain a valid ' +\n                    'OpenPNM Workspace')\nconflicts = set(temp.keys()).intersection(set(ws.keys()))\nfor name in list(temp.keys()):\n    if name in conflicts:\n        new_name = ws._gen_name()\n        logger.warning('A project named ' + name + ' already exists,' +\n            ' renaming to ' + new_name)\n        ws[new_name] = temp[name]\n    else:\n        ws[name] = temp[name]\nreturn ws\nclassmethod"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_lr_disturbed_sample_weight_half_zero_half_one",
+    "className": "CrossEntropyMNLMultinomialTests",
+    "fileName": "/Mogeng_&_IOHMM/tests_&_test_CrossentropyMNL.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.model = CrossEntropyMNL(solver='lbfgs', fit_intercept=True, est_stderr\n    =True, reg_method='l2', alpha=0, l1_ratio=0, tol=0.0001, max_iter=100,\n    coef=None, stderr=None, n_classes=None)\nlen_half = 500\nself.model.fit(self.data_anes96.exog, self.y_disturbed, sample_weight=np.\n    array([1] * len_half + [0] * (self.data_anes96.exog.shape[0] - len_half)))\nself.model_half = CrossEntropyMNL(solver='lbfgs', fit_intercept=True,\n    est_stderr=True, reg_method='l2', alpha=0, l1_ratio=0, tol=0.0001,\n    max_iter=100, coef=None, stderr=None, n_classes=None)\nself.model_half.fit(self.data_anes96.exog[:len_half], self.y_disturbed[:\n    len_half])\nnp.testing.assert_array_almost_equal(self.model.coef, self.model_half.coef,\n    decimal=3)\n"
+}

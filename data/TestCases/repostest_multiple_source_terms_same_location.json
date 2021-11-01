@@ -1,0 +1,9 @@
+{
+    "functionName": "test_multiple_source_terms_same_location",
+    "className": "ReactiveTransportTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_ReactiveTransportTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.alg.reset(bcs=True, source_terms=True)\nstd_kinetics = op.models.physics.generic_source_term.standard_kinetics\nself.phys.add_model(propname='pore.another_reaction', model=std_kinetics,\n    prefactor='pore.A', exponent='pore.k', X='pore.concentration',\n    regen_mode='deferred')\nself.alg.set_source(pores=self.net.pores('left'), propname='pore.reaction')\nself.alg.set_source(pores=self.net.pores('left'), propname=\n    'pore.another_reaction')\nself.alg.set_value_BC(pores=self.net.pores('right'), values=1.0)\nself.alg.run()\ncavg = self.alg['pore.concentration'].mean()\nassert_allclose(cavg, 0.666667, rtol=1e-05)\n"
+}

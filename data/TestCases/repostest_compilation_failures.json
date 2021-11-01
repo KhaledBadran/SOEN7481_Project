@@ -1,0 +1,9 @@
+{
+    "functionName": "test_compilation_failures",
+    "className": null,
+    "fileName": "/Pebaz_&_Nimporter/tests_&_test_distribution.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Make sure that all expected errors are thrown.\"\"\"\ntry:\n    NimCompiler.compile_nim_extension(Path('bar/baz'), None, library=False)\n    assert False, 'Should throw exception.'\nexcept NimporterException:\n    \"\"\"Expected result\"\"\"\ntry:\n    NimCompiler.compile_nim_extension(Path('tests/lib3'), Path('tests'),\n        library=True)\n    assert False, 'Should throw exception.'\nexcept NimporterException:\n    \"\"\"Expected result\"\"\"\ntry:\n    NimCompiler.compile_nim_extension(Path('tests/lib4'), Path('tests'),\n        library=True)\n    assert False, 'Should throw exception.'\nexcept NimInvokeException:\n    \"\"\"Expected result\"\"\"\ntry:\n    NimCompiler.compile_nim_extension(Path('tests/pkg1/error.nim'), Path(\n        'tests'), library=False)\n    assert False, 'Should throw exception.'\nexcept NimCompileException:\n    \"\"\"Expected result\"\"\"\n"
+}

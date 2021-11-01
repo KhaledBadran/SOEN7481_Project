@@ -1,0 +1,9 @@
+{
+    "functionName": "test_nn_chunking",
+    "className": null,
+    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_tests_&_test_neighbors.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "shape = 1000, 10\nX = 2 * np.ones(shape)\ndef func(X):\n    assert X.shape[0] > 0\n    return X ** 2, X - 1\nd, idx = _chunk_kneighbors(func, X, batch_size=batch_size)\nassert_allclose(d, 4 * np.ones(shape))\nassert_allclose(idx, 1 * np.ones(shape))\npytest.mark.parametrize('batch_size', [1, 101, 100])"
+}

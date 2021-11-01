@@ -1,0 +1,9 @@
+{
+    "functionName": "test_glove_common_download",
+    "className": "TestWordVectors",
+    "fileName": "/apmoore1_&_Bella/tests_&_test_word_vectors.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Tests that the Glove Common Crawl 840 and 42 Billion token vectors are\n        downloaded correctly\n        \"\"\"\nfor version in [42, 840]:\n    GloveCommonCrawl(version=version, skip_conf=True)\n    current_dir = os.path.abspath(os.path.dirname(__file__))\n    glove_common_folder = 'glove_common_crawl_{}b'.format(version)\n    glove_common_folder = os.path.join(current_dir, os.pardir, 'data',\n        'word_vectors', glove_common_folder)\n    self.assertEqual(True, os.path.isdir(glove_common_folder), msg=\n        'Glove Common Crawl vector directory should be here {}'.format(\n        glove_common_folder))\n    glove_common_file_name = 'glove.{}B.300d.binary'.format(version)\n    glove_common_file_path = os.path.join(glove_common_folder,\n        glove_common_file_name)\n    self.assertEqual(True, os.path.isfile(glove_common_file_path), msg=\n        'Glove common vector file {} should be here {}'.format(\n        glove_common_file_name, glove_common_file_path))\npytest.mark.skip(reason='Takes a long time to test only add on large tests')"
+}

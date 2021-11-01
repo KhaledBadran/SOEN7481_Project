@@ -1,0 +1,9 @@
+{
+    "functionName": "readScanData",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Geometry_&_Instrument.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "detlist = readDetSequence()[:detectors]\ndata = np.zeros((Numpoints, detectors, pixels), dtype='int32')\na3 = []\na4 = []\nei = []\nfor n in range(Numpoints):\n    frame, a3n, a4n, ein = readScanPointData(dir, detlist, n, factor=factor,\n        pixels=pixels, detectors=detectors)\n    a3.append(a3n)\n    a4.append(a4n)\n    ei.append(ein)\n    data[n] = frame\nreturn data, a3, a4, ei\n"
+}

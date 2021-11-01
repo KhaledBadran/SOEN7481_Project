@@ -1,0 +1,9 @@
+{
+    "functionName": "cutObject",
+    "className": null,
+    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&__tools.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "import MJOLNIR.Statistics.CutObject\n@functools.wraps(func)\ndef newFunction(*args, **kwargs):\n    if 'internal' in kwargs:\n        if kwargs['internal'] is True:\n            del kwargs['internal']\n            return func(*args, **kwargs)\n    fittingKwargs = ['fitFunction', 'p0', 'costFunction', 'lock']\n    temp = {}\n    for fitKwarg in fittingKwargs:\n        if fitKwarg in kwargs:\n            temp[fitKwarg] = kwargs[fitKwarg]\n            del kwargs[fitKwarg]\n        else:\n            temp[fitKwarg] = None\n    ds = args[0]\n    if len(args) > 1:\n        otherArgs = args[1:]\n    else:\n        otherArgs = None\n    co = MJOLNIR.Statistics.CutObject.CutObject(*func(*args, **kwargs),\n        dataSet=ds, cutFunction=func, kwargs=kwargs, args=otherArgs)\n    for fitKwarg in fittingKwargs:\n        setattr(co, fitKwarg, temp[fitKwarg])\n    return co\nreturn newFunction\n"
+}

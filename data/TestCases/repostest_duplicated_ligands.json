@@ -1,0 +1,9 @@
+{
+    "functionName": "test_duplicated_ligands",
+    "className": "LigandSearching",
+    "fileName": "/jcumby_&_PIEFACE/pieface_&_tests_&_test_readcoords.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\" Check that an atom can be found as a ligand in more than one adjacent cell \"\"\"\nself.atomcoords = {'Mn1': np.array([0.0, 0.0, 0.0]), 'O1': np.array([0.5, \n    0.5, 0.5])}\nself.orthom = np.array([[4.0, 0.0, 0.0], [0.0, 4.0, 0.0], [0.0, 0.0, 4.0]])\nself.atomtypes = {'Mn1': 'Mn', 'O1': 'O'}\ncorrectligands = {'O1': np.array([0.5, 0.5, 0.5]), 'O1a': np.array([-0.5, \n    0.5, 0.5]), 'O1b': np.array([0.5, -0.5, 0.5]), 'O1c': np.array([0.5, \n    0.5, -0.5]), 'O1d': np.array([-0.5, -0.5, 0.5]), 'O1e': np.array([-0.5,\n    0.5, -0.5]), 'O1f': np.array([0.5, -0.5, -0.5]), 'O1g': np.array([-0.5,\n    -0.5, -0.5])}\ncorrecttypes = {'Mn1': 'Mn', 'O1': 'O', 'O1a': 'O', 'O1b': 'O', 'O1c': 'O',\n    'O1d': 'O', 'O1e': 'O', 'O1f': 'O', 'O1g': 'O'}\nself.ligands, self.ligtypes = readcoords.findligands('Mn1', self.atomcoords,\n    self.orthom, radius=3.5, types=['O'], names=[], atomtypes=self.atomtypes)\nself.assertItemsEqual(self.ligands.keys(), correctligands.keys())\nfor k in self.ligands.keys():\n    np.testing.assert_array_almost_equal(self.ligands[k], correctligands[k])\nself.assertDictEqual(self.ligtypes, correcttypes)\n"
+}

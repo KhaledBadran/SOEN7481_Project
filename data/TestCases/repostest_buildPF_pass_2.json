@@ -1,0 +1,9 @@
+{
+    "functionName": "test_buildPF_pass_2",
+    "className": null,
+    "fileName": "/fmilthaler_&_FinQuant/tests_&_test_portfolio.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "d = d_pass[2]\npf = build_portfolio(**d)\nassert isinstance(pf, Portfolio)\nassert isinstance(pf.get_stock(names[0]), Stock)\nassert isinstance(pf.data, pd.DataFrame)\nassert isinstance(pf.portfolio, pd.DataFrame)\nassert len(pf.stocks) == len(pf.data.columns)\nassert pf.data.columns.tolist() == names\nassert pf.data.index.name == 'Date'\nassert (pf.portfolio == df_pf2).all().all()\nassert (pf.comp_weights() - weights_no_df_pf <= strong_abse).all()\npf.properties()\n"
+}

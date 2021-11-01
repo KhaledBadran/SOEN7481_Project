@@ -1,0 +1,9 @@
+{
+    "functionName": "test__include_cosmics__is_added_to_image_and_trailed",
+    "className": "TestCISimulate",
+    "fileName": "/Jammy2211_&_PyAutoCTI/test_&_unit_&_charge_injection_&_test_ci_data.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "pattern = ci_pattern.CIPatternUniform(normalization=10.0, regions=[(0, 1, 0,\n    5)])\nci_pre_cti = pattern.simulate_ci_pre_cti(shape=(5, 5))\ncosmic_ray_image = np.zeros((5, 5))\ncosmic_ray_image[2, 2] = 100.0\nci_data_simulate = ci_data.simulate(ci_pre_cti=ci_pre_cti, frame_geometry=\n    ci_frame.FrameGeometry.euclid_bottom_left(), ci_pattern=pattern,\n    cti_settings=arctic_parallel, cti_params=params_parallel,\n    cosmic_ray_image=cosmic_ray_image)\nassert ci_data_simulate.image[(0), 0:5] == pytest.approx(np.array([10.0, \n    10.0, 10.0, 10.0, 10.0]), 0.01)\nassert 0.0 < ci_data_simulate.image[1, 1] < 100.0\nassert ci_data_simulate.image[2, 2] > 98.0\nassert (ci_data_simulate.image[(1), 1:4] > 0.0).all()\nassert (ci_data_simulate.cosmic_ray_image == np.array([[0.0, 0.0, 0.0, 0.0,\n    0.0], [0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 100.0, 0.0, 0.0], [0.0, 0.0,\n    0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0]])).all()\n"
+}

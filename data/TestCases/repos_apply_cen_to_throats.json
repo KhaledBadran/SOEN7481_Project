@@ -1,0 +1,9 @@
+{
+    "functionName": "_apply_cen_to_throats",
+    "className": "MixedInvasionPercolationCoop",
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_algorithms_&_MixedInvasionPercolationCoop.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"\n        Take the pore center and throat center and work out which way\n        the throat normal is pointing relative to the vector between centers.\n        Offset the meniscus center along the throat vector in the correct\n        direction\n        \"\"\"\nv = p_cen - t_cen\nsign = np.sign(np.sum(v * t_norm, axis=1))\nc3 = np.vstack((men_cen * sign, men_cen * sign, men_cen * sign)).T\ncoords = t_cen + c3 * t_norm\nreturn coords\n"
+}

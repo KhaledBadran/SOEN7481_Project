@@ -1,0 +1,9 @@
+{
+    "functionName": "test_trio_sockets_msg_raw",
+    "className": "TestSockets",
+    "fileName": "/PRIArobotics_&_HedgehogProtocol/tests_&_test_protocol.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "async with trio_asyncio.open_loop():\n    endpoint = 'inproc://test'\n    router = zmq_trio.DealerRouterSocket(zmq_trio_ctx, zmq.ROUTER, side=\n        ServerSide)\n    req = zmq_trio.ReqSocket(zmq_trio_ctx, zmq.REQ, side=ClientSide)\n    with router, req:\n        router.bind(endpoint)\n        req.connect(endpoint)\n        old = b'as'\n        await req.send_msg_raw(old)\n        header, new = await router.recv_msg_raw()\n        assert new == old\n        old = b'df'\n        await router.send_msg_raw(header, old)\n        new = await req.recv_msg_raw()\n        assert new == old\npytest.mark.trio"
+}

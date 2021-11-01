@@ -1,0 +1,9 @@
+{
+    "functionName": "fake_get_response",
+    "className": null,
+    "fileName": "/halcy_&_Mastodon.py/tests_&_test_streaming.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "global close_connections\nclose_connections = False\nif args[0]._vcr_request.path.startswith('/api/v1/streaming/'):\n    real_connections.append(args[0].real_connection)\n    real_connection_real_get_response = args[0].real_connection.getresponse\n\n    def fakeRealConnectionGetresponse(*args, **kwargs):\n        response = real_connection_real_get_response(*args, **kwargs)\n        real_body = b''\n        try:\n            while close_connections == False:\n                if len(select.select([response], [], [], 0.01)[0]) > 0:\n                    chunk = response.read(1)\n                    real_body += chunk\n        except AttributeError:\n            pass\n        print(real_body)\n        response.read = lambda : real_body\n        return response\n    args[0].real_connection.getresponse = fakeRealConnectionGetresponse\nreturn real_get_response(*args, **kwargs)\n"
+}

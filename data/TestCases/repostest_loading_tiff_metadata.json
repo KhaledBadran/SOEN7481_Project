@@ -1,0 +1,9 @@
+{
+    "functionName": "test_loading_tiff_metadata",
+    "className": "TestLoading",
+    "fileName": "/ornlneutronimaging_&_NeuNorm/tests_&_NeuNorm_&_loading_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"assert metadata of sample are correctly loaded\"\"\"\nsample_tif_file = self.data_path + '/tif/sample/image001.tif'\no_norm = Normalization()\no_norm.load(file=sample_tif_file, auto_gamma_filter=False)\nmetadata = o_norm.data['sample']['metadata']\nmetadata_1_expected = 'this is value a'\nmetadata_1_returned = metadata[0][1]\nif isinstance(metadata_1_returned, tuple):\n    metadata_1_returned = metadata_1_returned[0]\nself.assertEqual(metadata_1_expected, metadata_1_returned)\n"
+}

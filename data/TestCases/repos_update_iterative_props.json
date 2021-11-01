@@ -1,0 +1,9 @@
+{
+    "functionName": "_update_iterative_props",
+    "className": "ReactiveTransport",
+    "fileName": "/pmeal_&_OpenPNM/openpnm_&_algorithms_&_ReactiveTransport.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "\"\"\"r\n        Update physics using the current value of ``quantity``\n\n        Notes\n        -----\n        The algorithm directly writes the value of 'quantity' into the phase.\n        This method was implemented relaxing one of the OpenPNM rules of\n        algorithms not being able to write into phases.\n        \"\"\"\nphase = self.project.phases()[self.settings['phase']]\nphysics = self.project.find_physics(phase=phase)\ngeometries = self.project.geometries().values()\nphase.update(self.results())\niterative_props = self._get_iterative_props()\nphase.regenerate_models(propnames=iterative_props)\nfor geometry in geometries:\n    geometry.regenerate_models(iterative_props)\nfor phys in physics:\n    phys.regenerate_models(iterative_props)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_oversampling_method_binary",
+    "className": null,
+    "fileName": "/tvdboom_&_ATOM/tests_&_test_data_cleaning.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Assert that the oversampling method works for binary tasks.\"\"\"\nstrats = [1.0, 0.9, 'minority', 'not majority', 'all']\nfor strat in strats:\n    X, y = Balancer(oversample=strat).transform(X_bin, y_bin)\n    assert (y == 0).sum() != (y_bin == 0).sum()\n"
+}

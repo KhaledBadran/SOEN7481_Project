@@ -1,0 +1,9 @@
+{
+    "functionName": "test_channel_data",
+    "className": null,
+    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_yokogawa_&_test_yokogawa_6370.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "values_packed = b''.join(struct.pack('<d', value) for value in values)\nvalues_len = str(len(values_packed)).encode()\nvalues_len_of_len = str(len(values_len)).encode()\nwith expected_protocol(ik.yokogawa.Yokogawa6370, [':FORMat:DATA REAL,64',\n    ':TRAC:Y? {}'.format(channel.value)], [b'#' + values_len_of_len +\n    values_len + values_packed]) as inst:\n    np.testing.assert_array_equal(inst.channel[channel].data(), np.array(\n        values, dtype='<d'))\ngiven(values=st.lists(st.decimals(allow_infinity=False, allow_nan=False),\n    min_size=1), channel=st.sampled_from(ik.yokogawa.Yokogawa6370.Traces))"
+}

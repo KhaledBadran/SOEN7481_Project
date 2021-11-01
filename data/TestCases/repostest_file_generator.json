@@ -1,0 +1,9 @@
+{
+    "functionName": "test_file_generator",
+    "className": "TestGenerator",
+    "fileName": "/BciPy_&_BciPy/bcipy_&_acquisition_&_tests_&_datastream_&_test_generator.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Should stream data from a file.\"\"\"\nrow_count = 100\nheader = ['col1,col2,col3']\ndata = list(mock_data(row_count, len(header)))\nrows = map(lambda x: ','.join(map(str, x)), data)\ntest_data = '\\n'.join(header + rows)\nwith patch('bcipy.acquisition.datastream.generator.open', mock_open(\n    read_data=test_data), create=True):\n    gen = file_data(filename='foo', header_row=1)\n    generated_data = [next(gen) for _ in range(row_count)]\n    for i, row in enumerate(generated_data):\n        self.assertEqual(row, data[i])\n"
+}

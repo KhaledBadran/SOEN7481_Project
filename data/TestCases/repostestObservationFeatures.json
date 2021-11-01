@@ -1,0 +1,9 @@
+{
+    "functionName": "testObservationFeatures",
+    "className": "ObservationsTest",
+    "fileName": "/facebook_&_Ax/ax_&_core_&_tests_&_test_observation.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "t = np.datetime64('now')\nattrs = {'parameters': {'x': 0, 'y': 'a'}, 'trial_index': 2, 'start_time':\n    t, 'end_time': t, 'random_split': 1}\nobsf = ObservationFeatures(**attrs)\nfor k, v in attrs.items():\n    self.assertEqual(getattr(obsf, k), v)\nprintstr = \"ObservationFeatures(parameters={'x': 0, 'y': 'a'}, \"\nprintstr += 'trial_index=2, '\nprintstr += 'start_time={t}, end_time={t}, '.format(t=t)\nprintstr += 'random_split=1)'\nself.assertEqual(repr(obsf), printstr)\nobsf2 = ObservationFeatures(**attrs)\nself.assertEqual(hash(obsf), hash(obsf2))\na = {obsf, obsf2}\nself.assertEqual(len(a), 1)\nself.assertEqual(obsf, obsf2)\nattrs.pop('trial_index')\nobsf3 = ObservationFeatures(**attrs)\nself.assertNotEqual(obsf, obsf3)\nself.assertFalse(obsf == 1)\n"
+}

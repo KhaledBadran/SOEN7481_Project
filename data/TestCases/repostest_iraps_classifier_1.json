@@ -1,0 +1,9 @@
+{
+    "functionName": "test_iraps_classifier_1",
+    "className": null,
+    "fileName": "/goeckslab_&_Galaxy-ML/galaxy_ml_&_tests_&_test_binarize_target.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cv = OrderedKFold(10)\nscoring = dict(AUC=binarize_auc_scorer, AP=binarize_average_precision_scorer)\niraps_core = IRAPSCore(n_iter=100, n_jobs=2, random_state=10, verbose=10,\n    parallel_backend='threading')\niraps = IRAPSClassifier(iraps_core, p_thres=0.01, occurrence=0.7)\nstart_time = time.time()\nresult_clf = cross_validate(iraps, X, y, cv=cv, scoring=scoring, verbose=10,\n    n_jobs=2)\nstop_time = time.time()\nprint('Time: %f ' % (stop_time - start_time))\nap_mean = result_clf['test_AP'].mean()\nassert round(ap_mean, 4) == 0.2879, ap_mean\nroc_mean = result_clf['test_AUC'].mean()\nassert round(roc_mean, 4) == 0.7038, roc_mean\n"
+}

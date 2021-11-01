@@ -1,0 +1,9 @@
+{
+    "functionName": "test_complexity_vs_Python",
+    "className": null,
+    "fileName": "/neuropsychology_&_NeuroKit/tests_&_tests_complexity.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "signal = np.cos(np.linspace(start=0, stop=30, num=100))\nshannon = nk.entropy_shannon(signal)\nassert np.allclose(shannon - pyentrp.shannon_entropy(signal), 0)\nassert np.allclose(nk.entropy_approximate(signal), 0.17364897858477146)\nassert np.allclose(nk.entropy_approximate(signal, dimension=2, r=0.2 * np.\n    std(signal, ddof=1)) - entropy_app_entropy(signal, 2), 0)\nassert nk.entropy_approximate(signal, dimension=2, r=0.2 * np.std(signal,\n    ddof=1)) != pyeeg_ap_entropy(signal, 2, 0.2 * np.std(signal, ddof=1))\nassert np.allclose(nk.entropy_sample(signal, dimension=2, r=0.2 * np.std(\n    signal, ddof=1)) - entropy_sample_entropy(signal, 2), 0)\nassert np.allclose(nk.entropy_sample(signal, dimension=2, r=0.2) - nolds.\n    sampen(signal, 2, 0.2), 0)\nassert np.allclose(nk.entropy_sample(signal, dimension=2, r=0.2) -\n    entro_py_sampen(signal, 2, 0.2, scale=False), 0)\nassert np.allclose(nk.entropy_sample(signal, dimension=2, r=0.2) -\n    pyeeg_samp_entropy(signal, 2, 0.2), 0)\nassert nk.entropy_sample(signal, dimension=2, r=0.2) != pyentrp.sample_entropy(\n    signal, 2, 0.2)[1]\nassert nk.entropy_sample(signal, dimension=2, r=0.2 * np.sqrt(np.var(signal))\n    ) != MultiscaleEntropy_sample_entropy(signal, 2, 0.2)[0.2][2]\nassert np.allclose(nk.entropy_fuzzy(signal, dimension=2, r=0.2, delay=1) -\n    entro_py_fuzzyen(signal, 2, 0.2, 1, scale=False), 0)\nassert nk.fractal_dfa(signal, windows=np.array([4, 8, 12, 20])) != nolds.dfa(\n    signal, nvals=[4, 8, 12, 20], fit_exp='poly')\n"
+}

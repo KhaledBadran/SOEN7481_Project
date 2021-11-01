@@ -1,0 +1,9 @@
+{
+    "functionName": "test_execution_simple",
+    "className": null,
+    "fileName": "/poletaevvlad_&_CubeLang/test_&_execution_&_test_execution.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "code = \"\"\"\n        let x: int = -15\n        let y: int = x * abs(x + a)\n        print(x * y)\n    \"\"\"\nstack = Stack()\nstack.add_global('a', Integer)\nstack.add_global('abs', Function(([Integer], Integer)))\nstack.add_global('print', Function(([Integer], Void)))\nexpressions = parser.parse(code, stack)\nglobals = {'a': 10, 'abs': abs, 'print': MagicMock()}\ncontext = ExecutionContext(globals)\ncontext.compile(expressions)\ncontext.execute(MockTracebackWriter())\nassert tuple(globals['print'].call_args[0]) == (1125,)\n"
+}

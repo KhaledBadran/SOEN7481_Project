@@ -1,0 +1,9 @@
+{
+    "functionName": "test_identity_create_delete",
+    "className": "TestSqlIdentityStorage",
+    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_identity_methods.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "identityName = Name('/TestIdentityStorage/Identity').appendVersion(int(time\n    .time()))\ncertificateName = self.keyChain.createIdentityAndCertificate(identityName)\nkeyName = IdentityCertificate.certificateNameToPublicKeyName(certificateName)\nself.assertTrue(self.identityStorage.doesIdentityExist(identityName),\n    'Identity was not added to IdentityStorage')\nself.assertIsNotNone(keyName, 'New identity has no key')\nself.assertTrue(self.identityStorage.doesKeyExist(keyName),\n    'Key was not added to IdentityStorage')\nself.assertIsNotNone(certificateName,\n    'Certificate was not added to IdentityStorage')\nself.keyChain.deleteIdentity(identityName)\nself.assertFalse(self.identityStorage.doesIdentityExist(identityName),\n    'Identity still in IdentityStorage after identity was deleted')\nself.assertFalse(self.identityStorage.doesKeyExist(keyName),\n    'Key still in IdentityStorage after identity was deleted')\nself.assertFalse(self.identityStorage.doesCertificateExist(certificateName),\n    'Certificate still in IdentityStorage after identity was deleted')\nwith self.assertRaises(SecurityException):\n    self.identityManager.getDefaultCertificateNameForIdentity(identityName)\n"
+}

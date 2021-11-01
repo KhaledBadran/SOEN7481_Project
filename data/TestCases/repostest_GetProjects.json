@@ -1,0 +1,9 @@
+{
+    "functionName": "test_GetProjects",
+    "className": null,
+    "fileName": "/incf-nidash_&_PyNIDM/nidm_&_experiment_&_tests_&_test_query.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "kwargs = {Constants.NIDM_PROJECT_NAME: 'FBIRN_PhaseII', Constants.\n    NIDM_PROJECT_IDENTIFIER: 9610, Constants.NIDM_PROJECT_DESCRIPTION:\n    'Test investigation'}\nproject = Project(uuid='_123456', attributes=kwargs)\nwith open('test_gp.ttl', 'w') as f:\n    f.write(project.serializeTurtle())\nproject_list = Query.GetProjectsUUID(['test_gp.ttl'])\nremove('test_gp.ttl')\nassert URIRef(Constants.NIIRI + '_123456') in project_list\n"
+}

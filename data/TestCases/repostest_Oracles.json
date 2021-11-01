@@ -1,0 +1,9 @@
+{
+    "functionName": "test_Oracles",
+    "className": null,
+    "fileName": "/NUAA-AL_&_ALiPy/test_&_test_oracle.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "multi_oracles.add_oracle('oracle1', oracle)\nmulti_oracles.add_oracle('oracle2', oracle2)\nresult = multi_oracles.query_from([1], oracle_name='oracle1')\nmulti_oracles.query_from_s([1])\nmulti_oracles.query_from_s([1, 2], oracles_name=['oracle2', 'oracle1'])\nprint(multi_oracles.full_history())\nprint(multi_oracles.cost_inall)\n\"\"\"\n    +---------+-----------------+-----------------+--------------------+--------+\n    | oracles |        0        |        1        |         2          | in all |\n    +---------+-----------------+-----------------+--------------------+--------+\n    | oracle1 | query_index:[1] | query_index:[1] | query_index:[1, 2] |   3    |\n    |         |   response:[0]  |   response:[0]  |  response:[0, 0]   |        |\n    |         |     cost:[1]    |     cost:[1]    |    cost:[1, 1]     |        |\n    | oracle2 |        \\\\        | query_index:[1] | query_index:[1, 2] |   2    |\n    |         |                 |   response:[1]  |  response:[1, 1]   |        |\n    |         |                 |     cost:[1]    |    cost:[1, 1]     |        |\n    +---------+-----------------+-----------------+--------------------+--------+\n    7\n    \"\"\"\n"
+}

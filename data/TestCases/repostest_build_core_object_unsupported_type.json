@@ -1,0 +1,9 @@
+{
+    "functionName": "test_build_core_object_unsupported_type",
+    "className": "TestKmipEngine",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that an InvalidField error is generated when building\n        kmip.core objects that are unsupported.\n        \"\"\"\ne = engine.KmipEngine()\ne._logger = mock.MagicMock()\nargs = None,\nregex = 'Cannot build an unsupported object type.'\nsix.assertRaisesRegex(self, exceptions.InvalidField, regex, e.\n    _build_core_object, *args)\nclass DummyObject:\n\n    def __init__(self):\n        self._object_type = enums.ObjectType.TEMPLATE\nargs = DummyObject(),\nregex = 'The Template object type is not supported.'\nsix.assertRaisesRegex(self, exceptions.InvalidField, regex, e.\n    _build_core_object, *args)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_connected_residual_clusters",
+    "className": "MixedPercolationTest",
+    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_MixedPercolationTest.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "net = self.net\nphys = self.phys\nphys['throat.entry_pressure'] = np.arange(0, net.Nt, dtype=float)\nphys['pore.entry_pressure'] = np.arange(0, net.Np, dtype=float)\nIP_1 = mp(network=self.net)\nIP_1.settings['residual_saturation'] = True\nIP_1.settings['snap_off'] = False\nIP_1.setup(phase=self.phase)\nT = 20\n[P1, P2] = self.net['throat.conns'][T]\nself.phase['pore.occupancy'] = False\nself.phase['throat.occupancy'] = False\nself.phase['pore.occupancy'][P1] = True\nself.phase['pore.occupancy'][P2] = True\nIP_1.set_inlets(pores=self.inlets)\nassert len(IP_1.queue) == 1\n"
+}

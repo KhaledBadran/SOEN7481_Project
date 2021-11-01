@@ -1,0 +1,9 @@
+{
+    "functionName": "test_set_hostname",
+    "className": "TestKmipServerConfig",
+    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_config.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n        Test that the hostname configuration property can be set correctly.\n        \"\"\"\nc = config.KmipServerConfig()\nc._logger = mock.MagicMock()\nc._set_hostname('127.0.0.1')\nself.assertIn('hostname', c.settings.keys())\nself.assertEqual('127.0.0.1', c.settings.get('hostname'))\nargs = 0,\nregex = 'The hostname value must be a string.'\nself.assertRaisesRegex(exceptions.ConfigurationError, regex, c.\n    _set_hostname, *args)\nself.assertNotEqual(0, c.settings.get('hostname'))\n"
+}

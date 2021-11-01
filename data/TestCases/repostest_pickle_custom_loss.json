@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pickle_custom_loss",
+    "className": null,
+    "fileName": "/viebboy_&_PyGOP/test_&_utility_&_test_misc.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "filename = os.path.join(tmpdir.dirname, 'custom_loss.pickle')\nhas_custom_loss = misc.pickle_custom_loss(utility.mean_absolute_error_keras,\n    filename)\nassert has_custom_loss\nassert os.path.exists(filename)\nwith open(filename, 'rb') as fid:\n    loss = pickle.load(fid)\nassert loss['function_string'] == dill.dumps(utility.mean_absolute_error_keras)\nos.remove(filename)\nhas_custom_loss = misc.pickle_custom_loss('categorical_crossentropy', filename)\nassert has_custom_loss is False\n"
+}

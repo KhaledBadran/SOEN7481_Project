@@ -1,0 +1,9 @@
+{
+    "functionName": "test_cegb_scaling_equalities",
+    "className": "TestBasic",
+    "fileName": "/microsoft_&_LightGBM/tests_&_python_package_test_&_test_basic.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "X = np.random.random((100, 5))\nX[:, ([1, 3])] = 0\ny = np.random.random(100)\nnames = [('col_%d' % i) for i in range(5)]\nds = lgb.Dataset(X, feature_name=names).construct()\nds.set_label(y)\npairs = [({'cegb_penalty_feature_coupled': [1, 2, 1, 2, 1]}, {\n    'cegb_penalty_feature_coupled': [0.5, 1, 0.5, 1, 0.5], 'cegb_tradeoff':\n    2}), ({'cegb_penalty_feature_lazy': [0.01, 0.02, 0.03, 0.04, 0.05]}, {\n    'cegb_penalty_feature_lazy': [0.005, 0.01, 0.015, 0.02, 0.025],\n    'cegb_tradeoff': 2}), ({'cegb_penalty_split': 1}, {'cegb_penalty_split':\n    2, 'cegb_tradeoff': 0.5})]\nfor p1, p2 in pairs:\n    booster1 = lgb.Booster(train_set=ds, params=p1)\n    booster2 = lgb.Booster(train_set=ds, params=p2)\n    for k in range(10):\n        booster1.update()\n        booster2.update()\n    with tempfile.NamedTemporaryFile() as f:\n        p1name = f.name\n    booster1.reset_parameter(p2)\n    booster1.save_model(p1name)\n    with open(p1name, 'rt') as f:\n        p1txt = f.read()\n    with tempfile.NamedTemporaryFile() as f:\n        p2name = f.name\n    booster2.save_model(p2name)\n    with open(p2name, 'rt') as f:\n        p2txt = f.read()\n    self.maxDiff = None\n    self.assertEqual(p1txt, p2txt)\n"
+}

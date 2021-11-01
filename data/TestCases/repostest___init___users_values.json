@@ -1,0 +1,9 @@
+{
+    "functionName": "test___init___users_values",
+    "className": "TestBaseMetaModelTuner",
+    "fileName": "/HDI-Project_&_BTB/tests_&_tuning_&_tuners_&_test_base.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "tunable = MagicMock(spec_set=Tunable)\ninstance = MagicMock()\ninstance._metamodel_kwargs = {'a': 'test'}\ninstance._acquisition_kwargs = {'a': 'acquisition_test'}\ninstance.__init_metamodel__ = MagicMock()\ninstance.__init_acquisition__ = MagicMock()\nBaseMetaModelTuner.__init__(instance, tunable, maximize=False,\n    num_candidates=5, min_trials=20)\nassert instance.num_candidates == 5\nassert instance.min_trials == 20\ninstance.__init_metamodel__.assert_called_once_with(a='test')\ninstance.__init_acquisition__.assert_called_once_with(a='acquisition_test')\npatch('btb.tuning.tuners.base.super')"
+}

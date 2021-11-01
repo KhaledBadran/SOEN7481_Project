@@ -1,0 +1,9 @@
+{
+    "functionName": "test_kafka_missing_zookeeper",
+    "className": null,
+    "fileName": "/PearsonEducation_&_Alarmageddon/tests_&_validations_&_test_kafka.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "ssh_ctx = ssh.SshContext('ubuntu', get_mock_key_file(tmpdir))\ntext = \"\"\"\n  Exception in thread \"main\" joptsimple.OptionMissingRequiredArgumentException: Option ['zookeeper'] requires an argument\n    at joptsimple.RequiredArgumentOptionSpec.detectOptionArgument(RequiredArgumentOptionSpec.java:49)\n    at joptsimple.ArgumentAcceptingOptionSpec.handleOption(ArgumentAcceptingOptionSpec.java:209)\n    at joptsimple.OptionParser.handleLongOptionToken(OptionParser.java:405)\n    at joptsimple.OptionParserState$2.handleArgument(OptionParserState.java:55)\n    at joptsimple.OptionParser.parse(OptionParser.java:392)\n    at kafka.admin.ListTopicCommand$.main(ListTopicCommand.scala:43)\n    at kafka.admin.ListTopicCommand.main(ListTopicCommand.scala)\n    \"\"\"\nmonkeypatch.setattr(Connection, 'run', lambda self, x, warn:\n    get_mock_ssh_text(text, 0))\nwith pytest.raises(ValidationFailure):\n    kafka.KafkaStatusValidation(ssh_ctx, zookeeper_nodes='1.2.3.4:2181',\n        hosts=['127.0.0.1'], cluster_name=_CLUSTER_NAME).perform({})\n"
+}

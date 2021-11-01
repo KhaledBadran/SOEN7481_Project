@@ -1,0 +1,9 @@
+{
+    "functionName": "test_topic_count",
+    "className": "FlaskMQTTTestCase",
+    "fileName": "/MrLeeh_&_Flask-MQTT/tests_&_test_integration.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "self.mqtt = Mqtt(self.app)\nret, mid = self.mqtt.subscribe('test')\nself.assertEqual(1, len(self.mqtt.topics))\nret, mid = self.mqtt.subscribe('test')\nself.assertEqual(1, len(self.mqtt.topics))\nself.mqtt.unsubscribe('test')\nself.assertEqual(0, len(self.mqtt.topics))\nself.mqtt.unsubscribe('test')\nself.assertEqual(0, len(self.mqtt.topics))\nret, mid = self.mqtt.subscribe('test1')\nret, mid = self.mqtt.subscribe('test2')\nself.assertEqual(2, len(self.mqtt.topics))\nself.mqtt.unsubscribe_all()\nself.assertEqual(0, len(self.mqtt.topics))\nself.mqtt._disconnect()\n"
+}

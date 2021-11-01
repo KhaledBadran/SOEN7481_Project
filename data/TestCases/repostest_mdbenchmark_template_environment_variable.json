@@ -1,0 +1,9 @@
+{
+    "functionName": "test_mdbenchmark_template_environment_variable",
+    "className": null,
+    "fileName": "/bio-phys_&_MDBenchmark/mdbenchmark_&_tests_&_test_utils.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Test that we can set a custom path via environment variable MDBENCHMARK_TEMPLATES.\"\"\"\ntry:\n    from importlib import reload\nexcept ImportError:\n    from imp import reload\ncustom_path = '/this/is/a/custom/path'\nmonkeypatch.setenv('MDBENCHMARK_TEMPLATES', custom_path)\nreload(utils)\nfrom mdbenchmark.utils import _loaders\nfor path in _loaders:\n    if isinstance(path, jinja2.loaders.FileSystemLoader):\n        assert path.searchpath[0] in ['{}/.config/MDBenchmark'.format(os.\n            getenv('HOME')), custom_path, '/etc/xdg/MDBenchmark']\n"
+}

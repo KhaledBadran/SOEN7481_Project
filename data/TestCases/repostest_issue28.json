@@ -1,0 +1,9 @@
+{
+    "functionName": "test_issue28",
+    "className": null,
+    "fileName": "/Carbonara-Project_&_Carbonara-IDB/tests_&_test_issue28.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n\n    demonstrate parsing of section metadata.\n\n    see github issue #28 for the backstory.\n\n    \"\"\"\ncd = os.path.dirname(__file__)\nidbpath = os.path.join(cd, 'data', 'elf', 'cat.i64')\nwith idb.from_file(idbpath) as db:\n    api = idb.IDAPython(db)\n    assert [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2\n        ] == [api.idc.GetSegmentAttr(s, api.idc.SEGATTR_BITNESS) for s in\n        api.idautils.Segments()]\n"
+}

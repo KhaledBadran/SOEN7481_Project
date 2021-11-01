@@ -1,0 +1,9 @@
+{
+    "functionName": "test_simple_user",
+    "className": "UserTestCase",
+    "fileName": "/konzy_&_CSC440-Wiki-Project/tests_&_test_user.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"\n            Assert a simple User is created correctly.\n        \"\"\"\nname = 'Hash'\npassword = 'password'\nactive = True\nroles = ['Admin']\nauthentication_method = 'hash'\nuser_manager = UserManager('')\nhash_user = user_manager.add_user(name, password, active, roles,\n    authentication_method)\nassert hash_user.is_active()\nassert hash_user.is_authenticated() is False\nhash_user.set('authenticated', True)\nassert hash_user.get('authenticated')\nassert hash_user.get_id() == name\nassert hash_user.is_anonymous() is True\nassert hash_user.check_password(password)\nname2 = 'Test2'\nauthentication_method2 = 'cleartext'\nclear_user = user_manager.add_user(name2, password, active, roles,\n    authentication_method2)\nassert clear_user.check_password(password)\nassert hash_user.check_password('hi') is False\nhash_user.set('authentication_method', 'hi')\nis_caught = False\ntry:\n    hash_user.check_password('hi')\nexcept NotImplementedError:\n    is_caught = True\nassert is_caught\n"
+}

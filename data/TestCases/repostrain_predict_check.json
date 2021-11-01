@@ -1,0 +1,9 @@
+{
+    "functionName": "train_predict_check",
+    "className": "FileLoader",
+    "fileName": "/microsoft_&_LightGBM/tests_&_python_package_test_&_test_consistency.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": false,
+    "Body": "params = dict(self.params)\nparams['force_row_wise'] = True\ngbm = lgb.train(params, lgb_train)\ny_pred = gbm.predict(X_test)\ncpp_pred = gbm.predict(X_test_fn)\nnp.testing.assert_allclose(y_pred, cpp_pred)\nnp.testing.assert_allclose(y_pred, sk_pred)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_models_multiclass",
+    "className": null,
+    "fileName": "/tvdboom_&_ATOM/tests_&_test_models.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Assert that the fit method works with all models for multiclass.\"\"\"\nfor model in [m for m in MODEL_NAMES if m not in ONLY_REGRESSION]:\n    if model == 'CatB':\n        continue\n    atom = ATOMClassifier(X_class2, y_class2, test_size=0.24, random_state=1)\n    atom.run(models=model, metric='f1_micro', n_calls=2, n_random_starts=1,\n        bo_params={'base_estimator': 'rf', 'cv': 1})\n    assert not atom.errors\n    assert hasattr(atom, model) and hasattr(atom, model.lower())\n"
+}

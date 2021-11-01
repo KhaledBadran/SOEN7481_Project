@@ -1,0 +1,9 @@
+{
+    "functionName": "test_matching_post_error_handler_is_called",
+    "className": "TestErrorHandlers",
+    "fileName": "/cbefus_&_Eynnyd/tests_&_plan_execution_&_test_error_handlers.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class CustomRegisterException(Exception):\n    pass\nclass SpyFakeExceptionHandler:\n\n    def __init__(self):\n        self._pre_call_count = 0\n        self._post_call_count = 0\n\n    @property\n    def pre_call_count(self):\n        return self._pre_call_count\n\n    @property\n    def post_call_count(self):\n        return self._post_call_count\n\n    def test_pre_fake_handler(self, exc, request):\n        self._pre_call_count += 1\n\n    def test_post_fake_handler(self, exc, request, response):\n        self._post_call_count += 1\nfake_handler = SpyFakeExceptionHandler()\nerror_handlers = ErrorHandlers([(CustomRegisterException, fake_handler.\n    test_pre_fake_handler)], [(CustomRegisterException, fake_handler.\n    test_post_fake_handler)])\nerror_handlers.handle_post_response_error(CustomRegisterException(), None, None\n    )\nself.assertEqual(0, fake_handler.pre_call_count)\nself.assertEqual(1, fake_handler.post_call_count)\n"
+}

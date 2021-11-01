@@ -1,0 +1,9 @@
+{
+    "functionName": "test_pkhm_pk2d",
+    "className": null,
+    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_pkhm.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "hmc = ccl.halos.HMCalculator(COSMO, HMF, HBF, mass_def=M200)\nk_arr = KK\na_arr = np.linspace(0.1, 1, 10)\npk_arr = ccl.halos.halomod_power_spectrum(COSMO, hmc, k_arr, a_arr, P1,\n    normprof1=True, normprof2=True)\npk2d = ccl.halos.halomod_Pk2D(COSMO, hmc, P1, lk_arr=np.log(k_arr), a_arr=\n    a_arr, normprof1=True)\npk_arr_2 = np.array([pk2d.eval(k_arr, a, COSMO) for a in a_arr])\nassert np.all(np.fabs(pk_arr / pk_arr_2 - 1).flatten() < 0.0001)\npk2d = ccl.halos.halomod_Pk2D(COSMO, hmc, P1, normprof1=True)\npk_arr_2 = np.array([pk2d.eval(k_arr, a, COSMO) for a in a_arr])\nassert np.all(np.fabs(pk_arr / pk_arr_2 - 1).flatten() < 0.0001)\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_gridsearchcv_keras_g_regressor",
+    "className": null,
+    "fileName": "/goeckslab_&_Galaxy-ML/galaxy_ml_&_tests_&_test_keras_galaxy.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "config = train_model.get_config()\nregressor = KerasGRegressor(config, optimizer='adam', metrics=[], seed=42)\nparam_grid = dict(epochs=[60], batch_size=[20], lr=[0.002],\n    layers_1_Dense__config__kernel_initializer__config__seed=[999],\n    layers_0_Dense__config__kernel_initializer__config__seed=[999])\ncv = KFold(n_splits=3)\ngrid = GridSearchCV(regressor, param_grid, cv=cv, scoring='r2', refit=True)\ngrid_result = grid.fit(X, y)\ngot1 = round(grid_result.best_score_, 1)\ngot2 = grid_result.best_estimator_.lr\ngot3 = grid_result.best_estimator_.epochs\ngot4 = grid_result.best_estimator_.batch_size\ngot5 = grid_result.best_estimator_.config['layers'][0]['config'][\n    'kernel_initializer']['config']['seed']\ngot6 = grid_result.best_estimator_.config['layers'][1]['config'][\n    'kernel_initializer']['config']['seed']\nassert got1 == 0.0, got1\nassert got2 == 0.002, got2\nassert got3 == 60, got3\nassert got4 == 20, got4\nassert got5 == 999, got5\nassert got6 == 999, got6\n"
+}

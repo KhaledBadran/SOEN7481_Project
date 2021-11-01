@@ -1,0 +1,9 @@
+{
+    "functionName": "test_run_with_backend_is_used",
+    "className": "TestNotebookExecution",
+    "fileName": "/breathe_&_NotebookScripter/tests_&_test_NotebookScripter.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "with self.assertRaises(Exception) as context:\n    with patch('NotebookScripter._main.__notebookscripter_injected__', [[{},\n        {}]]):\n        NotebookScripter.set_notebook_option(with_matplotlib_backend='somefake'\n            )\n        NotebookScripter.run_notebook(self.notebook_file)\nprint(str(context.exception))\nself.assertTrue(\"Unrecognized backend string 'somefake'\" in str(context.\n    exception))\n"
+}

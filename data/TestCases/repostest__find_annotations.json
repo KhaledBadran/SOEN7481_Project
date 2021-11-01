@@ -1,0 +1,9 @@
+{
+    "functionName": "test__find_annotations",
+    "className": null,
+    "fileName": "/HDI-Project_&_MLBlocks/tests_&_test_discovery.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "search_annotations_mock.return_value = {'/path/to/a/classifier.primitive.json':\n    'classifier.primitive', '/path/to/a/regressor.primitive.json':\n    'regressor.primitive'}\nloader = Mock()\nloader.side_effect = [{'name': 'classifier.primitive', 'classifiers': {\n    'type': 'estimator', 'subtype': 'classifier'}}, {'name':\n    'regressor.primitive', 'classifiers': {'type': 'estimator', 'subtype':\n    'regressor'}}]\nfilters = {'classifiers.subtype': 'regressor'}\nannotations = discovery._find_annotations(['/a/path'], loader, 'pattern',\n    filters)\nassert annotations == ['regressor.primitive']\nsearch_annotations_mock.assert_called_once_with('/a/path', 'pattern')\npatch('mlblocks.discovery._search_annotations')"
+}

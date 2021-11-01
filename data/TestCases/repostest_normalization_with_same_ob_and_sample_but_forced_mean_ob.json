@@ -1,0 +1,9 @@
+{
+    "functionName": "test_normalization_with_same_ob_and_sample_but_forced_mean_ob",
+    "className": "TestNormalization",
+    "fileName": "/ornlneutronimaging_&_NeuNorm/tests_&_NeuNorm_&_normalizing_test.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"assert normalization with same ob and sample number of files force to use mean ob when flag used\"\"\"\nsamples_path = self.data_path + '/tif/sample/'\nob1 = self.data_path + '/tif/ob/ob001.tif'\nob2 = self.data_path + '/tif/ob/ob002.tif'\nob3 = self.data_path + '/tif/ob/ob003.tif'\no_norm = Normalization()\no_norm.load(folder=samples_path, auto_gamma_filter=False)\no_norm.load(file=[ob1, ob2, ob3], data_type='ob', auto_gamma_filter=False)\no_norm.normalization(force_mean_ob=True)\nexpected_normalized_array = np.ones((5, 5))\nexpected_normalized_array[:, (2)] = 2\nexpected_normalized_array[:, (3)] = 3\nexpected_normalized_array[:, (4)] = 4\nassert (o_norm.data['normalized'][0] == expected_normalized_array).all()\n"
+}

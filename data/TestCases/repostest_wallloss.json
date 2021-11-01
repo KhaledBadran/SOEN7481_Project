@@ -1,0 +1,9 @@
+{
+    "functionName": "test_wallloss",
+    "className": null,
+    "fileName": "/simonom_&_PyCHAM/PyCHAM_&_Unit_Testing_&_test_wallloss.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from wallloss import wallloss\nBeta = wallloss(Pn, Cn, Gi, eta_a, Dp, MW, Varr, sbn, nc, TEMP, t,\n    inflectDp, pwl_xpre, pwl_xpro, inflectk, ChamR, Rader, testf, p_char,\n    e_field)\nif p_char == 0:\n    ax0.loglog(Dp * 1000000.0, Beta, 'k')\n    ax0.set_title('Wall Loss Rate of Neutral and Charged Particles')\n    ax0.set_xlim([0.01, 10.0])\n    ax0.set_xlabel('$\\\\rm{D_p}$ ($\\\\rm{\\\\mu}$m)', fontsize=12)\n    ax0.set_ylabel('$\\\\rm{\\\\beta_{T}$ $(s^{-1})}$', fontsize=12)\n    ax0.text(0.5, 0.05, 'R = 35 cm')\n    ax0.text(0.5, 0.03, 'E = 45 volts/cm')\n    ax0.text(0.5, 0.018, '$\\\\rm{k_{e}=6.4x10^{-3}\\\\, s^{-1}}$')\n    ax0.text(0.025, 5e-05, 'n=0')\nif p_char == 1:\n    ax0.loglog(Dp * 1000000.0, Beta, 'k')\n    ax0.text(0.03, 0.003, 'n=1')\nif p_char == 2:\n    ax0.loglog(Dp * 1000000.0, Beta, 'k')\n    ax0.text(0.05, 0.004, '2')\nif p_char == 3:\n    ax0.loglog(Dp * 1000000.0, Beta, 'k')\n    ax0.text(0.085, 0.005, '3')\nif p_char == -1000000.0:\n    ax0.loglog(Dp * 1000000.0, Beta, '--k', label=\n        '$D_{p,flec}=1\\\\, \\\\mathrm{\\\\mu m},\\\\, \\\\nabla_{pre}=1,\\\\, \\\\nabla_{pro}=1,\\\\, \\\\beta_{flec}=\\\\mathrm{2x10^{-5} s^{-1}}$'\n        )\nif p_char == -2000000.0:\n    ax0.loglog(Dp * 1000000.0, Beta, '-.k', label=\n        '$D_{p,flec}=0.8\\\\, \\\\mathrm{\\\\mu m},\\\\, \\\\nabla_{pre}=0,\\\\, \\\\nabla_{pro}=-1,\\\\, \\\\beta_{flec}=\\\\mathrm{1x10^{-3} s^{-1}}$'\n        )\n    ax0.legend()\n"
+}

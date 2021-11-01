@@ -1,0 +1,9 @@
+{
+    "functionName": "test_completion_sockets_and_messages",
+    "className": "TestJython",
+    "fileName": "/fabioz_&_PyDev.Debugger/tests_&_test_jyserver.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "dbg('test_completion_sockets_and_messages')\nt, socket = self.create_connections()\nself.socket = socket\ndbg('connections created')\ntry:\n    msg = urllib.quote_plus('math')\n    toWrite = '@@IMPORTS:%sEND@@' % msg\n    dbg('writing' + str(toWrite))\n    socket.send(toWrite)\n    completions = self.read_msg()\n    dbg(urllib.unquote_plus(completions))\n    start = '@@COMPLETIONS('\n    self.assertTrue(completions.startswith(start), \n        '%s DOESNT START WITH %s' % (completions, start))\n    self.assertTrue(completions.find('@@COMPLETIONS') != -1)\n    self.assertTrue(completions.find('END@@') != -1)\n    msg = urllib.quote_plus('__builtin__.str')\n    toWrite = '@@IMPORTS:%sEND@@' % msg\n    dbg('writing' + str(toWrite))\n    socket.send(toWrite)\n    completions = self.read_msg()\n    dbg(urllib.unquote_plus(completions))\n    start = '@@COMPLETIONS('\n    self.assertTrue(completions.startswith(start), \n        '%s DOESNT START WITH %s' % (completions, start))\n    self.assertTrue(completions.find('@@COMPLETIONS') != -1)\n    self.assertTrue(completions.find('END@@') != -1)\nfinally:\n    try:\n        self.send_kill_msg(socket)\n        while not t.ended:\n            pass\n        socket.close()\n    except:\n        pass\n"
+}

@@ -1,0 +1,9 @@
+{
+    "functionName": "test_get_all_params",
+    "className": "TestCountParams",
+    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_helper.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "from lasagne.layers import InputLayer, DenseLayer, count_params\nl1 = InputLayer((10, 20))\nl2 = DenseLayer(l1, 30)\nl3 = DenseLayer(l2, 40)\nnum_weights = 20 * 30 + 30 * 40\nnum_biases = 30 + 40\nassert count_params(l3, regularizable=True) == num_weights\nassert count_params(l3, regularizable=False) == num_biases\nassert count_params(l3) == num_weights + num_biases\n"
+}

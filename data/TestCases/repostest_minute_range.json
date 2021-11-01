@@ -1,0 +1,9 @@
+{
+    "functionName": "test_minute_range",
+    "className": null,
+    "fileName": "/roniemartinez_&_DocCron/tests_&_test_range.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "cron = doccron.cron('5-20 * * * * *')\nnext_datetime = datetime.now(tz=tzlocal()).replace(second=0, microsecond=0)\nfor _ in range(25):\n    while True:\n        if next_datetime.minute in range(5, 21\n            ) and next_datetime > datetime.now(tz=tzlocal()):\n            break\n        next_datetime += timedelta(minutes=1)\n    next_schedule = next(cron)\n    assert isinstance(next_schedule, datetime)\n    assert next_schedule == next_datetime\n    next_datetime += timedelta(minutes=1)\n"
+}

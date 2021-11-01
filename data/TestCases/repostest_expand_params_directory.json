@@ -1,0 +1,9 @@
+{
+    "functionName": "test_expand_params_directory",
+    "className": "TestRunTests",
+    "fileName": "/capn-freako_&_PyAMI/tests_&_test_run_tests.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "runs_dir = tmp_path.joinpath('runs')\nruns_dir.mkdir()\nrun_file = runs_dir.joinpath('test.run')\nwith open(run_file, 'w') as test_file:\n    test_file.write(\n        \"\"\"Sweep of Tx pre-emphasis filter posttap1 values.\n\n('Posttap1 = 0',   ({'root_name'        : 'example_tx',     'tx_tap_np1'       : 0,     'tx_tap_nm1'       : 0,     'tx_tap_nm2'       : 0,    },    {'channel_response' : [2.0e11] + [0.],     'sample_interval'  : 5.0e-12,    },   ), )\"\"\"\n        )\nparams = expand_params(runs_dir)\nassert params == [('test',\n    'Sweep of Tx pre-emphasis filter posttap1 values.\\n', [('Posttap1 = 0',\n    ({'root_name': 'example_tx', 'tx_tap_nm1': 0, 'tx_tap_nm2': 0,\n    'tx_tap_np1': 0}, {'channel_response': [200000000000.0, 0.0],\n    'sample_interval': 5e-12}))])]\n"
+}

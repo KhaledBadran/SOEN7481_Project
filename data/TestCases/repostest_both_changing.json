@@ -1,0 +1,9 @@
+{
+    "functionName": "test_both_changing",
+    "className": "TestGetChangingVariable",
+    "fileName": "/kyleniemeyer_&_PyTeCK/pyteck_&_tests_&_test_eval_model.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "\"\"\"Check fallback behavior for both properties varying.\n        \"\"\"\nnum = 10\npressures = numpy.random.rand(num) * units('atm')\ntemperatures = numpy.random.rand(num) * units('K')\ncases = []\nfor pres, temp in zip(pressures, temperatures):\n    dp = DataPoint({'pressure': [str(pres)], 'temperature': [str(temp)],\n        'composition': {'kind': 'mole fraction', 'species': [{\n        'species-name': 'O2', 'amount': [1.0]}]}, 'ignition-type': None})\n    cases.append(dp)\nwith pytest.warns(RuntimeWarning, match=\n    'Warning: multiple changing variables. Using temperature.'):\n    variable = eval_model.get_changing_variable(cases)\nassert len(variable) == num\nassert numpy.allclose(variable, [c.temperature.magnitude for c in cases])\n"
+}

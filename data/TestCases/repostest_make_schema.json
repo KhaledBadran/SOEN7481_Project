@@ -1,0 +1,9 @@
+{
+    "functionName": "test_make_schema",
+    "className": null,
+    "fileName": "/hdoupe_&_ParamTools/paramtools_&_tests_&_test_schema.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "custom_type = 'custom'\nregister_custom_type(custom_type, ma.fields.String())\nschema = {'labels': {'lab': {'type': custom_type, 'validators': {}}},\n    'additional_members': {'custom': {'type': custom_type}}}\nassert get_param_schema(schema)\nbad_schema = copy.deepcopy(schema)\nbad_schema['labels']['lab']['type'] = 'unknown'\nwith pytest.raises(UnknownTypeException):\n    get_param_schema(bad_schema)\nbad_schema = copy.deepcopy(schema)\nbad_schema['additional_members']['custom']['type'] = 'unknown'\nwith pytest.raises(UnknownTypeException):\n    get_param_schema(bad_schema)\nschema = {'labels': {'lab': {'type': custom_type, 'validators': {'choice':\n    {'choices': ['hello']}}}}, 'additional_members': {'custom': {'type':\n    custom_type}}}\nwith pytest.raises(ParamToolsError):\n    get_param_schema(schema)\n"
+}

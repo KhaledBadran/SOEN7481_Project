@@ -1,0 +1,9 @@
+{
+    "functionName": "test_policy_authorization_one_success_class_method",
+    "className": null,
+    "fileName": "/RobertoPrevato_&_GuardPost/tests_&_test_authorization.py",
+    "projectName": "repos",
+    "Label": false,
+    "isTest": true,
+    "Body": "class Example(Requirement):\n\n    async def handle(self, context: AuthorizationContext):\n        context.succeed(self)\nauth = get_strategy([Policy('user', Example())])\nclass Foo:\n\n    @auth(policy='user')\n    async def some_method(self):\n        return True\ncontext = Foo()\nvalue = await context.some_method()\nassert value is True, 'Authorization succeeded'\npytest.mark.asyncio"
+}
