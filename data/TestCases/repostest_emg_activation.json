@@ -1,9 +1,0 @@
-{
-    "functionName": "test_emg_activation",
-    "className": null,
-    "fileName": "/neuropsychology_&_NeuroKit/tests_&_tests_emg.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "emg = nk.emg_simulate(duration=10, burst_number=3)\ncleaned = nk.emg_clean(emg)\nemg_amplitude = nk.emg_amplitude(cleaned)\nactivity_signal, info = nk.emg_activation(emg_amplitude)\nassert set(activity_signal.columns.to_list()) == set(list(info.keys()))\nassert len(info['EMG_Onsets']) == len(info['EMG_Offsets'])\nfor i, j in zip(info['EMG_Onsets'], info['EMG_Offsets']):\n    assert i < j\n"
-}

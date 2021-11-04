@@ -1,9 +1,0 @@
-{
-    "functionName": "test_firstdoughnutring",
-    "className": null,
-    "fileName": "/open-source-economics_&_OG-USA/ogusa_&_tests_&_test_TPI.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "input_tuple = utils.safe_read_pickle(os.path.join(CUR_PATH, 'test_io_data',\n    'firstdoughnutring_inputs.pkl'))\nguesses, r, w, b, BQ, TR, j, params = input_tuple\nincome_tax_params, tpi_params, initial_b = params\ntpi_params = tpi_params + [True]\np = Specifications(client=dask_client, num_workers=NUM_WORKERS)\n(p.J, p.S, p.T, p.BW, p.beta, p.sigma, p.alpha, p.gamma, p.epsilon, Z, p.\n    delta, p.ltilde, p.nu, p.g_y, p.g_n, tau_b, delta_tau, tau_payroll,\n    tau_bq, p.rho, p.omega, N_tilde, lambdas, p.imm_rates, p.e, retire, p.\n    mean_income_data, factor, h_wealth, p_wealth, m_wealth, p.b_ellipse, p.\n    upsilon, p.chi_b, p.chi_n, theta, p.baseline) = tpi_params\np.Z = np.ones(p.T + p.S) * Z\np.tau_bq = np.ones(p.T + p.S) * 0.0\np.tau_payroll = np.ones(p.T + p.S) * tau_payroll\np.tau_b = np.ones(p.T + p.S) * tau_b\np.delta_tau = np.ones(p.T + p.S) * delta_tau\np.h_wealth = np.ones(p.T + p.S) * h_wealth\np.p_wealth = np.ones(p.T + p.S) * p_wealth\np.m_wealth = np.ones(p.T + p.S) * m_wealth\np.retire = (np.ones(p.T + p.S) * retire).astype(int)\np.tax_func_type = 'DEP'\np.analytical_mtrs, etr_params, mtrx_params, mtry_params = income_tax_params\np.etr_params = np.transpose(etr_params, (1, 0, 2))\np.mtrx_params = np.transpose(mtrx_params, (1, 0, 2))\np.mtry_params = np.transpose(mtry_params, (1, 0, 2))\np.lambdas = lambdas.reshape(p.J, 1)\np.num_workers = 1\nbq = BQ / p.lambdas[j]\ntr = TR\ntest_list = TPI.firstdoughnutring(guesses, r, w, bq, tr, theta, factor, j,\n    initial_b, p)\nexpected_list = utils.safe_read_pickle(os.path.join(CUR_PATH,\n    'test_io_data', 'firstdoughnutring_outputs.pkl'))\nassert np.allclose(np.array(test_list), np.array(expected_list))\n"
-}

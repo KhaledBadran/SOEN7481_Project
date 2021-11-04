@@ -1,9 +1,0 @@
-{
-    "functionName": "test_basic_object_pagination",
-    "className": "LimitPaginationTests",
-    "fileName": "/Axiologue_&_DjangoRestMultipleModels/tests_&_test_pagination.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "view = ObjectLimitPaginationView.as_view()\nrequest = factory.get('/')\nwith self.assertNumQueries(4):\n    response = view(request).render()\nself.assertEqual(response.status_code, status.HTTP_200_OK)\nself.assertEqual(len(response.data['results']['Play']), 2)\nself.assertEqual(len(response.data['results']['Poem']), 2)\nself.assertEqual(response.data['highest_count'], 4)\nself.assertEqual(response.data['overall_total'], 7)\nself.assertEqual(response.data['next'], 'http://testserver/?limit=2&offset=2')\nself.assertEqual(response.data['previous'], None)\nrequest = factory.get('/', {'offset': 2})\nresponse = view(request).render()\nself.assertEqual(response.status_code, status.HTTP_200_OK)\nself.assertEqual(len(response.data['results']['Play']), 2)\nself.assertEqual(len(response.data['results']['Poem']), 1)\nself.assertEqual(response.data['highest_count'], 4)\nself.assertEqual(response.data['overall_total'], 7)\nself.assertEqual(response.data['previous'], 'http://testserver/?limit=2')\nself.assertEqual(response.data['next'], None)\n"
-}

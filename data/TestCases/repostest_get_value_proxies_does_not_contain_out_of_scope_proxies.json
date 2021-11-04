@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_value_proxies_does_not_contain_out_of_scope_proxies",
-    "className": "TestConfigurationNamespace",
-    "fileName": "/dnephin_&_PyStaticConfiguration/tests_&_config_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "assert not self.namespace.get_value_proxies()\ndef a_scope():\n    mock_proxy = mock.create_autospec(proxy.ValueProxy)\n    self.namespace.register_proxy(mock_proxy)\na_scope()\na_scope()\ngc.collect()\nassert_equal(len(self.namespace.get_value_proxies()), 0)\npytest.mark.skipif('PyPy' in platform.python_implementation(), reason=\n    'Fails on PyPy')"
-}

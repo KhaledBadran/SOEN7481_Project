@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sino_rytov",
-    "className": null,
-    "fileName": "/RI-imaging_&_ODTbrain/tests_&_test_processing.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "myframe = sys._getframe()\nsino = get_test_data_set_sino(rytov=True)\nryt = odtbrain.sinogram_as_rytov(sino)\ntwopi = 2 * np.pi\nif WRITE_RES:\n    write_results(myframe, ryt)\nif ryt.imag.min() > twopi:\n    ryt.imag -= twopi\nassert np.allclose(np.array(ryt).flatten().view(float), get_results(myframe))\nryt2d = odtbrain.sinogram_as_rytov(sino[:, :, (0)])\nassert np.allclose(0, negative_modulo_rest_imag(ryt2d - ryt[:, :, (0)],\n    twopi).view(float), atol=1e-06)\nryt2d2 = odtbrain.sinogram_as_rytov(sino[:, (0), :])\nassert np.allclose(0, negative_modulo_rest_imag(ryt2d2 - ryt[:, (0), :],\n    twopi).view(float), atol=1e-06)\n"
-}

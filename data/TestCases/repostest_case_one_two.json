@@ -1,9 +1,0 @@
-{
-    "functionName": "test_case_one_two",
-    "className": "TestQuickReply",
-    "fileName": "/p1r-a-t3_&_FB_Bot/Tests_&_test_quick_reply.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        This the only test functions contains 5 phases. \n        \"\"\"\nq_reply = QuickReply(self.test_user)\ntest_1_payload = q_reply.quick_reply_create('text', 'Hello_World')\nself.assertEqual(test_1_payload, {},\n    'Its suppose to be an empty dictionary here!')\ntest_2_payload = q_reply.quick_reply_create('text', 'Hello_World', '123456', ''\n    )\ntest_1_quick_reply_payload = q_reply.quick_reply('test_case_one_two', [\n    test_1_payload])\ntest_2_quick_reply_payload = q_reply.quick_reply('test_case_one_two', [\n    test_2_payload])\nself.assertNotEqual(type(test_1_quick_reply_payload), dict,\n    'Test_1 You shall not Pass')\nself.assertEqual(type(test_2_quick_reply_payload), dict,\n    'Test_2 This is suppose to be a dictionary to be passed!')\nstatus_code = self.facebook.send_message(test_1_quick_reply_payload)\nself.assertEqual(status_code, 400, 'This test case must be 400!')\nstatus_code = self.facebook.send_message(test_2_quick_reply_payload)\nself.assertEqual(status_code, 200, 'This better be 200!')\n"
-}

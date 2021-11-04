@@ -1,9 +1,0 @@
-{
-    "functionName": "sample_raw_data",
-    "className": null,
-    "fileName": "/BciPy_&_BciPy/bcipy_&_helpers_&_tests_&_test_triggers.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Helper function for creating mock data that looks like the raw_data.csv\n    output. Adds trigger data to the TRG column at the specified interval.\n\n    Parameters:\n    -----------\n        trigger_seq: list of tuples with the stimulus, targetness.\n        first_trg_time: first time in the data where a trigger should appear.\n        trigger_interval: set interval at which subsequent triggers should be\n                    displayed\n    Returns:\n    --------\n        content: str, trigger_times: list(float)\n    \"\"\"\ntrigger_times = []\ntriggers_by_time = {}\nfor i in range(len(trigger_seq)):\n    ts = first_trg_time + i * trigger_interval\n    trigger_times.append(ts)\n    trg_val = trigger_seq[i][0]\n    triggers_by_time[ts] = trg_val\nsep = '\\r\\n'\nmeta = sep.join(['daq_type,TestStream', 'sample_rate,300'])\nheader = 'timestamp,c1,c2,c3,TRG'\ndata = []\nfor i in range(1000):\n    timestamp = i + 10.0\n    channel_data = [str(random.uniform(-1000, 1000)) for _ in range(3)]\n    trg = triggers_by_time.get(timestamp, NONE_VALUE)\n    data.append(','.join([str(timestamp), *channel_data, trg]))\ncontent = sep.join([meta, header, *data])\nreturn content, trigger_times\n"
-}

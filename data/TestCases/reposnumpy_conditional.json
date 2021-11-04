@@ -1,9 +1,0 @@
-{
-    "functionName": "numpy_conditional",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_conditionals_&_test_conditionals.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "Kmm = kern(Z, Z) + np.eye(M) * gpflow.config.default_jitter()\nKmn = kern(Z, X)\nKnn = kern(X, X)\nKmm, Kmn, Knn = [k.numpy() for k in [Kmm, Kmn, Knn]]\nKmm, Kmn, Knm, Knn = [np.tile(k[(None), :, :], [Dy, 1, 1]) for k in [Kmm,\n    Kmn, Kmn.T, Knn]]\nS = q_sqrt @ np.transpose(q_sqrt, [0, 2, 1])\nKmm_inv = np.linalg.inv(Kmm)\nmean = np.einsum('dmn,dmM,Md->nd', Kmn, Kmm_inv, q_mu)\ncov = Knn + Knm @ Kmm_inv @ (S - Kmm) @ Kmm_inv @ Kmn\nreturn mean, cov\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_stream_fit",
-    "className": null,
-    "fileName": "/vc1492a_&_PyNomaly/tests_&_test_loop.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test to ensure that the proper warning is issued if the user attempts\n    to use the streaming approach prior to the classical approach being fit.\n    :param X_n140_outliers: A pytest Fixture that generates 140 observations.\n    :return: None\n    \"\"\"\nX_train = X_n140_outliers[0:138]\nX_test = X_n140_outliers[139]\nclf = loop.LocalOutlierProbability(X_train, use_numba=NUMBA)\nwith pytest.warns(UserWarning) as record:\n    clf.stream(X_test)\nmessages = [i.message.args[0] for i in record]\nassert 'Must fit on historical data by calling fit() prior to calling stream(x).' in messages\n"
-}

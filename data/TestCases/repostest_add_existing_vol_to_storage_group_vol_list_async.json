@@ -1,9 +1,0 @@
-{
-    "functionName": "test_add_existing_vol_to_storage_group_vol_list_async",
-    "className": "PyU4VProvisioningTest",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test add_existing_vol_to_storage_group.\"\"\"\npayload = {'executionOption': 'ASYNCHRONOUS', 'editStorageGroupActionParam':\n    {'expandStorageGroupParam': {'addSpecificVolumeParam': {'volumeId': [\n    self.data.device_id]}}}}\nwith mock.patch.object(self.provisioning, 'modify_storage_group') as mock_mod:\n    self.provisioning.add_existing_vol_to_sg(self.data.storagegroup_name, [\n        self.data.device_id], True)\n    mock_mod.assert_called_once_with(self.data.storagegroup_name, payload)\n"
-}

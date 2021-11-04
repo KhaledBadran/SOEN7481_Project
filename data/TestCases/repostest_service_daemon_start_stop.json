@@ -1,9 +1,0 @@
-{
-    "functionName": "test_service_daemon_start_stop",
-    "className": null,
-    "fileName": "/glentner_&_CmdKit/tests_&_test_service.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Start the test daemon.\"\"\"\nlog.debug(f'starting daemon')\np = Process(target=DemoDaemon.test, args=('start',))\np.start()\np.join()\ntime.sleep(1)\nwith open(DemoDaemon.PIDFILE, mode='r') as pidfile:\n    PID = int(pidfile.read().strip())\n    log.debug(f'daemon had pid={PID}')\ncheck_call(['ps', str(PID)])\nlog.debug(f'stopping daemon')\np = Process(target=DemoDaemon.test, args=('stop',))\np.start()\np.join()\nassert not os.path.exists(DemoDaemon.PIDFILE)\nwith pytest.raises(CalledProcessError):\n    check_call(['ps', str(PID)])\n"
-}

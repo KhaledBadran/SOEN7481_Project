@@ -1,9 +1,0 @@
-{
-    "functionName": "test_gnome_one_hot_encoder",
-    "className": null,
-    "fileName": "/goeckslab_&_Galaxy-ML/galaxy_ml_&_tests_&_test_sequences.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "coder = GenomeOneHotEncoder(padding=False)\ncoder1 = clone(coder)\nX = np.zeros((20, 1))\nX[:, (0)] = np.arange(20)\ncoder.fit(X, fasta_path=sequence_path)\ntrans = coder.transform(X)\nexpect = np.load('./tools/test-data/sequence_encoding01.npy')\nassert np.array_equal(trans, expect), trans\nfasta_file = pyfaidx.Fasta(sequence_path)\nX1 = np.array([str(fasta_file[i]) for i in range(20)])[:, (np.newaxis)]\ncoder1.fit(X1)\ntrans = coder1.transform(X1)\nassert np.array_equal(trans, expect), trans\n"
-}

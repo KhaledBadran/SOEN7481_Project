@@ -1,9 +1,0 @@
-{
-    "functionName": "test_parse_error_lambda",
-    "className": "TestParser",
-    "fileName": "/anselmrothe_&_EIG/test_&_test_parser.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with self.assertRaises(ProgramSyntaxError) as cm:\n    question = Parser.parse('(map (lambda x0 (+ 1 2)) (set AllColors))')\nexception = cm.exception\nself.assertEqual(exception.error_msg, 'Top level type cannot be DataType.SET_N'\n    )\nwith self.assertRaises(ProgramSyntaxError) as cm:\n    question = Parser.parse(\n        '(any (map (lambda x1 (== (color x2) Red)) (set AllColors)))')\nexception = cm.exception\nself.assertEqual(exception.error_msg,\n    'Lambda variable x2 should not exist here')\nwith self.assertRaises(ProgramSyntaxError) as cm:\n    question = Parser.parse(\n        '(++ (map (lambda x1 (== (size x1) (++ (map (lambda x1 (== (orient x1) V)) (set AllColors))))) (set AllColors)))'\n        )\nexception = cm.exception\nself.assertEqual(exception.error_msg,\n    'Lambda variable x1 has already been defined')\nwith self.assertRaises(ProgramSyntaxError) as cm:\n    question = Parser.parse(\n        '(any (map (lambda x2 (== (orient x2) H)) (set AllTiles)))')\nexception = cm.exception\nself.assertEqual(exception.error_msg,\n    \"\"\"Parameter type mismatch. Expected one of\n  (DataType.LAMBDA_FXB, DataType.SET_S),\n  (DataType.LAMBDA_FYB, DataType.SET_L),\n  (DataType.LAMBDA_FXL, DataType.SET_S),\n  (DataType.LAMBDA_FXN, DataType.SET_S),\nget (DataType.LAMBDA_FXB, DataType.SET_L)\"\"\"\n    )\nwith self.assertRaises(ProgramSyntaxError) as cm:\n    question = Parser.parse(\n        '(++ (lambda (lambda x0 (size x0)) (set AllColors)))')\nexception = cm.exception\nself.assertEqual(exception.error_msg,\n    \"\"\"Parameter type mismatch. The first child of lambda operator should be lambda\nvariable (x0, x1, y2, etc.), get lambda_op\"\"\"\n    )\n"
-}

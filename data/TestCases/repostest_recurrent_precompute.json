@@ -1,9 +1,0 @@
-{
-    "functionName": "test_recurrent_precompute",
-    "className": null,
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_recurrent.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "num_batch, seq_len, n_features1 = 2, 3, 4\nnum_units = 2\nin_shp = num_batch, seq_len, n_features1\nl_inp = InputLayer(in_shp)\nl_mask_inp = InputLayer(in_shp[:2])\nx_in = np.random.random(in_shp).astype('float32')\nmask_in = np.ones((num_batch, seq_len), dtype='float32')\nlasagne.random.get_rng().seed(1234)\nl_rec_precompute = RecurrentLayer(l_inp, num_units=num_units,\n    precompute_input=True, mask_input=l_mask_inp)\nlasagne.random.get_rng().seed(1234)\nl_rec_no_precompute = RecurrentLayer(l_inp, num_units=num_units,\n    precompute_input=False, mask_input=l_mask_inp)\noutput_precompute = helper.get_output(l_rec_precompute).eval({l_inp.\n    input_var: x_in, l_mask_inp.input_var: mask_in})\noutput_no_precompute = helper.get_output(l_rec_no_precompute).eval({l_inp.\n    input_var: x_in, l_mask_inp.input_var: mask_in})\nnp.testing.assert_almost_equal(output_precompute, output_no_precompute)\n"
-}

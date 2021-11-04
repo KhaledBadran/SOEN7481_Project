@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_json_files",
-    "className": "TestMonitorUtilities",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_monitor.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that all files ending in .json can be collected from a directory.\n        \"\"\"\nwith open(os.path.join(self.tmp_dir, 'policy_1.json'), 'w') as f:\n    f.write('{\"policy_1\": {}}\\n')\nwith open(os.path.join(self.tmp_dir, 'policy_2.json'), 'w') as f:\n    f.write('{\"policy_2\": {}}\\n')\nwith open(os.path.join(self.tmp_dir, 'policy_3.txt'), 'w') as f:\n    f.write('{\"policy_3\": {}}\\n')\nresult = monitor.get_json_files(self.tmp_dir)\nself.assertIsInstance(result, list)\nself.assertEqual(2, len(result))\nself.assertIn(os.path.join(self.tmp_dir, 'policy_1.json'), result)\nself.assertIn(os.path.join(self.tmp_dir, 'policy_2.json'), result)\n"
-}

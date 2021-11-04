@@ -1,9 +1,0 @@
-{
-    "functionName": "test_conversion_to_respecth_ignition_targets",
-    "className": "TestConvertToReSpecTh",
-    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_chemked.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test proper conversion for different ignition targets.\n        \"\"\"\nfile_path = os.path.join('testfile_st.yaml')\nfilename = pkg_resources.resource_filename(__name__, file_path)\nc = ChemKED(filename)\nfor dp in c.datapoints:\n    dp.ignition_type['target'] = ignition_target\nwith TemporaryDirectory() as temp_dir:\n    newfile = os.path.join(temp_dir, 'test.xml')\n    c.convert_to_ReSpecTh(newfile)\n    tree = etree.parse(newfile)\nroot = tree.getroot()\nelem = root.find('ignitionType')\nelem = elem.attrib\nif ignition_target == 'pressure':\n    assert elem['target'] == 'P'\nelif ignition_target == 'temperature':\n    assert elem['target'] == 'T'\nelse:\n    assert elem['target'] == ignition_target\npytest.mark.parametrize('ignition_target', ['pressure', 'temperature', 'OH',\n    'CH', 'OH*', 'CH*'])"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_clustering_max_tree_depth",
-    "className": null,
-    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_server_&_tests_&_test_cluster.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "dsid, lsi_id, a, b = get_features_lsi_cached(app, hashed=False)\nparent_id = lsi_id\nurl = V01 + '/clustering/birch'\npars = {'min_similarity': 0.8, 'parent_id': parent_id, 'branching_factor': 10}\ndata = app.post_check(url, json=pars)\nmid = data['id']\ndata = app.get_check(url + '/' + mid)\nmax_depth = max(el['cluster_depth'] for el in data['data'])\nmax_depth_lim = 2\nassert max_depth > max_depth_lim\npars['max_tree_depth'] = max_depth_lim\nmid = app.post_check(url, json=pars)['id']\ndata2 = app.get_check(url + '/' + mid)\nassert max(el['cluster_depth'] for el in data2['data']) == max_depth_lim\ndataset_size = len(b['dataset'])\n_check_htree_consistency(data['data'], dataset_size)\n_check_htree_consistency(data2['data'], dataset_size)\n"
-}

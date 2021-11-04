@@ -1,9 +1,0 @@
-{
-    "functionName": "test_derive_key_missing_cryptographic_length",
-    "className": "TestKmipEngine",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the right error is thrown when the cryptographic length is\n        missing from a DeriveKey request.\n        \"\"\"\ne = engine.KmipEngine()\ne._data_store = self.engine\ne._data_store_session_factory = self.session_factory\ne._data_session = e._data_store_session_factory()\ne._is_allowed_by_operation_policy = mock.Mock(return_value=True)\ne._logger = mock.MagicMock()\ne._cryptography_engine.logger = mock.MagicMock()\nbase_key = pie_objects.SymmetricKey(algorithm=enums.CryptographicAlgorithm.\n    HMAC_SHA256, length=160, value=\n    b'\\x0b\\x0b\\x0b\\x0b\\x0b\\x0b\\x0b\\x0b\\x0b\\x0b\\x0b\\x0b\\x0b\\x0b\\x0b\\x0b\\x0b\\x0b\\x0b\\x0b'\n    , masks=[enums.CryptographicUsageMask.DERIVE_KEY])\ne._data_session.add(base_key)\ne._data_session.commit()\ne._data_session = e._data_store_session_factory()\nattribute_factory = factory.AttributeFactory()\npayload = payloads.DeriveKeyRequestPayload(object_type=enums.ObjectType.\n    SYMMETRIC_KEY, unique_identifiers=[str(base_key.unique_identifier)],\n    derivation_method=enums.DerivationMethod.HMAC, derivation_parameters=\n    attributes.DerivationParameters(cryptographic_parameters=attributes.\n    CryptographicParameters(hashing_algorithm=enums.HashingAlgorithm.\n    SHA_256), derivation_data=b'Hi There'), template_attribute=objects.\n    TemplateAttribute(attributes=[attribute_factory.create_attribute(enums.\n    AttributeType.CRYPTOGRAPHIC_ALGORITHM, enums.CryptographicAlgorithm.AES)]))\nargs = payload,\nself.assertRaisesRegex(exceptions.InvalidField,\n    'The cryptographic length must be provided in the template attribute.',\n    e._process_derive_key, *args)\n"
-}

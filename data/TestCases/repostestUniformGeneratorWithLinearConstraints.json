@@ -1,9 +1,0 @@
-{
-    "functionName": "testUniformGeneratorWithLinearConstraints",
-    "className": "UniformGeneratorTest",
-    "fileName": "/facebook_&_Ax/ax_&_models_&_tests_&_test_uniform.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "generator = UniformGenerator(seed=0)\nn_tunable = fixed_param_index = 3\nbounds = self._create_bounds(n_tunable=n_tunable, n_fixed=1)\ngenerated_points, weights = generator.gen(n=3, bounds=bounds,\n    linear_constraints=(np.array([[1, 1, 0, 0], [0, 1, 1, 0]]), np.array([1,\n    1])), fixed_features={fixed_param_index: 1})\nexpected_points = np.array([[0.0871293, 0.0202184, 0.83261985, 1.0], [\n    0.11827443, 0.63992102, 0.14335329, 1.0], [0.56843395, 0.0187898, \n    0.6176355, 1.0]])\nself.assertTrue(np.shape(expected_points) == np.shape(generated_points))\nself.assertTrue(np.allclose(expected_points, generated_points))\n"
-}

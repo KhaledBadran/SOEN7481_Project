@@ -1,9 +1,0 @@
-{
-    "functionName": "empty_queued_pool",
-    "className": null,
-    "fileName": "/5uper5hoot_&_PikaTools/tests_&_test_pool.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "queued = [queued_pool.acquire() for _ in range(queued_pool.max_size)]\nrequest.addfinalizer(lambda : [cxn.release() for cxn in queued])\noverflow = [queued_pool.acquire() for _ in range(queued_pool.max_overflow)]\nrequest.addfinalizer(lambda : [cxn.release() for cxn in overflow])\nreturn queued_pool\npytest.fixture"
-}

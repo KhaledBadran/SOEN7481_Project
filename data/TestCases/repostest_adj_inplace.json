@@ -1,9 +1,0 @@
-{
-    "functionName": "test_adj_inplace",
-    "className": "GradientStreamedTest",
-    "fileName": "/IMTtugraz_&_PyQMRI/test_&_test_gradient.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "outgrad = np.zeros_like(self.divin)\noutdiv = np.zeros_like(self.gradin)\nself.grad.fwd([outgrad], [[self.gradin]])\nself.grad.adj([outdiv], [[self.divin]])\na = np.vdot(outgrad[(...), :-1].flatten(), self.divin[(...), :-1].flatten()\n    ) / self.gradin.size\nb = np.vdot(self.gradin.flatten(), -outdiv.flatten()) / self.gradin.size\nprint('Adjointness: %.2e +1j %.2e' % ((a - b).real, (a - b).imag))\nself.assertAlmostEqual(a, b, places=15)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_conf_in_current_directory",
-    "className": "CITestUtils",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test config handler with PyU4V in current directory.\"\"\"\nif self.skip_config_ci:\n    self.skipTest(reason='PyU4V.conf not in ~/.PyU4V/')\nhidden_conf = os.path.normpath('{dir}/__PyU4V.conf'.format(dir=self.conf_dir))\ntemp_file = str()\ntry:\n    temp_file = shutil.copy(self.conf_file, os.getcwd())\n    os.rename(self.conf_file, hidden_conf)\n    temp_u4v_conn = univmax_conn.U4VConn()\n    test_request = temp_u4v_conn.common.get_uni_version()\n    self.assertTrue(test_request)\n    self.addCleanup(self.cleanup_files, pyu4v_orig=(self.conf_file,\n        hidden_conf), temp_file=temp_file)\nexcept Exception as e:\n    self.addCleanup(self.cleanup_files, pyu4v_orig=(self.conf_file,\n        hidden_conf), temp_file=temp_file)\n    raise Exception('Test failed with exception: {msg}'.format(msg=e))\n"
-}

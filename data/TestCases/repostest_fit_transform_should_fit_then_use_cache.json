@@ -1,9 +1,0 @@
-{
-    "functionName": "test_fit_transform_should_fit_then_use_cache",
-    "className": null,
-    "fileName": "/Neuraxio_&_Neuraxle/testing_&_steps_&_test_value_caching_wrapper.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "tape_transform = TapeCallbackFunction()\ntape_fit = TapeCallbackFunction()\np = Pipeline([PickleValueCachingWrapper(LogFitTransformCallbackStep(\n    tape_transform, tape_fit, transform_function=np.log), tmpdir)])\np, outputs = p.fit_transform([1, 1, 2, 2], [2, 2, 4, 4])\nassert outputs == EXPECTED_OUTPUTS\nassert tape_transform.data == [[1], [2]]\nassert tape_fit.data == [([1, 1, 2, 2], [2, 2, 4, 4])]\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_regularize_layer_params_weighted",
-    "className": "TestRegularizationHelpers",
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_test_regularization.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from lasagne.regularization import regularize_layer_params_weighted\nfrom lasagne.regularization import apply_penalty, l2\nl_1, l_2, l_3 = layers\nlayers = OrderedDict()\nlayers[l_2] = 0.1\nlayers[l_3] = 0.5\nloss = regularize_layer_params_weighted(layers, lasagne.regularization.l2)\nassert equal_computations([loss], [sum([0.1 * apply_penalty([l_2.W], l2), \n    0.5 * apply_penalty([l_3.W], l2)])])\n"
-}

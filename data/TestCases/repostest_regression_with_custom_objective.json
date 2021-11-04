@@ -1,9 +1,0 @@
-{
-    "functionName": "test_regression_with_custom_objective",
-    "className": "TestSklearn",
-    "fileName": "/microsoft_&_LightGBM/tests_&_python_package_test_&_test_sklearn.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "X, y = load_boston(return_X_y=True)\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1,\n    random_state=42)\ngbm = lgb.LGBMRegressor(n_estimators=50, silent=True, objective=objective_ls)\ngbm.fit(X_train, y_train, eval_set=[(X_test, y_test)],\n    early_stopping_rounds=5, verbose=False)\nret = mean_squared_error(y_test, gbm.predict(X_test))\nself.assertLess(ret, 7.0)\nself.assertAlmostEqual(ret, gbm.evals_result_['valid_0']['l2'][gbm.\n    best_iteration_ - 1], places=5)\n"
-}

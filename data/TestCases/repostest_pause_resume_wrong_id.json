@@ -1,9 +1,0 @@
-{
-    "functionName": "test_pause_resume_wrong_id",
-    "className": null,
-    "fileName": "/EclecticIQ_&_OpenTAXII/tests_&_services_&_test_subscription_management.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "version = 11\nservice = server.get_service('collection-management-A')\nheaders = prepare_headers(version, https)\nrequest = prepare_request(collection=COLLECTION_OPEN, action=ACT_SUBSCRIBE,\n    version=version)\nresponse = service.process(headers, request)\nassert isinstance(response, as_tm(version).ManageCollectionSubscriptionResponse\n    )\nassert response.collection_name == COLLECTION_OPEN\nassert len(response.subscription_instances) == 1\nsubs = response.subscription_instances[0]\nassert subs.subscription_id\nassert subs.status == SS_ACTIVE\nwith pytest.raises(exceptions.StatusMessageException):\n    request = prepare_request(collection=COLLECTION_OPEN, action=ACT_PAUSE,\n        subscription_id='RANDOM-WRONG-SUBSCRIPTION', version=version)\n    response = service.process(headers, request)\nwith pytest.raises(exceptions.StatusMessageException):\n    request = prepare_request(collection=COLLECTION_OPEN, action=ACT_RESUME,\n        subscription_id='RANDOM-WRONG-SUBSCRIPTION', version=version)\n    response = service.process(headers, request)\npytest.mark.parametrize('https', [True, False])"
-}

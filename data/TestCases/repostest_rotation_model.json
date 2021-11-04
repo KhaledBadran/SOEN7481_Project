@@ -1,9 +1,0 @@
-{
-    "functionName": "test_rotation_model",
-    "className": null,
-    "fileName": "/AllenInstitute_&_EM_Aligner_python/integration_tests_&_test_transforms.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "rt = renderapi.transform.Polynomial2DTransform()\nwith pytest.raises(AlignerTransformException):\n    t = AlignerRotationModel(transform=rt)\nrt = renderapi.transform.AffineModel()\nt = AlignerTransform(name='RotationModel', transform=rt)\nassert t.__class__ == AlignerRotationModel\nt = AlignerTransform(name='RotationModel', transform=rt, fullsize=True)\nnmatch = 100\nmatch = example_match(nmatch, fac=1000)\nncol = 1000\nicol = 73\nppts, qpts, w = AlignerRotationModel.preprocess(np.array(match['matches'][\n    'p']).transpose(), np.array(match['matches']['q']).transpose(), np.\n    array(match['matches']['w']))\nassert ppts.shape == qpts.shape\nassert ppts.shape[0] <= nmatch\nblock, weights, rhs = t.block_from_pts(ppts, w, icol, ncol)\nassert rhs.shape == ppts.shape\nassert block.check_format() is None\nassert weights.size == ppts.shape[0]\nassert block.shape == (ppts.shape[0] * t.rows_per_ptmatch, ncol)\nassert block.nnz == ppts.shape[0]\nt = AlignerTransform(name='RotationModel')\nv = t.to_solve_vec()\nassert np.all(v == np.array([0.0]).reshape(-1, 1))\nntiles = 6\nvec = np.random.randn(ntiles)\nvec = vec.reshape(-1, 1)\nindex = 0\nfor i in range(ntiles):\n    t = AlignerTransform(name='RotationModel')\n    index += t.from_solve_vec(vec[index:, :])\n    msub = t.rotation\n    assert np.isclose(np.mod(np.abs(msub - vec[i][0]), 2.0 * np.pi), 0.0)\nrdict = {'default_lambda': 1.2345, 'translation_factor': 0.1}\nt = AlignerTransform(name='RotationModel')\nr = t.regularization(rdict)\nassert np.all(np.isclose(r, 1.2345))\n"
-}

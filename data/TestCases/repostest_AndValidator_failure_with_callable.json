@@ -1,9 +1,0 @@
-{
-    "functionName": "test_AndValidator_failure_with_callable",
-    "className": null,
-    "fileName": "/justanr_&_Flask-Transfer/tests_&_test_validators.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "dummy_file = DummyFile(filename='doesntmatter.exe')\ntruthy = mock.MagicMock(return_value=True)\nfalsey = mock.MagicMock(return_value=False)\nand_validator = validators.AndValidator(falsey, truthy)\nwith pytest.raises(UploadError) as excinfo:\n    and_validator(dummy_file, {})\nassert 'returned false in' in str(excinfo.value)\nassert falsey.call_count == 1\nassert falsey.call_args == mock.call(dummy_file, {})\nassert truthy.call_count == 0\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_amend_commit_add_files",
-    "className": null,
-    "fileName": "/132nd-etcher_&_EPAB/test_&_test_repo_&_test_commit.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "_dummy_commit(repo)\nassert len(list(repo.repo.iter_commits())) == 2\nPath('moo').touch()\nPath('pig').touch()\nassert repo.is_dirty(untracked=True)\nassert len(repo.untracked_files()) == 2\nrepo.amend_commit(new_message='test', files_to_add='moo')\nassert repo.is_dirty(untracked=True)\nassert len(repo.untracked_files()) == 1\nassert 'pig' in repo.untracked_files()\n"
-}

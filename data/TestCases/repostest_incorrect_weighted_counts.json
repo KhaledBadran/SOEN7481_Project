@@ -1,9 +1,0 @@
-{
-    "functionName": "test_incorrect_weighted_counts",
-    "className": "TestBugFixes",
-    "fileName": "/Rambatino_&_CHAID/tests_&_test_tree.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Fix bug whereby the weights was using the class weights\n        and not the sliced weights in node()\n        \"\"\"\ntree = CHAID.Tree.from_numpy(self.ndarr, self.arr, alpha_merge=0.999,\n    weights=self.wt, max_depth=5, min_parent_node_size=2, min_child_node_size=0\n    )\nassert tree.tree_store[3].members == {(1): 0, (2): 1.2}\nassert tree.tree_store[5].members == {(1): 5.0, (2): 6.0}\n"
-}

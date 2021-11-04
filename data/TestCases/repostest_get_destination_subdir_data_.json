@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_destination_subdir_data_",
-    "className": "TestSync",
-    "fileName": "/DusanMadar_&_PySyncDroid/tests_&_test_sync.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test 'get_destination_subdir_data' populates 'dst_dir_fls' with\n        collected data.\n        \"\"\"\nmock_path_exists.return_value = True\nmock_listdir.return_value = ['song.mp3', 'cover.jpg', 'demo.mp3']\nmock_handle_ignored_file_type.side_effect = [None, IgnoredTypeException, None]\nsync = Sync(FAKE_MTP_DETAILS, '/tmp', 'Card/Music')\nsync.set_source_abs()\nsync.set_destination_abs()\nsync_data = self._create_empty_sync_data(sync)\nsync.get_destination_subdir_data(sync_data)\nself.assertEqual(sync_data['dst_dir_fls'], [\n    '/run/user/<user>/gvfs/mtp:host=%5Busb%3A002%2C003%5D/Card/Music/testdir/song.mp3'\n    ,\n    '/run/user/<user>/gvfs/mtp:host=%5Busb%3A002%2C003%5D/Card/Music/testdir/demo.mp3'\n    ])\npatch('pysyncdroid.sync.os.path.exists')patch('pysyncdroid.sync.os.listdir')patch.object(pysyncdroid.sync.Sync, 'handle_ignored_file_type')"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_nearest_neighbor_ranker",
-    "className": null,
-    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_tests_&_test_neighbors.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from sklearn.neighbors import KNeighborsClassifier\nfrom sklearn.neighbors import NearestNeighbors\nnp.random.seed(0)\nn_samples = 110\nn_features = 10\nX = np.random.rand(n_samples, n_features)\nnormalize(X, copy=False)\nindex = np.arange(n_samples, dtype='int')\ny = np.random.randint(0, n_categories, size=(n_samples,))\nindex_train, index_test, y_train, y_test = train_test_split(index, y)\nX_train = X[index_train]\nX_test = X[index_test]\nrk = NearestNeighborRanker()\nrk.fit(X_train, y_train)\ny_pred, idx_pred = rk.kneighbors(X_test, batch_size=90)\nassert y_pred.shape == (X_test.shape[0], n_categories)\nassert y_pred.min() >= -1 and y_pred.max() <= 1\nassert idx_pred.shape == (X_test.shape[0], n_categories)\ncl = KNeighborsClassifier(n_neighbors=1, algorithm='brute', metric='cosine')\ncl.fit(X_train, y_train)\nidx_ref_cl = cl.predict(X_test)\nlabel_pred = np.argmax(y_pred, axis=1)\nassert_equal(label_pred, idx_ref_cl)\nnn = NearestNeighbors(n_neighbors=1, algorithm='brute', metric='cosine')\nnn.fit(X_train)\nS_ref_nn, idx_ref_nn = nn.kneighbors(X_test)\nassert_equal(idx_pred[range(len(label_pred)), label_pred], idx_ref_nn[:, (0)])\nassert_allclose(np.max(y_pred, axis=1)[:, (None)], 1 - S_ref_nn)\npytest.mark.parametrize('n_categories', [1, 2, 3, 4])"
-}

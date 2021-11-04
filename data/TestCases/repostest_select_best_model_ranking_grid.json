@@ -1,9 +1,0 @@
-{
-    "functionName": "test_select_best_model_ranking_grid",
-    "className": null,
-    "fileName": "/Accenture_&_AmpliGraph/tests_&_ampligraph_&_evaluation_&_test_protocol.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "X = load_wn18rr()\nmodel_class = TransE\nparam_grid = {'batches_count': [50], 'seed': 0, 'epochs': [1], 'k': [2, 50],\n    'eta': [1], 'loss': ['nll'], 'loss_params': {},\n    'embedding_model_params': {}, 'regularizer': [None],\n    'regularizer_params': {}, 'optimizer': ['adagrad'], 'optimizer_params':\n    {'lr': [1000.0, 0.0001]}}\n(best_model, best_params, best_mrr_train, ranks_test, test_results,\n    experimental_history) = (select_best_model_ranking(model_class, X[\n    'train'], X['valid'][::5], X['test'][::10], param_grid))\nassert best_params['k'] in (2, 50)\nassert best_params['optimizer_params']['lr'] == 0.0001\nassert len(experimental_history) == 4\nassert set(i['model_params']['k'] for i in experimental_history) == {2, 50}\nassert set(i['model_params']['optimizer_params']['lr'] for i in\n    experimental_history) == {1000.0, 0.0001}\nassert len(set(frozenset(_flatten_nested_keys(i['model_params']).items()) for\n    i in experimental_history)) == 4\nassert set(test_results.keys()) == {'mrr', 'mr', 'hits_1', 'hits_3', 'hits_10'}\nprint(test_results.values())\nassert all(r >= 0 for r in test_results.values())\nassert all(not np.isnan(r) for r in test_results.values())\n"
-}

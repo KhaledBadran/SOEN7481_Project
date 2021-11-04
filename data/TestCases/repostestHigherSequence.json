@@ -1,9 +1,0 @@
-{
-    "functionName": "testHigherSequence",
-    "className": "TestInvertibleBloomLookupTable",
-    "fileName": "/named-data_&_PyNDN2/tests_&_unit_tests_&_test_invertible_bloom_lookup_table.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "size = 10\nownIblt = InvertibleBloomLookupTable(size)\nreceivedIblt = InvertibleBloomLookupTable(size)\nprefix = Name('/test/memphis').appendNumber(3).toUri()\nhash1 = Common.murmurHash3Blob(11, prefix)\nownIblt.insert(hash1)\nprefix2 = Name('/test/memphis').appendNumber(4).toUri()\nhash2 = Common.murmurHash3Blob(11, prefix2)\nreceivedIblt.insert(hash2)\ndiff = ownIblt.difference(receivedIblt)\npositive = set()\nnegative = set()\nself.assertTrue(diff.listEntries(positive, negative))\nself.assertEqual(1, len(positive))\nself.assertTrue(min(positive) == hash1)\nself.assertEqual(1, len(negative))\nself.assertTrue(min(negative) == hash2)\n"
-}

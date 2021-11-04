@@ -1,9 +1,0 @@
-{
-    "functionName": "test_rbasex_pos",
-    "className": null,
-    "fileName": "/PyAbel_&_PyAbel/abel_&_tests_&_test_rbasex.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test positive regularization as in run_orders().\n    \"\"\"\nsigma = 5.0\nstep = 6 * sigma\nfor order in [0, 1, 2, 4, 6]:\n    rmax = int((order + 2) * step)\n    if order == 1:\n        rmax += int(step)\n        height = 2 * rmax + 1\n    else:\n        height = rmax + 1\n    x = np.arange(float(rmax + 1))\n    y = rmax - np.arange(float(height))[:, (None)]\n    r = np.sqrt(x ** 2 + y ** 2)\n    r[rmax, 0] = np.inf\n    c = y / r\n    s = x / r\n    r[rmax, 0] = 0\n\n    def peak(i, isotropic=False):\n        if isotropic:\n            return np.exp(-(r - (i + 1) * step) ** 2 / (2 * sigma ** 2))\n        m = i\n        k = order - m & ~1\n        return c ** m * s ** k * np.exp(-(r - (i + 1) * step) ** 2 / (2 * \n            sigma ** 2))\n    src = peak(0)\n    if order == 1:\n        src += (1 + c) * peak(1, True)\n        src += (1 - c) * peak(2, True)\n    else:\n        for i in range(2, order + 1, 2):\n            src += peak(i)\n    zero = np.full_like(src, -1e-15)\n    abel = hansenlaw_transform(src, direction='forward', hold_order=1)\n    abel += 0.05 * np.random.RandomState(0).rand(*abel.shape)\n    param = '-> order = {}, '.format(order)\n    for mode in ['clean', 'cached']:\n        if mode == 'clean':\n            cache_cleanup()\n        recon, _ = rbasex_transform(abel, origin=(rmax, 0), order=order,\n            reg='pos', out='fold')\n        recon[rmax - 3:rmax + 4, :2] = 0\n        assert_allclose(recon, src, atol=0.05, err_msg=param + mode)\n        assert_array_less(zero, recon)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "expand_cov",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_conditionals_&_test_multioutput.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    :param G: cholesky of covariance matrices, L x M x M\n    :param W: mixing matrix (square),  L x L\n    :return: cholesky of 1 x LM x LM covariance matrix\n    \"\"\"\nq_cov = np.matmul(q_sqrt, q_sqrt.transpose([0, 2, 1]))\nq_cov_expanded = scipy.linalg.block_diag(*q_cov)\nq_sqrt_expanded = np.linalg.cholesky(q_cov_expanded)\nreturn q_sqrt_expanded[None, ...]\n"
-}

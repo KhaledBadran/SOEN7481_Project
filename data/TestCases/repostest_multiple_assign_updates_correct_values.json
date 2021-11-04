@@ -1,9 +1,0 @@
-{
-    "functionName": "test_multiple_assign_updates_correct_values",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_test_base_training.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "old_value_dict = leaf_components(model).copy()\nmultiple_assign(model, var_update_dict)\nfor path, variable in leaf_components(model).items():\n    if path in var_update_dict.keys():\n        np.testing.assert_almost_equal(variable.value().numpy(),\n            var_update_dict[path], decimal=7)\n    else:\n        np.testing.assert_equal(variable.value().numpy(), old_value_dict[\n            path].value().numpy())\npytest.mark.parametrize('var_update_dict', [model_param_updates])"
-}

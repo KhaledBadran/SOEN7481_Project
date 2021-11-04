@@ -1,9 +1,0 @@
-{
-    "functionName": "testDifference",
-    "className": "TestInvertibleBloomLookupTable",
-    "fileName": "/named-data_&_PyNDN2/tests_&_unit_tests_&_test_invertible_bloom_lookup_table.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "size = 10\nownIblt = InvertibleBloomLookupTable(size)\nreceivedIblt = InvertibleBloomLookupTable(ownIblt)\ndiff = ownIblt.difference(receivedIblt)\npositive = set()\nnegative = set()\nself.assertTrue(diff.listEntries(positive, negative))\nself.assertEqual(0, len(positive))\nself.assertEqual(0, len(negative))\nprefix = Name('/test/memphis').appendNumber(1).toUri()\nnewHash = Common.murmurHash3Blob(11, prefix)\nownIblt.insert(newHash)\ndiff = ownIblt.difference(receivedIblt)\nself.assertTrue(diff.listEntries(positive, negative))\nself.assertEqual(1, len(positive))\nself.assertEqual(0, len(negative))\nprefix = Name('/test/csu').appendNumber(1).toUri()\nnewHash = Common.murmurHash3Blob(11, prefix)\nreceivedIblt.insert(newHash)\ndiff = ownIblt.difference(receivedIblt)\nself.assertTrue(diff.listEntries(positive, negative))\nself.assertEqual(1, len(positive))\nself.assertEqual(1, len(negative))\n"
-}

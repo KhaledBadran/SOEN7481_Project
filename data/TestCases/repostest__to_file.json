@@ -1,9 +1,0 @@
-{
-    "functionName": "test__to_file",
-    "className": "TestElasticBuffer",
-    "fileName": "/dkaslovsky_&_ElasticBatch/tests_&_test_buffer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "dump_dir = '/tmp'\neb = ElasticBuffer(dump_dir=dump_dir)\nexpected_dump_file = os.path.join(dump_dir,\n    f'{eb.__class__.__name__}_buffer_dump_{self.timestamp}')\neb.add(self.docs)\neb._to_file(timestamp=self.timestamp)\nmocked_file.assert_called_once_with(expected_dump_file, 'w')\nself.assertEqual(mocked_file().write.call_count, len(self.docs),\n    'write should be called once for every document')\nexpected_write_call_args = [(json.dumps(doc) + '\\n') for doc in self.docs]\nwrite_call_args = [arg[0][0] for arg in mocked_file().write.call_args_list]\nself.assertListEqual(write_call_args, expected_write_call_args,\n    'write should be called with each document (json serialized and newline)')\npatch(f'{ElasticBuffer.__module__}.open', side_effect=mock_open())"
-}

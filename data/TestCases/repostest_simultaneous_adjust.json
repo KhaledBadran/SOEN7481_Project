@@ -1,9 +1,0 @@
-{
-    "functionName": "test_simultaneous_adjust",
-    "className": "TestAdjust",
-    "fileName": "/hdoupe_&_ParamTools/paramtools_&_tests_&_test_parameters.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Adjust min_int_param above original max_int_param value at same time as\n        max_int_param value is adjusted up. This tests that the new param is\n        compared against the adjusted reference param if the reference param is\n        specified.\n        \"\"\"\nparams = TestParams()\nparams.set_state(label0='zero', label1=1)\nadjustment = {'min_int_param': [{'label0': 'zero', 'label1': 1, 'value': 4}\n    ], 'max_int_param': [{'label0': 'zero', 'label1': 1, 'value': 5}]}\nparams.adjust(adjustment)\nassert params.min_int_param == adjustment['min_int_param']\nassert params.max_int_param == adjustment['max_int_param']\n"
-}

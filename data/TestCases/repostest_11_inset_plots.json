@@ -1,9 +1,0 @@
-{
-    "functionName": "test_11_inset_plots",
-    "className": null,
-    "fileName": "/ACCLAB_&_DABEST-python/dabest_&_tests_&_test_03_plotting.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "iris = pd.read_csv(\n    'https://github.com/mwaskom/seaborn-data/raw/master/iris.csv')\niris_melt = pd.melt(iris.reset_index(), id_vars=['species', 'index'],\n    var_name='metric')\niris_dabest1 = load(data=iris, x='species', y='petal_width', idx=('setosa',\n    'versicolor', 'virginica'))\niris_dabest2 = load(data=iris, x='species', y='sepal_width', idx=('setosa',\n    'versicolor'))\niris_dabest3 = load(data=iris_melt[iris_melt.species == 'setosa'], x=\n    'metric', y='value', idx=('sepal_length', 'sepal_width'), paired=True,\n    id_col='index')\nfig, ax = plt.subplots(nrows=2, ncols=2, figsize=(15, 15), gridspec_kw={\n    'wspace': 0.5})\niris_dabest1.mean_diff.plot(ax=ax.flat[0])\niris_dabest2.mean_diff.plot(ax=ax.flat[1])\niris_dabest3.mean_diff.plot(ax=ax.flat[2])\niris_dabest3.mean_diff.plot(ax=ax.flat[3], float_contrast=False)\nreturn fig\npytest.mark.mpl_image_compare(tolerance=20)"
-}

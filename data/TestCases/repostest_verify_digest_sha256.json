@@ -1,9 +1,0 @@
-{
-    "functionName": "test_verify_digest_sha256",
-    "className": "TestInterestMethods",
-    "fileName": "/named-data_&_PyNDN2/tests_&_unit_tests_&_test_interest_methods.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "identityStorage = MemoryIdentityStorage()\nkeyChain = KeyChain(IdentityManager(identityStorage,\n    MemoryPrivateKeyStorage()), SelfVerifyPolicyManager(identityStorage))\ninterest = Interest(Name('/test/signed-interest'))\nkeyChain.signWithSha256(interest)\nfailedCallback = Mock()\nverifiedCallback = Mock()\nkeyChain.verifyInterest(interest, verifiedCallback, failedCallback)\nself.assertEqual(failedCallback.call_count, 0, 'Signature verification failed')\nself.assertEqual(verifiedCallback.call_count, 1,\n    'Verification callback was not used.')\n"
-}

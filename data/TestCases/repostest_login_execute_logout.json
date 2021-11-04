@@ -1,9 +1,0 @@
-{
-    "functionName": "test_login_execute_logout",
-    "className": "ImpersonatorTestCase",
-    "fileName": "/Stavatech_&_Impersonator-Python-Client/test_&_test_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "client = Impersonator()\ncredentials = {'username': 'username', 'password': 'password'}\npayload = {'token': MOCK_TOKEN, 'command': MOCK_COMMAND_SUCCESS}\nlogin_endpoint = 'http://%s:%d/%s' % (client.host, client.port, client.\n    token_endpoint)\ncommand_endpoint = 'http://%s:%d/%s' % (client.host, client.port, client.\n    command_endpoint)\nlogout_endpoint = '%s/%s' % (login_endpoint, MOCK_TOKEN)\ntoken = client.login(**credentials)\nself.assertIn(mock.call(login_endpoint, json=credentials), mock_post.\n    call_args_list)\nself.assertEqual(token, MOCK_TOKEN)\ndata = client.execute(MOCK_COMMAND_SUCCESS)\nself.assertIn(mock.call(command_endpoint, json=payload), mock_post.\n    call_args_list)\nself.assertEqual(data, MOCK_OUTPUT)\nclient.logout()\nself.assertIn(mock.call(logout_endpoint), mock_delete.call_args_list)\nself.assertEqual(client.token, None)\nmock.patch('requests.post', side_effect=mock_post_request)mock.patch('requests.delete', side_effect=mock_logout_success)"
-}

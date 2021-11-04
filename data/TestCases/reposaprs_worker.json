@@ -1,9 +1,0 @@
-{
-    "functionName": "aprs_worker",
-    "className": null,
-    "fileName": "/FaradayRF_&_Faraday-Software/faraday_&_aprs.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Obtains telemetry with infinite loop, forwards to APRS-IS server\n\n    :param config: Configuration file descriptor from aprs.INI\n    :param sock: Internet socket\n    :return: None\n    \"\"\"\nlogger.debug('Starting aprs_worker thread')\nrate = config.getint('APRSIS', 'RATE')\nconn = False\nwhile True:\n    for sequence in range(8280):\n        stations = getStations()\n        stationData = getStationData(stations)\n        str = 'Tracking {0} Faraday stations...'\n        logger.info(str.format(len(stations)))\n        if not conn:\n            sock = connectAPRSIS()\n        try:\n            conn = sendPositions(sequence, stationData, sock)\n            if sequence % 10 == 0:\n                sendTelemLabels(stationData, sock)\n                sendParameters(stationData, sock)\n                sendEquations(stationData, sock)\n        except StandardError as e:\n            logger.error(e)\n        sleep(rate)\n"
-}

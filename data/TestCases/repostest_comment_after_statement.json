@@ -1,9 +1,0 @@
-{
-    "functionName": "test_comment_after_statement",
-    "className": "LexerTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_lexer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "template = \"\"\"\n        % if x: #comment\n            hi\n        % else: #next\n            hi\n        % endif #end\n\"\"\"\nnodes = Lexer(template).parse()\nself._compare(nodes, TemplateNode({}, [Text('\\n', (1, 1)), ControlLine('if',\n    'if x: #comment', False, (2, 1)), Text('            hi\\n', (3, 1)),\n    ControlLine('else', 'else: #next', False, (4, 1)), Text(\n    '            hi\\n', (5, 1)), ControlLine('if', 'endif #end', True, (6, \n    1))]))\n"
-}

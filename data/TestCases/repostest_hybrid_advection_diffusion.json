@@ -1,9 +1,0 @@
-{
-    "functionName": "test_hybrid_advection_diffusion",
-    "className": "AdvectionDiffusionTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_AdvectionDiffusionTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "mod = op.models.physics.ad_dif_conductance.ad_dif\nself.phys.add_model(propname='throat.ad_dif_conductance_hybrid', model=mod,\n    s_scheme='hybrid')\nself.phys.regenerate_models()\nself.ad.setup(conductance='throat.ad_dif_conductance_hybrid')\nself.ad.run()\nx = [0.0, 0.0, 0.0, 0.89908, 0.89908, 0.89908, 1.54128, 1.54128, 1.54128, \n    2.0, 2.0, 2.0]\ny = np.around(self.ad['pore.concentration'], decimals=5)\nassert_allclose(actual=y, desired=x)\n"
-}

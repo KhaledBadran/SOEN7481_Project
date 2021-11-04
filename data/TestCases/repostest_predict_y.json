@@ -1,9 +1,0 @@
-{
-    "functionName": "test_predict_y",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_kernels_&_test_coregion.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "vgp0, vgp1, cvgp = _prepare_models()\nmu1, var1 = vgp0.predict_y(Datum.Xtest)\nc_mu1, c_var1 = cvgp.predict_y(np.hstack([Datum.Xtest, np.zeros((Datum.\n    Xtest.shape[0], 1))]))\nassert_allclose(mu1, c_mu1[:, :1], atol=0.0001)\nassert_allclose(var1, c_var1[:, :1], atol=0.0001)\nmu2, var2 = vgp1.predict_y(Datum.Xtest)\nc_mu2, c_var2 = cvgp.predict_y(np.hstack([Datum.Xtest, np.ones((Datum.Xtest\n    .shape[0], 1))]))\nassert_allclose(mu2, c_mu2[:, 1:2], atol=0.0001)\nassert_allclose(var2, c_var2[:, 1:2], atol=0.0001)\n"
-}

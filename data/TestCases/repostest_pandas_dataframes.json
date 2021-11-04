@@ -1,9 +1,0 @@
-{
-    "functionName": "test_pandas_dataframes",
-    "className": null,
-    "fileName": "/gelijergensen_&_PermutationImportance/test_&_test_data_verification.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "inputs = np.array([[1, 2, 3], [2, 4, 6]])\noutputs = np.array([1, 0])\ndata = inputs, outputs\nresult = verify_data(data)\nfor exp, res in zip(data, result):\n    assert (exp == res).all()\nA = [1, 2]\nB = [2, 4]\nC = [3, 6]\nD = [1, 0]\ninputs = pd.DataFrame({'A': A, 'B': B, 'C': C})\noutputs = pd.DataFrame({'D': D})\ndata = inputs, outputs\nresult = verify_data(data)\nfor exp, res in zip(data, result):\n    assert exp.equals(res)\ninputs = pd.DataFrame({'A': A, 'B': B, 'C': C, 'D': D})\noutputs = 'D'\ndata = inputs, outputs\nexpected_inputs = inputs[['A', 'B', 'C']]\nexpected_outputs = inputs[['D']]\nexpected = expected_inputs, expected_outputs\nresult = verify_data(data)\nfor exp, res in zip(expected, result):\n    assert exp.equals(res)\noutputs = pd.DataFrame({'D': D}).values\ndata = inputs, outputs\nwith pytest.raises(InvalidDataException):\n    verify_data(data)\ninputs = np.array([[1, 2, 3], [2, 4, 6]])\noutputs = 'Hi'\ndata = inputs, outputs\nwith pytest.raises(InvalidDataException):\n    verify_data(data)\ndata = 'Hi'\nwith pytest.raises(InvalidDataException):\n    verify_data(data)\ninputs = 'Hi'\noutputs = 'Bye'\ndata = inputs, outputs\nwith pytest.raises(InvalidDataException):\n    verify_data(data)\ninputs = np.array([[1, 2, 3], [2, 4, 6]])\noutputs = np.array([1, 0])\nother = np.array(['A', 'B'])\ndata = inputs, outputs, other\nwith pytest.raises(InvalidDataException):\n    verify_data(data)\n"
-}

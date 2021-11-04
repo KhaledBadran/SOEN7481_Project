@@ -1,9 +1,0 @@
-{
-    "functionName": "test_addmedia",
-    "className": "SingleRequestTests",
-    "fileName": "/kaltura_&_KalturaGeneratedAPIClientsPython/KalturaClient_&_tests_&_test_functional.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ulFile = getTestFile('DemoVideo.flv')\nuploadTokenId = self.client.media.upload(ulFile)\nmediaEntry = KalturaMediaEntry()\nmediaEntry.setName('Media Entry Using Python Client ver %s' % (API_VERSION,))\nmediaEntry.setMediaType(KalturaMediaType(KalturaMediaType.VIDEO))\nmediaEntry = self.client.media.addFromUploadedFile(mediaEntry, uploadTokenId)\nDATA_ENTRY_CONTENT = 'bla bla bla'\ndataEntry = KalturaDataEntry()\ndataEntry.setName('test data entry')\ndataEntry.setDataContent(DATA_ENTRY_CONTENT)\naddedDataEntry = self.client.data.add(dataEntry)\nserveUrl = self.client.data.serve(addedDataEntry.id)\nf = requests.get(serveUrl)\nassert DATA_ENTRY_CONTENT == f.text\n"
-}

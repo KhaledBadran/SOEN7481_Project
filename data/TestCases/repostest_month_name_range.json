@@ -1,9 +1,0 @@
-{
-    "functionName": "test_month_name_range",
-    "className": null,
-    "fileName": "/roniemartinez_&_DocCron/tests_&_test_range.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "cron = doccron.cron('0 10 1 Mar-Nov * *')\nnext_datetime = datetime.now(tz=tzlocal()).replace(day=1, hour=10, minute=0,\n    second=0, microsecond=0)\nwhile True:\n    if next_datetime.month in range(3, 12\n        ) and next_datetime.day == 1 and next_datetime > datetime.now(tz=\n        tzlocal()):\n        break\n    next_datetime += timedelta(days=1)\nnext_schedule = next(cron)\nassert isinstance(next_schedule, datetime)\nassert next_schedule == next_datetime\n"
-}

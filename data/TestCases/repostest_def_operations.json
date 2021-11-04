@@ -1,9 +1,0 @@
-{
-    "functionName": "test_def_operations",
-    "className": "DefTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_def.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"test get/list/has def\"\"\"\ntemplate = Template(\n    \"\"\"\n\n            this is the body\n\n            <%def name=\"a()\">\n                this is a\n            </%def>\n\n            <%def name=\"b(x, y)\">\n                this is b, ${x} ${y}\n            </%def>\n\n        \"\"\"\n    )\nassert template.get_def('a')\nassert template.get_def('b')\nassert_raises(AttributeError, template.get_def, 'c')\nassert template.has_def('a')\nassert template.has_def('b')\nassert not template.has_def('c')\ndefs = template.list_defs()\nassert 'a' in defs\nassert 'b' in defs\nassert 'body' in defs\nassert 'c' not in defs\n"
-}

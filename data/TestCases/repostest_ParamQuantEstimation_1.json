@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ParamQuantEstimation_1",
-    "className": null,
-    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_core_&_tests_&_test_quant_analysis.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Create the object of the 'ParamQuantEstimation' class. Load and then clear reference data.\n    \"\"\"\nhome_dir = tmp_path\nconfig_dir = '.pyxrf'\nstandards_fln = 'quantitative_standards.yaml'\npqe = ParamQuantEstimation(home_dir=home_dir)\nfile_path = os.path.join(home_dir, config_dir, standards_fln)\nassert os.path.isfile(file_path\n    ), f\"Empty file for user-defined reference standards '{file_path}' was not created\"\npqe.load_standards()\nassert pqe.standards_built_in is not None, 'Failed to load built-in standards'\nassert pqe.standards_custom is not None, 'Failed to load user-defined standards'\npqe.clear_standards()\nassert pqe.standards_built_in is None, 'Failed to clear loaded built-in standards'\nassert pqe.standards_custom is None, 'Failed to clear loaded user-defined standards'\n"
-}

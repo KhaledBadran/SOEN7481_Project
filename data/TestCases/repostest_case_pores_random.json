@@ -1,9 +1,0 @@
-{
-    "functionName": "test_case_pores_random",
-    "className": "MixedPercolationTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_MixedPercolationTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "net = self.net\nphys = self.phys\nnp.random.seed(2)\nphys['throat.entry_pressure'] = 0.0\nphys['pore.entry_pressure'] = np.random.random(net.Np) * net.Np\ndat_g = self.run_mp(False, False, False)\nnp.random.seed(2)\ndat_h = self.run_mp(True, False, False)\nassert np.all(dat_h.S_tot <= dat_g.S_tot)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_rekey_on_operation_failure",
-    "className": "TestProxyKmipClient",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_test_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a KmipOperationFailure exception is raised when the\n        backend fails to rekey a key.\n        \"\"\"\nstatus = enums.ResultStatus.OPERATION_FAILED\nreason = enums.ResultReason.GENERAL_FAILURE\nmessage = 'Test failure message'\nresult = {'result_status': status, 'result_reason': reason,\n    'result_message': message}\nerror_message = str(KmipOperationFailure(status, reason, message))\nclient = ProxyKmipClient()\nclient.open()\nclient.proxy.rekey.return_value = result\nkwargs = {'uid': '1', 'offset': 1, 'deactivation_date': 10000}\nself.assertRaisesRegex(KmipOperationFailure, error_message, client.rekey,\n    **kwargs)\nmock.patch('kmip.pie.client.KMIPProxy', mock.MagicMock(spec_set=KMIPProxy))"
-}

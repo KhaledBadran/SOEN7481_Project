@@ -1,9 +1,0 @@
-{
-    "functionName": "test_poll_responses",
-    "className": null,
-    "fileName": "/tutorgen_&_HPIT-python-client/tests_&_hpitclient_&_test_message_sender_mixin.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    MessageSenderMixin._poll_responses() Test plan:\n        -Ensure False returned if pre_poll_responses hook returns false\n        -Ensure False returned if post_poll_responses hook returns false\n        -Ensure a collection of responses returned on success\n    \"\"\"\nhttpretty.register_uri(httpretty.GET,\n    'https://www.hpit-project.org/response/list', body='{\"responses\":\"4\"}')\ndef returnFalse():\n    return False\ndef returnTrue():\n    return True\ntest_message_sender_mixin = MessageSenderMixin()\nsetattr(test_message_sender_mixin, 'pre_poll_responses', returnFalse)\nsetattr(test_message_sender_mixin, 'post_poll_responses', returnTrue)\ntest_message_sender_mixin._poll_responses().should.equal(False)\nsetattr(test_message_sender_mixin, 'pre_poll_responses', returnTrue)\nsetattr(test_message_sender_mixin, 'post_poll_responses', returnTrue)\ntest_message_sender_mixin._poll_responses().should.equal({})\ntest_message_sender_mixin.outstanding_responses['4'] = 1\nsetattr(test_message_sender_mixin, 'pre_poll_responses', returnTrue)\nsetattr(test_message_sender_mixin, 'post_poll_responses', returnFalse)\ntest_message_sender_mixin._poll_responses().should.equal(False)\nsetattr(test_message_sender_mixin, 'pre_poll_responses', returnTrue)\nsetattr(test_message_sender_mixin, 'post_poll_responses', returnTrue)\ntest_message_sender_mixin._poll_responses().should.equal('4')\nhttpretty.activate"
-}

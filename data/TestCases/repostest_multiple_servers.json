@@ -1,9 +1,0 @@
-{
-    "functionName": "test_multiple_servers",
-    "className": "TestBufferServer",
-    "fileName": "/BciPy_&_BciPy/bcipy_&_acquisition_&_tests_&_test_buffer_server.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test multiple concurrent servers.\"\"\"\npid2 = buffer_server.start(self.channels, self._next_buf_name())\nn_records = 200\nfor count, data in enumerate(mock_data(n_records, self.channel_count)):\n    if count % 2 == 0:\n        buffer_server.append(self.pid, Record(data, count, None))\n    else:\n        buffer_server.append(pid2, Record(data, count, None))\nself.assertEqual(buffer_server.count(self.pid), n_records / 2)\nself.assertEqual(buffer_server.count(pid2), n_records / 2)\nserver1_data = buffer_server.get_data(self.pid, 0, 5)\nserver2_data = buffer_server.get_data(pid2, 0, 5)\nself.assertNotEqual(server1_data, server2_data)\nbuffer_server.stop(pid2)\n"
-}

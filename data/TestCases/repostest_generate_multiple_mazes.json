@@ -1,9 +1,0 @@
-{
-    "functionName": "test_generate_multiple_mazes",
-    "className": null,
-    "fileName": "/microsoft_&_MazeExplorer/tests_&_test_mazeexplorer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    This function should test whether new episodes sample from the selection of map levels in the wad.\n    The assertion could be that every map is used at least once but given the stochasticity, it becomes\n    a trade off between how many episodes to sample and how certain one can be that the test will pass.\n    For now this test is implemented with the weaker condition that more than one map is sampled.\n    This ensures at least that the map level is not being fixed.\n    \"\"\"\nfor number_mazes in [1, 5, 10]:\n    maps = set()\n    env = MazeExplorer(number_maps=number_mazes, mazes_path=tmpdir.strpath)\n    for _ in range(5000):\n        *_, done, _ = env.step(env.action_space.sample())\n        if done:\n            env.reset()\n            map_id = int(env.env.get_game_variable(GameVariable.USER4))\n            maps.add(map_id)\n    if number_mazes == 1:\n        assert len(maps) == 1\n    else:\n        assert len(maps) > 1\n"
-}

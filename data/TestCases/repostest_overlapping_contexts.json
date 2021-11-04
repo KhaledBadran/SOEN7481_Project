@@ -1,9 +1,0 @@
-{
-    "functionName": "test_overlapping_contexts",
-    "className": null,
-    "fileName": "/PRIArobotics_&_HedgehogClient/tests_&_test_async_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "port_a, value_a, port_d, value_d = 0, 0, 0, True\nasync with start_dummy(Commands.concurrent_analog_digital_requests, port_a,\n    value_a, port_d, value_d) as server:\n    async with connect_client(server) as client:\n\n        async def do_something():\n            assert client._open_count == 2\n            await asyncio.sleep(2)\n            assert await client.get_analog(port_a) == value_a\n        assert client._open_count == 1\n        task = await client.spawn(do_something())\n        assert client._open_count == 2\n        assert await client.get_digital(port_d) == value_d\n        await asyncio.sleep(1)\n    await task\npytest.mark.asyncio"
-}

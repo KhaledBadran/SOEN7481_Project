@@ -1,9 +1,0 @@
-{
-    "functionName": "test_concat",
-    "className": "TestConcat",
-    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_onnx_&_test_onnx_ops.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "axis = 0\ninput_shape = [2, 3]\noutput_shape = [4, 3]\nx1_val = np.random.random(input_shape)\nx2_val = np.random.random(input_shape)\nX = onnx.helper.make_tensor_value_info('X', onnx.TensorProto.FLOAT, input_shape\n    )\nX1 = onnx.helper.make_tensor_value_info('X1', onnx.TensorProto.FLOAT,\n    input_shape)\nX2 = onnx.helper.make_tensor_value_info('X2', onnx.TensorProto.FLOAT,\n    input_shape)\nY = onnx.helper.make_tensor_value_info('Y', onnx.TensorProto.FLOAT,\n    output_shape)\nconst_X1 = onnx.helper.make_node(op_type='Constant', inputs=[], outputs=[\n    'X1'], value=onnx.helper.make_tensor(name='X1', data_type=onnx.\n    TensorProto.FLOAT, dims=input_shape, vals=x1_val.flatten().tolist()))\nconst_X2 = onnx.helper.make_node(op_type='Constant', inputs=[], outputs=[\n    'X2'], value=onnx.helper.make_tensor(name='X2', data_type=onnx.\n    TensorProto.FLOAT, dims=input_shape, vals=x2_val.flatten().tolist()))\nconcat_node = onnx.helper.make_node(op_type='Concat', inputs=['X1', 'X2'],\n    outputs=['Y'], axis=axis)\nonnx_graph = onnx.helper.make_graph(nodes=[const_X1, const_X2, concat_node],\n    name='test-concat', inputs=[X], outputs=[Y])\nonnx_model = onnx.helper.make_model(onnx_graph, producer_name='ONNX')\nonnx.checker.check_model(onnx_model)\nloaded_model = load_model_proto(onnx_model)\nbigdl_model = JoinTable(dimension=axis + 1, n_input_dims=len(input_shape))\nloaded_out = loaded_model.forward([x1_val, x2_val])\nexpected_out = bigdl_model.forward([x1_val, x2_val])\nassert np.array_equal(loaded_out, expected_out)\n"
-}

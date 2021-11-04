@@ -1,9 +1,0 @@
-{
-    "functionName": "test_project_statistics_fields",
-    "className": null,
-    "fileName": "/incf-nidash_&_PyNIDM/nidm_&_experiment_&_tools_&_tests_&_test_rest_statistics.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "project = getSampleProjectUUID()\nderivative_stats = restParser.run(BRAIN_VOL_FILES,\n    '/statistics/projects/{}?fields=derivatives.fsl_000020'.format(project))\nassert 'title' in derivative_stats\nassert 'subjects' in derivative_stats\nassert len(derivative_stats['subjects']) > 0\nfor field in ['fsl_000020']:\n    assert field in derivative_stats\n    for x in ['max', 'min', 'mean', 'median', 'standard_deviation']:\n        assert x in derivative_stats[field]\nderivative_stats = restParser.run(BRAIN_VOL_FILES,\n    '/statistics/projects/{}?fields=derivatives.fsl_000020,instruments.AGE_AT_SCAN'\n    .format(project))\nassert 'title' in derivative_stats\nassert 'subjects' in derivative_stats\nassert len(derivative_stats['subjects']) > 0\nfor field in ['fsl_000020', 'AGE_AT_SCAN']:\n    assert field in derivative_stats\n    for x in ['max', 'min', 'mean', 'median', 'standard_deviation']:\n        assert x in derivative_stats[field]\n"
-}

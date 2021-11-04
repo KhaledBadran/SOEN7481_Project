@@ -1,9 +1,0 @@
-{
-    "functionName": "test_search_station_fail",
-    "className": null,
-    "fileName": "/cgtobi_&_PyRMVtransport/tests_&_test_rmvtransport.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test failing station search.\"\"\"\nwith open('fixtures/request_no_timestamp.xml') as f:\n    xml = f.read()\nasync with aresponses.ResponsesMockServer(loop=event_loop) as arsps:\n    arsps.add(URL, URL_SEARCH_PATH, 'get', xml)\n    async with aiohttp.ClientSession(loop=event_loop) as session:\n        rmv = RMVtransport(session)\n        station = 'Hauptwache'\n        data = await rmv.search_station(station)\n        assert data == {'003000001': {'name': 'Frankfurt (Main) Hauptwache',\n            'id': '003000001', 'lat': 50.113963, 'long': 8.679292}}\npytest.mark.asynciopytest.mark.xfail(raises=RMVtransportError)"
-}

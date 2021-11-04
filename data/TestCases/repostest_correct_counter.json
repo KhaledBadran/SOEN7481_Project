@@ -1,9 +1,0 @@
-{
-    "functionName": "test_correct_counter",
-    "className": null,
-    "fileName": "/RI-imaging_&_ODTbrain/tests_&_test_apple.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "count = mp.Value('I', lock=True)\nmax_count = mp.Value('I', lock=True)\nsino, angles = create_test_sino_3d(Nx=10, Ny=10)\np = get_test_parameter_set(1)[0]\nf = odtbrain.backpropagate_3d(sino, angles, padval=0, dtype=np.float64,\n    copy=False, **p)\nodtbrain.apple.correct(f=f, res=p['res'], nm=p['nm'], enforce_envelope=0.95,\n    max_iter=100, min_diff=0.01, count=count, max_count=max_count)\nassert count.value == max_count.value\n"
-}

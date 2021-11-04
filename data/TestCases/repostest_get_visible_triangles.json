@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_visible_triangles",
-    "className": "TestRenderer",
-    "fileName": "/fechbmaster_&_3DNIRmapper/tests_&_test_renderer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.cam.resolution_x = 96\nself.cam.resolution_y = 54\nvisible_vertices = np.array([[1, 1, -1], [-1, 1, 1], [1, 1, 1], [1, 1, -1],\n    [-1, 1, -1], [-1, 1, 1]])\nvisible_triangle_ids = np.array([5, 11])\nvisible_triangle_counts = np.array([667, 665])\nvis_verts, vis_ids, counts = self.renderer.get_visible_triangles(self.model\n    .vertices, self.model.indices, self.cam)\ntry:\n    np.testing.assert_equal(vis_verts, visible_vertices)\n    np.testing.assert_equal(vis_ids, visible_triangle_ids)\n    np.testing.assert_equal(counts, visible_triangle_counts)\n    res = True\nexcept AssertionError as err:\n    res = False\n    print(err)\nself.assertTrue(res)\n"
-}

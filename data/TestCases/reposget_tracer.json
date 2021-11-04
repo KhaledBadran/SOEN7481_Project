@@ -1,9 +1,0 @@
-{
-    "functionName": "get_tracer",
-    "className": null,
-    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_tracers.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "z = np.linspace(0.0, 1.0, 2000)\nn = dndz(z)\nb = np.sqrt(1.0 + z)\nif tracer_type == 'nc':\n    ntr = 3\n    tr = ccl.NumberCountsTracer(COSMO, True, dndz=(z, n), bias=(z, b),\n        mag_bias=(z, b))\nelif tracer_type == 'wl':\n    ntr = 2\n    tr = ccl.WeakLensingTracer(COSMO, dndz=(z, n), ia_bias=(z, b))\nelif tracer_type == 'cl':\n    ntr = 1\n    tr = ccl.CMBLensingTracer(COSMO, 1100.0)\nelse:\n    ntr = 0\n    tr = ccl.Tracer()\nreturn tr, ntr\n"
-}

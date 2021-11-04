@@ -1,9 +1,0 @@
-{
-    "functionName": "test_read_csv_values",
-    "className": "PyU4VUtilsTest",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test read_csv_values.\"\"\"\ncsv_response = [{'kpi_a': '0.01', 'kpi_b': 'True'}, {'kpi_a': '0.02',\n    'kpi_b': 'True'}, {'kpi_a': '0.03', 'kpi_b': 'False'}, {'kpi_a': 'mock',\n    'kpi_b': 'mock'}]\nwith mock.patch.object(csv, 'DictReader', return_value=csv_response):\n    csv_data = self.file.read_csv_values(file_name='mock_csv_file', convert\n        =True)\n    reference_csv_response = {'kpi_a': [0.01, 0.02, 0.03, 'mock'], 'kpi_b':\n        [True, True, False, 'mock']}\n    self.assertEqual(reference_csv_response, csv_data)\nmock.patch('builtins.open', new_callable=mock.mock_open)"
-}

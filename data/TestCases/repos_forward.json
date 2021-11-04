@@ -1,9 +1,0 @@
-{
-    "functionName": "_forward",
-    "className": null,
-    "fileName": "/david-leon_&_Dandelion/test_&_test_ChainCRF.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Forward recurrence of the linear chain crf.\"\"\"\ndef _forward_step(energy_matrix_t, states):\n    alpha_tm1 = states[-1]\n    new_states = reduce_step(K.expand_dims(alpha_tm1, 2) + energy_matrix_t)\n    return new_states[0], new_states\nU_shared = K.expand_dims(K.expand_dims(U, 0), 0)\nif mask is not None:\n    mask = K.cast(mask, K.floatx())\n    mask_U = K.expand_dims(K.expand_dims(mask[:, :-1] * mask[:, 1:], 2), 3)\n    U_shared = U_shared * mask_U\ninputs = K.expand_dims(x[:, 1:, :], 2) + U_shared\ninputs = K.concatenate([inputs, K.zeros_like(inputs[:, -1:, :, :])], axis=1)\nlast, values, _ = K.rnn(_forward_step, inputs, initial_states)\nreturn last, values\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_common_composition_units_percent",
-    "className": "TestCommonProperties",
-    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_converters.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test proper handling of common composition unit conversion for (mole) percent.\n        \"\"\"\nroot = etree.Element('experiment')\nproperties = etree.SubElement(root, 'commonProperties')\ninitial_composition = etree.SubElement(properties, 'property')\ninitial_composition.set('name', 'initial composition')\nspecies_refs = [{'name': 'Ar', 'inchi': '1S/Ar', 'amount': 1.0, 'units':\n    'percent'}]\nfor spec in species_refs:\n    component = etree.SubElement(initial_composition, 'component')\n    species = etree.SubElement(component, 'speciesLink')\n    species.set('preferredKey', spec['name'])\n    species.set('InChI', spec['inchi'])\n    amount = etree.SubElement(component, 'amount')\n    amount.set('units', spec['units'])\n    amount.text = str(spec['amount'])\nwith pytest.warns(UserWarning) as record:\n    common = get_common_properties(root)\nm = str(record.pop(UserWarning).message)\nassert m == 'Assuming percent in composition means mole percent'\nassert common['composition']['kind'] == 'mole percent'\nassert len(common['composition']['species']) == 1\nassert common['composition']['species'][0]['species-name'] == 'Ar'\nassert common['composition']['species'][0]['InChI'] == '1S/Ar'\nassert_allclose(common['composition']['species'][0]['amount'], [1.0])\n"
-}

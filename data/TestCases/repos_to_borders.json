@@ -1,9 +1,0 @@
-{
-    "functionName": "_to_borders",
-    "className": "Brain",
-    "fileName": "/nipy_&_PySurfer/surfer_&_viz.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Helper to potentially convert a label/parc to borders\"\"\"\nif not isinstance(borders, (bool, int)) or borders < 0:\n    raise ValueError('borders must be a bool or positive integer')\nif borders:\n    n_vertices = label.size\n    edges = utils.mesh_edges(self.geo[hemi].faces)\n    border_edges = label[edges.row] != label[edges.col]\n    show = np.zeros(n_vertices, dtype=np.int)\n    keep_idx = np.unique(edges.row[border_edges])\n    if isinstance(borders, int):\n        for _ in range(borders):\n            keep_idx = np.in1d(self.geo[hemi].faces.ravel(), keep_idx)\n            keep_idx.shape = self.geo[hemi].faces.shape\n            keep_idx = self.geo[hemi].faces[np.any(keep_idx, axis=1)]\n            keep_idx = np.unique(keep_idx)\n        if restrict_idx is not None:\n            keep_idx = keep_idx[np.in1d(keep_idx, restrict_idx)]\n    show[keep_idx] = 1\n    label *= show\n"
-}

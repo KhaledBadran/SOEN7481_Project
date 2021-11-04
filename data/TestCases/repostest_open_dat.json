@@ -1,9 +1,0 @@
-{
-    "functionName": "test_open_dat",
-    "className": null,
-    "fileName": "/FCS-analysis_&_PyScanFCS/tests_&_test_open_dat.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "here = pathlib.Path(__file__).parent\nf16 = here / 'data/n2000_7.0ms_16bit.dat'\nf32 = here / 'data/n2000_7.0ms_32bit.dat'\ninfo16 = openfile.openDAT(str(f16))\ninfo32 = openfile.openDAT(str(f32))\nassert info16['system_clock'] == 60\nassert info32['system_clock'] == 60\nassert np.all(info16['data_stream'] == info32['data_stream'])\nref = np.array([1, 1, 21420, 21418, 21420])\nassert np.all(info16['data_stream'][-5:] == ref)\n"
-}

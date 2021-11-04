@@ -1,9 +1,0 @@
-{
-    "functionName": "test_accepted",
-    "className": "Test_custom",
-    "fileName": "/axiros_&_DevApps/tests_&_test_casting.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "def my_custom_caster(s, dflt, ctx):\n    s = int(s)\n    return 43 if s == 42 else s\ncast.add_caster(my_custom_caster, name='no_answer')\nfor f, t in ((42, 43), ('42', 43), (1, 1)):\n    assert cast(f, my_custom_caster) == t\n    assert cast(f, 'no_answer') == t\nwith pytest.raises(Exception) as einfo:\n    cast('foo', my_custom_caster)\nassert einfo.value.args[0] == Exc.cannot_cast\nassert 'no_answer' in str(einfo.value)\n"
-}

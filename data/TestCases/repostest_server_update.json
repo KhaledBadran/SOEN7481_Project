@@ -1,9 +1,0 @@
-{
-    "functionName": "test_server_update",
-    "className": null,
-    "fileName": "/mozilla_&_CANOSP-2019/tests_&_test_simulation_util.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "np.random.seed(0)\ninit_weights = [np.array([0.0, 0.0, 0.0]), np.array([0.0])]\nnum_client = 10\nsamples_per_client = 10\nnum_features = 3\nfeatures = np.random.randint(10, size=(num_client, samples_per_client,\n    num_features))\nlabels = np.random.randint(2, size=(num_client, samples_per_client))\nclassifier = server_update(init_weights, client_fraction=0.5, num_rounds=2,\n    features=features, labels=labels, epoch=2, batch_size=3,\n    display_weight_per_round=False, rand_seed=0)\nnew_coefs = classifier.coef_.tolist()[0]\nnew_intercepts = classifier.intercept_.tolist()\nexpected_coefs = [-42.21600518468813, 3.4301014509740986, 30.442381328564878]\nexpected_intercepts = [-1.0702357064270938]\nassert new_coefs == expected_coefs\nassert new_intercepts == expected_intercepts\npytest.mark.skip('server_update() currently broken as part of migration')"
-}

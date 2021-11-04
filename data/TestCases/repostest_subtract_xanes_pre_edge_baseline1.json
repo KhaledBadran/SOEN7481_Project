@@ -1,9 +1,0 @@
-{
-    "functionName": "test_subtract_xanes_pre_edge_baseline1",
-    "className": null,
-    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_xanes_maps_&_tests_&_test_xanes_maps_api.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Tests for ``subtract_xanes_pre_edge_baseline`` \"\"\"\npre_edge_upper_keV_default = -0.01\npre_edge_upper_keV = pre_edge_upper_keV_default\nincident_energies, eline, eline_activation_energy = _get_xanes_energy_axis()\nspectrum, spectrum_no_base = _get_sim_pre_edge_spectrum(incident_energies,\n    eline_activation_energy, pre_edge_upper_keV, [3, 5])\nspectrum_out = subtract_xanes_pre_edge_baseline(spectrum, incident_energies,\n    eline, non_negative=False)\nnp.testing.assert_almost_equal(spectrum_out, spectrum_no_base, err_msg=\n    'Baseline subtraction from 1D XANES spectrum failed')\nspectrum_no_base = np.clip(spectrum_no_base, a_min=0, a_max=None)\nspectrum_out = subtract_xanes_pre_edge_baseline(spectrum, incident_energies,\n    eline)\nnp.testing.assert_almost_equal(spectrum_out, spectrum_no_base, err_msg=\n    'Baseline subtraction from 1D XANES spectrum failed')\nspectrum, spectrum_no_base = _get_sim_pre_edge_spectrum(incident_energies,\n    eline_activation_energy, pre_edge_upper_keV, [3, 7])\nwith pytest.raises(RuntimeError, match='No pre-edge points were found'):\n    subtract_xanes_pre_edge_baseline(spectrum, incident_energies + 1, eline)\n"
-}

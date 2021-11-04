@@ -1,9 +1,0 @@
-{
-    "functionName": "test_check_fc_symmetry",
-    "className": null,
-    "fileName": "/mesonepigreco_&_CellConstructor/tests_&_TestSymmetryPhonons_&_test_check_fc_symmetry.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "total_path = os.path.dirname(os.path.abspath(__file__))\nos.chdir(total_path)\n\"\"\"\n    This script check the symmetries of a dynamical matrix.\n    In the end the symmetry is constrained.\n    \"\"\"\nRyToCm = 109691.40235\nPH = CC.Phonons.Phonons('hydrogen_dyn', nqirr=1)\nprint('Loaded hydrogen_dyn1')\nprint('Symmetry group:', spglib.get_spacegroup(PH.structure.get_ase_atoms(),\n    0.01))\nsymmetries = spglib.get_symmetry(PH.structure.get_ase_atoms(), 0.01)\nprint('Number of symmetries:', len(symmetries['rotations']))\nsym_mats = CC.symmetries.GetSymmetriesFromSPGLIB(symmetries)\nPH.structure.fix_coords_in_unit_cell()\nPH.structure.impose_symmetries(sym_mats)\nnat = PH.structure.N_atoms\nw, pols = PH.DyagDinQ(0)\nPH_new = PH.Copy()\nqe_sym = CC.symmetries.QE_Symmetry(PH.structure)\nqe_sym.SetupFromSPGLIB()\nqe_sym.ApplySymmetriesToV2(PH_new.dynmats[0])\nCC.symmetries.CustomASR(PH_new.dynmats[0])\nnew_w, new_pols = PH_new.DyagDinQ(0)\nPH.Symmetrize()\nw_qe, p_qe = PH.DyagDinQ(0)\nprint('Old Matrix | Python Symmetries | QE Symmetries | ')\nprint('\\n'.join([('%12.2f\\t%12.2f\\t%12.2f  cm-1' % (w[k] * RyToCm, new_w[k] *\n    RyToCm, w_qe[k] * RyToCm)) for k in range(0, len(w))]))\n"
-}

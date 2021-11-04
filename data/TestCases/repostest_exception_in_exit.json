@@ -1,9 +1,0 @@
-{
-    "functionName": "test_exception_in_exit",
-    "className": "TestDisableVarSubst",
-    "fileName": "/alex-ber_&_AlexBerUtils/tests_&_utils_&_ymlparsers_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "logger.info(f'{request._pyfuncitem.name}()')\nmock_lock = create_mock_lock(mocker)\norig_jinja2ctx = HiYaPyCo.jinja2ctx\nduumy_jinja2ctx = TestDisableVarSubst.DummyEnvironment(delegate=orig_jinja2ctx)\nwith pytest.raises(ValueError):\n    with ymlparsers.DisableVarSubst(jinja2ctx=duumy_jinja2ctx, jinja2Lock=\n        mock_lock):\n        pass\npytest.assume(mock_lock.acquire.call_count > 0)\npytest.assume(mock_lock.release.call_count == mock_lock.acquire.call_count)\npytest.assume(duumy_jinja2ctx != orig_jinja2ctx)\npytest.assume(mock_lock != orig_jinja2ctx)\npytest.assume(duumy_jinja2ctx.variable_start_string == orig_jinja2ctx.\n    variable_start_string)\npytest.assume(duumy_jinja2ctx.variable_end_string == orig_jinja2ctx.\n    variable_end_string)\npytest.assume(duumy_jinja2ctx.block_start_string == orig_jinja2ctx.\n    block_start_string)\npytest.assume(duumy_jinja2ctx.block_end_string != orig_jinja2ctx.\n    block_end_string)\npytest.mark.yml"
-}

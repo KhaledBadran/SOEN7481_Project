@@ -1,9 +1,0 @@
-{
-    "functionName": "is_percolating",
-    "className": "OrdinaryPercolation",
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_algorithms_&_OrdinaryPercolation.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        Returns a True or False value to indicate if a percolating cluster\n        spans between the inlet and outlet pores that were specified at the\n        given applied pressure.\n\n        Parameters\n        ----------\n        applied_pressure : scalar, float\n            The pressure at which percolation should be checked\n\n        Returns\n        -------\n        A simple boolean True or False if percolation has occured or not.\n\n        \"\"\"\nif np.sum(self['pore.inlets']) == 0:\n    raise Exception('Inlet pores must be specified first')\nelse:\n    Pin = self['pore.inlets']\nif np.sum(self['pore.outlets']) == 0:\n    raise Exception('Outlet pores must be specified first')\nelse:\n    Pout = self['pore.outlets']\nif np.amin(self['pore.invasion_pressure'][Pout]) > applied_pressure:\n    val = False\nelse:\n    mask = self['throat.invasion_pressure'] < applied_pressure\n    am = self.project.network.create_adjacency_matrix(weights=mask, fmt='coo')\n    val = ispercolating(am=am, mode=self.settings['mode'], inlets=Pin,\n        outlets=Pout)\nreturn val\n"
-}

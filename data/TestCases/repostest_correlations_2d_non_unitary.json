@@ -1,9 +1,0 @@
-{
-    "functionName": "test_correlations_2d_non_unitary",
-    "className": "TestChain",
-    "fileName": "/samreay_&_ChainConsumer/tests_&_test_analysis.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data = np.random.multivariate_normal([0, 0], [[4, 0], [0, 4]], size=100000)\nparameters = ['x', 'y']\nc = ChainConsumer()\nc.add_chain(data, parameters=parameters)\np, cor = c.analysis.get_correlations()\nassert p[0] == 'x'\nassert p[1] == 'y'\nassert np.isclose(cor[0, 0], 1, atol=0.01)\nassert np.isclose(cor[1, 1], 1, atol=0.01)\nassert np.abs(cor[0, 1]) < 0.01\nassert cor.shape == (2, 2)\n"
-}

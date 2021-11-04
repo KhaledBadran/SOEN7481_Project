@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_stations_bounding_box_whensucceed",
-    "className": "EVChargingStationsApi",
-    "fileName": "/abdullahselek_&_HerePy/tests_&_test_ev_charging_stations_api.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with open('testdata/models/ev_charging_stations_circular.json', 'r') as f:\n    expected_response = f.read()\nresponses.add(responses.GET,\n    'https://ev-v2.cit.cc.api.here.com/ev/stations.json', expected_response,\n    status=200)\nresponse = self._api.get_stations_bounding_box(top_left=[52.8, 11.37309],\n    bottom_right=[52.31, 13.2], connectortypes=[EVStationConnectorTypes.\n    small_paddle_inductive, EVStationConnectorTypes.large_paddle_inductive])\nself.assertTrue(response)\nself.assertIsInstance(response, herepy.EVChargingStationsResponse)\nresponses.activate"
-}

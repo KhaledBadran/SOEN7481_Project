@@ -1,9 +1,0 @@
-{
-    "functionName": "test_preprocessing_email_headers",
-    "className": null,
-    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_server_&_tests_&_test_preprocessing.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "method = V01 + '/feature-extraction/'\ndata = app.post_check(method, json={'preprocess': preprocess})\ndsid = data['id']\nmethod += dsid\napp.post_check(method, json={'dataset_definition': [{'file_path': os.path.\n    join(data_dir, '0.7.6.28635.txt')}]})\nwith (Path(CACHE_DIR) / 'ediscovery_cache' / dsid / 'vectorizer').open('rb'\n    ) as fh:\n    vectorizer = pickle.load(fh)\npars = app.get_check(method)\nassert pars['preprocess'] == preprocess\nvocabulary = list(vectorizer.vocabulary_.keys())\nif not preprocess:\n    assert 'baumbach' in vocabulary\nelse:\n    assert 'baumbach' not in vocabulary\npytest.mark.parametrize('preprocess', [[], ['emails_ignore_header']])"
-}

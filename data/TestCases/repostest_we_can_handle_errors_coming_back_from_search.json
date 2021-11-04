@@ -1,9 +1,0 @@
-{
-    "functionName": "test_we_can_handle_errors_coming_back_from_search",
-    "className": null,
-    "fileName": "/AutomatedTester_&_Bugsy/tests_&_test_search.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "error_return = {'code': 108, 'documentation':\n    'http://www.bugzilla.org/docs/tip/en/html/api/', 'error': True,\n    'message': \"Can't use [Bug Creation] as a field name.\"}\nurl_params = dict(chfield=['[Bug Creation]', 'Alias'], chfieldvalue='foo',\n    chfieldfrom='2014-12-01', chfieldto='2014-12-05')\nresponses.add(responses.GET, rest_url('bug', **url_params), body=json.dumps\n    (error_return), status=200, content_type='application/json',\n    match_querystring=True)\nbugzilla = Bugsy()\ntry:\n    bugzilla.search_for.change_history_fields(['[Bug Creation]', 'Alias'],\n        'foo').timeframe('2014-12-01', '2014-12-05').search()\nexcept SearchException as e:\n    assert str(e\n        ) == \"Message: Can't use [Bug Creation] as a field name. Code: 108\"\nresponses.activate"
-}

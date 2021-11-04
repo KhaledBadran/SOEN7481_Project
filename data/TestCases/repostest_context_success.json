@@ -1,9 +1,0 @@
-{
-    "functionName": "test_context_success",
-    "className": "TestElasticBuffer",
-    "fileName": "/dkaslovsky_&_ElasticBatch/tests_&_test_buffer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class TestCase:\n\n    def __init__(self, n_docs, buffer_size, n_expected_flush_calls):\n        self.n_docs = n_docs\n        self.buffer_size = buffer_size\n        self.n_expected_flush_calls = n_expected_flush_calls\ntests = {'flush is called on exit with empty buffer': TestCase(n_docs=0,\n    buffer_size=10, n_expected_flush_calls=1),\n    'flush is called on exit with populated buffer': TestCase(n_docs=5,\n    buffer_size=10, n_expected_flush_calls=1),\n    'flush is called once when buffer is full and once on exit': TestCase(\n    n_docs=5, buffer_size=2, n_expected_flush_calls=2)}\nfor test_name, test in tests.items():\n    mock_flush.reset_mock()\n    docs = ['a'] * test.n_docs\n    with ElasticBuffer(size=test.buffer_size) as eb:\n        mock_flush.side_effect = eb._clear_buffer\n        eb.add(docs)\n    self.assertEqual(mock_flush.call_count, test.n_expected_flush_calls,\n        test_name)\npatch.object(ElasticBuffer, 'flush')"
-}

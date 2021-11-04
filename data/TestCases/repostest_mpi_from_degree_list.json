@@ -1,9 +1,0 @@
-{
-    "functionName": "test_mpi_from_degree_list",
-    "className": null,
-    "fileName": "/Silmathoron_&_NNGT/testing_&_test_generation2.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Check that the degrees generated using `from_degree_list` indeed\n    correspond to the provided list\n    \"\"\"\nnum_nodes = 1000\nfrom mpi4py import MPI\ncomm = MPI.COMM_WORLD\ndeg_list = np.random.randint(0, 100, size=num_nodes)\ng = ng.from_degree_list(deg_list, degree_type='in', nodes=num_nodes)\ndeg = g.get_degrees('in')\ndeg = comm.gather(deg, root=0)\nif nngt.on_master_process():\n    deg = np.sum(deg, axis=0)\n    assert np.all(deg == deg_list)\nnum_edges = g.edge_nb()\nnum_edges = comm.gather(num_edges, root=0)\nif nngt.on_master_process():\n    num_edges = np.sum(num_edges)\n    assert num_edges == np.sum(deg_list)\ng = ng.from_degree_list(deg_list, degree_type='out', nodes=num_nodes)\ndeg = g.get_degrees('out')\ndeg = comm.gather(deg, root=0)\nif nngt.on_master_process():\n    deg = np.sum(deg, axis=0)\n    assert np.all(deg == deg_list)\nnum_edges = g.edge_nb()\nnum_edges = comm.gather(num_edges, root=0)\nif nngt.on_master_process():\n    num_edges = np.sum(num_edges)\n    assert num_edges == np.sum(deg_list)\npytest.mark.mpi"
-}

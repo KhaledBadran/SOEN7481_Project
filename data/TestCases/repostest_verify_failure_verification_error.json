@@ -1,9 +1,0 @@
-{
-    "functionName": "test_verify_failure_verification_error",
-    "className": "EasyJWTTest",
-    "fileName": "/BMeu_&_EasyJWT/tests_&_easyjwt_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n            Test verifying a token with an expiration date claim that is not an integer.\n\n            Expected Result: A `VerificationError` is raised.\n        \"\"\"\neasyjwt_creation = EasyJWT(self.key)\neasyjwt_creation.expiration_date = 'January 1, 2019 12:34.56'\ntoken = easyjwt_creation.create()\nwith self.assertRaises(VerificationError) as exception_cm:\n    easyjwt_verification = EasyJWT.verify(token, self.key)\n    self.assertIsNone(easyjwt_verification)\nself.assertEqual('Expiration Time claim (exp) must be an integer.', str(\n    exception_cm.exception))\n"
-}

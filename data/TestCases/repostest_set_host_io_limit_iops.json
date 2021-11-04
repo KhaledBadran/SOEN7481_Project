@@ -1,9 +1,0 @@
-{
-    "functionName": "test_set_host_io_limit_iops",
-    "className": "PyU4VProvisioningTest",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test set_host_io_limit_iops_or_mbps.\"\"\"\nstorage_group = self.data.qos_storagegroup\niops = '3000'\ndynamic_distribution = 'Always'\nmbps = '9001'\nref_qos_specs = {'maxIOPS': iops, 'DistributionType': dynamic_distribution,\n    'maxMBPS': mbps}\nwith mock.patch.object(self.provisioning, 'update_storagegroup_qos'\n    ) as mock_qos:\n    self.provisioning.set_host_io_limit_iops_or_mbps(storage_group, iops,\n        dynamic_distribution, mbps)\n    mock_qos.assert_called_once_with(storage_group, ref_qos_specs)\n"
-}

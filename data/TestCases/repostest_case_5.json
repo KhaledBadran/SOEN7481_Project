@@ -1,9 +1,0 @@
-{
-    "functionName": "test_case_5",
-    "className": null,
-    "fileName": "/david-leon_&_Dandelion/test_&_test_shufflenet.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "print('test_case_5: ShuffleUnit_v2')\nargs = [[256, 128, 'same', 1, relu, 2, 2], [256, 256, 'same', 2, relu, 1, 1]]\nshape_gt = [(4, 128, 128, 128), (4, 256, 256, 256)]\nfor i, arg in enumerate(args):\n    (in_channels, out_channels, border_mode, batchnorm_mode, activation,\n        stride, dilation) = arg\n    model = ShuffleUnit_v2(in_channels=in_channels, out_channels=\n        out_channels, border_mode=border_mode, batchnorm_mode=\n        batchnorm_mode, activation=activation, dilation=dilation, stride=stride\n        )\n    x = tensor.ftensor4('x')\n    y = model.forward(x)\n    print('compiling fn...')\n    fn = theano.function([x], y, no_default_updates=False)\n    print('run fn...')\n    input = np.random.rand(4, in_channels, 256, 256).astype(np.float32)\n    output = fn(input)\n    assert output.shape == shape_gt[i], 'incorrect output shape = %s' % str(\n        output.shape)\n"
-}

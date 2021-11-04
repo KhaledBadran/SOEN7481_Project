@@ -1,9 +1,0 @@
-{
-    "functionName": "test_nonstandard_errors",
-    "className": null,
-    "fileName": "/halcy_&_Mastodon.py/tests_&_test_errors.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "response = MagicMock()\nresponse.json = MagicMock(return_value=\n    'I am a non-standard instance and this error is a plain string.')\nresponse.ok = False\nresponse.status_code = 501\nsession = MagicMock()\nsession.request = MagicMock(return_value=response)\napi.session = session\nwith pytest.raises(MastodonAPIError):\n    api.instance()\n"
-}

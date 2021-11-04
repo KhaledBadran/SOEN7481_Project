@@ -1,9 +1,0 @@
-{
-    "functionName": "test_saveState",
-    "className": "MethodicalTests",
-    "fileName": "/glyph_&_Automat/automat_&__test_&_test_methodical.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        L{MethodicalMachine.serializer} is a decorator that modifies its\n        decoratee's signature to take a \"state\" object as its first argument,\n        which is the \"serialized\" argument to the L{MethodicalMachine.state}\n        decorator.\n        \"\"\"\nclass Mechanism(object):\n    m = MethodicalMachine()\n\n    def __init__(self):\n        self.value = 1\n\n    @m.state(serialized='first-state', initial=True)\n    def first(self):\n        \"\"\"First state.\"\"\"\n\n    @m.state(serialized='second-state')\n    def second(self):\n        \"\"\"Second state.\"\"\"\n\n    @m.serializer()\n    def save(self, state):\n        return {'machine-state': state, 'some-value': self.value}\nself.assertEqual(Mechanism().save(), {'machine-state': 'first-state',\n    'some-value': 1})\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_fvd",
-    "className": null,
-    "fileName": "/SunPower_&_PVMismatch/pvmismatch_&_contrib_&_gen_coeffs_&_tests_&_test_diode.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test diode voltage.\n    \"\"\"\nvd, vc, ic, rs = sympy.symbols(['vd', 'vc', 'ic', 'rs'])\nvd = vc + ic * rs\nd_vc = sympy.diff(vd, vc)\nd_ic = sympy.diff(vd, ic)\nd_rs = sympy.diff(vd, rs)\ntest_data = {'vc': VC, 'ic': IC, 'rs': RS_1}\nfvd_test, jvd_test = diode.fvd(**test_data)\nfvd_expected = np.float(vd.evalf(subs=test_data))\njvd_expected = np.array([d_vc.evalf(subs=test_data), d_ic.evalf(subs=\n    test_data), d_rs.evalf(subs=test_data)], dtype=np.float)\nLOGGER.debug('test: %g = expected: %g', fvd_test, fvd_expected)\nassert np.isclose(fvd_test, fvd_expected)\nassert np.allclose(jvd_test, jvd_expected.reshape(-1, 1))\n"
-}

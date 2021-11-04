@@ -1,9 +1,0 @@
-{
-    "functionName": "test_petsc_iterative",
-    "className": "SolversTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_SolversTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.alg.settings['solver_family'] = 'petsc'\niterative_solvers = ['cg', 'groppcg', 'pipecg', 'pipecgrr', 'nash', 'stcg',\n    'gltr', 'fcg', 'pipefcg', 'gmres', 'pipefgmres', 'fgmres', 'lgmres',\n    'dgmres', 'pgmres', 'tcqmr', 'bcgs', 'ibcgs', 'fbcgs', 'fbcgsr',\n    'bcgsl', 'pipebcgs', 'cgs', 'tfqmr', 'cr', 'pipecr', 'bicg', 'minres',\n    'symmlq', 'lcd', 'gcr', 'pipegcr']\nfor solver in iterative_solvers:\n    self.alg.settings['solver_type'] = solver\n    self.alg.run()\n    xmean = self.alg['pore.x'].mean()\n    nt.assert_allclose(actual=xmean, desired=0.587595, rtol=1e-05)\ncatch_module_not_found"
-}

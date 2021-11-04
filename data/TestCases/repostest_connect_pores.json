@@ -1,9 +1,0 @@
-{
-    "functionName": "test_connect_pores",
-    "className": "TopotoolsTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_topotools_&_TopotoolsTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "testnet = op.network.Cubic(shape=[10, 10, 10])\nNt_old = testnet.Nt\nps1 = [[0, 1], [23, 65]]\nps2 = [[55], [982, 555]]\ntopotools.connect_pores(testnet, pores1=ps1, pores2=ps2)\nam = testnet.create_adjacency_matrix(weights=np.ones(testnet.Nt, dtype=int),\n    fmt='csr')\nconns = testnet['throat.conns']\nassert len(conns) == Nt_old + 6\nassert am[0, 55] == 1\nassert am[1, 55] == 1\nassert am[23, 982] == 1\nassert am[23, 555] == 1\nassert am[65, 982] == 1\nassert am[65, 555] == 1\n"
-}

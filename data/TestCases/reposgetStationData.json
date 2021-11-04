@@ -1,9 +1,0 @@
-{
-    "functionName": "getStationData",
-    "className": null,
-    "fileName": "/FaradayRF_&_Faraday-Software/faraday_&_aprs.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Queries telemetry server for detailed telemetry from active stations\n\n    :param stations: List of callsign + nodeids to get telemetry data from\n    :return: list containing latest station telemetry\n    \"\"\"\nstationData = []\nhost = aprsConfig.get('TELEMETRY', 'HOST')\nport = aprsConfig.get('TELEMETRY', 'PORT')\nage = aprsConfig.getint('APRSIS', 'STATIONSAGE')\nurl = 'http://' + host + ':' + port + '/'\nfor station in stations:\n    callsign = station['SOURCECALLSIGN']\n    nodeid = station['SOURCEID']\n    payload = {'callsign': callsign, 'nodeid': nodeid, 'timespan': age,\n        'limit': 1}\n    try:\n        r = requests.get(url, params=payload)\n        data = r.json()\n    except requests.exceptions.RequestException as e:\n        logger.error(e)\n    else:\n        stationData.append(data)\nreturn stationData\n"
-}

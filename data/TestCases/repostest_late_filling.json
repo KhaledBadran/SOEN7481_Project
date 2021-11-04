@@ -1,9 +1,0 @@
-{
-    "functionName": "test_late_filling",
-    "className": "MixedPercolationTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_MixedPercolationTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.setup_class(Np=10)\nnet = self.net\nphys = self.phys\nnp.random.seed(1)\nphys['throat.entry_pressure'] = np.random.random(net.Nt) * 10000 + 5000\nphys['pore.entry_pressure'] = 0.0\nphys.add_model(propname='pore.pc_star', model=op.models.misc.\n    from_neighbor_throats, throat_prop='throat.entry_pressure', mode='min')\nphys.add_model(propname='pore.late_filling', model=op.models.physics.\n    multiphase.late_filling, pressure='pore.pressure', Pc_star=\n    'pore.pc_star', eta=1, Swp_star=0.4)\nphys['throat.pc_star'] = phys['throat.entry_pressure']\nphys.add_model(propname='throat.late_filling', model=op.models.physics.\n    multiphase.late_filling, pressure='throat.pressure', Pc_star=\n    'throat.pc_star', eta=1, Swp_star=0.2)\ninlets = net.pores('left')\noutlets = net.pores('right')\nIP_1 = mp(network=self.net)\nIP_1.setup(phase=self.phase)\nIP_1.set_inlets(pores=inlets)\nIP_1.set_outlets(pores=outlets)\nIP_1.run()\ninv_points = np.arange(phys['throat.entry_pressure'].min(), phys[\n    'throat.entry_pressure'].max(), 100)\nalg_data = IP_1.get_intrusion_data(inv_points=inv_points)\nIP_1.settings['late_pore_filling'] = 'pore.late_filling'\nIP_1.settings['late_throat_filling'] = 'throat.late_filling'\nalg_data_lpf = IP_1.get_intrusion_data(inv_points=inv_points)\nassert np.any(alg_data_lpf.S_tot - alg_data.S_tot < 0.0)\nassert ~np.any(alg_data_lpf.S_tot - alg_data.S_tot > 0.0)\n"
-}

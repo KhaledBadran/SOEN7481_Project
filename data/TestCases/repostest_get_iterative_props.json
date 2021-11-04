@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_iterative_props",
-    "className": "ReactiveTransportTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_ReactiveTransportTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "iterative_props = self.alg._get_iterative_props()\nassert len(iterative_props) == 0\nself.alg.settings['quantity'] = 'pore.foo'\niterative_props = self.alg._get_iterative_props()\nassert len(iterative_props) == 0\nself.phase.add_model(propname='pore.bar_depends_on_foo', model=lambda\n    target, bar='pore.foo': 0.0)\niterative_props = self.alg._get_iterative_props()\nassert len(iterative_props) == 1\nassert 'pore.bar_depends_on_foo' in iterative_props\nself.phys.add_model(propname='pore.baz_depends_on_bar', model=lambda target,\n    bar='pore.bar_depends_on_foo': 0.0)\niterative_props = self.alg._get_iterative_props()\nassert len(iterative_props) == 2\nassert 'pore.baz_depends_on_bar' in iterative_props\nself.phys.add_model(propname='pore.lambda_depends_on_blah', model=lambda\n    target, bar='pore.blah': 0.0)\nself.alg._set_variable_props('pore.blah')\niterative_props = self.alg._get_iterative_props()\nassert len(iterative_props) == 4\nassert 'pore.lambda_depends_on_blah' in iterative_props\nassert 'pore.blah' in iterative_props\n"
-}

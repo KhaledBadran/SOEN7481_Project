@@ -1,9 +1,0 @@
-{
-    "functionName": "test_srsdg645_channel_delay",
-    "className": null,
-    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_srs_&_test_srsdg645.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    SRSDG645: Get / set delay.\n    \"\"\"\nwith expected_protocol(ik.srs.SRSDG645, ['DLAY?2', 'DLAY 3,2,60.0',\n    'DLAY 5,4,10'], ['0,42']) as ddg:\n    ref, t = ddg.channel['A'].delay\n    assert ref == ddg.Channels.T0\n    assert abs((t - u.Quantity(42, 's')).magnitude) < 100000.0\n    ddg.channel['B'].delay = ddg.channel['A'], u.Quantity(1, 'minute')\n    ddg.channel['D'].delay = ddg.channel['C'], 10\n"
-}

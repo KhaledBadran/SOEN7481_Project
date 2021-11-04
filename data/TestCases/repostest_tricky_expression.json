@@ -1,9 +1,0 @@
-{
-    "functionName": "test_tricky_expression",
-    "className": "LexerTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_lexer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "template = \"\"\"\n\n            ${x and \"|\" or \"hi\"}\n        \"\"\"\nnodes = Lexer(template).parse()\nself._compare(nodes, TemplateNode({}, [Text('\\n\\n            ', (1, 1)),\n    Expression('x and \"|\" or \"hi\"', [], (3, 13)), Text('\\n        ', (3, 33))])\n    )\ntemplate = \"\"\"\n\n            ${hello + '''heres '{|}' text | | }''' | escape1}\n            ${'Tricky string: ' + '\\\\\\\\\\\\\"\\\\\\\\\\\\'|\\\\\\\\'}\n        \"\"\"\nnodes = Lexer(template).parse()\nself._compare(nodes, TemplateNode({}, [Text('\\n\\n            ', (1, 1)),\n    Expression(\"hello + '''heres '{|}' text | | }''' \", ['escape1'], (3, 13\n    )), Text('\\n            ', (3, 62)), Expression(\n    '\\'Tricky string: \\' + \\'\\\\\\\\\\\\\"\\\\\\\\\\\\\\'|\\\\\\\\\\'', [], (4, 13)), Text(\n    '\\n        ', (4, 49))]))\n"
-}

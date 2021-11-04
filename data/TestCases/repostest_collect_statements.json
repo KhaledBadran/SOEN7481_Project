@@ -1,9 +1,0 @@
-{
-    "functionName": "test_collect_statements",
-    "className": null,
-    "fileName": "/ChrisTimperley_&_Kaskara/test_&_test_python.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "def line(num: int) ->FileLine:\n    return FileLine('flask/signals.py', num)\nwith flask.provision() as container:\n    filename = 'flask/signals.py'\n    visitor = kaskara.python.statements.CollectStatementsVisitor(container)\n    visitor.collect(filename)\n    statements = ProgramStatements(visitor.statements)\n    statements_at_line = list(statements.at_line(line(21)))\n    assert len(statements_at_line) == 1\n    actual = statements_at_line[0]\n    assert actual.content == 'return _FakeSignal(name, doc)'\n"
-}

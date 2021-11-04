@@ -1,9 +1,0 @@
-{
-    "functionName": "test__ensure_list_no_pandas",
-    "className": "TestElasticBuffer",
-    "fileName": "/dkaslovsky_&_ElasticBatch/tests_&_test_buffer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class TestCase:\n\n    def __init__(self, docs_in, expected_docs):\n        self.docs_in = docs_in\n        self.expected_docs = expected_docs\ntests_success = {'dict': TestCase(docs_in=self.docs[0], expected_docs=[self\n    .docs[0]]), 'list': TestCase(docs_in=self.docs, expected_docs=self.docs)}\ntests_fail = {'string input': TestCase(docs_in='docs', expected_docs=None),\n    'set input': TestCase(docs_in={'docs'}, expected_docs=None)}\nfor test_name, test in tests_success.items():\n    docs_out = ElasticBuffer._ensure_list(test.docs_in)\n    self.assertListEqual(docs_out, test.expected_docs, test_name)\nfor test_name, test in tests_fail.items():\n    with self.assertRaises(ValueError, msg=test_name):\n        _ = ElasticBuffer._ensure_list(test.docs_in)\n"
-}

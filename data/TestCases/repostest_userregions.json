@@ -1,9 +1,0 @@
-{
-    "functionName": "test_userregions",
-    "className": null,
-    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_skysub.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Run the parameter setup script\n    \"\"\"\nregions = [':10', '30:60', '80:', ':10,35:65,80:', '10:20;', '10:20,']\nresult = [[np.array([], dtype=np.int), np.array([99], dtype=np.int)], [np.\n    array([299], dtype=np.int), np.array([598], dtype=np.int)], [np.array([\n    798], dtype=np.int), np.array([], dtype=np.int)], [np.array([349, 798],\n    dtype=np.int), np.array([99, 648], dtype=np.int)], [], [np.array([99],\n    dtype=np.int), np.array([199], dtype=np.int)]]\nresstat = [0, 0, 0, 0, 1, 2]\nnslits = 2\nmaxsl = 100\nfor rr, reg in enumerate(regions):\n    status, regs = skysub.read_userregions(reg, nslits, maxslitlength=maxsl)\n    if status != 1:\n        assert len(regs) == nslits\n        assert np.array_equal(np.where(regs[0][1:] & ~regs[0][:-1])[0],\n            result[rr][0])\n        assert np.array_equal(np.where(~regs[0][1:] & regs[0][:-1])[0],\n            result[rr][1])\n    assert status == resstat[rr]\n"
-}

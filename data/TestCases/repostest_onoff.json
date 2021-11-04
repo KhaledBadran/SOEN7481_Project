@@ -1,9 +1,0 @@
-{
-    "functionName": "test_onoff",
-    "className": "TestValve",
-    "fileName": "/albertogeniola_&_MerossIot/tests_&_test_valve.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "if len(self.test_devices) < 1:\n    self.skipTest('No valve device has been found to run this test.')\n    return\nfor dev in self.test_devices:\n    res = await dev.async_update()\n    if dev.is_on():\n        await dev.async_turn_off()\n        self.assertFalse(dev.is_on())\n        await asyncio.sleep(1)\n        await dev.async_turn_on()\n        self.assertTrue(dev.is_on())\nunittest_run_loop"
-}

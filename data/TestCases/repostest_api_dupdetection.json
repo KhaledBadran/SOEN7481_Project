@@ -1,9 +1,0 @@
-{
-    "functionName": "test_api_dupdetection",
-    "className": null,
-    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_server_&_tests_&_test_duplicate_detection.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "if kind == 'simhash':\n    try:\n        import simhash\n    except ImportError:\n        raise SkipTest\ndsid, pars, _ = get_features_cached(app, hashed=False)\nmethod = V01 + '/feature-extraction/{}'.format(dsid)\ndata = app.get_check(method)\nurl = V01 + '/duplicate-detection'\npars = {'parent_id': dsid, 'method': kind}\ndata = app.post_check(url, json=pars)\nassert dict2type(data) == {'id': 'str'}\nmid = data['id']\nurl += '/{}'.format(mid)\ndata = app.get_check(url, query_string=options)\nassert dict2type(data, max_depth=1) == {'data': 'list'}\nfor row in data['data']:\n    assert dict2type(row, max_depth=1) == {'cluster_id': 'int',\n        'cluster_similarity': 'float', 'documents': 'list'}\napp.delete_check(url)\npytest.mark.parametrize('kind, options', [['simhash', {'distance': 3}], [\n    'i-match', {}]])"
-}

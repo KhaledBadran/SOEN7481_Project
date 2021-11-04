@@ -1,9 +1,0 @@
-{
-    "functionName": "test_jal",
-    "className": "TestJTypes",
-    "fileName": "/AshtonUPS_&_Py-MI-PS/src_&_PyMIPS_&_tests_&_test_commands.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "Memory.reset()\nDataHeap.reset()\nProgramStack.reset()\npc = RegisterPool.get_register('pc')\nra = RegisterPool.get_register('$ra')\nprogram = {'main': [JType('jal', 'test'), BaseCommand(), BaseCommand(),\n    BaseCommand()], 'test': [BaseCommand()]}\nProgramStack.add_block_from_dict(program)\nProgramStack.jump_label('main')\ncurrent = pc.get_contents_as_int() + 4\nProgramStack.execute_next()\naddress = ProgramStack.get_label_addres('test')\nself.assertEqual(pc.get_contents_as_int(), address)\nself.assertEqual(ra.get_contents_as_int(), current)\n"
-}

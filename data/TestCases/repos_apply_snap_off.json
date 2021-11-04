@@ -1,9 +1,0 @@
-{
-    "functionName": "_apply_snap_off",
-    "className": "MixedInvasionPercolation",
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_algorithms_&_MixedInvasionPercolation.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        Add all the throats to the queue with snap off pressure\n        This is probably wrong!!!! Each one needs to start a new cluster.\n        \"\"\"\nnet = self.project.network\nphase = self.project.find_phase(self)\nsnap_off = self.settings['snap_off']\nif queue is None:\n    queue = self.queue[0]\ntry:\n    Pc_snap_off = phase[snap_off]\n    logger.info('Adding snap off pressures to queue')\n    for T in net.throats():\n        if not np.isnan(Pc_snap_off[T]):\n            hq.heappush(queue, [Pc_snap_off[T], T, 'throat'])\nexcept KeyError:\n    logger.warning('Phase ' + phase.name + \" doesn't have \" + 'property ' +\n        snap_off)\n"
-}

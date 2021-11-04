@@ -1,9 +1,0 @@
-{
-    "functionName": "test_vision_feature_reply",
-    "className": "TestMessages",
-    "fileName": "/PRIArobotics_&_HedgehogProtocol/tests_&_test_protocol.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "msg = vision.FeatureReply('foo', vision.FacesFeature([vision.Face((0, 10, \n    100, 50))]))\nproto = HedgehogMessage()\nproto.vision_feature_message.channel = 'foo'\nface = proto.vision_feature_message.feature.faces.faces.add()\nface.y = 10\nface.width = 100\nface.height = 50\nself.assertTransmissionServerClient(msg, proto)\nmsg = vision.FeatureReply('foo', vision.FacesFeature([]))\nproto = HedgehogMessage()\nproto.vision_feature_message.channel = 'foo'\nface = proto.vision_feature_message.feature.faces.SetInParent()\nself.assertTransmissionServerClient(msg, proto)\nmsg = vision.FeatureReply('foo', vision.BlobsFeature([vision.Blob((0, 10, \n    100, 50), (50, 35), 0.5)]))\nproto = HedgehogMessage()\nproto.vision_feature_message.channel = 'foo'\nblob = proto.vision_feature_message.feature.blobs.blobs.add()\nblob.y = 10\nblob.width = 100\nblob.height = 50\nblob.cx = 50\nblob.cy = 35\nblob.confidence = 0.5\nself.assertTransmissionServerClient(msg, proto)\nmsg = vision.FeatureReply('foo', vision.BlobsFeature([]))\nproto = HedgehogMessage()\nproto.vision_feature_message.channel = 'foo'\nblob = proto.vision_feature_message.feature.blobs.SetInParent()\nself.assertTransmissionServerClient(msg, proto)\n"
-}

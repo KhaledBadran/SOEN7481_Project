@@ -1,9 +1,0 @@
-{
-    "functionName": "test_size",
-    "className": "TestICP",
-    "fileName": "/jan-glx_&_ICPy/icpy_&_tests_&_test_ICP.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "np.random.seed(seed=1)\nn = 10\np = 3\nnoise = 0.1\nalpha = 0.1\ndef one():\n    E = np.repeat([0, 1, 2], np.ceil(n / 3.0))[0:n]\n    A = np.random.normal(scale=noise, size=[n]) + np.equal(E, 1)\n    B = A + np.random.normal(scale=noise, size=[n]) / 3 + np.equal(E, 2)\n    C = B + np.random.normal(scale=noise, size=[n])\n    S_hat, q_values, _ = icpy.invariant_causal_prediction(X=np.column_stack\n        ((A, B)), y=C, z=E, alpha=alpha)\n    return 0 in S_hat\nN = 100\nK = sum(one() for _ in range(N))\np_value = scipy.stats.binom_test(K, N, alpha, alternative='greater')\nself.assertGreater(p_value, 0.01)\n"
-}

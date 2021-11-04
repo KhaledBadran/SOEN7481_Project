@@ -1,9 +1,0 @@
-{
-    "functionName": "test_resource_create",
-    "className": "test_API_Gateway",
-    "fileName": "/pbx-gs_&_OSBot-AWS/tests_&_unit_&_apis_&_test_API_Gateway.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "api_name = 'temp-unit-test-api'\nnew_path = 'test-path'\nrest_api = self.api_gateway.rest_api_create(api_name)\napi_id = rest_api.get('id')\npath_id = self.api_gateway.resource(api_id, '/').get('id')\nnew_path_id = self.api_gateway.resource_create(api_id, path_id, new_path).get(\n    'id')\nassert self.api_gateway.resource(api_id, f'/{new_path}').get('id'\n    ) == new_path_id\nself.api_gateway.resource_delete(api_id, new_path_id)\nsleep(2)\nself.api_gateway.rest_api_delete(api_id)\n"
-}

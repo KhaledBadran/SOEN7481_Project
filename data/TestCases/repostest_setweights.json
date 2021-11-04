@@ -1,9 +1,0 @@
-{
-    "functionName": "test_setweights",
-    "className": null,
-    "fileName": "/hughperkins_&_DeepCL/python_&_test_&_test_basic.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "batchSize = 32\nplanes = 3\nsize = 28\ncl = PyDeepCL.DeepCL()\nnet = PyDeepCL.NeuralNet(cl)\nnet.addLayer(PyDeepCL.InputLayerMaker().numPlanes(planes).imageSize(size))\nnet.addLayer(PyDeepCL.RandomTranslationsMaker().translateSize(3))\nnet.addLayer(PyDeepCL.ConvolutionalMaker().numFilters(4).filterSize(3).\n    padZeros().biased())\nfor i in range(net.getNumLayers()):\n    layer = net.getLayer(i)\n    weights = layer.getWeights()\n    if weights is None:\n        continue\n    weightsSize = weights.size\n    print('i', i, 'weightsSize', weightsSize)\n    weights2 = np.zeros((weightsSize,), dtype=np.float32)\n    weights2[:] = np.random.uniform(-0.5, 0.5, weights2.shape)\n    layer.setWeights(weights2)\n    weights3 = layer.getWeights()\n    for j in range(weights2.size):\n        assert weights2[j] == weights3[j]\n"
-}

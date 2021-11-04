@@ -1,9 +1,0 @@
-{
-    "functionName": "test_basis_state_on_subsystem",
-    "className": "BasisStateTest",
-    "fileName": "/XanaduAI_&_PennyLane-PQ/tests_&_test_basis_state.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test BasisState with preparations on subsystems.\"\"\"\nif self.devices is None:\n    return\nself.logTestName()\nfor device in self.devices:\n    for bits_to_flip in [np.array([0, 0, 0]), np.array([1, 0, 0]), np.array\n        ([0, 1, 1]), np.array([1, 1, 0]), np.array([1, 1, 1])]:\n\n        @qml.qnode(device)\n        def circuit():\n            qml.BasisState(bits_to_flip, wires=list(range(self.\n                num_subsystems - 1)))\n            return qml.expval(qml.PauliZ(0)), qml.expval(qml.PauliZ(1)\n                ), qml.expval(qml.PauliZ(2)), qml.expval(qml.PauliZ(3))\n        self.assertAllAlmostEqual([1] * (self.num_subsystems - 1) - 2 *\n            bits_to_flip, np.array(circuit()[:-1]), delta=self.tol)\n"
-}

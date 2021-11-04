@@ -1,9 +1,0 @@
-{
-    "functionName": "test_set_tls_cipher_suites_invalid_list_value",
-    "className": "TestKmipServerConfig",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_config.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the right error is raised when an invalid list value is used\n        to set the tls_cipher_suites configuration property.\n        \"\"\"\nc = config.KmipServerConfig()\nc._logger = mock.MagicMock()\nargs = [0],\nself.assertRaisesRegex(exceptions.ConfigurationError,\n    'The TLS cipher suites must be a set of strings representing cipher suite names.'\n    , c._set_tls_cipher_suites, *args)\n"
-}

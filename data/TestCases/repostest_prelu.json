@@ -1,9 +1,0 @@
-{
-    "functionName": "test_prelu",
-    "className": "TestParametricRectifierLayer",
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_special.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "import lasagne\ninput_shape = 3, 28\ninput = np.random.randn(*input_shape).astype(theano.config.floatX)\nl_in = lasagne.layers.input.InputLayer(input_shape)\nl_dense = lasagne.layers.dense.DenseLayer(l_in, num_units=100)\nl_prelu = lasagne.layers.prelu(l_dense, alpha=init_alpha)\noutput = lasagne.layers.get_output(l_prelu, input)\nassert l_dense.nonlinearity == lasagne.nonlinearities.identity\nW = l_dense.W.get_value()\nb = l_dense.b.get_value()\nalpha_v = l_prelu.alpha.get_value()\nexpected = np.dot(input, W) + b\nexpected = np.maximum(expected, 0) + np.minimum(expected, 0) * alpha_v\nassert np.allclose(output.eval(), expected, atol=1e-07)\n"
-}

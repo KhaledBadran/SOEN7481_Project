@@ -1,9 +1,0 @@
-{
-    "functionName": "test_architecture",
-    "className": null,
-    "fileName": "/Puumanamana_&_CoCoNet/tests_&_test_config.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test if params for architecture are formatted correctly\n    \"\"\"\nargs = {'compo_neurons': [64, 32], 'cover_neurons': [32, 32],\n    'cover_filters': 30, 'cover_kernel': 5, 'cover_stride': 2,\n    'merge_neurons': 16}\ncfg = Configuration()\ncfg.init_config(output='test123', **args)\narchitecture = {'composition': {'neurons': args['compo_neurons']},\n    'coverage': {'neurons': args['cover_neurons'], 'n_filters': args[\n    'cover_filters'], 'kernel_size': args['cover_kernel'], 'conv_stride':\n    args['cover_stride']}, 'merge': {'neurons': args['merge_neurons']}}\nassert architecture == cfg.get_architecture()\n"
-}

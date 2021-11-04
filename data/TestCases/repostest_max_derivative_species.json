@@ -1,9 +1,0 @@
-{
-    "functionName": "test_max_derivative_species",
-    "className": "TestGetIgnitionDelay",
-    "fileName": "/kyleniemeyer_&_PyTeCK/pyteck_&_tests_&_test_simulation.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test using max derivative of a species-looking profile.\n        \"\"\"\na, b, c = [51329.3528, 0.316147043, 0.0105018205]\ntimes = np.linspace(0, 1, 10000)\nmass_fraction = a * np.exp(-((times - b) / c) ** 2)\nignition_delays = simulation.get_ignition_delay(times, mass_fraction,\n    'species', 'd/dt max')\nassert np.allclose(ignition_delays[0], b - np.sqrt(1 / 2) * c, rtol=0.0001)\n"
-}

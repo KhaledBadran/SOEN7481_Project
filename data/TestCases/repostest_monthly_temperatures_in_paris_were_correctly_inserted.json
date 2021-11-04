@@ -1,9 +1,0 @@
-{
-    "functionName": "test_monthly_temperatures_in_paris_were_correctly_inserted",
-    "className": null,
-    "fileName": "/AntoineToubhans_&_MongoTs/test_&_integration_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "months_document = collection._collection.find_one({'city': 'Paris'}, {\n    'months': 1})['months']\nassert 12 == len(months_document)\nfor month_index, month_document in enumerate(months_document):\n    if 6 == month_index:\n        assert 4 == month_document['count']\n        assert 35.6 + 36.8 + 29 + 18 == month_document['sum']\n        assert 35.6 ** 2 + 36.8 ** 2 + 29 ** 2 + 18 ** 2 == month_document[\n            'sum2']\n    else:\n        assert 0 == month_document['count']\n        assert 0 == month_document['sum']\n        assert 0 == month_document['sum2']\n"
-}

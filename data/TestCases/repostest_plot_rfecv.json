@@ -1,9 +1,0 @@
-{
-    "functionName": "test_plot_rfecv",
-    "className": null,
-    "fileName": "/tvdboom_&_ATOM/tests_&_test_plots.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Assert that the plot_rfecv method work as intended \"\"\"\nfs = FeatureSelector()\npytest.raises(PermissionError, fs.plot_rfecv)\nfs = FeatureSelector('RFECV', solver='lgb_class', n_features=12, scoring='f1')\nfs.fit_transform(X_bin, y_bin)\nfs.plot_rfecv(filename=FILE_DIR + 'rfecv1', display=False)\nassert glob.glob(FILE_DIR + 'rfecv1.png')\natom = ATOMClassifier(X_bin, y_bin, random_state=1)\natom.run('lr', metric='precision')\natom.feature_selection(strategy='RFECV', n_features=10)\natom.plot_rfecv(filename=FILE_DIR + 'rfecv2', display=False)\nassert glob.glob(FILE_DIR + 'rfecv2.png')\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_outer_scope",
-    "className": "NestedDefTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_def.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "t = Template(\n    \"\"\"\n        <%def name=\"a()\">\n            a: x is ${x}\n        </%def>\n\n        <%def name=\"b()\">\n            <%def name=\"c()\">\n            <%\n                x = 10\n            %>\n            c. x is ${x}.  ${a()}\n            </%def>\n\n            b. ${c()}\n        </%def>\n\n        ${b()}\n\n        x is ${x}\n\"\"\"\n    )\neq_(flatten_result(t.render(x=5)), 'b. c. x is 10. a: x is 5 x is 5')\n"
-}

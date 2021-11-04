@@ -1,9 +1,0 @@
-{
-    "functionName": "build_unwind_and_match_data",
-    "className": "QueryTest",
-    "fileName": "/AntoineToubhans_&_MongoTs/test_&_query_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "years_pipeline = []\nmonths_pipeline = [{'$unwind': '$months'}, {'$match': {'months.datetime': {\n    '$gte': datetime(2001, 3, 1), '$lte': datetime(2001, 4, 1)}}}]\ndays_pipeline = [{'$unwind': '$months'}, {'$match': {'months.datetime': {\n    '$gte': datetime(2001, 3, 1), '$lte': datetime(2001, 4, 1)}}}, {\n    '$unwind': '$months.days'}, {'$match': {'months.days.datetime': {'$gte':\n    datetime(2001, 3, 22), '$lte': datetime(2001, 4, 2)}}}]\nhours_pipeline = [{'$unwind': '$months'}, {'$match': {'months.datetime': {\n    '$gte': datetime(2001, 3, 1), '$lte': datetime(2001, 4, 1)}}}, {\n    '$unwind': '$months.days'}, {'$match': {'months.days.datetime': {'$gte':\n    datetime(2001, 3, 22), '$lte': datetime(2001, 4, 2)}}}, {'$unwind':\n    '$months.days.hours'}, {'$match': {'months.days.hours.datetime': {\n    '$gte': datetime(2001, 3, 22, 12), '$lte': datetime(2001, 4, 2, 0)}}}]\nstart = datetime(2001, 3, 22, 12)\nend = datetime(2001, 4, 2)\nreturn [(start, end, aggregateby.Aggregateby(0), years_pipeline), (start,\n    end, aggregateby.Aggregateby(1), months_pipeline), (start, end,\n    aggregateby.Aggregateby(2), days_pipeline), (start, end, aggregateby.\n    Aggregateby(3), hours_pipeline)]\n"
-}

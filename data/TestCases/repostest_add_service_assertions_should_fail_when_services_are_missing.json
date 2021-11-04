@@ -1,9 +1,0 @@
-{
-    "functionName": "test_add_service_assertions_should_fail_when_services_are_missing",
-    "className": null,
-    "fileName": "/Neuraxio_&_Neuraxle/testing_&_test_could_have_context.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with pytest.raises(AssertionError) as exception_info:\n    context = ExecutionContext(root=tmpdir)\n    p = Pipeline([SomeStep().assert_has_services(BaseService)]).with_context(\n        context=context)\n    data_inputs = np.array([0, 1, 2, 3])\n    p.transform(data_inputs=data_inputs)\nassert 'BaseService dependency missing' in exception_info.value.args[0]\n"
-}

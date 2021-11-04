@@ -1,9 +1,0 @@
-{
-    "functionName": "test_replace_in_fort3_fort3_parse_property_name",
-    "className": null,
-    "fileName": "/mortele_&_OccamTools/test_&_test_replace_in_fort3.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "properties = ['atom', 'bond type', 'bond angle', 'torsion', 'non bonded',\n    'scf', 'compress', 'chi']\nreplacement = Fort3Replacement()\nassert replacement.property is None\nfor index, prop in enumerate(properties):\n    replacement = Fort3Replacement(property=prop)\n    assert replacement.property == index\nfor s in ['abc', 'this-is-not-valid', 'a t o m', 'mota', 'not']:\n    caught = False\n    try:\n        replacement = Fort3Replacement(property=s)\n    except ValueError:\n        caught = True\n    assert caught is True\n"
-}

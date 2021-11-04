@@ -1,9 +1,0 @@
-{
-    "functionName": "test_calculate_route_whenerroroccured",
-    "className": "PublicTransitApiTest",
-    "fileName": "/abdullahselek_&_HerePy/tests_&_test_publictransit_api.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with open('testdata/models/public_transit_api_error.json', 'r') as f:\n    expectedResponse = f.read()\nresponses.add(responses.GET, 'https://transit.ls.hereapi.com/v3/route.json',\n    expectedResponse, status=200)\nwith self.assertRaises(herepy.HEREError):\n    self._api.calculate_route([-9999, -9999], [-9999, -9999],\n        '2017-11-22T07:30:00')\nresponses.activate"
-}

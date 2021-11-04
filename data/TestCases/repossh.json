@@ -1,9 +1,0 @@
-{
-    "functionName": "sh",
-    "className": "Data",
-    "fileName": "/openworm_&_PyOpenWorm/tests_&_OWMCLITest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "if not command:\n    return None\nenv = dict(os.environ)\nenv['PYTHONPATH'] = self.testdir + os.pathsep + env['PYTHONPATH']\nenv['HOME'] = self.test_homedir\nenv.update(kwargs.pop('env', {}))\noutputs = []\nfor cmd in command:\n    try:\n        outputs.append(check_output(shlex.split(cmd), env=env, cwd=self.\n            testdir, **kwargs).decode('utf-8'))\n    except CalledProcessError as e:\n        if e.output:\n            print(dedent(\n                \"\"\"                    ----------stdout from \"{}\"----------\n                    {}\n                    ----------{}----------\n                    \"\"\"\n                ).format(cmd, e.output.decode('UTF-8'), 'end stdout'.center\n                (14 + len(cmd))))\n        if getattr(e, 'stderr', None):\n            print(dedent(\n                \"\"\"                    ----------stderr from \"{}\"----------\n                    {}\n                    ----------{}----------\n                    \"\"\"\n                ).format(cmd, e.stderr.decode('UTF-8'), 'end stderr'.center\n                (14 + len(cmd))))\n        raise\nreturn outputs[0] if len(outputs) == 1 else outputs\n"
-}

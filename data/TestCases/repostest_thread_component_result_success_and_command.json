@@ -1,9 +1,0 @@
-{
-    "functionName": "test_thread_component_result_success_and_command",
-    "className": null,
-    "fileName": "/SillyFreak_&_ConcurrentUtils/tests_&_test_component.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "@component_workload\nasync def component(x, *, commands, events):\n    await events.send(Component.EVENT_START)\n    await commands.send(await commands.recv() + 1)\n    return x\ne = ThreadPoolExecutor(1)\ncomp = await start_component_in_thread(e, component, 1)\nassert await comp.request(1) == 2\nassert await comp.result() == 1\npytest.mark.asyncio"
-}

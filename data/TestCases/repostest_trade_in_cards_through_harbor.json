@@ -1,9 +1,0 @@
-{
-    "functionName": "test_trade_in_cards_through_harbor",
-    "className": "TestGame",
-    "fileName": "/josefwaller_&_PyCatan/tests_&_test_game.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "g = Game()\nres = g.add_settlement(0, g.board.points[0][2], is_starting=True)\nassert res == Statuses.ALL_GOOD\nfor h in g.board.harbors:\n    if g.board.points[0][2] in h.get_points():\n        h.type = HarborType.Ore\n        print('found harbor lmao')\ng.players[0].add_cards([ResCard.Ore] * 2)\nres = g.trade_to_bank(player=0, cards=[ResCard.Ore] * 2, request=ResCard.Wheat)\nassert res == Statuses.ALL_GOOD\nassert g.players[0].has_cards([ResCard.Wheat])\nassert not g.players[0].has_cards([ResCard.Ore])\ng.players[0].add_cards([ResCard.Brick] * 2)\nres = g.trade_to_bank(player=0, cards=[ResCard.Brick] * 2, request=ResCard.\n    Sheep)\nassert res == Statuses.ERR_HARBOR\nassert g.players[0].has_cards([ResCard.Brick] * 2)\nassert not g.players[0].has_cards([ResCard.Sheep])\nassert not g.players[0].has_cards([ResCard.Ore])\nres = g.trade_to_bank(player=0, cards=[ResCard.Ore] * 2, request=ResCard.Sheep)\nassert res == Statuses.ERR_CARDS\nassert not g.players[0].has_cards([ResCard.Sheep])\ng.players[0].add_cards([ResCard.Ore])\nres = g.trade_to_bank(player=0, cards=[ResCard.Ore] * 2, request=ResCard.Sheep)\nassert res == Statuses.ERR_CARDS\nassert not g.players[0].has_cards([ResCard.Sheep])\nassert g.players[0].has_cards([ResCard.Ore])\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test__to_array_values_reshape_dimensions_two",
-    "className": "TestBaseHyperParam",
-    "fileName": "/HDI-Project_&_BTB/tests_&_tuning_&_hyperparams_&_test_base.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "mock_np_isscalar.side_effect = [False, True]\ninstance = MagicMock()\ninstance.dimensions = 2\nmock_np_isscalar.return_value = False\nvalues = [1]\narray = MagicMock()\narray.__len__.return_value = 2\narray.shape.__len__.return_value = 1\nmock_np_array.return_value = array\nBaseHyperParam._to_array(instance, values)\narray.reshape.assert_called_once_with(1, -1)\npatch('btb.tuning.hyperparams.base.np.isscalar')patch('btb.tuning.hyperparams.base.np.array')"
-}

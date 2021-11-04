@@ -1,9 +1,0 @@
-{
-    "functionName": "test_rsp_plot",
-    "className": null,
-    "fileName": "/neuropsychology_&_NeuroKit/tests_&_tests_rsp.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "rsp = nk.rsp_simulate(duration=120, sampling_rate=1000, respiratory_rate=15)\nrsp_summary, _ = nk.rsp_process(rsp, sampling_rate=1000)\nnk.rsp_plot(rsp_summary)\nfig = plt.gcf()\nassert len(fig.axes) == 3\ntitles = ['Raw and Cleaned Signal', 'Breathing Rate', 'Breathing Amplitude']\nfor ax, title in zip(fig.get_axes(), titles):\n    assert ax.get_title() == title\nplt.close(fig)\n"
-}

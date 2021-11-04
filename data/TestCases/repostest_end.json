@@ -1,9 +1,0 @@
-{
-    "functionName": "test_end",
-    "className": null,
-    "fileName": "/SimLeek_&_CV_PubSubs/tests_&_window_&_test_subscriber_windows.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "sub_win.SubscriberWindows.FRAME_DICT = {}\nwith mock.patch.object(cv2, 'namedWindow'), mock.patch(\n    'displayarray.window.subscriber_windows.window_commands'\n    ) as mock_win_cmd, mock.patch(\n    'displayarray.window.subscriber_windows.subscriber_dictionary.stop_cam'\n    ) as mock_stop:\n    sw = sub_win.SubscriberWindows()\n    sw.close_threads = [mock.MagicMock(), mock.MagicMock()]\n    sw.end()\n    mock_win_cmd.quit.assert_called_with(force_all_read=False)\n    mock_stop.assert_called_with('0')\n    sw.close_threads[0].join.assert_called_once()\n    sw.close_threads[1].join.assert_called_once()\n"
-}

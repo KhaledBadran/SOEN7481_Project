@@ -1,9 +1,0 @@
-{
-    "functionName": "test_error_raise_when_module_not_found",
-    "className": "TestModelNotFound",
-    "fileName": "/bigfishgames_&_GameBenchAPI-PyClient/tests_&_test_unit_&_test_models_&_test_creator_&_test_model_creator.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Verify the ModuleNotFound exception is raised if the given model doesn't exist.\"\"\"\nmock_class_object = Mock\nmock_import.return_value = 'mocking.a.module.path'\nmock_object.return_value = mock_class_object\nexpected = 'The not_valid model does not exist.'\nwith self.assertRaises(ModelNotFound) as module_error:\n    self.creator = ModelCreator('not_valid')\nactual = str(module_error.exception)\nself.assertEqual(actual, expected)\npatch(MODEL_CREATOR_GET_CLASS)patch(MODEL_CREATOR_IMPORT_MODULE)"
-}

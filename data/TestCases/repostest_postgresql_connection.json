@@ -1,9 +1,0 @@
-{
-    "functionName": "test_postgresql_connection",
-    "className": "TestDBAccess",
-    "fileName": "/Riffstation_&_Flask-Philo-SQLAlchemy/tests_&_app_&_test_connection.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        checks if connection is open\n        \"\"\"\nconfig = {}\nconfig['FLASK_PHILO_SQLALCHEMY'] = {'DEFAULT':\n    'postgresql://ds:dsps@pgdb:5432/ds_test'}\napp = BaseTestFactory.create_test_app(config=config)\nwith app.app_context():\n    pool = create_pool()\n    result = pool.connections['DEFAULT'].session.execute('SELECT 19;')\n    assert result.fetchone()[0] == 19\n    pool.connections['DEFAULT'].session.close()\n"
-}

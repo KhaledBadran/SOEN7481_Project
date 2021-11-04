@@ -1,9 +1,0 @@
-{
-    "functionName": "_redirect_context",
-    "className": null,
-    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_pydevd_io.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "from _pydevd_bundle.pydevd_io import RedirectToPyDBIoMessages\nfrom _pydevd_bundle.pydevd_io import _RedirectionsHolder\npy_db = _DummyPyDb()\n_original_get_pydb = RedirectToPyDBIoMessages.get_pydb\n_original_stack_stdout = _RedirectionsHolder._stack_stdout\n_original_stack_stderr = _RedirectionsHolder._stack_stderr\n_original_stdout_redirect = _RedirectionsHolder._pydevd_stdout_redirect_\n_original_stderr_redirect = _RedirectionsHolder._pydevd_stderr_redirect_\nRedirectToPyDBIoMessages.get_pydb = lambda *args, **kwargs: py_db\n_RedirectionsHolder._stack_stdout = []\n_RedirectionsHolder._stack_stderr = []\n_RedirectionsHolder._pydevd_stdout_redirect_ = None\n_RedirectionsHolder._pydevd_stderr_redirect_ = None\noriginal_stdout = sys.stdout\noriginal_stderr = sys.stderr\nyield {'py_db': py_db}\nsys.stdout = original_stdout\nsys.stderr = original_stderr\nRedirectToPyDBIoMessages.get_pydb = _original_get_pydb\n_RedirectionsHolder._stack_stdout = _original_stack_stdout\n_RedirectionsHolder._stack_stderr = _original_stack_stderr\n_RedirectionsHolder._pydevd_stdout_redirect_ = _original_stdout_redirect\n_RedirectionsHolder._pydevd_stderr_redirect_ = _original_stderr_redirect\npytest.yield_fixture"
-}

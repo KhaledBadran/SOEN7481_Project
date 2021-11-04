@@ -1,9 +1,0 @@
-{
-    "functionName": "test_stochastic_dual_sgd",
-    "className": null,
-    "fileName": "/PythonOT_&_POT/test_&_test_stochastic.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "n = 10\nreg = 1\nnumItermax = 15000\nbatch_size = 10\nrng = np.random.RandomState(0)\nx = rng.randn(n, 2)\nu = ot.utils.unif(n)\nM = ot.dist(x, x)\nG, log = ot.stochastic.solve_dual_entropic(u, u, M, reg, batch_size,\n    numItermax=numItermax, log=True)\nnp.testing.assert_allclose(u, G.sum(1), atol=0.001)\nnp.testing.assert_allclose(u, G.sum(0), atol=0.001)\n"
-}

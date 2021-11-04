@@ -1,9 +1,0 @@
-{
-    "functionName": "test_scope_six",
-    "className": "ScopeTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_def.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"test that the initial context counts\n        as 'enclosing' scope, for plain defs\"\"\"\nt = Template(\n    \"\"\"\n\n        <%def name=\"a()\">\n            a: x is ${x}\n        </%def>\n\n        <%def name=\"b()\">\n            <%\n                x = 10\n            %>\n            b. x is ${x}.  ${a()}\n        </%def>\n\n        ${b()}\n    \"\"\"\n    )\neq_(flatten_result(t.render(x=5)), 'b. x is 10. a: x is 5')\n"
-}

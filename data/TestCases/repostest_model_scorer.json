@@ -1,9 +1,0 @@
-{
-    "functionName": "test_model_scorer",
-    "className": null,
-    "fileName": "/gelijergensen_&_PermutationImportance/test_&_test_sklearn_api.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "training_data, scoring_data = make_test_data()\nmodel = SVC(gamma='auto', probability=True)\nscore_fn = model_scorer(model, train_model, predict_model, accuracy_score)\nassert callable(score_fn)\nscore = score_fn(training_data, scoring_data)\nassert (0 <= score).all()\nassert (score <= 1).all()\nscore_fn = model_scorer(model, train_model, predict_model, accuracy_score,\n    nbootstrap=5, subsample=0.2)\nassert callable(score_fn)\nscore = score_fn(training_data, scoring_data)\nassert (0 <= score).all()\nassert (score <= 1).all()\nscore2 = score_fn((training_data[0][:, 0:0], training_data[1]), scoring_data)\nassert score.shape == score2.shape\nassert (score_fn.default_score == score2).all()\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_to_dataframe_custom_size",
-    "className": null,
-    "fileName": "/capitalone_&_Data-Load-and-Copy-using-Python/tests_&_test_database.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with mock.patch(dbapi.__name__ + '.connect') as mock_connect:\n    mock_connect.return_value.cursor.return_value.fetchmany.return_value = [(\n        1, 2), (2, 3), (3,)]\n    with Database(dbapi=dbapi, **credentials) as test:\n        test.execute(\"SELECT 'hello world' AS fld\")\n        df = test.to_dataframe(size=5)\nmock_connect.return_value.cursor.return_value.fetchmany.assert_called_with(5)\nmock_pandas.assert_called_with(test.cursor.fetchmany(), columns=[])\npytest.mark.parametrize('dbapi', DBAPIS)mock.patch('pandas.DataFrame')"
-}

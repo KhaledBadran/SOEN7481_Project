@@ -1,9 +1,0 @@
-{
-    "functionName": "trilaterate_v",
-    "className": "MixedInvasionPercolationCoop",
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_algorithms_&_MixedInvasionPercolationCoop.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        Find whether 3 spheres intersect\n        \"\"\"\ntemp1 = P2 - P1\ne_x = temp1 / np.linalg.norm(temp1, axis=1)[:, (np.newaxis)]\ntemp2 = P3 - P1\ni = self._my_dot(e_x, temp2)[:, (np.newaxis)]\ntemp3 = temp2 - i * e_x\ne_y = temp3 / np.linalg.norm(temp3, axis=1)[:, (np.newaxis)]\nd = np.linalg.norm(P2 - P1, axis=1)[:, (np.newaxis)]\nj = self._my_dot(e_y, temp2)[:, (np.newaxis)]\nx = (r1 * r1 - r2 * r2 + d * d) / (2 * d)\ny = (r1 * r1 - r3 * r3 - 2 * i * x + i * i + j * j) / (2 * j)\ntemp4 = r1 * r1 - x * x - y * y\nreturn temp4 >= 0\n"
-}

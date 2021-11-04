@@ -1,9 +1,0 @@
-{
-    "functionName": "test_fasta_to_array_iterator_params",
-    "className": null,
-    "fileName": "/goeckslab_&_Galaxy-ML/galaxy_ml_&_tests_&_test_sequences.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "fasta_path = sequence_path\ngenerator = FastaDNABatchGenerator(fasta_path)\ngenerator.set_processing_attrs()\nX = np.arange(2, 8)[:, (np.newaxis)]\ny = np.array([1, 0, 0, 1, 0, 1])\ntoarray_iterator = FastaToArrayIterator(X, generator, y=y, seed=42)\nparams = list(toarray_iterator.get_params().keys())\nexpect1 = ['X', 'batch_size', 'generator__fasta_path', 'generator__seed',\n    'generator__seq_length', 'generator__shuffle', 'generator',\n    'sample_weight', 'seed', 'shuffle', 'y']\nassert params == expect1, params\nnew_params = {'batch_size': 30, 'seed': 999, 'generator__seq_length': 500}\ntoarray_iterator.set_params(**new_params)\ngot1 = toarray_iterator.batch_size\ngot2 = toarray_iterator.seed\ngot3 = toarray_iterator.generator.seq_length\nassert got1 == 30, got1\nassert got2 == 999, got2\nassert got3 == 500, got3\n"
-}

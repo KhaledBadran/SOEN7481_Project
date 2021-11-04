@@ -1,9 +1,0 @@
-{
-    "functionName": "test_split_unit_str_scientific_notation",
-    "className": null,
-    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_split_str.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    split_unit_str: Given inputs of scientific notation, I expect the output\n    to correctly represent the inputted magnitude.\n\n    This checks that inputs with scientific notation are correctly converted\n    to floats.\n    \"\"\"\nmag, units = split_unit_str('123E1')\nassert mag == 1230\nassert units == u.dimensionless\nmag, units = split_unit_str('123E-1')\nassert mag == 12.3\nassert units == u.dimensionless\nmag, units = split_unit_str('-123E1')\nassert mag == -1230\nassert units == u.dimensionless\nmag, units = split_unit_str('123E1 foobars')\nassert mag == 1230\nassert units == 'foobars'\nmag, units = split_unit_str('-123E-1 foobars')\nassert mag == -12.3\nassert units == 'foobars'\nmag, units = split_unit_str('123e1')\nassert mag == 1230\nassert units == u.dimensionless\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_wavetilts",
-    "className": null,
-    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_wavetilts.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "wvtilts = wavetilts.WaveTilts(**instant_dict)\noutfile = data_path('tst_wavetilts.fits')\nwvtilts.to_file(outfile, overwrite=True)\n_wvtilts = wavetilts.WaveTilts.from_file(outfile)\nfor key in instant_dict.keys():\n    if isinstance(instant_dict[key], np.ndarray):\n        assert np.array_equal(wvtilts[key], _wvtilts[key])\n    else:\n        assert wvtilts[key] == _wvtilts[key]\nwvtilts.to_file(outfile, overwrite=True)\nos.remove(outfile)\n"
-}

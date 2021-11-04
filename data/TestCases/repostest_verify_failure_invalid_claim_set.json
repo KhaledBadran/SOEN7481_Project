@@ -1,9 +1,0 @@
-{
-    "functionName": "test_verify_failure_invalid_claim_set",
-    "className": "EasyJWTTest",
-    "fileName": "/BMeu_&_EasyJWT/tests_&_easyjwt_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n            Test verifying a token with unsupported claims.\n\n            Expected Result: An `InvalidClaimSetError` error is raised.\n        \"\"\"\neasyjwt_creation = EasyJWT(self.key)\nfake_claim = 'part_of_the_claim_set'\neasyjwt_creation.part_of_the_claim_set = True\nself.assertTrue(easyjwt_creation._is_claim(fake_claim))\ntoken = easyjwt_creation.create()\nwith self.assertRaises(InvalidClaimSetError) as exception_cm:\n    easyjwt_verification = EasyJWT.verify(token, self.key)\n    self.assertIsNone(easyjwt_verification)\nself.assertIn(fake_claim, str(exception_cm.exception))\n"
-}

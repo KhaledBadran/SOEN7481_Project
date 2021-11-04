@@ -1,9 +1,0 @@
-{
-    "functionName": "test_wilke_fuller_diffusivity",
-    "className": "MixturesTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_phase_&_MixturesTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.ha.set_concentration(component=self.N2, values=0.7)\nself.ha.set_concentration(component=self.O2, values=0.2)\nself.ha.set_concentration(component=self.H2O, values=0.1)\nself.ha.update_mole_fractions()\nself.ha.add_model(propname='pore.diffusivity', model=mods.phases.mixtures.\n    wilke_fuller_diffusivity)\nassert 'pore.diffusivity.' + self.O2.name in self.ha.keys()\nassert 'pore.diffusivity.' + self.N2.name in self.ha.keys()\nassert 'pore.diffusivity.' + self.H2O.name in self.ha.keys()\nDa = self.ha['pore.diffusivity.' + self.O2.name][0]\nDb = self.ha['pore.diffusivity.' + self.N2.name][0]\nDc = self.ha['pore.diffusivity.' + self.H2O.name][0]\nassert Da != Db\nassert Db != Dc\nself.ha.set_concentration(component=self.N2, values=0.8)\nself.ha.set_concentration(component=self.O2, values=0.2)\nself.ha.set_concentration(component=self.H2O, values=0.0)\nself.ha.update_mole_fractions()\nself.ha.regenerate_models()\nDa = self.ha['pore.diffusivity.' + self.O2.name][0]\nDb = self.ha['pore.diffusivity.' + self.N2.name][0]\nDc = self.ha['pore.diffusivity.' + self.H2O.name][0]\nassert np.allclose(Da, Db)\nassert Db != Dc\n"
-}

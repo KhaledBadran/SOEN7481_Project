@@ -1,9 +1,0 @@
-{
-    "functionName": "init_configurator",
-    "className": "TestConfigurationMethods",
-    "fileName": "/XHotSniperX_&_Netconflib/tests_&_test_netconf.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Initializes the NetConf object\n        with the desired number of nodes on the cluster.\n\n        Arguments:\n            node_count {integer} -- The number of nodes.\n        \"\"\"\nconfig_path = None\nif os.path.isfile(Paths.config_file_test):\n    config_path = Paths.config_file_test\nelse:\n    config_path = Paths.config_file_test_programfolder\nself.config = configparser.ConfigParser()\nconfig_file = open(config_path, 'r')\nself.config.read_file(config_file)\nconfig_file.close()\nif testing:\n    self.config.set('settings', 'testing', 'yes')\nelse:\n    self.config.set('settings', 'testing', 'no')\nself.config.remove_section('hosts')\nself.config.add_section('hosts')\nfor i in range(node_count):\n    host = 'node{}'.format(i + 1)\n    address = '10.0.1.{}'.format(i + 1)\n    self.config.set('hosts', host, address)\nconfig_file = open(config_path, 'w')\nself.config.write(config_file)\nconfig_file.close()\nself.ncl = NetConf(config_path)\n"
-}

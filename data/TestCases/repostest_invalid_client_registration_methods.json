@@ -1,9 +1,0 @@
-{
-    "functionName": "test_invalid_client_registration_methods",
-    "className": "TestQueryResponsePayload",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_query.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a TypeError is raised when an invalid value is used to set\n        the client registration methods of a Query response payload.\n        \"\"\"\nkwargs = {'client_registration_methods': 'invalid'}\nself.assertRaisesRegex(TypeError,\n    'The client registration methods must be a list of ClientRegistrationMethod enumerations.'\n    , payloads.QueryResponsePayload, **kwargs)\nkwargs = {'client_registration_methods': ['invalid']}\nself.assertRaisesRegex(TypeError,\n    'The client registration methods must be a list of ClientRegistrationMethod enumerations.'\n    , payloads.QueryResponsePayload, **kwargs)\nargs = payloads.QueryResponsePayload(\n    ), 'client_registration_methods', 'invalid'\nself.assertRaisesRegex(TypeError,\n    'The client registration methods must be a list of ClientRegistrationMethod enumerations.'\n    , setattr, *args)\nargs = payloads.QueryResponsePayload(), 'client_registration_methods', [\n    'invalid']\nself.assertRaisesRegex(TypeError,\n    'The client registration methods must be a list of ClientRegistrationMethod enumerations.'\n    , setattr, *args)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_matrix_prod",
-    "className": "TestNeuralPooling",
-    "fileName": "/apmoore1_&_Bella/tests_&_test_neural_pooling.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Tests :py:func:`bella.neural_pooling.matrix_std`\n        \"\"\"\nnum_array = np.asarray([[1, 2], [5, 6], [9, 10]], dtype=np.float32)\nstd_array = np.asarray([[1, 2, 3, 4]], dtype=np.float32)\nzero_array = np.asarray([[-1, 0], [0.5, -0.6], [0.009, 0.1]], dtype=np.float32)\nnum_out = matrix_prod(num_array)\nstd_out = matrix_prod(std_array)\nzero_out = matrix_prod(zero_array)\nnum_cor = np.asarray([45, 120], dtype=np.float32).reshape(1, 2)\nstd_corr = np.asarray([1, 2, 3, 4], dtype=np.float32).reshape(1, 4)\nzero_corr = np.asarray([-0.0045, 0], dtype=np.float32).reshape(1, 2)\nself.assertEqual(True, np.array_equal(num_cor, num_out), msg=\n    'Cannot handle basic numbers: real out {} correct values {}'.format(\n    num_out, num_cor))\nself.assertEqual(True, np.array_equal(std_corr, std_out), msg=\n    'Cannot handle vectors: real out {} correct values {}'.format(std_out,\n    std_corr))\nself.assertEqual(True, np.array_equal(zero_corr, zero_out), msg=\n    'Cannot handle vectors with zeros: real out {} correct values {}'.\n    format(zero_out, zero_corr))\n"
-}

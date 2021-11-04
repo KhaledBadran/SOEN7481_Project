@@ -1,9 +1,0 @@
-{
-    "functionName": "_distance_rule_theo",
-    "className": null,
-    "fileName": "/Silmathoron_&_NNGT/testing_&_test_generation.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "avg_deg = instruct['avg_deg']\nres = [avg_deg]\nspatial_density = instruct['neuron_density']\nscale = instruct['scale']\nrule = instruct['rule']\ndist_distrib = None\ndistances = None\nif rule == 'exp':\n    distances = np.arange(0.02 * scale, 7 * scale, 0.02 * scale)\n\n    def dist_distrib(d, space_dens, scale):\n        fact = 2 * np.pi * space_dens\n        return fact * d * np.exp(-d / scale)\nelse:\n    distances = np.arange(0.005 * scale, scale, 0.005 * scale)\n\n    def dist_distrib(d, space_dens, scale):\n        fact = 2 * np.pi * space_dens\n        return fact * d * np.clip(scale - d, 0.0, np.inf) / scale\ndistrib = dist_distrib(distances, spatial_density, scale)\nres.extend(distrib / distrib.sum())\nreturn res\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_lex_penman",
-    "className": null,
-    "fileName": "/goodmami_&_penman/tests_&_test_lexer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "def _lex(s):\n    return [tok.type for tok in lexer.lex(s)]\nassert _lex('') == []\nassert _lex('(a / alpha)') == ['LPAREN', 'SYMBOL', 'SLASH', 'SYMBOL', 'RPAREN']\nassert _lex(\"\"\"(a/alpha\n  :ROLE b)\"\"\") == ['LPAREN', 'SYMBOL', 'SLASH',\n    'SYMBOL', 'ROLE', 'SYMBOL', 'RPAREN']\nassert _lex(['(a / alpha', '  :ROLE b)']) == _lex(\"\"\"(a/alpha\n  :ROLE b)\"\"\")\nassert _lex('(a :INT 1 :STR \"hi there\" :FLOAT -1.2e3)') == ['LPAREN',\n    'SYMBOL', 'ROLE', 'SYMBOL', 'ROLE', 'STRING', 'ROLE', 'SYMBOL', 'RPAREN']\nassert _lex('(a :ROLE~e.1,2 b~3)') == ['LPAREN', 'SYMBOL', 'ROLE',\n    'ALIGNMENT', 'SYMBOL', 'ALIGNMENT', 'RPAREN']\nassert _lex(\"\"\"# comment\n# (n / nope)\n(a / alpha)\"\"\") == ['COMMENT',\n    'COMMENT', 'LPAREN', 'SYMBOL', 'SLASH', 'SYMBOL', 'RPAREN']\n"
-}

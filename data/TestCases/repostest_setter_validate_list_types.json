@@ -1,9 +1,0 @@
-{
-    "functionName": "test_setter_validate_list_types",
-    "className": null,
-    "fileName": "/AutomatedTester_&_Bugsy/tests_&_test_attachment.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "bugzilla = Bugsy()\nsource = attachment_return['bugs']['1017315'][0]\nattachment = Attachment(bugzilla, **source)\nfor field in ['bug_flags', 'flags']:\n    setattr(attachment, field, ['flag'])\n    assert getattr(attachment, field) == ['flag']\n    try:\n        setattr(attachment, field, 'non-boolean')\n        assert False, 'Should have raised an AttachmentException due to invalid list value'\n    except AttachmentException as e:\n        match = (\n            'Message: The %s field value must be of type list Code: None' %\n            field)\n        assert str(e) == match\n"
-}

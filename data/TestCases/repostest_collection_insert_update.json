@@ -1,9 +1,0 @@
-{
-    "functionName": "test_collection_insert_update",
-    "className": "TestCollection",
-    "fileName": "/kenfar_&_DataGristle/datagristle_&_tests_&_test_metadata.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "old_rows = self.md.collection_tools.lister()\nkva = {'schema_id': self.schema_id, 'collection_name': 'a',\n    'collection_desc': 'a1'}\nkvb = {'schema_id': self.schema_id, 'collection_name': 'b',\n    'collection_desc': 'b1'}\nassert self.md.collection_tools.setter(**kva) != 0\nassert self.md.collection_tools.setter(**kvb) != 0\nassert len(self.md.collection_tools.lister()) == 3\nassert self.md.collection_tools.getter(schema_id=self.schema_id,\n    collection_name='b').collection_desc == 'b1'\nassert self.md.collection_tools.getter(**kva).collection_desc == 'a1'\nkvb['collection_desc'] = 'b2'\nassert self.md.collection_tools.setter(**kvb) == 0\nassert len(self.md.collection_tools.lister()) == 3\nassert self.md.collection_tools.getter(**kvb).collection_desc == 'b2'\nkvb['collection_desc'] = 'b3'\nassert self.md.collection_tools.setter(**kvb) == 0\nassert len(self.md.collection_tools.lister()) == 3\nassert self.md.collection_tools.getter(schema_id=self.schema_id,\n    collection_name='b').collection_desc == 'b3'\nassert self.md.collection_tools.getter(schema_id=self.schema_id,\n    collection_name='a').collection_desc == 'a1'\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_adapt",
-    "className": "TestWSGIResponseAdapter",
-    "fileName": "/cbefus_&_Eynnyd/tests_&_wsgi_&_test_wsgi_response_adapter.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "response = ResponseBuilder().set_status(HTTPStatus.CREATED).add_header('foo',\n    'bar').add_header('fizz', 'buzz').add_basic_cookie('pants', 'shirt'\n    ).set_utf8_body('foobar-fizzbuzz').build()\nwsgi_response = WSGIResponseAdapter(None).adapt(response)\nself.assertEqual('201 CREATED', wsgi_response.status)\nself.assertEqual(4, len(wsgi_response.headers))\nself.assertTrue(('foo', 'bar') in wsgi_response.headers)\nself.assertTrue(('fizz', 'buzz') in wsgi_response.headers)\nself.assertTrue(('content-length', '15') in wsgi_response.headers)\nself.assertTrue(('Set-Cookie', 'pants=shirt; Secure; HttpOnly') in\n    wsgi_response.headers)\nself.assertEqual(1, len(list(wsgi_response.body)))\nself.assertTrue(b'foobar-fizzbuzz' in list(wsgi_response.body))\n"
-}

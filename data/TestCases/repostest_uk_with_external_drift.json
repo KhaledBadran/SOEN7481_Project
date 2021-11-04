@@ -1,9 +1,0 @@
-{
-    "functionName": "test_uk_with_external_drift",
-    "className": null,
-    "fileName": "/bsmurphy_&_PyKrige/tests_&_test_core.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data, _, (uk_test_answer, gridx_ref, gridy_ref) = validation_ref\ndem, demx, demy, cellsize, no_data = kt.read_asc_grid(os.path.join(BASE_DIR,\n    'test_data/test3_dem.asc'))\nuk = UniversalKriging(data[:, (0)], data[:, (1)], data[:, (2)],\n    variogram_model='spherical', variogram_parameters=[500.0, 3000.0, 0.0],\n    anisotropy_scaling=1.0, anisotropy_angle=0.0, drift_terms=['external_Z'\n    ], external_drift=dem, external_drift_x=demx, external_drift_y=demy,\n    verbose=False)\nanswer, gridx, gridy, cellsize, no_data = kt.read_asc_grid(os.path.join(\n    BASE_DIR, 'test_data/test3_answer.asc'))\nz, ss = uk.execute('grid', gridx, gridy, backend='vectorized')\nassert_allclose(z, answer, **allclose_pars)\nz, ss = uk.execute('grid', gridx, gridy, backend='loop')\nassert_allclose(z, answer, **allclose_pars)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_large_graph_mode",
-    "className": null,
-    "fileName": "/Accenture_&_AmpliGraph/tests_&_ampligraph_&_latent_features_&_test_models.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "set_entity_threshold(10)\nX = load_wn18()\nmodel = ComplEx(batches_count=100, seed=555, epochs=1, k=50, loss=\n    'multiclass_nll', loss_params={'margin': 5}, verbose=True, optimizer=\n    'sgd', optimizer_params={'lr': 0.001})\nmodel.fit(X['train'])\nX_filter = np.concatenate((X['train'], X['valid'], X['test']), axis=0)\nevaluate_performance(X['test'][::1000], model, X_filter, verbose=True,\n    corrupt_side='s,o')\ny = model.predict(X['test'][:1])\nprint(y)\nreset_entity_threshold()\n"
-}

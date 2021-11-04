@@ -1,9 +1,0 @@
-{
-    "functionName": "test_resumable_pipeline_fit_should_save_all_fitted_pipeline_steps",
-    "className": null,
-    "fileName": "/Neuraxio_&_Neuraxle/testing_&_test_step_saving.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "p = ResumablePipeline([(SOME_STEP_1, MultiplyByN(multiply_by=2)), (\n    PIPELINE_2, ResumablePipeline([(SOME_STEP_2, MultiplyByN(multiply_by=4)\n    ), (CHECKPOINT, DefaultCheckpoint()), (SOME_STEP_3, MultiplyByN(\n    multiply_by=6))]))], cache_folder=tmpdir)\np.name = ROOT\np = p.fit(np.array(range(10)), np.array(range(10)))\nnot_saved_paths = [create_some_step3_path(tmpdir)]\nsaved_paths = [create_root_path(tmpdir), create_pipeline2_path(tmpdir),\n    create_some_step1_path(tmpdir), create_some_step2_path(tmpdir),\n    create_some_checkpoint_path(tmpdir)]\nfor p in saved_paths:\n    assert os.path.exists(p)\nfor p in not_saved_paths:\n    assert not os.path.exists(p)\n"
-}

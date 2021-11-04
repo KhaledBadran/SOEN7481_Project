@@ -1,9 +1,0 @@
-{
-    "functionName": "test_write_app",
-    "className": "TestWriteApp",
-    "fileName": "/brettvanderwerff_&_Flaskerizer/flaskerizer_&_flaskerizer_src_&_tests_&_test_write_app.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"When CONFIGURATION['large_app_structure'] == False, tests that write_small_app method of the WriteApp\n        class creates a file 'app.py' that matches a \"gold standard\" app.py called app_test_file.py from the testing_files\n        directory. These two files are compared line for line in the test. Similarly, when\n        CONFIGURATION['large_app_structure'] == False, tests if the 'routes.py' file written by write_large_app matches\n        a gold standard version.\n        \"\"\"\nself.test.write_large_app()\ntest_dir = os.path.join(os.path.dirname(flaskerizer.__file__), os.path.\n    basename('Test_application'), os.path.basename('Test_application'), os.\n    path.basename('routes.py'))\ngold_dir = os.path.join(os.path.dirname(tests.__file__), os.path.basename(\n    'testing_files'), os.path.basename('routes_test_file.py'))\nwith open(test_dir, 'r') as test_obj:\n    test_string = test_obj.read()\nwith open(gold_dir) as gold_obj:\n    gold_string = gold_obj.read()\nself.assertMultiLineEqual(test_string, gold_string)\n"
-}

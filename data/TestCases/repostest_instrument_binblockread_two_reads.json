@@ -1,9 +1,0 @@
-{
-    "functionName": "test_instrument_binblockread_two_reads",
-    "className": null,
-    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_base_instrument.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "inst = ik.Instrument.open_test()\ndata = bytes.fromhex('00000001000200030004')\ninst._file.read_raw = mock.MagicMock(side_effect=[b'#', b'2', b'10', data[:\n    6], data[6:]])\nnp.testing.assert_array_equal(inst.binblockread(2), [0, 1, 2, 3, 4])\ncalls_expected = [1, 1, 2, 10, 4]\ncalls_actual = [call[0][0] for call in inst._file.read_raw.call_args_list]\nnp.testing.assert_array_equal(calls_expected, calls_actual)\n"
-}

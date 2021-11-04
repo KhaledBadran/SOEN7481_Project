@@ -1,9 +1,0 @@
-{
-    "functionName": "create_connections",
-    "className": "TestJython",
-    "fileName": "/fabioz_&_PyDev.Debugger/tests_&_test_jyserver.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        Creates the connections needed for testing.\n        \"\"\"\nserver = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\nserver.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)\nserver.bind((pycompletionserver.HOST, 0))\nserver.listen(1)\nfrom thread import start_new_thread\nt = pycompletionserver.CompletionServer(server.getsockname()[1])\nt.exit_process_on_kill = False\nstart_new_thread(t.run, ())\nsock, _addr = server.accept()\nreturn t, sock\n"
-}

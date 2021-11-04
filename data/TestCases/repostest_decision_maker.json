@@ -1,9 +1,0 @@
-{
-    "functionName": "test_decision_maker",
-    "className": "TestDecisionMaker",
-    "fileName": "/BciPy_&_BciPy/bcipy_&_tasks_&_tests_&_test_decision_maker.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test default behavior\"\"\"\ndecision_maker = mf.DecisionMaker(min_num_seq=1, max_num_seq=10, state='',\n    alphabet=['a', 'b', 'c', 'd'], decision_threshold=0.8)\nlikelihood = np.array([0.2, 0.2, 0.2, 0.4])\ndecision, _arg = decision_maker.decide(likelihood)\nself.assertFalse(decision)\nself.assertEqual('.', decision_maker.state)\nself.assertEqual('', decision_maker.displayed_state)\nlikelihood = np.array([0.05, 0.05, 0.1, 0.8])\ndecision, _arg = decision_maker.decide(likelihood)\nself.assertFalse(decision, 'Must exceed threshold')\nself.assertEqual('..', decision_maker.state)\nlikelihood = np.array([0.05, 0.05, 0.09, 0.81])\ndecision, _arg = decision_maker.decide(likelihood)\nself.assertTrue(decision)\nself.assertEqual('..d', decision_maker.state)\nself.assertEqual('d', decision_maker.displayed_state)\n"
-}

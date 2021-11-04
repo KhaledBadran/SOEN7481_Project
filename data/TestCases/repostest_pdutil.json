@@ -1,9 +1,0 @@
-{
-    "functionName": "test_pdutil",
-    "className": null,
-    "fileName": "/quantOS-org_&_JAQS/test_&_test_util.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "df = pd.DataFrame(np.random.rand(4, 20))\ndf.iloc[1, 2] = np.nan\ndf.iloc[3, 4] = np.nan\ndf.iloc[1, 4] = np.nan\nassert df.isnull().sum().sum() == 3\ndf.iloc[2, 11] = np.inf\ndf.iloc[2, 12] = -np.inf\nassert df.isnull().sum().sum() == 3\ndf2 = jutil.fillinf(df)\nassert df2.isnull().sum().sum() == 5\nres_q = jutil.to_quantile(df, 5, axis=1)\ndf3 = df.copy()\ndf3['group'] = ['a', 'a', 'b', 'a']\ndic = jutil.group_df_to_dict(df3, by='group')\nassert set(list(dic.keys())) == {'a', 'b'}\n"
-}

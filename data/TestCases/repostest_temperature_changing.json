@@ -1,9 +1,0 @@
-{
-    "functionName": "test_temperature_changing",
-    "className": "TestGetChangingVariable",
-    "fileName": "/kyleniemeyer_&_PyTeCK/pyteck_&_tests_&_test_eval_model.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Check normal behavior for multiple points with temperature changing.\n        \"\"\"\nnum = 10\npressure = numpy.random.rand(1) * units('atm')\ntemperatures = numpy.random.rand(num) * units('K')\ncases = []\nfor temp in temperatures:\n    dp = DataPoint({'pressure': [str(pressure[0])], 'temperature': [str(\n        temp)], 'composition': {'kind': 'mole fraction', 'species': [{\n        'species-name': 'O2', 'amount': [1.0]}]}, 'ignition-type': None})\n    cases.append(dp)\nvariable = eval_model.get_changing_variable(cases)\nassert len(variable) == num\nassert numpy.allclose(variable, [c.temperature.magnitude for c in cases])\n"
-}

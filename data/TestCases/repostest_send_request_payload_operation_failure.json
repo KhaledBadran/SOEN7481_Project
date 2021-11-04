@@ -1,9 +1,0 @@
-{
-    "functionName": "test_send_request_payload_operation_failure",
-    "className": "TestKMIPClient",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_test_kmip_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a KmipOperationFailure error is raised when a payload\n        with a failure status is returned.\n        \"\"\"\nbatch_item = ResponseBatchItem(operation=Operation(OperationEnum.\n    DELETE_ATTRIBUTE), result_status=ResultStatus(ResultStatusEnum.\n    OPERATION_FAILED), result_reason=ResultReason(ResultReasonEnum.\n    GENERAL_FAILURE), result_message=ResultMessage('Test failed!'))\nbuild_mock.return_value = None\nsend_mock.return_value = ResponseMessage(batch_items=[batch_item])\nargs = OperationEnum.DELETE_ATTRIBUTE, payloads.DeleteAttributeRequestPayload(\n    unique_identifier='1', attribute_name='Object Group', attribute_index=2)\nself.assertRaisesRegex(exceptions.OperationFailure, 'Test failed!', self.\n    client.send_request_payload, *args)\nmock.patch('kmip.services.kmip_client.KMIPProxy._build_request_message')mock.patch('kmip.services.kmip_client.KMIPProxy._send_and_receive_message')"
-}

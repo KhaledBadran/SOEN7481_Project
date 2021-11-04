@@ -1,9 +1,0 @@
-{
-    "functionName": "test_TasUBDEG_CalculateAngles",
-    "className": null,
-    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_TasUBlibDEG.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "cell = [6.11, 6.11, 11.35, 1.187430040454027, 1.1874300210500532, \n    0.5535845899562842, 90.0, 90.0, 120.0, 90.0, 90.0, 60.0]\nB = calculateBMatrix(cell)\nOM = 0.0\nsgu = 0.0\nsgl = 0.0\nUB = calcUBFromAngles(B, OM, sgu, sgl)\nplaneNormal = np.array([0, 0, 1.0])\nqe = np.array([1.0, 0.0, 0.0, 5.0, 5])\nss = 1\nA3Off = 0.0\nUBINV = np.linalg.inv(UB)\nQE = np.array([[1.0, 0.0, 0.0, 5.0, 5], [0.0, 0.5, 0.0, 8.0, 9.2], [-1.1, -\n    0.1, 0.0, 5.4, 4.4]])\nfor qe in QE:\n    a3, a4, sgu, sgl = calcTasQAngles(UB, planeNormal, ss, A3Off, qe)\n    print('------------------\\nA3:{}\\nA4{}'.format(a3, a4))\n    hkl = calcTasQH(UBINV, [a3, a4], qe[3], qe[4])[0]\n    print('{}'.format(hkl))\n    assert np.all(np.isclose([sgu, sgl], 0.0))\n    assert np.all(np.isclose(hkl, qe[:3]))\n"
-}

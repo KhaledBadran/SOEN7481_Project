@@ -1,9 +1,0 @@
-{
-    "functionName": "test_buffered",
-    "className": "CacheTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_cache.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "t = Template(\n    \"\"\"\n        <%!\n            def a(text):\n                return \"this is a \" + text.strip()\n        %>\n        ${foo()}\n        ${foo()}\n        <%def name=\"foo()\" cached=\"True\" buffered=\"True\">\n            this is a test\n        </%def>\n        \"\"\"\n    , buffer_filters=['a'])\nself._install_mock_cache(t)\neq_(result_lines(t.render()), ['this is a this is a test',\n    'this is a this is a test'])\n"
-}

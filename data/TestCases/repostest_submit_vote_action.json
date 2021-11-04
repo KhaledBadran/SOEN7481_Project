@@ -1,9 +1,0 @@
-{
-    "functionName": "test_submit_vote_action",
-    "className": null,
-    "fileName": "/OwnMarket_&_OwnBlockchainSdkPython/own_blockchain_sdk_&_test_transactions.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "sender_wallet = Wallet()\naccount_hash = 'AccountH1'\nasset_hash = 'AssetH1'\nresolution_hash = 'ResolutionH1'\nvote_hash = 'VoteH1'\nexpected = (\n    \"\"\"{\n    \"senderAddress\": \"%s\",\n    \"nonce\": 1,\n    \"expirationTime\": 0,\n    \"actionFee\": 0.01,\n    \"actions\": [\n        {\n            \"actionType\": \"SubmitVote\",\n            \"actionData\": {\n                \"accountHash\": \"%s\",\n                \"assetHash\": \"%s\",\n                \"resolutionHash\": \"%s\",\n                \"voteHash\": \"%s\"\n            }\n        }\n    ]\n}\"\"\"\n     % (sender_wallet.address, account_hash, asset_hash, resolution_hash,\n    vote_hash))\ntx = Tx(sender_wallet.address, 1, 0.01, 0)\ntx.add_submit_vote_action(account_hash, asset_hash, resolution_hash, vote_hash)\nactual = tx.to_json()\nassert expected == actual\n"
-}

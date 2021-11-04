@@ -1,9 +1,0 @@
-{
-    "functionName": "test_download_404",
-    "className": "TestCase",
-    "fileName": "/IntegralDefense_&_ACE/lib_&_saq_&_modules_&_test_url.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"We should not extract URLs from data downloaded from URLs that returned a 404.\"\"\"\nfrom saq.modules.url import CrawlphishAnalysisV2\nroot = create_root_analysis()\nroot.initialize_storage()\nurl = root.add_observable(F_URL,\n    'http://localhost:{}/test_data/crawlphish.001'.format(LOCAL_PORT))\nurl.add_directive(DIRECTIVE_CRAWL)\nroot.save()\nroot.schedule()\nengine = TestEngine()\nengine.enable_module('analysis_module_crawlphish', 'test_groups')\nengine.controlled_stop()\nengine.start()\nengine.wait()\nroot.load()\nurl = root.get_observable(url.id)\nanalysis = url.get_analysis(CrawlphishAnalysisV2)\nself.assertEquals(analysis.proxy_results['GLOBAL'].status_code, 404)\nif 'tor' in analysis.proxy_results:\n    self.assertIsNone(analysis.proxy_results['tor'].status_code)\nself.assertIsNone(analysis.file_name)\nself.assertFalse(analysis.downloaded)\nself.assertIsNotNone(analysis.error_reason)\nfile_observables = analysis.get_observables_by_type(F_FILE)\nself.assertEquals(len(file_observables), 0)\n"
-}

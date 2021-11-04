@@ -1,9 +1,0 @@
-{
-    "functionName": "mix_and_match",
-    "className": null,
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_models_&_phases_&_misc.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Return the given property by looking it up from a list of given phases\n    based on occupancy.\n\n    Parameters\n    ----------\n    target : OpenPNM Object\n        The object which this model is associated with. This controls the\n        length of the calculated array, and also provides access to other\n        necessary properties.\n\n    prop : string\n        The dictionary key to the array containing the pore/throat property to\n        be used in the calculation.\n\n    phases : list\n        List of OpenPNM phase objects over which the given `prop` is to be\n        averaged out.\n\n    occupancy : string\n        The dictionary key to the array containing the occupancy associated\n        with each of the given ``phases``.\n\n    Returns\n    -------\n    weighted_average : ndarray\n        Weighted average of the given `prop` averaged over `phases`.\n\n    \"\"\"\nprop = prop.strip('_')\nvalues = _np.zeros_like(phases[0][prop])\nfor phase in phases:\n    mask = phase[occupancy]\n    values[mask] = phase[prop][mask]\nreturn values\n"
-}

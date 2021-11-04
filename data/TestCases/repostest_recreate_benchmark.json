@@ -1,9 +1,0 @@
-{
-    "functionName": "test_recreate_benchmark",
-    "className": null,
-    "fileName": "/perslab_&_CELLEX/tests_&_test_recreate_benchmark.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "path_data = str(Path(BENCHMARK_DIR, 'zeisel2018_mousebrain_subset_data.csv.gz')\n    )\npath_metadata = str(Path(BENCHMARK_DIR,\n    'zeisel2018_mousebrain_subset_metadata.csv.gz'))\ndata = pd.read_csv(path_data, index_col=0, compression='gzip')\nmetadata = pd.read_csv(path_metadata, index_col=0, compression='gzip')\neso = cellex.ESObject(data, annotation=metadata, dtype='float64')\neso.compute()\nfor key in eso.results.keys():\n    path = str(Path(BENCHMARK_DIR, 'mousebrain_subset.{}.csv.gz'.format(key)))\n    benchmark = pd.read_csv(path, index_col=0, compression='gzip')\n    result = eso.results[key]\n    pd.util.testing.assert_frame_equal(benchmark, result, check_less_precise=14\n        )\n"
-}

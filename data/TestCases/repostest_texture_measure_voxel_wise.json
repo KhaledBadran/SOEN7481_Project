@@ -1,9 +1,0 @@
-{
-    "functionName": "test_texture_measure_voxel_wise",
-    "className": null,
-    "fileName": "/NPann_&_GenTex/tests_&_test_texture_measure.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "texm = ['CM Entropy']\nim = Image.open(FIXTURE_DIR / 'test_image.png')\nim = np.asarray(im.resize(tuple(map(lambda x: x // 4, im.size))))\nmask2 = np.where(im > 0, 1, 0)\nidx, idy = np.where(mask2 == 1)\nmask1 = np.zeros(im.shape, dtype=int)\nres = np.zeros(im.shape + (len(texm),))\nbox_indices = gentex.template.Template('RectBox', [7, 7, 7], 2, False).offsets\nlevels = 8\nbins = np.linspace(im.min(), im.max(), levels + 1)\nim_q = np.digitize(im.ravel(), bins).reshape(im.shape) - 1\nfor a, b in zip(idx, idy):\n    mask1[a, b] = 1\n    comat = gentex.comat.comat_2T_mult(im_q, mask1, im_q, mask2,\n        box_indices, levels1=levels + 1, levels2=levels + 1)\n    mytex = gentex.texmeas.Texmeas(comat)\n    for c, meas in enumerate(texm):\n        mytex.calc_measure(meas)\n        res[a, b, c] = mytex.val\n    mask1[a, b] = 0\n"
-}

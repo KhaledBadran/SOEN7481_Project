@@ -1,9 +1,0 @@
-{
-    "functionName": "find_clusters",
-    "className": null,
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_topotools_&_topotools.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Identify connected clusters of pores in the network.  This method can\n    also return a list of throat cluster numbers, which correspond to the\n    cluster numbers of the pores to which the throat is connected.  Either\n    site and bond percolation can be considered, see description of input\n    arguments for details.\n\n    Parameters\n    ----------\n    network : OpenPNM Network Object\n        The network\n\n    mask : array_like, boolean\n        A list of active bonds or sites (throats or pores).  If the mask is\n        Np long, then the method will perform a site percolation, and if\n        the mask is Nt long bond percolation will be performed.\n\n    Returns\n    -------\n    A tuple containing an Np long list of pore cluster labels, and an Nt-long\n    list of throat cluster labels.  The label numbers correspond such that\n    pores and throats with the same label are part of the same cluster.\n\n    Examples\n    --------\n    >>> import openpnm as op\n    >>> from scipy import rand\n    >>> pn = op.network.Cubic(shape=[25, 25, 1])\n    >>> pn['pore.seed'] = rand(pn.Np)\n    >>> pn['throat.seed'] = rand(pn.Nt)\n\n\n    \"\"\"\nmask = np.array(mask, ndmin=1)\nif mask.dtype != bool:\n    raise Exception('Mask must be a boolean array of Np or Nt length')\nif np.size(mask) == network.Np:\n    p_clusters, t_clusters = _site_percolation(network, mask)\nelif np.size(mask) == network.Nt:\n    p_clusters, t_clusters = _bond_percolation(network, mask)\nelse:\n    raise Exception('Mask received was neither Nt nor Np long')\nreturn p_clusters, t_clusters\n"
-}

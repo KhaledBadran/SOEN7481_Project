@@ -1,9 +1,0 @@
-{
-    "functionName": "test_runTargetRMS_2",
-    "className": null,
-    "fileName": "/mworion_&_MountWizzard4/mw4_&_test_&_unit_tests_&_gui_&_mainWmixin_&_test_tabManageModel.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "app.runningOptimize = True\napp.ui.optimizeOverall.setChecked(True)\napp.ui.optimizeSingle.setChecked(False)\napp.app.mount.model.addStar('12:00:00, 180:00:00, 5, 90, 1')\napp.app.mount.model.addStar('12:00:00, 120:00:00, 4, 90, 2')\napp.app.mount.model.errorRMS = 100\napp.app.mount.model.numberStars = 2\napp.runningTargetRMS = True\napp.app.mount.signals.alignDone.connect(app.runTargetRMS)\nwith mock.patch.object(app.app.mount.model, 'deletePoint', return_value=False):\n    with mock.patch.object(app.app.mount, 'getAlign'):\n        suc = app.runTargetRMS()\n        assert suc\n"
-}

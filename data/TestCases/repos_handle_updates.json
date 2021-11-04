@@ -1,9 +1,0 @@
-{
-    "functionName": "_handle_updates",
-    "className": "AsyncClient",
-    "fileName": "/PRIArobotics_&_HedgehogClient/hedgehog_&_client_&_async_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "while True:\n    _, msgs = await self.socket.recv_msgs()\n    assert len(msgs) > 0\n    async with self._reply_condition:\n        if msgs[0].is_async:\n            assert all(msg.is_async for msg in msgs)\n            logger.debug('Receive updates: %s', msgs)\n            self.registry.handle_updates(msgs)\n        else:\n            assert not any(msg.is_async for msg in msgs)\n            self.registry.complete_register(msgs)\n            self._replies.append(msgs)\n            self._reply_condition.notify()\n"
-}

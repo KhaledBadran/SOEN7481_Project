@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_details_batch",
-    "className": null,
-    "fileName": "/mcs07_&_ChemSpiPy/tests_&_test_api.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test get_extended_compound_info_list returns info for a list of record IDs.\"\"\"\ninfo = cs.get_details_batch([6543, 1235, 6084])\nassert len(info) == 3\nassert all(field in info[0] for field in ['id', 'smiles', 'formula',\n    'averageMass', 'molecularWeight', 'monoisotopicMass', 'nominalMass',\n    'commonName', 'referenceCount', 'dataSourceCount', 'pubMedCount',\n    'rscCount', 'mol2D'])\nassert all(isinstance(info[0][field], float) for field in ['averageMass',\n    'molecularWeight', 'monoisotopicMass'])\nassert isinstance(info[0]['id'], int)\nassert all(isinstance(info[0][field], six.text_type) for field in ['smiles',\n    'formula', 'commonName', 'mol2D'])\n"
-}

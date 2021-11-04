@@ -1,9 +1,0 @@
-{
-    "functionName": "test_subdict_getitem_on_two_geometries",
-    "className": "BaseTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_core_&_BaseTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "pn = op.network.Cubic(shape=[5, 5, 5])\ngeo1 = op.geometry.GenericGeometry(network=pn, pores=pn.Ps[:75], throats=pn\n    .Ts[:75])\ngeo2 = op.geometry.GenericGeometry(network=pn, pores=pn.Ps[75:], throats=pn\n    .Ts[75:])\ngeo1['pore.foo.bar'] = 1\ngeo1['pore.foo.baz'] = 2\nd = pn['pore.foo']\nassert len(d) == 2\nassert 'pore.foo.bar' in d.keys()\nassert 'pore.foo.baz' in d.keys()\nassert np.any(np.isnan(d['pore.foo.bar']))\nassert np.any(np.isnan(d['pore.foo.baz']))\ngeo2['pore.foo.bar'] = 1\ngeo2['pore.foo.baz'] = 2\nd = pn['pore.foo']\nassert np.all(~np.isnan(d['pore.foo.bar']))\nassert np.all(~np.isnan(d['pore.foo.baz']))\n"
-}

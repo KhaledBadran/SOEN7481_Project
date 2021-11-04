@@ -1,9 +1,0 @@
-{
-    "functionName": "test__horizontal_charge_line__captures_reflect_poisson_densities",
-    "className": "TestParallelPoissonDensities",
-    "fileName": "/Jammy2211_&_PyAutoCTI/test_&_unit_&_data_&_test_add_correct_cti_to_image.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "image_pre_cti = np.zeros((5, 5))\nimage_pre_cti[(2), :] = +100\nim = cti_image.ImageFrame(frame_geometry=ci_frame.FrameGeometry.\n    euclid_bottom_left(), array=image_pre_cti)\nparallel_species = arctic_params.Species(trap_density=10.0, trap_lifetime=1.0)\nparallel_species = arctic_params.Species.poisson_species(species=[\n    parallel_species], shape=im.shape, seed=1)\nparallel_ccd = arctic_params.CCD(well_notch_depth=0.0001, well_fill_beta=\n    0.58, well_fill_gamma=0.0, well_fill_alpha=1.0)\nparams_parallel = arctic_params.ArcticParams(parallel_species=\n    parallel_species, parallel_ccd=parallel_ccd)\nimage_post_cti = im.add_cti_to_image(cti_params=params_parallel,\n    cti_settings=arctic_parallel, use_parallel_poisson_densities=True)\nassert image_post_cti[2, 0] == image_post_cti[2, 3]\nassert image_post_cti[2, 0] == image_post_cti[2, 4]\nassert image_post_cti[2, 0] < image_post_cti[2, 1]\nassert image_post_cti[2, 0] < image_post_cti[2, 2]\nassert image_post_cti[2, 1] > image_post_cti[2, 2]\nassert image_post_cti[3, 0] == image_post_cti[3, 3]\nassert image_post_cti[3, 0] == image_post_cti[3, 4]\nassert image_post_cti[3, 0] > image_post_cti[3, 1]\nassert image_post_cti[3, 0] > image_post_cti[3, 2]\nassert image_post_cti[3, 1] < image_post_cti[3, 2]\n"
-}

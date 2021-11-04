@@ -1,9 +1,0 @@
-{
-    "functionName": "test_correct_answer_with_copy",
-    "className": "TestComputeIfOffenseIsHome",
-    "fileName": "/AndrewRook_&_NFLWin/nflwin_&_tests_&_test_preprocessing.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "input_df = pd.DataFrame({'home_team': ['a', 'a', 'a'], 'offense_team': ['a',\n    'b', 'a']})\nexpected_input_df = input_df.copy()\nexpected_transformed_df = pd.DataFrame({'home_team': ['a', 'a', 'a'],\n    'offense_team': ['a', 'b', 'a'], 'offense_home_team': [True, False, True]})\nciow = preprocessing.ComputeIfOffenseIsHome('offense_team', 'home_team',\n    offense_home_team_colname='offense_home_team', copy=True)\ntransformed_df = ciow.transform(input_df)\npd.util.testing.assert_frame_equal(input_df.sort_index(axis=1),\n    expected_input_df.sort_index(axis=1))\npd.util.testing.assert_frame_equal(transformed_df.sort_index(axis=1),\n    expected_transformed_df.sort_index(axis=1))\n"
-}

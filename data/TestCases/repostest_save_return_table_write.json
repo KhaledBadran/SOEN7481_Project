@@ -1,9 +1,0 @@
-{
-    "functionName": "test_save_return_table_write",
-    "className": null,
-    "fileName": "/open-source-economics_&_OG-USA/ogusa_&_tests_&_test_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test of the utils.save_return_table function for case when write to\n    disk\n    \"\"\"\nutils.save_return_table(df, output_type, path=path)\nfilehandle = open(path)\ntry:\n    assert filehandle.read() is not None\nexcept UnicodeDecodeError:\n    from openpyxl import load_workbook\n    wb = load_workbook(filename=path)\npytest.mark.parametrize('df,output_type,path', test_data, ids=['tex', 'csv',\n    'json', 'excel'])"
-}

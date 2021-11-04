@@ -1,9 +1,0 @@
-{
-    "functionName": "test_mode_symmetries",
-    "className": null,
-    "fileName": "/mesonepigreco_&_CellConstructor/tests_&_TestModeSymmetries_&_test_mode_symmetries.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "total_path = os.path.dirname(os.path.abspath(__file__))\nos.chdir(total_path)\ndyn = CC.Phonons.Phonons('../TestPhononSupercell/dynmat')\ndyn.Symmetrize()\nqe_sym = CC.symmetries.QE_Symmetry(dyn.structure)\nqe_sym.SetupQPoint(verbose=True)\nsymmetries = qe_sym.GetSymmetries()\nw, pols = dyn.DyagDinQ(0)\nsim_modes = CC.symmetries.GetSymmetriesOnModes(symmetries, dyn.structure, pols)\nfor i in range(len(symmetries)):\n    print('Symmetry:')\n    print(symmetries[i])\n    print('Interaction matrix:')\n    print('\\n'.join(['{:16.4f} cm-1  | diag_value = {:10.4f}'.format(w[j] *\n        CC.Phonons.RY_TO_CM, sim_modes[i, j, j]) for j in range(len(w))]))\n"
-}

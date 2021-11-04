@@ -1,9 +1,0 @@
-{
-    "functionName": "test_removeUpdate",
-    "className": "TestDatabase",
-    "fileName": "/corydodt_&_Hypy/src_&_hypy_&_test_lib.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test for document id, update, document removal, len() of database.\n        \"\"\"\ndocxx = HDocument(uri=u'xx')\ndocxx.addText(u'xx')\nself.assertEqual(docxx.id, -1)\ndb = HDatabase()\nself.assertRaises(EditFailed, db.updateAttributes, docxx)\nwith self.freshenDatabase() as db:\n    db.putDoc(docxx, clean=True)\n    del db[u'xx']\n    self.assertRaises(EditFailed, db.remove, uri=u'xx')\n    db.putDoc(docxx)\n    self.assertEqual(len(db), 4)\n    db.remove(uri=u'1')\n    self.assertEqual(len(db), 3)\n    doc2 = db[u'2']\n    db.remove(doc2)\n    self.assertEqual(len(db), 2)\n    doc3id = db[u'3'].id\n    db.remove(id=doc3id)\n    self.assertEqual(len(db), 1)\n    self.assertRaises(TypeError, db.remove)\n    self.assertRaises(EditFailed, db.remove, id=doc3id)\n    self.assertRaises(KeyError, db.__getitem__, b'1')\n    dbdocxx = db[u'xx']\n    self.assertFalse(docxx is dbdocxx)\n    self.assertTrue(dbdocxx.get(u'zz') is None)\n    dbdocxx[u'zz'] = u'hello'\n    db.updateAttributes(dbdocxx)\n    dbdocxx2 = db[u'xx']\n    self.assertFalse(dbdocxx is dbdocxx2)\n    self.assertEqual(dbdocxx2.get(u'zz'), u'hello')\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "_update_network",
-    "className": "GenericIO",
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_io_&_GenericIO.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "for el in ['pore', 'throat']:\n    N = [np.shape(net[i])[0] for i in net.keys() if i.startswith(el)]\n    if N:\n        N = np.array(N)\n        if np.all(N == N[0]):\n            if network._count(el) == N[0] or network._count(el) == 0:\n                network.update({(el + '.all'): np.ones((N[0],), dtype=bool)})\n                net.pop(el + '.all', None)\n            else:\n                raise Exception('Length of ' + el + ' data in file' +\n                    ' does not match network')\n        else:\n            raise Exception(el + ' data in file have inconsistent' + ' lengths'\n                )\nfor item in net.keys():\n    if net[item].dtype is int and net[item].max() == 1:\n        net[item] = net[item].astype(bool)\n    network.update({item: net[item]})\nnetwork._gen_ids()\nreturn network\nclassmethod"
-}

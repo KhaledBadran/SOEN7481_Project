@@ -1,9 +1,0 @@
-{
-    "functionName": "test_add_tensor",
-    "className": null,
-    "fileName": "/mesonepigreco_&_CellConstructor/tests_&_ReadPhOutput_&_test_add_tensor.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "total_path = os.path.dirname(os.path.abspath(__file__))\nos.chdir(total_path)\nph_file = 'phonon.pho'\ndyn_file = 'dyn_'\nnqirr = 3\nINFO = (\n    \"\"\"\n    This script reads the dynamical matrix in the supercell and \n    adds a dielectric tensor and the effective charges computed with\n    quantum espresso ph.x.\n    Those are read directly from the ph.x output stored in {}\n\n    In this case the effective charges have been computed in a supercell \n    with distorted atoms.\n    We first need to generate the supercell, and then we apply the effective charges.\n    \"\"\"\n    .format(ph_file))\nprint(INFO)\ndyn = CC.Phonons.Phonons(dyn_file, nqirr)\nsuper_dyn = dyn.GenerateSupercellDyn(dyn.GetSupercell())\nsuper_dyn.ReadInfoFromESPRESSO(ph_file)\nprint('The read dielectric tensor is:')\nprint(super_dyn.dielectric_tensor)\n"
-}

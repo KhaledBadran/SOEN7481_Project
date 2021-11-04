@@ -1,9 +1,0 @@
-{
-    "functionName": "test_keybase_list_requests",
-    "className": "KeybaseTest",
-    "fileName": "/cmsteffen-code_&_PyKBLib/tests_&_test_pykblib_keybase.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.keybase._api.run_command.return_value = 'ERROR'\nwith self.assertRaises(KeybaseException):\n    self.keybase.list_requests()\nself.keybase._api.run_command.assert_called_with('team list-requests')\nself.keybase._api.run_command.return_value = 'No requests at this time'\nresult = self.keybase.list_requests()\nself.assertEqual(result, dict())\nself.keybase._api.run_command.return_value = '\\n'.join([\n    'team_one          test_user wants to join',\n    'team_one          test_user2 wants to join',\n    'team_one.subteam  test_user wants to join',\n    '----------------------------------------------------------------------',\n    'To handle requests, use `keybase team add-member` or `keybase team ignore-request`.'\n    ])\nresult = self.keybase.list_requests()\nself.assertEqual(result, {'team_one': {'test_user', 'test_user2'},\n    'team_one.subteam': {'test_user'}})\nself.keybase._api.run_command.return_value = '\\n'.join([\n    'team_one.subteam  test_user wants to join',\n    '----------------------------------------------------------------------',\n    'To handle requests, use `keybase team add-member` or `keybase team ignore-request`.'\n    ])\nresult = self.keybase.list_requests('team_one.subteam')\nself.keybase._api.run_command.assert_called_with(\n    'team list-requests -t team_one.subteam')\nself.assertEqual(result, {'team_one.subteam': {'test_user'}})\n"
-}

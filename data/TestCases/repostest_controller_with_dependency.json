@@ -1,9 +1,0 @@
-{
-    "functionName": "test_controller_with_dependency",
-    "className": null,
-    "fileName": "/RobertoPrevato_&_BlackSheep/tests_&_test_controllers.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "app = FakeApplication()\napp.controllers_router = RoutesRegistry()\nget = app.controllers_router.get\nclass Settings:\n\n    def __init__(self, greetings: str):\n        self.greetings = greetings\nclass Home(Controller):\n\n    def __init__(self, settings: Settings):\n        assert isinstance(settings, Settings)\n        self.settings = settings\n\n    def greet(self):\n        return self.settings.greetings\n\n    @get('/')\n    async def index(self, request: Request):\n        return text(self.greet())\napp.services.add_instance(Settings(value))\napp.setup_controllers()\nawait app(get_example_scope('GET', '/'), MockReceive(), MockSend())\nbody = await app.response.text()\nassert body == value\nassert app.response.status == 200\npytest.mark.asynciopytest.mark.parametrize('value', ['Hello World', 'Charlie Brown'])"
-}

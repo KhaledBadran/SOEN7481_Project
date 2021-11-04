@@ -1,9 +1,0 @@
-{
-    "functionName": "set_outlets",
-    "className": "MixedInvasionPercolation",
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_algorithms_&_MixedInvasionPercolation.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        Set the locations through which defender exits the network.\n        This is only necessary if 'trapping' was set to True when ``setup``\n        was called.\n\n        Parameters\n        ----------\n        pores : array_like\n            Locations where the defender can exit the network.  Any defender\n            that does not have access to these sites will be trapped.\n\n        overwrite : boolean\n            If ``True`` then all existing outlet locations will be removed and\n            then the supplied locations will be added.  If ``False`` (default),\n            then supplied locations are added to any already existing outlet\n            locations.\n\n        \"\"\"\nif self.settings['trapping'] is False:\n    logger.warning('Setting outlets is meaningless unless trapping ' +\n        'was set to True during setup')\nPs = self._parse_indices(pores)\nif np.sum(self['pore.inlets'][Ps]) > 0:\n    raise Exception('Some outlets are already defined as inlets')\nif overwrite:\n    self['pore.outlets'] = False\nself['pore.outlets'][Ps] = True\n"
-}

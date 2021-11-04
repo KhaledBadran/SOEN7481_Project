@@ -1,9 +1,0 @@
-{
-    "functionName": "test_parallel_queued_pipeline_with_step_name_n_worker_additional_arguments",
-    "className": null,
-    "fileName": "/Neuraxio_&_Neuraxle/testing_&_test_streaming.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "n_workers = 4\nworker_arguments = [('hyperparams', HyperparameterSamples({'multiply_by': 2\n    })) for _ in range(n_workers)]\np = ParallelQueuedFeatureUnion([('1', n_workers, worker_arguments,\n    MultiplyByN())], batch_size=10, max_queue_size=5)\noutputs = p.transform(list(range(100)))\nexpected = np.array(list(range(0, 200, 2)))\nassert np.array_equal(outputs, expected)\n"
-}

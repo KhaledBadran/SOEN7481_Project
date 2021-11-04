@@ -1,9 +1,0 @@
-{
-    "functionName": "test_best_point",
-    "className": "ArrayModelBridgeTest",
-    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_array_modelbridge.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "exp = Experiment(search_space=get_search_space_for_range_value(), name='test')\nmodelbridge = ArrayModelBridge(search_space=\n    get_search_space_for_range_value(), model=NumpyModel(), transforms=[t1,\n    t2], experiment=exp, data=Data())\nself.assertEqual(list(modelbridge.transforms.keys()), ['Cast', 't1', 't2'])\nmodelbridge.outcomes = ['a']\nrun = modelbridge.gen(n=1, optimization_config=OptimizationConfig(objective\n    =Objective(metric=Metric('a'), minimize=False), outcome_constraints=[]))\narm, predictions = run.best_arm_predictions\nself.assertEqual(arm.parameters, {})\nself.assertEqual(predictions[0], {'m': 1.0})\nself.assertEqual(predictions[1], {'m': {'m': 2.0}})\nwith self.assertRaises(ValueError):\n    run = modelbridge.gen(n=1, optimization_config=None)\npatch(f'{ModelBridge.__module__}.observations_from_data', autospec=True,\n    return_value=[get_observation1()])patch(f'{ModelBridge.__module__}.unwrap_observation_data', autospec=True,\n    return_value=(2, 2))patch(f'{ModelBridge.__module__}.gen_arms', autospec=True, return_value=([\n    Arm(parameters={})], {}))patch(f'{ModelBridge.__module__}.ModelBridge.predict', autospec=True,\n    return_value=({'m': [1.0]}, {'m': {'m': [2.0]}}))patch(f'{ModelBridge.__module__}.ModelBridge._fit', autospec=True)patch(f'{NumpyModel.__module__}.NumpyModel.best_point', return_value=np.\n    array([1, 2]), autospec=True)patch(f'{NumpyModel.__module__}.NumpyModel.gen', return_value=(np.array([[1,\n    2]]), np.array([1]), {}, []), autospec=True)"
-}

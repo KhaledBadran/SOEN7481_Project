@@ -1,9 +1,0 @@
-{
-    "functionName": "test_handle_big_json_files",
-    "className": null,
-    "fileName": "/AmadeusITGroup_&_JumpSSH/tests_&_test__session.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "gateway_ip, gateway_port = docker_env.get_host_ip_port()\ngateway_session = SSHSession(host=gateway_ip, port=gateway_port, username=\n    'user1', password='password1').open()\nremotehost_session = gateway_session.get_remote_session(host='remotehost',\n    port=22, username='user1', password='password1')\nremote_path = '/tmp/dummy.json'\ndummy_json = tests_util.create_random_json(50000)\nremotehost_session.file(remote_path=remote_path, content=json.dumps(dummy_json)\n    )\ndummy_json_from_remote = json.loads(remotehost_session.get_cmd_output(\n    'cat %s' % remote_path))\nassert dummy_json == dummy_json_from_remote\n"
-}

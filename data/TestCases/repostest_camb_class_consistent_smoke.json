@@ -1,9 +1,0 @@
-{
-    "functionName": "test_camb_class_consistent_smoke",
-    "className": null,
-    "fileName": "/LSSTDESC_&_CCL/benchmarks_&_test_camb_class_consistent.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "kwargs = kwargs or {}\nprint('kwargs:', kwargs)\nc_camb = ccl.Cosmology(Omega_c=0.25, Omega_b=0.05, h=0.7, n_s=0.95, A_s=\n    2e-09, transfer_function='boltzmann_camb', **kwargs)\nc_class = ccl.Cosmology(Omega_c=0.25, Omega_b=0.05, h=0.7, n_s=0.95, A_s=\n    2e-09, transfer_function='boltzmann_class', **kwargs)\nwith warnings.catch_warnings():\n    warnings.simplefilter('ignore')\n    rel_sigma8 = np.abs(ccl.sigma8(c_camb) / ccl.sigma8(c_class) - 1)\na = 0.845\nk = np.logspace(-3, 1, 100)\npk_camb = ccl.linear_matter_power(c_camb, k, a)\npk_class = ccl.linear_matter_power(c_class, k, a)\nrel_pk = np.max(np.abs(pk_camb / pk_class - 1))\nprint('rel err pk:', rel_pk)\nprint('rel err sigma8:', rel_sigma8)\nassert rel_sigma8 < 0.003\nassert rel_pk < pkerr\n"
-}

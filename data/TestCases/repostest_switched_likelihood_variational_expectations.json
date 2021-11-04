@@ -1,9 +1,0 @@
-{
-    "functionName": "test_switched_likelihood_variational_expectations",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_likelihoods_&_test_switched_likelihood.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "Y_perm = list(range(3 + 4 + 5))\nnp.random.shuffle(Y_perm)\nY_sw = np.hstack([np.concatenate(Y_list), np.concatenate(Y_label)])[(Y_perm\n    ), :3]\nF_sw = np.concatenate(F_list)[(Y_perm), :]\nFvar_sw = np.concatenate(Fvar_list)[(Y_perm), :]\nlikelihoods = [Gaussian()] * 3\nfor lik in likelihoods:\n    lik.variance = np.exp(np.random.randn(1)).squeeze().astype(np.float32)\nswitched_likelihood = SwitchedLikelihood(likelihoods)\nswitched_results = switched_likelihood.variational_expectations(F_sw,\n    Fvar_sw, Y_sw)\nresults = [lik.variational_expectations(f, fvar, y) for lik, y, f, fvar in\n    zip(likelihoods, Y_list, F_list, Fvar_list)]\nassert_allclose(switched_results, np.concatenate(results)[Y_perm])\npytest.mark.parametrize('Y_list', [[tf.random.normal((i, 2)) for i in range\n    (3, 6)]])pytest.mark.parametrize('F_list', [[tf.random.normal((i, 2)) for i in range\n    (3, 6)]])pytest.mark.parametrize('Fvar_list', [[tf.exp(tf.random.normal((i, 2))) for\n    i in range(3, 6)]])pytest.mark.parametrize('Y_label', [[(tf.ones((i, 2)) * (i - 3.0)) for i in\n    range(3, 6)]])"
-}

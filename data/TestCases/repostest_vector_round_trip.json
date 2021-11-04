@@ -1,9 +1,0 @@
-{
-    "functionName": "test_vector_round_trip",
-    "className": null,
-    "fileName": "/PaulHancock_&_Aegean/tests_&_test_wcs_helpers.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Converting a vector from pixel to sky coords and back again should give the\n    original vector (within some tolerance).\n    \"\"\"\nfname = 'tests/test_files/1904-66_SIN.fits'\nhelper = WCSHelper.from_file(fname)\ninitial = [1, 45]\nref = helper.refpix\nra, dec, dist, ang = helper.pix2sky_vec(ref, *initial)\n_, _, r, theta = helper.sky2pix_vec((ra, dec), dist, ang)\nif not (abs(r - initial[0]) < 1e-09 and abs(theta - initial[1]) < 1e-09):\n    raise AssertionError()\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_fit_pmt_resp_func_fixed_ped_spe",
-    "className": "TestTools",
-    "fileName": "/JonasReubelt_&_PeeEmTee/peeemtee_&_tests_&_test_fit.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "x, y = np.loadtxt(\n    './peeemtee/tests/samples/charge_distribution_fixed_ped_spe.txt',\n    unpack=True)\nped_mean = -0.002328480440935881\nped_sigma = 0.001512095679762637\nspe_charge = 0.019105690941272496\nspe_sigma = 0.009400739884996042\nfitter = ChargeHistFitter()\nfitter.fix_ped_spe(ped_mean, ped_sigma, spe_charge, spe_sigma)\nfitter.pre_fit(x, y)\nfitter.fit_pmt_resp_func(x, y, n_gaussians=25)\nassert np.sum((y - fitter.opt_prf_values) ** 2 / fitter.opt_prf_values\n    ) / 195 < 20\n"
-}

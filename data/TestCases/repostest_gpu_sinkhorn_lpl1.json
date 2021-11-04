@@ -1,9 +1,0 @@
-{
-    "functionName": "test_gpu_sinkhorn_lpl1",
-    "className": null,
-    "fileName": "/PythonOT_&_POT/test_&_test_gpu.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "rng = np.random.RandomState(0)\nfor n_samples in [50, 100, 500]:\n    print(n_samples)\n    a = rng.rand(n_samples // 4, 100)\n    labels_a = np.random.randint(10, size=n_samples // 4)\n    b = rng.rand(n_samples, 100)\n    wa = ot.unif(n_samples // 4)\n    wb = ot.unif(n_samples)\n    M = ot.dist(a.copy(), b.copy())\n    M2 = ot.gpu.dist(a.copy(), b.copy(), to_numpy=False)\n    reg = 1\n    G = ot.da.sinkhorn_lpl1_mm(wa, labels_a, wb, M, reg)\n    G1 = ot.gpu.da.sinkhorn_lpl1_mm(wa, labels_a, wb, M, reg)\n    np.testing.assert_allclose(G1, G, rtol=1e-10)\n    ot.gpu.da.sinkhorn_lpl1_mm(wa, labels_a, wb, M2, reg, to_numpy=False,\n        log=True)\npytest.mark.skipif(nogpu, reason='No GPU available')"
-}

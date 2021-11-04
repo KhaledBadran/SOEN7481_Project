@@ -1,9 +1,0 @@
-{
-    "functionName": "test_whiteboard_screened",
-    "className": "TestETL",
-    "fileName": "/klahnakoski_&_Bugzilla-ETL/tests_&_test_etl.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "GOOD_BUG_TO_TEST = 1046\ndatabase.make_test_instance(self.settings.bugzilla)\nwith MySQL(self.settings.bugzilla) as db:\n    es = fake_elasticsearch.make_test_instance(self.settings.public.bugs)\n    database.add_bug_group(db, GOOD_BUG_TO_TEST,\n        SCREENED_WHITEBOARD_BUG_GROUPS[0])\n    db.flush()\n    param = Data()\n    param.end_time = convert.datetime2milli(get_current_time(db))\n    param.start_time = 0\n    param.start_time_str = extract_bugzilla.milli2string(db, MIN_TIMESTAMP)\n    param.alias_file = self.settings.param.alias_file\n    param.bug_list = wrap([GOOD_BUG_TO_TEST])\n    param.allow_private_bugs = True\n    with ThreadedQueue('etl queue', es, batch_size=1000) as output:\n        etl(db, output, param, self.alias_analyzer, please_stop=None)\n        refresh_metadata(es)\n    versions = get_all_bug_versions(es, GOOD_BUG_TO_TEST)\n    for v in versions:\n        if v.status_whiteboard not in (None, '', '[screened]'):\n            Log.error('Expecting whiteboard to be screened')\n"
-}

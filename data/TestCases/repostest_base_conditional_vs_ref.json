@@ -1,9 +1,0 @@
-{
-    "functionName": "test_base_conditional_vs_ref",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_conditionals_&_test_conditionals.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test that conditionals agree with a slow-but-clear numpy implementation\n    \"\"\"\nDy, N, M, Dx = 5, 4, 3, 2\nX = np.random.randn(N, Dx)\nZ = np.random.randn(M, Dx)\nkern = gpflow.kernels.Matern52(lengthscales=0.5)\nq_mu = np.random.randn(M, Dy)\nq_sqrt = np.tril(np.random.randn(Dy, M, M), -1)\ndef numpy_conditional(X, Z, kern, q_mu, q_sqrt):\n    Kmm = kern(Z, Z) + np.eye(M) * gpflow.config.default_jitter()\n    Kmn = kern(Z, X)\n    Knn = kern(X, X)\n    Kmm, Kmn, Knn = [k.numpy() for k in [Kmm, Kmn, Knn]]\n    Kmm, Kmn, Knm, Knn = [np.tile(k[(None), :, :], [Dy, 1, 1]) for k in [\n        Kmm, Kmn, Kmn.T, Knn]]\n    S = q_sqrt @ np.transpose(q_sqrt, [0, 2, 1])\n    Kmm_inv = np.linalg.inv(Kmm)\n    mean = np.einsum('dmn,dmM,Md->nd', Kmn, Kmm_inv, q_mu)\n    cov = Knn + Knm @ Kmm_inv @ (S - Kmm) @ Kmm_inv @ Kmn\n    return mean, cov\nmean_np, cov_np = numpy_conditional(X, Z, kern, q_mu, q_sqrt)\nif features_inducing_points:\n    Z = gpflow.inducing_variables.InducingPoints(Z)\nmean_gpflow, cov_gpflow = [v.numpy() for v in gpflow.conditionals.\n    conditional(X, Z, kern, q_mu, q_sqrt=tf.identity(q_sqrt), white=False,\n    full_cov=full_cov)]\nif not full_cov:\n    cov_np = np.diagonal(cov_np, axis1=-1, axis2=-2).T\nassert_allclose(mean_np, mean_gpflow)\nassert_allclose(cov_np, cov_gpflow)\npytest.mark.parametrize('full_cov', [True, False])pytest.mark.parametrize('features_inducing_points', [False, True])"
-}

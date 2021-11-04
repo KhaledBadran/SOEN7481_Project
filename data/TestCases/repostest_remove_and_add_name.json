@@ -1,9 +1,0 @@
-{
-    "functionName": "test_remove_and_add_name",
-    "className": "TestX509Certificate",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_objects_&_test_x509_certificate.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Tests that names can be removed from the list of names and more added.\n        This will verify that the list of names is correct. It will verify that\n        updating this object removes the name from the database. It will verify\n        that the indices for the removed names are not reused.\n        \"\"\"\nnames = ['bowser', 'frumpy', 'big fat cat']\ncert = X509Certificate(self.bytes_a, name=names[0])\ncert.names.append(names[1])\ncert.names.append(names[2])\ncert.names.pop()\ncert.names.pop()\ncert.names.append('dog')\nself.assertEquals(4, cert.name_index)\nexpected_names = ['bowser', 'dog']\nexpected_mo_names = list()\nexpected_mo_names.append(sqltypes.ManagedObjectName(expected_names[0], 0))\nexpected_mo_names.append(sqltypes.ManagedObjectName(expected_names[1], 3))\nself.assertEquals(expected_names, cert.names)\nself.assertEquals(expected_mo_names, cert._names)\nSession = sessionmaker(bind=self.engine)\nsession = Session()\nsession.add(cert)\nsession.commit()\nsession = Session()\nget_obj = session.query(X509Certificate).filter(ManagedObject.\n    unique_identifier == cert.unique_identifier).one()\nsession.commit()\nself.assertEquals(expected_names, get_obj.names)\nself.assertEquals(expected_mo_names, get_obj._names)\n"
-}

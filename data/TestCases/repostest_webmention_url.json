@@ -1,9 +1,0 @@
-{
-    "functionName": "test_webmention_url",
-    "className": null,
-    "fileName": "/PlaidWeb_&_Authl/tests_&_test_main.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" test handles_url on a webmention profile \"\"\"\nhandler_1 = UrlHandler('test://foo', 'a')\nhandler_2 = UrlHandler('test://bar', 'b')\ninstance = Authl([handler_1, handler_2])\nwgp = mocker.patch('authl.webfinger.get_profiles')\nwgp.side_effect = lambda url: {'test://cat', 'test://bar'\n    } if url == '@foo@bar.baz' else {}\nassert instance.get_handler_for_url('@foo@bar.baz') == (handler_2, 'b',\n    'test://bar')\n"
-}

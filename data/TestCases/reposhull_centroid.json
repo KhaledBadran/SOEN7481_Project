@@ -1,9 +1,0 @@
-{
-    "functionName": "hull_centroid",
-    "className": null,
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_topotools_&_topotools.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Computes centroid of the convex hull enclosing the given coordinates.\n\n    Parameters\n    ----------\n    points : Np by 3 ndarray\n        Coordinates (xyz)\n\n    Returns\n    -------\n    A 3 by 1 Numpy array containing coordinates of the centroid.\n\n    \"\"\"\ndim = [(np.unique(points[:, (i)]).size != 1) for i in range(3)]\nhull = ConvexHull(points[:, (dim)])\ncentroid = points.mean(axis=0)\ncentroid[dim] = hull.points[hull.vertices].mean(axis=0)\nreturn centroid\n"
-}

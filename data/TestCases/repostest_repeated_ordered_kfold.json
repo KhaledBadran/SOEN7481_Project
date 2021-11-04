@@ -1,9 +1,0 @@
-{
-    "functionName": "test_repeated_ordered_kfold",
-    "className": null,
-    "fileName": "/goeckslab_&_Galaxy-ML/galaxy_ml_&_tests_&_test_model_validations.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "y = list(range(12))\ngot1 = []\ncv = RepeatedOrderedKFold(n_splits=4, n_repeats=2, random_state=42)\nfor _, test_index in cv.split(y, y):\n    got1.append(test_index.tolist())\nexpect1 = [[1, 5, 11], [3, 7, 8], [0, 4, 9], [2, 6, 10], [1, 6, 8], [0, 5, \n    9], [3, 4, 10], [2, 7, 11]]\nassert got1 == expect1, got1\ngot2 = []\ncv = RepeatedOrderedKFold(n_splits=4, n_repeats=2, random_state=999)\nfor _, test_index in cv.split(y, y):\n    got2.append(test_index.tolist())\nexpect2 = [[2, 6, 8], [1, 7, 10], [3, 4, 9], [0, 5, 11], [3, 5, 8], [2, 6, \n    11], [1, 7, 10], [0, 4, 9]]\nassert got2 == expect2, got2\n"
-}

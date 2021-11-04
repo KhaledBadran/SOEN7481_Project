@@ -1,9 +1,0 @@
-{
-    "functionName": "display_frame",
-    "className": null,
-    "fileName": "/AlexBdx_&_Heli/10_Executable_&_test_CNN.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "if bbox_roi != (0, 0, 0, 0):\n    x, y, w, h = bbox_roi\n    if flag_tracker_active:\n        title = 'Helico'\n        color = COLOR['RED']\n    else:\n        title = 'Motion'\n        color = COLOR['BLUE']\n    cv2.rectangle(frame, (x, y), (x + w, y + h), color, 2)\n    cv2.putText(frame, title, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5,\n        color, 2)\nelse:\n    pass\ntracker_state = 'ON' if flag_tracker_active else 'OFF'\ntext_count = 'Frame number: {}'.format(frame_count)\ntext_tracker = 'Tracker: {}'.format(tracker_state)\ncv2.putText(frame, text_count, (10, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5,\n    COLOR['WHITE'], 2)\ncv2.putText(frame, text_tracker, (10, 40), cv2.FONT_HERSHEY_SIMPLEX, 0.5,\n    COLOR['WHITE'], 2)\ncv2.imshow(VIDEO_STREAM_PATH, frame)\nkey = cv2.waitKey(1) & 255\nflag_quit_program = True if key == ord('q') else False\nreturn flag_quit_program\n"
-}

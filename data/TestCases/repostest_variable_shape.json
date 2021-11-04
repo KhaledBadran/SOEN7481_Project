@@ -1,9 +1,0 @@
-{
-    "functionName": "test_variable_shape",
-    "className": "TestDenseLayer",
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_dense.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "assert DenseLayer((None, 10), 20).output_shape == (None, 20)\nassert DenseLayer((10, None, 10), 20, num_leading_axes=2).output_shape == (\n    10, None, 20)\nfor shape, num_leading_axes in (((10, None), 1), ((10, None, 10), 1)):\n    with pytest.raises(ValueError) as exc:\n        DenseLayer(shape, 20, num_leading_axes=num_leading_axes)\n    assert 'requires a fixed input shape' in exc.value.args[0]\n"
-}

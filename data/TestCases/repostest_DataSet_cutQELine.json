@@ -1,9 +1,0 @@
-{
-    "functionName": "test_DataSet_cutQELine",
-    "className": null,
-    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_DataSet.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "QPoints = np.array([[0.3, -1], [0.7, -1.4], [1.6, -0.9], [0.3, -0.9]],\n    dtype=float)\nQPointsHKL = np.array([[1.0, 0.0, 0.0], [0.5, 1.5, 0.0], [1.7, -0.1, 0.0],\n    [1.0, 1.0, 0.0]])\nEnergyBins = np.linspace(1.7, 2.7, 5)\nminPixel = 0.001\nwidth = 0.1\nDataFile = ['Data/camea2018n000137.hdf']\ndataset = DataSet(convertedFiles=DataFile)\ndataset.convertDataFile(saveFile=False)\ntry:\n    dataset.cutQELine([], EnergyBins, width=width, minPixel=minPixel, rlu=True)\n    assert False\nexcept AttributeError:\n    assert True\ntry:\n    dataset.cutQELine([], EnergyBins, width=width, minPixel=minPixel, rlu='42')\n    assert False\nexcept AttributeError:\n    assert True\nDataList, BinList, centerPosition, binDistance = dataset.cutQELine(QPointsHKL,\n    EnergyBins, width=width, minPixel=minPixel, rlu=True)\nDataList2, BinList2, centerPosition2, binDistance2 = dataset.cutQELine(QPoints,\n    EnergyBins, width=width, minPixel=minPixel, rlu=False)\nassert len(DataList['qCut'][0]) == (len(QPointsHKL) - 1) * (len(EnergyBins) - 1\n    )\nassert len(DataList2['qCut'][0]) == (len(QPoints) - 1) * (len(EnergyBins) - 1)\n"
-}

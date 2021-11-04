@@ -1,9 +1,0 @@
-{
-    "functionName": "test_if_elseif_else",
-    "className": null,
-    "fileName": "/poletaevvlad_&_CubeLang/test_&_compiler_&_test_source_parsing.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "tree = tr('if_expression', tr('bool_literal_true'), tr('int_literal', '1'),\n    tr('bool_literal_false'), tr('int_literal', '2'), tr('float_literal',\n    '3.1'))\nexpression = parser.handle(tree, Stack())\nassert isinstance(expression, ConditionExpression)\nassert expression.type == Real\nintermediate = expression.intermediates[0]\nassert isinstance(intermediate, ConditionExpression.Intermediate)\nassert intermediate.actions[0][0].expression == ['True']\nassert intermediate.actions[0][1][0].expression == ['1']\nassert intermediate.actions[1][0].expression == ['False']\nassert intermediate.actions[1][1][0].expression == ['2']\nassert intermediate.else_clause[0].expression == ['3.1']\n"
-}

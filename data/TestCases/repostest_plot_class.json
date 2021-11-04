@@ -1,9 +1,0 @@
-{
-    "functionName": "test_plot_class",
-    "className": "TestCellListPlot",
-    "fileName": "/Jhsmit_&_ColiCoords/test_&_test_plot.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "fig, ax = plt.subplots()\ncontainer = self.clp.plot_l_class(ax=ax)\nself.assertEqual(len(container), 3)\nh = [rect.get_height() for rect in container]\nself.assertEqual(self.num_st / len(self.cell_list), sum(h))\nnum = 0\nfor c in self.cell_list:\n    st_x, st_y = c.data.data_dict['storm']['x'], c.data.data_dict['storm']['y']\n    l, r, phi = c.coords.transform(st_x, st_y)\n    num += (l == 0).sum() + (l == c.length).sum()\nself.assertEqual(self.num_poles / len(self.cell_list), h[0])\nplt.close()\n"
-}

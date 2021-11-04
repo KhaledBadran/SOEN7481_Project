@@ -1,9 +1,0 @@
-{
-    "functionName": "does_top_window_exist",
-    "className": "TestMainFrame",
-    "fileName": "/PmagPy_&_PmagPy/pmagpy_tests_&_test_magic_gui.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        produces a click event on the button called btn_name,\n        see if it produces a top-level window called window_name\n        \"\"\"\nbtn = None\nchildren = parent.GetChildren()\nprint(', '.join([child.GetName() for child in children]))\nfor child in children:\n    if child.GetName() == btn_name:\n        btn = child\n        break\nif not btn:\n    return None\nevent = wx.CommandEvent(wx.wxEVT_COMMAND_BUTTON_CLICKED, btn.GetId())\nbtn.GetEventHandler().ProcessEvent(event)\nfor wind in wx.GetTopLevelWindows():\n    if wind.GetName() == window_name:\n        return wind\nreturn None\n"
-}

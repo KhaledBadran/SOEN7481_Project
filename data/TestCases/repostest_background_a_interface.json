@@ -1,9 +1,0 @@
-{
-    "functionName": "test_background_a_interface",
-    "className": null,
-    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_background.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "if func is ccl.distance_modulus and np.any(a == 1):\n    with pytest.raises(ccl.CCLError):\n        func(COSMO, a)\nelse:\n    val = func(COSMO, a)\n    assert np.all(np.isfinite(val))\n    assert np.shape(val) == np.shape(a)\n    if func is ccl.angular_diameter_distance:\n        val = func(COSMO, a, a)\n        assert np.all(np.isfinite(val))\n        assert np.shape(val) == np.shape(a)\n        if isinstance(a, float) or isinstance(a, int):\n            val1 = ccl.angular_diameter_distance(COSMO, 1.0, a)\n            val2 = ccl.comoving_angular_distance(COSMO, a) * a\n        else:\n            val1 = ccl.angular_diameter_distance(COSMO, np.ones(len(a)), a)\n            val2 = ccl.comoving_angular_distance(COSMO, a) * a\n        assert np.allclose(val1, val2)\npytest.mark.parametrize('a', AVALS)pytest.mark.parametrize('func', [ccl.growth_factor, ccl.growth_rate, ccl.\n    growth_factor_unnorm, ccl.scale_factor_of_chi, ccl.\n    comoving_angular_distance, ccl.comoving_radial_distance, ccl.\n    angular_diameter_distance, ccl.luminosity_distance, ccl.h_over_h0, ccl.\n    distance_modulus, ccl.mu_MG, ccl.Sig_MG])"
-}

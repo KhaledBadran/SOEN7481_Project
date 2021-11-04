@@ -1,9 +1,0 @@
-{
-    "functionName": "test_api_post_user",
-    "className": null,
-    "fileName": "/mostafa_&_GRest/tests_&_test_extended_app.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"UsersView:post\"\"\"\nglobal uid\nres = client.post('/users', data=json.dumps({'first_name': 'test1',\n    'last_name': 'test2', 'phone_number': '123', 'secret_field':\n    'MY_SECRET'}), headers={'Content-Type': 'application/json'})\nassert res.status_code == 200\nif 'uid' in res.json:\n    uid = res.json['uid']\nassert 'uid' in res.json\nassert 'secret_field' not in res.json\nres = client.post('/users', data=json.dumps({'first_name': 'test1',\n    'last_name': 'test2', 'phone_number': '123'}), headers={'Content-Type':\n    'application/json'})\nassert res.status_code == 409\nassert 'errors' in res.json\nres = client.post('/users', data=json.dumps({'first_name': 'test1',\n    'last_name': 'test2', 'phone_number': '123'}), headers={'Content-Type':\n    'application/json'})\nassert res.status_code == 409\nassert 'errors' in res.json\n"
-}

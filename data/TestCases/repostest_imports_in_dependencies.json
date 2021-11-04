@@ -1,9 +1,0 @@
-{
-    "functionName": "test_imports_in_dependencies",
-    "className": null,
-    "fileName": "/openworm_&_PyOpenWorm/tests_&_BundleInstallTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    If we have imports and a dependency includes the context, then we shouldn't have an\n    error.\n\n    Versioned bundles are assumed to be immutable, so we won't re-fetch a bundle already\n    in the local index\n    \"\"\"\nimports_ctxid = 'http://example.org/imports'\nctxid_1 = 'http://example.org/ctx1'\nctxid_2 = 'http://example.org/ctx2'\nd = Descriptor('test')\nd.includes.add(make_include_func(ctxid_1))\nd.includes.add(make_include_func(imports_ctxid))\nd.dependencies.add(DependencyDescriptor('dep'))\ndep_d = Descriptor('dep')\ndep_d.includes.add(make_include_func(ctxid_2))\ng = rdflib.ConjunctiveGraph()\ncg_1 = g.get_context(ctxid_1)\ncg_2 = g.get_context(ctxid_2)\ncg_imp = g.get_context(imports_ctxid)\nwith transaction.manager:\n    cg_1.add((URIRef('a'), URIRef('b'), URIRef('c')))\n    cg_2.add((URIRef('d'), URIRef('e'), URIRef('f')))\n    cg_imp.add((URIRef(ctxid_1), CONTEXT_IMPORTS, URIRef(ctxid_2)))\nbi = Installer(*dirs, imports_ctx=imports_ctxid, graph=g)\nbi.install(dep_d)\nbi.install(d)\n"
-}

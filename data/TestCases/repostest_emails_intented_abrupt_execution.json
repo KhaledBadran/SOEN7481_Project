@@ -1,9 +1,0 @@
-{
-    "functionName": "test_emails_intented_abrupt_execution",
-    "className": null,
-    "fileName": "/alex-ber_&_AlexBerUtils/tests_&_utils_&_emails_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "logger.info(f'{request._pyfuncitem.name}()')\nemailLogger.info('Started')\nemailLogger.info('Step 1')\nlogging.shutdown([lambda : errorMailMemoryHandler])\nemailLogger.info('Step 2')\nmock_log = emailsFixture.emit\npytest.assume(mock_log.call_count == 1)\n(logrecord,), _ = mock_log.call_args\nsubject = str(logrecord.msg['subject'])\npytest.assume('Abrupt' in subject)\npytest.assume('{status}' not in subject)\nmessage = str(logrecord.msg)\npytest.assume('Start' in message)\npytest.assume('Step 1' in message)\npytest.assume('Step 2' not in message)\n"
-}

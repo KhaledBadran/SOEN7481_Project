@@ -1,9 +1,0 @@
-{
-    "functionName": "test_rename_volume_name",
-    "className": "PyU4VProvisioningTest",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test rename_volume.\"\"\"\nnew_name = 'new_name'\ndevice_id = self.data.device_id\nref_payload_name = {'editVolumeActionParam': {'modifyVolumeIdentifierParam':\n    {'volumeIdentifier': {'identifier_name': new_name,\n    'volumeIdentifierChoice': 'identifier_name'}}}}\nwith mock.patch.object(self.provisioning, '_modify_volume') as mock_mod:\n    self.provisioning.rename_volume(device_id, new_name)\n    mock_mod.assert_called_once_with(device_id, ref_payload_name)\nref_result = self.data.job_list[0]\nact_result = self.provisioning.rename_volume(device_id, new_name)\nself.assertEqual(ref_result, act_result)\n"
-}

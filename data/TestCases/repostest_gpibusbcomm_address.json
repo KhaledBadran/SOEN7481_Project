@@ -1,9 +1,0 @@
-{
-    "functionName": "test_gpibusbcomm_address",
-    "className": null,
-    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_comm_&_test_gpibusb.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "comm = GPIBCommunicator(mock.MagicMock(), 1)\nport_name = mock.PropertyMock(return_value='/dev/address')\ntype(comm._file).address = port_name\nassert comm.address == (1, '/dev/address')\nport_name.assert_called_with()\ncomm.address = 5\nassert comm._gpib_address == 5\ncomm.address = [6, '/dev/foobar']\nassert comm._gpib_address == 6\nport_name.assert_called_with('/dev/foobar')\n"
-}

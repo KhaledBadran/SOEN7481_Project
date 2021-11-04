@@ -1,9 +1,0 @@
-{
-    "functionName": "test_block_pageargs",
-    "className": "BlockTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_block.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "l = TemplateLookup()\nl.put_string('caller',\n    \"\"\"\n\n            <%include file=\"callee\" args=\"val1='3', val2='4'\"/>\n\n        \"\"\"\n    )\nl.put_string('callee',\n    \"\"\"\n            <%block name=\"foob\">\n                foob, ${pageargs['val1']}, ${pageargs['val2']}\n            </%block>\n        \"\"\"\n    )\nself._do_test(l.get_template('caller'), ['foob, 3, 4'], filters=result_lines)\n"
-}

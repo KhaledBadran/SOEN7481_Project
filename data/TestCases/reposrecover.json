@@ -1,9 +1,0 @@
-{
-    "functionName": "recover",
-    "className": null,
-    "fileName": "/NUAA-AL_&_ALiPy/test_&_test_recover_multithreads.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "X, y = load_iris(return_X_y=True)\nea = ExperimentAnalyser()\nreg = linear_model.LogisticRegression(solver='liblinear')\nqs = QueryInstanceQBC(X, y, disagreement='vote_entropy')\ndef run_thread(round, train_id, test_id, Lcollection, Ucollection, saver,\n    examples, labels, global_parameters):\n    reg.fit(X=examples[(Lcollection.index), :], y=labels[Lcollection.index])\n    pred = reg.predict(examples[(test_id), :])\n    accuracy = sum(pred == labels[test_id]) / len(test_id)\n    saver.set_initial_point(accuracy)\n    while len(Ucollection) > 30:\n        select_index = qs.select(Lcollection, Ucollection, reg, n_jobs=1)\n        Ucollection.difference_update(select_index)\n        Lcollection.update(select_index)\n        reg.fit(X=examples[(Lcollection.index), :], y=labels[Lcollection.index]\n            )\n        pred = reg.predict(examples[(test_id), :])\n        accuracy = sum(pred == labels[test_id]) / len(test_id)\n        st = State(select_index=select_index, performance=accuracy)\n        saver.add_state(st)\n        saver.save()\nmt = aceThreading.recover('./multi_thread_state.pkl')\nmt.start_all_threads()\nea.add_method(method_name='QBC', method_results=mt.get_results())\nprint(ea)\nea.plot_learning_curves(show='False')\n"
-}

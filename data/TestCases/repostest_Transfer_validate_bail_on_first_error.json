@@ -1,9 +1,0 @@
-{
-    "functionName": "test_Transfer_validate_bail_on_first_error",
-    "className": null,
-    "fileName": "/justanr_&_Flask-Transfer/tests_&_test_transfer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "counter = iter(range(2))\n@transf.validator\n@transf.validator\ndef derp(filehandle, meta):\n    raise UploadError(str(next(counter)))\nwith pytest.raises(UploadError) as excinfo:\n    transf._validate('', {}, catch_all_errors=False)\nassert str(excinfo.value) == '0'\nassert next(counter) == 1\n"
-}

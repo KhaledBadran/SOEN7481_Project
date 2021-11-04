@@ -1,9 +1,0 @@
-{
-    "functionName": "test_checkCallbacksSimple",
-    "className": null,
-    "fileName": "/bakwc_&_PySyncObj/test_syncobj.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "random.seed(42)\na = [getNextAddr(), getNextAddr(), getNextAddr()]\no1 = TestObj(a[0], [a[1], a[2]])\no2 = TestObj(a[1], [a[2], a[0]])\no3 = TestObj(a[2], [a[0], a[1]])\nobjs = [o1, o2, o3]\nassert not o1._isReady()\nassert not o2._isReady()\nassert not o3._isReady()\ndoTicks(objs, 10, stopFunc=lambda : o1._isReady() and o2._isReady() and o3.\n    _isReady())\nassert o1._isReady()\nassert o2._isReady()\nassert o3._isReady()\nassert o1._getLeader().address in a\nassert o1._getLeader() == o2._getLeader()\nassert o1._getLeader() == o3._getLeader()\ncallbackInfo = {'callback': False}\no1.addValue(3, callback=partial(onAddValue, info=callbackInfo))\ndoTicks(objs, 10, stopFunc=lambda : o2.getCounter() == 3 and callbackInfo[\n    'callback'] == True)\nassert o2.getCounter() == 3\nassert callbackInfo['callback'] == True\no1._destroy()\no2._destroy()\no3._destroy()\n"
-}

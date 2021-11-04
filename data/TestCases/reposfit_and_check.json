@@ -1,9 +1,0 @@
-{
-    "functionName": "fit_and_check",
-    "className": null,
-    "fileName": "/microsoft_&_LightGBM/tests_&_python_package_test_&_test_sklearn.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "params['first_metric_only'] = first_metric_only\ngbm = lgb.LGBMRegressor(**params).fit(**params_fit)\nself.assertEqual(len(gbm.evals_result_), len(eval_set_names))\nfor eval_set_name in eval_set_names:\n    self.assertIn(eval_set_name, gbm.evals_result_)\n    self.assertEqual(len(gbm.evals_result_[eval_set_name]), len(metric_names))\n    for metric_name in metric_names:\n        self.assertIn(metric_name, gbm.evals_result_[eval_set_name])\n        actual = len(gbm.evals_result_[eval_set_name][metric_name])\n        expected = assumed_iteration + (params_fit['early_stopping_rounds'] if\n            eval_set_name != 'training' and assumed_iteration != gbm.\n            n_estimators else 0)\n        self.assertEqual(expected, actual)\n        self.assertEqual(assumed_iteration if eval_set_name != 'training' else\n            gbm.n_estimators, gbm.best_iteration_)\n"
-}

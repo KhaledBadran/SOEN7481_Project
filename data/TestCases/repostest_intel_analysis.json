@@ -1,9 +1,0 @@
-{
-    "functionName": "test_intel_analysis",
-    "className": "TestCase",
-    "fileName": "/IntegralDefense_&_ACE/lib_&_saq_&_modules_&_test_intel.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "if not saq.CONFIG['sip'].getboolean('enabled'):\n    return\nroot = create_root_analysis(analysis_mode=ANALYSIS_MODE_CORRELATION)\nroot.initialize_storage()\ni = root.add_observable(F_INDICATOR, 'sip:{}'.format(self.test_indicator_id))\nself.assertIsNotNone(i)\nroot.save()\nroot.schedule()\nengine = TestEngine(local_analysis_modes=[ANALYSIS_MODE_CORRELATION])\nengine.enable_module('analysis_module_intel_analyzer',\n    ANALYSIS_MODE_CORRELATION)\nengine.controlled_stop()\nengine.start()\nengine.wait()\nroot = RootAnalysis(storage_dir=root.storage_dir)\nroot.load()\ni = root.get_observable(i.id)\nself.assertIsNotNone(i)\nfrom saq.modules.intel import IntelAnalysis\nanalysis = i.get_analysis(IntelAnalysis)\nself.assertIsNotNone(analysis)\nself.assertEquals(analysis.details, self.test_indicator)\n"
-}

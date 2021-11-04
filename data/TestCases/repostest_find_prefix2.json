@@ -1,9 +1,0 @@
-{
-    "functionName": "test_find_prefix2",
-    "className": null,
-    "fileName": "/Carbonara-Project_&_Carbonara-IDB/tests_&_test_idb.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    this test is derived from some issues encountered while doing import analysis.\n    ultimately, we're checking prefix matching when the first match is found\n     in a branch node.\n    \"\"\"\nimpnn = idb.netnode.Netnode(kernel32_idb, '$ imports')\nexpected_alts = list(range(48))\nexpected_alts.append(kernel32_idb.uint(-1))\nassert list(impnn.alts()) == expected_alts\nassert list(impnn.sups()) == list(range(48))\ndist = []\nfor alt in impnn.alts():\n    if alt == kernel32_idb.uint(-1):\n        break\n    ref = idb.netnode.as_uint(impnn.get_val(alt, tag='A'))\n    nn = idb.netnode.Netnode(kernel32_idb, ref)\n    dist.append((alt, len(list(nn.sups()))))\nassert dist == [(0, 4), (1, 388), (2, 77), (3, 50), (4, 42), (5, 13), (6, \n    28), (7, 4), (8, 33), (9, 68), (10, 1), (11, 9), (12, 1), (13, 7), (14,\n    1), (15, 24), (16, 9), (17, 6), (18, 26), (19, 9), (20, 54), (21, 24),\n    (22, 8), (23, 9), (24, 7), (25, 5), (26, 1), (27, 2), (28, 26), (29, 1),\n    (30, 18), (31, 5), (32, 3), (33, 2), (34, 3), (35, 6), (36, 11), (37, \n    11), (38, 5), (39, 6), (40, 11), (41, 7), (42, 10), (43, 14), (44, 38),\n    (45, 16), (46, 6), (47, 7)]\nkern32_test()"
-}

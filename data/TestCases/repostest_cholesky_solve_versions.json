@@ -1,9 +1,0 @@
-{
-    "functionName": "test_cholesky_solve_versions",
-    "className": null,
-    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_bspline.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from pypeit.bspline.utilpy import cholesky_solve as cholesky_solve_py\nfrom pypeit.bspline.utilc import cholesky_solve as cholesky_solve_c\nd = np.load(data_path('cholesky_solve_abb.npz'))\npytime = time.perf_counter()\ne, b = cholesky_solve_py(d['a'], d['bb'])\npytime = time.perf_counter() - pytime\nctime = time.perf_counter()\nt = time.perf_counter()\ne, _b = cholesky_solve_c(d['a'], d['bb'])\nctime = time.perf_counter() - ctime\nassert ctime < pytime, 'C is less efficient!'\nassert np.allclose(b, _b), 'Differences in cholesky_solve'\nbspline_ext_required"
-}

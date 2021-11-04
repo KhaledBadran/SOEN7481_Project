@@ -1,9 +1,0 @@
-{
-    "functionName": "test_dual_sgd_sinkhorn",
-    "className": null,
-    "fileName": "/PythonOT_&_POT/test_&_test_stochastic.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "n = 10\nreg = 1\nnb_iter = 15000\nbatch_size = 10\nrng = np.random.RandomState(0)\nx = rng.randn(n, 2)\nu = ot.utils.unif(n)\nM = ot.dist(x, x)\nG_sgd = ot.stochastic.solve_dual_entropic(u, u, M, reg, batch_size,\n    numItermax=nb_iter)\nG_sinkhorn = ot.sinkhorn(u, u, M, reg)\nnp.testing.assert_allclose(G_sgd.sum(1), G_sinkhorn.sum(1), atol=0.001)\nnp.testing.assert_allclose(G_sgd.sum(0), G_sinkhorn.sum(0), atol=0.001)\nnp.testing.assert_allclose(G_sgd, G_sinkhorn, atol=0.001)\nn = 30\nreg = 1\nbatch_size = 30\na = ot.datasets.make_1D_gauss(n, 15, 5)\nb = ot.datasets.make_1D_gauss(n, 15, 5)\nX_source = np.arange(n, dtype=np.float64)\nY_target = np.arange(n, dtype=np.float64)\nM = ot.dist(X_source.reshape((n, 1)), Y_target.reshape((n, 1)))\nM /= M.max()\nG_sgd = ot.stochastic.solve_dual_entropic(a, b, M, reg, batch_size,\n    numItermax=nb_iter)\nG_sinkhorn = ot.sinkhorn(a, b, M, reg)\nnp.testing.assert_allclose(G_sgd.sum(1), G_sinkhorn.sum(1), atol=0.001)\nnp.testing.assert_allclose(G_sgd.sum(0), G_sinkhorn.sum(0), atol=0.001)\nnp.testing.assert_allclose(G_sgd, G_sinkhorn, atol=0.001)\n"
-}

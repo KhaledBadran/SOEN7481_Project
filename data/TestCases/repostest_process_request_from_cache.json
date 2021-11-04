@@ -1,9 +1,0 @@
-{
-    "functionName": "test_process_request_from_cache",
-    "className": "TestWeather",
-    "fileName": "/lukeWaninger_&_GSCAP/tests_&_test_weather.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "hwr = wthr.HourlyWeatherReport(lat=self.lat, lon=self.lon, date=self.day,\n    time=self.time)\nself.session.add(hwr)\nself.session.commit()\nproqu, reqque, resque = mul.Queue(), mul.Queue(), mul.Queue()\nargs = None, proqu, reqque, resque\nself.assertTrue(wthr.process_request(args) is None)\nreq = wthr.WeatherRequest(lat=self.lat, lon=self.lon, date=self.day,\n    zipcode=None)\nargs = req, proqu, reqque, resque\nresque.put(dict(pid=os.getpid(), response=dict(zipcode=self.zipcode)))\nt = wthr.process_request(args)\nself.assertTrue(all(c in t.keys() for c in ['report', 'hits', 'misses']))\nself.assertTrue(t['hits'] == 1 and t['misses'] == 0)\n"
-}

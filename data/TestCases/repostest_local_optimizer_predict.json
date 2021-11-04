@@ -1,9 +1,0 @@
-{
-    "functionName": "test_local_optimizer_predict",
-    "className": "TestSimple",
-    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_test_simple_integration.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "feature_num = 2\ndata_len = 1000\nbatch_size = 32\nepoch_num = 500\nX_ = np.random.uniform(0, 1, (data_len, feature_num))\ny_ = (2 * X_).sum(1) + 0.4\nmodel = Sequential()\nl1 = Linear(feature_num, 1)\nmodel.add(l1)\nlocalOptimizer = Optimizer.create(model=model, training_set=(X_, y_),\n    criterion=MSECriterion(), optim_method=SGD(learningrate=0.01),\n    end_trigger=MaxEpoch(epoch_num), batch_size=batch_size)\ntrained_model = localOptimizer.optimize()\ntrained_model = model\nw = trained_model.get_weights()\nassert_allclose(w[0], np.array([2, 2]).reshape([1, 2]), rtol=0.1)\nassert_allclose(w[1], np.array([0.4]), rtol=0.1)\npredict_result = trained_model.predict_local(X_)\nassert_allclose(y_, predict_result.reshape((data_len,)), rtol=0.1)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_pending_observation_features",
-    "className": "TestModelbridgeUtils",
-    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.assertIsNone(get_pending_observation_features(self.experiment))\nself.trial.mark_running(no_runner_required=True)\nself.assertEqual(get_pending_observation_features(self.experiment), {\n    'tracking': [self.obs_feat], 'm2': [self.obs_feat], 'm1': [self.obs_feat]})\nself.experiment.attach_data(Data.from_evaluations({self.trial.arm.name: {\n    'm2': (1, 0)}}, trial_index=self.trial.index))\nself.assertEqual(get_pending_observation_features(self.experiment), {\n    'tracking': [self.obs_feat], 'm2': [], 'm1': [self.obs_feat]})\nself.trial.mark_failed()\nself.assertIsNone(get_pending_observation_features(self.experiment))\nself.assertEqual(get_pending_observation_features(self.experiment,\n    include_failed_as_pending=True), {'tracking': [self.obs_feat], 'm2': [],\n    'm1': [self.obs_feat]})\n"
-}

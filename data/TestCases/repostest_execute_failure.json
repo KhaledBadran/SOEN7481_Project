@@ -1,9 +1,0 @@
-{
-    "functionName": "test_execute_failure",
-    "className": "ImpersonatorTestCase",
-    "fileName": "/Stavatech_&_Impersonator-Python-Client/test_&_test_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "client = Impersonator()\ncredentials = {'username': 'username', 'password': 'password'}\npayload = {'token': MOCK_TOKEN, 'command': MOCK_COMMAND_FAILURE}\nlogin_endpoint = 'http://%s:%d/%s' % (client.host, client.port, client.\n    token_endpoint)\ncommand_endpoint = 'http://%s:%d/%s' % (client.host, client.port, client.\n    command_endpoint)\ntoken = client.login(**credentials)\nwith self.assertRaises(Exception) as context:\n    client.execute(MOCK_COMMAND_FAILURE)\nself.assertIn(mock.call(command_endpoint, json=payload), mock_post.\n    call_args_list)\nself.assertEqual(MOCK_ERROR, str(context.exception))\nmock.patch('requests.post', side_effect=mock_post_request)"
-}

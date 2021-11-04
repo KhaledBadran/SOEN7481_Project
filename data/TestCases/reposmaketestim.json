@@ -1,9 +1,0 @@
-{
-    "functionName": "maketestim",
-    "className": null,
-    "fileName": "/jonwright_&_ImageD11/test_&_test_overlapimage.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "M = 2048\nN = 64\nSIG = 3.0\ni, j = np.mgrid[0:N, 0:N] - N / 2.0\ndef pk(x, y, s):\n    dx = i - x\n    dy = j - y\n    gg = np.exp(-(dx * dx + dy * dy) / s / s)\n    ll = s * s / (s * s + dx * dx + dy * dy)\n    return ll + gg\nim = np.zeros((M, M))\npks = []\nfor ii in range(0, M, N):\n    for jj in range(0, M, N):\n        oi = 3 * SIG * ii / M\n        oj = SIG * ii / M\n        sc = jj * 1.0 / M\n        im[ii:ii + N, jj:jj + N] = pk(-oi, -oj, SIG) + pk(oi, oj, SIG) * sc\n        pks.append((ii + N // 2 - oi, jj + N // 2 - oj))\n        pks.append((ii + N // 2 + oi, jj + N // 2 + oj))\nif 0:\n    import pylab as pl\n    pl.imshow(pl.log(im))\n    pl.show()\ns = 30000 / im.max()\nint_im = (im * s).astype(np.uint16)\nif not os.path.exists(OVIM):\n    fabio.edfimage.edfimage(int_im).write(OVIM)\nreturn int_im\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_keybase_update_team_name",
-    "className": "KeybaseTest",
-    "fileName": "/cmsteffen-code_&_PyKBLib/tests_&_test_pykblib_keybase.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "test_team = mock.MagicMock()\nself.keybase._active_teams['team_one'] = test_team\ntest_sub_team = mock.MagicMock()\nself.keybase._active_teams['team_one.subteam'] = test_sub_team\nself.keybase._update_team_name('team_one', 'team_1')\ntest_sub_team._update_parent_team_name.assert_called_with('team_one', 'team_1')\nself.assertNotIn('team_one', self.keybase._active_teams.keys())\nself.assertNotIn('team_one.subteam', self.keybase._active_teams.keys())\nself.assertEqual(self.keybase._active_teams['team_1'], test_team)\nself.assertEqual(self.keybase._active_teams['team_1.subteam'], test_sub_team)\nself.assertNotIn('team_one', self.keybase.teams)\nself.assertNotIn('team_one.subteam', self.keybase.teams)\nself.assertIn('team_1', self.keybase.teams)\nself.assertIn('team_1.subteam', self.keybase.teams)\nself.keybase._update_team_name('team_1', 'team_one')\ntest_sub_team._update_parent_team_name.assert_called_with('team_1', 'team_one')\nself.assertNotIn('team_1', self.keybase._active_teams.keys())\nself.assertNotIn('team_1.subteam', self.keybase._active_teams.keys())\nself.assertEqual(self.keybase._active_teams['team_one'], test_team)\nself.assertEqual(self.keybase._active_teams['team_one.subteam'], test_sub_team)\nself.assertNotIn('team_1', self.keybase.teams)\nself.assertNotIn('team_1.subteam', self.keybase.teams)\nself.assertIn('team_one', self.keybase.teams)\nself.assertIn('team_one.subteam', self.keybase.teams)\nself.keybase._update_team_name('not_a_team', 'fake_name')\n"
-}

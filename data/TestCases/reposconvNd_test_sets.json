@@ -1,9 +1,0 @@
-{
-    "functionName": "convNd_test_sets",
-    "className": null,
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_conv.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "def _convert(input, kernel, output, kwargs):\n    return [theano.shared(floatX(input)), floatX(kernel), output, kwargs]\nextra_shape = 11, 16, 23\ninput_shape = (3, 1) + extra_shape[-n:]\nfor pad in (0, 1, 2, 'full', 'same'):\n    for stride in (1, 2, 3):\n        for filter_size in (1, 3):\n            if stride > filter_size:\n                continue\n            input = np.random.random(input_shape)\n            kernel = np.random.random((16, 1) + (filter_size,) * n)\n            output = convNd(input, kernel, pad, stride, n=n)\n            yield _convert(input, kernel, output, {'pad': pad, 'stride':\n                stride, 'flip_filters': True})\ninput = np.random.random(input_shape)\nkernel = np.random.random((16, 1) + (3,) * n)\noutput = convNd(input, kernel, pad='valid')\nyield _convert(input, kernel, output, {'b': None, 'flip_filters': True})\nyield _convert(input, kernel, output, {'untie_biases': True, 'flip_filters':\n    True})\nyield _convert(input, kernel, output, {'pad': 'valid', 'flip_filters': True})\nflip = (slice(None), slice(None)) + (slice(None, None, -1),) * n\noutput = convNd(input, kernel[flip], pad='valid')\nyield _convert(input, kernel, output, {'flip_filters': False})\ninput_shape = (2, 6) + extra_shape[-n:]\ninput = np.random.random(input_shape)\nkernel = np.random.random((9, 2) + (3,) * n)\noutput = convNd(input, kernel, pad='valid', groups=3)\nyield _convert(input, kernel, output, {'num_groups': 3, 'flip_filters': True})\n"
-}

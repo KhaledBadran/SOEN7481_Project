@@ -1,9 +1,0 @@
-{
-    "functionName": "test_map_operator_from_index",
-    "className": null,
-    "fileName": "/viebboy_&_PyGOP/test_&_utility_&_test_misc.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "nodal_set = ['multiplication', 'exp']\npool_set = ['summation', utility.custom_pool]\nactivation_set = ['relu']\ntotal_op_sets = [(nodal, pool, activation) for nodal in nodal_set for pool in\n    pool_set for activation in activation_set]\nop_set_indices = {('gop_%d' % k): k for k in range(len(total_op_sets))}\nop_sets = misc.map_operator_from_index(op_set_indices, nodal_set, pool_set,\n    activation_set)\nlayer_names = [('gop_' + str(k)) for k in range(len(total_op_sets))]\nkeys = list(op_sets.keys())\nkeys.sort()\nassert keys == layer_names\nfor k in range(len(total_op_sets)):\n    assert op_sets['gop_' + str(k)] == total_op_sets[k]\n"
-}

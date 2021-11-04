@@ -1,9 +1,0 @@
-{
-    "functionName": "test_send_init_fail",
-    "className": null,
-    "fileName": "/willdeuschle_&_Flask-GraphQL-Subscriptions-Transport/tests_&_test_flask_graphql_subscriptions_transport.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "app, ss = basic_ss\ntest_client = SocketIOTestClient(app, ss.socketio, namespace=ss.namespace)\nss.send_init_result = Mock()\nss.on_connect = Mock(return_value=False)\ntest_client.emit('message', json.dumps({'type': INIT, 'id': 1, 'payload':\n    'foo'}), namespace=ss.namespace)\nss.send_init_result.assert_called_once()\nassert ss.send_init_result.call_args[0][0] == INIT_FAIL\n"
-}

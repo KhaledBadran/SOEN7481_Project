@@ -1,9 +1,0 @@
-{
-    "functionName": "test_text_iterable_type_error",
-    "className": "CLITextOutputModeTest",
-    "fileName": "/openworm_&_PyOpenWorm/tests_&_CLITest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with noexit(), stdout() as so:\n\n    @with_defaults\n    def main(argument_namespace_callback, **kwargs):\n        argument_namespace_callback.output_mode = 'text'\n\n        def iterable():\n            yield 'blah'\n            yield 'blah'\n            raise TypeError('blah blah')\n        return iterable()\n    self.ccw().main.side_effect = main\n    with self.assertRaises(TypeError):\n        PCLI.main()\n    self.assertEqual(so.getvalue(), 'blah\\nblah\\n')\n"
-}

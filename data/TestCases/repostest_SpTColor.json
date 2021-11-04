@@ -1,9 +1,0 @@
-{
-    "functionName": "test_SpTColor",
-    "className": "TestMeanStars",
-    "fileName": "/dsavransky_&_MeanStars/tests_&_test_MeanStars.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "SpT = self.ms.data['SpT'].data\nfor cind in np.arange(len(self.ms.colors)):\n    vals = self.ms.getFloatData(self.ms.colorstr[cind])\n    goodinds = np.isfinite(vals)\n    for v, s in zip(vals[goodinds], SpT[goodinds]):\n        m = self.ms.specregex.match(s)\n        self.assertTrue(m, \"Couldn't decompose spectral type from data.\")\n        self.assertTrue(self.ms.SpTColor(self.ms.colors[cind][0], self.ms.\n            colors[cind][1], m.groups()[0], float(m.groups()[1])) == v, \n            'Cannot reproduce colors from interpolant for %s' % self.ms.\n            colorstr[cind])\n"
-}

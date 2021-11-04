@@ -1,9 +1,0 @@
-{
-    "functionName": "test_send_request_payload_incorrect_number_of_batch_items",
-    "className": "TestKMIPClient",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_test_kmip_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that an InvalidMessage error is raised when the wrong number of\n        response payloads are returned from the server.\n        \"\"\"\nbuild_mock.return_value = None\nsend_mock.return_value = ResponseMessage(batch_items=[])\nargs = OperationEnum.DELETE_ATTRIBUTE, payloads.DeleteAttributeRequestPayload(\n    unique_identifier='1', attribute_name='Object Group', attribute_index=2)\nself.assertRaisesRegex(exceptions.InvalidMessage,\n    'The response message does not have the right number of requested operation results.'\n    , self.client.send_request_payload, *args)\nmock.patch('kmip.services.kmip_client.KMIPProxy._build_request_message')mock.patch('kmip.services.kmip_client.KMIPProxy._send_and_receive_message')"
-}

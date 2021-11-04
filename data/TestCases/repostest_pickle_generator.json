@@ -1,9 +1,0 @@
-{
-    "functionName": "test_pickle_generator",
-    "className": null,
-    "fileName": "/viebboy_&_PyGOP/test_&_utility_&_test_misc.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "train_func = utility.get_generator\ntrain_data = [INPUT_DIM, OUTPUT_DIM, BATCH_SIZE, STEPS]\nval_func = utility.get_generator\nval_data = [INPUT_DIM, OUTPUT_DIM, BATCH_SIZE, STEPS]\ntest_func = utility.get_generator\ntest_data = [INPUT_DIM, OUTPUT_DIM, BATCH_SIZE, STEPS]\nfilename = os.path.join(tmpdir.dirname, 'data_generator.pickle')\nmisc.pickle_generator(filename, train_func, train_data, val_func, val_data,\n    test_func, test_data)\nassert os.path.exists(filename)\nwith open(filename, 'rb') as fid:\n    data = pickle.load(fid)\nassert data['train_data'] == train_data\nassert data['train_func'] == dill.dumps(train_func, recurse=True)\nos.remove(filename)\nmisc.pickle_generator(filename, train_func, train_data, None, None,\n    test_func, test_data)\nassert os.path.exists(filename)\nwith open(filename, 'rb') as fid:\n    data = pickle.load(fid)\nassert data['val_data'] is None\nos.remove(filename)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_estimate_competence_all_ones",
-    "className": null,
-    "fileName": "/Menelau_&_DESlib/deslib_&_tests_&_dcs_&_test_a_priori.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "X, y, neighbors, distances, dsel_processed, dsel_scores = example_all_ones\nquery = np.array([1, 1])\na_priori_test = APriori()\na_priori_test.DSEL_processed_ = dsel_processed\na_priori_test.dsel_scores_ = dsel_scores\na_priori_test.DSEL_target_ = y\na_priori_test.n_classes_ = 2\nneighbors = neighbors[(index), :].reshape(1, -1)\ndistances = distances[(index), :].reshape(1, -1)\ncompetences = a_priori_test.estimate_competence(query.reshape(1, -1),\n    neighbors, distances)\nassert np.isclose(competences, expected).all()\npytest.mark.parametrize('index, expected', [(0, [1.0, 1.0, 1.0]), (1, [1.0,\n    1.0, 1.0]), (2, [1.0, 1.0, 1.0])])"
-}

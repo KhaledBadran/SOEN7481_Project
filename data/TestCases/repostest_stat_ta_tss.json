@@ -1,9 +1,0 @@
-{
-    "functionName": "test_stat_ta_tss",
-    "className": "TestStatTaComparison",
-    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_stat_TA_comparison.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "tss_file = os.path.join(self.test_folder, 'aaa_TSS.gff')\nta_file = os.path.join(self.test_folder, 'aaa_transcript.gff')\ngen_file(tss_file, self.example.tss)\ngen_file(ta_file, self.example.ta)\nstat_file = os.path.join(self.test_folder, 'stat')\nout_ta_file = os.path.join(self.test_folder, 'out_ta.gff')\nout_tss_file = os.path.join(self.test_folder, 'out_tss.gff')\nstc.stat_ta_tss(ta_file, tss_file, stat_file, out_ta_file, out_tss_file, 5)\ndatas = import_data(stat_file)\nself.assertEqual('\\n'.join(datas), 'All genomes:\\n' + self.example.print_tas)\ndatas, attributes = extract_info(out_ta_file, 'file')\nself.assertListEqual(datas, [\n    'aaa\\tfragmented_and_normal\\tTranscript\\t313\\t3344\\t.\\t+\\t.'])\nfor attribute in attributes:\n    if 'associated_tss' in attribute:\n        self.assertEqual('associated_tss=TSS:2131_f')\ndatas, attributes = extract_info(out_tss_file, 'file')\nself.assertListEqual(datas, ['aaa\\tTSSpredator\\tTSS\\t2131\\t2131\\t.\\t+\\t.'])\nfor attribute in attributes:\n    if 'Parent_tran' in attribute:\n        self.assertEqual(attribute, 'Parent_tran=tran0')\n"
-}

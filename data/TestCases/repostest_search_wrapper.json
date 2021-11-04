@@ -1,9 +1,0 @@
-{
-    "functionName": "test_search_wrapper",
-    "className": null,
-    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_engine_&_tests_&_test_search.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "fe = FeatureVectorizer(cache_dir=cache_dir, mode='w')\nvect_uuid = fe.setup()\nfe.ingest(data_dir, file_pattern='.*\\\\d.txt')\nif kind == 'semantic':\n    lsi = _LSIWrapper(cache_dir=cache_dir, parent_id=vect_uuid, mode='w')\n    lsi.fit_transform(n_components=20)\n    parent_id = lsi.mid\nelse:\n    parent_id = vect_uuid\nsw = _SearchWrapper(cache_dir=cache_dir, parent_id=parent_id)\ndist = sw.search('so that I can reserve a room')\nassert dist.shape == (fe.n_samples_,)\nassert dist.argmax() == 1\npytest.mark.parametrize('kind,', ['regular', 'semantic'])"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_plot_filter_dataframe_for_plotting_module_name",
-    "className": null,
-    "fileName": "/bio-phys_&_MDBenchmark/mdbenchmark_&_tests_&_test_plot.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Checks whether the module names are filterd correctly in the filtering function.\n    \"\"\"\nwith tmpdir.as_cwd():\n    expected_df = pd.read_csv(data['testcsv.csv'])\n    expected_df = expected_df[expected_df['module'].str.contains(module_name)]\n    input_df = pd.read_csv(data['testcsv.csv'])\n    module = module_name,\n    real_df = plot.filter_dataframe_for_plotting(df=input_df, host_name=(),\n        module_name=module, gpu=True, cpu=True)\n    assert_frame_equal(expected_df, real_df)\npytest.mark.parametrize('module_name', ['namd/2.12',\n    'gromacs/5.1.4-plumed2.3', 'gromacs', 'namd'])"
-}

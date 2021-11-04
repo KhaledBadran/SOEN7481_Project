@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sumkl_equals_batchkl",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_test_kullback_leiblers.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    gauss_kl implicitely performs a sum of KL divergences\n    This test checks that doing the sum outside of the function is equivalent\n    For q(X)=prod q(x_l) and p(X)=prod p(x_l), check that sum KL(q(x_l)||p(x_l)) = KL(q(X)||p(X))\n    Here, q(X) has covariance [L, M, M]\n    p(X) has covariance [L, M, M] ( or [M, M] )\n    Here, q(x_i) has covariance [1, M, M]\n    p(x_i) has covariance [M, M]\n    \"\"\"\ns = Datum.sqrt_diag if diag else Datum.sqrt\nkl_batch = gauss_kl(Datum.mu, s, Datum.K if shared_k else Datum.K_batch)\nkl_sum = []\nfor n in range(Datum.N):\n    q_mu_n = Datum.mu[:, (n)][:, (None)]\n    q_sqrt_n = Datum.sqrt_diag[:, (n)][:, (None)] if diag else Datum.sqrt[(\n        n), :, :][(None), :, :]\n    K_n = Datum.K if shared_k else Datum.K_batch[(n), :, :][(None), :, :]\n    kl_n = gauss_kl(q_mu_n, q_sqrt_n, K=K_n)\n    kl_sum.append(kl_n)\nkl_sum = tf.reduce_sum(kl_sum)\nassert_almost_equal(kl_sum, kl_batch)\npytest.mark.parametrize('shared_k', [True, False])pytest.mark.parametrize('diag', [True, False])"
-}

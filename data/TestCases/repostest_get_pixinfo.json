@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_pixinfo",
-    "className": null,
-    "fileName": "/PaulHancock_&_Aegean/tests_&_test_fits_image.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that we can get info from various header styles\"\"\"\nheader = fits.getheader('tests/test_files/1904-66_SIN.fits')\narea, scale = AegeanTools.wcs_helpers.get_pixinfo(header)\nif not area > 0:\n    raise AssertionError()\nif not len(scale) == 2:\n    raise AssertionError()\nheader['CD1_1'] = header['CDELT1']\ndel header['CDELT1']\nheader['CD2_2'] = header['CDELT2']\ndel header['CDELT2']\narea, scale = AegeanTools.wcs_helpers.get_pixinfo(header)\nif not area > 0:\n    raise AssertionError()\nif not len(scale) == 2:\n    raise AssertionError()\nheader['CD1_2'] = 0\nheader['CD2_1'] = 0\narea, scale = AegeanTools.wcs_helpers.get_pixinfo(header)\nif not area > 0:\n    raise AssertionError()\nif not len(scale) == 2:\n    raise AssertionError()\nheader['CD1_2'] = header['CD1_1']\nheader['CD2_1'] = header['CD2_2']\narea, scale = AegeanTools.wcs_helpers.get_pixinfo(header)\nif not area == 0:\n    raise AssertionError()\nif not len(scale) == 2:\n    raise AssertionError()\nfor f in ['CD1_1', 'CD1_2', 'CD2_2', 'CD2_1']:\n    del header[f]\narea, scale = AegeanTools.wcs_helpers.get_pixinfo(header)\nif not area == 0:\n    raise AssertionError()\nif not scale == (0, 0):\n    raise AssertionError()\n"
-}

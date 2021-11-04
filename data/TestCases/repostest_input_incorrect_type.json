@@ -1,9 +1,0 @@
-{
-    "functionName": "test_input_incorrect_type",
-    "className": null,
-    "fileName": "/vc1492a_&_PyNomaly/tests_&_test_loop.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test to ensure that the proper warning is issued if the type of an\n    argument is the incorrect type.\n    :param X_n140_outliers: A pytest Fixture that generates 140 observations.\n    :return: None\n    \"\"\"\nwith pytest.warns(UserWarning) as record:\n    loop.LocalOutlierProbability(X_n140_outliers, n_neighbors=str(\n        X_n140_outliers.shape[0] - 1), use_numba=NUMBA)\nassert len(record) == 1\nassert record[0].message.args[0\n    ] == \"Argument 'n_neighbors' is not of type (<class 'int'>, <class 'numpy.integer'>).\"\n"
-}

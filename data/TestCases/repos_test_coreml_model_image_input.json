@@ -1,9 +1,0 @@
-{
-    "functionName": "_test_coreml_model_image_input",
-    "className": null,
-    "fileName": "/Microsoft_&_MMdnn/mmdnn_&_conversion_&_examples_&_coreml_&_test_tfcoreml.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Test single image input conversions.\n    tf_model_path - the TF model\n    coreml_model - converted CoreML model\n    input_tensor_name - the input image tensor name\n    output_tensor_name - the output tensor name\n    img_size - size of the image\n    \"\"\"\nimg_np, img = _load_image(TEST_IMAGE, resize_to=(img_size, img_size))\nimg_tf = np.expand_dims(img_np, axis=0)\nimg_tf[:, :, :, (0)] = 2.0 / 255 * img_tf[:, :, :, (0)] - 1\nimg_tf[:, :, :, (1)] = 2.0 / 255 * img_tf[:, :, :, (1)] - 1\nimg_tf[:, :, :, (2)] = 2.0 / 255 * img_tf[:, :, :, (2)] - 1\ntf.reset_default_graph()\ngraph_def = graph_pb2.GraphDef()\nwith open(tf_model_path, 'rb') as f:\n    graph_def.ParseFromString(f.read())\ng = tf.import_graph_def(graph_def)\nwith tf.Session(graph=g) as sess:\n    image_input_tensor = sess.graph.get_tensor_by_name('import/' +\n        input_tensor_name)\n    output = sess.graph.get_tensor_by_name('import/' + output_tensor_name)\n    tf_out = sess.run(output, feed_dict={image_input_tensor: img_tf})\nif len(tf_out.shape) == 4:\n    tf_out = np.transpose(tf_out, (0, 3, 1, 2))\ntf_out_flatten = tf_out.flatten()\ncoreml_input_name = input_tensor_name.replace(':', '__').replace('/', '__')\ncoreml_output_name = output_tensor_name.replace(':', '__').replace('/', '__')\ncoreml_input = {coreml_input_name: img}\ncoreml_out = coreml_model.predict(coreml_input, useCPUOnly=useCPUOnly)[\n    coreml_output_name]\ncoreml_out_flatten = coreml_out.flatten()\nprint(coreml_out_flatten)\n"
-}

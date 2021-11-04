@@ -1,9 +1,0 @@
-{
-    "functionName": "test_reloading",
-    "className": null,
-    "fileName": "/mrob95_&_Breathe/tests_&_test_loading.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with open(file_path, 'w') as f:\n    f.write(\n        \"\"\"\nfrom breathe import Breathe\nfrom ..testutils import DoNothing\n\nBreathe.add_commands(\n    None,\n    {\n        \"parsnip\": DoNothing(),\n    }\n)\n\"\"\"\n        )\nif PY2:\n    os.remove(file_path + 'c')\nengine.mimic('rebuild everything test')\nwith pytest.raises(MimicFailure):\n    engine.mimic('apple')\nengine.mimic('parsnip')\nassert len(Breathe.modules) == 1\n"
-}

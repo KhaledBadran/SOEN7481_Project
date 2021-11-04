@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_data_with_username",
-    "className": "TestAttributes",
-    "fileName": "/bigfishgames_&_GameBenchAPI-PyClient/tests_&_test_unit_&_test_api_&_test_requests_retriever_&_test_builder_&_request_attributes_&_test_attributes_creator.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Verify the correct data is returned if a username and password are present.\n\n            If there is a username key that means it is an auth request so we return\n            the username and password as the data variable in the request builder.\n        \"\"\"\nmock_is_auth_request.return_value = True\ntest_parameters = {'password': 'test_password', 'username': 'test_user_name'}\nattributes = Attributes(**test_parameters)\nactual = attributes.get_data()\nexpected = {'username': 'test_user_name', 'password': 'test_password'}\nwith self.subTest():\n    mock_is_auth_request.assert_called_once_with()\nself.assertEqual(actual, expected)\npatch(\n    'gamebench_api_client.api.requests_retriever.builder.attributes.attributes_creator.Attributes._is_auth_request'\n    )"
-}

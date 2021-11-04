@@ -1,9 +1,0 @@
-{
-    "functionName": "test_set_coordinates",
-    "className": "TestChainClass",
-    "fileName": "/pierrepo_&_PBxplore/pbxplore_&_tests_&_test_functions.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Tests for coordinates update\n        \"\"\"\nnew_coords = numpy.array([[1.0, 1.0, 1.0], [2.0, 2.0, 2.0], [3.0, 3.0, 3.0],\n    [4.0, 4.0, 4.0], [5.0, 5.0, 5.0]])\nchain.set_coordinates(new_coords)\nfor atom, ref_coords in zip(chain, new_coords):\n    numpy.testing.assert_array_almost_equal(atom.coords, ref_coords)\nwrong_coords = new_coords[:-1]\nwith pytest.raises(ValueError):\n    chain.set_coordinates(wrong_coords)\n"
-}

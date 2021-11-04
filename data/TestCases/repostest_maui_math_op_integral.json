@@ -1,9 +1,0 @@
-{
-    "functionName": "test_maui_math_op_integral",
-    "className": null,
-    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_teledyne_&_test_maui.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Set math channel, integral operator.\"\"\"\nwith expected_protocol(ik.teledyne.MAUI, [init,\n    \"F1:DEFINE EQN,'INTG(C1),MULTIPLIER,1,ADDER,0,VERSCALE,0.001,VEROFFSET,0\",\n    \"F1:DEFINE EQN,'INTG(C4),MULTIPLIER,10,ADDER,0.5,VERSCALE,1,VEROFFSET,0.001\"\n    ,\n    \"F1:DEFINE EQN,'INTG(C4),MULTIPLIER,10,ADDER,0.5,VERSCALE,1,VEROFFSET,0.001\"\n    ], [], sep='\\n') as osc:\n    osc.math[0].operator.integral(0)\n    osc.math[0].operator.integral(3, multiplier=10, adder=0.5, vscale=u.\n        Quantity(1, u.Wb), voffset=u.Quantity(0.001, u.Wb))\n    osc.math[0].operator.integral(3, multiplier=10, adder=0.5, vscale=1,\n        voffset=0.001)\n"
-}

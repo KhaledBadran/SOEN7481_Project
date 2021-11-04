@@ -1,9 +1,0 @@
-{
-    "functionName": "graph",
-    "className": null,
-    "fileName": "/TUDelft-CITG_&_OpenTNSim/tests_&_test_route_selection.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "FG = nx.Graph()\nnode_1 = {'Name': 'Node 1', 'Geometry': shapely.geometry.Point(4.4954, \n    51.905505)}\nnode_2 = {'Name': 'Node 2', 'Geometry': shapely.geometry.Point(4.48935, \n    51.907995)}\nnode_3 = {'Name': 'Node 3', 'Geometry': shapely.geometry.Point(4.4833, \n    51.910485)}\nnode_4 = {'Name': 'Node 4', 'Geometry': shapely.geometry.Point(4.4844, \n    51.904135)}\nnodes = [node_1, node_2, node_3, node_4]\nfor node in nodes:\n    FG.add_node(node['Name'], name=node['Name'], geometry=node['Geometry'],\n        position=(node['Geometry'].x, node['Geometry'].y))\nedges = [[node_1, node_2], [node_2, node_3], [node_2, node_4], [node_3, node_4]\n    ]\nfor edge in edges:\n    if edge != [node_2, node_4]:\n        FG.add_edge(edge[0]['Name'], edge[1]['Name'], Width=25, Height=25,\n            Depth=25)\n    else:\n        FG.add_edge(edge[0]['Name'], edge[1]['Name'], Width=6.5, Height=25,\n            Depth=25)\nreturn FG\npytest.fixture()"
-}

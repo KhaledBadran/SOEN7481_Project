@@ -1,9 +1,0 @@
-{
-    "functionName": "test_should_pause_producers_with_optional_consumers",
-    "className": null,
-    "fileName": "/Drakkar-Software_&_OctoBot-Channels/tests_&_test_channel.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "producer = EmptyTestProducer(test_channel)\nawait test_channel.register_producer(producer)\nconsumer_1 = await get_chan(EMPTY_TEST_CHANNEL).new_consumer(\n    empty_test_callback, priority_level=ChannelConsumerPriorityLevels.\n    OPTIONAL.value)\nconsumer_2 = await get_chan(EMPTY_TEST_CHANNEL).new_consumer(\n    empty_test_callback, priority_level=ChannelConsumerPriorityLevels.\n    OPTIONAL.value)\nconsumer_3 = await get_chan(EMPTY_TEST_CHANNEL).new_consumer(\n    empty_test_callback, priority_level=ChannelConsumerPriorityLevels.\n    OPTIONAL.value)\ntest_channel.is_paused = False\nif not os.getenv('CYTHON_IGNORE'):\n    assert test_channel._should_pause_producers()\nawait test_channel.remove_consumer(consumer_1)\nawait test_channel.remove_consumer(consumer_2)\nawait test_channel.remove_consumer(consumer_3)\npytest.mark.asyncio"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_hierarchy",
-    "className": "TestValidation",
-    "fileName": "/SUNCAT-Center_&_CatLearn/test_&_test_validation.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Function to test the hierarchy with ridge regression predictions.\"\"\"\ntrain_features, train_targets, test_features, test_targets = get_data()\nhv = Hierarchy(db_name='{}/test.sqlite'.format(wkdir), file_name='hierarchy')\nhv.todb(features=train_features, targets=train_targets)\nsplit = hv.split_index(min_split=5, max_split=25)\nself.assertEqual(len(split), 6)\nind = hv.load_split()\nself.assertEqual(len(ind), len(split))\npred = hv.split_predict(index_split=ind, predict=predict)\nself.assertTrue(len(pred[0]) == 14 and len(pred[1]) == 14)\n"
-}

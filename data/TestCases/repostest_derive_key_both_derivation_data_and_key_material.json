@@ -1,9 +1,0 @@
-{
-    "functionName": "test_derive_key_both_derivation_data_and_key_material",
-    "className": "TestCryptographyEngine",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_crypto_&_test_engine.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the right error is raised when both derivation data and key\n        material are provided for hash-based key derivation.\n        \"\"\"\nengine = crypto.CryptographyEngine()\nargs = enums.DerivationMethod.HASH, 16\nkwargs = {'hash_algorithm': enums.HashingAlgorithm.SHA_256,\n    'derivation_data': b'\\x01\\x02\\x03\\x04', 'key_material': b'\\n\\x0b\\x0c\\r'}\nself.assertRaisesRegex(exceptions.InvalidField,\n    'For hash-based key derivation, specify only derivation data or key material, not both.'\n    , engine.derive_key, *args, **kwargs)\n"
-}

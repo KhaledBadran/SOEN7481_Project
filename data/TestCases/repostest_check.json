@@ -1,9 +1,0 @@
-{
-    "functionName": "test_check",
-    "className": "TestProxyKmipClient",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_test_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the client can check an object.\n        \"\"\"\nresult = {'unique_identifier': '1', 'result_status': enums.ResultStatus.SUCCESS\n    }\nclient = ProxyKmipClient()\nclient.open()\nclient.proxy.check.return_value = result\nchecked_id = client.check(uid='1', usage_limits_count=100,\n    cryptographic_usage_mask=[enums.CryptographicUsageMask.ENCRYPT, enums.\n    CryptographicUsageMask.DECRYPT], lease_time=10000)\nself.assertEqual('1', checked_id)\nmock.patch('kmip.pie.client.KMIPProxy', mock.MagicMock(spec_set=KMIPProxy))"
-}

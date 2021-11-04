@@ -1,9 +1,0 @@
-{
-    "functionName": "test_no_fetch",
-    "className": null,
-    "fileName": "/msiemens_&_PyGitUp/PyGitUp_&_tests_&_test_nofetch.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Run 'git up' with '--no-fetch' argument \"\"\"\nos.chdir(repo_path)\nfrom PyGitUp.gitup import GitUp\ngitup = GitUp(testing=True)\ngitup.should_fetch = False\nwith capture() as [stdout, _]:\n    gitup.run()\nstdout = stdout.getvalue()\nassert_false('Fetching' in stdout)\nassert_true('rebasing' in stdout)\nassert_true('up to date' in stdout)\nassert_true(test_name in stdout)\nassert_true(new_branch_name in stdout)\n"
-}

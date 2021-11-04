@@ -1,9 +1,0 @@
-{
-    "functionName": "test_average_pool",
-    "className": "TestAveragePool",
-    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_onnx_&_test_onnx_ops.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ceil_mode = 0\nkernel_width, kernel_height = 3, 3\npad_width, pad_height = 0, 0\nstride_width, stride_height = 1, 1\ninput_shape = [1, 3, 224, 224]\noutput_shape = [1, 3, 222, 222]\ninput_x = np.random.random(input_shape)\nX = onnx.helper.make_tensor_value_info('X', onnx.TensorProto.FLOAT, input_shape\n    )\nY = onnx.helper.make_tensor_value_info('Y', onnx.TensorProto.FLOAT,\n    output_shape)\navgpool_node = onnx.helper.make_node(op_type='AveragePool', inputs=['X'],\n    outputs=['Y'], auto_pad='NOTSET', ceil_mode=ceil_mode, kernel_shape=(\n    kernel_width, kernel_height), pads=(pad_width, pad_height), strides=(\n    stride_width, stride_height))\nonnx_graph = onnx.helper.make_graph(nodes=[avgpool_node], name=\n    'test-averagePool', inputs=[X], outputs=[Y])\nonnx_model = onnx.helper.make_model(onnx_graph, producer_name='ONNX')\nonnx.checker.check_model(onnx_model)\nloaded_model = load_model_proto(onnx_model)\nbigdl_model = SpatialAveragePooling(kw=kernel_width, kh=kernel_height, dw=\n    stride_width, dh=stride_height, pad_w=pad_width, pad_h=pad_height,\n    ceil_mode=False if ceil_mode == 0 else True)\nloaded_out = loaded_model.forward(input_x)\nexpected_out = bigdl_model.forward(input_x)\nassert np.array_equal(expected_out, loaded_out)\n"
-}

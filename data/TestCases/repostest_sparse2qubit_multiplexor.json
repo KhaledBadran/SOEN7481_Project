@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sparse2qubit_multiplexor",
-    "className": "Test_conjugated_kernel",
-    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_unitary.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.setUpClass()\nnum_qubits = 2\np = ql.Program('test_usingqx_sparse2qubit_multiplexor', platform, num_qubits)\nk = ql.Kernel('akernel', platform, num_qubits)\nmatrix = [0.30279949 - 0.60010283j, -0.58058628 - 0.45946559j, 0, 0, \n    0.04481146 - 0.73904059j, 0.64910478 + 0.17456782j, 0, 0, 0.0 + 0.0j, -\n    0.0 + 0.0j, 0.2309453 - 0.79746147j, -0.53683301 + 0.15009925j, 0.0 + \n    0.0j, 0.0 + 0.0j, 0.39434916 - 0.39396473j, 0.80810853 + 0.19037107j]\nu1 = ql.Unitary('multiplexor', matrix)\nu1.decompose()\nk.hadamard(0)\nk.hadamard(1)\nk.gate(u1, [0, 1])\np.add_kernel(k)\np.compile()\nqx.set(os.path.join(output_dir, p.name + '_initialqasmwriter_out.qasm'))\nqx.execute()\nc0 = qx.get_state()\nself.assertAlmostEqual(0.25 * helper_prob(matrix[0] + matrix[1] + matrix[2] +\n    matrix[3]), helper_regex(c0)[0], 5)\nself.assertAlmostEqual(0.25 * helper_prob(matrix[4] + matrix[5] + matrix[6] +\n    matrix[7]), helper_regex(c0)[1], 5)\nself.assertAlmostEqual(0.25 * helper_prob(matrix[8] + matrix[9] + matrix[10\n    ] + matrix[11]), helper_regex(c0)[2], 5)\nself.assertAlmostEqual(0.25 * helper_prob(matrix[12] + matrix[13] + matrix[\n    14] + matrix[15]), helper_regex(c0)[3], 5)\n"
-}

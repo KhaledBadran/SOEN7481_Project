@@ -1,9 +1,0 @@
-{
-    "functionName": "test_categorical_accuracy_top_k",
-    "className": null,
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_test_objectives.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from lasagne.objectives import categorical_accuracy\np = theano.tensor.matrix('p')\nt = theano.tensor.ivector('t')\ntop_k = 4\nc = categorical_accuracy(p, t, top_k=top_k)\nfloatX = theano.config.floatX\npredictions = np.random.rand(10, 20).astype(floatX)\ncls_predictions = np.argsort(predictions, axis=1).astype('int8')\ntargets = cls_predictions[np.arange(10), -np.random.permutation(10)]\ntop_predictions = cls_predictions[:, -top_k:]\naccuracy = np.any(top_predictions == targets[:, (np.newaxis)], axis=1)\nassert np.allclose(accuracy, c.eval({p: predictions, t: targets}))\none_hot = np.zeros((10, 20)).astype('int8')\none_hot[np.arange(10), targets] = 1\nt = theano.tensor.imatrix('t')\nc = categorical_accuracy(p, t, top_k=top_k)\nassert np.allclose(accuracy, c.eval({p: predictions, t: one_hot}))\n"
-}

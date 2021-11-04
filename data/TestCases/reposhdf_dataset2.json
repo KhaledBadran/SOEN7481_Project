@@ -1,9 +1,0 @@
-{
-    "functionName": "hdf_dataset2",
-    "className": null,
-    "fileName": "/CCampJr_&_CRIkit2/crikit_&_data_&_tests_&_test_mosaic_hdf.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\" Setups and tears down a sample HDF5 file \"\"\"\nfilename = 'temp_test.h5'\nfid = h5py.File(filename, 'w')\ndata_m, data_n = [3, 4]\ndata = np.random.randn(data_m, data_n)\nN = 10\nfor n in range(N):\n    fid.create_dataset('img_z{}'.format(n), data=data)\nyield filename, fid\nif lazy5.utils.hdf_is_open(fid):\n    fid.close()\ntime.sleep(1)\ntry:\n    os.remove(filename)\nexcept:\n    print('Could not delete {}'.format(filename))\npytest.fixture(scope='module')"
-}

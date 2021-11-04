@@ -1,9 +1,0 @@
-{
-    "functionName": "test_multiple_run_consistency",
-    "className": null,
-    "fileName": "/NASA_&_MLMCPy/tests_&_mlmc_&_test_MLMCSimulator.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Ensure that simulator can be run multiple times without exceptions and\n    returns consistent results.\n    \"\"\"\nsim = MLMCSimulator(models=models_from_data, data=data_input)\nestimate1, sample_sizes1, variances1 = sim.simulate(epsilon=1.0,\n    initial_sample_sizes=100)\nsim = MLMCSimulator(models=models_from_data, data=data_input)\nestimate2, sample_sizes2, variances2 = sim.simulate(epsilon=1.0,\n    initial_sample_sizes=100)\nestimate3, sample_sizes3, variances3 = sim.simulate(epsilon=1.0,\n    initial_sample_sizes=100)\nassert np.all(np.isclose(estimate1, estimate2))\nassert np.all(np.isclose(estimate2, estimate3))\nassert np.all(np.isclose(sample_sizes1, sample_sizes2))\nassert np.all(np.isclose(sample_sizes2, sample_sizes3))\nassert np.all(np.isclose(variances1, variances2))\nassert np.all(np.isclose(variances2, variances3))\n"
-}

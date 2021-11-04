@@ -1,9 +1,0 @@
-{
-    "functionName": "test_supercell_fourier",
-    "className": null,
-    "fileName": "/mesonepigreco_&_CellConstructor/tests_&_TestSupercellRealSpace_&_test_supercell_fourier.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "total_path = os.path.dirname(os.path.abspath(__file__))\nos.chdir(total_path)\nSUPER_DYN = '../TestPhononSupercell/dynmat'\nNQIRR = 8\nSUPERCELL = 3, 3, 2\ndyn = CC.Phonons.Phonons(SUPER_DYN, NQIRR)\nfc = dyn.GetRealSpaceFC(SUPERCELL)\nfc_new = fc.copy()\nprint('Real space:')\nprint(fc[:6, :6])\nprint('First one:')\nprint(dyn.dynmats[0])\nprint('Distances')\nsuper_structure = dyn.structure.generate_supercell(SUPERCELL)\nm = super_structure.get_masses_array()\nnq = np.prod(SUPERCELL)\nnat_sc = dyn.structure.N_atoms * nq\n_m_ = np.zeros(3 * nat_sc)\nfor i in range(nat_sc):\n    _m_[3 * i:3 * i + 3] = m[i]\nm_mat = np.outer(1 / np.sqrt(_m_), 1 / np.sqrt(_m_))\nfc *= m_mat\nw_tot = np.sqrt(np.abs(np.real(np.linalg.eigvals(fc))))\nw_tot.sort()\nw_old = np.zeros(len(w_tot))\nfor i in range(nq):\n    w, p = dyn.DyagDinQ(i)\n    w_old[i * len(w):(i + 1) * len(w)] = w\nw_old.sort()\nprint('Freq:')\nprint('\\n'.join([(' %.5f vs %.5f' % (w_tot[i] * CC.Phonons.RY_TO_CM, w_old[\n    i] * CC.Phonons.RY_TO_CM)) for i in range(len(w_tot))]))\ndynmats_new = CC.Phonons.GetDynQFromFCSupercell(fc_new, np.array(dyn.q_tot),\n    dyn.structure, super_structure)\ndyn_sc_new = CC.Phonons.GetSupercellFCFromDyn(dynmats_new, np.array(dyn.\n    q_tot), dyn.structure, super_structure)\nprint('Distance reverted:', np.sqrt(np.sum((dyn_sc_new - fc_new) ** 2) / np\n    .sum(dyn_sc_new ** 2)))\n"
-}

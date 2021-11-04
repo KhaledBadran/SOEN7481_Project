@@ -1,9 +1,0 @@
-{
-    "functionName": "test_hist_property",
-    "className": "TestCellListPlot",
-    "fileName": "/Jhsmit_&_ColiCoords/test_&_test_plot.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "fig, ax = plt.subplots()\nfor p in ['length', 'radius', 'area', 'surface', 'volume']:\n    n, b, p = self.clp.hist_property(prop=p, ax=ax)\n    self.assertEqual(self.num, np.sum(n))\n    self.assertEqual(ax.get_ylabel(), 'Cell count')\nax.clear()\nwith self.assertRaises(ValueError):\n    self.clp.hist_property(prop='asdf')\nn, b, p = self.clp.hist_property(prop='radius', ax=ax, bins=[0, 1000])\nself.assertEqual(len(b), 2)\nplt.close()\n"
-}

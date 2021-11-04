@@ -1,9 +1,0 @@
-{
-    "functionName": "sendAPRSPacket",
-    "className": null,
-    "fileName": "/FaradayRF_&_Faraday-Software/faraday_&_aprs.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Sends an APRS packet (just a string) to the socket specified. If an\n    error occurs a False is returned while a True is returned if successful.\n    On an error, the socket is closed as it is no longer useful.\n\n    :param socket: APRS-IS server internet socket\n    :param packet: String to be sent to APRS-IS\n    :return: Boolean\n    \"\"\"\ntry:\n    socket.sendall(packet)\n    return True\nexcept IOError as e:\n    logger.error(e)\n    socket.close()\n    return False\n"
-}

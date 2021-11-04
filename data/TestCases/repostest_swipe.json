@@ -1,9 +1,0 @@
-{
-    "functionName": "test_swipe",
-    "className": null,
-    "fileName": "/martinohanlon_&_BlueDot/tests_&_test_blue_dot.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "mbd = MockBlueDot()\nmbd.mock_client_connected()\ndef simulate_swipe(pressed_x, pressed_y, moved_x, moved_y, released_x,\n    released_y):\n    mbd.mock_blue_dot_pressed(pressed_x, pressed_y)\n    mbd.mock_blue_dot_moved(moved_x, moved_y)\n    mbd.mock_blue_dot_released(released_x, released_y)\ndelay_function(lambda : simulate_swipe(-1, 0, 0, 0, 1, 0), 0.5)\nassert mbd.wait_for_swipe(1)\nevent_swiped = Event()\nmbd.when_swiped = lambda : event_swiped.set()\nassert not event_swiped.is_set()\nsimulate_swipe(-1, 0, 0, 0, 1, 0)\nassert event_swiped.is_set()\nswipe = BlueDotSwipe(mbd.interaction)\nassert swipe.right\nassert not swipe.left\nassert not swipe.up\nassert not swipe.down\nevent_swiped.clear()\nsimulate_swipe(1, 0, 0, 0, -1, 0)\nassert event_swiped.is_set()\nswipe = BlueDotSwipe(mbd.interaction)\nassert not swipe.right\nassert swipe.left\nassert not swipe.up\nassert not swipe.down\nevent_swiped.clear()\nsimulate_swipe(0, -1, 0, 0, 0, 1)\nassert event_swiped.is_set()\nswipe = BlueDotSwipe(mbd.interaction)\nassert not swipe.right\nassert not swipe.left\nassert swipe.up\nassert not swipe.down\nevent_swiped.clear()\nsimulate_swipe(0, 1, 0, 0, 0, -1)\nassert event_swiped.is_set()\nswipe = BlueDotSwipe(mbd.interaction)\nassert not swipe.right\nassert not swipe.left\nassert not swipe.up\nassert swipe.down\nevent_swiped.clear()\nmbd.set_when_swiped(lambda : delay_function(event_swiped.set, 0.2),\n    background=True)\nsimulate_swipe(0, 1, 0, 0, 0, -1)\nassert not event_swiped.is_set()\nassert event_swiped.wait(1)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_multipleInitialStatesFailure",
-    "className": "MethodicalTests",
-    "fileName": "/glyph_&_Automat/automat_&__test_&_test_methodical.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        A L{MethodicalMachine} can only have one initial state.\n        \"\"\"\nclass WillFail(object):\n    m = MethodicalMachine()\n\n    @m.state(initial=True)\n    def firstInitialState(self):\n        \"\"\"The first initial state -- this is OK.\"\"\"\n    with self.assertRaises(ValueError):\n\n        @m.state(initial=True)\n        def secondInitialState(self):\n            \"\"\"The second initial state -- results in a ValueError.\"\"\"\n"
-}

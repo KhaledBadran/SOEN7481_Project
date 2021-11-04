@@ -1,9 +1,0 @@
-{
-    "functionName": "test_quantity_relaxation_consistency_w_base_solution",
-    "className": "ReactiveTransportTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_ReactiveTransportTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.alg.reset(bcs=True, source_terms=True)\nself.alg.set_source(pores=self.net.pores('bottom'), propname='pore.reaction')\nself.alg.set_value_BC(pores=self.net.pores('top'), values=1.0)\nself.alg.run()\nc_mean_base = self.alg['pore.concentration'].mean()\nself.alg.settings['relaxation_quantity'] = 0.5\nself.alg.run()\nc_mean_relaxed = self.alg['pore.concentration'].mean()\nassert_allclose(c_mean_base, c_mean_relaxed, rtol=1e-06)\n"
-}

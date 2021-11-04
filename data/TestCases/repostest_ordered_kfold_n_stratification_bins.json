@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ordered_kfold_n_stratification_bins",
-    "className": null,
-    "fileName": "/goeckslab_&_Galaxy-ML/galaxy_ml_&_tests_&_test_model_validations.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "y = list(range(12))\ngot1 = []\ncv = OrderedKFold(n_splits=4, shuffle=True, random_state=42,\n    n_stratification_bins=2)\nfor _, test_index in cv.split(y, y):\n    got1.append(test_index.tolist())\nexpect1 = [[0, 4, 7], [1, 3, 8], [5, 9, 11], [2, 6, 10]]\nassert got1 == expect1, got1\ngot2 = []\ncv = OrderedKFold(n_splits=4, shuffle=True, random_state=999,\n    n_stratification_bins=3)\nfor _, test_index in cv.split(y, y):\n    got2.append(test_index.tolist())\nexpect2 = [[2, 6, 8], [1, 7, 10], [3, 4, 9], [0, 5, 11]]\nassert got2 == expect2, got2\ngot3 = []\ncv = RepeatedOrderedKFold(n_splits=4, random_state=999, n_repeats=2,\n    n_stratification_bins=2)\nfor _, test_index in cv.split(y, y):\n    got3.append(test_index.tolist())\nexpect3 = [[2, 4, 11], [0, 5, 10], [3, 6, 9], [1, 7, 8], [2, 5, 7], [0, 1, \n    10], [3, 6, 9], [4, 8, 11]]\nassert got3 == expect3, got3\n"
-}

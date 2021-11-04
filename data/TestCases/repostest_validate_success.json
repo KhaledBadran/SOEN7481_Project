@@ -1,9 +1,0 @@
-{
-    "functionName": "test_validate_success",
-    "className": "IntegrationTest",
-    "fileName": "/BMeu_&_Flask-EasyJWT/tests_&_integration_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n            Test getting and successfully validating a token.\n\n            Expected Result: A token can be requested from the app and then successfully validated.\n        \"\"\"\nuser_id = 42\nresponse = self.client.get(f'/get_token/{user_id}')\ntoken = response.get_data(as_text=True)\nself.assertIsNotNone(token)\nresponse = self.client.get(f'/validate_user/{token}')\nvalidated_user = response.get_data(as_text=True)\nself.assertEqual(str(user_id), validated_user)\n"
-}

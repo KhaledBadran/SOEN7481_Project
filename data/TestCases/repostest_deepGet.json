@@ -1,9 +1,0 @@
-{
-    "functionName": "test_deepGet",
-    "className": "Test_ConfigParser",
-    "fileName": "/Kieran-Bacon_&_Better/PackageTests_&_test_configparser.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "config = ConfigParser(\n    \"\"\"\n        basic = Still works\n        [1]\n            [2]\n                [3]\n                    key = value\n                    (int) number = 10\n        \"\"\"\n    )\nself.assertEqual(config.get('basic'), 'Still works')\nself.assertEqual(config.get('not present basic', 'This is fine'),\n    'This is fine')\nself.assertEqual(config.get('1:2:3:key'), 'value')\nself.assertEqual(config.get('1:2:3:number'), 10)\nself.assertEqual(config.get('1:2:3:not present'), None)\nself.assertEqual(config.get('1:2:3:not present', True), True)\n"
-}

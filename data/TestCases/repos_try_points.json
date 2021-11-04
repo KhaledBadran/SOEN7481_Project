@@ -1,9 +1,0 @@
-{
-    "functionName": "_try_points",
-    "className": null,
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_topotools_&_topotools.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "prob = np.atleast_3d(prob)\nprob = np.array(prob) / np.amax(prob)\nbase_pts = []\nN = 0\nwhile N < num_points:\n    pt = np.random.rand(3)\n    [indx, indy, indz] = np.floor(pt * np.shape(prob)).astype(int)\n    if np.random.rand(1) <= prob[indx][indy][indz]:\n        base_pts.append(pt)\n        N += 1\nbase_pts = np.array(base_pts)\nreturn base_pts\n"
-}

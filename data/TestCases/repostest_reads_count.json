@@ -1,9 +1,0 @@
-{
-    "functionName": "test_reads_count",
-    "className": null,
-    "fileName": "/shao-lab_&_MAnorm/tests_&_test_read_class.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "reads = Reads(name='test')\nreads.add('chr1', 100)\nreads.add('chr1', 102)\nreads.add('chr1', 1)\nreads.sort()\nwith pytest.raises(ValueError):\n    reads.count('chr1', 1, 1)\nassert reads.count('chr11', 1, 200) == 0\nassert reads.count('chr1', -100, 0) == 0\nassert reads.count('chr1', 1, 2) == 1\nassert reads.count('chr1', 1, 100) == 1\nassert reads.count('chr1', 1, 101) == 2\nassert reads.count('chr1', 1, 200) == 3\n"
-}

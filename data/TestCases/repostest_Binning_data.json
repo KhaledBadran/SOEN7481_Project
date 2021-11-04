@@ -1,9 +1,0 @@
-{
-    "functionName": "test_Binning_data",
-    "className": null,
-    "fileName": "/jakob-lass_&_MJOLNIR/TutorialsDepricated_&_Binning_data.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "import numpy as np\nimport h5py as hdf\nimport matplotlib.pyplot as plt\nfileName = 'Data/camea2018n000137.hdf'\nds = DataSet.DataSet(dataFiles=fileName)\nds.convertDataFile()\nI = ds.convertedFiles[0].I\nqx = ds.convertedFiles[0].qx\nqy = ds.convertedFiles[0].qy\nenergy = ds.convertedFiles[0].energy\nNorm = ds.convertedFiles[0].Norm\nMonitor = ds.convertedFiles[0].Monitor\ntitle = 'Magnon ComponentA3Scan'\npos = [qx, qy, energy]\nData, bins = DataSet.binData3D(0.02, 0.02, 0.1, pos, I, norm=Norm, mon=Monitor)\nimport warnings\nwarnings.simplefilter('ignore')\nIntensity = np.divide(Data[0] * Data[3], Data[1] * Data[2])\nwarnings.simplefilter('once')\nViewer = Viewer3D.Viewer3D(Intensity, bins, axis=2)\nViewer.caxis = 0, 40\nViewer.ax.set_title(str(title)[2:-1])\nif view:\n    plt.show()\nelif os.path.exists('Data/camea2018n000137.nxs'):\n    os.remove('Data/camea2018n000137.nxs')\n"
-}

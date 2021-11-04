@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ALEBOStrategy",
-    "className": "ALEBOStrategyTest",
-    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_alebo_strategy.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "D = 20\nd = 3\ninit_size = 5\ns = ALEBOStrategy(D=D, d=d, init_size=init_size)\nself.assertEqual(s._steps[0].num_trials, init_size)\nrandom_B = s._steps[0].model_kwargs['B']\ngp_B = s._steps[1].model_kwargs['B']\nself.assertTrue(np.allclose(random_B, gp_B.numpy()))\nself.assertEqual(random_B.shape, (d, D))\nself.assertTrue(torch.allclose(torch.sqrt((gp_B ** 2).sum(dim=0)), torch.\n    ones(D, dtype=torch.double)))\ns2 = s.clone_reset()\nself.assertEqual(s2.d, d)\nself.assertEqual(s2.D, D)\nself.assertEqual(s2._steps[0].num_trials, init_size)\nrandom_B2 = s2._steps[0].model_kwargs['B']\nself.assertEqual(random_B2.shape, (d, D))\nself.assertFalse(np.allclose(random_B, random_B2))\n"
-}

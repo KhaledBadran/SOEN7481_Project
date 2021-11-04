@@ -1,9 +1,0 @@
-{
-    "functionName": "test_unitary_decompose_nonunitary",
-    "className": "Test_conjugated_kernel",
-    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_unitary.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.setUpClass()\nnum_qubits = 1\np = ql.Program('test_unitary_nonunitary', platform, num_qubits)\nk = ql.Kernel('akernel', platform, num_qubits)\nu = ql.Unitary('WRONG', [complex(0.0, 0.0), complex(0.0, 0.0), complex(0.0,\n    0.0), complex(0.0, 0.0)])\nwith self.assertRaises(Exception) as cm:\n    u.decompose()\n    k.gate(u, [0])\n    add_kernel(k)\n    p.compile()\nself.assertEqual(str(cm.exception),\n    \"\"\"Error: Unitary 'WRONG' is not a unitary matrix. Cannot be decomposed!(0,0) (0,0)\n(0,0) (0,0)\n\"\"\"\n    )\n"
-}

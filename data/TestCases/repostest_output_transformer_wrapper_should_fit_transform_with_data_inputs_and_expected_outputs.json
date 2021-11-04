@@ -1,9 +1,0 @@
-{
-    "functionName": "test_output_transformer_wrapper_should_fit_transform_with_data_inputs_and_expected_outputs",
-    "className": null,
-    "fileName": "/Neuraxio_&_Neuraxle/testing_&_test_output_transformer_wrapper.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "tape = TapeCallbackFunction()\np = OutputTransformerWrapper(Pipeline([MultiplyByN(2), FitCallbackStep(tape)]))\ndata_inputs, expected_outputs = _create_data_source((10, 10))\np, data_container = p.handle_fit_transform(DataContainer(data_inputs=\n    data_inputs, expected_outputs=expected_outputs), ExecutionContext())\nassert np.array_equal(data_container.data_inputs, data_inputs)\nassert np.array_equal(data_container.expected_outputs, expected_outputs * 2)\nassert np.array_equal(tape.data[0][0], expected_outputs * 2)\nfor i in range(10):\n    assert tape.data[0][1][i] is None\n"
-}

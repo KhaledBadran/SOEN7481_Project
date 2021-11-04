@@ -1,9 +1,0 @@
-{
-    "functionName": "test_parse_auth_settings",
-    "className": "TestKmipServerConfig",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_config.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that server authentication plugin settings are parsed correctly.\n        \"\"\"\nparser = configparser.ConfigParser()\nparser.add_section('server')\nparser.add_section('auth:slugs')\nparser.set('auth:slugs', 'enabled', 'True')\nparser.set('auth:slugs', 'url', 'http://127.0.0.1:8080/slugs/')\nparser.add_section('auth:ldap')\nparser.set('auth:ldap', 'enabled', 'False')\nparser.set('auth:ldap', 'url', 'http://127.0.0.1:8080/ldap/')\nc = config.KmipServerConfig()\nc._logger = mock.MagicMock()\nself.assertEqual([], c.settings['auth_plugins'])\nc.parse_auth_settings(parser)\nconfigs = c.settings['auth_plugins']\nself.assertIsInstance(configs, list)\nself.assertEqual(2, len(configs))\nfor c in configs:\n    self.assertIsInstance(c, tuple)\n    self.assertEqual(2, len(c))\n    self.assertIn(c[0], ['auth:slugs', 'auth:ldap'])\n    self.assertIsInstance(c[1], dict)\n    if c[0] == 'auth:slugs':\n        self.assertIn('enabled', six.iterkeys(c[1]))\n        self.assertEqual('True', c[1]['enabled'])\n        self.assertIn('url', six.iterkeys(c[1]))\n        self.assertEqual('http://127.0.0.1:8080/slugs/', c[1]['url'])\n    elif c[0] == 'auth:ldap':\n        self.assertIn('enabled', six.iterkeys(c[1]))\n        self.assertEqual('False', c[1]['enabled'])\n        self.assertIn('url', six.iterkeys(c[1]))\n        self.assertEqual('http://127.0.0.1:8080/ldap/', c[1]['url'])\n"
-}

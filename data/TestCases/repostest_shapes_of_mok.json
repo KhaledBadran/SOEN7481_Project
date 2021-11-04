@@ -1,9 +1,0 @@
-{
-    "functionName": "test_shapes_of_mok",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_conditionals_&_test_multioutput.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data = DataMixedKernel\nkern_list = [SquaredExponential() for _ in range(data.L)]\nk1 = mk.LinearCoregionalization(kern_list, W=data.W)\nassert k1.num_latent_gps == data.L\nk2 = mk.SeparateIndependent(kern_list)\nassert k2.num_latent_gps == data.L\ndims = 5\nk3 = mk.SharedIndependent(SquaredExponential(), dims)\nassert k3.num_latent_gps == dims\n"
-}

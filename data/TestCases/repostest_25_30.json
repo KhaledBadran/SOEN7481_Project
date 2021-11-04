@@ -1,9 +1,0 @@
-{
-    "functionName": "test_25_30",
-    "className": "test_k_to_g",
-    "fileName": "/jonwright_&_ImageD11/test_&_gv_general_&_test_gv_general.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" wedge, chi = 25,30 \"\"\"\nw, c = 25, 30\nSANITY = False\nif SANITY:\n    print('*' * 80)\nom = np.zeros(self.np, np.float)\ng_old = transform.compute_g_vectors(self.tth, self.eta, self.omega, self.\n    wvln, wedge=w, chi=c)\nif SANITY:\n    print(g_old.shape, '\\n', g_old[:, :3])\nk = transform.compute_k_vectors(self.tth, self.eta, self.wvln)\nif SANITY:\n    print('k=', k[:, :3])\npost = gv_general.chiwedge(chi=c, wedge=w)\ng_new = gv_general.k_to_g(k, self.omega, axis=[0, 0, -1], post=post)\nif SANITY:\n    print(g_new.shape, g_new[:, :3])\nif SANITY:\n    print('end routine')\nif SANITY:\n    print('*' * 80)\nself.assertAlmostEqual(array_diff(g_new, g_old), 0, 6)\n"
-}

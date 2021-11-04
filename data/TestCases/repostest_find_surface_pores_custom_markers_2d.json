@@ -1,9 +1,0 @@
-{
-    "functionName": "test_find_surface_pores_custom_markers_2d",
-    "className": "TopotoolsTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_topotools_&_TopotoolsTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "net = op.network.Cubic(shape=[4, 4, 1], spacing=1)\nnet.clear(mode='labels')\nassert net.labels() == ['pore.all', 'throat.all']\nmarkers = [[-1, 2], [2, -1], [2, 5], [5, 2]]\ntopotools.find_surface_pores(network=net, markers=markers)\nassert net.num_pores('surface') == 12\nmarkers = [[-1], [2], [2], [5]]\nwith pytest.raises(Exception):\n    topotools.find_surface_pores(network=net, markers=markers)\nmarkers = [[-1, 2, 0], [2, -1, 0], [2, 5, 0], [5, 2, 0]]\nwith pytest.raises(Exception):\n    topotools.find_surface_pores(network=net, markers=markers)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test__get_encoded_role_factors",
-    "className": "TestRoles",
-    "fileName": "/dkaslovsky_&_GraphRole/tests_&_test_roles_&_test_extract.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "min_shape = min(self.features.shape)\nfor n_roles in range(2, 4):\n    total_values = n_roles * min_shape\n    for n_bits in range(1, 6):\n        expected_uniq_vals = 2 ** n_bits\n        if expected_uniq_vals <= total_values:\n            G, F = self.re._get_encoded_role_factors(self.features, n_roles,\n                n_bits)\n            uniq_vals_g = len(np.unique(G))\n            uniq_vals_f = len(np.unique(F))\n            self.assertTupleEqual(G.shape, (self.n_nodes, n_roles))\n            self.assertLessEqual(uniq_vals_g, expected_uniq_vals)\n            self.assertTupleEqual(F.shape, (n_roles, self.n_features))\n            self.assertLessEqual(uniq_vals_f, expected_uniq_vals)\n        else:\n            with self.assertRaises(ValueError):\n                G, F = self.re._get_encoded_role_factors(self.features,\n                    n_roles, n_bits)\n"
-}

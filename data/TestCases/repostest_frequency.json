@@ -1,9 +1,0 @@
-{
-    "functionName": "test_frequency",
-    "className": "TestProducer",
-    "fileName": "/BciPy_&_BciPy/bcipy_&_acquisition_&_tests_&_datastream_&_test_producer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Data should be generated at the provided frequency\"\"\"\nsample_hz = 300\nruntime = 0.2\ndata_queue = queue.Queue()\nproducer = Producer(data_queue, freq=1 / sample_hz)\nproducer.start()\ntime.sleep(runtime)\nproducer.stop()\ndata_n = data_queue.qsize()\nexpected_n = sample_hz * runtime\ntolerance = 5\nself.assertTrue(data_n + tolerance >= expected_n)\nself.assertTrue(data_n <= expected_n + tolerance)\n"
-}

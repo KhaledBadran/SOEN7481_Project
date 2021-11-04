@@ -1,9 +1,0 @@
-{
-    "functionName": "test_corrupt_fuzz",
-    "className": null,
-    "fileName": "/Microsoft_&_LMChallenge/lmchallenge_&_core_&_tests_&_test_errors.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "config = errors.DEFAULT_CONFIG\nfor i in range(1000):\n    word = ''.join(random.choice(string.ascii_letters) for j in range(\n        random.randint(1, 10)))\n    input_word = errors.corrupt(config, word)\n    assert len(word) == len(input_word)\n    input_score = errors.score(config, input_word, input_word)\n    assert input_score < 0\n    score = errors.score(config, input_word, word)\n    assert score <= input_score\n"
-}

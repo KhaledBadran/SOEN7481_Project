@@ -1,9 +1,0 @@
-{
-    "functionName": "test_write_ann",
-    "className": null,
-    "fileName": "/PaulHancock_&_Aegean/tests_&_test_catalogs.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that write_ann *doesn't* do anything\"\"\"\ncat.writeAnn('out.ann', [], fmt='fail')\nif os.path.exists('out.ann'):\n    raise AssertionError(\"Shoudn't have written anything\")\nsrc = ComponentSource()\ndel src.a\ncat.writeAnn('out.reg', [src], fmt='reg')\nif not os.path.exists('out_comp.reg'):\n    raise AssertionError()\nos.remove('out_comp.reg')\ncat.writeAnn('out.ann', [ComponentSource()], fmt='ann')\nif not os.path.exists('out_comp.ann'):\n    raise AssertionError()\nos.remove('out_comp.ann')\ncat.writeAnn('out.ann', [SimpleSource()], fmt='ann')\nif not os.path.exists('out_simp.ann'):\n    raise AssertionError()\nos.remove('out_simp.ann')\ncat.writeAnn('out.reg', [ComponentSource()], fmt='reg')\nif not os.path.exists('out_comp.reg'):\n    raise AssertionError()\nos.remove('out_comp.reg')\ncat.writeAnn('out.reg', [SimpleSource()], fmt='reg')\nif not os.path.exists('out_simp.reg'):\n    raise AssertionError()\nos.remove('out_simp.reg')\ncat.writeAnn('out.reg', [IslandSource()], fmt='reg')\nif not os.path.exists('out_isle.reg'):\n    raise AssertionError()\nos.remove('out_isle.reg')\ncat.writeAnn('out.ann', [IslandSource()], fmt='ann')\ncat.writeAnn('out.reg', [IslandSource()], fmt='fail')\n"
-}

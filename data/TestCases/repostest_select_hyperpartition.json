@@ -1,9 +1,0 @@
-{
-    "functionName": "test_select_hyperpartition",
-    "className": null,
-    "fileName": "/HDI-project_&_ATM/tests_&_test_worker.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    This won't test that BTB is working correctly, just that the ATM-BTB\n    connection is working.\n    \"\"\"\nworker.db.get_hyperpartitions = Mock(return_value=[Mock(id=1)])\nclf_mock = Mock(hyperpartition_id=1, cv_judgment_metric=0.5)\nworker.db.get_classifiers = Mock(return_value=[clf_mock])\nworker.selector.select = Mock(return_value=1)\nhp = worker.select_hyperpartition()\nworker.selector.select.assert_called_with({(1): [0.5]})\nassert hp.id == 1\n"
-}

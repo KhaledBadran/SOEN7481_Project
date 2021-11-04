@@ -1,9 +1,0 @@
-{
-    "functionName": "test_bad_node",
-    "className": "Test_Graph",
-    "fileName": "/AdriaanRol_&_AutoDepGraph/autodepgraph_&_tests_&_test_graph.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "cal_True_delayed = (\n    'autodepgraph.node_functions.calibration_functions.test_calibration_True_delayed'\n    )\ntest_graph = AutoDepGraph_DAG('test graph')\nfor node in ['A', 'B', 'C', 'D', 'E']:\n    test_graph.add_node(node, calibrate_function=cal_True_delayed)\ntest_graph.add_edge('C', 'A')\ntest_graph.add_edge('C', 'B')\ntest_graph.add_edge('B', 'A')\ntest_graph.add_edge('D', 'A')\ntest_graph.add_edge('E', 'D')\ntest_graph.set_all_node_states('unknown')\nself.assertEqual(test_graph.nodes()['C']['state'], 'unknown')\nself.assertEqual(test_graph.nodes()['B']['state'], 'unknown')\nself.assertEqual(test_graph.nodes()['A']['state'], 'unknown')\ncal_False = (\n    'autodepgraph.node_functions.calibration_functions.test_calibration_False')\ntest_graph.nodes['C']['calibrate_function'] = cal_False\nwith self.assertRaises(ValueError):\n    test_graph.maintain_node('C')\nself.assertEqual(test_graph.nodes()['C']['state'], 'bad')\nself.assertEqual(test_graph.nodes()['B']['state'], 'good')\nself.assertEqual(test_graph.nodes()['A']['state'], 'good')\ncal_True_delayed = (\n    'autodepgraph.node_functions.calibration_functions.test_calibration_True_delayed'\n    )\n"
-}

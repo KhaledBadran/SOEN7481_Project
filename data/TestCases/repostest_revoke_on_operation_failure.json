@@ -1,9 +1,0 @@
-{
-    "functionName": "test_revoke_on_operation_failure",
-    "className": "TestProxyKmipClient",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_test_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a KmipOperationFailure exception is raised when the\n        backend fails to revoke a secret.\n        \"\"\"\nstatus = enums.ResultStatus.OPERATION_FAILED\nreason = enums.ResultReason.GENERAL_FAILURE\nrevocation_message = 'Test failure message'\nresult = results.OperationResult(contents.ResultStatus(status), contents.\n    ResultReason(reason), contents.ResultMessage(revocation_message))\nerror_msg = str(KmipOperationFailure(status, reason, revocation_message))\nclient = ProxyKmipClient()\nclient.open()\nclient.proxy.revoke.return_value = result\nrevocation_reason = enums.RevocationReasonCode.KEY_COMPROMISE\nuuid = 'aaaaaaaa-1111-2222-3333-ffffffffffff'\nrevocation_message = 'Key compromised!'\ncompromise_occurrence_date = 1\nargs = [revocation_reason, uuid, revocation_message, compromise_occurrence_date\n    ]\nself.assertRaisesRegex(KmipOperationFailure, error_msg, client.revoke, *args)\nmock.patch('kmip.pie.client.KMIPProxy', mock.MagicMock(spec_set=KMIPProxy))"
-}

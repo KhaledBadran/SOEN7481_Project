@@ -1,9 +1,0 @@
-{
-    "functionName": "test_eda_phasic",
-    "className": null,
-    "fileName": "/neuropsychology_&_NeuroKit/tests_&_tests_eda.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "sampling_rate = 1000\neda = nk.eda_simulate(duration=30, sampling_rate=sampling_rate, scr_number=\n    6, noise=0.01, drift=0.01, random_state=42)\nif platform.system() == 'Linux':\n    cvxEDA = nk.eda_phasic(nk.standardize(eda), method='cvxeda')\n    assert len(cvxEDA) == len(eda)\nsmoothMedian = nk.eda_phasic(nk.standardize(eda), method='smoothmedian')\nassert len(smoothMedian) == len(eda)\nhighpass = nk.eda_phasic(nk.standardize(eda), method='highpass')\nassert len(highpass) == len(eda)\n"
-}

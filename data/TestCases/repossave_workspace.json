@@ -1,9 +1,0 @@
-{
-    "functionName": "save_workspace",
-    "className": "OpenpnmIO",
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_io_&_OpenpnmIO.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        Save the current Workspace to a file on disk\n\n        Parameters\n        ----------\n        filename : string\n            The filename to save the file\n        \"\"\"\nif filename == '':\n    filename = 'workspace' + '_' + time.strftime('%Y%b%d_%H%M%p')\nfilename = cls._parse_filename(filename=filename, ext='pnm')\nd = {}\nfor sim in ws.values():\n    d[sim.name] = sim\nwith open(filename, 'wb') as f:\n    pickle.dump(d, f)\nclassmethod"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_update_post_required_fields",
-    "className": null,
-    "fileName": "/AutomatedTester_&_Bugsy/tests_&_test_attachment.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "resp_dict = {'attachments': [{}]}\nfor k, v in attachment_return['bugs']['1017315'][0].items():\n    if k in Attachment.UPDATE_FIELDS:\n        resp_dict['attachments'][0][k] = copy.deepcopy(v)\nresp_dict['attachments'][0]['summary'] = 'Updated summary'\ndef request_callback(request):\n    header = {}\n    body = json.dumps(json.loads(request.body), sort_keys=True)\n    if body != json.dumps(resp_dict['attachments'][0], sort_keys=True):\n        return 500, header, 'Invalid payload supplied'\n    else:\n        return 200, header, json.dumps(resp_dict)\nattach_id = attachment_return['bugs']['1017315'][0]['id']\nresponses.add_callback(responses.PUT, \n    'https://bugzilla.mozilla.org/rest/bug/attachment/%s' % attach_id,\n    callback=request_callback, content_type='application/json')\nbugzilla = Bugsy()\nattachment = Attachment(bugzilla, **attachment_return['bugs']['1017315'][0])\nattachment.summary = 'Updated summary'\nattachment.update()\nassert attachment.summary == 'Updated summary'\nresponses.activate"
-}

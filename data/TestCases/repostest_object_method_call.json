@@ -1,9 +1,0 @@
-{
-    "functionName": "test_object_method_call",
-    "className": null,
-    "fileName": "/ocaballeror_&_Lyricfetch/lyricfetch_&_tests_&_test_dbusobject.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Register and call methods on a dbus object.\n    \"\"\"\ndef str_response(body=''):\n    return 's', (body,)\ninterface = 'com.example.interface1'\nobject_path = 'com.example.object'\nadd0 = DBusAddress('/path', object_path)\nadd1 = DBusAddress('/path/subpath', object_path)\nadd2 = DBusAddress('/path', object_path, interface=interface)\nadd3 = DBusAddress('/path/subpath', object_path, interface=interface)\nhello0 = partial(str_response, body='Hello0')\nhello1 = partial(str_response, body='Hello1')\nhello2 = partial(str_response, body='Hello2')\nhello3 = partial(str_response, body='Hello3')\ndbus_service.set_handler(add0.object_path, 'hello0', hello0)\ndbus_service.set_handler(add1.object_path, 'hello1', hello1)\ndbus_service.set_handler(add2.object_path, 'hello2', hello2, interface)\ndbus_service.set_handler(add3.object_path, 'hello3', hello3, interface)\ndbus_service.listen()\nconn = connect_and_authenticate()\nresponse = conn.send_and_get_reply(new_method_call(add0, 'hello0'))\nassert response == ('Hello0',)\nresponse = conn.send_and_get_reply(new_method_call(add1, 'hello1'))\nassert response == ('Hello1',)\nresponse = conn.send_and_get_reply(new_method_call(add2, 'hello2'))\nassert response == ('Hello2',)\nresponse = conn.send_and_get_reply(new_method_call(add3, 'hello3'))\nassert response == ('Hello3',)\npytest.mark.parametrize('dbus_service', ['com.example.object'], indirect=True)"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test__proposemin_trials_lt__trials_set_not_allow_duplicates",
-    "className": "TestBaseMetaModelTuner",
-    "fileName": "/HDI-Project_&_BTB/tests_&_tuning_&_tuners_&_test_base.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "instance = MagicMock()\ninstance.tunable = MagicMock(spec_set=Tunable)\ninstance.tunable.cardinality = 3\ninstance.min_trials = 0\ninstance.num_candidates = 10\ninstance._trials_set.__len__.return_value = 1\ninstance._sample.return_value = np.array([1])\ninstance._predict.return_value = 'predicted'\ninstance._acquire.return_value = 0\nresult = BaseMetaModelTuner._propose(instance, 1, False)\ninstance._sample.assert_called_once_with(2, False)\ninstance._predict.assert_called_once_with(np.array([1]))\ninstance._acquire.assert_called_once_with('predicted', 1)\nassert result == 1\n"
-}

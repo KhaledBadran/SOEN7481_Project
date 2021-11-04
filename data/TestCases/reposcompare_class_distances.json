@@ -1,9 +1,0 @@
-{
-    "functionName": "compare_class_distances",
-    "className": null,
-    "fileName": "/LSSTDESC_&_CCL/benchmarks_&_test_distances.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Compare distances calculated by pyccl with the distances in the CLASS\n    benchmark file.\n    \"\"\"\ncosmo = ccl.Cosmology(Omega_c=Omega_c, Omega_b=Omega_b, Neff=Neff, h=h, A_s\n    =A_s, n_s=n_s, Omega_k=Omega_k, m_nu=m_nu, w0=w0, wa=wa)\na = 1.0 / (1.0 + z)\nchi = ccl.comoving_radial_distance(cosmo, a)\nassert_allclose(chi, chi_bench, rtol=DISTANCES_TOLERANCE_CLASS)\na_not_one = a != 1\ndm = ccl.distance_modulus(cosmo, a[a_not_one])\nassert_allclose(dm, dm_bench[a_not_one], rtol=DISTANCES_TOLERANCE_CLASS)\n"
-}

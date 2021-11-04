@@ -1,9 +1,0 @@
-{
-    "functionName": "test_csv_mapper",
-    "className": "TestCSVMapper",
-    "fileName": "/NullConvergence_&_GraphRepo/tests_&_test_csv_mapper.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "folder = os.path.dirname(os.path.abspath(__file__))\ntest_driller = Driller(os.path.join(folder, 'cnfg_simple.yml'))\ntest_driller.drill_batch()\nn_matcher = NodeMatcher(test_driller.graph)\nr_matcher = RelationshipMatcher(test_driller.graph)\ncom_miner = CommitMiner(test_driller.graph, n_matcher, r_matcher)\nmapper = CSVMapper()\ncommits = com_miner.get_all()\nmapped_commits = mapper.map(commits)\nassert mapped_commits.shape == (8, 9)\nc_files = com_miner.get_commit_files(\n    'ad98f8594c15b1ebc4be4f20d849bcc0edf69ec574c33dfd84b7792d')\nc_csv = mapper.map(c_files)\nassert c_csv.shape == (3, 4)\ntest_driller.clean()\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_write_dx",
-    "className": null,
-    "fileName": "/MDAnalysis_&_GridDataFormats/gridData_&_tests_&_test_dx.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "h, edges = np.histogramdd(np.random.random((counts, ndim)), bins=10)\ng = Grid(h, edges)\ng.grid = g.grid.astype(nptype)\nassert_equal(g.grid.sum(), counts)\nwith tmpdir.as_cwd():\n    g.export(outfile)\n    g2 = Grid(outfile)\n    dx = gridData.OpenDX.field(0)\n    dx.read(outfile)\n    data = dx.components['data']\n    out_dxtype = data.type\nassert_almost_equal(g.grid, g2.grid, err_msg=\n    'written grid does not match original')\nassert_almost_equal(g.delta, g2.delta, decimal=6, err_msg=\n    'deltas of written grid do not match original')\nassert_equal(out_dxtype, dxtype)\npytest.mark.parametrize('outfile', ['grid.dx', 'grid.dx.gz'])pytest.mark.parametrize('nptype,dxtype', [('float16', 'float'), ('float32',\n    'float'), ('float64', 'double'), ('int64', 'int'), ('int32', 'int'), (\n    'uint32', 'unsigned int'), ('uint64', 'unsigned int'), ('int16',\n    'short'), ('uint16', 'unsigned short'), ('int8', 'signed byte'), (\n    'uint8', 'byte')])"
-}

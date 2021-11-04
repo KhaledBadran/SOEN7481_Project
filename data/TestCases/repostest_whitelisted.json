@@ -1,9 +1,0 @@
-{
-    "functionName": "test_whitelisted",
-    "className": "TestCase",
-    "fileName": "/IntegralDefense_&_ACE/lib_&_saq_&_modules_&_test_alerts.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "root = create_root_analysis(uuid=str(uuid.uuid4()))\nroot.initialize_storage()\nobservable = root.add_observable(F_TEST, 'test_8')\nroot.save()\nroot.schedule()\nengine = TestEngine()\nengine.enable_alerting()\nengine.enable_module('analysis_module_basic_test')\nengine.controlled_stop()\nengine.start()\nengine.wait()\nc.execute('SELECT id FROM alerts WHERE uuid = %s', (root.uuid,))\nrow = c.fetchone()\nself.assertIsNone(row)\nuse_db"
-}

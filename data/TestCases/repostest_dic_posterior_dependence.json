@@ -1,9 +1,0 @@
-{
-    "functionName": "test_dic_posterior_dependence",
-    "className": null,
-    "fileName": "/samreay_&_ChainConsumer/tests_&_test_comparisons.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "d = norm.rvs(size=1000000)\np = norm.logpdf(d)\np2 = norm.logpdf(d, scale=2)\nc = ChainConsumer()\nc.add_chain(d, posterior=p)\nc.add_chain(d, posterior=p2)\nbics = c.comparison.dic()\nassert len(bics) == 2\nassert bics[1] == 0\ndic1 = 2 * np.mean(-2 * p) + 2 * norm.logpdf(0)\ndic2 = 2 * np.mean(-2 * p2) + 2 * norm.logpdf(0, scale=2)\nassert np.isclose(bics[0], dic1 - dic2, atol=0.001)\n"
-}

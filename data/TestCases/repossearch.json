@@ -1,9 +1,0 @@
-{
-    "functionName": "search",
-    "className": null,
-    "fileName": "/aerupt_&_PyFlightSearch/PyFlightSearch_&_QPX.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "url = ('https://www.googleapis.com/qpxExpress/v1/trips/search?key=' +\n    QPX_API_KEY)\ndata = {'request': {'passengers': {'kind': 'qpxexpress#passengerCounts',\n    'adultCount': adults}, 'slice': [{'kind': 'qpxexpress#sliceInput',\n    'origin': origin, 'destination': destination, 'date': date.isoformat()}\n    ], 'refundable': 'false', 'solutions': limit}}\nresponse = requests.post(url.format(QPX_API_KEY), json=data, headers=\n    QPX_HEADERS).json()\nif 'trips' in response:\n    return [Flight.from_qpx_json(flight_json) for flight_json in response[\n        'trips']['tripOption']]\nlogging.warning('Something went wrong with the response:')\nlogging.warning(response)\n"
-}

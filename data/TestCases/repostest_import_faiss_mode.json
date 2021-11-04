@@ -1,9 +1,0 @@
-{
-    "functionName": "test_import_faiss_mode",
-    "className": null,
-    "fileName": "/Menelau_&_DESlib/deslib_&_tests_&_test_base.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "try:\n    import sys\n    sys.modules.pop('deslib.util.faiss_knn_wrapper')\nexcept Exception:\n    pass\nwith unittest.mock.patch.dict('sys.modules', {'faiss': None}):\n    with pytest.raises(ImportError):\n        BaseDS(knn_classifier='faiss')\n"
-}

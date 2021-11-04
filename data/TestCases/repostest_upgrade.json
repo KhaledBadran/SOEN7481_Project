@@ -1,9 +1,0 @@
-{
-    "functionName": "test_upgrade",
-    "className": null,
-    "fileName": "/vamf12_&_Glask/tests_&_test_alembic.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "dbname = parse_dbname(app=app)\nassert not db_exists(name=dbname)\nwith upgrade(app=app):\n    assert app.logger.disabled == False\n    assert db_exists(name=dbname)\n    with pg_cursor(database=dbname) as cursor:\n        cursor.execute('SELECT * FROM alembic_version')\n        assert cursor.fetchone()[0] == '14eb5bc5ddfb'\nassert not db_exists(name=dbname)\n"
-}

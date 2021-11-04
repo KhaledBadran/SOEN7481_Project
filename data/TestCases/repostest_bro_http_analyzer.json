@@ -1,9 +1,0 @@
-{
-    "functionName": "test_bro_http_analyzer",
-    "className": "TestCase",
-    "fileName": "/IntegralDefense_&_ACE/lib_&_saq_&_modules_&_test_http.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "saq.CONFIG['analysis_mode_http']['cleanup'] = 'no'\nroot = create_root_analysis(alert_type=ANALYSIS_TYPE_BRO_HTTP,\n    analysis_mode=ANALYSIS_MODE_HTTP)\nroot.initialize_storage()\nroot.details = {}\nfor file_name in ['CZZiJd1zicZKNMMrV1.0.ready',\n    'CZZiJd1zicZKNMMrV1.0.reply', 'CZZiJd1zicZKNMMrV1.0.reply.entity',\n    'CZZiJd1zicZKNMMrV1.0.request']:\n    source_path = os.path.join('test_data', 'http_streams', file_name)\n    dest_path = os.path.join(root.storage_dir, file_name)\n    shutil.copy(source_path, dest_path)\n    root.add_observable(F_FILE, file_name)\nroot.save()\nroot.schedule()\nengine = TestEngine(analysis_pools={ANALYSIS_MODE_HTTP: 1},\n    local_analysis_modes=[ANALYSIS_MODE_HTTP])\nengine.enable_module('analysis_module_bro_http_analyzer', ANALYSIS_MODE_HTTP)\nengine.controlled_stop()\nengine.start()\nengine.wait()\nroot = RootAnalysis(storage_dir=root.storage_dir)\nroot.load()\nself.verify(root)\n"
-}

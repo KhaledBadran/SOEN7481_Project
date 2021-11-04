@@ -1,9 +1,0 @@
-{
-    "functionName": "test_recordings_resample",
-    "className": "TestGenerators",
-    "fileName": "/alejoe91_&_MEArec/MEArec_&_tests_&_test_generators.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "print('Test recording generation - resampling')\nne = 2\nni = 1\nnum_chan = self.num_chan\nn_neurons = ne + ni\nfs = 10000\nduration = 5\nrec_params = mr.get_default_recordings_params()\nrec_params['spiketrains']['n_exc'] = ne\nrec_params['spiketrains']['n_inh'] = ni\nrec_params['spiketrains']['duration'] = duration\nn_jitter = 3\nrec_params['templates']['n_jitters'] = n_jitter\nrec_params['recordings']['modulation'] = 'none'\nrec_params['recordings']['fs'] = fs\nrecgen_rs = mr.gen_recordings(params=rec_params, tempgen=self.tempgen,\n    verbose=False)\nassert recgen_rs.recordings.shape[0] == num_chan\nassert recgen_rs.recordings.shape[1] == int(duration * fs)\nassert recgen_rs.channel_positions.shape == (num_chan, 3)\nassert len(recgen_rs.spiketrains) == n_neurons\nassert len(recgen_rs.spiketrains) == n_neurons\nassert len(recgen_rs.spiketrains) == n_neurons\nassert len(recgen_rs.spike_traces) == n_neurons\ndel recgen_rs\n"
-}

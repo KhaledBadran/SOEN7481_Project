@@ -1,9 +1,0 @@
-{
-    "functionName": "test_queued_pipeline_saving",
-    "className": null,
-    "fileName": "/Neuraxio_&_Neuraxle/testing_&_test_streaming.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "p = ParallelQueuedFeatureUnion([('1', FitTransformCallbackStep()), ('2',\n    FitTransformCallbackStep()), ('3', FitTransformCallbackStep()), ('4',\n    FitTransformCallbackStep())], n_workers_per_step=1, max_queue_size=10,\n    batch_size=10)\np, outputs = p.fit_transform(list(range(100)), list(range(100)))\np.save(ExecutionContext(tmpdir))\np.apply('clear_callbacks')\nassert len(p[0].wrapped.transform_callback_function.data) == 0\nassert len(p[0].wrapped.fit_callback_function.data) == 0\nassert len(p[1].wrapped.transform_callback_function.data) == 0\nassert len(p[1].wrapped.fit_callback_function.data) == 0\nassert len(p[2].wrapped.transform_callback_function.data) == 0\nassert len(p[2].wrapped.fit_callback_function.data) == 0\nassert len(p[3].wrapped.transform_callback_function.data) == 0\nassert len(p[3].wrapped.fit_callback_function.data) == 0\np = p.load(ExecutionContext(tmpdir))\nassert len(p[0].wrapped.transform_callback_function.data) == 10\nassert len(p[0].wrapped.fit_callback_function.data) == 10\nassert len(p[1].wrapped.transform_callback_function.data) == 10\nassert len(p[1].wrapped.fit_callback_function.data) == 10\nassert len(p[2].wrapped.transform_callback_function.data) == 10\nassert len(p[2].wrapped.fit_callback_function.data) == 10\nassert len(p[3].wrapped.transform_callback_function.data) == 10\nassert len(p[3].wrapped.fit_callback_function.data) == 10\n"
-}

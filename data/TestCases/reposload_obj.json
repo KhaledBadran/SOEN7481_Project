@@ -1,9 +1,0 @@
-{
-    "functionName": "load_obj",
-    "className": "CacheTest",
-    "fileName": "/pywavefront_&_PyWavefront/tests_&_test_cache.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Helper method loading files with proper mocks\"\"\"\nif not fake_io:\n    self.fake_io = FakeIO()\nif not fake_io:\n    scene = Wavefront(filename, cache=True, create_materials=self.\n        create_materials)\nwith mock.patch('pywavefront.cache.gzip.open', new=self.fake_io):\n    with mock.patch('pywavefront.cache.open', new=self.fake_io):\n        with mock.patch('pywavefront.cache.os.path.exists', new=self.\n            fake_io.exisis):\n            if fake_io:\n                scene = Wavefront(filename, cache=True, create_materials=\n                    self.create_materials)\n            scene.parser.post_parse()\nself.meta_file = self.obj_file.with_suffix(self.obj_file.suffix + '.json')\nself.cache_file = self.obj_file.with_suffix(self.obj_file.suffix + '.bin')\nreturn scene\n"
-}

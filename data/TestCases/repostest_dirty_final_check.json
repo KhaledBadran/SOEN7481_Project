@@ -1,9 +1,0 @@
-{
-    "functionName": "test_dirty_final_check",
-    "className": null,
-    "fileName": "/132nd-etcher_&_EPAB/test_&_test_cmd_&_test_release.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ctx = mock()\nrepo = mock()\nCTX.repo = repo\nwhen(epab.utils).get_next_version().thenReturn('next_version')\nwhen(CTX.repo).is_dirty(untracked=True).thenReturn(False).thenReturn(False\n    ).thenReturn(True)\nwith pytest.raises(SystemExit):\n    epab.cmd._release._release(ctx)\nassert 'repository is dirty: last check before build' in caplog.text\n"
-}

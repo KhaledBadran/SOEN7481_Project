@@ -1,9 +1,0 @@
-{
-    "functionName": "test_googlenet_resnet_v2",
-    "className": "TestModels",
-    "fileName": "/Microsoft_&_MMdnn/mmdnn_&_conversion_&_examples_&_coreml_&_test_tfcoreml.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "url = (\n    'https://storage.googleapis.com/download.tensorflow.org/models/inception_resnet_v2_2016_08_30_frozen.pb.tar.gz'\n    )\ntf_model_dir = _download_file(url=url)\ntf_model_path = os.path.join(TMP_MODEL_DIR,\n    'inception_resnet_v2_2016_08_30_frozen.pb')\nmlmodel_path = os.path.join(TMP_MODEL_DIR,\n    'inception_resnet_v2_2016_08_30_frozen.mlmodel')\nmlmodel = tf_converter.convert(tf_model_path=tf_model_path, mlmodel_path=\n    mlmodel_path, output_feature_names=[\n    'InceptionResnetV2/Logits/Predictions:0'], input_name_shape_dict={\n    'input:0': [1, 299, 299, 3]}, image_input_names=['input:0'], red_bias=-\n    1, green_bias=-1, blue_bias=-1, image_scale=2.0 / 255.0)\nself._test_coreml_model_image_input(tf_model_path=tf_model_path,\n    coreml_model=mlmodel, input_tensor_name='input:0', output_tensor_name=\n    'InceptionResnetV2/Logits/Predictions:0', img_size=299)\n"
-}

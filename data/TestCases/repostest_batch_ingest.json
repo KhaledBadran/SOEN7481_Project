@@ -1,9 +1,0 @@
-{
-    "functionName": "test_batch_ingest",
-    "className": null,
-    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_server_&_tests_&_test_ingestion.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data_dir1 = Path(data_dir)\ndata_dir2 = Path(data_dir).parent.parent / 'ds_002' / 'raw'\nmethod = V01 + '/feature-extraction/'\ndata = app.post_check(method)\ndsid = data['id']\nmethod += dsid\nfor data_dir_k in [data_dir1, data_dir2]:\n    dd = []\n    for fname in data_dir_k.glob('*txt'):\n        if ingestion_method == 'content':\n            with fname.open('rt', encoding='utf-8') as fh:\n                dd.append({'content': fh.read()})\n        elif ingestion_method == 'file_path':\n            dd.append({'file_path': str(fname)})\n        else:\n            raise ValueError('method={} not supported'.format(ingestion_method)\n                )\n    app.post_check(method, json={'dataset_definition': dd, 'vectorize': False})\napp.post_check(method, json={'data_dir': str(data_dir1), 'vectorize': False})\napp.post_check(method, json={'vectorize': True})\ndata = app.get_check(method)\nassert len(data['filenames']) == 6 * 3\nassert data['n_samples'] == 6 * 3\npytest.mark.parametrize('ingestion_method', ['content', 'file_path'])"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_uk_calculate_data_point_zscalars",
-    "className": null,
-    "fileName": "/bsmurphy_&_PyKrige/tests_&_test_core.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data, (gridx, gridy, _), mask_ref = sample_data_2d\ndem = np.arange(0.0, 5.1, 0.1)\ndem = np.repeat(dem[(np.newaxis), :], 6, axis=0)\ndem_x = np.arange(0.0, 5.1, 0.1)\ndem_y = np.arange(0.0, 6.0, 1.0)\nwith pytest.raises(ValueError):\n    UniversalKriging(data[:, (0)], data[:, (1)], data[:, (2)],\n        variogram_model='linear', variogram_parameters=[1.0, 0.0],\n        drift_terms=['external_Z'])\nwith pytest.raises(ValueError):\n    UniversalKriging(data[:, (0)], data[:, (1)], data[:, (2)],\n        variogram_model='linear', variogram_parameters=[1.0, 0.0],\n        drift_terms=['external_Z'], external_drift=dem)\nwith pytest.raises(ValueError):\n    UniversalKriging(data[:, (0)], data[:, (1)], data[:, (2)],\n        variogram_model='linear', variogram_parameters=[1.0, 0.0],\n        drift_terms=['external_Z'], external_drift=dem, external_drift_x=\n        dem_x, external_drift_y=np.arange(0.0, 5.0, 1.0))\nuk = UniversalKriging(data[:, (0)], data[:, (1)], data[:, (2)],\n    variogram_model='linear', variogram_parameters=[1.0, 0.0], drift_terms=\n    ['external_Z'], external_drift=dem, external_drift_x=dem_x,\n    external_drift_y=dem_y)\nassert_allclose(uk.z_scalars, data[:, (0)])\nxi, yi = np.meshgrid(np.arange(0.0, 5.3, 0.1), gridy)\nwith pytest.raises(ValueError):\n    uk._calculate_data_point_zscalars(xi, yi)\nxi, yi = np.meshgrid(np.arange(0.0, 5.0, 0.1), gridy)\nz_scalars = uk._calculate_data_point_zscalars(xi, yi)\nassert_allclose(z_scalars[(0), :], np.arange(0.0, 5.0, 0.1))\n"
-}

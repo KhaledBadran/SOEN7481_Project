@@ -1,9 +1,0 @@
-{
-    "functionName": "hedgehog_server",
-    "className": null,
-    "fileName": "/PRIArobotics_&_HedgehogServer/tests_&_test_server.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "@asynccontextmanager\nasync def start_server(endpoint: str='inproc://controller', *, handler_dict:\n    handlers.HandlerCallbackDict=handler_dict):\n    async with trio_aio_loop(), zmq_trio_ctx(\n        ) as ctx, hardware_handler, trio.open_nursery() as nursery:\n        server = HedgehogServer(ctx, endpoint, handler_dict)\n        await nursery.start(server.run)\n        yield server\n        server.stop()\nreturn start_server\npytest.fixture"
-}

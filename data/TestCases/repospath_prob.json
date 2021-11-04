@@ -1,9 +1,0 @@
-{
-    "functionName": "path_prob",
-    "className": null,
-    "fileName": "/haotianteng_&_Chiron/chiron_&_chiron_eval_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Calculate the mean of the difference between highest and second highest logits in path.\n    Given the p_i = exp(logit_i)/sum_k(logit_k), we can get the quality score for the concensus sequence as:\n        qs = 10 * log_10(p1/p2) = 10 * log_10(exp(logit_1 - logit_2)) = 10 * ln(10) * (logit_1 - logit_2), \n        where p_1,logit_1 are the highest probability, logit, and p_2, logit_2 are the second highest probability logit.\n\n    Args:\n        logits (Float): Tensor of shape [batch_size, max_time,class_num], output logits.\n\n    Returns:\n        prob_logits(Float): Tensor of shape[batch_size].\n    \"\"\"\nfea_shape = tf.shape(logits)\nbsize = fea_shape[0]\nseg_len = fea_shape[1]\ntop2_logits = tf.nn.top_k(logits, k=2)[0]\nlogits_diff = tf.slice(top2_logits, [0, 0, 0], [bsize, seg_len, 1]) - tf.slice(\n    top2_logits, [0, 0, 1], [bsize, seg_len, 1])\nprob_logits = tf.reduce_mean(logits_diff, axis=-2)\nreturn prob_logits\n"
-}

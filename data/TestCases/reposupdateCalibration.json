@@ -1,9 +1,0 @@
-{
-    "functionName": "updateCalibration",
-    "className": "DataFile",
-    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_DataFile.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Update calibrations for the data file. Does not save the changes.\n        \n        Args:\n            \n            - calibrationFile (string or list): calibration file, as generated from MJOLNIR.Geometry.Instrument or list of these.\n            \n        Kwargs:\n            \n            - overwrite (bool): If true, previous binnings will be overwritten if new files contain same binning (default False)\n        \n    .. note::\n        Changes performed by this method is not saved to disk. If this is wanted, use the saveNXsqom method.      \n            \n        \"\"\"\ntry:\n    len(calibrationFile)\nexcept TypeError:\n    calibrationFile = [calibrationFile]\ncurrentBinnings = self.possibleBinnings\ncalibrations = {}\nnewBinnings = []\nfor binning in self.possibleBinnings:\n    self.loadBinning(binning)\n    calibrations[binning] = [self.instrumentCalibrationEf, self.\n        instrumentCalibrationA4, self.instrumentCalibrationEdges]\nexpress = re.compile('\\\\w*\\\\spixel')\nfor f in calibrationFile:\n    with open(f) as file:\n        line = file.readline()\n    pixel = int(express.findall(line)[0].split(' ')[0])\n    if overwrite == False and pixel in currentBinnings:\n        warnings.warn(\n            'Binning {} from file \"{}\" is skipped as overwrite is set to False.'\n            .format(pixel, f))\n        continue\n    newBinnings.append(pixel)\n    data = np.loadtxt(f, skiprows=3, delimiter=',')\n    EfTable = data[:, ([3, 4, 5, 6])]\n    A4 = data[:, (-1)]\n    bound = data[:, ([7, 8])]\n    calibrations[pixel] = [EfTable, A4, bound]\nself.instrumentCalibrations = np.array([c for c in calibrations.values()])\nself.possibleBinnings = np.array(list(calibrations.keys()))\n"
-}

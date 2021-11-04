@@ -1,9 +1,0 @@
-{
-    "functionName": "test_is_allowed_policy_object_type_mismatch",
-    "className": "TestKmipEngine",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that an access check using a policy that does not support the\n        specified object type is handled correctly.\n        \"\"\"\ne = engine.KmipEngine()\ne._logger = mock.Mock()\ne._get_enum_string = mock.Mock(return_value='Certificate')\ne.get_relevant_policy_section = mock.Mock(return_value={enums.ObjectType.\n    SYMMETRIC_KEY: {enums.Operation.GET: enums.Policy.ALLOW_OWNER}})\nresult = e.is_allowed('test_policy', 'test_user', 'test_group', 'test_user',\n    enums.ObjectType.CERTIFICATE, enums.Operation.GET)\ne._logger.warning.assert_called_once_with(\n    \"The 'test_policy' policy does not apply to Certificate objects.\")\nself.assertFalse(result)\n"
-}

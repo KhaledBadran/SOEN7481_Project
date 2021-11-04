@@ -1,9 +1,0 @@
-{
-    "functionName": "test_segmentation_measures",
-    "className": "TestsUnet",
-    "fileName": "/MarniTausen_&_Greenotyper/test_sample.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "truth_array = [[0, 0, 1, 0, 0], [0, 1, 1, 1, 0], [1, 1, 1, 1, 1], [0, 1, 1,\n    1, 0], [0, 0, 1, 0, 0]]\ntruth_array = np.array(truth_array)\nprediction_array = [[0, 0, 0, 0, 0], [0, 1, 1, 1, 0], [0, 1, 1, 1, 0], [0, \n    1, 1, 1, 0], [0, 1, 1, 1, 0]]\nprediction_array = np.array(prediction_array)\nTN, TP = 10, 10\nFN, FP = 3, 2\ntrue_precision = TP / (TP + FP)\ntrue_recall = TP / (TP + FN)\ntrue_pixel_accuracy = (TP + TN) / (TP + TN + FN + FP)\ntrue_iou = TP / (TP + FN + FP)\ntrue_dice_coefficient = 2 * TP / (TP + FN + (TP + FP))\nself.assertEqual(true_precision, self.PL._precision(truth_array,\n    prediction_array))\nself.assertEqual(true_recall, self.PL._recall(truth_array, prediction_array))\nself.assertEqual(true_pixel_accuracy, self.PL._pixel_accuracy(truth_array,\n    prediction_array))\nself.assertEqual(true_iou, self.PL._iou_score(truth_array, prediction_array))\nself.assertEqual(true_dice_coefficient, self.PL._dice_coefficient(\n    truth_array, prediction_array))\n"
-}

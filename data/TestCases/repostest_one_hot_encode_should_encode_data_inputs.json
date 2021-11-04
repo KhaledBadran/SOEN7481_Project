@@ -1,9 +1,0 @@
-{
-    "functionName": "test_one_hot_encode_should_encode_data_inputs",
-    "className": null,
-    "fileName": "/Neuraxio_&_Neuraxle/testing_&_steps_&_test_one_hot.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "one_hot_encode = OneHotEncoder(nb_columns=no_columns, name='one_hot')\ndata_shape = list(range(100, 200))[:n_dims]\ndata_inputs = np.random.randint(low=no_columns, size=data_shape)\ndata_inputs[0] = 0\ndata_inputs[1] = no_columns - 1\ndata_inputs[-2] = -1\noutputs = one_hot_encode.transform(data_inputs)\nassert outputs.shape[-1] == no_columns\nassert ((outputs == 1) | (outputs == 0)).all()\nif n_dims >= 2:\n    assert (outputs[0, ..., 0] == 1).all()\n    assert (outputs[1, ..., -1] == 1).all()\n    assert (outputs[-2, ...] == 0).all()\npytest.mark.parametrize('n_dims', [1, 2, 3])pytest.mark.parametrize('no_columns', [10])"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_source_subdir_data",
-    "className": "TestSync",
-    "fileName": "/DusanMadar_&_PySyncDroid/tests_&_test_sync.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test 'get_source_subdir_data' populates 'src_dir_fls' with collected\n        data.\n        \"\"\"\nmock_handle_ignored_file_type.side_effect = [None, IgnoredTypeException, None]\nsrc_subdir_files = ['song.mp3', 'cover.jpg', 'demo.mp3']\nsync = Sync(FAKE_MTP_DETAILS, '/tmp', 'Card/Music')\nsync.set_source_abs()\nsync.set_destination_abs()\nsync_data = self._create_empty_sync_data(sync)\nsync.get_source_subdir_data(src_subdir_files, sync_data)\nself.assertEqual(sync_data['src_dir_fls'], ['/tmp/testdir/song.mp3',\n    '/tmp/testdir/demo.mp3'])\npatch.object(pysyncdroid.sync.Sync, 'handle_ignored_file_type')"
-}

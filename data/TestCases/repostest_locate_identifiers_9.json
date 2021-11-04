@@ -1,9 +1,0 @@
-{
-    "functionName": "test_locate_identifiers_9",
-    "className": "AstParseTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_ast.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "code = \"\"\"\n    \",\".join([t for t in (\"a\", \"b\", \"c\")])\n\"\"\"\nparsed = ast.PythonCode(code, **exception_kwargs)\neq_(parsed.declared_identifiers, set(['t']))\neq_(parsed.undeclared_identifiers, set(['t']))\ncode = \"\"\"\n    [(val, name) for val, name in x]\n\"\"\"\nparsed = ast.PythonCode(code, **exception_kwargs)\neq_(parsed.declared_identifiers, set(['val', 'name']))\neq_(parsed.undeclared_identifiers, set(['val', 'name', 'x']))\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_texture_measure",
-    "className": null,
-    "fileName": "/NPann_&_GenTex/tests_&_test_texture_measure.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "texm = ['CM Entropy', 'EM Entropy', 'Statistical Complexity',\n    'Energy Uniformity', 'Maximum Probability', 'Contrast',\n    'Inverse Difference Moment', 'Correlation', 'Probability of Run Length',\n    'Epsilon Machine Run Length', 'Run Length Asymmetry', 'Homogeneity',\n    'Cluster Tendency', 'Multifractal Spectrum Energy Range',\n    'Multifractal Spectrum Entropy Range']\nim = imageio.imread(FIXTURE_DIR / 'test_image.png')\nmask = np.where(im > 0, 1, 0)\nbox_indices = gentex.template.Template('RectBox', [7, 7, 7], 2, False).offsets\nlevels = 4\nfe = gentex.features.Features([im], mask, box_indices)\nfe.clusfs(numclus=levels)\ncomat = gentex.comat.comat_mult(fe.clusim, mask, box_indices, levels=levels)\nmytex = gentex.texmeas.Texmeas(comat)\nmytex.coordmom = 2\nmytex.probmom = 2\nmytex.clusmom = 2\nmytex.rllen = 0.1\nfor meas in texm:\n    mytex.calc_measure(meas)\n    print('\\t', meas, '= ', mytex.val)\n"
-}

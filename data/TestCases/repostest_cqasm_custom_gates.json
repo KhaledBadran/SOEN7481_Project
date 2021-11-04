@@ -1,9 +1,0 @@
-{
-    "functionName": "test_cqasm_custom_gates",
-    "className": "Test_cqasm",
-    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_cqasm.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.setUpClass()\nql.set_option('use_default_gates', 'no')\nnqubits = 4\nk = ql.Kernel('aKernel', platf, nqubits)\nk.gate('prep_z', [0])\nk.gate('i', [0])\nk.gate('h', [0])\nk.gate('x', [0])\nk.gate('y', [0])\nk.gate('z', [0])\nk.gate('x90', [0])\nk.gate('y90', [0])\nk.gate('mx90', [0])\nk.gate('my90', [0])\nk.gate('s', [0])\nk.gate('sdag', [0])\nk.gate('t', [0])\nk.gate('tdag', [0])\nk.gate('rx', [0], 0, 0.15)\nk.gate('ry', [0], 0, 0.15)\nk.gate('rz', [0], 0, 0.15)\nk.gate('cnot', [0, 1])\nk.gate('cz', [0, 1])\nk.gate('toffoli', [0, 1, 2])\nk.gate('swap', [0, 1])\nk.gate('measure', [0])\nk.gate('measure', [1])\nsweep_points = [2]\np = ql.Program('test_cqasm_custom_gates', platf, nqubits)\np.set_sweep_points(sweep_points)\np.add_kernel(k)\np.compile()\nqasm_files = []\nqasm_files.append(os.path.join(output_dir, p.name +\n    '_initialqasmwriter_out.qasm'))\nqasm_files.append(os.path.join(output_dir, p.name +\n    '_scheduledqasmwriter_out.qasm'))\nfor qasm_file in qasm_files:\n    print('assembling: {}'.format(qasm_file))\n    assemble(qasm_file)\n"
-}

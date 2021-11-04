@@ -1,9 +1,0 @@
-{
-    "functionName": "test_expand_home_in_path",
-    "className": "TestLoadHierarchy",
-    "fileName": "/FlorianKempenich_&_Hierarchy/tests_&_hierarchy_&_test_loader.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "tmp_file.write_text(\n    \"\"\"\n        repos:\n          - url: 'git@github.com:FlorianKempenich/Hierarchy.git'\n            path: '~/this/is/a/path/with/home/symbol'\n        \"\"\"\n    )\nexpanduser.return_value = 'EXPECTED_PATH'\nrepos = loader.load_from_file(tmp_file)\nexpanduser.assert_called_with('~/this/is/a/path/with/home/symbol')\nassert repos[0].path == Path('EXPECTED_PATH/Hierarchy')\npatch('os.path.expanduser')"
-}

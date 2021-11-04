@@ -1,9 +1,0 @@
-{
-    "functionName": "test_team_change_member_role",
-    "className": "TeamTest",
-    "fileName": "/cmsteffen-code_&_PyKBLib/tests_&_test_pykblib_team.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "old_role = random_role()\nnew_role = random_role()\nwhile new_role == old_role:\n    new_role = random_role()\nusername = random_username()\nmember_dict = self.team.members_by_role._asdict()\nmember_dict[old_role].add(username)\nself.team.members_by_role = dict_to_ntuple(member_dict)\nself.team.name = random_username()\nquery = {'method': 'edit-member', 'params': {'options': {'team': self.team.\n    name, 'username': username, 'role': new_role}}}\nself.team.change_member_role(username, new_role)\nself.team._api.call_api.assert_called_with('team', query)\nmember_dict = self.team.members_by_role._asdict()\nself.assertIn(username, member_dict[new_role])\nself.assertNotIn(username, member_dict[old_role])\nself.team._api.call_api.side_effect = APIException('EXCEPTION')\nwith self.assertRaises(TeamException):\n    self.team.change_member_role(username, new_role)\n"
-}

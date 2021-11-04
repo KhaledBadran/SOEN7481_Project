@@ -1,9 +1,0 @@
-{
-    "functionName": "test_create_volume_from_storage_group_return_dev_id",
-    "className": "PyU4VProvisioningTest",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test create_volume_from_storage_group_return_dev_id.\"\"\"\nstorage_group_name = self.data.storagegroup_name_1\njob = {'status': 'SUCCEEDED', 'jobId': '12345', 'result': 'created',\n    'resourceLink': 'storagegroup/%s' % storage_group_name, 'description':\n    'Creating new Volumes for MY-SG : [00001]'}\nwith mock.patch.object(self.provisioning, 'add_new_volume_to_storage_group',\n    return_value=job):\n    with mock.patch.object(self.provisioning, 'get_volume_list',\n        return_value=['00001']):\n        device_id = self.provisioning.create_volume_from_sg_return_dev_id(\n            'volume_name', storage_group_name, '2')\n        self.assertEqual(self.data.device_id, device_id)\n"
-}

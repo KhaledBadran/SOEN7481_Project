@@ -1,9 +1,0 @@
-{
-    "functionName": "test_can_publish_requires_recipients",
-    "className": null,
-    "fileName": "/PearsonEducation_&_Alarmageddon/tests_&_publishing_&_test_emailer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "email_pub = create_default_email_publisher(tmpdir, smtpserver)\nhttp_validator = HttpValidation.get(httpserver.url).expect_status_codes([200])\nemail_settings = {'email_type': 'test_alert', 'subject':\n    'subject test line', 'body': 'body test', 'sender': {'real_name':\n    'Alarmageddon Monitor', 'address': 'noreply@alarmageddon.com'},\n    'recipients': [{'real_name': 'Test Recipient', 'address':\n    'testrecipient@alarmageddon.com'}]}\nemailer.enrich(http_validator, email_settings)\ntemp_pub = EmailPublisher({'fake': 'config'})\ndata = http_validator.get_enriched(temp_pub)\nmonkeypatch.delitem(data['email_settings'], 'recipients')\nresult = Success('validation name', http_validator)\nassert email_pub._can_publish(result) is False\n"
-}

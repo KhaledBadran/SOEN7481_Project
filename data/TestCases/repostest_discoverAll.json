@@ -1,9 +1,0 @@
-{
-    "functionName": "test_discoverAll",
-    "className": "FindMachinesIntegrationTests",
-    "fileName": "/glyph_&_Automat/automat_&__test_&_test_discover.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Given a top-level package FQPN, L{findMachines} discovers all\n        L{MethodicalMachine} instances in and below it.\n        \"\"\"\nmachines = sorted(self.findMachines('test_package'), key=operator.itemgetter(0)\n    )\ntpRootLevel = self.packageDict['test_package.rootLevel'].load()\ntpPythonClass = self.packageDict['test_package.PythonClass'].load()\nmRLAttr = self.moduleDict['test_package.subpackage.module.rootLevel']\nmRootLevel = mRLAttr.load()\nmPCAttr = self.moduleDict['test_package.subpackage.module.PythonClass']\nmPythonClass = mPCAttr.load()\nexpectedMachines = sorted([('test_package.rootLevel', tpRootLevel), (\n    'test_package.PythonClass._machine', tpPythonClass._machine), (\n    'test_package.subpackage.module.rootLevel', mRootLevel), (\n    'test_package.subpackage.module.PythonClass._machine', mPythonClass.\n    _machine)], key=operator.itemgetter(0))\nself.assertEqual(expectedMachines, machines)\n"
-}

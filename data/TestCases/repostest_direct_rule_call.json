@@ -1,9 +1,0 @@
-{
-    "functionName": "test_direct_rule_call",
-    "className": null,
-    "fileName": "/textX_&_Arpeggio/arpeggio_&_tests_&_regressions_&_test_direct_rule_call.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test regression where in direct rule call semantic action is\n    erroneously attached to both caller and callee.\n    \"\"\"\ndef grammar():\n    return rule1, rule2\ndef rule1():\n    return 'a'\ndef rule2():\n    return rule1\ncall_count = [0]\nclass DummySemAction(SemanticAction):\n\n    def first_pass(self, parser, node, nodes):\n        call_count[0] += 1\n        return SemanticAction.first_pass(self, parser, node, nodes)\nrule2.sem = DummySemAction()\nparser = ParserPython(grammar)\nparse_tree = parser.parse('aa')\nparser.getASG()\nassert call_count[0] == 1, 'Semantic action should be called once!'\n"
-}

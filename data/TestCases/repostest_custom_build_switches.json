@@ -1,9 +1,0 @@
-{
-    "functionName": "test_custom_build_switches",
-    "className": null,
-    "fileName": "/Pebaz_&_Nimporter/tests_&_test_build.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test to make sure custom build switches can be used\"\"\"\nswitch_file = Path('tests/lib2/switches.py')\nscope = dict(MODULE_PATH=Path('foo/bar/baz.nim'), BUILD_ARTIFACT=Path(\n    'foo/bar/__pycache__/baz.' + NimCompiler.EXT), BUILD_DIR=None,\n    IS_LIBRARY=False)\nswitches = NimCompiler.get_switches(switch_file, **scope)\nold_import = switches['import'][:]\nold_bundle = switches['bundle'][:]\nassert switches\nassert old_import\nassert old_bundle\nold_platform = sys.platform + ''\nsys.platform = 'darwin' if sys.platform == 'win32' else 'win32'\ntry:\n    switches = NimCompiler.get_switches(switch_file, **scope)\n    assert switches\n    assert old_import\n    assert old_bundle\n    assert old_import != switches['import']\n    assert old_bundle != switches['bundle']\nfinally:\n    sys.platform = old_platform\n"
-}

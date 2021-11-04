@@ -1,9 +1,0 @@
-{
-    "functionName": "_enqueue_update",
-    "className": "HardwareAdapter",
-    "fileName": "/PRIArobotics_&_HedgehogServer/hedgehog_&_server_&_hardware_&___init__.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        Adds an update from the hardware to a queue.\n        This is normally done from inside the hardware adapter itself.\n        The updates can be retrieved from `self.updates`.\n\n        If the queue is full, the oldest update in the queue is discarded,\n        so it is (relatively) safe to ignore the queue when no hardware updates are needed.\n        \"\"\"\ntry:\n    self._updates_in.send_nowait(update)\nexcept trio.WouldBlock:\n    try:\n        self._updates_out.receive_nowait()\n    except trio.WouldBlock:\n        assert False\n    try:\n        self._updates_in.send_nowait(update)\n    except trio.WouldBlock:\n        assert False\n"
-}

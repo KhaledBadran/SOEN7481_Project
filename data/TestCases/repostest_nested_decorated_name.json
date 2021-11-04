@@ -1,9 +1,0 @@
-{
-    "functionName": "test_nested_decorated_name",
-    "className": "DecoratorTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_decorators.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "template = Template(\n    \"\"\"\n            <%!\n                def bat(fn):\n                    def decorate(context):\n                        return \"function \" + fn.__name__ + \" \" + runtime.capture(context, fn)\n                    return decorate\n            %>\n\n            <%def name=\"foo()\">\n\n                <%def name=\"bar()\" decorator=\"bat\">\n                    this is bar\n                </%def>\n                ${bar()}\n            </%def>\n\n            ${foo()}\n        \"\"\"\n    )\nassert flatten_result(template.render()) == 'function bar this is bar'\n"
-}

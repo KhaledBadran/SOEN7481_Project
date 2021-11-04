@@ -1,9 +1,0 @@
-{
-    "functionName": "test_Powder",
-    "className": null,
-    "fileName": "/jakob-lass_&_MJOLNIR/TutorialsDepricated_&_Powder.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "import matplotlib.pyplot as plt\nfile = 'Data/camea2018n000137.hdf'\nDataObj = DataSet.DataSet(dataFiles=file)\nDataObj.convertDataFile()\nI = DataObj.I\nqx = DataObj.qx\nqy = DataObj.qy\nenergy = DataObj.energy\nNorm = DataObj.Norm\nMonitor = DataObj.Monitor\nEBinEdges = _tools.binEdges(energy, tolerance=0.125)\nax, Data, qbins = DataObj.plotCutPowder(EBinEdges, qMinBin=0.05)\nplt.colorbar(ax.pmeshs[0])\nax2, Data2, qbins2 = DataSet.plotCutPowder([qx, qy, energy], I, Norm,\n    Monitor, EBinEdges, qMinBin=0.05)\nplt.colorbar(ax2.pmeshs[0])\nData3, qbins3 = DataObj.cutPowder(EBinEdges)\nax2.set_clim(0, 0.01)\nif show:\n    plt.show()\nelif os.path.exists('Data/camea2018n000137.nxs'):\n    os.remove('Data/camea2018n000137.nxs')\n"
-}

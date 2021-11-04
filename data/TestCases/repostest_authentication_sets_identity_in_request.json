@@ -1,9 +1,0 @@
-{
-    "functionName": "test_authentication_sets_identity_in_request",
-    "className": null,
-    "fileName": "/RobertoPrevato_&_BlackSheep/tests_&_test_auth.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "app = FakeApplication()\napp.use_authentication().add(MockAuthHandler())\nidentity = None\n@app.router.get(b'/')\nasync def home(request):\n    nonlocal identity\n    identity = request.identity\n    return None\napp.prepare()\nawait app(get_example_scope('GET', '/'), MockReceive(), MockSend())\nassert app.response.status == 204\nassert identity is not None\nassert identity['id'] == '001'\nassert identity['name'] == 'Charlie Brown'\npytest.mark.asyncio"
-}

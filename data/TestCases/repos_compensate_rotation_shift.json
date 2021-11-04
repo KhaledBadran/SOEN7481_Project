@@ -1,9 +1,0 @@
-{
-    "functionName": "_compensate_rotation_shift",
-    "className": "RotatedBox",
-    "fileName": "/konstantint_&_PassportEye/passporteye_&_util_&_geometry.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"This is an auxiliary method used by extract_from_image.\n        It is needed due to particular specifics of the skimage.transform.rotate implementation.\n        Namely, when you use rotate(... , resize=True), the rotated image is rotated and shifted by certain amount.\n        Thus when we need to cut out the box from the image, we need to account for this shift.\n        We do this by repeating the computation from skimage.transform.rotate here.\n\n        TODO: This makes the code uncomfortably coupled to SKImage (e.g. this logic is appropriate for skimage 0.12.1, but not for 0.11,\n        and no one knows what happens in later versions). A solution would be to use skimage.transform.warp with custom settings, but we can think of it later.\n        \"\"\"\nctr = np.asarray([self.center[1] * scale, self.center[0] * scale])\ntform1 = transform.SimilarityTransform(translation=ctr)\ntform2 = transform.SimilarityTransform(rotation=np.pi / 2 - self.angle)\ntform3 = transform.SimilarityTransform(translation=-ctr)\ntform = tform3 + tform2 + tform1\nrows, cols = img.shape[0], img.shape[1]\ncorners = np.array([[0, 0], [0, rows - 1], [cols - 1, rows - 1], [cols - 1, 0]]\n    )\ncorners = tform.inverse(corners)\nminc = corners[:, (0)].min()\nminr = corners[:, (1)].min()\nmaxc = corners[:, (0)].max()\nmaxr = corners[:, (1)].max()\nout_rows = maxr - minr + 1\nout_cols = maxc - minc + 1\nreturn (cols - out_cols) / 2.0, (rows - out_rows) / 2.0\n"
-}

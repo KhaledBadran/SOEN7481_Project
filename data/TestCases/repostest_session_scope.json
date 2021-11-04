@@ -1,9 +1,0 @@
-{
-    "functionName": "test_session_scope",
-    "className": "TestWeather",
-    "fileName": "/lukeWaninger_&_GSCAP/tests_&_test_weather.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "hwr = wthr.HourlyWeatherReport(lat=self.lat, lon=self.lon, date=self.day,\n    time=self.day.time())\nwith wthr.session_scope(self.wcname) as session:\n    self.assertTrue(os.path.exists(self.wcname.replace(\n        'sqlite+pysqlite:///', '')))\n    self.assertTrue(isinstance(session, Session))\n    session.add(hwr)\nt = self.session.query(wthr.HourlyWeatherReport).all()\nself.assertTrue(len(t) == 1)\nwith wthr.session_scope(self.wcname) as session:\n    session.add(hwr)\n    session.add(hwr)\nt = self.session.query(wthr.HourlyWeatherReport).all()\nself.assertTrue(len(t) == 1)\n"
-}

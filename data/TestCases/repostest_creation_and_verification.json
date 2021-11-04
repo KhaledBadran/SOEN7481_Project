@@ -1,9 +1,0 @@
-{
-    "functionName": "test_creation_and_verification",
-    "className": "IntegrationTest",
-    "fileName": "/BMeu_&_EasyJWT/tests_&_integration_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n            Test that the creation of tokens succeeds and the created token can be verified, but only with the correct\n            class.\n\n            Expected Result: No errors are raised; the created token is returned.\n        \"\"\"\nself.assertTrue(AccountDeletionToken.strict_verification)\nself.assertTrue(AccountValidationToken.strict_verification)\nvalidation_token_object = AccountValidationToken(self.key)\nself.assertIsNotNone(validation_token_object)\nwith self.assertRaises(MissingRequiredClaimsError):\n    validation_token = validation_token_object.create()\n    self.assertIsNone(validation_token)\nvalidation_token_object.user_id = self.user_id\nvalidation_token = validation_token_object.create()\nself.assertIsNotNone(validation_token)\nverified_token_object = AccountValidationToken.verify(validation_token,\n    self.key)\nself.assertIsNotNone(verified_token_object)\nself.assertEqual(self.user_id, verified_token_object.user_id)\nwith self.assertRaises(InvalidClassError):\n    verified_token_object = AccountDeletionToken.verify(validation_token,\n        self.key)\n    self.assertIsNone(verified_token_object)\n"
-}

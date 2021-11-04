@@ -1,9 +1,0 @@
-{
-    "functionName": "find_pore_hulls",
-    "className": "DelaunayVoronoiDual",
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_network_&_DelaunayVoronoiDual.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        Finds the indices of the Voronoi nodes that define the convex hull\n        around the given Delaunay nodes.\n\n        Parameters\n        ----------\n        pores : array_like\n            The pores whose convex hull are sought.  The given pores should be\n            from the 'delaunay' network.  If no pores are given, then the hull\n            is found for all 'delaunay' pores.\n\n        Notes\n        -----\n        This metod is not fully optimized as it scans through each pore in a\n        for-loop, so could be slow for large networks.\n        \"\"\"\nif pores is None:\n    pores = self.pores('delaunay')\ntemp = []\ntvals = self['throat.interconnect'].astype(int)\nam = self.create_adjacency_matrix(weights=tvals, fmt='lil', drop_zeros=True)\nfor p in pores:\n    Ps = am.rows[p]\n    temp.append(Ps)\nreturn np.array(temp, dtype=object)\n"
-}

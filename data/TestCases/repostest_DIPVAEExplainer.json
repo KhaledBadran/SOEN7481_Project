@@ -1,9 +1,0 @@
-{
-    "functionName": "test_DIPVAEExplainer",
-    "className": "TestDIPVAEExplainer",
-    "fileName": "/IBM_&_AIX360/tests_&_dipvae_&_test_DIPVAE.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "dataset_obj = FakeFMnistDataset()\nself.assertIsNotNone(dataset_obj)\ncuda_available = torch.cuda.is_available()\ndipvaeii_args = argparse.Namespace()\ndipvaeii_args.model = 'dipvae-ii'\ndipvaeii_args.activation_type = 'relu'\ndipvaeii_args.num_nodes = 1200\ndipvaeii_args.latent_dim = 10\ndipvaeii_args.num_gen_layers = 3\ndipvaeii_args.num_inference_layers = 2\ndipvaeii_args.step_size = 0.001\ndipvaeii_args.lambda_diag_factor = 10.0\ndipvaeii_args.lambda_offdiag = 0.001\ndipvaeii_args.seed = 0\ndipvaeii_args.num_epochs = 2\ndipvaeii_explainer = DIPVAEExplainer(model_args=dipvaeii_args, dataset=\n    dataset_obj, cuda_available=cuda_available)\nloss_epoch_list = dipvaeii_explainer.fit()\nfor x, _ in dataset_obj.next_test_batch():\n    input_images = x.squeeze().view(-1, np.prod(dataset_obj.data_dims))\n    break\nconvert_and_reshape = lambda x: x.cpu().data.numpy().reshape([-1] +\n    dataset_obj.data_dims)\nedited_images = dipvaeii_explainer.explain(input_images=input_images,\n    edit_dim_id=0, edit_dim_value=-1.0, edit_z_sample=True)\nself.assertGreater(np.linalg.norm(np.abs(convert_and_reshape(input_images) -\n    convert_and_reshape(edited_images))), 0.0)\n"
-}

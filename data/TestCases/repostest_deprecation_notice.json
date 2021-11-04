@@ -1,9 +1,0 @@
-{
-    "functionName": "test_deprecation_notice",
-    "className": "CITestUtils",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test deprecation_notice.\"\"\"\nif self.skip_config_ci:\n    self.skipTest(reason=\n        'PyU4V.conf not in ~/.PyU4V/, cannot determine log file location.')\nc_name, f_name = 'test_class', '_my_test_func'\nstart_ver, end_ver = 10, 13\n@decorators.deprecation_notice(c_name, start_ver, end_ver)\ndef _my_test_func():\n    pass\nc_date = time.strftime('%Y-%m-%d')\nc_time = time.strftime('%H:%M')\nreg_time = '\\\\A' + c_date + '\\\\s' + c_time + ':\\\\d{2},\\\\d{3}\\\\s-\\\\s'\nreg_lvl = 'PyU4V\\\\.action\\\\_required\\\\s-\\\\sWARNING\\\\s-\\\\s'\nreg_msg = c_name + '\\\\.' + f_name + '[\\\\w\\\\s]{31}' + str(end_ver\n    ) + '\\\\.[\\\\w\\\\s]{46}' + str(start_ver) + '[\\\\w\\\\s]{14}\\\\.$'\ntime_re_search = re.compile(reg_time + reg_lvl + reg_msg)\n_my_test_func()\nlog_args = self.cfg.get('handler_fileHandler', 'args').split(',')\nlog_path = log_args[0][2:].strip(\"'\")\nwith open(log_path, newline='') as log_file:\n    log_lines = log_file.read().splitlines()\n    last_lines = log_lines[-10:]\n    match = False\n    for line in last_lines:\n        if bool(time_re_search.match(line)):\n            match = True\n    self.assertTrue(match)\n"
-}

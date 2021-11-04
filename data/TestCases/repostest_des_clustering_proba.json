@@ -1,9 +1,0 @@
-{
-    "functionName": "test_des_clustering_proba",
-    "className": null,
-    "fileName": "/Menelau_&_DESlib/deslib_&_tests_&_test_des_integration.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from sklearn.cluster import KMeans\npool_classifiers, X_dsel, y_dsel, X_test, y_test = setup_classifiers()\nrng = np.random.RandomState(123456)\ncluster = KMeans(n_clusters=5, random_state=rng)\ndes_clustering = DESClustering(pool_classifiers, clustering=cluster)\ndes_clustering.fit(X_dsel, y_dsel)\nprobas = des_clustering.predict_proba(X_test)\nexpected = np.load(\n    'deslib/tests/expected_values/des_clustering_proba_integration.npy')\nassert np.allclose(probas, expected)\n"
-}

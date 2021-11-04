@@ -1,9 +1,0 @@
-{
-    "functionName": "test_keybase_team",
-    "className": "KeybaseTest",
-    "fileName": "/cmsteffen-code_&_PyKBLib/tests_&_test_pykblib_keybase.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "mock_team.side_effect = TeamException('Some words.')\nwith self.assertRaises(KeybaseException):\n    self.keybase.team('team_name')\nmock_team.assert_called_with('team_name', self.keybase)\nmock_team.side_effect = None\nteam = mock.MagicMock()\nteam.name = 'team_name2'\nmock_team.return_value = team\nnew_team = self.keybase.team('team_name2')\nmock_team.assert_called_with('team_name2', self.keybase)\nself.assertEqual(new_team, team)\nself.assertEqual(self.keybase._active_teams['team_name2'], team)\nmock.patch('pykblib.keybase.Team')"
-}

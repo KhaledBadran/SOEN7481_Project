@@ -1,9 +1,0 @@
-{
-    "functionName": "test_expval",
-    "className": "ExpvalAndPreExpvalMock",
-    "fileName": "/XanaduAI_&_PennyLane-PQ/tests_&_test_ibm_expval_and_pre_expval_mock.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "dev = ProjectQIBMBackend(wires=2, use_hardware=False, num_runs=8 * 1024,\n    token=token, verbose=True)\ndev._eng = MagicMock()\ndev._eng.backend = MagicMock()\ndev._eng.backend.get_probabilities = MagicMock()\ndev._eng.backend.get_probabilities.return_value = {'00': 0.1, '01': 0.3,\n    '10': 0.2, '11': 0.4}\nself.assertAlmostEqual(dev.expval('PauliZ', wires=Wires([0]), par=list()), \n    -0.2, delta=self.tol)\nself.assertAlmostEqual(dev.expval('Identity', wires=Wires([0]), par=list()),\n    1.0, delta=self.tol)\nself.assertRaises(NotImplementedError, dev.expval, 'Hermitian', wires=Wires\n    ([0]), par=list())\n"
-}

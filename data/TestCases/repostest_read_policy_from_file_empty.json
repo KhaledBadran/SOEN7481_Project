@@ -1,9 +1,0 @@
-{
-    "functionName": "test_read_policy_from_file_empty",
-    "className": "TestPolicy",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_test_policy.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that reading an empty policy file generates the right error.\n        \"\"\"\npolicy_file = tempfile.NamedTemporaryFile(dir=self.temp_dir, delete=False)\nwith open(policy_file.name, 'w') as f:\n    f.write('')\nargs = policy_file.name,\nregex = \"Loading the policy file '{}' generated a JSON error:\".format(\n    policy_file.name)\nself.assertRaisesRegex(ValueError, regex, policy.read_policy_from_file, *args)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_nan_handle",
-    "className": "TestSklearn",
-    "fileName": "/microsoft_&_LightGBM/tests_&_python_package_test_&_test_sklearn.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "nrows = 100\nncols = 10\nX = np.random.randn(nrows, ncols)\ny = np.random.randn(nrows) + np.full(nrows, 1e+30)\nweight = np.zeros(nrows)\nparams = {'n_estimators': 20, 'verbose': -1}\nparams_fit = {'X': X, 'y': y, 'sample_weight': weight, 'eval_set': (X, y),\n    'verbose': False, 'early_stopping_rounds': 5}\ngbm = lgb.LGBMRegressor(**params).fit(**params_fit)\nnp.testing.assert_allclose(gbm.evals_result_['training']['l2'], np.nan)\n"
-}

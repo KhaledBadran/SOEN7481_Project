@@ -1,9 +1,0 @@
-{
-    "functionName": "test_inputOutputMismatch",
-    "className": "MethodicalTests",
-    "fileName": "/glyph_&_Automat/automat_&__test_&_test_methodical.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        All the argument lists of the outputs for a given input must match; if\n        one does not the call to C{upon} will raise a C{TypeError}.\n        \"\"\"\nclass Mechanism(object):\n    m = MethodicalMachine()\n\n    @m.input()\n    def nameOfInput(self, a):\n        \"\"\"an input\"\"\"\n\n    @m.output()\n    def outputThatMatches(self, a):\n        \"\"\"an output that matches\"\"\"\n\n    @m.output()\n    def outputThatDoesntMatch(self, b):\n        \"\"\"an output that doesn't match\"\"\"\n\n    @m.state()\n    def state(self):\n        \"\"\"a state\"\"\"\n    with self.assertRaises(TypeError) as cm:\n        state.upon(nameOfInput, state, [outputThatMatches,\n            outputThatDoesntMatch])\n    self.assertIn('nameOfInput', str(cm.exception))\n    self.assertIn('outputThatDoesntMatch', str(cm.exception))\n"
-}

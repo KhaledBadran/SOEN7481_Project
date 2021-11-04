@@ -1,9 +1,0 @@
-{
-    "functionName": "test_user_agent",
-    "className": null,
-    "fileName": "/Manishearth_&_ChatExchange/tests_&_test_browser.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Tests that HTTP requests made from a Browser use the intended\n    User-Agent.\n\n    WebSocket connections are not tested.\n    \"\"\"\ngood_requests = []\n@httmock.all_requests\ndef verify_user_agent(url, request):\n    assert request.headers['user-agent'] == Browser.user_agent\n    good_requests.append(request)\n    return '<!doctype html><html><head><title>Hello<body>World'\nwith only_httmock(verify_user_agent):\n    browser = Browser()\n    browser.get_soup('http://example.com/', with_chat_root=False)\n    browser.get_soup('http://example.com/2', with_chat_root=False)\n    assert len(good_requests) == 2, 'Unexpected number of requests'\n"
-}

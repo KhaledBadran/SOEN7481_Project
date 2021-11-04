@@ -1,9 +1,0 @@
-{
-    "functionName": "test_static_loads_policy",
-    "className": "StaticTestCase",
-    "fileName": "/daymien_&_Flask-Casbin/tests_&_test_acl.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "app = Flask(__name__)\napp.config.update(CASBIN_MODEL_CONF='./tests/model.conf')\napp.static_url_path = '/static'\napp.secret_key = 'this is a temp key'\ncm = CasbinManager()\ncm.init_app(app)\n@cm.policy_loader\ndef load():\n    with open('./tests/policy.csv', 'rb') as fd:\n        return IOAdapter(io.BytesIO(fd.read()))\nwith app.test_client() as c:\n    c.get('/static')\n    self.assertIsNotNone(current_enforcer)\n    assert current_enforcer.enforce('user:alice', 'data:1', 'read') is True\n"
-}

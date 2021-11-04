@@ -1,9 +1,0 @@
-{
-    "functionName": "getScanParameter",
-    "className": null,
-    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_DataFile.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Extract scan parameter from hdf file.\n\n    Args:\n\n        - f (hdf): Open HDF5 file object from which parameters are extracted.\n\n    \"\"\"\nif f.get('/entry/data') is None:\n    return [], [], []\nscanParameters = []\nscanValues = []\nscanUnits = []\nscanDataPosition = []\nfor item in f.get('/entry/data/'):\n    if not item in ['counts', 'summed_counts', 'en', 'h', 'intensity', 'k',\n        'l', 'monitor', 'normalization', 'qx', 'qy'] and item[-4:] != 'zero':\n        scanParameters.append(item)\n        fItem = f.get('/entry/data/{}'.format(item))\n        scanUnits.append(decodeStr(fItem.attrs['units']))\n        scanValues.append(np.array(fItem))\n        try:\n            scanDataPosition.append(decodeStr(fItem.attrs['target']))\n        except:\n            pass\nreturn scanParameters, np.array(scanValues), scanUnits, scanDataPosition\n_tools.KwargChecker()"
-}

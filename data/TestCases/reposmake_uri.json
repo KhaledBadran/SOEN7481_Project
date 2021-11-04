@@ -1,9 +1,0 @@
-{
-    "functionName": "make_uri",
-    "className": null,
-    "fileName": "/opentargets_&_OnToma/ontoma_&_interface.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Transform a short form ontology code in a full URI.\n    Currently works for EFO, HPO, ORDO and MP.\n\n    Args:\n        ontology_short_form: An ontology code in the short format, like 'EFO:0000270'.\n                             The function won't break if a valid URI is passed.\n\n    Returns:\n        A full URI. Raises a `ValueError` if the short form code was not\n        one of the supported ones.\n\n    Example:\n        >>> make_uri('EFO:0000270')\n        'http://www.ebi.ac.uk/efo/EFO_0000270'\n\n        >>> make_uri('HP_0000270')\n        'http://purl.obolibrary.org/obo/HP_0000270'\n\n        >>> make_uri('http://purl.obolibrary.org/obo/HP_0000270')\n        'http://purl.obolibrary.org/obo/HP_0000270'\n\n        >>> make_uri('TEST_0000270')\n        Traceback (most recent call last):\n            ...\n        ValueError: Could not build an URI. Short form: TEST_0000270 not recognized\n    \"\"\"\nif ontology_short_form is None:\n    return None\nif ontology_short_form.startswith('http'):\n    return ontology_short_form\nontology_code = ontology_short_form.replace(':', '_')\nif ontology_code.startswith('EFO'):\n    return 'http://www.ebi.ac.uk/efo/' + ontology_code\nelif ontology_code.startswith('HP') or ontology_code.startswith('MP'\n    ) or ontology_code.startswith('MONDO') or ontology_code.startswith('UBERON'\n    ):\n    return 'http://purl.obolibrary.org/obo/' + ontology_code\nelif ontology_code.startswith('Orphanet'):\n    return 'http://www.orpha.net/ORDO/' + ontology_code\nelse:\n    raise ValueError('Could not build an URI. Short form: {} not recognized'\n        .format(ontology_code))\n"
-}

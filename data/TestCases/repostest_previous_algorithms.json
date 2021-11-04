@@ -1,9 +1,0 @@
-{
-    "functionName": "test_previous_algorithms",
-    "className": "IntegrationTest",
-    "fileName": "/BMeu_&_EasyJWT/tests_&_integration_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n            Test that tokens can be verified, even if the encoding algorithm has changed.\n\n            Expected Result: The verification succeeds.\n        \"\"\"\nAccountValidationToken.algorithm = Algorithm.HS256\ntoken_object = AccountValidationToken(self.key)\ntoken_object.user_id = self.user_id\ntoken = token_object.create()\nAccountValidationToken.algorithm = Algorithm.HS512\nwith self.assertRaises(UnsupportedAlgorithmError):\n    verified_token_object = AccountValidationToken.verify(token, self.key)\n    self.assertIsNone(verified_token_object)\nAccountValidationToken.previous_algorithms = {Algorithm.HS256}\nverified_token_object = AccountValidationToken.verify(token, self.key)\nself.assertIsNotNone(verified_token_object)\nself.assertEqual(self.user_id, verified_token_object.user_id)\n"
-}

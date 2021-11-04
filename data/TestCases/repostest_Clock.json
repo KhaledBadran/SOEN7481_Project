@@ -1,9 +1,0 @@
-{
-    "functionName": "test_clock",
-    "className": "TestDataAcquisitionClient",
-    "fileName": "/BciPy_&_BciPy/bcipy_&_acquisition_&_tests_&_test_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test clock integration.\"\"\"\nclock = CountClock()\nclock.counter = 10\ndaq = DataAcquisitionClient(device=_MockDevice(data=self.mock_data,\n    channels=self.mock_channels), buffer_name='buffer_client_test_clock.db',\n    raw_data_file_name=None, delete_archive=True, clock=clock)\nwith daq:\n    time.sleep(0.1)\ndata = daq.get_data()\nself.assertTrue(len(data) > 0)\nfor i, record in enumerate(data):\n    self.assertEqual(record.timestamp, float(i + 1))\ndaq.cleanup()\n"
-}

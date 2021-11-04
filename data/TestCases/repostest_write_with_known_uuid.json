@@ -1,9 +1,0 @@
-{
-    "functionName": "test_write_with_known_uuid",
-    "className": "TestRevokeResponsePayload",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_revoke.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a RevokeResponsePayload object with a known UUID can be\n        written to a data stream.\n        \"\"\"\nstream = utils.BytearrayStream()\npayload = payloads.RevokeResponsePayload(self.uuid)\npayload.write(stream)\nlength_expected = len(self.encoding_a)\nlength_received = len(stream)\nmsg = 'encoding lengths not equal'\nmsg += '; expected {0}, received {1}'.format(length_expected, length_received)\nself.assertEqual(length_expected, length_received, msg)\nmsg = 'encoding mismatch'\nmsg += \"\"\";\nexpected:\n{0}\nreceived:\n{1}\"\"\".format(self.encoding_a, stream)\nself.assertEqual(self.encoding_a, stream, msg)\n"
-}

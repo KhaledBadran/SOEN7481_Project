@@ -1,9 +1,0 @@
-{
-    "functionName": "test_frame_extraction_random",
-    "className": "WildFireFrameExtractorTester",
-    "fileName": "/frgfm_&_PyroNear/test_&_test_datasets_wildfire_frame_extractor.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Extracting frames should produce expected count of images and length of metadata(labels)\"\"\"\nfor n_frames in [2, 3, 4]:\n    frames_count_expected = self.path_to_states_count * n_frames\n    frame_extractor = FrameExtractor(self.path_to_videos, self.\n        path_to_states, strategy='random', n_frames=n_frames)\n    with tempfile.TemporaryDirectory() as path_to_frames:\n        labels = frame_extractor.run(path_to_frames=path_to_frames, seed=69\n            ).get_frame_labels()\n        frames_count = len(glob.glob1(path_to_frames, '*.png'))\n        labels_count = len(labels)\n        self.assertEqual(frames_count, labels_count)\n        self.assertEqual(frames_count, frames_count_expected)\n"
-}

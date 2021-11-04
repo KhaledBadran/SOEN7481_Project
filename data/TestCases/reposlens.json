@@ -1,9 +1,0 @@
-{
-    "functionName": "lens",
-    "className": null,
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_models_&_geometry_&_throat_volume.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Calculates the volume residing the hemispherical caps formed by the\n    intersection between cylindrical throats and spherical pores.\n\n    This volume should be subtracted from throat volumes if the throat lengths\n    were found using throat end points.\n\n    Parameters\n    ----------\n    throat_diameter : string\n        The dictionary keys containing the array with the throat diameter\n        values.\n    pore_diameter : string\n        The dictionary keys containing the array with the pore diameter\n        values.\n\n    Returns\n    -------\n    volume : ND-array\n        The volume that should be subtracted from each throat volume to prevent\n        double counting the volume of overlapping area.\n\n    Notes\n    -----\n    This model does NOT consider the possibility that multiple throats might\n    overlap in the same location which could happen if throats are large and\n    connectivity is random.\n\n    See Also\n    --------\n    pendular_ring\n    \"\"\"\nnetwork = target.network\nconns = network['throat.conns']\nRp = target[pore_diameter]\nRt = target[throat_diameter]\na = _np.atleast_2d(Rt).T\nq = _np.arcsin(a / Rp[conns])\nb = Rp[conns] * _np.cos(q)\nh = Rp[conns] - b\nV = 1 / 6 * _np.pi * h * (3 * a ** 2 + h ** 2)\nreturn _np.sum(V, axis=1)\n"
-}

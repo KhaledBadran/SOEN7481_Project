@@ -1,9 +1,0 @@
-{
-    "functionName": "test_cps",
-    "className": null,
-    "fileName": "/open-source-economics_&_OG-USA/ogusa_&_tests_&_test_get_micro_data.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Check that setting `data` to 'cps' uses cps data\n    \"\"\"\nbaseline = False\nstart_year = 2016\nreform = {'II_em': {(2017): 10000}}\ncalc = get_micro_data.get_calculator(baseline, start_year, reform=reform,\n    records_start_year=CPS_START_YEAR, data='cps')\nassert calc.array('blind_head').sum() > 0 and calc.array('e00700').sum() == 0\n"
-}

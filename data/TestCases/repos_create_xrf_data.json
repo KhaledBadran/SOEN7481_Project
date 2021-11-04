@@ -1,9 +1,0 @@
-{
-    "functionName": "_create_xrf_data",
-    "className": null,
-    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_core_&_tests_&_test_map_processing.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Prepare data represented as numpy array, dask array (no change) or HDF5 dataset\"\"\"\nif data_representation == 'numpy_array':\n    data = data_dask.compute()\nelif data_representation == 'dask_array':\n    data = data_dask\nelif data_representation == 'hdf5_file_dset':\n    os.chdir(tmpdir)\n    fln = f'test-{uuid.uuid4()}.h5'\n    dset_name = 'level1/level2'\n    with h5py.File(fln, 'w') as f:\n        kwargs = {'shape': data_dask.shape, 'dtype': 'float64'}\n        if chunked_HDF5:\n            kwargs.update({'chunks': data_dask.chunksize})\n        dset = f.create_dataset(dset_name, **kwargs)\n        dset[:, :, :] = data_dask.compute()\n    data = RawHDF5Dataset(fln, dset_name, shape=data_dask.shape)\nelse:\n    raise RuntimeError(\n        f\"Error in test parameter: unknown value of 'data_representation' = {data_representation}\"\n        )\nreturn data\n"
-}

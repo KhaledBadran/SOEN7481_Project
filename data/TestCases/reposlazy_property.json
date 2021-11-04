@@ -1,9 +1,0 @@
-{
-    "functionName": "lazy_property",
-    "className": null,
-    "fileName": "/opentargets_&_OnToma/ontoma_&_interface.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Decorator that makes a property lazy-evaluated.\n    ... seealso: https://stevenloria.com/lazy-properties/\n    \"\"\"\nattr_name = '_lazy_' + fn.__name__\n@property\ndef _lazy_property(self):\n    if not hasattr(self, attr_name):\n        setattr(self, attr_name, fn(self))\n    return getattr(self, attr_name)\nreturn _lazy_property\n"
-}

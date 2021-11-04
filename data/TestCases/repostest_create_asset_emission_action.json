@@ -1,9 +1,0 @@
-{
-    "functionName": "test_create_asset_emission_action",
-    "className": null,
-    "fileName": "/OwnMarket_&_OwnBlockchainSdkPython/own_blockchain_sdk_&_test_transactions.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "sender_wallet = Wallet()\nemission_account_hash = 'EAccH1'\nasset_hash = 'AssetH1'\namount = 100\nexpected = (\n    \"\"\"{\n    \"senderAddress\": \"%s\",\n    \"nonce\": 1,\n    \"expirationTime\": 0,\n    \"actionFee\": 0.01,\n    \"actions\": [\n        {\n            \"actionType\": \"CreateAssetEmission\",\n            \"actionData\": {\n                \"emissionAccountHash\": \"%s\",\n                \"assetHash\": \"%s\",\n                \"amount\": %d\n            }\n        }\n    ]\n}\"\"\"\n     % (sender_wallet.address, emission_account_hash, asset_hash, amount))\ntx = Tx(sender_wallet.address, 1, 0.01, 0)\ntx.add_create_asset_emission_action(emission_account_hash, asset_hash, amount)\nactual = tx.to_json()\nassert expected == actual\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_gen_xrf_spectrum_2",
-    "className": null,
-    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_simulation_&_tests_&_test_sim_xrf_scan_data.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Failing test of ``gen_xrf_spectrum``: invalid types of parameter ``element_line_groups``\"\"\"\nelement_groups = None\nspectrum_expected = np.zeros(shape=(4096,), dtype=float)\nspectrum, xx = gen_xrf_spectrum(element_groups, incident_energy=12.0)\nnpt.assert_array_equal(spectrum, spectrum_expected, err_msg=\n    'Values in the spectrum array are not all zeros')\nwith pytest.raises(RuntimeError, match=\n    \"Parameter 'element_line_groups' has invalid type\"):\n    gen_xrf_spectrum([1, 2, 3], incident_energy=12.0)\n"
-}

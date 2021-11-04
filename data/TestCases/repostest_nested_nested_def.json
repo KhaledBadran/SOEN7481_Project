@@ -1,9 +1,0 @@
-{
-    "functionName": "test_nested_nested_def",
-    "className": "NestedDefTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_def.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "t = Template(\n    \"\"\"\n\n        ${a()}\n        <%def name=\"a()\">\n            a\n            <%def name=\"b1()\">\n                a_b1\n            </%def>\n            <%def name=\"b2()\">\n                a_b2 ${c1()}\n                <%def name=\"c1()\">\n                    a_b2_c1\n                </%def>\n            </%def>\n            <%def name=\"b3()\">\n                a_b3 ${c1()}\n                <%def name=\"c1()\">\n                    a_b3_c1 heres x: ${x}\n                    <%\n                        y = 7\n                    %>\n                    y is ${y}\n                </%def>\n                <%def name=\"c2()\">\n                    a_b3_c2\n                    y is ${y}\n                    c1 is ${c1()}\n                </%def>\n                ${c2()}\n            </%def>\n\n            ${b1()} ${b2()}  ${b3()}\n        </%def>\n\"\"\"\n    )\neq_(flatten_result(t.render(x=5, y=None)),\n    'a a_b1 a_b2 a_b2_c1 a_b3 a_b3_c1 heres x: 5 y is 7 a_b3_c2 y is None c1 is a_b3_c1 heres x: 5 y is 7'\n    )\n"
-}

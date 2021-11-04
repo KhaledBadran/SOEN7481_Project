@@ -1,9 +1,0 @@
-{
-    "functionName": "test_best_raw_objective_point_scalarized",
-    "className": "TestBestPointUtils",
-    "fileName": "/facebook_&_Ax/ax_&_service_&_tests_&_test_best_point_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "exp = get_branin_experiment()\nexp.optimization_config = OptimizationConfig(ScalarizedObjective(metrics=[\n    get_branin_metric()], minimize=False))\nwith self.assertRaisesRegex(ValueError, 'Cannot identify best '):\n    get_best_raw_objective_point(exp)\nself.assertEqual(get_best_parameters(exp), None)\nexp.new_trial(generator_run=GeneratorRun(arms=[Arm(parameters={'x1': 5.0,\n    'x2': 5.0})])).run()\nself.assertEqual(get_best_raw_objective_point(exp)[0], {'x1': 5.0, 'x2': 5.0})\n"
-}

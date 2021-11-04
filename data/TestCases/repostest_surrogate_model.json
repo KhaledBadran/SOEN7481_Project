@@ -1,9 +1,0 @@
-{
-    "functionName": "test_surrogate_model",
-    "className": "TestAcquisition",
-    "fileName": "/SUNCAT-Center_&_CatLearn/test_&_test_acquisition.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "(train_features, train_targets, train_atoms, test_features, test_targets,\n    test_atoms) = self.get_data()\nsg0 = ActiveLearning(_surrogate_model, train_features, train_targets)\nbatch_size = 10\nsg0.test_acquisition(batch_size=batch_size)\nto_acquire, _ = sg0.acquire(test_features, batch_size=batch_size)\nself.assertTrue(len(to_acquire) == batch_size)\nsg1 = ActiveLearning(_surrogate_model, train_features, train_targets)\nbatch_size = 3\nto_acquire, _ = sg1.acquire(test_features, batch_size=batch_size)\nself.assertTrue(len(to_acquire) == batch_size)\nsg2 = ActiveLearning(_surrogate_model, train_features, train_targets)\nbatch_size = 1\nto_acquire, _ = sg2.acquire(test_features, batch_size=batch_size)\nself.assertTrue(len(to_acquire) == batch_size)\nsg0.ensemble_test(size=2, batch_size=batch_size)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_cast_str_to_int",
-    "className": null,
-    "fileName": "/EVEprosper_&_ProsperDatareader/tests_&_test_config.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"validate behavior for cast_str_to_int\"\"\"\ndemo_json = [{'string_value': 'butts', 'int_value': '12', 'float_value':\n    '10.50'}, {'string_value': 'otherbutts', 'int_value': '-99',\n    'float_value': '-5.00'}]\ndemo_df = pd.DataFrame(demo_json)\nassert demo_df['string_value'].dtype == object\nassert demo_df['int_value'].dtype == object\nassert demo_df['float_value'].dtype == object\nwith pytest.raises(TypeError):\n    demo_df['diff'] = demo_df['int_value'] - demo_df['float_value']\nupdated_df = config._cast_str_to_int(demo_df)\nassert updated_df['string_value'].dtype == object\nassert updated_df['int_value'].dtype == numpy.int64\nassert updated_df['float_value'].dtype == numpy.float64\nupdated_df['diff'] = updated_df['int_value'] - updated_df['float_value']\nassert updated_df['diff'].dtype == numpy.float64\n"
-}

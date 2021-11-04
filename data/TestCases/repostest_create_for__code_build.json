@@ -1,9 +1,0 @@
-{
-    "functionName": "test_create_for__code_build",
-    "className": "test_IAM_Role",
-    "fileName": "/pbx-gs_&_OSBot-AWS/tests_&_unit_&_helpers_&_test_IAM_Role.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.iam_role.iam.role_delete()\nresult = self.iam_role.create_for__code_build()\nstatus = result.get('status')\ndata = result.get('data')\nrole_arn = result.get('role_arn')\nrole_name = result.get('role_name')\ncreate_date = data.get('CreateDate')\ndel data['RoleId']\ndel data['CreateDate']\nexpected_service = 'codebuild.amazonaws.com'\nexpected_arn = 'arn:aws:iam::{0}:role/test_IAM_Role__temp_role'.format(\n    account_id)\nexpected_data = {'Arn': expected_arn, 'AssumeRolePolicyDocument': {\n    'Statement': [{'Action': 'sts:AssumeRole', 'Effect': 'Allow',\n    'Principal': {'Service': expected_service}}]}, 'Path': '/', 'RoleName':\n    'test_IAM_Role__temp_role'}\nassert status == 'ok'\nassert role_arn == expected_arn\nassert role_name == self.temp_role_name\nassert data == expected_data\nTemp_Assert(create_date).is_today()\nassert self.iam_role.create_for__code_build() == {'data':\n    'role already exists', 'role_name': self.temp_role_name, 'role_arn':\n    expected_arn, 'status': 'warning'}\nassert self.iam_role.iam.role_delete() is True\n"
-}

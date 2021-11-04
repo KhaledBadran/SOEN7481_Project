@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ShapTreeExplainer",
-    "className": "TestShapExplainer",
-    "fileName": "/IBM_&_AIX360/tests_&_shap_&_test_shap.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "X, y = shap.datasets.nhanesi()\nX_display, y_display = shap.datasets.nhanesi(display=True)\nxgb_full = xgboost.DMatrix(X, label=y)\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2,\n    random_state=7)\nxgb_train = xgboost.DMatrix(X_train, label=y_train)\nxgb_test = xgboost.DMatrix(X_test, label=y_test)\nparams = {'eta': 0.002, 'max_depth': 3, 'objective': 'survival:cox',\n    'subsample': 0.5}\nmodel_train = xgboost.train(params, xgb_train, 10000, evals=[(xgb_test,\n    'test')], verbose_eval=1000)\nparams = {'eta': 0.002, 'max_depth': 3, 'objective': 'survival:cox',\n    'subsample': 0.5}\nmodel = xgboost.train(params, xgb_full, 5000, evals=[(xgb_full, 'test')],\n    verbose_eval=1000)\ndef c_statistic_harrell(pred, labels):\n    total = 0\n    matches = 0\n    for i in range(len(labels)):\n        for j in range(len(labels)):\n            if labels[j] > 0 and abs(labels[i]) > labels[j]:\n                total += 1\n                if pred[j] > pred[i]:\n                    matches += 1\n    return matches / total\nc_statistic_harrell(model_train.predict(xgb_test, ntree_limit=5000), y_test)\nshap_values = TreeExplainer(model).explain_instance(X)\nprint('Invoked Shap TreeExplainer')\n"
-}

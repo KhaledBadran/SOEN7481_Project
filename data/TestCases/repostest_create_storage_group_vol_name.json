@@ -1,9 +1,0 @@
-{
-    "functionName": "test_create_storage_group_vol_name",
-    "className": "PyU4VProvisioningTest",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test create_storage_group.\"\"\"\nwith mock.patch.object(self.provisioning, 'create_resource') as mock_create:\n    self.provisioning.create_storage_group(self.data.srp, 'new-sg', slo=\n        'Diamond', workload=None, num_vols=1, vol_size='1', vol_name='ID4TEST')\n    volume_identifier = {'identifier_name': 'ID4TEST',\n        'volumeIdentifierChoice': 'identifier_name'}\n    payload1 = {'srpId': 'SRP_1', 'storageGroupId': 'new-sg', 'emulation':\n        'FBA', 'sloBasedStorageGroupParam': [{'sloId': 'Diamond',\n        'workloadSelection': None, 'noCompression': 'false',\n        'volumeAttributes': [{'volume_size': '1', 'capacityUnit': 'GB',\n        'num_of_vols': 1, 'volumeIdentifier': volume_identifier}]}]}\n    mock_create.assert_called_once_with(category='sloprovisioning',\n        resource_level='symmetrix', resource_level_id=self.data.array,\n        resource_type='storagegroup', payload=payload1)\n"
-}

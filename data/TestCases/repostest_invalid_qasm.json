@@ -1,9 +1,0 @@
-{
-    "functionName": "test_invalid_qasm",
-    "className": "TestcQasmReader",
-    "fileName": "/QE-Lab_&_OpenQL/tests_&_cqasm_&_test_cqasm_reader.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "config_fn = os.path.join(curdir, '../hardware_config_cc_light.json')\nplatform = ql.Platform('seven_qubits_chip', config_fn)\nnumber_qubits = platform.get_qubit_number()\nprogram = ql.Program('test_invalid_qasm', platform, number_qubits)\nqasm_str = \"\"\"version 1.0\nqubits 1\nprop_z q[0]\nmeasure_z q[0]\n\"\"\"\nqasm_rdr = ql.cQasmReader(platform, program)\nwith self.assertRaisesRegex(RuntimeError,\n    'Error at <unknown>:3:1..12: failed to resolve prop_z'):\n    qasm_rdr.string2circuit(qasm_str)\n"
-}

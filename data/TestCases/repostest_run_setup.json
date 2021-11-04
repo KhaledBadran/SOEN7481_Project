@@ -1,9 +1,0 @@
-{
-    "functionName": "test_run_setup",
-    "className": null,
-    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_setups.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Test the setup script\n    \"\"\"\nsfiles = glob.glob('*.setups')\nfor sfile in sfiles:\n    os.remove(sfile)\ndroot = data_path('b')\npargs = setup.parser(['-r', droot, '-s', 'shane_kast_blue', '-c=all',\n    '--extension=fits.gz', '--output_path={:s}'.format(data_path(''))])\nsetup.main(pargs)\npargs2 = setup.parser(['-r', droot, '-s', 'shane_kast_blu', '-c=all',\n    '--extension=fits.gz', '--output_path={:s}'.format(data_path(''))])\nwith pytest.raises(ValueError):\n    setup.main(pargs2)\n"
-}

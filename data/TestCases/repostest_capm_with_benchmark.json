@@ -1,9 +1,0 @@
-{
-    "functionName": "test_capm_with_benchmark",
-    "className": null,
-    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_expected_returns.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "df = get_data()\nmkt_df = get_benchmark_data()\nmu = expected_returns.capm_return(df, market_prices=mkt_df, compounding=True)\nassert isinstance(mu, pd.Series)\nassert list(mu.index) == list(df.columns)\nassert mu.notnull().all()\nassert mu.dtype == 'float64'\ncorrect_mu = np.array([0.10903299, 0.11891232, 0.0659977, 0.07369941, \n    0.15948144, 0.12308759, 0.15907944, 0.08680978, 0.15778843, 0.0903294, \n    0.09043133, 0.14716681, 0.12510181, 0.0927869, 0.10990104, 0.12317033, \n    0.13596521, 0.09344662, 0.15457909, 0.11430041])\nnp.testing.assert_array_almost_equal(mu.values, correct_mu)\n"
-}

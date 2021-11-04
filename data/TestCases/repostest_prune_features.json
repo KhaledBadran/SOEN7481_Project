@@ -1,9 +1,0 @@
-{
-    "functionName": "test_prune_features",
-    "className": "TestFeaturePruner",
-    "fileName": "/dkaslovsky_&_GraphRole/tests_&_test_features_&_test_prune.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data = {'a': [1, 2, 3, 10], 'b': [1, 2, 3, 1], 'c': [2, 1, 1, 4], 'd': [1, \n    1, 1, 1], 'e': [1, 1, 2, 0]}\nfeatures = pd.DataFrame(data)\ngeneration_dict = {(0): {'a': {(0): 0, (1): 1}, 'b': {(0): 2, (1): 3}, 'c':\n    {(0): 8, (1): 9}}, (1): {'d': {(0): 4, (1): 5}, 'e': {(0): 6, (1): 7}}}\nself.pruner._generation_dict = generation_dict\ntable = {'no pruning': {'feature_group_thresh': 0,\n    'expected_features_to_drop': []}, 'two groups': {'feature_group_thresh':\n    1, 'expected_features_to_drop': ['c', 'd', 'e']}, 'one group': {\n    'feature_group_thresh': 2, 'expected_features_to_drop': ['b', 'c', 'd',\n    'e']}}\nfor test_name, test in table.items():\n    self.pruner._feature_group_thresh = test['feature_group_thresh']\n    expected = test['expected_features_to_drop']\n    features_to_drop = self.pruner.prune_features(features)\n    self.assertSetEqual(set(features_to_drop), set(expected), test_name)\n"
-}

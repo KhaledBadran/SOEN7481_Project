@@ -1,9 +1,0 @@
-{
-    "functionName": "test_update_threshold_settings",
-    "className": "PyU4VPerformanceTest",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_performance.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test update_threshold_settings.\"\"\"\ncategory, metric, alert = 'Array', 'PercentBusy', True\nfirst_threshold, second_threshold = 80, 90\nfirst_threshold_occurrences = 2\nfirst_threshold_samples = 10\nfirst_threshold_severity = pc.INFO_LVL\nsecond_threshold_occurrences = 2\nsecond_threshold_samples = 20\nsecond_threshold_severity = pc.WARN_LVL\nref_payload = {pc.METRIC: metric, pc.ALERT: alert, pc.FIRST_THRESH: str(\n    first_threshold), pc.FIRST_THRESH_OCC: str(first_threshold_occurrences),\n    pc.FIRST_THRESH_SAMP: str(first_threshold_samples), pc.FIRST_THRESH_SEV:\n    first_threshold_severity, pc.SEC_THRESH: str(second_threshold), pc.\n    SEC_THRESH_OCC: str(second_threshold_occurrences), pc.SEC_THRESH_SAMP:\n    str(second_threshold_samples), pc.SEC_THRESH_SEV: second_threshold_severity\n    }\nwith mock.patch.object(self.perf, 'put_request') as mck_request:\n    self.perf.update_threshold_settings(category, metric, first_threshold,\n        second_threshold, alert, first_threshold_occurrences,\n        first_threshold_samples, first_threshold_severity,\n        second_threshold_occurrences, second_threshold_samples,\n        second_threshold_severity)\n    mck_request.assert_called_once_with(category=pc.PERFORMANCE,\n        resource_level=pc.THRESHOLD, resource_type=pc.UPDATE,\n        resource_type_id=category, payload=ref_payload)\n"
-}

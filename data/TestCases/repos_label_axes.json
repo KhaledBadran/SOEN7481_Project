@@ -1,9 +1,0 @@
-{
-    "functionName": "_label_axes",
-    "className": null,
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_topotools_&_plottools.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "labels = ['X', 'Y', 'Z']\ndim = np.zeros(3, dtype=bool)\nfor i, arr in enumerate([X, Y, Z]):\n    if np.unique(arr).size > 1:\n        dim[i] = True\nif dim.sum() == 1:\n    dim[np.argwhere(~dim)[0]] = True\nif dim.sum() == 0:\n    dim[[0, 1]] = True\ndim_idx = np.argwhere(dim).squeeze()\nax.set_xlabel(labels[dim_idx[0]])\nax.set_ylabel(labels[dim_idx[1]])\nif hasattr(ax, 'set_zlim'):\n    ax.set_zlabel('Z')\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_python_and_cpp_return_same_log_likelihood_and_gradient",
-    "className": "TestLogLikelihood",
-    "fileName": "/Yelp_&_MOE/moe_&_tests_&_optimal_learning_&_python_&_cpp_wrappers_&_log_likelihood_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Check that the C++ and Python log likelihood + gradients match over a series of randomly built data sets.\"\"\"\ntolerance_log_like = 5e-11\ntolerance_grad_log_like = 4e-12\nfor num_sampled in self.num_sampled_list:\n    self.gp_test_environment_input.num_sampled = num_sampled\n    _, python_gp = self._build_gaussian_process_test_data(self.\n        gp_test_environment_input)\n    python_cov, historical_data = python_gp.get_core_data_copy()\n    python_lml = (moe.optimal_learning.python.python_version.log_likelihood\n        .GaussianProcessLogMarginalLikelihood(python_cov, historical_data))\n    cpp_cov = (moe.optimal_learning.python.cpp_wrappers.covariance.\n        SquareExponential(python_cov.hyperparameters))\n    cpp_lml = (moe.optimal_learning.python.cpp_wrappers.log_likelihood.\n        GaussianProcessLogMarginalLikelihood(cpp_cov, historical_data))\n    python_log_like = python_lml.compute_log_likelihood()\n    cpp_log_like = cpp_lml.compute_log_likelihood()\n    self.assert_scalar_within_relative(python_log_like, cpp_log_like,\n        tolerance_log_like)\n    python_grad_log_like = python_lml.compute_grad_log_likelihood()\n    cpp_grad_log_like = cpp_lml.compute_grad_log_likelihood()\n    self.assert_vector_within_relative(python_grad_log_like,\n        cpp_grad_log_like, tolerance_grad_log_like)\n"
-}

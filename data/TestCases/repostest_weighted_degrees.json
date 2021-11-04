@@ -1,9 +1,0 @@
-{
-    "functionName": "test_weighted_degrees",
-    "className": null,
-    "fileName": "/Silmathoron_&_NNGT/testing_&_test_weights.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "g = nngt.Graph()\ng.new_node(10)\nww = [5.0] * 4\ng.new_edges([(0, 4), (8, 2), (7, 0), (1, 3)], attributes={'weight': ww})\nin_deg = [1.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0]\nout_deg = [1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0]\ntot_deg = [2.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0]\nassert np.all(g.get_degrees('in') == in_deg)\nassert np.all(g.get_degrees('in', weights=True) == np.multiply(ww[0], in_deg))\nassert np.all(g.get_degrees('out') == out_deg)\nassert np.all(g.get_degrees('total') == tot_deg)\ng.set_weights(0.0)\nassert set(g.get_weights()) == {0.0}\nassert set(g.get_edge_attributes(name='weight')) == {0.0}\nassert not np.any(g.get_degrees('in', weights=True))\nelist = [(0, 4), (8, 2)]\ng.set_weights(2.0, elist=elist)\nassert set(g.get_weights()) == {0.0, 2.0}\nassert set(g.get_edge_attributes(name='weight')) == {0.0, 2.0}\nw_indeg = [0.0, 0.0, 2.0, 0.0, 2.0, 0.0, 0.0, 0.0, 0.0, 0.0]\nw_outdeg = [2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.0, 0.0]\nassert np.all(g.get_degrees('in', weights=True) == w_indeg)\nassert np.all(g.get_degrees('out', weights=True) == w_outdeg)\nassert g.node_nb() == 10\nassert g.edge_nb() == 4\n"
-}

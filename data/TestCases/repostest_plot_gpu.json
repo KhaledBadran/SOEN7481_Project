@@ -1,9 +1,0 @@
-{
-    "functionName": "test_plot_gpu",
-    "className": null,
-    "fileName": "/bio-phys_&_MDBenchmark/mdbenchmark_&_tests_&_test_plot.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test gpu flage without any host or module.\n    \"\"\"\nwith tmpdir.as_cwd():\n    output = \"\"\"Plotting GPU and CPU data.\nPlotting all hosts in input file.\nPlotting all modules in your input data.\nYour file was saved as 'testpng.png' in the working directory.\n\"\"\"\n    result = cli_runner.invoke(cli, ['plot', '--csv={}'.format(data[\n        'test.csv']), '--gpu', '--output-name=testpng', '--output-format=png'])\n    assert result.exit_code == 0\n    assert result.output == output\n    assert os.path.exists('testpng.png')\n"
-}

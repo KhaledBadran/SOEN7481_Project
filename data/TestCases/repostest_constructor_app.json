@@ -1,9 +1,0 @@
-{
-    "functionName": "test_constructor_app",
-    "className": null,
-    "fileName": "/max-k_&_flask-multi-redis/test_&_unit_&_test_flask_multi_redis.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that the constructor passes the app to FlaskMultiRedis.init_app.\"\"\"\nfrom flask_multi_redis import main\ndel modules['redis']\nmain = reload(main)\nFlaskMultiRedis = main.FlaskMultiRedis\nmocker.patch.object(FlaskMultiRedis, 'init_app', autospec=True)\napp_stub = mocker.stub(name='app_stub')\nFlaskMultiRedis(app_stub)\nFlaskMultiRedis.init_app.assert_called_once_with(mocker.ANY, app_stub)\n"
-}

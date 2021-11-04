@@ -1,9 +1,0 @@
-{
-    "functionName": "test_component_cancel_event",
-    "className": null,
-    "fileName": "/SillyFreak_&_ConcurrentUtils/tests_&_test_component.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "EVENT = 'EVENT'\n@component_workload\nasync def component(x, *, commands, events):\n    await events.send(Component.EVENT_START)\n    with pytest.raises(asyncio.CancelledError):\n        await asyncio.sleep(1)\n    await events.send(EVENT)\n    with pytest.raises(asyncio.CancelledError):\n        await asyncio.sleep(1)\n    return x\ncomp = await start_component(component, 1)\nwith pytest.raises(Component.EventException) as exc_info:\n    await comp.cancel()\nevent, = exc_info.value.args\nassert event == EVENT\nassert await comp.cancel() == 1\npytest.mark.asyncio"
-}

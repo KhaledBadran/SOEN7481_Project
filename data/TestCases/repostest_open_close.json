@@ -1,9 +1,0 @@
-{
-    "functionName": "test_open_close",
-    "className": "TestGarageOpener",
-    "fileName": "/albertogeniola_&_MerossIot/tests_&_test_garage.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "if len(self.garage_devices) < 1:\n    self.skipTest(\n        'Could not find any Garage Opener within the given set of devices. The test will be skipped'\n        )\n    return\ngarage = self.garage_devices[0]\ncurrent_status = garage.get_is_open(channel=0)\nself.assertIsNone(current_status)\nawait garage.async_update()\nself.assertIsNotNone(garage.get_is_open())\nis_open = garage.get_is_open()\nif is_open:\n    await garage.async_close()\nelse:\n    await garage.async_open()\nawait asyncio.sleep(30)\nself.assertEqual(garage.get_is_open(), not is_open)\nis_open = garage.get_is_open()\nif is_open:\n    await garage.async_close()\nelse:\n    await garage.async_open()\nawait asyncio.sleep(30)\nself.assertEqual(garage.get_is_open(), not is_open)\nunittest_run_loop"
-}

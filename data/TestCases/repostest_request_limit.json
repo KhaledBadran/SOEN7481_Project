@@ -1,9 +1,0 @@
-{
-    "functionName": "test_request_limit",
-    "className": "TestCase",
-    "fileName": "/IntegralDefense_&_ACE/lib_&_saq_&_modules_&_test_cloudphish.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "saq.CONFIG['analysis_module_cloudphish']['cloudphish_request_limit'] = '1'\nsaq.CONFIG['analysis_mode_analysis']['cleanup'] = 'no'\nself.start_api_server()\nroot = create_root_analysis(analysis_mode=ANALYSIS_MODE_ANALYSIS)\nroot.initialize_storage()\nurl_1 = root.add_observable(F_URL, TEST_URL)\nurl_2 = root.add_observable(F_URL, 'http://invalid_domain.local/some/path')\nroot.save()\nroot.schedule()\nengine = TestEngine(analysis_pools={}, local_analysis_modes=[\n    ANALYSIS_MODE_ANALYSIS, ANALYSIS_MODE_CLOUDPHISH])\nengine.enable_module('analysis_module_cloudphish', ANALYSIS_MODE_ANALYSIS)\nengine.enable_module('analysis_module_cloudphish_request_analyzer',\n    ANALYSIS_MODE_CLOUDPHISH)\nengine.enable_module('analysis_module_crawlphish', ANALYSIS_MODE_CLOUDPHISH)\nengine.controlled_stop()\nengine.start()\nengine.wait()\nroot = RootAnalysis(storage_dir=root.storage_dir)\nroot.load()\nurl_1 = root.get_observable(url_1.id)\nurl_2 = root.get_observable(url_2.id)\nfrom saq.modules.cloudphish import CloudphishAnalysis\nanalysis_1 = url_1.get_analysis(CloudphishAnalysis)\nanalysis_2 = url_2.get_analysis(CloudphishAnalysis)\nself.assertTrue(isinstance(analysis_1, Analysis) and analysis_2 is False or\n    analysis_1 is False and isinstance(analysis_2, Analysis))\nself.assertEquals(log_count('reached cloudphish limit'), 1)\n"
-}

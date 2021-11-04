@@ -1,9 +1,0 @@
-{
-    "functionName": "test_gp_update",
-    "className": "TestPrediction",
-    "fileName": "/SUNCAT-Center_&_CatLearn/test_&_test_predict.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test Gaussian process predictions with the multiplication kernel.\"\"\"\ntrain_features, train_targets, test_features, test_targets = get_data()\nkdict = [{'type': 'linear', 'scaling': 1.0}, {'type': 'gaussian', 'width': \n    1.0, 'scaling': 1.0, 'operation': 'multiplication'}, {'type':\n    'constant', 'const': 1.0}]\ngp = GaussianProcess(train_fp=train_features, train_target=train_targets,\n    kernel_list=kdict, regularization=np.sqrt(0.001),\n    optimize_hyperparameters=True, scale_data=True)\nd, f = np.shape(train_features)\ntrain_features = np.concatenate((train_features, test_features))\nnew_features = np.random.random_sample((np.shape(train_features)[0], 5))\ntrain_features = np.concatenate((train_features, new_features), axis=1)\nself.assertNotEqual(np.shape(train_features), (d, f))\ntrain_targets = np.concatenate((train_targets, test_targets))\nnew_features = np.random.random_sample((len(test_features), 5))\ntest_features = np.concatenate((test_features, new_features), axis=1)\nkdict = [{'type': 'linear', 'scaling': 1.0}, {'type': 'gaussian', 'width': \n    1.0, 'scaling': 1.0, 'operation': 'multiplication'}, {'type':\n    'constant', 'const': 1.0}]\ngp.update_gp(train_fp=train_features, train_target=train_targets,\n    kernel_list=kdict)\npred = gp.predict(test_fp=test_features, test_target=test_targets,\n    get_validation_error=True, get_training_error=True)\nsigma = gp.predict_uncertainty(test_fp=test_features)\nself.assertEqual(len(sigma['uncertainty']), len(test_features))\nself.assertEqual(len(pred['prediction']), len(test_features))\nprint('Update prediction:', pred['validation_error']['rmse_average'])\n"
-}

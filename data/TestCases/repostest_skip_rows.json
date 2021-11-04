@@ -1,9 +1,0 @@
-{
-    "functionName": "test_skip_rows",
-    "className": null,
-    "fileName": "/NASA_&_MLMCPy/tests_&_model_&_test_ModelFromData.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test ability to skip rows in data file.\n    \"\"\"\nnormal_model = ModelFromData(input_data_file_2d, output_data_file_2d, 1.0)\nnormal_row_count = normal_model._inputs.shape[0]\nskipped_row_model = ModelFromData(input_data_file_2d, output_data_file_2d,\n    skip_header=rows_to_skip, cost=1.0)\nskipped_row_count = skipped_row_model._inputs.shape[0]\nassert normal_row_count - rows_to_skip == skipped_row_count\npytest.mark.parametrize('rows_to_skip', [1, 2, 3])"
-}

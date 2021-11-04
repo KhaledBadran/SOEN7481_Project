@@ -1,9 +1,0 @@
-{
-    "functionName": "test_logging_basis_process",
-    "className": "Test_PoolManager_logging",
-    "fileName": "/Kieran-Bacon_&_Better/PackageTests_&_multiprocessing_&_test_PoolManager_logging.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class LoggingProcess(PoolProcess):\n\n    def __init__(self):\n        self.log = logging.getLogger('Subprocess')\n        self.log.setLevel(logging.DEBUG)\n\n    def run(self, pid):\n        self.log.info('{}'.format(pid))\nlog = self.TestLogger('Subprocess', level=logging.INFO)\nwith PoolManager(LoggingProcess, logger=log) as pool:\n    for i in range(8):\n        pool.put(i)\n    pool.getAll()\nself.assertEqual(set(log._returned), {str(x) for x in range(8)})\n"
-}

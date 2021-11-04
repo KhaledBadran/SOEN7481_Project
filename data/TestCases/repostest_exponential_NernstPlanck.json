@@ -1,9 +1,0 @@
-{
-    "functionName": "test_exponential_NernstPlanck",
-    "className": "NernstPlanckTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_NernstPlanckTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "mod = op.models.physics.ad_dif_mig_conductance.ad_dif_mig\nself.phys.add_model(propname='throat.ad_dif_mig_conductance_exp', model=mod,\n    s_scheme='exponential', ion='ionX')\nself.phys.regenerate_models()\nself.adm.setup(conductance='throat.ad_dif_mig_conductance_exp')\nself.adm.run()\nx = [0.0, 0.0, 0.0, 1.2788, 1.79357, 2.71385, 1.59656, 1.93321, 2.46286, \n    2.0, 2.0, 2.0]\ny = np.around(self.adm['pore.concentration.ionX'], decimals=5)\nassert_allclose(actual=y, desired=x)\n"
-}

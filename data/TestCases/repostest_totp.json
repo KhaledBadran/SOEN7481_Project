@@ -1,9 +1,0 @@
-{
-    "functionName": "test_totp",
-    "className": "TestCoreClientSession",
-    "fileName": "/mozilla_&_PyFxA/fxa_&_tests_&_test_core.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "resp = self.session.totp_create()\nself.assertTrue(self.session.totp_exists())\nresp = self.session.totp_create()\nself.session.verified = False\ncode = pyotp.TOTP(resp['secret']).now()\nself.assertTrue(self.session.totp_verify(code))\nself.assertTrue(self.session.verified)\nself.assertTrue(self.session.totp_exists())\nwith self.assertRaises(fxa.errors.ClientError):\n    self.session.totp_create()\nresp = self.session.totp_delete()\nself.assertFalse(self.session.totp_exists())\n"
-}

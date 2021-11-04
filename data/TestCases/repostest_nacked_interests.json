@@ -1,9 +1,0 @@
-{
-    "functionName": "test_nacked_interests",
-    "className": "TestValidator",
-    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_validator.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "def processInterest(interest, onData, onTimeout, onNetworkNack):\n    networkNack = NetworkNack()\n    networkNack.setReason(NetworkNack.Reason.NO_ROUTE)\n    onNetworkNack(interest, networkNack)\nself._fixture._face._processInterest = processInterest\ndata = Data(Name('/Security/V2/ValidatorFixture/Sub1/Sub2/Data'))\nself._fixture._keyChain.sign(data, SigningInfo(self._fixture._subIdentity))\nself.validateExpectFailure(data, 'All interests should get NACKed')\nself.assertTrue(len(self._fixture._face._sentInterests) > 1)\n"
-}

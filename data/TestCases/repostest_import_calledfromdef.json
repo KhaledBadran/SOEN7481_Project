@@ -1,9 +1,0 @@
-{
-    "functionName": "test_import_calledfromdef",
-    "className": "NamespaceTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_namespace.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "l = lookup.TemplateLookup()\nl.put_string('a',\n    \"\"\"\n        <%def name=\"table()\">\n            im table\n        </%def>\n        \"\"\"\n    )\nl.put_string('b',\n    \"\"\"\n        <%namespace file=\"a\" import=\"table\"/>\n\n        <%\n            def table2():\n                table()\n                return \"\"\n        %>\n\n        ${table2()}\n        \"\"\"\n    )\nt = l.get_template('b')\nassert flatten_result(t.render()) == 'im table'\n"
-}

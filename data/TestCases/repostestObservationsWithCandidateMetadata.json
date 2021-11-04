@@ -1,9 +1,0 @@
-{
-    "functionName": "testObservationsWithCandidateMetadata",
-    "className": "ObservationsTest",
-    "fileName": "/facebook_&_Ax/ax_&_core_&_tests_&_test_observation.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "SOME_METADATA_KEY = 'metadatum'\ntruth = [{'arm_name': '0_0', 'parameters': {'x': 0, 'y': 'a'}, 'mean': 2.0,\n    'sem': 2.0, 'trial_index': 0, 'metric_name': 'a'}, {'arm_name': '1_0',\n    'parameters': {'x': 1, 'y': 'b'}, 'mean': 3.0, 'sem': 3.0,\n    'trial_index': 1, 'metric_name': 'a'}]\narms = {obs['arm_name']: Arm(name=obs['arm_name'], parameters=obs[\n    'parameters']) for obs in truth}\nexperiment = Mock()\nexperiment._trial_indices_by_status = {status: set() for status in TrialStatus}\ntrials = {obs['trial_index']: Trial(experiment, GeneratorRun(arms=[arms[obs\n    ['arm_name']]], candidate_metadata_by_arm_signature={arms[obs[\n    'arm_name']].signature: {SOME_METADATA_KEY:\n    f\"value_{obs['trial_index']}\"}})) for obs in truth}\ntype(experiment).arms_by_name = PropertyMock(return_value=arms)\ntype(experiment).trials = PropertyMock(return_value=trials)\ndf = pd.DataFrame(truth)[['arm_name', 'trial_index', 'mean', 'sem',\n    'metric_name']]\ndata = Data(df=df)\nobservations = observations_from_data(experiment, data)\nfor observation in observations:\n    self.assertEqual(observation.features.metadata.get(SOME_METADATA_KEY),\n        f'value_{observation.features.trial_index}')\n"
-}

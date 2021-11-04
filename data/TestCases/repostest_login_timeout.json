@@ -1,9 +1,0 @@
-{
-    "functionName": "test_login_timeout",
-    "className": null,
-    "fileName": "/PlaidWeb_&_Authl/tests_&_handlers_&_test_indieauth.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "store = {}\nhandler = indieauth.IndieAuth('http://client/', tokens.DictStore(store), 10)\nmock_time = mocker.patch('time.time')\nmock_time.return_value = 238742\nrequests_mock.get('http://example.user/', text='hello', headers={'Link':\n    '<http://endpoint/>; rel=\"authorization_endpoint\"'})\nassert len(store) == 0\nresponse = handler.initiate_auth('http://example.user', 'http://client/cb',\n    '/dest')\nassert isinstance(response, disposition.Redirect)\nassert len(store) == 1\nmock_time.return_value += 100\ndata = {'state': parse_args(response.url)['state'], 'code': 'bogus'}\nresponse = handler.check_callback('http://client/cb', data, {})\nassert isinstance(response, disposition.Error)\nassert 'timed out' in response.message\nassert len(store) == 0\n"
-}

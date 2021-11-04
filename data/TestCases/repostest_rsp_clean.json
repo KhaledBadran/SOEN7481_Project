@@ -1,9 +1,0 @@
-{
-    "functionName": "test_rsp_clean",
-    "className": null,
-    "fileName": "/neuropsychology_&_NeuroKit/tests_&_tests_rsp.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "sampling_rate = 100\nduration = 120\nrsp = nk.rsp_simulate(duration=duration, sampling_rate=sampling_rate,\n    respiratory_rate=15, noise=0.1, random_state=42)\nrsp += nk.signal_distort(rsp, sampling_rate=sampling_rate, linear_drift=True)\nkhodadad2018 = nk.rsp_clean(rsp, sampling_rate=sampling_rate, method=\n    'khodadad2018')\nassert len(rsp) == len(khodadad2018)\nrsp_biosppy = nk.rsp_clean(rsp, sampling_rate=sampling_rate, method='biosppy')\nassert len(rsp) == len(rsp_biosppy)\nfft_raw = np.abs(np.fft.rfft(rsp))\nfft_khodadad2018 = np.abs(np.fft.rfft(khodadad2018))\nfft_biosppy = np.abs(np.fft.rfft(rsp_biosppy))\nfreqs = np.fft.rfftfreq(len(rsp), 1 / sampling_rate)\nassert np.sum(fft_raw[freqs > 3]) > np.sum(fft_khodadad2018[freqs > 3])\nassert np.sum(fft_raw[freqs < 0.05]) > np.sum(fft_khodadad2018[freqs < 0.05])\nassert np.sum(fft_raw[freqs > 0.35]) > np.sum(fft_biosppy[freqs > 0.35])\nassert np.sum(fft_raw[freqs < 0.1]) > np.sum(fft_biosppy[freqs < 0.1])\nrsp_biosppy = nk.rsp_clean(rsp, sampling_rate=sampling_rate, method='biosppy')\noriginal, _, _ = biosppy.tools.filter_signal(signal=rsp, ftype='butter',\n    band='bandpass', order=2, frequency=[0.1, 0.35], sampling_rate=\n    sampling_rate)\noriginal = nk.signal_detrend(original, order=0)\nassert np.allclose((rsp_biosppy - original).mean(), 0, atol=1e-06)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test__vertical_charge_line__loses_charge_trails_form_in_serial_direction",
-    "className": "TestParallelAndSerialCTI",
-    "fileName": "/Jammy2211_&_PyAutoCTI/test_&_unit_&_data_&_test_add_correct_cti_to_image.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "image_pre_cti = np.zeros((5, 5))\nimage_pre_cti[1:4, (2)] = +100\nim = cti_image.ImageFrame(frame_geometry=ci_frame.FrameGeometry.\n    euclid_bottom_right(), array=image_pre_cti)\nimage_post_cti = im.add_cti_to_image(cti_params=params_both, cti_settings=\n    arctic_both)\nimage_difference = image_post_cti - image_pre_cti\nassert (image_difference[(0), 0:5] == 0.0).all()\nassert (image_difference[1:4, (2)] < 0.0).all()\nassert (image_difference[4, 2] > 0.0).all()\nassert (image_difference[1:5, 0:2] > 0.0).all()\nassert (image_difference[0:5, 3:5] == 0.0).all()\nassert image_difference[3, 1] > image_difference[3, 0]\nassert image_difference[4, 1] > image_difference[4, 0]\n"
-}

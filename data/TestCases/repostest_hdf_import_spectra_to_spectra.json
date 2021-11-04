@@ -1,9 +1,0 @@
-{
-    "functionName": "test_hdf_import_spectra_to_spectra",
-    "className": null,
-    "fileName": "/CCampJr_&_CRIkit2/crikit_&_io_&_tests_&_test_hdf5.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Import a spectra into a spectra \"\"\"\nfilename, fid, hdf_data_shape = hdf_dataset\nhdf_data_shape = np.array(hdf_data_shape)\ndname = 'spectra'\ndataset = Spectra()\nout = hdf_import_data('.', filename, dname, output_cls_instance=dataset)\nassert out is True\nassert dataset.size == hdf_data_shape[1:].prod()\nnp.testing.assert_array_equal(dataset.data, fid[dname].value)\n"
-}

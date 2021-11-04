@@ -1,9 +1,0 @@
-{
-    "functionName": "test_unicode_printing",
-    "className": "TestBugFixes",
-    "fileName": "/Rambatino_&_CHAID/tests_&_test_tree.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "cols = dict(zip([u'\u2013', 'a', 'b', u'another unicode \u2013 \u2013'], ['nominal'] * 4))\ndf = pd.DataFrame(data=self.string_ndarr, columns=cols)\ndf['ordinal'] = self.arr[::-1]\ncols['ordinal'] = 'ordinal'\ndf['dep_v'] = self.arr\nno_exception = True\ntry:\n    CHAID.Tree.from_pandas_df(df, cols, 'dep_v', min_child_node_size=0\n        ).print_tree()\nexcept:\n    no_exception = False\nassert no_exception, 'Raised error while printing the tree'\n"
-}

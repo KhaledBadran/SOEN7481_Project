@@ -1,9 +1,0 @@
-{
-    "functionName": "_same_file_content",
-    "className": null,
-    "fileName": "/pierrepo_&_PBxplore/pbxplore_&_tests_&_test_regression.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Return True if two files are identical. Take file path as arguments.\n    Ignore the content of lines which start with `comment_char`.\n    \"\"\"\nwith open(file_a) as f1, open(file_b) as f2:\n    for f1_line, f2_line in zip(f1, f2):\n        if f1_line != f2_line:\n            f1_firstchar = f1_line.strip().startswith(comment_char)\n            f2_firstchar = f2_line.strip().startswith(comment_char)\n            if f1_firstchar != f2_firstchar:\n                print(file_a, file_b)\n                print(f1_line, f2_line, sep='//')\n                return False\n    for infile in (f1, f2):\n        try:\n            next(infile)\n        except StopIteration:\n            pass\n        else:\n            print('File too long')\n            return False\nreturn True\n"
-}

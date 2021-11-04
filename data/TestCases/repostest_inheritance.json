@@ -1,9 +1,0 @@
-{
-    "functionName": "test_inheritance",
-    "className": "NamespaceTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_namespace.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"test namespace initialization in a base inherited template that doesnt otherwise access the namespace\"\"\"\ncollection = lookup.TemplateLookup()\ncollection.put_string('base.html',\n    \"\"\"\n            <%namespace name=\"foo\" file=\"ns.html\" inheritable=\"True\"/>\n\n            ${next.body()}\n\"\"\"\n    )\ncollection.put_string('ns.html',\n    \"\"\"\n            <%def name=\"bar()\">\n                this is ns.html->bar\n            </%def>\n        \"\"\"\n    )\ncollection.put_string('index.html',\n    \"\"\"\n            <%inherit file=\"base.html\"/>\n\n            this is index\n            ${self.foo.bar()}\n        \"\"\"\n    )\nassert result_lines(collection.get_template('index.html').render()) == [\n    'this is index', 'this is ns.html->bar']\n"
-}

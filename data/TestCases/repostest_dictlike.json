@@ -1,9 +1,0 @@
-{
-    "functionName": "test_dictlike",
-    "className": "TestHDocument",
-    "fileName": "/corydodt_&_Hypy/src_&_hypy_&_test_lib.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        HDocument mostly conforms to the dictionary protocol.  Make sure that\n        works.\n        \"\"\"\ndoc = self.doc\nself.assertRaises(TypeError, doc.__setitem__, b'foobar', b'baz')\nself.assertRaises(TypeError, doc.__setitem__, b'foobar', 1)\ndoc[u'foobar'] = u'baz'\ndoc[u'foobar']\nself.assertEqual(doc[u'foobar'], u'baz')\nself.assertEqual(doc.get(u'foobar', b'default'), u'baz')\nself.assertEqual(doc.get(u'xyz', b'default'), b'default')\nself.assertEqual(doc.get(u'xyz'), None)\nnewattrs = {u'new1': u'lala', u'foobar': u'bazz'}\ndoc.update(newattrs)\nself.assertEqual(sorted(doc.items()), [(u'@uri', u'1'), (u'foobar', u'bazz'\n    ), (u'new1', u'lala')])\ndoc[u'ninjas'] = u'11'\nself.assertEqual(sorted(doc.keys()), [u'@uri', u'foobar', u'new1', u'ninjas'])\nself.assertEqual(sorted(doc.values()), [u'1', u'11', u'bazz', u'lala'])\nself.assertRaises(NotImplementedError, doc.__delitem__, u'ninjas')\n"
-}

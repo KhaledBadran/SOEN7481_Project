@@ -1,9 +1,0 @@
-{
-    "functionName": "test_logout_but_unauthorized_in_other_api",
-    "className": "TestLogout",
-    "fileName": "/fvalverd_&_AutoApi/tests_&_test_operations.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data = {'email': self.user, 'password': self.password, 'api': self.api}\nresponse = self.app.post('/login', data=data)\nself.assertEqual(response.status_code, 200)\nheaders = self.response_to_headers(response)\nresponse = self.app.post('/logout', headers=headers, data={'api': 'bad_api'})\nself.assertEqual(response.status_code, 401)\nresponse_json = json.loads(response.data or '{}')\nself.assertDictEqual(response_json, {'message': \n    u'You must be logged in \"%s\" api' % u'bad_api'})\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "find_lib_path",
-    "className": null,
-    "fileName": "/microsoft_&_LightGBM/tests_&_c_api_test_&_test_.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "if os.environ.get('LIGHTGBM_BUILD_DOC', False):\n    return []\ncurr_path = os.path.dirname(os.path.abspath(os.path.expanduser(__file__)))\ndll_path = [curr_path, os.path.join(curr_path, '../../'), os.path.join(\n    curr_path, '../../python-package/lightgbm/compile'), os.path.join(\n    curr_path, '../../python-package/compile'), os.path.join(curr_path,\n    '../../lib/')]\nif system() in ('Windows', 'Microsoft'):\n    dll_path.append(os.path.join(curr_path,\n        '../../python-package/compile/Release/'))\n    dll_path.append(os.path.join(curr_path,\n        '../../python-package/compile/windows/x64/DLL/'))\n    dll_path.append(os.path.join(curr_path, '../../Release/'))\n    dll_path.append(os.path.join(curr_path, '../../windows/x64/DLL/'))\n    dll_path = [os.path.join(p, 'lib_lightgbm.dll') for p in dll_path]\nelse:\n    dll_path = [os.path.join(p, 'lib_lightgbm.so') for p in dll_path]\nlib_path = [p for p in dll_path if os.path.exists(p) and os.path.isfile(p)]\nif not lib_path:\n    dll_path = [os.path.realpath(p) for p in dll_path]\n    raise Exception(\n        'Cannot find lightgbm library file in following paths:\\n' + '\\n'.\n        join(dll_path))\nreturn lib_path\n"
-}

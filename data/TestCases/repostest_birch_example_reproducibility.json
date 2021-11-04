@@ -1,9 +1,0 @@
-{
-    "functionName": "test_birch_example_reproducibility",
-    "className": null,
-    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_tests_&_test_cluster.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "rng = np.random.RandomState(42)\nX, y = make_blobs(n_samples=1000, n_features=10, random_state=rng)\ncluster_model = Birch(threshold=0.9, branching_factor=20,\n    compute_sample_indices=True)\ncluster_model.fit(X)\nhtree, n_subclusters = birch_hierarchy_wrapper(cluster_model)\nassert htree.tree_size == n_subclusters\nassert htree.tree_size == 78\nsc = htree.flatten()[example_id]\nif example_id == 34:\n    assert sc.current_depth == 1\n    assert len(sc.children) == 3\nassert_array_equal([sc['cluster_id'] for sc in htree.flatten()], np.arange(\n    htree.tree_size))\npytest.mark.parametrize('example_id', [12, 34])"
-}

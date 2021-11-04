@@ -1,9 +1,0 @@
-{
-    "functionName": "test_q_add_field",
-    "className": null,
-    "fileName": "/quantOS-org_&_JAQS/test_&_test_dataview.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "dv = DataView()\ndv.load_dataview(folder_path=quarterly_path)\nnrows, ncols = dv.data_q.shape\nn_securities = len(dv.data_d.columns.levels[0])\nds = RemoteDataService()\nds.init_from_config(data_config)\ndv.add_field('net_inc_other_ops', ds)\n\"\"\"\n    dv.add_field('oper_rev', ds)\n    dv.add_field('turnover', ds)\n    \"\"\"\nassert dv.data_q.shape == (nrows, ncols + 1 * n_securities)\n"
-}

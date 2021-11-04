@@ -1,9 +1,0 @@
-{
-    "functionName": "test_from_header",
-    "className": null,
-    "fileName": "/PaulHancock_&_Aegean/tests_&_test_wcs_helpers.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that we can make a beam from a fitsheader\"\"\"\nfname = 'tests/test_files/1904-66_SIN.fits'\nheader = fits.getheader(fname)\nhelper = WCSHelper.from_header(header)\nif helper.beam is None:\n    raise AssertionError()\ndel header['BMAJ'], header['BMIN'], header['BPA']\ntry:\n    _ = WCSHelper.from_header(header)\nexcept AssertionError as e:\n    pass\nelse:\n    raise AssertionError(\n        'Header with no beam information should thrown an exception.')\nreturn\n"
-}

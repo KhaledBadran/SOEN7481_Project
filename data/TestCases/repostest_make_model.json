@@ -1,9 +1,0 @@
-{
-    "functionName": "test_make_model",
-    "className": null,
-    "fileName": "/PaulHancock_&_Aegean/tests_&_test_AeRes.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test make_model\"\"\"\nfilename = 'tests/test_files/1904_comp.fits'\nsources = ar.load_sources(filename)\nhdulist = fits.open('tests/test_files/1904-66_SIN.fits')\nwcs_helper = wcs_helpers.WCSHelper.from_header(header=hdulist[0].header)\nmodel = ar.make_model(sources=sources, shape=hdulist[0].data.shape,\n    wcshelper=wcs_helper)\nif np.all(model == 0.0):\n    raise AssertionError('Model is empty')\nmodel = ar.make_model(sources=sources, shape=(100, 2), wcshelper=wcs_helper)\nif not np.all(model == 0.0):\n    raise AssertionError('Model is *not* empty')\n"
-}

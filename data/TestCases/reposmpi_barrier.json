@@ -1,9 +1,0 @@
-{
-    "functionName": "mpi_barrier",
-    "className": null,
-    "fileName": "/Silmathoron_&_NNGT/nngt_&_lib_&_test_functions.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "def wrapper(func, *args, **kwargs):\n    try:\n        from mpi4py import MPI\n        comm = MPI.COMM_WORLD\n        comm.Barrier()\n    except ImportError:\n        pass\n    if func is not None:\n        return func(*args, **kwargs)\nif func is not None:\n    return decorate(func, wrapper)\nwrapper(None)\n"
-}

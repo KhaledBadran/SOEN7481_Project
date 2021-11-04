@@ -1,9 +1,0 @@
-{
-    "functionName": "test_find_knn",
-    "className": "TestManifold",
-    "fileName": "/nishaq503_&_CHESS/tests_&_test_manifold.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data = datasets.bullseye()[0]\npoint = data[0]\npoints = sorted([(d, p) for p, d in zip(range(data.shape[0]), cdist(np.\n    asarray([point]), data, 'euclidean')[0])])\nm = Manifold(data, 'euclidean')\nm.build_tree(criterion.MinPoints(10), criterion.MaxDepth(10))\nks = list(range(100))\nks.extend(range(100, data.shape[0], 100))\nfor k in ks:\n    naive_results = {p: d for d, p in points[:k]}\n    results = m.find_knn(point, k)\n    self.assertEqual(k, len(results.keys()))\n    self.assertSetEqual(set(naive_results.keys()), set(results.keys()))\n"
-}

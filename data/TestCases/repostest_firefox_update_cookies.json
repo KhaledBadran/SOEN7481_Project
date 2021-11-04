@@ -1,9 +1,0 @@
-{
-    "functionName": "test_firefox_update_cookies",
-    "className": "TestBrowser",
-    "fileName": "/cdgriffith_&_CookieEater/test_&_test_browser.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "fox = FirefoxCookiesV1(db=fox_db)\nfox.update_cookie('www.example.com', 'test_name1', 'test_value1',\n    ignore_missing=True)\nconn = sqlite3.Connection(fox_db)\ncur = conn.cursor()\ncur.execute('SELECT * FROM {0}'.format(fox.table_name))\nres = cur.fetchall()\ntry:\n    assert len(res) == 1\n    assert res[0][3] == 'test_name1'\n    assert res[0][4] == 'test_value1'\nfinally:\n    conn.close()\nfox.update_cookie('www.example.com', 'test_name1', 'test_value2345',\n    ignore_missing=True)\nconn = sqlite3.Connection(fox_db)\ncur = conn.cursor()\ncur.execute('SELECT * FROM {0}'.format(fox.table_name))\nres = cur.fetchall()\ntry:\n    assert len(res) == 1\n    assert res[0][3] == 'test_name1'\n    assert res[0][4] == 'test_value2345'\nfinally:\n    conn.close()\n"
-}

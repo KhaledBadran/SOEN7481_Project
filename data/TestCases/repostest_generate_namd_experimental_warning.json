@@ -1,9 +1,0 @@
-{
-    "functionName": "test_generate_namd_experimental_warning",
-    "className": null,
-    "fileName": "/bio-phys_&_MDBenchmark/mdbenchmark_&_tests_&_test_generate.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that we print the NAMD experimental warning.\"\"\"\nwith tmpdir.as_cwd():\n    for f in ['md.namd', 'md.psf', 'md.pdb']:\n        open(f, 'a').close()\n    monkeypatch.setattr('mdbenchmark.mdengines.get_available_modules', lambda :\n        {'namd': ['123']})\n    result = cli_runner.invoke(cli, ['generate', '--module=namd/123',\n        '--host=draco', '--name=md', '--yes'])\n    output1 = \"\"\"WARNING NAMD support is experimental. All input files must be in the current directory. Parameter paths must be absolute. Only crude file checks are performed! If you use the --gpu option make sure you use the GPU compatible NAMD module!\nCreating benchmark system for namd/123.\n\"\"\"\n    bundle = dtr.discover()\n    df = DataFrameFromBundle(bundle)\n    df = ConsolidateDataFrame(df)\n    test_output = 'Benchmark Summary:\\n' + PrintDataFrame(df, False) + '\\n'\n    output2 = \"\"\"Generating the above benchmarks.\nFinished generating all benchmarks.\nYou can now submit the jobs with mdbenchmark submit.\n\"\"\"\n    output = output1 + test_output + output2\n    assert result.exit_code == 0\n    assert result.output == output\n"
-}

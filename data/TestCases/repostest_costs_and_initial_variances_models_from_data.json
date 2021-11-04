@@ -1,9 +1,0 @@
-{
-    "functionName": "test_costs_and_initial_variances_models_from_data",
-    "className": null,
-    "fileName": "/NASA_&_MLMCPy/tests_&_mlmc_&_test_MLMCSimulator.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Tests costs and variances computed by simulator's\n    compute_costs_and_variances() against expected values based on data loaded\n    from files.\n    \"\"\"\nnp.random.seed(1)\nsim = MLMCSimulator(models=models_from_data, data=data_input)\nsim._initial_sample_sizes = np.array([100, 100, 100])\ncosts, variances = sim._compute_costs_and_variances()\ntrue_variances = np.array([[9.262628271266264], [0.07939834631411287], [\n    5.437083709623372e-06]])\ntrue_costs = np.array([1.0, 5.0, 20.0])\nassert np.all(np.isclose(true_costs, costs))\nassert np.all(np.isclose(true_variances, variances, rtol=0.1))\n"
-}

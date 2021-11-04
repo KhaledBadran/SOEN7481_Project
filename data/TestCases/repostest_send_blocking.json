@@ -1,9 +1,0 @@
-{
-    "functionName": "test_send_blocking",
-    "className": "TestTutor",
-    "fileName": "/tutorgen_&_HPIT-python-client/tests_&_hpitclient_&_test_tutor.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Tutor.send_blocking() Test plan:\n            - if message is transaction, then it should raise an exception\n            - make a mock endpoint, return a message id\n            - test a timeout\n                - mock poll_responses to return empty dict, should return none\n            - test a valid response\n                - mock poll_responses to return a valid response with desired message ID\n        \"\"\"\nhttpretty.register_uri(httpretty.POST,\n    'https://www.hpit-project.org/message', body='{\"message_id\":\"4\"}')\nsubject = Tutor(123, 456, None)\nsubject.poll_wait = 0\nsubject.send_log_entry = MagicMock()\nsubject.send_blocking.when.called_with('transaction', {'payload': 'something'}\n    ).should.throw(InvalidMessageNameException)\nsubject.block_timeout_time = 0\nsubject._poll_responses = MagicMock(return_value=[])\nsubject.send_blocking('message_name', {'payload': 'something'}).should.equal(\n    None)\nsubject.block_timeout_time = 999999\nsubject._poll_responses = MagicMock(return_value=[{'message': {'message_id':\n    '4'}, 'response': {'data': '1'}}])\nsubject.send_blocking('message_name', {'payload': 'something'}).should.equal({\n    'data': '1', 'message_id': '4'})\nhttpretty.activate"
-}

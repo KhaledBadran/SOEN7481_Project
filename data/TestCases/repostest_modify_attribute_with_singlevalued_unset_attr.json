@@ -1,9 +1,0 @@
-{
-    "functionName": "test_modify_attribute_with_singlevalued_unset_attr",
-    "className": "TestKmipEngine",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a KmipError is raised when attempting to modify an\n        unset attribute.\n        \"\"\"\ne = engine.KmipEngine()\ne._protocol_version = contents.ProtocolVersion(1, 4)\ne._attribute_policy._version = e._protocol_version\ne._data_store = self.engine\ne._data_store_session_factory = self.session_factory\ne._data_session = e._data_store_session_factory()\ne._is_allowed_by_operation_policy = mock.Mock(return_value=True)\ne._logger = mock.MagicMock()\ne._get_attributes_from_managed_object = mock.Mock(return_value=[])\nsecret = pie_objects.SymmetricKey(enums.CryptographicAlgorithm.AES, 0, b'')\ne._data_session.add(secret)\ne._data_session.commit()\ne._data_session = e._data_store_session_factory()\nattribute_factory = factory.AttributeFactory()\ne._set_attribute_on_managed_object(secret, ('Sensitive', primitives.Boolean\n    (None)))\nargs = payloads.ModifyAttributeRequestPayload(unique_identifier='1',\n    attribute=attribute_factory.create_attribute(enums.AttributeType.\n    SENSITIVE, True)),\nself.assertRaisesRegex(exceptions.KmipError,\n    \"The 'Sensitive' attribute is not set on the managed object. It must be set before it can be modified.\"\n    , e._process_modify_attribute, *args)\n"
-}

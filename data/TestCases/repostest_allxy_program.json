@@ -1,9 +1,0 @@
-{
-    "functionName": "test_allxy_program",
-    "className": "Test_program",
-    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_Program.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.setUpClass()\nnqubits = 7\np = ql.Program('AllXY', platf, nqubits)\nk = ql.Kernel('AllXY_q0', platf, nqubits)\nq = 0\npulse_combinations = [['I', 'I'], ['rx180', 'rx180'], ['ry180', 'ry180'], [\n    'rx180', 'ry180'], ['ry180', 'rx180'], ['rx90', 'I'], ['ry90', 'I'], [\n    'rx90', 'ry90'], ['ry90', 'rx90'], ['rx90', 'ry180'], ['ry90', 'rx180'],\n    ['rx180', 'ry90'], ['ry180', 'rx90'], ['rx90', 'rx180'], ['rx180',\n    'rx90'], ['ry90', 'ry180'], ['ry180', 'ry90'], ['rx180', 'I'], ['ry180',\n    'I'], ['rx90', 'rx90'], ['ry90', 'ry90']]\nnr_sweep_pts = len(pulse_combinations)\nfor pulse_comb in pulse_combinations:\n    k.prepz(q)\n    k.gate(pulse_comb[0], [q])\n    k.gate(pulse_comb[1], [q])\n    k.measure(q)\np.add_kernel(k)\np.set_sweep_points([nr_sweep_pts])\np.compile()\n"
-}

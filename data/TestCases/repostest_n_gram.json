@@ -1,9 +1,0 @@
-{
-    "functionName": "test_n_gram",
-    "className": null,
-    "fileName": "/ironmussa_&_Optimus/tests_&_test_ml.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "df = op.sc.parallelize([['this is the best sentence ever'], [\n    'this is however the worst sentence available']]).toDF(schema=types.\n    StructType().add('sentence', types.StringType()))\ndf_model, tfidf_model = fe.n_gram(df, input_col='sentence', n=2)\nassert_spark_df(df_model)\nassert_spark_model(tfidf_model)\nassert_equal(df_model.select('sentence', 'features').count(), 2)\n"
-}

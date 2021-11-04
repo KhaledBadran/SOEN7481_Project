@@ -1,9 +1,0 @@
-{
-    "functionName": "test_lstm_simulator_load_from_rnn_model",
-    "className": null,
-    "fileName": "/dbehrlich_&_PsychRNN/test_&_backend_&_test_simulation.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "reset_seeds(19846)\ntf.compat.v1.keras.backend.set_floatx('float64')\nmtc = MatchToCategory(dt=10, tau=100, T=2000, N_batch=50)\nparams = mtc.get_task_params()\nparams['name'] = 'test'\nparams['N_rec'] = 49\nrnn_model = LSTM(params)\nx, _, _, _ = mtc.get_trial_batch()\nsim_model = LSTMSimulator(rnn_model=rnn_model)\ntf_output, tf_state = rnn_model.test(x)\nsim_output, sim_state = sim_model.run_trials(x)\nassert tf_output.shape == sim_output.shape\nassert tf_state.shape == sim_state.shape\nassert np.allclose(tf_state, sim_state, atol=0.1, rtol=0.1)\nassert np.allclose(tf_output, sim_output, atol=0.1, rtol=0.1)\nrnn_model.destruct()\nrnn_model = LSTM(params)\ntf_output, tf_state = rnn_model.test(x)\nassert not np.allclose(tf_state, sim_state, atol=0.1, rtol=0.1)\nassert not np.allclose(tf_output, sim_output, atol=0.1, rtol=0.1)\n"
-}

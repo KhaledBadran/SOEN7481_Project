@@ -1,9 +1,0 @@
-{
-    "functionName": "test_undersampling_method_multiclass",
-    "className": null,
-    "fileName": "/tvdboom_&_ATOM/tests_&_test_data_cleaning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Assert that the undersampling method works for multiclass tasks.\"\"\"\nstrats = ['majority', 'not minority', 'all']\nfor strat in strats:\n    balancer = Balancer(oversample=None, undersample=strat)\n    X, y = balancer.transform(X_class, y_class)\n    assert (y == 1).sum() != (y_class == 1).sum()\n"
-}

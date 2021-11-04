@@ -1,9 +1,0 @@
-{
-    "functionName": "file_load_check",
-    "className": "FileLoader",
-    "fileName": "/microsoft_&_LightGBM/tests_&_python_package_test_&_test_consistency.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "lgb_train_f = lgb.Dataset(self.path(name), params=self.params).construct()\nfor f in ('num_data', 'num_feature', 'get_label', 'get_weight',\n    'get_init_score', 'get_group'):\n    a = getattr(lgb_train, f)()\n    b = getattr(lgb_train_f, f)()\n    if a is None and b is None:\n        pass\n    elif a is None:\n        assert np.all(b == 1), f\n    elif isinstance(b, (list, np.ndarray)):\n        np.testing.assert_allclose(a, b)\n    else:\n        assert a == b, f\n"
-}

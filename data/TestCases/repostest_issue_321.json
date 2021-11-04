@@ -1,9 +1,0 @@
-{
-    "functionName": "test_issue_321",
-    "className": "TestGitHubIssues",
-    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_test_issues.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Test iterable as query argument. \"\"\"\nconn = pymysql.connect(charset='utf8', **self.databases[0])\nself.safe_create_table(conn, 'issue321',\n    'create table issue321 (value_1 varchar(1), value_2 varchar(1))')\nsql_insert = 'insert into issue321 (value_1, value_2) values (%s, %s)'\nsql_dict_insert = (\n    'insert into issue321 (value_1, value_2) values (%(value_1)s, %(value_2)s)'\n    )\nsql_select = 'select * from issue321 where value_1 in %s and value_2=%s'\ndata = [[(u'a',), u'\u0430'], [[u'b'], u'\u0430'], {'value_1': [[u'c']], 'value_2': u'\u0430'}\n    ]\ncur = conn.cursor()\nself.assertEqual(cur.execute(sql_insert, data[0]), 1)\nself.assertEqual(cur.execute(sql_insert, data[1]), 1)\nself.assertEqual(cur.execute(sql_dict_insert, data[2]), 1)\nself.assertEqual(cur.execute(sql_select, [(u'a', u'b', u'c'), u'\u0430']), 3)\nself.assertEqual(cur.fetchone(), (u'a', u'\u0430'))\nself.assertEqual(cur.fetchone(), (u'b', u'\u0430'))\nself.assertEqual(cur.fetchone(), (u'c', u'\u0430'))\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_uk_update_variogram_model",
-    "className": null,
-    "fileName": "/bsmurphy_&_PyKrige/tests_&_test_core.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data, (gridx, gridy, _), mask_ref = sample_data_2d\nwith pytest.raises(ValueError):\n    UniversalKriging(data[:, (0)], data[:, (1)], data[:, (2)],\n        variogram_model='blurg')\nwith pytest.raises(ValueError):\n    UniversalKriging(data[:, (0)], data[:, (1)], data[:, (2)], drift_terms=\n        ['external_Z'])\nwith pytest.raises(ValueError):\n    UniversalKriging(data[:, (0)], data[:, (1)], data[:, (2)], drift_terms=\n        ['external_Z'], external_drift=np.array([0]))\nwith pytest.raises(ValueError):\n    UniversalKriging(data[:, (0)], data[:, (1)], data[:, (2)], drift_terms=\n        ['point_log'])\nuk = UniversalKriging(data[:, (0)], data[:, (1)], data[:, (2)])\nvariogram_model = uk.variogram_model\nvariogram_parameters = uk.variogram_model_parameters\nanisotropy_scaling = uk.anisotropy_scaling\nanisotropy_angle = uk.anisotropy_angle\nwith pytest.raises(ValueError):\n    uk.update_variogram_model('blurg')\nuk.update_variogram_model('power', anisotropy_scaling=3.0, anisotropy_angle\n    =45.0)\nassert variogram_model != uk.variogram_model\nassert not np.array_equal(variogram_parameters, uk.variogram_model_parameters)\nassert anisotropy_scaling != uk.anisotropy_scaling\nassert anisotropy_angle != uk.anisotropy_angle\n"
-}

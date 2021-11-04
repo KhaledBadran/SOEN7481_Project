@@ -1,9 +1,0 @@
-{
-    "functionName": "test_kfold",
-    "className": "TestValidation",
-    "fileName": "/SUNCAT-Center_&_CatLearn/test_&_test_validation.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test some cross-validation.\"\"\"\nfeatures, targets, _, _ = get_data()\nf, t = k_fold(features, nsplit=5, targets=targets)\nself.assertTrue(len(f) == 5 and len(t) == 5)\nfor s in f:\n    self.assertEqual(np.shape(s), (9, 100))\nf, t = k_fold(features, nsplit=4, targets=targets, fix_size=5)\nself.assertTrue(len(f) == 4 and len(t) == 4)\nfor s in f:\n    self.assertEqual(np.shape(s), (5, 100))\nwrite_split(features=f, targets=t, fname='cvsave', fformat='pickle')\nf1, t1 = read_split(fname='cvsave', fformat='pickle')\nself.assertEqual(len(f1), len(f))\nself.assertEqual(len(t1), len(t))\nwrite_split(features=f, targets=t, fname='cvsave', fformat='json')\nf1, t1 = read_split(fname='cvsave', fformat='pickle')\nself.assertEqual(len(f1), len(f))\nself.assertEqual(len(t1), len(t))\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_embed_words",
-    "className": null,
-    "fileName": "/oujago_&_NumpyDL/tests_&_test_layers_&_test_embedding.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "embed_words = np.random.rand(100, 10)\nlayer = Embedding(embed_words, False)\nassert len(layer.params) == 1\nassert len(layer.grads) == 1\nassert len(layer.param_grads) == 1\nlayer.connect_to()\nassert len(layer.out_shape) == 3\nlayer = Embedding(embed_words)\nwith pytest.raises(AssertionError):\n    layer.forward(np.arange(10))\ninput = np.random.randint(0, 10, (4, 2))\nassert layer.forward(input).shape == (4, 2, 10)\nassert len(layer.params) == 0\nassert len(layer.grads) == 0\nassert len(layer.param_grads) == 0\n"
-}

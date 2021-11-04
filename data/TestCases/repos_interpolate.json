@@ -1,9 +1,0 @@
-{
-    "functionName": "_interpolate",
-    "className": null,
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_layers_&_special.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "num_batch, height, width, channels = im.shape\nheight_f = T.cast(height, theano.config.floatX)\nwidth_f = T.cast(width, theano.config.floatX)\nx = (x + 1) / 2 * (width_f - 1)\ny = (y + 1) / 2 * (height_f - 1)\nx0_f = T.floor(x)\ny0_f = T.floor(y)\nx1_f = x0_f + 1\ny1_f = y0_f + 1\nif border_mode == 'nearest':\n    x0 = T.clip(x0_f, 0, width_f - 1)\n    x1 = T.clip(x1_f, 0, width_f - 1)\n    y0 = T.clip(y0_f, 0, height_f - 1)\n    y1 = T.clip(y1_f, 0, height_f - 1)\nelif border_mode == 'mirror':\n    w = 2 * (width_f - 1)\n    x0 = T.minimum(x0_f % w, -x0_f % w)\n    x1 = T.minimum(x1_f % w, -x1_f % w)\n    h = 2 * (height_f - 1)\n    y0 = T.minimum(y0_f % h, -y0_f % h)\n    y1 = T.minimum(y1_f % h, -y1_f % h)\nelif border_mode == 'wrap':\n    x0 = T.mod(x0_f, width_f)\n    x1 = T.mod(x1_f, width_f)\n    y0 = T.mod(y0_f, height_f)\n    y1 = T.mod(y1_f, height_f)\nelse:\n    raise ValueError(\"border_mode must be one of 'nearest', 'mirror', 'wrap'\")\nx0, x1, y0, y1 = (T.cast(v, 'int64') for v in (x0, x1, y0, y1))\ndim2 = width\ndim1 = width * height\nbase = T.repeat(T.arange(num_batch, dtype='int64') * dim1, out_height *\n    out_width)\nbase_y0 = base + y0 * dim2\nbase_y1 = base + y1 * dim2\nidx_a = base_y0 + x0\nidx_b = base_y1 + x0\nidx_c = base_y0 + x1\nidx_d = base_y1 + x1\nim_flat = im.reshape((-1, channels))\nIa = im_flat[idx_a]\nIb = im_flat[idx_b]\nIc = im_flat[idx_c]\nId = im_flat[idx_d]\nwa = ((x1_f - x) * (y1_f - y)).dimshuffle(0, 'x')\nwb = ((x1_f - x) * (y - y0_f)).dimshuffle(0, 'x')\nwc = ((x - x0_f) * (y1_f - y)).dimshuffle(0, 'x')\nwd = ((x - x0_f) * (y - y0_f)).dimshuffle(0, 'x')\noutput = T.sum([wa * Ia, wb * Ib, wc * Ic, wd * Id], axis=0)\nreturn output\n"
-}

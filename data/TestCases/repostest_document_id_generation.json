@@ -1,9 +1,0 @@
-{
-    "functionName": "test_document_id_generation",
-    "className": null,
-    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_server_&_tests_&_test_ingestion.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "method = V01 + '/feature-extraction/'\ndata = app.post_check(method)\ndsid = data['id']\nmethod += dsid\npars = {'data_dir': data_dir}\nif document_id_generator:\n    pars['document_id_generator'] = document_id_generator\napp.post_check(method, json=pars)\ndata = app.get_check(method)\ndata = app.post_check(method + '/id-mapping')\ndf = pd.DataFrame(data['data'])\nif document_id_generator in [None, 'indexed_file_path']:\n    assert_array_equal(df.document_id.values, df.internal_id.values)\nelse:\n    assert_array_equal(df.document_id.values, [747101442, 747117435, \n        7628635, 7628636, 7628637, 7628638])\npytest.mark.parametrize('document_id_generator', [None, 'indexed_file_path',\n    'infer_file_path'])"
-}

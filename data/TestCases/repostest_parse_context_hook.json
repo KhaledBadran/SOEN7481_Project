@@ -1,9 +1,0 @@
-{
-    "functionName": "test_parse_context_hook",
-    "className": null,
-    "fileName": "/willdeuschle_&_Flask-GraphQL-Subscriptions-Transport/tests_&_test_flask_graphql_subscriptions_transport.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "app, ss = basic_ss\ntest_client = SocketIOTestClient(app, ss.socketio, namespace=ss.namespace)\nss.parse_context = Mock(return_value={})\nss.send_subscription_success = Mock()\ntest_client.emit('message', json.dumps({'type': SUBSCRIPTION_START,\n    'payload': 'foo', 'query': 'query test{ testString }', 'variables':\n    'baz'}), namespace=ss.namespace)\nss.parse_context.assert_called_once()\nss.send_subscription_success.assert_called_once()\n"
-}

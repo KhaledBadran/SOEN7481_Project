@@ -1,9 +1,0 @@
-{
-    "functionName": "test_core_initialize_variogram_model_3d",
-    "className": null,
-    "fileName": "/bsmurphy_&_PyKrige/tests_&_test_core.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data, _, _ = sample_data_3d\nwith pytest.raises(ValueError):\n    core._initialize_variogram_model(np.vstack((data[:, (0)], data[:, (1)],\n        data[:, (2)])).T, data[:, (3)], 'linear', [0.0], 'linear', 6, False,\n        'euclidean')\nwith pytest.raises(ValueError):\n    core._initialize_variogram_model(np.vstack((data[:, (0)], data[:, (1)],\n        data[:, (2)])).T, data[:, (3)], 'spherical', [0.0], 'spherical', 6,\n        False, 'euclidean')\nwith pytest.raises(ValueError):\n    core._initialize_variogram_model(np.vstack((data[:, (0)], data[:, (1)],\n        data[:, (2)])).T, data[:, (3)], 'linear', [0.0, 0.0], 'linear', 6, \n        False, 'geographic')\nlags, semivariance, variogram_model_parameters = (core.\n    _initialize_variogram_model(np.vstack((np.array([1.0, 2.0, 3.0, 4.0]),\n    np.array([1.0, 2.0, 3.0, 4.0]), np.array([1.0, 2.0, 3.0, 4.0]))).T, np.\n    array([1.0, 2.0, 3.0, 4.0]), 'linear', [0.0, 0.0], 'linear', 3, False,\n    'euclidean'))\nassert_allclose(lags, np.array([np.sqrt(3.0), 2.0 * np.sqrt(3.0), 3.0 * np.\n    sqrt(3.0)]))\nassert_allclose(semivariance, np.array([0.5, 2.0, 4.5]))\n"
-}

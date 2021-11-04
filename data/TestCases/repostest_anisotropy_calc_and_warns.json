@@ -1,9 +1,0 @@
-{
-    "functionName": "test_anisotropy_calc_and_warns",
-    "className": "TestThellierGUI",
-    "fileName": "/PmagPy_&_PmagPy/pmagpy_tests_&_test_thellier_gui.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "aniso_menu = self.get_menu_from_frame(self.frame, 'Anisotropy')\ncalc_aniso = wx.PyCommandEvent(wx.EVT_MENU.typeId, aniso_menu.FindItem(\n    '&Calculate anisotropy tensors'))\nwarn_aniso = wx.PyCommandEvent(wx.EVT_MENU.typeId, aniso_menu.FindItem(\n    '&Show anisotropy calculation Warnings/Errors'))\nself.assertFalse(os.path.isfile(os.path.join(self.frame.WD,\n    'rmag_anisotropy.txt')))\nself.assertFalse(os.path.isfile(os.path.join(self.frame.WD,\n    'rmag_anisotropy.log')))\nself.assertFalse(os.path.isfile(os.path.join(self.frame.WD,\n    'rmag_results.txt')))\nself.frame.ProcessEvent(calc_aniso)\nif self.frame.data_model != 3:\n    self.assertTrue(os.path.isfile(os.path.join(self.frame.WD,\n        'rmag_anisotropy.txt')))\n    self.assertTrue(os.path.isfile(os.path.join(self.frame.WD,\n        'rmag_anisotropy.log')))\n    self.assertTrue(os.path.isfile(os.path.join(self.frame.WD,\n        'rmag_results.txt')))\nself.frame.ProcessEvent(warn_aniso)\n"
-}

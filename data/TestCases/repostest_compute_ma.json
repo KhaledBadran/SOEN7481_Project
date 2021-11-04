@@ -1,9 +1,0 @@
-{
-    "functionName": "test_compute_ma",
-    "className": null,
-    "fileName": "/fmilthaler_&_FinQuant/tests_&_test_moving_average.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "stock_orig = [100.0, 0.1531138587991997, 0.6937500710898674, -\n    0.9998892390840102, -0.46790785174554383, 0.24992469198859263, \n    0.8371986752411684, 0.9996789142433975]\nma10d_orig = [91.0, 0.12982588130881456, 0.6364686654113839, -\n    0.9111588177100766, -0.45638926346295605, 0.22777211487458476, \n    0.7335679046265856, 0.9544686462652832]\nma30d_orig = [71.0, 0.029843302068984976, 0.40788852852895285, -\n    0.5654851211095089, -0.3735139378462722, 0.0648917102227224, \n    0.4075702001405792, 0.5942823972334838]\nindex = ['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max']\ndforig = pd.DataFrame({'Stock': stock_orig, '10d': ma10d_orig, '30d':\n    ma30d_orig}, index=index)\nx = np.sin(np.linspace(1, 10, 100))\ndf = pd.DataFrame({'Stock': x})\nma = compute_ma(df, ema, spans=[10, 30])\nassert all(abs(dforig - ma.describe() <= 1e-15).all())\n"
-}

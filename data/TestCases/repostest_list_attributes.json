@@ -1,9 +1,0 @@
-{
-    "functionName": "test_list_attributes",
-    "className": "TestAttributes",
-    "fileName": "/Silmathoron_&_NNGT/testing_&_test_attributes.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        For list attributes, test that they are preserved as lists, and that\n        some nodes or edges do not own references to the same list.\n        \"\"\"\navg = 25\nstd = 3\ngraph = nngt.generation.gaussian_degree(avg, std, nodes=1000)\ngraph.new_node_attribute('nlist', value_type='object', val=[])\nnodes = [i for i in range(8, 49)]\ngraph.set_node_attribute('nlist', val=[1], nodes=nodes)\nnodes = [i for i in range(0, 41)]\nnlists = graph.get_node_attributes(name='nlist', nodes=nodes)\nfor l in nlists:\n    l.append(2)\ngraph.set_node_attribute('nlist', values=nlists, nodes=nodes)\nnlists = graph.get_node_attributes(name='nlist')\nself.assertTrue(np.all(np.unique(nlists) == np.unique([[], [1], [2], [1, 2]])))\nself.assertTrue([] not in nlists[:49].tolist())\ngraph.new_edge_attribute('elist', value_type='object', val=[])\nnodes = [i for i in range(8, 49)]\nedges = graph.get_edges(source_node=nodes, target_node=nodes)\ngraph.set_edge_attribute('elist', val=[1], edges=edges)\nnodes = [i for i in range(0, 41)]\nedges2 = graph.get_edges(source_node=nodes, target_node=nodes)\nelists = graph.get_edge_attributes(name='elist', edges=edges2)\nfor l in elists:\n    l.append(2)\ngraph.set_edge_attribute('elist', values=elists, edges=edges2)\nelists = graph.get_edge_attributes(name='elist')\nself.assertTrue(np.all(np.unique(elists) == np.unique([[], [1], [2], [1, 2]])))\neattr1 = graph.get_edge_attributes(name='elist', edges=edges).tolist()\neattr2 = graph.get_edge_attributes(name='elist', edges=edges2).tolist()\nself.assertTrue([] not in eattr1 and [] not in eattr2)\nunittest.skipIf(nngt.get_config('mpi'), 'Not checking for MPI')"
-}

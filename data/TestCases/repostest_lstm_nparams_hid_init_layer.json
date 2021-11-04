@@ -1,9 +1,0 @@
-{
-    "functionName": "test_lstm_nparams_hid_init_layer",
-    "className": null,
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_recurrent.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "l_inp = InputLayer((2, 2, 3))\nl_inp_h = InputLayer((2, 5))\nl_inp_h_de = DenseLayer(l_inp_h, 7)\nl_inp_cell = InputLayer((2, 5))\nl_inp_cell_de = DenseLayer(l_inp_cell, 7)\nl_lstm = LSTMLayer(l_inp, 7, hid_init=l_inp_h_de, cell_init=l_inp_cell_de)\nlayers_to_find = [l_inp, l_inp_h, l_inp_h_de, l_inp_cell, l_inp_cell_de, l_lstm\n    ]\nassert lasagne.layers.get_all_layers(l_lstm) == layers_to_find\nassert len(lasagne.layers.get_all_params(l_lstm, trainable=True)) == 19\nassert len(lasagne.layers.get_all_params(l_lstm, regularizable=False)) == 6\n"
-}

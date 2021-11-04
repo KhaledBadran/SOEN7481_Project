@@ -1,9 +1,0 @@
-{
-    "functionName": "read_stc",
-    "className": null,
-    "fileName": "/nipy_&_PySurfer/surfer_&_io.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Read an STC file from the MNE package\n\n    STC files contain activations or source reconstructions\n    obtained from EEG and MEG data.\n\n    Parameters\n    ----------\n    filepath: string\n        Path to STC file\n\n    Returns\n    -------\n    data: dict\n        The STC structure. It has the following keys:\n           tmin           The first time point of the data in seconds\n           tstep          Time between frames in seconds\n           vertices       vertex indices (0 based)\n           data           The data matrix (nvert * ntime)\n    \"\"\"\nfid = open(filepath, 'rb')\nstc = dict()\nfid.seek(0, 2)\nfile_length = fid.tell()\nfid.seek(0, 0)\nstc['tmin'] = float(np.fromfile(fid, dtype='>f4', count=1))\nstc['tmin'] /= 1000.0\nstc['tstep'] = float(np.fromfile(fid, dtype='>f4', count=1))\nstc['tstep'] /= 1000.0\nvertices_n = int(np.fromfile(fid, dtype='>u4', count=1))\nstc['vertices'] = np.fromfile(fid, dtype='>u4', count=vertices_n)\ndata_n = int(np.fromfile(fid, dtype='>u4', count=1))\nif (file_length / 4 - 4 - vertices_n) % (data_n * vertices_n) != 0:\n    raise ValueError('incorrect stc file size')\nstc['data'] = np.fromfile(fid, dtype='>f4', count=vertices_n * data_n)\nstc['data'] = stc['data'].reshape([data_n, vertices_n]).T\nfid.close()\nreturn stc\n"
-}

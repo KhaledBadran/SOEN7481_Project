@@ -1,9 +1,0 @@
-{
-    "functionName": "test_process_request_future_timestamp",
-    "className": "TestKmipEngine",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that an InvalidMessage exception is raised when processing a\n        request with a future timestamp.\n        \"\"\"\ne = engine.KmipEngine()\ne._logger = mock.MagicMock()\nprotocol = contents.ProtocolVersion(1, 0)\nheader = messages.RequestHeader(protocol_version=protocol, time_stamp=\n    contents.TimeStamp(10 ** 10))\nrequest = messages.RequestMessage(request_header=header)\nargs = request,\nregex = 'Future request rejected by server.'\nsix.assertRaisesRegex(self, exceptions.InvalidMessage, regex, e.\n    process_request, *args)\ne._logger.warning.assert_any_call(MockRegexString(\n    'Received request with future timestamp.'))\n"
-}

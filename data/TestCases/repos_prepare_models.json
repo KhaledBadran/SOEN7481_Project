@@ -1,9 +1,0 @@
-{
-    "functionName": "_prepare_models",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_kernels_&_test_coregion.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Prepare models to make sure the coregionalized model with diagonal coregion kernel and\n    with fixed lengthscales is equivalent with normal GP regression.\n    \"\"\"\nk0 = gpflow.kernels.SquaredExponential()\nset_trainable(k0.lengthscales, False)\nk1 = gpflow.kernels.SquaredExponential()\nset_trainable(k1.lengthscales, False)\nvgp0 = gpflow.models.VGP((Datum.X[0], Datum.Y[0]), kernel=k0, mean_function\n    =Constant(), likelihood=gpflow.likelihoods.Gaussian(), num_latent_gps=1)\nvgp1 = gpflow.models.VGP((Datum.X[1], Datum.Y[1]), kernel=k1, mean_function\n    =Constant(), likelihood=gpflow.likelihoods.Gaussian(), num_latent_gps=1)\nkc = gpflow.kernels.SquaredExponential(active_dims=[0, 1])\nset_trainable(kc.lengthscales, False)\nset_trainable(kc.variance, False)\ncoreg = gpflow.kernels.Coregion(output_dim=2, rank=1, active_dims=[2])\ncoreg.W.assign(np.zeros((2, 1)))\nset_trainable(coreg.W, False)\nlik = gpflow.likelihoods.SwitchedLikelihood([gpflow.likelihoods.Gaussian(),\n    gpflow.likelihoods.Gaussian()])\nmean_c = gpflow.mean_functions.SwitchedMeanFunction([gpflow.mean_functions.\n    Constant(), gpflow.mean_functions.Constant()])\ncvgp = gpflow.models.VGP((Datum.X_augmented, Datum.Y_augmented), kernel=kc *\n    coreg, mean_function=mean_c, likelihood=lik, num_latent_gps=1)\nopt = gpflow.optimizers.Scipy()\nopt.minimize(vgp0.training_loss, variables=vgp0.trainable_variables,\n    options=dict(maxiter=1000), method='BFGS')\nopt.minimize(vgp1.training_loss, variables=vgp1.trainable_variables,\n    options=dict(maxiter=1000), method='BFGS')\nopt.minimize(cvgp.training_loss, variables=cvgp.trainable_variables,\n    options=dict(maxiter=1000), method='BFGS')\nreturn vgp0, vgp1, cvgp\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_inputs_and_outputs",
-    "className": "TraceTests",
-    "fileName": "/glyph_&_Automat/automat_&__test_&_test_trace.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "traces = []\ndef tracer(old_state, input, new_state):\n    traces.append((old_state, input, new_state, None))\n\n    def trace_outputs(output):\n        traces.append((old_state, input, new_state, output))\n    return trace_outputs\ns = SampleObject()\ns.setTrace(tracer)\ns.go1()\nself.assertEqual(traces, [('begin', 'go1', 'middle', None), ('begin', 'go1',\n    'middle', 'out')])\ns.go2()\nself.assertEqual(traces, [('begin', 'go1', 'middle', None), ('begin', 'go1',\n    'middle', 'out'), ('middle', 'go2', 'end', None), ('middle', 'go2',\n    'end', 'out')])\ns.setTrace(None)\ns.back()\nself.assertEqual(traces, [('begin', 'go1', 'middle', None), ('begin', 'go1',\n    'middle', 'out'), ('middle', 'go2', 'end', None), ('middle', 'go2',\n    'end', 'out')])\ns.go2()\nself.assertEqual(traces, [('begin', 'go1', 'middle', None), ('begin', 'go1',\n    'middle', 'out'), ('middle', 'go2', 'end', None), ('middle', 'go2',\n    'end', 'out')])\n"
-}

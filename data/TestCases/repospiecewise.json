@@ -1,9 +1,0 @@
-{
-    "functionName": "piecewise",
-    "className": null,
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_models_&_geometry_&_throat_length.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Calculate throat length from end points and optionally a centroid\n\n    Parameters\n    ----------\n    target : OpenPNM Object\n        The object which this model is associated with. This controls the\n        length of the calculated array, and also provides access to other\n        necessary properties.\n\n    throat_endpoints : string\n        Dictionary key of the throat endpoint values.\n\n    throat_centroid : string\n        Dictionary key of the throat centroid values, optional.\n\n    Returns\n    -------\n    Lt : ndarray\n        Array containing throat lengths for the given geometry.\n\n    Notes\n    -----\n    (1) By default, the model assumes that the centroids of pores and the\n    connecting throat in each conduit are colinear.\n\n    (2) If `throat_centroid` is passed, the model accounts for the extra\n    length. This could be useful for Voronoi or extracted networks.\n\n    \"\"\"\nnetwork = target.project.network\nthroats = network.map_throats(throats=target.Ts, origin=target)\nEP1 = network[throat_endpoints + '.head'][throats]\nEP2 = network[throat_endpoints + '.tail'][throats]\nLt = _norm(EP1 - EP2, axis=1)\ntry:\n    Ct = network[throat_centroid][throats]\n    Lt = _norm(Ct - EP1, axis=1) + _norm(Ct - EP2, axis=1)\nexcept KeyError:\n    pass\nreturn Lt\n"
-}

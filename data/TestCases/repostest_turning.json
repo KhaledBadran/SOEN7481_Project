@@ -1,9 +1,0 @@
-{
-    "functionName": "test_turning",
-    "className": null,
-    "fileName": "/poletaevvlad_&_CubeLang/test_&_postprocessing_&_test_optimizer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "a1 = Turn(type, [1], amount1)\na2 = Turn(type, [1], amount2)\nactual = []\npp = OptimizingPostprocessor()\npp.callback = actual.append\npp.process(a1)\npp.process(a2)\npp.done()\nif exp_amount is None:\n    assert len(actual) == 0\nelse:\n    assert len(actual) == 1\n    actual = actual[0]\n    assert isinstance(actual, Turn)\n    assert actual.type == type\n    assert actual.turns == exp_amount\n    assert actual.indices == [1]\npytest.mark.parametrize('type, amount1, amount2, exp_amount', [(TurningType\n    .HORIZONTAL, 1, 1, 2), (TurningType.VERTICAL, 1, 2, 3), (TurningType.\n    SLICE, 1, 3, None), (TurningType.HORIZONTAL, 2, 1, 3), (TurningType.\n    VERTICAL, 2, 2, None), (TurningType.SLICE, 2, 3, 1), (TurningType.\n    HORIZONTAL, 3, 1, None), (TurningType.VERTICAL, 3, 2, 1), (TurningType.\n    SLICE, 3, 3, 2)])"
-}

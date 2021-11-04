@@ -1,9 +1,0 @@
-{
-    "functionName": "test_hmcalculator_number_counts_scipy_dblquad",
-    "className": null,
-    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_hmcalculator_number_counts.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "cosmo = ccl.Cosmology(Omega_c=0.25, Omega_b=0.05, h=0.7, n_s=0.96, sigma8=\n    0.8, Omega_k=0.0, Omega_g=0, Neff=0.0, w0=-1.0, wa=0.0, T_CMB=2.7245,\n    mu_0=0.0, transfer_function='eisenstein_hu', matter_power_spectrum='linear'\n    )\nmdef = ccl.halos.MassDef(200, 'matter')\nhmf = ccl.halos.MassFuncTinker08(cosmo, mdef, mass_def_strict=False)\nhbf = ccl.halos.HaloBiasTinker10(cosmo, mass_def=mdef, mass_def_strict=False)\namin = 0.75\namax = 1.0\nmmin = 100000000000000.0\nmmax = 1000000000000000.0\nhmc = ccl.halos.HMCalculator(cosmo, hmf, hbf, mdef, log10M_min=np.log10(\n    mmin), log10M_max=np.log10(mmax), integration_method_M='spline')\ndef sel(m, a):\n    m = np.atleast_1d(m)\n    a = np.atleast_1d(a)\n    val = np.zeros_like(m.reshape(-1, 1) * a.reshape(1, -1))\n    msk_a = (a > amin) & (a < amax)\n    msk_m = (m > mmin) & (m < mmax)\n    val[(msk_m), :] += 2\n    val[:, (msk_a)] += 2\n    msk = val == 4\n    val[~msk] = 0\n    val[msk] = 1.0\n    return val\ndef _func(m, a):\n    abs_dzda = 1 / a / a\n    dc = ccl.comoving_angular_distance(cosmo, a)\n    ez = ccl.h_over_h0(cosmo, a)\n    dh = ccl.physical_constants.CLIGHT_HMPC / cosmo['h']\n    dvdz = dh * dc ** 2 / ez\n    dvda = dvdz * abs_dzda\n    val = hmf.get_mass_function(cosmo, 10 ** m, a, mdef_other=mdef)\n    val *= sel(10 ** m, a)\n    return val[0, 0] * dvda\nmtot, _ = scipy.integrate.dblquad(_func, amin, amax, lambda x: hmc._prec[\n    'log10M_min'], lambda x: hmc._prec['log10M_max'])\nmtot_hmc = hmc.number_counts(cosmo, sel, amin=amin, amax=amax)\nassert np.allclose(mtot_hmc, mtot, atol=0, rtol=0.02)\n"
-}

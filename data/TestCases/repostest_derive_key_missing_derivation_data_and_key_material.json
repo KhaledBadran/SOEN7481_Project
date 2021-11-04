@@ -1,9 +1,0 @@
-{
-    "functionName": "test_derive_key_missing_derivation_data_and_key_material",
-    "className": "TestCryptographyEngine",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_crypto_&_test_engine.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the right error is raised when neither derivation data nor\n        key material are provided for hash-based key derivation.\n        \"\"\"\nengine = crypto.CryptographyEngine()\nargs = enums.DerivationMethod.HASH, 16\nkwargs = {'hash_algorithm': enums.HashingAlgorithm.SHA_256}\nself.assertRaisesRegex(exceptions.InvalidField,\n    'For hash-based key derivation, derivation data or key material must be specified.'\n    , engine.derive_key, *args, **kwargs)\n"
-}

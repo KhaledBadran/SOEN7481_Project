@@ -1,9 +1,0 @@
-{
-    "functionName": "generateStartStopTimes",
-    "className": null,
-    "fileName": "/FaradayRF_&_Faraday-Software/faraday_&_telemetry.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Use parameters dictionary to build up a Tuple of start/stop time values\n\n    :param parameters: dictionary with 'STARTTIME', 'ENDTIME' ISO 8601 keys:val\n    :return: Tuple containing epoch times from input ISO 8601 times\n    \"\"\"\nif parameters['STARTTIME'] is not None and parameters['ENDTIME'] is not None:\n    startTime = str(parameters['STARTTIME'])\n    endTime = str(parameters['ENDTIME'])\n    timeTuple = iso8601ToEpoch(startTime, endTime)\nelif parameters['STARTTIME'] is not None:\n    startTime = str(parameters['STARTTIME'])\n    endTime = time.strftime('%Y-%m-%dT%H:%M:%S')\n    timeTuple = iso8601ToEpoch(startTime, endTime)\nelse:\n    endEpoch = time.time()\n    startEpoch = endEpoch - float(parameters['TIMESPAN'])\n    timeTuple = int(startEpoch), int(endEpoch)\nreturn timeTuple\n"
-}

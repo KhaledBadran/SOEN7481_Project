@@ -1,9 +1,0 @@
-{
-    "functionName": "test_pipeline_tosklearn",
-    "className": null,
-    "fileName": "/Neuraxio_&_Neuraxle/testing_&_test_pipeline.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "import sklearn.pipeline\nthe_step = SomeStep()\nstep_to_check = the_step.tosklearn()\np = Pipeline([('a', SomeStep()), ('b', SKLearnWrapper(sklearn.pipeline.\n    Pipeline([('a', sklearn.pipeline.Pipeline([('z', step_to_check)])), (\n    'b', SomeStep().tosklearn()), ('c', SomeStep().tosklearn())]),\n    return_all_sklearn_default_params_on_get=True)), ('c', SomeStep())])\np.set_hyperparams({'b': {'a__z__learning_rate': 7, 'b__learning_rate': 9}})\nassert p.get_hyperparams()['b__a__z__learning_rate'] == 7\np = p.tosklearn()\np = sklearn.pipeline.Pipeline([('sk', p)])\np.set_params(**{'sk__b__a__z__learning_rate': 11})\nsk_ = p.named_steps['sk']\nb_ = sk_.p['b']\npredictor = b_.wrapped_sklearn_predictor\na_ = predictor.named_steps['a']\nz_ = a_['z']\nassert z_.get_params()['learning_rate'] == 11\np.set_params(**RecursiveDict({'sk__b': {'a__z__learning_rate': 12,\n    'b__learning_rate': 9}}).to_flat())\nassert p.named_steps['sk'].p['b'].wrapped_sklearn_predictor.named_steps['a'][\n    'z'].get_params()['learning_rate'] == 12\nprint(the_step.get_hyperparams())\n"
-}

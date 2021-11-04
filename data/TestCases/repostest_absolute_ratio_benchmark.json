@@ -1,9 +1,0 @@
-{
-    "functionName": "test_absolute_ratio_benchmark",
-    "className": null,
-    "fileName": "/PyAbel_&_PyAbel/abel_&_tests_&_test_benchmarks.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "n = 501\nr_max = 50\nfor symmetric in [True, False]:\n    for Backend, options in [(StepAnalytical, dict(A0=10.0, r1=6.0, r2=14.0,\n        ratio_valid_step=1.0)), (GaussianAnalytical, dict(sigma=2))]:\n        ref = Backend(n, r_max, symmetric=symmetric, **options)\n        ratio = absolute_ratio_benchmark(ref, ref.func)\n        backend_name = type(ref).__name__\n        assert_allclose_msg(ratio.mean(), 1.0,\n            'Sanity test, sym={}: {}: ratio == 1.0'.format(symmetric,\n            backend_name))\n        assert_allclose_msg(ratio.std(), 0.0,\n            'Sanity test, sym={}: {}: std == 0.0'.format(symmetric,\n            backend_name))\n"
-}

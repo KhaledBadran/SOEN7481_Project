@@ -1,9 +1,0 @@
-{
-    "functionName": "test_data_limits",
-    "className": null,
-    "fileName": "/nipy_&_PySurfer/surfer_&_tests_&_test_viz.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test handling of data limits.\"\"\"\n_set_backend()\nbrain = Brain('fsaverage', 'both', 'inflated')\nsurf_data = np.linspace(0, 1, 163842)\npytest.raises(ValueError, brain.add_data, surf_data, 0, 0)\nbrain.add_data(surf_data, 0, 1, hemi='lh')\nassert brain.data_dict['lh']['fmax'] == 1.0\nbrain.add_data(surf_data, 0, 0.5, hemi='rh')\nassert brain.data_dict['lh']['fmax'] == 1.0\nassert brain.data_dict['rh']['fmax'] == 0.5\nbrain.close()\nrequires_fsaverage()"
-}

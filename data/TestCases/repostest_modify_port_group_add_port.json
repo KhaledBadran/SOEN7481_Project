@@ -1,9 +1,0 @@
-{
-    "functionName": "test_modify_port_group_add_port",
-    "className": "CITestProvisioning",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test modify_port_group add port.\"\"\"\nfa_directors = self.provisioning.get_fa_directors()\nselected_director_ports = list()\nfor fa_director in fa_directors:\n    port = self.provisioning.get_any_director_port(fa_director, filters=\n        'aclx=true')\n    director_port = self.provisioning.format_director_port(fa_director, port)\n    selected_director_ports.append(director_port)\nport_group_name = self.generate_name(constants.PORT_GROUP)\ndirector, port = selected_director_ports[0].split(':')\nport_group_details = self.provisioning.create_port_group(port_group_name,\n    director, port)\nself.addCleanup(self.delete_port_group, port_group_name)\nself.assertEqual(1, port_group_details[constants.NUM_OF_PORTS])\ndirector, port = selected_director_ports[1].split(':')\nmodify_result = self.provisioning.modify_port_group(port_group_name,\n    add_port=(director, port))\nself._validate_port_group_details(port_group_name, modify_result,\n    selected_director_ports[:2], ref_port_count=2)\n"
-}

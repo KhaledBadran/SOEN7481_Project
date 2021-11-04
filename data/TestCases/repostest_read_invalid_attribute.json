@@ -1,9 +1,0 @@
-{
-    "functionName": "test_read_invalid_attribute",
-    "className": "TestAttributes",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that an unrecognized tag is correctly handled when reading in an\n        Attributes structure from a data stream. Specifically, structure\n        parsing should stop and an error should be raised indicating that more\n        encoding data is available but could not be parsed.\n        \"\"\"\nattrs = objects.Attributes()\nself.assertEqual([], attrs.attributes)\nargs = self.invalid_encoding,\nself.assertRaisesRegex(exceptions.StreamNotEmptyError,\n    'Invalid length used to read Base, bytes remaining: 16', attrs.read, *args)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_tracer_kernel_smoke",
-    "className": null,
-    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_tracers.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "tr, ntr = get_tracer(tracer_type)\nfor chi in [np.linspace(0.0, 3000.0, 128), [100.0, 1000.0], 100.0]:\n    w = tr.get_kernel(chi)\n    assert w.shape[0] == ntr\n    if ntr > 0:\n        for ww in w:\n            assert np.shape(ww) == np.shape(chi)\npytest.mark.parametrize('tracer_type', ['nc', 'wl', 'cl', 'not'])"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_propose_raise_error",
-    "className": "TestBTBSession",
-    "fileName": "/HDI-Project_&_BTB/tests_&_test_session.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "tuner = MagicMock()\ntuner.propose.side_effect = [StopTuning('test')]\ninstance = MagicMock(spec_set=BTBSession)\ninstance._normalized_scores.__len__.return_value = 1\ninstance._selector.select.return_value = 'test_tunable'\ninstance._tuners = {'test_tunable': tuner}\ninstance._tunables = {'test_tunable': 'test_spec'}\ninstance._tunable_names = ['test_tunable']\ninstance._get_next_tunable_name.return_value = 'test_tunable'\ninstance._make_id.return_value = 1\nwith self.assertRaises(ValueError):\n    BTBSession.propose(instance)\n"
-}

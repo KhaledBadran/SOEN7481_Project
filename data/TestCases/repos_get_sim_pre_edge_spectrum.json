@@ -1,9 +1,0 @@
-{
-    "functionName": "_get_sim_pre_edge_spectrum",
-    "className": null,
-    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_xanes_maps_&_tests_&_test_xanes_maps_api.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Generate spectrum for testing baseline removal function\n    ``img_dims`` is the size of the image, e.g. [5, 10] is 5x10 pixel image.\n    The spectrum points are always placed along axis 0.\n    \"\"\"\nn_pts = incident_energies.shape[0]\nn_pixels = np.prod(img_dims)\nn_pre_edge = np.sum(incident_energies < eline_activation_energy +\n    pre_edge_upper_keV)\nspectrum = np.random.rand(n_pts, n_pixels)\nspectrum_no_base = spectrum\nfor n in range(n_pixels):\n    spectrum[n_pre_edge:n_pts, (n)] += 2\n    v_bs = np.median(spectrum[0:n_pre_edge, (n)])\n    spectrum_no_base[:, (n)] = spectrum[:, (n)] - v_bs\nif n_pixels == 1:\n    spectrum = np.squeeze(spectrum, axis=1)\n    spectrum_no_base = np.squeeze(spectrum_no_base, axis=1)\nelse:\n    spectrum = np.reshape(spectrum, np.insert(img_dims, 0, n_pts))\n    spectrum_no_base = np.reshape(spectrum_no_base, np.insert(img_dims, 0,\n        n_pts))\nreturn spectrum, spectrum_no_base\n"
-}

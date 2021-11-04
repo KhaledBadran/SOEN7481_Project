@@ -1,9 +1,0 @@
-{
-    "functionName": "test_pickle",
-    "className": null,
-    "fileName": "/PaulHancock_&_Aegean/tests_&_test_regions.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Test that the Region class can be pickled and loaded without loss \"\"\"\nra = 66.38908\ndec = -26.72466\nradius = 22\nregion = Region(maxdepth=8)\nregion.add_circles(np.radians(ra), np.radians(dec), np.radians(radius))\ntry:\n    import cPickle as pickle\nexcept ImportError:\n    import pickle\npickle.dump(region, open('out_temp.mim', 'wb'))\nregion2 = pickle.load(open('out_temp.mim', 'rb'))\nif not region.pixeldict == region2.pixeldict:\n    raise AssertionError('pickle/unpickle does not give same region')\nos.remove('out_temp.mim')\n"
-}

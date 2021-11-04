@@ -1,9 +1,0 @@
-{
-    "functionName": "apply_penalty",
-    "className": null,
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_regularization.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Computes the total cost for applying a specified penalty\n    to a tensor or group of tensors.\n\n    Parameters\n    ----------\n    tensor_or_tensors : Theano tensor or list of tensors\n    penalty : callable\n    **kwargs\n        keyword arguments passed to penalty.\n\n    Returns\n    -------\n    Theano scalar\n        a scalar expression for the total penalty cost\n    \"\"\"\ntry:\n    return sum(penalty(x, **kwargs) for x in tensor_or_tensors)\nexcept (TypeError, ValueError):\n    return penalty(tensor_or_tensors, **kwargs)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_process_batch",
-    "className": "TestKmipEngine",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a batch is processed correctly.\n        \"\"\"\ne = engine.KmipEngine()\ne._logger = mock.MagicMock()\npayload = payloads.DiscoverVersionsRequestPayload()\nbatch = list([messages.RequestBatchItem(operation=contents.Operation(enums.\n    Operation.DISCOVER_VERSIONS), request_payload=payload)])\nresults = e._process_batch(batch, enums.BatchErrorContinuationOption.STOP, True\n    )\nself.assertIsNotNone(results)\nself.assertEqual(1, len(results))\n"
-}

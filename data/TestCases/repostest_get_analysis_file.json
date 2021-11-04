@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_analysis_file",
-    "className": "TestCase",
-    "fileName": "/IntegralDefense_&_ACE/test_ace_api.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "result = self._submit()\nself.assertIsNotNone(result)\nself.assertTrue('result' in result)\nresult = result['result']\nself.assertIsNotNone(result['uuid'])\nuuid = result['uuid']\nresult = ace_api.get_analysis(uuid)\nself.assertIsNotNone(result)\nself.assertTrue('result' in result)\nresult = result['result']\nfile_uuid = None\nfor o_uuid in result['observables']:\n    o = result['observable_store'][o_uuid]\n    if o['type'] == 'file' and o['value'] == 'sample.dat':\n        file_uuid = o_uuid\n        break\nself.assertIsNotNone(file_uuid)\noutput_path = os.path.join(saq.SAQ_HOME, saq.TEMP_DIR, 'get_file_test.dat')\nself.assertTrue(ace_api.get_analysis_file(uuid, file_uuid, output_file=\n    output_path))\nwith open(output_path, 'rb') as fp:\n    self.assertEquals(fp.read(), b'Hello, world!')\nwith open(output_path, 'wb') as fp:\n    self.assertTrue(ace_api.get_analysis_file(uuid, file_uuid, output_fp=fp))\nself.assertTrue(ace_api.get_analysis_file(uuid, 'sample.dat', output_file=\n    output_path))\nwith open(output_path, 'rb') as fp:\n    self.assertEquals(fp.read(), b'Hello, world!')\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_hmcalculator_number_counts_zero",
-    "className": null,
-    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_hmcalculator_number_counts.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "cosmo = ccl.Cosmology(Omega_c=0.27, Omega_b=0.045, h=0.67, sigma8=0.8, n_s=\n    0.96, transfer_function='bbks', matter_power_spectrum='linear')\nmdef = ccl.halos.MassDef(200, 'matter')\nhmf = ccl.halos.MassFuncTinker10(cosmo, mdef, mass_def_strict=False)\nhbf = ccl.halos.HaloBiasTinker10(cosmo, mass_def=mdef, mass_def_strict=False)\nhmc = ccl.halos.HMCalculator(cosmo, hmf, hbf, mdef)\ndef sel(m, a):\n    m = np.atleast_1d(m)\n    a = np.atleast_1d(a)\n    val = np.zeros_like(m.reshape(-1, 1) * a.reshape(1, -1))\n    return val\nnc = hmc.number_counts(cosmo, sel) * 4.0 * np.pi\nassert np.isfinite(nc)\nassert np.allclose(nc, 0)\n"
-}

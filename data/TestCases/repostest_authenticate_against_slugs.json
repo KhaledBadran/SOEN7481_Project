@@ -1,9 +1,0 @@
-{
-    "functionName": "test_authenticate_against_slugs",
-    "className": "TestKmipSession",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_session.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the session correctly handles authentication with SLUGS.\n        \"\"\"\nmock_instance = mock.MagicMock()\nmock_instance.authenticate.return_value = 'John Doe', ['Group A']\nmock_connector.return_value = mock_instance\nkmip_session = session.KmipSession(None, None, ('127.0.0.1', 48026), name=\n    'TestSession', auth_settings=[('auth:slugs', {'enabled': 'True', 'url':\n    'test_url'})])\nkmip_session._logger = mock.MagicMock()\nfake_credential = objects.Credential(credential_type=enums.CredentialType.\n    USERNAME_AND_PASSWORD, credential_value=objects.\n    UsernamePasswordCredential(username='John Doe', password='secret'))\nfake_request = messages.RequestMessage(request_header=messages.\n    RequestHeader(authentication=contents.Authentication(credentials=[\n    fake_credential])))\nresult = kmip_session.authenticate('fake_certificate', fake_request)\nmock_connector.assert_any_call('test_url')\nkmip_session._logger.debug.assert_any_call(\n    'Authenticating with plugin: auth:slugs')\nmock_instance.authenticate.assert_any_call('fake_certificate', ((\n    '127.0.0.1', 48026), kmip_session._session_time), fake_request.\n    request_header.authentication.credentials)\nkmip_session._logger.debug(\n    'Authentication succeeded for client identity: John Doe')\nself.assertEqual(2, len(result))\nself.assertEqual('John Doe', result[0])\nself.assertEqual(['Group A'], result[1])\nmock.patch('kmip.services.server.auth.SLUGSConnector')"
-}

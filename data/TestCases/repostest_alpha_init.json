@@ -1,9 +1,0 @@
-{
-    "functionName": "test_alpha_init",
-    "className": "TestParametricRectifierLayer",
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_special.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "input_shape = None, 3, 28, 28\nlayer = ParametricRectifierLayer(input_shape, alpha=init_alpha)\nalpha = layer.alpha\nassert layer.shared_axes == (0, 2, 3)\nassert alpha.get_value().shape == (3,)\nassert np.allclose(alpha.get_value(), init_alpha((3,)))\nlayer = ParametricRectifierLayer(input_shape, alpha=init_alpha, shared_axes\n    ='all')\nalpha = layer.alpha\nassert layer.shared_axes == (0, 1, 2, 3)\nassert alpha.get_value().shape == ()\nassert np.allclose(alpha.get_value(), init_alpha((1,)))\nlayer = ParametricRectifierLayer(input_shape, alpha=init_alpha, shared_axes=0)\nalpha = layer.alpha\nassert layer.shared_axes == (0,)\nassert alpha.get_value().shape == (3, 28, 28)\nassert np.allclose(alpha.get_value(), init_alpha((3, 28, 28)))\nlayer = ParametricRectifierLayer(input_shape, alpha=init_alpha, shared_axes\n    =(0, 3))\nalpha = layer.alpha\nassert layer.shared_axes == (0, 3)\nassert alpha.get_value().shape == (3, 28)\nassert np.allclose(alpha.get_value(), init_alpha((3, 28)))\n"
-}

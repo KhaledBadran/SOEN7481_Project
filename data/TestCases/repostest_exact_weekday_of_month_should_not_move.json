@@ -1,9 +1,0 @@
-{
-    "functionName": "test_exact_weekday_of_month_should_not_move",
-    "className": null,
-    "fileName": "/roniemartinez_&_DocCron/tests_&_test_non_standard_characters.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "cron = doccron.cron('0 0 21W * 1 2050')\ndatetime_21 = localize(datetime(2050, 1, 21)).replace(hour=0, minute=0,\n    second=0, microsecond=0)\nif datetime_21.day == 21:\n    datetime_21 += timedelta(days=monthrange(datetime_21.year, datetime_21.\n        month)[-1])\nwhile True:\n    if datetime_21.day == 21 and datetime_21.isoweekday() in range(1, 6):\n        break\n    datetime_21 += timedelta(days=1)\nassert next(cron) == datetime_21\n"
-}

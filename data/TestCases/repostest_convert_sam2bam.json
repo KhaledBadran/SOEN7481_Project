@@ -1,9 +1,0 @@
-{
-    "functionName": "test_convert_sam2bam",
-    "className": "TestCircRNADetection",
-    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_circRNA.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.circ._run_samtools_convert_bam = self.samtools.mock_covert_bam\nsam1 = os.path.join(self.test_folder, 'test1.sam')\nsam2 = os.path.join(self.test_folder, 'test2.sam')\nbam = os.path.join(self.test_folder, 'test3.bam')\ngen_file(sam1, self.example.align_file)\ngen_file(sam2, self.example.align_file)\ngen_file(bam, self.example.align_file)\nalign_files = ['test1']\nlog = open(os.path.join(self.test_folder, 'test.log'), 'w')\nbam_files, convert_ones, remove_ones = self.circ._convert_sam2bam(self.\n    test_folder, None, align_files, log)\nself.assertEqual(set(bam_files), set([bam, sam1.replace('sam', 'bam'), sam2\n    .replace('sam', 'bam')]))\nself.assertEqual(set(convert_ones), set([sam2.replace('sam', 'bam')]))\nself.assertEqual(set(remove_ones), set([sam1]))\nalign_files = ['test3']\nbam_files, convert_ones, remove_ones = self.circ._convert_sam2bam(self.\n    test_folder, None, align_files, log)\nself.assertEqual(set(convert_ones), set([sam2.replace('sam', 'bam'), sam1.\n    replace('sam', 'bam')]))\nself.assertEqual(set(remove_ones), set([]))\n"
-}

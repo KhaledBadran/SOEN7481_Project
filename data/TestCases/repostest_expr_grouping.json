@@ -1,9 +1,0 @@
-{
-    "functionName": "test_expr_grouping",
-    "className": "NamespaceTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_namespace.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"test that parenthesis are placed around string-embedded expressions.\"\"\"\ntemplate = Template(\n    \"\"\"\n            <%def name=\"bar(x, y)\">\n                ${x}\n                ${y}\n            </%def>\n\n            <%self:bar x=\" ${foo} \" y=\"x${g and '1' or '2'}y\"/>\n        \"\"\"\n    , input_encoding='utf-8')\nassert result_lines(template.render(foo='this is foo', g=False)) == [\n    'this is foo', 'x2y']\n"
-}

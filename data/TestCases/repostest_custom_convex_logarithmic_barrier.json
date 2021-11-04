@@ -1,9 +1,0 @@
-{
-    "functionName": "test_custom_convex_logarithmic_barrier",
-    "className": null,
-    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_custom_objectives.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ef = setup_efficient_frontier()\ndef logarithmic_barrier(w, cov_matrix, k=0.1):\n    log_sum = cp.sum(cp.log(w))\n    var = cp.quad_form(w, cov_matrix)\n    return var - k * log_sum\nw = ef.convex_objective(logarithmic_barrier, cov_matrix=ef.cov_matrix)\nassert isinstance(w, dict)\nassert set(w.keys()) == set(ef.tickers)\nnp.testing.assert_almost_equal(ef.weights.sum(), 1)\nnp.testing.assert_allclose(ef.portfolio_performance(), (0.23978400459553223,\n    0.21100848889958182, 1.041588448605623))\n"
-}

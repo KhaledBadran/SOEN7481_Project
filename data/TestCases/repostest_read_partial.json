@@ -1,9 +1,0 @@
-{
-    "functionName": "test_read_partial",
-    "className": "TestKeyWrappingSpecification",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a KeyWrappingSpecification struct can be read from a\n        partial data stream.\n        \"\"\"\nkey_wrapping_specification = objects.KeyWrappingSpecification()\nself.assertEqual(None, key_wrapping_specification.wrapping_method)\nself.assertEqual(None, key_wrapping_specification.encryption_key_information)\nself.assertEqual(None, key_wrapping_specification.mac_signature_key_information\n    )\nself.assertEqual(None, key_wrapping_specification.attribute_names)\nself.assertEqual(None, key_wrapping_specification.encoding_option)\nkey_wrapping_specification.read(self.partial_encoding)\nself.assertEqual(enums.WrappingMethod.ENCRYPT, key_wrapping_specification.\n    wrapping_method)\nself.assertIsInstance(key_wrapping_specification.encryption_key_information,\n    objects.EncryptionKeyInformation)\ne = key_wrapping_specification.encryption_key_information\nself.assertEqual('100182d5-72b8-47aa-8383-4d97d512e98a', e.unique_identifier)\nself.assertIsInstance(e.cryptographic_parameters, attributes.\n    CryptographicParameters)\nself.assertEqual(enums.BlockCipherMode.NIST_KEY_WRAP, e.\n    cryptographic_parameters.block_cipher_mode)\nself.assertIsNone(key_wrapping_specification.mac_signature_key_information)\nself.assertIsNone(key_wrapping_specification.attribute_names)\nself.assertIsNone(key_wrapping_specification.encoding_option)\n"
-}

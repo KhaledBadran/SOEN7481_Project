@@ -1,9 +1,0 @@
-{
-    "functionName": "test_cassandra_down",
-    "className": null,
-    "fileName": "/PearsonEducation_&_Alarmageddon/tests_&_validations_&_test_cassandra.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ssh_ctx = ssh.SshContext('ubuntu', get_mock_key_file(tmpdir))\ntext = SERVER_DOWN_OUTPUT\nmonkeypatch.setattr(Connection, 'run', lambda self, x, warn:\n    get_mock_ssh_text(text, 0))\nwith pytest.raises(ValidationFailure):\n    cassandra.CassandraStatusValidation(ssh_ctx, hosts=['127.0.0.1'],\n        cluster_name=_CLUSTER_NAME).perform({})\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_write_fits_table_variable_uuid_lengths",
-    "className": null,
-    "fileName": "/PaulHancock_&_Aegean/tests_&_test_catalogs.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that the length of the UUID column is appropriate\"\"\"\ncatalog = []\nfor l in range(10):\n    c = ComponentSource()\n    c.ra_str = c.dec_str = 'hello!'\n    c.uuid = 'source-{0:d}'.format(2 ** l)\n    catalog.append(c)\ncat.save_catalog('a.fits', catalog, meta={'Purpose': 'Testing'})\nif not os.path.exists('a_comp.fits'):\n    raise AssertionError()\nrcat = cat.load_table('a_comp.fits')\nfor src1, src2 in zip(rcat, catalog):\n    if len(src1['uuid']) != len(src2.uuid):\n        print('len mismatch for source {0}'.format(src1))\n        print('uuid should be len={0}'.format(len(src2.uuid)))\n        raise AssertionError('UUID col is of wrong length')\nos.remove('a_comp.fits')\nreturn\n"
-}

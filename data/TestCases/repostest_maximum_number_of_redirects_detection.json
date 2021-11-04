@@ -1,9 +1,0 @@
-{
-    "functionName": "test_maximum_number_of_redirects_detection",
-    "className": null,
-    "fileName": "/RobertoPrevato_&_BlackSheep/tests_&_client_&_test_redirects.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "async with ClientSession(base_url=b'http://localhost:8080', pools=\n    pools_factory(responses)) as client:\n    client.maximum_redirects = maximum_redirects\n    with pytest.raises(MaximumRedirectsExceededError):\n        await client.get(b'/')\npytest.mark.asynciopytest.mark.parametrize('responses,maximum_redirects', [[[Response(302, [(\n    b'Location', b'/a')]), Response(302, [(b'Location', b'/b')]), Response(\n    302, [(b'Location', b'/c')]), Response(302, [(b'Location', b'/d')]),\n    Response(302, [(b'Location', b'/e')])], 5], [[Response(302, [(\n    b'Location', b'/a')]), Response(302, [(b'Location', b'/b')]), Response(\n    302, [(b'Location', b'/c')])], 2], [[Response(302, [(b'Location', b'/a'\n    )]), Response(302, [(b'Location', b'/b')])], 1]])"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_revoke_on_closed",
-    "className": "TestProxyKmipClient",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_test_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a ClientConnectionNotOpen exception is raised when trying\n        to revoke a secret on an unopened client connection.\n        \"\"\"\nclient = ProxyKmipClient()\nrevocation_reason = enums.RevocationReasonCode.KEY_COMPROMISE\nuuid = 'aaaaaaaa-1111-2222-3333-ffffffffffff'\nrevocation_message = 'Key compromised!'\ncompromise_occurrence_date = 1\nargs = [revocation_reason, uuid, revocation_message, compromise_occurrence_date\n    ]\nself.assertRaises(ClientConnectionNotOpen, client.revoke, *args)\nmock.patch('kmip.pie.client.KMIPProxy', mock.MagicMock(spec_set=KMIPProxy))"
-}

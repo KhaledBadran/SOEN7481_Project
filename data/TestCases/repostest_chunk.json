@@ -1,9 +1,0 @@
-{
-    "functionName": "test_chunk",
-    "className": "PenginesTestCase",
-    "fileName": "/ian-andrich_&_PythonPengines/tests_&_srctest_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n\n        \"\"\"\nsrc = \"\"\"foo(a).\nfoo(b).\nfoo(c).\"\"\"\nq = 'foo(X)'\nfactory = PengineBuilder(urlserver='http://localhost:4242', destroy=False,\n    srctext=src, chunk=1, ask=q)\npengine = Pengine(builder=factory)\nall_results = []\nresults = pengine.currentQuery.availProofs\nprint('INIT Results={}'.format(results))\nself.assertTrue(len(results) == 1)\nwhile pengine.currentQuery.hasMore:\n    pengine.doNext(pengine.currentQuery)\n    results = pengine.currentQuery.availProofs\n    print('NEXT Results={}'.format(results))\nself.assertTrue({'X': 'a'} in results)\nself.assertTrue({'X': 'b'} in results)\nself.assertTrue({'X': 'c'} in results)\nself.assertEquals(len(results), 3)\n"
-}

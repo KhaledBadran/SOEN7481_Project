@@ -1,9 +1,0 @@
-{
-    "functionName": "test_gstools_variogram",
-    "className": null,
-    "fileName": "/bsmurphy_&_PyKrige/tests_&_test_core.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "gstools = pytest.importorskip('gstools')\ndata = np.array([[0.3, 1.2, 0.47], [1.9, 0.6, 0.56], [1.1, 3.2, 0.74], [3.3,\n    4.4, 1.47], [4.7, 3.8, 1.74]])\ngridx = np.arange(0.0, 5.5, 0.1)\ngridy = np.arange(0.0, 6.5, 0.1)\ncov_model = gstools.Gaussian(dim=2, len_scale=1, anis=0.2, angles=-0.5, var\n    =0.5, nugget=0.1)\nkrige = model(data[:, (0)], data[:, (1)], data[:, (2)], cov_model)\nz1, ss1 = krige.execute('grid', gridx, gridy)\nfor i in range(5):\n    y_id = int(data[i, 1] * 10)\n    x_id = int(data[i, 0] * 10)\n    assert np.isclose(z1[y_id, x_id], data[i, 2])\npytest.mark.parametrize('model', [OrdinaryKriging, UniversalKriging])"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ccl_latencies",
-    "className": "Test_advance",
-    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_cc_light.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "tests = [(0, [('x', [0]), ('y', [3])]), (1, [('x', [0]), ('y', [4])]), (2,\n    [('x', [0]), ('y', [5])]), (3, [('x', [3]), ('y', [3])]), (4, [('x', [4\n    ]), ('y', [4])]), (5, [('x', [5]), ('y', [5])])]\nfor testNo, testKernel in tests:\n    ql.set_option('output_dir', output_dir)\n    print('Running test_ccl_latencies No: {}'.format(testNo))\n    config_fn = os.path.join(curdir, 'test_cfg_cc_light_buffers_latencies.json'\n        )\n    platform = ql.Platform('seven_qubits_chip', config_fn)\n    sweep_points = [1, 2]\n    num_qubits = 7\n    p = ql.Program('test_ccl_latencies' + str(testNo), platform, num_qubits)\n    p.set_sweep_points(sweep_points)\n    k = ql.Kernel('aKernel', platform, num_qubits)\n    for gate, qubits in testKernel:\n        k.gate(gate, qubits)\n    p.add_kernel(k)\n    p.compile()\n    QISA_fn = os.path.join(output_dir, p.name + '.qisa')\n    gold_fn = rootDir + '/golden/test_ccl_latencies_' + str(testNo) + '.qisa'\n    assemble(QISA_fn)\n    self.assertTrue(file_compare(QISA_fn, gold_fn))\n"
-}

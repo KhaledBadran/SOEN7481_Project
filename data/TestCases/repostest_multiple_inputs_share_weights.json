@@ -1,9 +1,0 @@
-{
-    "functionName": "test_multiple_inputs_share_weights",
-    "className": "TestLayer",
-    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_keras_&_test_layer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with pytest.raises(Exception) as excinfo:\n    input_node1 = Input(shape=[3, 16, 16])\n    input_node2 = Input(shape=[3, 32, 32])\n    conv2d = Convolution2D(5, 3, 3, border_mode='same')\n    conv1 = conv2d(input_node1)\n    conv2 = conv2d(input_node2)\n    out1 = Flatten()(conv1)\n    out2 = Flatten()(conv2)\n    model1 = Model(input=[input_node1, input_node2], output=[out1, out2])\n    tensor1, tensor2 = model1([input_node1, input_node2])\n    out3 = Dense(7)(tensor1)\n    out4 = Dense(8)(tensor2)\n    model2 = Model(input=[input_node1, input_node2], output=[out3, out4])\n    def_path, w_path = dump_keras(model2)\n    bigdl_model = DefinitionLoader.from_json_path(def_path)\nassert str(excinfo.value\n    ) == \"Convolution2D doesn't support multiple inputs with shared weights\"\n"
-}

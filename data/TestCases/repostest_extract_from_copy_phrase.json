@@ -1,9 +1,0 @@
-{
-    "functionName": "test_extract_from_copy_phrase",
-    "className": "TestTriggers",
-    "fileName": "/BciPy_&_BciPy/bcipy_&_helpers_&_tests_&_test_triggers.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "trigger_seq = [(\"['calibration_trigger', 2.3019680810393766]\", 'calib'), (\n    '+', 'fixation'), ('I', 'nontarget'), ('H', 'nontarget'), ('C',\n    'nontarget'), ('G', 'nontarget'), ('D', 'nontarget'), ('F', 'nontarget'\n    ), ('_', 'nontarget'), ('E', 'nontarget'), ('<', 'nontarget'), ('B',\n    'nontarget'), ('+', 'fixation'), ('E', 'nontarget'), ('B', 'nontarget'),\n    ('H', 'nontarget'), ('_', 'nontarget'), ('C', 'nontarget'), ('I',\n    'nontarget'), ('G', 'nontarget'), ('<', 'nontarget'), ('F', 'nontarget'\n    ), ('D', 'nontarget'), ('+', 'fixation'), ('G', 'nontarget'), ('_',\n    'nontarget'), ('B', 'nontarget'), ('F', 'nontarget'), ('I', 'nontarget'\n    ), ('C', 'nontarget'), ('<', 'nontarget'), ('E', 'nontarget'), ('D',\n    'nontarget'), ('H', 'nontarget')]\nphrase = 'HELLO'\nstart_index = int(len(phrase) / 2)\ncopy_text = phrase[start_index:]\ncontent, trigger_times = sample_raw_data(trigger_seq)\nextracted = extract_from_copy_phrase(StringIO(content), copy_text=copy_text,\n    typed_text=copy_text)\nself.assertEqual(len(trigger_seq), len(extracted))\nfor seq_i in range(len(trigger_seq)):\n    extracted_val, extracted_targetness, stamp = extracted[seq_i]\n    expected_trg, targetness = trigger_seq[seq_i]\n    if 'calibration' in expected_trg:\n        expected_trg = 'calibration_trigger'\n    self.assertEqual(expected_trg, extracted_val)\n    self.assertEqual(targetness, extracted_targetness)\n    self.assertEqual(trigger_times[seq_i], float(stamp))\n"
-}

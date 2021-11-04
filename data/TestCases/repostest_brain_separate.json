@@ -1,9 +1,0 @@
-{
-    "functionName": "test_brain_separate",
-    "className": null,
-    "fileName": "/nipy_&_PySurfer/surfer_&_tests_&_test_viz.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that Brain does not reuse existing figures by default.\"\"\"\n_set_backend('auto')\nbrain = Brain(*std_args)\nassert brain.brain_matrix.size == 1\nbrain_2 = Brain(*std_args)\nassert brain_2.brain_matrix.size == 1\nassert brain._figures[0][0] is not brain_2._figures[0][0]\nbrain_3 = Brain(*std_args, figure=brain._figures[0][0])\nassert brain._figures[0][0] is brain_3._figures[0][0]\nrequires_fsaverage()"
-}

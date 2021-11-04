@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_search_filenames",
-    "className": null,
-    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_server_&_tests_&_test_ingestion.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "dsid, _, _ = get_features_cached(app)\nmethod = V01 + '/feature-extraction/{}/id-mapping'.format(dsid)\ndef _filter_dict(x, filter_field):\n    return {key: val for key, val in x.items() if key == filter_field}\nresponse_ref = {'internal_id': 'int', 'file_path': 'str', 'document_id': 'int'}\nfile_path_obj = [{'file_path': val} for val in ['00401.txt', '00506.txt']]\ndata = app.post_check(method, json={'data': file_path_obj})\ndata = data['data']\nfor idx in range(len(data)):\n    assert dict2type(data[idx]) == response_ref\nassert [_filter_dict(row, 'file_path') for row in data] == file_path_obj\nassert_equal(np.asarray([row['internal_id'] for row in data]) ** 2, [row[\n    'document_id'] for row in data])\nwith pytest.raises(NotFound):\n    res = app.post(method, json={'data': [{'file_path': '00400.txt'}]})\nfile_path_obj = [{'document_id': 4}, {'document_id': 9}]\ndata = app.post_check(method, json={'data': file_path_obj})\ndata = data['data']\nfor idx in range(len(data)):\n    assert dict2type(data[idx]) == response_ref\nassert [_filter_dict(row, 'document_id') for row in data] == file_path_obj\nassert_equal(np.asarray([row['internal_id'] for row in data]) ** 2, [row[\n    'document_id'] for row in data])\n"
-}

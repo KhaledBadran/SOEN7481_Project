@@ -1,9 +1,0 @@
-{
-    "functionName": "test_failure_numeric",
-    "className": "ChangeAndConfirmParamsMultipleElementTestCase",
-    "fileName": "/mzy2240_&_ESA/tests_&_test_saw.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Don't actually send in a command, and ensure that we get\n        an exception.\n        \"\"\"\ncommand_df = pd.DataFrame([[13, '1', 130.5, '5.8'], [3, ' 1 ', '94.2',\n    '19.0']], columns=['BusNum', 'LoadID', 'LoadMW', 'LoadMVR'])\nwith patch.object(saw_14, 'ChangeParametersMultipleElement'):\n    with self.assertRaisesRegex(CommandNotRespectedError,\n        'After calling .* not all parameters'):\n        saw_14.change_and_confirm_params_multiple_element(ObjectType='load',\n            command_df=command_df)\n"
-}

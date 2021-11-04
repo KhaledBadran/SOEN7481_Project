@@ -1,9 +1,0 @@
-{
-    "functionName": "test_register_wrapped_get_destroy",
-    "className": "TestProxyKmipClientIntegration",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_integration_&_services_&_test_proxykmipclient.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a wrapped key can be registered with the server and that its\n        metadata is retrieved with the get operation.\n        \"\"\"\nkey = objects.SymmetricKey(enums.CryptographicAlgorithm.AES, 128,\n    b'\\x00\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08\\t\\n\\x0b\\x0c\\r\\x0e\\x0f',\n    key_wrapping_data={'wrapping_method': enums.WrappingMethod.ENCRYPT,\n    'encryption_key_information': {'unique_identifier': '42',\n    'cryptographic_parameters': {'block_cipher_mode': enums.BlockCipherMode\n    .NIST_KEY_WRAP}}, 'encoding_option': enums.EncodingOption.NO_ENCODING})\nkey_id = self.client.register(key)\nresult = self.client.get(key_id)\nkey_wrapping_data = result.key_wrapping_data\nself.assertIsInstance(key_wrapping_data, dict)\nself.assertEqual(enums.WrappingMethod.ENCRYPT, key_wrapping_data.get(\n    'wrapping_method'))\neki = key_wrapping_data.get('encryption_key_information')\nself.assertIsInstance(eki, dict)\nself.assertEqual('42', eki.get('unique_identifier'))\ncp = eki.get('cryptographic_parameters')\nself.assertIsInstance(cp, dict)\nself.assertEqual(enums.BlockCipherMode.NIST_KEY_WRAP, cp.get(\n    'block_cipher_mode'))\nself.assertEqual(enums.EncodingOption.NO_ENCODING, key_wrapping_data.get(\n    'encoding_option'))\n"
-}

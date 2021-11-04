@@ -1,9 +1,0 @@
-{
-    "functionName": "test_expval_exception_if_no_obs_queue",
-    "className": "Expval",
-    "fileName": "/XanaduAI_&_PennyLane-PQ/tests_&_test_ibm_expval_and_pre_expval_mock.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "if self.args.device == 'ibm' or self.args.device == 'all':\n    dev = ProjectQIBMBackend(wires=2, shots=1, use_hardware=False, token=\n        token, verbose=True)\nelse:\n    return\ndel dev.__dict__['_obs_queue']\ndev._eng = MagicMock()\ndev._eng.backend = MagicMock()\ndev._eng.backend.get_probabilities = MagicMock()\ndev._eng.backend.get_probabilities.return_value = {'00': 1.0}\nself.assertRaises(DeviceError, dev.expval, 'PauliX', wires=Wires([0]), par=\n    list())\nself.assertRaises(DeviceError, dev.expval, 'PauliY', wires=Wires([0]), par=\n    list())\nself.assertRaises(DeviceError, dev.expval, 'Hadamard', wires=Wires([0]),\n    par=list())\n"
-}

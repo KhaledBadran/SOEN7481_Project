@@ -1,9 +1,0 @@
-{
-    "functionName": "test_missing_uncertainty_parts",
-    "className": "TestDataPoint",
-    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_chemked.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "properties = self.load_properties('testfile_uncertainty.yaml')\nfor prop in ['uncertainty', 'uncertainty-type']:\n    save = properties[0]['temperature'][1].pop(prop)\n    with pytest.raises(ValueError):\n        DataPoint(properties[0])\n    properties[0]['temperature'][1][prop] = save\n    save = properties[1]['ignition-delay'][1].pop(prop)\n    with pytest.raises(ValueError):\n        DataPoint(properties[1])\n    properties[1]['ignition-delay'][1][prop] = save\nfor prop in ['upper-uncertainty', 'lower-uncertainty']:\n    save = properties[2]['temperature'][1].pop(prop)\n    with pytest.raises(ValueError):\n        DataPoint(properties[2])\n    properties[0]['temperature'][1][prop] = save\n    save = properties[3]['ignition-delay'][1].pop(prop)\n    with pytest.raises(ValueError):\n        DataPoint(properties[3])\n    properties[1]['ignition-delay'][1][prop] = save\npytest.mark.filterwarnings('ignore:Asymmetric uncertainties')"
-}

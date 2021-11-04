@@ -1,9 +1,0 @@
-{
-    "functionName": "test_translate_unknown_source_message",
-    "className": "OWMTranslateTest",
-    "fileName": "/openworm_&_PyOpenWorm/tests_&_CommandTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Should exit with a message indicating the source type cannot\n        be found in the graph\n        \"\"\"\ntranslator = 'http://example.org/translator'\nsource = 'http://example.org/source'\nimports_context_ident = 'http://example.org/imports'\nself.cut._lookup_translator = lambda *args, **kwargs: Mock()\nwith self.assertRaisesRegexp(GenericUserError, re.escape(source)):\n    self.cut.translate(translator, imports_context_ident, data_sources=(\n        source,))\n"
-}

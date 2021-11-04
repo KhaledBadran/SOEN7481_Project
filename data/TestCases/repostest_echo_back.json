@@ -1,9 +1,0 @@
-{
-    "functionName": "test_echo_back",
-    "className": "TestBasic",
-    "fileName": "/p1r-a-t3_&_FB_Bot/Tests_&_test_basic.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        This functions test tbe basic text reply payload settings\n        There are four test cases. \n        \"\"\"\ntext = 'test_echo_back - Test 1 -- {}'.format(random.randint(0, 10000000000000)\n    )\necho_payload = self.utility.basic_text_reply_payload(self.test_user, text)\nstatus_code = self.facebook.send_message(echo_payload)\nself.assertEqual(status_code, 200, 'test_echo_back - Test 1')\nwaiting_period = random.uniform(0.1, 20.1)\ntyping_payload = self.utility.typing_on(self.test_user, waiting_period=\n    waiting_period)\nstatus_code = self.facebook.send_message(typing_payload)\nself.assertEqual(status_code, 200, 'test_echo_back - Test 1')\ntime.sleep(waiting_period)\ntext = 'test_echo_back - waiting for {} - Test 2 -- {}'.format(waiting_period,\n    random.randint(0, 10000000000000))\necho_payload = self.utility.basic_text_reply_payload(self.test_user, text)\nstatus_code = self.facebook.send_message(echo_payload)\nself.assertEqual(status_code, 200, 'test_echo_back - Test 2')\ntext = 'Test 3 - {}'.format('x' * 20000)\necho_payload = self.utility.basic_text_reply_payload(self.test_user, text)\nstatus_code = self.facebook.send_message(echo_payload)\nself.assertEqual(status_code, 400, 'test_echo_back Test 3 -> 400')\n"
-}

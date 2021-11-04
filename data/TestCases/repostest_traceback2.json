@@ -1,9 +1,0 @@
-{
-    "functionName": "test_traceback2",
-    "className": null,
-    "fileName": "/PaulHancock_&_Aegean/tests_&_test_pprocess.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "queue = pprocess.Queue(limit=5, reuse=1)\ndo_parallel = queue.manage(pprocess.MakeReusable(raise_stupid_err))\nfor i in range(5):\n    do_parallel('Process {0}'.format(i))\ntry:\n    queue.next()\nexcept TypeError as e:\n    if 'pow()' not in repr(e):\n        raise AssertionError('Type Error not raised properly')\nreturn\n"
-}

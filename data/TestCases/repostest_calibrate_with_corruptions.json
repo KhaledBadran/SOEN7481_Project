@@ -1,9 +1,0 @@
-{
-    "functionName": "test_calibrate_with_corruptions",
-    "className": null,
-    "fileName": "/Accenture_&_AmpliGraph/tests_&_ampligraph_&_latent_features_&_test_models.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "model = DistMult(batches_count=2, seed=555, epochs=1, k=10, loss='pairwise',\n    loss_params={'margin': 5}, optimizer='adagrad', optimizer_params={'lr':\n    0.1})\nX = np.array([['a', 'y', 'b'], ['b', 'y', 'a'], ['a', 'y', 'c'], ['c', 'z',\n    'a'], ['a', 'z', 'd']])\nmodel.fit(X)\nX_pos = np.array([['a', 'y', 'b'], ['b', 'y', 'a'], ['a', 'y', 'c'], ['c',\n    'z', 'a'], ['d', 'z', 'd']])\nwith pytest.raises(RuntimeError):\n    model.predict_proba(X_pos)\nwith pytest.raises(ValueError):\n    model.calibrate(X_pos, batches_count=2, epochs=10)\nmodel.calibrate(X_pos, positive_base_rate=0.5, batches_count=2, epochs=10)\nprobas = model.predict_proba(X_pos)\nassert np.logical_and(probas > 0, probas < 1).all()\n"
-}

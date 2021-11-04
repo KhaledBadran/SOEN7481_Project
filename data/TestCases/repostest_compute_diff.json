@@ -1,9 +1,0 @@
-{
-    "functionName": "test_compute_diff",
-    "className": null,
-    "fileName": "/harsimrans_&_DropboxSyncer/tests_&_test_syncer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "files = ['/abc/def.txt', '/abc/efg.png', '/abc/hgf.pdf', '/something.txt']\ndirectories = ['abc/har', 'bcd', '/def']\nfor entry in directories:\n    fs.CreateDirectory(entry)\nfor entry in files:\n    fs.CreateFile(entry)\ndiff1 = syncer.compute_dir_index('/')\nfs.RemoveObject('/something.txt')\nfs.RemoveObject('/abc/def.txt')\nfs.CreateFile('/abc/def.txt', contents=\n    \"Dear Prudence\\\\nWon\\\\'t you come out to play?\\\\n\")\nfs.RemoveObject('/def')\nfs.CreateFile('/something2.txt', contents=\n    \"Dear Prudence\\\\nWon\\\\'t you come out to play?\\\\n\")\ndiff2 = syncer.compute_dir_index('/')\ndiffs = syncer.compute_diff(diff2, diff1)\nassert len(diffs['deleted']) == 1\nassert len(diffs['updated']) == 1\nassert len(diffs['deleted_dirs']) == 1\nassert len(diffs['created']) == 1\n"
-}

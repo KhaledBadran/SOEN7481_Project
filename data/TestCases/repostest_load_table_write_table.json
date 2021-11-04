@@ -1,9 +1,0 @@
-{
-    "functionName": "test_load_table_write_table",
-    "className": null,
-    "fileName": "/PaulHancock_&_Aegean/tests_&_test_catalogs.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that we can write and load tables with various file formats\"\"\"\ncatalog = [ComponentSource()]\nfor fmt in ['csv', 'vo']:\n    fout = 'a.' + fmt\n    cat.save_catalog(fout, catalog, meta=None)\n    fout = 'a_comp.' + fmt\n    tab = cat.load_table(fout)\n    if not len(tab) == len(catalog):\n        raise AssertionError()\nos.remove(fout)\ncat.save_catalog('a.csv', catalog, meta=None)\ntab = cat.load_table('a_comp.csv')\ncat.write_table(tab, 'a.csv')\nif not os.path.exists('a.csv'):\n    raise AssertionError()\nos.remove('a.csv')\nassert_raises(Exception, cat.write_table, tab, 'bla.fox')\nassert_raises(Exception, cat.load_table, 'file.fox')\n"
-}

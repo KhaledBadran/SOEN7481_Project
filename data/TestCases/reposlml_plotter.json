@@ -1,9 +1,0 @@
-{
-    "functionName": "lml_plotter",
-    "className": null,
-    "fileName": "/SUNCAT-Center_&_CatLearn/test_&_test_lml_optimizer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Function to plot log_marginal_likelihood.\"\"\"\nprint('Plotting log marginal likelihood.')\nN, N_D = np.shape(train_features)\nhyperparameters = np.array(kdicts2list(kernel_list, N_D=N_D))\nhyperparameters = np.append(hyperparameters, regularization)\nd_max = min(len(hyperparameters), d_max)\nfor d in range(d_max):\n    theta = hyperparameters.copy()\n    x0 = hyperparameters[d]\n    X = 10 ** np.linspace(np.log10(x0) - 3, np.log10(x0) + 3, 17)\n    Y = []\n    dY = []\n    for x in X:\n        theta[d] = x\n        function = lml.log_marginal_likelihood(theta, np.array(\n            train_features), np.array(train_targets), kernel_list,\n            scale_optimizer, eval_gradients, eval_jac=True)\n        Y.append(-function[0])\n        dY.append(-function[1])\n    n_x = np.ceil(np.sqrt(d_max))\n    n_y = n_x + 1\n    ax = plt.subplot(n_x, n_y, d + 1)\n    ax.semilogx(X, Y, marker='o', linestyle='none')\n    for i in range(len(X)):\n        dx = X[i] / 10.0\n        ax.semilogx([X[i] + dx, X[i] - dx], [Y[i] + dY[i][d] * dx, Y[i] - \n            dY[i][d] * dx], c='r')\n    ax.axvline(x0)\n    ax.set_ylabel('lml')\n    ax.set_xlabel('Hyperparameter ' + str(d))\n"
-}

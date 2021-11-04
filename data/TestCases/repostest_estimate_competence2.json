@@ -1,9 +1,0 @@
-{
-    "functionName": "test_estimate_competence2",
-    "className": null,
-    "fileName": "/Menelau_&_DESlib/deslib_&_tests_&_dcs_&_test_mcb.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "_, _, neighbors, distances, dsel_processed, _ = example_estimate_competence\nquery = np.ones((1, 2))\nmcb_test = MCB()\nmcb_test.n_classifiers_ = 3\nmcb_test.DSEL_processed_ = dsel_processed\nneighbors = neighbors[(index), :].reshape(1, -1)\ndistances = distances[(index), :].reshape(1, -1)\nmcb_test.BKS_DSEL_ = bks_dsel_ex2\npredictions = np.array([[0, 1, 0]])\ncompetences = mcb_test.estimate_competence(query, neighbors, distances=\n    distances, predictions=np.atleast_2d(predictions))\nassert np.isclose(competences, expected).all()\npytest.mark.parametrize('index, expected', [(0, [0.66666666, 0.83333333, \n    0.66666666]), (1, [0.83333333, 1.0, 0.66666666])])"
-}

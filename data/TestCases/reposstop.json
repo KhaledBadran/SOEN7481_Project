@@ -1,9 +1,0 @@
-{
-    "functionName": "stop",
-    "className": "TrezorEmulator",
-    "fileName": "/bitcoin-core_&_HWI/test_&_test_trezor.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "if self.emulator_proc.poll() is None:\n    os.killpg(os.getpgid(self.emulator_proc.pid), signal.SIGTERM)\n    os.waitpid(self.emulator_proc.pid, 0)\nif self.model_t:\n    emulator_img = '/var/tmp/trezor.flash'\nelse:\n    emulator_img = os.path.dirname(self.emulator_path) + '/emulator.img'\nif os.path.isfile(emulator_img):\n    os.unlink(emulator_img)\nif self.emulator_log is not None:\n    self.emulator_log.close()\n    self.emulator_log = None\natexit.unregister(self.stop)\n"
-}

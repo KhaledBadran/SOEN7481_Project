@@ -1,9 +1,0 @@
-{
-    "functionName": "like_read_count",
-    "className": null,
-    "fileName": "/Hatoris_&_BioPlate/tests_&_test_plate_to_excel.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "val = list(plate.count().items())\nif isinstance(val[0][1], dict):\n    nv = []\n    for pos, valdict in val:\n        valdict = list(map(list, valdict.items()))\n        addp = lambda x: [pos] + x\n        nv += list(map(addp, valdict))\n    val = nv\n    if isinstance(val[0][2], dict):\n        nv = []\n        for i in range(len(val)):\n            num, pos, valdict = val[i]\n            valdict = list(map(list, valdict.items()))\n            addp = lambda x: [num, pos] + x\n            nv += list(map(addp, valdict))\n        val = nv\nval = list(map(list, val))\nchange = lambda x: empty if x == '' else x\nval = list(map(lambda y: list(map(change, y)), val))\nlen_header = len(val[0])\nif len_header == 2:\n    hd = ['infos', 'count']\nelif len_header == 3:\n    if not Inserts:\n        hd = ['plate', 'infos', 'count']\n    else:\n        hd = ['position', 'infos', 'count']\nelif len_header == 4:\n    hd = ['plate', 'position', 'infos', 'count']\nval.insert(0, hd)\nreturn val\n"
-}

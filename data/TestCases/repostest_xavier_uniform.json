@@ -1,9 +1,0 @@
-{
-    "functionName": "test_xavier_uniform",
-    "className": null,
-    "fileName": "/Accenture_&_AmpliGraph/tests_&_ampligraph_&_latent_features_&_test_initializers.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Xavier uniform initializer test\n    \"\"\"\ntf.reset_default_graph()\ntf.random.set_random_seed(0)\nxuniform_class = INITIALIZER_REGISTRY['xavier']\nxuniform_obj = xuniform_class({'uniform': True})\ntf_init = xuniform_obj.get_tf_initializer()\nvar1 = tf.get_variable(shape=(200, 1000), initializer=tf_init, name='var1')\nwith tf.Session() as sess:\n    sess.run(tf.global_variables_initializer())\n    tf_var = sess.run(var1)\n    np_var = xuniform_obj.get_np_initializer(200, 1000)\n    assert np.round(np.min(np_var), 2) == np.round(np.min(tf_var), 2)\n    assert np.round(np.max(np_var), 2) == np.round(np.max(tf_var), 2)\n"
-}

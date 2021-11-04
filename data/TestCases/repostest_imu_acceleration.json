@@ -1,9 +1,0 @@
-{
-    "functionName": "test_imu_acceleration",
-    "className": null,
-    "fileName": "/PRIArobotics_&_HedgehogServer/tests_&_test_server.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "async with conn_dealer() as socket:\n    await assertReplyDealer(socket, imu.AccelerationRequest(), imu.\n        AccelerationReply(0, 0, 0))\n    sub = Subscription()\n    sub.subscribe = False\n    sub.timeout = 1000\n    await assertReplyDealer(socket, imu.AccelerationSubscribe(sub), ack.\n        FAILED_COMMAND)\n    with assertImmediate():\n        sub = Subscription()\n        sub.subscribe = True\n        sub.timeout = 1000\n        await assertReplyDealer(socket, imu.AccelerationSubscribe(sub), ack.OK)\n        _, update = await socket.recv_msg()\n        assert update == imu.AccelerationUpdate(0, 0, 0, sub)\n    sub.subscribe = False\n    await assertReplyDealer(socket, imu.AccelerationSubscribe(sub), ack.OK)\npytest.mark.trio"
-}

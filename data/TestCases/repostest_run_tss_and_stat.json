@@ -1,9 +1,0 @@
-{
-    "functionName": "test_run_tss_and_stat",
-    "className": "TestOptimizeTSSpredator",
-    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_optimize_TSSpredator.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "list_num = [self.example.best_para]\nseeds = {'seed': 0, 'pre_seed': []}\nfeatures = {'feature': 'l', 'pre_feature': ''}\nbest_para = {'re_factor': 0.3, 'processing': 3.3, 'enrichment': 2.5,\n    'height': 0.5, 'base_height': 0.0, 're_height': 0.2, 'factor': 0.7}\ncurrent_para = {'re_factor': 0.3, 'processing': 2.3, 'enrichment': 2.5,\n    'height': 0.5, 'base_height': 0.2, 're_height': 0.2, 'factor': 0.7}\nstat_out = StringIO()\nwig = os.path.join(self.test_folder, 'wig')\nfasta = os.path.join(self.test_folder, 'aaa.fa')\ngff = os.path.join(self.test_folder, 'aaa.gff')\nif not os.path.exists(wig):\n    os.mkdir(wig)\ngen_file(fasta, self.example.fasta)\ngen_file(gff, self.example.gff_file)\noutput_prefix = ['test_aaa']\not.run_TSSpredator_paralle = Mock_func().mock_run_TSSpredator_paralle\not.convert2gff = Mock_func().mock_convert2gff\nargs = self.mock_args.mock()\nargs.steps = 2000\nargs.cores = 1\nargs.tsspredator_path = 'test'\nargs.libs = self.example.libs\nargs.program = 'TSS'\nargs.cluster = 3\nargs.utr = 200\nargs.replicate = 'all_2'\nargs.replicate_name = 'rep'\nargs.project_strain = 'aaa'\nargs.manual = os.path.join(self.test_folder, 'manual.gff')\nargs.gene_length = 2000\nlog = open(os.path.join(self.test_folder, 'test.log'), 'w')\ngen_file(args.manual, self.example.manual_file)\ndatas, set_config, run_tss = ot.run_tss_and_stat(self.example.indexs,\n    list_num, seeds, 0.4, 0.3, self.test_folder, stat_out, best_para,\n    current_para, wig, fasta, gff, self.example.best, 3, args, 'aaa', self.\n    example.mans, 2000, log, True, True)\nself.assertFalse(datas[0])\n"
-}

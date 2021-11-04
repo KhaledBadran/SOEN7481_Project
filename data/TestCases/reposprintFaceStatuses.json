@@ -1,9 +1,0 @@
-{
-    "functionName": "printFaceStatuses",
-    "className": null,
-    "fileName": "/named-data_&_PyNDN2/examples_&_test_list_faces.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    This is called when all the segments are received to decode the\n    encodedMessage repeated TLV FaceStatus messages and display the values.\n\n    :param Blob encodedMessage: The repeated TLV-encoded FaceStatus.\n    \"\"\"\nfaceStatusMessage = face_status_pb2.FaceStatusMessage()\nProtobufTlv.decode(faceStatusMessage, encodedMessage)\ndump('Faces:')\nfor faceStatus in faceStatusMessage.face_status:\n    line = ''\n    line += '  faceid=' + str(faceStatus.face_id\n        ) + ' remote=' + faceStatus.uri + ' local=' + faceStatus.local_uri\n    if faceStatus.HasField('expiration_period'):\n        line += ' expires=' + str(round(faceStatus.expiration_period / 1000.0)\n            ) + 's'\n    line += ' counters={' + 'in={' + str(faceStatus.n_in_interests\n        ) + 'i ' + str(faceStatus.n_in_datas) + 'd ' + str(faceStatus.\n        n_in_bytes) + 'B}' + ' out={' + str(faceStatus.n_out_interests\n        ) + 'i ' + str(faceStatus.n_out_datas) + 'd ' + str(faceStatus.\n        n_out_bytes) + 'B}' + '}' + ' ' + ('local' if faceStatus.face_scope ==\n        1 else 'non-local') + ' ' + ('permanent' if faceStatus.\n        face_persistency == 2 else 'on-demand' if faceStatus.\n        face_persistency == 1 else 'persistent') + ' ' + ('multi-access' if\n        faceStatus.link_type == 1 else 'point-to-point')\n    dump(line)\n"
-}

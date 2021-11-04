@@ -1,9 +1,0 @@
-{
-    "functionName": "_parse_imu_message_reply",
-    "className": null,
-    "fileName": "/PRIArobotics_&_HedgehogProtocol/hedgehog_&_protocol_&_messages_&_imu.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "kind = msg.kind\nx = msg.x\ny = msg.y\nz = msg.z\nsubscription = msg.subscription if msg.HasField('subscription') else None\nif not subscription:\n    class_ = {RATE: RateReply, ACCELERATION: AccelerationReply, POSE: PoseReply\n        }[kind]\n    return class_(x, y, z)\nelse:\n    class_ = {RATE: RateUpdate, ACCELERATION: AccelerationUpdate, POSE:\n        PoseUpdate}[kind]\n    return class_(x, y, z, subscription)\nReplyMsg.parser('imu_message')"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_cache_list_description",
-    "className": null,
-    "fileName": "/openworm_&_PyOpenWorm/tests_&_OWMBundleTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Make sure the bundle description shows up\n    \"\"\"\nbundle_dir1 = p(self.test_homedir, '.owmeta', 'bundles', 'test%2Fmain', '1')\nbundle_dir2 = p(self.test_homedir, '.owmeta', 'bundles', 'test%2Fsecondary',\n    '2')\nmakedirs(bundle_dir1)\nmakedirs(bundle_dir2)\nwith open(p(bundle_dir1, 'manifest'), 'w') as mf:\n    mf.write('{\"version\": 1, \"id\": \"test/main\"}')\nwith open(p(bundle_dir2, 'manifest'), 'w') as mf:\n    mf.write('{\"version\": 1, \"id\": \"test/secondary\"}')\nassertRegexpMatches(self.sh('owm bundle cache list'), 'test/main@1')\nassertRegexpMatches(self.sh('owm bundle cache list'), 'test/secondary@1')\n"
-}

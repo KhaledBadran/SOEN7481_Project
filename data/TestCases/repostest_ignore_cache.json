@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ignore_cache",
-    "className": null,
-    "fileName": "/Pebaz_&_Nimporter/tests_&_test_import.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "tenth = 100\nCTM = lambda : round(time.time() * tenth * 10)\nstart = CTM()\nmod = Nimporter.import_nim_module('pkg3.mod4')\nassert mod\nassert mod.func1\nellapsed = CTM() - start\nassert ellapsed > tenth, 'Module was loaded from __pycache__'\nif sys.platform == 'win32':\n    return\nstart = CTM()\nmod = Nimporter.import_nim_module('pkg3.mod4', ignore_cache=True)\nassert mod\nassert mod.func1\nellapsed2 = CTM() - start\nassert ellapsed2 > tenth, 'Module was loaded from __pycache__'\nNimporter.IGNORE_CACHE = True\nstart = CTM()\nmod = Nimporter.import_nim_module('pkg3.mod4')\nassert mod\nassert mod.func1\nellapsed3 = CTM() - start\nassert ellapsed3 > tenth, 'Module was loaded from __pycache__'\nNimporter.IGNORE_CACHE = False\nstart = CTM()\nmod = Nimporter.import_nim_module('pkg3.mod4')\nassert mod\nassert mod.func1\nellapsed4 = CTM() - start\nassert ellapsed4 < tenth, 'Module should have been loaded from __pycache__.'\n"
-}

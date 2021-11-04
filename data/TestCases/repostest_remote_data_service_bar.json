@@ -1,9 +1,0 @@
-{
-    "functionName": "test_remote_data_service_bar",
-    "className": null,
-    "fileName": "/quantOS-org_&_JAQS/test_&_test_dataservice.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "res2, msg2 = ds.bar('rb1710.SHF,600662.SH', start_time=200000, end_time=\n    160000, trade_date=20170831, fields='')\nassert msg2 == '0,'\nrb2 = res2.loc[(res2.loc[:, ('symbol')] == 'rb1710.SHF'), :]\nstk2 = res2.loc[(res2.loc[:, ('symbol')] == '600662.SH'), :]\nassert set(rb2.columns) == {u'close', u'code', u'date', u'freq', u'high',\n    u'low', u'oi', u'open', u'settle', u'symbol', u'time', u'trade_date',\n    u'turnover', u'volume', u'vwap'}\nassert abs(rb2.loc[:, ('settle')].values[0] - 0.0) < 0.001\nassert rb2.shape == (345, 15)\nassert stk2.shape == (240, 15)\nassert rb2.loc[:, ('volume')].values[344] == 3366\n"
-}

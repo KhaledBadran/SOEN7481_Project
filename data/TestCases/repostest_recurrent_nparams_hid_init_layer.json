@@ -1,9 +1,0 @@
-{
-    "functionName": "test_recurrent_nparams_hid_init_layer",
-    "className": null,
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_recurrent.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "l_inp = InputLayer((2, 2, 3))\nl_inp_h = InputLayer((2, 5))\nl_inp_h_de = DenseLayer(l_inp_h, 7)\nl_rec = RecurrentLayer(l_inp, 7, hid_init=l_inp_h_de)\nassert lasagne.layers.get_all_layers(l_rec) == [l_inp, l_inp_h, l_inp_h_de,\n    l_rec]\nassert len(lasagne.layers.get_all_params(l_rec, trainable=True)) == 5\nassert len(lasagne.layers.get_all_params(l_rec, regularizable=False)) == 2\n"
-}

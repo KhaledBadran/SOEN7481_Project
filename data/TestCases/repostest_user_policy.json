@@ -1,9 +1,0 @@
-{
-    "functionName": "test_user_policy",
-    "className": "TestUserPolicy",
-    "fileName": "/SUSE_&_Enceladus/mockboto3_&_tests_&_test_iam.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test user policy endpoints.\"\"\"\nself.client.create_user(UserName=self.user)\nself.client.create_policy(PolicyName='Admins', PolicyDocument=POLICY_DOC)\nself.client.attach_user_policy(UserName=self.user, PolicyArn=self.policy)\nresponse = self.client.list_attached_user_policies(UserName=self.user)\nassert 'Admins' == response['AttachedPolicies'][0]['PolicyName']\nassert 1 == len(response['AttachedPolicies'])\nself.client.detach_user_policy(UserName=self.user, PolicyArn=self.policy)\nresponse = self.client.list_attached_user_policies(UserName=self.user)\nassert 0 == len(response['AttachedPolicies'])\nmock_iam"
-}

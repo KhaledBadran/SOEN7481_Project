@@ -1,9 +1,0 @@
-{
-    "functionName": "test_glioblastoma_module",
-    "className": null,
-    "fileName": "/QTIM-Lab_&_DeepNeuro/deepneuro_&_package_test_&_pipeline_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "import numpy as np\nimport os\nfrom shutil import rmtree\nFLAIR, T1POST, T1PRE = np.random.normal(loc=1000, scale=200, size=(240, 240,\n    40)), np.random.normal(loc=1500, scale=200, size=(240, 240, 180)\n    ), np.random.normal(loc=1300, scale=200, size=(120, 120, 60))\nfrom deepneuro.utilities.conversion import save_data\ntry:\n    os.mkdir(testing_directory)\n    FLAIR_file = save_data(FLAIR, os.path.join(testing_directory,\n        'FLAIR.nii.gz'))\n    T1PRE_file = save_data(T1PRE, os.path.join(testing_directory,\n        'T1PRE.nii.gz'))\n    T1POST_file = save_data(T1POST, os.path.join(testing_directory,\n        'T1POST.nii.gz'))\n    from deepneuro.pipelines.Segment_GBM.predict import predict_GBM\n    os.environ['CUDA_DEVICE_ORDER'] = 'PCI_BUS_ID'\n    os.environ['CUDA_VISIBLE_DEVICES'] = str(gpu_num)\n    predict_GBM(testing_directory, T1POST=T1POST_file, FLAIR=FLAIR_file,\n        T1PRE=T1PRE_file)\n    rmtree(testing_directory)\nexcept:\n    rmtree(testing_directory)\n    raise\nreturn\n"
-}

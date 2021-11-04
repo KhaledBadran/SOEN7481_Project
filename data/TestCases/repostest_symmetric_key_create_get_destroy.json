@@ -1,9 +1,0 @@
-{
-    "functionName": "test_symmetric_key_create_get_destroy",
-    "className": "TestIntegration",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_integration_&_services_&_test_integration.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that symmetric keys are properly created\n        \"\"\"\nkey_name = 'Integration Test - Create-Get-Destroy Key'\nresult = self._create_symmetric_key(key_name=key_name)\nself._check_result_status(result, ResultStatus, ResultStatus.SUCCESS)\nself._check_object_type(result.object_type, ObjectType, ObjectType.\n    SYMMETRIC_KEY)\nself._check_uuid(result.uuid, str)\nresult = self.client.get(uuid=result.uuid, credential=None)\nself._check_result_status(result, ResultStatus, ResultStatus.SUCCESS)\nself._check_object_type(result.object_type, ObjectType, ObjectType.\n    SYMMETRIC_KEY)\nself._check_uuid(result.uuid, str)\nsecret = result.secret\nexpected = SymmetricKey\nself.assertIsInstance(secret, expected)\nself.logger.debug('Destroying key: ' + key_name + '\\n With UUID: ' + result\n    .uuid)\nresult = self.client.destroy(result.uuid)\nself._check_result_status(result, ResultStatus, ResultStatus.SUCCESS)\nself._check_uuid(result.uuid.value, str)\nresult = self.client.get(uuid=result.uuid.value, credential=None)\nself._check_result_status(result, ResultStatus, ResultStatus.OPERATION_FAILED)\nexpected = ResultReason\nobserved = type(result.result_reason.value)\nself.assertEqual(expected, observed)\nexpected = ResultReason.ITEM_NOT_FOUND\nobserved = result.result_reason.value\nself.assertEqual(expected, observed)\n"
-}

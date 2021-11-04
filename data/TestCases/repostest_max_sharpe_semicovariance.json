@@ -1,9 +1,0 @@
-{
-    "functionName": "test_max_sharpe_semicovariance",
-    "className": null,
-    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_efficient_frontier.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "df = get_data()\nef = setup_efficient_frontier()\nef.cov_matrix = risk_models.semicovariance(df, benchmark=0)\nw = ef.max_sharpe()\nassert isinstance(w, dict)\nassert set(w.keys()) == set(ef.tickers)\nnp.testing.assert_almost_equal(ef.weights.sum(), 1)\nassert all([(i >= 0) for i in w.values()])\nnp.testing.assert_allclose(ef.portfolio_performance(), (0.2972184894480104,\n    0.06443145011260347, 4.302533762060766))\n"
-}

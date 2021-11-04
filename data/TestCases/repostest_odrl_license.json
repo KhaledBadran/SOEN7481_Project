@@ -1,9 +1,0 @@
-{
-    "functionName": "test_odrl_license",
-    "className": "testLicense",
-    "fileName": "/benjimor_&_CaLi/tests_&_test_license.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test if ODRL licenses are well instanciated.\"\"\"\nodrl = ODRLVocabulary()\nDL1 = RestrictivenessLatticeOfStatus(Graph().parse(data=dl1_rdf, format='ttl'))\nDL2 = RestrictivenessLatticeOfStatus(Graph().parse(data=dl2_rdf, format='ttl'))\nld_licenses_graph = Graph().parse(data=ld_licenses_rdf, format='ttl')\nrep_licenses_graph = Graph().parse(data=rep_licenses_rdf, format='ttl')\nwith self.assertRaises(exceptions.MissingAction):\n    mit_license = ODRLLicense(vocabulary=odrl, ls=DL2, rdf_graph=\n        ld_licenses_graph, iri=MIT)\nwith self.assertRaises(exceptions.MissingLicense):\n    apache_license = ODRLLicense(vocabulary=odrl, ls=DL1, rdf_graph=\n        ld_licenses_graph, iri=ApacheV2)\nmit_license = ODRLLicense(vocabulary=odrl, ls=DL1, rdf_graph=\n    ld_licenses_graph, iri=MIT)\nself.assertIsInstance(mit_license, ODRLLicense)\nself.assertTrue(mit_license.statuses)\napache_license = ODRLLicense(vocabulary=odrl, ls=DL1, rdf_graph=\n    rep_licenses_graph, iri=ApacheV2)\nself.assertIsInstance(apache_license, ODRLLicense)\nself.assertTrue(apache_license.statuses)\n"
-}

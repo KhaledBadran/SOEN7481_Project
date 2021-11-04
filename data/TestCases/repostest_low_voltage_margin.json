@@ -1,9 +1,0 @@
-{
-    "functionName": "test_low_voltage_margin",
-    "className": "MyTestCase",
-    "fileName": "/KD-Group_&_Half.Sample/tests_&_test_estimate.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "sampler.set_sampler(sampler_name='mock_sampler')\nfor mock_v0, mock_v_inf in [[1, 2], [2, 3]]:\n    sampler.set_sampler_value('mock_v0', mock_v0)\n    sampler.set_sampler_value('mock_v_inf', mock_v_inf)\n    mock_taus = [1, 10, 100, 1000, 10000]\n    for mock_tau in mock_taus:\n        sampler.set_sampler_value('mock_tau', mock_tau)\n        sampler.measure(number_of_waveforms=4, emitting_frequency=10,\n            auto_mode=True)\n        while sampler.is_measuring:\n            time.sleep(0.1)\n        result = sampler.query()\n        diff = abs(mock_tau - result.tau)\n        diff_ratio = diff / mock_tau\n        self.assertTrue(diff_ratio <= 0.2 or diff < 0.5)\n        self.assertTrue(abs(mock_v0 - result.v0) <= 0.5)\n        self.assertTrue(abs(mock_v_inf - result.v_inf) <= 0.5)\n"
-}

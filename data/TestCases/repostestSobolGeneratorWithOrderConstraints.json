@@ -1,9 +1,0 @@
-{
-    "functionName": "testSobolGeneratorWithOrderConstraints",
-    "className": "SobolGeneratorTest",
-    "fileName": "/facebook_&_Ax/ax_&_models_&_tests_&_test_sobol.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "generator = SobolGenerator(seed=0)\nn_tunable = fixed_param_index = 3\nbounds = self._create_bounds(n_tunable=n_tunable, n_fixed=1)\ngenerated_points, weights = generator.gen(n=3, bounds=bounds,\n    linear_constraints=(np.array([[1, -1, 0, 0], [0, 1, -1, 0], [0, 0, 1, -\n    1]]), np.array([0, 0, 0])), fixed_features={fixed_param_index: 0.5})\nexpected_points = np.array([[0.0625397, 0.18969421, 0.38985136, 0.5], [\n    0.14849217, 0.26198292, 0.47683588, 0.5], [0.04088604, 0.08176377, \n    0.49635732, 0.5]])\nself.assertTrue(np.shape(expected_points) == np.shape(generated_points))\nself.assertTrue(np.allclose(expected_points, generated_points))\n"
-}

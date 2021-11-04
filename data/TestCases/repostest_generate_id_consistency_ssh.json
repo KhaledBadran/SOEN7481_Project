@@ -1,9 +1,0 @@
-{
-    "functionName": "test_generate_id_consistency_ssh",
-    "className": null,
-    "fileName": "/PearsonEducation_&_Alarmageddon/tests_&_publishing_&_test_pagerduty.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "pub = PagerDutyPublisher('url', 'token')\nssh_ctx = ssh.SshContext('ubuntu', ssh_key_file(tmpdir))\nssh_ctx2 = ssh.SshContext('ubuntu', ssh_key_file(tmpdir))\nv = ssh.SshCommandValidation(ssh_ctx, 'name', 'cmd', hosts=['a fake host'])\nv2 = ssh.SshCommandValidation(ssh_ctx2, 'name', 'cmd', hosts=['a fake host'])\nfailure = Failure('bar', v, 'unable to transmogrify')\nanother = Failure('foo', v2, 'to transmogrify')\nassert pub._generate_id(failure) == pub._generate_id(another)\n"
-}

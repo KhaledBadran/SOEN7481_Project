@@ -1,9 +1,0 @@
-{
-    "functionName": "test_faulty_client",
-    "className": null,
-    "fileName": "/PRIArobotics_&_HedgehogClient/tests_&_test_async_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "port, value = 0, 0\nasync with start_dummy(Commands.analog_request, port, value) as server:\n\n\n    class MyException(Exception):\n        pass\n    faulty = True\n\n\n    class FaultyClient(HedgehogClient):\n\n        async def _workload(self, *, commands: PipeEnd, events: PipeEnd\n            ) ->None:\n            if faulty:\n                raise MyException()\n            else:\n                return await super(FaultyClient, self)._workload(commands=\n                    commands, events=events)\n    client = FaultyClient(zmq_aio_ctx, server)\n    with pytest.raises(MyException):\n        async with client:\n            pass\n    assert client._open_count == 0\n    faulty = False\n    async with client:\n        assert await client.get_analog(port) == value\npytest.mark.asyncio"
-}

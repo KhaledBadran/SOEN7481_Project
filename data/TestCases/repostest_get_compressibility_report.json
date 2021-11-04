@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_compressibility_report",
-    "className": "CITestProvisioning",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test get_compressibility_report.\"\"\"\nsrp_list = self.provisioning.get_srp_list()\nif not srp_list:\n    self.skipTest('test_get_compressibility_report - Could not find any SRPs.')\npopulated_report = None\nfor srp in srp_list:\n    report = self.provisioning.get_compressibility_report(srp)\n    self.assertIsInstance(report, list)\n    if report:\n        populated_report = report\nnum_of_volumes = 'num_of_volumes'\nallocated_cap_gb = 'allocated_cap_gb'\nused_cap_gb = 'used_cap_gb'\ncompression_enabled = 'compression_enabled'\ntarget_ratio_to_one = 'target_ratio_to_one'\nfor storage_group_detail in populated_report:\n    self.assertIn(constants.STORAGE_GROUP_ID_CAMEL, storage_group_detail)\n    self.assertIn(num_of_volumes, storage_group_detail)\n    self.assertIn(allocated_cap_gb, storage_group_detail)\n    self.assertIn(used_cap_gb, storage_group_detail)\n    self.assertIn(compression_enabled, storage_group_detail)\n    self.assertIs(str, type(storage_group_detail[constants.\n        STORAGE_GROUP_ID_CAMEL]))\n    self.assertIs(int, type(storage_group_detail[num_of_volumes]))\n    self.assertIs(float, type(storage_group_detail[allocated_cap_gb]))\n    self.assertIs(float, type(storage_group_detail[used_cap_gb]))\n    self.assertIs(bool, type(storage_group_detail[compression_enabled]))\n    if target_ratio_to_one in storage_group_detail:\n        self.assertIs(float, type(storage_group_detail[target_ratio_to_one]))\n"
-}

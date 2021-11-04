@@ -1,9 +1,0 @@
-{
-    "functionName": "test_random_generate",
-    "className": null,
-    "fileName": "/mesonepigreco_&_CellConstructor/tests_&_TestGenerateSupercell_&_test_random_generate.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "total_path = os.path.dirname(os.path.abspath(__file__))\nos.chdir(total_path)\ndyn = CC.Phonons.Phonons('ffield_dynq', 3)\ndyn.ForcePositiveDefinite()\ndyn.Symmetrize()\nstructs = dyn.ExtractRandomStructures(size=2, T=150)\nfor s in structs:\n    s.fix_coords_in_unit_cell()\n    for i in range(s.N_atoms):\n        for j in range(s.N_atoms):\n            if i != j:\n                d = np.sqrt(np.sum((s.coords[(i), :] - s.coords[(j), :]) ** 2))\n                assert d > 0.2\n"
-}

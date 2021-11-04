@@ -1,9 +1,0 @@
-{
-    "functionName": "test_assembly",
-    "className": "TestTranscriptAssembly",
-    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_transcript_detection.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "wig_f_file = os.path.join(self.test_folder, 'aaa_forward.wig')\nwig_r_file = os.path.join(self.test_folder, 'aaa_reverse.wig')\nwig_f2_file = os.path.join(self.test_folder, 'aaa2_forward.wig')\nwig_r2_file = os.path.join(self.test_folder, 'aaa2_reverse.wig')\ngen_file(wig_f_file, self.example.wig_f)\ngen_file(wig_r_file, self.example.wig_r)\ngen_file(wig_f2_file, self.example.wig_f)\ngen_file(wig_r2_file, self.example.wig_r)\nreps = {'tex': 'all_1', 'frag': 'all_1'}\nout_file = os.path.join(self.test_folder, 'out')\ninput_lib = ['aaa_forward.wig:frag:1:a:+', 'aaa_reverse.wig:frag:1:a:-',\n    'aaa2_forward.wig:tex:1:a:+', 'aaa2_reverse.wig:tex:1:a:-']\nargs = self.mock_args.mock()\nargs.replicates = reps\nargs.height = 10\nargs.width = 1\nargs.tolerance = 3\nargs.tex = 2\nargs.low_cutoff = 5\nta.detect_transcript(wig_f_file, wig_r_file, self.test_folder, input_lib,\n    out_file, 'TEX', args)\ndatas = import_data(out_file)\nself.assertEqual('\\n'.join(datas), '##gff-version 3\\n' + self.example.out_tran)\n"
-}

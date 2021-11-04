@@ -1,9 +1,0 @@
-{
-    "functionName": "test_staggered_construction",
-    "className": "TestFields",
-    "fileName": "/tum-pbs_&_PhiFlow/tests_&_test_fields.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "tensor = math.zeros([1, 5, 5, 2])\nstaggered = StaggeredGrid(tensor, name='')\nassert len(staggered.data) == 2\nassert isinstance(staggered.data[0], CenteredGrid)\nassert staggered.data[0].component_count == 1\nnp.testing.assert_equal(staggered.data[0].box.lower, [-0.5, 0])\nstaggered2 = StaggeredGrid(unstack_staggered_tensor(tensor), name='')\nstruct.print_differences(staggered, staggered2)\nself.assertEqual(staggered, staggered2)\nstaggered3 = StaggeredGrid([staggered.data[0], staggered2.data[1]], name='')\nself.assertEqual(staggered3, staggered)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_submit_forced_download",
-    "className": "TestCase",
-    "fileName": "/IntegralDefense_&_ACE/lib_&_saq_&_modules_&_test_cloudphish.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "saq.CONFIG['analysis_mode_analysis']['cleanup'] = 'no'\nself.start_api_server()\nroot = create_root_analysis(analysis_mode=ANALYSIS_MODE_ANALYSIS)\nroot.initialize_storage()\nurl = root.add_observable(F_URL, TEST_URL)\nurl.add_directive(DIRECTIVE_CRAWL)\nurl.add_directive(DIRECTIVE_FORCE_DOWNLOAD)\nroot.save()\nroot.schedule()\nengine = TestEngine(analysis_pools={ANALYSIS_MODE_ANALYSIS: 1,\n    ANALYSIS_MODE_CLOUDPHISH: 1}, local_analysis_modes=[\n    ANALYSIS_MODE_ANALYSIS, ANALYSIS_MODE_CLOUDPHISH])\nengine.enable_module('analysis_module_cloudphish', ANALYSIS_MODE_ANALYSIS)\nengine.enable_module('analysis_module_cloudphish_request_analyzer',\n    ANALYSIS_MODE_CLOUDPHISH)\nengine.enable_module('analysis_module_crawlphish', ANALYSIS_MODE_CLOUDPHISH)\nengine.start()\nwait_for_log_count('analysis CloudphishAnalysis is completed', 1, 10)\nengine.controlled_stop()\nengine.wait()\nroot = RootAnalysis(storage_dir=root.storage_dir)\nroot.load()\nurl = root.get_observable(url.id)\nself.assertIsNotNone(url)\nself.assertEquals(len(url.analysis), 1)\nfrom saq.modules.cloudphish import CloudphishAnalysis\ncloudphish_analysis = url.get_analysis(CloudphishAnalysis)\nself.assertIsNotNone(cloudphish_analysis)\nself.assertEquals(cloudphish_analysis.analysis_result, SCAN_RESULT_CLEAR)\nself.assertEquals(len(cloudphish_analysis.observables), 1)\nself.assertEquals(cloudphish_analysis.observables[0].type, F_FILE)\nself.assertEquals(cloudphish_analysis.observables[0].value,\n    'Payment_Advice.pdf')\nself.assertTrue(os.path.exists(os.path.join(root.storage_dir,\n    cloudphish_analysis.observables[0].value)))\n"
-}

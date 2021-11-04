@@ -1,9 +1,0 @@
-{
-    "functionName": "test_autoTick1",
-    "className": null,
-    "fileName": "/bakwc_&_PySyncObj/test_syncobj.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "random.seed(42)\na = [getNextAddr(), getNextAddr()]\no1 = TestObj(a[0], [a[1]], TEST_TYPE.AUTO_TICK_1)\no2 = TestObj(a[1], [a[0]], TEST_TYPE.AUTO_TICK_1)\nassert not o1._isReady()\nassert not o2._isReady()\ntime.sleep(4.5)\nassert o1._isReady()\nassert o2._isReady()\nassert o1._getLeader().address in a\nassert o1._getLeader() == o2._getLeader()\nassert o1._isReady()\nassert o2._isReady()\no1.addValue(150)\no2.addValue(200)\ntime.sleep(1.5)\nassert o1._isReady()\nassert o2._isReady()\nassert o1.getCounter() == 350\nassert o2.getCounter() == 350\nassert o2.addValueSync(10) == 360\nassert o1.addValueSync(20) == 380\no1._destroy()\no2._destroy()\ntime.sleep(0.5)\n"
-}

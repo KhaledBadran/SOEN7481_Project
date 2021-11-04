@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sino_radon",
-    "className": null,
-    "fileName": "/RI-imaging_&_ODTbrain/tests_&_test_processing.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "myframe = sys._getframe()\nsino = get_test_data_set_sino()\nrad = odtbrain.sinogram_as_radon(sino)\ntwopi = 2 * np.pi\nif rad.min() > twopi:\n    rad -= twopi\nif WRITE_RES:\n    write_results(myframe, rad)\nassert np.allclose(np.array(rad).flatten().view(float), get_results(myframe))\nrad2d = odtbrain.sinogram_as_radon(sino[:, :, (0)])\nassert np.allclose(0, negative_modulo_rest(rad2d - rad[:, :, (0)], twopi),\n    atol=1e-06)\nrad2d2 = odtbrain.sinogram_as_radon(sino[:, (0), :])\nassert np.allclose(0, negative_modulo_rest(rad2d2 - rad[:, (0), :], twopi),\n    atol=1e-06)\n"
-}

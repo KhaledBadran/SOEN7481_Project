@@ -1,9 +1,0 @@
-{
-    "functionName": "test_cache_uses_current_context",
-    "className": "RealBackendTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_cache.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "t = Template(\n    \"\"\"\n        ${foo()}\n        <%def name=\"foo()\" cached=\"True\" cache_timeout=\"1\">\n            foo: ${x}\n        </%def>\n        \"\"\"\n    )\nself._install_mock_cache(t)\nx1 = t.render(x=1)\ntime.sleep(1.2)\nx2 = t.render(x=2)\neq_(x1.strip(), 'foo: 1')\neq_(x2.strip(), 'foo: 2')\n"
-}

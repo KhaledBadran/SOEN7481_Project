@@ -1,9 +1,0 @@
-{
-    "functionName": "test_chunk_numpy_array",
-    "className": null,
-    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_core_&_tests_&_test_map_processing.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Basic functionailty tests for '_chunk_xrf_map_numpy\"\"\"\ndata = np.random.random(data_shape)\ndata_dask = _chunk_numpy_array(data, chunk_target)\nchunksize_expected = tuple([min(chunk_target[0], data_shape[0]), min(\n    chunk_target[1], data_shape[1]), *data_shape[2:]])\nassert data_dask.shape == data.shape, \"The shape of the original and chunked array don't match\"\nassert data_dask.chunksize == chunksize_expected, \"The chunk size of the Dask array doesn't match the desired chunk size\"\nnpt.assert_array_equal(data_dask.compute(), data, err_msg=\n    'The chunked array is different from the original array')\npytest.mark.parametrize('chunk_target, data_shape', [((2, 2), (10, 10, 3)),\n    ((2, 3), (9, 11, 3)), ((3, 2), (11, 9, 3)), ((3, 3), (3, 3, 2)), ((1, 1\n    ), (1, 1, 3)), ((1, 5), (1, 10, 3)), ((5, 1), (10, 1, 3)), ((3, 4), (2,\n    3, 2)), ((2, 2), (9, 11, 5)), ((2, 2), (9, 11)), ((2, 2), (9, 11, 5, 3)\n    ), ((2, 2), (9, 11, 5, 3, 4))])"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_config_key_no_app",
-    "className": "FlaskEasyJWTTest",
-    "fileName": "/BMeu_&_Flask-EasyJWT/tests_&_flask_easyjwt_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n            Test getting the key if called outside an app context.\n\n            Expected Result: A runtime error is thrown.\n        \"\"\"\nself.app_context.pop()\nwith self.assertRaises(RuntimeError) as exception_cm:\n    key = FlaskEasyJWT._get_config_key()\n    self.assertIsNone(key)\nmessage = 'Working outside of application context.'\nself.assertIn(message, str(exception_cm.exception))\nself.app_context.push()\n"
-}

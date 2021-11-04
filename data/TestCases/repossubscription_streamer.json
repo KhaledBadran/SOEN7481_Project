@@ -1,9 +1,0 @@
-{
-    "functionName": "subscription_streamer",
-    "className": null,
-    "fileName": "/PRIArobotics_&_HedgehogServer/tests_&_test_subscription.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "async with trio.open_nursery() as nursery:\n    subs = SubscriptionStreamer()\n\n    @nursery.start_soon\n    async def the_stream():\n        async with streamcontext(stream(*items)) as streamer:\n            async for item in streamer:\n                await subs.send(item)\n        await subs.close()\n    yield subs\n    nursery.cancel_scope.cancel()\nasynccontextmanager"
-}

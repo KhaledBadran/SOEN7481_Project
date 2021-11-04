@@ -1,9 +1,0 @@
-{
-    "functionName": "test_parallel_queued_parallelize_correctly",
-    "className": null,
-    "fileName": "/Neuraxio_&_Neuraxle/testing_&_test_streaming.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "sleep_time = 0.001\np = SequentialQueuedPipeline([('1', 4, 10, Pipeline([ForEachDataInput(Sleep\n    (sleep_time=sleep_time)), MultiplyByN(2)])), ('2', 4, 10, Pipeline([\n    ForEachDataInput(Sleep(sleep_time=sleep_time)), MultiplyByN(2)])), ('3',\n    4, 10, Pipeline([ForEachDataInput(Sleep(sleep_time=sleep_time)),\n    MultiplyByN(2)])), ('4', 4, 10, Pipeline([ForEachDataInput(Sleep(\n    sleep_time=sleep_time)), MultiplyByN(2)]))], batch_size=10)\na = time.time()\noutputs_streaming = p.transform(list(range(100)))\nb = time.time()\ntime_queued_pipeline = b - a\np = Pipeline([Pipeline([ForEachDataInput(Sleep(sleep_time=sleep_time)),\n    MultiplyByN(2)]), Pipeline([ForEachDataInput(Sleep(sleep_time=\n    sleep_time)), MultiplyByN(2)]), Pipeline([ForEachDataInput(Sleep(\n    sleep_time=sleep_time)), MultiplyByN(2)]), Pipeline([ForEachDataInput(\n    Sleep(sleep_time=sleep_time)), MultiplyByN(2)])])\na = time.time()\noutputs_vanilla = p.transform(list(range(100)))\nb = time.time()\ntime_vanilla_pipeline = b - a\nassert time_queued_pipeline < time_vanilla_pipeline\nassert np.array_equal(outputs_streaming, outputs_vanilla)\n"
-}

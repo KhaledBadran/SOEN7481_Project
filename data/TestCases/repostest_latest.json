@@ -1,9 +1,0 @@
-{
-    "functionName": "test_latest",
-    "className": "TestBuffer",
-    "fileName": "/BciPy_&_BciPy/bcipy_&_acquisition_&_tests_&_test_buffer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test query for most recent items.\"\"\"\nn_records = 1000\nlatest_n = 100\nchannel_count = 25\nchannels = [('ch' + str(c)) for c in range(channel_count)]\nbuf = Buffer(channels=channels)\nlatest = []\nfor i, data in enumerate(mock_data(n_records, channel_count)):\n    timestamp = float(i)\n    if i >= n_records - latest_n:\n        latest.append((data, timestamp, i + 1))\n    buf.append(Record(data, timestamp, None))\nrows = buf.latest(latest_n)\nfor j, item in enumerate(reversed(latest)):\n    self.assertEqual(item, rows[j])\nbuf.cleanup()\n"
-}

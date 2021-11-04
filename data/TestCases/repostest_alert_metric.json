@@ -1,9 +1,0 @@
-{
-    "functionName": "test_alert_metric",
-    "className": null,
-    "fileName": "/michael-lazar_&_Akita/tests_&_test_metrics.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "metric = AlertMetric(window_size=1, n_windows=20, threshold=5)\nalert = metric.flush(timestamp=0)\nassert alert is None\nfor _ in range(20):\n    metric.add_point()\nalert = metric.flush(timestamp=2)\nassert alert is None\nalert = metric.flush(timestamp=6)\nassert alert is None\nfor _ in range(80):\n    metric.add_point()\nalert = metric.flush(timestamp=8.4)\nassert alert == metric.ALERT_START\nassert metric.triggered\nassert metric.triggered_at == 8\nassert metric.triggered_rate == 5\nalert = metric.flush(timestamp=22)\nassert alert is None\nassert metric.total == 80\nalert = metric.flush(timestamp=28)\nassert alert == metric.ALERT_STOP\nassert not metric.triggered\nassert metric.triggered_at == 28\n"
-}

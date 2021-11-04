@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_pixel_positions",
-    "className": null,
-    "fileName": "/European-XFEL_&_EXtra-geom/extra_geom_&_tests_&_test_dssc_geometry.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "geom = DSSC_1MGeometry.from_h5_file_and_quad_positions(sample_xfel_geom,\n    QUAD_POS)\npixelpos = geom.get_pixel_positions()\nassert pixelpos.shape == (16, 128, 512, 3)\npx = pixelpos[..., 0]\npy = pixelpos[..., 1]\nassert -0.15 < px.min() < -0.1\nassert 0.15 > px.max() > 0.1\nassert -0.2 < py.min() < -0.12\nassert 0.2 > py.max() > 0.12\nnp.testing.assert_allclose(px[(0), 1::2, (0)] - px[(0), 0::2, (0)], \n    0.000236 / 2)\n"
-}

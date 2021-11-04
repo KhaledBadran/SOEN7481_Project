@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sync_no_data",
-    "className": "TestSync",
-    "fileName": "/DusanMadar_&_PySyncDroid/tests_&_test_sync.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test 'sync' ends early if there are no files to synchronize.\n        \"\"\"\nmock_get_sync_data.return_value = [{'src_dir_fls': []}]\nsync = Sync(FAKE_MTP_DETAILS, '/tmp', 'Card/Music')\nsync.set_source_abs()\nsync.set_destination_abs()\nsync.sync()\nmock_do_sync.assert_not_called()\npatch.object(pysyncdroid.sync.Sync, 'do_sync')patch.object(pysyncdroid.sync.Sync, 'get_sync_data')"
-}

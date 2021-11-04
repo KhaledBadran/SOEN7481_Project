@@ -1,9 +1,0 @@
-{
-    "functionName": "printChannelStatuses",
-    "className": null,
-    "fileName": "/named-data_&_PyNDN2/examples_&_test_list_channels.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    This is called when all the segments are received to decode the\n    encodedMessage repeated TLV ChannelStatus messages and display the values.\n\n    :param Blob encodedMessage: The repeated TLV-encoded ChannelStatus.\n    \"\"\"\nchannelStatusMessage = channel_status_pb2.ChannelStatusMessage()\nProtobufTlv.decode(channelStatusMessage, encodedMessage)\ndump('Channels:')\nfor channelStatus in channelStatusMessage.channel_status:\n    dump('  ' + channelStatus.local_uri)\n"
-}

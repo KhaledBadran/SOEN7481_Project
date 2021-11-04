@@ -1,9 +1,0 @@
-{
-    "functionName": "test_openfire",
-    "className": "DatasetsTester",
-    "fileName": "/frgfm_&_PyroNear/test_&_test_datasets.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "num_samples = 200\nwith tempfile.TemporaryDirectory() as root:\n    train_set = datasets.OpenFire(root=root, train=True, download=True,\n        num_samples=num_samples)\n    test_set = datasets.OpenFire(root=root, train=False, download=True,\n        num_samples=num_samples)\n    self.assertIsInstance(train_set, VisionDataset)\n    self.assertTrue(all(sample['name'].rpartition('.')[-1] in ['jpg',\n        'jpeg', 'png', 'gif'] for sample in train_set.data))\n    self.assertTrue(all(sample['name'].rpartition('.')[-1] in ['jpg',\n        'jpeg', 'png', 'gif'] for sample in test_set.data))\n    datasets.utils.download_url(train_set.url, root, filename=\n        'extract.json', verbose=False)\n    with open(Path(root).joinpath('extract.json'), 'rb') as f:\n        extract = json.load(f)[:num_samples]\n    img, target = train_set[0]\n    self.assertIsInstance(img, Image)\n    self.assertIsInstance(target, int)\n    self.assertEqual(train_set.class_to_idx[extract[0]['target']], target)\n    self.assertIsInstance(train_set, VisionDataset)\n    train_paths = [sample['name'] for sample in train_set.data]\n    self.assertTrue(all(sample['name'] not in train_paths for sample in\n        test_set.data))\n"
-}

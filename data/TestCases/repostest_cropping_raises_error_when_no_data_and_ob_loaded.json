@@ -1,9 +1,0 @@
-{
-    "functionName": "test_cropping_raises_error_when_no_data_and_ob_loaded",
-    "className": "TestCropping",
-    "fileName": "/ornlneutronimaging_&_NeuNorm/tests_&_NeuNorm_&_cropping_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"assert error raised when no sample and ob data loaded\"\"\"\no_norm = Normalization()\n_roi = ROI(x0=0, y0=0, x1=4, y1=4)\nself.assertRaises(IOError, o_norm.crop, roi=_roi)\no_norm = Normalization()\nsample_path = self.data_path + '/tif/sample'\no_norm.load(folder=sample_path, auto_gamma_filter=False)\nself.assertRaises(IOError, o_norm.crop, roi=_roi)\no_norm = Normalization()\nsample_path = self.data_path + '/tif/sample'\no_norm.load(folder=sample_path, auto_gamma_filter=False)\nob_path = self.data_path + '/tif/ob'\no_norm.load(folder=ob_path, data_type='ob', auto_gamma_filter=False)\no_norm.normalization()\nself.assertTrue(o_norm.crop(roi=_roi))\n"
-}

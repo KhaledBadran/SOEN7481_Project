@@ -1,9 +1,0 @@
-{
-    "functionName": "test_load_all1",
-    "className": "Test_Data",
-    "fileName": "/sahahn_&_ABCD_ML/BPt_&_tests_&_test_Data.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.ML.eventname = None\nloc = get_file_path('custom_data2.csv')\nself.ML.Load_Data(loc=loc, dataset_type='custom')\nloc = get_file_path('custom_covars1.csv')\nself.ML.Load_Targets(loc=loc, col_name='sex', data_type='b', dataset_type=\n    'custom')\nself.ML.Load_Covars(loc=loc, col_name='education', data_type='c',\n    dataset_type='custom')\nself.assertTrue(self.ML.data.shape == (10, 3))\nself.assertTrue(self.ML.targets.shape == (5, 1))\nself.ML.Load_Strat(loc=loc, col_name='education', dataset_type='custom',\n    overlap_subjects=True)\nself.assertTrue(self.ML.strat.shape == (5, 1))\nself.ML.Define_Validation_Strategy(groups='education')\nself.assertTrue(len(self.ML.CV.groups == 5))\nrs = 1\nfor x in range(50):\n    self.ML.Train_Test_Split(test_size=0.2, random_state=rs)\n    rs += 1\n    train_groups = set(self.ML.strat.loc[self.ML.train_subjects])\n    test_groups = set(self.ML.strat.loc[self.ML.test_subjects])\n    self.assertTrue(len(train_groups.intersection(test_groups)))\nself.assertTrue(self.ML.all_data.shape == (5, 7))\nself.ML.Define_Validation_Strategy(stratify=self.ML.targets_keys[0])\nself.assertTrue(len(self.ML.CV.stratify) == 5)\nself.assertTrue(len(np.unique(self.ML.CV.stratify)) == 2)\nself.ML.Define_Validation_Strategy(stratify=[self.ML.targets_keys[0],\n    'education'])\nself.assertTrue(len(self.ML.CV.stratify) == 5)\nself.assertTrue(len(np.unique(self.ML.CV.stratify)) == 5)\nself.ML.Load_Targets(loc=loc, col_name='sex', data_type='c', dataset_type=\n    'custom', clear_existing=True)\nself.ML.Define_Validation_Strategy(stratify=self.ML.targets_keys[0])\nself.assertTrue(len(self.ML.CV.stratify) == 5)\nself.ML.Train_Test_Split(test_subjects='NDAR_1')\nself.assertTrue(len(self.ML.test_subjects) == 1)\n"
-}

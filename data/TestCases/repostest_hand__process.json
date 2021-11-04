@@ -1,9 +1,0 @@
-{
-    "functionName": "test_hand__process",
-    "className": "Farm",
-    "fileName": "/al-niessner_&_DAWGIE/Test_&_test_10.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "dawgie.context.git_rev = 321\nhand = dawgie.pl.farm.Hand(('localhost', 666))\nhand.transport = self\nmsg = dawgie.pl.message.make(rev=123, typ=dawgie.pl.message.Type.status)\nwith self.assertLogs('dawgie.pl.farm', 'WARN') as logbook:\n    dawgie.context.fsm.state = 'running'\n    hand._process(msg)\n    dawgie.context.fsm.state = 'starting'\n    pass\nself.assertEqual([\n    'WARNING:dawgie.pl.farm:Worker and pipeline revisions are not the same. Sever version 123 and worker version 321.'\n    ], logbook.output)\nreturn\n"
-}

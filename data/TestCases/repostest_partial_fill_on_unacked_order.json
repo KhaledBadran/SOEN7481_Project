@@ -1,9 +1,0 @@
-{
-    "functionName": "test_partial_fill_on_unacked_order",
-    "className": null,
-    "fileName": "/nabicht_&_Buttonwood/tests_&_test_MarketObjects_&_test_Events_&_test_ordereventchain.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "n = NewOrderCommand(121234, 1234235.123, 2342, 'user_x', MARKET, BID_SIDE,\n    FAR, Price('34.52'), 100)\noec = OrderEventChain(n, LOGGER, MonotonicIntID())\nassert oec.current_exposure() is None\nassert oec.most_recent_requested_exposure().qty() == 100\nassert oec.most_recent_requested_exposure().price() == Price('34.52')\npf = PartialFillReport(1212344, 1234237.123, 2342, 'user_x', MARKET, n, 10,\n    Price('34.52'), BID_SIDE, 99999, 90)\noec.apply_partial_fill_report(pf)\nassert oec.current_exposure() is None\nassert oec.most_recent_requested_exposure().qty() == 90\nassert oec.most_recent_requested_exposure().price() == Price('34.52')\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_float_array_sum_constraint",
-    "className": null,
-    "fileName": "/SeverTopan_&_AdjSim/test_&_test_decision_mutable.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "import adjsim\nconstraint = adjsim.decision.PositiveSumConstraint(sum_val)\nd = adjsim.decision.DecisionMutableFloatArray(shape, constraint)\nassert d.constraint.sum == sum_val\nassert d.shape == tuple(shape)\nnum_elements = np.prod(shape)\nonehot = np.array([float(i == 0) for i in range(num_elements)]).reshape(shape\n    ) * sum_val\nuniform = np.ones(shape) * sum_val / num_elements\nvalid_values = [onehot, uniform, np.random.dirichlet(np.ones((num_elements,\n    ))).reshape(shape) * sum_val]\nfor value in valid_values:\n    print(sum_val, np.sum(value))\n    d._set_value(value)\n    assert (d.value == value).all()\ninvalid_types = [None, InvalidClass()]\nfor value in invalid_types:\n    with pytest.raises(TypeError):\n        d._set_value(value)\ninvalid_values = [onehot + 1, onehot * 3, onehot - 1, onehot / 3, uniform +\n    2, uniform - 2, np.random.dirichlet(np.ones((num_elements,))).reshape(\n    shape) * sum_val * 2, np.random.dirichlet(np.ones((num_elements,))).\n    reshape(shape) * sum_val / 2]\nfor value in invalid_values:\n    with pytest.raises(ValueError):\n        d._set_value(value)\nfor _ in range(50):\n    d._set_value_random()\n    assert math.isclose(np.sum(d.value), sum_val)\nfor _ in range(50):\n    d._perturb_around_locus(valid_values[1])\n    assert math.isclose(np.sum(d.value), sum_val)\npytest.mark.parametrize('sum_val,shape', items)"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_purcell_bidirectional",
-    "className": "CapillaryPressureTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_physics_&_CapillaryPressureTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "f = op.models.physics.capillary_pressure.purcell_bidirectional\nself.geo['pore.touch'] = (np.random.random(self.geo.Np) + 0.5) * 0.1\nself.phys.add_model(propname='throat.bidirectional', model=f, r_toroid=0.1,\n    surface_tension='pore.surface_tension', contact_angle=\n    'pore.contact_angle', pore_diameter='pore.touch')\ndiff = self.phys['throat.bidirectional'][:, (0)] - self.phys[\n    'throat.bidirectional'][:, (1)]\nassert np.any(diff != 0)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_lr",
-    "className": "DiscreteMNLMultinomialTests",
-    "fileName": "/Mogeng_&_IOHMM/tests_&_test_DiscreteMNL.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.model = DiscreteMNL(solver='newton-cg', fit_intercept=True, est_stderr\n    =True, reg_method='l2', alpha=0, l1_ratio=0, tol=0.0001, max_iter=100,\n    coef=None, stderr=None, classes=None)\nself.model.fit(self.data_anes96.exog, self.data_anes96.endog)\nself.assertEqual(np.sum(self.model.predict(self.data_anes96.exog) == self.\n    data_anes96.endog), 372)\nself.assertAlmostEqual(self.model.loglike(self.data_anes96.exog, self.\n    data_anes96.endog), -1461.9227472481984, places=3)\njson_dict = self.model.to_json('./tests/linear_models/DiscreteMNL/Multinomial/'\n    )\nself.assertEqual(json_dict['properties']['solver'], 'newton-cg')\nself.model_from_json = DiscreteMNL.from_json(json_dict)\nnp.testing.assert_array_almost_equal(self.model.coef, self.model_from_json.\n    coef, decimal=3)\nnp.testing.assert_array_almost_equal(self.model.classes, np.array(list(\n    range(7))), decimal=3)\nself.assertEqual(self.model.n_classes, 7)\n"
-}

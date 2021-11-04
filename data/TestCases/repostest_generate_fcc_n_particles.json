@@ -1,9 +1,0 @@
-{
-    "functionName": "test_generate_fcc_n_particles",
-    "className": null,
-    "fileName": "/mortele_&_OccamTools/test_&_test_generate_fort5.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "file_name = os.path.join(os.path.dirname(__file__), 'fcc_n_test.5')\n_check_remove_file(file_name)\nlattice_constant = 1.0\ncell_box = [3, 7, 4]\ngenerate_fcc(cell_box, lattice_constant, velocity=False, path=file_name)\nwith open(file_name, 'r') as in_file:\n    for _ in range(3):\n        line = in_file.readline()\n    line = in_file.readline().strip()\n    assert float(line) == int(line)\n    expected = 4 * np.prod(np.asarray(cell_box))\n    assert int(line) == expected\nassert _check_remove_file(file_name)\n"
-}

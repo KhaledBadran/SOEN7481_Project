@@ -1,9 +1,0 @@
-{
-    "functionName": "test_hyperparameter_gradient_pings",
-    "className": "TestSquareExponential",
-    "fileName": "/Yelp_&_MOE/moe_&_tests_&_optimal_learning_&_python_&_python_version_&_covariance_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Ping test (compare analytic result to finite difference) the gradient wrt hyperparameters.\"\"\"\nh = 0.002\ntolerance = 4e-05\nnum_tests = 10\ndim = 3\nnum_hyperparameters = dim + 1\nhyperparameter_interval = ClosedInterval(3.0, 5.0)\ndomain = TensorProductDomain(ClosedInterval.\n    build_closed_intervals_from_list([[-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0]]))\npoints1 = domain.generate_uniform_random_points_in_domain(num_tests)\npoints2 = domain.generate_uniform_random_points_in_domain(num_tests)\nfor i in xrange(num_tests):\n    point_one = points1[i, ...]\n    point_two = points2[i, ...]\n    covariance = gp_utils.fill_random_covariance_hyperparameters(\n        hyperparameter_interval, num_hyperparameters, covariance_type=self.\n        CovarianceClass)\n    analytic_grad = covariance.hyperparameter_grad_covariance(point_one,\n        point_two)\n    for k in xrange(covariance.num_hyperparameters):\n        hyperparameters_old = covariance.hyperparameters\n        hyperparameters_p = numpy.copy(hyperparameters_old)\n        hyperparameters_p[k] += h\n        covariance.hyperparameters = hyperparameters_p\n        cov_p = covariance.covariance(point_one, point_two)\n        covariance.hyperparameters = hyperparameters_old\n        hyperparameters_m = numpy.copy(hyperparameters_old)\n        hyperparameters_m[k] -= h\n        covariance.hyperparameters = hyperparameters_m\n        cov_m = covariance.covariance(point_one, point_two)\n        covariance.hyperparameters = hyperparameters_old\n        fd_grad = (cov_p - cov_m) / (2.0 * h)\n        self.assert_scalar_within_relative(fd_grad, analytic_grad[k], tolerance\n            )\n"
-}

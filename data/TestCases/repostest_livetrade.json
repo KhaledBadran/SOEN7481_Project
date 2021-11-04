@@ -1,9 +1,0 @@
-{
-    "functionName": "test_livetrade",
-    "className": null,
-    "fileName": "/quantOS-org_&_JAQS/test_&_test_backtest_alpha.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "dv = DataView()\ndv.load_dataview(folder_path=dataview_dir_path)\nprops = {'benchmark': BENCHMARK, 'universe': ','.join(dv.symbol),\n    'start_date': dv.start_date, 'end_date': dv.end_date, 'period': 'day',\n    'days_delay': 0, 'init_balance': 100000000.0, 'position_ratio': 1.0,\n    'strategy_no': 1044}\nprops.update(data_config)\nprops.update(trade_config)\nstock_selector = model.StockSelector()\nstock_selector.add_filter(name='rank_ret_top10', func=my_selector)\nstrategy = AlphaStrategy(stock_selector=stock_selector, pc_method=\n    'equal_weight')\npm = PortfolioManager()\nbt = AlphaLiveTradeInstance()\ntrade_api = RealTimeTradeApi(props)\nds = RemoteDataService()\ncontext = model.Context(dataview=dv, instance=bt, strategy=strategy,\n    trade_api=trade_api, pm=pm, data_api=ds)\nstock_selector.register_context(context)\nbt.init_from_config(props)\nbt.run_alpha()\ngoal_positions = strategy.goal_positions\nprint(goal_positions)\ndo_analyze()\n"
-}

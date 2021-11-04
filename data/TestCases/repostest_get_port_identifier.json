@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_port_identifier",
-    "className": "CITestProvisioning",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test get_port_identifier.\"\"\"\ndirector_port_list = self.provisioning.get_port_list()\nfor director_port in director_port_list:\n    director = director_port[constants.DIRECTOR_ID]\n    port = director_port[constants.PORT_ID]\n    port_identifier = self.provisioning.get_port_identifier(director, port)\n    if port_identifier is not None:\n        self.assertIsInstance(port_identifier, str)\n        search_pattern = '{wwn}|{iqn}'.format(wwn=constants.\n            WWN_SEARCH_PATTERN_16, iqn=constants.ISCSI_IQN_SEARCH_PATTERN)\n        self.assertIsNotNone(re.match(search_pattern, port_identifier))\n"
-}

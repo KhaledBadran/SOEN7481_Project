@@ -1,9 +1,0 @@
-{
-    "functionName": "testConnectionToDBWithCreator",
-    "className": "SQAStoreTest",
-    "fileName": "/facebook_&_Ax/ax_&_storage_&_sqa_store_&_tests_&_test_sqa_store.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "def MockDBAPI():\n    connection = Mock()\n\n    def connect(*args, **kwargs):\n        return connection\n    return MagicMock(connect=Mock(side_effect=connect))\nmocked_dbapi = MockDBAPI()\ninit_engine_and_session_factory(creator=lambda : mocked_dbapi.connect(),\n    force_init=True, module=mocked_dbapi, echo=True, pool_size=2,\n    _initialize=False)\nwith session_scope() as session:\n    engine = session.bind\n    engine.connect()\n    self.assertEqual(mocked_dbapi.connect.call_count, 1)\n    self.assertTrue(engine.echo)\n    self.assertEqual(engine.pool.size(), 2)\n"
-}

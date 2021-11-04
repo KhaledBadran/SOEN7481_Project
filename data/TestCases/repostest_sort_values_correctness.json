@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sort_values_correctness",
-    "className": "TestAccess",
-    "fileName": "/hdoupe_&_ParamTools/paramtools_&_tests_&_test_parameters.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Ensure sort is correct\"\"\"\nexp = [{'value': 1}, {'label0': 1, 'label1': 'one', 'value': 1}, {'label0':\n    1, 'label1': 'two', 'value': 1}, {'label0': 2, 'label1': 'one', 'value':\n    1}, {'label0': 2, 'label1': 'two', 'value': 1}, {'label0': 3, 'label1':\n    'one', 'value': 1}]\nshuffled = copy.deepcopy(exp)\nshuffle(shuffled)\nclass Params(Parameters):\n    defaults = {'schema': {'labels': {'label0': {'type': 'int',\n        'validators': {'range': {'min': 0, 'max': 3}}}, 'label1': {'type':\n        'str', 'validators': {'choice': {'choices': ['one', 'two']}}}}},\n        'param': {'title': 'test', 'description': '', 'type': 'int',\n        'value': shuffled}}\nparams = Params()\nassert params.param != exp and params.param == shuffled\nparams.sort_values()\nassert params.param == exp\nparams = Params()\nassert params.param != exp and params.param == shuffled\ndata1 = {'param': params.param}\nparams.sort_values(data1, has_meta_data=False)\ndata1 = copy.deepcopy(data1)\ndata2 = {'param': {'value': params.param}}\nparams.sort_values(data2, has_meta_data=True)\ndata2 = copy.deepcopy(data2)\nparams.sort_values()\nassert data1['param'] == data2['param']['value'] == params.param\nwith pytest.raises(ParamToolsError):\n    params.sort_values(has_meta_data=False)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "difference",
-    "className": "DataFile",
-    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_DataFile.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Return the difference between two data files by keys\"\"\"\ndif = []\nif not set(self.__dict__.keys()) == set(other.__dict__.keys()):\n    return list(set(self.__dict__.keys()) - set(other.__dict__.keys()))\ncomparisonKeys = keys\nfor key in comparisonKeys:\n    skey = self.__dict__[key]\n    okey = other.__dict__[key]\n    if isinstance(skey, np.ndarray):\n        try:\n            if not np.all(np.isclose(skey, okey)):\n                if not np.all(np.isnan(skey), np.isnan(okey)):\n                    dif.append(key)\n        except (TypeError, AttributeError, ValueError):\n            if np.all(skey != okey):\n                dif.append(key)\n    elif not np.all(self.__dict__[key] == other.__dict__[key]):\n        dif.append(key)\nreturn dif\n"
-}

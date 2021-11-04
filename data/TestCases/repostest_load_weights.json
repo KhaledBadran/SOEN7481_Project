@@ -1,9 +1,0 @@
-{
-    "functionName": "test_load_weights",
-    "className": "TestLoadModel",
-    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_keras_&_test_load_model.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "K.set_image_dim_ordering('th')\nkmodel, input_data, output_data = TestModels.kmodel_graph_1_layer()\nkeras_model_json_path, keras_model_hdf5_path = dump_keras(kmodel,\n    dump_weights=True)\nbmodel = DefinitionLoader.from_json_path(keras_model_json_path)\nkmodel.set_weights([kmodel.get_weights()[0] + 100, kmodel.get_weights()[1]])\nWeightLoader.load_weights_from_hdf5(bmodel, kmodel, filepath=\n    keras_model_hdf5_path)\nself.assert_allclose(bmodel.forward(input_data), kmodel.predict(input_data))\n"
-}

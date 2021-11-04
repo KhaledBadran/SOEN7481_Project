@@ -1,9 +1,0 @@
-{
-    "functionName": "test_export_import",
-    "className": "TestImporterUtils",
-    "fileName": "/Keeper-Security_&_Commander/unit-tests_&_test_importer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "params_export = get_synced_params()\ncmd_export = commands.RecordExportCommand()\nparam_import = get_connected_params()\ncmd_import = commands.RecordImportCommand()\njson_text = ''\ndef mock_write(text):\n    nonlocal json_text\n    json_text += text\ndef mock_read():\n    nonlocal json_text\n    return json_text\nwith mock.patch('keepercommander.api.sync_down'), mock.patch('builtins.open',\n    mock.mock_open()) as m_open:\n    m_open.return_value.write = mock_write\n    cmd_export.execute(params_export, format='json', name='json')\nwith mock.patch('keepercommander.api.sync_down'), mock.patch('builtins.open',\n    mock.mock_open()) as m_open, mock.patch(\n    'keepercommander.importer.imp_exp.execute_import_folder_record',\n    return_value=([], [])):\n    m_open.return_value.read = mock_read\n    self.communicate_mock.side_effect = None\n    self.communicate_mock.return_value = {'result': 'success',\n        'result_code': '', 'message': ''}\n    with mock.patch('os.path.isfile', return_value=True):\n        cmd_import.execute(param_import, format='json', name='json')\n"
-}

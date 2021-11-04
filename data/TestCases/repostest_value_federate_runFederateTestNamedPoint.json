@@ -1,9 +1,0 @@
-{
-    "functionName": "test_value_federate_runFederateTestNamedPoint",
-    "className": null,
-    "fileName": "/GMLC-TDC_&_HELICS/tests_&_python_&_test_value_federate.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "defaultValue = (\n    'start of a longer string in place of the shorter one and now this should be very long'\n    )\ndefVal = 5.3\ntestValue1 = 'short string'\ntestVal1 = 45.7823\ntestValue2 = 'I am a string'\ntestVal2 = 0.0\npubid = h.helicsFederateRegisterGlobalPublication(vFed, 'pub1', h.\n    helics_data_type_named_point, '')\nsubid = h.helicsFederateRegisterSubscription(vFed, 'pub1', '')\nh.helicsInputSetDefaultNamedPoint(subid, defaultValue, defVal)\nh.helicsFederateEnterExecutingMode(vFed)\nh.helicsPublicationPublishNamedPoint(pubid, testValue1, testVal1)\nval = h.helicsInputGetNamedPoint(subid)\nassert val == [defaultValue, defVal]\ngrantedtime = h.helicsFederateRequestTime(vFed, 1.0)\nassert grantedtime == 0.01\nval2 = h.helicsInputGetNamedPoint(subid)\nassert val2 == [testValue1, testVal1]\nh.helicsPublicationPublishNamedPoint(pubid, testValue2, testVal2)\nval3 = h.helicsInputGetNamedPoint(subid)\nassert val3 == [testValue1, testVal1]\ngrantedtime = h.helicsFederateRequestTime(vFed, 2.0)\nassert grantedtime == 0.02\nval4 = h.helicsInputGetNamedPoint(subid)\nassert val4 == [testValue2, testVal2]\n"
-}

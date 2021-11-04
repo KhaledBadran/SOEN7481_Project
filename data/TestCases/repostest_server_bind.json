@@ -1,9 +1,0 @@
-{
-    "functionName": "test_server_bind",
-    "className": null,
-    "fileName": "/daveisadork_&_PyDevNS/tests_&_test_server.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "config.host = host\nconfig.port = port\nwith server.bind() as connection:\n    assert server.connection is connection\n    timeout = connection.gettimeout()\n    _host, _port = connection.getsockname()\nassert timeout == 3.05\nassert _host == host\nassert _port == port or _port\nwith pytest.raises(socket.error):\n    server.connection.getsockname()\npytest.mark.parametrize('host, port', [('0.0.0.0', 0), ('127.0.0.1', 53535)])"
-}

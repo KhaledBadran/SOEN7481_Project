@@ -1,9 +1,0 @@
-{
-    "functionName": "test_non_trainable_model_objective",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_models_&_test_gpr.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Checks that we can still compute the objective of a model that has no\n    trainable parameters whatsoever (regression test for bug in log_prior()).\n    In this case we have no priors, so log_prior should be zero to add no\n    contribution to the objective.\n    \"\"\"\nmodel = gpflow.models.GPR((Data.X, Data.Y), kernel=gpflow.kernels.\n    SquaredExponential(lengthscales=Data.ls, variance=Data.var))\nset_trainable(model, False)\n_ = model.log_marginal_likelihood()\nassert model.log_prior_density() == 0.0\n"
-}

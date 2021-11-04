@@ -1,9 +1,0 @@
-{
-    "functionName": "test_check_condition_df",
-    "className": null,
-    "fileName": "/PEtab-dev_&_PEtab/tests_&_test_lint.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Check that we correctly detect errors in condition table\"\"\"\n_, sbml_model = minimal_sbml_model\ncondition_df = pd.DataFrame(data={CONDITION_ID: ['condition1'], 'p1': [nan]})\ncondition_df.set_index(CONDITION_ID, inplace=True)\nwith pytest.raises(AssertionError):\n    lint.check_condition_df(condition_df, sbml_model)\nsbml_model.createParameter().setId('p1')\nlint.check_condition_df(condition_df, sbml_model)\ncondition_df['s1'] = [3.0]\nwith pytest.raises(AssertionError):\n    lint.check_condition_df(condition_df, sbml_model)\nsbml_model.createSpecies().setId('s1')\nlint.check_condition_df(condition_df, sbml_model)\ncondition_df['c1'] = [4.0]\nwith pytest.raises(AssertionError):\n    lint.check_condition_df(condition_df, sbml_model)\nsbml_model.createCompartment().setId('c1')\nlint.check_condition_df(condition_df, sbml_model)\n"
-}

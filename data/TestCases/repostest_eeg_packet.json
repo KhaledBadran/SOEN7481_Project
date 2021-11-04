@@ -1,9 +1,0 @@
-{
-    "functionName": "test_eeg_packet",
-    "className": "TestDsi",
-    "fileName": "/BciPy_&_BciPy/bcipy_&_acquisition_&_tests_&_protocols_&_dsi_&_test_dsi.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test encoding/decoding EEG_DATA packet\"\"\"\nexpected = (\n    b'@ABCD\\x01\\x00\\x13\\x00\\x00\\x00\\rN\\x05Y\\xe9\\x00123456C\\xf2ff\\xc3\\xfb\\x19\\x9a'\n    )\nparams = dict(type='EEG_DATA', payload_length=19, number=13, timestamp=\n    559315520.0, data_counter=0, ADC_status=b'123456', sensor_data=[\n    484.799987793, -502.200012207])\nresult = dsi.packet.build(params)\nself.assertEqual(result, expected)\nparsed = dsi.packet.parse(expected)\nfor key in params:\n    if key != 'sensor_data':\n        self.assertEqual(parsed[key], params[key])\nself.assertEqual('%.9f' % parsed['sensor_data'][0], '484.799987793')\nself.assertEqual('%.9f' % parsed['sensor_data'][1], '-502.200012207')\nwith pytest.raises(construct.core.RangeError):\n    params['payload_length'] = 24\n    dsi.packet.build(params)\n"
-}

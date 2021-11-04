@@ -1,9 +1,0 @@
-{
-    "functionName": "test_batched_forced_burgers_1d",
-    "className": "TestBurgers",
-    "fileName": "/tum-pbs_&_PhiFlow/tests_&_test_burgers.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "world = World(batch_size=3)\nburgers = world.add(Domain([4]).centered_grid(0, batch_size=world.\n    batch_size, name='velocity'))\nk = math.to_float(numpy.random.uniform(3, 6, [world.batch_size, 1]))\namplitude = numpy.random.uniform(-0.5, 0.5, [world.batch_size, 1])\nforce = SinPotential(k, phase_offset=numpy.random.uniform(0, 2 * numpy.pi,\n    [world.batch_size]), data=amplitude)\nphysics = ForcingPhysics(numpy.random.uniform(-0.4, 0.4, [world.batch_size]))\neffect = FieldEffect(force, ['velocity'])\nworld.add(effect, physics=physics)\nburgers.step()\nburgers.step()\n"
-}

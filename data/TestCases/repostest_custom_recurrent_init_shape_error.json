@@ -1,9 +1,0 @@
-{
-    "functionName": "test_custom_recurrent_init_shape_error",
-    "className": null,
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_recurrent.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "n_batch, n_steps, n_channels, width, height = 2, 3, 4, 5, 6\nn_out_filters = 7\nfilter_shape = 3, 3\nl_in = lasagne.layers.InputLayer((n_batch, n_steps, n_channels, width, height))\nl_hid_to_hid = lasagne.layers.Conv2DLayer(lasagne.layers.InputLayer((\n    n_batch, n_out_filters, width, height)), n_out_filters, filter_shape,\n    pad='same')\nl_in_to_hid = lasagne.layers.Conv2DLayer(lasagne.layers.InputLayer((n_batch,\n    n_channels, width, height)), n_out_filters, filter_shape, pad='same')\nwith pytest.raises(ValueError):\n    l_rec = lasagne.layers.CustomRecurrentLayer(l_in, l_in_to_hid,\n        l_hid_to_hid, precompute_input=True)\nl_in_to_hid = lasagne.layers.Conv2DLayer(lasagne.layers.InputLayer((n_batch +\n    1, n_channels, width, height)), n_out_filters, filter_shape, pad='same')\nwith pytest.raises(ValueError):\n    l_rec = lasagne.layers.CustomRecurrentLayer(l_in, l_in_to_hid,\n        l_hid_to_hid, precompute_input=False)\nl_in_to_hid = lasagne.layers.Conv2DLayer(lasagne.layers.InputLayer((None,\n    n_channels, width + 1, height)), n_out_filters, filter_shape, pad='same')\nwith pytest.raises(ValueError):\n    l_rec = lasagne.layers.CustomRecurrentLayer(l_in, l_in_to_hid, l_hid_to_hid\n        )\nl_in_to_hid = lasagne.layers.Conv2DLayer(lasagne.layers.InputLayer((None,\n    n_channels, width, height)), n_out_filters, filter_shape)\nl_hid_to_hid = lasagne.layers.Conv2DLayer(lasagne.layers.InputLayer((\n    n_batch, n_out_filters, width, height)), n_out_filters, filter_shape)\nwith pytest.raises(ValueError):\n    l_rec = lasagne.layers.CustomRecurrentLayer(l_in, l_in_to_hid, l_hid_to_hid\n        )\n"
-}

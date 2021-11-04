@@ -1,9 +1,0 @@
-{
-    "functionName": "test_rsp_rrv",
-    "className": null,
-    "fileName": "/neuropsychology_&_NeuroKit/tests_&_tests_rsp.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "rsp90 = nk.rsp_simulate(duration=60, sampling_rate=1000, respiratory_rate=\n    90, random_state=42)\nrsp110 = nk.rsp_simulate(duration=60, sampling_rate=1000, respiratory_rate=\n    110, random_state=42)\ncleaned90 = nk.rsp_clean(rsp90, sampling_rate=1000)\n_, peaks90 = nk.rsp_peaks(cleaned90)\nrsp_rate90 = nk.signal_rate(peaks90, desired_length=len(rsp90))\ncleaned110 = nk.rsp_clean(rsp110, sampling_rate=1000)\n_, peaks110 = nk.rsp_peaks(cleaned110)\nrsp_rate110 = nk.signal_rate(peaks110, desired_length=len(rsp110))\nrsp90_rrv = nk.rsp_rrv(rsp_rate90, peaks90)\nrsp110_rrv = nk.rsp_rrv(rsp_rate110, peaks110)\nassert np.array(rsp90_rrv['RRV_SDBB']) < np.array(rsp110_rrv['RRV_SDBB'])\nassert np.array(rsp90_rrv['RRV_RMSSD']) < np.array(rsp110_rrv['RRV_RMSSD'])\nassert np.array(rsp90_rrv['RRV_SDSD']) < np.array(rsp110_rrv['RRV_SDSD'])\nassert np.array(rsp90_rrv['RRV_HF']) < np.array(rsp110_rrv['RRV_HF'])\nassert np.isnan(rsp90_rrv['RRV_LF'][0])\nassert np.isnan(rsp110_rrv['RRV_LF'][0])\nwith pytest.warns(nk.misc.NeuroKitWarning, match=\n    'The duration of recording is too short.*'):\n    short_rsp90 = nk.rsp_simulate(duration=10, sampling_rate=1000,\n        respiratory_rate=90, random_state=42)\n    short_cleaned90 = nk.rsp_clean(short_rsp90, sampling_rate=1000)\n    _, short_peaks90 = nk.rsp_peaks(short_cleaned90)\n    short_rsp_rate90 = nk.signal_rate(short_peaks90, desired_length=len(\n        short_rsp90))\n    nk.rsp_rrv(short_rsp_rate90, short_peaks90)\n"
-}

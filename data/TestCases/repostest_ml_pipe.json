@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ml_pipe",
-    "className": null,
-    "fileName": "/ironmussa_&_Optimus/tests_&_test_ml.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "df = op.sc.parallelize([Row(sentence='this is a test', label=0.0), Row(\n    sentence='this is another test', label=1.0)]).toDF()\npl = feature.Tokenizer().setInputCol('sentence') | feature.CountVectorizer()\nml = pl | classification.LogisticRegression()\nml_model = ml.fit(df)\nassert_equal(ml_model.transform(df).count(), 2)\n"
-}

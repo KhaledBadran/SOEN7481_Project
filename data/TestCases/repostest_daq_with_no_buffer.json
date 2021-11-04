@@ -1,9 +1,0 @@
-{
-    "functionName": "test_daq_with_no_buffer",
-    "className": "TestDataAcquisitionClient",
-    "fileName": "/BciPy_&_BciPy/bcipy_&_acquisition_&_tests_&_test_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"get_data should return an empty list if daq._buf is None\n        data length should return 0\n        \"\"\"\ndevice = _MockDevice(data=self.mock_data, channels=self.mock_channels)\ndaq = DataAcquisitionClient(device=device, delete_archive=True,\n    raw_data_file_name=None)\ndaq.start_acquisition()\ntime.sleep(0.1)\ndaq.stop_acquisition()\nbuf_temp = daq._buf\ndaq._buf = None\ndata = daq.get_data()\nself.assertEqual(data, [])\ndata_length = daq.get_data_len()\nself.assertEqual(data_length, 0)\noffset = daq.offset\nself.assertEqual(offset, None)\ndaq._buf = buf_temp\ndaq.cleanup()\n"
-}

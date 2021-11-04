@@ -1,9 +1,0 @@
-{
-    "functionName": "test_multilevel_nesting",
-    "className": "InheritanceTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_inheritance.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "collection = lookup.TemplateLookup()\ncollection.put_string('main',\n    \"\"\"\n<%inherit file=\"layout\"/>\n<%def name=\"d()\">main_d</%def>\nmain_body ${parent.d()}\nfull stack from the top:\n    ${self.name} ${parent.name} ${parent.context['parent'].name} ${parent.context['parent'].context['parent'].name}\n\"\"\"\n    )\ncollection.put_string('layout',\n    \"\"\"\n<%inherit file=\"general\"/>\n<%def name=\"d()\">layout_d</%def>\nlayout_body\nparent name: ${parent.name}\n${parent.d()}\n${parent.context['parent'].d()}\n${next.body()}\n\"\"\"\n    )\ncollection.put_string('general',\n    \"\"\"\n<%inherit file=\"base\"/>\n<%def name=\"d()\">general_d</%def>\ngeneral_body\n${next.d()}\n${next.context['next'].d()}\n${next.body()}\n\"\"\"\n    )\ncollection.put_string('base',\n    \"\"\"\nbase_body\nfull stack from the base:\n    ${self.name} ${self.context['parent'].name} ${self.context['parent'].context['parent'].name} ${self.context['parent'].context['parent'].context['parent'].name}\n${next.body()}\n<%def name=\"d()\">base_d</%def>\n\"\"\"\n    )\nassert result_lines(collection.get_template('main').render()) == ['base_body',\n    'full stack from the base:',\n    'self:main self:layout self:general self:base', 'general_body',\n    'layout_d', 'main_d', 'layout_body', 'parent name: self:general',\n    'general_d', 'base_d', 'main_body layout_d', 'full stack from the top:',\n    'self:main self:layout self:general self:base']\n"
-}

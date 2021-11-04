@@ -1,9 +1,0 @@
-{
-    "functionName": "get_legal_synonyms",
-    "className": "TestSystem",
-    "fileName": "/SimGus_&_Chatette/tests_&_system-testing_&_test_system.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        Returns a dict with all legal synonyms\n        or `None` if there is no synonym solution file.\n        \"\"\"\nsyn_filepath = TestSystem.get_synonym_solution_filepath(input_filepath)\nif not os.path.isfile(syn_filepath):\n    return None\nwith io.open(syn_filepath, 'r') as f:\n    result = dict()\n    for l in f:\n        if not l.startswith('#'):\n            [name, val] = l.rstrip().split('===')\n            if name not in result:\n                result[name] = [val]\n            else:\n                result[name].append(val)\nreturn result\nstaticmethod"
-}

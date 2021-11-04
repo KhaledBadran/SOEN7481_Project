@@ -1,9 +1,0 @@
-{
-    "functionName": "test_delete_volume",
-    "className": "CITestProvisioning",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test delete_volume.\"\"\"\nvolume_name = self.generate_name()\nstorage_group_name = self.create_empty_storage_group()\ndevice_id = self.provisioning.create_volume_from_storage_group_return_id(\n    volume_name, storage_group_name, '1')\ntime.sleep(10)\nvolume_list = self.provisioning.get_volume_list()\nself.assertIn(device_id, volume_list)\nself.provisioning.remove_volume_from_storage_group(storage_group_name,\n    device_id)\nself.provisioning.delete_volume(device_id)\nvolume_list = self.provisioning.get_volume_list()\nself.assertNotIn(device_id, volume_list)\n"
-}

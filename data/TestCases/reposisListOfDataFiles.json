@@ -1,9 +1,0 @@
-{
-    "functionName": "isListOfDataFiles",
-    "className": null,
-    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_DataSet.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "returnList = []\nif isinstance(inputFiles, (list, np.ndarray)):\n    for file in inputFiles:\n        if isinstance(file, MJOLNIR.Data.DataFile.DataFile):\n            returnList.append(file)\n        elif isinstance(file, str):\n            if not os.path.isfile(file):\n                raise AttributeError('Following file does not exist:\\n{}'.\n                    format(file))\n            returnList.append(MJOLNIR.Data.DataFile.DataFile(file))\nelif isinstance(inputFiles, MJOLNIR.Data.DataFile.DataFile):\n    returnList.append(inputFiles)\nelif isinstance(inputFiles, str):\n    returnList.append(MJOLNIR.Data.DataFile.DataFile(inputFiles))\nelse:\n    raise AttributeError(\n        'File provided is not of type string, list, or DataFile')\nif len(returnList) > 1:\n    sameSample = [(returnList[0].sample == file.sample) for file in returnList]\n    if not np.all(sameSample):\n        raise AttributeError(\n            'Files does not have the same sample! Compared to first entry: {}'\n            .format(sameSample))\nreturn returnList\n"
-}

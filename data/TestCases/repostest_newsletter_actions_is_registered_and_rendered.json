@@ -1,9 +1,0 @@
-{
-    "functionName": "test_newsletter_actions_is_registered_and_rendered",
-    "className": "ViewletIntegrationTest",
-    "fileName": "/collective_&_Products.EasyNewsletter/src_&_Products_&_EasyNewsletter_&_tests_&_test_viewlet_newsletter_actions.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "setRoles(self.portal, TEST_USER_ID, ['Manager'])\nview = BrowserView(self.newsletter, self.request)\nmanager_name = 'plone.abovecontentbody'\nalsoProvides(self.request, IProductsEasyNewsletterLayer)\nmanager = queryMultiAdapter((self.newsletter, self.request, view),\n    IViewletManager, manager_name, default=None)\nself.assertIsNotNone(manager)\nmanager.update()\nmy_viewlets = [v for v in manager.viewlets if v.__name__ ==\n    'newsletter-actions']\nself.assertEqual(len(my_viewlets), 1)\nself.assertIn(u'toc-nav newsletter', manager.render())\n"
-}

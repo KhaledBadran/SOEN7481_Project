@@ -1,9 +1,0 @@
-{
-    "functionName": "test_await_permissions",
-    "className": null,
-    "fileName": "/rm-hull_&_OPi.GPIO/tests_&_test_sysfs.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "path = '/sys/class/gpio/test'\nfs.CreateFile(path)\nos.chmod(path, 292)\nstart_time = time.time()\nthreading.Timer(test_input, lambda : os.chmod(path, 438)).start()\nawait_permissions(path)\nassert (time.time() - start_time < WAIT_PERMISSION_TIMEOUT) == expected\npytest.mark.parametrize('test_input,expected', [(0.1, True), (1.5, False)])"
-}

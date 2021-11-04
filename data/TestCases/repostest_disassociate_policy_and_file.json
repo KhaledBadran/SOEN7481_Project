@@ -1,9 +1,0 @@
-{
-    "functionName": "test_disassociate_policy_and_file",
-    "className": "TestPolicyDirectoryMonitor",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_monitor.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the PolicyDirectoryMonitor can correctly unlink a policy and\n        a policy file in its tracking structures.\n        \"\"\"\nm = monitor.PolicyDirectoryMonitor(self.tmp_dir, multiprocessing.Manager().\n    dict())\nm.policy_cache = {'policy_A': [(1480043060.870089, os.path.join(self.\n    tmp_dir, 'policy_1.json'), {}), (1480043062.02171, os.path.join(self.\n    tmp_dir, 'policy_2.json'), {}), (1480043062.645776, os.path.join(self.\n    tmp_dir, 'policy_1.json'), {}), (1480043063.453713, os.path.join(self.\n    tmp_dir, 'policy_3.json'), {})], 'policy_B': [(1480043123.65311, os.\n    path.join(self.tmp_dir, 'policy_1.json'), {})]}\nm.disassociate_policy_and_file('policy_A', os.path.join(self.tmp_dir,\n    'policy_1.json'))\nself.assertEqual([(1480043062.02171, os.path.join(self.tmp_dir,\n    'policy_2.json'), {}), (1480043063.453713, os.path.join(self.tmp_dir,\n    'policy_3.json'), {})], m.policy_cache.get('policy_A', []))\nself.assertEqual([(1480043123.65311, os.path.join(self.tmp_dir,\n    'policy_1.json'), {})], m.policy_cache.get('policy_B', []))\n"
-}

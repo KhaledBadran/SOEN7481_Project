@@ -1,9 +1,0 @@
-{
-    "functionName": "create_body_template",
-    "className": null,
-    "fileName": "/PearsonEducation_&_Alarmageddon/tests_&_publishing_&_test_emailer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\" Creates a body template for the email.\n        template_directory - [Required] A directory location for templates.\n                                        Must be a py.path.local object.\n        template_name - [Optional] The name of the template to create.\n                                   Defaults to \"default.template\".\n        template_content - [Optional] Allows tests to override default content\n                                      written to the template. Must be a valid\n                                      string. Defaults to the default template.\n    \"\"\"\nif not template_directory:\n    raise ValueError('template_directory is required.')\nif not template_name:\n    template_name = 'default.template'\nbody_template = template_directory.join(template_name)\nif not template_content:\n    body_template.write(\n        \"\"\"Validation Failure in environment {{env}}:\nTest Name: [{{test_name}}]\nTest Description: [{{test_description}}]\nCustom Message: [{{email_custom_message}}]\"\"\"\n        )\nelse:\n    body_template.write(template_content)\nreturn template_name\n"
-}

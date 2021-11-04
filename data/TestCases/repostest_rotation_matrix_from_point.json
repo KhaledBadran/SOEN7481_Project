@@ -1,9 +1,0 @@
-{
-    "functionName": "test_rotation_matrix_from_point",
-    "className": null,
-    "fileName": "/RI-imaging_&_ODTbrain/tests_&_test_rotation_matrices.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    `rotation_matrix_from_point` generates a matrix that rotates a point at\n    [0,0,1] to the position of the argument of the method.\n    \"\"\"\nsq2 = np.sqrt(2)\nm1 = odtbrain._alg3d_bppt.rotation_matrix_from_point([0, 0, 1])\nassert np.allclose(np.dot(m1, [1, 2, 3]), [1, 2, 3])\nassert np.allclose(np.dot(m1, [-3, 0.5, -0.6]), [-3, 0.5, -0.6])\nm2 = odtbrain._alg3d_bppt.rotation_matrix_from_point([0, 1, 1])\nassert np.allclose(np.dot(m2, [0, 0, 1]), [0, 1 / sq2, 1 / sq2])\nassert np.allclose(np.dot(m2, [0, 1, 1]), [0, sq2, 0])\nassert np.allclose(np.dot(m2, [1, 0, 0]), [1, 0, 0])\nm3 = odtbrain._alg3d_bppt.rotation_matrix_from_point([-1, 1, 0])\nassert np.allclose(np.dot(m3, [1, 0, 0]), [0, 0, -1])\nassert np.allclose(np.dot(m3, [0, 1, 1]), [0, sq2, 0])\nassert np.allclose(np.dot(m3, [0, -1 / sq2, -1 / sq2]), [0, -1, 0])\nassert np.allclose(np.dot(m3, [0, 1 / sq2, -1 / sq2]), [-1, 0, 0])\nassert np.allclose(np.dot(m3, [0, -1 / sq2, 1 / sq2]), [1, 0, 0])\n"
-}

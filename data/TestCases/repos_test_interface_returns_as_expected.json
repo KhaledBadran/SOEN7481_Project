@@ -1,9 +1,0 @@
-{
-    "functionName": "_test_interface_returns_as_expected",
-    "className": "TestBanditViews",
-    "fileName": "/Yelp_&_MOE/moe_&_tests_&_views_&_rest_&_bandit_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Integration test for the bandit endpoints.\"\"\"\nfor subtype in BANDIT_ENDPOINTS_TO_SUBTYPES[self._endpoint]:\n    for historical_info in self._historical_infos:\n        json_payload = self._build_json_payload(subtype, historical_info)\n        arm_names = set([arm_name for arm_name in historical_info.\n            arms_sampled.iterkeys()])\n        resp = self.testapp.post(self._moe_route.endpoint, json_payload)\n        resp_schema = BanditResponse()\n        resp_dict = resp_schema.deserialize(json.loads(resp.body))\n        resp_arm_names = set([arm_name for arm_name in resp_dict[\n            'arm_allocations'].iterkeys()])\n        assert arm_names == resp_arm_names\n        total_allocation = 0\n        for allocation in resp_dict['arm_allocations'].itervalues():\n            assert allocation >= 0\n            assert allocation <= 1\n            total_allocation += allocation\n        assert total_allocation == 1.0\n"
-}

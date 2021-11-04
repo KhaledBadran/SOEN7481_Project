@@ -1,9 +1,0 @@
-{
-    "functionName": "test_generate_code_with_breakpoints",
-    "className": null,
-    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_frame_evaluator.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from _pydevd_frame_eval.pydevd_frame_evaluator import generate_code_with_breakpoints_py\nfrom _pydevd_frame_eval.pydevd_frame_evaluator import get_cached_code_obj_info_py\ndef create_breakpoints_dict(lines):\n    return dict((line, None) for line in lines)\ndef method():\n    a = 1\n    a = 2\n    a = 3\nbreakpoint_found, new_code = generate_code_with_breakpoints_py(method.\n    __code__, create_breakpoints_dict([method.__code__.co_firstlineno + 1, \n    method.__code__.co_firstlineno + 2]))\nassert breakpoint_found\nwith pytest.raises(AssertionError):\n    generate_code_with_breakpoints_py(new_code, create_breakpoints_dict([\n        method.__code__.co_firstlineno + 1]))\ncached_value = get_cached_code_obj_info_py(new_code)\nbreakpoint_found, force_stay_in_untraced_mode = (cached_value.\n    compute_force_stay_in_untraced_mode(create_breakpoints_dict([method.\n    __code__.co_firstlineno + 1])))\nassert breakpoint_found\nassert force_stay_in_untraced_mode\nbreakpoint_found, force_stay_in_untraced_mode = (cached_value.\n    compute_force_stay_in_untraced_mode(create_breakpoints_dict([method.\n    __code__.co_firstlineno + 10])))\nassert not breakpoint_found\nassert force_stay_in_untraced_mode\nbreakpoint_found, force_stay_in_untraced_mode = (cached_value.\n    compute_force_stay_in_untraced_mode(create_breakpoints_dict([method.\n    __code__.co_firstlineno + 2])))\nassert breakpoint_found\nassert force_stay_in_untraced_mode\nbreakpoint_found, force_stay_in_untraced_mode = (cached_value.\n    compute_force_stay_in_untraced_mode(create_breakpoints_dict([method.\n    __code__.co_firstlineno + 3])))\nassert breakpoint_found\nassert not force_stay_in_untraced_mode\n"
-}

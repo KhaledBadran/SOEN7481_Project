@@ -1,9 +1,0 @@
-{
-    "functionName": "test_split_by_arm",
-    "className": "GeneratorRunTest",
-    "fileName": "/facebook_&_Ax/ax_&_core_&_tests_&_test_generator_run.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "gm = {'hello': 'world'}\ngenerator_run = GeneratorRun(arms=self.arms, weights=self.weights,\n    optimization_config=get_optimization_config(), search_space=\n    get_search_space(), gen_metadata=gm)\ngenerator_runs = generator_run.split_by_arm()\nself.assertEqual(len(generator_runs), len(self.arms))\nfor a, w, gr in zip(self.arms, self.weights, generator_runs):\n    with self.subTest(a=a, w=w, gr=gr):\n        self.assertEqual(gr.arms, [a])\n        self.assertEqual(gr.weights, [w])\n        self.assertEqual(gr._generator_run_type, generator_run.\n            _generator_run_type)\n        self.assertEqual(gr._model_key, generator_run._model_key)\n        self.assertEqual(gr._generation_step_index, generator_run.\n            _generation_step_index)\n        self.assertIsNone(gr._optimization_config)\n        self.assertIsNone(gr._search_space)\n        self.assertIsNone(gr._gen_metadata)\n"
-}

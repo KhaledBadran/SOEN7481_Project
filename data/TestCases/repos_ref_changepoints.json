@@ -1,9 +1,0 @@
-{
-    "functionName": "_ref_changepoints",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_kernels_&_test_kernels.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Calculates K(X) for each kernel in `kernels`, then multiply by sigmoid functions\n    in order to smoothly transition betwen them. The sigmoid transitions are defined\n    by a location and a steepness parameter.\n    \"\"\"\nlocations = sorted(locations)\nsteepness = steepness if isinstance(steepness, list) else [steepness] * len(\n    locations)\nlocations = np.array(locations).reshape((1, 1, -1))\nsteepness = np.array(steepness).reshape((1, 1, -1))\nsig_X = 1.0 / (1.0 + np.exp(-steepness * (X[:, :, (None)] - locations)))\nstarters = sig_X * np.transpose(sig_X, axes=(1, 0, 2))\nstoppers = (1 - sig_X) * np.transpose(1 - sig_X, axes=(1, 0, 2))\nones = np.ones((X.shape[0], X.shape[0], 1))\nstarters = np.concatenate([ones, starters], axis=2)\nstoppers = np.concatenate([stoppers, ones], axis=2)\nkernel_stack = np.stack([k(X) for k in kernels], axis=2)\nreturn (kernel_stack * starters * stoppers).sum(axis=2)\n"
-}

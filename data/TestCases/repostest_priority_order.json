@@ -1,9 +1,0 @@
-{
-    "functionName": "test_priority_order",
-    "className": null,
-    "fileName": "/EVEprosper_&_ProsperCommon/tests_&_test_prosper_config.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Makes sure desired priority order is followed\n\n        1. override_value\n        2. local_config option\n        3. global_config option\n        4. default_value\n\n    \"\"\"\nTestConfigObj = prosper_config.ProsperConfig(TEST_GLOBAL_CONFIG_PATH,\n    local_filepath_override=TEST_LOCAL_CONFIG_PATH)\nassert TestConfigObj.get_option('TEST', 'key2', 999, None) == 999\nassert TestConfigObj.get_option('TEST', 'key2', None, None) == str(100)\nassert TestConfigObj.get_option('TEST', 'key3', None, None) == 'stuff'\nassert TestConfigObj.get_option('TEST', 'nokey', 111, 111) == 111\nassert TestConfigObj.get_option('TEST', 'dummy_val', None, None) == ENV_TEST_1\n"
-}

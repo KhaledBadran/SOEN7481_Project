@@ -1,9 +1,0 @@
-{
-    "functionName": "test_bad_recnum",
-    "className": "TestCommandLine",
-    "fileName": "/kenfar_&_DataGristle/scripts_&_tests_&_test_gristle_viewer_cmd.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Shows that the program when given a recnum that doesn't exist will\n            write no rows to the output file and print only a comment to stdout\n\n            To do:\n                - check for a negative number\n                - check for return code\n        \"\"\"\np_outrecs = []\ncmd = '%s -i %s -r 999 -o %s' % (fq_pgm, self.in_fqfn, self.out_fqfn)\nrunner = envoy.run(cmd)\nprint(runner.std_out)\nprint(runner.std_err)\nassert runner.status_code == 0\nfor rec in fileinput.input(self.out_fqfn):\n    p_outrecs.append(rec)\nfileinput.close()\nassert 'No record found' in runner.std_out\nassert not p_outrecs\n"
-}

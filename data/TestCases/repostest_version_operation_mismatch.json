@@ -1,9 +1,0 @@
-{
-    "functionName": "test_version_operation_mismatch",
-    "className": "TestKmipEngine",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that an OperationNotSupported error is generated when trying to\n        invoke an operation unsupported by a specific version of KMIP.\n        \"\"\"\ne = engine.KmipEngine()\ne._logger = mock.MagicMock()\ne._protocol_version = contents.ProtocolVersion(1, 0)\nargs = None,\nregex = 'DiscoverVersions is not supported by KMIP {0}'.format(e.\n    _protocol_version)\nsix.assertRaisesRegex(self, exceptions.OperationNotSupported, regex, e.\n    _process_discover_versions, *args)\n"
-}

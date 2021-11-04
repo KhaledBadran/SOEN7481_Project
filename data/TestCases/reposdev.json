@@ -1,9 +1,0 @@
-{
-    "functionName": "dev",
-    "className": null,
-    "fileName": "/XanaduAI_&_PennyLane-PQ/tests_&_test_var.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"devices\"\"\"\nif issubclass(DevClass, ProjectQSimulator):\n    yield DevClass(wires=1, shots=20000000, verbose=True)\nelif issubclass(DevClass, ProjectQClassicalSimulator):\n    yield DevClass(wires=1, verbose=True)\nelif issubclass(DevClass, ProjectQIBMBackend):\n    ibm_options = pennylane.default_config['projectq.ibm']\n    init_device = DevClass(wires=1, use_hardware=False, num_runs=8 * 1024,\n        token=token, verbose=True)\n    with monkeypatch.context() as m:\n        m.setattr('pennylane_pq.devices.ProjectQIBMBackend.obs_queue', [\n            pennylane.PauliZ(wires=0, do_queue=False)])\n        init_device._eng = MagicMock()\n        init_device._eng.backend = MagicMock()\n        init_device._eng.backend.get_probabilities = MagicMock()\n        yield init_device\npytest.fixture"
-}

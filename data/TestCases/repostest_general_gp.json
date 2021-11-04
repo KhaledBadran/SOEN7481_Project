@@ -1,9 +1,0 @@
-{
-    "functionName": "test_general_gp",
-    "className": "TestPrediction",
-    "fileName": "/SUNCAT-Center_&_CatLearn/test_&_test_predict.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test the functions to build a general model.\"\"\"\ntrain_features, train_targets, test_features, test_targets = get_data()\nggp = GeneralGaussianProcess()\nggp.train_gaussian_process(train_features, train_targets)\npred = ggp.gaussian_process_predict(test_features)\nself.assertEqual(len(pred['prediction']), len(test_features))\nprint('GeneralGP error: {0:.3f}'.format(get_error(pred['prediction'],\n    test_targets)['rmse_average']))\nggp = GeneralGaussianProcess(kernel='smooth')\nggp.train_gaussian_process(train_features, train_targets)\npred = ggp.gaussian_process_predict(test_features)\nself.assertEqual(len(pred['prediction']), len(test_features))\nprint('GeneralGP error: {0:.3f}'.format(get_error(pred['prediction'],\n    test_targets)['rmse_average']))\nggp = GeneralGaussianProcess(dimension='features')\nggp.train_gaussian_process(train_features, train_targets)\npred = ggp.gaussian_process_predict(test_features)\nself.assertEqual(len(pred['prediction']), len(test_features))\nprint('GeneralGP error: {0:.3f}'.format(get_error(pred['prediction'],\n    test_targets)['rmse_average']))\n"
-}

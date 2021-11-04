@@ -1,9 +1,0 @@
-{
-    "functionName": "permute_tests",
-    "className": null,
-    "fileName": "/schmamps_&_Kinda/tests_&_test_kinda.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Generate test params and IDs\n\n    Returns:\n        tuple[list[tuple], list[str]] -- (test_params, test_ids)\n    \"\"\"\nparams = []\nids = []\nfor places in range(start, stop, step):\n    place_vals = get_place_values(places)\n    for abs_tol, rel_tol in get_tol_values(places):\n        comparisons = get_comp_values(place_vals, places, abs_tol, rel_tol)\n        for val_a, val_b, actual_comp in comparisons:\n            params.append(get_test_params(val_a, val_b, actual_comp,\n                abs_tol, rel_tol))\n            ids.append(get_test_id(actual_comp, abs_tol, rel_tol, places))\nreturn params, ids\n"
-}

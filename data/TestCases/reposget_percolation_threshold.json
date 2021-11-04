@@ -1,9 +1,0 @@
-{
-    "functionName": "get_percolation_threshold",
-    "className": "OrdinaryPercolation",
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_algorithms_&_OrdinaryPercolation.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        Find the invasion threshold at which a cluster spans from the inlet to\n        the outlet sites\n\n        \"\"\"\nif np.sum(self['pore.inlets']) == 0:\n    raise Exception('Inlet pores must be specified first')\nif np.sum(self['pore.outlets']) == 0:\n    raise Exception('Outlet pores must be specified first')\nelse:\n    Pout = self['pore.outlets']\nif self.settings['access_limited']:\n    thresh = np.amin(self['pore.invasion_pressure'][Pout])\nelse:\n    raise Exception('This is currently only implemented for access ' +\n        'limited simulations')\nreturn thresh\n"
-}

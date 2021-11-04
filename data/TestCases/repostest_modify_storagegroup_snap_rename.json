@@ -1,9 +1,0 @@
-{
-    "functionName": "test_modify_storagegroup_snap_rename",
-    "className": "CITestReplication",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_replication.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test modify_storage_group_snapshot.\"\"\"\nsnapshot_info, sg_name = self.create_sg_snapshot()\nold_name = snapshot_info.get('name')\nself.replication.modify_storage_group_snapshot(src_storage_grp_id=sg_name,\n    tgt_storage_grp_id=None, snap_name=old_name, new_name='newname', gen_num=0)\nsnap_list = self.replication.get_storagegroup_snapshot_list(storagegroup_id\n    =sg_name)\nself.assertEqual('newname', snap_list[0])\nself.replication.modify_storage_group_snapshot(src_storage_grp_id=sg_name,\n    tgt_storage_grp_id=None, snap_name='newname', new_name=old_name, gen_num=0)\n"
-}

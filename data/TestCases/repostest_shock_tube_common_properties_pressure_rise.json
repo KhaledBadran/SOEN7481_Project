@@ -1,9 +1,0 @@
-{
-    "functionName": "test_shock_tube_common_properties_pressure_rise",
-    "className": "TestCommonProperties",
-    "fileName": "/kyleniemeyer_&_PyTeCK/pyteck_&_tests_&_test_parse_files_xml.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Ensure basic common properties parsed for shock tube.\n        \"\"\"\nfile_path = os.path.join('testfile_st2.xml')\nfilename = pkg_resources.resource_filename(__name__, file_path)\ntree = etree.parse(filename)\nroot = tree.getroot()\nproperties = {}\nproperties['kind'] = parse_files_XML.get_experiment_kind(root)\nproperties = parse_files_XML.get_common_properties(properties, root)\nassert properties['pressure'] == 2.18 * units.atm\nassert properties['composition']['H2'] == 0.00444\nassert properties['composition']['O2'] == 0.00566\nassert properties['composition']['Ar'] == 0.9899\nassert properties['pressure-rise'] == 0.1 / units.ms\nassert set(properties.keys()) == set(['kind', 'pressure', 'pressure-rise',\n    'composition'])\n"
-}

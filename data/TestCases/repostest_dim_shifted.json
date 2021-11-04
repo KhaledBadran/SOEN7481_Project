@@ -1,9 +1,0 @@
-{
-    "functionName": "test_dim_shifted",
-    "className": "TestMath",
-    "fileName": "/tum-pbs_&_PhiFlow/tests_&_test_math.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "tensor = np.expand_dims(np.expand_dims(np.arange(10), axis=-1), axis=0)\nlower, center, upper = _dim_shifted(tensor, 0, (-1, 0, 1), components=0)\nnp.testing.assert_equal(lower[(0), :, (0)], np.arange(8))\nnp.testing.assert_equal(center[(0), :, (0)], np.arange(1, 9))\nnp.testing.assert_equal(upper[(0), :, (0)], np.arange(2, 10))\ntensor = np.ones([1, 4, 4, 2])\nlower, upper = _dim_shifted(tensor, 0, (0, 1), diminish_others=(0, 1),\n    components=0)\nnp.testing.assert_equal(lower.shape, (1, 3, 3, 1))\nnp.testing.assert_equal(upper.shape, (1, 3, 3, 1))\n"
-}

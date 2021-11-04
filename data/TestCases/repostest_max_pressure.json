@@ -1,9 +1,0 @@
-{
-    "functionName": "test_max_pressure",
-    "className": "MixedPercolationTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_MixedPercolationTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "net = self.net\nphys = self.phys\nphys['throat.entry_pressure'] = np.arange(0, net.Nt, dtype=float)\nphys['pore.entry_pressure'] = 0.0\nIP_1 = mp(network=self.net)\nIP_1.settings['partial_saturation'] = False\nIP_1.settings['snap_off'] = False\nIP_1.setup(phase=self.phase)\nIP_1.set_inlets(pores=self.inlets)\nIP_1.run(max_pressure=20)\nIP_1.results(Pc=20)\ninv_Pc = IP_1['pore.invasion_pressure']\ninv_Pc = inv_Pc[~np.isinf(inv_Pc)]\nassert inv_Pc.max() <= 20\n"
-}

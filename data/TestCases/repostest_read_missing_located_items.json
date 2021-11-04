@@ -1,9 +1,0 @@
-{
-    "functionName": "test_read_missing_located_items",
-    "className": "TestLocateResponsePayload",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_locate.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a Locate response payload can be read from a data stream\n        even when missing the located items.\n        \"\"\"\npayload = payloads.LocateResponsePayload()\nself.assertIsNone(payload.located_items)\nself.assertEqual([], payload.unique_identifiers)\npayload.read(self.no_located_items_encoding)\nself.assertIsNone(payload.located_items)\nself.assertIsInstance(payload.unique_identifiers, list)\nself.assertEqual(1, len(payload.unique_identifiers))\nself.assertEqual(['8d945322-fd70-495d-bf7f-71481d1401f6'], payload.\n    unique_identifiers)\n"
-}

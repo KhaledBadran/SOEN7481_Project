@@ -1,9 +1,0 @@
-{
-    "functionName": "test_deep_learning_pipeline",
-    "className": null,
-    "fileName": "/Neuraxio_&_Neuraxle/testing_&_test_deep_learning_pipeline.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data_inputs, expected_outputs = create_2d_data()\np = DeepLearningPipeline(SKLearnWrapper(linear_model.LinearRegression()),\n    validation_size=VALIDATION_SIZE, batch_size=BATCH_SIZE, batch_metrics={\n    'mse': to_numpy_metric_wrapper(mean_squared_error)},\n    shuffle_in_each_epoch_at_train=True, n_epochs=N_EPOCHS, epochs_metrics=\n    {'mse': to_numpy_metric_wrapper(mean_squared_error)}, scoring_function=\n    to_numpy_metric_wrapper(mean_squared_error))\np, outputs = p.fit_transform(data_inputs, expected_outputs)\nmetrics = p.apply('get_metrics').to_flat_as_dict_primitive()\nbatch_mse_train = metrics[\n    'EpochRepeater__validation_split_wrapper__epoch_metrics__train__mse']\nepoch_mse_train = metrics[\n    'EpochRepeater__validation_split_wrapper__epoch_metrics__TrainShuffled__MiniBatchSequentialPipeline__batch_metrics__train__mse'\n    ]\nepoch_mse_validation = metrics[\n    'EpochRepeater__validation_split_wrapper__epoch_metrics__validation__mse']\nassert len(epoch_mse_train) == N_EPOCHS\nassert len(epoch_mse_validation) == N_EPOCHS\nexpected_len_batch_mse = math.ceil(len(data_inputs) / BATCH_SIZE * (1 -\n    VALIDATION_SIZE)) * N_EPOCHS\nassert len(batch_mse_train) == expected_len_batch_mse\n"
-}

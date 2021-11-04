@@ -1,9 +1,0 @@
-{
-    "functionName": "test_generate_fcc_positions_velocities",
-    "className": null,
-    "fileName": "/mortele_&_OccamTools/test_&_test_generate_fort5.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "file_name = os.path.join(os.path.dirname(__file__), 'fcc_pos_vel_test.5')\n_check_remove_file(file_name)\nlattice_constant = 9.259825981095233\nb = lattice_constant\ncell_box = [3, 2, 4]\nn_particles = generate_fcc(cell_box, b, velocity=True, path=file_name)\nwith open(file_name, 'r') as in_file:\n    for _ in range(4):\n        line = in_file.readline()\n    for _ in range(n_particles):\n        for _ in range(2):\n            line = in_file.readline()\n        line = in_file.readline().split()\n        assert len(line) == 16\n        for p in line[4:7]:\n            assert np.mod(float(p), 0.5 * b) == pytest.approx(0.0, abs=1e-15)\n        for p in line[7:10]:\n            assert float(p) == pytest.approx(0.0, abs=1e-15)\nassert _check_remove_file(file_name)\n"
-}

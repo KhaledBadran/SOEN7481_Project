@@ -1,9 +1,0 @@
-{
-    "functionName": "test_print_rntptt_file",
-    "className": "TestConverter",
-    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_converter.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "cdss = []\ngenes = []\nrnas = []\ngff_dict = Example().gff_dict\nfor gff in gff_dict:\n    if gff['feature'] == 'gene':\n        genes.append(self.converter.gff3parser.entries(self, gff))\n    elif gff['feature'] == 'CDS':\n        cdss.append(self.converter.gff3parser.entries(self, gff))\n    elif gff['feature'] == 'tRNA':\n        rnas.append(self.converter.gff3parser.entries(self, gff))\nout_p = StringIO()\nout_r = StringIO()\nself.converter._print_rntptt_file(out_p, cdss, genes)\nself.converter._print_rntptt_file(out_r, rnas, genes)\nself.assertEqual(out_p.getvalue().split('\\n')[:-1], self.example.ptt_out_list)\nself.assertEqual(out_r.getvalue().split('\\n')[:-1], self.example.rnt_out_list)\nout_p.close()\nout_r.close()\n"
-}

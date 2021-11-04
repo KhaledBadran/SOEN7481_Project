@@ -1,9 +1,0 @@
-{
-    "functionName": "test_empty_stdin",
-    "className": "TestEmptyFile",
-    "fileName": "/kenfar_&_DataGristle/scripts_&_tests_&_test_gristle_validator_cmd.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Should show proper handling of an empty file.\n        \"\"\"\ncmd = \"cat %s | %s -d',' -f 5 --outgood %s --outerr %s\" % (self.empty_fqfn,\n    fq_pgm, self.outgood_fqfn, self.outerr_fqfn)\nrunner = envoy.run(cmd)\nprint(runner.std_out)\nprint(runner.std_err)\nassert runner.status_code == errno.ENODATA\nout_recs = []\nfor rec in fileinput.input(self.outgood_fqfn):\n    out_recs.append(rec)\nfileinput.close()\nassert not out_recs\nout_recs = []\nfor rec in fileinput.input(self.outerr_fqfn):\n    out_recs.append(rec)\nfileinput.close()\nassert not out_recs\n"
-}

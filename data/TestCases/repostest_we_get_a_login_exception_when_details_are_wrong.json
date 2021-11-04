@@ -1,9 +1,0 @@
-{
-    "functionName": "test_we_get_a_login_exception_when_details_are_wrong",
-    "className": null,
-    "fileName": "/AutomatedTester_&_Bugsy/tests_&_test_bugsy.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "responses.add(responses.GET, 'https://bugzilla.mozilla.org/rest/login',\n    body=\n    '{\"message\": \"The username or password you entered is not valid.\"}',\n    status=400, content_type='application/json', match_querystring=True)\ntry:\n    Bugsy('foo', 'bar')\n    assert 1 == 0, 'Should have thrown an error'\nexcept LoginException as e:\n    assert str(e\n        ) == 'Message: The username or password you entered is not valid. Code: None'\n    assert responses.calls[0].request.headers['X-Bugzilla-Login'] == 'foo'\n    assert responses.calls[0].request.headers['X-Bugzilla-Password'] == 'bar'\nresponses.activate"
-}

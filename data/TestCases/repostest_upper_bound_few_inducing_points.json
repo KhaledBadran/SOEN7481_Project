@@ -1,9 +1,0 @@
-{
-    "functionName": "test_upper_bound_few_inducing_points",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_integration_&_test_method_equivalence.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test for upper bound for regression marginal likelihood\n    \"\"\"\nmodel_vfe = gpflow.models.SGPR((DatumUpper.X, DatumUpper.Y), gpflow.kernels\n    .SquaredExponential(), inducing_variable=DatumUpper.X[:10, :].copy(),\n    mean_function=Constant())\nopt = gpflow.optimizers.Scipy()\nopt.minimize(model_vfe.training_loss, variables=model_vfe.\n    trainable_variables, options=dict(maxiter=500))\nfull_gp = gpflow.models.GPR((DatumUpper.X, DatumUpper.Y), kernel=gpflow.\n    kernels.SquaredExponential(), mean_function=Constant())\nfull_gp.kernel.lengthscales.assign(model_vfe.kernel.lengthscales)\nfull_gp.kernel.variance.assign(model_vfe.kernel.variance)\nfull_gp.likelihood.variance.assign(model_vfe.likelihood.variance)\nfull_gp.mean_function.c.assign(model_vfe.mean_function.c)\nlml_upper = model_vfe.upper_bound()\nlml_vfe = model_vfe.elbo()\nlml_full_gp = full_gp.log_marginal_likelihood()\nassert lml_vfe < lml_full_gp\nassert lml_full_gp < lml_upper\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_adsorption",
-    "className": "TestChalcogenides",
-    "fileName": "/SUNCAT-Center_&_CatLearn/test_&_test_chalcogenides.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "images = database_to_list('data/bajdichWO32018_ads.db')\nimages = images_connectivity(images)\nslabs = database_to_list('data/bajdichWO32018_slabs.db')\nslabs_dict = {}\nfor slab in slabs:\n    slabs_dict[slab.info['id']] = slab\nfor i, atoms in enumerate(images):\n    species = atoms.info['key_value_pairs']['species']\n    atoms.subsets['ads_atoms'] = slab_positions2ads_index(atoms, slabs[i],\n        species)\n    if 'slab_atoms' not in atoms.subsets:\n        atoms.subsets['slab_atoms'] = slab_index(atoms)\n    if ('chemisorbed_atoms' not in atoms.subsets or 'site_atoms' not in\n        atoms.subsets or 'ligand_atoms' not in atoms.subsets):\n        chemi, site, ligand = info2primary_index(atoms)\n        atoms.subsets['chemisorbed_atoms'] = chemi\n        atoms.subsets['site_atoms'] = site\n        atoms.subsets['ligand_atoms'] = ligand\n    attach_cations(atoms, anion_number=8)\n    charges = formal_charges(atoms)\n    atoms.set_initial_charges(charges)\ngen = FeatureGenerator(nprocs=1)\ntrain_fpv = default_fingerprinters(gen, 'chalcogenides')\nmatrix = gen.return_vec(images, train_fpv)\nlabels = gen.return_names(train_fpv)\nif __name__ == '__main__':\n    for i, l in enumerate(labels):\n        print(i, l)\n    print(atoms.get_initial_charges())\nself.assertTrue(len(labels) == np.shape(matrix)[1])\n"
-}

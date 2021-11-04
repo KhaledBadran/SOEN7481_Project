@@ -1,9 +1,0 @@
-{
-    "functionName": "test_session_success_log",
-    "className": null,
-    "fileName": "/OvalMoney_&_Nephthys/tests_&_test_clients_&_test_requests.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "caplog.set_level(logging.INFO)\nm.get('https://ovalmoney.com/user?key1=value1&key2=value2&key2=value3',\n    json={'test': True}, headers={'Content-Type': 'application/json'},\n    status_code=200)\nwith freeze_time(datetime.utcnow()):\n    s = Session(log_tag='test')\n    s.get('https://ovalmoney.com/user', params={'key1': 'value1', 'key2': [\n        'value2', 'value3']})\n    now = datetime.utcnow().timestamp()\nlog = [rec.msg for rec in caplog.records][0]\nassert log['extra_tags'] == ['test', 'requests_out']\nassert log['request']['start'] == now\nassert log['request']['end'] == now\nassert log['request']['time'] == 0.0\nassert log['request']['method'] == 'GET'\nassert log['request']['url'\n    ] == 'https://ovalmoney.com/user?key1=value1&key2=value2&key2=value3'\nassert log['request']['path'] == '/user'\nassert log['request']['host'] == 'ovalmoney.com'\nassert log['request']['query'] == {'key1': 'value1', 'key2': 'value2,value3'}\nassert log['response']['body'] == '{\"test\": true}'\nassert log['response']['status_code'] == 200\n"
-}

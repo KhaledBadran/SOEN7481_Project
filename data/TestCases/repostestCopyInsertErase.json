@@ -1,9 +1,0 @@
-{
-    "functionName": "testCopyInsertErase",
-    "className": "TestInvertibleBloomLookupTable",
-    "fileName": "/named-data_&_PyNDN2/tests_&_unit_tests_&_test_invertible_bloom_lookup_table.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "size = 10\niblt1 = InvertibleBloomLookupTable(size)\nprefix = Name('/test/memphis').appendNumber(1).toUri()\nhash1 = Common.murmurHash3Blob(11, prefix)\niblt1.insert(hash1)\niblt2 = InvertibleBloomLookupTable(iblt1)\niblt2.erase(hash1)\nprefix = Name('/test/memphis').appendNumber(2).toUri()\nhash3 = Common.murmurHash3Blob(11, prefix)\niblt2.insert(hash3)\niblt1.erase(hash1)\nprefix = Name('/test/memphis').appendNumber(5).toUri()\nhash5 = Common.murmurHash3Blob(11, prefix)\niblt1.insert(hash5)\niblt2.erase(hash3)\niblt2.insert(hash5)\nself.assertTrue(iblt1.equals(iblt2))\n"
-}

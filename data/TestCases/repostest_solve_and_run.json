@@ -1,9 +1,0 @@
-{
-    "functionName": "test_solve_and_run",
-    "className": "TSGetContingencyResultsTestCase",
-    "fileName": "/mzy2240_&_ESA/tests_&_test_saw.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Solve the contingency and run the function.\"\"\"\nobj_field_list = ['\"Plot Gen_Rotor Angle\"']\nt1 = '0.0'\nt2 = '10.0'\nself.saw.RunScriptCommand('TSSolve(\"{}\")'.format(self.ctg_name))\nmeta, data = self.saw.TSGetContingencyResults(self.ctg_name, obj_field_list,\n    t1, t2)\nself.assertIsInstance(meta, pd.DataFrame)\nself.assertIsInstance(data, pd.DataFrame)\nself.assertEqual(meta.shape[0], data.shape[1] - 1)\nfor dtype in data.dtypes:\n    self.assertEqual(dtype, np.float64)\nmeta_rows = meta.index.tolist()\ndata_cols = data.columns.tolist()\ndata_cols.remove('time')\nself.assertListEqual(meta_rows, data_cols)\n"
-}

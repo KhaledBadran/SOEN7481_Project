@@ -1,9 +1,0 @@
-{
-    "functionName": "test_zero_velocity_after_end",
-    "className": "TestVolumeProfile",
-    "fileName": "/kyleniemeyer_&_PyTeCK/pyteck_&_tests_&_test_simulation.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Ensure volume profile returns zero velocity after end of time series.\n        \"\"\"\ntmax = 10.0\ntimes = np.arange(0, tmax, 0.001)\nvolumes = np.cos(times)\nvolume_history = TimeHistory(time=times * units.second, quantity=volumes *\n    units.cm3, type='volume')\nvolume_profile = simulation.VolumeProfile(volume_history)\nassert volume_profile(tmax + 1.0) == 0.0\n"
-}

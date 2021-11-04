@@ -1,9 +1,0 @@
-{
-    "functionName": "test_BooleanAlgebra",
-    "className": null,
-    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_Mask.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class simpleMaskingObject(MaskingObject):\n    dimensionality = '1D'\n\n    def __init__(self, coordinates=None, maskInside=True):\n        super(simpleMaskingObject, self).__init__(coordinates=coordinates,\n            maskInside=maskInside)\n\n    def __call__(self):\n        return self.maskInside\ntrue = simpleMaskingObject(maskInside=True)\nfalse = simpleMaskingObject(maskInside=False)\nmulti = true + true\nassert isinstance(multi, MultiMask)\nassert multi() == True\nnegated = -multi\nassert negated() == False\nmulti2 = true * true\nassert multi2() == True\nnegated = -multi2\nassert negated() == False\nassert negated() == false()\nnegated = -false\nassert negated() == True\nassert (false - false)() == True\nassert (true / true)() == False\nassert (true / false)() == True\nassert (false / true)() == False\nassert (false / false)() == False\nassert (true + true)() == True\nassert (true * true)() == True\nassert (true + false)() == True\nassert (false + true)() == True\nassert (true * false)() == False\nassert (false * true)() == False\nassert (false * false)() == False\nassert (false + false)() == False\nval1 = true * true + true\nval2 = (false + false) * true\nval3 = true * true * true\nassert val1() == True\nassert val2() == False\nassert val3() == True\nval1 = true * true + (true + true)\nval2 = (false + false) * (true * false)\nval3 = false + false + true * false\nval4 = true * false * (true + true)\nassert val1() == True\nassert val2() == False\nassert val3() == False\nassert val4() == False\n"
-}

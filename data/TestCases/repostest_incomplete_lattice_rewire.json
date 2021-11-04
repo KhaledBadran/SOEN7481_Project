@@ -1,9 +1,0 @@
-{
-    "functionName": "test_incomplete_lattice_rewire",
-    "className": null,
-    "fileName": "/Silmathoron_&_NNGT/testing_&_test_rewire.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "num_nodes = 10\ndegree = 7\ng = ng.fixed_degree(degree, 'total', nodes=num_nodes)\ng.new_node_attribute('random_int', 'int', values=[2, 5, 33, 6, 4, 1, 98, 45,\n    30, 10])\ng.new_node_attribute('attr2', 'float', values=nngt._rng.uniform(size=num_nodes)\n    )\nww = nngt._rng.uniform(1, 5, size=g.edge_nb())\ng.set_weights(ww)\ng.new_edge_attribute('my-edge-attr', 'int', values=-ww.astype(int))\nl2 = ng.lattice_rewire(g, weight='weight', distance_sort='linear',\n    edge_attr_constraints='together')\nassert g.node_nb() == l2.node_nb()\nassert g.edge_nb() == l2.edge_nb()\nassert g.node_attributes == l2.node_attributes\nassert not np.array_equal(g.node_attributes['random_int'], l2.\n    node_attributes['random_int'])\nassert not np.array_equal(g.node_attributes['attr2'], l2.node_attributes[\n    'attr2'])\nmea = l2.edge_attributes['my-edge-attr']\nassert np.array_equal(mea, -l2.get_weights().astype(int))\nsrt = np.sort(ww)\nfor i in range(num_nodes - 1):\n    assert l2.get_edge_attributes((i, i + 1), name='weight') == srt[2 * i]\n    assert l2.get_edge_attributes((i + 1, i), name='weight') == srt[2 * i + 1]\npytest.mark.mpi_skip"
-}

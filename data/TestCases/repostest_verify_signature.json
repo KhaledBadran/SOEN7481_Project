@@ -1,9 +1,0 @@
-{
-    "functionName": "test_verify_signature",
-    "className": null,
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_crypto_&_test_engine.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test that various signature verification methods and settings can be used\n    to correctly verify signatures.\n    \"\"\"\nengine = crypto.CryptographyEngine()\nbackend = backends.default_backend()\npublic_key_numbers = rsa.RSAPublicNumbers(signature_parameters.get(\n    'public_key').get('e'), signature_parameters.get('public_key').get('n'))\npublic_key = public_key_numbers.public_key(backend)\npublic_bytes = public_key.public_bytes(signature_parameters.get('encoding'),\n    serialization.PublicFormat.PKCS1)\nresult = engine.verify_signature(signing_key=public_bytes, message=\n    signature_parameters.get('message'), signature=signature_parameters.get\n    ('signature'), padding_method=signature_parameters.get('padding_method'\n    ), signing_algorithm=signature_parameters.get('signing_algorithm'),\n    hashing_algorithm=signature_parameters.get('hashing_algorithm'),\n    digital_signature_algorithm=signature_parameters.get(\n    'digital_signature_algorithm'))\nassert result\n"
-}

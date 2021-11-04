@@ -1,9 +1,0 @@
-{
-    "functionName": "test_simulation_1",
-    "className": null,
-    "fileName": "/TUDelft-CITG_&_OpenTNSim/tests_&_test_sailing_times.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "simulation_start = datetime.datetime.now()\nenv = simpy.Environment(initial_time=time.mktime(simulation_start.timetuple()))\nenv.epoch = time.mktime(simulation_start.timetuple())\nenv.FG = graph\npath = networkx.dijkstra_path(graph, 'Node 1', 'Node 2')\nvessel.env = env\nvessel.route = path\ndef start(env, vessel):\n    while True:\n        vessel.log_entry('Start sailing', env.now, '', vessel.geometry)\n        yield from vessel.move()\n        vessel.log_entry('Stop sailing', env.now, '', vessel.geometry)\n        if vessel.geometry == networkx.get_node_attributes(graph, 'geometry')[\n            vessel.route[-1]]:\n            break\nenv.process(start(env, vessel))\nenv.run()\nwgs84 = pyproj.Geod(ellps='WGS84')\ndistance = 0\nfor i, _ in enumerate(path):\n    point_1 = networkx.get_node_attributes(graph, 'geometry')[path[i]]\n    point_2 = networkx.get_node_attributes(graph, 'geometry')[path[i + 1]]\n    distance += wgs84.inv(point_1.x, point_1.y, point_2.x, point_2.y)[2]\n    if i == len(path) - 2:\n        break\nnp.testing.assert_almost_equal(distance, env.now - env.epoch)\n"
-}

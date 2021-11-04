@@ -1,9 +1,0 @@
-{
-    "functionName": "test_list_subscriptions",
-    "className": "TestPlugin",
-    "fileName": "/tutorgen_&_HPIT-python-client/tests_&_hpitclient_&_test_plugin.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Plugin.list_subscriptions() Test plan:\n            -ensure the subscriptions are in return value\n            -ensure that 'unknown' subscriptions set callback to none\n            -ensure that 'known' subsriptsion still have their callbacks set\n            -ensure that the return value is a dictionary\n        \"\"\"\nhttpretty.register_uri(httpretty.GET,\n    'https://www.hpit-project.org/plugin/subscription/list', body=\n    '{\"subscriptions\":[\"subscription1\",\"subscription2\"]}')\nhttpretty.register_uri(httpretty.POST,\n    'https://www.hpit-project.org/plugin/subscribe', body='')\nself.test_plugin.callbacks['subscription1'] = 4\nsubscriptions = self.test_plugin.list_subscriptions()\n\"\"\"subscription1\"\"\".should.be.within(subscriptions)\n\"\"\"subscription2\"\"\".should.be.within(subscriptions)\nself.test_plugin.callbacks['subscription1'].should.equal(4)\nself.test_plugin.callbacks['subscription2'].should.equal(None)\nsubscriptions.should.be.a('dict')\nhttpretty.activate"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "get_snippet_suites",
-    "className": null,
-    "fileName": "/mzy2240_&_ESA/tests_&_test_snippets.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Return list of DocFileSuites\"\"\"\nsaw_14 = SAW(PATH_14)\nversion = saw_14.version\nsaw_14.exit()\ndel saw_14\nout = []\nfor suffix, case_path in CASE_MAP.items():\n    files = [x for x in SNIPPET_FILES if x.endswith(suffix + '.rst')]\n    if len(files) > 0:\n        if version < BROKEN_THRESHOLD:\n            not_broken_files = [x for x in files if BROKEN not in x]\n            if len(not_broken_files) != len(files):\n                LOG.warning(\n                    'The snippet {} is being skipped because the Simulator version is < {}'\n                    .format(BROKEN, BROKEN_THRESHOLD))\n        else:\n            not_broken_files = files\n        g = {'CASE_PATH': case_path}\n        if '2000' in suffix:\n            g['CANDIDATE_LINES'] = CANDIDATE_LINES\n        out.append(doctest.DocFileSuite(*not_broken_files, module_relative=\n            False, globs=g))\nreturn out\n"
-}

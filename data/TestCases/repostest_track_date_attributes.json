@@ -1,9 +1,0 @@
-{
-    "functionName": "test_track_date_attributes",
-    "className": "TestKmipEngine",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test date attribute value tracking with a simple dictionary.\n        \"\"\"\ne = engine.KmipEngine()\ne._data_store = self.engine\ne._data_store_session_factory = self.session_factory\ne._data_session = e._data_store_session_factory()\ne._is_allowed_by_operation_policy = mock.Mock(return_value=True)\ne._logger = mock.MagicMock()\ndate_values = {}\ne._track_date_attributes(enums.AttributeType.INITIAL_DATE, date_values, \n    1563564519)\nself.assertEqual(1563564519, date_values['start'])\ne._track_date_attributes(enums.AttributeType.INITIAL_DATE, date_values, \n    1563564521)\nself.assertEqual(1563564519, date_values['start'])\nself.assertEqual(1563564521, date_values['end'])\nargs = enums.AttributeType.INITIAL_DATE, date_values, 1563564520\nsix.assertRaisesRegex(self, exceptions.InvalidField,\n    'Too many Initial Date attributes provided. Include one for an exact match. Include two for a ranged match.'\n    , e._track_date_attributes, *args)\ndate_values = {}\ndate_values['start'] = 1563564521\ne._track_date_attributes(enums.AttributeType.INITIAL_DATE, date_values, \n    1563564519)\nself.assertEqual(1563564519, date_values['start'])\nself.assertEqual(1563564521, date_values['end'])\n"
-}

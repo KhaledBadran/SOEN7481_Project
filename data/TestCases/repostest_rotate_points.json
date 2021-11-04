@@ -1,9 +1,0 @@
-{
-    "functionName": "test_rotate_points",
-    "className": "TransformationsTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_topotools_&_TransformationsTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "net = op.network.Cubic(shape=[3, 3, 3])\ntopotools.rotate_coords(network=net, a=45)\na = np.array([[0.5, 0.0, 0.707106781], [0.5, -0.707106781, 1.41421356]])\nassert np.allclose(net['pore.coords'][0:2, :], a)\nnet = op.network.Cubic(shape=[3, 3, 3])\ntopotools.rotate_coords(network=net, a=45, b=45, c=45)\nb = np.array([[-0.10355339, -0.10355339, 0.85355339], [+0.04289322, -\n    0.95710678, 1.35355339]])\nassert np.allclose(net['pore.coords'][0:2, :], b)\nnet = op.network.Cubic(shape=[3, 3, 3])\nq = 45\nR = np.array([[1, 0, 0], [0, np.cos(np.deg2rad(q)), -np.sin(np.deg2rad(q))],\n    [0, np.sin(np.deg2rad(q)), np.cos(np.deg2rad(q))]])\ntopotools.rotate_coords(network=net, R=R)\nassert np.allclose(net['pore.coords'][0:2, :], a)\n"
-}

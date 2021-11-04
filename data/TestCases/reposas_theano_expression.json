@@ -1,9 +1,0 @@
-{
-    "functionName": "as_theano_expression",
-    "className": null,
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Wrap as Theano expression.\n\n    Wraps the given input as a Theano constant if it is not\n    a valid Theano expression already. Useful to transparently\n    handle numpy arrays and Python scalars, for example.\n\n    Parameters\n    ----------\n    input : number, numpy array or Theano expression\n        Expression to be converted to a Theano constant.\n\n    Returns\n    -------\n    Theano symbolic constant\n        Theano constant version of `input`.\n    \"\"\"\nif isinstance(input, theano.gof.Variable):\n    return input\nelse:\n    try:\n        return theano.tensor.constant(input)\n    except Exception as e:\n        raise TypeError(\n            'Input of type %s is not a Theano expression and cannot be wrapped as a Theano constant (original exception: %s)'\n             % (type(input), e))\n"
-}

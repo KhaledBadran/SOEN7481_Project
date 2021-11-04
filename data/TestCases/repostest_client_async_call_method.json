@@ -1,9 +1,0 @@
-{
-    "functionName": "test_client_async_call_method",
-    "className": "RPCTestCase",
-    "fileName": "/wo1fsea_&_PyEasyRPC/tests_&_test_rpc.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "instance0 = TestInstance(process_request_in_thread=True)\nclient = AsyncRPCClient('TestInstance')\nasync def add():\n    self.assertEqual(await client.add(1, 2), 3)\nasync def catch_exception():\n    with self.assertRaises(Exception) as context:\n        await client.add()\ntask = [add(), catch_exception()]\nasync def func():\n    await asyncio.wait(task)\ninstance0.start_background_running()\nloop = asyncio.get_event_loop()\nloop.run_until_complete(func())\ninstance0.stop_background_running()\ninstance0.unregister()\n"
-}

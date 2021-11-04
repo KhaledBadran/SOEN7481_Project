@@ -1,9 +1,0 @@
-{
-    "functionName": "_add_ts2q",
-    "className": "MixedInvasionPercolation",
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_algorithms_&_MixedInvasionPercolation.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        Helper method to add throats to the cluster queue\n        \"\"\"\nnet = self.project.network\nelem_type = 'throat'\nTs = net.find_neighbor_throats(pores=pore)\nTs = Ts[self['throat.invasion_sequence'][Ts] <= 0]\ntcp = self['throat.entry_pressure']\nif len(Ts) > 0:\n    self._interface_Ts[Ts] = True\n    for T in Ts:\n        data = []\n        if self._bidirectional:\n            pmap = net['throat.conns'][T] != pore\n            pind = list(pmap).index(True)\n            data.append(tcp[T][pind])\n        else:\n            data.append(tcp[T])\n        data.append(T)\n        data.append(elem_type)\n        hq.heappush(queue, data)\n"
-}

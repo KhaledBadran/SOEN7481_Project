@@ -1,9 +1,0 @@
-{
-    "functionName": "test_read_next",
-    "className": "FilePatchTestCase",
-    "fileName": "/squaresLab_&_BugZoo/test_&_test_patch.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from_s = \"\"\"\n        diff --git a/file-two.txt b/file-two.txt\n        new file mode 100644\n        index 0000000..2990e5b\n        --- /dev/null\n        +++ b/file-two.txt\n        @@ -0,0 +1,2 @@\n        +This is file two.\n        +How do you do?\n        diff --git a/testfile.c b/testfile.c\n        index f50a1fc..60ed6ff 100644\n        --- a/testfile.c\n        +++ b/testfile.c\n        @@ -6,6 +6,8 @@\n         int testfun(int a, int b)\n           x = a + b;\n           x *= x;\n         \n        +  int z = 10000;\n        +\n           int y;\n           y = x * 2;\n        \"\"\"\nfrom_s = dedent(from_s)[1:-1]\nlines = from_s.split('\\n')\nexpected_l1 = lines[8:]\nexpected_s1 = '\\n'.join(lines[3:8])\nexpected_s2 = '\\n'.join(lines[10:])\npatch = FilePatch._read_next(lines)\nself.assertEqual(str(patch), expected_s1)\nself.assertEqual(lines, expected_l1)\npatch = FilePatch._read_next(lines)\nself.assertEqual(str(patch), expected_s2)\nself.assertEqual(lines, [])\n"
-}

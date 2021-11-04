@@ -1,9 +1,0 @@
-{
-    "functionName": "test_create_host_with_initiator_list_host_flags",
-    "className": "CITestProvisioning",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test create_host with initiator list.\"\"\"\navailable_initiator_list = (self.provisioning.\n    get_available_initiator_wwn_as_list())\nif not available_initiator_list:\n    self.skipTest(\n        'test_create_host_with_initiator_list_host_flags - Unable to get an available initiator.'\n        )\nhost_flags = constants.HOST_FLAGS\nhost_flags[constants.SCSI_3] = {constants.OVERRIDE: constants.TRUE,\n    constants.ENABLED: constants.TRUE}\nhost_flags[constants.CONSISTENT_LUN] = constants.TRUE\nhost_name = self.create_host(available_initiator_list, host_flags)\nhost_list = self.provisioning.get_host_list()\nget_host_details = self.provisioning.get_host(host_name)\ninitiator_count = get_host_details[constants.NUM_OF_INITIATORS]\ninitiator = get_host_details[constants.INITIATOR]\nenabled_flags = get_host_details[constants.ENABLED_FLAGS]\nconsitent_lun = get_host_details[constants.CONSISTENT_LUN]\nself.assertIn(host_name, host_list)\nself.assertIsNotNone(get_host_details)\nself.assertEqual(1, initiator_count)\nself.assertEqual(available_initiator_list, initiator)\nself.assertEqual(constants.SCSI_3_FLAG, enabled_flags)\nself.assertEqual(consitent_lun, True)\n"
-}

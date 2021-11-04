@@ -1,9 +1,0 @@
-{
-    "functionName": "test_autocrop_array_shapes",
-    "className": "TestAutocrop",
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_merge.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from lasagne.layers.merge import autocrop_array_shapes\ncrop0 = None\ncrop1 = [None, 'lower', 'center', 'upper']\ncrop2 = ['lower', 'upper']\ncrop_bad = ['lower', 'upper', 'bad', 'worse']\nassert autocrop_array_shapes([(1, 2, 3, 4), (5, 6, 7, 8), (5, 4, 3, 2)], crop0\n    ) == [(1, 2, 3, 4), (5, 6, 7, 8), (5, 4, 3, 2)]\nassert autocrop_array_shapes([(1, 2, 3, 4), (5, 6, 7, 8), (5, 4, 3, 2)], crop1\n    ) == [(1, 2, 3, 2), (5, 2, 3, 2), (5, 2, 3, 2)]\nassert autocrop_array_shapes([(1, 2, 3, 4), (5, 6, 7, 8), (5, 4, 3, 2)], crop2\n    ) == [(1, 2, 3, 4), (1, 2, 7, 8), (1, 2, 3, 2)]\nassert autocrop_array_shapes([(None, 2, 3, 4), (5, 6, 7, 8), (5, 4, 3, 2)],\n    crop2) == [(None, 2, 3, 4), (None, 2, 7, 8), (None, 2, 3, 2)]\nwith pytest.raises(ValueError):\n    autocrop_array_shapes([(1, 2, 3, 4), (5, 6, 7, 8), (5, 4, 3, 2)], crop_bad)\nwith pytest.raises(ValueError):\n    autocrop_array_shapes([(1, 2, 3, 4), (5, 6, 7), (5, 4, 3, 2, 10)], crop1)\n"
-}

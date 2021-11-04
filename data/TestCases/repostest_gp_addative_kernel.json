@@ -1,9 +1,0 @@
-{
-    "functionName": "test_gp_addative_kernel",
-    "className": "TestPrediction",
-    "fileName": "/SUNCAT-Center_&_CatLearn/test_&_test_predict.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test Gaussian process predictions with the addative kernel.\"\"\"\ntrain_features, train_targets, test_features, test_targets = get_data()\nkdict = [{'type': 'linear', 'features': [0, 1], 'scaling': 1.0}, {'type':\n    'gaussian', 'features': [2, 3], 'width': 1.0, 'scaling': 1.0}, {'type':\n    'constant', 'const': 1.0}]\ngp = GaussianProcess(train_fp=train_features, train_target=train_targets,\n    kernel_list=kdict, regularization=np.sqrt(0.001),\n    optimize_hyperparameters=True, scale_data=True)\npred = gp.predict(test_fp=test_features, test_target=test_targets,\n    get_validation_error=True, get_training_error=True)\nself.assertEqual(len(pred['prediction']), len(test_features))\nprint('addition prediction:', pred['validation_error']['rmse_average'])\n"
-}

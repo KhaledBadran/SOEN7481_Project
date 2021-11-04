@@ -1,9 +1,0 @@
-{
-    "functionName": "test_result",
-    "className": null,
-    "fileName": "/gelijergensen_&_PermutationImportance/test_&_test_result.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "method = 'test'\nvariable_names = ['A', 'B', 'C', 'D']\nimp_result = ImportanceResult(method, variable_names, 0)\nimp_result.add_new_results({'A': (0, 0.5), 'B': (2, 0.7), 'C': (1, 0.6),\n    'D': (3, 0.8)}, 'A')\nimp_result.add_new_results({'B': (0, 0.3), 'C': (2, 0.5), 'D': (1, 0.4)})\nimp_result.add_new_results({'C': (1, 0.3), 'D': (0, 0.1)})\nassert not imp_result.complete\nassert len(imp_result) == 3\nimp_result.add_new_results({'C': (0, 0.0)})\nassert imp_result.original_score == 0\nassert imp_result.complete\nassert len(imp_result) == 5\nexpected_breiman = {'A': (0, 0.5), 'B': (2, 0.7), 'C': (1, 0.6), 'D': (3, 0.8)}\nassert expected_breiman == imp_result.retrieve_singlepass()\nexpected_laks = {'A': (0, 0.5), 'B': (1, 0.3), 'C': (3, 0), 'D': (2, 0.1)}\nassert expected_laks == imp_result.retrieve_multipass()\nexpected_1 = {'A': (0, 0.5)}, {'B': (0, 0.3), 'C': (2, 0.5), 'D': (1, 0.4)}\nassert expected_1 == imp_result[1]\nassert imp_result[4] == imp_result[-1]\nfor context, result in imp_result:\n    assert len(context) + len(result) == 4\nwith pytest.warns(FullImportanceResultWarning):\n    imp_result.add_new_results({'E': (0, 9000)})\n"
-}

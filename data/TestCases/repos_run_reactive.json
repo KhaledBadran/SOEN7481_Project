@@ -1,9 +1,0 @@
-{
-    "functionName": "_run_reactive",
-    "className": "ReactiveTransport",
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_algorithms_&_ReactiveTransport.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        Repeatedly updates ``A``, ``b``, and the solution guess within according\n        to the applied source term then calls ``_solve`` to solve the resulting\n        system of linear equations.\n\n        Stops when the residual falls below ``solver_tol * norm(b)`` or when\n        the maximum number of iterations is reached.\n\n        Parameters\n        ----------\n        x0 : ND-array\n            Initial guess of unknown variable\n\n        Returns\n        -------\n        x : ND-array\n            Solution array.\n\n        Notes\n        -----\n        The algorithm must at least complete one iteration, and hence the check for\n        itr >= 1, because otherwise, _check_for_nans() never get's called in case\n        there's something wrong with the data, and therefore, the user won't get\n        notified about the root cause of the algorithm divergence.\n\n        \"\"\"\nw = self.settings['relaxation_quantity']\nquantity = self.settings['quantity']\nmax_it = self.settings['nlin_max_iter']\nself[quantity] = x = x0\nfor itr in range(max_it):\n    self._update_iterative_props()\n    self._build_A()\n    self._build_b()\n    self._apply_BCs()\n    self._apply_sources()\n    res = self._get_residual()\n    if itr >= 1 and self._is_converged():\n        logger.info(f'Solution converged: {res:.4e}')\n        return x\n    logger.info(f'Tolerance not met: {res:.4e}')\n    self[quantity] = x = self._solve(x0=x) * w + x * (1 - w)\nif not self._is_converged():\n    raise Exception(f'Not converged after {max_it} iterations.')\n"
-}

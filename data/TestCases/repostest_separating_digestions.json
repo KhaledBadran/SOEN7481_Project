@@ -1,9 +1,0 @@
-{
-    "functionName": "test_separating_digestions",
-    "className": null,
-    "fileName": "/Edinburgh-Genome-Foundry_&_BandWitch/tests_&_test_enzyme_suggestion.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "enzymes = sorted([str(enzyme) for enzyme in Restriction.CommOnly if enzyme.\n    size == 6 and len(enzyme.supplier_list()) >= 3])\nproblem = SeparatingDigestionsProblem(sequences=sequences, enzymes=enzymes,\n    topology='circular', ladder=LADDERS['100_to_4k'],\n    max_enzymes_per_digestion=1, relative_migration_precision=0.05)\nscore, selected_digestions = problem.select_digestions(max_digestions=1)\nassert selected_digestions == [('AvaI',)]\naxes = problem.plot_digestions(selected_digestions, patterns_props={\n    'label_fontdict': {'rotation': 35}})\naxes[0].figure.savefig(os.path.join(str(tmpdir),\n    'separating_digestions.png'), bbox_inches='tight')\nax = problem.plot_distances_map(digestions=selected_digestions)\nax.figure.savefig(os.path.join(str(tmpdir), 'distances.png'))\n"
-}

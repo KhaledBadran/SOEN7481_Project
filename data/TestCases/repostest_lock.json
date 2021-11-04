@@ -1,9 +1,0 @@
-{
-    "functionName": "test_lock",
-    "className": null,
-    "fileName": "/abhiTamrakar_&_PessimisticMongo/test_concurrency.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test if the lock is gained and released immediately after the operation is finished.\n    \"\"\"\nlock = get_connection(1, 5, 5)\ncollection = str(random.random())\nwith lock(collection):\n    assert lock.isLocked(collection) == True\nassert lock.isLocked(collection) == False\n"
-}

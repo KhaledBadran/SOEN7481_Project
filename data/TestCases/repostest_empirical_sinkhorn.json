@@ -1,9 +1,0 @@
-{
-    "functionName": "test_empirical_sinkhorn",
-    "className": null,
-    "fileName": "/PythonOT_&_POT/test_&_test_bregman.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "n = 100\na = ot.unif(n)\nb = ot.unif(n)\nX_s = np.reshape(np.arange(n), (n, 1))\nX_t = np.reshape(np.arange(0, n), (n, 1))\nM = ot.dist(X_s, X_t)\nM_m = ot.dist(X_s, X_t, metric='minkowski')\nG_sqe = ot.bregman.empirical_sinkhorn(X_s, X_t, 1)\nsinkhorn_sqe = ot.sinkhorn(a, b, M, 1)\nG_log, log_es = ot.bregman.empirical_sinkhorn(X_s, X_t, 0.1, log=True)\nsinkhorn_log, log_s = ot.sinkhorn(a, b, M, 0.1, log=True)\nG_m = ot.bregman.empirical_sinkhorn(X_s, X_t, 1, metric='minkowski')\nsinkhorn_m = ot.sinkhorn(a, b, M_m, 1)\nloss_emp_sinkhorn = ot.bregman.empirical_sinkhorn2(X_s, X_t, 1)\nloss_sinkhorn = ot.sinkhorn2(a, b, M, 1)\nnp.testing.assert_allclose(sinkhorn_sqe.sum(1), G_sqe.sum(1), atol=1e-05)\nnp.testing.assert_allclose(sinkhorn_sqe.sum(0), G_sqe.sum(0), atol=1e-05)\nnp.testing.assert_allclose(sinkhorn_log.sum(1), G_log.sum(1), atol=1e-05)\nnp.testing.assert_allclose(sinkhorn_log.sum(0), G_log.sum(0), atol=1e-05)\nnp.testing.assert_allclose(sinkhorn_m.sum(1), G_m.sum(1), atol=1e-05)\nnp.testing.assert_allclose(sinkhorn_m.sum(0), G_m.sum(0), atol=1e-05)\nnp.testing.assert_allclose(loss_emp_sinkhorn, loss_sinkhorn, atol=1e-05)\n"
-}

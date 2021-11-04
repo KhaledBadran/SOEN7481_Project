@@ -1,9 +1,0 @@
-{
-    "functionName": "test_run_on_local_module_without_adding_to_pythonpath",
-    "className": null,
-    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_run.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "import sys\nimport os\npydevd_dir = os.path.dirname(os.path.dirname(__file__))\nassert os.path.exists(os.path.join(pydevd_dir, 'pydevd.py'))\nfoo_module = 'local_foo'\nwith open(os.path.join(os.getcwd(), 'local_foo.py'), 'w') as stream:\n    stream.write('print(\"WorkedLocalFoo\")')\n_run_and_check(testdir, testdir.makepyfile(\n    \"\"\"\nimport sys\nimport os\nsys.path.append(%(pydevd_dir)r)\nsys.argv.append('--as-module')\ncwd = os.path.abspath(os.getcwd())\nwhile cwd in sys.path:\n    sys.path.remove(cwd)\nimport pydevd\npy_db = pydevd.PyDB()\npy_db.ready_to_run = True\npy_db.run(%(foo_module)r, is_module=True)\n\"\"\"\n     % locals()), check_for='WorkedLocalFoo')\n_run_and_check(testdir, testdir.makepyfile(\n    \"\"\"\nimport sys\nimport os\nsys.argv.append('--as-module')\nsys.path.append(%(pydevd_dir)r)\ncwd = os.path.abspath(os.getcwd())\nwhile cwd in sys.path:\n    sys.path.remove(cwd)\nimport pydevd\npy_db = pydevd.PyDB()\npy_db.run(%(foo_module)r, is_module=True, set_trace=False)\n\"\"\"\n     % locals()), check_for='WorkedLocalFoo')\n"
-}

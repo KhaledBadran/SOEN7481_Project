@@ -1,9 +1,0 @@
-{
-    "functionName": "test_we_can_search_with_change_history_field_gets_bugs",
-    "className": null,
-    "fileName": "/AutomatedTester_&_Bugsy/tests_&_test_search.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "return_1 = {'bugs': [{'component': 'CSS Parsing and Computation', 'product':\n    'Core', 'summary': 'Map \"rebeccapurple\" to #663399 in named color list.'}]}\nurl_params = dict(chfield=['[Bug creation]', 'Alias'], chfieldvalue='foo',\n    chfieldfrom='2014-12-01', chfieldto='2014-12-05')\nresponses.add(responses.GET, rest_url('bug', **url_params), body=json.dumps\n    (return_1), status=200, content_type='application/json',\n    match_querystring=True)\nbugzilla = Bugsy()\nbugs = bugzilla.search_for.change_history_fields(['[Bug creation]', 'Alias'\n    ], 'foo').timeframe('2014-12-01', '2014-12-05').search()\nassert len(responses.calls) == 1\nassert len(bugs) == 1\nassert bugs[0].product == return_1['bugs'][0]['product']\nassert bugs[0].summary == return_1['bugs'][0]['summary']\nresponses.activate"
-}

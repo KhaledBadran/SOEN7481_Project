@@ -1,9 +1,0 @@
-{
-    "functionName": "test_search_retrieve_batch",
-    "className": null,
-    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_server_&_tests_&_test_search.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "dsid, lsi_id, _, input_ds = get_features_lsi_cached(app)\nparent_id = lsi_id\nmax_results = -1\nquery_document_id = 3844\ntotal_document_number = 1967 - 1\nfor batch_id, batch_size in [(-1, 1000), (0, 983), (1, 983), (2, 983), (1, \n    1000)]:\n    pars = dict(parent_id=parent_id, max_results=max_results, sort=True,\n        query_document_id=query_document_id, batch_id=batch_id, batch_size=\n        batch_size)\n    data = app.post_check(V01 + '/search/', json=pars)\n    assert sorted(data.keys()) == ['data', 'pagination']\n    for row in data['data']:\n        assert dict2type(row) == {'score': 'float', 'document_id': 'int'}\n    assert dict2type(data['pagination']) == {'total_response_count': 'int',\n        'current_response_count': 'int', 'batch_id': 'int', 'batch_id_last':\n        'int'}\n    scores = np.array([row['score'] for row in data['data']])\n    assert (np.diff(scores) <= 0).all()\n    assert len(data['data']) == data['pagination']['current_response_count']\n    assert data['pagination']['total_response_count'] == total_document_number\n    assert data['pagination']['batch_id'] == batch_id\n    if batch_id == -1:\n        assert len(data['data']) == total_document_number\n        assert data['pagination']['batch_id_last'] == batch_id\n    elif batch_id >= 0:\n        assert data['pagination']['current_response_count'] <= batch_size\n        if batch_id == 1 and batch_size == 983:\n            assert data['pagination']['current_response_count'] == batch_size\n        elif batch_id == 2:\n            assert data['pagination']['current_response_count'] == 0\n"
-}

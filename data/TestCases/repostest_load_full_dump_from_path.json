@@ -1,9 +1,0 @@
-{
-    "functionName": "test_load_full_dump_from_path",
-    "className": null,
-    "fileName": "/Neuraxio_&_Neuraxle/testing_&_test_full_pipeline_dump.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "tape_fit_callback_function = TapeCallbackFunction()\ntape_transform_callback_function = TapeCallbackFunction()\npipeline = Pipeline([('step_a', Identity()), ('step_b',\n    OutputTransformerWrapper(FitTransformCallbackStep(\n    tape_fit_callback_function, tape_transform_callback_function)))],\n    cache_folder=tmpdir).set_name(PIPELINE_NAME)\npipeline, outputs = pipeline.fit_transform(DATA_INPUTS, EXPECTED_OUTPUTS)\npipeline.save(ExecutionContext(tmpdir), full_dump=True)\nloaded_pipeline = ExecutionContext(tmpdir).load(os.path.join(PIPELINE_NAME,\n    'step_b'))\nassert isinstance(loaded_pipeline, OutputTransformerWrapper)\nloaded_step_b_wrapped_step = loaded_pipeline.wrapped\nassert np.array_equal(loaded_step_b_wrapped_step.\n    transform_callback_function.data[0], EXPECTED_OUTPUTS)\nassert np.array_equal(loaded_step_b_wrapped_step.fit_callback_function.data\n    [0][0], EXPECTED_OUTPUTS)\nassert np.array_equal(loaded_step_b_wrapped_step.fit_callback_function.data\n    [0][1], [None] * len(EXPECTED_OUTPUTS))\n"
-}

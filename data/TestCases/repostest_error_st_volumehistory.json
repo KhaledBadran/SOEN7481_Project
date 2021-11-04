@@ -1,9 +1,0 @@
-{
-    "functionName": "test_error_st_volumehistory",
-    "className": "TestConvertReSpecTh",
-    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_converters.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test for appropriate error if shock tube file has volume history.\n        \"\"\"\nfile_path = os.path.join('testfile_st.xml')\nfilename = pkg_resources.resource_filename(__name__, file_path)\ntree = etree.parse(filename)\nroot = tree.getroot()\ndatagroup = etree.SubElement(root, 'dataGroup')\nprop = etree.SubElement(datagroup, 'property')\nprop.set('id', 'x1')\nprop.set('name', 'time')\nprop.set('units', 's')\nprop = etree.SubElement(datagroup, 'property')\nprop.set('id', 'x2')\nprop.set('name', 'volume')\nprop.set('units', 'cm3')\ndatapoint = etree.SubElement(datagroup, 'dataPoint')\nx1 = etree.SubElement(datapoint, 'x1')\nx1.text = str(0.0)\nx2 = etree.SubElement(datapoint, 'x2')\nx2.text = str(10.0)\net = etree.ElementTree(root)\nwith TemporaryDirectory() as temp_dir:\n    filename = os.path.join(temp_dir, 'test.xml')\n    et.write(filename, encoding='utf-8', xml_declaration=True)\n    with pytest.raises(KeywordError) as excinfo:\n        ReSpecTh_to_ChemKED(filename)\n    assert 'Volume history cannot be defined for shock tube.' in str(excinfo\n        .value)\npytest.mark.filterwarnings('ignore:Using DOI')"
-}

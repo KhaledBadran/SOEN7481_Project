@@ -1,9 +1,0 @@
-{
-    "functionName": "pad",
-    "className": null,
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_theano_extensions_&_padding.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Pad a tensor with a constant value.\n\n    Parameters\n    ----------\n    x : tensor\n\n    width : int, iterable of int, or iterable of tuple\n        Padding width. If an int, pads each axis symmetrically with the same\n        amount in the beginning and end. If an iterable of int, defines the\n        symmetric padding width separately for each axis. If an iterable of\n        tuples of two ints, defines a seperate padding width for each beginning\n        and end of each axis.\n\n    val : float\n        The constant value used for padding\n\n    batch_ndim : integer\n        Dimensions before the value will not be padded.\n\n    \"\"\"\ninput_shape = x.shape\ninput_ndim = x.ndim\noutput_shape = list(input_shape)\nindices = [slice(None) for _ in output_shape]\nif isinstance(width, int_types):\n    widths = [width] * (input_ndim - batch_ndim)\nelse:\n    widths = width\nfor k, w in enumerate(widths):\n    try:\n        l, r = w\n    except TypeError:\n        l = r = w\n    output_shape[k + batch_ndim] += l + r\n    indices[k + batch_ndim] = slice(l, l + input_shape[k + batch_ndim])\nif val:\n    out = T.ones(output_shape) * val\nelse:\n    out = T.zeros(output_shape)\nreturn T.set_subtensor(out[tuple(indices)], x)\n"
-}

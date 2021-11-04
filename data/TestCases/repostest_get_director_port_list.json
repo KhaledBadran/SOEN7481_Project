@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_director_port_list",
-    "className": "CITestProvisioning",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test get_director_port_list.\"\"\"\ndirector_list = self.provisioning.get_director_list()\ndirector = director_list[0]\ndirector_port_list = self.provisioning.get_director_port_list(director)\nself.assertIsInstance(director_port_list, list)\nfor director_port in director_port_list:\n    self.assertIsInstance(director_port, dict)\n    self.assertIn(constants.DIRECTOR_ID, director_port)\n    self.assertIn(constants.PORT_ID, director_port)\n    director_id = director_port[constants.DIRECTOR_ID]\n    port_id = director_port[constants.PORT_ID]\n    self.assertIsInstance(director_id, str)\n    self.assertIsInstance(port_id, str)\n    self.assertIsNotNone(re.match(constants.DIRECTOR_SEARCH_PATTERN,\n        director_id))\n    self.assertIsNotNone(re.match(constants.PORT_SEARCH_PATTERN, port_id))\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_transient_advection_diffusion",
-    "className": "TransientAdvectionDiffusionTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_TransientAdvectionDiffusionTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "sf = op.algorithms.StokesFlow(network=self.net, phase=self.phase)\nsf.setup(quantity='pore.pressure', conductance='throat.hydraulic_conductance')\nsf.set_value_BC(pores=self.net.pores('back'), values=1)\nsf.set_value_BC(pores=self.net.pores('front'), values=0)\nsf.run()\nself.phase[sf.settings['quantity']] = sf[sf.settings['quantity']]\nmod = op.models.physics.ad_dif_conductance.ad_dif\nself.phys.add_model(propname='throat.ad_dif_conductance', model=mod,\n    s_scheme='powerlaw')\nself.phys.regenerate_models()\nad = op.algorithms.TransientAdvectionDiffusion(network=self.net, phase=self\n    .phase)\nad.setup(phase=self.phase, quantity='pore.concentration', conductance=\n    'throat.ad_dif_conductance', diffusive_conductance=\n    'throat.diffusive_conductance', hydraulic_conductance=\n    'throat.hydraulic_conductance', pressure='pore.pressure', t_initial=0,\n    t_final=100, t_step=1, t_output=50, t_tolerance=1e-20, t_precision=12,\n    s_scheme='implicit')\nad.set_IC(0)\nad.set_value_BC(pores=self.net.pores('back'), values=2)\nad.set_value_BC(pores=self.net.pores('front'), values=0)\nad.run()\nx = [0.0, 0.0, 0.0, 0.89653, 0.89653, 0.89653, 1.53924, 1.53924, 1.53924, \n    2.0, 2.0, 2.0]\ny = np.around(ad[ad.settings['quantity']], decimals=5)\nassert np.all(x == y)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ecg_peaks",
-    "className": null,
-    "fileName": "/neuropsychology_&_NeuroKit/tests_&_tests_ecg.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "sampling_rate = 1000\nnoise = 0.15\necg = nk.ecg_simulate(duration=120, sampling_rate=sampling_rate, noise=\n    noise, random_state=42)\necg_cleaned_nk = nk.ecg_clean(ecg, sampling_rate=sampling_rate, method=\n    'neurokit')\nsignals, info = nk.ecg_peaks(ecg_cleaned_nk, correct_artifacts=False,\n    method='neurokit')\nassert signals.shape == (120000, 1)\nassert np.allclose(signals['ECG_R_Peaks'].values.sum(dtype=np.int64), 139,\n    atol=1)\nsignals, info = nk.ecg_peaks(ecg_cleaned_nk, correct_artifacts=True, method\n    ='neurokit')\nassert signals.shape == (120000, 1)\nassert np.allclose(signals['ECG_R_Peaks'].values.sum(dtype=np.int64), 139,\n    atol=1)\n"
-}

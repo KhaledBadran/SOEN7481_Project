@@ -1,9 +1,0 @@
-{
-    "functionName": "initDB",
-    "className": null,
-    "fileName": "/FaradayRF_&_Faraday-Software/faraday_&_proxy.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Initialize database, creates it if not present\n\n    :return: True or False if successful\n    \"\"\"\ntry:\n    os.makedirs(os.path.join(faradayHelper.userPath, 'lib'))\nexcept:\n    pass\ntry:\n    dbFilename = proxyConfig.get('DATABASE', 'FILENAME')\n    dbPath = os.path.join(faradayHelper.userPath, 'lib', dbFilename)\n    logger.debug('Proxy Database: ' + dbPath)\n    dbFilename = dbPath\n    dbSchema = proxyConfig.get('DATABASE', 'SCHEMANAME')\n    dbSchema = os.path.join(faradayHelper.path, dbSchema)\nexcept ConfigParser.Error as e:\n    logger.error('ConfigParse.Error: ' + str(e))\n    return False\nif os.path.isfile(dbFilename):\n    pass\nelse:\n    try:\n        with open(dbSchema, 'rt') as f:\n            conn = sqlite3.connect(dbFilename)\n            cur = conn.cursor()\n            schema = f.read()\n            cur.executescript(schema)\n        conn.close()\n    except sqlite3.Error as e:\n        logger.error('Sqlite3.Error: ' + str(e))\n        return False\nreturn True\n"
-}

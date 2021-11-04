@@ -1,9 +1,0 @@
-{
-    "functionName": "test_check_measurement_df",
-    "className": null,
-    "fileName": "/PEtab-dev_&_PEtab/tests_&_test_lint.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Check measurement (and observable) tables\"\"\"\nobservable_df = pd.DataFrame(data={OBSERVABLE_ID: ['0obsPar1noisePar',\n    '2obsPar0noisePar'], OBSERVABLE_FORMULA: ['', ''], NOISE_FORMULA: ['',\n    ''], NOISE_DISTRIBUTION: ['', '']})\nobservable_df.set_index([OBSERVABLE_ID], inplace=True)\nmeasurement_df = pd.DataFrame(data={OBSERVABLE_ID: ['0obsPar1noisePar',\n    '2obsPar0noisePar'], SIMULATION_CONDITION_ID: ['condition1',\n    'condition1'], PREEQUILIBRATION_CONDITION_ID: ['', ''], TIME: [1.0, 2.0\n    ], MEASUREMENT: [1.0, 2.0], OBSERVABLE_PARAMETERS: ['', ''],\n    NOISE_PARAMETERS: ['', '']})\nlint.check_measurement_df(measurement_df, observable_df)\nobservable_df[OBSERVABLE_TRANSFORMATION] = [LOG, '']\nmeasurement_df[MEASUREMENT] = [-1.0, 0.0]\nwith pytest.raises(ValueError):\n    lint.check_measurement_df(measurement_df, observable_df)\n"
-}

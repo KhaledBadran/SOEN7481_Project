@@ -1,9 +1,0 @@
-{
-    "functionName": "run_pcap_to_features",
-    "className": null,
-    "fileName": "/CyberReboot_&_NetworkML/tests_&_test_csv_to_features.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "with tempfile.TemporaryDirectory() as tmpdir:\n    testdata = os.path.join(tmpdir, 'test_data')\n    shutil.copytree('./tests/test_data', testdata)\n    if pcap:\n        pcap_path = os.path.join(testdata, pcap)\n        pcap_csv_path = os.path.join(tmpdir, pcap + '.csv.gz')\n    else:\n        testsdir = os.path.join(tmpdir, 'tests')\n        shutil.copytree('tests', testsdir)\n        pcap_path = testsdir\n        pcap_csv_path = os.path.join(tmpdir, 'pcap.csv.gz')\n    run_pcap_to_csv(pcap_path, pcap_csv_path)\n    if outdir:\n        outpath = tmpdir\n    else:\n        outpath = os.path.join(tmpdir, 'combined.csv.gz')\n    run_csv_to_features(pcap_csv_path, outpath)\n"
-}

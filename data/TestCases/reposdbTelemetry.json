@@ -1,9 +1,0 @@
-{
-    "functionName": "dbTelemetry",
-    "className": null,
-    "fileName": "/FaradayRF_&_Faraday-Software/faraday_&_telemetry.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Provides a RESTful interface to telemetry in the SQLite database at URL '/'\n\n    Serves JSON responses to the \"/\" URL containing output of SQLite queries.\n    Specific SQLite queries can return data from specified ranges and source\n    stations as\n\n    :return: JSON formatted string with data or error message and HTTP response\n    \"\"\"\nparameters = {}\ndata = []\ntry:\n    callsign = request.args.get('callsign', '%')\n    nodeid = request.args.get('nodeid', '%')\n    direction = request.args.get('direction', 0)\n    startTime = request.args.get('starttime', None)\n    endTime = request.args.get('endtime', None)\n    timespan = request.args.get('timespan', 5 * 60)\n    limit = request.args.get('limit')\nexcept IOError as e:\n    logger.error('IOError: ' + str(e))\n    return json.dumps({'error': str(e)}), 400\nnodeid = str(nodeid)\ndirection = int(direction)\ncallsign = str(callsign).upper()\ntimespan = int(timespan)\nif limit is not None:\n    limit = int(limit)\nif timespan <= 0:\n    message = \"Error: Timespan '{0}' is invalid\".format(timespan)\n    return json.dumps({'error': message}), 400\nparameters['CALLSIGN'] = callsign\nparameters['NODEID'] = nodeid\nparameters['DIRECTION'] = direction\nparameters['STARTTIME'] = startTime\nparameters['ENDTIME'] = endTime\nparameters['TIMESPAN'] = timespan\nparameters['LIMIT'] = limit\ndata = queryDb(parameters)\nif len(data) <= 0:\n    logger.info('No station data in last %d seconds', timespan)\n    return '', 204\nreturn json.dumps(data, indent=1), 200, {'Content-Type': 'application/json'}\napp.route('/', methods=['GET'])"
-}

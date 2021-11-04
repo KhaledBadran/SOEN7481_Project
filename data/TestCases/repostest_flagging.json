@@ -1,9 +1,0 @@
-{
-    "functionName": "test_flagging",
-    "className": null,
-    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_bitmask.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "n = 1024\nshape = n, n\nimage_bm = ImageBitMask()\nmask = numpy.zeros(shape, dtype=image_bm.minimum_dtype())\ncosmics_indx = numpy.zeros(shape, dtype=bool)\ncosmics_indx[numpy.random.randint(0, high=n, size=100), numpy.random.\n    randint(0, high=n, size=100)] = True\nmask[cosmics_indx] = image_bm.turn_on(mask[cosmics_indx], 'COSMIC')\nsaturated_indx = numpy.zeros(shape, dtype=bool)\nsaturated_indx[numpy.random.randint(0, high=n, size=100), numpy.random.\n    randint(0, high=n, size=100)] = True\nmask[saturated_indx] = image_bm.turn_on(mask[saturated_indx], 'SATURATED')\nassert numpy.sum(image_bm.flagged(mask, flag='BPM')) == 0\nassert numpy.sum(image_bm.flagged(mask, flag='COSMIC')) == numpy.sum(\n    cosmics_indx)\nassert numpy.sum(image_bm.flagged(mask, flag='SATURATED')) == numpy.sum(\n    saturated_indx)\nassert image_bm.flagged_bits(1) == ['BPM']\nassert image_bm.flagged_bits(2) == ['COSMIC']\nassert image_bm.flagged_bits(4) == ['SATURATED']\nunique_flags = numpy.sort(numpy.unique(numpy.concatenate([image_bm.\n    flagged_bits(b) for b in numpy.unique(mask)]))).tolist()\nassert unique_flags == ['COSMIC', 'SATURATED']\nmask[saturated_indx] = image_bm.turn_off(mask[saturated_indx], 'SATURATED')\nassert numpy.sum(image_bm.flagged(mask, flag='COSMIC')) == numpy.sum(\n    cosmics_indx)\nassert numpy.sum(image_bm.flagged(mask, flag='SATURATED')) == 0\nunique_flags = numpy.sort(numpy.unique(numpy.concatenate([image_bm.\n    flagged_bits(b) for b in numpy.unique(mask)]))).tolist()\nassert unique_flags == ['COSMIC']\nb_indx, c_indx, s_indx = image_bm.unpack(mask)\nassert numpy.sum(b_indx) == 0\nassert numpy.sum(c_indx) == numpy.sum(cosmics_indx)\nassert numpy.sum(s_indx) == 0\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "itemsets_from_transactions_naive",
-    "className": null,
-    "fileName": "/tommyod_&_Efficient-Apriori/efficient_apriori_&_tests_&_test_itemsets.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Naive algorithm used for testing only.\n    \"\"\"\nunique_items = set(k for t in transactions for k in t)\nnum_transactions = len(transactions)\nL = dict()\nfor k in range(1, len(unique_items) + 1):\n    for combination in itertools.combinations(unique_items, k):\n        counts = 0\n        for transaction in transactions:\n            if set.issubset(set(combination), set(transaction)):\n                counts += 1\n        if counts / num_transactions >= min_support:\n            try:\n                L[k][tuple(sorted(list(combination)))] = counts\n            except KeyError:\n                L[k] = dict()\n                L[k][tuple(sorted(list(combination)))] = counts\n    try:\n        L[k] = {k: v for k, v in sorted(L[k].items())}\n        if L[k] == {}:\n            del L[k]\n            return L, num_transactions\n    except KeyError:\n        return L, num_transactions\nreturn L, num_transactions\n"
-}

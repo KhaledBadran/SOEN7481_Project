@@ -1,9 +1,0 @@
-{
-    "functionName": "test_naming",
-    "className": null,
-    "fileName": "/ivirshup_&_ConsistentClusters/tests_&_test_aggregate.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "s, c = clustering_run\nr = reconcile(s, c)\ncs = r.get_components(0.9)\nsubset = np.sort(np.random.choice(len(c), 75, replace=False))\nc_sub = c.iloc[(subset), :]\nr_sub = reconcile(s, c_sub)\nin_comp = r_sub.clusterings.iloc[-1, 0]\ncomp_from_subset = r_sub.find_components(0.9, [in_comp])[0]\nassert all(np.isin(comp_from_subset.intersect_names, cs[0].intersect_names))\n"
-}

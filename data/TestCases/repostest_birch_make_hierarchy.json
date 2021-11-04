@@ -1,9 +1,0 @@
-{
-    "functionName": "test_birch_make_hierarchy",
-    "className": null,
-    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_tests_&_test_cluster.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "if dataset == 'random':\n    np.random.seed(9999)\n    X = np.random.rand(1000, 100)\n    normalize(X)\n    branching_factor = 10\nelif dataset == 'birch_hierarchical':\n    basename = os.path.dirname(__file__)\n    X = np.load(os.path.join(basename, '..', 'data', 'ds_lsi_birch',\n        'data.npy'))\n    branching_factor = 2\nmod = Birch(n_clusters=None, threshold=0.1, branching_factor=\n    branching_factor, compute_labels=False, compute_sample_indices=True)\nmod.fit(X)\nhtree, n_subclusters = birch_hierarchy_wrapper(mod)\nfor row in htree.flatten():\n    inertia, S_sim = centroid_similarity(X, row['document_id_accumulated'])\n    row['document_similarity'] = S_sim\n    row['cluster_similarity'] = inertia\nassert htree.tree_size == n_subclusters\ndoc_count = 0\nfor el in htree.flatten():\n    doc_count += len(el['document_id'])\n    el.current_depth\n    el.document_id_accumulated\nassert doc_count == len(htree['document_id_accumulated'])\nassert doc_count == X.shape[0]\nassert htree.document_count == X.shape[0]\nif optimal_sampling:\n    s_samples_1 = compute_optimal_sampling(htree, min_similarity=0.85,\n        min_coverage=0.9)\n    for row in s_samples_1:\n        assert len(row['document_similarity']) == 1\n        assert len(row['document_id_accumulated']) == 1\n    s_samples_2 = compute_optimal_sampling(htree, min_similarity=0.85,\n        min_coverage=0.2)\n    s_samples_3 = compute_optimal_sampling(htree, min_similarity=0.9,\n        min_coverage=0.9)\n    assert len(s_samples_1) > len(s_samples_2)\n    assert len(s_samples_1) < len(s_samples_3)\npytest.mark.parametrize('dataset, optimal_sampling', [('random', False), (\n    'birch_hierarchical', False), ('birch_hierarchical', True)])"
-}

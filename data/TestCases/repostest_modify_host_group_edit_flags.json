@@ -1,9 +1,0 @@
-{
-    "functionName": "test_modify_host_group_edit_flags",
-    "className": "CITestProvisioning",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test modify_host_group_edit_flags.\"\"\"\nhost_group_name = self.create_host_group()\nhost_group_details = self.provisioning.get_host_group(host_group_name)\nenabled_flags = host_group_details[constants.ENABLED_FLAGS]\nself.assertEqual('', enabled_flags)\ntry:\n    host_groups_hosts = host_group_details.get(constants.HOST)\n    host_name = host_groups_hosts[0].get(constants.HOST_ID)\n    host_flags = constants.HOST_FLAGS\n    host_flags[constants.SCSI_3] = {constants.OVERRIDE: constants.TRUE,\n        constants.ENABLED: constants.TRUE}\n    self.provisioning.modify_host(host_name, host_flag_dict=host_flags)\n    self.provisioning.modify_host_group(host_group_name, host_flag_dict=\n        host_flags)\n    host_group_details = self.provisioning.get_host_group(host_group_name)\n    enabled_flags = host_group_details[constants.ENABLED_FLAGS]\n    self.assertIn(constants.SCSI_3_FLAG, enabled_flags)\nexcept exception.VolumeBackendAPIException:\n    self.skipTest(\n        'Erroneous error for consistent lun violation which is only appearing in CI sporadically, not possible to pin down source at present but manual tests pass for the feature with no issues.'\n        )\n"
-}

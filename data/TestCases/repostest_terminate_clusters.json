@@ -1,9 +1,0 @@
-{
-    "functionName": "test_terminate_clusters",
-    "className": "MixedPercolationTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_MixedPercolationTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.setup_class(Np=10)\nnet = self.net\nphys = self.phys\nnp.random.seed(1)\nphys['throat.entry_pressure'] = 0.0\nphys['pore.entry_pressure'] = np.random.random(net.Np) * net.Np\ninlets = net.pores('left')\noutlets = net.pores('right')\nIP_1 = mp(network=self.net)\nIP_1.setup(phase=self.phase)\nIP_1.set_inlets(pores=inlets)\nIP_1.set_outlets(pores=outlets)\nIP_1.run()\nassert np.any(IP_1['throat.invasion_sequence'][outlets] > -1)\nassert np.any(IP_1['throat.invasion_sequence'] == -1)\n"
-}

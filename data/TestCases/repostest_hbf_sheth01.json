@@ -1,9 +1,0 @@
-{
-    "functionName": "test_hbf_sheth01",
-    "className": null,
-    "fileName": "/LSSTDESC_&_CCL/benchmarks_&_test_hbf.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "d_hbf = np.loadtxt(os.path.join(dirdat, 'hbf_sheth01.txt'), unpack=True)\nmf = ccl.halos.HaloBiasSheth01(cosmo)\nm = d_hbf[0]\nfor iz, z in enumerate(zs):\n    hb_d = d_hbf[iz + 1]\n    hb_h = mf.get_halo_bias(cosmo, m, 1.0 / (1 + z))\n    assert np.all(np.fabs(hb_h / hb_d - 1) < 0.001)\n"
-}

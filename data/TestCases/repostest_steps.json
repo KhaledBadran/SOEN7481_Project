@@ -1,9 +1,0 @@
-{
-    "functionName": "test_steps",
-    "className": null,
-    "fileName": "/roniemartinez_&_DocCron/tests_&_test_steps.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "cron = doccron.cron('*/15 */6 1,15,31 * *')\nnext_datetime = datetime.now().replace(minute=0, second=0, microsecond=0)\nwhile True:\n    if next_datetime.day in [1, 15, 31] and next_datetime.hour in [0, 6, 12, 18\n        ] and next_datetime.minute in [0, 15, 30, 45]:\n        break\n    next_datetime += timedelta(minutes=15)\nnext_schedule = next(cron)\nassert isinstance(next_schedule, datetime)\nassert next_schedule.day in [1, 15, 31]\nassert next_schedule.hour in [0, 6, 12, 18]\nassert next_schedule.minute in [0, 15, 30, 45]\n"
-}

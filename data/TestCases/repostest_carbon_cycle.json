@@ -1,9 +1,0 @@
-{
-    "functionName": "test_carbon_cycle",
-    "className": null,
-    "fileName": "/OMS-NetZero_&_FAIR/tests_&_unit_&_unit_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test the stand-alone carbon cycle component of FaIR\"\"\"\nnt = 10\nc_pi = 278.0\nemissions = np.ones(nt) * 10.0\nconcentrations = np.ones(nt) * c_pi\nc_acc = np.zeros(nt)\ntime_scale_sf = 0.16\ncarbon_boxes = np.zeros((nt, 4))\nppm_gtc = M_ATMOS / 1e+18 * molwt.C / molwt.AIR\nc_full, f_full, t_full = fair.forward.fair_scm(emissions=np.ones(nt) * 10,\n    useMultigas=False)\ncarbon_boxes[(0), :] = carbon.a * emissions[0, np.newaxis] / ppm_gtc\nconcentrations[0] = np.sum(carbon_boxes[(0), :], axis=-1) + c_pi\nfor t in range(1, nt):\n    concentrations[t], c_acc[t], carbon_boxes[(t), :\n        ], time_scale_sf = fair.gas_cycle.fair1.carbon_cycle(emissions[t - \n        1], c_acc[t - 1], t_full[t - 1], carbon.r0, carbon.rc, carbon.rt,\n        carbon.iirf_max, time_scale_sf, carbon.a, carbon.tau, carbon.iirf_h,\n        carbon_boxes[(t - 1), :], c_pi, concentrations[t - 1], emissions[t])\nassert np.all(c_full == concentrations)\n"
-}

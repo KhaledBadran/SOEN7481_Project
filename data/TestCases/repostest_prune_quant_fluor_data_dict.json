@@ -1,9 +1,0 @@
-{
-    "functionName": "test_prune_quant_fluor_data_dict",
-    "className": null,
-    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_core_&_tests_&_test_quant_analysis.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test for ``prune_quant_fluor_data_dict``: basic test of functionality\"\"\"\nfluor_standard = copy.deepcopy(_xrf_standard_fluor_sample)\nelines_not_none = []\nfor eline, info in fluor_standard['element_lines'].items():\n    set_to_none = np.random.rand() < 0.5\n    if set_to_none:\n        info['fluorescence'] = None\n    if info['fluorescence'] is not None:\n        elines_not_none.append(eline)\nfluor_standard_pruned = prune_quant_fluor_data_dict(fluor_standard)\nfor eline, info in fluor_standard_pruned['element_lines'].items():\n    assert eline in elines_not_none, f'Emission line {eline} should have been removed from the dictionary'\n    assert info['fluorescence'\n        ] is not None, f\"Emission line {eline} has 'fluorescence' set to None\"\n"
-}

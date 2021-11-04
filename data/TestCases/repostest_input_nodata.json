@@ -1,9 +1,0 @@
-{
-    "functionName": "test_input_nodata",
-    "className": null,
-    "fileName": "/vc1492a_&_PyNomaly/tests_&_test_loop.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test to ensure that the proper warning is issued if no data is\n    provided.\n    :param X_n140_outliers: A pytest Fixture that generates 140 observations.\n    :return: None\n    \"\"\"\nwith pytest.warns(UserWarning) as record:\n    loop.LocalOutlierProbability(n_neighbors=X_n140_outliers.shape[0] - 1,\n        use_numba=NUMBA)\nassert len(record) == 1\nassert record[0].message.args[0\n    ] == 'Data or a distance matrix must be provided.'\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test__sanitize_amend_commit_message",
-    "className": null,
-    "fileName": "/132nd-etcher_&_EPAB/test_&_test_repo_&_test_commit.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "assert repo.last_commit_msg() == 'init commit'\nassert repo._sanitize_amend_commit_message(new_message='test') == 'test'\nassert repo._sanitize_amend_commit_message(append_to_msg='test') == \"\"\"init commit\n\ntest\"\"\"\nassert repo._sanitize_amend_commit_message(previous_message=\"\"\"init commit\n\ntest\"\"\", append_to_msg='test') == \"\"\"init commit\n\ntest\"\"\"\nassert repo._sanitize_amend_commit_message(previous_message=\"\"\"init commit\n\ntest\n\"\"\", append_to_msg='other test') == \"\"\"init commit\n\ntest\nother test\"\"\"\nwith pytest.raises(SystemExit):\n    repo._sanitize_amend_commit_message()\n"
-}

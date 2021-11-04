@@ -1,9 +1,0 @@
-{
-    "functionName": "test_artificial_volume_profile_nitrogen",
-    "className": "TestCreateVolumeHistory",
-    "fileName": "/kyleniemeyer_&_PyTeCK/pyteck_&_tests_&_test_simulation.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Check correct volume profile for nitrogen mixture.\n        \"\"\"\ninitial_pres = 1.0 * ct.one_atm\npres_rise = 0.05\nend_time = 1.0\ninitial_temp = 300.0\n[times, volumes] = simulation.create_volume_history('air.xml', initial_temp,\n    initial_pres, 'N2:1.0', pres_rise, end_time)\nend_pres = initial_pres * (pres_rise * end_time + 1.0)\ngas = ct.Solution('air.xml')\ngas.TPX = initial_temp, initial_pres, 'N2:1.0'\ninitial_density = gas.density\ngamma = gas.cp / gas.cv\nvolume = (end_pres / initial_pres) ** (-1.0 / gamma)\nassert np.allclose(times[-1], 1.0)\nassert np.allclose(volume, volumes[-1], rtol=1e-05)\n"
-}

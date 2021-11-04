@@ -1,9 +1,0 @@
-{
-    "functionName": "test_compile",
-    "className": null,
-    "fileName": "/MechWolf_&_MechWolf/tests_&_test_protocol.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "P = mw.Protocol(A)\nP.add([pump1, pump2], rate='10 mL/min', duration='5 min')\nassert P._compile() == {pump1: [{'params': {'rate': '10 mL/min'}, 'time': 0\n    }, {'params': {'rate': '0 mL/min'}, 'time': 300}], pump2: [{'params': {\n    'rate': '10 mL/min'}, 'time': mw._ureg.parse_expression('0 seconds')},\n    {'params': {'rate': '0 mL/min'}, 'time': 300}]}\nP = mw.Protocol(A)\nP.add([pump1, pump2], rate='10 mL/min')\nwith pytest.raises(RuntimeError):\n    P._compile()\n"
-}

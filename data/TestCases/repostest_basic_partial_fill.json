@@ -1,9 +1,0 @@
-{
-    "functionName": "test_basic_partial_fill",
-    "className": null,
-    "fileName": "/nabicht_&_Buttonwood/tests_&_test_MarketObjects_&_test_Events_&_test_ordereventchain.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "n = NewOrderCommand(121234, 1234235.123, 2342, 'user_x', MARKET, BID_SIDE,\n    FAR, Price('34.52'), 1000)\noec = OrderEventChain(n, LOGGER, MonotonicIntID())\nack = AcknowledgementReport(121235, 1234235.123, 2342, 'user_x', MARKET, n,\n    Price('34.52'), 1000, 1000)\noec.apply_acknowledgement_report(ack)\naggressor = NewOrderCommand(1111, 1234237.123, 22222, 'user_x', MARKET,\n    ASK_SIDE, FAR, Price('34.52'), 44)\npf = PartialFillReport(121236, 1234237.123, 2342, 'user_x', MARKET,\n    aggressor, 44, Price('34.52'), BID_SIDE, 99999, 1000 - 44)\noec.apply_partial_fill_report(pf)\nassert oec.open_exposure_requests() == []\nassert oec.current_exposure().price() == Price('34.52')\nassert oec.current_exposure().qty() == 1000 - 44\nassert oec.visible_qty() == 1000 - 44\nassert oec.iceberg_peak_qty() == 1000\nassert oec.has_partial_fill()\n"
-}

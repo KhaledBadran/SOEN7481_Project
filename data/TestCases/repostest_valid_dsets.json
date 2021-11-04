@@ -1,9 +1,0 @@
-{
-    "functionName": "test_valid_dsets",
-    "className": null,
-    "fileName": "/CCampJr_&_LazyHDF5/lazy5_&_tests_&_test_inspect.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Test whether a dset or list of dsets are valid or not \"\"\"\nfilename, fid = hdf_dataset\nassert not valid_dsets('NOTAFILE.XYZ', 'base', verbose=True)\ndset_list = 'base'\nassert valid_dsets(filename, dset_list, verbose=True)\ndset_list = 'base'\nassert valid_dsets(fid, dset_list, verbose=True)\ndset_list = 'NOTADSET'\nassert not valid_dsets(filename, dset_list, verbose=True)\ndset_list = ['base']\nassert valid_dsets(filename, dset_list, verbose=True)\ndset_list = ['base', '/Group1/ingroup1_1', '/Group1/ingroup1_2',\n    'Group2/ingroup2']\nassert valid_dsets(filename, dset_list, verbose=True)\ndset_list = ['base', '/Group1/ingroup1_1', '/Group1/ingroup1_2',\n    'Group2/DOESNOTEXIST']\nassert not valid_dsets(filename, dset_list, verbose=True)\ndset_list = 1\nwith pytest.raises(TypeError):\n    valid_dsets(filename, dset_list, verbose=True)\ndset_list = ['base', 1]\nwith pytest.raises(TypeError):\n    valid_dsets(filename, dset_list, verbose=True)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_l2_regularizer",
-    "className": null,
-    "fileName": "/Accenture_&_AmpliGraph/tests_&_ampligraph_&_latent_features_&_test_regularizers.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "l2_class = REGULARIZER_REGISTRY['LP']\np1 = tf.constant([1, -1, 1], dtype=tf.float32)\np2 = tf.constant([2, -2, 2], dtype=tf.float32)\nparams = [p1, p2]\nlambda_1 = 1.0\nlambda_2 = [2.0, 3.0]\nl2_obj1 = l2_class({'lambda': lambda_1, 'p': 2})\nl2_obj2 = l2_class({'lambda': lambda_2, 'p': 2})\nwith tf.Session() as sess:\n    out = sess.run(l2_obj1.apply([p1, p2]))\n    np.testing.assert_array_equal(out, 15.0)\n    out = sess.run(l2_obj2.apply([p1, p2]))\n    np.testing.assert_array_equal(out, 42.0)\n"
-}

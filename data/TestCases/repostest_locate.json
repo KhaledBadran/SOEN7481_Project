@@ -1,9 +1,0 @@
-{
-    "functionName": "test_locate",
-    "className": "TestProxyKmipClient",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_test_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test the locate client with proper input.\n        \"\"\"\nmaximum_items = 10\nstorage_status_mask = 1\nobject_group_member = enums.ObjectGroupMember.GROUP_MEMBER_FRESH\nattributes = [obj.Attribute(attribute_name=obj.Attribute.AttributeName(\n    'Name'), attribute_index=obj.Attribute.AttributeIndex(0),\n    attribute_value=attr.Name(name_value=attr.Name.NameValue('Test Name'),\n    name_type=attr.Name.NameType(enums.NameType.UNINTERPRETED_TEXT_STRING))\n    ), obj.Attribute(attribute_name=obj.Attribute.AttributeName(\n    'Object Type'), attribute_value=attr.ObjectType(enums.ObjectType.\n    SYMMETRIC_KEY))]\nuuid0 = 'aaaaaaaa-1111-2222-3333-ffffffffffff'\nuuid1 = 'bbbbbbbb-4444-5555-6666-gggggggggggg'\nunique_identifiers = [uuid0, uuid1]\nresult = results.LocateResult(contents.ResultStatus(enums.ResultStatus.\n    SUCCESS), uuids=unique_identifiers)\nwith ProxyKmipClient() as client:\n    client.proxy.locate.return_value = result\n    uuids = client.locate(maximum_items, storage_status_mask,\n        object_group_member, attributes)\n    self.assertIn(uuid0, uuids)\n    self.assertIn(uuid1, uuids)\nmock.patch('kmip.pie.client.KMIPProxy', mock.MagicMock(spec_set=KMIPProxy))"
-}

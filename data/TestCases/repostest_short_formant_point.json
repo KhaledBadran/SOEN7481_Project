@@ -1,9 +1,0 @@
-{
-    "functionName": "test_short_formant_point",
-    "className": null,
-    "fileName": "/mmcauliffe_&_Pyraat/tests_&_test_short.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "script_path = os.path.join(praat_script_test_dir, 'formant_point.praat')\nfunc = PraatAnalysisFunction(script_path, praat_path, arguments=[0.33, 5, 5500]\n    )\nassert func.point_measure\nassert not func.uses_long\nassert func._output_parse_function == parse_point_script_output\nheader = ['F1', 'B1', 'F2', 'B2', 'F3', 'B3', 'F4', 'B4', 'F5', 'B5']\noutput = func(vowel_sound_file, 0.33, 5, 5000)\nwith pytest.raises(PyraatError):\n    func(vowel_sound_file, 0, 0.33, 5, 5000)\nassert sorted(output.keys()) == sorted(header)\nfor k, v in output.items():\n    assert isinstance(k, str)\n    assert isinstance(v, (float, type(None)))\n"
-}

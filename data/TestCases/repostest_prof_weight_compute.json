@@ -1,9 +1,0 @@
-{
-    "functionName": "test_prof_weight_compute",
-    "className": "Testprofwexplainer",
-    "fileName": "/IBM_&_AIX360/tests_&_profwt_&_test_ProfWt.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Test Prof Weight Computation \"\"\"\na = np.random.random_sample((1, 9))\na = a / np.sum(a)\ndata_matrix = np.outer(np.ones((3, 1)), a)\nnp.save('./test_case_data_1', data_matrix)\nnp.save('./test_case_data_2', np.roll(data_matrix, -1, axis=1))\nnp.save('./test_case_data_3', np.roll(data_matrix, -2, axis=1))\ny = np.zeros((1, 9))\ny[0, 0] = 1\ny1 = np.roll(y, 3, axis=1)\ny2 = np.roll(y1, 3, axis=1)\nY = np.vstack((np.vstack((y, y1)), y2))\nnp.save('./test_case_train_labels', Y)\nlist_probe_filenames = [('./test_case_data_' + str(x) + '.npy') for x in\n    range(1, 4)]\nprint(list_probe_filenames)\ntrain_label_path = './test_case_train_labels.npy'\ny_train = np.load(train_label_path)\nstart_layer = 0\nfinal_layer = 2\nw = prof_weight_compute(list_probe_filenames, start_layer, final_layer, y_train\n    )\nw = w.reshape(w.shape[0])\nself.assertTrue((abs(3 * w[0] - np.sum(a[(0), 0:3])) < 0.0001) & (abs(3 * w\n    [1] - np.sum(a[(0), 3:6])) < 0.0001) & (abs(3 * w[2] - np.sum(a[(0), 6:\n    9])) < 0.0001), 'Weight Computation has an error')\nprint('prof_weight_compute Test passed..')\nprint('Removing Created test files....')\nif os.path.isfile(train_label_path):\n    os.remove(train_label_path)\nfor f in list_probe_filenames:\n    if os.path.isfile(f):\n        os.remove(f)\n"
-}

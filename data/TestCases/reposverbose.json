@@ -1,9 +1,0 @@
-{
-    "functionName": "verbose",
-    "className": null,
-    "fileName": "/nipy_&_PySurfer/surfer_&_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Decorator to allow functions to override default log level\n\n    Do not call this function directly to set the global verbosity level,\n    instead use set_log_level().\n\n    Parameters (to decorated function)\n    ----------------------------------\n    verbose : bool, str, int, or None\n        The level of messages to print. If a str, it can be either DEBUG,\n        INFO, WARNING, ERROR, or CRITICAL. Note that these are for\n        convenience and are equivalent to passing in logging.DEBUG, etc.\n        For bool, True is the same as 'INFO', False is the same as 'WARNING'.\n        None defaults to using the current log level [e.g., set using\n        mne.set_log_level()].\n    \"\"\"\narg_names = _get_args(function)\n@wraps(function)\ndef dec(*args, **kwargs):\n    if len(arg_names) > 0 and arg_names[0] == 'self':\n        default_level = getattr(args[0], 'verbose', None)\n    else:\n        default_level = None\n    verbose_level = kwargs.get('verbose', default_level)\n    if verbose_level is not None:\n        old_level = set_log_level(verbose_level, True)\n        try:\n            ret = function(*args, **kwargs)\n        except Exception:\n            set_log_level(old_level)\n            raise\n        set_log_level(old_level)\n        return ret\n    else:\n        return function(*args, **kwargs)\ndec.__wrapped__ = function\nreturn dec\n"
-}

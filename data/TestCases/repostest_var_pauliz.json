@@ -1,9 +1,0 @@
-{
-    "functionName": "test_var_pauliz",
-    "className": null,
-    "fileName": "/XanaduAI_&_PennyLane-PQ/tests_&_test_var.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that variance of PauliZ is the same as I-<Z>^2\"\"\"\ndev.apply('PauliX', wires=Wires([0]), par=[])\nif isinstance(dev, ProjectQIBMBackend):\n    dev._eng.backend.get_probabilities.return_value = {'0': 0, '1': 1}\ndev.pre_measure()\nvar = dev.var('PauliZ', wires=Wires([0]), par=[])\nmean = dev.expval('PauliZ', wires=Wires([0]), par=[])\ndev.post_measure()\nassert np.allclose(var, 1 - mean ** 2, atol=tol, rtol=0)\npytest.mark.parametrize('DevClass', [ProjectQSimulator,\n    ProjectQClassicalSimulator, ProjectQIBMBackend])"
-}

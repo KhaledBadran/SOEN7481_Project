@@ -1,9 +1,0 @@
-{
-    "functionName": "test_transform_incompatible_dtypes",
-    "className": null,
-    "fileName": "/CCampJr_&_CRIkit2/crikit_&_preprocess_&_tests_&_test_subtract_dark.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test that TypeError is raised when Dark and Data have incompatible\n    dtypes for in-place transformation\n\n    Note: if spectra or hsi is used for dark, will convert to float due to mean\n    \"\"\"\nspectrum, spectra, hsi, shape = make_datasets\ndata = (1 * hsi).astype(np.int)\ndark = (1 * spectrum).astype(np.int)\nsubdark = SubtractDark(dark)\nsubdark.transform(data)\ndata = (1 * hsi).astype(np.float)\ndark = (1 * spectrum).astype(np.int)\nsubdark = SubtractDark(dark)\nsubdark.transform(data)\ndata = (1 * hsi).astype(np.complex)\ndark = (1 * spectrum).astype(np.int)\nsubdark = SubtractDark(dark)\nsubdark.transform(data)\ndata = (1 * hsi).astype(np.int)\ndark = (1 * spectrum).astype(np.float)\nsubdark = SubtractDark(dark)\nwith pytest.raises(TypeError):\n    subdark.transform(data)\ndata = (1 * hsi).astype(np.float)\ndark = (1 * spectrum).astype(np.float)\nsubdark = SubtractDark(dark)\nsubdark.transform(data)\ndata = (1 * hsi).astype(np.complex)\ndark = (1 * spectrum).astype(np.float)\nsubdark = SubtractDark(dark)\nsubdark.transform(data)\ndata = (1 * hsi).astype(np.int)\ndark = (1 * spectrum).astype(np.complex)\nsubdark = SubtractDark(dark)\nwith pytest.raises(TypeError):\n    subdark.transform(data)\ndata = (1 * hsi).astype(np.float)\ndark = (1 * spectrum).astype(np.complex)\nsubdark = SubtractDark(dark)\nwith pytest.raises(TypeError):\n    subdark.transform(data)\ndata = (1 * hsi).astype(np.complex)\ndark = (1 * spectrum).astype(np.complex)\nsubdark = SubtractDark(dark)\nsubdark.transform(data)\n"
-}

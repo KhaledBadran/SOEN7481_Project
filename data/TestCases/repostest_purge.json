@@ -1,9 +1,0 @@
-{
-    "functionName": "test_purge",
-    "className": "Schedule",
-    "fileName": "/al-niessner_&_DAWGIE/Test_&_test_06.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "a = dawgie.pl.dag.Node('a')\nb = dawgie.pl.dag.Node('b')\nc = dawgie.pl.dag.Node('c')\nd = dawgie.pl.dag.Node('d')\ne = dawgie.pl.dag.Node('e')\nf = dawgie.pl.dag.Node('f')\nfor n in [a, b, c, d, e, f]:\n    for l in ['do', 'doing', 'todo']:\n        n.set(l, [])\n        for t in ['A', 'B', 'C']:\n            n.get(l).append(t)\n        pass\n    pass\na.add(c)\na.add(d)\nb.add(d)\nb.add(e)\nd.add(f)\ndawgie.pl.schedule.purge(b, 'B')\nfor l in ['do', 'doing', 'todo']:\n    self.assertEqual(['A', 'B', 'C'], a.get(l))\n    self.assertEqual(['A', 'C'], b.get(l))\n    self.assertEqual(['A', 'B', 'C'], c.get(l))\n    self.assertEqual(['A', 'C'], d.get(l))\n    self.assertEqual(['A', 'C'], e.get(l))\n    self.assertEqual(['A', 'C'], f.get(l))\n    pass\nreturn\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_merge_left_right",
-    "className": "TestPrimerTabix",
-    "fileName": "/stjude_&_PrimerTK/test_&_python_tests_&_test_primer_tabix.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Merge the left and right SNP dataframes.\n        \"\"\"\nleft = pt.primer_range_left(self.pvcf['Sequence ID'], self.pvcf[\n    'Primer Rank'], self.pvcf['Chromosome'], self.pvcf['Primer Left Seq'],\n    self.pvcf['Position1'])\nnormalized = pt.match_pinfo_to_vcf(left, self.vcf_in)\nleft_snps = pt.tabix_fetch(normalized['Sequence ID'], normalized[\n    'Primer Rank'], normalized['Chromosome'], normalized['Position1'],\n    normalized['Position2'], self.vcf_in)\nleft_df = pt.tabix_results_to_df(left_snps, 'L', 'Left SNP Count')\nright = pt.primer_range_right(self.pvcf['Sequence ID'], self.pvcf[\n    'Primer Rank'], self.pvcf['Chromosome'], self.pvcf['Primer Right Seq'],\n    self.pvcf['Position2'])\nnormalized = pt.match_pinfo_to_vcf(right, self.vcf_in)\nright_snps = pt.tabix_fetch(normalized['Sequence ID'], normalized[\n    'Primer Rank'], normalized['Chromosome'], normalized['Position1'],\n    normalized['Position2'], self.vcf_in)\nright_df = pt.tabix_results_to_df(left_snps, 'R', 'Right SNP Count')\nmerged_df = pt.merge_left_right(left_df, right_df, self.pvcf)\nself.assertTrue('Left SNP Count' and 'Right SNP Count' in merged_df.columns)\n"
-}

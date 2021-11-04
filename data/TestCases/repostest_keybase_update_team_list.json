@@ -1,9 +1,0 @@
-{
-    "functionName": "test_keybase_update_team_list",
-    "className": "KeybaseInitializationTest",
-    "fileName": "/cmsteffen-code_&_PyKBLib/tests_&_test_pykblib_keybase.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "mock_get_username.return_value = 'testuser'\nmock_call_api.return_value = dict_to_ntuple({'result': {'teams': [{'uid':\n    'fake_uid', 'team_id': 'fake_team_id', 'username': 'testuser',\n    'full_name': 'Test User', 'fq_name': 'example_team', 'is_implicit_team':\n    False, 'implicit_team_display_name': '', 'is_open_team': False, 'role':\n    4, 'needsPUK': False, 'member_count': 7, 'member_eldest_seqno': 0,\n    'allow_profile_promote': False, 'is_member_showcased': False, 'status':\n    0}], 'annotatedActiveInvites': {}}})\nkeybase = Keybase()\nmock_call_api.assert_called_with('team', {'method': 'list-user-memberships',\n    'params': {'options': {'username': 'testuser'}}})\nself.assertEqual(keybase.teams, ['example_team'])\nkeybase.update_team_list()\nself.assertEqual(keybase.teams, ['example_team'])\nmock.patch('pykblib.keybase.KeybaseAPI.call_api')mock.patch('pykblib.keybase.Keybase._get_username')"
-}

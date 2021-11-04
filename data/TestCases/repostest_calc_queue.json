@@ -1,9 +1,0 @@
-{
-    "functionName": "test_calc_queue",
-    "className": null,
-    "fileName": "/PaulHancock_&_Aegean/tests_&_test_pprocess.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test a queue which creates list\n    \"\"\"\nqueue = pprocess.Queue(limit=4)\ncalc = queue.manage(pprocess.MakeParallel(calculate))\nanswers = list(range(0, 2 * N * N, 2))\nfor i in range(0, N):\n    for j in range(0, N):\n        calc(i, j)\nresults = sorted([q for q in queue])\nif not np.all(results == answers):\n    print(results)\n    print(answers)\n    raise AssertionError('Calc queue failed to give correct results')\n"
-}

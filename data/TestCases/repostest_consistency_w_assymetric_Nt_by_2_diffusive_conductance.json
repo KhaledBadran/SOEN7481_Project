@@ -1,9 +1,0 @@
-{
-    "functionName": "test_consistency_w_assymetric_Nt_by_2_diffusive_conductance",
-    "className": "DispersiveConductanceTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_physics_&_DispersiveConductanceTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "gd = self.phase['throat.diffusive_conductance']\nself.phys['throat.Nt_by_2'] = np.vstack((gd, gd)).T\nself.phys['throat.Nt_by_2'][3, 1] = 7.45\nmod = op.models.physics.dispersive_conductance.ad_dif\nself.phys.add_model(propname='throat.ad_dif_conductance', model=mod,\n    s_scheme='powerlaw', pore_pressure='pore.uniform_pressure',\n    throat_diffusive_conductance='throat.Nt_by_2')\ng_ad_dif = self.phys['throat.ad_dif_conductance']\ng_dif = self.phys['throat.Nt_by_2']\nassert_allclose(actual=g_ad_dif, desired=g_dif)\n"
-}

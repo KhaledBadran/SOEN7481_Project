@@ -1,9 +1,0 @@
-{
-    "functionName": "test_configure_validator_action",
-    "className": null,
-    "fileName": "/OwnMarket_&_OwnBlockchainSdkPython/own_blockchain_sdk_&_test_transactions.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "sender_wallet = Wallet()\nnetwork_address = 'val01.some.domain.com:25718'\nshared_reward_percent = 42\nis_enabled = True\nexpected = (\n    \"\"\"{\n    \"senderAddress\": \"%s\",\n    \"nonce\": 1,\n    \"expirationTime\": 0,\n    \"actionFee\": 0.01,\n    \"actions\": [\n        {\n            \"actionType\": \"ConfigureValidator\",\n            \"actionData\": {\n                \"networkAddress\": \"%s\",\n                \"sharedRewardPercent\": %d,\n                \"isEnabled\": true\n            }\n        }\n    ]\n}\"\"\"\n     % (sender_wallet.address, network_address, shared_reward_percent))\ntx = Tx(sender_wallet.address, 1, 0.01, 0)\ntx.add_configure_validator_action(network_address, shared_reward_percent,\n    is_enabled)\nactual = tx.to_json()\nassert expected == actual\n"
-}

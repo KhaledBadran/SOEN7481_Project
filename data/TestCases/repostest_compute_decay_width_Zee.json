@@ -1,9 +1,0 @@
-{
-    "functionName": "test_compute_decay_width_Zee",
-    "className": "TestRambo",
-    "fileName": "/LoganAMorrison_&_Hazma/test_&_rambo_&_test_rambo.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test rambo decay width function on Z -> e e.\n        \"\"\"\nsw = np.sqrt(0.2223)\ncw = np.sqrt(1.0 - sw ** 2)\nfsp_masses = np.array([me, me])\ndef msqd_Z_to_ee(momenta):\n    p1 = momenta[0]\n    p2 = momenta[1]\n    return qe ** 2 * (2 * (1 - 4 * sw ** 2 + 8 * sw ** 4) * MDot(p1, p2) **\n        2 + 2 * (1 - 4 * sw ** 2 + 8 * sw ** 4) * me ** 4 + 12 * sw ** 2 *\n        (-1 + 2 * sw ** 2) * me ** 2 * mz ** 2 + (1 - 4 * sw ** 2 + 8 * sw **\n        4) * MDot(p1, p2) * (4 * me ** 2 + mz ** 2)) / (6.0 * cw ** 2 * sw **\n        2 * mz ** 2)\nrambo = compute_decay_width(fsp_masses, mz, num_ps_pts=10, mat_elem_sqrd=\n    msqd_Z_to_ee)\nnum = qe ** 2 * (8.0 * sw ** 4 - 4.0 * sw ** 2 + 1) * mz\nden = 96.0 * np.pi * cw ** 2 * sw ** 2\nanalytic = num / den\nassert_allclose(rambo[0], analytic, rtol=0.005)\n"
-}

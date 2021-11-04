@@ -1,9 +1,0 @@
-{
-    "functionName": "test_screenkhorn",
-    "className": null,
-    "fileName": "/PythonOT_&_POT/test_&_test_bregman.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "rng = np.random.RandomState(0)\nn = 100\na = ot.unif(n)\nb = ot.unif(n)\nx = rng.randn(n, 2)\nM = ot.dist(x, x)\nG_sink = ot.sinkhorn(a, b, M, 0.001)\nG_screen = ot.bregman.screenkhorn(a, b, M, 0.001, uniform=True, verbose=True)\nnp.testing.assert_allclose(G_sink.sum(0), G_screen.sum(0), atol=0.01)\nnp.testing.assert_allclose(G_sink.sum(1), G_screen.sum(1), atol=0.01)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "testSetupPriors_CorrectData",
-    "className": null,
-    "fileName": "/muma7490_&_PyDIAMONDS-Background/tests_&_test_Background.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "fileName = (testFilePath + 'background_hyperParameters' + valueObject.model\n    .fileAppendix + '.txt')\ndef testSetupPriors_File():\n    return valueObject._setupPriors(kicID, dataPath=testFilePath)\ndef testSetupPriors_Data():\n    data = np.loadtxt(fileName).T\n    return valueObject._setupPriors(kicID, data=data)\nresults = [testSetupPriors_File(), testSetupPriors_Data()]\nfor result in results:\n    assert isinstance(result, UniformPrior)\n    assert len(result.getMinima()) == valueObject.model.dimension\n    assert len(result.getMaxima()) == valueObject.model.dimension\npytest.mark.parametrize('model', modelsList)"
-}

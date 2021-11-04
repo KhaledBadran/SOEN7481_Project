@@ -1,9 +1,0 @@
-{
-    "functionName": "test_failsWithDifferentModule",
-    "className": "OriginalLocationTests",
-    "fileName": "/glyph_&_Automat/automat_&__test_&_test_discover.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        L{isOriginalLocation} returns False when the attribute refers to\n        an object outside of the module where that object was defined.\n        \"\"\"\noriginalSource = \"\"\"        class ImportThisClass(object):\n            pass\n        importThisObject = ImportThisClass()\n        importThisNestingObject = ImportThisClass()\n        importThisNestingObject.nestedObject = ImportThisClass()\n        \"\"\"\nimportingSource = \"\"\"        from original import (ImportThisClass,\n                              importThisObject,\n                              importThisNestingObject)\n        \"\"\"\nself.makeModule(originalSource, self.pathDir, 'original.py')\nimportingDict = self.makeModuleAsDict(importingSource, self.pathDir,\n    'importing.py')\nself.assertFalse(self.isOriginalLocation(importingDict[\n    'importing.ImportThisClass']))\nself.assertFalse(self.isOriginalLocation(importingDict[\n    'importing.importThisObject']))\nnestingObject = importingDict['importing.importThisNestingObject']\nnestingObjectDict = self.attributesAsDict(nestingObject)\nnestedObject = nestingObjectDict[\n    'importing.importThisNestingObject.nestedObject']\nself.assertFalse(self.isOriginalLocation(nestedObject))\n"
-}

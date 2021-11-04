@@ -1,9 +1,0 @@
-{
-    "functionName": "test_inbox_request_destination_collection",
-    "className": null,
-    "fileName": "/EclecticIQ_&_OpenTAXII/tests_&_services_&_test_inbox.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "version = 11\ninbox_message = make_inbox_message(version, blocks=[make_content(version)],\n    dest_collection=None)\nheaders = prepare_headers(version, https)\ninbox = server.get_service('inbox-A')\nresponse = inbox.process(headers, inbox_message)\nassert isinstance(response, as_tm(version).StatusMessage)\nassert response.status_type == ST_SUCCESS\ninbox = server.get_service('inbox-B')\nwith pytest.raises(exceptions.StatusMessageException):\n    response = inbox.process(headers, inbox_message)\npytest.mark.parametrize('https', [True, False])"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_forcebackprop",
-    "className": null,
-    "fileName": "/hughperkins_&_DeepCL/python_&_test_&_test_basic.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "cl = PyDeepCL.DeepCL()\nnet = PyDeepCL.NeuralNet(cl)\nnet.addLayer(PyDeepCL.InputLayerMaker().numPlanes(3).imageSize(28))\nnet.addLayer(PyDeepCL.ForceBackpropMaker())\nnet.addLayer(PyDeepCL.ConvolutionalMaker().numFilters(8).filterSize(5).\n    padZeros().biased())\nnet.setBatchSize(32)\nprint(net.asString())\nassert 3 == net.getNumLayers()\nprint(net.getLayer(1))\nprint(net.getLayer(1).asString())\nprint(net.getLayer(1).getClassName())\nassert 'ForceBackpropMaker', net.getLayer(1).getClassName()\n"
-}

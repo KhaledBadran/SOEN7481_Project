@@ -1,9 +1,0 @@
-{
-    "functionName": "mpi_random",
-    "className": null,
-    "fileName": "/Silmathoron_&_NNGT/nngt_&_lib_&_test_functions.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Decorator asserting that all processes start with same random seed when\n    using mpi.\n    \"\"\"\ndef wrapper(func, *args, **kwargs):\n    try:\n        from mpi4py import MPI\n        comm = MPI.COMM_WORLD\n        rank = comm.Get_rank()\n        if rank == 0:\n            state = np.random.get_state()\n        else:\n            state = None\n        state = comm.bcast(state, root=0)\n        np.random.set_state(state)\n    except ImportError:\n        pass\n    return func(*args, **kwargs)\nreturn decorate(func, wrapper)\n"
-}

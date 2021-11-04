@@ -1,9 +1,0 @@
-{
-    "functionName": "test_process_request_unsupported_batch_option",
-    "className": "TestKmipEngine",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that an InvalidMessage error is generated while processing a\n        batch with an unsupported batch error continuation option.\n        \"\"\"\ne = engine.KmipEngine()\ne._logger = mock.MagicMock()\nprotocol = contents.ProtocolVersion(1, 1)\nheader = messages.RequestHeader(protocol_version=protocol, authentication=\n    contents.Authentication(), batch_error_cont_option=contents.\n    BatchErrorContinuationOption(enums.BatchErrorContinuationOption.UNDO))\nrequest = messages.RequestMessage(request_header=header)\nargs = request,\nregex = 'Undo option for batch handling is not supported.'\nsix.assertRaisesRegex(self, exceptions.InvalidMessage, regex, e.\n    process_request, *args)\n"
-}

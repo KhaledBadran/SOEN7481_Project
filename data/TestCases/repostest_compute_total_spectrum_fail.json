@@ -1,9 +1,0 @@
-{
-    "functionName": "test_compute_total_spectrum_fail",
-    "className": null,
-    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_core_&_tests_&_test_map_processing.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Failing cases: incorrect type for the mask ndarray\"\"\"\ndata_dask = da.random.random((7, 12, 20), chunks=(2, 3, 4))\nwith pytest.raises(TypeError, match=\n    \"Parameter 'mask' must be a numpy array or None\"):\n    compute_total_spectrum(data_dask, mask=mask, chunk_pixels=12)\npytest.mark.parametrize('mask', [da.random.random((7, 12)), (7, 12), 20,\n    'abcde'])"
-}

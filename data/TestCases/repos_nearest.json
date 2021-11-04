@@ -1,9 +1,0 @@
-{
-    "functionName": "_nearest",
-    "className": null,
-    "fileName": "/nipy_&_PySurfer/surfer_&_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "import scipy\nfrom scipy.sparse.csgraph import dijkstra\nif LooseVersion(scipy.__version__) < LooseVersion('1.3'):\n    raise RuntimeError('smoothing_steps=\"nearest\" requires SciPy >= 1.3')\norder = np.argsort(vertices)\nvertices = vertices[order]\n_, _, sources = dijkstra(adj_mat, False, indices=vertices, min_only=True,\n    return_predecessors=True)\ncol = np.searchsorted(vertices, sources)\ncol = order[col]\nrow = np.arange(len(col))\ndata = np.ones(len(col))\nmat = sparse.coo_matrix((data, (row, col)))\nassert mat.shape == (adj_mat.shape[0], len(vertices)), mat.shape\nreturn mat\n"
-}

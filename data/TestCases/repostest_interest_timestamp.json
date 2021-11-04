@@ -1,9 +1,0 @@
-{
-    "functionName": "test_interest_timestamp",
-    "className": "TestPolicyManagerV2",
-    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_policy_manager_v2.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "interestName = Name('/ndn/ucla/edu/something')\ncertName = self.keyChain.getPib().getIdentity(self.identityName).getKey(self\n    .keyName).getDefaultCertificate().getName()\nface = Face('localhost')\nface.setCommandSigningInfo(self.keyChain, certName)\noldInterest = Interest(interestName)\nface.makeCommandInterest(oldInterest)\ntime.sleep(0.1)\nnewInterest = Interest(interestName)\nface.makeCommandInterest(newInterest)\nvr = doVerify(self.policyManager, newInterest)\nself.assertFalse(vr.hasFurtherSteps,\n    'ConfigPolicyManager returned ValidationRequest but certificate is known')\nself.assertEqual(vr.failureCount, 0, 'Verification of valid interest failed')\nself.assertEqual(vr.successCount, 1,\n    'Verification success called {} times instead of 1'.format(vr.successCount)\n    )\nvr = doVerify(self.policyManager, oldInterest)\nself.assertFalse(vr.hasFurtherSteps,\n    'ConfigPolicyManager returned ValidationRequest but certificate is known')\nself.assertEqual(vr.successCount, 0, 'Verification of stale interest succeeded'\n    )\nself.assertEqual(vr.failureCount, 1,\n    'Failure callback called {} times instead of 1'.format(vr.failureCount))\n"
-}

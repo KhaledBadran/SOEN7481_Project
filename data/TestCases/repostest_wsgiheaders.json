@@ -1,9 +1,0 @@
-{
-    "functionName": "test_wsgiheaders",
-    "className": null,
-    "fileName": "/zeaphoo_&_cocopot_&_/tests_&_test_datastructure.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "env = {'REQUEST_METHOD': 'POST', 'SCRIPT_NAME': '/foo', 'PATH_INFO': '/bar',\n    'QUERY_STRING': 'a=1&b=2', 'SERVER_NAME': 'test.cocopot.org',\n    'SERVER_PORT': '80', 'HTTP_HOST': 'test.cocopot.org', 'SERVER_PROTOCOL':\n    'http', 'CONTENT_TYPE': 'text/plain; charset=utf-8', 'CONTENT_LENGTH':\n    '0', 'wsgi.url_scheme': 'http', 'HTTP_X_FORWARDED_FOR': '5.5.5.5'}\nuser, pwd = 'marc', 'secret'\nbasic = to_unicode(base64.b64encode(to_bytes('%s:%s' % (user, pwd))))\nenv['HTTP_AUTHORIZATION'] = 'basic %s' % basic\nenv['HTTP_COOKIE'] = 'a=a; a=b'\nw = WSGIHeaders(env)\nassert w.raw('authorization') == 'basic %s' % basic\nassert w.raw('content_type') == 'text/plain; charset=utf-8'\nassert w.raw('cookie') == 'a=a; a=b'\nassert w.raw('range') == None\nassert w['authorization'] == 'basic %s' % basic\nassert w['content_type'] == 'text/plain; charset=utf-8'\nwith pytest.raises(TypeError):\n    w['content_type'] = 'text/plain'\nwith pytest.raises(TypeError):\n    del w['range']\nassert len(w) == len(w.keys())\nassert len(w) == 6\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_nfw",
-    "className": null,
-    "fileName": "/apetri_&_LensTools/lenstools_&_tests_&_test_plane.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "snap = Gadget2Snapshot()\nsnap.setPositions(np.ones((1, 3), dtype=np.float32) * 120.0 * u.Mpc)\nsnap.weights = np.ones(1, dtype=np.float32)\nsnap.virial_radius = np.array([200.0]) * u.Mpc\nsnap.concentration = np.array([1.0])\nsnap.setHeaderInfo(box_size=240.0 * u.Mpc)\np, b, n = snap.cutPlaneGaussianGrid(center=120.0 * u.Mpc, thickness=240.0 *\n    u.Mpc, plane_resolution=256, thickness_resolution=1, left_corner=np.\n    zeros(3) * u.Mpc)\npln = PotentialPlane(p / p.max(), snap.header['box_size'],\n    comoving_distance=snap.header['comoving_distance'], unit=None,\n    num_particles=n)\npln.visualize(colorbar=True)\npln.savefig('nfw.png')\n"
-}

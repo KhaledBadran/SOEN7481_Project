@@ -1,9 +1,0 @@
-{
-    "functionName": "_set_locations",
-    "className": "Subdomain",
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_core_&_Subdomain.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        This private method is called by ``set_locations`` and\n        ``remove_locations`` as needed.\n\n        \"\"\"\nboss = self.project.find_full_domain(self)\nelement = self._parse_element(element=element, single=True)\nif element + '.' + self.name not in boss.keys():\n    boss[element + '.' + self.name] = False\nif mode == 'add':\n    if self._isa('geometry'):\n        objs = self.project.geometries().keys()\n    else:\n        objs = self.project.physics().keys()\n    for name in objs:\n        if element + '.' + name in boss.keys():\n            if np.any(boss[element + '.' + name][indices]):\n                raise Exception('Given indices already assigned to ' + name)\nmask = boss[element + '.' + self.name]\nif mode == 'add':\n    mask = mask + boss._tomask(indices=indices, element=element)\nelif mode == 'drop':\n    mask = mask * ~boss._tomask(indices=indices, element=element)\nfor item in self.keys(element=element, mode='all'):\n    self.update({item: boss[item][mask]})\nboss[element + '.' + self.name] = mask\nif mode == 'drop':\n    if ~np.any(boss[element + '.' + self.name]):\n        boss[element + '.' + self.name] = False\n"
-}

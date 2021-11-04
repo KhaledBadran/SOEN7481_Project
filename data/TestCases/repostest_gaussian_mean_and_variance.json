@@ -1,9 +1,0 @@
-{
-    "functionName": "test_gaussian_mean_and_variance",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_models_&_test_model_predict.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data = rng.randn(Ntrain, D), rng.randn(Ntrain, 1)\nXtest, _ = rng.randn(Ntest, D), rng.randn(Ntest, 1)\nkernel = Matern32() + gpflow.kernels.White()\nmodel_gp = gpflow.models.GPR(data, kernel=kernel)\nmu_f, var_f = model_gp.predict_f(Xtest)\nmu_y, var_y = model_gp.predict_y(Xtest)\nassert np.allclose(mu_f, mu_y)\nassert np.allclose(var_f, var_y - 1.0)\npytest.mark.parametrize('Ntrain, Ntest, D', [[100, 10, 2]])"
-}

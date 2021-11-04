@@ -1,9 +1,0 @@
-{
-    "functionName": "test_xavier_normal",
-    "className": null,
-    "fileName": "/Accenture_&_AmpliGraph/tests_&_ampligraph_&_latent_features_&_test_initializers.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Xavier normal initializer test\n    \"\"\"\ntf.reset_default_graph()\ntf.random.set_random_seed(0)\nxnormal_class = INITIALIZER_REGISTRY['xavier']\nxnormal_obj = xnormal_class({'uniform': False})\ntf_init = xnormal_obj.get_tf_initializer()\nvar1 = tf.get_variable(shape=(2000, 100), initializer=tf_init, name='var1')\nwith tf.Session() as sess:\n    sess.run(tf.global_variables_initializer())\n    tf_var = sess.run(var1)\n    np_var = xnormal_obj.get_np_initializer(2000, 100)\n    assert np.round(np.mean(np_var), 2) == np.round(np.mean(tf_var), 2)\n    assert np.round(np.std(np_var), 2) == np.round(np.std(tf_var), 2)\n"
-}

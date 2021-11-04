@@ -1,9 +1,0 @@
-{
-    "functionName": "test_status_card_pre_2_9_2",
-    "className": null,
-    "fileName": "/halcy_&_Mastodon.py/tests_&_test_status.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with vcr.use_cassette('test_status_card.yaml', cassette_library_dir=\n    'tests/cassettes_pre_2_9_2', record_mode='none'):\n    import time\n    status = api.status_post('http://example.org/')\n    time.sleep(5)\n    card = api.status_card(status['id'])\n    try:\n        assert card\n        assert card.url == 'http://example.org/'\n    finally:\n        api.status_delete(status['id'])\n"
-}

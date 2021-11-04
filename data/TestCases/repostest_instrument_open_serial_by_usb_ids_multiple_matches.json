@@ -1,9 +1,0 @@
-{
-    "functionName": "test_instrument_open_serial_by_usb_ids_multiple_matches",
-    "className": null,
-    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_base_instrument.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with pytest.raises(serial.SerialException):\n    fake_device = ListPortInfo()\n    fake_device.vid = 0\n    fake_device.pid = 1000\n    fake_device.serial_number = 'a1'\n    fake_device.device = 'COM1'\n    fake_device2 = ListPortInfo()\n    fake_device2.vid = 0\n    fake_device2.pid = 1000\n    fake_device2.serial_number = 'b2'\n    fake_device2.device = 'COM2'\n    mock_comports.return_value = [fake_device, fake_device2]\n    _ = ik.Instrument.open_serial(baud=1234, vid=0, pid=1000)\nmock.patch('instruments.abstract_instruments.instrument.comports')mock.patch('instruments.abstract_instruments.instrument.serial_manager')"
-}

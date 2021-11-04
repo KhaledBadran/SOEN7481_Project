@@ -1,9 +1,0 @@
-{
-    "functionName": "test_compute_annihilation_cross_section",
-    "className": "TestRambo",
-    "fileName": "/LoganAMorrison_&_Hazma/test_&_rambo_&_test_rambo.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "def msqrd_ee_to_mumu(momenta):\n    p3 = momenta[0]\n    p4 = momenta[1]\n    P = sum(momenta)\n    Q = P[0]\n    pi_mag = np.sqrt(Q ** 2 / 4.0 - me ** 2)\n    p1 = np.array([Q / 2.0, 0.0, 0.0, pi_mag])\n    p2 = np.array([Q / 2.0, 0.0, 0.0, -pi_mag])\n    return 2.0 * qe ** 4 * (MDot(p1, p4) * MDot(p2, p3) + MDot(p1, p3) *\n        MDot(p2, p4) + MDot(p1, p2) * me ** 2 + MDot(p3, p4) * mmu ** 2 + \n        2.0 * me ** 2 * mmu ** 2) / (MDot(p3, p4) + mmu ** 2) ** 2\nisp_masses = np.array([me, me])\nfsp_masses = np.array([mmu, mmu])\ncme = 1000.0\nrambo = compute_annihilation_cross_section(isp_masses, fsp_masses, cme,\n    num_ps_pts=5000, mat_elem_sqrd=msqrd_ee_to_mumu)\nanalytic = 4.0 * np.pi * alpha_em ** 2 / (3.0 * cme ** 2)\nassert_allclose(rambo[0], analytic, rtol=0.005)\n"
-}

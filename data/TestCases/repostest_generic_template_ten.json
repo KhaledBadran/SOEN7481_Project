@@ -1,9 +1,0 @@
-{
-    "functionName": "test_generic_template_ten",
-    "className": "TestGenericTemplate",
-    "fileName": "/p1r-a-t3_&_FB_Bot/Tests_&_test_generic_template.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "default_action = self.button.create_url_button('', self.url,\n    is_default_action=True)\nbuttons = list()\nfor _ in range(0, 3):\n    title = 'Test 7 - {} '.format(_)\n    buttons.append(self.button.create_url_button(title, self.url))\npayload = list()\npayload_title = 'test_generic_template_ten '\npayload.append(self.generic_template.create_single_generic_elements(\n    payload_title, buttons=buttons, default_action=default_action))\ngeneric_payload = self.generic_template.generic_template(payload, shareable\n    =True)\nself.assertNotEqual(generic_payload, None, 'Generic Payload is None! Crap!')\nstatus_code = self.facebook.send_message(generic_payload)\nself.assertEqual(status_code, 200, 'Status code is not 200! Whaaaaaaaaaaaat!')\n"
-}

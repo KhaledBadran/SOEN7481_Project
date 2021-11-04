@@ -1,9 +1,0 @@
-{
-    "functionName": "test_save_no_attrs",
-    "className": null,
-    "fileName": "/CCampJr_&_LazyHDF5/lazy5_&_tests_&_test_create.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data = np.random.randn(20, 20)\nfilename = 'temp_create.h5'\ndset_name = '/Group1/Dset'\nsave(filename, dset_name, data, mode='w')\nfof = FidOrFile(filename)\nfid = fof.fid\nassert np.allclose(fid[dset_name], data)\nfof.close_if_file_not_fid()\ndata = np.random.randn(20, 20)\nsave(filename, dset_name, data, mode='w')\nfof = FidOrFile(filename)\nfid = fof.fid\nassert np.allclose(fid[dset_name], data)\nfof.close_if_file_not_fid()\ndata = np.random.randn(20, 20)\nwith pytest.raises(IOError):\n    save(filename, dset_name, data, dset_overwrite=False)\ndata = np.random.randn(20, 20)\nattr_dict = {'AT1': 1, 'AT2': 2}\nsave(filename, dset_name, data, attr_dict=attr_dict, mode='w')\nfof = FidOrFile(filename)\nfid = fof.fid\nassert fid[dset_name].attrs['AT1'] == 1\nassert fid[dset_name].attrs['AT2'] == 2\nwith pytest.raises(KeyError):\n    fid[dset_name].attrs['DOESNOTEXIST'] == 2\nfof.close_if_file_not_fid()\ntime.sleep(1)\ntry:\n    os.remove(filename)\nexcept:\n    print('Could not delete {}'.format(filename))\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_login_profile",
-    "className": "TestLoginProfile",
-    "fileName": "/SUSE_&_Enceladus/mockboto3_&_tests_&_test_iam.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test login profile endpoints.\"\"\"\nself.client.create_user(UserName=self.user)\nresponse = self.client.create_login_profile(UserName=self.user, Password=\n    self.password)\nassert self.user == response['LoginProfile']['UserName']\nresponse = self.client.get_login_profile(UserName=self.user)\nassert response['LoginProfile']['CreateDate'] is not None\nself.client.update_login_profile(UserName=self.user, PasswordResetRequired=True\n    )\nself.client.delete_login_profile(UserName=self.user)\nmsg = (\n    'An error occurred (NoSuchEntity) when calling the GetLoginProfile operation: LoginProfile for user with name John cannot be found.'\n    )\nwith pytest.raises(MockBoto3ClientError) as e:\n    self.client.get_login_profile(UserName=self.user)\nassert msg == str(e.value)\nmock_iam"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "xref_to_name_and_label_mapping",
-    "className": null,
-    "fileName": "/opentargets_&_OnToma/ontoma_&_interface.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    builds xref to list of name and label lookup dictionary starting from an OBO file\n    \"\"\"\nxref_to_name_and_label = {}\nfor nodeid, data in obonetwork.nodes(data=True):\n    if 'xref' in data:\n        for xref in data['xref']:\n            name_and_label = {'id': nodeid, 'name': data['name']}\n            if xref in xref_to_name_and_label:\n                xref_to_name_and_label[xref].append(name_and_label)\n            else:\n                xref_to_name_and_label[xref] = [name_and_label]\nreturn xref_to_name_and_label\n"
-}

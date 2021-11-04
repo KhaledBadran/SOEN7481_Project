@@ -1,9 +1,0 @@
-{
-    "functionName": "test_subscription_transform_granularity_timeout",
-    "className": null,
-    "fileName": "/PRIArobotics_&_HedgehogServer/tests_&_test_subscription.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "async with stream_from_subscription_transform(((x, 10) for x in [0, 0, 0, 0,\n    1, 0, 1, 1, 0, None, None, None, None]), granularity_timeout=31) as s:\n    await s.expect_after(10, 0)\n    await trio.sleep(35)\n    await s.expect_after(0, 0)\n    await s.expect_after(5, 1)\n    await trio.sleep(25)\n    await s.expect_after(6, 1)\n    await s.expect_after(9, 0)\n    await s.expect_exit_after(40)\npytest.mark.trio"
-}

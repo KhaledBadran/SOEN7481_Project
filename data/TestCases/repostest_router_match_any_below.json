@@ -1,9 +1,0 @@
-{
-    "functionName": "test_router_match_any_below",
-    "className": null,
-    "fileName": "/RobertoPrevato_&_BlackSheep/tests_&_test_router.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "router = Router()\ndef a():\n    ...\ndef b():\n    ...\ndef c():\n    ...\ndef d():\n    ...\nrouter.add_get(b'/a/*', a)\nrouter.add_get(b'/b/*', b)\nrouter.add_get(b'/c/*', c)\nrouter.add_get(b'/d/*', d)\nm = router.get_match(HttpMethod.GET, b'/a')\nassert m is None\nm = router.get_match(HttpMethod.GET, b'/a/anything/really')\nassert m is not None\nassert m.handler is a\nassert m.values.get('tail') == 'anything/really'\nm = router.get_match(HttpMethod.GET, b'/b/anything/really')\nassert m is not None\nassert m.handler is b\nassert m.values.get('tail') == 'anything/really'\nm = router.get_match(HttpMethod.GET, b'/c/anything/really')\nassert m is not None\nassert m.handler is c\nassert m.values.get('tail') == 'anything/really'\nm = router.get_match(HttpMethod.GET, b'/d/anything/really')\nassert m is not None\nassert m.handler is d\nassert m.values.get('tail') == 'anything/really'\nm = router.get_match(HttpMethod.POST, b'/a/anything/really')\nassert m is None\nm = router.get_match(HttpMethod.POST, b'/b/anything/really')\nassert m is None\nm = router.get_match(HttpMethod.POST, b'/c/anything/really')\nassert m is None\nm = router.get_match(HttpMethod.POST, b'/d/anything/really')\nassert m is None\n"
-}

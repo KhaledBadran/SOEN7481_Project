@@ -1,9 +1,0 @@
-{
-    "functionName": "test_failed_mongo_insert",
-    "className": "TestPost",
-    "fileName": "/fvalverd_&_AutoApi/tests_&_views_&_test_post.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "mocked_insert_one.return_value = InsertOneResult(None, False)\nresponse = self.app.post('/%s/movies' % self.api, headers=self.headers,\n    data=json.dumps({}), content_type='application/json')\nself.assertEqual(response.status_code, 500)\nresponse_json = json.loads(response.data or '{}')\nself.assertDictContainsSubset({'message':\n    u'The resource can not be created'}, response_json)\nmock.patch.object(Collection, 'insert_one')"
-}

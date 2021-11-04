@@ -1,9 +1,0 @@
-{
-    "functionName": "test_3wxformer",
-    "className": "GetKeyFieldListTestCase",
-    "fileName": "/mzy2240_&_ESA/tests_&_test_saw.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Ensure 3WXFormer listing matches.\"\"\"\nself.assertNotIn('3wxformer', saw_14._object_key_fields)\nif VERSION in [21, 22]:\n    expected = ['BusIdentifier', 'BusIdentifier:1', 'BusIdentifier:2',\n        'LineCircuit']\nelif VERSION == 17:\n    expected = ['BusName_NomVolt:4', 'BusNum3W:3', 'LineCircuit']\nelse:\n    raise NotImplementedError(\n        'We do not know when key fields for 3 winding transformerschanged, and have thus far only looked into PWS versions 17 and 21. Please update this test if you are running a different version of Simulator.'\n        )\nself.assertListEqual(expected, saw_14.get_key_field_list('3WXFormer'))\n"
-}

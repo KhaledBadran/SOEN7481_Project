@@ -1,9 +1,0 @@
-{
-    "functionName": "calcTasQAngles",
-    "className": null,
-    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_TasUBlibDEG.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "R = buildRMatrix(UB, planeNormal, qe)\ncossgl = np.sqrt(R[0, 0] * R[0, 0] + R[1, 0] * R[1, 0])\nsgl = ss * arctan2d(-R[2, 0], cossgl)\nom = arctan2d(R[1, 0] / cossgl, R[0, 0] / cossgl)\nsgu = arctan2d(R[2, 1] / cossgl, R[2, 2] / cossgl)\nQC = tasReflectionToQC(qe, UB)\nq = np.linalg.norm(QC)\nEi = qe[3]\nEf = qe[4]\nki = np.sqrt(Ei) * factorsqrtEK\nkf = np.sqrt(Ef) * factorsqrtEK\ncos2t = (ki ** 2 + kf ** 2 - q ** 2) / (2.0 * np.abs(ki) * np.abs(kf))\nA4 = arccosd(cos2t)\ntheta = calcTheta(ki, kf, A4)\nA3 = om + ss * theta + A3Off\nA3 = np.mod(A3 + ss * 180.0, 360.0) - ss * 180.0\nreturn -A3, -A4, sgu, sgl\n"
-}

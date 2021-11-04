@@ -1,9 +1,0 @@
-{
-    "functionName": "test__same_as_above_with_parallel_overscan_thinner__columsn_outside_overscan_are_zeros",
-    "className": "TestCIParallelNonRegionArrayFromFrame",
-    "fileName": "/Jammy2211_&_PyAutoCTI/test_&_unit_&_charge_injection_&_test_ci_frame.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "pattern = ci_pattern.CIPattern(normalization=10.0, regions=[(0, 1, 0, 3), (\n    3, 4, 0, 3)])\nimage = np.array([[0.0, 1.0, 2.0], [3.0, 4.0, 5.0], [6.0, 7.0, 8.0], [9.0, \n    10.0, 11.0], [12.0, 13.0, 14.0]])\nframe = ci_frame.ChInj(frame_geometry=MockCIGeometry(parallel_overscan=(3, \n    4, 1, 2)), ci_pattern=pattern)\nnew_frame = frame.parallel_non_ci_regions_frame_from_frame(image)\nprint(new_frame)\nassert (new_frame == np.array([[0.0, 0.0, 0.0], [0.0, 4.0, 0.0], [0.0, 7.0,\n    0.0], [0.0, 0.0, 0.0], [0.0, 13.0, 0.0]])).all()\n"
-}

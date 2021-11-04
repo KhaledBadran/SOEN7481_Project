@@ -1,9 +1,0 @@
-{
-    "functionName": "test_badTransitionForCurrentState",
-    "className": "MethodicalTests",
-    "fileName": "/glyph_&_Automat/automat_&__test_&_test_methodical.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Calling any input method that lacks a transition for the machine's\n        current state raises an informative L{NoTransition}.\n        \"\"\"\nclass OnlyOnePath(object):\n    m = MethodicalMachine()\n\n    @m.state(initial=True)\n    def start(self):\n        \"\"\"Start state.\"\"\"\n\n    @m.state()\n    def end(self):\n        \"\"\"End state.\"\"\"\n\n    @m.input()\n    def advance(self):\n        \"\"\"Move from start to end.\"\"\"\n\n    @m.input()\n    def deadEnd(self):\n        \"\"\"A transition from nowhere to nowhere.\"\"\"\n    start.upon(advance, end, [])\nmachine = OnlyOnePath()\nwith self.assertRaises(NoTransition) as cm:\n    machine.deadEnd()\nself.assertIn('deadEnd', str(cm.exception))\nself.assertIn('start', str(cm.exception))\nmachine.advance()\nwith self.assertRaises(NoTransition) as cm:\n    machine.deadEnd()\nself.assertIn('deadEnd', str(cm.exception))\nself.assertIn('end', str(cm.exception))\n"
-}

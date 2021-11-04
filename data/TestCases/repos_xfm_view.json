@@ -1,9 +1,0 @@
-{
-    "functionName": "_xfm_view",
-    "className": "_Hemisphere",
-    "fileName": "/nipy_&_PySurfer/surfer_&_viz.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Normalize a given string to available view\n\n        Parameters\n        ----------\n        view: string\n            view which may match leading substring of available views\n\n        Returns\n        -------\n        good: string\n            matching view string\n        out: {'s' | 'd'}\n            's' to return string, 'd' to return dict\n\n        \"\"\"\nif view not in self.viewdict:\n    good_view = [k for k in self.viewdict if view == k[:len(view)]]\n    if len(good_view) == 0:\n        raise ValueError('No views exist with this substring')\n    if len(good_view) > 1:\n        raise ValueError(\n            'Multiple views exist with this substring.Try a longer substring')\n    view = good_view[0]\nif out == 'd':\n    return self.viewdict[view]\nelse:\n    return view\n"
-}

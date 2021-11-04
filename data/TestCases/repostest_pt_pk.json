@@ -1,9 +1,0 @@
-{
-    "functionName": "test_pt_pk",
-    "className": null,
-    "fileName": "/LSSTDESC_&_CCL/benchmarks_&_test_ptpk.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "i_d, cc = comb\nt1, t2 = cc\nreturn_bb = False\nif t2 == 'b':\n    t2 = 'i'\n    return_bb = True\nptt1 = ptt[t1]\nptt2 = ptt[t2]\na_arr = 1.0 / (1 + np.array([0.0, 0.25, 0.5, 0.75, 1.0]))[::-1]\npk = pt.get_pt_pk2d(COSMO, ptt1, tracer2=ptt2, ptc=ptc, return_ia_bb=\n    return_bb, nonlin_pk_type='spt', a_arr=a_arr)\nfor iz, z in enumerate(zs):\n    a = 1.0 / (1 + z)\n    kin = data[iz][0]\n    ind = np.where((kin < kmax) & (kin > kmin))\n    k = kin[ind]\n    dpk = data[iz][i_d + 1][ind]\n    tpk = pk.eval(k, a, COSMO)\n    print('If this fails, try updating or re-installing fast-pt:')\n    print('pip install -U fast-pt')\n    assert np.all(np.fabs(tpk / dpk - 1) < 1e-05)\npytest.mark.parametrize('comb', enumerate(order))"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_selects_user_idxs_follows_user_select_probability",
-    "className": "TestSelectingRandomUserIdxs",
-    "fileName": "/mozilla_&_CANOSP-2019/tests_&_test_fed_avg_w_dp.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "num_runs_for_average = 100\nuser_sel_prob = 0.2\ntot_users_sel = 0\nmax_perc_variation_from_sel_prob = 0.01\nfor _ in range(num_runs_for_average):\n    res = fed_avg_w_dp._get_random_selection_of_user_idxs(\n        TestSelectingRandomUserIdxs.DEFAULT_NUM_USERS, user_sel_prob)\n    tot_users_sel += len(res)\navg_users_sel_per_iter = tot_users_sel / num_runs_for_average\nexpected_avg_sel_users_per_iter = (user_sel_prob *\n    TestSelectingRandomUserIdxs.DEFAULT_NUM_USERS)\nassert _vals_are_within_percent_diff_range(avg_users_sel_per_iter,\n    expected_avg_sel_users_per_iter, max_perc_variation_from_sel_prob)\n"
-}

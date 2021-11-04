@@ -1,9 +1,0 @@
-{
-    "functionName": "test_instrument_sendcmd_noprompt_multiple_ack",
-    "className": null,
-    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_base_instrument.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "mock_filelike = mock.MagicMock()\nmock_filelike.__class__ = AbstractCommunicator\ninst = ik.Instrument(mock_filelike)\ndef new_ack(msg):\n    return [msg, 'second ack']\ninst._ack_expected = new_ack\ninst.read = mock.MagicMock(side_effect=['foobar', 'second ack'])\ninst.sendcmd('foobar')\ninst.read.assert_called_with()\ninst._file.sendcmd.assert_called_with('foobar')\n"
-}

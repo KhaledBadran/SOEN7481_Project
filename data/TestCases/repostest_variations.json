@@ -1,9 +1,0 @@
-{
-    "functionName": "test_variations",
-    "className": null,
-    "fileName": "/SimGus_&_Chatette/tests_&_unit-testing_&_cli_&_interactive_commands_&_test_hide_command.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "cmd = HideCommand('hide alias \"var#one\"')\nfacade = new_facade()\ncmd.execute()\ntry:\n    unit = AST.get_or_create()[UnitType.alias]['var']\n    assert 'one' not in unit._variation_rules\nexcept KeyError:\n    pytest.fail(\"Unexpected KeyError. Alias 'var' doesn't exist in the parser.\"\n        )\ncmd = UnhideCommand('unhide alias \"var#nothing\"')\ncmd.execute()\ncaptured = capsys.readouterr()\nassert \"Variation 'nothing' of alias 'var' \" + 'was not previously hidden.' in captured.out\ncmd = UnhideCommand('unhide ~ \"var#one\"')\ncmd.execute()\ntry:\n    unit = AST.get_or_create()[UnitType.alias]['var']\n    assert 'one' in unit._variation_rules\nexcept KeyError:\n    pytest.fail(\"Unexpected KeyError. Alias 'var' doesn't exist \" +\n        'in the parser.')\nnew_facade()\ncmd = HideCommand('hide ~ \"var#nothing\"')\ncmd.execute()\ncaptured = capsys.readouterr()\nassert \"Couldn't find variation 'nothing' in alias 'var'.\" in captured.out\ncmd = UnhideCommand('unhide ~ \"nothing#var\"')\ncmd.execute()\ncaptured = capsys.readouterr()\nassert \"Alias 'nothing' is not defined.\" in captured.out\ncmd = HideCommand('hide ~ \"var#one\"')\nfacade = new_facade()\ncmd.execute()\ncmd = HideCommand('hide ~ \"var#one\"')\nother_facade = new_facade()\ncmd.execute()\ncmd = UnhideCommand('unhide ~ \"var#one\"')\nassert cmd.command_tokens == ['unhide', '~', '\"var#one\"']\ncmd.execute()\ncmd.execute()\ncaptured = capsys.readouterr()\nassert \"[ERROR]\\tVariation 'one' is \" + \"already defined for alias 'var'.\" in captured.out\n"
-}

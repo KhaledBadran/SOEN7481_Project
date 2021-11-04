@@ -1,9 +1,0 @@
-{
-    "functionName": "test_basic_download",
-    "className": "TestCase",
-    "fileName": "/IntegralDefense_&_ACE/lib_&_saq_&_modules_&_test_url.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from saq.modules.url import CrawlphishAnalysisV2\nroot = create_root_analysis()\nroot.initialize_storage()\nurl = root.add_observable(F_URL,\n    'http://localhost:{}/test_data/crawlphish.000'.format(LOCAL_PORT))\nurl.add_directive(DIRECTIVE_CRAWL)\nroot.save()\nroot.schedule()\nengine = TestEngine()\nengine.enable_module('analysis_module_crawlphish', 'test_groups')\nengine.controlled_stop()\nengine.start()\nengine.wait()\nroot.load()\nurl = root.get_observable(url.id)\nanalysis = url.get_analysis(CrawlphishAnalysisV2)\nself.assertEquals(analysis.status_code, 200)\nself.assertEquals(analysis.file_name, 'crawlphish.000')\nself.assertTrue(analysis.downloaded)\nself.assertIsNone(analysis.error_reason)\nfile_observables = analysis.get_observables_by_type(F_FILE)\nself.assertEquals(len(file_observables), 1)\nfile_observable = file_observables[0]\nself.assertTrue(file_observable.has_directive(DIRECTIVE_EXTRACT_URLS))\nself.assertTrue(file_observable.has_relationship(R_DOWNLOADED_FROM))\n"
-}

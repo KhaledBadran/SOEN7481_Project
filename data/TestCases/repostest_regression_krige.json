@@ -1,9 +1,0 @@
-{
-    "functionName": "test_regression_krige",
-    "className": null,
-    "fileName": "/bsmurphy_&_PyKrige/tests_&_test_regression_krige.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "np.random.seed(1)\nx = np.linspace(-1.0, 1.0, 100)\nX = np.tile(x, reps=(5, 1)).T\ny = 1 + 5 * X[:, (0)] - 2 * X[:, (1)] - 2 * X[:, (2)] + 3 * X[:, (3)] + 4 * X[:\n    , (4)] + 2 * (np.random.rand(100) - 0.5)\nlon = np.linspace(-180.0, 180.0, 10)\nlat = np.linspace(-90.0, 90.0, 10)\nlon_lat = np.array(list(product(lon, lat)))\nX_train, X_test, y_train, y_test, lon_lat_train, lon_lat_test = (\n    train_test_split(X, y, lon_lat, train_size=0.7, random_state=10))\nfor ml_model, krige_method in _methods():\n    reg_kr_model = RegressionKriging(regression_model=ml_model, method=\n        krige_method, n_closest_points=2)\n    reg_kr_model.fit(X_train, lon_lat_train, y_train)\n    assert reg_kr_model.score(X_test, lon_lat_test, y_test) > 0.25\npytest.mark.skipif(not SKLEARN_INSTALLED, reason='requires scikit-learn')"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_filter_mass",
-    "className": null,
-    "fileName": "/mcs07_&_ChemSpiPy/tests_&_test_api.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test filter_mass returns a list of CSIDs.\"\"\"\nqid = cs.filter_mass(500, 0.001)\nwhile True:\n    status = cs.filter_status(qid)\n    if status['status'] in {'Suspended', 'Failed', 'Not Found', 'Complete'}:\n        break\n    time.sleep(1)\nresults = cs.filter_results(qid)\nassert len(results) > 10\n"
-}

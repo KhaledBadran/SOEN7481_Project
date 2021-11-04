@@ -1,9 +1,0 @@
-{
-    "functionName": "test_chain_resample_transition",
-    "className": null,
-    "fileName": "/jamesross2_&_Bayesian-HMM/tests_&_test_chain.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Check that resampled latent sequence conforms to deterministic transition latent\n    structure\n    \"\"\"\nlen_init = 10\nlen_total = 50\nemissions = [('e' + str(x % len_init)) for x in range(len_total)]\nstates = [('s' + str(x)) for x in range(8)]\np_initial = {s: (1 if s == states[-1] else 0) for s in states}\np_emission = {s: {e: (1 / len(set(emissions))) for e in emissions} for s in\n    states}\np_transition = {s1: {s2: (0) for s2 in states} for s1 in states}\nfor i in range(len(states)):\n    p_transition[states[i]][states[(i + 1) % len(states)]] = 1\nlatent_sequence_resampled = [states[-1]] + [states[i % len(states)] for i in\n    range(len(emissions) - 1)]\nchain = bayesian_hmm.Chain(emissions)\nchain.initialise([states[0]])\nassert all(s == states[0] for s in chain.latent_sequence)\nchain.latent_sequence = chain.resample_latent_sequence((chain.\n    emission_sequence, chain.latent_sequence), states, p_initial,\n    p_emission, p_transition)\nassert all(chain.latent_sequence[x] == latent_sequence_resampled[x] for x in\n    range(len(chain)))\n"
-}

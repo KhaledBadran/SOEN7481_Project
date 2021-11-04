@@ -1,9 +1,0 @@
-{
-    "functionName": "test_main_errors",
-    "className": null,
-    "fileName": "/ocaballeror_&_Lyricfetch/lyricfetch_&_tests_&_test_args.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test the different error conditions that can occur when calling `main()`.\n    \"\"\"\ndef empty_set():\n    return set()\ndef filled_set():\n    return set('hello world')\ndef value_error():\n    raise ValueError('whattup')\ndef fake_run(songs):\n    raise KeyboardInterrupt\nmonkeypatch.setattr(lyricfetch.cli, 'parse_argv', empty_set)\nassert main() == 1\nmonkeypatch.setattr(lyricfetch.cli, 'parse_argv', value_error)\nassert main() == 1\nmonkeypatch.setattr(lyricfetch.cli, 'parse_argv', filled_set)\nmonkeypatch.setattr(lyricfetch.cli, 'run', fake_run)\nassert main() == 1\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ShapLinearExplainer",
-    "className": "TestShapExplainer",
-    "fileName": "/IBM_&_AIX360/tests_&_shap_&_test_shap.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "corpus, y = shap.datasets.imdb()\ncorpus_train, corpus_test, y_train, y_test = train_test_split(corpus, y,\n    test_size=0.2, random_state=7)\nvectorizer = TfidfVectorizer(min_df=10)\nX_train = vectorizer.fit_transform(corpus_train)\nX_test = vectorizer.transform(corpus_test)\nmodel = sklearn.linear_model.LogisticRegression(penalty='l1', C=0.1, solver\n    ='liblinear')\nmodel.fit(X_train, y_train)\nshapexplainer = LinearExplainer(model, X_train, feature_dependence=\n    'independent')\nshap_values = shapexplainer.explain_instance(X_test)\nprint('Invoked Shap LinearExplainer')\n"
-}

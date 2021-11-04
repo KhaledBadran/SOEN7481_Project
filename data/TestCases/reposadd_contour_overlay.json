@@ -1,9 +1,0 @@
-{
-    "functionName": "add_contour_overlay",
-    "className": "_Hemisphere",
-    "fileName": "/nipy_&_PySurfer/surfer_&_viz.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Add a topographic contour overlay of the positive data\"\"\"\narray_id, pipe = self._add_scalar_data(scalar_data)\nwith warnings.catch_warnings(record=True):\n    thresh = threshold_filter(pipe, low=min)\n    surf = mlab.pipeline.contour_surface(thresh, contours=n_contours,\n        line_width=line_width, reset_zoom=False, **kwargs)\nif lut is not None:\n    l_m = surf.module_manager.scalar_lut_manager\n    l_m.load_lut_from_list(lut / 255.0)\nwith warnings.catch_warnings(record=True):\n    bar = mlab.scalarbar(surf, nb_colors=n_contours, nb_labels=n_contours + 1)\nbar.data_range = min, max\nbar.label_text_property.color = self._fg_color\nbar.scalar_bar_representation.position2 = 0.8, 0.09\nif not colorbar:\n    bar.visible = False\nreturn dict(surface=surf, colorbar=bar, brain=self, array_id=array_id)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_geweke_default_failed",
-    "className": null,
-    "fileName": "/samreay_&_ChainConsumer/tests_&_test_diagnostic.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data = np.vstack((np.random.normal(loc=0.0, size=100000), np.random.normal(\n    loc=1.0, size=100000))).T\nconsumer = ChainConsumer()\nconsumer.add_chain(data, walkers=20, name='c1')\ndata2 = data.copy()\ndata2[98000:, :] += 0.3\nconsumer.add_chain(data2, walkers=20, name='c2')\nassert not consumer.diagnostic.geweke()\n"
-}

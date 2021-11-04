@@ -1,9 +1,0 @@
-{
-    "functionName": "test_pipeline_update_hyperparam_level_two_flat",
-    "className": null,
-    "fileName": "/Neuraxio_&_Neuraxle/testing_&_test_pipeline.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "p = Pipeline([('a', SomeStep()), ('b', Pipeline([('a', SomeStep()), ('b',\n    SomeStep()), ('c', SomeStep())])), ('c', SomeStep())])\np.set_hyperparams({'b__a__learning_rate': 7, 'b__a__other_hp': 8})\np.update_hyperparams({'b__a__learning_rate': 0.01})\nassert p['b']['a'].hyperparams['learning_rate'] == 0.01\nassert p['b']['a'].hyperparams['other_hp'] == 8\nassert p['b']['c'].hyperparams == dict()\nassert p['b'].hyperparams.to_flat_as_dict_primitive() == {'a__learning_rate':\n    0.01, 'a__other_hp': 8}\nassert p['c'].hyperparams == dict()\n"
-}

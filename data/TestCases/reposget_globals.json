@@ -1,9 +1,0 @@
-{
-    "functionName": "get_globals",
-    "className": null,
-    "fileName": "/fmfn_&_BayesianOptimization/tests_&_test_util.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "X = np.array([[0.0, 0.0], [0.99, 0.99], [0.0, 0.99], [0.99, 0.0], [0.5, 0.5\n    ], [0.25, 0.5], [0.5, 0.25], [0.75, 0.5], [0.5, 0.75]])\ndef get_y(X):\n    return -(X[:, (0)] - 0.3) ** 2 - 0.5 * (X[:, (1)] - 0.6) ** 2 + 2\ny = get_y(X)\nmesh = np.dstack(np.meshgrid(np.arange(0, 1, 0.005), np.arange(0, 1, 0.005))\n    ).reshape(-1, 2)\nGP = GaussianProcessRegressor(kernel=Matern(), n_restarts_optimizer=25)\nGP.fit(X, y)\nreturn {'x': X, 'y': y, 'gp': GP, 'mesh': mesh}\n"
-}

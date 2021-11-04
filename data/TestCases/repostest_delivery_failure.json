@@ -1,9 +1,0 @@
-{
-    "functionName": "test_delivery_failure",
-    "className": "SlackSessionTestCase",
-    "fileName": "/hosford42_&_Chatty/test_chatty_&_test_sessions_&_test_slack.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "sent_at = datetime.datetime.now()\nmeta_data = SignalMetaData(origin=self.slack_config2.handle_configs[0].\n    handle, addressees=[Handle('nonexistent_channel')], sent_at=sent_at)\ncontent = 'Delivery failure'\nmessage = Message(meta_data, content)\nself.receiver_session.send(message)\nfor _ in range(self.max_receiver_delay * 1000):\n    time.sleep(0.001)\n    if self.received:\n        failure = self.received.popleft()\n        break\nelse:\n    failure = self.received.popleft()\nassert isinstance(failure, DeliveryFailure)\nassert failure.meta_data.identifier == meta_data.identifier\n"
-}

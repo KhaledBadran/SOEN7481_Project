@@ -1,9 +1,0 @@
-{
-    "functionName": "test_subscribe",
-    "className": "FlaskMQTTTestCase",
-    "fileName": "/MrLeeh_&_Flask-MQTT/tests_&_test_integration.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.mqtt = Mqtt(self.app)\nself.subscribe_handled = False\nself.unsubscribe_handled = False\n@self.mqtt.on_subscribe()\ndef handle_subscribe(client, userdata, mid_, granted_qos):\n    self.subscribe_handled = True\n@self.mqtt.on_unsubscribe()\ndef handle_unsubscribe(client, userdata, mid_):\n    self.unsubscribe_handled = True\nret, mid = self.mqtt.subscribe('home/test')\nself.assertEqual(ret, MQTT_ERR_SUCCESS)\nwait()\nret, mid = self.mqtt.unsubscribe('home/test')\nself.assertEqual(ret, MQTT_ERR_SUCCESS)\nwait()\nself.assertTrue(self.subscribe_handled)\nself.assertTrue(self.unsubscribe_handled)\n"
-}

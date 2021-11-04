@@ -1,9 +1,0 @@
-{
-    "functionName": "test_multiphase_set_occupancy_w_indices_only",
-    "className": "MultiPhaseTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_phases_&_MultiPhaseTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "m = op.phases.MultiPhase(network=self.net, phases=[self.air, self.water])\nPs_water = np.array([0, 1, 2])\nPs_water_mask = self.net.tomask(pores=Ps_water)\nTs_water = np.array([4, 12, 22])\nTs_water_mask = self.net.tomask(throats=Ts_water)\nm.set_occupancy(self.water, pores=Ps_water, throats=Ts_water)\nassert m['pore.occupancy.water'][Ps_water_mask].mean() == 1\nassert m['pore.occupancy.water'][~Ps_water_mask].mean() == 0\nassert m['throat.occupancy.water'][Ts_water_mask].mean() == 1\nassert m['throat.occupancy.water'][~Ts_water_mask].mean() == 0\n"
-}

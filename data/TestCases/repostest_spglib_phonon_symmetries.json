@@ -1,9 +1,0 @@
-{
-    "functionName": "test_spglib_phonon_symmetries",
-    "className": "TestStructureMethods",
-    "fileName": "/mesonepigreco_&_CellConstructor/scripts_&_cellconstructor_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "dyn = self.dynSky.Copy()\ndyn_qe = dyn.Copy()\ndyn_qe.Symmetrize()\ndyn_spglib = dyn.Copy()\ndyn_spglib.SymmetrizeSupercell()\nfor i, iq in enumerate(dyn.q_tot):\n    delta = dyn_qe.dynmats[i] - dyn_spglib.dynmats[i]\n    delta = np.sqrt(np.sum(np.abs(delta) ** 2))\n    self.assertAlmostEqual(delta, 0)\n"
-}

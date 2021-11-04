@@ -1,9 +1,0 @@
-{
-    "functionName": "test_single_qubit_flux_manual01",
-    "className": "Test_advance",
-    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_cc_light.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ql.set_option('cz_mode', 'manual')\nconfig_fn = os.path.join(curdir, 'hardware_config_cc_light.json')\nplatform = ql.Platform('seven_qubits_chip', config_fn)\nnum_qubits = platform.get_qubit_number()\np = ql.Program('test_single_qubit_flux_manual01', platform, num_qubits)\nk = ql.Kernel('aKernel', platform, num_qubits)\nk.gate('prepz', [0])\nk.gate('prepz', [2])\nk.gate('sqf', [2])\np.add_kernel(k)\np.compile()\n"
-}

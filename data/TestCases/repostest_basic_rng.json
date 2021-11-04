@@ -1,9 +1,0 @@
-{
-    "functionName": "test_basic_rng",
-    "className": null,
-    "fileName": "/CCampJr_&_CRIkit2/crikit_&_preprocess_&_tests_&_test_als.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "x = np.linspace(-100, 100, 1000)\ny = 10 * np.exp(-(x ** 2 / (2 * 20 ** 2)))\nrng = np.arange(200, 800)\nals = AlsCvxopt(smoothness_param=1, asym_param=0.001, rng=rng, redux=1,\n    fix_end_points=False, fix_rng=None, verbose=True)\ny_als = als.calculate(y)\nnp.testing.assert_almost_equal(y[..., rng], y_als[..., rng], decimal=2)\nnp.testing.assert_allclose(y_als[:200], 0)\nnp.testing.assert_allclose(y_als[800:], 0)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_2_button_template_with_web_url",
-    "className": "TestButtonTemplate",
-    "fileName": "/p1r-a-t3_&_FB_Bot/Tests_&_test_button_template.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Button Template test with Web URL buttons with messenger_extension TRUE\n        This function tests the default_action option with Button Template.\n        \"\"\"\nbuttons = list()\n\"\"\"\n        TODO: whitelisting format changed!\n        TODO: There has to be a good function for this feature!\n        For this test, domain has been whitelisted from the page settings\n        \"\"\"\ntitle = 'Test 2 - {}'.format(1)\nbuttons.append(self.button.create_url_button(title, self.url,\n    messenger_extensions=True, fallback_url=self.url))\ntitle_text = 'test_button_template_with_web_url - Test 2 - {}'.format(1)\nbutton_payload = self.template.button_template(title_text, buttons)\nstatus_code = self.facebook.send_message(button_payload)\nself.assertEqual(status_code, 200, 'test2_button_template web_url')\n"
-}

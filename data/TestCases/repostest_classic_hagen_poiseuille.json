@@ -1,9 +1,0 @@
-{
-    "functionName": "test_classic_hagen_poiseuille",
-    "className": "HydraulicConductanceTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_physics_&_HydraulicConductanceTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.geo['pore.diameter'] = 1.0\nself.geo['throat.diameter'] = 1.0\nself.geo['throat.length'] = 1e-09\nself.air = op.phases.Air(network=self.net)\nself.phys = op.physics.GenericPhysics(network=self.net, phase=self.air,\n    geometry=self.geo)\nmod = op.models.physics.hydraulic_conductance.classic_hagen_poiseuille\nself.phys.add_model(propname='throat.conductance', model=mod)\nassert _np.allclose(a=self.phys['throat.conductance'][0], b=1330.68207684)\n"
-}

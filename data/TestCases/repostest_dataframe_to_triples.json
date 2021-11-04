@@ -1,9 +1,0 @@
-{
-    "functionName": "test_dataframe_to_triples",
-    "className": null,
-    "fileName": "/Accenture_&_AmpliGraph/tests_&_ampligraph_&_utils_&_test_model_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "X = pd.read_csv(\n    'https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv')\nschema = [('species', 'has_sepal_length', 'sepal_length')]\nnpt.assert_array_equal(dataframe_to_triples(X, schema)[0], np.array([\n    'setosa', 'has_sepal_length', '5.1']))\nschema = [('species', 'has_sepal_length', 'abc')]\ntry:\n    dataframe_to_triples(X, schema)\nexcept:\n    assert True\nschema = [('species', 'has_sepal_length', 'sepal_length')]\ntry:\n    dataframe_to_triples(X, schema)\nexcept:\n    assert True\n"
-}

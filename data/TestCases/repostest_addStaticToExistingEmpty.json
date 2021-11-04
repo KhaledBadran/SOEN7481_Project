@@ -1,9 +1,0 @@
-{
-    "functionName": "test_addStaticToExistingEmpty",
-    "className": "PlaylistTests",
-    "fileName": "/kaltura_&_KalturaGeneratedAPIClientsPython/KalturaClient_&_tests_&_test_playlist.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "referenceId = 'pytest.PlaylistTests.test_addStaticToExistingEmpty'\nkplaylist = KalturaPlaylist()\nkplaylist.setName(referenceId)\nkplaylist.setReferenceId(referenceId)\nkplaylist.setPlaylistType(KalturaPlaylistType(KalturaPlaylistType.STATIC_LIST))\nkplaylist = self.client.playlist.add(kplaylist)\nself.addCleanup(self.client.playlist.delete, kplaylist.getId())\nplaylistId = kplaylist.getId()\nmediaEntry = KalturaMediaEntry()\nmediaEntry.setName(referenceId)\nmediaEntry.setMediaType(KalturaMediaType(KalturaMediaType.VIDEO))\nulFile = getTestFile('DemoVideo.flv')\nuploadTokenId = self.client.media.upload(ulFile)\nmediaEntry = self.client.media.addFromUploadedFile(mediaEntry, uploadTokenId)\nself.addCleanup(self.client.media.delete, mediaEntry.getId())\nnewplaylist = KalturaPlaylist()\nnewplaylist.setReferenceId(referenceId)\nplaylistContent = u','.join([mediaEntry.getId()])\nnewplaylist.setPlaylistContent(playlistContent)\nself.client.playlist.update(playlistId, newplaylist)\nresultPlaylist = self.client.playlist.get(playlistId)\nself.assertEqual(playlistContent, resultPlaylist.getPlaylistContent())\n"
-}

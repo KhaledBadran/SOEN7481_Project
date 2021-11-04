@@ -1,9 +1,0 @@
-{
-    "functionName": "test_scoring_custom_metrics",
-    "className": null,
-    "fileName": "/tvdboom_&_ATOM/tests_&_test_basemodel.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Assert that the scoring methods works for custom metrics.\"\"\"\natom = ATOMClassifier(X_bin, y_bin, random_state=1)\natom.run('MNB')\nfor metric in ['cm', 'confusion_matrix']:\n    assert isinstance(atom.mnb.scoring(metric), np.ndarray)\nfor metric in ['tn', 'fp', 'fn', 'tp']:\n    assert isinstance(atom.mnb.scoring(metric), int)\nfor metric in ['lift', 'fpr', 'tpr', 'sup']:\n    assert isinstance(atom.mnb.scoring(metric), float)\n"
-}

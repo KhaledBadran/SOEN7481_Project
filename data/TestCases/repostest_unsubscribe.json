@@ -1,9 +1,0 @@
-{
-    "functionName": "test_unsubscribe",
-    "className": null,
-    "fileName": "/EclecticIQ_&_OpenTAXII/tests_&_services_&_test_subscription_management.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "service = server.get_service('collection-management-A')\nheaders = prepare_headers(version, https)\nparams = dict(response_type=RT_FULL, content_bindings=[CB_STIX_XML_111,\n    CUSTOM_CONTENT_BINDING])\nrequest = prepare_request(collection=COLLECTION_OPEN, action=ACT_SUBSCRIBE,\n    version=version, params=params)\nresponse = service.process(headers, request)\nassert len(response.subscription_instances) == 1\nsubs = response.subscription_instances[0]\nassert subs.subscription_id\nsubscription_id = subs.subscription_id\nINVALID_ID = 'RANDOM-WRONG-SUBSCRIPTION'\nrequest = prepare_request(collection=COLLECTION_OPEN, action=\n    ACT_UNSUBSCRIBE, subscription_id=INVALID_ID, version=version)\nresponse = service.process(headers, request)\nassert len(response.subscription_instances) == 1\nsubs = response.subscription_instances[0]\nassert subs.subscription_id == INVALID_ID\nrequest = prepare_request(collection=COLLECTION_OPEN, action=\n    ACT_UNSUBSCRIBE, subscription_id=subscription_id, version=version)\nresponse = service.process(headers, request)\nassert len(response.subscription_instances) == 1\nsubs = response.subscription_instances[0]\nassert subs.subscription_id == subscription_id\nif version == 11:\n    assert subs.status == SS_UNSUBSCRIBED\nassert server.persistence.get_subscription(subscription_id\n    ).status == SS_UNSUBSCRIBED\npytest.mark.parametrize('https', [True, False])pytest.mark.parametrize('version', [11, 10])"
-}

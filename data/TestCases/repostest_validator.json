@@ -1,9 +1,0 @@
-{
-    "functionName": "test_validator",
-    "className": null,
-    "fileName": "/marten-de-vries_&_Flask-WebSub/tests_&_test_integration.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "on_error = Mock()\nsubscriber.add_error_handler(on_error)\nerror = 'invalid URL'\n@hub.register_validator\ndef validate(callback_url, topic_url, *args):\n    if not topic_url.startswith('http://example.com'):\n        return error\ntopic = 'http://invalid.com'\nid = subscriber.subscribe(topic_url=topic, hub_url='http://localhost:5001/hub')\nwhile not on_error.called:\n    pass\non_error.assert_called_with(topic, id, error)\ntopic = 'http://example.com/abc'\non_success = Mock()\nsubscriber.add_success_handler(on_success)\nid = subscriber.subscribe(topic_url=topic, hub_url='http://localhost:5001/hub')\nwhile not on_success.called:\n    pass\non_success.assert_called_with(topic, id, 'subscribe')\n"
-}

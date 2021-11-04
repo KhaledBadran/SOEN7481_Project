@@ -1,9 +1,0 @@
-{
-    "functionName": "test_print_file_and_plot",
-    "className": "TestStatSubLocal",
-    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_stat_sublocal.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "out_stat = StringIO()\nsub = {'Unknown': 1, 'CellWall': 1, 'Cytoplasmic': 2}\ntotal_nums = {'Staphylococcus_aureus_HG002': 1,\n    'Staphylococcus_aureus_HG003': 3, 'all_strain': 4}\nunknown_nums = {'Staphylococcus_aureus_HG002': 1,\n    'Staphylococcus_aureus_HG003': 0, 'all_strain': 1}\nss.print_file_and_plot(sub, total_nums, unknown_nums, 'all_strain',\n    out_stat, self.test_folder + '/')\ndatas = out_stat.getvalue().split('\\n')\nfor data in datas:\n    if 'Total with Unknown' in data:\n        self.assertEqual(data,\n            'Total including Unknown is 4; Total excluding Unknown is 3')\n    elif 'CellWall' in data:\n        self.assertEqual(data,\n            '\\tCellWall\\t1(including Unknown 0.25; excluding Unknonwn 0.3333333333333333)'\n            )\n    elif 'Cytoplasmic' in data:\n        self.assertEqual(data,\n            '\\tCytoplasmic\\t2(including Unknown 0.5; excluding Unknonwn 0.6666666666666666)'\n            )\n    elif 'include Unknown' in data:\n        self.assertEqual(data, '\\tUnknown\\t1(including Unknown 0.25)')\n"
-}

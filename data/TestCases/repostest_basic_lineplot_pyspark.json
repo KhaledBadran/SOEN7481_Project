@@ -1,9 +1,0 @@
-{
-    "functionName": "test_basic_lineplot_pyspark",
-    "className": null,
-    "fileName": "/PatrikHlobil_&_Pandas-Bokeh/Tests_&_test_PySpark.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test for basic lineplot with Pyspark\"\"\"\nnp.random.seed(42)\ndf = pd.DataFrame({'Google': np.random.randn(1000) + 0.2, 'Apple': np.\n    random.randn(1000) + 0.17}, index=pd.date_range('1/1/2000', periods=1000))\ndf.index.name = 'Date'\ndf = df.cumsum()\ndf = df + 50\ndf = spark.createDataFrame(df.reset_index())\np_basic_lineplot = df.plot_bokeh(kind='line', x='Date', show_figure=False)\np_basic_lineplot_accessor = df.plot_bokeh.line(x='Date', show_figure=False)\noutput = pandas_bokeh.row([p_basic_lineplot, p_basic_lineplot_accessor])\nwith open(os.path.join(directory, 'Plots', 'Basic_lineplot_PySpark.html'), 'w'\n    ) as f:\n    f.write(pandas_bokeh.embedded_html(output))\nassert True\n"
-}

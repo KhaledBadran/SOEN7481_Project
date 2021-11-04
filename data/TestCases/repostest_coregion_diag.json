@@ -1,9 +1,0 @@
-{
-    "functionName": "test_coregion_diag",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_kernels_&_test_kernels.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "X = np.random.randint(0, output_dim, (N, input_dim))\nkernel = gpflow.kernels.Coregion(output_dim=output_dim, rank=rank)\nkernel.W = rng.randn(output_dim, rank)\nkernel.kappa = rng.randn(output_dim, 1).reshape(-1) + 1.0\nK = kernel(X)\nKdiag = kernel.K_diag(X)\nassert np.allclose(np.diag(K), Kdiag)\npytest.mark.parametrize('N, input_dim, output_dim, rank', [[10, 1, 3, 2]])"
-}

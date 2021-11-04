@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ols_one_data_point",
-    "className": "PerfectCorrelationMultivariateOLSTests",
-    "fileName": "/Mogeng_&_IOHMM/tests_&_test_OLS.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.model = OLS(solver='pinv', fit_intercept=True, est_stderr=True,\n    reg_method=None, alpha=0, l1_ratio=0, tol=0.0001, max_iter=100, coef=\n    None, stderr=None, dispersion=None)\nself.model.fit(self.X[0:1, :], self.Y[0:1,], sample_weight=0.5)\nself.assertEqual(self.model.coef.shape, (2, 7))\nnp.testing.assert_array_almost_equal(self.model.dispersion, np.array([[0, 0\n    ], [0, 0]]), decimal=6)\nnp.testing.assert_array_equal(self.model.loglike_per_sample(self.X[0:1, :],\n    self.Y[0:1,]), np.array([0]))\nnp.testing.assert_array_almost_equal(self.model.loglike_per_sample(np.array\n    (self.X[0:1, :].tolist() * 6), np.array([[60323, 60323], [0, 60323], [\n    60323, 60323], [60322, 60323], [60322, 60322], [60323, 60323]])), np.\n    array([0, -np.Infinity, 0, -np.Infinity, -np.Infinity, 0]), decimal=3)\n"
-}

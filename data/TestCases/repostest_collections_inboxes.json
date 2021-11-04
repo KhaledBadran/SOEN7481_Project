@@ -1,9 +1,0 @@
-{
-    "functionName": "test_collections_inboxes",
-    "className": null,
-    "fileName": "/EclecticIQ_&_OpenTAXII/tests_&_services_&_test_collection_management.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "version = 11\nservice = server.get_service('collection-management-A')\nheaders = prepare_headers(version, https)\nrequest = prepare_request(version)\nresponse = service.process(headers, request)\nfor coll in response.collection_informations:\n    inboxes = coll.receiving_inbox_services\n    assert len(inboxes) == ASSIGNED_INBOX_INSTANCES\npytest.mark.parametrize('https', [True, False])"
-}

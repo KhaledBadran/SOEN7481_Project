@@ -1,9 +1,0 @@
-{
-    "functionName": "test_detach_user_policy_exception",
-    "className": "TestUserPolicy",
-    "fileName": "/SUSE_&_Enceladus/mockboto3_&_tests_&_test_iam.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test detach non existent user policy raises exception.\"\"\"\nmsg = (\n    'An error occurred (NoSuchEntity) when calling the DetachUserPolicy operation: The policy with name Admins is not attached to the user with name John.'\n    )\nself.client.create_user(UserName=self.user)\nwith pytest.raises(MockBoto3ClientError) as e:\n    self.client.detach_user_policy(UserName=self.user, PolicyArn=self.policy)\nassert msg == str(e.value)\nmock_iam"
-}

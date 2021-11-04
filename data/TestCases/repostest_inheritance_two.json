@@ -1,9 +1,0 @@
-{
-    "functionName": "test_inheritance_two",
-    "className": "NamespaceTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_namespace.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "collection = lookup.TemplateLookup()\ncollection.put_string('base.html',\n    \"\"\"\n            <%def name=\"foo()\">\n                base.foo\n            </%def>\n\n            <%def name=\"bat()\">\n                base.bat\n            </%def>\n\"\"\"\n    )\ncollection.put_string('lib.html',\n    \"\"\"\n            <%inherit file=\"base.html\"/>\n            <%def name=\"bar()\">\n                lib.bar\n                ${parent.foo()}\n                ${self.foo()}\n                ${parent.bat()}\n                ${self.bat()}\n            </%def>\n\n            <%def name=\"foo()\">\n                lib.foo\n            </%def>\n\n        \"\"\"\n    )\ncollection.put_string('front.html',\n    \"\"\"\n            <%namespace name=\"lib\" file=\"lib.html\"/>\n            ${lib.bar()}\n        \"\"\"\n    )\nassert result_lines(collection.get_template('front.html').render()) == [\n    'lib.bar', 'base.foo', 'lib.foo', 'base.bat', 'base.bat']\n"
-}

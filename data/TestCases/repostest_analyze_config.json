@@ -1,9 +1,0 @@
-{
-    "functionName": "test_analyze_config",
-    "className": "AvlTestOffline",
-    "fileName": "/shmir_&_PyAvalanche/avalanche_&_test_&_test_offline.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Analyze existing configuration. \"\"\"\nself.logger.info(AvlTestOffline.test_analyze_config.__doc__.strip())\nself.avl.load_config(path.join(path.dirname(__file__),\n    'configs/test_config.spf'))\nassert len(self.avl.project.tests) == 3\nself.avl.api.get(self.avl.project.ref)\ntest = self.avl.api.get(self.avl.project.ref, 'tests').split(' ')[0]\nname = self.avl.api.get(test, 'name')\nself.avl.api.config(test, name=name + '_')\nassert self.avl.api.get(test, 'name') == name + '_'\n"
-}

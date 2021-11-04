@@ -1,9 +1,0 @@
-{
-    "functionName": "test_lenet_distributed_rdd",
-    "className": "TestBackend",
-    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_keras_&_test_backend.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "kmodel, X_train, y_train = TestModels.kmodel_seq_lenet_mnist()\nsc = get_spark_context()\nfrom bigdl.util.common import Sample\nfrom bigdl.util.common import to_sample_rdd\ntraining_rdd = to_sample_rdd(X_train, y_train)\nself.modelTest(X_train, kmodel, dump_weights=True)\nkmodel.compile(loss='categorical_crossentropy', optimizer='adam', metrics=[\n    'accuracy'])\nmodel = with_bigdl_backend(kmodel)\nmodel.fit(training_rdd, batch_size=4, nb_epoch=2, validation_data=\n    training_rdd, is_distributed=True)\nmodel.predict(X_train, is_distributed=True).collect()\nmodel.evaluate(X_train, y_train, is_distributed=True)\nprint(model)\n"
-}

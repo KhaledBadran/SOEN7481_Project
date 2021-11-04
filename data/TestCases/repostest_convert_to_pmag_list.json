@@ -1,9 +1,0 @@
-{
-    "functionName": "test_convert_to_pmag_list",
-    "className": "TestMagicDataFrame",
-    "fileName": "/PmagPy_&_PmagPy/pmagpy_tests_&_test_contribution_builder.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "directory = os.path.join(WD, 'data_files', '3_0', 'Megiddo')\nfname = os.path.join(directory, 'sites.txt')\ndf = cb.MagicDataFrame(fname)\ndf.df.loc['mgq04t1', 'age_high'] = np.nan\ndf.df.loc['mgq04t1', 'age_low'] = None\nfor val in df.df.loc['mgq04t1', 'age_high'].values:\n    self.assertTrue(np.isnan(val))\nfor val in df.df.loc['mgq04t1', 'age_low'].values:\n    self.assertTrue(val is None)\nlst = df.convert_to_pmag_data_list()\nrelevant_lst = pmag.get_dictitem(lst, 'site', 'mgq04t1', 'T')\nfor i in relevant_lst:\n    self.assertEqual(i['age_high'], '')\n    self.assertEqual(i['age_low'], '')\nself.assertEqual(str, type(relevant_lst[0]['age']))\n"
-}

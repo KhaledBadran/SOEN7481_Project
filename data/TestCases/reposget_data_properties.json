@@ -1,9 +1,0 @@
-{
-    "functionName": "get_data_properties",
-    "className": "Brain",
-    "fileName": "/nipy_&_PySurfer/surfer_&_viz.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\" Get properties of the data shown\n\n        Returns\n        -------\n        props : dict\n            Dictionary with data properties\n\n            props[\"fmin\"] : minimum colormap\n            props[\"fmid\"] : midpoint colormap\n            props[\"fmax\"] : maximum colormap\n            props[\"transparent\"] : lower part of colormap transparent?\n            props[\"time\"] : time points\n            props[\"time_idx\"] : current time index\n            props[\"smoothing_steps\"] : number of smoothing steps\n        \"\"\"\nprops = dict()\nkeys = ['fmin', 'fmid', 'fmax', 'transparent', 'time', 'time_idx',\n    'smoothing_steps', 'center']\ntry:\n    if self.data_dict['lh'] is not None:\n        hemi = 'lh'\n    else:\n        hemi = 'rh'\n    for key in keys:\n        props[key] = self.data_dict[hemi][key]\nexcept KeyError:\n    for key in keys:\n        props[key] = 0\nreturn props\n"
-}

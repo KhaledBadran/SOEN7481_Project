@@ -1,9 +1,0 @@
-{
-    "functionName": "handle_update",
-    "className": "ProcessHandler",
-    "fileName": "/PRIArobotics_&_HedgehogClient/hedgehog_&_client_&_async_handlers.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "if isinstance(update, process.StreamUpdate):\n    if update.fileno == process.STDOUT:\n        if self._on_stdout is not None:\n            await self._on_stdout(self.pid, update.fileno, update.chunk)\n    elif self._on_stderr is not None:\n        await self._on_stderr(self.pid, update.fileno, update.chunk)\nelif isinstance(update, process.ExitUpdate):\n    if self._on_exit is not None:\n        await self._on_exit(self.pid, update.exit_code)\nelse:\n    assert False, update\n"
-}

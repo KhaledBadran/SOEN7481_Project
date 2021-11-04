@@ -1,9 +1,0 @@
-{
-    "functionName": "test_modify_initiator_set_fcid",
-    "className": "CITestProvisioning",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test modify_initiator set fcid.\"\"\"\nself.skipTest('test_modify_initiator_set_fcid - OPT 564116')\ninitiator = self.provisioning.get_in_use_initiator()\ninitiator_details = self.provisioning.get_initiator(initiator)\nold_fcid = ''\nif constants.FCID in initiator_details:\n    old_fcid = initiator_details[constants.FCID]\nnew_fcid = '999999'\nself.provisioning.modify_initiator(initiator, set_fcid=new_fcid)\ninitiator_details = self.provisioning.get_initiator(initiator)\nself.assertEqual(new_fcid, initiator_details[constants.FCID])\nself.provisioning.modify_initiator(initiator, set_fcid=old_fcid)\n"
-}

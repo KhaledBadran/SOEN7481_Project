@@ -1,9 +1,0 @@
-{
-    "functionName": "test_run_cmd_retry",
-    "className": null,
-    "fileName": "/AmadeusITGroup_&_JumpSSH/tests_&_test__session.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "gateway_ip, gateway_port = docker_env.get_host_ip_port()\ngateway_session = SSHSession(host=gateway_ip, port=gateway_port, username=\n    'user1', password='password1').open()\nwith pytest.raises(exception.RunCmdError) as exc_info:\n    gateway_session.run_cmd('dummy commmand', retry=2, retry_interval=1)\nassert exc_info.value.runs_nb == 3\ntemporary_filename1 = util.id_generator(size=7)\ncmd = \"echo -n 'p' >> {0} && grep 'pppp' {0}\".format(temporary_filename1)\nwith pytest.raises(exception.RunCmdError) as exc_info:\n    gateway_session.run_cmd(cmd, retry=2, retry_interval=1)\nassert exc_info.value.runs_nb == 3\ntemporary_filename2 = util.id_generator(size=8)\ncmd = cmd.replace(temporary_filename1, temporary_filename2)\nresult = gateway_session.run_cmd(cmd, retry=3, retry_interval=1)\nassert len(result.result_list) == 0\ntemporary_filename3 = util.id_generator(size=8)\ncmd = cmd.replace(temporary_filename2, temporary_filename3)\nresult = gateway_session.run_cmd(cmd, retry=3, retry_interval=1,\n    keep_retry_history=True)\nassert len(result.result_list) == 4\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_redshiftcopy",
-    "className": null,
-    "fileName": "/capitalone_&_Data-Load-and-Copy-using-Python/tests_&_test_redshift.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with mock.patch(dbapi.__name__ + '.connect') as mock_connect:\n    r = locopy.Redshift(dbapi=dbapi, **credentials)\n    r.connect()\n    r.copy('table', 's3bucket')\n    assert mock_connect.return_value.cursor.return_value.execute.called\n    mock_connect.return_value.cursor.return_value.execute.assert_called_with(\n        \"COPY table FROM 's3bucket' CREDENTIALS 'aws_access_key_id={0};aws_secret_access_key={1};token={2}' DELIMITER '|' DATEFORMAT 'auto' COMPUPDATE ON TRUNCATECOLUMNS;\"\n        .format(r.session.get_credentials().access_key, r.session.\n        get_credentials().secret_key, r.session.get_credentials().token), ())\n    r.copy('table', 's3bucket', delim='\\t')\n    assert mock_connect.return_value.cursor.return_value.execute.called\n    mock_connect.return_value.cursor.return_value.execute.assert_called_with(\n        \"COPY table FROM 's3bucket' CREDENTIALS 'aws_access_key_id={0};aws_secret_access_key={1};token={2}' DELIMITER '\\t' DATEFORMAT 'auto' COMPUPDATE ON TRUNCATECOLUMNS;\"\n        .format(r.session.get_credentials().access_key, r.session.\n        get_credentials().secret_key, r.session.get_credentials().token), ())\npytest.mark.parametrize('dbapi', DBAPIS)mock.patch('locopy.s3.Session')"
-}

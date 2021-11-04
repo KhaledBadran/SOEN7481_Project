@@ -1,9 +1,0 @@
-{
-    "functionName": "test_team_create_sub_team",
-    "className": "TeamTest",
-    "fileName": "/cmsteffen-code_&_PyKBLib/tests_&_test_pykblib_team.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.team._keybase.create_team.side_effect = KeybaseException(\n    'Could not create team test_team.sub_team.')\nwith self.assertRaises(TeamException):\n    self.team.create_sub_team('sub_team')\nself.team._keybase.create_team.assert_called_with('test_team.sub_team')\nself.team._keybase.create_team.side_effect = None\nself.team._keybase.create_team.return_value = 'team_instance'\nself.assertEqual(self.team.create_sub_team('sub_team2'), 'team_instance')\nself.team._keybase.create_team.return_value = 'different_string'\nself.assertEqual(self.team.create_sub_team('sub_team2'), 'different_string')\n"
-}

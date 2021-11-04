@@ -1,9 +1,0 @@
-{
-    "functionName": "test_to_tree_returns_a_tree",
-    "className": null,
-    "fileName": "/Rambatino_&_CHAID/tests_&_test_tree.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test that the to_tree() method returns expected result\n    \"\"\"\ngender = np.array([0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1])\nincome = np.array([0, 0, 1, 1, 2, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0])\nndarr = np.transpose(np.vstack([gender]))\ntree = CHAID.Tree.from_numpy(ndarr, income, alpha_merge=0.9,\n    min_child_node_size=1, min_parent_node_size=1)\nassert isinstance(tree.to_tree(), TreeLibTree), 'A TreeLib object is returned'\nassert len(tree.tree_store) == len(tree.to_tree().nodes\n    ), 'The tree contains the correct number of nodes'\n"
-}

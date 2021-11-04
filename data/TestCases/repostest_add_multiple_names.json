@@ -1,9 +1,0 @@
-{
-    "functionName": "test_add_multiple_names",
-    "className": "TestX509Certificate",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_objects_&_test_x509_certificate.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that multiple names can be added to a managed object. This\n        verifies a few properties. First this verifies that names can be added\n        using simple strings. It also verifies that the index for each\n        subsequent string is set accordingly. Finally this tests that the names\n        can be saved and retrieved from the database.\n        \"\"\"\nexpected_names = ['bowser', 'frumpy', 'big fat cat']\ncert = X509Certificate(self.bytes_a, name=expected_names[0])\ncert.names.append(expected_names[1])\ncert.names.append(expected_names[2])\nself.assertEquals(3, cert.name_index)\nexpected_mo_names = list()\nfor i, name in enumerate(expected_names):\n    expected_mo_names.append(sqltypes.ManagedObjectName(name, i))\nself.assertEquals(expected_mo_names, cert._names)\nSession = sessionmaker(bind=self.engine)\nsession = Session()\nsession.add(cert)\nsession.commit()\nsession = Session()\nget_obj = session.query(X509Certificate).filter(ManagedObject.\n    unique_identifier == cert.unique_identifier).one()\nsession.commit()\nself.assertEquals(expected_mo_names, get_obj._names)\n"
-}

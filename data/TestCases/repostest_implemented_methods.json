@@ -1,9 +1,0 @@
-{
-    "functionName": "test_implemented_methods",
-    "className": null,
-    "fileName": "/PythonOT_&_POT/test_&_test_unbalanced.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "IMPLEMENTED_METHODS = ['sinkhorn', 'sinkhorn_stabilized']\nTO_BE_IMPLEMENTED_METHODS = ['sinkhorn_reg_scaling']\nNOT_VALID_TOKENS = ['foo']\nn = 3\nrng = np.random.RandomState(42)\nx = rng.randn(n, 2)\na = ot.utils.unif(n)\nb = ot.utils.unif(n) * 1.5\nA = rng.rand(n, 2)\nM = ot.dist(x, x)\nepsilon = 1.0\nreg_m = 1.0\nfor method in IMPLEMENTED_METHODS:\n    ot.unbalanced.sinkhorn_unbalanced(a, b, M, epsilon, reg_m, method=method)\n    ot.unbalanced.sinkhorn_unbalanced2(a, b, M, epsilon, reg_m, method=method)\n    barycenter_unbalanced(A, M, reg=epsilon, reg_m=reg_m, method=method)\nwith pytest.warns(UserWarning, match='not implemented'):\n    for method in set(TO_BE_IMPLEMENTED_METHODS):\n        ot.unbalanced.sinkhorn_unbalanced(a, b, M, epsilon, reg_m, method=\n            method)\n        ot.unbalanced.sinkhorn_unbalanced2(a, b, M, epsilon, reg_m, method=\n            method)\n        barycenter_unbalanced(A, M, reg=epsilon, reg_m=reg_m, method=method)\nwith pytest.raises(ValueError):\n    for method in set(NOT_VALID_TOKENS):\n        ot.unbalanced.sinkhorn_unbalanced(a, b, M, epsilon, reg_m, method=\n            method)\n        ot.unbalanced.sinkhorn_unbalanced2(a, b, M, epsilon, reg_m, method=\n            method)\n        barycenter_unbalanced(A, M, reg=epsilon, reg_m=reg_m, method=method)\n"
-}

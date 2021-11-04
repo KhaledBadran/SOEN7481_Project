@@ -1,9 +1,0 @@
-{
-    "functionName": "test_interleave_data_object",
-    "className": "SubdomainTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_core_&_SubdomainTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "net = op.network.Cubic(shape=[2, 2, 2])\nPs = net.pores('top')\ngeom1 = op.geometry.GenericGeometry(network=net, pores=Ps)\nPs = net.pores('bottom')\n_ = op.geometry.GenericGeometry(network=net, pores=Ps)\ngeom1['pore.blah'] = [[1, 2], [1, 2, 3], [1, 2, 3, 4], [1]]\nassert 'object' in net['pore.blah'].dtype.name\nassert np.sum([(item is None) for item in net['pore.blah']]) == 4\n"
-}

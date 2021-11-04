@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_initiator_ids_from_host",
-    "className": "CITestProvisioning",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test get_initiator_ids_from_host.\"\"\"\npattern = '{wwn}|{iscsi}'.format(wwn=constants.WWN_SEARCH_PATTERN_16, iscsi\n    =constants.ISCSI_IQN_SEARCH_PATTERN)\nhost_list = self.provisioning.get_host_list()\nhost_list = [host for host in host_list if '_CLOUD' not in host]\nfor host in host_list:\n    host_details = self.provisioning.get_host(host)\n    initiator_ids = self.provisioning.get_initiator_ids_from_host(host)\n    self.assertIsInstance(initiator_ids, list)\n    if host_details[constants.NUM_OF_INITIATORS] > 0:\n        initiators = host_details[constants.INITIATOR]\n        for initiator in initiators:\n            self.assertIsInstance(initiator, str)\n            self.assertIsNotNone(re.match(pattern, initiator))\n"
-}

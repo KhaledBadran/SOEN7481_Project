@@ -1,9 +1,0 @@
-{
-    "functionName": "test_not_found_exception_handler",
-    "className": "TestEynnydWebappErrorHandlers",
-    "fileName": "/cbefus_&_Eynnyd/tests_&_test_eynnyd_webapp.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "stub_raises_handler = TestEynnydWebappErrorHandlers.StubRaisesHandler(Exception\n    )\nspy_not_found_exception_handler = (TestEynnydWebappErrorHandlers.\n    SpyExceptionHandler())\nspy_generic_exception_handler = (TestEynnydWebappErrorHandlers.\n    SpyExceptionHandler())\nroutes = RoutesBuilder().add_handler('GET', '/boom', stub_raises_handler.\n    test_handler).build()\nerror_handlers = ErrorHandlersBuilder().add_pre_response_error_handler(\n    RouteNotFoundException, spy_not_found_exception_handler.\n    test_pre_response_handler).add_pre_response_error_handler(Exception,\n    spy_generic_exception_handler.test_pre_response_handler).build()\ntest_app = EynnydWebappBuilder().set_routes(routes).set_error_handlers(\n    error_handlers).build()\nrequest = TestEynnydWebappHandlers.StubRequest(method='GET', request_uri=\n    '/route_does_not_exist')\nresponse = test_app.process_request_to_response(request)\nself.assertEqual(HTTPStatus.BAD_REQUEST.value, response.status.code)\nself.assertEqual(1, spy_not_found_exception_handler.call_count)\nself.assertEqual(0, spy_generic_exception_handler.call_count)\n"
-}

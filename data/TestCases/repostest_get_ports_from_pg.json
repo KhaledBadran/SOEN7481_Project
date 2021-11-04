@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_ports_from_pg",
-    "className": "CITestProvisioning",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test get_ports_from_pg.\"\"\"\nport_group_name, port_group_details = self.create_port_group()\nport_list = self.provisioning.get_ports_from_pg(port_group_name)\nself.assertIsNotNone(port_list)\nself.assertIsInstance(port_list, list)\nreference_port = port_group_details[constants.SYMMETRIX_PORT_KEY][0][\n    constants.PORT_ID]\nresult_port = port_list[0]\nself.assertEqual(reference_port, result_port)\nself.assertIsNotNone(re.match(constants.PORT_SEARCH_PATTERN, result_port))\n"
-}

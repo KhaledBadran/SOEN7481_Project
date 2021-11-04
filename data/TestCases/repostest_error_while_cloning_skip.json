@@ -1,9 +1,0 @@
-{
-    "functionName": "test_error_while_cloning_skip",
-    "className": null,
-    "fileName": "/FlorianKempenich_&_Hierarchy/tests_&_hierarchy_&_test_cloner.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "error = GitCommandError(command='git clone etc ....', status=218)\ndef raise_error_only_for_hierachy_project(*args, url=None, **kwargs):\n    if 'Hierarchy' in url:\n        raise error\nhierarchy = MOCK_HIERARCHY\nclone_from.side_effect = raise_error_only_for_hierachy_project\ncloner.clone_all(hierarchy)\ndisplay.assert_any_call(Contains('Hierarchy'), variant='ERROR', reason=error)\nclone_from.assert_called_with(url=\n    'git@github.com:FlorianKempenich/kata.git', to_path=mock.ANY)\nmock.patch.object(Repo, 'clone_from')mock.patch('hierarchy.cloner.display')"
-}

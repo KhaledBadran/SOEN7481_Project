@@ -1,9 +1,0 @@
-{
-    "functionName": "test_fish",
-    "className": null,
-    "fileName": "/SunPower_&_PVMismatch/pvmismatch_&_contrib_&_gen_coeffs_&_tests_&_test_diode.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    test shunt current.\n    \"\"\"\nish, vd, rsh = sympy.symbols(['ish', 'vd', 'rsh'])\nish = vd / rsh\nd_vd = sympy.diff(ish, vd)\nd_rsh = sympy.diff(ish, rsh)\ntest_data = {'vd': VD_1, 'rsh': RSH_1}\nfish_test, jish_test = diode.fish(**test_data)\nfish_expected = np.float(ish.evalf(subs=test_data))\njish_expected = np.array([d_vd.evalf(subs=test_data), d_rsh.evalf(subs=\n    test_data)], dtype=np.float)\nLOGGER.debug('test: %g = expected: %g', fish_test, fish_expected)\nassert np.isclose(fish_test, fish_expected)\nassert np.allclose(jish_test, jish_expected.reshape(-1, 1))\n"
-}

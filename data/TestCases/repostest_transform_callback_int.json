@@ -1,9 +1,0 @@
-{
-    "functionName": "test_transform_callback_int",
-    "className": "TransformCallbackTest",
-    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_transform_callback.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "exp = get_branin_experiment()\nparameters = [RangeParameter(name='x1', parameter_type=ParameterType.INT,\n    lower=1, upper=10), RangeParameter(name='x2', parameter_type=\n    ParameterType.INT, lower=5, upper=15)]\ngpei = TorchModelBridge(experiment=exp, data=exp.fetch_data(), search_space\n    =SearchSpace(parameters=parameters), model=BotorchModel(), transforms=[\n    IntToFloat], torch_dtype=torch.double)\ntransformed = gpei._transform_callback([5.4, 7.6])\nself.assertTrue(np.allclose(transformed, [5, 8]))\nnp_mb = ArrayModelBridge(experiment=exp, data=exp.fetch_data(),\n    search_space=SearchSpace(parameters=parameters), model=NumpyModel(),\n    transforms=[IntToFloat])\ntransformed = np_mb._transform_callback(np.array([5.4, 7.6]))\nself.assertTrue(np.allclose(transformed, [5, 8]))\npatch('ax.modelbridge.torch.TorchModelBridge._model_fit', return_value=None)"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_new_columns_constructor",
-    "className": null,
-    "fileName": "/Rambatino_&_CHAID/tests_&_test_tree.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test the new tree constructor that takes CHAID Columns as parameters\n    \"\"\"\norientation = np.array([0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 2, 2, 2, 2, 2, 2, \n    2, 2, 1])\nage = np.array([0, 1, 1, 0, 2, 2, 2, 2, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0])\nincome = np.array([0, 0, 1, 1, 2, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0])\nmetadata = {(0): '0-5', (1): '6-10', (2): '11-15'}\ncols = [CHAID.OrdinalColumn(orientation, name='orientation', metadata=\n    metadata), CHAID.OrdinalColumn(age, name='age', metadata=metadata)]\ntree = CHAID.Tree(cols, CHAID.NominalColumn(income), {'min_child_node_size': 1}\n    )\nassert tree.tree_store[0].split.groupings == \"[['0-5'], ['6-10', '11-15']]\"\n"
-}

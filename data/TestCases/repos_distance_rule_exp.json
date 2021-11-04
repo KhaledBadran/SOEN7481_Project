@@ -1,9 +1,0 @@
-{
-    "functionName": "_distance_rule_exp",
-    "className": null,
-    "fileName": "/Silmathoron_&_NNGT/testing_&_test_generation.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "scale = instruct['scale']\nrule = instruct['rule']\ndegrees = graph.get_degrees('out', weights=False)\nres = [np.average(degrees)]\ndistances = graph.get_edge_attributes(name='distance')\nbins = None\nif rule == 'exp':\n    bins = np.linspace(0, 7 * scale, 350)\nelse:\n    bins = np.linspace(0, scale, 200)\nhist, _ = np.histogram(distances, bins)\nkernel = sps.gaussian(20, 3)\nhist = sps.convolve(hist, kernel, mode='same')\nres.extend(hist / hist.sum())\nreturn res\n"
-}

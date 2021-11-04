@@ -1,9 +1,0 @@
-{
-    "functionName": "test_invalid_storage_status_mask",
-    "className": "TestLocateRequestPayload",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_locate.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a TypeError is raised when an invalid value is used to set\n        the storage status mask of a Locate request payload.\n        \"\"\"\nkwargs = {'storage_status_mask': 'invalid'}\nself.assertRaisesRegex(TypeError,\n    'Storage status mask must be an integer representing a valid StorageStatusMask bit mask.'\n    , payloads.LocateRequestPayload, **kwargs)\nkwargs = {'storage_status_mask': 55}\nself.assertRaisesRegex(TypeError,\n    'Storage status mask must be an integer representing a valid StorageStatusMask bit mask.'\n    , payloads.LocateRequestPayload, **kwargs)\nargs = payloads.LocateRequestPayload(), 'storage_status_mask', 'invalid'\nself.assertRaisesRegex(TypeError,\n    'Storage status mask must be an integer representing a valid StorageStatusMask bit mask.'\n    , setattr, *args)\n"
-}

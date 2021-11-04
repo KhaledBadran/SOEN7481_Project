@@ -1,9 +1,0 @@
-{
-    "functionName": "load_from_mat",
-    "className": null,
-    "fileName": "/microsoft_&_LightGBM/tests_&_c_api_test_&_test_.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "data = []\nlabel = []\nwith open(filename, 'r') as inp:\n    for line in inp.readlines():\n        values = line.split('\\t')\n        data.append([float(x) for x in values[1:]])\n        label.append(float(values[0]))\nmat = np.array(data)\ndata = np.array(mat.reshape(mat.size), copy=False)\nlabel = np.array(label, dtype=np.float32)\nhandle = ctypes.c_void_p()\nref = None\nif reference is not None:\n    ref = reference\nLIB.LGBM_DatasetCreateFromMat(data.ctypes.data_as(ctypes.POINTER(ctypes.\n    c_void_p)), dtype_float64, mat.shape[0], mat.shape[1], 1, c_str(\n    'max_bin=15'), ref, ctypes.byref(handle))\nnum_data = ctypes.c_long()\nLIB.LGBM_DatasetGetNumData(handle, ctypes.byref(num_data))\nnum_feature = ctypes.c_long()\nLIB.LGBM_DatasetGetNumFeature(handle, ctypes.byref(num_feature))\nLIB.LGBM_DatasetSetField(handle, c_str('label'), c_array(ctypes.c_float,\n    label), len(label), 0)\nprint('#data: %d #feature: %d' % (num_data.value, num_feature.value))\nreturn handle\n"
-}

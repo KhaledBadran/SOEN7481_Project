@@ -1,9 +1,0 @@
-{
-    "functionName": "test_conditional_gradient2",
-    "className": null,
-    "fileName": "/PythonOT_&_POT/test_&_test_optim.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "n = 1000\nmu_s = np.array([0, 0])\ncov_s = np.array([[1, 0], [0, 1]])\nmu_t = np.array([4, 4])\ncov_t = np.array([[1, -0.8], [-0.8, 1]])\nxs = ot.datasets.make_2D_samples_gauss(n, mu_s, cov_s)\nxt = ot.datasets.make_2D_samples_gauss(n, mu_t, cov_t)\na, b = np.ones((n,)) / n, np.ones((n,)) / n\nM = ot.dist(xs, xt)\nM /= M.max()\ndef f(G):\n    return 0.5 * np.sum(G ** 2)\ndef df(G):\n    return G\nreg = 0.1\nG, log = ot.optim.cg(a, b, M, reg, f, df, numItermaxEmd=200000, verbose=\n    True, log=True)\nnp.testing.assert_allclose(a, G.sum(1))\nnp.testing.assert_allclose(b, G.sum(0))\n"
-}

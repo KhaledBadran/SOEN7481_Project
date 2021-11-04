@@ -1,9 +1,0 @@
-{
-    "functionName": "testWav",
-    "className": "DecoderPipelineTests",
-    "fileName": "/mertyildiran_&_Dragonfire/dragonfire_&_sr_&_decoder_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.decoder_pipeline.init_request('testWav', '')\nf = open('tests/ten_digits.wav', 'rb')\nfor block in iter(lambda : f.read(16000 * 2 * 2 / 4), ''):\n    time.sleep(0.25)\n    self.decoder_pipeline.process_data(block)\nself.decoder_pipeline.end_request()\nwhile not self.finished:\n    time.sleep(1)\nself.assertEqual(['ONE', 'TWO', 'THREE', 'FOUR', 'FIVE', 'SIX', 'SEVEN',\n    'EIGHT', '<#s>'], self.words)\npytest.mark.skip(reason='Kaldi is deprecated.')"
-}

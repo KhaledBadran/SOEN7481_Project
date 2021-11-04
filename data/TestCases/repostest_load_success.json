@@ -1,9 +1,0 @@
-{
-    "functionName": "test_load_success",
-    "className": "JSONGraphFormatTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_io_&_JSONGraphFormatTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "path = Path(os.path.realpath(__file__), '../../../fixtures/JSONGraphFormat')\nfilename = Path(path.resolve(), 'valid.json')\nproject = op.io.JSONGraphFormat.load(filename)\nassert len(project) == 1\nnet = project.network\nassert net.Np == 2\nassert net.Nt == 1\npore_props = {'pore.index', 'pore.coords', 'pore.diameter', 'pore.area',\n    'pore.volume'}\nassert pore_props.issubset(net.props())\nassert np.array_equal(net['pore.area'], np.array([0, 0]))\nassert np.array_equal(net['pore.index'], np.array([0, 1]))\nassert np.array_equal(net['pore.volume'], np.array([0, 0]))\nassert np.array_equal(net['pore.diameter'], np.array([0, 0]))\nassert np.array_equal(net['pore.coords'][0], np.array([0, 0, 0]))\nassert np.array_equal(net['pore.coords'][1], np.array([1, 1, 1]))\nthroat_props = {'throat.length', 'throat.conns', 'throat.diameter',\n    'throat.area', 'throat.volume', 'throat.perimeter', 'throat.surface_area'}\nassert throat_props.issubset(net.props())\nlength = 1.73205080757\nsquared_radius = 5.169298742047715\nassert net['throat.length'] == length\nassert net['throat.area'] == np.pi * squared_radius\nassert np.array_equal(net['throat.conns'], np.array([[0, 1]]))\nassert net['throat.diameter'] == 2.0 * np.sqrt(squared_radius)\nassert net['throat.volume'] == np.pi * squared_radius * length\nassert net['throat.perimeter'] == 2.0 * np.pi * np.sqrt(squared_radius)\nassert net['throat.surface_area'] == 2.0 * np.sqrt(squared_radius\n    ) * np.pi * length\n"
-}

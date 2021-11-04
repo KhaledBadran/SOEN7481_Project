@@ -1,9 +1,0 @@
-{
-    "functionName": "test_scalars",
-    "className": "ModelTest",
-    "fileName": "/halide_&_Halide/apps_&_onnx_&_model_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "X = helper.make_tensor_value_info('A', TensorProto.INT32, [])\nY = helper.make_tensor_value_info('B', TensorProto.INT32, [])\nZ = helper.make_tensor_value_info('C', TensorProto.INT32, [])\nnode_def = helper.make_node('Add', ['A', 'B'], ['C'])\ngraph_def = helper.make_graph([node_def], 'scalar-model', [X, Y], [Z])\nonnx_model = helper.make_model(graph_def, producer_name='onnx-example')\nmodel = Model()\nmodel.BuildFromOnnxModel(onnx_model)\nschedule = model.OptimizeSchedule()\nschedule = schedule.replace('\\n', ' ')\nexpected_schedule = (\n    '// --- BEGIN machine-generated schedule // Target: .+// MachineParams: .+// Delete this line if not using Generator Pipeline pipeline = get_pipeline\\\\(\\\\);.+Func C = pipeline.get_func\\\\(2\\\\);.+{.+}.+'\n    )\nself.assertRegex(schedule, expected_schedule)\ninput1 = np.random.randint(-10, 10, size=())\ninput2 = np.random.randint(-10, 10, size=())\noutputs = model.run([input1, input2])\nself.assertEqual(1, len(outputs))\noutput = outputs[0]\nexpected = input1 + input2\nnp.testing.assert_allclose(expected, output)\n"
-}

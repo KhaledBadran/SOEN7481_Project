@@ -1,9 +1,0 @@
-{
-    "functionName": "test_subscription_streamer_granularity",
-    "className": null,
-    "fileName": "/PRIArobotics_&_HedgehogServer/tests_&_test_subscription.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "in_seq = [(value, 10) for value in [0, 1, 2, 1, 2, 1, 1, 0]]\nout_seq = [0, 2, 1, 0]\ntim_seq = [10, 20, 45, 45]\nasync with subscription_streamer(in_seq) as subs:\n    with assertPassed(sum(tim_seq)):\n        await assert_stream(tim_seq, out_seq, subs.subscribe(15, lambda a,\n            b: abs(a - b) > 1, 45))\npytest.mark.trio"
-}

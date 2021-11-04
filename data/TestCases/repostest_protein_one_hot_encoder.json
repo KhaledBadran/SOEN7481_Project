@@ -1,9 +1,0 @@
-{
-    "functionName": "test_protein_one_hot_encoder",
-    "className": null,
-    "fileName": "/goeckslab_&_Galaxy-ML/galaxy_ml_&_tests_&_test_sequences.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "fasta_path = './tools/test-data/uniprot_sprot_10000L.fasta'\ncoder = ProteinOneHotEncoder(fasta_path=fasta_path, padding=True)\nX = np.zeros((20, 1))\nX[:, (0)] = np.arange(20)\ncoder.fit(X)\ntrans = coder.transform(X)\nexpect = np.load('./tools/test-data/sequence_encoding02.npy')\nassert np.array_equal(trans, expect), trans\nfasta_file = pyfaidx.Fasta(fasta_path)\nX1 = np.array([str(fasta_file[i]) for i in range(20)])[:, (np.newaxis)]\ncoder.set_params(fasta_path=None)\ncoder.fit(X1)\ntrans = coder.transform(X1)\nassert np.array_equal(trans, expect), trans\n"
-}

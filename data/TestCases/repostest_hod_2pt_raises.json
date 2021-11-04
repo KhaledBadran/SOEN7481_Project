@@ -1,9 +1,0 @@
-{
-    "functionName": "test_hod_2pt_raises",
-    "className": null,
-    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_profiles.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "pbad = ccl.halos.HaloProfilePressureGNFW()\nc = ccl.halos.ConcentrationDuffy08(M200)\npgood = ccl.halos.HaloProfileHOD(c_M_relation=c)\npgood_b = ccl.halos.HaloProfileHOD(c_M_relation=c)\np2 = ccl.halos.Profile2ptHOD()\nwith pytest.raises(TypeError):\n    p2.fourier_2pt(pbad, COSMO, 1.0, 10000000000000.0, 1.0, mass_def=M200)\nwith pytest.raises(ValueError):\n    p2.fourier_2pt(pgood, COSMO, 1.0, 10000000000000.0, 1.0, prof2=pgood_b,\n        mass_def=M200)\np2.fourier_2pt(pgood, COSMO, 1.0, 10000000000000.0, 1.0, prof2=pgood,\n    mass_def=M200)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_account_transfer_consent",
-    "className": "TestRegister",
-    "fileName": "/Keeper-Security_&_Commander/unit-tests_&_test_command_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "params = get_connected_params()\nparams.settings = {'share_account_to': [{'role_id': ent_env.role1_id,\n    'public_key': vault_env.encoded_public_key}],\n    'must_perform_account_share_by': datetime.datetime.now().timestamp()}\ncmd = utils.CheckEnforcementsCommand()\nwith mock.patch('builtins.print'), mock.patch(\n    'keepercommander.api.accept_account_transfer_consent') as m_transfer:\n    m_transfer.return_value = True\n    cmd.execute(params)\n    m_transfer.assert_called()\n    self.assertNotIn('share_account_to', params.settings)\n    self.assertNotIn('must_perform_account_share_by', params.settings)\n    m_transfer.reset()\n    m_transfer.return_value = False\n    cmd.execute(params)\n    m_transfer.assert_called()\n    self.assertNotIn('share_account_to', params.settings)\n    self.assertNotIn('must_perform_account_share_by', params.settings)\n"
-}

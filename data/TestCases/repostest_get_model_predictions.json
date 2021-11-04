@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_model_predictions",
-    "className": "TestAxClient",
-    "fileName": "/facebook_&_Ax/ax_&_service_&_tests_&_test_ax_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ax_client = AxClient()\nax_client.create_experiment(name='test_experiment', parameters=[{'name':\n    'x', 'type': 'range', 'bounds': [-5.0, 10.0]}, {'name': 'y', 'type':\n    'range', 'bounds': [0.0, 15.0]}], minimize=True, objective_name='a')\nax_client.get_next_trial()\nax_client.experiment.trials[0].arm._name = '1_1'\nself.assertEqual(ax_client.get_model_predictions(), {(0): {'a': (9.0, 1.0)}})\npatch('ax.modelbridge.base.observations_from_data', autospec=True,\n    return_value=[get_observation1()])patch('ax.modelbridge.random.RandomModelBridge.get_training_data', autospec\n    =True, return_value=[get_observation1()])patch('ax.modelbridge.random.RandomModelBridge._predict', autospec=True,\n    return_value=[get_observation1trans().data])"
-}

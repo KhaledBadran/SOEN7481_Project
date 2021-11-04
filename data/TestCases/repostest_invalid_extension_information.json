@@ -1,9 +1,0 @@
-{
-    "functionName": "test_invalid_extension_information",
-    "className": "TestQueryResponsePayload",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_query.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a TypeError is raised when an invalid value is used to set\n        the extension information of a Query response payload.\n        \"\"\"\nkwargs = {'extension_information': 'invalid'}\nself.assertRaisesRegex(TypeError,\n    'The extension information must be a list of ExtensionInformation structures.'\n    , payloads.QueryResponsePayload, **kwargs)\nkwargs = {'extension_information': ['invalid']}\nself.assertRaisesRegex(TypeError,\n    'The extension information must be a list of ExtensionInformation structures.'\n    , payloads.QueryResponsePayload, **kwargs)\nargs = payloads.QueryResponsePayload(), 'extension_information', 'invalid'\nself.assertRaisesRegex(TypeError,\n    'The extension information must be a list of ExtensionInformation structures.'\n    , setattr, *args)\nargs = payloads.QueryResponsePayload(), 'extension_information', ['invalid']\nself.assertRaisesRegex(TypeError,\n    'The extension information must be a list of ExtensionInformation structures.'\n    , setattr, *args)\n"
-}

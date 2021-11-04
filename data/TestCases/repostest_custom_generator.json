@@ -1,9 +1,0 @@
-{
-    "functionName": "test_custom_generator",
-    "className": "TestProducer",
-    "fileName": "/BciPy_&_BciPy/bcipy_&_acquisition_&_tests_&_datastream_&_test_producer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Producer should be able to take a custom generator.\"\"\"\ndef gen():\n    counter = 0\n    while True:\n        counter += 1\n        yield counter\ndata_queue = queue.Queue()\nproducer = Producer(data_queue, freq=1 / 300, generator=gen())\nproducer.start()\ntime.sleep(0.1)\nproducer.stop()\nlst = list(data_queue.queue)\nself.assertTrue(len(lst) > 0)\nself.assertEqual(lst[0], 1)\nself.assertEqual(lst[-1], len(lst))\nprint(lst[-1])\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_gcrecord_fullgc",
-    "className": null,
-    "fileName": "/linkedin_&_JTune/test_&_test_gcrecord.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Verify parsing of a Full GC record.\"\"\"\nfull_gc = datetime.datetime(2017, 2, 16, 11, 26, 47, 922000), [\n    '2017-02-16T11:26:47.922-0800: 67.436: [Full GC (Ergonomics) [PSYoungGen: 63767K->58469K(699392K)] [ParOldGen: 1554485K->1556899K(1815040K)] 1618252K->1615369K(2514432K), [Metaspace: 40896K->40896K(1085440K)], 8.5770030 secs] [Times: user=82.54 sys=0.27, real=8.58 secs]'\n    ]\nr = GCRecord(full_gc)\nassert r.gc_type == 'FULL'\nassert r.is_stw_gc\nassert r.valid_record\nassert r.stw_time == 8.577003\n"
-}

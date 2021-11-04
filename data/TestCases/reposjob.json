@@ -1,9 +1,0 @@
-{
-    "functionName": "job",
-    "className": "HedgehogServer",
-    "fileName": "/PRIArobotics_&_HedgehogServer/hedgehog_&_server_&_hedgehog_server.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "LONG_RUNNING_THRESHOLD = 0.2\nCANCEL_THRESHOLD = 10\nif job_name is None:\n    _, _, _, job_name, _, _ = inspect.stack()[2]\nasync with self._lock:\n    nursery = None\n    manually_cancelled = False\n    begin = trio.current_time()\n    try:\n        async with trio.open_nursery() as nursery:\n            nursery.cancel_scope.deadline = begin + CANCEL_THRESHOLD\n\n            @nursery.start_soon\n            async def warn_long_running():\n                await trio.sleep(LONG_RUNNING_THRESHOLD)\n                logger.warning('Long running job on server loop: %s', job_name)\n            yield\n            manually_cancelled = True\n            nursery.cancel_scope.cancel()\n    finally:\n        assert nursery is not None\n        end = trio.current_time()\n        if nursery.cancel_scope.cancelled_caught and not manually_cancelled:\n            logger.error('Long running job cancelled after %.1f ms: %s', (\n                end - begin) * 1000, job_name)\n            raise trio.TooSlowError\n        elif end - begin > LONG_RUNNING_THRESHOLD:\n            logger.warning('Long running job finished after %.1f ms: %s', (\n                end - begin) * 1000, job_name)\nasynccontextmanager"
-}

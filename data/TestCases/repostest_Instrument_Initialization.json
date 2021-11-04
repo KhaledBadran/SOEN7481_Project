@@ -1,9 +1,0 @@
-{
-    "functionName": "test_Instrument_Initialization",
-    "className": null,
-    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Geometry_&_Instrument.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "Instr = Instrument()\nwedge = Wedge.Wedge(position=(0.5, 0, 0), concept='ManyToMany')\npixels = 33\nsplit = [12]\nDet = Detector.TubeDetector1D(position=(1.0, 1, 0), direction=(1, 0, 0),\n    pixels=pixels, split=split)\nAna = Analyser.FlatAnalyser(position=(0.5, 0, 0), direction=(1, 0, 1))\nwedge.append([Det, Det, Ana, Ana, Ana])\ntry:\n    Instr.initialize()\n    assert False\nexcept ValueError:\n    assert True\ntry:\n    print(Instr.A4)\n    assert False\nexcept RuntimeError:\n    assert True\ntry:\n    print(Instr.Ef)\n    assert False\nexcept RuntimeError:\n    assert True\nInstr.append(wedge)\ntry:\n    Instr.initialize()\n    assert False\nexcept ValueError:\n    assert True\nInstr.wedges[0].detectors[0].split = [0, 12, 20, pixels]\nInstr.initialize()\nassert len(Instr.A4) == 1\nassert len(Instr.A4[0]) == 2\nassert len(Instr.A4[0][0]) == pixels\nassert len(Instr.A4) == len(Instr.Ef)\nassert len(Instr.A4[0]) == len(Instr.Ef[0])\nassert len(Instr.A4[0][0]) == len(Instr.Ef[0][0])\nassert Instr.settings['Initialized'] == True\ntry:\n    Instr.A4 = []\n    assert False\nexcept NotImplementedError:\n    assert True\ntry:\n    Instr.Ef = []\n    assert False\nexcept NotImplementedError:\n    assert True\n"
-}

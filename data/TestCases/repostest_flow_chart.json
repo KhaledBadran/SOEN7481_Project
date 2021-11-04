@@ -1,9 +1,0 @@
-{
-    "functionName": "test_flow_chart",
-    "className": null,
-    "fileName": "/Carbonara-Project_&_Carbonara-IDB/tests_&_test_idaapi.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "api = idb.IDAPython(kernel32_idb)\nDllEntryPoint = api.ida_funcs.get_func(1754273429)\nbbs = list(api.idaapi.FlowChart(DllEntryPoint))\nassert list(sorted(lpluck('startEA', bbs))) == [1754273429, 1754273444, \n    1754292566]\nfor bb in bbs:\n    if bb.startEA == 1754273429:\n        assert list(sorted(lpluck('startEA', bb.succs()))) == [1754273444, \n            1754292566]\n    elif bb.startEA == 1754273444:\n        assert lpluck('startEA', bb.succs()) == []\n    elif bb.startEA == 1754292566:\n        assert lpluck('startEA', bb.succs()) == [1754273444]\nfor bb in bbs:\n    if bb.startEA == 1754273429:\n        assert lpluck('startEA', bb.preds()) == []\n    elif bb.startEA == 1754273444:\n        assert list(sorted(lpluck('startEA', bb.preds()))) == [1754273429, \n            1754292566]\n    elif bb.startEA == 1754292566:\n        assert lpluck('startEA', bb.preds()) == [1754273429]\nkern32_test()"
-}

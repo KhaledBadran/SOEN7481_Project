@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_validity_timedelta",
-    "className": "FlaskEasyJWTTest",
-    "fileName": "/BMeu_&_Flask-EasyJWT/tests_&_flask_easyjwt_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n            Test getting the validity if it is configured as a `timedelta` object.\n\n            Expected Result: The token's validity as defined in the configuration. No warning is issued.\n        \"\"\"\nself.app.config['EASYJWT_TOKEN_VALIDITY'] = timedelta(minutes=self.validity)\nvalidity = FlaskEasyJWT.get_validity()\nself.assertEqual(self.app.config['EASYJWT_TOKEN_VALIDITY'], validity)\nmock_warn.assert_not_called()\npatch('flask_easyjwt.flask_easyjwt.warn')"
-}

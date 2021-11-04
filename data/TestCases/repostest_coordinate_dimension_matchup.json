@@ -1,9 +1,0 @@
-{
-    "functionName": "test_coordinate_dimension_matchup",
-    "className": null,
-    "fileName": "/UW-Hydro_&_MetSim/metsim_&_tests_&_test_metsim.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    This test checks that MetSim correctely adds a coordinate\n    if an input dataset is missing coordinate variables for the\n    chunked dimensions.\n    \"\"\"\nvar_rename = OrderedDict(latitude='lat', longitude='lon', mask='mask',\n    elevation='elev', pptrate='prec', maxtemp='t_max', mintemp='t_min')\nfilename = './examples/example_dimtest.conf'\nconf = io.read_config(DummyOpts(filename))\nconf['out_dir'] = tempfile.mkdtemp('results')\nms = MetSim(conf)\nds = xr.open_dataset('./metsim/data/dim_test.nc')\nassert 'hru' not in ds.coords\nassert 'hru' in ms.met_data.coords\n"
-}

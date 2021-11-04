@@ -1,9 +1,0 @@
-{
-    "functionName": "test_targetcoll_get",
-    "className": "TestTarget",
-    "fileName": "/apmoore1_&_Bella/tests_&_test_data_types.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test the __getitem__ function of TargetCollection\n        \"\"\"\ntarget_example_0 = Target([(3, 5), (6, 8)], '1', 'Iphone',\n    'text with Iphone', 1)\ntarget_example_1 = Target([(1, 5)], '3', 'Iphone', 'text with Iphone', 1)\ntarget_example_2 = Target([(1, 2)], '2', 'Iphone', 'text with Iphone', 1)\ntarget_col = TargetCollection([target_example_0, target_example_1,\n    target_example_2])\nself.assertEqual(target_example_2, target_col['2'], msg=\n    'Cannot access data using keys. key used {} collection {}'.format('2',\n    target_col))\nself.assertEqual(target_example_1, target_col.get('3'), msg=\n    'Cannot access data using the get method.')\nself.assertEqual(None, target_col.get('5'), msg=\n    'Default value for get not working should be None not {}'.format(\n    target_col.get('5')))\nwith self.assertRaises(KeyError, msg=\n    'Should produce a key error when the data does not exist'):\n    target_col['5']\n"
-}

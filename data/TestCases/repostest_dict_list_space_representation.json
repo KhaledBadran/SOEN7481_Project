@@ -1,9 +1,0 @@
-{
-    "functionName": "test_dict_list_space_representation",
-    "className": null,
-    "fileName": "/bytesandbrains_&_ProcessOptimizer/ProcessOptimizer_&_tests_&_test_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Tests whether the conversion of the dictionary and list representation\n    of a point from a search space works properly.\n    \"\"\"\nchef_space = {'Cooking time': (0, 1200), 'Main ingredient': ['cheese',\n    'cherimoya', 'chicken', 'chard', 'chocolate', 'chicory'],\n    'Secondary ingredient': ['love', 'passion', 'dedication'],\n    'Cooking temperature': (-273.16, 10000.0)}\nopt = Optimizer(dimensions=dimensions_aslist(chef_space))\npoint = opt.ask()\nassert_equal(point, point_aslist(chef_space, point_asdict(chef_space, point)))\npytest.mark.fast_test"
-}

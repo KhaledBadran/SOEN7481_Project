@@ -1,9 +1,0 @@
-{
-    "functionName": "test_train_test_split_errors",
-    "className": null,
-    "fileName": "/goeckslab_&_Galaxy-ML/galaxy_ml_&_tests_&_test_model_validations.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "pytest.raises(ValueError, train_test_split)\npytest.raises(ValueError, train_test_split, range(3), train_size=1.1)\npytest.raises(ValueError, train_test_split, range(3), test_size=0.6,\n    train_size=0.6)\npytest.raises(ValueError, train_test_split, range(3), test_size=np.float32(\n    0.6), train_size=np.float32(0.6))\npytest.raises(ValueError, train_test_split, range(3), test_size='wrong_type')\npytest.raises(ValueError, train_test_split, range(3), test_size=2, train_size=4\n    )\npytest.raises(TypeError, train_test_split, range(3), some_argument=1.1)\npytest.raises(ValueError, train_test_split, range(3), range(42))\npytest.raises(ValueError, train_test_split, range(10), shuffle=True)\npytest.raises(ValueError, train_test_split, range(10), shuffle='group',\n    labels=None)\npytest.raises(TypeError, train_test_split, range(10), shuffle='stratified',\n    labels=None)\nwith pytest.raises(ValueError, match=\n    'train_size=11 should be either positive and smaller than the number of samples 10 or a float in the \\\\(0, 1\\\\) range'\n    ):\n    train_test_split(range(10), train_size=11, test_size=1)\n"
-}

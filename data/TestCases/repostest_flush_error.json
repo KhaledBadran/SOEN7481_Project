@@ -1,9 +1,0 @@
-{
-    "functionName": "test_flush_error",
-    "className": "TestElasticBuffer",
-    "fileName": "/dkaslovsky_&_ElasticBatch/tests_&_test_buffer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class TestCase:\n\n    def __init__(self, n_success=0, bulk_errs=None, side_effect=None):\n        self.eb = ElasticBuffer()\n        self.eb._buffer = TestElasticBuffer.docs\n        self.eb._oldest_doc_timestamp = TestElasticBuffer.timestamp\n        self.return_value = n_success, bulk_errs\n        self.side_effect = side_effect\ntests = {'bulk raises ElasticsearchException': TestCase(side_effect=\n    ElasticsearchException), 'not all docs successfully inserted': TestCase\n    (n_success=len(self.docs) - 1, bulk_errs=[]), 'error returned':\n    TestCase(n_success=len(self.docs), bulk_errs=['err1'])}\nfor test_name, test in tests.items():\n    mock_bulk.reset_mock()\n    mock_bulk.return_value = test.return_value\n    mock_bulk.side_effect = test.side_effect\n    with self.assertRaises(ElasticBufferFlushError, msg=test_name):\n        test.eb.flush()\n    self.assertListEqual(test.eb._buffer, self.docs, test_name)\n    self.assertEqual(test.eb._oldest_doc_timestamp, self.timestamp, test_name)\npatch(f'{ElasticBuffer.__module__}.bulk')"
-}

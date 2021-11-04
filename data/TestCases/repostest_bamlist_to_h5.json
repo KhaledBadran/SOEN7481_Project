@@ -1,9 +1,0 @@
-{
-    "functionName": "test_bamlist_to_h5",
-    "className": null,
-    "fileName": "/Puumanamana_&_CoCoNet/tests_&_test_preprocessing.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test for wrapper\n    \"\"\"\nfasta = Path('{}/sim_data/assembly.fasta'.format(LOCAL_DIR))\nbam_list = [Path('{}/sim_data/sample_{}.bam'.format(LOCAL_DIR, i)) for i in\n    [1, 2]]\nh5_out = Path('coverage.h5')\nsingleton_file = Path('singletons.txt')\nfasta_filt = format_assembly(fasta, min_length=512)\nbam_list_to_h5(fasta_filt, bam_list, output=h5_out, singleton_file=\n    singleton_file, min_qual=50, flag=3596, fl_range=[0, 1000], rm_filt_bam\n    =True)\nassert h5_out.is_file() and singleton_file.is_file()\nfor f in [h5_out, singleton_file, fasta_filt]:\n    f.unlink()\n"
-}

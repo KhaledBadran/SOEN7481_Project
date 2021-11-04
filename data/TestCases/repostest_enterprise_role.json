@@ -1,9 +1,0 @@
-{
-    "functionName": "test_enterprise_role",
-    "className": "TestEnterprise",
-    "fileName": "/Keeper-Security_&_Commander/unit-tests_&_test_command_enterprise.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "params = get_connected_params()\napi.query_enterprise(params)\ncmd = enterprise.EnterpriseRoleCommand()\nwith mock.patch('builtins.print'):\n    cmd.execute(params, role=[ent_env.role1_name])\nTestEnterprise.expected_commands = ['role_user_add']\ncmd.execute(params, add_user=[ent_env.user2_email], role=[ent_env.role1_id])\nself.assertEqual(len(TestEnterprise.expected_commands), 0)\nTestEnterprise.expected_commands = ['role_user_remove']\ncmd.execute(params, remove_user=[ent_env.user2_email], role=[ent_env.\n    role1_name])\nself.assertEqual(len(TestEnterprise.expected_commands), 0)\nwith self.assertLogs(level=logging.WARNING):\n    cmd.execute(params, add_user=[ent_env.user2_email], verbose=True, role=\n        ['Invalid'])\n    with mock.patch('builtins.print'):\n        cmd.execute(params, add_user=['invalid@keepersecurity.com'],\n            verbose=True, role=[ent_env.role1_name])\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_yelp_call",
-    "className": "TestGPS",
-    "fileName": "/lukeWaninger_&_GSCAP/tests_&_test_gps.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "base = 'https://api.yelp.com/v3/businesses/search'\nurl = (\n    f'{base}?latitude={self.lat}&longitude={self.lon}&radius=50&sort_by=best_match'\n    )\nresponses.add(responses.GET, url, body=\n    '{\"businesses\": [], \"total\": 0, \"region\": {\"center\": {\"longitude\": -84.90685, \"latitude\": 32.3788}}}'\n    , status=200)\nt = gps.yelp_call(gps.PlaceRequest(lat=self.lat, lon=self.lon, radius=50,\n    rankby=gps.YelpRankBy.BEST_MATCH))\nself.assertTrue(isinstance(t, gps.PlaceRequest))\nj = json.loads(t.content)\nself.assertTrue(isinstance(j, dict))\nself.assertTrue('businesses' in j.keys())\nresponses.activate"
-}

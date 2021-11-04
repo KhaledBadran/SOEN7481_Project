@@ -1,9 +1,0 @@
-{
-    "functionName": "test_efficient_return_many_values",
-    "className": null,
-    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_efficient_frontier.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ef = setup_efficient_frontier()\nfor target_return in np.arange(0.25, 0.2, 0.28):\n    ef.efficient_return(target_return)\n    np.testing.assert_almost_equal(ef.weights.sum(), 1)\n    assert all([(i >= 0) for i in ef.weights])\n    mean_return = ef.portfolio_performance()[0]\n    assert abs(target_return - mean_return) < 0.05\n"
-}

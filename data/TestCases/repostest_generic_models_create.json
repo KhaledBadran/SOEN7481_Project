@@ -1,9 +1,0 @@
-{
-    "functionName": "test_generic_models_create",
-    "className": "GenericModelsTests",
-    "fileName": "/bigfishgames_&_GameBenchAPI-PyClient/tests_&_test_unit_&_test_models_&_test_dataframes_&_test_generic_&_test_generic_models.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Ensures each of the classes can be created.\"\"\"\nwith patch(\n    f'{DATAFRAMES_PATH}.generic.generic_models.AbstractGenericModel.get_data'\n    ), patch(f'{ABSTRACT_GENERIC}.GenericMediator'), patch(\n    f'{ABSTRACT_GENERIC}.Authenticator'):\n    with self.subTest():\n        fps_stability = FpsStability()\n        self.assertEqual('/fpsStability', fps_stability.request_parameters[\n            'metric'])\n    with self.subTest():\n        keyword = Keyword()\n        self.assertEqual('/typeahead', keyword.request_parameters['metric'])\n    with self.subTest():\n        markers = Markers()\n        self.assertEqual('/markers', markers.request_parameters['metric'])\n    with self.subTest():\n        notes = SessionNotes()\n        self.assertEqual('/notes', notes.request_parameters['metric'])\n    with self.subTest():\n        summary = SessionSummary()\n        self.assertEqual('', summary.request_parameters['metric'])\n"
-}

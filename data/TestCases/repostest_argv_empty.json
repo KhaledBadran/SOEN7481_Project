@@ -1,9 +1,0 @@
-{
-    "functionName": "test_argv_empty",
-    "className": null,
-    "fileName": "/ocaballeror_&_Lyricfetch/lyricfetch_&_tests_&_test_args.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Check that, with no arguments, the program searches for the currently\n    playing song.\n    \"\"\"\ncurrent_song = Song('Fallujah', 'Assemblage of wolves')\ndef fake_get_current_song():\n    return current_song\nnew_args = [__file__]\nmonkeypatch.setattr(sys, 'argv', new_args)\nmonkeypatch.setattr(lyricfetch.cli, 'get_current_song', fake_get_current_song)\nsongs = parse_argv()\nassert songs == set([current_song])\n"
-}

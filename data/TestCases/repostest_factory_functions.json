@@ -1,9 +1,0 @@
-{
-    "functionName": "test_factory_functions",
-    "className": "ALEBOStrategyTest",
-    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_alebo_strategy.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "experiment = get_branin_experiment(with_batch=True)\nB = np.array([[1.0, 2.0]])\nm1 = get_ALEBOInitializer(search_space=experiment.search_space, B=B)\nself.assertTrue(np.allclose(m1.model.Q, np.linalg.pinv(B) @ B))\ndata = Data(pd.DataFrame({'arm_name': ['0_0', '0_1', '0_2'], 'metric_name':\n    'y', 'mean': [-1.0, 0.0, 1.0], 'sem': 0.1}))\nwith mock.patch('ax.modelbridge.strategies.alebo.ALEBO.fit', autospec=True):\n    m2 = get_ALEBO(experiment=experiment, search_space=None, data=data, B=\n        torch.tensor(B))\nself.assertTrue(np.array_equal(m2.model.B.numpy(), B))\n"
-}

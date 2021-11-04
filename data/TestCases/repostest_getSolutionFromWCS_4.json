@@ -1,9 +1,0 @@
-{
-    "functionName": "test_getSolutionFromWCS_4",
-    "className": null,
-    "fileName": "/mworion_&_MountWizzard4/mw4_&_test_&_unit_tests_&_astrometry_&_test_astrometry.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "hdu = fits.HDUList()\nhdu.append(fits.PrimaryHDU())\nheader = hdu[0].header\nheader.set('CRVAL1', 180.0)\nheader.set('CRVAL2', 60.0)\nheader.set('RA', 180.0)\nheader.set('DEC', 60.0)\nheader.set('CTYPE1', 'TAN-SIP')\nheader.set('CTYPE2', 'TAN-SIP')\nsolve, header = app.getSolutionFromWCS(fitsHeader=header, wcsHeader=header,\n    updateFits=True)\nassert solve['raJ2000S'].hours == 12\nassert solve['decJ2000S'].degrees == 60\nassert solve['angleS'] == 0\nassert solve['scaleS'] == 0\nassert not solve['flippedS']\nassert header['RA'] == header['CRVAL1']\nassert header['DEC'] == header['CRVAL2']\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_verify_failure_unsupported_algorithm",
-    "className": "EasyJWTTest",
-    "fileName": "/BMeu_&_EasyJWT/tests_&_easyjwt_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n            Test verifying a token with an incompatible algorithm.\n\n            Expected Result: An `UnsupportedAlgorithmError` is raised.\n        \"\"\"\nencoding_algorithm = EasyJWT.algorithm\neasyjwt_creation = EasyJWT(self.key)\ntoken = easyjwt_creation.create()\nEasyJWT.algorithm = Algorithm.HS512\nself.assertNotEqual(encoding_algorithm, EasyJWT.algorithm)\nwith self.assertRaises(UnsupportedAlgorithmError):\n    easyjwt_verification = EasyJWT.verify(token, self.key)\n    self.assertIsNone(easyjwt_verification)\nEasyJWT.algorithm = encoding_algorithm\n"
-}

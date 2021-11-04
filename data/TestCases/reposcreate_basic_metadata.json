@@ -1,9 +1,0 @@
-{
-    "functionName": "create_basic_metadata",
-    "className": null,
-    "fileName": "/kenfar_&_DataGristle/datagristle_&_tests_&_test_metadata.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\" Used by most above tests to insert a basic set of metadata.\n    \"\"\"\nschema_id = md.schema_tools.setter(schema_name='geoip', schema_desc=\n    'geoip data')\nkv = {'schema_id': schema_id, 'element_name': 'cntry_2byte', 'element_desc':\n    'cntry_2byte_desc', 'element_type': 'string', 'element_len': 2}\nmd.element_tools.setter(**kv)\npp(md.element_tools)\nassert md.element_tools.getter(element_name='cntry_2byte').element_len == 2\nkeys = ['schema_id', 'collection_name', 'collection_desc']\nv = [schema_id, 'geolite_country', 'free maxmind geoip feed']\nkv = dict(zip(keys, v))\ncollection_id = md.collection_tools.setter(**kv)\nassert collection_id > 0\nfield_keys = ['collection_id', 'field_name', 'field_desc', 'field_type',\n    'field_len', 'element_name']\nval_list = [[collection_id, 'field-a', 'field-a-desc', 'string', 15, None],\n    [collection_id, 'field-b', 'field-b-desc', 'string', 15, None], [\n    collection_id, 'field-c', 'field-c-desc', 'int', None, None], [\n    collection_id, 'field-d', 'field-d-desc', 'int', None, None], [\n    collection_id, 'field-e', 'field-e-desc', None, None, 'cntry_2byte'], [\n    collection_id, 'field-f', 'field-f-desc', 'string', 40, None]]\nfor row in val_list:\n    kv = dict(zip(field_keys, row))\n    assert md.field_tools.setter(**kv) > 0\nreturn schema_id, collection_id\n"
-}

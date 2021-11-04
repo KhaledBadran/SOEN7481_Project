@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_config_expiration_date_string_unparsable",
-    "className": "FlaskEasyJWTTest",
-    "fileName": "/BMeu_&_Flask-EasyJWT/tests_&_flask_easyjwt_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n            Test getting the validity if it is configured as a string that cannot be parsed to an integer.\n\n            Expected Result: `None` is returned. A warning is issued.\n        \"\"\"\nself.app.config['EASYJWT_TOKEN_VALIDITY'] = '15 minutes'\nexpiration_date = FlaskEasyJWT.get_validity()\nself.assertIsNone(expiration_date)\nmock_warn.assert_called_once()\nwarning = (\n    'must be an int, a string castable to an int, or a datetime.timedelta')\nself.assertIn(warning, mock_warn.call_args_list[0][0][0])\npatch('flask_easyjwt.flask_easyjwt.warn')"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_choice_and_priority_choice_with_probas",
-    "className": null,
-    "fileName": "/Neuraxio_&_Neuraxle/testing_&_hyperparams_&_test_distributions.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "probas = [0.1, 0.4, 0.3, 0.2]\nprobas_array = np.array(probas)\nchoice_list = [0, 1, False, 'Test']\nhd = ctor(choice_list, probas=probas)\nsamples = get_many_samples_for(hd)\nz0 = Counter(samples).get(0)\nz1 = Counter(samples).get(1)\nzNone = Counter(samples).get(False)\nzTest = Counter(samples).get('Test')\nassert z0 > NUM_TRIALS * (probas[0] - 0.05)\nassert z1 > NUM_TRIALS * (probas[1] - 0.05)\nassert zNone > NUM_TRIALS * (probas[2] - 0.05)\nassert zTest > NUM_TRIALS * (probas[3] - 0.05)\nassert abs(hd.pdf(0) - probas[0]) < 1e-06\nassert abs(hd.pdf(1) - probas[1]) < 1e-06\nassert abs(hd.pdf(False) - probas[2]) < 1e-06\nassert abs(hd.pdf('Test') - probas[3]) < 1e-06\nassert abs(hd.cdf(0) - probas_array[0]) < 1e-06\nassert abs(hd.cdf(1) - np.sum(probas_array[0:2])) < 1e-06\nassert abs(hd.cdf(False) - np.sum(probas_array[0:3])) < 1e-06\nassert abs(hd.cdf('Test') - 1.0) < 1e-06\nwith pytest.raises(ValueError):\n    assert hd.pdf(3) == 0.0\n    assert hd.cdf(3) == 0.0\nassert hd.min() == 0\nassert hd.max() == len(choice_list)\nassert abs(hd.mean() - 1.6) < 1e-06\nassert abs(hd.var() - 0.84) < 1e-06\nassert abs(hd.std() - 0.9165151389911679) < 1e-06\nsamples_index = [get_index_in_list_with_bool(choice_list, sample) for\n    sample in samples]\nassert abs((hd.mean() - np.mean(samples_index)) / hd.mean()) < 0.1\nassert abs((hd.var() - np.var(samples_index)) / hd.var()) < 0.1\npytest.mark.parametrize('ctor', [Choice, PriorityChoice])"
-}

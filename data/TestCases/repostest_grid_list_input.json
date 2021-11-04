@@ -1,9 +1,0 @@
-{
-    "functionName": "test_grid_list_input",
-    "className": "TestChain",
-    "fileName": "/samreay_&_ChainConsumer/tests_&_test_analysis.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "x, y = np.linspace(-3, 3, 200), np.linspace(-5, 5, 200)\nxx, yy = np.meshgrid(x, y, indexing='ij')\npdf = 1 / (2 * np.pi) * np.exp(-0.5 * (xx * xx + yy * yy / 4))\nc = ChainConsumer()\nc.add_chain([x, y], parameters=['x', 'y'], weights=pdf, grid=True)\nsummary = c.analysis.get_summary()\nx_sum = summary['x']\ny_sum = summary['y']\nexpected_x = np.array([-1.0, 0.0, 1.0])\nexpected_y = np.array([-2.0, 0.0, 2.0])\nthreshold = 0.05\nassert np.all(np.abs(expected_x - x_sum) < threshold)\nassert np.all(np.abs(expected_y - y_sum) < threshold)\n"
-}

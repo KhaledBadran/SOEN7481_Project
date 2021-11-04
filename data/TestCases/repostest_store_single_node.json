@@ -1,9 +1,0 @@
-{
-    "functionName": "test_store_single_node",
-    "className": "TestDucoInterface",
-    "fileName": "/SteinHeselmans_&_DucoBox/tests_&_test_ducointerface.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "cfgparser_mock_object = MagicMock(spec=dut.ConfigParser)\ncfgparser_mock.return_value = cfgparser_mock_object\nprint(cfgparser_mock_object)\nopen_mock = mock_open()\nitf = dut.DucoInterface(self.MOCK_PORT_NAME, self.MOCK_CFG_FILE)\nnode = dut.DucoNode('11', '22', itf)\nitf.nodes.append(node)\nwith patch('duco.ducobox.open', open_mock, create=True):\n    itf.store()\nopen_mock.assert_called_once_with(self.MOCK_CFG_FILE, 'w')\npatch('duco.ducobox.ConfigParser', autospec=True)"
-}

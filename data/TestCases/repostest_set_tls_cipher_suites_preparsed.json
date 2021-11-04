@@ -1,9 +1,0 @@
-{
-    "functionName": "test_set_tls_cipher_suites_preparsed",
-    "className": "TestKmipServerConfig",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_config.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the tls_cipher_suites configuration property can be set\n        correctly with a preparsed list of TLS cipher suites, the value\n        expected if the cipher suites were provided via constructor.\n        \"\"\"\nc = config.KmipServerConfig()\nc._logger = mock.MagicMock()\nc._set_tls_cipher_suites(['TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA',\n    'TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384', 'DH-DSS-AES128-SHA'])\nself.assertEqual(3, len(c.settings.get('tls_cipher_suites')))\nself.assertIn('DH-DSS-AES128-SHA', c.settings.get('tls_cipher_suites'))\nself.assertIn('TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA', c.settings.get(\n    'tls_cipher_suites'))\nself.assertIn('TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384', c.settings.get(\n    'tls_cipher_suites'))\n"
-}

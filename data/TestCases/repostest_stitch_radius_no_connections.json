@@ -1,9 +1,0 @@
-{
-    "functionName": "test_stitch_radius_no_connections",
-    "className": "TopotoolsTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_topotools_&_TopotoolsTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "Nx, Ny, Nz = 10, 10, 1\nLc = 0.0001\npn = op.network.Cubic(shape=[Nx, Ny, Nz], spacing=Lc)\npn2 = op.network.Cubic(shape=[Nx, Ny, Nz], spacing=Lc)\npn2['pore.coords'] += [Lc * Nx, 0, 0]\nop.topotools.stitch(network=pn, donor=pn2, P_network=pn.pores('back'),\n    P_donor=pn2.pores('front'), method='radius', len_max=0, label_stitches=\n    ['test', 'test2'])\nassert pn.Nt == pn2.Nt * 2\n"
-}

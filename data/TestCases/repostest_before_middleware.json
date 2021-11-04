@@ -1,9 +1,0 @@
-{
-    "functionName": "test_before_middleware",
-    "className": "TestRouting",
-    "fileName": "/joegasewicz_&_Flask-JWT-Router/tests_&_test_routing.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "app = Flask(__name__)\n@app.route('/test', methods=['GET'])\ndef test_one():\n    return '/test'\nentity = TestMockEntity(id=1, user_name='joe')\nctx = app.test_request_context('/test')\nctx.push()\nassert entity.user_name == 'joe'\nassert entity.id == 1\nself.ext.entity_models = [TestMockEntity]\nentity = Entity(self.ext)\nrouting = Routing(app, self.ext, entity)\nwith ctx:\n    monkeypatch.setattr('flask.request.args', MockArgs(mock_token))\n    routing.before_middleware()\n    assert ctx.g.test_entities == [(1, 'joe')]\nwith ctx:\n    monkeypatch.setattr('flask.request.args', MockArgs())\n    monkeypatch.setattr('flask.request.headers', MockArgs(mock_token, True))\n    routing.before_middleware()\n    assert ctx.g.test_entities == [(1, 'joe')]\n"
-}

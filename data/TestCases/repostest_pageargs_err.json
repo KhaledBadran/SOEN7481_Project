@@ -1,9 +1,0 @@
-{
-    "functionName": "test_pageargs_err",
-    "className": "InheritanceTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_inheritance.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "collection = lookup.TemplateLookup()\ncollection.put_string('base',\n    \"\"\"\n            this is the base.\n            ${next.body()}\n        \"\"\")\ncollection.put_string('index',\n    \"\"\"\n            <%inherit file=\"base\"/>\n            <%page args=\"x, y, z=7\"/>\n            print ${x}, ${y}, ${z}\n        \"\"\"\n    )\ntry:\n    print(collection.get_template('index').render(x=5, y=10))\n    assert False\nexcept TypeError:\n    assert True\n"
-}

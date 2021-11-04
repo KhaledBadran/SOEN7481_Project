@@ -1,9 +1,0 @@
-{
-    "functionName": "proxy_server",
-    "className": null,
-    "fileName": "/Anorov_&_PySocks/test_&_test_pysocks.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "th = Thread(target=proxy_thread)\nth.daemon = True\nth.start()\nwait_for_socket('3proxy:http', PROXY_HOST_IP, HTTP_PROXY_PORT)\nwait_for_socket('3proxy:socks4', PROXY_HOST_IP, SOCKS4_PROXY_PORT)\nwait_for_socket('3proxy:socks5', PROXY_HOST_IP, SOCKS5_PROXY_PORT)\nyield\nprint('Active threads:')\nfor th in threading.enumerate():\n    print(' * %s' % th)\nparent = psutil.Process(os.getpid())\nprint('Active child processes:')\nfor child in parent.children(recursive=True):\n    print(' * %s' % child)\n    child.send_signal(signal.SIGINT)\npytest.fixture(scope='session', autouse=True)"
-}

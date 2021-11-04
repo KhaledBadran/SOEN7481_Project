@@ -1,9 +1,0 @@
-{
-    "functionName": "test_fixed",
-    "className": null,
-    "fileName": "/Silmathoron_&_NNGT/testing_&_test_connect_group_type.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Fixed degree with type \"\"\"\npop = nngt.NeuralPop.exc_and_inhib(1000)\nigroup = pop['inhibitory']\negroup = pop['excitatory']\nnet = nngt.Network(population=pop)\ndeg_e = 50\nng.connect_neural_types(net, 1, [-1, 1], graph_model='fixed_degree', degree\n    =deg_e, degree_type='out-degree')\ndeg_i = 100\nng.connect_neural_types(net, -1, [-1, 1], graph_model='fixed_degree',\n    degree=deg_i, degree_type='out-degree')\nedeg = net.get_degrees('out', nodes=egroup.ids)\nideg = net.get_degrees('out', nodes=igroup.ids)\nassert np.all(edeg == deg_e)\nassert np.all(ideg == deg_i)\nedeg = net.get_degrees('in', nodes=egroup.ids)\nideg = net.get_degrees('in', nodes=igroup.ids)\navg_deg = (deg_e * egroup.size + deg_i * igroup.size) / pop.size\nstd_deg = np.sqrt(avg_deg)\nassert avg_deg - std_deg < np.average(edeg) < avg_deg + std_deg\nassert avg_deg - std_deg < np.average(ideg) < avg_deg + std_deg\npytest.mark.mpi_skip"
-}

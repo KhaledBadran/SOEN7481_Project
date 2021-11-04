@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ellipse_round_trip",
-    "className": null,
-    "fileName": "/PaulHancock_&_Aegean/tests_&_test_wcs_helpers.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Converting an ellipse from pixel to sky coords and back again should give the\n    original ellipse (within some tolerance).\n    \"\"\"\nfname = 'tests/test_files/1904-66_SIN.fits'\nhelper = WCSHelper.from_file(fname)\na = 2 * helper.beam.a\nb = helper.beam.b\npa = helper.beam.pa + 45\nralist = list(range(-180, 180, 10))\ndeclist = list(range(-85, -10, 10))\nras, decs = np.meshgrid(ralist, declist)\nfor _, (ra, dec) in enumerate(zip(ras.ravel(), decs.ravel())):\n    if ra < 0:\n        ra += 360\n    x, y, sx, sy, theta = helper.sky2pix_ellipse((ra, dec), a, b, pa)\n    ra_f, dec_f, major, minor, pa_f = helper.pix2sky_ellipse((x, y), sx, sy,\n        theta)\n    assert_almost_equal(ra, ra_f)\n    assert_almost_equal(dec, dec_f)\n    if not abs(a - major) / a < 0.05:\n        raise AssertionError()\n    if not abs(b - minor) / b < 0.05:\n        raise AssertionError()\n    if not abs(pa - pa_f) < 1:\n        raise AssertionError()\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_no_timestamp",
-    "className": null,
-    "fileName": "/cgtobi_&_PyRMVtransport/tests_&_test_rmvtransport.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test with no timestamp.\"\"\"\nwith open('fixtures/request_no_timestamp.xml') as f:\n    xml = f.read()\nasync with aresponses.ResponsesMockServer(loop=event_loop) as arsps:\n    arsps.add(URL, URL_PATH, 'get', xml)\n    async with aiohttp.ClientSession(loop=event_loop) as session:\n        rmv = RMVtransport(session)\n        station_id = '3006904'\n        await rmv.get_departures(station_id)\npytest.mark.asynciopytest.mark.xfail(raises=RMVtransportError)"
-}

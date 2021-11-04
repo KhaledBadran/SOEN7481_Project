@@ -1,9 +1,0 @@
-{
-    "functionName": "test_make_plots",
-    "className": "TestMakeMagicPlots",
-    "fileName": "/PmagPy_&_PmagPy/pmagpy_tests_&_test_make_plots.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "dir_path = os.path.join(WD, 'data_files', '3_0', 'Osler')\nimage_file = os.path.join(dir_path, 'images.txt')\nos.chdir(dir_path)\nfor filename in glob.glob('*error*'):\n    os.remove(filename)\nos.system('new_make_magic_plots.py')\nself.assertFalse(glob.glob('errors.txt'))\nself.assertTrue(os.path.exists(image_file))\nlines = pmag.magic_read(image_file)[0]\nself.assertEqual(len(lines), 7)\nself.assertFalse('image' in lines[0].keys())\nif pmagplotlib.isServer:\n    self.assertFalse(glob.glob('thumbnail_errors.txt'))\n    self.assertEqual(14, len(glob.glob('*.png')))\n    self.assertEqual(7, len(glob.glob('*thumb*.png')))\nelse:\n    self.assertEqual(10, len(glob.glob('*.png')))\n    self.assertEqual(5, len(glob.glob('*thumb*.png')))\n"
-}

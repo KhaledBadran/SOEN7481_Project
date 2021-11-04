@@ -1,9 +1,0 @@
-{
-    "functionName": "test_transform_should_transform_all_steps_for_each_data_inputs_expected_outputs",
-    "className": null,
-    "fileName": "/Neuraxio_&_Neuraxle/testing_&_steps_&_test_for_each.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "tape = TapeCallbackFunction()\np = Pipeline([ForEachDataInput(Pipeline([TransformCallbackStep(tape.\n    callback, ['1']), TransformCallbackStep(tape.callback, ['2'])]))])\ndata_inputs = [[0, 1], [1, 2]]\noutputs = p.transform(data_inputs)\nassert tape.get_name_tape() == ['1', '2', '1', '2']\n"
-}

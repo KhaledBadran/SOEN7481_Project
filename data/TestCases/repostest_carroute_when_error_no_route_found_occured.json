@@ -1,9 +1,0 @@
-{
-    "functionName": "test_carroute_when_error_no_route_found_occured",
-    "className": "RoutingApiTest",
-    "fileName": "/abdullahselek_&_HerePy/tests_&_test_routing_api.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with open('testdata/models/routing_error_no_route_found.json', 'r') as f:\n    expectedResponse = f.read()\nresponses.add(responses.GET,\n    'https://route.ls.hereapi.com/routing/7.2/calculateroute.json',\n    expectedResponse, status=200)\nwith self.assertRaises(herepy.NoRouteFoundError):\n    self._api.car_route([11.0, 12.0], [47.013399, -10.171986])\nresponses.activate"
-}

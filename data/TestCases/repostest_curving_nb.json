@@ -1,9 +1,0 @@
-{
-    "functionName": "test_curving_nb",
-    "className": null,
-    "fileName": "/apetri_&_LensTools/lenstools_&_tests_&_test_database.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "db_filename = os.path.join(dataExtern(), 'database',\n    'variance_scaling_nb_expected.sqlite')\nparameter = 'w'\nnsim = 200\nxlim = 0, 1.0 / 65\nylim = 1, 2.5\nnr_top = [1000, 500, 300, 200, 150, 100, 90, 70]\nfig, ax = plt.subplots()\nwith Database(db_filename) as db:\n    features = db.tables\n    features.sort(key=order.get)\n    for f in features:\n        v = db.read_table(f).query('nsim=={0}'.format(nsim))\n        v['1/nreal'] = v.eval('1.0/nreal')\n        v = v.sort_values('1/nreal')\n        s0 = v[parameter].values[0]\n        Nb = v['bins'].mean()\n        Np = 3\n        ax.scatter(v['1/nreal'], v[parameter] / s0, color=colors[f], marker\n            =markers[f], label=labels[f], s=10 + (100 - 10) * (Nb - 1) / (\n            200 - 1))\n        x = 1.0 / np.linspace(1000, 65, 100)\n        ax.plot(x, 1 + x * (Nb - Np), linestyle='--', color=colors[f])\n        ax.plot(x, 1 + (Nb - Np) * x + (Nb - Np) * (Nb - Np + 2) * x ** 2,\n            linestyle='-', color=colors[f])\n        ax.plot(x, (1 - 2 * x) / (1 - (Nb - Np + 2) * x), linestyle='-',\n            linewidth=3, color=colors[f])\nax.set_xlim(*xlim)\nax.set_ylim(*ylim)\nax.set_xlabel('$1/N_r$', fontsize=22)\nax.set_ylabel('$\\\\langle\\\\hat{\\\\sigma}^2_w\\\\rangle/\\\\sigma^2_{w,\\\\infty}$',\n    fontsize=22)\nax.legend(loc='upper left', prop={'size': 13})\nax1 = ax.twiny()\nax1.set_xlim(*xlim)\nax1.set_xticks([(1.0 / n) for n in nr_top])\nax1.set_xticklabels([str(n) for n in nr_top])\nax1.set_xlabel('$N_r$', fontsize=22)\nfig.savefig('database_nb.png')\n"
-}

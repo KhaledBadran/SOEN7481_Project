@@ -1,9 +1,0 @@
-{
-    "functionName": "test_write_alternative_tag",
-    "className": "TestAttributes",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that an Attributes structure can be correctly written to a data\n        stream with an alternative tag. This can occur if a variant of the\n        Attributes structure is being used, like the Common Attributes, Public\n        Key Attributes, or Private Key Attributes structures.\n        \"\"\"\nattrs = objects.Attributes(attributes=[primitives.Enumeration(enums.\n    CryptographicAlgorithm, enums.CryptographicAlgorithm.AES, enums.Tags.\n    CRYPTOGRAPHIC_ALGORITHM), primitives.Integer(128, enums.Tags.\n    CRYPTOGRAPHIC_LENGTH)], tag=enums.Tags.PRIVATE_KEY_ATTRIBUTES)\nstream = utils.BytearrayStream()\nattrs.write(stream)\nself.assertEqual(len(self.alt_encoding), len(stream))\nself.assertEqual(str(self.alt_encoding), str(stream))\n"
-}

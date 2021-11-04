@@ -1,9 +1,0 @@
-{
-    "functionName": "_indiameter_from_fibers",
-    "className": "DelaunayGeometry",
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_materials_&_VoronoiFibers.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        Calculate an indiameter by distance transforming sections of the\n        fiber image. By definition the maximum value will be the largest radius\n        of an inscribed sphere inside the fibrous hull\n        \"\"\"\nNp = self.num_pores()\nindiam = np.zeros(Np, dtype=float)\nincen = np.zeros([Np, 3], dtype=float)\nhull_pores = np.unique(self._hull_image)\nLx, Ly, Lz = np.shape(self._hull_image)\nindx, indy, indz = np.indices([Lx, Ly, Lz])\nindx = indx.flatten()\nindy = indy.flatten()\nindz = indz.flatten()\nfor i, pore in enumerate(hull_pores):\n    logger.info('Processing pore: ' + str(i) + ' of ' + str(len(hull_pores)))\n    dt_pore = self._dt_image * (self._hull_image == pore)\n    indiam[pore] = dt_pore.max() * 2\n    max_ind = np.argmax(dt_pore)\n    incen[pore, 0] = indx[max_ind]\n    incen[pore, 1] = indy[max_ind]\n    incen[pore, 2] = indz[max_ind]\nindiam *= self.network.resolution\nincen *= self.network.resolution\nreturn indiam, incen\n"
-}

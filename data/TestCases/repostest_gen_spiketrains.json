@@ -1,9 +1,0 @@
-{
-    "functionName": "test_gen_spiketrains",
-    "className": "TestGenerators",
-    "fileName": "/alejoe91_&_MEArec/MEArec_&_tests_&_test_generators.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "print('Test spike train generation')\nrec_params = mr.get_default_recordings_params()\nsp_params = rec_params['spiketrains']\nspgen = mr.SpikeTrainGenerator(sp_params, seed=0)\nspgen.generate_spikes()\nfor st in spgen.spiketrains:\n    isi = stat.isi(st).rescale('ms')\n    assert np.all(isi.magnitude > sp_params['ref_per'])\n    assert 1 / np.mean(isi.rescale('s')) > sp_params['min_rate']\nsp_params['process'] = 'gamma'\nspgen = mr.SpikeTrainGenerator(sp_params, seed=0)\nspgen.generate_spikes()\nfor st in spgen.spiketrains:\n    isi = stat.isi(st).rescale('ms')\n    assert np.all(isi.magnitude > sp_params['ref_per'])\n    assert 1 / np.mean(isi.rescale('s')) > sp_params['min_rate']\nspgen = mr.gen_spiketrains(sp_params, seed=0)\nspiketrains = spgen.spiketrains\nspgen_st = mr.gen_spiketrains(spiketrains=spiketrains)\nfor st, st_ in zip(spgen.spiketrains, spgen_st.spiketrains):\n    assert np.allclose(st.times.magnitude, st_.times.magnitude)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ozone_stevenson_zero_nofix",
-    "className": null,
-    "fileName": "/OMS-NetZero_&_FAIR/tests_&_integration_&_integration_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "emissions = deepcopy(fair.RCPs.rcp85.Emissions.emissions)\nemissions[:, 1:] = 0\nemissions[:, (3)] = 209.279889\nemissions[:, (6)] = 170.0\nemissions[:, (7)] = 10.0\nemissions[:, (8)] = 4.29 * molwt.N / molwt.NO\n_, F, _ = fair.forward.fair_scm(emissions=emissions, natural=0,\n    fixPre1850RCP=False, useTropO3TFeedback=False)\nassert np.allclose(F[:, (4)], np.zeros(736))\n"
-}

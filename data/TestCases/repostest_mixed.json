@@ -1,9 +1,0 @@
-{
-    "functionName": "test_mixed",
-    "className": null,
-    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_datacontainer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "x = np.arange(10)\ny = np.arange(10) + 5\nz = np.arange(30).reshape(10, 3)\narr1 = np.full((3, 3, 3), -1)\ntab1 = Table(data={'x': x, 'y': y, 'z': z}, meta={'test': 'this'})\ndata = GoodMixedTypeContainer(tab1, arr1)\nassert data.tab1.keys() == ['x', 'y', 'z'], 'Bad table save'\nassert data.tab1.meta['test'] == 'this', 'Bad table meta save'\nassert data.arr1shape == (3, 3, 3), 'Bad shape'\nhdu = data.to_hdu(add_primary=True)\nassert len(hdu) == 3, 'Should be 3 extensions'\nassert [h.name for h in hdu] == ['PRIMARY', 'TAB1', 'ARR1'\n    ], 'Bad extension names'\nassert len(hdu['TAB1'].data) == data.tab1len, 'Bad table length'\nassert hdu['ARR1'].shape == data.arr1shape, 'Bad array shape'\nassert hdu['TAB1'].header['TAB1LEN'] == 10, 'Bad header data'\nassert hdu['ARR1'].header['ARR1SHAPE'] == str((3, 3, 3)), 'Bad array shape'\n_data = GoodMixedTypeContainer.from_hdu(hdu)\nassert _data.arr1shape == (3, 3, 3), 'Bad array shape'\ndata = BadMixedTypeContainer(tab1, arr1)\nassert data.tab1.keys() == ['x', 'y', 'z'], 'Bad table save'\nassert data.tab1.meta['test'] == 'this', 'Bad table meta save'\nassert data.arr1shape == (3, 3, 3), 'Bad shape'\nwith pytest.raises(ValueError):\n    hdu = data.to_hdu()\n"
-}

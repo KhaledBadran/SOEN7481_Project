@@ -1,9 +1,0 @@
-{
-    "functionName": "test_io_action",
-    "className": "TestMessages",
-    "fileName": "/PRIArobotics_&_HedgehogProtocol/tests_&_test_protocol.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "msg = io.Action(0, io.INPUT_PULLDOWN)\nproto = HedgehogMessage()\nproto.io_action.flags = io.INPUT_PULLDOWN\nself.assertTransmissionClientServer(msg, proto)\nassert not msg.output\nassert not msg.pullup\nassert msg.pulldown\nassert not msg.level\nwith pytest.raises(errors.InvalidCommandError):\n    io.Action(0, io.OUTPUT | io.PULLUP)\nwith pytest.raises(errors.InvalidCommandError):\n    io.Action(0, io.OUTPUT | io.PULLDOWN)\nwith pytest.raises(errors.InvalidCommandError):\n    io.Action(0, io.LEVEL)\nwith pytest.raises(errors.InvalidCommandError):\n    io.Action(0, io.PULLUP | io.PULLDOWN)\n"
-}

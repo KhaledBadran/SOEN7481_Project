@@ -1,9 +1,0 @@
-{
-    "functionName": "test_not_follow_redirect",
-    "className": null,
-    "fileName": "/RobertoPrevato_&_BlackSheep/tests_&_client_&_test_redirects.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "async with ClientSession(base_url=b'http://localhost:8080', pools=\n    pools_factory(responses), follow_redirects=False) as client:\n    response = await client.get(b'/')\n    assert response.status == 302\n    location = response.headers[b'location']\n    assert location\n    assert location[0] == expected_location\npytest.mark.asynciopytest.mark.parametrize('responses,expected_location', [[[Response(302, [(\n    b'Location', b'/a')]), Response(302, [(b'Location', b'/b')]), Response(\n    200, None, TextContent('Hello, World!'))], b'/a']])"
-}

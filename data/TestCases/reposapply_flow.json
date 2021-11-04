@@ -1,9 +1,0 @@
-{
-    "functionName": "apply_flow",
-    "className": "MixedInvasionPercolation",
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_algorithms_&_MixedInvasionPercolation.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        Convert the invaded sequence into an invaded time for a given flow rate\n        considering the volume of invaded pores and throats.\n\n        Parameters\n        ----------\n        flowrate : float\n            The flow rate of the injected fluid\n\n        Returns\n        -------\n        Creates a throat array called 'invasion_time' in the Algorithm\n        dictionary\n\n        \"\"\"\nnet = self.project.network\nP12 = net['throat.conns']\naa = self['throat.invasion_sequence']\nbb = np.argsort(self['throat.invasion_sequence'])\nP12_inv = self['pore.invasion_sequence'][P12]\nP1_inv = P12_inv[:, (0)] <= aa\nP2_inv = P12_inv[:, (1)] <= aa\ncc = np.column_stack((P1_inv, P2_inv))\ndd = np.sum(cc, axis=1, dtype=bool)\nP12_vol = np.sum(net['pore.volume'][P12] * cc, axis=1) * dd\nT_vol = P12_vol + net['throat.volume']\nee = np.cumsum(T_vol[bb] / flowrate)\nt = np.zeros((self.Nt,))\nt[bb] = ee\nphase = self.project.find_phase(self)\nphase['throat.invasion_time'] = t\n"
-}

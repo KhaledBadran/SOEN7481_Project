@@ -1,9 +1,0 @@
-{
-    "functionName": "test_detect_inter_type",
-    "className": "TestsORFDetection",
-    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_sORF_detection.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "inter_dict = [{'seq_id': 'aaa', 'source': 'UTR_derived', 'feature':\n    'Transcript', 'start': 1, 'end': 23, 'phase': '.', 'strand': '+',\n    'score': '.'}]\nattributes_inter = [{'ID': 'tran0', 'Name': 'Transcript_0', 'UTR_type': '3utr'}\n    ]\ninters = []\ninters.append(Create_generator(inter_dict[0], attributes_inter[0], 'gff'))\nsd.get_coverage = self.mock.mock_get_coverage\nwigs = {'forward': 'wigs_f', 'reverse': 'wigs_r'}\ndata = sd.detect_inter_type(inters, wigs, 'test')\nself.assertDictEqual(data, {'aaa': {'interCDS': [], '5utr': [], '3utr': ['2']}}\n    )\nsd.get_coverage = copy.deepcopy(get_coverage)\n"
-}

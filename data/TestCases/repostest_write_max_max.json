@@ -1,9 +1,0 @@
-{
-    "functionName": "test_write_max_max",
-    "className": "TestLongInteger",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_primitives_&_test_long_integer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a LongInteger representing the maximum positive value can be\n        written to a byte stream.\n        \"\"\"\nencoding = b'B\\x00\\x00\\x03\\x00\\x00\\x00\\x08\\x7f\\xff\\xff\\xff\\xff\\xff\\xff\\xff'\nstream = utils.BytearrayStream()\nlong_int = primitives.LongInteger(primitives.LongInteger.MAX)\nlong_int.write(stream)\nresult = stream.read()\nself.assertEqual(len(encoding), len(result))\nself.assertEqual(encoding, result)\n"
-}

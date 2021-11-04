@@ -1,9 +1,0 @@
-{
-    "functionName": "test_async_socket",
-    "className": "TestAsyncSocket",
-    "fileName": "/PRIArobotics_&_HedgehogUtils/tests_&_test_zmq.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "a, b = (zmq_aio_ctx.socket(zmq.PAIR).configure(hwm=1000, linger=0) for _ in\n    range(2))\nwith a, b:\n    a.bind('inproc://endpoint')\n    b.connect('inproc://endpoint')\n    await assertTimeout(b.poll(), 1)\n    assert await b.poll(1) == 0\n    with assertPassed(1):\n        task = asyncio.ensure_future(b.wait())\n        await assertTimeout(task, 1, shield=True)\n        await a.signal()\n        await task\n    with assertPassed(1):\n        task = asyncio.ensure_future(b.recv_multipart_expect((b'foo', b'bar')))\n        await assertTimeout(task, 1, shield=True)\n        await a.send_multipart((b'foo', b'bar'))\n        await task\npytest.mark.asyncio"
-}

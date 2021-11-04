@@ -1,9 +1,0 @@
-{
-    "functionName": "test_metaclass",
-    "className": "Test",
-    "fileName": "/fabioz_&_PyDev.Debugger/test_pydevd_reload_&_test_pydevd_reload.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class Meta(type):\n\n    def __init__(cls, name, bases, attrs):\n        super(Meta, cls).__init__(name, bases, attrs)\nclass F:\n    __metaclass__ = Meta\n\n    def m1(self):\n        return 1\nclass G:\n    __metaclass__ = Meta\n\n    def m1(self):\n        return 2\nself.assertEqual(F().m1(), 1)\npydevd_reload.Reload(None)._update(None, None, F, G)\nself.assertEqual(F().m1(), 2)\n"
-}

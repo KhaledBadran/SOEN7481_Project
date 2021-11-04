@@ -1,9 +1,0 @@
-{
-    "functionName": "test_mac_on_closed",
-    "className": "TestProxyKmipClient",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_test_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a ClientConnectionNotOpen exception is raised when trying\n        to do mac on an unopened client connection.\n        \"\"\"\nclient = ProxyKmipClient()\nuuid = 'aaaaaaaa-1111-2222-3333-ffffffffffff'\nalgorithm = enums.CryptographicAlgorithm.HMAC_SHA256\ndata = b'\\x00\\x01\\x02\\x03\\x04'\nargs = [data, uuid, algorithm]\nself.assertRaises(ClientConnectionNotOpen, client.mac, *args)\nmock.patch('kmip.pie.client.KMIPProxy', mock.MagicMock(spec_set=KMIPProxy))"
-}

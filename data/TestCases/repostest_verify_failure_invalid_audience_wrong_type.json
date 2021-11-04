@@ -1,9 +1,0 @@
-{
-    "functionName": "test_verify_failure_invalid_audience_wrong_type",
-    "className": "EasyJWTTest",
-    "fileName": "/BMeu_&_EasyJWT/tests_&_easyjwt_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n            Test verifying a token with an audience claim, but giving an audience of a wrong type.\n\n            Expected Result: An `InvalidAudienceError` is raised.\n        \"\"\"\neasyjwt_creation = EasyJWT(self.key)\neasyjwt_creation.audience = self.audience\ntoken = easyjwt_creation.create()\nwith self.assertRaises(InvalidAudienceError):\n    easyjwt_verification = EasyJWT.verify(token, self.key, audience=42.1337)\n    self.assertIsNone(easyjwt_verification)\n"
-}

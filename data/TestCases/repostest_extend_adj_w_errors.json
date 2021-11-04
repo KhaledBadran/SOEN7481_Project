@@ -1,9 +1,0 @@
-{
-    "functionName": "test_extend_adj_w_errors",
-    "className": "TestExtend",
-    "fileName": "/hdoupe_&_ParamTools/paramtools_&_tests_&_test_parameters.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class ExtParams(Parameters):\n    defaults = extend_ex_path\n    label_to_extend = 'd0'\n    array_first = True\nparams = ExtParams()\nwith pytest.raises(ValidationError):\n    params.adjust({'extend_param': 102})\nparams = ExtParams()\nwith pytest.raises(ValidationError) as excinfo:\n    params.adjust({'extend_param': [{'value': 70, 'd0': 5}]})\nemsg = json.loads(excinfo.value.args[0])\nassert 'd0=7' in emsg['errors']['extend_param'][0]\nparams = ExtParams()\nbefore = copy.deepcopy(params.extend_param)\nparams.adjust({'extend_param': [{'value': 70, 'd0': 5}]}, raise_errors=False)\nassert params.errors['extend_param'] == emsg['errors']['extend_param']\nassert np.allclose(params.extend_param, before)\n"
-}

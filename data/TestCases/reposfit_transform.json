@@ -1,9 +1,0 @@
-{
-    "functionName": "fit_transform",
-    "className": "DataFrameToMatrix",
-    "fileName": "/kitware_&_BroThon/zat_&_dataframe_to_matrix.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Convert the dataframe to a matrix (numpy ndarray)\n        Args:\n            input_df (dataframe): The dataframe to convert\n            normalize (bool): Boolean flag to normalize numeric columns (default=True)\n        \"\"\"\nself.nan_replace = nan_replace\n_internal_df = input_df.copy() if copy else input_df\nself.object_to_categorical(_internal_df)\nself.fit_category_nans(_internal_df)\nself.lock_categorical(_internal_df)\nself.sanity_check_categorical(_internal_df)\nif normalize:\n    self.normalize_numeric(_internal_df)\nfor column in _internal_df.select_dtypes(include='number').columns:\n    _internal_df[column].fillna(self.nan_replace, inplace=True)\nfor column in list(_internal_df.select_dtypes(exclude=['number', 'category'\n    ]).columns):\n    print('Dropping {:s} column...'.format(column))\n_internal_df = _internal_df.select_dtypes(include=['number', 'category'])\nself.column_names = _internal_df.columns.to_list()\nfor column in _internal_df.columns:\n    self.dtype_map[column] = _internal_df[column].dtype\nreturn pd.get_dummies(_internal_df).to_numpy(dtype=np.float32)\n"
-}

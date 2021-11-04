@@ -1,9 +1,0 @@
-{
-    "functionName": "test_input_too_many",
-    "className": null,
-    "fileName": "/vc1492a_&_PyNomaly/tests_&_test_loop.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test to ensure that the proper warning is issued if both a data matrix\n    and a distance matrix are provided (can only be data matrix).\n    :param X_n120: A pytest Fixture that generates 120 observations.\n    :return: None\n    \"\"\"\nneigh = NearestNeighbors(metric='euclidean')\nneigh.fit(X_n120)\nd, idx = neigh.kneighbors(X_n120, n_neighbors=10, return_distance=True)\nwith pytest.warns(UserWarning) as record:\n    loop.LocalOutlierProbability(X_n120, distance_matrix=d, neighbor_matrix\n        =idx, use_numba=NUMBA)\nassert len(record) == 1\nassert record[0].message.args[0\n    ] == 'Only one of the following may be provided: data or a distance matrix (not both).'\n"
-}

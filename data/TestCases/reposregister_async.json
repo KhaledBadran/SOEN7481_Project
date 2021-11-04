@@ -1,9 +1,0 @@
-{
-    "functionName": "register_async",
-    "className": null,
-    "fileName": "/PRIArobotics_&_HedgehogClient/hedgehog_&_client_&_shutdown_handler.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "if threading.current_thread() is not threading.main_thread():\n    raise RuntimeError(\n        'Signal handlers can only be manipulated from the main thread')\nif signalnum in __handlers:\n    raise RuntimeError(\"Can't combine regular and event loop signal handling\")\nloop = asyncio.get_event_loop()\nif signalnum not in __async_handlers:\n    old_handler = signal.getsignal(signalnum)\n    if old_handler is None:\n        logger.warning(\"Removing a signal handler that can't be restored\")\n        if signalnum == signal.SIGINT:\n            old_handler = signal.default_int_handler\n        else:\n            old_handler = signal.SIG_DFL\n    handler = __async_handlers[signalnum] = __Handler(old_handler,\n        OrderedDict())\n\n    def do_handle():\n        for callback in reversed(__async_handlers[signalnum].callbacks.values()\n            ):\n            try:\n                callback()\n            except Exception:\n                logger.exception('Exception in signal handler')\n    loop.add_signal_handler(signalnum, do_handle)\nelse:\n    handler = __async_handlers[signalnum]\nkey = object()\nhandler.callbacks[key] = callback\ntry:\n    yield\nfinally:\n    del handler.callbacks[key]\n    if len(handler.callbacks) == 0:\n        loop.remove_signal_handler(signalnum)\n        signal.signal(signalnum, handler.old_handler)\n        del __async_handlers[signalnum]\ncontextmanager"
-}

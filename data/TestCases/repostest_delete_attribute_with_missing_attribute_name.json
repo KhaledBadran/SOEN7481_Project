@@ -1,9 +1,0 @@
-{
-    "functionName": "test_delete_attribute_with_missing_attribute_name",
-    "className": "TestKmipEngine",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that an InvalidMessage error is raised when attempting to delete\n        an attribute without specifying the attribute name (under KMIP 1.0+).\n        \"\"\"\ne = engine.KmipEngine()\ne._data_store = self.engine\ne._data_store_session_factory = self.session_factory\ne._data_session = e._data_store_session_factory()\ne._is_allowed_by_operation_policy = mock.Mock(return_value=True)\ne._logger = mock.MagicMock()\nsecret = pie_objects.SymmetricKey(enums.CryptographicAlgorithm.AES, 0, b'')\ne._data_session.add(secret)\ne._data_session.commit()\ne._data_session = e._data_store_session_factory()\nargs = payloads.DeleteAttributeRequestPayload(unique_identifier='1'),\nself.assertRaisesRegex(exceptions.InvalidMessage,\n    'The DeleteAttribute request must specify the attribute name.', e.\n    _process_delete_attribute, *args)\n"
-}

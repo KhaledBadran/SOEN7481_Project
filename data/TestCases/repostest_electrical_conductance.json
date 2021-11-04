@@ -1,9 +1,0 @@
-{
-    "functionName": "test_electrical_conductance",
-    "className": "ElectricalConductanceTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_physics_&_ElectricalConductanceTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.geo['throat.conduit_lengths.pore1'] = 0.15\nself.geo['throat.conduit_lengths.throat'] = 0.6\nself.geo['throat.conduit_lengths.pore2'] = 0.25\nmod = op.models.physics.electrical_conductance.series_resistors\nself.phys.add_model(propname='throat.electrical_conductance', model=mod)\nself.phys.regenerate_models()\nactual = self.phys['throat.electrical_conductance'].mean()\nassert_approx_equal(actual, desired=1.0)\n"
-}

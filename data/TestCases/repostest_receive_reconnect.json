@@ -1,9 +1,0 @@
-{
-    "functionName": "test_receive_reconnect",
-    "className": "TestClient",
-    "fileName": "/akolar_&_ogn-lib/tests_&_test_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "sock = self._get_mocked_socket(mocker, True)\nmocker.patch('socket.create_connection', return_value=sock)\nmocker.patch('time.sleep')\ncl = client.OgnClient('username')\ncl._receive_loop = mocker.MagicMock(side_effect=BrokenPipeError)\ncl._reconnect = mocker.MagicMock(side_effect=ConnectionError)\ncl.connect()\nwith pytest.raises(ConnectionError):\n    cl.receive(lambda x: None)\nassert cl._reconnect.call_count == 1\n"
-}

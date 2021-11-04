@@ -1,9 +1,0 @@
-{
-    "functionName": "test_transform_array_like_list",
-    "className": "TestTunable",
-    "fileName": "/HDI-Project_&_BTB/tests_&_tuning_&_test_tunable.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test transform a valid array like list.\"\"\"\nself.bhp.transform.return_value = [[1]]\nself.chp.transform.return_value = [[0]]\nself.ihp.transform.return_value = [[1]]\nvalues = [[True, 'dog', 2], [False, 'cat', 3]]\nresult = self.instance.transform(values)\nassert_called_with_np_array(self.bhp.transform.call_args_list, [call(np.\n    array([True, False]))])\nassert_called_with_np_array(self.chp.transform.call_args_list, [call(np.\n    array(['dog', 'cat']))])\nassert_called_with_np_array(self.ihp.transform.call_args_list, [call(np.\n    array([2, 3]))])\nnp.testing.assert_array_equal(result, np.array([[1, 0, 1]]))\n"
-}

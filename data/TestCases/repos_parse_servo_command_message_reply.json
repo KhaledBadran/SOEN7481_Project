@@ -1,9 +1,0 @@
-{
-    "functionName": "_parse_servo_command_message_reply",
-    "className": null,
-    "fileName": "/PRIArobotics_&_HedgehogProtocol/hedgehog_&_protocol_&_messages_&_servo.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "port = msg.port\nactive = msg.active\nposition = msg.position\nsubscription = msg.subscription if msg.HasField('subscription') else None\nif subscription is None:\n    return CommandReply(port, position if active else None)\nelse:\n    return CommandUpdate(port, position if active else None, subscription)\nReplyMsg.parser('servo_command_message')"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_simulate_exception_for_invalid_parameters",
-    "className": null,
-    "fileName": "/NASA_&_MLMCPy/tests_&_mlmc_&_test_MLMCSimulator.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Ensures that expected exceptions occur when running simulate() with invalid\n    parameters.\n    \"\"\"\ntest_mlmc = MLMCSimulator(models=models_from_data, data=data_input)\nwith pytest.raises(ValueError):\n    test_mlmc.simulate(epsilon=-0.1, initial_sample_sizes=20)\nwith pytest.raises(TypeError):\n    test_mlmc.simulate(epsilon='one', initial_sample_sizes=20)\nwith pytest.raises(TypeError):\n    test_mlmc.simulate(epsilon=0.1, initial_sample_sizes='five')\nwith pytest.raises(TypeError):\n    test_mlmc.simulate(epsilon=0.1, initial_sample_sizes=5, target_cost='3')\nwith pytest.raises(ValueError):\n    test_mlmc.simulate(epsilon=0.1, initial_sample_sizes=5, target_cost=-1)\nwith pytest.raises(ValueError):\n    test_mlmc.simulate(epsilon=0.1, initial_sample_sizes=1)\nwith pytest.raises(ValueError):\n    test_mlmc.simulate(epsilon=0.1, initial_sample_sizes=[5, 4, 3, 2])\n"
-}

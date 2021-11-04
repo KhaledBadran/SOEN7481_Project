@@ -1,9 +1,0 @@
-{
-    "functionName": "test_replace_in_fort1_float",
-    "className": null,
-    "fileName": "/mortele_&_OccamTools/test_&_test_replace_in_fort1.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "out_file_name = os.path.join(os.path.dirname(file_name), 'fort.1_float')\nfor dt, freq in zip([0.1, 0.02, 1.085, 0.295], [1.0, 6.294, 0.0258, 9]):\n    replace_in_fort1(file_name, out_file_name, time_step=dt,\n        collision_frequen=freq)\n    fort1_new = Fort1(out_file_name)\n    fort1_new.read_file(silent=True)\n    assert fort1_new.dt == pytest.approx(dt, abs=1e-14)\n    assert fort1_new.collision_frequency == pytest.approx(freq, abs=1e-14)\n    _assert_fort1s_equal_ignore(fort1, fort1_new, 'dt', 'collision_frequency')\nos.remove(out_file_name)\n"
-}

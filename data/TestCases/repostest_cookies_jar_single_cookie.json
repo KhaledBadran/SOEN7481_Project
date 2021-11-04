@@ -1,9 +1,0 @@
-{
-    "functionName": "test_cookies_jar_single_cookie",
-    "className": null,
-    "fileName": "/RobertoPrevato_&_BlackSheep/tests_&_client_&_test_cookiejar.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "fake_pools = FakePools([Response(200, [(b'Set-Cookie',\n    write_response_cookie(Cookie(b'X-Foo', b'Foo')))]).with_content(\n    TextContent('Hello, World!')), Response(200, None, TextContent('Hello!'))])\ncheck_cookie = False\nasync def middleware_for_assertions(request, next_handler):\n    if check_cookie:\n        cookie = request.cookies.get('X-Foo')\n        assert cookie is not None, 'X-Foo cookie must be configured for following requests'\n    return await next_handler(request)\nasync with ClientSession(base_url=b'https://bezkitu.org', pools=fake_pools,\n    middlewares=[middleware_for_assertions]) as client:\n    await client.get(b'/')\n    check_cookie = True\n    await client.get(b'/')\npytest.mark.asyncio"
-}

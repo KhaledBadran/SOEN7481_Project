@@ -1,9 +1,0 @@
-{
-    "functionName": "test_f2r",
-    "className": null,
-    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_profiles.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "cM = ccl.halos.ConcentrationDuffy08(M200)\np1 = ccl.halos.HaloProfileNFW(cM)\np2 = ccl.halos.HaloProfileNFW(cM, fourier_analytic=True)\np2._real = None\np2.update_precision_fftlog(padding_hi_fftlog=1000.0)\nM = 100000000000000.0\na = 0.5\nr_Delta = M200.get_radius(COSMO, M, a) / a\nr_arr = np.logspace(-2, 1) * r_Delta\npr_1 = p1.real(COSMO, r_arr, M, a, M200)\npr_2 = p2.real(COSMO, r_arr, M, a, M200)\nid_good = r_arr < r_Delta\nres = np.fabs(pr_2[id_good] / pr_1[id_good] - 1)\nassert np.all(res < 0.01)\n"
-}

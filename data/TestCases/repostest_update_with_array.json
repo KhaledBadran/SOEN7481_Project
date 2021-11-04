@@ -1,9 +1,0 @@
-{
-    "functionName": "test_update_with_array",
-    "className": null,
-    "fileName": "/SimLeek_&_CV_PubSubs/tests_&_window_&_test_subscriber_windows.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "sub_win.SubscriberWindows.FRAME_DICT = {}\nwith mock.patch.object(cv2, 'namedWindow'), mock.patch.object(sub_win.\n    SubscriberWindows, 'update_frames') as mock_update_win_frames, mock.patch(\n    'displayarray.window.subscriber_windows.window_commands'\n    ) as mock_win_cmd, mock.patch.object(sub_win.SubscriberWindows,\n    'handle_keys') as mock_handle_keys, mock.patch.object(sub_win.\n    SubscriberWindows, 'add_source') as add_source, mock.patch.object(sub_win\n    .SubscriberWindows, 'add_window') as add_window, mock.patch(\n    'displayarray.window.subscriber_windows.global_cv_display_callback'\n    ) as mock_cb, mock.patch.object(cv2, 'waitKey') as key:\n    sw = sub_win.SubscriberWindows()\n    sw.update(arr=1, id=2)\n    mock_cb.assert_called_once_with(1, 2)\n    add_source.assert_has_calls([mock.call(0), mock.call(2)])\n    add_window.assert_has_calls([mock.call('displayarray'), mock.call(2)])\n"
-}

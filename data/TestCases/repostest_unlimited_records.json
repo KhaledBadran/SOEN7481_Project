@@ -1,9 +1,0 @@
-{
-    "functionName": "test_unlimited_records",
-    "className": "TestValidationPolicyCommandInterest",
-    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_validation_policy_command_interest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self._fixture = ValidationPolicyCommandInterestFixture(\n    ValidationPolicyCommandInterest.Options(15 * 1000.0, -1))\nidentities = []\nfor i in range(20):\n    identity = self._fixture.addSubCertificate(Name(\n        '/Security/V2/ValidatorFixture/Sub' + str(i)), self._fixture._identity)\n    self._fixture._cache.insert(identity.getDefaultKey().\n        getDefaultCertificate())\n    identities.append(identity)\ninterest1 = self._fixture.makeCommandInterest(identities[0])\nself._fixture.setNowOffsetMilliseconds(1 * 1000.0)\nfor i in range(20):\n    interest2 = self._fixture.makeCommandInterest(identities[i])\n    self.validateExpectSuccess(interest2, 'Should succeed')\nself.validateExpectFailure(interest1, 'Should fail (timestamp reorder)')\n"
-}

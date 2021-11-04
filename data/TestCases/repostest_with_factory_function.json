@@ -1,9 +1,0 @@
-{
-    "functionName": "test_with_factory_function",
-    "className": "TestGenerationStrategy",
-    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_generation_strategy.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Checks that generation strategy works with custom factory functions.\n        No information about the model should be saved on generator run.\"\"\"\ndef get_sobol(search_space: SearchSpace) ->RandomModelBridge:\n    return RandomModelBridge(search_space=search_space, model=\n        SobolGenerator(), transforms=Cont_X_trans)\nexp = get_branin_experiment()\nsobol_generation_strategy = GenerationStrategy(steps=[GenerationStep(model=\n    get_sobol, num_trials=5)])\ng = sobol_generation_strategy.gen(exp)\nself.assertIsInstance(sobol_generation_strategy.model, RandomModelBridge)\nself.assertIsNone(g._model_key)\nself.assertIsNone(g._model_kwargs)\nself.assertIsNone(g._bridge_kwargs)\n"
-}

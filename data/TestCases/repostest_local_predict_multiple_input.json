@@ -1,9 +1,0 @@
-{
-    "functionName": "test_local_predict_multiple_input",
-    "className": "TestSimple",
-    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_test_simple_integration.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "l1 = Linear(3, 2)()\nl2 = Linear(3, 3)()\njoinTable = JoinTable(dimension=1, n_input_dims=1)([l1, l2])\nmodel = Model(inputs=[l1, l2], outputs=joinTable)\nresult = model.predict_local([np.ones([4, 3]), np.ones([4, 3])])\nassert result.shape == (4, 5)\nresult2 = model.predict_class([np.ones([4, 3]), np.ones([4, 3])])\nassert result2.shape == (4,)\nresult3 = model.predict_local([JTensor.from_ndarray(np.ones([4, 3])),\n    JTensor.from_ndarray(np.ones([4, 3]))])\nassert result3.shape == (4, 5)\nresult4 = model.predict_class([JTensor.from_ndarray(np.ones([4, 3])),\n    JTensor.from_ndarray(np.ones([4, 3]))])\nassert result4.shape == (4,)\nresult5 = model.predict_local([JTensor.from_ndarray(np.ones([4, 3])),\n    JTensor.from_ndarray(np.ones([4, 3]))], batch_size=2)\nassert result5.shape == (4, 5)\n"
-}

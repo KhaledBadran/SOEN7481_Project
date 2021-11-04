@@ -1,9 +1,0 @@
-{
-    "functionName": "test_min_volatility_cvxpy_vs_scipy",
-    "className": null,
-    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_efficient_frontier.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ef = setup_efficient_frontier()\nef.min_volatility()\nw1 = ef.weights\nargs = ef.cov_matrix,\ninitial_guess = np.array([1 / ef.n_assets] * ef.n_assets)\nresult = sco.minimize(objective_functions.portfolio_variance, x0=\n    initial_guess, args=args, method='SLSQP', bounds=[(0, 1)] * 20,\n    constraints=[{'type': 'eq', 'fun': lambda x: np.sum(x) - 1}])\nw2 = result['x']\ncvxpy_var = objective_functions.portfolio_variance(w1, ef.cov_matrix)\nscipy_var = objective_functions.portfolio_variance(w2, ef.cov_matrix)\nassert cvxpy_var <= scipy_var\n"
-}

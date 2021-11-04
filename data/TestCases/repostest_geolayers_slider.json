@@ -1,9 +1,0 @@
-{
-    "functionName": "test_geolayers_slider",
-    "className": null,
-    "fileName": "/PatrikHlobil_&_Pandas-Bokeh/Tests_&_test_GeoPandasBokeh.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Tests for mutiple geolayers\"\"\"\ndf_states = gpd.read_file(os.path.join(test_sets_directory, 'states',\n    'states.geojson'))\ndf_cities = gpd.read_file(os.path.join(test_sets_directory,\n    'populated places', 'ne_10m_populated_places_simple_bigcities.geojson'))\ndf_cities['size'] = df_cities.pop_max / 400000\nfor i in range(8):\n    df_states['Delta_Population_201%d' % i] = (df_states['POPESTIMATE201%d' %\n        i] / df_states['POPESTIMATE2010'] - 1) * 100\nslider_columns = [('Delta_Population_201%d' % i) for i in range(8)]\nslider_range = range(2010, 2018)\nfigure = df_states.plot_bokeh(figsize=(900, 600), simplify_shapes=5000,\n    slider=slider_columns, slider_range=slider_range, slider_name='Year',\n    colormap='Inferno', hovertool_columns=['STATE_NAME'] + slider_columns,\n    title='Change of Population [%]', show_figure=False)\nhtml_multilayer_slider = df_cities.plot_bokeh(figure=figure, category=\n    'pop_max', colormap='Viridis', colormap_uselog=True, size='size',\n    hovertool_string=\n    \"\"\"<h1>@name</h1>\n                            <h3>Population: @pop_max </h3>\"\"\"\n    , marker='inverted_triangle', legend='Cities', show_figure=False,\n    return_html=True)\nwith open(os.path.join(directory, 'Plots', 'Multiple_Geolayers_Slider.html'\n    ), 'w') as f:\n    f.write(html_multilayer_slider)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test__no_columns_specified_so_uses_smallest_charge_injection_region_column_size",
-    "className": "TestSerialFrontEdgeFromFrame",
-    "fileName": "/Jammy2211_&_PyAutoCTI/test_&_unit_&_charge_injection_&_test_ci_frame.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "pattern = ci_pattern.CIPatternUniform(normalization=1.0, regions=[(0, 3, 1,\n    3), (0, 3, 5, 8)])\nimage = np.array([[0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0], [0.0,\n    1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0], [0.0, 1.0, 2.0, 3.0, 4.0,\n    5.0, 6.0, 7.0, 8.0, 9.0]])\nframe = ci_frame.ChInj(frame_geometry=ci_frame.FrameGeometry.\n    euclid_bottom_left(), ci_pattern=pattern)\nfront_edges = frame.serial_front_edge_arrays_from_frame(image)\nassert (front_edges[0] == np.array([[1.0, 2.0], [1.0, 2.0], [1.0, 2.0]])).all()\nassert (front_edges[1] == np.array([[5.0, 6.0], [5.0, 6.0], [5.0, 6.0]])).all()\nstacked_front_edges = frame.serial_front_edge_stacked_array_from_frame(image)\nassert (stacked_front_edges == np.array([[3.0, 4.0], [3.0, 4.0], [3.0, 4.0]])\n    ).all()\nfront_edge_line = frame.serial_front_edge_line_binned_over_rows_from_frame(\n    image)\nassert (front_edge_line == np.array([3.0, 4.0])).all()\n"
-}

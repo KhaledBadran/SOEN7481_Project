@@ -1,9 +1,0 @@
-{
-    "functionName": "test_remote_data_service_industry_df",
-    "className": null,
-    "fileName": "/quantOS-org_&_JAQS/test_&_test_dataservice.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "arr = ds.query_index_member(index='000300.SH', start_date=20130101,\n    end_date=20170505)\nsymbol_arr = ','.join(arr)\nsec = '000008.SZ'\ntype_ = 'ZZ'\ndf_raw = ds.query_industry_raw(symbol=sec, type_=type_)\ndf = ds.query_industry_daily(symbol=symbol_arr, start_date=df_raw['in_date'\n    ].min(), end_date=20170505, type_=type_, level=1)\nfor idx, row in df_raw.iterrows():\n    in_date = row['in_date']\n    value = row['industry1_code']\n    if in_date in df.index:\n        assert df.loc[in_date, sec] == value\n    else:\n        idx = ds.query_next_trade_date(in_date)\n        assert df.loc[idx, sec] == value\n"
-}

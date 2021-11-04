@@ -1,9 +1,0 @@
-{
-    "functionName": "test_cudapoa_valid_output_type",
-    "className": null,
-    "fileName": "/clara-genomics_&_ClaraGenomicsAnalysis/pygenomeworks_&_test_&_test_cudapoa_bindings.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "device = cuda.cuda_get_device()\nfree, total = cuda.cuda_get_mem_info(device)\ntry:\n    CudaPoaBatch(10, 1024, 0.9 * free, deivce_id=device, output_type=\n        'consensus')\nexcept RuntimeError:\n    assert False\npytest.mark.gpu"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_matplotlib",
-    "className": null,
-    "fileName": "/Edinburgh-Genome-Foundry_&_Flametree/tests_&_test_third_parties.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "path = str(tmpdir)\nroot = file_tree(path)\nfig, ax = plt.subplots(1)\nfig.savefig(root._file('fig1.png').open('wb'), format='png')\nwith PdfPages(root._file('plots.pdf').open('wb')) as pdf_io:\n    for i in range(3):\n        fig, ax = plt.subplots(1)\n        pdf_io.savefig(fig)\n        plt.close(fig)\nwith open(os.path.join(path, 'fig1.png'), 'rb') as f:\n    filesize = len(f.read())\n    assert filesize > 7000\nwith open(os.path.join(path, 'plots.pdf'), 'rb') as f:\n    filesize = len(f.read())\n    assert filesize > 6000\n"
-}

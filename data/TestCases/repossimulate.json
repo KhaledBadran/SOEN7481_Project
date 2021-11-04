@@ -1,9 +1,0 @@
-{
-    "functionName": "simulate",
-    "className": null,
-    "fileName": "/tum-pbs_&_PhiFlow/tests_&_test_fluid.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "world = World()\nfluid = world.add(Fluid(Domain([5, 4], boundaries=CLOSED, box=AABox(0, [40,\n    32])), buoyancy_factor=0.1, batch_size=centers.shape[0]), physics=\n    IncompressibleFlow(pressure_solver=SparseCG(max_iterations=3)))\nworld.add(Inflow(Sphere(center=centers, radius=3), rate=0.2))\nworld.add(Fan(Sphere(center=centers, radius=5), acceleration=[1.0, 0]))\nworld.step(dt=1.5)\nworld.step(dt=1.5)\nworld.step(dt=1.5)\nprint()\nreturn fluid.density.data[0, ...], fluid.velocity.unstack()[0].data[0, ...\n    ], fluid.velocity.unstack()[1].data[0, ...]\n"
-}

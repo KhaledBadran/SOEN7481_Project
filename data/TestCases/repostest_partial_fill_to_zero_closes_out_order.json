@@ -1,9 +1,0 @@
-{
-    "functionName": "test_partial_fill_to_zero_closes_out_order",
-    "className": null,
-    "fileName": "/nabicht_&_Buttonwood/tests_&_test_MarketObjects_&_test_Events_&_test_ordereventchain.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "n = NewOrderCommand(121234, 1234235.123, 2342, 'user_x', MARKET, BID_SIDE,\n    FAR, Price('34.52'), 100)\noec = OrderEventChain(n, LOGGER, MonotonicIntID())\nack = AcknowledgementReport(121235, 1234235.123, 2342, 'user_x', MARKET, n,\n    Price('34.52'), 100, 100)\noec.apply_acknowledgement_report(ack)\naggressor = NewOrderCommand(1111, 1234237.123, 22222, 'user_y', MARKET,\n    ASK_SIDE, FAR, Price('34.52'), 100)\npf = PartialFillReport(1212344, 1234237.123, 2342, 'user_x', MARKET,\n    aggressor, 100, Price('34.52'), BID_SIDE, 99999, 0)\noec.apply_partial_fill_report(pf)\nassert oec.open_exposure_requests() == []\nassert oec.is_open() is False\nassert oec.visible_qty() == 0\nassert oec.current_exposure() == Exposure(None, 0, 1212344)\n"
-}

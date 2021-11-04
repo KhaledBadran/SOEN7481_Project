@@ -1,9 +1,0 @@
-{
-    "functionName": "test_easy_file",
-    "className": "TestCommandLine",
-    "fileName": "/kenfar_&_DataGristle/scripts_&_tests_&_test_gristle_viewer_cmd.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "cmd = '%s -i %s -r 9 -o %s' % (fq_pgm, self.in_fqfn, self.out_fqfn)\nrunner = envoy.run(cmd)\nprint(runner.std_out)\nprint(runner.std_err)\nassert runner.status_code == 0\np_recs = []\nfor rec in fileinput.input(self.out_fqfn):\n    p_recs.append(rec)\nfileinput.close()\nassert len(p_recs) == 4\nassert p_recs[0].strip().startswith('field_0')\nassert p_recs[0].strip().endswith('9')\nassert p_recs[1].strip().startswith('field_1')\nassert p_recs[1].strip().endswith('A')\nassert p_recs[2].strip().startswith('field_2')\nassert p_recs[2].strip().endswith('B')\nassert p_recs[3].strip().startswith('field_3')\nassert p_recs[3].strip().endswith('C')\n"
-}

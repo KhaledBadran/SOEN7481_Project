@@ -1,9 +1,0 @@
-{
-    "functionName": "test_timeout_0_time",
-    "className": null,
-    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_timeout_tracker.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class _DummyPyDb(object):\n\n    def __init__(self):\n        self.created_pydb_daemon_threads = {}\nraise_timeout = pydevd_timeout.create_interrupt_this_thread_callback()\ndef on_timeout(arg):\n    assert arg == 1\n    raise_timeout()\npy_db = _DummyPyDb()\ntimeout_tracker = pydevd_timeout.TimeoutTracker(py_db)\ntry:\n    with timeout_tracker.call_on_timeout(0, on_timeout, kwargs={'arg': 1}):\n        time.sleep(1)\nexcept KeyboardInterrupt:\n    pass\n"
-}

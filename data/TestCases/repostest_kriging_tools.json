@@ -1,9 +1,0 @@
-{
-    "functionName": "test_kriging_tools",
-    "className": null,
-    "fileName": "/bsmurphy_&_PyKrige/tests_&_test_core.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data, (gridx, gridy, gridx_2), mask_ref = sample_data_2d\nok = OrdinaryKriging(data[:, (0)], data[:, (1)], data[:, (2)])\nz_write, ss_write = ok.execute('grid', gridx, gridy)\nkt.write_asc_grid(gridx, gridy, z_write, filename=os.path.join(BASE_DIR,\n    'test_data/temp.asc'), style=1)\nz_read, x_read, y_read, cellsize, no_data = kt.read_asc_grid(os.path.join(\n    BASE_DIR, 'test_data/temp.asc'))\nassert_allclose(z_write, z_read, 0.01, 0.01)\nassert_allclose(gridx, x_read)\nassert_allclose(gridy, y_read)\nz_write, ss_write = ok.execute('masked', gridx, gridy, mask=mask_ref)\nkt.write_asc_grid(gridx, gridy, z_write, filename=os.path.join(BASE_DIR,\n    'test_data/temp.asc'), style=1)\nz_read, x_read, y_read, cellsize, no_data = kt.read_asc_grid(os.path.join(\n    BASE_DIR, 'test_data/temp.asc'))\nassert np.ma.allclose(z_write, np.ma.masked_where(z_read == no_data, z_read\n    ), masked_equal=True, rtol=0.01, atol=0.01)\nassert_allclose(gridx, x_read)\nassert_allclose(gridy, y_read)\nok = OrdinaryKriging(data[:, (0)], data[:, (1)], data[:, (2)])\nz_write, ss_write = ok.execute('grid', gridx_2, gridy)\nkt.write_asc_grid(gridx_2, gridy, z_write, filename=os.path.join(BASE_DIR,\n    'test_data/temp.asc'), style=2)\nz_read, x_read, y_read, cellsize, no_data = kt.read_asc_grid(os.path.join(\n    BASE_DIR, 'test_data/temp.asc'))\nassert_allclose(z_write, z_read, 0.01, 0.01)\nassert_allclose(gridx_2, x_read)\nassert_allclose(gridy, y_read)\nos.remove(os.path.join(BASE_DIR, 'test_data/temp.asc'))\n"
-}

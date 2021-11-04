@@ -1,9 +1,0 @@
-{
-    "functionName": "test_write_only_essentials",
-    "className": "TestValidationInformation",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a ValidationInformation structure can be written to a data\n        stream when only containing essential required fields.\n        \"\"\"\nvalidation_information = objects.ValidationInformation(\n    validation_authority_type=enums.ValidationAuthorityType.COMMON_CRITERIA,\n    validation_version_major=1, validation_type=enums.ValidationType.HYBRID,\n    validation_level=5)\nbuffer = utils.BytearrayStream()\nvalidation_information.write(buffer, kmip_version=enums.KMIPVersion.KMIP_1_3)\nself.assertEqual(len(self.only_essentials_encoding), len(buffer))\nself.assertEqual(str(self.only_essentials_encoding), str(buffer))\n"
-}

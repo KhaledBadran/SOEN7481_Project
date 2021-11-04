@@ -1,9 +1,0 @@
-{
-    "functionName": "test_fit_transform_should_rehash_hyperparameters_for_each_steps",
-    "className": null,
-    "fileName": "/Neuraxio_&_Neuraxle/testing_&_test_pipeline_hashing.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "pipeline = ResumablePipelineWithMockHasher(steps=test_case.steps,\n    cache_folder=tmpdir)\npipeline.fit_transform(test_case.data_inputs, test_case.expected_outputs)\nmocked_checkpoint = find_checkpoint(pipeline.steps_as_tuple)\nactual_rehashed_ids = mocked_checkpoint.saved_data_container.current_ids\nassert np.array_equal(actual_rehashed_ids, test_case.expected_rehashed_ids)\npytest.mark.parametrize('test_case', create_test_cases())"
-}

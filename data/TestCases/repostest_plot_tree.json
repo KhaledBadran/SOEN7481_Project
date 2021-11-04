@@ -1,9 +1,0 @@
-{
-    "functionName": "test_plot_tree",
-    "className": "TestBasic",
-    "fileName": "/microsoft_&_LightGBM/tests_&_python_package_test_&_test_plotting.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "gbm = lgb.LGBMClassifier(n_estimators=10, num_leaves=3, silent=True)\ngbm.fit(self.X_train, self.y_train, verbose=False)\nself.assertRaises(IndexError, lgb.plot_tree, gbm, tree_index=83)\nax = lgb.plot_tree(gbm, tree_index=3, figsize=(15, 8), show_info=['split_gain']\n    )\nself.assertIsInstance(ax, matplotlib.axes.Axes)\nw, h = ax.axes.get_figure().get_size_inches()\nself.assertEqual(int(w), 15)\nself.assertEqual(int(h), 8)\nunittest.skipIf(not MATPLOTLIB_INSTALLED or not GRAPHVIZ_INSTALLED,\n    'matplotlib or graphviz is not installed')"
-}

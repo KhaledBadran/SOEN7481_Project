@@ -1,9 +1,0 @@
-{
-    "functionName": "am_to_im",
-    "className": null,
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_topotools_&_topotools.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Convert an adjacency matrix into an incidence matrix\n    \"\"\"\nif am.shape[0] != am.shape[1]:\n    raise Exception('Adjacency matrices must be square')\nif am.format != 'coo':\n    am = am.tocoo(copy=False)\nconn = np.vstack((am.row, am.col)).T\nrow = conn[:, (0)]\ndata = am.data\ncol = np.arange(np.size(am.data))\nif istriangular(am):\n    row = np.append(row, conn[:, (1)])\n    data = np.append(data, data)\n    col = np.append(col, col)\nim = sprs.coo.coo_matrix((data, (row, col)), (row.max() + 1, col.max() + 1))\nreturn im\n"
-}

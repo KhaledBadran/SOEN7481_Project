@@ -1,9 +1,0 @@
-{
-    "functionName": "test_hsi_to_spectra_rng",
-    "className": null,
-    "fileName": "/CCampJr_&_CRIkit2/crikit_&_data_&_tests_&_test_spectra.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Import an hsi into spectra -- defined range\"\"\"\nspectrum, spectra, hsi, make_dataset_shape = make_datasets\nrng = [10, 11]\nnew_dataset = Spectra()\nnew_dataset.freq.data = np.arange(spectra.shape[-1])\nnew_dataset.data = hsi\nnew_dataset.freq.op_list_pix = rng\nnew_dataset.data = hsi\nassert new_dataset.size == hsi.size\nassert (new_dataset.data != 0).sum() == len(rng) * np.prod(hsi.shape[:-1])\nnp.testing.assert_almost_equal(new_dataset.data[..., rng], hsi[..., rng].\n    reshape((-1, len(rng))))\n"
-}

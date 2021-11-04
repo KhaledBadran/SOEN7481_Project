@@ -1,9 +1,0 @@
-{
-    "functionName": "test_plot_bagging",
-    "className": null,
-    "fileName": "/tvdboom_&_ATOM/tests_&_test_plots.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Assert that the plot_bagging method work as intended.\"\"\"\ntrainer = TrainerRegressor(['ols', 'ridge'], metric='r2', bagging=0)\npytest.raises(NotFittedError, trainer.plot_bagging)\ntrainer.run(reg_train, reg_test)\npytest.raises(PermissionError, trainer.plot_bagging, models='OLS')\ntrainer = TrainerRegressor(['ols', 'ridge'], metric='r2', bagging=3)\ntrainer.run(reg_train, reg_test)\ntrainer.plot_bagging(filename=FILE_DIR + 'bagging1', display=False)\ntrainer.ols.plot_bagging(filename=FILE_DIR + 'bagging2', display=False)\nassert glob.glob(FILE_DIR + 'bagging1.png')\nassert glob.glob(FILE_DIR + 'bagging2.png')\natom = ATOMRegressor(X_reg, y_reg, random_state=1)\natom.run('ols', metric=['me', 'r2'], bagging=3)\natom.plot_bagging(metric='me', filename=FILE_DIR + 'bagging3', display=False)\natom.ols.plot_bagging(filename=FILE_DIR + 'bagging4', display=False)\nassert glob.glob(FILE_DIR + 'bagging3.png')\nassert glob.glob(FILE_DIR + 'bagging4.png')\n"
-}

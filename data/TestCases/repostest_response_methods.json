@@ -1,9 +1,0 @@
-{
-    "functionName": "test_response_methods",
-    "className": null,
-    "fileName": "/AmadeusITGroup_&_JumpSSH/tests_&_test_restclient.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "gateway_ip, gateway_port = docker_env.get_host_ip_port('gateway')\ngateway_session = SSHSession(host=gateway_ip, port=gateway_port, username=\n    'user1', password='password1').open()\nrest_client = RestSshClient(gateway_session)\nendpoint = 'http://%s' % REMOTE_HOST_IP_PORT\nwith pytest.raises(exception.RestClientError):\n    rest_client.get(endpoint + '/dummy-uri').check_for_success()\nassert rest_client.get(endpoint + '/json').is_valid_json_body() is True\nassert rest_client.get(endpoint + '/').is_valid_json_body() is False\nwith pytest.raises(exception.RestClientError) as exc_info:\n    rest_client.get(endpoint + '/').json()\nassert 'http response body is not in a valid json format' in str(exc_info.value\n    )\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_notification_with_datafeed_loaded_from_config",
-    "className": "StartCommand",
-    "fileName": "/SketchingDev_&_Doodle-Dashboard/tests_&_doodledashboard_&_it_&_features_&_configurable_&_test_remote_config.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "config_with_single_notification = \"\"\"\n        dashboard:\n          display:\n            type: console\n            options:\n              seconds-per-notifications: 0\n          data-feeds:\n            - type: text\n              options:\n                text:\n                  - Test Message 1\n          notifications:\n            - title: Print message\n              type: text-from-message\n        \"\"\"\nself.http_server.serve_content(config_with_single_notification)\nresult = self.call_cli(CliRunner(), start, '%s --once' % self.http_server.url)\nself.assertIn('1 notifications loaded', result.output)\nself.assertIn('Test Message 1', result.output)\nself.assertEqual(0, result.exit_code)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_set_attributes_on_managed_object_attribute_mismatch",
-    "className": "TestKmipEngine",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that an InvalidField error is generated when attempting to set\n        an attribute that is not applicable for a given managed object.\n        \"\"\"\ne = engine.KmipEngine()\ne._data_store = self.engine\ne._data_store_session_factory = self.session_factory\ne._data_session = e._data_store_session_factory()\ne._logger = mock.MagicMock()\nmanaged_object = pie_objects.OpaqueObject(b'', enums.OpaqueDataType.NONE)\nattribute_factory = factory.AttributeFactory()\nmask = attribute_factory.create_attribute(enums.AttributeType.\n    CRYPTOGRAPHIC_USAGE_MASK, [enums.CryptographicUsageMask.ENCRYPT, enums.\n    CryptographicUsageMask.DECRYPT])\ntemplate_attribute = objects.TemplateAttribute(attributes=[mask])\nobject_attributes = e._process_template_attribute(template_attribute)\nargs = managed_object, object_attributes\nregex = 'Cannot set Cryptographic Usage Mask attribute on OpaqueData object.'\nsix.assertRaisesRegex(self, exceptions.InvalidField, regex, e.\n    _set_attributes_on_managed_object, *args)\n"
-}

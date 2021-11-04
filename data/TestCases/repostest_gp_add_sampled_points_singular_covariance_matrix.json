@@ -1,9 +1,0 @@
-{
-    "functionName": "test_gp_add_sampled_points_singular_covariance_matrix",
-    "className": "TestGaussianProcess",
-    "fileName": "/Yelp_&_MOE/moe_&_tests_&_optimal_learning_&_python_&_cpp_wrappers_&_gaussian_process_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that GaussianProcess.add_sampled_points indicates a singular covariance matrix when points_sampled contains duplicates (0 noise).\"\"\"\ntest_environment_input = copy.copy(self.gp_test_environment_input)\ntest_environment_input.num_sampled = 1\ntest_environment_input.gaussian_process_class = GaussianProcess\n_, gaussian_process = self._build_gaussian_process_test_data(\n    test_environment_input)\npoint_one = SamplePoint([0.5] * gaussian_process.dim, 1.0, 0.0)\npoint_two = SamplePoint([1.0] * gaussian_process.dim, -1.0, 0.0)\npoint_three = point_one\ngaussian_process.add_sampled_points([point_one, point_two])\nwith pytest.raises(C_GP.SingularMatrixException):\n    gaussian_process.add_sampled_points([point_three])\n"
-}

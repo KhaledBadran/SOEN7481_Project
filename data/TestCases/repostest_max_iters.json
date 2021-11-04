@@ -1,9 +1,0 @@
-{
-    "functionName": "test_max_iters",
-    "className": "TestProducer",
-    "fileName": "/BciPy_&_BciPy/bcipy_&_acquisition_&_tests_&_datastream_&_test_producer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Producer should stop producing data after maxiters if param is\n        provided.\"\"\"\nsample_hz = 300\nruntime = 0.2\nmaxiters = 10\ndata_queue = queue.Queue()\nproducer = Producer(data_queue, freq=1 / sample_hz, maxiters=maxiters)\nproducer.start()\ntime.sleep(runtime)\nproducer.stop()\nexpected_n = sample_hz * runtime\ntolerance = 10\nself.assertTrue(expected_n - tolerance > maxiters)\ndata_n = data_queue.qsize()\nself.assertEqual(data_n, maxiters)\n"
-}

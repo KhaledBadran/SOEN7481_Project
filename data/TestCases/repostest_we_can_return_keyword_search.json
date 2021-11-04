@@ -1,9 +1,0 @@
-{
-    "functionName": "test_we_can_return_keyword_search",
-    "className": null,
-    "fileName": "/AutomatedTester_&_Bugsy/tests_&_test_search.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "keyword_return = {'bugs': [{'component': 'Networking: HTTP', 'product':\n    'Core', 'summary': 'IsPending broken for requests without Content-Type'\n    }, {'component': 'Developer Tools: Graphic Commandline and Toolbar',\n    'product': 'Firefox', 'summary':\n    'GCLI Command to open Profile Directory'}, {'component':\n    'Video/Audio Controls', 'product': 'Toolkit', 'summary':\n    'Fullscreen video should disable screensaver during playback on Linux'},\n    {'component': 'Reader Mode', 'product': 'Firefox for Android',\n    'summary': 'Article showing twice in reader mode'}, {'component':\n    'Message Reader UI', 'product': 'Thunderbird', 'summary':\n    'Make \"visited link\" coloring work in thunderbird'}]}\nresponses.add(responses.GET, rest_url('bug', keywords='checkin-needed'),\n    body=json.dumps(keyword_return), status=200, content_type=\n    'application/json', match_querystring=True)\nbugzilla = Bugsy()\nbugs = bugzilla.search_for.keywords('checkin-needed').search()\nassert len(responses.calls) == 1\nassert len(bugs) == 5\nassert bugs[0].product == keyword_return['bugs'][0]['product']\nassert bugs[0].component == keyword_return['bugs'][0]['component']\nresponses.activate"
-}

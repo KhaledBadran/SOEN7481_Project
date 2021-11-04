@@ -1,9 +1,0 @@
-{
-    "functionName": "test_handle_predict_should_handle_transform_with_initial_is_train_mode_after_predict",
-    "className": null,
-    "fileName": "/Neuraxio_&_Neuraxle/testing_&_test_basestep.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "tape_fit = TapeCallbackFunction()\ntape_transform = TapeCallbackFunction()\np = Pipeline([TestOnlyWrapper(CallbackWrapper(MultiplyByN(2),\n    tape_transform, tape_fit)), TrainOnlyWrapper(CallbackWrapper(\n    MultiplyByN(4), tape_transform, tape_fit))])\ndata_container = DataContainer(data_inputs=np.array([1, 1]),\n    expected_outputs=np.array([1, 1]))\np.handle_predict(data_container=data_container.copy(), context=\n    ExecutionContext())\ndata_container = p.handle_transform(data_container, ExecutionContext())\nassert np.array_equal(data_container.data_inputs, np.array([4, 4]))\n"
-}

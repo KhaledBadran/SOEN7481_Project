@@ -1,9 +1,0 @@
-{
-    "functionName": "test_load_quora_qp",
-    "className": null,
-    "fileName": "/NTMC-Community_&_MatchZoo-py/tests_&_test_datasets.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "train_data = mz.datasets.quora_qp.load_data(task='classification')\nassert len(train_data) == 363177\ndev_data, tag = mz.datasets.quora_qp.load_data('dev', task='classification',\n    return_classes=True)\nassert tag == [False, True]\nassert len(dev_data) == 40371\nx, y = dev_data.unpack()\nassert len(x['text_left']) == 40371\nassert len(x['text_right']) == 40371\nassert y.shape == (40371, 1)\ntest_data = mz.datasets.quora_qp.load_data('test')\nassert len(test_data) == 390965\ndev_data = mz.datasets.quora_qp.load_data('dev', 'ranking')\nx, y = dev_data.unpack()\nassert y.shape == (40371, 1)\npytest.mark.cron"
-}

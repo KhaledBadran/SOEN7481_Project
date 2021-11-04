@@ -1,9 +1,0 @@
-{
-    "functionName": "test_no_strict_verification",
-    "className": "IntegrationTest",
-    "fileName": "/BMeu_&_EasyJWT/tests_&_integration_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n            Test that tokens can be verified by other classes if strict verification is disabled.\n\n            Expected Result: The verification succeeds.\n        \"\"\"\nAccountDeletionToken.strict_verification = False\nAccountValidationToken.strict_verification = False\nvalidation_token_object = AccountValidationToken(self.key)\nvalidation_token_object.user_id = self.user_id\nvalidation_token = validation_token_object.create()\nverified_token_object = AccountDeletionToken.verify(validation_token, self.key)\nself.assertIsNotNone(verified_token_object)\nself.assertEqual(self.user_id, verified_token_object.user_id)\n"
-}

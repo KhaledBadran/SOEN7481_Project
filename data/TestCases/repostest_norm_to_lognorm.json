@@ -1,9 +1,0 @@
-{
-    "functionName": "test_norm_to_lognorm",
-    "className": "LogNormTest",
-    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_log_y_transform.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "mu_n = -0.5 * np.ones(3)\nCov_n = np.eye(3)\nmu_ln, Cov_ln = norm_to_lognorm(mu_n, Cov_n)\nself.assertTrue(np.allclose(mu_ln, np.ones(3)))\nself.assertTrue(np.allclose(Cov_ln, (np.exp(1) - 1) * np.eye(3)))\nCov_n2 = np.array([[1.0, 0.0, 0.5], [0.0, 1.0, 0.0], [0.5, 0.0, 1.0]])\nmu_ln2, Cov_ln2 = norm_to_lognorm(mu_n, Cov_n2)\nZ = np.zeros_like(Cov_ln2)\nZ[0, 2] = np.sqrt(np.exp(1)) - 1\nZ[2, 0] = np.sqrt(np.exp(1)) - 1\nself.assertTrue(np.allclose(mu_ln2, np.ones(3)))\nself.assertTrue(np.allclose(Cov_ln2, np.exp(np.eye(3)) + Z - 1))\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_conv",
-    "className": null,
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_test_theano_extensions.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "import lasagne.theano_extensions.conv\nconv = getattr(lasagne.theano_extensions.conv, impl)\nX = T.tensor3()\nW = T.tensor3()\ninput = lasagne.utils.floatX(np.ones((1, 1, 10)))\nkernel = lasagne.utils.floatX(np.random.uniform(-1, 1, (2, 1, 6)))\nconv_theano = conv(X, W, input.shape, kernel.shape, subsample=(stride,),\n    filter_flip=filter_flip).eval({X: input, W: kernel})\nconv_np = conv1d(input, kernel, stride)\nassert np.allclose(conv_theano, conv_np)\npytest.mark.parametrize('impl', ['conv1d_sc', 'conv1d_mc0', 'conv1d_mc1',\n    'conv1d_unstrided', 'conv1d_sd', 'conv1d_md'])pytest.mark.parametrize('filter_flip', [True, False])pytest.mark.parametrize('stride', [1, 2])"
-}

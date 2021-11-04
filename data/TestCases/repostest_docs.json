@@ -1,9 +1,0 @@
-{
-    "functionName": "test_docs",
-    "className": "LexerTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_lexer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "template = \"\"\"\n        <%doc>\n            this is a comment\n        </%doc>\n        <%def name=\"foo()\">\n            <%doc>\n                this is the foo func\n            </%doc>\n        </%def>\n        \"\"\"\nnodes = Lexer(template).parse()\nself._compare(nodes, TemplateNode({}, [Text('\\n        ', (1, 1)), Comment(\n    \"\"\"\n            this is a comment\n        \"\"\", (2, 9)), Text(\n    '\\n        ', (4, 16)), DefTag('def', {'name': 'foo()'}, (5, 9), [Text(\n    '\\n            ', (5, 28)), Comment(\n    \"\"\"\n                this is the foo func\n            \"\"\", (6, 13)),\n    Text('\\n        ', (8, 20))]), Text('\\n        ', (9, 16))]))\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_performance_key_list_post_with_inputs",
-    "className": "PyU4VPerformanceTest",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_performance.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test get_performance_key_list post with all inputs set.\"\"\"\ntime_now = int(time.time())\nref_request_body = {'symmetrixId': self.p_data.array, 'directorId': self.\n    p_data.fe_dir_id, 'storageGroupId': self.p_data.storage_group_id,\n    'storageContainerId': self.p_data.storage_container_id,\n    'storageResourceId': self.p_data.storage_resource_id, 'startDate':\n    time_now, 'endDate': time_now}\nwith mock.patch.object(self.perf, 'post_request', return_value=self.p_data.\n    fe_dir_keys) as mck_request:\n    key_response = self.perf.get_performance_key_list(category=pc.FE_DIR,\n        array_id=self.p_data.array, director_id=self.p_data.fe_dir_id,\n        storage_group_id=self.p_data.storage_group_id, storage_container_id\n        =self.p_data.storage_container_id, storage_resource_id=self.p_data.\n        storage_resource_id, start_time=time_now, end_time=time_now)\n    mck_request.assert_called_once_with(category=pc.PERFORMANCE,\n        resource_level=pc.FE_DIR, resource_type=pc.KEYS, payload=\n        ref_request_body)\n    self.assertEqual(key_response, self.p_data.fe_dir_keys)\n"
-}

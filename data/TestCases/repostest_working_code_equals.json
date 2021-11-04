@@ -1,9 +1,0 @@
-{
-    "functionName": "test_working_code_equals",
-    "className": null,
-    "fileName": "/HTML-as-programming-language_&_HTML-as-programming-language/tests_&_test_compiler.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test if the working code folder equals the code that is currently on the github repo\n    \"\"\"\nenviorment_str = enviorment.backup('working-code', 'backup')\npathlist = Path(enviorment_str).glob('**/*.html')\nfor path in pathlist:\n    with patch.object(sys, 'argv', [str(path)]):\n        compiler.main()\n    out_str = enviorment_str + '/out/' + str(path).split('/')[-1].replace(\n        '.html', '.c')\n    backup_str = out_str.replace(enviorment_str, 'working-code')\n    assert enviorment.files_look_alike(out_str, backup_str)\nenviorment.delete(enviorment_str)\n"
-}

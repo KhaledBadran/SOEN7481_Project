@@ -1,9 +1,0 @@
-{
-    "functionName": "dummy_spectra",
-    "className": null,
-    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_coadd.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\" Generate a set of normalized spectra with varying wavelength\n    and noise\n\n    Parameters\n    ----------\n    s2n : float, optional\n\n    Returns\n    -------\n    dspec : XSpectrum1D\n\n    \"\"\"\nrstate = np.random.RandomState(seed)\nif wvmnx is None:\n    wvmnx = [[5000.0, 6000.0], [4000.5, 5800.5], [4500.8, 6300.8]]\nif npix is None:\n    npix = [1000, 1001, 1100]\nslist = []\nfor ii, inpix in enumerate(npix):\n    wave = np.linspace(wvmnx[ii][0], wvmnx[ii][1], inpix)\n    slist.append(dummy_spectrum(wave=wave, s2n=s2n, rstate=rstate))\ndspec = collate(slist, masking='edges')\nreturn dspec\n"
-}

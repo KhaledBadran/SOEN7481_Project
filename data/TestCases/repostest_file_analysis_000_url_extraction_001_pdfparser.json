@@ -1,9 +1,0 @@
-{
-    "functionName": "test_file_analysis_000_url_extraction_001_pdfparser",
-    "className": "TestCase",
-    "fileName": "/IntegralDefense_&_ACE/lib_&_saq_&_modules_&_test_file_analysis.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "root = create_root_analysis()\nroot.initialize_storage()\nshutil.copy('test_data/pdf/Payment_Advice.pdf', root.storage_dir)\ntarget_file = 'Payment_Advice.pdf'\nfile_observable = root.add_observable(F_FILE, target_file)\nroot.save()\nroot.schedule()\nengine = TestEngine()\nengine.enable_module('analysis_module_pdf_analyzer', 'test_groups')\nengine.enable_module('analysis_module_url_extraction', 'test_groups')\nengine.enable_module('analysis_module_file_type', 'test_groups')\nengine.controlled_stop()\nengine.start()\nengine.wait()\nroot.load()\nfile_observable = root.get_observable(file_observable.id)\nself.assertIsNotNone(file_observable)\nfrom saq.modules.file_analysis import URLExtractionAnalysis, PDFAnalysis\npdf_analysis = file_observable.get_analysis(PDFAnalysis)\nself.assertIsNotNone(pdf_analysis)\npdfparser_file = pdf_analysis.get_observables_by_type(F_FILE)\nself.assertEquals(len(pdfparser_file), 1)\npdfparser_file = pdfparser_file[0]\nurl_analysis = pdfparser_file.get_analysis(URLExtractionAnalysis)\nself.assertIsNotNone(url_analysis)\nbad_url = (\n    'http://www.williamtoms.com/wp-includes/354387473a/autodomain/autodomain/autodomain/autofil'\n    )\nself.assertTrue(bad_url in [url.value for url in url_analysis.\n    get_observables_by_type(F_URL)])\n"
-}

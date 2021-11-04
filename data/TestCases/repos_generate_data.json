@@ -1,9 +1,0 @@
-{
-    "functionName": "_generate_data",
-    "className": null,
-    "fileName": "/Microsoft_&_MMdnn/mmdnn_&_conversion_&_examples_&_coreml_&_test_tfcoreml.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n  Generate some random data according to a shape.\n  \"\"\"\nif input_shape is None or len(input_shape) == 0:\n    return 0.5\nif mode == 'zeros':\n    X = np.zeros(input_shape)\nelif mode == 'ones':\n    X = np.ones(input_shape)\nelif mode == 'linear':\n    X = np.array(range(np.product(input_shape))).reshape(input_shape) * 1.0\nelif mode == 'random':\n    X = np.random.rand(*input_shape)\nelif mode == 'random_zero_mean':\n    X = np.random.rand(*input_shape) - 0.5\nelif mode == 'image':\n    img_np, _ = _load_image(TEST_IMAGE, resize_to=(img_size, img_size))\n    img_tf = np.expand_dims(img_np, axis=0)\n    X = img_tf * scale + bias\nelif mode == 'onehot_0':\n    X = np.zeros(input_shape)\n    X[0] = 1\nreturn X\n"
-}

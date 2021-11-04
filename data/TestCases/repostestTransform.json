@@ -1,9 +1,0 @@
-{
-    "functionName": "testTransform",
-    "className": "IVWTransformTest",
-    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_ivw_transform.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "obsd1_0 = ObservationData(metric_names=['m1', 'm2', 'm2'], means=np.array([\n    1.0, 2.0, 1.0]), covariance=np.array([[1.0, 0.2, 0.4], [0.2, 2.0, 0.8],\n    [0.4, 0.8, 3.0]]))\nobsd1_1 = ObservationData(metric_names=['m1', 'm1', 'm2', 'm2'], means=np.\n    array([1.0, 1.0, 2.0, 1.0]), covariance=np.array([[1.0, 0.0, 0.0, 0.0],\n    [0.0, 1.0, 0.2, 0.4], [0.0, 0.2, 2.0, 0.8], [0.0, 0.4, 0.8, 3.0]]))\nobsd2_0 = ObservationData(metric_names=['m1', 'm2'], means=np.array([1.0, \n    1.6]), covariance=np.array([[1.0, 0.28], [0.28, 1.584]]))\nobsd2_1 = ObservationData(metric_names=['m1', 'm2'], means=np.array([1.0, \n    1.6]), covariance=np.array([[0.5, 0.14], [0.14, 1.584]]))\nobservation_data = [obsd1_0, obsd1_1]\nt = IVW(None, None, None)\nobservation_data2 = t.transform_observation_data(observation_data, [])\nobservation_data2_true = [obsd2_0, obsd2_1]\nfor i, obsd in enumerate(observation_data2_true):\n    self.assertEqual(observation_data2[i].metric_names, obsd.metric_names)\n    self.assertTrue(np.array_equal(observation_data2[i].means, obsd.means))\n    discrep = np.max(np.abs(observation_data2[i].covariance - obsd.covariance))\n    self.assertTrue(discrep < 1e-08)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_here_varname",
-    "className": "ConfigureTest",
-    "fileName": "/openworm_&_PyOpenWorm/tests_&_ConfigureTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        By default, $HERE refers to the directory the config file sits in, or to the\n        current working directory\n        \"\"\"\nwith patch.dict('os.environ', (), clear=True):\n    tf = self.tempfile()\n    dname = os.path.dirname(tf.name)\n    print('{\"z\": \"$HERE/car\"}', file=tf)\n    tf.close()\n    try:\n        c = Configure.open(tf.name)\n        self.assertEqual(c['z'], dname + '/car')\n    finally:\n        os.unlink(tf.name)\n"
-}

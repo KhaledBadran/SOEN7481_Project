@@ -1,9 +1,0 @@
-{
-    "functionName": "test_create_host_group_host_flags_async",
-    "className": "PyU4VProvisioningTest",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test create_host_group with additional flags\"\"\"\nhost_group_id = self.data.hostgroup_id\nhost_list = [self.data.initiatorgroup_name_f]\nhost_flags = {'flag': 1}\npayload = {'hostId': host_list, 'hostGroupId': host_group_id, 'hostFlags':\n    host_flags, 'executionOption': 'ASYNCHRONOUS'}\nwith mock.patch.object(self.provisioning, 'create_resource') as mock_create:\n    self.provisioning.create_hostgroup(host_group_id, host_list, host_flags,\n        _async=True)\n    mock_create.assert_called_once_with(category=constants.SLOPROVISIONING,\n        resource_level=constants.SYMMETRIX, resource_level_id=self.data.\n        array, resource_type=constants.HOSTGROUP, payload=payload)\n"
-}

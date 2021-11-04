@@ -1,9 +1,0 @@
-{
-    "functionName": "_heartbeat",
-    "className": "Chat",
-    "fileName": "/named-data_&_PyNDN2/examples_&_test_chrono_chat.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        This repeatedly calls itself after a timeout to send a heartbeat message\n        (chat message type HELLO). This method has an \"interest\" argument\n        because we use it as the onTimeout for Face.expressInterest.\n        \"\"\"\nif len(self._messageCache) == 0:\n    self._messageCacheAppend(chatbuf_pb2.ChatMessage.JOIN, 'xxx')\nself._sync.publishNextSequenceNo()\nself._messageCacheAppend(chatbuf_pb2.ChatMessage.HELLO, 'xxx')\ntimeout = Interest(Name('/local/timeout'))\ntimeout.setInterestLifetimeMilliseconds(60000)\nself._face.expressInterest(timeout, self._dummyOnData, self._heartbeat)\n"
-}

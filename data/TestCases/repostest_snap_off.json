@@ -1,9 +1,0 @@
-{
-    "functionName": "test_snap_off",
-    "className": "MixedPercolationTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_MixedPercolationTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "net = self.net\nphys = self.phys\nphys['throat.entry_pressure'] = np.arange(0, net.Nt, dtype=float)\nphys['pore.entry_pressure'] = 0.0\ndat_m = self.run_mp(False, False, False)\nphys['throat.snap_off'] = 100.0\nT = 10\n[P1, P2] = self.net['throat.conns'][T]\nphys['throat.snap_off'][T] = 0.5\ndat_n = self.run_mp(False, False, True)\nassert self.alg['pore.invasion_pressure'][P1] == 0.5\nassert self.alg['pore.invasion_pressure'][P2] == 0.5\nassert self.alg['throat.invasion_pressure'][T] == 0.5\nassert ~np.all(dat_m.S_tot - dat_n.S_tot == 0)\n"
-}

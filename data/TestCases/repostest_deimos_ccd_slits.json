@@ -1,9 +1,0 @@
-{
-    "functionName": "test_deimos_ccd_slits",
-    "className": null,
-    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_opticalmodel.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "f = os.path.join(os.environ['PYPEIT_DEV'], 'RAW_DATA', 'keck_deimos',\n    '830G_M_8500', 'DE.20100913.22358.fits.gz')\nspec = KeckDEIMOSSpectrograph()\nximg, yimg, ccd, xpix, ypix = spec.mask_to_pixel_coordinates(filename=f)\nindx = ccd < 1\nassert numpy.sum(indx\n    ) == 5, 'Should find 4 slits that are off all CCDs at the central lambda'\nccds_with_slits_at_cwl, n_per_ccd = numpy.unique(ccd, return_counts=True)\nassert len(set(numpy.arange(8) + 1) - set(ccds_with_slits_at_cwl)\n    ) == 0, 'Should find slits on all CCDs'\nassert numpy.sum(n_per_ccd\n    ) == 106, 'Should return coordinates for all 106 slits'\nassert n_per_ccd[1] == 11, 'Incorrect number of slits on CCD 1'\ndev_suite_required"
-}

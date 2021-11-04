@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_session_request",
-    "className": "TestGetAuthRequest",
-    "fileName": "/bigfishgames_&_GameBenchAPI-PyClient/tests_&_test_integration_&_test_api_&_test_requests_retriever_&_test_builder_&_test_request_director.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Test to check that get_session_request returns expected dict.\"\"\"\nerror_message = \"\"\"\nTest: {} \nExpected: {}\nActual:   {}\n\"\"\"\ntest_params = METRIC_TEST_PARAMS\nfor test, params in test_params.items():\n    request_parameters = {'method': params['method'], 'session_id': params[\n        'session_id'], 'metric': params['metric'], 'auth_token': AUTH_TOKEN,\n        'params': '', 'data': ''}\n    expected = {'method': params['method'], 'url': BASE_URL + VERSION +\n        SESSION_SUFFIX + '/' + params['session_id'] + params['metric'],\n        'attributes': {'headers': params['headers'], 'params': '', 'data': ''}}\n    self.director = RequestDirector(**request_parameters)\n    actual = self.director.get_session_request()\n    self.assertEqual(expected, actual, error_message.format(test, expected,\n        actual))\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_DataSet_BinData",
-    "className": null,
-    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_DataSet.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "I = np.random.randint(0, 100, (10, 20, 30))\nNorm = np.random.rand(10, 20, 30)\nPosx = np.linspace(0, 1, 10)\nPosy = np.linspace(0, 1, 20)\nPosz = np.linspace(1, 2, 30)\nPosX, PosY, PosZ = np.meshgrid(Posx, Posy, Posz, indexing='ij')\npos = [PosX.flatten(), PosY.flatten(), PosZ.flatten()]\nData, bins = binData3D(0.5, 0.25, 0.25, pos, I, norm=Norm)\nReBinnedI = Data[0]\nRebinnedNorm = Data[1]\nRebinnedNormCount = Data[2]\nassert ReBinnedI.shape == (3, 5, 5)\nassert RebinnedNorm.shape == ReBinnedI.shape\nassert RebinnedNormCount.shape == ReBinnedI.shape\nassert RebinnedNormCount.dtype == int\nassert RebinnedNorm.dtype == Norm.dtype\nassert ReBinnedI.dtype == I.dtype\n"
-}

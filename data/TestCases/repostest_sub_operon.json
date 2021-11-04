@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sub_operon",
-    "className": "TestDetectOperon",
-    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_detect_operon.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "tss_dict = [{'seq_id': 'aaa', 'source': 'Refseq', 'feature': 'TSS', 'start':\n    140, 'end': 140, 'phase': '.', 'strand': '+', 'score': '.'}, {'seq_id':\n    'aaa', 'source': 'Refseq', 'feature': 'TSS', 'start': 200, 'end': 200,\n    'phase': '.', 'strand': '+', 'score': '.'}]\nattributes_tss = [{'ID': 'tss0', 'Name': 'TSS_0', 'locus_tag': 'AAA_00001'},\n    {'ID': 'tss1', 'Name': 'TSS_1', 'locus_tag': 'BBB_00001'}]\ngff_dict = [{'seq_id': 'aaa', 'source': 'Refseq', 'feature': 'CDS', 'start':\n    540, 'end': 640, 'phase': '.', 'strand': '+', 'score': '.'}, {'seq_id':\n    'aaa', 'source': 'Refseq', 'feature': 'TSS', 'start': 166, 'end': 198,\n    'phase': '.', 'strand': '+', 'score': '.'}]\nattributes_gff = [{'ID': 'tss0', 'Name': 'TSS_0', 'locus_tag': 'AAA_00001'},\n    {'ID': 'tss1', 'Name': 'TSS_1', 'locus_tag': 'BBB_00001'}]\ntsss = {'with_feature': True, 'num_feature': 2, 'data_list': []}\ngenes = {'data_list': []}\nfor index in range(0, 2):\n    genes['data_list'].append(Create_generator(gff_dict[index],\n        attributes_gff[index], 'gff'))\n    tsss['data_list'].append(Create_generator(tss_dict[index],\n        attributes_tss[index], 'gff'))\noperons = op.sub_operon('+', tsss, 141, 800, genes, 30)\nself.assertDictEqual(operons[0], {'end': 199, 'start': 141, 'strand': '+'})\nself.assertDictEqual(operons[1], {'end': 799, 'start': 200, 'strand': '+'})\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_adaptive_armor_hardener_single_damage_type",
-    "className": null,
-    "fileName": "/Pyfa-fit_&_EVE_Gnosis/tests_&_effects_&_test_adaptivearmorhardener.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "resists = {'Elecromagnetic': 0, 'Thermal': 0.2, 'Kinetic': 0.4, 'Explosive':\n    0.5}\ndamage_profile = {'Elecromagnetic': 0.5, 'Thermal': 0, 'Kinetic': 0,\n    'Explosive': 0}\nreturn_matrix = AdaptiveArmorHardener.run_cycle(resists, damage_profile)\nassert return_matrix['AdaptivePattern']['Elecromagnetic'] == 27\nassert return_matrix['AdaptivePattern']['Thermal'] == 15\nassert return_matrix['AdaptivePattern']['Kinetic'] == 9\nassert return_matrix['AdaptivePattern']['Explosive'] == 9\nfor _ in return_matrix['AppliedDamage']:\n    key, value = _\n    if key == 'Elecromagnetic':\n        assert value == 0.5\n    elif key == 'Thermal':\n        assert value == 0\n    elif key == 'Kinetic':\n        assert value == 0\n    elif key == 'Explosive':\n        assert value == 0\n    else:\n        assert True is False\n"
-}

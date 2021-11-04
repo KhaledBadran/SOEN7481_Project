@@ -1,9 +1,0 @@
-{
-    "functionName": "test_find_clusters",
-    "className": null,
-    "fileName": "/Accenture_&_AmpliGraph/tests_&_ampligraph_&_discovery_&_test_discovery.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "X = np.array([['a', 'y', 'b'], ['b', 'y', 'a'], ['a', 'y', 'c'], ['c', 'y',\n    'a'], ['a', 'y', 'd'], ['c', 'x', 'd'], ['b', 'y', 'c'], ['f', 'y', 'e']])\nmodel = ComplEx(k=2, batches_count=2)\nmodel.fit(X)\nclustering_algorithm = DBSCAN(eps=0.001, min_samples=1)\nlabels = find_clusters(X, model, clustering_algorithm, mode='triple')\nassert np.array_equal(labels, np.array([0, 1, 2, 3, 4, 5, 6, 7]))\nlabels = find_clusters(np.unique(X[:, (0)]), model, clustering_algorithm,\n    mode='entity')\nassert np.array_equal(labels, np.array([0, 1, 2, 3]))\nlabels = find_clusters(np.unique(X[:, (1)]), model, clustering_algorithm,\n    mode='relation')\nassert np.array_equal(labels, np.array([0, 1]))\nlabels = find_clusters(np.unique(X[:, (2)]), model, clustering_algorithm,\n    mode='entity')\nassert np.array_equal(labels, np.array([0, 1, 2, 3, 4]))\nwith pytest.raises(ValueError):\n    find_clusters(X, model, clustering_algorithm, mode='hah')\nwith pytest.raises(ValueError):\n    find_clusters(X, model, clustering_algorithm, mode='entity')\nwith pytest.raises(ValueError):\n    find_clusters(X, model, clustering_algorithm, mode='relation')\nwith pytest.raises(ValueError):\n    find_clusters(np.unique(X[:, (0)]), model, clustering_algorithm, mode=\n        'triple')\n"
-}

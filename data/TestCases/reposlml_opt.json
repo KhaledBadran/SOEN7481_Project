@@ -1,9 +1,0 @@
-{
-    "functionName": "lml_opt",
-    "className": null,
-    "fileName": "/SUNCAT-Center_&_CatLearn/test_&_test_lml_optimizer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test Gaussian process predictions.\"\"\"\nN, N_D = np.shape(train_features)\nregularization_bounds = 0.001, None\nkdict, bounds = prepare_kernels(kernel_list, regularization_bounds,\n    eval_gradients, N_D)\nprint(bounds)\ntheta = kdicts2list(kdict, N_D=N_D)\ntheta = np.append(theta, regularization)\nargs = np.array(train_features), np.array(train_targets\n    ), kdict, scale_optimizer, eval_gradients, None, eval_jac\nif not global_opt:\n    popt = minimize(lml.log_marginal_likelihood, theta, args=args, method=\n        algomin, jac=eval_jac, options={'disp': True}, bounds=bounds)\nelse:\n    minimizer_kwargs = {'method': algomin, 'args': args, 'bounds': bounds,\n        'jac': eval_jac}\n    popt = basinhopping(lml.log_marginal_likelihood, theta, niter=10,\n        minimizer_kwargs=minimizer_kwargs, disp=True)\nreturn popt\n"
-}

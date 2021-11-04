@@ -1,9 +1,0 @@
-{
-    "functionName": "test_handle_mouse",
-    "className": null,
-    "fileName": "/SimLeek_&_CV_PubSubs/tests_&_window_&_test_subscriber_windows.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "sub_win.SubscriberWindows.FRAME_DICT = {}\nwith mock.patch.object(cv2, 'namedWindow'), mock.patch(\n    'displayarray.window.subscriber_windows.window_commands'\n    ) as mock_win_cmd, mock.patch(\n    'displayarray.window.subscriber_windows.MouseEvent') as mock_mouse_event:\n    mock_mousey = mock_mouse_event.return_value = mock.MagicMock()\n    sw = sub_win.SubscriberWindows()\n    sw.handle_mouse(1, 2, 3, 4, 5)\n    mock_mouse_event.assert_called_once_with(1, 2, 3, 4, 5)\n    mock_win_cmd.mouse_pub.publish.assert_called_once_with(mock_mousey)\n"
-}

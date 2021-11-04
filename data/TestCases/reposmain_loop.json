@@ -1,9 +1,0 @@
-{
-    "functionName": "main_loop",
-    "className": null,
-    "fileName": "/NUAA-AL_&_ALiPy/test_&_test_exa_multi label.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "train_idx, test_idx, label_ind, unlab_ind = alibox.get_split(round)\nsaver = alibox.get_stateio(round)\nX_tr, y_tr, _ = get_Xy_in_multilabel(label_ind, X=X, y=mult_y,\n    unknown_element=0)\nmodel.fit(X=X_tr, y=y_tr)\nini_lab_num = len(label_ind)\nwhile len(label_ind) - ini_lab_num <= 120:\n    if isinstance(strategy, QueryMultiLabelAUDI):\n        select_labs = strategy.select(label_ind, unlab_ind, model=model)\n    else:\n        select_labs = strategy.select(label_ind, unlab_ind)\n    if len(select_labs[0]) == 1:\n        cost = mult_y.shape[1]\n    else:\n        cost = len(select_labs)\n    label_ind.update(select_labs)\n    unlab_ind.difference_update(select_labs)\n    X_tr, y_tr, _ = get_Xy_in_multilabel(select_labs, X=X, y=mult_y,\n        unknown_element=0)\n    model.fit(X=X_tr, y=y_tr, is_incremental=True)\n    pres, pred = model.predict(X[test_idx])\n    pred[pred == -1] = 0\n    perf = f1_score(y_true=mult_y_for_metric[test_idx], y_pred=pred,\n        average='micro')\n    st = alibox.State(select_index=select_labs, performance=perf, cost=cost)\n    saver.add_state(st)\n    saver.save()\nreturn copy.deepcopy(saver)\n"
-}

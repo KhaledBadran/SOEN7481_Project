@@ -1,9 +1,0 @@
-{
-    "functionName": "test_valid_row_normalize",
-    "className": "TestRowNormalizeCSRMatrix",
-    "fileName": "/dkaslovsky_&_Coupled-Biased-Random-Walks/tests_&_test_matrix.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "valid_table = {'random entries': {'data': np.random.rand(4),\n    'expected_row_0': 1, 'expected_row_1': 1}, 'zero row': {'data': np.\n    array([0, 0, 1, 1]), 'expected_row_0': 0, 'expected_row_1': 1},\n    'all zeros': {'data': np.zeros(4), 'expected_row_0': 0,\n    'expected_row_1': 0}}\ninvalid_table = {'wrong type': {'input': np.array([[1, 2], [3, 4]]),\n    'exception': TypeError}, 'stored zeros': {'input': csr_matrix(([1, 0],\n    ([0, 1], [0, 0])), shape=(2, 2)), 'exception': ValueError}}\nfor test_name, test in iteritems(valid_table):\n    matrix = construct_2x2_csr_matrix(test['data'])\n    normalized = row_normalize_csr_matrix(matrix)\n    row_sums = normalized.sum(axis=1)\n    self.assertAlmostEqual(row_sums[0], test['expected_row_0'], 3, test_name)\n    self.assertAlmostEqual(row_sums[1], test['expected_row_1'], 3, test_name)\nfor test_name, test in iteritems(invalid_table):\n    with self.assertRaises(test['exception']):\n        _ = row_normalize_csr_matrix(test['input'])\n"
-}

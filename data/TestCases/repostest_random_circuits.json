@@ -1,9 +1,0 @@
-{
-    "functionName": "test_random_circuits",
-    "className": null,
-    "fileName": "/PECOS-packages_&_PECOS/tests_&_test_random_circuits.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "state_sims = []\ntry:\n    from PECOS.state_sims.cychp import State as state_chp\n    state_sims.append(state_chp)\nexcept ImportError:\n    pass\ntry:\n    from PECOS.state_sims.cygraphsim import State as state_graph\n    state_sims.append(state_graph)\nexcept ImportError:\n    pass\ntry:\n    from PECOS.state_sims.cysparsesim import State as state_csparse\n    state_sims.append(state_csparse)\nexcept ImportError:\n    pass\ntry:\n    from PECOS.state_sims.cysparsesim_simple import State as state_csparse_simp\n    state_sims.append(state_csparse_simp)\nexcept ImportError:\n    pass\nstate_sims.append(state_sparse)\nassert run_circuit_test(state_sims, num_qubits=10, circuit_depth=50)\n"
-}

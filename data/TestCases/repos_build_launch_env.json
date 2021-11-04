@@ -1,9 +1,0 @@
-{
-    "functionName": "_build_launch_env",
-    "className": null,
-    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_utilities.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "import os\nimport pydevd\nenviron = os.environ.copy()\ncwd = os.path.abspath(os.path.dirname(__file__))\nassert os.path.isdir(cwd)\nresources_dir = os.path.join(os.path.dirname(pydevd.__file__),\n    'tests_python', 'resources')\nassert os.path.isdir(resources_dir)\nattach_to_process_dir = os.path.join(os.path.dirname(pydevd.__file__),\n    'pydevd_attach_to_process')\nassert os.path.isdir(attach_to_process_dir)\npydevd_dir = os.path.dirname(pydevd.__file__)\nassert os.path.isdir(pydevd_dir)\nenviron['PYTHONPATH'] = (cwd + os.pathsep + resources_dir + os.pathsep +\n    attach_to_process_dir + os.pathsep + pydevd_dir + os.pathsep + environ.\n    get('PYTHONPATH', ''))\nreturn cwd, environ\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_account_history",
-    "className": "TestAuthenticatedClient",
-    "fileName": "/danpaquin_&_GDAX-Python/tests_&_test_authenticated_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "accounts = client.get_accounts()\naccount_usd = [x for x in accounts if x['currency'] == 'USD'][0]['id']\nr = list(islice(client.get_account_history(account_usd), 5))\nassert type(r) is list\nassert 'amount' in r[0]\nassert 'details' in r[0]\nhistory_gen = client.get_account_history(account_usd, limit=1)\nr = list(islice(history_gen, 2))\nr2 = list(islice(history_gen, 2))\nassert r != r2\nr3 = list(client.get_account_history(account_usd, before=r2[0]['id']))\nassert r3 == r\n"
-}

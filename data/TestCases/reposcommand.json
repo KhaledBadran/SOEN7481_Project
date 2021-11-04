@@ -1,9 +1,0 @@
-{
-    "functionName": "command",
-    "className": "SerialHardwareAdapter",
-    "fileName": "/PRIArobotics_&_HedgehogServer/hedgehog_&_server_&_hardware_&_serial_&___init__.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "logger.debug(f\"Send to HWC:     {' '.join(f'{b:02X}' for b in cmd)}\")\nself.writer.write(bytes(cmd))\nreply = await self._replies_out.receive()\nif isinstance(reply, TruncatedCommandError):\n    raise reply\nif reply[0] in Reply.SUCCESS_REPLIES:\n    assert reply[0] == reply_code\n    return reply\nelse:\n    if reply[0] == Reply.UNKNOWN_OPCODE:\n        self.controller.serial.flushOutput()\n        await trio.sleep(0.02)\n        self.controller.serial.flushInput()\n        raise FailedCommandError(\n            'opcode unknown to the HWC; connection was reset')\n    elif reply[0] == Reply.INVALID_OPCODE:\n        raise FailedCommandError('opcode not supported')\n    elif reply[0] == Reply.INVALID_PORT:\n        raise FailedCommandError('port not supported or out of range')\n    elif reply[0] == Reply.INVALID_CONFIG:\n        raise FailedCommandError('sensor request invalid for output port')\n    elif reply[0] == Reply.INVALID_MODE:\n        raise FailedCommandError('unsupported motor mode')\n    elif reply[0] == Reply.INVALID_FLAGS:\n        raise FailedCommandError('unsupported combination of IO flags')\n    elif reply[0] == Reply.INVALID_VALUE and cmd[0] == Command.MOTOR:\n        raise FailedCommandError('unsupported motor power/velocity')\n    elif reply[0] == Reply.INVALID_VALUE and cmd[0] == Command.SERVO:\n        raise FailedCommandError('unsupported servo position')\n    elif reply[0] == Reply.FAIL_EMERGENCY_ACTIVE:\n        raise FailedCommandError('Emergency Shutdown activated')\n    raise FailedCommandError('unknown hardware controller response')\n"
-}

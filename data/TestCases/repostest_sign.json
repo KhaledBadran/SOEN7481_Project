@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sign",
-    "className": "TestProxyKmipClient",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_test_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the client can sign data.\n        \"\"\"\nmock_signature = b'aaaaaaaaaaaaaaaaaaaaaaaaaa'\nresult = {'result_status': enums.ResultStatus.SUCCESS, 'unique_identifier':\n    '1', 'signature': mock_signature}\nclient = ProxyKmipClient()\nclient.open()\nclient.proxy.sign.return_value = result\nactual_signature = client.sign(b'\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08', uid='1',\n    cryptographic_parameters={'padding_method': enums.PaddingMethod.PSS,\n    'cryptographic_algorithm': enums.CryptographicAlgorithm.RSA})\nself.assertEqual(mock_signature, actual_signature)\nmock.patch('kmip.pie.client.KMIPProxy', mock.MagicMock(spec_set=KMIPProxy))"
-}

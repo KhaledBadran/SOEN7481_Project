@@ -1,9 +1,0 @@
-{
-    "functionName": "test_BotorchModelConstraints",
-    "className": "BotorchModelTest",
-    "fileName": "/facebook_&_Ax/ax_&_models_&_tests_&_test_botorch_model.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "Xs1, Ys1, Yvars1, bounds, tfs, fns, mns = _get_torch_test_data(dtype=torch.\n    float, cuda=False, constant_noise=True)\nXs2, Ys2, Yvars2, _, _, _, _ = _get_torch_test_data(dtype=torch.float, cuda\n    =False, constant_noise=True)\nXs2[0] = -1 * Xs2[0]\nobjective_weights = torch.tensor([-1.0, 1.0], dtype=torch.float, device=\n    torch.device('cpu'))\nn = 3\nmodel = BotorchModel()\nwith mock.patch(FIT_MODEL_MO_PATH) as _mock_fit_model:\n    model.fit(Xs=Xs1 + Xs2, Ys=Ys1 + Ys2, Yvars=Yvars1 + Yvars2, bounds=\n        bounds, task_features=tfs, feature_names=fns, metric_names=mns,\n        fidelity_features=[])\n    _mock_fit_model.assert_called_once()\nwith self.assertRaises(ValueError):\n    model.gen(n, bounds, objective_weights)\n"
-}

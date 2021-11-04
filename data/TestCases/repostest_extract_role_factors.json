@@ -1,9 +1,0 @@
-{
-    "functionName": "test_extract_role_factors",
-    "className": "TestRoles",
-    "fileName": "/dkaslovsky_&_GraphRole/tests_&_test_roles_&_test_extract.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "for n_roles in range(2, 6):\n    self.re = RoleExtractor(n_roles=n_roles)\n    self.re.extract_role_factors(self.features)\n    expected_features = set(self.features.columns)\n    expected_nodes = set(self.features.index)\n    expected_roles = {f'role_{i}' for i in range(n_roles)}\n    self.assertEqual(self.re.node_role_factor.shape[1], n_roles)\n    self.assertEqual(self.re.role_feature_factor.shape[0], n_roles)\n    self.assertSetEqual(set(self.re.node_role_factor.index), expected_nodes)\n    self.assertSetEqual(set(self.re.node_role_factor.columns), expected_roles)\n    self.assertSetEqual(set(self.re.role_feature_factor.index), expected_roles)\n    self.assertSetEqual(set(self.re.role_feature_factor.columns),\n        expected_features)\n"
-}

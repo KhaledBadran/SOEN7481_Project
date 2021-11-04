@@ -1,9 +1,0 @@
-{
-    "functionName": "test_audit_audit_report_parse_date_filter",
-    "className": "TestEnterprise",
-    "fileName": "/Keeper-Security_&_Commander/unit-tests_&_test_command_enterprise.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "cmd = enterprise.AuditReportCommand()\nepoch_max = int(datetime.now().timestamp())\ndt_max = datetime.fromtimestamp(epoch_max)\ndt_min = dt_max - timedelta(days=1)\nepoch_min = int(dt_min.timestamp())\nval = cmd.get_filter(dt_max.strftime('%Y-%m-%dT%H:%M:%SZ'), cmd.convert_date)\nself.assertTrue(type(val) == int)\nself.assertEqual(epoch_max, val)\nrng = cmd.get_filter('>{0}'.format(dt_min.strftime('%Y-%m-%dT%H:%M:%SZ')),\n    cmd.convert_date)\nself.assertTrue(type(rng) == dict)\nself.assertIn('min', rng)\nself.assertIn('exclude_min', rng)\nself.assertTrue(rng['exclude_min'])\nself.assertNotIn('max', rng)\nself.assertEqual(rng['min'], epoch_min)\nrng = cmd.get_filter('<= {0}'.format(dt_max.strftime('%Y-%m-%dT%H:%M:%SZ')),\n    cmd.convert_date)\nself.assertTrue(type(rng) == dict)\nself.assertIn('max', rng)\nself.assertFalse(rng.get('exclude_max') or False)\nself.assertNotIn('min', rng)\nself.assertEqual(rng['max'], epoch_max)\nrng = cmd.get_filter('between {0} and {1}'.format(dt_min.strftime(\n    '%Y-%m-%dT%H:%M:%SZ'), dt_max.strftime('%Y-%m-%dT%H:%M:%SZ')), cmd.\n    convert_date)\nself.assertTrue(type(rng) == dict)\nself.assertIn('min', rng)\nself.assertIn('max', rng)\nself.assertEqual(rng['min'], epoch_min)\nself.assertEqual(rng['max'], epoch_max)\n"
-}

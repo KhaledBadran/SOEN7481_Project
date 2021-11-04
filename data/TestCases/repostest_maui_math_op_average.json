@@ -1,9 +1,0 @@
-{
-    "functionName": "test_maui_math_op_average",
-    "className": null,
-    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_teledyne_&_test_maui.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Set math channel, average operator.\"\"\"\nwith expected_protocol(ik.teledyne.MAUI, [init,\n    \"F1:DEFINE EQN,'AVG(C1)',AVERAGETYPE,SUMMED,SWEEPS,1000\",\n    \"F1:DEFINE EQN,'AVG(C2)',AVERAGETYPE,CONTINUOUS,SWEEPS,100\"], [], sep='\\n'\n    ) as osc:\n    osc.math[0].operator.average(0)\n    osc.math[0].operator.average(1, average_type='continuous', sweeps=100)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_command_program_resolve",
-    "className": null,
-    "fileName": "/filips123_&_DNSLinkPy/tests_&_test_command_program.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "records = [['dnslink=/ipfs/QmZGNUyrwwqHnaD8cgMWNUGDubny7Ro3pJ2P5yJ8LiVxMu',\n    'dnslink=/zeronet/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D',\n    'dnslink=/foo/bar/baz']]\ndnslinks = [record.replace('dnslink=', '') for record in records[0]]\nargv = ['dnslink', 'resolve', 'example.com']\nstdout = io.StringIO()\nquery = mocks.query(records)\nwith patch.object(sys, 'argv', argv), patch('sys.stdout', stdout), patch(\n    'dns.resolver.Resolver.query', query):\n    main()\nassert stdout.getvalue().strip().split('\\n') == dnslinks\n"
-}

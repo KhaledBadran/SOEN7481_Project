@@ -1,9 +1,0 @@
-{
-    "functionName": "test_invoke_raw",
-    "className": "test_Lambda",
-    "fileName": "/pbx-gs_&_OSBot-AWS/tests_&_unit_&_apis_&_test_Lambda.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with Temp_Lambda() as temp_lambda:\n    result = temp_lambda.aws_lambda.invoke_raw({'name': temp_lambda.\n        lambda_name})\n    data = result.get('data')\n    name = result.get('name')\n    status = result.get('status')\n    response = result.get('response')\n    assert status == 'ok'\n    assert name == temp_lambda.lambda_name\n    assert data == 'hello {0}'.format(temp_lambda.lambda_name)\n    assert response.get('StatusCode') == 200\n"
-}

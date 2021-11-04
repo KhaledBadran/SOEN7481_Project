@@ -1,9 +1,0 @@
-{
-    "functionName": "plot_Kr_curves",
-    "className": "RelativePermeability",
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_algorithms_&_metrics_&_RelativePermeability.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        \"\"\"\nimport matplotlib.pyplot as plt\nf = plt.figure()\nax = f.add_subplot(111)\nfor inp in self.settings['flow_inlets']:\n    if self.settings['wp'] is not None:\n        ax.plot(self.Kr_values['sat'][inp], self.Kr_values['relperm_wp'][\n            inp], 'o-', label='Krwp' + inp)\n    ax.plot(self.Kr_values['sat'][inp], self.Kr_values['relperm_nwp'][inp],\n        '*-', label='Krnwp' + inp)\nax.set_xlabel('Snw')\nax.set_ylabel('Kr')\nax.set_title('Relative Permability Curves')\nax.legend()\nreturn f\n"
-}

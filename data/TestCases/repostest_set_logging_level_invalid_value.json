@@ -1,9 +1,0 @@
-{
-    "functionName": "test_set_logging_level_invalid_value",
-    "className": "TestKmipServerConfig",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_config.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the right error is raised when an invalid value is used to\n        set the tls_cipher_suites configuration property.\n        \"\"\"\nc = config.KmipServerConfig()\nc._logger = mock.MagicMock()\nargs = 0,\nself.assertRaisesRegex(exceptions.ConfigurationError,\n    'The logging level must be a string representing a valid logging level.',\n    c._set_logging_level, *args)\nargs = 'invalid',\nself.assertRaisesRegex(exceptions.ConfigurationError,\n    'The logging level must be a string representing a valid logging level.',\n    c._set_logging_level, *args)\n"
-}

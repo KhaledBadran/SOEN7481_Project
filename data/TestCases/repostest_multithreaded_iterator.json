@@ -1,9 +1,0 @@
-{
-    "functionName": "test_multithreaded_iterator",
-    "className": null,
-    "fileName": "/TMiguelT_&_Asynchronize/test_&_test_general.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test for the async iterator use-case\n    \"\"\"\ncallback = asynchronize.AsyncCallback()\nlib = MultiThreadedLibrary(step_callback=callback.step_callback,\n    end_callback=callback.finished_callback, iterator=True)\nlib.start()\ni = 0\nasync for val in callback:\n    assert val.args[0] == i\n    i += 1\npytest.mark.asyncio"
-}

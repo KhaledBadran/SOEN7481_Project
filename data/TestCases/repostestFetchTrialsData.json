@@ -1,9 +1,0 @@
-{
-    "functionName": "testFetchTrialsData",
-    "className": "ExperimentTest",
-    "fileName": "/facebook_&_Ax/ax_&_core_&_tests_&_test_experiment.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "exp = self._setupBraninExperiment(n=5)\nbatch_0 = exp.trials[0]\nbatch_1 = exp.trials[1]\nbatch_0_data = exp.fetch_trials_data(trial_indices=[0])\nself.assertEqual(set(batch_0_data.df['trial_index'].values), {0})\nself.assertEqual(set(batch_0_data.df['arm_name'].values), {a.name for a in\n    batch_0.arms})\nbatch_1_data = exp.fetch_trials_data(trial_indices=[1])\nself.assertEqual(set(batch_1_data.df['trial_index'].values), {1})\nself.assertEqual(set(batch_1_data.df['arm_name'].values), {a.name for a in\n    batch_1.arms})\nself.assertEqual(exp.fetch_trials_data(trial_indices=[0, 1]), Data.\n    from_multiple_data([batch_0_data, batch_1_data]))\nwith self.assertRaisesRegex(ValueError, '.* not associated .*'):\n    exp.fetch_trials_data(trial_indices=[2])\nexp.remove_tracking_metric(metric_name='b')\nexp.add_tracking_metric(Metric(name='dummy'))\nself.assertTrue(exp.fetch_trials_data(trial_indices=[0]).df.empty)\nexp.attach_data(batch_0_data)\nexp.attach_data(batch_1_data)\nself.assertEqual(exp.fetch_trials_data(trial_indices=[0]), batch_0_data)\nself.assertEqual(exp.fetch_trials_data(trial_indices=[1]), batch_1_data)\nself.assertEqual(set(batch_0_data.df['trial_index'].values), {0})\nself.assertEqual(set(batch_0_data.df['arm_name'].values), {a.name for a in\n    batch_0.arms})\n"
-}

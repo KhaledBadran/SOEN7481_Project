@@ -1,9 +1,0 @@
-{
-    "functionName": "test_coadd1d_1",
-    "className": null,
-    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_scripts.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test basic coadd using shane_kast_blue\n    \"\"\"\nparfile = 'coadd1d.par'\nif os.path.isfile(parfile):\n    os.remove(parfile)\ncoadd_ofile = data_path('J1217p3905_coadd.fits')\nif os.path.isfile(coadd_ofile):\n    os.remove(coadd_ofile)\ncoadd_ifile = data_path('shane_kast_blue.coadd1d')\ncoadd_1dspec.main(coadd_1dspec.parser([coadd_ifile, '--test_spec_path',\n    data_path('')]))\nhdu = fits.open(coadd_ofile)\nassert hdu[1].header['EXT_MODE'] == 'OPT'\nassert hdu[1].header['FLUXED'] is False\nos.remove(parfile)\nos.remove(coadd_ofile)\n"
-}

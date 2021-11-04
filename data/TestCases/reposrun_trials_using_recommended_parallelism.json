@@ -1,9 +1,0 @@
-{
-    "functionName": "run_trials_using_recommended_parallelism",
-    "className": null,
-    "fileName": "/facebook_&_Ax/ax_&_service_&_tests_&_test_ax_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "remaining_trials = total_trials\nfor num_trials, parallelism_setting in recommended_parallelism:\n    if num_trials == -1:\n        num_trials = remaining_trials\n    for _ in range(ceil(num_trials / parallelism_setting)):\n        in_flight_trials = []\n        if parallelism_setting > remaining_trials:\n            parallelism_setting = remaining_trials\n        for _ in range(parallelism_setting):\n            params, idx = ax_client.get_next_trial()\n            in_flight_trials.append((params, idx))\n            remaining_trials -= 1\n        for _ in range(parallelism_setting):\n            params, idx = in_flight_trials.pop()\n            ax_client.complete_trial(idx, branin(params['x'], params['y']))\nreturn remaining_trials\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "_t1",
-    "className": null,
-    "fileName": "/IntegralDefense_&_ACE/lib_&_saq_&_test_database.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "_uuid = str(uuid.uuid4())\n_lock_uuid = str(uuid.uuid4())\ntry:\n    with get_db_connection() as db:\n        c = db.cursor()\n        c.execute('INSERT INTO locks ( uuid, lock_time ) VALUES ( %s, NOW() )',\n            (_uuid,))\n        time.sleep(2)\n        c.execute(\"UPDATE locks SET lock_owner = 'whatever'\")\n        db.commit()\nexcept pymysql.err.OperationalError as e:\n    if e.args[0] == 1213 or e.args[0] == 1205:\n        deadlock_event.set()\n"
-}

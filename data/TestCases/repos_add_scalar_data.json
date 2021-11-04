@@ -1,9 +1,0 @@
-{
-    "functionName": "_add_scalar_data",
-    "className": "_Hemisphere",
-    "fileName": "/nipy_&_PySurfer/surfer_&_viz.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Add scalar values to dataset\"\"\"\narray_id = self._mesh_dataset.point_data.add_array(data)\nself._mesh_dataset.point_data.get_array(array_id).name = array_id\nself._mesh_dataset.point_data.update()\nwith warnings.catch_warnings(record=True):\n    pipe = mlab.pipeline.set_active_attribute(self._mesh_dataset,\n        point_scalars=array_id, figure=self._f)\n    if pipe.parent not in self._f.children:\n        self._f.add_child(pipe.parent)\nself._mesh_clones[array_id] = pipe.parent\nreturn array_id, pipe\n"
-}

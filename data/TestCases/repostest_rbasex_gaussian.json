@@ -1,9 +1,0 @@
-{
-    "functionName": "test_rbasex_gaussian",
-    "className": null,
-    "fileName": "/PyAbel_&_PyAbel/abel_&_tests_&_test_rbasex.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Check an isotropic gaussian solution for rBasex\"\"\"\nrmax = 100\nsigma = 30\nn = 2 * rmax - 1\nref = GaussianAnalytical(n, rmax, symmetric=True, sigma=sigma)\nsrc = ref.func * ref.func[:, (None)]\nproj = ref.abel * ref.func[:, (None)]\nfwd_im, fwd_distr = rbasex_transform(src, direction='forward')\nassert_allclose(fwd_im, proj, rtol=0.02, atol=0.001)\nassert_allclose(fwd_distr.harmonics()[(0), 1:], ref.abel[rmax:], rtol=0.02,\n    atol=0.0005)\ninv_im, inv_distr = rbasex_transform(proj)\nassert_allclose(inv_im, src, rtol=0.02, atol=0.02)\nassert_allclose(inv_distr.harmonics()[(0), 1:], ref.func[rmax:], rtol=0.02,\n    atol=0.0001)\n"
-}

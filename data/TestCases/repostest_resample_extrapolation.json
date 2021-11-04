@@ -1,9 +1,0 @@
-{
-    "functionName": "test_resample_extrapolation",
-    "className": null,
-    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_resampling.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "tilt = -1.0\noffset = 1\ndef f(r):\n    if extrap == 'linx_liny':\n        return r * tilt\n    elif extrap == 'linx_logy':\n        return np.exp(r * tilt)\n    elif extrap == 'logx_liny':\n        return tilt * np.log(r)\n    elif extrap == 'logx_logy':\n        return r ** tilt\n    else:\n        trunc_ini = np.heaviside(r - R_INI, 0)\n        trunc_end = 1 - np.heaviside(r - R_END, 0)\n        trunc = trunc_ini * trunc_end\n        return r * tilt * trunc + offset\nf_arr = f(R_ARR)\nr_ini_x = 0.01\nr_end_x = 200\nr_arr_x = np.geomspace(r_ini_x, r_end_x, 2048)\nif extrap == 'none':\n    with pytest.raises(ccl.CCLError):\n        ccl.resample_array(R_ARR, f_arr, r_arr_x, extrap, extrap, offset,\n            offset)\nelse:\n    f_arr_x = ccl.resample_array(R_ARR, f_arr, r_arr_x, extrap, extrap,\n        offset, offset)\n    id_extrap = (r_arr_x > R_END) | (r_arr_x < R_INI)\n    f_arr_x_pred = f(r_arr_x)\n    res = np.fabs(f_arr_x / f_arr_x_pred - 1)\n    assert np.all(res[id_extrap] < 1e-10)\npytest.mark.parametrize('extrap', EXTRAP_TYPES)"
-}

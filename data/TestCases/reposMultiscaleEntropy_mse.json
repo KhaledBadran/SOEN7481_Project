@@ -1,9 +1,0 @@
-{
-    "functionName": "MultiscaleEntropy_mse",
-    "className": null,
-    "fileName": "/neuropsychology_&_NeuroKit/tests_&_tests_complexity.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"[Multiscale Entropy]\n\n    Arguments:\n        x {[input signal]} -- [an iterator of numbers]\n\n    Keyword Arguments:\n        scale_factor {list} -- [scale factors of coarse graining] (default: {[i for i in range(1,21)]})\n        m {list} -- [m in sample entropy] (default: {[2]})\n        r {list} -- [r in sample entropy] (default: {[0.15]})\n        return_type {str} -- [can be dict or list] (default: {'dict'})\n        safe_mode {bool} -- [if set True, type checking will be skipped] (default: {False})\n\n    Raises:\n        ValueError -- [some values too big]\n\n    Returns:\n        [dict or list as return_type indicates] -- [if dict, nest as [scale_factor][m][r] for each value of scale_factor, m, r; if list nest as [i][j][k] for lengths of scale_factor, m, r]\n    \"\"\"\nif not safe_mode:\n    m = MultiscaleEntropy_check_type(m, int, 'm')\n    r = MultiscaleEntropy_check_type(r, float, 'r')\n    scale_factor = MultiscaleEntropy_check_type(scale_factor, int,\n        'scale_factor')\ntry:\n    x = np.array(x)\nexcept:\n    print('x should be a sequence of numbers')\nif max(scale_factor) > len(x):\n    raise ValueError(\"the max scale_factor is bigger than x's length\")\nsd = np.sqrt(np.var(x))\nms_en = MultiscaleEntropy_init_return_type(return_type)\nfor s_f in scale_factor:\n    y = MultiscaleEntropy_coarse_grain(x, s_f)\n    if return_type == 'dict':\n        ms_en[s_f] = MultiscaleEntropy_sample_entropy(y, m, r, sd, 'dict', True\n            )\n    else:\n        ms_en.append(MultiscaleEntropy_sample_entropy(y, m, r, sd, 'list', \n            True))\nif return_type == 'list':\n    ms_en = [i[0] for i in ms_en]\n    ms_en = [i[0] for i in ms_en]\nreturn ms_en\n"
-}

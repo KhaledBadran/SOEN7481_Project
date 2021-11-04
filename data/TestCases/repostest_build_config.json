@@ -1,9 +1,0 @@
-{
-    "functionName": "test_build_config",
-    "className": "TestXenaOffline",
-    "fileName": "/xenadevel_&_PyXenaValkyrie/tests_&_test_offline.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "port = self.xm.session.reserve_ports([self.port1], force=False, reset=True)[\n    self.port1]\nassert XenaStream.next_tpld_id == 0\nassert len(port.streams) == 0\nassert port.get_attribute('ps_indices') == ''\nstream = port.add_stream('first stream')\nassert stream.get_attribute('ps_comment') == 'first stream'\nassert stream.get_attribute('ps_tpldid') == '0'\nassert XenaStream.next_tpld_id == 1\nassert len(port.streams) == 1\nstream = port.add_stream(tpld_id=7)\nassert stream.get_attribute('ps_tpldid') == '7'\nassert XenaStream.next_tpld_id == 8\nassert len(port.streams) == 2\nif self.api == ApiType.rest:\n    return\nmatch = port.add_match()\nmatch.set_attributes(pm_protocol='ETHERNET VLAN')\nmatch.set_attributes(pm_position=14)\nmatch.set_attributes(pm_match='0x0FFF000000000000 0x0064000000000000')\nassert len(port.matches) == 1\nfilter = port.add_filter(comment='New Filter')\nfilter.set_attributes(pf_condition='0 0 0 0 1 0')\nfilter.set_state(XenaFilterState.on)\nassert filter.get_attribute('pf_comment') == 'New Filter'\nassert len(port.filters) == 1\nlength = port.add_length()\nassert len(port.lengthes) == 1\nport.remove_length(0)\nassert len(port.lengthes) == 0\nport.remove_filter(0)\nassert len(port.filters) == 0\nport.remove_match(0)\nassert len(port.matches) == 0\nport.remove_stream(0)\nassert len(port.streams) == 1\nassert port.streams.get(1)\nassert port.get_attribute('ps_indices').split()[0] == '1'\nport.save_config(path.join(path.dirname(__file__), 'configs',\n    'save_config.xpc'))\n"
-}

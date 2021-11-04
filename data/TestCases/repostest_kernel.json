@@ -1,9 +1,0 @@
-{
-    "functionName": "test_kernel",
-    "className": "TestMLMin",
-    "fileName": "/SUNCAT-Center_&_CatLearn/test_&_test_mlmin.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test ML-Min kernels\"\"\"\ninitial_structure = read('initial_mlmin.traj')\ninitial_structure.set_calculator(EMT())\ninitial_opt = MLMin(initial_structure, trajectory='mlmin_structures.traj')\ninitial_opt.run(fmax=0.01, full_output=True, acq='min_energy', kernel=\n    'SQE_fixed')\natoms_catlearn = read('mlmin_structures.traj', ':')\nn_eval_catlearn = len(atoms_catlearn)\nprint('Checking number of function calls...')\nself.assertEqual(n_eval_catlearn, 7)\nprint('Checking converged energy...')\ne_opt = initial_opt.list_targets[-1]\ne_test = 3.31076\nnp.testing.assert_array_almost_equal(e_opt, e_test, decimal=5)\nprint('Checking converged fmax...')\nfmax_opt = initial_opt.list_fmax[-1][0]\nfmax_test = 0.00786\nnp.testing.assert_array_almost_equal(fmax_opt, fmax_test, decimal=5)\ninitial_structure = read('initial_mlmin.traj')\ninitial_structure.set_calculator(EMT())\ninitial_opt = MLMin(initial_structure, trajectory='mlmin_structures.traj')\ninitial_opt.run(fmax=0.01, full_output=True, acq='min_energy', kernel='ARD_SQE'\n    )\natoms_catlearn = read('mlmin_structures.traj', ':')\nn_eval_catlearn = len(atoms_catlearn)\nprint('Checking number of function calls...')\nself.assertEqual(n_eval_catlearn, 7)\nprint('Checking converged energy...')\ne_opt = initial_opt.list_targets[-1]\ne_test = 3.31076\nnp.testing.assert_array_almost_equal(e_opt, e_test, decimal=5)\nprint('Checking converged fmax...')\nfmax_opt = initial_opt.list_fmax[-1][0]\nfmax_test = 0.00766\nnp.testing.assert_array_almost_equal(fmax_opt, fmax_test, decimal=5)\n"
-}

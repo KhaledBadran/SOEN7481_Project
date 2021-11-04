@@ -1,9 +1,0 @@
-{
-    "functionName": "test_scan_poiss",
-    "className": null,
-    "fileName": "/bsafdi_&_NPTFit/tests_&_test_scan.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "n = nptfit.NPTF(tag='Test_Poiss')\nfermi_data = np.array([2, 1, 1, 1, 4, 10]).astype(np.int32)\nfermi_exposure = np.array([1.0, 1.0, 1.0, 2.0, 2.0, 2.0])\nn.load_data(fermi_data, fermi_exposure)\nanalysis_mask = np.array([False, False, False, False, False, True])\nn.load_mask(analysis_mask)\ndif = np.array([1.0, 2.0, 3.0, 4.0, 5.0, 6.0])\niso = np.array([1.0, 1.0, 1.0, 1.0, 1.0, 1.0])\nn.add_template(dif, 'dif')\nn.add_template(iso, 'iso')\nn.add_template(iso, 'iso_f', units='flux')\nn.add_template(iso, 'iso_PS', units='PS')\nn.add_poiss_model('dif', '$A_\\\\mathrm{dif}$', [0, 30], False)\nn.add_poiss_model('iso', '$A_\\\\mathrm{iso}$', [0, 5], False)\nn.configure_for_scan()\nn.perform_scan(nlive=50)\nn.load_scan()\nn = nptfit.NPTF(tag='Test_Poiss')\nn.load_data(fermi_data, fermi_exposure)\nn.add_template(dif, 'dif')\nn.add_poiss_model('dif', '$A_\\\\mathrm{dif}$', [0, 30], False)\nn.configure_for_scan()\nn.perform_scan(nlive=50)\nn.load_scan()\n"
-}

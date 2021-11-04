@@ -1,9 +1,0 @@
-{
-    "functionName": "test_modify_port_group_remove_port",
-    "className": "CITestProvisioning",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test modify_port_group remove port.\"\"\"\nport_group_name, port_group_details = self.create_port_group(number_of_ports=2)\ndirector_port_list = port_group_details[constants.SYMMETRIX_PORT_KEY]\nself.assertEqual(2, port_group_details[constants.NUM_OF_PORTS])\nself.assertEqual(2, len(director_port_list))\nremove_director = director_port_list[0][constants.DIRECTOR_ID]\nremove_port = director_port_list[0][constants.PORT_ID]\nremaining_director = director_port_list[1][constants.DIRECTOR_ID]\nremaining_port = director_port_list[1][constants.PORT_ID]\nremaining_director_port = self.provisioning.format_director_port(\n    remaining_director, remaining_port)\nmodify_port_result = self.provisioning.modify_port_group(port_group_name,\n    remove_port=(remove_director, remove_port))\nself._validate_port_group_details(port_group_name, modify_port_result, [\n    remaining_director_port], ref_port_count=1)\nport_group_details = self.provisioning.get_port_group(port_group_name)\nself._validate_port_group_details(port_group_name, port_group_details, [\n    remaining_director_port], ref_port_count=1)\n"
-}

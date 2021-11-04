@@ -1,9 +1,0 @@
-{
-    "functionName": "test_app_render_hook",
-    "className": null,
-    "fileName": "/PlaidWeb_&_Authl/tests_&_test_flask_wrapper.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "app = flask.Flask(__name__)\napp.secret_key = 'qwer'\naflask = authl.flask.AuthlFlask(app, {'TEST_ENABLED': True},\n    login_render_func=lambda **_: ('please login', 401))\n@app.route('/')\ndef index():\n    if 'me' not in flask.session:\n        return aflask.render_login_form('/')\n    return f\"hello {flask.session['me']}\"\nwith app.test_client() as client:\n    response = client.get('/')\n    assert response.status_code == 401\n    assert response.data == b'please login'\n    response = client.get('/login')\n    assert response.status_code == 401\n    assert response.data == b'please login'\n    response = client.get('/login/?me=test:poiu')\n    assert flask.session['me'] == 'test:poiu'\n    assert response.headers['Location'] == 'http://localhost/'\n    response = client.get('/')\n    assert response.data == b'hello test:poiu'\n"
-}

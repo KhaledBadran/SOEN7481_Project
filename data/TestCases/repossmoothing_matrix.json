@@ -1,9 +1,0 @@
-{
-    "functionName": "smoothing_matrix",
-    "className": null,
-    "fileName": "/nipy_&_PySurfer/surfer_&_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Create a smoothing matrix which can be used to interpolate data defined\n       for a subset of vertices onto mesh with an adjancency matrix given by\n       adj_mat.\n\n       If smoothing_steps is None, as many smoothing steps are applied until\n       the whole mesh is filled with with non-zeros. Only use this option if\n       the vertices correspond to a subsampled version of the mesh.\n\n    Parameters\n    ----------\n    vertices : 1d array\n        vertex indices\n    adj_mat : sparse matrix\n        N x N adjacency matrix of the full mesh\n    smoothing_steps : int or None\n        number of smoothing steps (Default: 20)\n    verbose : bool, str, int, or None\n        If not None, override default verbose level (see surfer.verbose).\n\n    Returns\n    -------\n    smooth_mat : sparse matrix\n        smoothing matrix with size N x len(vertices)\n    \"\"\"\nif smoothing_steps == 'nearest':\n    mat = _nearest(vertices, adj_mat)\nelse:\n    mat = _smooth(vertices, adj_mat, smoothing_steps)\nreturn mat\nverbose"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_wrong_key_jwt_token",
-    "className": "TestJwtToken",
-    "fileName": "/mozilla_&_PyFxA/fxa_&_tests_&_test_oauth.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.verify_will_succeed = False\nbad_key = self.get_file_contents('bad-key.json')\ntoken = self._make_jwt({}, bad_key)\nwith self.assertRaises(fxa.errors.TrustError):\n    self.client.verify_token(token)\nfor c in responses.calls:\n    if c.request.url == 'https://server/v1/verify':\n        raise Exception(\n            'testing with a well-formed token with invalid signature                                  should not have resulted in a call to /verify, but it did.'\n            )\nresponses.activate"
-}

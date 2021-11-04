@@ -1,9 +1,0 @@
-{
-    "functionName": "test_assert_overrides_match_parameter_count",
-    "className": null,
-    "fileName": "/PEtab-dev_&_PEtab/tests_&_test_lint.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "observable_df = pd.DataFrame(data={OBSERVABLE_ID: ['0obsPar1noisePar',\n    '2obsPar0noisePar'], OBSERVABLE_FORMULA: ['1.0',\n    'observableParameter1_2obsPar0noisePar + observableParameter2_2obsPar0noisePar'\n    ], NOISE_FORMULA: ['noiseParameter1_0obsPar1noisePar', '1.0']})\nobservable_df.set_index(OBSERVABLE_ID, inplace=True)\nmeasurement_df_orig = pd.DataFrame(data={OBSERVABLE_ID: ['0obsPar1noisePar',\n    '2obsPar0noisePar'], SIMULATION_CONDITION_ID: ['condition1',\n    'condition1'], PREEQUILIBRATION_CONDITION_ID: ['', ''], TIME: [1.0, 2.0\n    ], OBSERVABLE_PARAMETERS: ['', ''], NOISE_PARAMETERS: ['', '']})\npetab.assert_overrides_match_parameter_count(measurement_df_orig, observable_df\n    )\nmeasurement_df = measurement_df_orig.copy()\nmeasurement_df.loc[0, NOISE_PARAMETERS] = 'noiseParOverride'\npetab.assert_overrides_match_parameter_count(measurement_df, observable_df)\nmeasurement_df.loc[0, NOISE_PARAMETERS] = 'noiseParOverride;oneTooMuch'\nwith pytest.raises(AssertionError):\n    petab.assert_overrides_match_parameter_count(measurement_df, observable_df)\nmeasurement_df.loc[0, NOISE_PARAMETERS] = 'noiseParOverride'\nmeasurement_df.loc[1, NOISE_PARAMETERS] = 'oneTooMuch'\nwith pytest.raises(AssertionError):\n    petab.assert_overrides_match_parameter_count(measurement_df, observable_df)\nmeasurement_df = measurement_df_orig.copy()\nmeasurement_df.loc[1, OBSERVABLE_PARAMETERS] = 'override1;override2'\npetab.assert_overrides_match_parameter_count(measurement_df, observable_df)\nmeasurement_df.loc[1, OBSERVABLE_PARAMETERS] = 'oneMissing'\nwith pytest.raises(AssertionError):\n    petab.assert_overrides_match_parameter_count(measurement_df, observable_df)\n"
-}

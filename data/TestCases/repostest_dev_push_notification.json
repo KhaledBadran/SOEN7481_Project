@@ -1,9 +1,0 @@
-{
-    "functionName": "test_dev_push_notification",
-    "className": "TestPushNotificationHandler",
-    "fileName": "/albertogeniola_&_MerossIot/tests_&_test_push_handler.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "if self.test_device is None:\n    self.skipTest('No ToggleX device has been found to run this test on.')\n    return\nawait self.test_device.async_turn_on()\nnew_meross_client = await MerossHttpClient.async_from_user_password(email=\n    EMAIL, password=PASSWORD)\nm = None\ntry:\n    m = MerossManager(http_client=new_meross_client)\n    await m.async_init()\n    await m.async_device_discovery()\n    devs = m.find_devices(device_uuids=(self.test_device.uuid,))\n    dev = devs[0]\n    e = asyncio.Event()\n\n    async def my_coro(namespace, data):\n        e.set()\n    dev.register_push_notification_handler_coroutine(my_coro)\n    await self.test_device.async_turn_off()\n    await asyncio.wait_for(e.wait(), 5.0)\nfinally:\n    if m is not None:\n        m.close()\n    await new_meross_client.async_logout()\nunittest_run_loop"
-}

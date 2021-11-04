@@ -1,9 +1,0 @@
-{
-    "functionName": "test_partial_wasserstein",
-    "className": null,
-    "fileName": "/PythonOT_&_POT/test_&_test_partial.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "n_samples = 20\nn_noise = 20\nmu = np.array([0, 0])\ncov = np.array([[1, 0], [0, 2]])\nxs = ot.datasets.make_2D_samples_gauss(n_samples, mu, cov)\nxs = np.append(xs, (np.random.rand(n_noise, 2) + 1) * 4).reshape((-1, 2))\nxt = ot.datasets.make_2D_samples_gauss(n_samples, mu, cov)\nxt = np.append(xt, (np.random.rand(n_noise, 2) + 1) * -3).reshape((-1, 2))\nM = ot.dist(xs, xt)\np = ot.unif(n_samples + n_noise)\nq = ot.unif(n_samples + n_noise)\nm = 0.5\nw0, log0 = ot.partial.partial_wasserstein(p, q, M, m=m, log=True)\nw, log = ot.partial.entropic_partial_wasserstein(p, q, M, reg=1, m=m, log=\n    True, verbose=True)\nnp.testing.assert_equal(w0.sum(1) - p <= 1e-05, [True] * len(p))\nnp.testing.assert_equal(w0.sum(0) - q <= 1e-05, [True] * len(q))\nnp.testing.assert_equal(w.sum(1) - p <= 1e-05, [True] * len(p))\nnp.testing.assert_equal(w.sum(0) - q <= 1e-05, [True] * len(q))\nnp.testing.assert_allclose(np.sum(w0), m, atol=0.0001)\nnp.testing.assert_allclose(np.sum(w), m, atol=0.0001)\nw0, log0 = ot.partial.partial_wasserstein2(p, q, M, m=m, log=True)\nw0_val = ot.partial.partial_wasserstein2(p, q, M, m=m, log=False)\nG = log0['T']\nnp.testing.assert_allclose(w0, w0_val, atol=0.1, rtol=0.1)\nnp.testing.assert_equal(G.sum(1) <= p, [True] * len(p))\nnp.testing.assert_equal(G.sum(0) <= q, [True] * len(q))\nnp.testing.assert_allclose(np.sum(G), m, atol=0.0001)\n"
-}

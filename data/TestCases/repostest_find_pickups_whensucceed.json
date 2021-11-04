@@ -1,9 +1,0 @@
-{
-    "functionName": "test_find_pickups_whensucceed",
-    "className": "FleetTelematicsApiTest",
-    "fileName": "/abdullahselek_&_HerePy/tests_&_test_fleet_telematics_api.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with open('testdata/models/fleet_telematics_find_pickups.json', 'r') as f:\n    expected_response = f.read()\nresponses.add(responses.GET,\n    'https://wse.ls.hereapi.com/2/findpickups.json', expected_response,\n    status=200)\nmodes = [herepy.RouteMode.fastest, herepy.RouteMode.car, herepy.RouteMode.\n    traffic_enabled]\nstart = str.format('{0},{1};{2}:{3},value:{4}', 50.11562, 8.63121, herepy.\n    MultiplePickupOfferType.pickup.__str__(), 'GRAPEFRUITS', 1000)\ndeparture = '2016-10-14T07:30:00+02:00'\ncapacity = 10000\nvehicle_cost = 0.29\ndriver_cost = 20\nmax_detour = 60\nrest_times = 'disabled'\nintermediate_destinations = [str.format('{0},{1};{2}:{3},value:{4}', \n    50.118578, 8.636551, herepy.MultiplePickupOfferType.drop.__str__(),\n    'APPLES', 30), str.format('{0},{1};{2}:{3}', 50.12254, 8.63107, herepy.\n    MultiplePickupOfferType.pickup.__str__(), 'BANANAS')]\nend = str.format('{1},{2}', 'MainzCentralStation', 50.13254, 8.64928)\nresponse = self._api.find_pickups(modes=modes, start=start, departure=\n    departure, capacity=capacity, vehicle_cost=vehicle_cost, driver_cost=\n    driver_cost, max_detour=max_detour, rest_times=rest_times,\n    intermediate_destinations=intermediate_destinations, end=end)\nself.assertTrue(response)\nself.assertIsInstance(response, herepy.WaypointSequenceResponse)\nresponses.activate"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_remote_data_service_index_weight",
-    "className": null,
-    "fileName": "/quantOS-org_&_JAQS/test_&_test_dataservice.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "df = ds.query_index_weights_raw(index='000300.SH', trade_date=20140101)\nassert df.shape[0] == 300\nassert abs(df['weight'].sum() - 1.0) < 1.0\ndf = ds.query_index_weights_range(index='000300.SH', start_date=20140101,\n    end_date=20140305)\ndf = ds.query_index_weights_raw(index='000016.SH', trade_date=20140101)\nassert df.shape[0] == 50\nassert abs(df['weight'].sum() - 1.0) < 1.0\ndf = ds.query_index_weights_daily(index='000300.SH', start_date=20150101,\n    end_date=20151221)\nassert abs(df.at[20150120, '000001.SZ'] - 0.0107) < 0.01\nassert df.shape == (236, 321)\n"
-}

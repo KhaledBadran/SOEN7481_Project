@@ -1,9 +1,0 @@
-{
-    "functionName": "createEncryptionKey",
-    "className": "TestProducer",
-    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_producer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "params = RsaKeyParams()\neKeyName = Name(eKeyName)\neKeyName.append(timeMarker)\ndKeyBlob = RsaAlgorithm.generateKey(params).getKeyBits()\neKeyBlob = RsaAlgorithm.deriveEncryptKey(dKeyBlob).getKeyBits()\nself.decryptionKeys[eKeyName] = dKeyBlob\nkeyData = Data(eKeyName)\nkeyData.setContent(eKeyBlob)\nself.keyChain.sign(keyData, self.certificateName)\nself.encryptionKeys[eKeyName] = keyData\n"
-}

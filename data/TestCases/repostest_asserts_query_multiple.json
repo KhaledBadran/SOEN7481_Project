@@ -1,9 +1,0 @@
-{
-    "functionName": "test_asserts_query_multiple",
-    "className": "EvidenceTest",
-    "fileName": "/openworm_&_PyOpenWorm/tests_&_EvidenceTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Show that setting the evidence with distinct objects yields\n            distinct results \"\"\"\nr = DataObject(key='relationship')\nar = DataObject(key='aref')\nbr = DataObject(key='bref')\ne = self.ctx.Evidence(key='a', reference=ar)\ne.supports(r)\nself.save()\ne1 = self.ctx.Evidence(key='b', reference=br)\ne1.supports(r)\nself.save()\ne0 = self.ctx.Evidence()\ne0.supports(r)\nfor x in e0.load():\n    lar = x.reference.one()\n    lbr = x.reference.one()\n    if x.idl == e1.idl:\n        self.assertEqual(lbr, br)\n    elif x.idl == e.idl:\n        self.assertEqual(lar, ar)\n    else:\n        self.fail('Unknown object returned from load')\n"
-}

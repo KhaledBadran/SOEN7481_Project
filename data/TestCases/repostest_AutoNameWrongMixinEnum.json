@@ -1,9 +1,0 @@
-{
-    "functionName": "test_AutoNameWrongMixinEnum",
-    "className": "TestAutoNameMixinEnum",
-    "fileName": "/alex-ber_&_AlexBerUtils/tests_&_utils_&_enums_mixin_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "logger.info(f'{request._pyfuncitem.name}()')\nwith pytest.raises(ValueError) as excinfo:\n    some_enum = cls('RED')\n    logger.debug(excinfo.value, exc_info=(excinfo.type, excinfo.value,\n        excinfo.tb))\nsome_enum = cls(1)\nlogger.info(f'name is {some_enum!r}')\nsec_enum = cls[some_enum.name]\nassert some_enum == sec_enum\nlogger.debug(some_enum)\nlogger.debug(f'repr is {some_enum!r}')\nlogger.debug(f'str is {some_enum!s}')\n[logger.debug(f'{member!r}') for member in cls.__members__.values()]\nif is_rep_check:\n    assert repr(some_enum) == str(some_enum)\npytest.mark.parametrize('cls,is_rep_check', [(ColorAutoNameWrong, True), (\n    ColorAutoNameWrong2, False)])"
-}

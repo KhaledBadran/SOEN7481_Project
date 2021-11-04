@@ -1,9 +1,0 @@
-{
-    "functionName": "test_allocation_errors",
-    "className": null,
-    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_discrete_allocation.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "df = get_data()\nmu = mean_historical_return(df)\nS = sample_cov(df)\nef = EfficientFrontier(mu, S)\nw = ef.max_sharpe()\nlatest_prices = get_latest_prices(df)\nwith pytest.raises(TypeError):\n    DiscreteAllocation(ef.weights, latest_prices)\nwith pytest.raises(TypeError):\n    DiscreteAllocation(w, latest_prices.values.tolist())\nwith pytest.raises(ValueError):\n    DiscreteAllocation(w, latest_prices, total_portfolio_value=0)\nwith pytest.raises(ValueError):\n    DiscreteAllocation(w, latest_prices, short_ratio=-0.4)\n"
-}

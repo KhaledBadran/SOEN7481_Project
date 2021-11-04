@@ -1,9 +1,0 @@
-{
-    "functionName": "test_acq_optimizer_with_time_api",
-    "className": null,
-    "fileName": "/bytesandbrains_&_ProcessOptimizer/ProcessOptimizer_&_tests_&_test_optimizer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "opt = Optimizer([(-2.0, 2.0)], base_estimator=base_estimator, acq_func=\n    acq_func, acq_optimizer='sampling', n_initial_points=2)\nx1 = opt.ask()\nopt.tell(x1, (bench1(x1), 1.0))\nx2 = opt.ask()\nres = opt.tell(x2, (bench1(x2), 2.0))\nassert_true(x1 != x2)\nassert_true(len(res.models) == 1)\nassert_array_equal(res.func_vals.shape, (2,))\nassert_array_equal(res.log_time.shape, (2,))\nwith pytest.raises(TypeError) as e:\n    opt.tell(x2, bench1(x2))\npytest.mark.parametrize('base_estimator', TREE_REGRESSORS)pytest.mark.parametrize('acq_func', ACQ_FUNCS_PS)"
-}

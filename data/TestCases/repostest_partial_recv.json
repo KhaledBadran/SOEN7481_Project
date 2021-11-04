@@ -1,9 +1,0 @@
-{
-    "functionName": "test_partial_recv",
-    "className": null,
-    "fileName": "/maxtwen_&_Non-Blocking-Pipe/tests_&_test_nonblock_receiver.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "r, w = os.pipe()\nsender = BlockSender(w)\nreceiver = NonBlockReceiver(r)\nobj = TestObject()\nsender.send(obj)\npacked = sender._pack(pickle.dumps(obj))\nsize = packed.size + len(packed.header)\npart1 = int(math.ceil(size / 2.0))\npart2 = int(math.floor(size / 2.0))\nlist(receiver.recv(part1))\nobj, = receiver.recv(part2)\nassert isinstance(obj, TestObject)\n"
-}

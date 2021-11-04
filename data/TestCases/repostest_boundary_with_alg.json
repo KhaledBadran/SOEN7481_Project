@@ -1,9 +1,0 @@
-{
-    "functionName": "test_boundary_with_alg",
-    "className": "BoundaryTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_geometry_&_BoundaryTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "pn = op.network.Cubic(shape=[5, 5, 5], spacing=2.5e-05)\npn.add_boundary_pores()\nPs_int = pn.pores(labels=['*boundary'], mode='not')\nPs_boun = pn.pores(labels=['*boundary'])\nTs_int = pn.throats(labels=['*boundary'], mode='not')\nTs_boun = pn.throats(labels=['*boundary'])\ngeo = op.geometry.StickAndBall(network=pn, pores=Ps_int, throats=Ts_int)\nboun = op.geometry.Boundary(network=pn, pores=Ps_boun, throats=Ts_boun)\ngeo.regenerate_models()\nboun.regenerate_models()\nair = op.phases.Air(network=pn)\nodiff = op.models.physics.diffusive_conductance.ordinary_diffusion\nphys_air_geo = op.physics.Standard(network=pn, phase=air, geometry=geo)\nphys_air_geo.add_model(propname='throat.diffusive_conductance', model=odiff)\nphys_air_boun = op.physics.Standard(network=pn, phase=air, geometry=boun)\nphys_air_boun.add_model(propname='throat.diffusive_conductance', model=odiff)\nphys_air_boun.regenerate_models()\nphys_air_geo.regenerate_models()\nchecks = phys_air_geo.check_data_health().values()\nfor check in checks:\n    assert len(check) == 0\nchecks = phys_air_boun.check_data_health().values()\nfor check in checks:\n    assert len(check) == 0\nFD = op.algorithms.FickianDiffusion(network=pn)\nFD.setup(phase=air)\nFD.set_value_BC(pores=pn.pores('top_boundary'), values=1.0)\nFD.set_value_BC(pores=pn.pores('bottom_boundary'), values=0.0)\nFD.run()\nassert FD.calc_effective_diffusivity() > 0\nSF = op.algorithms.StokesFlow(network=pn)\nSF.setup(phase=air)\nSF.set_value_BC(pores=pn.pores('top_boundary'), values=1.0)\nSF.set_value_BC(pores=pn.pores('bottom_boundary'), values=0.0)\nSF.run()\nassert SF.calc_effective_permeability() > 0\n"
-}

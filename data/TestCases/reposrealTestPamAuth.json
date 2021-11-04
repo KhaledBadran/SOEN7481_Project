@@ -1,9 +1,0 @@
-{
-    "functionName": "realTestPamAuth",
-    "className": "TestAuthentication",
-    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_test_connection.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "db = self.db.copy()\nimport os\ndb['password'] = os.environ.get('PASSWORD')\ncur = self.connect().cursor()\ntry:\n    cur.execute('show grants for ' + TestAuthentication.osuser + '@localhost')\n    grants = cur.fetchone()[0]\n    cur.execute('drop user ' + TestAuthentication.osuser + '@localhost')\nexcept pymysql.OperationalError as e:\n    self.assertEqual(1045, e.args[0])\n    grants = None\nwith TempUser(cur, TestAuthentication.osuser + '@localhost', self.databases\n    [0]['db'], 'pam', os.environ.get('PAMSERVICE')) as u:\n    try:\n        c = pymysql.connect(user=TestAuthentication.osuser, **db)\n        db['password'] = 'very bad guess at password'\n        with self.assertRaises(pymysql.err.OperationalError):\n            pymysql.connect(user=TestAuthentication.osuser, auth_plugin_map\n                ={b'mysql_cleartext_password': TestAuthentication.\n                DefectiveHandler}, **self.db)\n    except pymysql.OperationalError as e:\n        self.assertEqual(1045, e.args[0])\n        with self.assertRaises(pymysql.err.OperationalError):\n            pymysql.connect(user=TestAuthentication.osuser, auth_plugin_map\n                ={b'mysql_cleartext_password': TestAuthentication.\n                DefectiveHandler}, **self.db)\nif grants:\n    cur.execute(grants)\n"
-}

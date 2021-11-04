@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ingestion_csv_wrong_params",
-    "className": null,
-    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_engine_&_tests_&_test_vectorizer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "cache_dir = check_cache()\nfe = FeatureVectorizer(cache_dir=cache_dir, mode='w')\nfe.setup(column_ids=[1, 3])\nwith pytest.raises(ValueError, match=\n    '.*can only be privided using `dataset_definition.*'):\n    fe.ingest(csv_data_dir)\nwith pytest.raises(ValueError, match='.*one CSV can be provided at a time.*'):\n    fe.ingest(dataset_definition=[{'file_path': os.path.join(csv_data_dir,\n        'example.csv')}, {'file_path': os.path.join(csv_data_dir,\n        'example.csv')}])\n"
-}

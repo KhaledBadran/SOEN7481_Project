@@ -1,9 +1,0 @@
-{
-    "functionName": "disabled_test_issue_54",
-    "className": "TestNewIssues",
-    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_test_issues.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "conn = self.connect()\nc = conn.cursor()\nwith warnings.catch_warnings():\n    warnings.filterwarnings('ignore')\n    c.execute('drop table if exists issue54')\nbig_sql = 'select * from issue54 where '\nbig_sql += ' and '.join('%d=%d' % (i, i) for i in range(0, 100000))\ntry:\n    c.execute('create table issue54 (id integer primary key)')\n    c.execute('insert into issue54 (id) values (7)')\n    c.execute(big_sql)\n    self.assertEqual(7, c.fetchone()[0])\nfinally:\n    c.execute('drop table issue54')\n"
-}

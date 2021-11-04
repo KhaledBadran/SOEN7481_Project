@@ -1,9 +1,0 @@
-{
-    "functionName": "test_interleaving_partial_data",
-    "className": "SubdomainTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_core_&_SubdomainTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "pn = op.network.Cubic(shape=[3, 1, 1])\ngeo1 = op.geometry.GenericGeometry(network=pn, pores=[0], throats=[0])\ngeo2 = op.geometry.GenericGeometry(network=pn, pores=[1], throats=[1])\ngeo3 = op.geometry.GenericGeometry(network=pn, pores=[2])\ngeo1['pore.test_int_missing'] = 1\ngeo2['pore.test_int_missing'] = 2\nassert np.isnan(pn['pore.test_int_missing']).sum() == 1\nassert pn['pore.test_int_missing'].dtype == float\ngeo1['pore.test_int'] = 1\ngeo2['pore.test_int'] = 2\ngeo3['pore.test_int'] = 3\nassert pn['pore.test_int'].dtype == int\ngeo1['pore.test_bool'] = True\ngeo2['pore.test_bool'] = False\nassert pn['pore.test_bool'].dtype == bool\nassert pn['pore.test_bool'].sum() == 1\n"
-}

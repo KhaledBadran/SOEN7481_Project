@@ -1,9 +1,0 @@
-{
-    "functionName": "montage_pointmatches_weighted",
-    "className": null,
-    "fileName": "/AllenInstitute_&_EM_Aligner_python/integration_tests_&_test_montage.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "test_montage_collection2 = 'montage_collection2'\npms_from_json = []\nwith open(FILE_PMS, 'r') as f:\n    pms_from_json = json.load(f)\nn = len(pms_from_json[0]['matches']['w'])\npms_from_json[0]['matches']['w'] = [(0.0) for i in range(n)]\nrenderapi.pointmatch.import_matches(test_montage_collection2, pms_from_json,\n    render=render)\nyield test_montage_collection2\nrenderapi.pointmatch.delete_collection(test_montage_collection2, render=render)\npytest.fixture(scope='module')"
-}

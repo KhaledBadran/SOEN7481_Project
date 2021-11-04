@@ -1,9 +1,0 @@
-{
-    "functionName": "test_read_invalid_kmip_version",
-    "className": "TestSetAttributeResponsePayload",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_set_attribute.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a VersionNotSupported error is raised when an unsupported\n        version of KMIP is used to decode the SetAttribute response payload.\n        \"\"\"\npayload = payloads.SetAttributeResponsePayload()\nargs = self.empty_encoding,\nkwargs = {'kmip_version': enums.KMIPVersion.KMIP_1_0}\nself.assertRaisesRegex(exceptions.VersionNotSupported,\n    'KMIP 1.0 does not support the SetAttribute operation.', payload.read,\n    *args, **kwargs)\n"
-}

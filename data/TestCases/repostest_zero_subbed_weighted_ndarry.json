@@ -1,9 +1,0 @@
-{
-    "functionName": "test_zero_subbed_weighted_ndarry",
-    "className": null,
-    "fileName": "/Rambatino_&_CHAID/tests_&_test_tree.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test how the split works when 0 independent categorical variable chooses a dependent categorical variable for the weighted case.\n    In this instance, a very small float is assigned to the 0 value\n    \"\"\"\ngender = np.array([0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1])\nincome = np.array([0, 0, 1, 1, 2, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0])\nweighting = np.array([0.9] * int(len(gender) / 2.0) + [1.9] * int(len(\n    gender) / 2.0))\nndarr = np.transpose(np.vstack([gender]))\ntree = CHAID.Tree.from_numpy(ndarr, income, alpha_merge=0.9, weights=\n    weighting, min_child_node_size=0)\nsplit = tree.generate_best_split(tree.vectorised_array, tree.observed)\nassert round(split.score, 4) == 14.5103\nassert round(split.p, 4) == 0.0007\n"
-}

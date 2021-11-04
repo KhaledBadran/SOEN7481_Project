@@ -1,9 +1,0 @@
-{
-    "functionName": "slow_kmer_freq",
-    "className": null,
-    "fileName": "/Puumanamana_&_CoCoNet/tests_&_test_generators.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "nucls = 'ACGT'\nrc_trans = str.maketrans(nucls, nucls[::-1])\nkmer_counts = {''.join(kmer): (0) for kmer in product(list(nucls), repeat=k)}\nfor i in range(len(seq) - k + 1):\n    kmer_counts[seq[i:i + k]] += 1\n    if rc:\n        seq_rc = seq[i:i + k].translate(rc_trans)[::-1]\n        if seq_rc != seq[i:i + k]:\n            kmer_counts[seq_rc] += 1\nfreqs = np.array(list(kmer_counts.values()))\nif rc:\n    indices, _ = kmer_rc_idx(k)\n    freqs = freqs[indices]\nreturn freqs\n"
-}

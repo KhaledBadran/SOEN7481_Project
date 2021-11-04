@@ -1,9 +1,0 @@
-{
-    "functionName": "test_plot_filter_dataframe_for_plotting_gpu_and_cpu_fail",
-    "className": null,
-    "fileName": "/bio-phys_&_MDBenchmark/mdbenchmark_&_tests_&_test_plot.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Tests the error when gpu and cpu are set to false.\n    \"\"\"\nwith tmpdir.as_cwd():\n    input_df = pd.read_csv(data['testcsv.csv'])\n    expected_output = 'ERROR CPU and GPU not set. Nothing to plot. Exiting.\\n'\n    with pytest.raises(SystemExit) as error:\n        plot.filter_dataframe_for_plotting(df=input_df, host_name=(),\n            module_name=(), gpu=False, cpu=False)\n    out, err = capsys.readouterr()\n    assert out == expected_output\n    assert error.type == SystemExit\n    assert error.value.code == 1\n"
-}

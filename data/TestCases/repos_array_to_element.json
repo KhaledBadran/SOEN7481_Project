@@ -1,9 +1,0 @@
-{
-    "functionName": "_array_to_element",
-    "className": "VTK",
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_io_&_VTK.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "dtype_map = {'int8': 'Int8', 'int16': 'Int16', 'int32': 'Int32', 'int64':\n    'Int64', 'uint8': 'UInt8', 'uint16': 'UInt16', 'uint32': 'UInt32',\n    'uint64': 'UInt64', 'float32': 'Float32', 'float64': 'Float64', 'str':\n    'String'}\nelement = None\nif str(array.dtype) in dtype_map.keys():\n    element = ET.Element('DataArray')\n    element.set('Name', name)\n    element.set('NumberOfComponents', str(n))\n    element.set('type', dtype_map[str(array.dtype)])\n    element.text = '\\t'.join(map(str, array.ravel()))\nreturn element\nclassmethod"
-}

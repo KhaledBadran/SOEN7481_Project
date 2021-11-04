@@ -1,9 +1,0 @@
-{
-    "functionName": "test_set_account_eligibility_action",
-    "className": null,
-    "fileName": "/OwnMarket_&_OwnBlockchainSdkPython/own_blockchain_sdk_&_test_transactions.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "sender_wallet = Wallet()\naccount_hash = 'AccountH1'\nasset_hash = 'AssetH1'\nis_primary_eligible = False\nis_secondary_eligible = True\nexpected = (\n    \"\"\"{\n    \"senderAddress\": \"%s\",\n    \"nonce\": 1,\n    \"expirationTime\": 0,\n    \"actionFee\": 0.01,\n    \"actions\": [\n        {\n            \"actionType\": \"SetAccountEligibility\",\n            \"actionData\": {\n                \"accountHash\": \"%s\",\n                \"assetHash\": \"%s\",\n                \"isPrimaryEligible\": false,\n                \"isSecondaryEligible\": true\n            }\n        }\n    ]\n}\"\"\"\n     % (sender_wallet.address, account_hash, asset_hash))\ntx = Tx(sender_wallet.address, 1, 0.01, 0)\ntx.add_set_account_eligibility_action(account_hash, asset_hash,\n    is_primary_eligible, is_secondary_eligible)\nactual = tx.to_json()\nassert expected == actual\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_weighted",
-    "className": null,
-    "fileName": "/AllenInstitute_&_EM_Aligner_python/integration_tests_&_test_montage.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "renderapi.stack.set_stack_state(loading_raw_stack, stack_state, render=render)\np = copy.deepcopy(montage_parameters)\np['input_stack']['name'] = loading_raw_stack\np['output_stack']['name'] = output_stack_name\np['pointmatch']['name'] = montage_pointmatches_weighted\nmod = EMaligner.EMaligner(input_data=p, args=[])\nmod.run()\nassert np.all(np.array(mod.results['precision']) < 1e-07)\nassert np.all(np.array(mod.results['error']) < 200)\ndel mod\npytest.mark.parametrize('stack_state', ['COMPLETE', 'LOADING'])"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_convex_hull",
-    "className": "TestPolygon",
-    "fileName": "/FabriceSalvaire_&_PyValentina/unit-test_&_GeometryEngine_&_test_Polygon.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "points = Vector2D.from_coordinates((0, 0), (-1, 2), (0, 3), (2, 4), (1, 5),\n    (4, 6), (3, 3), (5, 3), (7, 3), (7, 2), (6, 1), (3, 2), (2, 1))\nconvex_hull_points = [points[i] for i in (0, 10, 9, 8, 5, 4, 1)]\npolygon = Polygon2D(*points)\nconvex_hull_truth = Polygon2D(*convex_hull_points)\nself.assertTrue(polygon.is_simple)\nself.assertFalse(polygon.is_convex)\nself.assertTrue(polygon.is_concave)\nself.assertTrue(polygon.is_clockwise)\nself.assertFalse(polygon.is_counterclockwise)\nconvex_hull = polygon.convex_hull()\nself.assertListEqual(list(convex_hull.points), convex_hull_points)\nself.assertEqual(convex_hull, convex_hull_truth)\nself.assertFalse(convex_hull.is_clockwise)\nself.assertTrue(convex_hull.is_counterclockwise)\nreversed_polygon = Polygon2D(*reversed(points))\nself.assertFalse(reversed_polygon.is_clockwise)\nself.assertTrue(reversed_polygon.is_counterclockwise)\nconvex_hull2 = reversed_polygon.convex_hull()\nself.assertEqual(convex_hull, convex_hull2)\nself.assertFalse(convex_hull2.is_clockwise)\nself.assertTrue(convex_hull2.is_counterclockwise)\nsimplified_polygon = convex_hull.simplify(threshold=0.1)\nself.assertEqual(simplified_polygon, convex_hull_truth)\n"
-}

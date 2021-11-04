@@ -1,9 +1,0 @@
-{
-    "functionName": "test_lognormal",
-    "className": null,
-    "fileName": "/Neuraxio_&_Neuraxle/testing_&_hyperparams_&_test_distributions.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "log2_space_mean = 0.0\nlog2_space_std = 2.0\nhd = LogNormal(log2_space_mean, log2_space_std)\nsamples = get_many_samples_for(hd)\nsamples_median = np.median(samples)\nassert 0.9 < samples_median < 1.1\nsamples_std = np.std(samples)\nassert 5 < samples_std < 8\nassert hd.pdf(0.0) == 0.0\nassert abs(hd.pdf(1.0) - 0.28777602476804065) < 1e-06\nassert abs(hd.pdf(5.0) - 0.029336304593386688) < 1e-06\nassert hd.cdf(0.0) == 0.0\nassert hd.cdf(1.0) == 0.5\nassert abs(hd.cdf(5.0) - 0.8771717397015799) < 1e-06\nassert hd.min() == 0\nassert hd.max() == np.inf\nassert abs(hd.mean() - 2.614063815405198) < 1e-06\nassert abs(hd.var() - 39.86106421503915) < 1e-06\nassert abs(hd.std() - 6.313561927710787) < 1e-06\nassert abs(hd.mean() - np.mean(samples)) < 0.1\nassert abs((hd.var() - np.var(samples)) / hd.var()) < 0.25\n"
-}

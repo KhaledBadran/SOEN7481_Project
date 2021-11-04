@@ -1,9 +1,0 @@
-{
-    "functionName": "test_rproperty_readonly_writing_fails",
-    "className": null,
-    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_property_factories_&_test_rproperty.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with pytest.raises(AttributeError):\n\n\n    class Mock(MockInstrument):\n\n        def __init__(self):\n            super(Mock, self).__init__()\n            self._value = 0\n\n        def mockset(self, newval):\n            self._value = newval\n        mockproperty = rproperty(fget=None, fset=mockset, readonly=True)\n    mock_inst = Mock()\n    mock_inst.mockproperty = 1\n"
-}

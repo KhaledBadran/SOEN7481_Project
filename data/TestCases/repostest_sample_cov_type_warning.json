@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sample_cov_type_warning",
-    "className": null,
-    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_risk_models.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "df = get_data()\ncov_from_df = risk_models.sample_cov(df)\nreturns_as_array = np.array(df)\nwith warnings.catch_warnings(record=True) as w:\n    cov_from_array = risk_models.sample_cov(returns_as_array)\n    assert len(w) == 1\n    assert issubclass(w[0].category, RuntimeWarning)\n    assert str(w[0].message) == 'data is not in a dataframe'\nnp.testing.assert_array_almost_equal(cov_from_df.values, cov_from_array.\n    values, decimal=6)\n"
-}

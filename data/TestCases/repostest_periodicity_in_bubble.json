@@ -1,9 +1,0 @@
-{
-    "functionName": "test_periodicity_in_bubble",
-    "className": "Test_periodicity_grispy",
-    "fileName": "/mchalela_&_GriSPy/tests_&_test_brute_force.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "centres = np.array([[5.0, 0.0, 0.0], [0.0, 5.0, 0.0], [0.0, 0.0, 5.0]])\nupper_radii = 0.3 * self.lbox\nfor j in range(3):\n    gsp = self.make_gsp({j: (-self.lbox * 0.5, self.lbox * 0.5)})\n    centre = centres[j].reshape(1, 3)\n    dis, ind = gsp.bubble_neighbors(centre, distance_upper_bound=upper_radii)\n    dis, ind = dis[0], ind[0]\n    aux = np.argsort(ind)\n    ind = ind[aux]\n    dis = dis[aux]\n    for i in range(2):\n        assert_equal(ind[i], i + j * 2)\n        assert_(dis[i] <= upper_radii * (1.0 + self.eps))\n        assert_(dis[i] >= upper_radii * (1.0 - self.eps))\n"
-}

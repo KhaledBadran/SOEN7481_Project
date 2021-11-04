@@ -1,9 +1,0 @@
-{
-    "functionName": "guggenheim_katayama",
-    "className": null,
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_models_&_phases_&_surface_tension.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Missing description\n\n    Parameters\n    ----------\n    target : OpenPNM Object\n        The object for which these values are being calculated.  This\n        controls the length of the calculated array, and also provides\n        access to other necessary thermofluid properties.\n\n    K2 : scalar\n        Fluid specific constant\n\n    n : scalar\n        Fluid specific constant\n\n    temperature : string\n        The dictionary key containing the temperature values (K)\n\n    critical_temperature : string\n        The dictionary key containing the critical temperature values (K)\n\n    critical_pressure : string\n        The dictionary key containing the critical pressure values (K)\n\n    Returns\n    -------\n    value : NumPy ndarray\n        Array containing surface tension values [N/m]\n\n    \"\"\"\nT = target[temperature]\nPc = target[critical_pressure]\nTc = target[critical_temperature]\nsigma_o = K2 * Tc ** (1 / 3) * Pc ** (2 / 3)\nvalue = sigma_o * (1 - T / Tc) ** n\nreturn value\n"
-}

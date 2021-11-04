@@ -1,9 +1,0 @@
-{
-    "functionName": "test_unclosed_tag",
-    "className": "LexerTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_lexer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "template = \"\"\"\n\n            <%def name=\"foo()\">\n             other text\n        \"\"\"\ntry:\n    nodes = Lexer(template).parse()\n    assert False\nexcept errors.SyntaxException:\n    eq_(str(compat.exception_as()), 'Unclosed tag: <%def> at line: 5 char: 9')\n"
-}

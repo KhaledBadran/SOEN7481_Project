@@ -1,9 +1,0 @@
-{
-    "functionName": "test_min_volatility_L2_reg_many_values",
-    "className": null,
-    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_efficient_frontier.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ef = setup_efficient_frontier()\nef.min_volatility()\ninitial_number = sum(ef.weights > 0.01)\nfor _ in range(10):\n    ef.add_objective(objective_functions.L2_reg, gamma=0.05)\n    ef.min_volatility()\n    np.testing.assert_almost_equal(ef.weights.sum(), 1)\n    new_number = sum(ef.weights > 0.01)\n    assert new_number >= initial_number\n    initial_number = new_number\n"
-}

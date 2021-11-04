@@ -1,9 +1,0 @@
-{
-    "functionName": "test_create_and_delete_rdf_group",
-    "className": "CITestReplication",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_replication.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test create_rdf_group and delete_rdf_group.\"\"\"\nlocal_array = self.conn.array_id\nlocal_port_list, remote_port_list = self.get_online_rdf_ports()\nself.conn.set_array_id(local_array)\nrdf_group = self.get_next_free_srdf_group()\nself.replication.create_rdf_group(local_director_port_list=local_port_list,\n    remote_array_id=self.conn.remote_array, remote_director_port_list=\n    remote_port_list, array_id=local_array, local_rdfg_number=rdf_group,\n    remote_rdfg_number=rdf_group, label='pyu4v_' + str(rdf_group))\nrdf_group_list = self.replication.get_rdf_group_list()\nrdfg_list = []\nfor group in rdf_group_list:\n    rdfg_list.append(group['rdfgNumber'])\nself.assertIn(rdf_group, rdfg_list)\nself.replication.delete_rdf_group(srdf_group_number=rdf_group)\nrdf_group_list = self.replication.get_rdf_group_list()\nrdfg_list = []\nfor group in rdf_group_list:\n    rdfg_list.append(group['rdfgNumber'])\nself.assertNotIn(rdf_group, rdfg_list)\n"
-}

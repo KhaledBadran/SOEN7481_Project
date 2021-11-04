@@ -1,9 +1,0 @@
-{
-    "functionName": "test_write_only_profile_name",
-    "className": "TestProfileInformation",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a ProfileInformation structure can be written to a data\n        stream even when missing all fields except the profile name.\n        \"\"\"\nprofile_information = objects.ProfileInformation(profile_name=enums.\n    ProfileName.BASELINE_SERVER_BASIC_KMIPv12)\nbuffer = utils.BytearrayStream()\nprofile_information.write(buffer, kmip_version=enums.KMIPVersion.KMIP_1_3)\nself.assertEqual(len(self.only_profile_name_encoding), len(buffer))\nself.assertEqual(str(self.only_profile_name_encoding), str(buffer))\n"
-}

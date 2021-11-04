@@ -1,9 +1,0 @@
-{
-    "functionName": "test_missing_attributes",
-    "className": "TestIgnitionType",
-    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_converters.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Check for error upon missing attributes\n        \"\"\"\nroot = etree.Element('experiment')\nwith pytest.raises(MissingElementError) as excinfo:\n    ignition = get_ignition_type(root)\nassert 'Error: required element ignitionType is missing.' in str(excinfo.value)\nroot = etree.Element('experiment')\nignition = etree.SubElement(root, 'ignitionType')\nignition.set('target', 'P')\nwith pytest.raises(MissingAttributeError) as excinfo:\n    ignition = get_ignition_type(root)\nassert 'Error: required attribute type of ignitionType is missing.' in str(\n    excinfo.value)\nroot = etree.Element('experiment')\nignition = etree.SubElement(root, 'ignitionType')\nignition.set('type', 'max')\nwith pytest.raises(MissingAttributeError) as excinfo:\n    ignition = get_ignition_type(root)\nassert 'Error: required attribute target of ignitionType is missing.' in str(\n    excinfo.value)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_current_spotify",
-    "className": null,
-    "fileName": "/ocaballeror_&_Lyricfetch/lyricfetch_&_tests_&_test_dbus.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Check that we can get the current song playing in amarok.\n    \"\"\"\npath = '/org/mpris/MediaPlayer2'\ninterface = 'org.mpris.MediaPlayer2.Player'\nsignature, value = response\ndbus_service.set_property(path, 'Metadata', signature, value, interface)\ndbus_service.listen()\ncurrent = get_current()\nassert current == song\npytest.mark.parametrize('dbus_service,song,response,get_current', [(\n    'org.mpris.MediaPlayer2.spotify', Song(artist='Gorod', title=\n    'Splinters of Life', album='Process of a new decline'),\n    sample_response_spotify, get_current_spotify), (\n    'org.mpris.MediaPlayer2.clementine', Song(artist='Rush', title='2112',\n    album='2112'), sample_response_clementine, get_current_clementine)],\n    ids=['spotify', 'clementine'], indirect=['dbus_service'])"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_interpolate_with_support",
-    "className": null,
-    "fileName": "/mesonepigreco_&_CellConstructor/tests_&_TestInterpolateDynmat_&_test_interpolate_with_support.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "total_path = os.path.dirname(os.path.abspath(__file__))\nos.chdir(total_path)\ndyn = CC.Phonons.Phonons('dyn_prova')\nharm_coarse = CC.Phonons.Phonons('harm_support')\nharm_fine = CC.Phonons.Phonons('harm_support', 2)\nnew_dyn = dyn.Interpolate((1, 1, 1), (2, 2, 1), harm_coarse, harm_fine,\n    symmetrize=False)\nsymqe = CC.symmetries.QE_Symmetry(new_dyn.structure)\nsymqe.SetupQPoint(verbose=True)\nprint(new_dyn.q_stars)\nq_stars, q_index = symqe.SetupQStar(new_dyn.q_tot)\nnew_dyn.save_qe('new_dyn')\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_server_cancel_in_job",
-    "className": null,
-    "fileName": "/PRIArobotics_&_HedgehogServer/tests_&_test_server.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "async def handler_callback(server, ident, msg):\n\n    async def task(*, task_status=trio.TASK_STATUS_IGNORED):\n        task_status.started()\n        async with server.job():\n            await trio.sleep(0.1)\n    await server.add_task(task)\n    return ack.Acknowledgement()\nasync with conn_req(handler_dict={io.Action: handler_callback}) as socket:\n    await assertReplyReq(socket, io.Action(0, io.INPUT_FLOATING), ack.OK)\n    await trio.sleep(0.05)\npytest.mark.trio"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "rough_input_stack_3",
-    "className": null,
-    "fileName": "/AllenInstitute_&_EM_Aligner_python/integration_tests_&_test_rough.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "test_rough_stack3 = 'rough_input_stack_3'\nwith open(FILE_ROUGH_TILES, 'r') as f:\n    j = json.load(f)\ntilespecs = [renderapi.tilespec.TileSpec(json=d) for d in j]\ntfs = [renderapi.transform.AffineModel(M00=2.0, M11=2.0), renderapi.\n    transform.AffineModel(M00=0.5, M11=0.5)]\nfor i in range(len(tilespecs)):\n    tilespecs[i].tforms.insert(0, tfs[1])\n    tilespecs[i].tforms.insert(0, tfs[0])\nrenderapi.stack.create_stack(test_rough_stack3, render=render)\nrenderapi.client.import_tilespecs(test_rough_stack3, tilespecs, render=\n    render, use_rest=True)\nrenderapi.stack.set_stack_state(test_rough_stack3, 'COMPLETE', render=render)\nyield test_rough_stack3\nrenderapi.stack.delete_stack(test_rough_stack3, render=render)\npytest.fixture(scope='module')"
-}

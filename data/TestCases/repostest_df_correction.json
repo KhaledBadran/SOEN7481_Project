@@ -1,9 +1,0 @@
-{
-    "functionName": "test_df_correction",
-    "className": "TestDFCorrection",
-    "fileName": "/ornlneutronimaging_&_NeuNorm/tests_&_NeuNorm_&_normalizing_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"assert df corrction works\"\"\"\nsample_path = self.data_path + '/tif/sample/'\nob_path = self.data_path + '/tif/ob/'\no_norm = Normalization()\no_norm.load(folder=sample_path, auto_gamma_filter=False)\no_norm.load(folder=ob_path, data_type='ob', auto_gamma_filter=False)\ndf_file_1 = self.data_path + '/tif/df/df002.tif'\ndf_file_2 = self.data_path + '/tif/df/df003.tif'\no_norm.load(file=df_file_1, data_type='df', auto_gamma_filter=False)\no_norm.load(file=df_file_2, data_type='df', auto_gamma_filter=False)\no_norm.df_correction()\n_expected_data = np.zeros([5, 5])\n_expected_data[:, (2)] = 1\n_expected_data[:, (3)] = 2\n_expected_data[:, (4)] = 3\n_sample_data = o_norm.data['sample']['data'][0]\nassert (_expected_data == o_norm.data['sample']['data'][0]).all()\n_expected_data = np.zeros([5, 5])\n_ob_data = o_norm.data['ob']['data'][0]\nassert (_expected_data == _ob_data).all()\n"
-}

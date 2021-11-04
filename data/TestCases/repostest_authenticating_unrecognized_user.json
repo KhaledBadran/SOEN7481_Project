@@ -1,9 +1,0 @@
-{
-    "functionName": "test_authenticating_unrecognized_user",
-    "className": "TestSLUGSAuthenticationAndAccessControl",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_functional_&_services_&_test_authentication.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that an unrecognized user is blocked from submitting a request.\n        \"\"\"\nwith open('/tmp/slugs/user_group_mapping.csv', 'w') as f:\n    f.write('Jane Doe,Group A\\n')\n    f.write('Jane Doe,Group B\\n')\n    f.write('John Smith,Group B\\n')\ntime.sleep(1)\nargs = enums.CryptographicAlgorithm.AES, 256\nkwargs = {'operation_policy_name': 'policy_1'}\nwith self.client_john_doe as c:\n    self.assertRaises(exceptions.KmipOperationFailure, c.create, *args, **\n        kwargs)\nwith open('/tmp/slugs/user_group_mapping.csv', 'w') as f:\n    f.write('John Doe,Group A\\n')\n    f.write('Jane Doe,Group A\\n')\n    f.write('Jane Doe,Group B\\n')\n    f.write('John Smith,Group B\\n')\ntime.sleep(1)\n"
-}

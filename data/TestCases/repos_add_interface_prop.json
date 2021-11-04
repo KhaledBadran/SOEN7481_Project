@@ -1,9 +1,0 @@
-{
-    "functionName": "_add_interface_prop",
-    "className": "MultiPhase",
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_phases_&_MultiPhase.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        Helper method used to add interface models to the MultiPhase object by\n        augmenting ``propname`` --> ``propname.phases[0].name:phases[1].name``\n        \"\"\"\nif propname.split('.')[0] not in ['pore', 'throat']:\n    propname = f'throat.{propname}'\nif not propname.startswith('throat'):\n    raise Exception(\"'propname' must be a throat property such as: \" +\n        \"'throat.partition_coef'.\")\npropname += f'.{phases[0].name}:{phases[1].name}'\nself.add_model(propname, model, **kwargs)\n"
-}

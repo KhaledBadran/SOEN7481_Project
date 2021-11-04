@@ -1,9 +1,0 @@
-{
-    "functionName": "test_default_logger",
-    "className": null,
-    "fileName": "/EVEprosper_&_ProsperCommon/tests_&_test_prosper_logging.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Execute LogCapture on basic/default logger object\"\"\"\ntest_logname = 'default_logger'\nlog_builder = prosper_logging.ProsperLogger(test_logname, LOG_PATH,\n    config_obj=config)\nlogger = log_builder.get_logger()\nlog_capture = helper_log_messages(logger)\nlog_capture.check((test_logname, 'INFO',\n    'prosper.common.prosper_logging TEST --INFO--'), (test_logname,\n    'WARNING', 'prosper.common.prosper_logging TEST --WARNING--'), (\n    test_logname, 'ERROR', 'prosper.common.prosper_logging TEST --ERROR--'),\n    (test_logname, 'CRITICAL',\n    'prosper.common.prosper_logging TEST --CRITICAL--'))\ntest_cleanup_log_directory(log_builder)\n"
-}

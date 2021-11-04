@@ -1,9 +1,0 @@
-{
-    "functionName": "test_process",
-    "className": "TestDispatchProcessor",
-    "fileName": "/BciPy_&_BciPy/bcipy_&_acquisition_&_tests_&_test_processor.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test MultiProcessor functionality\"\"\"\ndata1 = [1, 2, 3]\ndata2 = [4, 5, 6]\nproc1 = mock(Processor)\nproc2 = mock(Processor)\nwhen(proc1).process(any(), None).thenReturn(None)\nwhen(proc2).process(any(), None).thenReturn(None)\nmulti = DispatchProcessor(proc1)\nmulti.process(data1)\nmulti.add(proc2)\nmulti.process(data2)\nverify(proc1, times=1).process(data1, None)\nverify(proc1, times=1).process(data2, None)\nverify(proc2, times=0).process(data1, None)\nverify(proc2, times=1).process(data2, None)\n"
-}

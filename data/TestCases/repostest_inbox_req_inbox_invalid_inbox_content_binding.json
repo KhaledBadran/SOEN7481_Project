@@ -1,9 +1,0 @@
-{
-    "functionName": "test_inbox_req_inbox_invalid_inbox_content_binding",
-    "className": null,
-    "fileName": "/EclecticIQ_&_OpenTAXII/tests_&_services_&_test_inbox.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "inbox = server.get_service('inbox-B')\ncontent = make_content(version, content_binding=INVALID_CONTENT_BINDING)\ninbox_message = make_inbox_message(version, dest_collection=COLLECTION_OPEN,\n    blocks=[content])\nheaders = prepare_headers(version, https)\nresponse = inbox.process(headers, inbox_message)\nassert isinstance(response, as_tm(version).StatusMessage)\nassert response.status_type == ST_SUCCESS\nassert response.in_response_to == MESSAGE_ID\nblocks = server.persistence.get_content_blocks(None)\nassert len(blocks) == 0\npytest.mark.parametrize('https', [True, False])pytest.mark.parametrize('version', [11, 10])"
-}

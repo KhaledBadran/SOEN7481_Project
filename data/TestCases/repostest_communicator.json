@@ -1,9 +1,0 @@
-{
-    "functionName": "test_communicator",
-    "className": "TestATCommunicator",
-    "fileName": "/ChristianVisintin_&_ATtila/tests_&_test_atcommunicator.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "com = ATCommunicator('/dev/ttyS0', 9600, 10, '\\r\\n', True, True)\nself.assertEqual(com.serial_port, '/dev/ttyS0')\nself.assertEqual(com.baud_rate, 9600)\nself.assertEqual(com.default_timeout, 10)\nself.assertEqual(com.line_break, '\\r\\n')\nself.assertEqual(com.rtscts, True)\nself.assertEqual(com.dsrdtr, True)\ncom.serial_port = '/dev/ttyfoobar'\nself.assertEqual(com.serial_port, '/dev/ttyfoobar')\ncom.baud_rate = 115200\nself.assertEqual(com.baud_rate, 115200)\ncom.default_timeout = 15\nself.assertEqual(com.default_timeout, 15)\ncom.default_timeout = -5\nself.assertEqual(com.default_timeout, 10)\ncom.default_timeout = None\nself.assertEqual(com.default_timeout, 10)\ncom.line_break = '\\r'\nself.assertEqual(com.line_break, '\\r')\ncom.rtscts = False\nself.assertEqual(com.rtscts, False)\ncom.dsrdtr = False\nself.assertEqual(com.dsrdtr, False)\nwith self.assertRaises(ATSerialPortError):\n    com.open()\ncom.serial_port = None\nwith self.assertRaises(ATSerialPortError):\n    com.open()\nwith self.assertRaises(ATSerialPortError):\n    com.close()\nself.assertFalse(com.is_open())\nwith self.assertRaises(ATSerialPortError):\n    com.exec('AT')\n"
-}

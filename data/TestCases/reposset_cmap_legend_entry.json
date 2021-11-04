@@ -1,9 +1,0 @@
-{
-    "functionName": "set_cmap_legend_entry",
-    "className": null,
-    "fileName": "/1313e_&_CMasher/cmasher_&_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Sets the label of the provided `artist` to `label`, and creates a legend\n    entry using a miniature version of the colormap of `artist` as the legend\n    icon.\n\n    This function can be used to add legend entries for *MPL* artists that use\n    a colormap, like those made with :func:`~matplotlib.pyplot.hexbin`;\n    :func:`~matplotlib.pyplot.hist2d`; :func:`~matplotlib.pyplot.scatter`; or\n    any :mod:`~matplotlib.pyplot` function that takes `cmap` as an input\n    argument.\n    Keep in mind that using this function will override any legend entry that\n    already exists for `artist`.\n\n    Parameters\n    ----------\n    artist : :obj:`~matplotlib.artist.Artist` object\n        Any artist object that has the `cmap` attribute, for which a legend\n        entry must be made using its colormap as the icon.\n    label : str\n        The string that must be set as the label of `artist`.\n\n    \"\"\"\ncmap = getattr(artist, 'cmap', None)\nif cmap is None:\n    raise ValueError(\"Input argument 'artist' does not have attribute 'cmap'!\")\nartist.set_label(label)\nLegend.get_default_handler_map()[artist] = _HandlerColorPolyCollection()\n"
-}

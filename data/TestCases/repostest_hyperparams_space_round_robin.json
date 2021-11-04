@@ -1,9 +1,0 @@
-{
-    "functionName": "test_hyperparams_space_round_robin",
-    "className": null,
-    "fileName": "/Neuraxio_&_Neuraxle/testing_&_hyperparams_&_test_space.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "orig_space = copy.deepcopy(HYPE_SPACE)\nprint(orig_space.keys())\nnestened = HyperparameterSpace(getattr(orig_space, to_nested_dict_func_name)())\nprint(nestened)\nflattened = HyperparameterSpace(getattr(nestened, to_flat_func_name)())\nprint(flattened.keys())\nassert flattened.to_flat_as_dict_primitive(\n    ) == orig_space.to_flat_as_dict_primitive()\npytest.mark.parametrize('to_flat_func_name', ['to_flat',\n    'to_flat_as_dict_primitive', 'to_flat_as_ordered_dict_primitive'])pytest.mark.parametrize('to_nested_dict_func_name', ['to_nested_dict',\n    'to_nested_dict_as_dict_primitive',\n    'to_nested_dict_as_ordered_dict_primitive'])"
-}

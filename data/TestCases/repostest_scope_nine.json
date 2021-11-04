@@ -1,9 +1,0 @@
-{
-    "functionName": "test_scope_nine",
-    "className": "ScopeTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_def.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"test that 'enclosing scope' doesnt\n        get exported to other templates\"\"\"\nl = lookup.TemplateLookup()\nl.put_string('main',\n    \"\"\"\n        <%\n            x = 5\n        %>\n        this is main.  <%include file=\"secondary\"/>\n\"\"\"\n    )\nl.put_string('secondary', \"\"\"\n        this is secondary.  x is ${x}\n\"\"\")\neq_(flatten_result(l.get_template('main').render(x=2)),\n    'this is main. this is secondary. x is 2')\n"
-}

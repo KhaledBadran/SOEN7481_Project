@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ok3d_update_variogram_model",
-    "className": null,
-    "fileName": "/bsmurphy_&_PyKrige/tests_&_test_core.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data, (gridx_ref, gridy_ref, gridz_ref), mask_ref = sample_data_3d\nwith pytest.raises(ValueError):\n    OrdinaryKriging3D(data[:, (0)], data[:, (1)], data[:, (2)], data[:, (3)\n        ], variogram_model='blurg')\nk3d = OrdinaryKriging3D(data[:, (0)], data[:, (1)], data[:, (2)], data[:, (3)])\nvariogram_model = k3d.variogram_model\nvariogram_parameters = k3d.variogram_model_parameters\nanisotropy_scaling_y = k3d.anisotropy_scaling_y\nanisotropy_scaling_z = k3d.anisotropy_scaling_z\nanisotropy_angle_x = k3d.anisotropy_angle_x\nanisotropy_angle_y = k3d.anisotropy_angle_y\nanisotropy_angle_z = k3d.anisotropy_angle_z\nwith pytest.raises(ValueError):\n    k3d.update_variogram_model('blurg')\nk3d.update_variogram_model('power', anisotropy_scaling_y=3.0,\n    anisotropy_scaling_z=3.0, anisotropy_angle_x=45.0, anisotropy_angle_y=\n    45.0, anisotropy_angle_z=45.0)\nassert variogram_model != k3d.variogram_model\nassert not np.array_equal(variogram_parameters, k3d.variogram_model_parameters)\nassert anisotropy_scaling_y != k3d.anisotropy_scaling_y\nassert anisotropy_scaling_z != k3d.anisotropy_scaling_z\nassert anisotropy_angle_x != k3d.anisotropy_angle_x\nassert anisotropy_angle_y != k3d.anisotropy_angle_y\nassert anisotropy_angle_z != k3d.anisotropy_angle_z\n"
-}

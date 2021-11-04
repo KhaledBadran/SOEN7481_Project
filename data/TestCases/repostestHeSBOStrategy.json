@@ -1,9 +1,0 @@
-{
-    "functionName": "testHeSBOStrategy",
-    "className": "REMBOStrategyTest",
-    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_rembo_strategy.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "gs = HeSBOStrategy(D=10, d=4, init_per_proj=2)\nself.assertEqual(gs.name, 'HeSBO')\nself.assertEqual(len(gs.projections), 1)\nA, bounds_d = gs.projections[0]\nself.assertEqual(bounds_d, [(-1, 1)] * 4)\nz = torch.abs(A).sum(dim=1)\nself.assertTrue(torch.allclose(z, torch.ones(10, dtype=torch.double)))\ngs2 = gs.clone_reset()\nself.assertTrue(isinstance(gs2, HeSBOStrategy))\n"
-}

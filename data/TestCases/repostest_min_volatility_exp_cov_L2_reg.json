@@ -1,9 +1,0 @@
-{
-    "functionName": "test_min_volatility_exp_cov_L2_reg",
-    "className": null,
-    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_efficient_frontier.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "df = get_data()\nef = setup_efficient_frontier()\nef.add_objective(objective_functions.L2_reg)\nef.cov_matrix = risk_models.exp_cov(df)\nw = ef.min_volatility()\nassert isinstance(w, dict)\nassert set(w.keys()) == set(ef.tickers)\nnp.testing.assert_almost_equal(ef.weights.sum(), 1)\nassert all([(i >= 0) for i in w.values()])\nnp.testing.assert_allclose(ef.portfolio_performance(), (0.2434082300792007,\n    0.17835412793427002, 1.2526103694192867))\n"
-}

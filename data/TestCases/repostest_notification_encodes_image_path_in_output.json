@@ -1,9 +1,0 @@
-{
-    "functionName": "test_notification_encodes_image_path_in_output",
-    "className": "TestConfig",
-    "fileName": "/SketchingDev_&_Doodle-Dashboard/tests_&_doodledashboard_&_notifications_&_image_&_test_image_configuration.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "file_contents = str(uuid.uuid4())\nself.http_server.serve_content(file_contents)\ndownloader = FileDownloader()\nconfig = ImageDependingOnMessageContentCreator(downloader)\noptions = {'default-image': '%s/default image.png' % self.http_server.url}\ntry:\n    notification = config.create(options, self._EMPTY_SECRET_STORE)\n    image_output = notification.create([])\n    self.assertIsNotNone(image_output.image_path)\n    with open(image_output.image_path, 'r') as f:\n        self.assertEquals(file_contents, f.read())\nfinally:\n    self.cleanup_downloaded_files(downloader, 'default20image.png')\n"
-}

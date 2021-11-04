@@ -1,9 +1,0 @@
-{
-    "functionName": "test_succeedsWithSameModule",
-    "className": "OriginalLocationTests",
-    "fileName": "/glyph_&_Automat/automat_&__test_&_test_discover.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        L{isOriginalLocation} returns True when the attribute refers to an\n        object inside the module where that object was defined.\n        \"\"\"\nmSource = textwrap.dedent(\n    \"\"\"\n        class ThisClassWasDefinedHere(object):\n            pass\n        anObject = ThisClassWasDefinedHere()\n        aNestingObject = ThisClassWasDefinedHere()\n        aNestingObject.nestedObject = ThisClassWasDefinedHere()\n        \"\"\"\n    )\nmDict = self.makeModuleAsDict(mSource, self.pathDir, 'm.py')\nself.assertTrue(self.isOriginalLocation(mDict['m.ThisClassWasDefinedHere']))\nself.assertTrue(self.isOriginalLocation(mDict['m.aNestingObject']))\nnestingObject = mDict['m.aNestingObject']\nnestingObjectDict = self.attributesAsDict(nestingObject)\nnestedObject = nestingObjectDict['m.aNestingObject.nestedObject']\nself.assertTrue(self.isOriginalLocation(nestedObject))\n"
-}

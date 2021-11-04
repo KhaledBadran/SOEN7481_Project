@@ -1,9 +1,0 @@
-{
-    "functionName": "test_set_attribute_with_multivalued_attribute",
-    "className": "TestKmipEngine",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a KmipError is raised when attempting to set the value of\n        a multivalued attribute.\n        \"\"\"\ne = engine.KmipEngine()\ne._protocol_version = contents.ProtocolVersion(2, 0)\ne._data_store = self.engine\ne._data_store_session_factory = self.session_factory\ne._data_session = e._data_store_session_factory()\ne._is_allowed_by_operation_policy = mock.Mock(return_value=True)\ne._logger = mock.MagicMock()\nsecret = pie_objects.SymmetricKey(enums.CryptographicAlgorithm.AES, 0, b'')\ne._data_session.add(secret)\ne._data_session.commit()\ne._data_session = e._data_store_session_factory()\nargs = payloads.SetAttributeRequestPayload(unique_identifier='1',\n    new_attribute=objects.NewAttribute(attribute=primitives.TextString(\n    value='New Name', tag=enums.Tags.NAME))),\nself.assertRaisesRegex(exceptions.KmipError,\n    \"The 'Name' attribute is multi-valued. Multi-valued attributes cannot be set with the SetAttribute operation.\"\n    , e._process_set_attribute, *args)\n"
-}

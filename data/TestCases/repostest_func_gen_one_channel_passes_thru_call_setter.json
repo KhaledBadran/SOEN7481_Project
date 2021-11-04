@@ -1,9 +1,0 @@
-{
-    "functionName": "test_func_gen_one_channel_passes_thru_call_setter",
-    "className": null,
-    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_abstract_inst_&_test_function_generator.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "mock_properties = [mocker.PropertyMock() for _ in range(4)]\nmock_method = mocker.MagicMock()\nmocker.patch('instruments.abstract_instruments.FunctionGenerator.frequency',\n    new=mock_properties[0])\nmocker.patch('instruments.abstract_instruments.FunctionGenerator.function',\n    new=mock_properties[1])\nmocker.patch('instruments.abstract_instruments.FunctionGenerator.offset',\n    new=mock_properties[2])\nmocker.patch('instruments.abstract_instruments.FunctionGenerator.phase',\n    new=mock_properties[3])\nmocker.patch(\n    'instruments.abstract_instruments.FunctionGenerator._set_amplitude_',\n    new=mock_method)\nfg._channel_count = 1\nfg.channel[0].amplitude = 1\nfg.channel[0].frequency = 1\nfg.channel[0].function = 1\nfg.channel[0].offset = 1\nfg.channel[0].phase = 1\nfor mock_property in mock_properties:\n    mock_property.assert_called_once_with(1)\nmock_method.assert_called_once_with(magnitude=1, units=fg.VoltageMode.\n    peak_to_peak)\n"
-}

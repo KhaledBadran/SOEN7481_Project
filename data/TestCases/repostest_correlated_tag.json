@@ -1,9 +1,0 @@
-{
-    "functionName": "test_correlated_tag",
-    "className": "TestCase",
-    "fileName": "/IntegralDefense_&_ACE/lib_&_saq_&_modules_&_test_file_analysis.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from saq.database import Alert\nself.initialize_yss()\nroot = create_root_analysis(analysis_mode='test_groups')\nroot.initialize_storage()\nshutil.copy(os.path.join('test_data', 'ppt', 'Payment_Details.ppsx'), root.\n    storage_dir)\nfile_observable = root.add_observable(F_FILE, 'Payment_Details.ppsx')\nroot.save()\nroot.schedule()\nengine = TestEngine(pool_size_limit=1)\nengine.enable_alerting()\nengine.enable_module('analysis_module_correlated_tag_analyzer', 'test_groups')\nengine.enable_module('analysis_module_archive', 'test_groups')\nengine.enable_module('analysis_module_file_type', 'test_groups')\nengine.enable_module('analysis_module_yara_scanner_v3_4', 'test_groups')\nengine.controlled_stop()\nengine.start()\nengine.wait()\nalert = saq.db.query(Alert).first()\nself.assertIsNotNone(alert)\n"
-}

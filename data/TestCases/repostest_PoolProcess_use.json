@@ -1,9 +1,0 @@
-{
-    "functionName": "test_PoolProcess_use",
-    "className": "Test_PoolManager",
-    "fileName": "/Kieran-Bacon_&_Better/PackageTests_&_multiprocessing_&_test_PoolManager.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class Worker(PoolProcess):\n\n    def __init__(self, arg1, arg2):\n        self.value = arg1 + arg2\n\n    def run(self, multiple):\n        return self.value * multiple\nwith PoolManager(Worker, static_args=[5, 5]) as pool:\n    for i in range(10):\n        pool.put(i)\n    self.assertEqual(set(pool.getAll()), {(10 * i) for i in range(10)})\n"
-}

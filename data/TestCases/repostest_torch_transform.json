@@ -1,9 +1,0 @@
-{
-    "functionName": "test_torch_transform",
-    "className": null,
-    "fileName": "/mdbloice_&_Augmentor/tests_&_test_torch_transform.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "torchvision = pytest.importorskip('torchvision')\nred = np.zeros([10, 10, 3], np.uint8)\nred[..., 0] = 255\nred = Image.fromarray(red)\np = Augmentor.Pipeline()\np.greyscale(probability=1)\np.zoom(probability=1, min_factor=1.0, max_factor=1.0)\np.rotate_random_90(probability=1)\ntransforms = torchvision.transforms.Compose([p.torch_transform()])\nassert red != transforms(red)\nresult = red\nfor op in p.operations:\n    result = op.perform_operation([result])[0]\nassert transforms(red) == result\n"
-}

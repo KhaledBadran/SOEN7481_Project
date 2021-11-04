@@ -1,9 +1,0 @@
-{
-    "functionName": "test_accuracy02",
-    "className": "TestExplicitEulerMethod",
-    "fileName": "/Hoeppke_&_PyODESolver/pyodesolver_&_method_explicit_euler_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "N = 2 ** 14\nt = np.linspace(0, 1, num=N)\ny0 = np.array([1.0, 1.0]).T\nexactSol = ExampleFunc02_solution(y0, t)\nee_solver = ExplicitEuler(N, y0, [0, 1], ExampleFunc02())\nsolution = ee_solver.generate()\nnumericSol = []\nfor time, val in solution:\n    numericSol.append(val)\nnumericSol = np.array(numericSol).T\nerr = np.max(np.abs(exactSol - numericSol))\nprint(err)\nself.assertTrue(err < 1.2 * 10 ** -5)\n"
-}

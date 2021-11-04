@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ssh_connection_error",
-    "className": null,
-    "fileName": "/AmadeusITGroup_&_JumpSSH/tests_&_test__session.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "gateway_ip, gateway_port = docker_env.get_host_ip_port()\ngateway_session1 = SSHSession(host=gateway_ip, port=gateway_port, username=\n    'user1', password='password1').open()\ngateway_session1.run_cmd('echo \"user1:newpassword\" | sudo -S chpasswd')\nwith pytest.raises(exception.ConnectionError) as excinfo:\n    SSHSession(host=gateway_ip, port=gateway_port, username='user1',\n        password='password1').open()\nassert type(excinfo.value.__cause__\n    ) == paramiko.ssh_exception.AuthenticationException\ngateway_session1.run_cmd('echo \"user1:password1\" | sudo -S chpasswd')\ngateway_session2 = SSHSession(host=gateway_ip, port=gateway_port, username=\n    'user1', password='password1').open()\nassert gateway_session2.is_active()\n"
-}

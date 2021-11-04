@@ -1,9 +1,0 @@
-{
-    "functionName": "test_server_address_ttl",
-    "className": null,
-    "fileName": "/daveisadork_&_PyDevNS/tests_&_test_server.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "server.address = '1.2.3.4'\nserver._address_last_updated -= timedelta(seconds=server.config.ttl + 5)\nlast_updated = server._address_last_updated\nwith patch('devns.server.DevNS._get_address_by_ifconfig') as ifconfig:\n    ifconfig.return_value = address\n    assert server.address == address\n    assert server._encoded_address == encoded_address\n    assert server._address_last_updated > last_updated\n    ifconfig.assert_called_once()\npytest.mark.parametrize('address, encoded_address', [('0.0.0.0',\n    b'\\x00\\x00\\x00\\x00'), ('127.0.0.1', b'\\x7f\\x00\\x00\\x01'), ('1.2.3.4',\n    b'\\x01\\x02\\x03\\x04')])"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_esimate_lmfit_parinfo",
-    "className": null,
-    "fileName": "/PaulHancock_&_Aegean/tests_&_test_source_finder.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test estimate_lmfit_parinfo\"\"\"\nlog = logging.getLogger('Aegean')\nsfinder = sf.SourceFinder(log=log)\ndata = np.zeros(shape=(3, 3))\nrmsimg = np.ones(shape=(3, 3))\nbeam = Beam(1, 1, 0)\ndata[1, 1] = -6\nouterclip = None\ncurve = np.zeros((3, 4))\ntry:\n    sfinder.estimate_lmfit_parinfo(data=data, rmsimg=rmsimg, curve=curve,\n        beam=beam, innerclip=5, outerclip=outerclip)\nexcept AssertionError as e:\n    e.message = 'Passed'\nelse:\n    raise AssertionError(\n        'estimate_lmfit_parinfo should err when curve.shape != data.shape')\nreturn\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_mean_functions_A_minus_A_equals_zero",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_test_mean_functions.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Tests that the addition the inverse of a mean function to itself is equivalent to having a\n    Zero mean function: A + (-A) = 0\n    \"\"\"\nX, Y = rng.randn(Datum.N, Datum.input_dim), rng.randn(Datum.N, Datum.output_dim\n    )\nXtest = rng.randn(30, Datum.input_dim)\nA, A_inverse = mean_functions[0], mean_functions[-1]\nlhs = Additive(A, A_inverse)\nrhs = Zero()\nmodel_lhs = _create_GPR_model_with_bias(X, Y, mean_function=lhs)\nmodel_rhs = _create_GPR_model_with_bias(X, Y, mean_function=rhs)\nmu_lhs, var_lhs = model_lhs.predict_f(Xtest)\nmu_rhs, var_rhs = model_rhs.predict_f(Xtest)\nassert_allclose(mu_lhs, mu_rhs)\nassert_allclose(var_lhs, var_rhs)\npytest.mark.parametrize('mean_functions', [_linear_functions,\n    _constant_functions])"
-}

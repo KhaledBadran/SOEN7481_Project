@@ -1,9 +1,0 @@
-{
-    "functionName": "pool_1d_Lasagne",
-    "className": null,
-    "fileName": "/david-leon_&_Dandelion/test_&_test_pooling.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Lasagne requires x is 3D, and pooling is done on the last dimension\n    :param x:\n    :param axis:\n    :return:\n    \"\"\"\ninput_4d = tensor.shape_padright(x, 1)\nif axis == 1:\n    input_4d = input_4d.dimshuffle((0, 2, 1, 3))\npooled = pool_2d(input_4d, ws=(2, 1), stride=(2, 1), ignore_border=True,\n    pad=(0, 0), mode=mode)\nif axis == 1:\n    pooled = pooled.dimshuffle((0, 2, 1, 3))\nreturn pooled[:, :, :, (0)]\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_unpickle_custom_metrics",
-    "className": null,
-    "fileName": "/viebboy_&_PyGOP/test_&_utility_&_test_misc.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "filename = os.path.join(tmpdir.dirname, 'custom_metrics.pickle')\nmisc.pickle_custom_metrics(['mse', utility.mean_absolute_error_keras], filename\n    )\nmetrics = misc.unpickle_custom_metrics(filename)\nfor metric in metrics:\n    if isinstance(metric, str):\n        assert metric == 'mse'\n    if callable(metric):\n        assert metric.__name__ == 'mean_absolute_error_keras'\ny_true = K.ones((10, 20))\ny_pred = K.zeros((10, 20))\nassert K.eval(utility.mean_absolute_error_keras(y_true, y_pred)) == K.eval(\n    metrics[1](y_true, y_pred))\nos.remove(filename)\n"
-}

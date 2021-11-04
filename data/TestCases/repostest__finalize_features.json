@@ -1,9 +1,0 @@
-{
-    "functionName": "test__finalize_features",
-    "className": "TestCases",
-    "fileName": "/dkaslovsky_&_GraphRole/tests_&_test_features_&_test_extract.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data = {'node1': {'a': 0, 'b': 1, 'c': 2, 'd': 3, 'e': 4}, 'node2': {'a': 5,\n    'b': 6, 'c': 7, 'd': 8, 'e': 9}}\nexpected_final_features = pd.DataFrame.from_dict(data, orient='index')\nself.rfe._final_features = {(0): expected_final_features[['a', 'b']].\n    to_dict(), (1): expected_final_features[['c', 'd']].to_dict(), (2):\n    expected_final_features['e'].to_frame().to_dict()}\nfinal_features = self.rfe._finalize_features()\npd.testing.assert_frame_equal(final_features.sort_index(axis=1),\n    expected_final_features.sort_index(axis=1))\n"
-}

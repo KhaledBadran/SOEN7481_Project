@@ -1,9 +1,0 @@
-{
-    "functionName": "test_gelatize_2d_7",
-    "className": null,
-    "fileName": "/ratnania_&_GeLaTo/gelato_&_tests_&_test_gelatize_2d.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "domain = Domain('Omega', dim=DIM)\nV = ScalarFunctionSpace('V', domain)\nu, v = elements_of(V, names='u,v')\nnx, ny = symbols('nx ny', integer=True)\npx, py = symbols('px py', integer=True)\ntx, ty = symbols('tx ty')\nbx = Constant('bx')\nby = Constant('by')\nb = Tuple(bx, by)\nexpected = -bx * I * Advection(px, tx) * Mass(py, ty\n    ) / ny - by * I * Advection(py, ty) * Mass(px, tx) / nx\nexpr = dot(b, grad(v)) * u\nexpr = BilinearForm((u, v), integral(domain, expr))\nassert gelatize(expr) == expected\n"
-}

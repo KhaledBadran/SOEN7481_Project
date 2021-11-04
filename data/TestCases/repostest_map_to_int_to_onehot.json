@@ -1,9 +1,0 @@
-{
-    "functionName": "test_map_to_int_to_onehot",
-    "className": "TestPipelines",
-    "fileName": "/AndrewRook_&_NFLWin/nflwin_&_tests_&_test_preprocessing.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "fit_df = pd.DataFrame({'quarter': ['Q1', 'Q1', 'Q1', 'Q2', 'Q2']})\ntransform_df = fit_df.copy()\nmti = preprocessing.MapToInt('quarter', copy=True)\nohe = preprocessing.OneHotEncoderFromDataFrame(categorical_feature_names=[\n    'quarter'], copy=True)\npipe = Pipeline(steps=[('one', mti), ('two', ohe)])\npipe.fit(fit_df)\noutput_df = pipe.transform(transform_df)\nexpected_df = pd.DataFrame({'onehot_col1': [1.0, 1, 1, 0, 0], 'onehot_col2':\n    [0.0, 0, 0, 1, 1]})\npd.util.testing.assert_frame_equal(output_df, expected_df)\n"
-}

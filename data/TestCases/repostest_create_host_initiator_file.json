@@ -1,9 +1,0 @@
-{
-    "functionName": "test_create_host_initiator_file",
-    "className": "CITestProvisioning",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test create_host with initiator file.\"\"\"\navailable_initiator_list = (self.provisioning.\n    get_available_initiator_wwn_as_list())\nif not available_initiator_list:\n    self.skipTest(\n        'test_create_host_initiator_file - Unable to get an available initiator.'\n        )\ncsv_file_name = 'test.csv'\ntemp_dir = self.create_temp_directory()\ncsv_file_path = os.path.join(temp_dir, csv_file_name)\nwith open(csv_file_path, 'w') as tmp:\n    for initiator in available_initiator_list:\n        tmp.write(initiator)\nhost_name = self.create_host(init_file=csv_file_path)\nhost_list = self.provisioning.get_host_list()\nhost_details = self.provisioning.get_host(host_name)\ninitiator_count = host_details[constants.NUM_OF_INITIATORS]\ninitiator = host_details[constants.INITIATOR]\nself.assertIsNotNone(host_details)\nself.assertIn(host_name, host_list)\nself.assertIsNotNone(host_details)\nself.assertEqual(1, initiator_count)\nself.assertEqual(available_initiator_list, initiator)\n"
-}

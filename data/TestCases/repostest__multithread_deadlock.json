@@ -1,9 +1,0 @@
-{
-    "functionName": "test__multithread_deadlock",
-    "className": null,
-    "fileName": "/gelijergensen_&_PermutationImportance/test_&_test_abstract_runner.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "A = [1, 2]\nB = [2, 4]\nC = [3, 6]\nD = [1, 0]\ninputs = pd.DataFrame({'A': A, 'B': B, 'C': C})\noutputs = pd.DataFrame({'D': D})\ndef scoring_fn(training_data, scoring_data):\n    return np.random.random((100000,))\nselection_iterator = ((i, inputs, outputs) for i in range(1000))\n_multithread_iteration(selection_iterator, scoring_fn, njobs=2)\nassert True\npytest.mark.timeout(20)"
-}

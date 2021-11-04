@@ -1,9 +1,0 @@
-{
-    "functionName": "test_compute_norms_axes",
-    "className": null,
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_test_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from lasagne.utils import compute_norms\narray = np.random.randn(10, 20, 30, 40).astype(theano.config.floatX)\nnorms = compute_norms(array, norm_axes=(0, 2))\nassert array.dtype == norms.dtype\nassert norms.shape == (array.shape[1], array.shape[3])\nt_array = theano.shared(array)\nt_norms = compute_norms(t_array, norm_axes=(0, 2))\nassert np.allclose(t_norms.eval(), norms)\n"
-}

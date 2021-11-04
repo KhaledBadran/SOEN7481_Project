@@ -1,9 +1,0 @@
-{
-    "functionName": "test_cross_sections",
-    "className": "TestScalarMediator",
-    "fileName": "/LoganAMorrison_&_Hazma/test_&_scalar_mediator_&_test_scalar_mediator.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test the scalar mediator cross sections for:\n            'g g', 'e e', 'pi0 pi0', 'total', 's s', 'mu mu', 'pi pi'\n        \"\"\"\ncs1_new = self.sm1.annihilation_cross_sections(self.e_cm1)\ncs2_new = self.sm2.annihilation_cross_sections(self.e_cm2)\nprint(self.cs1_old['pi pi'], cs1_new['pi pi'], round(self.cs1_old['pi pi'] -\n    cs1_new['pi pi'], 5))\nprint(self.cs2_old['pi pi'], cs2_new['pi pi'], round(self.cs2_old['pi pi'] -\n    cs2_new['pi pi'], 5))\nprint('SM1')\nfor key in self.cs1_old.keys():\n    print(key, self.cs1_old[key], cs1_new[key])\n    assert_allclose(self.cs1_old[key], cs1_new[key], rtol=0.0001, err_msg=key)\nprint('SM2')\nfor key in self.cs2_old.keys():\n    print(key, self.cs2_old[key], cs2_new[key])\n    assert_allclose(self.cs2_old[key], cs2_new[key], rtol=0.0001, err_msg=key)\n"
-}

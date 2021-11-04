@@ -1,9 +1,0 @@
-{
-    "functionName": "test_propagate_name_down_fail",
-    "className": "TestContribution",
-    "fileName": "/PmagPy_&_PmagPy/pmagpy_tests_&_test_contribution_builder.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"fail gracefully\"\"\"\ndirectory = os.path.join(WD, 'data_files', 'convert_2_magic', 'cit_magic',\n    'PI47')\ncon = cb.Contribution(directory)\nself.assertNotIn('sample', con.tables['measurements'].df.columns)\nself.assertNotIn('location', con.tables['measurements'].df.columns)\ndel con.tables['samples'].df['site']\nmeas_df = con.propagate_location_to_measurements()\nself.assertIn('sample', con.tables['measurements'].df.columns)\nself.assertNotIn('location', meas_df.columns)\n"
-}

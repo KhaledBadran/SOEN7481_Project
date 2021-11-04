@@ -1,9 +1,0 @@
-{
-    "functionName": "testExperimentRunner",
-    "className": "ExperimentTest",
-    "fileName": "/facebook_&_Ax/ax_&_core_&_tests_&_test_experiment.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "original_runner = SyntheticRunner()\nself.experiment.runner = original_runner\nbatch = self.experiment.new_batch_trial()\nbatch.run()\nself.assertEqual(batch.runner, original_runner)\ncandidate_batch = self.experiment.new_batch_trial()\ncandidate_batch.run()\ncandidate_batch._status = TrialStatus.CANDIDATE\nself.assertEqual(self.experiment.trials_expecting_data, [batch])\ntbs = self.experiment.trials_by_status\nself.assertEqual(len(tbs), len(TrialStatus))\nself.assertEqual(tbs[TrialStatus.RUNNING], [batch])\nself.assertEqual(tbs[TrialStatus.CANDIDATE], [candidate_batch])\ntibs = self.experiment.trial_indices_by_status\nself.assertEqual(len(tibs), len(TrialStatus))\nself.assertEqual(tibs[TrialStatus.RUNNING], {0})\nself.assertEqual(tibs[TrialStatus.CANDIDATE], {1})\nidentifier = {'new_runner': True}\nnew_runner = SyntheticRunner(dummy_metadata=identifier)\nself.experiment.reset_runners(new_runner)\nself.assertEqual(batch.runner, original_runner)\nself.assertEqual(self.experiment.runner, new_runner)\nself.assertEqual(self.experiment.trials[1].runner, new_runner)\n"
-}

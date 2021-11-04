@@ -1,9 +1,0 @@
-{
-    "functionName": "test_gen_xrf_spectrum_1",
-    "className": null,
-    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_simulation_&_tests_&_test_sim_xrf_scan_data.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Successful operation of ``gen_xrf_spectrum``. Some tests are empirical and don't guarantee\n    accurate operation of the function.\"\"\"\nelement_groups = {'Fe_K': {'area': 800}, 'Se_L': {'area': 900}, 'W_M': {\n    'area': 1000}}\ntotal_area = sum([_['area'] for _ in element_groups.values()])\nn_peaks_expected = 5\nspectrum, xx = gen_xrf_spectrum(element_groups, incident_energy=12.0)\nnpt.assert_almost_equal(sum(spectrum), total_area, err_msg=\n    'Total spectrum area is incorrect')\nn_peaks = 0\nfor n in range(1, len(spectrum) - 1):\n    if spectrum[n] > 1e-20 and spectrum[n] == max(spectrum[n - 1:n + 2]):\n        n_peaks += 1\nassert n_peaks == n_peaks_expected, 'The number of peaks in simulated data is incorrect'\nxx_expected = 0.01 * np.arange(4096)\nnpt.assert_array_almost_equal(xx, xx_expected, err_msg=\n    'The returned energy axis values are incorrect')\n"
-}

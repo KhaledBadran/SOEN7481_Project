@@ -1,9 +1,0 @@
-{
-    "functionName": "test_uniform_scheduler_3",
-    "className": "Test_uniform_scheduler",
-    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_uniform_sched.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ql.set_option('output_dir', output_dir)\nql.set_option('optimize', 'no')\nql.set_option('scheduler', 'ALAP')\nql.set_option('scheduler_uniform', 'yes')\nql.set_option('log_level', 'LOG_WARNING')\nconfig_fn = os.path.join(curdir, 'test_cfg_none_s7.json')\nplatform = ql.Platform('starmon', config_fn)\nnum_qubits = 7\np = ql.Program('test_uniform_scheduler_3', platform, num_qubits, 0)\nk = ql.Kernel('kernel_3', platform, num_qubits, 0)\nfor j in range(7):\n    k.gate('x', [j])\nk.gate('cnot', [6, 3])\nk.gate('cnot', [0, 2])\nk.gate('cnot', [1, 3])\nk.gate('cnot', [1, 4])\nk.gate('cnot', [0, 3])\nfor j in range(7):\n    k.gate('x', [j])\nk.gate('cnot', [2, 5])\nk.gate('cnot', [3, 1])\nk.gate('cnot', [2, 0])\nk.gate('cnot', [3, 6])\nfor j in range(7):\n    k.gate('x', [j])\nk.gate('cnot', [4, 1])\nk.gate('cnot', [3, 0])\nk.gate('cnot', [4, 6])\nfor j in range(7):\n    k.gate('x', [j])\nk.gate('cnot', [3, 5])\nk.gate('cnot', [5, 2])\nk.gate('cnot', [6, 4])\nk.gate('cnot', [5, 3])\nfor j in range(7):\n    k.gate('x', [j])\np.add_kernel(k)\np.compile()\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_plot_learning_curve",
-    "className": null,
-    "fileName": "/tvdboom_&_ATOM/tests_&_test_plots.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Assert that the plot_learning_curve method work as intended.\"\"\"\ntrainer = TrainerRegressor(['ols', 'ridge'], metric='r2')\ntrainer.run(reg_train, reg_test)\npytest.raises(PermissionError, trainer.ols.plot_learning_curve)\nts = TrainSizingRegressor(['ols', 'ridge'], metric='r2', bagging=4)\npytest.raises(NotFittedError, ts.plot_learning_curve)\nts.run(reg_train, reg_test)\nts.plot_learning_curve(filename=FILE_DIR + 'ts1', display=False)\nts.ols.plot_learning_curve(filename=FILE_DIR + 'ts2', display=False)\nassert glob.glob(FILE_DIR + 'ts1.png')\nassert glob.glob(FILE_DIR + 'ts2.png')\natom = ATOMRegressor(X_reg, y_reg, random_state=1)\natom.train_sizing('ols', metric='max_error')\natom.plot_learning_curve(filename=FILE_DIR + 'ts3', display=False)\natom.ols.plot_learning_curve(filename=FILE_DIR + 'ts4', display=False)\nassert glob.glob(FILE_DIR + 'ts3.png')\nassert glob.glob(FILE_DIR + 'ts4.png')\n"
-}

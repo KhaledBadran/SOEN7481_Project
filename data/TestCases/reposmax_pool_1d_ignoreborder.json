@@ -1,9 +1,0 @@
-{
-    "functionName": "max_pool_1d_ignoreborder",
-    "className": null,
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_pool.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "stride = pool_size if stride is None else stride\npads = [(0, 0)] * len(data.shape)\npads[-1] = pad, pad\ndata = np.pad(data, pads, mode='constant', constant_values=(-np.inf,))\ndata_shifted = np.zeros((pool_size,) + data.shape)\ndata_shifted = data_shifted[(...), :data.shape[-1] - pool_size + 1]\nfor i in range(pool_size):\n    data_shifted[i] = data[(...), i:i + data.shape[-1] - pool_size + 1]\ndata_pooled = data_shifted.max(axis=0)\nif stride:\n    data_pooled = data_pooled[(...), ::stride]\nreturn data_pooled\n"
-}

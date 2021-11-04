@@ -1,9 +1,0 @@
-{
-    "functionName": "test_diag_symmetries",
-    "className": null,
-    "fileName": "/mesonepigreco_&_CellConstructor/tests_&_TestDiagonalizeSymmetries_&_test_diagsymmetries.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "total_path = os.path.dirname(os.path.abspath(__file__))\nos.chdir(total_path)\ndyn = CC.Phonons.Phonons('../TestDiagonalizeSupercell/prova', 4)\nw, p = dyn.DiagonalizeSupercell()\nview(dyn.structure.get_ase_atoms())\nsupercell_s = dyn.structure.generate_supercell(dyn.GetSupercell())\nspglib_syms = spglib.get_symmetry(dyn.structure.get_ase_atoms())\nsyms = CC.symmetries.GetSymmetriesFromSPGLIB(spglib_syms)\npols_syms = CC.symmetries.GetSymmetriesOnModes(syms, supercell_s, p)\nnew_pols, syms_character = (CC.symmetries.\n    get_diagonal_symmetry_polarization_vectors(p, w, pols_syms))\nn_modes, n_syms = syms_character.shape\nfor i in range(n_modes):\n    print('Mode {} | '.format(i), np.angle(syms_character[(i), :], deg=True))\npytest.mark.skip(reason='Function not implemented')"
-}

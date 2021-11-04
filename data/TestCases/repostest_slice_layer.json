@@ -1,9 +1,0 @@
-{
-    "functionName": "test_slice_layer",
-    "className": null,
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_shape.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from lasagne.layers import SliceLayer, InputLayer, get_output_shape, get_output\nfrom numpy.testing import assert_array_almost_equal as aeq\nin_shp = 3, 5, 2\nl_inp = InputLayer(in_shp)\nl_slice_ax0 = SliceLayer(l_inp, axis=0, indices=0)\nl_slice_ax1 = SliceLayer(l_inp, axis=1, indices=slice(3, 5))\nl_slice_ax2 = SliceLayer(l_inp, axis=-1, indices=-1)\nx = np.arange(np.prod(in_shp)).reshape(in_shp).astype('float32')\nx1 = x[0]\nx2 = x[:, 3:5]\nx3 = x[:, :, (-1)]\nassert get_output_shape(l_slice_ax0) == x1.shape\nassert get_output_shape(l_slice_ax1) == x2.shape\nassert get_output_shape(l_slice_ax2) == x3.shape\naeq(get_output(l_slice_ax0, x).eval(), x1)\naeq(get_output(l_slice_ax1, x).eval(), x2)\naeq(get_output(l_slice_ax2, x).eval(), x3)\nin_shp = 2, None, 2\nl_inp = InputLayer(in_shp)\nl_slice_ax1 = SliceLayer(l_inp, axis=1, indices=slice(3, 5))\nassert get_output_shape(l_slice_ax1) == (2, None, 2)\naeq(get_output(l_slice_ax1, x).eval(), x2)\n"
-}

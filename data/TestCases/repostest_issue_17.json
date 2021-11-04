@@ -1,9 +1,0 @@
-{
-    "functionName": "test_issue_17",
-    "className": "TestOldIssues",
-    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_test_issues.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"could not connect mysql use passwod\"\"\"\nconn = self.connect()\nhost = self.databases[0]['host']\ndb = self.databases[0]['db']\nc = conn.cursor()\ntry:\n    with warnings.catch_warnings():\n        warnings.filterwarnings('ignore')\n        c.execute('drop table if exists issue17')\n    c.execute('create table issue17 (x varchar(32) primary key)')\n    c.execute(\"insert into issue17 (x) values ('hello, world!')\")\n    c.execute(\n        \"grant all privileges on %s.issue17 to 'issue17user'@'%%' identified by '1234'\"\n         % db)\n    conn.commit()\n    conn2 = pymysql.connect(host=host, user='issue17user', passwd='1234', db=db\n        )\n    c2 = conn2.cursor()\n    c2.execute('select x from issue17')\n    self.assertEqual('hello, world!', c2.fetchone()[0])\nfinally:\n    c.execute('drop table issue17')\npytest.mark.skip(\n    'test_issue_17() requires a custom, legacy MySQL configuration and will not be run.'\n    )"
-}

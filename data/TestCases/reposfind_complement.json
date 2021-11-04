@@ -1,9 +1,0 @@
-{
-    "functionName": "find_complement",
-    "className": null,
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_topotools_&_topotools.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Finds the complementary sites (or bonds) to a given set of inputs\n\n    Parameters\n    ----------\n    am : scipy.sparse matrix\n        The adjacency matrix of the network.\n\n    sites : array_like (optional)\n        The set of sites for which the complement is sought\n\n    bonds : array_like (optional)\n        The set of bonds for which the complement is sought\n\n    asmask : boolean\n        If set to ``True`` the result is returned as a boolean mask of the\n        correct length with ``True`` values indicate the complements.  The\n        default is ``False`` which returns a list of indices instead.\n\n    Returns\n    -------\n    An array containing indices of the sites (or bonds) that are not part of\n    the input list.\n\n    Notes\n    -----\n    Either ``sites`` or ``bonds`` must be specified\n\n    \"\"\"\nif sites is not None and bonds is None:\n    inds = np.unique(sites)\n    N = am.shape[0]\nelif bonds is not None and sites is None:\n    inds = np.unique(bonds)\n    N = int(am.nnz / 2)\nelif bonds is not None and sites is not None:\n    raise Exception('Only one of sites or bonds can be specified')\nelse:\n    raise Exception('Either sites or bonds must be specified')\nmask = np.ones(shape=N, dtype=bool)\nmask[inds] = False\nif asmask:\n    return mask\nelse:\n    return np.arange(N)[mask]\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_remove_documents",
-    "className": null,
-    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_server_&_tests_&_test_ingestion.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "method = V01 + '/feature-extraction/'\ndata = app.post_check(method)\ndsid = data['id']\nmethod += dsid\napp.post_check(method, json={'data_dir': data_dir})\ndata = app.get_check(method)\ndata = app.post_check(method + '/id-mapping')\ndb_old = pd.DataFrame(data['data'])\ndataset_definition = db_old.iloc[[2, 4]][['document_id']].to_dict(orient=\n    'records')\nfor row in dataset_definition:\n    row['document_id'] = int(row['document_id'])\napp.post_check(method + '/delete', json={'dataset_definition':\n    dataset_definition})\ndata = app.post_check(method + '/id-mapping')\ndb_new = pd.DataFrame(data['data'])\nassert db_old.shape[0] - 2 == db_new.shape[0]\n"
-}

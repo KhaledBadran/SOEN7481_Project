@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ProtoDashExplainer",
-    "className": "TestProtoDashExplainer",
-    "fileName": "/IBM_&_AIX360/tests_&_protodash_&_test_PDASH.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "nhanes = CDCDataset()\ndf = nhanes.get_csv_file('INQ_H.csv')\nprint(df.head(5))\ndata = df.to_numpy()\nnp.set_printoptions(suppress=True)\nprint(data[:5])\noriginal = data\noriginal[np.isnan(original)] = 0\noriginal = original[:, 1:]\nonehot_encoder = OneHotEncoder(sparse=False)\nonehot_encoded = onehot_encoder.fit_transform(original)\nprint(onehot_encoded.shape, original.shape)\nY = onehot_encoded\nX = Y\nexplainer = ProtodashExplainer()\nW, S, _ = explainer.explain(X, Y, m=5)\ndfs = df.iloc[S].copy()\ndfs['Weight'] = W\nprint(dfs)\nX, Y = get_Gaussian_Data(100, 300, 4000)\nprint(X.shape, Y.shape)\nW, S, _ = explainer.explain(X, Y, m=5, kernelType='Gaussian', sigma=2)\nprint(S, W)\n"
-}

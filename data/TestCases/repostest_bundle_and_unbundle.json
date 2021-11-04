@@ -1,9 +1,0 @@
-{
-    "functionName": "test_bundle_and_unbundle",
-    "className": "TestCoreCrypto",
-    "fileName": "/mozilla_&_PyFxA/fxa_&_tests_&_test_crypto.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "key = os.urandom(32)\npayload = os.urandom(47)\nenc_payload = bundle(key, b'test-namespace', payload)\ndec_payload = unbundle(key, b'test-namespace', enc_payload)\nself.assertEqual(payload, dec_payload)\nbad_enc_payload = mutate_one_byte(enc_payload)\nwith self.assertRaises(Exception):\n    unbundle(key, b'test-namespace', bad_enc_payload)\n"
-}

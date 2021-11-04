@@ -1,9 +1,0 @@
-{
-    "functionName": "rows",
-    "className": "LiveSimulator",
-    "fileName": "/kitware_&_BroThon/zat_&_live_simulator.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Using the ZeekLogReader this method generates (yields) each row of the log file\n           replacing timestamps, looping and emitting rows based on EPS rate\n        \"\"\"\nnum_rows = 0\nwhile True:\n    for row in self.log_reader.readrows():\n        yield self.replace_timestamp(row)\n        time.sleep(next(self.eps_timer))\n        num_rows += 1\n        if self.max_rows and num_rows >= self.max_rows:\n            return\n    if self.only_once:\n        return\n"
-}

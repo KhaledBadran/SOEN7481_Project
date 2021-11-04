@@ -1,9 +1,0 @@
-{
-    "functionName": "pyeeg_ap_entropy",
-    "className": null,
-    "fileName": "/neuropsychology_&_NeuroKit/tests_&_tests_complexity.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "N = len(X)\nEm = pyeeg_embed_seq(X, 1, M)\nA = np.tile(Em, (len(Em), 1, 1))\nB = np.transpose(A, [1, 0, 2])\nD = np.abs(A - B)\nInRange = np.max(D, axis=2) <= R\nCm = InRange.mean(axis=0)\nDp = np.abs(np.tile(X[M:], (N - M, 1)) - np.tile(X[M:], (N - M, 1)).T)\nCmp = np.logical_and(Dp <= R, InRange[:-1, :-1]).mean(axis=0)\nPhi_m, Phi_mp = np.sum(np.log(Cm)), np.sum(np.log(Cmp))\nAp_En = (Phi_m - Phi_mp) / (N - M)\nreturn Ap_En\n"
-}

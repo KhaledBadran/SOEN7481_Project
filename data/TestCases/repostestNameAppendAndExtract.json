@@ -1,9 +1,0 @@
-{
-    "functionName": "testNameAppendAndExtract",
-    "className": "TestInvertibleBloomLookupTable",
-    "fileName": "/named-data_&_PyNDN2/tests_&_unit_tests_&_test_invertible_bloom_lookup_table.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "size = 10\niblt = InvertibleBloomLookupTable(size)\nprefix = Name('/test/memphis').appendNumber(1).toUri()\nnewHash = Common.murmurHash3Blob(11, prefix)\niblt.insert(newHash)\nexpectedEncoding = [120, 218, 99, 100, 96, 96, 216, 85, 181, 252, 91, 178, \n    239, 226, 108, 6, 10, 0, 35, 29, 205, 1, 0, 101, 41, 13, 177]\nibltName = Name('sync')\nencodedIblt = iblt.encode()\nself.assertTrue(encodedIblt.equals(Blob(expectedEncoding)))\nibltName.append(encodedIblt)\nreceived = InvertibleBloomLookupTable(size)\nreceived.initialize(ibltName.get(-1).getValue())\nself.assertTrue(iblt.equals(received))\nreceivedDifferentSize = InvertibleBloomLookupTable(20)\ntry:\n    receivedDifferentSize.initialize(ibltName.get(-1).getValue())\n    self.fail('Did not throw the expected exception')\nexcept RuntimeError:\n    pass\nelse:\n    self.fail('Did not throw the expected exception')\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_config_key_none",
-    "className": "FlaskEasyJWTTest",
-    "fileName": "/BMeu_&_Flask-EasyJWT/tests_&_flask_easyjwt_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n            Test getting the key if none is set.\n\n            Expected Result: An error is raised.\n        \"\"\"\ndel self.app.config['EASYJWT_KEY']\ndel self.app.config['SECRET_KEY']\nwith self.assertRaises(EasyJWTError) as exception_cm:\n    key = FlaskEasyJWT._get_config_key()\n    self.assertIsNone(key)\nmessage = 'No key set for encrypting tokens.'\nself.assertIn(message, str(exception_cm.exception))\n"
-}

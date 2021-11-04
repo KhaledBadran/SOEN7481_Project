@@ -1,9 +1,0 @@
-{
-    "functionName": "test_PubSub_events",
-    "className": null,
-    "fileName": "/willdeuschle_&_Python-GraphQL-Subscriptions/tests_&_test_python_graphql_subscriptions.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "not_triggered = ['foo']\ntrigger_name = 'bar'\ndef on_message(payload):\n    not_triggered[0] = payload\n    return\npubsub.subscribe(trigger_name, on_message)\nassert not_triggered == ['foo']\npayload = 'baz'\npubsub.publish(trigger_name, payload)\nassert not_triggered == [payload]\npubsub.unsubscribe(1)\nineffective_payload = 'qux'\npubsub.publish(trigger_name, payload)\nassert not_triggered == [payload]\n"
-}

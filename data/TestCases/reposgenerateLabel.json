@@ -1,9 +1,0 @@
-{
-    "functionName": "generateLabel",
-    "className": null,
-    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&__tools.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Format a scattering vector with individual letters.\n    \n    Args:\n    \n        - vec (array): Vector to be formated.\n\n    Kwargs:\n        \n        - lables (list): Letters to use for formating (default ['H','K','L']) \n        \n    \"\"\"\nintegers = np.isclose(np.abs(vec) - np.floor(np.abs(vec)), 0.0)\nsigns = np.sign(vec)\nvec = np.abs(vec)\nzeros = np.isclose(vec, 0.0)\nones = np.isclose(vec, 1.0)\nlabel = []\nfor l, i, s, z, o, v in zip(labels, integers, signs, zeros, ones, vec):\n    sign = '-' if s == -1 else ''\n    if not i:\n        label.append(''.join([sign, str(v), l]))\n    elif z:\n        label.append('0')\n    elif o:\n        label.append(''.join([sign, l]))\n    else:\n        label.append(''.join([sign, str(int(v)), l]))\nreturnLabel = ''.join(['(', ', '.join([x for x in label]), ')'])\nreturn returnLabel\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_replace_in_fort3_construct_new_chi",
-    "className": null,
-    "fileName": "/mortele_&_OccamTools/test_&_test_replace_in_fort3.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "old_atom_names = {(1): 'A', (2): 'B'}\nnew_atom_names = {(1): 'A', (2): 'B'}\nAA, AB = 1, 2\nBA, BB = 3, 4\nchi = np.array([[AA, AB], [BA, BB]])\nexpected = deepcopy(chi)\nchi = _construct_new_chi(new_atom_names, old_atom_names, chi)\nassert np.allclose(chi, expected)\nold_atom_names = {(0): 'A', (1): 'B'}\nnew_atom_names = {(0): 'B', (1): 'A'}\nchi = _construct_new_chi(new_atom_names, old_atom_names, chi)\nexpected = np.array([[BB, BA], [AB, AA]])\nassert np.allclose(chi, expected)\nold_atom_names = {(1): 'A', (2): 'B', (3): 'C', (4): 'D'}\nnew_atom_names = {(1): 'C', (2): 'B', (3): 'A', (4): 'E', (5): 'D'}\nAA, AB, AC, AD = 1, 2, 3, 4\nBA, BB, BC, BD = 5, 6, 7, 8\nCA, CB, CC, CD = 9, 10, 11, 12\nDA, DB, DC, DD = 13, 14, 15, 16\nchi = np.array([[AA, AB, AC, AD], [BA, BB, BC, BD], [CA, CB, CC, CD], [DA,\n    DB, DC, DD]])\nnew_chi = _construct_new_chi(new_atom_names, old_atom_names, chi)\nAE, BE, CE, DE, EE = 5 * [-1]\nEA, EB, EC, ED, EE = 5 * [-1]\nexpected = np.array([[CC, CB, CA, CE, CD], [BC, BB, BA, BE, BD], [AC, AB,\n    AA, AE, AD], [EC, EB, EA, EE, ED], [DC, DB, DA, DE, DD]])\nassert np.allclose(new_chi, expected)\n"
-}

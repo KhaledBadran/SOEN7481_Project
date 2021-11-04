@@ -1,9 +1,0 @@
-{
-    "functionName": "test_make_filter",
-    "className": null,
-    "fileName": "/mavrix93_&_LightCurvesClassifier/test_&_cli_&_test_cli.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "if os.path.exists('/tmp/lcc_test/filters'):\n    shutil.rmtree('/tmp/lcc_test/filters')\ncmd = (\n    'lcc make_filter -i tune_lc_shape.txt -f CurvesShapeDescr -s qso:50 -c be_stars:50 -t qso:1 -d QDADec -n CurveShapeFilter'\n    )\nsys.argv = cmd.split()\nconfig = mock.Mock()\nconfig.TUN_PARAMS = os.path.join(os.path.dirname(os.path.abspath(__file__)),\n    os.pardir, 'resources')\nconfig.INP_LCS = os.path.join(os.path.dirname(os.path.abspath(__file__)),\n    os.pardir, os.pardir, 'sample')\nconfig.FILTERS = '/tmp/lcc_test/filters'\nmake_filter(config)\nassert os.path.exists(\n    '/tmp/lcc_test/filters/CurveShapeFilter/CurveShapeFilter.filter')\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_SS_solver",
-    "className": null,
-    "fileName": "/open-source-economics_&_OG-USA/ogusa_&_tests_&_test_SS.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "p = Specifications(baseline=baseline, client=dask_client, num_workers=\n    NUM_WORKERS)\np.update_specifications(param_updates)\np.output_base = CUR_PATH\np.get_tax_function_parameters(None, run_micro=False)\nb_guess = np.ones((p.S, p.J)) * 0.07\nn_guess = np.ones((p.S, p.J)) * 0.35 * p.ltilde\nif p.zeta_K[-1] == 1.0:\n    rguess = p.world_int_rate[-1]\nelse:\n    rguess = 0.06483431412921253\nTRguess = 0.05738932081035772\nfactorguess = 139355.1547340256\nBQguess = aggregates.get_BQ(rguess, b_guess, None, p, 'SS', False)\nYguess = 0.6376591201150815\ntest_dict = SS.SS_solver(b_guess, n_guess, rguess, BQguess, TRguess,\n    factorguess, Yguess, p, None, False)\nexpected_dict = utils.safe_read_pickle(os.path.join(CUR_PATH,\n    'test_io_data', filename))\nfor k, v in expected_dict.items():\n    print('Testing ', k)\n    assert np.allclose(test_dict[k], v, atol=1e-07, equal_nan=True)\npytest.mark.parametrize('baseline,param_updates,filename', [(True,\n    param_updates1, filename1), (True, param_updates2, filename2), (True,\n    param_updates4, filename4), (True, param_updates5, filename5)], ids=[\n    'Baseline', 'Baseline, budget balance', 'Baseline, small open',\n    'Baseline, small open, budget balance'])"
-}

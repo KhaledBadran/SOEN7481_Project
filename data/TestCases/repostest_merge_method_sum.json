@@ -1,9 +1,0 @@
-{
-    "functionName": "test_merge_method_sum",
-    "className": "TestKerasAPI",
-    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_keras_&_test_keras_api.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "bx1 = BLayer.Input(shape=(8,))\nbx2 = BLayer.Input(shape=(6,))\nby1 = BLayer.Dense(10)(bx1)\nby2 = BLayer.Dense(10)(bx2)\nbz = BLayer.merge([by1, by2], mode='sum')\nbmodel = BModel([bx1, bx2], bz, name='graph1')\nkx1 = KLayer.Input(shape=(8,))\nkx2 = KLayer.Input(shape=(6,))\nky1 = KLayer.Dense(10)(kx1)\nky2 = KLayer.Dense(10)(kx2)\nkz = kmerge([ky1, ky2], mode='sum')\nkmodel = KModel([kx1, kx2], kz)\ninput_data = [np.random.random([2, 8]), np.random.random([2, 6])]\nself.compare_newapi(kmodel, bmodel, input_data, self.convert_two_dense_model)\n"
-}

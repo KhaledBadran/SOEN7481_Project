@@ -1,9 +1,0 @@
-{
-    "functionName": "test_neighbors_basic",
-    "className": null,
-    "fileName": "/ivirshup_&_ConsistentClusters/tests_&_test_neighbors.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "chars = list('abcd')\nfor n in range(2, 5):\n    nt = namedtuple('NamedTuple', chars[:n])\n    s = pd.DataFrame(list(product(*repeat(range(3), n))), columns=chars[:n])\n    nodes = list(s.itertuples(index=False))\n    edge_indices = gen_neighbors(s)\n    edges = [(nodes[i], nodes[j]) for i, j in edge_indices]\n    assert len([x for x in edges if nt(*repeat(1, n)) in x]) == n * 2\n    assert len([x for x in edges if nt(*repeat(0, n)) in x]) == n\n    assert len([x for x in edges if nt(*repeat(2, n)) in x]) == n\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_snip_method_numba",
-    "className": null,
-    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_core_&_tests_&_test_map_processing.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Compare the output of `snip_method_numba` with the output produced\n    by `snip_method` to make sure the functions are equivalent.\n    \"\"\"\ndataset_params = {'n_data_dimensions': (20, 20)}\nadd_pts_before, add_pts_after = 0, 0\nuse_snip = True\nft = _FitXRFMapTesting(dataset_params=dataset_params, use_snip=use_snip,\n    add_pts_before=add_pts_before, add_pts_after=add_pts_after)\ndata = ft.data_input\nwidth = 0.5\nfor ny in range(data.shape[0]):\n    for nx in range(data.shape[1]):\n        spec_sel = data[(ny), (nx), :]\n        bg = snip_method_numba(spec_sel, 0, 0.01, 0, width=width)\n        bg_expected = snip_method(spec_sel, 0, 0.01, 0, width=width)\n        npt.assert_array_almost_equal(bg, bg_expected, err_msg=\n            f\"Background estimates don't match for the pixel ({ny}, {nx})\")\n"
-}

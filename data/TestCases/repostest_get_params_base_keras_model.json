@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_params_base_keras_model",
-    "className": null,
-    "fileName": "/goeckslab_&_Galaxy-ML/galaxy_ml_&_tests_&_test_keras_galaxy.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "config = model.get_config()\nclassifier = KerasGClassifier(config)\nparams = classifier.get_params()\ngot = {}\nfor key, value in params.items():\n    if not key.startswith('layers') and not key.startswith('config'):\n        got[key] = value\nexpect = {'amsgrad': None, 'batch_size': 32, 'beta_1': None, 'beta_2': None,\n    'callbacks': None, 'decay': 0, 'epochs': 1, 'loss':\n    'binary_crossentropy', 'lr': 0.01, 'metrics': [], 'model_type':\n    'sequential', 'momentum': 0, 'nesterov': False, 'optimizer': 'sgd',\n    'rho': None, 'schedule_decay': None, 'seed': None, 'steps_per_epoch':\n    None, 'validation_fraction': 0.1, 'validation_steps': None, 'verbose': 0}\nassert got == expect, got\n"
-}

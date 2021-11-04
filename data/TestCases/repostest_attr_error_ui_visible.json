@@ -1,9 +1,0 @@
-{
-    "functionName": "test_attr_error_ui_visible",
-    "className": "SimAutoPropertiesTestCase",
-    "fileName": "/mzy2240_&_ESA/tests_&_test_saw.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Patch UIVisible, and ensure we get a warning when it throws\n        an attribute error.\n        \"\"\"\ncom_patch = MagicMock()\nseal(com_patch)\nwith patch.object(saw_14, '_pwcom', new=com_patch):\n    with self.assertLogs(logger=saw_14.log, level='WARN'):\n        result = saw_14.UIVisible\nself.assertFalse(result)\n"
-}

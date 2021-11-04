@@ -1,9 +1,0 @@
-{
-    "functionName": "test_circular_redirect_detection",
-    "className": null,
-    "fileName": "/RobertoPrevato_&_BlackSheep/tests_&_client_&_test_redirects.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "async with ClientSession(base_url=b'http://localhost:8080', pools=\n    pools_factory(responses)) as client:\n    with pytest.raises(CircularRedirectError) as error:\n        await client.get(b'/')\n    assert str(error.value) == expected_error_message\npytest.mark.asynciopytest.mark.parametrize('responses,expected_error_message', [[[Response(302,\n    [(b'Location', b'/hello-world')]), Response(302, [(b'Location',\n    b'/circular-dependency')]), Response(302, [(b'Location', b'/')])],\n    'Circular redirects detected. Requests path was: (http://localhost:8080/ --> http://localhost:8080/hello-world --> http://localhost:8080/circular-dependency --> http://localhost:8080/).'\n    ], [[Response(302, [(b'Location',\n    b'https://identity-provider.some/login')]), Response(302, [(b'Location',\n    b'http://localhost:8080/welcome')]), Response(302, [(b'Location',\n    b'https://identity-provider.some/login')])],\n    'Circular redirects detected. Requests path was: (http://localhost:8080/ --> https://identity-provider.some/login --> http://localhost:8080/welcome --> https://identity-provider.some/login).'\n    ], [[Response(302, [(b'Location', b'/a')]), Response(302, [(b'Location',\n    b'/a')])],\n    'Circular redirects detected. Requests path was: (http://localhost:8080/ --> http://localhost:8080/a --> http://localhost:8080/a).'\n    ], [[Response(302, [(b'Location', b'/')])],\n    'Circular redirects detected. Requests path was: (http://localhost:8080/ --> http://localhost:8080/).'\n    ]])"
-}

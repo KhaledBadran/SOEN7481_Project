@@ -1,9 +1,0 @@
-{
-    "functionName": "test_eda_intervalrelated",
-    "className": null,
-    "fileName": "/neuropsychology_&_NeuroKit/tests_&_tests_eda.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data = nk.data('bio_resting_8min_100hz')\ndf, info = nk.eda_process(data['EDA'], sampling_rate=100)\ncolumns = ['SCR_Peaks_N', 'SCR_Peaks_Amplitude_Mean']\nfeatures_df = nk.eda_intervalrelated(df)\nassert all(elem in columns for elem in np.array(features_df.columns.values,\n    dtype=str))\nassert features_df.shape[0] == 1\nepochs = nk.epochs_create(df, events=[0, 25300], sampling_rate=100,\n    epochs_end=20)\nfeatures_dict = nk.eda_intervalrelated(epochs)\nassert all(elem in columns for elem in np.array(features_dict.columns.\n    values, dtype=str))\nassert features_dict.shape[0] == 2\n"
-}

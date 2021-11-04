@@ -1,9 +1,0 @@
-{
-    "functionName": "test_outputWithSubsetOfArguments",
-    "className": "MethodicalTests",
-    "fileName": "/glyph_&_Automat/automat_&__test_&_test_methodical.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Inputs pass arguments that output will accept.\n        \"\"\"\nclass Mechanism(object):\n    m = MethodicalMachine()\n\n    @m.input()\n    def input(self, x, y=1):\n        \"\"\"an input\"\"\"\n\n    @m.state(initial=True)\n    def state(self):\n        \"\"\"a state\"\"\"\n\n    @m.output()\n    def outputX(self, x):\n        self._x = x\n        return x\n\n    @m.output()\n    def outputY(self, y):\n        self._y = y\n        return y\n\n    @m.output()\n    def outputNoArgs(self):\n        return None\n    state.upon(input, state, [outputX, outputY, outputNoArgs])\nm = Mechanism()\nself.assertEqual(m.input(3), [3, 1, None])\nself.assertEqual(m._x, 3)\nself.assertEqual(m._y, 1)\nself.assertEqual(m.input(x=4), [4, 1, None])\nself.assertEqual(m._x, 4)\nself.assertEqual(m._y, 1)\nself.assertEqual(m.input(6, 3), [6, 3, None])\nself.assertEqual(m._x, 6)\nself.assertEqual(m._y, 3)\nself.assertEqual(m.input(5, y=2), [5, 2, None])\nself.assertEqual(m._x, 5)\nself.assertEqual(m._y, 2)\n"
-}

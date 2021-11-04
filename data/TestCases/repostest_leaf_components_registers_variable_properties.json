@@ -1,9 +1,0 @@
-{
-    "functionName": "test_leaf_components_registers_variable_properties",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_utilities_&_test_printing.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "module = module_callable()\nfor path, variable in leaf_components(module).items():\n    param_name = path.split('.')[-2] + '.' + path.split('.')[-1]\n    assert isinstance(variable, gpflow.Parameter)\n    np.testing.assert_equal(variable.value().numpy(), expected_param_dicts[\n        param_name]['value'])\n    assert variable.trainable == expected_param_dicts[param_name]['trainable']\n    assert variable.shape == expected_param_dicts[param_name]['shape']\npytest.mark.parametrize('module_callable, expected_param_dicts', [(\n    create_kernel, kernel_param_dict), (create_model, model_gp_param_dict)])"
-}

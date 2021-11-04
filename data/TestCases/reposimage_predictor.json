@@ -1,9 +1,0 @@
-{
-    "functionName": "image_predictor",
-    "className": "DL",
-    "fileName": "/ironmussa_&_Optimus/optimus_&_dl_&_models.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "image_df = ImageSchema.readImages(path)\npredictor = DeepImagePredictor(inputCol=input_col, outputCol=output_col,\n    modelName=model_name, decodePredictions=decode_predictions, topK=topK)\npreds = predictor.transform(image_df)\nfirstelement = udf(lambda v: (str(v[0][1]), float(v[0][2])), ArrayType(\n    StringType()))\nreturn preds.select(firstelement('predicted_labels').alias('predicted_labels'))\nstaticmethod"
-}

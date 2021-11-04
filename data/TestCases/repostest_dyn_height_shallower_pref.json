@@ -1,9 +1,0 @@
-{
-    "functionName": "test_dyn_height_shallower_pref",
-    "className": null,
-    "fileName": "/TEOS-10_&_GSW-python/gsw_&_tests_&_test_geostrophy.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Check that we can handle a p_ref that is shallower than the top of the\n    cast.  To make the results from bin 1 on down independent of whether\n    bin 0 has been deleted, we need to use linear interpolation.\n    \"\"\"\np = cv.p_chck_cast\nCT = cv.CT_chck_cast\nSA = cv.SA_chck_cast\nstrf0 = gsw.geo_strf_dyn_height(SA, CT, p, p_ref=0, interp_method='linear')\nstrf1 = gsw.geo_strf_dyn_height(SA[1:], CT[1:], p[1:], p_ref=0,\n    interp_method='linear')\nfound = strf1 - strf1[0]\nexpected = strf0[1:] - strf0[1]\nassert_almost_equal(found, expected)\n"
-}

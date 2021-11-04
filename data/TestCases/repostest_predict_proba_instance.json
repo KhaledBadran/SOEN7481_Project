@@ -1,9 +1,0 @@
-{
-    "functionName": "test_predict_proba_instance",
-    "className": null,
-    "fileName": "/Menelau_&_DESlib/deslib_&_tests_&_dcs_&_test_base.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "query = np.array([-1, 1])\nn_classifiers = 3\npool_classifiers = create_pool_classifiers\ndcs_test = BaseDCS(pool_classifiers)\ndcs_test.n_classes_ = 2\ncompetences = np.random.rand(n_classifiers)\ndcs_test.estimate_competence = MagicMock(return_value=competences)\nexpected = pool_classifiers[np.argmax(competences)].predict_proba(query)\npredictions = []\nprobabilities = []\nfor clf in dcs_test.pool_classifiers:\n    predictions.append(clf.predict(query)[0])\n    probabilities.append(clf.predict_proba(query)[0])\nquery = np.atleast_2d(query)\npredictions = np.atleast_2d(predictions)\nprobabilities = np.array(probabilities)\nprobabilities = np.expand_dims(probabilities, axis=0)\npredicted_proba = dcs_test.predict_proba_with_ds(query, predictions,\n    probabilities)\nassert np.array_equal(predicted_proba, expected)\n"
-}

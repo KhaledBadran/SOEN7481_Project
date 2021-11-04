@@ -1,9 +1,0 @@
-{
-    "functionName": "_parse_vision_channel_message_request",
-    "className": null,
-    "fileName": "/PRIArobotics_&_HedgehogProtocol/hedgehog_&_protocol_&_messages_&_vision.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "op = msg.op\nchannels = msg.channels\nif op in {READ, DELETE}:\n    keys = {msg.key for msg in channels}\n    if op == READ:\n        return ChannelRequest(keys)\n    else:\n        return DeleteChannelAction(keys)\nelif op in {CREATE, UPDATE}:\n    channels = {key: channel for key, channel in (_parse_channel(msg) for\n        msg in msg.channels)}\n    if op == CREATE:\n        return CreateChannelAction(channels)\n    else:\n        return UpdateChannelAction(channels)\nelse:\n    assert False\nRequestMsg.parser('vision_channel_message')"
-}

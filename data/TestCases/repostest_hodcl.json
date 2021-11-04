@@ -1,9 +1,0 @@
-{
-    "functionName": "test_hodcl",
-    "className": null,
-    "fileName": "/LSSTDESC_&_CCL/benchmarks_&_test_hod.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "lMcut = 11.8\nlM1 = 11.73\nsigma_Ncen = 0.15\nalp_Nsat = 0.77\nrmax = 4.39\nrgs = 1.17\nks = np.loadtxt('benchmarks/data/k_hod.txt')\nzs = np.loadtxt('benchmarks/data/z_hod.txt')\npks = np.loadtxt('benchmarks/data/pk_hod.txt')\nl_bm, cl_bm = np.loadtxt('benchmarks/data/cl_hod.txt', unpack=True)\ndef _nz_2mrs(z):\n    m = 1.31\n    beta = 1.64\n    x = z / 0.0266\n    return x ** m * np.exp(-x ** beta)\nz1 = 1e-05\nz2 = 0.1\nz_arr = np.linspace(z1, z2, 1024)\ndndz = _nz_2mrs(z_arr)\ncosmo = ccl.Cosmology(Omega_b=0.05, Omega_c=0.25, h=0.67, n_s=0.9645, A_s=\n    2e-09, m_nu=1e-05, m_nu_type='equal')\ncosmo._set_linear_power_from_arrays(a_array=1 / (1.0 + zs[::-1]), k_array=\n    ks, pk_array=pks[::-1, :])\nmass_def = ccl.halos.MassDef(200, 'critical')\ncm = ccl.halos.ConcentrationDuffy08(mass_def)\nhmf = ccl.halos.MassFuncTinker08(cosmo, mass_def=mass_def)\nhbf = ccl.halos.HaloBiasTinker10(cosmo, mass_def=mass_def)\nhmc = ccl.halos.HMCalculator(cosmo, hmf, hbf, mass_def)\nprf = ccl.halos.HaloProfileHOD(cm, lMmin_0=np.log10(10.0 ** lMcut / cosmo[\n    'h']), siglM_0=sigma_Ncen, lM0_0=np.log10(10.0 ** lMcut / cosmo['h']),\n    lM1_0=np.log10(10.0 ** lM1 / cosmo['h']), alpha_0=alp_Nsat, bg_0=rgs,\n    bmax_0=rmax)\nprf2pt = ccl.halos.Profile2ptHOD()\nk_arr = np.geomspace(0.0001, 100.0, 512)\na_arr = np.linspace(0.8, 1, 32)\npk_hod = ccl.halos.halomod_Pk2D(cosmo, hmc, prf, prof_2pt=prf2pt, normprof1\n    =True, lk_arr=np.log(k_arr), a_arr=a_arr)\ntr = ccl.NumberCountsTracer(cosmo, False, (z_arr, dndz), (z_arr, np.ones(\n    len(dndz))))\ncl_hod = ccl.angular_cl(cosmo, tr, tr, l_bm, p_of_k_a=pk_hod)\nassert np.all(np.fabs(cl_hod / cl_bm - 1) < 0.005)\n"
-}

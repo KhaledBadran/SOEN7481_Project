@@ -1,9 +1,0 @@
-{
-    "functionName": "test_setter_getter",
-    "className": "TestEncryptedContent",
-    "fileName": "/named-data_&_PyNDN2/tests_&_unit_tests_&_test_encrypted_content.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "content = EncryptedContent()\nself.assertEqual(content.getAlgorithmType(), None)\nself.assertTrue(content.getPayload().isNull())\nself.assertTrue(content.getInitialVector().isNull())\nself.assertEqual(content.getKeyLocator().getType(), None)\ncontent.setAlgorithmType(EncryptAlgorithmType.RsaOaep)\nself.assertEqual(content.getAlgorithmType(), EncryptAlgorithmType.RsaOaep)\nself.assertTrue(content.getPayload().isNull())\nself.assertTrue(content.getInitialVector().isNull())\nself.assertEqual(content.getKeyLocator().getType(), None)\nkeyLocator = KeyLocator()\nkeyLocator.setType(KeyLocatorType.KEYNAME)\nkeyLocator.getKeyName().set('/test/key/locator')\ncontent.setKeyLocator(keyLocator)\nself.assertTrue(content.getKeyLocator().getType() != None)\nself.assertTrue(content.getKeyLocator().getKeyName().equals(Name(\n    '/test/key/locator')))\nself.assertTrue(content.getPayload().isNull())\nself.assertTrue(content.getInitialVector().isNull())\ncontent.setPayload(Blob(message, False))\nself.assertTrue(content.getPayload().equals(Blob(message, False)))\ncontent.setInitialVector(Blob(iv, False))\nself.assertTrue(content.getInitialVector().equals(Blob(iv, False)))\nencoded = content.wireEncode()\ncontentBlob = Blob(encrypted, False)\nself.assertTrue(contentBlob.equals(encoded))\n"
-}

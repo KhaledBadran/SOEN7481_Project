@@ -1,9 +1,0 @@
-{
-    "functionName": "test_add_delete_batch",
-    "className": "test_Dynamo",
-    "fileName": "/pbx-gs_&_OSBot-AWS/tests_&_unit_&_apis_&_test_Dynamo.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "assert self.table.keys() == ['key-2', 'key-1']\nitems = [{self.table_key: 'key-3', 'answer-1': 42}, {self.table_key:\n    'key-4', 'answer-1': 42}]\nself.table.add_batch(items)\nkeys = self.table.keys(use_cache=False)\nassert len(keys) == 4\nassert 'key-3' in keys\nitems = [{self.table_key: 'key-3'}, {self.table_key: 'key-4'}]\nself.table.delete_batch(items)\nkeys = self.table.keys()\nassert len(keys) == 4\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_statemachine",
-    "className": null,
-    "fileName": "/pwwang_&_PyPPL/tests_&_test_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with pytest.raises(AttributeError):\n    _MultiDestTransition('solid', {})\n_MultiDestTransition('solid', 'liquid', depends_on='depends_on')\nclass Model(object):\n\n    def depends_on(self):\n        return 'turntoliquid'\nmodel = Model()\nmachine = StateMachine(model=model, states=['solid', 'liquid', 'gas'],\n    initial='solid')\nmachine.add_transition('heat', 'solid', {'turntoliquid': 'liquid',\n    'turntogas': 'gas'}, depends_on='depends_on')\nmodel.heat()\nassert model.state == 'liquid'\n"
-}

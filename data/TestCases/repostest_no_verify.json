@@ -1,9 +1,0 @@
-{
-    "functionName": "test_no_verify",
-    "className": "TestConfigPolicyManager",
-    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_policy_manager.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "policyManager = NoVerifyPolicyManager()\nidentityName = Name('TestValidator/Null').appendVersion(int(time.time()))\nkeyChain = KeyChain(self.identityManager, policyManager)\nkeyChain.createIdentityAndCertificate(identityName)\ndata = Data(Name(identityName).append('data'))\nkeyChain.signByIdentity(data, identityName)\nvr = doVerify(policyManager, data)\nself.assertFalse(vr.hasFurtherSteps,\n    'NoVerifyPolicyManager returned a ValidationRequest')\nself.assertEqual(vr.failureCount, 0,\n    'Verification failed with NoVerifyPolicyManager')\nself.assertEqual(vr.successCount, 1,\n    'Verification success called {} times instead of 1'.format(vr.successCount)\n    )\n"
-}

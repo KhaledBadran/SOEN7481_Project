@@ -1,9 +1,0 @@
-{
-    "functionName": "test_pub_cam_int",
-    "className": null,
-    "fileName": "/SimLeek_&_CV_PubSubs/tests_&_frame_&_test_frame_publishing.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "img = np.zeros((30, 40))\nwith mock.patch.object(cv2, 'VideoCapture', new_callable=mock.MagicMock\n    ) as mock_cv_capture, mock.patch.object(NpCam, 'set'), mock.patch.object(\n    NpCam, 'get') as mock_get, mock.patch.object(NpCam, 'release'\n    ), mock.patch.object(displayarray.frame.frame_publishing.\n    subscriber_dictionary, 'register_cam') as reg_cam, mock.patch.object(\n    displayarray.frame.frame_publishing.subscriber_dictionary, 'cam_cmd_sub'\n    ) as cam_cmd_sub:\n    cap = NpCam(img)\n    mock_cv_capture.return_value = cap\n    mock_sub = cam_cmd_sub.return_value = mock.MagicMock()\n    mock_sub.get = mock.MagicMock()\n    mock_sub.get.side_effect = ['', '', '', 'quit']\n    mock_sub.release = mock.MagicMock()\n    mock_get.return_value = 2\n    cam_0 = subd.CV_CAMS_DICT['0'] = subd.Cam('0')\n    with mock.patch.object(cam_0.frame_pub, 'publish') as cam_pub:\n        pub_cam_loop_opencv(0, high_speed=False)\n        cam_pub.assert_has_calls([mock.call(img)] * 4)\n        reg_cam.assert_called_once_with('0', cap)\n        cam_cmd_sub.assert_called_once_with('0')\n        cap.set.assert_has_calls([mock.call(cv2.CAP_PROP_FRAME_WIDTH, -1),\n            mock.call(cv2.CAP_PROP_FRAME_HEIGHT, -1)])\n        cap.get.assert_has_calls([mock.call(cv2.CAP_PROP_FRAME_COUNT)] * 8)\n        mock_sub.get.assert_has_calls([mock.call(), mock.call(), mock.call(\n            ), mock.call()])\n        mock_sub.release.assert_called_once()\n        cap.release.assert_called_once()\n    subd.CV_CAMS_DICT = {}\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_unauthorized_request",
-    "className": null,
-    "fileName": "/EclecticIQ_&_OpenTAXII/tests_&_test_auth.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "base_url = '%s://localhost' % ('https' if https else 'http')\nresponse = client.post(INBOX_OPEN['address'], data='invalid-body', headers=\n    prepare_headers(version, https), base_url=base_url)\nassert response.status_code == 200\nassert is_headers_valid(response.headers, version, https)\nmessage = as_tm(version).get_message_from_xml(response.data)\nassert message.status_type == ST_UNAUTHORIZED\nfrom opentaxii import context\nassert not hasattr(context, 'account')\npytest.mark.parametrize('https', [True, False])pytest.mark.parametrize('version', [11, 10])"
-}

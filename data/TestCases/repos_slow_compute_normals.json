@@ -1,9 +1,0 @@
-{
-    "functionName": "_slow_compute_normals",
-    "className": null,
-    "fileName": "/nipy_&_PySurfer/surfer_&_tests_&_test_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Efficiently compute vertex normals for triangulated surface\"\"\"\nr1 = rr[(tris[:, (0)]), :]\nr2 = rr[(tris[:, (1)]), :]\nr3 = rr[(tris[:, (2)]), :]\ntri_nn = np.cross(r2 - r1, r3 - r1)\nsize = np.sqrt(np.sum(tri_nn * tri_nn, axis=1))\nzidx = np.where(size == 0)[0]\nsize[zidx] = 1.0\ntri_nn /= size[:, (np.newaxis)]\nnn = np.zeros((len(rr), 3))\nfor p, verts in enumerate(tris):\n    nn[verts] += tri_nn[(p), :]\nsize = np.sqrt(np.sum(nn * nn, axis=1))\nsize[size == 0] = 1.0\nnn /= size[:, (np.newaxis)]\nreturn nn\n"
-}

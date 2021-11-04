@@ -1,9 +1,0 @@
-{
-    "functionName": "assert_allclose",
-    "className": "BigDLTestCase",
-    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_test_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "self.assertEqual(a.shape, b.shape, 'Shape mismatch: expected %s, got %s.' %\n    (a.shape, b.shape))\nif not np.allclose(a, b, rtol=rtol, atol=atol):\n    cond = np.logical_or(np.abs(a - b) > atol + rtol * np.abs(b), np.isnan(\n        a) != np.isnan(b))\n    if a.ndim:\n        x = a[np.where(cond)]\n        y = b[np.where(cond)]\n        print('not close where = ', np.where(cond))\n    else:\n        x, y = a, b\n    print('not close lhs = ', x)\n    print('not close rhs = ', y)\n    print('not close dif = ', np.abs(x - y))\n    print('not close tol = ', atol + rtol * np.abs(y))\n    print('dtype = %s, shape = %s' % (a.dtype, a.shape))\n    np.testing.assert_allclose(a, b, rtol=rtol, atol=atol, err_msg=msg)\n"
-}

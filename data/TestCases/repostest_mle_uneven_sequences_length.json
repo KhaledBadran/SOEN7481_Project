@@ -1,9 +1,0 @@
-{
-    "functionName": "test_mle_uneven_sequences_length",
-    "className": null,
-    "fileName": "/lopatovsky_&_CT-HMM/test_&_test_cthmm.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test if different inputs methods hold the same results\"\"\"\nchmm = hmms.CtHMM.random(5, 7)\nt_seqs, s_seqs, e_seqs = chmm.generate_data((10, 10), states=True)\nt_seqs2 = numpy_to_list(t_seqs)\ns_seqs2 = numpy_to_list(s_seqs)\ne_seqs2 = numpy_to_list(e_seqs)\nchmm_r = hmms.CtHMM.random(5, 7)\nchmm_r2 = hmms.CtHMM(*chmm_r.params)\ngraph = chmm_r.maximum_likelihood_estimation(s_seqs, t_seqs, e_seqs, 15,\n    est=True)\ngraph2 = chmm_r2.maximum_likelihood_estimation(s_seqs2, t_seqs2, e_seqs2, \n    15, est=True)\nassert float_equal_mat(graph, graph2)\n"
-}

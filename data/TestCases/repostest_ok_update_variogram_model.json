@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ok_update_variogram_model",
-    "className": null,
-    "fileName": "/bsmurphy_&_PyKrige/tests_&_test_core.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data, (ok_test_answer, gridx, gridy), _ = validation_ref\nwith pytest.raises(ValueError):\n    OrdinaryKriging(data[:, (0)], data[:, (1)], data[:, (2)],\n        variogram_model='blurg')\nok = OrdinaryKriging(data[:, (0)], data[:, (1)], data[:, (2)])\nvariogram_model = ok.variogram_model\nvariogram_parameters = ok.variogram_model_parameters\nanisotropy_scaling = ok.anisotropy_scaling\nanisotropy_angle = ok.anisotropy_angle\nwith pytest.raises(ValueError):\n    ok.update_variogram_model('blurg')\nok.update_variogram_model('power', anisotropy_scaling=3.0, anisotropy_angle\n    =45.0)\nassert variogram_model != ok.variogram_model\nassert not np.array_equal(variogram_parameters, ok.variogram_model_parameters)\nassert anisotropy_scaling != ok.anisotropy_scaling\nassert anisotropy_angle != ok.anisotropy_angle\n"
-}

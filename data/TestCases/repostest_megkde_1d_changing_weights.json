@@ -1,9 +1,0 @@
-{
-    "functionName": "test_megkde_1d_changing_weights",
-    "className": null,
-    "fileName": "/samreay_&_ChainConsumer/tests_&_test_kde.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "np.random.seed(0)\nxs = np.linspace(-3, 3, 1000)\nweights = norm.pdf(xs)\nys = MegKDE(xs, weights=weights).evaluate(xs)\ncs = ys.cumsum()\ncs /= cs[-1]\ncs[0] = 0\nsamps = interp1d(cs, xs)(np.random.uniform(size=10000))\nmu, std = norm.fit(samps)\nassert np.isclose(mu, 0, atol=0.1)\nassert np.isclose(std, 1.0, atol=0.1)\n"
-}

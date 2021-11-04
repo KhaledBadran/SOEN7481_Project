@@ -1,9 +1,0 @@
-{
-    "functionName": "_parse_td2",
-    "className": "MRZ",
-    "fileName": "/konstantint_&_PassportEye/passporteye_&_mrz_&_text.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "len_a, len_b = len(a), len(b)\nif len(a) < 36:\n    a = a + '<' * (36 - len(a))\nif len(b) < 36:\n    b = b + '<' * (36 - len(b))\nself.type = a[0:2]\nself.country = a[2:5]\nsurname_names = a[5:36].split('<<', 1)\nif len(surname_names) < 2:\n    surname_names += ['']\nself.surname, self.names = surname_names\nself.names = self.names.replace('<', ' ').strip()\nself.surname = self.surname.replace('<', ' ').strip()\nself.number = b[0:9]\nself.check_number = b[9]\nself.nationality = b[10:13]\nself.date_of_birth = b[13:19]\nself.check_date_of_birth = b[19]\nself.sex = b[20]\nself.expiration_date = b[21:27]\nself.check_expiration_date = b[27]\nself.optional1 = b[28:35]\nself.check_composite = b[35]\nself.valid_check_digits = [MRZCheckDigit.compute(self.number) == self.\n    check_number, MRZCheckDigit.compute(self.date_of_birth) == self.\n    check_date_of_birth and MRZ._check_date(self.date_of_birth), \n    MRZCheckDigit.compute(self.expiration_date) == self.\n    check_expiration_date and MRZ._check_date(self.expiration_date), \n    MRZCheckDigit.compute(b[0:10] + b[13:20] + b[21:35]) == self.\n    check_composite]\nself.valid_line_lengths = [len_a == 36, len_b == 36]\nself.valid_misc = [a[0] in 'ACI']\nself.valid_score = 10 * sum(self.valid_check_digits) + sum(self.\n    valid_line_lengths) + sum(self.valid_misc) + 1\nself.valid_score = 100 * self.valid_score // (40 + 2 + 1 + 1)\n(self.valid_number, self.valid_date_of_birth, self.valid_expiration_date,\n    self.valid_composite) = self.valid_check_digits\nreturn self.valid_score == 100\n"
-}

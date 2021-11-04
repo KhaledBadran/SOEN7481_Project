@@ -1,9 +1,0 @@
-{
-    "functionName": "test_specification_query",
-    "className": "TestAccess",
-    "fileName": "/hdoupe_&_ParamTools/paramtools_&_tests_&_test_parameters.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "params = TestParams()\nspec1 = params.specification()\nexp = {'min_int_param': [{'label0': 'one', 'label1': 2, 'value': 2}],\n    'max_int_param': [{'label0': 'one', 'label1': 2, 'value': 4}]}\nspec2 = params.specification(label0='one')\nassert spec2['min_int_param'] == exp['min_int_param']\nassert spec2['max_int_param'] == exp['max_int_param']\nparams.set_state(label0='one')\nassert params.min_int_param == exp['min_int_param']\nassert params.max_int_param == exp['max_int_param']\nfor param, data in spec1.items():\n    if all('label0' not in val_item for val_item in data):\n        assert spec2[param] == data\nparams._data['str_choice_param']['value'] = []\nassert 'str_choice_param' not in params.specification()\nassert 'str_choice_param' in params.specification(include_empty=True)\n"
-}

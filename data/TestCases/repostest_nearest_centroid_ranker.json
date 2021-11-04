@@ -1,9 +1,0 @@
-{
-    "functionName": "test_nearest_centroid_ranker",
-    "className": null,
-    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_tests_&_test_neighbors.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from sklearn.neighbors import NearestNeighbors\nnp.random.seed(0)\nn_samples = 100\nn_features = 120\nX = np.random.rand(n_samples, n_features)\nnormalize(X, copy=False)\nindex = np.arange(n_samples, dtype='int')\ny = np.arange(n_samples, dtype='int')\nindex_train, index_test, y_train, y_test = train_test_split(index, y)\nX_train = X[index_train]\nX_test = X[index_test]\nnn = NearestNeighbors(n_neighbors=1, algorithm='brute')\nnn.fit(X_train)\ndist_ref, idx_ref = nn.kneighbors(X_test)\nnc = NearestCentroidRanker()\nnc.fit(X_train, y_train)\ndist_pred = nc.decision_function(X_test)\ny_pred = nc.predict(X_test)\nassert np.unique(idx_ref[:, (0)]).shape == np.unique(y_pred).shape\nassert_allclose(dist_pred, dist_ref[:, (0)])\n"
-}

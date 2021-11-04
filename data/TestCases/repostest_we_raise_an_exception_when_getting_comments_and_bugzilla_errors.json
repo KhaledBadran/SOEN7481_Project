@@ -1,9 +1,0 @@
-{
-    "functionName": "test_we_raise_an_exception_when_getting_comments_and_bugzilla_errors",
-    "className": null,
-    "fileName": "/AutomatedTester_&_Bugsy/tests_&_test_bugs.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "responses.add(responses.GET, 'https://bugzilla.mozilla.org/rest/login',\n    body='{\"token\": \"foobar\"}', status=200, content_type='application/json',\n    match_querystring=True)\nresponses.add(responses.GET, rest_url('bug', 1017315), body=json.dumps(\n    bug_return), status=200, content_type='application/json',\n    match_querystring=True)\nbugzilla = Bugsy('foo', 'bar')\nbug = bugzilla.get(1017315)\nerror_response = {'code': 67399, 'message':\n    \"The requested method 'Bug.comments' was not found.\", 'documentation':\n    u'http://www.bugzilla.org/docs/tip/en/html/api/', 'error': True}\nresponses.add(responses.GET,\n    'https://bugzilla.mozilla.org/rest/bug/1017315/comment', body=json.\n    dumps(error_response), status=400, content_type='application/json',\n    match_querystring=True)\ntry:\n    comments = bug.get_comments()\n    assert False, 'Should have raised an BugException for the bug not existing'\nexcept BugsyException as e:\n    assert str(e\n        ) == \"Message: The requested method 'Bug.comments' was not found. Code: 67399\"\nresponses.activate"
-}

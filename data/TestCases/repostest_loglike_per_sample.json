@@ -1,9 +1,0 @@
-{
-    "functionName": "test_loglike_per_sample",
-    "className": "NegativeBinomialTests",
-    "fileName": "/Mogeng_&_IOHMM/tests_&_test_family_wrapper.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "endog = np.arange(1, 11)\nmu = np.arange(1, 11)\nscale = 1.0\nlps = self.forwarding_family.loglike_per_sample(endog, mu, scale)\nself.assertEqual(lps.ndim, 1)\nself.assertEqual(np.sum(lps), self.family.loglike(endog, mu, 1.0, scale))\nmu = np.random.rand(10)\nscale = 2.0\nlps = self.forwarding_family.loglike_per_sample(endog, mu, scale)\nself.assertEqual(lps.ndim, 1)\nself.assertEqual(np.sum(lps), self.family.loglike(endog, mu, 1.0, scale))\nendog = np.arange(1, 2)\nmu = np.arange(1, 2)\nscale = 5.0\nlps = self.forwarding_family.loglike_per_sample(endog, mu, scale)\nself.assertEqual(lps.ndim, 1)\nself.assertEqual(np.sum(lps), self.family.loglike(endog, mu, 1.0, scale))\nendog = np.arange(0)\nmu = np.arange(0)\nlps = self.forwarding_family.loglike_per_sample(endog, mu, scale)\nself.assertEqual(lps.ndim, 1)\nself.assertEqual(np.sum(lps), self.family.loglike(endog, mu, 1.0, scale))\nendog = np.arange(1, 11)\nmu = np.arange(1, 11)\nscale = 0.0\nlps = self.forwarding_family.loglike_per_sample(endog, mu, scale)\nself.assertEqual(lps.ndim, 1)\nnp.testing.assert_array_equal(lps, np.array([0] * 10))\nmu = np.array([1, 2, 3, 4, 5, 7, 8, 9, 10, 11])\nlps = self.forwarding_family.loglike_per_sample(endog, mu, scale)\nself.assertEqual(lps.ndim, 1)\nnp.testing.assert_array_equal(lps, np.array([0] * 5 + [-np.Infinity] * 5))\nendog = np.arange(0)\nmu = np.arange(0)\nscale = 0.0\nlps = self.forwarding_family.loglike_per_sample(endog, mu, scale)\nself.assertEqual(lps.ndim, 1)\nnp.testing.assert_array_equal(lps, np.array([]))\n"
-}

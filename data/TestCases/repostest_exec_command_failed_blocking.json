@@ -1,9 +1,0 @@
-{
-    "functionName": "test_exec_command_failed_blocking",
-    "className": "TestWebOSControlBase",
-    "fileName": "/supersaiyanmode_&_PyWebOSTV/tests_&_test_controls.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "client = FakeClient()\ncontrol_base = WebOSControlBase(client)\ncontrol_base.COMMANDS = {'test': {'uri': '/test', 'validation': lambda *\n    args: (False, 'err'), 'validation_error': 'Error'}}\nclient.setup_response('/test', {'resp': True})\nwith raises(IOError):\n    control_base.test(block=True)\n"
-}

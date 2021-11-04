@@ -1,9 +1,0 @@
-{
-    "functionName": "test_simple_regex",
-    "className": "TestRegexMatching",
-    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_verification_rules.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "policyManager = ConfigPolicyManager('policy_config/regex_ruleset.conf')\ndataName1 = Name('/SecurityTestSecRule/Basic')\ndataName2 = Name('/SecurityTestSecRule/Basic/More')\ndataName3 = Name('/SecurityTestSecRule/')\ndataName4 = Name('/SecurityTestSecRule/Other/TestData')\ndataName5 = Name('/Basic/Data')\nmatchedRule1 = policyManager._findMatchingRule(dataName1, 'data')\nmatchedRule2 = policyManager._findMatchingRule(dataName2, 'data')\nmatchedRule3 = policyManager._findMatchingRule(dataName3, 'data')\nmatchedRule4 = policyManager._findMatchingRule(dataName4, 'data')\nmatchedRule5 = policyManager._findMatchingRule(dataName5, 'data')\nself.assertIsNotNone(matchedRule1)\nself.assertIsNone(matchedRule2)\nself.assertIsNotNone(matchedRule3)\nself.assertNotEqual(matchedRule3, matchedRule1,\n    'Rule regex matched extra components')\nself.assertIsNotNone(matchedRule4)\nself.assertNotEqual(matchedRule4, matchedRule1,\n    'Rule regex matched with missing component')\nself.assertIsNone(matchedRule5)\n"
-}

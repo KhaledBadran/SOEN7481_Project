@@ -1,9 +1,0 @@
-{
-    "functionName": "weather_data_pressure",
-    "className": null,
-    "fileName": "/AntoineToubhans_&_MongoTs/test_&_integration_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with open('test/data/weather_data.csv') as file:\n    reader = DictReader(file, delimiter=';')\n    result = []\n    for row in reader:\n        try:\n            timestamp = datetime.strptime(row['datetime'], '%Y-%m-%d %H:%M:%S')\n            pressure = float(row['atmospheric pressure'])\n            city = row['city']\n            result.append((pressure, timestamp, {'city': city}))\n        except Exception as e:\n            pass\n    return result\npytest.fixture"
-}

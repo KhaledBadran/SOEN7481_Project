@@ -1,9 +1,0 @@
-{
-    "functionName": "setup_api",
-    "className": null,
-    "fileName": "/Neuraxio_&_Neuraxle/testing_&_api_&_test_flask.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "class Decoder(JSONDataBodyDecoder):\n    \"\"\"This is a custom JSON decoder class that precedes the pipeline's transformation.\"\"\"\n\n    def decode(self, data_inputs):\n        \"\"\"\n            Transform a JSON list object into an np.array object.\n\n            :param data_inputs: json object\n            :return: np array for data inputs\n            \"\"\"\n        return np.array(data_inputs)\nclass Encoder(JSONDataResponseEncoder):\n    \"\"\"This is a custom JSON response encoder class for converting the pipeline's transformation outputs.\"\"\"\n\n    def encode(self, data_inputs) ->dict:\n        \"\"\"\n            Convert predictions to a dict for creating a JSON Response object.\n\n            :param data_inputs:\n            :return:\n            \"\"\"\n        return {'predictions': np.array(data_inputs).tolist()}\nclass Multiplier(BaseTransformer):\n\n    def transform(self, data_inputs):\n        return 2 * data_inputs\napp = FlaskRestApiWrapper(json_decoder=Decoder(), wrapped=Multiplier(),\n    json_encoder=Encoder()).get_app()\napp.testing = True\ntest_client = app.test_client()\nreturn test_client\n"
-}

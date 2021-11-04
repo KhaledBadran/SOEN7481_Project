@@ -1,9 +1,0 @@
-{
-    "functionName": "test_tagset_operators",
-    "className": null,
-    "fileName": "/PlaidWeb_&_Publ/tests_&_test_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Test operators  on TagSet \"\"\"\nfrom publ.utils import TagSet\nassert TagSet(('a', 's', 'D', 'F')) == TagSet(('A', 'S', 'd', 'f'))\nassert TagSet(('a', 's', 'D', 'F')) == {'A', 'S', 'd', 'f'}\nassert TagSet(('a', 's', 'd', 'f')) != TagSet(('a', 's', 'd'))\nassert TagSet(('a', 's', 'd', 'f')) != {'a', 's', 'd'}\nassert TagSet(('a', 'S', 'd')) | TagSet(('A', 's', 'D', 'F')) == TagSet((\n    'a', 's', 'd', 'f'))\nassert TagSet(('a', 'S', 'd')) | {'A', 's', 'D', 'F'} == TagSet(('a', 's',\n    'd', 'f'))\nassert TagSet(('a', 'S', 'd')) & TagSet(('a', 'D')) == TagSet(('A', 'd'))\nassert TagSet(('a', 'S', 'd')) & {'a', 'D'} == TagSet(('A', 'd'))\nassert TagSet(('a', 's', 'd', 'f')) ^ TagSet(('A', 'F', 'G', 'h')) == TagSet((\n    's', 'd', 'g', 'h'))\nassert TagSet(('a', 's', 'd', 'f')) ^ {'A', 'F', 'G', 'h'} == TagSet(('s',\n    'd', 'g', 'h'))\nassert TagSet(('a', 's', 'd', 'f')) - {'A', 'D', 'g', 'G'} == {'s', 'f'}\nassert TagSet(('1', '2', '3')) < TagSet(('1', '2', '3', '4'))\nassert TagSet(('1', '2', '3')) < {'1', '2', '3', '4'}\nassert TagSet(('1', '2', '3')) <= TagSet(('1', '2', '3', '4'))\nassert TagSet(('1', '2', '3')) <= {'1', '2', '3', '4'}\nassert not TagSet(('a', 's', 'd')) < TagSet(('a', 's', 'd'))\nassert not TagSet(('a', 's', 'd')) < TagSet(('q', 'w', 'e'))\nassert not TagSet(('a', 's', 'd')) <= TagSet(('q', 'w', 'e'))\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_Marray_multiD",
-    "className": null,
-    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Marray.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "A = Marray([np.random.rand(i, 2, 3) for i in [1, 2, 3]])\nassert len(A) == 3\nassert np.all([np.all(np.isclose(AData, AD)) for AData, AD in zip(A._data, A)])\nassert A.multidimensional == True\n_temp = A[-1].copy()\ndel A[-1]\nassert len(A) == 2\nA.append(_temp)\nassert len(A) == 3\nstring = str(A)\nA[2][0, 1, 1] = 20\nA[2][0, 0, 0] = -20\nassert np.min(A) == -20\nassert np.max(A) == 20\nassert len(np.max(A, axis=0)) == 3\nassert len(np.min(A, axis=0)) == 3\nA.mask = -1\nmask = [np.zeros(d.shape, dtype=bool) for d in A]\nmask[0][(0), (1), :] = True\nmask[2][1, 0, 1] = True\nA.mask = mask\nassert len(A.extractData()) == np.sum([np.array(M).size for M in mask]\n    ) - np.sum([np.sum(M) for M in mask])\nassert np.all(A.extractData() == A.compress())\nA.shape = 3, -1\nassert np.all(A.shape == np.array([(6,), (12,), (18,)]))\nA.shape = 3, [(1, 2, 3), (2, 2, 3), (3, 2, 3)]\nassert np.all(A.shape == np.array([(1, 2, 3), (2, 2, 3), (3, 2, 3)]))\n0 - A - A + 2 * A - 0\nB = Marray([np.random.rand(i, 2, 3) for i in [1, 2, 3]])\nB.mask = False\nA + B\nB + A\n"
-}

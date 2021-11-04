@@ -1,9 +1,0 @@
-{
-    "functionName": "test_patch_stdin",
-    "className": null,
-    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_pydevd_io.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from pydevd import _internal_patch_stdin\npy_db = _DummyPyDb()\nclass _Stub(object):\n    pass\nactions = []\nclass OriginalStdin(object):\n\n    def readline(self):\n        assert sys_mod.stdin is not original_stdin\n        actions.append('readline')\n        return 'read'\ndef getpass_stub(*args, **kwargs):\n    actions.append('getpass')\n    assert sys_mod.stdin is original_stdin\n    return 'pass'\nsys_mod = _Stub()\noriginal_stdin = sys_mod.stdin = OriginalStdin()\ngetpass_mod = _Stub()\ngetpass_mod.getpass = getpass_stub\n_internal_patch_stdin(py_db, sys_mod, getpass_mod)\nassert sys_mod.stdin.readline() == 'read'\nassert py_db.writer.command_meanings == ['CMD_INPUT_REQUESTED',\n    'CMD_INPUT_REQUESTED']\ndel py_db.writer.command_meanings[:]\nassert actions == ['readline']\ndel actions[:]\nassert getpass_mod.getpass() == 'pass'\nassert py_db.writer.command_meanings == ['CMD_INPUT_REQUESTED',\n    'CMD_INPUT_REQUESTED']\ndel py_db.writer.command_meanings[:]\n"
-}

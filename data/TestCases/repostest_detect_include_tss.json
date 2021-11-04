@@ -1,9 +1,0 @@
-{
-    "functionName": "test_detect_include_tss",
-    "className": "TestsRNAIntergenic",
-    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_sRNA_intergenic.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "si.get_coverage = self.mock.mock_get_coverage\nnums = {'pro': 3, 'tss': 3, 'uni': 0, 'cds': 3, 'ta': 3}\nout_table = StringIO()\noutput = StringIO()\ndetects = {'overlap': False, 'uni_with_tss': False}\ncoverage = {'primary': 0, 'secondary': 0, 'internal': 0, 'antisense': 50,\n    'orphan': 10}\nargs = self.mock_args.mock()\nargs.tex_notex = 'tex_notex'\nargs.min_len = 30\nargs.max_len = 300\nargs.decrease_inter = 50\nargs.fuzzy_inter = 5\nargs.tolerance = 5\nargs.tsss = copy.deepcopy(self.example.tsss)\nargs.nums = nums\nargs.fuzzy = 20\nargs.detects = detects\nargs.cutoff_coverage = coverage\nargs.texs = 'texs'\nargs.replicates = 'rep'\nargs.table_best = True\nargs.wigs_f = ''\nargs.wigs_r = ''\nargs.notex = coverage\nargs.file_type = 'frag'\nargs.break_tran = False\nargs.output = output\nargs.out_table = out_table\ntas = copy.deepcopy(self.example.tas)\nsi.detect_include_tss(tas[0], args, None, args.wigs_f, args.wigs_r)\nsi.get_coverage = get_coverage\nself.assertEqual(output.getvalue(),\n    \"\"\"aaa\tANNOgesic\tncRNA\t170\t230\t.\t+\t.\tID=aaa_srna0;Name=sRNA_00000;sRNA_type=intergenic;with_TSS=TSS:170_+\n\"\"\"\n    )\nself.assertEqual(out_table.getvalue(),\n    'aaa\\t00000\\t170\\t230\\t+\\tNA\\tNA\\tNA\\tNA\\tNA\\tTSS:170_+\\n')\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_dynamic_key_with_funcargs",
-    "className": "CacheTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_cache.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "t = Template(\n    \"\"\"\n            <%def name=\"foo(num=5)\" cached=\"True\" cache_key=\"foo_${str(num)}\">\n             hi\n            </%def>\n\n            ${foo()}\n        \"\"\"\n    )\nm = self._install_mock_cache(t)\nt.render()\nt.render()\nassert result_lines(t.render()) == ['hi']\nassert m.key == 'foo_5'\nt = Template(\n    \"\"\"\n            <%def name=\"foo(*args, **kwargs)\" cached=\"True\"\n             cache_key=\"foo_${kwargs['bar']}\">\n             hi\n            </%def>\n\n            ${foo(1, 2, bar='lala')}\n        \"\"\"\n    )\nm = self._install_mock_cache(t)\nt.render()\nassert result_lines(t.render()) == ['hi']\nassert m.key == 'foo_lala'\nt = Template(\n    \"\"\"\n        <%page args=\"bar='hi'\" cache_key=\"foo_${bar}\" cached=\"True\"/>\n         hi\n        \"\"\"\n    )\nm = self._install_mock_cache(t)\nt.render()\nassert result_lines(t.render()) == ['hi']\nassert m.key == 'foo_hi'\n"
-}

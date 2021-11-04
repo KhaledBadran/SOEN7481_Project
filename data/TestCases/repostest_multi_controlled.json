@@ -1,9 +1,0 @@
-{
-    "functionName": "test_multi_controlled",
-    "className": "Test_controlled_kernel",
-    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_controlled_kernel.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "config_fn = os.path.join(curdir, 'test_cfg_none_simple.json')\nplatform = ql.Platform('platform_none', config_fn)\nnum_qubits = 12\np = ql.Program('test_multi_controlled', platform, num_qubits)\nk = ql.Kernel('kernel1', platform, num_qubits)\nck = ql.Kernel('controlled_kernel1', platform, num_qubits)\nk.gate('x', [0])\nk.gate('cnot', [0, 1])\nql.set_option('decompose_toffoli', 'no')\nck.controlled(k, [2, 3, 4, 5, 6], [7, 8, 9, 10, 11])\np.add_kernel(k)\np.add_kernel(ck)\np.compile()\n"
-}

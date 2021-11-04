@@ -1,9 +1,0 @@
-{
-    "functionName": "test_derive_key_using_hmac",
-    "className": "TestProxyKmipClientIntegration",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_integration_&_services_&_test_proxykmipclient.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the ProxyKmipClient can derive a new key using HMAC.\n        \"\"\"\nbase_id = self.client.register(objects.SecretData(\n    b'\\x0c\\x0c\\x0c\\x0c\\x0c\\x0c\\x0c\\x0c\\x0c\\x0c\\x0c\\x0c\\x0c\\x0c\\x0c\\x0c\\x0c\\x0c\\x0c\\x0c\\x0c\\x0c'\n    , enums.SecretDataType.SEED, masks=[enums.CryptographicUsageMask.\n    DERIVE_KEY]))\nsecret_id = self.client.derive_key(enums.ObjectType.SECRET_DATA, [base_id],\n    enums.DerivationMethod.HMAC, {'cryptographic_parameters': {\n    'hashing_algorithm': enums.HashingAlgorithm.SHA_1}, 'derivation_data':\n    b'', 'salt': b''}, cryptographic_length=336)\nsecret = self.client.get(secret_id)\nself.assertEqual(\n    b',\\x91\\x11r\\x04\\xd7E\\xf3P\\rcjb\\xf6O\\n\\xb3\\xba\\xe5H\\xaaS\\xd4#\\xb0\\xd1\\xf2~\\xbb\\xa6\\xf5\\xe5g:\\x08\\x1dp\\xcc\\xe7\\xac\\xfcH'\n    , secret.value)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "set_data_smoothing_steps",
-    "className": "Brain",
-    "fileName": "/nipy_&_PySurfer/surfer_&_viz.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Set the number of smoothing steps\n\n        Parameters\n        ----------\n        smoothing_steps : int | str | None\n            Number of smoothing steps (if data come from surface subsampling).\n            Can be None to use the fewest steps that result in all vertices\n            taking on data values, or \"nearest\" such that each high resolution\n            vertex takes the value of the its nearest (on the sphere)\n            low-resolution vertex. Default is 20.\n        verbose : bool, str, int, or None\n            If not None, override default verbose level (see surfer.verbose).\n        \"\"\"\nviews = self._toggle_render(False)\nfor hemi in ['lh', 'rh']:\n    data = self.data_dict[hemi]\n    if data is not None:\n        adj_mat = utils.mesh_edges(self.geo[hemi].faces)\n        smooth_mat = utils.smoothing_matrix(data['vertices'], adj_mat,\n            smoothing_steps)\n        data['smooth_mat'] = smooth_mat\n        if data['array'].ndim == 1:\n            plot_data = data['array']\n        elif data['array'].ndim == 2:\n            plot_data = data['array'][:, (data['time_idx'])]\n        else:\n            plot_data = data['magnitude'][:, (data['time_idx'])]\n        plot_data = data['smooth_mat'] * plot_data\n        for brain in self.brains:\n            if brain.hemi == hemi:\n                brain.set_data(data['layer_id'], plot_data)\n        data['smoothing_steps'] = smoothing_steps\nself._toggle_render(True, views)\nverbose"
-}

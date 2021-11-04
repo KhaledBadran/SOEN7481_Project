@@ -1,9 +1,0 @@
-{
-    "functionName": "test_transform_list_of_dicts",
-    "className": "TestTunable",
-    "fileName": "/HDI-Project_&_BTB/tests_&_tuning_&_test_tunable.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test transform method with a list of dictionaries.\"\"\"\nself.bhp.transform.return_value = [[1], [0]]\nself.chp.transform.return_value = [[0], [1]]\nself.ihp.transform.return_value = [[1], [1]]\nvalues_list_dict = [{'bhp': True, 'chp': 'cat', 'ihp': 2}, {'bhp': False,\n    'chp': 'cat', 'ihp': 3}]\nresults = self.instance.transform(values_list_dict)\nassert_called_with_np_array(self.bhp.transform.call_args_list, [call([True,\n    False])])\nassert_called_with_np_array(self.chp.transform.call_args_list, [call(['cat',\n    'cat'])])\nassert_called_with_np_array(self.ihp.transform.call_args_list, [call([2, 3])])\nnp.testing.assert_array_equal(results, np.array([[1, 0, 1], [0, 1, 1]]))\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_vertex_dimension",
-    "className": "VoronoiTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_materials_&_VoronoiFibersTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "prj = op.materials.VoronoiFibers(num_points=10, fiber_rad=0.2, resolution=\n    0.1, shape=[3, 2, 1], name='test2')\nnet = prj.network\ndel_geom = prj.geometries()['test2_del']\nB1 = net.pores(['left', 'delaunay'], mode='xnor')\nB2 = net.pores(['right', 'delaunay'], mode='xnor')\nassert del_geom.vertex_dimension(B1, B2, 'volume') == 6.0\nassert del_geom.vertex_dimension(B1, B2, 'area') == 3.0\nassert del_geom.vertex_dimension(B1, B2, 'length') == 2.0\nassert del_geom.vertex_dimension(B1, B2, 'area_xy') == 6.0\nassert del_geom.vertex_dimension(B1, B2, 'area_yz') == 2.0\nassert del_geom.vertex_dimension(B1, B2, 'area_xz') == 3.0\nassert del_geom.vertex_dimension(B1, B2, 'minmax') == [0.0, 3.0, 0.0, 2.0, \n    0.0, 1.0]\n"
-}

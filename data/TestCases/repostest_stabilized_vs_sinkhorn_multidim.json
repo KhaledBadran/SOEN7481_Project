@@ -1,9 +1,0 @@
-{
-    "functionName": "test_stabilized_vs_sinkhorn_multidim",
-    "className": null,
-    "fileName": "/PythonOT_&_POT/test_&_test_bregman.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "n = 100\na = ot.datasets.make_1D_gauss(n, m=20, s=5)\nb1 = ot.datasets.make_1D_gauss(n, m=60, s=8)\nb2 = ot.datasets.make_1D_gauss(n, m=30, s=4)\nb = np.vstack((b1, b2)).T\nM = ot.utils.dist0(n)\nM /= np.median(M)\nepsilon = 0.1\nG, log = ot.bregman.sinkhorn(a, b, M, reg=epsilon, method=\n    'sinkhorn_stabilized', log=True)\nG2, log2 = ot.bregman.sinkhorn(a, b, M, epsilon, method='sinkhorn', log=True)\nnp.testing.assert_allclose(G, G2)\n"
-}

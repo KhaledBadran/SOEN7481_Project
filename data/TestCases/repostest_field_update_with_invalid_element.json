@@ -1,9 +1,0 @@
-{
-    "functionName": "test_field_update_with_invalid_element",
-    "className": "TestField",
-    "fileName": "/kenfar_&_DataGristle/datagristle_&_tests_&_test_metadata.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "field_keys = ['collection_id', 'field_name', 'field_desc', 'field_type',\n    'field_len', 'element_name']\nval_list = [self.collection_id, 'field-z', 'field-a-desc', 'string', 15, None]\nkv = dict(zip(field_keys, val_list))\nassert self.md.field_tools.setter(**kv) > 0\nassert self.md.field_tools.setter(**kv) == 0\nval_list = [self.collection_id, 'field-z', 'field-a-desc', 'string', 15,\n    'bad_name']\nkv = dict(zip(field_keys, val_list))\nwith pytest.raises(exc.IntegrityError):\n    self.md.field_tools.setter(**kv)\n"
-}

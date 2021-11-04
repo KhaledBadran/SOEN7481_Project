@@ -1,9 +1,0 @@
-{
-    "functionName": "test_send_transaction",
-    "className": null,
-    "fileName": "/tutorgen_&_HPIT-python-client/tests_&_hpitclient_&_test_message_sender_mixin.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    MessageSenderMixin._send_transaction() Test plan:\n        -ensure callback is set on success\n        -ensure that a response is received\n    \"\"\"\ntest_payload = {'item': 'shoe'}\nhttpretty.register_uri(httpretty.POST,\n    'https://www.hpit-project.org/message', body='{\"message_id\":\"4\"}')\nsubject = MessageSenderMixin()\nresponse = subject.send('test_event', test_payload, send_callback)\nsubject.response_callbacks['4'].should.equal(globals()['send_callback'])\nresponse.should.equal({'message_id': '4'})\nhttpretty.activate"
-}

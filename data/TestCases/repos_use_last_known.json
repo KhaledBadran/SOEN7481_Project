@@ -1,9 +1,0 @@
-{
-    "functionName": "_use_last_known",
-    "className": "CurrencyConverter",
-    "fileName": "/alexprengere_&_currencyconverter/currency_converter_&_currency_converter.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Fill missing rates of a currency.\n\n        This is done by using the last known rate.\n\n        :param str currency: The currency to fill missing rates for.\n        \"\"\"\nrates = self._rates[currency]\nfor date in sorted(rates):\n    rate = rates[date]\n    if rate is not None:\n        last_rate, last_date = rate, date\n    else:\n        rates[date] = last_rate\n        if self.verbose:\n            print('{0}: filling {1} missing rate using {2} from {3}'.format\n                (currency, date, last_rate, last_date))\n"
-}

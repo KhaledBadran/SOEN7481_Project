@@ -1,9 +1,0 @@
-{
-    "functionName": "test_Req_parse",
-    "className": null,
-    "fileName": "/nicfit_&_Parcyl/tests_&_test_requirements.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "r = Requirement.parse('eyeD3_extra')\nassert r.name == 'eyeD3_extra'\nassert r.project_name == 'eyeD3-extra'\nassert r.key == 'eyed3-extra'\nassert r.specs == []\nassert r.marker is None\nr = Requirement.parse(\"pathlib==1.0.1;python_version < '3.4'\")\nassert r.project_name == r.name == r.key == 'pathlib'\nassert r.specs == [('==', '1.0.1')]\nassert str(r.marker) == 'python_version < \"3.4\"'\nr = Requirement.parse(\"pathlib;python_version < '3.4'\")\nassert r.project_name == r.name == r.key == 'pathlib'\nassert r.specs == []\nassert str(r.marker) == 'python_version < \"3.4\"'\nr = Requirement.parse('pathlib== 1.0.1')\nassert r.project_name == r.name == r.key == 'pathlib'\nassert r.specs == [('==', '1.0.1')]\nassert r.marker is None\nr = Requirement.parse('PathLib>=3,<2')\nassert r.project_name == r.name == 'PathLib'\nassert r.key == 'pathlib'\nassert sorted(r.specs) == [('<', '2'), ('>=', '3')]\nrstr = 'hg+https://nicfit@bitbucket.org/nicfit/sphinxcontrib-bitbucket'\nr = Requirement.parse(rstr)\nassert r.project_name == r.name == r.key == 'sphinxcontrib-bitbucket'\nassert r._scm_requirement_string == rstr\nassert r.marker is None\nassert r.specs == []\nassert not r.extras\nr = Requirement.parse('Parcyl[requirements]')\nassert r.name == r.project_name == 'Parcyl'\nassert r.key == 'parcyl'\nassert r.marker is None\nassert r.specs == []\nassert r.extras == ('requirements',)\nr = Requirement.parse('MishMash[postgres,web]~=0.3')\nassert r.name == r.project_name == 'MishMash'\nassert r.key == 'mishmash'\nassert r.marker is None\nassert r.specs == [('~=', '0.3')]\nassert sorted(r.extras) == sorted(('web', 'postgres'))\nassert str(r) in ('MishMash[postgres,web]~=0.3', 'MishMash[web,postgres]~=0.3')\n"
-}

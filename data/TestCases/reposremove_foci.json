@@ -1,9 +1,0 @@
-{
-    "functionName": "remove_foci",
-    "className": "Brain",
-    "fileName": "/nipy_&_PySurfer/surfer_&_viz.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Remove foci added with ``Brain.add_foci()``.\n\n        Parameters\n        ----------\n        name : str | list of str | None\n            Names of the foci to remove (if None, remove all).\n\n        Notes\n        -----\n        Only foci added with a unique names can be removed.\n        \"\"\"\nif name is None:\n    keys = tuple(self.foci_dict)\nelse:\n    if isinstance(name, str):\n        keys = name,\n    else:\n        keys = name\n    if not all(key in self.foci_dict for key in keys):\n        missing = ', '.join(key for key in keys if key not in self.foci_dict)\n        raise ValueError('foci=%r: no foci named %s' % (name, missing))\nfor key in keys:\n    for points in self.foci_dict.pop(key):\n        points.remove()\n"
-}

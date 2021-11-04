@@ -1,9 +1,0 @@
-{
-    "functionName": "test_largest_sphere",
-    "className": "PoreSizeTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_geometry_&_PoreSizeTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "net = op.network.Cubic(shape=[5, 5, 5], spacing=[0.1, 0.2, 0.3])\ngeo = op.geometry.GenericGeometry(network=net, pores=net.Ps, throats=net.Ts)\ngeo.add_model(propname='pore.diameter', model=mods.largest_sphere, iters=5)\ndmin = np.amin(geo['pore.diameter'])\nassert dmin <= 0.1\ngeo.models['pore.diameter']['iters'] = 5\ngeo.regenerate_models()\nassert dmin <= np.amin(geo['pore.diameter'])\n"
-}

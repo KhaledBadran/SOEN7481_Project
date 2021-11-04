@@ -1,9 +1,0 @@
-{
-    "functionName": "test_time_offset",
-    "className": null,
-    "fileName": "/UW-Hydro_&_MetSim/metsim_&_tests_&_test_metsim.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Tests to make sure that the time_offset option works\"\"\"\nloc = data_locations['binary']\ndata_files = [os.path.join(loc, f) for f in os.listdir(loc)]\nout_vars = ['prec', 'temp', 'shortwave', 'longwave', 'vapor_pressure',\n    'wind', 'rel_humid', 'spec_humid', 'air_pressure']\nout_dir = '.'\nparams = {'start': dates['binary'][0], 'stop': dates['binary'][1],\n    'forcing_fmt': 'binary', 'domain_fmt': 'netcdf', 'state_fmt': 'netcdf',\n    'domain': './metsim/data/stehekin.nc', 'state':\n    './metsim/data/state_vic.nc', 'forcing': data_files, 'method': 'mtclim',\n    'scheduler': 'threading', 'time_step': '60', 'out_dir': out_dir,\n    'out_state': os.path.join(out_dir, 'state.nc'), 'out_vars': {n: metsim.\n    metsim.available_outputs[n] for n in out_vars}, 'forcing_vars':\n    in_vars_section['binary'], 'domain_vars': domain_section['binary']}\nparams1 = dict()\nparams1.update(params)\nparams2 = dict()\nparams2.update(params)\nparams1['period_ending'] = False\nparams2['period_ending'] = True\nms1 = MetSim(params1)\nms2 = MetSim(params2)\nassert ms1._times[1:] == ms2._times[:-1]\n"
-}

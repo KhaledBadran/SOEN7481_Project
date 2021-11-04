@@ -1,9 +1,0 @@
-{
-    "functionName": "test_query_before_flush",
-    "className": "TestBuffer",
-    "fileName": "/BciPy_&_BciPy/bcipy_&_acquisition_&_tests_&_test_buffer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"If a query is made before chunksize records have been written,\n        the data should still be available.\"\"\"\nn_records = 1000\nchannel_count = 25\nchannels = [('ch' + str(c)) for c in range(channel_count)]\nbuf = Buffer(channels=channels, chunksize=10000)\nfor i, data in enumerate(mock_data(n_records, channel_count)):\n    timestamp = float(i)\n    buf.append(Record(data, timestamp, None))\nrows = buf.query(start=buf.start_time, field='timestamp')\nself.assertEqual(len(rows), n_records)\nself.assertEqual(len(buf.all()), n_records)\nbuf.cleanup()\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_run_all_funcs",
-    "className": null,
-    "fileName": "/CyberReboot_&_NetworkML/tests_&_test_featurizers_main.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "instance = Featurizer()\nclass TestClass(Features):\n\n    @staticmethod\n    def test_feature1(rows, _srcmacid):\n        for row in rows:\n            return [{'test1': row['test1']}]\n\n    @staticmethod\n    def test_feature2(rows, _srcmacid):\n        for row in rows:\n            return [{'test2': row['test2']}]\ntc = TestClass()\nresults = instance.run_all_funcs([('test_feature1', 'test_feature1'), (\n    'test_feature2', 'test_feature2')], [], [(tc, 'test_feature1'), (tc,\n    'test_feature2')], [{'test1': 99, 'test2': 123}], True)\nassert results == [[{'test1': 99}], [{'test2': 123}]]\nresults = instance.run_all_funcs([], [], [], [{'test1': 99, 'test2': 123}],\n    True)\nassert results == []\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "testTransformOptimizationConfig",
-    "className": "LogYTransformTest",
-    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_log_y_transform.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "m1 = Metric(name='m1')\nobjective = Objective(metric=m1, minimize=False)\noc = OptimizationConfig(objective=objective, outcome_constraints=[])\ntf = LogY(search_space=None, observation_features=None, observation_data=[\n    self.obsd1, self.obsd2], config={'metrics': ['m1']})\noc_tf = tf.transform_optimization_config(oc, None, None)\nself.assertTrue(oc_tf == oc)\nm2 = Metric(name='m2')\ncons = [OutcomeConstraint(metric=m2, op=ComparisonOp.GEQ, bound=0.0,\n    relative=False)]\noc = OptimizationConfig(objective=objective, outcome_constraints=cons)\noc_tf = tf.transform_optimization_config(oc, None, None)\nself.assertTrue(oc_tf == oc)\nm2 = Metric(name='m2')\ncons = [OutcomeConstraint(metric=m2, op=ComparisonOp.GEQ, bound=0.0,\n    relative=False)]\noc = OptimizationConfig(objective=objective, outcome_constraints=cons)\ntf2 = LogY(search_space=None, observation_features=None, observation_data=[\n    self.obsd1, self.obsd2], config={'metrics': ['m2']})\nwith self.assertRaises(ValueError):\n    tf2.transform_optimization_config(oc, None, None)\n"
-}

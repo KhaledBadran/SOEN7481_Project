@@ -1,9 +1,0 @@
-{
-    "functionName": "test_CalibrationInsepctor_Run",
-    "className": null,
-    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_CommandLineScripts_&_test_commandline.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "try:\n    os.makedirs('_temp')\nexcept:\n    pass\nsubprocess.check_output(['MJOLNIRCalibrationInspector', '-s _temp/', '-b 1',\n    dataFiles[0]])\nfilesCreated = ['_temp/Final_Energy_Individual_1.png',\n    '_temp/Final_Energy_Overview_1.png',\n    '_temp/Instrument_calibration_1.png', '_temp/Normalization_1.png']\nfor file in filesCreated:\n    assert os.path.exists(file)\n    os.remove(file)\nos.rmdir('_temp')\npytest.mark.skip(reason='Fails on the headless Travis-ci')"
-}

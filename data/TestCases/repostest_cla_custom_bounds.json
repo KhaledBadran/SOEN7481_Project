@@ -1,9 +1,0 @@
-{
-    "functionName": "test_cla_custom_bounds",
-    "className": null,
-    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_cla.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "bounds = [(0.01, 0.13), (0.02, 0.11)] * 10\ncla = CLA(*setup_cla(data_only=True), weight_bounds=bounds)\ndf = get_data()\ncla.cov_matrix = risk_models.exp_cov(df).values\nw = cla.min_volatility()\nassert isinstance(w, dict)\nassert set(w.keys()) == set(cla.tickers)\nnp.testing.assert_almost_equal(cla.weights.sum(), 1)\nassert (0.01 <= cla.weights[::2]).all() and (cla.weights[::2] <= 0.13).all()\nassert (0.02 <= cla.weights[1::2]).all() and (cla.weights[1::2] <= 0.11).all()\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_poll_max_count_max_size",
-    "className": null,
-    "fileName": "/EclecticIQ_&_OpenTAXII/tests_&_services_&_test_poll.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "version = 11\nserver.config['count_blocks_in_poll_responses'] = count_blocks\nservice = server.get_service('poll-A')\nblocks_amount = 30\nfor i in range(blocks_amount):\n    persist_content(server.persistence, COLLECTION_OPEN, service.id)\nheaders = prepare_headers(version, https)\nrequest = prepare_request(collection_name=COLLECTION_OPEN, count_only=True,\n    version=version)\nresponse = service.process(headers, request)\nassert isinstance(response, tm11.PollResponse)\nif count_blocks:\n    assert response.record_count.record_count == POLL_MAX_COUNT\nelse:\n    assert response.record_count is None\nassert len(response.content_blocks) == 0\nrequest = prepare_request(collection_name=COLLECTION_OPEN, version=version)\nresponse = service.process(headers, request)\nassert isinstance(response, tm11.PollResponse)\nif count_blocks:\n    assert response.record_count.record_count == POLL_MAX_COUNT\n    assert response.record_count.partial_count is True\n    assert len(response.content_blocks) == POLL_RESULT_SIZE\nelse:\n    assert response.record_count is None\nassert response.more is True\nassert response.result_id\nserver.config['count_blocks_in_poll_responses'] = True\npytest.mark.parametrize(('https', 'count_blocks'), [(True, True), (False, \n    True), (True, False), (False, False)])"
-}

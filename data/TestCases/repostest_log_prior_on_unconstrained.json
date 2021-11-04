@@ -1,9 +1,0 @@
-{
-    "functionName": "test_log_prior_on_unconstrained",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_test_base_prior.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    A parameter with an Exp transform, and a uniform prior on its unconstrained, should have a\n    prior in the constrained space that scales as 1/value.\n    \"\"\"\ninitial_value = 1.0\nscale_factor = 10.0\nuniform_prior = Uniform(low=np.float64(0), high=np.float64(100))\nparam = gpflow.Parameter(initial_value, transform=Exp(), prior=\n    uniform_prior, prior_on=PriorOn.UNCONSTRAINED)\nlow_value = param.log_prior_density().numpy()\nparam.assign(scale_factor * initial_value)\nhigh_value = param.log_prior_density().numpy()\nassert np.isclose(low_value, high_value + np.log(scale_factor))\n"
-}

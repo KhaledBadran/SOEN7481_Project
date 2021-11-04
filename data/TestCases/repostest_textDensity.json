@@ -1,9 +1,0 @@
-{
-    "functionName": "test_textDensity",
-    "className": null,
-    "fileName": "/jmriebold_&_BoilerPy3/tests_&_test_extractors.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "template = '<html><body><p>*</p><p>*</p></body></html>'\ncontent = make_content([80, 'one, !!! two'])\ndoc = make_doc_2(template, content)\nblocks = doc.text_blocks\nnum_arr = [[block.num_words, block.num_words_in_wrapped_lines, block.\n    num_wrapped_lines, block.text_density] for block in blocks]\nassert blocks[0].num_words == 80\nassert_range(blocks[0].num_words_in_wrapped_lines, 60, 80)\nassert_range(blocks[0].num_wrapped_lines, 4, 7)\nassert_range(blocks[0].text_density, 8, 16)\nassert num_arr[1] == [2, 2, 1, 2]\n"
-}

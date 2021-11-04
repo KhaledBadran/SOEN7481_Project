@@ -1,9 +1,0 @@
-{
-    "functionName": "test_square_pores",
-    "className": "ThroatEndpointsTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_geometry_&_ThroatEndpointsTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.geo['pore.diameter'] = 0.5\nself.geo['throat.diameter'] = 0.25\nself.geo.add_model(propname='throat.endpoints', model=mods.square_pores,\n    regen_mode='normal')\nEP1 = self.geo['throat.endpoints.head'][0]\nEP2 = self.geo['throat.endpoints.tail'][0]\nEP1d = np.array([0, 0.25, 0]) + self.base\nEP2d = np.array([0, 1 - 0.25, 0]) + self.base\nassert_allclose(EP1, desired=EP1d)\nassert_allclose(EP2, desired=EP2d)\nEP1 = self.geo['throat.endpoints.head'][1]\nEP2 = self.geo['throat.endpoints.tail'][1]\nEP1d = np.array([0, 1 + 0.25, 0]) + self.base\nEP2d = np.array([0, 2 - 0.25, 0]) + self.base\nassert_allclose(EP1, desired=EP1d)\nassert_allclose(EP2, desired=EP2d)\n"
-}

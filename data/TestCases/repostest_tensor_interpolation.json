@@ -1,9 +1,0 @@
-{
-    "functionName": "test_tensor_interpolation",
-    "className": "TestStructureMethods",
-    "fileName": "/mesonepigreco_&_CellConstructor/scripts_&_cellconstructor_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test the interpolation using the Tensor\n        module against the interpolation of the quantum espresso\n        module.\n        \"\"\"\ndyn = self.dynSnSe.Copy()\nnew_cell = 4, 4, 1\nqe_inter_dyn = dyn.Interpolate(dyn.GetSupercell(), new_cell)\nt2 = CC.ForceTensor.Tensor2(dyn.structure, dyn.structure.generate_supercell\n    (dyn.GetSupercell()), dyn.GetSupercell())\nt2.SetupFromPhonons(dyn)\nt2.Center()\ntensor_inter_dyn = t2.GeneratePhonons(new_cell)\ntensor_inter_dyn.Symmetrize()\nqe_inter_dyn.Symmetrize()\nfor iq, q in enumerate(tensor_inter_dyn.q_tot):\n    dist = qe_inter_dyn.dynmats[iq] - tensor_inter_dyn.dynmats[iq]\n    dist = np.max(np.abs(dist))\n    self.assertTrue(dist < 1e-06)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_merge_pores_coords",
-    "className": "TopotoolsTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_topotools_&_TopotoolsTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Coordinates of merged pores should be centroid of the enclosing convex\n        hull.\n\n        This test verifies that if one subdivides a pore and then merge it\n        with a bunch of other pores, the coordinates of the new pore should be\n        exactly the same as when one merges the same pores without subdiving.\n\n        \"\"\"\ntestnet = op.network.Cubic(shape=[1, 10, 10])\ntestnet['pore.to_merge'] = False\ntestnet['pore.to_merge'][[14, 15, 16, 24, 25, 26, 34, 35, 36]] = True\ntopotools.subdivide(testnet, pores=15, shape=[1, 10, 10], labels='subdivided')\ntopotools.merge_pores(testnet, labels='new_pore', pores=testnet.pores([\n    'subdivided', 'to_merge']))\nxyz_w_subdivide = testnet['pore.coords'][testnet.pores('new_pore')]\ntestnet = op.network.Cubic(shape=[1, 10, 10])\ntestnet['pore.to_merge'] = False\ntestnet['pore.to_merge'][[14, 15, 16, 24, 25, 26, 34, 35, 36]] = True\ntopotools.merge_pores(testnet, labels='new_pore', pores=testnet.pores(\n    'to_merge'))\nxyz_wo_subdivide = testnet['pore.coords'][testnet.pores('new_pore')]\nassert_allclose(xyz_w_subdivide, xyz_wo_subdivide)\n"
-}

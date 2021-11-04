@@ -1,9 +1,0 @@
-{
-    "functionName": "test_rotate_images_custom_temp_files",
-    "className": null,
-    "fileName": "/mdbloice_&_Augmentor/tests_&_test_rotate.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "original_dimensions = 800, 800\ntmpdir = tempfile.mkdtemp()\ntmp = tempfile.NamedTemporaryFile(dir=tmpdir, suffix='.JPEG')\nim = Image.new('RGB', original_dimensions)\nim.save(tmp.name, 'JPEG')\nr = Operations.Rotate(probability=1, rotation=90)\nim = [im]\nim_r = r.perform_operation(im)\nassert im_r is not None\nassert im_r[0].size == original_dimensions\ntmp.close()\nshutil.rmtree(tmpdir)\n"
-}

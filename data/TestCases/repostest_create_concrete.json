@@ -1,9 +1,0 @@
-{
-    "functionName": "test_create_concrete",
-    "className": "TestIntentDefBuilder",
-    "fileName": "/SimGus_&_Chatette/tests_&_unit-testing_&_parsing_&_test_init.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "builder = IntentDefBuilder()\nbuilder.identifier = 'id'\nbuilder.randgen_name = 'name'\nbuilder.nb_training_ex = 100\nwith pytest.raises(ValueError):\n    builder.create_concrete()\nbuilder.randgen = True\nmodifiers = builder._build_modifiers_repr()\nassert isinstance(modifiers, ModifiersRepresentation)\nassert not modifiers.casegen\nassert modifiers.randgen\nassert modifiers.randgen.name == 'name'\nassert modifiers.randgen.percentage == 50\nassert not modifiers.randgen.opposite\nintent = builder.create_concrete()\nassert isinstance(intent, IntentDefinition)\nassert not intent._leading_space\nassert intent._name == 'id'\nassert intent._nb_training_ex_asked == 100\nassert intent._nb_testing_ex_asked is None\n"
-}

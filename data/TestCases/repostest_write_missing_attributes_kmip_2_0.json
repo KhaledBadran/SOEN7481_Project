@@ -1,9 +1,0 @@
-{
-    "functionName": "test_write_missing_attributes_kmip_2_0",
-    "className": "TestGetAttributesResponsePayload",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_get_attributes.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that an InvalidField error is raised during the encoding of a\n        GetAttributes request payload when the payload is missing the\n        attributes list.\n        \"\"\"\npayload = payloads.GetAttributesResponsePayload(self.unique_identifier)\nargs = utils.BytearrayStream(),\nkwargs = {'kmip_version': enums.KMIPVersion.KMIP_2_0}\nself.assertRaisesRegex(exceptions.InvalidField,\n    'The GetAttributes response payload is missing the attributes list.',\n    payload.write, *args, **kwargs)\n"
-}

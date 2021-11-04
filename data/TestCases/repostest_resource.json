@@ -1,9 +1,0 @@
-{
-    "functionName": "test_resource",
-    "className": null,
-    "fileName": "/PlaidWeb_&_Authl/tests_&_test_webfinger.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "requests_mock.get(\n    'https://example.com/.well-known/webfinger?resource=acct:profile@example.com'\n    , json={'links': [{'rel': 'profile', 'href':\n    'https://profile.example.com/u/moo'}, {'rel': 'self', 'href':\n    'https://profile.example.com/u/moo'}, {'rel': 'self', 'href':\n    'https://self.example.com/u/moo'}, {'rel': 'posts', 'href':\n    'https://example.com/u/moo/posts'}]})\nassert webfinger.get_profiles('@profile@example.com') == {\n    'https://profile.example.com/u/moo', 'https://self.example.com/u/moo'}\nrequests_mock.get(\n    'https://example.com/.well-known/webfinger?resource=acct:empty@example.com'\n    , json={'links': [{'rel': 'nothing', 'href':\n    'https://profile.example.com/u/moo'}, {'rel': 'still-nothing', 'href':\n    'https://self.example.com/u/moo'}, {'rel': 'posts', 'href':\n    'https://example.com/u/moo/posts'}]})\nassert webfinger.get_profiles('@empty@example.com') == set()\n"
-}

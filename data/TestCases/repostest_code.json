@@ -1,9 +1,0 @@
-{
-    "functionName": "test_code",
-    "className": null,
-    "fileName": "/whiteclover_&_Choco/test_&_test_lexer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "template = \"\"\"text\n    <%\n        print(\"hi\")\n        for x in range(1,5):\n            print(x)\n    %>\nmore text\n    <%!\n        import foo\n    %>\n\"\"\"\nnodes = Lexer(template).parse()\nself._compare(nodes, TemplateNode({}, [Text('text\\n    ', (1, 1)), Code(\n    \"\"\"\nprint(\"hi\")\nfor x in range(1,5):\n    print(x)\n    \n\"\"\", False, (2, \n    5)), Text('\\nmore text\\n    ', (6, 7)), Code(\"\"\"\nimport foo\n    \n\"\"\", \n    True, (8, 5)), Text('\\n', (10, 7))]))\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_eda_eventrelated",
-    "className": null,
-    "fileName": "/neuropsychology_&_NeuroKit/tests_&_tests_eda.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "eda = nk.eda_simulate(duration=15, scr_number=3)\neda_signals, info = nk.eda_process(eda, sampling_rate=1000)\nepochs = nk.epochs_create(eda_signals, events=[5000, 10000, 15000],\n    sampling_rate=1000, epochs_start=-0.1, epochs_end=1.9)\neda_eventrelated = nk.eda_eventrelated(epochs)\nno_activation = np.where(eda_eventrelated['EDA_SCR'] == 0)[0][0]\nassert int(pd.DataFrame(eda_eventrelated.values[no_activation]).isna().sum()\n    ) == 4\nassert len(eda_eventrelated['Label']) == 3\nwith pytest.warns(nk.misc.NeuroKitWarning, match=\n    '.*does not have an `EDA_Phasic`.*'):\n    first_epoch_key = list(epochs.keys())[0]\n    first_epoch_copy = epochs[first_epoch_key].copy()\n    del first_epoch_copy['EDA_Phasic']\n    nk.eda_eventrelated({**epochs, first_epoch_key: first_epoch_copy})\nwith pytest.warns(nk.misc.NeuroKitWarning, match=\n    '.*does not have an `SCR_Amplitude`.*'):\n    first_epoch_key = list(epochs.keys())[0]\n    first_epoch_copy = epochs[first_epoch_key].copy()\n    del first_epoch_copy['SCR_Amplitude']\n    nk.eda_eventrelated({**epochs, first_epoch_key: first_epoch_copy})\nwith pytest.warns(nk.misc.NeuroKitWarning, match=\n    '.*does not have an `SCR_RecoveryTime`.*'):\n    first_epoch_key = list(epochs.keys())[0]\n    first_epoch_copy = epochs[first_epoch_key].copy()\n    del first_epoch_copy['SCR_RecoveryTime']\n    nk.eda_eventrelated({**epochs, first_epoch_key: first_epoch_copy})\nwith pytest.warns(nk.misc.NeuroKitWarning, match=\n    '.*does not have an `SCR_RiseTime`.*'):\n    first_epoch_key = list(epochs.keys())[0]\n    first_epoch_copy = epochs[first_epoch_key].copy()\n    del first_epoch_copy['SCR_RiseTime']\n    nk.eda_eventrelated({**epochs, first_epoch_key: first_epoch_copy})\n"
-}

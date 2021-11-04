@@ -1,9 +1,0 @@
-{
-    "functionName": "test_rate",
-    "className": "AdvectionDiffusionTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_AdvectionDiffusionTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "for s_scheme in ['upwind', 'hybrid', 'powerlaw', 'exponential']:\n    ad = op.algorithms.AdvectionDiffusion(network=self.net, phase=self.phase)\n    ad.setup(quantity='pore.concentration', conductance=\n        'throat.ad_dif_conductance_' + s_scheme, s_scheme=s_scheme)\n    ad.set_value_BC(pores=self.net.pores('back'), values=2)\n    ad.set_value_BC(pores=self.net.pores('front'), values=0)\n    ad.run()\n    mdot_inlet = ad.rate(pores=self.net.pores('back'))[0]\n    mdot_outlet = ad.rate(pores=self.net.pores('front'))[0]\n    temp = np.random.choice(self.net.pores(['back', 'front'], mode='not'),\n        size=3, replace=False)\n    mdot_internal = ad.rate(pores=temp)[0]\n    assert_allclose(mdot_inlet - mdot_internal, mdot_inlet)\n    assert_allclose(mdot_inlet, -mdot_outlet)\n"
-}

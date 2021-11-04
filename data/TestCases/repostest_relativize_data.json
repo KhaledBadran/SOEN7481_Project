@@ -1,9 +1,0 @@
-{
-    "functionName": "test_relativize_data",
-    "className": "RelativizeDataTest",
-    "fileName": "/facebook_&_Ax/ax_&_utils_&_stats_&_tests_&_test_statstools.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data = Data(df=pd.DataFrame([{'mean': 2, 'sem': 0, 'metric_name': 'foobar',\n    'arm_name': 'status_quo'}, {'mean': 5, 'sem': 0, 'metric_name':\n    'foobaz', 'arm_name': 'status_quo'}, {'mean': 1, 'sem': 0,\n    'metric_name': 'foobar', 'arm_name': '0_0'}, {'mean': 10, 'sem': 0,\n    'metric_name': 'foobaz', 'arm_name': '0_0'}]))\nexpected_relativized_data = Data(df=pd.DataFrame([{'mean': -0.5, 'sem': 0,\n    'metric_name': 'foobar', 'arm_name': '0_0'}, {'mean': 1, 'sem': 0,\n    'metric_name': 'foobaz', 'arm_name': '0_0'}]))\nexpected_relativized_data_with_sq = Data(df=pd.DataFrame([{'mean': 0, 'sem':\n    0, 'metric_name': 'foobar', 'arm_name': 'status_quo'}, {'mean': -0.5,\n    'sem': 0, 'metric_name': 'foobar', 'arm_name': '0_0'}, {'mean': 0,\n    'sem': 0, 'metric_name': 'foobaz', 'arm_name': 'status_quo'}, {'mean': \n    1, 'sem': 0, 'metric_name': 'foobaz', 'arm_name': '0_0'}]))\nactual_relativized_data = relativize_data(data=data)\nself.assertEqual(expected_relativized_data, actual_relativized_data)\nactual_relativized_data_with_sq = relativize_data(data=data, include_sq=True)\nself.assertEqual(expected_relativized_data_with_sq,\n    actual_relativized_data_with_sq)\n"
-}

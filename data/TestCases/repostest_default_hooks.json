@@ -1,9 +1,0 @@
-{
-    "functionName": "test_default_hooks",
-    "className": null,
-    "fileName": "/PlaidWeb_&_Authl/tests_&_test_flask_wrapper.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "sendmail = mocker.Mock(return_value=None)\napp = flask.Flask(__name__)\napp.secret_key = __name__\nauthl.flask.setup(app, {'TEST_ENABLED': True, 'EMAIL_SENDMAIL': sendmail,\n    'EMAIL_CHECK_MESSAGE': 'check yr email'})\nwith app.test_client() as client:\n    soup = BeautifulSoup(client.get('/login').data, 'html.parser')\n    assert soup.find('input', type='url')\nwith app.test_client() as client:\n    soup = BeautifulSoup(client.get('/login?me=test:error').data, 'html.parser'\n        )\n    assert soup.find('div', {'class': 'error'})\nwith app.test_client() as client:\n    soup = BeautifulSoup(client.get('/login?me=unknown://').data, 'html.parser'\n        )\n    error = soup.find('div', {'class': 'error'})\n    assert error.text.strip() == 'Unknown authentication method'\nwith app.test_client() as client:\n    assert client.get('/login?me=test:success')\n    assert flask.session['me'] == 'test:success'\nwith app.test_client() as client:\n    soup = BeautifulSoup(client.get('/login?me=mailto:foo@bar').data,\n        'html.parser')\n    sendmail.assert_called()\n    message = soup.find('div', {'id': 'notify'})\n    assert message.text.strip() == 'check yr email'\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_profile_partial",
-    "className": null,
-    "fileName": "/PlaidWeb_&_Authl/tests_&_handlers_&_test_indieauth.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "profile_html = \"\"\"\n    <div class=\"h-card\">\n    <a class=\"u-url\" href=\"https://example.foo/~user/\">larry</a>\n    <p class=\"e-note\">I'm <em>Larry</em>. And you're not.</p>\n    <a class=\"u-email\" href=\"mailto:larry%40example.foo\">larry at example dot foo</a>\n    </div><div class=\"h-card\">\n    <a class=\"u-email\" href=\"mailto:notme@example.com\"></a>\n    </div>\n    \"\"\"\nprofile_blob = {'homepage': 'https://example.foo/~user/', 'bio':\n    \"I'm Larry. And you're not.\", 'email': 'larry@example.foo'}\nrequests_mock.get('https://partial.example', text=profile_html)\nprofile = indieauth.get_profile('https://partial.example')\nassert profile == profile_blob\n"
-}

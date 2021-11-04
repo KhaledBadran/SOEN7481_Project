@@ -1,9 +1,0 @@
-{
-    "functionName": "test_pz_roundtrip",
-    "className": null,
-    "fileName": "/TEOS-10_&_GSW-python/gsw_&_tests_&_test_geostrophy.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    The p_z conversion functions have Matlab-based checks that use\n    only the first two arguments.\n    Here we verify that the functions are also inverses when the optional\n    arguments are used.\n    \"\"\"\nz = np.array([-10, -100, -1000, -5000], dtype=float)\np = gsw.p_from_z(z, 30, 0.5, 0.25)\nzz = gsw.z_from_p(p, 30, 0.5, 0.25)\nassert_almost_equal(z, zz)\n"
-}

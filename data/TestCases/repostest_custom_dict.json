@@ -1,9 +1,0 @@
-{
-    "functionName": "test_custom_dict",
-    "className": "TestDictCursor",
-    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_test_DictCursor.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class MyDict(dict):\n    pass\nclass MyDictCursor(self.cursor_type):\n    dict_type = MyDict\nkeys = ['name', 'age', 'DOB']\nbob = MyDict([(k, self.bob[k]) for k in keys])\njim = MyDict([(k, self.jim[k]) for k in keys])\nfred = MyDict([(k, self.fred[k]) for k in keys])\ncur = self.conn.cursor(MyDictCursor)\ncur.execute(\"SELECT * FROM dictcursor WHERE name='bob'\")\nr = cur.fetchone()\nself.assertEqual(bob, r, 'fetchone() returns MyDictCursor')\nself._ensure_cursor_expired(cur)\ncur.execute('SELECT * FROM dictcursor')\nr = cur.fetchall()\nself.assertEqual([bob, jim, fred], r, 'fetchall failed via MyDictCursor')\ncur.execute('SELECT * FROM dictcursor')\nr = list(cur)\nself.assertEqual([bob, jim, fred], r, 'list failed via MyDictCursor')\ncur.execute('SELECT * FROM dictcursor')\nr = cur.fetchmany(2)\nself.assertEqual([bob, jim], r, 'list failed via MyDictCursor')\nself._ensure_cursor_expired(cur)\n"
-}

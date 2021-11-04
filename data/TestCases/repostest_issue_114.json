@@ -1,9 +1,0 @@
-{
-    "functionName": "test_issue_114",
-    "className": "TestGitHubIssues",
-    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_test_issues.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" autocommit is not set after reconnecting with ping() \"\"\"\nconn = pymysql.connect(charset='utf8', **self.databases[0])\nconn.autocommit(False)\nc = conn.cursor()\nc.execute('select @@autocommit;')\nself.assertFalse(c.fetchone()[0])\nconn.close()\nconn.ping()\nc.execute('select @@autocommit;')\nself.assertFalse(c.fetchone()[0])\nconn.close()\nconn = pymysql.connect(charset='utf8', **self.databases[0])\nc = conn.cursor()\nc.execute('select @@autocommit;')\nself.assertFalse(c.fetchone()[0])\nconn.close()\nconn.ping()\nconn.autocommit(True)\nc.execute('select @@autocommit;')\nself.assertTrue(c.fetchone()[0])\nconn.close()\n"
-}

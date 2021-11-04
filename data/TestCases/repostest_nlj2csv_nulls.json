@@ -1,9 +1,0 @@
-{
-    "functionName": "test_nlj2csv_nulls",
-    "className": null,
-    "fileName": "/geowurster_&_NewlineJSON/tests_&_test_main.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Null JSON fields should become empty CSV fields\n    \"\"\"\noutfile = str(tmpdir.mkdir('test').join('out.csv'))\nresult = CliRunner().invoke(main, ['nlj2csv', dicts_with_null_path, outfile])\nassert result.exit_code == 0\nwith nlj.open(dicts_with_null_path) as expected:\n    with open(outfile) as actual:\n        for e, a in zip(expected, csv.DictReader(actual)):\n            assert a == dict((k, v if v else '') for k, v in six.iteritems(a))\nwith open(outfile) as f:\n    data = f.read()\n    assert len(data) > 0\n    assert 'None' not in data\n"
-}

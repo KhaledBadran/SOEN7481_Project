@@ -1,9 +1,0 @@
-{
-    "functionName": "test_block_update",
-    "className": null,
-    "fileName": "/viebboy_&_PyGOP/test_&_utility_&_test_block_update.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "model_path = os.path.join(tmpdir.dirname, 'test_model')\nif os.path.exists(model_path):\n    shutil.rmtree(model_path)\nos.mkdir(model_path)\nparams, model_data = utility.get_random_model_data()\nparams['tmp_dir'] = tmpdir.dirname\nparams['model_name'] = 'test_model'\nparams['nodal_set'] = gop_operators.get_default_nodal_set()\nparams['pool_set'] = gop_operators.get_default_pool_set()\nparams['activation_set'] = gop_operators.get_default_activation_set()\nparams['convergence_measure'] = random.choice(['train_', 'val_']) + params[\n    'convergence_measure']\nblock_names = ['gop_0_0', 'gop_1_0', 'bn_0_0', 'bn_1_0', 'output']\nall_op_sets = utility.get_all_operators()\nop_set_indices = {}\nfor layer_name in model_data['op_sets'].keys():\n    op_set_indices[layer_name] = all_op_sets.index(model_data['op_sets'][\n        layer_name])\ntrain_states = {'topology': model_data['topology'], 'weights': model_data[\n    'weights'], 'op_set_indices': op_set_indices}\n_, _, new_weights = gop_utils.block_update_standalone(train_states, params,\n    block_names, utility.get_generator, [INPUT_DIM, OUTPUT_DIM, BATCH_SIZE,\n    STEPS], utility.get_generator, [INPUT_DIM, OUTPUT_DIM, BATCH_SIZE,\n    STEPS], utility.get_generator, [INPUT_DIM, OUTPUT_DIM, BATCH_SIZE, STEPS])\nfor layer_name in new_weights.keys():\n    if layer_name not in block_names:\n        assert np.allclose(new_weights[layer_name][0], model_data['weights'\n            ][layer_name][0])\nshutil.rmtree(model_path)\n"
-}

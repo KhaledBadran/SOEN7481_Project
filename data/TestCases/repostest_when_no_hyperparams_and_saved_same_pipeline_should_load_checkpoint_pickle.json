@@ -1,9 +1,0 @@
-{
-    "functionName": "test_when_no_hyperparams_and_saved_same_pipeline_should_load_checkpoint_pickle",
-    "className": null,
-    "fileName": "/Neuraxio_&_Neuraxle/testing_&_test_pickle_checkpoint_step.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "tape = TapeCallbackFunction()\npipeline_save = create_pipeline(tmpdir=tmpdir, pickle_checkpoint_step=\n    DefaultCheckpoint(), tape=TapeCallbackFunction())\npipeline_save.fit_transform(data_inputs, expected_outputs)\npipeline_load = create_pipeline(tmpdir=tmpdir, pickle_checkpoint_step=\n    DefaultCheckpoint(), tape=tape)\npipeline_load, actual_data_inputs = pipeline_load.fit_transform(data_inputs,\n    expected_outputs)\nactual_tape = tape.get_name_tape()\nassert np.array_equal(actual_data_inputs, data_inputs)\nassert actual_tape == EXPECTED_TAPE_AFTER_CHECKPOINT\n"
-}

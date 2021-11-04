@@ -1,9 +1,0 @@
-{
-    "functionName": "freshenDatabase",
-    "className": "TestDatabase",
-    "fileName": "/corydodt_&_Hypy/src_&_hypy_&_test_lib.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        Use:\n            with self.freshenDatabase() as db:\n                ... stuff that should test using these three documents ...\n        \"\"\"\ndb = HDatabase()\ndb.open('_temp_db', 'w')\ndoc = HDocument(uri=u'1')\ndoc.addText(\n    u'word this is my document. do you like documents? this one is hi-res.')\ndb.putDoc(doc, clean=True)\ndoc = HDocument(uri=u'2')\ndoc.addText(\n    u'word lorem ipsum dolor sit amet something whatever whatever i do not remember the rest'\n    )\ndb.putDoc(doc)\ndoc = HDocument(uri=u'3')\ndoc.addText(\n    u'word four score and 7 years ago our forefathers brought forth upon upon something'\n    )\ndb.putDoc(doc)\nfor x in range(4, extras + 4):\n    doc = HDocument(uri=text_type(x))\n    doc.addText(u'filler filler filler carrot top')\n    doc[u'specialId'] = text_type(x)\n    doc[u'description'] = text_type(x) * x\n    doc[u'date'] = u'2008-12-%s' % (x,)\n    db.putDoc(doc)\ndb.flush()\ntry:\n    yield db\nfinally:\n    try:\n        db.close()\n    except CloseFailed:\n        \"\"\"Some of the tests do this close on their own.\"\"\"\ncontextmanager"
-}

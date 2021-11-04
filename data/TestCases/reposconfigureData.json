@@ -1,9 +1,0 @@
-{
-    "functionName": "configureData",
-    "className": null,
-    "fileName": "/FaradayRF_&_Faraday-Software/faraday_&_data.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Configure Data configuration file from command line\n\n    :param args: argparse arguments\n    :param dataConfigPath: Path to data.ini file\n    :return: None\n    \"\"\"\nconfig = ConfigParser.RawConfigParser()\nconfig.read(os.path.join(path, 'data.ini'))\nif args.flaskhost is not None:\n    config.set('FLASK', 'HOST', args.flaskhost)\nif args.flaskport is not None:\n    config.set('FLASK', 'PORT', args.flaskport)\nif args.proxyhost is not None:\n    config.set('PROXY', 'HOST', args.proxyhost)\nif args.proxyport is not None:\n    config.set('PROXY', 'PORT', args.proxyport)\nwith open(dataConfigPath, 'wb') as configfile:\n    config.write(configfile)\n"
-}

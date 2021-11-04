@@ -1,9 +1,0 @@
-{
-    "functionName": "do_start",
-    "className": null,
-    "fileName": "/PRIArobotics_&_HedgehogClient/hedgehog_&_client_&_test_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "with DealerRouterSocket(zmq_aio_ctx, zmq.ROUTER, side=ServerSide) as socket:\n    socket.bind(endpoint)\n\n    async def target():\n        await server_coro(socket, *args, **kwargs)\n        ident, msgs = await socket.recv_msgs()\n        _msgs = []\n        _msgs.extend(motor.Action(port, motor.POWER, 0) for port in range(0, 4)\n            )\n        _msgs.extend(servo.Action(port, None) for port in range(0, 6))\n        _msgs.append(speaker.Action(None))\n        _msgs.append(vision.CloseCameraAction())\n        assert msgs == tuple(_msgs)\n        await socket.send_msgs(ident, [ack.Acknowledgement()] * len(_msgs))\n    task = asyncio.ensure_future(target())\n    try:\n        yield endpoint\n        await task\n    finally:\n        task.cancel()\nasynccontextmanager"
-}

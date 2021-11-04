@@ -1,9 +1,0 @@
-{
-    "functionName": "test_bool_array_range_constraint",
-    "className": null,
-    "fileName": "/SeverTopan_&_AdjSim/test_&_test_decision_mutable.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "import adjsim\nd = adjsim.decision.DecisionMutableBoolArray(shape)\nassert d.shape == tuple(shape)\nvalid_values = [np.zeros(shape, dtype=np.bool_), np.ones(shape, dtype=np.bool_)\n    ]\nfor value in valid_values:\n    d._set_value(value)\n    assert (d.value == value).all()\ninvalid_types = [None, InvalidClass(), np.zeros(shape, dtype=np.int_)]\nfor value in invalid_types:\n    with pytest.raises(TypeError):\n        d._set_value(value)\ninvalid_values = [np.zeros(np.array(shape) + 1, dtype=np.bool_)]\nfor value in invalid_values:\n    with pytest.raises(ValueError):\n        d._set_value(value)\nfor _ in range(50):\n    d._set_value_random()\n    assert np.logical_or(d.value, np.logical_not(d.value)).all()\nfor _ in range(50):\n    d._perturb_around_locus(valid_values[0])\n    assert np.logical_or(d.value, np.logical_not(d.value)).all()\nfor _ in range(50):\n    d._perturb_locally()\n    assert np.logical_or(d.value, np.logical_not(d.value)).all()\npytest.mark.parametrize('shape', [(5,), (5, 6), [5, 6], (4, 7, 3, 4)])"
-}

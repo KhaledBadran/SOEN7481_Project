@@ -1,9 +1,0 @@
-{
-    "functionName": "test__make_analysis__uses_mask_function",
-    "className": "TestPhase",
-    "fileName": "/Jammy2211_&_PyAutoCTI/test_&_unit_&_pipeline_&_test_phase.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "def mask_function(shape, ci_frame):\n    return np.full(shape=shape, fill_value=False)\nphase.mask_function = mask_function\nanalysis = phase.make_analysis(ci_datas=[ci_data], cti_settings=cti_settings)\nassert (analysis.ci_datas_full[0].mask == np.full(shape=(3, 3), fill_value=\n    False)).all()\ndef mask_function(shape, ci_frame):\n    return np.array([[False, False, False], [False, True, False], [False, \n        False, False]])\nphase.mask_function = mask_function\nanalysis = phase.make_analysis(ci_datas=[ci_data], cti_settings=cti_settings)\nassert (analysis.ci_datas_full[0].mask == np.array([[False, False, False],\n    [False, True, False], [False, False, False]])).all()\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "ispercolating",
-    "className": null,
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_topotools_&_topotools.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Determines if a percolating clusters exists in the network spanning\n    the given inlet and outlet sites\n\n    Parameters\n    ----------\n    am : adjacency_matrix\n        The adjacency matrix with the ``data`` attribute indicating\n        if a bond is occupied or not\n\n    inlets : array_like\n        An array of indices indicating which sites are part of the inlets\n\n    outlets : array_like\n        An array of indices indicating which sites are part of the outlets\n\n    mode : string\n        Indicates which type of percolation to apply, either `'site'` or\n        `'bond'`\n\n    \"\"\"\nif am.format != 'coo':\n    am = am.to_coo()\nij = np.vstack((am.col, am.row)).T\nif mode.startswith('site'):\n    occupied_sites = np.zeros(shape=am.shape[0], dtype=bool)\n    occupied_sites[ij[am.data].flatten()] = True\n    clusters = site_percolation(ij, occupied_sites)\nelif mode.startswith('bond'):\n    occupied_bonds = am.data\n    clusters = bond_percolation(ij, occupied_bonds)\nins = np.unique(clusters.sites[inlets])\nif ins[0] == -1:\n    ins = ins[1:]\nouts = np.unique(clusters.sites[outlets])\nif outs[0] == -1:\n    outs = outs[1:]\nhits = np.in1d(ins, outs)\nreturn np.any(hits)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "testNumArmsNoDeduplication",
-    "className": "ExperimentTest",
-    "fileName": "/facebook_&_Ax/ax_&_core_&_tests_&_test_experiment.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "exp = Experiment(name='test_experiment', search_space=get_search_space())\narm = get_arm()\nexp.new_batch_trial().add_arm(arm)\ntrial = exp.new_batch_trial().add_arm(arm)\nself.assertEqual(exp.sum_trial_sizes, 2)\nself.assertEqual(len(exp.arms_by_name), 1)\ntrial.mark_arm_abandoned(trial.arms[0].name)\nself.assertEqual(exp.num_abandoned_arms, 1)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_rough_similarity_explicit_depth",
-    "className": null,
-    "fileName": "/AllenInstitute_&_EM_Aligner_python/integration_tests_&_test_rough.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "rough_parameters2 = copy.deepcopy(rough_parameters)\nrough_parameters2['input_stack']['name'] = rough_input_stack\nrough_parameters2['output_stack']['name'] = output_stack_name\nrough_parameters2['pointmatch']['name'] = rough_pointmatches\nrough_parameters2['transformation'] = 'SimilarityModel'\nrough_parameters2['matrix_assembly']['depth'] = [0, 1, 2]\nrough_parameters2['matrix_assembly']['explicit_weight_by_depth'] = [0, 0.5,\n    0.33]\nmod = EMaligner.EMaligner(input_data=copy.deepcopy(rough_parameters2), args=[])\nmod.run()\ntin = renderapi.tilespec.get_tile_specs_from_stack(rough_parameters2[\n    'input_stack']['name'], render=render)\ntout = renderapi.tilespec.get_tile_specs_from_stack(rough_parameters2[\n    'output_stack']['name'], render=render)\nassert np.all(np.array(mod.results['precision']) < 1e-07)\nassert np.all(np.array(mod.results['error']) < 1000000.0)\nassert len(tin) == len(tout)\ndel mod\nwith pytest.raises(ValidationError):\n    rough_parameters2['matrix_assembly']['depth'] = [0, 1]\n    EMaligner.EMaligner(input_data=copy.deepcopy(rough_parameters2), args=[])\n"
-}

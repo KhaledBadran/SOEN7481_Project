@@ -1,9 +1,0 @@
-{
-    "functionName": "test_basic_auth",
-    "className": null,
-    "fileName": "/AmadeusITGroup_&_JumpSSH/tests_&_test_restclient.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "gateway_ip, gateway_port = docker_env.get_host_ip_port('gateway')\ngateway_session = SSHSession(host=gateway_ip, port=gateway_port, username=\n    'user1', password='password1').open()\nrest_client = RestSshClient(gateway_session)\nuri = 'http://%s/authentication-required' % REMOTE_HOST_IP_PORT\nwith pytest.raises(exception.RestClientError) as exc_info:\n    rest_client.request('GET', uri, auth='invalid_auth_format')\nassert 'Invalid auth parameter' in str(exc_info.value)\nhttp_response = rest_client.request('GET', uri, auth=('wrong_user',\n    'wrong_password'))\nassert http_response.status_code == 401\nassert 'You have to login with proper credentials' in http_response.text\nhttp_response = rest_client.request('GET', uri, auth=('admin', 'secret'))\nassert http_response.status_code == 200\nassert http_response.text == 'Authentication successful'\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_producer_with_link",
-    "className": "TestProducer",
-    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_producer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "prefix = Name('/prefix')\nsuffix = Name('/suffix')\nexpectedInterest = Name(prefix)\nexpectedInterest.append(Encryptor.NAME_COMPONENT_READ)\nexpectedInterest.append(suffix)\nexpectedInterest.append(Encryptor.NAME_COMPONENT_E_KEY)\ntestTime = Schedule.fromIsoString('20150101T100001')\ntimeoutCount = [0]\nclass TestFace(object):\n\n    def __init__(self, handleExpressInterest):\n        self.handleExpressInterest = handleExpressInterest\n\n    def expressInterest(self, interest, onData, onTimeout, onNetworkNack):\n        return self.handleExpressInterest(interest, onData, onTimeout,\n            onNetworkNack)\ndef handleExpressInterest(interest, onData, onTimeout, onNetworkNack):\n    self.assertEqual(expectedInterest, interest.getName())\n    self.assertEqual(3, interest.getLink().getDelegations().size())\n    timeoutCount[0] += 1\n    onTimeout(interest)\n    return 0\nface = TestFace(handleExpressInterest)\nlink = Link()\nlink.addDelegation(10, Name('/test1'))\nlink.addDelegation(20, Name('/test2'))\nlink.addDelegation(100, Name('/test3'))\nself.keyChain.sign(link, self.certificateName)\ntestDb = Sqlite3ProducerDb(self.databaseFilePath)\nproducer = Producer(prefix, suffix, face, self.keyChain, testDb, 3, link)\ndef onEncryptedKeys(result):\n    self.assertEqual(4, timeoutCount[0])\n    self.assertEqual(0, len(result))\nproducer.createContentKey(testTime, onEncryptedKeys)\n"
-}

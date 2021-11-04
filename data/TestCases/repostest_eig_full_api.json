@@ -1,9 +1,0 @@
-{
-    "functionName": "test_eig_full_api",
-    "className": "TestEIG",
-    "fileName": "/anselmrothe_&_EIG/test_&_test_eig.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "belief = Bayes(self.hs1)\ncontext = Context(self.hs1, belief)\ncontext.observe(self.observation1)\nquestion = Parser.parse('Red')\nexecutor = Executor(question)\neig = compute_eig(executor, context)\nself.assertAlmostEqual(eig, 0)\nquestion = Parser.parse(\n    '(any (map (lambda y0 (== (color y0) Red)) (set 1-1 1-2 1-3)))')\nexecutor = Executor(question)\neig = compute_eig(executor, context)\nself.assertAlmostEqual(eig, 1)\nquestion = Parser.parse('(size Red)')\nexecutor = Executor(question)\neig = compute_eig(executor, context)\nself.assertAlmostEqual(eig, 0.81127812)\ntmp_observation = self.observation1.copy()\ntmp_observation[1, 2] = 2\ncontext.observe(tmp_observation)\neig = compute_eig(executor, context)\nself.assertAlmostEqual(eig, 0)\nbelief = Bayes(self.hs2)\ncontext = Context(self.hs2, belief)\nquestion = Parser.parse('(orient Blue)')\nexecutor = Executor(question)\neig = compute_eig(executor, context)\nself.assertAlmostEqual(eig, 1)\nprior = EqualSizesDistribution(ship_labels=[1, 2, 3])\nbelief = Bayes(self.hs3, prior)\ncontext = Context(self.hs3, belief)\ncontext.observe(self.observation2)\nquestion = Parser.parse('(bottomright (coloredTiles Purple))')\nexecutor = Executor(question)\neig = compute_eig(executor, context)\nself.assertAlmostEqual(eig, 2.4275116)\nquestion = Parser.parse('(size Purple)')\nexecutor = Executor(question)\neig = compute_eig(executor, context)\nself.assertAlmostEqual(eig, 1.565336)\nquestion = Parser.parse('(color 3-1)')\nexecutor = Executor(question)\neig = compute_eig(executor, context)\nself.assertAlmostEqual(eig, 0.9989968)\n"
-}

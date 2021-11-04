@@ -1,9 +1,0 @@
-{
-    "functionName": "test_species_missing_inchi",
-    "className": "TestCommonProperties",
-    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_converters.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Check for warning when species missing InChI.\n        \"\"\"\nroot = etree.Element('experiment')\nproperties = etree.SubElement(root, 'commonProperties')\ninitial_composition = etree.SubElement(properties, 'property')\ninitial_composition.set('name', 'initial composition')\ncomponent = etree.SubElement(initial_composition, 'component')\nspecies = etree.SubElement(component, 'speciesLink')\nspecies.set('preferredKey', 'H2')\namount = etree.SubElement(component, 'amount')\namount.set('units', 'mole fraction')\namount.text = '1.0'\nwith pytest.warns(UserWarning) as record:\n    get_common_properties(root)\nm = str(record.pop(UserWarning).message)\nassert m == 'Missing InChI for species H2'\n"
-}

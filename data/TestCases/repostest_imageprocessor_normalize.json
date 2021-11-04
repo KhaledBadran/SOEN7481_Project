@@ -1,9 +1,0 @@
-{
-    "functionName": "test_imageprocessor_normalize",
-    "className": null,
-    "fileName": "/IBM_&_MAX-Framework/maxfw_&_tests_&_test_image_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test the Imageprocessor's normalize function.\"\"\"\ntransform_sequence = [ToPILImage('RGBA'), Normalize()]\np = ImageProcessor(transform_sequence)\nimg_out = p.apply_transforms(test_input)\nassert np.max(img_out) <= 1 and np.min(img_out) >= 0\ntransform_sequence = [ToPILImage('RGB'), Normalize()]\np = ImageProcessor(transform_sequence)\nimg_out = p.apply_transforms(test_input)\nassert np.max(img_out) <= 1 and np.min(img_out) >= 0\ntransform_sequence = [ToPILImage('L'), Normalize()]\np = ImageProcessor(transform_sequence)\nimg_out = p.apply_transforms(test_input)\nassert np.max(img_out) <= 1 and np.min(img_out) >= 0\ntransform_sequence = [ToPILImage('L'), Normalize(), Resize(size=(200, 200))]\np = ImageProcessor(transform_sequence)\nwith nose.tools.assert_raises(Exception):\n    p.apply_transforms(test_input)\ntransform_sequence = [ToPILImage('RGBA'), Normalize(), Normalize()]\np = ImageProcessor(transform_sequence)\nwith nose.tools.assert_raises(Exception):\n    p.apply_transforms(test_input)\n"
-}

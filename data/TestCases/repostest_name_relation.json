@@ -1,9 +1,0 @@
-{
-    "functionName": "test_name_relation",
-    "className": "TestRegexMatching",
-    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_verification_rules.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "policyManagerPrefix = ConfigPolicyManager(\n    'policy_config/relation_ruleset_prefix.conf')\npolicyManagerStrict = ConfigPolicyManager(\n    'policy_config/relation_ruleset_strict.conf')\npolicyManagerEqual = ConfigPolicyManager(\n    'policy_config/relation_ruleset_equal.conf')\ndataName = Name('/TestRule1')\nself.assertIsNotNone(policyManagerPrefix._findMatchingRule(dataName, 'data'\n    ), 'Prefix relation should match prefix name')\nself.assertIsNotNone(policyManagerEqual._findMatchingRule(dataName, 'data'),\n    'Equal relation should match prefix name')\nself.assertIsNone(policyManagerStrict._findMatchingRule(dataName, 'data'),\n    'Strict-prefix relation should not match prefix name')\ndataName = Name('/TestRule1/hi')\nself.assertIsNotNone(policyManagerPrefix._findMatchingRule(dataName, 'data'\n    ), 'Prefix relation should match longer name')\nself.assertIsNone(policyManagerEqual._findMatchingRule(dataName, 'data'),\n    'Equal relation should not match longer name')\nself.assertIsNotNone(policyManagerStrict._findMatchingRule(dataName, 'data'\n    ), 'Strict-prefix relation should match longer name')\ndataName = Name('/Bad/TestRule1/')\nself.assertIsNone(policyManagerPrefix._findMatchingRule(dataName, 'data'),\n    'Prefix relation should not match inner components')\nself.assertIsNone(policyManagerEqual._findMatchingRule(dataName, 'data'),\n    'Equal relation should not match inner components')\nself.assertIsNone(policyManagerStrict._findMatchingRule(dataName, 'data'),\n    'Strict-prefix relation should  not match inner components')\n"
-}

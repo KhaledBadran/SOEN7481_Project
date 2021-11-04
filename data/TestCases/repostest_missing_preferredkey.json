@@ -1,9 +1,0 @@
-{
-    "functionName": "test_missing_preferredkey",
-    "className": "TestGetReference",
-    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_converters.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Ensure can handle DOI with missing ``preferredKey``.\n        \"\"\"\nroot = etree.Element('experiment')\nref = etree.SubElement(root, 'bibliographyLink')\nref.set('doi', '10.1016/j.ijhydene.2007.04.008')\nref = get_reference(root)\nassert ref['doi'] == '10.1016/j.ijhydene.2007.04.008'\nassert ref['journal'] == 'International Journal of Hydrogen Energy'\nassert ref['year'] == 2007\nassert ref['volume'] == 32\nassert ref['pages'] == '2216-2226'\nassert len(ref['authors']) == 4\nassert {'name': 'N CHAUMEIX'} in ref['authors']\nassert {'name': 'S PICHON'} in ref['authors']\nassert {'name': 'F LAFOSSE'} in ref['authors']\nassert {'name': 'C PAILLARD'} in ref['authors']\n"
-}

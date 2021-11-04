@@ -1,9 +1,0 @@
-{
-    "functionName": "test_updates",
-    "className": "TestUpdateFunctions",
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_test_updates.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "A = theano.shared(lasagne.utils.floatX([1, 1, 1]))\nB = theano.shared(lasagne.utils.floatX([1, 1, 1]))\nupdate_func = getattr(lasagne.updates, method)\nupdates = update_func(self.f(A) + self.f(B), [A, B], **kwargs)\ndo_update = theano.function([], [], updates=updates)\nfor _ in range(10):\n    do_update()\nassert np.allclose(A.get_value(), B.get_value())\nassert np.allclose(A.get_value(), self.torch_values[method])\npytest.mark.parametrize('method, kwargs', [['sgd', {'learning_rate': 0.1}],\n    ['momentum', {'learning_rate': 0.1, 'momentum': 0.5}], [\n    'nesterov_momentum', {'learning_rate': 0.1, 'momentum': 0.5}], [\n    'adagrad', {'learning_rate': 0.1}], ['rmsprop', {'learning_rate': 0.01}\n    ], ['adadelta', {}], ['adam', {'learning_rate': 0.01}], ['adamax', {\n    'learning_rate': 0.01}], ['amsgrad', {'learning_rate': 0.01}]])"
-}

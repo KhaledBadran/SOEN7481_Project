@@ -1,9 +1,0 @@
-{
-    "functionName": "test_tuple_resolver_mixed",
-    "className": null,
-    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_resolvers.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from _pydevd_bundle.pydevd_resolver import TupleResolver\ntuple_resolver = TupleResolver()\nclass CustomTuple(tuple):\n    pass\nmy_tuple = CustomTuple([1, 2])\nmy_tuple.some_value = 10\ncontents_debug_adapter_protocol = clear_contents_debug_adapter_protocol(\n    tuple_resolver.get_contents_debug_adapter_protocol(my_tuple))\nlen_entry = contents_debug_adapter_protocol.pop(-1)\ncheck_len_entry(len_entry, (GENERATED_LEN_ATTR_NAME, 2))\nassert contents_debug_adapter_protocol == [('some_value', 10, '.some_value'\n    ), ('0', 1, '[0]'), ('1', 2, '[1]')]\n"
-}

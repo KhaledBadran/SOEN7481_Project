@@ -1,9 +1,0 @@
-{
-    "functionName": "realTestDialogAuthThreeAttempts",
-    "className": "TestAuthentication",
-    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_test_connection.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "TestAuthentication.Dialog.m = {b'Password, please:': b'stillnotverysecret'}\nTestAuthentication.Dialog.fail = True\nwith TempUser(self.connect().cursor(), 'pymysql_3a@localhost', self.\n    databases[0]['db'], 'three_attempts', 'stillnotverysecret') as u:\n    pymysql.connect(user='pymysql_3a', auth_plugin_map={b'dialog':\n        TestAuthentication.Dialog}, **self.db)\n    pymysql.connect(user='pymysql_3a', auth_plugin_map={b'dialog':\n        TestAuthentication.DialogHandler}, **self.db)\n    with self.assertRaises(pymysql.err.OperationalError):\n        pymysql.connect(user='pymysql_3a', auth_plugin_map={b'dialog':\n            object}, **self.db)\n    with self.assertRaises(pymysql.err.OperationalError):\n        pymysql.connect(user='pymysql_3a', auth_plugin_map={b'dialog':\n            TestAuthentication.DefectiveHandler}, **self.db)\n    with self.assertRaises(pymysql.err.OperationalError):\n        pymysql.connect(user='pymysql_3a', auth_plugin_map={\n            b'notdialogplugin': TestAuthentication.Dialog}, **self.db)\n    TestAuthentication.Dialog.m = {b'Password, please:': b'I do not know'}\n    with self.assertRaises(pymysql.err.OperationalError):\n        pymysql.connect(user='pymysql_3a', auth_plugin_map={b'dialog':\n            TestAuthentication.Dialog}, **self.db)\n    TestAuthentication.Dialog.m = {b'Password, please:': None}\n    with self.assertRaises(pymysql.err.OperationalError):\n        pymysql.connect(user='pymysql_3a', auth_plugin_map={b'dialog':\n            TestAuthentication.Dialog}, **self.db)\n"
-}

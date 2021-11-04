@@ -1,9 +1,0 @@
-{
-    "functionName": "test_renew",
-    "className": null,
-    "fileName": "/marten-de-vries_&_Flask-WebSub/tests_&_test_integration.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "topic = 'http://example.com/def'\non_success = Mock()\nsubscriber.add_success_handler(on_success)\nid = subscriber.subscribe(topic_url=topic, hub_url='http://localhost:5001/hub')\nwhile not on_success.called:\n    pass\nsubscriber.renew(id)\nwhile on_success.call_count != 2:\n    pass\nsubscriber.renew_close_to_expiration(margin_in_seconds=10000000000000)\nwhile on_success.call_count != 3:\n    pass\non_success.assert_has_calls([call(topic, id, 'subscribe'), call(topic, id,\n    'subscribe'), call(topic, id, 'subscribe')])\n"
-}

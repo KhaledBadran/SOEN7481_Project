@@ -1,9 +1,0 @@
-{
-    "functionName": "get_meta_graph_def",
-    "className": null,
-    "fileName": "/haotianteng_&_Chiron/chiron_&_load_run_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Gets `MetaGraphDef` from a directory containing a `SavedModel`.\n  Returns the `MetaGraphDef` for the given tag-set and SavedModel directory.\n  Args:\n    saved_model_dir: Directory containing the SavedModel.\n    tags: Comma separated list of tags used to identify the correct\n      `MetaGraphDef`.\n  Raises:\n    ValueError: An error when the given tags cannot be found.\n  Returns:\n    A `MetaGraphDef` corresponding to the given tags.\n  \"\"\"\nsaved_model = reader.read_saved_model(saved_model_dir)\nset_of_tags = set([tag.strip() for tag in tags.split(',')])\nfor meta_graph_def in saved_model.meta_graphs:\n    if set(meta_graph_def.meta_info_def.tags) == set_of_tags:\n        return meta_graph_def\nraise ValueError('Could not find MetaGraphDef with tags {}'.format(tags))\n"
-}

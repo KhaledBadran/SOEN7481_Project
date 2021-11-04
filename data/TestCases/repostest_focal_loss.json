@@ -1,9 +1,0 @@
-{
-    "functionName": "test_focal_loss",
-    "className": null,
-    "fileName": "/davidmascharka_&_MyNN/tests_&_test_losses.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "scores = data.draw(hnp.arrays(shape=(num_datum, num_classes), dtype=float,\n    elements=st.floats(1, 100)))\nassume((abs(scores.sum(axis=1)) > 0.001).all())\nscores_mygrad = Tensor(scores)\nscores_nn = Tensor(scores)\ntruth = np.zeros((num_datum, num_classes))\ntargets = data.draw(st.tuples(*(st.integers(0, num_classes - 1) for i in\n    range(num_datum))))\ntruth[range(num_datum), targets] = 1\nprobs = softmax(scores_mygrad)\nmygrad_focal_loss = sum(truth * (-alpha * (1 - probs + 1e-14) ** gamma *\n    log(probs))) / num_datum\nmygrad_focal_loss.backward(grad)\nnn_loss = softmax_focal_loss(scores_nn, targets, alpha=alpha, gamma=gamma)\nnn_loss.backward(grad)\nassert isinstance(nn_loss, Tensor) and nn_loss.ndim == 0\nassert_allclose(nn_loss.data, mygrad_focal_loss.data, atol=0.0001, rtol=0.0001)\nassert_allclose(scores_nn.grad, scores_mygrad.grad, atol=0.0001, rtol=0.0001)\nnn_loss.null_gradients()\nassert scores_nn.grad is None\ngiven(num_datum=st.integers(1, 100), num_classes=st.integers(1, 15), alpha=\n    st.floats(-1, 1), gamma=st.floats(0.0, 5), data=st.data(), grad=st.\n    floats(-1, 1))"
-}

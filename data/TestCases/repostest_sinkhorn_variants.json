@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sinkhorn_variants",
-    "className": null,
-    "fileName": "/PythonOT_&_POT/test_&_test_bregman.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "n = 100\nrng = np.random.RandomState(0)\nx = rng.randn(n, 2)\nu = ot.utils.unif(n)\nM = ot.dist(x, x)\nG0 = ot.sinkhorn(u, u, M, 1, method='sinkhorn', stopThr=1e-10)\nGs = ot.sinkhorn(u, u, M, 1, method='sinkhorn_stabilized', stopThr=1e-10)\nGes = ot.sinkhorn(u, u, M, 1, method='sinkhorn_epsilon_scaling', stopThr=1e-10)\nG_green = ot.sinkhorn(u, u, M, 1, method='greenkhorn', stopThr=1e-10)\nnp.testing.assert_allclose(G0, Gs, atol=1e-05)\nnp.testing.assert_allclose(G0, Ges, atol=1e-05)\nnp.testing.assert_allclose(G0, G_green, atol=1e-05)\nprint(G0, G_green)\n"
-}

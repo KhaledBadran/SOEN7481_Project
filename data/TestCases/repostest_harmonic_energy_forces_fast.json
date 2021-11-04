@@ -1,9 +1,0 @@
-{
-    "functionName": "test_harmonic_energy_forces_fast",
-    "className": "TestStructureMethods",
-    "fileName": "/mesonepigreco_&_CellConstructor/scripts_&_cellconstructor_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test the computation of harmonic forces with the new fast method (that is done in the polarization space)\n        against the one done in the full real space.\n        \"\"\"\ndyn = self.dynSnSe.Copy()\nN_RANDOM = 100\nnat = dyn.structure.N_atoms\nnat_sc = int(nat * np.prod(dyn.GetSupercell()))\nrandom_structures = dyn.ExtractRandomStructures(N_RANDOM, 100)\n__EPSIL__ = 1e-08\nu_disps = np.zeros((N_RANDOM, 3 * nat_sc), dtype=np.double)\nforces = np.zeros((N_RANDOM, nat_sc, 3), dtype=np.double)\nenergies = np.zeros(N_RANDOM, dtype=np.double)\nfor i, s in enumerate(random_structures):\n    u_disps[(i), :] = (s.coords - dyn.structure.generate_supercell(dyn.\n        GetSupercell()).coords).ravel()\n    energy_new, force_new = dyn.get_energy_forces(s)\n    energy_old, force_old = dyn.get_energy_forces(s, use_unit_cell=False)\n    assert np.abs(energy_new - energy_old\n        ) < __EPSIL__, 'Error, the energy are not correctly computed: {:.16e} Ry vs {:.16r} Ry'.format(\n        energy_new, energy_old)\n    diff = np.max(np.abs(force_new - force_old))\n    forces[(i), :, :] = force_new\n    energies[i] = energy_new\n    assert diff < __EPSIL__, 'Error, the forces are not correctly computed: max difference is {} Ry / A'.format(\n        diff)\nnew_energy, all_forces = dyn.get_energy_forces(None, displacement=u_disps,\n    use_unit_cell=True)\ndiff = np.max(np.abs(all_forces - forces))\nassert diff < __EPSIL__, 'Error, the forces computed all toghether differs of {} Ry / A'.format(\n    diff)\ndiff = np.max(np.abs(energies - new_energy))\nassert diff < __EPSIL__, 'Error, the energies computed all togheter differs of {} Ry / A'.format(\n    diff)\n"
-}

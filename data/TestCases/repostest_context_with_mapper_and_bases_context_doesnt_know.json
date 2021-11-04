@@ -1,9 +1,0 @@
-{
-    "functionName": "test_context_with_mapper_and_bases_context_doesnt_know",
-    "className": "GMSRTTest",
-    "fileName": "/openworm_&_PyOpenWorm/tests_&_DataObjectTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ctx = Mock()\nctx.resolve_class.return_value = None\nt1 = Mock()\nt2 = Mock()\nt1.rdf_type = R.URIRef('http://example.org/t1')\nt2.rdf_type = R.URIRef('http://example.org/t2')\nctx.mapper.base_classes.values.return_value = {t1, t2}\nself.assertIsNone(get_most_specific_rdf_type(types=set(), context=ctx))\n"
-}

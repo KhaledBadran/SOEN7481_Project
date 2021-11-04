@@ -1,9 +1,0 @@
-{
-    "functionName": "test_syncobjAdminSetVersion",
-    "className": null,
-    "fileName": "/bakwc_&_PySyncObj/test_syncobj.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "random.seed(42)\na = [getNextAddr(), getNextAddr(), getNextAddr()]\no1 = TestObj(a[0], [a[1]], dynamicMembershipChange=True)\no2 = TestObj(a[1], [a[0]], dynamicMembershipChange=True)\nassert not o1._isReady()\nassert not o2._isReady()\ndoTicks([o1, o2], 10.0, stopFunc=lambda : o1._isReady() and o2._isReady())\nassert o1._isReady()\nassert o2._isReady()\nassert o1.getCodeVersion() == 0\nassert o2.getCodeVersion() == 0\no2.testMethod()\ndoTicks([o1, o2], 10.0, stopFunc=lambda : o1.getValue('testKey') ==\n    'valueVer1' and o2.getValue('testKey') == 'valueVer1')\nassert o1.getValue('testKey') == 'valueVer1'\nassert o2.getValue('testKey') == 'valueVer1'\ntrueRes = 'SUCCESS SET_VERSION 1'\ncurrRes = {}\nargs = {o1: ['-conn', a[0], '-set_version', '1']}\ndoSyncObjAdminTicks([o1, o2], args, 10.0, currRes, stopFunc=lambda : \n    currRes.get(o1) is not None)\nassert currRes[o1] == trueRes\ndoTicks([o1, o2], 10.0, stopFunc=lambda : o1.getCodeVersion() == 1 and o2.\n    getCodeVersion() == 1)\nassert o1.getCodeVersion() == 1\nassert o2.getCodeVersion() == 1\no2.testMethod()\ndoTicks([o1, o2], 10.0, stopFunc=lambda : o1.getValue('testKey') ==\n    'valueVer2' and o2.getValue('testKey') == 'valueVer2')\nassert o1.getValue('testKey') == 'valueVer2'\nassert o2.getValue('testKey') == 'valueVer2'\no1._destroy()\no2._destroy()\n"
-}

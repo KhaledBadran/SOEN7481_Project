@@ -1,9 +1,0 @@
-{
-    "functionName": "sendEquations",
-    "className": null,
-    "fileName": "/FaradayRF_&_Faraday-Software/faraday_&_aprs.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Constructs an APRS equation string for each station and sends it to the socket\n\n    :param stations: List of dictionary organized station data\n    :param socket: APRS-IS server internet socket\n    :return: None\n    \"\"\"\nfor item in stations:\n    station = item[0]\n    sourceCallsign = station['SOURCECALLSIGN']\n    sourceID = station['SOURCEID']\n    destinationCallsign = station['DESTINATIONCALLSIGN']\n    destinationID = station['DESTINATIONID']\n    qConstruct = aprsConfig.get('APRS', 'QCONSTRUCT')\n    destAddress = aprsConfig.get('APRS', 'DESTADDRESS')\n    equationConfig = ','.join([str(aprsConfig.get('APRS', 'EQ0A')), str(\n        aprsConfig.get('APRS', 'EQ0B')), str(aprsConfig.get('APRS', 'EQ0C')\n        ), str(aprsConfig.get('APRS', 'EQ1A')), str(aprsConfig.get('APRS',\n        'EQ1B')), str(aprsConfig.get('APRS', 'EQ1C')), str(aprsConfig.get(\n        'APRS', 'EQ2A')), str(aprsConfig.get('APRS', 'EQ2B')), str(\n        aprsConfig.get('APRS', 'EQ2C')), str(aprsConfig.get('APRS', 'EQ3A')\n        ), str(aprsConfig.get('APRS', 'EQ3B')), str(aprsConfig.get('APRS',\n        'EQ3C')), str(aprsConfig.get('APRS', 'EQ4A')), str(aprsConfig.get(\n        'APRS', 'EQ4B')), str(aprsConfig.get('APRS', 'EQ4C'))])\n    node = sourceCallsign + '-' + str(sourceID)\n    destNode = destinationCallsign + '-' + str(destinationID)\n    if node != destNode:\n        equations = '{}>{},{},{}::{} :EQNS.{}\\r'.format(node, destAddress,\n            qConstruct, destNode, node, equationConfig)\n        return sendAPRSPacket(socket, equations)\n    elif node == destNode:\n        equations = '{}>{}::{} :EQNS.{}\\r'.format(node, destAddress, node,\n            equationConfig)\n        return sendAPRSPacket(socket, equations)\n"
-}

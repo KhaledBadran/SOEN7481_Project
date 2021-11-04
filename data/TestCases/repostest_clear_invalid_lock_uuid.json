@@ -1,9 +1,0 @@
-{
-    "functionName": "test_clear_invalid_lock_uuid",
-    "className": "TestCase",
-    "fileName": "/IntegralDefense_&_ACE/test_ace_api.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "root = create_root_analysis(uuid=str(uuid.uuid4()))\nroot.initialize_storage()\nroot.details = {'hello': 'world'}\nroot.save()\nself.assertTrue(os.path.exists(root.storage_dir))\nlock_uuid = str(uuid.uuid4())\nself.assertTrue(acquire_lock(root.uuid, lock_uuid))\nlock_uuid = str(uuid.uuid4())\nwith self.assertRaises(Exception):\n    self.assertFalse(ace_api.clear(root.uuid, lock_uuid))\nself.assertTrue(os.path.exists(root.storage_dir))\n"
-}

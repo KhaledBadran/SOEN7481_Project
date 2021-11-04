@@ -1,9 +1,0 @@
-{
-    "functionName": "test_api_exception_handler",
-    "className": null,
-    "fileName": "/jperras_&_Flask-ApiExceptions/test_apiexceptions.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Use JSONExceptionHandler.api_exception_handler to capture ApiException\n    objects that are raised.\"\"\"\n@app.route('/custom')\ndef testing():\n    \"\"\"Endpoint to raise our custom exception.\"\"\"\n    error = ApiError(code='teapot', message='I am a little teapot.')\n    raise ApiException(status_code=418, error=error)\next = JSONExceptionHandler(app)\next.register(code_or_exception=ApiException, handler=api_exception_handler)\nwith app.app_context():\n    with app.test_client() as c:\n        rv = c.get('/custom')\nassert rv.status_code == 418\nassert rv.headers['content-type'] == 'application/json'\njson_data = json.loads(rv.data)\nassert json_data['errors'][0]['message'] == 'I am a little teapot.'\nassert json_data['errors'][0]['code'] == 'teapot'\nassert json_data['errors'][0]['info'] is None\n"
-}

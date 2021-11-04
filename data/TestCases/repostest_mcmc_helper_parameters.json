@@ -1,9 +1,0 @@
-{
-    "functionName": "test_mcmc_helper_parameters",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_optimizers_&_test_mcmc.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data = build_data()\nmodel = build_model(data)\nhmc_helper = gpflow.optimizers.SamplingHelper(model.log_posterior_density,\n    model.trainable_parameters)\nfor i in range(len(model.trainable_parameters)):\n    assert model.trainable_parameters[i].shape == hmc_helper.current_state[i\n        ].shape\n    assert model.trainable_parameters[i] == hmc_helper._parameters[i]\n    assert model.trainable_parameters[i\n        ].unconstrained_variable == hmc_helper.current_state[i]\n"
-}

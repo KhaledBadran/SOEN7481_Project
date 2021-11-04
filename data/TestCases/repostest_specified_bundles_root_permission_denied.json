@@ -1,9 +1,0 @@
-{
-    "functionName": "test_specified_bundles_root_permission_denied",
-    "className": null,
-    "fileName": "/openworm_&_PyOpenWorm/tests_&_BundleTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with tempfile.TemporaryDirectory(prefix=__name__ + '.') as tempdir:\n    bundles_directory = p(tempdir, 'bundles')\n    b = Bundle('example', bundles_directory=bundles_directory)\n    makedirs(bundles_directory)\n    chmod(bundles_directory, 0)\n    try:\n        with pytest.raises(OSError, match='[Pp]ermission denied'):\n            b._get_bundle_directory()\n    finally:\n        chmod(bundles_directory, 511)\n"
-}

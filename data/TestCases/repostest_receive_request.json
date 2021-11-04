@@ -1,9 +1,0 @@
-{
-    "functionName": "test_receive_request",
-    "className": "TestKmipSession",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_session.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the session can correctly receive and parse a message\n        encoding.\n        \"\"\"\ncontent = b'\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00'\nexpected = utils.BytearrayStream(content)\nkmip_session = session.KmipSession(None, None, None, 'name')\nkmip_session._receive_bytes = mock.MagicMock(side_effect=[content, b''])\nobserved = kmip_session._receive_request()\nkmip_session._receive_bytes.assert_any_call(8)\nkmip_session._receive_bytes.assert_any_call(0)\nself.assertEqual(expected.buffer, observed.buffer)\n"
-}

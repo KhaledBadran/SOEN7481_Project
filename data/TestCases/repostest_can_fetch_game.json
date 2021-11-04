@@ -1,9 +1,0 @@
-{
-    "functionName": "test_can_fetch_game",
-    "className": "TestGameClient",
-    "fileName": "/steveYeah_&_PyBomb/tests_&_test_clients_&_test_game.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test the fetch method.\n\n        Check the reponse and call to GB API was correct.\n        \"\"\"\nres = game_client.fetch(1)\nassert isinstance(res, Response)\nassert res.uri == mock_response.url\nmock_response_json = mock_response.json()\nassert res.results == mock_response_json['results']\nassert res.num_page_results == mock_response_json['number_of_page_results']\nassert res.num_total_results == mock_response_json['number_of_total_results']\nmock_requests_get.assert_called_once_with('http://www.giantbomb.com/api/game/1'\n    , params={'api_key': 'fake_key', 'format': 'json'}, headers={\n    'User-Agent': 'Pybomb {}'.format(version)})\n"
-}

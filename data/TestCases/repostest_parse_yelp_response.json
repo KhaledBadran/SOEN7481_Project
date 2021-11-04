@@ -1,9 +1,0 @@
-{
-    "functionName": "test_parse_yelp_response",
-    "className": "TestGPS",
-    "fileName": "/lukeWaninger_&_GSCAP/tests_&_test_gps.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.assertRaises(TypeError, gps.parse_yelp_response, 1)\nt = gps.parse_yelp_response('nan')\nself.assertTrue({'name', 'rank_order', 'categories', 'major_categories'} ==\n    set(t.keys()))\nself.assertTrue(t['name'] == 'not found')\nself.assertTrue(t['rank_order'] == -1)\nself.assertTrue(t['major_categories'] == 'none')\nt = gps.parse_yelp_response('}{')\nself.assertTrue(t['major_categories'] == 'JSONDecodeError')\nresponses.reset()\nt = json.dumps(dict(businesses=[dict(name='test', categories=[dict(alias=\n    '3dprinting')])]))\nt = gps.parse_yelp_response(t)\nself.assertTrue(t['name'] == 'test')\nself.assertTrue(t['major_categories'] == 'personal_services')\n"
-}

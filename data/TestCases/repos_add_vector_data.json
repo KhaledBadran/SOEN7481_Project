@@ -1,9 +1,0 @@
-{
-    "functionName": "_add_vector_data",
-    "className": "_Hemisphere",
-    "fileName": "/nipy_&_PySurfer/surfer_&_viz.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "vertices = slice(None) if vertices is None else vertices\nx, y, z = np.array(self._geo_mesh.data.points.data)[vertices].T\nvector_alpha = min(vector_alpha, 0.9999999)\nwith warnings.catch_warnings(record=True):\n    quiver = mlab.quiver3d(x, y, z, vectors[:, (0)], vectors[:, (1)],\n        vectors[:, (2)], colormap='hot', vmin=fmin, scale_mode='vector',\n        vmax=fmax, figure=self._f, opacity=vector_alpha)\nquiver.actor.property.backface_culling = True\nquiver.mlab_source.update()\nquiver.glyph.glyph.scale_factor = scale_factor\nquiver.glyph.glyph.clamping = False\nquiver.glyph.glyph.range = 0.0, 1.0\nl_m = quiver.parent.vector_lut_manager\nl_m.load_lut_from_list(lut / 255.0)\nl_m.data_range = np.array([fmin, fmax])\nreturn quiver\n"
-}

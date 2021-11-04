@@ -1,9 +1,0 @@
-{
-    "functionName": "test_if_redis_returns_ping",
-    "className": "TestRedisCache",
-    "fileName": "/GeographicaGS_&_Longitude/longitude_&_core_&_tests_&_test_cache_redis.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.redis_mock.return_value.ping.return_value = True\nself.redis_mock.return_value.get.return_value = None\nself.assertIsNone(self.cache.get('fake_key'))\nself.redis_mock.return_value.get.assert_called_once()\nself.redis_mock.return_value.set.return_value = None\nself.assertFalse(self.cache.put('some_key', LongitudeQueryResponse()))\nself.redis_mock.return_value.exists.return_value = 1\nself.assertTrue(self.cache.put('some_key', LongitudeQueryResponse()))\nself.assertEqual(2, self.redis_mock.return_value.set.call_count)\nself.redis_mock.return_value.flushall.return_value = None\nself.cache.flush()\nself.redis_mock.return_value.flushall.assert_called_once()\n"
-}

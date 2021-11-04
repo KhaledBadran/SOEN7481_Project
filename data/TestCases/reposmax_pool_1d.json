@@ -1,9 +1,0 @@
-{
-    "functionName": "max_pool_1d",
-    "className": null,
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_pool.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "stride = pool_size if stride is None else stride\nidx = range(data.shape[-1])\nused_idx = set([])\nidx_sets = []\ni = 0\nwhile i < data.shape[-1]:\n    idx_set = set(range(i, i + pool_size))\n    idx_set = idx_set.intersection(idx)\n    if not idx_set.issubset(used_idx):\n        idx_sets.append(list(idx_set))\n        used_idx = used_idx.union(idx_set)\n    i += stride\ndata_pooled = np.array([data[..., idx_set].max(axis=-1) for idx_set in\n    idx_sets])\ndata_pooled = np.rollaxis(data_pooled, 0, len(data_pooled.shape))\nreturn data_pooled\n"
-}

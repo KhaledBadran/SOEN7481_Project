@@ -1,9 +1,0 @@
-{
-    "functionName": "test_good_redirect",
-    "className": null,
-    "fileName": "/RobertoPrevato_&_BlackSheep/tests_&_client_&_test_redirects.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "async with ClientSession(base_url=b'http://localhost:8080', pools=\n    pools_factory(responses)) as client:\n    response = await client.get(b'/')\n    assert response is not None\n    assert response.status == 200\n    content = await response.text()\n    assert content == expected_response_body\npytest.mark.asynciopytest.mark.parametrize('responses,expected_response_body', get_scenarios(\n    lambda status: [[Response(status, [(b'Location', b'/a')]), Response(\n    status, [(b'Location', b'/b')]), Response(200, None, TextContent(\n    'Hello, World!'))], 'Hello, World!']) + get_scenarios(lambda status: [[\n    Response(status, [(b'Location', b'/a')]), Response(200, None,\n    HtmlContent('<h1>Hello, World!</h1>'))], '<h1>Hello, World!</h1>']))"
-}

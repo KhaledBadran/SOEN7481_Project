@@ -1,9 +1,0 @@
-{
-    "functionName": "test_find_points",
-    "className": "TestManifold",
-    "fileName": "/nishaq503_&_CHESS/tests_&_test_manifold.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.assertEqual(1, len(self.manifold.find_points(self.data[0], radius=0.0)))\nself.assertLessEqual(1, len(self.manifold.find_points(self.data[0], radius=\n    1.0)))\npoint = self.data[0]\ndistances = [(p, d) for p, d in zip(range(self.data.shape[0]), cdist(np.\n    asarray([point]), self.data, self.manifold.metric)[0])]\nfor radius in [0.25, 0.5, 1.0, 2.0, 5.0]:\n    naive_results = {p: d for p, d in distances if d <= radius}\n    results = self.manifold.find_points(point, radius)\n    self.assertDictEqual(naive_results, results)\nreturn\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_img_path",
-    "className": "TestIconToIcon",
-    "fileName": "/BciPy_&_BciPy/bcipy_&_tasks_&_tests_&_test_icon_to_icon.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test img_path method\"\"\"\nparameters = self.parameters\nparameters['window_height'] = 1\nparameters['window_width'] = 1\nparameters['is_txt_stim'] = False\nimg_path = 'bcipy/static/images/rsvp_images/'\nparameters['path_to_presentation_images'] = img_path\nfixation = 'bcipy/static/images/bci_main_images/PLUS.png'\ndisplay = init_display_window(parameters)\ndaq = mock()\nfile_save = ''\nsignal_model = None\nlanguage_model = None\nfake = True\nauc_filename = ''\nwith patch('bcipy.tasks.rsvp.icon_to_icon.open', mock_open()):\n    task = RSVPIconToIconTask(display, daq, parameters, file_save,\n        signal_model, language_model, fake, False, auc_filename)\n    self.assertTrue(len(task.alp) > 0)\n    self.assertTrue('PLUS' not in task.alp)\n    self.assertEqual('bcipy/static/images/rsvp_images/A.png', task.img_path\n        ('A'))\n    self.assertEqual('A.png', task.img_path('A.png'))\n    self.assertEqual(fixation, task.img_path(fixation))\ndisplay.close()\n"
-}

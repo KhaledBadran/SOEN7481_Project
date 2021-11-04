@@ -1,9 +1,0 @@
-{
-    "functionName": "test_delete_attribute_from_managed_object_undeletable_attribute",
-    "className": "TestKmipEngine",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a PermissionDenied error is raised when attempting to delete\n        a required attribute from a managed object.\n        \"\"\"\ne = engine.KmipEngine()\ne._data_store = self.engine\ne._data_store_session_factory = self.session_factory\ne._data_session = e._data_store_session_factory()\ne._logger = mock.MagicMock()\nmanaged_object = pie_objects.SymmetricKey(enums.CryptographicAlgorithm.AES,\n    0, b'')\nargs = managed_object, ('Cryptographic Algorithm', None, None)\nself.assertRaisesRegex(exceptions.PermissionDenied,\n    'Cannot delete a required attribute.', e.\n    _delete_attribute_from_managed_object, *args)\n"
-}

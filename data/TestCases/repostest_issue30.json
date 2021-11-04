@@ -1,9 +1,0 @@
-{
-    "functionName": "test_issue30",
-    "className": null,
-    "fileName": "/Carbonara-Project_&_Carbonara-IDB/tests_&_test_issue30.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n\n    demonstrate get_func_cmt().\n\n    see github issue #30 for the backstory.\n\n    \"\"\"\ncd = os.path.dirname(__file__)\nidbpath = os.path.join(cd, 'data', 'issue30', 'issue30.i64')\nwith idb.from_file(idbpath) as db:\n    api = idb.IDAPython(db)\n    assert api.idc.GetCommentEx(4199832, 0) == 'local cmt'\n    assert api.idc.GetCommentEx(4199832, 1) == ''\n    assert api.ida_funcs.get_func_cmt(4199832, 0) == 'rep cmt'\n    assert api.ida_funcs.get_func_cmt(4199832, 1) == 'rep cmt'\n"
-}

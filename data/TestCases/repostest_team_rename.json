@@ -1,9 +1,0 @@
-{
-    "functionName": "test_team_rename",
-    "className": "TeamTest",
-    "fileName": "/cmsteffen-code_&_PyKBLib/tests_&_test_pykblib_team.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.team._api.call_api.side_effect = APIException('EXCEPTION')\nself.team.name = 'test_team.subteam'\nwith self.assertRaises(TeamException):\n    self.team.rename('new_name')\nself.team._api.call_api.assert_called_with('team', {'method':\n    'rename-subteam', 'params': {'options': {'team': 'test_team.subteam',\n    'new-team-name': 'test_team.new_name'}}})\nself.team._api.call_api.side_effect = None\nself.team._api.call_api.return_value = dict_to_ntuple({'result': 'success'})\nself.team.rename('new_name2')\nself.team._keybase._update_team_name.assert_called_with('test_team.subteam',\n    'test_team.new_name2')\n"
-}

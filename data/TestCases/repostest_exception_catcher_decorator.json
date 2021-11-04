@@ -1,9 +1,0 @@
-{
-    "functionName": "test_exception_catcher_decorator",
-    "className": null,
-    "fileName": "/OvalMoney_&_Nephthys/tests_&_test_clients_&_test_requests.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "caplog.set_level(logging.DEBUG, logger='requests_in')\ndef on_my_funct():\n    raise Exception()\ncatch_logger_exception(on_my_funct)()\nassert len(caplog.records) == 1\nrecord = caplog.records[0]\nassert record.levelno == logging.ERROR\nassert record.msg == 'Failed to log'\nassert record.exc_info is not None\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_remove_vol_from_storage_group_volume_list",
-    "className": "PyU4VProvisioningTest",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test remove_vol_from_storage_group multiple volumes.\"\"\"\npayload = {'executionOption': 'ASYNCHRONOUS', 'editStorageGroupActionParam':\n    {'removeVolumeParam': {'volumeId': [self.data.device_id]}}}\nwith mock.patch.object(self.provisioning, 'modify_storage_group') as mock_mod:\n    mock_mod.reset_mock()\n    self.provisioning.remove_vol_from_storagegroup(self.data.\n        storagegroup_name, [self.data.device_id], True)\n    mock_mod.assert_called_once_with(self.data.storagegroup_name, payload)\n"
-}

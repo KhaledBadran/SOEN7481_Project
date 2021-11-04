@@ -1,9 +1,0 @@
-{
-    "functionName": "test_classify_instance_hybrid_batch",
-    "className": null,
-    "fileName": "/Menelau_&_DESlib/deslib_&_tests_&_des_&_test_base.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "query = np.ones((3, 2))\nexpected = 1\npool_classifiers = create_pool_classifiers + create_pool_classifiers\ndes_test = BaseDES(pool_classifiers, mode='hybrid')\ndes_test.classes_ = np.array([0, 1])\ndes_test.n_classes_ = 2\nselected_indices = np.tile([True, True, False, False, False, True], (3, 1))\ncompetences = np.tile([0.55, 1.0, 0.2, 0.6, 0.75, 0.3], (3, 1))\ndes_test.estimate_competence = MagicMock(return_value=competences)\ndes_test.select = MagicMock(return_value=selected_indices)\npredictions = []\nfor clf in des_test.pool_classifiers:\n    predictions.append(clf.predict(query)[0])\npredicted_label = des_test.classify_with_ds(query, np.tile(predictions, (3, 1))\n    )\nassert np.allclose(predicted_label, expected)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "conduit_lengths",
-    "className": null,
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_models_&_geometry_&_throat_length.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Calculate conduit lengths. A conduit is defined as half pore + throat\n    + half pore.\n\n    Parameters\n    ----------\n    target : OpenPNM Object\n        The object which this model is associated with. This controls the\n        length of the calculated array, and also provides access to other\n        necessary properties.\n\n    throat_endpoints : string\n        Dictionary key of the throat endpoint values.\n\n    throat_diameter : string\n        Dictionary key of the throat length values.\n\n    throat_length : string (optional)\n        Dictionary key of the throat length values.  If not given then the\n        direct distance bewteen the two throat end points is used.\n\n    Returns\n    -------\n    Dictionary containing conduit lengths, which can be accessed via the dict\n    keys 'pore1', 'pore2', and 'throat'.\n\n    \"\"\"\nnetwork = target.project.network\nthroats = network.map_throats(throats=target.Ts, origin=target)\ncn = network['throat.conns'][throats]\nC1 = network['pore.coords'][cn[:, (0)]]\nC2 = network['pore.coords'][cn[:, (1)]]\nEP1 = network[throat_endpoints + '.head'][throats]\nEP2 = network[throat_endpoints + '.tail'][throats]\ntry:\n    Lt = network[throat_length][throats]\nexcept KeyError:\n    Lt = piecewise(target, throat_endpoints, throat_centroid)\nL1 = _norm(C1 - EP1, axis=1)\nL2 = _norm(C2 - EP2, axis=1)\nreturn {'pore1': L1, 'throat': Lt, 'pore2': L2}\n"
-}

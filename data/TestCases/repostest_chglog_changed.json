@@ -1,9 +1,0 @@
-{
-    "functionName": "test_chglog_changed",
-    "className": null,
-    "fileName": "/132nd-etcher_&_EPAB/test_&_test_main.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "repo = mock()\nwhen(repo).ensure()\nwhen(epab.utils).Repo(...).thenReturn(repo)\nexpect(_chglog, times=0)._chglog(...)\nrunner = CliRunner()\nwhen(repo).changed_files().thenReturn(['CHANGELOG.md'])\nresult = runner.invoke(cli, ['chglog'])\nassert result.exception\nassert result.exc_info[0] is SystemExit\nverify(repo).changed_files()\n"
-}

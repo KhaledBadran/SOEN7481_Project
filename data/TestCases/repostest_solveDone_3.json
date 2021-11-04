@@ -1,9 +1,0 @@
-{
-    "functionName": "test_solveDone_3",
-    "className": null,
-    "fileName": "/mworion_&_MountWizzard4/mw4_&_test_&_unit_tests_&_gui_&_extWindows_&_test_imageW.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "app.ui.checkAutoSolve.setChecked(False)\napp.ui.checkStackImages.setChecked(True)\nresult = {'success': True, 'raJ2000S': Angle(hours=10), 'decJ2000S': Angle(\n    degrees=20), 'angleS': 30, 'scaleS': 1, 'errorRMS_S': 3, 'flippedS': \n    False, 'imagePath': 'test', 'message': 'test'}\napp.app.astrometry.signals.done.connect(app.solveDone)\nwith qtbot.waitSignal(app.app.message) as blocker:\n    suc = app.solveDone(result=result)\n    assert suc\nassert ['Solved :             RA: 10:00:00 (10.000), DEC: +20:00:00 (20.000), '\n    , 0] == blocker.args\n"
-}

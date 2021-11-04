@@ -1,9 +1,0 @@
-{
-    "functionName": "test_GetParticipantDetails",
-    "className": null,
-    "fileName": "/incf-nidash_&_PyNIDM/nidm_&_experiment_&_tools_&_tests_&_test_rest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "import time\nstart = time.time()\nrestParser = RestParser()\nif cmu_test_project_uuid:\n    project = cmu_test_project_uuid\nelse:\n    projects = restParser.run(BRAIN_VOL_FILES, '/projects')\n    project = projects[0]\nimport time\nstart = time.time()\nsubjects = restParser.run(BRAIN_VOL_FILES, '/projects/{}/subjects'.format(\n    project))\nsubject = subjects['uuid'][0]\nQuery.GetParticipantInstrumentData(BRAIN_VOL_FILES, project, subject)\ndetails = Query.GetParticipantDetails(BRAIN_VOL_FILES, project, subject)\nassert 'uuid' in details\nassert 'id' in details\nassert 'activity' in details\nassert 'instruments' in details\nassert 'derivatives' in details\nend = time.time()\nruntime = end - start\n"
-}

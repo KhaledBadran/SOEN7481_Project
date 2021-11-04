@@ -1,9 +1,0 @@
-{
-    "functionName": "test_compress",
-    "className": null,
-    "fileName": "/PaulHancock_&_Aegean/tests_&_test_fits_interp.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test the compression functionality\"\"\"\nif not fits_interp.compress(None, factor=-1) is None:\n    raise AssertionError()\nif not fits_interp.compress(None, factor=0.3) is None:\n    raise AssertionError()\nif not fits_interp.compress(None, factor=0) is None:\n    raise AssertionError()\nfname = 'tests/test_files/1904-66_AIT.fits'\nhdulist = fits.open(fname)\ncd1 = hdulist[0].header['CDELT1']\ncd2 = hdulist[0].header['CDELT2']\nif not isinstance(fits_interp.compress(hdulist, factor=10), fits.HDUList):\n    raise AssertionError()\nhdulist[0].header['CD1_1'] = cd1\ndel hdulist[0].header['CDELT1']\nhdulist[0].header['CD2_2'] = cd2\ndel hdulist[0].header['CDELT2']\nif not isinstance(fits_interp.compress(hdulist, factor=10), fits.HDUList):\n    raise AssertionError()\ndel hdulist[0].header['CD2_2']\nif not fits_interp.compress(hdulist, factor=10) is None:\n    raise AssertionError()\ndel hdulist[0].header['CD1_1']\nif not fits_interp.compress(hdulist, factor=10) is None:\n    raise AssertionError()\n"
-}

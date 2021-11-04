@@ -1,9 +1,0 @@
-{
-    "functionName": "test_wmc2",
-    "className": null,
-    "fileName": "/wannesm_&_PySDD/tests_&_test_wmcstochastic.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "vtree = Vtree(var_count=4, var_order=[2, 1, 4, 3], vtree_type='balanced')\nsdd = SddManager.from_vtree(vtree)\na, b, c, d = [sdd.literal(i) for i in range(1, 5)]\nformula = a & b | b & c | c & d\nweights = array('d', [0.8, 0.7, 0.6, 0.5, 0.5, 0.4, 0.3, 0.2])\nwmc = WmcManager(formula, log_mode=False)\nwmc.set_literal_weights_from_array(weights)\nwmc_result = wmc.propagate()\nwmcs = WmcStochastic(formula, log_mode=False)\nwmcs.set_literal_weights_from_array(weights)\nnb_pos, nb_neg, scaling = 0, 0, 1\nwmcs_results = []\niterations = 1000\nfor i in range(iterations):\n    random.seed()\n    nb_pos_i, nb_neg_i, scaling_i = wmcs.propagate_counts(bitlength=10)\n    nb_pos += nb_pos_i\n    nb_neg += nb_neg_i\n    scaling = scaling_i\n    wmcs_results.append(nb_pos / (nb_pos + nb_neg) * scaling)\nprint(wmcs_results[-1])\nif verbose:\n    import matplotlib.pyplot as plt\n    plt.plot([(i * 10) for i in range(iterations)], [wmc_result] * iterations)\n    plt.plot([(i * 10) for i in range(iterations)], wmcs_results)\n    plt.savefig('stochastic_wmc.png')\npytest.mark.skip(reason=\n    'Takes too long to generate the figure and is the same test as test_wmc1')"
-}

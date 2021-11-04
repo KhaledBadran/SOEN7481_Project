@@ -1,9 +1,0 @@
-{
-    "functionName": "test_inverse_transform_valid_data",
-    "className": "TestTunable",
-    "fileName": "/HDI-Project_&_BTB/tests_&_tuning_&_test_tunable.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that the inverse transform method is calling the hyperparameters.\"\"\"\nself.bhp.inverse_transform.return_value = [[True]]\nself.chp.inverse_transform.return_value = [['cat']]\nself.ihp.inverse_transform.return_value = [[1]]\nvalues = [[1, 0, 1]]\nresult = self.instance.inverse_transform(values)\nexpected_result = pd.DataFrame({'bhp': [True], 'chp': ['cat'], 'ihp': [1]},\n    dtype=object)\nself.bhp.inverse_transform.assert_called_once_with([1])\nself.chp.inverse_transform.assert_called_once_with([0])\nself.ihp.inverse_transform.assert_called_once_with([1])\npd.testing.assert_frame_equal(result, expected_result)\n"
-}

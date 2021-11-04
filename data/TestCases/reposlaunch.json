@@ -1,9 +1,0 @@
-{
-    "functionName": "launch",
-    "className": null,
-    "fileName": "/PRIArobotics_&_HedgehogServer/hedgehog_&_server_&___init__.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "from hedgehog.server.hardware.simulated import SimulatedHardwareAdapter\nsimulator = hardware_factory == SimulatedHardwareAdapter\nargs = parse_args(simulator)\nif args.logging_conf:\n    logging.config.fileConfig(args.logging_conf)\nif simulator and args.simulate_sensors:\n    hardware_factory = partial(hardware_factory, simulate_sensors=True)\nconfig = configparser.ConfigParser()\nconfig.read(args.config_file)\nif args.scan_config and os.path.isfile(args.scan_config_file):\n    scan_config = configparser.ConfigParser()\n    scan_config.read(args.scan_config_file)\n    apply_scan_config(config, scan_config)\n    with open(args.config_file, mode='w') as f:\n        config.write(f)\nport = args.port or config.getint('default', 'port', fallback=0)\nwith suppress(KeyboardInterrupt):\n    start(hardware_factory, port)\n"
-}

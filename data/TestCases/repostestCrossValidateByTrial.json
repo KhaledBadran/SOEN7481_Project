@@ -1,9 +1,0 @@
-{
-    "functionName": "testCrossValidateByTrial",
-    "className": "CrossValidationTest",
-    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_cross_validation.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "ma = mock.MagicMock()\nma.get_training_data = mock.MagicMock(\n    'ax.modelbridge.base.ModelBridge.get_training_data', autospec=True,\n    return_value=self.training_data[1:3])\nwith self.assertRaises(ValueError):\n    cross_validate_by_trial(model=ma)\nma = mock.MagicMock()\nma.get_training_data = mock.MagicMock(\n    'ax.modelbridge.base.ModelBridge.get_training_data', autospec=True,\n    return_value=self.training_data)\nma.cross_validate = mock.MagicMock(\n    'ax.modelbridge.base.ModelBridge.cross_validate', autospec=True,\n    return_value=self.observation_data)\nwith self.assertRaises(ValueError):\n    cross_validate_by_trial(model=ma, trial=10)\nresult = cross_validate_by_trial(model=ma)\nself.assertEqual(len(result), 1)\nz = ma.cross_validate.mock_calls\nself.assertEqual(len(z), 1)\ntrain_trials = [obs.features.trial_index for obs in z[0][2]['cv_training_data']\n    ]\ntest_trials = [obsf.trial_index for obsf in z[0][2]['cv_test_points']]\nself.assertEqual(train_trials, [0, 1])\nself.assertEqual(test_trials, [2])\nself.assertEqual(len(result), 1)\nself.assertEqual(result[0].observed.features.trial_index, 2)\n"
-}

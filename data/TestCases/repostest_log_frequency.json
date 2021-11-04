@@ -1,9 +1,0 @@
-{
-    "functionName": "test_log_frequency",
-    "className": null,
-    "fileName": "/DAI-Lab_&_CTGAN/tests_&_integration_&_test_ctgan.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data = pd.DataFrame({'continuous': np.random.random(1000), 'discrete': np.\n    repeat(['a', 'b', 'c'], [950, 25, 25])})\ndiscrete_columns = ['discrete']\nctgan = CTGANSynthesizer()\nctgan.fit(data, discrete_columns, epochs=100)\nsampled = ctgan.sample(10000)\ncounts = sampled['discrete'].value_counts()\nassert counts['a'] < 6500\nctgan = CTGANSynthesizer()\nctgan.fit(data, discrete_columns, epochs=100, log_frequency=False)\nsampled = ctgan.sample(10000)\ncounts = sampled['discrete'].value_counts()\nassert counts['a'] > 9000\n"
-}

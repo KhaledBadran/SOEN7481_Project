@@ -1,9 +1,0 @@
-{
-    "functionName": "test_merge_layer",
-    "className": null,
-    "fileName": "/Vizzuality_&_LMIPy/tests_&_test_lmipy.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "staging_layer = Layer('626e08ed-15b5-499a-8a46-9a5cb52d0a30', server=\n    'https://staging-api.globalforestwatch.org')\nstaging_layer.update(token=API_TOKEN, update_params={'name':\n    'Template Layer Staging', 'iso': [], 'layerConfig': {}, 'legendConfig':\n    {}, 'applicationConfig': {}, 'interactionConfig': {}})\nproduction_layer = Layer('25dcb710-6b85-4bfa-b09b-e4c70c33f381')\nwhitelist = ['layerConfig', 'legendConfig', 'applicationConfig',\n    'interactionConfig', 'description', 'iso', 'application', 'provider',\n    'published']\nmerged_layer = production_layer.merge(token=API_TOKEN, target_layer=None,\n    target_layer_id='626e08ed-15b5-499a-8a46-9a5cb52d0a30', target_server=\n    'https://staging-api.globalforestwatch.org', key_whitelist=whitelist,\n    force=True)\nmerged_atts = {k: v for k, v in merged_layer.attributes.items() if k in\n    whitelist}\nproduction_atts = {k: v for k, v in production_layer.attributes.items() if \n    k in whitelist}\nassert merged_atts == production_atts\n"
-}

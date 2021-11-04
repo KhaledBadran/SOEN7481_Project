@@ -1,9 +1,0 @@
-{
-    "functionName": "clean_simple_case_references",
-    "className": null,
-    "fileName": "/Tsjerk_&_Insane/tests_&_test_regression.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Delete reference files for the simple tests if they are not in use anymore.\n    \"\"\"\nsimple_test_cases = [_split_case(case)[2] for case in SIMPLE_TEST_CASES]\nsimple_case_ref_data = os.path.join(DATA_DIR, 'simple_case')\nfor path in glob.glob(os.path.join(simple_case_ref_data, '*')):\n    base_name = os.path.basename(os.path.splitext(path)[0])\n    if base_name not in simple_test_cases:\n        print(path)\n        os.remove(path)\n"
-}

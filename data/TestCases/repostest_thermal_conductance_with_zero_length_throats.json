@@ -1,9 +1,0 @@
-{
-    "functionName": "test_thermal_conductance_with_zero_length_throats",
-    "className": "ThermalConductanceTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_physics_&_ThermalConductanceTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.geo['throat.conduit_lengths.pore1'] = 0.25\nself.geo['throat.conduit_lengths.throat'] = 0.0\nself.geo['throat.conduit_lengths.pore2'] = 0.15\nself.phase['pore.thermal_conductivity'] = 1\nmod = op.models.physics.thermal_conductance.series_resistors\nself.phys.add_model(propname='throat.thermal_conductance', model=mod)\nself.phys.regenerate_models()\nactual = self.phys['throat.thermal_conductance'].mean()\nassert_approx_equal(actual, desired=2.5)\n"
-}

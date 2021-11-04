@@ -1,9 +1,0 @@
-{
-    "functionName": "test_locate_identifiers",
-    "className": "AstParseTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_ast.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"test the location of identifiers in a python code string\"\"\"\ncode = \"\"\"\na = 10\nb = 5\nc = x * 5 + a + b + q\n(g,h,i) = (1,2,3)\n[u,k,j] = [4,5,6]\nfoo.hoho.lala.bar = 7 + gah.blah + u + blah\nfor lar in (1,2,3):\n    gh = 5\n    x = 12\n(\"hello world, \", a, b)\n(\"Another expr\", c)\n\"\"\"\nparsed = ast.PythonCode(code, **exception_kwargs)\neq_(parsed.declared_identifiers, set(['a', 'b', 'c', 'g', 'h', 'i', 'u',\n    'k', 'j', 'gh', 'lar', 'x']))\neq_(parsed.undeclared_identifiers, set(['x', 'q', 'foo', 'gah', 'blah']))\nparsed = ast.PythonCode('x + 5 * (y-z)', **exception_kwargs)\nassert parsed.undeclared_identifiers == set(['x', 'y', 'z'])\nassert parsed.declared_identifiers == set()\n"
-}

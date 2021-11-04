@@ -1,9 +1,0 @@
-{
-    "functionName": "test_appveyor_no_artifacts",
-    "className": null,
-    "fileName": "/132nd-etcher_&_EPAB/test_&_test_cmd_&_test_release.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ctx = mock()\nrepo = mock()\nCTX.repo = repo\nCTX.appveyor = True\nwhen(epab.utils).get_next_version().thenReturn('next_version')\nexpect(elib_run).run(contains(\n    'appveyor SetVariable -Name RELEASE_DESCRIPTION -Value ')),\nexpect(elib_run).run('appveyor UpdateBuild -Version next_version-0001-ABCDEF')\nexpect(elib_run).run(contains('python.exe setup.py bdist_wheel'))\nexpect(elib_run).run(\n    'appveyor SetVariable -Name EPAB_VERSION -Value next_version')\nexpect(shutil, times=0).copy(...)\nexpect(subprocess, atleast=1).call(...)\nmonkeypatch.setenv('APPVEYOR_REPO_BRANCH', 'branch')\nmonkeypatch.setenv('APPVEYOR_BUILD_NUMBER', '0001')\nmonkeypatch.setenv('APPVEYOR_REPO_COMMIT', 'ABCDEF')\nepab.cmd._release._release(ctx)\n"
-}

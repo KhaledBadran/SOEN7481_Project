@@ -1,9 +1,0 @@
-{
-    "functionName": "test_grid_remove",
-    "className": null,
-    "fileName": "/SeverTopan_&_AdjSim/test_&_test_index.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from adjsim import core, analysis, decision\nclass TestAgent(core.SpatialAgent):\n\n    def __init__(self, pos):\n        super().__init__(pos=pos)\ntest_sim = core.Simulation()\ntest_sim.agents.add(TestAgent(np.array([0, 0]) * grid_size))\ntest_sim.agents.add(TestAgent(np.array([0, 1]) * grid_size))\ntest_sim.agents.add(TestAgent(np.array([1, 1]) * grid_size))\ntest_sim.agents.add(TestAgent(np.array([2, 0]) * grid_size))\nagent_to_remove = TestAgent(np.array([-1, 0]) * grid_size)\ntest_sim.agents.add(agent_to_remove)\ntest_sim.indices.grid.initialize(grid_size)\ntest_sim.agents.remove(agent_to_remove)\nassert len(test_sim.indices.grid.get_neighbours(np.array([0, 0]) * grid_size)\n    ) == 2\ncommon.step_simulate_interpolation(test_sim)\nassert len(test_sim.indices.grid.get_neighbours(np.array([0, 0]) * grid_size)\n    ) == 2\npytest.mark.parametrize('grid_size', [1, 5, 7, 12, 17])"
-}

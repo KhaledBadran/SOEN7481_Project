@@ -1,9 +1,0 @@
-{
-    "functionName": "test_txfunc_vars",
-    "className": null,
-    "fileName": "/open-source-economics_&_OG-USA/regression_&_test_regression.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Compare tax function variables\n    txfunc_output: output read from TxFuncEst_*.pkl\n                   created in txfunc.tax_func_estimate\n    txfunc_var: tax function output variable from TXFUNC_VARS\n    \"\"\"\nreg = txfunc_output[0][txfunc_var]\nnew = txfunc_output[1][txfunc_var]\nassert np.allclose(reg, new, atol=0.001, rtol=0.001)\npytest.mark.regressionpytest.mark.parametrize('txfunc_var', TXFUNC_VARS)"
-}

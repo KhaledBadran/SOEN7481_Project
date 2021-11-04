@@ -1,9 +1,0 @@
-{
-    "functionName": "test_submit_failed_analysis",
-    "className": "TestCase",
-    "fileName": "/IntegralDefense_&_ACE/test_ace_api.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.stop_api_server()\nanalysis = ace_api.Analysis(description='Test Analysis')\nanalysis.add_observable(F_IPV4, '1.2.3.4', local_time(), directives=[\n    DIRECTIVE_NO_SCAN])\nanalysis.add_tag('test')\ntemp_path = os.path.join(saq.TEMP_DIR, 'test.txt')\nwith open(temp_path, 'w') as fp:\n    fp.write('test')\nanalysis.add_file(temp_path, relative_storage_path='dest/test.txt')\nwith self.assertRaises(Exception):\n    uuid = analysis.submit(f'https://{saq.API_PREFIX}', ssl_verification=\n        saq.CONFIG['SSL']['ca_chain_path'])\nself.assertEquals(log_count('unable to submit '), 1)\ndir_list = os.listdir('.saq_alerts')\nself.assertEquals(len(dir_list), 1)\ntarget_path = os.path.join('.saq_alerts', dir_list[0], 'alert')\nwith open(target_path, 'rb') as fp:\n    new_analysis = pickle.load(fp)\nself.assertEquals(new_analysis.submit_kwargs, analysis.submit_kwargs)\ndata_test = None\nwith open(os.path.join('.saq_alerts', new_analysis.uuid, 'dest/test.txt'), 'r'\n    ) as fp:\n    data_test = fp.read()\nself.assertEquals(data_test, 'test')\nself.start_api_server()\nace_api.submit_failed_alerts(delete_on_success=True)\ndir_list = os.listdir('.saq_alerts')\nself.assertEquals(len(dir_list), 0)\n"
-}

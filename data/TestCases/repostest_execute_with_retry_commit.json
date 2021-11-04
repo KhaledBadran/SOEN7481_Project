@@ -1,9 +1,0 @@
-{
-    "functionName": "test_execute_with_retry_commit",
-    "className": "TestCase",
-    "fileName": "/IntegralDefense_&_ACE/lib_&_saq_&_test_database.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "_uuid = str(uuid.uuid4())\n_lock_uuid = str(uuid.uuid4())\ndisable_cached_db_connections()\nwith get_db_connection() as db:\n    c = db.cursor()\n    execute_with_retry(db, c,\n        'INSERT INTO locks ( uuid, lock_time ) VALUES ( %s, NOW() )', (\n        _uuid,), commit=True)\nwith get_db_connection() as db:\n    c = db.cursor()\n    c.execute('SELECT uuid FROM locks WHERE uuid = %s', (_uuid,))\n    self.assertIsNotNone(c.fetchone())\n_uuid = str(uuid.uuid4())\n_lock_uuid = str(uuid.uuid4())\nwith get_db_connection() as db:\n    c = db.cursor()\n    execute_with_retry(db, c,\n        'INSERT INTO locks ( uuid, lock_time ) VALUES ( %s, NOW() )', (\n        _uuid,), commit=False)\nwith get_db_connection() as db:\n    c = db.cursor()\n    c.execute('SELECT uuid FROM locks WHERE uuid = %s', (_uuid,))\n    self.assertIsNone(c.fetchone())\nenable_cached_db_connections()\n"
-}

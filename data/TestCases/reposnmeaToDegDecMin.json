@@ -1,9 +1,0 @@
-{
-    "functionName": "nmeaToDegDecMin",
-    "className": null,
-    "fileName": "/FaradayRF_&_Faraday-Software/faraday_&_aprs.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Converts NMEA string latitude and longitude data into degree decimal minutes data compatible with\n    APRS-IS server requirements per APRS Protocol Version 1.0\n\n    :param latitude: NMEA latitude string\n    :param longitude: NMEA longitude string\n    :return: list of latitude and longitude strings per APRS protocol version 1\n    \"\"\"\nlatDeg = latitude[:2]\nlonDeg = longitude[:3]\nlatDec = round(float(latitude[2:]), 2)\nlonDec = round(float(longitude[3:]), 2)\nlatDec = str('%.2f' % latDec).zfill(5)\nlonDec = str('%.2f' % lonDec).zfill(5)\nlatString = latDeg + str(latDec)\nlonString = lonDeg + str(lonDec)\nreturn [latString, lonString]\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_daemon_context_first",
-    "className": null,
-    "fileName": "/PRIArobotics_&_HedgehogClient/tests_&_test_async_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "port, value = 0, 0\nasync with start_dummy(Commands.analog_request, port, value) as server:\n    client = HedgehogClient(zmq_aio_ctx, server)\n    with pytest.raises(RuntimeError):\n        async with client.daemon:\n            pass\n    async with client:\n        assert await client.get_analog(port) == value\npytest.mark.asyncio"
-}

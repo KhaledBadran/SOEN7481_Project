@@ -1,9 +1,0 @@
-{
-    "functionName": "test_small_cluster_size",
-    "className": null,
-    "fileName": "/vc1492a_&_PyNomaly/tests_&_test_loop.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test to ensure that the program exits when the specified number of neighbors\n    is larger than the smallest cluster size in the input data.\n    :param X_n140_outliers: A pytest Fixture that generates 140 observations.\n    :return: None\n    \"\"\"\na = [0] * 120\nb = [1] * 18\ncluster_labels = a + b\nclf = loop.LocalOutlierProbability(X_n140_outliers, n_neighbors=50,\n    cluster_labels=cluster_labels, use_numba=NUMBA)\nwith pytest.raises(SystemExit) as record_a, pytest.warns(UserWarning\n    ) as record_b:\n    clf.fit()\nassert record_a.type == SystemExit\nassert len(record_b) == 1\nassert record_b[0].message.args[0\n    ] == 'Number of neighbors specified larger than smallest cluster. Specify a number of neighbors smaller than the smallest cluster size (observations in smallest cluster minus one).'\n"
-}

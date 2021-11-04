@@ -1,9 +1,0 @@
-{
-    "functionName": "test_normalization_works",
-    "className": "TestNormalization",
-    "fileName": "/ornlneutronimaging_&_NeuNorm/tests_&_NeuNorm_&_normalizing_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"assert sample and ob normalization works with and without roi\"\"\"\nsample_tif_folder = self.data_path + '/tif/sample'\nob_tif_folder = self.data_path + '/tif/ob'\no_norm = Normalization()\no_norm.load(folder=sample_tif_folder, auto_gamma_filter=False)\no_norm.load(folder=ob_tif_folder, data_type='ob', auto_gamma_filter=False)\nroi = ROI(x0=0, y0=0, x1=3, y1=2)\n_sample = o_norm.data['sample']['data'][0]\n_expected = _sample / np.mean(_sample[0:3, 0:4])\no_norm.normalization(roi=roi)\n_returned = o_norm.data['sample']['data'][0]\nassert (_expected == _returned).all()\no_norm1 = Normalization()\no_norm1.load(folder=sample_tif_folder, auto_gamma_filter=False)\no_norm1.load(folder=ob_tif_folder, data_type='ob', auto_gamma_filter=False)\n_expected = o_norm1.data['sample']['data'][0]\no_norm1.normalization()\n_returned = o_norm1.data['sample']['data'][0]\nassert (_expected == _returned).all()\no_norm = Normalization()\no_norm.load(folder=sample_tif_folder, auto_gamma_filter=False)\no_norm.load(folder=ob_tif_folder, data_type='ob', auto_gamma_filter=False)\nnorm_roi = ROI(x0=0, y0=0, x1=3, y1=2)\no_norm.normalization(roi=norm_roi)\n_ob = o_norm.data['ob']['data'][0]\n_expected = _ob / np.mean(_ob[0:3, 0:4])\n_returned = o_norm.data['ob']['data'][0]\nassert (_expected == _returned).all()\no_norm = Normalization()\no_norm.load(folder=sample_tif_folder, auto_gamma_filter=False)\no_norm.load(folder=ob_tif_folder, data_type='ob', auto_gamma_filter=False)\n_expected = o_norm.data['ob']['data'][0]\no_norm.normalization()\n_returned = o_norm.data['ob']['data'][0]\nassert (_expected == _returned).all()\n"
-}

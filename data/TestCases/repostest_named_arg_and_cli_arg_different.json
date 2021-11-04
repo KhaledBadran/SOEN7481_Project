@@ -1,9 +1,0 @@
-{
-    "functionName": "test_named_arg_and_cli_arg_different",
-    "className": "CLICommandWrapperTest",
-    "fileName": "/openworm_&_PyOpenWorm/tests_&_CommandTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "m = []\nclass Spec(object):\n\n    def test(self, function_argument):\n        \"\"\"\n                Description\n\n                Parameters\n                ----------\n                function_argument : str\n                    description\n                \"\"\"\n        m.append(function_argument)\nhints = {'test': {(METHOD_NAMED_ARG, 'function_argument'): {'names': [\n    'command_line_argument']}}}\nwith noexit():\n    CLICommandWrapper(Spec(), hints=hints, program_name='test').main(args=[\n        'test', 'hello'])\nself.assertEqual(m, ['hello'])\n"
-}

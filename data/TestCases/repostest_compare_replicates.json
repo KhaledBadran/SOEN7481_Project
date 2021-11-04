@@ -1,9 +1,0 @@
-{
-    "functionName": "test_compare_replicates",
-    "className": "TestCoverageTerminator",
-    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_detect_coverage_term.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "texs = {'track_tex_track_notex': 0}\nargs = self.mock_args.mock()\nargs.replicates = {'tex': ['all_1'], 'frag': ['all_1']}\nargs.tex_notex = 2\ncond = 'texnotex'\nterm_covers = [{'track': 'track_tex', 'high': 300, 'low': 50, 'detect':\n    'True', 'diff': 250, 'type': 'tex'}, {'track': 'track_notex', 'high': \n    200, 'low': 50, 'detect': 'True', 'diff': 150, 'type': 'notex'}]\ndiff_cover, diff, term_datas, detect_num = dct.compare_replicates(term_covers,\n    texs, cond, args)\nself.assertEqual(diff_cover, 250)\nself.assertDictEqual(diff, {'track': 'track_tex', 'detect': 'True', 'high':\n    300, 'low': 50, 'type': 'tex', 'diff': 250})\nref_datas = [{'track': 'track_notex', 'detect': 'True', 'high': 200, 'low':\n    50, 'type': 'notex', 'diff': 150}, {'track': 'track_tex', 'detect':\n    'True', 'high': 300, 'low': 50, 'type': 'tex', 'diff': 250}]\nfor index in range(0, 2):\n    self.assertDictEqual(ref_datas[index], term_datas[index])\nself.assertEqual(detect_num, 1)\nargs.replicates = {'tex': ['all_1'], 'frag': ['all_1']}\ncond = 'frag'\nterm_covers = [{'track': 'frag', 'high': 10, 'low': 0, 'detect': 'False',\n    'diff': 10, 'type': 'frag'}]\ndiff_cover, diff, term_datas, detect_num = dct.compare_replicates(term_covers,\n    texs, cond, args)\nself.assertEqual(diff_cover, 10)\nself.assertDictEqual(diff, {'detect': 'False', 'type': 'frag', 'low': 0,\n    'diff': 10, 'track': 'frag', 'high': 10})\nself.assertDictEqual(term_datas[0], {'detect': 'False', 'type': 'frag',\n    'low': 0, 'diff': 10, 'track': 'frag', 'high': 10})\nself.assertEqual(detect_num, 1)\n"
-}

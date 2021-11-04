@@ -1,9 +1,0 @@
-{
-    "functionName": "test_gp_quadratic_kernel",
-    "className": "TestPrediction",
-    "fileName": "/SUNCAT-Center_&_CatLearn/test_&_test_predict.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test Gaussian process predictions with the quadratic kernel.\"\"\"\ntrain_features, train_targets, test_features, test_targets = get_data()\nkdict = [{'type': 'quadratic', 'slope': 1.0, 'degree': 1.0, 'scaling': 1.0,\n    'bounds': ((1e-05, None),) * (np.shape(train_features)[1] + 1),\n    'scaling_bounds': ((0.0, None),)}]\ngp = GaussianProcess(train_fp=train_features, train_target=train_targets,\n    kernel_list=kdict, regularization=np.sqrt(0.001),\n    optimize_hyperparameters=True, scale_data=True)\npred = gp.predict(test_fp=test_features, test_target=test_targets,\n    get_validation_error=True, get_training_error=True)\nself.assertEqual(len(pred['prediction']), len(test_features))\nprint('quadratic prediction:', pred['validation_error']['rmse_average'])\n"
-}

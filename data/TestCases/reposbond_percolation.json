@@ -1,9 +1,0 @@
-{
-    "functionName": "bond_percolation",
-    "className": null,
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_topotools_&_topotools.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Calculates the site and bond occupancy status for a bond percolation\n    process given a list of occupied bonds.\n\n    Parameters\n    ----------\n    ij : array_like\n        An N x 2 array of [site_A, site_B] connections.  A site is\n        considered occupied if any of it's connecting bonds are occupied.\n\n    occupied_bonds: boolean\n        A list indicating whether a bond is occupied or not\n\n    Returns\n    -------\n    A tuple containing a list of site and bond labels, indicating which\n    cluster each belongs to.  A value of -1 indicates uninvaded.\n\n    Notes\n    -----\n    The ``connected_components`` function of scipy.sparse.csgraph will give ALL\n    sites a cluster number whether they are occupied or not, so this\n    function essentially adjusts the cluster numbers to represent a\n    percolation process.\n\n    \"\"\"\nfrom collections import namedtuple\nNp = np.amax(ij) + 1\nadj_mat = sprs.csr_matrix((occupied_bonds, (ij[:, (0)], ij[:, (1)])), shape\n    =(Np, Np))\nadj_mat.eliminate_zeros()\nclusters = csgraph.connected_components(csgraph=adj_mat, directed=False)[1]\nvalid_clusters = np.bincount(clusters) > 1\nmapping = -np.ones(shape=(clusters.max() + 1,), dtype=int)\nmapping[valid_clusters] = np.arange(0, valid_clusters.sum())\ns_labels = mapping[clusters]\nb_labels = np.amin(s_labels[ij], axis=1)\nb_labels[~occupied_bonds] = -1\ntup = namedtuple('cluster_labels', ('sites', 'bonds'))\nreturn tup(s_labels, b_labels)\n"
-}

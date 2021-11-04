@@ -1,9 +1,0 @@
-{
-    "functionName": "test_simulation_from_data",
-    "className": "TestSimulation",
-    "fileName": "/JohnVolk_&_PRMS-Python/test_&_test_prms_python.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Use @classmethod from_data to build a simulation from Parameters and Data instances\n        \"\"\"\ntdd = self.test_model_data_dir\ndata = Data(OPJ(tdd, 'data'))\nparameters = Parameters(OPJ(tdd, 'parameters'))\nctrl = OPJ(tdd, 'control')\ntest_dir = OPJ(tdd, 'test-sim-dir')\nif os.path.isdir(test_dir):\n    shutil.rmtree(test_dir)\ns = Simulation.from_data(data, parameters, ctrl, test_dir)\ns.run()\ng = [os.path.basename(f) for f in glob.glob(OPJ(test_dir, 'outputs', '*'))]\nself.assertIn('prms_ic.out', g)\nself.assertIn('prms.out', g)\nself.assertIn('statvar.dat', g)\nshutil.rmtree(test_dir)\n"
-}

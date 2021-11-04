@@ -1,9 +1,0 @@
-{
-    "functionName": "test_delete_attribute",
-    "className": "TestProxyKmipClient",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_test_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the client can delete an attribute.\n        \"\"\"\nrequest_payload = payloads.DeleteAttributeRequestPayload(unique_identifier=\n    '1', attribute_name='Object Group', attribute_index=2)\nresponse_payload = payloads.DeleteAttributeResponsePayload(unique_identifier\n    ='1', attribute=None)\nwith ProxyKmipClient() as client:\n    client.proxy.send_request_payload.return_value = response_payload\n    unique_identifier, attribute = client.delete_attribute('1',\n        attribute_name='Object Group', attribute_index=2)\n    args = enums.Operation.DELETE_ATTRIBUTE, request_payload\n    client.proxy.send_request_payload.assert_called_with(*args)\n    self.assertEqual('1', unique_identifier)\n    self.assertIsNone(attribute)\nmock.patch('kmip.pie.client.KMIPProxy', mock.MagicMock(spec_set=KMIPProxy))"
-}

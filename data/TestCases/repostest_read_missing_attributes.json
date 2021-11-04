@@ -1,9 +1,0 @@
-{
-    "functionName": "test_read_missing_attributes",
-    "className": "TestObjectDefaults",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that an InvalidKmipEncoding error is raised during the decoding\n        of an ObjectDefaults structure when the attributes structure is missing\n        from the encoding.\n        \"\"\"\nobject_defaults = objects.ObjectDefaults()\nself.assertIsNone(object_defaults.attributes)\nargs = self.no_attributes_encoding,\nself.assertRaisesRegex(exceptions.InvalidKmipEncoding,\n    'The ObjectDefaults encoding is missing the attributes structure.',\n    object_defaults.read, *args)\n"
-}

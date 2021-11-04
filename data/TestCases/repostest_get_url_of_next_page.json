@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_url_of_next_page",
-    "className": "TestCommunication",
-    "fileName": "/funilrys_&_PyTravisCI/tests_&_core_&_test_communication.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test of :meth:`PyTravisCI.communication.Communication.get_url_of_next_page`.\n        \"\"\"\nresponse_without_pagination = {'@type': 'home', '@href': '/', 'errors': {\n    'login_required': {'status': 403, 'default_message': 'login required',\n    'additional_attributes': []}, 'method_not_allowed': {'status': 405,\n    'default_message': 'method not allowed', 'additional_attributes': []},\n    'not_found': {'status': 404, 'default_message':\n    'resource not found (or insufficient access)', 'additional_attributes':\n    ['resource_type']}}}\ncomm = Communication(self.root)\nexpected = None\nactual = comm.get_url_of_next_page(response_without_pagination)\nself.assertEqual(expected, actual)\nresponse_with_pagination = {'@type': 'branches', '@href':\n    '/repo/891/branches?exists_on_github=true&limit=5', '@representation':\n    'standard', '@pagination': {'limit': 5, 'offset': 0, 'count': 24,\n    'is_first': True, 'is_last': False, 'next': {'@href':\n    '/repo/891/branches?exists_on_github=true&limit=5&offset=5', 'offset': \n    5, 'limit': 5}, 'prev': None, 'first': {'@href':\n    '/repo/891/branches?exists_on_github=true&limit=5', 'offset': 0,\n    'limit': 5}, 'last': {'@href':\n    '/repo/891/branches?exists_on_github=true&limit=5&offset=20', 'offset':\n    20, 'limit': 5}}}\nexpected = (\n    f'{AccessPoints.OPEN}/repo/891/branches?exists_on_github=true&limit=5&offset=5'\n    )\nactual = comm.get_url_of_next_page(response_with_pagination)\nself.assertEqual(expected, actual)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_min_volatility_L2_reg",
-    "className": null,
-    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_efficient_frontier.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ef = setup_efficient_frontier()\nef.add_objective(objective_functions.L2_reg, gamma=1)\nweights = ef.min_volatility()\nassert isinstance(weights, dict)\nassert set(weights.keys()) == set(ef.tickers)\nnp.testing.assert_almost_equal(ef.weights.sum(), 1)\nassert all([(i >= 0) for i in weights.values()])\nef2 = setup_efficient_frontier()\nef2.min_volatility()\nequal_weight = np.full((ef.n_assets,), 1 / ef.n_assets)\nassert np.abs(equal_weight - ef.weights).sum() < np.abs(equal_weight - ef2.\n    weights).sum()\nnp.testing.assert_allclose(ef.portfolio_performance(), (0.23129890623344232,\n    0.1955254118258614, 1.080672349748733))\n"
-}

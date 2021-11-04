@@ -1,9 +1,0 @@
-{
-    "functionName": "test_navigate_get_acquisition_data_by_session",
-    "className": null,
-    "fileName": "/incf-nidash_&_PyNIDM/nidm_&_experiment_&_tests_&_test_navigate.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "set_of_keys_returned = set([])\nset_of_activities = set([])\nsessions = Navigate.getSessions(OPENNEURO_FILES, OPENNEURO_PROJECT_URI)\nassert len(sessions) > 0\nfor s in sessions:\n    acquisitions = Navigate.getAcquisitions(OPENNEURO_FILES, s)\n    assert len(acquisitions) > 0\n    for a in acquisitions:\n        set_of_activities.add(str(a))\n        ad = Navigate.getActivityData(OPENNEURO_FILES, a)\n        assert len(ad.data) > 5\n        for vt in ad.data:\n            set_of_keys_returned.add(vt.label)\nprint(set_of_keys_returned)\nassert 'age' in set_of_keys_returned\nassert 'hadAcquisitionModality' in set_of_keys_returned\n"
-}

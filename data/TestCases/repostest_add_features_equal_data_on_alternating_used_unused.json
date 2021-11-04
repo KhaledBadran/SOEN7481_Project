@@ -1,9 +1,0 @@
-{
-    "functionName": "test_add_features_equal_data_on_alternating_used_unused",
-    "className": "TestBasic",
-    "fileName": "/microsoft_&_LightGBM/tests_&_python_package_test_&_test_basic.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.maxDiff = None\nX = np.random.random((100, 5))\nX[:, ([1, 3])] = 0\nnames = [('col_%d' % i) for i in range(5)]\nfor j in range(1, 5):\n    d1 = lgb.Dataset(X[:, :j], feature_name=names[:j]).construct()\n    d2 = lgb.Dataset(X[:, j:], feature_name=names[j:]).construct()\n    d1.add_features_from(d2)\n    with tempfile.NamedTemporaryFile() as f:\n        d1name = f.name\n    d1._dump_text(d1name)\n    d = lgb.Dataset(X, feature_name=names).construct()\n    with tempfile.NamedTemporaryFile() as f:\n        dname = f.name\n    d._dump_text(dname)\n    with open(d1name, 'rt') as d1f:\n        d1txt = d1f.read()\n    with open(dname, 'rt') as df:\n        dtxt = df.read()\n    os.remove(dname)\n    os.remove(d1name)\n    self.assertEqual(dtxt, d1txt)\n"
-}

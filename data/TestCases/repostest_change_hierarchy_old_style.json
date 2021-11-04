@@ -1,9 +1,0 @@
-{
-    "functionName": "test_change_hierarchy_old_style",
-    "className": "Test",
-    "fileName": "/fabioz_&_PyDev.Debugger/test_pydevd_reload_&_test_pydevd_reload.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class F:\n\n    def m1(self):\n        return 1\nclass B:\n\n    def super_call(self):\n        return 2\nclass G(B):\n\n    def m1(self):\n        return self.super_call()\nself.assertEqual(F().m1(), 1)\nold = pydevd_reload.notify_error\nself._called = False\ndef on_error(*args):\n    self._called = True\ntry:\n    pydevd_reload.notify_error = on_error\n    pydevd_reload.Reload(None)._update(None, None, F, G)\n    self.assertTrue(self._called)\nfinally:\n    pydevd_reload.notify_error = old\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_scope_ten",
-    "className": "ScopeTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_def.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "t = Template(\n    \"\"\"\n            <%def name=\"a()\">\n                <%def name=\"b()\">\n                    <%\n                        y = 19\n                    %>\n                    b/c: ${c()}\n                    b/y: ${y}\n                </%def>\n                <%def name=\"c()\">\n                    c/y: ${y}\n                </%def>\n\n                <%\n                    # we assign to \"y\".  but the 'enclosing\n                    # scope' of \"b\" and \"c\" is from\n                    # the \"y\" on the outside\n                    y = 10\n                %>\n                a/y: ${y}\n                a/b: ${b()}\n            </%def>\n\n            <%\n                y = 7\n            %>\n            main/a: ${a()}\n            main/y: ${y}\n    \"\"\"\n    )\neq_(flatten_result(t.render()),\n    'main/a: a/y: 10 a/b: b/c: c/y: 10 b/y: 19 main/y: 7')\n"
-}

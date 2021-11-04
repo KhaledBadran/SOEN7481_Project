@@ -1,9 +1,0 @@
-{
-    "functionName": "dimensionality",
-    "className": null,
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_topotools_&_topotools.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Checks the dimensionality of the network\n\n    Parameters\n    ----------\n    network : OpenPNM Network object\n        The network whose dimensionality is to be checked\n\n    Returns\n    -------\n    Returns an 3-by-1 array containing ``True`` for each axis that contains\n    multiple values, indicating that the pores are spatially distributed\n    in that direction.\n    \"\"\"\nxyz = network['pore.coords']\nxyz_unique = [np.unique(xyz[:, (i)]) for i in range(3)]\nreturn np.array([(elem.size != 1) for elem in xyz_unique])\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_configure_replacement_context_email_type_found",
-    "className": null,
-    "fileName": "/PearsonEducation_&_Alarmageddon/tests_&_publishing_&_test_emailer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "email_pub = create_default_email_publisher(tmpdir, smtpserver)\nhttp_validator = HttpValidation.get(httpserver.url).expect_status_codes([200])\nemail_settings = {'email_type': 'test_alert', 'subject':\n    'subject test line', 'body': 'body test', 'sender': {'real_name':\n    'Alarmageddon Monitor', 'address': 'noreply@alarmageddon.com'},\n    'recipients': [{'real_name': 'Test Recipient', 'address':\n    'testrecipient@alarmageddon.com'}]}\nemailer.enrich(http_validator, email_settings)\nresult = Failure('validation name', http_validator, description=\n    'A failure occurred.')\nemail_pub.configure_replacement_context(result)\nreplacement_context = email_pub._replacement_context\nassert replacement_context['test_name'] == 'validation name'\nassert replacement_context['test_description'] == 'A failure occurred.'\nassert replacement_context['env'] == 'test'\nassert replacement_context['email_type'] == 'test_alert'\nassert replacement_context['email_custom_message'\n    ] == 'Validation failed in environment {{env}}: {{test_name}}.'\n"
-}

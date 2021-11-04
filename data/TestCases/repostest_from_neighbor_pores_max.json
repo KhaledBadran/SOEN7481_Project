@@ -1,9 +1,0 @@
-{
-    "functionName": "test_from_neighbor_pores_max",
-    "className": "MiscTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_misc_&_MiscTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.geo.remove_model('throat.seed')\nself.geo['pore.seed'] = np.random.rand(self.net.Np)\nself.geo.add_model(model=mods.from_neighbor_pores, propname='throat.seed',\n    pore_prop='pore.seed', mode='max')\nP12 = self.net['throat.conns']\ntseed = np.amax(self.geo['pore.seed'][P12], axis=1)\nassert_array_almost_equal_nulp(self.geo['throat.seed'], tseed)\n"
-}

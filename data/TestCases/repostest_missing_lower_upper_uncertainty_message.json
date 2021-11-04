@@ -1,9 +1,0 @@
-{
-    "functionName": "test_missing_lower_upper_uncertainty_message",
-    "className": "TestValidator",
-    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_validation.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that having a single asymmetric uncertainty fails validation.\n\n        When https://github.com/pyeve/cerberus/issues/278 is resolved,\n        the errors that result from this validation should be checked to make\n        sure that the missing values are caught. For now, we just check that\n        the document doesn't validate.\n        \"\"\"\nv.validate({'datapoints': [{'temperature': ['1000 kelvin', {\n    'uncertainty-type': 'relative', 'upper-uncertainty': 0.1}]}]}, update=True)\nassert v.errors\nv.validate({'datapoints': [{'temperature': ['1000 kelvin', {\n    'uncertainty-type': 'relative', 'lower-uncertainty': 0.1}]}]}, update=True)\nassert v.errors\npytest.mark.xfail(raises=NotImplementedError)"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_onion_bordas_2d_gaussian",
-    "className": null,
-    "fileName": "/PyAbel_&_PyAbel/abel_&_tests_&_test_onion_bordas.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "gauss = lambda r, r0, sigma: np.exp(-(r - r0) ** 2 / sigma ** 2)\nimage_shape = n, n\nrows, cols = image_shape\nr2 = rows // 2 + rows % 2\nc2 = cols // 2 + cols % 2\nsigma = 20 * n / 100\nx = np.linspace(-c2, c2, cols)\ny = np.linspace(-r2, r2, rows)\nX, Y = np.meshgrid(x, y)\nIM = gauss(X, 0, sigma)\nQ0 = IM[:r2, c2:]\nQ0_copy = Q0.copy()\nAQ0 = abel.onion_bordas.onion_bordas_transform(Q0, shift_grid=False)\nprofQ0 = Q0_copy[-10:, :].sum(axis=0)\nprofAQ0 = AQ0[-10:, :].sum(axis=0)\nratio_2d = np.sqrt(np.pi) * sigma\nassert_allclose(Q0_copy, AQ0 * ratio_2d, rtol=0.0, atol=0.3)\n"
-}

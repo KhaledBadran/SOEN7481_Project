@@ -1,9 +1,0 @@
-{
-    "functionName": "test_read_kmip_2_0_structs",
-    "className": "TestGetAttributeListResponsePayload",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_get_attribute_list.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a GetAttributeList response payload can be read from a data\n        stream encoded with the KMIP 2.0 format using AttributeReference\n        structures.\n        \"\"\"\npayload = payloads.GetAttributeListResponsePayload()\nself.assertEqual(None, payload.unique_identifier)\nself.assertEqual(list(), payload.attribute_names)\npayload.read(self.full_encoding_with_reference_structs, kmip_version=enums.\n    KMIPVersion.KMIP_2_0)\nself.assertEqual('1703250b-4d40-4de2-93a0-c494a1d4ae40', payload.\n    unique_identifier)\nself.assertEqual(3, len(payload.attribute_names))\nself.assertEqual(['Object Group', 'Application Specific Information',\n    'Contact Information'], payload.attribute_names)\n"
-}

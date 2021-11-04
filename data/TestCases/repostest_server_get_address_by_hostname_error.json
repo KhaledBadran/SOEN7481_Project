@@ -1,9 +1,0 @@
-{
-    "functionName": "test_server_get_address_by_hostname_error",
-    "className": null,
-    "fileName": "/daveisadork_&_PyDevNS/tests_&_test_server.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with patch('devns.server.socket') as socket_mock:\n    socket_mock.getfqdn = MagicMock(return_value='test.example.com')\n    socket_mock.gethostbyname = MagicMock(side_effect=socket.error)\n    address = server._get_address_by_hostname()\n    socket_mock.getfqdn.assert_called_once_with()\n    socket_mock.gethostbyname.assert_called_once_with('test.example.com')\nassert address is None\n"
-}

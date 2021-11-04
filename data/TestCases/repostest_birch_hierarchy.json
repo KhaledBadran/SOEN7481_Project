@@ -1,9 +1,0 @@
-{
-    "functionName": "test_birch_hierarchy",
-    "className": null,
-    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_tests_&_sklearn_compat_&_test_birch.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "X, y = make_blobs(random_state=40)\nbrc = Birch(n_clusters=None, branching_factor=5, compute_sample_indices=True)\nbrc.fit(X)\nn_leaves = 1\nsample_id = []\ncurrent_leaf = brc.dummy_leaf_.next_leaf_\nwhile current_leaf:\n    subclusters = current_leaf.subclusters_\n    for sc in subclusters:\n        assert sc.n_samples_ == len(sc.samples_id_)\n        sample_id += sc.samples_id_\n    current_leaf = current_leaf.next_leaf_\n    n_leaves += 1\nassert_array_equal(np.sort(sample_id), np.arange(X.shape[0]))\nassert len(brc.root_.subclusters_) < n_leaves\nsample_id = []\nfor sc in brc.root_.subclusters_:\n    sample_id += sc.samples_id_\n    assert sc.n_samples_ == len(sc.samples_id_)\nassert_array_equal(np.sort(sample_id), np.arange(X.shape[0]))\ndocument_id = 45\ndocument_in_subcluster = []\ndistance_to_centroid = []\nfor sc in brc.root_.subclusters_:\n    centroid = X[(sc.samples_id_), :].mean(axis=0)\n    distance_to_centroid.append(((X[[document_id]] - centroid) ** 2).sum())\n    document_in_subcluster.append(document_id in sc.samples_id_)\nassert np.argmin(distance_to_centroid) == np.nonzero(document_in_subcluster)[0\n    ][0]\nlabels2 = np.zeros(X.shape[0], dtype=int)\ncluster_id = 0\nfor current_leaf in brc._get_leaves():\n    subclusters = current_leaf.subclusters_\n    for sc in subclusters:\n        labels2[list(sc.samples_id_)] = cluster_id\n        cluster_id += 1\nassert np.unique(brc.labels_).shape == np.unique(labels2).shape\nassert v_measure_score(brc.labels_, labels2) > 0.95\n"
-}

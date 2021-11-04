@@ -1,9 +1,0 @@
-{
-    "functionName": "testUpdateFeatures",
-    "className": "ObservationsTest",
-    "fileName": "/facebook_&_Ax/ax_&_core_&_tests_&_test_observation.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "parameters = {'x': 0, 'y': 'a'}\nnew_parameters = {'z': 'foo'}\nobsf = ObservationFeatures(parameters=parameters, trial_index=3)\nobsf.update_features(ObservationFeatures(parameters={}))\nself.assertEqual(obsf.trial_index, 3)\nnew_obsf = ObservationFeatures(parameters=new_parameters, trial_index=4,\n    start_time=pd.Timestamp('2005-02-25'), end_time=pd.Timestamp(\n    '2005-02-26'), random_split=7)\nobsf.update_features(new_obsf)\nself.assertEqual(obsf.parameters, {**parameters, **new_parameters})\nself.assertEqual(obsf.trial_index, 4)\nself.assertEqual(obsf.random_split, 7)\nself.assertEqual(obsf.start_time, pd.Timestamp('2005-02-25'))\nself.assertEqual(obsf.end_time, pd.Timestamp('2005-02-26'))\n"
-}

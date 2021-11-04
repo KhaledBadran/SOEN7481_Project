@@ -1,9 +1,0 @@
-{
-    "functionName": "test_is_attribute_deprecated",
-    "className": "TestAttributePolicy",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_policy.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that is_attribute_deprecated returns the expected results in all\n        cases.\n        \"\"\"\nrules = policy.AttributePolicy(contents.ProtocolVersion(1, 0))\nattribute_a = 'Name'\nattribute_b = 'Certificate Subject'\nresult = rules.is_attribute_deprecated(attribute_a)\nself.assertFalse(result)\nresult = rules.is_attribute_deprecated(attribute_b)\nself.assertFalse(result)\nrules = policy.AttributePolicy(contents.ProtocolVersion(1, 1))\nresult = rules.is_attribute_deprecated(attribute_b)\nself.assertTrue(result)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_logging_hierarchy",
-    "className": "Test_PoolManager_logging",
-    "fileName": "/Kieran-Bacon_&_Better/PackageTests_&_multiprocessing_&_test_PoolManager_logging.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "def sub_processes(pid):\n    log = logging.getLogger('test.submodule')\n    log.setLevel(logging.DEBUG)\n    log.info('{}'.format(pid))\nhigher = logging.getLogger('test')\nhigher.setLevel(logging.DEBUG)\nhigherHandle = self.TestHandler()\nhigher.addHandler(higherHandle)\nwith PoolManager(sub_processes, logger=higher) as pool:\n    for i in range(8):\n        pool.put(i)\n    pool.getAll()\nself.assertEqual(set(higherHandle._returned), {str(x) for x in range(8)})\n"
-}

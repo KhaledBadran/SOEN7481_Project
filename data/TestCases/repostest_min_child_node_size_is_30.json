@@ -1,9 +1,0 @@
-{
-    "functionName": "test_min_child_node_size_is_30",
-    "className": null,
-    "fileName": "/Rambatino_&_CHAID/tests_&_test_tree.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test that the min_child_node_size is set to 30 and prevents\n    splitting if the parent's child would have less than 30 data points\n    \"\"\"\ngender = np.array([0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1])\nincome = np.array([0, 0, 1, 1, 2, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0])\nndarr = np.transpose(np.vstack([gender]))\ntree = CHAID.Tree.from_numpy(ndarr, income, alpha_merge=0.9)\ninvalid_split_reason = (\n    'splitting would create nodes with less than the minimum child node size')\nassert str(tree.tree_store[0].split.invalid_reason) == invalid_split_reason\nassert len(tree.tree_store) == 1\n"
-}

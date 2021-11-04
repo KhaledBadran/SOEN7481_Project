@@ -1,9 +1,0 @@
-{
-    "functionName": "test_one_person_folds_before_betting",
-    "className": null,
-    "fileName": "/exzacktlee_&_CardGames/tests_&_test_holdem_&_test_bet_collector.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "collector, players = collector_four_players\nfor player in players:\n    player.award_chips(15)\ncollector.get_blind_wagers()\nplayers[3].fold()\nfor i in range(3):\n    player = players[i]\n    amount_to_buy_in = collector.buy_in - player.check_wager()\n    players[i].bet(amount_to_buy_in)\nfor i in range(4):\n    collector.ask_next_player_for_wager()\ncollector.collect_all_bets()\nassert len(collector.pots) == 1\nassert collector.pots[0].size == 30\n"
-}

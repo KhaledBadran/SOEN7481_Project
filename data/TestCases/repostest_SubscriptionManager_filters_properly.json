@@ -1,9 +1,0 @@
-{
-    "functionName": "test_SubscriptionManager_filters_properly",
-    "className": null,
-    "fileName": "/willdeuschle_&_Python-GraphQL-Subscriptions/tests_&_test_python_graphql_subscriptions.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "schema = Schema\nsetup_functions = {'test_filter_sub': lambda options, args,\n    subscription_name: {'filter_1': {'filter': lambda root, context, **\n    variables: root['filter_bool'] == variables['filter_bool']}}}\nsub_manager = SubscriptionManager(schema, pubsub, setup_functions)\ndef callback(error=None, result=None):\n    assert result.data['test_filter_sub'] == 'SUCCESS'\nkwargs = {'query':\n    'subscription test_filter($filter_bool: Boolean){                   test_filter_sub(filter_bool: $filter_bool) }'\n    , 'operation_name': 'test_filter', 'variables': {'filter_bool': True},\n    'callback': callback, 'context': {}}\nsub_id = sub_manager.subscribe(**kwargs)\nsub_manager.publish('filter_1', {'filter_bool': True})\n"
-}

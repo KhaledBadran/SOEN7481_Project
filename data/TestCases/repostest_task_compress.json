@@ -1,9 +1,0 @@
-{
-    "functionName": "test_task_compress",
-    "className": null,
-    "fileName": "/ZELLMECHANIK-DRESDEN_&_DCKit/tests_&_test_gui_basic.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "path = retrieve_data('rtdc_data_hdf5_rtfdc.zip')\npath_out = path.with_name('compressed')\npath_out.mkdir()\nmonkeypatch.setattr(QDialog, 'exec_', lambda *args: QMessageBox.Ok)\nmonkeypatch.setattr(QMessageBox, 'exec_', lambda *args: QMessageBox.Ok)\nmonkeypatch.setattr(QFileDialog, 'getExistingDirectory', lambda *args: str(\n    path_out))\nmw = DCKit(check_update=False)\nqtbot.addWidget(mw)\nmw.append_paths([path])\npouts, invalid = mw.on_task_compress()\nassert len(pouts) == 1\nassert len(invalid) == 0\nwith dclab.new_dataset(pouts[0]) as ds, dclab.new_dataset(path) as ds0:\n    assert len(ds) == len(ds0)\n    scf = list(set(ds.features_scalar + ds0.features_scalar))\n    for feat in scf:\n        assert feat in ds0\n        assert feat in ds\n        assert np.all(ds[feat] == ds0[feat])\ncleanup()\n"
-}

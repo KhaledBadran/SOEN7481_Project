@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ModelSetups_do_not_share_kwargs",
-    "className": "ModelRegistryTest",
-    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_registry.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Tests that none of the preset model and bridge combinations share a\n        kwarg.\n        \"\"\"\nfor model_setup_info in MODEL_KEY_TO_MODEL_SETUP.values():\n    model_class = model_setup_info.model_class\n    bridge_class = model_setup_info.bridge_class\n    model_args = set(get_function_argument_names(model_class))\n    bridge_args = set(get_function_argument_names(bridge_class))\n    self.assertEqual(model_args & bridge_args, set())\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "testMasking",
-    "className": null,
-    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_DataSet.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "DataFile = ['Data/camea2018n000136.hdf', 'Data/camea2018n000137.hdf']\nds = DataSet(DataFile)\nds.convertDataFile()\ncirc = Mask.circleMask(center=np.array([1.0, 0.0]), radiusPoint=np.array([\n    1.1, 0.0]), coordinates=['h', 'k'])\nEmask = Mask.lineMask(1.7, end=2.0, coordinates='energy')\nrect = Mask.rectangleMask(corner1=np.array([1.0, 0.0]), corner2=np.array([\n    1.5, 0.5]), coordinates=['h', 'k'])\nmask = circ * Emask + Emask * rect\nds.mask = mask\nmasks = [mask(df) for df in ds]\nprint(np.sum(ds.I.mask))\nassert np.sum(ds.I.mask) == np.sum([np.sum(m) for m in masks])\n"
-}

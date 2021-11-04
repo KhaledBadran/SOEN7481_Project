@@ -1,9 +1,0 @@
-{
-    "functionName": "test_fftlog_shapes",
-    "className": null,
-    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_fftlog.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "nk = 1024\nnt = 4\nk_arr = np.logspace(-4, 4, nk)\nfk_arr = []\nfor i in range(nt):\n    fk_arr.append(fk(k_arr, 1.5, 0, 2))\nfk_arr = np.array(fk_arr)\nwith pytest.raises(ValueError):\n    _fftlog_transform(k_arr[0], fk_arr, 2, 0, 1.5)\nwith pytest.raises(ValueError):\n    _fftlog_transform(k_arr, fk_arr[0][0], 2, 0, 1.5)\nwith pytest.raises(ValueError):\n    _fftlog_transform(k_arr[1:], fk_arr, 2, 0, 1.5)\nr, fr = _fftlog_transform(k_arr, fk_arr[0], 2, 0, 1.5)\nassert fr.shape == (nk,)\nr, fr = _fftlog_transform(k_arr, fk_arr, 2, 0, 1.5)\nassert fr.shape == (nt, nk)\n"
-}

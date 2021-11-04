@@ -1,9 +1,0 @@
-{
-    "functionName": "test_read_xyz_parse_comment_line",
-    "className": null,
-    "fileName": "/mortele_&_OccamTools/test_&_test_read_xyz.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "xyz = _read_default_file_name()\nxyz._parse_comment_first('1.7 2.5 5.0 5.0')\nassert xyz.comment_format_known\nassert xyz.time[0] == pytest.approx(1.7, abs=1e-15)\nassert np.allclose(xyz.box, [2.5, 5.0, 5.0])\ndel xyz\nxyz = _read_default_file_name()\ntime_0 = 985.2519859185\nxyz.time[0] = time_0\nxyz._parse_comment_first('6.7 8.1 9.9')\nassert xyz.comment_format_known is False\nassert xyz.time[0] == time_0\nassert np.allclose(xyz.box, [6.7, 8.1, 9.9])\ndel xyz\nxyz = _read_default_file_name()\nxyz._parse_comment_first('abc')\nassert xyz.comment_format_known is False\nassert all([(b is None) for b in xyz.box])\ndel xyz\nxyz = _read_default_file_name()\nxyz._parse_comment_first('1.0 2.0 A')\nassert xyz.comment_format_known is False\nassert all([(b is None) for b in xyz.box])\ndel xyz\nxyz = _read_default_file_name()\nxyz._parse_comment_first('1.0 2.0 3.0 B')\nassert xyz.comment_format_known is False\nassert all([(b is None) for b in xyz.box])\n"
-}

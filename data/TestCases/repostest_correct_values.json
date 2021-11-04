@@ -1,9 +1,0 @@
-{
-    "functionName": "test_correct_values",
-    "className": null,
-    "fileName": "/RI-imaging_&_ODTbrain/tests_&_test_apple.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "sino, angles = create_test_sino_3d(Nx=10, Ny=10)\np = get_test_parameter_set(1)[0]\nf = odtbrain.backpropagate_3d(sino, angles, padval=0, dtype=np.float64,\n    copy=False, **p)\ntry:\n    odtbrain.apple.correct(f=f, res=p['res'], nm=p['nm'], enforce_envelope=1.05\n        )\nexcept ValueError:\n    pass\nelse:\n    assert False, '`enforce_envelope` must be in [0, 1]'\n"
-}

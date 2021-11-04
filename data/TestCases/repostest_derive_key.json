@@ -1,9 +1,0 @@
-{
-    "functionName": "test_derive_key",
-    "className": "TestProxyKmipClient",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_test_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the client can derive a key.\n        \"\"\"\nresult = {'unique_identifier': '1', 'result_status': enums.ResultStatus.SUCCESS\n    }\nclient = ProxyKmipClient()\nclient.open()\nclient.proxy.derive_key.return_value = result\nderived_id = client.derive_key(enums.ObjectType.SYMMETRIC_KEY, ['2', '3'],\n    enums.DerivationMethod.ENCRYPT, {'cryptographic_parameters': {\n    'cryptographic_algorithm': enums.CryptographicAlgorithm.AES,\n    'block_cipher_mode': enums.BlockCipherMode.CBC, 'padding_method': enums\n    .PaddingMethod.PKCS1v15}, 'initialization_vector': b'\\x01\\x02\\x03\\x04',\n    'derivation_data': b'\\xff\\xfe\\xfe\\xfc'}, cryptographic_length=128,\n    cryptographic_algorithm=enums.CryptographicAlgorithm.AES,\n    cryptographic_usage_mask=[enums.CryptographicUsageMask.ENCRYPT, enums.\n    CryptographicUsageMask.DECRYPT])\nself.assertEqual('1', derived_id)\nmock.patch('kmip.pie.client.KMIPProxy', mock.MagicMock(spec_set=KMIPProxy))"
-}

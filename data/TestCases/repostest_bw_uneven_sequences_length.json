@@ -1,9 +1,0 @@
-{
-    "functionName": "test_bw_uneven_sequences_length",
-    "className": null,
-    "fileName": "/lopatovsky_&_CT-HMM/test_&_test_cthmm.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"The likelihood in the EM algorithm had always to grow\"\"\"\ncthmm = hmms.CtHMM.random(7, 5)\nt, e = cthmm.generate_data((10, 8))\nt2 = numpy_to_list(t)\ne2 = numpy_to_list(e)\ncthmm_t = hmms.CtHMM.random(7, 5)\ncthmm_t2 = hmms.CtHMM(*cthmm_t.params)\ndl = cthmm_t.baum_welch(t, e, 15, est=True)\ndl2 = cthmm_t2.baum_welch(t2, e2, 15, est=True)\nassert float_equal_mat(dl, dl2)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "_build_func",
-    "className": null,
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_models_&_physics_&_generic_source_term.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Take a symbolic equation and return the lambdified version plus the\n    linearization of form S1 * x + S2\n    \"\"\"\nfrom sympy import lambdify\neq_prime = eq.diff(args['x'])\ns1 = eq_prime\ns2 = eq - eq_prime * args['x']\nEQ = lambdify(args.values(), expr=eq, modules='numpy')\nS1 = lambdify(args.values(), expr=s1, modules='numpy')\nS2 = lambdify(args.values(), expr=s2, modules='numpy')\nreturn EQ, S1, S2\n"
-}

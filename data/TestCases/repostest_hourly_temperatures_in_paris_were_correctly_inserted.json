@@ -1,9 +1,0 @@
-{
-    "functionName": "test_hourly_temperatures_in_paris_were_correctly_inserted",
-    "className": null,
-    "fileName": "/AntoineToubhans_&_MongoTs/test_&_integration_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "hours_document = collection._collection.find_one({'city': 'Paris'}, {\n    'months': 1})['months'][6]['days'][22]['hours']\nassert 24 == len(hours_document)\nfor hour_index, hour_document in enumerate(hours_document):\n    if 13 == hour_index:\n        assert 1 == hour_document['count']\n        assert 35.6 == hour_document['sum']\n        assert 35.6 ** 2 == hour_document['sum2']\n    elif 15 == hour_index:\n        assert 1 == hour_document['count']\n        assert 36.8 == hour_document['sum']\n        assert 36.8 ** 2 == hour_document['sum2']\n    elif 23 == hour_index:\n        assert 1 == hour_document['count']\n        assert 29 == hour_document['sum']\n        assert 29 ** 2 == hour_document['sum2']\n    else:\n        assert 0 == hour_document['count']\n        assert 0 == hour_document['sum']\n        assert 0 == hour_document['sum2']\n"
-}

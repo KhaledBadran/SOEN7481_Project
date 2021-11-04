@@ -1,9 +1,0 @@
-{
-    "functionName": "test_add_enterprise_user",
-    "className": "TestEnterpriseCommands",
-    "fileName": "/Keeper-Security_&_Commander/tests_&_test_enterprise_commands.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "params = TestEnterpriseCommands.params\nself.assertIsNotNone(params.enterprise)\ntemplate_body = \"\"\"\n[\n    {\n        \"title\": \"Record For ${user_name}\",\n        \"login\": \"${user_email}\",\n        \"password\": \"${generate_password}\",\n        \"login_url\": \"https://keepersecurity.com\",\n        \"notes\": \"notes\",\n        \"custom_fields\": {\n            \"key1\": \"value1\",\n            \"key2\": \"value2\"\n        }\n    },\n    {\n        \"title\": \"Empty record\"\n    }\n\n]\"\"\"\nnew_user = 'integration.new.user@keepersecurity.com'\nwith mock.patch('builtins.open', mock.mock_open(read_data=template_body)\n    ), mock.patch('os.path.abspath', return_value='template.json'), mock.patch(\n    'os.path.isfile', return_value=True):\n    with self.assertLogs(level=logging.WARNING):\n        cli.do_command(params,\n            'create-user --generate --name=\"New User\" --expire --records=\"template.json\" --question=\"This app name?\" --answer=\"Commander\" {0}'\n            .format(new_user))\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "_drop_locations",
-    "className": "Subdomain",
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_core_&_Subdomain.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        Removes association between an objectx and its boss object at the\n        given pore and/or throat locations.\n\n        Parameters\n        ----------\n        pores and throats : array_like\n            The pore and/or throat locations from which the association should\n            be removed.  These indices refer to the full domain.\n\n        Notes\n        -----\n        For *Physics* objects, the boss is the *Phase* with which it was\n        assigned, while for *Geometry* objects the boss is the *Network*.\n\n        \"\"\"\nboss = self.project.find_full_domain(self)\npores = boss._parse_indices(pores)\nthroats = boss._parse_indices(throats)\nif len(pores) > 0:\n    self._set_locations(element='pore', indices=pores, mode='drop')\nif len(throats) > 0:\n    self._set_locations(element='throat', indices=throats, mode='drop')\n"
-}

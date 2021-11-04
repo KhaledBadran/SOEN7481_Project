@@ -1,9 +1,0 @@
-{
-    "functionName": "test_Range_errors",
-    "className": null,
-    "fileName": "/hdoupe_&_ParamTools/paramtools_&_tests_&_test_validate.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "range_ = Range(0, 10)\nwith pytest.raises(ValidationError):\n    range_(11)\nwith pytest.raises(ValidationError):\n    range_({'value': 11}, is_value_object=True)\nrange_ = Range(min_vo=[{'value': 0}], max_vo=[{'value': 10}])\nwith pytest.raises(ValidationError):\n    range_(11)\nwith pytest.raises(ValidationError):\n    range_({'value': 11}, is_value_object=True)\nrange_ = Range(min_vo=[{'lab0': 1, 'value': 0}, {'lab0': 2, 'value': 2}],\n    max_vo=[{'lab0': 1, 'value': 10}, {'lab0': 2, 'value': 9}], error_min=\n    'param{labels} {input} < min {min} oth_param{oth_labels}', error_max=\n    'param{labels} {input} > max {max} max_oth_param{oth_labels}')\nwith pytest.raises(ValidationError) as excinfo:\n    range_({'lab0': 1, 'value': 11}, is_value_object=True)\nassert excinfo.value.args[0][0\n    ] == 'param[lab0=1] 11 > max 10 max_oth_param[lab0=1]'\nwith pytest.raises(ValidationError) as excinfo:\n    range_({'value': 11}, is_value_object=True)\nassert excinfo.value.args[0] == ['param 11 > max 10 max_oth_param[lab0=1]',\n    'param 11 > max 9 max_oth_param[lab0=2]']\n"
-}

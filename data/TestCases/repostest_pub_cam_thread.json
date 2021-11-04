@@ -1,9 +1,0 @@
-{
-    "functionName": "test_pub_cam_thread",
-    "className": null,
-    "fileName": "/SimLeek_&_CV_PubSubs/tests_&_frame_&_test_frame_publishing.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with mock.patch('displayarray.frame.frame_publishing.threading.Thread',\n    new_callable=mock.MagicMock) as mock_thread:\n    thread_instance = mock_thread.return_value = mock.MagicMock()\n    pub_cam_thread(5)\n    mock_thread.assert_called_once_with(target=fpub.pub_cam_loop_opencv,\n        args=(5, (-1, -1), True, float('inf')))\n    thread_instance.start.assert_called_once()\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_geocorrect",
-    "className": null,
-    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_vcorr.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    \"\"\"\nnpix = 1000\nsobj = specobj.SpecObj('MultiSlit', 1, SLITID=0)\nsobj.BOX_WAVE = np.linspace(4000.0, 6000.0, npix)\nsobj.BOX_COUNTS = 50.0 * (sobj.BOX_WAVE / 5000.0) ** -1.0\nsobj.BOX_COUNTS_IVAR = 1.0 / sobj.BOX_COUNTS.copy()\nspecObjs = specobjs.SpecObjs()\nspecObjs.add_sobj(sobj)\nscidx = 5\nobstime = Time(fitstbl['mjd'][scidx], format='mjd')\nmaskslits = np.array([False] * specObjs.nobj)\nradec = ltu.radec_to_coord((fitstbl['ra'][scidx], fitstbl['dec'][scidx]))\nhelio, hel_corr = wave.geomotion_correct(specObjs, radec, obstime,\n    maskslits, lon, lat, alt, 'heliocentric')\nassert np.isclose(helio, -9.17461338, rtol=1e-05)\nassert np.isclose(specObjs[0].BOX_WAVE[0], 3999.877589008, rtol=1e-08)\n"
-}

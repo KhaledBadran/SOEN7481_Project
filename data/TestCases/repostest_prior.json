@@ -1,9 +1,0 @@
-{
-    "functionName": "test_prior",
-    "className": null,
-    "fileName": "/grd349_&_PBjam/pbjam_&_tests_&_test_priors.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Tests for kde.prior\"\"\"\nsimp_kde.kde = type('kde', (object,), {})()\nsimp_kde.kde.samples = np.ones((2, 10))\ndata = np.array(solar_p.repeat(11).reshape((10, -1)))\nsimp_kde.kde = sm.nonparametric.KDEMultivariate(data=data, var_type=\n    'cccccccccc', bw='scott')\nfunc = simp_kde.prior\ninp = [solar_p]\npbt.does_it_return(func, inp)\npbt.right_type(func, inp, float)\nassert np.isnan(func(*inp))\n"
-}

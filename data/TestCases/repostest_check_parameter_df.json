@@ -1,9 +1,0 @@
-{
-    "functionName": "test_check_parameter_df",
-    "className": null,
-    "fileName": "/PEtab-dev_&_PEtab/tests_&_test_lint.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Check parameters.normalize_parameter_df.\"\"\"\nparameter_df = pd.DataFrame({PARAMETER_ID: ['par0', 'par1', 'par2'],\n    PARAMETER_SCALE: [LOG10, LOG10, LIN], NOMINAL_VALUE: [0.01, 0.001, \n    0.0001], ESTIMATE: [1, 1, 0], LOWER_BOUND: [1e-05, 1e-06, 1e-07],\n    UPPER_BOUND: [100000.0, 1000000.0, 10000000.0]}).set_index(PARAMETER_ID)\nlint.check_parameter_df(df=parameter_df)\nparameter_df.loc['par2', NOMINAL_VALUE] = ''\nwith pytest.raises(AssertionError):\n    lint.check_parameter_df(df=parameter_df)\ndel parameter_df[NOMINAL_VALUE]\nwith pytest.raises(AssertionError):\n    lint.check_parameter_df(df=parameter_df)\n"
-}

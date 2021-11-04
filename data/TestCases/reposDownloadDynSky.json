@@ -1,9 +1,0 @@
-{
-    "functionName": "DownloadDynSky",
-    "className": null,
-    "fileName": "/mesonepigreco_&_CellConstructor/scripts_&_cellconstructor_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    DOWNLOAD THE DYN FROM WEB\n    =========================\n\n    We use urllib to download from the web a testing dynamical matrix.\n\n    Results\n    -------\n        dyn : CC.Phonons.Phonons()\n            The dynamical matrix for test\n    \"\"\"\nNQ = 4\nfor i in range(1, NQ + 1):\n    dynfile = urlopen(\n        'https://raw.githubusercontent.com/mesonepigreco/CellConstructor/master/tests/TestSymmetriesSupercell/skydyn_%d'\n         % i)\n    with open('dyn.Sky.%d' % i, 'wb') as output:\n        output.write(dynfile.read())\ndyn = CC.Phonons.Phonons('dyn.Sky.', NQ)\nfor i in range(1, NQ + 1):\n    os.remove('dyn.Sky.%d' % i)\nreturn dyn\n"
-}

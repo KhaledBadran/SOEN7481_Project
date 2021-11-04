@@ -1,9 +1,0 @@
-{
-    "functionName": "test_petablint_succeeds",
-    "className": null,
-    "fileName": "/PEtab-dev_&_PEtab/tests_&_test_lint.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Run petablint and ensure we exit successfully for a file that should\n    contain no errors\"\"\"\ndir_isensee = '../doc/example/example_Isensee/'\ndir_fujita = '../doc/example/example_Fujita/'\nscript_path = os.path.abspath(os.path.dirname(__file__))\nmeasurement_file = os.path.join(script_path, dir_isensee,\n    'Isensee_measurementData.tsv')\nresult = subprocess.run(['petablint', '-m', measurement_file])\nassert result.returncode == 0\nyaml_file = os.path.join(script_path, dir_fujita, 'Fujita.yaml')\nresult = subprocess.run(['petablint', '-v', '-y', yaml_file])\nassert result.returncode == 0\nparameter_file = os.path.join(script_path, dir_fujita, 'Fujita_parameters.tsv')\nresult = subprocess.run(['petablint', '-v', '-p', parameter_file])\nassert result.returncode == 0\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "_use_linear_interpolation",
-    "className": "CurrencyConverter",
-    "fileName": "/alexprengere_&_currencyconverter/currency_converter_&_currency_converter.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Fill missing rates of a currency.\n\n        This is done by linear interpolation of the two closest available rates.\n\n        :param str currency: The currency to fill missing rates for.\n        \"\"\"\nrates = self._rates[currency]\ntmp = defaultdict(lambda : [None, None])\nfor date in sorted(rates):\n    rate = rates[date]\n    if rate is not None:\n        closest_rate = rate\n        dist = 0\n    else:\n        dist += 1\n        tmp[date][0] = closest_rate, dist\nfor date in sorted(rates, reverse=True):\n    rate = rates[date]\n    if rate is not None:\n        closest_rate = rate\n        dist = 0\n    else:\n        dist += 1\n        tmp[date][1] = closest_rate, dist\nfor date in sorted(tmp):\n    (r0, d0), (r1, d1) = tmp[date]\n    rates[date] = (r0 * d1 + r1 * d0) / (d0 + d1)\n    if self.verbose:\n        print(\n            '{0}: filling {1} missing rate using {2} ({3}d old) and {4} ({5}d later)'\n            .format(currency, date, r0, d0, r1, d1))\n"
-}

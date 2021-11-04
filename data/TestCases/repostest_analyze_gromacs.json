@@ -1,9 +1,0 @@
-{
-    "functionName": "test_analyze_gromacs",
-    "className": null,
-    "fileName": "/bio-phys_&_MDBenchmark/mdbenchmark_&_tests_&_test_analyze.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that the output is OK when all outputs are fine.\"\"\"\nwith tmpdir.as_cwd():\n    result = cli_runner.invoke(cli, ['analyze', '--directory={}'.format(\n        data['analyze-files-gromacs'])])\n    df = pd.read_csv(data['analyze-files-gromacs.csv'])\n    test_output = PrintDataFrame(df, False) + '\\n'\n    assert result.exit_code == 0\n    assert result.output == test_output\n"
-}

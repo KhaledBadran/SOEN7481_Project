@@ -1,9 +1,0 @@
-{
-    "functionName": "test_issue_15",
-    "className": "TestOldIssues",
-    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_test_issues.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" query should be expanded before perform character encoding \"\"\"\nconn = self.connect()\nc = conn.cursor()\nwith warnings.catch_warnings():\n    warnings.filterwarnings('ignore')\n    c.execute('drop table if exists issue15')\nc.execute('create table issue15 (t varchar(32))')\ntry:\n    c.execute('insert into issue15 (t) values (%s)', (u'\u00e4\u00f6\u00fc',))\n    c.execute('select t from issue15')\n    self.assertEqual(u'\u00e4\u00f6\u00fc', c.fetchone()[0])\nfinally:\n    c.execute('drop table issue15')\n"
-}

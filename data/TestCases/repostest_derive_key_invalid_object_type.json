@@ -1,9 +1,0 @@
-{
-    "functionName": "test_derive_key_invalid_object_type",
-    "className": "TestProxyKmipClient",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_test_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the right error is raised when attempting to derive a key\n        with an invalid object type.\n        \"\"\"\nclient = ProxyKmipClient()\nclient.open()\nclient.proxy.derive_key.return_value = {}\nargs = ['invalid', ['2', '3'], enums.DerivationMethod.ENCRYPT, {\n    'cryptographic_parameters': {'cryptographic_algorithm': enums.\n    CryptographicAlgorithm.AES, 'block_cipher_mode': enums.BlockCipherMode.\n    CBC, 'padding_method': enums.PaddingMethod.PKCS1v15},\n    'initialization_vector': b'\\x01\\x02\\x03\\x04', 'derivation_data':\n    b'\\xff\\xfe\\xfe\\xfc'}]\nkwargs = {'cryptographic_length': 128, 'cryptographic_algorithm': enums.\n    CryptographicAlgorithm.AES}\nself.assertRaisesRegex(TypeError,\n    'Object type must be an ObjectType enumeration.', client.derive_key, *\n    args, **kwargs)\nmock.patch('kmip.pie.client.KMIPProxy', mock.MagicMock(spec_set=KMIPProxy))"
-}

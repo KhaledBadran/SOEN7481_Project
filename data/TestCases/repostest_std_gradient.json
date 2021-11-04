@@ -1,9 +1,0 @@
-{
-    "functionName": "test_std_gradient",
-    "className": null,
-    "fileName": "/bytesandbrains_&_ProcessOptimizer/ProcessOptimizer_&_learning_&_gaussian_process_&_tests_&_test_gpr.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "length_scale = np.arange(1, 6)\nX = rng.randn(10, 5)\ny = rng.randn(10)\nX_new = rng.randn(5)\nrbf = RBF(length_scale=length_scale, length_scale_bounds='fixed')\ngpr = GaussianProcessRegressor(rbf, random_state=0).fit(X, y)\n_, _, _, std_grad = gpr.predict(np.expand_dims(X_new, axis=0), return_std=\n    True, return_cov=False, return_mean_grad=True, return_std_grad=True)\nnum_grad = optimize.approx_fprime(X_new, lambda x: predict_wrapper(x, gpr)[\n    1], 0.0001)\nassert_array_almost_equal(std_grad, num_grad, decimal=3)\npytest.mark.fast_test"
-}

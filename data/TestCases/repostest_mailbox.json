@@ -1,9 +1,0 @@
-{
-    "functionName": "test_mailbox",
-    "className": "TestCase",
-    "fileName": "/IntegralDefense_&_ACE/lib_&_saq_&_modules_&_test_email.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "import saq.modules.email\nroot = create_root_analysis(alert_type='mailbox')\nroot.initialize_storage()\nroot.details = {'hello': 'world'}\nshutil.copy(os.path.join('test_data', 'emails',\n    'splunk_logging.email.rfc822'), os.path.join(root.storage_dir,\n    'email.rfc822'))\nfile_observable = root.add_observable(F_FILE, 'email.rfc822')\nfile_observable.add_directive(DIRECTIVE_ORIGINAL_EMAIL)\nroot.save()\nroot.schedule()\nengine = TestEngine()\nengine.enable_module('analysis_module_file_type', 'test_groups')\nengine.enable_module('analysis_module_email_analyzer', 'test_groups')\nengine.enable_module('analysis_module_mailbox_email_analyzer', 'test_groups')\nengine.controlled_stop()\nengine.start()\nengine.wait()\nroot = RootAnalysis(storage_dir=root.storage_dir)\nroot.load()\nself.assertTrue('hello' in root.details)\nself.assertTrue('email' in root.details)\nself.assertIsNotNone(root.details['email'])\nself.assertTrue(root.description.startswith(saq.modules.email.\n    MAILBOX_ALERT_PREFIX))\n"
-}

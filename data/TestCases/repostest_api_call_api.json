@@ -1,9 +1,0 @@
-{
-    "functionName": "test_api_call_api",
-    "className": "KeybaseAPITest",
-    "fileName": "/cmsteffen-code_&_PyKBLib/tests_&_test_pykblib_api.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "demo_query = {'method': 'demo'}\nmock_run_command.return_value = '{\"error\":{\"message\":\"error message\"}}'\nwith self.assertRaises(APIException):\n    self.api.call_api('team', demo_query)\nmock_run_command.assert_called_with('team api -m \\'{\"method\": \"demo\"}\\'')\nmock_run_command.return_value = '{\"result\": \"success\"}'\nmock_dict_to_ntuple.return_value = 'Success'\nself.assertEqual(self.api.call_api('team', demo_query), 'Success')\nmock_dict_to_ntuple.assert_called_with({'result': 'success'})\nmock.patch('pykblib.api.dict_to_ntuple')mock.patch('pykblib.api.KeybaseAPI.run_command')"
-}

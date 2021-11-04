@@ -1,9 +1,0 @@
-{
-    "functionName": "test_that_we_can_search_for_a_specific_user",
-    "className": null,
-    "fileName": "/AutomatedTester_&_Bugsy/tests_&_test_search.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "user_return = {'bugs': [{'product': 'addons.mozilla.org', 'summary':\n    'Add Selenium tests to the repository'}, {'product':\n    'addons.mozilla.org', 'summary':\n    'Add Ids to links to help with testability'}, {'product':\n    'addons.mozilla.org', 'summary':\n    'Add a name for AMO Themes sort links for testability'}, {'product':\n    'addons.mozilla.org', 'summary':\n    'Missing ID for div with class \"feature ryff\" (Mobile Add-on: Foursquare)'\n    }]}\nresponses.add(responses.GET, rest_url('bug', assigned_to=\n    'dburns@mozilla.com'), body=json.dumps(user_return), status=200,\n    content_type='application/json', match_querystring=True)\nbugzilla = Bugsy()\nbugs = bugzilla.search_for.assigned_to('dburns@mozilla.com').search()\nassert len(responses.calls) == 1\nassert len(bugs) == 4\nassert bugs[0].product == user_return['bugs'][0]['product']\nassert bugs[0].summary == user_return['bugs'][0]['summary']\nresponses.activate"
-}

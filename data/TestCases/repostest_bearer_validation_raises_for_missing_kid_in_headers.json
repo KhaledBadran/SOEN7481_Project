@@ -1,9 +1,0 @@
-{
-    "functionName": "test_bearer_validation_raises_for_missing_kid_in_headers",
-    "className": null,
-    "fileName": "/RobertoPrevato_&_GuardPost-JWT/tests_&_test_bearer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "issuer = 'aaa'\naudience = 'bbb'\nhandler = JWTBearerTest([issuer], [audience], [InMemoryKeyProvider({'001':\n    private_rsa_1.public_key()})])\ntoken = jwt.encode({'iss': issuer, 'aud': audience, 'some': 'payload'},\n    private_rsa_2, algorithm='RS256')\nwith pytest.raises(MissingKidError):\n    await handler.authenticate({'access_token': token.decode()})\npytest.mark.asyncio"
-}

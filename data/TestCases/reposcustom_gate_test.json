@@ -1,9 +1,0 @@
-{
-    "functionName": "custom_gate_test",
-    "className": "Test_kernel",
-    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_custom_gate.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "nqubits = 1\nk = ql.Kernel('aKernel', platf, nqubits)\nk.load_custom_instructions('instructions.json')\nk.print_custom_instructions()\nk.prepz(0)\nk.x(0)\nk.gate('rx180', [0])\nk.gate('rx180', 0)\nsweep_points = [1, 1.25, 1.75, 2.25, 2.75]\np = ql.Program('aProgram', platf, nqubits)\np.set_sweep_points(sweep_points, len(sweep_points))\np.add_kernel(k)\np.compile(optimize=False, scheduler='ASAP', log_level='LOG_WARNING')\nqasm_files = []\nqasm_files.append(os.path.join(output_dir, 'aProgram.qasm'))\nqasm_files.append(os.path.join(output_dir, 'aProgram_scheduled.qasm'))\nfor qasm_file in qasm_files:\n    qasm_reader = ql.QASM_Loader(qasm_file)\n    errors = qasm_reader.load()\n    self.assertTrue(errors == 0)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_create_bdist",
-    "className": null,
-    "fileName": "/Pebaz_&_Nimporter/tests_&_test_installation.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test the successful create of a wheel.\"\"\"\nwith nimporter.cd('tests/proj1'):\n    subprocess.Popen(f'{PYTHON} setup.py bdist_wheel'.split()).wait()\n    dist = Path('dist')\n    build = Path('build')\n    egg = Path('project1.egg-info')\n    try:\n        assert dist.exists()\n        assert build.exists()\n        assert egg.exists()\n        targets = list(Path('dist').glob('project1*.whl'))\n        assert len(targets) == 1\n        assert targets[0].exists()\n        for extension in Path('nim-extensions').iterdir():\n            nim_build_data_file, = extension.glob('*json')\n            nim_build_data = json.loads(nim_build_data_file.read_text())\n            expected = nimporter.NimCompiler.get_compatible_compiler()\n            installed_ccs = nimporter.NimCompiler.get_installed_compilers()\n            if not expected:\n                warnings.warn(\n                    f'No compatible C compiler installed: {installed_ccs}')\n            else:\n                cc_path = installed_ccs[expected]\n                actual = nim_build_data['linkcmd'].split()[0].strip()\n                if not actual.startswith(cc_path.stem):\n                    warnings.warn(\n                        f'Nim used a different C compiler than what Python expects. Python uses {cc_path.stem} and Nim used {actual}'\n                        )\n    finally:\n        shutil.rmtree(str(dist.absolute()))\n        shutil.rmtree(str(build.absolute()))\n        shutil.rmtree(str(egg.absolute()))\npytest.mark.integration_test"
-}

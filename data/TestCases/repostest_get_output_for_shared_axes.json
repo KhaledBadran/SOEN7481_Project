@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_output_for_shared_axes",
-    "className": "TestDropoutLayer",
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_noise.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from lasagne.layers.noise import DropoutLayer\nlayer = DropoutLayer((2, 4, 7, 9), shared_axes=shared_axes)\ninput = theano.shared(numpy.ones((2, 4, 7, 9)))\nresult = layer.get_output_for(input)\nresult_eval = result.eval()\nassert np.allclose(result_eval.mean(axis=shared_axes, keepdims=True),\n    result_eval)\npytest.mark.parametrize('shared_axes', [(), (0,), (2, 3), (-1, -2)])"
-}

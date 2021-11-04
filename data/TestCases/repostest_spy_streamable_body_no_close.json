@@ -1,9 +1,0 @@
-{
-    "functionName": "test_spy_streamable_body_no_close",
-    "className": "TestCloseableStreamIterator",
-    "fileName": "/cbefus_&_Eynnyd/tests_&_wsgi_&_test_closeable_stream_iterator.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class SpyStreamableBody:\n\n    def __init__(self, size=500):\n        self._size = size\n        self._read_call_count = 0\n\n    @property\n    def read_call_count(self):\n        return self._read_call_count\n\n    def read(self, block_size):\n        self._size -= block_size\n        self._read_call_count += 1\n        if self._size < 0:\n            return b''\n        else:\n            return b'some content'\nbody = SpyStreamableBody()\nstream = CloseableStreamIterator(body, 100)\nfor _ in stream:\n    pass\nstream.close()\nself.assertEqual(6, body.read_call_count)\n"
-}

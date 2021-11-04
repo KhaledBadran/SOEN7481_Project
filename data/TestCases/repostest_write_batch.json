@@ -1,9 +1,0 @@
-{
-    "functionName": "test_write_batch",
-    "className": "TestData",
-    "fileName": "/tum-pbs_&_PhiFlow/tests_&_test_data.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "for scene in Scene.list('data'):\n    scene.remove()\nscene_batch = Scene.create('data', count=2)\nself.assertEqual(scene_batch.batch_size, 2)\nself.assertEqual(len(Scene.list('data')), 2)\nbatched_data = np.zeros([2, 4, 4, 1])\nunbatched_data = np.ones([1, 4, 4, 1])\nscene_batch.write(batched_data, frame=0)\nscene_batch.write(unbatched_data, frame=1)\nself.assertTrue(os.path.exists('data/sim_000000/unnamed_000000.npz'))\nself.assertTrue(os.path.exists('data/sim_000000/unnamed_000001.npz'))\nself.assertTrue(os.path.exists('data/sim_000001/unnamed_000000.npz'))\nself.assertTrue(os.path.exists('data/sim_000001/unnamed_000001.npz'))\n"
-}

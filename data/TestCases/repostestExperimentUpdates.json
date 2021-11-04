@@ -1,9 +1,0 @@
-{
-    "functionName": "testExperimentUpdates",
-    "className": "SQAStoreTest",
-    "fileName": "/facebook_&_Ax/ax_&_storage_&_sqa_store_&_tests_&_test_sqa_store.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "experiment = get_experiment_with_batch_trial()\nsave_experiment(experiment)\nself.assertEqual(get_session().query(SQAExperiment).count(), 1)\nexperiment.description = 'foobar'\nsave_experiment(experiment)\nself.assertEqual(get_session().query(SQAExperiment).count(), 1)\nexperiment.status_quo = Arm(parameters={'w': 0.0, 'x': 1, 'y': 'y', 'z': True})\nsave_experiment(experiment)\nself.assertEqual(get_session().query(SQAExperiment).count(), 1)\nloaded_experiment = load_experiment(experiment.name)\nself.assertEqual(experiment, loaded_experiment)\n"
-}

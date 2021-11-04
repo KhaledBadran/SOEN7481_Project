@@ -1,9 +1,0 @@
-{
-    "functionName": "test_recurrent_return_shape",
-    "className": null,
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_recurrent.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "num_batch, seq_len, n_features1, n_features2 = 5, 3, 10, 11\nnum_units = 6\nx = T.tensor4()\nin_shp = num_batch, seq_len, n_features1, n_features2\nl_inp = InputLayer(in_shp)\nl_rec = RecurrentLayer(l_inp, num_units=num_units)\nx_in = np.random.random(in_shp).astype('float32')\noutput = helper.get_output(l_rec, x)\noutput_val = output.eval({x: x_in})\nassert helper.get_output_shape(l_rec, x_in.shape) == output_val.shape\nassert output_val.shape == (num_batch, seq_len, num_units)\n"
-}

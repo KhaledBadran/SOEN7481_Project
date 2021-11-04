@@ -1,9 +1,0 @@
-{
-    "functionName": "test_matplotlib_writer",
-    "className": null,
-    "fileName": "/Edinburgh-Genome-Foundry_&_Flametree/tests_&_test_basics.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "zip_path = os.path.join(str(tmpdir), 'archive.zip')\nfolder_path = os.path.join(str(tmpdir), 'test_folder')\ntry:\n    import matplotlib.pyplot as plt\nexcept ImportError:\n    print('Not running test_matplotlib_writer: Matplotlib not available.')\n    return True\nfig, ax = plt.subplots(1)\nwith file_tree(zip_path) as zip_root:\n    fig_dir = zip_root._dir('figures', replace=False)\n    fig.savefig(fig_dir._file('fig.png').open('wb'), format='png')\n    fig.savefig(fig_dir._file('fig.pdf').open('wb'), format='pdf')\nwith file_tree(folder_path) as root:\n    fig_dir = root._dir('figures', replace=False)\n    fig.savefig(fig_dir._file('fig.png').open('wb'), format='png')\n    fig.savefig(fig_dir._file('fig.pdf').open('wb'), format='pdf')\nassert set([f._name for f in root._all_files]) == set(['fig.png', 'fig.pdf'])\nassert os.path.exists(os.path.join(folder_path, 'figures', 'fig.pdf'))\n"
-}

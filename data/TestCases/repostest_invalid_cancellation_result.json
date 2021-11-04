@@ -1,9 +1,0 @@
-{
-    "functionName": "test_invalid_cancellation_result",
-    "className": "TestCancelResponsePayload",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_cancel.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a TypeError is raised when an invalid value is used to set\n        the cancellation result of an Cancel response payload.\n        \"\"\"\nkwargs = {'cancellation_result': 'invalid'}\nself.assertRaisesRegex(TypeError,\n    'Cancellation result must be a CancellationResult enumeration.',\n    payloads.CancelResponsePayload, **kwargs)\npayload = payloads.CancelResponsePayload()\nargs = payload, 'cancellation_result', 'invalid'\nself.assertRaisesRegex(TypeError,\n    'Cancellation result must be a CancellationResult enumeration.',\n    setattr, *args)\n"
-}

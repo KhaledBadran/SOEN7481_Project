@@ -1,9 +1,0 @@
-{
-    "functionName": "test_register_on_operation_failure",
-    "className": "TestProxyKmipClient",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_test_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a KmipOperationFailure exception is raised when the\n        backend fails to register a key.\n        \"\"\"\nstatus = enums.ResultStatus.OPERATION_FAILED\nreason = enums.ResultReason.GENERAL_FAILURE\nmessage = 'Test failure message'\nresult = results.OperationResult(contents.ResultStatus(status), contents.\n    ResultReason(reason), contents.ResultMessage(message))\nerror_msg = str(KmipOperationFailure(status, reason, message))\nkey_value = b'\\x00\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08\\t\\n\\x0b\\x0c\\r\\x0e\\x0f'\nkey = objects.SymmetricKey(enums.CryptographicAlgorithm.AES, 128, key_value)\nclient = ProxyKmipClient()\nclient.open()\nclient.proxy.register.return_value = result\nargs = [key]\nself.assertRaisesRegex(KmipOperationFailure, error_msg, client.register, *args)\nmock.patch('kmip.pie.client.KMIPProxy', mock.MagicMock(spec_set=KMIPProxy))"
-}

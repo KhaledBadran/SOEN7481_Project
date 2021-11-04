@@ -1,9 +1,0 @@
-{
-    "functionName": "test_map_vader_sentiment",
-    "className": null,
-    "fileName": "/EVEprosper_&_ProsperDatareader/tests_&_test_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"validate map_vader_sentiment() behavior\"\"\"\ndemo_df = pd.DataFrame(DEMO_DATA)\ngraded_df = utils.map_vader_sentiment(demo_df['text'])\nassert graded_df['compound'].loc[0] > 0\nassert graded_df['compound'].loc[1] < 0\nassert graded_df['compound'].loc[2] == 0\ncustom_columns = ['ennie', 'mennie', 'minie', 'moe']\ncustom_df = utils.map_vader_sentiment(demo_df['text'], column_names=\n    custom_columns)\nmy_cols = list(custom_df.columns.values)\nassert list(set(custom_columns) - set(my_cols)) == []\nwith pytest.raises(exceptions.VaderClassificationException):\n    bad_df = utils.map_vader_sentiment(demo_df['text'], column_names=['not',\n        'enough', 'keys'])\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_boxMask",
-    "className": null,
-    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_Mask.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "X, Y, Z = np.array(np.meshgrid(np.linspace(0, 2, 100), np.linspace(0, 2, \n    100), np.linspace(0, 2, 100))).reshape(3, -1)\nclass p(object):\n    pass\npoints = p()\nfor name, coord in zip(['X', 'Y', 'Z'], [X, Y, Z]):\n    setattr(points, name, coord)\ncorners = np.array([[0, 0, 0], [1, 0, 0], [0, 0.5, 0], [0, 0, 0.5]])\nbox = boxMask(*corners, coordinates=['X', 'Y', 'Z'])\nbox2 = boxMask([0, 0, 0], [1, 0.5, 0], [0, 0, 0.5])\nmask = box(points)\nmask2 = box2(X, Y, Z)\nassert np.sum(mask) == int(100 ** 3 * (1 / 2 * 1 / 4 ** 2))\nassert np.all(mask2 == mask)\nbox3 = boxMask([1, 0, 0], [0, 0.5, 0], [0, 0, 0.5], [0, 0, 0])\nassert np.isclose(box3.length * box3.width * box3.height, 0.25)\nassert np.all(np.isclose(box3.center, np.array([0.34444444, -0.06111111, \n    0.13888889])))\n"
-}

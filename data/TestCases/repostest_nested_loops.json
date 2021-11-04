@@ -1,9 +1,0 @@
-{
-    "functionName": "test_nested_loops",
-    "className": "TestLoop",
-    "fileName": "/whiteclover_&_Choco/test_&_test_loop.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "template = Template(\n    \"\"\"% for x in 'ab':\n${x} ${loop.index} <- start in outer loop\n% for y in [0, 1]:\n${y} ${loop.index} <- go to inner loop\n% endfor\n${x} ${loop.index} <- back to outer loop\n% endfor\"\"\"\n    )\ncode = template.code\nrendered = template.render()\nexpected = ['a 0 <- start in outer loop', '0 0 <- go to inner loop',\n    '1 1 <- go to inner loop', 'a 0 <- back to outer loop',\n    'b 1 <- start in outer loop', '0 0 <- go to inner loop',\n    '1 1 <- go to inner loop', 'b 1 <- back to outer loop']\nfor line in expected:\n    assert line in rendered, 'The LoopStack allows you to take advantage of the loop variable even in embedded loops'\n"
-}

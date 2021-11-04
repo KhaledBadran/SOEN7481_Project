@@ -1,9 +1,0 @@
-{
-    "functionName": "test_min_volatility_no_rets",
-    "className": null,
-    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_efficient_frontier.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "df = get_data()\nS = risk_models.sample_cov(df)\nef = EfficientFrontier(None, S)\nw = ef.min_volatility()\nassert isinstance(w, dict)\nassert set(w.keys()) == set(ef.tickers)\nnp.testing.assert_almost_equal(ef.weights.sum(), 1)\nassert all([(i >= 0) for i in w.values()])\nnp.testing.assert_almost_equal(ef.portfolio_performance()[1], \n    0.15915084514118694)\n"
-}

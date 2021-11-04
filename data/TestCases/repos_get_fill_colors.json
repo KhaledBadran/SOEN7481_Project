@@ -1,9 +1,0 @@
-{
-    "functionName": "_get_fill_colors",
-    "className": null,
-    "fileName": "/nipy_&_PySurfer/surfer_&_viz.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Get the fill colors for the middle of divergent colormaps.\n\n    Tries to figure out whether there is a smooth transition in the center of\n    the original colormap. If yes, it chooses the color in the center as the\n    only fill color, else it chooses the two colors between which there is\n    a large step in color space to fill up the middle of the new colormap.\n    \"\"\"\nsteps = np.linalg.norm(np.diff(cols[:, :3].astype(float), axis=0), axis=1)\nind = np.flatnonzero(steps[1:-1] > steps[[0, -1]].mean() * 3)\nif ind.size > 0:\n    ind = ind[0] + 1\n    fillcols = np.r_[np.tile(cols[(ind), :], (n_fill // 2, 1)), np.tile(\n        cols[(ind + 1), :], (n_fill - n_fill // 2, 1))]\nelse:\n    fillcols = np.tile(cols[(int(cols.shape[0] / 2)), :], (n_fill, 1))\nreturn fillcols\n"
-}

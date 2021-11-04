@@ -1,9 +1,0 @@
-{
-    "functionName": "test_fitting_storm",
-    "className": "TestSynthCellFitting",
-    "fileName": "/Jhsmit_&_ColiCoords/test_&_test_fitting.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "cell = self.cells[0]\ncell_fit = cell.copy()\ncell_fit.coords.xl -= 5\ncell_fit.coords.xr -= 2\ncell_fit.coords.a0 -= 5\ncell_fit.coords.a1 *= 0.1\ncell_fit.coords.a2 *= -1.2\ncell_fit.coords.r += 5\nres = cell_fit.optimize('storm', minimizer=Powell)\nres_dict = {'a0': 10.97109892275029, 'a1': 0.18567779050907443, 'a2': -\n    0.0025215258088723746, 'r': 7.4819827565860555, 'xl': \n    13.174377724643914, 'xr': 60.56108371075396}\nself.assertAlmostEqual(214.05394964376524, self.cf * res.objective_value, 5)\nfor k, v in res_dict.items():\n    self.assertAlmostEqual(v, res.params[k], 3)\n"
-}

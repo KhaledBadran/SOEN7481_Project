@@ -1,9 +1,0 @@
-{
-    "functionName": "fake_handler2",
-    "className": null,
-    "fileName": "/mobidevke_&_PyFineract/tests_&_test_pagination.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "parsed = urlparse(req.url)\nparams = parse_qs(parsed.query)\nparams = {key: val[0] for key, val in params.items()}\nclass FakeResponse(Response):\n\n    @property\n    def ok(self):\n        return True\n\n    def json(self, **kwargs1):\n        with open('tests/clients.json', 'r') as in_file:\n            data = json.load(in_file)\n        offset = int(params.get('offset', 0))\n        limit = int(params.get('limit', 30))\n        items = []\n        count = 0\n        for item in data[offset:]:\n            if count == limit:\n                break\n            items.append(item)\n            count += 1\n        return {'totalFilteredRecords': len(data), 'pageItems': items}\nreturn FakeResponse()\n"
-}

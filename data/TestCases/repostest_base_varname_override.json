@@ -1,9 +1,0 @@
-{
-    "functionName": "test_base_varname_override",
-    "className": "ConfigureTest",
-    "fileName": "/openworm_&_PyOpenWorm/tests_&_ConfigureTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with patch('owmeta.configure.resource_filename') as rf:\n    with patch.dict('os.environ', {'BASE': 'cars'}, clear=True):\n        rf.return_value = 'moosh'\n        tf = self.tempfile()\n        print('{\"z\": \"$BASE/car\"}', file=tf)\n        tf.close()\n        try:\n            c = Configure.open(tf.name)\n            self.assertEqual(c['z'], 'cars/car')\n        finally:\n            os.unlink(tf.name)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_tagged_counter_metric",
-    "className": null,
-    "fileName": "/michael-lazar_&_Akita/tests_&_test_metrics.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "metric = TaggedCounterMetric(window_size=2, n_windows=5)\nassert len(metric.history) == 5\nassert sum(metric.total.values()) == 0\nmetric.flush(timestamp=0)\nassert metric.total == Counter()\nmetric.add_point(tags=['foo', 'bar'])\nmetric.flush(timestamp=2.1)\nassert metric.history[0] == Counter({'foo': 1, 'bar': 1, None: 1})\nmetric.add_point(tags=['foo'])\nmetric.flush(timestamp=4.0)\nassert metric.history[0] == Counter({'foo': 1, None: 1})\nmetric.add_point()\nmetric.add_point(tags=['bar'])\nmetric.add_point(tags=['buzz'])\nmetric.flush(timestamp=6.3)\nassert metric.history[0] == Counter({'bar': 1, 'buzz': 1, None: 3})\nassert metric.total == Counter({'foo': 2, 'bar': 2, 'buzz': 1, None: 5})\n"
-}

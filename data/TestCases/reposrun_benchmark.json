@@ -1,9 +1,0 @@
-{
-    "functionName": "run_benchmark",
-    "className": "WofostTestingTemplate",
-    "fileName": "/ajwdewit_&_pcse_&_/pcse_&_tests_&_test_wofost.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "benchmark_data = self.BenchmarkRetriever(var_to_benchmark)\nmsg = 'Failure to retrieve benchmark data.'\nself.assertTrue(len(benchmark_data) > 0, msg)\nn_assert = 0\nfor day, benchmark in benchmark_data:\n    value = self.OutputRetriever(day, var_to_benchmark)\n    if value is None:\n        continue\n    diff = float(abs(value - benchmark))\n    assertmsg = 'Test day, variable %s, %s: %f vs %f' % (day,\n        var_to_benchmark, benchmark, value)\n    self.assertAlmostEqual(diff, 0.0, precision, assertmsg)\n    n_assert += 1\nmsg = \"No data found in sim_results_timeseries table for variable '%s'\"\nmsg = msg % var_to_benchmark\nself.assertGreater(n_assert, 0, msg)\n"
-}

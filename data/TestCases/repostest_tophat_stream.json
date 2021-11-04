@@ -1,9 +1,0 @@
-{
-    "functionName": "test_tophat_stream",
-    "className": "TestFilterStream",
-    "fileName": "/michaelbuehlmann_&_CatAna/test_&_python_&_io_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "N = 1000\ndata = np.zeros((N, 3))\ndata[:, (0)] = np.random.permutation(np.arange(N))\npc = catana.PointContainer(data)\nsource = catana.io.PointContainerSource(pc)\npc2 = catana.PixelizedPointContainer(16)\nsink = catana.io.PixelizedPointContainerSink(pc2)\nf = catana.io.TophatRadialWindowFunctionFilter(222.4)\nfs = catana.io.FilterStream(source, sink)\nfs.add_filter(f)\nfs.run()\nassert np.sum(pc2.get_countmap()) == 223\n"
-}

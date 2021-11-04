@@ -1,9 +1,0 @@
-{
-    "functionName": "test_loguniform",
-    "className": null,
-    "fileName": "/Neuraxio_&_Neuraxle/testing_&_hyperparams_&_test_distributions.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "min_included = 0.001\nmax_included = 10\nhd = LogUniform(min_included, max_included)\nsamples = get_many_samples_for(hd)\nsamples_mean = np.abs(np.mean(samples))\nassert samples_mean < 1.15\nassert min(samples) >= 0.001\nassert max(samples) <= 10.0\nassert hd.pdf(0.0001) == 0.0\nassert abs(hd.pdf(2) - 0.054286810237906484) < 1e-06\nassert hd.pdf(10.1) == 0.0\nassert hd.cdf(0.0001) == 0.0\nassert abs(hd.cdf(2) - (math.log2(2) - math.log2(0.001)) / (math.log2(10) -\n    math.log2(0.001))) < 1e-06\nassert hd.cdf(10.1) == 1.0\nassert hd.min() == min_included\nassert hd.max() == max_included\nassert abs(hd.mean() - (max_included - min_included) / (math.log(2) * (math\n    .log2(max_included) - math.log2(min_included)))) < 1e-06\nesperance_squared = (max_included ** 2 - min_included ** 2) / (2 * math.log\n    (2) * (math.log2(max_included) - math.log2(min_included)))\nassert abs(hd.var() - (esperance_squared - hd.mean() ** 2)) < 1e-06\nassert abs(hd.mean() - np.mean(samples)) < 0.05\nassert abs(hd.var() - np.var(samples)) < 0.25\n"
-}

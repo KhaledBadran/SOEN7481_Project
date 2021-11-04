@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_response_for_file_returns_headers_with_information",
-    "className": null,
-    "fileName": "/RobertoPrevato_&_BlackSheep/tests_&_test_files_serving.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "response = get_response_for_file(Request(method, b'/example', None),\n    file_path, 1200)\nassert response.status == 200\ninfo = FileInfo.from_path(file_path)\nexpected_headers = {b'etag': info.etag.encode(), b'last-modified': str(info\n    .modified_time).encode(), b'accept-ranges': b'bytes', b'cache-control':\n    b'max-age=1200'}\nfor expected_header_name, expected_header_value in expected_headers.items():\n    value = response.get_single_header(expected_header_name)\n    assert value is not None\n    assert value == expected_header_value\npytest.mark.asynciopytest.mark.parametrize('file_path,method', TEST_FILES_METHODS)"
-}

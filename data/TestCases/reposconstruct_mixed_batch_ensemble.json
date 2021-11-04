@@ -1,9 +1,0 @@
-{
-    "functionName": "construct_mixed_batch_ensemble",
-    "className": null,
-    "fileName": "/gregmedlock_&_Medusa/medusa_&_test_&_test_load_from_file.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "model1 = create_test_model('textbook')\nmodel1.remove_reactions(model1.reactions[1:3])\nmodel1.id = 'first_textbook'\ncobra.io.save_json_model(model1, 'model1.json')\nmodel2 = create_test_model('textbook')\nmodel2.remove_reactions(model2.reactions[4:6])\nmodel2.id = 'second_textbook'\ncobra.io.save_json_model(model2, 'model2.json')\nmodel3 = create_test_model('textbook')\nmodel3.remove_reactions(model3.reactions[5:7])\nmodel3.id = 'third_textbook'\nmodel3.reactions.get_by_id('SUCCt2_2').lower_bound = -1000\ncobra.io.save_json_model(model3, 'model3.json')\nmodel4 = model3.copy()\nmodel4.id = 'dual_features'\nmodel4.reactions[1].lower_bound = 0\ncobra.io.save_json_model(model4, 'model4.json')\nmodel_file_names = ['model1.json', 'model2.json', 'model3.json', 'model4.json']\nbatch_mixed_ensemble = batch_load_from_files(model_file_names, identifier=\n    'textbook_ensemble', batchsize=2)\nreturn batch_mixed_ensemble\n"
-}

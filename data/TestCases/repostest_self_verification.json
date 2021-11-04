@@ -1,9 +1,0 @@
-{
-    "functionName": "test_self_verification",
-    "className": "TestConfigPolicyManager",
-    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_policy_manager.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "policyManager = SelfVerifyPolicyManager(self.identityStorage)\nkeyChain = KeyChain(self.identityManager, policyManager)\nidentityName = Name('TestValidator/RsaSignatureVerification')\nkeyChain.createIdentityAndCertificate(identityName)\ndata = Data(Name('/TestData/1'))\nkeyChain.signByIdentity(data, identityName)\nvr = doVerify(policyManager, data)\nself.assertFalse(vr.hasFurtherSteps,\n    'SelfVerifyPolicyManager returned a ValidationRequest')\nself.assertEqual(vr.failureCount, 0,\n    'Verification of identity-signed data failed')\nself.assertEqual(vr.successCount, 1,\n    'Verification success called {} times instead of 1'.format(vr.successCount)\n    )\ndata2 = Data(Name('/TestData/2'))\nvr = doVerify(policyManager, data2)\nself.assertFalse(vr.hasFurtherSteps,\n    'SelfVerifyPolicyManager returned a ValidationRequest')\nself.assertEqual(vr.successCount, 0, 'Verification of unsigned data succeeded')\nself.assertEqual(vr.failureCount, 1,\n    'Verification failure callback called {} times instead of 1'.format(vr.\n    failureCount))\n"
-}

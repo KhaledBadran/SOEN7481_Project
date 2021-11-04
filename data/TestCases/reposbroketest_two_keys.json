@@ -1,9 +1,0 @@
-{
-    "functionName": "broketest_two_keys",
-    "className": "TestKeyOptions",
-    "fileName": "/kenfar_&_DataGristle/scripts_&_tests_&_test_gristle_sorter_cmd.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "in_fqfn = create_complex_test_file(self.temp_dir, header=False)\ndialect = csvhelper.Dialect(delimiter=',', quoting=csv.QUOTE_NONE,\n    quotechar=None, has_header=False, doublequote=False)\nout_fqfn = in_fqfn + '.sorted'\ncmd = f\"\"\" {pjoin(SCRIPT_DIR, 'gristle_sorter')}                       -i {in_fqfn}\n                    -o {out_fqfn}\n                    -k 0ir 1sf\n              \"\"\"\nexecutor(cmd, expect_success=True)\nactual_recs = get_file_contents(out_fqfn, dialect)\nexpected_recs = [['4', 'aaa', 'a23'], ['4', 'aba', 'a23'], ['4', 'bbb',\n    'a23'], ['3', 'aaa', 'b23'], ['3', 'aaa', 'b23'], ['1', 'aaa', 'a23']]\npp(actual_recs)\nassert actual_recs == expected_recs\n"
-}

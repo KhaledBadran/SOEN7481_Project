@@ -1,9 +1,0 @@
-{
-    "functionName": "test_hipchat_logger",
-    "className": null,
-    "fileName": "/EVEprosper_&_ProsperCommon/tests_&_test_prosper_logging.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Execute LogCapture on Slack logger object\"\"\"\nif not HIPCHAT_WEBHOOK:\n    pytest.xfail('hipchat_webhook is blank')\ntest_logname = 'hipchat_logger'\nlog_builder = prosper_logging.ProsperLogger(test_logname, LOG_PATH,\n    config_obj=config)\nlog_builder.configure_hipchat_logger(HIPCHAT_WEBHOOK)\ntest_logger = log_builder.get_logger()\nlog_capture = helper_log_messages(test_logger)\nrequest_POST_endpoint = HIPCHAT_POST_ENDPOINT.format(hipchat_hostname=\n    HIPCHAT_HOSTNAME, hipchat_port=HIPCHAT_PORT, webhook_info=\n    HIPCHAT_WEBHOOK.replace(HIPCHAT_HOSTNAME, ''))\nnew_connection_message = HIPCHAT_NEW_CONNECTION.format(hipchat_hostname=\n    HIPCHAT_HOSTNAME).replace('https://', '')\nlog_capture.check((test_logname, 'INFO',\n    'prosper.common.prosper_logging TEST --INFO--'), (test_logname,\n    'WARNING', 'prosper.common.prosper_logging TEST --WARNING--'), (\n    REQUEST_LOGNAME, 'DEBUG', new_connection_message), (REQUEST_LOGNAME,\n    'DEBUG', request_POST_endpoint), (test_logname, 'ERROR',\n    'prosper.common.prosper_logging TEST --ERROR--'), (REQUEST_LOGNAME,\n    'DEBUG', new_connection_message), (REQUEST_LOGNAME, 'DEBUG',\n    request_POST_endpoint), (test_logname, 'CRITICAL',\n    'prosper.common.prosper_logging TEST --CRITICAL--'))\npytest.mark.loud"
-}

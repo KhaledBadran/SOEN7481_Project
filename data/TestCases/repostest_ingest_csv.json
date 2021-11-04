@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ingest_csv",
-    "className": null,
-    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_server_&_tests_&_test_ingestion.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "method = V01 + '/feature-extraction/'\ndata = app.post_check(method, json={'column_ids': [1, 3]})\ndsid = data['id']\nmethod += dsid\napp.post_check(method, json={'dataset_definition': [{'file_path': os.path.\n    join(data_dir, '..', '..', 'ds_003', 'example.csv')}]})\ndata = app.get_check(method)\ndata = app.post_check(method + '/id-mapping', json={'return_file_path': True})\nassert len(data.get('data', [])) == 4\nassert data.get('data', [])[-1] == {'document_id': 3, 'file_path':\n    'example.csv:3', 'internal_id': 3}\npars = {'parent_id': dsid, 'data': [{'document_id': 0, 'category':\n    'positive'}, {'document_id': 1, 'category': 'negative'}], 'method':\n    'NearestNeighbor', 'training_scores': True}\nmethod = V01 + '/categorization/'\ndata = app.post_check(method, json=pars)\nmid = data['id']\nmethod = V01 + '/categorization/{}/predict'.format(mid)\ndata = app.get_check(method)\nassert data['pagination']['total_response_count'] == 2\n"
-}

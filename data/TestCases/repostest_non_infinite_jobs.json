@@ -1,9 +1,0 @@
-{
-    "functionName": "test_non_infinite_jobs",
-    "className": null,
-    "fileName": "/roniemartinez_&_DocCron/tests_&_test_not_infinite.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "next_minute = datetime.now(tz=tzlocal()).replace(second=0, microsecond=0\n    ) + timedelta(minutes=1)\nbar.__doc__ = \"\"\"\n    /etc/crontab::\n\n        {} {} {} {} * {}\n    \"\"\".format(\n    next_minute.minute, next_minute.hour, next_minute.day, next_minute.\n    month, next_minute.year)\njobs_found = False\nfor next_schedule, function_object in doccron.run_jobs(simulate=True):\n    assert next_schedule == datetime.now(tz=tzlocal()).replace(second=0,\n        microsecond=0) + timedelta(minutes=1)\n    jobs_found = True\nassert jobs_found\n"
-}

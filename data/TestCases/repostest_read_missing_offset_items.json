@@ -1,9 +1,0 @@
-{
-    "functionName": "test_read_missing_offset_items",
-    "className": "TestLocateRequestPayload",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_locate.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a Locate request payload can be read from a data stream\n        even when missing the offset items.\n        \"\"\"\npayload = payloads.LocateRequestPayload()\nself.assertIsNone(payload.maximum_items)\nself.assertIsNone(payload.offset_items)\nself.assertIsNone(payload.storage_status_mask)\nself.assertIsNone(payload.object_group_member)\nself.assertEqual([], payload.attributes)\npayload.read(self.no_offset_items_encoding)\nself.assertEqual(1, payload.maximum_items)\nself.assertIsNone(payload.offset_items)\nself.assertEqual(enums.get_bit_mask_from_enumerations([enums.\n    StorageStatusMask.ONLINE_STORAGE, enums.StorageStatusMask.\n    ARCHIVAL_STORAGE]), payload.storage_status_mask)\nself.assertEqual(enums.ObjectGroupMember.GROUP_MEMBER_DEFAULT, payload.\n    object_group_member)\nself.assertIsInstance(payload.attributes, list)\nself.assertEqual(1, len(payload.attributes))\nself.assertEqual(objects.Attribute(attribute_name=objects.Attribute.\n    AttributeName('Object Group'), attribute_value=primitives.TextString(\n    value='RoundRobinTestGroup', tag=enums.Tags.OBJECT_GROUP)), payload.\n    attributes[0])\n"
-}

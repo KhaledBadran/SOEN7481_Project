@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_optimal_op_set",
-    "className": null,
-    "fileName": "/viebboy_&_PyGOP/test_&_utility_&_test_gop_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "search_results = []\nconvergence_measure = random.choice(['train_', 'val_']) + random.choice([\n    'mean_squared_error', 'mean_absolute_error'])\ndirection = 'lower'\nlowest_value = -np.random.rand(1)[0] - 1.0\nfor i in range(10):\n    performance = {'train_mean_squared_error': np.random.rand(1)[0],\n        'val_mean_squared_error': np.random.rand(1)[0],\n        'train_mean_absolute_error': np.random.rand(1)[0],\n        'val_mean_absolute_error': np.random.rand(1)[0]}\n    weights = None\n    op_set_idx = None\n    history = None\n    search_results.append((performance, weights, op_set_idx, history))\nbest_performance = {'train_mean_squared_error': lowest_value,\n    'val_mean_squared_error': lowest_value, 'train_mean_absolute_error':\n    lowest_value, 'val_mean_absolute_error': lowest_value}\nweights = np.random.rand(10, 20)\nop_set_idx = np.random.randint(0, 1000)\nsearch_results.append((best_performance, weights, op_set_idx, history))\nrecovered_result = gop_utils.get_optimal_op_set(search_results,\n    convergence_measure, direction)\nassert recovered_result[0] == best_performance\nassert np.allclose(recovered_result[1], weights)\nassert recovered_result[2] == op_set_idx\n"
-}

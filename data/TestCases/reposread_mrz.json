@@ -1,9 +1,0 @@
-{
-    "functionName": "read_mrz",
-    "className": null,
-    "fileName": "/konstantint_&_PassportEye/passporteye_&_mrz_&_image.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"The main interface function to this module, encapsulating the recognition pipeline.\n       Given an image filename, runs MRZPipeline on it, returning the parsed MRZ object.\n\n    :param file: A filename or a stream to read the file data from.\n    :param save_roi: when this is True, the .aux['roi'] field will contain the Region of Interest where the MRZ was parsed from.\n    :param extra_cmdline_params:extra parameters to the ocr.py\n    \"\"\"\np = MRZPipeline(file, extra_cmdline_params)\nmrz = p.result\nif mrz is not None:\n    mrz.aux['text'] = p['text']\n    if save_roi:\n        mrz.aux['roi'] = p['roi']\nreturn mrz\n"
-}

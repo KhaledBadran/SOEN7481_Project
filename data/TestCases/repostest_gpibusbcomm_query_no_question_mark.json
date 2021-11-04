@@ -1,9 +1,0 @@
-{
-    "functionName": "test_gpibusbcomm_query_no_question_mark",
-    "className": null,
-    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_comm_&_test_gpibusb.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "comm = GPIBCommunicator(mock.MagicMock(), 1)\ncomm._version = 5\ncomm._file.sendcmd = mock.MagicMock()\ncomm._file.read = mock.MagicMock(return_value='answer')\ncomm.sendcmd = mock.MagicMock()\nassert comm._query('mock') == 'answer'\ncomm.sendcmd.assert_called_with('mock')\ncomm._file.read.assert_called_with(-1)\ncomm._file.sendcmd.assert_has_calls([mock.call('+read')])\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_custom_loss",
-    "className": null,
-    "fileName": "/dbehrlich_&_PsychRNN/test_&_backend_&_test_loss_functions.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "params = get_params()\nparams['loss_function'] = 'my_mean_squared_error'\nrnn = RNN(params)\nmocker.patch.object(RNN, 'forward_pass')\nRNN.forward_pass.return_value = tf.fill([params['N_batch'], params[\n    'N_steps'], params['N_out']], float('nan')), tf.fill([params['N_batch'],\n    params['N_steps'], params['N_rec']], float('nan'))\nwith pytest.raises(UserWarning) as excinfo:\n    rnn.build()\nassert 'my_mean_squared_error' in str(excinfo.value)\nrnn.destruct()\nparams['my_mean_squared_error'] = mean_squared_error\nrnn = RNN(params)\nmocker.patch.object(RNN, 'forward_pass')\nRNN.forward_pass.return_value = tf.fill([params['N_batch'], params[\n    'N_steps'], params['N_out']], float('nan')), tf.fill([params['N_batch'],\n    params['N_steps'], params['N_rec']], float('nan'))\nrnn.build()\npatch.object(RNN, '__abstractmethods__', set())"
-}

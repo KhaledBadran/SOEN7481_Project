@@ -1,9 +1,0 @@
-{
-    "functionName": "test_wrap_key_invalid_wrapping_method",
-    "className": "TestCryptographyEngine",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_crypto_&_test_engine.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the right error is raised when an invalid wrapping method\n        is specified for key wrapping.\n        \"\"\"\nengine = crypto.CryptographyEngine()\nargs = b'', 'invalid', enums.BlockCipherMode.NIST_KEY_WRAP, b''\nself.assertRaisesRegex(exceptions.InvalidField,\n    \"Wrapping method 'invalid' is not a supported key wrapping method.\",\n    engine.wrap_key, *args)\n"
-}

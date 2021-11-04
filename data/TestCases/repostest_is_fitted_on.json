@@ -1,9 +1,0 @@
-{
-    "functionName": "test_is_fitted_on",
-    "className": null,
-    "fileName": "/Accenture_&_AmpliGraph/tests_&_ampligraph_&_latent_features_&_test_models.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "model = DistMult(batches_count=2, seed=555, epochs=1, k=10, loss='pairwise',\n    loss_params={'margin': 5}, optimizer='adagrad', optimizer_params={'lr':\n    0.1})\nX = np.array([['a', 'y', 'b'], ['b', 'y', 'a'], ['a', 'y', 'c'], ['c', 'z',\n    'a'], ['a', 'z', 'd']])\nmodel.fit(X)\nX1 = np.array([['a', 'y', 'b'], ['b', 'y', 'a'], ['a', 'y', 'c'], ['c', 'z',\n    'a'], ['g', 'z', 'd']])\nX2 = np.array([['a', 'y', 'b'], ['b', 'y', 'a'], ['a', 'y', 'c'], ['c', 'z',\n    'a'], ['a', 'x', 'd']])\nassert model.is_fitted_on(X) is True\nassert model.is_fitted_on(X1) is False\nassert model.is_fitted_on(X2) is False\n"
-}

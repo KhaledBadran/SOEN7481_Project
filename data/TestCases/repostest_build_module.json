@@ -1,9 +1,0 @@
-{
-    "functionName": "test_build_module",
-    "className": null,
-    "fileName": "/Pebaz_&_Nimporter/tests_&_test_build.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that a given Nim module can produce a Python extension module.\"\"\"\nwith nimporter.cd('tests'):\n    module = Path('mod_a.nim')\n    output = NimCompiler.build_artifact(module)\n    f = io.StringIO()\n    with redirect_stdout(f):\n        artifact = NimCompiler.compile_nim_code(module, output, library=False)\n    assert artifact.exists()\n    assert artifact.parent == output.parent\n    assert 'Warning:' in f.getvalue()\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_whitened",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_test_kullback_leiblers.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Check that K=Identity and K=None give same answer\n    \"\"\"\nchol_from_diag = tf.stack([tf.linalg.diag(Datum.sqrt_diag[:, (i)]) for i in\n    range(Datum.N)])\ns = Datum.sqrt_diag if diag else chol_from_diag\nkl_white = gauss_kl(Datum.mu, s)\nkl_nonwhite = gauss_kl(Datum.mu, s, Datum.I)\nnp.testing.assert_allclose(kl_white, kl_nonwhite)\npytest.mark.parametrize('diag', [True, False])"
-}

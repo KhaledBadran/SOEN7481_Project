@@ -1,9 +1,0 @@
-{
-    "functionName": "test_screening",
-    "className": "TestFeatureOptimization",
-    "fileName": "/SUNCAT-Center_&_CatLearn/test_&_test_feature_optimization.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test feature screening.\"\"\"\ncorr = ['pearson', 'spearman', 'kendall']\nd, f = np.shape(self.train_features)\nfor c in corr:\n    screen = FeatureScreening(correlation=c, iterative=False)\n    feat = screen.eliminate_features(target=self.train_targets,\n        train_features=self.train_features, test_features=self.\n        test_features, size=d, step=None, order=None)\n    self.assertTrue(np.shape(feat[0])[1] == d and np.shape(feat[1])[1] == d)\n    screen = FeatureScreening(correlation=c, iterative=True, regression='ridge'\n        )\n    feat = screen.eliminate_features(target=self.train_targets,\n        train_features=self.train_features, test_features=self.\n        test_features, size=d, step=2, order=None)\n    self.assertTrue(np.shape(feat[0])[1] == d and np.shape(feat[1])[1] == d)\n    screen = FeatureScreening(correlation=c, iterative=True, regression='lasso'\n        )\n    feat = screen.eliminate_features(target=self.train_targets,\n        train_features=self.train_features, test_features=self.\n        test_features, size=d, step=2, order=None)\n    self.assertTrue(np.shape(feat[0])[1] == d and np.shape(feat[1])[1] == d)\n    screen = FeatureScreening(correlation=c, iterative=True, regression=\n        'lasso', random_check=True)\n    feat = screen.eliminate_features(target=self.train_targets,\n        train_features=self.train_features, test_features=self.\n        test_features, size=d, step=2, order=None)\n"
-}

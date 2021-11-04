@@ -1,9 +1,0 @@
-{
-    "functionName": "test_transient_fickian_diffusion",
-    "className": "TransientFickianDiffusionTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_TransientFickianDiffusionTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "alg = op.algorithms.TransientFickianDiffusion(network=self.net, phase=self.\n    phase)\nalg.setup(quantity='pore.concentration', conductance=\n    'throat.diffusive_conductance', t_initial=0, t_final=1000, t_step=1,\n    t_output=100, t_tolerance=1e-08, t_scheme='implicit')\nalg.set_IC(0)\nalg.set_value_BC(pores=self.net.pores('back'), values=1)\nalg.set_value_BC(pores=self.net.pores('front'), values=0)\nalg.run()\nx = [0.0, 0.0, 0.0, 0.33333, 0.33333, 0.33333, 0.66667, 0.66667, 0.66667, \n    1.0, 1.0, 1.0]\ny = np.around(alg[alg.settings['quantity']], decimals=5)\nassert np.all(x == y)\n"
-}

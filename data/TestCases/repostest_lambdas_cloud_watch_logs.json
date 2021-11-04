@@ -1,9 +1,0 @@
-{
-    "functionName": "test_lambdas_cloud_watch_logs",
-    "className": "test_Lambdas_Creation",
-    "fileName": "/pbx-gs_&_OSBot-AWS/tests_&_integration_&_test_Lambdas_Creation.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with Temp_Lambda() as _:\n    assert _.invoke() == 'hello None'\n    log_name = '/aws/lambda/{0}'.format(_.name)\n    logs = Logs(group_name=log_name)\n    assert logs.group_exists() is True\n    logs.stream_name = logs.streams()[0].get('logStreamName')\n    sleep(1.0)\n    messages = logs.messages()\n    assert len(messages) > 0\n    assert 'START RequestId: ' in messages.pop()\nunittest.skip('Use of sleep and fails occasionally in CodeBuild')"
-}

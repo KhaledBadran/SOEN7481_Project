@@ -1,9 +1,0 @@
-{
-    "functionName": "test_fba_specific_models",
-    "className": null,
-    "fileName": "/gregmedlock_&_Medusa/medusa_&_test_&_test_flux_balance.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ensemble = construct_mixed_ensemble()\nmodel1 = ensemble.members[0]\nmodel2 = ensemble.members[1]\nmodel_list = [model1, model2]\nfba_fluxes = optimize_ensemble(ensemble, specific_models=model_list)\nrows = fba_fluxes.shape[0]\ncolumns = fba_fluxes.shape[1]\nrownames = fba_fluxes.index\nassert rows == len(model_list)\nassert columns == len(ensemble.base_model.reactions)\nassert rownames.contains(model1.id)\nassert rownames.contains(model2.id)\n"
-}

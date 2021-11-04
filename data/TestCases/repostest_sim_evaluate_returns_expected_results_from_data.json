@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sim_evaluate_returns_expected_results_from_data",
-    "className": null,
-    "fileName": "/NASA_&_MLMCPy/tests_&_model_&_test_CDFWrapperModel.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Tests MLMC Simulator with CDF Wrapper models and Spring Mass Data to\n    ensure outputs are valid. Uses a wide variety of initial sample sizes and\n    grid sizes.\n    \"\"\"\ngrid = np.linspace(8, 25, grid_size)\ncdfw_level1 = CDFWrapperModel(models_from_data[0], grid)\ncdfw_level2 = CDFWrapperModel(models_from_data[1], grid)\ncdfw_level3 = CDFWrapperModel(models_from_data[2], grid)\ncdfws = [cdfw_level1, cdfw_level2, cdfw_level3]\nmlmc_simulator = MLMCSimulator(data_input, cdfws)\nmlmc_simulator._caching_enabled = False\ncdf, sample_sizes, variances = mlmc_simulator.simulate(epsilon=0.025,\n    initial_sample_sizes=initial_sample_size)\nassert np.all(cdf >= 0.0)\nassert np.count_nonzero(cdf[1:-1] >= cdf[0:-2]) > grid_size * 0.75\ncdf_sum = np.sum(cdf[1:-1] - cdf[:-2])\nassert np.isclose(cdf_sum, 1.0, atol=0.05)\npytest.mark.parametrize('grid_size', [10, 25, 50])pytest.mark.parametrize('initial_sample_size', [10, 250, 500])"
-}

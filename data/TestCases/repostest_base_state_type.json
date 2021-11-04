@@ -1,9 +1,0 @@
-{
-    "functionName": "test_base_state_type",
-    "className": null,
-    "fileName": "/MechWolf_&_MechWolf/tests_&_test_validate_component.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class Test(mw.ActiveComponent):\n\n    def __init__(self, serial_port=None):\n        super().__init__(name=None)\n        self.active = False\n        self.serial_port = serial_port\n        self._base_state = dict(active='10 mL')\n\n    async def _update(self):\n        return True\nwith pytest.raises(ValueError):\n    Test()._validate(dry_run=True)\nclass Test(mw.ActiveComponent):\n\n    def __init__(self, serial_port=None):\n        super().__init__(name=None)\n        self.active = False\n        self.serial_port = serial_port\n        self._base_state = 'not a dict'\n\n    async def _update(self):\n        return True\nwith pytest.raises(ValueError):\n    Test()._validate(dry_run=True)\n"
-}

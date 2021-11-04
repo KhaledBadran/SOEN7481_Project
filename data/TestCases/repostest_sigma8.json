@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sigma8",
-    "className": null,
-    "fileName": "/apetri_&_LensTools/lenstools_&_tests_&_test_database.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "fig, ax = plt.subplots()\ndb_name = os.path.join(dataExtern(), 'database', 'scores_power.sqlite')\nwith ScoreDatabase(db_name) as db:\n    likelihood = db.pull_features(['coarse_150sim'], table_name='coarse',\n        score_type='likelihood')\nlikelihood_slice = likelihood.query('Om==0.2 and w==-1.0')\nax.plot(likelihood_slice['sigma8'], likelihood_slice['coarse_150sim'])\nax.set_xlabel('$\\\\sigma_8$', fontsize=22)\nax.set_ylabel('$\\\\mathcal{L}(\\\\sigma_8,\\\\Omega_m=0.2,w=-1)$', fontsize=22)\nfig.savefig('si8_likelihood.png')\n"
-}

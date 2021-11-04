@@ -1,9 +1,0 @@
-{
-    "functionName": "test_generate_simple_input_with_working_validation",
-    "className": null,
-    "fileName": "/bio-phys_&_MDBenchmark/mdbenchmark_&_tests_&_test_generate.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that we can generate benchmarks for all supported MD engines with module validation.\"\"\"\nwith tmpdir.as_cwd():\n    for ext in extensions:\n        open('protein.{}'.format(ext), 'a').close()\n    result = cli_runner.invoke(cli, ['generate', '--module={}'.format(\n        module), '--template=draco', '--max-nodes=4', '--gpu', '--no-cpu',\n        '--name=protein', '--yes'])\n    output = generate_output().format(module)\n    output = (\n        \"\"\"WARNING Cannot locate modules available on this host. Not performing module name validation.\n\"\"\"\n         + output)\n    if 'namd' in module:\n        output = NAMD_WARNING_FORMATTED + output\n    monkeypatch.setattr('mdbenchmark.mdengines.get_available_modules', lambda :\n        {'gromacs': ['2016'], 'namd': ['11']})\n    assert result.exit_code == 0\n    assert result.output == output\npytest.mark.parametrize('module, extensions', [('gromacs/2016', ['tpr']), (\n    'namd/11', ['namd', 'pdb', 'psf'])])"
-}

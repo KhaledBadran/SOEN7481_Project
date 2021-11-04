@@ -1,9 +1,0 @@
-{
-    "functionName": "test_restart",
-    "className": "TestMLNEB",
-    "fileName": "/SUNCAT-Center_&_CatLearn/test_&_test_mlneb.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Here we test the restart flag, the mic, and the internal\n            interpolation.\"\"\"\nneb_catlearn = MLNEB(start='initial_optimized.traj', end=\n    'final_optimized.traj', n_images=9, ase_calc=ase_calculator,\n    interpolation='linear', restart=False)\nneb_catlearn.run(fmax=0.05, trajectory='ML-NEB.traj', max_step=0.2)\nprint('Checking number of iterations using 9 images...')\nself.assertEqual(neb_catlearn.iter, 12)\nmax_unc = np.max(neb_catlearn.uncertainty_path)\nunc_test = 0.0377\nprint('Checking uncertainty on the path (9 images):')\nnp.testing.assert_array_almost_equal(max_unc, unc_test, decimal=4)\nprint('Checking restart flag...')\nprint('Using tighter convergence criteria.')\nneb_catlearn = MLNEB(start='initial_optimized.traj', end=\n    'final_optimized.traj', n_images=11, ase_calc=ase_calculator, restart=True)\nneb_catlearn.run(fmax=0.01, max_step=0.2, unc_convergence=0.01, trajectory=\n    'ML-NEB.traj')\nprint('Checking number of iterations restarting with 11 images...')\nself.assertEqual(neb_catlearn.iter, 5)\nprint('Checking uncertainty on the path (11 images).')\nmax_unc = np.max(neb_catlearn.uncertainty_path)\nunc_test = 0.0062\nnp.testing.assert_array_almost_equal(max_unc, unc_test, decimal=4)\n"
-}

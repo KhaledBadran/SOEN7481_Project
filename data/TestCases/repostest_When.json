@@ -1,9 +1,0 @@
-{
-    "functionName": "test_When",
-    "className": null,
-    "fileName": "/hdoupe_&_ParamTools/paramtools_&_tests_&_test_validate.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "range_ = Range(0, 10)\nchoices = [12, 15]\noneof = OneOf(choices=choices)\nwhen = When({'equal_to': 'world'}, when_vos=[{'value': 'hello'}],\n    then_validators=[range_], otherwise_validators=[oneof])\nwhen(12)\nwith pytest.raises(ValidationError):\n    when(3)\nwhen = When({'equal_to': 'hello'}, when_vos=[{'value': 'hello'}],\n    then_validators=[range_], otherwise_validators=[oneof])\nwhen(3)\nwith pytest.raises(ValidationError):\n    when(12)\nassert when.grid() == list(range(10 + 1))\n"
-}

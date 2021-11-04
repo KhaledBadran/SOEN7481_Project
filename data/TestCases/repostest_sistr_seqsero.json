@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sistr_seqsero",
-    "className": null,
-    "fileName": "/OLC-Bioinformatics_&_COWBAT/tests_&_test_pipeline.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "metadata = MetadataObject()\nmethod.runmetadata.samples = list()\nfasta = os.path.join(var.sequencepath, 'NC_003198.fasta')\nmetadata.name = os.path.split(fasta)[1].split('.')[0]\nmetadata.general = GenObject()\nmetadata.run = GenObject()\nmetadata.general.fastqfiles = list()\nmetadata.general.trimmedcorrectedfastqfiles = [os.path.join(var.\n    sequencepath, 'seqsero', '2014-SEQ-1049_seqsero.fastq.gz')]\noutputdir = os.path.join(var.sequencepath, metadata.name)\nmake_path(outputdir)\nmetadata.general.outputdirectory = outputdir\nmetadata.general.logout = os.path.join(outputdir, 'out')\nmetadata.general.logerr = os.path.join(outputdir, 'err')\nmetadata.run.outputdirectory = outputdir\nmetadata.general.bestassemblyfile = True\nmetadata.commands = GenObject()\nmetadata.general.referencegenus = 'Salmonella'\nmetadata.general.bestassemblyfile = fasta\nmethod.runmetadata.samples.append(metadata)\nmethod.sistr()\nfor sample in method.runmetadata.samples:\n    assert sample.sistr.cgmlst_genome_match == 'ERR586739' or sample.sistr.cgmlst_genome_match == 'SAL_BA2732AA'\nmethod.seqsero()\nfor sample in method.runmetadata.samples:\n    assert sample.seqsero.predicted_serotype == 'Berta'\nvariable_update()\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sparse_categorical_crossentropy",
-    "className": "TestLoss",
-    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_keras_&_test_loss.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "import keras.backend as K\ny_a = np.array([0.12, 0.22, 0.3, 0.17, 0.19])\ny_b_bigdl = np.array([2])\ny_b_keras = np.array([1])\nkloss = objectives.sparse_categorical_crossentropy\nbloss = OptimConverter.to_bigdl_criterion('sparse_categorical_crossentropy')\nbigdl_output = bloss.forward(y_a, y_b_bigdl)\nkeras_output = np.mean(K.eval(kloss(K.variable(y_b_keras), K.variable(y_a))))\nnp.testing.assert_allclose(bigdl_output, keras_output)\n"
-}

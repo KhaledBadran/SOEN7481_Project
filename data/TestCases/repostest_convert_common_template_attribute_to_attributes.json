@@ -1,9 +1,0 @@
-{
-    "functionName": "test_convert_common_template_attribute_to_attributes",
-    "className": "TestAttributeUtilities",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "template_attribute = objects.TemplateAttribute(attributes=[objects.\n    Attribute(attribute_name=objects.Attribute.AttributeName(\n    'Cryptographic Algorithm'), attribute_value=primitives.Enumeration(\n    enums.CryptographicAlgorithm, value=enums.CryptographicAlgorithm.AES,\n    tag=enums.Tags.CRYPTOGRAPHIC_ALGORITHM))], tag=enums.Tags.\n    COMMON_TEMPLATE_ATTRIBUTE)\nvalue = objects.convert_template_attribute_to_attributes(template_attribute)\nself.assertIsInstance(value, objects.Attributes)\nself.assertEqual(enums.Tags.COMMON_ATTRIBUTES, value.tag)\nself.assertIsInstance(value.attributes, list)\nself.assertEqual(1, len(value.attributes))\nself.assertEqual(primitives.Enumeration(enums.CryptographicAlgorithm, value\n    =enums.CryptographicAlgorithm.AES, tag=enums.Tags.\n    CRYPTOGRAPHIC_ALGORITHM), value.attributes[0])\n"
-}

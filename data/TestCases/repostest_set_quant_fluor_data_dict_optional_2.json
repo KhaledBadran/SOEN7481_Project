@@ -1,9 +1,0 @@
-{
-    "functionName": "test_set_quant_fluor_data_dict_optional_2",
-    "className": null,
-    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_core_&_tests_&_test_quant_analysis.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Tests for 'set_quant_fluor_data_dict_optional'.\n    Failing tests.\n    \"\"\"\nfluor_standard = copy.deepcopy(_xrf_standard_fluor_sample)\nwith pytest.raises(RuntimeError, match=\n    \"Parameter 'scan_id' must be integer or a string representing integer\"):\n    set_quant_fluor_data_dict_optional(fluor_standard, scan_id='abc_34g')\nwith pytest.raises(RuntimeError, match=\n    \"Parameter 'scan_id' must be integer or a string representing integer\"):\n    set_quant_fluor_data_dict_optional(fluor_standard, scan_id=[1, 5, 14])\nwith pytest.raises(RuntimeError, match=\n    \"Parameter 'scan_uid' must be a string representing scan UID\"):\n    set_quant_fluor_data_dict_optional(fluor_standard, scan_uid=[1, 5, 14])\n"
-}

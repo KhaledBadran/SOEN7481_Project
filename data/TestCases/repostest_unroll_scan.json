@@ -1,9 +1,0 @@
-{
-    "functionName": "test_unroll_scan",
-    "className": null,
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_test_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from lasagne.utils import unroll_scan\nk = 2\na = T.scalar('a')\nresult = unroll_scan(fn=lambda step, prior_result, a: prior_result * a,\n    sequences=T.arange(k), outputs_info=[1.0], non_sequences=[a], n_steps=k)\nfinal_result = result[-1]\npower = theano.function(inputs=[a], outputs=final_result)\nassert np.all(power(10) == [10, 100])\nb = T.scalar('b')\ndef mul_div(step, previous_mul, previous_div, mul, div):\n    return previous_mul * mul, previous_div / div\nresult = unroll_scan(fn=mul_div, sequences=T.arange(k), outputs_info=[1.0, \n    1.0], non_sequences=[a, b], n_steps=k)\npower = theano.function(inputs=[a, b], outputs=result)\nassert np.allclose(power(10, 10), [[10, 100], [0.1, 0.01]])\n"
-}

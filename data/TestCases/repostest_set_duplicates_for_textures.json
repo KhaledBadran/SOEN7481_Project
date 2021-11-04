@@ -1,9 +1,0 @@
-{
-    "functionName": "test_set_duplicates_for_textures",
-    "className": "TestMapper",
-    "fileName": "/fechbmaster_&_3DNIRmapper/tests_&_test_mapper.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "location = [4.28, 3.58, 0]\nrotation = [-90, 180, -52.2]\nfocal_length = 35\nsensor_width = 32\nsensor_height = 18\nscreen_width = 1920\nscreen_height = 1080\ncam3 = Camera(focal_length, screen_width, screen_height, sensor_width,\n    sensor_height, location, rotation, 'EULER')\ntexture3 = Texture('/fake_texture.png', cam3)\nself.mapper.textures.append(texture3)\nself.mapper.start_visibility_analysis()\nself.mapper.set_duplicates_for_textures()\nexpected_dups_0 = [5, 11]\nexpected_dups_1 = [2, 8]\nexpected_dups_2 = [2, 5, 8, 11]\ntry:\n    np.testing.assert_equal(self.mapper.textures[0].\n        duplicate_triangle_indices, expected_dups_0)\n    np.testing.assert_equal(self.mapper.textures[1].\n        duplicate_triangle_indices, expected_dups_1)\n    np.testing.assert_equal(self.mapper.textures[2].\n        duplicate_triangle_indices, expected_dups_2)\n    res = True\nexcept AssertionError as err:\n    res = False\n    print(err)\nself.assertTrue(res)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_location_by_name_throws_WaypointNotFoundError",
-    "className": "RoutingApiTest",
-    "fileName": "/abdullahselek_&_HerePy/tests_&_test_routing_api.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with codecs.open('testdata/models/routing_truck_route_short.json', mode='r',\n    encoding='utf-8') as f:\n    expectedRoutingResponse = f.read()\nresponses.add(responses.GET,\n    'https://route.ls.hereapi.com/routing/7.2/calculateroute.json',\n    expectedRoutingResponse, status=200)\nwith open('testdata/models/geocoder_error.json', 'r') as f:\n    expectedGeocoderResponse = f.read()\nresponses.add(responses.GET,\n    'https://geocode.search.hereapi.com/v1/geocode',\n    expectedGeocoderResponse, status=200)\nwith self.assertRaises(herepy.WaypointNotFoundError):\n    response = self._api.truck_route('200 S Mathilda Sunnyvale CA',\n        '200 S Mathilda Sunnyvale CA')\nresponses.activate"
-}

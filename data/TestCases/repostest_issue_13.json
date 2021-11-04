@@ -1,9 +1,0 @@
-{
-    "functionName": "test_issue_13",
-    "className": "TestOldIssues",
-    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_test_issues.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" can't handle large result fields \"\"\"\nconn = self.connect()\ncur = conn.cursor()\nwith warnings.catch_warnings():\n    warnings.filterwarnings('ignore')\n    cur.execute('drop table if exists issue13')\ntry:\n    cur.execute('create table issue13 (t text)')\n    size = 18 * 1024\n    cur.execute('insert into issue13 (t) values (%s)', ('x' * size,))\n    cur.execute('select t from issue13')\n    r = cur.fetchone()[0]\n    self.assertTrue('x' * size == r)\nfinally:\n    cur.execute('drop table issue13')\n"
-}

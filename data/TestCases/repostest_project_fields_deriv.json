@@ -1,9 +1,0 @@
-{
-    "functionName": "test_project_fields_deriv",
-    "className": null,
-    "fileName": "/incf-nidash_&_PyNIDM/nidm_&_experiment_&_tools_&_tests_&_test_rest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "rest_parser = RestParser(verbosity_level=0)\nrest_parser.setOutputFormat(RestParser.OBJECT_FORMAT)\nfield = 'fs_000003'\nproject = rest_parser.run(BRAIN_VOL_FILES, '/projects/{}?fields={}'.format(\n    cmu_test_project_uuid, field))\nassert len(project) > 0\nfv = project\nassert type(fv) == list\nfields_used = set([i.label for i in fv])\nassert 'Brain Segmentation Volume (mm^3)' in fields_used\n"
-}

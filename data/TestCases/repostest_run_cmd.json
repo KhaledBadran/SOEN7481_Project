@@ -1,9 +1,0 @@
-{
-    "functionName": "test_run_cmd",
-    "className": null,
-    "fileName": "/AmadeusITGroup_&_JumpSSH/tests_&_test__session.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "gateway_ip, gateway_port = docker_env.get_host_ip_port()\ngateway_session = SSHSession(host=gateway_ip, port=gateway_port, username=\n    'user1', password='password1').open()\nassert gateway_session.is_active()\nexit_code, output = gateway_session.run_cmd('hostname')\nassert exit_code == 0\nassert output == 'gateway'\ngateway_session.run_cmd(['cd /etc', 'ls'])\nexit_code, output = gateway_session.run_cmd('dummy commmand',\n    raise_if_error=False)\nassert exit_code == 127\nwith pytest.raises(exception.RunCmdError) as excinfo:\n    gateway_session.run_cmd('dummy commmand')\nassert excinfo.value.exit_code == 127\nassert excinfo.value.command == 'dummy commmand'\nwith pytest.raises(TypeError):\n    gateway_session.run_cmd({'key': 'value'})\ngateway_session.run_cmd('ls -lta /')\nout, err = capfd.readouterr()\nassert len(out) == 0\ngateway_session.run_cmd('ls -lta /', continuous_output=True)\nout, err = capfd.readouterr()\nassert len(out) > 0\nassert isinstance(out, unicode if util.PY2 else str)\n"
-}

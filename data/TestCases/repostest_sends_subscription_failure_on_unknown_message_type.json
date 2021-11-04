@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sends_subscription_failure_on_unknown_message_type",
-    "className": null,
-    "fileName": "/willdeuschle_&_Flask-GraphQL-Subscriptions-Transport/tests_&_test_flask_graphql_subscriptions_transport.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "app, ss = basic_ss\ntest_client = SocketIOTestClient(app, ss.socketio, namespace=ss.namespace)\nss.send_subscription_fail = Mock()\ntest_client.emit('message', json.dumps({'type': 'unknown message type',\n    'payload': 'foo', 'query': 'query test{ testString }', 'variables':\n    'baz'}), namespace=ss.namespace)\nss.send_subscription_fail.assert_called_once()\nassert ss.send_subscription_fail.call_args[0][1] == {'errors':\n    'Invalid message type'}\n"
-}

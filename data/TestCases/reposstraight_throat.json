@@ -1,9 +1,0 @@
-{
-    "functionName": "straight_throat",
-    "className": null,
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_models_&_geometry_&_throat_endpoints.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Calculate the coordinates of throat endpoints given a central coordinate,\n    unit vector along the throat direction and a length.\n\n    Parameters\n    ----------\n    target : OpenPNM Object\n        The object which this model is associated with. This controls the\n        length of the calculated array, and also provides access to other\n        necessary properties.\n\n    throat_centroid : string\n        Dictionary key of the throat center coordinates.\n\n    throat_vector : string\n        Dictionary key of the throat vector pointing along the length of the\n        throats.\n\n    throat_length : string\n        Dictionary key of the throat length.\n\n    Returns\n    -------\n    EP : dictionary\n        Coordinates of throat endpoints stored in Dict form. Can be accessed\n        via the dict keys 'head' and 'tail'.\n\n    \"\"\"\nnetwork = target.project.network\nthroats = network.map_throats(throats=target.Ts, origin=target)\ncenter = network[throat_centroid][throats]\nvector = network[throat_vector][throats]\nlength = network[throat_length][throats]\nEP1 = center - 0.5 * length[:, (_np.newaxis)] * vector\nEP2 = center + 0.5 * length[:, (_np.newaxis)] * vector\nreturn {'head': EP1, 'tail': EP2}\n"
-}

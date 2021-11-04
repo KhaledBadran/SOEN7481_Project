@@ -1,9 +1,0 @@
-{
-    "functionName": "test_generic_signature",
-    "className": "TestDataDump",
-    "fileName": "/named-data_&_PyNDN2/tests_&_unit_tests_&_test_data_methods.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "signature = GenericSignature()\nsignature.setSignatureInfoEncoding(Blob(experimentalSignatureInfo, False), None\n    )\nsignatureValue = Blob([1, 2, 3, 4], False)\nsignature.setSignature(signatureValue)\nself.freshData.setSignature(signature)\nencoding = self.freshData.wireEncode()\ndecodedData = Data()\ndecodedData.wireDecode(encoding)\ndecodedSignature = decodedData.getSignature()\nself.assertEqual(decodedSignature.getTypeCode(), experimentalSignatureType)\nself.assertTrue(Blob(experimentalSignatureInfo, False).equals(\n    decodedSignature.getSignatureInfoEncoding()))\nself.assertTrue(signatureValue.equals(decodedSignature.getSignature()))\nsignature = GenericSignature()\nsignature.setSignatureInfoEncoding(Blob(\n    experimentalSignatureInfoNoSignatureType, False), None)\nsignature.setSignature(signatureValue)\nself.freshData.setSignature(signature)\ngotError = True\ntry:\n    self.freshData.wireEncode()\n    gotError = False\nexcept:\n    pass\nif not gotError:\n    self.fail(\n        'Expected encoding error for experimentalSignatureInfoNoSignatureType')\nsignature = GenericSignature()\nsignature.setSignatureInfoEncoding(Blob(experimentalSignatureInfoBadTlv, \n    False), None)\nsignature.setSignature(signatureValue)\nself.freshData.setSignature(signature)\ngotError = True\ntry:\n    self.freshData.wireEncode()\n    gotError = False\nexcept:\n    pass\nif not gotError:\n    self.fail('Expected encoding error for experimentalSignatureInfoBadTlv')\n"
-}

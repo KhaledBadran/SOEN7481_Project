@@ -1,9 +1,0 @@
-{
-    "functionName": "test_api_controller_with_version",
-    "className": null,
-    "fileName": "/RobertoPrevato_&_BlackSheep/tests_&_test_controllers.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "app = FakeApplication()\napp.controllers_router = RoutesRegistry()\nget = app.controllers_router.get\npost = app.controllers_router.post\ndelete = app.controllers_router.delete\npatch = app.controllers_router.patch\nclass Cat(ApiController):\n\n    @classmethod\n    def version(cls) ->Optional[str]:\n        return 'v1'\n\n    @get(':cat_id')\n    def get_cat(self, cat_id: str):\n        return text('1')\n\n    @patch()\n    def update_cat(self):\n        return text('2')\n\n    @post()\n    def create_cat(self):\n        return text('3')\n\n    @delete(':cat_id')\n    def delete_cat(self):\n        return text('4')\napp.setup_controllers()\nexpected_result = {('GET', '/api/v1/cat/100'): '1', ('PATCH', '/api/v1/cat'\n    ): '2', ('POST', '/api/v1/cat'): '3', ('DELETE', '/api/v1/cat/100'): '4'}\nfor key, value in expected_result.items():\n    method, pattern = key\n    await app(get_example_scope(method, pattern), MockReceive(), MockSend())\n    assert app.response.status == 200\n    body = await app.response.text()\n    assert body == value\npytest.mark.asyncio"
-}

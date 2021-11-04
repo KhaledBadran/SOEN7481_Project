@@ -1,9 +1,0 @@
-{
-    "functionName": "test_max_sharpe_short",
-    "className": null,
-    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_efficient_frontier.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ef = EfficientFrontier(*setup_efficient_frontier(data_only=True),\n    weight_bounds=(None, None))\nw = ef.max_sharpe()\nassert isinstance(w, dict)\nassert set(w.keys()) == set(ef.tickers)\nnp.testing.assert_almost_equal(ef.weights.sum(), 1)\nnp.testing.assert_allclose(ef.portfolio_performance(), (0.4072439477276246,\n    0.24823487545231313, 1.5599900981762558))\nsharpe = ef.portfolio_performance()[2]\nef_long_only = setup_efficient_frontier()\nef_long_only.max_sharpe()\nlong_only_sharpe = ef_long_only.portfolio_performance()[2]\nassert sharpe > long_only_sharpe\n"
-}

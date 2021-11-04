@@ -1,9 +1,0 @@
-{
-    "functionName": "test_plot_permutation_importance",
-    "className": null,
-    "fileName": "/tvdboom_&_ATOM/tests_&_test_plots.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Assert that the plot_permutation_importance method work as intended.\"\"\"\ntrainer = TrainerRegressor(['ols', 'ridge'], metric='r2')\npytest.raises(NotFittedError, trainer.plot_permutation_importance)\ntrainer.run(reg_train, reg_test)\npytest.raises(ValueError, trainer.plot_permutation_importance, show=0)\npytest.raises(ValueError, trainer.plot_permutation_importance, n_repeats=0)\ntrainer.plot_permutation_importance(filename=FILE_DIR + 'p1', display=False)\ntrainer.ols.plot_permutation_importance(filename=FILE_DIR + 'p2', display=False\n    )\nassert glob.glob(FILE_DIR + 'p1.png')\nassert glob.glob(FILE_DIR + 'p2.png')\natom = ATOMClassifier(X_bin, y_bin, random_state=1)\natom.run('lda', metric='f1')\natom.plot_permutation_importance(filename=FILE_DIR + 'p3', display=False)\natom.lda.plot_permutation_importance(filename=FILE_DIR + 'p4', display=False)\nassert glob.glob(FILE_DIR + 'p3.png')\nassert glob.glob(FILE_DIR + 'p4.png')\n"
-}

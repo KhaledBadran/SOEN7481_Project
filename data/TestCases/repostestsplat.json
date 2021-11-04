@@ -1,9 +1,0 @@
-{
-    "functionName": "testsplat",
-    "className": "test_sparse_connected_pixels",
-    "fileName": "/jonwright_&_ImageD11/test_&_test_sparse_image.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "i = self.s.row.astype(np.uint16)\nj = self.s.col.astype(np.uint16)\nv = self.s.data\nself.assertTrue((self.s.todense() == self.a).all())\nni, nj = self.s.shape\nz = np.empty((ni + 2) * (nj + 2), np.int32)\nsl = np.zeros(v.shape, 'i')\nsls = np.zeros(v.shape, 'i')\nns = cImageD11.sparse_connectedpixels(v, i, j, self.threshold, sl)\ns0 = timer()\nns = cImageD11.sparse_connectedpixels(v, i, j, self.threshold, sl)\ns1 = timer()\nns = cImageD11.sparse_connectedpixels_splat(v, i, j, self.threshold, sls, z,\n    ni, nj)\ns2 = timer()\nns = cImageD11.sparse_connectedpixels_splat(v, i, j, self.threshold, sls, z,\n    ni, nj)\ns3 = timer()\nsld = scipy.sparse.coo_matrix((sl, (i, j)), shape=self.a.shape)\ntestcase = (sls == sl).all()\nprint(\"\"\"\nsparse_connectedpixels       %.3f ms\"\"\" % (1000.0 * (s1 - s0)), \n    \"\"\"\nsparse_connectedpixels_splat %.3f ms\"\"\" % (1000.0 * (s3 - s2)))\nif ~testcase:\n    import pylab as pl\n    pl.ioff()\n    pl.figure()\n    pl.subplot(311)\n    pl.title('t=%f' % self.threshold)\n    pl.imshow(dl, interpolation='nearest')\n    pl.colorbar()\n    pl.subplot(312)\n    pl.imshow(sld.todense(), interpolation='nearest')\n    pl.colorbar()\n    pl.subplot(313)\n    pl.imshow(sld.todense() - dl, interpolation='nearest')\n    pl.colorbar()\n    pl.show()\nself.assertTrue(testcase)\n"
-}

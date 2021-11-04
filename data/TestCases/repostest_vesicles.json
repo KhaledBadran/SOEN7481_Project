@@ -1,9 +1,0 @@
-{
-    "functionName": "test_vesicles",
-    "className": null,
-    "fileName": "/MDAnalysis_&_MDAnalysisData/MDAnalysisData_&_tests_&_test_datasets.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data = datasets.fetch_vesicle_lib()\nmetadata = vesicles.METADATA['vesicle_lib']\nassert len(data.DESCR) == 1329\nassert data.DESCR.startswith(\n    \"\"\".. -*- coding: utf-8 -*-\n\n.. _`vesicle-library-dataset`:\"\"\")\nassert data.N_structures == metadata['CONTENTS']['N_structures']\nassert data.N_structures == len(metadata['CONTENTS']['structures'])\nassert any(path.endswith(filename) for path in data.structures)\nassert any(os.path.exists(path) for path in data.structures if path.\n    endswith(filename))\npytest.mark.onlinepytest.mark.parametrize('filename', vesicles.METADATA['vesicle_lib'][\n    'CONTENTS']['structures'])"
-}

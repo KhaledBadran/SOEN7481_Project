@@ -1,9 +1,0 @@
-{
-    "functionName": "test_autoselect_connectors",
-    "className": null,
-    "fileName": "/Edinburgh-Genome-Foundry_&_DnaCauldron/tests_&_test_autoselect_connectors_&_test_autoselect_connectors.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "repo = dc.SequenceRepository()\nrepo.import_records(collection='parts', folder=os.path.join(this_directory,\n    'parts'), use_file_names_as_ids=True, topology='circular')\nrepo.import_records(collection='emma_connectors', folder=os.path.join(\n    this_directory, 'emma_connectors'), use_file_names_as_ids=True)\nall_parts = list(repo.collections['parts'].keys())\nassembly = dc.Type2sRestrictionAssembly(parts=all_parts,\n    connectors_collection='emma_connectors')\nsimulation = assembly.simulate(sequence_repository=repo)\nassert len(simulation.construct_records) == 1\nassert len(simulation.warnings) == 1\nwarning = simulation.warnings[0]\nassert sorted(warning.data['selected_connectors']) == ['conn_A_B',\n    'conn_D-F', 'conn_J-K', 'conn_L-N', 'conn_R-W', 'conn_W-Z']\n"
-}

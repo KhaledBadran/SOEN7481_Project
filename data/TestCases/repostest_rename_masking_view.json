@@ -1,9 +1,0 @@
-{
-    "functionName": "test_rename_masking_view",
-    "className": "CITestProvisioning",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test rename_masking_view.\"\"\"\nmasking_view_name, _ = self.create_masking_view()\nnew_name = self.generate_name('masking_view')\nmasking_view_list = self.provisioning.get_masking_view_list()\nwhile new_name in masking_view_list:\n    new_name = self.generate_name('masking_view')\nmasking_view_details = self.provisioning.rename_masking_view(masking_view_name,\n    new_name)\nself.addCleanup(self.delete_masking_view, new_name)\nmasking_view_list = self.provisioning.get_masking_view_list()\nself.assertIn(new_name, masking_view_list)\nself.assertNotIn(masking_view_name, masking_view_list)\nnew_id = masking_view_details[constants.MASKING_VIEW_ID]\nself.assertEqual(new_name, new_id)\n"
-}

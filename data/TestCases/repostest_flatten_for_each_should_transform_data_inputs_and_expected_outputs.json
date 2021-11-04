@@ -1,9 +1,0 @@
-{
-    "functionName": "test_flatten_for_each_should_transform_data_inputs_and_expected_outputs",
-    "className": null,
-    "fileName": "/Neuraxio_&_Neuraxle/testing_&_steps_&_test_flatten_for_each.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "p = FlattenForEach(Pipeline([MultiplyByN(2), OutputTransformerWrapper(\n    MultiplyByN(3))]))\ndata_inputs, expected_outputs = _create_random_of_shape(DATA_SHAPE)\np, outputs = p.handle_fit_transform(DataContainer(data_inputs=data_inputs,\n    expected_outputs=expected_outputs), ExecutionContext())\nassert np.array(outputs.data_inputs).shape == DATA_SHAPE\nassert np.array_equal(outputs.data_inputs, data_inputs * 2)\nassert np.array(outputs.expected_outputs).shape == DATA_SHAPE\nassert np.array_equal(outputs.expected_outputs, expected_outputs * 3)\n"
-}

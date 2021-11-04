@@ -1,9 +1,0 @@
-{
-    "functionName": "test_argv_incompatible",
-    "className": null,
-    "fileName": "/ocaballeror_&_Lyricfetch/lyricfetch_&_tests_&_test_args.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Check that the `parse_argv` function raises some kind of error when these\n    incompatible arguments are passed at the same time.\n    \"\"\"\nnew_args = [__file__] + args\nmonkeypatch.setattr(sys, 'argv', new_args)\nwith pytest.raises(SystemExit):\n    parse_argv()\npytest.mark.parametrize('args', [['-r', '--from-file'], ['-n', '--from-file']])"
-}

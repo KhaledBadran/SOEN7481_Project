@@ -1,9 +1,0 @@
-{
-    "functionName": "test_MixedMok_Kgg",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_conditionals_&_test_multioutput.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data = DataMixedKernel\nkern_list = [SquaredExponential() for _ in range(data.L)]\nkernel = mk.LinearCoregionalization(kern_list, W=data.W)\nKgg = kernel.Kgg(Data.X, Data.X)\nKff = kernel.K(Data.X, Data.X)\nKff_infered = np.einsum('lnm,pl,ql->npmq', Kgg, data.W, data.W)\nnp.testing.assert_array_almost_equal(Kff, Kff_infered, decimal=5)\n"
-}

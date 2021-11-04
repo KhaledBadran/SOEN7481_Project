@@ -1,9 +1,0 @@
-{
-    "functionName": "test_propose_normalized_scores_lt_tunable_names",
-    "className": "TestBTBSession",
-    "fileName": "/HDI-Project_&_BTB/tests_&_test_session.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "mock_tunable.from_dict.return_value.get_defaults.return_value = 'defaults'\nmock_isinstance.return_value = True\ntuner = MagicMock()\ninstance = MagicMock(spec_set=BTBSession)\ninstance._tuner_class = tuner\ninstance.proposals = {}\ninstance._normalized_scores.__len__.return_value = 0\ninstance._tunables = {'test_tunable': 'test_spec'}\ninstance._tunable_names = ['test_tunable']\ninstance._make_id.return_value = 1\nres_name, res_config = BTBSession.propose(instance)\nassert res_name == 'test_tunable'\nassert res_config == 'defaults'\nexpected_proposals = {(1): {'id': 1, 'name': 'test_tunable', 'config':\n    'defaults'}}\nassert instance.proposals == expected_proposals\ninstance._make_id.assert_called_once_with('test_tunable', 'defaults')\nmock_tunable.from_dict.assert_called_once_with('test_spec')\ntuner.assert_called_once_with(mock_tunable.from_dict.return_value)\nmock_tunable.from_dict.return_value.get_defaults.assert_called_once_with()\nexpected_isinstance_calls = [call('test_spec', dict), call('defaults',\n    mock_tunable)]\nmock_isinstance.has_calls(expected_isinstance_calls)\npatch('btb.session.isinstance')patch('btb.session.Tunable')"
-}

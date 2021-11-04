@@ -1,9 +1,0 @@
-{
-    "functionName": "test_plot_lift",
-    "className": null,
-    "fileName": "/tvdboom_&_ATOM/tests_&_test_plots.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Assert that the plot_lift method work as intended.\"\"\"\ntrainer = TrainerRegressor(['ols', 'ridge'], metric='r2')\ntrainer.run(reg_train, reg_test)\npytest.raises(PermissionError, trainer.plot_lift)\ntrainer = TrainerClassifier('PA', metric='f1')\ntrainer.run(bin_train, bin_test)\npytest.raises(AttributeError, trainer.plot_lift)\ntrainer = TrainerClassifier(['LDA', 'LGB'], metric='f1')\npytest.raises(NotFittedError, trainer.plot_lift, models='LDA')\ntrainer.run(bin_train, bin_test)\ntrainer.plot_lift(filename=FILE_DIR + 'lift1', display=False)\ntrainer.lda.plot_lift(filename=FILE_DIR + 'lift2', display=False)\nassert glob.glob(FILE_DIR + 'lift1.png')\nassert glob.glob(FILE_DIR + 'lift2.png')\natom = ATOMClassifier(X_bin, y_bin, random_state=1)\natom.run('lda', metric='f1')\natom.plot_lift(filename=FILE_DIR + 'lift3', display=False)\natom.lda.plot_lift(filename=FILE_DIR + 'lift4', display=False)\nassert glob.glob(FILE_DIR + 'lift3.png')\nassert glob.glob(FILE_DIR + 'lift4.png')\n"
-}

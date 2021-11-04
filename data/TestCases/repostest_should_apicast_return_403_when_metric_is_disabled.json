@@ -1,9 +1,0 @@
-{
-    "functionName": "test_should_apicast_return_403_when_metric_is_disabled",
-    "className": null,
-    "fileName": "/pestanko_&_3scale-api-python/tests_&_integration_&_test_integration_backend_metrics.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Metric is disabled when its limit is set to 0.\"\"\"\nproxy = service.proxy.list()\nplan = service.app_plans.create(params=dict(name='metrics-disabled'))\napplication_params = dict(name='metrics-disabled', plan_id=plan['id'],\n    description='metric disabled')\napp = account.applications.create(params=application_params)\nback_metric = backend.metrics.create(params=backend_metric_params)\nplan.limits(back_metric).create(params=dict(period='month', value=0))\nrules = backend.mapping_rules.list()\nfor rule in rules:\n    rule.delete()\nrule = create_backend_mapping_rule(back_metric, 'GET', '/foo/bah/')\nproxy = service.proxy.list()\nproxy.deploy()\nparams = get_user_key_from_application(app, proxy)\nclient = app.api_client(verify=ssl_verify)\nresponse = make_request(client, backend_usage['path'] + '/' + rule['pattern'])\nassert response.status_code == 403\n"
-}

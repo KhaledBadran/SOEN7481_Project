@@ -1,9 +1,0 @@
-{
-    "functionName": "test_check_network_health_one_isolated_cluster",
-    "className": "CheckNetworkHealthTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_network_&_NetworkHealthCheckTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "net = op.network.Cubic(shape=[5, 5, 5])\nPs = net['pore.coords'][:, (2)] == 2.5\nPs = Ps * (net['pore.coords'][:, (1)] > 2.5)\nTs = net.find_neighbor_throats(pores=Ps, mode='exclusive_or')\ntrim(network=net, throats=Ts)\na = net.check_network_health()\nassert len(a['disconnected_clusters']) == 2\nassert len(a['trim_pores']) == 10\n"
-}

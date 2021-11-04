@@ -1,9 +1,0 @@
-{
-    "functionName": "handle_streams",
-    "className": null,
-    "fileName": "/PRIArobotics_&_HedgehogServer/tests_&_test_server.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "outputs = {process.STDOUT: [], process.STDERR: []}\nopen = len(outputs)\ndef send(msg: process.StreamUpdate):\n    nonlocal outputs, open\n    outputs[msg.fileno].append(msg.chunk)\n    if msg.chunk == b'':\n        open -= 1\n    if open > 0:\n        return None\n    return {fileno: b''.join(chunks) for fileno, chunks in outputs.items()}\nreturn send\n"
-}

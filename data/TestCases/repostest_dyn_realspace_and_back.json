@@ -1,9 +1,0 @@
-{
-    "functionName": "test_dyn_realspace_and_back",
-    "className": "TestStructureMethods",
-    "fileName": "/mesonepigreco_&_CellConstructor/scripts_&_cellconstructor_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test in which we take a particularly odd dynamical matrix\n        and we generate the dynamical matrix in realspace, and then we \n        return back in q space. The two must match.\n        \"\"\"\ndyn = self.dynSky.Copy()\nsuperdyn = dyn.GenerateSupercellDyn(dyn.GetSupercell())\ndynq = CC.Phonons.GetDynQFromFCSupercell(superdyn.dynmats[0], np.array(dyn.\n    q_tot), dyn.structure, superdyn.structure)\nfor iq, q in enumerate(dyn.q_tot):\n    delta = dynq[(iq), :, :] - dyn.dynmats[iq]\n    delta = np.sqrt(np.sum(np.abs(delta) ** 2))\n    self.assertAlmostEqual(delta, 0)\n"
-}

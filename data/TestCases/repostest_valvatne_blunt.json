@@ -1,9 +1,0 @@
-{
-    "functionName": "test_valvatne_blunt",
-    "className": "HydraulicConductanceTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_physics_&_HydraulicConductanceTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.phase = op.phases.GenericPhase(network=self.net)\nself.phase['pore.viscosity'] = 1e-05\nself.phys = op.physics.GenericPhysics(network=self.net, phase=self.phase,\n    geometry=self.geo)\nmod = op.models.physics.hydraulic_conductance.valvatne_blunt\nsf = _np.sqrt(3) / 36.0\nself.geo['pore.shape_factor'] = _np.ones(self.geo.Np) * sf\nself.geo['throat.shape_factor'] = _np.ones(self.geo.Nt) * sf\nself.phys.add_model(propname='throat.valvatne_conductance', model=mod)\nactual = self.phys['throat.valvatne_conductance'].mean()\ndesired = 1030.9826\ndesired = 7216.8783\nassert_approx_equal(actual, desired=desired)\n"
-}

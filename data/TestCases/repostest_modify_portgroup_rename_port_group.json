@@ -1,9 +1,0 @@
-{
-    "functionName": "test_modify_portgroup_rename_port_group",
-    "className": "CITestProvisioning",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test modify_portgroup rename.\"\"\"\nport_group_name, _ = self.create_port_group()\nnew_name = self.generate_name(constants.PORT_GROUP)\nport_group_list = self.provisioning.get_port_group_list()\nwhile new_name in port_group_list:\n    new_name = self.generate_name(constants.PORT_GROUP)\n    port_group_list = self.provisioning.get_port_group_list()\nmodify_result = self.provisioning.modify_portgroup(port_group_name,\n    rename_portgroup=new_name)\nself.addCleanup(self.delete_port_group, new_name)\nport_group_list = self.provisioning.get_port_group_list()\nself.assertIn(new_name, port_group_list)\nself._validate_port_group_details(new_name, modify_result)\n"
-}

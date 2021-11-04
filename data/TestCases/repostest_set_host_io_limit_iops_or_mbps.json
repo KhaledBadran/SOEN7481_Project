@@ -1,9 +1,0 @@
-{
-    "functionName": "test_set_host_io_limit_iops_or_mbps",
-    "className": "CITestProvisioning",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test set_host_io_limit_iops_or_mbps.\"\"\"\nstorage_group_name = self.create_empty_storage_group()\niops = 3000\ndistribution_type = 'Always'\nmbps = 5000\nmodify_result = self.provisioning.set_host_io_limit_iops_or_mbps(\n    storage_group_name, iops, distribution_type, mbps)\nqos_specs = self.provisioning.get_storage_group(storage_group_name)[\n    constants.HOST_IO_LIMIT]\nself._validate_qos_specs(str(iops), str(mbps), distribution_type,\n    modify_result[constants.HOST_IO_LIMIT])\nself._validate_qos_specs(str(iops), str(mbps), distribution_type, qos_specs)\n"
-}

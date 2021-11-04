@@ -1,9 +1,0 @@
-{
-    "functionName": "testStatusQuoOverlap",
-    "className": "BatchTrialTest",
-    "fileName": "/facebook_&_Ax/ax_&_core_&_tests_&_test_batch_trial.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "new_sq = Arm(parameters={'w': 0.95, 'x': 1, 'y': 'foo', 'z': True})\nself.batch.set_status_quo_with_weight(self.arms[0], self.sq_weight)\nself.assertEqual(self.batch.weights[0], self.batch.weights[1])\nself.assertTrue(self.batch.status_quo.parameters == self.arms[0].parameters)\nself.assertEqual(self.batch.status_quo.name, self.batch.arms[0].name)\nself.assertEqual(self.batch.arm_weights[self.batch.arms[0]], self.sq_weight)\nself.assertEqual(sum(self.batch.weights), self.weights[1] + self.sq_weight)\nself.batch.set_status_quo_with_weight(new_sq, self.sq_weight)\nself.assertEqual(self.batch.status_quo.name, 'status_quo_0')\nself.batch.add_arms_and_weights([new_sq])\nself.assertEqual(self.batch.generator_run_structs[1].generator_run.arms[0].\n    name, 'status_quo_0')\n"
-}

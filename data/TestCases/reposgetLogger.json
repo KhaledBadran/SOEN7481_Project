@@ -1,9 +1,0 @@
-{
-    "functionName": "getLogger",
-    "className": "Helper",
-    "fileName": "/FaradayRF_&_Faraday-Software/faraday_&_classes_&_helper.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        Get logger configuration and create instance of a logger\n        \"\"\"\nrelpath1 = os.path.join('etc', 'faraday')\nrelpath2 = os.path.join('..', 'etc', 'faraday')\nsetuppath = os.path.join(sys.prefix, 'etc', 'faraday')\nuserpath = os.path.join(os.path.expanduser('~'), '.faraday')\nself.path = ''\nfor location in (os.curdir, relpath1, relpath2, setuppath, userpath):\n    try:\n        logging.config.fileConfig(os.path.join(location, 'loggingConfig.ini'))\n        self.path = location\n        break\n    except ConfigParser.NoSectionError:\n        pass\nself._logger = logging.getLogger(self._name)\nreturn self._logger\n"
-}

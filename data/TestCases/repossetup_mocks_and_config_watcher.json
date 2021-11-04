@@ -1,9 +1,0 @@
-{
-    "functionName": "setup_mocks_and_config_watcher",
-    "className": "TestConfigurationWatcher",
-    "fileName": "/dnephin_&_PyStaticConfiguration/tests_&_config_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.loader = mock.Mock()\nwith mock.patch('staticconf.config.time') as self.mock_time:\n    with mock.patch('staticconf.config.os.stat') as self.mock_stat:\n        with tempfile.NamedTemporaryFile() as file:\n            with mock.patch('staticconf.config.os.path.getmtime'\n                ) as self.mock_getmtime:\n                file.flush()\n                self.mtime = 234\n                self.mock_getmtime.return_value = self.mtime\n                self.mock_stat.return_value.st_ino = 1\n                self.mock_stat.return_value.st_dev = 2\n                self.filename = file.name\n                self.watcher = config.ConfigurationWatcher(self.loader,\n                    self.filename)\n                yield\npytest.yield_fixture(autouse=True)"
-}

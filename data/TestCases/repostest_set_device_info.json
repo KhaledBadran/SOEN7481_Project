@@ -1,9 +1,0 @@
-{
-    "functionName": "test_set_device_info",
-    "className": "TestDispatchProcessor",
-    "fileName": "/BciPy_&_BciPy/bcipy_&_acquisition_&_tests_&_test_processor.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test MultiProcessor functionality\"\"\"\nproc1 = mock(Processor)\nproc2 = mock(Processor)\nproc3 = mock(Processor)\nwhen(proc1).set_device_info(any()).thenReturn(None)\nwhen(proc2).set_device_info(any()).thenReturn(None)\nwhen(proc3).set_device_info(any()).thenReturn(None)\nmulti = DispatchProcessor(proc1, proc2)\ndevice_info = DeviceInfo(name='foo-device', fs=100, channels=['c1', 'c2', 'c3']\n    )\nmulti.set_device_info(device_info)\nverify(proc1, times=1).set_device_info(device_info)\nverify(proc2, times=1).set_device_info(device_info)\nmulti.add(proc3)\nverify(proc3, times=1).set_device_info(device_info)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "from_neighbor_throats",
-    "className": null,
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_models_&_misc_&_neighbor_lookups.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Adopt a value from the values found in neighboring throats\n\n    Parameters\n    ----------\n    target : OpenPNM Object\n        The object which this model is associated with. This controls the\n        length of the calculated array, and also provides access to other\n        necessary properties.\n    prop : string\n        The dictionary key of the array containing the throat property to be\n        used in the calculation.  The default is 'throat.seed'.\n    throat_prop : string\n        Same as ``prop``, but will be deprecated.\n    mode : string\n        Controls how the pore property is calculated.  Options are 'min',\n        'max' and 'mean'.\n    ignore_nans : boolean (default is ``True``)\n        If ``True`` the result will ignore ``nans`` in the neighbors\n\n    Returns\n    -------\n    value : ND-array\n        Array containing customized values based on those of adjacent throats.\n\n    \"\"\"\nprj = target.project\nnetwork = prj.network\nlookup = prj.find_full_domain(target)\nPs = lookup.map_pores(target.pores(), target)\nif prop is not None:\n    throat_prop = prop\ndata = lookup[throat_prop]\nif ignore_nans:\n    data = np.ma.MaskedArray(data=data, mask=np.isnan(data))\nneighborTs = network.find_neighbor_throats(pores=Ps, flatten=False, mode='or')\nvalues = np.ones((np.shape(Ps)[0],)) * np.nan\nif mode == 'min':\n    for pore in range(len(Ps)):\n        values[pore] = np.amin(data[neighborTs[pore]])\nif mode == 'max':\n    for pore in range(len(Ps)):\n        values[pore] = np.amax(data[neighborTs[pore]])\nif mode == 'mean':\n    for pore in range(len(Ps)):\n        values[pore] = np.mean(data[neighborTs[pore]])\nreturn np.array(values)\n"
-}

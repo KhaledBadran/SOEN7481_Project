@@ -1,9 +1,0 @@
-{
-    "functionName": "test_interfaces_equivalent",
-    "className": "TestGpMeanVarView",
-    "fileName": "/Yelp_&_MOE/moe_&_tests_&_views_&_rest_&_gp_mean_var_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that the /gp/mean, var, mean_var, etc. endpoints are consistent.\"\"\"\ntolerance = numpy.finfo(numpy.float64).eps\nfor test_case in self.gp_test_environments:\n    python_domain, python_gp = test_case\n    python_cov, historical_data = python_gp.get_core_data_copy()\n    points_to_evaluate = (python_domain.\n        generate_uniform_random_points_in_domain(10))\n    json_payload = self._build_json_payload(python_domain, python_cov,\n        historical_data, points_to_evaluate.tolist())\n    resp = self.testapp.post(self.endpoint, json_payload)\n    resp_schema = GpMeanVarResponse()\n    resp_dict = resp_schema.deserialize(json.loads(resp.body))\n    truth_mean = numpy.asarray(resp_dict.get('mean'))\n    truth_var = numpy.asarray(resp_dict.get('var'))\n    self._compare_endpoint_mean_var_results(json_payload, GP_MEAN_ENDPOINT,\n        GpMeanResponse(), tolerance, truth_mean=truth_mean)\n    self._compare_endpoint_mean_var_results(json_payload, GP_VAR_ENDPOINT,\n        GpVarResponse(), tolerance, truth_var=truth_var)\n    self._compare_endpoint_mean_var_results(json_payload,\n        GP_VAR_DIAG_ENDPOINT, GpVarDiagResponse(), tolerance, truth_var=\n        numpy.diag(truth_var))\n    self._compare_endpoint_mean_var_results(json_payload,\n        GP_MEAN_VAR_DIAG_ENDPOINT, GpMeanVarDiagResponse(), tolerance,\n        truth_mean=truth_mean, truth_var=numpy.diag(truth_var))\n"
-}

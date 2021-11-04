@@ -1,9 +1,0 @@
-{
-    "functionName": "test_save_xrf_standard_yaml_file3",
-    "className": null,
-    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_core_&_tests_&_test_quant_analysis.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test the case of existing file\"\"\"\nyaml_path = ['yaml', 'param', 'file']\nfile_name = 'standard.yaml'\nyaml_path = os.path.join(tmp_path, *yaml_path, file_name)\nstandard_data = copy.deepcopy(_standard_data_sample)\nstandard_data[0]['density'] = 50.0\nsave_xrf_standard_yaml_file(yaml_path, standard_data)\nwith pytest.raises(RuntimeError, match=\n    'Sum of areal densities does not match total density'):\n    load_xrf_standard_yaml_file(yaml_path)\n"
-}

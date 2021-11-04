@@ -1,9 +1,0 @@
-{
-    "functionName": "test_is_symmetric_FickianDiffusion_must_be_symmetric",
-    "className": "UtilsTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_utils_&_UtilsTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "net = op.network.Cubic(shape=[5, 5, 5])\ngeom = op.geometry.StickAndBall(network=net)\nair = op.phases.Air(network=net)\n_ = op.physics.Standard(network=net, phase=air, geometry=geom)\nfd = op.algorithms.FickianDiffusion(network=net, phase=air)\nfd.set_value_BC(pores=net.pores('left'), values=1.0)\nfd.set_value_BC(pores=net.pores('right'), values=0.1)\nassert op.utils.misc.is_symmetric(fd.A)\n"
-}

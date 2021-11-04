@@ -1,9 +1,0 @@
-{
-    "functionName": "test_export_datapoint_target_none",
-    "className": "TestDatasetExporter",
-    "fileName": "/vfdev-5_&_ImageDatasetViz/tests_&_test_dataset_exporter.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "def read_img(i):\n    img = Image.new(mode='RGB', size=(64, 64), color=(i % 255, i * 2 % 255,\n        i * 3 % 255))\n    return img\nde = DatasetExporter(read_img_fn=read_img, img_id_fn=lambda x: str(x))\nwith tempfile.TemporaryDirectory() as tmpdir:\n    path = Path(tmpdir) / 'test.png'\n    de.export_datapoint(0, None, path.as_posix())\n    self.assertTrue(path.exists())\n"
-}

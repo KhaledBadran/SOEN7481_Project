@@ -1,9 +1,0 @@
-{
-    "functionName": "test_io_time_serie",
-    "className": null,
-    "fileName": "/datamllab_&_PyODDS/test_&_pyodds_&_io_api_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "host = '127.0.0.1'\nuser = 'user'\npassword = '0906'\nalg = 'luminol'\nrng = np.random.RandomState(42)\nnp.random.seed(42)\nconn, cursor = connect_server(host, user, password)\nground_truth_whole = insert_demo_data(conn, cursor, 'db', 't',\n    ground_truth_flag=True)\ndata, ground_truth = query_data(conn, cursor, 'db', 't', time_serie_name=\n    'ts', ground_truth=ground_truth_whole, start_time='2019-07-20 00:00:00',\n    end_time='2019-08-20 00:00:00', time_serie=True, ground_truth_flag=True)\nclf = algorithm_selection(alg, random_state=rng, contamination=0.1)\nprint('Start processing:')\nstart_time = time.clock()\nclf.fit(data)\nprediction_result = clf.predict(data)\noutlierness = clf.decision_function(data)\noutput_performance(alg, ground_truth, prediction_result, time.clock() -\n    start_time, outlierness)\nvisualize_distribution_time_serie(clf.ts, data)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_specific_messages",
-    "className": null,
-    "fileName": "/Manishearth_&_ChatExchange/tests_&_test_messages.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "client = Client('stackexchange.com')\nmessage1 = client.get_message(15359027)\nassert message1.id == 15359027\nassert message1.text_content == '@JeremyBanks hello'\nassert message1.content_source == ':15358991 **hello**'\nassert message1.room.id == 1\nmessage2 = message1.parent\nassert message2.id == 15358991\nassert message2 is client.get_message(15358991)\nassert message2.text_content == '@bot forever in my tests'\nmessage3 = message2.parent\nmessage3.scrape_history = 'NOT EXPECTED TO BE CALLED'\nmessage3.scrape_transcript()\nassert message3.id == 15356758\nassert not message3.edited\nassert message3.editor is None\nassert not message3.pinned\nassert message3.pinners == []\nassert message3.pins == 0\nassert message3.owner.id == 97938\nmessage4 = message3.parent\nassert message4.id == 15356755\nassert message4.edited\nassert message4.owner.id == 97938\nassert message4.text_content == 'and again!'\nassert message4.parent is None\nmessage5 = client.get_message(15359293)\nmessage5.scrape_transcript = 'NOT EXPECTED TO BE CALLED'\nmessage5.scrape_history()\nassert message5.edited\nassert message5.edits == 1\nassert message5.editor.id == 97938\nmessage6 = client.get_message(15493758)\nmessage6.scrape_transcript = 'NOT EXPECTED TO BE CALLED'\nmessage6.scrape_history()\nassert not message6.edited\nassert message6.edits == 0\nassert message6.editor is None\npytest.mark.timeout(240)"
-}

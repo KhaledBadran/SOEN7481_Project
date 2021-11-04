@@ -1,9 +1,0 @@
-{
-    "functionName": "test_invoke_compiler_failure",
-    "className": null,
-    "fileName": "/Pebaz_&_Nimporter/tests_&_test_build.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Make sure that the compiler fails on bad input.\"\"\"\nerr_file = Path('tests/pkg1/error.nim').resolve()\next = '.exe' if sys.platform == 'win32' else ''\nout_file = Path('tests/pkg1/error' + ext).resolve()\ntry:\n    out, err, war, hin = NimCompiler.invoke_compiler(['nim', 'c', *\n        NimCompiler.NIM_CLI_ARGS, str(err_file)])\n    assert not out_file.exists(), err\n    assert any('Error: cannot open file: fallacy' in i for i in err)\n    assert any('Hint: system [Processing]' in i for i in hin)\nfinally:\n    if out_file.exists():\n        out_file.unlink()\n"
-}

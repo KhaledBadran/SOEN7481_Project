@@ -1,9 +1,0 @@
-{
-    "functionName": "test_isoclust_against_bruteforce",
-    "className": null,
-    "fileName": "/MetaSys-LISBP_&_IsoCor/isocor_&_tests_&_test_isotopic_cluster_HighRes.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Check the high-resolution isotopic clusters generation against a brute force implementation.\"\"\"\nstr_formula = ''.join(['{}{}'.format(k, v) for k, v in formula.items()])\ntry:\n    del formula['C']\nexcept:\n    pass\nic_bruteforce = get_isoclust_bruteforce(formula, data_iso)\nmetabolite = hrcor.HighResMetaboliteCorrector(str_formula, '13C', 1e+42, \n    400, resolution_formula_code='orbitrap', derivative_formula=None,\n    tracer_purity=None, data_isotopes=data_iso, correct_NA_tracer=False,\n    charge=1)\nmetabolite.threshold_p = None\nic_optimized = metabolite.get_isotopic_cluster()\nnp.testing.assert_allclose(sum(ic_bruteforce.values()), 1.0, rtol=usr_tolerance\n    )\nnp.testing.assert_allclose(sum(ic_optimized.values()), 1.0, rtol=usr_tolerance)\nassert len(ic_bruteforce) == len(ic_optimized)\nmass_optimized = [float(x) for x in sorted(ic_optimized.keys())]\nmass_bruteforce = [float(x) for x in sorted(ic_bruteforce.keys())]\nnp.testing.assert_allclose(mass_optimized, mass_bruteforce, rtol=usr_tolerance)\nabun_optimized = [float(x) for x in sorted(ic_optimized.values())]\nabun_bruteforce = [float(x) for x in sorted(ic_bruteforce.values())]\nnp.testing.assert_allclose(abun_optimized, abun_bruteforce, rtol=usr_tolerance)\npytest.mark.parametrize('formula', [{'C': 1, 'N': 1}, {'C': 1, 'O': 1}, {\n    'C': 1, 'N': 2}, {'C': 1, 'O': 2}, {'C': 1, 'N': 20, 'H': 20, 'O': 20,\n    'P': 4}, {'C': 20, 'N': 20, 'H': 20, 'O': 20, 'P': 4}])"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_weekday_name_range",
-    "className": null,
-    "fileName": "/roniemartinez_&_DocCron/tests_&_test_range.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "cron = doccron.cron('0 10 * * TUE-FRI *')\nnext_datetime = datetime.now(tz=tzlocal()).replace(hour=10, minute=0,\n    second=0, microsecond=0)\nwhile True:\n    if next_datetime.isoweekday() in range(2, 6\n        ) and next_datetime > datetime.now(tz=tzlocal()):\n        break\n    next_datetime += timedelta(days=1)\nnext_schedule = next(cron)\nassert isinstance(next_schedule, datetime)\nassert next_schedule == next_datetime\n"
-}

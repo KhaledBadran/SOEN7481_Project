@@ -1,9 +1,0 @@
-{
-    "functionName": "test_is_allowed_by_operation_policy_denied",
-    "className": "TestKmipEngine",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that access denied by operation policy is processed correctly.\n        \"\"\"\ne = engine.KmipEngine()\ne.is_allowed = mock.Mock(return_value=False)\nresult = e._is_allowed_by_operation_policy('test_policy', ['test_user', [\n    'test_group_A', 'test_group_B']], 'test_user', enums.ObjectType.\n    SYMMETRIC_KEY, enums.Operation.GET)\ne.is_allowed.assert_any_call('test_policy', 'test_user', 'test_group_A',\n    'test_user', enums.ObjectType.SYMMETRIC_KEY, enums.Operation.GET)\ne.is_allowed.assert_any_call('test_policy', 'test_user', 'test_group_B',\n    'test_user', enums.ObjectType.SYMMETRIC_KEY, enums.Operation.GET)\nself.assertFalse(result)\n"
-}

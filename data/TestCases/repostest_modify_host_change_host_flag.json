@@ -1,9 +1,0 @@
-{
-    "functionName": "test_modify_host_change_host_flag",
-    "className": "PyU4VProvisioningTest",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test modify_host change host flag.\"\"\"\nhost_name = self.data.initiatorgroup_name_i\nhost_flag_dict = {'consistent_lun': 'true'}\npayload = {'editHostActionParam': {'setHostFlagsParam': {'hostFlags':\n    host_flag_dict}}}\nwith mock.patch.object(self.provisioning, 'modify_resource') as mock_mod:\n    self.provisioning.modify_host(host_name, host_flag_dict=host_flag_dict)\n    mock_mod.assert_called_once_with(category=constants.SLOPROVISIONING,\n        resource_level=constants.SYMMETRIX, resource_level_id=self.data.\n        array, resource_type=constants.HOST, resource_type_id=host_name,\n        payload=payload)\n"
-}

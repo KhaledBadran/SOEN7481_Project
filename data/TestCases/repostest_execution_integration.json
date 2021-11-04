@@ -1,9 +1,0 @@
-{
-    "functionName": "test_execution_integration",
-    "className": null,
-    "fileName": "/poletaevvlad_&_CubeLang/test_&_execution_&_test_execution.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Computing pi by integrating:\n    \\\\frac{\\\\pi}{2} = \\\\int^1_{-1} \\\\sqrt{1 - x^2} dx\n    \"\"\"\ncode = \"\"\"\n        let delta_x: real = 0.001\n        let x: real = -1\n        let y: real = sqrt(1 - x * x)\n        let result: real\n\n        while x + delta_x < 1 do\n            let next_x: real = x + delta_x\n            let next_y: real = sqrt(1 - next_x * next_x)\n            result = result + (y + next_y) / 2 * delta_x\n\n            y = next_y\n            x = next_x\n        end\n        print(result * 2)\n    \"\"\"\nstack = Stack()\nstack.add_global('print', Function(([Real], Void)))\nstack.add_global('sqrt', Function(([Real], Real)))\nexpressions = parser.parse(code, stack)\ncontext = ExecutionContext(dict(print=MagicMock(), sqrt=math.sqrt))\ncontext.compile(expressions)\ncontext.execute(MockTracebackWriter())\nreturn_value = context.globals['print'].call_args[0][0]\nassert abs(return_value - math.pi) < 0.01\n"
-}

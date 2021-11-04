@@ -1,9 +1,0 @@
-{
-    "functionName": "test_inter_arrival_times_markovian",
-    "className": null,
-    "fileName": "/TUDelft-CITG_&_OpenTNSim/tests_&_test_vessel_generator.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "generator = model.VesselGenerator(vessel_type, vessel_database)\nsimulation_start = datetime.datetime(2019, 1, 1)\nsim = model.Simulation(simulation_start, graph)\nsim.add_vessels(origin=list(graph)[0], destination=list(graph)[-1],\n    vessel_generator=generator)\nsim.run(duration=100 * 24 * 60 * 60)\ninter_arrivals = []\nfor i, _ in enumerate(sim.environment.vessels):\n    if i > 0:\n        inter_arrivals.append(sim.environment.vessels[i].log['Timestamp'][0\n            ] - sim.environment.vessels[i - 1].log['Timestamp'][0])\nassert np.isclose(3600, np.mean(inter_arrivals).total_seconds(), rtol=0.01,\n    atol=60)\n"
-}

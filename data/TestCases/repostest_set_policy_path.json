@@ -1,9 +1,0 @@
-{
-    "functionName": "test_set_policy_path",
-    "className": "TestKmipServerConfig",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_config.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the policy_path configuration property can be set correctly.\n        \"\"\"\nc = config.KmipServerConfig()\nc._logger = mock.MagicMock()\nself.assertNotIn('policy_path', c.settings.keys())\nwith mock.patch('os.path.exists') as os_mock:\n    os_mock.return_value = True\n    c._set_policy_path('/test/path/policies')\nself.assertIn('policy_path', c.settings.keys())\nself.assertEqual('/test/path/policies', c.settings.get('policy_path'))\nc._set_policy_path(None)\nself.assertIn('policy_path', c.settings.keys())\nself.assertEqual(None, c.settings.get('policy_path'))\nc._logger.reset_mock()\nargs = 1,\nself.assertRaises(exceptions.ConfigurationError, c._set_policy_path, *args)\nself.assertNotEqual(1, c.settings.get('policy_path'))\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_gaussian_full_cov",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_models_&_test_model_predict.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "covar_shape = output_dim, Ntest, Ntest\nX, Y, Z = rng.randn(N, input_dim), rng.randn(N, output_dim), rng.randn(M,\n    input_dim)\nXtest = rng.randn(Ntest, input_dim)\nkernel = Matern32()\nmodel_gp = gpflow.models.GPR([X, Y], kernel=kernel)\nmu1, var = model_gp.predict_f(Xtest, full_cov=False)\nmu2, covar = model_gp.predict_f(Xtest, full_cov=True)\nassert np.allclose(mu1, mu2, atol=1e-10)\nassert covar.shape == covar_shape\nassert var.shape == (Ntest, output_dim)\nfor i in range(output_dim):\n    assert np.allclose(var[:, (i)], np.diag(covar[(i), :, :]))\npytest.mark.parametrize('input_dim, output_dim, N, Ntest, M', [[3, 2, 20, \n    30, 5]])"
-}

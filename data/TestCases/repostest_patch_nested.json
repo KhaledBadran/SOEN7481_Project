@@ -1,9 +1,0 @@
-{
-    "functionName": "test_patch_nested",
-    "className": "TestPatchResource",
-    "fileName": "/fvalverd_&_AutoApi/tests_&_views_&_test_patch.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.movies[1]['country'] = 'USA'\nresponse = self.app.patch('/%s/actors/%s/movies/%s' % (self.api, self.\n    actors[1]['id'], self.movies[1]['id']), headers=self.headers, data=json\n    .dumps({'country': 'USA'}), content_type='application/json')\nself.assertEqual(response.status_code, 204)\nresponse = self.app.get('/%s/movies/%s' % (self.api, self.movies[1]['id']),\n    headers=self.headers)\nresponse_json = json.loads(response.data)\nself.assertEqual(self.movies[1], response_json)\n"
-}

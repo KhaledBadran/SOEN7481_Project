@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sockets_msg_raw",
-    "className": "TestSockets",
-    "fileName": "/PRIArobotics_&_HedgehogProtocol/tests_&_test_protocol.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "endpoint = 'inproc://test'\nrouter = zmq_sync.DealerRouterSocket(zmq_ctx, zmq.ROUTER, side=ServerSide)\nreq = zmq_sync.ReqSocket(zmq_ctx, zmq.REQ, side=ClientSide)\nwith router, req:\n    router.bind(endpoint)\n    req.connect(endpoint)\n    old = b'as'\n    req.send_msg_raw(old)\n    header, new = router.recv_msg_raw()\n    assert new == old\n    old = b'df'\n    router.send_msg_raw(header, old)\n    new = req.recv_msg_raw()\n    assert new == old\n"
-}

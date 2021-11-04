@@ -1,9 +1,0 @@
-{
-    "functionName": "test_solution_should_diverge_w_large_relaxation",
-    "className": "ReactiveTransportTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_ReactiveTransportTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.alg.reset(bcs=True, source_terms=True)\nself.alg.setup(nlin_max_iter=25)\nself.alg.settings.update({'conductance': 'throat.diffusive_conductance',\n    'quantity': 'pore.concentration'})\nself.alg.set_source(pores=self.net.pores('bottom'), propname='pore.reaction')\nself.alg.set_value_BC(pores=self.net.pores('top'), values=1.0)\nself.alg.settings['relaxation_quantity'] = 20.0\nself.alg.settings['relaxation_source'] = 1.0\nwith pytest.raises(Exception):\n    self.alg.run()\nself.alg.settings['relaxation_quantity'] = 1.0\nself.alg.settings['relaxation_source'] = 20.0\nwith pytest.raises(Exception):\n    self.alg.run()\n"
-}

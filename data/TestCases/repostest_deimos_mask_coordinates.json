@@ -1,9 +1,0 @@
-{
-    "functionName": "test_deimos_mask_coordinates",
-    "className": null,
-    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_opticalmodel.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "f = os.path.join(os.environ['PYPEIT_DEV'], 'RAW_DATA', 'keck_deimos',\n    '830G_M_8500', 'DE.20100913.22358.fits.gz')\nspec = KeckDEIMOSSpectrograph()\nspec.get_grating(f)\nassert numpy.isclose(spec.grating.central_wave, 8500.0078125\n    ), 'Incorrect grating setup'\nximg, yimg, ccd, xpix, ypix = spec.mask_to_pixel_coordinates(x=-127.15775,\n    y=20.0565)\nassert ccd == 6, 'Incorrect chip selected'\nassert numpy.isclose(xpix, 528.54329982), 'Incorrect x coordinate'\nassert numpy.isclose(ypix, 487.64455754), 'Incorrect y coordinate'\ndev_suite_required"
-}

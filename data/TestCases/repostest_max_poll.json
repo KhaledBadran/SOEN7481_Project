@@ -1,9 +1,0 @@
-{
-    "functionName": "test_max_poll",
-    "className": "TestMaxPool",
-    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_onnx_&_test_onnx_ops.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "kernel_width, kernel_height = 2, 2\nstride_width, stride_height = 1, 1\npad_width, pad_height = 0, 0\nceil_mode = 0\ninput_shape = [1, 3, 224, 224]\noutput_shape = [1, 3, 223, 223]\ninput_x = np.random.random(input_shape)\nX = onnx.helper.make_tensor_value_info('X', onnx.TensorProto.FLOAT, input_shape\n    )\nY = onnx.helper.make_tensor_value_info('Y', onnx.TensorProto.FLOAT,\n    output_shape)\nmaxpool_node = onnx.helper.make_node(op_type='MaxPool', inputs=['X'],\n    outputs=['Y'], kernel_shape=(kernel_width, kernel_height))\nonnx_graph = onnx.helper.make_graph(nodes=[maxpool_node], name=\n    'test-maxpool', inputs=[X], outputs=[Y])\nonnx_model = onnx.helper.make_model(onnx_graph, producer_name='ONNX')\nonnx.checker.check_model(onnx_model)\nloaded_model = load_model_proto(onnx_model)\nbigdl_model = SpatialMaxPooling(kw=kernel_width, kh=kernel_height, dw=\n    stride_width, dh=stride_height, pad_w=pad_width, pad_h=pad_height,\n    to_ceil=False if ceil_mode == 0 else True)\nloaded_out = loaded_model.forward(input_x)\nexpected_out = bigdl_model.forward(input_x)\nassert np.array_equal(expected_out, loaded_out)\n"
-}

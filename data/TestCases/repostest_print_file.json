@@ -1,9 +1,0 @@
-{
-    "functionName": "test_print_file",
-    "className": "TestsORFDetection",
-    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_sORF_detection.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "out_g = StringIO()\nout_t = StringIO()\nsorf = {'strain': 'aaa', 'strand': '+', 'start': 10, 'end': 15, 'starts': [\n    str(10)], 'ends': [str(15)], 'seq': 'ATGTA', 'type': '3utr', 'print': \n    False, 'rbs': ['3'], 'start_TSS': '1', 'with_TSS': ['NA'], 'srna': [\n    'NA'], 'candidate': ['AAA'], 'shift': 1}\nsorf_datas = {'best': 20, 'high': 50, 'low': 10, 'start': 1, 'end': 10,\n    'track': 'track_1', 'detail': [], 'conds': {'frag': 'track_1'}}\nargs = self.mock_args.mock()\nargs.table_best = True\nargs.print_all = True\nsd.print_file(sorf, sorf_datas, 1, out_g, out_t, 'best', args)\nself.assertEqual(out_g.getvalue(),\n    \"\"\"aaa\tANNOgesic\tsORF\t10\t15\t.\t+\t.\tID=aaa_sorf1;Name=sORF_00001;start_TSS=1;with_TSS=NA;sORF_type=3utr;sRNA=NA;rbs=RBS_3;frame_shift=1\n\"\"\"\n    )\nself.assertEqual(out_t.getvalue(),\n    \"\"\"aaa\tsORF_00001\t10\t15\t+\t3'UTR_derived\tNA\tRBS_3\t10\t15\tNA\t1\tFragmented\t20\t\tATGTA\tAAA\n\"\"\"\n    )\n"
-}

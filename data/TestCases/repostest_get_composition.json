@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_composition",
-    "className": null,
-    "fileName": "/ePSIC-DLS_&_ParticleSpy/ParticleSpy_&_tests_&_test_particle_analysis.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "mask = gen_test.generate_test_image(hspy=False)\neds = gen_test.generate_test_eds()\np = Particle()\np.set_mask(mask)\nstype = 'EDS_TEM'\np.spectrum = {}\nPAnalysis.store_spectrum(p, eds, stype)\nparams = PAnalysis.parameters()\nparams.generate()\nparams.generate_eds(eds_method='CL', elements=['Au', 'Pd'], factors=[1.0, 1.0])\nPAnalysis.get_composition(p, params)\nnptest.assert_allclose(p.composition['Au'], 46.94530019)\n"
-}

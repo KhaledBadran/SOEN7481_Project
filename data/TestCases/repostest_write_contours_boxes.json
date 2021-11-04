@@ -1,9 +1,0 @@
-{
-    "functionName": "test_write_contours_boxes",
-    "className": null,
-    "fileName": "/PaulHancock_&_Aegean/tests_&_test_catalogs.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that we can write contour boxes for our island sources\"\"\"\ndata = np.zeros((5, 5))\ndata[1:4, (2)] = 1.0\ndata[(2), 1:4] = 1.0\nms = MarchingSquares(data)\nsrc = IslandSource()\nsrc.contour = ms.perimeter\nsrc.max_angular_size_anchors = [1, 2, 3, 4]\nsrc.pix_mask = [[0, 0], [1, 1]]\nsrc.extent = [1, 4, 1, 4]\ncatalog = [src]\ncat.writeIslandContours('out.reg', catalog, fmt='reg')\nif not os.path.exists('out.reg'):\n    raise AssertionError()\nos.remove('out.reg')\ncat.writeIslandContours('out.ann', catalog, fmt='ann')\nif os.path.exists('out.ann'):\n    raise AssertionError()\ncat.writeIslandBoxes('out.reg', catalog, fmt='reg')\nif not os.path.exists('out.reg'):\n    raise AssertionError()\nos.remove('out.reg')\ncat.writeIslandBoxes('out.ann', catalog, fmt='ann')\nif not os.path.exists('out.ann'):\n    raise AssertionError()\nos.remove('out.ann')\ncat.writeIslandBoxes('out.ot', catalog, fmt='ot')\nif os.path.exists('out.ot'):\n    raise AssertionError()\n"
-}

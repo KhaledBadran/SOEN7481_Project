@@ -1,9 +1,0 @@
-{
-    "functionName": "test_MaxValueEntropySearch_MultiFidelity",
-    "className": "MaxValueEntropySearchTest",
-    "fileName": "/facebook_&_Ax/ax_&_models_&_tests_&_test_botorch_mes.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "model = MaxValueEntropySearch()\nmodel.fit(Xs=self.Xs, Ys=self.Ys, Yvars=self.Yvars, bounds=self.bounds,\n    task_features=[], feature_names=self.feature_names, metric_names=self.\n    metric_names, fidelity_features=[-1])\nxbest = model.best_point(bounds=self.bounds, objective_weights=self.\n    objective_weights, target_fidelities={(2): 5.0})\nlb = torch.tensor([b[0] for b in self.bounds]) - 1e-05\nub = torch.tensor([b[1] for b in self.bounds]) + 1e-05\nself.assertTrue(torch.all(xbest <= ub))\nself.assertTrue(torch.all(xbest >= lb))\nwith self.assertRaises(RuntimeError):\n    model.best_point(bounds=self.bounds, objective_weights=self.\n        objective_weights)\nwith self.assertRaises(RuntimeError):\n    model.best_point(bounds=self.bounds, objective_weights=self.\n        objective_weights, target_fidelities={(2): 1.0}, fixed_features={(2\n        ): 1.0})\nn = 1\nnew_X_dummy = torch.rand(1, n, 3, dtype=self.dtype, device=self.device)\nwith mock.patch(self.optimize_acqf, side_effect=[(new_X_dummy, None)]\n    ) as mock_optimize_acqf:\n    Xgen, wgen, _, __ = model.gen(n=n, bounds=self.bounds,\n        objective_weights=self.objective_weights, outcome_constraints=None,\n        linear_constraints=None, model_gen_options={\n        'acquisition_function_kwargs': self.acq_options, 'optimizer_kwargs':\n        self.optimizer_options}, target_fidelities={(2): 1.0})\n    self.assertTrue(torch.equal(Xgen, new_X_dummy.cpu()))\n    self.assertTrue(torch.equal(wgen, torch.ones(n, dtype=self.dtype)))\n    mock_optimize_acqf.assert_called()\n"
-}

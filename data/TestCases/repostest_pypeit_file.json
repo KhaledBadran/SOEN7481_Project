@@ -1,9 +1,0 @@
-{
-    "functionName": "test_pypeit_file",
-    "className": null,
-    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_pypeitpar.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "cfg, data, frametype, usrdata, setups = parse_pypeit_file(data_path(\n    'example_pypeit_file.pypeit'), file_check=False)\nname = pypeitpar.PypeItPar.from_cfg_lines(merge_with=cfg)['rdx']['spectrograph'\n    ]\nspectrograph = load_spectrograph(name)\nspec_cfg = spectrograph.default_pypeit_par().to_config()\np = pypeitpar.PypeItPar.from_cfg_lines(cfg_lines=spec_cfg, merge_with=cfg)\nassert p['fluxcalib'] is not None\nassert p['calibrations']['biasframe']['process']['sig_lohi'] == [10, 10]\nassert p['calibrations']['traceframe']['process']['combine'] == 'median'\nassert p['scienceframe']['process']['n_lohi'] == [8, 8]\n"
-}

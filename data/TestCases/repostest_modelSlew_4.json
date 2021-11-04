@@ -1,9 +1,0 @@
-{
-    "functionName": "test_modelSlew_4",
-    "className": null,
-    "fileName": "/mworion_&_MountWizzard4/mw4_&_test_&_unit_tests_&_gui_&_mainWmixin_&_test_tabModel.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "app.deviceStat['dome'] = True\nmPoint = {'lenSequence': 3, 'countSequence': 3, 'imagePath': '',\n    'exposureTime': 1, 'binning': 1, 'subFrame': 100, 'fastReadout': False,\n    'azimuth': 0, 'altitude': 0}\napp.slewQueue.put(mPoint)\napp.ui.checkDomeGeometry.setChecked(True)\nwith mock.patch.object(app.app.camera, 'expose'):\n    with mock.patch.object(app.app.dome, 'slewDome', return_value=0):\n        with mock.patch.object(app.app.mount.obsSite, 'setTargetAltAz',\n            return_value=True):\n            suc = app.modelSlew()\n            assert suc\n"
-}

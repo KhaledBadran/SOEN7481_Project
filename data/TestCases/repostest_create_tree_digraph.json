@@ -1,9 +1,0 @@
-{
-    "functionName": "test_create_tree_digraph",
-    "className": "TestBasic",
-    "fileName": "/microsoft_&_LightGBM/tests_&_python_package_test_&_test_plotting.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "constraints = [-1, 1] * int(self.X_train.shape[1] / 2)\ngbm = lgb.LGBMClassifier(n_estimators=10, num_leaves=3, silent=True,\n    monotone_constraints=constraints)\ngbm.fit(self.X_train, self.y_train, verbose=False)\nself.assertRaises(IndexError, lgb.create_tree_digraph, gbm, tree_index=83)\ngraph = lgb.create_tree_digraph(gbm, tree_index=3, show_info=['split_gain',\n    'internal_value', 'internal_weight'], name='Tree4', node_attr={'color':\n    'red'})\ngraph.render(view=False)\nself.assertIsInstance(graph, graphviz.Digraph)\nself.assertEqual(graph.name, 'Tree4')\nself.assertEqual(graph.filename, 'Tree4.gv')\nself.assertEqual(len(graph.node_attr), 1)\nself.assertEqual(graph.node_attr['color'], 'red')\nself.assertEqual(len(graph.graph_attr), 0)\nself.assertEqual(len(graph.edge_attr), 0)\ngraph_body = ''.join(graph.body)\nself.assertIn('leaf', graph_body)\nself.assertIn('gain', graph_body)\nself.assertIn('value', graph_body)\nself.assertIn('weight', graph_body)\nself.assertIn('#ffdddd', graph_body)\nself.assertIn('#ddffdd', graph_body)\nself.assertNotIn('data', graph_body)\nself.assertNotIn('count', graph_body)\nunittest.skipIf(not GRAPHVIZ_INSTALLED, 'graphviz is not installed')"
-}

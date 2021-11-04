@@ -1,9 +1,0 @@
-{
-    "functionName": "test_context_error",
-    "className": "TestElasticBuffer",
-    "fileName": "/dkaslovsky_&_ElasticBatch/tests_&_test_buffer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class TestCase:\n\n    def __init__(self, n_docs, buffer_size, n_expected_flush_calls):\n        self.n_docs = n_docs\n        self.buffer_size = buffer_size\n        self.n_expected_flush_calls = n_expected_flush_calls\ntests = {'flush is not called on exit due to exception with empty buffer':\n    TestCase(n_docs=0, buffer_size=10, n_expected_flush_calls=0),\n    'flush is not called on exit due to exception with populated buffer':\n    TestCase(n_docs=5, buffer_size=10, n_expected_flush_calls=0),\n    'flush is called once when buffer is full but not again on exit':\n    TestCase(n_docs=5, buffer_size=2, n_expected_flush_calls=1)}\ndefault_err = ValueError\nfor test_name, test in tests.items():\n    mock_flush.reset_mock()\n    mock_flush.side_effect = ElasticBufferFlushError\n    err = (ElasticBufferFlushError if test.n_expected_flush_calls > 0 else\n        default_err)\n    docs = [self.docs[0]] * test.n_docs\n    with self.assertRaises(err, msg=test_name):\n        with ElasticBuffer(size=test.buffer_size) as eb:\n            eb.add(docs)\n            raise default_err()\n    self.assertEqual(mock_flush.call_count, test.n_expected_flush_calls,\n        test_name)\npatch.object(ElasticBuffer, 'flush')"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "dummy_spectrum",
-    "className": null,
-    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_coadd.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Parameters\n    ----------\n    s2n\n    seed\n    wave\n\n    Returns\n    -------\n    spec : XSpectrum1D\n\n    \"\"\"\nif rstate is None:\n    rstate = np.random.RandomState(seed)\nif wave is None:\n    wave = np.linspace(4000.0, 5000.0, 2000)\nflux = np.ones_like(wave)\nsig = np.ones_like(wave) / s2n\nispec = XSpectrum1D.from_tuple((wave, flux, sig))\nspec = ispec.add_noise(rstate=rstate)\nflux, sig, mask = spec.data['flux'], spec.data['sig'], spec.data['flux'].mask\nivar = utils.inverse(sig ** 2)\nreturn flux, ivar, mask\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_exception_auto_populate_error",
-    "className": null,
-    "fileName": "/jperras_&_Flask-ApiExceptions/test_apiexceptions.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"If no ApiError object is provided, create one by default in\n    ApiException.\"\"\"\nexc = ApiException(status_code=418, code='bad_inputs', message=\n    'Something happened.', info={'key': 'value'})\nassert len(exc.errors) == 1\nassert isinstance(exc.errors[0], ApiError)\nassert exc.errors[0].code == 'bad_inputs'\nassert exc.errors[0].message == 'Something happened.'\nassert exc.errors[0].info == {'key': 'value'}\nexc = ApiException(status_code=418, code='bad_inputs')\nassert len(exc.errors) == 1\nassert isinstance(exc.errors[0], ApiError)\nassert exc.errors[0].code == 'bad_inputs'\nassert exc.errors[0].message is None\nassert exc.errors[0].info is None\nexc = ApiException(status_code=418, message='Whoopsie! That is no good.')\nassert len(exc.errors) == 1\nassert isinstance(exc.errors[0], ApiError)\nassert exc.errors[0].info is None\nassert exc.errors[0].code is None\nassert exc.errors[0].message == 'Whoopsie! That is no good.'\nexc = ApiException(status_code=418, info={'key': 'value'})\nassert len(exc.errors) == 1\nassert isinstance(exc.errors[0], ApiError)\nassert exc.errors[0].info == {'key': 'value'}\nassert exc.errors[0].code is None\nassert exc.errors[0].message is None\n"
-}

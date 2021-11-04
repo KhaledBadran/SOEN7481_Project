@@ -1,9 +1,0 @@
-{
-    "functionName": "test_cudnn_gru_save_and_cudnn_compatible_load",
-    "className": "TestTFLayers",
-    "fileName": "/deepmipt_&_DeepPavlov/tests_&_test_tf_layers.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "x = np.random.normal(size=(10, 10, 50))\ntf.reset_default_graph()\ncdnngrumodel = DPCudnnGRUModel(num_layers=num_layers, num_units=100)\nbefore_load_hidden, before_load_state = cdnngrumodel(x)[0], cdnngrumodel(x)[1]\ncdnngrumodel.save(str(tf_layers_data_path / 'cdnngrumodel' / 'model'))\ntf.reset_default_graph()\ncdnngrumodel = DPGRUModel(num_layers=num_layers, num_units=100)\ncdnngrumodel.load(str(tf_layers_data_path / 'cdnngrumodel' / 'model'))\nafter_load_hidden, after_load_state = cdnngrumodel(x)[0], cdnngrumodel(x)[1]\nequal_hidden = self.equal_values(after_load_hidden, before_load_hidden)\nequal_state = self.equal_values(after_load_state, before_load_state)\nassert equal_hidden > 1 - self.allowed_error_lvl\nassert equal_state > 1 - self.allowed_error_lvl\npytest.mark.parametrize('num_layers', [1, 3])"
-}

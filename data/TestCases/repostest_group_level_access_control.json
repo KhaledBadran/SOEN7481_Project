@@ -1,9 +1,0 @@
-{
-    "functionName": "test_group_level_access_control",
-    "className": "TestSLUGSAuthenticationAndAccessControl",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_functional_&_services_&_test_authentication.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that:\n        1. a user in Group A can create and retrieve a symmetric key\n        2. a user in Group B can also retrieve the same symmetric key\n        3. a user in both Groups can also retrieve the same symmetric key\n        4. a user in Group B cannot destroy the same symmetric key, and\n        5. a user in Group A can destroy the same symmetric key.\n        \"\"\"\nwith self.client_john_doe as c:\n    uid = c.create(enums.CryptographicAlgorithm.AES, 256,\n        operation_policy_name='policy_1')\n    self.assertIsInstance(uid, six.string_types)\n    key = c.get(uid)\n    self.assertIsInstance(key, objects.SymmetricKey)\n    self.assertEqual(key.cryptographic_algorithm, enums.\n        CryptographicAlgorithm.AES)\n    self.assertEqual(key.cryptographic_length, 256)\nwith self.client_jane_doe as c:\n    key = c.get(uid)\n    self.assertIsInstance(key, objects.SymmetricKey)\n    self.assertEqual(key.cryptographic_algorithm, enums.\n        CryptographicAlgorithm.AES)\n    self.assertEqual(key.cryptographic_length, 256)\nwith self.client_john_smith as c:\n    key = c.get(uid)\n    self.assertIsInstance(key, objects.SymmetricKey)\n    self.assertEqual(key.cryptographic_algorithm, enums.\n        CryptographicAlgorithm.AES)\n    self.assertEqual(key.cryptographic_length, 256)\n    self.assertRaises(exceptions.KmipOperationFailure, c.destroy, uid)\nwith self.client_john_doe as c:\n    c.destroy(uid)\n    self.assertRaises(exceptions.KmipOperationFailure, c.get, uid)\n    self.assertRaises(exceptions.KmipOperationFailure, c.destroy, uid)\n"
-}

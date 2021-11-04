@@ -1,9 +1,0 @@
-{
-    "functionName": "test_delete_user_folder",
-    "className": "TestFolder",
-    "fileName": "/Keeper-Security_&_Commander/unit-tests_&_test_command_folder.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "params = get_synced_params()\ncmd = folder.FolderRemoveCommand()\nuser_folder = next(iter([x for x in params.folder_cache.values() if x.type ==\n    'user_folder']))\ndef pre_delete(rq):\n    self.assertEqual(rq['command'], 'pre_delete')\n    return {'pre_delete_response': {'would_delete': {'deletion_summary': [\n        '1 Personal Folder']}, 'pre_delete_token': 'token'}}\nwith mock.patch('builtins.print'), mock.patch(\n    'keepercommander.commands.folder.user_choice') as mock_choice:\n    mock_choice.return_value = 'n'\n    KeeperApiHelper.communicate_expect([pre_delete])\n    cmd.execute(params, folder=user_folder.name)\n    self.assertTrue(KeeperApiHelper.is_expect_empty())\n    mock_choice.return_value = 'y'\n    KeeperApiHelper.communicate_expect([pre_delete, 'delete'])\n    cmd.execute(params, folder=user_folder.name)\n    self.assertTrue(KeeperApiHelper.is_expect_empty())\n"
-}

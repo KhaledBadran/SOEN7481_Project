@@ -1,9 +1,0 @@
-{
-    "functionName": "test_tagset_membership",
-    "className": null,
-    "fileName": "/PlaidWeb_&_Publ/tests_&_test_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Membership tests for TagSet \"\"\"\nfrom publ.utils import TagSet\nitems = 'a', 'S', 'd', 'F'\nothers = 'Q', 'w', 'E', 'r'\ntags = TagSet(items)\nassert bool(tags)\nassert not bool(TagSet())\nassert not bool(TagSet([]))\nassert not bool(TagSet({}))\nassert len(tags) == 4\nassert hash(TagSet(('a', 's', 'd'))) == hash(TagSet(('s', 'd', 'a')))\nassert hash(TagSet(('a', 's', 'd'))) == hash(TagSet(('A', 'S', 'D')))\nassert hash(TagSet(items)) != hash(TagSet(others))\nfor item in items:\n    assert item in tags\n    assert item.lower() in tags\n    assert item.upper() in tags\n    assert item.casefold() in tags\nfor item in tags:\n    assert item.casefold() in {t.casefold() for t in items}\nfor item in others:\n    assert item not in tags\n    assert item.lower() not in tags\n    assert item.upper() not in tags\n    assert item.casefold() not in tags\n"
-}

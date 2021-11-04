@@ -1,9 +1,0 @@
-{
-    "functionName": "test_server",
-    "className": "Test",
-    "fileName": "/fabioz_&_PyDev.Debugger/tests_&_test_pydevconsole.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.original_stdout = sys.stdout\nsys.stdout = pydevd_io.IOBuf()\ntry:\n    client_port, server_port = self.get_free_addresses()\n\n\n    class ServerThread(threading.Thread):\n\n        def __init__(self, client_port, server_port):\n            threading.Thread.__init__(self)\n            self.client_port = client_port\n            self.server_port = server_port\n\n        def run(self):\n            from _pydev_bundle import pydev_localhost\n            pydevconsole.start_server(pydev_localhost.get_localhost(), self\n                .server_port, self.client_port)\n    server_thread = ServerThread(client_port, server_port)\n    server_thread.setDaemon(True)\n    server_thread.start()\n    client_thread = self.start_client_thread(client_port)\n    import time\n    time.sleep(0.3)\n    sys.stdout = pydevd_io.IOBuf()\n    from _pydev_bundle import pydev_localhost\n    server = xmlrpclib.Server('http://%s:%s' % (pydev_localhost.\n        get_localhost(), server_port))\n    server.execLine('class Foo:')\n    server.execLine('    pass')\n    server.execLine('')\n    server.execLine('foo = Foo()')\n    server.execLine('a = %s()' % (raw_input_name,))\n    server.execLine('print (a)')\n    initial = time.time()\n    while not client_thread.requested_input:\n        if time.time() - initial > 2:\n            raise AssertionError(\n                'Did not get the return asked before the timeout.')\n        time.sleep(0.1)\n    found = sys.stdout.getvalue()\n    while ['input_request'] != found.split():\n        found += sys.stdout.getvalue()\n        if time.time() - initial > 2:\n            break\n        time.sleep(0.1)\n    self.assertEqual(['input_request'], found.split())\nfinally:\n    sys.stdout = self.original_stdout\n"
-}

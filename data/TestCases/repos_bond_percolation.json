@@ -1,9 +1,0 @@
-{
-    "functionName": "_bond_percolation",
-    "className": null,
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_topotools_&_topotools.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    This private method is called by 'find_clusters'\n    \"\"\"\ncsr = network.create_adjacency_matrix(weights=tmask, fmt='csr', drop_zeros=True\n    )\nclusters = sprs.csgraph.connected_components(csgraph=csr, directed=False)[1]\nPs = network.find_connected_pores(throats=tmask, flatten=True)\np_clusters = (clusters + 1) * network.tomask(pores=Ps).astype(int) - 1\nt_clusters = clusters[network['throat.conns']][:, (0)]\nt_clusters[~tmask] = -1\nreturn p_clusters, t_clusters\n"
-}

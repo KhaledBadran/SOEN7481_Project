@@ -1,9 +1,0 @@
-{
-    "functionName": "test_keybase_leave_team",
-    "className": "KeybaseTest",
-    "fileName": "/cmsteffen-code_&_PyKBLib/tests_&_test_pykblib_keybase.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.keybase._api.call_api.side_effect = APIException('EXCEPTION')\nwith self.assertRaises(KeybaseException):\n    self.keybase.leave_team('team_one')\nself.keybase._api.call_api.assert_called_with('team', {'method':\n    'leave-team', 'params': {'options': {'team': 'team_one', 'permanent': \n    False}}})\nself.keybase.teams.append('team_two')\nself.keybase._active_teams['team_two'] = 'placeholder'\nself.keybase._api.call_api.side_effect = APIException('not a member of team')\nself.keybase.leave_team('team_two')\nself.assertTrue('team_two' not in self.keybase.teams)\nself.assertTrue('team_two' not in self.keybase._active_teams.keys())\nself.keybase._api.call_api.side_effect = None\nself.keybase._api.call_api.return_value = dict_to_ntuple({'response':\n    'success'})\nself.keybase.leave_team('team_one')\nself.assertTrue('team_one' not in self.keybase.teams)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_N2",
-    "className": "TestGeopt",
-    "fileName": "/OMalenfantThuot_&_ML_Calc_Driver/tests_&_test_geopt.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "init = Job(posinp=self.posN2, calculator=self.calcN2)\ninit.run('energy')\nassert init.results['energy'][0] == -2978.2354\ngeo = Geopt(posinp=self.posN2, calculator=self.calcN2)\ngeo.run(recenter=True, verbose=2)\noutput = capsys.readouterr()\nassert 1.101 < geo.final_posinp.distance(0, 1) < 1.103\nassert np.isclose(geo.final_posinp.positions[0, 2], -geo.final_posinp.\n    positions[1, 2], atol=1e-06)\nassert output.out is not None\nfinal = Job(posinp=geo.final_posinp, calculator=self.calcN2)\nfinal.run('energy')\nassert final.results['energy'][0] == -2979.607\n"
-}

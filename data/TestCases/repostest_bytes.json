@@ -1,9 +1,0 @@
-{
-    "functionName": "test_bytes",
-    "className": null,
-    "fileName": "/Carbonara-Project_&_Carbonara-IDB/tests_&_test_idaapi.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "idc = idb.IDAPython(kernel32_idb).idc\nflags = idc.GetFlags(1754271760)\nassert idc.hasValue(flags) is True\nbyte = idc.IdbByte(1754271760)\nassert byte == 139\nwith pytest.raises(KeyError):\n    idc.GetFlags(2290649224)\n    assert idc.hasValue(idc.GetFlags(2290649224)) is True\nassert idc.ItemSize(1754271760) == 2\nwith pytest.raises(ValueError):\n    idc.ItemSize(1754271761)\nassert idc.ItemSize(1754271762) == 1\nassert idc.GetManyBytes(1754271760, 3) == b'\\x8b\\xffU'\nkern32_test()"
-}

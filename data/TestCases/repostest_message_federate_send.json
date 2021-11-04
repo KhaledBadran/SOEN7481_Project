@@ -1,9 +1,0 @@
-{
-    "functionName": "test_message_federate_send",
-    "className": null,
-    "fileName": "/GMLC-TDC_&_HELICS/tests_&_python_&_test_message_federate.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "epid1 = h.helicsFederateRegisterEndpoint(mFed, 'ep1', None)\nepid2 = h.helicsFederateRegisterGlobalEndpoint(mFed, 'ep2', 'random')\nh.helicsFederateSetTimeProperty(mFed, h.helics_property_time_delta, 1.0)\nh.helicsFederateEnterExecutingMode(mFed)\ndata = 'random-data'\nh.helicsEndpointSendEventRaw(epid1, 'ep2', data, 1.0)\ngranted_time = h.helicsFederateRequestTime(mFed, 2.0)\nassert granted_time == 1.0\nres = h.helicsFederateHasMessage(mFed)\nassert res == 1\nres = h.helicsEndpointHasMessage(epid1)\nassert res == 0\nres = h.helicsEndpointHasMessage(epid2)\nassert res == 1\nmessage = h.helicsEndpointGetMessage(epid2)\nassert message.data == 'random-data'\nassert message.length == 11\nassert message.original_dest == ''\nassert message.original_source == 'TestA Federate/ep1'\nassert message.source == 'TestA Federate/ep1'\nassert message.time == 1.0\n"
-}

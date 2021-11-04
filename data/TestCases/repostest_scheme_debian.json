@@ -1,9 +1,0 @@
-{
-    "functionName": "test_scheme_debian",
-    "className": "TestUnixScheme",
-    "fileName": "/cournape_&_Bento/bento_&_commands_&_tests_&_test_configure.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "bento_info = 'Name: foo\\n'\nscheme = self._compute_scheme(bento_info, self.options)\nprefix = scheme.pop('prefix')\neprefix = scheme.pop('eprefix')\nsitedir = scheme.pop('sitedir')\nincludedir = scheme.pop('includedir')\nself.assertEqual(prefix, '/usr/local')\nself.assertEqual(eprefix, '/usr/local')\nself.assertEqual(sitedir, '/usr/local/lib/python%s/dist-packages' %\n    PY_VERSION_SHORT)\nself.assertEqual(includedir, '/usr/local/include/python%s/foo' %\n    PY_VERSION_SHORT)\nscheme.pop('py_version_short')\nscheme.pop('pkgname')\nfor k, v in scheme.items():\n    self.assertEqual(UNIX_REFERENCE[k], v)\nmock.patch('sys.platform', 'linux2')mock.patch('bento.commands.configure.virtualenv_prefix', lambda : None)mock.patch('bento.core.platforms.sysconfig.bento.utils.path.find_root', lambda\n    ignored: '/')mock.patch('distutils.command.install.INSTALL_SCHEMES', {'unix_local':\n    MOCK_DEBIAN_SCHEME}, create=True)"
-}

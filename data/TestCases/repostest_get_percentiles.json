@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_percentiles",
-    "className": null,
-    "fileName": "/grd349_&_PBjam/pbjam_&_tests_&_test_jar.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Tests the function for getting the percentiless of a distribution\"\"\"\nfunc = get_percentiles\ninp = [np.random.normal(0, 1, size=10), 3]\npbt.does_it_run(func, inp)\npbt.does_it_return(func, inp)\npbt.right_type(func, inp, np.ndarray)\npbt.right_shape(func, inp, (2 * inp[1] + 1,))\ninp = [np.random.normal(0, 1, size=30000), 5]\npbt.right_shape(func, inp, (2 * inp[1] + 1,))\ninp = [[0, 0, 0, 1, 1], 1]\nassert_array_equal(func(*inp), [0.0, 0.0, 1.0])\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "split_tests",
-    "className": null,
-    "fileName": "/apmoore1_&_Bella/tests_&_test_data_types.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "data_size = len(data_)\ntrain_size = len(train_)\ntest_size = len(test_)\nassert train_size == data_size - int(data_size * test_split)\nassert test_size == int(data_size * test_split)\nassert data_size == train_size + test_size\ntrain_ids = []\ntest_ids = []\nfor data in train_.data_dict():\n    train_ids.append(re.findall('\\\\d+', data['target_id'])[0])\nfor data in test_.data_dict():\n    test_ids.append(re.findall('\\\\d+', data['target_id'])[0])\nassert len(train_ids) == len(set(train_ids))\nassert len(test_ids) == len(set(test_ids))\nfor train_id in train_ids:\n    assert train_id not in test_ids\nfor test_id in test_ids:\n    assert test_id not in train_ids\nreturn train_ids, test_ids\n"
-}

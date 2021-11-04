@@ -1,9 +1,0 @@
-{
-    "functionName": "test_parse_yml",
-    "className": null,
-    "fileName": "/alex-ber_&_AlexBerUtils/tests_&_utils_&_init_app_conf_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "logger.info(f'{request._pyfuncitem.name}()')\nexpdd = {'general': {'profiles': ['dev'], 'log': {'version': 1,\n    'disable_existing_loggers': False, 'formatters': {'brief': {'format':\n    '%(message)s'}, 'detail': '%(message)s'}, 'root': {'level': 'INFO'}},\n    'listEnsure': ['app.white_list', 'app.alt_white_list']}, 'app': {\n    'host_name': 'yahoo.com', 'portal': 'reddit.com', 'news': 'cnn.com',\n    'white_list': ['alpha', 'betha', 'gamma'], 'alt_white_list': [100, 10.0]}}\nsys_d = {'general': {'profiles': ['dev'], 'listEnsure': ['app.white_list',\n    'app.alt_white_list']}, 'app': {'host_name': 'yahoo.com', 'portal':\n    'reddit.com', 'white_list': ['alpha', 'betha', 'gamma']}}\npck = '.'.join(['tests_data', __package__, 'initappconf'])\nwith path(pck, 'config.yml') as full_path:\n    dd = create_default_parser()._parse_yml(sys_d, ['dev'], config_file=\n        full_path)\n    del dd['general']['log']['handlers']\n    del dd['general']['log']['root']['handlers']\n    pytest.assume(expdd == dd)\npytest.mark.yml"
-}

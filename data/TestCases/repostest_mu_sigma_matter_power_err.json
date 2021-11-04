@@ -1,9 +1,0 @@
-{
-    "functionName": "test_mu_sigma_matter_power_err",
-    "className": null,
-    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_mg.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from pyccl.pyutils import assert_warns\nwith pytest.raises(ccl.CCLError):\n    cosmo = ccl.Cosmology(Omega_c=0.25, Omega_b=0.05, h=0.7, A_s=2.1e-09,\n        n_s=0.96, mu_0=0.1, sigma_0=0.2, transfer_function=None,\n        matter_power_spectrum=mp)\n    assert_warns(ccl.CCLWarning, ccl.nonlin_matter_power, cosmo, 1, 1)\npytest.mark.parametrize('mp', ['emu', 'halofit'])"
-}

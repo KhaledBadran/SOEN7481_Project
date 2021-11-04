@@ -1,9 +1,0 @@
-{
-    "functionName": "test_binary_crossentropy",
-    "className": null,
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_test_objectives.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from lasagne.objectives import binary_crossentropy\nif not colvect:\n    p, t = theano.tensor.matrices('pt')\n    c = binary_crossentropy(p, t)\nelse:\n    p, t = theano.tensor.vectors('pt')\n    c = binary_crossentropy(p.dimshuffle(0, 'x'), t)[:, (0)]\nfloatX = theano.config.floatX\nshape = (10, 20) if not colvect else (10,)\npredictions = np.random.rand(*shape).astype(floatX)\ntargets = np.random.rand(*shape).astype(floatX)\ncrossent = -targets * np.log(predictions) - (1 - targets) * np.log(1 -\n    predictions)\nassert np.allclose(crossent, c.eval({p: predictions, t: targets}))\npytest.mark.parametrize('colvect', (False, True))"
-}

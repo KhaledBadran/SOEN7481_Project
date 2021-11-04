@@ -1,9 +1,0 @@
-{
-    "functionName": "test_matching_tensor_layer",
-    "className": null,
-    "fileName": "/NTMC-Community_&_MatchZoo/tests_&_unit_test_&_test_layers.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "s1_value = np.array([[[1, 2], [2, 3], [3, 4]], [[0.1, 0.2], [0.2, 0.3], [\n    0.3, 0.4]]])\ns2_value = np.array([[[1, 2], [2, 3]], [[0.1, 0.2], [0.2, 0.3]]])\ns3_value = np.array([[[1, 2], [2, 3]], [[0.1, 0.2], [0.2, 0.3]], [[0.1, 0.2\n    ], [0.2, 0.3]]])\ns1_tensor = K.variable(s1_value)\ns2_tensor = K.variable(s2_value)\ns3_tensor = K.variable(s3_value)\nfor init_diag in [True, False]:\n    model = MatchingTensorLayer(init_diag=init_diag)\n    _ = K.eval(model([s1_tensor, s2_tensor]))\nwith pytest.raises(ValueError):\n    MatchingTensorLayer()([s1_tensor, s3_tensor])\n"
-}

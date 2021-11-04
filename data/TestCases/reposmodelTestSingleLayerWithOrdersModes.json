@@ -1,9 +1,0 @@
-{
-    "functionName": "modelTestSingleLayerWithOrdersModes",
-    "className": "BigDLTestCase",
-    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_test_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "for dim_ordering in dim_orderings:\n    print('Testing with dim_ordering %s' % dim_ordering)\n    keras.backend.set_image_dim_ordering(dim_ordering)\n    for border_mode in border_modes:\n        print('Testing with border_mode %s' % border_mode)\n        output_layer = output_layer_creator()\n        if not hasattr(output_layer, 'dim_ordering'\n            ) and '1D' not in output_layer.__class__.__name__:\n            raise Exception('cannot set dim order for %s' % output_layer)\n        output_layer.dim_ordering = dim_ordering\n        if hasattr(output_layer, 'border_mode'):\n            output_layer.border_mode = border_mode\n        elif border_mode is not None:\n            raise Exception('cannot set border_mode for %s' % output_layer)\n        self.modelTestSingleLayer(input_data, output_layer, random_weights,\n            dump_weights, is_training, rtol, atol)\n"
-}

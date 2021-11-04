@@ -1,9 +1,0 @@
-{
-    "functionName": "test_component_manual_eof_event",
-    "className": null,
-    "fileName": "/SillyFreak_&_ConcurrentUtils/tests_&_test_component.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "@component_workload\nasync def component(x, *, commands, events):\n    await events.send(Component.EVENT_START)\n    await events.send(eof=True)\ncomp = await start_component(component, 1)\nwith pytest.raises(Component.LifecycleError):\n    await comp.recv_event()\nwith pytest.raises(Component.LifecycleError):\n    await comp.result()\nwith pytest.raises(Component.LifecycleError):\n    await comp.stop()\npytest.mark.asyncio"
-}

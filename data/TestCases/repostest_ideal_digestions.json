@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ideal_digestions",
-    "className": null,
-    "fileName": "/Edinburgh-Genome-Foundry_&_BandWitch/tests_&_test_enzyme_suggestion.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class MyIdealDigestionsProblem(IdealDigestionsProblem):\n\n    def migration_pattern_is_ideal(self, migration):\n        \"\"\"2-3 bands between 30% and 70% of the migration span?\"\"\"\n        min_migr = 0.7 * self.migration_min + 0.3 * self.migration_max\n        max_migr = 0.3 * self.migration_min + 0.7 * self.migration_max\n        bands_in_central_zone = [band for band in migration if min_migr <=\n            band <= max_migr]\n        return 2 <= len(bands_in_central_zone) <= 3\nenzymes = ['EcoRI', 'BamHI', 'XhoI', 'EcoRV', 'SpeI', 'XbaI', 'NotI',\n    'SacI', 'SmaI', 'HindIII', 'PstI']\nproblem = MyIdealDigestionsProblem(sequences=sequences, enzymes=enzymes,\n    ladder=LADDERS['100_to_4k'], topology='circular',\n    max_enzymes_per_digestion=2)\nscore, selected_digestions = problem.select_digestions(max_digestions=1)\nassert score > 0.09\nassert selected_digestions == [('BamHI', 'SacI')]\n"
-}

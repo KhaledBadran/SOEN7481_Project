@@ -1,9 +1,0 @@
-{
-    "functionName": "test_keybase_delete_team",
-    "className": "KeybaseTest",
-    "fileName": "/cmsteffen-code_&_PyKBLib/tests_&_test_pykblib_keybase.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with self.assertRaises(KeybaseException):\n    self.keybase.delete_team('team_one.subteam2')\nself.keybase._api.delete_team.side_effect = APIException(\n    'Could not delete team.')\nwith self.assertRaises(KeybaseException):\n    self.keybase.delete_team('team_one')\nself.keybase._api.delete_team.side_effect = None\nself.keybase._active_teams['second_team'] = 'placeholder'\nself.keybase.delete_team('second_team')\nself.assertFalse('second_team' in self.keybase.teams)\nself.assertFalse('second_team' in self.keybase._active_teams.keys())\nself.keybase._api.delete_team.assert_called_with('second_team')\nself.keybase._api.delete_team.side_effect = [None, APIException(\n    'Failed to delete team team_one.')]\nwith self.assertRaises(KeybaseException):\n    self.keybase.delete_team('team_one')\nself.assertTrue('team_one' in self.keybase.teams)\nself.assertTrue('team_one.subteam' not in self.keybase.teams)\n"
-}

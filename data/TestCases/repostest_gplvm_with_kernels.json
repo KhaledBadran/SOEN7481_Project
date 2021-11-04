@@ -1,9 +1,0 @@
-{
-    "functionName": "test_gplvm_with_kernels",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_models_&_test_gplvm.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "m = gpflow.models.GPLVM(Data.Y, Data.Q, kernel=kernel)\nlml_initial = m.log_marginal_likelihood()\nopt = gpflow.optimizers.Scipy()\nopt.minimize(m.training_loss, m.trainable_variables, options=dict(maxiter=2))\nassert m.log_marginal_likelihood() > lml_initial\npytest.mark.parametrize('kernel', [None, gpflow.kernels.Periodic(\n    base_kernel=gpflow.kernels.SquaredExponential())])"
-}

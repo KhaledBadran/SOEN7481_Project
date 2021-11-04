@@ -1,9 +1,0 @@
-{
-    "functionName": "test_DataSet_Convert_Data",
-    "className": null,
-    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_DataSet.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "dataFiles = 'Data/camea2018n000136.hdf'\ndataset = DataSet(dataFiles=dataFiles)\ntry:\n    dataset.convertDataFile(dataFiles=dataFiles, binning=100)\n    assert False\nexcept AttributeError:\n    assert True\ntry:\n    dataset.convertDataFile(dataFiles='FileDoesNotExist', binning=1)\n    assert False\nexcept AttributeError:\n    assert True\ntry:\n    os.remove('Data/camea2018n000136.nxs')\nexcept:\n    pass\ndataset.convertDataFile(dataFiles=dataFiles, binning=8, saveLocation=\n    'Data/', saveFile=True)\nconvertedFile = dataset.convertedFiles[0]\notherFile = MJOLNIR.Data.DataFile.DataFile(dataFiles.replace('.hdf', '.nxs'))\nassert convertedFile == otherFile\nos.remove('Data/camea2018n000136.nxs')\n"
-}

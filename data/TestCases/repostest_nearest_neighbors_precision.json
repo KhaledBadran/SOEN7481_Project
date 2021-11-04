@@ -1,9 +1,0 @@
-{
-    "functionName": "test_nearest_neighbors_precision",
-    "className": "Test_grispy",
-    "fileName": "/mchalela_&_GriSPy/tests_&_test_brute_force.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "gsp = self.make_gsp({})\nb, ind = gsp.nearest_neighbors(self.centres, n=self.n_nearest)\nfor i, centre in enumerate(self.centres):\n    d = np.fabs(self.data - centre)\n    d = sorted(np.concatenate(d))\n    d = d[:self.n_nearest]\n    assert_equal(len(b[i]), len(d))\n    assert_almost_equal(b[i], d, decimal=16)\ngsp = self.make_gsp({(0): (-self.lbox * 0.5, self.lbox * 0.5)})\nb, ind = gsp.nearest_neighbors(self.centres, n=self.n_nearest)\nfor i, centre in enumerate(self.centres):\n    d = self.data - centre\n    mask = d > 0.5 * self.lbox\n    d[mask] = d[mask] - self.lbox\n    mask = d < -0.5 * self.lbox\n    d[mask] = d[mask] + self.lbox\n    d = np.fabs(d)\n    d = sorted(np.concatenate(d))\n    d = d[:self.n_nearest]\n    assert_equal(len(b[i]), len(d))\n    assert_almost_equal(b[i], d, decimal=16)\n"
-}

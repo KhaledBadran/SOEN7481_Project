@@ -1,9 +1,0 @@
-{
-    "functionName": "test_export_create_the_right_file_name",
-    "className": "TestExportingPhase2",
-    "fileName": "/ornlneutronimaging_&_NeuNorm/tests_&_NeuNorm_&_export_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"assert export works for all data types for tif output\"\"\"\nsample_path = self.data_path + '/tif/sample'\nob_path = self.data_path + '/tif/ob'\no_norm = Normalization()\no_norm.load(folder=sample_path, auto_gamma_filter=False)\no_norm.load(folder=ob_path, data_type='ob', auto_gamma_filter=False)\no_norm.export(folder=self.export_folder, data_type='ob')\n_output_file_name_0 = o_norm._export_file_name[0]\n_file_name_0 = os.path.basename(o_norm.data['ob']['file_name'][0])\n_new_file_name = os.path.splitext(_file_name_0)[0] + '.tif'\n_expected_file_name_0 = os.path.join(self.export_folder, _new_file_name)\nself.assertTrue(_expected_file_name_0 == _output_file_name_0)\no_norm.normalization()\no_norm.export(folder=self.export_folder, data_type='normalized')\n_output_file_name_0 = o_norm._export_file_name[0]\n_file_name_0 = os.path.basename(o_norm.data['sample']['file_name'][0])\n_new_file_name = 'normalized_' + os.path.splitext(_file_name_0)[0] + '.tif'\n_expected_file_name_0 = os.path.join(self.export_folder, _new_file_name)\nself.assertTrue(_expected_file_name_0 == _output_file_name_0)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_cancel_replace_not_allowed_on_fak_or_fok",
-    "className": null,
-    "fileName": "/nabicht_&_Buttonwood/tests_&_test_MarketObjects_&_test_Events_&_test_ordereventchain.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "n = NewOrderCommand(121234, 1234235.123, 2342, 'user_x', MARKET, BID_SIDE,\n    FAK, Price('34.52'), 1000)\noec = OrderEventChain(n, LOGGER, MonotonicIntID())\ncr = CancelReplaceCommand(121235, 1234235.324, 2342, 'user_x', MARKET,\n    BID_SIDE, Price('43.01'), 234)\nwith pytest.raises(AssertionError):\n    oec.apply_cancel_replace_command(cr)\nn = NewOrderCommand(121234, 1234235.123, 2342, 'user_x', MARKET, BID_SIDE,\n    FOK, Price('34.52'), 1000)\noec = OrderEventChain(n, LOGGER, MonotonicIntID())\ncr = CancelReplaceCommand(121235, 1234235.324, 2342, 'user_x', MARKET,\n    BID_SIDE, Price('43.01'), 234)\nwith pytest.raises(AssertionError):\n    oec.apply_cancel_replace_command(cr)\n"
-}

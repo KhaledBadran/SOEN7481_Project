@@ -1,9 +1,0 @@
-{
-    "functionName": "test_DFT_iDFT_fullcov",
-    "className": "TestDFTmethods",
-    "fileName": "/PTB-PSt1_&_PyDynamic/test_&_test_DFT.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "x, ux = multisine_testsignal()\nux = np.ones_like(x) * 0.01 ** 2\ncx = create_corrmatrix(0.95, len(x))\nUx = np.diag(ux)\nUx = Ux.dot(cx.dot(Ux))\nX, UX = GUM_DFT(x, Ux)\nxh, Uxh = GUM_iDFT(X, UX)\nassert_almost_equal(np.max(np.abs(x - xh)), 0)\nassert_almost_equal(np.max(Ux - Uxh), 0)\n"
-}

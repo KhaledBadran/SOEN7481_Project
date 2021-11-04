@@ -1,9 +1,0 @@
-{
-    "functionName": "raw_stack_offset_z",
-    "className": null,
-    "fileName": "/AllenInstitute_&_EM_Aligner_python/integration_tests_&_test_plots.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "dz = 10\ntest_raw_stack_offset = 'input_raw_stack_offset'\ntilespecs = [renderapi.tilespec.TileSpec(json=d) for d in\n    montage_raw_tilespecs_json]\nfor i in range(len(tilespecs)):\n    tilespecs[i].z += dz\n    tilespecs[i].layout.sectionId = '%0.1f' % tilespecs[i].z\nrenderapi.stack.create_stack(test_raw_stack_offset, render=render)\nrenderapi.client.import_tilespecs(test_raw_stack_offset, tilespecs, render=\n    render, use_rest=True)\nrenderapi.stack.set_stack_state(test_raw_stack_offset, 'COMPLETE', render=\n    render)\nyield test_raw_stack_offset\nrenderapi.stack.delete_stack(test_raw_stack_offset, render=render)\npytest.fixture(scope='module')"
-}

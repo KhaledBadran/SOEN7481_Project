@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sample_arm_add_arm_with_variance_invalid",
-    "className": "TestDataContainers",
-    "fileName": "/Yelp_&_MOE/moe_&_tests_&_bandit_&_data_containers_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that adding arms with variance causes a ValueError. Neither of the arms can have non-None variance.\"\"\"\nwith pytest.raises(ValueError):\n    arm = SampleArm(win=2, loss=1, total=500, variance=0.1)\n    arm.__add__(SampleArm(win=2, loss=1, total=500, variance=None))\nwith pytest.raises(ValueError):\n    arm = SampleArm(win=2, loss=1, total=500, variance=None)\n    arm.__add__(SampleArm(win=2, loss=1, total=500, variance=0.1))\npytest.mark.usefixtures('disable_logging')"
-}

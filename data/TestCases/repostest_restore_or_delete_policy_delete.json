@@ -1,9 +1,0 @@
-{
-    "functionName": "test_restore_or_delete_policy_delete",
-    "className": "TestPolicyDirectoryMonitor",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_monitor.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the PolicyDirectoryMonitor can correctly delete policy data\n        upon a policy file change.\n        \"\"\"\nm = monitor.PolicyDirectoryMonitor(self.tmp_dir, multiprocessing.Manager().\n    dict())\nm.logger = mock.MagicMock(logging.Logger)\nm.policy_cache = {'policy_A': []}\nm.policy_store['policy_A'] = {'{\"policy_4\"}'}\nm.policy_map['policy_A'] = os.path.join(self.tmp_dir, 'policy_4.json')\nm.restore_or_delete_policy('policy_A')\nm.logger.info.assert_called_once_with('Removing policy: policy_A')\nself.assertNotIn('policy_A', m.policy_cache.keys())\nself.assertNotIn('policy_A', m.policy_store.keys())\nself.assertNotIn('policy_A', m.policy_map.keys())\n"
-}

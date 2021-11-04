@@ -1,9 +1,0 @@
-{
-    "functionName": "test_step_return",
-    "className": null,
-    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_frame_eval_and_tracing.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with case_setup_force_frame_eval.test_file('_debugger_case56.py') as writer:\n    writer.write_add_breakpoint(2, 'Call2')\n    writer.write_make_initial_run()\n    hit = writer.wait_for_breakpoint_hit()\n    assert hit.suspend_type == 'frame_eval'\n    writer.write_get_frame(hit.thread_id, hit.frame_id)\n    writer.write_step_return(hit.thread_id)\n    hit = writer.wait_for_breakpoint_hit('109')\n    assert hit.line == 8\n    assert hit.suspend_type == 'trace'\n    writer.write_step_in(hit.thread_id)\n    hit = writer.wait_for_breakpoint_hit('107')\n    assert hit.line in (4, 5)\n    assert hit.suspend_type == 'trace', 'Expected suspend type to be \"trace\", but was: %s' % hit.suspend_type\n    writer.write_run_thread(hit.thread_id)\n    writer.finished_ok = True\n"
-}

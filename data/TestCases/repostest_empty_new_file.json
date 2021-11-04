@@ -1,9 +1,0 @@
-{
-    "functionName": "test_empty_new_file",
-    "className": "TestCommandLine",
-    "fileName": "/kenfar_&_DataGristle/scripts_&_tests_&_test_gristle_differ_cmd.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        \"\"\"\nfile1_recs = [['del-row-1', '4', '14'], ['del-row-2', '6', '16'], [\n    'del-row-3', '8', '18']]\nfqfn1 = generate_test_file(self.temp_dir, 'old_', '.csv', self.dialect,\n    file1_recs)\nfile2_recs = []\nfqfn2 = generate_test_file(self.temp_dir, 'new_', '.csv', self.dialect,\n    file2_recs)\nfn2 = basename(fqfn2)\ncmd = ' %s %s %s -k 0 -c 1 --temp-dir %s' % (pjoin(script_dir,\n    'gristle_differ'), fqfn1, fqfn2, self.temp_dir)\nexecutor(cmd)\nassert self.file_cnt(fn2, '.insert') == 0\nassert self.file_cnt(fn2, '.delete') == 3\nassert self.file_cnt(fn2, '.chgold') == 0\nassert self.file_cnt(fn2, '.chgnew') == 0\nassert self.file_cnt(fn2, '.same') == 0\n"
-}

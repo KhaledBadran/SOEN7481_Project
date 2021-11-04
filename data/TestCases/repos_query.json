@@ -1,9 +1,0 @@
-{
-    "functionName": "_query",
-    "className": "VTQuery",
-    "fileName": "/kitware_&_BroThon/zat_&_utils_&_vt_query.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Internal query method for the VirusTotal Service\n            Args:\n               query_type(str): The type of query (either 'file' or 'url')\n               query_str (str): The file hash or domain/url to be queried\n        \"\"\"\ncached = self.query_cache.get(query_str)\nif cached:\n    if verbose:\n        print('Returning Cached VT Query Results')\n    return cached\nif query_type == 'file':\n    response = requests.get('https://www.virustotal.com/vtapi/v2/file/report',\n        params={'apikey': self.apikey, 'resource': query_str, 'allinfo': 1})\nelse:\n    response = requests.post('https://www.virustotal.com/vtapi/v2/url/report',\n        params={'apikey': self.apikey, 'resource': query_str, 'allinfo': 1})\ntry:\n    vt_output = response.json()\nexcept ValueError:\n    error_msg = 'VirusTotal no valid response, throttling and trying again...'\n    if self.throttle:\n        if verbose:\n            print(error_msg)\n        time.sleep(30)\n        return self._query(query_type, query_str)\n    return {'vt_error': error_msg}\nif not vt_output or vt_output['response_code'] == 0:\n    output = {'query': query_str, 'not_found': True}\n    self.query_cache.set(query_str, output)\n    return output\noutput = {field: vt_output[field] for field in vt_output.keys() if field not in\n    self.exclude}\noutput['query'] = query_str\nscan_results = collections.Counter()\nfor scan in vt_output['scans'].values():\n    if 'result' in scan:\n        if scan['result']:\n            scan_results[scan['result']] += 1\noutput['scan_results'] = scan_results.most_common(5)\nself.query_cache.set(query_str, output)\nreturn output\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_compute_standard_element_densities",
-    "className": null,
-    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_core_&_tests_&_test_quant_analysis.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "standard_data = _standard_data_sample\nfor data in standard_data:\n    if 'density' in data:\n        total_density = data['density']\n    else:\n        total_density = np.sum(list(data['compounds'].values()))\n    element_densities = compute_standard_element_densities(data['compounds'])\n    assert all([validate_element_str(_) for _ in element_densities.keys()]\n        ), f'Some of the elements in the list {list(element_densities.keys())} have invalid representation'\n    npt.assert_almost_equal(np.sum(list(element_densities.values())),\n        total_density, err_msg=\n        \"The sum of element densities and the total sum don't match\")\n"
-}

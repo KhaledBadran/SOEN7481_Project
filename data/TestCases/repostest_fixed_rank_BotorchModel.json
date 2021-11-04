@@ -1,9 +1,0 @@
-{
-    "functionName": "test_fixed_rank_BotorchModel",
-    "className": "BotorchModelTest",
-    "fileName": "/facebook_&_Ax/ax_&_models_&_tests_&_test_botorch_model.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "Xs1, Ys1, Yvars1, bounds, _, fns, __package__ = _get_torch_test_data(dtype=\n    dtype, cuda=cuda, constant_noise=True)\nXs2, Ys2, Yvars2, _, _, _, _ = _get_torch_test_data(dtype=dtype, cuda=cuda,\n    constant_noise=True)\nmodel = BotorchModel(multitask_gp_ranks={'y': 2, 'w': 1})\nwith mock.patch(FIT_MODEL_MO_PATH) as _mock_fit_model:\n    model.fit(Xs=Xs1 + Xs2, Ys=Ys1 + Ys2, Yvars=Yvars1 + Yvars2, bounds=\n        bounds, task_features=[0], feature_names=fns, metric_names=['y',\n        'w'], fidelity_features=[])\n    _mock_fit_model.assert_called_once()\nmodel_list = model.model.models\nself.assertEqual(model_list[0]._rank, 2)\nself.assertEqual(model_list[1]._rank, 1)\n"
-}

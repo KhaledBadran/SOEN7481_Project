@@ -1,9 +1,0 @@
-{
-    "functionName": "test_prepare_xrf_mask_fail",
-    "className": null,
-    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_core_&_tests_&_test_map_processing.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Failing cases of `_prepare_xrf_mask`\"\"\"\nwith pytest.raises(TypeError, match=msg):\n    _prepare_xrf_mask(data_dask, mask=mask, selection=selection)\npytest.mark.parametrize('data_dask, mask, selection, msg', [(np.random.\n    random((5, 5, 10)), np.random.randint(0, 3, size=(5, 5)), None,\n    \"Parameter 'data' must be a Dask array\"), (da.random.random((5,)), np.\n    random.randint(0, 3, size=(5, 5)), None,\n    \"Parameter 'data' must have at least 2 dimensions\"), (da.random.random(\n    (5, 4, 10)), np.random.randint(0, 3, size=(5, 5)), None,\n    \"Dimensions 0 and 1 of parameters 'data' and 'mask' do not match\"), (da\n    .random.random((5, 5, 10)), np.random.randint(0, 3, size=(5, 5)), (1, 3,\n    4), \"Parameter 'selection' must be iterable with 4 elements\")])"
-}

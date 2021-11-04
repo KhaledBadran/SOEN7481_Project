@@ -1,9 +1,0 @@
-{
-    "functionName": "test_callback_raises_error",
-    "className": null,
-    "fileName": "/rm-hull_&_OPi.GPIO/tests_&_test_event.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "pin = 194\nfs.CreateFile('/sys/class/gpio/gpio{0}/edge'.format(pin))\nfs.CreateFile('/sys/class/gpio/gpio{0}/value'.format(pin))\ndef cb(p):\n    raise RuntimeError('test exception')\nwith patch('select.epoll') as mock:\n    try:\n        assert pin not in event._threads\n        event.add_edge_detect(pin, RISING, cb)\n        mock.return_value.poll.return_value = [(pin, 74)]\n        time.sleep(2)\n        with pytest.raises(RuntimeError) as ex:\n            event.cleanup(pin)\n        assert str(ex.value) == 'test exception'\n    finally:\n        event.cleanup()\n"
-}

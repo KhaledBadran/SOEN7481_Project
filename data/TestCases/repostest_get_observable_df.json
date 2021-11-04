@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_observable_df",
-    "className": null,
-    "fileName": "/PEtab-dev_&_PEtab/tests_&_test_observables.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test measurements.get_measurement_df.\"\"\"\nobservable_df = pd.DataFrame(data={OBSERVABLE_NAME: ['observable name 1'],\n    OBSERVABLE_FORMULA: ['observable_1'], NOISE_FORMULA: [1]})\nwith tempfile.NamedTemporaryFile(mode='w', delete=False) as fh:\n    file_name = fh.name\n    observable_df.to_csv(fh, sep='\\t', index=False)\nwith pytest.raises(KeyError):\n    petab.get_observable_df(file_name)\nobservable_df[OBSERVABLE_ID] = ['observable_1']\nwith tempfile.NamedTemporaryFile(mode='w', delete=False) as fh:\n    file_name = fh.name\n    observable_df.to_csv(fh, sep='\\t', index=False)\ndf = petab.get_observable_df(file_name)\nassert (df == observable_df.set_index(OBSERVABLE_ID)).all().all()\nassert (petab.get_observable_df(observable_df) == observable_df).all().all()\nassert petab.get_observable_df(None) is None\n"
-}

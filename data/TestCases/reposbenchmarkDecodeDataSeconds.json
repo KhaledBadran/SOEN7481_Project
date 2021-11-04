@@ -1,9 +1,0 @@
-{
-    "functionName": "benchmarkDecodeDataSeconds",
-    "className": null,
-    "fileName": "/named-data_&_PyNDN2/examples_&_test_encode_decode_benchmark.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Loop to decode a data packet nIterations times.\n\n    :param int nIterations: The number of iterations.\n    :param bool useCrypto: If true, verify the signature.  If false, don't\n      verify.\n    :param KeyType keyType: KeyType.RSA or EC, used if useCrypto is True.\n    :param Blob encoding: The wire encoding to decode.\n    :return: The number of seconds for all iterations.\n    :rtype: float\n    \"\"\"\nkeyChain = KeyChain('pib-memory:', 'tpm-memory:')\nkeyChain.importSafeBag(SafeBag(Name('/testname/KEY/123'), Blob(\n    DEFAULT_EC_PRIVATE_KEY_DER if keyType == KeyType.EC else\n    DEFAULT_RSA_PRIVATE_KEY_DER, False), Blob(DEFAULT_EC_PUBLIC_KEY_DER if \n    keyType == KeyType.EC else DEFAULT_RSA_PUBLIC_KEY_DER, False)))\nvalidator = Validator(ValidationPolicyFromPib(keyChain.getPib()))\nstart = getNowSeconds()\nfor i in range(nIterations):\n    data = Data()\n    data.wireDecode(encoding)\n    if useCrypto:\n        validator.validate(data, onVerifySuccess, onVerifyFailed)\nfinish = getNowSeconds()\nreturn finish - start\n"
-}

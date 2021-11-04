@@ -1,9 +1,0 @@
-{
-    "functionName": "test_invalid_hyperparameters_input",
-    "className": "TestRestGaussianProcessWithExceptions",
-    "fileName": "/Yelp_&_MOE/moe_&_tests_&_views_&_exceptions_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that invalid hyperparameters (via GP_MEAN_VAR_ENDPOINT) generate expected Response with error message.\"\"\"\nendpoint = GP_MEAN_VAR_ENDPOINT\ndict_payload = copy.deepcopy(GpMeanVarView._pretty_default_request)\ndict_payload['covariance_info']['hyperparameters'][0] *= -1.0\nresult = self.testapp.post(endpoint, json.dumps(dict_payload),\n    expect_errors=True)\nrequest_schema = GpMeanVarRequest()\nwith pytest.raises(colander.Invalid) as request_exception:\n    request_schema.deserialize(dict_payload)\nassert result.body == failed_colander_validation(request_exception.value,\n    result.request).body\n"
-}

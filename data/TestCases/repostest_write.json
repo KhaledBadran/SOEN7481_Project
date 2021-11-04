@@ -1,9 +1,0 @@
-{
-    "functionName": "test_write",
-    "className": "TestProtectionStorageMasks",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a ProtectionStorageMasks structure can be written to a data\n        stream.\n        \"\"\"\nprotection_storage_masks = objects.ProtectionStorageMasks(\n    protection_storage_masks=[enums.ProtectionStorageMask.SOFTWARE.value |\n    enums.ProtectionStorageMask.HARDWARE.value, enums.ProtectionStorageMask\n    .ON_PREMISES.value | enums.ProtectionStorageMask.OFF_PREMISES.value])\nbuffer = utils.BytearrayStream()\nprotection_storage_masks.write(buffer)\nself.assertEqual(len(self.full_encoding), len(buffer))\nself.assertEqual(str(self.full_encoding), str(buffer))\n"
-}

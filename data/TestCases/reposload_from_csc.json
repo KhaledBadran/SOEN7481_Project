@@ -1,9 +1,0 @@
-{
-    "functionName": "load_from_csc",
-    "className": null,
-    "fileName": "/microsoft_&_LightGBM/tests_&_c_api_test_&_test_.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "data = []\nlabel = []\nwith open(filename, 'r') as inp:\n    for line in inp.readlines():\n        values = line.split('\\t')\n        data.append([float(x) for x in values[1:]])\n        label.append(float(values[0]))\nmat = np.array(data)\nlabel = np.array(label, dtype=np.float32)\ncsr = sparse.csc_matrix(mat)\nhandle = ctypes.c_void_p()\nref = None\nif reference is not None:\n    ref = reference\nLIB.LGBM_DatasetCreateFromCSC(c_array(ctypes.c_int, csr.indptr),\n    dtype_int32, c_array(ctypes.c_int, csr.indices), csr.data.ctypes.\n    data_as(ctypes.POINTER(ctypes.c_void_p)), dtype_float64, ctypes.c_int64\n    (len(csr.indptr)), ctypes.c_int64(len(csr.data)), ctypes.c_int64(csr.\n    shape[0]), c_str('max_bin=15'), ref, ctypes.byref(handle))\nnum_data = ctypes.c_long()\nLIB.LGBM_DatasetGetNumData(handle, ctypes.byref(num_data))\nnum_feature = ctypes.c_long()\nLIB.LGBM_DatasetGetNumFeature(handle, ctypes.byref(num_feature))\nLIB.LGBM_DatasetSetField(handle, c_str('label'), c_array(ctypes.c_float,\n    label), len(label), 0)\nprint('#data: %d #feature: %d' % (num_data.value, num_feature.value))\nreturn handle\n"
-}

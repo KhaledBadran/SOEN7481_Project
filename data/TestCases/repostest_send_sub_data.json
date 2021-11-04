@@ -1,9 +1,0 @@
-{
-    "functionName": "test_send_sub_data",
-    "className": null,
-    "fileName": "/willdeuschle_&_Flask-GraphQL-Subscriptions-Transport/tests_&_test_flask_graphql_subscriptions_transport.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "app, ss = basic_ss\ntest_client = SocketIOTestClient(app, ss.socketio, namespace=ss.namespace)\ntest_client.emit('message', json.dumps({'type': SUBSCRIPTION_START,\n    'payload': 'foo', 'id': 1, 'query': 'query test{ testString }',\n    'variables': {'some': 'vars'}}), namespace=ss.namespace)\nss.send_subscription_data = Mock()\nss.subscription_manager.pubsub.publish('testString', {'foo': 'bar'})\nss.send_subscription_data.assert_called_once()\nassert ss.send_subscription_data.call_args[0][1] == {'data': {'testString':\n    'string returned'}}\n"
-}

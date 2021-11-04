@@ -1,9 +1,0 @@
-{
-    "functionName": "test_estimate_competence_batch",
-    "className": null,
-    "fileName": "/Menelau_&_DESlib/deslib_&_tests_&_dcs_&_test_a_priori.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "_, y, nn, _, dsel_processed, dsel_scores = example_estimate_competence\nquery = np.ones((3, 2))\nexpected = np.array([[0.333333, 0.5, 0.4], [0.666666, 0.5, 0.6], [0.0, 0.5,\n    0.2]])\na_priori_test = APriori(k=3)\na_priori_test.DSEL_processed_ = dsel_processed\na_priori_test.dsel_scores_ = dsel_scores\na_priori_test.DSEL_target_ = y\na_priori_test.n_classes_ = 2\nnn = nn[:, 0:3]\ndistances = np.ones((3, 3))\ncompetences = a_priori_test.estimate_competence(query, nn, distances)\nassert np.allclose(competences, expected, atol=0.01)\n"
-}

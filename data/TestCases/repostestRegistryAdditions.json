@@ -1,9 +1,0 @@
-{
-    "functionName": "testRegistryAdditions",
-    "className": "JSONStoreTest",
-    "fileName": "/facebook_&_Ax/ax_&_storage_&_json_store_&_tests_&_test_json_store.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "class MyRunner(Runner):\n\n    def run():\n        pass\n\n    def staging_required():\n        return False\nclass MyMetric(Metric):\n    pass\nregister_metric(MyMetric)\nregister_runner(MyRunner)\nexperiment = get_experiment_with_batch_and_single_trial()\nexperiment.runner = MyRunner()\nexperiment.add_tracking_metric(MyMetric(name='my_metric'))\nwith tempfile.NamedTemporaryFile(mode='w+', delete=False, suffix='.json') as f:\n    save_experiment(experiment, f.name)\n    loaded_experiment = load_experiment(f.name)\n    self.assertEqual(loaded_experiment, experiment)\n    os.remove(f.name)\n"
-}

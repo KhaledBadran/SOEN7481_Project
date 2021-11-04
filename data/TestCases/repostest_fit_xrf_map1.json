@@ -1,9 +1,0 @@
-{
-    "functionName": "test_fit_xrf_map1",
-    "className": "TestFitXRFMap",
-    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_core_&_tests_&_test_map_processing.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Basic functionality of `fit_xrf_map`.\n        Tests are run using global Dask clients to inprove testing speed.\n        \"\"\"\nglobal_client = self.client\nadd_pts_before, add_pts_after = add_pts\nft = _FitXRFMapTesting(dataset_params=dataset_params, use_snip=use_snip,\n    add_pts_before=add_pts_before, add_pts_after=add_pts_after)\ndata_dask = _array_numpy_to_dask(ft.data_input, chunk_pixels=4, n_chunks_min=1)\ndata = _create_xrf_data(data_dask, data_representation, tmpdir)\ndata_out = fit_xrf_map(data, data_sel_indices=ft.data_sel_indices, matv=ft.\n    spectra, snip_param=ft.snip_param, use_snip=use_snip, chunk_pixels=10,\n    n_chunks_min=4, progress_bar=None, client=global_client)\nft.verify_fit_output(data_out=data_out, snip_param=ft.snip_param)\npytest.mark.parametrize('data_representation', ['numpy_array', 'dask_array',\n    'hdf5_file_dset'])pytest.mark.parametrize('dataset_params', [{'n_data_dimensions': (10, 10)},\n    {'n_data_dimensions': (9, 11)}, {'n_data_dimensions': (1, 100)}, {\n    'n_data_dimensions': (100, 1)}])pytest.mark.parametrize('add_pts', [(0, 0), (50, 100)])pytest.mark.parametrize('use_snip', [False, True])"
-}

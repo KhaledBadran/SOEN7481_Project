@@ -1,9 +1,0 @@
-{
-    "functionName": "g_test_scores",
-    "className": null,
-    "fileName": "/kitware_&_BroThon/zat_&_dataframe_stats.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"G Test Score for log likelihood ratio\n       - http://en.wikipedia.org/wiki/G_test (Wikipedia)\n       - 95th percentile; 5% level; p < 0.05; critical value = 3.84\n       - 99th percentile; 1% level; p < 0.01; critical value = 6.63\n       - 99.9th percentile; 0.1% level; p < 0.001; critical value = 10.83\n       - 99.99th percentile; 0.01% level; p < 0.0001; critical value = 15.13\n\n       Args:\n           rownames: the column name or list of columns names that make the keys of the rows\n           colnames: the column name or list of columns names that make the keys of the columns\n    \"\"\"\ncont_table = contingency_table(dataframe, rownames=rownames, colnames=\n    colnames, margins=False)\nexp_counts = expected_counts(dataframe, rownames=rownames, colnames=colnames)\nfor row in cont_table.index:\n    g_score = 0\n    for column in cont_table.columns:\n        g_score += compute_g(cont_table[column][row], exp_counts[column][row])\n    for column in cont_table.columns:\n        cont_table[column][row] = g_score if cont_table[column][row\n            ] > exp_counts[column][row] else -g_score\nreturn cont_table\n"
-}

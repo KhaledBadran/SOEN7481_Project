@@ -1,9 +1,0 @@
-{
-    "functionName": "test_modify_slo",
-    "className": "CITestProvisioning",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test modify_slo.\"\"\"\nservice_level_list = self.provisioning.get_service_level_list()\nservice_level = service_level_list[0]\nservice_level_details = self.provisioning.get_service_level(service_level)\nold_name = service_level_details[constants.SLO_ID]\nnew_name = self.generate_name(constants.SERVICE_LEVEL)\nself.provisioning.modify_slo(service_level, new_name)\nservice_level_list = self.provisioning.get_service_level_list()\nself.assertIn(new_name, service_level_list)\nself.assertNotIn(old_name, service_level_list)\nservice_level_details = self.provisioning.get_service_level(new_name)\nself._validate_service_level_details(new_name, service_level_details)\nself.provisioning.modify_slo(new_name, old_name)\n"
-}

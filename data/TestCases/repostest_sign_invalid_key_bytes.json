@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sign_invalid_key_bytes",
-    "className": "TestCryptographyEngine",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_crypto_&_test_engine.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that an InvalidField exception is raised when\n        sign is called with invalid key bytes.\n        \"\"\"\nengine = crypto.CryptographyEngine()\nargs = (None, enums.CryptographicAlgorithm.RSA, enums.HashingAlgorithm.MD5,\n    enums.PaddingMethod.PKCS1v15, 'thisisnotavalidkey', None)\nself.assertRaisesRegex(exceptions.InvalidField,\n    'Unable to deserialize key bytes, unknown format.', engine.sign, *args)\n"
-}

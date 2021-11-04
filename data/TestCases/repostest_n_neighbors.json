@@ -1,9 +1,0 @@
-{
-    "functionName": "test_n_neighbors",
-    "className": null,
-    "fileName": "/vc1492a_&_PyNomaly/tests_&_test_loop.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Tests the functionality of providing a large number of neighbors that\n    is greater than the number of observations (software defaults to the\n    data input size and provides a UserWarning).\n    :return: None\n    \"\"\"\nX = iris.data\nclf = loop.LocalOutlierProbability(X, n_neighbors=500, use_numba=NUMBA).fit()\nassert_equal(clf.n_neighbors, X.shape[0] - 1)\nclf = loop.LocalOutlierProbability(X, n_neighbors=500, use_numba=NUMBA)\nassert_warns(UserWarning, clf.fit)\nassert_equal(clf.n_neighbors, X.shape[0] - 1)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_mixed_mok_with_Id_vs_independent_mok",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_conditionals_&_test_multioutput.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data = DataMixedKernelWithEye\nk1 = mk.SharedIndependent(SquaredExponential(variance=0.5, lengthscales=1.2\n    ), data.L)\nf1 = InducingPoints(data.X[:data.M, (...)])\nmodel_1 = SVGP(k1, Gaussian(), f1, q_mu=data.mu_data_full, q_sqrt=data.\n    sqrt_data_full)\nset_trainable(model_1, False)\nset_trainable(model_1.q_sqrt, True)\ngpflow.optimizers.Scipy().minimize(model_1.training_loss_closure(Data.data),\n    variables=model_1.trainable_variables, method='BFGS', compile=True)\nkern_list = [SquaredExponential(variance=0.5, lengthscales=1.2) for _ in\n    range(data.L)]\nk2 = mk.LinearCoregionalization(kern_list, data.W)\nf2 = InducingPoints(data.X[:data.M, (...)])\nmodel_2 = SVGP(k2, Gaussian(), f2, q_mu=data.mu_data_full, q_sqrt=data.\n    sqrt_data_full)\nset_trainable(model_2, False)\nset_trainable(model_2.q_sqrt, True)\ngpflow.optimizers.Scipy().minimize(model_2.training_loss_closure(Data.data),\n    variables=model_2.trainable_variables, method='BFGS', compile=True)\ncheck_equality_predictions(Data.data, [model_1, model_2])\n"
-}

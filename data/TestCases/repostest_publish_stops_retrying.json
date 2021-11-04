@@ -1,9 +1,0 @@
-{
-    "functionName": "test_publish_stops_retrying",
-    "className": null,
-    "fileName": "/PearsonEducation_&_Alarmageddon/tests_&_publishing_&_test_pagerduty.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "times_to_fail = 4\nmock = failserver_monkeypatch(monkeypatch, times_to_fail)\npub = PagerDutyPublisher(mock.host, 'token')\nv = Validation('low', priority=Priority.CRITICAL)\nfailure = Failure('bar', v, 'message')\nwith pytest.raises(PublishFailure):\n    pub.send(failure)\nassert mock.successes == 0\n"
-}

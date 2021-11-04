@@ -1,9 +1,0 @@
-{
-    "functionName": "test_registration",
-    "className": "TestWebOSClient",
-    "fileName": "/supersaiyanmode_&_PyWebOSTV/tests_&_test_connection.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "client = FakeClient()\nsent_event = Event()\ndef make_response(prompt, registered, wrong):\n\n    def send_response():\n        sent_event.wait()\n        sent_event.clear()\n        if prompt:\n            client.received_message(json.dumps({'id': '1', 'payload': {\n                'pairingType': 'PROMPT'}}))\n        if registered:\n            client.received_message(json.dumps({'id': '1', 'payload': {\n                'client-key': 'xyz'}, 'type': 'registered'}))\n        if wrong:\n            client.received_message(json.dumps({'id': '1', 'type':\n                'wrong-response'}))\n    return send_response\ndef patched_send_message(*args, **kwargs):\n    kwargs['unique_id'] = '1'\n    obj = WebOSClient.send_message(client, *args, **kwargs)\n    sent_event.set()\n    return obj\nclient.send_message = patched_send_message\nstore = {}\nThread(target=make_response(True, True, False)).start()\ngen = client.register(store, timeout=10)\nassert next(gen) == WebOSClient.PROMPTED\nassert next(gen) == WebOSClient.REGISTERED\nassert store == {'client_key': 'xyz'}\nThread(target=make_response(False, True, False)).start()\nassert list(client.register(store, timeout=10)) == [WebOSClient.REGISTERED]\nassert 'xyz' in json.dumps(client.sent_message)\nThread(target=make_response(False, False, True)).start()\nwith raises(Exception):\n    list(client.register(store, timeout=10))\n"
-}

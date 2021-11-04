@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sample_cov_npd",
-    "className": null,
-    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_risk_models.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "S = np.array([[0.03818144, 0.04182824], [0.04182824, 0.04149209]])\nassert not risk_models._is_positive_semidefinite(S)\nfor method in {'spectral', 'diag'}:\n    with warnings.catch_warnings(record=True) as w:\n        S2 = risk_models.fix_nonpositive_semidefinite(S, fix_method=method)\n        assert risk_models._is_positive_semidefinite(S2)\n        assert len(w) == 1\n        assert issubclass(w[0].category, UserWarning)\n        assert str(w[0].message\n            ) == 'The covariance matrix is non positive semidefinite. Amending eigenvalues.'\n"
-}

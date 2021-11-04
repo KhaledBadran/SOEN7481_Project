@@ -1,9 +1,0 @@
-{
-    "functionName": "test_efficient_risk_short",
-    "className": null,
-    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_efficient_frontier.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ef = EfficientFrontier(*setup_efficient_frontier(data_only=True),\n    weight_bounds=(-1, 1))\nw = ef.efficient_risk(0.19)\nassert isinstance(w, dict)\nassert set(w.keys()) == set(ef.tickers)\nnp.testing.assert_almost_equal(ef.weights.sum(), 1)\nnp.testing.assert_allclose(ef.portfolio_performance(), (0.30468522897430295,\n    0.19, 1.4983424153337392), atol=1e-06)\nsharpe = ef.portfolio_performance()[2]\nef_long_only = setup_efficient_frontier()\nef_long_only.efficient_risk(0.19)\nlong_only_sharpe = ef_long_only.portfolio_performance()[2]\nassert sharpe > long_only_sharpe\n"
-}

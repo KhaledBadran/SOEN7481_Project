@@ -1,9 +1,0 @@
-{
-    "functionName": "test_xyz_to_fort5_header_and_positions",
-    "className": null,
-    "fileName": "/mortele_&_OccamTools/test_&_test_xyz_to_fort5.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "xyz_file, _, box = _generate_minimal_xyz()\nfort5_file = xyz_to_fort5(xyz_file, False, box)\nwith open(xyz_file, 'r') as xyz, open(fort5_file, 'r') as fort5:\n    xyz_n_particles = int(xyz.readline())\n    xyz_box = _parse_comment_line(xyz.readline())\n    _ = fort5.readline()\n    fort5_box = [float(b) for b in fort5.readline().split()[:3]]\n    assert np.allclose(xyz_box, fort5_box)\n    _ = fort5.readline()\n    fort5_n_particles = int(fort5.readline())\n    assert fort5_n_particles == xyz_n_particles\n    n_particles = xyz_n_particles\n    for _ in range(n_particles):\n        for _ in range(3):\n            fort5_line = fort5.readline()\n        fort5_pos = [float(p) for p in fort5_line.split()[4:7]]\n        xyz_pos = [float(p) for p in xyz.readline().split()[1:]]\n        assert np.allclose(fort5_pos, xyz_pos)\n_remove_files(xyz_file, fort5_file)\n"
-}

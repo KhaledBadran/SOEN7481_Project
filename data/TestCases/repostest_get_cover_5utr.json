@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_cover_5utr",
-    "className": "TestsRNAUTR",
-    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_sRNA_utr_derived.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "args = self.mock_args.mock()\ndatas = {'num': 0, 'cover_tmp': {'5utr': 0}, 'checks': {'detect_decrease': \n    True}, 'final_poss': {'start': 1, 'end': 26}}\ncover = 20\ncover_sets = {'high': 50, 'low': 10}\nargs.decrease_utr = 50\nargs.fuzzy_utr = 2\ngo_out = sud.get_cover_5utr(datas, cover_sets, cover, self.example.inters[0\n    ], args, 10)\nself.assertDictEqual(datas['final_poss'], {'start': 1, 'end': 10})\nself.assertEqual(datas['num'], 0)\nself.assertTrue(go_out)\nself.assertDictEqual(datas['cover_tmp'], {'5utr': 0})\nself.assertDictEqual(cover_sets, {'high': 50, 'low': 10})\ncover = 20\ndatas = {'num': 0, 'cover_tmp': {'5utr': 30}, 'checks': {'detect_decrease':\n    True}, 'final_poss': {'start': 1, 'end': 26}}\ncover_sets = {'low': 10, 'high': 50}\nargs.decrease_utr = 0.5\ngo_out = sud.get_cover_5utr(datas, cover_sets, cover, self.example.inters[0\n    ], args, 10)\nself.assertEqual(datas['num'], 1)\nself.assertFalse(go_out)\nself.assertDictEqual(datas['final_poss'], {'start': 1, 'end': 26})\nself.assertDictEqual(datas['cover_tmp'], {'5utr': 20})\nself.assertDictEqual(cover_sets, {'low': 20, 'high': 50})\n"
-}

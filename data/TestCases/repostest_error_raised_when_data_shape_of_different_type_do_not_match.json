@@ -1,9 +1,0 @@
-{
-    "functionName": "test_error_raised_when_data_shape_of_different_type_do_not_match",
-    "className": "TestApplyingROI",
-    "fileName": "/ornlneutronimaging_&_NeuNorm/tests_&_NeuNorm_&_normalizing_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"assert shape of data must match to allow normalization\"\"\"\nimage1 = self.data_path + '/tif/sample/image001.tif'\nob1 = self.data_path + '/different_format/ob001_4_by_4.tif'\no_norm = Normalization()\no_norm.load(file=image1, auto_gamma_filter=False)\no_norm.load(file=ob1, data_type='ob', auto_gamma_filter=False)\nwith pytest.raises(ValueError):\n    o_norm.normalization()\nimage1 = self.data_path + '/tif/sample/image001.tif'\nob1 = self.data_path + '/tif/ob/ob001.tif'\ndf1 = self.data_path + '/different_format/df001_4_by_4.tif'\no_norm = Normalization()\no_norm.load(file=image1, auto_gamma_filter=False)\no_norm.load(file=ob1, data_type='ob', auto_gamma_filter=False)\no_norm.load(file=df1, data_type='df', auto_gamma_filter=False)\nwith pytest.raises(ValueError):\n    o_norm.normalization()\n"
-}

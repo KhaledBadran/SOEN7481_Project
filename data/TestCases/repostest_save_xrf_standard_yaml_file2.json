@@ -1,9 +1,0 @@
-{
-    "functionName": "test_save_xrf_standard_yaml_file2",
-    "className": null,
-    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_core_&_tests_&_test_quant_analysis.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test the case of of no match between total density and sum of densities of individual compounds\"\"\"\nyaml_path = ['yaml', 'param', 'file']\nfile_name = 'standard.yaml'\nyaml_path = os.path.join(tmp_path, *yaml_path, file_name)\nstandard_data = []\nsave_xrf_standard_yaml_file(yaml_path, standard_data)\nwith pytest.raises(IOError, match=f\"File '{yaml_path}' already exists\"):\n    save_xrf_standard_yaml_file(yaml_path, standard_data)\nsave_xrf_standard_yaml_file(yaml_path, standard_data, overwrite_existing=True)\n"
-}

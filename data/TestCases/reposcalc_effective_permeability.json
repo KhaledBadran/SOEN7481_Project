@@ -1,9 +1,0 @@
-{
-    "functionName": "calc_effective_permeability",
-    "className": "StokesFlow",
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_algorithms_&_StokesFlow.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        This calculates the effective permeability in this linear transport\n        algorithm.\n\n        Parameters\n        ----------\n        inlets : array_like\n            The pores where the inlet pressure boundary conditions were\n            applied.  If not given an attempt is made to infer them from the\n            algorithm.\n\n        outlets : array_like\n            The pores where the outlet pressure boundary conditions were\n            applied.  If not given an attempt is made to infer them from the\n            algorithm.\n\n        domain_area : scalar, optional\n            The area of the inlet (and outlet) boundary faces.  If not given\n            then an attempt is made to estimate it, but it is usually\n            underestimated.\n\n        domain_length : scalar, optional\n            The length of the domain between the inlet and outlet boundary\n            faces.  If not given then an attempt is made to estimate it, but it\n            is usually underestimated.\n\n        Notes\n        -----\n        The area and length of the domain are found using the bounding box\n        around the inlet and outlet pores which do not necessarily lie on the\n        edge of the domain, resulting in underestimation of sizes.\n        \"\"\"\nphase = self.project.phases()[self.settings['phase']]\nd_normal = self._calc_eff_prop(inlets=inlets, outlets=outlets, domain_area=\n    domain_area, domain_length=domain_length)\nK = d_normal * np.mean(phase['pore.viscosity'])\nreturn K\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_unpickle_custom_loss",
-    "className": null,
-    "fileName": "/viebboy_&_PyGOP/test_&_utility_&_test_misc.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "filename = os.path.join(tmpdir.dirname, 'custom_loss.pickle')\nmisc.pickle_custom_loss(utility.mean_absolute_error_keras, filename)\nloss = misc.unpickle_custom_loss(filename)\ny_true = K.ones((10, 20))\ny_pred = K.zeros((10, 20))\nassert K.eval(utility.mean_absolute_error_keras(y_true, y_pred)) == K.eval(loss\n    (y_true, y_pred))\nassert loss.__name__ == 'mean_absolute_error_keras'\nos.remove(filename)\n"
-}

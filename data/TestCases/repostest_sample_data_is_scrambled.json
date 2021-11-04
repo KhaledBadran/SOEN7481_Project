@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sample_data_is_scrambled",
-    "className": null,
-    "fileName": "/NASA_&_MLMCPy/tests_&_input_&_test_InputFromData.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Ensure that sample data is reordered.\n    \"\"\"\nall_file_data = sample_entire_data_set(data_filename)\nfile_length = all_file_data.shape[0]\nnp.random.seed(1)\ndata_sampler = InputFromData(data_filename)\nsample_data = data_sampler.draw_samples(file_length)\nassert not np.array_equal(all_file_data, sample_data)\nassert np.isclose(np.sum(all_file_data), np.sum(sample_data))\npytest.mark.parametrize('data_filename', data_file_paths, ids=data_file_names)"
-}

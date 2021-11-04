@@ -1,9 +1,0 @@
-{
-    "functionName": "test_new_format",
-    "className": "TestReadPyPI",
-    "fileName": "/cournape_&_Bento/bento_&_pypi_&_tests_&_test_register_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data = \"\"\"[distutils]\nindex-servers =\n    test\n    pypi\n\n[test]\nusername:cdavid\npassword:yoyo\nrepository:http://testpypi.python.org\n\n[pypi]\nusername:david\npassword:yeye\nrepository:http://pypi.python.org\n\"\"\"\nconfig = parse_pypirc(StringIO(data), 'pypi')\nself.assertEqual(config.username, 'david')\nself.assertEqual(config.password, 'yeye')\nconfig = parse_pypirc(StringIO(data), repository='test')\nself.assertEqual(config.username, 'cdavid')\nself.assertEqual(config.password, 'yoyo')\nself.assertEqual(config.repository, 'http://testpypi.python.org')\n"
-}

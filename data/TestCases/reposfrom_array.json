@@ -1,9 +1,0 @@
-{
-    "functionName": "from_array",
-    "className": "Cubic",
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_network_&_Cubic.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        Apply data to the network based on a rectangular array filled with\n        values.  Each array location corresponds to a pore in the network.\n\n        Parameters\n        ----------\n        array : array_like\n            The rectangular array containing the values to be added to the\n            network. This array must be the same shape as the original network.\n\n        propname : string\n            The name of the pore property being added.\n\n        \"\"\"\narray = np.atleast_3d(array)\nif np.shape(array) != self._shape:\n    raise Exception('The array shape does not match the network')\ntemp = array.flatten()\nPs = np.array(self['pore.index'][self.pores('internal')], dtype=int)\npropname = 'pore.' + propname.split('.')[-1]\nself[propname] = np.nan\nself[propname][self.pores('internal')] = temp[Ps]\n"
-}

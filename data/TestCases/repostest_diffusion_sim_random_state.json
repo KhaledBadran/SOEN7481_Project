@@ -1,9 +1,0 @@
-{
-    "functionName": "test_diffusion_sim_random_state",
-    "className": null,
-    "fileName": "/OpenSMFS_&_PyBroMo/pybromo_&_tests_&_test_diffusion.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "for psf in (pbm.NumericPSF(), pbm.GaussianPSF()):\n    rs = np.random.RandomState(_SEED)\n    P = pbm.Particles.from_specs(num_particles=(5, 7), D=(D1, D2), box=box,\n        rs=rs)\n    t_max = 0.01\n    S = pbm.ParticlesSimulation(t_step=t_step, t_max=t_max, particles=P,\n        box=box, psf=psf)\n    rs_prediffusion = rs.get_state()\n    S.simulate_diffusion(total_emission=False, save_pos=True, verbose=True,\n        rs=rs, chunksize=2 ** 13, chunkslice='times')\n    rs_postdiffusion = rs.get_state()\n    saved_rs = S.traj_group._v_attrs['init_random_state']\n    assert randomstate_equal(saved_rs, rs_prediffusion)\n    saved_rs = S.traj_group._v_attrs['last_random_state']\n    assert randomstate_equal(saved_rs, rs_postdiffusion)\n    S.store.close()\n"
-}

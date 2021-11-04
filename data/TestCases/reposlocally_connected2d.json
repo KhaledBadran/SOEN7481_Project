@@ -1,9 +1,0 @@
-{
-    "functionName": "locally_connected2d",
-    "className": null,
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_local.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    2D convolution with unshared weights, no stride, 'same' padding,\n    no dilation and no bias\n    \"\"\"\nnum_batch, input_channels, input_rows, input_cols = input.shape\nassert W.shape[1] == input_channels\n(num_filters, input_channels, filter_rows, filter_cols, output_rows,\n    output_cols) = W.shape\nassert filter_rows % 2 == 1\nassert filter_cols % 2 == 1\noutput = np.zeros((num_batch, num_filters, output_rows, output_cols))\nfor b in range(num_batch):\n    for f in range(num_filters):\n        for c in range(input_channels):\n            for i_out in range(output_rows):\n                for j_out in range(output_cols):\n                    for i_filter in range(filter_rows):\n                        i_in = i_out + i_filter - filter_rows // 2\n                        if not 0 <= i_in < input_rows:\n                            continue\n                        for j_filter in range(filter_cols):\n                            j_in = j_out + j_filter - filter_cols // 2\n                            if not 0 <= j_in < input_cols:\n                                continue\n                            if flip_filters:\n                                inc = input[b, c, i_in, j_in] * W[f, c, -\n                                    i_filter - 1, -j_filter - 1, i_out, j_out]\n                            else:\n                                inc = input[b, c, i_in, j_in] * W[f, c,\n                                    i_filter, j_filter, i_out, j_out]\n                            output[b, f, i_out, j_out] += inc\nreturn output\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_mixed_shared",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_covariances_&_test_multioutput.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "inducing_variable = mf.SharedIndependentInducingVariables(make_ip())\nkernel = mk.LinearCoregionalization(make_kernels(Datum.L), Datum.W)\nif fun is mo_kuus.Kuu:\n    t = tf.linalg.cholesky(fun(inducing_variable, kernel, jitter=1e-09))\nelse:\n    t = fun(inducing_variable, kernel, Datum.Xnew)\n    print(t.shape)\npytest.mark.parametrize('fun', [mo_kuus.Kuu, mo_kufs.Kuf])"
-}

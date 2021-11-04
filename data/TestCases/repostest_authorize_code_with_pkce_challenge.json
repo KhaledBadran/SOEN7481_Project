@@ -1,9 +1,0 @@
-{
-    "functionName": "test_authorize_code_with_pkce_challenge",
-    "className": "TestAuthClientAuthorizeCode",
-    "fileName": "/mozilla_&_PyFxA/fxa_&_tests_&_test_oauth.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "assertion = 'A_FAKE_ASSERTION'\nchallenge, verifier = self.client.generate_pkce_challenge()\nself.assertEqual(sorted(challenge), ['code_challenge', 'code_challenge_method']\n    )\nself.assertEqual(sorted(verifier), ['code_verifier'])\ncode = self.client.authorize_code(assertion, **challenge)\nself.assertEqual(code, 'qed')\nreq_body = json.loads(_decoded(responses.calls[0].request.body))\nself.assertEqual(req_body, {'assertion': assertion, 'client_id': self.\n    client.client_id, 'state': AnyStringValue(), 'code_challenge':\n    challenge['code_challenge'], 'code_challenge_method': challenge[\n    'code_challenge_method']})\nresponses.activate"
-}

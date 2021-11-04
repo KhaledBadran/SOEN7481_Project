@@ -1,9 +1,0 @@
-{
-    "functionName": "build_spark_schema",
-    "className": "LogToSparkDF",
-    "fileName": "/kitware_&_BroThon/zat_&_log_to_sparkdf.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Given a set of names and types, construct a dictionary to be used\n           as the Spark read_csv dtypes argument\"\"\"\nunknown_type = StringType()\nschema = StructType()\nfor name, zeek_type in zip(column_names, column_types):\n    spark_type = self.type_map.get(zeek_type)\n    if not spark_type:\n        if verbose:\n            print('Could not find type for {:s} using StringType...'.format\n                (zeek_type))\n        spark_type = unknown_type\n    schema.add(name, spark_type)\nreturn schema\n"
-}

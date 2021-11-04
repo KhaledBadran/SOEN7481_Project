@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_ohlcv",
-    "className": null,
-    "fileName": "/Drakkar-Software_&_OctoBot-Backtesting/tests_&_importers_&_test_exchange_importer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "async with get_importer() as importer:\n    ohlcv = await importer.get_ohlcv()\n    assert len(ohlcv) == 500\n    exchange = ohlcv[0][1]\n    cryptocurrency = ohlcv[0][2]\n    symbol = ohlcv[0][3]\n    assert all(data[1] == exchange for data in ohlcv)\n    assert all(data[2] == cryptocurrency for data in ohlcv)\n    assert all(data[3] == symbol for data in ohlcv)\n    assert all(data[4] == '1h' for data in ohlcv)\n    assert all(len(data[5]) == 6 and all(isinstance(element, float) for\n        element in data[5]) for data in ohlcv)\n    ohlcv = await importer.get_ohlcv(exchange_name='binance', symbol=\n        'ETH/BTC', time_frame=TimeFrames.ONE_WEEK, limit=10)\n    assert len(ohlcv) == 10\n    assert all(data[4] == TimeFrames.ONE_WEEK.value for data in ohlcv)\n    ohlcv = await importer.get_ohlcv(exchange_name='binance', symbol=\n        'ETH/XXX', time_frame=TimeFrames.ONE_WEEK)\n    assert len(ohlcv) == 0\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_multistart_hyperparameter_optimization",
-    "className": "TestGaussianProcessLogMarginalLikelihood",
-    "fileName": "/Yelp_&_MOE/moe_&_tests_&_optimal_learning_&_python_&_python_version_&_log_likelihood_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Check that multistart optimization (gradient descent) can find the optimum hyperparameters.\"\"\"\nrandom_state = numpy.random.get_state()\nnumpy.random.seed(87612)\nmax_num_steps = 200\nmax_num_restarts = 5\nnum_steps_averaged = 0\ngamma = 0.2\npre_mult = 1.0\nmax_relative_change = 0.3\ntolerance = 1e-11\ngd_parameters = GradientDescentParameters(max_num_steps, max_num_restarts,\n    num_steps_averaged, gamma, pre_mult, max_relative_change, tolerance)\nnum_multistarts = 3\nnum_sampled = 10\nself.gp_test_environment_input.num_sampled = num_sampled\n_, gaussian_process = self._build_gaussian_process_test_data(self.\n    gp_test_environment_input)\npython_cov, historical_data = gaussian_process.get_core_data_copy()\nlml = GaussianProcessLogMarginalLikelihood(python_cov, historical_data)\ndomain = TensorProductDomain([ClosedInterval(1.0, 4.0)] * self.\n    gp_test_environment_input.num_hyperparameters)\nhyperparameter_optimizer = GradientDescentOptimizer(domain, lml, gd_parameters)\nbest_hyperparameters = multistart_hyperparameter_optimization(\n    hyperparameter_optimizer, num_multistarts)\nlml.hyperparameters = best_hyperparameters\ngradient = lml.compute_grad_log_likelihood()\nself.assert_vector_within_relative(gradient, numpy.zeros(self.\n    num_hyperparameters), tolerance)\nassert domain.check_point_inside(best_hyperparameters) is True\nnumpy.random.set_state(random_state)\n"
-}

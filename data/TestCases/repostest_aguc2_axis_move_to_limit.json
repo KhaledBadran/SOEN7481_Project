@@ -1,9 +1,0 @@
-{
-    "functionName": "test_aguc2_axis_move_to_limit",
-    "className": null,
-    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_newport_&_test_agilis.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Check for move to limit function.\n    This function is UNTESTED to work, here simply command sending is checked\n    \"\"\"\nwith expected_protocol(ik.newport.AGUC2, ['MR', '2 MA 3'], [], sep='\\r\\n'\n    ) as agl:\n    agl.axis['Y'].move_to_limit = 3\n    with pytest.raises(ValueError):\n        agl.axis['Y'].move_to_limit = -5\n    with pytest.raises(ValueError):\n        agl.axis['X'].move_to_limit = 5\n"
-}

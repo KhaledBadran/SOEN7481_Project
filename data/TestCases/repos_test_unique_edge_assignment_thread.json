@@ -1,9 +1,0 @@
-{
-    "functionName": "_test_unique_edge_assignment_thread",
-    "className": null,
-    "fileName": "/seung-lab_&_PyChunkedGraph/pychunkedgraph_&_creator_&_data_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "paths = args[0]\nid_dict = collections.Counter()\nfor path in paths:\n    try:\n        ids = creator_utils.read_edge_file_h5(path)['edge_ids']\n    except:\n        ids = creator_utils.read_edge_file_h5(path)['node_ids']\n    u_ids = np.unique(ids)\n    u_id_d = dict(zip(u_ids, np.ones(len(u_ids), dtype=np.int)))\n    add_counter = collections.Counter(u_id_d)\n    id_dict += add_counter\nreturn id_dict\n"
-}

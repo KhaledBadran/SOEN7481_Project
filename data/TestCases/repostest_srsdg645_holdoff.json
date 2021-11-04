@@ -1,9 +1,0 @@
-{
-    "functionName": "test_srsdg645_holdoff",
-    "className": null,
-    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_srs_&_test_srsdg645.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    SRSDG645: Set / get hold off.\n    \"\"\"\nwith expected_protocol(ik.srs.SRSDG645, ['HOLD?', 'HOLD 0', 'HOLD 0.01'], [\n    '+0.001001000000']) as ddg:\n    assert ddg.holdoff == u.Quantity(1001, u.us)\n    ddg.holdoff = 0\n    ddg.holdoff = u.Quantity(10, u.ms)\n"
-}

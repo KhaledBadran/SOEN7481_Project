@@ -1,9 +1,0 @@
-{
-    "functionName": "test_loopbackcomm_read_raw_2char_terminator",
-    "className": null,
-    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_comm_&_test_serial.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "comm = SerialCommunicator(serial.Serial())\ncomm._conn = mock.MagicMock()\ncomm._conn.read = mock.MagicMock(side_effect=[b'a', b'b', b'c', b'\\r', b'\\n'])\ncomm._terminator = '\\r\\n'\nassert comm.read_raw() == b'abc'\ncomm._conn.read.assert_has_calls([mock.call(1)] * 5)\nassert comm._conn.read.call_count == 5\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_generate_random_uniform_header",
-    "className": null,
-    "fileName": "/mortele_&_OccamTools/test_&_test_generate_fort5.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "file_name = os.path.join(os.path.dirname(__file__), 'header_test.5')\n_check_remove_file(file_name)\nn_particles = 10\nbox = [2, 7, 11]\ngenerate_uniform_random(n_particles, box, path=file_name)\nassert os.path.exists(file_name)\nwith open(file_name, 'r') as in_file:\n    line = in_file.readline().strip()\n    assert line.lower() == 'box:'\n    line = in_file.readline()\n    line = line.split()\n    assert len(line) == 4\n    for i in range(3):\n        assert float(line[i]) == pytest.approx(box[i], abs=1e-15)\n        assert float(line[3]) == pytest.approx(0.0, abs=1e-15)\nassert _check_remove_file(file_name)\n"
-}

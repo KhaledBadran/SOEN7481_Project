@@ -1,9 +1,0 @@
-{
-    "functionName": "test_invalid_query_functions",
-    "className": "TestQueryRequestPayload",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_query.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a TypeError is raised when an invalid value is used to set\n        the query functions of a Query request payload.\n        \"\"\"\nkwargs = {'query_functions': 'invalid'}\nself.assertRaisesRegex(TypeError,\n    'The query functions must be a list of QueryFunction enumerations.',\n    payloads.QueryRequestPayload, **kwargs)\nkwargs = {'query_functions': ['invalid']}\nself.assertRaisesRegex(TypeError,\n    'The query functions must be a list of QueryFunction enumerations.',\n    payloads.QueryRequestPayload, **kwargs)\nargs = payloads.QueryRequestPayload(), 'query_functions', 'invalid'\nself.assertRaisesRegex(TypeError,\n    'The query functions must be a list of QueryFunction enumerations.',\n    setattr, *args)\nargs = payloads.QueryRequestPayload(), 'query_functions', ['invalid']\nself.assertRaisesRegex(TypeError,\n    'The query functions must be a list of QueryFunction enumerations.',\n    setattr, *args)\n"
-}

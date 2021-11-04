@@ -1,9 +1,0 @@
-{
-    "functionName": "test_bayesian_gplvm_1d",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_models_&_test_gplvm.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "Q = 1\nkernel = gpflow.kernels.SquaredExponential()\ninducing_variable = np.linspace(0, 1, Data.M)[:, (None)]\nm = gpflow.models.BayesianGPLVM(Data.Y, np.zeros((Data.N, Q)), np.ones((\n    Data.N, Q)), kernel, inducing_variable=inducing_variable)\nassert len(m.inducing_variable) == Data.M\nelbo_initial = m.elbo()\nopt = gpflow.optimizers.Scipy()\nopt.minimize(m.training_loss, m.trainable_variables, options=dict(maxiter=2))\nassert m.elbo() > elbo_initial\n"
-}

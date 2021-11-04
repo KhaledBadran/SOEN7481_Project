@@ -1,9 +1,0 @@
-{
-    "functionName": "test_gaussian_log_density",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_models_&_test_model_predict.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data = rng.randn(Ntrain, D), rng.randn(Ntrain, 1)\nXtest, Ytest = rng.randn(Ntest, D), rng.randn(Ntest, 1)\nkernel = Matern32() + gpflow.kernels.White()\nmodel_gp = gpflow.models.GPR(data, kernel=kernel)\nmu_y, var_y = model_gp.predict_y(Xtest)\ndata = Xtest, Ytest\nlog_density = model_gp.predict_log_density(data)\nlog_density_hand = np.squeeze(-0.5 * np.log(2 * np.pi) - 0.5 * np.log(var_y\n    ) - 0.5 * np.square(mu_y - Ytest) / var_y, axis=-1)\nassert np.allclose(log_density_hand, log_density)\npytest.mark.parametrize('Ntrain, Ntest, D', [[100, 10, 2]])"
-}

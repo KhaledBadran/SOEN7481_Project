@@ -1,9 +1,0 @@
-{
-    "functionName": "test_DictCursor",
-    "className": "TestDictCursor",
-    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_test_DictCursor.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "bob, jim, fred = self.bob.copy(), self.jim.copy(), self.fred.copy()\nconn = self.conn\nc = conn.cursor(self.cursor_type)\nc.execute(\"update dictcursor set age=20 where name='bob'\")\nbob['age'] = 20\nc.execute(\"SELECT * from dictcursor where name='bob'\")\nr = c.fetchone()\nself.assertEqual(bob, r, 'fetchone via DictCursor failed')\nself._ensure_cursor_expired(c)\nc.execute(\"SELECT * from dictcursor where name='bob'\")\nr = c.fetchall()\nself.assertEqual([bob], r,\n    'fetch a 1 row result via fetchall failed via DictCursor')\nc.execute(\"SELECT * from dictcursor where name='bob'\")\nfor r in c:\n    self.assertEqual(bob, r,\n        'fetch a 1 row result via iteration failed via DictCursor')\nc.execute('SELECT * from dictcursor')\nr = c.fetchall()\nself.assertEqual([bob, jim, fred], r, 'fetchall failed via DictCursor')\nc.execute('SELECT * from dictcursor')\nr = list(c)\nself.assertEqual([bob, jim, fred], r, 'DictCursor should be iterable')\nc.execute('SELECT * from dictcursor')\nr = c.fetchmany(2)\nself.assertEqual([bob, jim], r, 'fetchmany failed via DictCursor')\nself._ensure_cursor_expired(c)\n"
-}

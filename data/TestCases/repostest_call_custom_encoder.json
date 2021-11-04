@@ -1,9 +1,0 @@
-{
-    "functionName": "test_call_custom_encoder",
-    "className": "TestEval",
-    "fileName": "/sqreen_&_PyMiniRacer/tests_&_test_call.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class CustomEncoder(json.JSONEncoder):\n\n    def default(self, obj):\n        if isinstance(obj, datetime):\n            return obj.isoformat()\n        return json.JSONEncoder.default(self, obj)\nnow = datetime.now()\njs_func = \"\"\"var f = function(args) {\n            return args;\n        }\"\"\"\nself.mr.eval(js_func)\nself.assertEqual(self.mr.call('f', now, encoder=CustomEncoder), now.isoformat()\n    )\n"
-}

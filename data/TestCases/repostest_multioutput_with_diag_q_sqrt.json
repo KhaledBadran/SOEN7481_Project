@@ -1,9 +1,0 @@
-{
-    "functionName": "test_multioutput_with_diag_q_sqrt",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_conditionals_&_test_multioutput.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data = DataMixedKernel\nq_sqrt_diag = np.ones((data.M, data.L)) * 2\nq_sqrt = np.repeat(np.eye(data.M)[None, ...], data.L, axis=0) * 2\nkern_list = [SquaredExponential() for _ in range(data.L)]\nk1 = mk.LinearCoregionalization(kern_list, W=data.W)\nf1 = mf.SharedIndependentInducingVariables(InducingPoints(data.X[:data.M, (\n    ...)]))\nmodel_1 = SVGP(k1, Gaussian(), inducing_variable=f1, q_mu=data.mu_data,\n    q_sqrt=q_sqrt_diag, q_diag=True)\nkern_list = [SquaredExponential() for _ in range(data.L)]\nk2 = mk.LinearCoregionalization(kern_list, W=data.W)\nf2 = mf.SharedIndependentInducingVariables(InducingPoints(data.X[:data.M, (\n    ...)]))\nmodel_2 = SVGP(k2, Gaussian(), inducing_variable=f2, q_mu=data.mu_data,\n    q_sqrt=q_sqrt, q_diag=False)\ncheck_equality_predictions(Data.data, [model_1, model_2])\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_hard_coded_springmass_random_input",
-    "className": null,
-    "fileName": "/NASA_&_MLMCPy/tests_&_mlmc_&_test_MLMCSimulator.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Tests simulator estimate and variances against precomputed values.\n    \"\"\"\nnp.random.seed(1)\nmlmc_hard_coded_mean = [12.274674424393805]\nmlmc_hard_coded_variance = [0.01078008]\nsim = MLMCSimulator(models=spring_models, data=beta_distribution_input)\nall_sample_sizes = np.array([1113, 34, 0])\nget_cpu_samples = np.vectorize(sim._determine_num_cpu_samples)\nsim._cpu_sample_sizes = get_cpu_samples(all_sample_sizes)\nsim._determine_input_output_size()\nsim._caching_enabled = False\nsim._sample_sizes = all_sample_sizes\nnp.random.seed(1)\nestimate, cpu_sample_sizes, variances = sim._run_simulation()\nassert np.all(np.isclose(estimate, mlmc_hard_coded_mean))\nassert np.all(np.isclose(variances, mlmc_hard_coded_variance))\n"
-}

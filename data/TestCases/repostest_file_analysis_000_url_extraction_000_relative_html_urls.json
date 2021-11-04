@@ -1,9 +1,0 @@
-{
-    "functionName": "test_file_analysis_000_url_extraction_000_relative_html_urls",
-    "className": "TestCase",
-    "fileName": "/IntegralDefense_&_ACE/lib_&_saq_&_modules_&_test_file_analysis.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from saq.modules.file_analysis import URLExtractionAnalysis\nroot = create_root_analysis(event_time=datetime.datetime.now())\nroot.initialize_storage()\nshutil.copy('test_data/url_extraction_000', root.storage_dir)\ntarget_file = 'url_extraction_000'\nsrc_url = 'https://vaishaligarden.com/.opjl/'\nurl_observable = root.add_observable(F_URL, src_url)\nfile_observable = root.add_observable(F_FILE, target_file)\nfile_observable.add_directive(DIRECTIVE_EXTRACT_URLS)\nfile_observable.add_relationship(R_DOWNLOADED_FROM, url_observable)\nroot.save()\nroot.schedule()\nengine = TestEngine()\nengine.enable_module('analysis_module_url_extraction', 'test_groups')\nengine.enable_module('analysis_module_file_type', 'test_groups')\nengine.controlled_stop()\nengine.start()\nengine.wait()\nroot.load()\nfile_observable = root.get_observable(file_observable.id)\nself.assertIsNotNone(file_observable)\nanalysis = file_observable.get_analysis(URLExtractionAnalysis)\nself.assertIsNotNone(analysis)\nself.assertEquals(len(analysis.get_observables_by_type(F_URL)), 10)\n"
-}

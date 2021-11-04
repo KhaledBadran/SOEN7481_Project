@@ -1,9 +1,0 @@
-{
-    "functionName": "test_consumers",
-    "className": null,
-    "fileName": "/bakwc_&_PySyncObj/test_syncobj.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "random.seed(42)\na = [getNextAddr(), getNextAddr(), getNextAddr()]\nc11 = TestConsumer1()\nc12 = TestConsumer1()\nc13 = TestConsumer2()\nc21 = TestConsumer1()\nc22 = TestConsumer1()\nc23 = TestConsumer2()\nc31 = TestConsumer1()\nc32 = TestConsumer1()\nc33 = TestConsumer2()\no1 = TestObj(a[0], [a[1], a[2]], consumers=[c11, c12, c13])\no2 = TestObj(a[1], [a[0], a[2]], consumers=[c21, c22, c23])\no3 = TestObj(a[2], [a[0], a[1]], consumers=[c31, c32, c33])\nobjs = [o1, o2]\nassert not o1._isReady()\nassert not o2._isReady()\ndoTicks(objs, 10.0, stopFunc=lambda : o1._isReady() and o2._isReady())\nassert o1._getLeader().address in a\nassert o1._getLeader() == o2._getLeader()\nassert o1._isReady()\nassert o2._isReady()\nc11.set(42)\nc11.add(10)\nc12.add(15)\nc13.set('testKey', 'testValue')\ndoTicks(objs, 10.0, stopFunc=lambda : c21.get() == 52 and c22.get() == 15 and\n    c23.get('testKey') == 'testValue')\nassert c21.get() == 52\nassert c22.get() == 15\nassert c23.get('testKey') == 'testValue'\no1.forceLogCompaction()\no2.forceLogCompaction()\ndoTicks(objs, 0.5)\nobjs = [o1, o2, o3]\ndoTicks(objs, 10.0, stopFunc=lambda : c31.get() == 52 and c32.get() == 15 and\n    c33.get('testKey') == 'testValue')\nassert c31.get() == 52\nassert c32.get() == 15\nassert c33.get('testKey') == 'testValue'\no1.destroy()\no2.destroy()\no3.destroy()\n"
-}

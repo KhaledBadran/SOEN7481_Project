@@ -1,9 +1,0 @@
-{
-    "functionName": "test_utcdatetime_type",
-    "className": "TestDbType",
-    "fileName": "/adsabs_&_ADSPipelineUtils/adsputils_&_tests_&_test_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "base = declarative_base()\nclass Test(base):\n    __tablename__ = 'testdate'\n    id = sa.Column(sa.Integer, primary_key=True)\n    created = sa.Column(adsputils.UTCDateTime, default=adsputils.get_date)\n    updated = sa.Column(adsputils.UTCDateTime)\nbase.metadata.bind = self.app._engine\nbase.metadata.create_all()\nwith self.app.session_scope() as session:\n    session.add(Test())\n    m = session.query(Test).first()\n    assert m.created\n    assert m.created.tzname() == 'UTC'\n    assert '+00:00' in str(m.created)\n    current = adsputils.get_date('2018-09-07T20:22:02.249389+00:00')\n    m.updated = current\n    session.commit()\n    m = session.query(Test).first()\n    assert str(m.updated) == str(current)\n    t = adsputils.get_date()\n    m.created = t\n    session.commit()\n    m = session.query(Test).first()\n    assert m.created == t\nbase.metadata.drop_all()\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_min_load_correctly_fails_15_minute",
-    "className": null,
-    "fileName": "/PearsonEducation_&_Alarmageddon/tests_&_validations_&_test_ssh.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "t = '18:01:46 up 62 days, 18:27,  1 user,  load average: 0.09, 0.04, 0.01'\nmonkeypatch.setattr(Connection, 'run', lambda self, x, warn:\n    get_mock_ssh_text(t, 0))\nssh_ctx = ssh.SshContext('ubuntu', get_mock_key_file(tmpdir))\nwith pytest.raises(ValidationFailure):\n    ssh.LoadAverageValidation(ssh_ctx, hosts=hosts).expect_min_15_minute_load(\n        0.02).perform({})\n"
-}

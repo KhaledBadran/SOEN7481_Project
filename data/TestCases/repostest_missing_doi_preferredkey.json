@@ -1,9 +1,0 @@
-{
-    "functionName": "test_missing_doi_preferredkey",
-    "className": "TestGetReference",
-    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_converters.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Ensure error if missing both DOI and ``preferredKey``.\n        \"\"\"\nroot = etree.Element('experiment')\nref = etree.SubElement(root, 'bibliographyLink')\nref.set('doi', '10.1000/invalid.doi')\nwith pytest.raises(KeywordError) as excinfo:\n    ref = get_reference(root)\nassert 'DOI not found and preferredKey attribute not set' in str(excinfo.value)\n"
-}

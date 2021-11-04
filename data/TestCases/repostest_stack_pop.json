@@ -1,9 +1,0 @@
-{
-    "functionName": "test_stack_pop",
-    "className": "CallTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_call.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "t = Template(\n    \"\"\"\n        <%def name=\"links()\" buffered=\"True\">\n           Some links\n        </%def>\n\n        <%def name=\"wrapper(links)\">\n           <h1>${caller.body()}</h1>\n           ${links}\n        </%def>\n\n        ## links() pushes a stack frame on.  when complete,\n        ## 'nextcaller' must be restored\n        <%call expr=\"wrapper(links())\">\n           Some title\n        </%call>\n\n        \"\"\"\n    )\nassert result_lines(t.render()) == ['<h1>', 'Some title', '</h1>', 'Some links'\n    ]\n"
-}

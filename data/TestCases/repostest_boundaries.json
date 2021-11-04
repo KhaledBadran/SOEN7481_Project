@@ -1,9 +1,0 @@
-{
-    "functionName": "test_boundaries",
-    "className": null,
-    "fileName": "/apetri_&_LensTools/lenstools_&_tests_&_test_mask.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "conv_map = ConvergenceMap.load(os.path.join(dataExtern(), 'unmasked.fit'))\nmask_profile = Mask.load(os.path.join(dataExtern(), 'mask.fit'))\nmasked_map = conv_map.mask(mask_profile)\nassert hasattr(masked_map, '_mask')\nassert masked_map._masked\nassert masked_map.side_angle == conv_map.side_angle\nassert masked_map.data.shape == conv_map.data.shape\nperimeter_area = masked_map.maskBoundaries()\nfig, ax = plt.subplots(1, 3, figsize=(24, 8))\nax[0].imshow(masked_map._gradient_boundary, origin='lower', cmap=plt.cm.\n    binary, interpolation='nearest', extent=[0, conv_map.side_angle.value, \n    0, conv_map.side_angle.value])\nax[1].imshow(masked_map._gradient_boundary ^ masked_map._hessian_boundary,\n    origin='lower', cmap=plt.cm.binary, interpolation='nearest', extent=[0,\n    conv_map.side_angle.value, 0, conv_map.side_angle.value])\nax[2].imshow(masked_map.boundary, origin='lower', cmap=plt.cm.binary,\n    interpolation='nearest', extent=[0, conv_map.side_angle.value, 0,\n    conv_map.side_angle.value])\nax[0].set_xlabel('$x$(deg)')\nax[0].set_ylabel('$y$(deg)')\nax[0].set_title('Gradient boundary')\nax[1].set_xlabel('$x$(deg)')\nax[1].set_ylabel('$y$(deg)')\nax[1].set_title('Hessian overhead')\nax[2].set_xlabel('$x$(deg)')\nax[2].set_ylabel('$y$(deg)')\nax[2].set_title('Full boundary: perimeter/area={0:.3f}'.format(perimeter_area))\nfig.tight_layout()\nplt.savefig('boundaries.png')\nplt.clf()\n"
-}

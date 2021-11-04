@@ -1,9 +1,0 @@
-{
-    "functionName": "test_lognormal_clipped",
-    "className": null,
-    "fileName": "/Neuraxio_&_Neuraxle/testing_&_hyperparams_&_test_distributions.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "log2_space_mean = 10.0\nlog2_space_std = 5.0\nhard_clip_min = 5\nhard_clip_max = 100\nhd = LogNormal(log2_space_mean, log2_space_std, hard_clip_min=hard_clip_min,\n    hard_clip_max=hard_clip_max)\nsamples = get_many_samples_for(hd)\nsamples_median = np.median(samples)\nassert 25 < samples_median < 35\nsamples_std = np.std(samples)\nassert 20 < samples_std < 30\nassert hd.pdf(0.0) == 0.0\nassert abs(hd.pdf(6.0) - 0.03385080142719004) < 1e-06\nassert abs(hd.pdf(10.0) - 0.024999599033243936) < 1e-06\nassert hd.cdf(0.0) == 0.0\nassert abs(hd.cdf(6.0) - 0.03560663481768936) < 1e-06\nassert abs(hd.cdf(10.0) - 0.15112888563249155) < 1e-06\nassert hd.min() == hard_clip_min\nassert hd.max() == hard_clip_max\nassert abs(hd.mean() - 38.110960930274594) < 1e-06\nassert abs(hd.var() - 728.7599668053633) < 1e-06\nassert abs(hd.std() - 26.995554574880718) < 1e-06\nassert abs((hd.mean() - np.mean(samples)) / hd.mean()) < 0.1\nassert abs((hd.var() - np.var(samples)) / hd.var()) < 0.1\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_stabilized_vs_sinkhorn",
-    "className": null,
-    "fileName": "/PythonOT_&_POT/test_&_test_unbalanced.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "n = 100\na = ot.datasets.make_1D_gauss(n, m=20, s=5)\nb1 = ot.datasets.make_1D_gauss(n, m=60, s=8)\nb2 = ot.datasets.make_1D_gauss(n, m=30, s=4)\nb = np.vstack((b1, b2)).T\nM = ot.utils.dist0(n)\nM /= np.median(M)\nepsilon = 0.1\nreg_m = 1.0\nG, log = ot.unbalanced.sinkhorn_unbalanced2(a, b, M, reg=epsilon, method=\n    'sinkhorn_stabilized', reg_m=reg_m, log=True)\nG2, log2 = ot.unbalanced.sinkhorn_unbalanced2(a, b, M, epsilon, reg_m,\n    method='sinkhorn', log=True)\nnp.testing.assert_allclose(G, G2, atol=1e-05)\n"
-}

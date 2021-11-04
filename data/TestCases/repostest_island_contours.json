@@ -1,9 +1,0 @@
-{
-    "functionName": "test_island_contours",
-    "className": null,
-    "fileName": "/PaulHancock_&_Aegean/tests_&_test_source_finder.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that island contours are correct\"\"\"\nlog = logging.getLogger('Aegean')\nsfinder = sf.SourceFinder(log=log)\nfilename = 'tests/test_files/synthetic_test.fits'\nnsrc = 98\nnisl = 97\nntot = nsrc + nisl\nfound = sfinder.find_sources_in_image(filename, cores=1, rms=0.5, bkg=0,\n    doislandflux=True)\ncomponents, islands, simples = classify_catalog(found)\nisle_0_contour = np.array([(41, 405), (41, 406), (41, 407), (42, 407), (42,\n    408), (42, 409), (43, 409), (43, 410), (44, 410), (45, 410), (46, 410),\n    (47, 410), (47, 409), (48, 409), (48, 408), (49, 408), (49, 407), (49, \n    406), (49, 405), (48, 405), (48, 404), (48, 403), (47, 403), (46, 403),\n    (45, 403), (44, 403), (43, 403), (43, 404), (42, 404), (42, 405)])\nif not np.all(np.array(islands[0].contour) == isle_0_contour):\n    raise AssertionError('Island contour for island 0 is incoorect')\nreturn\n"
-}

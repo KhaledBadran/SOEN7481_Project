@@ -1,9 +1,0 @@
-{
-    "functionName": "test_output_created_with_path_and_pattern",
-    "className": "TestConfig",
-    "fileName": "/SketchingDev_&_Doodle-Dashboard/tests_&_doodledashboard_&_notifications_&_image_&_test_image_configuration.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.http_server.serve_content('<IMAGE CONTENT>')\ndownloader = FileDownloader()\nconfig = ImageDependingOnMessageContentCreator(downloader)\noptions = {'images': [{'path': '%s/test-filename-1.png' % self.http_server.\n    url, 'if-matches': 'test pattern1'}]}\ntry:\n    config = config.create(options, self._EMPTY_SECRET_STORE)\n    self.assertIsInstance(config, ImageDependingOnMessageContent)\n    image_filters = config.filtered_images\n    self.assertEqual(1, len(image_filters), 'Single image has been configured')\n    image_and_filter = image_filters[0]\n    downloaded_files = downloader.get_downloaded_files()\n    self.assertEqual(1, len(downloaded_files),\n        'Single image has been downloaded')\n    download_path = downloaded_files[0]\n    self.assertEqual(download_path, image_and_filter['path'],\n        'Image path in handler matches path to downloaded file')\n    self.assertEqual('test pattern1', str(image_and_filter['filter'].\n        pattern), \"Image filter's pattern matches configuration\")\nfinally:\n    self.cleanup_downloaded_files(downloader, 'test-filename-1.png')\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_empty_approved_file_created_when_one_does_not_exist",
-    "className": "GenericDiffReporterTests",
-    "fileName": "/approvals_&_ApprovalTests.Python/tests_&_reporters_&_test_genericdiffreporter.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "namer = Namer()\nreceived = namer.get_received_filename()\napproved = namer.get_approved_filename()\nif os.path.isfile(approved):\n    os.remove(approved)\nself.assertFalse(os.path.isfile(approved))\nreporter = self.factory.get('BeyondCompare4')\nreporter.run_command = lambda command_array: None\nreporter.report(received, approved)\nself.assertEqual(0, os.stat(approved).st_size)\n"
-}

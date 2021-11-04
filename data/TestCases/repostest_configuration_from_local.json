@@ -1,9 +1,0 @@
-{
-    "functionName": "test_configuration_from_local",
-    "className": null,
-    "fileName": "/glentner_&_CmdKit/tests_&_test_config.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test Configuration.from_local factory method.\"\"\"\nfor label, data in TEST_CONFIG_SOURCES.items():\n    with open(f'{TMPDIR}/{label}.toml', mode='w') as output:\n        output.write(data)\nPREFIX = 'CMDKIT'\nfor var in dict(os.environ):\n    if var.startswith(PREFIX):\n        os.environ.pop(var)\nfor line in TEST_CONFIG_ENVIRON.strip().split('\\n'):\n    field, value = line.strip().split('=')\n    os.environ[field] = value\ndefault = Namespace.from_toml(StringIO(TEST_CONFIG_DEFAULT))\ncfg = Configuration.from_local(default=default, env=True, prefix=PREFIX,\n    system=f'{TMPDIR}/system.toml', user=f'{TMPDIR}/user.toml', local=\n    f'{TMPDIR}/local.toml')\nassert cfg.namespaces['default'] == Namespace.from_toml(StringIO(\n    TEST_CONFIG_DEFAULT))\nassert cfg.namespaces['system'] == Namespace.from_toml(StringIO(\n    TEST_CONFIG_SYSTEM))\nassert cfg.namespaces['user'] == Namespace.from_toml(StringIO(TEST_CONFIG_USER)\n    )\nassert cfg.namespaces['local'] == Namespace.from_toml(StringIO(\n    TEST_CONFIG_LOCAL))\nassert cfg.namespaces['env'] == Environ(PREFIX).reduce()\nassert cfg['a']['var0'] == 'default_var0' and cfg.which('a', 'var0'\n    ) == 'default'\nassert cfg['a']['var1'] == 'system_var1' and cfg.which('a', 'var1') == 'system'\nassert cfg['a']['var2'] == 'user_var2' and cfg.which('a', 'var2') == 'user'\nassert cfg['b']['var3'] == 'local_var3' and cfg.which('b', 'var3') == 'local'\nassert cfg['c']['var4'] == 'env_var4' and cfg.which('c', 'var4') == 'env'\nassert cfg['c']['var5'] == 'env_var5' and cfg.which('c', 'var5') == 'env'\n"
-}

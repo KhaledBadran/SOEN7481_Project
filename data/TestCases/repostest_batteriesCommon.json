@@ -1,9 +1,0 @@
-{
-    "functionName": "test_batteriesCommon",
-    "className": null,
-    "fileName": "/bakwc_&_PySyncObj/test_syncobj.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "d1 = ReplDict()\nl1 = ReplLockManager(autoUnlockTime=30.0)\nd2 = ReplDict()\nl2 = ReplLockManager(autoUnlockTime=30.0)\na = [getNextAddr(), getNextAddr()]\no1 = TestObj(a[0], [a[1]], TEST_TYPE.AUTO_TICK_1, consumers=[d1, l1])\no2 = TestObj(a[1], [a[0]], TEST_TYPE.AUTO_TICK_1, consumers=[d2, l2])\ndoAutoTicks(10.0, stopFunc=lambda : o1.isReady() and o2.isReady())\nassert o1.isReady() and o2.isReady()\nd1.set('testKey', 'testValue', sync=True)\ndoAutoTicks(3.0, stopFunc=lambda : d2.get('testKey') == 'testValue')\nassert d2['testKey'] == 'testValue'\nd2.pop('testKey', sync=True)\ndoAutoTicks(3.0, stopFunc=lambda : d1.get('testKey') == None)\nassert d1.get('testKey') == None\nassert l1.tryAcquire('test.lock1', sync=True) == True\nassert l2.tryAcquire('test.lock1', sync=True) == False\nassert l2.isAcquired('test.lock1') == False\nl1id = l1._ReplLockManager__selfID\nl1._ReplLockManager__lockImpl.prolongate(l1id, 0, _doApply=True)\nl1.release('test.lock1', sync=True)\nassert l2.tryAcquire('test.lock1', sync=True) == True\nassert d1.setdefault('keyA', 'valueA', sync=True) == 'valueA'\nassert d2.setdefault('keyA', 'valueB', sync=True) == 'valueA'\nd2.pop('keyA', sync=True)\nassert d2.setdefault('keyA', 'valueB', sync=True) == 'valueB'\no1.destroy()\no2.destroy()\nl1.destroy()\nl2.destroy()\n"
-}

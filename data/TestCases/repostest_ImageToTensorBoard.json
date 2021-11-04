@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ImageToTensorBoard",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_test_monitor.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Smoke test `ImageToTensorBoard` in Eager and Compiled mode.\"\"\"\ntmp_path = str(tmp_path)\ndef plotting_cb(fig, axes):\n    axes[0, 0].plot(np.random.randn(2), np.random.randn(2))\n    axes[1, 0].plot(np.random.randn(2), np.random.randn(2))\n    axes[0, 1].plot(np.random.randn(2), np.random.randn(2))\n    axes[1, 1].plot(np.random.randn(2), np.random.randn(2))\nfig_kwargs = dict(figsize=(10, 10))\nsubplots_kwargs = dict(sharex=True, nrows=2, ncols=2)\ntask = ImageToTensorBoard(tmp_path, plotting_cb, 'image', fig_kw=fig_kwargs,\n    subplots_kw=subplots_kwargs)\ntask(0)\ncompiled_task = tf.function(task)\ncompiled_task(0)\n"
-}

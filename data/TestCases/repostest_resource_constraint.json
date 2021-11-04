@@ -1,9 +1,0 @@
-{
-    "functionName": "test_resource_constraint",
-    "className": null,
-    "fileName": "/open-source-economics_&_OG-USA/ogusa_&_tests_&_test_aggregates.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test resource constraint equation.\n    \"\"\"\np = Specifications()\np.delta = 0.05\nY = np.array([48, 55, 2, 99, 8])\nC = np.array([33, 44, 0.4, 55, 6])\nG = np.array([4, 5, 0.01, 22, 0])\nI = np.array([20, 5, 0.6, 10, 1])\nK_f = np.array([0, 0, 0.2, 3, 0.05])\nnew_borrowing_f = np.array([0, 0.1, 0.3, 4, 0.5])\ndebt_service_f = np.array([0.1, 0.1, 0.3, 2, 0.02])\nr = np.array([0.03, 0.04, 0.03, 0.06, 0.01])\nexpected = np.array([-9.1, 1, 0.974, 13.67, 1.477])\ntest_RC = aggr.resource_constraint(Y, C, G, I, K_f, new_borrowing_f,\n    debt_service_f, r, p)\nassert np.allclose(test_RC, expected)\n"
-}

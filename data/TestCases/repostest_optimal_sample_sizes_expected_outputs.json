@@ -1,9 +1,0 @@
-{
-    "functionName": "test_optimal_sample_sizes_expected_outputs",
-    "className": null,
-    "fileName": "/NASA_&_MLMCPy/tests_&_mlmc_&_test_MLMCSimulator.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Tests samples sizes produced by simulator's compute_optimal_sample_sizes()\n    against expected computed sample sizes for various sets of parameters.\n    \"\"\"\ntest_mlmc = MLMCSimulator(models=models_from_data[:2], data=data_input)\ndata_input._data = np.broadcast_to(data_input._data, (data_input._data.\n    shape[0], num_qoi))\ntest_mlmc._epsilons = epsilons\ncosts = np.array([1.0, 4.0])\ntest_mlmc._compute_optimal_sample_sizes(costs, np.array(variances))\nsample_sizes = test_mlmc._sample_sizes\nif num_qoi == 1:\n    expected_sample_size = [800, 200]\nelse:\n    expected_sample_size = [80000, 20000]\nassert np.all(np.isclose(sample_sizes, expected_sample_size, atol=1))\npytest.mark.parametrize('num_qoi, variances, epsilons', [[1, [[4.0], [1.0]],\n    [0.1]], [2, [[4.0, 4.0], [1, 1.0]], [0.1, 0.01]], [3, [[4.0, 4.0, 4.0],\n    [1, 1.0, 1.0]], [0.1, 1.0, 0.01]]])"
-}

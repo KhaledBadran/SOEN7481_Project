@@ -1,9 +1,0 @@
-{
-    "functionName": "_iter_time",
-    "className": "Brain",
-    "fileName": "/nipy_&_PySurfer/surfer_&_viz.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Iterate through time points, then reset to current time\n\n        Parameters\n        ----------\n        time_idx : array_like\n            Time point indexes through which to iterate.\n        interpolation : str\n            Interpolation method (``scipy.interpolate.interp1d`` parameter,\n            one of 'linear' | 'nearest' | 'zero' | 'slinear' | 'quadratic' |\n            'cubic'). Interpolation is only used for non-integer indexes.\n\n        Yields\n        ------\n        idx : int | float\n            Current index.\n\n        Notes\n        -----\n        Used by movie and image sequence saving functions.\n        \"\"\"\ncurrent_time_idx = self.data_time_index\nfor idx in time_idx:\n    self.set_data_time_index(idx, interpolation)\n    yield idx\nself.set_data_time_index(current_time_idx)\n"
-}

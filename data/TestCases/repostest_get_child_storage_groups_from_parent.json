@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_child_storage_groups_from_parent",
-    "className": "CITestProvisioning",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test get_child_storage_groups_from_parent.\"\"\"\nparent_storage_group_name = self.create_empty_storage_group()\nchild_storage_group_name = self.create_empty_storage_group()\nself.provisioning.add_child_storage_group_to_parent_group(\n    child_storage_group_name, parent_storage_group_name)\nchild_list = self.provisioning.get_child_storage_groups_from_parent(\n    parent_storage_group_name)\nself.assertIsInstance(child_list, list)\nself.assertIsNot(0, len(child_list))\nself.assertIn(child_storage_group_name, child_list)\nfor child in child_list:\n    self.provisioning.remove_child_storage_group_from_parent_group(child,\n        parent_storage_group_name)\n    self.provisioning.delete_storage_group(child)\n"
-}

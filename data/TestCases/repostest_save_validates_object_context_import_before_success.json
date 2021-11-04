@@ -1,9 +1,0 @@
-{
-    "functionName": "test_save_validates_object_context_import_before_success",
-    "className": "OWMTest",
-    "fileName": "/openworm_&_PyOpenWorm/tests_&_CommandTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "a = 'http://example.org/mdc'\ns = URIRef('http://example.org/node')\nself._init_conf({DEFAULT_CONTEXT_KEY: a})\nwith patch('importlib.import_module') as im:\n\n    def f(ns):\n        ctx = ns.context\n        stmt = MagicMock(name='stmt')\n        new_ctx = Context(ident=URIRef(a))\n        stmt.to_triple.return_value = s, s, s\n        stmt.object.context.identifier = new_ctx.identifier\n        stmt.property.context.identifier = URIRef(a)\n        stmt.subject.context.identifier = URIRef(a)\n        stmt.context.identifier = URIRef(a)\n        ctx.add_import(new_ctx)\n        ctx.add_statement(stmt)\n    im().test = f\n    self.cut.save('tests', 'test')\n"
-}

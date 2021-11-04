@@ -1,9 +1,0 @@
-{
-    "functionName": "test_verify_signature_invalid_signing_key",
-    "className": "TestCryptographyEngine",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_crypto_&_test_engine.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the right error is raised when an invalid signing key is\n        used.\n        \"\"\"\nengine = crypto.CryptographyEngine()\nargs = 'invalid', b'', b'', enums.PaddingMethod.PSS\nkwargs = {'signing_algorithm': enums.CryptographicAlgorithm.RSA,\n    'hashing_algorithm': enums.HashingAlgorithm.SHA_1,\n    'digital_signature_algorithm': None}\nself.assertRaisesRegex(exceptions.CryptographicFailure,\n    'The signing key bytes could not be loaded.', engine.verify_signature,\n    *args, **kwargs)\n"
-}

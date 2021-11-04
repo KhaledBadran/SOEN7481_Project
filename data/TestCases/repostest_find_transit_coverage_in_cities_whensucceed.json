@@ -1,9 +1,0 @@
-{
-    "functionName": "test_find_transit_coverage_in_cities_whensucceed",
-    "className": "PublicTransitApiTest",
-    "fileName": "/abdullahselek_&_HerePy/tests_&_test_publictransit_api.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with io.open('testdata/models/public_transit_api_coverage_cities.json', 'r',\n    encoding='utf-8') as f:\n    expectedResponse = f.read()\nresponses.add(responses.GET,\n    'https://transit.ls.hereapi.com/v3/coverage/city.json',\n    expectedResponse, status=200)\nresponse = self._api.find_transit_coverage_in_cities([42.358, -71.0636],\n    'USA', 50000)\nself.assertTrue(response)\nself.assertIsInstance(response, herepy.PublicTransitResponse)\nresponses.activate"
-}

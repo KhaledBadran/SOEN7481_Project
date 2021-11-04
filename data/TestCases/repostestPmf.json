@@ -1,9 +1,0 @@
-{
-    "functionName": "testPmf",
-    "className": "Test",
-    "fileName": "/AllenDowney_&_EmpyricalDistributions/empiricaldist_&_test_empiricaldist.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "t = list('allen')\npmf = Pmf.from_seq(t)\nself.assertEqual(len(pmf), 4)\nself.assertEqual(pmf['l'], 0.4)\npmf = Pmf(pmf)\nself.assertEqual(len(pmf), 4)\nself.assertEqual(pmf['l'], 0.4)\npmf = Pmf(Counter(t))\nself.assertEqual(len(pmf), 4)\nself.assertEqual(pmf['l'], 2)\npmf2 = pmf.copy()\nself.assertEqual(len(pmf), 4)\nself.assertEqual(pmf['l'], 2)\nnp.random.seed(42)\npmf.normalize()\nxs = pmf.choice(7, replace=True)\nself.assertListEqual(xs.tolist(), ['l', 'n', 'e', 'l', 'a', 'a', 'a'])\nt = [1, 2, 2, 3, 5]\npmf = Pmf.from_seq(t, normalize=False)\npmf[0] = 0\npmf.sort_index(inplace=True)\nself.assertListEqual(list(pmf), [0, 1, 2, 1, 1])\nself.assertEqual(pmf(3), 1)\nself.assertEqual(pmf(4), 0)\nself.assertEqual(pmf('a'), 0)\nxs = [0, 1, 2, 3, 4, 5, 6]\nres = pmf(xs)\nself.assertListEqual(list(res), [0, 1, 2, 1, 0, 1, 0])\n"
-}

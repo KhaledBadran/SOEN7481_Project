@@ -1,9 +1,0 @@
-{
-    "functionName": "test_union",
-    "className": "TestCells",
-    "fileName": "/mit-crpg_&_OpenMOC/tests_&_unit_tests_&_test_regions.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "union = openmoc.Union()\np1x = openmoc.XPlane(x=3)\np2x = openmoc.XPlane(x=-2)\np1y = openmoc.YPlane(y=1)\np2y = openmoc.YPlane(y=-0.5)\np1z = openmoc.ZPlane(z=8)\np2z = openmoc.ZPlane(z=-4)\np1x.setBoundaryType(openmoc.VACUUM)\np2x.setBoundaryType(openmoc.REFLECTIVE)\np1y.setBoundaryType(openmoc.PERIODIC)\np2y.setBoundaryType(openmoc.REFLECTIVE)\np1z.setBoundaryType(openmoc.PERIODIC)\np2z.setBoundaryType(openmoc.VACUUM)\nh1x = openmoc.Halfspace(-1, p1x)\nh2x = openmoc.Halfspace(+1, p2x)\nh1y = openmoc.Halfspace(-1, p1y)\nh2y = openmoc.Halfspace(+1, p2y)\nh1z = openmoc.Halfspace(-1, p1z)\nh2z = openmoc.Halfspace(+1, p2z)\nunion.addNode(h1x, True)\nself.assertEqual(union.getMaxX(), 3)\nself.assertEqual(union.getMaxXBoundaryType(), openmoc.VACUUM)\nunion = openmoc.Union()\nunion.addNode(h1y)\nself.assertEqual(union.getMaxY(), 1)\nself.assertEqual(union.getMaxYBoundaryType(), openmoc.PERIODIC)\nunion = openmoc.Union()\nunion.addNode(h1z)\nself.assertEqual(union.getMaxZ(), 8)\nself.assertEqual(union.getMaxZBoundaryType(), openmoc.PERIODIC)\nunion = openmoc.Union()\nunion.addNode(h2x)\nself.assertEqual(union.getMinX(), -2)\nself.assertEqual(union.getMinXBoundaryType(), openmoc.REFLECTIVE)\nunion = openmoc.Union()\nunion.addNode(h2y)\nself.assertEqual(union.getMinY(), -0.5)\nself.assertEqual(union.getMinYBoundaryType(), openmoc.REFLECTIVE)\nunion = openmoc.Union()\nunion.addNode(h2z)\nself.assertEqual(union.getMinZ(), -4)\nself.assertEqual(union.getMinZBoundaryType(), openmoc.VACUUM)\n"
-}

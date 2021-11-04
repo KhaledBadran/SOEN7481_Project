@@ -1,9 +1,0 @@
-{
-    "functionName": "test_add_residue2",
-    "className": null,
-    "fileName": "/mtien_&_PeptideBuilder/tests_&_test_PeptideBuilder.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Build a helix containing all 20 amino acids, with slowly varying backbone angles\n    \"\"\"\nphi = -60\npsi_im1 = -40\ngeo = Geometry.geometry('A')\ngeo.phi = phi\ngeo.psi_im1 = psi_im1\nstructure = PeptideBuilder.initialize_res(geo)\nfor aa in 'CDEFGHIKLMNPQRSTVWY':\n    phi += 1\n    psi_im1 -= 1\n    geo = Geometry.geometry(aa)\n    geo.phi = phi\n    geo.psi_im1 = psi_im1\n    PeptideBuilder.add_residue(structure, geo)\nassert compare_to_reference(structure, 'helix.pdb')\n"
-}

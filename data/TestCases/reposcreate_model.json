@@ -1,9 +1,0 @@
-{
-    "functionName": "create_model",
-    "className": "BertModelTester",
-    "fileName": "/kpi6research_&_Bert-as-a-Library/BertLibrary_&_bert_&_modeling_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "input_ids = BertModelTest.ids_tensor([self.batch_size, self.seq_length],\n    self.vocab_size)\ninput_mask = None\nif self.use_input_mask:\n    input_mask = BertModelTest.ids_tensor([self.batch_size, self.seq_length\n        ], vocab_size=2)\ntoken_type_ids = None\nif self.use_token_type_ids:\n    token_type_ids = BertModelTest.ids_tensor([self.batch_size, self.\n        seq_length], self.type_vocab_size)\nconfig = modeling.BertConfig(vocab_size=self.vocab_size, hidden_size=self.\n    hidden_size, num_hidden_layers=self.num_hidden_layers,\n    num_attention_heads=self.num_attention_heads, intermediate_size=self.\n    intermediate_size, hidden_act=self.hidden_act, hidden_dropout_prob=self\n    .hidden_dropout_prob, attention_probs_dropout_prob=self.\n    attention_probs_dropout_prob, max_position_embeddings=self.\n    max_position_embeddings, type_vocab_size=self.type_vocab_size,\n    initializer_range=self.initializer_range)\nmodel = modeling.BertModel(config=config, is_training=self.is_training,\n    input_ids=input_ids, input_mask=input_mask, token_type_ids=\n    token_type_ids, scope=self.scope)\noutputs = {'embedding_output': model.get_embedding_output(),\n    'sequence_output': model.get_sequence_output(), 'pooled_output': model.\n    get_pooled_output(), 'all_encoder_layers': model.get_all_encoder_layers()}\nreturn outputs\n"
-}

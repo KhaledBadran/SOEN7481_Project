@@ -1,9 +1,0 @@
-{
-    "functionName": "test_write_missing_private_key_template_attribute",
-    "className": "TestCreateKeyPairResponsePayload",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_create_key_pair.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a CreateKeyPair response payload can be written to a data\n        stream even when missing the private key template attribute.\n        \"\"\"\npayload = payloads.CreateKeyPairResponsePayload(private_key_unique_identifier\n    ='7f7ee394-40f9-444c-818c-fb1ae57bdf15', public_key_unique_identifier=\n    '79c0eb55-d020-43de-b72f-5e18c862647c', public_key_template_attribute=\n    objects.TemplateAttribute(attributes=[objects.Attribute(attribute_name=\n    objects.Attribute.AttributeName('State'), attribute_value=primitives.\n    Enumeration(enums.State, value=enums.State.PRE_ACTIVE, tag=enums.Tags.\n    STATE))], tag=enums.Tags.PUBLIC_KEY_TEMPLATE_ATTRIBUTE))\nstream = utils.BytearrayStream()\npayload.write(stream)\nself.assertEqual(len(self.no_private_key_template_attr_encoding), len(stream))\nself.assertEqual(str(self.no_private_key_template_attr_encoding), str(stream))\n"
-}

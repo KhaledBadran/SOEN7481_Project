@@ -1,9 +1,0 @@
-{
-    "functionName": "test_when_validation_limitations",
-    "className": "TestValidationMessages",
-    "fileName": "/hdoupe_&_ParamTools/paramtools_&_tests_&_test_parameters.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        When validation prohibits child validators from doing referential violation\n        when the other parameter is an array type (number_dims > 0).\n        \"\"\"\nclass Params(Parameters):\n    defaults = {'param': {'title': '', 'description': '', 'type': 'int',\n        'number_dims': 1, 'value': [0, 0], 'validators': {'when': {'param':\n        'when_param', 'is': {'less_than': 0}, 'then': {'range': {'min': 0}},\n        'otherwise': {'range': {'min': 'when_param'}}}}}, 'when_param': {\n        'title': '', 'description': '', 'type': 'int', 'number_dims': 1,\n        'value': [3, 5]}}\nparams = Params(array_first=True)\nwith pytest.raises(ValidationError) as excinfo:\n    params.adjust({'param': [4, 6]})\nmsg = json.loads(excinfo.value.args[0])['errors']\nassert msg == {'schema': [\n    \"Data format error: ['param is validated against when_param in an invalid context.']\"\n    ]}\nclass Params(Parameters):\n    defaults = {'param': {'title': '', 'description': '', 'type': 'int',\n        'number_dims': 1, 'value': [0, 0], 'validators': {'when': {'param':\n        'default', 'is': {'less_than': 0}, 'then': {'range': {'min': 0}},\n        'otherwise': {'range': {'min': 'default'}}}}}}\nparams = Params(array_first=True)\nwith pytest.raises(ValidationError) as excinfo:\n    params.adjust({'param': [4, 6]})\nmsg = json.loads(excinfo.value.args[0])['errors']\nassert msg == {'schema': [\n    \"Data format error: ['param is validated against default in an invalid context.']\"\n    ]}\n"
-}

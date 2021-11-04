@@ -1,9 +1,0 @@
-{
-    "functionName": "synthesize_random_network",
-    "className": null,
-    "fileName": "/KnowEnG_&_KnowEnG_Pipelines_Library/test_&_unit_&_test_perform_net_nmf.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" symmetric random adjacency matrix from random set of nodes\n    Args:\n        network_dim: number of rows and columns in the symmetric output matrix\n        n_nodes: number of connections (approximate because duplicates are ignored)\n    Returns:\n        network: a symmetric adjacency matrix (0 or 1 in network_dim x network_dim matrix)\n    \"\"\"\nnetwork = np.zeros((network_dim, network_dim))\ncol_0 = np.random.randint(0, network_dim, n_nodes)\ncol_1 = np.random.randint(0, network_dim, n_nodes)\nfor node in range(0, n_nodes):\n    if col_0[node] != col_1[node]:\n        network[col_0[node], col_1[node]] = 1\nnetwork = network + network.T\nnetwork[network != 0] = 1\nreturn network\n"
-}

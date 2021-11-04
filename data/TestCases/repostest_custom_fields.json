@@ -1,9 +1,0 @@
-{
-    "functionName": "test_custom_fields",
-    "className": "TestSchema",
-    "fileName": "/hdoupe_&_ParamTools/paramtools_&_tests_&_test_parameters.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class Custom(ma.Schema):\n    hello = ma.fields.Boolean()\n    world = ma.fields.Boolean()\nregister_custom_type('custom_type', ma.fields.Nested(Custom()))\nclass Params(Parameters):\n    defaults = {'schema': {'labels': {'custom_label': {'type':\n        'custom_type'}}, 'additional_members': {'custom': {'type':\n        'custom_type'}}}, 'param': {'title': '', 'description': '', 'type':\n        'int', 'value': [{'custom_label': {'hello': True}, 'value': 0}],\n        'custom': {'hello': True, 'world': True}}}\nparams = Params()\nassert params\nassert params._data['param']['custom'] == {'hello': True, 'world': True}\nclass BadSpec(Parameters):\n    field_map = {'custom_type': ma.fields.Nested(Custom)}\n    defaults = {'schema': {'additional_members': {'custom': {'type':\n        'custom_type'}}}, 'param': {'title': '', 'description': '', 'type':\n        'int', 'value': 0, 'custom': {'hello': 123, 'world': 'whoops'}}}\nwith pytest.raises(ma.ValidationError):\n    BadSpec()\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_substrate",
-    "className": null,
-    "fileName": "/Patarimi_&_PassiveAutoDesign/tests_&_test_substrate.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "SUB = sb.Substrate()\nM_LYR = sb.Layer('m_bott', 0.0001, sb.COPPER, sb.AIR)\nM_LYR.set_rules(0.000508, 0.01, 0.000508)\nD_LYR = sb.Layer('core', 0.0008, sb.COPPER, sb.D5880)\nD_LYR.set_rules(0.000508, 0.01, 0.000508)\nSUB.add_layer(M_LYR)\nSUB.add_layer(D_LYR)\nSUB.add_layer(M_LYR)\nwith pytest.raises(ValueError):\n    SUB.dump('tests')\nSUB.dump('tests/tech.yml')\nSUB.load('tests/tech.yml')\nassert SUB.get_index_of('m_bott') == 0\nwith pytest.raises(ValueError):\n    SUB.get_index_of('foo')\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_rollaxis_idempotent",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_conditionals_&_test_util.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "A = np.random.randn(10, 5, 3, 20, 1)\nA_tf = tf.convert_to_tensor(A)\nA_left_right = rollaxis_left(rollaxis_right(A_tf, 2), 2)\nA_right_left = rollaxis_right(rollaxis_left(A_tf, 2), 2)\nassert_allclose(A, A_left_right)\nassert_allclose(A, A_right_left)\npytest.mark.parametrize('rolls', [1, 2])"
-}

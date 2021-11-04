@@ -1,9 +1,0 @@
-{
-    "functionName": "plot_tutorial",
-    "className": null,
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_topotools_&_plottools.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Generate a network plot suitable for tutorials and explanations.\n\n    Parameters\n    ----------\n    network : OpenPNM Network object\n        The network to plot, should be 2D, since the z-coordinate will be\n        ignored.\n    font_size : int\n        Size of font to use for labels\n    line_width : int\n        Thickness of edge lines and node borders\n    node_color : str\n        Color of node border\n    edge_color : str\n        Color of edge lines\n    node_size : int\n        Size of node circle\n\n    Returns\n    -------\n    g : NetworkX plot object\n\n    \"\"\"\nfrom openpnm.io import NetworkX\nG = NetworkX.to_networkx(network=network)\npos = {i: network['pore.coords'][(i), 0:2] for i in network.Ps}\nlabels = {i: i for i in network.Ps}\nedge_labels = {tuple(network['throat.conns'][(i), :]): i for i in network.Ts}\ngplot = nx.draw_networkx_nodes(G, pos, node_size=node_size, node_color='w',\n    edgecolors=node_color, linewidths=line_width)\nnx.draw_networkx_edges(G, pos, width=line_width, edge_color=edge_color)\nnx.draw_networkx_labels(G, pos, labels=labels, font_size=font_size,\n    font_color='k')\nnx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_size=\n    font_size, font_color='k')\nplt.axis('off')\nreturn gplot\n"
-}

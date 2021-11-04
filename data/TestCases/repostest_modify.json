@@ -1,9 +1,0 @@
-{
-    "functionName": "test_modify",
-    "className": null,
-    "fileName": "/Drakkar-Software_&_OctoBot-Channels/tests_&_test_channel.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "producer = EmptyTestProducer(test_channel)\nawait test_channel.register_producer(producer)\nproducer_2 = EmptyTestProducer(test_channel)\nawait test_channel.register_producer(producer_2)\nwith patch.object(producer, 'modify', new=AsyncMock()\n    ) as mocked_producer_1_modify:\n    with patch.object(producer_2, 'modify', new=AsyncMock()\n        ) as mocked_producer_2_modify:\n        await get_chan(EMPTY_TEST_CHANNEL).modify()\n        await mock_was_called_once(mocked_producer_1_modify)\n        await mock_was_called_once(mocked_producer_2_modify)\npytest.mark.asyncio"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_SplitParagraphBlocksFilter",
-    "className": null,
-    "fileName": "/jmriebold_&_BoilerPy3/tests_&_test_filters.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "doc = make_doc(['A single paragraph.',\n    \"\"\"Multiple paragraphs.\n\nParagraph 2 is here.\"\"\"], None, [True, False])\nfiltr = SplitParagraphBlocksFilter()\nis_changed = filtr.process(doc)\ntext_arr = [block.text for block in doc.text_blocks]\nis_content = [block.is_content for block in doc.text_blocks]\nassert text_arr == ['A single paragraph.', 'Multiple paragraphs.',\n    'Paragraph 2 is here.']\nassert is_content == [True, False, False]\nassert is_changed is True\n"
-}

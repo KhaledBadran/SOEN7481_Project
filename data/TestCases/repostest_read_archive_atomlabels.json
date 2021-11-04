@@ -1,9 +1,0 @@
-{
-    "functionName": "test_read_archive_atomlabels",
-    "className": "TestReadDlpoly",
-    "fileName": "/symmy596_&_PolyPy/polypy_&_tests_&_test_dlmpy.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Read entire trajectory from ARCHIVE\n        Check that labels of atoms in configurations match\"\"\"\narchive_file = test_data_dir + 'sample_configs/ARCHIVE1'\ntraj = dlmpy.read_trajectory(archive_file)\nexpect_labels = [[['A'], ['B', 'C']], [['D'], ['E', 'F']], [['G'], ['H', 'I']]]\nfor iconfig in range(traj['numconfigs']):\n    this_config = traj[iconfig]\n    for imol in range(this_config['nummols']):\n        this_mol = this_config['mols'][imol]\n        for iatom in range(this_mol['numatoms']):\n            this_atom = this_mol['atoms'][iatom]\n            assert this_atom['label'] == expect_labels[iconfig][imol][iatom]\n"
-}

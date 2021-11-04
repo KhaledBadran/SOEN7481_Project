@@ -1,9 +1,0 @@
-{
-    "functionName": "test_GetProjectAttributes",
-    "className": null,
-    "fileName": "/incf-nidash_&_PyNIDM/nidm_&_experiment_&_tests_&_test_query.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "if not Path('./cmu_a.nidm.ttl').is_file():\n    urllib.request.urlretrieve(\n        'https://raw.githubusercontent.com/dbkeator/simple2_NIDM_examples/master/datasets.datalad.org/abide/RawDataBIDS/CMU_a/nidm.ttl'\n        , 'cmu_a.nidm.ttl')\nfiles = tuple(['cmu_a.nidm.ttl'])\nproject_list = Query.GetProjectsUUID(files)\nprint(project_list)\nproject_uuid = str(project_list[0])\nproject_attributes = nidm.experiment.Navigate.GetProjectAttributes(files,\n    project_uuid)\nassert 'prov:Location' in project_attributes or 'Location' in project_attributes\nassert 'dctypes:title' in project_attributes or 'title' in project_attributes\nassert 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' in project_attributes or 'type' in project_attributes\nassert 'AcquisitionModality' in project_attributes\nassert 'ImageContrastType' in project_attributes\nassert 'Task' in project_attributes\nassert 'ImageUsageType' in project_attributes\n"
-}

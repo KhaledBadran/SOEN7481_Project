@@ -1,9 +1,0 @@
-{
-    "functionName": "test_Particles",
-    "className": null,
-    "fileName": "/OpenSMFS_&_PyBroMo/pybromo_&_tests_&_test_diffusion.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "rs = np.random.RandomState(_SEED)\nP = pbm.Particles(num_particles=20, D=D1, box=box, rs=rs)\nP.add(num_particles=15, D=D2)\nassert P.particles_counts == [20, 15]\nassert P.num_populations == 2\nassert P.diffusion_coeff_counts == [(D1, 20), (D2, 15)]\nwith pytest.raises(ValueError):\n    P.add(num_particles=1, D=D1)\nx1 = P.num_particles_to_slices((7, 8))\nx2 = [slice(0, 7, None), slice(7, 7 + 8, None)]\nfor s1, s2 in zip(x1, x2):\n    assert s1 == s2\nDi, counts = zip(*P.diffusion_coeff_counts)\nrs2 = np.random.RandomState()\nrs2.set_state(P.init_random_state)\nP2_list = pbm.Particles._generate(num_particles=counts[0], D=Di[0], box=P.\n    box, rs=rs2)\nP2_list += pbm.Particles._generate(num_particles=counts[1], D=Di[1], box=P.\n    box, rs=rs2)\nassert P.to_list() == P2_list\nassert randomstate_equal(P.rs, rs.get_state())\nassert randomstate_equal(P.init_random_state, np.random.RandomState(_SEED))\nassert not randomstate_equal(P.init_random_state, P.rs)\nP_json = P.to_json()\nP3 = pbm.Particles.from_json(P_json)\nassert P.to_list() == P3.to_list()\nrs = np.random.RandomState(_SEED)\nP4 = pbm.Particles.from_specs(num_particles=(20, 15), D=(D1, D2), box=box,\n    rs=rs)\nassert P4.to_list() == P2_list\n"
-}

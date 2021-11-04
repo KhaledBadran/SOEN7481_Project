@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_volume_effective_wwn_details_no_output_file",
-    "className": "CITestProvisioning",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test get_volume_effective_wwn_details.\"\"\"\nvolume_list = self.provisioning.get_volume_list()\nselected_volume_list = list()\nselected_volume_details = None\nfor volume in volume_list:\n    volume_details = self.provisioning.get_volume(volume)\n    if volume_details[constants.HAS_EFFECTIVE_WWN]:\n        selected_volume_list.append(volume)\n        selected_volume_details = volume_details\n        break\nif selected_volume_details is None:\n    self.skipTest(\n        'test_get_volume_effective_wwn_details_no_output_file - could not find a volume with effective wwn flag set to true.'\n        )\nwwn_details_list = self.provisioning.get_volume_effective_wwn_details(\n    selected_volume_list)[0]\nkeys_list = [constants.VOLUME_ID, constants.EFFECTIVE_WWN, constants.WWN,\n    constants.HAS_EFFECTIVE_WWN, constants.STORAGE_GROUP_ID]\n_zip = zip(keys_list, wwn_details_list)\nwwn_details_dict = dict(_zip)\nfor key, val in wwn_details_dict.items():\n    wwn_details_dict[key] = [val]\nself._validate_effective_wwn_details(selected_volume_details, wwn_details_dict)\n"
-}

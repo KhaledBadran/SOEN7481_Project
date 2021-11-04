@@ -1,9 +1,0 @@
-{
-    "functionName": "test_bug_update_updates_copy_dict",
-    "className": null,
-    "fileName": "/AutomatedTester_&_Bugsy/tests_&_test_bugs.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "responses.add(responses.GET, 'https://bugzilla.mozilla.org/rest/login',\n    body='{\"token\": \"foobar\"}', status=200, content_type='application/json',\n    match_querystring=True)\nbugzilla = Bugsy('foo', 'bar')\nbug = Bug(bugzilla, **bug_return['bugs'][0])\nbug.status = 'NEW'\ndiff = bug.diff()\nbug_dict = copy.deepcopy(bug_return)\nbug_dict['bugs'][0]['status'] = 'NEW'\nresponses.add(responses.GET,\n    'https://bugzilla.mozilla.org/rest/bug/1017315', body=json.dumps(\n    bug_dict), status=200, content_type='application/json')\nresponses.add(responses.PUT,\n    'https://bugzilla.mozilla.org/rest/bug/1017315', body=json.dumps(diff),\n    status=200, content_type='application/json')\nbugzilla.put(bug)\nbug.update()\nassert bug._copy['status'] == 'NEW'\nresponses.activate"
-}

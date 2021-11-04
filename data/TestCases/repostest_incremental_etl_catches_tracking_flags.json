@@ -1,9 +1,0 @@
-{
-    "functionName": "test_incremental_etl_catches_tracking_flags",
-    "className": "TestETL",
-    "fileName": "/klahnakoski_&_Bugzilla-ETL/tests_&_test_etl.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "bug = 813650\ndatabase.make_test_instance(self.settings.bugzilla)\nFile(self.settings.param.first_run_time).delete()\nFile(self.settings.param.last_run_time).delete()\nwith MySQL(self.settings.bugzilla) as db:\n    es = fake_elasticsearch.make_test_instance(self.settings.public.bugs)\n    param = Data()\n    param.end_time = convert.datetime2milli(get_current_time(db))\n    param.start_time = convert.datetime2milli(convert.string2datetime(\n        '02/01/2013 10:09:15', '%d/%m/%Y %H:%M:%S'))\n    param.start_time_str = extract_bugzilla.milli2string(db, param.start_time)\n    param.alias_file = self.settings.param.alias_file\n    param.bug_list = [bug]\n    param.allow_private_bugs = self.settings.param.allow_private_bugs\n    with es.threaded_queue(batch_size=1000) as output:\n        etl(db, output, param, self.alias_analyzer, please_stop=None)\n    refresh_metadata(es)\n    versions = get_all_bug_versions(es, bug)\n    if not versions:\n        Log.error('expecting bug version records')\n    flags = ['cf_status_firefox18', 'cf_status_firefox19',\n        'cf_status_firefox_esr17', 'cf_status_b2g18']\n    for v in versions:\n        if v.modified_ts > param.start_time:\n            for f in flags:\n                if v[f] != 'fixed':\n                    Log.error(\n                        \"813650 should have {{flag}}=='fixed'. Instead it is {{value|json}}\"\n                        , flag=f, value=v[f])\n"
-}

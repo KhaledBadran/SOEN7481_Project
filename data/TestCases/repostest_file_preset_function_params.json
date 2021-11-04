@@ -1,9 +1,0 @@
-{
-    "functionName": "test_file_preset_function_params",
-    "className": "TestConfigure",
-    "fileName": "/axiros_&_DevApps/tests_&_test_configure.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        This is a bit of a crazy feature:\n\n        We mutate the defaults(!) of functions in the tree according to\n        what is given in the config file:\n        \"\"\"\nargv = self.test_ok(get_argv=True)\nwrite_file({'foo': 2, 'i_no_dflt': 100, 'i_dflt': 101, 'func1': {'bar1': \n    123.2, 'baz': True}, 'inner': {'ifoo': 3, 'inner': {'foo': 42}, 'deep':\n    {'b_d_dflt': False, 'deep': {'foo1': 43}, 'deep_func1': {'bar': 1.2,\n    'baz': False}}}})\napp = self.configure([CLI(argv), File(fn_test)])[0]\napp = app()\ndeep = inner(app, 'inner', 'deep')\nres = deep.do_deep_func1(foo='myfoo')\nassert res == {'deep_func1': ('myfoo', 1.2, False, {'deep_deep': (\n    'myfoomyfoo', 43, {'root config': (True, 23, 101)}, {'inner.do_inner':\n    {'app.do_func1': {'args': (), 'bar1': 123.2, 'baz': True, 'foo': ((\n    'myfoomyfoo', 43), 42), 'kw': {}}}})})}\nself.setup_method()\nargv.append('-hhc')\napp, func = self.configure([CLI(argv), File(fn_test)])[:2]\nres = func(app())\nprint(res)\nassert '```python' in res\nassert 'def do_deep_func1' in res\nassert 'return {' in res\nassert '### Actions\\n' in res\n"
-}

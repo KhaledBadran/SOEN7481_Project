@@ -1,9 +1,0 @@
-{
-    "functionName": "test_bam_to_h5",
-    "className": null,
-    "fileName": "/Puumanamana_&_CoCoNet/tests_&_test_preprocessing.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test if depth from samtools can be converted to h5\n    \"\"\"\nbam_file = Path('{}/sim_data/sample_1.bam'.format(LOCAL_DIR))\nctg_info = {seq.id: len(seq.seq) for seq in SeqIO.parse(\n    '{}/sim_data/assembly.fasta'.format(LOCAL_DIR), 'fasta')}\nh5 = bam_to_h5(bam_file, '/tmp', ctg_info)\nassert h5.is_file()\nh5.unlink()\n"
-}

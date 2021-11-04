@@ -1,9 +1,0 @@
-{
-    "functionName": "test_locals",
-    "className": null,
-    "fileName": "/fireeye_&_FIDL/FIDL_&_tests_&_test_common.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Checks the `lvars` in a `controlFlowinator` object\"\"\"\nfor f_ea, locals_info in locals_in_putty.items():\n    c = du.controlFlowinator(ea=f_ea, fast=False)\n    if not c:\n        continue\n    for i, lv in c.lvars.items():\n        name = lv.name\n        namez = locals_info[i]['name']\n        assert name == namez\n        size = lv.size\n        sizez = locals_info[i]['size']\n        assert size == sizez\n        calc_type = lv.type_name\n        must_type = locals_info[i]['type_name']\n        assert Counter(calc_type) == Counter(must_type)\n"
-}

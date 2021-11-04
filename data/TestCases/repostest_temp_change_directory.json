@@ -1,9 +1,0 @@
-{
-    "functionName": "test_temp_change_directory",
-    "className": null,
-    "fileName": "/Pebaz_&_Nimporter/tests_&_test_build.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test to see if the nimporter.cd function actually works.\"\"\"\ncwd = Path('.').absolute()\ntemp_dir = Path('nim-temp').absolute()\ntry:\n    temp_dir.mkdir()\n    with nimporter.cd(temp_dir) as tmp:\n        assert tmp == temp_dir\n        assert Path().resolve() == temp_dir\n        assert Path().resolve() == tmp\n    assert Path().resolve() == cwd\nfinally:\n    temp_dir.rmdir()\n"
-}

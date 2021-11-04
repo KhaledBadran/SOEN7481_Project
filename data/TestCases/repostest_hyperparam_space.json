@@ -1,9 +1,0 @@
-{
-    "functionName": "test_hyperparam_space",
-    "className": null,
-    "fileName": "/Neuraxio_&_Neuraxle/testing_&_test_pipeline.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "p = Pipeline([AddFeatures([SomeStep(hyperparams_space=HyperparameterSpace({\n    'n_components': RandInt(1, 5)})), SomeStep(hyperparams_space=\n    HyperparameterSpace({'n_components': RandInt(1, 5)}))]), ModelStacking(\n    [SomeStep(hyperparams_space=HyperparameterSpace({'n_estimators':\n    RandInt(1, 1000)})), SomeStep(hyperparams_space=HyperparameterSpace({\n    'n_estimators': RandInt(1, 1000)})), SomeStep(hyperparams_space=\n    HyperparameterSpace({'max_depth': RandInt(1, 100)})), SomeStep(\n    hyperparams_space=HyperparameterSpace({'max_depth': RandInt(1, 100)}))],\n    joiner=NumpyTranspose(), judge=SomeStep(hyperparams_space=\n    HyperparameterSpace({'alpha': LogUniform(0.1, 10.0)})))])\nrvsed = p.get_hyperparams_space()\np.set_hyperparams(rvsed)\nhyperparams = p.get_hyperparams()\nassert 'AddFeatures__SomeStep1__n_components' in hyperparams.keys()\nassert 'AddFeatures__SomeStep__n_components' in hyperparams.keys()\nassert 'AddFeatures__SomeStep1__n_components' in hyperparams.keys()\nassert 'ModelStacking__SomeStep__n_estimators' in hyperparams.keys()\nassert 'ModelStacking__SomeStep1__n_estimators' in hyperparams.keys()\nassert 'ModelStacking__SomeStep2__max_depth' in hyperparams.keys()\nassert 'ModelStacking__SomeStep3__max_depth' in hyperparams.keys()\n"
-}

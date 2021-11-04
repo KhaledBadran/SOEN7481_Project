@@ -1,9 +1,0 @@
-{
-    "functionName": "test_blez_true",
-    "className": "TestITypes",
-    "fileName": "/AshtonUPS_&_Py-MI-PS/src_&_PyMIPS_&_tests_&_test_commands.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "Memory.reset()\nDataHeap.reset()\nProgramStack.reset()\npc = RegisterPool.get_register('pc')\nt1 = RegisterPool.get_register('$t1')\nprogram = {'main': [IType('blez', '$t1', 'test'), BaseCommand(),\n    BaseCommand(), BaseCommand()], 'test': [BaseCommand()]}\nProgramStack.add_block_from_dict(program)\nt1.set_contents_from_int(0)\nProgramStack.jump_label('main')\nProgramStack.execute_next()\naddress = ProgramStack.get_label_addres('test')\nself.assertEqual(pc.get_contents_as_int(), address)\n"
-}

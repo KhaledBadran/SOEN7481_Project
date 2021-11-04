@@ -1,9 +1,0 @@
-{
-    "functionName": "name_to_label_mapping",
-    "className": null,
-    "fileName": "/opentargets_&_OnToma/ontoma_&_interface.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    builds name <=> label lookup dictionaries starting\n    from an OBO file, including synonyms\n    \"\"\"\nid_to_name = {}\nname_to_id = {}\nfor nodeid, data in obonetwork.nodes(data=True):\n    try:\n        id_to_name[nodeid] = data['name']\n        name_to_id[data['name']] = nodeid\n    except KeyError:\n        pass\n    if 'synonym' in data:\n        for synonim in data['synonym']:\n            name_to_id[synonim.split('\"')[1]] = nodeid\nreturn id_to_name, name_to_id\n"
-}

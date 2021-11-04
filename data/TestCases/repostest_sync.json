@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sync",
-    "className": null,
-    "fileName": "/luyuhuang_&_DWords/tests_&_test_sync.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "_delete_mails()\nnum, = user_db.getOne(\"select count(*) from sync_cache where op = 'add'\")\n_sync()\nqtbot.waitUntil(lambda : not async_thread._coroutines, timeout=30000)\nassert user_db.getOne('select count(*) from sync_cache')[0] == 0\nwith user_db.cursor() as c:\n    c.execute('delete from words')\n    c.execute(\"delete from sys where id = 'last_mail_id'\")\n    c.execute(\"update sys set value = ? where id = 'uuid'\", (str(uuid.uuid1\n        ()),))\n_sync()\nqtbot.waitUntil(lambda : not async_thread._coroutines, timeout=30000)\nassert user_db.getOne('select count(*) from words')[0] == num\n"
-}

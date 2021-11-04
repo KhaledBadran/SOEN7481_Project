@@ -1,9 +1,0 @@
-{
-    "functionName": "test_categorization",
-    "className": null,
-    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_engine_&_tests_&_test_categorize.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "if 'CIRCLECI' in os.environ and cv == 'fast' and method in ['LinearSVC',\n    'xgboost']:\n    raise SkipTest\nif method == 'xgboost':\n    try:\n        import xgboost\n    except ImportError:\n        raise SkipTest\nif not use_lsi:\n    uuid = vect_uuid\nelse:\n    uuid = lsi.mid\ncat = _CategorizerWrapper(cache_dir=cache_dir, parent_id=uuid, cv_n_folds=2)\ncat.fe.db_.filenames_ = cat.fe.filenames_\nindex = cat.fe.db_._search_filenames(ground_truth.file_path.values)\ntry:\n    model, Y_train = cat.fit(index, ground_truth.is_relevant.values, method\n        =method, cv=cv)\nexcept OptionalDependencyMissing:\n    raise SkipTest\nexcept WrongParameter:\n    if method in ['NearestNeighbor', 'NearestCentroid']:\n        return\n    else:\n        raise\nY_pred, md = cat.predict()\nX_pred = np.arange(cat.fe.n_samples_, dtype='int')\nidx_gt = cat.fe.db_._search_filenames(ground_truth.file_path.values)\nscores = categorization_score(idx_gt, ground_truth.is_relevant.values,\n    X_pred, np.argmax(Y_pred, axis=1))\nassert cat.get_params() is not None\nassert Y_pred.shape == (cat.fe.n_samples_, len(np.unique(ground_truth.\n    is_relevant.values)))\nif method == 'NearestNeighbor':\n    assert md.shape == Y_pred.shape\nelse:\n    assert md is None\nif method in ['xgboost', 'ensemble-stacking']:\n    return\nassert_allclose(scores['precision'], 1, rtol=0.5)\nassert_allclose(scores['recall'], 1, rtol=0.68)\ncat.delete()\npytest.mark.parametrize('use_lsi, method, cv', _test_cases)"
-}

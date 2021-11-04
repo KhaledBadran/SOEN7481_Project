@@ -1,9 +1,0 @@
-{
-    "functionName": "test_calc_series",
-    "className": null,
-    "fileName": "/SunPower_&_PVMismatch/pvmismatch_&_tests_&_test_pvcell.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "pvconst = PVconstants()\npvcells = [PVcell(pvconst=pvconst, Tcell=323), PVcell(pvconst=pvconst, Ee=\n    0.75, Tcell=313), PVcell(pvconst=pvconst, Ee=0.55, Tcell=303)]\ni_at_vrbd = np.asarray([np.interp(pvc.VRBD, pvc.Vcell.flat, pvc.Icell.flat) for\n    pvc in pvcells])\nicells = np.asarray([pvc.Icell.flatten() for pvc in pvcells])\nvcells = np.asarray([pvc.Vcell.flatten() for pvc in pvcells])\nisc = np.asarray([pvc.Isc for pvc in pvcells])\ni, v = pvconst.calcSeries(icells, vcells, isc.mean(), i_at_vrbd.max())\niv_old = np.loadtxt(os.path.join(BASE_DIR, 'calc_series_test_iv_old.dat'))\niv_expected = np.loadtxt(os.path.join(BASE_DIR, 'calc_series_test_iv.dat'))\niv_calc = np.concatenate([[i], [v]], axis=0).T\nok_(np.allclose(iv_calc, iv_expected))\nassert np.allclose(iv_old[(0), :], np.interp(iv_old[(1), :], v, i), 0.01, 0.01)\nassert np.allclose(iv_old[(1), :], np.interp(iv_old[(0), :], np.flipud(i),\n    np.flipud(v)), 0.1, 0.1)\nreturn i, v\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_resize_in_memory",
-    "className": null,
-    "fileName": "/mdbloice_&_Augmentor/tests_&_test_resize.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "tmpdir = tempfile.mkdtemp()\ntmp = tempfile.NamedTemporaryFile(dir=tmpdir, suffix='.JPEG')\nim = Image.new('RGB', original_dimensions)\nim.save(tmp.name, 'JPEG')\nresize = Operations.Resize(probability=1, width=larger_dimensions[0],\n    height=larger_dimensions[1], resample_filter='BICUBIC')\nim = [im]\nim_resized = resize.perform_operation(im)\nassert im_resized[0].size == larger_dimensions\nresize_smaller = Operations.Resize(probability=1, width=smaller_dimensions[\n    0], height=smaller_dimensions[1], resample_filter='BICUBIC')\nim_resized_smaller = resize_smaller.perform_operation(im)\nassert im_resized_smaller[0].size == smaller_dimensions\ntmp.close()\n"
-}

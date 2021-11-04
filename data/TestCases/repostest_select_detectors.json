@@ -1,9 +1,0 @@
-{
-    "functionName": "test_select_detectors",
-    "className": null,
-    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_pypeit.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "pypit_file = data_path('test.pypeit')\nmake_pypeit_file(pypit_file, 'shane_kast_blue', [data_path('b*fits.gz')],\n    setup_mode=True)\nsetup = pypeitsetup.PypeItSetup.from_pypeit_file(pypit_file)\npar, spectrograph, fitstbl = setup.run(sort_dir=data_path(''))\nassert PypeIt.select_detectors(detnum=par['rdx']['detnum'], ndet=\n    spectrograph.ndet) == [1], 'Incorrect detectors selected.'\nos.remove(data_path('test.calib'))\nos.remove(data_path('test.pypeit'))\nassert np.array_equal(PypeIt.select_detectors(), [1]\n    ), 'Incorrect detectors selected.'\nassert np.array_equal(PypeIt.select_detectors(detnum=3, ndet=5), [3]\n    ), 'Incorrect detectors selected.'\nassert np.array_equal(PypeIt.select_detectors(ndet=5), [1, 2, 3, 4, 5]\n    ), 'Incorrect detectors selected.'\nassert np.array_equal(PypeIt.select_detectors(detnum=[1, 3]), [1, 3]\n    ), 'Incorrect detectors selected.'\n"
-}

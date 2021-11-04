@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_token",
-    "className": null,
-    "fileName": "/EclecticIQ_&_OpenTAXII/tests_&_test_auth.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "base_url = '%s://localhost' % ('https' if https else 'http')\nresponse = client.post(AUTH_PATH, data={'username': 'dummy', 'password':\n    'wrong'}, base_url=base_url)\nassert response.status_code == 401\nresponse = client.post(AUTH_PATH, data={'other': 'somethind'}, base_url=\n    base_url)\nassert response.status_code == 400\nresponse = client.post(AUTH_PATH, data={'username': USERNAME, 'password':\n    PASSWORD}, base_url=base_url)\nassert response.status_code == 200\ndata = json.loads(response.get_data(as_text=True))\nassert data.get('token')\nresponse = client.post(AUTH_PATH, data=json.dumps({'username': USERNAME,\n    'password': PASSWORD}), base_url=base_url, content_type='application/json')\nassert response.status_code == 200\ndata = json.loads(response.get_data(as_text=True))\nassert data.get('token')\npytest.mark.parametrize('https', [True, False])pytest.mark.parametrize('version', [11, 10])"
-}

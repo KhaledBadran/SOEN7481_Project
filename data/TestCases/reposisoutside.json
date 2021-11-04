@@ -1,9 +1,0 @@
-{
-    "functionName": "isoutside",
-    "className": null,
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_topotools_&_topotools.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Identifies points that lie outside the specified region.\n\n    Parameters\n    ----------\n    domain_size : array_like\n        The size and shape of the domain beyond which points should be\n        trimmed. The argument is treated as follows:\n\n        **sphere** : If a scalar or single element list is received, it's\n        treated as the radius [r] of a sphere centered on [0, 0, 0].\n\n        **cylinder** : If a two-element list is received it's treated as\n        the radius and height of a cylinder [r, z] whose central axis\n        starts at [0, 0, 0] and extends in the positive z-direction.\n\n        **rectangle** : If a three element list is received, it's treated\n        as the outer corner of rectangle [x, y, z] whose opposite corner\n        lies at [0, 0, 0].\n\n    Returns\n    -------\n    An Np-long mask of True values indicating pores that lie outside the\n    domain.\n\n    \"\"\"\nif len(shape) == 1:\n    r = np.sqrt(np.sum(coords ** 2, axis=1))\n    Ps = r > shape[0]\nelif len(shape) == 2:\n    r = np.sqrt(np.sum(coords[:, ([0, 1])] ** 2, axis=1))\n    Ps = r > shape[0]\n    if shape[1] > 0:\n        Ps = Ps + (coords[:, (2)] > shape[1])\n        Ps = Ps + (coords[:, (2)] < 0)\n    else:\n        pass\nelif len(shape) == 3:\n    shape = np.array(shape, dtype=float)\n    try:\n        lo_lim = shape[:, (0)]\n        hi_lim = shape[:, (1)]\n    except IndexError:\n        lo_lim = np.array([0, 0, 0])\n        hi_lim = shape\n    Ps1 = np.any(coords > hi_lim, axis=1)\n    Ps2 = np.any(coords < lo_lim, axis=1)\n    Ps = Ps1 + Ps2\nreturn Ps\n"
-}

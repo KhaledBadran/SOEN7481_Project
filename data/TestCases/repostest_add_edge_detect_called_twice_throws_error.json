@@ -1,9 +1,0 @@
-{
-    "functionName": "test_add_edge_detect_called_twice_throws_error",
-    "className": null,
-    "fileName": "/rm-hull_&_OPi.GPIO/tests_&_test_event.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "pin = 43\nfs.CreateFile('/sys/class/gpio/gpio{0}/edge'.format(pin))\nfs.CreateFile('/sys/class/gpio/gpio{0}/value'.format(pin))\nwith patch('select.epoll'):\n    try:\n        event.add_edge_detect(pin, RISING)\n        assert pin in event._threads\n        with pytest.raises(RuntimeError) as ex:\n            event.add_edge_detect(pin, RISING)\n        assert str(ex.value\n            ) == 'Conflicting edge detection already enabled for this GPIO channel'\n    finally:\n        event.cleanup()\n        assert pin not in event._threads\n"
-}

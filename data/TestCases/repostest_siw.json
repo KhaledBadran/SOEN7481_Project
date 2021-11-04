@@ -1,9 +1,0 @@
-{
-    "functionName": "test_siw",
-    "className": null,
-    "fileName": "/Patarimi_&_PassiveAutoDesign/tests_&_test_structure.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    unity test for SIW object\n    \"\"\"\nwr1 = wg.SIW(COPPER, D5880, 0.0024)\nwith pytest.raises(ValueError):\n    wr1.calc_pphc(29000000000.0, 3500000.0)\nwr1.set_width(0.0071)\nassert round(wr1.f_c) == 14233805208\nwr1.set_fc(17000000000.0)\nassert round(1000 * wr1.width, 2) == 5.94\nassert round(wr1.calc_a_d(20000000000.0), 4) == 0.0461\nassert round(wr1.calc_a_c(20000000000.0), 6) == 0.004997\nassert round(wr1.calc_ksr(20000000000.0), 6) == 1\nassert round(wr1.calc_lambda(20000000000.0), 6) == 0.028455\nwr1.diel.rougthness = 0\nwith pytest.raises(ValueError):\n    wr1.calc_ksr(20000000000.0)\nwr1.diel.rougthness = 0.0009\nassert round(wr1.calc_pphc(29000000000.0, 3500000.0)) == 139370\nwr1.print_info()\nassert round(wr1.get_sparam(20000000000.0, 0.01), 2) == -0.99 + 0.13j\n"
-}

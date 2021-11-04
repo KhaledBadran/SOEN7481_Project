@@ -1,9 +1,0 @@
-{
-    "functionName": "test_execution_gcd",
-    "className": null,
-    "fileName": "/poletaevvlad_&_CubeLang/test_&_execution_&_test_execution.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "code = \"\"\"\n        let a: int = 15\n        let b: int = 6\n        while a != 0 and b != 0 do\n            if a > b then\n                a = a - b\n            else\n                b = b - a\n            end\n        end\n        print (a + b)\n    \"\"\"\nstack = Stack()\nstack.add_global('print', Function(([Integer], Void)))\nexpressions = parser.parse(code, stack)\ncontext = ExecutionContext(dict(print=MagicMock()))\ncontext.compile(expressions)\ncontext.execute(MockTracebackWriter())\nassert tuple(context.globals['print'].call_args[0]) == (3,)\n"
-}

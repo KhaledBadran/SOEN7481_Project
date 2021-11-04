@@ -1,9 +1,0 @@
-{
-    "functionName": "test_multipart_commands",
-    "className": null,
-    "fileName": "/PRIArobotics_&_HedgehogClient/tests_&_test_async_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "port_a, state_a, amount_a, port_b, state_b, amount_b = (0, motor.POWER, 100,\n    3, motor.POWER, 100)\nasync with connect_dummy(Commands.multipart_motor_requests, port_a, state_a,\n    amount_a, port_b, state_b, amount_b) as client:\n    await client.commands(client.move_motor_cmd(port_a, amount_a, state_a),\n        client.move_motor_cmd(port_b, amount_b, state_b))\nport_a, state_a, amount_a, port_b, state_b, amount_b = (0, motor.POWER, 100,\n    4, motor.POWER, 100)\nasync with connect_dummy(Commands.multipart_motor_requests, port_a, state_a,\n    amount_a, port_b, state_b, amount_b) as client:\n    with pytest.raises(errors.FailedCommandError):\n        await client.commands(client.move_motor_cmd(port_a, amount_a,\n            state_a), client.move_motor_cmd(port_b, amount_b, state_b))\npytest.mark.asyncio"
-}

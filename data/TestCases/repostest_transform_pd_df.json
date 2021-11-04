@@ -1,9 +1,0 @@
-{
-    "functionName": "test_transform_pd_df",
-    "className": "TestTunable",
-    "fileName": "/HDI-Project_&_BTB/tests_&_tuning_&_test_tunable.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that the method transform performs a transformation over a ``pandas.DataFrame``\n        with a single combination of hyperparameter valid values.\n        \"\"\"\nself.bhp.transform.return_value = [[1]]\nself.chp.transform.return_value = [[0]]\nself.ihp.transform.return_value = [[1]]\nvalues = pd.DataFrame([[True, 'dog', 2]], columns=['bhp', 'chp', 'ihp'])\nresult = self.instance.transform(values)\nself.bhp.transform.assert_called_once_with(True)\nself.chp.transform.assert_called_once_with('dog')\nself.ihp.transform.assert_called_once_with(2)\nnp.testing.assert_array_equal(result, np.array([[1, 0, 1]]))\n"
-}

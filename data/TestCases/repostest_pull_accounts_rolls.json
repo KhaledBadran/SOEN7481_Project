@@ -1,9 +1,0 @@
-{
-    "functionName": "test_pull_accounts_rolls",
-    "className": "TestMonitorRollsService",
-    "fileName": "/AndreMiras_&_EtherollApp/src_&_etherollapp_&_tests_&_service_&_test_main.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Checks `pull_accounts_rolls()` iterates over the accounts and call\n        `pull_account_rolls()` for each.\n        \"\"\"\nservice = MonitorRollsService()\naddress = '46044beAa1E985C67767E04dE58181de5DAAA00F'\nm_account = mock.MagicMock()\nm_account.address = binascii.unhexlify(address)\nwith mock.patch('etherollapp.service.main.AccountUtils.get_account_list'\n    ) as m_get_account_list, mock.patch.object(MonitorRollsService,\n    'pull_account_rolls') as m_pull_account_rolls:\n    m_get_account_list.return_value = [m_account]\n    service.pull_accounts_rolls()\nassert m_pull_account_rolls.call_args_list == [mock.call(m_account)]\n"
-}

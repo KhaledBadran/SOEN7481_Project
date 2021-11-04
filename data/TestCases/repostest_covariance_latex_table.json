@@ -1,9 +1,0 @@
-{
-    "functionName": "test_covariance_latex_table",
-    "className": "TestChain",
-    "fileName": "/samreay_&_ChainConsumer/tests_&_test_analysis.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "cov = [[2, 0.5, 0.2], [0.5, 3, 0.3], [0.2, 0.3, 4.0]]\ndata = np.random.multivariate_normal([0, 0, 1], cov, size=20000000)\nparameters = ['x', 'y', 'z']\nc = ChainConsumer()\nc.add_chain(data, parameters=parameters)\nlatex_table = c.analysis.get_covariance_table()\nactual = \"\"\"\\\\begin{table}\n            \\\\centering\n            \\\\caption{Parameter Covariance}\n            \\\\label{tab:parameter_covariance}\n            \\\\begin{tabular}{c|ccc}\n                 & x & y & z\\\\\\\\\n                \\\\hline\n                   x  &  2.00 &  0.50 &  0.20 \\\\\\\\\n                   y  &  0.50 &  3.00 &  0.30 \\\\\\\\\n                   z  &  0.20 &  0.30 &  4.00 \\\\\\\\\n                \\\\hline\n            \\\\end{tabular}\n        \\\\end{table}\"\"\"\nassert latex_table.replace(' ', '') == actual.replace(' ', '')\n"
-}

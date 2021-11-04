@@ -1,9 +1,0 @@
-{
-    "functionName": "test_gromov_entropic_barycenter",
-    "className": null,
-    "fileName": "/PythonOT_&_POT/test_&_test_gromov.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ns = 50\nnt = 60\nXs, ys = ot.datasets.make_data_classif('3gauss', ns, random_state=42)\nXt, yt = ot.datasets.make_data_classif('3gauss2', nt, random_state=42)\nC1 = ot.dist(Xs)\nC2 = ot.dist(Xt)\nn_samples = 3\nCb = ot.gromov.entropic_gromov_barycenters(n_samples, [C1, C2], [ot.unif(ns\n    ), ot.unif(nt)], ot.unif(n_samples), [0.5, 0.5], 'square_loss', 0.002,\n    max_iter=100, tol=0.001, verbose=True)\nnp.testing.assert_allclose(Cb.shape, (n_samples, n_samples))\nCb2 = ot.gromov.entropic_gromov_barycenters(n_samples, [C1, C2], [ot.unif(\n    ns), ot.unif(nt)], ot.unif(n_samples), [0.5, 0.5], 'kl_loss', 0.002,\n    max_iter=100, tol=0.001)\nnp.testing.assert_allclose(Cb2.shape, (n_samples, n_samples))\n"
-}

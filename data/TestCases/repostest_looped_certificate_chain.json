@@ -1,9 +1,0 @@
-{
-    "functionName": "test_looped_certificate_chain",
-    "className": "TestValidator",
-    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_validator.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "identity1 = self._fixture.addIdentity(Name('/loop'))\nkey1 = self._fixture._keyChain.createKey(identity1, RsaKeyParams(Name.\n    Component('key1')))\nkey2 = self._fixture._keyChain.createKey(identity1, RsaKeyParams(Name.\n    Component('key2')))\nkey3 = self._fixture._keyChain.createKey(identity1, RsaKeyParams(Name.\n    Component('key3')))\nself.makeCertificate(key1, key2)\nself.makeCertificate(key2, key3)\nself.makeCertificate(key3, key1)\ndata = Data(Name('/loop/Data'))\nself._fixture._keyChain.sign(data, SigningInfo(key1))\nself.validateExpectFailure(data,\n    'Should fail since the certificate chain loops')\nself.assertEqual(3, len(self._fixture._face._sentInterests))\n"
-}

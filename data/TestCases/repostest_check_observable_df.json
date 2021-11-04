@@ -1,9 +1,0 @@
-{
-    "functionName": "test_check_observable_df",
-    "className": null,
-    "fileName": "/PEtab-dev_&_PEtab/tests_&_test_lint.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Check that we correctly detect errors in observable table\"\"\"\nobservable_df = pd.DataFrame(data={OBSERVABLE_ID: ['obs1', 'obs2'],\n    OBSERVABLE_FORMULA: ['x1', 'x2'], NOISE_FORMULA: ['sigma1', 'sigma2']}\n    ).set_index(OBSERVABLE_ID)\nlint.check_observable_df(observable_df)\nbad_observable_df = observable_df.copy()\nbad_observable_df.index = ['obs1', 'obs1']\nwith pytest.raises(AssertionError):\n    lint.check_observable_df(bad_observable_df)\n"
-}

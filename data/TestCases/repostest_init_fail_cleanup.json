@@ -1,9 +1,0 @@
-{
-    "functionName": "test_init_fail_cleanup",
-    "className": "OWMTest",
-    "fileName": "/openworm_&_PyOpenWorm/tests_&_CommandTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" If we fail on init, there shouldn't be a .owm leftover \"\"\"\nself.cut.repository_provider = Mock()\ndef failed_init(*args, **kwargs):\n    raise _TestException('Oh noes!')\nself.cut.repository_provider.init.side_effect = failed_init\ntry:\n    self.cut.init()\n    self.fail('Should have failed init')\nexcept _TestException:\n    pass\nself.assertFalse(exists(self.cut.owmdir), msg='owmdir does not exist')\n"
-}

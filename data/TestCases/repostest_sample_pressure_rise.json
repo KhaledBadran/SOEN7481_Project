@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sample_pressure_rise",
-    "className": "TestSampleRisingPressure",
-    "fileName": "/kyleniemeyer_&_PyTeCK/pyteck_&_tests_&_test_simulation.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that pressure sampled correctly with rise.\n        \"\"\"\ntime_end = 10.0\npres = 1.0\npres_rise = 0.05\nfreq = 20000.0\n[times, pressures] = simulation.sample_rising_pressure(time_end, pres, freq,\n    pres_rise)\nassert len(times) == int(freq * time_end + 1)\nassert times[-1] == time_end\nassert np.allclose(pressures[-1], pres * (pres_rise * time_end + 1))\ndpdt = simulation.first_derivative(times, pressures)\nassert np.allclose(dpdt, pres * pres_rise)\n"
-}

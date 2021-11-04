@@ -1,9 +1,0 @@
-{
-    "functionName": "test_configure_message_multiple_recipients",
-    "className": null,
-    "fileName": "/PearsonEducation_&_Alarmageddon/tests_&_publishing_&_test_emailer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "email_pub = create_default_email_publisher(tmpdir, smtpserver)\nemail_sender = email_pub._config['email_defaults']['general']['email_sender']\nconfigured_sender = email_pub.configure_sender(email_sender)\nemail_config = email_pub._config['environment']['test']['email_notifications']\nemail_recipients = email_config['test_alert']['email_recipients']\nconfigured_recipients = email_pub.configure_recipients(email_recipients)\nmsg = email_pub.configure_message(configured_sender, configured_recipients,\n    'Test Subject', 'Test Body')\nassert msg['Subject'] == 'Test Subject'\nassert msg['From'] == 'Alarmageddon Monitor <noreply@alarmageddon.com>'\nassert msg['To'\n    ] == 'Test Recipient Override 1 <testrecipientoverride1@alarmageddon.com>, Test Recipient Override 2 <testrecipientoverride2@alarmageddon.com>'\noffset = int(six.PY2)\nassert str(msg.get_payload()[0]).split('\\n')[4 + offset] == 'Test Body'\n"
-}

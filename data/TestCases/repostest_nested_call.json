@@ -1,9 +1,0 @@
-{
-    "functionName": "test_nested_call",
-    "className": "CallTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_call.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"test %calls that are nested inside each other\"\"\"\nt = Template(\n    \"\"\"\n            <%def name=\"foo()\">\n                ${caller.body(x=10)}\n            </%def>\n\n            x is ${x}\n            <%def name=\"bar()\">\n                bar: ${caller.body()}\n            </%def>\n\n            <%call expr=\"foo()\" args=\"x\">\n                this is foo body: ${x}\n\n                <%call expr=\"bar()\">\n                    this is bar body: ${x}\n                </%call>\n            </%call>\n\"\"\"\n    )\nassert result_lines(t.render(x=5)) == ['x is 5', 'this is foo body: 10',\n    'bar:', 'this is bar body: 10']\n"
-}

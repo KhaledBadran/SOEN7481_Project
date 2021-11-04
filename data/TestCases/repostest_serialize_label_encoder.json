@@ -1,9 +1,0 @@
-{
-    "functionName": "test_serialize_label_encoder",
-    "className": null,
-    "fileName": "/CyberReboot_&_NetworkML/tests_&_test_algorithms_host_footprint.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "instance = HostFootprint()\nle_classes = ['printer', 'workstation', 'server']\nle = preprocessing.LabelEncoder()\nle.fit(le_classes)\nwith tempfile.TemporaryDirectory() as tmpdir:\n    le_file = os.path.join(tmpdir, 'le.json')\n    instance.serialize_label_encoder(le, le_file)\n    new_le = instance.deserialize_label_encoder(le_file)\n    assert le.classes_.tolist() == new_le.classes_.tolist()\n    assert new_le.inverse_transform(le.transform(le_classes)).tolist(\n        ) == le_classes\n"
-}

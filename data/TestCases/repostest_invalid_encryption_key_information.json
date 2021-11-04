@@ -1,9 +1,0 @@
-{
-    "functionName": "test_invalid_encryption_key_information",
-    "className": "TestKeyWrappingSpecification",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a TypeError is raised when an invalid value is used to set\n        the encryption key information of a KeyWrappingSpecification struct.\n        \"\"\"\nkwargs = {'encryption_key_information': 'invalid'}\nself.assertRaisesRegex(TypeError,\n    'Encryption key information must be an EncryptionKeyInformation struct.',\n    objects.KeyWrappingSpecification, **kwargs)\nargs = objects.KeyWrappingSpecification(\n    ), 'encryption_key_information', 'invalid'\nself.assertRaisesRegex(TypeError,\n    'Encryption key information must be an EncryptionKeyInformation struct.',\n    setattr, *args)\n"
-}

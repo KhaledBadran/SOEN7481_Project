@@ -1,9 +1,0 @@
-{
-    "functionName": "test_key_errors_on_get_inputs",
-    "className": null,
-    "fileName": "/comp-org_&_COMP-Developer-Toolkit/cs_kit_&_tests_&_test_FunctionsTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class TestFunctions(CoreTestFunctions):\n    get_version = get_version\n    get_inputs = lambda *args: 'hello world'\n    validate_inputs = validate_inputs\n    run_model = run_model\n    ok_adjustment = {'mock': {'model_param': 2}}\n    bad_adjustment = {'mock': {'model_param': 'not an int'}}\nft = TestFunctions()\nwith pytest.raises(CSKitError):\n    ft.test_get_inputs()\nclass TestFunctions(CoreTestFunctions):\n    get_version = get_version\n    get_inputs = lambda *args: {'param_meta': {}, 'model_parameters': {}}\n    validate_inputs = validate_inputs\n    run_model = run_model\n    ok_adjustment = {'mock': {'model_param': 2}}\n    bad_adjustment = {'mock': {'model_param': 'not an int'}}\nft = TestFunctions()\nwith pytest.raises(CSKitError):\n    ft.test_get_inputs()\n"
-}

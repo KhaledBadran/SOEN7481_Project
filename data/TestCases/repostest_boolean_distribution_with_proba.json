@@ -1,9 +1,0 @@
-{
-    "functionName": "test_boolean_distribution_with_proba",
-    "className": null,
-    "fileName": "/Neuraxio_&_Neuraxle/testing_&_hyperparams_&_test_distributions.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "proba_is_true = 0.7\nhd = Boolean(proba_is_true=proba_is_true)\nsamples = get_many_samples_for(hd)\nfalses = Counter(samples).get(False)\ntrues = Counter(samples).get(True)\nassert trues > NUM_TRIALS * (proba_is_true - 0.1)\nassert falses > NUM_TRIALS * (1 - proba_is_true - 0.1)\nassert abs(hd.pdf(False) - (1 - proba_is_true)) < 1e-06\nassert abs(hd.pdf(0.0) - (1 - proba_is_true)) < 1e-06\nassert abs(hd.pdf(True) - proba_is_true) < 1e-06\nassert abs(hd.pdf(1.0) - proba_is_true) < 1e-06\nassert abs(hd.pdf(-0.1) - 0.0) < 1e-06\nassert abs(hd.pdf(1.1) - 0.0) < 1e-06\nassert abs(hd.cdf(False) - (1 - proba_is_true)) < 1e-06\nassert abs(hd.cdf(0.0) - (1 - proba_is_true)) < 1e-06\nassert abs(hd.cdf(True) - 1.0) < 1e-06\nassert abs(hd.cdf(1.0) - 1.0) < 1e-06\nassert abs(hd.cdf(-0.1) - 0.0) < 1e-06\nassert abs(hd.cdf(1.1) - 1.0) < 1e-06\nassert hd.min() == 0\nassert hd.max() == 1\nassert abs(hd.mean() - proba_is_true) < 1e-06\nassert abs(hd.std() - math.sqrt(proba_is_true * (1 - proba_is_true))) < 1e-06\nassert abs(hd.var() - proba_is_true * (1 - proba_is_true)) < 1e-06\nassert abs(hd.mean() - np.mean(samples)) < 0.01\nassert abs(hd.var() - np.var(samples)) < 0.01\n"
-}

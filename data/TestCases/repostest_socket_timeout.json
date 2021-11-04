@@ -1,9 +1,0 @@
-{
-    "functionName": "test_socket_timeout",
-    "className": null,
-    "fileName": "/YoSTEALTH_&_Liburing/test_&_socket_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ring = liburing.io_uring()\ncqes = liburing.io_uring_cqes()\nserver = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\nserver.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, True)\nserver.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, True)\nserver.bind(('0.0.0.0', 0))\nserver.listen(32)\nfd = server.fileno()\naddr, addrlen = liburing.sockaddr()\ntry:\n    assert liburing.io_uring_queue_init(32, ring, 0) == 0\n    sqe = liburing.io_uring_get_sqe(ring)\n    liburing.io_uring_prep_accept(sqe, fd, addr, addrlen, 0)\n    sqe.flags |= liburing.IOSQE_IO_LINK\n    sqe.user_data = 1\n    sqe = liburing.io_uring_get_sqe(ring)\n    ts = liburing.timespec(0, 41666)\n    liburing.io_uring_prep_link_timeout(sqe, ts, 0)\n    sqe.user_data = 2\n    assert liburing.io_uring_submit(ring) == 2\n    while True:\n        try:\n            assert liburing.io_uring_peek_cqe(ring, cqes) == 0\n        except BlockingIOError:\n            pass\n        else:\n            cqe = cqes[0]\n            if cqe.user_data == 1:\n                assert cqe.res == -125\n                liburing.io_uring_cqe_seen(ring, cqe)\n                continue\n            else:\n                assert cqe.user_data == 2\n                assert cqe.res in (-62, -114)\n                liburing.io_uring_cqe_seen(ring, cqe)\n                break\nfinally:\n    server.close()\n    liburing.io_uring_queue_exit(ring)\n"
-}

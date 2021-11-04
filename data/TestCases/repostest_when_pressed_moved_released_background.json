@@ -1,9 +1,0 @@
-{
-    "functionName": "test_when_pressed_moved_released_background",
-    "className": null,
-    "fileName": "/martinohanlon_&_BlueDot/tests_&_test_blue_dot.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "mbd = MockBlueDot()\nmbd.mock_client_connected()\nevent_pressed = Event()\nmbd.set_when_pressed(lambda : delay_function(event_pressed.set, 0.2),\n    background=True)\nevent_double_pressed = Event()\nmbd.set_when_double_pressed(lambda : delay_function(event_double_pressed.\n    set, 0.2), background=True)\nevent_moved = Event()\nmbd.set_when_moved(lambda : delay_function(event_moved.set, 0.2),\n    background=True)\nevent_released = Event()\nmbd.set_when_released(lambda : delay_function(event_released.set, 0.2),\n    background=True)\nassert not event_pressed.is_set()\nmbd.mock_blue_dot_pressed(0, 0)\nassert not event_pressed.is_set()\nassert event_pressed.wait(1)\nassert not event_moved.is_set()\nmbd.mock_blue_dot_moved(1, 1)\nassert not event_moved.is_set()\nassert event_moved.wait(1)\nassert not event_released.is_set()\nmbd.mock_blue_dot_released(0, 0)\nassert not event_released.is_set()\nassert event_released.wait(1)\nmbd.set_when_pressed(None)\nmbd.set_when_moved(None)\nmbd.set_when_released(None)\nmbd.mock_blue_dot_pressed(0, 0)\nmbd.mock_blue_dot_moved(1, 1)\nmbd.mock_blue_dot_released(0, 0)\nassert not event_double_pressed.is_set()\nmbd.mock_blue_dot_pressed(0, 0)\nassert not event_double_pressed.is_set()\nassert event_double_pressed.wait(1)\n"
-}

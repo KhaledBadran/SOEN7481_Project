@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_remote_session",
-    "className": null,
-    "fileName": "/AmadeusITGroup_&_JumpSSH/tests_&_test__session.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "gateway_ip, gateway_port = docker_env.get_host_ip_port()\ngateway_session = SSHSession(host=gateway_ip, port=gateway_port, username=\n    'user1', password='password1').open()\nremotehost_session = gateway_session.get_remote_session(host='remotehost',\n    port=22, username='user1', password='password1')\nassert remotehost_session.get_cmd_output('hostname') == 'remotehost'\nassert gateway_session.get_remote_session(host='remotehost', port=22,\n    username='user1', password='password1') == remotehost_session\nremotehost2_session = remotehost_session.get_remote_session(host=\n    'remotehost2', port=22, username='user1', password='password1')\nassert remotehost2_session.is_active()\nassert remotehost2_session.get_cmd_output('hostname') == 'remotehost2'\nassert remotehost_session.is_active()\nassert remotehost_session.get_cmd_output('hostname') == 'remotehost'\nremotehost2_session.close()\nassert not remotehost2_session.is_active()\nremotehost2_session = remotehost_session.get_remote_session(host=\n    'remotehost2', port=22, username='user1', password='password1')\nassert remotehost2_session.is_active()\ngateway_session.close()\nassert not remotehost_session.is_active()\nassert not remotehost2_session.is_active()\nremotehost_session = gateway_session.get_remote_session(host='remotehost',\n    port=22, username='user1', password='password1')\nassert gateway_session.is_active()\nassert remotehost_session.is_active()\n"
-}

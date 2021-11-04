@@ -1,9 +1,0 @@
-{
-    "functionName": "test_star_init",
-    "className": null,
-    "fileName": "/grd349_&_PBjam/pbjam_&_tests_&_test_star.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test the init of the star class\n    \n    Notes\n    -----\n    If adding more star inits, remember to os.rmdir(st.path) to clean up after\n    the test. \n    \n    \n    \"\"\"\npg = lk.periodogram.Periodogram(np.array([1, 1]) * units.microhertz, units.\n    Quantity(np.array([1, 1]), None))\nst = star('thisisatest', pg, (220.0, 3.0), (16.97, 0.05), (4750, 250), (\n    1.34, 0.1))\nst = star('thisisatest', pg, (220.0, 3.0), (16.97, 0.05), bp_rp=(1.34, 0.1))\nassert np.all(np.array(st.teff) != np.array([None, None]))\nst = star('thisisatest', pg, (220.0, 3.0), (16.97, 0.05), teff=(4750, 250))\nassert np.all(np.array(st.bp_rp) != np.array([None, None]))\nwith pytest.raises(TypeError):\n    st = star('thisisatest', pg)\natts = ['ID', '_fill_diag', '_log_obs', '_make_prior_corner', '_obs',\n    '_get_outpath', '_plot_offdiag', '_save_my_fig', '_set_outpath',\n    'bp_rp', 'dnu', 'f', 'numax', 'path', 'pg', 'plot_corner',\n    'plot_echelle', 'plot_prior', 'plot_spectrum', 'plot_start',\n    'prior_file', 'run_asy_peakbag', 'run_kde', 'run_peakbag', 's', 'teff']\npbt.assert_hasattributes(st, atts)\nos.rmdir(st.path)\n"
-}

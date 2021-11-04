@@ -1,9 +1,0 @@
-{
-    "functionName": "test_valid_schema_invalid_dgmin_and_dgmax",
-    "className": "TestSchemaValidation",
-    "fileName": "/kenfar_&_DataGristle/scripts_&_tests_&_test_gristle_validator_cmd.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "dlm = ','\ndata_7x7 = []\nfd, input_fqfn = tempfile.mkstemp(prefix='TestGristleValidator7x7In_', dir=\n    self.tmp_dir)\nwith open(input_fqfn, 'w') as out:\n    out.write('\"foo\",\"bar\",\"batz\",\"1.7\",\"2\",\"0\"\\n')\n    out.write('\"foo\",\"bar\",\"batz\",\"0.7\",\"3\",\"1\"\\n')\n    out.write('\"foo\",\"bar\",\"batz\",\"2.9\",\"999\",\"2\"\\n')\nschema = _generate_foobarbatz_schema()\nschema_fqfn = _write_schema_file('foobarbatz', schema, dir_name=self.tmp_dir)\nself.cmd = (\n    \"\"\"%(pgm)s %(in_fqfn)s\n                         -d ','\n                         --fieldcnt 6\n                         --quoting 'quote_all'\n                         --outgood %(outgood)s\n                         --outerr  %(outerr)s\n                         --validschema %(schema)s\n                   \"\"\"\n     % {'pgm': self.pgm, 'outgood': self.outgood_fqfn, 'outerr': self.\n    outerr_fqfn, 'in_fqfn': input_fqfn, 'schema': schema_fqfn})\nprint(self.cmd)\nrunner = envoy.run(self.cmd)\nself.get_outputs(runner)\nprint(self.std_out)\nprint(self.std_err)\nprint(self.err_output)\nassert self.status_code == 74\nassert len(self.err_output) == 2\nassert len(self.good_output) == 1\nassert not self.std_out\nassert not self.std_err or len(self.std_err\n    ) < 50 and 'Coverage.py' in self.std_err\n"
-}

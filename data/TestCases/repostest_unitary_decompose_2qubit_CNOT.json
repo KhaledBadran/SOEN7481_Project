@@ -1,9 +1,0 @@
-{
-    "functionName": "test_unitary_decompose_2qubit_CNOT",
-    "className": "Test_conjugated_kernel",
-    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_unitary.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.setUpClass()\nnum_qubits = 2\np = ql.Program('test_unitary_2qubitCNOT', platform, num_qubits)\nk = ql.Kernel('akernel', platform, num_qubits)\nmatrix = [complex(1.0, 0.0), complex(0.0, 0.0), complex(0.0, 0.0), complex(\n    0.0, 0.0), complex(0.0, 0.0), complex(1.0, 0.0), complex(0.0, 0.0),\n    complex(0.0, 0.0), complex(0.0, 0.0), complex(0.0, 0.0), complex(0.0, \n    0.0), complex(1.0, 0.0), complex(0.0, 0.0), complex(0.0, 0.0), complex(\n    1.0, 0.0), complex(0.0, 0.0)]\nu = ql.Unitary('cnot', matrix)\nu.decompose()\nk.gate(u, [0, 1])\np.add_kernel(k)\np.compile()\nqx.set(os.path.join(output_dir, p.name + '_initialqasmwriter_out.qasm'))\nqx.execute()\nc0 = qx.get_state()\nself.assertAlmostEqual(helper_prob(matrix[0]), helper_regex(c0)[0], 5)\nself.assertAlmostEqual(helper_prob(matrix[4]), helper_regex(c0)[1], 5)\n"
-}

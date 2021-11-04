@@ -1,9 +1,0 @@
-{
-    "functionName": "percolating_continua",
-    "className": null,
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_models_&_phases_&_electrical_conductivity.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Calculates the effective property of a continua using percolation theory\n\n    Parameters\n    ----------\n    target : OpenPNM Object\n        The object for which these values are being calculated.  This\n        controls the length of the calculated array, and also provides\n        access to other necessary thermofluid properties.\n\n    volume_fraction : string\n        The dictionary key in the Phase object containing the volume fraction\n        of the conducting component\n\n    bulk_property : string\n        The dictionary key in the Phase object containing the intrinsic\n        property of the conducting component\n\n    phi_crit : float\n        The volume fraction below which percolation does NOT occur\n\n    tau : float\n        The exponent of the percolation relationship\n\n    Returns\n    -------\n    sigma_eff : NumPy ndarray\n        Array containing effective electrical conductivity values.\n\n    Notes\n    -----\n    This model uses the following standard percolation relationship:\n\n    .. math::\n\n        \\\\sigma_{effective}=\\\\sigma_{bulk}(\\\\phi - \\\\phi_{critical})^\\\\lambda\n\n    \"\"\"\nsigma = target[bulk_property]\nphi = target[volume_fraction]\ndiff_phi = _np.clip(phi - phi_crit, a_min=0, a_max=_np.inf)\nsigma_eff = sigma * diff_phi ** tau\nreturn sigma_eff\n"
-}

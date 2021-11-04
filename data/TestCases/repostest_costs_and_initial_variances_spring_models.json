@@ -1,9 +1,0 @@
-{
-    "functionName": "test_costs_and_initial_variances_spring_models",
-    "className": null,
-    "fileName": "/NASA_&_MLMCPy/tests_&_mlmc_&_test_MLMCSimulator.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Tests costs and variances computed by simulator's\n    compute_costs_and_variances() against expected values based on a\n    beta distribution.\n    \"\"\"\nsim = MLMCSimulator(models=spring_models, data=beta_distribution_input)\nnp.random.seed(1)\nsim._initial_sample_sizes = np.array([100, 100, 100])\ncosts, variances = sim._compute_costs_and_variances()\ntrue_variances = np.array([[8.245224951411819], [0.0857219498864355], [\n    7.916295509470576e-06]])\ntrue_costs = np.array([1.0, 11.0, 110.0])\nassert np.all(np.isclose(true_costs, costs))\nassert np.all(np.isclose(true_variances, variances, rtol=0.1))\n"
-}

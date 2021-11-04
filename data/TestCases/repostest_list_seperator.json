@@ -1,9 +1,0 @@
-{
-    "functionName": "test_list_seperator",
-    "className": null,
-    "fileName": "/JosephPallipadan_&_Namsor-API-Wrapper-Python/namsorclient_&_tests_&_test_request_objects.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    To test the list_seperator function, a total element number is used which goes from 0 to 1000.\n    An array of size total_num is created with random numbers in the indexes.\n\n    Then the separated array is generated. Using three pointers, one for pointing to a block of the \n    separated array, one for pointing to an index within the block and one pointer for the initial array.\n    The assertions make sure that if the separated array was iterated element by element, block by block,\n    the elements encountered would be the same as iterating through the initial array.\n    \"\"\"\nfor total_num in range(0, 1000):\n    initial = [random.randint(0, 1000) for i in range(total_num)]\n    final = namsorclient.list_separator(initial)\n    block, pointer_1, pointer_2 = 0, 0, 0\n    while pointer_2 < total_num:\n        assert initial[pointer_2] == final[block][pointer_1]\n        pointer_2 += 1\n        if pointer_1 == 99:\n            pointer_1 = 0\n            block += 1\n        else:\n            pointer_1 += 1\n"
-}

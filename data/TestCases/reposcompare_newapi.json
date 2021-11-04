@@ -1,9 +1,0 @@
-{
-    "functionName": "compare_newapi",
-    "className": "BigDLTestCase",
-    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_test_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "from keras.models import Sequential as KSequential\nfrom bigdl.nn.keras.topology import Sequential as BSequential\nbmodel = BSequential()\nbmodel.add(blayer)\nkmodel = KSequential()\nkmodel.add(klayer)\nkoutput = kmodel.predict(input_data)\nfrom bigdl.nn.keras.layer import BatchNormalization\nif isinstance(blayer, BatchNormalization):\n    k_running_mean = K.eval(klayer.running_mean)\n    k_running_std = K.eval(klayer.running_std)\n    blayer.set_running_mean(k_running_mean)\n    blayer.set_running_std(k_running_std)\nif kmodel.get_weights():\n    bmodel.set_weights(weight_converter(klayer, kmodel.get_weights()))\nbmodel.training(is_training)\nboutput = bmodel.forward(input_data)\nself.assert_allclose(boutput, koutput, rtol=rtol, atol=atol)\n"
-}

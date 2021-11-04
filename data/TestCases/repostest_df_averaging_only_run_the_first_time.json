@@ -1,9 +1,0 @@
-{
-    "functionName": "test_df_averaging_only_run_the_first_time",
-    "className": "TestDFCorrection",
-    "fileName": "/ornlneutronimaging_&_NeuNorm/tests_&_NeuNorm_&_normalizing_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"assert the average_df is only run the first time the df_correction is run\"\"\"\nsample_path = self.data_path + '/tif/sample/'\nob_path = self.data_path + '/tif/ob/'\no_norm = Normalization()\no_norm.load(folder=sample_path, auto_gamma_filter=False)\no_norm.load(folder=ob_path, data_type='ob', auto_gamma_filter=False)\ndf_file_1 = self.data_path + '/tif/df/df002.tif'\ndf_file_2 = self.data_path + '/tif/df/df003.tif'\no_norm.load(file=df_file_1, data_type='df', auto_gamma_filter=False)\no_norm.load(file=df_file_2, data_type='df', auto_gamma_filter=False)\ndf_average_data = o_norm.data['df']['data_average']\nassert not df_average_data\no_norm.df_correction()\ndf_average_data = o_norm.data['df']['data_average']\nassert df_average_data.size != 0\no_norm.df_correction()\nexpected_df_average = df_average_data\ndf_average = o_norm.data['df']['data_average']\nassert (expected_df_average == df_average).all()\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_multimode_pad",
-    "className": "TestMath",
-    "fileName": "/tum-pbs_&_PhiFlow/tests_&_test_math.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "a = np.array([[1, 2], [3, 4]])\nprint(a)\np = pad(a, [[1, 1], [1, 1]], mode=['replicate', ['circular', 'constant']],\n    constant_values=[0, [0, 10]])\nnp.testing.assert_equal(p[(0), 1:-1], [1, 2])\nnp.testing.assert_equal(p[(3), 1:-1], [3, 4])\nnp.testing.assert_equal(p[1:-1, (0)], [2, 4])\nnp.testing.assert_equal(p[1:-1, (3)], [10, 10])\nprint(p)\ntf.InteractiveSession()\na_tf = tf.constant(a, tf.float32, shape=(2, 2))\np_tf = pad(a_tf, [[1, 1], [1, 1]], mode=['replicate', ['circular',\n    'constant']], constant_values=[0, [0, 10]])\nnp.testing.assert_equal(p, p_tf.eval())\n"
-}

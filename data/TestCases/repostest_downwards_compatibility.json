@@ -1,9 +1,0 @@
-{
-    "functionName": "test_downwards_compatibility",
-    "className": "CompatibilityTest",
-    "fileName": "/BMeu_&_EasyJWT/tests_&_compatibility_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n            Test the compatibility of the current version of `EasyJWT` with older versions of `EasyJWT`.\n\n            Expected Result: The verification succeeds without errors. All data is restored.\n        \"\"\"\nfor folder_entry in listdir(TOKEN_FOLDER):\n    if isdir(folder_entry):\n        continue\n    if not folder_entry.endswith('jwt') or folder_entry == 'external.jwt':\n        continue\n    token, version = self.get_token_and_version_from_file(folder_entry)\n    message = 'Token v' + version\n    with self.assertNotRaises(EasyJWTError, message):\n        token_object = CompatibilityToken.verify(token, KEY, ISSUER, AUDIENCE)\n    self.assertIsNotNone(token_object, message)\n    self.verify_claim_set(token_object, message)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_CDEs",
-    "className": null,
-    "fileName": "/incf-nidash_&_PyNIDM/nidm_&_experiment_&_tools_&_tests_&_test_rest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "def testrun():\n    path = os.path.abspath(__file__)\n    dir_parts = path.split('/')\n    dir_parts = dir_parts[:-4]\n    dir_parts.append('core')\n    dir_parts.append('cde_dir')\n    dir = '/'.join(dir_parts)\n    graph = Query.getCDEs(['{}/ants_cde.ttl'.format(dir), '{}/fs_cde.ttl'.\n        format(dir)])\n    units = graph.objects(subject=Constants.FREESURFER['fs_000002'],\n        predicate=Constants.NIDM['hasUnit'])\n    count = 0\n    for u in units:\n        count += 1\n        assert str(u) == 'mm^2'\n    assert count == 1\ntestrun()\nQuery.getCDEs.cache = None\ntestrun()\n"
-}

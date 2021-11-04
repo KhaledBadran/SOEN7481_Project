@@ -1,9 +1,0 @@
-{
-    "functionName": "test_team_add_members",
-    "className": "TeamTest",
-    "fileName": "/cmsteffen-code_&_PyKBLib/tests_&_test_pykblib_team.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "usernames = ['abraham', 'barnabas', 'charlize']\nusername_dict = [{'username': username, 'role': 'reader'} for username in\n    usernames]\nquery = {'method': 'add-members', 'params': {'options': {'team': self.team.\n    name, 'usernames': username_dict}}}\nself.team._api.call_api.side_effect = APIException('EXCEPTION')\nwith self.assertRaises(TeamException):\n    self.team.add_members(usernames)\nself.team._api.call_api.assert_called_with('team', query)\nself.team._api.call_api.side_effect = None\nusernames = [random_username() for _ in range(random.randint(3, 7))]\nrole = random_role()\nself.team.name = 'bozo_bongo'\nusername_dict = [{'username': username, 'role': role} for username in usernames\n    ]\nquery = {'method': 'add-members', 'params': {'options': {'team': self.team.\n    name, 'usernames': username_dict}}}\nself.team._api.call_api.return_vaue = 'Success'\nself.team.add_members(usernames, role)\nroles = self.team.members_by_role._asdict()\nself.assertFalse(any([(name not in roles[role]) for name in usernames]))\nself.team._api.call_api.assert_called_with('team', query)\n"
-}

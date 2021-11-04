@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sort_values",
-    "className": "TestAccess",
-    "fileName": "/hdoupe_&_ParamTools/paramtools_&_tests_&_test_parameters.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Ensure sort runs and is stable\"\"\"\nsorted_tp = TestParams()\nsorted_tp.sort_values()\nassert sorted_tp.dump(sort_values=False) == TestParams().dump(sort_values=False\n    )\nshuffled_tp = TestParams()\nfor param in shuffled_tp:\n    shuffle(shuffled_tp._data[param]['value'])\nassert sorted_tp.dump(sort_values=False) != shuffled_tp.dump(sort_values=False)\nshuffled_tp.sort_values()\nassert sorted_tp.dump(sort_values=False) == shuffled_tp.dump(sort_values=False)\nfor param in sorted_tp:\n    assert getattr(sorted_tp, param) == getattr(shuffled_tp, param)\n"
-}

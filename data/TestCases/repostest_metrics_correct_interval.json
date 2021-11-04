@@ -1,9 +1,0 @@
-{
-    "functionName": "test_metrics_correct_interval",
-    "className": "TestCustomizedTutorial",
-    "fileName": "/CrowdTruth_&_CrowdTruth-core/test_&_test_metrics.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "test_conf_const = TutorialCustomizedConfig()\ntest_config = test_conf_const.__class__\ndata, config = crowdtruth.load(file='tutorial/relex_example_custom.csv',\n    config=test_config())\nresults = crowdtruth.run(data, config)\nfor _, val_arr in results['units']['unit_annotation_score'].items():\n    for _, val in val_arr.items():\n        self.assertGreaterEqual(val, 0.0)\n        self.assertLessEqual(val, 1.0)\nfor _, val in results['units']['uqs'].items():\n    self.assertGreaterEqual(val, 0.0)\n    self.assertLessEqual(val, 1.0)\nfor _, val in results['workers']['wqs'].items():\n    self.assertGreaterEqual(val, 0.0)\n    self.assertLessEqual(val, 1.0)\nfor _, val in results['annotations']['aqs'].items():\n    self.assertGreaterEqual(val, 0.0)\n    self.assertLessEqual(val, 1.0)\n"
-}

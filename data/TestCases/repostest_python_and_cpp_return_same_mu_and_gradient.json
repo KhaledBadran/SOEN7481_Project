@@ -1,9 +1,0 @@
-{
-    "functionName": "test_python_and_cpp_return_same_mu_and_gradient",
-    "className": "TestGaussianProcess",
-    "fileName": "/Yelp_&_MOE/moe_&_tests_&_optimal_learning_&_python_&_cpp_wrappers_&_gaussian_process_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Compare mu/grad mu results from Python & C++, checking seeral random points per test case.\"\"\"\nnum_tests_per_case = 4\nmu_tolerance = 3e-13\ngrad_mu_tolerance = 3e-12\nfor test_case in self.gp_test_environments:\n    domain, python_gp = test_case\n    python_cov, historical_data = python_gp.get_core_data_copy()\n    cpp_cov = SquareExponential(python_cov.hyperparameters)\n    cpp_gp = GaussianProcess(cpp_cov, historical_data)\n    for num_to_sample in self.num_to_sample_list:\n        for _ in xrange(num_tests_per_case):\n            points_to_sample = domain.generate_uniform_random_points_in_domain(\n                num_to_sample)\n            cpp_mu = cpp_gp.compute_mean_of_points(points_to_sample)\n            python_mu = python_gp.compute_mean_of_points(points_to_sample)\n            self.assert_vector_within_relative(python_mu, cpp_mu, mu_tolerance)\n            cpp_grad_mu = cpp_gp.compute_grad_mean_of_points(points_to_sample)\n            python_grad_mu = python_gp.compute_grad_mean_of_points(\n                points_to_sample)\n            self.assert_vector_within_relative(python_grad_mu, cpp_grad_mu,\n                grad_mu_tolerance)\n"
-}

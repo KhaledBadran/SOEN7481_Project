@@ -1,9 +1,0 @@
-{
-    "functionName": "test_instantiate_from_one",
-    "className": null,
-    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_scienceimage.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Run on a single science frame\n    \"\"\"\ndet = 1\npixelflat = load_kast_blue_masters(pixflat=True)[0]\nbpm = kast_blue.empty_bpm(shane_kast_blue_sci_files[0], det)\nframe_par = kast_par['scienceframe']\nframe_par['process']['use_illumflat'] = False\nframe_par['process']['use_biasimage'] = False\nrawImage = rawimage.RawImage(shane_kast_blue_sci_files[0], kast_blue, det)\nflatImages = flatfield.FlatImages(pixelflat_norm=pixelflat)\npypeItImage = rawImage.process(frame_par['process'], flatimages=flatImages)\ncooked_required"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_argv_recursive_path",
-    "className": null,
-    "fileName": "/ocaballeror_&_Lyricfetch/lyricfetch_&_tests_&_test_args.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Check that the `-r` flag can search in a different path given as an\n    argument too.\n    \"\"\"\ntempdir_dir = tmpdir / 'dir'\ntempdir_dir.mkdir()\nmp3s = [tmpdir / 'first.mp3', tmpdir / 'second.mp3', tempdir_dir /\n    'third.mp3', tempdir_dir / 'fourth.mp3']\nfor mp3 in mp3s:\n    shutil.copyfile(mp3file, mp3)\nmonkeypatch.setattr(sys, 'argv', [__file__, '-r', str(tmpdir)])\nsongs = parse_argv()\nsongs = set(pypath(s.filename) for s in songs)\nassert set(mp3s) == songs\n"
-}

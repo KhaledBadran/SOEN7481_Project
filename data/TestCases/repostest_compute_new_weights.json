@@ -1,9 +1,0 @@
-{
-    "functionName": "test_compute_new_weights",
-    "className": null,
-    "fileName": "/mozilla_&_CANOSP-2019/tests_&_test_server.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "server = make_server_populated()\ncheck_populated_server_output(server, 1.6, coef, intercept)\nserver = make_server_populated(avg_denom=2)\ncheck_populated_server_output(server, 8, coef, intercept)\nserver = make_server_populated(avg_denom=2, standard_dev=1.0)\nreset_random_seed()\nnew_coef, new_inter = server.compute_new_weights()\nexpected_coef = np.zeros_like(coef) + 8 + normal_noise[0]\nexpected_intercept = np.zeros_like(intercept) + 8 + normal_noise[1]\nassert with_noise_array_equals(new_coef, expected_coef)\nassert with_noise_array_equals(new_inter, expected_intercept)\n"
-}

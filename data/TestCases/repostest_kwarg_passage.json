@@ -1,9 +1,0 @@
-{
-    "functionName": "test_kwarg_passage",
-    "className": "TestRetryDecorator",
-    "fileName": "/facebook_&_Ax/ax_&_utils_&_common_&_tests_&_test_executils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Tests if the decorator correctly takes the suppress all errors\n        flag from the kwargs of the decorated function.\n        \"\"\"\nclass DecoratorTester:\n\n    @retry_on_exception(default_return_on_suppression='SUCCESS')\n    def error_throwing_function(self, suppress_all_errors=False,\n        extra_kwarg='1234'):\n        self.assertEqual(extra_kwarg, 'abcd')\n        raise Exception('ERROR THROWN FOR TESTING. SHOULD HAVE BEEN CAUGHT')\ndecorator_tester = DecoratorTester()\nself.assertEqual('SUCCESS', decorator_tester.error_throwing_function(\n    suppress_all_errors=True, extra_kwarg='abcd'))\n"
-}

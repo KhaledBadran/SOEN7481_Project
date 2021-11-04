@@ -1,9 +1,0 @@
-{
-    "functionName": "test_patch",
-    "className": null,
-    "fileName": "/132nd-etcher_&_EPAB/test_&_test_cmd_&_test_freeze.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "repo = mock(spec=epab.utils.Repo)\nCTX.repo = repo\nnow = datetime.datetime.utcnow()\ntimestamp = f'{now.year}{now.month}{now.day}{now.hour}{now.minute}'\npackage_name = config.PACKAGE_NAME()\nwhen(repo).get_current_branch().thenReturn('branch')\nwhen(repo).get_sha().thenReturn('sha')\nwhen(elib_run).run(\n    f'dummy.exe ./dist/{package_name}.exe /high version /va /pv version /s desc {package_name} /s product {package_name} /s title {package_name} /s copyright {now.year}-etcher /s company etcher /s SpecialBuild version /s PrivateBuild version-branch_sha-{timestamp} /langid 1033'\n    )\nwhen(epab.utils).resource_path(...).thenReturn('dummy.exe')\nfreeze._patch('version')\n"
-}

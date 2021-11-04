@@ -1,9 +1,0 @@
-{
-    "functionName": "test_multiclass",
-    "className": "TestEngine",
-    "fileName": "/microsoft_&_LightGBM/tests_&_python_package_test_&_test_consistency.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "fd = FileLoader('../../examples/multiclass_classification', 'multiclass')\nX_train, y_train, _ = fd.load_dataset('.train')\nX_test, _, X_test_fn = fd.load_dataset('.test')\nlgb_train = lgb.Dataset(X_train, y_train)\ngbm = lgb.LGBMClassifier(**fd.params)\ngbm.fit(X_train, y_train)\nsk_pred = gbm.predict_proba(X_test)\nfd.train_predict_check(lgb_train, X_test, X_test_fn, sk_pred)\nfd.file_load_check(lgb_train, '.train')\n"
-}

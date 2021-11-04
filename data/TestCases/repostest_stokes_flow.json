@@ -1,9 +1,0 @@
-{
-    "functionName": "test_stokes_flow",
-    "className": "SubclassedTransportTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_SubclassedTransportTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "alg = op.algorithms.StokesFlow(network=self.net, phase=self.phase)\nself.phys['throat.hydraulic_conductance'] = 1\nPin = self.net.pores('top')\nPout = self.net.pores('bottom')\nalg.set_value_BC(pores=Pin, values=101325)\nalg.set_value_BC(pores=Pout, values=0)\nalg.run()\nrate_in = alg.rate(pores=Pin)[0]\nrate_out = alg.rate(pores=Pout)[0]\nrate_total = alg.rate(self.net.pores('surface'))[0]\nassert_allclose(rate_in, 1025915.625)\nassert_allclose(rate_in, -rate_out)\nassert rate_in > 0\nassert abs(rate_total) < rate_in * 1e-14\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_generate_overhangs_collection",
-    "className": null,
-    "fileName": "/Edinburgh-Genome-Foundry_&_GoldenHinges/tests_&_test_basics.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "selector = OverhangsSelector(gc_min=0.5, gc_max=0.5, differences=2,\n    time_limit=2)\ncollection = selector.generate_overhangs_set(n_overhangs=18, n_cliques=100)\ncollection = selector.generate_overhangs_set(start_at=len(collection))\nassert len(collection) == 24\nfor o1, o2 in itertools.combinations(collection, 2):\n    assert sequences_differences(o1, o2) >= 2\n    assert sequences_differences(o1, reverse_complement(o2)) >= 2\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_load_unloaded_subtype",
-    "className": "ClassRegistryTest",
-    "fileName": "/openworm_&_PyOpenWorm/tests_&_DataObjectTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        This test actually combines a few different features:\n            - loading a module from a ClassDescription\n            - resolving subclasses from superclasses\n        \"\"\"\nfrom owmeta.dataObject import PythonModule, PythonClassDescription, RegistryEntry\nident = R.URIRef('http://openworm.org/entities/TDO01')\nrdftype = R.RDF['type']\nsc = R.RDFS['subClassOf']\ntdo = R.URIRef('http://openworm.org/entities/TDO')\npm = R.URIRef('http://example.com/pymod')\npcd = R.URIRef('http://example.com/pycd')\nre = R.URIRef('http://example.com/re')\ng = R.ConjunctiveGraph()\nctx = g.get_context(self.context.identifier)\nself.TestConfig['rdf.graph'] = g\ntrips = [(ident, rdftype, tdo), (tdo, sc, DataObject.rdf_type), (pm,\n    rdftype, PythonModule.rdf_type), (pm, PythonModule.name.link, R.Literal\n    ('tests.tmod.tdo')), (pcd, PythonClassDescription.name.link, R.Literal(\n    'TDO')), (pcd, rdftype, PythonClassDescription.rdf_type), (pcd,\n    PythonClassDescription.module.link, pm), (re, rdftype, RegistryEntry.\n    rdf_type), (re, RegistryEntry.rdf_class.link, tdo), (re, RegistryEntry.\n    class_description.link, pcd)]\nfor tr in trips:\n    ctx.add(tr)\no = list(self.context.stored(DataObject)(ident=ident).load())\nself.assertEqual('tests.tmod.tdo.TDO', FCN(type(o[0])))\n"
-}

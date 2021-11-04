@@ -1,9 +1,0 @@
-{
-    "functionName": "test_stream_stats",
-    "className": "TestXenaOnline",
-    "fileName": "/xenadevel_&_PyXenaValkyrie/tests_&_test_online.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" For this test we need back-to-back ports. \"\"\"\nports = self.xm.session.reserve_ports([self.port1, self.port2])\nports[self.port1].load_config(path.join(path.dirname(__file__), 'configs',\n    'test_config_1.xpc'))\nports[self.port2].load_config(path.join(path.dirname(__file__), 'configs',\n    'test_config_2.xpc'))\nself.xm.session.start_traffic(blocking=True)\ntpld_stats = XenaTpldsStats(self.xm.session)\nprint(tpld_stats.read_stats().dumps())\nstreams_stats = XenaStreamsStats(self.xm.session)\nstreams_stats.read_stats()\nprint(streams_stats.tx_statistics.dumps())\nprint(streams_stats.statistics.dumps())\nassert streams_stats.tx_statistics['Stream 1-1']['packets'] == 8000\nassert streams_stats.tx_statistics[ports[self.port1].streams[0]]['packets'\n    ] == 8000\nassert streams_stats.statistics[ports[self.port1].streams[0]]['tx']['packets'\n    ] == 8000\nassert streams_stats.statistics['Stream 1-1']['tx']['packets'] == 8000\nassert streams_stats.statistics['/'.join(self.port1.split('/')[1:]) + '/0'][\n    'tx']['packets'] == 8000\nassert streams_stats.statistics['Stream 1-1']['rx']['pr_tpldtraffic']['pac'\n    ] == 8000\nassert streams_stats.statistics['Stream 1-1']['rx'][ports[self.port2]][\n    'pr_tpldtraffic']['pac'] == 8000\nassert streams_stats.statistics['Stream 1-1']['rx'][self.port2][\n    'pr_tpldtraffic']['pac'] == 8000\n"
-}

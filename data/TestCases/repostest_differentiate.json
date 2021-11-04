@@ -1,9 +1,0 @@
-{
-    "functionName": "test_differentiate",
-    "className": null,
-    "fileName": "/apetri_&_LensTools/lenstools_&_tests_&_test_ensemble.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "conv_ensemble_peaks_cumulative = Ensemble.compute(file_list=map_list,\n    callback_loader=peaks_loader, pool=None, thresholds=thresholds_pk).cumsum(1\n    )\ndiff_ensemble = conv_ensemble_peaks_cumulative.apply(lambda s: s.diff(), axis=1\n    )\nfig, ax = plt.subplots()\nfor i in range(diff_ensemble.nobs):\n    ax.plot(0.5 * (thresholds_pk[:-1] + thresholds_pk[1:]), diff_ensemble.\n        values[i])\nax.set_xlabel('$\\\\kappa$')\nax.set_ylabel('$P(\\\\kappa)$')\nfig.savefig('ensemble_differentiate.png')\n"
-}

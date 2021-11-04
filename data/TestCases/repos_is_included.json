@@ -1,9 +1,0 @@
-{
-    "functionName": "_is_included",
-    "className": "OnToma",
-    "fileName": "/opentargets_&_OnToma/ontoma_&_interface.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        FIXME: this function should check against an actual index/ontology,\n        not be guessing the right root nodes.\n\n        checks if efo term with given iri has for ancestors one of the nodes\n        we select for open targets\n        \"\"\"\nif not ontology:\n    ontology = 'efo'\ntry:\n    for ancestor in self._ols.get_ancestors(ontology, iri):\n        if ancestor['iri'] in OT_TOP_NODES:\n            return True\nexcept KeyError:\n    pass\nreturn False\n"
-}

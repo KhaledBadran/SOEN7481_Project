@@ -1,9 +1,0 @@
-{
-    "functionName": "test_experiment_with_list_3",
-    "className": "TestRecallExperiment",
-    "fileName": "/pixelogik_&_NearPy/tests_&_experiments_tests.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "dim = 50\nvector_count = 100\nvectors = []\nfor index in range(vector_count):\n    vectors.append(numpy.random.randn(dim))\nunibucket = UniBucket('testHash')\nnearest = NearestFilter(5 + 1)\nengine = Engine(dim, lshashes=[unibucket], vector_filters=[nearest])\nexp = RecallPrecisionExperiment(10, vectors)\nresult = exp.perform_experiment([engine])\nself.assertEqual(result[0][0], 0.5)\nself.assertEqual(result[0][1], 1.0)\n"
-}

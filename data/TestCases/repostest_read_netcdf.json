@@ -1,9 +1,0 @@
-{
-    "functionName": "test_read_netcdf",
-    "className": "TestReadNetcdf",
-    "fileName": "/twhiteaker_&_CFGeom/cfgeom_&_test_&_test_ncgeom_&_test_convert_&_test_netcdf_&_test_nc_reader.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "root = join(self.path_data, 'simplified_examples')\nfiles = [join(root, f) for f in os.listdir(root) if f.endswith('.json')]\nfor json_file in files:\n    with open(json_file) as f:\n        data = json.load(f)\n    nc_files = [json_file.replace('.json', '_cra.nc'), json_file.replace(\n        '.json', '_vlen.nc')]\n    for nc_file in nc_files:\n        containers = read_netcdf(nc_file)\n        container = containers['geometry_container']['container']\n        self.assertEqual(json.loads(container.to_json()), data)\n"
-}

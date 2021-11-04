@@ -1,9 +1,0 @@
-{
-    "functionName": "test__left_quadrant__1_ci_region__1_serial_trail__extracts_all_trails",
-    "className": "TestSerialAllTrailsArrayFromFrame",
-    "fileName": "/Jammy2211_&_PyAutoCTI/test_&_unit_&_charge_injection_&_test_ci_frame.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "pattern = ci_pattern.CIPattern(normalization=10.0, regions=[(0, 4, 0, 2)])\nframe_geometry = ci_frame.FrameGeometry.euclid_bottom_left()\nframe_geometry.serial_overscan = ci_frame.Region((0, 4, 2, 3))\nimage = np.array([[0.0, 1.0, 2.0], [3.0, 4.0, 5.0], [6.0, 7.0, 8.0], [9.0, \n    10.0, 11.0]])\nframe = ci_frame.ChInj(frame_geometry=frame_geometry, ci_pattern=pattern)\nnew_frame = frame.serial_all_trails_frame_from_frame(image)\nassert (new_frame == np.array([[0.0, 0.0, 2.0], [0.0, 0.0, 5.0], [0.0, 0.0,\n    8.0], [0.0, 0.0, 11.0]])).all()\n"
-}

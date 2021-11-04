@@ -1,9 +1,0 @@
-{
-    "functionName": "mpi_checker",
-    "className": null,
-    "fileName": "/Silmathoron_&_NNGT/nngt_&_lib_&_test_functions.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Decorator used to check for mpi and make sure only rank zero is used\n    to store and generate the graph if the mpi algorithms are activated.\n    \"\"\"\ndef decorator(func):\n\n    def wrapper(func, *args, **kwargs):\n        try:\n            from mpi4py import MPI\n            comm = MPI.COMM_WORLD\n            comm.Barrier()\n        except ImportError:\n            pass\n        backend = False\n        if not logging:\n            backend = nngt.get_config('backend') == 'nngt'\n        if backend or on_master_process():\n            return func(*args, **kwargs)\n        else:\n            return None\n    return decorate(func, wrapper)\nreturn decorator\n"
-}

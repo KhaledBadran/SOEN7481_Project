@@ -1,9 +1,0 @@
-{
-    "functionName": "test_detections_000_ole",
-    "className": "DetectionTestCase",
-    "fileName": "/IntegralDefense_&_ACE/lib_&_saq_&_test_detection.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "submissions = {}\nfor file_name in os.listdir(OFFICE_SAMPLES):\n    source_path = os.path.join(OFFICE_SAMPLES, file_name)\n    root = create_root_analysis(uuid=str(uuid.uuid4()))\n    root.initialize_storage()\n    shutil.copy(source_path, root.storage_dir)\n    root.add_observable(F_FILE, file_name)\n    root.save()\n    root.schedule()\n    submissions[root.storage_dir] = source_path\nengine = TestEngine()\nengine.enable_module('analysis_module_archive')\nengine.enable_module('analysis_module_file_type')\nengine.enable_module('analysis_module_olevba_v1_1')\nengine.enable_module('analysis_module_officeparser_v1_0')\nengine.enable_module('analysis_module_yara_scanner_v3_4')\nengine.controlled_stop()\nengine.start()\nengine.wait()\nfor storage_dir in submissions:\n    with self.subTest(storage_dir=storage_dir, source_path=submissions[\n        storage_dir]):\n        root = RootAnalysis()\n        root.storage_dir = storage_dir\n        root.load()\n        detections = root.all_detection_points\n        self.assertGreater(len(detections), 0)\n"
-}

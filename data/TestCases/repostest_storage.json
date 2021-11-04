@@ -1,9 +1,0 @@
-{
-    "functionName": "test_storage",
-    "className": "TestFeatureGeneration",
-    "fileName": "/SUNCAT-Center_&_CatLearn/test_&_test_1_feature_generation.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test database functions.\"\"\"\ndb_name = '/vec_store.sqlite'\ndescriptors = [('f' + str(i)) for i in range(np.shape(self.data)[1])]\ntargets = ['Energy']\nnames = descriptors + targets\ndd = DescriptorDatabase(db_name=wkdir + db_name, table='FingerVector')\ndd.create_db(names=names)\nprint('Generate the database')\nnew_data = []\nfor i, a in zip(self.data, self.all_cand):\n    d = []\n    d.append(a.info['unique_id'])\n    for j in i:\n        d.append(j)\n    d.append(a.info['key_value_pairs']['raw_score'])\n    new_data.append(d)\ndd.fill_db(descriptor_names=names, data=new_data)\ntrain_fingerprint = dd.query_db(names=descriptors)\ntrain_target = dd.query_db(names=targets)\nprint(\"\"\"\nfeature data for candidates:\n\"\"\", train_fingerprint,\n    \"\"\"\ntarget data for candidates:\n\"\"\", train_target)\ncand_data = dd.query_db(unique_id='7a216711c2eae02decc04da588c9e592')\nprint(\"\"\"\ndata for random candidate:\n\"\"\", cand_data)\nall_id = dd.query_db(names=['uuid'])\ndd.create_column(new_column=['random'])\nfor i in all_id:\n    dd.update_descriptor(descriptor='random', new_data=random(), unique_id=i[0]\n        )\nprint(\"\"\"\nretrieve random vars:\n\"\"\", dd.query_db(names=['random']))\nprint(\"\"\"\nretrieved column names:\n\"\"\", dd.get_column_names())\n"
-}

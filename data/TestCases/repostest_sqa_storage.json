@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sqa_storage",
-    "className": "TestAxClient",
-    "fileName": "/facebook_&_Ax/ax_&_service_&_tests_&_test_ax_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "init_test_engine_and_session_factory(force_init=True)\nconfig = SQAConfig()\nencoder = Encoder(config=config)\ndecoder = Decoder(config=config)\ndb_settings = DBSettings(encoder=encoder, decoder=decoder)\nax_client = AxClient(db_settings=db_settings)\nax_client.create_experiment(name='test_experiment', parameters=[{'name':\n    'x', 'type': 'range', 'bounds': [-5.0, 10.0]}, {'name': 'y', 'type':\n    'range', 'bounds': [0.0, 15.0]}], minimize=True)\nfor _ in range(5):\n    parameters, trial_index = ax_client.get_next_trial()\n    ax_client.complete_trial(trial_index=trial_index, raw_data=branin(*\n        parameters.values()))\ngs = ax_client.generation_strategy\nax_client = AxClient(db_settings=db_settings)\nax_client.load_experiment_from_database('test_experiment')\ngs._seen_trial_indices_by_status[TrialStatus.COMPLETED].add(4)\nself.assertEqual(gs, ax_client.generation_strategy)\nwith self.assertRaises(ValueError):\n    ax_client.create_experiment(name='test_experiment', parameters=[{'name':\n        'x', 'type': 'range', 'bounds': [-5.0, 10.0]}, {'name': 'y', 'type':\n        'range', 'bounds': [0.0, 15.0]}], minimize=True)\nwith self.assertRaises(ValueError):\n    ax_client.create_experiment(name='test_experiment', parameters=[{'name':\n        'x', 'type': 'range', 'bounds': [-5.0, 10.0]}],\n        overwrite_existing_experiment=True)\nself.assertEqual(len(ax_client.experiment.trials), 5)\n"
-}

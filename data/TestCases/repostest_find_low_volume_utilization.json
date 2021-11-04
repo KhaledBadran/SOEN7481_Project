@@ -1,9 +1,0 @@
-{
-    "functionName": "test_find_low_volume_utilization",
-    "className": "CITestProvisioning",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test find_low_volume_utilization.\"\"\"\ncsv_file_name = 'test.csv'\ntemp_dir = self.create_temp_directory()\ncsv_file_path = os.path.join(temp_dir, csv_file_name)\nself.provisioning.find_low_volume_utilization(10, csv_file_path)\nparsed_values = file_handler.read_csv_values(csv_file_path)\nself.assertIsNotNone(parsed_values)\nself.assertIsInstance(parsed_values, dict)\nsg_name = 'sg_name'\nidentifier = 'identifier'\ncapacity = 'capacity'\nself.assertIn(sg_name, parsed_values)\nself.assertIn(constants.VOLUME_ID, parsed_values)\nself.assertIn(identifier, parsed_values)\nself.assertIn(capacity, parsed_values)\nself.assertIn(constants.ALLOCATED_PERCENT, parsed_values)\nself.assertIsInstance(parsed_values[sg_name], list)\nself.assertIsInstance(parsed_values[constants.VOLUME_ID], list)\nself.assertIsInstance(parsed_values[identifier], list)\nself.assertIsInstance(parsed_values[capacity], list)\nself.assertIsInstance(parsed_values[constants.ALLOCATED_PERCENT], list)\n"
-}

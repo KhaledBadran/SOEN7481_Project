@@ -1,9 +1,0 @@
-{
-    "functionName": "test_inline_expression_from_arg_one",
-    "className": "ScopeTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_def.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"test that cache_key=${foo} gets its value from\n        the 'foo' argument in the <%def> tag,\n        and strict_undefined doesn't complain.\n\n        this is #191.\n\n        \"\"\"\nt = Template(\n    \"\"\"\n        <%def name=\"layout(foo)\" cached=\"True\" cache_key=\"${foo}\">\n        foo: ${foo}\n        </%def>\n\n        ${layout(3)}\n        \"\"\"\n    , strict_undefined=True, cache_impl='plain')\neq_(result_lines(t.render()), ['foo: 3'])\n"
-}

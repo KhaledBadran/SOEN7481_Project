@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_async_search_result",
-    "className": null,
-    "fileName": "/mcs07_&_ChemSpiPy/tests_&_test_api.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test get_async_search_result returns a list of CSIDs.\"\"\"\nwith pytest.deprecated_call():\n    rid = cs.async_simple_search('benzene')\n    while True:\n        status = cs.get_async_search_status(rid)\n        if status in {'Created', 'Scheduled', 'Processing'}:\n            continue\n        assert [c.csid for c in cs.get_async_search_result(rid)] == [236]\n        break\n"
-}

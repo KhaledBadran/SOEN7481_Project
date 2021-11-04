@@ -1,9 +1,0 @@
-{
-    "functionName": "test_multiplePackagesObject",
-    "className": "WrapFQPNTests",
-    "fileName": "/glyph_&_Automat/automat_&__test_&_test_discover.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        L{wrapFQPN} returns a L{twisted.python.modules.PythonAttribute}\n        referring to the deepest object described by an FQPN,\n        descending through several packages.\n        \"\"\"\nimport xml.etree.ElementTree\nimport automat\nfor fqpn, obj in [('xml.etree.ElementTree.fromstring', xml.etree.\n    ElementTree.fromstring), ('automat.MethodicalMachine.__doc__', automat.\n    MethodicalMachine.__doc__)]:\n    self.assertAttributeWrapperRefersTo(self.wrapFQPN(fqpn), fqpn, obj)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_greedy_allocation_rmse_error_short",
-    "className": null,
-    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_discrete_allocation.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "df = get_data()\nmu = mean_historical_return(df)\nS = sample_cov(df)\nef = EfficientFrontier(mu, S, weight_bounds=(-1, 1))\nw = ef.max_sharpe()\nlatest_prices = get_latest_prices(df)\nda = DiscreteAllocation(w, latest_prices)\nda.greedy_portfolio()\nnp.testing.assert_almost_equal(da._allocation_rmse_error(), \n    0.033070015016740284)\n"
-}

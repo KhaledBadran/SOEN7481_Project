@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_response_json_creates_expected_json_with_time_series_data",
-    "className": "TestResponseRetriever",
-    "fileName": "/bigfishgames_&_GameBenchAPI-PyClient/tests_&_test_integration_&_test_api_&_test_response_&_test_response_mediator.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Verify the json we are expecting is returned from the Adapter.\"\"\"\nfor test, params in self.test_params.items():\n    session_parameters = {'method': params['method'], 'session_id': params[\n        'session_id'], 'metric': params['metric'], 'auth_token': AUTH_TOKEN,\n        'params': params['params'], 'data': params['data']}\n    expected_request_parameters = {'method': params['method'], 'url':\n        params['url'], 'attributes': params['attributes']}\n    adapter = RequestsAdapter(**expected_request_parameters)\n    mock_return.request(params['method'], params['url'], json=self.\n        time_series_json['response'])\n    expected_json = adapter.request().json()\n    expected = expected_json['samples']\n    self.retriever = ResponseRetriever(**session_parameters)\n    actual_json = self.retriever.get_response_json()\n    actual = actual_json['samples']\n    self.assertEqual(expected, actual, self.error_message.format(test,\n        expected, actual))\nrequests_mock.Mocker()"
-}

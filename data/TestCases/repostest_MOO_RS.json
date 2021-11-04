@@ -1,9 +1,0 @@
-{
-    "functionName": "test_MOO_RS",
-    "className": "ModelBridgeFactoryTest",
-    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_factory.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "single_obj_exp = get_branin_experiment(with_batch=True)\nwith self.assertRaises(ValueError):\n    get_MOO_RS(experiment=single_obj_exp, data=single_obj_exp.fetch_data())\nmulti_obj_exp = get_branin_experiment_with_multi_objective(with_batch=True)\nwith self.assertRaises(ValueError):\n    get_MOO_RS(experiment=multi_obj_exp, data=multi_obj_exp.fetch_data())\nmulti_obj_exp.trials[0].run()\nmoo_rs = get_MOO_RS(experiment=multi_obj_exp, data=multi_obj_exp.fetch_data())\nself.assertIsInstance(moo_rs, TorchModelBridge)\nself.assertEqual({'acquisition_function_kwargs': {'random_scalarization': \n    True, 'sequential': True}}, moo_rs._default_model_gen_options)\nmoo_rs_run = moo_rs.gen(n=5)\nself.assertEqual(len(moo_rs_run.arms), 5)\n"
-}

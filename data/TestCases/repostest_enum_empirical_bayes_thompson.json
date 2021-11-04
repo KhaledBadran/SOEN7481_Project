@@ -1,9 +1,0 @@
-{
-    "functionName": "test_enum_empirical_bayes_thompson",
-    "className": "ModelRegistryTest",
-    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_registry.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Tests EB/TS instantiation through the Models enum.\"\"\"\nexp = get_factorial_experiment()\nfactorial = Models.FACTORIAL(exp.search_space)\nself.assertIsInstance(factorial, DiscreteModelBridge)\nfactorial_run = factorial.gen(n=-1)\nexp.new_batch_trial().add_generator_run(factorial_run).run()\ndata = exp.fetch_data()\neb_thompson = Models.EMPIRICAL_BAYES_THOMPSON(experiment=exp, data=data,\n    min_weight=0.0)\nself.assertIsInstance(eb_thompson, DiscreteModelBridge)\nself.assertIsInstance(eb_thompson.model, EmpiricalBayesThompsonSampler)\nthompson_run = eb_thompson.gen(n=5)\nself.assertEqual(len(thompson_run.arms), 5)\n"
-}

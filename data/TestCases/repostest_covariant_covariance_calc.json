@@ -1,9 +1,0 @@
-{
-    "functionName": "test_covariant_covariance_calc",
-    "className": "TestChain",
-    "fileName": "/samreay_&_ChainConsumer/tests_&_test_analysis.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data1 = np.random.multivariate_normal([0, 0], [[1, 0], [0, 1]], size=10000)\ndata2 = np.random.multivariate_normal([0, 0], [[2, 1], [1, 2]], size=10000)\nweights = np.concatenate((np.ones(10000), np.zeros(10000)))\ndata = np.concatenate((data1, data2))\nc = ChainConsumer()\nc.add_chain(data, weights=weights, parameters=['x', 'y'])\np, cor = c.analysis.get_covariance()\nassert p[0] == 'x'\nassert p[1] == 'y'\nassert np.isclose(cor[0, 0], 1, atol=0.04)\nassert np.isclose(cor[1, 1], 1, atol=0.04)\nassert np.isclose(cor[0, 1], 0, atol=0.04)\nassert cor.shape == (2, 2)\n"
-}

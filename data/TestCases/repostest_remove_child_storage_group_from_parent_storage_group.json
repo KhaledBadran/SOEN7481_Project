@@ -1,9 +1,0 @@
-{
-    "functionName": "test_remove_child_storage_group_from_parent_storage_group",
-    "className": "PyU4VProvisioningTest",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test remove_child_storage_group_from_parent_storage_group.\"\"\"\nparent_storage_group = self.data.parent_sg\nchild_storage_group = self.data.storagegroup_name_1\nref_payload = {'editStorageGroupActionParam': {'removeStorageGroupParam': {\n    'storageGroupId': [child_storage_group], 'force': 'true'}}}\nwith mock.patch.object(self.provisioning, 'modify_storage_group') as mock_mod:\n    self.provisioning.remove_child_sg_from_parent_sg(child_storage_group,\n        parent_storage_group)\n    mock_mod.assert_called_once_with(parent_storage_group, ref_payload)\nref_result = self.data.job_list[0]\nact_result = self.provisioning.remove_child_sg_from_parent_sg(\n    child_storage_group, parent_storage_group)\nself.assertEqual(ref_result, act_result)\n"
-}

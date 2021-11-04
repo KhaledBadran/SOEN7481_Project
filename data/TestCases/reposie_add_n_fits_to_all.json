@@ -1,9 +1,0 @@
-{
-    "functionName": "ie_add_n_fits_to_all",
-    "className": "TestDemagGUI",
-    "fileName": "/PmagPy_&_PmagPy/pmagpy_tests_&_test_demag_gui.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "tools_menu = self.get_menu_from_frame(self.frame, 'Tools')\nopen_ie_evt = wx.PyCommandEvent(wx.EVT_MENU.typeId, tools_menu.FindItem(\n    '&Interpretation editor\\tCtrl-E'))\nself.frame.ProcessEvent(open_ie_evt)\nself.assertTrue(self.frame.ie_open)\nie = self.frame.ie\naddall_evt = wx.PyCommandEvent(wx.EVT_BUTTON.typeId, ie.add_all_button.GetId())\nfor i in range(n):\n    steps = self.frame.Data[self.frame.s]['zijdblock_steps']\n    tmin = steps[rn.randint(0, len(steps) - 3)]\n    tmax = steps[rn.randint(steps.index(tmin) + 2, len(steps) - 1)]\n    ie.tmin_box.SetValue(tmin)\n    ie.tmax_box.SetValue(tmax)\n    ie.name_box.Clear()\n    ie.name_box.WriteText('test%d' % i)\n    self.assertEqual(ie.tmin_box.GetValue(), tmin)\n    self.assertEqual(ie.tmax_box.GetValue(), tmax)\n    self.assertEqual(ie.name_box.GetValue(), 'test%d' % i)\n    wx.CallAfter(ie.ProcessEvent, addall_evt)\n"
-}

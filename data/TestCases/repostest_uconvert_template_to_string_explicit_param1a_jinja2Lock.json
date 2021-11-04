@@ -1,9 +1,0 @@
-{
-    "functionName": "test_uconvert_template_to_string_explicit_param1a_jinja2Lock",
-    "className": null,
-    "fileName": "/alex-ber_&_AlexBerUtils/tests_&_utils_&_ymlparsers_extra_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "logger.info(f'{request._pyfuncitem.name}{ymlparsersExtraFixture}')\nmock_lock = create_mock_lock(mocker)\nmocker.patch.object(HiYaPyCo, 'jinja2Lock', new=mock_lock, spec_set=True)\njinja2ctx_mock = mocker.patch.object(HiYaPyCo, 'jinja2ctx', spec_set=True)\nexp_value = '{name}'\ntemplate = '{{name}}'\njinja2Lock_param_lock = create_mock_lock(mocker)\nvalue = _convert_template_to_string_format(template, jinja2Lock=\n    jinja2Lock_param_lock)\npytest.assume(exp_value == value)\npytest.assume(mock_lock.acquire.call_count == 0)\npytest.assume(jinja2ctx_mock.call_count == 0)\npytest.mark.parametrize('ymlparsersExtraFixture', [(False, True)], indirect\n    =True)pytest.mark.yml"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_create_parameter_df",
-    "className": null,
-    "fileName": "/PEtab-dev_&_PEtab/tests_&_test_petab.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test petab.create_parameter_df.\"\"\"\n_, model = minimal_sbml_model\ns = model.createSpecies()\ns.setId('x1')\npetab.sbml.add_global_parameter(model, parameter_id='fixedParameter1',\n    parameter_name='FixedParameter1', value=2.0)\npetab.sbml.add_global_parameter(model, parameter_id='p0', parameter_name=\n    'Parameter 0', value=3.0)\nobservable_df = pd.DataFrame(data={OBSERVABLE_ID: ['obs1', 'obs2'],\n    OBSERVABLE_FORMULA: ['x1', '2*x1']}).set_index(OBSERVABLE_ID)\npetab.add_global_parameter(sbml_model=model, parameter_id='assignment_target')\npetab.create_assigment_rule(sbml_model=model, assignee_id=\n    'assignment_target', formula='1.0')\nmeasurement_df = pd.DataFrame(data={OBSERVABLE_ID: ['obs1', 'obs2'],\n    OBSERVABLE_PARAMETERS: ['', 'p1;p2'], NOISE_PARAMETERS: ['p3;p4', 'p5']})\nparameter_df = petab.create_parameter_df(model, condition_df_2_conditions,\n    observable_df, measurement_df)\nexpected = ['p3', 'p4', 'p1', 'p2', 'p5']\nactual = parameter_df.index.values.tolist()\nassert actual == expected\ncondition_df_2_conditions.loc['condition2', 'fixedParameter1'] = 'overrider'\nexpected = ['p3', 'p4', 'p1', 'p2', 'p5', 'overrider']\nparameter_df = petab.create_parameter_df(model, condition_df_2_conditions,\n    observable_df, measurement_df)\nactual = parameter_df.index.values.tolist()\nassert actual == expected\nexpected = ['p0', 'p3', 'p4', 'p1', 'p2', 'p5', 'overrider']\nparameter_df = petab.create_parameter_df(model, condition_df_2_conditions,\n    observable_df, measurement_df, include_optional=True)\nactual = parameter_df.index.values.tolist()\nassert actual == expected\nassert parameter_df.loc['p0', NOMINAL_VALUE] == 3.0\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_create_multiport_portgroup",
-    "className": "CITestProvisioning",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test create_multiport_portgroup.\"\"\"\nport_group_name = self.generate_name(constants.PORT_GROUP)\nfa_directors = self.provisioning.get_fa_directors()\nselected_director_ports = list()\nfor director in fa_directors:\n    if len(selected_director_ports) < 2:\n        ports = self.provisioning.get_director_port_list(director, filters=\n            'aclx=true')\n        ports = [p for p in ports if int(p[constants.PORT_ID]) < 30]\n        selected_director_ports.append(ports[0])\nreference_director_ports = list()\nfor director_port in selected_director_ports:\n    director_id = director_port[constants.DIRECTOR_ID]\n    port_id = director_port[constants.PORT_ID]\n    formatted_director_port = self.provisioning.format_director_port(\n        director_id, port_id)\n    reference_director_ports.append(formatted_director_port)\nport_group_details = self.provisioning.create_multiport_portgroup(\n    port_group_name, selected_director_ports)\nself.addCleanup(self.delete_port_group, port_group_name)\nself._validate_port_group_details(port_group_name, port_group_details,\n    reference_director_ports, 2)\n"
-}

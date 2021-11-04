@@ -1,9 +1,0 @@
-{
-    "functionName": "testRFModel",
-    "className": "RandomForestTest",
-    "fileName": "/facebook_&_Ax/ax_&_models_&_tests_&_test_randomforest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "Xs = [np.random.rand(10, 2) for i in range(2)]\nYs = [np.random.rand(10, 1) for i in range(2)]\nYvars = [np.random.rand(10, 1) for i in range(2)]\nm = RandomForest(num_trees=5)\nm.fit(Xs=Xs, Ys=Ys, Yvars=Yvars, bounds=[(0, 1)] * 2, task_features=[],\n    feature_names=['x1', 'x2'], metric_names=['y'], fidelity_features=[])\nself.assertEqual(len(m.models), 2)\nself.assertEqual(len(m.models[0].estimators_), 5)\nf, cov = m.predict(np.random.rand(5, 2))\nself.assertEqual(f.shape, (5, 2))\nself.assertEqual(cov.shape, (5, 2, 2))\nf, cov = m.cross_validate(Xs_train=Xs, Ys_train=Ys, Yvars_train=Yvars,\n    X_test=np.random.rand(3, 2))\nself.assertEqual(f.shape, (3, 2))\nself.assertEqual(cov.shape, (3, 2, 2))\n"
-}

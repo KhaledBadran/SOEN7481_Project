@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_model",
-    "className": "BotorchDefaultsTest",
-    "fileName": "/facebook_&_Ax/ax_&_models_&_tests_&_test_botorch_defaults.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "x = torch.zeros(2, 2)\ny = torch.zeros(2, 1)\nvar = torch.zeros(2, 1)\npartial_var = torch.tensor([0, float('nan')]).unsqueeze(-1)\nunknown_var = torch.tensor([float('nan'), float('nan')]).unsqueeze(-1)\nmodel = _get_model(x, y, unknown_var, None)\nself.assertIsInstance(model, SingleTaskGP)\nmodel = _get_model(X=x, Y=y, Yvar=var)\nself.assertIsInstance(model, FixedNoiseGP)\nmodel = _get_model(X=x, Y=y, Yvar=unknown_var, task_feature=1)\nself.assertTrue(type(model) == MultiTaskGP)\nmodel = _get_model(X=x, Y=y, Yvar=var, task_feature=1)\nself.assertIsInstance(model, FixedNoiseMultiTaskGP)\nmodel = _get_model(X=x, Y=y, Yvar=partial_var.clone(), task_feature=1)\nself.assertIsInstance(model, FixedNoiseMultiTaskGP)\nmodel = _get_model(X=x, Y=y, Yvar=partial_var.clone(), task_feature=1, rank=1)\nself.assertEqual(model._rank, 1)\nwith self.assertRaises(ValueError):\n    model = _get_model(X=x, Y=y, Yvar=partial_var, task_feature=None)\nmodel = _get_model(X=x, Y=y, Yvar=var, fidelity_features=[-1])\nself.assertTrue(isinstance(model, SingleTaskMultiFidelityGP))\nwith self.assertRaises(NotImplementedError):\n    _get_model(X=x, Y=y, Yvar=var, task_feature=1, fidelity_features=[-1])\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_monthly",
-    "className": null,
-    "fileName": "/roniemartinez_&_DocCron/tests_&_test_predefined.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "cron = doccron.cron('@monthly')\nnext_month = datetime.now(tz=tzlocal()).replace(day=1, hour=0, minute=0,\n    second=0, microsecond=0)\nfor _ in range(3):\n    if next_month.month == 12:\n        next_month = next_month.replace(year=next_month.year + 1, month=1)\n    else:\n        next_month = next_month.replace(month=next_month.month + 1)\n    assert next(cron) == next_month\n"
-}

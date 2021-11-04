@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sobol_GPEI_strategy",
-    "className": "TestGenerationStrategy",
-    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_generation_strategy.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "exp = get_branin_experiment()\nsobol_GPEI = GenerationStrategy(name='Sobol+GPEI', steps=[GenerationStep(\n    model=Models.SOBOL, num_trials=5), GenerationStep(model=Models.GPEI,\n    num_trials=2)])\nself.assertEqual(sobol_GPEI.name, 'Sobol+GPEI')\nself.assertEqual(sobol_GPEI.model_transitions, [5])\nfor i in range(7):\n    g = sobol_GPEI.gen(exp)\n    exp.new_trial(generator_run=g).run()\n    if i > 4:\n        self.mock_torch_model_bridge.assert_called()\n    else:\n        self.assertEqual(g._model_key, 'Sobol')\n        self.assertEqual(g._model_kwargs, {'seed': None, 'deduplicate': \n            False, 'init_position': i, 'scramble': True, 'generated_points':\n            None})\n        self.assertEqual(g._bridge_kwargs, {'optimization_config': None,\n            'status_quo_features': None, 'status_quo_name': None,\n            'transform_configs': None, 'transforms': Cont_X_trans,\n            'fit_out_of_design': False})\n        self.assertEqual(g._model_state_after_gen, {'init_position': i + 1})\nwith self.assertRaises(GenerationStrategyCompleted):\n    g = sobol_GPEI.gen(exp)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "rotMatrix",
-    "className": null,
-    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&__tools.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\" Generalized rotation matrix.\n    \n    Args:\n        \n        - v (list): Rotation axis around which matrix rotates\n        \n        - theta (float): Rotation angle (by default in degrees)\n        \n    Kwargs:\n        \n        - deg (bool): Whether or not angle is in degrees or radians (Default True)\n        \n    Returns:\n        \n        - 3x3 matrix rotating points around vector v by amount theta.\n    \"\"\"\nif deg == True:\n    theta = np.deg2rad(theta.copy())\nv /= np.linalg.norm(v)\nm11 = np.cos(theta) + v[0] ** 2 * (1 - np.cos(theta))\nm12 = v[0] * v[1] * (1 - np.cos(theta)) - v[2] * np.sin(theta)\nm13 = v[0] * v[2] * (1 - np.cos(theta)) + v[1] * np.sin(theta)\nm21 = v[0] * v[1] * (1 - np.cos(theta)) + v[2] * np.sin(theta)\nm22 = np.cos(theta) + v[1] ** 2 * (1 - np.cos(theta))\nm23 = v[1] * v[2] * (1 - np.cos(theta)) - v[0] * np.sin(theta)\nm31 = v[0] * v[2] * (1 - np.cos(theta)) - v[1] * np.sin(theta)\nm32 = v[1] * v[2] * (1 - np.cos(theta)) + v[0] * np.sin(theta)\nm33 = np.cos(theta) + v[2] ** 2 * (1 - np.cos(theta))\nreturn np.array([[m11, m12, m13], [m21, m22, m23], [m31, m32, m33]])\n"
-}

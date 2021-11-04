@@ -1,9 +1,0 @@
-{
-    "functionName": "test_invalid_settings",
-    "className": "TestLocallyConnected2DLayer",
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_local.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from lasagne.layers import LocallyConnected2DLayer\ninput_layer = DummyInputLayer((10, 2, 4, 4))\nwith pytest.raises(ValueError) as exc:\n    LocallyConnected2DLayer(input_layer, 4, 3, channelwise=True)\nassert 'num_filters and the number of input channels should match' in exc.value.args[\n    0]\ninput_layer = DummyInputLayer((10, 2, None, 4))\nwith pytest.raises(ValueError) as exc:\n    LocallyConnected2DLayer(input_layer, 4, 3, channelwise=True)\nassert 'A LocallyConnected2DLayer requires a fixed input shape (except for the batch size)' in exc.value.args[\n    0]\n"
-}

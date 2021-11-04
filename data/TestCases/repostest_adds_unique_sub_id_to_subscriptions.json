@@ -1,9 +1,0 @@
-{
-    "functionName": "test_adds_unique_sub_id_to_subscriptions",
-    "className": null,
-    "fileName": "/willdeuschle_&_Flask-GraphQL-Subscriptions-Transport/tests_&_test_flask_graphql_subscriptions_transport.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "app, ss = basic_ss\ntest_client = SocketIOTestClient(app, ss.socketio, namespace=ss.namespace)\ntest_client.emit('message', json.dumps({'type': SUBSCRIPTION_START,\n    'payload': 'foo', 'id': 1, 'query': 'query test{ testString }',\n    'variables': 'baz'}), namespace=ss.namespace)\nfor key, val in ss.connection_subscriptions.items():\n    first_key = key\n    first_sub = ss.connection_subscriptions[key]\ndel ss.connection_subscriptions[first_key]\ntest_client.emit('message', json.dumps({'type': SUBSCRIPTION_START,\n    'payload': 'bar', 'id': 2, 'query': 'query test{ testString }',\n    'variables': 'baz'}), namespace=ss.namespace)\nfor key, val in ss.connection_subscriptions.items():\n    second_sub = ss.connection_subscriptions[key]\nassert first_sub != second_sub\n"
-}

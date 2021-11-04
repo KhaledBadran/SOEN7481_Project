@@ -1,9 +1,0 @@
-{
-    "functionName": "test_resolve_class_in_ymc",
-    "className": "ClassRegistryTest",
-    "fileName": "/openworm_&_PyOpenWorm/tests_&_DataObjectTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class A(DataObject):\n    class_context = self.context\n    rdf_type = R.URIRef('http://example.org/A')\nself.context.mapper.process_class(A)\nmod = import_module('tests.DataObjectTest')\nmod.__yarom_mapped_classes__ = A,\ntry:\n    del self.context.mapper.RDFTypeTable[A.rdf_type]\n    res = self.context.resolve_class(A.rdf_type)\n    self.assertIsNotNone(res)\nfinally:\n    delattr(mod, '__yarom_mapped_classes__')\n"
-}

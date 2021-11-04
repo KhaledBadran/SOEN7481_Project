@@ -1,9 +1,0 @@
-{
-    "functionName": "test_srsdg645_burst_period",
-    "className": null,
-    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_srs_&_test_srsdg645.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        SRSDG645: Checks getting/setting of enabling T0 output on first\n        in burst mode.\n        \"\"\"\nwith expected_protocol(ik.srs.SRSDG645, ['BURP?', 'BURP 13', 'BURP 0.1'], [\n    '100E-9']) as ddg:\n    unit_eq(ddg.burst_period, u.Quantity(100, 'ns').rescale(u.s))\n    ddg.burst_period = u.Quantity(13, 's')\n    ddg.burst_period = 0.1\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_chunked_dataset",
-    "className": "TestBasic",
-    "fileName": "/microsoft_&_LightGBM/tests_&_python_package_test_&_test_basic.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "X_train, X_test, y_train, y_test = train_test_split(*load_breast_cancer(\n    return_X_y=True), test_size=0.1, random_state=2)\nchunk_size = X_train.shape[0] // 10 + 1\nX_train = [X_train[i * chunk_size:(i + 1) * chunk_size, :] for i in range(\n    X_train.shape[0] // chunk_size + 1)]\nX_test = [X_test[i * chunk_size:(i + 1) * chunk_size, :] for i in range(\n    X_test.shape[0] // chunk_size + 1)]\ntrain_data = lgb.Dataset(X_train, label=y_train, params={\n    'bin_construct_sample_cnt': 100})\nvalid_data = train_data.create_valid(X_test, label=y_test, params={\n    'bin_construct_sample_cnt': 100})\ntrain_data.construct()\nvalid_data.construct()\n"
-}

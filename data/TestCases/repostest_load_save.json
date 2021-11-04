@@ -1,9 +1,0 @@
-{
-    "functionName": "test_load_save",
-    "className": null,
-    "fileName": "/Puumanamana_&_CoCoNet/tests_&_test_config.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test saving / loading configs\n    \"\"\"\nkwargs = {'coverage': ['xyz.h5'], 'fasta': '/a/b/c.fasta', 'output': 'output'}\ncfg = Configuration()\ncfg.init_config(mkdir=True, **kwargs)\ncfg.to_yaml()\nconfig_file = Path('{}/config.yaml'.format(cfg.io['output']))\ncfg_loaded = Configuration.from_yaml(config_file)\nassert config_file.is_file()\nassert all(getattr(cfg_loaded, k) == getattr(cfg, k) for k, v in cfg_loaded\n    .__dict__.items() if not isinstance(v, dict))\nconfig_file.unlink()\ncfg.io['output'].rmdir()\n"
-}

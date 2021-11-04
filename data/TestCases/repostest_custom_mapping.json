@@ -1,9 +1,0 @@
-{
-    "functionName": "test_custom_mapping",
-    "className": "TestComputeElapsedTime",
-    "fileName": "/AndrewRook_&_NFLWin/nflwin_&_tests_&_test_preprocessing.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "input_df = pd.DataFrame({'quarter': ['quarter1', 'Q2', 'Q3', 'Q4', 'OT1'],\n    'time_elapsed': [200, 0, 50, 850, 40]})\ncet = preprocessing.ComputeElapsedTime('quarter', 'time_elapsed',\n    quarter_to_second_mapping={'quarter1': 0, 'Q2': 500, 'Q3': 1800, 'Q4': \n    2700, 'OT1': 3600})\ncet.fit(input_df)\ntransformed_df = cet.transform(input_df)\nexpected_df = pd.DataFrame({'quarter': ['quarter1', 'Q2', 'Q3', 'Q4', 'OT1'\n    ], 'time_elapsed': [200, 0, 50, 850, 40], 'total_elapsed_time': [200, \n    500, 1850, 3550, 3640]})\npd.util.testing.assert_frame_equal(transformed_df, expected_df)\n"
-}

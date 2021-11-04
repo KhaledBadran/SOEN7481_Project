@@ -1,9 +1,0 @@
-{
-    "functionName": "test_integration",
-    "className": "LexerTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_lexer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "template = \"\"\"<%namespace name=\"foo\" file=\"somefile.html\"/>\n ## inherit from foobar.html\n<%inherit file=\"foobar.html\"/>\n\n<%def name=\"header()\">\n     <div>header</div>\n</%def>\n<%def name=\"footer()\">\n    <div> footer</div>\n</%def>\n\n<table>\n    % for j in data():\n    <tr>\n        % for x in j:\n            <td>Hello ${x| h}</td>\n        % endfor\n    </tr>\n    % endfor\n</table>\n\"\"\"\nnodes = Lexer(template).parse()\nself._compare(nodes, TemplateNode({}, [NamespaceTag('namespace', {'file':\n    'somefile.html', 'name': 'foo'}, (1, 1), []), Text('\\n', (1, 46)),\n    Comment('inherit from foobar.html', (2, 1)), InheritTag('inherit', {\n    'file': 'foobar.html'}, (3, 1), []), Text('\\n\\n', (3, 31)), DefTag(\n    'def', {'name': 'header()'}, (5, 1), [Text(\n    \"\"\"\n     <div>header</div>\n\"\"\", (5, 23))]), Text('\\n', (7, 8)), DefTag(\n    'def', {'name': 'footer()'}, (8, 1), [Text(\n    \"\"\"\n    <div> footer</div>\n\"\"\", (8, 23))]), Text('\\n\\n<table>\\n', (10, \n    8)), ControlLine('for', 'for j in data():', False, (13, 1)), Text(\n    '    <tr>\\n', (14, 1)), ControlLine('for', 'for x in j:', False, (15, 1\n    )), Text('            <td>Hello ', (16, 1)), Expression('x', ['h'], (16,\n    23)), Text('</td>\\n', (16, 30)), ControlLine('for', 'endfor', True, (17,\n    1)), Text('    </tr>\\n', (18, 1)), ControlLine('for', 'endfor', True, (\n    19, 1)), Text('</table>\\n', (20, 1))]))\n"
-}

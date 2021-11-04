@@ -1,9 +1,0 @@
-{
-    "functionName": "testSetupKMeansNestedSampling_correctData",
-    "className": null,
-    "fileName": "/muma7490_&_PyDIAMONDS-Background/tests_&_test_Background.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "fileNameXMeans = testFilePath + 'Xmeans_configuringParameters.txt'\nfileNameNSMC = testFilePath + 'NSMC_configuringParameters.txt'\ndef testSetup_File(method):\n    return method(dataPath=testFilePath)\ndef testSetup_Data(method, fileName):\n    data = np.loadtxt(fileName).T\n    return method(data=data)\ndef testSetup_Empty(method):\n    return method()\ndef testSetup_NoFile(method):\n    return method(dataPath=testPath + 'empty/')\ntestFunctions = {fileNameXMeans: (valueObject._setupKmeans, KmeansClusterer\n    ), fileNameNSMC: (valueObject._setupNestedSampling, MultiEllipsoidSampler)}\nfor file, (method, object) in testFunctions.items():\n    assert isinstance(testSetup_File(method), object)\n    assert isinstance(testSetup_Data(method, file), object)\n    assert isinstance(testSetup_Empty(method), object)\n    assert isinstance(testSetup_NoFile(method), object)\n"
-}

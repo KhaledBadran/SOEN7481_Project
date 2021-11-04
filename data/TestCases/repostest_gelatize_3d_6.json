@@ -1,9 +1,0 @@
-{
-    "functionName": "test_gelatize_3d_6",
-    "className": null,
-    "fileName": "/ratnania_&_GeLaTo/gelato_&_tests_&_test_gelatize_3d.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "domain = Domain('Omega', dim=DIM)\nV = ScalarFunctionSpace('V', domain)\nu, v = elements_of(V, names='u,v')\nnx, ny, nz = symbols('nx ny nz', integer=True)\npx, py, pz = symbols('px py pz', integer=True)\ntx, ty, tz = symbols('tx ty tz')\nexpected = nx * Mass(py, ty) * Mass(pz, tz) * Stiffness(px, tx) / (ny * nz\n    ) + I * Advection(px, tx) * Mass(py, ty) * Mass(pz, tz) / (ny * nz\n    ) + ny * Mass(px, tx) * Mass(pz, tz) * Stiffness(py, ty) / (nx * nz\n    ) + I * Advection(py, ty) * Mass(px, tx) * Mass(pz, tz) / (nx * nz\n    ) + nz * Mass(px, tx) * Mass(py, ty) * Stiffness(pz, tz) / (nx * ny)\nexpr = dot(grad(v), grad(u)) + dx(u) * v + dy(u) * v\nexpr = BilinearForm((u, v), integral(domain, expr))\nassert gelatize(expr) == expected\n"
-}

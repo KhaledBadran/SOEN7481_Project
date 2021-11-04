@@ -1,9 +1,0 @@
-{
-    "functionName": "test_param",
-    "className": null,
-    "fileName": "/TeamHG-Memex_&_MaybeDont/tests_&_test_predict.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "dupe_predictor = DupePredictor()\ndef gen_urls(page):\n    tpls = ['{}/?page={}', '{}/?page={}&start=0'] if is_param else ['{}/{}',\n        '{}/{}?start=0']\n    return [tpl.format('http://foo.com', page) for tpl in tpls]\nfor i in range(100):\n    urls = gen_urls(i)\n    if reverse_update:\n        urls.reverse()\n    for url in urls:\n        dupe_predictor.update_model(url, 'a{}'.format(i))\ndupe_predictor.log_dupstats(min_dup=1)\nurl1, url2 = gen_urls('b')\nif reverse_test:\n    url1, url2 = url2, url1\ndupe_predictor.update_model(url1, 'b')\nassert dupe_predictor.get_dupe_prob(url2) > 0.97\nfor url in gen_urls('c'):\n    assert dupe_predictor.get_dupe_prob(url) < 0.1\npytest.mark.parametrize('reverse_update', [True, False])pytest.mark.parametrize('reverse_test', [True, False])pytest.mark.parametrize('is_param', [True, False])"
-}

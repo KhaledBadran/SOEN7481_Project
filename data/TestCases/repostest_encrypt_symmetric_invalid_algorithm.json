@@ -1,9 +1,0 @@
-{
-    "functionName": "test_encrypt_symmetric_invalid_algorithm",
-    "className": "TestCryptographyEngine",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_crypto_&_test_engine.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the right errors are raised when invalid symmetric\n        encryption algorithms are used.\n        \"\"\"\nengine = crypto.CryptographyEngine()\nargs = None, b'', b''\nself.assertRaisesRegex(exceptions.InvalidField,\n    'Encryption algorithm is required.', engine.encrypt, *args)\nargs = 'invalid', b'', b''\nself.assertRaisesRegex(exceptions.InvalidField,\n    \"Encryption algorithm 'invalid' is not a supported symmetric encryption algorithm.\"\n    , engine.encrypt, *args)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_partial_wasserstein_lagrange",
-    "className": null,
-    "fileName": "/PythonOT_&_POT/test_&_test_partial.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "n_samples = 20\nn_noise = 20\nmu = np.array([0, 0])\ncov = np.array([[1, 0], [0, 2]])\nxs = ot.datasets.make_2D_samples_gauss(n_samples, mu, cov)\nxs = np.append(xs, (np.random.rand(n_noise, 2) + 1) * 4).reshape((-1, 2))\nxt = ot.datasets.make_2D_samples_gauss(n_samples, mu, cov)\nxt = np.append(xt, (np.random.rand(n_noise, 2) + 1) * -3).reshape((-1, 2))\nM = ot.dist(xs, xt)\np = ot.unif(n_samples + n_noise)\nq = ot.unif(n_samples + n_noise)\nw0, log0 = ot.partial.partial_wasserstein_lagrange(p, q, M, 1, log=True)\n"
-}

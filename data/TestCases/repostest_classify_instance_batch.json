@@ -1,9 +1,0 @@
-{
-    "functionName": "test_classify_instance_batch",
-    "className": null,
-    "fileName": "/Menelau_&_DESlib/deslib_&_tests_&_dcs_&_test_base.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "n_samples = 3\nn_classifiers = 3\nquery = np.ones((n_samples, 2))\npool_classifiers = create_pool_classifiers\ndcs_test = BaseDCS(pool_classifiers)\ncompetences = np.random.rand(n_samples, n_classifiers)\ndcs_test.estimate_competence = MagicMock(return_value=competences)\nexpected = []\nfor ind in range(n_samples):\n    expected.append(pool_classifiers[np.argmax(competences[(ind), :])].\n        predict(query)[0])\npredictions = []\nfor clf in dcs_test.pool_classifiers:\n    predictions.append(clf.predict(query)[0])\npredicted_label = dcs_test.classify_with_ds(query, np.tile(predictions, (3, 1))\n    )\nassert np.array_equal(predicted_label, expected)\n"
-}

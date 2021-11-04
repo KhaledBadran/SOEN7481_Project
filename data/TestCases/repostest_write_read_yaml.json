@@ -1,9 +1,0 @@
-{
-    "functionName": "test_write_read_yaml",
-    "className": "Test_Graph",
-    "fileName": "/AdriaanRol_&_AutoDepGraph/autodepgraph_&_tests_&_test_graph.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Mostly an example on how to read and write, but also test for\n        weird objects being present.\n        \"\"\"\nself.test_graph.nodes()['C']['state'] = 'good'\nself.test_graph.nodes()['B']['state'] = 'unknown'\nfn = os.path.join(test_dir, 'nx_test_graph.yaml')\nnx.readwrite.write_yaml(self.test_graph, fn)\nread_testgraph = nx.readwrite.read_yaml(fn)\nself.assertTrue(isinstance(read_testgraph, AutoDepGraph_DAG))\nself.assertEqual(read_testgraph.nodes()['C']['state'], 'good')\nself.assertEqual(read_testgraph.nodes()['B']['state'], 'unknown')\n"
-}

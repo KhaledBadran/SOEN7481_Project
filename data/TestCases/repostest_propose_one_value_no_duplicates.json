@@ -1,9 +1,0 @@
-{
-    "functionName": "test_propose_one_value_no_duplicates",
-    "className": "TestBaseTuner",
-    "fileName": "/HDI-Project_&_BTB/tests_&_tuning_&_tuners_&_test_base.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that ``propose`` method calls it's child implemented method with\n        ``allow_duplicates`` as ``False``.\n        \"\"\"\ninstance = MagicMock()\ninstance.tunable = MagicMock(spec_set=Tunable)\ninverse_return = instance.tunable.inverse_transform.return_value\ninverse_return.to_dict.return_value = [1]\ninstance._propose = MagicMock(return_value=1)\nresult = BaseTuner.propose(instance, 1)\ninstance._check_proposals.assert_called_once_with(1)\ninstance._propose.assert_called_once_with(1, False)\ninstance.tunable.inverse_transform.called_once_with(1)\ninverse_return.to_dict.assert_called_once_with(orient='records')\nassert result == 1\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_session_summary_details",
-    "className": "TestModelCreator",
-    "fileName": "/bigfishgames_&_GameBenchAPI-PyClient/tests_&_test_integration_&_test_models_&_test_creator_&_test_model_creator.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" SessionSummary attributes should return the proper DataFrames.\"\"\"\nwith open(os.path.join(PARENT_DIR + API_SAMPLES + 'sessionid.json')\n    ) as json_data:\n    self.session_app_json = json.load(json_data)\nwith open(os.path.join(PARENT_DIR + '/fixtures/' + 'authentication_token.json')\n    ) as json_data:\n    self.auth_token = json.load(json_data)\nmock_return.request('POST', AUTH_URL, json=self.auth_token)\nmock_return.request('GET', BASE_SESSION_URL, json=self.session_app_json[\n    'response'])\ncreator = ModelCreator('SessionSummary', **DEFAULT_SESSION_DETAIL_PARAMS)\nmodel = creator.get_model()\ndf = pandas.DataFrame([self.session_app_json['response']])\nexpected = df.filter(['app'])\nactual = model.app\nassert_frame_equal(actual, expected)\nrequests_mock.Mocker()"
-}

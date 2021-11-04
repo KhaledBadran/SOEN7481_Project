@@ -1,9 +1,0 @@
-{
-    "functionName": "test_transfer_matter_power_nu_raises",
-    "className": null,
-    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_power.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "cosmo = ccl.Cosmology(Omega_c=0.27, Omega_b=0.045, h=0.67, sigma8=0.8, n_s=\n    0.96, transfer_function=tf, matter_power_spectrum=pk, m_nu=m_nu)\nif tf is not None:\n    with pytest.warns(CCLWarning):\n        ccl.linear_matter_power(cosmo, 1, 1)\nwith pytest.raises(CCLError):\n    ccl.nonlin_matter_power(cosmo, 1, 1)\npytest.mark.parametrize('tf,pk,m_nu', [(None, 'emu', 0.06), ('bbks', 'emu',\n    0.06), ('eisenstein_hu', 'emu', 0.06)])"
-}

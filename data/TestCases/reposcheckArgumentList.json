@@ -1,9 +1,0 @@
-{
-    "functionName": "checkArgumentList",
-    "className": null,
-    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&__tools.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "notFound = []\nfor key in kwargs:\n    if key not in argList:\n        similarity = np.array([SequenceMatcher(None, key.lower(), x.lower()\n            ).ratio() for x in argList])\n        maxVal = np.max(similarity)\n        maxId = np.argmax(similarity)\n        notFound.append(\n            'Key-word argument \"{}\" not understood. Did you mean \"{}\"?'.\n            format(key, argList[maxId]))\nif len(notFound) > 0:\n    if len(notFound) > 1:\n        errorMsg = 'The following key-word arguments are not understood:\\n'\n        errorMsg += '\\n'.join(notFound)\n    else:\n        errorMsg = notFound[0]\n    error = AttributeError(errorMsg)\n    raise error\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_all_workers_disagree",
-    "className": "TestAgreementClosed",
-    "fileName": "/CrowdTruth_&_CrowdTruth-core/test_&_test_metrics.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "for w in range(2, 11):\n    test_config = self.test_conf_const.__class__\n    data, config = crowdtruth.load(file=TEST_FILE_PREF + str(w) +\n        'work_disagr.csv', config=test_config())\n    results = crowdtruth.run(data, config)\n    self.assertAlmostEqual(results['units']['uqs'].at[1], 0.0)\n    for wid in range(w):\n        self.assertAlmostEqual(results['workers']['wqs'].at['W' + str(wid +\n            1)], 0.0)\n        if not config.open_ended_task:\n            self.assertAlmostEqual(results['annotations']['aqs'][list(\n                string.ascii_uppercase)[w]], 0.0)\n"
-}

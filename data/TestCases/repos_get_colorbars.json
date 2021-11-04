@@ -1,9 +1,0 @@
-{
-    "functionName": "_get_colorbars",
-    "className": "Brain",
-    "fileName": "/nipy_&_PySurfer/surfer_&_viz.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "shape = self.brain_matrix.shape\nrow = row % shape[0]\ncol = col % shape[1]\nind = np.ravel_multi_index((row, col), self.brain_matrix.shape)\ncolorbars = []\nh = self._brain_list[ind]['hemi']\nif self.data_dict[h] is not None and 'colorbars' in self.data_dict[h]:\n    colorbars.append(self.data_dict[h]['colorbars'][row])\nif len(self.morphometry_list) > 0:\n    colorbars.append(self.morphometry_list[ind]['colorbar'])\nif len(self.contour_list) > 0:\n    colorbars.append(self.contour_list[ind]['colorbar'])\nif len(self.overlays_dict) > 0:\n    for name, obj in self.overlays_dict.items():\n        for bar in ['pos_bar', 'neg_bar']:\n            try:\n                this_ind = min(len(obj) - 1, ind)\n                colorbars.append(getattr(obj[this_ind], bar))\n            except AttributeError:\n                pass\nreturn colorbars\n"
-}

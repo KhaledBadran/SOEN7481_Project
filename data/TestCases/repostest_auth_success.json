@@ -1,9 +1,0 @@
-{
-    "functionName": "test_auth_success",
-    "className": null,
-    "fileName": "/PlaidWeb_&_Authl/tests_&_handlers_&_test_fediverse.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "store = tokens.DictStore()\nhandler = fediverse.Fediverse('test', store, homepage='http://foo.example/')\nmock_mastodon = mocker.patch('mastodon.Mastodon')\nmock_mastodon.create_app.return_value = 'the id', 'the secret'\nmock_mastodon().auth_request_url.return_value = 'https://cb?code=12345'\nmock_mastodon().log_in.return_value = 'some_auth_token'\nmock_mastodon().me.return_value = {'url': 'https://mastodon.example/@moo',\n    'display_name': 'moo friend', 'avatar_static':\n    'https://placekitten.com/1280/1024', 'source': {'note': 'a cow',\n    'fields': [{'name': 'homepage', 'value': 'https://moo.example'}, {\n    'name': 'my pronouns', 'value': 'moo/moo'}]}}\nrequests_mock.get('https://mastodon.example/api/v1/instance', text=json.\n    dumps({'uri': 'foo', 'version': '2.5.1', 'urls': 'foo.bar'}))\nrequests_mock.post('https://mastodon.example/oauth/revoke', text='ok')\nresult = handler.initiate_auth('mastodon.example', 'https://cb', 'qwerpoiu')\nassert isinstance(result, disposition.Redirect)\nmock_mastodon().auth_request_url.assert_called_with(redirect_uris=\n    'https://cb', scopes=['read:accounts'])\nresult = handler.check_callback(result.url, parse_args(result.url), {})\nassert isinstance(result, disposition.Verified)\nassert result.identity == 'https://mastodon.example/@moo'\nassert result.redir == 'qwerpoiu'\nassert result.profile == {'name': 'moo friend', 'bio': 'a cow', 'avatar':\n    'https://placekitten.com/1280/1024', 'homepage': 'https://moo.example',\n    'pronouns': 'moo/moo'}\n"
-}

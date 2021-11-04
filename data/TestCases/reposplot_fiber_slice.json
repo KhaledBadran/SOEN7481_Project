@@ -1,9 +1,0 @@
-{
-    "functionName": "plot_fiber_slice",
-    "className": "DelaunayGeometry",
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_materials_&_VoronoiFibers.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        Plot one slice from the fiber image\n\n        Parameters\n        ----------\n        plane : array_like\n        List of 3 values, [x,y,z], 2 must be zero and the other must be between\n        zero and one representing the fraction of the domain to slice along\n        the non-zero axis\n\n        index : array_like\n        similar to plane but instead of the fraction an index of the image is\n        used\n        \"\"\"\nimport matplotlib.pyplot as plt\nif hasattr(self, '_fiber_image') is False:\n    logger.warning('This method only works when a fiber image exists')\n    return\nslice_image = self._get_fiber_slice(plane, index)\nif slice_image is not None:\n    if fig is None:\n        plt.figure()\n    plt.imshow(slice_image.T, cmap='Greys', origin='lower', interpolation=\n        'nearest')\nreturn fig\n"
-}

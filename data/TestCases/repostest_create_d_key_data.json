@@ -1,9 +1,0 @@
-{
-    "functionName": "test_create_d_key_data",
-    "className": "TestGroupManager",
-    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_group_manager.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "manager = GroupManager(Name('Alice'), Name('data_type'),\n    Sqlite3GroupManagerDb(self.dKeyDatabaseFilePath), 2048, 1, self.keyChain)\nnewCertificateBlob = self.certificate.wireEncode()\nnewCertificate = IdentityCertificate()\nnewCertificate.wireDecode(newCertificateBlob)\ndata = manager._createDKeyData('20150825T000000', '20150827T000000', Name(\n    '/ndn/memberA/KEY'), self.decryptKeyBlob, newCertificate.\n    getPublicKeyInfo().getKeyDer())\ndataContent = data.getContent()\nencryptedNonce = EncryptedContent()\nencryptedNonce.wireDecode(dataContent)\nself.assertEqual(0, encryptedNonce.getInitialVector().size())\nself.assertEqual(EncryptAlgorithmType.RsaOaep, encryptedNonce.\n    getAlgorithmType())\nblobNonce = encryptedNonce.getPayload()\ndecryptParams = EncryptParams(EncryptAlgorithmType.RsaOaep)\nnonce = RsaAlgorithm.decrypt(self.decryptKeyBlob, blobNonce, decryptParams)\npayloadContent = dataContent.buf()[encryptedNonce.wireEncode().size():]\nencryptedPayload = EncryptedContent()\nencryptedPayload.wireDecode(payloadContent)\nself.assertEqual(16, encryptedPayload.getInitialVector().size())\nself.assertEqual(EncryptAlgorithmType.AesCbc, encryptedPayload.\n    getAlgorithmType())\ndecryptParams.setAlgorithmType(EncryptAlgorithmType.AesCbc)\ndecryptParams.setInitialVector(encryptedPayload.getInitialVector())\nblobPayload = encryptedPayload.getPayload()\nlargePayload = AesAlgorithm.decrypt(nonce, blobPayload, decryptParams)\nself.assertTrue(largePayload.equals(self.decryptKeyBlob))\n"
-}

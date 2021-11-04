@@ -1,9 +1,0 @@
-{
-    "functionName": "test_q_add_formula",
-    "className": null,
-    "fileName": "/quantOS-org_&_JAQS/test_&_test_dataview.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "dv = DataView()\nfolder_path = '../output/prepared/20160609_20170601_freq=1D'\ndv.load_dataview(folder_path=quarterly_path)\nnrows, ncols = dv.data_d.shape\nn_securities = len(dv.data_d.columns.levels[0])\nformula = 'total_oper_rev / close'\ndv.add_formula('myvar1', formula, is_quarterly=False)\ndf1 = dv.get_ts('myvar1')\nassert not df1.empty\nformula2 = 'Delta(oper_exp * myvar1 - open, 3)'\ndv.add_formula('myvar2', formula2, is_quarterly=False)\ndf2 = dv.get_ts('myvar2')\nassert not df2.empty\n"
-}

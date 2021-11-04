@@ -1,9 +1,0 @@
-{
-    "functionName": "testOK",
-    "className": "test_sparse_connected_pixels",
-    "fileName": "/jonwright_&_ImageD11/test_&_test_sparse_image.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "i = self.s.row.astype(np.uint16)\nj = self.s.col.astype(np.uint16)\nv = self.s.data\nself.assertTrue((self.s.todense() == self.a).all())\ndl = np.zeros(self.a.shape, 'i')\nnd = cImageD11.connectedpixels(self.a, dl, self.threshold)\ndstart = timer()\nnd = cImageD11.connectedpixels(self.a, dl, self.threshold)\ndend = timer()\nsl = np.zeros(v.shape, 'i')\nns = cImageD11.sparse_connectedpixels(v, i, j, self.threshold, sl)\nsbegin = timer()\nns = cImageD11.sparse_connectedpixels(v, i, j, self.threshold, sl)\nsend = timer()\nsld = scipy.sparse.coo_matrix((sl, (i, j)), shape=self.a.shape)\ntestcase = (sld.todense() == dl).all()\ndensetime = dend - dstart\nsparsetime = send - sbegin\nprint('sp_cp: %.3f ms vs %.3f ms, ratio %.1f nnz %d' % (1000.0 * sparsetime,\n    1000.0 * densetime, densetime / sparsetime, sld.nnz), ' t=%.0f' % self.\n    threshold)\nif ~testcase:\n    import pylab as pl\n    pl.ioff()\n    pl.figure()\n    pl.subplot(311)\n    pl.title('t=%f' % self.threshold)\n    pl.imshow(dl, interpolation='nearest')\n    pl.colorbar()\n    pl.subplot(312)\n    pl.imshow(sld.todense(), interpolation='nearest')\n    pl.colorbar()\n    pl.subplot(313)\n    pl.imshow(sld.todense() - dl, interpolation='nearest')\n    pl.colorbar()\n    pl.show()\nself.assertTrue(testcase)\n"
-}

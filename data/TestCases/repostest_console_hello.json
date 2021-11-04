@@ -1,9 +1,0 @@
-{
-    "functionName": "test_console_hello",
-    "className": "Test",
-    "fileName": "/fabioz_&_PyDev.Debugger/tests_&_test_pydevconsole.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.original_stdout = sys.stdout\nsys.stdout = pydevd_io.IOBuf()\ntry:\n    sys.stdout.encoding = sys.stdin.encoding\nexcept AttributeError:\n    pass\ntry:\n    client_port, _server_port = self.get_free_addresses()\n    client_thread = self.start_client_thread(client_port)\n    import time\n    time.sleep(0.3)\n    from _pydev_bundle import pydev_localhost\n    interpreter = pydevconsole.InterpreterInterface(pydev_localhost.\n        get_localhost(), client_port, threading.currentThread())\n    result, = interpreter.hello('Hello pydevconsole')\n    self.assertEqual(result, 'Hello eclipse')\nfinally:\n    sys.stdout = self.original_stdout\n"
-}

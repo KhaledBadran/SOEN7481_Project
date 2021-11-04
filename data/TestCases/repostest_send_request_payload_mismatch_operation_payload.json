@@ -1,9 +1,0 @@
-{
-    "functionName": "test_send_request_payload_mismatch_operation_payload",
-    "className": "TestKMIPClient",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_test_kmip_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a TypeError is raised when the operation and request payload\n        do not match up when used to send a request.\n        \"\"\"\nargs = OperationEnum.DELETE_ATTRIBUTE, payloads.CreateRequestPayload()\nself.assertRaisesRegex(TypeError,\n    'The request payload for the DeleteAttribute operation must be a DeleteAttributeRequestPayload object.'\n    , self.client.send_request_payload, *args)\nargs = OperationEnum.SET_ATTRIBUTE, payloads.CreateRequestPayload()\nself.assertRaisesRegex(TypeError,\n    'The request payload for the SetAttribute operation must be a SetAttributeRequestPayload object.'\n    , self.client.send_request_payload, *args)\nargs = OperationEnum.MODIFY_ATTRIBUTE, payloads.CreateRequestPayload()\nself.assertRaisesRegex(TypeError,\n    'The request payload for the ModifyAttribute operation must be a ModifyAttributeRequestPayload object.'\n    , self.client.send_request_payload, *args)\n"
-}

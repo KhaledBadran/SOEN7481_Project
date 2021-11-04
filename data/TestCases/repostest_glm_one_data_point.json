@@ -1,9 +1,0 @@
-{
-    "functionName": "test_glm_one_data_point",
-    "className": "NegativeBinomialTests",
-    "fileName": "/Mogeng_&_IOHMM/tests_&_test_GLM.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.model = GLM(solver='IRLS', family=NegativeBinomialWrapper(),\n    fit_intercept=True, est_stderr=True, reg_method=None, alpha=0, l1_ratio\n    =0, tol=0.0001, max_iter=100, coef=None, stderr=None, dispersion=None)\nprint(self.Y[0:1,])\nself.model.fit(self.X[0:1, :], self.Y[0:1,], sample_weight=0.5)\nself.assertEqual(self.model.coef.shape, (7,))\nself.assertAlmostEqual(self.model.dispersion, 0, places=6)\nnp.testing.assert_array_almost_equal(self.model.loglike_per_sample(self.X[0\n    :1, :], self.Y[0:1,]), np.array([0]), decimal=3)\nnp.testing.assert_array_almost_equal(self.model.loglike_per_sample(np.array\n    (self.X[0:1, :].tolist() * 6), np.array([6, 60, 6, 0, 6, 62])), np.\n    array([0, -np.Infinity, 0, -np.Infinity, 0, -np.Infinity]), decimal=3)\n"
-}

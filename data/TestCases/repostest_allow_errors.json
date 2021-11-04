@@ -1,9 +1,0 @@
-{
-    "functionName": "test_allow_errors",
-    "className": "BTBSessionTest",
-    "fileName": "/HDI-Project_&_BTB/tests_&_integration_&_test_session.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "tunables = {'a_tunable': {'a_parameter': {'type': 'int', 'default': 0,\n    'range': [0, 1]}}}\ndef scorer(name, proposal):\n    if proposal['a_parameter'] == 0:\n        raise Exception()\n    return 1\nsession = BTBSession(tunables, scorer, max_errors=10)\nbest = session.run(10)\nassert best['name'] == 'a_tunable'\nassert best['config'] == {'a_parameter': 1}\n"
-}

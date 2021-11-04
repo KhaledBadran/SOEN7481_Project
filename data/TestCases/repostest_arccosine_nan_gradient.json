@@ -1,9 +1,0 @@
-{
-    "functionName": "test_arccosine_nan_gradient",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_kernels_&_test_kernels.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "X = rng.rand(N, D)\nkernel = gpflow.kernels.ArcCosine()\nwith tf.GradientTape() as tape:\n    Kff = kernel(X)\ngrads = tape.gradient(Kff, kernel.trainable_variables)\nassert not np.any(np.isnan(grads))\npytest.mark.parametrize('D, N', [[1, 4]])"
-}

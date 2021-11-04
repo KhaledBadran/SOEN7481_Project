@@ -1,9 +1,0 @@
-{
-    "functionName": "test_from_networkx",
-    "className": "NetworkXTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_io_&_NetworkXTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "G = complete_graph(10)\npos = random_layout(G, dim=3)\nval = {n: list(pos[n]) for n in pos}\nset_node_attributes(G, name='coords', values=val)\nset_node_attributes(G, name='area', values=1.123)\nset_node_attributes(G, name='diameter', values=1.123)\nset_edge_attributes(G, name='length', values=1.123)\nset_edge_attributes(G, name='perimeter', values=1.123)\nproject = op.io.NetworkX.from_networkx(G=G)\nassert len(project) == 1\nnum_nodes = len(G.nodes())\nnum_edges = len(G.edges())\nnet = project.network\nassert net.Np == num_nodes\nassert net.Nt == num_edges\nassert np.shape(net['pore.coords']) == (num_nodes, 3)\nassert np.shape(net['throat.conns']) == (num_edges, 2)\na = {'pore.area', 'pore.diameter', 'throat.length', 'throat.perimeter'}\nassert a.issubset(net.props())\n"
-}

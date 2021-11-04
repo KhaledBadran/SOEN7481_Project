@@ -1,9 +1,0 @@
-{
-    "functionName": "test_model_with_initializer",
-    "className": "ModelTest",
-    "fileName": "/halide_&_Halide/apps_&_onnx_&_model_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "X = helper.make_tensor_value_info('X', TensorProto.FLOAT, [3, 1])\nZ2 = helper.make_tensor_value_info('Z2', TensorProto.FLOAT, [2, 3, 6])\nexpand_node_def = helper.make_node('Expand', ['X', 'Y'], ['Z1'])\ncast_node_def = helper.make_node('Scale', ['Z1'], ['Z2'])\ngraph_def = helper.make_graph([expand_node_def, cast_node_def], 'test-node',\n    [X], [Z2], initializer=[helper.make_tensor('Y', TensorProto.INT64, (3,),\n    (2, 1, 6))])\nonnx_model = helper.make_model(graph_def, producer_name='onnx-example')\nmodel = Model()\nmodel.BuildFromOnnxModel(onnx_model)\ninput_data = np.random.rand(3, 1).astype(np.float32)\noutputs = model.run([input_data])\nexpected = input_data * np.ones([2, 1, 6], dtype=np.float32)\nnp.testing.assert_allclose(expected, outputs[0])\n"
-}

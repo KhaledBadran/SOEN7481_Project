@@ -1,9 +1,0 @@
-{
-    "functionName": "test_fitting_brightfield_DE",
-    "className": "TestCellFitting",
-    "fileName": "/Jhsmit_&_ColiCoords/test_&_test_fitting.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "cell_0 = self.cells[0].copy()\nif StrictVersion(scipy.__version__) < StrictVersion('1.2.0'):\n    res_dict = {'a0': 17.62122, 'a1': -0.02272049, 'a2': 0.0004457729, 'r':\n        9.243795, 'xl': 15.1707, 'xr': 36.38401}\n    value = 8206601.073967202\nelif StrictVersion(scipy.__version__) < StrictVersion('1.4.0'):\n    res_dict = {'a0': 18.0473570288722, 'a1': -0.05285406247108937, 'a2': \n        0.0009726930458977879, 'r': 9.265014573271854, 'xl': \n        15.20349136432933, 'xr': 36.37929146737385}\n    value = 8221057.758640378\nelse:\n    res_dict = {'a0': 17.72944105424428, 'a1': -0.02800104528377645, 'a2': \n        0.0004916945792890149, 'r': 9.254283346347917, 'xl': \n        15.172830307331035, 'xr': 36.45007538899884}\n    value = 8191888.515532021\nres = cell_0.optimize('brightfield', minimizer=DifferentialEvolution, **\n    self.de_kwargs)\nself.assertAlmostEqual(self.cf * res.objective_value, value, 6)\nfor k, v in res_dict.items():\n    self.assertAlmostEqual(v, res.params[k], 5)\n"
-}

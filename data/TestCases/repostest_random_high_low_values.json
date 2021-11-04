@@ -1,9 +1,0 @@
-{
-    "functionName": "test_random_high_low_values",
-    "className": "TestGenerator",
-    "fileName": "/BciPy_&_BciPy/bcipy_&_acquisition_&_tests_&_datastream_&_test_generator.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Random generator should allow user to set value ranges.\"\"\"\nchannel_count = 10\nlow = -100\nhigh = 100\ngen = random_data(low=-100, high=100, channel_count=channel_count)\ndata = [next(gen) for _ in range(100)]\nself.assertEqual(len(data), 100)\nfor record in data:\n    self.assertEqual(len(record), channel_count)\n    for value in record:\n        self.assertTrue(low <= value <= high)\n"
-}

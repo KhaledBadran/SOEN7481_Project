@@ -1,9 +1,0 @@
-{
-    "functionName": "test_baseline",
-    "className": "TestValidatingTheValidator",
-    "fileName": "/kenfar_&_DataGristle/scripts_&_tests_&_test_gristle_validator_cmd.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.in_fqfn = _generate_foobarbatz_file(10000, dir_name=self.tmp_dir)\nschema = _generate_foobarbatz_schema()\nself.schema_fqfn = _write_schema_file('foobarbatz', schema, dir_name=self.\n    tmp_dir)\nself.cmd = (\n    \"\"\"%(pgm)s %(in_fqfn)s\n                         -d ','\n                         --validschema %(schema)s\n                         --quoting 'quote_none'\n                         --outgood %(outgood)s\n                         --outerr  %(outerr)s\n                         -s\n                   \"\"\"\n     % {'pgm': self.pgm, 'outgood': self.outgood_fqfn, 'outerr': self.\n    outerr_fqfn, 'in_fqfn': self.in_fqfn, 'schema': self.schema_fqfn})\nprint(self.cmd)\nrunner = envoy.run(self.cmd)\nself.get_outputs(runner)\nassert self.status_code == 0\nassert not self.err_output\nassert len(self.good_output) == 10000\n"
-}

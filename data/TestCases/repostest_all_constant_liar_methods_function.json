@@ -1,9 +1,0 @@
-{
-    "functionName": "test_all_constant_liar_methods_function",
-    "className": "TestGpNextPointsViews",
-    "fileName": "/Yelp_&_MOE/moe_&_tests_&_views_&_rest_&_gp_next_points_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that each contant liar ``lie_method`` runs to completion. This is an integration test.\"\"\"\nfor test_case in self.gp_test_environments:\n    python_domain, python_gp = test_case\n    python_cov, historical_data = python_gp.get_core_data_copy()\n    for constant_liar_method in CONSTANT_LIAR_METHODS:\n        json_payload = self._build_json_payload(python_domain, python_cov,\n            historical_data, 2, lie_method=constant_liar_method)\n        resp = self.testapp.post(GP_NEXT_POINTS_CONSTANT_LIAR_ENDPOINT,\n            json_payload)\n        resp_schema = GpNextPointsResponse()\n        resp_dict = resp_schema.deserialize(json.loads(resp.body))\n        assert 'points_to_sample' in resp_dict\n        assert len(resp_dict['points_to_sample']) == 2\n        assert len(resp_dict['points_to_sample'][0]) == python_gp.dim\n        assert 'status' in resp_dict\n        assert 'expected_improvement' in resp_dict['status']\n        assert resp_dict['status']['expected_improvement'] >= 0.0\n"
-}

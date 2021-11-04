@@ -1,9 +1,0 @@
-{
-    "functionName": "test_frame_eval_change_breakpoints",
-    "className": null,
-    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_frame_eval_and_tracing.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with case_setup_force_frame_eval.test_file('_debugger_case_change_breaks.py'\n    ) as writer:\n    break1_line = writer.get_line_index_with_content('break 1')\n    break2_line = writer.get_line_index_with_content('break 2')\n    break2_id = writer.write_add_breakpoint(break2_line, 'None')\n    writer.write_make_initial_run()\n    hit = writer.wait_for_breakpoint_hit(line=break2_line)\n    assert hit.suspend_type == 'frame_eval'\n    writer.write_remove_breakpoint(break2_id)\n    writer.write_add_breakpoint(break1_line, 'None')\n    writer.write_run_thread(hit.thread_id)\n    hit = writer.wait_for_breakpoint_hit(line=break1_line)\n    writer.write_run_thread(hit.thread_id)\n    writer.finished_ok = True\n"
-}

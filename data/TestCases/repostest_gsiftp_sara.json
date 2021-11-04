@@ -1,9 +1,0 @@
-{
-    "functionName": "test_gsiftp_sara",
-    "className": "SrmlistTest",
-    "fileName": "/apmechev_&_GRID_LRT/GRID_LRT_&_tests_&_test_srmlist.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "sl = srmlist()\nself.assertTrue(os.path.exists(os.path.dirname(__file__) + '/srm_50_sara.txt'))\nwith open(os.path.dirname(__file__) + '/srm_50_sara.txt', 'r') as sfile:\n    for line in sfile:\n        self.assertTrue(line != '')\n        self.assertTrue(line != None)\n        sl.append(line)\nself.assertTrue(len(sl) == 51)\ngsiftps = []\nfor f in sl.gsi_links():\n    self.assertTrue(f[:34] == 'gsiftp://gridftp.grid.sara.nl:2811')\n    gsiftps.append(f)\nself.assertTrue(len(gsiftps) == 51)\n"
-}

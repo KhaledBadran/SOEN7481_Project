@@ -1,9 +1,0 @@
-{
-    "functionName": "test_mac",
-    "className": "TestProxyKmipClient",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_test_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test the MAC client with proper input.\n        \"\"\"\nuuid = 'aaaaaaaa-1111-2222-3333-ffffffffffff'\nalgorithm = enums.CryptographicAlgorithm.HMAC_SHA256\ndata = b'\\x00\\x01\\x02\\x03\\x04'\nresult = results.MACResult(contents.ResultStatus(enums.ResultStatus.SUCCESS\n    ), uuid=attr.UniqueIdentifier(uuid), mac_data=obj.MACData(data))\nwith ProxyKmipClient() as client:\n    client.proxy.mac.return_value = result\n    uid, mac_data = client.mac(data, uuid, algorithm)\n    self.assertEqual(uid, uuid)\n    self.assertEqual(mac_data, data)\nmock.patch('kmip.pie.client.KMIPProxy', mock.MagicMock(spec_set=KMIPProxy))"
-}

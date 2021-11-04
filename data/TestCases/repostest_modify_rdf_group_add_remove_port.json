@@ -1,9 +1,0 @@
-{
-    "functionName": "test_modify_rdf_group_add_remove_port",
-    "className": "CITestReplication",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_replication.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"test adding and removing of port from RDF group.\"\"\"\nsrdf_group, local_port_list, remote_port_list = self.setup_srdf_group()\nport_list = []\nport_list.append(local_port_list[0])\nself.replication.modify_rdf_group(action='remove_ports', srdf_group_number=\n    srdf_group, port_list=port_list)\nmodifed_port_list = self.replication.get_rdf_group(rdf_number=srdf_group)[\n    'localPorts']\nself.assertNotIn(local_port_list[0], modifed_port_list)\nself.replication.modify_rdf_group(action='add_ports', port_list=port_list,\n    srdf_group_number=srdf_group)\nmodifed_port_list = self.replication.get_rdf_group(rdf_number=srdf_group)[\n    'localPorts']\nself.assertIn(local_port_list[0], modifed_port_list)\nself.replication.delete_rdf_group(srdf_group_number=srdf_group)\n"
-}

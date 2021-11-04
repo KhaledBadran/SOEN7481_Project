@@ -1,9 +1,0 @@
-{
-    "functionName": "test_normalization_ran_only_once",
-    "className": "TestNormalization",
-    "fileName": "/ornlneutronimaging_&_NeuNorm/tests_&_NeuNorm_&_normalizing_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"assert normalization is only once if force switch not turn on\"\"\"\nsample_tif_folder = self.data_path + '/tif/sample'\nob_tif_folder = self.data_path + '/tif/ob'\no_norm = Normalization()\no_norm.load(folder=sample_tif_folder, auto_gamma_filter=False)\no_norm.load(folder=ob_tif_folder, data_type='ob', auto_gamma_filter=False)\nroi = ROI(x0=0, y0=0, x1=3, y1=2)\no_norm.normalization(roi=roi)\n_returned_first_time = o_norm.data['sample']['data'][0]\no_norm.normalization(roi=roi)\n_returned_second_time = o_norm.data['sample']['data'][0]\nassert (_returned_first_time == _returned_second_time).all()\n"
-}

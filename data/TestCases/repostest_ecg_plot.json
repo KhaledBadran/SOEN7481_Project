@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ecg_plot",
-    "className": null,
-    "fileName": "/neuropsychology_&_NeuroKit/tests_&_tests_ecg.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ecg = nk.ecg_simulate(duration=60, heart_rate=70, noise=0.05)\necg_summary, _ = nk.ecg_process(ecg, sampling_rate=1000, method='neurokit')\nnk.ecg_plot(ecg_summary)\nfig = plt.gcf()\nassert len(fig.axes) == 2\ntitles = ['Raw and Cleaned Signal', 'Heart Rate']\nfor ax, title in zip(fig.get_axes(), titles):\n    assert ax.get_title() == title\nassert fig.get_axes()[1].get_xlabel() == 'Samples'\nnp.testing.assert_array_equal(fig.axes[0].get_xticks(), fig.axes[1].\n    get_xticks())\nplt.close(fig)\nnk.ecg_plot(ecg_summary, sampling_rate=1000)\nfig = plt.gcf()\nassert len(fig.axes) == 3\ntitles = ['Raw and Cleaned Signal', 'Heart Rate', 'Individual Heart Beats']\nfor ax, title in zip(fig.get_axes(), titles):\n    assert ax.get_title() == title\nassert fig.get_axes()[1].get_xlabel() == 'Time (seconds)'\nnp.testing.assert_array_equal(fig.axes[0].get_xticks(), fig.axes[1].\n    get_xticks())\nplt.close(fig)\n"
-}

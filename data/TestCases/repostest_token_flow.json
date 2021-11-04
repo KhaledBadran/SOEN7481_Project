@@ -1,9 +1,0 @@
-{
-    "functionName": "test_token_flow",
-    "className": null,
-    "fileName": "/PlaidWeb_&_Publ/tests_&_test_tokens.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "app = flask.Flask(__name__)\napp.secret_key = 'random bytes'\nmock_time = mocker.patch('time.time')\nwith app.app_context():\n    mock_time.return_value = 100\n    token = tokens.get_token('somebody', 1600)\n    parsed = tokens.parse_token(token)\n    assert parsed['me'] == 'somebody'\n    assert 'scope' not in parsed\n    mock_time.return_value = 1800\n    with pytest.raises(http_error.Unauthorized):\n        parsed = tokens.parse_token(token)\n    token = tokens.get_token('someone', 1600, 'read')\n    parsed = tokens.parse_token(token)\n    assert parsed['me'] == 'someone'\n    assert parsed['scope'] == 'read'\n    with pytest.raises(http_error.Unauthorized):\n        parsed = tokens.parse_token('kwijibo')\n"
-}

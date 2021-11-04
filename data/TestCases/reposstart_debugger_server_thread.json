@@ -1,9 +1,0 @@
-{
-    "functionName": "start_debugger_server_thread",
-    "className": "Test",
-    "fileName": "/fabioz_&_PyDev.Debugger/tests_&_test_pydevconsole.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "class DebuggerServerThread(threading.Thread):\n\n    def __init__(self, debugger_port, socket_code):\n        threading.Thread.__init__(self)\n        self.debugger_port = debugger_port\n        self.socket_code = socket_code\n\n    def run(self):\n        import socket\n        s = socket.socket()\n        s.bind(('', debugger_port))\n        s.listen(1)\n        socket, unused_addr = s.accept()\n        socket_code(socket)\ndebugger_thread = DebuggerServerThread(debugger_port, socket_code)\ndebugger_thread.setDaemon(True)\ndebugger_thread.start()\nreturn debugger_thread\n"
-}

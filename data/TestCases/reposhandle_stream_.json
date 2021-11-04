@@ -1,9 +1,0 @@
-{
-    "functionName": "handle_stream_",
-    "className": "Listener",
-    "fileName": "/halcy_&_Mastodon.py/tests_&_test_streaming.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Test helper to avoid littering all tests with six.b().\"\"\"\nclass MockResponse:\n\n    def __init__(self, data):\n        self.data = data\n\n    def iter_content(self, chunk_size):\n        for line in self.data:\n            for byte in line:\n                bytearr = bytearray()\n                bytearr.append(byte)\n                yield bytearr\n            yield b'\\n'\nreturn self.handle_stream(MockResponse(map(six.b, lines)))\n"
-}

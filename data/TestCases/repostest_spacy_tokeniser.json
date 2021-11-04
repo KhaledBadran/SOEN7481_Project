@@ -1,9 +1,0 @@
-{
-    "functionName": "test_spacy_tokeniser",
-    "className": "TestTokenisers",
-    "fileName": "/apmoore1_&_Bella/tests_&_test_tokenisers.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Tests :py:func:`bella.tokenisers.spacy_tokeniser`\n        \"\"\"\nwith self.assertRaises(ValueError, msg='It should not accept a list'):\n    spacy_tokeniser(['words to be tested'])\nexpected_results = [['The', 'fox', 'jumped', 'over', 'the', 'MOON', '.'], [\n    'lol', 'ly', 'x0x0,:D'], []]\nfor index, test_sentence in enumerate(self.test_sentences):\n    test_result = spacy_tokeniser(test_sentence)\n    expected_result = expected_results[index]\n    self.assertIsInstance(test_result, list, msg=\n        'The returned result is of the wrong type {} should be a list'.\n        format(type(test_result)))\n    self.assertEqual(expected_result, test_result, msg=\n        'Did not return the expected result {} returned this {}'.format(\n        expected_result, test_result))\n"
-}

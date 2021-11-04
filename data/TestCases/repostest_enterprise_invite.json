@@ -1,9 +1,0 @@
-{
-    "functionName": "test_enterprise_invite",
-    "className": "TestRegister",
-    "fileName": "/Keeper-Security_&_Commander/unit-tests_&_test_command_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "params = get_connected_params()\nparams.enforcements = {'enterprise_invited': 'Test Enterprise'}\ncmd = utils.CheckEnforcementsCommand()\nwith mock.patch('builtins.print'), mock.patch(\n    'keepercommander.commands.utils.user_choice') as m_choice, mock.patch(\n    'builtins.input') as m_input:\n\n    def accept_enterprise_invite(rq):\n        self.assertEqual(rq['command'], 'accept_enterprise_invite')\n        self.assertEqual(rq['verification_code'], TestRegister.\n            enterpriseInviteCode)\n    m_choice.return_value = 'Accept'\n    m_input.return_value = TestRegister.enterpriseInviteCode\n    KeeperApiHelper.communicate_expect([accept_enterprise_invite])\n    cmd.execute(params)\n    self.assertTrue(KeeperApiHelper.is_expect_empty())\n    m_choice.return_value = 'Accept'\n    m_input.return_value = ''\n    cmd.execute(params)\n    m_choice.return_value = 'Decline'\n    m_input.side_effect = KeyboardInterrupt()\n    KeeperApiHelper.communicate_expect(['decline_enterprise_invite'])\n    cmd.execute(params)\n    self.assertTrue(KeeperApiHelper.is_expect_empty())\n    m_choice.return_value = 'Ignore'\n    cmd.execute(params)\n"
-}

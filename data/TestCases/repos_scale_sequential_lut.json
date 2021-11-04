@@ -1,9 +1,0 @@
-{
-    "functionName": "_scale_sequential_lut",
-    "className": null,
-    "fileName": "/nipy_&_PySurfer/surfer_&_viz.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Scale a sequential colormap.\"\"\"\nlut_table_new = lut_table.copy()\nn_colors = lut_table.shape[0]\nn_colors2 = n_colors // 2\nfmid_idx = int(np.round(n_colors * ((fmid - fmin) / (fmax - fmin))) - 1)\nfor i in range(4):\n    part1 = np.interp(np.linspace(0, n_colors2 - 1, fmid_idx + 1), np.\n        arange(n_colors), lut_table[:, (i)])\n    lut_table_new[:fmid_idx + 1, (i)] = part1\n    part2 = np.interp(np.linspace(n_colors2, n_colors - 1, n_colors -\n        fmid_idx - 1), np.arange(n_colors), lut_table[:, (i)])\n    lut_table_new[fmid_idx + 1:, (i)] = part2\nreturn lut_table_new\n"
-}

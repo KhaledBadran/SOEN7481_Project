@@ -1,9 +1,0 @@
-{
-    "functionName": "test_simple_source",
-    "className": null,
-    "fileName": "/PaulHancock_&_Aegean/tests_&_test_models.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Make a new source without failing\"\"\"\nss = models.SimpleSource()\nss.ra = np.float32(12)\nss.dec = ss.peak_flux = ss.err_peak_flux = ss.a = ss.b = ss.pa = 0.0\nss.local_rms = ss.background = ss.peak_pixel = 0.0\nss._sanitise()\nif not isinstance(ss.ra, np.float64):\n    raise AssertionError()\na = '{0}'.format(ss)\nif not a == ' 12.0000000   0.0000000  0.000000  0.000000  0.00  0.00    0.0 0000000':\n    raise AssertionError()\nif not ss.__repr__() == ss.__str__():\n    raise AssertionError()\nif not np.all(ss.as_list()[:-1] == [0.0, 0.0, 12.0, 0.0, 0.0, 0.0, 0, 0.0, \n    0.0, 0.0, 0.0]):\n    raise AssertionError()\nisl = models.IslandSource()\nisl2 = models.IslandSource()\nif not isl < ss:\n    raise AssertionError()\nif not isl <= ss:\n    raise AssertionError()\nif isl > ss:\n    raise AssertionError()\nif isl >= ss:\n    raise AssertionError()\nif not isl == isl2:\n    raise AssertionError()\nif isl != isl2:\n    raise AssertionError()\nout = models.ComponentSource()\nout.source = 1\nout2 = models.ComponentSource()\nout2.source = 2\nout3 = models.ComponentSource()\nout3.island = 1\nif not out < out2:\n    raise AssertionError()\nif not out3 > out2:\n    raise AssertionError()\nif not out <= out2:\n    raise AssertionError()\nif not out3 >= out:\n    raise AssertionError()\nif not out != out2:\n    raise AssertionError()\nif not out == out:\n    raise AssertionError()\n"
-}

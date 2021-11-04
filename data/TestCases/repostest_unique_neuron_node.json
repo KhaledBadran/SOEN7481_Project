@@ -1,9 +1,0 @@
-{
-    "functionName": "test_unique_neuron_node",
-    "className": "DataIntegrityTest",
-    "fileName": "/openworm_&_PyOpenWorm/tests_&_DataIntegrityTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        There should one and only one unique RDF node for every neuron.  If\n        more than one is present for a given cell name, then our data is\n        inconsistent.  If there is not at least one present, then we are\n        missing neurons.\n        \"\"\"\nresults = {}\nfor n in self.neurons:\n    qres = self.g.query(\n        \"\"\"\n                SELECT distinct ?n WHERE\n                {{\n                    ?n <http://openworm.org/entities/Cell/name> {name}\n                }} LIMIT 5\n                \"\"\"\n        .format(name=R.Literal(n).n3()))\n    results[n] = len(qres), [x[0] for x in qres]\nmore_than_one = [(x, results[x]) for x in results if results[x][0] > 1]\nless_than_one = [(x, results[x]) for x in results if results[x][0] < 1]\nself.assertEqual(0, len(more_than_one), \n    'Some neurons have more than 1 node: ' + '\\n'.join(str(x) for x in\n    more_than_one))\nself.assertEqual(0, len(less_than_one), 'Some neurons have no node: ' +\n    '\\n'.join(str(x) for x in less_than_one))\n"
-}

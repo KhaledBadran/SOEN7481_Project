@@ -1,9 +1,0 @@
-{
-    "functionName": "test_xi_transform_vgp_vs_gpr",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_optimizers_&_test_natural_gradient.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    With other transforms the solution is not given in a single step, but it should still give the same answer\n    after a number of smaller steps.\n    \"\"\"\ngpr, vgp = gpr_and_vgp\nassert_gpr_vs_vgp(gpr, vgp, gamma=0.01, xi_transform=xi_transform, maxiter=500)\npytest.mark.parametrize('xi_transform', [gpflow.optimizers.XiSqrtMeanVar(),\n    XiEta()])"
-}

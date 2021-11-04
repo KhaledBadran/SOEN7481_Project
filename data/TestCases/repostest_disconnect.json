@@ -1,9 +1,0 @@
-{
-    "functionName": "test_disconnect",
-    "className": "FlaskMQTTTestCase",
-    "fileName": "/MrLeeh_&_Flask-MQTT/tests_&_test_integration.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.mqtt = Mqtt()\nself.connected = False\n@self.mqtt.on_connect()\ndef handle_connect(*args, **kwargs):\n    self.connected = True\n@self.mqtt.on_disconnect()\ndef handle_disconnect(*args, **kwargs):\n    self.connected = False\nself.assertFalse(self.connected)\nself.mqtt.init_app(self.app)\nwait()\nself.assertTrue(self.connected)\nself.mqtt._disconnect()\nwait()\nself.assertFalse(self.connected)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_zero_offset",
-    "className": "TestDataAcquisitionClient",
-    "fileName": "/BciPy_&_BciPy/bcipy_&_acquisition_&_tests_&_test_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test offset value override\"\"\"\nchannels = ['ch1', 'ch2', 'TRG']\nsample_hz = 100\ntrigger_at = 10\nnum_records = 500\nn_channels = len(channels) - 1\ndata = [(mock_record(n_channels) + [0 if i + 1 < trigger_at else 1]) for i in\n    range(num_records)]\ndevice = _MockDevice(data=data, channels=channels, fs=sample_hz)\ndaq = DataAcquisitionClient(device=device, buffer_name=\n    'buffer_client_test_offset.db', raw_data_file_name=None, delete_archive\n    =True, clock=CountClock())\ndaq.is_calibrated = True\ndaq.start_acquisition()\ntime.sleep(0.1)\ndaq.stop_acquisition()\nself.assertTrue(daq.is_calibrated)\nself.assertEqual(daq.offset, 0.0,\n    'Setting the is_calibrated to True            should override the offset calcution.'\n    )\ndaq.cleanup()\n"
-}

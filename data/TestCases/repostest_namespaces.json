@@ -1,9 +1,0 @@
-{
-    "functionName": "test_namespaces",
-    "className": "InheritanceTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_inheritance.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"test that templates used via <%namespace> have access to an inheriting 'self', and that\n        the full 'self' is also exported.\"\"\"\ncollection = lookup.TemplateLookup()\ncollection.put_string('base',\n    \"\"\"\n        <%def name=\"a()\">base_a</%def>\n        <%def name=\"b()\">base_b</%def>\n        This is the base.\n        ${next.body()}\n\"\"\"\n    )\ncollection.put_string('layout',\n    \"\"\"\n        <%inherit file=\"base\"/>\n        <%def name=\"a()\">layout_a</%def>\n        This is the layout..\n        ${next.body()}\n\"\"\"\n    )\ncollection.put_string('index',\n    \"\"\"\n        <%inherit file=\"base\"/>\n        <%namespace name=\"sc\" file=\"secondary\"/>\n        this is index.\n        a is: ${self.a()}\n        sc.a is: ${sc.a()}\n        sc.b is: ${sc.b()}\n        sc.c is: ${sc.c()}\n        sc.body is: ${sc.body()}\n\"\"\"\n    )\ncollection.put_string('secondary',\n    \"\"\"\n        <%inherit file=\"layout\"/>\n        <%def name=\"c()\">secondary_c.  a is ${self.a()} b is ${self.b()} d is ${self.d()}</%def>\n        <%def name=\"d()\">secondary_d.</%def>\n        this is secondary.\n        a is: ${self.a()}\n        c is: ${self.c()}\n\"\"\"\n    )\nassert result_lines(collection.get_template('index').render()) == [\n    'This is the base.', 'this is index.', 'a is: base_a',\n    'sc.a is: layout_a', 'sc.b is: base_b',\n    'sc.c is: secondary_c. a is layout_a b is base_b d is secondary_d.',\n    'sc.body is:', 'this is secondary.', 'a is: layout_a',\n    'c is: secondary_c. a is layout_a b is base_b d is secondary_d.']\n"
-}

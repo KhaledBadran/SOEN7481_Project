@@ -1,9 +1,0 @@
-{
-    "functionName": "load_object_from_dict",
-    "className": "OpenpnmIO",
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_io_&_OpenpnmIO.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        Loads a dictionary currently in memory into an OpenPNM Project\n\n        Parameters\n        ----------\n        obj : dict handle\n            The dictionary to load\n        objname : string\n            The name to give the object upon loading into the Project. If\n            none is specified one will be generated.\n        objtype : string\n            The type of object being loaded. If not specified, than a generic\n            Base class will be used.  The options are 'network', 'geometry',\n            'physics', 'phase', 'algorithm'.\n        project : OpenPNM Project\n            A project to load the given dict into (optional)\n\n        Returns\n        -------\n        project : OpenPNM Project\n            If no Project object is specified then one is created. A handle to\n            the Project is returned.\n\n        \"\"\"\nif project is None:\n    project = Project()\nnew_obj = project._new_object(objtype=objtype, name=objname)\nnew_obj.update(obj)\nreturn new_obj\nclassmethod"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_set_all_param_values",
-    "className": "TestSetAllParamValues",
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_helper.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from lasagne.layers import InputLayer, DenseLayer, set_all_param_values\nfrom lasagne.utils import floatX\nl1 = InputLayer((10, 20))\nl2 = DenseLayer(l1, 30)\nl3 = DenseLayer(l2, 40)\na2 = floatX(numpy.random.normal(0, 1, (20, 30)))\nb2 = floatX(numpy.random.normal(0, 1, (30,)))\na3 = floatX(numpy.random.normal(0, 1, (30, 40)))\nb3 = floatX(numpy.random.normal(0, 1, (40,)))\nset_all_param_values(l3, [a2, b2, a3, b3])\nassert numpy.allclose(l3.W.get_value(), a3)\nassert numpy.allclose(l3.b.get_value(), b3)\nassert numpy.allclose(l2.W.get_value(), a2)\nassert numpy.allclose(l2.b.get_value(), b2)\nwith pytest.raises(ValueError):\n    set_all_param_values(l3, [a3, b3, a2])\nwith pytest.raises(ValueError):\n    a3_bad = floatX(numpy.random.normal(0, 1, (25, 40)))\n    set_all_param_values(l3, [a2, b2, a3_bad, b3])\n"
-}

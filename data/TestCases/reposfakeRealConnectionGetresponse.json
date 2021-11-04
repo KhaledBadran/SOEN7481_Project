@@ -1,9 +1,0 @@
-{
-    "functionName": "fakeRealConnectionGetresponse",
-    "className": null,
-    "fileName": "/halcy_&_Mastodon.py/tests_&_test_streaming.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "response = real_connection_real_get_response(*args, **kwargs)\nreal_body = b''\ntry:\n    while close_connections == False:\n        if len(select.select([response], [], [], 0.01)[0]) > 0:\n            chunk = response.read(1)\n            real_body += chunk\nexcept AttributeError:\n    pass\nprint(real_body)\nresponse.read = lambda : real_body\nreturn response\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_tags_filtered",
-    "className": "CITestSystem",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_system.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test get_tags_filtered.\"\"\"\ncommon.CommonFunctions.get_resource = MagicMock(side_effect=self.common.\n    get_resource)\nresponse = self.system.get_tags(array_id=self.conn.array_id, tag_name=\n    'CI-TEST-NO-RESULT', storage_group_id='XX', num_of_storage_groups=1,\n    num_of_arrays=3)\ncommon.CommonFunctions.get_resource.assert_called_once_with(category=SYSTEM,\n    resource_level=TAG, params={ARRAY_ID: self.conn.array_id, TAG_NAME:\n    'CI-TEST-NO-RESULT', SG_ID: 'XX', SG_NUM: '1', ARRAY_NUM: '3'})\nself.assertTrue(response)\nself.assertIsInstance(response, dict)\nself.assertIn(TAG_NAME, response.keys())\n"
-}

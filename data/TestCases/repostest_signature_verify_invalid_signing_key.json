@@ -1,9 +1,0 @@
-{
-    "functionName": "test_signature_verify_invalid_signing_key",
-    "className": "TestKmipEngine",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the right error is thrown when an invalid signing key\n        is specified with a SignatureVerify request.\n        \"\"\"\ne = engine.KmipEngine()\ne._data_store = self.engine\ne._data_store_session_factory = self.session_factory\ne._data_session = e._data_store_session_factory()\ne._is_allowed_by_operation_policy = mock.Mock(return_value=True)\ne._logger = mock.MagicMock()\ne._cryptography_engine.logger = mock.MagicMock()\nsigning_key = pie_objects.OpaqueObject(b'\\x01\\x02\\x03\\x04', enums.\n    OpaqueDataType.NONE)\ne._data_session.add(signing_key)\ne._data_session.commit()\ne._data_session = e._data_store_session_factory()\nunique_identifier = str(signing_key.unique_identifier)\npayload = payloads.SignatureVerifyRequestPayload(unique_identifier=\n    unique_identifier, cryptographic_parameters=attributes.\n    CryptographicParameters(padding_method=enums.PaddingMethod.PSS,\n    digital_signature_algorithm=enums.DigitalSignatureAlgorithm.\n    SHA1_WITH_RSA_ENCRYPTION), data=b'', signature_data=b'')\nargs = payload,\nself.assertRaisesRegex(exceptions.PermissionDenied,\n    'The requested signing key is not a public key. A public key must be specified.'\n    , e._process_signature_verify, *args)\n"
-}

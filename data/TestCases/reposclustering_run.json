@@ -1,9 +1,0 @@
-{
-    "functionName": "clustering_run",
-    "className": null,
-    "fileName": "/ivirshup_&_ConsistentClusters/tests_&_test_aggregate.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "cells = np.arange(100)\nparams = {'a': list(range(4)), 'b': list(range(4)), 'c': list(range(3))}\nsettings = pd.DataFrame(product(*params.values()), columns=params.keys())\nclusterings = pd.DataFrame(np.zeros((len(cells), len(settings)), dtype=np.\n    integer), index=cells.astype(request.param), columns=settings.index)\nmask = settings['a'] > settings['b']\ncomponent1 = lambda : np.append(np.zeros(50, dtype=np.integer), np.random.\n    randint(1, 6, 50))\ncomponent2 = lambda : np.append(np.random.randint(1, 6, 50), np.zeros(50,\n    dtype=np.integer))\nfor i, b in mask.items():\n    if b:\n        clusterings[i] = component1()\n    else:\n        clusterings[i] = component2()\nreturn settings, clusterings\npytest.fixture(params=[str, int])"
-}

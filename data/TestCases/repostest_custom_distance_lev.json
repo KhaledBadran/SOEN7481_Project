@@ -1,9 +1,0 @@
-{
-    "functionName": "test_custom_distance_lev",
-    "className": null,
-    "fileName": "/mchalela_&_GriSPy/tests_&_test_distances.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "def levenshtein(c0, centres, dim):\n    c0 = tuple(c0)\n    distances = np.empty(len(centres))\n    for idx, c1 in enumerate(centres):\n        c1 = tuple(c1)\n        dis = textdistance.levenshtein(c0, c1)\n        distances[idx] = dis\n    return distances\nrandom = np.random.RandomState(42)\nNpoints = 10 ** 3\nNcentres = 2\ndim = 2\nLbox = 100.0\ndata = random.uniform(0, Lbox, size=(Npoints, dim))\ncentres = random.uniform(0, Lbox, size=(Ncentres, dim))\ngsp = GriSPy(data, metric=levenshtein)\nupper_radii = 10.0\nlev_dist, lev_ind = gsp.bubble_neighbors(centres, distance_upper_bound=\n    upper_radii)\nassert len(centres) == len(lev_dist) == len(lev_ind)\nassert np.all(lev_dist[0] == 2)\nassert np.all(lev_dist[1] == 2)\nassert np.all(lev_ind[0] == [648, 516, 705, 910, 533, 559, 61, 351, 954, \n    214, 90, 645, 846, 818, 39, 433, 7, 700, 2, 364, 547, 427, 660, 548, \n    333, 246, 193, 55, 83, 159, 684, 310, 777, 112, 535, 780, 334, 300, 467,\n    30, 613, 564, 134, 534, 435, 901, 296, 800, 391, 321, 763, 208, 42, 413,\n    97])\nassert np.all(lev_ind[1] == [580, 740, 498, 89, 610, 792, 259, 647, 58, 722,\n    360, 685, 552, 619, 6, 555, 935, 268, 615, 661, 680, 817, 75, 919, 922,\n    927, 52, 77, 859, 70, 544, 189, 340, 691, 453, 570, 126, 140, 67, 284, \n    662, 590, 527])\n"
-}

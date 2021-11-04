@@ -1,9 +1,0 @@
-{
-    "functionName": "test_step_cloner_should_fit_transform",
-    "className": null,
-    "fileName": "/Neuraxio_&_Neuraxle/testing_&_steps_&_test_step_cloner_for_each_data_input.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "tape = TapeCallbackFunction()\np = StepClonerForEachDataInput(Pipeline([FitCallbackStep(tape), MultiplyByN\n    (2)]))\ndata_inputs = _create_data((2, 2))\nexpected_outputs = _create_data((2, 2))\np, processed_outputs = p.fit_transform(data_inputs, expected_outputs)\nassert isinstance(p.steps_as_tuple[0][1], Pipeline)\nassert np.array_equal(p.steps_as_tuple[0][1][0].callback_function.data[0][0\n    ], data_inputs[0])\nassert np.array_equal(p.steps_as_tuple[0][1][0].callback_function.data[0][1\n    ], expected_outputs[0])\nassert isinstance(p.steps_as_tuple[1][1], Pipeline)\nassert np.array_equal(p.steps_as_tuple[1][1][0].callback_function.data[0][0\n    ], data_inputs[1])\nassert np.array_equal(p.steps_as_tuple[1][1][0].callback_function.data[0][1\n    ], expected_outputs[1])\nassert np.array_equal(processed_outputs, data_inputs * 2)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_build_library_fails",
-    "className": null,
-    "fileName": "/Pebaz_&_Nimporter/tests_&_test_build.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test NimInvokeException\"\"\"\ntry:\n    NimCompiler.compile_nim_code(Path('tests/mod_b.nim'), None, library=True)\n    assert False, 'Should throw exception.'\nexcept NimporterException:\n    \"\"\"Expected result\"\"\"\ntry:\n    module = Path('tests/lib4')\n    output = NimCompiler.build_artifact(module)\n    NimCompiler.compile_nim_code(module, output, library=True)\n    assert False, 'Should throw exception.'\nexcept NimInvokeException as e:\n    assert str(e)\n    assert e.get_output()\ntry:\n    NimCompiler.compile_nim_code(Path('tests/lib3'), None, library=True)\n    assert False, 'Should throw exception.'\nexcept NimporterException:\n    \"\"\"Expected result\"\"\"\n"
-}

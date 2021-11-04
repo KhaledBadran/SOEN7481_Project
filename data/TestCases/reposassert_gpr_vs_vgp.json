@@ -1,9 +1,0 @@
-{
-    "functionName": "assert_gpr_vs_vgp",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_optimizers_&_test_natural_gradient.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "assert maxiter >= 1\nm1_ll_before = m1.training_loss()\nm2_ll_before = m2.training_loss()\nassert_different(m2_ll_before, m1_ll_before)\nparams = m2.q_mu, m2.q_sqrt\nif xi_transform is not None:\n    params += xi_transform,\nopt = NaturalGradient(gamma)\n@tf.function\ndef minimize_step():\n    opt.minimize(m2.training_loss, var_list=[params])\nfor _ in range(maxiter):\n    minimize_step()\nm1_ll_after = m1.training_loss()\nm2_ll_after = m2.training_loss()\nnp.testing.assert_allclose(m1_ll_after, m2_ll_after, atol=0.0001)\n"
-}

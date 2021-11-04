@@ -1,9 +1,0 @@
-{
-    "functionName": "graph_tool_check",
-    "className": null,
-    "fileName": "/Silmathoron_&_NNGT/nngt_&_lib_&_test_functions.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Raise an error for function not working with old versions of graph-tool.\n    \"\"\"\ndef decorator(func):\n\n    def wrapper(func, *args, **kwargs):\n        old_graph_tool = _old_graph_tool(version_min)\n        if old_graph_tool:\n            raise NotImplementedError(\n                'This function is not working for graph-tool < ' +\n                version_min + '.')\n        else:\n            return func(*args, **kwargs)\n    return decorate(func, wrapper)\nreturn decorator\n"
-}

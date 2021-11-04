@@ -1,9 +1,0 @@
-{
-    "functionName": "testAuthSHA256",
-    "className": "TestAuthentication",
-    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_test_connection.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "conn = self.connect()\nc = conn.cursor()\nwith TempUser(c, 'pymysql_sha256@localhost', self.databases[0]['db'],\n    'sha256_password') as u:\n    if self.mysql_server_is(conn, (5, 7, 0)):\n        c.execute(\"SET PASSWORD FOR 'pymysql_sha256'@'localhost' ='Sh@256Pa33'\"\n            )\n    else:\n        c.execute('SET old_passwords = 2')\n        c.execute(\n            \"SET PASSWORD FOR 'pymysql_sha256'@'localhost' = PASSWORD('Sh@256Pa33')\"\n            )\n    c.execute('FLUSH PRIVILEGES')\n    db = self.db.copy()\n    db['password'] = 'Sh@256Pa33'\n    with self.assertRaises(pymysql.err.OperationalError):\n        pymysql.connect(user='pymysql_sha256', **db)\npytest.mark.skipif(not socket_auth, reason='connection to unix_socket required'\n    )pytest.mark.skipif(not sha256_password_found, reason=\n    'no sha256 password authentication plugin found')"
-}

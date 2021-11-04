@@ -1,9 +1,0 @@
-{
-    "functionName": "load_label",
-    "className": "Surface",
-    "fileName": "/nipy_&_PySurfer/surfer_&_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Load in a Freesurfer .label file.\n\n        Label files are just text files indicating the vertices included\n        in the label. Each Surface instance has a dictionary of labels, keyed\n        by the name (which is taken from the file name if not given as an\n        argument.\n\n        \"\"\"\nlabel = nib.freesurfer.read_label(op.join(self.data_path, 'label', \n    '%s.%s.label' % (self.hemi, name)))\nlabel_array = np.zeros(len(self.x), np.int)\nlabel_array[label] = 1\ntry:\n    self.labels[name] = label_array\nexcept AttributeError:\n    self.labels = {name: label_array}\n"
-}

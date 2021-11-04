@@ -1,9 +1,0 @@
-{
-    "functionName": "test_aguc2_axis_move_relative",
-    "className": null,
-    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_newport_&_test_agilis.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Check the move relative function.\n    \"\"\"\nwith expected_protocol(ik.newport.AGUC2, ['MR', '1 PR 1000', '2 PR -340'],\n    [], sep='\\r\\n') as agl:\n    agl.axis['X'].move_relative = 1000\n    agl.axis['Y'].move_relative = -340\n    with pytest.raises(ValueError):\n        agl.axis['X'].move_relative = 2147483648\n    with pytest.raises(ValueError):\n        agl.axis['Y'].move_relative = -2147483649\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_reporter_correctly_sends_failures",
-    "className": null,
-    "fileName": "/PearsonEducation_&_Alarmageddon/tests_&_test_reporter.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "reporter = env['reporter']\npublishers = []\nfor i in range(10):\n    publishers.append(MockPublisher())\nreporter.publishers = publishers\nreporter.collect(Failure('failed', Validation('valid'), 'why it failed'))\nreporter.report()\nfor pub in publishers:\n    assert pub.failures == 1\n    assert pub.successes == 0\n"
-}

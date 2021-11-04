@@ -1,9 +1,0 @@
-{
-    "functionName": "test_cache_enable",
-    "className": "CacheTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_cache.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "t = Template(\n    \"\"\"\n            <%!\n                callcount = [0]\n            %>\n            <%def name=\"foo()\" cached=\"True\">\n                <% callcount[0] += 1 %>\n            </%def>\n            ${foo()}\n            ${foo()}\n            callcount: ${callcount}\n        \"\"\"\n    , cache_enabled=False)\nself._install_mock_cache(t)\neq_(t.render().strip(), 'callcount: [2]')\n"
-}

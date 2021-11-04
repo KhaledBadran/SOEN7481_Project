@@ -1,9 +1,0 @@
-{
-    "functionName": "test_worker",
-    "className": "TestWorkerExecution",
-    "fileName": "/breathe_&_NotebookScripter/tests_&_test_NotebookScripter.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "return_values = ['parameterized_name', 'french_mode', 'greeting_string',\n    'hello']\nclass FakeQueue(object):\n\n    def __init__(self):\n        self._items = []\n\n    def put(self, item):\n        self._items.append(item)\n\n    def get(self):\n        return return_values\nparent_to_child_queue = FakeQueue()\nchild_to_parent_queue = FakeQueue()\nnotebook = self.notebook_file\nparent_parameters = [[{}, {}]]\nhooks = {'parameterized_name': 'external world'}\nworker(parent_to_child_queue, child_to_parent_queue, notebook,\n    parent_parameters, **hooks)\n_, mod = child_to_parent_queue._items[0]\nhello_repr = mod.pop('hello', None)\nself.assertTrue('function' in hello_repr)\nself.assertMatchSnapshot(mod)\n"
-}

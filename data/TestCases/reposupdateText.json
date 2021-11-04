@@ -1,9 +1,0 @@
-{
-    "functionName": "updateText",
-    "className": "Viewer1D",
-    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_Viewer1D.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "text = '{}'.format(title) + \"\"\"\nCurrent fitting model: {}\n\"\"\".format(self.\n    fitFunction.latex(highlight=highlight))\nfor i in range(self.fitFunction.parameterLength):\n    if np.isnan(self.fitFunction.parameters[i]):\n        val = '   '\n    else:\n        val = '{:.3e}'.format(self.fitFunction.parameters[i])\n    text += '${}$:    {}     '.format(self.fitFunction.variableNames[i], val)\nif not self.fitFunction.fitError is False:\n    text += '\\n'\n    for i in range(self.fitFunction.parameterLength):\n        if np.isnan(self.fitFunction.parameters[i]):\n            val = '   '\n        else:\n            val = '{:.3e}'.format(np.sqrt(self.fitFunction.fitError[i, i]))\n        text += '${}{}{}$:  {}    '.format('\\\\sigma_{', self.fitFunction.\n            variableNames[i], '}', val)\nif not ps is None:\n    text += '\\n' + ps\nself.text = text\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_split_dataset",
-    "className": "TestTarget",
-    "fileName": "/apmoore1_&_Bella/tests_&_test_data_types.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "def split_tests(data_: TargetCollection, train_: TargetCollection, test_:\n    TargetCollection, test_split: float):\n    data_size = len(data_)\n    train_size = len(train_)\n    test_size = len(test_)\n    assert train_size == data_size - int(data_size * test_split)\n    assert test_size == int(data_size * test_split)\n    assert data_size == train_size + test_size\n    train_ids = []\n    test_ids = []\n    for data in train_.data_dict():\n        train_ids.append(re.findall('\\\\d+', data['target_id'])[0])\n    for data in test_.data_dict():\n        test_ids.append(re.findall('\\\\d+', data['target_id'])[0])\n    assert len(train_ids) == len(set(train_ids))\n    assert len(test_ids) == len(set(test_ids))\n    for train_id in train_ids:\n        assert train_id not in test_ids\n    for test_id in test_ids:\n        assert test_id not in train_ids\n    return train_ids, test_ids\ntest_dir = Path(__file__, '..', 'test_data')\ndata_fp = Path(test_dir, 'semeval_test_data.xml')\ndata = semeval_14(data_fp)\ntrain, test = data.split_dataset(data, test_split=0.2)\n_, test_ids_ = split_tests(data, train, test, 0.2)\ntrue_test_ids = ['20140', '20141', '20120', '20121', '20110']\nassert true_test_ids == test_ids_\nfor i in range(20):\n    train, test = data.split_dataset(data, test_split=0.2, random=True)\n    split_tests(data, train, test, 0.2)\nfor i in range(20):\n    train, test = data.split_dataset(data, test_split=0.8, random=True)\n    split_tests(data, train, test, 0.8)\n"
-}

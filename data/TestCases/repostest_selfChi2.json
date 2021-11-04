@@ -1,9 +1,0 @@
-{
-    "functionName": "test_selfChi2",
-    "className": null,
-    "fileName": "/apetri_&_LensTools/lenstools_&_tests_&_test_ensemble.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ens = Ensemble.read(os.path.join(dataExtern(), 'all',\n    'Om0.295_Ol0.705_w-1.878_ns0.960_si0.100', 'subfield1', 'sigma05',\n    'power_spectrum.npy'))\nchi2 = ens.selfChi2()\nassert chi2.shape[0] == ens.shape[0]\nfig, ax = plt.subplots()\nn, bins, patch = ax.hist(chi2.values, bins=50, normed=True, histtype=\n    'stepfilled', alpha=0.5)\nax.plot(stats.chi2.pdf(bins, ens.shape[1]))\nax.set_xlabel('$\\\\chi^2$')\nax.set_ylabel('$P(\\\\chi^2)$')\nfig.savefig('self_chi2.png')\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_classify_instance_weighting",
-    "className": null,
-    "fileName": "/Menelau_&_DESlib/deslib_&_tests_&_des_&_test_base.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "query = np.array([[-1, 1]])\npool_classifiers = create_pool_classifiers + create_pool_classifiers\ndes_test = BaseDES(pool_classifiers, mode='weighting')\ndes_test.classes_ = np.array([0, 1])\ndes_test.n_classes_ = 2\ncompetences = np.array([[0.55, 1.0, 0.2, 0.6, 0.75, 0.3]])\ndes_test.estimate_competence = MagicMock(return_value=competences)\npredictions = []\nfor clf in des_test.pool_classifiers:\n    predictions.append(clf.predict(query)[0])\npredicted_label = des_test.classify_with_ds(query, np.array(predictions))\nassert predicted_label == 1.0\n"
-}

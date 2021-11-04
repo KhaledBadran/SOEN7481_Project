@@ -1,9 +1,0 @@
-{
-    "functionName": "test_requires_admin_user",
-    "className": null,
-    "fileName": "/RobertoPrevato_&_BlackSheep/itests_&_test_server.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "headers = {'Authorization': urlsafe_b64encode(json.dumps(claims).encode(\n    'utf8')).decode()} if claims else {}\nresponse = session_two.get('/only-for-admins', headers=headers)\nassert response.status_code == expected_status\npytest.mark.parametrize('claims,expected_status', [(None, 401), ({'id':\n    '001', 'name': 'Charlie Brown', 'role': 'user'}, 401), ({'id': '002',\n    'name': 'Snoopy', 'role': 'admin'}, 204)])"
-}

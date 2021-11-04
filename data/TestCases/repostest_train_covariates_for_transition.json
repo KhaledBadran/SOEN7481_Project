@@ -1,9 +1,0 @@
-{
-    "functionName": "test_train_covariates_for_transition",
-    "className": "UnSupervisedIOHMMTests",
-    "fileName": "/Mogeng_&_IOHMM/tests_&_test_UnSupervisedIOHMM.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.model = UnSupervisedIOHMM(num_states=2, max_EM_iter=100, EM_tol=1e-06)\nself.model.set_models(model_initial=CrossEntropyMNL(solver='newton-cg',\n    reg_method='l2'), model_transition=CrossEntropyMNL(solver='newton-cg',\n    reg_method='l2'), model_emissions=[OLS()])\nself.model.set_inputs(covariates_initial=[], covariates_transition=['Pacc'],\n    covariates_emissions=[[]])\nself.model.set_outputs([['rt']])\nself.model.set_data([self.data_speed])\nself.model.train()\nnp.testing.assert_array_almost_equal(self.model.model_emissions[0][0].coef,\n    np.array([[5.5]]), decimal=1)\nnp.testing.assert_array_almost_equal(self.model.model_emissions[1][0].coef,\n    np.array([[6.4]]), decimal=1)\nnp.testing.assert_array_almost_equal(self.model.model_emissions[0][0].\n    dispersion, np.array([[0.036]]), decimal=2)\nnp.testing.assert_array_almost_equal(self.model.model_emissions[1][0].\n    dispersion, np.array([[0.063]]), decimal=2)\nnp.testing.assert_array_almost_equal(np.exp(self.model.model_transition[0].\n    predict_log_proba(self.model.inp_transitions_all_sequences)).sum(axis=0\n    ), np.array([312, 126]), decimal=0)\nnp.testing.assert_array_almost_equal(np.exp(self.model.model_transition[1].\n    predict_log_proba(self.model.inp_transitions_all_sequences)).sum(axis=0\n    ), np.array([112, 326]), decimal=0)\n"
-}

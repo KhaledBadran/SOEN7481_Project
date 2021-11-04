@@ -1,9 +1,0 @@
-{
-    "functionName": "get_value",
-    "className": null,
-    "fileName": "/kenfar_&_DataGristle/scripts_&_tests_&_test_gristle_determinator_cmd.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\" Gets the value (right-most field) out of gristle_determinator\n        parsable output given the key values for the rest of the fields.\n    \"\"\"\nmydialect = csv.Dialect\nmydialect.delimiter = '|'\nmydialect.quoting = file_type.get_quote_number('QUOTE_ALL')\nmydialect.quotechar = '\"'\nmydialect.lineterminator = '\\n'\ncsvobj = csv.reader(parsable_out.split('\\n'), dialect=mydialect)\nfor record in csvobj:\n    if not record:\n        continue\n    assert len(record) == 5\n    rec_division = record[0]\n    rec_section = record[1]\n    rec_subsection = record[2]\n    rec_key = record[3]\n    rec_value = record[4]\n    if (rec_division == division and rec_section == section and \n        rec_subsection == subsection and rec_key == key):\n        return rec_value\nreturn None\n"
-}

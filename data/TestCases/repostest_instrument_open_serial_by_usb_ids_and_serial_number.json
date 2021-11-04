@@ -1,9 +1,0 @@
-{
-    "functionName": "test_instrument_open_serial_by_usb_ids_and_serial_number",
-    "className": null,
-    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_base_instrument.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "mock_serial_manager.new_serial_connection.return_value.__class__ = (\n    SerialCommunicator)\ninst = ik.Instrument.open_serial(baud=1234, vid=0, pid=1000, serial_number='a1'\n    )\nassert isinstance(inst._file, SerialCommunicator) is True\nmock_serial_manager.new_serial_connection.assert_called_with('COM1', baud=\n    1234, timeout=3, write_timeout=3)\nmock.patch('instruments.abstract_instruments.instrument.comports', new=\n    fake_comports)mock.patch('instruments.abstract_instruments.instrument.serial_manager')"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_team_get_key",
-    "className": "TestCrossEnterpriseCommands",
-    "fileName": "/Keeper-Security_&_Commander/tests_&_test_cross_commands.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "param1 = TestCrossEnterpriseCommands.params1\nparam2 = TestCrossEnterpriseCommands.params2\nuids = [x['team_uid'] for x in param1.enterprise['teams']]\nself.assertGreater(len(uids), 0, 'cannot resolve team')\nent1_team_uid = uids[0]\nrq = {'command': 'team_get_keys', 'teams': [ent1_team_uid]}\nrs = api.communicate(param2, rq)\nself.assertEqual(rs['keys'][0]['result_code'], 'doesnt_exist')\n"
-}

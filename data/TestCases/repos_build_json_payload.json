@@ -1,9 +1,0 @@
-{
-    "functionName": "_build_json_payload",
-    "className": "TestGpHyperOptViews",
-    "fileName": "/Yelp_&_MOE/moe_&_tests_&_views_&_rest_&_gp_hyper_opt_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Create a json_payload to POST to the /gp/hyper_opt endpoint with all needed info.\"\"\"\nhyper_dim = domain.dim + 1\ndict_to_dump = {'gp_historical_info': historical_data.json_payload(),\n    'covariance_info': covariance.get_json_serializable_info(),\n    'domain_info': domain.get_json_serializable_info(minimal=True),\n    'optimizer_info': {'optimizer_type': GRADIENT_DESCENT_OPTIMIZER,\n    'num_multistarts': TEST_OPTIMIZER_MULTISTARTS, 'num_random_samples':\n    TEST_OPTIMIZER_NUM_RANDOM_SAMPLES, 'optimizer_parameters': dict(\n    TEST_GRADIENT_DESCENT_PARAMETERS._asdict())},\n    'hyperparameter_domain_info': {'dim': hyper_dim, 'domain_type':\n    'tensor_product', 'domain_bounds': []}}\nfor _ in range(hyper_dim):\n    dict_to_dump['hyperparameter_domain_info']['domain_bounds'].append({\n        'min': 0.1, 'max': 2.0})\nreturn json.dumps(dict_to_dump)\nstaticmethod"
-}

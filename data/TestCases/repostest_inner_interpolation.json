@@ -1,9 +1,0 @@
-{
-    "functionName": "test_inner_interpolation",
-    "className": "TestFields",
-    "fileName": "/tum-pbs_&_PhiFlow/tests_&_test_fields.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data = math.zeros([1, 2, 3, 1])\ndata[(0), :, :, (0)] = [[1, 2, 3], [4, 5, 6]]\nf = CenteredGrid(data, box[0:2, 0:3])\ng = CenteredGrid(math.zeros([1, 2, 2, 1]), box[0:2, 0.5:2.5])\nresampled = f.at(g)\nself.assertTrue(resampled.compatible(g))\nnp.testing.assert_equal(resampled.data[0, ..., 0], [[1.5, 2.5], [4.5, 5.5]])\nresampled2 = Field.at(f, g)\nself.assertTrue(resampled2.compatible(g))\nnp.testing.assert_equal(resampled2.data[0, ..., 0], [[1.5, 2.5], [4.5, 5.5]])\n"
-}

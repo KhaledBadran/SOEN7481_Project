@@ -1,9 +1,0 @@
-{
-    "functionName": "test_occam_data_save_load",
-    "className": null,
-    "fileName": "/mortele_&_OccamTools/test_&_test_occam_data.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "shutil.rmtree(class_dir, ignore_errors=True)\noccam_data, fort1, fort7, xyz = _create_default_occam_data_object()\nall_attributes = [key for key in occam_data.__dict__]\nattributes = []\nfor key in all_attributes:\n    if isinstance(occam_data.__dict__[key], np.ndarray):\n        attributes.append(key)\noccam_data.save()\nfor array in attributes:\n    expected_file_name = array + '.npy'\n    assert os.path.exists(os.path.join(class_dir, expected_file_name))\nfor key in all_attributes:\n    assert key in occam_data.__dict__\noccam_data_npy_loaded = OccamData(os.path.join(class_dir, os.pardir),\n    silent=True)\nfor key in all_attributes:\n    assert key in occam_data_npy_loaded.__dict__\nassert not occam_data_npy_loaded.save(overwrite=False)\noccam_data_npy_loaded_file = OccamData(os.path.join(class_dir, os.pardir,\n    'fort.1'), silent=True)\n_assert_all_attributes_present_and_equal(occam_data_npy_loaded_file, fort1,\n    fort7, xyz)\ncaught = False\ntry:\n    _ = OccamData('this_is_not_a_file', silent=True)\nexcept FileNotFoundError:\n    caught = True\nassert caught\nshutil.rmtree(class_dir)\n"
-}

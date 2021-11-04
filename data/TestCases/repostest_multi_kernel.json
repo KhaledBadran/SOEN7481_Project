@@ -1,9 +1,0 @@
-{
-    "functionName": "test_multi_kernel",
-    "className": "Test_kernel",
-    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_Kernel.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "sweep_points = [2]\nnqubits = 3\nk1 = ql.Kernel('kernel1', platf, nqubits)\nk1.prepz(0)\nk1.prepz(1)\nk1.x(0)\nk1.y(0)\nk1.cnot(0, 1)\nk1.toffoli(0, 1, 2)\nk1.rx90(0)\nk1.clifford(2, 0)\nk1.measure(2)\nk2 = ql.Kernel('kernel2', platf, nqubits)\nk2.prepz(0)\nk2.prepz(1)\nk2.x(0)\nk2.y(0)\nk2.cnot(0, 1)\nk2.toffoli(0, 1, 2)\nk2.rx90(0)\nk2.clifford(2, 0)\nk2.measure(2)\np = ql.Program('aProgram', platf, nqubits)\np.set_sweep_points(sweep_points)\np.add_kernel(k1)\np.add_kernel(k2)\np.compile()\n"
-}

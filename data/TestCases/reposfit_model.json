@@ -1,9 +1,0 @@
-{
-    "functionName": "fit_model",
-    "className": null,
-    "fileName": "/OLC-LOC-Bioinformatics_&_GenomeQAML/scikit_learn_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "dataframe = pd.get_dummies(dataframe, columns=['Genus'], dummy_na=True)\nfeatures = list(dataframe.columns[1:len(dataframe.columns)])\nfeatures.remove('PassFail')\nX = dataframe[features]\ny = dataframe['PassFail']\nparam_dict = {'n_estimators': [10, 20, 50, 100], 'max_depth': [5, 10, 20, \n    50, 100, 200], 'max_leaf_nodes': [10, 20, 40, 50, 100, 200],\n    'criterion': ['gini', 'entropy']}\ndt = ExtraTreesClassifier()\ngrid_search = GridSearchCV(dt, param_dict)\ngrid_search.fit(X, y)\nprint(grid_search.best_params_)\ndt = ExtraTreesClassifier(n_estimators=grid_search.best_params_[\n    'n_estimators'], max_depth=grid_search.best_params_['max_depth'],\n    max_leaf_nodes=grid_search.best_params_['max_leaf_nodes'], criterion=\n    grid_search.best_params_['criterion'])\nscores = cross_val_score(dt, X, y, cv=10)\nprint(np.mean(scores))\ndt = dt.fit(X, y)\nreturn dt\n"
-}

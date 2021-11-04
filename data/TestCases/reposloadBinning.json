@@ -1,9 +1,0 @@
-{
-    "functionName": "loadBinning",
-    "className": "DataFile",
-    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_DataFile.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Small function to check if current binning is equal to wanted binning and if not reloads to binning wanted\"\"\"\nif binning is None or not hasattr(self, 'instrumentCalibrations'):\n    return\nif not binning in self.possibleBinnings:\n    raise AttributeError('Wanted binning not in possible binnings!')\nbinID = list(self.possibleBinnings).index(binning)\n(self.instrumentCalibrationEf, self.instrumentCalibrationA4, self.\n    instrumentCalibrationEdges) = self.instrumentCalibrations[binID]\ntry:\n    len(binning)\nexcept TypeError:\n    pass\nelse:\n    binning = binning[0]\nself._binning = binning\nself.instrumentCalibrationEf.shape = -1, 4\nself.instrumentCalibrationA4.shape = -1\nself.instrumentCalibrationEdges.shape = -1, 2\n_tools.KwargChecker()"
-}

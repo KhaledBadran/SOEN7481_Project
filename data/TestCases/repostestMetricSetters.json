@@ -1,9 +1,0 @@
-{
-    "functionName": "testMetricSetters",
-    "className": "ExperimentTest",
-    "fileName": "/facebook_&_Ax/ax_&_core_&_tests_&_test_experiment.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "self.assertEqual(len(get_optimization_config().metrics) + 1, len(self.\n    experiment.metrics))\nopt_config = get_optimization_config()\nopt_config.outcome_constraints[0].metric = Metric(name='m3')\nself.experiment.optimization_config = opt_config\nself.assertEqual(len(get_optimization_config().metrics) + 1, len(self.\n    experiment.metrics))\nself.experiment.add_tracking_metric(Metric(name='m4'))\nself.assertEqual(len(get_optimization_config().metrics) + 2, len(self.\n    experiment.metrics))\nself.experiment.add_tracking_metrics([Metric(name='z1')])\nself.assertEqual(len(get_optimization_config().metrics) + 3, len(self.\n    experiment.metrics))\nself.assertIsNone(self.experiment.metrics['m4'].lower_is_better)\nself.experiment.update_tracking_metric(Metric(name='m4', lower_is_better=True))\nself.assertTrue(self.experiment.metrics['m4'].lower_is_better)\nwith self.assertRaises(ValueError):\n    self.experiment.add_tracking_metric(Metric(name='m4'))\nwith self.assertRaises(ValueError):\n    self.experiment.add_tracking_metrics([Metric(name='z1'), Metric(name='m4')]\n        )\nwith self.assertRaises(ValueError):\n    self.experiment.add_tracking_metric(Metric(name='m1'))\nwith self.assertRaises(ValueError):\n    self.experiment.add_tracking_metrics([Metric(name='z2'), Metric(name='m1')]\n        )\nwith self.assertRaises(ValueError):\n    self.experiment.update_tracking_metric(Metric(name='m5'))\nwith self.assertRaises(ValueError):\n    self.experiment.remove_tracking_metric(metric_name='m5')\n"
-}

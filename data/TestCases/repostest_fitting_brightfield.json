@@ -1,9 +1,0 @@
-{
-    "functionName": "test_fitting_brightfield",
-    "className": "TestCellFitting",
-    "fileName": "/Jhsmit_&_ColiCoords/test_&_test_fitting.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "res_dict = {'a0': 20.5992, 'a1': -0.2712269, 'a2': 0.005158162, 'r': \n    9.248204, 'xl': 15.22411, 'xr': 36.45077}\ncell_0 = self.cells[0].copy()\nres = cell_0.optimize('brightfield')\nbf_value = 10016887.213015744 if platform.system(\n    ) == 'Linux' else 10016887.123816863\nself.assertEqual(self.cf * res.objective_value, bf_value)\nfor key, val in res_dict.items():\n    self.assertAlmostEqual(res.params[key], val, 5)\ncell_0 = self.cells[0].copy()\nres = cell_0.optimize('brightfield', minimizer=Powell)\nself.assertEqual(self.cf * res.objective_value, bf_value)\nfor key, val in res_dict.items():\n    self.assertAlmostEqual(res.params[key], val, 5)\n"
-}

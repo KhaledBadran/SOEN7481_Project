@@ -1,9 +1,0 @@
-{
-    "functionName": "test_total_undirected_connectivities",
-    "className": null,
-    "fileName": "/Silmathoron_&_NNGT/testing_&_test_generation2.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Test total-degree connectivities \"\"\"\nnum_nodes = 1000\ndensity = 0.1\ng = ng.erdos_renyi(density=density, nodes=num_nodes, directed=False)\nassert g.edge_nb() / (num_nodes * num_nodes) == density\nfor directed in (True, False):\n    deg = 50\n    g = ng.fixed_degree(deg, 'total', nodes=num_nodes, directed=directed)\n    assert {deg} == set(g.get_degrees())\n    avg = 50.0\n    std = 5.0\n    g = ng.gaussian_degree(avg, std, degree_type='total', nodes=num_nodes,\n        directed=directed)\n    deviation = 20.0 / np.sqrt(num_nodes)\n    average = np.average(g.get_degrees())\n    assert avg - deviation <= average <= avg + deviation\npytest.mark.mpi_skip"
-}

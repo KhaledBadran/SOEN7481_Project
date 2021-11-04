@@ -1,9 +1,0 @@
-{
-    "functionName": "test_set_record_topology",
-    "className": null,
-    "fileName": "/Edinburgh-Genome-Foundry_&_BandWitch/tests_&_test_tools.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "record_path = os.path.join(this_directory, 'test_data', 'test_sequences',\n    'asm_00.gb')\nrecord = tools.load_record(record_path, topology='circular')\nassert record.annotations['topology'] == 'circular'\nassert not tools.record_is_linear(record, default=True)\ntools.set_record_topology(record, 'default_to_circular')\nassert not tools.record_is_linear(record, default=True)\nrecord.annotations.pop('topology')\nassert not tools.record_is_linear(record, default=False)\ntools.set_record_topology(record, 'default_to_linear')\nassert tools.record_is_linear(record, default=False)\n"
-}

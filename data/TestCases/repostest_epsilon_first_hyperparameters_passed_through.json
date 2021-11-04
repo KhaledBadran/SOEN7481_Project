@@ -1,9 +1,0 @@
-{
-    "functionName": "test_epsilon_first_hyperparameters_passed_through",
-    "className": "TestBanditEpsilonViews",
-    "fileName": "/Yelp_&_MOE/moe_&_tests_&_views_&_rest_&_bandit_epsilon_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that the hyperparameters get passed through to the epsilon-first endpoint.\"\"\"\nhistorical_info = self.one_arm_test_case\njson_payload = json.loads(self._build_json_payload(EPSILON_SUBTYPE_FIRST,\n    historical_info, EPSILON_SUBTYPES_TO_DEFAULT_HYPERPARAMETER_INFOS[\n    EPSILON_SUBTYPE_FIRST]))\nrequest = pyramid.testing.DummyRequest(post=json_payload)\nrequest.json_body = json_payload\nview = self._view(request)\nparams = view.get_params_from_request()\nassert params['hyperparameter_info'] == json_payload['hyperparameter_info']\njson_payload['hyperparameter_info']['epsilon'] = 1.0\njson_payload['hyperparameter_info']['total_samples'] = 20000\nrequest = pyramid.testing.DummyRequest(post=json_payload)\nrequest.json_body = json_payload\nview = self._view(request)\nparams = view.get_params_from_request()\nassert params['hyperparameter_info'] == json_payload['hyperparameter_info']\n"
-}

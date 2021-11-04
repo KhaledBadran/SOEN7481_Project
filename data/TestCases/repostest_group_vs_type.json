@@ -1,9 +1,0 @@
-{
-    "functionName": "test_group_vs_type",
-    "className": null,
-    "fileName": "/Silmathoron_&_NNGT/testing_&_test_connect_group_type.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Gaussian degree with groups and types \"\"\"\nnngt.seed(0)\npop = nngt.NeuralPop.exc_and_inhib(1000)\nigroup = pop['inhibitory']\negroup = pop['excitatory']\nnet1 = nngt.Network(population=pop)\nall_groups = list(pop.keys())\navg_e = 50\nstd_e = 5\nng.connect_groups(net1, egroup, all_groups, graph_model='gaussian_degree',\n    avg=avg_e, std=std_e, degree_type='out-degree')\navg_i = 100\nstd_i = 5\nng.connect_groups(net1, igroup, all_groups, graph_model='gaussian_degree',\n    avg=avg_i, std=std_i, degree_type='out-degree')\nnngt.seed(0)\npop = nngt.NeuralPop.exc_and_inhib(1000)\nigroup = pop['inhibitory']\negroup = pop['excitatory']\nnet2 = nngt.Network(population=pop)\navg_e = 50\nstd_e = 5\nng.connect_neural_types(net2, 1, [-1, 1], graph_model='gaussian_degree',\n    avg=avg_e, std=std_e, degree_type='out-degree')\navg_i = 100\nstd_i = 5\nng.connect_neural_types(net2, -1, [-1, 1], graph_model='gaussian_degree',\n    avg=avg_i, std=std_i, degree_type='out-degree')\nif nngt.on_master_process() or nngt.get_config('backend') == 'nngt':\n    assert np.all(net1.get_degrees() == net2.get_degrees())\n"
-}

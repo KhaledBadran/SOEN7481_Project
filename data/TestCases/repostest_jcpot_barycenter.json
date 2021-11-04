@@ -1,9 +1,0 @@
-{
-    "functionName": "test_jcpot_barycenter",
-    "className": null,
-    "fileName": "/PythonOT_&_POT/test_&_test_da.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"test_jcpot_barycenter\n    \"\"\"\nns1 = 150\nns2 = 150\nnt = 200\nsigma = 0.1\nnp.random.seed(1985)\nps1 = 0.2\nps2 = 0.9\npt = 0.4\nXs1, ys1 = make_data_classif('2gauss_prop', ns1, nz=sigma, p=ps1)\nXs2, ys2 = make_data_classif('2gauss_prop', ns2, nz=sigma, p=ps2)\nXt, yt = make_data_classif('2gauss_prop', nt, nz=sigma, p=pt)\nXs = [Xs1, Xs2]\nys = [ys1, ys2]\nprop = ot.bregman.jcpot_barycenter(Xs, ys, Xt, reg=0.5, metric=\n    'sqeuclidean', numItermax=10000, stopThr=1e-09, verbose=False, log=False)\nnp.testing.assert_allclose(prop, [1 - pt, pt], rtol=0.001, atol=0.001)\n"
-}

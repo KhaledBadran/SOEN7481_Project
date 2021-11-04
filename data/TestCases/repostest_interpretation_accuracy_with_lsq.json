@@ -1,9 +1,0 @@
-{
-    "functionName": "test_interpretation_accuracy_with_lsq",
-    "className": "TestDemagGUI",
-    "fileName": "/PmagPy_&_PmagPy/pmagpy_tests_&_test_demag_gui.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "g = os.walk(project_WD)\nlsq_filenames = list([os.path.join(project_WD, x) for x in [x for x in next\n    (g)[2] if x.lower().endswith('.lsq')]])\nfor lsq_filename in lsq_filenames:\n    try:\n        interps = read_LSQ(lsq_filename)\n        self.frame.COORDINATE_SYSTEM = 'geographic'\n        self.frame.read_from_LSQ(lsq_filename)\n    except OSError as e:\n        print('Could not read in LSQ file: %s' % lsq_filename)\n        raise e\n    except IOError as e:\n        print('No LSQ file: %s' % lsq_filename)\n        raise e\n    for interp in interps:\n        specimen = interp['er_specimen_name']\n        gui_interps = self.frame.pmag_results_data['specimens'][specimen]\n        similar_fit_present = True\n        for gui_interp in gui_interps:\n            pars = gui_interp.get('geographic')\n            if int(pars['specimen_n']) != int(interp['specimen_n']):\n                continue\n            for value in ['specimen_dec', 'specimen_inc', 'specimen_mad',\n                'specimen_n']:\n                if round(float(pars[value]), 1\n                    ) - allowable_float_error > float(interp[value]) and float(\n                    interp[value]) > round(float(pars[value]), 1\n                    ) + allowable_float_error:\n                    print((round(float(pars[value]), 1), float(interp[value])))\n                    similar_fit_present = False\n        self.assertTrue(similar_fit_present)\n"
-}

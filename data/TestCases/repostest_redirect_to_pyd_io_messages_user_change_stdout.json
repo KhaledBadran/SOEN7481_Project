@@ -1,9 +1,0 @@
-{
-    "functionName": "test_redirect_to_pyd_io_messages_user_change_stdout",
-    "className": null,
-    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_pydevd_io.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from _pydevd_bundle.pydevd_io import redirect_stream_to_pydb_io_messages\nfrom _pydevd_bundle.pydevd_io import stop_redirect_stream_to_pydb_io_messages\nfrom _pydevd_bundle.pydevd_io import _RedirectionsHolder\npy_db = _redirect_context['py_db']\nstack = getattr(_RedirectionsHolder, '_stack_%s' % (std,))\ndef get_redirect():\n    return getattr(_RedirectionsHolder, '_pydevd_%s_redirect_' % (std,))\ndef write(s):\n    getattr(sys, std).write(s)\nredirect_stream_to_pydb_io_messages(std=std)\nassert len(stack) == 1\nassert get_redirect() is not None\nwrite('aaa')\nassert py_db.writer.command_meanings == ['CMD_WRITE_TO_CONSOLE']\nfrom io import StringIO\nstream = StringIO()\nsetattr(sys, std, stream)\nwrite(u'bbb')\nassert py_db.writer.command_meanings == ['CMD_WRITE_TO_CONSOLE']\nassert stream.getvalue() == u'bbb'\nstop_redirect_stream_to_pydb_io_messages(std=std)\nassert len(stack) == 0\nassert get_redirect() is None\nwrite(u'ccc')\nassert py_db.writer.command_meanings == ['CMD_WRITE_TO_CONSOLE']\nassert stream.getvalue() == u'bbbccc'\npytest.mark.parametrize('std', ['stderr', 'stdout'])"
-}

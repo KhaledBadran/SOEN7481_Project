@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_inputs_no_fit",
-    "className": "TestMLPipline",
-    "fileName": "/HDI-Project_&_MLBlocks/tests_&_test_mlpipeline.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "expected = {'input': {'name': 'input', 'type': 'whatever'}, 'another_input':\n    {'name': 'another_input', 'type': 'another_whatever'}}\npipeline = MLPipeline(['a_primitive', 'another_primitive'])\npipeline.blocks['a_primitive#1'].produce_args = [{'name': 'input', 'type':\n    'whatever'}]\npipeline.blocks['a_primitive#1'].fit_args = [{'name': 'fit_input', 'type':\n    'whatever'}]\npipeline.blocks['a_primitive#1'].produce_output = [{'name': 'output',\n    'type': 'another_whatever'}]\npipeline.blocks['another_primitive#1'].produce_args = [{'name': 'output',\n    'type': 'another_whatever'}, {'name': 'another_input', 'type':\n    'another_whatever'}]\ninputs = pipeline.get_inputs(fit=False)\nassert inputs == expected\npatch('mlblocks.mlpipeline.MLBlock', new=get_mlblock_mock)"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_compare_to_external_software",
-    "className": "Test_CompareToExternalSoftware",
-    "fileName": "/PolymerGuy_&_AXITOM/axitom_&_tests_&_test_real_projections.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Compare the results obtained by using only a single radiogram from a full dataset to the results\n        obtained by using the whole dataset and external reconstruction software. The reconstruction by\n        the external software is done in advance and only the result is used here.\n        \"\"\"\ndir_path = os.path.dirname(os.path.realpath(__file__))\nself.tol = 0.02\nrecon = run_reconstruction()\nrecon_crop = recon.transpose()[:, ::-1][1:, :400]\nrecon_crop_norm = normalize_grey_scales(recon_crop)\ncorrect = axitom.read_image(dir_path +\n    '/example_data/recon_by_external_software.tif')\ncorrect_norm = normalize_grey_scales(correct.transpose())\nerror_field = np.abs(recon_crop_norm[::-1, :] - correct_norm)\nif np.average(error_field) > self.tol:\n    self.fail(\n        'The reconstruction did not match the reconstruction performed by another software and the error was: %f'\n         % np.average(error_field))\n"
-}

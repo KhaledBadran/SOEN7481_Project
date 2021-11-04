@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sky_within",
-    "className": null,
-    "fileName": "/PaulHancock_&_Aegean/tests_&_test_regions.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test the Ragion.sky_within method\"\"\"\nra = np.radians([13.5, 15])\ndec = np.radians([-45, -40])\nradius = np.radians([0.1, 0.1])\nregion = Region(maxdepth=11)\nregion.add_circles(ra, dec, radius)\nif not np.all(region.sky_within(ra[0], dec[0])):\n    raise AssertionError('Failed on position at center of region')\nif not np.all(region.sky_within(ra, dec)):\n    raise AssertionError('Failed on list of positions')\nif np.any(region.sky_within(ra[0] + 5 * radius[0], dec[0])):\n    raise AssertionError('Failed on position outside of region')\ntry:\n    region.sky_within(np.nan, dec[0])\nexcept ValueError as e:\n    raise AssertionError('Failed with a nan position\\n' + e.message)\n"
-}

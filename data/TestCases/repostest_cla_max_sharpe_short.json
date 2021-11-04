@@ -1,9 +1,0 @@
-{
-    "functionName": "test_cla_max_sharpe_short",
-    "className": null,
-    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_cla.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "cla = CLA(*setup_cla(data_only=True), weight_bounds=(-1, 1))\nw = cla.max_sharpe()\nassert isinstance(w, dict)\nassert set(w.keys()) == set(cla.tickers)\nnp.testing.assert_almost_equal(cla.weights.sum(), 1)\nnp.testing.assert_allclose(cla.portfolio_performance(), (0.3799273115521356,\n    0.23115368271125736, 1.5570909679242886))\nsharpe = cla.portfolio_performance()[2]\ncla_long_only = setup_cla()\ncla_long_only.max_sharpe()\nlong_only_sharpe = cla_long_only.portfolio_performance()[2]\nassert sharpe > long_only_sharpe\n"
-}

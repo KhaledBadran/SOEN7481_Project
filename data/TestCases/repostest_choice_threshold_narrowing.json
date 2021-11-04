@@ -1,9 +1,0 @@
-{
-    "functionName": "test_choice_threshold_narrowing",
-    "className": null,
-    "fileName": "/Neuraxio_&_Neuraxle/testing_&_hyperparams_&_test_distributions.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "hd = Choice([0, 1, False, 'Test'])\nhd = hd.narrow_space_from_best_guess(False, 1.0)\nassert isinstance(hd, Choice)\nassert len(hd) == 4\nhd = hd.narrow_space_from_best_guess(False, 0.5)\nassert isinstance(hd, Choice)\nassert len(hd) == 4\nhd = hd.narrow_space_from_best_guess(False, 0.5)\nassert isinstance(hd, FixedHyperparameter)\nhd = hd.narrow_space_from_best_guess(False, 0.5)\nassert isinstance(hd, FixedHyperparameter)\nassert hd.get_current_narrowing_value() == 0.5 ** 3\nhd = hd.unnarrow()\nassert isinstance(hd, Choice)\nassert len(hd) == 4\nassert hd.get_current_narrowing_value() == 1.0\n"
-}

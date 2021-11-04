@@ -1,9 +1,0 @@
-{
-    "functionName": "test_registry_in_yarom_mapped_class",
-    "className": "ClassRegistryTest",
-    "fileName": "/openworm_&_PyOpenWorm/tests_&_DataObjectTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class A(DataObject):\n    class_context = self.context\nwith captured_logging() as logs:\n    mod = import_module('tests.DataObjectTest')\n    mod.__yarom_mapped_classes__ = A,\n    try:\n        self.context.mapper.process_class(A)\n        log = logs.getvalue()\n        self.assertNotRegexpMatches(log, 'registry')\n    finally:\n        delattr(mod, '__yarom_mapped_classes__')\n"
-}

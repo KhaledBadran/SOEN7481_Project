@@ -1,9 +1,0 @@
-{
-    "functionName": "test_param_value",
-    "className": null,
-    "fileName": "/TeamHG-Memex_&_MaybeDont/tests_&_test_predict.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "dupe_predictor = DupePredictor()\nrandom.seed(1)\ndef gen_urls(page):\n    random_start = random.randint(1, 100)\n    if is_param:\n        tpls = ['{}/?page={}', '{}/?page={}&start=0', \n            '{}/?page={}&start=%s' % random_start]\n    else:\n        tpls = ['{}/{}', '{}/{}?start=0', '{}/{}?start=%s' % random_start]\n    return [tpl.format('http://foo.com', page) for tpl in tpls]\nfor i in range(100):\n    urls = gen_urls(i)\n    with_contents = list(zip(urls, ['a{}'.format(i)] * 2 + ['r{}'.format(\n        random.randint(1, 100))]))\n    if reverse_update:\n        with_contents.reverse()\n    for url, content in with_contents:\n        dupe_predictor.update_model(url, content)\ndupe_predictor.log_dupstats(min_dup=1)\nurl1, url2, url3 = gen_urls('b')\nif reverse_test:\n    url1, url2 = url2, url1\ndupe_predictor.update_model(url1, 'b')\nassert dupe_predictor.get_dupe_prob(url2) > 0.97\nassert dupe_predictor.get_dupe_prob(url3) < 0.3\nfor url in gen_urls('c'):\n    assert dupe_predictor.get_dupe_prob(url) < 0.3\npytest.mark.parametrize('reverse_update', [True, False])pytest.mark.parametrize('reverse_test', [True, False])pytest.mark.parametrize('is_param', [True, False])"
-}

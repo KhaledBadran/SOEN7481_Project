@@ -1,9 +1,0 @@
-{
-    "functionName": "test_multiple_input",
-    "className": "TestSimple",
-    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_test_simple_integration.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test training data of samples with several tensors as feature\n        using a sequential model with multiple inputs.\n        \"\"\"\nFEATURES_DIM = 2\ndata_len = 100\nbatch_size = 32\nepoch_num = 5\ndef gen_rand_sample():\n    features1 = np.random.uniform(0, 1, FEATURES_DIM)\n    features2 = np.random.uniform(0, 1, FEATURES_DIM)\n    label = np.array((2 * (features1 + features2)).sum() + 0.4)\n    return Sample.from_ndarray([features1, features2], label)\ntrainingData = self.sc.parallelize(range(0, data_len)).map(lambda i:\n    gen_rand_sample())\nmodel_test = Sequential()\nbranches = ParallelTable()\nbranch1 = Sequential().add(Linear(FEATURES_DIM, 1)).add(ReLU())\nbranch2 = Sequential().add(Linear(FEATURES_DIM, 1)).add(ReLU())\nbranches.add(branch1).add(branch2)\nmodel_test.add(branches).add(CAddTable())\noptim_method = SGD(learningrate=0.01, learningrate_decay=0.0002,\n    weightdecay=0.0, momentum=0.0, dampening=0.0, nesterov=False,\n    leaningrate_schedule=Poly(0.5, int(data_len / batch_size * epoch_num)))\noptimizer = Optimizer.create(model=model_test, training_set=trainingData,\n    criterion=MSECriterion(), optim_method=optim_method, end_trigger=\n    MaxEpoch(epoch_num), batch_size=batch_size)\noptimizer.set_validation(batch_size=batch_size, val_rdd=trainingData,\n    trigger=EveryEpoch(), val_method=[Top1Accuracy()])\noptimizer.optimize()\n"
-}

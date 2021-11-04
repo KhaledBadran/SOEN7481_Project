@@ -1,9 +1,0 @@
-{
-    "functionName": "gaseous_species_in_water",
-    "className": null,
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_models_&_phases_&_partition_coefficient.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Calculate Henry's law constant for gaseous species dissolved in water.\n\n    Parameters\n    ----------\n    target : OpenPNM MultiPhase object\n        Target object in which data is to be stored.\n\n    chemical_formula : string\n        Chemical formula of the dissolving species.\n\n    temperature : string, optional\n        Dictionary key containing pore temperature values.\n        The default is \"pore.temperature\".\n\n    Returns\n    -------\n    H : numpy ndarray\n        Array containing Henry's law constant (Kpx) [atm/mol-frac]\n\n    References\n    ----------\n    Yaws, Carl L., et al. \"Solubility & Henry's Law constants for sulfur\n    compounds in water: unlike traditional methods, the new correlation and\n    data presented here are appropriate for very low concentrations.\"\n    Chemical Engineering 110.8 (2003): 60-65.\n\n    \"\"\"\nimport pandas as pd\nfname = 'gas_water_henry.csv'\npath = Path(os.path.realpath(__file__), '../')\npath = Path(path.resolve(), fname)\ndf = pd.read_csv(path)\nrow = df[df.Formula == chemical_formula]\nA, B, C, D = row.iloc[(0), 3:7].astype(float)\nTmin, Tmax = row.iloc[(0), 7:9].astype(float)\nT = target[temperature]\nif T.min() < Tmin or T.max() > Tmax:\n    logger.critical(\n        'The correlation is only accurate for temperatures in the ' +\n        f'range of {Tmin:.1f}K and {Tmax:.1f}K!')\nHpx_log10 = A + B / T + C * np.log10(T) + D * T\nreturn 10 ** Hpx_log10\n"
-}

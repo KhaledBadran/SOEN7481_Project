@@ -1,9 +1,0 @@
-{
-    "functionName": "test_schedule_per_second_list",
-    "className": null,
-    "fileName": "/roniemartinez_&_DocCron/tests_&_test_quartz.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "cron = doccron.cron_quartz('0,10,20,30,40,50 * * * * * *')\nassert isinstance(cron, Iterator)\nnext_schedule = next(cron)\nassert next_schedule > datetime.now(tz=tzlocal()).replace(microsecond=0)\nassert isinstance(next_schedule, datetime)\nfor i in range(0, 60, 10):\n    n = next(cron)\n    assert isinstance(n, datetime)\n    assert next_schedule + timedelta(seconds=10) == n\n    next_schedule = n\n"
-}

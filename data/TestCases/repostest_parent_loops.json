@@ -1,9 +1,0 @@
-{
-    "functionName": "test_parent_loops",
-    "className": "TestLoop",
-    "fileName": "/whiteclover_&_Choco/test_&_test_loop.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "template = Template(\n    \"\"\"% for x in 'ab':\n${x} ${loop.index} <- outer loop\n% for y in [0, 1]:\n${y} ${loop.index} <- inner loop\n${x} ${loop.parent.index} <- parent loop\n% endfor\n${x} ${loop.index} <- outer loop\n% endfor\"\"\"\n    )\ncode = template.code\nrendered = template.render()\nexpected = ['a 0 <- outer loop', 'a 0 <- parent loop', 'b 1 <- outer loop',\n    'b 1 <- parent loop']\nfor line in expected:\n    print(code)\n    assert line in rendered, 'The parent attribute of a loop gives you the previous loop context in the stack'\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_make_resume_files_full",
-    "className": null,
-    "fileName": "/zeshuaro_&_LinkedRW/tests_&_test_resume.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with tempfile.TemporaryDirectory() as dirname:\n    with open(pkg_resources.resource_filename(__name__, PROFILE_FILE)) as f:\n        profile = json.load(f)\n    make_resume_files(profile, dirname, TIMEOUT)\n    for filename in os.listdir(pkg_resources.resource_filename(__name__,\n        RESUME_DIR)):\n        assert filecmp.cmp(os.path.join(dirname, RESUME_DIR, filename),\n            pkg_resources.resource_filename(__name__,\n            f'{RESUME_DIR}/{filename}'), shallow=False) is True\n"
-}

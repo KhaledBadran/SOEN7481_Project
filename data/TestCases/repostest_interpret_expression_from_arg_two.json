@@ -1,9 +1,0 @@
-{
-    "functionName": "test_interpret_expression_from_arg_two",
-    "className": "ScopeTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_def.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"test that cache_key=${foo} gets its value from\n        the 'foo' argument regardless of it being passed\n        from the context.\n\n        This is here testing that there's no change\n        to existing behavior before and after #191.\n\n        \"\"\"\nt = Template(\n    \"\"\"\n        <%def name=\"layout(foo)\" cached=\"True\" cache_key=\"${foo}\">\n        foo: ${value}\n        </%def>\n\n        ${layout(3)}\n        \"\"\"\n    , cache_impl='plain')\neq_(result_lines(t.render(foo='foo', value=1)), ['foo: 1'])\neq_(result_lines(t.render(foo='bar', value=2)), ['foo: 1'])\n"
-}

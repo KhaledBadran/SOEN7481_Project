@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ok3d_moving_window",
-    "className": null,
-    "fileName": "/bsmurphy_&_PyKrige/tests_&_test_core.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data = np.genfromtxt(os.path.join(BASE_DIR, 'test_data', 'test3d_data.txt'),\n    skip_header=1)\nans = np.genfromtxt(os.path.join(BASE_DIR, './test_data/test3d_answer.txt'))\nans_z = ans[:, (0)].reshape((10, 10, 10))\nans_ss = ans[:, (1)].reshape((10, 10, 10))\nk3d = OrdinaryKriging3D(data[:, (0)], data[:, (1)], data[:, (2)], data[:, (\n    3)], variogram_model='linear', variogram_parameters=[1.0, 0.1])\nk, ss = k3d.execute('grid', np.arange(10.0), np.arange(10.0), np.arange(\n    10.0), backend='loop', n_closest_points=10)\nassert_allclose(k, ans_z, rtol=0.001)\nassert_allclose(ss, ans_ss, rtol=0.001)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_create_from_pip",
-    "className": "test_Lambda_Layer",
-    "fileName": "/pbx-gs_&_OSBot-AWS/tests_&_unit_&_apis_&_test_Lambda_Layer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "package_name = 'urllib3'\nlambda_layer = Lambda_Layer('created_from_pip')\nself.result = lambda_layer.create_from_pip(package_name)\nzip_file = lambda_layer.code_zip()\nfiles_in_zip = Files.zip_file_list(zip_file)\nassert len(files_in_zip) > 10\nassert 'urllib3/util/' in files_in_zip\nassert lambda_layer.delete() is True\nassert 'ERROR: Could not find a version that satisfies the requirement' in lambda_layer.create_from_pip(\n    'aaaaaaa-1234').get('error')\n"
-}

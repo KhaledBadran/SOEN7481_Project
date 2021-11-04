@@ -1,9 +1,0 @@
-{
-    "functionName": "test_invert_xfel_lpd_geom",
-    "className": null,
-    "fileName": "/European-XFEL_&_EXtra-geom/extra_geom_&_tests_&_test_lpd_geometry.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "src_file = pjoin(tests_dir, 'lpd_mar_18.h5')\ndst_file = pjoin(str(tmpdir), 'lpd_inverted.h5')\ninvert_xfel_lpd_geom(src_file, dst_file)\nwith h5py.File(src_file, 'r') as fsrc, h5py.File(dst_file, 'r') as fdst:\n    np.testing.assert_array_equal(fsrc['Q1/M1/Position'][:], -1 * fdst[\n        'Q1/M1/Position'][:])\n    np.testing.assert_array_equal(fsrc['Q1/M1/T07/Position'][:], -1 * fdst[\n        'Q1/M1/T07/Position'][:])\n"
-}

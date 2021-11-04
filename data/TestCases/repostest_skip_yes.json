@@ -1,9 +1,0 @@
-{
-    "functionName": "test_skip_yes",
-    "className": "Test_skip",
-    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_skip.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.setUp()\nql.set_option('issue_skip_319', 'yes')\nv = 'yes'\nconfig = os.path.join(rootDir, 'test_mapper_s7.json')\nnum_qubits = 7\nprog_name = 'test_skip_' + v\nkernel_name = 'kernel_' + v\nstarmon = ql.Platform('starmon', config)\nprog = ql.Program(prog_name, starmon, num_qubits, 0)\nqasm_rdr = ql.cQasmReader(starmon, prog)\nqasm_str = f\"\"\"version 1.0\n            qubits 7\n            .{kernel_name}\n            cnot q[2],q[5]\n            skip 2\n            {{ x q[0] | y q[1] }}\n            \"\"\"\nqasm_rdr.string2circuit(qasm_str)\nprog.compile()\nGOLD_fn = os.path.join(rootDir, 'golden', prog.name + '_scheduled.qasm')\nQASM_fn = os.path.join(output_dir, prog.name + '_scheduledqasmwriter_out.qasm')\nassemble(QASM_fn)\nself.assertTrue(file_compare(QASM_fn, GOLD_fn))\nql.set_option('write_qasm_files', 'no')\nql.set_option('write_report_files', 'no')\nql.set_option('unique_output', 'no')\nql.set_option('mapper', 'no')\nql.set_option('issue_skip_319', 'no')\n"
-}

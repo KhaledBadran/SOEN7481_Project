@@ -1,9 +1,0 @@
-{
-    "functionName": "test_bounds_checking_1D",
-    "className": null,
-    "fileName": "/bytesandbrains_&_ProcessOptimizer/ProcessOptimizer_&_tests_&_test_optimizer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "low = -2.0\nhigh = 2.0\nbase_estimator = ExtraTreesRegressor(random_state=2)\nopt = Optimizer([(low, high)], base_estimator, n_initial_points=1,\n    acq_optimizer='sampling')\nassert_raises(ValueError, opt.tell, [high + 0.5], 2.0)\nassert_raises(ValueError, opt.tell, [low - 0.5], 2.0)\nassert_raises(ValueError, opt.tell, [high + 0.5, high], (2.0, 3.0))\nassert_raises(ValueError, opt.tell, [low - 0.5, high], (2.0, 3.0))\npytest.mark.fast_test"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_drop_invalid_column_list_types",
-    "className": null,
-    "fileName": "/tvdboom_&_ATOM/tests_&_test_data_cleaning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Assert that invalid columns types are dropped for list input.\"\"\"\nX = X_bin.copy()\nX['datetime_col'] = pd.to_datetime(X['mean radius'])\nX['string_col'] = [str(i) for i in range(len(X))]\nX = StandardCleaner(prohibited_types=['datetime64[ns]', 'object'],\n    maximum_cardinality=False).transform(X)\nassert 'datetime_col' not in X.columns\nassert 'string_col' not in X.columns\n"
-}

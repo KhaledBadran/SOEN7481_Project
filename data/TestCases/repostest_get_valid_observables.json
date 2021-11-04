@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_valid_observables",
-    "className": "TestCase",
-    "fileName": "/IntegralDefense_&_ACE/test_ace_api.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from saq.constants import VALID_OBSERVABLE_TYPES, OBSERVABLE_DESCRIPTIONS, DEPRECATED_OBSERVABLES\nresult = ace_api.get_valid_observables()\nself.assertIsNotNone(result)\nself.assertTrue('result' in result)\nself.assertTrue(isinstance(result['result'], list))\nfor r in result['result']:\n    self.assertTrue(r['name'] in VALID_OBSERVABLE_TYPES)\n    self.assertEquals(OBSERVABLE_DESCRIPTIONS[r['name']], r['description'])\nactive_observables = set(VALID_OBSERVABLE_TYPES) - set(DEPRECATED_OBSERVABLES)\nself.assertEquals(len(active_observables), len(result['result']))\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_GRU",
-    "className": null,
-    "fileName": "/oujago_&_NumpyDL/tests_&_test_layers_&_test_recurrent.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "for seq in (True, False):\n    layer = GRU(n_out=200, n_in=100, return_sequence=seq)\n    assert layer.out_shape is None\n    layer.connect_to()\n    assert len(layer.out_shape) == (3 if seq else 2)\n    input = np.random.rand(10, 50, 100)\n    assert np.ndim(layer.forward(input)) == (3 if seq else 2)\n    with pytest.raises(NotImplementedError):\n        layer.backward(None)\n    assert len(layer.params) == 9\n    assert len(layer.grads) == 9\n"
-}

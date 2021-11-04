@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ols_sample_weight_half_zero_half_one",
-    "className": "PerfectCorrelationMultivariateOLSTests",
-    "fileName": "/Mogeng_&_IOHMM/tests_&_test_OLS.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.model = OLS(solver='pinv', fit_intercept=True, est_stderr=True,\n    reg_method=None, alpha=0, l1_ratio=0, tol=0.0001, max_iter=100, coef=\n    None, stderr=None, dispersion=None)\nlen_half = 8\nself.model.fit(self.X, self.Y, sample_weight=np.array([1] * len_half + [0] *\n    (self.data_longley.exog.shape[0] - len_half)))\nself.model_half = OLS(solver='pinv', fit_intercept=True, est_stderr=True,\n    reg_method=None, alpha=0, l1_ratio=0, max_iter=100, coef=None, stderr=\n    None, dispersion=None)\nself.model_half.fit(self.X[:len_half], self.Y[:len_half])\nnp.testing.assert_array_almost_equal(self.model.coef, self.model_half.coef,\n    decimal=3)\nnp.testing.assert_array_almost_equal(self.model.stderr, self.model_half.\n    stderr, decimal=3)\nnp.testing.assert_array_almost_equal(self.model.dispersion, self.model_half\n    .dispersion, decimal=3)\n"
-}

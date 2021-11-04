@@ -1,9 +1,0 @@
-{
-    "functionName": "test_compiled_execute_callable",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_test_monitor.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test that the `ExecuteCallback` when compiled behaves as expected.\n    We test that python prints are not executed anymore.\n    \"\"\"\nstring_to_print = 'Eager mode'\ndef callback():\n    print(string_to_print)\ntask = ExecuteCallback(callback)\nfor i in range(Data.num_steps):\n    task(i)\nout, _ = capsys.readouterr()\nassert out == f'{string_to_print}\\n' * Data.num_steps\ncompiled_task = tf.function(task)\nfor i in tf.range(Data.num_steps):\n    compiled_task(i)\nout, _ = capsys.readouterr()\nassert out == f'{string_to_print}\\n'\n"
-}

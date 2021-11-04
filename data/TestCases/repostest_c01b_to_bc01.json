@@ -1,9 +1,0 @@
-{
-    "functionName": "test_c01b_to_bc01",
-    "className": "TestShuffleLayers",
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_conv.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from lasagne.layers.input import InputLayer\ntry:\n    from lasagne.layers.cuda_convnet import ShuffleC01BToBC01Layer\nexcept ImportError:\n    pytest.skip('cuda_convnet not available')\ninput_layer = InputLayer((1, 2, 3, 4))\nlayer = ShuffleC01BToBC01Layer(input_layer)\nassert layer.output_shape == (4, 1, 2, 3)\ninput = floatX(np.random.random((1, 2, 3, 4)))\noutput = input.transpose(3, 0, 1, 2)\nactual = layer.get_output_for(theano.shared(input)).eval()\nassert np.allclose(output, actual)\n"
-}

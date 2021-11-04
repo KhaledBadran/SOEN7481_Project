@@ -1,9 +1,0 @@
-{
-    "functionName": "test_server_resolver_cleanup_error",
-    "className": null,
-    "fileName": "/daveisadork_&_PyDevNS/tests_&_test_server.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "server.config.domains = domains\nwith server.bind() as connection:\n    _host, _port = connection.getsockname()\n    with server._resolver():\n        for domain in domains:\n            path = os.path.join(config.resolver_dir, domain)\n            assert os.path.isfile(path)\n        os.unlink(path)\nfor domain in domains:\n    path = os.path.join(config.resolver_dir, domain)\n    assert not os.path.isfile(path)\npytest.mark.parametrize('domains', [('dev', 'local.co')])"
-}

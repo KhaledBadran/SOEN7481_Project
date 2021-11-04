@@ -1,9 +1,0 @@
-{
-    "functionName": "test_connection_gone_away",
-    "className": "TestConnection",
-    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_test_connection.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        http://dev.mysql.com/doc/refman/5.0/en/gone-away.html\n        http://dev.mysql.com/doc/refman/5.0/en/error-messages-client.html#error_cr_server_gone_error\n        \"\"\"\ncon = self.connect()\ncur = con.cursor()\ncur.execute('SET wait_timeout=1')\ntime.sleep(2)\nwith self.assertRaises(pymysql.OperationalError) as cm:\n    cur.execute('SELECT 1+1')\nself.assertIn(cm.exception.args[0], (2006, 2013))\n"
-}

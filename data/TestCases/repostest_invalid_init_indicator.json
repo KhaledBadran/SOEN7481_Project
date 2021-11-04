@@ -1,9 +1,0 @@
-{
-    "functionName": "test_invalid_init_indicator",
-    "className": "TestSignatureVerifyRequestPayload",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_signature_verify.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a TypeError is raised when an invalid value is used to set\n        the init indicator of a SignatureVerify request payload.\n        \"\"\"\nkwargs = {'init_indicator': 'invalid'}\nself.assertRaisesRegex(TypeError, 'Init indicator must be a boolean.',\n    signature_verify.SignatureVerifyRequestPayload, **kwargs)\npayload = signature_verify.SignatureVerifyRequestPayload()\nargs = payload, 'init_indicator', 'invalid'\nself.assertRaisesRegex(TypeError, 'Init indicator must be a boolean.',\n    setattr, *args)\n"
-}

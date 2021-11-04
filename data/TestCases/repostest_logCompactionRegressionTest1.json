@@ -1,9 +1,0 @@
-{
-    "functionName": "test_logCompactionRegressionTest1",
-    "className": null,
-    "fileName": "/bakwc_&_PySyncObj/test_syncobj.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "random.seed(42)\na = [getNextAddr(), getNextAddr()]\no1 = TestObj(a[0], [a[1]])\no2 = TestObj(a[1], [a[0]])\nobjs = [o1, o2]\ndoTicks(objs, 10, stopFunc=lambda : o1._isReady() and o2._isReady())\nassert o1._getLeader().address in a\nassert o1._getLeader() == o2._getLeader()\no1._forceLogCompaction()\ndoTicks(objs, 0.5)\nassert o1._SyncObj__forceLogCompaction == False\nlogAfterCompaction = o1._SyncObj__raftLog\no1._SyncObj__loadDumpFile(True)\nlogAfterDeserialize = o1._SyncObj__raftLog\nassert logAfterCompaction == logAfterDeserialize\no1._destroy()\no2._destroy()\n"
-}

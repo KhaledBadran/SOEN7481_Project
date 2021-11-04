@@ -1,9 +1,0 @@
-{
-    "functionName": "_read_scalar_data",
-    "className": "Brain",
-    "fileName": "/nipy_&_PySurfer/surfer_&_viz.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Load in scalar data from an image stored in a file or an array\n\n        Parameters\n        ----------\n        source : str or numpy array\n            path to scalar data file or a numpy array\n        name : str or None, optional\n            name for the overlay in the internal dictionary\n        cast : bool, optional\n            either to cast float data into 64bit datatype as a\n            workaround. cast=True can fix a rendering problem with\n            certain versions of Mayavi\n\n        Returns\n        -------\n        scalar_data : numpy array\n            flat numpy array of scalar data\n        name : str\n            if no name was provided, deduces the name if filename was given\n            as a source\n        \"\"\"\nif isinstance(source, string_types):\n    if name is None:\n        basename = os.path.basename(source)\n        if basename.endswith('.gz'):\n            basename = basename[:-3]\n        if basename.startswith('%s.' % hemi):\n            basename = basename[3:]\n        name = os.path.splitext(basename)[0]\n    scalar_data = io.read_scalar_data(source)\nelse:\n    scalar_data = source\nif cast:\n    if scalar_data.dtype.char == 'f' and scalar_data.dtype.itemsize < 8:\n        scalar_data = scalar_data.astype(np.float)\nreturn scalar_data, name\n"
-}

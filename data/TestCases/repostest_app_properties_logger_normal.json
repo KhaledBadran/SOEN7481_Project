@@ -1,9 +1,0 @@
-{
-    "functionName": "test_app_properties_logger_normal",
-    "className": "TestMetaClasses",
-    "fileName": "/EVEprosper_&_ProsperCommon/tests_&_test_prosper_cli.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"make sure properties work as expected\"\"\"\nclass DummyApplication(p_cli.ProsperApplication):\n    PROGNAME = 'DUMMY'\n    VERSION = '0.0.0'\n    here_path = HERE\n    config_path = LOCAL_CONFIG_PATH\n\n    def main(self):\n        return 'yes'\ndummy = DummyApplication(__file__)\nassert dummy._logger is None\nassert isinstance(dummy.logger, logging.Logger)\nhandler_types = [type(handler) for handler in dummy.logger.handlers]\nassert p_logging.HackyDiscordHandler in handler_types\nassert p_logging.HackySlackHandler in handler_types\nassert logging.StreamHandler not in handler_types\n"
-}

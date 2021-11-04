@@ -1,9 +1,0 @@
-{
-    "functionName": "sinusoidal",
-    "className": null,
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_models_&_physics_&_meniscus.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Wrapper for the general toroidal model to implement the a sinusoidal\n    profile. The quarter-wavelength is equal to toroidal radius r_toroid.\n    The amplitude is equal to the toroidal radius multiplied by the ratio of\n    the throat radius and average connecting pore radius.\n\n    Notes\n    -----\n    The capillary pressure equation for a sinusoidal throat is extended from\n    the Washburn equation as [1]_:\n\n    .. math::\n        P_c = -\\\\frac{2\\\\sigma(cos(\\\\alpha + \\\\theta))}{r(x)}\n\n    where alpha is:\n    .. math::\n        \\\\alpha = arctan(\\\\frac{dr}{dx})\n\n    References\n    ----------\n\n    .. [1] A. Forner-Cuenca et. al, Advanced Water Management in PEFCs:\n        Diffusion Layers with Patterned Wettability.\n        J. ECS. 163, 9, F1038-F1048 (2016).\n    \"\"\"\ntarget['throat.scale_a'] = r_toroid\ntarget['throat.scale_b'] = r_toroid\noutput = general_toroidal(target=target, mode=mode, profile_equation=\n    'sinusoidal', target_Pc=target_Pc, num_points=num_points,\n    throat_diameter=throat_diameter, touch_length=touch_length,\n    surface_tension=surface_tension, contact_angle=contact_angle)\nreturn output\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_parse_auth_settings_no_config",
-    "className": "TestKmipServerConfig",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_config.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that server authentication plugin settings are parsed correctly,\n        even when not specified.\n        \"\"\"\nparser = configparser.ConfigParser()\nparser.add_section('server')\nc = config.KmipServerConfig()\nc._logger = mock.MagicMock()\nself.assertEqual([], c.settings['auth_plugins'])\nc.parse_auth_settings(parser)\nconfigs = c.settings['auth_plugins']\nself.assertIsInstance(configs, list)\nself.assertEqual(0, len(configs))\n"
-}

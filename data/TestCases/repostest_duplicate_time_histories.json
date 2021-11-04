@@ -1,9 +1,0 @@
-{
-    "functionName": "test_duplicate_time_histories",
-    "className": "TestDataPoint",
-    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_chemked.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Check that duplicates of the history types raise an error\"\"\"\nproperties = self.load_properties('testfile_rcm.yaml')\nproperties[0]['time-histories'][0]['type'] = history_type[0]\nproperties[0]['time-histories'].append(deepcopy(properties[0][\n    'time-histories'][0]))\nproperties[0]['time-histories'][1]['type'] = history_type[1]\nwith pytest.raises(ValueError) as record:\n    DataPoint(properties[0])\nassert 'Each history type may only be specified once. {} was specified multiple times'.format(\n    history_type[0]) in str(record.value)\npytest.mark.parametrize('history_type', zip(time_history_types,\n    time_history_types))"
-}

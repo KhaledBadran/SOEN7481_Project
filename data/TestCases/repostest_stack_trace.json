@@ -1,9 +1,0 @@
-{
-    "functionName": "test_stack_trace",
-    "className": null,
-    "fileName": "/PearsonEducation_&_Alarmageddon/tests_&_validations_&_test_cassandra.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ssh_ctx = ssh.SshContext('ubuntu', get_mock_key_file(tmpdir))\ntext = \"\"\"[10.198.10.174] out: Exception java.lang.RuntimeException.\n    [10.198.10.174] out: \tat org.apache.cassandra.dht.Murmur3Partitioner.describeOwnership(Murmur3Partitioner.java:120)\n    [10.198.10.174] out: \tat org.apache.cassandra.service.StorageService.getOwnership(StorageService.java:3512)\n    [10.198.10.174] out: \tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n    \"\"\"\nmonkeypatch.setattr(Connection, 'run', lambda self, x, warn:\n    get_mock_ssh_text(text, 0))\nwith pytest.raises(ValidationFailure):\n    cassandra.CassandraStatusValidation(ssh_ctx, number_nodes=4, hosts=[\n        '127.0.0.1'], cluster_name=_CLUSTER_NAME).perform({})\n"
-}

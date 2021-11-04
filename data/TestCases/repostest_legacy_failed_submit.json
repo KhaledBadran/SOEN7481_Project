@@ -1,9 +1,0 @@
-{
-    "functionName": "test_legacy_failed_submit",
-    "className": "TestCase",
-    "fileName": "/IntegralDefense_&_ACE/test_ace_api.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.stop_api_server()\nalert = ace_api.Alert(description='Test Alert')\nalert.add_observable(F_IPV4, '1.2.3.4', local_time(), directives=[\n    DIRECTIVE_NO_SCAN])\nalert.add_tag('test')\ntemp_path = os.path.join(saq.TEMP_DIR, 'test.txt')\nwith open(temp_path, 'w') as fp:\n    fp.write('test')\nalert.add_attachment_link(temp_path, 'dest/test.txt')\nwith self.assertRaises(Exception):\n    alert.submit(f'https://{saq.API_PREFIX}', ssl_verification=saq.CONFIG[\n        'SSL']['ca_chain_path'])\nself.assertEquals(log_count('unable to submit '), 1)\ndir_list = os.listdir('.saq_alerts')\nself.assertEquals(len(dir_list), 1)\ntarget_path = os.path.join('.saq_alerts', dir_list[0], 'alert')\nwith open(target_path, 'rb') as fp:\n    new_alert = pickle.load(fp)\nself.assertEquals(new_alert.submit_kwargs, alert.submit_kwargs)\n"
-}

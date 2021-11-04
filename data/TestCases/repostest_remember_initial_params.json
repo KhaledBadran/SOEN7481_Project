@@ -1,9 +1,0 @@
-{
-    "functionName": "test_remember_initial_params",
-    "className": null,
-    "fileName": "/AFM-analysis_&_PyJibe/tests_&_test_fd_fit.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "main_window = pyjibe.head.PyJibe()\nmain_window.load_data(files=[jpkfile, jpkfile])\nwar = main_window.subwindows[0].widget()\nwar.tab_preprocess.list_preproc_applied.clear()\nwar.cb_autosave.setChecked(0)\nitem = QtWidgets.QListWidgetItem()\nitem.setText('compute_tip_position')\nwar.tab_preprocess.list_preproc_applied.addItem(item)\nitab = war.tab_fit.table_parameters_initial\nwar.tab_fit.cb_weight_cp.setCheckState(0)\nitab.item(4, 0).setCheckState(0)\nitab.item(3, 1).setText(str(18000))\nassert float(itab.item(1, 1).text()) == 10\nitab.item(1, 1).setText(str(5))\ncl1 = war.list_curves.currentItem()\ncl2 = war.list_curves.itemBelow(cl1)\nwar.list_curves.setCurrentItem(cl2)\nassert float(itab.item(1, 1).text()) == 5\n"
-}

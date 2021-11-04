@@ -1,9 +1,0 @@
-{
-    "functionName": "test_console_entry",
-    "className": null,
-    "fileName": "/jantman_&_AutoSimulationCraft/autosimulationcraft_&_tests_&_test_runner.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" test console_entry_point() \"\"\"\nwith patch('autosimulationcraft.runner.parse_args') as mock_parse_args, patch(\n    'autosimulationcraft.runner.AutoSimulationCraft', autospec=True\n    ) as mock_AS:\n    args = Container()\n    setattr(args, 'genconfig', False)\n    setattr(args, 'confdir', '/foo/bar')\n    setattr(args, 'dry_run', False)\n    setattr(args, 'verbose', 1)\n    setattr(args, 'version', False)\n    setattr(args, 'no_stat', False)\n    mock_parse_args.return_value = args\n    autosimulationcraft.runner.console_entry_point()\nassert mock_parse_args.call_count == 1\nassert mock_AS.mock_calls == [call(dry_run=False, verbose=1, confdir=\n    '/foo/bar'), call().run(no_stat=False)]\n"
-}

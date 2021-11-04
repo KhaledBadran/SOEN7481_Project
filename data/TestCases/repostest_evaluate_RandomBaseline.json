@@ -1,9 +1,0 @@
-{
-    "functionName": "test_evaluate_RandomBaseline",
-    "className": null,
-    "fileName": "/Accenture_&_AmpliGraph/tests_&_ampligraph_&_latent_features_&_test_models.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "model = RandomBaseline(seed=0)\nX = load_wn18()\nmodel.fit(X['train'])\nranks = evaluate_performance(X['test'], model=model, corrupt_side='s+o',\n    verbose=False)\nhits10 = hits_at_n_score(ranks, n=10)\nhits1 = hits_at_n_score(ranks, n=1)\nassert ranks.shape == (len(X['test']),)\nassert hits10 < 0.01 and hits1 == 0.0\nranks = evaluate_performance(X['test'], model=model, corrupt_side='s,o',\n    verbose=False)\nhits10 = hits_at_n_score(ranks, n=10)\nhits1 = hits_at_n_score(ranks, n=1)\nassert ranks.shape == (len(X['test']), 2)\nassert hits10 < 0.01 and hits1 == 0.0\nranks_filtered = evaluate_performance(X['test'], filter_triples=np.\n    concatenate((X['train'], X['valid'], X['test'])), model=model,\n    corrupt_side='s,o', verbose=False)\nhits10 = hits_at_n_score(ranks_filtered, n=10)\nhits1 = hits_at_n_score(ranks_filtered, n=1)\nassert ranks_filtered.shape == (len(X['test']), 2)\nassert hits10 < 0.01 and hits1 == 0.0\nassert np.all(ranks_filtered <= ranks)\nassert np.any(ranks_filtered != ranks)\n"
-}

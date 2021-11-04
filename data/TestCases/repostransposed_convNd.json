@@ -1,9 +1,0 @@
-{
-    "functionName": "transposed_convNd",
-    "className": null,
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_conv.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "if n is None:\n    n = input.ndim - 2\nif crop == 'valid':\n    pad = 'full'\nelif crop == 'full':\n    pad = 'valid'\nelif crop == 'same':\n    pad = 'same'\nelse:\n    crop = as_tuple(crop, n, int)\n    pad = tuple(f - 1 - c for f, c in zip(kernel.shape[2:], crop))\nstride = as_tuple(stride, n, int)\ndilated_input = dilate(input, (1, 1) + stride)\nif extend is not None:\n    extend = as_tuple(extend, n, int)\n    extend = [(0, p) for p in (0, 0) + extend]\n    dilated_input = np.pad(dilated_input, extend, mode='constant')\nreturn convNd(dilated_input, kernel, pad, stride=1, n=n)\n"
-}

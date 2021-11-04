@@ -1,9 +1,0 @@
-{
-    "functionName": "test_instrument_read",
-    "className": null,
-    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_base_instrument.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "mock_filelike = mock.MagicMock()\nmock_filelike.__class__ = AbstractCommunicator\ninst = ik.Instrument(mock_filelike)\ninst._file.read.return_value = 'foobar'\nassert inst.read() == 'foobar'\ninst._file.read.assert_called_with(-1, 'utf-8')\ninst._file = mock.MagicMock()\ninst._file.read.return_value = 'foobar'\nassert inst.read(6) == 'foobar'\ninst._file.read.assert_called_with(6, 'utf-8')\n"
-}

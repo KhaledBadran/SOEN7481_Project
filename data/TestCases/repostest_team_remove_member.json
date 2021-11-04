@@ -1,9 +1,0 @@
-{
-    "functionName": "test_team_remove_member",
-    "className": "TeamTest",
-    "fileName": "/cmsteffen-code_&_PyKBLib/tests_&_test_pykblib_team.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.team._api.call_api.side_effect = APIException('ANY ERROR')\nwith self.assertRaises(TeamException):\n    self.team.remove_member('test_writer')\nself.team._api.call_api.assert_called_with('team', {'method':\n    'remove-member', 'params': {'options': {'team': self.team.name,\n    'username': 'test_writer'}}})\nself.team._api.call_api.side_effect = None\nself.team.name = 'crazy_bunch'\nusername = random_username()\nrole = random_role()\nmember_dict = self.team.members_by_role._asdict()\nmember_dict[role].add(username)\nself.team.remove_member(username)\nself.team._api.call_api.assert_called_with('team', {'method':\n    'remove-member', 'params': {'options': {'team': self.team.name,\n    'username': username}}})\nself.assertNotIn(username, member_dict[role])\n"
-}

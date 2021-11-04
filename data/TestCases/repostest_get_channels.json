@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_channels",
-    "className": null,
-    "fileName": "/Drakkar-Software_&_OctoBot-Channels/tests_&_test_channel_instances.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class EmptyTestWithId2Channel(EmptyTestWithIdChannel):\n    pass\nclass EmptyTestWithId3Channel(EmptyTestWithIdChannel):\n    pass\nclass EmptyTestWithId4Channel(EmptyTestWithIdChannel):\n    pass\nclass EmptyTestWithId5Channel(EmptyTestWithIdChannel):\n    pass\nclass EmptyTestWithId6Channel(EmptyTestWithIdChannel):\n    pass\nchannel_4_id = uuid4().hex\nchannel_6_id = uuid4().hex\nch1 = get_chan_at_id(EMPTY_TEST_WITH_ID_CHANNEL, chan_id)\nch2 = await create_channel_instance(EmptyTestWithId2Channel, set_chan_at_id,\n    test_id=chan_id)\nch3 = await create_channel_instance(EmptyTestWithId3Channel, set_chan_at_id,\n    test_id=chan_id)\nch4 = await create_channel_instance(EmptyTestWithId4Channel, set_chan_at_id,\n    test_id=channel_4_id)\nch5 = await create_channel_instance(EmptyTestWithId5Channel, set_chan_at_id,\n    test_id=channel_4_id)\nch6 = await create_channel_instance(EmptyTestWithId6Channel, set_chan_at_id,\n    test_id=channel_6_id)\nassert len(get_channels(chan_id)) == 3\nassert len(get_channels(channel_4_id)) == 2\nassert len(get_channels(channel_6_id)) == 1\nassert get_channels(chan_id) == {'EmptyTestWithId': ch1, 'EmptyTestWithId2':\n    ch2, 'EmptyTestWithId3': ch3}\nassert get_channels(channel_4_id) == {'EmptyTestWithId4': ch4,\n    'EmptyTestWithId5': ch5}\nassert get_channels(channel_6_id) == {'EmptyTestWithId6': ch6}\ndel_channel_container(chan_id)\ndel_channel_container(channel_4_id)\ndel_channel_container(channel_6_id)\npytest.mark.asyncio"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_switched_likelihood_with_vgp",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_likelihoods_&_test_switched_likelihood.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Reproduces the bug in https://github.com/GPflow/GPflow/issues/951\n    \"\"\"\nX = np.random.randn(12 + 15, 1)\nY = np.random.randn(12 + 15, 1)\nidx = np.array([0] * 12 + [1] * 15)\nY_aug = np.c_[Y, idx]\nassert Y_aug.shape == (12 + 15, 2)\nkernel = gpflow.kernels.Matern32()\nlikelihood = gpflow.likelihoods.SwitchedLikelihood([StudentT(), StudentT()])\nmodel = gpflow.models.VGP((X, Y_aug), kernel=kernel, likelihood=likelihood)\nopt = gpflow.optimizers.Scipy()\nopt.minimize(model.training_loss, model.trainable_variables, options=dict(\n    maxiter=1))\n"
-}

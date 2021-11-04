@@ -1,9 +1,0 @@
-{
-    "functionName": "locally_connected2d_test_sets",
-    "className": null,
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_local.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "def _convert(input, W, output, kwargs):\n    return [floatX(input), floatX(W), output, kwargs]\nfor batch_size in (2, 3):\n    for input_shape in ((batch_size, 2, 5, 5), (batch_size, 4, 8, 8)):\n        for num_filters in (2, 4):\n            for filter_size in ((3, 3), (3, 5)):\n                for flip_filters in (True, False):\n                    for channelwise in (True, False):\n                        if channelwise and num_filters != input_shape[1]:\n                            continue\n                        input = np.random.random(input_shape)\n                        if channelwise:\n                            W = np.random.random((num_filters,) +\n                                filter_size + input_shape[2:])\n                            output = channelwise_locally_connected2d(input,\n                                W, flip_filters=flip_filters)\n                        else:\n                            W = np.random.random((num_filters, input_shape[\n                                1]) + filter_size + input_shape[2:])\n                            output = locally_connected2d(input, W,\n                                flip_filters=flip_filters)\n                        yield _convert(input, W, output, {'num_filters':\n                            num_filters, 'filter_size': filter_size,\n                            'flip_filters': flip_filters, 'channelwise':\n                            channelwise})\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_rotation_unstruct_2d",
-    "className": "TestSRF",
-    "fileName": "/GeoStat-Framework_&_GSTools/tests_&_test_srf.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.cov_model.dim = 2\nx_len = len(self.x_grid_c)\ny_len = len(self.y_grid_c)\nx_u, y_u = np.meshgrid(self.x_grid_c, self.y_grid_c)\nx_u = np.reshape(x_u, x_len * y_len)\ny_u = np.reshape(y_u, x_len * y_len)\nself.cov_model.anis = 0.25\nsrf = SRF(self.cov_model, mean=self.mean, mode_no=self.mode_no)\nfield = srf((x_u, y_u), seed=self.seed, mesh_type='unstructured')\nfield_str = np.reshape(field, (y_len, x_len))\nself.cov_model.angles = -np.pi / 2.0\nsrf = SRF(self.cov_model, mean=self.mean, mode_no=self.mode_no)\nfield_rot = srf((x_u, y_u), seed=self.seed, mesh_type='unstructured')\nfield_rot_str = np.reshape(field_rot, (y_len, x_len))\nself.assertAlmostEqual(field_str[0, 0], field_rot_str[-1, 0])\nself.assertAlmostEqual(field_str[1, 2], field_rot_str[-3, 1])\n"
-}

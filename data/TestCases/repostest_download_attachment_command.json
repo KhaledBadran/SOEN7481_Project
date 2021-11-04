@@ -1,9 +1,0 @@
-{
-    "functionName": "test_download_attachment_command",
-    "className": "TestRecord",
-    "fileName": "/Keeper-Security_&_Commander/unit-tests_&_test_command_record.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "params = get_synced_params()\ncmd = record.RecordDownloadAttachmentCommand()\nrecords = [x for x in params.record_cache.values() if len(x[\n    'extra_unencrypted']) > 10]\nrec = records[0]\nrecord_uid = rec['record_uid']\nextra = json.loads(rec['extra_unencrypted'].decode('utf-8'))\nattachments = {}\nfor file in extra['files']:\n    key = base64.urlsafe_b64decode(file['key'] + '==')\n    body_encoded = api.encrypt_aes(os.urandom(file['size']), key)\n    attachments['https://keepersecurity.com/files/' + file['id']\n        ] = body_encoded\ndef request_download(rq):\n    self.assertEqual(rq['command'], 'request_download')\n    return {'downloads': [{'url': 'https://keepersecurity.com/files/' + x} for\n        x in rq['file_ids']]}\ndef request_http_get(url, **kwargs):\n    attachment = mock.Mock()\n    attachment.raw = io.BytesIO(base64.urlsafe_b64decode(attachments[url] +\n        '=='))\n    return attachment\nwith mock.patch('requests.get', side_effect=request_http_get\n    ) as mock_get, mock.patch('builtins.open', mock.mock_open()), mock.patch(\n    'os.path.abspath', return_value='/file_name') as mock_abspath:\n    KeeperApiHelper.communicate_expect([request_download])\n    cmd.execute(params, record=record_uid)\n    self.assertTrue(KeeperApiHelper.is_expect_empty())\n    mock_get.assert_called()\n    mock_abspath.assert_called()\n"
-}

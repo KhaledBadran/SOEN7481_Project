@@ -1,9 +1,0 @@
-{
-    "functionName": "test_capitalization_species_target",
-    "className": "TestSimulation",
-    "fileName": "/kyleniemeyer_&_PyTeCK/pyteck_&_tests_&_test_simulation.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that species targets with capitalization not matching model works.\n        \"\"\"\nfile_path = os.path.join('testfile_st2.yaml')\nfilename = pkg_resources.resource_filename(__name__, file_path)\nproperties = ChemKED(filename, skip_validation=True)\nsimulations = create_simulations(filename, properties)\nfile_path = os.path.join('h2o2-lowercase.cti')\nmechanism_filename = pkg_resources.resource_filename(__name__, file_path)\nSPEC_KEY = {'H2': 'h2', 'O2': 'o2', 'N2': 'n2', 'Ar': 'ar'}\nsim = simulations[0]\nsim.setup_case(mechanism_filename, SPEC_KEY)\nassert sim.properties.ignition_target == 4\nproperties = ChemKED(filename, skip_validation=True)\nproperties.datapoints[0].ignition_type['target'] = 'oh'\nSPEC_KEY = {'H2': 'H2', 'O2': 'O2', 'N2': 'N2', 'Ar': 'AR'}\nsimulations = create_simulations(filename, properties)\nsim = simulations[0]\nsim.setup_case('h2o2.cti', SPEC_KEY)\nassert sim.properties.ignition_target == 4\n"
-}

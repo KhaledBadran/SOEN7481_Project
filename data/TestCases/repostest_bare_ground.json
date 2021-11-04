@@ -1,9 +1,0 @@
-{
-    "functionName": "test_bare_ground",
-    "className": null,
-    "fileName": "/tharen_&_PyFVS/python_&_pyfvs_&_test_&_test_variants.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "try:\n    f = fvs.FVS(variant)\nexcept ImportError:\n    pytest.skip('No variant library: {}'.format(variant))\n    return None\nexcept:\n    raise\nf.init_projection(os.path.join(root, kwd_path))\nfor c in range(f.contrl_mod.ncyc):\n    r = f.grow_projection()\nr = f.end_projection()\nassert r == 0\nwidths = [4, 4, 6, 4, 5, 4, 4, 5, 6, 6, 6, 6, 6, 6, 6, 4, 5, 4, 4, 5, 8, 5,\n    6, 8, 4, 2, 1]\nfldnames = (\n    'year,age,tpa,baa,sdi,ccf,top_ht,qmd,total_cuft,merch_cuft,merch_bdft,rem_tpa,rem_total_cuft,rem_merch_cuft,rem_merch_bdft,res_baa,res_sdi,res_ccf,res_top_ht,resid_qmd,grow_years,annual_acc,annual_mort,mai_merch_cuft,for_type,size_class,stocking_class'\n    .split(','))\nsum_check = pd.read_fwf(os.path.join(root, sum_path), skiprows=1, widths=widths\n    )\nsum_check.columns = fldnames\np = os.path.join(root, os.path.splitext(sum_path)[0])\nsum_test = pd.read_fwf(p, skiprows=1, widths=widths)\nsum_test.columns = fldnames\nfor fld in fldnames[:18]:\n    assert np.all(np.isclose(sum_check.loc[:, (fld)], sum_test.loc[:, (fld)\n        ], atol=1))\npytest.mark.parametrize(('variant', 'kwd_path', 'sum_path'), bare_ground_params\n    )"
-}

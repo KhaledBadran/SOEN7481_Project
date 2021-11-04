@@ -1,9 +1,0 @@
-{
-    "functionName": "test_err",
-    "className": null,
-    "fileName": "/SimGus_&_Chatette/tests_&_unit-testing_&_cli_&_interactive_commands_&_test_hide_command.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "facade = new_facade()\ncmd = HideCommand('hide alias \"inexistant\"')\ncmd.execute()\ncaptured = capsys.readouterr()\nassert \"Alias 'inexistant' was not defined.\" in captured.out\ncmd = UnhideCommand('unhide')\ncmd.execute()\ncaptured = capsys.readouterr()\nassert \"\"\"[ERROR]\tMissing some arguments\n\tUsage: \"\"\" + 'unhide <unit-type> \"<unit-name>\"' in captured.out\ncmd = UnhideCommand('unhide alias \"inexistant\"')\ncmd.execute()\ncaptured = capsys.readouterr()\nassert \"Alias 'inexistant' was not previously hidden.\" in captured.out\ncmd = UnhideCommand('unhide nothing \"a\"')\ncmd.execute()\ncaptured = capsys.readouterr()\nassert \"Unknown unit type: 'nothing'.\" in captured.out\ncmd = UnhideCommand('unhide alias \"var#a#b\"')\ncmd.execute()\ncaptured = capsys.readouterr()\nassert \"Unit identifier couldn't be interpreted. \" + \"Did you mean to escape some hashtags '#'?\" in captured.out\ncmd = UnhideCommand('unhide alias /unmatchable/')\ncmd.execute()\ncaptured = capsys.readouterr()\nassert 'No alias matched.' in captured.out\n"
-}

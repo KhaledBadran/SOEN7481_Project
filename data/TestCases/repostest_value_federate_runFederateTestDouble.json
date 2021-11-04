@@ -1,9 +1,0 @@
-{
-    "functionName": "test_value_federate_runFederateTestDouble",
-    "className": null,
-    "fileName": "/GMLC-TDC_&_HELICS/tests_&_python_&_test_value_federate.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "defaultValue = 1.0\ntestValue = 2.0\npubid = h.helicsFederateRegisterGlobalPublication(vFed, 'pub1', h.\n    helics_data_type_double, '')\nsubid = h.helicsFederateRegisterSubscription(vFed, 'pub1', '')\nh.helicsInputSetDefaultDouble(subid, defaultValue)\nh.helicsFederateEnterExecutingMode(vFed)\nh.helicsPublicationPublishDouble(pubid, testValue)\nvalue = h.helicsInputGetDouble(subid)\nassert value == defaultValue\ngrantedtime = h.helicsFederateRequestTime(vFed, 1.0)\nassert grantedtime == 0.01\nvalue = h.helicsInputGetDouble(subid)\nassert value == testValue\nh.helicsPublicationPublishDouble(pubid, testValue + 1)\ngrantedtime = h.helicsFederateRequestTime(vFed, 2.0)\nassert grantedtime == 0.02\nvalue = h.helicsInputGetDouble(subid)\nassert value == testValue + 1\n"
-}

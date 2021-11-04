@@ -1,9 +1,0 @@
-{
-    "functionName": "test_binary_undirected_clustering",
-    "className": null,
-    "fileName": "/Silmathoron_&_NNGT/testing_&_test_analysis.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Check that directed local clustering returns undirected value if graph is\n    not directed.\n    \"\"\"\nnum_nodes = 5\nedge_list = [(0, 3), (1, 0), (1, 2), (2, 4), (4, 1), (4, 3), (4, 2), (4, 0)]\nloc_clst = [2 / 3.0, 2 / 3.0, 1.0, 1.0, 0.5]\nglob_clst = 0.6428571428571429\ng = nngt.Graph(nodes=num_nodes)\ng.new_edges(edge_list)\nassert np.all(np.isclose(na.local_clustering_binary_undirected(g), loc_clst))\nassert np.all(np.isclose(na.local_clustering(g, directed=False), loc_clst))\nassert np.all(np.isclose(nngt.analyze_graph['local_clustering'](g, directed\n    =False), loc_clst))\nassert np.isclose(na.global_clustering(g, directed=False), glob_clst)\nassert np.isclose(na.transitivity(g, directed=False), glob_clst)\nassert np.isclose(na.global_clustering_binary_undirected(g), glob_clst)\nassert np.isclose(nngt.analyze_graph['global_clustering'](g, directed=False\n    ), glob_clst)\ng.new_edge(0, 0, self_loop=True)\nassert np.all(np.isclose(na.local_clustering_binary_undirected(g), loc_clst))\nassert np.isclose(na.global_clustering_binary_undirected(g), glob_clst)\ng = ng.erdos_renyi(avg_deg=10, nodes=100, directed=False)\nccu = na.local_clustering_binary_undirected(g)\ncc = na.local_clustering(g)\nassert np.all(np.isclose(cc, ccu))\npytest.mark.mpi_skip"
-}

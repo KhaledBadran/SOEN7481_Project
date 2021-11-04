@@ -1,9 +1,0 @@
-{
-    "functionName": "test_getResults",
-    "className": null,
-    "fileName": "/hughperkins_&_DeepCL/python_&_test_&_test_basic.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "cl = PyDeepCL.DeepCL()\nnet = PyDeepCL.NeuralNet(cl)\nnet.addLayer(PyDeepCL.InputLayerMaker().numPlanes(1).imageSize(2))\nnet.addLayer(PyDeepCL.NormalizationLayerMaker().translate(-2.0).scale(1 / 4.0))\nprint(net.asString())\nassert 2 == net.getNumLayers()\nnet.setBatchSize(2)\ninputValues = np.array([1, 2, 3, 4, 5, 6, 7, 8], dtype=np.float32)\nnet.forward(inputValues)\nresults = net.getLayer(0).getOutput()\nprint('results', results)\nassert (np.array([1, 2, 3, 4, 5, 6, 7, 8], dtype=np.float32).reshape(2, 1, \n    2, 2) == results).all()\nresults = net.getLayer(1).getOutput()\nprint('results', results)\nexpected_ls = [((x - 2.0) / 4.0) for x in [1, 2, 3, 4, 5, 6, 7, 8]]\nprint('expected_ls', expected_ls)\nassert (np.array(expected_ls, dtype=np.float32).reshape(2, 1, 2, 2) == results\n    ).all()\nnet = PyDeepCL.NeuralNet(cl)\nnet.addLayer(PyDeepCL.InputLayerMaker().numPlanes(1).imageSize(2))\nnet.addLayer(PyDeepCL.PoolingMaker().poolingSize(2))\nprint(net.asString())\nassert 2 == net.getNumLayers()\nnet.setBatchSize(2)\nnet.forward(inputValues)\nresults = net.getLayer(1).getOutput()\nprint('results', results)\nassert (np.array([4, 8], dtype=np.float32).reshape(2, 1, 1, 1) == results).all(\n    )\nresults = net.getOutput()\nprint('results', results)\nassert (np.array([4, 8], dtype=np.float32).reshape(2, 1, 1, 1) == results).all(\n    )\n"
-}

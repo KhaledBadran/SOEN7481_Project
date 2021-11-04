@@ -1,9 +1,0 @@
-{
-    "functionName": "test_gene_expression",
-    "className": "TestGeneExpress",
-    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_gene_express_analysis.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "gea.read_wig = MockFunc().mock_read_wig\ngea.read_libs = MockFunc().mock_read_libs\ngea.read_data = MockFunc().mock_read_data\nreplicates = {'tex': 1, 'frag': 1}\nstat_folder = os.path.join(self.test_folder, 'stat')\ngff_folder = os.path.join(self.test_folder, 'gff')\nif os.path.exists(gff_folder):\n    shutil.rmtree(gff_folder)\nos.mkdir(gff_folder)\ngen_file(os.path.join(gff_folder, 'aaa.gff'), 'test')\nif not os.path.exists(stat_folder):\n    os.mkdir(stat_folder)\nout_gff_folder = os.path.join(self.test_folder, 'out_gff')\nif not os.path.exists(out_gff_folder):\n    os.mkdir(out_gff_folder)\ngea.gene_expression(None, gff_folder, 'all', 'all', 'test_wig', 'test_wig',\n    ['CDS'], 'test_wig_folder', 5, 2, replicates, stat_folder,\n    out_gff_folder, 'high', 100, 0)\ndatas = import_data(os.path.join(stat_folder, 'aaa_CDS.csv'))\ndicts = {}\nfor data in datas:\n    dicts[data] = data\nrefs = {}\nfor data in self.example.out_stat.split('\\n'):\n    refs[data] = data\nself.assertDictEqual(dicts, refs)\n"
-}

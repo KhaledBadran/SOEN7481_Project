@@ -1,9 +1,0 @@
-{
-    "functionName": "test_feature_importances_type",
-    "className": "TestSklearn",
-    "fileName": "/microsoft_&_LightGBM/tests_&_python_package_test_&_test_sklearn.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data = load_iris(return_X_y=False)\nclf = lgb.LGBMClassifier(n_estimators=10)\nclf.fit(data.data, data.target)\nclf.set_params(importance_type='split')\nimportances_split = clf.feature_importances_\nclf.set_params(importance_type='gain')\nimportances_gain = clf.feature_importances_\nimportance_split_top1 = sorted(importances_split, reverse=True)[0]\nimportance_gain_top1 = sorted(importances_gain, reverse=True)[0]\nself.assertNotEqual(importance_split_top1, importance_gain_top1)\n"
-}

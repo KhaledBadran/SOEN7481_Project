@@ -1,9 +1,0 @@
-{
-    "functionName": "test_create_port_group_from_file",
-    "className": "CITestProvisioning",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test create_port_group_from_file.\"\"\"\nfa_directors = self.provisioning.get_fa_directors()\nif fa_directors:\n    port_group_name = self.generate_name()\n    director = fa_directors[0]\n    port = self.provisioning.get_any_director_port(director, filters=\n        'aclx=true')\n    formatted_director_port = self.provisioning.format_director_port(director,\n        port)\n    csv_file_name = 'test.csv'\n    temp_dir = self.create_temp_directory()\n    csv_file_path = os.path.join(temp_dir, csv_file_name)\n    with open(csv_file_path, 'w') as tmp:\n        tmp.write(formatted_director_port)\n    port_group_details = self.provisioning.create_port_group_from_file(\n        csv_file_path, port_group_name)\n    self.addCleanup(self.delete_port_group, port_group_name)\n    self._validate_port_group_details(port_group_name, port_group_details,\n        [formatted_director_port])\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_custom_provider_with_app",
-    "className": null,
-    "fileName": "/max-k_&_flask-multi-redis/test_&_integration_&_test_flask_multi_redis.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that FlaskMultiRedis can be instructed to use a different Redis client,\n    using an already existing Flask app.\"\"\"\nclass FakeProvider(object):\n\n    def __init__(self, **kwargs):\n        pass\nredis = FlaskMultiRedis.from_custom_provider(FakeProvider, app=app)\nassert isinstance(redis, FlaskMultiRedis)\nassert redis._redis_client is not None\nassert isinstance(redis._redis_client, FakeProvider)\n"
-}

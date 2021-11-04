@@ -1,9 +1,0 @@
-{
-    "functionName": "test_index_simple",
-    "className": "TestIndex",
-    "fileName": "/hdoupe_&_ParamTools/paramtools_&_tests_&_test_parameters.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class IndexParams1(Parameters):\n    defaults = extend_ex_path\n    label_to_extend = 'd0'\n    array_first = True\n    uses_extend_func = True\n    index_rates = {lte: (0) for lte in range(10)}\nparams = IndexParams1()\nparams.adjust({'indexed_param': [{'d0': 3, 'value': 3}]})\nassert params.indexed_param.tolist() == [[1, 2], [1, 2], [1, 2], [3, 3], [3,\n    3], [3, 3], [3, 3], [3, 3], [3, 3], [3, 3], [3, 3]]\nfor val in params._data['indexed_param']['value']:\n    if val['d0'] > 3 or val['d0'] in (0, 1):\n        assert val['_auto'] is True\n    else:\n        assert '_auto' not in val\nclass IndexParams2(Parameters):\n    defaults = extend_ex_path\n    label_to_extend = 'd0'\n    array_first = True\n    uses_extend_func = True\n    index_rates = {lte: (0.02) for lte in range(10)}\nparams = IndexParams2()\nparams.adjust({'indexed_param': [{'d0': 3, 'value': 3}]})\nexp = [[grow(1, 0.02, -2), grow(2, 0.02, -2)], [grow(1, 0.02, -1), grow(2, \n    0.02, -1)], [grow(1, 0.02, 0), grow(2, 0.02, 0)], [grow(3, 0.02, 0)] * \n    2, [grow(3, 0.02, 1)] * 2, [grow(3, 0.02, 2)] * 2, [grow(3, 0.02, 3)] *\n    2, [grow(3, 0.02, 4)] * 2, [grow(3, 0.02, 5)] * 2, [grow(3, 0.02, 6)] *\n    2, [grow(3, 0.02, 7)] * 2]\nnp.testing.assert_allclose(params.indexed_param.tolist(), exp)\n"
-}

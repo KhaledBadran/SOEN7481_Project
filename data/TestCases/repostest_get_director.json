@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_director",
-    "className": "CITestProvisioning",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test get_director.\"\"\"\navailability = 'availability'\ndirector_number = 'director_number'\ndirector_slot_number = 'director_slot_number'\ndirector_list = self.provisioning.get_director_list()\nfor director in director_list:\n    director_details = self.provisioning.get_director(director)\n    self.assertIsInstance(director_details, dict)\n    self.assertIn(availability, director_details)\n    self.assertIn(director_number, director_details)\n    self.assertIn(director_slot_number, director_details)\n    self.assertIn(constants.DIRECTOR_ID, director_details)\n    self.assertIn(constants.NUM_OF_PORTS, director_details)\n    self.assertIn(constants.NUM_OF_CORES, director_details)\n    self.assertIsInstance(director_details[availability], str)\n    self.assertIsInstance(director_details[director_number], int)\n    self.assertIsInstance(director_details[director_slot_number], int)\n    director_id = director_details[constants.DIRECTOR_ID]\n    self.assertIsInstance(director_id, str)\n    self.assertIsInstance(director_details[constants.NUM_OF_PORTS], int)\n    self.assertIsInstance(director_details[constants.NUM_OF_CORES], int)\n    self.assertIsNotNone(re.match(constants.DIRECTOR_SEARCH_PATTERN,\n        director_id))\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_stacking_classifier",
-    "className": "TestSklearn",
-    "fileName": "/microsoft_&_LightGBM/tests_&_python_package_test_&_test_sklearn.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from sklearn.ensemble import StackingClassifier\nX, y = load_iris(return_X_y=True)\nX_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42)\nclassifiers = [('gbm1', lgb.LGBMClassifier(n_estimators=3)), ('gbm2', lgb.\n    LGBMClassifier(n_estimators=3))]\nclf = StackingClassifier(estimators=classifiers, final_estimator=lgb.\n    LGBMClassifier(n_estimators=3), passthrough=True)\nclf.fit(X_train, y_train)\nscore = clf.score(X_test, y_test)\nself.assertGreaterEqual(score, 0.8)\nself.assertLessEqual(score, 1.0)\nself.assertEqual(clf.n_features_in_, 4)\nself.assertEqual(len(clf.named_estimators_['gbm1'].feature_importances_), 4)\nself.assertEqual(clf.named_estimators_['gbm1'].n_features_in_, clf.\n    named_estimators_['gbm2'].n_features_in_)\nself.assertEqual(clf.final_estimator_.n_features_in_, 10)\nself.assertEqual(len(clf.final_estimator_.feature_importances_), 10)\nclasses = clf.named_estimators_['gbm1'].classes_ == clf.named_estimators_[\n    'gbm2'].classes_\nself.assertTrue(all(classes))\nclasses = clf.classes_ == clf.named_estimators_['gbm1'].classes_\nself.assertTrue(all(classes))\nunittest.skipIf(sk_version < '0.23.0', 'scikit-learn version is less than 0.23'\n    )"
-}

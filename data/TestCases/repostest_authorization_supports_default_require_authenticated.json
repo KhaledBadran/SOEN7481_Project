@@ -1,9 +1,0 @@
-{
-    "functionName": "test_authorization_supports_default_require_authenticated",
-    "className": null,
-    "fileName": "/RobertoPrevato_&_BlackSheep/tests_&_test_auth.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "app = FakeApplication()\napp.use_authentication().add(MockNotAuthHandler())\napp.use_authorization().add(AdminsPolicy()\n    ).default_policy += AuthenticatedRequirement()\n@app.router.get(b'/')\nasync def home():\n    return None\napp.prepare()\nawait app(get_example_scope('GET', '/'), MockReceive(), MockSend())\nassert app.response.status == 401\npytest.mark.asyncio"
-}

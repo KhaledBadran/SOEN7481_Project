@@ -1,9 +1,0 @@
-{
-    "functionName": "test_task_metadata_sample",
-    "className": null,
-    "fileName": "/ZELLMECHANIK-DRESDEN_&_DCKit/tests_&_test_gui_basic.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "monkeypatch.setattr(QMessageBox, 'exec_', lambda *args: QMessageBox.Ok)\nmw = DCKit(check_update=False)\nqtbot.addWidget(mw)\npath = retrieve_data('rtdc_data_hdf5_rtfdc.zip')\nmw.append_paths([path])\nmw.tableWidget.item(0, 3).setText('Peter Pan')\nmw.on_task_metadata()\nwith dclab.new_dataset(path) as ds:\n    assert ds.config['experiment']['sample'] == 'Peter Pan'\ncleanup()\n"
-}

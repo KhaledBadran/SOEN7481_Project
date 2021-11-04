@@ -1,9 +1,0 @@
-{
-    "functionName": "_test_build_rekey_key_pair_batch_item",
-    "className": "TestKMIPClient",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_test_kmip_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "batch_item = self.client._build_rekey_key_pair_batch_item(private_key_uuid=\n    uuid, offset=offset, common_template_attribute=common,\n    private_key_template_attribute=private, public_key_template_attribute=\n    public)\nbase = 'expected {0}, received {1}'\nmsg = base.format(RequestBatchItem, batch_item)\nself.assertIsInstance(batch_item, RequestBatchItem, msg)\noperation = batch_item.operation\nmsg = base.format(Operation, operation)\nself.assertIsInstance(operation, Operation, msg)\noperation_enum = operation.value\nmsg = base.format(OperationEnum.REKEY_KEY_PAIR, operation_enum)\nself.assertEqual(OperationEnum.REKEY_KEY_PAIR, operation_enum, msg)\npayload = batch_item.request_payload\nmsg = base.format(payloads.RekeyKeyPairRequestPayload, payload)\nself.assertIsInstance(payload, payloads.RekeyKeyPairRequestPayload, msg)\nprivate_key_uuid_observed = payload.private_key_uuid\noffset_observed = payload.offset\ncommon_observed = payload.common_template_attribute\nprivate_observed = payload.private_key_template_attribute\npublic_observed = payload.public_key_template_attribute\nmsg = base.format(uuid, private_key_uuid_observed)\nself.assertEqual(uuid, private_key_uuid_observed, msg)\nmsg = base.format(offset, offset_observed)\nself.assertEqual(offset, offset_observed, msg)\nmsg = base.format(common, common_observed)\nself.assertEqual(common, common_observed, msg)\nmsg = base.format(private, private_observed)\nself.assertEqual(private, private_observed, msg)\nmsg = base.format(public, public_observed)\nself.assertEqual(public, public_observed)\n"
-}

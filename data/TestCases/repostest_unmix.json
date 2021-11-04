@@ -1,9 +1,0 @@
-{
-    "functionName": "test_unmix",
-    "className": null,
-    "fileName": "/PythonOT_&_POT/test_&_test_bregman.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "n_bins = 50\na1 = ot.datasets.make_1D_gauss(n_bins, m=20, s=10)\na2 = ot.datasets.make_1D_gauss(n_bins, m=40, s=10)\na = ot.datasets.make_1D_gauss(n_bins, m=30, s=10)\nD = np.vstack((a1, a2)).T\nM = ot.utils.dist0(n_bins)\nM /= M.max()\nM0 = ot.utils.dist0(2)\nM0 /= M0.max()\nh0 = ot.unif(2)\nreg = 0.001\num = ot.bregman.unmix(a, D, M, M0, h0, reg, 1, alpha=0.01)\nnp.testing.assert_allclose(1, np.sum(um), rtol=0.001, atol=0.001)\nnp.testing.assert_allclose([0.5, 0.5], um, rtol=0.001, atol=0.001)\not.bregman.unmix(a, D, M, M0, h0, reg, 1, alpha=0.01, log=True, verbose=True)\n"
-}

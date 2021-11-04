@@ -1,9 +1,0 @@
-{
-    "functionName": "test_run_classifier",
-    "className": null,
-    "fileName": "/HDI-project_&_ATM/tests_&_test_worker.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "worker.select_hyperpartition = Mock(return_value=hyperpartition)\nworker.tune_hyperparameters = Mock(return_value=DT_PARAMS)\nworker.test_classifier = Mock(return_value=(model, metrics))\nworker.save_classifier = Mock()\nworker.db = Mock()\nworker.is_datarun_finished = Mock(return_value=True)\nworker.run_classifier()\nassert not worker.select_hyperpartition.called\nassert not worker.tune_hyperparameters.called\nworker.is_datarun_finished = Mock(return_value=False)\nworker.run_classifier()\nworker.select_hyperpartition.assert_called_once()\nworker.tune_hyperparameters.assert_called_once_with(hyperpartition)\nworker.db.start_classifier.assert_called_once_with(hyperpartition_id=\n    hyperpartition.id, datarun_id=worker.datarun.id, host=ANY,\n    hyperparameter_values=DT_PARAMS)\nworker.test_classifier.assert_called_once_with(hyperpartition.method, DT_PARAMS\n    )\nworker.save_classifier.assert_called_once_with(ANY, model, metrics)\nhp_id = hyperpartition.id + 1\nworker.db.get_hyperpartition = lambda i: ObjWithAttrs(id=i, method='dt',\n    datarun_id=worker.datarun.id)\nworker.run_classifier(hyperpartition_id=hp_id)\nworker.tune_hyperparameters.assert_called_with(ObjWithAttrs(id=hp_id))\nworker.test_classifier.side_effect = ValueError('qwerty')\nwith pytest.raises(ClassifierError):\n    worker.run_classifier()\nworker.db.mark_classifier_errored.assert_called_with(ANY, error_message=\n    StringWith('qwerty'))\n"
-}

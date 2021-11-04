@@ -1,9 +1,0 @@
-{
-    "functionName": "test_param_for_white_kernel_in_Sum",
-    "className": null,
-    "fileName": "/bytesandbrains_&_ProcessOptimizer/ProcessOptimizer_&_learning_&_gaussian_process_&_tests_&_test_gpr.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "kernel_with_noise = kernel + wk\nwk_present, wk_param = _param_for_white_kernel_in_Sum(kernel + wk)\nassert_true(wk_present)\nkernel_with_noise.set_params(**{wk_param: WhiteKernel(noise_level=0.0)})\nassert_array_equal(kernel_with_noise(X), kernel(X))\nassert_false(_param_for_white_kernel_in_Sum(kernel5)[0])\npytest.mark.fast_testpytest.mark.parametrize('kernel', [kernel1, kernel2, kernel3, kernel4])"
-}

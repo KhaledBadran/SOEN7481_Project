@@ -1,9 +1,0 @@
-{
-    "functionName": "test_parameters_set",
-    "className": null,
-    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_parameters.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Check that a Cosmology object doesn't let parameters be set.\n    \"\"\"\nparams = ccl.Cosmology(Omega_c=0.25, Omega_b=0.05, h=0.7, A_s=2.1e-09, n_s=0.96\n    )\nassert_raises(ValueError, ccl.Cosmology, Omega_c=0.25, Omega_b=0.05, h=0.7,\n    A_s=2e-05, n_s=0.96)\nassert_raises(ValueError, ccl.Cosmology, Omega_c=0.25, Omega_b=0.05, h=0.7,\n    sigma8=9e-06, n_s=0.96)\nassert_raises(KeyError, lambda : params['wibble'])\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "testPamAuthInstallPlugin",
-    "className": "TestAuthentication",
-    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_test_connection.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "cur = self.connect().cursor()\ntry:\n    cur.execute(\"install plugin pam soname 'auth_pam.so'\")\n    TestAuthentication.pam_found = True\n    self.realTestPamAuth()\nexcept pymysql.err.InternalError:\n    pytest.skip(\"we couldn't install the auth_pam plugin\")\nfinally:\n    if TestAuthentication.pam_found:\n        cur.execute('uninstall plugin pam')\npytest.mark.skipif(not socket_auth, reason='connection to unix_socket required'\n    )pytest.mark.skipif(pam_found, reason='pam plugin already installed')pytest.mark.skipif(os.environ.get('PASSWORD') is None, reason=\n    'PASSWORD env var required')pytest.mark.skipif(os.environ.get('PAMSERVICE') is None, reason=\n    'PAMSERVICE env var required')"
-}

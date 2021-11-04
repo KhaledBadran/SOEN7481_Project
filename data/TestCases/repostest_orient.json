@@ -1,9 +1,0 @@
-{
-    "functionName": "test_orient",
-    "className": null,
-    "fileName": "/poletaevvlad_&_CubeLang/test_&_test_integration.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "code = \"\"\"\n        orient top: {G--/---/---}, bottom: {--Y/---/---} then\n            out(red)\n        else-orient top: {-W-/---/---}, right: {---/---/-O-} then\n            out(top[1, 1])\n        end\n    \"\"\"\nout_fn = MagicMock()\nstack = Stack()\ncube_runtime = CubeRuntime(Cube((3, 3, 3)), Orientation(), lambda action:\n    None, lambda : None)\ncube_runtime.functions.initialize_stack(stack)\nstdlib.initialize_stack(stack)\nstack.add_global('out', Function(([Color], Void)))\nglobals = {'out': out_fn, **stdlib.exec_globals, **cube_runtime.functions.\n    exec_globals}\nexecutor = ExecutionContext(globals)\nexecutor.compile(parser.parse(code, stack))\nexecutor.execute(MockTracebackWriter())\ncube_runtime.finished()\nout_fn.assert_called_once_with(orientation.Color.WHITE)\n"
-}

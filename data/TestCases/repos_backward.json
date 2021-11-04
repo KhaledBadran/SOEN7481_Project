@@ -1,9 +1,0 @@
-{
-    "functionName": "_backward",
-    "className": null,
-    "fileName": "/david-leon_&_Dandelion/test_&_test_ChainCRF.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Backward recurrence of the linear chain crf.\"\"\"\ngamma = K.cast(gamma, 'int32')\ndef _backward_step(gamma_t, states):\n    y_tm1 = states[0]\n    y_t = batch_gather(gamma_t, y_tm1)\n    return y_t, [y_t]\ninitial_states = [K.zeros_like(gamma[:, (0), (0)])]\n_, y_rev, _ = K.rnn(_backward_step, gamma, initial_states, go_backwards=True)\ny = K.reverse(y_rev, 1)\nif mask is not None:\n    mask = K.cast(mask, dtype='int32')\n    y *= mask\n    y += -(1 - mask)\nreturn y\n"
-}

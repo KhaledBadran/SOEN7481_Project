@@ -1,9 +1,0 @@
-{
-    "functionName": "test_conditional_call",
-    "className": "CallTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_call.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"test that 'caller' is non-None only if the immediate <%def> was called via <%call>\"\"\"\nt = Template(\n    \"\"\"\n        <%def name=\"a()\">\n        % if caller:\n        ${ caller.body() } \\\\\n        % endif\n        AAA\n        ${ b() }\n        </%def>\n\n        <%def name=\"b()\">\n        % if caller:\n        ${ caller.body() } \\\\\n        % endif\n        BBB\n        ${ c() }\n        </%def>\n\n        <%def name=\"c()\">\n        % if caller:\n        ${ caller.body() } \\\\\n        % endif\n        CCC\n        </%def>\n\n        <%call expr=\"a()\">\n        CALL\n        </%call>\n\n        \"\"\"\n    )\nassert result_lines(t.render()) == ['CALL', 'AAA', 'BBB', 'CCC']\n"
-}

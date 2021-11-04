@@ -1,9 +1,0 @@
-{
-    "functionName": "test_envio_nfse",
-    "className": "test_nfse_paulistana",
-    "fileName": "/danimaribeiro_&_PyTrustNFe/tests_&_test_nfse_paulistana.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "pfx_source = open(os.path.join(self.caminho, 'teste.pfx'), 'rb').read()\npfx = Certificado(pfx_source, '123456')\nnfse = self._get_nfse()\npath = os.path.join(os.path.dirname(__file__), 'XMLs')\nxml_return = open(os.path.join(path, 'paulistana_resultado.xml'), 'r').read()\nwith mock.patch('pytrustnfe.nfse.paulistana.get_authenticated_client'\n    ) as client:\n    retorno = mock.MagicMock()\n    client.return_value = retorno\n    retorno.service.EnvioLoteRPS.return_value = xml_return\n    retorno = envio_lote_rps(pfx, nfse=nfse)\n    self.assertEqual(retorno['received_xml'], xml_return)\n    self.assertEqual(retorno['object'].Cabecalho.Sucesso, True)\n    self.assertEqual(retorno['object'].ChaveNFeRPS.ChaveNFe.NumeroNFe, 446)\n    self.assertEqual(retorno['object'].ChaveNFeRPS.ChaveRPS.NumeroRPS, 6)\n"
-}

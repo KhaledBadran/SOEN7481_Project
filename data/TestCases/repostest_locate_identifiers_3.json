@@ -1,9 +1,0 @@
-{
-    "functionName": "test_locate_identifiers_3",
-    "className": "AstParseTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_ast.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"test that combination assignment/expressions\n        of the same identifier log the ident as 'undeclared'\"\"\"\ncode = \"\"\"\nx = x + 5\nfor y in range(1, y):\n    (\"hi\",)\n[z for z in range(1, z)]\n(q for q in range (1, q))\n\"\"\"\nparsed = ast.PythonCode(code, **exception_kwargs)\neq_(parsed.undeclared_identifiers, set(['x', 'y', 'z', 'q', 'range']))\n"
-}

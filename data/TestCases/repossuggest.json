@@ -1,9 +1,0 @@
-{
-    "functionName": "suggest",
-    "className": "OlsClient",
-    "fileName": "/opentargets_&_OnToma/ontoma_&_ols.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Suggest terms from an optional list of ontologies\n\n        .. seealso:: https://www.ebi.ac.uk/ols/docs/api#_suggest_term\n        \"\"\"\nparams = {'q': name}\nif ontology:\n    params['ontology'] = ','.join(ontology)\nr = self.session.get(self.ontology_suggest, params=params)\nr.raise_for_status()\nif r.json()['response']['numFound']:\n    return r.json()['response']['docs']\nelse:\n    logger.debug('OLS suggest returned empty response for %s', name)\n    return None\n"
-}

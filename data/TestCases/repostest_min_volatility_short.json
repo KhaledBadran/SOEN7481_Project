@@ -1,9 +1,0 @@
-{
-    "functionName": "test_min_volatility_short",
-    "className": null,
-    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_efficient_frontier.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ef = EfficientFrontier(*setup_efficient_frontier(data_only=True),\n    weight_bounds=(None, None))\nw = ef.min_volatility()\nassert isinstance(w, dict)\nassert set(w.keys()) == set(ef.tickers)\nnp.testing.assert_almost_equal(ef.weights.sum(), 1)\nnp.testing.assert_allclose(ef.portfolio_performance(), (0.1721356467349655,\n    0.1555915367269669, 0.9777887019776287))\nvolatility = ef.portfolio_performance()[1]\nef_long_only = setup_efficient_frontier()\nef_long_only.min_volatility()\nlong_only_volatility = ef_long_only.portfolio_performance()[1]\nassert volatility < long_only_volatility\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "conv1d_sc",
-    "className": null,
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_theano_extensions_&_conv.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    using conv2d with a single input channel\n    \"\"\"\nif border_mode not in ('valid', 0, (0,)):\n    raise RuntimeError('Unsupported border_mode for conv1d_sc: %s' %\n        border_mode)\nif image_shape is None:\n    image_shape_sc = None\nelse:\n    image_shape_sc = image_shape[0], 1, image_shape[1], image_shape[2]\nif filter_shape is None:\n    filter_shape_sc = None\nelse:\n    filter_shape_sc = filter_shape[0], 1, filter_shape[1], filter_shape[2]\ninput_sc = input.dimshuffle(0, 'x', 1, 2)\nfilters_sc = filters.dimshuffle(0, 'x', 1, 2)[:, :, ::-1, :]\nconved = T.nnet.conv2d(input_sc, filters_sc, image_shape_sc,\n    filter_shape_sc, subsample=(1, subsample[0]), filter_flip=filter_flip)\nreturn conved[:, :, (0), :]\n"
-}

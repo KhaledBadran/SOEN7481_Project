@@ -1,9 +1,0 @@
-{
-    "functionName": "test_resend_verify_code",
-    "className": "TestCoreClient",
-    "fileName": "/mozilla_&_PyFxA/fxa_&_tests_&_test_core.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "acct = TestEmailAccount()\nsession = self.client.create_account(email=acct.email, stretchpwd=\n    DUMMY_STRETCHED_PASSWORD)\nself._accounts_to_delete.append(acct)\ndef is_verify_email(m):\n    return 'x-verify-code' in m['headers']\nm1 = acct.wait_for_email(is_verify_email)\ncode1 = m1['headers']['x-verify-code']\nacct.clear()\nsession.resend_email_code()\n"
-}

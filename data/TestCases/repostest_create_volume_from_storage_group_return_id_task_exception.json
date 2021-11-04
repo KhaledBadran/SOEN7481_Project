@@ -1,9 +1,0 @@
-{
-    "functionName": "test_create_volume_from_storage_group_return_id_task_exception",
-    "className": "PyU4VProvisioningTest",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test create_volume_from_storage_group_return_id.\"\"\"\nref_dev_id = self.data.device_id\ntask = {'fail_key': 'fail_val'}\nreturned_job = {'status': 'succeeded', 'result': 200, 'task': [task]}\nwith mock.patch.object(self.provisioning, 'add_new_volume_to_storage_group',\n    return_value=returned_job):\n    with mock.patch.object(self.provisioning, 'get_volume_list',\n        return_value=['00001']):\n        act_dev_id = (self.provisioning.\n            create_volume_from_storage_group_return_id('vol_name', self.\n            data.storagegroup_name, 1))\n        self.assertEqual(ref_dev_id, act_dev_id)\n"
-}

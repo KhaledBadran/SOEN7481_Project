@@ -1,9 +1,0 @@
-{
-    "functionName": "test_rng_redux_fix_rng_vecasym",
-    "className": null,
-    "fileName": "/CCampJr_&_CRIkit2/crikit_&_preprocess_&_tests_&_test_als.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "x = np.linspace(-100, 100, 1000)\ny = 10 * np.exp(-(x ** 2 / (2 * 20 ** 2)))\nrng = np.arange(200, 800)\nasym_vec = 0 * x + 1e-07\nals = AlsCvxopt(smoothness_param=1, asym_param=asym_vec, rng=rng, redux=10,\n    fix_end_points=False, fix_rng=None, verbose=True)\ny_als = als.calculate(y)\nassert np.max(y[250:750] - y_als[250:750]) > 9\nfix_rng = np.arange(600)\nals = AlsCvxopt(smoothness_param=1, asym_param=1e-07, rng=rng, redux=10,\n    fix_end_points=False, fix_rng=fix_rng, verbose=True)\ny_als = als.calculate(y)\nassert np.max(y[250:750] - y_als[250:750]) < 0.004\n"
-}

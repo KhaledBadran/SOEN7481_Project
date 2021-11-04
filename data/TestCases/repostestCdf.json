@@ -1,9 +1,0 @@
-{
-    "functionName": "testCdf",
-    "className": "Test",
-    "fileName": "/AllenDowney_&_EmpyricalDistributions/empiricaldist_&_test_empiricaldist.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "cdf = Cdf.from_seq(list('allen'))\nself.assertAlmostEqual(cdf['a'], 0.2)\nself.assertAlmostEqual(cdf['e'], 0.4)\nself.assertAlmostEqual(cdf['l'], 0.8)\nself.assertAlmostEqual(cdf['n'], 1.0)\nt = [1, 2, 2, 3, 5]\ncdf = Cdf.from_seq(t)\nself.assertEqual(cdf(0), 0)\nself.assertAlmostEqual(cdf(1), 0.2)\nself.assertAlmostEqual(cdf(2), 0.6)\nself.assertAlmostEqual(cdf(3), 0.8)\nself.assertAlmostEqual(cdf(4), 0.8)\nself.assertAlmostEqual(cdf(5), 1)\nself.assertAlmostEqual(cdf(6), 1)\nxs = range(-1, 7)\nps = cdf(xs)\nfor p1, p2 in zip(ps, [0, 0, 0.2, 0.6, 0.8, 0.8, 1, 1]):\n    self.assertAlmostEqual(p1, p2)\nself.assertEqual(cdf.inverse(0), 1)\nself.assertEqual(cdf.inverse(0.1), 1)\nself.assertEqual(cdf.inverse(0.2), 1)\nself.assertEqual(cdf.inverse(0.3), 2)\nself.assertEqual(cdf.inverse(0.4), 2)\nself.assertEqual(cdf.inverse(0.5), 2)\nself.assertEqual(cdf.inverse(0.6), 2)\nself.assertEqual(cdf.inverse(0.7), 3)\nself.assertEqual(cdf.inverse(0.8), 3)\nself.assertEqual(cdf.inverse(0.9), 5)\nself.assertEqual(cdf.inverse(1), 5)\nps = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]\nqs = cdf.inverse(ps)\nself.assertTrue((qs == [1, 1, 1, 2, 2, 2, 2, 3, 3, 5, 5]).all())\nnp.random.seed(42)\nxs = cdf.choice(7, replace=True)\nself.assertListEqual(xs.tolist(), [2, 5, 3, 2, 1, 1, 1])\n"
-}

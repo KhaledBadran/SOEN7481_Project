@@ -1,9 +1,0 @@
-{
-    "functionName": "test_manual_priors",
-    "className": null,
-    "fileName": "/jamesross2_&_Bayesian-HMM/tests_&_test_hdphmm.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "emission_sequences = [[1, 2, 3] * 3] * 3\npriors_default = {'alpha': lambda : np.random.gamma(2, 2), 'gamma': lambda :\n    np.random.gamma(3, 3), 'alpha_emission': lambda : np.random.gamma(2, 2),\n    'gamma_emission': lambda : np.random.gamma(3, 3), 'kappa': lambda : np.\n    random.beta(1, 1)}\nhmms = {'default': bayesian_hmm.HDPHMM(emission_sequences), 'single':\n    bayesian_hmm.HDPHMM(emission_sequences, priors={'alpha': lambda : -1}),\n    'all': bayesian_hmm.HDPHMM(emission_sequences, priors={param: (lambda :\n    -1) for param in priors_default.keys()})}\nassert all(param > 0 for param in hmms['default'].hyperparameters.values())\nassert all(param < 0 for param in hmms['all'].hyperparameters.values())\nassert hmms['single'].hyperparameters['alpha'] < 0\nassert all(hmms['single'].hyperparameters[param] > 0 for param in\n    priors_default.keys() if param != 'alpha')\nfail = False\ntry:\n    _ = bayesian_hmm.HDPHMM(emission_sequences, priors={'kappa': lambda : 2\n        }, sticky=False)\nexcept ValueError:\n    fail = True\nassert fail\n"
-}

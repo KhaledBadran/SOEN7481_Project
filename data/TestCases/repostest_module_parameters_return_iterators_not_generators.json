@@ -1,9 +1,0 @@
-{
-    "functionName": "test_module_parameters_return_iterators_not_generators",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_utilities_&_test_printing.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Regression test: Ensure that gpflow.Module parameters return iterators like in TF2, not\n    generators.\n\n    Reason:\n    param = m.params  # <generator object>\n    x = [p for p in param] # List[Parameters]\n    y = [p for p in param] # [] empty!\n    \"\"\"\nm = create_model()\nassert isinstance(m, gpflow.base.Module)\nassert isinstance(m.parameters, tuple)\nassert isinstance(m.trainable_parameters, tuple)\n"
-}

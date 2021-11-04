@@ -1,9 +1,0 @@
-{
-    "functionName": "test_tensor_translational_invariance",
-    "className": "TestStructureMethods",
-    "fileName": "/mesonepigreco_&_CellConstructor/scripts_&_cellconstructor_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test if the tensor class generates \n        a translational invariant tensor when interpolating\n        \"\"\"\ntensor = CC.ForceTensor.Tensor2(self.dynSnSe.structure)\ntensor.SetupFromPhonons(self.dynSnSe)\nSUPERCELL = 4, 4, 1\nforce_fc = tensor.GenerateSupercellTensor(SUPERCELL)\nsuperstructure = self.dynSnSe.structure.generate_supercell(SUPERCELL)\nsymmetrize_fc = force_fc.copy()\nCC.symmetries.ApplyTranslationsToSupercell(symmetrize_fc, superstructure,\n    SUPERCELL)\nself.assertTrue(np.max(np.abs(force_fc - symmetrize_fc)) < 1e-10)\nunittest.skip('Tensor Library still to be finished')"
-}

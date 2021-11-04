@@ -1,9 +1,0 @@
-{
-    "functionName": "test_position_all_modules",
-    "className": null,
-    "fileName": "/European-XFEL_&_EXtra-geom/extra_geom_&_tests_&_test_geometry_old.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with h5py.File(pjoin(tests_dir, 'lpd_mar_18.h5'), 'r') as f:\n    geom = LPDGeometry.from_h5_file_and_quad_positions(f, quadpos)\nstacked_data = np.zeros((16, 256, 256))\nimg, centre = geom.position_all_modules(stacked_data)\nassert 1000 < img.shape[0] < 2000\nassert 1000 < img.shape[1] < 2000\nassert np.isnan(img[0, 0])\nassert img[200, 200] == 0\n"
-}

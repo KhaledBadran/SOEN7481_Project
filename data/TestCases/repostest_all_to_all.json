@@ -1,9 +1,0 @@
-{
-    "functionName": "test_all_to_all",
-    "className": null,
-    "fileName": "/Silmathoron_&_NNGT/testing_&_test_generation2.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Test all-to-all connection scheme \"\"\"\nnum_nodes = 4\ng = ng.all_to_all(nodes=num_nodes, directed=False)\nassert np.array_equal(g.edges_array, [(0, 1), (0, 2), (0, 3), (1, 2), (1, 3\n    ), (2, 3)])\ng = ng.all_to_all(nodes=num_nodes, directed=True)\nassert np.array_equal(g.edges_array, [(0, 1), (0, 2), (0, 3), (1, 0), (1, 2\n    ), (1, 3), (2, 0), (2, 1), (2, 3), (3, 0), (3, 1), (3, 2)])\ng = nngt.Graph(num_nodes)\nng.connect_nodes(g, [0, 1], [2, 3], 'all_to_all')\nassert np.array_equal(g.edges_array, [(0, 2), (0, 3), (1, 2), (1, 3)])\ng = nngt.Graph(num_nodes)\nng.connect_nodes(g, [0, 1], [1, 2, 3], 'all_to_all')\nassert np.array_equal(g.edges_array, [(0, 1), (0, 2), (0, 3), (1, 2), (1, 3)])\npytest.mark.mpi_skip"
-}

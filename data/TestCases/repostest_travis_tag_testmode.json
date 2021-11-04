@@ -1,9 +1,0 @@
-{
-    "functionName": "test_travis_tag_testmode",
-    "className": null,
-    "fileName": "/EVEprosper_&_ProsperCommon/tests_&_test_prosper_version.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"validate testmode can reach expected path\"\"\"\nold_environ = os.environ.get('TRAVIS_TAG')\np_version.TEST_MODE = True\nif not old_environ:\n    os.environ['TRAVIS_TAG'] = 'DUMMY'\nwith pytest.warns(exceptions.ProsperVersionTestModeWarning):\n    travis_version = p_version.get_version(PROJECT_HERE_PATH)\nassert travis_version == version.__version__\np_version.TEST_MODE = False\nif old_environ:\n    os.environ['TRAVIS_TAG'] = old_environ\n"
-}

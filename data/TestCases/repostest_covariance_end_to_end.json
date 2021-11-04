@@ -1,9 +1,0 @@
-{
-    "functionName": "test_covariance_end_to_end",
-    "className": null,
-    "fileName": "/NASA_&_MLMCPy/tests_&_model_&_test_CovarianceWrapperModel.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "model = DummyModel(3)\ncovariance_model = CovarianceWrapperModel(model)\nMC_output = [covariance_model.evaluate(np.random.random(1)) for _ in range(50)]\nMC_output = np.array(MC_output)\nexpected_values = np.mean(MC_output, axis=0)\ncovariance = covariance_model.post_process_covariance(expected_values)\nassert covariance[0] == pytest.approx(covariance[3])\nassert covariance[1] == pytest.approx(-1 * covariance[0])\nassert covariance[2] == pytest.approx(0)\nassert covariance[4] == pytest.approx(0)\nassert covariance[5] == pytest.approx(0)\n"
-}

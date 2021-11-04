@@ -1,9 +1,0 @@
-{
-    "functionName": "predict_results",
-    "className": null,
-    "fileName": "/OLC-LOC-Bioinformatics_&_GenomeQAML/scikit_learn_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "test_df = pd.read_csv(os.path.join(fasta_dir, 'extracted_features.csv'))\ndataframe = pd.get_dummies(test_df, columns=['Genus'], dummy_na=True)\ntraining_dataframe = pd.get_dummies(training_dataframe, columns=['Genus'],\n    dummy_na=True)\nfor column in dataframe:\n    if column not in training_dataframe:\n        dataframe.drop(column, axis=1, inplace=True)\nfor column in training_dataframe:\n    if 'Genus' in column and column not in dataframe:\n        not_present = [0] * len(dataframe)\n        dataframe[column] = not_present\nfeatures = list(dataframe.columns[1:len(dataframe.columns)])\nx = dataframe[features]\nresult = tree.predict(x)\nfor i in range(len(result)):\n    if result[i] == 0:\n        output = 'Fail'\n    elif result[i] == 1:\n        output = 'Pass'\n    elif result[i] == 2:\n        output = 'Reference'\n"
-}

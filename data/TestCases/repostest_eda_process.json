@@ -1,9 +1,0 @@
-{
-    "functionName": "test_eda_process",
-    "className": null,
-    "fileName": "/neuropsychology_&_NeuroKit/tests_&_tests_eda.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "eda = nk.eda_simulate(duration=30, scr_number=5, drift=0.1, noise=0,\n    sampling_rate=250)\nsignals, info = nk.eda_process(eda, sampling_rate=250)\nassert signals.shape == (7500, 11)\nassert np.array(['EDA_Raw', 'EDA_Clean', 'EDA_Tonic', 'EDA_Phasic',\n    'SCR_Onsets', 'SCR_Peaks', 'SCR_Height', 'SCR_Amplitude',\n    'SCR_RiseTime', 'SCR_Recovery', 'SCR_RecoveryTime']\n    ) in signals.columns.values\npeaks = np.where(signals['SCR_Peaks'] == 1)[0]\nonsets = np.where(signals['SCR_Onsets'] == 1)[0]\nrecovery = np.where(signals['SCR_Recovery'] == 1)[0]\nassert peaks.shape == onsets.shape == recovery.shape == (5,)\n"
-}

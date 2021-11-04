@@ -1,9 +1,0 @@
-{
-    "functionName": "test_auth_token_added_to_request_parameters",
-    "className": "TestAbstractTimeSeriesModel",
-    "fileName": "/bigfishgames_&_GameBenchAPI-PyClient/tests_&_test_unit_&_test_models_&_test_dataframes_&_test_time_series_&_test_abstract_time_series.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Ensure that the Authenticator token is added to the request_parameters dictionary as 'auth_token'.\"\"\"\nexpected_dict = {'auth_token': 'q1w2e3r4t5y6', 'metric': ''}\nmock_dict = Mock()\nmock_dict.data = {'token': 'q1w2e3r4t5y6'}\nmock_authenticator.return_value = mock_dict\nwith patch(f'{ABSTRACT_TIME_SERIES}.TimeSeriesMediator'), patch(\n    f'{ABSTRACT_TIME_SERIES}.AbstractTimeSeriesModel.get_data'):\n    actual = AbstractTimeSeriesModel()\nself.assertDictEqual(expected_dict, actual.request_parameters)\npatch(f'{ABSTRACT_TIME_SERIES}.Authenticator')"
-}

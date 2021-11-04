@@ -1,9 +1,0 @@
-{
-    "functionName": "test_distance",
-    "className": "TestGroupTimepointsByCenter",
-    "fileName": "/Erik-White_&_ColonyScanalyser/tests_&_unit_&_test_colony.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "try:\n    from math import dist\nexcept ImportError:\n    from scipy.spatial.distance import euclidean as dist\nfor max_dist, expected in zip(distance, group_expected):\n    result = group_timepoints_by_center(timepoints, max_dist)\n    assert len(result) == expected\n    for group in result:\n        x = [timepoint.center[0] for timepoint in group]\n        y = [timepoint.center[1] for timepoint in group]\n        group_center = sum(x) / len(group), sum(y) / len(group)\n        for timepoint in group:\n            assert dist(group_center, timepoint.center) <= max_dist\npytest.mark.parametrize('group_expected', [[11, 8, 5, 3, 3, 2, 1]])"
-}

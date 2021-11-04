@@ -1,9 +1,0 @@
-{
-    "functionName": "test_format_time_input_no_start_time",
-    "className": "PyU4VPerformanceTest",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_performance.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test format_time_input no start time specified.\"\"\"\nfive_mins_ago = self.time_now - pc.ONE_MINUTE * 5\nwith mock.patch.object(self.perf, 'extract_timestamp_keys', return_value=(\n    five_mins_ago, None)) as mck_get_time:\n    start_time, end_time = self.perf.format_time_input(self.p_data.array,\n        pc.ARRAY, end_time=self.time_now)\n    mck_get_time.assert_called_once_with(array_id=self.p_data.array,\n        category=pc.ARRAY, director_id=None, key_tgt_id=None)\n    self.assertIsInstance(start_time, str)\n    self.assertIsInstance(end_time, str)\n    self.assertEqual(start_time, str(five_mins_ago))\n    self.assertEqual(end_time, str(self.time_now))\n"
-}

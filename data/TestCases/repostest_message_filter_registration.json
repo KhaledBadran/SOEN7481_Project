@@ -1,9 +1,0 @@
-{
-    "functionName": "test_message_filter_registration",
-    "className": null,
-    "fileName": "/GMLC-TDC_&_HELICS/tests_&_python_&_test_message_filter.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "fFed, ffedinfo = AddFederate(broker, 'zmq', 1, 1, 'filter')\nmFed, mfedinfo = AddFederate(broker, 'zmq', 1, 1, 'message')\nh.helicsFederateRegisterGlobalEndpoint(mFed, 'port1', '')\nh.helicsFederateRegisterGlobalEndpoint(mFed, 'port2', None)\nf1 = h.helicsFederateRegisterFilter(fFed, h.helics_filter_type_custom,\n    'filter1')\nf2 = h.helicsFederateRegisterFilter(fFed, h.helics_filter_type_custom,\n    'filter2')\nh.helicsFederateRegisterEndpoint(fFed, 'fout', '')\nh.helicsFederateRegisterFilter(fFed, h.helics_filter_type_custom,\n    'filter0/fout')\nh.helicsFederateEnterExecutingModeAsync(fFed)\nh.helicsFederateEnterExecutingMode(mFed)\nh.helicsFederateEnterExecutingModeComplete(fFed)\nfilter_name = h.helicsFilterGetName(f1)\nassert filter_name == 'filter/filter1'\nfilter_name = h.helicsFilterGetName(f2)\nassert filter_name == 'filter/filter2'\nh.helicsFederateFinalize(mFed)\nh.helicsFederateFinalize(fFed)\nFreeFederate(fFed, ffedinfo)\nFreeFederate(mFed, mfedinfo)\ntime.sleep(1.0)\n"
-}

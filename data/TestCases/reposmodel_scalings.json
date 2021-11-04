@@ -1,9 +1,0 @@
-{
-    "functionName": "model_scalings",
-    "className": null,
-    "fileName": "/PEtab-dev_&_PEtab/tests_&_test_calculate.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Model with scalings.\"\"\"\nmeasurement_df = pd.DataFrame(data={OBSERVABLE_ID: ['obs_a', 'obs_a'],\n    SIMULATION_CONDITION_ID: ['c0', 'c0'], TIME: [5, 10], MEASUREMENT: [0.5,\n    1]})\nobservable_df = pd.DataFrame(data={OBSERVABLE_ID: ['obs_a'],\n    OBSERVABLE_FORMULA: ['A'], OBSERVABLE_TRANSFORMATION: [LOG],\n    NOISE_FORMULA: [2]}).set_index([OBSERVABLE_ID])\nparameter_df = pd.DataFrame(data={PARAMETER_ID: ['par1', 'par2'],\n    NOMINAL_VALUE: [3, 4]}).set_index([PARAMETER_ID])\nsimulation_df = measurement_df.copy(deep=True).rename(columns={MEASUREMENT:\n    SIMULATION})\nsimulation_df[SIMULATION] = [2, 3]\nexpected_residuals = {(np.log(2) - np.log(0.5)) / 2, (np.log(3) - np.log(1)\n    ) / 2}\nexpected_residuals_nonorm = {np.log(2) - np.log(0.5), np.log(3) - np.log(1)}\nexpected_llh = -0.5 * (np.array(list(expected_residuals)) ** 2).sum(\n    ) - 0.5 * np.log(2 * np.pi * np.array([2, 2]) ** 2 * np.array([0.5, 1]) **\n    2).sum()\nreturn measurement_df, observable_df, parameter_df, simulation_df, expected_residuals, expected_residuals_nonorm, expected_llh\n"
-}

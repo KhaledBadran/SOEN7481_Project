@@ -1,9 +1,0 @@
-{
-    "functionName": "test_general_symbolic",
-    "className": "GenericSourceTermTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_physics_&_GenericSourceTermTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "a, b, c, d, e, x = symbols('a,b,c,d,e,x')\ny = a * sym_ln(b * x ** c + d) + e\nphys = self.phys\nphys['pore.item1'] = 1.6e-15\nphys['pore.item2'] = 4\nphys['pore.item3'] = 1.4\nphys['pore.item4'] = 0.133\nphys['pore.item5'] = -5.1e-14\nphys.add_model(propname='pore.source1', model=pm.generic_source_term.\n    natural_logarithm, A1='pore.item1', A2='pore.item2', A3='pore.item3',\n    A4='pore.item4', A5='pore.item5', X='pore.mole_fraction', regen_mode=\n    'normal')\narg_map = collections.OrderedDict([('a', 'pore.item1'), ('b', 'pore.item2'),\n    ('c', 'pore.item3'), ('d', 'pore.item4'), ('e', 'pore.item5'), ('x',\n    'pore.mole_fraction')])\nphys.add_model(propname='pore.general', model=op.models.physics.\n    generic_source_term.general_symbolic, eqn=y, arg_map=arg_map,\n    regen_mode='normal')\nassert np.allclose(phys['pore.source1.rate'], phys['pore.general.rate'])\nassert np.allclose(phys['pore.source1.S1'], phys['pore.general.S1'])\nassert np.allclose(phys['pore.source1.S2'], phys['pore.general.S2'])\n"
-}

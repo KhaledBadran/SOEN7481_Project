@@ -1,9 +1,0 @@
-{
-    "functionName": "test_attr",
-    "className": "NamespaceTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_namespace.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "l = lookup.TemplateLookup()\nl.put_string('foo.html',\n    \"\"\"\n        <%!\n            foofoo = \"foo foo\"\n            onlyfoo = \"only foo\"\n        %>\n        <%inherit file=\"base.html\"/>\n        <%def name=\"setup()\">\n            <%\n            self.attr.foolala = \"foo lala\"\n            %>\n        </%def>\n        ${self.attr.basefoo}\n        ${self.attr.foofoo}\n        ${self.attr.onlyfoo}\n        ${self.attr.lala}\n        ${self.attr.foolala}\n        \"\"\"\n    )\nl.put_string('base.html',\n    \"\"\"\n        <%!\n            basefoo = \"base foo 1\"\n            foofoo = \"base foo 2\"\n        %>\n        <%\n            self.attr.lala = \"base lala\"\n        %>\n\n        ${self.attr.basefoo}\n        ${self.attr.foofoo}\n        ${self.attr.onlyfoo}\n        ${self.attr.lala}\n        ${self.setup()}\n        ${self.attr.foolala}\n        body\n        ${self.body()}\n        \"\"\"\n    )\nassert result_lines(l.get_template('foo.html').render()) == ['base foo 1',\n    'foo foo', 'only foo', 'base lala', 'foo lala', 'body', 'base foo 1',\n    'foo foo', 'only foo', 'base lala', 'foo lala']\n"
-}

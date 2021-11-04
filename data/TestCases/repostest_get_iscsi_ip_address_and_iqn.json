@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_iscsi_ip_address_and_iqn",
-    "className": "CITestProvisioning",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test get_iscsi_ip_address_and_iqn.\"\"\"\nport_list = self.provisioning.get_port_list()\nse_director_ports = [p for p in port_list if 'SE-' in p[constants.DIRECTOR_ID]]\nfor se_director_port in se_director_ports:\n    director_id = se_director_port[constants.DIRECTOR_ID]\n    port_id = se_director_port[constants.PORT_ID]\n    iscsi_id = self.provisioning.format_director_port(director_id, port_id)\n    ip_addresses, iqn = self.provisioning.get_iscsi_ip_address_and_iqn(iscsi_id\n        )\n    if ip_addresses:\n        self.assertIsInstance(ip_addresses, list)\n        for ip in ip_addresses:\n            valid_ip = self.provisioning.check_ipv4(ip\n                ) or self.provisioning.check_ipv6(ip)\n            self.assertIsInstance(ip, str)\n            self.assertTrue(valid_ip)\n    if iqn:\n        self.assertIsInstance(iqn, str)\n        self.assertIsNotNone(re.match(constants.ISCSI_IQN_SEARCH_PATTERN, iqn))\n"
-}

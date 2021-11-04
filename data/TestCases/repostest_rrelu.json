@@ -1,9 +1,0 @@
-{
-    "functionName": "test_rrelu",
-    "className": "TestRandomizedRectifierLayer",
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_special.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "import lasagne\ninput_shape = 3, 28\ninput = np.random.randn(*input_shape).astype(theano.config.floatX)\nl_in = lasagne.layers.input.InputLayer(input_shape)\nl_dense = lasagne.layers.dense.DenseLayer(l_in, num_units=100)\nl_rrelu = lasagne.layers.rrelu(l_dense)\noutput = lasagne.layers.get_output(l_rrelu, input)\nassert l_dense.nonlinearity == lasagne.nonlinearities.identity\nW = l_dense.W.get_value()\nb = l_dense.b.get_value()\nself.assert_between(l_rrelu, np.dot(input, W) + b, output.eval())\n"
-}

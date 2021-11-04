@@ -1,9 +1,0 @@
-{
-    "functionName": "test_invalid_validity_indicator",
-    "className": "TestSignatureVerifyResponsePayload",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_signature_verify.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a TypeError is raised when an invalid value is used to set\n        the validity indicator of a SignatureVerify response payload.\n        \"\"\"\nkwargs = {'validity_indicator': 'invalid'}\nself.assertRaisesRegex(TypeError,\n    'Validity indicator must be a ValidityIndicator enumeration.',\n    signature_verify.SignatureVerifyResponsePayload, **kwargs)\npayload = signature_verify.SignatureVerifyResponsePayload()\nargs = payload, 'validity_indicator', 'invalid'\nself.assertRaisesRegex(TypeError,\n    'Validity indicator must be a ValidityIndicator enumeration.', setattr,\n    *args)\n"
-}

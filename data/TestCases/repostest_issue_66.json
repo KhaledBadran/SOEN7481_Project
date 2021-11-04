@@ -1,9 +1,0 @@
-{
-    "functionName": "test_issue_66",
-    "className": "TestGitHubIssues",
-    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_test_issues.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" 'Connection' object has no attribute 'insert_id' \"\"\"\nconn = self.connect()\nc = conn.cursor()\nself.assertEqual(0, conn.insert_id())\ntry:\n    with warnings.catch_warnings():\n        warnings.filterwarnings('ignore')\n        c.execute('drop table if exists issue66')\n    c.execute(\n        'create table issue66 (id integer primary key auto_increment, x integer)'\n        )\n    c.execute('insert into issue66 (x) values (1)')\n    c.execute('insert into issue66 (x) values (1)')\n    self.assertEqual(2, conn.insert_id())\nfinally:\n    c.execute('drop table issue66')\n"
-}

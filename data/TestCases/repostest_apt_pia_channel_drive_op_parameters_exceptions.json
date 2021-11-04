@@ -1,9 +1,0 @@
-{
-    "functionName": "test_apt_pia_channel_drive_op_parameters_exceptions",
-    "className": null,
-    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_thorlabs_&_test_thorlabs_apt.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Raise exceptions in drive op parameters: APT Piezo Inertia Actuator.\"\"\"\nwith expected_protocol(ik.thorlabs.APTPiezoInertiaActuator, [init_kim101[0]\n    ], [init_kim101[1]], sep='') as apt:\n    with pytest.raises(TypeError):\n        apt.channel[0].drive_op_parameters = 42\n    with pytest.raises(ValueError):\n        apt.channel[0].drive_op_parameters = [42, 42]\n    with pytest.raises(ValueError):\n        apt.channel[0].drive_op_parameters = [1, 1000, 10000]\n    with pytest.raises(ValueError):\n        apt.channel[0].drive_op_parameters = [100, 2500, 10000]\n    with pytest.raises(ValueError):\n        apt.channel[0].drive_op_parameters = [100, 1000, 100001]\n"
-}

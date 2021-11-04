@@ -1,9 +1,0 @@
-{
-    "functionName": "test_optional_claims",
-    "className": "IntegrationTest",
-    "fileName": "/BMeu_&_EasyJWT/tests_&_integration_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n            Test that optional claims work as expected.\n\n            Expected Result: The creation and verification of a token with and without optional claims succeeds.\n        \"\"\"\ntoken_object = AccountValidationToken(self.key)\ntoken_object.user_id = self.user_id\ntoken = token_object.create()\nself.assertIsNotNone(token)\nverified_token_object = AccountValidationToken.verify(token, self.key)\nself.assertIsNotNone(verified_token_object)\nself.assertEqual(self.user_id, verified_token_object.user_id)\nself.assertIsNone(verified_token_object.email)\ntoken_object = AccountValidationToken(self.key)\ntoken_object.user_id = self.user_id\ntoken_object.email = self.email\ntoken = token_object.create()\nself.assertIsNotNone(token)\nverified_token_object = AccountValidationToken.verify(token, self.key)\nself.assertIsNotNone(verified_token_object)\nself.assertEqual(self.user_id, verified_token_object.user_id)\nself.assertEqual(self.email, verified_token_object.email)\n"
-}

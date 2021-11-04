@@ -1,9 +1,0 @@
-{
-    "functionName": "test_condon_errs",
-    "className": null,
-    "fileName": "/PaulHancock_&_Aegean/tests_&_test_fitting.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that we can create Condon errors\"\"\"\nsource = models.ComponentSource()\nsource.ra = 0\nsource.dec = 1\nsource.a = 10\nsource.b = 10\nsource.pa = 0\nsource.local_rms = 0.1\nsource.peak_flux = 1\nsource.int_flux = 1\nfitting.condon_errors(source, None)\nif not source.err_a == 0:\n    raise AssertionError()\nfitting.condon_errors(source, theta_n=8.0)\nif not source.err_a > 0:\n    raise AssertionError()\nsource.a = 20\nfitting.condon_errors(source, None)\nif source.err_pa < 0:\n    raise AssertionError()\n"
-}

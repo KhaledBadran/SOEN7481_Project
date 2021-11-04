@@ -1,9 +1,0 @@
-{
-    "functionName": "test_resolve_order",
-    "className": "TestArray",
-    "fileName": "/hdoupe_&_ParamTools/paramtools_&_tests_&_test_parameters.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "exp_label_order = ['label0', 'label2']\nexp_value_order = {'label0': ['zero', 'one'], 'label2': [0, 1, 2]}\nvi = [{'label0': 'zero', 'label2': 0, 'value': None}, {'label0': 'zero',\n    'label2': 1, 'value': None}, {'label0': 'zero', 'label2': 2, 'value':\n    None}, {'label0': 'one', 'label2': 0, 'value': None}, {'label0': 'one',\n    'label2': 1, 'value': None}, {'label0': 'one', 'label2': 2, 'value': None}]\nparams = TestParams()\nparams.madeup = vi\nparams._data['madeup'] = {'value': vi}\nvalue_items = params.select_eq('madeup', False, **params._state)\nassert params._resolve_order('madeup', value_items, params.label_grid) == (\n    exp_label_order, exp_value_order)\nexp_value_order = {'label0': ['zero', 'one'], 'label2': [0, 1]}\nparams.set_state(label2=[0, 1])\nvalue_items = params.select_eq('madeup', False, **params._state)\nassert params._resolve_order('madeup', value_items, params.label_grid) == (\n    exp_label_order, exp_value_order)\nparams.madeup[0]['label1'] = 0\nvalue_items = params.select_eq('madeup', False, **params._state)\nwith pytest.raises(InconsistentLabelsException):\n    params._resolve_order('madeup', value_items, params.label_grid)\n"
-}

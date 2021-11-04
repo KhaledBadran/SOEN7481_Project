@@ -1,9 +1,0 @@
-{
-    "functionName": "test_numpy_equivalence",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_utilities_&_test_ops.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "X = np.random.randn(N, D)\nif Q > D:\n    with pytest.raises(ValueError):\n        gpflow.utilities.ops.pca_reduce(tf.convert_to_tensor(X), Q)\nelse:\n    np_result = pca_reduce(X, Q)\n    tf_result = gpflow.utilities.ops.pca_reduce(tf.convert_to_tensor(X), Q\n        ).numpy()\n    assert np_result.shape == tf_result.shape == (N, Q)\n    for i in range(Q):\n        tf_column = tf_result[:, (i)]\n        np_column = np_result[:, (i)]\n        assert np.allclose(tf_column, np_column) or np.allclose(tf_column, \n            -np_column)\npytest.mark.parametrize('N', [3, 7])pytest.mark.parametrize('D', [2, 5, 9])pytest.mark.parametrize('Q', [2, 5, 9])"
-}

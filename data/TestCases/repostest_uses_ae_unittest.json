@@ -1,9 +1,0 @@
-{
-    "functionName": "test_uses_ae_unittest",
-    "className": "TestUnittestConventions",
-    "fileName": "/facebook_&_Ax/ax_&_utils_&_testing_&_test_unittest_conventions.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Check that all of our tests are inheriting from our own base class\n\n        Our base class does a bit more (like making sure we don't use any of python's\n        deprecated `assert` functions) so we want to enforce its usage everywhere.\n        \"\"\"\ntest_modules = set(__test_modules__.TEST_MODULES)\nfor m in test_modules:\n    importlib.import_module(m)\ntest_cases = [cls for cls in get_all_subclasses(unittest.TestCase) if cls.\n    __module__ in test_modules]\nbase = testutils.TestCase\nfor t in test_cases:\n    with self.subTest(t.__name__):\n        if not issubclass(t, base):\n            abs_path = pathlib.Path(sys.modules[t.__module__].__file__)\n            root = pathlib.Path(__test_modules__.__file__).parent\n            filename = abs_path.relative_to(root)\n            self.fail(\n                f'in {filename}: {t.__qualname__} should inherit from {base.__module__}.{base.__name__}'\n                )\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "run_hub_app",
-    "className": null,
-    "fileName": "/marten-de-vries_&_Flask-WebSub/tests_&_test_integration.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "app = Flask(__name__)\napp.config['PUBLISH_SUPPORTED'] = True\nhub = Hub(SQLite3HubStorage('hub.db'), celery, **app.config)\nworker.reload()\napp.register_blueprint(hub.build_blueprint(url_prefix='/hub'))\nwith serve_app(app, port=5001, https=https):\n    yield hub\nos.remove('hub.db')\n"
-}

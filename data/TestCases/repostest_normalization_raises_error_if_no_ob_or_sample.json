@@ -1,9 +1,0 @@
-{
-    "functionName": "test_normalization_raises_error_if_no_ob_or_sample",
-    "className": "TestNormalization",
-    "fileName": "/ornlneutronimaging_&_NeuNorm/tests_&_NeuNorm_&_normalizing_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"assert error raises when no ob or sample provided\"\"\"\npath = self.data_path + '/tif/sample'\no_norm = Normalization()\no_norm.load(folder=path, data_type='sample', auto_gamma_filter=False)\nwith pytest.raises(IOError):\n    o_norm.normalization()\npath = self.data_path + '/tif/ob'\no_norm = Normalization()\no_norm.load(folder=path, data_type='ob', auto_gamma_filter=False)\nwith pytest.raises(IOError):\n    o_norm.normalization()\nsample_path = self.data_path + '/tif/sample'\nob_path = self.data_path + '/tif/ob'\no_norm = Normalization()\no_norm.load(folder=sample_path, data_type='sample', auto_gamma_filter=False)\no_norm.load(folder=ob_path, data_type='ob', auto_gamma_filter=False)\nassert o_norm.normalization()\n"
-}

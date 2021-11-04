@@ -1,9 +1,0 @@
-{
-    "functionName": "test_connector",
-    "className": null,
-    "fileName": "/PlaidWeb_&_Authl/tests_&_handlers_&_test_emailaddr.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "import ssl\nmock_smtp_ssl = mocker.patch('smtplib.SMTP_SSL')\nmock_ssl = mocker.patch('ssl.SSLContext')\nconn = mocker.MagicMock()\nmock_smtp_ssl.return_value = conn\nconnector = email_addr.smtplib_connector('localhost', 25, 'test',\n    'poiufojar', use_ssl=True)\nconnector()\nmock_smtp_ssl.assert_called_with('localhost', 25)\nmock_ssl.assert_called_with(ssl.PROTOCOL_TLS_CLIENT)\nconn.ehlo.assert_called()\nconn.starttls.assert_called()\nconn.login.assert_called_with('test', 'poiufojar')\n"
-}

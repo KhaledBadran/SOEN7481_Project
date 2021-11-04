@@ -1,9 +1,0 @@
-{
-    "functionName": "receive_service_queue_put",
-    "className": "faraday_uart_object",
-    "fileName": "/FaradayRF_&_Faraday-Software/faraday_&_uart_&_layer_4_service.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "try:\n    if self.receive_parsed_queue_dict[service_number].full():\n        self.receive_parsed_queue_dict[service_number].get_nowait()\n        self.receive_parsed_queue_dict[service_number].put_nowait(payload)\n    else:\n        self.receive_parsed_queue_dict[service_number].put_nowait(payload)\nexcept:\n    self.receive_service_queue_open(service_number, self.QUEUE_SIZE_DEFAULT)\n    if self.receive_parsed_queue_dict[service_number].full():\n        self.receive_parsed_queue_dict[service_number].get_nowait()\n        self.receive_parsed_queue_dict[service_number].put_nowait(payload)\n    else:\n        self.receive_parsed_queue_dict[service_number].put_nowait(payload)\n    pass\n"
-}

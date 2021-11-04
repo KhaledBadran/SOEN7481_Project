@@ -1,9 +1,0 @@
-{
-    "functionName": "helper_test_roll_history_no_account",
-    "className": "UITestCase",
-    "fileName": "/AndreMiras_&_EtherollApp/src_&_etherollapp_&_tests_&_ui_&_test_etheroll_ui.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        When going to the roll history screen with no account selected,\n        the application should complain and bring back to the main screen.\n        \"\"\"\ncontroller = app.root\nscreen_manager = controller.screen_manager\ncontroller.current_account = None\nscreen_manager = controller.screen_manager\nwith patch_fetch_update_balance() as m_fetch_update_balance:\n    screen_manager.current = 'roll_results_screen'\n    advance_frames_for_screen()\nassert m_fetch_update_balance.call_args_list == [mock.call()]\ndialogs = Dialog.dialogs\nself.assertEqual(len(dialogs), 1)\ndialog = dialogs[0]\nself.assertEqual(dialog.title, 'No account selected')\ndialog.dismiss()\nadvance_frames_for_screen()\nself.assertEqual(controller.screen_manager.current, 'roll_screen')\nself.join_threads()\n"
-}

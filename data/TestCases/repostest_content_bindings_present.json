@@ -1,9 +1,0 @@
-{
-    "functionName": "test_content_bindings_present",
-    "className": null,
-    "fileName": "/EclecticIQ_&_OpenTAXII/tests_&_services_&_test_discovery.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "request = as_tm(version).DiscoveryRequest(message_id=MESSAGE_ID)\nservice = server.get_service('discovery-A')\nheaders = prepare_headers(version, https)\nresponse = service.process(headers, request)\nassert len(response.service_instances) == INSTANCES_CONFIGURED\nassert response.in_response_to == MESSAGE_ID\ninboxes = [s for s in response.service_instances if s.service_type == SVC_INBOX\n    ]\nassert len(inboxes) == 4\naddress_a = INBOX_A['address']\ninboxes_a = [i for i in inboxes if i.service_address.endswith(address_a)]\nassert all([(len(i.inbox_service_accepted_content) == 0) for i in inboxes_a])\naddress_b = INBOX_B['address']\ninboxes_b = [i for i in inboxes if i.service_address.endswith(address_b)]\nbindings = inboxes_b[0].inbox_service_accepted_content\nif version == 10:\n    binding_ids = bindings\nelse:\n    binding_ids = [b.binding_id for b in bindings]\nassert set(binding_ids) == set(INBOX_B['supported_content'])\npytest.mark.parametrize('https', [True, False])pytest.mark.parametrize('version', [11, 10])"
-}

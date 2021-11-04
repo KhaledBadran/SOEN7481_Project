@@ -1,9 +1,0 @@
-{
-    "functionName": "test_api_categorization_sort",
-    "className": null,
-    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_server_&_tests_&_test_categorization.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "n_categories = 2\ndsid, lsi_id, _, ds_input = get_features_lsi_cached(app, n_categories=\n    n_categories)\nmethod = V01 + '/feature-extraction/{}'.format(dsid)\ndata = app.get_check(method)\ntraining_set = ds_input['training_set']\nprint(training_set)\npars = {'parent_id': lsi_id, 'data': training_set, 'method': 'NearestNeighbor'}\nmethod = V01 + '/categorization/'\ndata = app.post_check(method, json=pars)\nmid = data['id']\nmethod = V01 + '/categorization/{}/predict'.format(mid)\ndata = app.get_check(method, json={'batch_id': -1, 'sort_by': sort_by})\nres = []\nfor row in data['data']:\n    res_el = {'document_id': row['document_id']}\n    for scores in row['scores']:\n        res_el[scores['category']] = scores['score']\n    res.append(res_el)\ndf = pd.DataFrame(res)\ndf = df.set_index('document_id')\nif sort_by in df.columns:\n    mask = pd.notnull(df[sort_by])\n    assert_array_equal(df[mask].index.values, df[mask].sort_values(sort_by,\n        ascending=False).index.values)\npytest.mark.parametrize('sort_by', ['comp.graphics', 'rec.sport.baseball'])"
-}

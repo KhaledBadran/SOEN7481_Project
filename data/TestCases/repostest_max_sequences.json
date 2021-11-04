@@ -1,9 +1,0 @@
-{
-    "functionName": "test_max_sequences",
-    "className": "TestDecisionMaker",
-    "fileName": "/BciPy_&_BciPy/bcipy_&_tasks_&_tests_&_test_decision_maker.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test max sequences criteria.\"\"\"\ndecision_maker = mf.DecisionMaker(min_num_seq=1, max_num_seq=3, state='',\n    alphabet=['a', 'b', 'c', 'd'], decision_threshold=0.8)\nlikelihood = np.array([0.2, 0.2, 0.4, 0.2])\ndecision, _arg = decision_maker.decide(likelihood)\nself.assertFalse(decision)\nlikelihood = np.array([0.2, 0.2, 0.4, 0.2])\ndecision, _arg = decision_maker.decide(likelihood)\nself.assertFalse(decision)\nlikelihood = np.array([0.2, 0.2, 0.4, 0.2])\ndecision, _arg = decision_maker.decide(likelihood)\nself.assertTrue(decision,\n    'Should make a decision after max sequences are reached even if max value is below threshold'\n    )\nself.assertEqual('c', decision_maker.displayed_state)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_adjust_many_labels",
-    "className": "TestAdjust",
-    "fileName": "/hdoupe_&_ParamTools/paramtools_&_tests_&_test_parameters.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Adjust min_int_param above original max_int_param value at same time as\n        max_int_param value is adjusted up. This tests that the new param is\n        compared against the adjusted reference param if the reference param is\n        specified.\n        \"\"\"\nparams = TestParams()\nparams.set_state(label0='zero', label1=1)\nadjustment = {'min_int_param': [{'label0': 'one', 'label1': 2, 'value': 2}],\n    'int_default_param': 5, 'date_param': [{'label0': 'zero', 'label1': 1,\n    'value': '2018-01-17'}]}\nparams.adjust(adjustment)\nspec = params.specification(use_state=False, label0='one', label1=2)\nassert spec['min_int_param'] == adjustment['min_int_param']\nassert params.min_int_param == [{'label0': 'zero', 'label1': 1, 'value': 1}]\nassert params.int_default_param == [{'value': adjustment['int_default_param']}]\nassert params.date_param == [{'value': datetime.date(2018, 1, 17), 'label1':\n    1, 'label0': 'zero'}]\n"
-}

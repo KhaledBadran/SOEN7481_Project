@@ -1,9 +1,0 @@
-{
-    "functionName": "test_run_solve_ivp",
-    "className": "TestOdeSolvers",
-    "fileName": "/AllenDowney_&_ModSimPy/modsim_&_test_modsim.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "s = UNITS.second\nm = UNITS.meter\ninit = State(y=2 * m)\nsystem = System(init=init, t_0=1 * s, t_end=3 * s)\ndef slope_func(state, t, system):\n    [y] = state\n    dydt = y + t\n    return [dydt]\nresults, details = run_solve_ivp(system, slope_func)\ny_end = get_last_value(results.y)\nself.assertAlmostEqual(y_end, 25.5571533)\n"
-}

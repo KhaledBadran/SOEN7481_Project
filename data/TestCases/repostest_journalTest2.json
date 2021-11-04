@@ -1,9 +1,0 @@
-{
-    "functionName": "test_journalTest2",
-    "className": null,
-    "fileName": "/bakwc_&_PySyncObj/test_syncobj.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "journalFiles = [getNextJournalFile()]\nremoveFiles(journalFiles)\nremoveFiles(journalFiles)\njournal = createJournal(journalFiles[0])\njournal.add(b'cmd1', 1, 0)\njournal.add(b'cmd2', 2, 0)\njournal.add(b'cmd3', 3, 0)\njournal._destroy()\njournal = createJournal(journalFiles[0])\nassert len(journal) == 3\nassert journal[0] == (b'cmd1', 1, 0)\nassert journal[-1] == (b'cmd3', 3, 0)\njournal.deleteEntriesFrom(2)\njournal._destroy()\njournal = createJournal(journalFiles[0])\nassert len(journal) == 2\nassert journal[0] == (b'cmd1', 1, 0)\nassert journal[-1] == (b'cmd2', 2, 0)\njournal.deleteEntriesTo(1)\njournal._destroy()\njournal = createJournal(journalFiles[0])\nassert len(journal) == 1\nassert journal[0] == (b'cmd2', 2, 0)\njournal._destroy()\nremoveFiles(journalFiles)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_Wedge_error",
-    "className": null,
-    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Geometry_&_Wedge.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "wedge = Wedge(position=(0, 0, 0))\nDet = Detector.TubeDetector1D(position=(1.0, 1, 0), direction=(1, 0, 0))\nAna = Analyser.FlatAnalyser(position=(0.5, 0, 0), direction=(1, 0, 1))\ntry:\n    wedge.detectors = Ana\n    assert False\nexcept AttributeError:\n    assert True\ntry:\n    wedge.analysers = Det\n    assert False\nexcept AttributeError:\n    assert True\ntry:\n    wedge.append('Wrong object type')\n    assert False\nexcept AttributeError:\n    assert True\ntry:\n    wedge.append(['List of', 3.0, 'wrong objects'])\n    assert False\nexcept AttributeError:\n    assert True\ntry:\n    wedge.settings['concept'] = 'OneToOne'\n    wedge.calculateDetectorAnalyserPositions()\n    assert False\nexcept ValueError:\n    assert True\ntry:\n    wedge.settings['concept'] = 'OneToOne'\n    wedge.append([Det, Det, Ana])\n    wedge.calculateDetectorAnalyserPositions()\n    assert False\nexcept RuntimeError:\n    assert True\ntry:\n    wedge.settings['concept'] = 'ManyToMany'\n    wedge.detectors[0].split = [10, 30, 44]\n    wedge.calculateDetectorAnalyserPositions()\n    assert False\nexcept ValueError:\n    assert True\ntry:\n    wedge.settings['concept'] = 'Wrong'\n    wedge.calculateDetectorAnalyserPositions()\n    assert False\nexcept ValueError:\n    assert True\n"
-}

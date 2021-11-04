@@ -1,9 +1,0 @@
-{
-    "functionName": "test_DataSet_1Dcut_ufit",
-    "className": null,
-    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_DataSet.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "q1 = np.array([1.23, -1.51])\nq2 = np.array([1.54, -1.25])\nwidth = 0.1\nplt.ioff()\nimport matplotlib\nmatplotlib.use('Agg')\nconvertFiles = ['Data/camea2018n000136.hdf', 'Data/camea2018n000137.hdf']\nds = DataSet(dataFiles=convertFiles)\nds.convertDataFile(saveFile=False)\nax, dataset = ds.plotCut1D(q1, q2, width, rlu=False, minPixel=0.01, Emin=\n    2.0, Emax=2.5, fmt='.', ticks=5, tickRound=2, ufit=True)\ndataset2 = ds.cut1D(q1, q2, width, rlu=False, minPixel=0.01, Emin=2.0, Emax\n    =2.5, ufit=True)\nfiles = ', '.join([x.replace('hdf', 'nxs').split('/')[-1] for x in\n    convertFiles])\nassert np.all([np.all(x == y) for x, y in zip(dataset.fit_columns, dataset2\n    .fit_columns)])\nassert dataset.meta == dataset2.meta\nassert dataset.meta['instrument'] == 'CAMEA'\nassert dataset.meta['datafilename'] == files\n"
-}

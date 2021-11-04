@@ -1,9 +1,0 @@
-{
-    "functionName": "test_policy_authorization_force_failure",
-    "className": null,
-    "fileName": "/RobertoPrevato_&_GuardPost/tests_&_test_authorization.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class Example(Requirement):\n\n    async def handle(self, context: AuthorizationContext):\n        context.succeed(self)\n        context.fail('Crash Test')\nauth = get_strategy([Policy('user', Example())])\n@auth(policy='user')\nasync def some_method():\n    pass\nwith raises(UnauthorizedError, match='Crash Test'):\n    await some_method()\npytest.mark.asyncio"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "set_distance",
-    "className": "Brain",
-    "fileName": "/nipy_&_PySurfer/surfer_&_viz.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Set view distances for all brain plots to the same value\n\n        Parameters\n        ----------\n        distance : float | None\n            Distance to use. If None, brains are set to the farthest\n            \"best fit\" distance across all current views; note that\n            the underlying \"best fit\" function can be buggy.\n\n        Returns\n        -------\n        distance : float\n            The distance used.\n        \"\"\"\nif distance is None:\n    distance = []\n    for ff in self._figures:\n        for f in ff:\n            mlab.view(figure=f, distance='auto')\n            v = mlab.view(figure=f)\n            if v is None:\n                v = [0, 0, 100]\n            distance += [v[2]]\n    distance = max(distance)\nfor ff in self._figures:\n    for f in ff:\n        mlab.view(distance=distance, figure=f)\nreturn distance\n"
-}

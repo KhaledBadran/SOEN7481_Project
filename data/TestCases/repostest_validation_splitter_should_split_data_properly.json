@@ -1,9 +1,0 @@
-{
-    "functionName": "test_validation_splitter_should_split_data_properly",
-    "className": null,
-    "fileName": "/Neuraxio_&_Neuraxle/testing_&_metaopt_&_test_automl.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data_inputs = np.random.random((4, 2, 2048, 6)).astype(np.float32)\nexpected_outputs = np.random.random((4, 2, 2048, 1)).astype(np.float32)\nsplitter = ValidationSplitter(test_size=0.2)\nvalidation_splits = splitter.split_data_container(DataContainer(data_inputs\n    =data_inputs, expected_outputs=expected_outputs))\ntrain_di, train_eo, validation_di, validation_eo = (\n    extract_validation_split_data(validation_splits))\ntrain_di = train_di[0]\ntrain_eo = train_eo[0]\nvalidation_di = validation_di[0]\nvalidation_eo = validation_eo[0]\nassert len(train_di) == 3\nassert np.array_equal(np.array(train_di), data_inputs[0:3])\nassert len(train_eo) == 3\nassert np.array_equal(np.array(train_eo), expected_outputs[0:3])\nassert len(validation_di) == 1\nassert np.array_equal(validation_di[0], data_inputs[-1])\nassert len(validation_eo) == 1\nassert np.array_equal(validation_eo[0], expected_outputs[-1])\n"
-}

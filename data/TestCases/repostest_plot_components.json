@@ -1,9 +1,0 @@
-{
-    "functionName": "test_plot_components",
-    "className": null,
-    "fileName": "/tvdboom_&_ATOM/tests_&_test_plots.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Assert that the plot_components method work as intended.\"\"\"\nfs = FeatureSelector()\npytest.raises(PermissionError, fs.plot_components)\nfs = FeatureSelector('PCA', n_features=12)\nfs.fit_transform(X_bin, y_bin)\npytest.raises(ValueError, fs.plot_components, show=0)\nfs.plot_components(show=100, filename=FILE_DIR + 'components1', display=False)\nassert glob.glob(FILE_DIR + 'components1.png')\natom = ATOMClassifier(X_bin, y_bin, random_state=1)\natom.feature_selection(strategy='PCA', n_features=10)\natom.plot_components(filename=FILE_DIR + 'components2', display=False)\nassert glob.glob(FILE_DIR + 'components2.png')\n"
-}

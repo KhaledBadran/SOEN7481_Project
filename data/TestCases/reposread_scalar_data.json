@@ -1,9 +1,0 @@
-{
-    "functionName": "read_scalar_data",
-    "className": null,
-    "fileName": "/nipy_&_PySurfer/surfer_&_io.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Load in scalar data from an image.\n\n    Parameters\n    ----------\n    filepath : str\n        path to scalar data file\n\n    Returns\n    -------\n    scalar_data : numpy array\n        flat numpy array of scalar data\n    \"\"\"\ntry:\n    scalar_data = np.asanyarray(nib.load(filepath).dataobj)\n    scalar_data = np.ravel(scalar_data, order='F')\n    return scalar_data\nexcept ImageFileError:\n    ext = os.path.splitext(filepath)[1]\n    if ext == '.mgz':\n        openfile = gzip.open\n    elif ext == '.mgh':\n        openfile = open\n    else:\n        raise ValueError(\n            'Scalar file format must be readable by Nibabel or .mg{hz} format')\nfobj = openfile(filepath, 'rb')\ntry:\n    v = np.fromstring(fobj.read(4), '>i4')[0]\n    if v != 1:\n        raise NotImplementedError('Scalar data file version not supported')\n    ndim1 = np.fromstring(fobj.read(4), '>i4')[0]\n    ndim2 = np.fromstring(fobj.read(4), '>i4')[0]\n    ndim3 = np.fromstring(fobj.read(4), '>i4')[0]\n    nframes = np.fromstring(fobj.read(4), '>i4')[0]\n    datatype = np.fromstring(fobj.read(4), '>i4')[0]\n    databytes, typecode = {(0): (1, '>i1'), (1): (4, '>i4'), (3): (4, '>f4'\n        ), (4): (2, '>h')}[datatype]\n    fobj.seek(284)\n    nbytes = ndim1 * ndim2 * ndim3 * nframes * databytes\n    scalar_data = np.fromstring(fobj.read(nbytes), typecode)\nfinally:\n    fobj.close()\nreturn scalar_data\n"
-}

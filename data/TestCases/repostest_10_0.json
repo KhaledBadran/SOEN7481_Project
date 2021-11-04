@@ -1,9 +1,0 @@
-{
-    "functionName": "test_10_0",
-    "className": "test_g_to_k",
-    "fileName": "/jonwright_&_ImageD11/test_&_gv_general_&_test_gv_general.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" wedge,chi = 10,0 \"\"\"\nw = 10.0\nc = 0\ng = transform.compute_g_vectors(self.tth, self.eta, self.omega, self.wvln,\n    wedge=w, chi=c)\npost = gv_general.wedgechi(wedge=w, chi=c)\nsol1, sol2, valid = gv_general.g_to_k(g, self.wvln, axis=np.array([0, 0, -1\n    ], np.float), pre=None, post=post)\nc0 = np.cos(transform.radians(self.omega))\nc1 = np.cos(transform.radians(sol1))\nc2 = np.cos(transform.radians(sol2))\ns0 = np.sin(transform.radians(self.omega))\ns1 = np.sin(transform.radians(sol1))\ns2 = np.sin(transform.radians(sol2))\nerr1 = np.absolute(c1 - c0) + np.absolute(s1 - s0)\nerr2 = np.absolute(c2 - c0) + np.absolute(s2 - s0)\nerr = np.minimum(err1, err2)\nself.assertAlmostEqual(array_diff(err, np.zeros(self.np)), 0, 6)\n"
-}

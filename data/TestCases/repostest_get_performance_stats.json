@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_performance_stats",
-    "className": "PyU4VPerformanceTest",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_performance.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test get_performance_stats with full run through.\"\"\"\nref_payload = {'symmetrixId': self.p_data.array, 'dataFormat': pc.AVERAGE,\n    'startDate': str(self.time_now), 'endDate': str(self.time_now),\n    'metrics': ['PercentBusy']}\nref_response = {'array_id': self.p_data.array, 'start_date': str(self.\n    time_now), 'end_date': str(self.time_now), 'reporting_level': 'array',\n    'result': self.p_data.perf_metrics_resp['resultList']['result'],\n    'timestamp': str(self.time_now)}\nwith mock.patch.object(self.perf, 'post_request', return_value=self.p_data.\n    perf_metrics_resp) as mck_request:\n    response = self.perf.get_performance_stats(category=pc.ARRAY, metrics=\n        'PercentBusy', array_id=self.p_data.array, start_time=self.time_now,\n        end_time=self.time_now, recency=True)\n    mck_request.assert_called_once_with(category=pc.PERFORMANCE,\n        resource_level=pc.ARRAY, resource_type=pc.METRICS, payload=ref_payload)\n    self.assertTrue(response)\n    self.assertEqual(response, ref_response)\n"
-}

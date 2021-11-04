@@ -1,9 +1,0 @@
-{
-    "functionName": "_download_file",
-    "className": null,
-    "fileName": "/Microsoft_&_MMdnn/mmdnn_&_conversion_&_examples_&_coreml_&_test_tfcoreml.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Download the file.\n  url - The URL address of the frozen file\n  fname - Filename of the frozen TF graph in the url.\n  \"\"\"\ndir_path = TMP_MODEL_DIR\nif not os.path.exists(dir_path):\n    os.makedirs(dir_path)\nk = url.rfind('/')\nfname = url[k + 1:]\nfpath = os.path.join(dir_path, fname)\nftype = None\nif url.endswith('.tar.gz') or url.endswith('.tgz'):\n    ftype = 'tgz'\nelif url.endswith('.zip'):\n    ftype = 'zip'\nif not os.path.exists(fpath):\n    urllib.urlretrieve(url, fpath)\nif ftype == 'tgz':\n    tar = tarfile.open(fpath)\n    tar.extractall(dir_path)\n    tar.close()\nelif ftype == 'zip':\n    zip_ref = zipfile.ZipFile(fpath, 'r')\n    zip_ref.extractall(dir_path)\n    zip_ref.close()\n"
-}

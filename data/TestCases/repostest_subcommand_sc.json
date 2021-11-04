@@ -1,9 +1,0 @@
-{
-    "functionName": "test_subcommand_sc",
-    "className": "CLICommandWrapperTest",
-    "fileName": "/openworm_&_PyOpenWorm/tests_&_CLITest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class S(object):\n\n    def __init__(self, parent):\n        self._parent = parent\n\n    def __call__(self):\n        self._parent.i = 1\nclass A(object):\n\n    def __init__(self):\n        self.i = 0\n    sc = SubCommand(S)\na = A()\ncm = CLICommandWrapper(a)\nparser = cm.parser()\nparser.parse_args(['sc'])\ncm.mapper.apply(a)\nself.assertEqual(a.i, 1)\n"
-}

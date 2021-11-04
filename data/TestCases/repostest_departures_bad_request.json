@@ -1,9 +1,0 @@
-{
-    "functionName": "test_departures_bad_request",
-    "className": null,
-    "fileName": "/cgtobi_&_PyRMVtransport/tests_&_test_rmvtransport.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test bad xml.\"\"\"\nwith open('fixtures/bad_request.xml') as xml_file:\n    xml_request = xml_file.read()\nwith open('fixtures/result_bad.json') as json_file:\n    result = json.load(json_file, object_hook=date_hook)\nasync with aresponses.ResponsesMockServer(loop=event_loop) as arsps:\n    arsps.add(URL, URL_PATH, 'get', xml_request)\n    async with aiohttp.ClientSession(loop=event_loop) as session:\n        rmv = RMVtransport(session)\n        station_id = '3006904'\n        direction_id = '3006905'\n        data = await rmv.get_departures(station_id, direction_id)\n        assert data == result\npytest.mark.asyncio"
-}

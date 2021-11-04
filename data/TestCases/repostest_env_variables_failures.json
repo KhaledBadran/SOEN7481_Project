@@ -1,9 +1,0 @@
-{
-    "functionName": "test_env_variables_failures",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_config_&_test_config.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "if attr_name == 'summary_fmt':\n    pytest.skip('The `summary_fmt` validation cannot be performed.')\nenv_name = f'GPFLOW_{attr_name.upper()}'\nwith mock.patch.dict('os.environ', {env_name: 'garbage'}):\n    with pytest.raises(TypeError):\n        gpflow.config.Config()\npytest.mark.parametrize('attr_name', dict.fromkeys(list(zip(*_env_values))[\n    0]).keys())"
-}

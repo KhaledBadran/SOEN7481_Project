@@ -1,9 +1,0 @@
-{
-    "functionName": "test_plotting_validation",
-    "className": "TestAxClient",
-    "fileName": "/facebook_&_Ax/ax_&_service_&_tests_&_test_ax_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ax_client = AxClient()\nax_client.create_experiment(parameters=[{'name': 'x3', 'type': 'fixed',\n    'value': 2, 'value_type': 'int'}])\nwith self.assertRaisesRegex(ValueError, '.* there are no trials'):\n    ax_client.get_contour_plot()\nwith self.assertRaisesRegex(ValueError, '.* there are no trials'):\n    ax_client.get_feature_importances()\nax_client.get_next_trial()\nwith self.assertRaisesRegex(ValueError, '.* less than 2 parameters'):\n    ax_client.get_contour_plot()\nax_client = AxClient()\nax_client.create_experiment(parameters=[{'name': 'x', 'type': 'range',\n    'bounds': [-5.0, 10.0]}, {'name': 'y', 'type': 'range', 'bounds': [0.0,\n    15.0]}])\nax_client.get_next_trial()\nwith self.assertRaisesRegex(ValueError, 'If `param_x` is provided'):\n    ax_client.get_contour_plot(param_x='y')\nwith self.assertRaisesRegex(ValueError, 'If `param_x` is provided'):\n    ax_client.get_contour_plot(param_y='y')\nwith self.assertRaisesRegex(ValueError, 'Parameter \"x3\"'):\n    ax_client.get_contour_plot(param_x='x3', param_y='x3')\nwith self.assertRaisesRegex(ValueError, 'Parameter \"x4\"'):\n    ax_client.get_contour_plot(param_x='x', param_y='x4')\nwith self.assertRaisesRegex(ValueError, 'Metric \"nonexistent\"'):\n    ax_client.get_contour_plot(param_x='x', param_y='y', metric_name=\n        'nonexistent')\nwith self.assertRaisesRegex(ValueError, 'Could not obtain contour'):\n    ax_client.get_contour_plot(param_x='x', param_y='y', metric_name=\n        'objective')\nwith self.assertRaisesRegex(ValueError, 'Could not obtain feature'):\n    ax_client.get_feature_importances()\n"
-}

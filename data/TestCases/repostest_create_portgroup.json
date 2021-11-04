@@ -1,9 +1,0 @@
-{
-    "functionName": "test_create_portgroup",
-    "className": "CITestProvisioning",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test create_portgroup.\"\"\"\ndirectors = self.conn.provisioning.get_director_list()\nport_group_name = self.generate_name(constants.PORT_GROUP)\ndirector = None\nport = None\nfor d in directors:\n    if 'FA-' in d:\n        director = d\n        port = self.conn.provisioning.get_director_port_list(director)[0][\n            constants.PORT_ID]\n        break\nformatted_director_port = self.provisioning.format_director_port(director, port\n    )\nport_group_details = self.conn.provisioning.create_portgroup(port_group_name,\n    director, port)\nself.addCleanup(self.delete_port_group, port_group_name)\nself._validate_port_group_details(port_group_name, port_group_details, [\n    formatted_director_port])\n"
-}

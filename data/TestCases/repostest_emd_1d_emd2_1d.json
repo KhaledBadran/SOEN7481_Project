@@ -1,9 +1,0 @@
-{
-    "functionName": "test_emd_1d_emd2_1d",
-    "className": null,
-    "fileName": "/PythonOT_&_POT/test_&_test_ot.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "n = 20\nm = 30\nrng = np.random.RandomState(0)\nu = rng.randn(n, 1)\nv = rng.randn(m, 1)\nM = ot.dist(u, v, metric='sqeuclidean')\nG, log = ot.emd([], [], M, log=True)\nwass = log['cost']\nG_1d, log = ot.emd_1d(u, v, [], [], metric='sqeuclidean', log=True)\nwass1d = log['cost']\nwass1d_emd2 = ot.emd2_1d(u, v, [], [], metric='sqeuclidean', log=False)\nwass1d_euc = ot.emd2_1d(u, v, [], [], metric='euclidean', log=False)\nnp.testing.assert_allclose(wass, wass1d)\nnp.testing.assert_allclose(wass, wass1d_emd2)\nwass_sp = wasserstein_distance(u.reshape((-1,)), v.reshape((-1,)))\nnp.testing.assert_allclose(wass_sp, wass1d_euc)\nnp.testing.assert_allclose(np.ones((n,)) / n, G.sum(1))\nnp.testing.assert_allclose(np.ones((m,)) / m, G.sum(0))\nnp.testing.assert_allclose(G, G_1d)\nu = np.random.randn(n, 2)\nv = np.random.randn(m, 2)\nwith pytest.raises(AssertionError):\n    ot.emd_1d(u, v, [], [])\n"
-}

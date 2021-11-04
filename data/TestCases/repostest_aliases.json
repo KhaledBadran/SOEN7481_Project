@@ -1,9 +1,0 @@
-{
-    "functionName": "test_aliases",
-    "className": "test_Lambda",
-    "fileName": "/pbx-gs_&_OSBot-AWS/tests_&_unit_&_apis_&_test_Lambda.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "lambda_api = self.aws_lambda\nalias_name = 'temp_name'\nalias_description = 'temp description'\nfunction_version = '$LATEST'\nwith Temp_Lambda() as temp_lambda:\n    assert lambda_api.aliases(function_name=temp_lambda.arn()) == []\n    assert lambda_api.alias_create(function_name=temp_lambda.lambda_name,\n        function_version=function_version, name=alias_name, description=\n        alias_description).get('Name') == alias_name\n    data = lambda_api.alias(function_name=temp_lambda.lambda_name, name=\n        alias_name)\n    del data['RevisionId']\n    assert data == {'AliasArn': f'{temp_lambda.arn()}:{alias_name}',\n        'Description': alias_description, 'FunctionVersion':\n        function_version, 'Name': alias_name}\n    assert lambda_api.aliases(function_name=temp_lambda.arn(), index_by='Name'\n        ).get(alias_name).get('Description') == alias_description\n    assert lambda_api.alias_delete(temp_lambda.lambda_name, alias_name) == {}\n    assert lambda_api.aliases(function_name=temp_lambda.arn()) == []\n"
-}

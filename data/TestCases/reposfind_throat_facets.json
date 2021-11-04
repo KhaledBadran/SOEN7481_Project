@@ -1,9 +1,0 @@
-{
-    "functionName": "find_throat_facets",
-    "className": "DelaunayVoronoiDual",
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_network_&_DelaunayVoronoiDual.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        Finds the indicies of the Voronoi nodes that define the facet or\n        ridge between the Delaunay nodes connected by the given throat.\n\n        Parameters\n        ----------\n        throats : array_like\n            The throats whose facets are sought.  The given throats should be\n            from the 'delaunay' network. If no throats are specified, all\n            'delaunay' throats are assumed.\n\n        Notes\n        -----\n        The method is not well optimized as it scans through each given throat\n        inside a for-loop, so it could be slow for large networks.\n\n        \"\"\"\nif throats is None:\n    throats = self.throats('delaunay')\ntemp = []\ntvals = self['throat.interconnect'].astype(int)\nam = self.create_adjacency_matrix(weights=tvals, fmt='lil', drop_zeros=True)\nfor t in throats:\n    P12 = self['throat.conns'][t]\n    Ps = list(set(am.rows[P12][0]).intersection(am.rows[P12][1]))\n    temp.append(Ps)\nreturn np.array(temp, dtype=object)\n"
-}

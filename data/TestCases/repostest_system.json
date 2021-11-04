@@ -1,9 +1,0 @@
-{
-    "functionName": "test_system",
-    "className": "TestSyscall",
-    "fileName": "/MeiK2333_&_JudgeLight/tests_&_test_syscall.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "code = \"\"\"\n#include <stdlib.h>\n\nint main() {\n    system(\"echo Hello World\");\n}\n\"\"\"\ncompile_it(code)\njl = JudgeLight('./a.out', allow_system_calls_rule='default',\n    output_file_path='output.txt')\nstats = jl.run()\nself.assertEqual(stats['re_flag'], 1)\nwith open('output.txt') as fr:\n    self.assertEqual(fr.read().strip(), '')\nclear_it()\nos.remove('output.txt')\n"
-}

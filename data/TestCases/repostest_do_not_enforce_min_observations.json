@@ -1,9 +1,0 @@
-{
-    "functionName": "test_do_not_enforce_min_observations",
-    "className": "TestGenerationStrategy",
-    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_generation_strategy.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "exp = get_branin_experiment()\ngs = GenerationStrategy(steps=[GenerationStep(model=Models.SOBOL,\n    num_trials=1, min_trials_observed=5, enforce_num_trials=False),\n    GenerationStep(model=Models.GPEI, num_trials=1)])\nfor _ in range(2):\n    gs.gen(exp)\nself.assertIsInstance(gs._model, RandomModelBridge)\n"
-}

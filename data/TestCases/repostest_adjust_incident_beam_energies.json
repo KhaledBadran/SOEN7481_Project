@@ -1,9 +1,0 @@
-{
-    "functionName": "test_adjust_incident_beam_energies",
-    "className": null,
-    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_xanes_maps_&_tests_&_test_xanes_maps_api.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Tests for ``adjust_incident_beam_energies``\"\"\"\nincident_energies, eline, eline_activation_energy = _get_xanes_energy_axis()\nincident_energies = np.random.permutation(incident_energies)\nthreshold = np.min(incident_energies[incident_energies >=\n    eline_activation_energy])\nie_adjusted = np.clip(incident_energies, a_min=threshold, a_max=None)\nie_adjusted_output = adjust_incident_beam_energies(np.asarray(\n    incident_energies), eline)\nnp.testing.assert_almost_equal(ie_adjusted_output, ie_adjusted, err_msg=\n    'Incident energies are adjusted incorrectly')\nie_adjusted_output = adjust_incident_beam_energies(list(incident_energies),\n    eline)\nnp.testing.assert_almost_equal(ie_adjusted_output, ie_adjusted, err_msg=\n    'Incident energies are adjusted incorrectly')\n"
-}

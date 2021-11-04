@@ -1,9 +1,0 @@
-{
-    "functionName": "test_establish_new_ask_tob",
-    "className": null,
-    "fileName": "/nabicht_&_Buttonwood/tests_&_test_MarketObjects_&_test_Orderbooks_&_test_orderlevelbook.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ob = build_base_order_book()\na = NewOrderCommand(56, 1234002.123, 1008, 'user_z', MARKET, ASK_SIDE, FAR,\n    Price('34.51'), 35)\nask_oec = OrderEventChain(a, LOGGER, SUBCHAIN_ID_GENERATOR)\na_ack = AcknowledgementReport(57, 1234002.123, 1008, 'user_z', MARKET, a,\n    Price('34.51'), 35, 35)\nask_oec.apply_acknowledgement_report(a_ack)\nob.handle_acknowledgement_report(a_ack, ask_oec)\nask_prices = ob.ask_prices()\nassert len(ask_prices) == 2\nassert ob.best_priority_chain(ASK_SIDE) == ask_oec\nassert ask_prices[0] == Price('34.51')\nassert ob.best_ask_price() == Price('34.51')\nassert ob.best_ask_level() == PriceLevel(Price('34.51'), 35, 0, 1)\nbid_prices = ob.bid_prices()\nassert len(bid_prices) == 1\nassert bid_prices[0] == Price('34.50')\nassert ob.best_bid_price() == Price('34.50')\nassert ob.best_bid_level() == PriceLevel(Price('34.50'), 120, 0, 2)\n"
-}

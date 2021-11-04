@@ -1,9 +1,0 @@
-{
-    "functionName": "test_gen_seq",
-    "className": "TestsRNATargetPrediction",
-    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_srna_target.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "srna_seq = os.path.join(self.out, 'sRNA_seqs')\ntar_seq = os.path.join(self.out, 'target_seqs')\nos.mkdir(os.path.join(self.srnas, 'tmp'))\nos.mkdir(os.path.join(self.fastas, 'tmp'))\nos.mkdir(os.path.join(self.gffs, 'tmp'))\nos.mkdir(tar_seq)\ngen_file(os.path.join(self.srnas, 'tmp', 'aaa_sRNA.gff'), self.example.\n    srna_file)\ngen_file(os.path.join(self.fastas, 'tmp', 'aaa.fa'), self.example.seq_file)\ngen_file(os.path.join(self.gffs, 'tmp', 'aaa.gff'), self.example.gff_file)\nargs = self.mock_args.mock()\nargs.query = ['aaa:5:8:+']\nargs.features = ['CDS']\nargs.tar_start = 3\nargs.tar_end = 5\nself.star._gen_seq(['aaa'], args)\ndatas = import_data(os.path.join(srna_seq, 'aaa_sRNA.fa'))\nself.assertEqual('\\n'.join(datas), \"\"\">srna0|aaa|5|8|+\nTAAT\"\"\")\ndatas = import_data(os.path.join(tar_seq, 'aaa_target_1.fa'))\nself.assertEqual('\\n'.join(datas), \"\"\">AAA_000001_cds0_12-16_+\nTAAATTCC\"\"\")\n"
-}

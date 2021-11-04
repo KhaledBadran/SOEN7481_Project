@@ -1,9 +1,0 @@
-{
-    "functionName": "test__load_entry_points_entry_points",
-    "className": null,
-    "fileName": "/HDI-Project_&_MLBlocks/tests_&_test_discovery.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "something_else_ep = EntryPoint('something_else', 'mlblocks.__version__')\nprimitives_ep = EntryPoint('primitives', 'tests.test_discovery', attrs=[\n    'FAKE_PRIMITIVES_PATH'], dist=Distribution())\nanother_primitives_ep = EntryPoint('primitives', 'tests.test_discovery',\n    attrs=['FAKE_PRIMITIVES_PATHS'], dist=Distribution())\niep_mock.return_value = [something_else_ep, primitives_ep,\n    another_primitives_ep]\npaths = discovery._load_entry_points('primitives')\nexpected = ['this/is/a/fake', 'this/is/another/fake',\n    'this/is/yet/another/fake']\nassert paths == expected\nexpected_calls = [call('mlblocks')]\nassert iep_mock.call_args_list == expected_calls\npatch('mlblocks.discovery.pkg_resources.iter_entry_points')"
-}

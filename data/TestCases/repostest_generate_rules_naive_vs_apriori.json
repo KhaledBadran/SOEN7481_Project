@@ -1,9 +1,0 @@
-{
-    "functionName": "test_generate_rules_naive_vs_apriori",
-    "className": null,
-    "fileName": "/tommyod_&_Efficient-Apriori/efficient_apriori_&_tests_&_test_rules.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test the naive rule finder vs. the simple one from the paper.\n    \"\"\"\nitemsets, num_transactions = itemsets_from_transactions(transactions, 0.15)\nmin_conf = 0.3\nrules_apri = generate_rules_apriori(itemsets, min_conf, num_transactions)\nrules_naive = generate_rules_naively(itemsets, min_conf, num_transactions)\nrules_apri = list(rules_apri)\nrules_naive = list(rules_naive)\nassert len(rules_apri) == len(rules_naive)\nassert set(rules_apri) == set(rules_naive)\npytest.mark.parametrize('transactions', input_data)"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "saveXML",
-    "className": "Instrument",
-    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Geometry_&_Instrument.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Method for saving current file as XML in fileName.\"\"\"\nXMLString = '<?xml version=\"1.0\"?>\\n'\nXMLString += '<Instrument '\nfor attrib in self.settings:\n    XMLString += \"{}='{}' \".format(attrib, self.settings[attrib])\nXMLString += \"position='\" + ','.join([str(x) for x in self.position]) + \"'\"\nXMLString += '>\\n'\nfor wedge in self.wedges:\n    XMLString += '\\t<Wedge '\n    for attrib in wedge.settings:\n        XMLString += \"{}='{}' \".format(attrib, wedge.settings[attrib])\n    XMLString += \"position='\" + ','.join([str(x) for x in wedge.position]\n        ) + \"'\"\n    XMLString += '>\\n'\n    for item in (wedge.analysers + wedge.detectors):\n        itemClass = str(item.__class__).split('.')[-1][:-2]\n        XMLString += '\\t\\t<{}'.format(itemClass)\n        for key in item.__dict__:\n            value = item.__getattribute__(key)\n            if isinstance(value, type(np.array([0, 0, 0]))):\n                valueStr = ','.join([str(x) for x in item.__getattribute__(\n                    key)])\n            else:\n                valueStr = str(value)\n            XMLString += \" {}='{}'\".format(str(key)[1:], valueStr)\n        XMLString += '></{}>\\n'.format(itemClass)\n    XMLString += '\\t</Wedge>\\n'\nXMLString += '</Instrument>\\n'\nf = open(fileName, 'w')\nf.write(XMLString)\nf.close()\n"
-}

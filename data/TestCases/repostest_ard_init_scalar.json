@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ard_init_scalar",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_kernels_&_test_kernels.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    For ard kernels, make sure that kernels can be instantiated with a single\n    scalar lengthscale or a suitable array of lengthscales\n    \"\"\"\nkernel_1 = gpflow.kernels.SquaredExponential(lengthscales=2.3)\nkernel_2 = gpflow.kernels.SquaredExponential(lengthscales=np.ones(D) * 2.3)\nlengthscales_1 = kernel_1.lengthscales.read_value()\nlengthscales_2 = kernel_2.lengthscales.read_value()\nassert np.allclose(lengthscales_1, lengthscales_2, atol=1e-10)\npytest.mark.parametrize('D', [4, 7])"
-}

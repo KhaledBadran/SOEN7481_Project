@@ -1,9 +1,0 @@
-{
-    "functionName": "test_constructor_rq",
-    "className": null,
-    "fileName": "/ViiSiX_&_FlaskRedislite/test_flask_redislite.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    - Test if the connection is created and using Redis class\n    - Check if the worker process is created\n    - Check if the worker pid file is created\n    - Check if the worker pid file is cleaned up after terminated\n    \"\"\"\nrdb = flask_redislite.FlaskRedis(app, rq=True)\nassert not path.isfile(app.config.get('REDISLITE_WORKER_PID'))\nwith app.app_context():\n    assert isinstance(rdb.connection, Redis)\n    assert rdb.connection.socket_file is not None\n    rdb.start_worker()\n    assert rdb.worker_process.is_alive()\n    assert path.isfile(app.config.get('REDISLITE_WORKER_PID'))\ntime.sleep(0.5)\nrdb.worker_process.terminate()\ntime.sleep(0.5)\nassert not path.isfile(app.config.get('REDISLITE_WORKER_PID'))\n"
-}

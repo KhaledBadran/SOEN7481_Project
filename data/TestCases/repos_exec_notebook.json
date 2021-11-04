@@ -1,9 +1,0 @@
-{
-    "functionName": "_exec_notebook",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_integration_&_test_notebooks.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "with open(notebook_filename) as notebook_file:\n    nb = jupytext.read(notebook_file, as_version=nbformat.current_nbformat)\n    try:\n        meta_data = {'path': os.path.dirname(notebook_filename)}\n        _preproc().preprocess(nb, {'metadata': meta_data})\n    except CellExecutionError as cell_error:\n        traceback.print_exc(file=sys.stdout)\n        msg = (\n            'Error executing the notebook {0}. See above for error.\\nCell error: {1}'\n            )\n        pytest.fail(msg.format(notebook_filename, str(cell_error)))\n"
-}

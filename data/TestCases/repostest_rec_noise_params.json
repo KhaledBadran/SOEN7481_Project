@@ -1,9 +1,0 @@
-{
-    "functionName": "test_rec_noise_params",
-    "className": null,
-    "fileName": "/dbehrlich_&_PsychRNN/test_&_backend_&_test_simulation.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "reset_seeds(19846)\nmtc = MatchToCategory(dt=10, tau=100, T=2000, N_batch=50)\nparams = mtc.get_task_params()\nparams['name'] = 'test'\nparams['N_rec'] = 49\nparams['rec_noise'] = 0.1\nrnn_model = Basic(params)\nweights = rnn_model.get_weights()\nx, _, _, _ = mtc.get_trial_batch()\nsim_model = BasicSimulator(params=params, weights=weights)\nassert sim_model.rec_noise == params['rec_noise']\nrnn_model.destruct()\n"
-}

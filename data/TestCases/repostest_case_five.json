@@ -1,9 +1,0 @@
-{
-    "functionName": "test_case_five",
-    "className": "TestQuickReply",
-    "fileName": "/p1r-a-t3_&_FB_Bot/Tests_&_test_quick_reply.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "q_reply = QuickReply(self.test_user)\ntest_5_payload = list()\nfor _ in range(0, 14):\n    title_text = 'test_case_five {}'.format(_)\n    payload = 'vikings_{}'.format(_)\n    image_url = config('test_url', None)\n    print('Image URL is: {}'.format(image_url))\n    import random\n    x = random.randint(2, 10)\n    if x % 2:\n        content_type = Tags.TAG_CONTENT_TYPE_TEXT\n    elif x % 3:\n        content_type = Tags.TAG_CONTENT_TYPE_LOCATION\n    elif x % 5:\n        content_type = Tags.TAG_CONTENT_TYPE_USER_PHONE_NUMBER\n    else:\n        content_type = Tags.TAG_CONTENT_TYPE_USER_EMAIL\n    test_5_payload.append(q_reply.quick_reply_create(content_type,\n        title_text, payload, image_url))\ntest_5_quick_reply_payload = q_reply.quick_reply('Test 5 Quick Reply Payload',\n    test_5_payload)\nself.assertEqual(type(test_5_quick_reply_payload), type(None), 'Oh Crap!')\nstatus_code = self.facebook.send_message(test_5_quick_reply_payload)\nself.assertEqual(status_code, 400, 'This better be 400!')\n"
-}

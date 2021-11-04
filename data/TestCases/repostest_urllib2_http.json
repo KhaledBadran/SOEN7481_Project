@@ -1,9 +1,0 @@
-{
-    "functionName": "test_urllib2_http",
-    "className": "PySocksTestCase",
-    "fileName": "/Anorov_&_PySocks/test_&_test_pysocks.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "original_socket = urllib2.socket.socket\ntry:\n    self.test_server.response['data'] = b'zzz'\n    socks.set_default_proxy(socks.HTTP, PROXY_HOST_IP, HTTP_PROXY_PORT)\n    socks.wrap_module(urllib2)\n    address = TEST_SERVER_HOST, TEST_SERVER_PORT\n    url = 'http://%s:%d/' % address\n    res = urllib2.urlopen(url)\n    resp_body = res.read()\n    self.assertEqual(200, res.getcode())\n    self.assertEqual(b'zzz', resp_body)\n    self.assertTrue(self.test_server.request['headers']['user-agent'].\n        startswith('Python-urllib'))\n    self.assertEqual('%s:%d' % address, self.test_server.request['headers']\n        ['host'])\nfinally:\n    urllib2.socket.socket = original_socket\n"
-}

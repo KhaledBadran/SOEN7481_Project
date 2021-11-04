@@ -1,9 +1,0 @@
-{
-    "functionName": "test_derive_key_invalid_unique_identifiers",
-    "className": "TestProxyKmipClient",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_test_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the right error is raised when attempting to derive a key\n        with an invalid list of unique identifiers.\n        \"\"\"\nclient = ProxyKmipClient()\nclient.open()\nclient.proxy.derive_key.return_value = {}\nargs = [enums.ObjectType.SYMMETRIC_KEY, 'invalid', enums.DerivationMethod.\n    ENCRYPT, {'cryptographic_parameters': {'cryptographic_algorithm': enums\n    .CryptographicAlgorithm.AES, 'block_cipher_mode': enums.BlockCipherMode\n    .CBC, 'padding_method': enums.PaddingMethod.PKCS1v15},\n    'initialization_vector': b'\\x01\\x02\\x03\\x04', 'derivation_data':\n    b'\\xff\\xfe\\xfe\\xfc'}]\nkwargs = {'cryptographic_length': 128, 'cryptographic_algorithm': enums.\n    CryptographicAlgorithm.AES}\nself.assertRaisesRegex(TypeError,\n    'Unique identifiers must be a list of strings.', client.derive_key, *\n    args, **kwargs)\nargs = [enums.ObjectType.SYMMETRIC_KEY, [2, 3], enums.DerivationMethod.\n    ENCRYPT, {'cryptographic_parameters': {'cryptographic_algorithm': enums\n    .CryptographicAlgorithm.AES, 'block_cipher_mode': enums.BlockCipherMode\n    .CBC, 'padding_method': enums.PaddingMethod.PKCS1v15},\n    'initialization_vector': b'\\x01\\x02\\x03\\x04', 'derivation_data':\n    b'\\xff\\xfe\\xfe\\xfc'}]\nself.assertRaisesRegex(TypeError,\n    'Unique identifiers must be a list of strings.', client.derive_key, *\n    args, **kwargs)\nmock.patch('kmip.pie.client.KMIPProxy', mock.MagicMock(spec_set=KMIPProxy))"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_periodicity_in_shell",
-    "className": "Test_periodicity_grispy",
-    "fileName": "/mchalela_&_GriSPy/tests_&_test_brute_force.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "centres = np.array([[0.0, 0.0, 0.0]])\nupper_radii = 0.8 * self.lbox\nlower_radii = 0.8 * self.lbox\nfor j in range(3):\n    gsp = self.make_gsp({j: (-0.5 * self.lbox, 0.5 * self.lbox)})\n    dis, ind = gsp.shell_neighbors(centres, distance_lower_bound=\n        lower_radii - self.eps, distance_upper_bound=upper_radii + self.eps)\n    dis, ind = dis[0], ind[0]\n    aux = np.argsort(ind)\n    ind = ind[aux]\n    dis = dis[aux]\n    for i in range(2):\n        assert_equal(ind[i], i + j * 2)\n        assert_(dis[i] >= lower_radii - self.eps)\n        assert_(dis[i] <= upper_radii + self.eps)\ngsp = self.make_gsp({(0): (-self.lbox * 0.5, self.lbox * 0.5), (1): (-self.\n    lbox * 0.5, self.lbox * 0.5), (2): (-self.lbox * 0.5, self.lbox * 0.5)})\ndis, ind = gsp.shell_neighbors(centres, distance_lower_bound=lower_radii -\n    self.eps, distance_upper_bound=upper_radii + self.eps)\ndis, ind = dis[0], ind[0]\naux = np.argsort(ind)\nind = ind[aux]\ndis = dis[aux]\nfor i in range(6):\n    assert_equal(ind[i], i)\n    assert_(dis[i] >= lower_radii * (1.0 - self.eps))\n    assert_(dis[i] <= upper_radii * (1.0 + self.eps))\n"
-}

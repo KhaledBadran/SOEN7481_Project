@@ -1,9 +1,0 @@
-{
-    "functionName": "rough_input_stack_renamed",
-    "className": null,
-    "fileName": "/AllenInstitute_&_EM_Aligner_python/integration_tests_&_test_rough.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "test_rough_stack = 'rough_input_stack_renamed'\nwith open(FILE_ROUGH_TILES, 'r') as f:\n    j = json.load(f)\ntilespecs = [renderapi.tilespec.TileSpec(json=d) for d in j]\nfor i in range(len(tilespecs)):\n    tilespecs[i].tileId = 'garbage_%d' % i\nrenderapi.stack.create_stack(test_rough_stack, render=render)\nrenderapi.client.import_tilespecs(test_rough_stack, tilespecs, render=\n    render, use_rest=True)\nrenderapi.stack.set_stack_state(test_rough_stack, 'COMPLETE', render=render)\nyield test_rough_stack\nrenderapi.stack.delete_stack(test_rough_stack, render=render)\npytest.fixture(scope='module')"
-}

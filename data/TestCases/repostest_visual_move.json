@@ -1,9 +1,0 @@
-{
-    "functionName": "test_visual_move",
-    "className": null,
-    "fileName": "/SeverTopan_&_AdjSim/test_&_test_simulation.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from adjsim import core, utility, decision\ndef move(env, source):\n    source.x += 10\n    source.y += 10\nclass TestAgent(core.VisualAgent):\n\n    def __init__(self, x, y):\n        super().__init__(pos=np.array([x, y]))\n        self.decision = decision.RandomSingleCastDecision()\n        self.actions['move'] = move\ntest_sim = core.VisualSimulation()\ntest_sim._wait_on_visual_init = 0\ntest_sim.agents.add(TestAgent(0, 0))\ntest_sim.agents.add(TestAgent(0, -10))\ncommon.step_simulate_interpolation(test_sim)\n"
-}

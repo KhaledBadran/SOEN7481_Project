@@ -1,9 +1,0 @@
-{
-    "functionName": "test_run_container_on_temp_cluster",
-    "className": "test_Fargate",
-    "fileName": "/pbx-gs_&_OSBot-AWS/tests_&_unit_&_apis_&_test_Fargate.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "subnet_id = ' subnet-49391932'\nsecurity_group_id = 'sg-e6ea548e'\ncluster_name = Misc.random_string_and_numbers(6, 'temp_cluster_')\ntask_name = 'temp_task_on_{0}'.format(cluster_name)\ntask_role = 'task_role_{0}'.format(task_name)\nexecution_role = 'execution_role_{0}'.format(task_name)\ndocker_image_name = 'gs-docker-codebuild'\nlog_group_name = 'awslogs-{0}'.format(task_name)\nlog_group_region = 'eu-west-2'\nlog_group_stream_prefix = 'awslogs-example'\nself.fargate.cluster_create(cluster_name)\nself.fargate.policy_create_for_task_role(task_role)\nself.fargate.policy_create_for_execution_role(execution_role)\ntask_arn = self.fargate.task_create(task_name, task_role, execution_role).get(\n    'taskDefinitionArn')\ntask_run = self.fargate.task_run(cluster_name, task_arn, subnet_id,\n    security_group_id)\ntask_run_arn = task_run.get('taskArn')\ntask_details = self.fargate.task_wait_for_completion(cluster_name, task_run_arn\n    )\ntask_id = 'asd'\nstream_name = '{0}/{1}{2}'.format(log_group_stream_prefix,\n    docker_image_name, task_id)\nmessages = self.cloud_watch.logs_get_messages(log_group_name, stream_name)\nDev.pprint(messages)\n"
-}

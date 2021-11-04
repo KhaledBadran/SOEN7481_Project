@@ -1,9 +1,0 @@
-{
-    "functionName": "test_hmcalculator_number_counts_norm",
-    "className": null,
-    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_hmcalculator_number_counts.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "cosmo = ccl.Cosmology(Omega_c=0.27, Omega_b=0.045, h=0.67, sigma8=0.8, n_s=\n    0.96, transfer_function='bbks', matter_power_spectrum='linear')\nmdef = ccl.halos.MassDef(200, 'matter')\nhmf = ccl.halos.MassFuncTinker10(cosmo, mdef, mass_def_strict=False)\nhbf = ccl.halos.HaloBiasTinker10(cosmo, mass_def=mdef, mass_def_strict=False)\nhmc = ccl.halos.HMCalculator(cosmo, hmf, hbf, mdef)\ndef sel2(m, a):\n    m = np.atleast_1d(m)\n    a = np.atleast_1d(a)\n    val = np.zeros_like(m.reshape(-1, 1) * a.reshape(1, -1))\n    msk_a = (a > 0.5) & (a < 1.0)\n    msk_m = (m > 100000000000000.0) & (m < 1e+16)\n    val[(msk_m), :] += 1\n    val[:, (msk_a)] += 1\n    msk = val == 2\n    val[~msk] = 0\n    return val\ndef sel4(m, a):\n    m = np.atleast_1d(m)\n    a = np.atleast_1d(a)\n    val = np.zeros_like(m.reshape(-1, 1) * a.reshape(1, -1))\n    msk_a = (a > 0.5) & (a < 1.0)\n    msk_m = (m > 100000000000000.0) & (m < 1e+16)\n    val[(msk_m), :] += 2\n    val[:, (msk_a)] += 2\n    msk = val == 4\n    val[~msk] = 0\n    return val\nnc2 = hmc.number_counts(cosmo, sel2) * 4.0 * np.pi\nassert np.isfinite(nc2)\nassert not np.allclose(nc2, 0)\nnc4 = hmc.number_counts(cosmo, sel4) * 4.0 * np.pi\nassert np.isfinite(nc4)\nassert not np.allclose(nc4, 0)\nassert np.allclose(nc2 * 2, nc4)\n"
-}

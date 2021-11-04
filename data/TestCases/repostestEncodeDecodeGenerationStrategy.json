@@ -1,9 +1,0 @@
-{
-    "functionName": "testEncodeDecodeGenerationStrategy",
-    "className": "SQAStoreTest",
-    "fileName": "/facebook_&_Ax/ax_&_storage_&_sqa_store_&_tests_&_test_sqa_store.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "with self.assertRaises(ValueError):\n    load_generation_strategy_by_id(gs_id=0)\ngeneration_strategy = get_generation_strategy()\nsave_generation_strategy(generation_strategy=generation_strategy)\nnew_generation_strategy = load_generation_strategy_by_id(gs_id=\n    generation_strategy._db_id)\nself.assertEqual(generation_strategy, new_generation_strategy)\nself.assertIsNone(generation_strategy._experiment)\nexperiment = get_branin_experiment()\nsave_experiment(experiment)\nwith self.assertRaises(ValueError):\n    load_generation_strategy_by_experiment_name(experiment_name=experiment.name\n        )\ngeneration_strategy = new_generation_strategy\nexperiment.new_trial(generation_strategy.gen(experiment=experiment))\ngeneration_strategy.gen(experiment, data=get_branin_data())\nsave_generation_strategy(generation_strategy=generation_strategy)\nsave_experiment(experiment)\nnew_generation_strategy = load_generation_strategy_by_experiment_name(\n    experiment_name=experiment.name)\nself.assertEqual(generation_strategy, new_generation_strategy)\nself.assertIsInstance(new_generation_strategy._steps[0].model, Models)\nself.assertIsInstance(new_generation_strategy.model, ModelBridge)\nself.assertEqual(len(new_generation_strategy._generator_runs), 2)\nself.assertEqual(new_generation_strategy._experiment._name, experiment._name)\n"
-}

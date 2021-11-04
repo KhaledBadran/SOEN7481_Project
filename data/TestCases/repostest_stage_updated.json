@@ -1,9 +1,0 @@
-{
-    "functionName": "test_stage_updated",
-    "className": null,
-    "fileName": "/132nd-etcher_&_EPAB/test_&_test_repo_&_test_index.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "for file in file_set:\n    assert file.name in repo.untracked_files()\nrepo.stage_subset(file_set[:3])\nrepo.repo.index.commit(message='test')\nfor file in file_set[3:]:\n    assert file.name not in repo.list_staged_files()\n    assert file.name in repo.untracked_files()\nfile_set[0].write_text('blob')\nrepo.stage_modified()\nassert repo.list_staged_files() == [file_set[0].name]\n"
-}

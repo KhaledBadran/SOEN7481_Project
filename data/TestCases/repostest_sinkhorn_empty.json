@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sinkhorn_empty",
-    "className": null,
-    "fileName": "/PythonOT_&_POT/test_&_test_bregman.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "n = 100\nrng = np.random.RandomState(0)\nx = rng.randn(n, 2)\nu = ot.utils.unif(n)\nM = ot.dist(x, x)\nG, log = ot.sinkhorn([], [], M, 1, stopThr=1e-10, verbose=True, log=True)\nnp.testing.assert_allclose(u, G.sum(1), atol=1e-05)\nnp.testing.assert_allclose(u, G.sum(0), atol=1e-05)\nG, log = ot.sinkhorn([], [], M, 1, stopThr=1e-10, method=\n    'sinkhorn_stabilized', verbose=True, log=True)\nnp.testing.assert_allclose(u, G.sum(1), atol=1e-05)\nnp.testing.assert_allclose(u, G.sum(0), atol=1e-05)\nG, log = ot.sinkhorn([], [], M, 1, stopThr=1e-10, method=\n    'sinkhorn_epsilon_scaling', verbose=True, log=True)\nnp.testing.assert_allclose(u, G.sum(1), atol=1e-05)\nnp.testing.assert_allclose(u, G.sum(0), atol=1e-05)\not.sinkhorn([], [], M, 1, method='greenkhorn', stopThr=1e-10, log=True)\n"
-}

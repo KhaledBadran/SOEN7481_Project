@@ -1,9 +1,0 @@
-{
-    "functionName": "test_handle_destination_dir_data_sync",
-    "className": "TestSync",
-    "fileName": "/DusanMadar_&_PySyncDroid/tests_&_test_sync.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test 'handle_destination_dir_data' synchronizes unmatched destination\n        data to source.\n        \"\"\"\nsync = Sync(FAKE_MTP_DETAILS, '/tmp', 'Card/Music', unmatched=SYNCHRONIZE)\nsync.set_source_abs()\nsync.set_destination_abs()\nsync.handle_destination_dir_data({'src_dir_abs': '/tmp/testdir',\n    'dst_dir_fls': [\n    '/run/user/<user>/gvfs/mtp:host=%5Busb%3A002%2C003%5D/Card/Music/testdir/song.mp3'\n    ], 'dst_dir_abs':\n    '/run/user/<user>/gvfs/mtp:host=%5Busb%3A002%2C003%5D/Card/Music/testdir'})\nmock_copy_file.assert_called_once_with(dst_file='/tmp/testdir/song.mp3',\n    src_file=\n    '/run/user/<user>/gvfs/mtp:host=%5Busb%3A002%2C003%5D/Card/Music/testdir/song.mp3'\n    )\npatch.object(pysyncdroid.sync.Sync, 'copy_file')"
-}

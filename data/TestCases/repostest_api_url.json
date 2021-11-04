@@ -1,9 +1,0 @@
-{
-    "functionName": "test_api_url",
-    "className": "TestCaseSensitive",
-    "fileName": "/fvalverd_&_AutoApi/tests_&_test_validations.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "headers = self.get_admin_headers()\napiL, apiC, apiU = self.api.lower(), self.api.capitalize(), self.api.upper()\nresponse_lowered = self.app.post(apiL + '/movies', headers=headers,\n    content_type='application/json', data=json.dumps({'name': 'nameL'}))\nself.assertEqual(response_lowered.status_code, 201)\nresponse_capitaized = self.app.post(apiC + '/movies', headers=headers,\n    content_type='application/json', data=json.dumps({'name': 'nameC'}))\nself.assertEqual(response_capitaized.status_code, 201)\nresponse_uppered = self.app.post(apiU + '/movies', headers=headers,\n    content_type='application/json', data=json.dumps({'name': 'nameU'}))\nself.assertEqual(response_uppered.status_code, 201)\nresponse_lowered = self.app.get(apiL + '/movies', headers=headers)\nself.assertEqual(response_lowered.status_code, 200)\nresponse_capitaized = self.app.get(apiC + '/movies', headers=headers)\nself.assertEqual(response_capitaized.status_code, 200)\nresponse_uppered = self.app.get(apiU + '/movies', headers=headers)\nself.assertEqual(response_uppered.status_code, 200)\nself.assertEqual(response_lowered.data, response_capitaized.data)\nself.assertEqual(response_capitaized.data, response_uppered.data)\n"
-}

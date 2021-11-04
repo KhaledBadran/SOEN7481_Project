@@ -1,9 +1,0 @@
-{
-    "functionName": "test_open_blank_mp3_file",
-    "className": null,
-    "fileName": "/mandeep_&_Mosaic/tests_&_test_player.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test the opening of a blank MP3 file.\n\n    Qtbot clicks on the file menu then Qt.Key_Down highlights the open file item.\n    The mock plugin creates a mock of the QFileDialog window while Qt.Key_Enter executes it.\n    This test opens a blank flac file to test cases where metadata is not embedded in the file.\"\"\"\nqtbot.mouseClick(window.file, Qt.LeftButton)\nqtbot.keyClick(window.file, Qt.Key_Down)\nmock.patch.object(QFileDialog, 'getOpenFileName', return_value=(\n    blank_mp3_file, '*.mp3'))\nqtbot.keyClick(window.file, Qt.Key_Enter)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_object_components",
-    "className": "TestMigrate",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_migrate.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test for get_object_components.\"\"\"\nregex_str = (\n    '^(?P<prefix>OS)-(?P<host>.+?)((?P<srp>SRP.+?)-(?P<slo>.+?)-(?P<workload>.+?)|(?P<no_slo>No_SLO))-(?P<protocol>I|F)(?P<CD>-CD|s*)(?P<RE>-RE|s*)-(?P<postfix>MV)$'\n    )\ninput_str = 'OS-myhost-SRP_1-Silver-NONE-I-MV'\nobject_dict = self.utils.get_object_components(regex_str, input_str)\nself.assertEqual('OS', object_dict['prefix'])\nself.assertEqual('myhost-', object_dict['host'])\nself.assertEqual('SRP_1', object_dict['srp'])\nself.assertEqual('I', object_dict['protocol'])\nself.assertEqual('Silver', object_dict['slo'])\nself.assertEqual('NONE', object_dict['workload'])\nself.assertEqual('MV', object_dict['postfix'])\n"
-}

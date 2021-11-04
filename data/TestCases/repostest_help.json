@@ -1,9 +1,0 @@
-{
-    "functionName": "test_help",
-    "className": "TestChapter1",
-    "fileName": "/axiros_&_DevApps/tests_&_test_tutorial.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "t = \"\"\"\n        ## Help Output\n\n        `-h` delivers a markdown formatted help output:\n        \"\"\"\nmd(t)\nres = bash_run(['calc2.py -h'], res_as=markdown)\nassert '## Actions' in res[0]['res']\nassert '```python' not in res[0]['res']\nt = \"\"\"\n        ### Markdown?\n\n        Because this allows to add a lot of structuring information - which we can use to nicely colorize the output, provide TOCs, put into README's and so on.\n\n        \"\"\"\nmd(t)\nmd('`-hc` shows the implementation:')\nres = bash_run(['calc2.py -hc'], res_as=markdown)\nassert '``python' in res[0]['res']\nmd(\"\"\"\n        > If the terminal width is not wide enough for the parameter tables we render the parameters vertically.\n        > `-hu` (classic unix) forces this always.\n        \"\"\"\n    )\nmd(\"\"\"\n        ### Defaults Are Configurable\n        Lets check `-h` output when arguments are supplied:\n        \"\"\"\n    )\nres = bash_run(['calc2.py of=multiply 1 -h | head -n 10'], res_as=markdown)\nassert 'multiply' in res[0]['res']\nmd(\"\"\"\n        As you can see our value from the CLI made it into the documentation.  \n        The `F` (From) column shows where the value was comming from.\n        \"\"\"\n    )\n"
-}

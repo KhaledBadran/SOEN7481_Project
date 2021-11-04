@@ -1,9 +1,0 @@
-{
-    "functionName": "test_poly",
-    "className": null,
-    "fileName": "/PaulHancock_&_Aegean/tests_&_test_regions.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test that polygon regions can be added and written to .reg files\n    \"\"\"\nra = [5.0, 5.0, 7.0, 7.0]\ndec = [-2.0, -2.5, -2.5, -2.0]\nregion = Region(maxdepth=6)\npositions = list(zip(np.radians(ra), np.radians(dec)))\nregion.add_poly(positions)\nregion.write_reg('test.reg')\nif not os.path.exists('test.reg'):\n    raise AssertionError()\nos.remove('test.reg')\n"
-}

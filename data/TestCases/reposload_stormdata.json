@@ -1,9 +1,0 @@
-{
-    "functionName": "load_stormdata",
-    "className": null,
-    "fileName": "/Jhsmit_&_ColiCoords/test_&_test_functions.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "f_path = os.path.dirname(os.path.realpath(__file__))\nbinary = tifffile.imread(os.path.join(f_path,\n    'test_data/ds2/binary_resized.tif')).astype('int')\ndtype = {'names': ('id', 'frame', 'x', 'y', 'sigma', 'intensity', 'offset',\n    'bkgstd', 'chi2', 'uncertainty_xy'), 'formats': (int, int, float, float,\n    float, float, float, float, float, float)}\nstorm_table = np.genfromtxt(os.path.join(f_path,\n    'test_data/ds2/storm_table.csv'), skip_header=1, dtype=dtype, delimiter=','\n    )\nstorm_table['x'] /= cfg.IMG_PIXELSIZE\nstorm_table['y'] /= cfg.IMG_PIXELSIZE\ndata = Data()\ndata.add_data(binary, 'binary')\ndata.add_data(storm_table, 'storm')\nreturn data\n"
-}

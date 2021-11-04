@@ -1,9 +1,0 @@
-{
-    "functionName": "test_hansenlaw_forward_dribinski_image",
-    "className": null,
-    "fileName": "/PyAbel_&_PyAbel/abel_&_tests_&_test_hansenlaw.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Check hansenlaw forward/inverse transform\n        using BASEX sample image, comparing speed distributions\n    \"\"\"\nIM = abel.tools.analytical.SampleImage(n=1001, name='dribinski').image\nQ0, Q1, Q2, Q3 = abel.tools.symmetry.get_image_quadrants(IM)\nfQ0 = abel.hansenlaw.hansenlaw_transform(Q0, direction='forward')\nifQ0 = abel.hansenlaw.hansenlaw_transform(fQ0, direction='inverse')\norig_speed, orig_radial = abel.tools.vmi.angular_integration(Q0, origin=(0,\n    0), Jacobian=True)\nspeed, radial_coords = abel.tools.vmi.angular_integration(ifQ0, origin=(0, \n    0), Jacobian=True)\norig_speed /= orig_speed[50:125].max()\nspeed /= speed[50:125].max()\nassert np.allclose(orig_speed[50:125], speed[50:125], rtol=0.5, atol=0)\n"
-}

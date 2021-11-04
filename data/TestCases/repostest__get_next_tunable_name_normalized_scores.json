@@ -1,9 +1,0 @@
-{
-    "functionName": "test__get_next_tunable_name_normalized_scores",
-    "className": "TestBTBSession",
-    "fileName": "/HDI-Project_&_BTB/tests_&_test_session.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "mock_np_random_choice.return_value = 'test_name'\nselector = MagicMock()\nselector.select.return_value = 'test_name'\ninstance = MagicMock(spec_set=BTBSession)\ninstance._normalized_scores = [('test_name', 0.1), ('second_test_name', 0.2)]\ninstance._selector = selector\ntunable_name = BTBSession._get_next_tunable_name(instance)\nassert tunable_name == 'test_name'\nmock_np_random_choice.assert_not_called()\nselector.select.assert_called_once_with([('test_name', 0.1), (\n    'second_test_name', 0.2)])\npatch('btb.session.np.random.choice')"
-}

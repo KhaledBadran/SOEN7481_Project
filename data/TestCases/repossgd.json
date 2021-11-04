@@ -1,9 +1,0 @@
-{
-    "functionName": "sgd",
-    "className": null,
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_updates.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Stochastic Gradient Descent (SGD) updates\n\n    Generates update expressions of the form:\n\n    * ``param := param - learning_rate * gradient``\n\n    Parameters\n    ----------\n    loss_or_grads : symbolic expression or list of expressions\n        A scalar loss expression, or a list of gradient expressions\n    params : list of shared variables\n        The variables to generate update expressions for\n    learning_rate : float or symbolic scalar\n        The learning rate controlling the size of update steps\n\n    Returns\n    -------\n    OrderedDict\n        A dictionary mapping each parameter to its update expression\n    \"\"\"\ngrads = get_or_compute_grads(loss_or_grads, params)\nupdates = OrderedDict()\nfor param, grad in zip(params, grads):\n    updates[param] = param - learning_rate * grad\nreturn updates\n"
-}

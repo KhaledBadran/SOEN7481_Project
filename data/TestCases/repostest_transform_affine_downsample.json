@@ -1,9 +1,0 @@
-{
-    "functionName": "test_transform_affine_downsample",
-    "className": "TestTransformLayer",
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_special.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "import lasagne\ndownsample = 0.7, 2.3\nx = np.random.random((10, 3, 28, 28)).astype('float32')\nx_sym = theano.tensor.tensor4()\nl_in = lasagne.layers.InputLayer((None, 3, 28, 28))\nl_loc = lasagne.layers.DenseLayer(l_in, num_units=6)\nl_trans = lasagne.layers.TransformerLayer(l_in, l_loc, downsample_factor=\n    downsample)\nassert l_trans.output_shape[0] is None\nassert l_trans.output_shape[1:] == (3, int(28 / 0.7), int(28 / 2.3))\noutput = lasagne.layers.get_output(l_trans, x_sym)\nx_out = output.eval({x_sym: x})\nassert x_out.shape[0] == x.shape[0]\nassert x_out.shape[1:] == l_trans.output_shape[1:]\nl_in = lasagne.layers.InputLayer((None, 3, None, 28))\nl_loc = lasagne.layers.DenseLayer(lasagne.layers.ReshapeLayer(l_in, ([0], 3 *\n    28 * 28)), num_units=6, W=l_loc.W, b=l_loc.b)\nl_trans = lasagne.layers.TransformerLayer(l_in, l_loc, downsample_factor=\n    downsample)\nassert l_trans.output_shape[0] is None\nassert l_trans.output_shape[1] == 3\nassert l_trans.output_shape[2] is None\nassert l_trans.output_shape[3] == int(28 / 2.3)\noutput = lasagne.layers.get_output(l_trans, x_sym)\nx_out2 = output.eval({x_sym: x})\nassert x_out2.shape == x_out.shape\nnp.testing.assert_allclose(x_out2, x_out, rtol=1e-05, atol=1e-05)\n"
-}

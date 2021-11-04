@@ -1,9 +1,0 @@
-{
-    "functionName": "test_publish",
-    "className": "FlaskMQTTTestCase",
-    "fileName": "/MrLeeh_&_Flask-MQTT/tests_&_test_integration.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.mqtt = Mqtt(self.app)\nself.handled_message = False\nself.handled_topic = False\nself.handled_publish = False\n@self.mqtt.on_message()\ndef handle_message(client, userdata, message):\n    self.handled_message = True\n@self.mqtt.on_publish()\ndef handle_publish(client, userdata, mid):\n    self.handled_publish = True\nself.mqtt.subscribe('home/test')\nwait()\nself.mqtt.publish('home/test', 'hello world')\nwait()\nself.assertTrue(self.handled_message)\nself.assertTrue(self.handled_publish)\n"
-}

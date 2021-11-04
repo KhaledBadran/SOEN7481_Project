@@ -1,9 +1,0 @@
-{
-    "functionName": "test_input_commands",
-    "className": "TestInputControl",
-    "fileName": "/supersaiyanmode_&_PyWebOSTV/tests_&_test_controls.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "client = FakeClient()\ninp = InputControl(client, ws_class=FakeMouseClient)\nclient.setup_response(\n    'ssap://com.webos.service.networkinput/getPointerInputSocket', {\n    'socketPath': 'x'})\ninp.connect_input()\ngetattr(inp, command)(*args, block=False, **kwargs)\ninp.disconnect_input()\nsplit = data.split()\nexpected = [(x + ':' + y) for x, y in zip(split[::2], split[1::2])]\ninp.mouse_ws.assert_sent_message('\\n'.join(expected) + '\\n\\n')\nmark.parametrize('command,args,kwargs,data', [('move', [5, 6], {},\n    'type move dx 5 dy 6 down 0'), ('move', [5, 6], {'drag': 1},\n    'type move dx 5 dy 6 down 1'), ('click', [], {}, 'type click'), (\n    'scroll', [5, 6], {}, 'type scroll dx 5 dy 6'), ('left', [], {},\n    'type button name LEFT'), ('right', [], {}, 'type button name RIGHT'),\n    ('down', [], {}, 'type button name DOWN'), ('up', [], {},\n    'type button name UP'), ('home', [], {}, 'type button name HOME'), (\n    'back', [], {}, 'type button name BACK'), ('ok', [], {},\n    'type button name ENTER'), ('dash', [], {}, 'type button name DASH'), (\n    'info', [], {}, 'type button name INFO')])"
-}

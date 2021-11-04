@@ -1,9 +1,0 @@
-{
-    "functionName": "test_wmc1",
-    "className": null,
-    "fileName": "/wannesm_&_PySDD/tests_&_test_wmcstochastic.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "vtree = Vtree(var_count=4, var_order=[2, 1, 4, 3], vtree_type='balanced')\nsdd = SddManager.from_vtree(vtree)\na, b, c, d = [sdd.literal(i) for i in range(1, 5)]\nformula = a & b | b & c | c & d\nif verbose:\n    with open('sdd.dot', 'w') as out:\n        print(formula.dot(), file=out)\nweights = array('d', [0.8, 0.7, 0.6, 0.5, 0.5, 0.4, 0.3, 0.2])\nwmc = WmcManager(formula, log_mode=False)\nprint(f'MC = {wmc.propagate()}')\nwmc.set_literal_weights_from_array(weights)\nwmc_result = wmc.propagate()\nprint(f'WMC-Normal = {wmc_result}')\nwmcs = WmcStochastic(formula, log_mode=False)\nwmcs.set_literal_weights_from_array(weights)\nwmcs_result = wmcs.propagate(bitlength=1000)\nprint(f'WMC-Stochastic = {wmcs_result}')\n"
-}

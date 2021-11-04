@@ -1,9 +1,0 @@
-{
-    "functionName": "test_DataFile_plotNormalization",
-    "className": null,
-    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_DataFile.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "plt.ioff()\nimport matplotlib\nmatplotlib.use('Agg')\nfileName = 'Data/camea2018n000136.hdf'\nfileName2 = 'Data/camea2018n000136.nxs'\nfile = DataFile(fileName)\nassertFile(fileName2)\ntry:\n    file.plotNormalization(binning=20)\n    assert False\nexcept AttributeError:\n    assert True\nfig = file.plotNormalization(1)\nfig2 = file.plotNormalization()\nfile2 = DataFile(fileName2)\ntry:\n    file2.plotNormalization(binning=20)\n    assert False\nexcept AttributeError:\n    assert True\nfile2.plotNormalization(binning=1)\nplt.close('all')\n"
-}

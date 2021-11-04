@@ -1,9 +1,0 @@
-{
-    "functionName": "test_simulation_series",
-    "className": "TestSimulationSeries",
-    "fileName": "/JohnVolk_&_PRMS-Python/test_&_test_prms_python.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "tdd = self.test_model_data_dir\ndata = Data(OPJ(tdd, 'data'))\nbase_parameters = Parameters(OPJ(tdd, 'parameters'))\ndef _copy_mod(base_parameters, val):\n    ret = copy(base_parameters)\n    ret['dday_intcp'][:] = val\n    return ret\nparameters_gen = ((val, _copy_mod(base_parameters, val)) for val in (-50, -\n    40, -30))\ncontrol_path = OPJ(tdd, 'control')\nseries = SimulationSeries(Simulation.from_data(data, parameters,\n    control_path, self.simulation_dir + str(val)) for val, parameters in\n    parameters_gen)\noutputs = list(series.run().outputs_iter())\nself.assertEqual(len(series), 3)\nself.assertEqual(len(outputs), 3)\nfor out in outputs:\n    sdir = out['simulation_dir']\n    assert os.path.isdir(out['simulation_dir'])\n    assert os.path.exists(OPJ(sdir, 'outputs', 'statvar.dat'))\n    assert os.path.exists(OPJ(sdir, 'inputs', 'data'))\n    assert os.path.exists(OPJ(sdir, 'inputs', 'parameters'))\n    shutil.rmtree(sdir)\n"
-}

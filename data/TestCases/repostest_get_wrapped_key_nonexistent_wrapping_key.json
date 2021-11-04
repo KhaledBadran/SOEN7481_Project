@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_wrapped_key_nonexistent_wrapping_key",
-    "className": "TestKmipEngine",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the right error is thrown when key wrapping is requested\n        with a nonexistent wrapping key in a Get request.\n        \"\"\"\ne = engine.KmipEngine()\ne._data_store = self.engine\ne._data_store_session_factory = self.session_factory\ne._data_session = e._data_store_session_factory()\ne._is_allowed_by_operation_policy = mock.Mock(return_value=True)\ne._logger = mock.MagicMock()\ne._cryptography_engine.logger = mock.MagicMock()\nunwrapped_key = pie_objects.SymmetricKey(enums.CryptographicAlgorithm.AES, \n    128, b'\\x00\\x11\"3DUfw\\x88\\x99\\xaa\\xbb\\xcc\\xdd\\xee\\xff', [enums.\n    CryptographicUsageMask.ENCRYPT])\ne._data_session.add(unwrapped_key)\ne._data_session.commit()\ne._data_session = e._data_store_session_factory()\nunwrapped_key_uuid = str(unwrapped_key.unique_identifier)\ncryptographic_parameters = attributes.CryptographicParameters(block_cipher_mode\n    =enums.BlockCipherMode.NIST_KEY_WRAP)\npayload = payloads.GetRequestPayload(unique_identifier=unwrapped_key_uuid,\n    key_wrapping_specification=objects.KeyWrappingSpecification(\n    wrapping_method=enums.WrappingMethod.ENCRYPT,\n    encryption_key_information=objects.EncryptionKeyInformation(\n    unique_identifier='invalid', cryptographic_parameters=\n    cryptographic_parameters), encoding_option=enums.EncodingOption.\n    NO_ENCODING))\nargs = payload,\nself.assertRaisesRegex(exceptions.ItemNotFound,\n    'Wrapping key does not exist.', e._process_get, *args)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test__transform",
-    "className": "CategoricalEncoderTest",
-    "fileName": "/HDI-Project_&_MLPrimitives/tests_&_custom_&_test_feature_extraction.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ce = CategoricalEncoder()\nohle_instance = Mock()\nohle_instance.transform.return_value = pd.DataFrame({'test=a': [1, 0, 1],\n    'test=b': [0, 1, 0]})\nce.encoders = {'test': ohle_instance}\nx = pd.Series(['a', 'b', 'a'], name='test')\nreturned = ce._transform(x)\nexpected = pd.DataFrame({'test=a': [1, 0, 1], 'test=b': [0, 1, 0]})\nassert expected.equals(returned)\nohle_instance.transform.assert_called_once_with(x)\n"
-}

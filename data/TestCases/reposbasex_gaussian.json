@@ -1,9 +1,0 @@
-{
-    "functionName": "basex_gaussian",
-    "className": null,
-    "fileName": "/PyAbel_&_PyAbel/abel_&_tests_&_test_basex.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Check a gaussian solution for BASEX\"\"\"\nn = 100\nr_max = n - 1\nref = GaussianAnalytical(n, r_max, symmetric=False, sigma=30)\ntr = np.tile(ref.abel[(None), :], (n, 1))\ncorrection = cor if isinstance(cor, bool) else False\nAi = abel.basex.get_bs_cached(n, sigma=sigma, reg=reg, correction=\n    correction, basis_dir=None, verbose=False)\nrecon = abel.basex.basex_core_transform(tr, Ai)\nrecon = recon[n // 2 + n % 2]\nref = ref.func\nif cor is not True:\n    recon /= cor\n    cut = int(2 * sigma)\n    recon = recon[cut:]\n    ref = ref[cut:]\nassert_allclose(recon, ref, atol=tol)\n"
-}

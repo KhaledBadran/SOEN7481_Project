@@ -1,9 +1,0 @@
-{
-    "functionName": "test_different_scorer",
-    "className": null,
-    "fileName": "/Menelau_&_DESlib/deslib_&_tests_&_static_&_test_static_selection.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "X, y = make_classification(n_samples=100, random_state=42)\nX_val, y_val = make_classification(n_samples=25, random_state=123)\npool = AdaBoostClassifier(n_estimators=10).fit(X, y)\nperformances = []\nfor clf in pool:\n    preds = clf.predict_proba(X_val)\n    performances.append(log_loss(y_val.ravel(), preds[:, (-1)]))\nid_best = np.argsort(performances)\nss = StaticSelection(pool_classifiers=pool, scoring='neg_log_loss')\nss.fit(X_val, y_val)\nassert (id_best[:ss.n_classifiers_ensemble_] == ss.clf_indices_).all()\n"
-}

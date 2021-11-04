@@ -1,9 +1,0 @@
-{
-    "functionName": "test_mapper_oneD4",
-    "className": "Test_mapper",
-    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_mapper.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "v = 'oneD4'\nconfig = os.path.join(rootDir, 'test_mapper_s7.json')\nnum_qubits = 7\nprog_name = 'test_mapper_' + v\nkernel_name = 'kernel_' + v\nstarmon = ql.Platform('starmon', config)\nprog = ql.Program(prog_name, starmon, num_qubits, 0)\nk = ql.Kernel(kernel_name, starmon, num_qubits, 0)\nk.gate('x', [2])\nk.gate('x', [4])\nk.gate('cnot', [2, 4])\nk.gate('x', [2])\nk.gate('x', [4])\nprog.add_kernel(k)\nprog.compile()\nGOLD_fn = os.path.join(rootDir, 'golden', prog.name + '.qisa')\nQISA_fn = os.path.join(output_dir, prog.name + '.qisa')\nassemble(QISA_fn)\nself.assertTrue(file_compare(QISA_fn, GOLD_fn))\n"
-}

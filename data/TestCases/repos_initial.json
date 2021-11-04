@@ -1,9 +1,0 @@
-{
-    "functionName": "_initial",
-    "className": "Chat",
-    "fileName": "/named-data_&_PyNDN2/examples_&_test_chrono_chat.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        Push the JOIN message in to the messageCache_, update roster\n        and start the heartbeat.\n        \"\"\"\ntimeout = Interest(Name('/local/timeout'))\ntimeout.setInterestLifetimeMilliseconds(60000)\nself._face.expressInterest(timeout, self._dummyOnData, self._heartbeat)\ntry:\n    self._roster.index(self._userName)\nexcept ValueError:\n    self._roster.append(self._userName)\n    print('Member: ' + self._screenName)\n    print(self._screenName + ': Join')\n    self._messageCacheAppend(chatbuf_pb2.ChatMessage.JOIN, 'xxx')\n"
-}

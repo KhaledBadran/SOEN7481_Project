@@ -1,9 +1,0 @@
-{
-    "functionName": "test_inception_v3",
-    "className": "TestApplication",
-    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_keras_&_test_application.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "keras.backend.set_image_dim_ordering('th')\nkmodel = inception_v3.InceptionV3(include_top=False, input_shape=(3, 299, \n    299), weights=None)\ninput_data = np.random.random([2, 3, 299, 299])\nbmodel = DefinitionLoader.from_kmodel(kmodel)\nWeightLoader.load_weights_from_kmodel(bmodel, kmodel)\nkeras_output = kmodel.predict(input_data)\nbmodel.training(is_training=False)\nbigdl_output = bmodel.forward(input_data)\nself.assert_allclose(keras_output, bigdl_output, rtol=0.001, atol=0.001)\n"
-}

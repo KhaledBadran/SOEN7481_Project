@@ -1,9 +1,0 @@
-{
-    "functionName": "test_multiprocess_lock",
-    "className": "TestCase",
-    "fileName": "/IntegralDefense_&_ACE/lib_&_saq_&_test_database.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "alert = self.insert_alert()\nsync0 = Event()\nsync1 = Event()\nsync2 = Event()\ndef p1(alert_id):\n    session = saq.database.DatabaseSession()\n    alert = session.query(Alert).filter(Alert.id == alert_id).one()\n    lock_uuid = acquire_lock(alert.uuid)\n    sync0.set()\n    sync1.wait()\n    release_lock(alert.uuid, lock_uuid)\n    sync2.set()\np = Process(target=p1, args=(alert.id,))\np.start()\ntry:\n    sync0.wait()\n    self.assertTrue(alert.is_locked())\n    self.assertFalse(acquire_lock(alert.uuid))\n    sync1.set()\n    sync2.wait()\n    self.assertFalse(alert.is_locked())\n    lock_uuid = acquire_lock(alert.uuid)\n    self.assertTrue(uuid)\n    self.assertTrue(alert.is_locked())\n    self.assertTrue(release_lock(alert.uuid, lock_uuid))\n    self.assertFalse(alert.is_locked())\n    p.join()\n    p = None\nfinally:\n    if p:\n        p.terminate()\n        p.join()\n"
-}

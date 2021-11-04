@@ -1,9 +1,0 @@
-{
-    "functionName": "test_open_ended_slice",
-    "className": "TestVLA",
-    "fileName": "/Gilnaa_&_Hydras/tests_&_test_array_vla.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class UpperBound(Struct):\n    b = u8[:3]\nself.assertEqual(len(UpperBound.deserialize(b'').b), 0)\nself.assertEqual(len(UpperBound.deserialize(b'\\x00\\x00\\x00').b), 3)\nclass LowerBound(Struct):\n    b = u8[3:]\nself.assertEqual(len(LowerBound.deserialize(b'\\x00\\x00\\x00').b), 3)\nself.assertEqual(len(LowerBound.deserialize(b'\\x00' * 100).b), 100)\nclass Unbound(Struct):\n    b = u8[:]\nself.assertEqual(len(Unbound.deserialize(b'\\x00\\x00\\x00').b), 3)\nself.assertEqual(len(Unbound.deserialize(b'\\x00' * 100).b), 100)\nself.assertEqual(len(Unbound.deserialize(b'').b), 0)\n"
-}

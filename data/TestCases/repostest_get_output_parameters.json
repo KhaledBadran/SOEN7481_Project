@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_output_parameters",
-    "className": null,
-    "fileName": "/PEtab-dev_&_PEtab/tests_&_test_observables.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test measurements.get_output_parameters.\"\"\"\n_, model = minimal_sbml_model\np = model.createParameter()\np.setId('fixedParameter1')\np.setName('FixedParameter1')\np = model.createParameter()\np.setId('observable_1')\np.setName('Observable 1')\nobservable_df = pd.DataFrame(data={OBSERVABLE_ID: ['observable_1'],\n    OBSERVABLE_NAME: ['observable name 1'], OBSERVABLE_FORMULA: [\n    'observable_1 * scaling + offset'], NOISE_FORMULA: [1]}).set_index(\n    OBSERVABLE_ID)\noutput_parameters = petab.get_output_parameters(observable_df, model)\nassert output_parameters == ['offset', 'scaling']\n"
-}

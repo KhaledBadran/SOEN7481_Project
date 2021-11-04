@@ -1,9 +1,0 @@
-{
-    "functionName": "test_score_unknown_features_default",
-    "className": "TestCBRW",
-    "fileName": "/dkaslovsky_&_Coupled-Biased-Random-Walks/tests_&_test_detect.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.cbrw.fit()\nto_be_scored = {'feature_a': 'a_val_x', 'feature_b': 'b_val_1', 'feature_c':\n    'c_val_1'}\nscore = self.cbrw.score(to_be_scored)\nself.assertTrue(isnan(score[0]))\nto_be_scored = {'feature_x': 'x_val_x', 'feature_b': 'b_val_1', 'feature_c':\n    'c_val_1'}\nscore = self.cbrw.score(to_be_scored)\nself.assertTrue(isnan(score[0]))\nto_be_scored = [self.observations[0], {'feature_x': 'x_val_x', 'feature_b':\n    'b_val_1'}]\nscores = self.cbrw.score(to_be_scored)\nvalid_score = scores[0]\ninvalid_score = scores[1]\nself.assertFalse(isnan(valid_score))\nself.assertGreaterEqual(valid_score, 0)\nself.assertLessEqual(valid_score, 1)\nself.assertTrue(isnan(invalid_score))\n"
-}

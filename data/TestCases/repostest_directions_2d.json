@@ -1,9 +1,0 @@
-{
-    "functionName": "test_directions_2d",
-    "className": "TestVariogramstructured",
-    "fileName": "/GeoStat-Framework_&_GSTools/tests_&_test_variogram_structured.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "x = np.linspace(0.0, 20.0, 100)\ny = np.linspace(0.0, 15.0, 80)\nrng = np.random.RandomState(1479373475)\nx_rand = rng.rand(len(x))\ny_rand = rng.rand(len(y))\nfield_x = np.tile(x_rand, (len(y), 1)).T\nfield_y = np.tile(y_rand, (len(x), 1))\ngamma_x_x = variogram.vario_estimate_structured(field_x, direction='x')\ngamma_x_y = variogram.vario_estimate_structured(field_x, direction='y')\ngamma_y_x = variogram.vario_estimate_structured(field_y, direction='x')\ngamma_y_y = variogram.vario_estimate_structured(field_y, direction='y')\nself.assertAlmostEqual(gamma_x_y[1], 0.0)\nself.assertAlmostEqual(gamma_x_y[len(gamma_x_y) // 2], 0.0)\nself.assertAlmostEqual(gamma_x_y[-1], 0.0)\nself.assertAlmostEqual(gamma_y_x[1], 0.0)\nself.assertAlmostEqual(gamma_y_x[len(gamma_x_y) // 2], 0.0)\nself.assertAlmostEqual(gamma_y_x[-1], 0.0)\n"
-}

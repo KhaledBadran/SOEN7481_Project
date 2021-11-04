@@ -1,9 +1,0 @@
-{
-    "functionName": "test_modify_storage_group",
-    "className": "PyU4VProvisioningTest",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test modify_storage_group.\"\"\"\nstorage_group_id = self.data.storagegroup_name\nref_payload = dict()\nwith mock.patch.object(self.provisioning, 'modify_resource') as mock_mod:\n    self.provisioning.modify_storage_group(storage_group_id, ref_payload)\n    mock_mod.assert_called_once_with(category=constants.SLOPROVISIONING,\n        resource_level=constants.SYMMETRIX, resource_level_id=self.data.\n        array, resource_type=constants.STORAGEGROUP, resource_type_id=\n        storage_group_id, payload=ref_payload)\nref_result = self.data.job_list[0]\nact_result = self.provisioning.modify_storage_group(storage_group_id,\n    ref_payload)\nself.assertEqual(ref_result, act_result)\n"
-}

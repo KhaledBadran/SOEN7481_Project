@@ -1,9 +1,0 @@
-{
-    "functionName": "test_equal_on_not_equal_mac_signature_key_information",
-    "className": "TestKeyWrappingSpecification",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the equality operator returns False when comparing two\n        KeyWrappingSpecification structs with different MAC/signature key\n        information.\n        \"\"\"\na = objects.KeyWrappingSpecification(mac_signature_key_information=objects.\n    MACSignatureKeyInformation(unique_identifier=\n    '100182d5-72b8-47aa-8383-4d97d512e98a', cryptographic_parameters=\n    attributes.CryptographicParameters(block_cipher_mode=enums.\n    BlockCipherMode.NIST_KEY_WRAP)))\nb = objects.KeyWrappingSpecification(mac_signature_key_information=objects.\n    MACSignatureKeyInformation(unique_identifier=\n    '100182d5-72b8-ffff-8383-4d97d512e98a', cryptographic_parameters=\n    attributes.CryptographicParameters(block_cipher_mode=enums.\n    BlockCipherMode.CBC)))\nself.assertFalse(a == b)\nself.assertFalse(b == a)\n"
-}

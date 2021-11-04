@@ -1,9 +1,0 @@
-{
-    "functionName": "_handle_process",
-    "className": "ProcessHandler",
-    "fileName": "/PRIArobotics_&_HedgehogServer/hedgehog_&_server_&_handlers_&_process.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "proc = await trio_asyncio.aio_as_trio(asyncio.create_subprocess_exec)(*msg.\n    args, stdin=asyncio.subprocess.PIPE, stdout=asyncio.subprocess.PIPE,\n    stderr=asyncio.subprocess.PIPE, cwd=msg.working_dir)\npid = proc.pid\nself._processes[pid] = proc\ntask_status.started(pid)\nasync with trio.open_nursery() as nursery:\n\n    async def handle_stream(fileno, file):\n        while True:\n            chunk = await trio_asyncio.aio_as_trio(file.read)(4096)\n            async with server.job():\n                await server.send_async(ident, process.StreamUpdate(pid,\n                    fileno, chunk))\n            if chunk == b'':\n                break\n    nursery.start_soon(handle_stream, process.STDOUT, proc.stdout)\n    nursery.start_soon(handle_stream, process.STDERR, proc.stderr)\nexit_code = await trio_asyncio.aio_as_trio(proc.wait)()\ntry:\n    async with server.job():\n        await server.send_async(ident, process.ExitUpdate(pid, exit_code))\nfinally:\n    del self._processes[pid]\n"
-}

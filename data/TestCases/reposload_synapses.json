@@ -1,9 +1,0 @@
-{
-    "functionName": "load_synapses",
-    "className": null,
-    "fileName": "/seung-lab_&_DynamicAnnotationDB/dynamicannotationdb_&_synapse_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Cheap test scenario using real synapses \"\"\"\ndf = pd.read_csv(path)\nsv_ids = np.array(df[['presyn_segid', 'postsyn_segid']])\ndata = np.array(df)\nmask = ~np.any(np.isnan(sv_ids), axis=1)\nsv_ids = sv_ids[mask].astype(np.uint64)\ndata = data[mask]\nannotations = [(sv_ids[i], data[i].tobytes()) for i in range(len(data))]\nreturn annotations\n"
-}

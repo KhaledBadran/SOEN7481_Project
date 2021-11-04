@@ -1,9 +1,0 @@
-{
-    "functionName": "test_nM_tinker_crit",
-    "className": null,
-    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_hmfunc.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "a = 0.5\nom = ccl.omega_x(COSMO, a, 'matter')\noc = ccl.omega_x(COSMO, a, 'critical')\ndelta_c = 500.0\ndelta_m = delta_c * oc / om\nmdef_c = ccl.halos.MassDef(delta_c, 'critical')\nmdef_m = ccl.halos.MassDef(delta_m, 'matter')\nnM_c = mf(COSMO, mdef_c)\nnM_m = mf(COSMO, mdef_m)\nassert np.allclose(nM_c.get_mass_function(COSMO, 10000000000000.0, a), nM_m\n    .get_mass_function(COSMO, 10000000000000.0, a))\npytest.mark.parametrize('mf', [ccl.halos.MassFuncTinker08, ccl.halos.\n    MassFuncTinker10])"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_output_for_ignoreborder",
-    "className": "TestMaxPool3DNNLayer",
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_pool.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "try:\n    input = floatX(np.random.randn(5, 8, 16, 17, 13))\n    input_layer = self.input_layer(input.shape)\n    input_theano = theano.shared(input)\n    result = self.layer(input_layer, pool_size, stride, pad).get_output_for(\n        input_theano)\n    result_eval = result.eval()\n    numpy_result = max_pool_3d_ignoreborder(input, [pool_size] * 3, [stride\n        ] * 3, [pad] * 3)\n    assert np.all(numpy_result.shape == result_eval.shape)\n    assert np.allclose(result_eval, numpy_result)\nexcept NotImplementedError:\n    pytest.skip()\npytest.mark.parametrize('pool_size, stride, pad', list(\n    pool_test_sets_ignoreborder()))"
-}

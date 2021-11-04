@@ -1,9 +1,0 @@
-{
-    "functionName": "test_fit_and_transform_categorical",
-    "className": "TestFeatureBinarizerFromTrees",
-    "fileName": "/IBM_&_AIX360/tests_&_rbm_&_test_Feature_Binarizer_From_Trees.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "fbt = FeatureBinarizerFromTrees(treeNum=1, treeDepth=1, colCateg=self.\n    col_categorical, randomState=self.random_state)\nfbt.fit(self.X_train[self.col_categorical], self.y_train)\nself.assertListEqual(list(fbt.enc.keys()), [self.col_categorical[1]])\nself.assertTrue(type(list(fbt.enc.values())[0]) is OneHotEncoder)\ntemp = [('cat num', '!=', 0), ('cat num', '==', 0)]\nself.assertListEqual(fbt.features.to_list(), temp)\nT = fbt.transform(self.X_test)\nself.assertListEqual(T.columns.to_list(), temp)\nfbt = FeatureBinarizerFromTrees(treeNum=1, treeDepth=None, colCateg=self.\n    col_categorical, randomState=self.random_state)\nfbt.fit(self.X_train[self.col_categorical], self.y_train)\nself.assertListEqual(self.col_categorical, fbt.colCateg)\nself.assertListEqual(self.col_categorical, list(fbt.enc.keys()))\ntemp = [('cat alpha', '!=', 'a'), ('cat alpha', '!=', 'c'), ('cat alpha',\n    '==', 'a'), ('cat alpha', '==', 'c'), ('cat num', '!=', 0), ('cat num',\n    '!=', 2), ('cat num', '==', 0), ('cat num', '==', 2)]\nself.assertListEqual(fbt.features.to_list(), temp)\nT = fbt.transform(self.X_test)\nself.assertListEqual(T.columns.to_list(), temp)\na = T['cat alpha', '==', 'a'].to_numpy()\nb = (self.X_test['cat alpha'] == 'a').astype(int).to_numpy()\nself.assertTrue(np.all(a == b))\na = T['cat alpha', '!=', 'a'].to_numpy()\nb = 1 - b\nself.assertTrue(np.all(a == b))\na = T['cat num', '==', 2].to_numpy()\nb = (self.X_test['cat num'] == 2).astype(int).to_numpy()\nself.assertTrue(np.all(a == b))\na = T['cat num', '!=', 2].to_numpy()\nb = 1 - b\nself.assertTrue(np.all(a == b))\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "doSyncObjAdminTicks",
-    "className": null,
-    "fileName": "/bakwc_&_PySyncObj/test_syncobj.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "objThreads = []\nutilityThreads = []\nfor o in objects:\n    t1 = threading.Thread(target=singleTickFunc, args=(o, timeToTick,\n        interval, stopFunc))\n    t1.start()\n    objThreads.append(t1)\n    if arguments.get(o) is not None:\n        t2 = threading.Thread(target=utilityTickFunc, args=(arguments[o],\n            currRes, o, timeToTick))\n        t2.start()\n        utilityThreads.append(t2)\nfor t in objThreads:\n    t.join()\nfor t in utilityThreads:\n    t.join()\n"
-}

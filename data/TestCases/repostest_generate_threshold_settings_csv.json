@@ -1,9 +1,0 @@
-{
-    "functionName": "test_generate_threshold_settings_csv",
-    "className": "PyU4VPerformanceTest",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_performance.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test generate_threshold_settings_csv.\"\"\"\ndata_for_csv = list()\ndata_for_csv.append([pc.CATEGORY, pc.METRIC, pc.FIRST_THRESH, pc.SEC_THRESH,\n    pc.ALERT_ERR, pc.KPI])\nthreshold_settings = self.p_data.threshold_settings_resp.get(pc.PERF_THRESH)\nfor threshold in threshold_settings:\n    category = pc.ARRAY\n    data_for_csv.append([category, threshold.get(pc.METRIC), threshold.get(\n        pc.FIRST_THRESH), threshold.get(pc.SEC_THRESH), threshold.get(pc.\n        ALERT_ERR), threshold.get(pc.KPI)])\nwith mock.patch.object(file_handler, 'write_to_csv_file') as mck_write:\n    self.perf.generate_threshold_settings_csv(output_csv_path='fake_csv')\n    mck_write.assert_called_once_with('fake_csv', data_for_csv)\n"
-}

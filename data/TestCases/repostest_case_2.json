@@ -1,9 +1,0 @@
-{
-    "functionName": "test_case_2",
-    "className": null,
-    "fileName": "/david-leon_&_Dandelion/test_&_test_spatial_pyramid_pooling.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "import numpy as np\nfrom lasagne_ext.utils import get_layer_by_name\nnp.random.seed(0)\npyramid_dims = [4]\nmodel_D = build_model_D_2(pyramid_dims=pyramid_dims)\nmodel_L = build_model_L_2(pyramid_dims=pyramid_dims)\nX = get_layer_by_name(model_L, 'input0').input_var\ny_D = model_D.forward(X)\nfn_D = theano.function([X], y_D, no_default_updates=True, on_unused_input=\n    'ignore')\nx = np.array([[[[0.1, 0.2], [0.3, 0.4]]]])\nx = x.astype(np.float32)\ny = fn_D(x)\ny_expect = np.array([[[[0.1, 0.1, 0.2, 0.2], [0.1, 0.1, 0.2, 0.2], [0.3, \n    0.3, 0.4, 0.4], [0.3, 0.3, 0.4, 0.4]]]])\ny_expect = y_expect.astype(np.float32)\ny_expect = y_expect.reshape((1, 1, -1))\ndiff = np.max(np.abs(y - y_expect))\nprint('diff=%0.6f' % diff)\nif diff > 0.0001:\n    raise ValueError('diff is too big')\nx = np.array([[[[0.7, 0.2, 0.3], [0.5, 0.6, 0.4], [0.1, 0.9, 0.8]]]])\nx = x.astype(np.float32)\ny = fn_D(x)\ny_expect = np.array([[[[0.7, 0.7, 0.3, 0.3], [0.7, 0.7, 0.6, 0.4], [0.5, \n    0.9, 0.9, 0.8], [0.1, 0.9, 0.9, 0.8]]]])\ny_expect = y_expect.astype(np.float32)\ny_expect = y_expect.reshape((1, 1, -1))\ndiff = np.max(np.abs(y - y_expect))\nprint('diff=%0.6f' % diff)\nif diff > 0.0001:\n    raise ValueError('diff is too big')\n"
-}

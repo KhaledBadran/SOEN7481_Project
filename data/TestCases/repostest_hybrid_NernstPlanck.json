@@ -1,9 +1,0 @@
-{
-    "functionName": "test_hybrid_NernstPlanck",
-    "className": "NernstPlanckTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_NernstPlanckTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "mod = op.models.physics.ad_dif_mig_conductance.ad_dif_mig\nself.phys.add_model(propname='throat.ad_dif_mig_conductance_hybrid', model=\n    mod, s_scheme='hybrid', ion='ionX')\nself.phys.regenerate_models()\nself.adm.setup(conductance='throat.ad_dif_mig_conductance_hybrid')\nself.adm.run()\nx = [0.0, 0.0, 0.0, 1.29501, 1.84357, 2.86142, 1.58876, 1.93152, 2.47971, \n    2.0, 2.0, 2.0]\ny = np.around(self.adm['pore.concentration.ionX'], decimals=5)\nassert_allclose(actual=y, desired=x)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_ips",
-    "className": null,
-    "fileName": "/CyberReboot_&_NetworkML/tests_&_test_funcs_host.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "instance = HostBase()\nfor ipv, ipb, srcip, dstip, ip_flags in ((4, 'ip', ipaddress.ip_address(\n    '192.168.0.1'), ipaddress.ip_address('192.168.0.2'), (1, 0)), (6,\n    'ipv6', ipaddress.ip_address('fc01::1'), ipaddress.ip_address('fc01::2'\n    ), (1, 0)), (4, 'ip', ipaddress.ip_address('192.168.0.1'), ipaddress.\n    ip_address('8.8.8.8'), (0, 0)), (6, 'ipv6', ipaddress.ip_address(\n    'fc01::1'), ipaddress.ip_address('2001:4860:4860::8888'), (0, 0)), (4,\n    'ip', ipaddress.ip_address('192.168.0.1'), ipaddress.ip_address(\n    '224.0.0.1'), (0, 1))):\n    row = nan_row_dict({'ip.version': ipv, ('%s.src' % ipb): str(int(srcip)\n        ), ('%s.dst' % ipb): str(int(dstip))})\n    assert instance._get_src_ip(row) == srcip\n    assert instance._get_dst_ip(row) == dstip\n    assert instance._df_ip_flags(srcip, dstip) == ip_flags\n"
-}

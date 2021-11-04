@@ -1,9 +1,0 @@
-{
-    "functionName": "draw_fill_values",
-    "className": null,
-    "fileName": "/PTB-PSt1_&_PyDynamic/test_&_test_interpolate.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Little helper to find proper strategy for efficient testing.\n\n        Parameters\n        ----------\n            strategy_spec : str\n                String specifying the desired strategy for drawing a fill_value. One of\n                \"float\", \"tuple\", \"str\", \"nan\" to guarantee either a float, a tuple of\n                two floats, the string \"extrapolate\" or np.nan.\n\n        Returns\n        -------\n            The drawn sample to match desired fill_value.\n        \"\"\"\nfloat_strategy = st.floats(**float_generic_params)\ntuple_strategy = st.tuples(float_strategy, float_strategy)\nstring_strategy = st.just('extrapolate')\nnan_strategy = st.just(np.nan)\nif strategy_spec == 'float':\n    fill_strategy = float_strategy\nelif strategy_spec == 'tuple':\n    fill_strategy = tuple_strategy\nelif strategy_spec == 'str':\n    fill_strategy = string_strategy\nelif strategy_spec == 'nan':\n    fill_strategy = nan_strategy\nelse:\n    fill_strategy = st.one_of(float_strategy, tuple_strategy,\n        string_strategy, nan_strategy)\nreturn draw(fill_strategy)\n"
-}

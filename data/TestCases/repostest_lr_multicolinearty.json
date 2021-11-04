@@ -1,9 +1,0 @@
-{
-    "functionName": "test_lr_multicolinearty",
-    "className": "DiscreteMNLMultinomialTests",
-    "fileName": "/Mogeng_&_IOHMM/tests_&_test_DiscreteMNL.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.model_col = DiscreteMNL(solver='lbfgs', fit_intercept=True, est_stderr\n    =True, reg_method='l2', alpha=0, l1_ratio=0, tol=0.0001, max_iter=100,\n    coef=None, stderr=None, classes=None)\nX = np.hstack([self.data_anes96.exog[:, 0:1], self.data_anes96.exog[:, 0:1]])\nself.model_col.fit(X, self.data_anes96.endog, sample_weight=0.5)\nself.model = DiscreteMNL(solver='lbfgs', fit_intercept=True, est_stderr=\n    True, reg_method='l2', alpha=0, l1_ratio=0, tol=0.0001, max_iter=100,\n    coef=None, stderr=None, classes=None)\nself.model.fit(self.data_anes96.exog[:, 0:1], self.data_anes96.endog,\n    sample_weight=0.5)\nnp.testing.assert_array_almost_equal(self.model_col.loglike_per_sample(X,\n    self.data_anes96.endog), self.model.loglike_per_sample(self.data_anes96\n    .exog[:, 0:1], self.data_anes96.endog), decimal=3)\nnp.testing.assert_array_almost_equal(self.model_col.predict(X), self.model.\n    predict(self.data_anes96.exog[:, 0:1]), decimal=3)\n"
-}

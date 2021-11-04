@@ -1,9 +1,0 @@
-{
-    "functionName": "test_select_batch",
-    "className": null,
-    "fileName": "/Menelau_&_DESlib/deslib_&_tests_&_des_&_test_des_knn.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test case: 10 base classifiers; select 5 based on accuracy,\n    then the 3 most diverse.\n    accuracies (/10): 4 6 1 2 9 8 7 9 3 2\n        (should select indices_ 1, 4, 5, 6, 7)\n    diversity:        0 8 0 0 1 6 7 2 0 0\n        (should select indices_ 1, 5, 6 as most diverse)\n\n    \"\"\"\nn_samples = 10\npool_classifiers = [create_base_classifier(1) for _ in range(10)]\naccuracies = np.tile([4, 6, 1, 2, 9, 8, 7, 9, 3, 2], (n_samples, 1)) / 10.0\ndiversity = np.tile([0, 8, 0, 0, 1, 6, 7, 2, 0, 0], (n_samples, 1))\ntarget = DESKNN(pool_classifiers, k=7, pct_accuracy=5.0 / 10, pct_diversity\n    =3.0 / 10)\ntarget.N_ = 5\ntarget.J_ = 3\nselected_classifiers = target.select(accuracies, diversity)\nexpected = np.tile([1, 5, 6], (n_samples, 1))\nassert np.array_equal(np.unique(selected_classifiers), np.unique(expected))\n"
-}

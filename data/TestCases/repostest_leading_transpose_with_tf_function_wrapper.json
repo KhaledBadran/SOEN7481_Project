@@ -1,9 +1,0 @@
-{
-    "functionName": "test_leading_transpose_with_tf_function_wrapper",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_conditionals_&_test_util.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Check that no warnings are thrown when compiling `leading_transpose` \"\"\"\ndims = [1, 2, 3, 4]\na = tf.zeros(dims)\n@tf.function\ndef compiled_wrapper():\n    return leading_transpose(a, [..., -1, -2])\ncompiled_wrapper()\nlog_message_levels = [record.levelname for record in caplog.records]\nassert 'WARNING' not in log_message_levels\n"
-}

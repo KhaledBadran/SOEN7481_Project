@@ -1,9 +1,0 @@
-{
-    "functionName": "test_object_get_all_properties",
-    "className": null,
-    "fileName": "/ocaballeror_&_Lyricfetch/lyricfetch_&_tests_&_test_dbusobject.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Get all properties from a dbus object.\n    \"\"\"\ninterface = 'com.example.interface1'\nobject_path = 'com.example.object'\naddr = DBusAddress('/path', object_path, interface=interface)\ndbus_service.set_property(addr.object_path, 'prop0', 's', 'hello0', addr.\n    interface)\ndbus_service.set_property(addr.object_path, 'prop1', 's', 'hello1', addr.\n    interface)\ndbus_service.set_property(addr.object_path, 'prop2', 's', 'hello2', addr.\n    interface)\ndbus_service.listen()\nconn = connect_and_authenticate()\nresponse = conn.send_and_get_reply(Properties(addr).get_all())\nassert response == ([('prop0', ('s', 'hello0')), ('prop1', ('s', 'hello1')),\n    ('prop2', ('s', 'hello2'))],)\npytest.mark.parametrize('dbus_service', ['com.example.object'], indirect=True)"
-}

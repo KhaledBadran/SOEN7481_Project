@@ -1,9 +1,0 @@
-{
-    "functionName": "test_hansenlaw_inverse_transform_gaussian",
-    "className": null,
-    "fileName": "/PyAbel_&_PyAbel/abel_&_tests_&_test_hansenlaw.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Check hansenlaw inverse transform with a Gaussian function\"\"\"\nn = 1001\nr_max = 501\nref = abel.tools.analytical.GaussianAnalytical(n, r_max, symmetric=False,\n    sigma=200)\ntr = np.tile(ref.abel[(None), :], (n, 1))\nrecon = abel.hansenlaw.hansenlaw_transform(tr, ref.dr, direction='inverse')\nrecon1d = recon[n // 2]\nratio = abel.benchmark.absolute_ratio_benchmark(ref, recon1d)\nassert_allclose(ratio, 1.0, rtol=0.1, atol=0)\n"
-}

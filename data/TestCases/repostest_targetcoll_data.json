@@ -1,9 +1,0 @@
-{
-    "functionName": "test_targetcoll_data",
-    "className": "TestTarget",
-    "fileName": "/apmoore1_&_Bella/tests_&_test_data_types.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test the data function of TargetCollection\n        \"\"\"\ntarget_col = TargetCollection()\ntarget_example_0 = Target([(3, 5), (6, 8)], '1', 'Iphone',\n    'text with Iphone', 1)\ntarget_example_1 = Target([(1, 5)], '3', 'Iphone', 'text with Iphone', 1)\ntarget_col.add(target_example_0)\ntarget_col.add(target_example_1)\nall_data = target_col.data()\nself.assertEqual(target_example_0, all_data[0], msg=\n    'First data returned should be the first inserted {} and not {}'.format\n    (target_example_0, all_data[0]))\nself.assertEqual(target_example_1, all_data[1], msg=\n    'Second data returned should be the second inserted {} and not {}'.\n    format(target_example_1, all_data[1]))\ntarget_example_2 = Target([(1, 2)], '2', 'Iphone', 'text with Iphone', 1)\ndel target_col['1']\ntarget_col.add(target_example_2)\nall_data = target_col.data()\nself.assertEqual(target_example_1, all_data[0], msg=\n    'First data returned should be the second inserted {} and not {} as the first has been removed'\n    .format(target_example_1, all_data[0]))\nself.assertEqual(target_example_2, all_data[1], msg=\n    'Second data returned should be the third inserted {} and not {} as the first has been removed'\n    .format(target_example_2, all_data[1]))\nself.assertEqual(2, len(all_data), msg=\n    'The length of the data returnedshoudl be 2 and not {}'.format(len(\n    all_data)))\n"
-}

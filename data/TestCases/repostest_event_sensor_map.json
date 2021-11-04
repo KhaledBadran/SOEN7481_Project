@@ -1,9 +1,0 @@
-{
-    "functionName": "test_event_sensor_map",
-    "className": "TestDsi",
-    "fileName": "/BciPy_&_BciPy/bcipy_&_acquisition_&_tests_&_protocols_&_dsi_&_test_dsi.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test encoding/decoding list of channels\"\"\"\nchannels = (\n    u'P3,C3,F3,Fz,F4,C4,P4,Cz,CM,A1,Fp1,Fp2,T3,T5,O1,O2,X3,X2,F7,F8,X1,A2,T6,T4,TRG'\n    .encode('ascii', 'ignore'))\nevent_code_bytes, sending_node_bytes, msg_len_bytes, msg_bytes = 4, 4, 4, len(\n    channels) * 4\npayload_length = sum([event_code_bytes, sending_node_bytes, msg_len_bytes,\n    msg_bytes])\nparams = dict(type='EVENT', payload_length=payload_length, number=13,\n    event_code='SENSOR_MAP', sending_node=33, message_length=len(channels),\n    message=channels)\nexpected = (\n    b'@ABCD\\x05\\x01@\\x00\\x00\\x00\\r\\x00\\x00\\x00\\t\\x00\\x00\\x00!\\x00\\x00\\x00MP3,C3,F3,Fz,F4,C4,P4,Cz,CM,A1,Fp1,Fp2,T3,T5,O1,O2,X3,X2,F7,F8,X1,A2,T6,T4,TRG'\n    )\nresult = dsi.packet.build(params)\nself.assertEqual(result, expected)\nparsed = dsi.packet.parse(expected)\nchannel_names = parsed.message.split(',')\nself.assertEqual(len(channel_names), 25)\n"
-}

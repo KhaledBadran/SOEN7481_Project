@@ -1,9 +1,0 @@
-{
-    "functionName": "test_revoke_missing_revocation_reason",
-    "className": "TestKmipEngine",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the right error is generated when a revocation request is\n        received with a missing revocation reason.\n        \"\"\"\ne = engine.KmipEngine()\ne._data_store = self.engine\ne._data_store_session_factory = self.session_factory\ne._data_session = e._data_store_session_factory()\ne._is_allowed_by_operation_policy = mock.Mock(return_value=True)\ne._logger = mock.MagicMock()\nmanaged_object = pie_objects.SymmetricKey(enums.CryptographicAlgorithm.AES,\n    0, b'')\ne._data_session.add(managed_object)\ne._data_session.commit()\ne._data_session = e._data_store_session_factory()\nself.assertEqual(enums.State.PRE_ACTIVE, managed_object.state)\nobject_id = str(managed_object.unique_identifier)\ndate = primitives.DateTime(tag=enums.Tags.COMPROMISE_OCCURRENCE_DATE, value=6)\npayload = payloads.RevokeRequestPayload(unique_identifier=attributes.\n    UniqueIdentifier(object_id), revocation_reason=None,\n    compromise_occurrence_date=date)\npayload.revocation_reason = None\nargs = payload,\nself.assertRaisesRegex(exceptions.InvalidField,\n    'revocation reason code must be specified', e._process_revoke, *args)\n"
-}

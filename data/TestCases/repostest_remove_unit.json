@@ -1,9 +1,0 @@
-{
-    "functionName": "test_remove_unit",
-    "className": "TestStats",
-    "fileName": "/SimGus_&_Chatette/tests_&_unit-testing_&_test_statistics.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "instance = Stats.reset_instance()\nassert instance.nb_units_declared == 0\nassert instance.nb_intents_declared == 0\nassert instance.nb_slots_declared == 0\nassert instance.nb_aliases_declared == 0\ninstance.new_unit_declared(UnitType.alias)\ninstance.one_unit_removed(UnitType.alias)\nassert instance.nb_units_declared == 0\nassert instance.nb_aliases_declared == 0\ninstance.new_unit_declared(UnitType.slot)\ninstance.one_unit_removed(UnitType.slot)\nassert instance.nb_units_declared == 0\nassert instance.nb_slots_declared == 0\ninstance.new_unit_declared(UnitType.intent)\ninstance.one_unit_removed(UnitType.intent)\nassert instance.nb_units_declared == 0\nassert instance.nb_intents_declared == 0\nwith pytest.raises(TypeError):\n    instance.one_unit_removed('invalid')\nwith pytest.raises(InvalidStatsState):\n    instance.one_unit_removed(UnitType.alias)\nwith pytest.raises(InvalidStatsState):\n    instance.one_unit_removed(UnitType.slot)\nwith pytest.raises(InvalidStatsState):\n    instance.one_unit_removed(UnitType.intent)\ninstance.new_unit_declared(UnitType.alias)\ninstance.nb_aliases_declared = 0\nwith pytest.raises(InvalidStatsState):\n    instance.one_unit_removed(UnitType.alias)\ninstance.new_unit_declared(UnitType.slot)\ninstance.nb_slots_declared = 0\nwith pytest.raises(InvalidStatsState):\n    instance.one_unit_removed(UnitType.slot)\ninstance.new_unit_declared(UnitType.intent)\ninstance.nb_intents_declared = 0\nwith pytest.raises(InvalidStatsState):\n    instance.one_unit_removed(UnitType.intent)\n"
-}

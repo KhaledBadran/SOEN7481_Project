@@ -1,9 +1,0 @@
-{
-    "functionName": "test_mac_on_operation_failure",
-    "className": "TestProxyKmipClient",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_test_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a KmipOperationFailure exception is raised when the\n        backend fails to generate MAC.\n        \"\"\"\nuuid = 'aaaaaaaa-1111-2222-3333-ffffffffffff'\nalgorithm = enums.CryptographicAlgorithm.HMAC_SHA256\ndata = b'\\x00\\x01\\x02\\x03\\x04'\nstatus = enums.ResultStatus.OPERATION_FAILED\nreason = enums.ResultReason.GENERAL_FAILURE\nmessage = 'Test failure message'\nresult = results.OperationResult(contents.ResultStatus(status), contents.\n    ResultReason(reason), contents.ResultMessage(message))\nerror_msg = str(KmipOperationFailure(status, reason, message))\nclient = ProxyKmipClient()\nclient.open()\nclient.proxy.mac.return_value = result\nargs = [data, uuid, algorithm]\nself.assertRaisesRegex(KmipOperationFailure, error_msg, client.mac, *args)\nmock.patch('kmip.pie.client.KMIPProxy', mock.MagicMock(spec_set=KMIPProxy))"
-}

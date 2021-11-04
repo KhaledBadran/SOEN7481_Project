@@ -1,9 +1,0 @@
-{
-    "functionName": "test_supervised_consumer",
-    "className": null,
-    "fileName": "/Drakkar-Software_&_OctoBot-Channels/tests_&_test_consumer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class TestSupervisedConsumer(SupervisedConsumer):\n    pass\nclass TestChannel(Channel):\n    PRODUCER_CLASS = EmptyTestProducer\n    CONSUMER_CLASS = TestSupervisedConsumer\ndel_chan(TEST_CHANNEL)\nawait create_channel_instance(TestChannel, set_chan)\nproducer = EmptyTestProducer(get_chan(TEST_CHANNEL))\nawait producer.run()\nconsumer = await get_chan(TEST_CHANNEL).new_consumer(empty_test_callback)\nawait get_chan(TEST_CHANNEL).get_internal_producer().send({})\nawait consumer.queue.join()\nawait get_chan(TEST_CHANNEL).stop()\npytest.mark.asyncio"
-}

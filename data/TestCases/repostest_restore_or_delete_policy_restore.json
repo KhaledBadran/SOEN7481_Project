@@ -1,9 +1,0 @@
-{
-    "functionName": "test_restore_or_delete_policy_restore",
-    "className": "TestPolicyDirectoryMonitor",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_monitor.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the PolicyDirectoryMonitor can correctly restore policy data\n        upon a policy file change.\n        \"\"\"\nm = monitor.PolicyDirectoryMonitor(self.tmp_dir, multiprocessing.Manager().\n    dict())\nm.logger = mock.MagicMock(logging.Logger)\nm.policy_cache = {'policy_A': [(1480043060.870089, os.path.join(self.\n    tmp_dir, 'policy_1.json'), {'{\"policy_1\"}'}), (1480043062.02171, os.\n    path.join(self.tmp_dir, 'policy_2.json'), {'{\"policy_2\"}'}), (\n    1480043063.453713, os.path.join(self.tmp_dir, 'policy_3.json'), {\n    '{\"policy_3\"}'})]}\nm.policy_store['policy_A'] = {'{\"policy_4\"}'}\nm.policy_map['policy_A'] = os.path.join(self.tmp_dir, 'policy_4.json')\nm.restore_or_delete_policy('policy_A')\nm.logger.info.assert_not_called()\nself.assertEqual([(1480043060.870089, os.path.join(self.tmp_dir,\n    'policy_1.json'), {'{\"policy_1\"}'}), (1480043062.02171, os.path.join(\n    self.tmp_dir, 'policy_2.json'), {'{\"policy_2\"}'})], m.policy_cache.get(\n    'policy_A', []))\nself.assertEqual({'{\"policy_3\"}'}, m.policy_store.get('policy_A', {}))\nself.assertEqual(os.path.join(self.tmp_dir, 'policy_3.json'), m.policy_map.\n    get('policy_A', None))\n"
-}

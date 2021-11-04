@@ -1,9 +1,0 @@
-{
-    "functionName": "test_audit_log_splunk_properties_cancel",
-    "className": "TestEnterprise",
-    "fileName": "/Keeper-Security_&_Commander/unit-tests_&_test_command_enterprise.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "splunk = enterprise.AuditLogSplunkExport()\nprops = {}\nrecord = Record()\nwith mock.patch('builtins.print'), mock.patch('builtins.input'\n    ) as mock_input, mock.patch('requests.post') as mock_post:\n    resp1 = mock.Mock()\n    resp1.status_code = 404\n    mock_input.side_effect = ['www.splunk.com', KeyboardInterrupt()]\n    mock_post.side_effect = [resp1, Exception()]\n    with self.assertRaises(KeyboardInterrupt):\n        splunk.get_properties(record, props)\n"
-}

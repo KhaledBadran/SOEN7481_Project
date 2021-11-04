@@ -1,9 +1,0 @@
-{
-    "functionName": "test_derive_key_using_pbkdf2",
-    "className": "TestProxyKmipClientIntegration",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_integration_&_services_&_test_proxykmipclient.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the ProxyKmipClient can derive a new key using PBKDF2.\n        \"\"\"\npassword_id = self.client.register(objects.SecretData(b'password', enums.\n    SecretDataType.PASSWORD, masks=[enums.CryptographicUsageMask.DERIVE_KEY]))\nkey_id = self.client.derive_key(enums.ObjectType.SYMMETRIC_KEY, [\n    password_id], enums.DerivationMethod.PBKDF2, {\n    'cryptographic_parameters': {'hashing_algorithm': enums.\n    HashingAlgorithm.SHA_1}, 'salt': b'salt', 'iteration_count': 4096},\n    cryptographic_length=160, cryptographic_algorithm=enums.\n    CryptographicAlgorithm.AES)\nkey = self.client.get(key_id)\nself.assertEqual(b'K\\x00y\\x01\\xb7eH\\x9a\\xbe\\xadI\\xd9&\\xf7!\\xd0e\\xa4)\\xc1',\n    key.value)\nattribute_list = self.client.get_attribute_list(key_id)\nself.assertIn('Cryptographic Algorithm', attribute_list)\nself.assertIn('Cryptographic Length', attribute_list)\nresult_id, attribute_list = self.client.get_attributes(uid=key_id,\n    attribute_names=['Cryptographic Algorithm', 'Cryptographic Length'])\nself.assertEqual(key_id, result_id)\nself.assertEqual(2, len(attribute_list))\nattribute = attribute_list[0]\nself.assertEqual('Cryptographic Algorithm', attribute.attribute_name.value)\nself.assertEqual(enums.CryptographicAlgorithm.AES, attribute.\n    attribute_value.value)\nattribute = attribute_list[1]\nself.assertEqual('Cryptographic Length', attribute.attribute_name.value)\nself.assertEqual(160, attribute.attribute_value.value)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_deco_no_args",
-    "className": null,
-    "fileName": "/axiros_&_DevApps/tests_&_test_app.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class Calc:\n\n    def do_run(calc, a, b):\n        return a, b\n\n    def do_list(calc, a, *b):\n        return a, b\n\n\n    class inner:\n\n        def do_inner(inner, a, b):\n            return root(inner).do_run(a, b)\ncfg = dict(common.CFG)\noav = list(sys.argv)\nsys.argv = ['_', '1', '2']\nold_stdout = sys.stdout\nsys.stdout = out = StringIO()\ntry:\n    app1 = app(Calc)\n    assert out.getvalue().strip() == \"('1', '2')\"\nfinally:\n    restore_argv(oav)\n    sys.stdout = old_stdout\n    common.CFG = cfg\n"
-}

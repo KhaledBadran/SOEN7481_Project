@@ -1,9 +1,0 @@
-{
-    "functionName": "test_schema_list_and_delete",
-    "className": "TestSchema",
-    "fileName": "/kenfar_&_DataGristle/datagristle_&_tests_&_test_metadata.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "assert len(self.md.schema_tools.lister()) == 1\nold_schema_rows = self.md.schema_tools.lister()\nassert self.md.schema_tools.deleter(schema_name='geoip') == 1\nassert self.md.schema_tools.deleter(schema_name='geoip') == 0\nfor field in self.md.field_tools.lister():\n    if field.collection_id == self.collection_id:\n        self.md.field_tools.deleter(collection_id=self.collection_id,\n            field_id=field.field_id)\nfor collection in self.md.collection_tools.lister():\n    if collection.schema_id == self.schema_id:\n        assert self.md.collection_tools.deleter(schema_id=self.schema_id,\n            collection_id=collection.collection_id) == 1\nfor element in self.md.element_tools.lister():\n    self.md.element_tools.deleter(element_name=element.element_name)\nself.md.schema_tools.deleter(schema_id=self.schema_id)\nassert not self.md.element_tools.lister()\nassert not self.md.field_tools.lister()\nassert not self.md.collection_tools.lister()\nassert not self.md.schema_tools.lister()\n"
-}

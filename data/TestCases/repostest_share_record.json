@@ -1,9 +1,0 @@
-{
-    "functionName": "test_share_record",
-    "className": "TestRegister",
-    "fileName": "/Keeper-Security_&_Commander/unit-tests_&_test_command_register.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "params = get_synced_params()\nrecord_uid = next(iter([x['record_uid'] for x in params.meta_data_cache.\n    values() if x['can_share']]))\ncmd = register.ShareRecordCommand()\nTestRegister.expected_commands.extend(['record_share_update'])\ncmd.execute(params, email=['user2@keepersecurity.com'], action='grant',\n    can_share=False, can_edit=True, record=record_uid)\nself.assertEqual(len(TestRegister.expected_commands), 0)\nTestRegister.expected_commands.extend(['record_share_update'])\ncmd.execute(params, email=['user2@keepersecurity.com'], action='owner',\n    can_share=False, can_edit=True, record=record_uid)\nself.assertEqual(len(TestRegister.expected_commands), 0)\nTestRegister.expected_commands.extend(['record_share_update'])\ncmd.execute(params, email=['user2@keepersecurity.com'], action='revoke',\n    record=record_uid)\nself.assertEqual(len(TestRegister.expected_commands), 0)\n"
-}

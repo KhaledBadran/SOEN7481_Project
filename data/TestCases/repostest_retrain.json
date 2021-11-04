@@ -1,9 +1,0 @@
-{
-    "functionName": "test_retrain",
-    "className": null,
-    "fileName": "/Accenture_&_AmpliGraph/tests_&_ampligraph_&_latent_features_&_test_models.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "model = ComplEx(batches_count=1, seed=555, epochs=20, k=10, loss='pairwise',\n    loss_params={'margin': 1}, regularizer='LP', regularizer_params={\n    'lambda': 0.1, 'p': 2}, optimizer='adagrad', optimizer_params={'lr': 0.1})\nX = np.array([['a', 'y', 'b'], ['b', 'y', 'a'], ['a', 'y', 'c'], ['c', 'y',\n    'a'], ['a', 'y', 'd'], ['c', 'y', 'd'], ['b', 'y', 'c'], ['f', 'y', 'e']])\nmodel.fit(X)\ny_pred_1st = model.predict(np.array([['f', 'y', 'e'], ['b', 'y', 'd']]))\nmodel.fit(X)\ny_pred_2nd = model.predict(np.array([['f', 'y', 'e'], ['b', 'y', 'd']]))\nnp.testing.assert_array_equal(y_pred_1st, y_pred_2nd)\n"
-}

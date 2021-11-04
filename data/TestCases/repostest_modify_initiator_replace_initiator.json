@@ -1,9 +1,0 @@
-{
-    "functionName": "test_modify_initiator_replace_initiator",
-    "className": "CITestProvisioning",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test modify_initiator replace initiator.\"\"\"\ndirector_type = 'FA'\ninitiator_1 = self.provisioning.get_in_use_initiator(director_type)\ninitiator_2 = self.provisioning.get_available_initiator(director_type)\nif not initiator_1 or not initiator_2:\n    self.skipTest(\n        'test_modify_initiator_replace_initiator - Unable to get an available initiator.'\n        )\ninitiator_1_details = self.provisioning.get_initiator(initiator_1)\ninitiator_2_details = self.provisioning.get_initiator(initiator_2)\ninitiator_1_id = initiator_1_details[constants.INITIATOR_ID]\ninitiator_2_id = initiator_2_details[constants.INITIATOR_ID]\nsymmetrix_port_key = initiator_1_details[constants.SYMMETRIX_PORT_KEY][0]\ninitiator_1_director_port = self.provisioning.format_director_port(\n    symmetrix_port_key[constants.DIRECTOR_ID], symmetrix_port_key[constants\n    .PORT_ID])\nself.provisioning.modify_initiator(initiator_1, replace_init=initiator_2_id)\nupdated_initiator = '{dp}:{id}'.format(dp=initiator_1_director_port, id=\n    initiator_2_id)\nresult = self.provisioning.get_initiator(updated_initiator)\nself.assertIsNotNone(result)\nself.assertEqual(initiator_2_id, result[constants.INITIATOR_ID])\nself.provisioning.modify_initiator(updated_initiator, replace_init=\n    initiator_1_id)\n"
-}

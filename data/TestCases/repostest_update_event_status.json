@@ -1,9 +1,0 @@
-{
-    "functionName": "test_update_event_status",
-    "className": "EventsAPITestCase",
-    "fileName": "/IntegralDefense_&_ACE/test_ace_api.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "c.execute(\n    \"\"\"\n            INSERT INTO `events`\n            (`creation_date`,\n            `name`,\n            `type`,\n            `vector`,\n            `prevention_tool`,\n            `remediation`,\n            `status`,\n            `comment`,\n            `campaign_id`)\n            VALUES\n            (\"2019-03-06\",\n            \"test event\",\n            \"phish\",\n            \"corporate email\",\n            \"response team\",\n            \"not remediated\",\n            \"OPEN\",\n            \"blah blah blah\",\n            1);\"\"\"\n    )\ndb.commit()\nc.execute(\"SELECT id FROM events WHERE name='test event'\")\nevent_id = c.fetchone()[0]\nresult = ace_api.update_event_status(event_id, 'CLOSED')\nself.assertIsNotNone(result)\nself.assertEqual(result['status'], 'CLOSED')\nuse_db"
-}

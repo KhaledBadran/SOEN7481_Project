@@ -1,9 +1,0 @@
-{
-    "functionName": "test_create_index",
-    "className": null,
-    "fileName": "/Drakkar-Software_&_OctoBot-Backtesting/tests_&_util_&_test_database.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "async with get_temp_empty_database() as temp_empty_database:\n    await temp_empty_database.insert(ExchangeDataTables.OHLCV, 1, symbol=\n        'xyz', price='1', date='01')\n    await temp_empty_database.create_index(ExchangeDataTables.OHLCV, [\n        'symbol', 'timestamp'])\n    assert await temp_empty_database.select(ExchangeDataTables.OHLCV) == [(\n        1, 'xyz', '1', '01')]\n"
-}

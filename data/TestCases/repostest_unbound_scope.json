@@ -1,9 +1,0 @@
-{
-    "functionName": "test_unbound_scope",
-    "className": "ScopeTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_def.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "t = Template(\n    \"\"\"\n            <%\n                y = 10\n            %>\n            <%def name=\"a()\">\n                y is: ${y}\n                <%\n                    # should raise error ?\n                    y = 15\n                %>\n                y is ${y}\n            </%def>\n            ${a()}\n\"\"\"\n    )\nassert_raises(UnboundLocalError, t.render)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "get_ancestors",
-    "className": "OlsClient",
-    "fileName": "/opentargets_&_OnToma/ontoma_&_ols.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Gets the data for a given term\n\n        Args:\n            ontology:   The name of the ontology\n            iri:        The IRI of a term\n        \"\"\"\nurl = self.ontology_ancestors.format(ontology=ont, iri=_dparse(iri))\nresponse = self.session.get(url)\ntry:\n    return response.json()['_embedded']['terms']\nexcept KeyError as e:\n    logger.warning(\n        'Term was found but ancestor lookup returned an empty response: %s',\n        response.json())\n    raise e\n"
-}

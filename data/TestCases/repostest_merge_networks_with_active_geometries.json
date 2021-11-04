@@ -1,9 +1,0 @@
-{
-    "functionName": "test_merge_networks_with_active_geometries",
-    "className": "TopotoolsTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_topotools_&_TopotoolsTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "pn = op.network.Cubic(shape=[3, 3, 3])\npn2 = op.network.Cubic(shape=[3, 3, 3])\npn2['pore.coords'] += [0, 0, 3]\npn2['pore.net_02'] = True\npn2['throat.net_02'] = True\ngeo = op.geometry.StickAndBall(network=pn, pores=pn.Ps, throats=pn.Ts)\ngeo2 = op.geometry.StickAndBall(network=pn2, pores=pn2.Ps, throats=pn2.Ts)\ngeo2['pore.test_vals'] = 1.5\nop.topotools.merge_networks(network=pn, donor=pn2)\nassert isinstance(pn['pore.test_vals'], np.ndarray)\nassert 'pore.' + geo2.name in pn.keys()\n"
-}

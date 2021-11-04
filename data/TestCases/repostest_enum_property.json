@@ -1,9 +1,0 @@
-{
-    "functionName": "test_enum_property",
-    "className": null,
-    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_property_factories_&_test_enum_property.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class SillyEnum(Enum):\n    a = 'aa'\n    b = 'bb'\nclass EnumMock(MockInstrument):\n    a = enum_property('MOCK:A', SillyEnum)\n    b = enum_property('MOCK:B', SillyEnum)\nmock_inst = EnumMock({'MOCK:A?': 'aa', 'MOCK:B?': 'bb'})\nassert mock_inst.a == SillyEnum.a\nassert mock_inst.b == SillyEnum.b\nmock_inst.a = SillyEnum.b\nmock_inst.b = 'a'\nmock_inst.b = 'bb'\nassert mock_inst.value == \"\"\"MOCK:A?\nMOCK:B?\nMOCK:A bb\nMOCK:B aa\nMOCK:B bb\n\"\"\"\n"
-}

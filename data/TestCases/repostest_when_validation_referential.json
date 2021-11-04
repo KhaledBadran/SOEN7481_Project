@@ -1,9 +1,0 @@
-{
-    "functionName": "test_when_validation_referential",
-    "className": "TestValidationMessages",
-    "fileName": "/hdoupe_&_ParamTools/paramtools_&_tests_&_test_parameters.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test referential validation with when validator.\n\n        Check limitations to referential validation with when validator\n        in test test_when_validation_limitations\n        \"\"\"\nclass Params(Parameters):\n    defaults = {'param': {'title': '', 'description': '', 'type': 'int',\n        'value': 3, 'validators': {'when': {'param': 'when_param', 'is': {\n        'less_than': 0}, 'then': {'range': {'min': 0}}, 'otherwise': {\n        'range': {'min': 'when_param'}}}}}, 'when_param': {'title': '',\n        'description': '', 'type': 'int', 'value': 3}}\nparams = Params(array_first=True)\nparams.adjust({'param': 4})\nparams.adjust({'param': 0, 'when_param': -1})\nparams = Params(array_first=True)\nwith pytest.raises(ValidationError):\n    params.adjust({'param': -1, 'when_param': -2})\nparams = Params(array_first=True)\nwith pytest.raises(ValidationError):\n    params.adjust({'param': params.when_param - 1})\n"
-}

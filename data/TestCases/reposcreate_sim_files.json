@@ -1,9 +1,0 @@
-{
-    "functionName": "create_sim_files",
-    "className": null,
-    "fileName": "/bio-phys_&_MDBenchmark/mdbenchmark_&_tests_&_migrations_&_test_mds_to_dtr.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "sim_files = []\ndirectory = tmpdir.mkdir('draco_gromacs').mkdir('2018.1')\nfor path in ['1', '2', '3']:\n    bundle = directory.mkdir(path)\n    filename = 'Sim.{uid}.json'.format(uid=uuid.uuid4())\n    sim = create_file(bundle, path, filename)\n    sim_files.append(sim)\n    proxy_filename = '.{filename}.proxy'.format(filename=filename)\n    proxy = create_file(bundle, path, proxy_filename)\n    sim_files.append(proxy)\n    tpr = create_file(bundle, path, 'md.tpr')\n    sim_files.append(tpr)\nreturn directory, sim_files\npytest.fixture"
-}

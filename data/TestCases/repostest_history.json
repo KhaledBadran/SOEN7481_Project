@@ -1,9 +1,0 @@
-{
-    "functionName": "test_history",
-    "className": "TestRunningCode",
-    "fileName": "/fabioz_&_PyDev.Debugger/tests_&_test_pydev_ipython_011.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Make sure commands are added to IPython's history \"\"\"\nself.redirect_stdout()\ntry:\n    self.add_exec('a=1')\n    self.add_exec('b=2')\n    _ih = self.front_end.get_namespace()['_ih']\n    eq_(_ih[-1], 'b=2')\n    eq_(_ih[-2], 'a=1')\n    self.add_exec('history')\n    hist = sys.stdout.getvalue().split('\\n')\n    eq_(hist[-1], '')\n    eq_(hist[-2], 'history')\n    eq_(hist[-3], 'b=2')\n    eq_(hist[-4], 'a=1')\nfinally:\n    self.restore_stdout()\n"
-}

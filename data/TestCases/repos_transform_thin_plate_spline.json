@@ -1,9 +1,0 @@
-{
-    "functionName": "_transform_thin_plate_spline",
-    "className": null,
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_layers_&_special.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "num_batch, num_channels, height, width = input.shape\nnum_control_points = source_points.shape[1]\ndest_points = source_points + T.reshape(dest_offsets, (num_batch, 2,\n    num_control_points))\ncoefficients = T.dot(dest_points, L_inv[:, 3:].T)\nif precompute_grid:\n    right_mat = T.tile(right_mat.dimshuffle('x', 0, 1), (num_batch, 1, 1))\n    transformed_points = T.batched_dot(coefficients, right_mat)\nelse:\n    out_height = T.cast(height // downsample_factor[0], 'int64')\n    out_width = T.cast(width // downsample_factor[1], 'int64')\n    orig_grid = _meshgrid(out_height, out_width)\n    orig_grid = orig_grid[0:2, :]\n    orig_grid = T.tile(orig_grid, (num_batch, 1, 1))\n    transformed_points = _get_transformed_points_tps(orig_grid,\n        source_points, coefficients, num_control_points, num_batch)\nx_transformed = transformed_points[:, (0)].flatten()\ny_transformed = transformed_points[:, (1)].flatten()\ninput_dim = input.dimshuffle(0, 2, 3, 1)\ninput_transformed = _interpolate(input_dim, x_transformed, y_transformed,\n    out_height, out_width, border_mode)\noutput = T.reshape(input_transformed, (num_batch, out_height, out_width,\n    num_channels))\noutput = output.dimshuffle(0, 3, 1, 2)\nreturn output\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_invalidate",
-    "className": "CacheTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_cache.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "t = Template(\n    \"\"\"\n            <%%def name=\"foo()\" cached=\"True\">\n                foo: ${x}\n            </%%def>\n\n            <%%def name=\"bar()\" cached=\"True\" cache_type='dbm' cache_dir='%s'>\n                bar: ${x}\n            </%%def>\n            ${foo()} ${bar()}\n        \"\"\"\n     % module_base)\nself._install_mock_cache(t)\nassert result_lines(t.render(x=1)) == ['foo: 1', 'bar: 1']\nassert result_lines(t.render(x=2)) == ['foo: 1', 'bar: 1']\nt.cache.invalidate_def('foo')\nassert result_lines(t.render(x=3)) == ['foo: 3', 'bar: 1']\nt.cache.invalidate_def('bar')\nassert result_lines(t.render(x=4)) == ['foo: 3', 'bar: 4']\nt = Template(\n    \"\"\"\n            <%%page cached=\"True\" cache_type=\"dbm\" cache_dir=\"%s\"/>\n\n            page: ${x}\n        \"\"\"\n     % module_base)\nself._install_mock_cache(t)\nassert result_lines(t.render(x=1)) == ['page: 1']\nassert result_lines(t.render(x=2)) == ['page: 1']\nt.cache.invalidate_body()\nassert result_lines(t.render(x=3)) == ['page: 3']\nassert result_lines(t.render(x=4)) == ['page: 3']\n"
-}

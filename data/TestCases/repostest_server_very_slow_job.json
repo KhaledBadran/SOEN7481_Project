@@ -1,9 +1,0 @@
-{
-    "functionName": "test_server_very_slow_job",
-    "className": null,
-    "fileName": "/PRIArobotics_&_HedgehogServer/tests_&_test_server.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "async def handler_callback(server, ident, msg):\n\n    async def task(*, task_status=trio.TASK_STATUS_IGNORED):\n        task_status.started()\n        async with server.job():\n            await trio.sleep(10.1)\n    await server.add_task(task)\n    return ack.Acknowledgement()\nasync with conn_req(handler_dict={io.Action: handler_callback}) as socket:\n    await assertReplyReq(socket, io.Action(0, io.INPUT_FLOATING), ack.OK)\n    await trio.sleep(10.2)\nrecords = [record for record in caplog.records if record.levelno >= logging\n    .WARNING]\nassert len(records) == 3 and 'Long running job on server loop' in records[0\n    ].message and 'Long running job cancelled after 10000.0 ms' in records[1\n    ].message and 'Task raised an exception' in records[2].message\ncheck_caplog.expected.update(records)\npytest.mark.trio"
-}

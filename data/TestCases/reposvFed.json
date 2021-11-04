@@ -1,9 +1,0 @@
-{
-    "functionName": "vFed",
-    "className": null,
-    "fileName": "/GMLC-TDC_&_HELICS/tests_&_python_&_test_value_federate.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "initstring = '-f 1 --name=mainbroker'\nfedinitstring = '--broker=mainbroker --federates=1'\ndeltat = 0.01\nh.helicsGetVersion()\nbroker = h.helicsCreateBroker('zmq', '', initstring)\nisconnected = h.helicsBrokerIsConnected(broker)\nif isconnected == 1:\n    pass\nfedinfo = h.helicsCreateFederateInfo()\nh.helicsFederateInfoSetCoreName(fedinfo, 'TestA Core')\nh.helicsFederateInfoSetCoreTypeFromString(fedinfo, 'zmq')\nh.helicsFederateInfoSetCoreInitString(fedinfo, fedinitstring)\nh.helicsFederateInfoSetTimeProperty(fedinfo, h.helics_property_time_delta,\n    deltat)\nh.helicsFederateInfoSetIntegerProperty(fedinfo, h.\n    helics_property_int_log_level, 1)\nvFed = h.helicsCreateValueFederate('TestA Federate', fedinfo)\nyield vFed\nh.helicsFederateFinalize(vFed)\nstate = h.helicsFederateGetState(vFed)\nassert state == 3\nwhile h.helicsBrokerIsConnected(broker):\n    time.sleep(1)\nh.helicsFederateInfoFree(fedinfo)\nh.helicsFederateFree(vFed)\nh.helicsCloseLibrary()\npt.fixture"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_uk_execute_single_point",
-    "className": null,
-    "fileName": "/bsmurphy_&_PyKrige/tests_&_test_core.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data = np.array([[61.0, 139.0, 477.0], [63.0, 140.0, 696.0], [64.0, 129.0, \n    227.0], [68.0, 128.0, 646.0], [71.0, 140.0, 606.0], [73.0, 141.0, 791.0\n    ], [75.0, 128.0, 783.0]])\npoint = 65.0, 137.0\nz_answer = 567.54\nss_answer = 9.044\nuk = UniversalKriging(data[:, (0)], data[:, (1)], data[:, (2)],\n    variogram_model='exponential', variogram_parameters=[10.0, 9.99, 0.0],\n    drift_terms=['regional_linear'])\nz, ss = uk.execute('points', np.array([point[0]]), np.array([point[1]]),\n    backend='vectorized')\nassert z_answer == approx(z[0], rel=0.1)\nassert ss_answer == approx(ss[0], rel=0.1)\nz, ss = uk.execute('points', np.array([61.0]), np.array([139.0]), backend=\n    'vectorized')\nassert z[0] == approx(477.0, rel=0.001)\nassert ss[0] == approx(0.0, rel=0.001)\nz, ss = uk.execute('points', np.array([61.0]), np.array([139.0]), backend=\n    'loop')\nassert z[0] == approx(477.0, rel=0.001)\nassert ss[0] == approx(0.0, rel=0.001)\n"
-}

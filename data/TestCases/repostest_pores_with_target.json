@@ -1,9 +1,0 @@
-{
-    "functionName": "test_pores_with_target",
-    "className": "BaseTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_core_&_BaseTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "net = op.network.Cubic(shape=[2, 2, 2])\ngeo1 = op.geometry.GenericGeometry(network=net, pores=[1, 3, 5, 7], throats\n    =range(6))\ngeo2 = op.geometry.GenericGeometry(network=net, pores=[0, 2, 4, 6], throats\n    =range(6, 12))\nassert np.all(net.pores('top', target=geo1) == [0, 1, 2, 3])\nassert len(net.pores('top', target=geo2)) == 0\nmapped = net.map_pores(pores=[0, 1, 2, 3], origin=geo1)\nassert np.all(mapped == net.pores('geo_01'))\nmapped = net.map_pores(pores=[0, 1, 2, 3], origin=geo2)\nassert np.all(mapped == net.pores('geo_02'))\n"
-}

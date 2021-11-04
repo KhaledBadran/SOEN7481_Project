@@ -1,9 +1,0 @@
-{
-    "functionName": "defaultSetup",
-    "className": null,
-    "fileName": "/muma7490_&_PyMesaHandler/tests_&_test_MesaFileAccess.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "with cd('tests'):\n    if 'playground' not in os.listdir('.'):\n        os.makedirs('playground/')\ndef cleanup():\n    print('Performing cleanup')\n    with cd(testWritePath):\n        for i in os.listdir('.'):\n            os.remove(i)\n    with cd('tests'):\n        if 'playground' in os.listdir('.'):\n            os.rmdir('playground')\n    os.remove('inlist')\n    os.remove('inlist_pgstar')\n    os.remove('inlist_project')\nshutil.copy2('tests/inlist', 'inlist')\nshutil.copy2('tests/inlist_pgstar', 'inlist_pgstar')\nshutil.copy2('tests/inlist_project', 'inlist_project')\nrequest.addfinalizer(cleanup)\nreturn MesaFileAccess()\npytest.fixture(scope='function')"
-}

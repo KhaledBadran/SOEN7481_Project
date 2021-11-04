@@ -1,9 +1,0 @@
-{
-    "functionName": "testErrors",
-    "className": "DerelativizeTransformTest",
-    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_derelativize_transform.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "t = Derelativize(search_space=None, observation_features=None,\n    observation_data=None)\noc = OptimizationConfig(objective=Objective(Metric('c')),\n    outcome_constraints=[OutcomeConstraint(Metric('a'), ComparisonOp.LEQ,\n    bound=2, relative=True)])\nsearch_space = SearchSpace(parameters=[RangeParameter('x', ParameterType.\n    FLOAT, 0, 20)])\ng = ModelBridge(search_space, None, [])\nwith self.assertRaises(ValueError):\n    t.transform_optimization_config(oc, None, None)\nwith self.assertRaises(ValueError):\n    t.transform_optimization_config(oc, g, None)\n"
-}

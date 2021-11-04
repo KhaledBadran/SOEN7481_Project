@@ -1,9 +1,0 @@
-{
-    "functionName": "test_new_syntax",
-    "className": "CallTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_call.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"test foo:bar syntax, including multiline args and expression eval.\"\"\"\nt = Template(\n    \"\"\"\n            <%def name=\"foo(x, y, q, z)\">\n                ${x}\n                ${y}\n                ${q}\n                ${\",\".join(\"%s->%s\" % (a, b) for a, b in z)}\n            </%def>\n\n            <%self:foo x=\"this is x\" y=\"${'some ' + 'y'}\" q=\"\n                this\n                is\n                q\"\n\n                z=\"${[\n                (1, 2),\n                (3, 4),\n                (5, 6)\n            ]\n\n            }\"/>\n        \"\"\"\n    )\neq_(result_lines(t.render()), ['this is x', 'some y', 'this', 'is', 'q',\n    '1->2,3->4,5->6'])\n"
-}

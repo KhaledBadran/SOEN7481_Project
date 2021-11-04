@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_iterator_results",
-    "className": "CITestCommon",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_common.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test get_iterator_results.\"\"\"\nstart_time, end_time = self.conn.performance.extract_timestamp_keys(category\n    ='Array')\nresult = self.conn.performance.get_array_stats(metrics='PercentReads',\n    start_time=start_time, end_time=end_time)\nself.assertTrue(result)\nself.assertIsInstance(result, dict)\nif result and len(result.get('result')) <= 1000:\n    self.skipTest(\n        'Skipping test_get_iterator_results because there is not enough performance data collected. It takes just under four days to build up enough data to return more than 1000 performance results. There are currently only {cnt} performance intervals available'\n        .format(cnt=len(result.get('result'))))\nelse:\n    self.assertTrue(len(result.get('result')) > 1000)\n"
-}

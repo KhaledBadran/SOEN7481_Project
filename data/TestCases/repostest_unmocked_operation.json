@@ -1,9 +1,0 @@
-{
-    "functionName": "test_unmocked_operation",
-    "className": "TestIAM",
-    "fileName": "/SUSE_&_Enceladus/mockboto3_&_tests_&_test_iam.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test operation not mocked error is returned.\"\"\"\nmsg = (\n    'An error occurred (NoSuchMethod) when calling the CreateGecko operation: Operation not mocked.'\n    )\ntry:\n    mocker = MockIAM()\n    mocker.mock_make_api_call('CreateGecko', {'Name': 'gecko'})\nexcept MockBoto3ClientError as e:\n    assert msg == str(e)\n"
-}

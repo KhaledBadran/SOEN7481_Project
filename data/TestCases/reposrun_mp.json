@@ -1,9 +1,0 @@
-{
-    "functionName": "run_mp",
-    "className": "MixedPercolationTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_MixedPercolationTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "IP_1 = mp(network=self.net)\nif snap:\n    IP_1.settings['snap_off'] = 'throat.snap_off'\nIP_1.setup(phase=self.phase)\nIP_1.set_inlets(pores=self.inlets)\nif residual:\n    IP_1.set_residual(pores=self.phase['pore.occupancy'])\nIP_1.run()\nif trapping:\n    IP_1.set_outlets(self.outlets)\n    IP_1.apply_trapping()\ninv_points = np.arange(0, 100, 1)\nalg_data = IP_1.get_intrusion_data(inv_points=inv_points)\nself.phase.update(IP_1.results(Pc=inv_points.max()))\nif plot:\n    plt.figure()\n    L = np.sqrt(self.net.Np).astype(int)\n    plt.imshow(IP_1['pore.invasion_sequence'].reshape([L, L]), cmap=plt.\n        get_cmap('Blues'))\nif flowrate is not None:\n    IP_1.apply_flow(flowrate=flowrate)\nself.alg = IP_1\nreturn alg_data\n"
-}

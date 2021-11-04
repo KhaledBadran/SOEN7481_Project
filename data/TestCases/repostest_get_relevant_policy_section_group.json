@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_relevant_policy_section_group",
-    "className": "TestKmipEngine",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the lookup for a policy with a group specified is handled\n        correctly.\n        \"\"\"\ne = engine.KmipEngine()\ne._operation_policies = {'test_policy': {'preset': {enums.ObjectType.\n    SYMMETRIC_KEY: {enums.Operation.GET: enums.Policy.ALLOW_OWNER}},\n    'groups': {'test_group': {enums.ObjectType.CERTIFICATE: {enums.\n    Operation.CREATE: enums.Policy.ALLOW_ALL}}}}}\nexpected = {enums.ObjectType.CERTIFICATE: {enums.Operation.CREATE: enums.\n    Policy.ALLOW_ALL}}\nresult = e.get_relevant_policy_section('test_policy', 'test_group')\nself.assertEqual(expected, result)\n"
-}

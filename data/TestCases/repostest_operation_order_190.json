@@ -1,9 +1,0 @@
-{
-    "functionName": "test_operation_order_190",
-    "className": "Test_bugs",
-    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_bugs.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.setUpClass()\nconfig_fn = os.path.join(curdir, 'hardware_config_cc_light.json')\nplatform = ql.Platform('myPlatform', config_fn)\nsweep_points = [1]\nnqubits = 4\nnregs = 4\np1 = ql.Program('order1_prog', platform, nqubits, nregs)\np2 = ql.Program('order2_prog', platform, nqubits, nregs)\np1.set_sweep_points(sweep_points)\np2.set_sweep_points(sweep_points)\nk1 = ql.Kernel('aKernel', platform, nqubits, nregs)\nk2 = ql.Kernel('aKernel', platform, nqubits, nregs)\nk1.gate('x', [0])\nk1.gate('y', [2])\nk2.gate('y', [2])\nk2.gate('x', [0])\np1.add_kernel(k1)\np2.add_kernel(k2)\np1.compile()\nself.setUpClass()\np2.compile()\nself.assertTrue(file_compare(os.path.join(output_dir, p1.name + '.qisa'),\n    os.path.join(output_dir, p2.name + '.qisa')))\n"
-}

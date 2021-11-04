@@ -1,9 +1,0 @@
-{
-    "functionName": "test_periodic",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_kernels_&_test_kernels.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "X = rng.randn(N, D) if D == 1 else rng.multivariate_normal(np.zeros(D), np.\n    eye(D), N)\nbase_kernel = base_class(lengthscales=lengthscales, variance=variance)\nkernel = gpflow.kernels.Periodic(base_kernel, period=period)\ngram_matrix = kernel(X)\nreference_gram_matrix = ref_periodic_kernel(X, base_class.__name__,\n    lengthscales, variance, period)\nassert_allclose(gram_matrix, reference_gram_matrix)\npytest.mark.parametrize('base_class', [gpflow.kernels.SquaredExponential,\n    gpflow.kernels.Matern12, gpflow.kernels.Matern32, gpflow.kernels.Matern52])pytest.mark.parametrize('D, lengthscales, period', [[1, 2.0, 3.0], [2, 11.5,\n    3.0], [2, 11.5, (3.0, 6.0)], [2, (11.5, 12.5), 3.0], [2, (11.5, 12.5),\n    (3.0, 6.0)]])pytest.mark.parametrize('N, variance', [[3, 2.3], [5, 1.3]])"
-}

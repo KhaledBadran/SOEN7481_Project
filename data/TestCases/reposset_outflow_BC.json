@@ -1,9 +1,0 @@
-{
-    "functionName": "set_outflow_BC",
-    "className": "AdvectionDiffusion",
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_algorithms_&_AdvectionDiffusion.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        Adds outflow boundary condition to the selected pores.\n\n        Outflow condition simply means that the gradient of the solved\n        quantity does not change, i.e. is 0.\n\n        \"\"\"\nmode = self._parse_mode(mode, allowed=['merge', 'overwrite', 'remove'],\n    single=True)\npores = self._parse_indices(pores)\nnetwork = self.project.network\nphase = self.project.phases()[self.settings['phase']]\nthroats = network.find_neighbor_throats(pores=pores)\nC12 = network['throat.conns'][throats]\nP12 = phase[self.settings['pressure']][C12]\ngh = phase[self.settings['hydraulic_conductance']][throats]\nQ12 = -gh * np.diff(P12, axis=1).squeeze()\nQp = np.zeros(self.Np)\nnp.add.at(Qp, C12[:, (0)], -Q12)\nnp.add.at(Qp, C12[:, (1)], Q12)\nif 'pore.bc_outflow' not in self.keys() or mode == 'overwrite':\n    self['pore.bc_outflow'] = np.nan\nself['pore.bc_outflow'][pores] = Qp[pores]\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_session_headers",
-    "className": "TestAttributes",
-    "fileName": "/bigfishgames_&_GameBenchAPI-PyClient/tests_&_test_unit_&_test_api_&_test_requests_retriever_&_test_builder_&_request_attributes_&_test_attributes_creator.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Verify _get_session_headers returns the expected headers.\"\"\"\nerror_message = \"\"\"\nTest: {} \nExpected: {}\nActual:   {}\n\"\"\"\ntest_params = {'no_metric': {'metric': '', 'headers': NO_METRIC_HEADERS,\n    'session_id': ''}, 'metric_present': {'metric': METRIC, 'headers':\n    DEFAULT_SESSION_HEADERS, 'session_id': SESSION_ID}}\nfor test, params in test_params.items():\n    request_parameters = {'metric': params['metric'], 'auth_token':\n        AUTH_TOKEN, 'headers': params['headers'], 'session_id': params[\n        'session_id']}\n    attributes = Attributes(**request_parameters)\n    expected = params['headers']\n    actual = attributes._get_session_headers()\n    self.assertEqual(expected, actual, error_message.format(test, expected,\n        actual))\n"
-}

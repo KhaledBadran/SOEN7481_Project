@@ -1,9 +1,0 @@
-{
-    "functionName": "collect_shared_vars",
-    "className": null,
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Returns all shared variables the given expression(s) depend on.\n\n    Parameters\n    ----------\n    expressions : Theano expression or iterable of Theano expressions\n        The expressions to collect shared variables from.\n\n    Returns\n    -------\n    list of Theano shared variables\n        All shared variables the given expression(s) depend on, in fixed order\n        (as found by a left-recursive depth-first search). If some expressions\n        are shared variables themselves, they are included in the result.\n    \"\"\"\nif isinstance(expressions, theano.Variable):\n    expressions = [expressions]\nreturn [v for v in theano.gof.graph.inputs(reversed(expressions)) if\n    isinstance(v, theano.compile.SharedVariable)]\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "_get_transformed_points_tps",
-    "className": null,
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_layers_&_special.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Calculates the transformed points' value using the provided coefficients\n\n    :param new_points: num_batch x 2 x num_to_transform tensor\n    :param source_points: 2 x num_points array of source points\n    :param coefficients: coefficients (should be shape (num_batch, 2,\n        control_points + 3))\n    :param num_points: the number of points\n\n    :return: the x and y coordinates of each transformed point. Shape (\n        num_batch, 2, num_to_transform)\n    \"\"\"\nto_transform = new_points.dimshuffle(0, 'x', 1, 2)\nstacked_transform = T.tile(to_transform, (1, num_points, 1, 1))\nr_2 = T.sum((stacked_transform - source_points.dimshuffle('x', 1, 0, 'x')) **\n    2, axis=2)\nlog_r_2 = T.log(r_2)\ndistances = T.switch(T.isnan(log_r_2), r_2 * log_r_2, 0.0)\nupper_array = T.concatenate([T.ones((batch_size, 1, new_points.shape[2]),\n    dtype=theano.config.floatX), new_points], axis=1)\nright_mat = T.concatenate([upper_array, distances], axis=1)\nnew_value = T.batched_dot(coefficients, right_mat)\nreturn new_value\n"
-}

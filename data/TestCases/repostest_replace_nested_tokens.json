@@ -1,9 +1,0 @@
-{
-    "functionName": "test_replace_nested_tokens",
-    "className": null,
-    "fileName": "/PearsonEducation_&_Alarmageddon/tests_&_publishing_&_test_emailer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "email_pub = create_default_email_publisher(tmpdir, smtpserver)\ntemplate_loader = FileSystemLoader(email_pub._config[\n    'email_template_directory'])\nemail_pub._template_environment = Environment(loader=template_loader,\n    undefined=SilentUndefined)\ncreate_subject_template(tmpdir)\nreplacement_context = {'env': '{{nested_token}}', 'test_name': 'test name',\n    'nested_token': 'test'}\ndetokenized_template = email_pub.replace_tokens('default_subject.template',\n    replacement_context)\nassert detokenized_template == 'Validation Failure in test: test name'\n"
-}

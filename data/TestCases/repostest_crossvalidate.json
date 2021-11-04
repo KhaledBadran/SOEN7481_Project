@@ -1,9 +1,0 @@
-{
-    "functionName": "test_crossvalidate",
-    "className": "TestTrexClassifier",
-    "fileName": "/univieCUBE_&_phenotrex/tests_&_test_ml.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test default crossvalidation of TrexClassifier class.\n        Using several different traits, cv folds, and scoring methods.\n        Compares with dictionary cv_scores.\n\n        :param trait_name:\n        :param cv:\n        :param classifier:\n        :param use_groups:\n        :return:\n        \"\"\"\ntraining_records, genotype, phenotype, group = self.test_load_data(trait_name,\n    False)\nclf = classifier(verb=True, random_state=RANDOM_STATE)\nscore_pred = clf.crossvalidate(records=training_records, cv=cv, scoring=\n    scoring_methods[0], groups=use_groups, n_jobs=min(4, os.cpu_count()))[:2]\nif classifier.identifier in cv_scores_trex and not use_groups:\n    score_target = cv_scores_trex[classifier.identifier][trait_name][cv][\n        scoring_methods[0]]\n    np.testing.assert_almost_equal(actual=score_pred, desired=score_target,\n        decimal=1)\nwith TemporaryDirectory() as tmpdir:\n    misclass_path = Path(tmpdir) / 'misclassifications.tsv'\n    write_misclassifications_file(misclass_path, training_records,\n        score_pred, use_groups=use_groups)\n    assert misclass_path.is_file()\npytest.mark.parametrize('trait_name', trait_names, ids=trait_names)pytest.mark.parametrize('cv', cv_folds, ids=[str(x) for x in cv_folds])pytest.mark.parametrize('classifier', classifiers, ids=classifier_ids)pytest.mark.parametrize('use_groups', [True, False], ids=['logo', 'nologo'])"
-}

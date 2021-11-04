@@ -1,9 +1,0 @@
-{
-    "functionName": "test_stream_performance",
-    "className": null,
-    "fileName": "/vc1492a_&_PyNomaly/tests_&_test_loop.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test to ensure that the streaming approach works as desired when using\n    a regular set of input data (no distance and neighbor matrices) and that\n    the result is within some expected level of error when compared to the\n    classical approach.\n    :param X_n140_outliers: A pytest Fixture that generates 140 observations.\n    :return:\n    \"\"\"\nX_train = X_n140_outliers[0:100]\nX_test = X_n140_outliers[100:140]\nm = loop.LocalOutlierProbability(X_n140_outliers, use_numba=NUMBA).fit()\nscores_noclust = m.local_outlier_probabilities\nm_train = loop.LocalOutlierProbability(X_train, use_numba=NUMBA)\nm_train.fit()\nX_train_scores = m_train.local_outlier_probabilities\nX_test_scores = []\nfor idx in range(X_test.shape[0]):\n    X_test_scores.append(m_train.stream(X_test[idx]))\nX_test_scores = np.array(X_test_scores)\nstream_scores = np.hstack((X_train_scores, X_test_scores))\nrmse = np.sqrt(((scores_noclust - stream_scores) ** 2).mean(axis=None))\nassert_greater(0.35, rmse)\n"
-}

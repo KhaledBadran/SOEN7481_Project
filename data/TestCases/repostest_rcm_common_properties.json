@@ -1,9 +1,0 @@
-{
-    "functionName": "test_rcm_common_properties",
-    "className": "TestCommonProperties",
-    "fileName": "/kyleniemeyer_&_PyTeCK/pyteck_&_tests_&_test_parse_files_xml.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Ensure basic common properties parsed for RCM.\n        \"\"\"\nfile_path = os.path.join('testfile_rcm.xml')\nfilename = pkg_resources.resource_filename(__name__, file_path)\ntree = etree.parse(filename)\nroot = tree.getroot()\nproperties = {}\nproperties['kind'] = parse_files_XML.get_experiment_kind(root)\nproperties = parse_files_XML.get_common_properties(properties, root)\nassert properties['composition']['H2'] == 0.125\nassert properties['composition']['O2'] == 0.0625\nassert properties['composition']['N2'] == 0.18125\nassert properties['composition']['Ar'] == 0.63125\nassert set(properties.keys()) == set(['kind', 'composition'])\n"
-}

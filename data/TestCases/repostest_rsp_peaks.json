@@ -1,9 +1,0 @@
-{
-    "functionName": "test_rsp_peaks",
-    "className": null,
-    "fileName": "/neuropsychology_&_NeuroKit/tests_&_tests_rsp.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "rsp = nk.rsp_simulate(duration=120, sampling_rate=1000, respiratory_rate=15,\n    random_state=42)\nrsp_cleaned = nk.rsp_clean(rsp, sampling_rate=1000)\nsignals, info = nk.rsp_peaks(rsp_cleaned)\nassert signals.shape == (120000, 2)\nassert signals['RSP_Peaks'].sum() == 28\nassert signals['RSP_Troughs'].sum() == 28\nassert info['RSP_Peaks'].shape[0] == 28\nassert info['RSP_Troughs'].shape[0] == 28\nassert np.allclose(info['RSP_Peaks'].sum(), 1643817)\nassert np.allclose(info['RSP_Troughs'].sum(), 1586588)\nassert info['RSP_Peaks'][0] > info['RSP_Troughs'][0]\nassert info['RSP_Peaks'][-1] > info['RSP_Troughs'][-1]\n"
-}

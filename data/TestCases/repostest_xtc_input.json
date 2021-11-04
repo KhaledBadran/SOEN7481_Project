@@ -1,9 +1,0 @@
-{
-    "functionName": "test_xtc_input",
-    "className": "TestPBAssign",
-    "fileName": "/pierrepo_&_PBxplore/pbxplore_&_tests_&_test_regression.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Run PBassign on a trajectory in the XTC format.\n\n        This test should produce the righ output with python 2. With python 3,\n        PBassign should fail as MDanalysis is not available.\n        \"\"\"\nname = 'barstar_md_traj'\nout_run_dir = str(tmpdir)\noutput_fname = name + '.PB.fasta'\ncall_list = ['PBassign', '-x', os.path.join(REFDIR, name + '.xtc'), '-g',\n    os.path.join(REFDIR, name + '.gro'), '-o', os.path.join(out_run_dir, name)]\nexe = subprocess.Popen(call_list, stdout=subprocess.PIPE, stderr=subprocess\n    .PIPE)\nout, err = exe.communicate()\nstatus = exe.wait()\nprint(out.decode('utf-8'))\nprint(err.decode('utf-8'))\nassert status == 0, 'PBassign exited with an error'\n_assert_identical_files(os.path.join(REFDIR, output_fname), os.path.join(\n    out_run_dir, output_fname))\n"
-}

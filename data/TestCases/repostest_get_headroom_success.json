@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_headroom_success",
-    "className": "PyU4VUnivmaxWLPTest",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_wlp.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test get_headroom success.\"\"\"\nwith mock.patch.object(self.wlp.common, 'get_resource', return_value=self.\n    data.headroom_array) as mck_head:\n    headroom = self.wlp.get_headroom(self.data.array, self.data.workload,\n        'SRP_TEST', 'Gold')\n    self.assertEqual(self.data.headroom_array['gbHeadroom'], headroom)\n    params = {'srp': 'SRP_TEST', 'slo': 'Gold', 'workloadtype': self.data.\n        workload}\n    mck_head.assert_called_once_with(category='wlp', resource_level=\n        'symmetrix', resource_level_id=self.data.array, resource_type=\n        'headroom', params=params)\n"
-}

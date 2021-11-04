@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ledoit_wolf_constant_correlation",
-    "className": null,
-    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_risk_models.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "df = get_data()\ncs = risk_models.CovarianceShrinkage(df)\nshrunk_cov = cs.ledoit_wolf(shrinkage_target='constant_correlation')\nassert 0 < cs.delta < 1\nassert shrunk_cov.shape == (20, 20)\nassert list(shrunk_cov.index) == list(df.columns)\nassert list(shrunk_cov.columns) == list(df.columns)\nassert not shrunk_cov.isnull().any().any()\nassert risk_models._is_positive_semidefinite(shrunk_cov)\n"
-}

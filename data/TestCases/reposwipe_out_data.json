@@ -1,9 +1,0 @@
-{
-    "functionName": "wipe_out_data",
-    "className": "TestEnterpriseCommands",
-    "fileName": "/Keeper-Security_&_Commander/tests_&_test_enterprise_commands.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "params = cls.params\nmanaged_roles = set()\nfor mn in params.enterprise['managed_nodes']:\n    managed_roles.add(mn['role_id'])\nfor ru in params.enterprise['role_users']:\n    if ru['role_id'] not in managed_roles:\n        request = {'command': 'role_user_remove', 'role_id': ru['role_id'],\n            'enterprise_user_id': ru['enterprise_user_id']}\n        api.communicate(params, request)\nfor user in params.enterprise['users']:\n    if user['username'] in ['integration.enterprise@keepersecurity.com',\n        'integration.tests@keepersecurity.com']:\n        if user['lock'] != 0:\n            request = {'command': 'enterprise_user_lock',\n                'enterprise_user_id': user['enterprise_user_id'], 'lock':\n                'unlocked'}\n            api.communicate(params, request)\n    else:\n        request = {'command': 'enterprise_user_delete',\n            'enterprise_user_id': user['enterprise_user_id']}\n        api.communicate(params, request)\nif 'teams' in params.enterprise:\n    for team in params.enterprise['teams']:\n        request = {'command': 'team_delete', 'team_uid': team['team_uid']}\n        api.communicate(params, request)\napi.query_enterprise(params)\nclassmethod"
-}

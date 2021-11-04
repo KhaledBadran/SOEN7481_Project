@@ -1,9 +1,0 @@
-{
-    "functionName": "test_cudapoa_complex_batch",
-    "className": null,
-    "fileName": "/clara-genomics_&_ClaraGenomicsAnalysis/pygenomeworks_&_test_&_test_cudapoa_bindings.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "random.seed(2)\nread_len = 500\nref = ''.join([random.choice(['A', 'C', 'G', 'T']) for _ in range(read_len)])\nnum_reads = 100\nmutation_rate = 0.02\nreads = []\nfor _ in range(num_reads):\n    new_read = ''.join([(r if random.random() > mutation_rate else random.\n        choice(['A', 'C', 'G', 'T'])) for r in ref])\n    reads.append(new_read)\ndevice = cuda.cuda_get_device()\nfree, total = cuda.cuda_get_mem_info(device)\nstream = cuda.CudaStream()\nbatch = CudaPoaBatch(1000, 1024, 0.9 * free, stream=stream, device_id=device)\nadd_status, seq_status = batch.add_poa_group(reads)\nbatch.generate_poa()\nconsensus, coverage, status = batch.get_consensus()\nconsensus = consensus[0]\nassert len(consensus) == len(ref)\nmatch_ratio = SequenceMatcher(None, ref, consensus).ratio()\nassert match_ratio == 1.0\npytest.mark.gpu"
-}

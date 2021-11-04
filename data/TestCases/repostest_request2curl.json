@@ -1,9 +1,0 @@
-{
-    "functionName": "test_request2curl",
-    "className": null,
-    "fileName": "/pestanko_&_3scale-api-python/tests_&_test_request2curl.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "URL = 'http://example.invalid'\nHEADERS = {'X-Header': 'this'}\nHEADERS_STR = \"-H 'X-Header: this'\"\nDATA = {'key': 'value'}\nBODY_STR = '-d key=value'\nrequest = _Request('GET', URL, None, None)\nassert request2curl(request) == f'curl -X GET {URL}'\nrequest = _Request('GET', URL, HEADERS, None)\nassert request2curl(request) == f'curl -X GET {HEADERS_STR} {URL}'\nrequest = _Request('POST', URL, HEADERS, DATA)\nassert request2curl(request) == f'curl -X POST {HEADERS_STR} {BODY_STR} {URL}'\nrequest = _Request('PUT', URL, None, DATA, True)\nassert request2curl(request) == f'curl -X PUT {BODY_STR} {URL}'\n"
-}

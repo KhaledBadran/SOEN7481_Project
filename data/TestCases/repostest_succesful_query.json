@@ -1,9 +1,0 @@
-{
-    "functionName": "test_succesful_query",
-    "className": "TestCartoDataSource",
-    "fileName": "/GeographicaGS_&_Longitude/longitude_&_core_&_tests_&_test_data_source_carto.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ds = CartoDataSource(user='', api_key='')\nds._sql_client = mock.MagicMock()\nds._sql_client.send.return_value = {'rows': [], 'time': 42.0, 'fields': {},\n    'total_rows': 0}\nresult = ds.query('some query')\nds._sql_client.send.assert_called_with('some query', do_post=False, format=\n    'json', parse_json=True)\nself.assertEqual([], result.rows)\nself.assertEqual(42, result.meta['response_time'])\n"
-}

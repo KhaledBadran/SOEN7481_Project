@@ -1,9 +1,0 @@
-{
-    "functionName": "test_servo_command_update",
-    "className": "TestMessages",
-    "fileName": "/PRIArobotics_&_HedgehogProtocol/tests_&_test_protocol.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "sub = Subscription()\nsub.subscribe = True\nsub.timeout = 10\nmsg = servo.CommandUpdate(0, 1000, sub)\nproto = HedgehogMessage()\nproto.servo_command_message.active = True\nproto.servo_command_message.position = 1000\nproto.servo_command_message.subscription.subscribe = True\nproto.servo_command_message.subscription.timeout = 10\nself.assertTransmissionServerClient(msg, proto, is_async=True)\nmsg = servo.CommandUpdate(0, None, sub)\nproto = HedgehogMessage()\nproto.servo_command_message.active = False\nproto.servo_command_message.subscription.subscribe = True\nproto.servo_command_message.subscription.timeout = 10\nself.assertTransmissionServerClient(msg, proto, is_async=True)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_setup",
-    "className": null,
-    "fileName": "/UW-Hydro_&_MetSim/metsim_&_tests_&_test_metsim.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Tests the setup of the MetSim object\"\"\"\nin_fmt = test_params['forcing_fmt']\nloc = data_locations[in_fmt]\nif in_fmt == 'binary' or in_fmt == 'ascii':\n    data_files = [os.path.join(loc, f) for f in os.listdir(loc)]\n    assert len(data_files) == 16\nelse:\n    data_files = loc\n    assert data_files == './metsim/data/test.nc'\ntest_params['forcing'] = data_files\nms = MetSim(test_params)\nreturn ms\npytest.fixture()"
-}

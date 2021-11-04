@@ -1,9 +1,0 @@
-{
-    "functionName": "test_check_health",
-    "className": "MixtureTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_phases_&_mixtures_&_GenericMixtureTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.air.set_mole_fraction(self.N2, 0.79)\nself.air.set_mole_fraction(self.O2, 0.209)\nself.air.set_mole_fraction(self.CO2, 0.001)\nself.air.set_mole_fraction(self.H2, 0.0)\nh = self.air.check_mixture_health()\nassert h.health is True\nself.air.set_mole_fraction(self.CO2, 0.002)\nh = self.air.check_mixture_health()\nassert h.health is False\nself.air.set_mole_fraction(self.CO2, 0.0)\nh = self.air.check_mixture_health()\nassert h.health is False\nassert len(h['mole_fraction_too_low']) == self.air.Np\nself.air.set_mole_fraction(self.CO2, 0.001)\nself.air['pore.mole_fraction.' + self.CO2.name][0] = 0.0\nh = self.air.check_mixture_health()\nassert h.health is False\nassert len(h['mole_fraction_too_low']) == 1\n"
-}

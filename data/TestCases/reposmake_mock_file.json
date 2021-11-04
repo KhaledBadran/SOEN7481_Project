@@ -1,9 +1,0 @@
-{
-    "functionName": "make_mock_file",
-    "className": null,
-    "fileName": "/Jammy2211_&_PyAutoCTI/test_&_unit_&_pipeline_&_test_pipeline.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "files = []\ndef mock_open(filename, flag, *args, **kwargs):\n    assert flag in ('w+', 'w+b', 'a')\n    file = MockFile()\n    file.filename = filename\n    files.append(file)\n    return file\nmonkeypatch.setattr(builtins, 'open', mock_open)\nreturn files\npytest.fixture(name='mock_files', autouse=True)"
-}

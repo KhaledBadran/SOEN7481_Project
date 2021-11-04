@@ -1,9 +1,0 @@
-{
-    "functionName": "test_to_array_with_nd_lists",
-    "className": "TestArrayFirst",
-    "fileName": "/hdoupe_&_ParamTools/paramtools_&_tests_&_test_parameters.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class ArrayAdjust(Parameters):\n    defaults = {'schema': {'labels': {'label1': {'type': 'int',\n        'validators': {'range': {'min': 0, 'max': 5}}}}}, 'arr': {'title':\n        'Array param', 'description': '', 'type': 'float', 'number_dims': 1,\n        'value': [1, 2, 3, 4]}, 'arr_2D': {'title': '2D Array Param',\n        'description': '', 'type': 'int', 'number_dims': 2, 'value': [[1, 2,\n        3], [4, 5, 6]]}}\n    array_first = True\nparams = ArrayAdjust()\nassert params\nassert isinstance(params.arr, np.ndarray)\nassert params.arr.tolist() == [1, 2, 3, 4]\nassert isinstance(params.arr_2D, np.ndarray)\nassert params.arr_2D.tolist() == [[1, 2, 3], [4, 5, 6]]\nparams.adjust({'arr': [4, 6, 8], 'arr_2D': [[7, 8, 9], [1, 5, 7]]})\nassert isinstance(params.arr, np.ndarray)\nassert isinstance(params.arr_2D, np.ndarray)\nnp.testing.assert_allclose(params.arr, [4, 6, 8])\nnp.testing.assert_allclose(params.arr_2D, [[7, 8, 9], [1, 5, 7]])\nwith pytest.raises(ParamToolsError):\n    params.adjust({'arr': [{'label1': 1, 'value': [4, 5, 6]}]})\n"
-}

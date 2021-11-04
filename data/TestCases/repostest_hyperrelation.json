@@ -1,9 +1,0 @@
-{
-    "functionName": "test_hyperrelation",
-    "className": "TestRegexMatching",
-    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_verification_rules.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "policyManager = ConfigPolicyManager('policy_config/hyperrelation_ruleset.conf')\ndataName = Name('/SecurityTestSecRule/Basic/Longer/Data2')\ndata1 = Data(dataName)\ndata2 = Data(dataName)\nmatchedRule = policyManager._findMatchingRule(dataName, 'data')\nself.keyChain.sign(data1, self.defaultCertName)\nself.keyChain.sign(data2, self.shortCertName)\nsignatureName1 = data1.getSignature().getKeyLocator().getKeyName()\nsignatureName2 = data2.getSignature().getKeyLocator().getKeyName()\nfailureReason = ['unknown']\nself.assertTrue(policyManager._checkSignatureMatch(signatureName1, dataName,\n    matchedRule, failureReason))\nself.assertFalse(policyManager._checkSignatureMatch(signatureName2,\n    dataName, matchedRule, failureReason))\ndataName = Name('/SecurityTestSecRule/Basic/Other/Data1')\ndata1 = Data(dataName)\ndata2 = Data(dataName)\nmatchedRule = policyManager._findMatchingRule(dataName, 'data')\nself.keyChain.sign(data1, self.defaultCertName)\nself.keyChain.sign(data2, self.shortCertName)\nsignatureName1 = data1.getSignature().getKeyLocator().getKeyName()\nsignatureName2 = data2.getSignature().getKeyLocator().getKeyName()\nself.assertFalse(policyManager._checkSignatureMatch(signatureName1,\n    dataName, matchedRule, failureReason))\nself.assertTrue(policyManager._checkSignatureMatch(signatureName2, dataName,\n    matchedRule, failureReason))\n"
-}

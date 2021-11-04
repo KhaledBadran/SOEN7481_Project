@@ -1,9 +1,0 @@
-{
-    "functionName": "test_convert_opaque_object_pie_to_core",
-    "className": "TestObjectFactory",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_test_factory.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a Pie opaque object can be converted into a core opaque\n        object.\n        \"\"\"\npie_obj = pobjects.OpaqueObject(self.opaque_bytes, enums.OpaqueDataType.NONE)\ncore_obj = self.factory.convert(pie_obj)\nself.assertIsInstance(core_obj, secrets.OpaqueObject)\nopaque_type = core_obj.opaque_data_type.value\nself.assertEqual(enums.OpaqueDataType.NONE, opaque_type)\nvalue = core_obj.opaque_data_value.value\nself.assertEqual(self.opaque_bytes, value)\n"
-}

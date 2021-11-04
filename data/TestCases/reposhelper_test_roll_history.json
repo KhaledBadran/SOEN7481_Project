@@ -1,9 +1,0 @@
-{
-    "functionName": "helper_test_roll_history",
-    "className": "UITestCase",
-    "fileName": "/AndreMiras_&_EtherollApp/src_&_etherollapp_&_tests_&_ui_&_test_etheroll_ui.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Roll history screen should display recent rolls, refs #61.\"\"\"\nbet_results_logs = PyEtherollTestUtils.bet_results_logs\nbet_logs = PyEtherollTestUtils.bet_logs\nmerged_logs = [{'bet_log': bet_logs[0], 'bet_result': bet_results_logs[0]},\n    {'bet_log': bet_logs[0], 'bet_result': bet_results_logs[0]}, {'bet_log':\n    bet_logs[2], 'bet_result': None}]\ncontroller = app.root\nself.assertIsNotNone(controller.current_account)\nscreen_manager = controller.screen_manager\nwith patch('pyetheroll.etheroll.Etheroll.get_merged_logs'\n    ) as m_get_merged_logs:\n    m_get_merged_logs.return_value = merged_logs\n    screen_manager.current = 'roll_results_screen'\n    self.assertTrue(self.wait_mock_called(m_get_merged_logs))\n    thread_info = [(t, t._target) for t in threading.enumerate()]\n    self.assertEqual(len(threading.enumerate()), 2, thread_info)\n    advance_frames_for_screen()\n    self.assertEqual(len(threading.enumerate()), 2)\n    main_thread = threading.enumerate()[0]\n    self.assertEqual(type(main_thread), threading._MainThread)\nroll_results_screen = controller.roll_results_screen\nroll_list = roll_results_screen.ids.roll_list_id\nitems = roll_list.children\nself.assertEqual(len(items), len(merged_logs))\nload_roll_screen(screen_manager)\n"
-}

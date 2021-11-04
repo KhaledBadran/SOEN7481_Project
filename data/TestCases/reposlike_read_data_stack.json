@@ -1,9 +1,0 @@
-{
-    "functionName": "like_read_data_stack",
-    "className": null,
-    "fileName": "/Hatoris_&_BioPlate/tests_&_test_plate_to_excel.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "if stack[0].name == 'Plate':\n    if accumulate:\n        header = ['well', 'value0']\n    else:\n        header = ['well', 'value']\nelif stack[0].name == 'Inserts':\n    if accumulate:\n        header = ['well', 'top0', 'bot0']\n    else:\n        header = ['well', 'top', 'bot']\nif accumulate:\n    for i in range(1, len(stack)):\n        if stack[0].name == 'Inserts':\n            header.append('top' + str(i))\n            header.append('bot' + str(i))\n        else:\n            header.append('value' + str(i))\nrm_empty = list(map(list, getattr(stack, 'iterate')(accumulate=accumulate,\n    order=order)))\nrm_empty.insert(0, header)\nreturn list(map(remove_tail, rm_empty))\n"
-}

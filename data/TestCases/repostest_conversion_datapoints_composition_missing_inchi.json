@@ -1,9 +1,0 @@
-{
-    "functionName": "test_conversion_datapoints_composition_missing_inchi",
-    "className": "TestConvertToReSpecTh",
-    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_chemked.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test for appropriate handling of composition with missing InChI.\n        \"\"\"\nfile_path = os.path.join('testfile_st.yaml')\nfilename = pkg_resources.resource_filename(__name__, file_path)\nc = ChemKED(filename)\nfor idx, dp in enumerate(c.datapoints):\n    c.datapoints[idx].composition = dict(H2=Composition(**{'amount': Q_(0.1,\n        'dimensionless'), 'species_name': 'H2', 'InChI': None, 'SMILES':\n        None, 'atomic_composition': None}), O2=Composition(**{'amount': Q_(\n        0.1, 'dimensionless'), 'species_name': 'O2', 'InChI': None,\n        'SMILES': None, 'atomic_composition': None}), Ar=Composition(**{\n        'amount': Q_(0.8, 'dimensionless'), 'species_name': 'Ar', 'InChI':\n        None, 'SMILES': None, 'atomic_composition': None}))\nwith TemporaryDirectory() as temp_dir:\n    newfile = os.path.join(temp_dir, 'test.xml')\n    c.convert_to_ReSpecTh(newfile)\n    tree = etree.parse(newfile)\nroot = tree.getroot()\nwith pytest.warns(UserWarning) as record:\n    common = get_common_properties(root)\nmessages = [str(record.pop(UserWarning).message) for i in range(3)]\nassert 'Missing InChI for species H2' in messages\nassert 'Missing InChI for species O2' in messages\nassert 'Missing InChI for species Ar' in messages\nassert len(common['composition']['species']) == 3\nfor spec in common['composition']['species']:\n    assert spec in [{'amount': [0.1], 'species-name': 'H2'}, {'amount': [\n        0.1], 'species-name': 'O2'}, {'amount': [0.8], 'species-name': 'Ar'}]\n"
-}

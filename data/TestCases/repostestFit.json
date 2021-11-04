@@ -1,9 +1,0 @@
-{
-    "functionName": "testFit",
-    "className": "DiscreteModelBridgeTest",
-    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_discrete_modelbridge.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "ma = DiscreteModelBridge()\nma._training_data = self.observations\nmodel = mock.create_autospec(DiscreteModel, instance=True)\nma._fit(model, self.search_space, self.observation_features, self.\n    observation_data)\nself.assertEqual(ma.parameters, ['x', 'y', 'z'])\nself.assertEqual(sorted(ma.outcomes), ['a', 'b'])\nXs = {'a': [[0, 'foo', True], [1, 'foo', True], [1, 'bar', True]], 'b': [[0,\n    'foo', True], [1, 'foo', True]]}\nYs = {'a': [[1.0], [2.0], [3.0]], 'b': [[-1.0], [-2.0]]}\nYvars = {'a': [[1.0], [2.0], [3.0]], 'b': [[6.0], [7.0]]}\nparameter_values = [[0.0, 1.0], ['foo', 'bar'], [True]]\nmodel_fit_args = model.fit.mock_calls[0][2]\nfor i, x in enumerate(model_fit_args['Xs']):\n    self.assertEqual(x, Xs[ma.outcomes[i]])\nfor i, y in enumerate(model_fit_args['Ys']):\n    self.assertEqual(y, Ys[ma.outcomes[i]])\nfor i, v in enumerate(model_fit_args['Yvars']):\n    self.assertEqual(v, Yvars[ma.outcomes[i]])\nself.assertEqual(model_fit_args['parameter_values'], parameter_values)\nsq_feat = ObservationFeatures({})\nsq_data = self.observation_data[0]\nwith self.assertRaises(ValueError):\n    ma._fit(model, self.search_space, self.observation_features + [sq_feat],\n        self.observation_data + [sq_data])\nmock.patch('ax.modelbridge.discrete.DiscreteModelBridge.__init__',\n    return_value=None)"
-}

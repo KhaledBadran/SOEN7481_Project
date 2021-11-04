@@ -1,9 +1,0 @@
-{
-    "functionName": "addMono",
-    "className": null,
-    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_DataFile.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "mono = inst.create_group('monochromator')\nmono.attrs['NX_class'] = np.string_('NXmonochromator')\ndset = mono.create_dataset('type', (1,), dtype='S70')\ndset[0] = getattr(self, 'monochromatorType')\nattributes = ['d_spacing', 'horizontal_curvature', 'vertical_curvature',\n    'horizontal_curvature_zero', 'vertical_curvature_zero', 'gm', 'gm_zero',\n    'tlm', 'tlm_zero', 'tum', 'tum_zero']\nunits = ['angstrom'] + ['meter'] * 4 + ['degree'] * 6\nvalues = [('monochromator' + x) for x in ['DSpacing', 'HorizontalCurvature',\n    'VerticalCurvature', 'HorizontalCurvatureZero', 'VerticalCurvatureZero',\n    'GM', 'GMZero', 'TLM', 'TLMZero', 'TUM', 'TUMZero']]\nfor att, val, unit in zip(attributes, values, units):\n    if val in self.__dict__:\n        dset = mono.create_dataset(att, (1,), 'float32')\n        dset[0] = getattr(self, val)\n        dset.attrs['units'] = unit\nmonoSlit = inst.create_group('monochromator_slit')\nmonoSlit.attrs['NX_class'] = np.string_('NXmonochromatorslit')\nattributes = [(x + zero) for x in ['bottom', 'left', 'right', 'top'] for\n    zero in ['', '_zero']]\nvalues = [('monochromatorSlit' + x + zero) for x in ['Bottom', 'Left',\n    'Right', 'Top'] for zero in ['', 'Zero']]\nfor att, value in zip(attributes, values):\n    val = getattr(self, value)\n    if not val.dtype == 'O':\n        dset = monoSlit.create_dataset(att, (1,), 'float32')\n        dset[0] = val\n        dset.attrs['units'] = np.string_('mm')\nfor value, att in zip(['monochromatorSlitXGap', 'monochromatorSlitYGap'], [\n    'x_gap', 'y_gap']):\n    dset = monoSlit.create_dataset(att, (3,), 'float32')\n    dset[:] = getattr(self, value)\n    dset.attrs['units'] = 'mm'\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_full_fill_on_unacked_cr_with_acked_new_order",
-    "className": null,
-    "fileName": "/nabicht_&_Buttonwood/tests_&_test_MarketObjects_&_test_Events_&_test_ordereventchain.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "n = NewOrderCommand(1, 1234235.123, 2342, 'user_x', MARKET, BID_SIDE, FAR,\n    Price('34.52'), 1000)\noec = OrderEventChain(n, LOGGER, MonotonicIntID())\nack = AcknowledgementReport(2, 1234235.123, 2342, 'user_x', MARKET, n,\n    Price('34.52'), 1000, 1000)\noec.apply_acknowledgement_report(ack)\nassert oec.visible_qty() == 1000\nassert oec.current_exposure().qty() == 1000\nassert oec.current_exposure().price() == Price('34.52')\nassert len(oec.open_exposure_requests()) == 0\nassert oec.is_open()\ncr = CancelReplaceCommand(3, 1234236.842, 2342, 'user_x', MARKET, BID_SIDE,\n    Price('34.56'), 800)\noec.apply_cancel_replace_command(cr)\nassert oec.visible_qty() == 1000\nassert oec.current_exposure().qty() == 1000\nassert oec.current_exposure().price() == Price('34.52')\nassert oec.is_open()\nassert len(oec.open_exposure_requests()) == 1\nassert oec.most_recent_requested_exposure() == Exposure(Price('34.56'), 800, 3)\nfull_fill = FullFillReport(4, 1234237.123, 2342, 'user_x', MARKET, cr, 800,\n    Price('34.56'), BID_SIDE, 12345)\noec.apply_full_fill_report(full_fill)\nassert oec.visible_qty() == 0\nassert oec.current_exposure().price() is None\nassert oec.current_exposure().qty() == 0\nassert oec.current_exposure().causing_event_id() == 4\nassert len(oec.open_exposure_requests()) == 0\nassert oec.is_open() is False\n"
-}

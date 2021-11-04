@@ -1,9 +1,0 @@
-{
-    "functionName": "_rotate_and_chop",
-    "className": "DelaunayGeometry",
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_materials_&_VoronoiFibers.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        Method to rotate a set of vertices (or coords) to align with an axis\n        points must be coplanar and normal must be given\n        Chops axis coord to give vertices back in 2D\n        Used to prepare verts for printing or calculating convex hull in order\n        to arrange them in hull order for calculations and printing\n        \"\"\"\nxaxis = [1, 0, 0]\nyaxis = [0, 1, 0]\nzaxis = [0, 0, 1]\nangle = tr.angle_between_vectors(normal, axis)\nif angle == 0.0 or angle == np.pi:\n    facet = verts\nelse:\n    M = tr.rotation_matrix(tr.angle_between_vectors(normal, axis), tr.\n        vector_product(normal, axis))\n    try:\n        facet = np.dot(verts, M[:3, :3].T)\n    except ValueError:\n        pass\ntry:\n    x = facet[:, (0)]\n    y = facet[:, (1)]\n    z = facet[:, (2)]\nexcept IndexError:\n    x = facet[0]\n    y = facet[1]\n    z = facet[2]\nif axis == xaxis:\n    output = np.column_stack((y, z))\nelif axis == yaxis:\n    output = np.column_stack((x, z))\nelif axis == zaxis:\n    output = np.column_stack((x, y))\nelse:\n    output = facet\nreturn output\n"
-}

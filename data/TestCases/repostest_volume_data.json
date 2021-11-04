@@ -1,9 +1,0 @@
-{
-    "functionName": "test_volume_data",
-    "className": null,
-    "fileName": "/martinohanlon_&_BlueDot/tests_&_test_bluetooth_comms.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from random import choice, randint\nimport string\nno_of_transmissions = randint(100, 200)\ntest_data = ''\nreceived = Event()\ndef data_received_server(data):\n    assert data == test_data\n    bts.send(test_data)\ndef data_received_client(data):\n    assert data == test_data\n    received.set()\nbts = BluetoothServer(data_received_server, device='hci0')\nbtc = BluetoothClient(bta0.address, data_received_client, device='hci1')\nfor test_no in range(no_of_transmissions):\n    test_data = ''.join(choice(string.ascii_uppercase + string.\n        ascii_lowercase + string.digits) for _ in range(randint(30, 100)))\n    print(test_data)\n    btc.send(test_data)\n    assert received.wait(1)\n    received.clear()\nbtc.disconnect()\nbts.stop()\n"
-}

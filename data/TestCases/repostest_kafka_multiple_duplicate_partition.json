@@ -1,9 +1,0 @@
-{
-    "functionName": "test_kafka_multiple_duplicate_partition",
-    "className": null,
-    "fileName": "/PearsonEducation_&_Alarmageddon/tests_&_validations_&_test_kafka.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ssh_ctx = ssh.SshContext('ubuntu', get_mock_key_file(tmpdir))\ntext = (\n    'topic: topic1\\tpartition: 0\\tleader: 140\\treplicas: 140,187,96,99,132\\tisr: 140,187,96,99,132\\r\\ntopic: topic1\\tpartition: 1\\tleader: 187\\treplicas: 187,96,99,132,140\\tisr: 132,96,187,140,99\\r\\ntopic: topic1\\tpartition: 2\\tleader: 96\\treplicas: 96,99,132,140,187\\tisr: 96,99,132,140,187\\r\\ntopic: topic1\\tpartition: 3\\tleader: 99\\treplicas: 99,132,140,187,96\\tisr: 99,132,140,187,96\\r\\ntopic: topic1\\tpartition: 4\\tleader: 99\\treplicas: 132,140,187,96,99\\tisr: 132,140,187,96,99\\r\\ntopic: topic2\\tpartition: 0\\tleader: 187\\treplicas: 187,96,99,132,140\\tisr: 132,96,187,140,99\\r\\ntopic: topic2\\tpartition: 1\\tleader: 96\\treplicas: 96,99,132,140,187\\tisr: 132,96,187,140,99\\r\\ntopic: topic2\\tpartition: 2\\tleader: 99\\treplicas: 99,132,140,187,96\\tisr: 132,96,187,140,99\\r\\ntopic: topic2\\tpartition: 3\\tleader: 132\\treplicas: 132,140,187,96,99\\tisr: 132,96,187,140,99\\r\\ntopic: topic2\\tpartition: 4\\tleader: 132\\treplicas: 140,187,96,99,132\\tisr: 132,96,187,140,99'\n    )\nmonkeypatch.setattr(Connection, 'run', lambda self, x, warn:\n    get_mock_ssh_text(text, 0))\nwith pytest.raises(ValidationFailure):\n    kafka.KafkaStatusValidation(ssh_ctx, zookeeper_nodes='1.2.3.4:2181',\n        hosts=['127.0.0.1'], cluster_name=_CLUSTER_NAME).perform({})\n"
-}

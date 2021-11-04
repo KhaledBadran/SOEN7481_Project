@@ -1,9 +1,0 @@
-{
-    "functionName": "test_query_with_invalid_filter_op",
-    "className": "TestBuffer",
-    "fileName": "/BciPy_&_BciPy/bcipy_&_acquisition_&_tests_&_test_buffer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test query with invalid filter operator.\"\"\"\nn_records = 20\nchannels = ['ch1', 'ch2', 'TRG']\nchannel_count = len(channels)\nbuf = Buffer(channels=channels)\nfor i, data in enumerate(mock_data(n_records, channel_count)):\n    timestamp = float(i)\n    buf.append(Record(data, timestamp, None))\nwith pytest.raises(Exception):\n    buf.query_data(filters=[('TRG', '> 0; DROP TABLE data; --', 0)])\nbuf.cleanup()\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_filter_stars",
-    "className": null,
-    "fileName": "/mavrix93_&_LightCurvesClassifier/test_&_cli_&_test_cli.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "if os.path.exists('/tmp/lcc_test/results/TestRun/lcs'):\n    shutil.rmtree('/tmp/lcc_test/results/TestRun/lcs')\ncmd = (\n    'lcc filter_stars.py -d OgleII -q query_ogle.txt -f CurveShapeFilter.filter -r TestRun'\n    )\nsys.argv = cmd.split()\nconfig = mock.Mock()\nconfig.QUERIES = os.path.join(os.path.dirname(os.path.abspath(__file__)),\n    os.pardir, 'resources')\nconfig.FILTERS = os.path.join(os.path.dirname(os.path.abspath(__file__)),\n    os.pardir, 'resources')\nconfig.RESULTS = '/tmp/lcc_test/results'\nfilter_stars(config)\nassert os.path.exists('/tmp/lcc_test/results/TestRun/lcs')\nassert os.path.exists('/tmp/lcc_test/results/TestRun/lcs/LMC_SC1_1.fits')\nassert os.path.exists('/tmp/lcc_test/results/TestRun/lcs/LMC_SC5_1.fits')\n"
-}

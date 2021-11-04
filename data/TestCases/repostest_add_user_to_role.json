@@ -1,9 +1,0 @@
-{
-    "functionName": "test_add_user_to_role",
-    "className": "TestCrossEnterpriseCommands",
-    "fileName": "/Keeper-Security_&_Commander/tests_&_test_cross_commands.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "param1 = TestCrossEnterpriseCommands.params1\nparam2 = TestCrossEnterpriseCommands.params2\nusers = [x for x in param2.enterprise['users']]\nself.assertGreater(len(users), 0, 'cannot resolve user')\nuser = users[0]\nent2_user_id = user['enterprise_user_id']\nids = []\nif 'roles' in param1.enterprise:\n    ids = [x['role_id'] for x in param1.enterprise['roles']]\nrole_cmd = EnterpriseRoleCommand()\nif len(ids) == 0:\n    role_cmd.execute(param1, add=True, role=['Role1'])\n    ids = [x['role_id'] for x in param1.enterprise['roles']]\nself.assertGreater(len(ids), 0, 'cannot resolve role')\nent1_role_id = ids[0]\nrq = {'command': 'role_user_add', 'role_id': ent1_role_id,\n    'enterprise_user_id': ent2_user_id}\nfailed = False\ntry:\n    api.communicate(param1, rq)\nexcept KeeperApiError as err:\n    failed = True\n    self.assertEqual(err.result_code, 'bad_inputs_enterprise_user_id')\nself.assertTrue(failed)\nfailed = False\ntry:\n    api.communicate(param2, rq)\nexcept KeeperApiError as err:\n    failed = True\n    self.assertEqual(err.result_code, 'bad_inputs_role_id')\nself.assertTrue(failed)\nrq = {'command': 'role_delete', 'role_id': ent1_role_id}\nfailed = False\ntry:\n    api.communicate(param2, rq)\nexcept KeeperApiError as err:\n    failed = True\n    self.assertEqual(err.result_code, 'bad_inputs_role_id')\nself.assertTrue(failed)\n"
-}

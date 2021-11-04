@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ProxyList_valid_range_is_enum",
-    "className": null,
-    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_util_fns.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class ProxyChild:\n\n    def __init__(self, parent, name):\n        self._parent = parent\n        self._name = name\nclass MockEnum(Enum):\n    a = 'aa'\n    b = 'bb'\nparent = object()\nproxy_list = ProxyList(parent, ProxyChild, MockEnum)\nassert proxy_list['aa']._name == MockEnum.a.value\nassert proxy_list['b']._name == MockEnum.b.value\nassert proxy_list[MockEnum.a]._name == MockEnum.a.value\n"
-}

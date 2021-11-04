@@ -1,9 +1,0 @@
-{
-    "functionName": "test_showRises_2",
-    "className": null,
-    "fileName": "/mworion_&_MountWizzard4/mw4_&_test_&_unit_tests_&_gui_&_mainWmixin_&_test_tabSatellite.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "t0 = app.app.mount.obsSite.timeJD\nt1 = app.app.mount.obsSite.ts.tt_jd(app.app.mount.obsSite.timeJD.tt + 0.1)\nt2 = app.app.mount.obsSite.ts.tt_jd(app.app.mount.obsSite.timeJD.tt + 0.2)\ntle = ['NOAA 8',\n    '1 13923U 83022A   20076.90417581  .00000005  00000-0  19448-4 0  9998',\n    '2 13923  98.6122  63.2579 0016304  96.9736 263.3301 14.28696485924954']\napp.satellite = EarthSatellite(tle[1], tle[2], name=tle[0])\nwith mock.patch.object(EarthSatellite, 'find_events', return_value=([t0, t1,\n    t2], [0, 2, 1])):\n    val = app.showRises()\n    assert isinstance(val, dict)\n"
-}

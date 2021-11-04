@@ -1,9 +1,0 @@
-{
-    "functionName": "testExperimentOutcomeConstraintUpdates",
-    "className": "SQAStoreTest",
-    "fileName": "/facebook_&_Ax/ax_&_storage_&_sqa_store_&_tests_&_test_sqa_store.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "experiment = get_experiment_with_batch_trial()\nsave_experiment(experiment)\nself.assertEqual(get_session().query(SQAMetric).count(), len(experiment.\n    metrics))\noptimization_config = get_optimization_config()\noutcome_constraint = get_outcome_constraint()\noutcome_constraint.bound = -1.0\noptimization_config.outcome_constraints = [outcome_constraint]\nexperiment.optimization_config = optimization_config\nsave_experiment(experiment)\nself.assertEqual(get_session().query(SQAMetric).count(), len(experiment.\n    metrics))\noutcome_constraint2 = OutcomeConstraint(metric=Metric(name='outcome'), op=\n    ComparisonOp.GEQ, bound=-0.5)\noptimization_config.outcome_constraints = [outcome_constraint,\n    outcome_constraint2]\nexperiment.optimization_config = optimization_config\nsave_experiment(experiment)\nself.assertEqual(get_session().query(SQAMetric).count(), len(experiment.\n    metrics))\noptimization_config.outcome_constraints = [outcome_constraint]\nexperiment.optimization_config = optimization_config\nsave_experiment(experiment)\nself.assertEqual(get_session().query(SQAMetric).count(), len(experiment.\n    metrics))\nloaded_experiment = load_experiment(experiment.name)\nself.assertEqual(experiment, loaded_experiment)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_keybase_create_team",
-    "className": "KeybaseTest",
-    "fileName": "/cmsteffen-code_&_PyKBLib/tests_&_test_pykblib_keybase.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.keybase._api.call_api.side_effect = APIException('EXCEPTION')\nwith self.assertRaises(KeybaseException):\n    self.keybase.create_team('team_two')\nself.keybase._api.call_api.assert_called_with('team', {'method':\n    'create-team', 'params': {'options': {'team': 'team_two'}}})\nself.keybase._api.call_api.side_effect = None\nself.keybase._api.call_api.return_value = dict_to_ntuple({'result': {\n    'chatSent': False}})\nwith self.assertRaises(KeybaseException):\n    new_team = self.keybase.create_team('team_one')\nself.keybase._api.call_api.return_value = dict_to_ntuple({'result': {\n    'chatSent': True, 'creatorAdded': True}})\nnew_team = self.keybase.create_team('team_two')\nself.assertTrue('team_two' in self.keybase.teams)\nmock_team.assert_called_with('team_two')\nself.keybase._api.call_api.return_value = dict_to_ntuple({'result': {\n    'chatSent': True, 'creatorAdded': False}})\nnew_team = self.keybase.create_team('team_three')\nself.assertTrue('team_three' in self.keybase.teams)\nmock_team.assert_called_with('team_three')\nmock.patch('pykblib.keybase.Keybase.team')"
-}

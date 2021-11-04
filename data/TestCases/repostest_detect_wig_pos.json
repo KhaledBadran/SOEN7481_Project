@@ -1,9 +1,0 @@
-{
-    "functionName": "test_detect_wig_pos",
-    "className": "TestsRNAIntergenic",
-    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_sRNA_intergenic.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "si.replicate_comparison = self.mock.mock_replicate_comparison\nnums = {'pro': 3, 'tss': 3, 'uni': 0, 'cds': 3, 'ta': 3}\nout_table = StringIO()\noutput = StringIO()\nargs = self.mock_args.mock()\nargs.texs = 'texs'\nargs.replicates = 'rep'\nargs.max_len = 300\nargs.min_len = 30\nargs.decrease_inter = 50\nargs.fuzzy_inter = 5\nargs.tex_notex = 'tex_notex'\nargs.pros = copy.deepcopy(self.example.pros)\ntas = copy.deepcopy(self.example.tas)\nargs.table_best = True\nargs.nums = nums\nargs.out_table = out_table\nargs.output = output\nargs.tolerance = 5\nsi.detect_wig_pos(self.example.wigs, tas[0], 20, 70, 'TSS_160+', 10, 20, args)\nself.assertEqual(output.getvalue(),\n    \"\"\"aaa\tANNOgesic\tncRNA\t20\t190\t.\t+\t.\tID=aaa_srna0;Name=sRNA_00000;sRNA_type=intergenic;with_TSS=TSS_160+;end_cleavage=Cleavage:190_+;best_avg_coverage=40;best_high_coverage=50;best_low_coverage=10\n\"\"\"\n    )\nself.assertEqual(out_table.getvalue(),\n    'aaa\\t00000\\t20\\t190\\t+\\tcond1\\ttest1\\t40\\t50\\t10\\t\\n')\n"
-}

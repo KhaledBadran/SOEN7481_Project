@@ -1,9 +1,0 @@
-{
-    "functionName": "test_halomod_f2d_copy",
-    "className": null,
-    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_power.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from pyccl.pyutils import assert_warns\nmdef = ccl.halos.MassDef('vir', 'matter')\nhmf = ccl.halos.MassFuncSheth99(COSMO_HM, mdef, mass_def_strict=False,\n    use_delta_c_fit=True)\nhbf = ccl.halos.HaloBiasSheth99(COSMO_HM, mass_def=mdef, mass_def_strict=False)\ncc = ccl.halos.ConcentrationDuffy08(mdef)\nprf = ccl.halos.HaloProfileNFW(cc)\nhmc = ccl.halos.HMCalculator(COSMO_HM, hmf, hbf, mdef)\npk2d = ccl.halos.halomod_Pk2D(COSMO_HM, hmc, prf, normprof1=True)\npsp_new = pk2d.psp\npk_old = assert_warns(ccl.CCLWarning, ccl.nonlin_matter_power, COSMO_HM, \n    1.0, 0.8)\npk_new = pk2d.eval(1.0, 0.8, COSMO_HM)\npsp_old = COSMO_HM.cosmo.data.p_nl\nassert psp_new.lkmin == psp_old.lkmin\nassert psp_new.lkmax == psp_old.lkmax\nassert psp_new.amin == psp_old.amin\nassert psp_new.amax == psp_old.amax\nassert psp_new.is_factorizable == psp_old.is_factorizable\nassert psp_new.is_k_constant == psp_old.is_k_constant\nassert psp_new.is_a_constant == psp_old.is_a_constant\nassert psp_new.is_log == psp_old.is_log\nassert psp_new.growth_factor_0 == psp_old.growth_factor_0\nassert psp_new.growth_exponent == psp_old.growth_exponent\nassert psp_new.extrap_order_lok == psp_old.extrap_order_lok\nassert psp_new.extrap_order_hik == psp_old.extrap_order_hik\nassert pk_old == pk_new\n"
-}

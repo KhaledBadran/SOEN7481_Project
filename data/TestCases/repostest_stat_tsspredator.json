@@ -1,9 +1,0 @@
-{
-    "functionName": "test_stat_tsspredator",
-    "className": "TestStatTSSpredator",
-    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_stat_TSSpredater.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "detect = False\ntss_file = os.path.join(self.test_folder, 'aaa_TSS.gff')\nstat_file = os.path.join(self.test_folder, 'stat')\nlib_file = os.path.join(self.test_folder, 'lib')\ngen_file(tss_file, self.example.tss)\nst.stat_tsspredator(tss_file, 'TSS', stat_file, lib_file)\ndatas = import_data(stat_file)\nfor data in datas:\n    if 'Primary' in data:\n        self.assertEqual(data.split(' = ')[-1], '1 (1.0)')\ndatas = import_data(lib_file)\nline = '\\n'.join(datas)\nif 'TSB_OD_0.2' in line and 'pMEM_OD_0.5' in line and 'pMEM_t2' in line:\n    detect = True\nself.assertTrue(detect)\nself.assertTrue(os.path.exists('TSS_class_aaa.png'))\nos.remove('TSS_class_aaa.png')\n"
-}

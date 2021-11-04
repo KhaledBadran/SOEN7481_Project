@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ordered_choice_skipws_ws",
-    "className": null,
-    "fileName": "/textX_&_Arpeggio/arpeggio_&_tests_&_regressions_&_issue_61_&_test_issue_61.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "def sentence():\n    return Sequence(ZeroOrMore(word), skipws=True), EOF\ndef word():\n    return OrderedChoice([(id, ' ', '.'), id, '.'], skipws=True)\ndef id():\n    return 'id'\nparser = ParserPython(sentence)\ntree = parser.parse('id id .')\nassert len(tree) == 4\ntree = parser.parse('id id.')\nassert len(tree) == 4\ntree = parser.parse('idid.')\nassert len(tree) == 4\ntree = parser.parse('idid .')\nassert len(tree) == 4\ndef word():\n    return OrderedChoice([(id, ' ', '.'), id, '.'], skipws=False)\nparser = ParserPython(sentence)\nwith pytest.raises(NoMatch):\n    parser.parse('id id .')\ntree = parser.parse('idid.')\nassert len(tree) == 4\ntree = parser.parse('idid .')\nassert len(tree) == 3\n"
-}

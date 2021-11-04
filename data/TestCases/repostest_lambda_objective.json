@@ -1,9 +1,0 @@
-{
-    "functionName": "test_lambda_objective",
-    "className": null,
-    "fileName": "/oberbichler_&_EQlib/tests_&_test_lambda_elements.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "x1 = eq.Variable(1)\nx2 = eq.Variable(2)\ndef compute(variables, g, h):\n    x1, x2 = hj.HyperJet.variables(variables)\n    f = x1 ** 2 + x1 * x2 + x2 ** 3\n    return explode(f, g, h)\nelement = eq.LambdaObjective([x1, x2], compute)\ng = np.empty(2)\nh = np.empty((2, 2))\nf = element.compute(g, h)\nassert_equal(f, 11)\nassert_equal(g, [4, 13])\nassert_equal(h, [[2, 1], [1, 12]])\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_struct_validation",
-    "className": "ValidationTests",
-    "fileName": "/Gilnaa_&_Hydras/tests_&_test_validation.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Test that a struct will throw an exception when a validation fails.\"\"\"\ntry:\n    Unvalidated.deserialize(b'\\x00')\nexcept ValueError:\n    self.fail('Valid data deemed invalid by framework.')\nwith self.assertRaises(ValidationError):\n    RangeValidated.deserialize(b'\\x00')\nHydraSettings.validate = False\ntry:\n    Unvalidated.deserialize(b'\\x00')\n    RangeValidated.deserialize(b'\\x00')\nexcept ValidationError:\n    self.fail('An exception was raised even when turned off by user.')\n"
-}

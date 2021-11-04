@@ -1,9 +1,0 @@
-{
-    "functionName": "test_file_author_only",
-    "className": "TestConvertReSpecTh",
-    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_converters.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that passing the file author only works properly\n        \"\"\"\nfile_path = os.path.join('testfile_st.xml')\nfilename = pkg_resources.resource_filename(__name__, file_path)\nfile_author = 'Kyle Niemeyer'\nproperties = ReSpecTh_to_ChemKED(filename, file_author, validate=False)\nc = ChemKED(dict_input=properties, skip_validation=True)\nassert c.file_authors[1]['name'] == file_author\nassert c.file_authors[1].get('ORCID', None) is None\npytest.mark.filterwarnings('ignore:Using DOI')"
-}

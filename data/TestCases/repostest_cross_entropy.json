@@ -1,9 +1,0 @@
-{
-    "functionName": "test_cross_entropy",
-    "className": null,
-    "fileName": "/tobinsouth_&_ProcessEntropy/test_code.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "assert find_lambda_jit(np.array([5], dtype=int), np.array([1, 2, 3, 4, 5, 3,\n    2, 4], dtype=int)) == 2\nassert find_lambda_jit(np.array([5, 7], dtype=int), np.array([1, 2, 3, 4, 5,\n    3, 2, 4], dtype=int)) == 2\nassert find_lambda_jit(np.array([5, 3, 2], dtype=int), np.array([1, 2, 3, 4,\n    5, 3, 2, 4], dtype=int)) == 3\nassert find_lambda_jit(np.array([5, 3, 5, 5], dtype=int), np.array([1, 2, 3,\n    4, 5, 3, 2, 4], dtype=int)) == 3\nassert find_lambda_jit(np.array([1, 2, 3], dtype=int), np.array([1], dtype=int)\n    ) == 2\nassert find_lambda_jit(np.array([1, 2, 3], dtype=int), np.array([], dtype=int)\n    ) == 1\nA = np.array([2, 1, 5, 7, 8, 9, 7, 8, 9, 1, 2, 3, 10, 10, 10], dtype=int)\nB = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 3, 2, 1, 5], dtype=int)\nindices = np.array([0, 0, 3, 3, 9, 9, 12, 12, 12, 12, 12, 14, 14, 14, 14],\n    dtype=int)\nL = get_all_lambdas(A, B, indices, np.zeros(len(A)).astype(int))\nassert np.mean(L == np.array([1.0, 1.0, 1.0, 1.0, 3.0, 2.0, 7.0, 6.0, 5.0, \n    4.0, 3.0, 2.0, 1.0, 1.0, 1.0])) == 1\nassert np.sum(L) == 39\nsynth_data_A = [(0, [1, 2, 3]), (3, [1, 2, 3, 4, 5, 6, 7, 6, 5, 6, 5, 6]),\n    (5, [4, 5, 4, 5, 1, 2, 3, 10, 10])]\nsynth_data_B = [(2, [1, 2, 3, 4, 10, 5, 4, 5, 4]), (4, [10, 10, 6])]\nassert np.mean(timeseries_cross_entropy(synth_data_A, synth_data_B,\n    get_lambdas=True, please_sanitize=False) == np.array([1.0, 1.0, 1.0, \n    5.0, 4.0, 3.0, 3.0, 2.0, 1.0, 1.0, 1.0, 2.0, 1.0, 2.0, 1.0, 4.0, 4.0, \n    3.0, 2.0, 4.0, 3.0, 2.0, 2.0, 2.0])) == 1\n"
-}

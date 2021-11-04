@@ -1,9 +1,0 @@
-{
-    "functionName": "test_active_product",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_kernels_&_test_kernels.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "X = rng.randn(N, D)\ndims, rand_idx, ls = list(range(D)), int(rng.randint(0, D)), rng.uniform(\n    1.0, 7.0, D)\nactive_dims_list = [dims[:rand_idx] + dims[rand_idx + 1:], [rand_idx], dims]\nlengthscales_list = [np.hstack([ls[:rand_idx], ls[rand_idx + 1:]]), ls[\n    rand_idx], ls]\nkernels = [gpflow.kernels.SquaredExponential(lengthscales=lengthscales,\n    active_dims=dims) for dims, lengthscales in zip(active_dims_list,\n    lengthscales_list)]\nkernel_prod = kernels[0] * kernels[1]\nKff = kernels[2](X)\nKff_prod = kernel_prod(X)\nassert np.allclose(Kff, Kff_prod)\npytest.mark.parametrize('N, D', [[30, 4], [10, 7]])"
-}

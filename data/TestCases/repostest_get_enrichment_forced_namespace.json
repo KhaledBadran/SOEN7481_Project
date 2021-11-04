@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_enrichment_forced_namespace",
-    "className": null,
-    "fileName": "/PearsonEducation_&_Alarmageddon/tests_&_validations_&_test_validation.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "pub_values = {(1): 2, 'a': 'b'}\npage_values = {(1): 5, 'what': 'who'}\nvalid = Validation('low', Priority.LOW)\npub = publisher.Publisher(priority_threshold=Priority.CRITICAL)\npage = pagerduty.PagerDutyPublisher('url', 'token')\nvalid.enrich(pub, pub_values, force_namespace=True)\nvalid.enrich(page, page_values, force_namespace=True)\nassert valid.get_enriched(page, force_namespace=True) == {(1): 5, 'what': 'who'\n    }\n"
-}

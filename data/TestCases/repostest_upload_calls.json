@@ -1,9 +1,0 @@
-{
-    "functionName": "test_upload_calls",
-    "className": null,
-    "fileName": "/superDross_&_MangaReaderScraper/tests_&_test_uploaders.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with mock.patch(f'scraper.uploaders.uploaders.{to_mock}', mock_obj):\n    manga = Manga('dragon-ball', 'pdf')\n    manga.add_volume(1)\n    manga.add_volume(2)\n    manga.volume[1].file_path = Path('tests/test_files/jpgs/test-manga_1_1.jpg'\n        )\n    manga.volume[2].file_path = Path('tests/test_files/jpgs/test-manga_1_2.jpg'\n        )\n    uploader = setup_uploader(uploader)\n    responses = uploader(manga)\n    assert len(responses) == 2\n    assert all(x == {'status': 'success'} for x in responses)\npytest.mark.parametrize('to_mock,mock_obj,uploader', [('PyCloud',\n    MockedPyCloud, PcloudUploader), ('Mega', MockedMegaNotFound, MegaUploader)]\n    )"
-}

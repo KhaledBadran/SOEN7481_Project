@@ -1,9 +1,0 @@
-{
-    "functionName": "test_overwriting_boundary_faces",
-    "className": "RelativePermeabilityTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_algorithms_&_metrics_&_RelativePermabilityTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "inlets = {'x': 'left', 'y': 'left', 'z': 'left'}\noutlets = {'x': 'right', 'y': 'right', 'z': 'right'}\nrp = op.algorithms.metrics.RelativePermeability(network=self.net)\nrp.setup(invading_phase=self.non_wet_phase, defending_phase=self.wet_phase,\n    invasion_sequence='invasion_sequence', flow_inlets=inlets, flow_outlets\n    =outlets)\nrp.run(Snw_num=10)\nresults = rp.get_Kr_data()\nkx = results['relperm_wp']['x']\nky = results['relperm_wp']['y']\nkr = [0.7230822778535343, 0.5469031280514686, 0.4675498520331332, \n    0.10041453914739418, 1.2428494917580884e-06, 1.0000000000000004e-06, \n    1.0000000000000004e-06, 1.0000000000000004e-06, 1.0000000000000004e-06,\n    1.0000000000000004e-06]\nnt.assert_allclose(kx, ky)\nnt.assert_allclose(kx, kr)\n"
-}

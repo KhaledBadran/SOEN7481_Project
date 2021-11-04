@@ -1,9 +1,0 @@
-{
-    "functionName": "test_phonons_supercell",
-    "className": "TestStructureMethods",
-    "fileName": "/mesonepigreco_&_CellConstructor/scripts_&_cellconstructor_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "supercell_size = 2, 2, 2\nnat_sc = np.prod(supercell_size)\nfc_random = np.zeros((3 * nat_sc, 3 * nat_sc), dtype=np.complex128)\nfc_random[:, :] = np.random.uniform(size=(3 * nat_sc, 3 * nat_sc))\nCC.symmetries.CustomASR(fc_random)\nback = fc_random.copy()\nCC.symmetries.CustomASR(back)\n__epsil__ = 1e-08\ndelta = np.sum((fc_random - back) ** 2)\nself.assertTrue(delta < __epsil__)\nqe_sym = CC.symmetries.QE_Symmetry(self.struct_simple_cubic)\nqe_sym.SetupQPoint()\nq_irr = qe_sym.GetQIrr(supercell_size)\nself.assertEqual(len(q_irr), 4)\nn_qirr = len(q_irr)\nq_tot = CC.symmetries.GetQGrid(self.struct_simple_cubic.unit_cell,\n    supercell_size)\ndynq = CC.Phonons.GetDynQFromFCSupercell(fc_random, np.array(q_tot), self.\n    struct_simple_cubic, self.struct_simple_cubic.generate_supercell(\n    supercell_size))\ndyn = CC.Phonons.Phonons()\nfor i in range(nat_sc):\n    dyn.dynmats.append(dynq[(i), :, :])\n    dyn.q_tot.append(q_tot[i])\ndyn.structure = self.struct_simple_cubic\ndyn.AdjustQStar()\ndyn.Symmetrize()\ndyn.ForcePositiveDefinite()\nnew_dyn = dyn.GenerateSupercellDyn(dyn.GetSupercell())\nw, p = new_dyn.DyagDinQ(0)\ndyn.Symmetrize()\nnew_dyn = dyn.GenerateSupercellDyn(dyn.GetSupercell())\nw_new, p = new_dyn.DyagDinQ(0)\ndelta = np.sum((w[3:] - w_new[3:]) ** 2)\nself.assertTrue(delta < __epsil__)\n"
-}

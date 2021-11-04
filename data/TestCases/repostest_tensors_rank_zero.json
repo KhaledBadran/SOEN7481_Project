@@ -1,9 +1,0 @@
-{
-    "functionName": "test_tensors_rank_zero",
-    "className": "ModelTest",
-    "fileName": "/halide_&_Halide/apps_&_onnx_&_model_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "X = helper.make_tensor_value_info('X', TensorProto.FLOAT, [3, 2])\nS1 = helper.make_tensor_value_info('S1', TensorProto.INT64, [])\nS2 = helper.make_tensor_value_info('S2', TensorProto.FLOAT, [])\nsize_node = helper.make_node('Size', ['X'], ['S1'])\ngraph_def = helper.make_graph([size_node], 'rank_zero_test', [X], [S1, S2],\n    initializer=[helper.make_tensor('S2', TensorProto.FLOAT, (), (3.14,))])\nonnx_model = helper.make_model(graph_def, producer_name='onnx-example')\nmodel = Model()\nmodel.BuildFromOnnxModel(onnx_model)\ninput_data = np.random.rand(3, 2).astype(np.float32)\noutputs = model.run([input_data])\nself.assertEqual(6, outputs[0])\nself.assertAlmostEqual(3.14, outputs[1])\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "addAna",
-    "className": null,
-    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_DataFile.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "ana = inst.create_group('analyzer')\nana.attrs['NX_class'] = np.string_('NXcrystal')\nattributes = ['d_spacing', 'nominal_energy', 'polar_angle',\n    'polar_angle_offset']\nvalues = [('analyzer' + x.replace('_', ' ').title().replace(' ', '')) for x in\n    attributes]\nunits = ['anstrom', 'mev', 'degree', 'degree']\nfor att, value, unit in zip(attributes, values, units):\n    dset = ana.create_dataset(att, (1,), 'float32')\n    dset[0] = getattr(self, value)\n    if not unit is None:\n        dset.attrs['units'] = np.string_(unit)\ndset = ana.create_dataset('type', data=np.array([np.string_(self.\n    analyzerType)]))\ndset = ana.create_dataset('analyzer_selection', (1,), 'int32', data=self.\n    analyzerSelection)\n"
-}

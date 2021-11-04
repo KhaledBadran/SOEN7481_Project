@@ -1,9 +1,0 @@
-{
-    "functionName": "conv1d_sd",
-    "className": null,
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_theano_extensions_&_conv.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    using a single dot product\n    \"\"\"\nif border_mode not in ('valid', 0, (0,)):\n    raise RuntimeError('Unsupported border_mode for conv1d_sd: %s' %\n        border_mode)\nbatch_size, num_input_channels, input_length = image_shape\nnum_filters, num_input_channels_, filter_length = filter_shape\nstride = subsample[0]\nif filter_length % stride > 0:\n    raise RuntimeError(\n        'Filter length (%d) is not a multiple of the stride (%d)' % (\n        filter_length, stride))\nnum_steps = filter_length // stride\noutput_length = (input_length - filter_length + stride) // stride\npadded_length = input_length // filter_length * filter_length + (num_steps - 1\n    ) * stride\ntruncated_length = min(input_length, padded_length)\ninput_truncated = input[:, :, :truncated_length]\ninput_padded_shape = batch_size, num_input_channels, padded_length\ninput_padded = T.zeros(input_padded_shape)\ninput_padded = T.set_subtensor(input_padded[:, :, :truncated_length],\n    input_truncated)\ninputs = []\nfor num in range(num_steps):\n    shift = num * stride\n    length = (padded_length - shift) // filter_length\n    r_input_shape = batch_size, num_input_channels, length, filter_length\n    r_input = input_padded[:, :, shift:length * filter_length + shift].reshape(\n        r_input_shape)\n    inputs.append(r_input)\ninputs_stacked = T.stack(*inputs)\nfilters_flipped = filters[:, :, ::-1] if filter_flip else filters\nr_conved = T.tensordot(inputs_stacked, filters_flipped, np.asarray([[2, 4],\n    [1, 2]]))\nr_conved = r_conved.dimshuffle(1, 3, 2, 0)\nconved = r_conved.reshape((r_conved.shape[0], r_conved.shape[1], r_conved.\n    shape[2] * r_conved.shape[3]))\nreturn conved[:, :, :output_length]\n"
-}

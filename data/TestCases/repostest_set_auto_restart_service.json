@@ -1,9 +1,0 @@
-{
-    "functionName": "test_set_auto_restart_service",
-    "className": "TestMonitorRollsService",
-    "fileName": "/AndreMiras_&_EtherollApp/src_&_etherollapp_&_tests_&_service_&_test_main.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        On Android it should be calling `setAutoRestartService()`. On other OS\n        this is a NOP.\n        \"\"\"\nservice = MonitorRollsService()\nm_jnius = mock.MagicMock()\nwith patch_jnius(m_jnius):\n    service.set_auto_restart_service()\nassert m_jnius.autoclass.called is False\nwith patch_platform(), patch_jnius(m_jnius):\n    service.set_auto_restart_service()\nassert m_jnius.autoclass.called is True\nmservice = m_jnius.autoclass().mService\nassert mservice.setAutoRestartService.call_args_list == [mock.call(True)]\n"
-}

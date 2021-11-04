@@ -1,9 +1,0 @@
-{
-    "functionName": "test_raw_data_request_body_log",
-    "className": null,
-    "fileName": "/OvalMoney_&_Nephthys/tests_&_test_clients_&_test_requests.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "caplog.set_level(logging.INFO)\nm.post('https://ovalmoney.com/raw_data')\ns = Session()\ns.post('https://ovalmoney.com/raw_data', headers={'Content-Type': 'video'},\n    data=b'\\xff\\x8f')\nlog_rec = [rec for rec in caplog.records][0]\nassert log_rec.msg['request']['body'] == BODY_NOT_LOGGABLE.format(log_rec.\n    msg['request']['header']['Content-Type'])\n"
-}

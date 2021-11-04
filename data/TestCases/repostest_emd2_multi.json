@@ -1,9 +1,0 @@
-{
-    "functionName": "test_emd2_multi",
-    "className": null,
-    "fileName": "/PythonOT_&_POT/test_&_test_ot.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "n = 500\nx = np.arange(n, dtype=np.float64)\na = gauss(n, m=20, s=5)\nls = np.arange(20, 500, 20)\nnb = len(ls)\nb = np.zeros((n, nb))\nfor i in range(nb):\n    b[:, (i)] = gauss(n, m=ls[i], s=10)\nM = ot.dist(x.reshape((n, 1)), x.reshape((n, 1)))\nprint('Computing {} EMD '.format(nb))\not.tic()\nemd1 = ot.emd2(a, b, M, 1)\not.toc('1 proc : {} s')\not.tic()\nemdn = ot.emd2(a, b, M)\not.toc('multi proc : {} s')\nnp.testing.assert_allclose(emd1, emdn)\not.tic()\nemdn = ot.emd2(a, b, M, log=True, return_matrix=True)\not.toc('multi proc : {} s')\nfor i in range(len(emdn)):\n    emd = emdn[i]\n    log = emd[1]\n    cost = emd[0]\n    check_duality_gap(a, b[:, (i)], M, log['G'], log['u'], log['v'], cost)\n    emdn[i] = cost\nemdn = np.array(emdn)\nnp.testing.assert_allclose(emd1, emdn)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_read_missing_private_key_unique_identifier",
-    "className": "TestCreateKeyPairResponsePayload",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_create_key_pair.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that an InvalidKmipEncoding error is raised during the decoding\n        of a CreateKeyPair response payload when the private key unique\n        identifier is missing from the encoding.\n        \"\"\"\npayload = payloads.CreateKeyPairResponsePayload()\nself.assertEqual(None, payload.private_key_unique_identifier)\nargs = self.no_private_key_unique_identifier_encoding,\nself.assertRaisesRegex(exceptions.InvalidKmipEncoding,\n    'The CreateKeyPair response payload encoding is missing the private key unique identifier.'\n    , payload.read, *args)\n"
-}

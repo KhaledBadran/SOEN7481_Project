@@ -1,9 +1,0 @@
-{
-    "functionName": "test_csv_it",
-    "className": "TestEvalBase",
-    "fileName": "/CosmiQ_&_CometTS/CometTS_&_tests_&_Comet_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test instantiation of csv_it.  Will also test get_extent\"\"\"\nbase_instance = csv_it(input_dir=data_dir, TSdata='S*rade9*.tif',\n    Observations='S*cvg*.tif', Mask='S*cvg*.tif', DateLoc='10:18', BandNum='')\noutput = os.path.join(data_dir, 'Test_Raster_List2.csv')\nbase_instance.to_csv(output)\nbase_instance = pd.read_csv(os.path.join(data_dir, 'Test_Raster_List2.csv'))\ngdf = pd.read_csv(os.path.join(data_dir, 'Test_Raster_List.csv'))\ngdf = gdf.sort_values(by=['date'])\nbase_instance = base_instance.sort_values(by=['date'])\nbase_instance = base_instance[['date', 'extent']]\ngdf = gdf[['date', 'extent']]\nprint(gdf['extent'])\nprint(base_instance['extent'])\npd.testing.assert_frame_equal(base_instance.reset_index(drop=True), gdf.\n    reset_index(drop=True))\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_select_less_scores_than_k_min",
-    "className": "TestPureBestKVelocity",
-    "fileName": "/HDI-Project_&_BTB/tests_&_selection_&_test_pure.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"If min length is lt k_min, super().compute_rewards is used.\n\n        In this case, we expect the socres to be returned as they are.\n        \"\"\"\nselector = PureBestKVelocity(['RF', 'SVM'])\nbandit_mock.return_value = 'RF'\nchoice_scores = {'DT': [0.7, 0.75, 0.73], 'RF': [0.8], 'SVM': [0.9]}\nbest = selector.select(choice_scores)\nassert best == 'RF'\nchoice_rewards = {'RF': [1], 'SVM': [1]}\nbandit_mock.assert_called_once_with(choice_rewards)\npatch('btb.selection.pure.PureBestKVelocity.bandit')"
-}

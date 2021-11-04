@@ -1,9 +1,0 @@
-{
-    "functionName": "test_pandas_sparse",
-    "className": "TestSklearn",
-    "fileName": "/microsoft_&_LightGBM/tests_&_python_package_test_&_test_sklearn.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "import pandas as pd\ntry:\n    from pandas.arrays import SparseArray\nexcept ImportError:\n    from pandas import SparseArray\nX = pd.DataFrame({'A': SparseArray(np.random.permutation([0, 1, 2] * 100)),\n    'B': SparseArray(np.random.permutation([0.0, 0.1, 0.2, -0.1, 0.2] * 60)\n    ), 'C': SparseArray(np.random.permutation([True, False] * 150))})\ny = pd.Series(SparseArray(np.random.permutation([0, 1] * 150)))\nX_test = pd.DataFrame({'A': SparseArray(np.random.permutation([0, 2] * 30)),\n    'B': SparseArray(np.random.permutation([0.0, 0.1, 0.2, -0.1] * 15)),\n    'C': SparseArray(np.random.permutation([True, False] * 30))})\nif pd.__version__ >= '0.24.0':\n    for dtype in pd.concat([X.dtypes, X_test.dtypes, pd.Series(y.dtypes)]):\n        self.assertTrue(pd.api.types.is_sparse(dtype))\ngbm = lgb.sklearn.LGBMClassifier(n_estimators=10).fit(X, y)\npred_sparse = gbm.predict(X_test, raw_score=True)\nif hasattr(X_test, 'sparse'):\n    pred_dense = gbm.predict(X_test.sparse.to_dense(), raw_score=True)\nelse:\n    pred_dense = gbm.predict(X_test.to_dense(), raw_score=True)\nnp.testing.assert_allclose(pred_sparse, pred_dense)\nunittest.skipIf(not lgb.compat.PANDAS_INSTALLED, 'pandas is not installed')"
-}

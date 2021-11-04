@@ -1,9 +1,0 @@
-{
-    "functionName": "test_multiline_payload",
-    "className": null,
-    "fileName": "/halcy_&_Mastodon.py/tests_&_test_streaming.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Data-only_messages\n    says that newlines in the 'data' field can be encoded by sending the field\n    twice! This would be really pathological for Mastodon because the payload\n    is JSON, but technically literal newlines are permissible (outside strings)\n    so let's handle this case.\n    \"\"\"\nlistener = Listener()\nlistener.handle_stream_(['event: update', 'data: {\"foo\":', 'data: \"bar\"',\n    'data: }', ''])\nassert listener.updates == [{'foo': 'bar'}]\n"
-}

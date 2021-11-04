@@ -1,9 +1,0 @@
-{
-    "functionName": "reshape",
-    "className": "Marray",
-    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Marray.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "if self.multidimensional:\n    try:\n        shapeLen = len(shape)\n    except TypeError:\n        for d in self:\n            d.reshape(shape)\n    else:\n        if shape[0] == len(self):\n            data = []\n            try:\n                len(shape[1])\n            except:\n                for d in self:\n                    data.append(d.reshape(shape[1:]))\n            else:\n                for d, s in zip(self._data, shape[1]):\n                    data.append(d.reshape(s))\n            self.data = data\n        else:\n            raise AttributeError(\n                'Shape provided ({}) does not fit Marray of length {}'.\n                format(shape, len(self)))\nelse:\n    try:\n        len(shape)\n    except:\n        shape = [shape]\n    for d, sh in zip(self, shape):\n        d.reshape(sh)\n"
-}

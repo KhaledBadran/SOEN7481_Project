@@ -1,9 +1,0 @@
-{
-    "functionName": "test_1d_analytic_ei_edge_cases",
-    "className": "TestExpectedImprovement",
-    "fileName": "/Yelp_&_MOE/moe_&_tests_&_optimal_learning_&_python_&_python_version_&_expected_improvement_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test cases where analytic EI would attempt to compute 0/0 without variance lower bounds.\"\"\"\nbase_coord = numpy.array([0.5])\npoint1 = SamplePoint(base_coord, -1.809342, 0)\npoint2 = SamplePoint(base_coord * 2.0, -1.09342, 0)\ndata = HistoricalData(base_coord.size, [point1])\nhyperparameters = numpy.array([0.2, 0.3])\ncovariance = SquareExponential(hyperparameters)\ngaussian_process = GaussianProcess(covariance, data)\npoint_to_sample = base_coord\nei_eval = ExpectedImprovement(gaussian_process, point_to_sample)\nei = ei_eval.compute_expected_improvement()\ngrad_ei = ei_eval.compute_grad_expected_improvement()\nself.assert_scalar_within_relative(ei, 0.0, 1e-15)\nself.assert_vector_within_relative(grad_ei, numpy.zeros(grad_ei.shape), 1e-15)\nshifts = 1e-15, 4e-11, 3.14e-06, 0.889, 2.71\nself._check_ei_symmetry(ei_eval, point_to_sample, shifts)\ngaussian_process.add_sampled_points([point2])\nshift = 3e-12\nei_eval = ExpectedImprovement(gaussian_process, point_to_sample - shift)\nei = ei_eval.compute_expected_improvement()\ngrad_ei = ei_eval.compute_grad_expected_improvement()\nself.assert_scalar_within_relative(ei, 0.0, 1e-15)\nself.assert_vector_within_relative(grad_ei, numpy.zeros(grad_ei.shape), 1e-15)\n"
-}

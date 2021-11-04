@@ -1,9 +1,0 @@
-{
-    "functionName": "test_issue_363",
-    "className": "TestGitHubIssues",
-    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_test_issues.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Test binary / geometry types. \"\"\"\nconn = pymysql.connect(charset='utf8', **self.databases[0])\nself.safe_create_table(conn, 'issue363',\n    'CREATE TABLE issue363 ( id INTEGER PRIMARY KEY, geom LINESTRING NOT NULL /*!80003 SRID 0 */, SPATIAL KEY geom (geom)) ENGINE=MyISAM'\n    )\ncur = conn.cursor()\nif self.mysql_server_is(conn, (5, 7, 0)):\n    geom_from_text = 'ST_GeomFromText'\n    geom_as_text = 'ST_AsText'\n    geom_as_bin = 'ST_AsBinary'\nelse:\n    geom_from_text = 'GeomFromText'\n    geom_as_text = 'AsText'\n    geom_as_bin = 'AsBinary'\nquery = (\n    \"INSERT INTO issue363 (id, geom) VALUES(1998, %s('LINESTRING(1.1 1.1,2.2 2.2)'))\"\n     % geom_from_text)\ncur.execute(query)\nquery = 'SELECT %s(geom) FROM issue363' % geom_as_text\ncur.execute(query)\nrow = cur.fetchone()\nself.assertEqual(row, ('LINESTRING(1.1 1.1,2.2 2.2)',))\nquery = 'SELECT %s(geom) FROM issue363' % geom_as_bin\ncur.execute(query)\nrow = cur.fetchone()\nself.assertEqual(row, (\n    b'\\x01\\x02\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x9a\\x99\\x99\\x99\\x99\\x99\\xf1?\\x9a\\x99\\x99\\x99\\x99\\x99\\xf1?\\x9a\\x99\\x99\\x99\\x99\\x99\\x01@\\x9a\\x99\\x99\\x99\\x99\\x99\\x01@'\n    ,))\ncur.execute('SELECT geom FROM issue363')\nrow = cur.fetchone()\nself.assertTrue(isinstance(row[0], bytes))\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_2Dbasic_transform_redux_rng",
-    "className": null,
-    "fileName": "/CCampJr_&_CRIkit2/crikit_&_preprocess_&_tests_&_test_baseline_sub.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "x = np.linspace(-100, 100, 1000)\ny = 10 * np.exp(-(x ** 2 / (2 * 20 ** 2)))\ny = np.dot(np.ones((10, 1)), y[(None), :])\nrng = np.arange(200, 800)\nals = SubtractBaselineALS(smoothness_param=0.01, asym_param=0.1, rng=rng,\n    redux=10, fix_end_points=False, fix_rng=None, verbose=True)\nals.transform(y)\nnp.testing.assert_allclose(y[(...), :200], 0)\nnp.testing.assert_allclose(y[(...), 800:], 0)\nnp.testing.assert_almost_equal(y[..., rng], 0, decimal=3)\n"
-}

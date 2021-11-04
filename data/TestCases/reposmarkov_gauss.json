@@ -1,9 +1,0 @@
-{
-    "functionName": "markov_gauss",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_expectations_&_test_expectations.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "cov_params = rng.randn(num_data + 1, D_in, 2 * D_in) / 2.0\nXcov = cov_params @ np.transpose(cov_params, (0, 2, 1))\nXcross = cov_params[:-1] @ np.transpose(cov_params[1:], (0, 2, 1))\nXcross = np.concatenate((Xcross, np.zeros((1, D_in, D_in))), 0)\nXcov = np.stack([Xcov, Xcross])\nreturn MarkovGaussian(Xmu_markov, ctt(Xcov))\n"
-}

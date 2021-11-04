@@ -1,9 +1,0 @@
-{
-    "functionName": "test_max_quadratic_utility",
-    "className": null,
-    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_efficient_frontier.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ef = setup_efficient_frontier()\nw = ef.max_quadratic_utility(risk_aversion=2)\nassert isinstance(w, dict)\nassert set(w.keys()) == set(ef.tickers)\nnp.testing.assert_almost_equal(ef.weights.sum(), 1)\nnp.testing.assert_allclose(ef.portfolio_performance(), (0.40064324249527605,\n    0.2917825266124642, 1.3045443362029479))\nret1, var1, _ = ef.portfolio_performance()\nef.max_quadratic_utility(10)\nret2, var2, _ = ef.portfolio_performance()\nassert ret2 < ret1 and var2 < var1\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_write_bibtex_stdout",
-    "className": null,
-    "fileName": "/martisak_&_3gpp-citations/standardcitations_&_test_&_test_write_bibtex.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test function that prints to stdout (with single entry). We test\n    here that with one input we get one output of the correct type.\n    (The correctness of the entire output is verified elsewhere.)\n    \"\"\"\ndatabase = standardcitations.get_bibdatabase()\nworksheet = standardcitations.get_worksheet(\n    'standardcitations/test/test_input.xlsx')\nrow = worksheet.__getitem__('2')\nentry = standardcitations.get_entry(row, True)\ndatabase.entries.append(entry)\nstandardcitations.write_bibtex(database)\ncaptured = capsys.readouterr()\nassert captured.out.startswith('@techreport')\n"
-}

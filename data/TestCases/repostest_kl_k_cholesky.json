@@ -1,9 +1,0 @@
-{
-    "functionName": "test_kl_k_cholesky",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_test_kullback_leiblers.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test that passing K or K_cholesky yield the same answer\n    \"\"\"\nq_mu = Datum.mu\nq_sqrt = Datum.sqrt_diag if diag else Datum.sqrt\nkl_K = gauss_kl(q_mu, q_sqrt, K=Datum.K)\nkl_K_chol = gauss_kl(q_mu, q_sqrt, K_cholesky=Datum.K_cholesky)\nnp.testing.assert_allclose(kl_K.numpy(), kl_K_chol.numpy())\npytest.mark.parametrize('diag', [True, False])"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_is_allowed_by_operation_policy_no_groups",
-    "className": "TestKmipEngine",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that access by operation policy is processed correctly when no\n        user groups are provided.\n        \"\"\"\ne = engine.KmipEngine()\ne.is_allowed = mock.Mock(return_value=True)\nresult = e._is_allowed_by_operation_policy('test_policy', ['test_user',\n    None], 'test_user', enums.ObjectType.SYMMETRIC_KEY, enums.Operation.GET)\ne.is_allowed.assert_called_once_with('test_policy', 'test_user', None,\n    'test_user', enums.ObjectType.SYMMETRIC_KEY, enums.Operation.GET)\nself.assertTrue(result)\n"
-}

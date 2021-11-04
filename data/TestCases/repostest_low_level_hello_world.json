@@ -1,9 +1,0 @@
-{
-    "functionName": "test_low_level_hello_world",
-    "className": null,
-    "fileName": "/RobertoPrevato_&_BlackSheep/itests_&_test_server.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "lines = b'\\r\\n'.join([b'GET /hello-world HTTP/1.1', b'Host: ' + server_host\n    .encode(), b'\\r\\n\\r\\n'])\nsocket_connection.send(lines)\nresponse_bytes = bytearray()\nwhile True:\n    chunk = socket_connection.recv(1024)\n    if chunk:\n        response_bytes.extend(chunk)\n    else:\n        break\nvalue = bytes(response_bytes)\nassert b'content-length: 13' in value\nassert value.endswith(b'Hello, World!')\n"
-}

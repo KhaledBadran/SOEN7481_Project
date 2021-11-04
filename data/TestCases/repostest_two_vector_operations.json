@@ -1,9 +1,0 @@
-{
-    "functionName": "test_two_vector_operations",
-    "className": "TestVector2D",
-    "fileName": "/FabriceSalvaire_&_PyValentina/unit-test_&_GeometryEngine_&_test_Vector.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "x = 10\nv1 = Vector2D(x, x)\nv2 = Vector2D(-x, x)\nself.assertTrue(v1.is_orthogonal(v2))\nself.assertTrue(v1.is_orthogonal(v1.rotate(90)))\nv1 = Vector2D(x, x)\nself.assertTrue(v1.is_parallel(v1 * -x))\nself.assertTrue(v1.is_parallel(v1.rotate(180)))\nangle1 = 10\ndirection = Vector2D.from_angle(angle1)\nperpendicular_direction = direction.rotate(90)\nfor angle2 in range(-160, 180, 10):\n    v2 = Vector2D.from_angle(angle2)\n    self.assertAlmostEqual(v2.orientation_with(direction), angle2 - angle1)\n    v2x = direction * v2.projection_on(direction)\n    v2y = perpendicular_direction * v2.deviation_with(direction)\n    v3 = v2x + v2y\n    self.assertTrue(v2.almost_equal(v3))\n"
-}

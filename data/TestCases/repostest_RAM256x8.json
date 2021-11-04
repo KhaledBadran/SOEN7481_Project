@@ -1,9 +1,0 @@
-{
-    "functionName": "test_RAM256x8",
-    "className": "TestRAM256x8",
-    "fileName": "/jamesjiang52_&_Bitwise/tests_&_storage_&_test_RAM256x8.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data_bus = bw.wire.Bus8()\naddress_bus = bw.wire.Bus8()\nwrite_enable = bw.wire.Wire()\nclock = bw.wire.Wire()\noutput_bus = bw.wire.Bus8()\na = bw.storage.RAM256x8(data_bus, address_bus, write_enable, clock, output_bus)\ndata_bus.wire_values = 0, 0, 0, 0, 0, 0, 0, 1\naddress_bus.wire_values = 0, 0, 0, 0, 0, 0, 0, 0\nwrite_enable.value = 1\nassert output_bus.wire_values == (0, 0, 0, 0, 0, 0, 0, 0)\nclock.value = 0\nclock.value = 1\nassert output_bus.wire_values == (0, 0, 0, 0, 0, 0, 0, 1)\ndata_bus.wire_values = 1, 0, 1, 0, 1, 0, 1, 0\naddress_bus.wire_values = 1, 0, 0, 0, 0, 0, 0, 0\nclock.value = 0\nclock.value = 1\nassert output_bus.wire_values == (1, 0, 1, 0, 1, 0, 1, 0)\ndata_bus.wire_values = 1, 1, 1, 1, 1, 1, 1, 0\naddress_bus.wire_values = 1, 1, 1, 1, 1, 1, 1, 1\nclock.value = 0\nclock.value = 1\nassert output_bus.wire_values == (1, 1, 1, 1, 1, 1, 1, 0)\nwrite_enable.value = 0\naddress_bus.wire_values = 0, 0, 0, 0, 0, 0, 0, 0\nassert output_bus.wire_values == (0, 0, 0, 0, 0, 0, 0, 1)\naddress_bus.wire_values = 1, 0, 0, 0, 0, 0, 0, 0\nassert output_bus.wire_values == (1, 0, 1, 0, 1, 0, 1, 0)\naddress_bus.wire_values = 1, 1, 1, 1, 1, 1, 1, 1\nassert output_bus.wire_values == (1, 1, 1, 1, 1, 1, 1, 0)\nprint(a.__doc__)\nprint(a)\na(data_bus=(0, 0, 0, 0, 0, 0, 0, 0), address_bus=(0, 0, 0, 0, 0, 0, 0, 0),\n    write_enable=0, clock=0, output_bus=None)\nassert output_bus.wire_values == (0, 0, 0, 0, 0, 0, 0, 1)\n"
-}

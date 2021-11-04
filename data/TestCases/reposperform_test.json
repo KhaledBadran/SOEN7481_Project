@@ -1,9 +1,0 @@
-{
-    "functionName": "perform_test",
-    "className": null,
-    "fileName": "/Accenture_&_AmpliGraph/tests_&_ampligraph_&_latent_features_&_test_models.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "X = load_wn18rr()\nk = 5\nunique_entities = np.unique(np.concatenate([X['train'][:, (0)], X['train'][\n    :, (2)]], 0))\nunique_relations = np.unique(X['train'][:, (1)])\nmodel = TransE(batches_count=100, seed=555, epochs=1, k=k, loss=\n    'multiclass_nll', loss_params={'margin': 5}, verbose=True, optimizer=\n    'sgd', optimizer_params={'lr': 0.001})\nmodel.fit(X['train'])\nassert model.trained_model_params[0].shape[0] == len(unique_entities)\nassert model.trained_model_params[1].shape[0] == len(unique_relations)\nassert model.trained_model_params[0].shape[1] == k\nassert model.trained_model_params[1].shape[1] == k\n"
-}

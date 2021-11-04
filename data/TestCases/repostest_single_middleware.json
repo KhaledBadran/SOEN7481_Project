@@ -1,9 +1,0 @@
-{
-    "functionName": "test_single_middleware",
-    "className": null,
-    "fileName": "/RobertoPrevato_&_BlackSheep/tests_&_client_&_test_middlewares.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "fake_pools = FakePools([Response(200, None, TextContent('Hello, World!'))])\nsteps = []\nasync def middleware_one(request, next_handler):\n    steps.append(1)\n    response = await next_handler(request)\n    steps.append(2)\n    return response\nasync with ClientSession(base_url=b'http://localhost:8080', pools=\n    fake_pools, middlewares=[middleware_one]) as client:\n    response = await client.get(b'/')\n    assert steps == [1, 2]\n    assert response.status == 200\n    text = await response.text()\n    assert text == 'Hello, World!'\npytest.mark.asyncio"
-}

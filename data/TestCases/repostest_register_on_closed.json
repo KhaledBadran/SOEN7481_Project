@@ -1,9 +1,0 @@
-{
-    "functionName": "test_register_on_closed",
-    "className": "TestProxyKmipClient",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_test_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a ClientConnectionNotOpen exception is raised when trying\n        to register a key on an unopened client connection.\n        \"\"\"\nkey = objects.SymmetricKey(enums.CryptographicAlgorithm.AES, 128,\n    b'\\x00\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08\\t\\n\\x0b\\x0c\\r\\x0e\\x0f')\nclient = ProxyKmipClient()\nargs = [key]\nself.assertRaises(ClientConnectionNotOpen, client.register, *args)\nmock.patch('kmip.pie.client.KMIPProxy', mock.MagicMock(spec_set=KMIPProxy))"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_replace_in_fort3_fort3_properties_index",
-    "className": null,
-    "fileName": "/mortele_&_OccamTools/test_&_test_replace_in_fort3.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "properties = ['atom', 'bond type', 'bond angle', 'torsion', 'non bonded',\n    'scf', 'compress', 'chi']\nfor prop in properties:\n    replace = Fort3Replacement(property=prop)\n    expected = _Properties._type_from_index(replace.property).lower()\n    if len(prop.split()) > 1:\n        for p in prop.split():\n            assert p in expected\n    else:\n        assert prop in expected\nfor i in [-2, -1, 8, 9, 0.2599]:\n    caught = False\n    try:\n        p = _Properties._type_from_index(i)\n    except IndexError:\n        caught = True\n    assert caught\n"
-}

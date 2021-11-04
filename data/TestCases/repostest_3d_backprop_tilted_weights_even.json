@@ -1,9 +1,0 @@
-{
-    "functionName": "test_3d_backprop_tilted_weights_even",
-    "className": null,
-    "fileName": "/RI-imaging_&_ODTbrain/tests_&_test_weighting.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    even weights\n    \"\"\"\nplatform.system = lambda : 'Windows'\nsino, angles = create_test_sino_3d()\np = get_test_parameter_set(1)[0]\nf1 = odtbrain.backpropagate_3d_tilted(sino, angles, weight_angles=False, **p)\nf2 = odtbrain.backpropagate_3d_tilted(sino, angles, weight_angles=True, **p)\ndata1 = np.array(f1).flatten().view(float)\ndata2 = np.array(f2).flatten().view(float)\nassert np.allclose(data1, data2)\n"
-}

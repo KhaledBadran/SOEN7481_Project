@@ -1,9 +1,0 @@
-{
-    "functionName": "test_create_for__lambda",
-    "className": "test_IAM_Role",
-    "fileName": "/pbx-gs_&_OSBot-AWS/tests_&_unit_&_helpers_&_test_IAM_Role.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.iam_role.create_for__lambda().get('role_arn')\nrole_info = self.iam_role.iam.role_info()\nservice = role_info.get('AssumeRolePolicyDocument').get('Statement')[0].get(\n    'Principal').get('Service')\nassert service == 'lambda.amazonaws.com'\npolicy_statement = list(self.iam_role.iam.role_policies_statements().values()\n    ).pop()\nassert policy_statement == [{'Action': ['logs:CreateLogGroup',\n    'logs:CreateLogStream', 'logs:PutLogEvents'], 'Effect': 'Allow',\n    'Resource': ['arn:aws:logs:{0}:{1}:log-group:/aws/lambda/*'.format(\n    region, account_id)]}]\nassert self.iam_role.iam.role_delete() is True\n"
-}

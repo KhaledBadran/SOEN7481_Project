@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sorting_by_custom_request_parameter",
-    "className": "TestMMFlatViews",
-    "fileName": "/Axiologue_&_DjangoRestMultipleModels/tests_&_test_flat_view.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Adding the sorting_field attribute should order the flat items according to whatever field\n        \"\"\"\nview = CustomSortingParamFlatView.as_view()\nfor sorting_arg in ('author', '-author'):\n    request = factory.get('/?custom_o={}'.format(sorting_arg))\n    with self.assertNumQueries(2):\n        response = view(request).render()\n    self.assertEqual(len(response.data), 6)\n    self.assertEqual(response.data, list(reversed(self.\n        sorted_results_w_author)) if '-' in sorting_arg else self.\n        sorted_results_w_author)\n"
-}

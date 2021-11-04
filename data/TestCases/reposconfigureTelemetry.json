@@ -1,9 +1,0 @@
-{
-    "functionName": "configureTelemetry",
-    "className": null,
-    "fileName": "/FaradayRF_&_Faraday-Software/faraday_&_telemetry.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Configure telemetry configuration file from command line\n\n    :param args: argparse arguments\n    :return: None\n    \"\"\"\nconfig = ConfigParser.RawConfigParser()\nconfig.read(os.path.join(faradayHelper.path, configFile))\nproxyConfiguration = proxyConfig('127.0.0.1', 8000)\nunit = 'UNIT' + str(args.unit)\nif args.unit is not 0:\n    try:\n        config.set('TELEMETRY', unit + 'CALL', 'REPLACEME')\n        config.set('TELEMETRY', unit + 'ID', 'REPLACEME')\n    except ConfigParser.DuplicateSectionError:\n        pass\nconfig.set('TELEMETRY', unit + 'CALL', proxyConfiguration['UNIT0'].get(\n    'callsign'))\nconfig.set('TELEMETRY', unit + 'ID', proxyConfiguration['UNIT0'].get('nodeid'))\nif args.proxyhost is not None:\n    config.set('TELEMETRY', 'proxyhost', args.proxyhost)\nif args.database is not None:\n    config.set('DATABASE', 'filename', args.database)\nif args.schema is not None:\n    config.set('DATABASE', 'schemaname', args.schema)\nif args.flaskhost is not None:\n    config.set('FLASK', 'host', args.flaskhost)\nif args.flaskport is not None:\n    config.set('FLASK', 'port', args.flaskport)\nfilename = os.path.join(faradayHelper.path, configFile)\nwith open(filename, 'wb') as configfile:\n    config.write(configfile)\n"
-}

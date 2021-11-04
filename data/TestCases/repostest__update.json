@@ -1,9 +1,0 @@
-{
-    "functionName": "test__update",
-    "className": "TestCases",
-    "fileName": "/dkaslovsky_&_GraphRole/tests_&_test_features_&_test_extract.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "existing_features = self.rfe._features\nnew_features = pd.concat([pd.DataFrame(existing_features['degree'].values,\n    columns=['degree2'], index=existing_features.index), pd.DataFrame(np.\n    random.randn(existing_features.shape[0], 2), columns=['a', 'b'], index=\n    existing_features.index)], axis=1)\nself.rfe._update(new_features)\nfeatures = self.rfe._features\nexpected_features = pd.concat([existing_features[['degree',\n    'external_edges']], new_features[['a', 'b']]], axis=1)\npd.testing.assert_frame_equal(features, expected_features)\nfinal_features = self.rfe._finalize_features()\nexpected_final_features = pd.concat([existing_features, new_features[['a',\n    'b']]], axis=1)\npd.testing.assert_frame_equal(final_features.sort_index(axis=1),\n    expected_final_features.sort_index(axis=1))\n"
-}

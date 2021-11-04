@@ -1,9 +1,0 @@
-{
-    "functionName": "test_second_order_effective_charges",
-    "className": "TestStructureMethods",
-    "fileName": "/mesonepigreco_&_CellConstructor/scripts_&_cellconstructor_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Here we test the effective charges second order tensor\n        using the rocksalt toy model\n        \"\"\"\nn_config = 10000\nstructures = self.rocksalt.dynmat.ExtractRandomStructures(n_config)\neff_charges = [self.rocksalt.get_z(s) for s in structures]\ndM_drdr = CC.Manipulate.GetSecondOrderDipoleMoment(self.rocksalt.dynmat,\n    structures, eff_charges, T=0)\ndx = 0.01\ndM_num = np.zeros((3 * self.rocksalt.N_atoms, 3 * self.rocksalt.N_atoms, 3))\nfor x1 in range(3 * self.rocksalt.N_atoms):\n    nat1 = int(x1 / 3)\n    cart1 = x1 % 3\n    struct = self.rocksalt.structure.copy()\n    struct.coords[nat1, cart1] += dx\n    z = self.rocksalt.get_z(struct)\n    for i in range(3):\n        dM_num[(x1), :, (i)] = z[:, (i), :].ravel()\ndM_num /= dx * CC.Units.A_TO_BOHR\ndistance = np.sqrt(np.sum((dM_drdr - dM_num) ** 2))\nself.assertTrue(distance < 0.05)\nunittest.skip('Second order effective charges to be implemented')"
-}

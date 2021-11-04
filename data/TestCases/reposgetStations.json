@@ -1,9 +1,0 @@
-{
-    "functionName": "getStations",
-    "className": null,
-    "fileName": "/FaradayRF_&_Faraday-Software/faraday_&_aprs.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Queries telemetry server for active stations\n\n    :return: JSON results from request\n    \"\"\"\nhost = aprsConfig.get('TELEMETRY', 'HOST')\nport = aprsConfig.get('TELEMETRY', 'PORT')\nurl = 'http://' + host + ':' + port + '/stations'\nlogger.debug(url)\nr = requests.get(url)\ntry:\n    results = r.json()\nexcept ValueError as e:\n    logger.error(e)\n    results = ''\nreturn results\n"
-}

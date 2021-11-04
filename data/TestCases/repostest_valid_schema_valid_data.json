@@ -1,9 +1,0 @@
-{
-    "functionName": "test_valid_schema_valid_data",
-    "className": "TestSchemaValidation",
-    "fileName": "/kenfar_&_DataGristle/scripts_&_tests_&_test_gristle_validator_cmd.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.cmd = (\n    \"\"\"%(pgm)s %(in_fqfn)s\n                         -d ','\n                         --fieldcnt 7\n                         --quoting 'quote_none'\n                         --outgood %(outgood)s\n                         --outerr  %(outerr)s\n                         --validschema %(schema)s\n                   \"\"\"\n     % {'pgm': self.pgm, 'outgood': self.outgood_fqfn, 'outerr': self.\n    outerr_fqfn, 'in_fqfn': self.std_7x7_fqfn, 'schema': self.schema_fqfn})\nprint(self.cmd)\nrunner = envoy.run(self.cmd)\nself.get_outputs(runner)\nprint(self.std_out)\nprint(self.std_err)\nprint(self.err_output)\nassert self.status_code == 0\nassert not self.err_output\nassert len(self.good_output) == 7\nassert not self.std_out\nassert not self.std_err or len(self.std_err\n    ) < 50 and 'Coverage.py' in self.std_err\n"
-}

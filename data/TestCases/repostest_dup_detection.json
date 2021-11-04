@@ -1,9 +1,0 @@
-{
-    "functionName": "test_dup_detection",
-    "className": null,
-    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_engine_&_tests_&_test_near_duplicates.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "if method == 'simhash':\n    try:\n        import simhash\n    except ImportError:\n        raise SkipTest\nfrom freediscovery.engine.near_duplicates import _DuplicateDetectionWrapper\ncache_dir, uuid, filenames, fe = fd_setup(**fe_options)\ndd = _DuplicateDetectionWrapper(cache_dir=cache_dir, parent_id=uuid)\ndd.fit(method=method)\ncluster_id = dd.query(**options)\nassert len(np.unique(cluster_id)) <= len(np.unique(filenames))\npytest.mark.parametrize('method, options, fe_options', [['simhash', {\n    'distance': 3}, {}], ['simhash', {'distance': 10}, {}], ['i-match', {},\n    {}]])"
-}

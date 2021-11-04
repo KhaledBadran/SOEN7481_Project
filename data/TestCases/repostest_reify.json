@@ -1,9 +1,0 @@
-{
-    "functionName": "test_reify",
-    "className": "TestModel",
-    "fileName": "/goodmami_&_penman/tests_&_test_model.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "m = Model()\nwith pytest.raises(ModelError):\n    m.reify(('a', ':ARG0', 'b'))\nwith pytest.raises(ModelError):\n    m.reify(('a', ':accompanier', 'b'))\nwith pytest.raises(ModelError):\n    m.reify(('a', ':domain', 'b'))\nwith pytest.raises(ModelError):\n    m.reify(('a', ':mod', 'b'))\nm = Model.from_dict(mini_amr)\nwith pytest.raises(ModelError):\n    m.reify(('a', ':ARG0', 'b'))\nassert m.reify(('a', ':accompanier', 'b')) == (('_', ':ARG0', 'a'), ('_',\n    ':instance', 'accompany-01'), ('_', ':ARG1', 'b'))\nwith pytest.raises(ModelError):\n    assert m.reify(('a', ':domain', 'b'))\nassert m.reify(('a', ':mod', 'b')) == (('_', ':ARG1', 'a'), ('_',\n    ':instance', 'have-mod-91'), ('_', ':ARG2', 'b'))\nassert m.reify(('a', ':mod', 'b'), variables={'a', 'b', '_'}) == (('_2',\n    ':ARG1', 'a'), ('_2', ':instance', 'have-mod-91'), ('_2', ':ARG2', 'b'))\n"
-}

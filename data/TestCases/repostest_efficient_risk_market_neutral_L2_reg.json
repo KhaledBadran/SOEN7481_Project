@@ -1,9 +1,0 @@
-{
-    "functionName": "test_efficient_risk_market_neutral_L2_reg",
-    "className": null,
-    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_efficient_frontier.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ef = EfficientFrontier(*setup_efficient_frontier(data_only=True),\n    weight_bounds=(-1, 1))\nef.add_objective(objective_functions.L2_reg)\nw = ef.efficient_risk(0.19, market_neutral=True)\nassert isinstance(w, dict)\nassert set(w.keys()) == set(ef.tickers)\nnp.testing.assert_almost_equal(ef.weights.sum(), 0)\nassert (ef.weights < 1).all() and (ef.weights > -1).all()\nnp.testing.assert_allclose(ef.portfolio_performance(), (0.10755645826336145,\n    0.11079556786108302, 0.7902523535340413), atol=1e-06)\n"
-}

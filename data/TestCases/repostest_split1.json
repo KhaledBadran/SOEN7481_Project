@@ -1,9 +1,0 @@
-{
-    "functionName": "test_split1",
-    "className": null,
-    "fileName": "/NUAA-AL_&_ALiPy/test_&_test_split.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "train_idx, test_idx, label_idx, unlabel_idx = split(X=X, y=y, all_class=\n    False, split_count=split_count, test_ratio=0.3, initial_label_rate=0.05,\n    saving_path=None, query_type='AllLabels')\nassert len(train_idx) == split_count\nassert len(test_idx) == split_count\nassert len(label_idx) == split_count\nassert len(unlabel_idx) == split_count\nfor i in range(split_count):\n    train = set(train_idx[i])\n    test = set(test_idx[i])\n    lab = set(label_idx[i])\n    unl = set(unlabel_idx[i])\n    assert len(test) == round(0.3 * instance_num)\n    assert len(lab) == round(0.05 * len(train))\n    traintest = train.union(test)\n    labun = lab.union(unl)\n    assert traintest == set(range(instance_num))\n    assert labun == train\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_push_update",
-    "className": null,
-    "fileName": "/halcy_&_Mastodon.py/tests_&_test_push.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "priv, pub = api.push_subscription_generate_keys()\nsub = api.push_subscription_set('example.com', pub, follow_events=False,\n    favourite_events=False, reblog_events=False, mention_events=False)\nsub2 = api.push_subscription_update(follow_events=True, favourite_events=\n    True, reblog_events=True, mention_events=True)\ntime.sleep(1)\nassert sub2 == api.push_subscription()\nsub3 = api.push_subscription_update(follow_events=False, favourite_events=\n    False, reblog_events=False, mention_events=False)\ntime.sleep(1)\nassert sub3 == api.push_subscription()\nprint(sub3)\nprint(api.push_subscription())\nassert sub3.alerts.follow == False\nassert sub3.alerts.favourite == False\nassert sub3.alerts.reblog == False\nassert sub3.alerts.mention == False\nassert sub2.alerts.follow == True\nassert sub2.alerts.favourite == True\nassert sub2.alerts.reblog == True\nassert sub2.alerts.mention == True\npytest.mark.vcr(match_on=['path'])"
-}

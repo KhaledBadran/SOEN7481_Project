@@ -1,9 +1,0 @@
-{
-    "functionName": "test_missing_parameters",
-    "className": "TestChangePassword",
-    "fileName": "/fvalverd_&_AutoApi/tests_&_test_operations.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data = {'email': self._user, 'password': self._pass, 'api': self.api}\nresponse = self.app.post('/login', data=data)\nheaders = self.response_to_headers(response)\ndel data['password']\nresponse = self.app.post('/password', data=data, headers=headers)\nself.assertEqual(response.status_code, 400)\nresponse_json = json.loads(response.data or '{}')\nself.assertDictEqual(response_json, {'message': u'Missing parameters'})\n"
-}

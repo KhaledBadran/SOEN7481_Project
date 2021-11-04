@@ -1,9 +1,0 @@
-{
-    "functionName": "test_directory_tree",
-    "className": null,
-    "fileName": "/apetri_&_LensTools/lenstools_&_tests_&_test_pipeline.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "for cosmo in cosmologies:\n    simulation_model = batch.newModel(cosmology=cosmo, parameters=['Om',\n        'Ol', 'w', 'si', 'ns'])\n    for i, box_size in enumerate(box_sizes):\n        collection = simulation_model.newCollection(box_size=box_size *\n            simulation_model.Mpc_over_h, nside=part[i])\n        fp = open(os.path.join(collection.home_subdir,\n            'ngenic_matterpower_z{0:.6f}.txt'.format(0.0)), 'w')\n        fp.close()\n        map_settings = MapSettings()\n        map_set = collection.newMapSet(map_settings)\n        catalog_settings = CatalogSettings()\n        catalog = collection.newCatalog(catalog_settings)\n        for seed in seeds:\n            ic = collection.newRealization(seed)\n            pln_settings = PlaneSettings()\n            pln = ic.newPlaneSet(pln_settings)\n"
-}

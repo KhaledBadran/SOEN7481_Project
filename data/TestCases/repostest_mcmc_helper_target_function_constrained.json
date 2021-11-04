@@ -1,9 +1,0 @@
-{
-    "functionName": "test_mcmc_helper_target_function_constrained",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_optimizers_&_test_mcmc.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Set up priors on the model parameters such that we can\n    readily compute their expected values. \"\"\"\ndata = build_data()\nmodel = build_model(data)\nprior_width = 200.0\nhmc_helper = gpflow.optimizers.SamplingHelper(model.log_posterior_density,\n    model.trainable_parameters)\ntarget_log_prob_fn = hmc_helper.target_log_prob_fn\nexpected_log_prior = 0.0\nfor param in model.trainable_parameters:\n    if param.value() < 0.001:\n        param.assign(1.0)\n    param.transform = Exp()\n    low_value = -100\n    high_value = low_value + prior_width\n    param.prior = Uniform(low=np.float64(low_value), high=np.float64(\n        high_value))\n    param.prior_on = PriorOn.CONSTRAINED\n    prior_density_on_constrained = 1 / prior_width\n    prior_density_on_unconstrained = (prior_density_on_constrained * param.\n        value())\n    expected_log_prior += np.log(prior_density_on_unconstrained)\nlog_marginal_likelihood = model.log_marginal_likelihood().numpy()\nexpected_log_prob = log_marginal_likelihood + expected_log_prior\nnp.testing.assert_allclose(target_log_prob_fn(), expected_log_prob)\n"
-}

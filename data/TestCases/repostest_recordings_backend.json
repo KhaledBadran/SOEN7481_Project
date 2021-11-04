@@ -1,9 +1,0 @@
-{
-    "functionName": "test_recordings_backend",
-    "className": "TestGenerators",
-    "fileName": "/alejoe91_&_MEArec/MEArec_&_tests_&_test_generators.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "print('Test recording generation - backend')\nne = 2\nni = 1\nduration = 3\nrec_params = mr.get_default_recordings_params()\nrec_params['spiketrains']['n_exc'] = ne\nrec_params['spiketrains']['n_inh'] = ni\nrec_params['spiketrains']['duration'] = duration\nn_jitter = 2\nrec_params['templates']['n_jitters'] = n_jitter\nrec_params['recordings']['modulation'] = 'none'\nrec_params['seeds']['templates'] = 0\nrec_params['seeds']['spiketrains'] = 0\nrec_params['seeds']['convolution'] = 0\nrec_params['seeds']['noise'] = 0\nn_jobs = [1, 2]\nchunk_durations = [0, 1]\nfor n in n_jobs:\n    for ch in chunk_durations:\n        print('Test recording backend with', n, 'jobs - chunk', ch)\n        rec_params['chunk_duration'] = n\n        recgen_memmap = mr.gen_recordings(params=rec_params, tempgen=self.\n            tempgen, tmp_mode='memmap', verbose=False, n_jobs=n)\n        recgen_np = mr.gen_recordings(params=rec_params, tempgen=self.\n            tempgen, tmp_mode=None, verbose=False, n_jobs=n)\n        assert np.allclose(recgen_np.recordings, np.array(recgen_memmap.\n            recordings), atol=0.0001)\n        del recgen_memmap, recgen_np\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_save_classifier",
-    "className": null,
-    "fileName": "/HDI-project_&_ATM/tests_&_test_worker.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "worker = Worker(db, datarun, models_dir=MODEL_DIR, metrics_dir=METRIC_DIR)\nhp = db.get_hyperpartitions(datarun_id=worker.datarun.id)[0]\nclassifier = worker.db.start_classifier(hyperpartition_id=hp.id, datarun_id\n    =worker.datarun.id, host='localhost', hyperparameter_values=DT_PARAMS)\nworker.db.complete_classifier = Mock()\nworker.save_classifier(classifier.id, model, metrics)\nworker.db.complete_classifier.assert_called()\nwith DBSession(worker.db):\n    clf = db.get_classifier(classifier.id)\n    loaded = load_model(clf, MODEL_DIR)\n    assert isinstance(loaded, Model)\n    assert loaded.method == model.method\n    assert loaded.random_state == model.random_state\n    assert load_metrics(clf, METRIC_DIR) == metrics\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_coregion_shape",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_kernels_&_test_kernels.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "X = np.random.randint(0, output_dim, (N, input_dim))\nX2 = np.random.randint(0, output_dim, (N2, input_dim))\nkernel = gpflow.kernels.Coregion(output_dim=output_dim, rank=rank)\nkernel.W = rng.randn(output_dim, rank)\nkernel.kappa = rng.randn(output_dim, 1).reshape(-1) + 1.0\nKff2 = kernel(X, X2)\nassert Kff2.shape == (10, 12)\nKff = kernel(X)\nassert Kff.shape == (10, 10)\npytest.mark.parametrize('N, N2, input_dim, output_dim, rank', [[10, 12, 1, \n    3, 2]])"
-}

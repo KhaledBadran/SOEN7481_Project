@@ -1,9 +1,0 @@
-{
-    "functionName": "test_prior_size_check",
-    "className": null,
-    "fileName": "/grd349_&_PBjam/pbjam_&_tests_&_test_priors.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Tests for kde.prior_size_check\"\"\"\nfunc = simp_kde._prior_size_check\npbt.does_it_return(func, [pdata, to_log10(30, 10), 100])\nfor KDEsize in [10, 20]:\n    for numax in [30, 200]:\n        for sigma in [10, 100]:\n            pdata_cut = func(pdata, to_log10(numax, sigma), KDEsize)\n            assert (len(pdata_cut) > 0) & (len(pdata_cut) <= KDEsize)\nwith pytest.warns(UserWarning):\n    func(pdata, to_log10(300, 1), 500)\nwith pytest.raises(ValueError):\n    func(pdata, to_log10(300000, 1), 500)\n"
-}

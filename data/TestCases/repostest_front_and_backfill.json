@@ -1,9 +1,0 @@
-{
-    "functionName": "test_front_and_backfill",
-    "className": "TestMagicDataFrame",
-    "fileName": "/PmagPy_&_PmagPy/pmagpy_tests_&_test_contribution_builder.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "magic_df = cb.MagicDataFrame(os.path.join(PROJECT_WD, 'sites.txt'), dmodel=\n    DMODEL)\ndirections = magic_df.df.loc['1', 'bed_dip_direction']\nself.assertEqual(sorted(directions, key=lambda x, y=0: int(x - y) if (\n    isinstance(x, float) or isinstance(x, int)) and (isinstance(y, float) or\n    isinstance(y, int)) else -1), [None, 135, 135])\nmagic_df.front_and_backfill(cols=['bed_dip_direction'])\ndirections = magic_df.df.loc['1', 'bed_dip_direction']\nself.assertEqual(sorted(directions), [135, 135, 135])\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_build_module_fails",
-    "className": null,
-    "fileName": "/Pebaz_&_Nimporter/tests_&_test_build.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test NimCompileException\"\"\"\ntry:\n    fake = Path('nonesense.nim')\n    NimCompiler.compile_nim_code(fake, None, library=True)\n    assert False, \"Should throw exception. File doesn't exist: \" + str(fake)\nexcept NimporterException:\n    \"\"\"Expected result\"\"\"\ntry:\n    NimCompiler.compile_nim_code(Path('tests/lib1'), None, library=False)\n    assert False, 'Should throw exception.'\nexcept NimporterException:\n    \"\"\"Expected result\"\"\"\ntry:\n    module = Path('tests/pkg1/error.nim')\n    output = NimCompiler.build_artifact(module)\n    NimCompiler.compile_nim_code(module, output, library=False)\n    assert False, 'Should throw exception.'\nexcept NimCompileException as e:\n    assert str(e)\n"
-}

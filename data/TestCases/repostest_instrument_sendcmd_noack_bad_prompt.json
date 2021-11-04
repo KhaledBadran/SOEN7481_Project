@@ -1,9 +1,0 @@
-{
-    "functionName": "test_instrument_sendcmd_noack_bad_prompt",
-    "className": null,
-    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_base_instrument.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with pytest.raises(PromptError):\n    mock_filelike = mock.MagicMock()\n    mock_filelike.__class__ = AbstractCommunicator\n    inst = ik.Instrument(mock_filelike)\n    inst.prompt = '> '\n    inst.read = mock.MagicMock(return_value='* ')\n    inst.sendcmd('foobar')\n"
-}

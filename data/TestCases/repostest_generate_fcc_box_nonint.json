@@ -1,9 +1,0 @@
-{
-    "functionName": "test_generate_fcc_box_nonint",
-    "className": null,
-    "fileName": "/mortele_&_OccamTools/test_&_test_generate_fort5.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "cell_boxes = np.ones(shape=(5, 3))\ncell_boxes[0, 1] = 10.0\ncell_boxes[1, 2] = 9.0\ncell_boxes[2, 1] = -1\ncell_boxes[3, 0] = 7.1\ncell_boxes[4, 1] = 1.259895\nshould_trow = [False, False, True, True, True]\nfor should_catch, box in zip(should_trow, cell_boxes):\n    caught = False\n    try:\n        file_name = os.path.join(os.path.dirname(__file__), 'int_test.5')\n        _check_remove_file(file_name)\n        generate_fcc(box, 1.0, path=file_name)\n    except ValueError:\n        caught = True\n    assert caught is should_catch\n    _check_remove_file(file_name)\n"
-}

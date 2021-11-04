@@ -1,9 +1,0 @@
-{
-    "functionName": "test_pipeline_in_binarize_target_classifier",
-    "className": null,
-    "fileName": "/goeckslab_&_Galaxy-ML/galaxy_ml_&_tests_&_test_binarize_target.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "std = StandardScaler()\nclf = SVC(random_state=10)\npipe = Pipeline([('std', std), ('clf', clf)])\nestimator = BinarizeTargetClassifier(pipe)\ncv = OrderedKFold(5)\nscoring = dict(AUC=binarize_auc_scorer, AP=binarize_average_precision_scorer)\nsearch = GridSearchCV(estimator, {}, cv=cv, scoring=scoring, refit='AP')\nsearch.fit(X, y)\nbest_est = search.best_estimator_\nbest_score = search.best_score_\nassert round(best_score, 2) == 0.33, best_score\nwith tempfile.TemporaryFile() as f:\n    pickle.dump(best_est, f, pickle.HIGHEST_PROTOCOL)\n"
-}

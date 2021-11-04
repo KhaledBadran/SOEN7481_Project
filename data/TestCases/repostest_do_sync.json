@@ -1,9 +1,0 @@
-{
-    "functionName": "test_do_sync",
-    "className": "TestSync",
-    "fileName": "/DusanMadar_&_PySyncDroid/tests_&_test_sync.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test 'do_sync' copies source files to their destination and updates\n        destination files list.\n        \"\"\"\nsync = Sync(FAKE_MTP_DETAILS, '/tmp', 'Card/Music')\nsync.set_source_abs()\nsync.set_destination_abs()\nsync.do_sync(FAKE_SYNC_DATA)\nself.assertEqual(FAKE_SYNC_DATA['dst_dir_fls'], [\n    '/run/user/<user>/gvfs/mtp:host=%5Busb%3A002%2C003%5D/Card/Music/testdir/oldsong.mp3'\n    ])\nmock_copy_file.assert_called_once_with('/tmp/testdir/song.mp3',\n    '/run/user/<user>/gvfs/mtp:host=%5Busb%3A002%2C003%5D/Card/Music/testdir/song.mp3'\n    )\npatch.object(pysyncdroid.sync.Sync, 'copy_file')"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_create_interrupt_this_thread_callback",
-    "className": null,
-    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_timeout_tracker.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class MyThread(threading.Thread):\n\n    def __init__(self):\n        threading.Thread.__init__(self)\n        self.finished = False\n        self.daemon = True\n        self.interrupt_thread = None\n        self.interrupted = False\n\n    def run(self):\n        try:\n            self.interrupt_thread = create_interrupt_this_thread_callback()\n            while True:\n                time.sleep(0.2)\n        except KeyboardInterrupt:\n            self.interrupted = True\n        finally:\n            self.finished = True\nt = MyThread()\nt.start()\nwait_for_condition(lambda : t.interrupt_thread is not None)\nt.interrupt_thread()\nwait_for_condition(lambda : t.finished)\nassert t.interrupted\npytest.mark.skipif(not IS_CPYTHON, reason='This only works in CPython.')"
-}

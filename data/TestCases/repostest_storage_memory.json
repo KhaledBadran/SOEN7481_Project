@@ -1,9 +1,0 @@
-{
-    "functionName": "test_storage_memory",
-    "className": "TestRandomBinaryProjectionTree",
-    "fileName": "/pixelogik_&_NearPy/tests_&_projection_trees_tests.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "rbpt = RandomBinaryProjectionTree('testHash', 10, 20)\nself.engine = Engine(100, lshashes=[rbpt], vector_filters=[NearestFilter(20)])\nfor k in range(2000):\n    x = numpy.random.randn(100)\n    x_data = 'data'\n    self.engine.store_vector(x, x_data)\nself.memory.store_hash_configuration(rbpt)\nrbpt2 = RandomBinaryProjectionTree(None, None, None)\nrbpt2.apply_config(self.memory.load_hash_configuration('testHash'))\nself.assertEqual(rbpt.dim, rbpt2.dim)\nself.assertEqual(rbpt.hash_name, rbpt2.hash_name)\nself.assertEqual(rbpt.projection_count, rbpt2.projection_count)\nfor i in range(rbpt.normals.shape[0]):\n    for j in range(rbpt.normals.shape[1]):\n        self.assertEqual(rbpt.normals[i, j], rbpt2.normals[i, j])\nfor k in range(10):\n    x = numpy.random.randn(100)\n    keys1 = rbpt.hash_vector(x, querying=True)\n    keys2 = rbpt2.hash_vector(x, querying=True)\n    self.assertEqual(len(keys1), len(keys2))\n    for k in range(len(keys1)):\n        self.assertEqual(keys1[k], keys2[k])\n"
-}

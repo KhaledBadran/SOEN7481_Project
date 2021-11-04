@@ -1,9 +1,0 @@
-{
-    "functionName": "test_single_bit_kernel_operations",
-    "className": "TestcQasmReader",
-    "fileName": "/QE-Lab_&_OpenQL/tests_&_cqasm_&_test_cqasm_reader.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "config_fn = os.path.join(curdir, '../hardware_config_cc_light.json')\nplatform = ql.Platform('seven_qubits_chip', config_fn)\nnumber_qubits = platform.get_qubit_number()\nprogram = ql.Program('test_single_bit_kernel_operations', platform,\n    number_qubits)\nqasm_rdr = ql.cQasmReader(platform, program)\nqasm_str = \"\"\"version 1.0\nqubits 5\nerror_model depolarizing_channel, 0.001\nprep_z q[0:3]\nprep_z q[4]\ni q[0:3]\nh q[4]\nx q[1:3]\nz q[0:1]\ns q[1]\nsdag q[2:3]\ntdag q[1:3]\nx90 q[3]\nmx90 q[1]\ny90 q[0]\nmy90 q[2:3]\nmeasure_z q[2:3]\nmeasure_z q[0, 1]\nmeasure_z q[4]\n\"\"\"\nqasm_rdr.string2circuit(qasm_str)\nprogram.compile()\n"
-}

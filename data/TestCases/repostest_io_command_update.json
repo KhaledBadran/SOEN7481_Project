@@ -1,9 +1,0 @@
-{
-    "functionName": "test_io_command_update",
-    "className": "TestMessages",
-    "fileName": "/PRIArobotics_&_HedgehogProtocol/tests_&_test_protocol.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "sub = Subscription()\nsub.subscribe = True\nsub.timeout = 10\nmsg = io.CommandUpdate(0, io.INPUT_PULLDOWN, sub)\nproto = HedgehogMessage()\nproto.io_command_message.flags = io.INPUT_PULLDOWN\nproto.io_command_message.subscription.subscribe = True\nproto.io_command_message.subscription.timeout = 10\nself.assertTransmissionServerClient(msg, proto, is_async=True)\nassert not msg.output\nassert not msg.pullup\nassert msg.pulldown\nassert not msg.level\nwith pytest.raises(errors.InvalidCommandError):\n    io.CommandUpdate(0, io.OUTPUT | io.PULLUP, sub)\nwith pytest.raises(errors.InvalidCommandError):\n    io.CommandUpdate(0, io.OUTPUT | io.PULLDOWN, sub)\nwith pytest.raises(errors.InvalidCommandError):\n    io.CommandUpdate(0, io.LEVEL, sub)\nwith pytest.raises(errors.InvalidCommandError):\n    io.CommandUpdate(0, io.PULLUP | io.PULLDOWN, sub)\n"
-}

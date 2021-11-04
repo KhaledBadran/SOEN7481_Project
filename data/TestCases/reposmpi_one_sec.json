@@ -1,9 +1,0 @@
-{
-    "functionName": "mpi_one_sec",
-    "className": null,
-    "fileName": "/justasb_&_LFPsimpy/tests_&_test_all.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "from mpi4py import MPI\nfrom neuron import h\npc = h.ParallelContext()\nmpirank = pc.id()\nnranks = int(pc.nhost())\nsoma, ic = create_sec()\nle = add_lfp_electrode()\nassert len(le.times) == 0\nassert len(le.values) == 0\npc.setup_transfer()\npc.timeout(1)\nh.cvode_active(0)\npc.set_maxstep(1)\nh.stdinit()\npc.psolve(10)\nif mpirank == 0:\n    assert len(le.times) > 0\n    assert len(le.values) > 0\n    from matplotlib import pyplot as plt\n    plt.plot(le.times, le.values)\n    plt.show()\nif nranks > 1:\n    h.quit()\n"
-}

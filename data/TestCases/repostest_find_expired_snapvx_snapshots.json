@@ -1,9 +1,0 @@
-{
-    "functionName": "test_find_expired_snapvx_snapshots",
-    "className": "PyU4VReplicationTest",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_replication.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test find_expired_snapvx_snapshots.\"\"\"\nref_expired_snap_list = [{'storagegroup_name': self.data.storagegroup_name,\n    'snapshot_name': self.data.group_snapshot_name, 'generation_number': 0,\n    'expiration_time': self.data.expired_snap['timeToLiveExpiryDate'],\n    'linked_sg_name': self.data.target_group_name, 'snap_creation_time':\n    self.data.expired_snap['timestamp']}]\nexpired_snap_list = self.replication.find_expired_snapvx_snapshots()\nself.assertEqual(ref_expired_snap_list, expired_snap_list)\nmock.patch.object(replication.ReplicationFunctions,\n    'get_snapshot_generation_details', return_value=pcd.CommonData.expired_snap\n    )mock.patch.object(replication.ReplicationFunctions,\n    'get_storagegroup_snapshot_generation_list', return_value=pcd.\n    CommonData.sg_snap_gen_list)"
-}

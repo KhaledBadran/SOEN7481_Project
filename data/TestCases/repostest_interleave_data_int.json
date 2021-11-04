@@ -1,9 +1,0 @@
-{
-    "functionName": "test_interleave_data_int",
-    "className": "SubdomainTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_core_&_SubdomainTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "net = op.network.Cubic(shape=[2, 2, 2])\nPs = net.pores('top')\ngeom1 = op.geometry.GenericGeometry(network=net, pores=Ps)\nPs = net.pores('bottom')\ngeom2 = op.geometry.GenericGeometry(network=net, pores=Ps)\ngeom1['pore.blah'] = 1\nassert 'int' in geom1['pore.blah'].dtype.name\nassert np.all(np.isnan(geom2['pore.blah']))\nassert 'float' in net['pore.blah'].dtype.name\nassert np.sum(np.isnan(net['pore.blah'])) == 4\n"
-}

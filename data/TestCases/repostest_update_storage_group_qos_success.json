@@ -1,9 +1,0 @@
-{
-    "functionName": "test_update_storage_group_qos_success",
-    "className": "PyU4VProvisioningTest",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test update_storage_group_qos.\"\"\"\nqos_specs = {'maxIOPS': '3000', 'DistributionType': 'never', 'maxMBPS': '9001'}\nref_payload = {'editStorageGroupActionParam': {'setHostIOLimitsParam': {\n    'host_io_limit_io_sec': qos_specs['maxIOPS'], 'host_io_limit_mb_sec':\n    qos_specs['maxMBPS'], 'dynamicDistribution': qos_specs[\n    'DistributionType']}}}\nwith mock.patch.object(self.provisioning, 'modify_storage_group') as mock_mod:\n    message = self.provisioning.update_storagegroup_qos(self.data.\n        qos_storagegroup, qos_specs)\n    mock_mod.assert_called_once_with(self.data.qos_storagegroup, ref_payload)\n    self.assertIsNotNone(message)\n"
-}

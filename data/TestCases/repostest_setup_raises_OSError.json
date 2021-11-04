@@ -1,9 +1,0 @@
-{
-    "functionName": "test_setup_raises_OSError",
-    "className": null,
-    "fileName": "/rm-hull_&_OPi.GPIO/tests_&_test_gpio.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with patch('OPi.GPIO.sysfs') as mock:\n    GPIO.setmode(GPIO.SUNXI)\n    mock.export.side_effect = OSError(44, 'test')\n    with pytest.raises(OSError) as ex:\n        GPIO.setup('PG07', GPIO.OUT)\n    assert str(ex.value) == '[Errno 44] test'\n    mock.export.assert_called_with(199)\n    mock.unexport.assert_not_called()\n    mock.direction.assert_not_called()\n    mock.output.assert_not_called()\n    assert 'PG07' not in GPIO._exports\n"
-}

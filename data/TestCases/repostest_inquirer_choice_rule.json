@@ -1,9 +1,0 @@
-{
-    "functionName": "test_inquirer_choice_rule",
-    "className": null,
-    "fileName": "/OpenSCAP_&_OVAL-visualization-as-graph/tests_&_test_command_json_to_graph.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "pexpect = pytest.importorskip('pexpect')\nsrc = tests.any_test_help.get_random_dir_in_tmp() + '.json'\nsut = pexpect.spawn('python3', ['-m', 'oval_graph.command_line',\n    'arf-to-json', 'tests/test_data/ssg-fedora-ds-arf.xml',\n    '_package_\\\\w+_removed'])\nsut.expect('\\\\w+')\nsut.send(key.DOWN)\nsut.send(key.SPACE)\nsut.send(key.UP)\nsut.send(key.SPACE)\nsut.send(key.ENTER)\nsut.wait()\nout = sut.readlines()\nwith open(src, 'w+') as f:\n    f.writelines(row.decode('utf-8') for row in out[21:])\ntests.any_test_help.compare_results_json(src)\nout_dir = tests.any_test_help.get_random_dir_in_tmp()\nsut = pexpect.spawn('python3', ['-m', 'oval_graph.command_line',\n    'json-to-graph', '-o', out_dir, '--off-web-browser', src, '.'])\nsut.expect('\\\\w+')\nsut.send(key.DOWN)\nsut.send(key.SPACE)\nsut.send(key.ENTER)\nsut.wait()\nassert len(os.listdir(out_dir)) == 1\nassert 'xccdf_org.ssgproject.content_rule_package_abrt_removed' in os.listdir(\n    out_dir)[0]\n"
-}

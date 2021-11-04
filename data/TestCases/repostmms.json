@@ -1,9 +1,0 @@
-{
-    "functionName": "tmms",
-    "className": null,
-    "fileName": "/ardiloot_&_NonlinearTMM/Tests_&_test_SecondOrderNLTMM.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "wlP1 = 7e-07\nwlP2 = 1.5e-06\nI0P1 = 1.0\nI0P2 = 2.0\ndValues = {'d11': 1e-12, 'd22': 2e-12, 'd33': 3e-12, 'd12': 4e-12, 'd23': 5e-12\n    }\nchi2 = LabPy.Chi2Tensor(**dValues)\nprism = LabPy.Material('Static', n=1.5)\nmetal = LabPy.Material('main/Ag/Johnson')\ncrystal = LabPy.Material('special/gaussian_test')\ndielectric = LabPy.Material('Static', n=1.0)\ncrystalD = 0.001\nmetalD = 5e-09\ntmmPy = LabPy.SecondOrderNLTmm(wlP1=wlP1, wlP2=wlP2, polP1=polP1, polP2=\n    polP2, polGen=polGen, I0P1=I0P1, I0P2=I0P2, process=process)\ntmmPy.AddLayer(float('inf'), prism)\ntmmPy.AddLayer(metalD, metal)\ntmmPy.AddLayer(crystalD, crystal, chi2)\ntmmPy.AddLayer(float('inf'), dielectric)\nprismCpp = Material.FromLabPy(prism)\nmetalCpp = Material.FromLabPy(metal)\ncrystalCpp = Material.FromLabPy(crystal)\ndielectricCpp = Material.FromLabPy(dielectric)\ncrystalCpp.chi2.Update(**dValues)\ntmmCpp = SecondOrderNLTMM(process)\ntmmCpp.P1.SetParams(wl=wlP1, pol=polP1, I0=I0P1)\ntmmCpp.P2.SetParams(wl=wlP2, pol=polP2, I0=I0P2)\ntmmCpp.Gen.SetParams(pol=polGen)\ntmmCpp.AddLayer(float('inf'), prismCpp)\ntmmCpp.AddLayer(metalD, metalCpp)\ntmmCpp.AddLayer(crystalD, crystalCpp)\ntmmCpp.AddLayer(float('inf'), dielectricCpp)\nreturn tmmPy, tmmCpp\npytest.fixture()"
-}

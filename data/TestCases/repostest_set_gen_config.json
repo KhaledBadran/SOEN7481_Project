@@ -1,9 +1,0 @@
-{
-    "functionName": "test_set_gen_config",
-    "className": "TestsTSSpredator",
-    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_tsspredator.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "os.mkdir(os.path.join(self.fastas, 'tmp'))\nos.mkdir(os.path.join(self.gffs, 'tmp'))\nos.mkdir(os.path.join(self.wigs, 'tmp'))\nos.mkdir(os.path.join(self.out, 'MasterTables'))\ngen_file(os.path.join(self.fastas, 'tmp/test.fa'), 'test')\ngen_file(os.path.join(self.gffs, 'tmp/test.gff'), 'test')\ngen_file(os.path.join(self.wigs, 'tmp/test1_forward.wig_STRAIN_test.wig'),\n    'test')\ngen_file(os.path.join(self.wigs, 'tmp/test1_reverse.wig_STRAIN_test.wig'),\n    'test')\ngen_file(os.path.join(self.wigs,\n    'tmp/test1_TEX_forward.wig_STRAIN_test.wig'), 'test')\ngen_file(os.path.join(self.wigs,\n    'tmp/test1_TEX_reverse.wig_STRAIN_test.wig'), 'test')\nlibs = ['test1_forward.wig:notex:1:a:+', 'test1_reverse.wig:notex:1:a:-',\n    'test1_TEX_forward.wig:tex:1:a:+', 'test1_TEX_reverse.wig:tex:1:a:-']\nlog = open(os.path.join(self.test_folder, 'test.log'), 'w')\nargs = self.mock_args.mock()\nargs.program = 'TSS'\nargs.height = 0.3\nargs.height_reduction = 0.2\nargs.factor = 2.0\nargs.factor_reduction = 0.5\nargs.base_height = 0.0\nargs.enrichment_factor = 2.0\nargs.processing_factor = 1.5\nargs.utr_length = 300\nargs.libs = libs\nargs.out_folder = self.out\nargs.cluster = 3\nargs.repmatch = ['all_2']\nargs.specify_strains = None\nargs.output_prefixs = ['test1']\nself.tss._set_gen_config(args, self.test_folder, log)\ndatas = import_data(os.path.join(self.test_folder, 'config_test.ini'))\nself.assertEqual('\\n'.join(datas), self.example.config)\n"
-}

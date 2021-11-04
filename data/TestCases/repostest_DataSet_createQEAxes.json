@@ -1,9 +1,0 @@
-{
-    "functionName": "test_DataSet_createQEAxes",
-    "className": null,
-    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_DataSet.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "plt.ioff()\nimport matplotlib\nmatplotlib.use('Agg')\nconvertFiles = ['Data/camea2018n000136.hdf']\nds = DataSet(dataFiles=convertFiles)\nds.convertDataFile(saveFile=True)\nax = ds.createQEAxes(projectionVector1=ds.sample[0].projectionVector1,\n    projectionVector2=ds.sample[0].projectionVector2)\ntry:\n    ax = ds.createQEAxes(axis=2)\nexcept AttributeError:\n    assert True\ntry:\n    ax = ds.createQEAxes(projectionVector1=[1, 0, 0], projectionVector2=[1,\n        2, 3, 4, 5])\nexcept AttributeError:\n    assert True\nplt.close('all')\n"
-}

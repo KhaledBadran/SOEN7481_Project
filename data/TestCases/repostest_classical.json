@@ -1,9 +1,0 @@
-{
-    "functionName": "test_classical",
-    "className": "Test_central_controller",
-    "fileName": "/QE-Lab_&_OpenQL/tests_&_cc_&_test_cc.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "platform = ql.Platform(platform_name, config_fn)\np = ql.Program('test_classical', platform, num_qubits, num_cregs)\nk1 = ql.Kernel('aKernel1', platform, num_qubits, num_cregs)\nk1.gate('x', [6])\nk1.gate('cz', [6, 7])\nrd = ql.CReg()\nrs1 = ql.CReg()\nrs2 = ql.CReg()\nif 0:\n    k1.classical(rd, ql.Operation(rs1, '+', rs2))\n    k1.classical(rd, ql.Operation('~', rs2))\n    k1.classical(rd, ql.Operation(rs1, '==', rs2))\n    k1.classical(rs1, ql.Operation(2))\n    k1.classical(rs1, ql.Operation(rs2))\nk1.gate('measure', [6], rs1)\nk1.gate('measure', [7], rs2)\np.add_kernel(k1)\np.compile()\n"
-}

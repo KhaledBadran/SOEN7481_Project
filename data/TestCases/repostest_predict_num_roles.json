@@ -1,9 +1,0 @@
-{
-    "functionName": "test_predict_num_roles",
-    "className": null,
-    "fileName": "/CyberReboot_&_NetworkML/tests_&_test_algorithms_host_footprint.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test predict function of HostFootprint class with\n    varying number of distinct roles present\n    \"\"\"\nwith tempfile.TemporaryDirectory() as tmpdir:\n    testdata = os.path.join(tmpdir, 'test_data')\n    shutil.copytree('./tests/test_data', testdata)\n    for file in ['combined_three_roles.csv', 'combined_two_roles.csv']:\n        input_file = os.path.join(testdata, file)\n        operation = 'train'\n        sys.argv = hf_args(tmpdir, operation, input_file)\n        instance = HostFootprint()\n        instance.main()\n        operation = 'predict'\n        sys.argv = hf_args(tmpdir, operation, input_file)\n        instance = HostFootprint()\n        instance.main()\n        predictions = json.loads(instance.predict())\n        assert isinstance(predictions, dict)\n        if file == 'combined_three_roles.csv':\n            assert len(predictions) == 6\n        else:\n            assert len(predictions) == 4\n"
-}

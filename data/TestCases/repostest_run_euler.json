@@ -1,9 +1,0 @@
-{
-    "functionName": "test_run_euler",
-    "className": "TestOdeSolvers",
-    "fileName": "/AllenDowney_&_ModSimPy/modsim_&_test_modsim.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "s = UNITS.second\nm = UNITS.meter\ninit = State(y=2 * m)\nsystem = System(init=init, t_0=1 * s, t_end=3 * s)\ndef slope_func(state, t, system):\n    [y] = state\n    dydt = y / s + t * m / s ** 2\n    return [dydt]\nresults, details = run_euler(system, slope_func)\ny_end = get_last_value(results.y)\nself.assertAlmostEqual(y_end, 24.9737147 * m)\n"
-}

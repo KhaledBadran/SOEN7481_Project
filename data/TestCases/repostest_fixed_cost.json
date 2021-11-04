@@ -1,9 +1,0 @@
-{
-    "functionName": "test_fixed_cost",
-    "className": null,
-    "fileName": "/NASA_&_MLMCPy/tests_&_mlmc_&_test_MLMCSimulator.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Ensure that when running the simulator with a specified target_cost that\n    the costs and sample sizes are consistent with the target cost and that\n    the actual simulation run time is reasonably consistent as well.\n    \"\"\"\nnp.random.seed(1)\nfor model in spring_models:\n    delattr(model, 'cost')\nsim = MLMCSimulator(models=spring_models, data=beta_distribution_input)\nsim._initial_sample_sizes = np.array([100, 100, 100])\nsim._target_cost = float(target_cost)\nsim._determine_input_output_size()\ncosts, variances = sim._compute_costs_and_variances()\nsim._compute_optimal_sample_sizes(costs, variances)\nexpected_cost = np.dot(costs, sim._cpu_sample_sizes)\nassert expected_cost <= target_cost and expected_cost * 0.9 < target_cost\nsim._caching_enabled = False\nwith warnings.catch_warnings():\n    warnings.simplefilter('ignore')\n    start_time = timeit.default_timer()\n    sim._run_simulation()\n    compute_time = timeit.default_timer() - start_time\nassert compute_time < target_cost * 1.2\npytest.mark.parametrize('target_cost', [3, 1, 0.1, 0.01])"
-}

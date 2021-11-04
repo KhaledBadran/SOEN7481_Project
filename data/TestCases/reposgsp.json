@@ -1,9 +1,0 @@
-{
-    "functionName": "gsp",
-    "className": "Test_hypersphere_grispy",
-    "fileName": "/mchalela_&_GriSPy/tests_&_test_brute_force.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "np.random.seed(1234)\nself.lbox = 100.0\nself.upper_radii = 0.25 * self.lbox\nself.lower_radii = 0.2 * self.lbox\nself.n_nearest = 32\nself.eps = 1e-06\nnpoints = 10 ** 5\nx = np.random.uniform(-1.0, 1.0, size=(npoints, 1))\ny = np.random.uniform(-1.0, 1.0, size=(npoints, 1))\nz = np.random.uniform(-1.0, 1.0, size=(npoints, 1))\nw = np.random.uniform(-1.0, 1.0, size=(npoints, 1))\ntttt = (x ** 2 + y ** 2 < 1.0) * (z ** 2 + w ** 2 < 1.0)\nnpoints = np.sum(tttt)\nself.radius = self.lbox * np.random.rand(npoints)\nx = x[tttt]\ny = y[tttt]\nz = z[tttt]\nw = w[tttt]\ntttt = np.sqrt((1.0 - x ** 2 - y ** 2) / (z ** 2 + w ** 2))\nx = self.radius * x\ny = self.radius * y\nz = self.radius * z * tttt\nw = self.radius * w * tttt\ntttt = np.sqrt(x ** 2 + y ** 2 + z ** 2 + w ** 2)\nassert_almost_equal(self.radius, tttt, decimal=12)\nself.data = np.array([x, y, z, w]).T\nreturn GriSPy(self.data)\npytest.fixture"
-}

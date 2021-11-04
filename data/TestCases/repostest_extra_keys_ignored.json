@@ -1,9 +1,0 @@
-{
-    "functionName": "test_extra_keys_ignored",
-    "className": null,
-    "fileName": "/halcy_&_Mastodon.py/tests_&_test_streaming.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format\n    defines 'id' and 'retry' keys which the Mastodon streaming API doesn't use,\n    and alleges that \"All other field names are ignored\".\n    \"\"\"\nlistener = Listener()\nlistener.handle_stream_(['event: update', 'data: {\"foo\": \"bar\"}', 'id: 123',\n    'retry: 456', 'ignoreme: blah blah blah', ''])\nassert listener.updates == [{'foo': 'bar'}]\n"
-}

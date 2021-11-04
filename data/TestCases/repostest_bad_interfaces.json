@@ -1,9 +1,0 @@
-{
-    "functionName": "test_bad_interfaces",
-    "className": null,
-    "fileName": "/theojulienne_&_PythonInterfaces/interfaces_&_tests_&_test_interfaces.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class IBar(interface):\n\n    def qux(self, n):\n        \"\"\"blah blah\"\"\"\n\n    def bar(self, a, b, c):\n        \"\"\"blah blah blah\"\"\"\nclass IBaz(interface):\n\n    def baz(self, b, z):\n        \"\"\"Baz from IBaz\"\"\"\nwith pytest.raises(interfaces.MissingInterfaceMethodException):\n\n\n    @implements(IBar)\n    @implements(IBaz)\n    class Foo(object):\n\n        def bar(self, a, b, c):\n            pass\n\n        def baz(self, b, z):\n            pass\nwith pytest.raises(interfaces.IncompatibleMethodException):\n\n\n    @implements(IBar)\n    @implements(IBaz)\n    class Foo(object):\n\n        def qux(self):\n            pass\n\n        def bar(self, a, b, c):\n            pass\n\n        def baz(self, b, z):\n            pass\n"
-}

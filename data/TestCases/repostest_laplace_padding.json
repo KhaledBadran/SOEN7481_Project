@@ -1,9 +1,0 @@
-{
-    "functionName": "test_laplace_padding",
-    "className": "TestMath",
-    "fileName": "/tum-pbs_&_PhiFlow/tests_&_test_math.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "tf.InteractiveSession()\nfor dims in range(1, 4):\n    shape = [2] + [4] * dims + [3]\n    a = zeros(shape)\n    l = laplace(a, padding='replicate')\n    np.testing.assert_equal(l, 0)\n    np.testing.assert_equal(l.shape, a.shape)\n    l = laplace(a, padding='reflect')\n    np.testing.assert_equal(l, 0)\n    np.testing.assert_equal(l.shape, a.shape)\n    l = laplace(a, padding='circular')\n    np.testing.assert_equal(l, 0)\n    np.testing.assert_equal(l.shape, a.shape)\n    l = laplace(a, padding='valid')\n    np.testing.assert_equal(l, 0)\n    np.testing.assert_equal(l.shape, [2] + [2] * dims + [3])\n"
-}

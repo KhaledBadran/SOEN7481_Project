@@ -1,9 +1,0 @@
-{
-    "functionName": "test_getdescriptors",
-    "className": "TestGetDescriptors",
-    "fileName": "/bitcoin-core_&_HWI/test_&_test_device.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "descriptors = self.do_command(self.dev_args + ['getdescriptors'])\nself.assertIn('receive', descriptors)\nself.assertIn('internal', descriptors)\nself.assertEqual(len(descriptors['receive']), 3)\nself.assertEqual(len(descriptors['internal']), 3)\nfor descriptor in descriptors['receive']:\n    info_result = self.rpc.getdescriptorinfo(descriptor)\n    self.assertTrue(info_result['isrange'])\n    self.assertTrue(info_result['issolvable'])\nfor descriptor in descriptors['internal']:\n    info_result = self.rpc.getdescriptorinfo(descriptor)\n    self.assertTrue(info_result['isrange'])\n    self.assertTrue(info_result['issolvable'])\n"
-}

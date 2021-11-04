@@ -1,9 +1,0 @@
-{
-    "functionName": "load_universal_modelseed",
-    "className": null,
-    "fileName": "/gregmedlock_&_Medusa/medusa_&_test_&_test_reconstruct.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "seed_rxn_table = pd.read_csv('./medusa/test/data/reactions_seed_20180809.tsv',\n    sep='\\t')\nseed_rxn_table['id'] = seed_rxn_table['id'] + '_c'\nuniversal = load_json_model('./medusa/test/data/universal_mundy.json')\nok_ids = list(seed_rxn_table.loc[(seed_rxn_table['status'] == 'OK') | (\n    seed_rxn_table['status'] == 'HB')]['id'])\nremove_rxns = []\nfor reaction in universal.reactions:\n    if reaction.id not in ok_ids:\n        remove_rxns.append(reaction)\nuniversal.remove_reactions(remove_rxns)\nmets_in_reactions = []\nfor reaction in universal.reactions:\n    mets = [met.id for met in reaction.metabolites]\n    mets_in_reactions.extend(mets)\nmets_in_reactions = set(mets_in_reactions)\nmets_missing_reactions = []\nfor metabolite in universal.metabolites:\n    if metabolite.id not in mets_in_reactions:\n        mets_missing_reactions.append(metabolite)\nuniversal.remove_metabolites(mets_missing_reactions)\nuniversal.repair()\nreturn universal\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_do_while_nested_for",
-    "className": "Test_hybrid_classical_quantum",
-    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_hybrid.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.setUpClass()\nconfig_fn = os.path.join(curdir, 'hardware_config_cc_light.json')\nplatform = ql.Platform('seven_qubits_chip', config_fn)\nnum_qubits = 5\nnum_cregs = 10\np = ql.Program('test_do_while_nested_for', platform, num_qubits, num_cregs)\nsweep_points = [1, 2]\np.set_sweep_points(sweep_points)\nsp1 = ql.Program('subprogram1', platform, num_qubits, num_cregs)\nsp2 = ql.Program('subprogram2', platform, num_qubits, num_cregs)\nk1 = ql.Kernel('aKernel1', platform, num_qubits, num_cregs)\nk2 = ql.Kernel('aKernel2', platform, num_qubits, num_cregs)\nrd = ql.CReg()\nrs1 = ql.CReg()\nrs2 = ql.CReg()\nk1.gate('x', [0])\nk2.gate('y', [0])\nsp1.add_do_while(k1, ql.Operation(rs1, '>=', rs2))\nsp2.add_for(sp1, 100)\np.add_program(sp2)\np.compile()\nQISA_fn = os.path.join(output_dir, p.name + '.qisa')\nassemble(QISA_fn)\n"
-}

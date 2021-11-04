@@ -1,9 +1,0 @@
-{
-    "functionName": "test_valid_post_request_with_data",
-    "className": "TestLambdaALBRouter",
-    "fileName": "/JeordyR_&_LambdaALBRouter/test_&_test_router.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "event = {'requestContext': {'elb': {'targetGroupArn': 'arn:'}},\n    'httpMethod': 'POST', 'path': '/update/user', 'queryStringParameters':\n    {}, 'headers': {'accept': '*/*', 'accept-encoding': 'gzip, deflate',\n    'accept-language': 'en-us', 'connection': 'keep-alive',\n    'content-length': '226', 'content-type': 'application/json', 'host':\n    'dummyhost.dummy.com', 'user-agent':\n    'Rested/2009 CFNetwork/902.1 Darwin/17.7.0 (x86_64)', 'x-amzn-trace-id':\n    'Root=1-xxxxx-xxxxxxxxxxxxxx', 'x-forwarded-for': '1.1.1.1',\n    'x-forwarded-port': '443', 'x-forwarded-proto': 'https'}, 'body':\n    \"\"\"{\n  \"first_name\": \"Bob\",\n  \"last_name\": \"Smith\"\n}\"\"\",\n    'isBase64Encoded': False}\nresult = lambda_handler(event)\nself.assertEqual(200, result['statusCode'])\nself.assertEqual('Updated user!', result['body']['message'])\nself.assertEqual('Bob', result['body']['context']['data']['first_name'])\nself.assertEqual('Smith', result['body']['context']['data']['last_name'])\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_soundfiles_generator",
-    "className": "TestStimuliGeneration",
-    "fileName": "/BciPy_&_BciPy/bcipy_&_helpers_&_tests_&_test_stimuli.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that soundfiles function returns an cyclic generator.\"\"\"\ndirectory = path.join('.', 'sounds')\nsoundfile_paths = [path.join(directory, '0.wav'), path.join(directory,\n    '1.wav'), path.join(directory, '2.wav')]\nwhen(glob).glob(path.join(directory, '*.wav')).thenReturn(soundfile_paths)\nwhen(path).isdir(directory).thenReturn(True)\ngen = soundfiles(directory)\nself.assertEqual(next(gen), soundfile_paths[0])\nself.assertEqual(next(gen), soundfile_paths[1])\nself.assertEqual(next(gen), soundfile_paths[2])\nself.assertEqual(next(gen), soundfile_paths[0])\nself.assertEqual(next(gen), soundfile_paths[1])\nfor _ in range(10):\n    self.assertTrue(next(gen) in soundfile_paths)\n"
-}

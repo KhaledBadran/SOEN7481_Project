@@ -1,9 +1,0 @@
-{
-    "functionName": "test_check_constraints",
-    "className": null,
-    "fileName": "/bytesandbrains_&_ProcessOptimizer/ProcessOptimizer_&_tests_&_test_constraints.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "space = Space([(0.0, 5.0), (1.0, 5.0)])\ncons_list = Single(0, 1, 'integer')\nwith raises(TypeError):\n    check_constraints(space, cons_list)\ncons_list = [Single(2, 1, 'integer')]\nwith raises(IndexError):\n    check_constraints(space, cons_list)\nspace = Space([(0.0, 5.0), (0, 5), ['a', 'b', 'c']])\ncons_list = [Single(2, 1, 'integer')]\nwith raises(TypeError):\n    check_constraints(space, cons_list)\ncons_list = [Single(1, 1.0, 'real')]\nwith raises(TypeError):\n    check_constraints(space, cons_list)\ncons_list = [Single(0, 'a', 'categorical')]\nwith raises(TypeError):\n    check_constraints(space, cons_list)\ncons_list = [Single(0, 1.0, 'real'), Single(0, 2.0, 'real')]\nwith raises(IndexError):\n    check_constraints(space, cons_list)\npytest.mark.fast_test"
-}

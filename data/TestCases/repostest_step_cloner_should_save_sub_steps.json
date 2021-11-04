@@ -1,9 +1,0 @@
-{
-    "functionName": "test_step_cloner_should_save_sub_steps",
-    "className": null,
-    "fileName": "/Neuraxio_&_Neuraxle/testing_&_steps_&_test_step_cloner_for_each_data_input.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "tape = TapeCallbackFunction()\np = StepClonerForEachDataInput(Pipeline([FitCallbackStep(tape), MultiplyByN\n    (2)]), cache_folder_when_no_handle=tmpdir)\ndata_inputs = _create_data((2, 2))\nexpected_outputs = _create_data((2, 2))\np, processed_outputs = p.fit_transform(data_inputs, expected_outputs)\np.save(ExecutionContext(tmpdir), full_dump=True)\nsaved_paths = [os.path.join(tmpdir,\n    'StepClonerForEachDataInput/Pipeline[0]/FitCallbackStep/FitCallbackStep.joblib'\n    ), os.path.join(tmpdir,\n    'StepClonerForEachDataInput/Pipeline[0]/MultiplyByN/MultiplyByN.joblib'\n    ), os.path.join(tmpdir,\n    'StepClonerForEachDataInput/Pipeline[0]/MultiplyByN/MultiplyByN.joblib'\n    ), os.path.join(tmpdir,\n    'StepClonerForEachDataInput/Pipeline[0]/Pipeline[0].joblib'), os.path.\n    join(tmpdir,\n    'StepClonerForEachDataInput/Pipeline[1]/FitCallbackStep/FitCallbackStep.joblib'\n    ), os.path.join(tmpdir,\n    'StepClonerForEachDataInput/Pipeline[1]/MultiplyByN/MultiplyByN.joblib'\n    ), os.path.join(tmpdir,\n    'StepClonerForEachDataInput/Pipeline[1]/Pipeline[1].joblib'), os.path.\n    join(tmpdir,\n    'StepClonerForEachDataInput/Pipeline/FitCallbackStep/FitCallbackStep.joblib'\n    ), os.path.join(tmpdir,\n    'StepClonerForEachDataInput/Pipeline/MultiplyByN/MultiplyByN.joblib'),\n    os.path.join(tmpdir,\n    'StepClonerForEachDataInput/Pipeline/Pipeline.joblib'), os.path.join(\n    tmpdir, 'StepClonerForEachDataInput/StepClonerForEachDataInput.joblib')]\nfor p in saved_paths:\n    assert os.path.exists(p)\n"
-}

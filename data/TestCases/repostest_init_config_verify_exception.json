@@ -1,9 +1,0 @@
-{
-    "functionName": "test_init_config_verify_exception",
-    "className": "PyU4VUnivmaxConnTestConfigFile",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_conn.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test initialisation of U4VConn with SSL verification set.\"\"\"\nconfig_file, config_dir = pf.FakeConfigFile.create_fake_config_file(verify_key\n    =False)\nunivmax_conn.file_path = config_file\nwith mock.patch.object(rest_requests.RestRequests, 'establish_rest_session',\n    return_value=pf.FakeRequestsSession()):\n    conn = univmax_conn.U4VConn()\n    self.assertTrue(conn.rest_client.verify_ssl)\n    pf.FakeConfigFile.delete_fake_config_file(config_file, config_dir)\n"
-}

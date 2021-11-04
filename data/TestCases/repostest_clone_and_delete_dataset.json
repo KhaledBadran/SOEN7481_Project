@@ -1,9 +1,0 @@
-{
-    "functionName": "test_clone_and_delete_dataset",
-    "className": null,
-    "fileName": "/Vizzuality_&_LMIPy/tests_&_test_lmipy.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "d = Dataset(id_hash='7cf3fab2-3fbe-4980-b572-712207b2c8c7')\ncloned = d.clone(token=API_TOKEN, env='production', dataset_params={'name':\n    'Template Dataset CLONED', 'published': False}, clone_children=True)\nassert cloned.attributes['name'] == f'Template Dataset CLONED'\nassert cloned.id is not '7cf3fab2-3fbe-4980-b572-712207b2c8c7'\nvocabulary = cloned.vocabulary\nmetadata = cloned.metadata\nwidget = cloned.widget\nlayer = cloned.layers\nassert len(vocabulary) > 0\nassert len(metadata) > 0\nassert len(widget) > 0\nassert len(layer) > 0\nassert vocabulary[0].delete(token=API_TOKEN) == None\nassert metadata[0].delete(token=API_TOKEN) == None\nassert widget[0].delete(token=API_TOKEN) == None\nassert layer[0].delete(token=API_TOKEN, force=True) == None\nassert cloned.delete(token=API_TOKEN, force=True) == None\n"
-}

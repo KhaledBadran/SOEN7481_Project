@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_sync_data",
-    "className": "TestSync",
-    "fileName": "/DusanMadar_&_PySyncDroid/tests_&_test_sync.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test 'get_sync_data' gets list of valid sync_data dictionaries.\n        \"\"\"\nmock_oswalk.return_value = ('/tmp/testdir', ['testsubdir'], ['song.mp3',\n    'demo.mp3']), ('/tmp/testdir/testsubdir', ['testsubdir2'], []), (\n    '/tmp/testdir/testsubdir/testsubdir2', [], ['song2.mp3'])\nmock_set_destination_subdir_abs.side_effect = (\n    '/run/user/<user>/gvfs/mtp:host=%5Busb%3A002%2C003%5D/Card/Music/testdir',\n    '/run/user/<user>/gvfs/mtp:host=%5Busb%3A002%2C003%5D/Card/Music/testdir/testsubdir2'\n    )\nsync = Sync(FAKE_MTP_DETAILS, '/tmp', 'Card/Music')\nsync.set_source_abs()\nsync.set_destination_abs()\nsync_data_set = sync.get_sync_data()\nself.assertTrue(mock_set_destination_subdir_abs.call_count, 2)\nself.assertTrue(mock_get_destination_subdir_data.call_count, 2)\nexpected_sync_data_set = [{'src_dir_abs': '/tmp/testdir', 'src_dir_fls': [\n    '/tmp/testdir/song.mp3', '/tmp/testdir/demo.mp3'], 'dst_dir_fls': [],\n    'dst_dir_abs':\n    '/run/user/<user>/gvfs/mtp:host=%5Busb%3A002%2C003%5D/Card/Music/testdir'\n    }, {'src_dir_abs': '/tmp/testdir/testsubdir/testsubdir2', 'src_dir_fls':\n    ['/tmp/testdir/testsubdir/testsubdir2/song2.mp3'], 'dst_dir_fls': [],\n    'dst_dir_abs':\n    '/run/user/<user>/gvfs/mtp:host=%5Busb%3A002%2C003%5D/Card/Music/testdir/testsubdir2'\n    }]\nself.assertIsInstance(sync_data_set, list)\nself.assertEqual(sync_data_set, expected_sync_data_set)\npatch('pysyncdroid.sync.os.walk')patch.object(pysyncdroid.sync.Sync, 'set_destination_subdir_abs')patch.object(pysyncdroid.sync.Sync, 'get_destination_subdir_data')"
-}

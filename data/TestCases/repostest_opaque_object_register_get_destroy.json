@@ -1,9 +1,0 @@
-{
-    "functionName": "test_opaque_object_register_get_destroy",
-    "className": "TestProxyKmipClientIntegration",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_integration_&_services_&_test_proxykmipclient.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the ProxyKmipClient can register, retrieve, and destroy an\n        opaque object.\n        \"\"\"\nobj = objects.OpaqueObject(b'SecretPassword', enums.OpaqueDataType.NONE)\nuid = self.client.register(obj)\nself.assertIsInstance(uid, six.string_types)\ntry:\n    result = self.client.get(uid)\n    self.assertIsInstance(result, objects.OpaqueObject)\n    self.assertEqual(result, obj, 'expected {0}\\nobserved {1}'.format(\n        result, obj))\nfinally:\n    self.client.destroy(uid)\n    self.assertRaises(exceptions.KmipOperationFailure, self.client.get, uid)\n    self.assertRaises(exceptions.KmipOperationFailure, self.client.destroy, uid\n        )\n"
-}

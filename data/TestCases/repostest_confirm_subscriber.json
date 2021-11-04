@@ -1,9 +1,0 @@
-{
-    "functionName": "test_confirm_subscriber",
-    "className": "RegistrationIntegrationTests",
-    "fileName": "/collective_&_Products.EasyNewsletter/src_&_Products_&_EasyNewsletter_&_tests_&_test_registration.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.portal.REQUEST.form.update({'newsletter': '/enl1', 'salutation': u'mr',\n    'firstname': 'Max', 'name': 'Mustermann', 'subscriber':\n    'max@example.com', 'organization': 'Musterfirma', 'name_prefix': 'Dr.'})\nview = getMultiAdapter((self.portal, self.portal.REQUEST), name=\n    'register-subscriber')\nview.__call__()\nenl_reg_entry = self.enl_reg_tool.values()[0]\nself.portal.REQUEST.form.update({'hkey': enl_reg_entry.id})\nview = getMultiAdapter((self.portal, self.portal.REQUEST), name=\n    'confirm-subscriber')\nview.__call__()\ncatalog = self.portal.portal_catalog\nquery = {'portal_type': 'Newsletter Subscriber'}\nresults = catalog(query)\nself.assertTrue(len(results) == 1)\nsubscriber = results[0].getObject()\nself.assertEqual(subscriber.firstname, 'Max')\nself.assertEqual(subscriber.lastname, 'Mustermann')\nself.assertEqual(subscriber.name_prefix, 'Dr.')\nself.assertEqual(subscriber.organization, 'Musterfirma')\nself.assertEqual(subscriber.salutation, 'mr')\nself.assertEqual(subscriber.title, 'max@example.com - Dr. Max Mustermann')\nsubscriber_uid = subscriber.UID()\nlogout()\nsubscriber_obj = api.content.get(UID=subscriber_uid)\nself.assertFalse(subscriber_obj)\nlogin(self.portal, TEST_USER_NAME)\n"
-}

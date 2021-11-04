@@ -1,9 +1,0 @@
-{
-    "functionName": "test_linear_mean_functions_associative_property",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_test_mean_functions.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Tests that associative property of addition holds for linear mean functions:\n    A + (B + (-A)) = B = (A + B) + (-A)\n    \"\"\"\nX, Y = rng.randn(Datum.N, Datum.input_dim), rng.randn(Datum.N, Datum.output_dim\n    )\nXtest = rng.randn(30, Datum.input_dim)\nA, B, A_inverse = mean_functions[0], mean_functions[1], mean_functions[-1]\nlhs = Additive(A, Additive(B, A_inverse))\nrhs = Additive(Additive(A, B), A_inverse)\nmodel_lhs = _create_GPR_model_with_bias(X, Y, mean_function=lhs)\nmodel_b = _create_GPR_model_with_bias(X, Y, mean_function=B)\nmodel_rhs = _create_GPR_model_with_bias(X, Y, mean_function=rhs)\nmu_lhs, var_lhs = model_lhs.predict_f(Xtest)\nmu_b, var_b = model_b.predict_f(Xtest)\nmu_rhs, var_rhs = model_rhs.predict_f(Xtest)\nassert_allclose(mu_lhs, mu_b)\nassert_allclose(var_lhs, var_b)\nassert_allclose(mu_b, mu_rhs)\nassert_allclose(var_b, var_rhs)\npytest.mark.parametrize('mean_functions', [_linear_functions])"
-}

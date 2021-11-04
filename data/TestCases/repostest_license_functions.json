@@ -1,9 +1,0 @@
-{
-    "functionName": "test_license_functions",
-    "className": "testLicense",
-    "fileName": "/benjimor_&_CaLi/tests_&_test_license.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test licenses methods.\"\"\"\nodrl = ODRLVocabulary()\nDL1 = RestrictivenessLatticeOfStatus(Graph().parse(data=dl1_rdf, format='ttl'))\nld_licenses_graph = Graph().parse(data=ld_licenses_rdf, format='ttl')\nrep_licenses_graph = Graph().parse(data=rep_licenses_rdf, format='ttl')\nmit_license = ODRLLicense(vocabulary=odrl, ls=DL1, rdf_graph=\n    ld_licenses_graph, iri=MIT)\napache_license = ODRLLicense(vocabulary=odrl, ls=DL1, rdf_graph=\n    rep_licenses_graph, iri=ApacheV2)\npermissions = [ODRL['modify'], CC['CommericalUse'], CC['Distribution'], CC[\n    'DerivativeWorks'], CC['Reproduction']]\nself.assertCountEqual(permissions, mit_license.get_action(vocabulary=odrl,\n    status=Permission))\nstate = apache_license.get_status(vocabulary=odrl, action=ODRL['derive'])\nself.assertEqual(state, Permission)\n"
-}

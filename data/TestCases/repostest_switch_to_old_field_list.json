@@ -1,9 +1,0 @@
-{
-    "functionName": "test_switch_to_old_field_list",
-    "className": "GetFieldListTestCase",
-    "fileName": "/mzy2240_&_ESA/tests_&_test_saw.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Ensure that switching to \"FIELD_LIST_COLUMNS_OLD works as\n        it should.\n        \"\"\"\nwith patch.object(saw_14, '_object_fields', new={'dict': 1}):\n    out = [(['x'] * len(saw_14.FIELD_LIST_COLUMNS_OLD)) for _ in range(10)]\n    with patch.object(saw_14, '_call_simauto', return_value=out):\n        result = saw_14.GetFieldList('bus')\nself.assertIsInstance(result, pd.DataFrame)\nself.assertListEqual(result.columns.tolist(), saw_14.FIELD_LIST_COLUMNS_OLD)\nself.assertEqual(result.shape, (10, len(saw_14.FIELD_LIST_COLUMNS_OLD)))\n"
-}

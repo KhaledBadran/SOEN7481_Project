@@ -1,9 +1,0 @@
-{
-    "functionName": "test_grid_3d",
-    "className": "TestChain",
-    "fileName": "/samreay_&_ChainConsumer/tests_&_test_analysis.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "x, y, z = np.linspace(-3, 3, 30), np.linspace(-3, 3, 30), np.linspace(-3, 3, 30\n    )\nxx, yy, zz = np.meshgrid(x, y, z, indexing='ij')\npdf = 1 / (2 * np.pi) * np.exp(-0.5 * (xx * xx + yy * yy + zz * zz))\nc = ChainConsumer()\nc.add_chain([x, y, z], parameters=['x', 'y', 'z'], weights=pdf, grid=True)\nsummary = c.analysis.get_summary()\nexpected = np.array([-1.0, 0.0, 1.0])\nfor k in summary:\n    assert np.all(np.abs(summary[k] - expected) < 0.2)\n"
-}

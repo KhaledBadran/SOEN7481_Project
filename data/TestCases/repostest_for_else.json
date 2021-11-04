@@ -1,9 +1,0 @@
-{
-    "functionName": "test_for_else",
-    "className": "TestInsertCode",
-    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_bytecode_modification.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.original_stdout = sys.stdout\nsys.stdout = StringIO()\ntry:\n\n    def original():\n        sum = 0\n        for i in range(3):\n            sum += i\n        else:\n            print(sum)\n\n    def check_line_1():\n        tracing()\n        sum = 0\n        for i in range(3):\n            sum += i\n        else:\n            print(sum)\n\n    def check_line_3():\n        sum = 0\n        for i in range(3):\n            tracing()\n            sum += i\n        else:\n            print(sum)\n\n    def check_line_5():\n        sum = 0\n        for i in range(3):\n            sum += i\n        else:\n            tracing()\n            print(sum)\n    self.check_insert_to_line_with_exec(original, tracing, original.\n        __code__.co_firstlineno + 1)\n    self.check_insert_to_line_with_exec(original, tracing, original.\n        __code__.co_firstlineno + 3)\n    self.check_insert_to_line_with_exec(original, tracing, original.\n        __code__.co_firstlineno + 5)\n    sys.stdout = self.original_stdout\n    self.check_insert_to_line_by_symbols(original, call_tracing, original.\n        __code__.co_firstlineno + 1, check_line_1.__code__)\n    self.check_insert_to_line_by_symbols(original, call_tracing, original.\n        __code__.co_firstlineno + 3, check_line_3.__code__)\n    self.check_insert_to_line_by_symbols(original, call_tracing, original.\n        __code__.co_firstlineno + 5, check_line_5.__code__)\nfinally:\n    sys.stdout = self.original_stdout\n"
-}

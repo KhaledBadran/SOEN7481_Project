@@ -1,9 +1,0 @@
-{
-    "functionName": "test_log_files__send_to_elk",
-    "className": "test_CloudTrail",
-    "fileName": "/pbx-gs_&_OSBot-AWS/tests_&_unit_&_helpers_&_test_CloudTrail_To_Elk.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "iam = IAM()\naccount_id = iam.account_id()\nregion = iam.region()\nyear = '2020'\nmonth = '02'\nday = '16'\nmax = 200\nlog_files = self.cloud_trail.log_files(self.trail_name, account_id, region,\n    year, month, day)\nrecords = self.cloud_trail.log_files_records(self.trail_name, log_files[0:max])\nself.result = self.send_to_elk(records, 'eventID')\n"
-}

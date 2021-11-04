@@ -1,9 +1,0 @@
-{
-    "functionName": "test_top_frequencies_list_exceeds_dict",
-    "className": null,
-    "fileName": "/rpep_&_FolderAnalyse/FolderAnalyse_&_tests_&_test_process.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    test_top_frequencies_list_exceeds_dict()\n\n    This test generates some junk data, and checks that the top_frequencies\n    function works as expected, by testing against manually constructed data.\n\n    A dictionary is created with the alphabet, with values running backwards\n    from 25 to 0 assigned to a-z. top_frequencies is called with the argument\n    10 and then each key value pair is checked against the known answer.\n    \"\"\"\nkeys = 'abcdefghijklmnopqrstuvwxyz'\nN = len(keys)\nfreq_dict = {}\nfor i in range(N - 1, -1, -1):\n    freq_dict[keys[N - i - 1]] = i\nfreq_dict = sort_dict(freq_dict)\ntop_freqs = top_frequencies(freq_dict, nterms=10)\nsolution = {'a': 25, 'b': 24, 'c': 23, 'd': 22, 'e': 21, 'f': 20, 'g': 19,\n    'h': 18, 'i': 17, 'j': 16}\nfor key, value in top_freqs.items():\n    assert solution[key] == value, 'Something has gone wrong with sorting.'\n"
-}

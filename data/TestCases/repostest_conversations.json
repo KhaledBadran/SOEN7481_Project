@@ -1,9 +1,0 @@
-{
-    "functionName": "test_conversations",
-    "className": null,
-    "fileName": "/halcy_&_Mastodon.py/tests_&_test_timeline.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "account = api.account_verify_credentials()\nstatus = api.status_post('@admin ilu bby ;3', visibility='direct')\ntime.sleep(2)\nconversations = api2.conversations()\napi2.conversations_read(conversations[0])\ntime.sleep(2)\nconversations2 = api2.conversations()\napi.status_delete(status)\nassert conversations\nassert status.id in map(lambda x: x.last_status.id, conversations)\nassert account.id in map(lambda x: x.accounts[0].id, conversations)\nassert conversations[0].unread == True\nassert conversations2[0].unread == False\npytest.mark.vcr()"
-}

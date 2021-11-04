@@ -1,9 +1,0 @@
-{
-    "functionName": "test_stop_words",
-    "className": null,
-    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_server_&_tests_&_test_custom_stop_words.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "name = 'test_acstw'\ntested_stop_words = ['one', 'two', 'three', 'foure', 'five', 'six']\nmethod = V01 + '/stop-words/'\npars = dict(name=name, stop_words=tested_stop_words)\ndata = app.post_check(method, json=pars)\nmethod = V01 + '/stop-words/{}'.format(name)\ndata = app.get_check(method)\nassert dict2type(data, collapse_lists=True) == {'name': 'str', 'stop_words':\n    ['str']}\nassert data['stop_words'] == tested_stop_words\nmethod = V01 + '/stop-words/{}'.format(name)\napp.delete_check(method)\n"
-}

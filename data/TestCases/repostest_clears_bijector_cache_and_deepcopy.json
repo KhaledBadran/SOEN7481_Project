@@ -1,9 +1,0 @@
-{
-    "functionName": "test_clears_bijector_cache_and_deepcopy",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_utilities_&_test_deepcopy.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    With each forward pass through a bijector, a cache is stored inside which prohibits the deepcopy of the bijector.\n    This is due to the fact that HashableWeakRef objects are not pickle-able, which raises a TypeError. Alternatively,\n    one can make use of `deepcopy_component` to deepcopy a module containing used bijectors.\n    \"\"\"\ninput = 1.0\n_ = module(input)\nwith pytest.raises(TypeError):\n    copy.deepcopy(module)\nmodule_copy = gpflow.utilities.deepcopy(module)\nassert module.var == module_copy.var\nassert module.var is not module_copy.var\nmodule_copy.var.assign([5.0])\nassert module.var != module_copy.var\npytest.mark.parametrize('module', [A(), B()])"
-}

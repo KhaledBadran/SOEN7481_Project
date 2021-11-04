@@ -1,9 +1,0 @@
-{
-    "functionName": "test_min_volatility_different_solver",
-    "className": null,
-    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_efficient_frontier.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ef = setup_efficient_frontier()\nef.solver = 'ECOS'\nw = ef.min_volatility()\nassert isinstance(w, dict)\nassert set(w.keys()) == set(ef.tickers)\nnp.testing.assert_almost_equal(ef.weights.sum(), 1)\nassert all([(i >= 0) for i in w.values()])\ntest_performance = 0.179312, 0.159151, 1.001015\nnp.testing.assert_allclose(ef.portfolio_performance(), test_performance,\n    atol=1e-05)\nef = setup_efficient_frontier()\nef.solver = 'OSQP'\nw = ef.min_volatility()\nnp.testing.assert_allclose(ef.portfolio_performance(), test_performance,\n    atol=1e-05)\nef = setup_efficient_frontier()\nef.solver = 'SCS'\nw = ef.min_volatility()\nnp.testing.assert_allclose(ef.portfolio_performance(), test_performance,\n    atol=0.001)\n"
-}

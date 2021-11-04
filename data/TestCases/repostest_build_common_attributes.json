@@ -1,9 +1,0 @@
-{
-    "functionName": "test_build_common_attributes",
-    "className": "TestProxyKmipClient",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_test_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the right attribute objects are created.\n        \"\"\"\nclient = ProxyKmipClient()\nclient.open()\noperation_policy_name = 'test'\ncommon_attributes = client._build_common_attributes(operation_policy_name=\n    operation_policy_name)\nself.assertEqual(1, len(common_attributes))\nopn = common_attributes[0]\nself.assertIsInstance(opn, obj.Attribute)\nself.assertIsInstance(opn.attribute_name, obj.Attribute.AttributeName)\nself.assertIsInstance(opn.attribute_value, attr.OperationPolicyName)\nself.assertEqual(opn.attribute_name.value, 'Operation Policy Name')\nself.assertEqual(opn.attribute_value.value, 'test')\nmock.patch('kmip.pie.client.KMIPProxy', mock.MagicMock(spec_set=KMIPProxy))"
-}

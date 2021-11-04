@@ -1,9 +1,0 @@
-{
-    "functionName": "test_defer_connect",
-    "className": "TestConnection",
-    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_test_connection.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "import socket\nd = self.databases[0].copy()\ntry:\n    sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)\n    sock.connect(d['unix_socket'])\nexcept KeyError:\n    sock.close()\n    sock = socket.create_connection((d.get('host', 'localhost'), d.get(\n        'port', 3306)))\nfor k in ['unix_socket', 'host', 'port']:\n    try:\n        del d[k]\n    except KeyError:\n        pass\nc = pymysql.connect(defer_connect=True, **d)\nself.assertFalse(c.open)\nc.connect(sock)\nc.close()\nsock.close()\n"
-}

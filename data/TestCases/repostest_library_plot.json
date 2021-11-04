@@ -1,9 +1,0 @@
-{
-    "functionName": "test_library_plot",
-    "className": null,
-    "fileName": "/Silmathoron_&_NNGT/testing_&_test_plots.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Check that plotting with the underlying backend library works \"\"\"\npop = nngt.NeuralPop.exc_and_inhib(50)\ng = ng.newman_watts(4, 0.2, population=pop)\ng.set_weights(np.random.uniform(1, 5, g.edge_nb()))\nnplt.library_draw(g, show=False)\nnplt.library_draw(g, ncolor='total-degree', ecolor='k', show=False)\nif nngt.get_config('backend') != 'nngt':\n    nplt.library_draw(g, ncolor='in-degree', ecolor='betweenness', esize=\n        'weight', max_esize=5, show=False)\nnplt.library_draw(g, nshape='s', esize='weight', layout='random', show=False)\nnplt.library_draw(g, nshape='s', esize='weight', layout='random', show=False)\nnplt.library_draw(g, ncolor='in-degree', esize='weight', layout='circular',\n    show=False)\nedges = g.edges_array[::5]\nnplt.library_draw(g, ncolor='in-degree', esize='weight', layout='circular',\n    restrict_edges=edges, show=False)\npytest.mark.mpi_skip"
-}

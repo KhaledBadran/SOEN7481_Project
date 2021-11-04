@@ -1,9 +1,0 @@
-{
-    "functionName": "test_convert_tiles_to_compact",
-    "className": null,
-    "fileName": "/ECCO-GROUP_&_ECCOv4-py/ecco_v4_py_&_test_&_test_llc_array_conversion.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Read in tiles data, convert to compact. \n    Verify this equals reading in compact data\n    \"\"\"\nfor fname, nk, nl in zip(_TEST_FILES, _TEST_NK, _TEST_RECS):\n    data_tiles = ecco.read_llc_to_tiles(fdir=_DATA_DIR, fname=fname, llc=90,\n        nk=nk, nl=nl, filetype='>f4', less_output=False)\n    data_compact = ecco.read_llc_to_compact(fdir=_DATA_DIR, fname=fname,\n        llc=90, nk=nk, nl=nl, filetype='>f4', less_output=False)\n    data_converted = ecco.llc_tiles_to_compact(data_tiles)\n    assert np.all(np.equal(data_converted, data_compact))\n"
-}

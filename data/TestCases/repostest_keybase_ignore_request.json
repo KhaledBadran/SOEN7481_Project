@@ -1,9 +1,0 @@
-{
-    "functionName": "test_keybase_ignore_request",
-    "className": "KeybaseTest",
-    "fileName": "/cmsteffen-code_&_PyKBLib/tests_&_test_pykblib_keybase.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.keybase._api.run_command.side_effect = APIException('EXCEPTION')\nwith self.assertRaises(KeybaseException):\n    self.keybase.ignore_request('test_team', 'fake_username')\nself.keybase._api.run_command.assert_called_with(\n    'team ignore-request test_team -u fake_username')\nself.keybase._api.run_command.side_effect = APIException('Not found')\nself.keybase.ignore_request('test_team', 'fake_username')\nself.keybase._api.run_command.side_effect = None\nself.keybase._api.run_command.return_value = 'Success!'\nself.keybase.ignore_request('test_team', 'fake_username')\n"
-}

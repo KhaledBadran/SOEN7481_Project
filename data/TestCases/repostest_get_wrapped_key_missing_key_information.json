@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_wrapped_key_missing_key_information",
-    "className": "TestKmipEngine",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the right error is thrown when key wrapping is requested\n        with no settings in a Get request.\n        \"\"\"\ne = engine.KmipEngine()\ne._data_store = self.engine\ne._data_store_session_factory = self.session_factory\ne._data_session = e._data_store_session_factory()\ne._is_allowed_by_operation_policy = mock.Mock(return_value=True)\ne._logger = mock.MagicMock()\ne._cryptography_engine.logger = mock.MagicMock()\nunwrapped_key = pie_objects.SymmetricKey(enums.CryptographicAlgorithm.AES, \n    128, b'\\x00\\x11\"3DUfw\\x88\\x99\\xaa\\xbb\\xcc\\xdd\\xee\\xff', [enums.\n    CryptographicUsageMask.ENCRYPT])\ne._data_session.add(unwrapped_key)\ne._data_session.commit()\ne._data_session = e._data_store_session_factory()\nunwrapped_key_uuid = str(unwrapped_key.unique_identifier)\npayload = payloads.GetRequestPayload(unique_identifier=unwrapped_key_uuid,\n    key_wrapping_specification=objects.KeyWrappingSpecification(\n    wrapping_method=enums.WrappingMethod.ENCRYPT, encoding_option=enums.\n    EncodingOption.NO_ENCODING))\nargs = payload,\nself.assertRaisesRegex(exceptions.PermissionDenied,\n    'Either the encryption key information or the MAC/signature key information must be specified for key wrapping to be performed.'\n    , e._process_get, *args)\n"
-}

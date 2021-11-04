@@ -1,9 +1,0 @@
-{
-    "functionName": "test_iotwo",
-    "className": null,
-    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_specobj.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "sobj = specobj.SpecObj('MultiSlit', 1, SLITID=0)\nsobj['BOX_WAVE'] = np.arange(100).astype(float)\nsobj['BOX_COUNTS'] = np.ones_like(sobj.BOX_WAVE)\nsobj['TRACE_SPAT'] = np.arange(100) * 2.0\nsobj['BOX_MASK'] = np.arange(100).astype(bool)\nofile = data_path('tmp.fits')\nsobj.to_file(ofile, overwrite=True)\nsobj2 = specobj.SpecObj.from_file(ofile)\nassert isinstance(sobj2, specobj.SpecObj)\nassert np.array_equal(sobj.BOX_WAVE, sobj2.BOX_WAVE)\nassert sobj2.PYPELINE == 'MultiSlit'\n"
-}

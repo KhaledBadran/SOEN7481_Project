@@ -1,9 +1,0 @@
-{
-    "functionName": "case_setup_force_frame_eval",
-    "className": null,
-    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_frame_eval_and_tracing.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "def get_environ(writer):\n    env = os.environ.copy()\n    env['PYDEVD_USE_FRAME_EVAL'] = 'YES'\n    env['PYDEVD_USE_CYTHON'] = 'YES'\n    return env\noriginal_test_file = case_setup.test_file\n@contextmanager\ndef test_file(*args, **kwargs):\n    kwargs.setdefault('get_environ', get_environ)\n    with original_test_file(*args, **kwargs) as writer:\n        yield writer\ncase_setup.test_file = test_file\nreturn case_setup\npytest.fixture"
-}

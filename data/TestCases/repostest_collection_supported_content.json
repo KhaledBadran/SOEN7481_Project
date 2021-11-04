@@ -1,9 +1,0 @@
-{
-    "functionName": "test_collection_supported_content",
-    "className": null,
-    "fileName": "/EclecticIQ_&_OpenTAXII/tests_&_services_&_test_collection_management.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "service = server.get_service('collection-management-A')\nheaders = prepare_headers(version, https)\nrequest = prepare_request(version)\nresponse = service.process(headers, request)\nif version == 11:\n\n    def get_coll(name):\n        return next(c for c in response.collection_informations if c.\n            collection_name == name)\n    assert get_coll(COLLECTION_OPEN\n        ).collection_type == entities.CollectionEntity.TYPE_SET\nelse:\n\n    def get_coll(name):\n        return next(c for c in response.feed_informations if c.feed_name ==\n            name)\nassert len(get_coll(COLLECTION_OPEN).supported_contents) == 0\nassert len(get_coll(COLLECTION_ONLY_STIX).supported_contents) == 1\nassert len(get_coll(COLLECTION_STIX_AND_CUSTOM).supported_contents) == 2\nassert not get_coll(COLLECTION_DISABLED).available\npytest.mark.parametrize('https', [True, False])pytest.mark.parametrize('version', [11, 10])"
-}

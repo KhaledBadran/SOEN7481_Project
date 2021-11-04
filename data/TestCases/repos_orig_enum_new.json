@@ -1,9 +1,0 @@
-{
-    "functionName": "_orig_enum_new",
-    "className": null,
-    "fileName": "/alex-ber_&_AlexBerUtils/tests_&_utils_&_enums_mixin_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "if type(value) is cls:\n    return value\ntry:\n    if value in cls._value2member_map_:\n        return cls._value2member_map_[value]\nexcept TypeError:\n    for member in cls._member_map_.values():\n        if member._value_ == value:\n            return member\ntry:\n    exc = None\n    result = cls._missing_(value)\nexcept Exception as e:\n    exc = e\n    result = None\nif isinstance(result, cls):\n    return result\nelse:\n    ve_exc = ValueError('%r is not a valid %s' % (value, cls.__name__))\n    if result is None and exc is None:\n        raise ve_exc\n    elif exc is None:\n        exc = TypeError(\n            'error in %s._missing_: returned %r instead of None or a valid member'\n             % (cls.__name__, result))\n    exc.__context__ = ve_exc\n    raise exc\n"
-}

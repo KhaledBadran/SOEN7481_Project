@@ -1,9 +1,0 @@
-{
-    "functionName": "test_equality_vincentys",
-    "className": "TestGeodesy",
-    "fileName": "/GeoscienceAustralia_&_GeodePy/geodepy_&_tests_&_test_geodesy.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "abs_path = os.path.abspath(os.path.dirname(__file__))\ntest_geo_coords = np.genfromtxt(os.path.join(abs_path,\n    'resources/Test_Conversion_Geo.csv'), delimiter=',', dtype='S4,f8,f8',\n    names=['site', 'lat1', 'long1'], usecols=('lat1', 'long1'))\ntest_geo_coord2 = np.genfromtxt(os.path.join(abs_path,\n    'resources/Test_Conversion_Geo.csv'), delimiter=',', dtype='S4,f8,f8',\n    names=['site', 'lat2', 'long2'], usecols=('lat2', 'long2'))\ntest_pairs = rfn.merge_arrays([test_geo_coords, np.roll(test_geo_coord2, 1)\n    ], flatten=True)\nvincinv_result = np.array(list(vincinv(*x) for x in test_pairs[['lat1',\n    'long1', 'lat2', 'long2']]))\nvincdir_input = rfn.merge_arrays([test_geo_coords, vincinv_result[:, (1)],\n    vincinv_result[:, (0)]], flatten=True)\nvincdir_input.dtype.names = ['lat1', 'long1', 'az1to2', 'ell_dist']\nvincdir_result = np.array(list(vincdir(*x) for x in vincdir_input[['lat1',\n    'long1', 'az1to2', 'ell_dist']]))\nnp.testing.assert_almost_equal(test_pairs['lat2'], vincdir_result[:, (0)],\n    decimal=8)\nnp.testing.assert_almost_equal(test_pairs['long2'], vincdir_result[:, (1)],\n    decimal=8)\nnp.testing.assert_almost_equal(vincinv_result[:, (2)], vincdir_result[:, (2)])\n"
-}

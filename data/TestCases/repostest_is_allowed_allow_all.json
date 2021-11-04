@@ -1,9 +1,0 @@
-{
-    "functionName": "test_is_allowed_allow_all",
-    "className": "TestKmipEngine",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that an access check resulting in an \"Allow All\" policy is\n        processed correctly.\n        \"\"\"\ne = engine.KmipEngine()\ne.get_relevant_policy_section = mock.Mock(return_value={enums.ObjectType.\n    SYMMETRIC_KEY: {enums.Operation.GET: enums.Policy.ALLOW_ALL}})\nresult = e.is_allowed('test_policy', 'test_user', 'test_group', 'test_user',\n    enums.ObjectType.SYMMETRIC_KEY, enums.Operation.GET)\nself.assertTrue(result)\n"
-}

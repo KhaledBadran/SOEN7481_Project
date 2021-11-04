@@ -1,9 +1,0 @@
-{
-    "functionName": "test_unbalanced_multiple_inputs",
-    "className": null,
-    "fileName": "/PythonOT_&_POT/test_&_test_unbalanced.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "n = 100\nrng = np.random.RandomState(42)\nx = rng.randn(n, 2)\na = ot.utils.unif(n)\nb = rng.rand(n, 2)\nM = ot.dist(x, x)\nepsilon = 1.0\nreg_m = 1.0\nloss, log = ot.unbalanced.sinkhorn_unbalanced(a, b, M, reg=epsilon, reg_m=\n    reg_m, method=method, log=True, verbose=True)\nfi = reg_m / (reg_m + epsilon)\nlogb = np.log(b + 1e-16)\nloga = np.log(a + 1e-16)[:, (None)]\nlogKtu = logsumexp(log['logu'][:, (None), :] - M[:, :, (None)] / epsilon,\n    axis=0)\nlogKv = logsumexp(log['logv'][(None), :] - M[:, :, (None)] / epsilon, axis=1)\nv_final = fi * (logb - logKtu)\nu_final = fi * (loga - logKv)\nnp.testing.assert_allclose(u_final, log['logu'], atol=1e-05)\nnp.testing.assert_allclose(v_final, log['logv'], atol=1e-05)\nassert len(loss) == b.shape[1]\npytest.mark.parametrize('method', ['sinkhorn', 'sinkhorn_stabilized'])"
-}

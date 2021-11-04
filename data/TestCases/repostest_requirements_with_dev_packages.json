@@ -1,9 +1,0 @@
-{
-    "functionName": "test_requirements_with_dev_packages",
-    "className": null,
-    "fileName": "/132nd-etcher_&_EPAB/test_&_test_cmd_&_test_requirements.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "reqs = Path('requirements.txt')\nreqs_dev = Path('requirements-dev.txt')\nwhen(elib_run).run('pipenv lock -r', mute=True, filters='Courtesy Notice: '\n    ).thenReturn((\"\"\"bad line\nreqs==0.1.0\"\"\", 0))\nwhen(elib_run).run('pipenv lock -r -d', mute=True, filters='Courtesy Notice: '\n    ).thenReturn((\"\"\"bad line\nreqs==0.1.1\"\"\", 0))\nepab.cmd._reqs._write_reqs(False, False)\nassert reqs.exists()\nassert reqs_dev.exists()\nassert reqs.read_text() == 'reqs==0.1.0'\nassert reqs_dev.read_text() == 'reqs==0.1.1'\n"
-}

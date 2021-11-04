@@ -1,9 +1,0 @@
-{
-    "functionName": "test_post_response_handler_can_override_default_internal_server_error_handler",
-    "className": "TestExceptionHandlersRegistry",
-    "fileName": "/cbefus_&_Eynnyd/tests_&_plan_execution_&_test_error_handlers_builder.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "def fake_handler(thrown_exc, request, response):\n    return ResponseBuilder().set_status(HTTPStatus.OK).build()\nexception_handlers = ErrorHandlersBuilder().add_post_response_error_handler(\n    Exception, fake_handler).build()\nresponse = exception_handlers.handle_post_response_error(Exception(),\n    'fake request', 'fake response')\nself.assertEqual(HTTPStatus.OK.value, response.status.code)\n"
-}

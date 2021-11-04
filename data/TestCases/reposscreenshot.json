@@ -1,9 +1,0 @@
-{
-    "functionName": "screenshot",
-    "className": "Brain",
-    "fileName": "/nipy_&_PySurfer/surfer_&_viz.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Generate a screenshot of current view.\n\n        Wraps to :func:`mayavi.mlab.screenshot` for ease of use.\n\n        Parameters\n        ----------\n        mode : string\n            Either 'rgb' or 'rgba' for values to return.\n        antialiased : bool\n            Antialias the image (see :func:`mayavi.mlab.screenshot`\n            for details; default False).\n\n        Returns\n        -------\n        screenshot : array\n            Image pixel values.\n\n        Notes\n        -----\n        Due to limitations in TraitsUI, if multiple views or ``hemi='split'``\n        is used, there is no guarantee painting of the windows will\n        complete before control is returned to the command line. Thus\n        we strongly recommend using only one figure window (which uses\n        a Mayavi figure to plot instead of TraitsUI) if you intend to\n        script plotting commands.\n        \"\"\"\nrow = []\nfor ri in range(self.brain_matrix.shape[0]):\n    col = []\n    n_col = 2 if self._hemi == 'split' else 1\n    for ci in range(n_col):\n        col += [self.screenshot_single(mode, antialiased, ri, ci)]\n    row += [np.concatenate(col, axis=1)]\ndata = np.concatenate(row, axis=0)\nreturn data\n"
-}

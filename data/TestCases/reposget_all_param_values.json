@@ -1,9 +1,0 @@
-{
-    "functionName": "get_all_param_values",
-    "className": null,
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_layers_&_helper.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    This function returns the values of the parameters of all layers below one\n    or more given :class:`Layer` instances, including the layer(s) itself.\n\n    This function can be used in conjunction with set_all_param_values to save\n    and restore model parameters.\n\n    Parameters\n    ----------\n    layer : Layer or list\n        The :class:`Layer` instance for which to gather all parameter values,\n        or a list of :class:`Layer` instances.\n\n    **tags (optional)\n        tags can be specified to filter the list. Specifying ``tag1=True``\n        will limit the list to parameters that are tagged with ``tag1``.\n        Specifying ``tag1=False`` will limit the list to parameters that\n        are not tagged with ``tag1``. Commonly used tags are\n        ``regularizable`` and ``trainable``.\n\n    Returns\n    -------\n    list of numpy.array\n        A list of numpy arrays representing the parameter values.\n\n    Examples\n    --------\n    >>> from lasagne.layers import InputLayer, DenseLayer\n    >>> l_in = InputLayer((100, 20))\n    >>> l1 = DenseLayer(l_in, num_units=50)\n    >>> all_param_values = get_all_param_values(l1)\n    >>> (all_param_values[0] == l1.W.get_value()).all()\n    True\n    >>> (all_param_values[1] == l1.b.get_value()).all()\n    True\n    \"\"\"\nparams = get_all_params(layer, **tags)\nreturn [p.get_value() for p in params]\n"
-}

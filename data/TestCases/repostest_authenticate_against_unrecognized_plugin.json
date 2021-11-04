@@ -1,9 +1,0 @@
-{
-    "functionName": "test_authenticate_against_unrecognized_plugin",
-    "className": "TestKmipSession",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_session.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the session correctly handles an unrecognized plugin\n        configuration.\n        \"\"\"\nkmip_session = session.KmipSession(None, None, None, name='TestSession',\n    auth_settings=[('auth:unrecognized', {})])\nkmip_session._logger = mock.MagicMock()\nfake_request = messages.RequestMessage(request_header=messages.RequestHeader())\nargs = 'fake_certificate', fake_request\nself.assertRaisesRegex(exceptions.PermissionDenied,\n    'Authentication failed.', kmip_session.authenticate, *args)\nkmip_session._logger.warning.assert_any_call(\n    \"Authentication plugin 'auth:unrecognized' is not supported.\")\n"
-}

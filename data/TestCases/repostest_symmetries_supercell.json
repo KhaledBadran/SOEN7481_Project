@@ -1,9 +1,0 @@
-{
-    "functionName": "test_symmetries_supercell",
-    "className": null,
-    "fileName": "/mesonepigreco_&_CellConstructor/tests_&_TestSymmetriesSupercell_&_test_symmetries_supercell.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "total_path = os.path.dirname(os.path.abspath(__file__))\nos.chdir(total_path)\ndynmat = CC.Phonons.Phonons(FILDYN, NQIRR)\nSUPERCELL = dynmat.GetSupercell()\nsupercell_dyn = dynmat.GenerateSupercellDyn(SUPERCELL)\nw1, pols = supercell_dyn.DyagDinQ(0)\nfor i, q in enumerate(dynmat.q_tot):\n    print('Dyagonalizing:', q)\n    w, p = dynmat.DyagDinQ(i)\n    print(' '.join([('%.4f cm-1 ' % (x * CC.Phonons.RY_TO_CM)) for x in w]))\nqe_sym = CC.symmetries.QE_Symmetry(dynmat.structure)\nfc_dynmat_start = np.array(dynmat.dynmats)\nafter_sym = fc_dynmat_start.copy()\nqe_sym.SymmetrizeFCQ(after_sym, np.array(dynmat.q_stars), verbose=True)\nfor i, q in enumerate(dynmat.q_tot):\n    dynmat.dynmats[i] = after_sym[(i), :, :]\nfor i, q in enumerate(dynmat.q_tot):\n    print('After Dyagonalizing:', q)\n    w, p = dynmat.DyagDinQ(i)\n    print(' '.join([('%.4f cm-1 ' % (x * CC.Phonons.RY_TO_CM)) for x in w]))\nprint()\nprint('Difference of the symmetrization:')\nprint(np.sqrt(np.sum((after_sym - fc_dynmat_start) ** 2) / np.sum(after_sym *\n    fc_dynmat_start)))\nsupercell_dyn = dynmat.GenerateSupercellDyn(SUPERCELL)\nw, pols = supercell_dyn.DyagDinQ(0)\nt = CC.Methods.get_translations(pols, supercell_dyn.structure.\n    get_masses_array())\ndynmat.Symmetrize()\nsupercell_dyn = dynmat.GenerateSupercellDyn(SUPERCELL)\nw3, pols = supercell_dyn.DyagDinQ(0)\nt = CC.Methods.get_translations(pols, supercell_dyn.structure.\n    get_masses_array())\nfor i, _w_ in enumerate(w):\n    w2 = w3[i]\n    assert np.abs(_w_ - w2) < 1e-08\npytest.mark.parametrize('FILDYN, NQIRR', [('Sym.dyn.', 3), ('skydyn_', 4)])"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_clear_transaction_callback",
-    "className": "TestPlugin",
-    "fileName": "/tutorgen_&_HPIT-python-client/tests_&_hpitclient_&_test_plugin.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Plugin.clear_transaction_callback() Test plan:\n            - make sure self.transaction_callback is None\n        \"\"\"\nhttpretty.register_uri(httpretty.POST,\n    'https://www.hpit-project.org/plugin/unsubscribe', body='')\ndef simple_callback():\n    pass\nself.test_plugin.transaction_callback = simple_callback\nself.test_plugin.clear_transaction_callback()\nself.test_plugin.transaction_callback.should.equal(None)\nhttpretty.activate"
-}

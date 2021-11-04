@@ -1,9 +1,0 @@
-{
-    "functionName": "test_estimate_and_variance_improved_by_lower_epsilon",
-    "className": null,
-    "fileName": "/NASA_&_MLMCPy/tests_&_mlmc_&_test_MLMCSimulator.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Runs simulate with decreasing epsilons and ensures that the resulting\n    estimates are increasingly accurate and that the variances decrease.\n    \"\"\"\nnp.random.seed(1)\nmc_20000_output_sample_mean = 12.3186216602\nsim = MLMCSimulator(models=models_from_data, data=data_input)\nestimates = np.zeros(3)\nvariances = np.zeros_like(estimates)\nfor i, epsilon in enumerate([1.0, 0.5, 0.1]):\n    estimates[i], sample_sizes, variances[i] = sim.simulate(epsilon=epsilon,\n        initial_sample_sizes=50)\nerror = np.abs(estimates - mc_20000_output_sample_mean)\nassert error[0] > error[1] > error[2]\nassert variances[0] > variances[1] > variances[2]\n"
-}

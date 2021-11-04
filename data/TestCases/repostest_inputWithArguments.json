@@ -1,9 +1,0 @@
-{
-    "functionName": "test_inputWithArguments",
-    "className": "MethodicalTests",
-    "fileName": "/glyph_&_Automat/automat_&__test_&_test_methodical.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        If an input takes an argument, it will pass that along to its output.\n        \"\"\"\nclass Mechanism(object):\n    m = MethodicalMachine()\n\n    @m.input()\n    def input(self, x, y=1):\n        \"\"\"an input\"\"\"\n\n    @m.state(initial=True)\n    def state(self):\n        \"\"\"a state\"\"\"\n\n    @m.output()\n    def output(self, x, y=1):\n        self._x = x\n        return x + y\n    state.upon(input, state, [output])\nm = Mechanism()\nself.assertEqual(m.input(3), [4])\nself.assertEqual(m._x, 3)\n"
-}

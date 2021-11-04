@@ -1,9 +1,0 @@
-{
-    "functionName": "test_merge_method_model_concat",
-    "className": "TestKerasAPI",
-    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_keras_&_test_keras_api.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "bx1 = BLayer.Input(shape=(4,))\nbx2 = BLayer.Input(shape=(5,))\nby1 = BLayer.Dense(6, activation='sigmoid')(bx1)\nbbranch1 = BModel(bx1, by1)(bx1)\nbbranch2 = BLayer.Dense(8)(bx2)\nbz = BLayer.merge([bbranch1, bbranch2], mode='concat')\nbmodel = BModel([bx1, bx2], bz)\nkx1 = KLayer.Input(shape=(4,))\nkx2 = KLayer.Input(shape=(5,))\nky1 = KLayer.Dense(6, activation='sigmoid')(kx1)\nkbranch1 = KModel(kx1, ky1)(kx1)\nkbranch2 = KLayer.Dense(8)(kx2)\nkz = KLayer.merge([kbranch1, kbranch2], mode='concat')\nkmodel = KModel([kx1, kx2], kz)\ninput_data = [np.random.random([2, 4]), np.random.random([2, 5])]\nself.compare_newapi(kmodel, bmodel, input_data, self.convert_two_dense_model)\n"
-}

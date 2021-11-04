@@ -1,9 +1,0 @@
-{
-    "functionName": "test_attribute_names",
-    "className": "TestGetAttributeListResponsePayload",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_get_attribute_list.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the attribute_names attribute of a GetAttributeList response\n        payload can be properly set and retrieved.\n        \"\"\"\npayload = payloads.GetAttributeListResponsePayload()\nself.assertEqual(list(), payload.attribute_names)\nself.assertEqual(list(), payload._attribute_names)\npayload.attribute_names = ['test-attribute-name-1', 'test-attribute-name-2']\nself.assertEqual(2, len(payload.attribute_names))\nself.assertEqual(2, len(payload._attribute_names))\nself.assertIn('test-attribute-name-1', payload.attribute_names)\nself.assertIn('test-attribute-name-2', payload.attribute_names)\nself.assertIn(primitives.TextString(value='test-attribute-name-1', tag=\n    enums.Tags.ATTRIBUTE_NAME), payload._attribute_names)\nself.assertIn(primitives.TextString(value='test-attribute-name-2', tag=\n    enums.Tags.ATTRIBUTE_NAME), payload._attribute_names)\n"
-}

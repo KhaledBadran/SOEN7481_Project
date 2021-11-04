@@ -1,9 +1,0 @@
-{
-    "functionName": "test_bad_field_cnt",
-    "className": "TestFieldCount",
-    "fileName": "/kenfar_&_DataGristle/scripts_&_tests_&_test_gristle_validator_cmd.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.cmd = (\n    \"%(pgm)s %(in_fqfn)s                                   -d ','                                             --fieldcnt 70                                      --quoting 'quote_none'                             --outgood %(outgood)s                              --outerr  %(outerr)s                         \"\n     % {'pgm': self.pgm, 'outgood': self.outgood_fqfn, 'outerr': self.\n    outerr_fqfn, 'in_fqfn': self.std_7x7_fqfn})\nprint(self.cmd)\nrunner = envoy.run(self.cmd)\nself.get_outputs(runner)\nprint(self.std_out)\nprint(self.std_err)\nassert self.status_code == errno.EBADMSG\nassert len(self.err_output) == 7\nassert not self.good_output\norig_recs = []\nfor rec in self.err_output:\n    fields = rec.split(',')\n    assert len(fields) == 8\n    orig_recs.append(','.join(fields[:7]))\nassert orig_recs == self.data_7x7\n"
-}

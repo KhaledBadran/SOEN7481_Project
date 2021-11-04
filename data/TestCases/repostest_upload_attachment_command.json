@@ -1,9 +1,0 @@
-{
-    "functionName": "test_upload_attachment_command",
-    "className": "TestRecord",
-    "fileName": "/Keeper-Security_&_Commander/unit-tests_&_test_command_record.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "params = get_synced_params()\ncmd = record.RecordUploadAttachmentCommand()\nrecord_uid = next(iter([x['record_uid'] for x in params.record_cache.values\n    () if len(x['extra_unencrypted']) > 10]))\nrec = api.get_record(params, record_uid)\nwith self.assertRaises(CommandError):\n    cmd.execute(params, record=rec.title)\ndef request_upload(rq):\n    self.assertEqual(rq['command'], 'request_upload')\n    return {'file_uploads': [{'max_size': 1000000, 'url':\n        'https://keepersecurity.com/uploads/', 'success_status_code': 201,\n        'file_id': 'ABCDEF%.2d' % x, 'file_parameter': 'file', 'parameters':\n        {'a': 'b'}} for x in range((rq.get('file_count') or 0) + (rq.get(\n        'thumbnail_count') or 0))]}\ndef request_http_post(url, **kwargs):\n    attachment = mock.Mock()\n    attachment.status_code = 201\n    return attachment\nwith mock.patch('requests.post', side_effect=request_http_post), mock.patch(\n    'builtins.open', mock.mock_open(read_data=b'data')) as m_open, mock.patch(\n    'os.path.isfile', return_value=True), mock.patch('os.path.getsize'\n    ) as mock_getsize:\n    m_open.return_value.tell = lambda : 4\n    mock_getsize.return_value = 1000000000\n    with self.assertRaises(CommandError):\n        KeeperApiHelper.communicate_expect([request_upload])\n        cmd.execute(params, file=['file.data'], record=record_uid)\n        self.assertTrue(KeeperApiHelper.is_expect_empty())\n    KeeperApiHelper.communicate_expect([request_upload, 'record_update'])\n    m_open.return_value.tell = lambda : 4\n    mock_getsize.return_value = 1000\n    cmd.execute(params, file=['file.data'], record=record_uid)\n    self.assertTrue(KeeperApiHelper.is_expect_empty())\n"
-}

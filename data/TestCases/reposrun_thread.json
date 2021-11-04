@@ -1,9 +1,0 @@
-{
-    "functionName": "run_thread",
-    "className": null,
-    "fileName": "/NUAA-AL_&_ALiPy/test_&_test_multi_threading.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "reg.fit(X=examples[(Lcollection.index), :], y=labels[Lcollection.index])\npred = reg.predict(examples[(test_id), :])\naccuracy = sum(pred == labels[test_id]) / len(test_id)\nsaver.set_initial_point(accuracy)\nwhile len(Ucollection) > 30:\n    select_index = qs.select(Lcollection, Ucollection, model=reg)\n    Ucollection.difference_update(select_index)\n    Lcollection.update(select_index)\n    reg.fit(X=examples[(Lcollection.index), :], y=labels[Lcollection.index])\n    pred = reg.predict(examples[(test_id), :])\n    accuracy = sum(pred == labels[test_id]) / len(test_id)\n    st = State(select_index=select_index, performance=accuracy)\n    saver.add_state(st)\n    saver.save()\n"
-}

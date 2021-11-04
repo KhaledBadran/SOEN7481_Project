@@ -1,9 +1,0 @@
-{
-    "functionName": "test_inverse_property_context",
-    "className": "ContextTest",
-    "fileName": "/openworm_&_PyOpenWorm/tests_&_ContextTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class A(DataObject):\n\n    def __init__(self, **kwargs):\n        super(A, self).__init__(**kwargs)\n        self.a = A.ObjectProperty(value_type=B)\nclass B(DataObject):\n\n    def __init__(self, **kwargs):\n        super(B, self).__init__(**kwargs)\n        self.b = B.ObjectProperty(value_type=A)\nInverseProperty(B, 'b', A, 'a')\nctx1 = Context(ident='http://example.org/context_1')\nctx2 = Context(ident='http://example.org/context_2')\na = ctx1(A)(ident='a')\nb = ctx2(B)(ident='b')\na.a(b)\nexpected = URIRef('b'), URIRef('http://openworm.org/entities/B/b'), URIRef('a')\nself.assertIn(expected, list(ctx1.contents_triples()))\n"
-}

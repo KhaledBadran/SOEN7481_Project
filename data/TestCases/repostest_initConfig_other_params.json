@@ -1,9 +1,0 @@
-{
-    "functionName": "test_initConfig_other_params",
-    "className": "TestYmlparsersInit",
-    "fileName": "/alex-ber_&_AlexBerUtils/tests_&_utils_&_ymlparsers_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "logger.info(f'{request._pyfuncitem.name}()')\nmock_lock = create_mock_lock(mocker)\np_load = {'method': METHOD_SIMPLE, 'mergelists': True, 'interpolate': False,\n    'castinterpolated': False}\np_safe_dump = {'default_flow_style': True, 'sort_keys': True}\np_undefined = StrictUndefined\ndumb = lambda : None\np_globals = {'foo': dumb, 'uname': dumb}\nymlparsers.initConfig(jinja2Lock=mock_lock, jinja2ctx={'undefined':\n    p_undefined, 'globals': p_globals}, load=p_load, safe_dump=p_safe_dump)\nlock = HiYaPyCo.jinja2Lock\npytest.assume(lock is not None)\npytest.assume(lock == mock_lock)\npytest.assume(mock_lock.acquire.call_count > 0)\npytest.assume(mock_lock.release.call_count == mock_lock.acquire.call_count)\njinja2Env = HiYaPyCo.jinja2ctx\npytest.assume(jinja2Env is not None)\njinja2EnvUndefined = jinja2Env.undefined\nb = issubclass(jinja2EnvUndefined, p_undefined)\npytest.assume(b)\njinja2EnvGloblas = jinja2Env.globals\nf = jinja2EnvGloblas['uname']\npytest.assume(f == dumb)\nf = jinja2EnvGloblas['foo']\npytest.assume(f == dumb)\n_load_d = ymlparsers._load_d\nassert _load_d is not None\nb = isinstance(_load_d, collections.Mapping)\npytest.assume(b)\nfor k, exp_v in p_load.items():\n    v = _load_d[k]\n    pytest.assume(exp_v == v)\n_safe_dump_d = ymlparsers._safe_dump_d\nassert _safe_dump_d is not None\nb = isinstance(_safe_dump_d, collections.Mapping)\npytest.assume(b)\nfor k, exp_v in p_safe_dump.items():\n    v = _safe_dump_d[k]\n    pytest.assume(exp_v == v)\npytest.mark.yml"
-}

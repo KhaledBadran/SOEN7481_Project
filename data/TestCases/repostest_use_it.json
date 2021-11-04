@@ -1,9 +1,0 @@
-{
-    "functionName": "test_use_it",
-    "className": null,
-    "fileName": "/5uper5hoot_&_PikaTools/tests_&_test_pool.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "params = pika.URLParameters(\n    'amqp://guest:guest@localhost:5672/?socket_timeout=10&connection_attempts=2'\n    )\npool = pika_pool.QueuedPool(create=lambda : pika.BlockingConnection(\n    parameters=params), max_size=10, max_overflow=10, timeout=10, recycle=\n    3600, stale=45)\nwith pool.acquire() as cxn:\n    cxn.channel.basic_publish(body=json.dumps({'type': 'banana',\n        'description': 'they are yellow'}), exchange='', routing_key=\n        'fruits', properties=pika.BasicProperties(content_type=\n        'application/json', content_encoding='utf-8', delivery_mode=2))\n    assert 'cxn=localhost:5672//' in str(cxn.fairy)\n"
-}

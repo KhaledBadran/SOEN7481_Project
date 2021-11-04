@@ -1,9 +1,0 @@
-{
-    "functionName": "test_wave_is_going_down",
-    "className": "MyTestCase",
-    "fileName": "/KD-Group_&_Half.Sample/tests_&_test_estimate.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "sampler.set_sampler(sampler_name='mock_sampler')\nmock_noise = 0.5\nsampler.set_sampler_value('mock_noise', mock_noise)\nmock_tau = 100000\nsampler.set_sampler_value('mock_tau', mock_tau)\nsampler.set_sampler_value('mock_is_going_down', 1.0)\nmock_v0, mock_v_inf = 1.0, 2.0\nsampler.set_sampler_value('mock_v0', mock_v0)\nsampler.set_sampler_value('mock_v_inf', mock_v_inf)\nsampler.measure(number_of_waveforms=4, emitting_frequency=0.5, auto_mode=False)\nwhile sampler.is_measuring:\n    time.sleep(0.1)\nresult = sampler.query()\nself.assertTrue(result.wave_interval >= 1000)\nsampler.measure(number_of_waveforms=4, emitting_frequency=0.5, auto_mode=True)\nwhile sampler.is_measuring:\n    time.sleep(0.1)\nresult = sampler.query()\nprint(result.wave_interval)\nself.assertTrue(500 <= result.wave_interval < 600)\n"
-}

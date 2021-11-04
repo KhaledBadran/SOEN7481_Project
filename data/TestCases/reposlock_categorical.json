@@ -1,9 +1,0 @@
-{
-    "functionName": "lock_categorical",
-    "className": "DataFrameToMatrix",
-    "fileName": "/kitware_&_BroThon/zat_&_dataframe_to_matrix.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Lock the categorical column types to a specific ordered list of categories\n        Args:\n            df (dataframe): The dataframe to lock categorical columns\n        Returns:\n            None but note that the dataframe is modified to 'lock' the categorical columns\n        \"\"\"\nfor column in df.select_dtypes(include='category').columns:\n    df[column] = pd.Categorical(df[column], categories=sorted(df[column].\n        unique().tolist()))\nstaticmethod"
-}

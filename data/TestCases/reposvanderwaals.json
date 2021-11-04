@@ -1,9 +1,0 @@
-{
-    "functionName": "vanderwaals",
-    "className": null,
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_models_&_phases_&_molar_density.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Uses Van der Waals equation of state to calculate the density of a real gas\n\n    Parameters\n    ----------\n    target : OpenPNM Object\n        The object for which these values are being calculated.  This\n        controls the length of the calculated array, and also provides\n        access to other necessary thermofluid properties.\n\n    pressure : string\n        The dictionary key containing the pressure values in Pascals (Pa)\n\n    temperature : string\n        The dictionary key containing the temperature values in Kelvin (K)\n\n    critical_pressure : string\n        The dictionary key containing the critical pressure values in Pascals\n        (Pa)\n\n    critical_temperature : string\n        The dictionary key containing the critical temperature values in Kelvin\n        (K)\n\n    Returns\n    -------\n    value : NumPy ndarray\n        Array containing molar density values [mol/m3]\n\n    \"\"\"\nP = target[pressure] / 100000\nT = target[temperature]\nPc = target[critical_pressure] / 100000\nTc = target[critical_temperature]\nR = 83.1447\na = 27 * R ** 2 * Tc ** 2 / (64 * Pc)\nb = R * Tc / (8 * Pc)\na1 = -1 / b\na2 = (R * T + b * P) / (a * b)\na3 = -P / (a * b)\na0 = np.ones(np.shape(a1))\ncoeffs = np.vstack((a0, a1, a2, a3)).T\ndensity = np.array([np.roots(C) for C in coeffs])\nvalue = np.real(density[:, (2)]) * 1000000.0\nreturn value\n"
-}

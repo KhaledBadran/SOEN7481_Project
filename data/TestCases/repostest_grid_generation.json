@@ -1,9 +1,0 @@
-{
-    "functionName": "test_grid_generation",
-    "className": "TestGridPointGeneration",
-    "fileName": "/Yelp_&_MOE/moe_&_tests_&_optimal_learning_&_python_&_geometry_utils_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that ``generate_grid_points`` generates a uniform grid.\n\n        Test makes assumptions about the ordering of the output that may be invalidated by\n        changes to numpy.meshgrid.\n\n        \"\"\"\ndomain_bounds = ClosedInterval.build_closed_intervals_from_list([[0.0, 1.0],\n    [-2.0, 3.0], [2.71, 3.14]])\npoints_per_dimension = [7, 11, 8]\ngrid = generate_grid_points(points_per_dimension, domain_bounds)\nper_axis_grid = [numpy.linspace(bounds.min, bounds.max,\n    points_per_dimension[i]) for i, bounds in enumerate(domain_bounds)]\nfor i, y_coord in enumerate(per_axis_grid[1]):\n    for j, x_coord in enumerate(per_axis_grid[0]):\n        for k, z_coord in enumerate(per_axis_grid[2]):\n            truth = numpy.array([x_coord, y_coord, z_coord])\n            index = i * per_axis_grid[2].size * per_axis_grid[0\n                ].size + j * per_axis_grid[2].size + k\n            test = grid[index, ...]\n            self.assert_vector_within_relative(test, truth, 0.0)\npoints_per_dimension = [5, 5, 5]\ngrid_truth = generate_grid_points(points_per_dimension, domain_bounds)\npoints_per_dimension = 5\ngrid_test = generate_grid_points(points_per_dimension, domain_bounds)\nself.assert_vector_within_relative(grid_test, grid_truth, 0.0)\n"
-}

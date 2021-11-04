@@ -1,9 +1,0 @@
-{
-    "functionName": "_poll_task",
-    "className": "PolledSubscribable",
-    "fileName": "/PRIArobotics_&_HedgehogServer/hedgehog_&_server_&_subscription.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "self.intervals, intervals = trio.open_memory_channel(0)\ntask_status.started()\nasync with trio.open_nursery() as nursery:\n\n    async def poller(interval, *, task_status=trio.TASK_STATUS_IGNORED):\n        with trio.CancelScope() as scope:\n            task_status.started(scope)\n            while True:\n                await self.streamer.send(await self.poll())\n                await trio.sleep(interval)\n\n    @nursery.start_soon\n    async def read_interval():\n        scope = None\n        async for interval in intervals:\n            if scope is not None:\n                scope.cancel()\n                scope = None\n            if interval >= 0:\n                scope = await nursery.start(poller, interval)\n"
-}

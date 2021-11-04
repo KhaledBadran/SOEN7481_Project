@@ -1,9 +1,0 @@
-{
-    "functionName": "test_write_version_not_supported",
-    "className": "TestAttributes",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a VersionNotSupported error is raised when an unsupported\n        KMIP version is provided while writing an Attributes structure to a\n        data stream. The Attributes structure is only supported in KMIP 2.0+.\n        \"\"\"\nattrs = objects.Attributes(attributes=[primitives.TextString('default', tag\n    =enums.Tags.OPERATION_POLICY_NAME)])\nstream = utils.BytearrayStream()\nargs = stream,\nkwargs = {'kmip_version': enums.KMIPVersion.KMIP_1_1}\nself.assertRaisesRegex(exceptions.VersionNotSupported,\n    'KMIP 1.1 does not support the Attributes object.', attrs.write, *args,\n    **kwargs)\n"
-}

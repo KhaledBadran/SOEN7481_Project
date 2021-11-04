@@ -1,9 +1,0 @@
-{
-    "functionName": "test_modify_module",
-    "className": null,
-    "fileName": "/Pebaz_&_Nimporter/tests_&_test_import.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Module is rebuilt when the source file changes.\"\"\"\nmod_name = 'pkg3.mod5'\nfilename = Path('tests/pkg3/mod5.nim')\ncode = filename.read_text()\nmod = Nimporter.import_nim_module(mod_name)\nassert mod.func1() == 'Hello World!'\ntry:\n    filename.write_text(code.replace('World', 'Pebaz'))\n    new_code = filename.read_text()\n    assert code != new_code\n    assert 'Pebaz' in new_code\n    assert Nimporter.hash_changed(filename)\n    if sys.platform != 'win32':\n        mod = Nimporter.import_nim_module(mod_name, ignore_cache=True)\nfinally:\n    filename.write_text(code)\n"
-}

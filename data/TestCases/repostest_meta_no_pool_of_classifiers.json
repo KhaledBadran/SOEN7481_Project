@@ -1,9 +1,0 @@
-{
-    "functionName": "test_meta_no_pool_of_classifiers",
-    "className": null,
-    "fileName": "/Menelau_&_DESlib/deslib_&_tests_&_test_des_integration.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "rng = np.random.RandomState(123456)\ndata = load_breast_cancer()\nX = data.data\ny = data.target\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33,\n    random_state=rng)\nscalar = StandardScaler()\nX_train = scalar.fit_transform(X_train)\nX_test = scalar.transform(X_test)\nmeta_des = METADES(knn_classifier=knn_methods, random_state=rng, DSEL_perc=0.5)\nmeta_des.fit(X_train, y_train)\nassert np.isclose(meta_des.score(X_test, y_test), 0.9095744680851063)\npytest.mark.parametrize('knn_methods', knn_methods)"
-}

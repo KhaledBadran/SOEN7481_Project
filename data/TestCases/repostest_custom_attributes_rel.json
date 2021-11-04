@@ -1,9 +1,0 @@
-{
-    "functionName": "test_custom_attributes_rel",
-    "className": "TestCommit",
-    "fileName": "/NullConvergence_&_GraphRepo/tests_&_test_commit.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "folder = os.path.dirname(os.path.abspath(__file__))\ntest_driller = Driller(os.path.join(folder, 'cnfg_simple.yml'))\ntest_driller.drill_batch()\nnode_matcher = NodeMatcher(test_driller.graph)\nrel_matcher = RelationshipMatcher(test_driller.graph)\ncommit = node_matcher.match('Commit', hash=\n    'aa6fa504ccb0fa919acc3cb31e510dc2048314eb0656f34babada15c').first()\nassert commit['is_merge'] == 0\nupdate_file_rel = rel_matcher.match([commit], 'UpdateFile').first()\nassert update_file_rel['complexity'] == 2\nassert update_file_rel['nloc'] == 8\nassert update_file_rel['old_path'] == 'gr_test/default_class.py'\nassert update_file_rel['path'] == 'gr_test/default_class.py'\nassert update_file_rel['token_count'] == 42\nassert update_file_rel['type'] == 'MODIFY'\nassert update_file_rel['removed'] == 6\nassert update_file_rel['added'] == 0\nupdate_method_rel = rel_matcher.match([commit], 'UpdateMethod').first()\nassert update_method_rel['nloc'] == 5\nassert update_method_rel['complexity'] == 2\nassert update_method_rel['token_count'] == 21\nassert update_method_rel['length'] == 5\nassert update_method_rel['fan_in'] == 0\nassert update_method_rel['fan_out'] == 0\nassert update_method_rel['start_line'] == 11\nassert update_method_rel['end_line'] == 15\ntest_driller.clean()\n"
-}

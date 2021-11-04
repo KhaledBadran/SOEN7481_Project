@@ -1,9 +1,0 @@
-{
-    "functionName": "qs",
-    "className": null,
-    "fileName": "/haotianteng_&_Chiron/chiron_&_chiron_eval_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Calculate the quality score for the consensus read.\n\n    Args:\n        consensus (Int): 2D Matrix (read length, bases) given the count of base on each position.\n        consensus_qs (Float): 1D Vector given the mean of the difference between the highest logit and second highest logit.\n        output_standard (str, optional): Defaults to 'phred+33'. Quality score output format.\n\n    Returns:\n        quality score: Return the queality score as int or string depending on the format.\n    \"\"\"\nsort_ind = np.argsort(consensus, axis=0)\nL = consensus.shape[1]\nsorted_consensus = consensus[sort_ind, np.arange(L)[(np.newaxis), :]]\nsorted_consensus_qs = consensus_qs[sort_ind, np.arange(L)[(np.newaxis), :]]\nquality_score = 10 * np.log10((sorted_consensus[(3), :] + 1) / (\n    sorted_consensus[(2), :] + 1)) + sorted_consensus_qs[(3), :\n    ] / sorted_consensus[(3), :] / np.log(10)\nif output_standard == 'number':\n    return quality_score.astype(int)\nelif output_standard == 'phred+33':\n    q_string = [chr(x + 33) for x in quality_score.astype(int)]\n    return ''.join(q_string)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_save_spectrum_as_csv_2",
-    "className": null,
-    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_xanes_maps_&_tests_&_test_xanes_maps_api.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Failing cases\"\"\"\nfln = 'output.csv'\nos.chdir(tmp_path)\nn_pts = 50\nenergy = np.random.rand(n_pts)\nspectrum = np.random.rand(n_pts)\ncaplog.set_level(logging.INFO)\n_save_spectrum_as_csv(fln=fln, energy=None, spectrum=spectrum)\nassert \"The array 'energy' is None\" in str(caplog.text)\ncaplog.clear()\n_save_spectrum_as_csv(fln=fln, spectrum=spectrum)\nassert \"The array 'energy' is None\" in str(caplog.text)\ncaplog.clear()\n_save_spectrum_as_csv(fln=fln, energy=energy, spectrum=None)\nassert \"The array 'spectrum' is None\" in str(caplog.text)\ncaplog.clear()\n_save_spectrum_as_csv(fln=fln, energy=energy)\nassert \"The array 'spectrum' is None\" in str(caplog.text)\ncaplog.clear()\nspectrum = spectrum[:-1]\n_save_spectrum_as_csv(fln=fln, energy=energy, spectrum=spectrum)\nassert \"Arrays 'energy' and 'spectrum' have different size:\" in str(caplog.text\n    )\ncaplog.clear()\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_aic_parameter_dependence",
-    "className": null,
-    "fileName": "/samreay_&_ChainConsumer/tests_&_test_comparisons.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "d = norm.rvs(size=1000)\np = norm.logpdf(d)\nc = ChainConsumer()\nc.add_chain(d, posterior=p, num_free_params=1, num_eff_data_points=1000)\nc.add_chain(d, posterior=p, num_free_params=2, num_eff_data_points=1000)\naics = c.comparison.aic()\nassert len(aics) == 2\nassert aics[0] == 0\nexpected = 1 * 2 + 2.0 * 2 * 3 / (1000 - 2 - 1) - 2.0 * 1 * 2 / (1000 - 1 - 1)\nassert np.isclose(aics[1], expected, atol=0.001)\n"
-}

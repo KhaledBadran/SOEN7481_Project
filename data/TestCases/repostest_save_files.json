@@ -1,9 +1,0 @@
-{
-    "functionName": "test_save_files",
-    "className": null,
-    "fileName": "/PaulHancock_&_Aegean/tests_&_test_source_finder.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that we can save files\"\"\"\nlog = logging.getLogger('Aegean')\nsfinder = sf.SourceFinder(log=log)\nfilename = 'tests/test_files/small.fits'\nsfinder.save_background_files(image_filename=filename, outbase='dlme')\nfor ext in ['bkg', 'rms', 'snr', 'crv']:\n    if not os.path.exists('dlme_{0}.fits'.format(ext)):\n        raise AssertionError()\n    os.remove('dlme_{0}.fits'.format(ext))\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_lris_red_multi_run",
-    "className": null,
-    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_metadata.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "file_list = glob.glob(os.path.join(os.environ['PYPEIT_DEV'], 'RAW_DATA',\n    'keck_lris_red', 'multi*', '*.fits*'))\ncfg_lines = ['[rdx]', 'spectrograph = keck_lris_red']\nps = PypeItSetup(file_list, cfg_lines=cfg_lines)\nps.run(setup_only=True)\nassert len(ps.fitstbl) >= 40, 'Should find 40+ files'\narcs = ps.fitstbl['filename'][ps.fitstbl.find_frames('arc')]\nassert len(arcs) >= 2, 'Should find two or more arcs'\nassert 'r170320_2017.fits.gz' in arcs, 'Should have identified r170320_2017.fits.gz as an arc'\nassert 'r170816_0057.fits' in ps.fitstbl['filename'][ps.fitstbl.find_frames\n    ('science')], 'Should have identified r170816_0057.fits as a science frame'\nos.remove('keck_lris_red.sorted')\ndev_suite_required"
-}

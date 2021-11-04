@@ -1,9 +1,0 @@
-{
-    "functionName": "test_scalars_into_lists",
-    "className": null,
-    "fileName": "/Accenture_&_AmpliGraph/tests_&_ampligraph_&_evaluation_&_test_protocol.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "eta_fn = lambda : np.random.choice([5, 10, 15])\nparam_grid = {'batches_count': 50, 'epochs': [4000], 'k': [100, 200], 'eta':\n    eta_fn, 'loss': 'nll', 'loss_params': {'margin': 2},\n    'embedding_model_params': {}, 'regularizer': ['LP', None],\n    'regularizer_params': {'p': [1, 3], 'lambda': [0.0001, 1e-05]},\n    'optimizer': ['adagrad', 'adam'], 'optimizer_params': {'lr': 'wrong'},\n    'verbose': False}\n_scalars_into_lists(param_grid)\nexpected = {'batches_count': [50], 'epochs': [4000], 'k': [100, 200], 'eta':\n    eta_fn, 'loss': ['nll'], 'loss_params': {'margin': [2]},\n    'embedding_model_params': {}, 'regularizer': ['LP', None],\n    'regularizer_params': {'p': [1, 3], 'lambda': [0.0001, 1e-05]},\n    'optimizer': ['adagrad', 'adam'], 'optimizer_params': {'lr': ['wrong']},\n    'verbose': [False]}\nassert param_grid == expected\n"
-}

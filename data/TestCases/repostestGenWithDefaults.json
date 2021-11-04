@@ -1,9 +1,0 @@
-{
-    "functionName": "testGenWithDefaults",
-    "className": "BaseModelBridgeTest",
-    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_base_modelbridge.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "exp = get_experiment_for_value()\nexp.optimization_config = get_optimization_config_no_constraints()\nss = get_search_space_for_range_value()\nmodelbridge = ModelBridge(search_space=ss, model=Model(), transforms=[],\n    experiment=exp)\nmodelbridge.gen(1)\nmock_gen.assert_called_with(modelbridge, n=1, search_space=ss,\n    fixed_features=ObservationFeatures(parameters={}), model_gen_options=\n    None, optimization_config=OptimizationConfig(objective=Objective(metric\n    =Metric('test_metric'), minimize=False), outcome_constraints=[]),\n    pending_observations={})\nmock.patch('ax.modelbridge.base.ModelBridge._gen', autospec=True,\n    return_value=([get_observation1trans().features], [2], None, {}))mock.patch('ax.modelbridge.base.ModelBridge.predict', autospec=True,\n    return_value=None)"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "validateExpectFailure",
-    "className": "TestValidationPolicyCommandInterest",
-    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_validation_policy_command_interest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        Call _fixture._validator.validate and if it calls the successCallback\n        then fail the test with the given message.\n\n        :param dataOrInterest: The Data or Interest to validate.\n        :type dataOrInterest: Data or Interest\n        :param str message: The message to show if the test succeeds.\n        \"\"\"\nsuccessCount = [0]\nfailureCount = [0]\ndef successCallback(dataOrInterest):\n    successCount[0] += 1\ndef failureCallback(dataOrInterest, error):\n    failureCount[0] += 1\nself._fixture._validator.validate(dataOrInterest, successCallback,\n    failureCallback)\nself.assertTrue(successCount[0] == 0, message)\n"
-}

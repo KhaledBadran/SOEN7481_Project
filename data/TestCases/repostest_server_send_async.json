@@ -1,9 +1,0 @@
-{
-    "functionName": "test_server_send_async",
-    "className": null,
-    "fileName": "/PRIArobotics_&_HedgehogServer/tests_&_test_server.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "async def handler_callback(server, ident, msg):\n\n    async def task(*, task_status=trio.TASK_STATUS_IGNORED):\n        task_status.started()\n        await trio.sleep(0.1)\n        async with server.job():\n            await server.send_async(ident, io.CommandUpdate(0, io.\n                INPUT_FLOATING, Subscription()))\n    await server.add_task(task)\n    return ack.Acknowledgement()\nasync with conn_dealer(handler_dict={io.Action: handler_callback}) as socket:\n    await assertReplyDealer(socket, io.Action(0, io.INPUT_FLOATING), ack.OK)\n    _, update = await socket.recv_msg()\n    assertMsgEqual(update, io.CommandUpdate, port=0, flags=io.INPUT_FLOATING)\npytest.mark.trio"
-}

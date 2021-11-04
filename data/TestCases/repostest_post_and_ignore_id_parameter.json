@@ -1,9 +1,0 @@
-{
-    "functionName": "test_post_and_ignore_id_parameter",
-    "className": "TestPost",
-    "fileName": "/fvalverd_&_AutoApi/tests_&_views_&_test_post.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "movie = {'name': u'Kill Bill: Volumen 1', 'year': u'2003', 'id': u'1',\n    '_id': u'2'}\nresponse = self.app.post('/%s/movies' % self.api, headers=self.headers,\n    data=json.dumps(movie), content_type='application/json')\nself.assertEqual(response.status_code, 201)\nresponse_json = json.loads(response.data or '{}')\nself.assertNotEqual(response_json.get('id'), movie['id'])\nself.assertNotEqual(response_json.get('id'), movie['_id'])\nself.assertIn('Location', response.headers)\nself.assertIn('/%s/movies/%s' % (self.api, response_json['id']), response.\n    headers['Location'])\nresponse = self.app.get(response.headers['Location'], headers=self.headers)\nself.assertEqual(response.status_code, 200)\nresponse_json = json.loads(response.data or '{}')\nmovie.update({'id': response_json['id']})\nmovie.pop('_id')\nself.assertDictEqual(movie, response_json)\n"
-}

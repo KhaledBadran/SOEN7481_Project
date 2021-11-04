@@ -1,9 +1,0 @@
-{
-    "functionName": "test_nested_call_2",
-    "className": "CallTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_call.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "t = Template(\n    \"\"\"\n            x is ${x}\n            <%def name=\"foo()\">\n                ${caller.foosub(x=10)}\n            </%def>\n\n            <%def name=\"bar()\">\n                bar: ${caller.barsub()}\n            </%def>\n\n            <%call expr=\"foo()\">\n                <%def name=\"foosub(x)\">\n                this is foo body: ${x}\n\n                <%call expr=\"bar()\">\n                    <%def name=\"barsub()\">\n                    this is bar body: ${x}\n                    </%def>\n                </%call>\n\n                </%def>\n\n            </%call>\n\"\"\"\n    )\nassert result_lines(t.render(x=5)) == ['x is 5', 'this is foo body: 10',\n    'bar:', 'this is bar body: 10']\n"
-}

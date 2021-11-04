@@ -1,9 +1,0 @@
-{
-    "functionName": "test_latent_kernels",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_kernels_&_test_kernels.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "kernel_list = [SquaredExponential(), White(), White() + Linear()]\nmultioutput_kernel_list = [SharedIndependent(SquaredExponential(), 3),\n    SeparateIndependent(kernel_list), LinearCoregionalization(kernel_list,\n    np.random.random((5, 3)))]\nassert len(multioutput_kernel_list[0].latent_kernels) == 1\nassert multioutput_kernel_list[1].latent_kernels == tuple(kernel_list)\nassert multioutput_kernel_list[2].latent_kernels == tuple(kernel_list)\n"
-}

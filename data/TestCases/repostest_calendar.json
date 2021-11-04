@@ -1,9 +1,0 @@
-{
-    "functionName": "test_calendar",
-    "className": null,
-    "fileName": "/quantOS-org_&_JAQS/test_&_test_dataservice.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ds = RemoteDataService()\nds.init_from_config(data_config)\nres1 = ds.query_trade_dates(20121224, 20130201)\nassert len(res1) == 27\nday_zero = 20170102\nres2 = ds.query_next_trade_date(day_zero)\nassert res2 == 20170103\nres2_last = ds.query_last_trade_date(res2)\nassert res2_last == 20161230\nres3 = ds.query_next_trade_date(20170104)\nassert res3 == 20170105\nres4 = ds.query_last_trade_date(res3)\nassert res4 == 20170104\nres11 = ds.query_trade_dates(20161224, 20170201)\nassert len(res11) == 23\nassert not ds.is_trade_date(20150101)\nassert not ds.is_trade_date(20130501)\n"
-}

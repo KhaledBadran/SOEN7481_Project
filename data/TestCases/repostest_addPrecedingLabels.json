@@ -1,9 +1,0 @@
-{
-    "functionName": "test_addPrecedingLabels",
-    "className": null,
-    "fileName": "/jmriebold_&_BoilerPy3/tests_&_test_filters.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "lb1 = DefaultLabels.TITLE\nlb2 = DefaultLabels.MIGHT_BE_CONTENT\nprefix = '^'\ndoc = make_doc([10, 10, 10], None, None, [lb1, lb2, None])\nfiltr = AddPrecedingLabelsFilter(prefix)\nis_changed = filtr.process(doc)\nlabels = [block.labels for block in doc.text_blocks]\nassert labels == [{lb1}, {prefix + lb1, lb2}, {prefix + lb2}]\nassert is_changed is True\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "compare_bytes_sequence",
-    "className": "TestInsertCode",
-    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_bytecode_modification.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        Compare code after modification and the real code\n        Since we add POP_JUMP_IF_TRUE instruction, we can't compare modified code and the real code. That's why we\n        allow some inaccuracies while code comparison\n        :param code1: result code after modification\n        :param code2: a real code for checking\n        :param inserted_code_size: size of inserted code\n        \"\"\"\nseq1 = [(offset, op, arg) for offset, op, arg in dis._unpack_opargs(code1)]\nseq2 = [(offset, op, arg) for offset, op, arg in dis._unpack_opargs(code2)]\nassert len(seq1) == len(seq2\n    ), 'Bytes sequences have different lengths %s != %s' % (len(seq1), len(\n    seq2))\nfor i in range(len(seq1)):\n    of, op1, arg1 = seq1[i]\n    _, op2, arg2 = seq2[i]\n    if op1 != op2:\n        if op1 == 115 and op2 == 1:\n            self.assertEqual(arg1, of - (inserted_code_size - 2))\n            continue\n        elif op1 == EXTENDED_ARG and op2 == 12:\n            inserted_code_size += 2\n            continue\n    self.assertEqual(op1, op2, 'Different operators at offset {}'.format(of))\n    if arg1 != arg2:\n        if op1 in (100, 101, 106, 116):\n            continue\n        else:\n            self.assertEqual(arg1, arg2, 'Different arguments at offset {}'\n                .format(of))\n"
-}

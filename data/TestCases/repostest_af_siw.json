@@ -1,9 +1,0 @@
-{
-    "functionName": "test_af_siw",
-    "className": null,
-    "fileName": "/Patarimi_&_PassiveAutoDesign/tests_&_test_structure.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    unity test for AF-SIW object\n    \"\"\"\nwith pytest.raises(ValueError):\n    af1 = wg.AF_SIW(COPPER, D5880, 0.0024, 0)\naf1 = wg.AF_SIW(COPPER, D5880, 0.0024, 0.0002)\naf1.set_width(0.00694)\nassert round(af1.f_c * 1e-09, 1) == 14.6\naf1.set_fc(17000000000.0)\nassert round(1000 * af1.width, 1) == 5.9\nassert af1.calc_a_d(15000000000.0) == 0\nassert round(af1.calc_ksr(20000000000.0), 6) == 1\naf1.f_c = 0\naf1.print_info()\nwith pytest.raises(ValueError):\n    af1.calc_fc(0, 1)\n"
-}

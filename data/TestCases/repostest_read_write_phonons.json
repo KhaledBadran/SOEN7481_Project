@@ -1,9 +1,0 @@
-{
-    "functionName": "test_read_write_phonons",
-    "className": "TestStructureMethods",
-    "fileName": "/mesonepigreco_&_CellConstructor/scripts_&_cellconstructor_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        We test if the writing and reading back a dynamical matrix \n        works correctly.\n\n        We also add a raman tensor, effective charges and a random dielectric tensor\n        \"\"\"\nfor i, dyn in enumerate([d.Copy() for d in [self.dynSky, self.dynSnSe]]):\n    dyn = self.dynSky.Copy()\n    dyn.dielectric_tensor = np.random.uniform(size=(3, 3))\n    dyn.effective_charges = np.random.uniform(size=(dyn.structure.N_atoms, \n        3, 3))\n    dyn.raman_tensor = np.random.uniform(size=(3, 3, 3 * dyn.structure.N_atoms)\n        )\n    nqirr = len(dyn.q_stars)\n    root_name = 'tmp_dyn_{}_'.format(i)\n    dyn.save_qe(root_name)\n    files = [f for f in os.listdir('.') if root_name in f]\n    print('I read the following files: ', ' '.join(files))\n    for j in range(nqirr):\n        dyn_name = '{}{}'.format(root_name, j + 1)\n        self.assertTrue(dyn_name in files)\n    new_dyn = CC.Phonons.Phonons(root_name, nqirr=nqirr)\n    __tol__ = 1e-07\n    for iq, q in enumerate(dyn.q_tot):\n        eps = np.max(np.abs(dyn.dynmats[iq] - new_dyn.dynmats[iq]))\n        self.assertTrue(eps < __tol__)\n        eps = np.abs(np.abs(q - new_dyn.q_tot[iq]))\n    eps = np.max(np.abs(dyn.dielectric_tensor - new_dyn.dielectric_tensor))\n    self.assertTrue(eps < __tol__)\n    eps = np.max(np.abs(dyn.raman_tensor - new_dyn.raman_tensor))\n    self.assertTrue(eps < __tol__)\n    eps = np.max(np.abs(dyn.effective_charges - new_dyn.effective_charges))\n    self.assertTrue(eps < __tol__)\n"
-}

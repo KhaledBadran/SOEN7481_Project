@@ -1,9 +1,0 @@
-{
-    "functionName": "test_write_missing_attestation_measurement",
-    "className": "TestAttestationCredential",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_credentials.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that an AttestationCredential struct can be written to a data\n        stream missing attestation measurement data.\n        \"\"\"\ncredential = objects.AttestationCredential(nonce=objects.Nonce(nonce_id=\n    b'\\x01', nonce_value=b'\\x00\\x01\\x02\\x03\\x04\\x05\\x06\\x07'),\n    attestation_type=enums.AttestationType.TPM_QUOTE, attestation_assertion\n    =b'\\x11\\x11\\x11\\x11\\x11\\x11\\x11\\x11')\nstream = utils.BytearrayStream()\ncredential.write(stream)\nself.assertEqual(len(self.encoding_missing_attestation_measurement), len(\n    stream))\nself.assertEqual(str(self.encoding_missing_attestation_measurement), str(\n    stream))\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_data_coords_to_positions",
-    "className": null,
-    "fileName": "/European-XFEL_&_EXtra-geom/extra_geom_&_tests_&_test_agipd_geometry.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "geom = AGIPD_1MGeometry.from_quad_positions(quad_pos=[(-525, 625), (-550, -\n    10), (520, -160), (542.5, 475)])\nmodule_no = np.zeros(16, dtype=np.int16)\nslow_scan = np.linspace(0, 500, num=16, dtype=np.float32)\nfast_scan = np.zeros(16, dtype=np.float32)\nres = geom.data_coords_to_positions(module_no, slow_scan, fast_scan)\nassert res.shape == (16, 3)\nresx, resy, resz = res.T\nnp.testing.assert_allclose(resz, 0)\nnp.testing.assert_allclose(resy, 625 * geom.pixel_size)\nassert (np.diff(resx) > 0).all()\nnp.testing.assert_allclose(resx[0], -525 * geom.pixel_size)\nassert -0.01 < resx[-1] < 0.01\n"
-}

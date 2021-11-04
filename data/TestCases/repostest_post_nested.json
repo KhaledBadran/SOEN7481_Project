@@ -1,9 +1,0 @@
-{
-    "functionName": "test_post_nested",
-    "className": "TestPost",
-    "fileName": "/fvalverd_&_AutoApi/tests_&_views_&_test_post.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "star = {'grade': u'10'}\nresponse = self.app.post('/%s/movies/%s/stars' % (self.api, self.movies[2][\n    'id']), headers=self.headers, data=json.dumps(star), content_type=\n    'application/json')\nself.assertEqual(response.status_code, 201)\nresponse_json = json.loads(response.data or '{}')\nself.assertIn('id', response_json)\nself.assertIsNotNone(response_json.get('id'))\nself.assertIn('Location', response.headers)\nself.assertIn('/%s/stars/%s' % (self.api, response_json['id']), response.\n    headers['Location'])\nstar.update({'id': response_json.get('id')})\nstar.update({'movies': self.movies[2]['id']})\nresponse = self.app.get(response.headers['Location'], headers=self.headers)\nself.assertEqual(response.status_code, 200)\nresponse_json = json.loads(response.data or '{}')\nself.assertDictEqual(star, response_json)\n"
-}

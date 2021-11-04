@@ -1,9 +1,0 @@
-{
-    "functionName": "test_relative_oc_without_sq",
-    "className": "TestAxClient",
-    "fileName": "/facebook_&_Ax/ax_&_service_&_tests_&_test_ax_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Must specify status quo to have relative outcome constraint.\"\"\"\nax_client = AxClient()\nwith self.assertRaises(ValueError):\n    ax_client.create_experiment(name='test_experiment', parameters=[{'name':\n        'x', 'type': 'range', 'bounds': [-5.0, 10.0]}, {'name': 'y', 'type':\n        'range', 'bounds': [0.0, 15.0]}], objective_name='test_objective',\n        minimize=True, outcome_constraints=['some_metric <= 4.0%'])\n"
-}

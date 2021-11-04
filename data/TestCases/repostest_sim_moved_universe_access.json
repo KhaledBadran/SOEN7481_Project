@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sim_moved_universe_access",
-    "className": "TestReadOnly",
-    "fileName": "/datreant_&_MDSynthesis/src_&_mdsynthesis_&_tests_&_test_treants.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that Sim can access Universe when read-only, especially\n        when universe files have moved with it (stale paths).\n        \"\"\"\npy.path.local(sim.abspath).chmod(504, rec=True)\nsim.location = tmpdir.mkdir('test').strpath\npy.path.local(sim.abspath).chmod(360, rec=True)\nassert isinstance(sim.universe, mda.Universe)\npy.path.local(sim.abspath).chmod(504, rec=True)\n"
-}

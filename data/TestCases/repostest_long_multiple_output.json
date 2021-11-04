@@ -1,9 +1,0 @@
-{
-    "functionName": "test_long_multiple_output",
-    "className": null,
-    "fileName": "/mmcauliffe_&_Pyraat/tests_&_test_long.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "script_path = os.path.join(praat_script_test_dir, 'sibilant_jane.praat')\nfunc = PraatAnalysisFunction(script_path, praat_path)\nassert func.point_measure\nassert func.uses_long\noutput = func(long_sound_file, *s_times, 0, 0)\nassert sorted(output.keys()) == sorted(['peak', 'slope', 'cog', 'spread'])\nassert all(isinstance(x, float) for x in output.values())\ns_cog = output['cog']\noutput = func(long_sound_file, *sh_times, 0, 0)\nassert sorted(output.keys()) == sorted(['peak', 'slope', 'cog', 'spread'])\nassert all(isinstance(x, float) for x in output.values())\nsh_cog = output['cog']\nassert sh_cog < s_cog\n"
-}

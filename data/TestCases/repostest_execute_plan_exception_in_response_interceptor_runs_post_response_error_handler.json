@@ -1,9 +1,0 @@
-{
-    "functionName": "test_execute_plan_exception_in_response_interceptor_runs_post_response_error_handler",
-    "className": "TestPlanExecutor",
-    "fileName": "/cbefus_&_Eynnyd/tests_&_plan_execution_&_test_plan_executor.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class CustomException(Exception):\n    pass\ndef fake_interceptor(original_request, original_response):\n    raise CustomException('Just a test')\ndef error_handler(thrown_error, request, response):\n    return ResponseBuilder().set_status(HTTPStatus.SERVICE_UNAVAILABLE).build()\ndef fake_handler(request):\n    return ResponseBuilder().set_status(HTTPStatus.OK).build()\nexception_handlers = ErrorHandlersBuilder().add_post_response_error_handler(\n    CustomException, error_handler).build()\nplan_executor = PlanExecutor(exception_handlers)\nplan = ExecutionPlan([], fake_handler, [fake_interceptor], {})\nresponse = plan_executor.execute_plan(plan, 'original test request')\nself.assertEqual(HTTPStatus.SERVICE_UNAVAILABLE.value, response.status.code)\n"
-}

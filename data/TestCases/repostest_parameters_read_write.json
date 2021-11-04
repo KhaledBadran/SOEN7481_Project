@@ -1,9 +1,0 @@
-{
-    "functionName": "test_parameters_read_write",
-    "className": null,
-    "fileName": "/LSSTDESC_&_CCL/pyccl_&_tests_&_test_parameters.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Check that Cosmology objects can be read and written\"\"\"\nparams = ccl.Cosmology(Omega_c=0.25, Omega_b=0.05, h=0.7, A_s=2.1e-09, n_s=\n    0.96, m_nu=[0.02, 0.1, 0.05], m_nu_type='list', z_mg=[0.0, 1.0], df_mg=\n    [0.01, 0.0])\nwith tempfile.NamedTemporaryFile(delete=False) as tmpfile:\n    temp_file_name = tmpfile.name\nparams.write_yaml(temp_file_name)\nparams2 = ccl.Cosmology.read_yaml(temp_file_name)\nassert_almost_equal(params['Omega_c'], params2['Omega_c'])\nassert_almost_equal(params['Neff'], params2['Neff'])\nassert_almost_equal(params['sum_nu_masses'], params2['sum_nu_masses'])\nwith tempfile.NamedTemporaryFile(delete=True) as tmpfile:\n    temp_file_name = tmpfile.name\nassert_raises(IOError, ccl.Cosmology.read_yaml, filename=temp_file_name)\nassert_raises(IOError, params.read_yaml, filename=temp_file_name +\n    '/nonexistent_directory/params.yml')\n"
-}

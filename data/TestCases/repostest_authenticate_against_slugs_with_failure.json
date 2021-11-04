@@ -1,9 +1,0 @@
-{
-    "functionName": "test_authenticate_against_slugs_with_failure",
-    "className": "TestKmipSession",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_session.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the session correctly handles a SLUGS authentication error.\n        \"\"\"\nmock_instance = mock.MagicMock()\ntest_exception = exceptions.PermissionDenied('Unrecognized user ID: John Doe')\nmock_instance.authenticate.side_effect = test_exception\nmock_connector.return_value = mock_instance\nkmip_session = session.KmipSession(None, None, ('127.0.0.1', 48026), name=\n    'TestSession', auth_settings=[('auth:slugs', {'enabled': 'True', 'url':\n    'test_url'})])\nkmip_session._logger = mock.MagicMock()\nfake_credential = objects.Credential(credential_type=enums.CredentialType.\n    USERNAME_AND_PASSWORD, credential_value=objects.\n    UsernamePasswordCredential(username='John Doe', password='secret'))\nfake_request = messages.RequestMessage(request_header=messages.\n    RequestHeader(authentication=contents.Authentication(credentials=[\n    fake_credential])))\nargs = 'fake_certificate', fake_request\nself.assertRaisesRegex(exceptions.PermissionDenied,\n    'Authentication failed.', kmip_session.authenticate, *args)\nmock_connector.assert_any_call('test_url')\nkmip_session._logger.debug.assert_any_call(\n    'Authenticating with plugin: auth:slugs')\nkmip_session._logger.warning.assert_any_call('Authentication failed.')\nkmip_session._logger.exception.assert_any_call(test_exception)\nmock.patch('kmip.services.server.auth.SLUGSConnector')"
-}

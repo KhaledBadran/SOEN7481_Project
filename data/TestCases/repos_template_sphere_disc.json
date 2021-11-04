@@ -1,9 +1,0 @@
-{
-    "functionName": "_template_sphere_disc",
-    "className": null,
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_topotools_&_topotools.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    This private method generates an image array of a sphere/shell-disc/ring.\n    It is useful for passing to Cubic networks as a ``template`` to make\n    networks with desired shapes.\n\n    Parameters\n    ----------\n    dim : int\n        Network dimension\n\n    outer_radius : int\n        Number of the nodes in the outer radius of the network\n\n    inner_radius : int\n        Number of the nodes in the inner radius of the network\n\n    Returns\n    -------\n    A Numpy array containing 1's to demarcate the desired shape, and 0's\n    elsewhere.\n\n    \"\"\"\nrmax = np.array(outer_radius, ndmin=1)\nrmin = np.array(inner_radius, ndmin=1)\nind = 2 * rmax - 1\ncoord = np.indices(ind * np.ones(dim, dtype=int))\ncoord = coord - (ind - 1) / 2\nx = coord[(0), :]\ny = coord[(1), :]\nif dim == 2:\n    img = x ** 2 + y ** 2 < rmax ** 2\nelif dim == 3:\n    z = coord[(2), :]\n    img = x ** 2 + y ** 2 + z ** 2 < rmax ** 2\nif rmin[0] != 0:\n    if dim == 2:\n        img_min = x ** 2 + y ** 2 > rmin ** 2\n    elif dim == 3:\n        img_min = x ** 2 + y ** 2 + z ** 2 > rmin ** 2\n    img = img * img_min\nreturn img\n"
-}

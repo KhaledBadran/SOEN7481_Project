@@ -1,9 +1,0 @@
-{
-    "functionName": "test_call_in_nested_2",
-    "className": "CallTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_call.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "t = Template(\n    \"\"\"\n            <%def name=\"a()\">\n                <%def name=\"d()\">\n                    not this d\n                </%def>\n                this is a ${b()}\n                <%def name=\"b()\">\n                    <%def name=\"d()\">\n                        not this d either\n                    </%def>\n                    this is b\n                    <%call expr=\"c()\">\n                        <%def name=\"d()\">\n                            this is d\n                        </%def>\n                        this is the body in b's call\n                    </%call>\n                </%def>\n                <%def name=\"c()\">\n                    this is c: ${caller.body()}\n                    the embedded \"d\" is: ${caller.d()}\n                </%def>\n            </%def>\n        ${a()}\n\"\"\"\n    )\nassert result_lines(t.render()) == ['this is a', 'this is b', 'this is c:',\n    \"this is the body in b's call\", 'the embedded \"d\" is:', 'this is d']\n"
-}

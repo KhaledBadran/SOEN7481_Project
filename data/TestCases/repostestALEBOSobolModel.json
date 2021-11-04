@@ -1,9 +1,0 @@
-{
-    "functionName": "testALEBOSobolModel",
-    "className": "ALEBOSobolTest",
-    "fileName": "/facebook_&_Ax/ax_&_models_&_tests_&_test_alebo_initializer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "B = np.array([[1.0, 2.0, 3.0], [2.0, 3.0, 4.0]])\nQ = np.linalg.pinv(B) @ B\nm = ALEBOInitializer(B=B)\nself.assertTrue(np.allclose(Q, m.Q))\nZ, w = m.gen(5, bounds=[(-1.0, 1.0)] * 3)\nself.assertEqual(Z.shape, (5, 3))\nself.assertTrue(Z.min() >= -1.0)\nself.assertTrue(Z.max() <= 1.0)\nself.assertTrue(np.allclose(Q @ Z.transpose(), Z.transpose()))\nm = ALEBOInitializer(B=B, nsamp=1)\nwith self.assertRaises(ValueError):\n    m.gen(2, bounds=[(-1.0, 1.0)] * 3)\n"
-}

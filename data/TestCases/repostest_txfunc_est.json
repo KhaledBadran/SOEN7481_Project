@@ -1,9 +1,0 @@
-{
-    "functionName": "test_txfunc_est",
-    "className": null,
-    "fileName": "/open-source-economics_&_OG-USA/ogusa_&_tests_&_test_txfunc.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test txfunc.txfunc_est() function.  The test is that given\n    inputs from previous run, the outputs are unchanged.\n    \"\"\"\ninput_tuple = utils.safe_read_pickle(os.path.join(CUR_PATH, 'test_io_data',\n    'txfunc_est_inputs.pkl'))\ndf, s, t, rate_type, output_dir, graph = input_tuple\ndf.rename(columns={'MTR labor income': 'mtr_labinc', 'MTR capital income':\n    'mtr_capinc', 'Total labor income': 'total_labinc',\n    'Total capital income': 'total_capinc', 'ETR': 'etr', 'expanded_income':\n    'market_income', 'Weights': 'weight'}, inplace=True)\ntax_func_type = 'DEP'\nnumparams = 12\ntest_tuple = txfunc.txfunc_est(df, s, t, rate_type, tax_func_type,\n    numparams, output_dir, graph)\nexpected_tuple = np.array([6.37000261e-22, 0.00273403892, 1.28516622e-08, \n    0.012675024, 0.232797219, -0.0369059719, 0.0001, -0.101967001, \n    0.0396030038, 0.102987671, -0.130433574, 1.0]), 19527.162030046195, 3798\nfor i, v in enumerate(expected_tuple):\n    assert np.allclose(test_tuple[i], v)\npytest.mark.full_run"
-}

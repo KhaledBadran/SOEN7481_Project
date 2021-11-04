@@ -1,9 +1,0 @@
-{
-    "functionName": "test_lr_disturbed_three_data_point",
-    "className": "CrossEntropyMNLMultinomialTests",
-    "fileName": "/Mogeng_&_IOHMM/tests_&_test_CrossentropyMNL.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.model = CrossEntropyMNL(solver='lbfgs', fit_intercept=True, est_stderr\n    =True, reg_method='l2', alpha=0.1, l1_ratio=0, tol=0.0001, max_iter=100,\n    coef=None, stderr=None, n_classes=None)\nself.model.fit(self.data_anes96.exog[6:9, :], self.y_disturbed[6:9,],\n    sample_weight=0.5)\nself.assertEqual(self.model.coef.shape, (7, 6))\nnp.testing.assert_array_almost_equal(self.model.loglike_per_sample(self.\n    data_anes96.exog[6:9, :], self.y_disturbed[6:9,]), np.array([-0.336, -\n    0.389, -0.398]), decimal=3)\nnp.testing.assert_array_almost_equal(self.model.loglike_per_sample(self.\n    data_anes96.exog[6:9, :], label_binarize([3, 1, 4], list(range(7)))),\n    np.array([-3.415, -4.506, -2.367]), decimal=3)\nnp.testing.assert_array_almost_equal(self.model.loglike_per_sample(self.\n    data_anes96.exog[6:9, :], label_binarize([3, 0, 5], list(range(7)))),\n    np.array([-3.415, -4.492, -4.301]), decimal=3)\n"
-}

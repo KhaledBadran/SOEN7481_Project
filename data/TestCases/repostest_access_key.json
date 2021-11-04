@@ -1,9 +1,0 @@
-{
-    "functionName": "test_access_key",
-    "className": "TestAccessKey",
-    "fileName": "/SUSE_&_Enceladus/mockboto3_&_tests_&_test_iam.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test access key endpoints.\"\"\"\nself.client.create_user(UserName=self.user)\nresponse = self.client.create_access_key(UserName=self.user)\nkey_id = response['AccessKey']['AccessKeyId']\nresponse = self.client.list_access_keys(UserName=self.user)\nassert 1 == len(response['AccessKeyMetadata'])\nassert key_id == response['AccessKeyMetadata'][0]['AccessKeyId']\nlast_used = self.client.get_access_key_last_used(AccessKeyId=key_id)[\n    'AccessKeyLastUsed']\nassert 'us-west-1' == last_used['Region']\nassert 'iam' == last_used['ServiceName']\nassert last_used['LastUsedDate'] is not None\nself.client.update_access_key(AccessKeyId=key_id, Status='Inactive')\nresponse = self.client.list_access_keys(UserName=self.user)\nassert 'Inactive' == response['AccessKeyMetadata'][0]['Status']\nself.client.delete_access_key(AccessKeyId=key_id)\nresponse = self.client.list_access_keys(UserName=self.user)\nassert 0 == len(response['AccessKeyMetadata'])\nmock_iam"
-}

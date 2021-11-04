@@ -1,9 +1,0 @@
-{
-    "functionName": "dropout_channels",
-    "className": null,
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_layers_&_noise.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Convenience function to drop full channels of feature maps.\n\n    Adds a :class:`DropoutLayer` that sets feature map channels to zero, across\n    all locations, with probability p. For convolutional neural networks, this\n    may give better results than independent dropout [1]_.\n\n    Parameters\n    ----------\n    incoming : a :class:`Layer` instance or a tuple\n        the layer feeding into this layer, or the expected input shape\n    *args, **kwargs\n        Any additional arguments and keyword arguments are passed on to the\n        :class:`DropoutLayer` constructor, except for `shared_axes`.\n\n    Returns\n    -------\n    layer : :class:`DropoutLayer` instance\n        The dropout layer with `shared_axes` set to drop channels.\n\n    References\n    ----------\n    .. [1] J. Tompson, R. Goroshin, A. Jain, Y. LeCun, C. Bregler (2014):\n           Efficient Object Localization Using Convolutional Networks.\n           https://arxiv.org/abs/1411.4280\n    \"\"\"\nndim = len(getattr(incoming, 'output_shape', incoming))\nkwargs['shared_axes'] = tuple(range(2, ndim))\nreturn DropoutLayer(incoming, *args, **kwargs)\n"
-}

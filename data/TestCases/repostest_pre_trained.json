@@ -1,9 +1,0 @@
-{
-    "functionName": "test_pre_trained",
-    "className": "TestWordVectors",
-    "fileName": "/apmoore1_&_Bella/tests_&_test_word_vectors.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Tests the :py:class:`bella.word_vectors.PreTrained`\n        \"\"\"\nwith self.assertRaises(TypeError, msg=\n    'Should not accept a list when file path is expect to be a String'):\n    PreTrained(['a fake file path'])\nwith self.assertRaises(ValueError, msg=\n    'Should not accept strings that are not file paths'):\n    PreTrained('file.txt')\nsswe_model = SSWE(skip_conf=True)\nsswe_vec_size = sswe_model.vector_size\nself.assertEqual(sswe_vec_size, 50, msg='Vector size should be 50 not {}'.\n    format(sswe_vec_size))\nunknown_word = '$$$ZERO_TOKEN$$$'\nunknown_vector = sswe_model.lookup_vector(unknown_word)\nzero_vector = np.zeros(sswe_vec_size)\nself.assertEqual(False, np.array_equal(zero_vector, unknown_vector), msg=\n    'The unknown vector should not be zeros')\nself.assertEqual('sswe', sswe_model.name, msg=\n    'The name of the instance should be sswe and not {}'.format(sswe_model.\n    name))\nself.assertEqual(0, sswe_model.word2index[unknown_word], msg=\n    'unknown word should be mapped to the 0 index')\nself.assertEqual('<unk>', sswe_model.index2word[0], msg=\n    'unknown index should map to the <unk> word')\nis_zero = np.array_equal(sswe_model.index2vector[0], np.zeros(sswe_vec_size))\nself.assertEqual(False, is_zero, msg='The unknwon vector should not be zeros')\npytest.mark.skip(reason='Takes a long time to test only add on large tests')"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "_toggle_render",
-    "className": "Brain",
-    "fileName": "/nipy_&_PySurfer/surfer_&_viz.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Turn rendering on (True) or off (False)\"\"\"\nfigs = [fig for fig_row in self._figures for fig in fig_row]\nif views is None:\n    views = [None] * len(figs)\nfor vi, (_f, view) in enumerate(zip(figs, views)):\n    if mlab.options.backend == 'test':\n        continue\n    if state is False and view is None:\n        views[vi] = mlab.view(figure=_f), mlab.roll(figure=_f\n            ), _f.scene.camera.parallel_scale if _f.scene is not None else False\n    if _f.scene is not None:\n        _f.scene.disable_render = not state\n    if state is True and view is not None and _f.scene is not None:\n        mlab.draw(figure=_f)\n        with warnings.catch_warnings(record=True):\n            mlab.view(*view[0], figure=_f)\n            mlab.roll(view[1], figure=_f)\nif state is True:\n    _force_render(self._figures)\nreturn views\n"
-}

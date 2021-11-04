@@ -1,9 +1,0 @@
-{
-    "functionName": "test_api_thread_emails",
-    "className": null,
-    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_server_&_tests_&_test_email_threading.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "dsid, pars, _ = get_features(app, parse_email_headers=True, dataset=\n    'fedora_ml_3k_subset')\nurl = V01 + '/email-threading'\npars = {'parent_id': dsid}\ndata = app.post_check(url, json=pars)\nassert sorted(data.keys()) == sorted(['data', 'id'])\nmid = data['id']\ntree_ref = [{'id': 0, 'parent': None, 'children': [{'id': 1, 'children': [],\n    'parent': 0}, {'id': 2, 'parent': 0, 'children': [{'id': 3, 'children':\n    [], 'parent': 2}, {'id': 4, 'children': [], 'parent': 2}]}]}]\ndef remove_subject_field(d):\n    del d['subject']\n    for el in d['children']:\n        remove_subject_field(el)\ntree_res = data['data']\nfor el in tree_res:\n    remove_subject_field(el)\nassert data['data'] == tree_ref\nurl += '/{}'.format(mid)\ndata = app.get_check(url)\nassert sorted(data.keys()) == sorted(['group_by_subject'])\napp.delete_check(url)\n"
-}

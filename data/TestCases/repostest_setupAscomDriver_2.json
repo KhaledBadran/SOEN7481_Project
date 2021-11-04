@@ -1,9 +1,0 @@
-{
-    "functionName": "test_setupAscomDriver_2",
-    "className": null,
-    "fileName": "/mworion_&_MountWizzard4/mw4_&_test_&_unit_tests_&_gui_&_extWindows_&_test_devicePopupW.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "if platform.system() != 'Windows':\n    return\nclass Test:\n    DeviceType = None\n\n    @staticmethod\n    def Choose(name):\n        return name\napp.ui.ascomDevice.setText('test')\nwith mock.patch.object(win32com.client, 'Dispatch', return_value=Test()):\n    suc = app.setupAscomDriver()\n    assert suc\n    assert app.ui.ascomDevice.text() == 'test'\n"
-}

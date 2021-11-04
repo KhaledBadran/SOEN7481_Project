@@ -1,9 +1,0 @@
-{
-    "functionName": "test_splits_shouldnt_carry_on_splitting_below_min_child_node_size",
-    "className": "TestBugFixes",
-    "fileName": "/Rambatino_&_CHAID/tests_&_test_tree.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Fix bug whereby no splits occur when valid split is segmented below\n        min_child_node_size threshold\n        \"\"\"\nregion = np.array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,\n    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 2, 3, 2, 2, 2, 3, 2, 4,\n    4, 2, 4, 4, 4, 2, 2, 2, 2, 3, 2, 3, 2, 3, 2, 2, 2])\nage = np.array([3, 4, 4, 3, 2, 4, 2, 3, 3, 2, 2, 3, 4, 3, 4, 2, 2, 3, 2, 3,\n    2, 4, 4, 3, 2, 3, 1, 2, 4, 4, 3, 4, 4, 3, 2, 4, 2, 3, 3, 2, 2, 3, 4, 3,\n    4, 2, 2, 3, 2, 3, 2, 4, 4, 3, 2, 3, 1, 2, 4, 4])\ngender = np.array([1, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1,\n    2, 2, 2, 2, 1, 2, 1, 2, 1, 2, 2, 1, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2,\n    2, 1, 1, 1, 1, 1, 2, 2, 2, 2, 1, 2, 1, 2, 1, 2, 2])\nlover = np.array([1] * 25 + [0] * 35)\ntree = CHAID.Tree.from_numpy(np.vstack([region, age, gender]).transpose(),\n    lover, alpha_merge=0.05)\nassert len(tree.tree_store) == 3\n"
-}

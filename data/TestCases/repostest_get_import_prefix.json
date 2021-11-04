@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_import_prefix",
-    "className": null,
-    "fileName": "/Pebaz_&_Nimporter/tests_&_test_build.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Make sure that the right namespace is returned for a given module path.\"\"\"\nwith nimporter.cd('tests') as tmpdir:\n    module_path1 = Path('pkg1/mod1.nim')\n    module_path2 = Path('pkg1/pkg2/mod2.nim')\n    gold1 = 'pkg1', 'mod1.nim'\n    gold2 = 'pkg1', 'pkg2', 'mod2.nim'\n    assert NimCompiler.get_import_prefix(module_path1, Path()) == gold1\n    assert NimCompiler.get_import_prefix(module_path2, Path()) == gold2\n"
-}

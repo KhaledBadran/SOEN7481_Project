@@ -1,9 +1,0 @@
-{
-    "functionName": "test_gunicorn_conf",
-    "className": null,
-    "fileName": "/EVEprosper_&_ProsperCommon/tests_&_test_flask_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"make sure gunicorn contents works as expected\"\"\"\nenviron['GUNICORN_TEST1'] = 'hello'\nenviron['GUNICORN_TEST2'] = 'world'\ngunicorn_filename = path.join(HERE, '_gunicorn.py')\nif path.isfile(gunicorn_filename):\n    remove(gunicorn_filename)\nflask_utils.make_gunicorn_config(_gunicorn_config_path=gunicorn_filename)\nassert path.isfile(gunicorn_filename)\nspec = importlib.util.spec_from_file_location('_gunicorn', gunicorn_filename)\nmodule = importlib.util.module_from_spec(spec)\nspec.loader.exec_module(module)\nassert module.test1 == 'hello'\nassert module.test2 == 'world'\ndel environ['GUNICORN_TEST1']\ndel environ['GUNICORN_TEST2']\natexit.register(atexit_remove_file, gunicorn_filename)\n"
-}

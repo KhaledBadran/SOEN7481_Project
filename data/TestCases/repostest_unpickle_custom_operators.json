@@ -1,9 +1,0 @@
-{
-    "functionName": "test_unpickle_custom_operators",
-    "className": null,
-    "fileName": "/viebboy_&_PyGOP/test_&_utility_&_test_misc.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "filename = os.path.join(tmpdir.dirname, 'custom_operators.pickle')\nnodal_set = ['multiplication', utility.custom_nodal]\npool_set = ['summation', utility.custom_pool]\nactivation_set = ['relu', utility.custom_activation]\nmisc.pickle_custom_operators(nodal_set, pool_set, activation_set, filename)\nnodal_set_recovered, pool_set_recovered, activation_set_recovered = (misc.\n    unpickle_custom_operators(filename))\nassert nodal_set_recovered[1].__name__ == 'custom_nodal'\nassert pool_set_recovered[1].__name__ == 'custom_pool'\nassert activation_set_recovered[1].__name__ == 'custom_activation'\nx = K.variable(np.random.rand(10, 20))\nw = K.variable(np.random.rand(10, 20))\nz = K.variable(np.random.rand(10, 20))\ny = K.variable(np.random.rand(10, 20))\nassert np.allclose(K.eval(utility.custom_nodal(x, w)), K.eval(\n    nodal_set_recovered[1](x, w)))\nassert np.allclose(K.eval(utility.custom_pool(z)), K.eval(\n    pool_set_recovered[1](z)))\nassert np.allclose(K.eval(utility.custom_activation(y)), K.eval(\n    activation_set_recovered[1](y)))\n"
-}

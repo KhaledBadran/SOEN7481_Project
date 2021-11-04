@@ -1,9 +1,0 @@
-{
-    "functionName": "_add_ps2q",
-    "className": "MixedInvasionPercolation",
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_algorithms_&_MixedInvasionPercolation.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        Helper method to add pores to the cluster queue\n        \"\"\"\nnet = self.project.network\nelem_type = 'pore'\nPs = net['throat.conns'][throat]\nPs = Ps[self['pore.invasion_sequence'][Ps] <= 0]\nif len(Ps) > 0:\n    self._interface_Ps[Ps] = True\n    for P in Ps:\n        data = []\n        data.append(self['pore.entry_pressure'][P])\n        data.append(P)\n        data.append(elem_type)\n        hq.heappush(queue, data)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_from_sens_func",
-    "className": null,
-    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_fluxspec.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" This test will fail if the previous one does as it need its output\n    \"\"\"\nspectrograph = load_spectrograph('shane_kast_blue')\npar = spectrograph.default_pypeit_par()\nstd_file, sci_file = kast_blue_files\noutfile = data_path(os.path.basename(sci_file))\nfluxCalibrate = fluxcalibrate.MultiSlitFC([sci_file], [sens_file], par=par[\n    'fluxcalib'], outfiles=[outfile])\nsobjs = specobjs.SpecObjs.from_fitsfile(outfile)\nassert 'OPT_FLAM' in sobjs[0].keys()\ncooked_required"
-}

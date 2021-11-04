@@ -1,9 +1,0 @@
-{
-    "functionName": "test_create_hdf5_xrf_map_const",
-    "className": null,
-    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_simulation_&_tests_&_test_sim_xrf_scan_data.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test creating file. Only the existence of the created file is verified.\"\"\"\nwd = os.path.join(tmp_path, 'file_dir')\nelement_groups = {'Fe_K': {'area': 800}, 'Se_L': {'area': 900}, 'W_M': {\n    'area': 1000}}\nscan_id = 1000\nfln_path = create_hdf5_xrf_map_const(scan_id=scan_id, wd=wd,\n    element_line_groups=element_groups, nx=100, ny=50, background_area=0)\nfile_name = f'scan2D_{scan_id}_sim.h5'\nfln_path_expected = os.path.join(wd, file_name)\nassert fln_path == fln_path_expected, 'File path is different from expected'\nassert os.path.isfile(fln_path_expected), f\"File '{file_name}' was not created\"\nfln_suffix = 'hello123'\nfln_path = create_hdf5_xrf_map_const(scan_id=scan_id, wd=wd, fln_suffix=\n    fln_suffix, element_line_groups=element_groups, nx=100, ny=50,\n    background_area=0)\nfile_name = f'scan2D_{scan_id}_sim_{fln_suffix}.h5'\nfln_path_expected = os.path.join(wd, file_name)\nassert fln_path == fln_path_expected, 'File path is different from expected'\nassert os.path.isfile(fln_path_expected), f\"File '{file_name}' was not created\"\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "run_a_circuit",
-    "className": null,
-    "fileName": "/PECOS-packages_&_PECOS/tests_&_test_random_circuits.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "state = state_rep(num_qubits)\nmeasurements = []\ngate_dict = state.gate_dict\nfor element, q in circuit:\n    m = -1\n    if element == 'measure Z':\n        m = gate_dict[element](state, q, random_outcome=0)\n        measurements.append(m)\n    else:\n        if isinstance(q, np.ndarray):\n            q = tuple(q)\n        gate_dict[element](state, q)\n    if verbose:\n        print('\\ngate', element, q, '->')\n        if m > -1:\n            print('result:', m)\n        try:\n            state.print_tableau(state.stabs)\n            print('..')\n            state.print_tableau(state.destabs)\n        except AttributeError:\n            pass\nif verbose:\n    print('\\n!!! DONE\\n\\n')\nreturn measurements\n"
-}

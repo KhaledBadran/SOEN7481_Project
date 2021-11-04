@@ -1,9 +1,0 @@
-{
-    "functionName": "conns_to_am",
-    "className": null,
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_topotools_&_topotools.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Converts a list of connections into a Scipy sparse adjacency matrix\n\n    Parameters\n    ----------\n    conns : array_like, N x 2\n        The list of site-to-site connections\n\n    shape : list, optional\n        The shape of the array.  If none is given then it is inferred from the\n        maximum value in ``conns`` array.\n\n    force_triu : boolean\n        If True (default), then all connections are assumed undirected, and\n        moved to the upper triangular portion of the array\n\n    drop_diag : boolean\n        If True (default), then connections from a site and itself are removed.\n\n    drop_dupes : boolean\n        If True (default), then all pairs of sites sharing multiple connections\n        are reduced to a single connection.\n\n    drop_negs : boolean\n        If True (default), then all connections with one or both ends pointing\n        to a negative number are removed.\n\n    \"\"\"\nif force_triu:\n    conns = np.sort(conns, axis=1)\nif drop_negs:\n    keep = ~np.any(conns < 0, axis=1)\n    conns = conns[keep]\nif drop_diag:\n    keep = np.where(conns[:, (0)] != conns[:, (1)])[0]\n    conns = conns[keep]\ndata = np.ones_like(conns[:, (0)], dtype=int)\nif shape is None:\n    N = conns.max() + 1\n    shape = N, N\nam = sprs.coo_matrix((data, (conns[:, (0)], conns[:, (1)])), shape=shape)\nif drop_dupes:\n    am = am.tocsr()\n    am = am.tocoo()\nmissing = np.where(np.bincount(conns.flatten()) == 0)[0]\nif np.size(missing) or np.any(am.col.max() < shape[0] - 1):\n    warnings.warn('Some nodes are not connected to any bonds')\nreturn am\n"
-}

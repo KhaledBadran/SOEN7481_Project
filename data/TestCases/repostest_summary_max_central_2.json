@@ -1,9 +1,0 @@
-{
-    "functionName": "test_summary_max_central_2",
-    "className": "TestChain",
-    "fileName": "/samreay_&_ChainConsumer/tests_&_test_analysis.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "c = ChainConsumer()\nc.add_chain(self.data_skew)\nsummary_area = 0.6827\nc.configure(statistics='max_central', bins=1.0, summary_area=summary_area)\nsummary = c.analysis.get_summary()['0']\nxs = np.linspace(-1, 5, 1000)\npdf = skewnorm.pdf(xs, 5, 1, 1.5)\ncdf = skewnorm.cdf(xs, 5, 1, 1.5)\nxval = interp1d(cdf, xs)([0.5 - 0.5 * summary_area, 0.5 + 0.5 * summary_area])\nxmax = xs[pdf.argmax()]\nassert np.isclose(xmax, summary[1], atol=0.05)\nassert np.isclose(xval[0], summary[0], atol=0.05)\nassert np.isclose(xval[1], summary[2], atol=0.05)\n"
-}

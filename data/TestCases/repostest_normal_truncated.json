@@ -1,9 +1,0 @@
-{
-    "functionName": "test_normal_truncated",
-    "className": null,
-    "fileName": "/Neuraxio_&_Neuraxle/testing_&_hyperparams_&_test_distributions.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "hd_mean = 2.0\nhd_std = 1.0\nhard_clip_min = 1.8\nhard_clip_max = 2.5\nhd = Normal(hd_mean, hd_std, hard_clip_min=hard_clip_min, hard_clip_max=\n    hard_clip_max)\nsamples = get_many_samples_for(hd)\nsamples_mean = np.abs(np.mean(samples))\nassert 2.0 < samples_mean < 2.2\nsamples_std = np.std(samples)\nassert 0 < samples_std < 0.4\nassert abs(hd.pdf(1.7) - 0.0) < 1e-06\nassert abs(hd.pdf(1.8) - 1.4444428136247596) < 1e-06\nassert abs(hd.pdf(2.0) - 1.473622494051997) < 1e-06\nassert abs(hd.pdf(2.25) - 1.4282838963071145) < 1e-06\nassert abs(hd.pdf(2.5) - 1.3004672865798739) < 1e-06\nassert abs(hd.pdf(2.6) - 0.0) < 1e-06\nassert abs(hd.cdf(1.7) - 0.0) < 1e-06\nassert abs(hd.cdf(1.8) - 0.0) < 1e-06\nassert abs(hd.cdf(2.0) - 0.2927714018778846) < 1e-06\nassert abs(hd.cdf(2.25) - 0.65737517785574) < 1e-06\nassert abs(hd.cdf(2.5) - 1.0) < 1e-06\nassert abs(hd.cdf(2.6) - 1.0) < 1e-06\nassert np.all((np.array(samples) >= hard_clip_min) & (np.array(samples) <=\n    hard_clip_max))\nassert hd.min() == hard_clip_min\nassert hd.max() == hard_clip_max\nassert abs(hd.mean() - 2.1439755270448857) < 1e-06\nassert abs(hd.var() - 0.04014884159725845) < 1e-06\nassert abs(hd.std() - 0.20037175848222336) < 1e-06\nassert abs(hd.mean() - np.mean(samples)) < 0.01\nassert abs(hd.var() - np.var(samples)) < 0.01\n"
-}

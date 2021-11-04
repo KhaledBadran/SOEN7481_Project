@@ -1,9 +1,0 @@
-{
-    "functionName": "test_inherited_block_no_render",
-    "className": "BlockTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_block.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "l = TemplateLookup()\nl.put_string('index',\n    \"\"\"\n                <%inherit file=\"base\"/>\n                <%block name=\"header\">\n                    index header\n                </%block>\n            \"\"\"\n    )\nl.put_string('base',\n    \"\"\"\n            above\n            <%block name=\"header\">\n                the header\n            </%block>\n\n            ${next.body()}\n            below\n        \"\"\"\n    )\nself._do_test(l.get_template('index'), ['above', 'index header', 'below'],\n    filters=result_lines)\n"
-}

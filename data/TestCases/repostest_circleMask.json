@@ -1,9 +1,0 @@
-{
-    "functionName": "test_circleMask",
-    "className": null,
-    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_Mask.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "X, Y, Z = np.array(np.meshgrid(np.linspace(0, 3, 50), np.linspace(0, 3, 50),\n    np.linspace(0, 3, 50))).reshape(3, -1)\nclass p(object):\n    pass\npoints = p()\nfor name, coord in zip(['X', 'Y', 'Z'], [X, Y, Z]):\n    setattr(points, name, coord)\ntry:\n    circ0 = circleMask(center=[0.5, 0.5])\n    assert False\nexcept AttributeError:\n    assert True\ncirc1 = circleMask(center=[0.5, 0.5], radiusPoint=[1, 0.5], coordinates=[\n    'X', 'Y'])\ncirc2 = circleMask(center=[0.5, 0.5], radiusPoint=[1, 0.5])\ncirc3 = circleMask(center=[0.5, 0.5], radius=0.5)\nassert np.isclose(circ1.radius, 0.5)\nassert np.isclose(circ3.radius, 0.5)\nmask = circ1(points)\nassert np.sum(mask) == 10450\nassert np.all(mask == circ2(X, Y))\nassert np.all(mask == circ3(X, Y))\nassert circ2(0.5, 0.5)\nassert circ2(0.9, 0.9) == False\nassert circ2(np.cos(np.pi / 4) * 0.5 + 0.501, np.cos(np.pi / 4) * 0.5 + 0.501\n    ) == False\nassert circ2(np.cos(np.pi / 4) * 0.5 + 0.499, np.cos(np.pi / 4) * 0.5 + 0.499\n    ) == True\n"
-}

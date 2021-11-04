@@ -1,9 +1,0 @@
-{
-    "functionName": "test_cache_list_multiple_versions",
-    "className": null,
-    "fileName": "/openworm_&_PyOpenWorm/tests_&_OWMBundleTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    List bundles in the cache.\n\n    For the same bundle ID, they should be in reverse version order (newest versions\n    first)\n    \"\"\"\nbundle_dir1 = p(self.test_homedir, '.owmeta', 'bundles', 'test%2Fmain', '1')\nbundle_dir2 = p(self.test_homedir, '.owmeta', 'bundles', 'test%2Fmain', '2')\nmakedirs(bundle_dir1)\nmakedirs(bundle_dir2)\nwith open(p(bundle_dir1, 'manifest'), 'w') as mf:\n    mf.write('{\"version\": 1, \"id\": \"test/main\"}')\nwith open(p(bundle_dir2, 'manifest'), 'w') as mf:\n    mf.write('{\"version\": 2, \"id\": \"test/main\"}')\nassertRegexpMatches(self.sh('owm bundle cache list'),\n    'test/main@2\\\\ntest/main@1')\n"
-}

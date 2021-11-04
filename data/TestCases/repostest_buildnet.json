@@ -1,9 +1,0 @@
-{
-    "functionName": "test_buildnet",
-    "className": null,
-    "fileName": "/hughperkins_&_DeepCL/python_&_test_&_test_basic.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "print('test_buildnet')\ncl = PyDeepCL.DeepCL()\nnet = PyDeepCL.NeuralNet(cl)\nnet.addLayer(PyDeepCL.InputLayerMaker().numPlanes(1).imageSize(28))\nnet.addLayer(PyDeepCL.NormalizationLayerMaker().translate(-0.5).scale(1 / \n    255.0))\nnet.addLayer(PyDeepCL.ConvolutionalMaker().numFilters(8).filterSize(5).\n    padZeros().biased())\nnet.addLayer(PyDeepCL.ActivationMaker().relu())\nnet.addLayer(PyDeepCL.PoolingMaker().poolingSize(2))\nnet.addLayer(PyDeepCL.ConvolutionalMaker().numFilters(8).filterSize(5).\n    padZeros().biased())\nnet.addLayer(PyDeepCL.ActivationMaker().relu())\nnet.addLayer(PyDeepCL.PoolingMaker().poolingSize(3))\nnet.addLayer(PyDeepCL.FullyConnectedMaker().numPlanes(150).imageSize(1).\n    biased())\nnet.addLayer(PyDeepCL.ActivationMaker().tanh())\nnet.addLayer(PyDeepCL.FullyConnectedMaker().numPlanes(10).imageSize(1).biased()\n    )\nnet.addLayer(PyDeepCL.SoftMaxMaker())\nprint(net.asString())\nassert 12 == net.getNumLayers()\nassert 1 == net.getLayer(0).getOutputPlanes()\nassert 1 == net.getLayer(1).getOutputPlanes()\nassert 8 == net.getLayer(2).getOutputPlanes()\nassert 8 == net.getLayer(3).getOutputPlanes()\nassert 150 == net.getLayer(9).getOutputPlanes()\nassert 10 == net.getLayer(10).getOutputPlanes()\nassert 10 == net.getLayer(11).getOutputPlanes()\nexceptionCalled = False\ntry:\n    net.getLayer(14).getOutputPlanes()\nexcept:\n    exceptionCalled = True\nassert exceptionCalled\nassert 28 == net.getLayer(0).getOutputSize()\nassert 28 == net.getLayer(1).getOutputSize()\nassert 28 == net.getLayer(2).getOutputSize()\nassert 14 == net.getLayer(4).getOutputSize()\nassert 1 == net.getLayer(8).getOutputSize()\n"
-}

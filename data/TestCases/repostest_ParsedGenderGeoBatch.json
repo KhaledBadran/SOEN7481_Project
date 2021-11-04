@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ParsedGenderGeoBatch",
-    "className": null,
-    "fileName": "/JosephPallipadan_&_Namsor-API-Wrapper-Python/namsorclient_&_tests_&_test_request_objects.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "tester = namsorclient.ParsedGenderGeoBatch()\nassert tester.response_type == namsorclient.GenderResponse\nnames = []\nfor id in range(10):\n    name = str(faker_obj.name()).split(' ')\n    country_code = random.choice(list(namsorclient.CountryCodes))\n    while len(name) < 3:\n        name = str(faker_obj.name()).split(' ')\n    name = [name[0], name[2], 'Dr.', 'The First', name[1], country_code, id]\n    names.append(name)\n    tester.addItem(name[0], name[1], name[2], name[3], name[4], name[5],\n        name[6])\n    assert isinstance(tester.items[-1], namsorclient.ParsedGenderGeoBatch.\n        ParsedGenderGeoBatchItem)\n    assert tester.items[-1].first_name == name[0]\n    assert tester.items[-1].last_name == name[1]\n    assert tester.items[-1].prefix_or_title == name[2]\n    assert tester.items[-1].suffix == name[3]\n    assert tester.items[-1].middle_name == name[4]\n    assert tester.items[-1].country_code == name[5].value\n    assert tester.items[-1].ID == name[6]\nfor name, item in zip(names, tester.batch_item_converter()):\n    keys = ['id', 'firstName', 'lastName', 'prefixOrTitle', 'suffix',\n        'middleName', 'countryIso2']\n    assert all([(key in item) for key in keys])\n    assert item['firstName'] == name[0]\n    assert item['lastName'] == name[1]\n    assert item['prefixOrTitle'] == name[2]\n    assert item['suffix'] == name[3]\n    assert item['middleName'] == name[4]\n    assert item['countryIso2'] == name[5].value\n    assert item['id'] == name[6]\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_toggle_master_switch",
-    "className": "TestToggleX",
-    "fileName": "/albertogeniola_&_MerossIot/tests_&_test_togglex.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "devices = self.meross_manager.find_devices(online_status=OnlineStatus.ONLINE)\nmulti_channel_devices = list(filter(lambda d: len(d.channels) > 1, devices))\nif len(multi_channel_devices) < 1:\n    self.skipTest(\n        'Could not find any online device supporting more than 1 channel')\n    return\nd = multi_channel_devices[0]\nmaster = None\nfor c in d.channels:\n    if c.is_master_channel:\n        master = c\n        continue\n    await d.async_turn_on(channel=c.index)\n    self.assertEqual(d.is_on(channel=c.index), True)\nawait asyncio.sleep(1)\nself.assertIsNotNone(master)\nawait d.async_turn_off(channel=master.index)\nawait asyncio.sleep(2)\nfor c in d.channels:\n    self.assertEqual(d.is_on(channel=c.index), False)\nunittest_run_loop"
-}

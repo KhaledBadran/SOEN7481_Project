@@ -1,9 +1,0 @@
-{
-    "functionName": "test_unit_train_detect",
-    "className": null,
-    "fileName": "/Merck_&_DeepBGC/test_&_unit_&_commands_&_test_unit_train.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "tmpdir = str(tmpdir)\nout_path = os.path.join(tmpdir, 'model.pkl')\nrun(['train', '--model', get_test_file(model), '--config', 'PFAM2VEC',\n    get_test_file('pfam2vec.test.tsv'), '--output', out_path, get_test_file\n    ('BGC0000015.pfam.csv'), get_test_file('negative.pfam.csv')])\nassert os.path.exists(out_path)\nmodel = SequenceModelWrapper.load(out_path)\npos_domains = pd.read_csv(get_test_file('BGC0000015.pfam.csv'))\nneg_domains = pd.read_csv(get_test_file('negative.pfam.csv'))\npos_prediction = model.predict(pos_domains)\nneg_prediction = model.predict(neg_domains)\nassert isinstance(pos_prediction, pd.Series)\nassert isinstance(neg_prediction, pd.Series)\nassert pos_prediction.index.equals(pos_domains.index)\nassert neg_prediction.index.equals(neg_domains.index)\nassert pos_prediction.mean() > 0.5\nassert neg_prediction.mean() < 0.5\npytest.mark.parametrize('model', ['deepbgc_test.json',\n    'clusterfinder_geneborder_test.json'])"
-}

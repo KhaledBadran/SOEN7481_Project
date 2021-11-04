@@ -1,9 +1,0 @@
-{
-    "functionName": "test_random_binary_projections",
-    "className": "TestRecallExperiment",
-    "fileName": "/pixelogik_&_NearPy/tests_&_experiments_tests.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "dim = 4\nvector_count = 5000\nvectors = numpy.random.randn(dim, vector_count)\nrbp = RandomBinaryProjections('rbp', 32)\nnearest = NearestFilter(10 + 1)\nengine = Engine(dim, lshashes=[rbp], vector_filters=[nearest])\nexp = RecallPrecisionExperiment(10, vectors)\nresult = exp.perform_experiment([engine])\nrecall1 = result[0][0]\nprecision1 = result[0][1]\nsearchtime1 = result[0][2]\nprint(\"\"\"\nRecall RBP: %f, Precision RBP: %f, SearchTime RBP: %f\n\"\"\" % (\n    recall1, precision1, searchtime1))\n"
-}

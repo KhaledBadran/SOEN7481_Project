@@ -1,9 +1,0 @@
-{
-    "functionName": "test_invalid_attestation_assertion",
-    "className": "TestAttestationCredential",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_credentials.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a TypeError is raised when an invalid value is used to set\n        the attestation assertion of an AttestationCredential struct.\n        \"\"\"\nkwargs = {'attestation_assertion': 0}\nself.assertRaisesRegex(TypeError, 'Attestation assertion must be bytes.',\n    objects.AttestationCredential, **kwargs)\ncredential = objects.AttestationCredential()\nargs = credential, 'attestation_assertion', 0\nself.assertRaisesRegex(TypeError, 'Attestation assertion must be bytes.',\n    setattr, *args)\n"
-}

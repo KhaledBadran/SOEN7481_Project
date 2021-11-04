@@ -1,9 +1,0 @@
-{
-    "functionName": "test_enu2xyz",
-    "className": "TestGeodesy",
-    "fileName": "/GeoscienceAustralia_&_GeodePy/geodepy_&_tests_&_test_geodesy.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "MOBS_MGA2020 = 55, 321820.085, 5811181.51, 40.57\nMOBS_MGA1994 = 55, 321819.594, 5811180.038, 40.659\nMOBS_GDA2020 = grid2geo(MOBS_MGA2020[0], MOBS_MGA2020[1], MOBS_MGA2020[2])\nMOBS_GDA1994 = grid2geo(MOBS_MGA1994[0], MOBS_MGA1994[1], MOBS_MGA1994[2])\nMOBS_GDA2020_XYZ = llh2xyz(MOBS_GDA2020[0], MOBS_GDA2020[1], MOBS_MGA2020[3])\nMOBS_GDA1994_XYZ = llh2xyz(MOBS_GDA1994[0], MOBS_GDA1994[1], MOBS_MGA1994[3])\nmga_vector = [MOBS_MGA2020[1] - MOBS_MGA1994[1], MOBS_MGA2020[2] -\n    MOBS_MGA1994[2], MOBS_MGA2020[3] - MOBS_MGA1994[3]]\nxyz_vector = MOBS_GDA2020_XYZ[0] - MOBS_GDA1994_XYZ[0], MOBS_GDA2020_XYZ[1\n    ] - MOBS_GDA1994_XYZ[1], MOBS_GDA2020_XYZ[2] - MOBS_GDA1994_XYZ[2]\ngrid_dist, grid_brg = rect2polar(mga_vector[0], mga_vector[1])\nlocal_east, local_north = polar2rect(grid_dist, grid_brg - MOBS_GDA2020[3])\nlocal_vector = local_east, local_north, mga_vector[2]\nx, y, z = enu2xyz(MOBS_GDA2020[0], MOBS_GDA2020[1], *local_vector)\nself.assertAlmostEqual(x, xyz_vector[0], 4)\nself.assertAlmostEqual(y, xyz_vector[1], 4)\nself.assertAlmostEqual(z, xyz_vector[2], 4)\ne, n, u = xyz2enu(MOBS_GDA2020[0], MOBS_GDA2020[1], *xyz_vector)\nself.assertAlmostEqual(e, local_vector[0], 4)\nself.assertAlmostEqual(n, local_vector[1], 4)\nself.assertAlmostEqual(u, local_vector[2], 4)\n"
-}

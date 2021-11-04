@@ -1,9 +1,0 @@
-{
-    "functionName": "test_simple_interrupted",
-    "className": "TestTransactionLog",
-    "fileName": "/cournape_&_Bento/bento_&_commands_&_tests_&_test_install.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test a simple, interrupted run.\"\"\"\nclass _InterruptException(Exception):\n    pass\ntarget_prefix = op.join(self.base_dir, 'foo')\ntrans_file = op.join(self.base_dir, 'trans.log')\ntargets = []\nlog = TransactionLog(trans_file)\ntry:\n    try:\n        for i, source in enumerate(self.files):\n            if i > len(self.files) / 3:\n                raise _InterruptException()\n            target = op.join(target_prefix, op.basename(source))\n            targets.append(target)\n            log.copy(source, target, None)\n    except _InterruptException:\n        log.rollback()\n        for target in targets:\n            self.assertFalse(op.exists(target))\n        return\n    self.fail('Expected failure at this point !')\nfinally:\n    log.close()\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_subscription",
-    "className": "TestWebOSClient",
-    "fileName": "/supersaiyanmode_&_PyWebOSTV/tests_&_test_connection.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "result = []\nresult_event = Event()\ndef callback(obj):\n    result.append(obj)\n    result_event.set()\nclient = FakeClient()\nclient.subscribe('unique_uri', '123', callback)\nclient.received_message(json.dumps({'id': '123', 'payload': [1]}))\nclient.received_message(json.dumps({'id': '123', 'payload': [2]}))\nclient.received_message(json.dumps({'id': '123', 'payload': [3]}))\nresult_event.wait()\nassert result == [[1], [2], [3]]\nresult = []\nclient.unsubscribe('123')\nclient.received_message(json.dumps({'id': '123', 'payload': [1]}))\nassert result == []\nwith raises(ValueError):\n    client.unsubscribe('123')\n"
-}

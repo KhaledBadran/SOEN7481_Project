@@ -1,9 +1,0 @@
-{
-    "functionName": "test_normalize_argument_docs",
-    "className": null,
-    "fileName": "/IanChen83_&_ClassArg/tests_&_test_doc.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "spec = SimpleNamespace(args=['aaa', 'bbb'], varargs='ccc', varkw='fff',\n    defaults=(1,), kwonlyargs=['ddd', 'eee'], kwonlydefaults={'eee': 2},\n    annotations={'bbb': int, 'ddd': int, 'eee': int})\nif isinstance(expect, Exception):\n    with pytest.raises(Exception) as e_info:\n        ret = doc.load_doc_hints(spec, docstring)\n        print(ret)\n    assert isinstance(expect, e_info.type)\nelse:\n    ret = doc.load_doc_hints(spec, docstring)\n    for key, value in expect.items():\n        assert getattr(ret, key) == value\npytest.mark.parametrize('docstring, expect', list(_gen_parse_doc_testcase()))"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_infusion",
-    "className": "SpectrumTest",
-    "fileName": "/AberystwythSystemsBiology_&_DIMEpy/tests_&_spectrum_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "spectrum = Spectrum(mzml_fp, 'test')\nspectrum.limit_polarity('negative')\nspectrum.load_scans()\nspectrum._to_use = []\nclass DuckyScan:\n\n    def __init__(self, total_ion_count):\n        self.TIC = total_ion_count\ntics = [10, 100, 200, 30, 40, 0, 0]\nfor tic in tics:\n    spectrum.scans.append(DuckyScan(tic))\n    spectrum.to_use.append(True)\nspectrum._scans = np.array(spectrum.scans)\nspectrum._to_use = np.array(spectrum._to_use)\nspectrum.limit_infusion(1)\nself.assertTrue(np.array_equal(spectrum.to_use, np.array([False, True, True,\n    False, False, False, False])))\n"
-}

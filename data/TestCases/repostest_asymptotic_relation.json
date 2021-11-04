@@ -1,9 +1,0 @@
-{
-    "functionName": "test_asymptotic_relation",
-    "className": null,
-    "fileName": "/grd349_&_PBjam/pbjam_&_tests_&_test_asy_peakbag.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test for method to compute frequencies from the asymptotic relation\"\"\"\nnorders = cs.pars['norders']\nnsamples = cs.pars['nsamples']\nmod = asymp_spec_model(cs.st.f, norders)\ndnu, numax, eps, alpha = 3050.0, 135.0, 1.45, 10 ** -2.5\nfunc = mod._asymptotic_relation\ninp = [dnu, numax, eps, alpha, norders]\ninp_arr = [np.float64(numax).repeat(nsamples), np.float64(dnu).repeat(\n    nsamples), np.float64(eps).repeat(nsamples), np.float64(alpha).repeat(\n    nsamples), norders]\npbt.does_it_run(func, inp)\npbt.does_it_return(func, inp)\npbt.right_type(func, inp, np.ndarray)\npbt.right_shape(func, inp, (norders,))\npbt.right_shape(func, inp_arr, (norders, nsamples))\nassert_allclose(func(*inp), [2896.028668, 3030.75434], atol=0.001)\n"
-}

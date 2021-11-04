@@ -1,9 +1,0 @@
-{
-    "functionName": "test_read_alternative_tag",
-    "className": "TestAttributes",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that an Attributes structure can be correctly read in from a data\n        stream with an alternative tag. This can occur if a variant of the\n        Attributes structure is being used, like the Common Attributes, Public\n        Key Attributes, or Private Key Attributes structures.\n        \"\"\"\nattrs = objects.Attributes(tag=enums.Tags.PRIVATE_KEY_ATTRIBUTES)\nself.assertEqual([], attrs.attributes)\nattrs.read(self.alt_encoding)\nself.assertEqual(2, len(attrs.attributes))\nattr_1 = attrs.attributes[0]\nself.assertIsInstance(attr_1, primitives.Enumeration)\nself.assertEqual(enums.CryptographicAlgorithm.AES, attr_1.value)\nattr_2 = attrs.attributes[1]\nself.assertIsInstance(attr_2, primitives.Integer)\nself.assertEqual(128, attr_2.value)\n"
-}

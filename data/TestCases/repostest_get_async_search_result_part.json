@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_async_search_result_part",
-    "className": null,
-    "fileName": "/mcs07_&_ChemSpiPy/tests_&_test_api.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test get_async_search_result_part returns a list of CSIDs.\"\"\"\nwith pytest.deprecated_call():\n    rid = cs.async_simple_search('glucose')\n    while True:\n        status = cs.get_async_search_status(rid)\n        if status in {'Created', 'Scheduled', 'Processing'}:\n            continue\n        assert len(cs.get_async_search_result_part(rid)) > 6\n        assert len(cs.get_async_search_result_part(rid, start=2)) > 2\n        assert len(cs.get_async_search_result_part(rid, start=2, count=2)) == 2\n        assert len(cs.get_async_search_result_part(rid, start=2, count=99)) > 2\n        break\n"
-}

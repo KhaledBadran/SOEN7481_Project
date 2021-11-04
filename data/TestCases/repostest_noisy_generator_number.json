@@ -1,9 +1,0 @@
-{
-    "functionName": "test_noisy_generator_number",
-    "className": null,
-    "fileName": "/clara-genomics_&_ClaraGenomicsAnalysis/pygenomeworks_&_test_&_test_read_simulators.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Test generated length for Markovian genome simulator is correct\"\"\"\ngenome_simulator = genomesim.MarkovGenomeSimulator()\nreference_string = genome_simulator.build_reference(reference_length,\n    transitions=simulators.HIGH_GC_HOMOPOLYMERIC_TRANSITIONS)\nread_generator = readsim.NoisyReadSimulator()\nnum_reads_generated = 0\nfor _ in range(num_reads):\n    read_generator.generate_read(reference_string, read_median_length)\n    num_reads_generated += 1\nassert num_reads_generated == num_reads_expected\npytest.mark.cpupytest.mark.parametrize(\n    'num_reads, reference_length, num_reads_expected, read_median_length',\n    num_reads_data)"
-}

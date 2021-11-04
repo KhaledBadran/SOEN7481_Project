@@ -1,9 +1,0 @@
-{
-    "functionName": "test_read_missing_key_block",
-    "className": "TestSplitKey",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_secrets_&_test_split_key.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that an InvalidKmipEncoding error is raised during the decoding\n        of a SplitKey object when the key block is missing from the encoding.\n        \"\"\"\nsplit_key = secrets.SplitKey()\nself.assertIsNone(split_key.key_block)\nargs = self.no_key_block_encoding,\nself.assertRaisesRegex(exceptions.InvalidKmipEncoding,\n    'The SplitKey encoding is missing the KeyBlock field.', split_key.read,\n    *args)\n"
-}

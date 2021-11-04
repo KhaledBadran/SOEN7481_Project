@@ -1,9 +1,0 @@
-{
-    "functionName": "test_storm_data_to_cells",
-    "className": "TestDataToCells",
-    "fileName": "/Jhsmit_&_ColiCoords/test_&_test_preprocessing.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data = self.storm_ds\ncells = data_to_cells(data)\nself.assertEqual(sum([len(c.data.data_dict['storm']) for c in cells]), 40)\ndata_copy = data.copy()\nstorm_ds = data_copy.data_dict['storm']\nstorm_ds['frame'][storm_ds['frame'] == 4] = 5\ncells = data_to_cells(data_copy)\nnum_spots = [0, 10, 0, 6, 1, 14, 1, 0, 0, 0, 0, 0, 0]\nfor c, spots in zip(cells, num_spots):\n    self.assertEqual(len(c.data.data_dict['storm']), spots)\n    self.assertIn('storm', c.data.names)\n    self.assertIn('storm', c.data.dclasses)\n"
-}

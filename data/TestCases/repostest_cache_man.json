@@ -1,9 +1,0 @@
-{
-    "functionName": "test_cache_man",
-    "className": "TestWeather",
-    "fileName": "/lukeWaninger_&_GSCAP/tests_&_test_weather.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "reqqu = mul.Queue()\nresqu = mul.Queue()\ncontent = pd.DataFrame([wthr.HourlyWeatherReport(lat=self.lat, lon=self.lon,\n    date=self.day, time=self.time).dict])\nreq = dict(type='put', args=[content])\nreqqu.put(req)\nreq = dict(pid=os.getpid(), type='get', args=(self.day, self.lat, self.lon))\nreqqu.put(req)\nreqqu.put(dict(type='end'))\nwthr.cache_manager(reqqu, resqu, self.wcname)\nres = resqu.get()\nself.assertTrue(res['pid'] == os.getpid())\n"
-}

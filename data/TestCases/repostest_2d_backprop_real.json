@@ -1,9 +1,0 @@
-{
-    "functionName": "test_2d_backprop_real",
-    "className": null,
-    "fileName": "/RI-imaging_&_ODTbrain/tests_&_test_alg2d_bpp.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Check if the real reconstruction matches the real part\n    of the complex reconstruction.\n    \"\"\"\nsino, angles = create_test_sino_2d()\nparameters = get_test_parameter_set(2)\nr = list()\nfor p in parameters:\n    f = odtbrain.backpropagate_2d(sino, angles, padval=0, **p)\n    r.append(f)\nr2 = list()\nfor p in parameters:\n    f = odtbrain.backpropagate_2d(sino, angles, padval=0, onlyreal=True, **p)\n    r2.append(f)\nassert np.allclose(np.array(r).real, np.array(r2))\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_emu",
-    "className": null,
-    "fileName": "/LSSTDESC_&_CCL/benchmarks_&_test_emu.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "model_numbers = [1, 3, 5, 6, 8, 10]\ndata = np.loadtxt('./benchmarks/data/emu_smooth_pk_M%d.txt' % model_numbers\n    [model])\ncosmos = np.loadtxt('./benchmarks/data/emu_cosmologies.txt')\ncosmo = ccl.Cosmology(Omega_c=cosmos[model, 0], Omega_b=cosmos[model, 1], h\n    =cosmos[model, 2], sigma8=cosmos[model, 3], n_s=cosmos[model, 4], w0=\n    cosmos[model, 5], wa=cosmos[model, 6], Neff=3.04, Omega_g=0, Omega_k=0,\n    transfer_function='bbks', matter_power_spectrum='emu')\na = 1\nk = data[:, (0)]\npk = ccl.nonlin_matter_power(cosmo, k, a)\nerr = np.abs(pk / data[:, (1)] - 1)\nassert np.allclose(err, 0, rtol=0, atol=EMU_TOLERANCE)\npytest.mark.parametrize('model', [0, 1, 3, 5])"
-}

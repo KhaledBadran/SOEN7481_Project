@@ -1,9 +1,0 @@
-{
-    "functionName": "test_OrValidator_failure_with_exception",
-    "className": null,
-    "fileName": "/justanr_&_Flask-Transfer/tests_&_test_validators.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "toss_error = mock.MagicMock(side_effect=UploadError('something bad happened'))\nor_validator = validators.OrValidator(toss_error, toss_error, toss_error)\nwith pytest.raises(UploadError) as excinfo:\n    or_validator(DummyFile(filename='wolololo.wav'), {})\nassert toss_error.call_count == 3\nassert len(excinfo.value.args[0]) == 3\nassert all('something bad happened' == e for e in excinfo.value.args[0])\n"
-}

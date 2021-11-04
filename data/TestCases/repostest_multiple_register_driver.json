@@ -1,9 +1,0 @@
-{
-    "functionName": "test_multiple_register_driver",
-    "className": null,
-    "fileName": "/mozilla_&_PyPOM/tests_&_test_driver.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" We are testing the registerDriver hook,\n        multiple registrations\"\"\"\nfrom zope.interface import implementer\nfrom zope.interface import Interface\nfrom pypom.driver import registerDriver\nfrom pypom.interfaces import IDriver\nclass IFakeDriver(Interface):\n    \"\"\" A fake marker interface\"\"\"\n@implementer(IFakeDriver)\nclass FakeDriver:\n    \"\"\" A fake driver \"\"\"\n\n    def __init__(self, driver):\n        self.driver = driver\nclass IFakeDriver2(Interface):\n    \"\"\" Another fake marker interface\"\"\"\n@implementer(IFakeDriver2)\nclass FakeDriver2:\n    \"\"\" Another fake driver \"\"\"\n\n    def __init__(self, driver):\n        self.driver = driver\nfake_driver = FakeDriver(None)\nfake_driver2 = FakeDriver2(None)\nregisterDriver(IFakeDriver, FakeDriver)\nregisterDriver(IFakeDriver2, IFakeDriver2)\nadapted_driver = IDriver(fake_driver)\nadapted_driver2 = IDriver(fake_driver2)\nassert isinstance(adapted_driver, FakeDriver)\nassert isinstance(adapted_driver2, FakeDriver2)\n"
-}

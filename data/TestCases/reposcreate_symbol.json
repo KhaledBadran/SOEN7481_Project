@@ -1,9 +1,0 @@
-{
-    "functionName": "create_symbol",
-    "className": null,
-    "fileName": "/Microsoft_&_MMdnn/mmdnn_&_conversion_&_examples_&_tensorflow_&_models_&_test_rnn.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "word_vectors = tf.contrib.layers.embed_sequence(X, vocab_size=maxf,\n    embed_dim=edim)\nword_list = tf.unstack(word_vectors, axis=1)\nif not CUDNN:\n    cell1 = tf.contrib.rnn.LSTMCell(nhid)\n    cell2 = tf.contrib.rnn.GRUCell(nhid)\n    stacked_cell = tf.nn.rnn_cell.MultiRNNCell([cell1, cell2])\n    outputs, states = tf.nn.static_rnn(stacked_cell, word_list, dtype=tf.\n        float32)\n    logits = tf.layers.dense(outputs[-1], 2, activation=None, name='output')\nelse:\n    from tensorflow.contrib.cudnn_rnn.python.ops import cudnn_rnn_ops\n    cudnn_cell = cudnn_rnn_ops.CudnnGRU(num_layers=1, num_units=nhid,\n        input_size=edim, input_mode='linear_input')\n    params_size_t = cudnn_cell.params_size()\n    params = tf.Variable(tf.random_uniform([params_size_t], -0.1, 0.1),\n        validate_shape=False)\n    input_h = tf.Variable(tf.zeros([1, batchs, nhid]))\n    outputs, states = cudnn_cell(input_data=word_list, input_h=input_h,\n        params=params)\n    logits = tf.layers.dense(outputs[-1], 2, activation=None, name='output')\nreturn logits, logits\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_trio_socket",
-    "className": "TestTrioSocket",
-    "fileName": "/PRIArobotics_&_HedgehogUtils/tests_&_test_zmq.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "async with trio_asyncio.open_loop():\n    a, b = (zmq_trio_ctx.socket(zmq.PAIR).configure(hwm=1000, linger=0) for\n        _ in range(2))\n    with a, b:\n        a.bind('inproc://endpoint')\n        b.connect('inproc://endpoint')\n        with assertTimeoutTrio(1):\n            await b.poll()\n        assert await b.poll(timeout=1) == 0\n        with assertPassed(1):\n            with assertTimeoutTrio(1):\n                await b.wait()\n            await a.signal()\n            await b.wait()\n        with assertPassed(1):\n            with assertTimeoutTrio(1):\n                await b.recv_multipart_expect((b'foo', b'bar'))\n            await a.send_multipart((b'foo', b'bar'))\n            await b.recv_multipart_expect((b'foo', b'bar'))\npytest.mark.trio"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_model_broadcast",
-    "className": "TestSimple",
-    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_test_simple_integration.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "init_executor_gateway(self.sc)\nmodel = Linear(3, 2)\nbroadcasted = broadcast_model(self.sc, model)\ninput_data = np.random.rand(3)\noutput = self.sc.parallelize([input_data], 1).map(lambda x: broadcasted.\n    value.forward(x)).first()\nexpected = model.forward(input_data)\nassert_allclose(output, expected)\n"
-}

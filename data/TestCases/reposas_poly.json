@@ -1,9 +1,0 @@
-{
-    "functionName": "as_poly",
-    "className": "RotatedBox",
-    "fileName": "/konstantint_&_PassportEye/passporteye_&_util_&_geometry.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Converts this box to a polygon, i.e. 4x2 array, representing the four corners starting from lower left to upper left counterclockwise.\n\n        :param margin_width: The additional \"margin\" that will be added to the box along its width dimension (from both sides) before conversion.\n        :param margin_height: The additional \"margin\" that will be added to the box along its height dimension (from both sides) before conversion.\n\n        >>> RotatedBox([0, 0], 4, 2, 0).as_poly()\n        array([[-2., -1.],\n               [ 2., -1.],\n               [ 2.,  1.],\n               [-2.,  1.]])\n        >>> RotatedBox([0, 0], 4, 2, np.pi/4).as_poly()\n        array([[-0.707..., -2.121...],\n               [ 2.121...,  0.707...],\n               [ 0.707...,  2.121...],\n               [-2.121..., -0.707...]])\n        >>> RotatedBox([0, 0], 4, 2, np.pi/2).as_poly()\n        array([[ 1., -2.],\n               [ 1.,  2.],\n               [-1.,  2.],\n               [-1., -2.]])\n        >>> RotatedBox([0, 0], 0, 0, np.pi/2).as_poly(2, 1)\n        array([[ 1., -2.],\n               [ 1.,  2.],\n               [-1.,  2.],\n               [-1., -2.]])\n        \"\"\"\nv_hor = (self.width / 2 + margin_width) * np.array([np.cos(self.angle), np.\n    sin(self.angle)])\nv_vert = (self.height / 2 + margin_height) * np.array([-np.sin(self.angle),\n    np.cos(self.angle)])\nc = np.array([self.cx, self.cy])\nreturn np.vstack([c - v_hor - v_vert, c + v_hor - v_vert, c + v_hor +\n    v_vert, c - v_hor + v_vert])\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_extended_compound_info_list",
-    "className": null,
-    "fileName": "/mcs07_&_ChemSpiPy/tests_&_test_api.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test get_extended_compound_info_list returns info for a list of CSIDs.\"\"\"\nwith pytest.deprecated_call():\n    info = cs.get_extended_compound_info_list([6543, 1235, 6084])\n    assert len(info) == 3\n    assert all(field in info[0] for field in ['id', 'smiles', 'formula',\n        'averageMass', 'molecularWeight', 'monoisotopicMass', 'nominalMass',\n        'commonName', 'referenceCount', 'dataSourceCount', 'pubMedCount',\n        'rscCount', 'mol2D'])\n    assert all(isinstance(info[0][field], float) for field in [\n        'averageMass', 'molecularWeight', 'monoisotopicMass'])\n    assert isinstance(info[0]['id'], int)\n    assert all(isinstance(info[0][field], six.text_type) for field in [\n        'smiles', 'formula', 'commonName', 'mol2D'])\n"
-}

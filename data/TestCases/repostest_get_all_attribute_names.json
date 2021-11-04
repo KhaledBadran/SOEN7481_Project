@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_all_attribute_names",
-    "className": "TestAttributePolicy",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_policy.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that get_all_attribute_names returns a complete list of the\n        names of all spec-defined attributes.\n        \"\"\"\nrules = policy.AttributePolicy(contents.ProtocolVersion(1, 0))\nattribute_names = ['Unique Identifier', 'Name', 'Object Type',\n    'Cryptographic Algorithm', 'Cryptographic Length',\n    'Cryptographic Parameters', 'Cryptographic Domain Parameters',\n    'Certificate Type', 'Certificate Length',\n    'X.509 Certificate Identifier', 'X.509 Certificate Subject',\n    'X.509 Certificate Issuer', 'Certificate Identifier',\n    'Certificate Subject', 'Certificate Issuer',\n    'Digital Signature Algorithm', 'Digest', 'Operation Policy Name',\n    'Cryptographic Usage Mask', 'Lease Time', 'Usage Limits', 'State',\n    'Initial Date', 'Activation Date', 'Process Start Date',\n    'Protect Stop Date', 'Deactivation Date', 'Destroy Date',\n    'Compromise Occurrence Date', 'Compromise Date', 'Revocation Reason',\n    'Archive Date', 'Object Group', 'Fresh', 'Link',\n    'Application Specific Information', 'Contact Information',\n    'Last Change Date', 'Custom Attribute', 'Sensitive']\nresult = rules.get_all_attribute_names()\nself.assertEqual(len(attribute_names), len(result))\nfor attribute_name in attribute_names:\n    self.assertIn(attribute_name, result)\n"
-}

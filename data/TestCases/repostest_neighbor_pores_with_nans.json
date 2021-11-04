@@ -1,9 +1,0 @@
-{
-    "functionName": "test_neighbor_pores_with_nans",
-    "className": "MiscTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_misc_&_MiscTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "net = op.network.Cubic(shape=[2, 2, 2])\nnet['pore.values'] = 1.0\nnet['pore.values'][0] = np.nan\nf = mods.from_neighbor_pores\nwith_nans = f(target=net, pore_prop='pore.values', ignore_nans=False, mode=\n    'min')\nassert np.any(np.isnan(with_nans))\nno_nans = f(target=net, pore_prop='pore.values', ignore_nans=True, mode='min')\nassert np.all(~np.isnan(no_nans))\nwith_nans = f(target=net, pore_prop='pore.values', ignore_nans=False, mode=\n    'max')\nassert np.any(np.isnan(with_nans))\nno_nans = f(target=net, pore_prop='pore.values', ignore_nans=True, mode='max')\nassert np.all(~np.isnan(no_nans))\nwith_nans = f(target=net, pore_prop='pore.values', ignore_nans=False, mode=\n    'mean')\nassert np.any(np.isnan(with_nans))\nno_nans = f(target=net, pore_prop='pore.values', ignore_nans=True, mode='mean')\nassert np.all(~np.isnan(no_nans))\n"
-}

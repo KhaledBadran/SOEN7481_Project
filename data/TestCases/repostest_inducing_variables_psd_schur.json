@@ -1,9 +1,0 @@
-{
-    "functionName": "test_inducing_variables_psd_schur",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_covariances_&_test_base_covariances.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "X = np.random.randn(5, input_dim)\nKuf_values = Kuf(inducing_variable, kernel, X)\nKuu_values = Kuu(inducing_variable, kernel, jitter=default_jitter())\nKff_values = kernel(X)\nQff_values = Kuf_values.numpy().T @ np.linalg.solve(Kuu_values, Kuf_values)\nassert np.all(np.linalg.eig(Kff_values - Qff_values)[0] > 0.0)\npytest.mark.parametrize('input_dim, inducing_variable, kernel',\n    _inducing_variables_and_kernels)"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_GetProjectInstruments",
-    "className": null,
-    "fileName": "/incf-nidash_&_PyNIDM/nidm_&_experiment_&_tests_&_test_query.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "kwargs = {Constants.NIDM_PROJECT_NAME: 'FBIRN_PhaseII', Constants.\n    NIDM_PROJECT_IDENTIFIER: 9610, Constants.NIDM_PROJECT_DESCRIPTION:\n    'Test investigation'}\nproject = Project(uuid='_123456', attributes=kwargs)\nsession = Session(project)\nacq = AssessmentAcquisition(session)\nkwargs = {pm.PROV_TYPE: pm.QualifiedName(pm.Namespace('nidm', Constants.\n    NIDM), 'NorthAmericanAdultReadingTest')}\nacq_obj = AssessmentObject(acq, attributes=kwargs)\nacq2 = AssessmentAcquisition(session)\nkwargs = {pm.PROV_TYPE: pm.QualifiedName(pm.Namespace('nidm', Constants.\n    NIDM), 'PositiveAndNegativeSyndromeScale')}\nacq_obj2 = AssessmentObject(acq2, attributes=kwargs)\nwith open('test_gpi.ttl', 'w') as f:\n    f.write(project.serializeTurtle())\nassessment_list = Query.GetProjectInstruments(['test_gpi.ttl'], '_123456')\nremove('test_gpi.ttl')\nassert URIRef(Constants.NIDM + 'NorthAmericanAdultReadingTest'\n    ) in assessment_list['assessment_type'].to_list()\nassert URIRef(Constants.NIDM + 'PositiveAndNegativeSyndromeScale'\n    ) in assessment_list['assessment_type'].to_list()\n"
-}

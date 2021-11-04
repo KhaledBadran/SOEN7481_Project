@@ -1,9 +1,0 @@
-{
-    "functionName": "test_memoization_positive",
-    "className": null,
-    "fileName": "/textX_&_Arpeggio/arpeggio_&_tests_&_regressions_&_test_memoization.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test that already matched rule is found in the cache on\n    subsequent matches.\n    Args:\n        capsys - pytest fixture for output capture\n    \"\"\"\ndef grammar():\n    return [(rule1, ruleb), (rule1, rulec)]\ndef rule1():\n    return rulea, ruleb\ndef rulea():\n    return 'a'\ndef ruleb():\n    return 'b'\ndef rulec():\n    return 'c'\nparser = ParserPython(grammar, memoization=True, debug=True)\nparse_tree = parser.parse('a   b   c')\nassert 'Cache hit' in capsys.readouterr()[0]\nassert parser.cache_hits == 1\nassert parser.cache_misses == 4\n"
-}

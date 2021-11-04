@@ -1,9 +1,0 @@
-{
-    "functionName": "remove_labels",
-    "className": "Brain",
-    "fileName": "/nipy_&_PySurfer/surfer_&_viz.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Remove one or more previously added labels from the image.\n\n        Parameters\n        ----------\n        labels : None | str | list of str\n            Labels to remove. Can be a string naming a single label, or None to\n            remove all labels. Possible names can be found in the Brain.labels\n            attribute.\n        hemi : None\n            Deprecated parameter, do not use.\n        \"\"\"\nif hemi is not None:\n    warn(\n        'The `hemi` parameter to Brain.remove_labels() has no effect and will be removed in PySurfer 0.9'\n        , DeprecationWarning)\nif labels is None:\n    labels_ = list(self._label_dicts.keys())\nelse:\n    labels_ = [labels] if isinstance(labels, str) else labels\n    missing = [key for key in labels_ if key not in self._label_dicts]\n    if missing:\n        raise ValueError('labels=%r contains unknown labels: %s' % (labels,\n            ', '.join(map(repr, missing))))\nfor key in labels_:\n    data = self._label_dicts.pop(key)\n    for brain, array_id in data['array_ids']:\n        brain._remove_scalar_data(array_id)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_team_purge_reset",
-    "className": "TeamTest",
-    "fileName": "/cmsteffen-code_&_PyKBLib/tests_&_test_pykblib_team.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.team.purge_reset()\nmock_remove_member.assert_called_with('reset_user')\nmember_dict = self.team.members_by_role._asdict()\nusername = random_username()\nmember_dict['reset'] = {username}\nself.team.members_by_role = dict_to_ntuple(member_dict)\nmock_remove_member.side_effect = TeamException('EXCEPTION')\nwith self.assertRaises(TeamException):\n    self.team.purge_reset()\nmock_remove_member.assert_called_with(username)\nmock.patch('pykblib.team.Team.remove_member')"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_test",
-    "className": null,
-    "fileName": "/dbehrlich_&_PsychRNN/test_&_backend_&_test_rnn.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "pd = PerceptualDiscrimination(dt=10, tau=100, T=2000, N_batch=128)\ngen = pd.batch_generator()\nx, y, m, p = next(gen)\nparams = get_params()\nrnn = RNN(params)\nmocker.patch.object(RNN, 'forward_pass')\nRNN.forward_pass.return_value = tf.fill([params['N_batch'], params[\n    'N_steps'], params['N_out']], float('nan')), tf.fill([params['N_batch'],\n    params['N_steps'], params['N_rec']], float('nan'))\nrnn.test(x)\npatch.object(RNN, '__abstractmethods__', set())"
-}

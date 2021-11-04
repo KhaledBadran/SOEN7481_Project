@@ -1,9 +1,0 @@
-{
-    "functionName": "test_cancel_confirm_first_order",
-    "className": null,
-    "fileName": "/nabicht_&_Buttonwood/tests_&_test_MarketObjects_&_test_Orderbooks_&_test_orderlevelbook.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ob = build_base_order_book()\nchain_to_cancel = ob.best_priority_chain(ASK_SIDE)\nsecond_ask_back = ob.order_chains_at_price(ASK_SIDE, Price('34.52'))[1]\nvisible_qty = ob.visible_qty_at_price(ASK_SIDE, Price('34.52'))\nhidden_qty = ob.hidden_qty_at_price(ASK_SIDE, Price('34.52'))\nnum_orders = ob.num_orders_at_price(ASK_SIDE, Price('34.52'))\nbest_price = ob.best_price(ASK_SIDE)\ncancel_command = CancelCommand(101, 1234002.123, chain_to_cancel.chain_id(),\n    chain_to_cancel.user_id(), MARKET, USER_CANCEL)\nchain_to_cancel.apply_cancel_command(cancel_command)\ncancel_report = CancelReport(102, 1234002.123, chain_to_cancel.chain_id(),\n    chain_to_cancel.user_id(), MARKET, cancel_command, USER_CANCEL)\nchain_to_cancel.apply_cancel_report(cancel_report)\nob.handle_cancel_report(cancel_report, chain_to_cancel)\nassert ob.visible_qty_at_price(ASK_SIDE, Price('34.52')) == visible_qty - 10\nassert hidden_qty - 25 == ob.hidden_qty_at_price(ASK_SIDE, Price('34.52'))\nassert ob.best_ask_price() == best_price == Price('34.52')\nassert num_orders - 1 == ob.num_orders_at_price(ASK_SIDE, Price('34.52'))\nassert ob.best_priority_chain(ASK_SIDE).chain_id() == second_ask_back.chain_id(\n    )\nchains = ob.order_chains_at_price(ASK_SIDE, Price('34.52'))\nfound = False\nfor chain in chains:\n    if chain.chain_id() == chain_to_cancel.chain_id():\n        found = True\nassert not found\nbid_prices = ob.bid_prices()\nassert len(bid_prices) == 1\nassert bid_prices[0] == Price('34.50')\nassert ob.best_bid_price() == Price('34.50')\nassert ob.best_bid_level() == PriceLevel(Price('34.50'), 120, 0, 2)\n"
-}

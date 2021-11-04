@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ctgan_dataframe",
-    "className": null,
-    "fileName": "/DAI-Lab_&_CTGAN/tests_&_integration_&_test_ctgan.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data = pd.DataFrame({'continuous': np.random.random(100), 'discrete': np.\n    random.choice(['a', 'b', 'c'], 100)})\ndiscrete_columns = ['discrete']\nctgan = CTGANSynthesizer()\nctgan.fit(data, discrete_columns, epochs=1)\nsampled = ctgan.sample(100)\nassert sampled.shape == (100, 2)\nassert isinstance(sampled, pd.DataFrame)\nassert set(sampled.columns) == {'continuous', 'discrete'}\nassert set(sampled['discrete'].unique()) == {'a', 'b', 'c'}\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_error_message",
-    "className": "TestCommunication",
-    "fileName": "/funilrys_&_PyTravisCI/tests_&_core_&_test_communication.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test of :meth:`PyTravisCI.communication.Communication.get_error_message`.\n        \"\"\"\nresponse_without_error = {'@type': 'home', '@href': '/', 'errors': {\n    'login_required': {'status': 403, 'default_message': 'login required',\n    'additional_attributes': []}, 'method_not_allowed': {'status': 405,\n    'default_message': 'method not allowed', 'additional_attributes': []},\n    'not_found': {'status': 404, 'default_message':\n    'resource not found (or insufficient access)', 'additional_attributes':\n    ['resource_type']}}}\ncomm = Communication(self.root)\nexpected = None\nactual = comm.get_error_message(response_without_error)\nself.assertEqual(expected, actual)\nresponse_with_error = {'@type': 'error', 'error_type': 'not_found',\n    'error_message': 'repository not found (or insufficient access)',\n    'resource_type': 'repository'}\nexpected = 'repository not found (or insufficient access)'\nactual = comm.get_error_message(response_with_error)\nself.assertEqual(expected, actual)\n"
-}

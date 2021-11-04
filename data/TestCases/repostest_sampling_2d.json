@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sampling_2d",
-    "className": "TestVariogramUnstructured",
-    "fileName": "/GeoStat-Framework_&_GSTools/tests_&_test_variogram_unstructured.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "x_c = np.linspace(0.0, 100.0, 600)\ny_c = np.linspace(0.0, 100.0, 600)\nx, y = np.meshgrid(x_c, y_c)\nx = np.reshape(x, len(x_c) * len(y_c))\ny = np.reshape(y, len(x_c) * len(y_c))\nrng = np.random.RandomState(1479373475)\nfield = rng.rand(len(x))\nbins = np.arange(0, 100, 10)\nbin_centres, gamma = vario_estimate_unstructured((x, y), field, bins,\n    sampling_size=2000, sampling_seed=1479373475)\nvar = 1.0 / 12.0\nself.assertAlmostEqual(gamma[0], var, places=2)\nself.assertAlmostEqual(gamma[len(gamma) // 2], var, places=2)\nself.assertAlmostEqual(gamma[-1], var, places=2)\n"
-}

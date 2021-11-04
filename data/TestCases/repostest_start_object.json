@@ -1,9 +1,0 @@
-{
-    "functionName": "test_start_object",
-    "className": "TestPJFServer",
-    "fileName": "/mseclab_&_PyJFuzz/test_&_test_pjf_server.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "server = PJFServer(configuration=PJFConfiguration(Namespace(ports={\n    'servers': {'HTTP_PORT': 8080, 'HTTPS_PORT': 8443}}, html=False, level=\n    6, command=['radamsa'], stdin=True, json={'a': 'test'}, indent=True,\n    strong_fuzz=False, url_encode=False, parameters=[], notify=False, debug\n    =False, content_type='text/plain', utf8=False, nologo=True)))\nserver.run()\ntime.sleep(2)\njson_http = urllib2.urlopen('http://127.0.0.1:8080').read()\ntry:\n    import requests\n    requests.packages.urllib3.disable_warnings()\n    json_https = requests.get('https://127.0.0.1:8443', verify=False).content\n    self.assertTrue(json_https)\nexcept ImportError:\n    pass\nself.assertTrue(json_http)\nserver.stop()\n"
-}

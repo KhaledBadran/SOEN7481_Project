@@ -1,9 +1,0 @@
-{
-    "functionName": "test_invalid_private_key_template_attribute",
-    "className": "TestCreateKeyPairResponsePayload",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_create_key_pair.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a TypeError is raised when an invalid value is used to set\n        the private key template attribute of a CreateKeyPair response payload.\n        \"\"\"\nkwargs = {'private_key_template_attribute': 'invalid'}\nself.assertRaisesRegex(TypeError,\n    'Private key template attribute must be a TemplateAttribute structure.',\n    payloads.CreateKeyPairResponsePayload, **kwargs)\nkwargs = {'private_key_template_attribute': objects.TemplateAttribute()}\nself.assertRaisesRegex(TypeError,\n    'Private key template attribute must be a TemplateAttribute structure with a PrivateKeyTemplateAttribute tag.'\n    , payloads.CreateKeyPairResponsePayload, **kwargs)\nargs = payloads.CreateKeyPairResponsePayload(\n    ), 'private_key_template_attribute', 'invalid'\nself.assertRaisesRegex(TypeError,\n    'Private key template attribute must be a TemplateAttribute structure.',\n    setattr, *args)\nargs = payloads.CreateKeyPairResponsePayload(\n    ), 'private_key_template_attribute', objects.TemplateAttribute()\nself.assertRaisesRegex(TypeError,\n    'Private key template attribute must be a TemplateAttribute structure with a PrivateKeyTemplateAttribute tag.'\n    , setattr, *args)\n"
-}

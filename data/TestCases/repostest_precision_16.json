@@ -1,9 +1,0 @@
-{
-    "functionName": "test_precision_16",
-    "className": "TestFluid",
-    "fileName": "/tum-pbs_&_PhiFlow/tests_&_test_fluid.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "try:\n    math.set_precision(16)\n    fluid = Fluid(Domain([16, 16]), density=math.maximum(0, Noise()))\n    self.assertEqual(fluid.density.data.dtype, numpy.float16)\n    self.assertEqual(fluid.velocity.unstack()[0].data.dtype, numpy.float16)\n    fluid = IncompressibleFlow().step(fluid, dt=1.0)\n    self.assertEqual(fluid.density.data.dtype, numpy.float16)\n    self.assertEqual(fluid.velocity.unstack()[0].data.dtype, numpy.float16)\nfinally:\n    math.set_precision(32)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_branches",
-    "className": "ListOfDevicesTestCase",
-    "fileName": "/mzy2240_&_ESA/tests_&_test_saw.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Ensure we get the correct number of branches, and ensure\n        we get back the expected fields.\n        \"\"\"\nresult = saw_14.ListOfDevices(ObjType='Branch')\nself.assertEqual(20, result.shape[0])\nself.assertIn('BusNum', result.columns.to_numpy())\nself.assertIn('BusNum:1', result.columns.to_numpy())\nself.assertIn('LineCircuit', result.columns.to_numpy())\nself.assertTrue(pd.api.types.is_numeric_dtype(result['BusNum']))\nself.assertTrue(pd.api.types.is_numeric_dtype(result['BusNum:1']))\nself.assertTrue(pd.api.types.is_string_dtype(result['LineCircuit']))\npd.testing.assert_series_equal(result['LineCircuit'], result['LineCircuit']\n    .str.strip())\npd.testing.assert_frame_equal(result, result.sort_values(by='BusNum'))\n"
-}

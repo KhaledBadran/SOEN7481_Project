@@ -1,9 +1,0 @@
-{
-    "functionName": "test_interp_and_diag",
-    "className": null,
-    "fileName": "/mesonepigreco_&_CellConstructor/tests_&_TestInterpolateDynmat_&_test_interp_and_diag.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "total_path = os.path.dirname(os.path.abspath(__file__))\nos.chdir(total_path)\ndyn = CC.Phonons.Phonons(dyn_name, nqirr)\ninterp_dyn = dyn.Interpolate(dyn.GetSupercell(), target_cell)\ninterp_dyn.save_qe('__trial__')\nnew_interp_dyn = CC.Phonons.Phonons('__trial__', interp_dyn.nqirr)\nw_new, p_new = new_interp_dyn.DiagonalizeSupercell()\nw_old, p_old = interp_dyn.DiagonalizeSupercell()\ngood_mask = np.abs(w_new - w_old) < 1e-07\nprint('Freq before saving-reloading | Freq after saving-reloading')\nprint('\\n'.join(['{:16.8f} | {:16.8f}  Good? {}'.format(w_old[i] * RY_TO_CM,\n    w_new[i] * RY_TO_CM, good_mask[i]) for i in range(len(w_old))]))\nassert np.max(np.abs(w_new - w_old)) < 1e-07\nsupercell_dyn = interp_dyn.GenerateSupercellDyn(target_cell)\nw_again, p_again = supercell_dyn.DiagonalizeSupercell()\ngood_mask = np.abs(w_again - w_old) < 1e-06\nprint('Freq before saving-reloading | Freq after saving-reloading')\nprint('\\n'.join(['{:16.8f} | {:16.8f}  Good? {}'.format(w_again[i] *\n    RY_TO_CM, w_new[i] * RY_TO_CM, good_mask[i]) for i in range(len(w_old))]))\nassert np.max(np.abs(w_new - w_old)) < 1e-06\npytest.mark.parametrize('dyn_name, nqirr, target_cell', TEST_DYN)"
-}

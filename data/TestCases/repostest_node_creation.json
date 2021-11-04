@@ -1,9 +1,0 @@
-{
-    "functionName": "test_node_creation",
-    "className": null,
-    "fileName": "/Silmathoron_&_NNGT/testing_&_test_basics.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    When making graphs, test node creation function.\n    \"\"\"\ng = nngt.Graph(100, name='new_node_test')\nassert g.node_nb(\n    ) == 100, \"Error on '{}': invalid initial nodes ({} vs {} expected).\".format(\n    g.name, g.node_nb(), 100)\nn = g.new_node()\nassert g.node_nb(\n    ) == 101 and n == 100, \"Error on '{}': ({}, {}) vs (101, 100) expected.\".format(\n    g.name, g.node_nb(), n)\nnn = g.new_node(2)\nassert g.node_nb() == 103 and tuple(nn) == (101, 102\n    ), \"Error on '{}': ({}, {}, {}) vs (103, 101, 102) expected.\".format(g.\n    name, g.node_nb(), nn[0], nn[1])\npytest.mark.mpi_skip"
-}

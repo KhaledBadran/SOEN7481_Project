@@ -1,9 +1,0 @@
-{
-    "functionName": "test_annot",
-    "className": null,
-    "fileName": "/nipy_&_PySurfer/surfer_&_tests_&_test_viz.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test plotting of annot.\"\"\"\n_set_backend()\nannots = ['aparc', 'aparc.a2005s']\nborders = [True, False, 2]\nalphas = [1, 0.5]\nbrain = Brain(*std_args)\nview = get_view(brain)\nfor a, b, p in zip(annots, borders, alphas):\n    brain.add_annotation(a, b, p, opacity=0.8)\ncheck_view(brain, view)\nbrain.set_surf('white')\nwith pytest.raises(ValueError):\n    brain.add_annotation('aparc', borders=-1)\nsubj_dir = utils._get_subjects_dir()\nannot_path = pjoin(subj_dir, subject_id, 'label', 'lh.aparc.a2009s.annot')\nlabels, ctab, names = nib.freesurfer.read_annot(annot_path)\nbrain.add_annotation((labels, ctab))\nbrain.add_annotation('aparc', color='red', remove_existing=True)\nsurf = brain.annot['surface']\nctab = surf.module_manager.scalar_lut_manager.lut.table\nfor color in ctab:\n    assert color[:3] == (255, 0, 0)\nbrain.close()\nrequires_fsaverage()"
-}

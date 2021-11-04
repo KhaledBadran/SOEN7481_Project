@@ -1,9 +1,0 @@
-{
-    "functionName": "test_WavesetReader",
-    "className": "TestTools",
-    "fileName": "/JonasReubelt_&_PeeEmTee/peeemtee_&_tests_&_test_core.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "reader = WavesetReader('peeemtee/tests/samples/waveform_data_dummy.h5')\nwavesets = reader.wavesets\nhvs = ['900', '950', '1000', '1050', '1100']\nassert sorted(wavesets) == sorted(hvs)\nb = np.array([[0, 1, 2], [0, 1, 2], [0, 1, 2]])\nfor i, hv in enumerate(hvs):\n    waveset = reader[int(hv)]\n    a = np.arange(1, 10, dtype=np.int8).reshape(3, 3) + i * 10\n    np.testing.assert_array_equal(waveset.raw_waveforms, a)\n    v_gain = waveset.v_gain\n    assert v_gain == i * 0.1\n    np.testing.assert_array_equal(waveset.waveforms, a * v_gain)\n    assert waveset.h_int == i * 10\n    np.testing.assert_array_almost_equal(waveset.zeroed_waveforms(0, 1), b *\n        v_gain)\n"
-}

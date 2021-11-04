@@ -1,9 +1,0 @@
-{
-    "functionName": "test_tuning_minimize",
-    "className": null,
-    "fileName": "/HDI-Project_&_BTB/tests_&_integration_&_test_tuning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "hyperparams = {'bhp': BooleanHyperParam(default=False), 'chp':\n    CategoricalHyperParam(choices=['a', 'b', None], default=None), 'fhp':\n    FloatHyperParam(min=0.1, max=1.0, default=0.5), 'ihp': IntHyperParam(\n    min=-1, max=1)}\ntunable = Tunable(hyperparams)\ntuner = GPTuner(tunable, maximize=False)\nfor _ in range(10):\n    proposed = tuner.propose(1)\n    tuner.record(proposed, random.random())\nassert len(tuner.trials) == 10\nassert len(tuner._trials_set) == 10\nassert len(tuner.raw_scores) == 10\nassert len(tuner.scores) == 10\nassert all(-tuner.raw_scores == tuner.scores)\n"
-}

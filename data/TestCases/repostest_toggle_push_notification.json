@@ -1,9 +1,0 @@
-{
-    "functionName": "test_toggle_push_notification",
-    "className": "TestToggleX",
-    "fileName": "/albertogeniola_&_MerossIot/tests_&_test_togglex.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "if self.test_device is None:\n    self.skipTest('No ToggleX device has been found to run this test on.')\n    return\nnew_meross_client = await MerossHttpClient.async_from_user_password(email=\n    EMAIL, password=PASSWORD)\nm = None\ntry:\n    m = MerossManager(http_client=new_meross_client)\n    await m.async_init()\n    await m.async_device_discovery()\n    devs = m.find_devices(device_uuids=(self.test_device.uuid,))\n    dev = devs[0]\n    r = await self.test_device.async_turn_off()\n    await asyncio.sleep(2)\n    r = await self.test_device.async_turn_on()\n    await asyncio.sleep(2)\n    self.assertTrue(self.test_device.is_on())\n    self.assertTrue(dev.is_on())\n    await asyncio.sleep(1)\n    r = await self.test_device.async_turn_off()\n    await asyncio.sleep(2)\n    self.assertFalse(self.test_device.is_on())\n    self.assertFalse(dev.is_on())\nfinally:\n    if m is not None:\n        m.close()\n    await new_meross_client.async_logout()\nunittest_run_loop"
-}

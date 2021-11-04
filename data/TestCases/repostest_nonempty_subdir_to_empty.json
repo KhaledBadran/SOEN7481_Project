@@ -1,9 +1,0 @@
-{
-    "functionName": "test_nonempty_subdir_to_empty",
-    "className": "TestEmpties",
-    "fileName": "/kenfar_&_DataGristle/scripts_&_tests_&_test_gristle_dir_merger_cmd.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"      starting dirs & files:\n            \tmp\\\\TestGristleDirMerger_source_?\\\\mysubdir\n            \tmp\\\\TestGristleDirMerger_source_?\\\\mysubdir\foo.csv\n            \tmp\\\\TestGristleDirMerger_dest_?\n                  should become:\n            \tmp\\\\TestGristleDirMerger_source_?\n            \tmp\\\\TestGristleDirMerger_dest_?\\\\mysubdir\foo.csv\n        \"\"\"\n_ = os.path.join(self.source_dir, 'mysubdir')\nsubdir = os.path.join(self.source_dir, 'mysubdir')\nos.mkdir(subdir)\ntt.touch(os.path.join(subdir, 'foo.csv'))\nself.cmd = (\n    '%(pgm)s %(source_dir)s                                     %(dest_dir)s                                  --match-on-name-only                               --log-level debug                                  -r                                           '\n     % {'pgm': PGM, 'source_dir': self.source_dir, 'dest_dir': self.dest_dir})\nself.executor(self.cmd)\nprint('dest_dir: %s' % self.dest_dir)\nprint(os.listdir(self.dest_dir))\nprint('dest sub dir: %s' % os.path.join(self.dest_dir, 'mysubdir'))\nprint('dest sub contents: ')\nprint('is a file? %s' % os.path.isfile(os.path.join(self.dest_dir, 'mysubdir'))\n    )\nassert 'mysubdir' in os.listdir(self.dest_dir)\nassert not os.path.exists(self.source_dir)\nassert 'foo.csv' in os.listdir(os.path.join(self.dest_dir, 'mysubdir'))\n"
-}

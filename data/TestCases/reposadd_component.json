@@ -1,9 +1,0 @@
-{
-    "functionName": "add_component",
-    "className": "Pipeline",
-    "fileName": "/konstantint_&_PassportEye/passporteye_&_util_&_pipeline.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        Add a given callable to a list of components. The provides and depends are lists of strings, specifying what\n        keys the component computes and what keys it requires to be present. If those are not given, the callable must\n        have fields __provides__ and __depends__.\n        \"\"\"\nprovides = provides or getattr(callable, '__provides__', [])\ndepends = depends or getattr(callable, '__depends__', [])\nfor p in provides:\n    if p in self.whoprovides:\n        raise Exception('There is already a component that provides %s' % p)\nself.provides[name] = provides\nself.depends[name] = depends\nself.components[name] = callable\nfor p in provides:\n    self.whoprovides[p] = name\n"
-}

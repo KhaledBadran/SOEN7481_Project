@@ -1,9 +1,0 @@
-{
-    "functionName": "test_backref_matcher",
-    "className": "TestRegex",
-    "fileName": "/named-data_&_PyNDN2/tests_&_unit_tests_&_test_regex.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "backRef = NdnRegexBackrefManager()\ncm = NdnRegexBackrefMatcher('(<a><b>)', backRef)\nbackRef.pushRef(cm)\ncm.lateCompile()\nres = cm.match(Name('/a/b/c'), 0, 2)\nself.assertEqual(True, res)\nself.assertEqual(2, len(cm.getMatchResult()))\nself.assertEqual('a', cm.getMatchResult()[0].toEscapedString())\nself.assertEqual('b', cm.getMatchResult()[1].toEscapedString())\nself.assertEqual(1, backRef.size())\nbackRef = NdnRegexBackrefManager()\ncm = NdnRegexBackrefMatcher('(<a>(<b>))', backRef)\nbackRef.pushRef(cm)\ncm.lateCompile()\nres = cm.match(Name('/a/b/c'), 0, 2)\nself.assertEqual(True, res)\nself.assertEqual(2, len(cm.getMatchResult()))\nself.assertEqual('a', cm.getMatchResult()[0].toEscapedString())\nself.assertEqual('b', cm.getMatchResult()[1].toEscapedString())\nself.assertEqual(2, backRef.size())\nself.assertEqual('a', backRef.getBackref(0).getMatchResult()[0].\n    toEscapedString())\nself.assertEqual('b', backRef.getBackref(0).getMatchResult()[1].\n    toEscapedString())\nself.assertEqual('b', backRef.getBackref(1).getMatchResult()[0].\n    toEscapedString())\n"
-}

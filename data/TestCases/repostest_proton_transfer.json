@@ -1,9 +1,0 @@
-{
-    "functionName": "test_proton_transfer",
-    "className": null,
-    "fileName": "/mesonepigreco_&_CellConstructor/tests_&_TestProtonTransfer_&_test_proton_transfer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "total_path = os.path.dirname(os.path.abspath(__file__))\nos.chdir(total_path)\ntry:\n    from mpi4py import MPI\n    comm = MPI.COMM_WORLD\n    rank = comm.Get_rank()\nexcept:\n    __MPI__ = False\n    rank = 0\nfrom ase.visualize import view\nN_SIZE = 1000\nT = 0\nMOLS = [(6, 7, 3), (9, 11, 6), (0, 1, 9), (3, 5, 0)]\ndynmat = CC.Phonons.Phonons('dynmat', nqirr=1)\ndynmat.Symmetrize()\nif rank == 0:\n    print('Extracting random configurations...')\nstructures = dynmat.ExtractRandomStructures(N_SIZE, T)\nif rank == 0:\n    print('Computing the proton transfer...')\nt1 = time.time()\npt_coords = CC.Manipulate.MeasureProtonTransfer(structures, MOLS)\nt2 = time.time()\nif rank == 0:\n    print('Time elapsed:', t2 - t1)\nif rank == 0:\n    print('Plotting the results...')\nh, be = np.histogram(pt_coords, 100)\nx_axis = be[:-1] + np.diff(be) / 2\nif rank == 0:\n    print('Probability of Proton transfer: ', sum((pt_coords >= 0).astype(\n        int)) / float(len(pt_coords)))\nif rank == 0:\n    plt.figure()\n    plt.fill_between(x_axis, h, 0, color='r', alpha=0.8)\n"
-}

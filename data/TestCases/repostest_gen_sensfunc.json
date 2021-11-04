@@ -1,9 +1,0 @@
-{
-    "functionName": "test_gen_sensfunc",
-    "className": null,
-    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_fluxspec.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "spectrograph = load_spectrograph('shane_kast_blue')\npar = spectrograph.default_pypeit_par()\nstd_file, sci_file = kast_blue_files\nsensFunc = sensfunc.UVIS(std_file, sens_file)\nassert sensFunc.meta_spec['BINNING'] == '1,1'\nassert sensFunc.meta_spec['TARGET'] == 'Feige 66'\nsensFunc.run()\nassert os.path.basename(sensFunc.meta_table['CAL_FILE'][0]\n    ) == 'feige66_002.fits'\nassert 'SENSFUNC' in sensFunc.out_table.keys()\nsensFunc.save()\ncooked_required"
-}

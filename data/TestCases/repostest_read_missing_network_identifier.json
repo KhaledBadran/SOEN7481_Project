@@ -1,9 +1,0 @@
-{
-    "functionName": "test_read_missing_network_identifier",
-    "className": "TestDeviceCredential",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_credentials.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a DeviceCredential struct can be read from a data stream\n        missing the network identifier data.\n        \"\"\"\ncredential = objects.DeviceCredential()\nself.assertEqual(None, credential.device_serial_number)\nself.assertEqual(None, credential.password)\nself.assertEqual(None, credential.device_identifier)\nself.assertEqual(None, credential.network_identifier)\nself.assertEqual(None, credential.machine_identifier)\nself.assertEqual(None, credential.media_identifier)\ncredential.read(self.encoding_missing_network_identifier)\nself.assertEqual('serNum123456', credential.device_serial_number)\nself.assertEqual('secret', credential.password)\nself.assertEqual('devID2233', credential.device_identifier)\nself.assertEqual(None, credential.network_identifier)\nself.assertEqual('machineID1', credential.machine_identifier)\nself.assertEqual('mediaID313', credential.media_identifier)\n"
-}

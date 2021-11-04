@@ -1,9 +1,0 @@
-{
-    "functionName": "test_failed_graph_operation",
-    "className": null,
-    "fileName": "/seung-lab_&_PyChunkedGraph/pychunkedgraph_&_tests_&_test_root_lock.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Ensure that root locks got released after successful\n        root lock acquisition + *unsuccessful* graph operation\"\"\"\nfake_operation_id = big_uint64()\nfake_locked_root_ids = np.array((big_uint64(), big_uint64()))\ncg = mocker.MagicMock()\ncg.get_unique_operation_id = mocker.MagicMock(return_value=fake_operation_id)\ncg.lock_root_loop = mocker.MagicMock(return_value=(True,\n    fake_locked_root_ids), side_effect=root_lock_tracker.add_locks)\ncg.unlock_root = mocker.MagicMock(return_value=True, side_effect=\n    root_lock_tracker.remove_lock)\nwith pytest.raises(cg_exceptions.PreconditionError):\n    with RootLock(cg, fake_locked_root_ids):\n        raise cg_exceptions.PreconditionError('Something went wrong')\nassert not root_lock_tracker.active_locks[fake_operation_id]\n"
-}

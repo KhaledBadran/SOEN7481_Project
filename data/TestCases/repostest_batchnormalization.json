@@ -1,9 +1,0 @@
-{
-    "functionName": "test_batchnormalization",
-    "className": "TestKerasAPI",
-    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_keras_&_test_keras_api.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "K.set_image_dim_ordering('th')\ninput_data = np.random.random_sample([2, 5, 32, 32])\nblayer = BLayer.BatchNormalization(axis=1, input_shape=(5, 32, 32))\nklayer = KLayer.BatchNormalization(axis=1, input_shape=(5, 32, 32))\nself.compare_newapi(klayer, blayer, input_data, WeightsConverter.\n    convert_batchnormalization)\nK.set_image_dim_ordering('tf')\ninput_data2 = np.random.random_sample([2, 32, 32, 4])\nblayer = BLayer.BatchNormalization(axis=-1, dim_ordering='tf', input_shape=\n    (32, 32, 4))\nklayer = KLayer.BatchNormalization(axis=-1, input_shape=(32, 32, 4))\nself.compare_newapi(klayer, blayer, input_data2, WeightsConverter.\n    convert_batchnormalization)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_kernels",
-    "className": null,
-    "fileName": "/LRydin_&_KramersMoyal/test_&_kernels_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "for dim in [1, 2, 3]:\n    edges = [np.linspace(-10, 10, 100000 // 10 ** dim, endpoint=True)] * dim\n    mesh = np.asarray(list(product(*edges)))\n    dx = (edges[0][1] - edges[0][0]) ** dim\n    for kernel in [epanechnikov, gaussian, uniform, triagular]:\n        for bw in [0.1, 0.3, 0.5, 1.0, 1.5, 2.0]:\n            kernel_ = kernel(mesh, bw=bw).reshape(*(edge.size for edge in\n                edges))\n            passed = np.allclose(kernel_.sum() * dx, 1, atol=0.01)\n            print('Kernel {0:10s}\\t with {1:.2f} bandwidth at {2}D passed: {3}'\n                .format(kernel.__name__, bw, dim, passed))\n        print()\n"
-}

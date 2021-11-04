@@ -1,9 +1,0 @@
-{
-    "functionName": "test_Param_successful_fields",
-    "className": null,
-    "fileName": "/BenSDuggan_&_DAPT/tests_&_test_param.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "create_complex_test_file()\ndb = dapt.Delimited_file('test.csv', ',')\nparam = dapt.Param(db)\nactual = param.next_parameters()\nexpected = actual\nactual = param.successful(actual['id'])\nexpected = OrderedDict({'id': 't2', 'start-time': '', 'end-time': '',\n    'status': 'finished', 'comment': '', 'performed-by': '', 'a': '10', 'b':\n    '10', 'c': ''})\nif (datetime.datetime.strptime(datetime.datetime.now().strftime(\n    '%Y-%m-%d %H:%M:%S'), '%Y-%m-%d %H:%M:%S') - datetime.datetime.strptime\n    (actual['start-time'], '%Y-%m-%d %H:%M:%S')).seconds < 15:\n    expected['start-time'] = actual['start-time']\nif (datetime.datetime.strptime(datetime.datetime.now().strftime(\n    '%Y-%m-%d %H:%M:%S'), '%Y-%m-%d %H:%M:%S') - datetime.datetime.strptime\n    (actual['end-time'], '%Y-%m-%d %H:%M:%S')).seconds < 15:\n    expected['end-time'] = actual['end-time']\nassert actual == expected, 'Cannot update the status of the paramater set.'\n"
-}

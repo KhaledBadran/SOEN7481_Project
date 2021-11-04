@@ -1,9 +1,0 @@
-{
-    "functionName": "test_submit_invalid_scheme",
-    "className": "TestCase",
-    "fileName": "/IntegralDefense_&_ACE/lib_&_saq_&_modules_&_test_cloudphish.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "root = create_root_analysis(analysis_mode=ANALYSIS_MODE_ANALYSIS)\nroot.initialize_storage()\nurl = root.add_observable(F_URL, 'mailto:john@smith.com')\nurl.add_directive(DIRECTIVE_CRAWL)\nroot.save()\nroot.schedule()\nengine = TestEngine(analysis_pools={ANALYSIS_MODE_ANALYSIS: 1,\n    ANALYSIS_MODE_CLOUDPHISH: 1}, local_analysis_modes=[\n    ANALYSIS_MODE_ANALYSIS, ANALYSIS_MODE_CLOUDPHISH])\nengine.enable_module('analysis_module_cloudphish', ANALYSIS_MODE_ANALYSIS)\nengine.enable_module('analysis_module_cloudphish_request_analyzer',\n    ANALYSIS_MODE_CLOUDPHISH)\nengine.enable_module('analysis_module_crawlphish', ANALYSIS_MODE_CLOUDPHISH)\nengine.controlled_stop()\nengine.start()\nengine.wait()\nself.assertEquals(log_count('is not a supported scheme for cloudphish'), 1)\n"
-}

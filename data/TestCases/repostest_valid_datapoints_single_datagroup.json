@@ -1,9 +1,0 @@
-{
-    "functionName": "test_valid_datapoints_single_datagroup",
-    "className": "TestGetDatapoints",
-    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_converters.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test valid parsing of datapoints when in a single dataGroup.\n        \"\"\"\nroot = etree.Element('experiment')\ndatagroup = etree.SubElement(root, 'dataGroup')\nprop = etree.SubElement(datagroup, 'property')\nprop.set('id', 'x1')\nprop.set('name', 'temperature')\nprop.set('units', 'K')\nprop = etree.SubElement(datagroup, 'property')\nprop.set('id', 'x2')\nprop.set('name', 'ignition delay')\nprop.set('units', 'us')\nnum_points = 10\ntemps = numpy.random.uniform(low=300.0, high=1000.0, size=(num_points,))\nignition_delays = numpy.random.uniform(low=100.0, high=700.0, size=(\n    num_points,))\nfor temp, ignition_delay in zip(temps, ignition_delays):\n    datapoint = etree.SubElement(datagroup, 'dataPoint')\n    x1 = etree.SubElement(datapoint, 'x1')\n    x1.text = str(temp)\n    x2 = etree.SubElement(datapoint, 'x2')\n    x2.text = str(ignition_delay)\ndatapoints = get_datapoints(root)\nassert len(datapoints) == num_points\nfor datapoint, temp, ignition_delay in zip(datapoints, temps, ignition_delays):\n    assert datapoint['temperature'] == [str(temp) + ' K']\n    assert datapoint['ignition-delay'] == [str(ignition_delay) + ' us']\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_invalid_apparatus_types",
-    "className": "TestGetExperiment",
-    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_converters.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Ensure unsupported apparatus types raise correct errors.\n        \"\"\"\nroot = etree.Element('experiment')\nexp = etree.SubElement(root, 'experimentType')\nexp.text = 'Ignition delay measurement'\napp = etree.SubElement(root, 'apparatus')\nkind = etree.SubElement(app, 'kind')\nkind.text = apparatus\nwith pytest.raises(NotImplementedError) as excinfo:\n    get_experiment_kind(root)\nassert apparatus + ' experiment not (yet) supported' in str(excinfo.value)\npytest.mark.parametrize('apparatus', ['perfectly stirred reactor',\n    'internal combustion engine', 'flow reactor'])"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_vm_mem_read",
-    "className": null,
-    "fileName": "/BTaskaya_&_Arkhe/test_arkhe.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "code = create_instr('read', 0, 1)\nvm = Arkhe(code)\nvm.registers[0] = 16\nwith pytest.raises(MemoryFault):\n    vm.exc_instr()\nvm.memory.alloc(100)\nvm.memory[16] = 'hello'\nvm.counter = 0\nvm.exc_instr()\nassert vm.registers[1] == 'hello'\n"
-}

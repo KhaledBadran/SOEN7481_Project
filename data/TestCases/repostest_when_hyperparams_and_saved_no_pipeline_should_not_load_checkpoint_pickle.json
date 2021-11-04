@@ -1,9 +1,0 @@
-{
-    "functionName": "test_when_hyperparams_and_saved_no_pipeline_should_not_load_checkpoint_pickle",
-    "className": null,
-    "fileName": "/Neuraxio_&_Neuraxle/testing_&_test_pickle_checkpoint_step.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "tape = TapeCallbackFunction()\npickle_checkpoint_step = DefaultCheckpoint()\npipeline_save = create_pipeline(tmpdir=tmpdir, pickle_checkpoint_step=\n    Identity(), tape=TapeCallbackFunction(), hyperparameters=\n    HyperparameterSamples({'a__learning_rate': 1}), different=True,\n    save_pipeline=False)\npipeline_save.fit_transform(data_inputs, expected_outputs)\npipeline_load = create_pipeline(tmpdir=tmpdir, pickle_checkpoint_step=\n    pickle_checkpoint_step, tape=tape, hyperparameters=\n    HyperparameterSamples({'a__learning_rate': 1}))\npipeline_load, actual_data_inputs = pipeline_load.fit_transform(data_inputs,\n    expected_outputs)\nactual_tape = tape.get_name_tape()\nassert np.array_equal(actual_data_inputs, data_inputs)\nassert actual_tape == ['1', '2', '3']\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_separate_independent_conditional_with_q_sqrt_none",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_conditionals_&_test_multioutput.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    In response to bug #1523, this test checks that separate_independent_condtional\n    does not fail when q_sqrt=None.\n    \"\"\"\nq_sqrt = None\ndata = DataMixedKernel\nkern_list = [SquaredExponential() for _ in range(data.L)]\nkernel = gpflow.kernels.SeparateIndependent(kern_list)\ninducing_variable_list = [InducingPoints(data.X[:data.M, (...)]) for _ in\n    range(data.L)]\ninducing_variable = mf.SeparateIndependentInducingVariables(\n    inducing_variable_list)\nmu_1, var_1 = gpflow.conditionals.conditional(data.X, inducing_variable,\n    kernel, data.mu_data, full_cov=False, full_output_cov=False, q_sqrt=\n    q_sqrt, white=True)\n"
-}

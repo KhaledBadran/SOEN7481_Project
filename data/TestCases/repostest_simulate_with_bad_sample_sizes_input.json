@@ -1,9 +1,0 @@
-{
-    "functionName": "test_simulate_with_bad_sample_sizes_input",
-    "className": null,
-    "fileName": "/NASA_&_MLMCPy/tests_&_mlmc_&_test_MLMCSimulator.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Tests running MLMC by specifying the number of samples but providing \n    bad values for the sample_sizes input. Makes sure exceptions are raised.\n    \"\"\"\ntest_mlmc = MLMCSimulator(models=models_from_data, data=data_input)\nwith pytest.raises(ValueError):\n    test_mlmc.simulate(epsilon=1.0, sample_sizes=sample_sizes)\npytest.mark.parametrize('sample_sizes', [[5], [2, 2, 2, 2], [-1, 5, 5]])"
-}

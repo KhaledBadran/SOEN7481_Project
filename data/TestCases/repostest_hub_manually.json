@@ -1,9 +1,0 @@
-{
-    "functionName": "test_hub_manually",
-    "className": null,
-    "fileName": "/marten-de-vries_&_Flask-WebSub/tests_&_test_integration.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "resp = requests.post('http://localhost:5001/hub')\nassert resp.status_code == 400\nresp2 = requests.post('http://localhost:5001/hub', data={'hub.mode':\n    'unknown', 'hub.topic': 'http://example.com', 'hub.callback':\n    'http://unimportant/'})\nassert resp2.status_code == 400\nresp3 = requests.post('http://localhost:5001/hub', data={'hub.mode':\n    'subscribe', 'hub.topic': 'http://example.com', 'hub.callback':\n    'http://unimportant/', 'hub.lease_seconds': 10000000000000000000})\nassert resp3.status_code == 202\nresp4 = requests.post('http://localhost:5001/hub', data={'hub.mode':\n    'subscribe', 'hub.topic': 'http://example.com', 'hub.callback':\n    'http://unimportant/', 'hub.lease_seconds': -10})\nassert resp4.status_code == 400\nresp5 = requests.post('http://localhost:5001/hub', data={'hub.mode':\n    'subscribe', 'hub.topic': 'http://example.com', 'hub.callback':\n    'http://unimportant/', 'hub.secret': 'X' * 1024})\nassert resp5.status_code == 400\nresp6 = requests.post('http://localhost:5001/hub', data={'hub.mode':\n    'publish', 'hub.topic': 'http://localhost:5001/ping'})\nassert resp6.status_code == 202\n"
-}

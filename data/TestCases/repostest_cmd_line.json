@@ -1,9 +1,0 @@
-{
-    "functionName": "test_cmd_line",
-    "className": "TestProgramsHelp",
-    "fileName": "/PmagPy_&_PmagPy/pmagpy_tests_&_test_programs.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "programs_list = os.listdir(programs_WD)\nif not sys.platform in ['win32', 'win62']:\n    conversion_scripts = os.listdir(os.path.join(programs_WD,\n        'conversion_scripts'))\n    programs_list.extend(conversion_scripts)\n    conversion_scripts2 = os.listdir(os.path.join(programs_WD,\n        'conversion_scripts2'))\n    programs_list.extend(conversion_scripts2)\nnot_checked = []\npip_anaconda = False\nif sys.platform in ['win32', 'win62']:\n    res = self.env.run('where angle.py')\n    if res.stderr:\n        pip_anaconda = True\nfor prog in programs_list:\n    if prog in ['__init__.py', 'program_envs.py', 'template_magic.py']:\n        continue\n    if 'gui' in prog:\n        continue\n    if prog.endswith('.pyc') or '#' in prog:\n        continue\n    if not prog.endswith('.py'):\n        not_checked.append(prog)\n        continue\n    if prog.lower() != prog:\n        not_checked.append(prog)\n        continue\n    if pip_anaconda:\n        prog = prog[:-3]\n    print('Testing help message for:', prog)\n    res = self.env.run(prog, '-h')\nprint('not_checked', not_checked)\n"
-}

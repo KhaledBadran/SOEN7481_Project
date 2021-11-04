@@ -1,9 +1,0 @@
-{
-    "functionName": "test_gen_xrf_map_const_2",
-    "className": null,
-    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_simulation_&_tests_&_test_sim_xrf_scan_data.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Failing test of ``gen_xrf_map_const``\"\"\"\nelement_groups = {'Fe_L': {'area': 800}, 'Se_L': {'area': 900}, 'W_M': {\n    'area': 1000}}\nbackground_area = 1000\nnx, ny = 50, 100\nwith pytest.raises(RuntimeError, match='Elemental line Fe_L is not supported'):\n    gen_xrf_map_const(element_groups, nx=nx, ny=ny, incident_energy=12.0,\n        background_area=background_area)\nwith pytest.raises(RuntimeError, match=\n    'Spectrum must contain at least one point'):\n    gen_xrf_map_const(element_groups, nx=nx, ny=ny, n_spectrum_points=0,\n        incident_energy=12.0, background_area=background_area)\nwith pytest.raises(RuntimeError, match='XRF map has zero pixels'):\n    gen_xrf_map_const(element_groups, nx=0, ny=ny, n_spectrum_points=1000,\n        incident_energy=12.0, background_area=background_area)\n"
-}

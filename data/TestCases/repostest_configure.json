@@ -1,9 +1,0 @@
-{
-    "functionName": "test_configure",
-    "className": null,
-    "fileName": "/goodmami_&_penman/tests_&_test_layout.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "g = codec.decode('(a / A)')\nassert configure(g) == Tree(('a', [('/', 'A')]))\nwith pytest.raises(LayoutError):\n    configure(g, top='A')\ng = codec.decode('(a / A :consist-of (b / B))')\nassert configure(g) == Tree(('a', [('/', 'A'), (':consist-of', ('b', [('/',\n    'B')]))]))\nassert configure(g, top='b') == Tree(('b', [('/', 'B'), (':consist', ('a',\n    [('/', 'A')]))]))\namr_codec = PENMANCodec(model=amr_model)\ng = amr_codec.decode('(a / A :consist-of (b / B))')\nassert configure(g, model=amr_model) == Tree(('a', [('/', 'A'), (\n    ':consist-of', ('b', [('/', 'B')]))]))\nassert configure(g, top='b', model=amr_model) == Tree(('b', [('/', 'B'), (\n    ':consist-of-of', ('a', [('/', 'A')]))]))\n"
-}

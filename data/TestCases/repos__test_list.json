@@ -1,9 +1,0 @@
-{
-    "functionName": "__test_list",
-    "className": "RedisListTestCase",
-    "fileName": "/wo1fsea_&_PyEasyRPC/tests_&_test_redis_collections_&_test_list.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "data = [1, 2.0, 'string', {'int': 1, 'float': 2.0, 'string': 'string'}, [0,\n    '1', 2.0, 3]]\nl = List(redis_key, packer)\nl.clear()\nself.assertEqual(len(l), 0)\nl.extend(data)\nself.assertEqual(l, data)\nself.assertEqual(l.data, data)\nself.assertEqual(l.copy(), data)\nself.assertEqual(len(l), len(data))\nl.clear()\nfor d in data:\n    self.assertFalse(d in l)\n    l.append(d)\n    self.assertTrue(d in l)\nfor d in data:\n    self.assertTrue(d in l)\n    l.remove(d)\n    self.assertFalse(d in l)\nl.clear()\ntest_l = list()\ni = 0\nfor ii in range(10):\n    i = i // 2\n    test_l.insert(i, i)\n    l.insert(i, i)\n    self.assertEqual(l, test_l)\n    self.assertEqual(l.count(i), l.count(i))\n    self.assertEqual(l.index(i), l.index(i))\ntest_l.reverse()\nl.reverse()\nself.assertEqual(l, test_l)\ntest_l.sort()\nl.sort()\ntest_l.insert(0, 100)\nl.insert(0, 100)\nself.assertEqual(l, test_l)\ntest_l.clear()\nl.clear()\nfor i in range(10):\n    test_l.append(i)\n    l.append(i)\nfor i in range(10):\n    l[i] += 1\n    test_l[i] += 1\n    self.assertEqual(l[i], test_l[i])\nfor i in range(3):\n    l.pop(i)\n    test_l.pop(i)\n    self.assertEqual(l[i], test_l[i])\nl += [1, 2, 3]\ntest_l += [1, 2, 3]\nself.assertEqual(l, test_l)\nl += [1, 2, 3]\ntest_l += [1, 2, 3]\nself.assertEqual(l, test_l)\nl1 = List(redis_key, packer)\nself.assertEqual(l1, l)\nl.clear()\nself.assertEqual(len(l1), 0)\n"
-}

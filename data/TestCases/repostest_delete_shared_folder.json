@@ -1,9 +1,0 @@
-{
-    "functionName": "test_delete_shared_folder",
-    "className": "TestFolder",
-    "fileName": "/Keeper-Security_&_Commander/unit-tests_&_test_command_folder.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "params = get_synced_params()\ncmd = folder.FolderRemoveCommand()\nshared_folder = next(iter([x for x in params.folder_cache.values() if x.\n    type == 'shared_folder']))\ndef shared_folder_update(rq):\n    self.assertEqual(rq['command'], 'shared_folder_update')\n    self.assertEqual(rq['operation'], 'delete')\n    self.assertEqual(rq['shared_folder_uid'], shared_folder.uid)\nKeeperApiHelper.communicate_expect([shared_folder_update])\ncmd.execute(params, force=True, folder=shared_folder.name)\nself.assertTrue(KeeperApiHelper.is_expect_empty())\nwith mock.patch('keepercommander.commands.folder.user_choice') as mock_choice:\n    mock_choice.return_value = 'y'\n    KeeperApiHelper.communicate_expect([shared_folder_update])\n    cmd.execute(params, folder=shared_folder.name)\n    self.assertTrue(KeeperApiHelper.is_expect_empty())\n    mock_choice.return_value = 'n'\n    cmd.execute(params, folder=shared_folder.name)\n"
-}

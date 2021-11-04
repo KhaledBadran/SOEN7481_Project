@@ -1,9 +1,0 @@
-{
-    "functionName": "disabled_test_case_0",
-    "className": null,
-    "fileName": "/david-leon_&_Dandelion/test_&_test_ChainCRF.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "y = tensor.imatrix('y')\nx = tensor.ftensor3('x')\nU = tensor.fmatrix('U')\nx_nobatch = tensor.fmatrix('x_nobatch')\ncost1 = free_energy0(x, U)\ncost2 = CRF_forward(x, U)\ncost3 = CRF_forward_nobatch(x_nobatch, U)\nseq1 = viterbi_decode(x, U)\nseq2 = CRF_decode(x, U)\nprint('compiling f1 & f2 ...')\nf1 = theano.function([x, U], cost1)\nf2 = theano.function([x, U], cost2)\nprint('compiling f3 ...')\nf3 = theano.function([x, U], seq1)\nprint('compiling f4 ...')\nf4 = theano.function([x, U], seq2)\nprint('compiling f5 ...')\nf5 = theano.function([x_nobatch, U], cost3)\nB, T, N = 7, 100, 20\nfor i in range(1):\n    x = np.random.rand(B, T, N).astype(np.float32)\n    U = np.random.rand(N, N).astype(np.float32)\n    c1 = f1(x, U)\n    c2 = f2(x, U)\n    s1 = f3(x, U)\n    s2 = f4(x, U)\n    print(c1)\n    print(c2)\n    print(c1 == c2)\n    if np.all(c1 == c2):\n        print('c pass')\n    else:\n        raise ValueError('c not same!')\n    print(s1)\n    print(s2)\n    print(s1.shape)\n    print(s2.shape)\n    print(s1 == s2)\n    if np.all(s1 == s2):\n        print('s pass')\n    else:\n        raise ValueError('s not same!')\n"
-}

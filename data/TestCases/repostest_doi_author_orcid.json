@@ -1,9 +1,0 @@
-{
-    "functionName": "test_doi_author_orcid",
-    "className": "TestGetReference",
-    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_converters.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test proper addition of author ORCID if present.\n        \"\"\"\nroot = etree.Element('experiment')\nref = etree.SubElement(root, 'bibliographyLink')\nref.set('doi', '10.1016/j.cpc.2017.02.004')\nref = get_reference(root)\nassert ref['doi'] == '10.1016/j.cpc.2017.02.004'\nassert ref['journal'] == 'Computer Physics Communications'\nassert ref['year'] == 2017\nassert ref['volume'] == 215\nassert ref['pages'] == '188-203'\nassert len(ref['authors']) == 3\nassert {'name': 'Kyle E. Niemeyer', 'ORCID': '0000-0003-4425-7097'} in ref[\n    'authors']\nassert {'name': 'Nicholas J. Curtis', 'ORCID': '0000-0002-0303-4711'} in ref[\n    'authors']\nassert {'name': 'Chih-Jen Sung'} in ref['authors']\n"
-}

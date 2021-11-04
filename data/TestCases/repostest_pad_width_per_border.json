@@ -1,9 +1,0 @@
-{
-    "functionName": "test_pad_width_per_border",
-    "className": null,
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_test_theano_extensions.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from lasagne.theano_extensions.padding import pad\nwidth = [(1, 2), (3, 4), (1, 2), (3, 4)]\nX = T.tensor4()\nX0 = lasagne.utils.floatX(np.ones((2, 3, 4, 5)))\nX_pad_theano = pad(X, width[batch_ndim:], val, batch_ndim).eval({X: X0})\npads = tuple(w if i >= batch_ndim else (0, 0) for i, w in enumerate(width))\nX_pad_np = np.pad(X0, pads, mode='constant', constant_values=val)\nassert (X_pad_theano == X_pad_np).all()\npytest.mark.parametrize('batch_ndim', [1, 2])"
-}

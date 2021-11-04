@@ -1,9 +1,0 @@
-{
-    "functionName": "test_bbks",
-    "className": null,
-    "fileName": "/LSSTDESC_&_CCL/benchmarks_&_test_bbks.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "cosmo = ccl.Cosmology(Omega_c=0.25, Omega_b=0.05, h=0.7, sigma8=0.8, n_s=\n    0.96, Neff=0, m_nu=0.0, w0=w0, wa=wa, T_CMB=2.7, m_nu_type='normal',\n    Omega_g=0, Omega_k=0, transfer_function='bbks', matter_power_spectrum=\n    'linear')\ndata = np.loadtxt('./benchmarks/data/model%d_pk.txt' % model)\nk = data[:, (0)] * cosmo['h']\nfor i in range(6):\n    a = 1.0 / (1.0 + i)\n    pk = data[:, (i + 1)] / cosmo['h'] ** 3\n    pk_ccl = ccl.linear_matter_power(cosmo, k, a)\n    err = np.abs(pk_ccl / pk - 1)\n    assert np.allclose(err, 0, rtol=0, atol=BBKS_TOLERANCE)\npytest.mark.parametrize('model,w0,wa', [(1, -1.0, 0.0), (2, -0.9, 0.0), (3,\n    -0.9, 0.1)])"
-}

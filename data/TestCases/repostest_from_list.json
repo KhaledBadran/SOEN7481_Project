@@ -1,9 +1,0 @@
-{
-    "functionName": "test_from_list",
-    "className": null,
-    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_scienceimage.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Run on two frames\n    \"\"\"\ndet = 1\npixelflat = load_kast_blue_masters(pixflat=True)[0]\nbpm = kast_blue.empty_bpm(shane_kast_blue_sci_files[0], det)\nflatImages = flatfield.FlatImages(pixelflat_norm=pixelflat)\nkast_par['scienceframe']['process']['use_illumflat'] = False\nkast_par['scienceframe']['process']['use_biasimage'] = False\nsciImg = buildimage.buildimage_fromlist(kast_blue, det, kast_par[\n    'scienceframe'], shane_kast_blue_sci_files, bpm=bpm, bias=None,\n    flatimages=flatImages)\nassert isinstance(sciImg, pypeitimage.PypeItImage)\ncooked_required"
-}

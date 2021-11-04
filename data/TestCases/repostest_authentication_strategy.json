@@ -1,9 +1,0 @@
-{
-    "functionName": "test_authentication_strategy",
-    "className": null,
-    "fileName": "/RobertoPrevato_&_GuardPost/tests_&_test_sync_authentication.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class ExampleHandler(AuthenticationHandler):\n\n    def authenticate(self, context: Request):\n        user = User({'id': context.headers['user']})\n        context.user = user\n        return user\nstrategy = AuthenticationStrategy(ExampleHandler())\nrequest = Request({'user': 'xxx'})\nstrategy.authenticate(request)\nassert isinstance(request.user, User)\nassert request.user['id'] == 'xxx'\n"
-}

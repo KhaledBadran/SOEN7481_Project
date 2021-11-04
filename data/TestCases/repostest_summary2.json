@@ -1,9 +1,0 @@
-{
-    "functionName": "test_summary2",
-    "className": "TestChain",
-    "fileName": "/samreay_&_ChainConsumer/tests_&_test_analysis.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "tolerance = 0.05\nconsumer = ChainConsumer()\nconsumer.add_chain(self.data_combined, parameters=['a', 'b'], name='chain1')\nconsumer.add_chain(self.data_combined, name='chain2')\nsummary = consumer.analysis.get_summary()\nk1 = list(summary[0].keys())\nk2 = list(summary[1].keys())\nassert len(k1) == 2\nassert 'a' in k1\nassert 'b' in k1\nassert len(k2) == 2\nassert 'a' in k2\nassert 'b' in k2\nexpected1 = np.array([3.5, 5.0, 6.5])\nexpected2 = np.array([2.0, 3.0, 4.0])\ndiff1 = np.abs(expected1 - np.array(list(summary[0]['a'])))\ndiff2 = np.abs(expected2 - np.array(list(summary[0]['b'])))\nassert np.all(diff1 < tolerance)\nassert np.all(diff2 < tolerance)\n"
-}

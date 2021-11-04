@@ -1,9 +1,0 @@
-{
-    "functionName": "test_feature_extraction_weighting",
-    "className": null,
-    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_engine_&_tests_&_test_vectorizer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "cache_dir = check_cache()\nuse_hashing = use_hashing == 'hashed'\nfe = FeatureVectorizer(cache_dir=cache_dir, mode='w')\nuuid = fe.setup(weighting=weighting, use_hashing=use_hashing)\nfe.ingest(data_dir, file_pattern='.*\\\\d.txt')\nres2 = fe._load_features(uuid)\nassert isinstance(res2, np.ndarray) or scipy.sparse.issparse(res2\n    ), 'not an array {}'.format(res2)\nassert np.isfinite(res2.data).all()\nassert_allclose(normalize(res2).data, res2.data)\nfe.delete()\npytest.mark.parametrize('weighting, use_hashing', list(itertools.product((\n    ''.join(el) for el in itertools.product('nlb', 'ns', 'c')), ['hashed',\n    ''])))"
-}

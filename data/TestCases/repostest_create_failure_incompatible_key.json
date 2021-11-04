@@ -1,9 +1,0 @@
-{
-    "functionName": "test_create_failure_incompatible_key",
-    "className": "EasyJWTTest",
-    "fileName": "/BMeu_&_EasyJWT/tests_&_easyjwt_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n            Test creating a token using an incompatible key.\n\n            Expected Result: An `IncompatibleKeyError` error is raised.\n        \"\"\"\nincompatible_key = '-----BEGIN PUBLIC KEY-----'\nself.assertIn(EasyJWT.algorithm, {Algorithm.HS256, Algorithm.HS384,\n    Algorithm.HS512})\neasyjwt = EasyJWT(incompatible_key)\nwith self.assertRaises(IncompatibleKeyError) as exception_cm:\n    token = easyjwt.create()\n    self.assertIsNone(token)\nmessage = (\n    'The specified key is an asymmetric key or x509 certificate and should not be used as an HMAC secret.'\n    )\nself.assertEqual(message, str(exception_cm.exception))\n"
-}

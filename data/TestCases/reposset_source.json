@@ -1,9 +1,0 @@
-{
-    "functionName": "set_source",
-    "className": "ReactiveTransport",
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_algorithms_&_ReactiveTransport.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        Applies a given source term to the specified pores\n\n        Parameters\n        ----------\n        propname : string\n            The property name of the source term model to be applied\n\n        pores : array_like\n            The pore indices where the source term should be applied\n\n        Notes\n        -----\n        Source terms cannot be applied in pores where boundary conditions have\n        already been set. Attempting to do so will result in an error being\n        raised.\n        \"\"\"\nlocs = self.tomask(pores=pores)\nlocs_BC = np.isfinite(self['pore.bc_value']) + np.isfinite(self['pore.bc_rate']\n    )\nif (locs & locs_BC).any():\n    raise Exception('Boundary conditions already present in given ' +\n        'pores, cannot also assign source terms')\nself[propname] = locs\nif propname not in self.settings['sources']:\n    self.settings['sources'].append(propname)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_build_xanes_map_4",
-    "className": null,
-    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_xanes_maps_&_tests_&_test_xanes_maps_api.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Load parameters from YAML file\"\"\"\nyaml_dir = 'param'\nyaml_fln = 'parameter.yaml'\nos.makedirs(os.path.join(tmp_path, yaml_dir), exist_ok=True)\nfile_path = os.path.join(tmp_path, yaml_dir, yaml_fln)\nbuild_xanes_map(parameter_file_path=file_path, create_parameter_file=True,\n    allow_exceptions=True)\nwith pytest.raises(ValueError, match=\n    \"The parameter 'xrf_subdir' is None or contains an empty string\"):\n    build_xanes_map(emission_line='Fe_K', parameter_file_path=file_path,\n        xrf_subdir='', allow_exceptions=True)\nbuild_xanes_map(emission_line='Fe_K', parameter_file_path=file_path,\n    xrf_subdir='')\n"
-}

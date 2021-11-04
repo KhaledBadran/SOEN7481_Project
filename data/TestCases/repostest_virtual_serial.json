@@ -1,9 +1,0 @@
-{
-    "functionName": "test_virtual_serial",
-    "className": "TestATCommunicator",
-    "fileName": "/ChristianVisintin_&_ATtila/tests_&_test_virtual.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "device = VirtualSerial('/dev/virtual', 115200, 1, read_callback,\n    write_callback, in_waiting)\nself.assertEqual(device.serial_port, '/dev/virtual')\nself.assertEqual(device.baudrate, 115200)\nself.assertEqual(device.timeout, 1)\ndevice.open()\ndevice.write(b'AT')\nself.assertEqual(device.read(4).decode('utf-8'), 'OK\\r\\n')\ndevice.reset_input_buffer()\ndevice.write(b'AT+CSQ')\nself.assertEqual(device.read_line().decode('utf-8'), '+CSQ: 32,99')\nself.assertEqual(device.read_line().decode('utf-8'), '')\nself.assertEqual(device.read_line().decode('utf-8'), 'OK')\ndevice.write(b'AT+CSQ')\nself.assertEqual(len(device.read_lines()), 3)\n"
-}

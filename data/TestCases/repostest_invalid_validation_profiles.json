@@ -1,9 +1,0 @@
-{
-    "functionName": "test_invalid_validation_profiles",
-    "className": "TestValidationInformation",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a TypeError is raised when an invalid value is used to set\n        the validation profiles of a ValidationInformation structure.\n        \"\"\"\nkwargs = {'validation_profiles': 0}\nself.assertRaisesRegex(TypeError,\n    'The validation profiles must be a list of strings.', objects.\n    ValidationInformation, **kwargs)\nkwargs = {'validation_profiles': ['valid', 0]}\nself.assertRaisesRegex(TypeError,\n    'The validation profiles must be a list of strings.', objects.\n    ValidationInformation, **kwargs)\nargs = objects.ValidationInformation(), 'validation_profiles', 0\nself.assertRaisesRegex(TypeError,\n    'The validation profiles must be a list of strings.', setattr, *args)\nargs = objects.ValidationInformation(), 'validation_profiles', ['valid', 0]\nself.assertRaisesRegex(TypeError,\n    'The validation profiles must be a list of strings.', setattr, *args)\n"
-}

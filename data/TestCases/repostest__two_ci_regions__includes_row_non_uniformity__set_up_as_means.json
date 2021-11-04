@@ -1,9 +1,0 @@
-{
-    "functionName": "test__two_ci_regions__includes_row_non_uniformity__set_up_as_means",
-    "className": "TestSetupMockNonUniformImage",
-    "fileName": "/Jammy2211_&_PyAutoCTI/test_&_unit_&_charge_injection_&_test_ci_pattern.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "pattern_sim = ci_pattern.CIPatternNonUniform(normalization=500.0, regions=[\n    (0, 1, 0, 1)], row_slope=1.0)\ncolumn = pattern_sim.generate_column(size=3, normalization=500.0)\nci_image = np.zeros((7, 3))\nci_image[0:3, (0)] = column\nci_image[0:3, (1)] = column\nci_image[0:3, (2)] = column\nci_image[4:7, (0)] = column\nci_image[4:7, (1)] = column\nci_image[4:7, (2)] = column\nmask = np.array([[False, False, False], [False, False, False], [False, \n    False, False], [False, False, False], [False, False, False], [False, \n    False, False], [False, False, False]])\npattern = ci_pattern.CIPatternNonUniform(normalization=500.0, regions=[(0, \n    3, 0, 3), (4, 7, 0, 3)], row_slope=1.0)\nmock_image = pattern.ci_pre_cti_from_ci_image_and_mask(ci_image=ci_image,\n    mask=mask)\nassert (mock_image == np.array([[500.0, 500.0, 500.0], [500.0, 500.0, 500.0\n    ], [500.0, 500.0, 500.0], [0.0, 0.0, 0.0], [500.0, 500.0, 500.0], [\n    500.0, 500.0, 500.0], [500.0, 500.0, 500.0]])).all()\n"
-}

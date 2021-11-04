@@ -1,9 +1,0 @@
-{
-    "functionName": "test_from_neighbor_throats_min",
-    "className": "MiscTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_misc_&_MiscTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.geo.pop('pore.seed', None)\nself.geo.models.pop('pore.seed', None)\nself.geo.models.pop('throat.seed', None)\nself.geo['throat.seed'] = np.random.rand(self.net.Nt)\nself.geo.add_model(model=mods.from_neighbor_throats, propname='pore.seed',\n    throat_prop='throat.seed', mode='min')\nassert np.all(np.in1d(self.geo['pore.seed'], self.geo['throat.seed']))\npmax = np.amax(self.geo['pore.seed'])\ntmax = np.amax(self.geo['throat.seed'])\nassert pmax <= tmax\n"
-}

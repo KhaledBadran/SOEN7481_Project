@@ -1,9 +1,0 @@
-{
-    "functionName": "test_linear_mapping_class",
-    "className": null,
-    "fileName": "/PythonOT_&_POT/test_&_test_da.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ns = 150\nnt = 200\nXs, ys = make_data_classif('3gauss', ns)\nXt, yt = make_data_classif('3gauss2', nt)\notmap = ot.da.LinearTransport()\notmap.fit(Xs=Xs, Xt=Xt)\nassert hasattr(otmap, 'A_')\nassert hasattr(otmap, 'B_')\nassert hasattr(otmap, 'A1_')\nassert hasattr(otmap, 'B1_')\nXst = otmap.transform(Xs=Xs)\nCt = np.cov(Xt.T)\nCst = np.cov(Xst.T)\nnp.testing.assert_allclose(Ct, Cst, rtol=0.01, atol=0.01)\n"
-}

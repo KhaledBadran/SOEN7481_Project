@@ -1,9 +1,0 @@
-{
-    "functionName": "test_should_use_changed_time_window_for_snapshot_after_change",
-    "className": null,
-    "fileName": "/EliCDavis_&_AssociationEngine/AssociationEngine_&_Tests_&_UnitTests_&_Snapper_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "manager = Manager()\nmanager.on_data = MagicMock()\nsnapper = Snapper(manager)\nsensor1 = Sensor()\nsnapper.add_sensor(sensor1)\nsensor1.publish(2, 1)\nsnapper.set_window_size(15.0)\nsensor2 = Sensor()\nsnapper.add_sensor(sensor2)\nsensor2.publish(3, 1)\nsensor2.publish(3, 11)\nmanager.on_data.assert_called_with({'start': 1, 'end': 10, sensor1.uuid: 2,\n    sensor2.uuid: 3})\nsensor1.publish(3, 15)\nsensor2.publish(5, 16)\nsensor1.publish(3, 26)\nmanager.on_data.assert_called_with({'start': 10, 'end': 24, sensor1.uuid: 3,\n    sensor2.uuid: 4})\n"
-}

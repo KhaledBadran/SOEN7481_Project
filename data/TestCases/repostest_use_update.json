@@ -1,9 +1,0 @@
-{
-    "functionName": "test_use_update",
-    "className": "TestGenerationStrategy",
-    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_generation_strategy.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "exp = get_branin_experiment()\nsobol_gs_with_update = GenerationStrategy(steps=[GenerationStep(model=\n    Models.SOBOL, num_trials=-1, use_update=True)])\ntrial = exp.new_trial(generator_run=sobol_gs_with_update.gen(experiment=exp))\nmock_update.assert_not_called()\ntrial._status = TrialStatus.COMPLETED\nfor i in range(3):\n    trial = exp.new_trial(generator_run=sobol_gs_with_update.gen(experiment\n        =exp))\n    self.assertEqual(mock_fetch_trials_data.call_args[1].get(\n        'trial_indices'), {i})\n    trial._status = TrialStatus.COMPLETED\nself.assertNotEqual(sobol_gs_with_update._seen_trial_indices_by_status, exp\n    .trial_indices_by_status)\nsobol_gs_with_update.gen(experiment=exp, data=get_branin_data(trial_indices\n    =range(4)))\nself.assertEqual(sobol_gs_with_update._seen_trial_indices_by_status, exp.\n    trial_indices_by_status)\nself.assertEqual(set(mock_update.call_args[1].get('new_data').df[\n    'trial_index'].values), {3})\npatch(f'{RandomModelBridge.__module__}.RandomModelBridge.update')patch(f'{Experiment.__module__}.Experiment.fetch_trials_data')"
-}

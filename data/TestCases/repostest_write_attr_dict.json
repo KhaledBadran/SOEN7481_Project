@@ -1,9 +1,0 @@
-{
-    "functionName": "test_write_attr_dict",
-    "className": null,
-    "fileName": "/CCampJr_&_LazyHDF5/lazy5_&_tests_&_test_alter.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Try writing dictionary of attributes \"\"\"\nfilename, fid = hdf_dataset\ndset_obj = fid['base']\nattr_dict = _OrderedDict([['WDA2', 2], ['WDA1', 1]])\nassert write_attr_dict(dset_obj, attr_dict, fid=None, sort_attrs=False,\n    verbose=False)\nassert dset_obj.attrs['WDA2'] == 2\nassert dset_obj.attrs['WDA1'] == 1\nassert dset_obj.attrs['Attribute_str'] == 'Test'\nl_attr = list(dset_obj.attrs.keys())\nl_attr[-2] == 'WDA2'\nl_attr[-1] == 'WDA1'\nwith pytest.raises(TypeError):\n    write_attr_dict('base', attr_dict, fid=None, sort_attrs=False, verbose=\n        False)\nassert write_attr_dict('base', attr_dict, fid=fid, sort_attrs=False,\n    verbose=False)\nassert dset_obj.attrs['WDA2'] == 2\nassert dset_obj.attrs['WDA1'] == 1\nassert dset_obj.attrs['Attribute_str'] == 'Test'\nassert write_attr_dict('base', attr_dict, fid=fid, sort_attrs=True, verbose\n    =False)\nassert dset_obj.attrs['WDA2'] == 2\nassert dset_obj.attrs['WDA1'] == 1\nl_attr = list(dset_obj.attrs.keys())\nl_attr[-1] == 'WDA2'\nl_attr[-2] == 'WDA1'\n"
-}

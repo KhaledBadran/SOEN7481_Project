@@ -1,9 +1,0 @@
-{
-    "functionName": "test_1_qubit",
-    "className": "Test_qubits",
-    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_qubits.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.setUpClass()\nnqubits = 1\nsweep_points = [2]\nk = ql.Kernel('aKernel', platf, nqubits)\nk.prepz(0)\nk.x(0)\nk.y(0)\nk.rx90(0)\nk.measure(0)\np = ql.Program('1_qubit_program', platf, nqubits)\np.set_sweep_points(sweep_points)\np.add_kernel(k)\np.compile()\ngold_fn = rootDir + '/golden/test_1_qubit.qasm'\nqasm_fn = os.path.join(output_dir, p.name + '_initialqasmwriter_out.qasm')\nself.assertTrue(file_compare(qasm_fn, gold_fn))\n"
-}

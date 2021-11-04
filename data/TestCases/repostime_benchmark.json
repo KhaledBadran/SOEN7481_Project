@@ -1,9 +1,0 @@
-{
-    "functionName": "time_benchmark",
-    "className": null,
-    "fileName": "/slott56_&_PyLit-3/docs_&_examples_&_iterqueue_speed_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"profile benchmark `fun` with `iterator` wrapped in `wrappers`\"\"\"\nprint(fun.__doc__, '({0:s})'.format(iterator))\nsetup = \"\"\"import iterqueue_speed_test\nimport iterqueue\"\"\"\nbenchmark = 'iterqueue_speed_test.{0!s}(iterqueue.{1!s}(iter({2!r})))'\nstmts = [benchmark.format(fun.__name__, wrapper.__name__, iterator) for\n    wrapper in wrappers]\ntimers = [Timer(stmt=stmt, setup=setup) for stmt in stmts]\nt_i = [min(timer.repeat(number=1, repeat=3)) for timer in timers]\nresults = [('%.5f s   %s' % (t, wrapper.__name__)) for t, wrapper in zip(\n    t_i, wrappers)]\nresults.sort()\nprint('\\n'.join(results))\n"
-}

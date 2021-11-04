@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sorted_flat",
-    "className": "TestMMFlatViews",
-    "fileName": "/Axiologue_&_DjangoRestMultipleModels/tests_&_test_flat_view.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Adding the sorting_field attribute should order the flat items according to whatever field\n        \"\"\"\nview = SortedFlatView.as_view()\nrequest = factory.get('/')\nwith self.assertNumQueries(2):\n    response = view(request).render()\nself.assertEqual(len(response.data), 6)\nself.assertEqual(response.data, self.sorted_results)\n"
-}

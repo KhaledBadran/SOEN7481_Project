@@ -1,9 +1,0 @@
-{
-    "functionName": "test_emd_1d_emd2_1d_with_weights",
-    "className": null,
-    "fileName": "/PythonOT_&_POT/test_&_test_ot.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "n = 20\nm = 30\nrng = np.random.RandomState(0)\nu = rng.randn(n, 1)\nv = rng.randn(m, 1)\nw_u = rng.uniform(0.0, 1.0, n)\nw_u = w_u / w_u.sum()\nw_v = rng.uniform(0.0, 1.0, m)\nw_v = w_v / w_v.sum()\nM = ot.dist(u, v, metric='sqeuclidean')\nG, log = ot.emd(w_u, w_v, M, log=True)\nwass = log['cost']\nG_1d, log = ot.emd_1d(u, v, w_u, w_v, metric='sqeuclidean', log=True)\nwass1d = log['cost']\nwass1d_emd2 = ot.emd2_1d(u, v, w_u, w_v, metric='sqeuclidean', log=False)\nwass1d_euc = ot.emd2_1d(u, v, w_u, w_v, metric='euclidean', log=False)\nnp.testing.assert_allclose(wass, wass1d)\nnp.testing.assert_allclose(wass, wass1d_emd2)\nwass_sp = wasserstein_distance(u.reshape((-1,)), v.reshape((-1,)), w_u, w_v)\nnp.testing.assert_allclose(wass_sp, wass1d_euc)\nnp.testing.assert_allclose(w_u, G.sum(1))\nnp.testing.assert_allclose(w_v, G.sum(0))\n"
-}

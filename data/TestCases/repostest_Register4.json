@@ -1,9 +1,0 @@
-{
-    "functionName": "test_Register4",
-    "className": "TestRegister4",
-    "fileName": "/jamesjiang52_&_Bitwise/tests_&_storage_&_test_Register4.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "input_1 = bw.wire.Wire()\ninput_2 = bw.wire.Wire()\ninput_3 = bw.wire.Wire()\ninput_4 = bw.wire.Wire()\nenable = bw.wire.Wire()\nclock = bw.wire.Wire()\ninput_bus = bw.wire.Bus4(input_1, input_2, input_3, input_4)\noutput_bus = bw.wire.Bus4()\na = bw.storage.Register4(input_bus, enable, clock, output_bus)\nenable.value = 1\nclock.value = 0\ninput_1.value = 0\ninput_2.value = 0\ninput_3.value = 0\ninput_4.value = 0\nclock.value = 1\nassert output_bus.wire_values == (0, 0, 0, 0)\nclock.value = 0\ninput_4.value = 1\nclock.value = 1\nassert output_bus.wire_values == (0, 0, 0, 1)\nclock.value = 0\ninput_3.value = 1\nclock.value = 1\nassert output_bus.wire_values == (0, 0, 1, 1)\nclock.value = 0\ninput_2.value = 1\nclock.value = 1\nassert output_bus.wire_values == (0, 1, 1, 1)\nenable.value = 0\nclock.value = 0\ninput_1.value = 1\nclock.value = 1\nassert output_bus.wire_values == (0, 1, 1, 1)\nenable.value = 1\nclock.value = 0\nclock.value = 1\nassert output_bus.wire_values == (1, 1, 1, 1)\nclock.value = 0\ninput_1.value = 0\ninput_2.value = 0\ninput_3.value = 0\ninput_4.value = 0\nclock.value = 1\nassert output_bus.wire_values == (0, 0, 0, 0)\nprint(a.__doc__)\nprint(a)\na(data_bus=(0, 0, 1, 1), enable=1, clock=0, output_bus=None)\na(clock=1)\nassert output_bus.wire_values == (0, 0, 1, 1)\n"
-}

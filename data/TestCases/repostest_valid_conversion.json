@@ -1,9 +1,0 @@
-{
-    "functionName": "test_valid_conversion",
-    "className": "TestConvertReSpecTh",
-    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_converters.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test proper conversion of ReSpecTh files.\n        \"\"\"\nfile_path = os.path.join(filename_xml)\nfilename = pkg_resources.resource_filename(__name__, file_path)\nfile_author = 'Kyle Niemeyer'\nfile_author_orcid = '0000-0003-4425-7097'\nproperties = ReSpecTh_to_ChemKED(filename, file_author, file_author_orcid,\n    validate=False)\nc = ChemKED(dict_input=properties, skip_validation=True)\nfile_path = os.path.join(os.path.splitext(filename_xml)[0] + '.yaml')\nfilename = pkg_resources.resource_filename(__name__, file_path)\nc_true = ChemKED(yaml_file=filename, skip_validation=True)\nassert c.file_authors[1]['name'] == file_author\nassert c.file_authors[1]['ORCID'] == file_author_orcid\nassert c.reference.detail == 'Converted from ReSpecTh XML file {}'.format(\n    filename_xml)\nassert c.apparatus.kind == c_true.apparatus.kind\nassert c.experiment_type == c_true.experiment_type\nassert c.reference.doi == c_true.reference.doi\nassert len(c.datapoints) == len(c_true.datapoints)\npytest.mark.parametrize('filename_xml', ['testfile_st.xml', 'testfile_rcm.xml']\n    )pytest.mark.filterwarnings('ignore:Using DOI')"
-}

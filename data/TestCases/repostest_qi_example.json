@@ -1,9 +1,0 @@
-{
-    "functionName": "test_qi_example",
-    "className": "Test_central_controller",
-    "fileName": "/QE-Lab_&_OpenQL/tests_&_cc_&_test_cc.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ql.set_option('output_dir', output_dir)\nql.set_option('optimize', 'no')\nql.set_option('scheduler', 'ALAP')\nql.set_option('scheduler_uniform', 'yes')\nql.set_option('log_level', 'LOG_WARNING')\nplatform = ql.Platform(platform_name, os.path.join(curdir,\n    'cc_s5_direct_iq.json'))\np = ql.Program('test_qi_example', platform, 5, num_cregs)\nk = ql.Kernel('kernel_0', platform, 5, num_cregs)\nk.gate('prepz', [0, 1, 2, 3, 4])\nk.gate('ry180', [0, 2])\nk.gate('cz', [0, 2])\nk.gate('y90', [2])\nk.gate('measure', [0, 1, 2, 3, 4])\np.add_kernel(k)\np.compile()\n"
-}

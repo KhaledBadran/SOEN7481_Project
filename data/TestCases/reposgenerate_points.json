@@ -1,9 +1,0 @@
-{
-    "functionName": "generate_points",
-    "className": "TestTfCudaResample",
-    "fileName": "/tum-pbs_&_PhiFlow/gpu_tests_&_test_tf_cuda_resample.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "dim_sizes = self.get_random_dims()\nshape = 1,\nshape = shape + dim_sizes\ndata_dims = len(data_shape) - 2\nshape = shape + (data_dims,)\npoints = np.zeros(shape, np.float32)\ndim = 0\nfor i in range(points.size):\n    points.flat[i] = rand.uniform(-self.PERCENTAGE_OUT_OF_BOUNDS / 200 * (\n        data_shape[dim + 1] - 1), (data_shape[dim + 1] - 1) * (1 + self.\n        PERCENTAGE_OUT_OF_BOUNDS / 200))\n    dim = (dim + 1) % data_dims\nreturn points\n"
-}

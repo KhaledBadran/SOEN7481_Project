@@ -1,9 +1,0 @@
-{
-    "functionName": "test_dump_sort_values",
-    "className": "TestAccess",
-    "fileName": "/hdoupe_&_ParamTools/paramtools_&_tests_&_test_parameters.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test sort_values keyword in dump()\"\"\"\ntp = TestParams()\nfor param in tp:\n    shuffle(tp._data[param]['value'])\nshuffled_dump = tp.dump(sort_values=False)\nsorted_dump = tp.dump(sort_values=True)\nassert sorted_dump != shuffled_dump\nsorted_tp = TestParams()\nsorted_tp.sort_values()\nassert sorted_tp.dump(sort_values=False) == sorted_dump\nstate_tp = TestParams()\nfor param in tp:\n    shuffle(state_tp._data[param]['value'])\nstate_tp.set_state(label0='zero', label2=1)\nstate_dump = copy.deepcopy(state_tp.dump(sort_values=False))\nclass NoStateParams(Parameters):\n    defaults = state_dump\nnostate_tp = NoStateParams()\nassert nostate_tp.dump(sort_values=False) == state_dump\nassert not nostate_tp.view_state()\nassert state_tp.view_state()\nassert nostate_tp.dump(sort_values=True) == state_tp.dump(sort_values=True)\n"
-}

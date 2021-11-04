@@ -1,9 +1,0 @@
-{
-    "functionName": "test_gradient_descent_optimizer_constrained",
-    "className": "TestOptimizer",
-    "fileName": "/Yelp_&_MOE/moe_&_tests_&_optimal_learning_&_python_&_python_version_&_optimization_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Check that gradient descent can find the global optimum (in a domain) when the true optimum is outside.\"\"\"\ndomain_bounds = [ClosedInterval(0.05, 0.32), ClosedInterval(0.05, 0.6),\n    ClosedInterval(0.05, 0.32)]\ndomain = TensorProductDomain(domain_bounds)\ngradient_descent_optimizer = GradientDescentOptimizer(domain, self.\n    polynomial, self.gd_parameters)\nconstrained_optimum_point = self.polynomial.optimum_point\nfor i, bounds in enumerate(domain_bounds):\n    if constrained_optimum_point[i] > bounds.max:\n        constrained_optimum_point[i] = bounds.max\n    elif constrained_optimum_point[i] < bounds.min:\n        constrained_optimum_point[i] = bounds.min\ntolerance = 2e-13\ninitial_guess = numpy.full(self.polynomial.dim, 0.2)\ngradient_descent_optimizer.objective_function.current_point = initial_guess\ninitial_value = (gradient_descent_optimizer.objective_function.\n    compute_objective_function())\ngradient_descent_optimizer.optimize()\noutput = gradient_descent_optimizer.objective_function.current_point\nself.assert_vector_within_relative(output, constrained_optimum_point, tolerance\n    )\nfinal_value = self.polynomial.compute_objective_function()\nassert final_value >= initial_value\ngradient = self.polynomial.compute_grad_objective_function()\nfor i, bounds in enumerate(domain_bounds):\n    if bounds.is_inside(self.polynomial.optimum_point[i]):\n        self.assert_scalar_within_relative(gradient[i], 0.0, tolerance)\n"
-}

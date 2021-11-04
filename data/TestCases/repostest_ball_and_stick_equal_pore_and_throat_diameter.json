@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ball_and_stick_equal_pore_and_throat_diameter",
-    "className": "PoissonShapeFactorsTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_physics_&_PoissonShapeFactorsTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.geo['throat.diameter'] = 0.5\nself.geo['throat.area'] = pi / 4 * 1 ** 2\nmod = op.models.physics.poisson_shape_factors.ball_and_stick\nself.phys.add_model(propname='throat.poisson_shape_factors', model=mod)\nself.phys.regenerate_models()\nSF1 = self.phys['throat.poisson_shape_factors.pore1'].mean()\nSF2 = self.phys['throat.poisson_shape_factors.pore2'].mean()\nSFt = self.phys['throat.poisson_shape_factors.throat'].mean()\nassert_allclose(SF1, desired=1.0)\nassert_allclose(SF2, desired=1.0)\nassert_allclose(SFt, desired=1.0)\nself.geo['throat.diameter'] = 0.35\nself.geo['throat.area'] = pi / 4 * 0.35 ** 2\n"
-}

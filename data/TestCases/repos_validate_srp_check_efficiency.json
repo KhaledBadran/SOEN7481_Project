@@ -1,9 +1,0 @@
-{
-    "functionName": "_validate_srp_check_efficiency",
-    "className": "CITestProvisioning",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Helper method for validating srp return details.\n\n        :param srp_details: srp details -- dict\n        \"\"\"\ncompression_state = 'compression_state'\ndata_reduction_enabled_percent = 'data_reduction_enabled_percent'\noverall_efficiency_ratio_to_one = 'overall_efficiency_ratio_to_one'\ndata_reduction_ratio_to_one = 'data_reduction_ratio_to_one'\nvirtual_provisioning_savings_ratio_to_one = (\n    'virtual_provisioning_savings_ratio_to_one')\nsnapshot_savings_ratio_to_one = 'snapshot_savings_ratio_to_one'\nsrp_efficiency = srp_details[constants.SRP_EFFICIENCY]\nself.assertIsInstance(srp_efficiency, dict)\nself.assertIn(compression_state, srp_efficiency)\nself.assertIn(data_reduction_enabled_percent, srp_efficiency)\nself.assertIsInstance(srp_efficiency[compression_state], str)\nself.assertIs(float, type(srp_efficiency[data_reduction_enabled_percent]))\nif overall_efficiency_ratio_to_one in srp_efficiency:\n    self.assertIs(float, type(srp_efficiency[overall_efficiency_ratio_to_one]))\nif data_reduction_ratio_to_one in srp_efficiency:\n    self.assertIs(float, type(srp_efficiency[data_reduction_ratio_to_one]))\nif virtual_provisioning_savings_ratio_to_one in srp_efficiency:\n    self.assertIs(float, type(srp_efficiency[\n        virtual_provisioning_savings_ratio_to_one]))\nif snapshot_savings_ratio_to_one in srp_efficiency:\n    self.assertIs(float, type(srp_efficiency[snapshot_savings_ratio_to_one]))\n"
-}

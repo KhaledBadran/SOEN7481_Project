@@ -1,9 +1,0 @@
-{
-    "functionName": "test_aguc2_axis_step_delay",
-    "className": null,
-    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_newport_&_test_agilis.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Check the step delay function.\n    \"\"\"\nwith expected_protocol(ik.newport.AGUC2, ['MR', '2 DL?', '1 DL 1000',\n    '1 DL 200'], ['2DL0'], sep='\\r\\n') as agl:\n    assert agl.axis['Y'].step_delay == '2DL0'\n    agl.axis['X'].step_delay = 1000\n    agl.axis['X'].step_delay = 200\n    with pytest.raises(ValueError):\n        agl.axis['X'].step_delay = -1\n    with pytest.raises(ValueError):\n        agl.axis['Y'].step_delay = 2000001\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_integration_targets_as_poly",
-    "className": "TestDatasetExporter",
-    "fileName": "/vfdev-5_&_ImageDatasetViz/tests_&_test_dataset_exporter.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "def read_img(i):\n    img = Image.new(mode='RGB', size=(64, 64), color=(i % 255, i * 2 % 255,\n        i * 3 % 255))\n    return img\ndef read_target(i):\n    return np.array([[10 + i, 10], [55 + i, 10], [55, 77], [10, 77]]\n        ), 'label_{}'.format(i)\nn = 100\ns = 32\nm = 5\nmax_n_rows = 5\nn_cols = 10\nde = DatasetExporter(read_img_fn=read_img, read_target_fn=read_target,\n    img_id_fn=lambda x: str(x), max_output_img_size=(s, s), margins=(m, m),\n    n_cols=n_cols, max_n_rows=max_n_rows)\nindices = [i for i in range(n)]\nwith tempfile.TemporaryDirectory() as tmpdir:\n    de.export(indices, indices, output_folder=tmpdir)\n    path = Path(tmpdir)\n    out_files = list(path.glob('*.png'))\n    self.assertEqual(len(out_files), int(np.ceil(n / (n_cols * max_n_rows))))\n    for fp in out_files:\n        out_img = Image.open(fp)\n        self.assertEqual(out_img.size, ((s + m) * n_cols, (s + m) * max_n_rows)\n            )\n"
-}

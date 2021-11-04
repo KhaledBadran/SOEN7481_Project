@@ -1,9 +1,0 @@
-{
-    "functionName": "test_next_departures_for_stations_whensucceed",
-    "className": "PublicTransitApiTest",
-    "fileName": "/abdullahselek_&_HerePy/tests_&_test_publictransit_api.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with io.open(\n    'testdata/models/public_transit_api_next_departures_for_stations.json',\n    'r', encoding='utf-8') as f:\n    expectedResponse = f.read()\nresponses.add(responses.GET,\n    'https://transit.ls.hereapi.com/v3/multiboard/by_stn_ids.json',\n    expectedResponse, status=200)\nresponse = self._api.next_departures_for_stations([402000656, 402000653, \n    402061786], '2017-11-22T07:30:00')\nself.assertTrue(response)\nself.assertIsInstance(response, herepy.PublicTransitResponse)\nresponses.activate"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_yiip_equilibrium",
-    "className": null,
-    "fileName": "/MDAnalysis_&_MDAnalysisData/MDAnalysisData_&_tests_&_test_datasets.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "if traj_len == 'short':\n    data = datasets.fetch_yiip_equilibrium_short()\nelif traj_len == 'long':\n    data = datasets.fetch_yiip_equilibrium_long()\nelse:\n    raise ValueError(\"Unknown yiip_equilibrium trajectory length'{}'\".\n        format(traj_len))\nmetadata = yiip_equilibrium.ARCHIVE[traj_len]\nassert len(data.DESCR) == 1511\nassert data.DESCR.startswith(\n    \"\"\".. -*- coding: utf-8 -*-\n\n.. _`yiip-equilibrium-dataset`:\"\"\")\nassert os.path.basename(data[filetype]) == metadata[filetype].filename\nassert os.path.exists(data[filetype])\npytest.mark.onlinepytest.mark.parametrize('traj_len', ('short', 'long'))pytest.mark.parametrize('filetype', ('topology', 'trajectory'))"
-}

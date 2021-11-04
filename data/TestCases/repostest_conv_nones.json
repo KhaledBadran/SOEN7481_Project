@@ -1,9 +1,0 @@
-{
-    "functionName": "test_conv_nones",
-    "className": null,
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_test_theano_extensions.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "import lasagne.theano_extensions.conv\nconv = getattr(lasagne.theano_extensions.conv, impl)\nX = T.tensor3()\nW = T.tensor3()\ninput = lasagne.utils.floatX(np.ones((1, 1, 12)))\nkernel = lasagne.utils.floatX(np.random.uniform(-1, 1, (2, 1, 3)))\nconv_theano = conv(X, W, None, None).eval({X: input, W: kernel})\nconv_np = conv1d(input, kernel)\nassert np.allclose(conv_theano, conv_np)\npytest.mark.parametrize('impl', ['conv1d_sc', 'conv1d_mc0', 'conv1d_mc1'])"
-}

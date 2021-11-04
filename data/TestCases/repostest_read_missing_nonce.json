@@ -1,9 +1,0 @@
-{
-    "functionName": "test_read_missing_nonce",
-    "className": "TestAttestationCredential",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_credentials.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a ValueError gets raised when attempting to read an\n        AttestationCredential struct from a data stream missing the nonce data.\n        \"\"\"\ncredential = objects.AttestationCredential()\nself.assertEqual(None, credential.nonce)\nself.assertEqual(None, credential.attestation_type)\nself.assertEqual(None, credential.attestation_measurement)\nself.assertEqual(None, credential.attestation_assertion)\nargs = self.encoding_missing_nonce,\nself.assertRaisesRegex(ValueError,\n    'Attestation credential encoding is missing the nonce.', credential.\n    read, *args)\n"
-}

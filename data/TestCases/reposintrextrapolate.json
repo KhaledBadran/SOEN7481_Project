@@ -1,9 +1,0 @@
-{
-    "functionName": "intrextrapolate",
-    "className": null,
-    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_DataSet.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"interpolates between old and new through linear regression and returns best estimate at old positions\n            \n            arg:\n            oldPosition (list): List of position to estimate the new value at (in coordinates of oldValues)\n            \n            oldValues (list): List of old values \n            \n            newValues (list): List of new values\n            \n            return:\n                newPosition (list): estimate of newValue at oldPosition\n            \"\"\"\noldOffset = oldValues[0]\noldSize = np.diff([oldValues[0], oldValues[-1]])\nnewOffset = newValues[0]\nnewSize = np.diff([newValues[0], newValues[-1]])\nX = (oldPosition - oldOffset) / oldSize\nnewPosition = X * newSize + newOffset\nreturn newPosition\n"
-}

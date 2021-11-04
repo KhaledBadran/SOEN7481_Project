@@ -1,9 +1,0 @@
-{
-    "functionName": "test_mac_crypto_usage_mask_not_set",
-    "className": "TestKmipEngine",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the right error is generated when an MAC request is\n        received for an object without proper crypto usage mask set.\n        \"\"\"\ne = engine.KmipEngine()\ne._data_store = self.engine\ne._data_store_session_factory = self.session_factory\ne._data_session = e._data_store_session_factory()\ne._is_allowed_by_operation_policy = mock.Mock(return_value=True)\ne._logger = mock.MagicMock()\ne._cryptography_engine.logger = mock.MagicMock()\nkey = b'\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00'\ndata = b'\\x00\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08\\t\\n\\x0b\\x0c\\r\\x0e\\x0f'\nalgorithm_a = enums.CryptographicAlgorithm.AES\nalgorithm_b = enums.CryptographicAlgorithm.HMAC_SHA512\nobj = pie_objects.SymmetricKey(algorithm_a, 128, key, [enums.\n    CryptographicUsageMask.MAC_VERIFY])\nobj.state = enums.State.ACTIVE\ne._data_session.add(obj)\ne._data_session.commit()\ne._data_session = e._data_store_session_factory()\nuuid = str(obj.unique_identifier)\ncryptographic_parameters = attributes.CryptographicParameters(\n    cryptographic_algorithm=algorithm_b)\npayload = payloads.MACRequestPayload(unique_identifier=attributes.\n    UniqueIdentifier(uuid), cryptographic_parameters=\n    cryptographic_parameters, data=objects.Data(data))\nargs = payload,\nregex = \"MAC Generate must be set in the object's cryptographic usage mask\"\nself.assertRaisesRegex(exceptions.PermissionDenied, regex, e._process_mac,\n    *args)\n"
-}

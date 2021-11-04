@@ -1,9 +1,0 @@
-{
-    "functionName": "test_attach_middleware",
-    "className": "TestFlaskProfiler",
-    "fileName": "/abetlen_&_Flask-Perf/test_flask_perf.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "app = Flask(__name__)\napp.config['PROFILER_ENABLED'] = True\nprofiler = Profiler()\nwith patch('flask_perf.ProfilerMiddleware') as MockProfilerMiddleware:\n    wsgi_app = app.wsgi_app\n    profiler.init_app(app)\n    MockProfilerMiddleware.assert_called_once_with(wsgi_app, restrictions=\n        app.config['PROFILER_RESTRICTIONS'])\n"
-}

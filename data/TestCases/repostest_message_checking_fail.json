@@ -1,9 +1,0 @@
-{
-    "functionName": "test_message_checking_fail",
-    "className": "TestRetryDecorator",
-    "fileName": "/facebook_&_Ax/ax_&_utils_&_common_&_tests_&_test_executils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Tests if the decorator correctly checks the list of messages\n        provided. In this case, we check if it correctly fails.\n        \"\"\"\nclass DecoratorTester:\n\n    @retry_on_exception(default_return_on_suppression='SUCCESS',\n        check_message_contains=['Hello', 'World'], exception_types=(\n        RuntimeError,))\n    def error_throwing_function(self):\n        raise RuntimeError\ndecorator_tester = DecoratorTester()\nwith self.assertRaises(RuntimeError):\n    decorator_tester.error_throwing_function()\n"
-}

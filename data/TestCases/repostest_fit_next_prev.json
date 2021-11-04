@@ -1,9 +1,0 @@
-{
-    "functionName": "test_fit_next_prev",
-    "className": "TestDemagGUI",
-    "fileName": "/PmagPy_&_PmagPy/pmagpy_tests_&_test_demag_gui.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "edit_menu = self.get_menu_from_frame(self.frame, 'Edit')\nnextfit_menu_evt = wx.PyCommandEvent(wx.EVT_MENU.typeId, edit_menu.FindItem\n    ('&Next interpretation\\tCtrl-Up'))\nprevfit_menu_evt = wx.PyCommandEvent(wx.EVT_MENU.typeId, edit_menu.FindItem\n    ('&Previous interpretation\\tCtrl-Down'))\nadd_fit_evt = wx.PyCommandEvent(wx.EVT_BUTTON.typeId, self.frame.\n    add_fit_button.GetId())\nself.frame.ProcessEvent(add_fit_evt)\nself.frame.ProcessEvent(add_fit_evt)\nself.frame.ProcessEvent(add_fit_evt)\nself.frame.ProcessEvent(add_fit_evt)\nfits = self.frame.pmag_results_data['specimens'][self.frame.s]\nci = fits.index(self.frame.current_fit)\nfor i in range(len(fits) + ci, ci, -1):\n    self.assertEqual(fits[i % len(fits)], self.frame.current_fit)\n    self.frame.ProcessEvent(nextfit_menu_evt)\nci = fits.index(self.frame.current_fit)\nfor i in range(ci, len(fits) + ci):\n    self.assertEqual(fits[i % len(fits)], self.frame.current_fit)\n    self.frame.ProcessEvent(prevfit_menu_evt)\n"
-}

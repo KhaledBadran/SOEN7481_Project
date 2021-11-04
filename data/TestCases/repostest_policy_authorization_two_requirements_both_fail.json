@@ -1,9 +1,0 @@
-{
-    "functionName": "test_policy_authorization_two_requirements_both_fail",
-    "className": null,
-    "fileName": "/RobertoPrevato_&_GuardPost/tests_&_test_sync_authorization.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class ExampleOne(Requirement):\n\n    def handle(self, context: AuthorizationContext):\n        pass\nclass ExampleTwo(Requirement):\n\n    def handle(self, context: AuthorizationContext):\n        pass\nauth = get_strategy([Policy('user', ExampleOne(), ExampleTwo())])\n@auth(policy='user')\ndef some_method():\n    return True\nwith raises(UnauthorizedError, match=\n    'The user is not authorized to perform the selected action. Failed requirements: ExampleOne, ExampleTwo.'\n    ):\n    some_method()\n"
-}

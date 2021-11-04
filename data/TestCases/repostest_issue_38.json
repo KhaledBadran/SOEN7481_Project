@@ -1,9 +1,0 @@
-{
-    "functionName": "test_issue_38",
-    "className": "TestNewIssues",
-    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_test_issues.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "conn = self.connect()\nc = conn.cursor()\ndatum = 'a' * 1024 * 1023\ntry:\n    with warnings.catch_warnings():\n        warnings.filterwarnings('ignore')\n        c.execute('drop table if exists issue38')\n    c.execute('create table issue38 (id integer, data mediumblob)')\n    c.execute('insert into issue38 values (1, %s)', (datum,))\nfinally:\n    c.execute('drop table issue38')\n"
-}

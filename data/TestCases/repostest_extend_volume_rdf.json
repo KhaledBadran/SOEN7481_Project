@@ -1,9 +1,0 @@
-{
-    "functionName": "test_extend_volume_rdf",
-    "className": "CITestProvisioning",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test extend_volume for rdf protected volume.\"\"\"\nsg_name, rdf_group_number, device_id, remote_volume = self.create_rdf_sg()\nold_size = self.provisioning.get_volume(device_id)[constants.CAP_GB]\nnew_size = old_size + 1\njob = self.provisioning.extend_volume(device_id, new_size, _async=True,\n    rdf_group_num=rdf_group_number)\nself.conn.common.wait_for_job_complete(job)\nvolume_details = self.provisioning.get_volume(device_id)\nself._validate_volume_details(volume_details)\nself.assertEqual(new_size, volume_details[constants.CAP_GB])\n"
-}

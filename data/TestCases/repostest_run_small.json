@@ -1,9 +1,0 @@
-{
-    "functionName": "test_run_small",
-    "className": null,
-    "fileName": "/open-source-economics_&_OG-USA/ogusa_&_tests_&_test_basic.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from ogusa.execute import runner\nSS.ENFORCE_SOLUTION_CHECKS = False\nTPI.ENFORCE_SOLUTION_CHECKS = False\nSS.MINIMIZER_TOL = 1e-06\nTPI.MINIMIZER_TOL = 1e-06\nog_spec = {'frisch': 0.41, 'debt_ratio_ss': 0.4}\nrunner(output_base=OUTPUT_DIR, baseline_dir=OUTPUT_DIR, test=True,\n    time_path=time_path, baseline=True, og_spec=og_spec, run_micro=False,\n    tax_func_path=TAX_FUNC_PATH, client=dask_client, num_workers=NUM_WORKERS)\npytest.mark.full_runpytest.mark.parametrize('time_path', [False, True], ids=['SS', 'TPI'])"
-}

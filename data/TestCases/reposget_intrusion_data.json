@@ -1,9 +1,0 @@
-{
-    "functionName": "get_intrusion_data",
-    "className": "MixedInvasionPercolation",
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_algorithms_&_MixedInvasionPercolation.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        Plot a simple drainage curve\n        \"\"\"\nnet = self.project.network\nif 'pore.invasion_pressure' not in self.props():\n    logger.error('Cannot plot drainage curve. Please run ' + ' algorithm first'\n        )\nif inv_points is None:\n    mask = ~np.isnan(self['throat.invasion_pressure'])\n    ok_Pc = self['throat.invasion_pressure'][mask]\n    inv_points = np.unique(ok_Pc)\nsat_p = np.zeros(len(inv_points))\nsat_t = np.zeros(len(inv_points))\nfor i, Pc in enumerate(inv_points):\n    res = self.results(Pc=Pc)\n    sat_p[i] = np.sum(res['pore.occupancy'])\n    sat_t[i] = np.sum(res['throat.occupancy'])\npvol = np.sum(net['pore.volume'])\ntvol = np.sum(net['throat.volume'])\ntot_vol = pvol + tvol\ntot_sat = sat_p + sat_t\nsat_p /= tot_vol\nsat_t /= tot_vol\ntot_sat /= tot_vol\npc_curve = namedtuple('pc_curve', ('Pcap', 'S_pore', 'S_throat', 'S_tot'))\ndata = pc_curve(inv_points, sat_p, sat_t, tot_sat)\nreturn data\n"
-}

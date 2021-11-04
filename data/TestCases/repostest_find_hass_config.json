@@ -1,9 +1,0 @@
-{
-    "functionName": "test_find_hass_config",
-    "className": null,
-    "fileName": "/robmarkcole_&_HASS-data-detective/tests_&_test_config.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test finding HASS config.\"\"\"\nwith patch.dict(os.environ, {'HASSIO_TOKEN': 'yo'}):\n    assert config.find_hass_config() == '/config'\nwith patch.dict(os.environ, {}, clear=True), patch(\n    'detective.config.default_hass_config_dir', return_value='default-dir'\n    ), patch('os.path.isdir', return_value=True):\n    assert config.find_hass_config() == 'default-dir'\nwith patch.dict(os.environ, {}, clear=True), patch('os.path.isdir',\n    return_value=False), pytest.raises(ValueError):\n    config.find_hass_config()\n"
-}

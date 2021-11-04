@@ -1,9 +1,0 @@
-{
-    "functionName": "test_fluid_pytorch_equality",
-    "className": "TestFluidPyTorch",
-    "fileName": "/tum-pbs_&_PhiFlow/tests_&_test_fluid_torch.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "for domain in [Domain([8, 6], boundaries=OPEN), Domain([8, 6], boundaries=\n    STICKY), Domain([8, 6], boundaries=SLIPPERY), Domain([8, 6], boundaries\n    =PERIODIC), Domain([8, 6], boundaries=[PERIODIC, [OPEN, STICKY]])]:\n    print('Comparing on domain %s' % (domain.boundaries,))\n    np_fluid = Fluid(domain, density=Noise(), velocity=Noise(2), batch_size=10)\n    torch_fluid = math.to_float(torch_from_numpy(np_fluid))\n    physics = IncompressibleFlow(conserve_density=False)\n    for _ in range(3):\n        np_fluid = physics.step(np_fluid, 1.0)\n        torch_fluid = physics.step(torch_fluid, 1.0)\n        for np_tensor, torch_tensor in zip(struct.flatten(np_fluid), struct\n            .flatten(torch_fluid)):\n            torch_eval = torch_tensor.numpy()\n            numpy.testing.assert_almost_equal(np_tensor, torch_eval, decimal=5)\n"
-}

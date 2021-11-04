@@ -1,9 +1,0 @@
-{
-    "functionName": "runner",
-    "className": "TestCSVDialects",
-    "fileName": "/kenfar_&_DataGristle/scripts_&_tests_&_test_gristle_slicer_cmd.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "assert runtype in ['arg', 'stdin']\nif quoted_file:\n    in_fqfn = self.q_fqfn\nelse:\n    in_fqfn = self.nq_fqfn\nirs = comm.coalesce(' ', f\"'{incl_rec_spec}'\")\ners = comm.coalesce(' ', f\"'{excl_rec_spec}'\")\nics = comm.coalesce(' ', f\"'{incl_col_spec}'\")\necs = comm.coalesce(' ', f\"'{excl_col_spec}'\")\nopt = comm.coalesce(' ', f'{options}')\npgm = fq_pgm\nout_fqfn = self.out_fqfn\ndef run_cmd(cmd):\n    print(cmd)\n    r = envoy.run(cmd)\n    print(r.std_out)\n    print(r.std_err)\n    recs = []\n    for rec in fileinput.input(self.out_fqfn):\n        recs.append(rec[:-1])\n    fileinput.close()\n    return r.status_code, recs\nif runtype == 'arg':\n    arg_cmd = f\"\"\"{pgm} -i {in_fqfn}\n                                -o {out_fqfn}\n                                   {irs}\n                                   {ers}\n                                   {ics}\n                                   {ecs}\n                                   {opt}\n                      \"\"\"\n    rc, recs = run_cmd(arg_cmd)\nelse:\n    stdin_cmd = f\"\"\"cat {in_fqfn} | {pgm}\n                                    -o {out_fqfn}\n                                    {irs}\n                                    {ers}\n                                    {ics}\n                                    {ecs}\n                                    {opt}\n                        \"\"\"\n    rc, recs = run_cmd(stdin_cmd)\nreturn rc, recs\n"
-}

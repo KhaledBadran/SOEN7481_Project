@@ -1,9 +1,0 @@
-{
-    "functionName": "test_jcpot_transport_class",
-    "className": null,
-    "fileName": "/PythonOT_&_POT/test_&_test_da.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"test_jcpot_transport\n    \"\"\"\nns1 = 150\nns2 = 150\nnt = 200\nXs1, ys1 = make_data_classif('3gauss', ns1)\nXs2, ys2 = make_data_classif('3gauss', ns2)\nXt, yt = make_data_classif('3gauss2', nt)\nXs = [Xs1, Xs2]\nys = [ys1, ys2]\notda = ot.da.JCPOTTransport(reg_e=1, max_iter=10000, tol=1e-09, verbose=\n    True, log=True)\notda.fit(Xs=Xs, ys=ys, Xt=Xt)\nassert hasattr(otda, 'coupling_')\nassert hasattr(otda, 'proportions_')\nassert hasattr(otda, 'log_')\nfor i, xs in enumerate(Xs):\n    assert_equal(otda.coupling_[i].shape, (xs.shape[0], Xt.shape[0]))\nmu_t = unif(nt)\nfor i in range(len(Xs)):\n    assert_allclose(np.sum(otda.coupling_[i], axis=0), mu_t, rtol=0.001,\n        atol=0.001)\n    assert_allclose(np.dot(otda.log_['D1'][i], np.sum(otda.coupling_[i],\n        axis=1)), otda.proportions_, rtol=0.001, atol=0.001)\ntransp_Xs = otda.transform(Xs=Xs)\n[assert_equal(x.shape, y.shape) for x, y in zip(transp_Xs, Xs)]\nXs_new, _ = make_data_classif('3gauss', ns1 + 1)\ntransp_Xs_new = otda.transform(Xs_new)\nassert_equal(transp_Xs_new.shape, Xs_new.shape)\ntransp_yt = otda.transform_labels(ys)\nassert_equal(transp_yt.shape[0], yt.shape[0])\nassert_equal(transp_yt.shape[1], len(np.unique(ys)))\ntransp_ys = otda.inverse_transform_labels(yt)\n[assert_equal(x.shape[0], y.shape[0]) for x, y in zip(transp_ys, ys)]\n[assert_equal(x.shape[1], len(np.unique(y))) for x, y in zip(transp_ys, ys)]\n"
-}

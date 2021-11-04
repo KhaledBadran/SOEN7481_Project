@@ -1,9 +1,0 @@
-{
-    "functionName": "test__check_proposals_trials_and_proposals_gt_cardinality",
-    "className": "TestBaseTuner",
-    "fileName": "/HDI-Project_&_BTB/tests_&_tuning_&_tuners_&_test_base.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that ``StopTuning`` is being raised if ``proposals`` + ``len(self.trials)``\n        is greater than ``self.tunable.cardinality``.\n        \"\"\"\ninstance = MagicMock()\ninstance.tunable = MagicMock(spec_set=Tunable)\ninstance.tunable.cardinality = 4\ninstance._trials_set.__len__.return_value = 2\nwith self.assertRaises(StopTuning):\n    BaseTuner._check_proposals(instance, 3)\n"
-}

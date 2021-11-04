@@ -1,9 +1,0 @@
-{
-    "functionName": "test_usbtmccomm_read_raw",
-    "className": null,
-    "fileName": "/Galvant_&_InstrumentKit/instruments_&_tests_&_test_comm_&_test_usbtmc.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "comm = USBTMCCommunicator()\ncomm._filelike.read_raw = mock.MagicMock(return_value=b'abc')\nassert comm.read_raw() == b'abc'\ncomm._filelike.read_raw.assert_called_with(num=-1)\nassert comm._filelike.read_raw.call_count == 1\ncomm._filelike.read_raw = mock.MagicMock()\ncomm.read_raw(10)\ncomm._filelike.read_raw.assert_called_with(num=10)\nmock.patch(patch_path)"
-}

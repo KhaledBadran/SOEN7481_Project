@@ -1,9 +1,0 @@
-{
-    "functionName": "test_workflow_measures_wip2",
-    "className": null,
-    "fileName": "/nickdelgrosso_&_LeanSim/tests_&_test_workflow.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "for worker in wflow.workers:\n    worker.batch_size = 10\nassert wflow.wip == 0\nwflow.workers[0].todo = 10\nfor el in range(1, 30):\n    wflow.step()\n    assert wflow.wip == min([el, 10])\n"
-}

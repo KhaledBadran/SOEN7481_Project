@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_nmax",
-    "className": null,
-    "fileName": "/grd349_&_PBjam/pbjam_&_tests_&_test_asy_peakbag.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test for method to get nmax\"\"\"\nnsamples = cs.pars['nsamples']\nnorders = cs.pars['norders']\nmod = asymp_spec_model(cs.st.f, norders)\ndnu, numax, eps = 10 ** cs.pars['asypars'][0], 10 ** cs.pars['asypars'][1\n    ], cs.pars['asypars'][2]\nfunc = mod._get_nmax\ninp = [dnu, numax, eps]\ninp_arr = [np.float64(dnu).repeat(nsamples), np.float64(numax).repeat(\n    nsamples), np.float64(eps).repeat(nsamples)]\npbt.does_it_run(func, inp)\npbt.does_it_return(func, inp)\npbt.right_type(func, inp, float)\npbt.right_type(func, inp_arr, np.ndarray)\npbt.right_shape(func, inp, ())\npbt.right_shape(func, inp_arr, (nsamples,))\nassert func(*inp) == 0.0\n"
-}

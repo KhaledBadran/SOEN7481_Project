@@ -1,9 +1,0 @@
-{
-    "functionName": "test_cegb_affects_behavior",
-    "className": "TestBasic",
-    "fileName": "/microsoft_&_LightGBM/tests_&_python_package_test_&_test_basic.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "X = np.random.random((100, 5))\nX[:, ([1, 3])] = 0\ny = np.random.random(100)\nnames = [('col_%d' % i) for i in range(5)]\nds = lgb.Dataset(X, feature_name=names).construct()\nds.set_label(y)\nbase = lgb.Booster(train_set=ds)\nfor k in range(10):\n    base.update()\nwith tempfile.NamedTemporaryFile() as f:\n    basename = f.name\nbase.save_model(basename)\nwith open(basename, 'rt') as f:\n    basetxt = f.read()\ncases = [{'cegb_penalty_feature_coupled': [50, 100, 10, 25, 30]}, {\n    'cegb_penalty_feature_lazy': [1, 2, 3, 4, 5]}, {'cegb_penalty_split': 1}]\nfor case in cases:\n    booster = lgb.Booster(train_set=ds, params=case)\n    for k in range(10):\n        booster.update()\n    with tempfile.NamedTemporaryFile() as f:\n        casename = f.name\n    booster.save_model(casename)\n    with open(casename, 'rt') as f:\n        casetxt = f.read()\n    self.assertNotEqual(basetxt, casetxt)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_outputsArePrivate",
-    "className": "MethodicalTests",
-    "fileName": "/glyph_&_Automat/automat_&__test_&_test_methodical.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        One of the benefits of using a state machine is that your output method\n        implementations don't need to take invalid state transitions into\n        account - the methods simply won't be called.  This property would be\n        broken if client code called output methods directly, so output methods\n        are not directly visible under their names.\n        \"\"\"\nclass Machination(object):\n    machine = MethodicalMachine()\n    counter = 0\n\n    @machine.input()\n    def anInput(self):\n        \"\"\"an input\"\"\"\n\n    @machine.output()\n    def anOutput(self):\n        self.counter += 1\n\n    @machine.state(initial=True)\n    def state(self):\n        \"\"\"a machine state\"\"\"\n    state.upon(anInput, enter=state, outputs=[anOutput])\nmach1 = Machination()\nmach1.anInput()\nself.assertEqual(mach1.counter, 1)\nmach2 = Machination()\nwith self.assertRaises(AttributeError) as cm:\n    mach2.anOutput\nself.assertEqual(mach2.counter, 0)\nself.assertIn(\n    'Machination.anOutput is a state-machine output method; to produce this output, call an input method instead.'\n    , str(cm.exception))\n"
-}

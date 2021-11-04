@@ -1,9 +1,0 @@
-{
-    "functionName": "test_exec_step",
-    "className": "TestATRE",
-    "fileName": "/ChristianVisintin_&_ATtila/tests_&_test_atre.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.atre = ATRuntimeEnvironment(True)\nself.atre.configure_virtual_communicator('virtualAdapter', 115200, 10, '\\r',\n    read_callback, write_callback, in_waiting)\ntry:\n    self.atre.parse_ATScript('%s%s' % (self.script_dir, SCRIPT_RUN))\nexcept (ATScriptNotFound, ATScriptSyntaxError) as err:\n    self.assertTrue(False, 'Could not parse AT script: %s' % err)\nself.atre.open_serial()\nres = True\nwhile res:\n    try:\n        res = self.atre.exec_next()\n    except (ATRuntimeError, ATSerialPortError, ATREUninitializedError) as err:\n        self.assertTrue(False, 'Runtime error: %s' % err)\nself.atre.close_serial()\nself.atre.init_session([])\ntry:\n    self.atre.parse_ATScript('%s%s' % (self.script_dir, SCRIPT_ATRE_ERR))\nexcept (ATScriptNotFound, ATScriptSyntaxError) as err:\n    self.assertTrue(False, 'Could not parse AT script: %s' % err)\nself.atre.open_serial()\nwith self.assertRaises(ATRuntimeError):\n    self.atre.exec_next()\nself.atre.close_serial()\n"
-}

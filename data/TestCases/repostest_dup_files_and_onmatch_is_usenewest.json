@@ -1,9 +1,0 @@
-{
-    "functionName": "test_dup_files_and_onmatch_is_usenewest",
-    "className": "TestMatchOnNameOnly",
-    "fileName": "/kenfar_&_DataGristle/scripts_&_tests_&_test_gristle_dir_merger_cmd.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"      starting dirs & files:\n            src_dir\\\\mysubdir\foo.csv\n            dst_dir\\\\mysubdir\foo.csv\n                  should become:\n            dst_dir\\\\mysubdir\foo.csv\n        \"\"\"\ncreate_test_file(self.dest_subdir, 'foo.csv', contents='is-different', year\n    =2014)\nself.cmd = get_cmd(self.source_dir, self.dest_dir, match_on='name_only',\n    on_match='keep_newest')\nrunner = envoy.run(self.cmd)\nself.assert_results(runner, source_files=None, dest_files=['foo.csv'])\nassert 'is-different' == get_file_contents(os.path.join(self.dest_dir,\n    'mysubdir', 'foo.csv'))\n"
-}

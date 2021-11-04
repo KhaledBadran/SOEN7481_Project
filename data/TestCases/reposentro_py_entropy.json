@@ -1,9 +1,0 @@
-{
-    "functionName": "entro_py_entropy",
-    "className": null,
-    "fileName": "/neuropsychology_&_NeuroKit/tests_&_tests_complexity.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "fuzzy = True if remove_baseline else False\ncross = True if type(x) == list else False\nN = len(x[0]) if cross else len(x)\nif scale:\n    if cross:\n        x = [entro_py_scale(np.copy(x[0])), entro_py_scale(np.copy(x[1]))]\n    else:\n        x = entro_py_scale(np.copy(x))\nphi = [0, 0]\nfor j in [0, 1]:\n    m = dim + j\n    npat = N - dim\n    if cross:\n        patterns = [entro_py_pattern_mat(x[0], m)[:, :npat],\n            entro_py_pattern_mat(x[1], m)[:, :npat]]\n    else:\n        patterns = entro_py_pattern_mat(x, m)[:, :npat]\n    if remove_baseline:\n        if cross:\n            patterns[0] = entro_py_remove_baseline(patterns[0], axis=0)\n            patterns[1] = entro_py_remove_baseline(patterns[1], axis=0)\n        else:\n            patterns = entro_py_remove_baseline(patterns, axis=0)\n    count = np.zeros(npat)\n    for i in range(npat):\n        if cross:\n            if m == 1:\n                sub = patterns[1][i]\n            else:\n                sub = patterns[1][:, ([i])]\n            dist = np.max(np.abs(patterns[0] - sub), axis=0)\n        else:\n            if m == 1:\n                sub = patterns[i]\n            else:\n                sub = patterns[:, ([i])]\n            dist = np.max(np.abs(patterns - sub), axis=0)\n        if fuzzy:\n            sim = np.exp(-np.power(dist, n) / r)\n        else:\n            sim = dist < r\n        count[i] = np.sum(sim) - 1\n    phi[j] = np.mean(count) / (N - dim - 1)\nreturn np.log(phi[0] / phi[1])\n"
-}

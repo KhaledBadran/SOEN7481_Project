@@ -1,9 +1,0 @@
-{
-    "functionName": "test_reload_custom_code_after_changes",
-    "className": "Test",
-    "fileName": "/fabioz_&_PyDev.Debugger/test_pydevd_reload_&_test_pydevd_reload.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "SAMPLE_CODE1 = \"\"\"\nCONSTANT = 1\n\nclass B(object):\n    def foo(self):\n        return CONSTANT\n\"\"\"\nSAMPLE_CODE2 = \"\"\"\nCONSTANT = 1\n\ndef __xreload_after_reload_update__(namespace):\n    namespace['CONSTANT'] = 2\n\nclass B(object):\n    def foo(self):\n        return CONSTANT\n\"\"\"\nself.make_mod(sample=SAMPLE_CODE1)\nimport x\nfoo = x.B().foo\nself.assertEqual(foo(), 1)\nself.make_mod(sample=SAMPLE_CODE2)\npydevd_reload.xreload(x)\nself.assertEqual(foo(), 2)\n"
-}

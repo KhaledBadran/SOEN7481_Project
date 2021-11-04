@@ -1,9 +1,0 @@
-{
-    "functionName": "test_retry_mechanism",
-    "className": "TestRetryDecorator",
-    "fileName": "/facebook_&_Ax/ax_&_utils_&_common_&_tests_&_test_executils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Tests if the decorator retries sufficient number of times\n        \"\"\"\nclass DecoratorTester:\n\n    def __init__(self):\n        self.retries_done = 0\n\n    @retry_on_exception(retries=4)\n    def error_throwing_function(self):\n        return self.succeed_on_3rd_try()\n\n    def succeed_on_3rd_try(self):\n        if self.retries_done < 2:\n            self.retries_done += 1\n            raise Exception(\n                'This error surfacing means enough retries were not done')\n        else:\n            return 'SUCCESS'\ndecorator_tester = DecoratorTester()\nself.assertEqual('SUCCESS', decorator_tester.error_throwing_function())\n"
-}

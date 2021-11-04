@@ -1,9 +1,0 @@
-{
-    "functionName": "test_collectOutputs",
-    "className": "MethodicalTests",
-    "fileName": "/glyph_&_Automat/automat_&__test_&_test_methodical.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Outputs can be combined with the \"collector\" argument to \"upon\".\n        \"\"\"\nimport operator\nclass Machine(object):\n    m = MethodicalMachine()\n\n    @m.input()\n    def input(self):\n        \"\"\"an input\"\"\"\n\n    @m.output()\n    def outputA(self):\n        return 'A'\n\n    @m.output()\n    def outputB(self):\n        return 'B'\n\n    @m.state(initial=True)\n    def state(self):\n        \"\"\"a state\"\"\"\n    state.upon(input, state, [outputA, outputB], collector=lambda x: reduce\n        (operator.add, x))\nm = Machine()\nself.assertEqual(m.input(), 'AB')\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_gp_construction_singular_covariance_matrix",
-    "className": "TestGaussianProcess",
-    "fileName": "/Yelp_&_MOE/moe_&_tests_&_optimal_learning_&_python_&_cpp_wrappers_&_gaussian_process_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that the GaussianProcess ctor indicates a singular covariance matrix when points_sampled contains duplicates (0 noise).\"\"\"\nindex = numpy.argmax(numpy.greater_equal(self.num_sampled_list, 1))\ndomain, gaussian_process = self.gp_test_environments[index]\npoint_one = SamplePoint([0.0] * domain.dim, 1.0, 0.0)\npoint_two = SamplePoint([1.0] * domain.dim, 1.0, 0.0)\npoint_three = point_two\nhistorical_data = HistoricalData(len(point_one.point), [point_one,\n    point_two, point_three])\nwith pytest.raises(C_GP.SingularMatrixException):\n    GaussianProcess(gaussian_process.get_covariance_copy(), historical_data)\n"
-}

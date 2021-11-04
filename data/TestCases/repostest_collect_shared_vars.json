@@ -1,9 +1,0 @@
-{
-    "functionName": "test_collect_shared_vars",
-    "className": null,
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_test_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from lasagne.utils import collect_shared_vars as collect\nx, y, z = (theano.shared(0, name=n) for n in 'xyz')\nassert collect([x, y, z]) == [x, y, z]\nassert collect([x, y, x, y, y, z]) == [x, y, z]\nassert collect(x + y + z) == [x, y, z]\nassert collect(x + (y + z)) == [x, y, z]\nassert collect([x ** 2, y * z * np.ones(10), x + T.matrix()]) == [x, y, z]\nassert collect([T.matrix() + T.matrix(), T.log(T.matrix())]) == []\n"
-}

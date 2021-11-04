@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_params_keras_g_regressor",
-    "className": null,
-    "fileName": "/goeckslab_&_Galaxy-ML/galaxy_ml_&_tests_&_test_keras_galaxy.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "config = train_model.get_config()\nregressor = KerasGRegressor(config, optimizer='sgd')\ngot = list(regressor.get_params().keys())\ngot = [x for x in got if not x.startswith('layers') or x.endswith('seed')]\nexpect = ['amsgrad', 'batch_size', 'beta_1', 'beta_2', 'callbacks',\n    'config', 'decay', 'epochs', 'loss', 'lr', 'metrics', 'model_type',\n    'momentum', 'nesterov', 'optimizer', 'rho', 'schedule_decay', 'seed',\n    'steps_per_epoch', 'validation_fraction', 'validation_steps', 'verbose',\n    'layers_0_Dense__config__kernel_initializer__config__seed',\n    'layers_1_Dense__config__kernel_initializer__config__seed']\nassert got == expect, got\n"
-}

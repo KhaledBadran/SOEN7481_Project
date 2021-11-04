@@ -1,9 +1,0 @@
-{
-    "functionName": "test_generate_rules_apriori_large",
-    "className": null,
-    "fileName": "/tommyod_&_Efficient-Apriori/efficient_apriori_&_tests_&_test_rules.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test with lots of data.\n    This test will fail if the second argument to `_ap_genrules` is not \n    validated as non-empty before the recursive function call. We must have\n    if H_m_copy:\n        yield from _ap_genrules\n    for this test to pass.\n    \"\"\"\ntransactions = generate_transactions(num_transactions=100, unique_items=30,\n    items_row=(1, 20), seed=123)\nitemsets, num_transactions = itemsets_from_transactions(transactions, 0.1)\nmin_conf = 0.3\nrules_apri = generate_rules_apriori(itemsets, min_conf, num_transactions)\nrules_naive = generate_rules_naively(itemsets, min_conf, num_transactions)\nrules_apri = list(rules_apri)\nrules_naive = list(rules_naive)\nassert len(rules_apri) == len(rules_naive)\nassert set(rules_apri) == set(rules_naive)\n"
-}

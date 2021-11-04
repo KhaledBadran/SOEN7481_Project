@@ -1,9 +1,0 @@
-{
-    "functionName": "test_variational_univariate_conditionals",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_models_&_test_variational.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "q_mu = np.ones((1, Datum.num_latent_gps)) * Datum.posterior_mean\nones = np.ones((1, Datum.num_latent_gps)) if diag else np.ones((1, 1, Datum\n    .num_latent_gps))\nq_sqrt = ones * Datum.posterior_std\nmodel = gpflow.models.SVGP(kernel=SquaredExponential(variance=Datum.K),\n    likelihood=Gaussian(), inducing_variable=Datum.Z, num_latent_gps=Datum.\n    num_latent_gps, q_diag=diag, whiten=whiten, q_mu=q_mu, q_sqrt=q_sqrt)\nfmean_func, fvar_func = gpflow.conditionals.conditional(Datum.X, Datum.Z,\n    model.kernel, model.q_mu, q_sqrt=model.q_sqrt, white=whiten)\nmean_value, var_value = fmean_func[0, 0], fvar_func[0, 0]\nassert_allclose(mean_value, Datum.posterior_mean, atol=4)\nassert_allclose(var_value, Datum.posterior_var, atol=4)\npytest.mark.parametrize('diag', [True, False])pytest.mark.parametrize('whiten', [True, False])"
-}

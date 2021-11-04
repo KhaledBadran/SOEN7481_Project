@@ -1,9 +1,0 @@
-{
-    "functionName": "test_tax_func_estimate",
-    "className": null,
-    "fileName": "/open-source-economics_&_OG-USA/ogusa_&_tests_&_test_txfunc.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test txfunc.tax_func_loop() function.  The test is that given\n    inputs from previous run, the outputs are unchanged.\n    \"\"\"\ninput_tuple = utils.safe_read_pickle(os.path.join(CUR_PATH, 'test_io_data',\n    'tax_func_estimate_inputs.pkl'))\n(BW, S, starting_age, ending_age, beg_yr, baseline, analytical_mtrs,\n    age_specific, reform, data, client, num_workers) = input_tuple\ntax_func_type = 'DEP'\nage_specific = False\nBW = 1\ntest_dict = txfunc.tax_func_estimate(BW, S, starting_age, ending_age,\n    start_year=beg_yr, baseline=baseline, analytical_mtrs=analytical_mtrs,\n    tax_func_type=tax_func_type, age_specific=age_specific, reform=reform,\n    data=data, client=dask_client, num_workers=NUM_WORKERS)\nexpected_dict = utils.safe_read_pickle(os.path.join(CUR_PATH,\n    'test_io_data', 'tax_func_estimate_outputs.pkl'))\ndel expected_dict['tfunc_time'], expected_dict['taxcalc_version']\nfor k, v in expected_dict.items():\n    try:\n        assert all(test_dict[k] == v)\n    except ValueError:\n        assert (test_dict[k] == v).all()\n    except TypeError:\n        assert test_dict[k] == v\npytest.mark.full_run"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_all_params_with_unwrap_shared",
-    "className": "TestGetAllParams",
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_layers_&_test_helper.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from lasagne.layers import InputLayer, DenseLayer, get_all_params\nimport theano.tensor as T\nfrom lasagne.utils import floatX\nl1 = InputLayer((10, 20))\nl2 = DenseLayer(l1, 30)\nW1 = theano.shared(floatX(numpy.zeros((30, 2))))\nW2 = theano.shared(floatX(numpy.zeros((2, 40))))\nW_expr = T.dot(W1, W2)\nl3 = DenseLayer(l2, 40, W=W_expr, b=None)\nl2_params = get_all_params(l2)\nassert get_all_params(l3) == l2_params + [W1, W2]\nassert get_all_params(l3, unwrap_shared=False) == l2_params + [W_expr]\n"
-}

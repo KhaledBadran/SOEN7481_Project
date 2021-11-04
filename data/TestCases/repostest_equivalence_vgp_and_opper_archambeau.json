@@ -1,9 +1,0 @@
-{
-    "functionName": "test_equivalence_vgp_and_opper_archambeau",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_integration_&_test_method_equivalence.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "kernel = gpflow.kernels.Matern52()\nlikelihood = gpflow.likelihoods.StudentT()\nvgp_oa_model = _create_vgpao_model(kernel, likelihood, DatumVGP.q_alpha,\n    DatumVGP.q_lambda)\nK = kernel(DatumVGP.X) + np.eye(DatumVGP.N) * default_jitter()\nL = np.linalg.cholesky(K)\nL_inv = np.linalg.inv(L)\nK_inv = np.linalg.inv(K)\nmean = K @ DatumVGP.q_alpha\nprec_dnn = K_inv[(None), :, :] + np.array([np.diag(l ** 2) for l in\n    DatumVGP.q_lambda.T])\nvar_dnn = np.linalg.inv(prec_dnn)\nsvgp_model_unwhitened = _create_svgp_model(kernel, likelihood, mean, np.\n    linalg.cholesky(var_dnn), whiten=False)\nmean_white_nd = L_inv.dot(mean)\nvar_white_dnn = np.einsum('nN,dNM,mM->dnm', L_inv, var_dnn, L_inv)\nq_sqrt_nnd = np.linalg.cholesky(var_white_dnn)\nvgp_model = _create_vgp_model(kernel, likelihood, mean_white_nd, q_sqrt_nnd)\nlikelihood_vgp = vgp_model.elbo()\nlikelihood_vgp_oa = vgp_oa_model.elbo()\nlikelihood_svgp_unwhitened = svgp_model_unwhitened.elbo(DatumVGP.data)\nassert_allclose(likelihood_vgp, likelihood_vgp_oa, rtol=0.01)\nassert_allclose(likelihood_vgp, likelihood_svgp_unwhitened, rtol=0.01)\nvgp_oa_mu, vgp_oa_var = vgp_oa_model.predict_f(DatumVGP.Xs)\nsvgp_unwhitened_mu, svgp_unwhitened_var = svgp_model_unwhitened.predict_f(\n    DatumVGP.Xs)\nvgp_mu, vgp_var = vgp_model.predict_f(DatumVGP.Xs)\nassert_allclose(vgp_oa_mu, vgp_mu)\nassert_allclose(vgp_oa_var, vgp_var, rtol=0.0001)\nassert_allclose(svgp_unwhitened_mu, vgp_mu)\nassert_allclose(svgp_unwhitened_var, vgp_var, rtol=0.0001)\n"
-}

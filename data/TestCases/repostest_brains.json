@@ -1,9 +1,0 @@
-{
-    "functionName": "test_brains",
-    "className": null,
-    "fileName": "/nipy_&_PySurfer/surfer_&_tests_&_test_viz.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test plotting of Brain with different arguments.\"\"\"\n_set_backend('auto')\nmlab.figure(101)\nsurfs = ['inflated', 'white', 'white', 'white', 'white', 'white', 'white']\nhemis = ['lh', 'rh', 'both', 'both', 'rh', 'both', 'both']\ntitles = [None, 'Hello', 'Good bye!', 'lut test', 'dict test', 'None test',\n    'RGB test']\ncortices = ['low_contrast', ('Reds', 0, 1, False), 'hotpink', ['yellow',\n    'blue'], dict(colormap='Greys'), None, (0.5, 0.5, 0.5)]\nsizes = [500, (400, 300), (300, 300), (300, 400), 500, 400, 300]\nbackgrounds = ['white', 'blue', 'black', '0.75', (0.2, 0.2, 0.2), 'black',\n    '0.75']\nforegrounds = ['black', 'white', '0.75', 'red', (0.2, 0.2, 0.2), 'blue',\n    'black']\nfigs = [101, mlab.figure(), None, None, mlab.figure(), None, None]\nsubj_dir = utils._get_subjects_dir()\nsubj_dirs = [None, subj_dir, subj_dir, subj_dir, subj_dir, subj_dir, subj_dir]\nalphas = [1.0, 0.5, 0.25, 0.7, 0.5, 0.25, 0.7]\nfor surf, hemi, title, cort, s, bg, fg, fig, sd, alpha in zip(surfs, hemis,\n    titles, cortices, sizes, backgrounds, foregrounds, figs, subj_dirs, alphas\n    ):\n    brain = Brain(subject_id, hemi, surf, title=title, cortex=cort, alpha=\n        alpha, size=s, background=bg, foreground=fg, figure=fig,\n        subjects_dir=sd)\n    with np.errstate(invalid='ignore'):\n        brain.set_distance()\n    brain.close()\nbrain = Brain(subject_id, hemi, surf, subjects_dir=sd, interaction='terrain')\nbrain.close()\npytest.raises(ValueError, Brain, subject_id, 'lh', 'inflated', subjects_dir='')\npytest.raises(ValueError, Brain, subject_id, 'lh', 'inflated', interaction=\n    'foo', subjects_dir=sd)\nrequires_fsaverage()"
-}

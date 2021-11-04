@@ -1,9 +1,0 @@
-{
-    "functionName": "test_eda_plot",
-    "className": null,
-    "fileName": "/neuropsychology_&_NeuroKit/tests_&_tests_eda.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "sampling_rate = 1000\neda = nk.eda_simulate(duration=30, sampling_rate=sampling_rate, scr_number=\n    6, noise=0, drift=0.01, random_state=42)\neda_summary, _ = nk.eda_process(eda, sampling_rate=sampling_rate)\nnk.eda_plot(eda_summary)\nfig = plt.gcf()\nassert len(fig.axes) == 3\ntitles = ['Raw and Cleaned Signal', 'Skin Conductance Response (SCR)',\n    'Skin Conductance Level (SCL)']\nfor ax, title in zip(fig.get_axes(), titles):\n    assert ax.get_title() == title\nassert fig.get_axes()[2].get_xlabel() == 'Samples'\nnp.testing.assert_array_equal(fig.axes[0].get_xticks(), fig.axes[1].\n    get_xticks(), fig.axes[2].get_xticks())\nplt.close(fig)\nnk.eda_plot(eda_summary, sampling_rate=sampling_rate)\nfig = plt.gcf()\nassert fig.get_axes()[2].get_xlabel() == 'Seconds'\n"
-}

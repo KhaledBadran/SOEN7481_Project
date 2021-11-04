@@ -1,9 +1,0 @@
-{
-    "functionName": "test_kimt_calc",
-    "className": null,
-    "fileName": "/simonom_&_PyCHAM/PyCHAM_&_Unit_Testing_&_test_kimt_calc.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from kimt_calc import kimt_calc\n[kimt, kelv_fac] = kimt_calc(y, mfp, num_sb, num_speci, accom_coeff, y_mw,\n    surfT, R_gas, TEMP, NA, y_dens, N_perbin, DStar_org, x.reshape(1, -1) *\n    1e-06, Psat, therm_sp, H2Oi)\nfrom ode_gen import ode_gen\nsol_eff = ode_gen(1, y, num_speci, 1, 1, 1, 1, 1, H2Oi, TEMP, 1, num_sb, 1,\n    mfp, accom_coeff, surfT, y_dens, N_perbin, DStar_org, y_mw, x,\n    core_diss, 1, 1, 1, 1, 1, 1, pconc, 1, 1, therm_sp, 1, 1, 1, 1, 1, 1, 1,\n    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1)\nfig, ax0 = plt.subplots(1, 1, figsize=(6, 5))\nax0.semilogx(x, kelv_fac, label='Curvature effect')\nax0.semilogx(x, sol_eff, label='Solute effect')\nax0.semilogx(x, kelv_fac * sol_eff, '--', label='Equilibrium saturation ratio')\nax0.set_ylim([0.98, 1.02])\nax0.set_xlabel('Particle radius ($\\\\rm{\\\\mu}$m)', fontsize=10)\nax0.set_ylabel('Saturation ratio', fontsize=10)\nax0.legend()\nplt.show()\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_response_json_gets_expected_request_dict",
-    "className": "TestResponseRetriever",
-    "fileName": "/bigfishgames_&_GameBenchAPI-PyClient/tests_&_test_integration_&_test_api_&_test_response_&_test_response_mediator.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Verify get_response_json.request is set to the correct dict.\"\"\"\nmock_return.request.return_value = ''\nfor test, params in self.test_params.items():\n    session_parameters = {'method': params['method'], 'session_id': params[\n        'session_id'], 'metric': params['metric'], 'auth_token': AUTH_TOKEN,\n        'params': params['params'], 'data': params['data']}\n    self.retriever = ResponseRetriever(**session_parameters)\n    self.retriever.get_response_json()\n    expected = {'method': params['method'], 'url': params['url'],\n        'attributes': params['attributes']}\n    actual = self.retriever.request\n    self.assertEqual(expected, actual, self.error_message.format(test,\n        expected, actual))\npatch('gamebench_api_client.api.response.response_retriever.RequestsAdapter')"
-}

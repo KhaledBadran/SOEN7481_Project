@@ -1,9 +1,0 @@
-{
-    "functionName": "test_multiple_programs",
-    "className": "TestcQasmReader",
-    "fileName": "/QE-Lab_&_OpenQL/tests_&_cqasm_&_test_cqasm_reader.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "config_fn = os.path.join(curdir, '../hardware_config_cc_light.json')\nplatform = ql.Platform('seven_qubits_chip', config_fn)\nnumber_qubits = platform.get_qubit_number()\nprogram = ql.Program('test_multiple_programs', platform, number_qubits)\nqasm_rdr = ql.cQasmReader(platform, program)\nqasm_str = \"\"\"version 1.0\nqubits 6\nprep_z q[0]\nprep_z q[1]\nx q[0]\nh q[1]\n\"\"\"\nqasm_rdr.string2circuit(qasm_str)\nqasm_str = \"\"\"version 1.0\nqubits 6\nprep_z q[2]\nprep_z q[3]\nx q[2]\nh q[3]\nmeasure_all\n\"\"\"\nqasm_rdr.string2circuit(qasm_str)\nprogram.compile()\n"
-}

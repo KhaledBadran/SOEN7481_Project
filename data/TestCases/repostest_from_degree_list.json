@@ -1,9 +1,0 @@
-{
-    "functionName": "test_from_degree_list",
-    "className": null,
-    "fileName": "/Silmathoron_&_NNGT/testing_&_test_generation2.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Check that the degrees generated using `from_degree_list` indeed\n    correspond to the provided list\n    \"\"\"\nnum_nodes = 1000\ndeg_list = np.random.randint(0, 100, size=num_nodes)\ng = ng.from_degree_list(deg_list, degree_type='in', nodes=num_nodes)\nassert np.array_equal(g.get_degrees('in'), deg_list)\nassert g.edge_nb() == np.sum(deg_list)\ng = ng.from_degree_list(deg_list, degree_type='out', nodes=num_nodes)\nassert np.array_equal(g.get_degrees('out'), deg_list)\nassert g.edge_nb() == np.sum(deg_list)\ndeg_list = 2 * np.random.randint(0, 50, size=num_nodes)\ntry:\n    g = ng.from_degree_list(deg_list, degree_type='total', nodes=num_nodes,\n        directed=True)\n    assert np.array_equal(g.get_degrees('total'), deg_list)\n    assert g.edge_nb() == int(0.5 * np.sum(deg_list))\nexcept ValueError:\n    print(\"Skipping non graphical sequence for 'total-degree'.\")\ndeg_list = 2 * np.random.randint(0, 50, size=num_nodes)\ntry:\n    g = ng.from_degree_list(deg_list, nodes=num_nodes, directed=False)\n    assert np.all(g.get_degrees('total') == deg_list)\n    assert g.edge_nb() == int(0.5 * np.sum(deg_list))\nexcept ValueError:\n    print('Skipping non graphical sequence for undirected graph.')\npytest.mark.mpi_skip"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_io_single",
-    "className": null,
-    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_slittrace.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "slits = SlitTraceSet(np.full((1000, 1), 2, dtype=float), np.full((1000, 1),\n    8, dtype=float), 'MultiSlit', nspat=10, PYP_SPEC='dummy')\ntst_file = data_path('tst_slittrace.fits')\nif os.path.isfile(tst_file):\n    os.remove(tst_file)\nslits.to_file(tst_file)\n_slits = SlitTraceSet.from_file(tst_file)\nassert np.array_equal(_slits.left_init, np.full((1000, 1), 2, dtype=float)\n    ), 'Bad left read'\nassert np.array_equal(_slits.left_init, slits.left_init), 'Bad left read'\nif os.path.isfile(tst_file):\n    os.remove(tst_file)\nslits.to_file(tst_file)\nslits.to_file(tst_file, overwrite=True)\n_slits = SlitTraceSet.from_file(tst_file)\nassert np.array_equal(slits.right_init, _slits.right_init\n    ), 'Bad read from_file'\nos.remove(tst_file)\n"
-}

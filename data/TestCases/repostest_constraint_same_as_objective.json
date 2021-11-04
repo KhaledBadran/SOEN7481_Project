@@ -1,9 +1,0 @@
-{
-    "functionName": "test_constraint_same_as_objective",
-    "className": "TestAxClient",
-    "fileName": "/facebook_&_Ax/ax_&_service_&_tests_&_test_ax_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Check that we do not allow constraints on the objective metric.\"\"\"\nax_client = AxClient(GenerationStrategy(steps=[GenerationStep(model=Models.\n    SOBOL, num_trials=30)]))\nwith self.assertRaises(ValueError):\n    ax_client.create_experiment(name='test_experiment', parameters=[{'name':\n        'x3', 'type': 'fixed', 'value': 2, 'value_type': 'int'}],\n        objective_name='test_objective', outcome_constraints=[\n        'test_objective >= 3'])\n"
-}

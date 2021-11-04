@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ols_l2_regularized",
-    "className": "PerfectCorrelationMultivariateOLSTests",
-    "fileName": "/Mogeng_&_IOHMM/tests_&_test_OLS.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.model = OLS(solver='auto', fit_intercept=True, est_stderr=True,\n    reg_method='l2', alpha=0.1, l1_ratio=0, tol=0.0001, max_iter=100, coef=\n    None, stderr=None, dispersion=None)\nself.model.fit(self.X, self.Y, sample_weight=0.5)\nnp.testing.assert_array_almost_equal(self.model.coef, np.array([[-2.0172203,\n    -52.14364269, 0.07089677, -0.42552125, -0.57305292, -0.41272483, \n    48.32484052], [-2.0172203, -52.14364269, 0.07089677, -0.42552125, -\n    0.57305292, -0.41272483, 48.32484052]]).reshape(2, -1), decimal=3)\nself.assertTrue(self.model.stderr is None)\nself.assertEqual(self.model.dispersion.shape, (2, 2))\nnp.testing.assert_array_almost_equal(old_div(self.model.dispersion, old_div\n    (9.0, self.data_longley.exog.shape[0])), np.array([[250870.081, \n    250870.081], [250870.081, 250870.081]]), decimal=3)\nres = np.array([[280.31871146], [-131.6981265], [90.64414685], [-\n    400.10244445], [-440.59604167], [-543.88595187], [200.70483416], [\n    215.88629903], [74.9456573], [913.85128645], [424.15996133], [-\n    9.5797488], [-360.96841852], [27.214226], [150.87705909], [-492.17489392]])\nnp.testing.assert_array_almost_equal(self.Y - self.model.predict(self.X),\n    np.hstack((res, res)), decimal=3)\nself.assertRaises(ValueError, self.model.loglike, self.X, self.Y)\n"
-}

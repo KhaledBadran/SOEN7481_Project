@@ -1,9 +1,0 @@
-{
-    "functionName": "test_TasUBDeg",
-    "className": null,
-    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_TasUBlibDEG.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "r1 = [1.0, 0.0, 0.0, 8.4377825e-06, -44.549999, -1.40625e-05, 3.3378601e-06,\n    5.0000076, 4.9678469]\nr2 = [0.0, -1.0, 0.0, -60.000084, -44.549999, -1.40625e-05, 3.3378601e-06, \n    5.0000076, 4.9678469]\ncellDeg = [6.11, 6.11, 11.35, 1.187430040454027, 1.1874300210500532, \n    0.5535845899562842, 90.0, 90.0, 120.0, 90.0, 90.0, 60.0]\nUB = calcTasUBFromTwoReflections(cellDeg, r1, r2)\nUBFile = np.array([[0.17459887, 0.024665387, 2.1624945e-08], [-0.072323568,\n    -0.18736884, -5.1334577e-09], [4.706634e-08, 1.6969278e-08, -0.088105723]])\ntest = np.all(np.isclose(UB, 2 * np.pi * UBFile, atol=1e-06))\nprint(cellDeg)\nprint('--------------')\nprint(UB)\nprint('--------------')\nprint(UBFile)\nprint('--------------')\nassert test\nUBInv = np.linalg.inv(UB)\nA3, A4 = [-23, -55]\nangles = np.array([A3, A4])\nEi = 5.05\nEf = 3.2\nqh = 1.174406\nqk = -0.127853\nql = 0.0\nqm = 1.325155\nQH = calcTasQH(UBInv, angles, Ei, Ef)\nassert np.all(np.isclose([QH[0]], [qh, qk, ql], atol=0.0001))\n"
-}

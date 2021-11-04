@@ -1,9 +1,0 @@
-{
-    "functionName": "test_serialize_scaler",
-    "className": null,
-    "fileName": "/CyberReboot_&_NetworkML/tests_&_test_algorithms_host_footprint.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "instance = HostFootprint()\nscaler = StandardScaler()\ntest_data = [[i, i] for i in range(99)]\nscaler.fit(test_data)\nwith tempfile.TemporaryDirectory() as tmpdir:\n    scaler_file = os.path.join(tmpdir, 'scaler.mod')\n    instance.serialize_scaler(scaler, scaler_file)\n    new_scaler = instance.deserialize_scaler(scaler_file)\n    assert len(scaler.mean_) == 2\n    assert scaler.mean_.tolist() == new_scaler.mean_.tolist()\n"
-}

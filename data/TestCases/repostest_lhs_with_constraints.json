@@ -1,9 +1,0 @@
-{
-    "functionName": "test_lhs_with_constraints",
-    "className": null,
-    "fileName": "/bytesandbrains_&_ProcessOptimizer/ProcessOptimizer_&_tests_&_test_constraints.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "space = Space([Real(1, 10)])\ncons_list = [Single(0, 5.0, 'real')]\ncons = Constraints(cons_list, space)\nopt = Optimizer(space, 'ET', lhs=True, n_initial_points=2)\nopt.tell([1], 0)\nwith raises(RuntimeError):\n    opt.set_constraints(cons)\nopt = Optimizer(space, 'ET', lhs=True, n_initial_points=2)\nopt.tell([[1], [1]], [0, 0])\nopt.set_constraints(cons)\npytest.mark.fast_test"
-}

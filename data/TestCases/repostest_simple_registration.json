@@ -1,9 +1,0 @@
-{
-    "functionName": "test_simple_registration",
-    "className": "TestOutputRegistration",
-    "fileName": "/cournape_&_Bento/bento_&_commands_&_tests_&_test_build.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "def hook(context):\n    n = context.make_build_node('foo.txt')\n    context.register_outputs_simple([n])\n    n = context.make_build_node('bar.txt')\n    context.register_outputs_simple([n])\nbld = self._run_build_with_pre_hook(hook)\nself.assertTrue('hook_registered' in bld.outputs_registry.categories)\nnodes = []\nfor name, _nodes, source_dir, target_dir in bld.outputs_registry.iter_category(\n    'hook_registered'):\n    nodes.extend(_nodes)\nself.assertTrue(nodes, [self.build_node.find_node('foo.txt')])\n"
-}

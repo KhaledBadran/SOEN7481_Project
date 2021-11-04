@@ -1,9 +1,0 @@
-{
-    "functionName": "test_detect_srna",
-    "className": "TestsRNAUTR",
-    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_sRNA_utr_derived.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "sud.replicate_comparison = self.mock.mock_replicate_comparison\nargs = self.mock_args.mock()\nargs.min_len = 1\nargs.max_len = 300\nargs.decrease_utr = 0.5\nargs.fuzzy_utr = 2\nargs.coverages = 'cover'\nargs.texs = 'template_texs'\nargs.tex_notex = 'tex_notex'\nargs.replicates = 'rep'\ngffs = []\nncs = []\nargs.table_best = True\nargs.out = StringIO()\nargs.out_t = StringIO()\nmedian = {'aaa': {'3utr': 555}}\nargs.srnas = [{'strand': '+', 'utr': '3utr', 'end': 20, 'start': 18,\n    'start_tss': 'NA', 'datas': {'frag_1': [{'final_end': 20, 'track':\n    'track_1', 'final_start': 2, 'ori_avg': 27.52, 'avg': 41.36842105263158,\n    'type': 'frag', 'low': 10, 'high': 50, 'conds': ['frag']}]},\n    'end_cleavage': 'NA', 'strain': 'aaa', 'start_cleavage':\n    'Cleavage:18_+', 'detail': {'avg': 41.36842105263158, 'type': 'frag',\n    'low': 10, 'high': 50, 'conds': ['frag']}}]\nsud.detect_srna(median, args)\nself.assertEqual(args.out.getvalue(),\n    \"\"\"aaa\tANNOgesic\tncRNA\t18\t20\t.\t+\t.\tID=aaa_srna_utr0;Name=UTR_sRNA_00000;sRNA_type=3utr;best_avg_coverage=500;best_high_coverage=700;best_low_coverage=400;with_TSS=NA;start_cleavage=Cleavage:18_+;end_cleavage=NA\n\"\"\"\n    )\nself.assertEqual(args.out_t.getvalue(),\n    \"\"\"aaa\t00000\t18\t20\t+\tfrag_1\ttrack_1\t500\t700\t400\tfrag(avg=200;high=700;low=400)\n\"\"\"\n    )\n"
-}

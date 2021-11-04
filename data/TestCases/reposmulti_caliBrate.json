@@ -1,9 +1,0 @@
-{
-    "functionName": "multi_caliBrate",
-    "className": null,
-    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_calibrations.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "for idx, row in enumerate(fitstbl):\n    if 'science' in row['frametype']:\n        sci_file = os.path.join(row['directory'], row['filename'])\n        break\nspectrograph = load_spectrograph('shane_kast_blue')\npar = spectrograph.config_specific_par(sci_file)\nturn_off = dict(use_biasimage=False)\npar.reset_all_processimages_par(**turn_off)\ncalib_par = par['calibrations']\ncalib_par['bpm_usebias'] = False\ncalib_par['slitedges']['sync_predict'] = 'nearest'\nmulti_caliBrate = calibrations.MultiSlitCalibrations(fitstbl, calib_par,\n    spectrograph, data_path('Masters'))\nreturn reset_calib(multi_caliBrate)\npytest.fixture"
-}

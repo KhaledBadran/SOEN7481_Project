@@ -1,9 +1,0 @@
-{
-    "functionName": "test__load_all_image_components__load_from_multi_hdu_fits",
-    "className": "TestLoadCIData",
-    "fileName": "/Jammy2211_&_PyAutoCTI/test_&_unit_&_charge_injection_&_test_ci_data.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "frame_geometry = MockGeometry()\npattern = MockPattern()\ndata = ci_data.ci_data_from_fits(frame_geometry=frame_geometry, ci_pattern=\n    pattern, image_path=test_data_dir + '3x3_multiple_hdu.fits', image_hdu=\n    0, noise_map_path=test_data_dir + '3x3_multiple_hdu.fits',\n    noise_map_hdu=1, ci_pre_cti_path=test_data_dir +\n    '3x3_multiple_hdu.fits', ci_pre_cti_hdu=2, cosmic_ray_image_path=\n    test_data_dir + '3x3_multiple_hdu.fits', cosmic_ray_image_hdu=3)\nassert (data.image == np.ones((3, 3))).all()\nassert (data.noise_map == 2.0 * np.ones((3, 3))).all()\nassert (data.ci_pre_cti == 3.0 * np.ones((3, 3))).all()\nassert data.ci_frame.frame_geometry == frame_geometry\nassert data.ci_frame.ci_pattern == pattern\nassert (data.cosmic_ray_image == 4.0 * np.ones((3, 3))).all()\n"
-}

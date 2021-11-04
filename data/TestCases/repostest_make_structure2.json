@@ -1,9 +1,0 @@
-{
-    "functionName": "test_make_structure2",
-    "className": null,
-    "fileName": "/mtien_&_PeptideBuilder/tests_&_test_PeptideBuilder.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Build a helix containing all 20 amino acids, with slowly varying\n    backbone angles, using make_structure(). Now we're changing omega also.\n    The first half of the resulting structure should be identical to\n    `helix.pdb`, while the second half should be slightly different.\n    \"\"\"\nphi_list = []\npsi_im1_list = []\nomega_list = []\nfor i in range(1, 20):\n    phi_list.append(-60 + i)\n    psi_im1_list.append(-40 - i)\n    omega_list.append(180)\nfor i in range(9, 19):\n    omega_list[i] = -178\nstructure = PeptideBuilder.make_structure('ACDEFGHIKLMNPQRSTVWY', phi_list,\n    psi_im1_list, omega_list)\nassert compare_to_reference(structure, 'helix2.pdb')\n"
-}

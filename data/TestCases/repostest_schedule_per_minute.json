@@ -1,9 +1,0 @@
-{
-    "functionName": "test_schedule_per_minute",
-    "className": null,
-    "fileName": "/roniemartinez_&_DocCron/tests_&_test_simple.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "current_datetime = datetime.now(tz=tzlocal()).replace(second=0, microsecond=0)\ncron = doccron.cron('* * * * *')\nassert isinstance(cron, Iterator)\nfor i in range(1, 6):\n    next_schedule = next(cron)\n    assert isinstance(next_schedule, datetime)\n    assert next_schedule == current_datetime + timedelta(minutes=i)\n"
-}

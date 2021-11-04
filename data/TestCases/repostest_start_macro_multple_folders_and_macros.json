@@ -1,9 +1,0 @@
-{
-    "functionName": "test_start_macro_multple_folders_and_macros",
-    "className": "TestAnyPyProcess",
-    "fileName": "/AnyBody-Research-Group_&_AnyPyTools/tests_&_test_abcutils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "number_of_models = 3\nnumber_of_macros = 3\nsetup_models_in_subdirs(tmpdir, number_of_models)\nfolderlist = [str(_) for _ in tmpdir.listdir()]\nmacrolist = default_macro * number_of_macros\nwith tmpdir.as_cwd():\n    app = AnyPyProcess()\n    output = app.start_macro(macrolist, folderlist)\nassert len(output) == len(folderlist) * len(macrolist)\nfor result in output:\n    assert 'ERROR' not in result\n"
-}

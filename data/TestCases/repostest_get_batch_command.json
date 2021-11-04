@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_batch_command",
-    "className": null,
-    "fileName": "/bio-phys_&_MDBenchmark/mdbenchmark_&_tests_&_test_submit.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that the get_engine_command works correctly.\n\n    It should exit if no batching system was found.\n    \"\"\"\noutput = \"\"\"ERROR Was not able to find a batch system. Are you trying to use this package on a host with a queuing system?\n\"\"\"\nwith pytest.raises(SystemExit):\n    get_batch_command()\n    out, err = capsys.readouterr()\n    assert out == output\nmonkeypatch.setattr('mdbenchmark.cli.submit.glob', lambda x: ['qsub'])\nassert get_batch_command()\npytest.mark.skip(reason='monkeypatching is a problem. skip for now.')"
-}

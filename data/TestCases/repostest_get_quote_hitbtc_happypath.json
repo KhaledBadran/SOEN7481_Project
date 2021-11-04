@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_quote_hitbtc_happypath",
-    "className": "TestGetQuoteHitBTC",
-    "fileName": "/EVEprosper_&_ProsperDatareader/tests_&_test_coins.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"validate expected normal behavior\"\"\"\nquote = coins.get_quote_hitbtc(self.coin_list)\nassert isinstance(quote, pandas.DataFrame)\nunique_values, unique_expected = helpers.find_uniques(list(quote.columns.\n    values), self.expected_headers)\nassert unique_expected == []\nif unique_values:\n    pytest.xfail('Unexpected values from get_quote_hitbtc(): {}'.format(\n        unique_values))\nassert len(quote) == len(self.coin_list)\n"
-}

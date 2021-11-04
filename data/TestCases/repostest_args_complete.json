@@ -1,9 +1,0 @@
-{
-    "functionName": "test_args_complete",
-    "className": "CacheTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_cache.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "t = Template(\n    \"\"\"\n        <%%def name=\"foo()\" cached=\"True\" cache_timeout=\"30\" cache_dir=\"%s\"\n         cache_type=\"file\" cache_key='somekey'>\n            this is foo\n        </%%def>\n\n        ${foo()}\n\"\"\"\n     % module_base)\nm = self._install_mock_cache(t)\nt.render()\neq_(m.kwargs, {'dir': module_base, 'type': 'file', 'timeout': 30})\nt2 = Template(\n    \"\"\"\n        <%%page cached=\"True\" cache_timeout=\"30\" cache_dir=\"%s\"\n         cache_type=\"file\" cache_key='somekey'/>\n        hi\n        \"\"\"\n     % module_base)\nm = self._install_mock_cache(t2)\nt2.render()\neq_(m.kwargs, {'dir': module_base, 'type': 'file', 'timeout': 30})\n"
-}

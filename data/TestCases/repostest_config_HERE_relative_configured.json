@@ -1,9 +1,0 @@
-{
-    "functionName": "test_config_HERE_relative_configured",
-    "className": "OWMTest",
-    "fileName": "/openworm_&_PyOpenWorm/tests_&_CommandTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        $HERE should resolve relative to the config file\n        \"\"\"\nuserconfdir = p(self.testdir, 'movedconf')\nos.mkdir(userconfdir)\nuserconf = p(userconfdir, 'owm.conf')\nwith open(userconf, 'w') as f:\n    f.write('{\"key\": \"$HERE/irrelevant\", \"rdf.store_conf\": \"$OWM/worm.db\"}')\nself.cut.config_file = userconf\nconf = self.cut._conf()\nself.assertEqual(conf['key'], p(userconfdir, 'irrelevant'))\n"
-}

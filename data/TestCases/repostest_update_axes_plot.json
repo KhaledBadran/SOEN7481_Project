@@ -1,9 +1,0 @@
-{
-    "functionName": "test_update_axes_plot",
-    "className": "TestIterSubplots",
-    "fileName": "/Jhsmit_&_ColiCoords/test_&_test_iplot.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.fig, self.ax = iter_subplots()\nself.assertIsInstance(self.ax, IterUpdateAxes)\ni = 10\nx = [np.arange(10) for j in range(i)]\ny = [(xi ** k) for k, xi in enumerate(x)]\nline, = self.ax.iter_plot(x, y)\nydata = line.get_ydata()\nself.assertArrayEqual(y[0], ydata)\nself.fig.on_next(None)\nydata = line.get_ydata()\nself.assertArrayEqual(y[1], ydata)\nself.fig.on_prev(None)\nydata = line.get_ydata()\nself.assertArrayEqual(y[0], ydata)\nself.fig.on_last(None)\nydata = line.get_ydata()\nself.assertArrayEqual(y[-1], ydata)\nself.fig.on_first(None)\nydata = line.get_ydata()\nself.assertArrayEqual(y[0], ydata)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_addrm_slit",
-    "className": null,
-    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_edgetrace.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" This tests the add and remove methods for user-supplied slit fussing. \"\"\"\ntrace_file = os.path.join(os.getenv('PYPEIT_DEV'), 'Cooked', 'Trace',\n    'MasterEdges_KeckLRISr_400_8500_det1.fits.gz')\nassert os.path.isfile(trace_file), 'Trace file does not exist!'\nedges = edgetrace.EdgeTraceSet.from_file(trace_file)\nassert edges.is_synced, 'Error in constructed Cooked trace file: not synced.'\nnslits = edges.ntrace // 2\nadd_user_slits = [[1024, 140, 200]]\nedges.add_user_traces(add_user_slits)\nassert edges.is_synced, 'Added slit caused object to de-synchronize.'\nassert edges.ntrace // 2 == nslits + 1, 'Number of slits incorrect.'\nxcen0 = np.median(np.mean(edges.spat_fit[:, :2], axis=0))\nassert np.absolute(xcen0 - 170) < 3, 'Unexpected slit center coordinate'\nrm_user_slits = [[1024, 170]]\nedges.rm_user_traces(rm_user_slits)\nassert edges.ntrace // 2 == nslits, 'Did not remove trace.'\ncooked_required"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_set_quant_fluor_data_dict_time",
-    "className": null,
-    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_core_&_tests_&_test_quant_analysis.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "fluor_standard = copy.deepcopy(_xrf_standard_fluor_sample)\nset_quant_fluor_data_dict_time(fluor_standard)\nt = fluor_standard['creation_time_local']\nassert t is not None, 'Time is not set'\nt = convert_time_from_nexus_string(t)\nt = ttime.mktime(t)\nt_current = ttime.mktime(ttime.localtime())\nassert abs(t_current - t) < 5.0, 'Time is set incorrectly'\n"
-}

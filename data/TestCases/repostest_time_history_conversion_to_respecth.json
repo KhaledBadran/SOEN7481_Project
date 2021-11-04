@@ -1,9 +1,0 @@
-{
-    "functionName": "test_time_history_conversion_to_respecth",
-    "className": "TestConvertToReSpecTh",
-    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_chemked.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test proper conversion to ReSpecTh XML with time histories.\n        \"\"\"\nfile_path = os.path.join('testfile_rcm.yaml')\nfilename = pkg_resources.resource_filename(__name__, file_path)\nwith open(filename, 'r') as yaml_file:\n    properties = yaml.safe_load(yaml_file)\nproperties['datapoints'][0]['time-histories'][0]['type'] = history_type\nproperties['datapoints'][0]['time-histories'][0]['quantity']['units'] = unit\nc_true = ChemKED(dict_input=properties)\nwith TemporaryDirectory() as temp_dir:\n    newfile = os.path.join(temp_dir, 'test.xml')\n    c_true.convert_to_ReSpecTh(newfile)\n    with pytest.warns(UserWarning) as record:\n        c = ChemKED.from_respecth(newfile)\nm = str(record.pop(UserWarning).message)\nassert m == 'Using DOI to obtain reference information, rather than preferredKey.'\nassert c.file_authors[0]['name'] == c_true.file_authors[0]['name']\nassert c.reference.detail == 'Converted from ReSpecTh XML file {}'.format(os\n    .path.split(newfile)[1])\nassert c.apparatus.kind == c_true.apparatus.kind\nassert c.experiment_type == c_true.experiment_type\nassert c.reference.doi == c_true.reference.doi\nassert len(c.datapoints) == len(c_true.datapoints)\nassert getattr(c.datapoints[0], '{}_history'.format(history_type)) is not None\npytest.mark.parametrize('history_type, unit', [('volume', 'cm3'), (\n    'temperature', 'K'), ('pressure', 'bar')])"
-}

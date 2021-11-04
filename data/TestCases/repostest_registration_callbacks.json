@@ -1,9 +1,0 @@
-{
-    "functionName": "test_registration_callbacks",
-    "className": "TestRegistrationCallbacks",
-    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_registration_callbacks.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "onRegisterFailed = Mock()\nonRegisterSuccess = Mock()\nself.face.registerPrefix(Name('/test/register/callbacks'), None,\n    onRegisterFailed, onRegisterSuccess)\nwhile True:\n    self.face.processEvents()\n    time.sleep(0.01)\n    if onRegisterSuccess.call_count > 0 or onRegisterFailed.call_count > 0:\n        break\nself.assertEqual(onRegisterSuccess.call_count, 1, \n    'Expected 1 onRegisterSuccess callback, got ' + str(onRegisterSuccess.\n    call_count))\n"
-}

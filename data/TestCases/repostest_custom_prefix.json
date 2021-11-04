@@ -1,9 +1,0 @@
-{
-    "functionName": "test_custom_prefix",
-    "className": null,
-    "fileName": "/max-k_&_flask-multi-redis/test_&_integration_&_test_flask_multi_redis.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that config prefixes enable distinct connections.\"\"\"\napp.config['DBA_NODES'] = [{'host': 'localhost', 'db': 1}]\napp.config['DBB_NODES'] = [{'host': 'localhost', 'db': 2}]\nredis_a = FlaskMultiRedis(app, config_prefix='DBA')\nredis_b = FlaskMultiRedis(app, config_prefix='DBB')\nassert redis_a.connection_pool.connection_kwargs['db'] == 1\nassert redis_b.connection_pool.connection_kwargs['db'] == 2\n"
-}

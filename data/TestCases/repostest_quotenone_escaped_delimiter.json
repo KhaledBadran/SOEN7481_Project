@@ -1,9 +1,0 @@
-{
-    "functionName": "test_quotenone_escaped_delimiter",
-    "className": "TestFileContents",
-    "fileName": "/kenfar_&_DataGristle/scripts_&_tests_&_test_gristle_sorter_cmd.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.dialect = csvhelper.Dialect(delimiter=',', quoting=csv.QUOTE_NONE,\n    quotechar=None, has_header=True, escapechar='\\\\')\nself.in_fqfn = pjoin(self.data_dir, 'dialect_quotenone_escaped_delimiter.csv')\nself.expected_fqfn = pjoin(self.data_dir,\n    'dialect_quotenone_escaped_delimiter.csv.sorted')\nself.make_command()\nexecutor(self.cmd, expect_success=True)\nself.load_files()\nself.print_files()\nassert self.out_recs == self.expected_recs\nprint('os diff of files: ')\nassert os.system(f'diff {self.out_fqfn} {self.expected_fqfn}') == 0\n"
-}

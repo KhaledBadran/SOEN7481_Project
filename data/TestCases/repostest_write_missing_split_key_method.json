@@ -1,9 +1,0 @@
-{
-    "functionName": "test_write_missing_split_key_method",
-    "className": "TestSplitKey",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_secrets_&_test_split_key.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that an InvalidField error is raised during the encoding of a\n        SplitKey object when the object is missing the split key method field.\n        \"\"\"\nsplit_key = secrets.SplitKey(split_key_parts=4, key_part_identifier=1,\n    split_key_threshold=2)\nstream = utils.BytearrayStream()\nargs = stream,\nself.assertRaisesRegex(exceptions.InvalidField,\n    'The SplitKey object is missing the SplitKeyMethod field.', split_key.\n    write, *args)\n"
-}

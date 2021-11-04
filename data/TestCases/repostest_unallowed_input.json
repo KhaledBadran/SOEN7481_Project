@@ -1,9 +1,0 @@
-{
-    "functionName": "test_unallowed_input",
-    "className": "TestChemKED",
-    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_chemked.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "file_path = os.path.join('testfile_required.yaml')\nfilename = pkg_resources.resource_filename(__name__, file_path)\nwith open(filename, 'r') as f:\n    properties = yaml.safe_load(f)\nproperties['experiment-type'] = 'Ignition Delay'\nwith pytest.raises(ValueError):\n    ChemKED(dict_input=properties)\nout, err = capfd.readouterr()\nassert out == \"\"\"experiment-type has an illegal value. Allowed values are ['ignition delay'] and are case sensitive.\n\"\"\"\n"
-}

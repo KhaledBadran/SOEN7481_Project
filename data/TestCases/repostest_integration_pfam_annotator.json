@@ -1,9 +1,0 @@
-{
-    "functionName": "test_integration_pfam_annotator",
-    "className": null,
-    "fileName": "/Merck_&_DeepBGC/test_&_integration_&_pipeline_&_test_integration_pfam.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "tmpdir = str(tmpdir)\ntmppath = os.path.join(tmpdir, 'test')\nrecords = SeqIO.parse(get_test_file('BGC0000015.gbk'), format='genbank')\nrecord = next(records)\nannotator = HmmscanPfamRecordAnnotator(record=record, tmp_path_prefix=\n    tmppath, db_path=get_test_file('Pfam-A.PF00005.hmm'), clans_path=\n    get_test_file('Pfam-A.PF00005.clans.tsv'))\nannotator.annotate()\npfams = util.get_pfam_features(record)\nassert len(pfams) == 2\npfam = pfams[0]\nassert pfam.location.start == 249\nassert pfam.location.end == 696\nassert pfam.location.strand == -1\nassert pfam.qualifiers.get('db_xref') == ['PF00005.26']\nassert pfam.qualifiers.get('locus_tag') == ['AAK73498.1']\nassert pfam.qualifiers.get('description') == ['ABC transporter']\nassert pfam.qualifiers.get('database') == ['31.0']\nassert_sorted_features(record)\n"
-}

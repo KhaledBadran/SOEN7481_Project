@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sample_mvn_shapes",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_conditionals_&_test_util.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "mean_shape = leading_dims + (n, d)\nmeans = tf.zeros(mean_shape, dtype=default_float())\nif full_cov:\n    covariance_shape = leading_dims + (n, d, d)\n    sqrt_cov = tf.random.normal(covariance_shape, dtype=default_float())\n    covariances = tf.matmul(sqrt_cov, sqrt_cov, transpose_b=True)\nelse:\n    covariance_shape = leading_dims + (n, d)\n    covariances = tf.random.normal(covariance_shape, dtype=default_float())\nsamples = sample_mvn(means, covariances, full_cov, num_samples)\nif num_samples:\n    expected_shape = leading_dims + (num_samples, n, d)\nelse:\n    expected_shape = leading_dims + (n, d)\nassert_equal(samples.shape, expected_shape)\npytest.mark.parametrize('leading_dims', [tuple(), (1,), (5,)])pytest.mark.parametrize('n', [1, 5])pytest.mark.parametrize('d', [1, 5])pytest.mark.parametrize('num_samples', [None, 1, 5])pytest.mark.parametrize('full_cov', [True, False])"
-}

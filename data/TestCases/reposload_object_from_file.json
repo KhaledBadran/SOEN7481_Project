@@ -1,9 +1,0 @@
-{
-    "functionName": "load_object_from_file",
-    "className": "OpenpnmIO",
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_io_&_OpenpnmIO.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        Loads an OpenPNM object from a file\n\n        Parameters\n        ----------\n        filename : string or path object\n            The name of the file containing the object to open. Can be a\n            relative or absolute path, and can be a string or path object such\n            as that produced by ``pathlib``.\n        project : OpenPNM Project object\n            If not provided one will be created and returned by this function,\n            otherwise the loaded object will be added to the given ``project``.\n\n        Returns\n        -------\n        project : OpenPNM Project\n            If no Project object is specified then one is created. A handle to\n            the Project is returned.\n\n        \"\"\"\nif project is None:\n    project = Project()\np = cls._parse_filename(filename)\nwith open(p, 'rb') as f:\n    d = pickle.load(f)\nobj = project._new_object(objtype=p.suffix.strip('.'), name=p.name.split(\n    '.')[0])\nobj.update(d)\nreturn project\nclassmethod"
-}

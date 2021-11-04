@@ -1,9 +1,0 @@
-{
-    "functionName": "test_should_use_none_for_sensors_not_pushing",
-    "className": null,
-    "fileName": "/EliCDavis_&_AssociationEngine/AssociationEngine_&_Tests_&_UnitTests_&_Snapper_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "snapper = Snapper()\nsensor_a = Sensor()\nsnapper.add_sensor(sensor_a)\nsensor_b = Sensor()\nsnapper.add_sensor(sensor_b)\nsensor_b.publish(3)\nsnapshot = snapper.get_snapshot()\nassert sensor_a.uuid in snapshot\nassert snapshot[sensor_a.uuid] is None\nassert round(snapshot[sensor_b.uuid] - 3, 5) == 0\n"
-}

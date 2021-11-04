@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_attributes_from_managed_object",
-    "className": "TestKmipEngine",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that multiple attributes can be retrieved from a given managed\n        object.\n        \"\"\"\ne = engine.KmipEngine()\ne._data_store = self.engine\ne._data_store_session_factory = self.session_factory\ne._data_session = e._data_store_session_factory()\ne._is_allowed_by_operation_policy = mock.Mock(return_value=True)\ne._logger = mock.MagicMock()\nsymmetric_key = pie_objects.SymmetricKey(enums.CryptographicAlgorithm.AES, \n    0, b'', masks=[enums.CryptographicUsageMask.ENCRYPT, enums.\n    CryptographicUsageMask.DECRYPT])\nsymmetric_key.names = ['Name 1', 'Name 2']\ne._data_session.add(symmetric_key)\ne._data_session.commit()\ne._data_session = e._data_store_session_factory()\nresult = e._get_attributes_from_managed_object(symmetric_key, [\n    'Unique Identifier', 'Name', 'Cryptographic Algorithm',\n    'Cryptographic Length', 'Cryptographic Usage Mask', 'invalid'])\nattribute_factory = factory.AttributeFactory()\nself.assertEqual(6, len(result))\nattribute = attribute_factory.create_attribute(enums.AttributeType.\n    UNIQUE_IDENTIFIER, '1')\nself.assertIn(attribute, result)\nattribute = attribute_factory.create_attribute(enums.AttributeType.\n    CRYPTOGRAPHIC_ALGORITHM, enums.CryptographicAlgorithm.AES)\nself.assertIn(attribute, result)\nattribute = attribute_factory.create_attribute(enums.AttributeType.\n    CRYPTOGRAPHIC_LENGTH, 0)\nself.assertIn(attribute, result)\nattribute = attribute_factory.create_attribute(enums.AttributeType.\n    CRYPTOGRAPHIC_USAGE_MASK, [enums.CryptographicUsageMask.ENCRYPT, enums.\n    CryptographicUsageMask.DECRYPT])\nself.assertIn(attribute, result)\n"
-}

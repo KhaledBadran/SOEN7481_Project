@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sobol_GPEI",
-    "className": "ModelBridgeFactoryTest",
-    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_factory.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Tests sobol + GPEI instantiation.\"\"\"\nexp = get_branin_experiment()\nsobol = get_sobol(search_space=exp.search_space)\nself.assertIsInstance(sobol, RandomModelBridge)\nfor _ in range(5):\n    sobol_run = sobol.gen(n=1)\n    exp.new_batch_trial().add_generator_run(sobol_run).run()\nexp.optimization_config = get_branin_optimization_config()\ngpei = get_GPEI(experiment=exp, data=exp.fetch_data())\nself.assertIsInstance(gpei, TorchModelBridge)\ngpei = get_GPEI(experiment=exp, data=exp.fetch_data(), search_space=exp.\n    search_space)\nself.assertIsInstance(gpei, TorchModelBridge)\nbotorch = get_botorch(experiment=exp, data=exp.fetch_data())\nself.assertIsInstance(botorch, TorchModelBridge)\n"
-}

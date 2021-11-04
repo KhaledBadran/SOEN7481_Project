@@ -1,9 +1,0 @@
-{
-    "functionName": "test_setup_channel_already_setup",
-    "className": null,
-    "fileName": "/rm-hull_&_OPi.GPIO/tests_&_test_gpio.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with patch('OPi.GPIO.sysfs') as mock:\n    GPIO.setmode(GPIO.SUNXI)\n    GPIO.setup('PA01', GPIO.IN)\n    mock.export.assert_called_with(1)\n    mock.direction.assert_called_with(1, GPIO.IN)\n    assert 'PA01' in GPIO._exports\n    with pytest.raises(RuntimeError) as ex:\n        GPIO.setup('PA01', GPIO.OUT)\n    assert str(ex.value) == 'Channel PA01 is already configured'\n"
-}

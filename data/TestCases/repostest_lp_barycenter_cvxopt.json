@@ -1,9 +1,0 @@
-{
-    "functionName": "test_lp_barycenter_cvxopt",
-    "className": null,
-    "fileName": "/PythonOT_&_POT/test_&_test_ot.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "a1 = np.array([1.0, 0, 0])[:, (None)]\na2 = np.array([0, 0, 1.0])[:, (None)]\nA = np.hstack((a1, a2))\nM = np.array([[0, 1.0, 4.0], [1.0, 0, 1.0], [4.0, 1.0, 0]])\nbary0 = np.array([0, 1.0, 0])\nbary = ot.lp.barycenter(A, M, [0.5, 0.5], solver=None)\nnp.testing.assert_allclose(bary, bary0, rtol=1e-05, atol=1e-07)\nnp.testing.assert_allclose(bary.sum(), 1)\npytest.mark.skipif(not ot.lp.cvx.cvxopt, reason='No cvxopt available')"
-}

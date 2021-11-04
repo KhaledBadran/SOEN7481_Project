@@ -1,9 +1,0 @@
-{
-    "functionName": "sets_a_eq_b",
-    "className": null,
-    "fileName": "/KnowEnG_&_KnowEnG_Pipelines_Library/test_&_unit_&_test_perform_net_nmf.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" check that all indices of equal values in a\n        are same sets as indices of equal values in b\n    Args:\n        a: array of cluster assignments\n        b: array of cluster assignments - same size or will return false\n    Returns:\n        True or False: array a indices of equal value\n            are the same as array b indices of equal values\n    \"\"\"\na_u = np.unique(a)\nb_u = np.unique(b)\nif len(a_u) != len(b_u):\n    return False\nelse:\n    a_list = get_cluster_indices_list(a)\n    b_list = get_cluster_indices_list(b)\n    if len(b) != len(a):\n        return False\n    else:\n        n_here = 0\n        for a_set in a_list:\n            if len(a_set) != len(b_list[n_here]):\n                return False\n            elif sum(np.int_(a_set != b_list[n_here])) != 0:\n                return False\n            else:\n                n_here += 1\nreturn True\n"
-}

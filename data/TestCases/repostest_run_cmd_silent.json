@@ -1,9 +1,0 @@
-{
-    "functionName": "test_run_cmd_silent",
-    "className": null,
-    "fileName": "/AmadeusITGroup_&_JumpSSH/tests_&_test__session.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "caplog.set_level(logging.DEBUG)\ngateway_ip, gateway_port = docker_env.get_host_ip_port()\ngateway_session = SSHSession(host=gateway_ip, port=gateway_port, username=\n    'user1', password='password1').open()\ntext = 'text with public and private data'\ncmd = \"echo '%s'\" % text\nassert gateway_session.run_cmd(cmd).output == text\nassert cmd in caplog.text\ntext = 'another text with public and private data'\ncmd = \"echo '%s'\" % text\nassert gateway_session.run_cmd(cmd, silent=True).output == text\nassert cmd not in caplog.text\ntext = 'a third text with public and private data'\ncmd = \"echo '%s'\" % text\nassert gateway_session.run_cmd(cmd, silent=['third', 'private data']\n    ).output == text\nassert cmd not in caplog.text\nassert 'a XXXXXXX text with public and XXXXXXX' in caplog.text\ntext = 'another text   to   test    regexp'\ncmd = \"echo '%s'\" % text\nassert gateway_session.run_cmd(cmd, silent=['\\\\s+']).output == text\nassert cmd not in caplog.text\nassert 'anotherXXXXXXXtextXXXXXXXtoXXXXXXXtestXXXXXXXregexp' in caplog.text\n"
-}

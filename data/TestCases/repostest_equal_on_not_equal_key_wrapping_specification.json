@@ -1,9 +1,0 @@
-{
-    "functionName": "test_equal_on_not_equal_key_wrapping_specification",
-    "className": "TestGetRequestPayload",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_get.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the equality operator returns False when comparing two\n        GetRequestPayload structs with different key wrapping specifications.\n        \"\"\"\na = payloads.GetRequestPayload(key_wrapping_specification=objects.\n    KeyWrappingSpecification(wrapping_method=enums.WrappingMethod.\n    ENCRYPT_THEN_MAC_SIGN, encryption_key_information=objects.\n    EncryptionKeyInformation(unique_identifier=\n    '100182d5-72b8-47aa-ffff-4d97d512e98a', cryptographic_parameters=\n    attributes.CryptographicParameters(block_cipher_mode=enums.\n    BlockCipherMode.NIST_KEY_WRAP)), encoding_option=enums.EncodingOption.\n    NO_ENCODING))\nb = payloads.GetRequestPayload(key_wrapping_specification=objects.\n    KeyWrappingSpecification(wrapping_method=enums.WrappingMethod.ENCRYPT,\n    encryption_key_information=objects.EncryptionKeyInformation(\n    unique_identifier='100182d5-72b8-47aa-8383-4d97d512e98a',\n    cryptographic_parameters=attributes.CryptographicParameters(\n    block_cipher_mode=enums.BlockCipherMode.NIST_KEY_WRAP)),\n    encoding_option=enums.EncodingOption.NO_ENCODING))\nself.assertFalse(a == b)\nself.assertFalse(b == a)\n"
-}

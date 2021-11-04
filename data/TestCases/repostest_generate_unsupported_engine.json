@@ -1,9 +1,0 @@
-{
-    "functionName": "test_generate_unsupported_engine",
-    "className": null,
-    "fileName": "/bio-phys_&_MDBenchmark/mdbenchmark_&_tests_&_test_generate.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Make sure we throw the correct error, when passed an unsupported MD engine.\"\"\"\nwith tmpdir.as_cwd():\n    for k, v in DIR_STRUCTURE.items():\n        for k2, v2 in v.items():\n            os.makedirs(os.path.join(k, k2))\n            for v3 in v2:\n                open(os.path.join(k, k2, v3), 'a').close()\n    dirs = ':'.join([os.path.join(os.getcwd(), x) for x in os.listdir(os.\n        getcwd())])\n    monkeypatch.setenv('MODULEPATH', dirs)\n    supported_engines = ', '.join(sorted([x for x in SUPPORTED_ENGINES]))\n    output = (\n        \"\"\"ERROR There is currently no support for 'doesnotexist'. Supported MD engines are: {}.\n\"\"\"\n        .format(supported_engines))\n    result = cli_runner.invoke(cli, ['generate',\n        '--module=doesnotexist/version', '--host=draco', '--name=protein',\n        '--yes'])\n    assert result.exit_code == 1\n    assert result.output == output\n"
-}

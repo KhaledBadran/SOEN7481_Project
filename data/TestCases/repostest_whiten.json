@@ -1,9 +1,0 @@
-{
-    "functionName": "test_whiten",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_conditionals_&_test_conditionals.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Make sure that predicting using the whitened representation is the\n    sameas the non-whitened one.\n    \"\"\"\nK = kernel(Xdata) + tf.eye(Nn, dtype=default_float()) * 1e-06\nL = tf.linalg.cholesky(K)\nV = tf.linalg.triangular_solve(L, mu, lower=True)\nmean1, var1 = conditional(Xnew, Xdata, kernel, mu)\nmean2, var2 = conditional(Xnew, Xdata, kernel, V, white=True)\nassert_allclose(mean1, mean2)\nassert_allclose(var1, var2)\n"
-}

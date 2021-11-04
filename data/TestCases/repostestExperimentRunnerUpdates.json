@@ -1,9 +1,0 @@
-{
-    "functionName": "testExperimentRunnerUpdates",
-    "className": "SQAStoreTest",
-    "fileName": "/facebook_&_Ax/ax_&_storage_&_sqa_store_&_tests_&_test_sqa_store.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "experiment = get_experiment_with_batch_trial()\nsave_experiment(experiment)\nself.assertEqual(get_session().query(SQARunner).count(), 1)\nrunner = get_synthetic_runner()\nexperiment.runner = runner\nsave_experiment(experiment)\nself.assertEqual(get_session().query(SQARunner).count(), 2)\nrunner = get_synthetic_runner()\nrunner.dummy_metadata = {'foo': 'bar'}\nexperiment.runner = runner\nsave_experiment(experiment)\nself.assertEqual(get_session().query(SQARunner).count(), 2)\nexperiment.runner = None\nsave_experiment(experiment)\nself.assertEqual(get_session().query(SQARunner).count(), 1)\nloaded_experiment = load_experiment(experiment.name)\nself.assertEqual(experiment, loaded_experiment)\n"
-}

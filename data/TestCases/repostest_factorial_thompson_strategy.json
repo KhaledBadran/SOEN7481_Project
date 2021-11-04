@@ -1,9 +1,0 @@
-{
-    "functionName": "test_factorial_thompson_strategy",
-    "className": "TestGenerationStrategy",
-    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_generation_strategy.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "exp = get_branin_experiment()\nfactorial_thompson_generation_strategy = GenerationStrategy(steps=[\n    GenerationStep(model=Models.FACTORIAL, num_trials=1), GenerationStep(\n    model=Models.THOMPSON, num_trials=-1)])\nself.assertEqual(factorial_thompson_generation_strategy.name,\n    'Factorial+Thompson')\nself.assertEqual(factorial_thompson_generation_strategy.model_transitions, [1])\nmock_model_bridge = self.mock_discrete_model_bridge.return_value\nexp.new_batch_trial(factorial_thompson_generation_strategy.gen(experiment=exp))\nargs, kwargs = mock_model_bridge._set_kwargs_to_save.call_args\nself.assertEqual(kwargs.get('model_key'), 'Factorial')\nexp.new_batch_trial(factorial_thompson_generation_strategy.gen(experiment=exp))\nargs, kwargs = mock_model_bridge._set_kwargs_to_save.call_args\nself.assertEqual(kwargs.get('model_key'), 'Thompson')\npatch(f'{Experiment.__module__}.Experiment.fetch_data', return_value=get_data()\n    )"
-}

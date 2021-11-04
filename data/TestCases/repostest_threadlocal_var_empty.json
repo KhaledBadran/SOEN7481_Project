@@ -1,9 +1,0 @@
-{
-    "functionName": "test_threadlocal_var_empty",
-    "className": null,
-    "fileName": "/alex-ber_&_AlexBerUtils/tests_&_utils_&_threadlocal_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "logger.info(f'{request._pyfuncitem.name}()')\nthread_locals = threading.local()\nexpValue = 5\nbox = threadlocal_var(thread_locals, 'value', Box, value=expValue)\nvalue = box.value\nassert expValue == value\nbox2 = get_threadlocal_var(thread_locals, 'value')\nvalue2 = box2.value\nassert expValue == value2\nassert box == box2\nwith pytest.raises(ValueError):\n    get_threadlocal_var(thread_locals, 'nonexist')\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_L63",
-    "className": null,
-    "fileName": "/nansencenter_&_DAPPER/tests_&_test_plotting.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from dapper.mods.Lorenz63.sak12 import HMM\ncfgs = List_of_Configs()\ncfgs += EnKF('Sqrt', N=10, infl=1.02, rot=True)\ncfgs += PartFilt(N=20, reg=2.4, NER=0.3)\ncfgs += OptInterp()\nfor iC, C in enumerate(cfgs):\n    C.fail_gently = False\n    C.store_u = False\n    C.liveplotting = 'all'\nHMM.t.BurnIn = HMM.t.dtObs\nHMM.t.KObs = 1\nxx, yy = simulate(HMM)\nstats = []\navrgs = []\nfor ic, config in enumerate(cfgs):\n    seed(sd0 + 2)\n    stats += [config.assimilate(HMM, xx, yy)]\n    avrgs += [stats[ic].average_in_time()]\n    print_averages(config, avrgs[-1])\nprint_averages(cfgs, avrgs, statkeys=['rmse_a'])\nfor s in stats:\n    replay(s, 'all')\nreplay(stats[-1], t2=1)\nreplay(stats[-1], t2=0.0)\nreplay(stats[-1], t2=0.3)\nreplay(stats[-1], t2=0.8)\nreplay(stats[-1], t2=0.8, t1=0.2)\nreplay(stats[-1], t2=np.inf)\nreplay(stats[-1], t2=np.inf, speed=1)\nreplay(stats[-1], t2=np.inf, pause_a=0, pause_f=0)\nprint(HMM)\nprint(config)\nprint(stats)\nprint(avrgs)\nassert True\nreturn HMM, xx, yy, cfgs, stats, avrgs\n"
-}

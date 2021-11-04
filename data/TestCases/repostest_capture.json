@@ -1,9 +1,0 @@
-{
-    "functionName": "test_capture",
-    "className": "TestXenaOnline",
-    "fileName": "/xenadevel_&_PyXenaValkyrie/tests_&_test_online.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "port = self.xm.session.reserve_ports([self.port1])[self.port1]\nport.load_config(path.join(path.dirname(__file__), 'configs',\n    'test_config_loopback.xpc'))\nport.streams[0].set_attributes(ps_ratepps=10, ps_packetlimit=80)\nport.remove_stream(1)\nport.start_capture()\nport.start_traffic(blocking=True)\nport.stop_capture()\npackets = port.capture.get_packets(0, 1, cap_type=XenaCaptureBufferType.raw)\nassert len(packets) == 1\nport.capture.packets[0].get_attributes()\npacket = ethernet.Ethernet(binascii.unhexlify(packets[0]))\nassert packet.ip.dst_s == '1.1.0.0'\npackets = port.capture.get_packets(10, 20, cap_type=XenaCaptureBufferType.raw)\nprint(packets[0])\nassert len(packets) == 10\npackets = port.capture.get_packets(file_name=path.join(self.temp_dir,\n    'xena_cap.txt'))\nprint(packets[0])\nassert len(packets) == 80\ntshark = Tshark(self.config.get('General', 'wireshark_dir'))\npackets = port.capture.get_packets(cap_type=XenaCaptureBufferType.pcap,\n    file_name=path.join(self.temp_dir, 'xena_cap.pcap'), tshark=tshark)\nanalyser = TsharkAnalyzer()\nanalyser.add_field('ip.src')\nanalyser.add_field('ip.dst')\nfields = tshark.analyze(path.join(self.temp_dir, 'xena_cap.pcap'), analyser)\nprint(fields)\nassert len(fields) == 80\n"
-}

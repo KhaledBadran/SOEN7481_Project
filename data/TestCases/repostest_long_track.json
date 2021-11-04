@@ -1,9 +1,0 @@
-{
-    "functionName": "test_long_track",
-    "className": null,
-    "fileName": "/mmcauliffe_&_Pyraat/tests_&_test_long.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "script_path = os.path.join(praat_script_test_dir, 'formant_track_long.praat')\nfunc = PraatAnalysisFunction(script_path, praat_path, arguments=[0.01, \n    0.025, 5, 5500])\nassert not func.point_measure\nassert func.uses_long\nassert func._output_parse_function == parse_track_script_output\noutput = func(long_sound_file, *iy_times, 0, 0)\nprint(output)\nheader = ['F1', 'B1', 'F2', 'B2', 'F3', 'B3', 'F4', 'B4', 'F5', 'B5']\nassert all(isinstance(x, float) for x in output.keys())\nfor k, v in output.items():\n    assert isinstance(k, float)\n    assert sorted(v.keys()) == sorted(header)\n    for k2, v2 in v.items():\n        assert isinstance(k2, str)\n        assert isinstance(v2, (float, type(None)))\noutput = func(long_sound_file, *ih_times, 0, 0)\nprint(output)\nassert all(isinstance(x, float) for x in output.keys())\nfor k, v in output.items():\n    assert isinstance(k, float)\n    assert sorted(v.keys()) == sorted(header)\n    for k2, v2 in v.items():\n        assert isinstance(k2, str)\n        assert isinstance(v2, (float, type(None)))\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ExtremeFilters",
-    "className": null,
-    "fileName": "/incf-nidash_&_PyNIDM/nidm_&_experiment_&_tools_&_tests_&_test_rest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "restParser = RestParser(output_format=RestParser.OBJECT_FORMAT)\nif cmu_test_project_uuid:\n    project = cmu_test_project_uuid\nelse:\n    projects = restParser.run(BRAIN_VOL_FILES, '/projects')\n    project = projects[0]\ndetails = restParser.run(BRAIN_VOL_FILES,\n    '/projects/{}?filter=AGE_AT_SCAN gt 200'.format(project))\nassert len(details['subjects']['uuid']) == 0\nassert len(details['data_elements']['uuid']) > 0\ndetails = restParser.run(BRAIN_VOL_FILES,\n    '/projects/{}?filter=instruments.AGE_AT_SCAN gt 0'.format(project))\nassert len(details['subjects']['uuid']) > 0\nassert len(details['data_elements']['uuid']) > 0\n"
-}

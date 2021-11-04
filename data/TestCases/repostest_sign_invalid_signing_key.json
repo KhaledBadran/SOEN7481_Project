@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sign_invalid_signing_key",
-    "className": "TestKmipEngine",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the right error is thrown when an invalid signing key\n        is specified with a Sign request.\n        \"\"\"\ne = engine.KmipEngine()\ne._data_store = self.engine\ne._data_store_session_factory = self.session_factory\ne._data_session = e._data_store_session_factory()\ne._is_allowed_by_operation_policy = mock.Mock(return_value=True)\ne._logger = mock.MagicMock()\ne._cryptography_engine.logger = mock.MagicMock()\nsigning_key = pie_objects.OpaqueObject(b'\\x01\\x02\\x03\\x04', enums.\n    OpaqueDataType.NONE)\ne._data_session.add(signing_key)\ne._data_session.commit()\ne.data_session = e._data_store_session_factory()\nunique_identifier = str(signing_key.unique_identifier)\npayload = payloads.SignRequestPayload(unique_identifier=unique_identifier,\n    cryptographic_parameters=attributes.CryptographicParameters(\n    padding_method=enums.PaddingMethod.PSS, digital_signature_algorithm=\n    enums.DigitalSignatureAlgorithm.SHA1_WITH_RSA_ENCRYPTION), data=\n    b'\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08\\t\\x10\\x11\\x12\\x13\\x14\\x15\\x16')\nargs = payload,\nself.assertRaisesRegex(exceptions.PermissionDenied,\n    'The requested signing key is not a private key. A private key must be specified.'\n    , e._process_sign, *args)\n"
-}

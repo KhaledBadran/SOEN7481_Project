@@ -1,9 +1,0 @@
-{
-    "functionName": "test_should_receive_data_from_multiple_sensors",
-    "className": null,
-    "fileName": "/EliCDavis_&_AssociationEngine/AssociationEngine_&_Tests_&_UnitTests_&_Snapper_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "snapper = Snapper()\nsensor1 = Sensor()\nsnapper.add_sensor(sensor1)\nsensor1.publish(2)\nsensor2 = Sensor()\nsnapper.add_sensor(sensor2)\nstartTime = snapper.windowStart\nendTime = snapper.windowEnd\nsensor2.publish(3)\nassert snapper.dataBuffer == {sensor1.uuid: [2], sensor2.uuid: [3]}\nassert snapper.get_snapshot() == {'start': startTime, 'end': endTime,\n    sensor1.uuid: 2, sensor2.uuid: 3}\n"
-}

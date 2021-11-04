@@ -1,9 +1,0 @@
-{
-    "functionName": "test_merge_networks",
-    "className": "TopotoolsTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_topotools_&_TopotoolsTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "net1 = op.network.Cubic(shape=[3, 3, 3])\nnet2 = op.network.Cubic(shape=[3, 3, 3])\nnet1['pore.test1'] = True\nnet1['pore.test2'] = 10\nnet1['pore.test3'] = np.ones((net1.Np, 3))\nnet2['pore.test4'] = True\nnet2['pore.test5'] = 10.0\nnet2['pore.test6'] = np.ones((net2.Np, 2))\ntopotools.merge_networks(network=net1, donor=net2)\nassert np.sum(net1['pore.test1']) == 27\nassert np.all(net1['pore.test3'].shape == (54, 3))\nassert np.sum(net1['pore.test2'][:27]) == 270.0\nassert np.sum(net1['pore.test4'][27:]) == 27\nassert 'pore.test1' not in net2\nassert 'pore.test2' not in net2\n"
-}

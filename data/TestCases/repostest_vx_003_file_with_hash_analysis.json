@@ -1,9 +1,0 @@
-{
-    "functionName": "test_vx_003_file_with_hash_analysis",
-    "className": "VxAnalysisModuleTestCase",
-    "fileName": "/IntegralDefense_&_ACE/lib_&_saq_&_modules_&_test_vx.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "engine = AnalysisEngine()\nengine.enable_module('analysis_module_vxstream_hash_analyzer')\nengine.enable_module('analysis_module_vxstream_file_analyzer')\nengine.enable_module('analysis_module_file_hash_analyzer')\nengine.enable_module('analysis_module_file_type')\nself.start_engine(engine)\nroot = create_root_analysis(event_time=datetime.datetime.now())\nroot.initialize_storage()\nwith open('/dev/urandom', 'rb') as fp_in:\n    with open('test_data/invalid.pcap', 'wb') as fp_out:\n        fp_out.write(fp_in.read(4096))\nshutil.copy('test_data/invalid.pcap', root.storage_dir)\n_file = root.add_observable(F_FILE, 'invalid.pcap')\n_file.add_directive(DIRECTIVE_SANDBOX)\nroot.save()\nengine.queue_work_item(root.storage_dir)\nengine.queue_work_item(TerminatingMarker())\nengine.wait()\nroot.load()\n_file = root.get_observable(_file.id)\nfrom saq.modules.vx import VxStreamFileAnalysis\nanalysis = _file.get_analysis(VxStreamFileAnalysis)\nself.assertFalse(analysis)\n"
-}

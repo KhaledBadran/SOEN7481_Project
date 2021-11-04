@@ -1,9 +1,0 @@
-{
-    "functionName": "test_bad_api_key",
-    "className": null,
-    "fileName": "/AutomatedTester_&_Bugsy/tests_&_test_bugsy.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "responses.add(responses.GET,\n    'https://bugzilla.mozilla.org/rest/valid_login?login=foo', body=\n    '{\"documentation\":\"http://www.bugzilla.org/docs/tip/en/html/api/\",\"error\":true,\"code\":306,\"message\":\"The API key you specified is invalid. Please check that you typed it correctly.\"}'\n    , status=400, content_type='application/json', match_querystring=True)\ntry:\n    Bugsy(username='foo', api_key='badkey')\n    assert False, 'Should have thrown'\nexcept LoginException as e:\n    assert str(e\n        ) == 'Message: The API key you specified is invalid. Please check that you typed it correctly. Code: 306'\nassert responses.calls[0].request.headers['X-Bugzilla-API-Key'] == 'badkey'\nresponses.activate"
-}

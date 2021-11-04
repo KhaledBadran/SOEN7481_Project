@@ -1,9 +1,0 @@
-{
-    "functionName": "test_shutdown_context",
-    "className": null,
-    "fileName": "/PRIArobotics_&_HedgehogClient/tests_&_test_async_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "port, value = 0, 0\nasync with connect_dummy(Commands.analog_request, port, value) as client:\n\n    async def do_something():\n        assert await client.get_analog(port) == value\n        await asyncio.sleep(2)\n        with pytest.raises(errors.EmergencyShutdown):\n            await client.get_analog(port)\n        raise errors.EmergencyShutdown()\n    assert not client.is_shutdown and not client.is_closed\n    task = await client.spawn(do_something())\n    await asyncio.sleep(1)\n    await client.shutdown()\n    assert client.is_shutdown and not client.is_closed\n    with pytest.raises(errors.EmergencyShutdown):\n        await client.get_analog(port)\n    await task\n    raise errors.EmergencyShutdown()\nassert client.is_shutdown and client.is_closed\npytest.mark.asyncio"
-}

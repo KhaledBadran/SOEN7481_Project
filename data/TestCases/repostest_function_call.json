@@ -1,9 +1,0 @@
-{
-    "functionName": "test_function_call",
-    "className": "TestFunctionCall",
-    "fileName": "/poletaevvlad_&_CubeLang/test_&_compiler_&_test_source_parsing.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "stack = Stack()\nstack.add_variable('array', List(Integer))\nfunc = Function(([Integer, Real, List(Integer)], Void))\nif is_global:\n    stack.add_global('func', func)\nelse:\n    stack.add_variable('func', func)\ntree = tr('func_call', 'func', tr('int_literal', '1'), tr('int_literal',\n    '2'), tr('variable', 'array'))\nexpression = parser.handle(tree, stack)\nassert expression.type == Void\nfunc_name = 'func' if is_global else 'var_1'\nassert expression.expression == [func_name, '(', '1', ', ', '2', ', ',\n    'var_0', ')']\npytest.mark.parametrize('is_global', [(True,), (False,)])"
-}

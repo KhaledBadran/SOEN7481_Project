@@ -1,9 +1,0 @@
-{
-    "functionName": "test_evaluate_performance_so_side_corruptions_with_filter",
-    "className": null,
-    "fileName": "/Accenture_&_AmpliGraph/tests_&_ampligraph_&_evaluation_&_test_protocol.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "X = load_wn18()\nmodel = ComplEx(batches_count=10, seed=0, epochs=5, k=200, eta=10, loss=\n    'nll', regularizer=None, optimizer='adam', optimizer_params={'lr': 0.01\n    }, verbose=True)\nmodel.fit(X['train'])\nranks = evaluate_performance(X['test'][::20], model=model, verbose=True,\n    corrupt_side='s+o')\nmrr = mrr_score(ranks)\nhits_10 = hits_at_n_score(ranks, n=10)\nprint('ranks: %s' % ranks)\nprint('MRR: %f' % mrr)\nprint('Hits@10: %f' % hits_10)\nassert mrr is not np.Inf\n"
-}

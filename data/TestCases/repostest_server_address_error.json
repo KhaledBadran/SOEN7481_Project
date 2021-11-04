@@ -1,9 +1,0 @@
-{
-    "functionName": "test_server_address_error",
-    "className": null,
-    "fileName": "/daveisadork_&_PyDevNS/tests_&_test_server.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with patch('devns.server.subprocess') as subprocess:\n    with patch('devns.server.socket') as socket_mock:\n        socket_mock.getfqdn = MagicMock(return_value='test.example.com')\n        socket_mock.gethostbyname = MagicMock(side_effect=socket.error)\n        subprocess.check_output = MagicMock(return_value='')\n        with pytest.raises(RuntimeError):\n            server.address = None\n        socket_mock.getfqdn.assert_called_once_with()\n        socket_mock.gethostbyname.assert_called_once_with('test.example.com')\n        subprocess.check_output.assert_called_once_with(('ifconfig',))\n"
-}

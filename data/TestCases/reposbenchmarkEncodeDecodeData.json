@@ -1,9 +1,0 @@
-{
-    "functionName": "benchmarkEncodeDecodeData",
-    "className": null,
-    "fileName": "/named-data_&_PyNDN2/examples_&_test_encode_decode_benchmark.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Call benchmarkEncodeDataSeconds and benchmarkDecodeDataSeconds with\n    appropriate nInterations.  Print the results to stdout.\n\n    :param bool useComplex: See benchmarkEncodeDataSeconds.\n    :param bool useCrypto: See benchmarkEncodeDataSeconds.\n    :param bool keyType: See benchmarkEncodeDataSeconds.\n    \"\"\"\nnIterations = (4000 if keyType == KeyType.EC else 1500) if useCrypto else 20000\nduration, encoding = benchmarkEncodeDataSeconds(nIterations, useComplex,\n    useCrypto, keyType)\nprint('Encode ' + ('complex' if useComplex else 'simple ') +\n    ' data: Crypto? ' + (('EC ' if keyType == KeyType.EC else 'RSA') if\n    useCrypto else '-  ') + ', Duration sec, Hz: ' + repr(duration) + ', ' +\n    repr(nIterations / duration))\nnIterations = (3000 if keyType == KeyType.EC else 5000) if useCrypto else 20000\nduration = benchmarkDecodeDataSeconds(nIterations, useCrypto, keyType, encoding\n    )\nprint('Decode ' + ('complex' if useComplex else 'simple ') +\n    ' data: Crypto? ' + (('EC ' if keyType == KeyType.EC else 'RSA') if\n    useCrypto else '-  ') + ', Duration sec, Hz: ' + repr(duration) + ', ' +\n    repr(nIterations / duration))\n"
-}

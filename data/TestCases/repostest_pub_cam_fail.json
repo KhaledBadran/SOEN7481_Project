@@ -1,9 +1,0 @@
-{
-    "functionName": "test_pub_cam_fail",
-    "className": null,
-    "fileName": "/SimLeek_&_CV_PubSubs/tests_&_frame_&_test_frame_publishing.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "img = np.zeros((30, 40))\nwith mock.patch.object(cv2, 'VideoCapture', new_callable=mock.MagicMock\n    ) as mock_cv_capture, mock.patch.object(NpCam, 'isOpened'\n    ) as mock_is_open, mock.patch.object(subd, 'register_cam') as mock_reg:\n    cap = NpCam(img)\n    mock_cv_capture.side_effect = [cap]\n    mock_is_open.return_value = False\n    subd.CV_CAMS_DICT['0'] = subd.Cam('0')\n    with mock.patch.object(subd.CV_CAMS_DICT['0'].status_pub, 'publish'\n        ) as mock_fail_pub:\n        pub_cam_loop_opencv(0, high_speed=False)\n        mock_fail_pub.assert_called_once_with('failed')\n    subd.CV_CAMS_DICT = {}\n"
-}

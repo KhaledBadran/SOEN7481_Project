@@ -1,9 +1,0 @@
-{
-    "functionName": "test_write_missing_offset_items",
-    "className": "TestLocateRequestPayload",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_messages_&_payloads_&_test_locate.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a Locate request payload can be written to a data stream\n        even when missing the offset items.\n        \"\"\"\npayload = payloads.LocateRequestPayload(maximum_items=1,\n    storage_status_mask=3, object_group_member=enums.ObjectGroupMember.\n    GROUP_MEMBER_DEFAULT, attributes=[objects.Attribute(attribute_name=\n    objects.Attribute.AttributeName('Object Group'), attribute_value=\n    primitives.TextString(value='RoundRobinTestGroup', tag=enums.Tags.\n    OBJECT_GROUP))])\nstream = utils.BytearrayStream()\npayload.write(stream)\nself.assertEqual(len(self.no_offset_items_encoding), len(stream))\nself.assertEqual(str(self.no_offset_items_encoding), str(stream))\n"
-}

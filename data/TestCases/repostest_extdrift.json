@@ -1,9 +1,0 @@
-{
-    "functionName": "test_extdrift",
-    "className": "TestKrige",
-    "fileName": "/GeoStat-Framework_&_GSTools/tests_&_test_krige.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ext_drift = []\ncond_drift = []\nfor i, grid in enumerate(self.grids):\n    dim = i + 1\n    model = Exponential(dim=dim, var=2, len_scale=10, anis=[0.9, 0.8],\n        angles=[2, 1, 0.5])\n    srf = SRF(model)\n    field = srf(grid)\n    ext_drift.append(field)\n    field = field.reshape(self.grid_shape[:dim])\n    cond_drift.append(field[self.data_idx[:dim]])\nfor Model in self.cov_models:\n    for dim in self.dims:\n        model = Model(dim=dim, var=2, len_scale=10, anis=[0.5, 0.2], angles\n            =[0.4, 0.2, 0.1])\n        extdrift = krige.ExtDrift(model, self.cond_pos[:dim], self.cond_val,\n            cond_drift[dim - 1])\n        field_1, __ = extdrift.unstructured(self.grids[dim - 1], ext_drift=\n            ext_drift[dim - 1])\n        field_1 = field_1.reshape(self.grid_shape[:dim])\n        field_2, __ = extdrift.structured(self.pos[:dim], ext_drift=\n            ext_drift[dim - 1])\n        self.assertAlmostEqual(np.max(np.abs(field_1 - field_2)), 0.0, places=2\n            )\n        for i, val in enumerate(self.cond_val):\n            self.assertAlmostEqual(field_2[self.data_idx[:dim]][i], val,\n                places=2)\n"
-}

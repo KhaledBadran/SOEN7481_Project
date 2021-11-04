@@ -1,9 +1,0 @@
-{
-    "functionName": "test_update_without_an_id_fails",
-    "className": null,
-    "fileName": "/AutomatedTester_&_Bugsy/tests_&_test_attachment.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data = copy.deepcopy(attachment_return['bugs']['1017315'][0])\nresp_dict = {'attachments': [data]}\nresp_dict['attachments'][0]['id'] = None\nbugzilla = Bugsy()\nattachment = Attachment(bugzilla, **resp_dict)\ntry:\n    attachment.update()\n    assert False, 'Should have raised an AttachmentException due to update without id'\nexcept AttachmentException as e:\n    assert str(e\n        ) == 'Message: Cannot update bug without an attachment id Code: None'\nresponses.activate"
-}

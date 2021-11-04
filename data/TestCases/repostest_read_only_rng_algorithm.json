@@ -1,9 +1,0 @@
-{
-    "functionName": "test_read_only_rng_algorithm",
-    "className": "TestRNGParameters",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a RNGParameters structure can be correctly read in from a\n        data stream even when missing all fields except the RNG algorithm.\n        \"\"\"\nrng_parameters = objects.RNGParameters()\nself.assertIsNone(rng_parameters.rng_algorithm)\nself.assertIsNone(rng_parameters.cryptographic_algorithm)\nself.assertIsNone(rng_parameters.cryptographic_length)\nself.assertIsNone(rng_parameters.hashing_algorithm)\nself.assertIsNone(rng_parameters.drbg_algorithm)\nself.assertIsNone(rng_parameters.recommended_curve)\nself.assertIsNone(rng_parameters.fips186_variation)\nself.assertIsNone(rng_parameters.prediction_resistance)\nrng_parameters.read(self.only_rng_algorithm_encoding, kmip_version=enums.\n    KMIPVersion.KMIP_1_3)\nself.assertEqual(enums.RNGAlgorithm.FIPS186_2, rng_parameters.rng_algorithm)\nself.assertIsNone(rng_parameters.cryptographic_algorithm)\nself.assertIsNone(rng_parameters.cryptographic_length)\nself.assertIsNone(rng_parameters.hashing_algorithm)\nself.assertIsNone(rng_parameters.drbg_algorithm)\nself.assertIsNone(rng_parameters.recommended_curve)\nself.assertIsNone(rng_parameters.fips186_variation)\nself.assertIsNone(rng_parameters.prediction_resistance)\n"
-}

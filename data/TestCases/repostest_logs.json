@@ -1,9 +1,0 @@
-{
-    "functionName": "test_logs",
-    "className": null,
-    "fileName": "/fmfn_&_BayesianOptimization/tests_&_test_util.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "import pytest\ndef f(x, y):\n    return -x ** 2 - (y - 1) ** 2 + 1\noptimizer = BayesianOptimization(f=f, pbounds={'x': (-2, 2), 'y': (-2, 2)})\nassert len(optimizer.space) == 0\nload_logs(optimizer, './tests/test_logs.json')\nassert len(optimizer.space) == 5\nload_logs(optimizer, ['./tests/test_logs.json'])\nassert len(optimizer.space) == 5\nother_optimizer = BayesianOptimization(f=lambda x: -x ** 2, pbounds={'x': (\n    -2, 2)})\nwith pytest.raises(ValueError):\n    load_logs(other_optimizer, ['./tests/test_logs.json'])\n"
-}

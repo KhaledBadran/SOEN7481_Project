@@ -1,9 +1,0 @@
-{
-    "functionName": "test_no_querylist",
-    "className": "TestMMObjectViews",
-    "fileName": "/Axiologue_&_DjangoRestMultipleModels/tests_&_test_object_view.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        A view with no querylist and no `get_querylist` overwrite should raise\n        an assertion error with the appropriate message\n        \"\"\"\nview = NoQuerylistView.as_view()\nrequest = factory.get('/')\nwith self.assertRaises(AssertionError) as error:\n    view(request).render()\nself.assertEqual(str(error.exception),\n    'NoQuerylistView should either include a `querylist` attribute, or override the `get_querylist()` method.'\n    )\n"
-}

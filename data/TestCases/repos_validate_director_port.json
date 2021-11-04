@@ -1,9 +1,0 @@
-{
-    "functionName": "_validate_director_port",
-    "className": "CITestProvisioning",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Helper method for validating get director port return details.\n\n        :param port_details: port details -- dict\n        \"\"\"\nsymmetrix_port = 'symmetrixPort'\nport_interface = 'port_interface'\nport_status = 'port_status'\ndirector_status = 'director_status'\nnum_of_hypers = 'num_of_hypers'\nmax_speed = 'max_speed'\nself.assertIsInstance(port_details, dict)\nself.assertIn(symmetrix_port, port_details)\nport_details = port_details[symmetrix_port]\nsymmetrix_port_key = port_details[constants.SYMMETRIX_PORT_KEY]\nself.assertIsInstance(symmetrix_port_key, dict)\nself.assertIn(constants.DIRECTOR_ID, symmetrix_port_key)\nself.assertIn(constants.PORT_ID, symmetrix_port_key)\nself.assertIsInstance(symmetrix_port_key[constants.PORT_ID], str)\ndirector_id = symmetrix_port_key[constants.DIRECTOR_ID]\nself.assertIsInstance(director_id, str)\nself.assertIsNotNone(re.match(constants.DIRECTOR_SEARCH_PATTERN, director_id))\nif port_interface in port_details:\n    self.assertIsInstance(port_details[port_interface], str)\nif port_status in port_details:\n    self.assertIsInstance(port_details[port_status], str)\nif director_status in port_details:\n    self.assertIsInstance(port_details[director_status], str)\nif constants.TYPE in port_details:\n    self.assertIsInstance(port_details[constants.TYPE], str)\nif constants.NUM_OF_CORES in port_details:\n    self.assertIsInstance(port_details[constants.NUM_OF_CORES], int)\nif num_of_hypers in port_details:\n    self.assertIsInstance(port_details[num_of_hypers], int)\nif max_speed in port_details:\n    self.assertIsInstance(port_details[max_speed], str)\n"
-}

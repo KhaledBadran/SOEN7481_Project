@@ -1,9 +1,0 @@
-{
-    "functionName": "test_replace_in_fort3_properties_replace_new",
-    "className": null,
-    "fileName": "/mortele_&_OccamTools/test_&_test_replace_in_fort3.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "replacement = Fort3Replacement(new=True)\nassert replacement.new is True\nassert replacement.replace is False\nreplacement.replace = True\nassert replacement.new is False\nassert replacement.replace is True\nreplacement.new = True\nassert replacement.new is True\nassert replacement.replace is False\nfor inp in ['string', 1, 8.251, int]:\n    caught = False\n    try:\n        replacement.new = inp\n    except TypeError:\n        caught = True\n    assert caught is True\n    caught = False\n    try:\n        replacement.replace = inp\n    except TypeError:\n        caught = True\n    assert caught is True\n    caught = False\n    try:\n        replacement = Fort3Replacement(new=inp)\n    except TypeError:\n        caught = True\n    assert caught is True\nfor a, b in zip([True, False], [False, True]):\n    replacement = Fort3Replacement(new=a, replace=b)\n    assert replacement.new is a\n    assert replacement.replace is b\nfor inp in [True, False]:\n    caught = False\n    try:\n        replacement = Fort3Replacement(new=inp, replace=inp)\n    except ValueError:\n        caught = True\n    assert caught is True\nreplacement = Fort3Replacement(new=True, replace=None)\nassert replacement.new is True\nassert replacement.replace is False\nreplacement = Fort3Replacement(new=None, replace=False)\nassert replacement.new is True\nassert replacement.replace is False\n"
-}

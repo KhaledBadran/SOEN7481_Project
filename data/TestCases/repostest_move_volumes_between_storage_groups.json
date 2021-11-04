@@ -1,9 +1,0 @@
-{
-    "functionName": "test_move_volumes_between_storage_groups",
-    "className": "CITestProvisioning",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test move_volumes_between_storage_groups.\"\"\"\nstorage_group_name_1 = self.create_empty_storage_group()\nstorage_group_name_2 = self.create_empty_storage_group()\nvolume_name = self.generate_name()\ndevice_id = self.provisioning.create_volume_from_storage_group_return_id(\n    volume_name, storage_group_name_1, '1')\ntime.sleep(10)\nstorage_group_details_1 = self.provisioning.get_storage_group(\n    storage_group_name_1)\nstorage_group_details_2 = self.provisioning.get_storage_group(\n    storage_group_name_2)\nself.assertEqual(1, storage_group_details_1[constants.NUM_OF_VOLS])\nself.assertEqual(0, storage_group_details_2[constants.NUM_OF_VOLS])\nself.provisioning.move_volumes_between_storage_groups(device_id,\n    storage_group_name_1, storage_group_name_2)\nself.addCleanup(self.delete_volume, storage_group_name_2, device_id)\nstorage_group_details_1 = self.provisioning.get_storage_group(\n    storage_group_name_1)\nstorage_group_details_2 = self.provisioning.get_storage_group(\n    storage_group_name_2)\nself.assertEqual(0, storage_group_details_1[constants.NUM_OF_VOLS])\nself.assertEqual(1, storage_group_details_2[constants.NUM_OF_VOLS])\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_multiple_send",
-    "className": "TestWebOSClient",
-    "fileName": "/supersaiyanmode_&_PyWebOSTV/tests_&_test_connection.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "client = FakeClient()\nq1 = client.send_message('req', 'uri', None, unique_id='1', get_queue=True)\nq2 = client.send_message('req', 'uri', None, unique_id='2', get_queue=True)\nclient.received_message(json.dumps({'id': '2', 'test': 'test2'}))\nclient.received_message(json.dumps({'id': '1', 'test': 'test1'}))\nassert q1.get(block=True, timeout=1) == {'id': '1', 'test': 'test1'}\nassert q2.get(block=True, timeout=1) == {'id': '2', 'test': 'test2'}\n"
-}

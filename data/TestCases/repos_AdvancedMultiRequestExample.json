@@ -1,9 +1,0 @@
-{
-    "functionName": "_AdvancedMultiRequestExample",
-    "className": "MultiRequestTests",
-    "fileName": "/kaltura_&_KalturaGeneratedAPIClientsPython/KalturaClient_&_tests_&_test_functional.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "client = KalturaClient(self.config)\nclient.startMultiRequest()\nfrom KalturaClient.Plugins.Core import KalturaMixEntry\nfrom KalturaClient.Plugins.Core import KalturaEditorType\nks = client.session.start(ADMIN_SECRET, USER_NAME, KalturaSessionType.ADMIN,\n    PARTNER_ID, 86400, '')\nclient.setKs(ks)\nmixEntry = KalturaMixEntry()\nmixEntry.setName('.Net Mix %s' % (testString,))\nmixEntry.setEditorType(KalturaEditorType.SIMPLE)\nmixEntry = client.mixing.add(mixEntry)\nulFile = getTestFile('DemoVideo.flv')\nuploadTokenId = client.media.upload(ulFile)\nmediaEntry = KalturaMediaEntry()\nmediaEntry.setName('Media Entry For Mix %s' % (testString,))\nmediaEntry.setMediaType(KalturaMediaType.VIDEO)\nmediaEntry = client.media.addFromUploadedFile(mediaEntry, uploadTokenId)\nclient.mixing.appendMediaEntry(mixEntry.id, mediaEntry.id)\nresponse = client.doMultiRequest()\nfor subResponse in response:\n    if isinstance(subResponse, KalturaException):\n        self.fail('Error occurred: ' + subResponse.message)\nassert isinstance(response[1], KalturaMixEntry)\nmixEntry = response[1]\nprint('The new mix entry id is: {}'.format(mixEntry.id))\n"
-}

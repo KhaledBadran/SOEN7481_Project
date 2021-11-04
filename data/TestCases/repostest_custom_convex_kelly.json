@@ -1,9 +1,0 @@
-{
-    "functionName": "test_custom_convex_kelly",
-    "className": null,
-    "fileName": "/robertmartin8_&_PyPortfolioOpt/tests_&_test_custom_objectives.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "lb = 0.01\nub = 0.3\nef = EfficientFrontier(*setup_efficient_frontier(data_only=True),\n    weight_bounds=(lb, ub))\ndef kelly_objective(w, e_returns, cov_matrix, k=3):\n    variance = cp.quad_form(w, cov_matrix)\n    objective = variance * 0.5 * k - w @ e_returns\n    return objective\nweights = ef.convex_objective(kelly_objective, e_returns=ef.\n    expected_returns, cov_matrix=ef.cov_matrix)\nfor w in weights.values():\n    assert w >= lb - 1e-08 and w <= ub + 1e-08\n"
-}

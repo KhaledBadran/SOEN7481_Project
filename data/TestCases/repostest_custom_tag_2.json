@@ -1,9 +1,0 @@
-{
-    "functionName": "test_custom_tag_2",
-    "className": "NamespaceTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_namespace.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "collection = lookup.TemplateLookup()\ncollection.put_string('base.html',\n    \"\"\"\n            <%def name=\"foo(x, y)\">\n                foo: ${x} ${y}\n            </%def>\n\n            <%def name=\"bat(g)\"><%\n                return \"the bat! %s\" % g\n            %></%def>\n\n            <%def name=\"bar(x)\">\n                ${caller.body(z=x)}\n            </%def>\n        \"\"\"\n    )\ncollection.put_string('index.html',\n    \"\"\"\n            <%namespace name=\"myns\" file=\"base.html\"/>\n\n            <%myns:foo x=\"${'some x'}\" y=\"some y\"/>\n\n            <%myns:bar x=\"${myns.bat(10)}\" args=\"z\">\n                record: ${z}\n            </%myns:bar>\n\n        \"\"\"\n    )\nassert result_lines(collection.get_template('index.html').render()) == [\n    'foo: some x some y', 'record: the bat! 10']\n"
-}

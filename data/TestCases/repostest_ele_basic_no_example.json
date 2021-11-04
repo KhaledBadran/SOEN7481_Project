@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ele_basic_no_example",
-    "className": null,
-    "fileName": "/NUAA-AL_&_ALiPy/test_&_test_repository.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ele.add(select_index=1, label=0)\nassert 1 in ele\nele.update_query(labels=[1], indexes=[60])\nele.update_query(labels=[1], indexes=61)\nassert 60 in ele\nassert 61 in ele\nele.update_query(labels=[1, 1], indexes=[63, 64])\nassert 63 in ele\nassert 64 in ele\nele.discard(index=61)\nassert 61 not in ele\n_, a = ele.retrieve_by_indexes(60)\nassert a == 1\n_, b = ele.retrieve_by_indexes([63, 64])\nassert np.all(b == [1, 1])\nprint(ele.get_training_data())\nprint(ele.full_history())\n\"\"\"\n    (array([], dtype=float64), array([0, 0, 0, 0, 1, 0, 1, 1, 1]), array([11, 32,  0,  6, 74,  1, 60, 63, 64]))\n    +----------------+----------------+----------------------+---------------------+\n    |       0        |       1        |          2           |        in all       |\n    +----------------+----------------+----------------------+---------------------+\n    | query_index:60 | query_index:61 | query_index:[63, 64] | number_of_queries:3 |\n    |   response:1   |   response:1   |   response:[1, 1]    |        cost:0       |\n    |   cost:None    |   cost:None    |      cost:None       |                     |\n    +----------------+----------------+----------------------+---------------------+\n    \"\"\"\n"
-}

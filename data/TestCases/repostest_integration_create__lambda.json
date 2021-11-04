@@ -1,9 +1,0 @@
-{
-    "functionName": "test_integration_create__lambda",
-    "className": "test_API_Gateway",
-    "fileName": "/pbx-gs_&_OSBot-AWS/tests_&_unit_&_apis_&_test_API_Gateway.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from osbot_aws.apis.Lambda import Lambda\nlambda_name = 'gw_bot_lambdas_dev_hello_world'\nresource_id = self.rest_api.resource_id('/')\nhttp_method = 'GET'\nself.api_gateway.method_create(self.api_id, resource_id, http_method)\nself.api_gateway.integration_create__lambda(api_id=self.api_id, resource_id\n    =resource_id, lambda_name=lambda_name, http_method=http_method)\nself.integration_add_permission_to_lambda(lambda_name)\nresponse_models = {'application/json': 'Empty'}\nself.api_gateway.method_response_create(self.api_id, resource_id,\n    http_method, '200', response_models)\nself.result = self.api_gateway.deployment_create(self.api_id, 'QA-Lambda')\n"
-}

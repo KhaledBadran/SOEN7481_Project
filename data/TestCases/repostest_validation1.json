@@ -1,9 +1,0 @@
-{
-    "functionName": "test_validation1",
-    "className": "Test_Data",
-    "fileName": "/sahahn_&_ABCD_ML/BPt_&_tests_&_test_Data.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "loc = get_file_path('custom_covars1.csv')\nself.ML.Load_Strat(loc=loc, col_name='education', dataset_type='custom')\nself.assertTrue(self.ML.strat.shape == (6, 1))\ned_size = len(np.unique(self.ML.strat['education' + self.ML.strat_u_name]))\nself.assertTrue(ed_size == 3)\nself.ML.Define_Validation_Strategy(groups='education')\nself.assertTrue(len(self.ML.CV.groups == 6))\nself.ML.Load_Strat(loc=loc, col_name='sex', dataset_type='custom',\n    binary_col=True)\nself.assertTrue(self.ML.strat.shape == (5, 2))\nself.ML.Define_Validation_Strategy(groups=['education', 'sex'])\nself.assertTrue(len(self.ML.CV.groups == 5))\nself.ML.Define_Validation_Strategy(stratify=['education', 'sex'])\nself.assertTrue(len(self.ML.CV.stratify == 5))\nself.assertTrue(len(np.unique(self.ML.CV.stratify)) == 5)\nself.ML.Define_Validation_Strategy(stratify='sex')\nself.assertTrue(len(self.ML.CV.stratify == 5))\nself.ML.Clear_Strat()\nself.assertTrue(len(self.ML.strat) == 0)\n"
-}

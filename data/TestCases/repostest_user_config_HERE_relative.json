@@ -1,9 +1,0 @@
-{
-    "functionName": "test_user_config_HERE_relative",
-    "className": "OWMTest",
-    "fileName": "/openworm_&_PyOpenWorm/tests_&_CommandTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        $HERE should resolve relative to the user config file\n        \"\"\"\nself._init_conf()\nuserconfdir = p(self.testdir, 'userconf')\nos.mkdir(userconfdir)\nuserconf = p(userconfdir, 'user.conf')\nself.cut.config = Mock()\nwith open(userconf, 'w') as f:\n    f.write('{\"key\": \"$HERE/irrelevant\"}')\nself.cut.config.user_config_file = userconf\nconf = self.cut._conf()\nself.assertEqual(conf['key'], p(userconfdir, 'irrelevant'))\n"
-}

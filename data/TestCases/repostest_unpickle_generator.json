@@ -1,9 +1,0 @@
-{
-    "functionName": "test_unpickle_generator",
-    "className": null,
-    "fileName": "/viebboy_&_PyGOP/test_&_utility_&_test_misc.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "train_func = utility.get_generator\ntrain_data = [INPUT_DIM, OUTPUT_DIM, BATCH_SIZE, STEPS]\nfilename = os.path.join(tmpdir.dirname, 'data_generator.pickle')\nmisc.pickle_generator(filename, train_func, train_data, None, None, None, None)\n(train_func_recovered, train_data_recovered, val_func, val_data, test_func,\n    test_data) = misc.unpickle_generator(filename)\nassert val_data is None\nassert val_func is None\nassert test_data is None\nassert test_func is None\nassert train_data == train_data_recovered\ntrain_gen, train_steps = train_func(train_data)\nassert train_steps == STEPS\nfor i in range(3):\n    next(train_gen)\nos.remove(filename)\n"
-}

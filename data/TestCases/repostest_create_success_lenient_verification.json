@@ -1,9 +1,0 @@
-{
-    "functionName": "test_create_success_lenient_verification",
-    "className": "EasyJWTTest",
-    "fileName": "/BMeu_&_EasyJWT/tests_&_easyjwt_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n            Test creating a token with strict verification disabled.\n\n            Expected Result: A token is created successfully. The create token can be decoded.\n        \"\"\"\nEasyJWT.strict_verification = False\neasyjwt = EasyJWT(self.key)\neasyjwt.expiration_date = self.expiration_date\neasyjwt.issuer = self.issuer\neasyjwt.JWT_ID = self.JWT_ID\neasyjwt.not_before_date = self.not_before_date\neasyjwt.subject = self.subject\ntoken = easyjwt.create()\nself.assertIsNotNone(token)\nself.assertIsNotNone(easyjwt.issued_at_date)\nclaim_set = decode(token, self.key, algorithms=easyjwt._get_decode_algorithms()\n    )\nself.assertIsNotNone(claim_set)\n"
-}

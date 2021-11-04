@@ -1,9 +1,0 @@
-{
-    "functionName": "test_qec",
-    "className": "Test_central_controller",
-    "fileName": "/QE-Lab_&_OpenQL/tests_&_cc_&_test_cc.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ql.set_option('output_dir', output_dir)\nql.set_option('optimize', 'no')\nql.set_option('scheduler', 'ALAP')\nql.set_option('scheduler_uniform', 'yes')\nql.set_option('log_level', 'LOG_WARNING')\nplatform = ql.Platform(platform_name, config_fn)\np = ql.Program('test_qec', platform, num_qubits, num_cregs)\nk = ql.Kernel('kernel_0', platform, num_qubits, num_cregs)\nx = 7\nxN = x - 5\nxE = x + 1\nxS = x + 5\nxW = x - 1\nz = 11\nzN = z - 5\nzE = z + 1\nzS = z + 5\nzW = z - 1\nrdX = ql.CReg()\nrdZ = ql.CReg()\nk.gate('rym90', [x])\nk.gate('rym90', [xN])\nk.gate('rym90', [xE])\nk.gate('rym90', [xW])\nk.gate('rym90', [xS])\nk.wait(all_qubits, 0)\nk.gate('cz', [x, xE])\nk.gate('cz', [x, xN])\nk.gate('cz', [x, xS])\nk.gate('cz', [x, xW])\nk.wait(all_qubits, 0)\nk.gate('ry90', [x])\nk.gate('ry90', [xN])\nk.gate('ry90', [xE])\nk.gate('ry90', [xW])\nk.gate('ry90', [xS])\nk.wait(all_qubits, 0)\nk.gate('measure', [x], rdX)\nk.wait([x], 0)\nk.gate('rym90', [z])\nk.gate('cz', [z, zE])\nk.gate('cz', [z, zS])\nk.gate('cz', [z, zN])\nk.gate('cz', [z, zW])\nk.gate('ry90', [z])\nk.gate('measure', [z], rdZ)\np.add_kernel(k)\np.compile()\nunittest.skip"
-}

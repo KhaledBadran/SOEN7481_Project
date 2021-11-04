@@ -1,9 +1,0 @@
-{
-    "functionName": "test_zmq_tcp_pipe",
-    "className": null,
-    "fileName": "/SillyFreak_&_ConcurrentUtils/tests_&_test_pipe.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ctx = zmq.asyncio.Context()\na, b = await zmq_tcp_pipe(ctx)\nawait b.send('foo')\nassert await a.recv() == 'foo'\nawait a.send(eof=True)\nwith pytest.raises(EOFError):\n    await b.recv()\nwith pytest.raises(EOFError):\n    await b.recv()\nwith pytest.raises(EOFError):\n    await a.send('bar')\nctx.destroy()\npytest.mark.asyncio"
-}

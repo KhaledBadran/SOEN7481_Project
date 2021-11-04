@@ -1,9 +1,0 @@
-{
-    "functionName": "test_auth_denied",
-    "className": null,
-    "fileName": "/PlaidWeb_&_Authl/tests_&_handlers_&_test_twitter.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "storage = {}\nhandler = twitter.Twitter('foo', 'bar', 60, storage)\nmocker.patch('authl.handlers.twitter.OAuth1')\nsession_mock = mocker.patch('authl.handlers.twitter.OAuth1Session')\nsession_mock().fetch_request_token.return_value = {'oauth_token':\n    'my_token', 'oauth_token_secret': 'my_secret'}\nresult = handler.initiate_auth('https://twitter.com/fluffy', 'http://cb',\n    'redir')\nassert isinstance(result, disposition.Redirect), str(result)\nassert result.url.startswith('https://api.twitter.com')\nargs = parse_args(result.url)\nprint(result.url)\nassert args['screen_name'] == 'fluffy'\nassert args['oauth_token'] == 'my_token'\nassert 'my_token' in storage\nargs['denied'] = args.pop('oauth_token')\nresult = handler.check_callback('foo', args, {})\nassert isinstance(result, disposition.Error)\nassert 'authorization declined' in result.message\n"
-}

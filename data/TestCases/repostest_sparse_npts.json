@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sparse_npts",
-    "className": null,
-    "fileName": "/AllenInstitute_&_EM_Aligner_python/integration_tests_&_test_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "fmatches = copy.deepcopy(matches)\ntids = [t.layout.sectionId for t in tilespecs]\nncol = 1000\npcol = 123\nqcol = 789\nma = {'npts_min': 5, 'npts_max': 100, 'choose_random': random}\nnz = 1\nfmatches[nz]['matches']['w'] = [0] * len(fmatches[nz]['matches']['w'])\nnmin = 4\nfmatches[nmin]['matches']['w'] = fmatches[nmin]['matches']['w'][0:ma[\n    'npts_min'] - 1]\nfor pq in ['p', 'q']:\n    for i in [0, 1]:\n        fmatches[nmin]['matches'][pq][i] = fmatches[nmin]['matches'][pq][i][\n            0:ma['npts_min'] - 1]\nfor k, match in enumerate(fmatches):\n    if not (match['pGroupId'] in tids) & (match['qGroupId'] in tids):\n        continue\n    npts = len(match['matches']['w'])\n    pi = tids.index(match['pGroupId'])\n    qi = tids.index(match['qGroupId'])\n    pspec = tilespecs[pi]\n    qspec = tilespecs[qi]\n    pblock, qblock, weights, rhs = blocks_from_tilespec_pair(pspec, qspec,\n        match, pcol, qcol, ncol, ma)\n    if np.all(np.array(match['matches']['w']) == 0):\n        for x in [pblock, qblock, weights, rhs]:\n            assert x is None\n        continue\n    if len(match['matches']['w']) < ma['npts_min']:\n        for x in [pblock, qblock, weights, rhs]:\n            assert x is None\n        continue\n    nrow = npts\n    if npts > ma['npts_max']:\n        nrow = ma['npts_max']\n    assert pblock.shape == qblock.shape == (nrow, ncol)\n    pndof = pspec.tforms[-1].DOF_per_tile\n    qndof = qspec.tforms[-1].DOF_per_tile\n    for block, nd, nc in zip([pblock, qblock], [pndof, qndof], [pcol, qcol]):\n        i, j, v = scipy.sparse.find(block)\n        assert np.all(np.in1d(j, nc + np.arange(nd)))\npytest.mark.parametrize('random', [True, False])"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_load_file",
-    "className": "TestLoadLocal",
-    "fileName": "/anthill-utils_&_PyMySQL/pymysql_&_tests_&_test_load_local.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test load local infile with a valid file\"\"\"\nconn = self.connect()\nc = conn.cursor()\nc.execute('CREATE TABLE test_load_local (a INTEGER, b INTEGER)')\nfilename = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'data',\n    'load_local_data.txt')\ntry:\n    c.execute((\"LOAD DATA LOCAL INFILE '{0}' INTO TABLE \" +\n        \"test_load_local FIELDS TERMINATED BY ','\").format(filename))\n    c.execute('SELECT COUNT(*) FROM test_load_local')\n    self.assertEqual(22749, c.fetchone()[0])\nfinally:\n    c.execute('DROP TABLE test_load_local')\n"
-}

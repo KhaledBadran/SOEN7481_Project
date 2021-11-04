@@ -1,9 +1,0 @@
-{
-    "functionName": "test_merge_list_value_in_dicts",
-    "className": null,
-    "fileName": "/alex-ber_&_AlexBerUtils/tests_&_utils_&_init_app_conf_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "logger.info(f'{request._pyfuncitem.name}()')\nif type(value) is list:\n    logger.debug(f'Complex types (such as list) are not supported.')\n    return\nflat_d = OrderedDict()\nflat_d['app.ports'] = value\nd = OrderedDict()\ninner_value = ['innervalue']\nd.setdefault('app', OrderedDict()).setdefault('ports', inner_value)\nret = merge_list_value_in_dicts(flat_d, d, 'app', 'ports', implicit_convert\n    =True)\nf_value = flat_d['app.ports']\ni_value = d['app']['ports']\npytest.assume(value == f_value)\npytest.assume(inner_value == i_value)\npytest.assume(exp_value == ret)\npytest.mark.parametrize('value, exp_value', [(10000, [10000]), ('10000', [\n    10000]), ('10000,', [10000, None]), ('10000,10001', [10000, 10001]), (\n    '10000,10001,', [10000, 10001, None]), ('10000,,10003', [10000, None, \n    10003]), (True, [True]), (False, [False]), ('True', [True]), ('False',\n    [False]), ('False,True,False', [False, True, False]), ([False], [False]\n    ), ([None], [None]), (['False'], [False]), (['None'], ['None']), ([None\n    ], ['innervalue']), ([''], ['innervalue'])])"
-}

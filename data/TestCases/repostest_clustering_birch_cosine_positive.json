@@ -1,9 +1,0 @@
-{
-    "functionName": "test_clustering_birch_cosine_positive",
-    "className": null,
-    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_server_&_tests_&_test_cluster.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "dsid, lsi_id, _, _ = get_features_lsi_cached(app, hashed=False)\nparent_id = lsi_id\nurl = V01 + '/clustering/birch'\npars = {'min_similarity': 0.5, 'parent_id': parent_id, 'metric': 'cosine'}\nmid = app.post_check(url, json=pars)['id']\ndata = app.get_check(url + '/' + mid)\nassert _get_min_similarity(data['data']) < 0.0\npars['metric'] = 'cosine-positive'\nmid = app.post_check(url, json=pars)['id']\ndata = app.get_check(url + '/' + mid)\nassert _get_min_similarity(data['data']) == 0.0\npars['metric'] = 'cosine-p'\nwith pytest.raises(ValueError):\n    mid = app.post_check(url, json=pars)['id']\n"
-}

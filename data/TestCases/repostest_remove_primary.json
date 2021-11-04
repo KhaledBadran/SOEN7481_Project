@@ -1,9 +1,0 @@
-{
-    "functionName": "test_remove_primary",
-    "className": "TestGensRNAOutput",
-    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_merge_manual.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "tss_dict = {'seq_id': 'aaa', 'source': 'Refseq', 'feature': 'TSS', 'start':\n    3, 'end': 3, 'phase': '.', 'strand': '+', 'score': '.'}\nattributes_tss = {'ID': 'CDS0', 'Name': 'CDS_0', 'type': 'Primary,Internal',\n    'associated_gene': 'AAA_00001,AAA_00004', 'utr_length':\n    'Primary_25,Internal_NA'}\ntss = Create_generator(tss_dict, attributes_tss, 'gff')\ntss_entry = [tss.attribute_string, {'utr_length': 'Primary_25,Internal_NA',\n    'type': 'Primary,Internal', 'associated_gene': 'AAA_00001,AAA_00004'}]\ntss_output = mm.remove_primary(tss, tss_entry)\nself.assertEqual(tss_output[0],\n    'utr_length=Internal_NA;associated_gene=AAA_00004;type=Internal;Name=TSS_3+'\n    )\nself.assertDictEqual(tss_output[1], {'associated_gene': 'AAA_00004', 'type':\n    'Internal', 'Name': 'TSS_3+', 'utr_length': 'Internal_NA'})\n"
-}

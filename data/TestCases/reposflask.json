@@ -1,9 +1,0 @@
-{
-    "functionName": "flask",
-    "className": null,
-    "fileName": "/ChrisTimperley_&_Kaskara/test_&_test_python.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "docker = _docker.from_env()\ndocker_image_name = 'kaskara/examples:flask'\ndocker_directory = os.path.join(DIR_HERE, 'examples/flask')\ndocker.images.build(path=docker_directory, tag=docker_image_name, rm=True)\nwith _dockerblade.DockerDaemon() as dockerblade:\n    files = {'flask/signals.py', 'flask/helpers.py'}\n    yield kaskara.Project(dockerblade=dockerblade, image=docker_image_name,\n        directory='/opt/flask/src', files=files)\npytest.fixture"
-}

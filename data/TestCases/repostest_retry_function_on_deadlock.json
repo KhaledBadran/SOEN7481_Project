@@ -1,9 +1,0 @@
-{
-    "functionName": "test_retry_function_on_deadlock",
-    "className": "TestCase",
-    "fileName": "/IntegralDefense_&_ACE/lib_&_saq_&_test_database.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from saq.database import User, retry_function_on_deadlock\nwith get_db_connection() as db:\n    c = db.cursor()\n    c.execute(\n        \"INSERT INTO users ( username, email ) VALUES ( 'user0', 'user0@localhost' )\"\n        )\n    c.execute(\n        \"INSERT INTO users ( username, email ) VALUES ( 'user1', 'user1@localhost' )\"\n        )\n    db.commit()\nlock_user0 = threading.Event()\nlock_user1 = threading.Event()\ndef _t1():\n    saq.db.execute(User.__table__.update().where(User.username == 'user0').\n        values(email='user0@t1'))\n    lock_user0.set()\n    lock_user1.wait(5)\n    time.sleep(2)\n    saq.db.execute(User.__table__.update().where(User.username == 'user1').\n        values(email='user1@t1'))\n    saq.db.commit()\ndef _t2():\n    with get_db_connection() as db:\n        c = db.cursor()\n        lock_user0.wait(5)\n        c.execute(\n            \"UPDATE users SET email = 'user1@t2' WHERE username = 'user1'\")\n        lock_user1.set()\n        c.execute(\n            \"UPDATE users SET email = 'user0@t2' WHERE username = 'user0'\")\n        db.commit()\nt1 = threading.Thread(target=retry_function_on_deadlock, args=(_t1,))\nt1.start()\nt2 = threading.Thread(target=_t2)\nt2.start()\nt1.join(5)\nt2.join(5)\nself.assertEquals(log_count('DEADLOCK STATEMENT'), 1)\nself.assertIsNotNone(saq.db.query(User).filter(User.email == 'user0@t1', \n    User.username == 'user0').first())\nself.assertIsNotNone(saq.db.query(User).filter(User.email == 'user1@t1', \n    User.username == 'user1').first())\n"
-}

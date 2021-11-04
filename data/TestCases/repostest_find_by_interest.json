@@ -1,9 +1,0 @@
-{
-    "functionName": "test_find_by_interest",
-    "className": "TestTrustAnchorContainer",
-    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_trust_anchor_container.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.anchorContainer.insert('group1', self.certificatePath1, 400.0)\ninterest = Interest(self.identity1.getName())\nself.assertTrue(self.anchorContainer.find(interest) != None)\ninterest1 = Interest(self.identity1.getName().getPrefix(-1))\nself.assertTrue(self.anchorContainer.find(interest1) != None)\ninterest2 = Interest(Name(self.identity1.getName()).appendVersion(1))\nself.assertTrue(self.anchorContainer.find(interest2) == None)\ncertificate3 = self.fixture.addCertificate(self.identity1.getDefaultKey(), '3')\ncertificate4 = self.fixture.addCertificate(self.identity1.getDefaultKey(), '4')\ncertificate5 = self.fixture.addCertificate(self.identity1.getDefaultKey(), '5')\ncertificate3Copy = CertificateV2(certificate3)\nself.anchorContainer.insert('group2', certificate3Copy)\nself.anchorContainer.insert('group3', certificate4)\nself.anchorContainer.insert('group4', certificate5)\ninterest3 = Interest(certificate3.getKeyName())\nfoundCertificate = self.anchorContainer.find(interest3)\nself.assertTrue(foundCertificate != None)\nself.assertTrue(interest3.getName().isPrefixOf(foundCertificate.getName()))\nself.assertTrue(certificate3.getName().equals(foundCertificate.getName()))\ninterest3.getExclude().appendComponent(certificate3.getName().get(\n    CertificateV2.ISSUER_ID_OFFSET))\nfoundCertificate = self.anchorContainer.find(interest3)\nself.assertTrue(foundCertificate != None)\nself.assertTrue(interest3.getName().isPrefixOf(foundCertificate.getName()))\nself.assertTrue(not foundCertificate.getName().equals(certificate3.getName()))\n"
-}

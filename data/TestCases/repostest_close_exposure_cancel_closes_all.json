@@ -1,9 +1,0 @@
-{
-    "functionName": "test_close_exposure_cancel_closes_all",
-    "className": null,
-    "fileName": "/nabicht_&_Buttonwood/tests_&_test_MarketObjects_&_test_Events_&_test_ordereventchain.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "id_gen = MonotonicIntID(seed=23043, increment=1)\nn = NewOrderCommand(id_gen.id(), 1234235.123, 2342, 'user_x', MARKET,\n    BID_SIDE, FAR, Price('34.52'), 1000)\noec = OrderEventChain(n, LOGGER, MonotonicIntID())\nassert len(oec.open_exposure_requests()) == 1\nassert oec.most_recent_requested_exposure() == Exposure(Price('34.52'), \n    1000, id_gen.last_id())\ncr = CancelReplaceCommand(id_gen.id(), 1234235.863, 2342, 'user_x', MARKET,\n    BID_SIDE, Price('34.51'), 800)\noec.apply_cancel_replace_command(cr)\nassert len(oec.open_exposure_requests()) == 2\nassert oec.open_exposure_requests()[1] == Exposure(Price('34.51'), 800,\n    id_gen.last_id())\nassert oec.most_recent_requested_exposure() == Exposure(Price('34.51'), 800,\n    id_gen.last_id())\ncancel_command = CancelCommand(id_gen.id(), 1234274.663, 2342, 'user_x',\n    MARKET, CancelReasons.USER_CANCEL)\noec.apply_cancel_command(cancel_command)\nassert len(oec.open_exposure_requests()) == 3\nassert oec.open_exposure_requests()[2] == Exposure(None, 0, id_gen.last_id())\nassert oec.most_recent_requested_exposure() == Exposure(None, 0, id_gen.\n    last_id())\ncancel_confirm = CancelReport(id_gen.id(), 1234278.663, 2342, 'user_x',\n    MARKET, cancel_command, CancelReasons.USER_CANCEL)\noec.apply_cancel_report(cancel_confirm)\nassert len(oec.open_exposure_requests()) == 0\nassert oec.most_recent_requested_exposure() is None\nassert oec.has_partial_fill() is False\n"
-}

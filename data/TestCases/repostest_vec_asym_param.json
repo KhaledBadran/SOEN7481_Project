@@ -1,9 +1,0 @@
-{
-    "functionName": "test_vec_asym_param",
-    "className": null,
-    "fileName": "/CCampJr_&_CRIkit2/crikit_&_preprocess_&_tests_&_test_als.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "x = np.linspace(-100, 100, 1000)\ny = 10 * np.exp(-(x ** 2 / (2 * 20 ** 2)))\nasym_param = 1e-06 * np.ones(x.size)\nals = AlsCvxopt(smoothness_param=1000.0, asym_param=asym_param, redux=1,\n    fix_end_points=False, fix_rng=None, verbose=True)\ny_als = als.calculate(y)\nassert np.max((y - y_als)[250:750]) > 7\nasym_param[200:800] = 0.01\nals = AlsCvxopt(smoothness_param=1000.0, asym_param=asym_param, redux=1,\n    fix_end_points=False, fix_rng=None, verbose=True)\ny_als = als.calculate(y)\nassert np.max((y - y_als)[250:750]) < 0.03\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_timer_matches_function",
-    "className": null,
-    "fileName": "/Gwildor_&_Pyromancer/pyromancer_&_test_&_test_objects.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "now = datetime.datetime.now()\nconnect_time = now - datetime.timedelta(seconds=4)\ntimer_with_last_time = Timer(datetime.timedelta(seconds=3))\ntimer_with_last_time.last_time = connect_time\ntimers = [(Timer(datetime.timedelta(seconds=3)), True), (Timer(datetime.\n    timedelta(seconds=5)), False), (Timer(datetime.timedelta(seconds=5),\n    direct=True), True), (timer_with_last_time, True), (Timer(now -\n    datetime.timedelta(days=1)), True), (Timer(now + datetime.timedelta(\n    days=1)), False), (Timer(now + datetime.timedelta(days=1), direct=True),\n    True)]\nfor t, expected in timers:\n    assert t.matches(connect_time) is expected\n"
-}

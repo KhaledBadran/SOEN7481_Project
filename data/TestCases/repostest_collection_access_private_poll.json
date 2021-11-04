@@ -1,9 +1,0 @@
-{
-    "functionName": "test_collection_access_private_poll",
-    "className": null,
-    "fileName": "/EclecticIQ_&_OpenTAXII/tests_&_test_auth.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "url, headers = prepare_url_headers(version, https, 'johnny', 'johnny')\nrequest = prepare_poll_request('collection-1', version, bindings=[\n    CB_STIX_XML_111])\nresponse = client.post(POLL_CLOSED['address'], data=request.to_xml(),\n    headers=headers, base_url=url)\nassert response.status_code == 200\nassert is_headers_valid(response.headers, version, https)\nmessage = as_tm(version).get_message_from_xml(response.data)\nassert message.message_type == 'Poll_Response'\nurl, headers = prepare_url_headers(version, https, 'billy', 'billy')\nrequest = prepare_poll_request('collection-2', version, bindings=[\n    CB_STIX_XML_111])\nresponse = client.post(POLL_CLOSED['address'], data=request.to_xml(),\n    headers=headers, base_url=url)\nassert response.status_code == 200\nassert is_headers_valid(response.headers, version, https)\nmessage = as_tm(version).get_message_from_xml(response.data)\nassert message.status_type == 'NOT_FOUND'\nurl, headers = prepare_url_headers(version, https, 'wally', 'wally')\nrequest = prepare_poll_request('collection-2', version, bindings=[\n    CB_STIX_XML_111])\nresponse = client.post(POLL_CLOSED['address'], data=request.to_xml(),\n    headers=headers, base_url=url)\nassert response.status_code == 200\nassert is_headers_valid(response.headers, version, https)\nmessage = as_tm(version).get_message_from_xml(response.data)\nassert message.message_type == 'Poll_Response'\npytest.mark.parametrize('https', [True, False])pytest.mark.parametrize('version', [11, 10])"
-}

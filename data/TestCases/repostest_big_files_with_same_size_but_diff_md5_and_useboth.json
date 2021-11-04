@@ -1,9 +1,0 @@
-{
-    "functionName": "test_big_files_with_same_size_but_diff_md5_and_useboth",
-    "className": "TestMatchOnNameAndMd5Extras",
-    "fileName": "/kenfar_&_DataGristle/scripts_&_tests_&_test_gristle_dir_merger_cmd.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" starting dirs & files:\n                src_dir\\\\mysubdir\foo.csv        # file moved\n                dst_dir\\\\mysubdir\foo.csv\n             should become:\n                dst_dir\\\\mysubdir\foo.csv\n                dst_dir\\\\mysubdir\foo.1.csv      # (action=keep_both)\n        \"\"\"\nshutil.rmtree(self.source_dir)\nself.source_dir = tempfile.mkdtemp(prefix='TestGristleDirMerger_source_')\nsource_subdir = os.path.join(self.source_dir, 'mysubdir')\nos.mkdir(source_subdir)\ncreate_test_file(source_subdir, 'foo.csv', records=10000)\ncreate_test_file(self.dest_subdir, 'foo.csv', records=10000, last_row_odd=True)\nself.cmd = get_cmd(self.source_dir, self.dest_dir, match_on='name_and_md5',\n    on_match='keep_both', on_partial_match='keep_both')\nrunner = envoy.run(self.cmd)\nself.assert_results(runner, source_files=None, dest_files=['foo.csv',\n    'foo.1.csv'])\n"
-}

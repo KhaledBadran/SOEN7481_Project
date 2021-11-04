@@ -1,9 +1,0 @@
-{
-    "functionName": "test_multiplication_centered_grid",
-    "className": "TestFieldMath",
-    "fileName": "/tum-pbs_&_PhiFlow/tests_&_test_object_math.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"multiply one field with another\"\"\"\nshape = [32, 27]\nfor boundary in [CLOSED, PERIODIC, OPEN]:\n    domain = Domain(shape, boundaries=(boundary, boundary))\n    centered_grid = CenteredGrid.sample(1, domain)\n    result_array = (centered_grid * centered_grid.copied_with(data=2 * np.\n        ones([1] + shape + [1]))).data\n    np.testing.assert_array_equal(result_array, 2)\n"
-}

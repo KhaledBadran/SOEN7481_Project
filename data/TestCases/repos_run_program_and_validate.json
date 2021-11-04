@@ -1,9 +1,0 @@
-{
-    "functionName": "_run_program_and_validate",
-    "className": "TemplateTestCase",
-    "fileName": "/pierrepo_&_PBxplore/pbxplore_&_tests_&_test_regression.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        Run the program to test and validate its outputs.\n        \"\"\"\ncommand = self._build_command_line(str(out_run_dir), **kwargs)\nprint(command)\nexe = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)\nout, err = exe.communicate()\nprint(out.decode('utf-8'))\nprint(err.decode('utf-8'))\nassert exe.returncode == 0, 'Program exited with a {} code.'.format(exe.\n    returncode)\nself._validate_output(str(out_run_dir), reference, **kwargs)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "verify_no_private_attachments",
-    "className": null,
-    "fileName": "/klahnakoski_&_Bugzilla-ETL/tests_&_test_etl.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "bugs = jx.select(private_attachments, 'bug_id')\nattaches = jx.select(private_attachments, 'attach_id')\nfor b in bugs:\n    versions = compare_es.get_all_bug_versions(es, b)\n    if not versions:\n        Log.error('expecting bug snapshots')\n    for v in versions:\n        for a in listwrap(v.attachments):\n            if a.attach_id in attaches:\n                Log.error('Private attachment should not exist')\n"
-}

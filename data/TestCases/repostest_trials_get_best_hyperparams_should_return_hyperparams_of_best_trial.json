@@ -1,9 +1,0 @@
-{
-    "functionName": "test_trials_get_best_hyperparams_should_return_hyperparams_of_best_trial",
-    "className": null,
-    "fileName": "/Neuraxio_&_Neuraxle/testing_&_metaopt_&_test_trial.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "hp_trial_1 = HyperparameterSamples({'a': 2})\ntrial_1 = Trial(hyperparams=hp_trial_1, main_metric_name=MAIN_METRIC_NAME)\nwith trial_1:\n    given_success_trial_validation_split(trial_1, best_score=0.2)\nhp_trial_2 = HyperparameterSamples({'b': 3})\ntrial_2 = Trial(hyperparams=hp_trial_2, main_metric_name=MAIN_METRIC_NAME)\nwith trial_2:\n    given_success_trial_validation_split(trial_2, best_score=0.1)\ntrials = Trials(trials=[trial_1, trial_2])\nbest_hyperparams = trials.get_best_hyperparams()\nassert best_hyperparams == hp_trial_2\n"
-}

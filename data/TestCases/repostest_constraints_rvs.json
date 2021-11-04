@@ -1,9 +1,0 @@
-{
-    "functionName": "test_constraints_rvs",
-    "className": null,
-    "fileName": "/bytesandbrains_&_ProcessOptimizer/ProcessOptimizer_&_tests_&_test_constraints.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "space = Space([Real(1, 10), Real(1, 10), Real(1, 10), Integer(0, 10),\n    Integer(0, 10), Integer(0, 10), Categorical(list('abcdefg')),\n    Categorical(list('abcdefg')), Categorical(list('abcdefg'))])\ncons_list = [Single(0, 5.0, 'real'), Inclusive(1, (3.0, 5.0), 'real'),\n    Exclusive(2, (3.0, 5.0), 'real'), Single(3, 5, 'integer'), Inclusive(4,\n    (3, 5), 'integer'), Exclusive(5, (3, 5), 'integer'), Single(6, 'b',\n    'categorical'), Inclusive(7, ('c', 'd', 'e'), 'categorical'), Exclusive\n    (8, ('c', 'd', 'e'), 'categorical'), Inclusive(4, (7, 9), 'integer'),\n    Exclusive(5, (7, 9), 'integer')]\nconstraints = Constraints(cons_list, space)\nsamples = constraints.rvs(n_samples=100)\nassert_equal(len(samples), 100)\nassert_equal(len(samples[0]), space.n_dims)\nassert_equal(len(samples[-1]), space.n_dims)\nsamples_a = constraints.rvs(n_samples=100, random_state=1)\nsamples_b = constraints.rvs(n_samples=100, random_state=1)\nsamples_c = constraints.rvs(n_samples=100, random_state=2)\nassert_equal(samples_a, samples_b)\nassert_not_equal(samples_a, samples_c)\nspace = Space([Real(0, 1)])\ncons_list = [Exclusive(0, (0.3, 0.7), 'real'), Inclusive(0, (0.5, 0.6), 'real')\n    ]\nconstraints = Constraints(cons_list, space)\nwith raises(RuntimeError):\n    samples = constraints.rvs(n_samples=10)\npytest.mark.slow_test"
-}

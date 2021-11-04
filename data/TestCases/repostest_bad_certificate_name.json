@@ -1,9 +1,0 @@
-{
-    "functionName": "test_bad_certificate_name",
-    "className": "TestValidationPolicyCommandInterest",
-    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_validation_policy_command_interest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "interest1 = self._fixture.makeCommandInterest(self._fixture._identity)\nkeyLocator = KeyLocator()\nkeyLocator.setType(KeyLocatorType.KEYNAME)\nkeyLocator.setKeyName(Name('/bad/cert/name'))\nsignatureInfo = Sha256WithRsaSignature()\nsignatureInfo.setKeyLocator(keyLocator)\nsetNameComponent(interest1, CommandInterestSigner.POS_SIGNATURE_INFO,\n    TlvWireFormat.get().encodeSignatureInfo(signatureInfo))\nself.validateExpectFailure(interest1, 'Should fail (bad certificate name)')\n"
-}

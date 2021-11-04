@@ -1,9 +1,0 @@
-{
-    "functionName": "test_trydeepcopy",
-    "className": null,
-    "fileName": "/pwwang_&_PyPPL/tests_&_test_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "copied = try_deepcopy(val)\nfor ast in asserts:\n    if ast == '=':\n        assert copied == val\n        assert copied is not val\n    elif ast == 'is':\n        assert copied is val\n    else:\n        key, eq = ast\n        if eq == '=':\n            assert copied[key] == val[key]\n            assert copied[key] is not val[key]\n        else:\n            assert copied[key] is val[key]\npytest.mark.parametrize('val,expt,asserts', [(None, None, ['is']), (1, 1, [\n    'is']), (sys, sys, ['is']), (Diot(a=Diot(b=Diot(c=1))), Diot(a=Diot(b=\n    Diot(c=1))), ['=']), ([1, sys, [1]], [1, sys, [1]], [(0, 'is'), (1,\n    'is'), (2, '=')]), ({'a': sys, 'b': [1]}, {'a': sys, 'b': [1]}, [('a',\n    'is'), ('b', '=')])])"
-}

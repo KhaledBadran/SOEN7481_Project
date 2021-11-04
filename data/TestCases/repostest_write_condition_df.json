@@ -1,9 +1,0 @@
-{
-    "functionName": "test_write_condition_df",
-    "className": null,
-    "fileName": "/PEtab-dev_&_PEtab/tests_&_test_conditions.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test conditions.write_condition_df.\"\"\"\ncondition_df = pd.DataFrame(data={CONDITION_ID: ['condition1', 'condition2'\n    ], CONDITION_NAME: ['Condition 1', 'Condition 2'], 'fixedParameter1': [\n    1.0, 2.0]}).set_index(CONDITION_ID)\nwith tempfile.NamedTemporaryFile(mode='w', delete=True) as fh:\n    file_name = fh.name\n    petab.write_condition_df(condition_df, file_name)\n    re_df = petab.get_condition_df(file_name)\n    assert (condition_df == re_df).all().all()\n"
-}

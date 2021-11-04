@@ -1,9 +1,0 @@
-{
-    "functionName": "test_inter_def",
-    "className": "DefTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_def.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"test defs calling each other\"\"\"\ntemplate = Template(\n    \"\"\"\n        ${b()}\n\n        <%def name=\"a()\">        im a\n        </%def>\n\n        <%def name=\"b()\">\n        im b\n        and heres a:  ${a()}\n        </%def>\n\n        <%def name=\"c()\">\n        im c\n        </%def>\n\"\"\"\n    )\nif compat.py3k:\n    assert 'a' not in template.module.render_c.__code__.co_varnames\n    assert 'a' in template.module.render_b.__code__.co_varnames\nelse:\n    assert 'a' not in template.module.render_c.func_code.co_varnames\n    assert 'a' in template.module.render_b.func_code.co_varnames\neq_(flatten_result(template.render()), 'im b and heres a: im a')\n"
-}

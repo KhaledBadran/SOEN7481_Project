@@ -1,9 +1,0 @@
-{
-    "functionName": "test_simple_cubic",
-    "className": "LigandSearching",
-    "fileName": "/jcumby_&_PIEFACE/pieface_&_tests_&_test_readcoords.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Find one ligand in simple cubic cell. \"\"\"\nself.atomcoords = {'Mn1': np.array([0.0, 0.0, 0.0]), 'O1': np.array([0.25, \n    0.25, 0.25])}\nself.orthom = np.array([[4.5, 0.0, 0.0], [0.0, 4.5, 0.0], [0.0, 0.0, 4.5]])\nself.atomtypes = {'Mn1': 'Mn', 'O1': 'O'}\ncorrectligands = {'O1': np.array([0.25, 0.25, 0.25])}\nself.ligands, self.ligtypes = readcoords.findligands('Mn1', self.atomcoords,\n    self.orthom, radius=2.0, types=['O'], names=[], atomtypes=self.atomtypes)\nself.assertItemsEqual(self.ligands.keys(), correctligands.keys())\nfor k in self.ligands.keys():\n    np.testing.assert_array_almost_equal(self.ligands[k], correctligands[k])\nself.assertDictEqual(self.ligtypes, self.atomtypes)\n"
-}

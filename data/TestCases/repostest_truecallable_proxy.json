@@ -1,9 +1,0 @@
-{
-    "functionName": "test_truecallable_proxy",
-    "className": null,
-    "fileName": "/PlaidWeb_&_Publ/tests_&_test_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Tests of TrueCallableProxy \"\"\"\nstash = {'call_count': 0}\ndef wrapped_func():\n    stash['call_count'] += 1\n    return False\nproxy = utils.TrueCallableProxy(wrapped_func)\napp = flask.Flask(__name__)\nwith app.test_request_context('/foo'):\n    assert stash['call_count'] == 0\n    assert proxy\n    assert stash['call_count'] == 0\n"
-}

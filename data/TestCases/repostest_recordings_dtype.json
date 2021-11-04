@@ -1,9 +1,0 @@
-{
-    "functionName": "test_recordings_dtype",
-    "className": "TestGenerators",
-    "fileName": "/alejoe91_&_MEArec/MEArec_&_tests_&_test_generators.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "print('Test recording generation - dtype')\nne = 2\nni = 1\nduration = 1\ndtypes = ['float16', 'float32', 'float64']\nrec_params = mr.get_default_recordings_params()\nrec_params['spiketrains']['n_exc'] = ne\nrec_params['spiketrains']['n_inh'] = ni\nrec_params['spiketrains']['duration'] = duration\nn_jitter = 3\nrec_params['templates']['n_jitters'] = n_jitter\nrec_params['recordings']['modulation'] = 'none'\nfor i, dt in enumerate(dtypes):\n    print('Dtype:', dt)\n    rec_params['recordings']['dtype'] = dt\n    recgen_dt = mr.gen_recordings(params=rec_params, tempgen=self.tempgen,\n        verbose=False)\n    assert recgen_dt.recordings[0, 0].dtype == dt\n    del recgen_dt\n"
-}

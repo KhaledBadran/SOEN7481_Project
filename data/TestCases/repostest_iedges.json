@@ -1,9 +1,0 @@
-{
-    "functionName": "test_iedges",
-    "className": null,
-    "fileName": "/Silmathoron_&_NNGT/testing_&_test_analysis.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Check the computation of the number of inhibitory edges \"\"\"\nnum_nodes = 5\nedge_list = [(0, 3), (1, 0), (1, 2), (2, 4), (4, 1), (4, 3)]\ntypes = [1, -1, 1, 1, -1, 1]\nfor directed in (True, False):\n    g = nngt.Graph(nodes=num_nodes, directed=directed)\n    g.new_edges(edge_list)\n    g.set_types(types)\n    assert na.num_iedges(g) == 2\n    nodes = [1, 2]\n    num_inhib = 3\n    g.set_types(-1, nodes=nodes)\n    assert na.num_iedges(g) == 3\n    g.set_types(-1, fraction=0.5)\n    assert na.num_iedges(g) == 3\npytest.mark.mpi_skip"
-}

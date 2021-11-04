@@ -1,9 +1,0 @@
-{
-    "functionName": "test_noise_equals_gaussian",
-    "className": null,
-    "fileName": "/bytesandbrains_&_ProcessOptimizer/ProcessOptimizer_&_learning_&_gaussian_process_&_tests_&_test_gpr.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "gpr1 = GaussianProcessRegressor(rbf + wk).fit(X, y)\ngpr2 = GaussianProcessRegressor(rbf, noise='gaussian').fit(X, y)\nassert_false(gpr1.noise_)\nassert_true(gpr2.noise_)\nassert_almost_equal(gpr1.kernel_.k2.noise_level, gpr2.noise_, 4)\nmean1, std1 = gpr1.predict(X, return_std=True)\nmean2, std2 = gpr2.predict(X, return_std=True)\nassert_array_almost_equal(mean1, mean2, 4)\nassert_false(np.any(std1 == std2))\npytest.mark.fast_test"
-}

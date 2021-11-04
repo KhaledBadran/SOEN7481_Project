@@ -1,9 +1,0 @@
-{
-    "functionName": "test_remove_child_storage_group_from_parent_group",
-    "className": "CITestProvisioning",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test remove_child_storage_group_from_parent_group.\"\"\"\nparent_storage_group_name = self.create_empty_storage_group()\nchild_storage_group_name = self.create_empty_storage_group()\nself.provisioning.add_child_storage_group_to_parent_group(\n    child_storage_group_name, parent_storage_group_name)\nparent_storage_group_details = self.provisioning.get_storage_group(\n    parent_storage_group_name)\nchild_storage_group = 'child_storage_group'\nself.assertIn(child_storage_group, parent_storage_group_details)\nchild_list = parent_storage_group_details[child_storage_group]\nself.assertIn(child_storage_group_name, child_list)\nfor child in child_list:\n    self.provisioning.remove_child_storage_group_from_parent_group(child,\n        parent_storage_group_name)\n    self.provisioning.delete_storage_group(child)\nparent_storage_group_details = self.provisioning.get_storage_group(\n    parent_storage_group_name)\nself.assertNotIn(child_storage_group, parent_storage_group_details)\nself.assertIs(0, parent_storage_group_details[constants.NUM_OF_CHILD_SGS])\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_reuse_after_shutdown",
-    "className": null,
-    "fileName": "/PRIArobotics_&_HedgehogClient/tests_&_test_async_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "port, value = 0, 0\nasync with start_dummy(Commands.analog_request, port, value) as server:\n    client = HedgehogClient(zmq_aio_ctx, server)\n    async with client:\n        assert await client.get_analog(port) == value\n    with pytest.raises(RuntimeError):\n        async with client:\n            pass\n    with pytest.raises(RuntimeError):\n        await client.shutdown()\npytest.mark.asyncio"
-}

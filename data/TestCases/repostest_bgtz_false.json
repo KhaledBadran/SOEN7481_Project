@@ -1,9 +1,0 @@
-{
-    "functionName": "test_bgtz_false",
-    "className": "TestITypes",
-    "fileName": "/AshtonUPS_&_Py-MI-PS/src_&_PyMIPS_&_tests_&_test_commands.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "Memory.reset()\nDataHeap.reset()\nProgramStack.reset()\npc = RegisterPool.get_register('pc')\nt1 = RegisterPool.get_register('$t1')\nprogram = {'main': [IType('bgtz', '$t1', 'test'), BaseCommand(),\n    BaseCommand(), BaseCommand()], 'test': [BaseCommand()]}\nProgramStack.add_block_from_dict(program)\nt1.set_contents_from_int(-100)\nProgramStack.jump_label('main')\nnext_i = pc.get_contents_as_int() + 4\nProgramStack.execute_next()\nself.assertEqual(pc.get_contents_as_int(), next_i)\n"
-}

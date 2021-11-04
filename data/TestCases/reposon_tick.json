@@ -1,9 +1,0 @@
-{
-    "functionName": "on_tick",
-    "className": "DoubleMaStrategy",
-    "fileName": "/quantOS-org_&_JAQS/test_&_test_backtest_eventdriven.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "if isinstance(quote, Quote):\n    bid, ask = quote.bidprice1, quote.askprice1\n    if bid > 0 and ask > 0:\n        mid = (quote.bidprice1 + quote.askprice1) / 2.0\n    else:\n        return\nelse:\n    mid = quote.close\nself.price_arr[0:self.window - 1] = self.price_arr[1:self.window]\nself.price_arr[-1] = mid\nself.window_count += 1\nif self.window_count <= self.window:\n    return\nself.fast_ma = np.mean(self.price_arr[-self.fast_ma_len - 1:])\nself.slow_ma = np.mean(self.price_arr[-self.slow_ma_len - 1:])\nprint(quote)\nprint('Fast MA = {:.2f}     Slow MA = {:.2f}'.format(self.fast_ma, self.\n    slow_ma))\nif self.fast_ma > self.slow_ma:\n    if self.pos == 0:\n        self.buy(quote, 1)\n    elif self.pos < 0:\n        self.buy(quote, 2)\nelif self.fast_ma < self.slow_ma:\n    if self.pos == 0:\n        self.sell(quote, 1)\n    elif self.pos > 0:\n        self.sell(quote, 2)\n"
-}

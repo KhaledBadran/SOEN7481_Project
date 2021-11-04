@@ -1,9 +1,0 @@
-{
-    "functionName": "test_default_values_should_give_zero_rate",
-    "className": "GenericSourceTermTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_physics_&_GenericSourceTermTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "sources = ['linear', 'power_law', 'exponential', 'natural_exponential',\n    'logarithm', 'natural_logarithm']\nself.alg = op.algorithms.ReactiveTransport(network=self.net, phase=self.phase)\nself.alg.settings.update({'conductance': 'throat.diffusive_conductance',\n    'quantity': 'pore.mole_fraction'})\nself.alg.set_value_BC(values=0.4, pores=self.BC_pores)\nself.alg.set_source(propname='pore.source_term', pores=self.source_pores)\nself.phase['pore.mole_fraction'] = 0.1\nfor source in sources:\n    self.phys.add_model(propname='pore.source_term', model=getattr(pm.\n        generic_source_term, source), X='pore.mole_fraction')\n    assert self.phys['pore.source_term.rate'].mean() == 0\n    assert self.phys['pore.source_term.S1'].mean() == 0\n    assert self.phys['pore.source_term.S2'].mean() == 0\n"
-}

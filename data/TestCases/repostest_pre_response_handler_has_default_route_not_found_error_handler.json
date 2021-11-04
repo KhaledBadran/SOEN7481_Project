@@ -1,9 +1,0 @@
-{
-    "functionName": "test_pre_response_handler_has_default_route_not_found_error_handler",
-    "className": "TestExceptionHandlersRegistry",
-    "fileName": "/cbefus_&_Eynnyd/tests_&_plan_execution_&_test_error_handlers_builder.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class FakeRequest:\n\n    @property\n    def http_method(self):\n        return 'fake http method'\n\n    @property\n    def request_uri(self):\n        return 'fake request uri'\nexception_handlers = ErrorHandlersBuilder().build()\nresponse = exception_handlers.handle_pre_response_error(RouteNotFoundException\n    (), FakeRequest())\nself.assertEqual(HTTPStatus.NOT_FOUND.value, response.status.code)\n"
-}

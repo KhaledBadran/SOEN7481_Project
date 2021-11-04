@@ -1,9 +1,0 @@
-{
-    "functionName": "test_custom_ciphers",
-    "className": "TestTLS12AuthenticationSuite",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_test_auth.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that providing a custom list of cipher suites yields the right\n        cipher string.\n        \"\"\"\nsuite = auth.TLS12AuthenticationSuite(['TLS_RSA_WITH_AES_256_CBC_SHA256',\n    'TLS_RSA_WITH_AES_256_CBC_SHA', 'TLS_DHE_PSK_WITH_AES_128_CBC_SHA',\n    'TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA', 'DHE-DSS-AES256-SHA',\n    'DHE-RSA-AES256-SHA'])\nciphers = suite.ciphers\nself.assertIsInstance(ciphers, str)\nsuites = ciphers.split(':')\nself.assertEqual(1, len(suites))\nself.assertIn('AES256-SHA256', suites)\n"
-}

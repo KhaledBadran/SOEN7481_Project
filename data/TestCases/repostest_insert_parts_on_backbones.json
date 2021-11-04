@@ -1,9 +1,0 @@
-{
-    "functionName": "test_insert_parts_on_backbones",
-    "className": null,
-    "fileName": "/Edinburgh-Genome-Foundry_&_DnaCauldron/tests_&_test_utils_&_test_utils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "backbones = repo.get_records(['partA2', 'partB2', 'partC', 'receptor'])\nparts = repo.get_records(['partA', 'partB'])\nchoices = resultA, resultB = dc.insert_parts_on_backbones(part_records=\n    parts, backbone_records=backbones, process_parts_with_backbone=True)\nassert resultA.already_on_backbone\nassert resultB.already_on_backbone\nassert resultA.backbone_record.id == 'partA2'\nassert resultB.backbone_record.id == 'partB2'\ndataframe = dc.BackboneChoice.list_to_infos_spreadsheet(choices)\ndataframe.to_excel(os.path.join(str(tmpdir), 'summary.xls'), index=False)\ndc.BackboneChoice.write_final_records(choices, str(tmpdir))\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_json_valid",
-    "className": null,
-    "fileName": "/zeaphoo_&_cocopot_&_/tests_&_test_request.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Environ: Request.json property. \"\"\"\ntest = dict(a=5, b='test', c=[1, 2, 3])\nenv = dict(copy.deepcopy(env1))\nenv['CONTENT_TYPE'] = 'application/json; charset=UTF-8'\nenv['wsgi.input'] = BytesIO(to_bytes(json.dumps(test)))\nenv['CONTENT_LENGTH'] = str(len(json.dumps(test)))\nr = Request(env)\nassert r.json == test\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_score_unknown_features_ignore",
-    "className": "TestCBRW",
-    "fileName": "/dkaslovsky_&_Coupled-Biased-Random-Walks/tests_&_test_detect.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.cbrw = CBRW(ignore_unknown=True)\nself.cbrw.add_observations(self.observations)\nself.cbrw.fit()\nto_be_scored = {'feature_a': 'a_val_x', 'feature_b': 'b_val_1', 'feature_c':\n    'c_val_1'}\nactually_scored = {'feature_b': 'b_val_1', 'feature_c': 'c_val_1'}\nscore = self.cbrw.score(to_be_scored)\nactual_score = self.cbrw.score(actually_scored)\nself.assertFalse(isnan(score[0]))\nself.assertEqual(score, actual_score)\nto_be_scored = {'feature_x': 'x_val_x', 'feature_b': 'b_val_1', 'feature_c':\n    'c_val_1'}\nactually_scored = {'feature_b': 'b_val_1', 'feature_c': 'c_val_1'}\nscore = self.cbrw.score(to_be_scored)\nactual_score = self.cbrw.score(actually_scored)\nself.assertFalse(isnan(score[0]))\nself.assertEqual(score, actual_score)\nto_be_scored = {'feature_x': 'x_val_x', 'feature_y': 'y_val_1', 'feature_z':\n    'z_val_1'}\nscore = self.cbrw.score(to_be_scored)\nself.assertFalse(isnan(score[0]))\nself.assertEqual(score[0], 0)\n"
-}

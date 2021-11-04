@@ -1,9 +1,0 @@
-{
-    "functionName": "test_wrong_bits",
-    "className": null,
-    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_bitmask.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "image_bm = ImageBitMask()\nn = 1024\nshape = n, n\nimage_bm = ImageBitMask()\nmask = numpy.zeros(shape, dtype=image_bm.minimum_dtype())\ncosmics_indx = numpy.zeros(shape, dtype=bool)\ncosmics_indx[numpy.random.randint(0, high=n, size=100), numpy.random.\n    randint(0, high=n, size=100)] = True\nmask[cosmics_indx] = image_bm.turn_on(mask[cosmics_indx], 'COSMIC')\nwith pytest.raises(ValueError):\n    out = image_bm.flagged(mask, flag='JUNK')\nwith pytest.raises(ValueError):\n    out = image_bm.flagged(mask, flag=['COSMIC', 'JUNK'])\nassert numpy.sum(image_bm.flagged(mask, flag='COSMIC')) == numpy.sum(\n    cosmics_indx)\n"
-}

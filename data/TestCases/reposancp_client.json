@@ -1,9 +1,0 @@
-{
-    "functionName": "ancp_client",
-    "className": null,
-    "fileName": "/GIC-de_&_PyANCP/tests_&_test_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "client = Client(address='1.2.3.4')\nclient.socket = MagicMock()\nclient._rx_bytes = bytearray()\nclient._tx_bytes = bytearray()\ndef _rx(b):\n    off = 0\n    length = 0\n    while True:\n        if off <= len(b):\n            length = yield b[off - length:off]\n            off += length\n        else:\n            time.sleep(1.0)\nrx = _rx(client._rx_bytes)\nnext(rx)\nclient._recvall = rx.send\ndef tx(msg):\n    client._tx_bytes += msg\nclient.socket.send = tx\nreturn client\npytest.fixture(scope='module')"
-}

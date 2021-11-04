@@ -1,9 +1,0 @@
-{
-    "functionName": "test_prepare_module_name",
-    "className": null,
-    "fileName": "/bio-phys_&_MDBenchmark/mdbenchmark_&_tests_&_mdengines_&_test_init.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that prepare_module_name works as expected.\"\"\"\nwith pytest.raises(SystemExit) as e:\n    prepare_module_name('gromacs-2016.4')\n    assert e.type == SystemExit\n    assert e.code == 1\nout, err = capsys.readouterr()\nassert out == 'ERROR We were not able to determine the module name.\\n'\nwith pytest.raises(SystemExit) as e:\n    prepare_module_name('whatever', skip_validation=True)\n    assert e.type == SystemExit\n    assert e.code == 1\nout, err = capsys.readouterr()\nassert out == \"\"\"ERROR Although you are using the --skip-validation option, you have to provide a valid MD engine name, e.g., gromacs/dummy or namd/dummy.\n\"\"\"\nassert prepare_module_name('gromacs/2016.4')\n"
-}

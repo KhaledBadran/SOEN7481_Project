@@ -1,9 +1,0 @@
-{
-    "functionName": "test_dlestimator_fit_dlmodel_transform",
-    "className": "TestDLClassifer",
-    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_dlframes_&_test_dl_classifier.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "model = Sequential().add(Linear(2, 2))\ncriterion = MSECriterion()\nestimator = DLEstimator(model, criterion, [2], [2]).setBatchSize(4\n    ).setLearningRate(0.01).setMaxEpoch(1000)\ndata = self.sc.parallelize([((2.0, 1.0), (1.0, 2.0)), ((1.0, 2.0), (2.0, \n    1.0)), ((2.0, 1.0), (1.0, 2.0)), ((1.0, 2.0), (2.0, 1.0))])\nschema = StructType([StructField('features', ArrayType(DoubleType(), False),\n    False), StructField('label', ArrayType(DoubleType(), False), False)])\ndf = self.sqlContext.createDataFrame(data, schema)\ndlModel = estimator.fit(df)\nres = dlModel.transform(df)\nassert type(res).__name__ == 'DataFrame'\nres.registerTempTable('dlModelDF')\nresults = self.sqlContext.table('dlModelDF')\ncount = results.rdd.count()\ndata = results.rdd.collect()\nfor i in range(count):\n    row_label = data[i][1]\n    row_prediction = data[i][2]\n    assert_allclose(row_label[0], row_prediction[0], atol=0, rtol=0.1)\n    assert_allclose(row_label[1], row_prediction[1], atol=0, rtol=0.1)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_set_ca_path",
-    "className": "TestKmipServerConfig",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_config.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the ca_path configuration property can be set correctly.\n        \"\"\"\nc = config.KmipServerConfig()\nc._logger = mock.MagicMock()\nself.assertNotIn('ca_path', c.settings.keys())\nwith mock.patch('os.path.exists') as os_mock:\n    os_mock.return_value = True\n    c._set_ca_path('/test/path/ca.crt')\nself.assertIn('ca_path', c.settings.keys())\nself.assertEqual('/test/path/ca.crt', c.settings.get('ca_path'))\nc._set_ca_path(None)\nself.assertIn('ca_path', c.settings.keys())\nself.assertEqual(None, c.settings.get('ca_path'))\nc._logger.reset_mock()\nargs = 0,\nself.assertRaises(exceptions.ConfigurationError, c._set_ca_path, *args)\nself.assertNotEqual(0, c.settings.get('ca_path'))\nargs = '/test/path/ca.crt',\nwith mock.patch('os.path.exists') as os_mock:\n    os_mock.return_value = False\n    self.assertRaises(exceptions.ConfigurationError, c._set_ca_path, *args)\n    self.assertNotEqual(0, c.settings.get('ca_path'))\n"
-}

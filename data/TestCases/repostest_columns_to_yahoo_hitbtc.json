@@ -1,9 +1,0 @@
-{
-    "functionName": "test_columns_to_yahoo_hitbtc",
-    "className": "TestColumnsToYahoo",
-    "fileName": "/EVEprosper_&_ProsperDatareader/tests_&_test_coins.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"validate columns_to_yahoo() works for hitbtc data\"\"\"\ndata = coins.get_quote_hitbtc(self.coin_list, to_yahoo=False)\nupdated = coins.columns_to_yahoo(data, coins.Sources.hitbtc)\nprint(updated)\nexpected_headers = ['ask', 'bid', 'high', 'last', 'low', 'open', 'symbol',\n    'timestamp', 'volume', 'volume_quote', 'change_pct', 'datetime']\nunique_values, unique_expected = helpers.find_uniques(list(updated.columns.\n    values), expected_headers)\nassert unique_expected == []\nif unique_values:\n    pytest.xfail('Unexpected values from columns_to_yahoo(): {}'.format(\n        unique_values))\n"
-}

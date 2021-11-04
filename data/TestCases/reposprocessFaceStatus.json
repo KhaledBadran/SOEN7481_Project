@@ -1,9 +1,0 @@
-{
-    "functionName": "processFaceStatus",
-    "className": null,
-    "fileName": "/named-data_&_PyNDN2/examples_&_test_register_route.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    This is called when all the segments are received to decode the\n    encodedFaceStatus as a TLV FaceStatus message. If the face ID exists for the\n    face URL, use it to call registerRoute(), otherwise send a\n    /localhost/nfd/faces/create command to create the face.\n\n    :param Blob encodedFaceStatus: The TLV-encoded FaceStatus.\n    :param Name prefix: The prefix name to register.\n    :param str uri: The remote URI in case we need to tell NFD to create a face.\n    :param Face face: The Face which is used to sign the command interest and\n      call expressInterest.\n    :param enabled: On success or error, set enabled[0] = False.\n    :type enabled: An array with one bool element\n    \"\"\"\nif encodedFaceStatus.size() == 0:\n    message = (control_parameters_pb2.ControlParametersTypes.\n        ControlParametersMessage())\n    message.control_parameters.uri = uri\n    encodedControlParameters = ProtobufTlv.encode(message)\n    interest = Interest(Name('/localhost/nfd/faces/create'))\n    interest.getName().append(encodedControlParameters)\n    interest.setInterestLifetimeMilliseconds(10000)\n\n    def onData(localInterest, data):\n        processCreateFaceResponse(data.getContent(), prefix, face, enabled)\n\n    def onTimeout(localInterest):\n        enabled[0] = False\n        dump('Face create command timed out.')\n    face.makeCommandInterest(interest)\n    face.expressInterest(interest, onData, onTimeout)\nelse:\n    decodedFaceStatus = face_status_pb2.FaceStatusMessage()\n    ProtobufTlv.decode(decodedFaceStatus, encodedFaceStatus)\n    faceId = decodedFaceStatus.face_status[0].face_id\n    dump('Found face ID ', faceId)\n    registerRoute(prefix, faceId, face, enabled)\n"
-}

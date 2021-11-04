@@ -1,9 +1,0 @@
-{
-    "functionName": "createTelemetryList",
-    "className": null,
-    "fileName": "/FaradayRF_&_Faraday-Software/faraday_&_telemetry.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n    Converts data dictionary into a defined list for insertion into SQLite db\n\n    SQLite3 insertions require that the data be ordered correctly. Python dictionaries\n    do not guarantee order so a list is greated from the dictionary.\n\n    :param data: Telemetry dictionary\n    :return: list that contains telemetry data\n    \"\"\"\ntry:\n    temp = [None, data['SOURCECALLSIGN'], data['SOURCEID'], data[\n        'DESTINATIONCALLSIGN'], data['DESTINATIONID'], data['RTCSEC'], data\n        ['RTCMIN'], data['RTCHOUR'], data['RTCDAY'], data['RTCDOW'], data[\n        'RTCMONTH'], data['RTCYEAR'], data['GPSLATITUDE'], data[\n        'GPSLATITUDEDIR'], data['GPSLONGITUDE'], data['GPSLONGITUDEDIR'],\n        data['GPSALTITUDE'], data['GPSALTITUDEUNITS'], data['GPSSPEED'],\n        data['GPSFIX'], data['GPSHDOP'], data['GPIOSTATE'], data['IOSTATE'],\n        data['RFSTATE'], data['ADC0'], data['ADC1'], data['ADC2'], data[\n        'ADC3'], data['ADC4'], data['ADC5'], data['VCC'], data['BOARDTEMP'],\n        data['ADC8'], data['HABTIMERSTATE'], data['HABCUTDOWNSTATE'], data[\n        'HABTRIGGERTIME'], data['HABTIMER'], data['EPOCH']]\nexcept KeyError as e:\n    logger.error('KeyError: ' + str(e))\n    temp = []\nreturn temp\n"
-}

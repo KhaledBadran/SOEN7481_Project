@@ -1,9 +1,0 @@
-{
-    "functionName": "test_set_quant_fluor_data_dict_optional_1",
-    "className": null,
-    "fileName": "/NSLS-II_&_PyXRF/pyxrf_&_core_&_tests_&_test_quant_analysis.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Tests for 'set_quant_fluor_data_dict_optional': basic test of functionality.\n    Successful tests.\n    \"\"\"\nfluor_standard = copy.deepcopy(_xrf_standard_fluor_sample)\nscan_id = 45378\nscan_uid = 'abc-12345'\nset_quant_fluor_data_dict_optional(fluor_standard, scan_id=scan_id,\n    scan_uid=scan_uid)\nassert fluor_standard['source_scan_id'\n    ] == scan_id, 'Scan ID is set incorrectly'\nassert fluor_standard['source_scan_uid'\n    ] == scan_uid, 'Scan UID is set incorrectly'\nt = fluor_standard['creation_time_local']\nassert t is not None, 'Time is not set'\nt = convert_time_from_nexus_string(t)\nt = ttime.mktime(t)\nt_current = ttime.mktime(ttime.localtime())\nassert abs(t_current - t) < 5.0, 'Time is set incorrectly'\nscan_id2 = 45346\nscan_id2_str = f'{scan_id2}'\nset_quant_fluor_data_dict_optional(fluor_standard, scan_id=scan_id2_str)\nassert fluor_standard['source_scan_id'\n    ] == scan_id2, 'Scan ID is set incorrectly'\n"
-}

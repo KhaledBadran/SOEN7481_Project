@@ -1,9 +1,0 @@
-{
-    "functionName": "test_nonlinearity",
-    "className": "TestNonlinearities",
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_test_nonlinearities.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "import lasagne.nonlinearities\nif nonlinearity == 'leaky_rectify_0':\n    from lasagne.nonlinearities import LeakyRectify\n    theano_nonlinearity = LeakyRectify(leakiness=0)\nelif nonlinearity == 'scaled_tanh':\n    from lasagne.nonlinearities import ScaledTanH\n    theano_nonlinearity = ScaledTanH()\nelif nonlinearity == 'scaled_tanh_p':\n    from lasagne.nonlinearities import ScaledTanH\n    theano_nonlinearity = ScaledTanH(scale_in=0.5, scale_out=2.27)\nelif nonlinearity.startswith('selu'):\n    from lasagne.nonlinearities import SELU, selu\n    if nonlinearity == 'selu':\n        theano_nonlinearity = SELU()\n    elif nonlinearity == 'selu_paper':\n        theano_nonlinearity = selu\n    elif nonlinearity == 'selu_rect':\n        theano_nonlinearity = SELU(scale=1, scale_neg=0)\n    elif nonlinearity == 'selu_custom':\n        theano_nonlinearity = SELU(scale=1.21, scale_neg=0.12)\nelse:\n    theano_nonlinearity = getattr(lasagne.nonlinearities, nonlinearity)\nnp_nonlinearity = getattr(self, nonlinearity)\nX = T.matrix()\nX0 = lasagne.utils.floatX(np.random.uniform(-3, 3, (10, 10)))\ntheano_result = theano_nonlinearity(X).eval({X: X0})\nnp_result = np_nonlinearity(X0)\nassert np.allclose(theano_result, np_result)\npytest.mark.parametrize('nonlinearity', ['linear', 'rectify',\n    'leaky_rectify', 'elu', 'selu', 'selu_paper', 'selu_rect',\n    'selu_custom', 'sigmoid', 'tanh', 'scaled_tanh', 'softmax',\n    'leaky_rectify_0', 'scaled_tanh_p', 'softplus'])"
-}

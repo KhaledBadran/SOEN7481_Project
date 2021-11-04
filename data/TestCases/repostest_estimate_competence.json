@@ -1,9 +1,0 @@
-{
-    "functionName": "test_estimate_competence",
-    "className": null,
-    "fileName": "/Menelau_&_DESlib/deslib_&_tests_&_des_&_test_des_knn.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test case:\n\n    Correct labels: 0000111\n    classifier 1:   1010000   (2/7 correct)\n    classifier 2:   1000100   (4/7 correct)\n    classifier 2:   0010110   (5/7 correct)\n\n    Diversity: compute number of common errors (on both classifiers) and\n    divide by 7:\n    clf1 x clf2: 3/7\n    clf1 x clf3: 2/7\n    clf2 x clf3: 1/7\n\n    clf1 diversity = (3+2)/7 = -5/7 (negative because we use the negative of\n                                     double error)\n    clf2 diversity = (3+1)/7 = -4/7\n    clf3 diversity = (2+1)/7 = -3/7\n\n    \"\"\"\nquery = np.ones((1, 2))\nx = np.array([0, 1, 2, 3, 4, 5, 6]).reshape(-1, 1)\ny = np.array([0, 0, 0, 0, 1, 1, 1])\nclf1 = create_base_classifier(np.array([1, 0, 1, 0, 0, 0, 0]))\nclf2 = create_base_classifier(np.array([1, 0, 0, 0, 1, 0, 0]))\nclf3 = create_base_classifier(np.array([0, 0, 1, 0, 1, 1, 0]))\npool_classifiers = [clf1, clf2, clf3]\ntarget = DESKNN(pool_classifiers, k=7, pct_accuracy=1, pct_diversity=1)\ntarget.fit(x, y)\nneighbors = np.array([[0, 1, 2, 3, 4, 5, 6]])\ncompetences, diversity = target.estimate_competence(query, neighbors)\nassert np.allclose(competences, [2.0 / 7, 4.0 / 7, 5.0 / 7])\nassert np.allclose(diversity, [-5.0 / 7, -4.0 / 7, -3.0 / 7])\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_GetProjectsComputedMetadata",
-    "className": null,
-    "fileName": "/incf-nidash_&_PyNIDM/nidm_&_experiment_&_tests_&_test_query.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "p1 = makeProjectTestFile('testfile.ttl')\np2 = makeProjectTestFile2('testfile2.ttl')\nfiles = ['testfile.ttl', 'testfile2.ttl']\nif USE_GITHUB_DATA:\n    if not Path('./cmu_a.nidm.ttl').is_file():\n        urllib.request.urlretrieve(\n            'https://raw.githubusercontent.com/dbkeator/simple2_NIDM_examples/master/datasets.datalad.org/abide/RawDataBIDS/CMU_a/nidm.ttl'\n            , 'cmu_a.nidm.ttl')\n    files.append('cmu_a.nidm.ttl')\nparsed = Query.GetProjectsComputedMetadata(files)\nif USE_GITHUB_DATA:\n    for project_id in parsed['projects']:\n        if project_id != p1 and project_id != p2:\n            p3 = project_id\n    assert parsed['projects'][p3][str(Constants.NIDM_PROJECT_NAME)\n        ] == 'ABIDE CMU_a Site'\n    assert parsed['projects'][p3][Query.matchPrefix(str(Constants.\n        NIDM_NUMBER_OF_SUBJECTS))] == 14\n    assert parsed['projects'][p3]['age_min'] == 21.0\n    assert parsed['projects'][p3]['age_max'] == 33.0\n    assert parsed['projects'][p3][str(Constants.NIDM_GENDER)] == ['1', '2']\n"
-}

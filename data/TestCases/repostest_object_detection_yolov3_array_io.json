@@ -1,9 +1,0 @@
-{
-    "functionName": "test_object_detection_yolov3_array_io",
-    "className": null,
-    "fileName": "/OlafenwaMoses_&_ImageAI/test_&_test_object_detection.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "image_input_array = cv2.imread(image_input)\ndetector = ObjectDetection()\ndetector.setModelTypeAsYOLOv3()\ndetector.setModelPath(os.path.join(main_folder, 'data-models', 'yolo.h5'))\ndetector.loadModel()\ndetected_array, results = detector.detectObjectsFromImage(input_image=\n    image_input_array, input_type='array', minimum_percentage_probability=\n    40, output_type='array')\nassert isinstance(detected_array, ndarray)\nassert isinstance(results, list)\nfor result in results:\n    assert isinstance(result['name'], str)\n    assert isinstance(result['percentage_probability'], float)\n    assert isinstance(result['box_points'], list)\ndetected_array, results2, extracted_arrays = detector.detectObjectsFromImage(\n    input_image=image_input, output_image_path=image_output,\n    minimum_percentage_probability=40, extract_detected_objects=True,\n    output_type='array')\nassert isinstance(results2, list)\nassert isinstance(extracted_arrays, list)\nfor result2 in results2:\n    assert isinstance(result2['name'], str)\n    assert isinstance(result2['percentage_probability'], float)\n    assert isinstance(result2['box_points'], list)\nfor extracted_array in extracted_arrays:\n    assert isinstance(extracted_array, ndarray)\npytest.mark.detectionpytest.mark.yolov3pytest.mark.array_io"
-}

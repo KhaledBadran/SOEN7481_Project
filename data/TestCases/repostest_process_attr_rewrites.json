@@ -1,9 +1,0 @@
-{
-    "functionName": "test_process_attr_rewrites",
-    "className": null,
-    "fileName": "/PlaidWeb_&_Publ/tests_&_test_html_entry.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "import flask\nfrom publ.html_entry import process\napp = flask.Flask(__name__, static_folder='bleh')\nwith app.test_request_context('https://foo.bar/baz'):\n    assert process('<a href=\"@something\">foo</a>', {}, ()\n        ) == '<a href=\"/bleh/something\">foo</a>'\n    assert process('<a href=\"@something\">bar</a>', {'absolute': True}, ()\n        ) == '<a href=\"https://foo.bar/bleh/something\">bar</a>'\n    assert process('<div $data-something=\"@something\" />', {}, ()\n        ) == '<div data-something=\"/bleh/something\" />'\n    assert process('<div $data-something=\"@something\" />', {'absolute': \n        True}, ()) == '<div data-something=\"https://foo.bar/bleh/something\" />'\n"
-}

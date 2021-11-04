@@ -1,9 +1,0 @@
-{
-    "functionName": "test_reciprocity",
-    "className": null,
-    "fileName": "/Silmathoron_&_NNGT/testing_&_test_analysis.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Check reciprocity result \"\"\"\nnum_nodes = 5\nedge_list1 = [(0, 3), (1, 0), (1, 2), (2, 4), (4, 1), (4, 3), (4, 2)]\nedge_list2 = [(0, 3), (1, 0), (1, 2), (2, 4), (4, 1), (4, 3)]\nrecip = 2 / 7\ng = nngt.Graph(nodes=num_nodes, directed=True)\ng.new_edges(edge_list1)\nassert np.isclose(nngt.analyze_graph['reciprocity'](g), recip)\ng = nngt.Graph(nodes=num_nodes, directed=False)\ng.new_edges(edge_list2)\nassert nngt.analyze_graph['reciprocity'](g) == 1.0\npytest.mark.mpi_skip"
-}

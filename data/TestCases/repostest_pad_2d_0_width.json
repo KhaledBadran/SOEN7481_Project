@@ -1,9 +1,0 @@
-{
-    "functionName": "test_pad_2d_0_width",
-    "className": null,
-    "fileName": "/CCampJr_&_CRIkit2/crikit_&_utils_&_tests_&_test_general.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "x = np.arange(-1000, 1001)\ny = np.real(1 / (-500 - x - 1.0j * 100))\ny = np.vstack((y, y))\nassert y.shape[0] == 2\nassert y.shape[-1] == x.size\ny_pad_edge, window_edge = pad(y, 0, 'edge')\nassert np.allclose(y_pad_edge, y)\nassert np.allclose(window_edge, 1)\nassert np.allclose(y_pad_edge[..., window_edge == 1], y)\ny_pad_constant, window_constant = pad(y, 0, 'constant')\nassert np.allclose(y_pad_constant, y)\nassert np.allclose(window_constant, 1)\nassert np.allclose(y_pad_constant[..., window_constant == 1], y)\n"
-}

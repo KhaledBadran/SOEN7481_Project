@@ -1,9 +1,0 @@
-{
-    "functionName": "test_no_kernels_missed",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_kernels_&_test_broadcasting.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "tested_kernel_classes = KERNEL_CLASSES + [kernels.Sum, kernels.Product]\nskipped_kernel_classes = [p.values[0] for p in KERNEL_CLASSES if isinstance\n    (p, type(pytest.param()))]\nabstract_base_classes = [kernels.Kernel, kernels.Combination, gpflow.\n    kernels.base.ReducingCombination, kernels.Static, kernels.Stationary,\n    kernels.IsotropicStationary, kernels.AnisotropicStationary]\nneeds_constructor_parameters = [kernels.Periodic]\nif kernel_class in tested_kernel_classes:\n    return\nif kernel_class in skipped_kernel_classes:\n    return\nif kernel_class in abstract_base_classes:\n    return\nif kernel_class in needs_constructor_parameters:\n    return\nif issubclass(kernel_class, kernels.MultioutputKernel):\n    return\nassert False, f'no broadcasting test for kernel class {kernel_class}'\npytest.mark.parametrize('kernel_class', gpflow.ci_utils.subclasses(kernels.\n    Kernel))"
-}

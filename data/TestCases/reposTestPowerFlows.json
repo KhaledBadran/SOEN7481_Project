@@ -1,9 +1,0 @@
-{
-    "functionName": "TestPowerFlows",
-    "className": null,
-    "fileName": "/ardiloot_&_NonlinearTMM/Tests_&_test_TMM.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "tmmCpp, tmmPy = tmms\nbetas = np.linspace(0.0, 1.49, 20)\nsr = tmmCpp.Sweep('beta', betas)\nsweepFunc = np.vectorize(lambda beta: tmmPy.Solve(beta=beta))\ninc, r, t, I, R, T, _ = sweepFunc(betas)\nnp.testing.assert_allclose(sr.inc, inc)\nnp.testing.assert_allclose(sr.r, r)\nnp.testing.assert_allclose(sr.t, t)\nnp.testing.assert_allclose(sr.Ii, I)\nnp.testing.assert_allclose(sr.Ir, R)\nnp.testing.assert_allclose(sr.It, T, atol=1e-09 * np.mean(I))\n"
-}

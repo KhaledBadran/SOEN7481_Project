@@ -1,9 +1,0 @@
-{
-    "functionName": "test_merge_method_seq_concat",
-    "className": "TestKerasAPI",
-    "fileName": "/intel-analytics_&_Bigdl/pyspark_&_test_&_bigdl_&_keras_&_test_keras_api.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "bx1 = BLayer.Input(shape=(10,))\nbx2 = BLayer.Input(shape=(10,))\nby1 = BLayer.Dense(12, activation='sigmoid')(bx1)\nbbranch1_node = BModel(bx1, by1)(bx1)\nbbranch2 = BSequential()\nbbranch2.add(BLayer.Dense(12, input_dim=10))\nbbranch2_node = bbranch2(bx2)\nbz = BLayer.merge([bbranch1_node, bbranch2_node], mode='concat')\nbmodel = BModel([bx1, bx2], bz)\nkx1 = KLayer.Input(shape=(10,))\nkx2 = KLayer.Input(shape=(10,))\nky1 = KLayer.Dense(12, activation='sigmoid')(kx1)\nkbranch1_node = KModel(kx1, ky1)(kx1)\nkbranch2 = KSequential()\nkbranch2.add(KLayer.Dense(12, input_dim=10))\nkbranch2_node = kbranch2(kx2)\nkz = KLayer.merge([kbranch1_node, kbranch2_node], mode='concat')\nkmodel = KModel([kx1, kx2], kz)\ninput_data = [np.random.random([2, 10]), np.random.random([2, 10])]\nself.compare_newapi(kmodel, bmodel, input_data, self.convert_two_dense_model)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_kernel_train",
-    "className": "TestGaussianKernel",
-    "fileName": "/SUNCAT-Center_&_CatLearn/test_&_test_gradients.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "bigK = gaussian_kernel(theta=width, log_scale=False, m1=train,\n    eval_gradients=False)\nbigKtilde = gaussian_kernel(theta=width, log_scale=False, m1=train,\n    eval_gradients=True)\nbigKdg = bigKtilde[n_train:n_train + n_train * D, :n_train]\nbigKgd = bigKtilde[:n_train, n_train:n_train + n_train * D]\nbigKdd = bigKtilde[n_train:n_train + n_train * D, n_train:n_train + n_train * D\n    ]\nprint('Comparing bigK (without gradients) and bigK in bigKtilde.')\nnp.testing.assert_array_equal(bigK, bigKtilde[:n_train, :n_train])\nprint('Checking block matrices bigKgd and bigKdg.')\nnp.testing.assert_array_equal(bigKgd, bigKdg.T)\ni_pos = np.random.randint(len(train))\nj_pos = np.random.randint(len(train))\nd = train[i_pos] - train[j_pos]\nprint('Checking bigK in bigKtilde.')\nbigK_math = np.exp(-np.linalg.norm(d / width) ** 2 / 2)\nnp.testing.assert_array_almost_equal(bigK_math, bigK[j_pos, i_pos], decimal=15)\nprint('Checking bigKgd in bigKtilde.')\nbigKgd_math = width ** -2 * d * np.exp(-np.linalg.norm(d / width) ** 2 / 2)\nnp.testing.assert_array_almost_equal(bigKgd_math, bigKgd[i_pos:i_pos + 1, \n    j_pos * D:(j_pos + 1) * D][0], decimal=15)\nprint('Checking bigKdd in bigKtilde.')\nbigKdd_math = (np.identity(len(d)) * width ** -2 - np.outer(width ** -2 * d,\n    (width ** -2 * d).T)) * np.exp(-np.linalg.norm(d / width) ** 2 / 2)\nnp.testing.assert_array_almost_equal(bigKdd_math, bigKdd[j_pos * D:(j_pos +\n    1) * D, i_pos * D:(i_pos + 1) * D], decimal=15)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "_sat_occ_update",
-    "className": "RelativePermeability",
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_algorithms_&_metrics_&_RelativePermeability.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        Calculates the saturation of each phase using the invasion sequence\n        from either invasion percolation or ordinary percolation.\n\n        Parameters\n        ----------\n        i: scalar\n        The invasion_sequence limit for masking pores/throats that have already\n        been invaded within this limit range. The saturation is found by\n        adding the volume of pores and thorats that meet this sequence limit\n        divided by the bulk volume.\n        \"\"\"\nnetwork = self.project.network\npore_mask = self.settings['pore.invasion_sequence'] < i\nthroat_mask = self.settings['throat.invasion_sequence'] < i\nsat_p = np.sum(network['pore.volume'][pore_mask])\nsat_t = np.sum(network['throat.volume'][throat_mask])\nsat1 = sat_p + sat_t\nbulk = network['pore.volume'].sum() + network['throat.volume'].sum()\nsat = sat1 / bulk\nnwp = self.project[self.settings['nwp']]\nnwp['pore.occupancy'] = pore_mask\nnwp['throat.occupancy'] = throat_mask\nif self.settings['wp'] is not None:\n    wp = self.project[self.settings['wp']]\n    wp['throat.occupancy'] = 1 - throat_mask\n    wp['pore.occupancy'] = 1 - pore_mask\nreturn sat\n"
-}

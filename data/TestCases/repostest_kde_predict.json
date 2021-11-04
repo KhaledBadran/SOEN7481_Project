@@ -1,9 +1,0 @@
-{
-    "functionName": "test_kde_predict",
-    "className": null,
-    "fileName": "/grd349_&_PBjam/pbjam_&_tests_&_test_priors.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Tests for the kde.kde_predict method\"\"\"\nwith pytest.raises(ValueError):\n    kde().kde_predict(8)\nerr = 0.01\nsimp_kde.samples = np.vstack([np.random.normal(m, err * abs(m), 50) for m in\n    solar_p]).T\nenns = range(15, 25)\nfunc = simp_kde.kde_predict\ninp = [enns]\npbt.does_it_run(func, inp)\npbt.does_it_return(func, inp)\npbt.right_type(func, inp, tuple)\npbt.right_shape(func, inp, (2, 10))\nout = simp_kde.kde_predict(enns)\nassert_almost_equal(out[1] / out[0], np.ones_like(out[1]) * err, decimal=1)\n"
-}

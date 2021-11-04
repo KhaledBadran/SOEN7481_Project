@@ -1,9 +1,0 @@
-{
-    "functionName": "test_onion_bordas_inverse_transform_curveA",
-    "className": null,
-    "fileName": "/PyAbel_&_PyAbel/abel_&_tests_&_test_onion_bordas.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Check onion_bordas inverse transform() 'curve A'\n    \"\"\"\ndelta = 0.01\nrl = np.arange(0, 0.5 + delta / 2, delta)\nrr = np.arange(0.5 + delta, 1.0, delta)\nr = np.concatenate((rl, rr), axis=0)\norig = np.concatenate((f(rl), f(rr)), axis=0)\nproj = np.concatenate((g(rl), g(rr)), axis=0)\nrecon = abel.onion_bordas.onion_bordas_transform(proj, r[1] - r[0],\n    direction='inverse')\nratio = orig[20] / recon[20]\nassert_allclose(orig, recon * ratio, rtol=0, atol=0.1)\n"
-}

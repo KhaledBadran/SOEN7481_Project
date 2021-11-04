@@ -1,9 +1,0 @@
-{
-    "functionName": "test_graph_isomorphic",
-    "className": "PlannerTest",
-    "fileName": "/leopepe_&_GOApy/tests_&_Planner_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "from Goap.Planner import Node\nfrom Goap.Planner import Edge\nacts = Actions()\nacts.add(name='CreateTmpDir', pre_conditions={'tmp_dir_state': False,\n    'tmp_dir_content': False}, effects={'tmp_dir_state': True,\n    'tmp_dir_content': False}, shell='mkdir -p /tmp/goap_tmp')\nacts.add(name='CreateToken', pre_conditions={'tmp_dir_state': True,\n    'tmp_dir_content': False}, effects={'tmp_dir_state': True,\n    'tmp_dir_content': True}, shell='touch /tmp/goap_tmp/.token')\nnode1 = Node(attributes={'tmp_dir_state': False, 'tmp_dir_content': False})\nnode2 = Node(attributes={'tmp_dir_state': True, 'tmp_dir_content': False})\nnode3 = Node(attributes={'tmp_dir_state': True, 'tmp_dir_content': True})\nedge1 = Edge(name='CreateTmpDir', predecessor=node1, successor=node2, obj=\n    acts.get('CreateTmpDir'))\nedge2 = Edge(name='CreateToken', predecessor=node2, successor=node3, obj=\n    acts.get('CreateToken'))\ng1 = nx.DiGraph(nodes=[node1, node2, node3], edges=[edge1, edge2])\ng2 = self.planner.graph.directed\nassert nx.is_isomorphic(g1, g2) is True\n"
-}

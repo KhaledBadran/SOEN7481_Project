@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_playlist_players",
-    "className": "UiConfTests",
-    "fileName": "/ptchankue_&_KalturaGeneratedAPIClientsPython/KalturaClient_&_tests_&_test_uiconf.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Until I find a better way... this gets all uiconfs that are 'playlist players'\n           not sure if this is the right way\"\"\"\nfilt = KalturaUiConfFilter()\nplayers = [KalturaUiConfObjType.PLAYER_V3, KalturaUiConfObjType.PLAYER,\n    KalturaUiConfObjType.PLAYER_SL]\ntags = 'playlist'\nfilt.setObjTypeIn(players)\nfilt.setTagsMultiLikeOr(tags)\nresp = self.client.uiConf.list(filter=filt)\nobjs = resp.objects\nfor o in objs:\n    self.assertIn(o.objType.getValue(), players)\n    match = re.search('isPlaylist=\"(.*?)\"', o.getConfFile())\n    self.assertIsNotNone(match, 'isPlaylist not found in confFile')\n    value = match.group(1)\n    self.assertIn(value, ['true', 'multi'])\n"
-}

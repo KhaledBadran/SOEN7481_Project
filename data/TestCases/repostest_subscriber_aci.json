@@ -1,9 +1,0 @@
-{
-    "functionName": "test_subscriber_aci",
-    "className": null,
-    "fileName": "/GIC-de_&_PyANCP/tests_&_test_subscriber.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "subscriber = Subscriber(aci='0.0.0.0 eth 0', up=1024, down=20148)\nlen, tlvs = subscriber.tlvs\nvalues = struct.unpack_from('!HHccccccccccccc', tlvs, 0)\nassert values[0] == TlvType.ACI\nassert values[1] == 13\naci = ''.join([v.decode('utf-8') for v in values[2:]])\nassert aci == '0.0.0.0 eth 0'\n"
-}

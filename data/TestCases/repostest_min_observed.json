@@ -1,9 +1,0 @@
-{
-    "functionName": "test_min_observed",
-    "className": "TestGenerationStrategy",
-    "fileName": "/facebook_&_Ax/ax_&_modelbridge_&_tests_&_test_generation_strategy.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "exp = get_branin_experiment(get_branin_experiment())\ngs = GenerationStrategy(steps=[GenerationStep(model=Models.SOBOL,\n    num_trials=5, min_trials_observed=5), GenerationStep(model=Models.GPEI,\n    num_trials=1)])\nself.assertFalse(gs.uses_non_registered_models)\nfor _ in range(5):\n    exp.new_trial(gs.gen(exp))\nwith self.assertRaises(DataRequiredError):\n    gs.gen(exp)\n"
-}

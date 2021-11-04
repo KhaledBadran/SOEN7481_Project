@@ -1,9 +1,0 @@
-{
-    "functionName": "test_byte_body_no_length",
-    "className": "TestWSGILoadedRequest",
-    "fileName": "/cbefus_&_Eynnyd/tests_&_test_wsgi_loaded_request.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class SpyBody:\n\n    def __init__(self):\n        self._size = 22\n\n    @property\n    def size(self):\n        return self._size\n\n    def read(self, size):\n        self._size = size\n        return b''\nbody = SpyBody()\nrequest = WSGILoadedRequest({'CONTENT_LENGTH': 'booots', 'wsgi.input': body})\nself.assertEqual(b'', request.byte_body)\nself.assertEqual(0, body.size)\n"
-}

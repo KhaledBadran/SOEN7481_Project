@@ -1,9 +1,0 @@
-{
-    "functionName": "test_encrypt_no_iv_counter_nonce",
-    "className": "TestKmipEngine",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_engine.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that an Encrypt request can be processed correctly when a\n        specific IV/counter/nonce is not specified.\n        \"\"\"\ne = engine.KmipEngine()\ne._data_store = self.engine\ne._data_store_session_factory = self.session_factory\ne._data_session = e._data_store_session_factory()\ne._is_allowed_by_operation_policy = mock.Mock(return_value=True)\ne._logger = mock.MagicMock()\ne._cryptography_engine.logger = mock.MagicMock()\nencryption_key = pie_objects.SymmetricKey(enums.CryptographicAlgorithm.\n    TRIPLE_DES, 128,\n    b'\\x01#Eg\\x89\\xab\\xcd\\xef\\xf0\\xe1\\xd2\\xc3\\xb4\\xa5\\x96\\x87', [enums.\n    CryptographicUsageMask.ENCRYPT])\nencryption_key.state = enums.State.ACTIVE\ne._data_session.add(encryption_key)\ne._data_session.commit()\ne._data_session = e._data_store_session_factory()\nunique_identifier = str(encryption_key.unique_identifier)\ncryptographic_parameters = attributes.CryptographicParameters(block_cipher_mode\n    =enums.BlockCipherMode.CBC, padding_method=enums.PaddingMethod.PKCS5,\n    cryptographic_algorithm=enums.CryptographicAlgorithm.BLOWFISH)\ndata = b'7654321 Now is the time for \\x00'\niv_counter_nonce = None\npayload = payloads.EncryptRequestPayload(unique_identifier,\n    cryptographic_parameters, data, iv_counter_nonce)\nresponse_payload = e._process_encrypt(payload)\ne._logger.info.assert_any_call('Processing operation: Encrypt')\nself.assertEqual(unique_identifier, response_payload.unique_identifier)\nself.assertIsNotNone(response_payload.data)\nself.assertIsNotNone(response_payload.iv_counter_nonce)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_default_hub",
-    "className": null,
-    "fileName": "/marten-de-vries_&_Flask-WebSub/tests_&_test_publisher.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "import flask_websub.hub.blueprint\nflask_websub.hub.blueprint.first_time = True\nhub = Hub(None, None, **app.config)\napp.register_blueprint(hub.build_blueprint(url_prefix='/hub'))\n@app.route('/resource')\n@publisher()\ndef resource():\n    return 'Hello World!'\nresp = app.test_client().get('/resource')\nassert '<http://localhost/hub>; rel=\"hub\"' in resp.headers['Link']\nassert '<http://localhost/resource>; rel=\"self\"' in resp.headers['Link']\n"
-}

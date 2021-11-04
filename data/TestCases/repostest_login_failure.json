@@ -1,9 +1,0 @@
-{
-    "functionName": "test_login_failure",
-    "className": "ImpersonatorTestCase",
-    "fileName": "/Stavatech_&_Impersonator-Python-Client/test_&_test_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "client = Impersonator()\ncredentials = {'username': 'username', 'password': 'password'}\nendpoint = 'http://%s:%d/%s' % (client.host, client.port, client.token_endpoint\n    )\nwith self.assertRaises(Exception) as context:\n    token = client.login(**credentials)\nself.assertIn(mock.call(endpoint, json=credentials), mock_post.call_args_list)\nself.assertEqual(MOCK_ERROR, str(context.exception))\nmock.patch('requests.post', side_effect=mock_login_failure)"
-}

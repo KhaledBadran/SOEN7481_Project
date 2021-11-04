@@ -1,9 +1,0 @@
-{
-    "functionName": "test_categorization_metrics",
-    "className": null,
-    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_server_&_tests_&_test_metrics.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "metrics = list(metrics)\nurl = V01 + '/metrics/categorization'\nlabels = ['negative', 'positive']\ny_true = [{'category': labels[key], 'document_id': idx} for idx, key in\n    enumerate([0, 0, 0, 1, 1, 0, 1, 0, 1])]\ny_pred = [{'scores': [{'category': labels[key], 'score': 1.0}],\n    'document_id': idx} for idx, key in enumerate([0, 0, 1, 1, 1, 0, 1, 1, 1])]\npars = {'y_true': y_true, 'y_pred': y_pred, 'metrics': metrics}\ndata = app.post_check(url, json=pars)\nassert sorted(data.keys()) == sorted(metrics)\nfor key in metrics:\n    assert data[key] > 0.5\n    assert data[key] <= 1.0\npytest.mark.parametrize('metrics', itertools.combinations(['precision',\n    'recall', 'f1', 'roc_auc', 'average_precision'], 3))"
-}

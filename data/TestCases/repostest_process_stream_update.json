@@ -1,9 +1,0 @@
-{
-    "functionName": "test_process_stream_update",
-    "className": "TestMessages",
-    "fileName": "/PRIArobotics_&_HedgehogProtocol/tests_&_test_protocol.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "msg = process.StreamUpdate(123, process.STDOUT, b'abc')\nproto = HedgehogMessage()\nproto.process_stream_message.pid = 123\nproto.process_stream_message.fileno = process.STDOUT\nproto.process_stream_message.chunk = b'abc'\nself.assertTransmissionServerClient(msg, proto, is_async=True)\nwith pytest.raises(errors.InvalidCommandError):\n    process.StreamUpdate(123, process.STDIN, b'abc')\n"
-}

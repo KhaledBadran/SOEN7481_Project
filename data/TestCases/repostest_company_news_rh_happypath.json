@@ -1,9 +1,0 @@
-{
-    "functionName": "test_company_news_rh_happypath",
-    "className": "TestCompanyNewsRobinhood",
-    "fileName": "/EVEprosper_&_ProsperDatareader/tests_&_test_news.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"make sure production endpoint works as expected\"\"\"\nall_news_df = news.company_news_rh(self.good_ticker)\nassert isinstance(all_news_df, pd.DataFrame)\nunique_values, unique_expected = helpers.find_uniques(list(all_news_df.\n    columns.values), self.expected_news_cols)\nassert unique_expected == []\nif unique_values:\n    pytest.xfail('Unexpected values from company_news_rh(): {}'.format(\n        unique_values))\n"
-}

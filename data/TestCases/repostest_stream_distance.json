@@ -1,9 +1,0 @@
-{
-    "functionName": "test_stream_distance",
-    "className": null,
-    "fileName": "/vc1492a_&_PyNomaly/tests_&_test_loop.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test to ensure that the streaming approach functions as desired when\n    providing matrices for use and that the returned results are within some\n    margin of error when compared to the classical approach (using the RMSE).\n    :param X_n140_outliers: A pytest Fixture that generates 140 observations.\n    :return: None\n    \"\"\"\nX_train = X_n140_outliers[0:100]\nX_test = X_n140_outliers[100:140]\nneigh = NearestNeighbors(metric='euclidean')\nneigh.fit(X_train)\nd, idx = neigh.kneighbors(X_train, n_neighbors=10, return_distance=True)\nm = loop.LocalOutlierProbability(X_train, use_numba=NUMBA).fit()\nm_dist = loop.LocalOutlierProbability(distance_matrix=d, neighbor_matrix=\n    idx, use_numba=NUMBA).fit()\nX_test_scores = []\nfor i in range(X_test.shape[0]):\n    X_test_scores.append(m.stream(np.array(X_test[i])))\nX_test_scores = np.array(X_test_scores)\nX_test_dist_scores = []\nfor i in range(X_test.shape[0]):\n    dd, ii = neigh.kneighbors(np.array([X_test[i]]), return_distance=True)\n    X_test_dist_scores.append(m_dist.stream(np.mean(dd)))\nX_test_dist_scores = np.array(X_test_dist_scores)\nrmse = np.sqrt(((X_test_scores - X_test_dist_scores) ** 2).mean(axis=None))\nassert_greater(0.075, rmse)\n"
-}

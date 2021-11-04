@@ -1,9 +1,0 @@
-{
-    "functionName": "test_against_R_implementation_1",
-    "className": null,
-    "fileName": "/tommyod_&_Efficient-Apriori/efficient_apriori_&_tests_&_test_apriori.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    The following R-code was used:\n        \n    > install.packages(\"arules\")\n    > col1 = c(\"a\", \"a\", \"a\", \"b\", \"b\", \"b\", \"b\") \n    > col2 = c(\"c\", \"c\", \"d\", \"d\", \"d\", \"c\", \"c\") \n    > col3 = c(\"e\", \"e\", \"e\", \"e\", \"f\", \"f\", \"f\")\n    > df = data.frame(col1, col2, col3)\n    > df <- data.frame(sapply(df, as.factor))\n    > rules <- apriori(df, parameter = list(supp = 0.2, conf = 0.2))\n    > inspect(head(rules, by = \"confidence\"))\n    \"\"\"\ntransactions = [('a', 'c', 'e'), ('a', 'c', 'e'), ('a', 'd', 'e'), ('b',\n    'd', 'e'), ('b', 'd', 'f'), ('b', 'c', 'f'), ('b', 'c', 'f')]\nitemsets, rules = apriori(transactions, 0.2, 0.2)\nassert Rule(('a',), ('e',)) in rules\nfor rule in rules:\n    if rule == Rule(('a',), ('e',)):\n        assert abs(rule.support - 0.4285714) < 1e-06\n        assert rule.confidence == 1\n    if rule == Rule(('c', 'e'), ('a',)):\n        assert abs(rule.support - 0.2857143) < 1e-06\n        assert rule.confidence == 1\n    if rule == Rule(('e',), ('a',)):\n        assert abs(rule.support - 0.4285714) < 1e-06\n        assert rule.confidence == 3 / 4\n"
-}

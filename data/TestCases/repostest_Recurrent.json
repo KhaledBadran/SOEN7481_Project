@@ -1,9 +1,0 @@
-{
-    "functionName": "test_Recurrent",
-    "className": null,
-    "fileName": "/oujago_&_NumpyDL/tests_&_test_layers_&_test_recurrent.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "for seq in (True, False):\n    layer = Recurrent(n_out=200, return_sequence=seq)\n    assert layer.out_shape is None\n    with pytest.raises(AssertionError):\n        layer.connect_to()\n    layer.connect_to(PrevLayer((20, 10, 100)))\n    assert layer.n_in == 100\n    assert len(layer.out_shape) == (3 if seq else 2)\n"
-}

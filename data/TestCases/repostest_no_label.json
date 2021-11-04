@@ -1,9 +1,0 @@
-{
-    "functionName": "test_no_label",
-    "className": "TestMMFlatViews",
-    "fileName": "/Axiologue_&_DjangoRestMultipleModels/tests_&_test_flat_view.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Tests that no label (aka add_model_type = False) just gives the data\n        \"\"\"\nview = NoLabelView.as_view()\nrequest = factory.get('/')\nwith self.assertNumQueries(2):\n    response = view(request).render()\nself.assertEqual(response.status_code, status.HTTP_200_OK)\nself.assertEqual(len(response.data), 6)\nself.assertEqual(response.data, [{k: v for k, v in i.items() if k != 'type'\n    } for i in self.unsorted_results])\n"
-}

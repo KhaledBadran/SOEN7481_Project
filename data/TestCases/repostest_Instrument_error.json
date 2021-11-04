@@ -1,9 +1,0 @@
-{
-    "functionName": "test_Instrument_error",
-    "className": null,
-    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Geometry_&_Instrument.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "try:\n    Instr = Instrument(fileName='wrongDummyFile.bin')\n    assert False\nexcept ValueError:\n    assert True\nInstr = Instrument()\nAna = Analyser.FlatAnalyser(position=(0.5, 0, 0), direction=(1, 0, 1))\ntry:\n    Instr.wedges = Ana\n    assert False\nexcept AttributeError:\n    assert True\ntry:\n    Instr.wedges = [Ana, Ana]\n    assert False\nexcept AttributeError:\n    assert True\ntry:\n    Instr.append('Wrong object type')\n    assert False\nexcept AttributeError:\n    assert True\ntry:\n    Instr.append(['List of', 3.0, 'wrong objects'])\n    assert False\nexcept AttributeError:\n    assert True\ntry:\n    Instr.settings = {'Name', 'New dictionary'}\n    assert False\nexcept NotImplementedError:\n    return True\n"
-}

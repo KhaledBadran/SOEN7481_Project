@@ -1,9 +1,0 @@
-{
-    "functionName": "test_loading_good_single_file",
-    "className": "TestLoading",
-    "fileName": "/ornlneutronimaging_&_NeuNorm/tests_&_NeuNorm_&_loading_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"assert sample, ob and df single file correctly loaded\"\"\"\nsample_tif_file = self.data_path + '/tif//sample/image001.tif'\no_norm = Normalization()\no_norm.load(file=sample_tif_file, data_type='sample', auto_gamma_filter=False)\n_expected_data = np.ones([5, 5])\n_expected_data[0, 0] = 5\n_expected_data[:, (2)] = 2\n_expected_data[:, (3)] = 3\n_expected_data[:, (4)] = 4\n_loaded_data = o_norm.data['sample']['data']\nself.assertTrue((_expected_data == _loaded_data).all())\n_expected_name = sample_tif_file\n_loaded_name = o_norm.data['sample']['file_name'][0]\nself.assertTrue(_expected_name == _loaded_name)\nsample_fits_file = self.data_path + '/fits//sample/image001.fits'\no_norm = Normalization()\no_norm.load(file=sample_fits_file, data_type='sample', auto_gamma_filter=False)\n_expected_data = np.ones([5, 5])\n_expected_data[0, 0] = 5\n_expected_data[:, (2)] = 2\n_expected_data[:, (3)] = 3\n_expected_data[:, (4)] = 4\n_loaded_data = o_norm.data['sample']['data']\nself.assertTrue((_expected_data == _loaded_data).all())\n_expected_name = sample_fits_file\n_loaded_name = o_norm.data['sample']['file_name'][0]\nself.assertTrue(_expected_name == _loaded_name)\n"
-}

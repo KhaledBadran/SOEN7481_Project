@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_event_by_id",
-    "className": "TestStorage",
-    "fileName": "/YuriyLisovskiy_&_EventReminder/tests_&_unittests_&_storage_&_test_storage.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "expected = 'some title', datetime.now().date().strftime(EventModel.DATE_FORMAT\n    ), datetime.now().time().replace(microsecond=0).strftime(EventModel.\n    TIME_FORMAT), 'Some description', 0, 0\nself.cursor.execute(\n    'INSERT INTO Events(title, date, time, description, is_past, repeat_weekly) VALUES (?, ?, ?, ?, ?, ?)'\n    , expected)\nself.db.commit()\nactual = self.storage.get_event_by_id(self.cursor.lastrowid)\nself.assertIsNotNone(actual)\nself.assertEqual(actual.title, expected[0])\nself.assertEqual(actual.date.strftime(EventModel.DATE_FORMAT), expected[1])\nself.assertEqual(actual.time.strftime(EventModel.TIME_FORMAT), expected[2])\nself.assertEqual(actual.description, expected[3])\nself.assertEqual(actual.is_past, expected[4])\nself.assertEqual(actual.repeat_weekly, expected[5])\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_lock_user",
-    "className": "TestCrossEnterpriseCommands",
-    "fileName": "/Keeper-Security_&_Commander/tests_&_test_cross_commands.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "param1 = TestCrossEnterpriseCommands.params1\nparam2 = TestCrossEnterpriseCommands.params2\nusers = [x for x in param2.enterprise['users']]\nself.assertGreater(len(users), 0, 'cannot resolve user')\nuser = users[0]\nent2_user_id = user['enterprise_user_id']\nrq = {'command': 'enterprise_user_lock', 'enterprise_user_id': ent2_user_id,\n    'lock': 'locked', 'delete_if_pending': True}\nfailed = False\ntry:\n    api.communicate(param1, rq)\nexcept KeeperApiError as err:\n    failed = True\n    self.assertEqual(err.result_code, 'bad_inputs_enterprise_user_id')\nself.assertTrue(failed)\nrq = {'command': 'enterprise_user_delete', 'enterprise_user_id': ent2_user_id}\nfailed = False\ntry:\n    api.communicate(param1, rq)\nexcept KeeperApiError as err:\n    failed = True\n    self.assertEqual(err.result_code, 'bad_inputs_enterprise_user_id')\nself.assertTrue(failed)\n"
-}

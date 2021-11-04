@@ -1,9 +1,0 @@
-{
-    "functionName": "test_convert_parameters_to_get_param",
-    "className": "TestCommunication",
-    "fileName": "/funilrys_&_PyTravisCI/tests_&_core_&_test_communication.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test of :meth:`PyTravisCI.communication.Communication.convert_parameters_to_get_param`.\n        \"\"\"\ncomm = Communication(self.root)\ncomm._parameters = OrderedDict()\ncomm._parameters['hello'] = 'world'\ncomm._parameters['world'] = 'hello'\ncomm._parameters['repo'] = 'example.org/test'\ncomm._parameters['this_is_a_test'] = False\ncomm._parameters['formatted_repo'] = 'example.org%2Ftest'\ncomm._excluded_parameters = ['world']\nexpected = (\n    '?hello=world&repo=example.org%2Ftest&this_is_a_test=false&formatted_repo=example.org%2Ftest'\n    )\nactual = comm.convert_parameters_to_get_param()\nself.assertEqual(expected, actual)\ncomm._parameters = {}\nexpected = ''\nactual = comm.convert_parameters_to_get_param()\nself.assertEqual(expected, actual)\n"
-}

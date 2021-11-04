@@ -1,9 +1,0 @@
-{
-    "functionName": "test_modify_host_change_name",
-    "className": "PyU4VProvisioningTest",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test modify_host change name.\"\"\"\nhost_name = self.data.initiatorgroup_name_i\nnew_name = 'my-new-name'\npayload = {'editHostActionParam': {'renameHostParam': {'new_host_name':\n    new_name}}}\nwith mock.patch.object(self.provisioning, 'modify_resource') as mock_mod:\n    self.provisioning.modify_host(host_name, new_name=new_name)\n    mock_mod.assert_called_once_with(category=constants.SLOPROVISIONING,\n        resource_level=constants.SYMMETRIX, resource_level_id=self.data.\n        array, resource_type=constants.HOST, resource_type_id=host_name,\n        payload=payload)\n"
-}

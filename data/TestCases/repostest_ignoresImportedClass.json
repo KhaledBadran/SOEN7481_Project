@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ignoresImportedClass",
-    "className": "FindMachinesViaWrapperTests",
-    "fileName": "/glyph_&_Automat/automat_&__test_&_test_discover.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        When given a L{twisted.python.modules.PythonAttribute} that refers\n        to a class imported from another module, any\n        L{MethodicalMachine}s on that class are ignored.\n\n        This behavior ensures that a machine is only discovered on a\n        class when visiting the module where that class was defined.\n        \"\"\"\noriginalSource = \"\"\"\n        from automat import MethodicalMachine\n\n        class PythonClass(object):\n            _classMachine = MethodicalMachine()\n        \"\"\"\nimportingSource = \"\"\"\n        from original import PythonClass\n        \"\"\"\nself.makeModule(originalSource, self.pathDir, 'original.py')\nimportingModule = self.makeModule(importingSource, self.pathDir, 'importing.py'\n    )\nself.assertFalse(list(self.findMachinesViaWrapper(importingModule)))\n"
-}

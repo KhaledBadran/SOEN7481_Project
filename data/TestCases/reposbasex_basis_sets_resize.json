@@ -1,9 +1,0 @@
-{
-    "functionName": "basex_basis_sets_resize",
-    "className": null,
-    "fileName": "/PyAbel_&_PyAbel/abel_&_tests_&_test_basex.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "n_s = 50\nn_l = 100\nfile_name_s = get_basis_file_name(n_s, sigma)\nfile_name_l = get_basis_file_name(n_l, sigma)\ndef remove_files():\n    if os.path.exists(file_name_s):\n        os.remove(file_name_s)\n    if os.path.exists(file_name_l):\n        os.remove(file_name_l)\nremove_files()\ncache_cleanup()\nAi_s = get_bs_cached(n_s, sigma, correction=False, basis_dir=DATA_DIR,\n    verbose=False)\ncache_cleanup()\nAi_s_l = get_bs_cached(n_l, sigma, correction=False, basis_dir=DATA_DIR,\n    verbose=False)\ncache_cleanup()\nremove_files()\nAi_l = get_bs_cached(n_l, sigma, correction=False, basis_dir=DATA_DIR,\n    verbose=False)\ncache_cleanup()\nAi_l_s = get_bs_cached(n_s, sigma, correction=False, basis_dir=DATA_DIR,\n    verbose=False)\ncache_cleanup()\nremove_files()\nassert_allclose(Ai_s, Ai_l_s, atol=1e-15, rtol=1e-15)\nassert_allclose(Ai_l, Ai_s_l, atol=1e-15, rtol=1e-15)\n"
-}

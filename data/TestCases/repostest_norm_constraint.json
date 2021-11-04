@@ -1,9 +1,0 @@
-{
-    "functionName": "test_norm_constraint",
-    "className": null,
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_tests_&_test_updates.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "import numpy as np\nimport theano\nfrom lasagne.updates import norm_constraint\nfrom lasagne.utils import compute_norms\nmax_norm = 0.01\nparam = theano.shared(np.random.randn(*((25,) * ndim)).astype(theano.config\n    .floatX))\nupdate = norm_constraint(param, max_norm)\napply_update = theano.function([], [], updates=[(param, update)])\napply_update()\nassert param.dtype == update.dtype\nassert np.max(compute_norms(param.get_value())) <= max_norm * (1 +\n    PCT_TOLERANCE)\npytest.mark.parametrize('ndim', [2, 3])"
-}

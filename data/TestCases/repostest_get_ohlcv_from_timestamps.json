@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_ohlcv_from_timestamps",
-    "className": null,
-    "fileName": "/Drakkar-Software_&_OctoBot-Backtesting/tests_&_importers_&_test_exchange_importer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "async with get_importer() as importer:\n    ohlcv = await importer.get_ohlcv_from_timestamps()\n    assert len(ohlcv) == 500\n    assert all(data[4] == '1h' for data in ohlcv)\n    ohlcv = await importer.get_ohlcv_from_timestamps(inferior_timestamp=\n        1587978000, superior_timestamp=1588060800)\n    assert len(ohlcv) == 24\n    assert all(1587978000 <= data[0] <= 1588060800 for data in ohlcv)\n"
-}

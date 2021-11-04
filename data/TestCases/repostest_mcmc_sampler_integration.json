@@ -1,9 +1,0 @@
-{
-    "functionName": "test_mcmc_sampler_integration",
-    "className": null,
-    "fileName": "/GPflow_&_GPflow/tests_&_gpflow_&_optimizers_&_test_mcmc.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data = build_data()\nmodel = build_model(data)\nhmc_helper = gpflow.optimizers.SamplingHelper(model.log_posterior_density,\n    model.trainable_parameters)\nhmc = tfp.mcmc.HamiltonianMonteCarlo(target_log_prob_fn=hmc_helper.\n    target_log_prob_fn, num_leapfrog_steps=2, step_size=0.01)\nadaptive_hmc = tfp.mcmc.SimpleStepSizeAdaptation(hmc, num_adaptation_steps=\n    2, target_accept_prob=gpflow.utilities.to_default_float(0.75),\n    adaptation_rate=0.1)\nnum_samples = 5\n@tf.function\ndef run_chain_fn():\n    return tfp.mcmc.sample_chain(num_results=num_samples, num_burnin_steps=\n        2, current_state=hmc_helper.current_state, kernel=adaptive_hmc,\n        trace_fn=lambda _, pkr: pkr.inner_results.is_accepted)\nsamples, _ = run_chain_fn()\nassert len(samples) == len(model.trainable_parameters)\nparameter_samples = hmc_helper.convert_to_constrained_values(samples)\nassert len(parameter_samples) == len(samples)\nfor i in range(len(model.trainable_parameters)):\n    assert len(samples[i]) == num_samples\n    assert hmc_helper.current_state[i].numpy() == samples[i][-1]\n    assert hmc_helper._parameters[i].numpy() == parameter_samples[i][-1]\n"
-}

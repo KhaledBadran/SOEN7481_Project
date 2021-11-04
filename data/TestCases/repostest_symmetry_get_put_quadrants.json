@@ -1,9 +1,0 @@
-{
-    "functionName": "test_symmetry_get_put_quadrants",
-    "className": null,
-    "fileName": "/PyAbel_&_PyAbel/abel_&_tests_&_test_tools_symmetry.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "n, m = image_shape\nz = np.ones((n, m)) * -1\nc2 = m // 2\nr2 = n // 2\nz[:r2, -c2:] = 0\nz[:r2, :c2] = 1\nz[-r2:, :c2] = 2\nz[-r2:, -c2:] = 3\nif verbose:\n    print('test image of shape ', z.shape)\n    if n % 2 or m % 2:\n        print(\" odd-size axes tagged with '-1'\")\n    print(z)\nq = abel.tools.symmetry.get_image_quadrants(z, reorient=True)\nif verbose:\n    for i, qi in enumerate(q):\n        print('\\nreoriented quadrant Q{:d}'.format(i))\n        print(qi)\nr = abel.tools.symmetry.put_image_quadrants(q, original_image_shape=z.shape)\nif verbose:\n    print('\\nreassembled image, shape = ', r.shape)\n    print(r)\nassert not (z - r).any()\n"
-}

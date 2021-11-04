@@ -1,9 +1,0 @@
-{
-    "functionName": "test_socket_udp",
-    "className": null,
-    "fileName": "/Carbyne-Solutions_&_logrdis/tests_&_test_socket.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test the UDP server.\"\"\"\nserver = log_server('udp')\nsock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)\nLOGGER.debug('Sending test message to localhost:4444')\nsock.sendto(sample_entry.encode(), ('localhost', 4444))\nsock.close()\ntime.sleep(1)\ncfg = test_yaml()\nresults = query_check(cfg)\nfor res in results:\n    assert re.search('[\\\\d\\\\w\\\\:]+', res['mac_source'])\nserver.stop()\n"
-}

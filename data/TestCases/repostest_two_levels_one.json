@@ -1,9 +1,0 @@
-{
-    "functionName": "test_two_levels_one",
-    "className": "BlockTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_block.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "l = TemplateLookup()\nl.put_string('index',\n    \"\"\"\n                <%inherit file=\"middle\"/>\n                <%block name=\"header\">\n                    index header\n                </%block>\n                <%block>\n                    index anon\n                </%block>\n            \"\"\"\n    )\nl.put_string('middle',\n    \"\"\"\n            <%inherit file=\"base\"/>\n            <%block>\n                middle anon\n            </%block>\n            ${next.body()}\n        \"\"\"\n    )\nl.put_string('base',\n    \"\"\"\n            above\n            <%block name=\"header\">\n                the header\n            </%block>\n\n            ${next.body()}\n            below\n        \"\"\"\n    )\nself._do_test(l.get_template('index'), ['above', 'index header',\n    'middle anon', 'index anon', 'below'], filters=result_lines)\n"
-}

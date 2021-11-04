@@ -1,9 +1,0 @@
-{
-    "functionName": "test_uri_projects_subjects_id",
-    "className": null,
-    "fileName": "/incf-nidash_&_PyNIDM/nidm_&_experiment_&_tools_&_tests_&_test_rest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "global test_person_uuid\nrestParser = RestParser()\nresult = restParser.run(OPENNEURO_FILES, '/projects')\nproject = result[0]\nresult = restParser.run(OPENNEURO_FILES, '/projects/{}/subjects'.format(\n    project))\nsubject = result['uuid'][0]\nuri = '/projects/{}/subjects/{}'.format(project, subject)\nresult = restParser.run(OPENNEURO_FILES, uri)\nassert type(result) == dict\nassert result['uuid'] == subject\nassert len(result['instruments']) > 2\ninstruments = result['instruments'].values()\nall_keys = []\nfor i in instruments:\n    all_keys += i.keys()\nassert 'age' in all_keys\n"
-}

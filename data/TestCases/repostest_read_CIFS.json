@@ -1,9 +1,0 @@
-{
-    "functionName": "test_read_CIFS",
-    "className": "CifRead",
-    "fileName": "/jcumby_&_PIEFACE/pieface_&_tests_&_test_readcoords.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Test CIF reads correctly\"\"\"\nfor cif in self.CIFS:\n    returnvals = readcoords.readcif(self.CIFS[cif])\n    self.assertDictEqual(returnvals[0], self.results[cif]['cell'])\n    self.assertItemsEqual(returnvals[1].keys(), self.results[cif][\n        'atomcoords'].keys())\n    for k in returnvals[1].keys():\n        np.testing.assert_array_almost_equal(returnvals[1][k], self.results\n            [cif]['atomcoords'][k])\n    self.assertDictEqual(returnvals[2], self.results[cif]['atomtypes'])\n    self.assertEqual(returnvals[3], self.results[cif]['spacegrp'])\n    self.assertListEqual(returnvals[4], self.results[cif]['symmops'])\n    self.assertListEqual(returnvals[5], self.results[cif]['symmid'])\n"
-}

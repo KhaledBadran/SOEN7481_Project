@@ -1,9 +1,0 @@
-{
-    "functionName": "test_predict_proba_all_agree",
-    "className": null,
-    "fileName": "/Menelau_&_DESlib/deslib_&_tests_&_test_base.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "X, y, _, _, _, dsel_scores = example_estimate_competence\nquery = np.atleast_2d([1, 1])\nds_test = BaseDS(create_pool_classifiers)\nds_test.fit(X, y)\nds_test.DSEL_scores = dsel_scores\nbackup_all_agree = BaseDS._all_classifier_agree\nBaseDS._all_classifier_agree = MagicMock(return_value=np.array([True]))\nproba = ds_test.predict_proba(query)\nBaseDS._all_classifier_agree = backup_all_agree\nassert np.allclose(proba, np.atleast_2d([0.61, 0.39]))\n"
-}

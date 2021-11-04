@@ -1,9 +1,0 @@
-{
-    "functionName": "test_descendsIntoPackages",
-    "className": "FindMachinesViaWrapperTests",
-    "fileName": "/glyph_&_Automat/automat_&__test_&_test_discover.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        L{findMachinesViaWrapper} descends into packages to discover\n        machines.\n        \"\"\"\npythonPath = self.PythonPath([self.pathDir])\npackage = self.FilePath(self.pathDir).child('test_package')\npackage.makedirs()\npackage.child('__init__.py').touch()\nsource = \"\"\"\n        from automat import MethodicalMachine\n\n\n        class PythonClass(object):\n            _classMachine = MethodicalMachine()\n\n\n        rootMachine = MethodicalMachine()\n        \"\"\"\nself.makeModule(source, package.path, 'module.py')\ntest_package = pythonPath['test_package']\nmachines = sorted(self.findMachinesViaWrapper(test_package), key=operator.\n    itemgetter(0))\nmoduleDict = self.loadModuleAsDict(test_package['module'])\nrootMachine = moduleDict['test_package.module.rootMachine'].load()\nPythonClass = moduleDict['test_package.module.PythonClass'].load()\nexpectedMachines = sorted([('test_package.module.rootMachine', rootMachine),\n    ('test_package.module.PythonClass._classMachine', PythonClass.\n    _classMachine)], key=operator.itemgetter(0))\nself.assertEqual(expectedMachines, machines)\n"
-}

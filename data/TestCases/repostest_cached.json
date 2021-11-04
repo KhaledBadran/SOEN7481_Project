@@ -1,9 +1,0 @@
-{
-    "functionName": "test_cached",
-    "className": "GetKeyFieldsForObjectType",
-    "fileName": "/mzy2240_&_ESA/tests_&_test_saw.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that the \"caching\" is working as intended.\"\"\"\nwith patch.object(saw_14, '_call_simauto', wraps=saw_14._call_simauto) as p:\n    kf = saw_14.get_key_fields_for_object_type('GEN')\nself.assertIsInstance(kf, pd.DataFrame)\nself.assertEqual(0, p.call_count)\nwith patch.object(saw_14, '_call_simauto', wraps=saw_14._call_simauto) as p:\n    kf = saw_14.get_key_fields_for_object_type('area')\nself.assertIsInstance(kf, pd.DataFrame)\nself.assertEqual(1, p.call_count)\n"
-}

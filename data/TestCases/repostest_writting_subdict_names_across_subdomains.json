@@ -1,9 +1,0 @@
-{
-    "functionName": "test_writting_subdict_names_across_subdomains",
-    "className": "SubdomainTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_core_&_SubdomainTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ws = op.Workspace()\nproj = ws.new_project()\npn = op.network.Cubic(shape=[10, 10, 10], spacing=0.0001, project=proj)\nPs = pn['pore.coords'][:, (0)] < pn['pore.coords'][:, (0)].mean()\nTs = pn.find_neighbor_throats(pores=Ps, mode='xnor')\ngeo1 = op.geometry.StickAndBall(network=pn, pores=Ps, throats=Ts)\nPs = pn['pore.coords'][:, (0)] >= pn['pore.coords'][:, (0)].mean()\nTs = pn.find_neighbor_throats(pores=Ps, mode='or')\ngeo2 = op.geometry.StickAndBall(network=pn, pores=Ps, throats=Ts)\npn['pore.foo'] = 1\nwith pytest.raises(Exception):\n    pn['pore.foo.bar'] = 1\npn['pore.baz.bar'] = 2\nwith pytest.raises(Exception):\n    pn['pore.baz'] = 2\ngeo1['pore.blah'] = 1\nwith pytest.raises(Exception):\n    geo1['pore.blah.boo'] = 1\ngeo1['pore.bee.bop'] = 1\nwith pytest.raises(Exception):\n    geo1['pore.bee'] = 1\nwith pytest.raises(Exception):\n    geo1['pore.foo'] = 1\nwith pytest.raises(Exception):\n    geo1['pore.foo.bar'] = 1\nwith pytest.raises(Exception):\n    geo1['pore.baz'] = 1\ngeo2['pore.blah'] = 1\ngeo2['pore.bee.bop'] = 1\nwith pytest.raises(Exception):\n    geo1['pore.bee'] = 1\nwith pytest.raises(Exception):\n    pn['pore.bee'] = 1\nwith pytest.raises(Exception):\n    pn['pore.bee.bop'] = 1\n"
-}

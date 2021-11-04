@@ -1,9 +1,0 @@
-{
-    "functionName": "test_psf_funcs",
-    "className": null,
-    "fileName": "/PaulHancock_&_Aegean/tests_&_test_wcs_helpers.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    For a SIN projected image, test that the beam/psf calculations are consistent at different points on the sky\n    \"\"\"\nfname = 'tests/test_files/1904-66_SIN.fits'\nhelper = WCSHelper.from_file(fname)\nheader = helper.wcs.to_header()\nrefpix = header['CRPIX2'], header['CRPIX1']\nrefcoord = header['CRVAL1'], header['CRVAL2']\nbeam_ref_coord = helper.get_skybeam(*refcoord)\nbeam_ref_pix = helper.get_skybeam(*helper.pix2sky(refpix))\nmsg = 'sky beams at ref coord/pix disagree'\nif not abs(beam_ref_coord.a - beam_ref_pix.a) < 1e-05:\n    raise AssertionError(msg)\nif not abs(beam_ref_coord.b - beam_ref_pix.b) < 1e-05:\n    raise AssertionError(msg)\nif not abs(beam_ref_coord.pa - beam_ref_pix.pa) < 1e-05:\n    raise AssertionError(msg)\npsf_zero = helper.get_psf_sky2pix(0, 0)\npsf_refcoord = helper.get_psf_sky2pix(*refcoord)\ndiff = np.subtract(psf_zero, psf_refcoord)\nif not np.all(diff < 1e-05):\n    raise AssertionError('psf varies in pixel coordinates (it should not)')\ndiff = np.subtract(psf_refcoord, (helper._psf_a, helper._psf_b, helper.\n    _psf_theta))\nif not np.all(diff < 1e-05):\n    raise AssertionError('psf varies in pixel coordinates (it should not)')\nreturn\n"
-}

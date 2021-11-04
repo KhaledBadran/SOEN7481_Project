@@ -1,9 +1,0 @@
-{
-    "functionName": "test_callback_in_class",
-    "className": null,
-    "fileName": "/martinohanlon_&_BlueDot/tests_&_test_blue_dot.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "class CallbackClass:\n\n    def __init__(self):\n        self.event = Event()\n\n    def no_pos(self):\n        self.event.set()\n        self.pos = None\n\n    def with_pos(self, pos):\n        self.event.set()\n        self.pos = pos\ncc = CallbackClass()\nmbd = MockBlueDot()\nmbd.mock_client_connected()\nmbd.when_pressed = cc.no_pos\nmbd.mock_blue_dot_pressed(0, 0)\nassert cc.event.is_set()\nassert cc.pos is None\nmbd.mock_blue_dot_released(0, 0)\ncc.event.clear()\nmbd.when_pressed = cc.with_pos\nmbd.mock_blue_dot_pressed(0, 0)\nassert cc.event.is_set()\nassert cc.pos.middle\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_read_kmip_1_3",
-    "className": "TestCapabilityInformation",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a CapabilityInformation structure can be correctly read in\n        from a data stream with only KMIP 1.3 features.\n        \"\"\"\ncapability_information = objects.CapabilityInformation()\nself.assertIsNone(capability_information.streaming_capability)\nself.assertIsNone(capability_information.asynchronous_capability)\nself.assertIsNone(capability_information.attestation_capability)\nself.assertIsNone(capability_information.batch_undo_capability)\nself.assertIsNone(capability_information.batch_continue_capability)\nself.assertIsNone(capability_information.unwrap_mode)\nself.assertIsNone(capability_information.destroy_action)\nself.assertIsNone(capability_information.shredding_algorithm)\nself.assertIsNone(capability_information.rng_mode)\ncapability_information.read(self.full_encoding_kmip_1_3, kmip_version=enums\n    .KMIPVersion.KMIP_1_4)\nself.assertFalse(capability_information.streaming_capability)\nself.assertTrue(capability_information.asynchronous_capability)\nself.assertTrue(capability_information.attestation_capability)\nself.assertIsNone(capability_information.batch_undo_capability)\nself.assertIsNone(capability_information.batch_continue_capability)\nself.assertEqual(enums.UnwrapMode.PROCESSED, capability_information.unwrap_mode\n    )\nself.assertEqual(enums.DestroyAction.SHREDDED, capability_information.\n    destroy_action)\nself.assertEqual(enums.ShreddingAlgorithm.CRYPTOGRAPHIC,\n    capability_information.shredding_algorithm)\nself.assertEqual(enums.RNGMode.NON_SHARED_INSTANTIATION,\n    capability_information.rng_mode)\n"
-}

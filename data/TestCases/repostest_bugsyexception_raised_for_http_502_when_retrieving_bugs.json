@@ -1,9 +1,0 @@
-{
-    "functionName": "test_bugsyexception_raised_for_http_502_when_retrieving_bugs",
-    "className": null,
-    "fileName": "/AutomatedTester_&_Bugsy/tests_&_test_errors.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "responses.add(responses.GET, rest_url('bug', 123456), body='Bad Gateway',\n    status=502, content_type='text/html', match_querystring=True)\nbugzilla = Bugsy()\nwith pytest.raises(BugsyException) as e:\n    r = bugzilla.get(123456)\nassert str(e.value\n    ) == 'Message: We received a 502 error with the following: Bad Gateway Code: None'\nresponses.activate"
-}

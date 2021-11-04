@@ -1,9 +1,0 @@
-{
-    "functionName": "test_load_end_to_end",
-    "className": "TestConfigFacadeAcceptance",
-    "fileName": "/dnephin_&_PyStaticConfiguration/tests_&_config_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "loader = staticconf.YamlConfiguration\ncallback = mock.Mock()\nfacade = staticconf.ConfigFacade.load(self.file.name, self.namespace, loader)\nfacade.add_callback('one', callback)\nassert_equal(staticconf.get('one', namespace=self.namespace), 'A')\nself.write(b'one: B', 10)\nfacade.reload_if_changed()\nassert_equal(staticconf.get('one', namespace=self.namespace), 'B')\ncallback.assert_called_with()\n"
-}

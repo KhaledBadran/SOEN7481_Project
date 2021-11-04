@@ -1,9 +1,0 @@
-{
-    "functionName": "test_IO_read_request_length_mismatch",
-    "className": "TestKMIPProtocol",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_test_kmip_protocol.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "socket = MagicMock()\nsocket.recv = MagicMock(side_effect=[self.response[:8], self.response[8:16],\n    []])\nprotocol = self.factory.getProtocol(socket)\nresp_len = len(self.response)\ntry:\n    protocol.read()\nexcept Exception as e:\n    self.assertIsInstance(e, RequestLengthMismatch, 'Invalid exception')\n    self.assertEqual(e.expected, resp_len - 8, 'Unexpected expected')\n    self.assertEqual(e.received, 8, 'Unexpected received')\n    self.assertEqual('{0}'.format(e), '{0}: expected {1}, received {2}'.\n        format('KMIPProtocol read error', resp_len - 8, 8),\n        'Invalid RequestLengthMismatch attributes')\nelse:\n    self.assertTrue(False, 'Unexpected error')\ncalls = [call(8), call(resp_len - 8), call(resp_len - 16)]\nsocket.recv.assert_has_calls(calls)\n"
-}

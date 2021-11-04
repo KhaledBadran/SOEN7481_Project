@@ -1,9 +1,0 @@
-{
-    "functionName": "test_create_with_cryptographic_usage_mask",
-    "className": "TestProxyKmipClient",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_test_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a symmetric key can be created with proper inputs,\n        specifically testing that the cryptographic usage mask is correctly\n        sent with the request.\n        \"\"\"\nalgorithm = enums.CryptographicAlgorithm.AES\nlength = 256\nalgorithm_attribute = self.attribute_factory.create_attribute(enums.\n    AttributeType.CRYPTOGRAPHIC_ALGORITHM, algorithm)\nlength_attribute = self.attribute_factory.create_attribute(enums.\n    AttributeType.CRYPTOGRAPHIC_LENGTH, length)\nmasks = [enums.CryptographicUsageMask.ENCRYPT, enums.CryptographicUsageMask\n    .DECRYPT]\nmasks_given = [enums.CryptographicUsageMask.MAC_GENERATE, enums.\n    CryptographicUsageMask.MAC_VERIFY]\nmasks.extend(masks_given)\nmask_attribute = self.attribute_factory.create_attribute(enums.\n    AttributeType.CRYPTOGRAPHIC_USAGE_MASK, masks)\nkey_attributes = [algorithm_attribute, length_attribute, mask_attribute]\ntemplate = obj.TemplateAttribute(attributes=key_attributes)\nkey_id = 'aaaaaaaa-1111-2222-3333-ffffffffffff'\nstatus = enums.ResultStatus.SUCCESS\nresult = results.CreateResult(contents.ResultStatus(status), uuid=attr.\n    UniqueIdentifier(key_id))\nwith ProxyKmipClient() as client:\n    client.proxy.create.return_value = result\n    client.create(algorithm, length, cryptographic_usage_mask=masks_given)\n    client.proxy.create.assert_called_with(enums.ObjectType.SYMMETRIC_KEY,\n        template)\nmock.patch('kmip.pie.client.KMIPProxy', mock.MagicMock(spec_set=KMIPProxy))"
-}

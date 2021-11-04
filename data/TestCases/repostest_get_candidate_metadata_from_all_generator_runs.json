@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_candidate_metadata_from_all_generator_runs",
-    "className": "BatchTrialTest",
-    "fileName": "/facebook_&_Ax/ax_&_core_&_tests_&_test_batch_trial.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "gr_1 = get_generator_run()\ngr_2 = get_generator_run2()\nself.batch.add_generator_run(gr_1)\ngr_1 = self.batch._generator_run_structs[-1].generator_run\nself.batch.add_generator_run(gr_2)\ngr_2 = self.batch._generator_run_structs[-1].generator_run\ncand_metadata_expected = {a.name: gr_1.candidate_metadata_by_arm_signature[\n    a.signature] for a in gr_1.arms}\nself.assertEqual(self.batch._get_candidate_metadata_from_all_generator_runs\n    (), cand_metadata_expected)\nfor arm in self.batch.arms:\n    self.assertEqual(cand_metadata_expected[arm.name], self.batch.\n        _get_candidate_metadata(arm.name))\nself.assertRaises(ValueError, self.batch._get_candidate_metadata,\n    'this_is_not_an_arm')\ngr_3 = get_generator_run2()\nnew_cand_metadata = {a.signature: {'md_key': f'md_val_{a.signature}'} for a in\n    gr_3.arms}\ngr_3._candidate_metadata_by_arm_signature = new_cand_metadata\nself.batch.add_generator_run(gr_3)\ngr_3 = self.batch._generator_run_structs[-1].generator_run\ncand_metadata_expected.update({a.name: gr_1.\n    candidate_metadata_by_arm_signature[a.signature] for a in gr_1.arms})\nself.assertEqual(self.batch._get_candidate_metadata_from_all_generator_runs\n    (), cand_metadata_expected)\nfor arm in self.batch.arms:\n    self.assertEqual(cand_metadata_expected[arm.name], self.batch.\n        _get_candidate_metadata(arm.name))\n"
-}

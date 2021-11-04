@@ -1,9 +1,0 @@
-{
-    "functionName": "test_integration_points_surface_3d",
-    "className": "TestIntegrationPoints",
-    "fileName": "/oberbichler_&_ANurbs/tests_&_TestIntegrationPoints.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "model = an.Model()\nmodel.add_array(\n    \"\"\"[\n            {\n                \"type\": \"NurbsSurfaceGeometry3D\",\n                \"degree_u\": 2,\n                \"degree_v\": 1,\n                \"knots_u\": [0.0,0.0,5.0,10.0,10.0],\n                \"knots_v\": [0.0,20.0],\n                \"nb_poles_u\": 4,\n                \"nb_poles_v\": 2,\n                \"poles\": [[0.0,0.0,0.0],[0.0,10.0,0.0],[2.00900107273569,0.0,0.0],[4.0763840660860486,7.8742350860349752,0.0],[7.0668900221629363,0.0,0.0],[12.011764418152659,7.1771412301834934,0.0],[10.0,0.0,0.0],[15.0,10.0,0.0]]\n            }\n        ]\"\"\"\n    )\nsurface = model.get(0).data\nintegration_points = an.integration_points(degree=2, surface=surface)\nassert_array_almost_equal(integration_points, [(1.0566243270259357, \n    4.226497308103743, 11.759664385301264), (1.0566243270259357, \n    15.773502691896258, 17.31405070545194), (3.9433756729740645, \n    4.226497308103743, 10.883683768349144), (3.9433756729740645, \n    15.773502691896258, 15.000698744981156), (6.0566243270259355, \n    4.226497308103743, 10.603123001336892), (6.0566243270259355, \n    15.773502691896258, 12.7153914474524), (8.943375672974064, \n    4.226497308103743, 11.952054522910226), (8.943375672974064, \n    15.773502691896258, 9.795549688797168)])\nstaticmethod"
-}

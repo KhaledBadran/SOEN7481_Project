@@ -1,9 +1,0 @@
-{
-    "functionName": "testStatusQuo",
-    "className": "BatchTrialTest",
-    "fileName": "/facebook_&_Ax/ax_&_core_&_tests_&_test_batch_trial.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "tot_weight = sum(self.batch.weights)\nnew_sq = Arm(parameters={'w': 0.95, 'x': 1, 'y': 'foo', 'z': True})\nwith self.assertRaises(ValueError):\n    self.batch.set_status_quo_with_weight(new_sq, -1)\nwith self.assertRaises(NotImplementedError):\n    self.batch.status_quo = new_sq\nself.batch.set_status_quo_with_weight(new_sq, self.sq_weight)\nself.assertTrue(self.batch.status_quo == new_sq)\nself.assertEqual(self.batch.status_quo.name, 'status_quo_0')\nself.assertEqual(sum(self.batch.weights), tot_weight + self.sq_weight)\nself.batch.unset_status_quo()\nself.assertEqual(sum(self.batch.weights), tot_weight)\nself.experiment.status_quo = self.status_quo\nbatch2 = self.batch.clone()\nself.assertEqual(batch2.status_quo, self.experiment.status_quo)\nself.assertIsNone(batch2._status_quo_weight_override)\nself.assertTrue(batch2.status_quo not in batch2.arm_weights)\nself.assertEqual(sum(batch2.weights), sum(self.weights))\nwith self.assertRaises(ValueError):\n    self.batch.set_status_quo_with_weight(Arm(new_sq.parameters, name=\n        'new_name'), 1)\n"
-}

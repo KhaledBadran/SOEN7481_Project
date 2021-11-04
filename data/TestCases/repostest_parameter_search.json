@@ -1,9 +1,0 @@
-{
-    "functionName": "test_parameter_search",
-    "className": "TestTrexClassifier",
-    "fileName": "/univieCUBE_&_phenotrex/tests_&_test_ml.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test randomized parameter search.\n\n        :param trait_name:\n        :param classifier:\n        :return:\n        \"\"\"\ntraining_records, genotype, phenotype, group = self.test_load_data(trait_name,\n    False)\nclf = classifier(verb=True, random_state=RANDOM_STATE)\nclf_opt = clf.parameter_search(records=training_records, n_iter=3,\n    return_optimized=False, n_jobs=min(4, os.cpu_count()))\nassert isinstance(clf_opt, dict)\nwith TemporaryDirectory() as tmpdir:\n    param_path = Path(tmpdir) / 'params.json'\n    write_params_file(param_path, clf_opt)\n    assert param_path.is_file()\npytest.mark.parametrize('trait_name', trait_names, ids=trait_names)pytest.mark.parametrize('classifier', classifiers, ids=classifier_ids)"
-}

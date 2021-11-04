@@ -1,9 +1,0 @@
-{
-    "functionName": "test_authorize_token_with_session_object",
-    "className": "TestAuthClientAuthorizeToken",
-    "fileName": "/mozilla_&_PyFxA/fxa_&_tests_&_test_oauth.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "session = mock.Mock()\nsession.get_identity_assertion.return_value = 'IDENTITY'\ntoken = self.client.authorize_token(session)\nsession.get_identity_assertion.assert_called_once_with(audience=\n    TEST_SERVER_URL, service=self.client.client_id)\nself.assertEqual(token, 'izatoken')\nreq_body = json.loads(_decoded(responses.calls[0].request.body))\nself.assertEqual(req_body, {'assertion': 'IDENTITY', 'client_id': self.\n    client.client_id, 'state': AnyStringValue(), 'response_type': 'token'})\nresponses.activate"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_mapper_maxcut",
-    "className": "Test_mapper",
-    "fileName": "/QE-Lab_&_OpenQL/tests_&_test_mapper.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "v = 'maxcut'\nconfig = os.path.join(rootDir, 'test_mapper_rig.json')\nnum_qubits = 8\nprog_name = 'test_mapper_' + v\nkernel_name = 'kernel_' + v\nstarmon = ql.Platform('starmon', config)\nprog = ql.Program(prog_name, starmon, num_qubits, 0)\nk = ql.Kernel(kernel_name, starmon, num_qubits, 0)\nk.gate('cz', [1, 4])\nk.gate('cz', [1, 3])\nk.gate('cz', [3, 4])\nk.gate('cz', [3, 7])\nk.gate('cz', [4, 7])\nk.gate('cz', [6, 7])\nk.gate('cz', [5, 6])\nk.gate('cz', [1, 5])\nk.gate('x', [1])\nk.gate('x', [3])\nk.gate('x', [4])\nk.gate('x', [5])\nk.gate('x', [6])\nk.gate('x', [7])\nprog.add_kernel(k)\nprog.compile()\nGOLD_fn = os.path.join(rootDir, 'golden', prog.name + '.qisa')\nQISA_fn = os.path.join(output_dir, prog.name + '.qisa')\nassemble(QISA_fn)\nself.assertTrue(file_compare(QISA_fn, GOLD_fn))\n"
-}

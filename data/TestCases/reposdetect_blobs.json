@@ -1,9 +1,0 @@
-{
-    "functionName": "detect_blobs",
-    "className": null,
-    "fileName": "/PRIArobotics_&_HedgehogServer/hedgehog_&_server_&_vision_&___init__.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV_FULL)\nif min_hsv[0] <= max_hsv[0]:\n    mask = cv2.inRange(hsv, min_hsv, max_hsv)\nelse:\n    mask = cv2.inRange(hsv, (0, *min_hsv[1:3]), max_hsv) | cv2.inRange(hsv,\n        min_hsv, (255, *max_hsv[1:3]))\nmask = mask.reshape((*mask.shape, 1))\ncontours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.\n    CHAIN_APPROX_TC89_L1)\nblobs = []\nfor c in contours:\n    rect = cv2.boundingRect(c)\n    _, _, w, h = rect\n    if w < 3 or h < 3:\n        continue\n    m = cv2.moments(c)\n    m00, m10, m01 = (m[x] for x in ('m00', 'm10', 'm01'))\n    if m00 == 0:\n        continue\n    confidence = m00 / (w * h)\n    centroid = int(m10 / m00), int(m01 / m00)\n    blobs.append((rect, centroid, confidence))\ndef area(blob):\n    rect, _, _ = blob\n    _, _, w, h = rect\n    return w * h\nblobs.sort(key=area, reverse=True)\nreturn blobs, mask\n"
-}

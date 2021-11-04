@@ -1,9 +1,0 @@
-{
-    "functionName": "test_probabilistic_labels",
-    "className": null,
-    "fileName": "/nipy_&_PySurfer/surfer_&_tests_&_test_viz.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test plotting of probabilistic labels.\"\"\"\n_set_backend()\nbrain = Brain('fsaverage', 'lh', 'inflated', cortex='low_contrast')\nextra, subj_dir = _get_extra()\nbrain.add_label('BA1' + extra, color='darkblue')\nbrain.add_label('BA1' + extra, color='dodgerblue', scalar_thresh=0.5)\nbrain.add_label('BA45' + extra, color='firebrick', borders=True)\nbrain.add_label('BA45' + extra, color='salmon', borders=True, scalar_thresh=0.5\n    )\nlabel_file = pjoin(subj_dir, 'fsaverage', 'label', 'lh.BA6%s.label' % (extra,))\nprob_field = np.zeros_like(brain.geo['lh'].x)\nids, probs = nib.freesurfer.read_label(label_file, read_scalars=True)\nprob_field[ids] = probs\nbrain.add_data(prob_field, thresh=1e-05)\nbrain.data['colorbar'].number_of_colors = 10\nbrain.data['colorbar'].number_of_labels = 11\nbrain.close()\nrequires_fsaverage()"
-}

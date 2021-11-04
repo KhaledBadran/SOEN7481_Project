@@ -1,9 +1,0 @@
-{
-    "functionName": "test_bearer_validation_invalid_signature_with_symmetric_encryption",
-    "className": null,
-    "fileName": "/RobertoPrevato_&_GuardPost-JWT/tests_&_test_bearer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "key_id = '230498151c214b788dd97f22b85410a5'\nsecret_key = 'super_secret'\nhandler = JWTBearerTest([issuer], [audience], [InMemoryKeyProvider({key_id:\n    secret_key})])\ntoken = jwt.encode({'iss': issuer, 'aud': audience, 'some': 'payload'},\n    'another_key', algorithm=alg, headers={'kid': key_id})\nwith pytest.raises(JWTAuthorizationError):\n    await handler.authenticate({'access_token': token.decode()})\npytest.mark.parametrize('alg,issuer,audience', [['HS512', 'Hello', 'World'],\n    ['HS256', 'Hello', 'World'], ['HS512', 'Hello', 'World']])pytest.mark.asyncio"
-}

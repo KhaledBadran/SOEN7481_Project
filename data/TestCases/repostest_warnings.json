@@ -1,9 +1,0 @@
-{
-    "functionName": "test_warnings",
-    "className": "TestValidationMessages",
-    "fileName": "/hdoupe_&_ParamTools/paramtools_&_tests_&_test_parameters.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "params = TestParams()\nwith pytest.raises(ValidationError) as excinfo:\n    params.adjust({'str_choice_warn_param': 'not a valid choice'})\nassert params.warnings\nassert not params.errors\nmsg = [\n    'str_choice_warn_param \"not a valid choice\" must be in list of choices value0, value1.'\n    ]\nassert json.loads(excinfo.value.args[0])['warnings']['str_choice_warn_param'\n    ] == msg\nparams = TestParams()\nwith pytest.raises(ValidationError) as excinfo:\n    params.adjust({'int_warn_param': -1})\nassert params.warnings\nassert not params.errors\nmsg = [f'int_warn_param -1 < min 0 ']\nassert json.loads(excinfo.value.args[0])['warnings']['int_warn_param'] == msg\n"
-}

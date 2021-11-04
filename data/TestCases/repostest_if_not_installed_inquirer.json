@@ -1,9 +1,0 @@
-{
-    "functionName": "test_if_not_installed_inquirer",
-    "className": null,
-    "fileName": "/OpenSCAP_&_OVAL-visualization-as-graph/tests_&_test_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with mock.patch.dict(sys.modules, {'inquirer': None}):\n    src = 'test_data/ssg-fedora-ds-arf.xml'\n    regex = '_package_\\\\w+_removed'\n    client = get_client(src, regex)\n    client.isatty = True\n    out = client.run_gui_and_return_answers()\n    assert out is None\n    captured = capsys.readouterr()\n    assert captured.out == \"\"\"== The Rule IDs ==\n'xccdf_org.ssgproject.content_rule_package_abrt_removed\\\\b'\n'xccdf_org.ssgproject.content_rule_package_sendmail_removed\\\\b'\nYou haven't got installed inquirer lib. Please copy id rule with you want use and put it in command\n\"\"\"\n"
-}

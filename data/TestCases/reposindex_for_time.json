@@ -1,9 +1,0 @@
-{
-    "functionName": "index_for_time",
-    "className": "Brain",
-    "fileName": "/nipy_&_PySurfer/surfer_&_viz.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Find the data time index closest to a specific time point.\n\n        Parameters\n        ----------\n        time : scalar\n            Time.\n        rounding : 'closest' | 'up' | 'down'\n            How to round if the exact time point is not an index.\n\n        Returns\n        -------\n        index : int\n            Data time index closest to time.\n        \"\"\"\nif self.n_times is None:\n    raise RuntimeError('Brain has no time axis')\ntimes = self._times\ntmin = np.min(times)\ntmax = np.max(times)\nmax_diff = (tmax - tmin) / (len(times) - 1) / 2\nif time < tmin - max_diff or time > tmax + max_diff:\n    err = 'time = %s lies outside of the time axis [%s, %s]' % (time, tmin,\n        tmax)\n    raise ValueError(err)\nif rounding == 'closest':\n    idx = np.argmin(np.abs(times - time))\nelif rounding == 'up':\n    idx = np.nonzero(times >= time)[0][0]\nelif rounding == 'down':\n    idx = np.nonzero(times <= time)[0][-1]\nelse:\n    err = 'Invalid rounding parameter: %s' % repr(rounding)\n    raise ValueError(err)\nreturn idx\n"
-}

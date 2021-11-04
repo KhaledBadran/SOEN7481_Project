@@ -1,9 +1,0 @@
-{
-    "functionName": "test_get_volume_list_over_max_page_size",
-    "className": "PyU4VProvisioningTest",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_unit_tests_&_test_pyu4v_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test get_volume_list with return val > max page size.\"\"\"\nreturn_value = {'id': '123', 'count': 3, 'maxPageSize': 2, 'resultList': {\n    'result': [{'volumeId': str(self.data.device_id)}, {'volumeId': str(\n    self.data.device_id2)}, {'volumeId': str(self.data.device_id3)}]}}\npage_list = [[{'volumeId': self.data.device_id}, {'volumeId': self.data.\n    device_id2}], [{'volumeId': self.data.device_id3}]]\nwith mock.patch.object(self.provisioning, 'get_resource', return_value=\n    return_value):\n    with mock.patch.object(self.provisioning.common,\n        'get_iterator_page_list', side_effect=page_list):\n        vol_list = self.provisioning.get_volume_list()\n        ref_vol_list = [self.data.device_id, self.data.device_id2, self.\n            data.device_id3]\n        self.assertEqual(ref_vol_list, vol_list)\n"
-}

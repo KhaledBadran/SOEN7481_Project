@@ -1,9 +1,0 @@
-{
-    "functionName": "test_decrypt_on_operation_failure",
-    "className": "TestProxyKmipClient",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_test_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a KmipOperationFailure exception is raised when the\n        backend fails to decrypt data.\n        \"\"\"\nstatus = enums.ResultStatus.OPERATION_FAILED\nreason = enums.ResultReason.GENERAL_FAILURE\nmessage = 'Test failure message'\nresult = {'result_status': status, 'result_reason': reason,\n    'result_message': message}\nerror_message = str(KmipOperationFailure(status, reason, message))\nclient = ProxyKmipClient()\nclient.open()\nclient.proxy.decrypt.return_value = result\nargs = [b'\\x01\\x02\\x03\\x04']\nkwargs = {'uid': '1', 'cryptographic_parameters': {}, 'iv_counter_nonce':\n    b'\\x00\\x00\\x00\\x00'}\nself.assertRaisesRegex(KmipOperationFailure, error_message, client.decrypt,\n    *args, **kwargs)\nmock.patch('kmip.pie.client.KMIPProxy', mock.MagicMock(spec_set=KMIPProxy))"
-}

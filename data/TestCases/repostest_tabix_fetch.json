@@ -1,9 +1,0 @@
-{
-    "functionName": "test_tabix_fetch",
-    "className": "TestPrimerTabix",
-    "fileName": "/stjude_&_PrimerTK/test_&_python_tests_&_test_primer_tabix.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Fetches snp info and assigns to primers.\n        \"\"\"\nleft = pt.primer_range_left(self.pvcf['Sequence ID'], self.pvcf[\n    'Primer Rank'], self.pvcf['Chromosome'], self.pvcf['Primer Left Seq'],\n    self.pvcf['Position1'])\nnormalized = pt.match_pinfo_to_vcf(left, self.vcf_in)\nleft_snps = pt.tabix_fetch(normalized['Sequence ID'], normalized[\n    'Primer Rank'], normalized['Chromosome'], normalized['Position1'],\n    normalized['Position2'], self.vcf_in)\nself.assertEqual(len(left_snps), 20)\n"
-}

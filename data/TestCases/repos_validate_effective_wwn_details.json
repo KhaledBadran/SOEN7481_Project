@@ -1,9 +1,0 @@
-{
-    "functionName": "_validate_effective_wwn_details",
-    "className": "CITestProvisioning",
-    "fileName": "/MichaelMcAleer_&_PyU4V/PyU4V_&_tests_&_ci_tests_&_test_pyu4v_ci_provisioning.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Helper method for validating parsed effective wwn values.\n\n        :param reference_details: volume details -- dict\n        :param actual_details: parsed effective wwn details -- dict\n        \"\"\"\nself.assertIsInstance(actual_details, dict)\nself.assertIn(constants.VOLUME_ID, actual_details)\nself.assertIn(constants.WWN, actual_details)\nself.assertIn(constants.HAS_EFFECTIVE_WWN, actual_details)\nself.assertIn(constants.EFFECTIVE_WWN, actual_details)\nself.assertIn(constants.STORAGE_GROUP_ID, actual_details)\nself.assertEqual(reference_details[constants.VOLUME_ID_CAMEL], str(\n    actual_details[constants.VOLUME_ID][0]))\nself.assertEqual(reference_details[constants.WWN], str(actual_details[\n    constants.WWN][0]))\nself.assertEqual(str(reference_details[constants.HAS_EFFECTIVE_WWN]), str(\n    actual_details[constants.HAS_EFFECTIVE_WWN][0]))\nself.assertEqual(reference_details[constants.EFFECTIVE_WWN], str(\n    actual_details[constants.EFFECTIVE_WWN][0]))\nif constants.STORAGE_GROUP_ID_CAMEL in reference_details:\n    storage_group_reference = reference_details[constants.\n        STORAGE_GROUP_ID_CAMEL]\nelse:\n    storage_group_reference = ''\nself.assertEqual(str(storage_group_reference), str(actual_details[constants\n    .STORAGE_GROUP_ID][0]))\n"
-}

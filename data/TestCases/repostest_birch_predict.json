@@ -1,9 +1,0 @@
-{
-    "functionName": "test_birch_predict",
-    "className": null,
-    "fileName": "/FreeDiscovery_&_FreeDiscovery/freediscovery_&_tests_&_sklearn_compat_&_test_birch.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "rng = np.random.RandomState(0)\nX = generate_clustered_data(n_clusters=3, n_features=3,\n    n_samples_per_cluster=10)\nshuffle_indices = np.arange(30)\nrng.shuffle(shuffle_indices)\nX_shuffle = X[(shuffle_indices), :]\nbrc = Birch(n_clusters=4, threshold=1.0)\nbrc.fit(X_shuffle)\ncentroids = brc.subcluster_centers_\nassert_array_equal(brc.labels_, brc.predict(X_shuffle))\nnearest_centroid = pairwise_distances_argmin(X_shuffle, centroids)\nassert_almost_equal(v_measure_score(nearest_centroid, brc.labels_), 1.0)\n"
-}

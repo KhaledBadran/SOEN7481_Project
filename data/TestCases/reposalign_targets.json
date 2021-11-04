@@ -1,9 +1,0 @@
-{
-    "functionName": "align_targets",
-    "className": null,
-    "fileName": "/Lasagne_&_Lasagne/lasagne_&_objectives.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Helper function turning a target 1D vector into a column if needed.\n    This way, combining a network of a single output unit with a target vector\n    works as expected by most users, not broadcasting outputs against targets.\n\n    Parameters\n    ----------\n    predictions : Theano tensor\n        Expression for the predictions of a neural network.\n    targets : Theano tensor\n        Expression or variable for corresponding targets.\n\n    Returns\n    -------\n    predictions : Theano tensor\n        The predictions unchanged.\n    targets : Theano tensor\n        If `predictions` is a column vector and `targets` is a 1D vector,\n        returns `targets` turned into a column vector. Otherwise, returns\n        `targets` unchanged.\n    \"\"\"\nif getattr(predictions, 'broadcastable', None) == (False, True) and getattr(\n    targets, 'ndim', None) == 1:\n    targets = as_theano_expression(targets).dimshuffle(0, 'x')\nreturn predictions, targets\n"
-}

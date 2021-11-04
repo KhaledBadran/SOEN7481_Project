@@ -1,9 +1,0 @@
-{
-    "functionName": "test_search_fuzz",
-    "className": null,
-    "fileName": "/Microsoft_&_LMChallenge/lmchallenge_&_core_&_tests_&_test_errors.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "words = ['bird', 'Bird', 'bind', 'bard', 'Aird', 'gird', 'Hird', 'biro',\n    'byrd', 'birr', 'bord', 'birt', 'Gird', 'birs', 'birh', 'find', 'died',\n    'bill', 'hard', 'fire']\nsearch = errors.Search(words)\nconfig = errors.DEFAULT_CONFIG\nfor word in words:\n    for _ in range(10):\n        corrupt = errors.corrupt(config, word)\n        top = search(corrupt, 5)\n        last_top_score = errors.score(config, corrupt, top[-1])\n        for w in words:\n            score = errors.score(config, corrupt, w)\n            if w in top:\n                assert last_top_score <= score\n            else:\n                assert score <= last_top_score\n"
-}

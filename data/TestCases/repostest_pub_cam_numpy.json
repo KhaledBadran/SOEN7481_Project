@@ -1,9 +1,0 @@
-{
-    "functionName": "test_pub_cam_numpy",
-    "className": null,
-    "fileName": "/SimLeek_&_CV_PubSubs/tests_&_frame_&_test_frame_publishing.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with mock.patch('displayarray.frame.frame_publishing.uid_for_source',\n    new_callable=mock.MagicMock) as mock_uidfs, mock.patch.object(NpCam, 'read'\n    ) as mock_np_read, mock.patch.object(subd, 'register_cam'):\n    img = np.zeros((30, 40))\n    mock_np_read.side_effect = [(True, img), (True, img), (True, img), (\n        False, None)]\n    mock_uidfs.return_value = '0'\n    cam_0 = subd.CV_CAMS_DICT['0'] = subd.Cam('0')\n    with mock.patch.object(cam_0.frame_pub, 'publish') as cam_pub:\n        pub_cam_loop_opencv(img)\n        cam_pub.assert_has_calls([mock.call(img)] * 3)\n    subd.CV_CAMS_DICT = {}\n"
-}

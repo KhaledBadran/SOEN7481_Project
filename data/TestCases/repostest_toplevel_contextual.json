@@ -1,9 +1,0 @@
-{
-    "functionName": "test_toplevel_contextual",
-    "className": "DecoratorTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_decorators.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "template = Template(\n    \"\"\"\n            <%!\n                def bar(fn):\n                    def decorate(context):\n                        context.write(\"BAR\")\n                        fn()\n                        context.write(\"BAR\")\n                        return ''\n                    return decorate\n            %>\n\n            <%def name=\"foo()\" decorator=\"bar\">\n                this is foo\n            </%def>\n\n            ${foo()}\n        \"\"\"\n    )\nassert flatten_result(template.render()) == 'BAR this is foo BAR'\nassert flatten_result(template.get_def('foo').render()\n    ) == 'BAR this is foo BAR'\n"
-}

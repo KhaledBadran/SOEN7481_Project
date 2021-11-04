@@ -1,9 +1,0 @@
-{
-    "functionName": "test_sticky_initialisation",
-    "className": null,
-    "fileName": "/jamesross2_&_Bayesian-HMM/tests_&_test_hdphmm.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "emission_sequences = [[1, 2, 3] * 3] * 3\nhmm_sticky = bayesian_hmm.HDPHMM(emission_sequences, sticky=True)\nhmm_slippery = bayesian_hmm.HDPHMM(emission_sequences, sticky=False)\nhmm_sticky.initialise(20)\nhmm_slippery.initialise(20)\nassert 0 <= hmm_sticky.hyperparameters['kappa'] <= 1\nassert hmm_sticky.priors['kappa'] != (lambda : 0)\nassert hmm_slippery.hyperparameters['kappa'] == 0\nassert all(hmm_slippery.priors['kappa']() == 0 for _ in range(100))\n"
-}

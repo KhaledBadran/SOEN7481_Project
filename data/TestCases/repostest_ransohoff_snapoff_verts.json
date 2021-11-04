@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ransohoff_snapoff_verts",
-    "className": "CapillaryPressureTest",
-    "fileName": "/pmeal_&_OpenPNM/tests_&_unit_&_models_&_physics_&_CapillaryPressureTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "ws = op.Workspace()\nws.clear()\nbp = np.array([[0.25, 0.25, 0.25], [0.25, 0.75, 0.25], [0.75, 0.25, 0.25],\n    [0.75, 0.75, 0.25], [0.25, 0.25, 0.75], [0.25, 0.75, 0.75], [0.75, 0.25,\n    0.75], [0.75, 0.75, 0.75]])\nscale = 0.0001\nnp.random.seed(1)\np = (np.random.random([len(bp), 3]) - 0.5) / 1000\nbp += p\nfiber_rad = 2e-06\nbp = op.topotools.reflect_base_points(bp, domain_size=[1, 1, 1])\nprj = op.materials.VoronoiFibers(fiber_rad=fiber_rad, resolution=1e-06,\n    shape=[scale, scale, scale], points=bp * scale, name='test')\nnet = prj.network\ndel_geom = prj.geometries()['test_del']\nvor_geom = prj.geometries()['test_vor']\nf = op.models.physics.capillary_pressure.ransohoff_snap_off\nwater = op.phases.GenericPhase(network=net)\nwater['pore.surface_tension'] = 0.072\nwater['pore.contact_angle'] = 45\nphys1 = op.physics.GenericPhysics(network=net, geometry=del_geom, phase=water)\nphys1.add_model(propname='throat.snap_off', model=f, wavelength=fiber_rad)\nphys1.add_model(propname='throat.snap_off_pair', model=f, wavelength=\n    fiber_rad, require_pair=True)\nphys2 = op.physics.GenericPhysics(network=net, geometry=vor_geom, phase=water)\nphys2.add_model(propname='throat.snap_off', model=f, wavelength=fiber_rad)\nphys2.add_model(propname='throat.snap_off_pair', model=f, wavelength=\n    fiber_rad, require_pair=True)\nts = ~net['throat.interconnect']\nassert ~np.any(np.isnan(water['throat.snap_off'][ts]))\nassert np.any(~np.isnan(water['throat.snap_off_pair'][ts]))\n"
-}

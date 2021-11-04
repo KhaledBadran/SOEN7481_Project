@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ok_uk_produce_same_result",
-    "className": null,
-    "fileName": "/bsmurphy_&_PyKrige/tests_&_test_core.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "data, _, (uk_test_answer, gridx_ref, gridy_ref) = validation_ref\ngridx = np.linspace(1067000.0, 1072000.0, 100)\ngridy = np.linspace(241500.0, 244000.0, 100)\nok = OrdinaryKriging(data[:, (0)], data[:, (1)], data[:, (2)],\n    variogram_model='linear', verbose=False, enable_plotting=False)\nz_ok, ss_ok = ok.execute('grid', gridx, gridy, backend='vectorized')\nuk = UniversalKriging(data[:, (0)], data[:, (1)], data[:, (2)],\n    variogram_model='linear', verbose=False, enable_plotting=False)\nuk_non_exact = UniversalKriging(data[:, (0)], data[:, (1)], data[:, (2)],\n    variogram_model='linear', verbose=False, enable_plotting=False,\n    exact_values=False)\nz_uk, ss_uk = uk.execute('grid', gridx, gridy, backend='vectorized')\nassert_allclose(z_ok, z_uk)\nassert_allclose(ss_ok, ss_uk)\nz_uk, ss_uk = uk_non_exact.execute('grid', gridx, gridy, backend='vectorized')\nassert_allclose(z_ok, z_uk)\nassert_allclose(ss_ok, ss_uk)\nz_ok, ss_ok = ok.execute('grid', gridx, gridy, backend='loop')\nz_uk, ss_uk = uk.execute('grid', gridx, gridy, backend='loop')\nassert_allclose(z_ok, z_uk)\nassert_allclose(ss_ok, ss_uk)\nz_uk, ss_uk = uk_non_exact.execute('grid', gridx, gridy, backend='loop')\nassert_allclose(z_ok, z_uk)\nassert_allclose(ss_ok, ss_uk)\n"
-}

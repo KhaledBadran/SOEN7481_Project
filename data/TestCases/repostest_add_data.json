@@ -1,9 +1,0 @@
-{
-    "functionName": "test_add_data",
-    "className": "TestMakeData",
-    "fileName": "/Jhsmit_&_ColiCoords/test_&_test_data_models.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "testdata_int = np.round(np.random.rand(512, 512)).astype(int)\ntestdata_float = np.round(np.random.rand(512, 512)) * 2 ** 16 - 1\ntestdata_mov = np.round(np.random.rand(10, 512, 512)) * 2 ** 16 - 1\ndata = Data()\nwith self.assertRaises(TypeError):\n    data.add_data(testdata_float, dclass='binary')\ndata.add_data(testdata_int, dclass='binary')\nself.assertArrayEqual(testdata_int, data.data_dict['binary'])\nself.assertArrayEqual(testdata_int, data.binary_img)\nwith self.assertRaises(ValueError):\n    data.add_data(testdata_float.reshape(256, -1), 'fluorescence')\nwith self.assertRaises(ValueError):\n    data.add_data(testdata_int, dclass='binary', name='newbinaryname')\ndata.add_data(testdata_float, dclass='brightfield')\nwith self.assertRaises(ValueError):\n    data.add_data(testdata_float, dclass='brightfield')\nself.assertEqual(testdata_float.shape, data.shape)\ndata.add_data(testdata_mov, 'fluorescence', name='fluorescence_movie')\n"
-}

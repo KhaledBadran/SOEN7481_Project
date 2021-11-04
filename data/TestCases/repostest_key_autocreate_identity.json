@@ -1,9 +1,0 @@
-{
-    "functionName": "test_key_autocreate_identity",
-    "className": "TestSqlIdentityStorage",
-    "fileName": "/named-data_&_PyNDN2/tests_&_integration_tests_&_test_identity_methods.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "keyName1 = Name('/TestSqlIdentityStorage/KeyType/RSA/ksk-12345')\nidentityName = keyName1[:-1]\ndecodedKey = base64.b64decode(RSA_DER)\nself.identityStorage.addKey(keyName1, KeyType.RSA, Blob(decodedKey))\nself.identityStorage.setDefaultKeyNameForIdentity(keyName1)\nself.assertTrue(self.identityStorage.doesKeyExist(keyName1),\n    'Key was not added')\nself.assertTrue(self.identityStorage.doesIdentityExist(identityName),\n    'Identity for key was not automatically created')\nself.assertEqual(self.identityManager.getDefaultKeyNameForIdentity(\n    identityName), keyName1, 'Default key was not set on identity creation')\nwith self.assertRaises(SecurityException):\n    self.identityStorage.getDefaultCertificateNameForKey(keyName1)\nwith self.assertRaises(SecurityException):\n    self.identityManager.selfSign(keyName1)\nwith self.assertRaises(SecurityException):\n    self.identityStorage.getDefaultCertificateNameForKey(keyName1)\nwith self.assertRaises(SecurityException):\n    self.identityManager.getDefaultCertificateNameForIdentity(identityName)\nkeyName2 = self.identityManager.generateRSAKeyPairAsDefault(identityName)\ncert = self.identityManager.selfSign(keyName2)\nself.identityManager.addCertificateAsIdentityDefault(cert)\ncertName1 = self.identityManager.getDefaultCertificateNameForIdentity(\n    identityName)\ncertName2 = self.identityStorage.getDefaultCertificateNameForKey(keyName2)\nself.assertEqual(certName1, certName2,\n    'Key-certificate mapping and identity-certificate mapping are not consistent'\n    )\nself.keyChain.deleteIdentity(identityName)\nself.assertFalse(self.identityStorage.doesKeyExist(keyName1))\n"
-}

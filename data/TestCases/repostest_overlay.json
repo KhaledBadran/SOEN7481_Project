@@ -1,9 +1,0 @@
-{
-    "functionName": "test_overlay",
-    "className": null,
-    "fileName": "/nipy_&_PySurfer/surfer_&_tests_&_test_viz.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test plotting of overlay.\"\"\"\n_set_backend()\noverlay_file = pjoin(data_dir, 'lh.sig.nii.gz')\nbrain = Brain(*std_args)\nbrain.add_overlay(overlay_file)\nbrain.overlays['sig'].remove()\nbrain.add_overlay(overlay_file, min=5, max=20, sign='pos', opacity=0.7)\nsig1 = io.read_scalar_data(pjoin(data_dir, 'lh.sig.nii.gz'))\nsig2 = io.read_scalar_data(pjoin(data_dir, 'lh.alt_sig.nii.gz'))\nbrain.add_overlay(sig1, 4, 30, name='two-sided')\noverlay = brain.overlays_dict.pop('two-sided')[0]\nassert_array_equal(overlay.pos_bar.data_range, [4, 30])\nassert_array_equal(overlay.neg_bar.data_range, [-30, -4])\nassert overlay.pos_bar.reverse_lut\nassert not overlay.neg_bar.reverse_lut\noverlay.remove()\nthresh = 4\nsig1[sig1 < thresh] = 0\nsig2[sig2 < thresh] = 0\nconjunct = np.min(np.vstack((sig1, sig2)), axis=0)\nbrain.add_overlay(sig1, 4, 30, name='sig1')\nbrain.overlays['sig1'].pos_bar.lut_mode = 'Reds'\nbrain.overlays['sig1'].pos_bar.visible = False\nbrain.add_overlay(sig2, 4, 30, name='sig2')\nbrain.overlays['sig2'].pos_bar.lut_mode = 'Blues'\nbrain.overlays['sig2'].pos_bar.visible = False\nbrain.add_overlay(conjunct, 4, 30, name='conjunct')\nbrain.overlays['conjunct'].pos_bar.lut_mode = 'Purples'\nbrain.overlays['conjunct'].pos_bar.visible = False\nbrain.set_surf('white')\nbrain.close()\nrequires_fsaverage()"
-}

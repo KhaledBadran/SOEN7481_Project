@@ -1,9 +1,0 @@
-{
-    "functionName": "test_save_validates_imports_fail",
-    "className": "OWMTest",
-    "fileName": "/openworm_&_PyOpenWorm/tests_&_CommandTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with self.assertRaises(StatementValidationError):\n    a = 'http://example.org/mdc'\n    self._init_conf({DEFAULT_CONTEXT_KEY: a})\n    with patch('importlib.import_module') as im:\n\n        def f(ns):\n            stmt = MagicMock()\n            stmt.context.identifier = URIRef(a)\n            ns.context.add_statement(stmt)\n        im().test = f\n        self.cut.save('tests', 'test')\n"
-}

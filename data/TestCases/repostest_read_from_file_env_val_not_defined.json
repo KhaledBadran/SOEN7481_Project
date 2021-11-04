@@ -1,9 +1,0 @@
-{
-    "functionName": "test_read_from_file_env_val_not_defined",
-    "className": "ConfigureTest",
-    "fileName": "/openworm_&_PyOpenWorm/tests_&_ConfigureTest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with patch.dict('os.environ', (), clear=True):\n    tf = self.tempfile()\n    print('{\"z\": \"$ENV_VAR\"}', file=tf)\n    tf.close()\n    try:\n        c = Configure.open(tf.name)\n        self.assertIsNone(c['z'])\n    finally:\n        os.unlink(tf.name)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_loader_xtc",
-    "className": "TestStructurelib",
-    "fileName": "/pierrepo_&_PBxplore/pbxplore_&_tests_&_test_functions.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test for API load function on xtc files\n        \"\"\"\ntopol = os.path.join(here, 'test_data/barstar_md_traj.gro')\ntraj = os.path.join(here, 'test_data/barstar_md_traj.xtc')\nchains = list(pbx.chains_from_trajectory(traj, topol))\ncomment, chain = chains[0]\nref_comment = '{0} | frame 0'.format(traj)\nref_chain = 'Chain  / model : 355 atoms'\nassert ref_comment == comment\nassert ref_chain == format(chain)\ncomment, chain = chains[-1]\nref_comment = '{0} | frame 9'.format(traj)\nassert ref_comment == comment\nassert ref_chain == format(chain)\n"
-}

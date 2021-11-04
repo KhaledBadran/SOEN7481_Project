@@ -1,9 +1,0 @@
-{
-    "functionName": "test_policies_insert_append",
-    "className": null,
-    "fileName": "/pestanko_&_3scale-api-python/tests_&_integration_&_test_integration_policies.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "policies = proxy.policies.list()\npolicy_1 = {'name': 'logging', 'configuration': {}, 'version': 'builtin',\n    'enabled': True}\nproxy.policies.append(policy_1)\npolicies['policies_config'].append(policy_1)\nupdated_policies = proxy.policies.list()\nassert policies['policies_config'] == updated_policies['policies_config']\npolicy_2 = {'name': 'echo', 'configuration': {}, 'version': 'builtin',\n    'enabled': True}\nproxy.policies.insert(1, policy_2)\nupdated_policies['policies_config'].insert(1, policy_2)\nnewly_updated_policies = proxy.policies.list()\nassert updated_policies['policies_config'] == newly_updated_policies[\n    'policies_config']\n"
-}

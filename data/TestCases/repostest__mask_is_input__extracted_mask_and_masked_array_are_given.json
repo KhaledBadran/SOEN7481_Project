@@ -1,9 +1,0 @@
-{
-    "functionName": "test__mask_is_input__extracted_mask_and_masked_array_are_given",
-    "className": "TestSerialTrailsFromFrame",
-    "fileName": "/Jammy2211_&_PyAutoCTI/test_&_unit_&_charge_injection_&_test_ci_frame.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "pattern = ci_pattern.CIPatternUniform(normalization=1.0, regions=[(0, 3, 1,\n    4), (0, 3, 5, 8)])\nimage = np.array([[0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0],\n    [0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0], [0.0, 1.0, \n    2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0]])\nmask = np.array([[False, False, False, False, False, False, False, False, \n    False, False, False], [False, False, True, False, True, False, True, \n    False, False, False, False], [False, False, False, False, False, False,\n    False, True, False, True, False]])\nframe = ci_frame.ChInj(frame_geometry=ci_frame.FrameGeometry.\n    euclid_bottom_left(), ci_pattern=pattern)\ntrails = frame.serial_trails_arrays_from_frame(image, columns=(0, 3), mask=mask\n    )\nassert (trails[0] == np.array([[4.0, 5.0, 6.0], [4.0, 5.0, 6.0], [4.0, 5.0,\n    6.0]])).all()\nassert (trails[0].mask == np.array([[False, False, False], [True, False, \n    True], [False, False, False]])).all()\nassert (trails[1] == np.array([[8.0, 9.0, 10.0], [8.0, 9.0, 10.0], [8.0, \n    9.0, 10.0]])).all()\nassert (trails[1].mask == np.array([[False, False, False], [False, False, \n    False], [False, True, False]])).all()\n"
-}

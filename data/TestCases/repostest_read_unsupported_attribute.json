@@ -1,9 +1,0 @@
-{
-    "functionName": "test_read_unsupported_attribute",
-    "className": "TestAttributes",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_core_&_objects_&_test_objects.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that an AttributeNotSupported error is raised when an unsupported\n        attribute is parsed while reading in an Attributes structure from a\n        data stream. This can occur when an older attribute is no longer\n        supported by a newer version of KMIP, or vice versa.\n        \"\"\"\nattrs = objects.Attributes()\nself.assertEqual([], attrs.attributes)\nargs = self.unsupported_encoding,\nkwargs = {'kmip_version': enums.KMIPVersion.KMIP_2_0}\nself.assertRaisesRegex(exceptions.AttributeNotSupported,\n    'Attribute OPERATION_POLICY_NAME is not supported by KMIP 2.0.', attrs.\n    read, *args, **kwargs)\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "feature_request",
-    "className": "VisionHandler",
-    "fileName": "/PRIArobotics_&_HedgehogServer/hedgehog_&_server_&_handlers_&_vision.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "try:\n    conn = self._connections[ident]\nexcept KeyError:\n    raise FailedCommandError('camera is closed')\nelse:\n    if self._img is None:\n        raise FailedCommandError('no frame available')\n    if msg.channel in conn.channels:\n        channel_data = conn.channel_data[msg.channel]\n        packed = channel_data.get_packed(self._img, conn.channels[msg.channel])\n        return vision_msg.FeatureReply(msg.channel, packed)\n    else:\n        raise FailedCommandError(f'no such channel: {msg.channel}')\n_commands.register(vision_msg.FeatureRequest)"
-}

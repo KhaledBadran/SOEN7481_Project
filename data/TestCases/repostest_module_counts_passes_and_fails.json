@@ -1,9 +1,0 @@
-{
-    "functionName": "test_module_counts_passes_and_fails",
-    "className": null,
-    "fileName": "/DrSerpent_&_DrSerpent/tests_&_test_executor.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "example_directory_path = os.path.dirname(os.path.realpath(__file__)\n    ) + '/example_projects'\nfizzbuzz_directory = example_directory_path + '/fizzbuzz/example_tests'\nsys.path.append(fizzbuzz_directory)\nreset_sys_path(ORIGINAL_SYS_PATH)\nbroken_fizzbuzz_directory = (example_directory_path +\n    '/broken_fizzbuzz/example_tests')\nsys.path.append(broken_fizzbuzz_directory)\nfrom test_logic import test_fizz, test_buzz\nfrom test_broken import test_fail, test_error\nreset_sys_path(ORIGINAL_SYS_PATH)\nmodule_dictionary = {'module': 'empty_module', 'tests': [test_fizz,\n    test_buzz, test_fail, test_error]}\nold_stdout = sys.stdout\nsys.stdout = output = StringIO()\nresults = execute_module(module_dictionary)\nsys.stdout = old_stdout\nreturn Expect(results).to_equal({'Passed': 2, 'Failed': 2})\n"
-}

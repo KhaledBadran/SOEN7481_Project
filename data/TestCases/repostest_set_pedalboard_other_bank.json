@@ -1,9 +1,0 @@
-{
-    "functionName": "test_set_pedalboard_other_bank",
-    "className": "CurrentControllerTest",
-    "fileName": "/PedalPi_&_Application/test_&_controller_&_current_controller_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "bank = self.bank_with_pedalboard\nself.manager.append(bank)\noriginal_pedalboard = self._current.pedalboard\noriginal_bank = self._current.bank\nself._current.set_pedalboard(bank.pedalboards[0])\nself.assertEqual(bank.pedalboards[0], self._current.pedalboard)\nself.assertEqual(bank, self._current.bank)\nself.observer.on_current_pedalboard_changed.assert_called_with(bank.\n    pedalboards[0])\nself._current.set_pedalboard(original_pedalboard)\nself.assertEqual(original_pedalboard, self._current.pedalboard)\nself.assertEqual(original_bank, self._current.bank)\nself.observer.on_current_pedalboard_changed.assert_called_with(\n    original_pedalboard)\nself.manager.banks.remove(bank)\n"
-}

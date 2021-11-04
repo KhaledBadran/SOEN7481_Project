@@ -1,9 +1,0 @@
-{
-    "functionName": "test_find_sequence_whenerroroccured",
-    "className": "FleetTelematicsApiTest",
-    "fileName": "/abdullahselek_&_HerePy/tests_&_test_fleet_telematics_api.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "with open('testdata/models/fleet_telematics_unauthorized_error.json', 'r'\n    ) as f:\n    expected_response = f.read()\nresponses.add(responses.GET,\n    'https://wse.ls.hereapi.com/2/findsequence.json', expected_response,\n    status=200)\nstart = str.format('{0};{1},{2}', 'WiesbadenCentralStation', 50.0715, 8.2434)\nintermediate_destinations = [str.format('{0};{1},{2}',\n    'FranfurtCentralStation', 50.1073, 8.6647), str.format('{0};{1},{2}',\n    'DarmstadtCentralStation', 49.8728, 8.6326), str.format('{0};{1},{2}',\n    'FrankfurtAirport', 50.0505, 8.5698)]\nend = str.format('{0};{1},{2}', 'MainzCentralStation', 50.0021, 8.259)\nmodes = [herepy.RouteMode.fastest, herepy.RouteMode.car, herepy.RouteMode.\n    traffic_enabled]\nwith self.assertRaises(herepy.HEREError):\n    self._api.find_sequence(start=start, departure=\n        '2014-12-09T09:30:00%2b01:00', intermediate_destinations=\n        intermediate_destinations, end=end, modes=modes)\nresponses.activate"
-}

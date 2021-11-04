@@ -1,9 +1,0 @@
-{
-    "functionName": "test_cookie_dict",
-    "className": null,
-    "fileName": "/zeaphoo_&_cocopot_&_/tests_&_test_request.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Environ: Cookie dict \"\"\"\nt = dict()\nt['a=a'] = {'a': 'a'}\nt['a=a; b=b'] = {'a': 'a', 'b': 'b'}\nt['a=a; a=b'] = {'a': 'b'}\nfor k, v in t.items():\n    env = dict(copy.deepcopy(env1))\n    env.update({'HTTP_COOKIE': k})\n    req = Request(env)\n    for n in v:\n        assert v[n] == req.cookies[n]\n        assert v[n] == req.get_cookie(n)\n"
-}

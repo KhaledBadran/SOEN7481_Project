@@ -1,9 +1,0 @@
-{
-    "functionName": "_process_pore_voxels",
-    "className": "DelaunayGeometry",
-    "fileName": "/pmeal_&_OpenPNM/openpnm_&_materials_&_VoronoiFibers.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"\n        Function to count the number of voxels in the pore and fiber space\n        Which are assigned to each hull volume\n        \"\"\"\nfrom scipy.stats import itemfreq\nnum_Ps = self.num_pores()\npore_vox = np.zeros(num_Ps, dtype=int)\nfiber_vox = np.zeros(num_Ps, dtype=int)\npore_space = self._hull_image.copy()\nfiber_space = self._hull_image.copy()\npore_space[self._fiber_image == 0] = -1\nfiber_space[self._fiber_image == 1] = -1\nfreq_pore_vox = itemfreq(pore_space)\nfreq_pore_vox = freq_pore_vox[freq_pore_vox[:, (0)] > -1]\nfreq_fiber_vox = itemfreq(fiber_space)\nfreq_fiber_vox = freq_fiber_vox[freq_fiber_vox[:, (0)] > -1]\npore_vox[freq_pore_vox[:, (0)]] = freq_pore_vox[:, (1)]\nfiber_vox[freq_fiber_vox[:, (0)]] = freq_fiber_vox[:, (1)]\nself['pore.volume'] = pore_vox * self.network.resolution ** 3\ndel pore_space\ndel fiber_space\n"
-}

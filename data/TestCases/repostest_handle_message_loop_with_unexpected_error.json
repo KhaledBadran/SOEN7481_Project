@@ -1,9 +1,0 @@
-{
-    "functionName": "test_handle_message_loop_with_unexpected_error",
-    "className": "TestKmipSession",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_session.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the correct logging and error handling occurs when an\n        unexpected error is generated while processing a request.\n        \"\"\"\ndata = utils.BytearrayStream(())\ncert_mock.return_value = 'test_certificate'\nkmip_engine = engine.KmipEngine()\nkmip_engine._logger = mock.MagicMock()\nkmip_session = session.KmipSession(kmip_engine, None, None, name='name',\n    enable_tls_client_auth=False)\nkmip_session.authenticate = mock.MagicMock()\nkmip_session.authenticate.return_value = 'test', ['group A', 'group B']\nkmip_session._engine = mock.MagicMock()\ntest_exception = Exception('Unexpected error.')\nkmip_session._engine.process_request = mock.MagicMock(side_effect=\n    test_exception)\nkmip_session._logger = mock.MagicMock()\nkmip_session._connection = mock.MagicMock()\nkmip_session._receive_request = mock.MagicMock(return_value=data)\nkmip_session._send_response = mock.MagicMock()\nkmip_session._handle_message_loop()\nkmip_session._receive_request.assert_called_once_with()\nkmip_session._logger.warning.assert_called_once_with(\n    'An unexpected error occurred while processing request.')\nkmip_session._logger.exception.assert_called_once_with(test_exception)\nself.assertTrue(kmip_session._send_response.called)\nmock.patch('kmip.services.server.auth.get_certificate_from_connection')mock.patch('kmip.core.messages.messages.RequestMessage')"
-}

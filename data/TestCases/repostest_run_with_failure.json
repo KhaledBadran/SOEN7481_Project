@@ -1,9 +1,0 @@
-{
-    "functionName": "test_run_with_failure",
-    "className": "TestKmipSession",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_services_&_server_&_test_session.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that the correct logging and error handling occurs when the\n        thread encounters an error with the message handling loop.\n        \"\"\"\nkmip_session = session.KmipSession(None, None, None, 'name')\nkmip_session._logger = mock.MagicMock()\nkmip_session._connection = mock.MagicMock()\ntest_exception = Exception('test')\nkmip_session._handle_message_loop = mock.MagicMock(side_effect=[\n    test_exception, exceptions.ConnectionClosed()])\nkmip_session.run()\nkmip_session._logger.info.assert_any_call('Starting session: name')\nself.assertTrue(kmip_session._handle_message_loop.called)\nkmip_session._logger.info.assert_any_call('Failure handling message loop')\nkmip_session._logger.exception.assert_called_once_with(test_exception)\nkmip_session._connection.shutdown.assert_called_once_with(socket.SHUT_RDWR)\nkmip_session._connection.close.assert_called_once_with()\nkmip_session._logger.info.assert_called_with('Stopping session: name')\n"
-}

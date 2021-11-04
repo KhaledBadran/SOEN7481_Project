@@ -1,9 +1,0 @@
-{
-    "functionName": "test_status_post",
-    "className": null,
-    "fileName": "/halcy_&_Mastodon.py/tests_&_test_status.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "status = api.status_post('Toot!', visibility=visibility, spoiler_text=\n    spoiler_text)\ntry:\n    assert status\n    if visibility:\n        assert status['visibility'] == visibility\n    if spoiler_text:\n        assert status['spoiler_text'] == spoiler_text\nfinally:\n    api.status_delete(status['id'])\npytest.mark.vcr()pytest.mark.parametrize('visibility', (None, 'direct', 'private',\n    'unlisted', 'public', pytest.param('foobar', marks=pytest.mark.xfail(\n    strict=True))))pytest.mark.parametrize('spoiler_text', (None, 'Content warning'))"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_calc_map",
-    "className": null,
-    "fileName": "/PaulHancock_&_Aegean/tests_&_test_pprocess.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Test a map which creates a list\n    \"\"\"\npmap = pprocess.Map(limit=4)\ncalc = pmap.manage(pprocess.MakeParallel(calculate))\nanswers = list(range(0, 2 * N * N, 2))\nfor i in range(0, N):\n    for j in range(0, N):\n        calc(i, j)\nresults = sorted([m for m in pmap])\nif not np.all(results == answers):\n    raise AssertionError('Calc map failed to give correct results')\n"
-}

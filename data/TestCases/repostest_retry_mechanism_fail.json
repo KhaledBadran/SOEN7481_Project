@@ -1,9 +1,0 @@
-{
-    "functionName": "test_retry_mechanism_fail",
-    "className": "TestRetryDecorator",
-    "fileName": "/facebook_&_Ax/ax_&_utils_&_common_&_tests_&_test_executils.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Tests that the decorator does not retry too many times\n        \"\"\"\nlogger = logging.getLogger('test_retry_mechanism_fail')\nclass DecoratorTester:\n\n    def __init__(self):\n        self.xyz = 0\n\n    @retry_on_exception(retries=2, logger=logger)\n    def error_throwing_function(self):\n        return self.succeed_on_3rd_try()\n\n    def succeed_on_3rd_try(self):\n        if self.xyz < 2:\n            self.xyz += 1\n            raise KeyError\n        else:\n            return 'SUCCESS'\ndecorator_tester = DecoratorTester()\nwith self.assertRaises(KeyError):\n    decorator_tester.error_throwing_function()\n"
-}

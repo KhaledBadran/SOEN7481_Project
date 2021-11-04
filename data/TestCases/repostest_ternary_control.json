@@ -1,9 +1,0 @@
-{
-    "functionName": "test_ternary_control",
-    "className": "LexerTest",
-    "fileName": "/whiteclover_&_Choco/test_&_test_lexer.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "template = \"\"\"\n        % if x:\n            hi\n        % elif y+7==10:\n            there\n        % elif lala:\n            lala\n        % else:\n            hi\n        % endif\n\"\"\"\nnodes = Lexer(template).parse()\nself._compare(nodes, TemplateNode({}, [Text('\\n', (1, 1)), ControlLine('if',\n    'if x:', False, (2, 1)), Text('            hi\\n', (3, 1)), ControlLine(\n    'elif', 'elif y+7==10:', False, (4, 1)), Text(\"\"\"            there\n\"\"\",\n    (5, 1)), ControlLine('elif', 'elif lala:', False, (6, 1)), Text(\n    '            lala\\n', (7, 1)), ControlLine('else', 'else:', False, (8, \n    1)), Text('            hi\\n', (9, 1)), ControlLine('if', 'endif', True,\n    (10, 1))]))\n"
-}

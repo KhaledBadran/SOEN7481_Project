@@ -1,9 +1,0 @@
-{
-    "functionName": "test_create_on_invalid_cryptographic_usage_mask",
-    "className": "TestProxyKmipClient",
-    "fileName": "/OpenKMIP_&_PyKMIP/kmip_&_tests_&_unit_&_pie_&_test_client.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n        Test that a TypeError exception is raised when trying to create a\n        symmetric key with invalid cryptographic_usage_mask.\n        \"\"\"\nargs = [enums.CryptographicAlgorithm.AES, 256]\nkwargs = {'cryptographic_usage_mask': enums.CryptographicUsageMask.ENCRYPT}\nwith ProxyKmipClient() as client:\n    self.assertRaises(TypeError, client.create, *args, **kwargs)\nkwargs = {'cryptographic_usage_mask': [enums.CryptographicUsageMask.ENCRYPT, 1]\n    }\nwith ProxyKmipClient() as client:\n    self.assertRaises(TypeError, client.create, *args, **kwargs)\nmock.patch('kmip.pie.client.KMIPProxy', mock.MagicMock(spec_set=KMIPProxy))"
-}

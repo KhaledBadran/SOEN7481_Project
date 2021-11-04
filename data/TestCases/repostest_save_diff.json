@@ -1,9 +1,0 @@
-{
-    "functionName": "test_save_diff",
-    "className": null,
-    "fileName": "/openworm_&_PyOpenWorm/tests_&_OWMCLITest.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\" Change something and make a diff \"\"\"\nmodpath = p(self.testdir, 'test_module')\nos.mkdir(modpath)\nopen(p(modpath, '__init__.py'), 'w').close()\nself.writefile(p(modpath, 'command_test_save.py'),\n    \"\"\"        from test_module.monkey import Monkey\n\n\n        def owm_data(ns):\n            ns.context.add_import(Monkey.definition_context)\n            ns.context(Monkey)(bananas=55)\n        \"\"\"\n    )\nself.writefile(p(modpath, 'monkey.py'),\n    \"\"\"        from owmeta.dataObject import DataObject, DatatypeProperty\n\n\n        class Monkey(DataObject):\n            class_context = 'http://example.org/primate/monkey'\n\n            bananas = DatatypeProperty()\n            def identifier_augment(self):\n                return type(self).rdf_namespace['paul']\n\n            def defined_augment(self):\n                return True\n\n\n        __yarom_mapped_classes__ = (Monkey,)\n        \"\"\"\n    )\nprint(self.sh('owm save test_module.command_test_save'))\nassertRegexpMatches(self.sh('owm diff'), '<[^>]+>')\n"
-}

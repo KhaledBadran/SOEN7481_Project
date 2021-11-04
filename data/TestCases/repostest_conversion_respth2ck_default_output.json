@@ -1,9 +1,0 @@
-{
-    "functionName": "test_conversion_respth2ck_default_output",
-    "className": "TestConverterMain",
-    "fileName": "/pr-omethe-us_&_PyKED/pyked_&_tests_&_test_converters.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test respth2ck converter when used via command-line arguments.\n        \"\"\"\nfile_path = os.path.join('testfile_st.xml')\nfilename = pkg_resources.resource_filename(__name__, file_path)\nwith TemporaryDirectory() as temp_dir:\n    xml_file = copy(filename, temp_dir)\n    with pytest.warns(UserWarning) as record:\n        respth2ck(['-i', xml_file])\n    newfile = os.path.join(os.path.splitext(xml_file)[0] + '.yaml')\n    assert os.path.exists(newfile)\nm = str(record.pop(UserWarning).message)\nassert m == 'Using DOI to obtain reference information, rather than preferredKey.'\n"
-}

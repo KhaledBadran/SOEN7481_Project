@@ -1,9 +1,0 @@
-{
-    "functionName": "test_estimate_competence_kuncheva_ex_batch",
-    "className": null,
-    "fileName": "/Menelau_&_DESlib/deslib_&_tests_&_dcs_&_test_a_posteriori.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "query = np.ones((10, 2))\nclassifier = MagicMock()\nclassifier.predict.return_value = [1]\nclassifier.predict_proba.return_value = None\na_posteriori_test = APosteriori(pool_classifiers=classifier, k=\n    example_kuncheva['k'])\na_posteriori_test.n_classifiers_ = 1\na_posteriori_test.DSEL_processed_ = example_kuncheva['dsel_processed']\na_posteriori_test.DSEL_target_ = example_kuncheva['y_dependent']\na_posteriori_test.dsel_scores_ = example_kuncheva['dsel_scores']\na_posteriori_test.n_classes_ = example_kuncheva['n_classes']\nneighbors = example_kuncheva['neighbors']\ndistances = example_kuncheva['distances']\npredictions = [1]\ncompetences = a_posteriori_test.estimate_competence(query, neighbors,\n    distances, predictions=np.array(predictions))\nassert np.allclose(competences, 0.95, atol=0.01)\n"
-}

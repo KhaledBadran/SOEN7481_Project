@@ -1,9 +1,0 @@
-{
-    "functionName": "test_single_cdf_wrapper_output_consistency",
-    "className": null,
-    "fileName": "/NASA_&_MLMCPy/tests_&_model_&_test_CDFWrapperModel.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"\n    Runs CDF Wrapper evaluate function for same samples twice to ensure\n    output is consistent.\n    \"\"\"\ngrid_size = 100\nnum_samples = 400\ngrid = np.linspace(8, 25, grid_size)\ncdfw = CDFWrapperModel(models_from_data[model_num], grid)\ninput_samples = data_input.draw_samples(num_samples)\noutputs1 = np.zeros((num_samples, grid_size))\noutputs2 = np.zeros_like(outputs1)\nfor i, sample in enumerate(input_samples):\n    outputs1[i] = cdfw.evaluate(sample)\nfor i, sample in enumerate(input_samples):\n    outputs2[i] = cdfw.evaluate(sample)\nassert np.array_equal(outputs1, outputs2)\npytest.mark.parametrize('model_num', [0, 1, 2])"
-}

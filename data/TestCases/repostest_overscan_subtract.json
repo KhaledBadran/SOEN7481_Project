@@ -1,9 +1,0 @@
-{
-    "functionName": "test_overscan_subtract",
-    "className": null,
-    "fileName": "/pypeit_&_PypeIt/pypeit_&_tests_&_test_processimage.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "one_file = deimos_flat_files[0]\nspectograph = load_spectrograph('keck_deimos')\ndet = 3\nrawImage = rawimage.RawImage(one_file, spectograph, det)\nrawImage.par = spectograph.default_pypeit_par()['scienceframe']['process']\npre_sub = rawImage.image.copy()\nrawImage.subtract_overscan()\noscan = np.median(pre_sub - rawImage.image)\nassert np.isclose(oscan, 1001.2, rtol=0.01)\nrawImage.trim()\nassert rawImage.steps['subtract_overscan']\nassert rawImage.steps['trim']\nassert rawImage.image.shape == (4096, 2048)\ndev_suite_required"
-}

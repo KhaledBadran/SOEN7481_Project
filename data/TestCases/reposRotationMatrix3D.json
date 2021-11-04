@@ -1,9 +1,0 @@
-{
-    "functionName": "RotationMatrix3D",
-    "className": null,
-    "fileName": "/jakob-lass_&_MJOLNIR/MJOLNIR_&_Data_&_Mask.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": false,
-    "Body": "\"\"\"Generate 3D rotation matrix given angle and rotation axis\"\"\"\nif deg == True:\n    theta = np.deg2rad(theta)\nif n is None:\n    M = np.eye((3, 3))\nelse:\n    n = np.array(n, dtype=float)\n    n *= 1.0 / np.linalg.norm(n)\n    cost = np.cos(theta)\n    sint = np.sin(theta)\n    M = np.zeros((3, 3))\n    M[0, 0] = cost + n[0] ** 2 * (1 - cost)\n    M[0, 1] = n[0] * n[1] * (1 - cost) - n[2] * sint\n    M[0, 2] = n[0] * n[2] * (1 - cost) + n[1] * sint\n    M[1, 0] = n[0] * n[1] * (1 - cost) + n[2] * sint\n    M[1, 1] = cost + n[1] ** 2 * (1 - cost)\n    M[1, 2] = n[1] * n[2] * (1 - cost) - n[0] * sint\n    M[2, 0] = n[0] * n[2] * (1 - cost) - n[1] * sint\n    M[2, 1] = n[1] * n[2] * (1 - cost) + n[0] * sint\n    M[2, 2] = cost + n[2] ** 2 * (1 - cost)\nreturn M\n"
-}

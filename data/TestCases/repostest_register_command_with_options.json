@@ -1,9 +1,0 @@
-{
-    "functionName": "test_register_command_with_options",
-    "className": "TestStartupHook",
-    "fileName": "/cournape_&_Bento/bentomakerlib_&_tests_&_test_bentomaker.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "bscript = \"\"\"from bento.commands import hooks\nfrom bento.commands.core import Command\nfrom bento.commands.options import OptionsContext, Option\n\nclass DocCommand(Command):\n    def run(self, context):\n        pass\n\n@hooks.startup\ndef startup(context):\n    cmd = DocCommand()\n    context.register_command(\"doc\", cmd)\n\n    options_context = OptionsContext.from_command(cmd)\n    options_context.add_option(Option(\"--some-weird-option\"))\n    context.register_options_context(\"doc\", options_context)\n\"\"\"\nself.top_node.make_node('bscript').write(bscript)\nglobal_context = GlobalContext(None)\noptions_context = create_global_options_context()\npopts = parse_global_options(options_context, ['doc'])\n_wrapped_main(global_context, popts, self.run_node, self.top_node, self.\n    build_node)\np = global_context.retrieve_options_context('doc').parser\no, a = p.parse_args(['--some-weird-option=46'])\nself.assertEqual(o.some_weird_option, '46')\n"
-}

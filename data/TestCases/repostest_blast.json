@@ -1,9 +1,0 @@
-{
-    "functionName": "test_blast",
-    "className": "TestsRNADetection",
-    "fileName": "/Sung-Huan_&_ANNOgesic/tests_&_test_srna.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "self.srna.helper.merge_blast_out = self.mock.mock_merge_blast_out\nsr.extract_blast = self.mock.mock_extract_blast\nself.srna._run_blast = self.mock.mock_run_blast\nself.srna._run_format = self.mock.mock_run_format\ngen_file(os.path.join(self.out, 'tmp_basic_test'), self.example.srna_file)\ngen_file(os.path.join(self.out, 'tmp_nr_test'), 'test')\ngen_file(os.path.join(self.fastas, 'tmp/test.fa'), \"\"\">test\nAAATTTGGGCCC\"\"\")\nargs = self.mock_args.mock()\nargs.blast_path = 'test'\nargs.para_blast = 1\nlog = open(os.path.join(self.test_folder, 'test.log'), 'w')\nargs.fastas = self.fastas\nargs.out_folder = self.out\nargs.blast_score_s = 0\nargs.blast_score_n = 0\nself.srna._blast('database', False, 'dna', args, ['test'], 'blast_all',\n    'nr', 0.0001, 'tss', log)\ndatas = import_data(os.path.join(self.out, 'tmp_basic_test'))\nself.assertEqual('\\n'.join(datas), 'test')\n"
-}

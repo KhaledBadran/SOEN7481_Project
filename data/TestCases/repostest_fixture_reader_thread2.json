@@ -1,9 +1,0 @@
-{
-    "functionName": "test_fixture_reader_thread2",
-    "className": null,
-    "fileName": "/fabioz_&_PyDev.Debugger/tests_python_&_test_fixtures.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "sock = _DummySocket()\nreader_thread = ReaderThread(sock)\nreader_thread.start()\njson_part = json.dumps({'key': 'val'})\njson_part = json_part.replace(':', ':\\n')\nmsg = json_part\nhttp = 'Content-Length: %s\\r\\n\\r\\n%s' % (len(msg), msg)\nsock.put(\"\"\"msg1\nmsg2\nmsg3\n\"\"\" + http + http)\nassert reader_thread.get_next_message('check 1') == 'msg1'\nassert reader_thread.get_next_message('check 2') == 'msg2'\nassert reader_thread.get_next_message('check 3') == 'msg3'\nassert reader_thread.get_next_message('check 4') == json_part\nassert reader_thread.get_next_message('check 5') == json_part\n"
-}

@@ -1,9 +1,0 @@
-{
-    "functionName": "test_generate_sparse_matrices",
-    "className": null,
-    "fileName": "/Hoohm_&_CITE-seq-Count/tests_&_test_processing.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "umi_results_matrix, read_results_matrix = processing.generate_sparse_matrices(\n    pytest.corrected_results, pytest.ordered_tags_map, set([\n    'ACTGTTTTATTGGCCT', 'TTCATAAGGTAGGGAT']))\nassert umi_results_matrix.shape == (4, 2)\nassert read_results_matrix.shape == (4, 2)\nread_results_matrix = read_results_matrix.tocsr()\ntotal_reads = 0\nfor i in range(read_results_matrix.shape[0]):\n    for j in range(read_results_matrix.shape[1]):\n        total_reads += read_results_matrix[i, j]\nassert total_reads == 12\npytest.mark.dependency(depends=['test_correct_umis'])"
-}

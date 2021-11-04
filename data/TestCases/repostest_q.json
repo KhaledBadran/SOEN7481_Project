@@ -1,9 +1,0 @@
-{
-    "functionName": "test_q",
-    "className": null,
-    "fileName": "/OMS-NetZero_&_FAIR/tests_&_unit_&_unit_test.py",
-    "projectName": "repos",
-    "Label": false,
-    "isTest": true,
-    "Body": "\"\"\"Test that separating out the q-calculation function does not affect\n    results, and that both constant and time-varying values work.\n\n    If no other tests break, then this is integrated correctly.\"\"\"\nnt = 10\ntcrecs = np.array([1.75, 3.0])\nd = np.array([4.1, 239.0])\nf2x = 3.71\ntcr_dbl = np.log(2.0) / np.log(1.01)\nq = fair.forward.calculate_q(tcrecs, d, f2x, tcr_dbl, nt)\nassert q.shape == (nt, 2)\nassert np.all(q[:, (0)] == np.mean(q[:, (0)]))\nassert np.all(q[:, (1)] == np.mean(q[:, (1)]))\ntcrecs = np.empty((nt, 2))\ntcrecs[:, (0)] = np.linspace(1.65, 1.85, nt)\ntcrecs[:, (1)] = np.linspace(2.8, 4.0, nt)\nq = fair.forward.calculate_q(tcrecs, d, f2x, 70.0, nt)\nassert q.shape == (nt, 2)\nassert np.any(q[:, (0)] != np.mean(q[:, (0)]))\nassert np.any(q[:, (1)] != np.mean(q[:, (1)]))\ntcrecs = np.array([1.75, 3.0, np.pi])\nwith pytest.raises(ValueError):\n    q = fair.forward.calculate_q(tcrecs, d, f2x, tcr_dbl, nt)\ntcrecs = np.empty((nt, 2))\ntcrecs[:, (0)] = np.linspace(1.65, 1.85, nt)\ntcrecs[:, (1)] = np.linspace(2.8, 4.0, nt)\nwith pytest.raises(ValueError):\n    q = fair.forward.calculate_q(tcrecs, d, f2x, tcr_dbl, nt + 1)\n"
-}
