@@ -42,15 +42,13 @@ class Result:
 
 
 TRUE_FALSE_SMELLS = [
-    "ConditionalTestLogic",
-    "DuplicateAssertion",
     "EmptyTest",
     "ExceptionHandling",
     "IgnoredTest",
     "MagicNumberTest",
-    "RedundantPrint",
     "SleepyTest",
     "SuboptimalAssert",
+    "RedundantPrint",
 ]
 
 ALL_SMELLS = [
@@ -93,7 +91,7 @@ def find_UnknownTest_functions(smell_details: List[List]) -> List[str]:
     """
     Given the details from an UnknownTest smell, this method returns the functions that have the smell
     """
-    return [item[0] for item in smell_details if item[1] == '0']
+    return [item[0] for item in smell_details if item[1] == "0"]
 
 
 def find_LackCohesion_functions(smell_details: Dict) -> List[str]:
@@ -101,8 +99,8 @@ def find_LackCohesion_functions(smell_details: Dict) -> List[str]:
     Given the details from an LackCohesion smell, this method returns the functions that have the smell
     """
     func_names = list()
-    threshold = smell_details['threshold']
-    cosine_similarity_scores = smell_details['cosineSimilarityScores']
+    threshold = smell_details["threshold"]
+    cosine_similarity_scores = smell_details["cosineSimilarityScores"]
 
     for cosine_similarity_score in cosine_similarity_scores:
         # if the similarity is lower than the threshold, append both functions (similar functions)
@@ -124,18 +122,18 @@ def find_AssertionRoulette_functions(smell_details: Dict) -> List[str]:
     """
     Given the details from an AssertionRoulette smell, this method returns the functions that have the smell
     """
-    assertion_calls: List = smell_details['assertionCallsInTests']
-    assertion_statements: List = smell_details['assertStatementsInTests']
+    assertion_calls: List = smell_details["assertionCallsInTests"]
+    assertion_statements: List = smell_details["assertStatementsInTests"]
 
     func_names = list()
 
     for assertion_call in assertion_calls:
-        calls = assertion_call[1].replace(']', '').replace('[', '').split(',')
+        calls = assertion_call[1].replace("]", "").replace("[", "").split(",")
         if len(calls) > 1:
             func_names.append(assertion_call[0])
 
     for assertion_statement in assertion_statements:
-        statements = assertion_statement[1].replace(']', '').replace('[', '').split(',')
+        statements = assertion_statement[1].replace("]", "").replace("[", "").split(",")
         if len(statements) > 1:
             func_names.append(assertion_statement[0])
 
@@ -146,14 +144,41 @@ def find_RedundantAssertion_functions(smell_details: Dict) -> List[str]:
     """
     Given the details from an RedundantAssertion smell, this method returns the functions that have the smell
     """
-    redundant_calls: List = smell_details['testMethodHaveRedundantAssertCall']
-    redundant_statements: List = smell_details['testMethodHaveRedundantAssertStatement']
+    redundant_calls: List = smell_details["testMethodHaveRedundantAssertCall"]
+    redundant_statements: List = smell_details["testMethodHaveRedundantAssertStatement"]
 
     func_names = list()
-    func_names += [call[0] for call in redundant_calls if call[1] != '0']
-    func_names += [statement[0] for statement in redundant_statements if statement[1] != '0']
+    func_names += [call[0] for call in redundant_calls if call[1] != "0"]
+    func_names += [
+        statement[0] for statement in redundant_statements if statement[1] != "0"
+    ]
 
     return list(set(func_names))
+
+
+def find_ConditionalTestLogic_functions(smell_details: Dict) -> List[str]:
+    """
+    Given the details from an ConditionalTestLogic smell, this method returns the functions that have the smell
+    """
+    all_functions: List = (
+        smell_details["testHasConditionalTestLogic"]
+        + smell_details["testHasComprehension"]
+    )
+
+    return list({item[0] for item in all_functions if item[1] == "true"})
+
+
+def find_DuplicateAssertion_functions(smell_details: Dict) -> List[str]:
+    """
+    Given the details from an ConditionalTestLogic smell, this method returns the functions that have the smell
+    """
+    all_functions: List = (
+        smell_details["testHasDuplicateAssertCall"]
+        + smell_details["testHasDuplicateAssertStatement"]
+    )
+
+    return list({item[0] for item in all_functions if item[1] == "true"})
+
 
 def create_class_function_dict() -> dict:
     return dict((test_smell, False) for test_smell in ALL_SMELLS)
@@ -162,18 +187,22 @@ def create_class_function_dict() -> dict:
 def find_smelly_functions(test_smell: str, test_smell_details) -> List[str]:
     if test_smell in TRUE_FALSE_SMELLS:
         return find_true_functions(test_smell_details)
-    elif test_smell == 'ObscureInLineSetup':
+    elif test_smell == "ObscureInLineSetup":
         return find_ObscureInLineSetup_functions(test_smell_details)
-    elif test_smell == 'UnknownTest':
+    elif test_smell == "UnknownTest":
         return find_UnknownTest_functions(test_smell_details)
-    elif test_smell == 'LackCohesion':
+    elif test_smell == "LackCohesion":
         return find_LackCohesion_functions(test_smell_details)
-    elif test_smell == 'GeneralFixture':
+    elif test_smell == "GeneralFixture":
         return find_GeneralFixture_functions(test_smell_details)
-    elif test_smell == 'AssertionRoulette':
+    elif test_smell == "AssertionRoulette":
         return find_AssertionRoulette_functions(test_smell_details)
-    elif test_smell == 'RedundantAssertion':
+    elif test_smell == "RedundantAssertion":
         return find_RedundantAssertion_functions(test_smell_details)
+    elif test_smell == "ConditionalTestLogic":
+        return find_ConditionalTestLogic_functions(test_smell_details)
+    elif test_smell == "DuplicateAssertion":
+        return find_DuplicateAssertion_functions(test_smell_details)
 
     return []
 
@@ -190,20 +219,20 @@ def extract_JSON_info(path_to_json_file: Path) -> List:
         result = Result.from_json(json_str)
     json_info = []
     for test_file, test_case in (
-            (tf, tc) for tf in result.result for tc in tf.test_cases
+        (tf, tc) for tf in result.result for tc in tf.test_cases
     ):
         test_case_functions = {}
         test_case_information = [path_to_json_file.stem, test_file.name, test_case.name]
 
-        detector_results = sorted(
-            test_case.detector_results, key=lambda dr: dr.name
-        )
+        detector_results = sorted(test_case.detector_results, key=lambda dr: dr.name)
 
         smelly_results = (result for result in detector_results if result.has_smell)
 
         for detector_result in smelly_results:
 
-            smelly_functions = find_smelly_functions(detector_result.name, detector_result.detail)
+            smelly_functions = find_smelly_functions(
+                detector_result.name, detector_result.detail
+            )
 
             for smelly_function in smelly_functions:
 
@@ -227,7 +256,9 @@ def extract_JSON_info(path_to_json_file: Path) -> List:
 def save_to_csv(data: List, output_dir: Path, file_name: str) -> None:
     if len(data) != 0:
         df = pd.DataFrame(
-            data, columns=["repo_name", "test_file", "test_case", 'test_function'] + ALL_SMELLS
+            data,
+            columns=["repo_name", "test_file", "test_case", "test_function"]
+            + ALL_SMELLS,
         )
         df.to_csv(output_dir / f"{file_name}.csv", index=False)
 
