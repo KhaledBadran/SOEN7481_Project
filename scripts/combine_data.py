@@ -3,6 +3,8 @@
 """
 This script combines the test smell, vocabulary, and flakiness data all into a single csv
 """
+import os
+from typing import List
 
 import requests
 from pathlib import Path
@@ -17,8 +19,9 @@ from typeguard import typechecked
 DATA_FOLDER: Path = Path("..", "data")
 VOCABULARY_DATA_FILE: Path = Path("vocabulary", "data_file.csv")
 TEST_SMELLS_DATA_FILE: Path = Path("repos_csvs", "merged_csvs.csv")
-TEST_FLAKINESS_DATA_FILE: Path = Path("python_flaky_tests", "active_repos.csv")
+TEST_FLAKINESS_DATA_FILE: Path = Path("python_flaky_tests", "active_repos_clean.csv")
 OUTPUT_DATA_FILE: Path = Path("oracle", "oracle.csv")
+REPOS_DIR: Path = Path('repos')
 
 
 # From file path in vocabulary dataframe (ex: https://github.com/tensorflow/tensorflow)
@@ -114,25 +117,16 @@ def create_test_flakiness_df() -> pd.DataFrame:
     test_flakiness_file: Path = Path.joinpath(DATA_FOLDER, TEST_FLAKINESS_DATA_FILE)
     test_flakiness_df_: pd.DataFrame = pd.read_csv(test_flakiness_file)
 
-    # rename columns
-    test_flakiness_df_.rename(
-        columns={
-            "Test_filename": "file_name",
-            "Test_funcname": "func_name",
-            "Test_classname": "class_name",
-        },
-        inplace=True,
-    )
+    # find downloaded repos
+    repos_path: Path = Path.joinpath(DATA_FOLDER, REPOS_DIR)
 
-    test_flakiness_df_["repo_name"] = test_flakiness_df_["Project_URL"].apply(
-        get_repo_name_from_url
-    )
+    # get the direct subdirectories from the repos directory in order to find the names of all projects
+    all_repos: List[str] = [f.name for f in os.scandir(repos_path) if f.is_dir()]
+
+    # filter dataframe to keep only repos that appear as a subdirectory (downloaded repos)
+    test_flakiness_df_ = test_flakiness_df_[test_flakiness_df_['repo_name'].isin(all_repos)]
 
     test_flakiness_df_["file_name"] = test_flakiness_df_["file_name"].astype(str)
-    test_flakiness_df_["file_name"] = test_flakiness_df_["file_name"].apply(
-        update_file_name
-    )
-    test_flakiness_df_["flaky"] = test_flakiness_df_.apply(determine_flakiness, axis=1)
 
     # keep releavant columns only
     test_flakiness_df_ = test_flakiness_df_[
