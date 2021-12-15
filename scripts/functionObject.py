@@ -1,4 +1,4 @@
-class FunctionObject():
+class FunctionObject:
     functionName = ""
     className = ""
     fileName = ""
@@ -53,7 +53,10 @@ class FunctionObject():
         self.isTest = status
 
     def __eq__(self, other):
-        if self.functionName == other.functionName and self.className == other.className:
+        if (
+            self.functionName == other.functionName
+            and self.className == other.className
+        ):
             return True
         else:
             return False
@@ -72,7 +75,14 @@ class FunctionObject():
         print("  body:", self.body)
 
     def toMinString(self):
-        print(str(self.projectName) + str(self.fileName) + "::" + str(self.className) + "::" + str(self.functionName))
+        print(
+            str(self.projectName)
+            + str(self.fileName)
+            + "::"
+            + str(self.className)
+            + "::"
+            + str(self.functionName)
+        )
 
     def toJSON(self):
         json = {
@@ -82,6 +92,6 @@ class FunctionObject():
             "projectName": self.projectName,
             "Label": self.isMarkedFlaky,
             "isTest": self.isTest,
-            "Body": self.body
+            "Body": self.body,
         }
         return json

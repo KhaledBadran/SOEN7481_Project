@@ -11,6 +11,7 @@ from numpy import random
 from time import sleep
 from tqdm import tqdm
 from bs4 import UnicodeDammit
+
 # from typeguard import typechecked
 import numpy as np
 
@@ -29,8 +30,9 @@ VOCABULARY_DATA_FILE: Path = Path("vocabulary", "data_file.csv")
 TEST_SMELLS_DATA_FILE: Path = Path("repos_csvs", "merged_csvs.csv")
 TEST_FLAKINESS_DATA_FILE: Path = Path("python_flaky_tests", "active_repos.csv")
 OUTPUT_DATA_FILE: Path = Path("oracle", "oracle.csv")
-TEST_FLAKINESS_DATA_FILE_CLEANED: Path = Path("python_flaky_tests", "active_repos_clean.csv")
-
+TEST_FLAKINESS_DATA_FILE_CLEANED: Path = Path(
+    "python_flaky_tests", "active_repos_clean.csv"
+)
 
 
 # From file path in vocabulary dataframe (ex: https://github.com/tensorflow/tensorflow)
@@ -171,19 +173,19 @@ test_flakiness.shape
 # In[236]:
 
 
-tem=test_flakiness
+tem = test_flakiness
 
 
 # In[237]:
 
 
-#test_flakiness.to_csv(str(Path(DATA_FOLDER, OUTPUT_DATA_FILE)))
+# test_flakiness.to_csv(str(Path(DATA_FOLDER, OUTPUT_DATA_FILE)))
 
 
 # In[275]:
 
 
-test_flakiness=tem
+test_flakiness = tem
 
 
 # In[276]:
@@ -197,8 +199,8 @@ test_flakiness=tem
 # In[285]:
 
 
-# remove all rows with Null Class 
-test_flakiness=test_flakiness[~test_flakiness['class_name'].isnull()]
+# remove all rows with Null Class
+test_flakiness = test_flakiness[~test_flakiness["class_name"].isnull()]
 test_flakiness
 
 
@@ -207,17 +209,16 @@ test_flakiness
 
 # update class_name. tests.test_camera.TestCamera    to TestCameratest_flakiness
 for i in test_flakiness.index:
-    name=test_flakiness['class_name'][i]
-#     print(name)
-    ind=name.rfind('.')
-    if ind>0:
-        
-        test_flakiness['class_name'][i]=name[ind+1:]
-    elif ind<=0:
-#         print(name,'----')
-#         print(test_flakiness['class_name'][i])
-        test_flakiness['class_name'][i]=name
-       
+    name = test_flakiness["class_name"][i]
+    #     print(name)
+    ind = name.rfind(".")
+    if ind > 0:
+
+        test_flakiness["class_name"][i] = name[ind + 1 :]
+    elif ind <= 0:
+        #         print(name,'----')
+        #         print(test_flakiness['class_name'][i])
+        test_flakiness["class_name"][i] = name
 
 
 # In[288]:
@@ -233,7 +234,6 @@ test_flakiness
 
 
 # In[307]:
-
 
 
 combined_data = test_flakiness.merge(
@@ -260,11 +260,10 @@ combined_data.isnull().sum()
 # In[268]:
 
 
-combined_data[combined_data['flaky']==True]
+combined_data[combined_data["flaky"] == True]
 
 
 # In[72]:
-
 
 
 combined_data = test_flakiness.merge(
@@ -287,7 +286,7 @@ combined_data = combined_data.merge(
 
 t_v = test_smells.merge(
     vocabulary,
-    on=["repo_name", "file_name", "class_name",'func_name'],
+    on=["repo_name", "file_name", "class_name", "func_name"],
     how="inner",
 )
 
@@ -301,9 +300,9 @@ t_v
 # In[94]:
 
 
-t_v_f=t_v.merge(
+t_v_f = t_v.merge(
     test_flakiness,
-    on=["repo_name", "file_name","class_name","func_name"],
+    on=["repo_name", "file_name", "class_name", "func_name"],
     how="outer",
 )
 
@@ -357,9 +356,6 @@ vocabulary.shape
 # In[ ]:
 
 
-
-
-
 # In[ ]:
 
 
@@ -375,14 +371,14 @@ combined_data
 # In[97]:
 
 
-w=test_smells[test_smells['repo_name']=='alejoe91_&_MEArec']
+w = test_smells[test_smells["repo_name"] == "alejoe91_&_MEArec"]
 w
 
 
 # In[98]:
 
 
-z=vocabulary[vocabulary['repo_name']=='alejoe91_&_MEArec']
+z = vocabulary[vocabulary["repo_name"] == "alejoe91_&_MEArec"]
 # z=vocabulary[vocabulary['repo_name']=='fechbmaster_&_3DNIRmapper']
 z.head(10)
 
@@ -391,7 +387,7 @@ z.head(10)
 
 
 # f=test_flakiness[test_flakiness['repo_name']=='fechbmaster_&_3DNIRmapper']
-f=test_flakiness[test_flakiness['repo_name']=='F-I-D-O_&_Future-Config']
+f = test_flakiness[test_flakiness["repo_name"] == "F-I-D-O_&_Future-Config"]
 f.head(10)
 
 
@@ -420,7 +416,7 @@ combined_data
 # In[ ]:
 
 
-combined_data[combined_data['repo_name']=='fechbmaster_&_3DNIRmapper']
+combined_data[combined_data["repo_name"] == "fechbmaster_&_3DNIRmapper"]
 
 
 # In[36]:
@@ -432,7 +428,7 @@ test_flakiness.head(10)
 # In[102]:
 
 
-test_flakiness[test_flakiness['class_name'].isnull()]
+test_flakiness[test_flakiness["class_name"].isnull()]
 
 
 # In[103]:
@@ -444,14 +440,16 @@ test_flakiness.shape
 # In[110]:
 
 
-test_flakiness=test_flakiness[test_flakiness['repo_name'].isin(list(vocabulary['repo_name']))]
+test_flakiness = test_flakiness[
+    test_flakiness["repo_name"].isin(list(vocabulary["repo_name"]))
+]
 test_flakiness
 
 
 # In[124]:
 
 
-tf=test_flakiness[test_flakiness['repo_name'].isin(list(test_smells['repo_name']))]
+tf = test_flakiness[test_flakiness["repo_name"].isin(list(test_smells["repo_name"]))]
 tf
 
 
@@ -459,7 +457,7 @@ tf
 
 
 test_smells.shape
-w=test_smells[test_smells['repo_name']=='fechbmaster_&_3DNIRmapper']
+w = test_smells[test_smells["repo_name"] == "fechbmaster_&_3DNIRmapper"]
 w.shape
 
 
@@ -467,26 +465,26 @@ w.shape
 
 
 vocabulary.shape
-v=vocabulary[vocabulary['repo_name']=='fechbmaster_&_3DNIRmapper']
+v = vocabulary[vocabulary["repo_name"] == "fechbmaster_&_3DNIRmapper"]
 v.shape
 
 
 # In[142]:
 
 
-vocabulary[vocabulary['class_name']=='TestCamera']
+vocabulary[vocabulary["class_name"] == "TestCamera"]
 
 
 # In[143]:
 
 
-test_smells[test_smells['class_name']=='TestCamera']
+test_smells[test_smells["class_name"] == "TestCamera"]
 
 
 # In[125]:
 
 
-f=tf[tf['repo_name']=='fechbmaster_&_3DNIRmapper']
+f = tf[tf["repo_name"] == "fechbmaster_&_3DNIRmapper"]
 f.shape
 
 
@@ -518,10 +516,9 @@ combined_data
 # h=test_flakiness[test_flakiness['repo_name']=='fechbmaster_&_3DNIRmapper']
 test_flakiness
 for i in test_flakiness.index:
-    name=test_flakiness['class_name'][i]
-    ind=name.rfind('.')
-    test_flakiness['class_name']=name[ind+1:]
-    
+    name = test_flakiness["class_name"][i]
+    ind = name.rfind(".")
+    test_flakiness["class_name"] = name[ind + 1 :]
 
 
 # In[157]:
@@ -531,7 +528,3 @@ test_flakiness
 
 
 # In[ ]:
-
-
-
-

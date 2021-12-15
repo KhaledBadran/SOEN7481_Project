@@ -35,7 +35,7 @@ if __name__ == "__main__":
     for url in unique_projects.Project_URL.tolist():
         results.append((url, repo_exists(url)))
 
-    results_df = pd.DataFrame(results, columns=['url', 'is_active'])
+    results_df = pd.DataFrame(results, columns=["url", "is_active"])
     results_df.to_csv(Path.joinpath(data_folder, "repo_activity_status.csv"))
 
     # get a list of inactive repos and use it to filter the original data

@@ -7,4 +7,3 @@ if __name__ == "__main__":
     df = pd.read_csv(data_file, usecols=[0, 1])
     df.drop_duplicates(inplace=True, ignore_index=True)
     print(df.info)
-

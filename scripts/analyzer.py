@@ -4,36 +4,39 @@ import astor
 import sys
 from functionObject import FunctionObject
 
+
 class Analyzer(ast.NodeTransformer):
     def __init__(self):
         self.objects = []
         pass
 
     def visit_FunctionDef(self, node):
-        """ Visit FunctionDef nodes """
+        """Visit FunctionDef nodes"""
         self.handleVisitFunction(node)
         self.generic_visit(node)
 
     def visit_AsyncFunctionDef(self, node):
-        """ Visit AsyncFunctionDef nodes """
+        """Visit AsyncFunctionDef nodes"""
         self.handleVisitFunction(node)
         self.generic_visit(node)
 
     def visit_ClassDef(self, node):
-        """ Visit ClassDef nodes """
+        """Visit ClassDef nodes"""
         isFlaky = self.isNodeFlaky(node)
         for functionNode in node.body:
-            if isinstance(functionNode, ast.FunctionDef) or isinstance(functionNode, ast.AsyncFunctionDef):
+            if isinstance(functionNode, ast.FunctionDef) or isinstance(
+                functionNode, ast.AsyncFunctionDef
+            ):
                 self.addTestToList(functionNode.name, node.name, isFlaky, functionNode)
         self.generic_visit(node)
 
     def handleVisitFunction(self, node):
-        """ Extender to AsyncFunctionDef and FunctionDef -> Code is similar for both"""
+        """Extender to AsyncFunctionDef and FunctionDef -> Code is similar for both"""
         isFlaky = self.isNodeFlaky(node)
         self.addTestToList(node.name, self.getClass(node), isFlaky, node)
 
     def addTestToList(self, functionName, className, isFlaky, node):
-        """ Create a test object, Add it to the main list """
+        """Create a test object, Add it to the main list"""
         # Create Function object
         currentObject = FunctionObject()
         currentObject.setFunctionName(functionName)
@@ -59,32 +62,35 @@ class Analyzer(ast.NodeTransformer):
             self.objects.append(currentObject)
 
     def getClass(self, node):
-        """ If node is a functionm, get name of the Class """
+        """If node is a functionm, get name of the Class"""
         if isinstance(node.parent, ast.ClassDef):
             return node.parent.name
         else:
             return None
 
     def alreadyInList(self, currentObject):
-        """ Check if test object is already in list """
+        """Check if test object is already in list"""
         isInList = False
         for element in self.objects:
             if currentObject.__eq__(element):
                 isInList = True
                 # Handle case if element is already in but MarkedFlaky is False
-                if element.getIsMarkedFlaky() == False and currentObject.getIsMarkedFlaky() == True:
+                if (
+                    element.getIsMarkedFlaky() == False
+                    and currentObject.getIsMarkedFlaky() == True
+                ):
                     element.setIsMarkedFlaky(True)
         return isInList
 
     def isNodeFlaky(self, node):
-        """ Check if node is marked with @flaky """
+        """Check if node is marked with @flaky"""
         isFlaky = False
         # If node has annotations
         if len(node.decorator_list) > 0:
             # For each annotation
             for decorator in node.decorator_list:
                 # When @flaky has parameters
-                if  hasattr(decorator, "func") and hasattr(decorator.func, "id"):
+                if hasattr(decorator, "func") and hasattr(decorator.func, "id"):
                     if "flaky" in decorator.func.id:
                         isFlaky = True
                 # When @flaky has no parameter
@@ -94,7 +100,7 @@ class Analyzer(ast.NodeTransformer):
         return isFlaky
 
     def isTestFunction(self, node):
-        """ Check if function is test or CUT """
+        """Check if function is test or CUT"""
         isTest = False
         # If node has annotations
         if node.name.startswith("test_"):
@@ -102,7 +108,7 @@ class Analyzer(ast.NodeTransformer):
         return isTest
 
     def getBody(self, node):
-        """ Get body of the function """
+        """Get body of the function"""
         # Init body
         body = ""
         # Add body of the function

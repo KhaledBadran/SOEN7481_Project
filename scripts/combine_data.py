@@ -42,10 +42,10 @@ def update_file_name(file_path: str) -> str:
 # checks multiple columns in the dataframe to determine whether a test function is flaky
 def determine_flakiness(data):
     if (
-            data["Flaky_randomOrder_withinIteration"]
-            or data["Flaky_sameOrder_withinIteration"]
-            or data["Order-dependent"]
-            or data["Flaky_Infrastructure"]
+        data["Flaky_randomOrder_withinIteration"]
+        or data["Flaky_sameOrder_withinIteration"]
+        or data["Order-dependent"]
+        or data["Flaky_Infrastructure"]
     ):
         return True
     else:
