@@ -21,6 +21,8 @@ Our code submission contains the following files:
 * `./script/json_to_csv.py`: parses the results from the PyNose tool to locate the infected test function in a test class
  and store the data in csv format. 
 * `./script/model.ipynb`: a jupyter notebook where we build, optimize and evaluate the models for the baseline and combined approaches. 
+* `./script/test_smells.ipynb`:  a utility notebook for running the PyNose functionality.
+* `./script/merge_csvs.py`:  a script for merging the multiple csv files into one.
 
 
 Notes
@@ -28,5 +30,8 @@ Notes
 * GPU is not required.
 * To check for project activity on GitHub, a valid GitHub token is required. 
 * Finding the optimal parameters takes ~1 hour.
-* To establish the baseline (vocabulary) model, we rely heavily on the steps followed by a previous study: 
+* To establish the baseline (vocabulary) model, we rely heavily on the replication steps [here](https://github.com/GuillaumeHaben/MSR2021-ReplicationPackage). 
+* To extract the test smells, we run the [PyNose](https://github.com/jetbrains-research/pynose) tool through the JetBrains IntelliJ IDEA, which was needed at the time we conducted the study.
+ The newer version of the tool only require PyCharm to be installed. 
+
 
